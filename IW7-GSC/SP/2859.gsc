@@ -57,25 +57,25 @@ func_6B44() {
 
   level.var_6B43 = ::func_6B16;
   if(!isDefined(level.var_6A64)) {
-    var_00 = [];
-    var_00["Cover Left"] = 0;
-    var_00["Cover Right"] = -90;
-    var_00["Cover Crouch"] = -90;
-    var_00["Cover Stand"] = -90;
-    var_00["Cover Stand 3D"] = -90;
-    anim.var_6A64 = var_00;
-    var_00 = [];
-    var_00["Cover Left"] = 180;
-    var_00["Cover Left Crouch"] = 0;
-    var_00["Cover Right"] = 180;
-    var_00["Cover Crouch"] = 180;
-    var_00["Cover Stand"] = 180;
-    anim.var_6A63 = var_00;
+    var_0 = [];
+    var_0["Cover Left"] = 0;
+    var_0["Cover Right"] = -90;
+    var_0["Cover Crouch"] = -90;
+    var_0["Cover Stand"] = -90;
+    var_0["Cover Stand 3D"] = -90;
+    anim.var_6A64 = var_0;
+    var_0 = [];
+    var_0["Cover Left"] = 180;
+    var_0["Cover Left Crouch"] = 0;
+    var_0["Cover Right"] = 180;
+    var_0["Cover Crouch"] = 180;
+    var_0["Cover Stand"] = 180;
+    anim.var_6A63 = var_0;
   }
 }
 
-func_79AF(param_00) {
-  return level.var_6B46[param_00].var_2274;
+func_79AF(var_0) {
+  return level.var_6B46[var_0].var_2274;
 }
 
 func_9BDF() {
@@ -150,49 +150,49 @@ func_6B16() {
   thread func_6B45();
 }
 
-func_495A(param_00) {
+func_495A(var_0) {
   if(!isDefined(level.var_6A65)) {
     level.var_6A65 = [];
   }
 
-  level.var_6A65[param_00] = [];
+  level.var_6A65[var_0] = [];
 }
 
-func_7CA8(param_00) {
-  return level.var_6A65[param_00];
+func_7CA8(var_0) {
+  return level.var_6A65[var_0];
 }
 
-func_174C(param_00, param_01, param_02, param_03, param_04) {
+func_174C(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level.var_6A65)) {
     level.var_6A65 = [];
   }
 
-  if(!isDefined(level.var_6A65[param_00])) {
-    func_495A(param_00);
+  if(!isDefined(level.var_6A65[var_0])) {
+    func_495A(var_0);
   }
 
-  var_05 = level.var_6A65[param_00].size;
-  level.var_6A65[param_00][var_05] = [];
-  level.var_6A65[param_00][var_05]["priority"] = param_04;
-  level.var_6A65[param_00][var_05]["stateName"] = param_01;
-  level.var_6A65[param_00][var_05]["thinkFunc"] = param_02;
-  level.var_6A65[param_00][var_05]["changeFunc"] = param_03;
-  level.var_6A65[param_00] = ::scripts\engine\utility::array_sort_with_func(level.var_6A65[param_00], ::is_higher_priority);
+  var_5 = level.var_6A65[var_0].size;
+  level.var_6A65[var_0][var_5] = [];
+  level.var_6A65[var_0][var_5]["priority"] = var_4;
+  level.var_6A65[var_0][var_5]["stateName"] = var_1;
+  level.var_6A65[var_0][var_5]["thinkFunc"] = var_2;
+  level.var_6A65[var_0][var_5]["changeFunc"] = var_3;
+  level.var_6A65[var_0] = ::scripts\engine\utility::array_sort_with_func(level.var_6A65[var_0], ::is_higher_priority);
 }
 
-func_E092(param_00, param_01) {
-  if(!isDefined(level.var_6A65[param_00])) {
+func_E092(var_0, var_1) {
+  if(!isDefined(level.var_6A65[var_0])) {
     return;
   }
 
-  var_02 = [];
-  foreach(var_04 in level.var_6A65[param_00]) {
-    if(var_04["stateName"] != param_01) {
-      var_02[var_02.size] = var_04;
+  var_2 = [];
+  foreach(var_4 in level.var_6A65[var_0]) {
+    if(var_4["stateName"] != var_1) {
+      var_2[var_2.size] = var_4;
     }
   }
 
-  level.var_6A65[param_00] = var_02;
+  level.var_6A65[var_0] = var_2;
 }
 
 func_6B15() {
@@ -216,14 +216,14 @@ func_6B15() {
 
   self _meth_839E();
   if(isDefined(self.target)) {
-    var_00 = scripts\engine\utility::getstruct(self.target, "targetname");
-    if(isDefined(var_00) && var_00 scripts\sp\fakeactor_node_MAYBE::func_9BE0()) {
+    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    if(isDefined(var_0) && var_0 scripts\sp\fakeactor_node_MAYBE::func_9BE0()) {
       if(func_9B69()) {
-        func_1164B(var_00);
+        func_1164B(var_0);
         return;
       }
 
-      func_F31D(var_00);
+      func_F31D(var_0);
       return;
     }
   }
@@ -243,14 +243,14 @@ func_B282() {
   thread func_DD7E();
   self waittill("make_real_ai");
   scripts\sp\utility::func_1101B();
-  var_00 = self.var_394;
-  var_01 = "";
+  var_0 = self.var_394;
+  var_1 = "";
   if(isDefined(self.var_4B94) && isDefined(self.var_4B94.target)) {
-    var_01 = self.var_4B94.target;
+    var_1 = self.var_4B94.target;
   }
 
-  var_02 = lib_0B77::func_10869(self, var_01);
-  var_02 scripts\anim\shared::placeweaponon(var_00, "right");
+  var_2 = lib_0B77::func_10869(self, var_1);
+  var_2 scripts\anim\shared::placeweaponon(var_0, "right");
   if(isDefined(self)) {
     self delete();
   }
@@ -259,9 +259,9 @@ func_B282() {
 func_13949() {
   self endon("death");
   self endon("goal");
-  var_00 = squared(128);
+  var_0 = squared(128);
   for(;;) {
-    if(distancesquared(level.player getorigin(), self.origin) < var_00) {
+    if(distancesquared(level.player getorigin(), self.origin) < var_0) {
       func_C2C9(1);
     } else {
       func_C2C9(0);
@@ -296,27 +296,27 @@ func_3DBA() {
   return self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self);
 }
 
-func_3C4D(param_00) {
+func_3C4D(var_0) {
   self.var_D8A6 = self.current_state;
   self notify("change_state");
   func_40C8();
-  self.current_state = param_00["stateName"];
-  self thread[[param_00["thinkFunc"]]]();
+  self.current_state = var_0["stateName"];
+  self thread[[var_0["thinkFunc"]]]();
 }
 
-func_174D(param_00) {
+func_174D(var_0) {
   if(!isDefined(self.var_4BBF)) {
     self.var_4BBF = [];
   }
 
-  self.var_4BBF[self.var_4BBF.size] = param_00;
+  self.var_4BBF[self.var_4BBF.size] = var_0;
 }
 
 func_40C8() {
   if(isDefined(self.var_4BBF)) {
-    foreach(var_01 in self.var_4BBF) {
-      if(isDefined(var_01)) {
-        var_01 delete();
+    foreach(var_1 in self.var_4BBF) {
+      if(isDefined(var_1)) {
+        var_1 delete();
       }
     }
   }
@@ -326,9 +326,9 @@ func_12E30() {
   self endon("death");
   self endon("make_real_ai");
   self.var_D8A6 = "";
-  var_00 = "default";
+  var_0 = "default";
   if(isDefined(self.var_10E1D)) {
-    var_00 = self.var_10E1D;
+    var_0 = self.var_10E1D;
   }
 
   for(;;) {
@@ -337,13 +337,13 @@ func_12E30() {
       continue;
     }
 
-    foreach(var_02 in func_7CA8(var_00)) {
-      if(isDefined(self.current_state) && self.current_state == var_02["stateName"]) {
+    foreach(var_2 in func_7CA8(var_0)) {
+      if(isDefined(self.current_state) && self.current_state == var_2["stateName"]) {
         continue;
       }
 
-      if([[var_02["changeFunc"]]]()) {
-        func_3C4D(var_02);
+      if([[var_2["changeFunc"]]]()) {
+        func_3C4D(var_2);
         break;
       }
     }
@@ -383,46 +383,46 @@ func_6BDE() {
   self endon("change_state");
   if(!isDefined(self.precacheleaderboards)) {
     if(isDefined(self.var_4B94)) {
-      var_00 = self.var_4B94 scripts\sp\utility::func_7A8F();
-      var_00 = scripts\engine\utility::array_combine(var_00, self.var_4B94 scripts\sp\utility::func_7A97());
-      if(var_00.size) {
-        var_01 = scripts\engine\utility::random(var_00);
-        var_02 = (0, 0, 0);
-        if(isDefined(var_01.fgetarg)) {
-          var_03 = randomfloatrange(var_01.fgetarg * -1, var_01.fgetarg);
-          var_04 = randomfloatrange(var_01.fgetarg * -1, var_01.fgetarg);
-          var_02 = (var_03, var_04, 0);
+      var_0 = self.var_4B94 scripts\sp\utility::func_7A8F();
+      var_0 = scripts\engine\utility::array_combine(var_0, self.var_4B94 scripts\sp\utility::func_7A97());
+      if(var_0.size) {
+        var_1 = scripts\engine\utility::random(var_0);
+        var_2 = (0, 0, 0);
+        if(isDefined(var_1.fgetarg)) {
+          var_3 = randomfloatrange(var_1.fgetarg * -1, var_1.fgetarg);
+          var_4 = randomfloatrange(var_1.fgetarg * -1, var_1.fgetarg);
+          var_2 = (var_3, var_4, 0);
         }
 
-        func_F297(var_01, var_02);
+        func_F297(var_1, var_2);
       }
     }
 
-    var_05 = func_7A04();
-    var_06 = func_77E9();
-    var_07 = self.origin;
-    if(isDefined(var_05) && isDefined(var_06)) {
-      func_CE00(var_05);
+    var_5 = func_7A04();
+    var_6 = func_77E9();
+    var_7 = self.origin;
+    if(isDefined(var_5) && isDefined(var_6)) {
+      func_CE00(var_5);
     }
 
     self notify("start_aim");
     func_6D53(func_7C63());
     self notify("end_aim");
-    if(isDefined(var_05) && isDefined(var_06)) {
-      func_CE00(var_06);
+    if(isDefined(var_5) && isDefined(var_6)) {
+      func_CE00(var_6);
     }
 
     if(func_FF45()) {
-      var_08 = func_7C03();
-      if(isDefined(var_08)) {
-        func_CE00(var_08);
+      var_8 = func_7C03();
+      if(isDefined(var_8)) {
+        func_CE00(var_8);
       }
     }
 
     if(scripts\engine\utility::cointoss()) {
-      var_09 = self.var_1FD0;
+      var_9 = self.var_1FD0;
       func_CB1F();
-      if(self.var_1FD0 != var_09) {
+      if(self.var_1FD0 != var_9) {
         func_CE00(func_7C9F());
       }
     }
@@ -444,7 +444,7 @@ func_126D0() {
 func_126D9() {
   self endon("death");
   func_F30A(1);
-  var_00 = func_57D2(self.var_4B94.var_126CD);
+  var_0 = func_57D2(self.var_4B94.var_126CD);
   func_F30A(0);
   func_F613(1);
 }
@@ -460,8 +460,8 @@ func_12944() {
 func_12999() {
   self endon("death");
   func_F30A(1);
-  var_00 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
-  func_CE00(func_7D21(self.angles, self.origin, var_00.origin));
+  var_0 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
+  func_CE00(func_7D21(self.angles, self.origin, var_0.origin));
   func_F30A(0);
   func_F613(1);
 }
@@ -486,9 +486,9 @@ func_CC8A() {
   self notify("played_anim");
 }
 
-func_57D2(param_00) {
-  var_01 = func_7D19(param_00);
-  func_CE00(var_01, undefined, ::scripts\anim\traverse\shared::func_89F8, "traverseAnim", self.var_4B94);
+func_57D2(var_0) {
+  var_1 = func_7D19(var_0);
+  func_CE00(var_1, undefined, ::scripts\anim\traverse\shared::func_89F8, "traverseAnim", self.var_4B94);
 }
 
 func_BC42() {
@@ -511,21 +511,21 @@ func_BC1C() {
     return 0;
   }
 
-  var_00 = func_582B();
-  var_01 = undefined;
+  var_0 = func_582B();
+  var_1 = undefined;
   if(!isDefined(self.current_state) && isDefined(self.var_4B94)) {
-    var_01 = scripts\sp\fakeactor_node_MAYBE::func_6B21(self.var_4B94, self.origin, func_9BE8(), var_00);
+    var_1 = scripts\sp\fakeactor_node_MAYBE::func_6B21(self.var_4B94, self.origin, func_9BE8(), var_0);
   }
 
-  if(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && !self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2D(var_00)) {
-    var_02 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
-    var_01 = scripts\sp\fakeactor_node_MAYBE::func_6B21(var_02, self.origin, func_9BE8(), var_00);
+  if(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && !self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2D(var_0)) {
+    var_2 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
+    var_1 = scripts\sp\fakeactor_node_MAYBE::func_6B21(var_2, self.origin, func_9BE8(), var_0);
   }
 
-  if(isDefined(var_01)) {
-    foreach(var_04 in var_01) {
-      if(var_04["dist"] > 0) {
-        self.var_C039 = var_01;
+  if(isDefined(var_1)) {
+    foreach(var_4 in var_1) {
+      if(var_4["dist"] > 0) {
+        self.var_C039 = var_1;
         return 1;
       }
     }
@@ -539,18 +539,18 @@ func_CDEB() {
   self endon("change_state");
   self notify("stop_running_anim");
   self endon("stop_running_anim");
-  var_00 = 1;
+  var_0 = 1;
   if(isDefined(self.var_E812) && isDefined(self.var_E811)) {
-    var_00 = randomfloatrange(self.var_E812, self.var_E811);
+    var_0 = randomfloatrange(self.var_E812, self.var_E811);
   }
 
   for(;;) {
-    var_01 = func_7AFA();
-    var_02 = func_7816(var_01);
-    var_03 = var_02.var_E81C;
-    var_04 = var_02.var_1F1D;
-    play_looping_breath_sound(var_01, var_00);
-    wait(getanimlength(var_01));
+    var_1 = func_7AFA();
+    var_2 = func_7816(var_1);
+    var_3 = var_2.var_E81C;
+    var_4 = var_2.var_1F1D;
+    play_looping_breath_sound(var_1, var_0);
+    wait(getanimlength(var_1));
   }
 }
 
@@ -558,33 +558,33 @@ func_BC82() {
   self endon("death");
   self endon("change_state");
   self notify("exit_node");
-  var_00 = self.origin;
-  var_01 = func_582B();
+  var_0 = self.origin;
+  var_1 = func_582B();
   if(self.var_C039.size == 0) {}
 
   self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
-  var_02 = func_7AFA();
-  var_03 = func_7816(var_02);
-  var_04 = var_03.var_E81C;
-  var_05 = var_03.var_1F1D;
-  if(!var_05) {
-    childthread func_AEE8(var_04);
+  var_2 = func_7AFA();
+  var_3 = func_7816(var_2);
+  var_4 = var_3.var_E81C;
+  var_5 = var_3.var_1F1D;
+  if(!var_5) {
+    childthread func_AEE8(var_4);
   }
 
-  var_06 = self.var_C039[self.var_C039.size - 1];
+  var_6 = self.var_C039[self.var_C039.size - 1];
   if(self.var_C039[0]["total_dist"] < 64) {
     thread func_CE00(func_7A2A());
-    var_07 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
-    func_174D(var_07);
-    self linkto(var_07);
-    var_08 = 0.2;
-    var_07 moveto(var_06["origin"], var_08);
-    var_07 rotateto(var_06["angles"], var_08);
-    scripts\engine\utility::waittill_notify_or_timeout("death", var_08);
+    var_7 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
+    func_174D(var_7);
+    self linkto(var_7);
+    var_8 = 0.2;
+    var_7 moveto(var_6["origin"], var_8);
+    var_7 rotateto(var_6["angles"], var_8);
+    scripts\engine\utility::waittill_notify_or_timeout("death", var_8);
     self unlink();
-    var_07 delete();
-    if(self.var_4B94 != var_06["node"]) {
-      self.var_4B94 = var_06["node"];
+    var_7 delete();
+    if(self.var_4B94 != var_6["node"]) {
+      self.var_4B94 = var_6["node"];
     }
 
     self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B37(self);
@@ -594,7 +594,7 @@ func_BC82() {
     return;
   }
 
-  var_09 = 0;
+  var_9 = 0;
   var_0A = undefined;
   if(func_FF2F()) {
     var_0B = 0;
@@ -616,53 +616,53 @@ func_BC82() {
   }
 
   var_10 = undefined;
-  var_11 = scripts\engine\utility::random(var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B1F());
-  if(func_FF2C() && !var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B32() && !var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B33() && var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B18()) {
+  var_11 = scripts\engine\utility::random(var_8["node"] scripts\sp\fakeactor_node_MAYBE::func_6B1F());
+  if(func_FF2C() && !var_8["node"] scripts\sp\fakeactor_node_MAYBE::func_6B32() && !var_8["node"] scripts\sp\fakeactor_node_MAYBE::func_6B33() && var_8["node"] scripts\sp\fakeactor_node_MAYBE::func_6B18()) {
     var_12 = self;
     if(isDefined(self.var_C039[self.var_C039.size - 2]["node"])) {
       var_12 = self.var_C039[self.var_C039.size - 2]["node"];
     }
 
-    var_10 = func_7836(var_08["node"], var_12, var_11);
+    var_10 = func_7836(var_8["node"], var_12, var_11);
     if(isDefined(var_10)) {
       var_13 = getmovedelta(var_10, 0, 1);
       var_14 = getangledelta3d(var_10, 0, 1);
       var_15 = invertangles(var_14);
-      var_16 = combineangles(var_08["angles"], var_15);
-      var_17 = var_08["origin"] - rotatevector(var_13, var_16);
-      var_08["anim_node"] = ::scripts\engine\utility::spawn_script_origin(var_17, var_16);
-      func_174D(var_08["anim_node"]);
-      var_08["origin"] = var_17;
-      var_08["angles"] = var_16;
+      var_16 = combineangles(var_8["angles"], var_15);
+      var_17 = var_8["origin"] - rotatevector(var_13, var_16);
+      var_8["anim_node"] = ::scripts\engine\utility::spawn_script_origin(var_17, var_16);
+      func_174D(var_8["anim_node"]);
+      var_8["origin"] = var_17;
+      var_8["angles"] = var_16;
     }
   }
 
   thread func_CDEB();
   thread func_13949();
-  self.var_4B94 = self.var_C039[var_09 + 1]["node"];
+  self.var_4B94 = self.var_C039[var_9 + 1]["node"];
   var_18 = 1;
   if(isDefined(self.var_BC68)) {
     var_18 = self.var_BC68;
   }
 
   for(;;) {
-    var_19 = self.var_C039[var_09]["to_next_node"];
-    var_1A = self.origin - self.var_C039[var_09]["origin"];
+    var_19 = self.var_C039[var_9]["to_next_node"];
+    var_1A = self.origin - self.var_C039[var_9]["origin"];
     var_1B = vectordot(var_19, var_1A);
-    if(var_09 == self.var_C039.size) {
+    if(var_9 == self.var_C039.size) {
       break;
     }
 
     var_1C = var_1B + self.var_AFED;
-    while(var_1C > self.var_C039[var_09]["dist"]) {
-      var_1C = var_1C - self.var_C039[var_09]["dist"];
-      var_09++;
-      if(var_09 == self.var_C039.size) {
-        if(self.var_4B94 != var_08["node"]) {
-          self.var_4B94 = var_08["node"];
+    while(var_1C > self.var_C039[var_9]["dist"]) {
+      var_1C = var_1C - self.var_C039[var_9]["dist"];
+      var_9++;
+      if(var_9 == self.var_C039.size) {
+        if(self.var_4B94 != var_8["node"]) {
+          self.var_4B94 = var_8["node"];
         }
 
-        var_08 = 0;
+        var_8 = 0;
         var_1D = (0, 0, 0);
         var_1E = (0, 0, 0);
         var_1F = (0, 0, 0);
@@ -674,18 +674,18 @@ func_BC82() {
           var_1F = vectorcross(var_1D, var_1E);
           var_1D = vectorcross(var_1E, var_1F);
           if(var_21 > 0) {
-            var_23 = var_21 / var_05 * var_11;
+            var_23 = var_21 / var_5 * var_11;
           }
         } else {
-          var_20 = var_09["origin"] - self.origin;
+          var_20 = var_9["origin"] - self.origin;
           var_1E = vectortoangles(var_21);
           var_21 = length(var_21);
-          var_23 = var_21 / var_05 * var_11;
+          var_23 = var_21 / var_5 * var_11;
         }
 
         if(var_23 > 0) {
-          if(var_06) {
-            self moveto(var_07["origin"], var_23);
+          if(var_6) {
+            self moveto(var_7["origin"], var_23);
             if(func_9B69()) {
               self rotateto(axistoangles(var_1D, var_1F, var_1E), var_23);
             } else {
@@ -694,10 +694,10 @@ func_BC82() {
 
             wait(var_23);
           } else {
-            var_07 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
+            var_7 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
             func_174D(var_21);
             self linkto(var_21);
-            var_21 moveto(var_06["origin"], var_22);
+            var_21 moveto(var_6["origin"], var_22);
             if(func_9B69()) {
               var_21 rotateto(axistoangles(var_23, var_1E, var_1D), var_22);
             } else {
@@ -710,13 +710,13 @@ func_BC82() {
           }
         }
 
-        if(isDefined(var_09)) {
+        if(isDefined(var_9)) {
           self notify("stop_running_anim");
-          func_CE00(var_09, undefined, undefined, undefined, var_06["anim_node"], 0);
-          var_06["anim_node"] delete();
+          func_CE00(var_9, undefined, undefined, undefined, var_6["anim_node"], 0);
+          var_6["anim_node"] delete();
           func_F2C3([var_0A]);
         } else {
-          self.angles = var_06["angles"];
+          self.angles = var_6["angles"];
           func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
         }
 
@@ -753,8 +753,8 @@ func_BC82() {
       childthread func_6B40(var_16, self.var_B04E);
     }
 
-    if(var_08) {
-      var_24 = var_07 * self.var_B04E * self.var_BC68;
+    if(var_8) {
+      var_24 = var_7 * self.var_B04E * self.var_BC68;
       var_25 = vectornormalize(var_1D - self.origin);
       var_23 = var_25 * var_24;
       var_23 = var_23 + self.origin;
@@ -773,23 +773,23 @@ func_BC82() {
   self notify("goal");
 }
 
-func_6B40(param_00, param_01) {
-  var_02 = anglesToForward(self.angles);
-  var_03 = anglesToForward(param_00);
-  var_04 = 0;
-  var_05 = 1 / param_01;
+func_6B40(var_0, var_1) {
+  var_2 = anglesToForward(self.angles);
+  var_3 = anglesToForward(var_0);
+  var_4 = 0;
+  var_5 = 1 / var_1;
   for(;;) {
-    var_06 = var_04 * var_05;
-    var_07 = vectorlerp(var_02, var_03, var_06);
-    self.angles = vectortoangles(var_07);
-    var_04 = var_04 + 0.05;
+    var_6 = var_4 * var_5;
+    var_7 = vectorlerp(var_2, var_3, var_6);
+    self.angles = vectortoangles(var_7);
+    var_4 = var_4 + 0.05;
     wait(0.05);
-    if(var_04 >= param_01) {
+    if(var_4 >= var_1) {
       break;
     }
   }
 
-  self.angles = param_00;
+  self.angles = var_0;
 }
 
 func_6B11() {
@@ -816,9 +816,9 @@ func_6B11() {
   }
 }
 
-func_6B12(param_00) {
-  if(isDefined(param_00.script_noteworthy)) {
-    switch (param_00.script_noteworthy) {
+func_6B12(var_0) {
+  if(isDefined(var_0.script_noteworthy)) {
+    switch (var_0.script_noteworthy) {
       case "delete_on_goal":
         if(isDefined(self.var_B14F)) {
           scripts\sp\utility::func_1101B();
@@ -833,95 +833,95 @@ func_6B12(param_00) {
     }
   }
 
-  if(isDefined(param_00.var_ED9E)) {
-    scripts\engine\utility::flag_set(param_00.var_ED9E);
+  if(isDefined(var_0.var_ED9E)) {
+    scripts\engine\utility::flag_set(var_0.var_ED9E);
   }
 
-  if(isDefined(param_00.var_ED9B)) {
-    scripts\engine\utility::flag_clear(param_00.var_ED9B);
+  if(isDefined(var_0.var_ED9B)) {
+    scripts\engine\utility::flag_clear(var_0.var_ED9B);
   }
 
-  if(isDefined(param_00.var_ED80)) {
-    scripts\sp\utility::func_65E1(param_00.var_ED80);
+  if(isDefined(var_0.var_ED80)) {
+    scripts\sp\utility::func_65E1(var_0.var_ED80);
   }
 
   if(isDefined(self.var_ED7F)) {
-    scripts\sp\utility::func_65E1(param_00.var_ED7F);
+    scripts\sp\utility::func_65E1(var_0.var_ED7F);
   }
 
-  if(isDefined(param_00.var_ED56)) {
-    if(param_00.var_ED56 == "frantic") {
+  if(isDefined(var_0.var_ED56)) {
+    if(var_0.var_ED56 == "frantic") {
       func_F3BE(1);
     }
   }
 
-  if(isDefined(param_00.var_ED60)) {
-    func_F35C(param_00.var_ED60);
+  if(isDefined(var_0.var_ED60)) {
+    func_F35C(var_0.var_ED60);
   }
 
-  if(isDefined(param_00.var_ED62)) {
-    func_F35D(param_00.var_ED62);
+  if(isDefined(var_0.var_ED62)) {
+    func_F35D(var_0.var_ED62);
   }
 
-  if(isDefined(param_00.var_ECF9)) {
-    func_F2C6(param_00.var_ECF9);
+  if(isDefined(var_0.var_ECF9)) {
+    func_F2C6(var_0.var_ECF9);
   }
 
-  if(isDefined(param_00.var_EEFF)) {
-    func_F568(param_00.var_EEFF);
+  if(isDefined(var_0.var_EEFF)) {
+    func_F568(var_0.var_EEFF);
   }
 
-  if(isDefined(param_00.var_EEFE)) {
-    func_F5F9(param_00.var_EEFE);
+  if(isDefined(var_0.var_EEFE)) {
+    func_F5F9(var_0.var_EEFE);
   }
 }
 
-func_AEE8(param_00) {
+func_AEE8(var_0) {
   self endon("death");
   self endon("change_state");
   self notify("drone_move_z");
   self endon("drone_move_z");
-  var_01 = 0.05;
+  var_1 = 0.05;
   for(;;) {
-    if(isDefined(self.var_AFEC) && param_00 > 0) {
+    if(isDefined(self.var_AFEC) && var_0 > 0) {
       if(func_9B69()) {
-        var_02 = anglestoup(self.angles);
-        var_03 = scripts\common\trace::ray_trace(self.origin + var_02 * 40, self.origin + var_02 * -40, self, scripts\common\trace::create_solid_ai_contents(1));
-        if(var_03["hittype"] != "hittype_none") {
-          self.origin = var_03["position"];
+        var_2 = anglestoup(self.angles);
+        var_3 = scripts\common\trace::ray_trace(self.origin + var_2 * 40, self.origin + var_2 * -40, self, scripts\common\trace::create_solid_ai_contents(1));
+        if(var_3["hittype"] != "hittype_none") {
+          self.origin = var_3["position"];
         }
       } else {
-        var_04 = self.var_AFEC[2] - self.origin[2];
-        var_05 = distance2d(self.var_AFEC, self.origin);
-        var_06 = var_05 / param_00;
-        if(var_06 > 0 && var_04 != 0) {
-          var_07 = abs(var_04) / var_06;
-          var_08 = var_07 * var_01;
-          if(var_04 >= var_07) {
-            self.origin = (self.origin[0], self.origin[1], self.origin[2] + var_08);
-          } else if(var_04 <= var_07 * -1) {
-            self.origin = (self.origin[0], self.origin[1], self.origin[2] - var_08);
+        var_4 = self.var_AFEC[2] - self.origin[2];
+        var_5 = distance2d(self.var_AFEC, self.origin);
+        var_6 = var_5 / var_0;
+        if(var_6 > 0 && var_4 != 0) {
+          var_7 = abs(var_4) / var_6;
+          var_8 = var_7 * var_1;
+          if(var_4 >= var_7) {
+            self.origin = (self.origin[0], self.origin[1], self.origin[2] + var_8);
+          } else if(var_4 <= var_7 * -1) {
+            self.origin = (self.origin[0], self.origin[1], self.origin[2] - var_8);
           }
         }
       }
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
-func_F31D(param_00) {
+func_F31D(var_0) {
   if(isDefined(self.var_4B94)) {
     self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
   }
 
   self.var_72A9 = undefined;
-  self.var_4B94 = param_00;
+  self.var_4B94 = var_0;
   func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
 }
 
-func_1164B(param_00) {
-  func_F31D(param_00);
+func_1164B(var_0) {
+  func_F31D(var_0);
   self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B37(self);
   func_6B12(self.var_4B94);
   self dontinterpolate();
@@ -931,9 +931,9 @@ func_1164B(param_00) {
 
 func_416B() {
   if(isDefined(self.var_C039)) {
-    foreach(var_01 in self.var_C039) {
-      if(isDefined(var_01["node"])) {
-        var_01["node"] scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
+    foreach(var_1 in self.var_C039) {
+      if(isDefined(var_1["node"])) {
+        var_1["node"] scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
       }
     }
   }
@@ -951,29 +951,29 @@ func_FF45() {
   return 1;
 }
 
-func_6D53(param_00) {
+func_6D53(var_0) {
   self endon("death");
   childthread func_1A2E();
   wait(0.25);
-  var_01 = weaponclipsize(self.var_394);
-  var_02 = weaponfiretime(self.var_394);
-  var_03 = weaponburstcount(self.var_394);
-  var_04 = weaponclass(self.var_394);
-  var_05 = var_01;
-  if(var_04 == "sniper") {
-    var_05 = 5;
-  } else if(var_03 > 0) {
-    var_05 = var_03;
+  var_1 = weaponclipsize(self.var_394);
+  var_2 = weaponfiretime(self.var_394);
+  var_3 = weaponburstcount(self.var_394);
+  var_4 = weaponclass(self.var_394);
+  var_5 = var_1;
+  if(var_4 == "sniper") {
+    var_5 = 5;
+  } else if(var_3 > 0) {
+    var_5 = var_3;
   }
 
-  while(var_05 > 0) {
+  while(var_5 > 0) {
     if(func_FF45()) {
-      var_06 = self gettagorigin("tag_flash");
-      var_07 = self gettagangles("tag_flash");
-      var_08 = anglesToForward(var_07);
-      var_09 = var_06 + var_08 * 1000;
+      var_6 = self gettagorigin("tag_flash");
+      var_7 = self gettagangles("tag_flash");
+      var_8 = anglesToForward(var_7);
+      var_9 = var_6 + var_8 * 1000;
       if(isDefined(self.var_1A2C)) {
-        var_0A = scripts\common\trace::ray_trace(var_06, var_09, self);
+        var_0A = scripts\common\trace::ray_trace(var_6, var_9, self);
         if(isDefined(var_0A["entity"]) && var_0A["entity"] == self.var_1A2C) {
           var_0B = func_77C8();
           if(randomfloat(1) > var_0B) {
@@ -987,115 +987,115 @@ func_6D53(param_00) {
             }
 
             var_11 = self.var_1A2C.origin + var_0D * var_0E + var_0F * var_10;
-            var_08 = vectornormalize(var_11 - var_06);
-            var_09 = var_06 + var_08 * 1000;
+            var_8 = vectornormalize(var_11 - var_6);
+            var_9 = var_6 + var_8 * 1000;
           }
         }
       }
 
       if(func_FF81()) {
-        magicbullet(self.var_394, var_06, var_09);
+        magicbullet(self.var_394, var_6, var_9);
       } else {
-        func_6ADC(self.var_394, var_06, var_09, self.var_C01E);
+        func_6ADC(self.var_394, var_6, var_9, self.var_C01E);
       }
 
-      self _meth_82AB(param_00, 1, 0.2, 1);
-      scripts\engine\utility::delaycall(0.15, ::clearanim, param_00, 0);
+      self _meth_82AB(var_0, 1, 0.2, 1);
+      scripts\engine\utility::delaycall(0.15, ::clearanim, var_0, 0);
     }
 
-    var_05--;
-    wait(max(var_02, 0.1));
+    var_5--;
+    wait(max(var_2, 0.1));
   }
 }
 
-func_77C8(param_00) {
-  var_01 = self.var_2894;
-  var_02 = 1;
+func_77C8(var_0) {
+  var_1 = self.var_2894;
+  var_2 = 1;
   if(isDefined(self.var_1A2C) && isDefined(self.var_1A2C.var_50)) {
-    var_02 = self.var_1A2C.var_50;
+    var_2 = self.var_1A2C.var_50;
   }
 
-  var_03 = distance(self.origin, self.var_1A2C.origin);
-  var_04 = getaccuracyfraction(self.var_394, var_03, isplayer(self.var_1A2C));
-  var_05 = "stand";
+  var_3 = distance(self.origin, self.var_1A2C.origin);
+  var_4 = getaccuracyfraction(self.var_394, var_3, isplayer(self.var_1A2C));
+  var_5 = "stand";
   if(isplayer(self.var_1A2C)) {
-    var_05 = self.var_1A2C getstance();
+    var_5 = self.var_1A2C getstance();
   } else if(isai(self.var_1A2C)) {
-    var_05 = self.var_1A2C.a.pose;
+    var_5 = self.var_1A2C.a.pose;
   }
 
-  var_06 = 1;
-  if(var_05 == "crouch") {
-    var_06 = 0.75;
-  } else if(var_05 == "prone") {
-    var_06 = 0.5;
+  var_6 = 1;
+  if(var_5 == "crouch") {
+    var_6 = 0.75;
+  } else if(var_5 == "prone") {
+    var_6 = 0.5;
   }
 
-  var_07 = 1;
+  var_7 = 1;
   if(isplayer(self.var_1A2C)) {
-    var_08 = level.player getnormalizedmovement();
-    var_07 = 1 - length(var_08) * 0.3;
+    var_8 = level.player getnormalizedmovement();
+    var_7 = 1 - length(var_8) * 0.3;
   } else if(isai(self.var_1A2C)) {}
 
-  var_09 = 0.75;
-  var_0A = var_01 * var_02 * var_04 * var_06 * var_07 * var_09;
+  var_9 = 0.75;
+  var_0A = var_1 * var_2 * var_4 * var_6 * var_7 * var_9;
   return var_0A;
 }
 
-func_6ADC(param_00, param_01, param_02, param_03) {
-  bullettracer(param_01, param_02, param_00);
+func_6ADC(var_0, var_1, var_2, var_3) {
+  bullettracer(var_1, var_2, var_0);
   playFXOnTag(scripts\engine\utility::getfx("fakeactor_muzflash"), self, "tag_flash");
-  if(!isDefined(param_03) || !param_03) {}
+  if(!isDefined(var_3) || !var_3) {}
 }
 
-func_7CDD(param_00) {
-  if(isplayer(param_00)) {
+func_7CDD(var_0) {
+  if(isplayer(var_0)) {
     if(func_9C07()) {
-      var_01 = 50;
+      var_1 = 50;
     } else {
-      var_01 = 50;
+      var_1 = 50;
     }
 
-    var_02 = param_00 getplayerangles();
-    var_03 = param_00 getorigin() + anglestoup(var_02) * var_01;
-    return var_03;
+    var_2 = var_0 getplayerangles();
+    var_3 = var_0 getorigin() + anglestoup(var_2) * var_1;
+    return var_3;
   }
 
-  if(isai(var_03)) {
-    return var_03 gettagorigin("j_SpineUpper");
+  if(isai(var_3)) {
+    return var_3 gettagorigin("j_SpineUpper");
   }
 
-  var_03 = var_03.origin;
+  var_3 = var_3.origin;
   if(isDefined(self.var_1A2D)) {
-    var_03 = var_03 + self.var_1A2D;
+    var_3 = var_3 + self.var_1A2D;
   }
 
-  return var_03;
+  return var_3;
 }
 
 func_1A2E() {
   self endon("end_aim");
-  var_00 = 0.2;
-  var_01 = func_77E7("aim_5");
-  if(isDefined(var_01)) {
-    self _meth_82A5(var_01, self.var_1EA4["body"], 1, var_00);
+  var_0 = 0.2;
+  var_1 = func_77E7("aim_5");
+  if(isDefined(var_1)) {
+    self _meth_82A5(var_1, self.var_1EA4["body"], 1, var_0);
   }
 
-  self _meth_82AC(func_77E7("aim_2"), 1, var_00);
-  self _meth_82AC(func_77E7("aim_4"), 1, var_00);
-  self _meth_82AC(func_77E7("aim_6"), 1, var_00);
-  self _meth_82AC(func_77E7("aim_8"), 1, var_00);
-  var_02 = 10;
-  var_03 = 0;
-  var_04 = 0;
-  var_05 = 1;
+  self _meth_82AC(func_77E7("aim_2"), 1, var_0);
+  self _meth_82AC(func_77E7("aim_4"), 1, var_0);
+  self _meth_82AC(func_77E7("aim_6"), 1, var_0);
+  self _meth_82AC(func_77E7("aim_8"), 1, var_0);
+  var_2 = 10;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 1;
   while(isDefined(self.var_1A2C)) {
-    var_06 = self gettagorigin("tag_flash");
-    var_07 = func_7CDD(self.var_1A2C);
-    var_08 = scripts\sp\utility::func_13DCC(var_07) - scripts\sp\utility::func_13DCC(var_06);
-    var_09 = vectortoangles(var_08);
-    var_0A = angleclamp180(var_09[0]);
-    var_0B = angleclamp180(var_09[1]);
+    var_6 = self gettagorigin("tag_flash");
+    var_7 = func_7CDD(self.var_1A2C);
+    var_8 = scripts\sp\utility::func_13DCC(var_7) - scripts\sp\utility::func_13DCC(var_6);
+    var_9 = vectortoangles(var_8);
+    var_0A = angleclamp180(var_9[0]);
+    var_0B = angleclamp180(var_9[1]);
     if(var_0A < self.var_368 || var_0A > self.isbot || var_0B < self.setdevdvar || var_0B > self.setmatchdatadef) {
       func_F5BF(0);
       var_0A = 0;
@@ -1109,60 +1109,60 @@ func_1A2E() {
       scripts\engine\utility::draw_angles(var_0C, self gettagorigin("tag_origin"));
     }
 
-    if(!var_05) {
-      var_0D = var_0B - var_03;
-      if(abs(var_0D) > var_02) {
-        var_0B = var_03 + clamp(var_0D, -1 * var_02, var_02);
+    if(!var_5) {
+      var_0D = var_0B - var_3;
+      if(abs(var_0D) > var_2) {
+        var_0B = var_3 + clamp(var_0D, -1 * var_2, var_2);
       }
 
-      var_0E = var_0A - var_04;
-      if(abs(var_0E) > var_02) {
-        var_0A = var_04 + clamp(var_0E, -1 * var_02, var_02);
+      var_0E = var_0A - var_4;
+      if(abs(var_0E) > var_2) {
+        var_0A = var_4 + clamp(var_0E, -1 * var_2, var_2);
       }
     }
 
     var_0A = clamp(var_0A, self.var_368, self.isbot);
     var_0B = clamp(var_0B, self.setdevdvar, self.setmatchdatadef);
-    var_05 = 0;
-    var_03 = var_0B;
-    var_04 = var_0A;
+    var_5 = 0;
+    var_3 = var_0B;
+    var_4 = var_0A;
     func_1A31(self.var_1EA4["aim_2"], self.var_1EA4["aim_4"], self.var_1EA4["aim_6"], self.var_1EA4["aim_8"], var_0A, var_0B);
     wait(0.05);
   }
 }
 
-func_7821(param_00, param_01, param_02, param_03) {
-  var_04 = archetypegetalias(param_00, param_01, param_02, param_03);
-  if(isDefined(var_04)) {
-    if(isarray(var_04.var_47)) {
-      if(isDefined(var_04.var_39E)) {
-        var_05 = randomfloat(1);
-        var_06 = 0;
-        for(var_07 = 0; var_07 < var_04.var_47.size; var_07++) {
-          var_06 = var_06 + var_04.var_39E[var_07];
-          if(var_06 >= var_05) {
-            return var_04.var_47[var_07];
+func_7821(var_0, var_1, var_2, var_3) {
+  var_4 = archetypegetalias(var_0, var_1, var_2, var_3);
+  if(isDefined(var_4)) {
+    if(isarray(var_4.var_47)) {
+      if(isDefined(var_4.var_39E)) {
+        var_5 = randomfloat(1);
+        var_6 = 0;
+        for(var_7 = 0; var_7 < var_4.var_47.size; var_7++) {
+          var_6 = var_6 + var_4.var_39E[var_7];
+          if(var_6 >= var_5) {
+            return var_4.var_47[var_7];
           }
         }
 
         return;
       }
 
-      var_05 = randomint(var_07.var_47.size);
-      return var_06.var_47[var_07];
+      var_5 = randomint(var_7.var_47.size);
+      return var_6.var_47[var_7];
     }
 
-    return var_07.var_47;
+    return var_7.var_47;
   }
 }
 
-func_7820(param_00, param_01) {
-  var_02 = func_7821(self.var_1FA8, param_00, param_01, func_9BE8());
-  if(isarray(var_02)) {
-    var_02 = scripts\engine\utility::random(var_02);
+func_7820(var_0, var_1) {
+  var_2 = func_7821(self.var_1FA8, var_0, var_1, func_9BE8());
+  if(isarray(var_2)) {
+    var_2 = scripts\engine\utility::random(var_2);
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_7A2A() {
@@ -1206,31 +1206,31 @@ func_7AFA() {
   return func_7820("stand_run_loop", "default");
 }
 
-func_7D21(param_00, param_01, param_02) {
-  var_03 = vectortoangles(param_02 - param_01);
-  var_04 = param_00[1] - var_03[1];
-  var_04 = var_04 + 360;
-  var_04 = int(var_04) % 360;
-  var_05 = "";
-  if(var_04 > 315 || var_04 < 45) {
+func_7D21(var_0, var_1, var_2) {
+  var_3 = vectortoangles(var_2 - var_1);
+  var_4 = var_0[1] - var_3[1];
+  var_4 = var_4 + 360;
+  var_4 = int(var_4) % 360;
+  var_5 = "";
+  if(var_4 > 315 || var_4 < 45) {
     return undefined;
-  } else if(var_04 >= 150 && var_04 <= 210) {
-    var_05 = "2";
-  } else if(var_04 < 90) {
-    var_05 = "9";
-  } else if(var_04 > 270) {
-    var_05 = "7";
-  } else if(var_04 < 135) {
-    var_05 = "6";
-  } else if(var_04 > 225) {
-    var_05 = "4";
-  } else if(var_04 < 150) {
-    var_05 = "3";
-  } else if(var_04 > 210) {
-    var_05 = "1";
+  } else if(var_4 >= 150 && var_4 <= 210) {
+    var_5 = "2";
+  } else if(var_4 < 90) {
+    var_5 = "9";
+  } else if(var_4 > 270) {
+    var_5 = "7";
+  } else if(var_4 < 135) {
+    var_5 = "6";
+  } else if(var_4 > 225) {
+    var_5 = "4";
+  } else if(var_4 < 150) {
+    var_5 = "3";
+  } else if(var_4 > 210) {
+    var_5 = "1";
   }
 
-  return func_7820("run_turn", "left" + var_05);
+  return func_7820("run_turn", "left" + var_5);
 }
 
 func_7C63() {
@@ -1250,40 +1250,40 @@ func_7C63() {
   }
 }
 
-func_77E7(param_00) {
+func_77E7(var_0) {
   switch (self.var_1FD0) {
     case "cover_crouch":
-      return func_7820("cover_crouch_aim", "rifle_" + param_00);
+      return func_7820("cover_crouch_aim", "rifle_" + var_0);
 
     case "cover_left_crouch":
-      if(param_00 == "aim_5") {
+      if(var_0 == "aim_5") {
         return undefined;
       }
-      return func_7820("cover_crouch_exposed_left", "rifle_" + param_00);
+      return func_7820("cover_crouch_exposed_left", "rifle_" + var_0);
 
     case "cover_right_crouch":
-      if(param_00 == "aim_5") {
+      if(var_0 == "aim_5") {
         return undefined;
       }
-      return func_7820("cover_crouch_exposed_right", "rifle_" + param_00);
+      return func_7820("cover_crouch_exposed_right", "rifle_" + var_0);
 
     case "cover_stand":
-      return func_7820("cover_stand_exposed", "rifle_" + param_00);
+      return func_7820("cover_stand_exposed", "rifle_" + var_0);
 
     case "cover_left":
-      if(param_00 == "aim_5") {
+      if(var_0 == "aim_5") {
         return undefined;
       }
-      return func_7820("cover_left_exposed_B", "rifle_" + param_00);
+      return func_7820("cover_left_exposed_B", "rifle_" + var_0);
 
     case "cover_right":
-      if(param_00 == "aim_5") {
+      if(var_0 == "aim_5") {
         return undefined;
       }
-      return func_7820("cover_right_exposed_B", "rifle_" + param_00);
+      return func_7820("cover_right_exposed_B", "rifle_" + var_0);
 
     case "exposed":
-      return func_7820("exposed_idle", "rifle_" + param_00);
+      return func_7820("exposed_idle", "rifle_" + var_0);
   }
 }
 
@@ -1335,55 +1335,55 @@ func_77E9() {
   return undefined;
 }
 
-func_7836(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = self.var_1FD0;
+func_7836(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = self.var_1FD0;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = self;
+  if(!isDefined(var_1)) {
+    var_1 = self;
   }
 
-  var_03 = param_02 + "_arrival";
-  var_04 = scripts\sp\utility::func_793C(param_00.angles, param_00.origin, param_01.origin);
-  switch (param_02) {
+  var_3 = var_2 + "_arrival";
+  var_4 = scripts\sp\utility::func_793C(var_0.angles, var_0.origin, var_1.origin);
+  switch (var_2) {
     case "cover_crouch":
-      if(var_04 == "9") {
-        var_04 = "6";
-      } else if(var_04 == "7" || var_04 == "8") {
-        var_04 = "4";
+      if(var_4 == "9") {
+        var_4 = "6";
+      } else if(var_4 == "7" || var_4 == "8") {
+        var_4 = "4";
       }
       break;
 
     case "cover_stand":
-      if(var_04 == "9") {
-        var_04 = "6";
-      } else if(var_04 == "7" || var_04 == "8") {
-        var_04 = "4";
+      if(var_4 == "9") {
+        var_4 = "6";
+      } else if(var_4 == "7" || var_4 == "8") {
+        var_4 = "4";
       }
       break;
 
     case "cover_left":
-      if(var_04 == "9") {
-        var_04 = "8";
+      if(var_4 == "9") {
+        var_4 = "8";
       }
       break;
 
     case "cover_right":
-      if(var_04 == "7") {
-        var_04 = "8";
+      if(var_4 == "7") {
+        var_4 = "8";
       }
       break;
 
     case "cover_left_crouch":
-      if(var_04 == "9") {
-        var_04 = "8";
+      if(var_4 == "9") {
+        var_4 = "8";
       }
       break;
 
     case "cover_right_crouch":
-      if(var_04 == "7") {
-        var_04 = "8";
+      if(var_4 == "7") {
+        var_4 = "8";
       }
       break;
 
@@ -1395,72 +1395,72 @@ func_7836(param_00, param_01, param_02) {
   }
 
   if(func_9C07()) {
-    var_05 = "left" + var_04;
+    var_5 = "left" + var_4;
   } else {
-    var_05 = var_05;
+    var_5 = var_5;
   }
 
-  return func_7820(var_03, var_05);
+  return func_7820(var_3, var_5);
 }
 
-func_79A4(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_01)) {
-    param_01 = self.origin;
+func_79A4(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = self.origin;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self.angles;
+  if(!isDefined(var_2)) {
+    var_2 = self.angles;
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = self.var_1FD0;
+  if(!isDefined(var_3)) {
+    var_3 = self.var_1FD0;
   }
 
-  var_04 = param_03 + "_exit";
-  var_05 = scripts\sp\utility::func_793C(param_02, param_01, param_00);
-  switch (param_03) {
+  var_4 = var_3 + "_exit";
+  var_5 = scripts\sp\utility::func_793C(var_2, var_1, var_0);
+  switch (var_3) {
     case "cover_crouch":
-      if(var_05 == "9") {
-        var_05 = "6";
-      } else if(var_05 == "7" || var_05 == "8") {
-        var_05 = "4";
+      if(var_5 == "9") {
+        var_5 = "6";
+      } else if(var_5 == "7" || var_5 == "8") {
+        var_5 = "4";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "cover_stand":
-      if(var_05 == "9") {
-        var_05 = "6";
-      } else if(var_05 == "7" || var_05 == "8") {
-        var_05 = "4";
+      if(var_5 == "9") {
+        var_5 = "6";
+      } else if(var_5 == "7" || var_5 == "8") {
+        var_5 = "4";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "cover_left":
-      if(var_05 == "9") {
-        var_05 = "8";
+      if(var_5 == "9") {
+        var_5 = "8";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "cover_right":
-      if(var_05 == "7") {
-        var_05 = "8";
+      if(var_5 == "7") {
+        var_5 = "8";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "cover_left_crouch":
-      if(var_05 == "9") {
-        var_05 = "8";
+      if(var_5 == "9") {
+        var_5 = "8";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "cover_right_crouch":
-      if(var_05 == "7") {
-        var_05 = "8";
+      if(var_5 == "7") {
+        var_5 = "8";
       }
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     case "exposed":
-      return func_7820(var_04, var_05);
+      return func_7820(var_4, var_5);
 
     default:
       return undefined;
@@ -1472,8 +1472,8 @@ func_7C03() {
     return func_7820("Exposed_Reload", "rifle");
   }
 
-  var_00 = self.var_1FD0 + "_reload";
-  return func_7820(var_00, "reload");
+  var_0 = self.var_1FD0 + "_reload";
+  return func_7820(var_0, "reload");
 }
 
 func_7C9F() {
@@ -1502,8 +1502,8 @@ func_7C9F() {
 
 func_7B62() {
   if(func_9C44()) {
-    var_00 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "short", "medium");
-    return func_7820("pain_run_default", var_00);
+    var_0 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "short", "medium");
+    return func_7820("pain_run_default", var_0);
   }
 
   switch (self.var_1FD0) {
@@ -1532,22 +1532,22 @@ func_7B62() {
 
 func_7927() {
   if(isDefined(self.var_A8A3) && self.var_A8A3 == "MOD_EXPLOSIVE") {
-    var_00 = scripts\engine\utility::random(["explosive_f", "explosive_l", "explosive_r"]);
+    var_0 = scripts\engine\utility::random(["explosive_f", "explosive_l", "explosive_r"]);
     if(func_9C44()) {
-      return func_7820("death_moving_explosive", var_00);
+      return func_7820("death_moving_explosive", var_0);
     }
 
-    return func_7820("death_explosive", var_00);
+    return func_7820("death_explosive", var_0);
   }
 
   if(func_9C44()) {
     if(scripts\engine\utility::cointoss()) {
-      var_00 = scripts\engine\utility::random(["death_pain_stand_head", "death_pain_stand_l_arm", "death_pain_stand_r_arm", "death_pain_stand_torso"]);
-      return func_7820(var_00, "default");
+      var_0 = scripts\engine\utility::random(["death_pain_stand_head", "death_pain_stand_l_arm", "death_pain_stand_r_arm", "death_pain_stand_torso"]);
+      return func_7820(var_0, "default");
     }
 
-    var_01 = scripts\engine\utility::random(["running_forward_2", "running_forward_4", "running_forward_6", "running_forward_8"]);
-    return func_7820("death_moving_default", var_01);
+    var_1 = scripts\engine\utility::random(["running_forward_2", "running_forward_4", "running_forward_6", "running_forward_8"]);
+    return func_7820("death_moving_default", var_1);
   }
 
   switch (self.var_1FD0) {
@@ -1570,25 +1570,25 @@ func_7927() {
       return func_7820("death_cover_default", "right_crouch_default");
 
     default:
-      var_00 = scripts\engine\utility::random(["death_pain_stand_head", "death_pain_stand_l_arm", "death_pain_stand_r_arm", "death_pain_stand_torso"]);
-      return func_7820(var_01, "default");
+      var_0 = scripts\engine\utility::random(["death_pain_stand_head", "death_pain_stand_l_arm", "death_pain_stand_r_arm", "death_pain_stand_torso"]);
+      return func_7820(var_1, "default");
   }
 }
 
-func_7D19(param_00) {
-  if(issubstr(param_00, "jumpdown")) {
-    return func_7820(param_00, "jumpdown");
+func_7D19(var_0) {
+  if(issubstr(var_0, "jumpdown")) {
+    return func_7820(var_0, "jumpdown");
   }
 
-  if(issubstr(param_00, "jumpover")) {
-    return func_7820(param_00, "jumpover");
+  if(issubstr(var_0, "jumpover")) {
+    return func_7820(var_0, "jumpover");
   }
 
-  if(issubstr(param_00, "jumpup")) {
-    return func_7820(param_00, "jumpup");
+  if(issubstr(var_0, "jumpup")) {
+    return func_7820(var_0, "jumpup");
   }
 
-  return func_7820(param_00, param_00);
+  return func_7820(var_0, var_0);
 }
 
 func_4E22() {
@@ -1600,15 +1600,15 @@ func_4E22() {
 
   func_416B();
   if(isDefined(self.var_4E46)) {
-    var_00 = self[[self.var_4E46]]();
-    if(!isDefined(var_00) || var_00) {
+    var_0 = self[[self.var_4E46]]();
+    if(!isDefined(var_0) || var_0) {
       return;
     }
   }
 
-  var_01 = self.var_4E2A;
-  if(!isDefined(var_01)) {
-    var_01 = func_7927();
+  var_1 = self.var_4E2A;
+  if(!isDefined(var_1)) {
+    var_1 = func_7927();
   }
 
   self notify("death");
@@ -1617,12 +1617,12 @@ func_4E22() {
   scripts\anim\face::saygenericdialogue("death");
   if(isDefined(self.noragdoll) && self.noragdoll) {
     if(!isDefined(self.var_10265) || !self.var_10265) {
-      func_CE00(var_01, "deathplant");
+      func_CE00(var_1, "deathplant");
     }
   } else if(isDefined(self.var_10265) && self.var_10265) {
     self giverankxp();
   } else {
-    func_CE00(var_01, "deathplant");
+    func_CE00(var_1, "deathplant");
     self giverankxp();
   }
 
@@ -1639,41 +1639,41 @@ func_4E22() {
 }
 
 func_5D16() {
-  var_00 = getweaponmodel(self.var_394);
-  if(isDefined(var_00) && var_00 != "") {
-    self detach(var_00, "tag_weapon_right");
+  var_0 = getweaponmodel(self.var_394);
+  if(isDefined(var_0) && var_0 != "") {
+    self detach(var_0, "tag_weapon_right");
     if(!isDefined(self.var_C05C)) {
-      var_01 = spawn("weapon_" + self.var_394, self gettagorigin("tag_weapon_right"));
-      var_01.angles = self gettagangles("tag_weapon_right");
-      func_ACDC(var_01);
+      var_1 = spawn("weapon_" + self.var_394, self gettagorigin("tag_weapon_right"));
+      var_1.angles = self gettagangles("tag_weapon_right");
+      func_ACDC(var_1);
     }
   }
 }
 
-func_ACDC(param_00) {
+func_ACDC(var_0) {
   if(!isDefined(level.var_6B13)) {
     level.var_6B13 = [];
   }
 
-  var_01 = scripts\engine\utility::array_removeundefined(level.var_6B13);
-  var_02 = var_01.size;
-  if(var_01.size >= 4) {
-    var_01 = sortbydistance(var_01, level.player.origin);
-    var_02 = var_02 - 1;
-    var_01[var_02] delete();
+  var_1 = scripts\engine\utility::array_removeundefined(level.var_6B13);
+  var_2 = var_1.size;
+  if(var_1.size >= 4) {
+    var_1 = sortbydistance(var_1, level.player.origin);
+    var_2 = var_2 - 1;
+    var_1[var_2] delete();
   }
 
-  var_01[var_02] = param_00;
-  level.var_6B13 = var_01;
+  var_1[var_2] = var_0;
+  level.var_6B13 = var_1;
 }
 
 func_4D23() {
   self endon("entitydeleted");
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04);
-    self.var_A8A3 = var_04;
-    if(isDefined(var_01) && isplayer(var_01)) {
-      var_01 setclientomnvar("damage_feedback_notify", gettime());
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4);
+    self.var_A8A3 = var_4;
+    if(isDefined(var_1) && isplayer(var_1)) {
+      var_1 setclientomnvar("damage_feedback_notify", gettime());
     }
 
     if(isDefined(self.var_E0) && self.var_E0) {
@@ -1707,98 +1707,98 @@ func_57AD() {
 
 func_4EC6() {}
 
-func_2294(param_00) {
-  var_01 = param_00.team;
-  scripts\sp\utility::func_11161(level.var_6B46[var_01], param_00);
-  param_00 waittill("death");
-  param_00 func_40C8();
-  if(isDefined(param_00) && isDefined(param_00.var_11159)) {
-    scripts\sp\utility::func_11163(level.var_6B46[var_01], param_00.var_11159);
+func_2294(var_0) {
+  var_1 = var_0.team;
+  scripts\sp\utility::func_11161(level.var_6B46[var_1], var_0);
+  var_0 waittill("death");
+  var_0 func_40C8();
+  if(isDefined(var_0) && isDefined(var_0.var_11159)) {
+    scripts\sp\utility::func_11163(level.var_6B46[var_1], var_0.var_11159);
     return;
   }
 
-  scripts\sp\utility::func_11164(level.var_6B46[var_01]);
+  scripts\sp\utility::func_11164(level.var_6B46[var_1]);
 }
 
-play_looping_breath_sound(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+play_looping_breath_sound(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   if(isDefined(self.var_6B17)) {
-    self[[self.var_6B17]](param_00, param_01);
+    self[[self.var_6B17]](var_0, var_1);
     return;
   }
 
   self clearanim(self.var_1EA4["body"], 0.2);
   self givescorefortrophyblocks();
-  self _meth_82E4("fakeactor_anim", param_00, self.var_1EA4["body"], 1, 0.2, param_01);
+  self _meth_82E4("fakeactor_anim", var_0, self.var_1EA4["body"], 1, 0.2, var_1);
 }
 
-func_CE00(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_CE00(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(self.var_6B41)) {
-    self[[self.var_6B41]](param_00, param_01);
+    self[[self.var_6B41]](var_0, var_1);
     return;
   }
 
   self clearanim(self.var_1EA4["body"], 0.2);
   self givescorefortrophyblocks();
-  var_06 = "normal";
-  if(isDefined(param_01)) {
-    var_06 = "deathplant";
+  var_6 = "normal";
+  if(isDefined(var_1)) {
+    var_6 = "deathplant";
   }
 
-  var_07 = self.origin;
-  var_08 = self.angles;
-  if(isDefined(param_04)) {
-    var_07 = param_04.origin;
-    var_08 = param_04.angles;
+  var_7 = self.origin;
+  var_8 = self.angles;
+  if(isDefined(var_4)) {
+    var_7 = var_4.origin;
+    var_8 = var_4.angles;
   }
 
-  if(!isDefined(param_05)) {
-    param_05 = 0.2;
+  if(!isDefined(var_5)) {
+    var_5 = 0.2;
   }
 
-  self animscripted("fakeactor_anim", var_07, var_08, param_00, var_06);
-  if(isDefined(param_02)) {
-    thread scripts\anim\shared::donotetracks(param_03, param_02);
+  self animscripted("fakeactor_anim", var_7, var_8, var_0, var_6);
+  if(isDefined(var_2)) {
+    thread scripts\anim\shared::donotetracks(var_3, var_2);
   }
 
-  var_09 = "end";
-  if(animhasnotetrack(param_00, "finish")) {
-    var_09 = "finish";
-  } else if(animhasnotetrack(param_00, "stop anim")) {
-    var_09 = "stop anim";
+  var_9 = "end";
+  if(animhasnotetrack(var_0, "finish")) {
+    var_9 = "finish";
+  } else if(animhasnotetrack(var_0, "stop anim")) {
+    var_9 = "stop anim";
   }
 
-  var_0A = getanimlength(param_00) - param_05;
-  if(param_05 > 0 && var_0A > 0) {
-    scripts\sp\utility::func_137A3("fakeactor_anim", var_09, var_0A);
+  var_0A = getanimlength(var_0) - var_5;
+  if(var_5 > 0 && var_0A > 0) {
+    scripts\sp\utility::func_137A3("fakeactor_anim", var_9, var_0A);
     return;
   }
 
-  self waittillmatch(var_09, "fakeactor_anim");
+  self waittillmatch(var_9, "fakeactor_anim");
 }
 
-func_7816(param_00) {
-  var_01 = spawnStruct();
-  var_01.var_1F5A = getanimlength(param_00);
-  var_02 = getmovedelta(param_00, 0, 1);
-  var_03 = length(var_02);
-  if(var_01.var_1F5A > 0 && var_03 > 0) {
-    var_01.var_E81C = var_03 / var_01.var_1F5A;
-    var_01.var_1F1D = 0;
+func_7816(var_0) {
+  var_1 = spawnStruct();
+  var_1.var_1F5A = getanimlength(var_0);
+  var_2 = getmovedelta(var_0, 0, 1);
+  var_3 = length(var_2);
+  if(var_1.var_1F5A > 0 && var_3 > 0) {
+    var_1.var_E81C = var_3 / var_1.var_1F5A;
+    var_1.var_1F1D = 0;
   } else {
-    var_01.var_E81C = 170;
-    var_01.var_1F1D = 1;
+    var_1.var_E81C = 170;
+    var_1.var_1F1D = 1;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_F297(param_00, param_01) {
-  self.var_1A2C = param_00;
-  self.var_1A2D = param_01;
+func_F297(var_0, var_1) {
+  self.var_1A2C = var_0;
+  self.var_1A2D = var_1;
 }
 
 func_77E8() {
@@ -1872,53 +1872,53 @@ func_F8F1() {
   self.var_1EA4["aim_8"] = % aim_8;
 }
 
-func_1A31(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = 0.1;
-  var_07 = 1;
-  if(param_05 < 0) {
-    var_08 = param_05 / self.setdevdvar * var_07;
-    self _meth_82AC(param_01, 0, var_06, 1, 1);
-    self _meth_82AC(param_02, var_08, var_06, 1, 1);
-  } else if(param_05 > 0) {
-    var_08 = param_05 / self.setmatchdatadef * var_07;
-    self _meth_82AC(param_01, var_08, var_06, 1, 1);
-    self _meth_82AC(param_02, 0, var_06, 1, 1);
+func_1A31(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = 0.1;
+  var_7 = 1;
+  if(var_5 < 0) {
+    var_8 = var_5 / self.setdevdvar * var_7;
+    self _meth_82AC(var_1, 0, var_6, 1, 1);
+    self _meth_82AC(var_2, var_8, var_6, 1, 1);
+  } else if(var_5 > 0) {
+    var_8 = var_5 / self.setmatchdatadef * var_7;
+    self _meth_82AC(var_1, var_8, var_6, 1, 1);
+    self _meth_82AC(var_2, 0, var_6, 1, 1);
   }
 
-  if(param_04 < 0) {
-    var_08 = param_04 / self.var_368 * var_07;
-    self _meth_82AC(param_00, 0, var_06, 1, 1);
-    self _meth_82AC(param_03, var_08, var_06, 1, 1);
+  if(var_4 < 0) {
+    var_8 = var_4 / self.var_368 * var_7;
+    self _meth_82AC(var_0, 0, var_6, 1, 1);
+    self _meth_82AC(var_3, var_8, var_6, 1, 1);
     return;
   }
 
-  if(param_04 > 0) {
-    var_08 = param_04 / self.isbot * var_07;
-    self _meth_82AC(param_00, var_08, var_06, 1, 1);
-    self _meth_82AC(param_03, 0, var_06, 1, 1);
+  if(var_4 > 0) {
+    var_8 = var_4 / self.isbot * var_7;
+    self _meth_82AC(var_0, var_8, var_6, 1, 1);
+    self _meth_82AC(var_3, 0, var_6, 1, 1);
   }
 }
 
-func_F2C3(param_00) {
-  self.var_1FD1 = param_00;
+func_F2C3(var_0) {
+  self.var_1FD1 = var_0;
   func_CB1F();
 }
 
 func_CB1F() {
-  var_00 = randomint(self.var_1FD1.size);
-  self.var_1FD0 = self.var_1FD1[var_00];
+  var_0 = randomint(self.var_1FD1.size);
+  self.var_1FD0 = self.var_1FD1[var_0];
 }
 
-func_F584(param_00) {
-  self.var_E7DA = param_00;
+func_F584(var_0) {
+  self.var_E7DA = var_0;
 }
 
 func_417B() {
   self.var_E7DA = undefined;
 }
 
-func_F40F(param_00) {
-  self.var_92D2 = param_00;
+func_F40F(var_0) {
+  self.var_92D2 = var_0;
 }
 
 func_415E() {
@@ -1937,8 +1937,8 @@ func_9BA1() {
   return self.magicbullet & 256;
 }
 
-func_F30A(param_00) {
-  if(param_00) {
+func_F30A(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 256;
     return;
   }
@@ -1954,10 +1954,10 @@ func_1142F() {
   func_F30A(1);
 }
 
-func_DF38(param_00) {
+func_DF38(var_0) {
   func_F30A(0);
-  if(isDefined(param_00)) {
-    func_F31D(param_00);
+  if(isDefined(var_0)) {
+    func_F31D(var_0);
     func_F613(1);
   } else if(isDefined(self.var_D88C)) {
     func_F31D(self.var_D88C);
@@ -1968,8 +1968,8 @@ func_DF38(param_00) {
   self.current_state = undefined;
 }
 
-func_F35C(param_00) {
-  if(param_00) {
+func_F35C(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 8;
     return;
   }
@@ -1981,8 +1981,8 @@ func_FF2C() {
   return self.magicbullet & 8;
 }
 
-func_F35D(param_00) {
-  if(param_00) {
+func_F35D(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 16;
     return;
   }
@@ -2000,8 +2000,8 @@ func_FF2F() {
   return self.magicbullet & 16;
 }
 
-func_F2C6(param_00) {
-  if(param_00) {
+func_F2C6(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 4;
     return;
   }
@@ -2013,8 +2013,8 @@ func_9B69() {
   return self.magicbullet & 4;
 }
 
-func_F613(param_00) {
-  if(param_00) {
+func_F613(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 2;
     return;
   }
@@ -2026,8 +2026,8 @@ func_582B() {
   return self.magicbullet & 2;
 }
 
-func_F5BF(param_00) {
-  if(param_00) {
+func_F5BF(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 1;
     return;
   }
@@ -2039,8 +2039,8 @@ func_9CE3() {
   return self.magicbullet & 1;
 }
 
-func_F568(param_00) {
-  if(param_00) {
+func_F568(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 32;
     return;
   }
@@ -2052,8 +2052,8 @@ func_FF81() {
   return self.magicbullet & 32;
 }
 
-func_F410(param_00) {
-  if(param_00) {
+func_F410(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 64;
     return;
   }
@@ -2065,8 +2065,8 @@ func_9C0B() {
   return self.magicbullet & 64;
 }
 
-func_C2C9(param_00) {
-  if(param_00) {
+func_C2C9(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 128;
     return;
   }
@@ -2082,8 +2082,8 @@ func_FF35() {
   return self.magicbullet & 512;
 }
 
-func_F5F9(param_00) {
-  if(param_00) {
+func_F5F9(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 512;
     return;
   }
@@ -2095,8 +2095,8 @@ func_13903() {
   return self.magicbullet & 2048;
 }
 
-func_F56C(param_00) {
-  if(param_00) {
+func_F56C(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 2048;
     return;
   }
@@ -2108,8 +2108,8 @@ func_9BE8() {
   return self.magicbullet & 1024;
 }
 
-func_F3BE(param_00) {
-  if(param_00) {
+func_F3BE(var_0) {
+  if(var_0) {
     self.magicbullet = self.magicbullet | 1024;
     return;
   }
@@ -2117,112 +2117,112 @@ func_F3BE(param_00) {
   self.magicbullet = self.magicbullet &~1024;
 }
 
-func_12735(param_00) {
+func_12735(var_0) {
   if(!isDefined(self.var_336)) {
     return;
   }
 
-  var_01 = getent("target", self.var_336);
+  var_1 = getent("target", self.var_336);
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    var_01 func_F613(1);
+    var_0 waittill("trigger", var_2);
+    var_1 func_F613(1);
   }
 }
 
-func_12736(param_00) {
-  if(!isDefined(param_00.var_336)) {
+func_12736(var_0) {
+  if(!isDefined(var_0.var_336)) {
     return;
   }
 
-  var_01 = scripts\engine\utility::getstructarray(param_00.var_336, "target");
-  if(var_01.size == 0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  if(var_1.size == 0) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    foreach(var_04 in var_01) {
-      var_04 scripts\sp\fakeactor_node_MAYBE::func_6B38(1);
+    var_0 waittill("trigger", var_2);
+    foreach(var_4 in var_1) {
+      var_4 scripts\sp\fakeactor_node_MAYBE::func_6B38(1);
     }
   }
 }
 
-func_12738(param_00) {
-  if(!isDefined(param_00.var_336)) {
+func_12738(var_0) {
+  if(!isDefined(var_0.var_336)) {
     return;
   }
 
-  var_01 = scripts\engine\utility::getstructarray(param_00.var_336, "target");
-  if(var_01.size == 0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  if(var_1.size == 0) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    foreach(var_04 in var_01) {
-      var_04 scripts\sp\fakeactor_node_MAYBE::func_6B38(0);
+    var_0 waittill("trigger", var_2);
+    foreach(var_4 in var_1) {
+      var_4 scripts\sp\fakeactor_node_MAYBE::func_6B38(0);
     }
   }
 }
 
-func_12739(param_00) {
-  if(!isDefined(param_00.script_parameters)) {
+func_12739(var_0) {
+  if(!isDefined(var_0.script_parameters)) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_01);
-    scripts\sp\fakeactor_node_MAYBE::func_6B24(param_00.script_parameters, 0);
+    var_0 waittill("trigger", var_1);
+    scripts\sp\fakeactor_node_MAYBE::func_6B24(var_0.script_parameters, 0);
   }
 }
 
-func_12737(param_00) {
-  if(!isDefined(param_00.script_parameters)) {
+func_12737(var_0) {
+  if(!isDefined(var_0.script_parameters)) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_01);
-    scripts\sp\fakeactor_node_MAYBE::func_6B24(param_00.script_parameters, 1);
+    var_0 waittill("trigger", var_1);
+    scripts\sp\fakeactor_node_MAYBE::func_6B24(var_0.script_parameters, 1);
   }
 }
 
-func_1273B(param_00) {
-  if(!isDefined(param_00.var_336)) {
+func_1273B(var_0) {
+  if(!isDefined(var_0.var_336)) {
     return;
   }
 
-  var_01 = scripts\engine\utility::getstructarray(param_00.var_336, "target");
-  if(var_01.size == 0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  if(var_1.size == 0) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    foreach(var_04 in var_01) {
-      var_04 scripts\sp\fakeactor_node_MAYBE::func_6B3A();
+    var_0 waittill("trigger", var_2);
+    foreach(var_4 in var_1) {
+      var_4 scripts\sp\fakeactor_node_MAYBE::func_6B3A();
     }
   }
 }
 
-func_1273A(param_00) {
-  if(!isDefined(param_00.var_336)) {
+func_1273A(var_0) {
+  if(!isDefined(var_0.var_336)) {
     return;
   }
 
-  var_01 = scripts\engine\utility::getstructarray(param_00.var_336, "target");
-  if(var_01.size == 0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  if(var_1.size == 0) {
     return;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    foreach(var_04 in var_01) {
-      var_04 scripts\sp\fakeactor_node_MAYBE::func_6B39();
+    var_0 waittill("trigger", var_2);
+    foreach(var_4 in var_1) {
+      var_4 scripts\sp\fakeactor_node_MAYBE::func_6B39();
     }
   }
 }
 
-is_higher_priority(param_00, param_01) {
-  return param_00["priority"] < param_01["priority"];
+is_higher_priority(var_0, var_1) {
+  return var_0["priority"] < var_1["priority"];
 }

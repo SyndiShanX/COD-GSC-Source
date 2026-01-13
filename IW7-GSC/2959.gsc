@@ -4,35 +4,35 @@
  * Script: 2959.gsc
 ************************/
 
-main(param_00) {
-  if(!isDefined(param_00)) {
+main(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "script_vehicle_m1a1_abrams_player_tm":
     case "script_vehicle_m1a1_abrams_minigun":
-      func_F63D(param_00, "vfx\core\tread\tread_dust_hamburg_cheap.vfx");
-      func_FB0B(param_00, "water");
-      func_FB0B(param_00, "paintedmetal");
-      func_FB0B(param_00, "riotshield");
+      func_F63D(var_0, "vfx\core\tread\tread_dust_hamburg_cheap.vfx");
+      func_FB0B(var_0, "water");
+      func_FB0B(var_0, "paintedmetal");
+      func_FB0B(var_0, "riotshield");
       break;
 
     case "script_vehicle_uk_utility_truck_no_rail_player":
     case "script_vehicle_uk_utility_truck_no_rail":
     case "script_vehicle_uk_utility_truck":
-      func_F63D(param_00, "vfx\core\tread\tread_dust_default.vfx");
-      func_FB0B(param_00, "water");
-      func_FB0B(param_00, "rock", undefined);
-      func_FB0B(param_00, "metal", undefined);
-      func_FB0B(param_00, "brick", undefined);
-      func_FB0B(param_00, "plaster", undefined);
-      func_FB0B(param_00, "asphalt", "vfx\core\tread\tread_asphalt_default.vfx");
-      func_FB0B(param_00, "paintedmetal", undefined);
-      func_FB0B(param_00, "riotshield", undefined);
-      func_FB0B(param_00, "snow", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "slush", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "ice", "vfx\core\tread\tread_ice_default.vfx");
+      func_F63D(var_0, "vfx\core\tread\tread_dust_default.vfx");
+      func_FB0B(var_0, "water");
+      func_FB0B(var_0, "rock", undefined);
+      func_FB0B(var_0, "metal", undefined);
+      func_FB0B(var_0, "brick", undefined);
+      func_FB0B(var_0, "plaster", undefined);
+      func_FB0B(var_0, "asphalt", "vfx\core\tread\tread_asphalt_default.vfx");
+      func_FB0B(var_0, "paintedmetal", undefined);
+      func_FB0B(var_0, "riotshield", undefined);
+      func_FB0B(var_0, "snow", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "slush", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "ice", "vfx\core\tread\tread_ice_default.vfx");
       break;
 
     case "script_vehicle_b2":
@@ -79,82 +79,82 @@ main(param_00) {
     case "script_vehicle_mi24p_hind_blackice":
     case "script_vehicle_ny_harbor_hind":
     case "script_vehicle_ny_blackhawk":
-      func_F63D(param_00, "vfx\code\tread\heli_dust_default.vfx");
-      func_FB0B(param_00, "water", "vfx\code\tread\heli_water.vfx");
-      func_FB0B(param_00, "snow", "vfx\core\tread\heli_snow_default.vfx");
-      func_FB0B(param_00, "slush", "vfx\core\tread\heli_snow_default.vfx");
-      func_FB0B(param_00, "ice", "vfx\core\tread\heli_snow_default.vfx");
+      func_F63D(var_0, "vfx\code\tread\heli_dust_default.vfx");
+      func_FB0B(var_0, "water", "vfx\code\tread\heli_water.vfx");
+      func_FB0B(var_0, "snow", "vfx\core\tread\heli_snow_default.vfx");
+      func_FB0B(var_0, "slush", "vfx\core\tread\heli_snow_default.vfx");
+      func_FB0B(var_0, "ice", "vfx\core\tread\heli_snow_default.vfx");
       break;
 
     case "script_vehicle_warrior_physics_turret":
-      func_F63D(param_00, "vfx\core\tread\tread_dust_default.vfx");
-      func_FB0B(param_00, "snow", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "slush", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "ice", "vfx\core\tread\tread_ice_default.vfx");
+      func_F63D(var_0, "vfx\core\tread\tread_dust_default.vfx");
+      func_FB0B(var_0, "snow", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "slush", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "ice", "vfx\core\tread\tread_ice_default.vfx");
       break;
 
     default:
-      func_F63D(param_00, "vfx\core\tread\tread_dust_default.vfx");
-      func_FB0B(param_00, "water");
-      func_FB0B(param_00, "concrete");
-      func_FB0B(param_00, "rock");
-      func_FB0B(param_00, "metal");
-      func_FB0B(param_00, "brick");
-      func_FB0B(param_00, "plaster");
-      func_FB0B(param_00, "asphalt", "vfx\core\tread\tread_asphalt_default.vfx");
-      func_FB0B(param_00, "paintedmetal");
-      func_FB0B(param_00, "riotshield");
-      func_FB0B(param_00, "snow", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "slush", "vfx\core\tread\tread_snow_default.vfx");
-      func_FB0B(param_00, "ice", "vfx\core\tread\tread_ice_default.vfx");
+      func_F63D(var_0, "vfx\core\tread\tread_dust_default.vfx");
+      func_FB0B(var_0, "water");
+      func_FB0B(var_0, "concrete");
+      func_FB0B(var_0, "rock");
+      func_FB0B(var_0, "metal");
+      func_FB0B(var_0, "brick");
+      func_FB0B(var_0, "plaster");
+      func_FB0B(var_0, "asphalt", "vfx\core\tread\tread_asphalt_default.vfx");
+      func_FB0B(var_0, "paintedmetal");
+      func_FB0B(var_0, "riotshield");
+      func_FB0B(var_0, "snow", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "slush", "vfx\core\tread\tread_snow_default.vfx");
+      func_FB0B(var_0, "ice", "vfx\core\tread\tread_ice_default.vfx");
       break;
   }
 }
 
-func_FB0B(param_00, param_01, param_02) {
-  scripts\sp\vehicle_build::func_F5FB(param_00, param_01, param_02);
+func_FB0B(var_0, var_1, var_2) {
+  scripts\sp\vehicle_build::func_F5FB(var_0, var_1, var_2);
 }
 
-func_F63D(param_00, param_01) {
-  var_02 = func_7D14();
-  func_FB0B(param_00, "none");
-  foreach(var_04 in var_02) {
-    func_FB0B(param_00, var_04, param_01);
+func_F63D(var_0, var_1) {
+  var_2 = func_7D14();
+  func_FB0B(var_0, "none");
+  foreach(var_4 in var_2) {
+    func_FB0B(var_0, var_4, var_1);
   }
 }
 
 func_7D14() {
-  var_00 = [];
-  var_00[var_00.size] = "brick";
-  var_00[var_00.size] = "bark";
-  var_00[var_00.size] = "carpet";
-  var_00[var_00.size] = "cloth";
-  var_00[var_00.size] = "concrete";
-  var_00[var_00.size] = "dirt";
-  var_00[var_00.size] = "flesh";
-  var_00[var_00.size] = "foliage";
-  var_00[var_00.size] = "glass";
-  var_00[var_00.size] = "grass";
-  var_00[var_00.size] = "gravel";
-  var_00[var_00.size] = "ice";
-  var_00[var_00.size] = "metal";
-  var_00[var_00.size] = "mud";
-  var_00[var_00.size] = "paper";
-  var_00[var_00.size] = "plaster";
-  var_00[var_00.size] = "rock";
-  var_00[var_00.size] = "sand";
-  var_00[var_00.size] = "snow";
-  var_00[var_00.size] = "water";
-  var_00[var_00.size] = "wood";
-  var_00[var_00.size] = "asphalt";
-  var_00[var_00.size] = "ceramic";
-  var_00[var_00.size] = "plastic";
-  var_00[var_00.size] = "rubber";
-  var_00[var_00.size] = "cushion";
-  var_00[var_00.size] = "fruit";
-  var_00[var_00.size] = "paintedmetal";
-  var_00[var_00.size] = "riotshield";
-  var_00[var_00.size] = "slush";
-  var_00[var_00.size] = "default";
-  return var_00;
+  var_0 = [];
+  var_0[var_0.size] = "brick";
+  var_0[var_0.size] = "bark";
+  var_0[var_0.size] = "carpet";
+  var_0[var_0.size] = "cloth";
+  var_0[var_0.size] = "concrete";
+  var_0[var_0.size] = "dirt";
+  var_0[var_0.size] = "flesh";
+  var_0[var_0.size] = "foliage";
+  var_0[var_0.size] = "glass";
+  var_0[var_0.size] = "grass";
+  var_0[var_0.size] = "gravel";
+  var_0[var_0.size] = "ice";
+  var_0[var_0.size] = "metal";
+  var_0[var_0.size] = "mud";
+  var_0[var_0.size] = "paper";
+  var_0[var_0.size] = "plaster";
+  var_0[var_0.size] = "rock";
+  var_0[var_0.size] = "sand";
+  var_0[var_0.size] = "snow";
+  var_0[var_0.size] = "water";
+  var_0[var_0.size] = "wood";
+  var_0[var_0.size] = "asphalt";
+  var_0[var_0.size] = "ceramic";
+  var_0[var_0.size] = "plastic";
+  var_0[var_0.size] = "rubber";
+  var_0[var_0.size] = "cushion";
+  var_0[var_0.size] = "fruit";
+  var_0[var_0.size] = "paintedmetal";
+  var_0[var_0.size] = "riotshield";
+  var_0[var_0.size] = "slush";
+  var_0[var_0.size] = "default";
+  return var_0;
 }

@@ -5,13 +5,13 @@
 ************************/
 
 devfindhost() {
-  var_00 = undefined;
-  foreach(var_02 in level.players) {
-    if(var_02 ishost()) {
-      var_00 = var_02;
+  var_0 = undefined;
+  foreach(var_2 in level.players) {
+    if(var_2 ishost()) {
+      var_0 = var_2;
       break;
     }
   }
 
-  return var_00;
+  return var_0;
 }

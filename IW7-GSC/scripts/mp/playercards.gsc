@@ -10,11 +10,11 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    if(!isai(var_00)) {
-      var_00.weaponfiretime = var_00 getplayerdata(level.loadoutsgroup, "squadMembers", "patch");
-      var_00.weaponhasthermalscope = var_00 getplayerdata(level.loadoutsgroup, "squadMembers", "patchbacking");
-      var_00.weaponfightdist = var_00 getplayerdata(level.loadoutsgroup, "squadMembers", "background");
+    level waittill("connected", var_0);
+    if(!isai(var_0)) {
+      var_0.weaponfiretime = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "patch");
+      var_0.weaponhasthermalscope = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "patchbacking");
+      var_0.weaponfightdist = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "background");
     }
   }
 }

@@ -5,30 +5,30 @@
 ******************************************************/
 
 superslasher_isonroof() {
-  return self.var_3135.locationstate == 0;
+  return self.bt.locationstate == 0;
 }
 
 superslasher_isonground() {
-  return self.var_3135.locationstate == 2;
+  return self.bt.locationstate == 2;
 }
 
 superslasher_isgoingtoroof() {
-  return self.var_3135.locationstate == 1;
+  return self.bt.locationstate == 1;
 }
 
 superslasher_isgoingtoground() {
-  return self.var_3135.locationstate == 3;
+  return self.bt.locationstate == 3;
 }
 
 superslasher_isfinalstage() {
   return self.health <= self.maxhealth * 0.1;
 }
 
-superslasher_init(param_00) {
+superslasher_init(var_0) {
   self setnavlayer("superslasher");
-  self.var_3135.locationstate = 0;
-  self.var_3135.allownextaction = gettime() + 1000;
-  self.var_3135.imaskchange = 0;
+  self.bt.locationstate = 0;
+  self.bt.allownextaction = gettime() + 1000;
+  self.bt.imaskchange = 0;
   self.nextsummonid = 0;
   self.bmaystomp = 1;
   self.bmayjumpattack = 1;
@@ -39,7 +39,7 @@ superslasher_init(param_00) {
   self.bmaywire = 0;
   self.bmayshark = 1;
   roof_initbehaviors();
-  self.var_3135.onroofstarttime = gettime() - 120000 + 2000;
+  self.bt.onroofstarttime = gettime() - 120000 + 2000;
   setnextidlesoundtime();
   setdvarifuninitialized("btSuperSlasherShield", 0);
   setdvarifuninitialized("btSuperSlasherTargetTimer", 20000);
@@ -50,25 +50,25 @@ superslasher_init(param_00) {
   return level.success;
 }
 
-dointro(param_00) {
-  if(!isDefined(self.var_1198.bintrorequested)) {
+dointro(var_0) {
+  if(!isDefined(self._blackboard.bintrorequested)) {
     return level.success;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("intro_anim", "end")) {
-    self.var_1198.bintrorequested = undefined;
+    self._blackboard.bintrorequested = undefined;
     return level.success;
   }
 
   return level.running;
 }
 
-updateeveryframe(param_00) {
+updateeveryframe(var_0) {
   if(!isalive(self)) {
     return level.failure;
   }
 
-  if((isDefined(self.scripted) && self.scripted) || isDefined(self.var_1198.bgameended)) {
+  if((isDefined(self.scripted) && self.scripted) || isDefined(self._blackboard.bgameended)) {
     self clearpath();
     self ghostskulls_total_waves(512);
     return level.failure;
@@ -87,7 +87,7 @@ setnextidlesoundtime() {
 
 updateidlesound() {
   if(gettime() > self.nextidlesoundtime) {
-    if(isDefined(self.var_1198.bmoving) || isDefined(self.var_1198.bidle)) {
+    if(isDefined(self._blackboard.bmoving) || isDefined(self._blackboard.bidle)) {
       self playsoundonmovingent("zmb_vo_supslasher_idle_grunt");
     }
 
@@ -95,67 +95,67 @@ updateidlesound() {
   }
 }
 
-isvalidtarget(param_00) {
-  if(!isDefined(param_00)) {
+isvalidtarget(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!isalive(param_00)) {
+  if(!isalive(var_0)) {
     return 0;
   }
 
-  if(param_00.ignoreme || isDefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
     return 0;
   }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(param_00)) {
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-settarget(param_00) {
-  self.var_3135.target = param_00;
-  self.var_3135.targetstarttime = gettime();
+settarget(var_0) {
+  self.bt.target = var_0;
+  self.bt.targetstarttime = gettime();
 }
 
 updatetarget() {
-  var_00 = !isDefined(self.var_3135.target) || !isvalidtarget(self.var_3135.target);
-  if(!var_00) {
-    var_01 = getdvarint("btSuperSlasherTargetTimer");
-    var_00 = var_01 > 0 && gettime() > self.var_3135.targetstarttime + var_01;
+  var_0 = !isDefined(self.bt.target) || !isvalidtarget(self.bt.target);
+  if(!var_0) {
+    var_1 = getdvarint("btSuperSlasherTargetTimer");
+    var_0 = var_1 > 0 && gettime() > self.bt.targetstarttime + var_1;
   }
 
-  if(var_00) {
-    var_02 = level.players;
-    if(isDefined(self.var_3135.target)) {
-      var_02 = scripts\engine\utility::array_remove(var_02, self.var_3135.target);
+  if(var_0) {
+    var_2 = level.players;
+    if(isDefined(self.bt.target)) {
+      var_2 = scripts\engine\utility::array_remove(var_2, self.bt.target);
     }
 
-    var_03 = [];
-    foreach(var_05 in var_02) {
-      if(isvalidtarget(var_05)) {
-        var_03[var_03.size] = var_05;
+    var_3 = [];
+    foreach(var_5 in var_2) {
+      if(isvalidtarget(var_5)) {
+        var_3[var_3.size] = var_5;
       }
     }
 
-    if(var_03.size > 0) {
-      settarget(var_03[randomint(var_03.size)]);
+    if(var_3.size > 0) {
+      settarget(var_3[randomint(var_3.size)]);
     }
   }
 }
 
-dotrapped(param_00) {
-  if(isDefined(self.var_1198.btraprequested)) {
+dotrapped(var_0) {
+  if(isDefined(self._blackboard.btraprequested)) {
     return level.running;
   }
 
   return level.success;
 }
 
-shouldgotoroof(param_00) {
-  if(self.var_3135.locationstate != 2) {
+shouldgotoroof(var_0) {
+  if(self.bt.locationstate != 2) {
     return level.failure;
   }
 
@@ -163,74 +163,74 @@ shouldgotoroof(param_00) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bstaggerrequested)) {
+  if(isDefined(self._blackboard.bstaggerrequested)) {
     return level.success;
   }
 
-  if(isDefined(self.var_1198.bgotoroofrequested)) {
+  if(isDefined(self._blackboard.bgotoroofrequested)) {
     return level.success;
   }
 
   return level.failure;
 }
 
-walktoroof_init(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].starttime = gettime();
-  self.var_3135.instancedata[param_00].objective_playermask_hidefromall = getclosestpointonnavmesh(level.superslashergotogroundspot, self);
+walktoroof_init(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].starttime = gettime();
+  self.bt.instancedata[var_0].objective_playermask_hidefromall = getclosestpointonnavmesh(level.superslashergotogroundspot, self);
   if(distance2dsquared(self.origin, level.superslashergotogroundspot) < 1296) {
-    self.var_3135.instancedata[param_00].bgoodtogo = 1;
+    self.bt.instancedata[var_0].bgoodtogo = 1;
   }
 }
 
-walktoroof(param_00) {
-  if(isDefined(self.var_3135.instancedata[param_00].bgoodtogo)) {
+walktoroof(var_0) {
+  if(isDefined(self.bt.instancedata[var_0].bgoodtogo)) {
     return level.success;
   }
 
-  var_01 = gettime();
-  var_02 = 10000;
-  if(var_01 > self.var_3135.instancedata[param_00].starttime + var_02) {
+  var_1 = gettime();
+  var_2 = 10000;
+  if(var_1 > self.bt.instancedata[var_0].starttime + var_2) {
     return level.success;
   }
 
-  if(var_01 > self.var_3135.instancedata[param_00].starttime + 500) {
+  if(var_1 > self.bt.instancedata[var_0].starttime + 500) {
     if(!isDefined(self.vehicle_getspawnerarray)) {
       return level.success;
     }
   }
 
-  self ghostskulls_complete_status(self.var_3135.instancedata[param_00].objective_playermask_hidefromall);
+  self ghostskulls_complete_status(self.bt.instancedata[var_0].objective_playermask_hidefromall);
   self ghostskulls_total_waves(64);
   return level.running;
 }
 
-walktoroof_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
+walktoroof_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }
 
-jumptoroof_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.broofrequested = 1;
-  self.var_1198.iroofjump = 0;
+jumptoroof_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.broofrequested = 1;
+  self._blackboard.iroofjump = 0;
   scripts\aitypes\superslasher\util::ongotoroof_init();
   scripts\asm\superslasher\superslasher_actions::killallsharks(self);
   self notify("kill_sharks");
 }
 
-jumptoroof(param_00) {
-  var_01 = 15000;
-  var_02 = gettime();
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+jumptoroof(var_0) {
+  var_1 = 15000;
+  var_2 = gettime();
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     self setorigin(level.superslasherrooftopspot, 1);
     self.angles = level.superslasherrooftopangles;
-    self.var_3135.locationstate = 0;
+    self.bt.locationstate = 0;
     roof_initbehaviors();
     return level.success;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("jumptoroof", "end")) {
-    self.var_3135.locationstate = 0;
+    self.bt.locationstate = 0;
     roof_initbehaviors();
     return level.success;
   }
@@ -238,34 +238,34 @@ jumptoroof(param_00) {
   return level.running;
 }
 
-jumptoroof_cleanup(param_00) {
-  self.var_1198.broofrequested = undefined;
-  self.var_3135.instancedata[param_00] = undefined;
+jumptoroof_cleanup(var_0) {
+  self._blackboard.broofrequested = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
 roof_initbehaviors() {
   self clearpath();
   self ghostskulls_total_waves(512);
-  var_00 = gettime();
-  self.var_3135.onroofstarttime = var_00;
-  self.var_1198.bonroof = 1;
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_1198.bgotoroofrequested = undefined;
-  self.var_3135.allownextaction = var_00 + 1000;
+  var_0 = gettime();
+  self.bt.onroofstarttime = var_0;
+  self._blackboard.bonroof = 1;
+  self.bt.bcaninterruptfortimer = 1;
+  self._blackboard.bgotoroofrequested = undefined;
+  self.bt.allownextaction = var_0 + 1000;
   scripts\aitypes\superslasher\util::onroof_init();
 }
 
-stagger_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
+stagger_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
 }
 
-dostagger(param_00) {
-  if(!isDefined(self.var_1198.bstaggerrequested)) {
+dostagger(var_0) {
+  if(!isDefined(self._blackboard.bstaggerrequested)) {
     return level.success;
   }
 
-  var_01 = 5000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+  var_1 = 5000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.success;
   }
 
@@ -278,21 +278,21 @@ dostagger(param_00) {
   return level.running;
 }
 
-stagger_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_1198.bstaggerrequested = undefined;
+stagger_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self._blackboard.bstaggerrequested = undefined;
 }
 
-shouldgotoground(param_00) {
-  if(self.var_3135.locationstate != 0) {
+shouldgotoground(var_0) {
+  if(self.bt.locationstate != 0) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bstaggerrequested)) {
+  if(isDefined(self._blackboard.bstaggerrequested)) {
     return level.success;
   }
 
-  if(isDefined(self.var_1198.bgotogroundrequested)) {
+  if(isDefined(self._blackboard.bgotogroundrequested)) {
     return level.success;
   }
 
@@ -303,21 +303,21 @@ shouldgotoground(param_00) {
   return level.failure;
 }
 
-gotoground_init(param_00) {
-  self.var_1198.bgroundrequested = 1;
-  self.var_3135.locationstate = 3;
-  if(!isDefined(self.var_3135.igroundphase)) {
-    self.var_3135.igroundphase = 0;
+gotoground_init(var_0) {
+  self._blackboard.bgroundrequested = 1;
+  self.bt.locationstate = 3;
+  if(!isDefined(self.bt.igroundphase)) {
+    self.bt.igroundphase = 0;
   } else {
-    self.var_3135.igroundphase++;
+    self.bt.igroundphase++;
   }
 
   scripts\aitypes\superslasher\util::ongotoground_init();
 }
 
-gotoground(param_00) {
+gotoground(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("jumptoground", "end")) {
-    self.var_3135.locationstate = 2;
+    self.bt.locationstate = 2;
     ground_initbehaviors();
     return level.success;
   }
@@ -328,56 +328,56 @@ gotoground(param_00) {
 ground_initbehaviors() {
   self clearpath(self.origin);
   self ghostskulls_total_waves(24);
-  var_00 = gettime();
-  self.var_3135.ongroundstarttime = var_00;
-  self.var_1198.bonroof = 0;
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_1198.bgotogroundrequested = undefined;
-  self.var_3135.allownextaction = var_00 + 1000;
-  self.var_3135.allowgroundpoundtime = var_00;
-  self.var_3135.allowthrowsawtime = var_00;
-  self.var_3135.allowthrowsawfantime = var_00;
-  self.var_3135.allowgroundjumptime = var_00;
-  self.var_3135.allowstomptime = var_00;
-  self.var_3135.allowshockwavetime = var_00 + -6536;
-  self.var_3135.allowsharktime = var_00 + 29000;
+  var_0 = gettime();
+  self.bt.ongroundstarttime = var_0;
+  self._blackboard.bonroof = 0;
+  self.bt.bcaninterruptfortimer = 1;
+  self._blackboard.bgotogroundrequested = undefined;
+  self.bt.allownextaction = var_0 + 1000;
+  self.bt.allowgroundpoundtime = var_0;
+  self.bt.allowthrowsawtime = var_0;
+  self.bt.allowthrowsawfantime = var_0;
+  self.bt.allowgroundjumptime = var_0;
+  self.bt.allowstomptime = var_0;
+  self.bt.allowshockwavetime = var_0 + -6536;
+  self.bt.allowsharktime = var_0 + 29000;
   scripts\aitypes\superslasher\util::onground_init();
   if(isDefined(self.btrophysystem)) {
     thread dotrophysystem();
   }
 }
 
-gotoground_cleanup(param_00) {
-  self.var_1198.bgroundrequested = undefined;
+gotoground_cleanup(var_0) {
+  self._blackboard.bgroundrequested = undefined;
 }
 
-isonroof(param_00) {
-  if(self.var_3135.locationstate == 0) {
+isonroof(var_0) {
+  if(self.bt.locationstate == 0) {
     return level.success;
   }
 
   return level.failure;
 }
 
-shouldtaunt(param_00) {
+shouldtaunt(var_0) {
   if(!isDefined(self.bmaytaunt) || !self.bmaytaunt) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowtaunttime) {
+  if(var_1 < self.bt.allowtaunttime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
-  if(self.var_3135.locationstate == 2) {
+  if(self.bt.locationstate == 2) {
     return level.failure;
   }
 
@@ -388,26 +388,26 @@ shouldtaunt(param_00) {
   return level.success;
 }
 
-taunt_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_3135.bcaninterruptfortimer = 0;
-  self.var_1198.btauntrequested = 1;
+taunt_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self.bt.bcaninterruptfortimer = 0;
+  self._blackboard.btauntrequested = 1;
 }
 
 taunt_setnextallowedtime() {
-  var_00 = gettime();
-  if(self.var_3135.locationstate == 0) {
-    self.var_3135.allowtaunttime = var_00 + 3000;
+  var_0 = gettime();
+  if(self.bt.locationstate == 0) {
+    self.bt.allowtaunttime = var_0 + 3000;
   } else {
-    self.var_3135.allowtaunttime = var_00 + 10000;
+    self.bt.allowtaunttime = var_0 + 10000;
   }
 
-  self.var_3135.allownextaction = var_00 + 1000;
+  self.bt.allownextaction = var_0 + 1000;
 }
 
-dotaunt(param_00) {
-  var_01 = 20000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dotaunt(var_0) {
+  var_1 = 20000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     taunt_setnextallowedtime();
     return level.success;
   }
@@ -422,19 +422,19 @@ dotaunt(param_00) {
   return level.running;
 }
 
-taunt_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_1198.btauntrequested = undefined;
+taunt_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self.bt.bcaninterruptfortimer = 1;
+  self._blackboard.btauntrequested = undefined;
 }
 
-dotauntcontinuously(param_00) {
+dotauntcontinuously(var_0) {
   self clearpath(self.origin);
   self ghostskulls_total_waves(64);
-  if(isDefined(self.var_1198.bstoptauntingcontinuously)) {
+  if(isDefined(self._blackboard.bstoptauntingcontinuously)) {
     if(scripts\asm\asm::asm_ephemeraleventfired("tauntanim", "end")) {
       taunt_setnextallowedtime();
-      self.var_1198.bstoptauntingcontinuously = undefined;
+      self._blackboard.bstoptauntingcontinuously = undefined;
       return level.success;
     }
   }
@@ -442,16 +442,16 @@ dotauntcontinuously(param_00) {
   return level.running;
 }
 
-shouldgroundpound(param_00) {
+shouldgroundpound(var_0) {
   if(!superslasher_isonground()) {
     return level.failure;
   }
 
-  if(gettime() < self.var_3135.allowgroundpoundtime) {
+  if(gettime() < self.bt.allowgroundpoundtime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
@@ -462,17 +462,17 @@ shouldgroundpound(param_00) {
   return level.success;
 }
 
-groundpound_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
+groundpound_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
   self clearpath(self.origin);
   self ghostskulls_total_waves(36);
-  self.var_3135.bcaninterruptfortimer = 0;
-  self.var_1198.bgroundpoundrequested = 1;
+  self.bt.bcaninterruptfortimer = 0;
+  self._blackboard.bgroundpoundrequested = 1;
 }
 
-dogroundpound(param_00) {
-  var_01 = 12000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dogroundpound(var_0) {
+  var_1 = 12000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     groundpound_setnextallowedtime();
     return level.success;
   }
@@ -486,19 +486,19 @@ dogroundpound(param_00) {
 }
 
 groundpound_setnextallowedtime() {
-  var_00 = gettime();
-  self.var_3135.allowgroundpoundtime = var_00 + 5000;
-  self.var_3135.allownextaction = var_00 + 1000;
+  var_0 = gettime();
+  self.bt.allowgroundpoundtime = var_0 + 5000;
+  self.bt.allownextaction = var_0 + 1000;
 }
 
-groundpound_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_1198.bgroundpoundrequested = undefined;
+groundpound_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self.bt.bcaninterruptfortimer = 1;
+  self._blackboard.bgroundpoundrequested = undefined;
 }
 
-shouldmelee(param_00) {
-  if(!isDefined(self.var_3135.target)) {
+shouldmelee(var_0) {
+  if(!isDefined(self.bt.target)) {
     return level.failure;
   }
 
@@ -513,87 +513,87 @@ shouldmelee(param_00) {
   return level.failure;
 }
 
-melee_charge_init(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].starttime = gettime();
-  self.var_3135.meleetarget = self.var_3135.target;
-  var_01 = getdvarint("btSuperSlasherRush") != 0;
-  if(var_01) {
-    if(distance2dsquared(self.origin, self.var_3135.target.origin) > 300) {
-      scripts\asm\asm_bb::bb_requestmeleecharge(self.var_3135.target, self.var_3135.target.origin);
-      self.var_3135.instancedata[param_00].bcharge = 1;
-      self.var_3135.bcaninterruptfortimer = 0;
+melee_charge_init(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].starttime = gettime();
+  self.bt.meleetarget = self.bt.target;
+  var_1 = getdvarint("btSuperSlasherRush") != 0;
+  if(var_1) {
+    if(distance2dsquared(self.origin, self.bt.target.origin) > 300) {
+      scripts\asm\asm_bb::bb_requestmeleecharge(self.bt.target, self.bt.target.origin);
+      self.bt.instancedata[var_0].bcharge = 1;
+      self.bt.bcaninterruptfortimer = 0;
     }
   }
 }
 
-melee_charge(param_00) {
-  if(isDefined(self.var_1198.bmoving)) {
-    var_01 = -28672;
+melee_charge(var_0) {
+  if(isDefined(self._blackboard.bmoving)) {
+    var_1 = -28672;
   } else {
-    var_01 = 20736;
+    var_1 = 20736;
   }
 
-  if(isDefined(self.var_3135.target) && isvalidtarget(self.var_3135.target)) {
-    if(!isDefined(self.var_1198.bcommittedtoanim)) {
-      var_02 = self.var_3135.target.origin - self.origin;
-      var_03 = length2dsquared(var_02);
-      if(var_03 < var_01) {
-        self.var_3135.instancedata[param_00].bsuccess = 1;
+  if(isDefined(self.bt.target) && isvalidtarget(self.bt.target)) {
+    if(!isDefined(self._blackboard.bcommittedtoanim)) {
+      var_2 = self.bt.target.origin - self.origin;
+      var_3 = length2dsquared(var_2);
+      if(var_3 < var_1) {
+        self.bt.instancedata[var_0].bsuccess = 1;
         return level.success;
       }
     }
   } else {
-    self.var_3135.instancedata[param_00].bsuccess = 1;
+    self.bt.instancedata[var_0].bsuccess = 1;
     return level.success;
   }
 
-  var_04 = gettime();
-  if(var_04 > self.var_3135.instancedata[param_00].starttime + 200 && !isDefined(self.vehicle_getspawnerarray)) {
+  var_4 = gettime();
+  if(var_4 > self.bt.instancedata[var_0].starttime + 200 && !isDefined(self.vehicle_getspawnerarray)) {
     return level.failure;
   }
 
-  var_05 = 5000;
-  if(var_04 > self.var_3135.instancedata[param_00].starttime + var_05) {
+  var_5 = 5000;
+  if(var_4 > self.bt.instancedata[var_0].starttime + var_5) {
     return level.failure;
   }
 
-  var_06 = 1000;
-  if(isDefined(self.var_3135.instancedata[param_00].bcharge) && var_04 > self.var_3135.instancedata[param_00].starttime + var_06) {
-    var_07 = anglesToForward(self.angles);
-    var_08 = self _meth_84AC();
-    if(navtrace(var_08, var_08 + var_07 * 36)) {
-      self.var_3135.instancedata[param_00].bsuccess = 1;
+  var_6 = 1000;
+  if(isDefined(self.bt.instancedata[var_0].bcharge) && var_4 > self.bt.instancedata[var_0].starttime + var_6) {
+    var_7 = anglesToForward(self.angles);
+    var_8 = self _meth_84AC();
+    if(navtrace(var_8, var_8 + var_7 * 36)) {
+      self.bt.instancedata[var_0].bsuccess = 1;
       return level.success;
     }
   }
 
-  var_09 = getclosestpointonnavmesh(self.var_3135.target.origin, self);
-  self ghostskulls_complete_status(var_09);
+  var_9 = getclosestpointonnavmesh(self.bt.target.origin, self);
+  self ghostskulls_complete_status(var_9);
   self ghostskulls_total_waves(24);
   return level.running;
 }
 
-melee_charge_cleanup(param_00) {
-  if(!isDefined(self.var_3135.instancedata[param_00].bsuccess)) {
-    self.var_3135.meleetarget = undefined;
+melee_charge_cleanup(var_0) {
+  if(!isDefined(self.bt.instancedata[var_0].bsuccess)) {
+    self.bt.meleetarget = undefined;
     scripts\asm\asm_bb::bb_clearmeleechargerequest();
   }
 
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_3135.instancedata[param_00] = undefined;
+  self.bt.bcaninterruptfortimer = 1;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-melee_init(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].starttime = gettime();
-  self.var_3135.bcaninterruptfortimer = 0;
-  scripts\asm\asm_bb::bb_requestmelee(self.var_3135.meleetarget);
+melee_init(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].starttime = gettime();
+  self.bt.bcaninterruptfortimer = 0;
+  scripts\asm\asm_bb::bb_requestmelee(self.bt.meleetarget);
 }
 
-domelee(param_00) {
-  var_01 = 8000;
-  if(gettime() > self.var_3135.instancedata[param_00].starttime + var_01) {
+domelee(var_0) {
+  var_1 = 8000;
+  if(gettime() > self.bt.instancedata[var_0].starttime + var_1) {
     return level.failure;
   }
 
@@ -601,9 +601,9 @@ domelee(param_00) {
     return level.success;
   }
 
-  if(isDefined(self.var_3135.meleetarget)) {
-    var_02 = getclosestpointonnavmesh(self.var_3135.meleetarget.origin, self);
-    self ghostskulls_complete_status(var_02);
+  if(isDefined(self.bt.meleetarget)) {
+    var_2 = getclosestpointonnavmesh(self.bt.meleetarget.origin, self);
+    self ghostskulls_complete_status(var_2);
     self ghostskulls_total_waves(24);
   } else {
     self clearpath(self.origin);
@@ -613,22 +613,22 @@ domelee(param_00) {
   return level.running;
 }
 
-melee_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_3135.bcaninterruptfortimer = 1;
-  self.var_3135.meleetarget = undefined;
+melee_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self.bt.bcaninterruptfortimer = 1;
+  self.bt.meleetarget = undefined;
   scripts\asm\asm_bb::bb_clearmeleerequest();
   scripts\asm\asm_bb::bb_clearmeleechargerequest();
-  self.var_3135.allownextaction = gettime() + 1000;
+  self.bt.allownextaction = gettime() + 1000;
 }
 
-shouldthrowsaw(param_00) {
+shouldthrowsaw(var_0) {
   if(!isDefined(self.bmayfrisbee) || !self.bmayfrisbee) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(!isDefined(self.var_3135.target)) {
+  var_1 = gettime();
+  if(!isDefined(self.bt.target)) {
     return level.failure;
   }
 
@@ -636,31 +636,31 @@ shouldthrowsaw(param_00) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allownextaction) {
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowthrowsawtime) {
+  if(var_1 < self.bt.allowthrowsawtime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
-  if(self.var_3135.locationstate == 2) {
+  if(self.bt.locationstate == 2) {
     if(isanyplayerwithinradius(256)) {
       return level.failure;
     }
 
-    var_02 = anglesToForward(self.angles);
-    var_03 = self.var_3135.target.origin - self.origin;
-    if(vectordot(var_02, var_03) < 0) {
+    var_2 = anglesToForward(self.angles);
+    var_3 = self.bt.target.origin - self.origin;
+    if(vectordot(var_2, var_3) < 0) {
       return level.failure;
     }
 
-    var_04 = getclosestpointonnavmesh(self.var_3135.target.origin, self);
-    if(!navisstraightlinereachable(self _meth_84AC(), var_04)) {
+    var_4 = getclosestpointonnavmesh(self.bt.target.origin, self);
+    if(!navisstraightlinereachable(self _meth_84AC(), var_4)) {
       return level.failure;
     }
   }
@@ -668,17 +668,17 @@ shouldthrowsaw(param_00) {
   return level.success;
 }
 
-throwsaw_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bthrowsawrequested = 1;
-  self.var_1198.throwsawtarget = self.var_3135.target;
-  self.var_1198.throwsawbackuptargetpos = self.var_3135.target.origin;
-  self.var_1198.throwsawchargetime = 1;
+throwsaw_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bthrowsawrequested = 1;
+  self._blackboard.throwsawtarget = self.bt.target;
+  self._blackboard.throwsawbackuptargetpos = self.bt.target.origin;
+  self._blackboard.throwsawchargetime = 1;
 }
 
-dothrowsaw(param_00) {
-  var_01 = 6001;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dothrowsaw(var_0) {
+  var_1 = 6001;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -692,24 +692,24 @@ dothrowsaw(param_00) {
 }
 
 throwsaw_setnextallowedtime() {
-  var_00 = gettime();
-  if(self.var_3135.locationstate == 0) {
-    self.var_3135.allowthrowsawtime = var_00 + 9000;
+  var_0 = gettime();
+  if(self.bt.locationstate == 0) {
+    self.bt.allowthrowsawtime = var_0 + 9000;
   } else {
-    self.var_3135.allowthrowsawtime = var_00 + 8000;
+    self.bt.allowthrowsawtime = var_0 + 8000;
   }
 
-  self.var_3135.allownextaction = var_00 + 1000;
+  self.bt.allownextaction = var_0 + 1000;
 }
 
-throwsaw_cleanup(param_00) {
+throwsaw_cleanup(var_0) {
   throwsaw_setnextallowedtime();
-  self.var_1198.bthrowsawrequested = undefined;
-  self.var_1198.throwsawtarget = undefined;
-  self.var_3135.instancedata[param_00] = undefined;
+  self._blackboard.bthrowsawrequested = undefined;
+  self._blackboard.throwsawtarget = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-shouldthrowsawfan(param_00) {
+shouldthrowsawfan(var_0) {
   if(!superslasher_isonground()) {
     return level.failure;
   }
@@ -718,16 +718,16 @@ shouldthrowsawfan(param_00) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowthrowsawfantime) {
+  if(var_1 < self.bt.allowthrowsawfantime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
@@ -735,19 +735,19 @@ shouldthrowsawfan(param_00) {
 }
 
 throwsawfan_setnextallowedtime() {
-  var_00 = gettime();
-  self.var_3135.allowthrowsawfantime = var_00 + 9500;
-  self.var_3135.allownextaction = var_00 + 1000;
+  var_0 = gettime();
+  self.bt.allowthrowsawfantime = var_0 + 9500;
+  self.bt.allownextaction = var_0 + 1000;
 }
 
-throwsawfan_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bthrowsawfanrequested = 1;
+throwsawfan_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bthrowsawfanrequested = 1;
 }
 
-dothrowsawfan(param_00) {
-  var_01 = 5000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dothrowsawfan(var_0) {
+  var_1 = 5000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -760,13 +760,13 @@ dothrowsawfan(param_00) {
   return level.running;
 }
 
-throwsawfan_cleanup(param_00) {
+throwsawfan_cleanup(var_0) {
   throwsawfan_setnextallowedtime();
-  self.var_1198.bthrowsawfanrequested = undefined;
-  self.var_3135.instancedata[param_00] = undefined;
+  self._blackboard.bthrowsawfanrequested = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-shouldstomp(param_00) {
+shouldstomp(var_0) {
   if(!isDefined(self.bmaystomp) || !self.bmaystomp) {
     return level.failure;
   }
@@ -775,61 +775,61 @@ shouldstomp(param_00) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowstomptime) {
+  if(var_1 < self.bt.allowstomptime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
-  var_02 = anglesToForward(self.angles);
-  var_03 = -1;
-  var_04 = undefined;
-  foreach(var_06 in level.players) {
-    if(!isvalidtarget(var_06)) {
+  var_2 = anglesToForward(self.angles);
+  var_3 = -1;
+  var_4 = undefined;
+  foreach(var_6 in level.players) {
+    if(!isvalidtarget(var_6)) {
       continue;
     }
 
-    var_07 = var_06.origin - self.origin;
-    var_08 = vectordot(var_02, var_07);
-    if(var_08 > 768) {
+    var_7 = var_6.origin - self.origin;
+    var_8 = vectordot(var_2, var_7);
+    if(var_8 > 768) {
       continue;
     }
 
-    if(var_08 < 0) {
+    if(var_8 < 0) {
       continue;
     }
 
-    var_09 = vectordot(var_02, var_07 / var_08);
-    if(var_09 > var_03) {
-      var_03 = var_09;
-      var_04 = var_06;
+    var_9 = vectordot(var_2, var_7 / var_8);
+    if(var_9 > var_3) {
+      var_3 = var_9;
+      var_4 = var_6;
     }
   }
 
-  if(var_03 > 0) {
-    self.var_1198.bstomprequested = 1;
-    self.var_1198.stomptarget = var_04;
-    self.var_1198.stompdist = 768;
+  if(var_3 > 0) {
+    self._blackboard.bstomprequested = 1;
+    self._blackboard.stomptarget = var_4;
+    self._blackboard.stompdist = 768;
     return level.success;
   }
 
   return level.failure;
 }
 
-stomp_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
+stomp_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
 }
 
-dostomp(param_00) {
-  var_01 = 15000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dostomp(var_0) {
+  var_1 = 15000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -842,20 +842,20 @@ dostomp(param_00) {
 }
 
 stomp_setnextallowedtime() {
-  var_00 = gettime();
-  self.var_3135.allownextaction = var_00 + 1000;
-  self.var_3135.allowstomptime = var_00 + 9000;
+  var_0 = gettime();
+  self.bt.allownextaction = var_0 + 1000;
+  self.bt.allowstomptime = var_0 + 9000;
 }
 
-stomp_cleanup(param_00) {
-  self.var_1198.bstomprequested = undefined;
-  self.var_1198.stomptarget = undefined;
-  self.var_1198.stompdist = undefined;
+stomp_cleanup(var_0) {
+  self._blackboard.bstomprequested = undefined;
+  self._blackboard.stomptarget = undefined;
+  self._blackboard.stompdist = undefined;
   stomp_setnextallowedtime();
-  self.var_3135.instancedata[param_00] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-shouldshockwave(param_00) {
+shouldshockwave(var_0) {
   if(!isDefined(self.bmayshockwave) || !self.bmayshockwave) {
     return level.failure;
   }
@@ -864,12 +864,12 @@ shouldshockwave(param_00) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
@@ -880,15 +880,15 @@ shouldshockwave(param_00) {
   return level.failure;
 }
 
-shockwave_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bshockwaverequested = 1;
+shockwave_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bshockwaverequested = 1;
   self.bshockwaverequested = undefined;
 }
 
-doshockwave(param_00) {
-  var_01 = 12000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+doshockwave(var_0) {
+  var_1 = 12000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -900,18 +900,18 @@ doshockwave(param_00) {
 }
 
 shockwave_setnextallowedtime() {
-  var_00 = gettime();
-  self.var_3135.allownextaction = var_00 + 1000;
-  self.var_3135.allowshockwavetime = var_00 + -6536;
+  var_0 = gettime();
+  self.bt.allownextaction = var_0 + 1000;
+  self.bt.allowshockwavetime = var_0 + -6536;
 }
 
-shockwave_cleanup(param_00) {
+shockwave_cleanup(var_0) {
   shockwave_setnextallowedtime();
-  self.var_1198.bshockwaverequested = undefined;
-  self.var_3135.instancedata[param_00] = undefined;
+  self._blackboard.bshockwaverequested = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-shoulddowires(param_00) {
+shoulddowires(var_0) {
   if(!isDefined(self.bmaywire) || !self.bmaywire) {
     return level.failure;
   }
@@ -920,21 +920,21 @@ shoulddowires(param_00) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bwired)) {
+  if(isDefined(self._blackboard.bwired)) {
     return level.failure;
   }
 
   return level.success;
 }
 
-wires_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bwiresrequested = 1;
+wires_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bwiresrequested = 1;
 }
 
-dowires(param_00) {
-  var_01 = 5000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dowires(var_0) {
+  var_1 = 5000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -945,17 +945,17 @@ dowires(param_00) {
   return level.running;
 }
 
-wires_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_1198.bwiresrequested = undefined;
+wires_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self._blackboard.bwiresrequested = undefined;
 }
 
-wires_stop(param_00) {
+wires_stop(var_0) {
   scripts\asm\superslasher\superslasher_actions::stopwireattack();
   return level.success;
 }
 
-shoulddosharks(param_00) {
+shoulddosharks(var_0) {
   if(!isDefined(self.bmayshark) || !self.bmayshark) {
     return level.failure;
   }
@@ -964,30 +964,30 @@ shoulddosharks(param_00) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowsharktime) {
+  if(var_1 < self.bt.allowsharktime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
   return level.success;
 }
 
-sharks_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bsharksrequested = 1;
+sharks_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bsharksrequested = 1;
 }
 
-dosharks(param_00) {
-  var_01 = 15000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dosharks(var_0) {
+  var_1 = 15000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -1000,18 +1000,18 @@ dosharks(param_00) {
 }
 
 sharks_setnextallowedtime() {
-  var_00 = gettime();
-  self.var_3135.allownextaction = var_00 + 1000;
-  self.var_3135.allowsharktime = var_00 + 29000;
+  var_0 = gettime();
+  self.bt.allownextaction = var_0 + 1000;
+  self.bt.allowsharktime = var_0 + 29000;
 }
 
-sharks_cleanup(param_00) {
+sharks_cleanup(var_0) {
   sharks_setnextallowedtime();
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_1198.bsharksrequested = undefined;
+  self.bt.instancedata[var_0] = undefined;
+  self._blackboard.bsharksrequested = undefined;
 }
 
-shouldjumpmove(param_00) {
+shouldjumpmove(var_0) {
   if(!isDefined(self.bmayjumpattack) || !self.bmayjumpattack) {
     return level.failure;
   }
@@ -1020,25 +1020,25 @@ shouldjumpmove(param_00) {
     return level.failure;
   }
 
-  var_01 = gettime();
-  if(var_01 < self.var_3135.allownextaction) {
+  var_1 = gettime();
+  if(var_1 < self.bt.allownextaction) {
     return level.failure;
   }
 
-  if(var_01 < self.var_3135.allowgroundjumptime) {
+  if(var_1 < self.bt.allowgroundjumptime) {
     return level.failure;
   }
 
-  if(isDefined(self.var_1198.bcommittedtoanim)) {
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return level.failure;
   }
 
-  var_02 = 147456;
-  if(isDefined(self.var_3135.target)) {
-    var_03 = getclosestpointonnavmesh(self.var_3135.target.origin, self);
-    if(distance2dsquared(self.origin, var_03) >= var_02) {
-      var_04 = self _meth_84AC();
-      if(navisstraightlinereachable(var_04, var_03, self)) {
+  var_2 = 147456;
+  if(isDefined(self.bt.target)) {
+    var_3 = getclosestpointonnavmesh(self.bt.target.origin, self);
+    if(distance2dsquared(self.origin, var_3) >= var_2) {
+      var_4 = self _meth_84AC();
+      if(navisstraightlinereachable(var_4, var_3, self)) {
         return level.success;
       }
     }
@@ -1047,16 +1047,16 @@ shouldjumpmove(param_00) {
   return level.failure;
 }
 
-jumpmove_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
-  self.var_1198.bjumpmoverequested = 1;
-  self.var_1198.jumptargetpos = getclosestpointonnavmesh(self.var_3135.target.origin, self);
-  self ghostskulls_complete_status(self.var_1198.jumptargetpos);
+jumpmove_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
+  self._blackboard.bjumpmoverequested = 1;
+  self._blackboard.jumptargetpos = getclosestpointonnavmesh(self.bt.target.origin, self);
+  self ghostskulls_complete_status(self._blackboard.jumptargetpos);
 }
 
-dojumpmove(param_00) {
-  var_01 = 4000;
-  if(gettime() > self.var_3135.instancedata[param_00] + var_01) {
+dojumpmove(var_0) {
+  var_1 = 4000;
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return level.failure;
   }
 
@@ -1068,43 +1068,43 @@ dojumpmove(param_00) {
 }
 
 jumpmove_setnextallowedtime() {
-  self.var_3135.allowgroundjumptime = gettime() + 7000;
+  self.bt.allowgroundjumptime = gettime() + 7000;
 }
 
-jumpmove_cleanup(param_00) {
+jumpmove_cleanup(var_0) {
   jumpmove_setnextallowedtime();
-  self.var_1198.bjumpmoverequested = undefined;
-  self.var_3135.instancedata[param_00] = undefined;
+  self._blackboard.bjumpmoverequested = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-move_init(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
+move_init(var_0) {
+  self.bt.instancedata[var_0] = gettime();
 }
 
-move(param_00) {
-  var_01 = gettime();
-  if(var_01 >= self.var_3135.instancedata[param_00]) {
-    if(isDefined(self.var_3135.target) && isvalidtarget(self.var_3135.target)) {
-      var_02 = 5000;
-      var_03 = getclosestpointonnavmesh(self.var_3135.target.origin, self);
-      self ghostskulls_complete_status(var_03);
+move(var_0) {
+  var_1 = gettime();
+  if(var_1 >= self.bt.instancedata[var_0]) {
+    if(isDefined(self.bt.target) && isvalidtarget(self.bt.target)) {
+      var_2 = 5000;
+      var_3 = getclosestpointonnavmesh(self.bt.target.origin, self);
+      self ghostskulls_complete_status(var_3);
       self ghostskulls_total_waves(36);
-      self.var_3135.instancedata[param_00] = var_01 + var_02;
+      self.bt.instancedata[var_0] = var_1 + var_2;
     }
   }
 
   return level.running;
 }
 
-move_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
+move_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }
 
-isanyplayerwithinradius(param_00) {
-  var_01 = param_00 * param_00;
-  foreach(var_03 in level.players) {
-    if(isvalidtarget(var_03)) {
-      if(distance2dsquared(self.origin, var_03.origin) < var_01) {
+isanyplayerwithinradius(var_0) {
+  var_1 = var_0 * var_0;
+  foreach(var_3 in level.players) {
+    if(isvalidtarget(var_3)) {
+      if(distance2dsquared(self.origin, var_3.origin) < var_1) {
         return 1;
       }
     }
@@ -1116,16 +1116,16 @@ isanyplayerwithinradius(param_00) {
 dotrophysystem() {
   self endon("killshield");
   self endon("death");
-  var_00 = 3;
+  var_0 = 3;
   self.shields = [];
-  for(var_01 = 0; var_01 < var_00; var_01++) {
-    self.shields[var_01] = setupshield(var_01, var_00);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    self.shields[var_1] = setupshield(var_1, var_0);
     wait(0.05);
   }
 
   for(;;) {
-    for(var_01 = 0; var_01 < var_00; var_01++) {
-      updateshield(self.shields[var_01]);
+    for(var_1 = 0; var_1 < var_0; var_1++) {
+      updateshield(self.shields[var_1]);
     }
 
     self.lastdamagedir = [];
@@ -1133,49 +1133,49 @@ dotrophysystem() {
   }
 }
 
-setupshield(param_00, param_01) {
-  var_02 = 96;
-  var_03 = 120;
-  var_04 = -90;
-  var_05 = angleclamp180(param_00 * 360 / param_01);
-  var_06 = (var_02, 0, var_03);
-  var_07 = spawn("script_model", self.origin + rotatevector(var_06, (0, var_05, 0)));
-  var_07 setModel("superslasher_trophy_system");
-  var_07.angles = (0, self.angles[1] + var_04, 0);
-  var_07.halfrange = 180 / param_01;
-  var_07.midrange = var_05;
-  var_07.offset = var_06;
-  var_07.lastdamagetime = 0;
-  var_07.beffect = 0;
-  var_07.effectontime = 0;
-  var_07.angleoffset = var_04;
-  var_07.curangle = var_05;
-  var_07.sine = 0;
-  var_07.targetangle = var_05;
-  return var_07;
+setupshield(var_0, var_1) {
+  var_2 = 96;
+  var_3 = 120;
+  var_4 = -90;
+  var_5 = angleclamp180(var_0 * 360 / var_1);
+  var_6 = (var_2, 0, var_3);
+  var_7 = spawn("script_model", self.origin + rotatevector(var_6, (0, var_5, 0)));
+  var_7 setModel("superslasher_trophy_system");
+  var_7.angles = (0, self.angles[1] + var_4, 0);
+  var_7.halfrange = 180 / var_1;
+  var_7.midrange = var_5;
+  var_7.offset = var_6;
+  var_7.lastdamagetime = 0;
+  var_7.beffect = 0;
+  var_7.effectontime = 0;
+  var_7.angleoffset = var_4;
+  var_7.curangle = var_5;
+  var_7.sine = 0;
+  var_7.targetangle = var_5;
+  return var_7;
 }
 
-updateshield(param_00) {
-  var_01 = 4;
-  var_02 = gettime();
-  var_03 = 1000;
-  var_04 = 0;
-  if(param_00.beffect && var_02 - param_00.effectontime > var_03) {
-    param_00 setscriptablepartstate("shield", "off");
-    param_00.beffect = 0;
-    var_04 = 1;
+updateshield(var_0) {
+  var_1 = 4;
+  var_2 = gettime();
+  var_3 = 1000;
+  var_4 = 0;
+  if(var_0.beffect && var_2 - var_0.effectontime > var_3) {
+    var_0 setscriptablepartstate("shield", "off");
+    var_0.beffect = 0;
+    var_4 = 1;
   }
 
   if(self.lastdamagedir.size > 0) {
-    foreach(var_06 in self.lastdamagedir) {
-      var_07 = vectortoyaw(var_06);
-      if(abs(angleclamp180(var_07 - param_00.midrange)) < param_00.halfrange) {
-        param_00.targetangle = var_07;
-        param_00.lastdamagetime = self.lastdamagetime;
-        if(!param_00.beffect && !var_04) {
-          param_00 setscriptablepartstate("shield", "impact");
-          param_00.effectontime = var_02;
-          param_00.beffect = 1;
+    foreach(var_6 in self.lastdamagedir) {
+      var_7 = vectortoyaw(var_6);
+      if(abs(angleclamp180(var_7 - var_0.midrange)) < var_0.halfrange) {
+        var_0.targetangle = var_7;
+        var_0.lastdamagetime = self.lastdamagetime;
+        if(!var_0.beffect && !var_4) {
+          var_0 setscriptablepartstate("shield", "impact");
+          var_0.effectontime = var_2;
+          var_0.beffect = 1;
         }
 
         break;
@@ -1183,26 +1183,26 @@ updateshield(param_00) {
     }
   }
 
-  var_09 = 3000;
-  if(var_02 - param_00.lastdamagetime > var_09) {
-    param_00.targetangle = param_00.midrange;
+  var_9 = 3000;
+  if(var_2 - var_0.lastdamagetime > var_9) {
+    var_0.targetangle = var_0.midrange;
   }
 
-  var_0A = angleclamp180(param_00.targetangle - param_00.curangle);
-  var_0A = clamp(var_0A, -1 * var_01, var_01);
-  param_00.curangle = angleclamp180(param_00.curangle + var_0A);
-  var_0B = self.origin + rotatevector(param_00.offset, (0, param_00.curangle, 0));
-  var_0C = var_0B + (0, 0, sin(param_00.sine) * 12);
-  param_00.sine = param_00.sine + 3 % 360;
-  param_00.origin = var_0C;
-  param_00.angles = (0, param_00.curangle + param_00.angleoffset, 0);
+  var_0A = angleclamp180(var_0.targetangle - var_0.curangle);
+  var_0A = clamp(var_0A, -1 * var_1, var_1);
+  var_0.curangle = angleclamp180(var_0.curangle + var_0A);
+  var_0B = self.origin + rotatevector(var_0.offset, (0, var_0.curangle, 0));
+  var_0C = var_0B + (0, 0, sin(var_0.sine) * 12);
+  var_0.sine = var_0.sine + 3 % 360;
+  var_0.origin = var_0C;
+  var_0.angles = (0, var_0.curangle + var_0.angleoffset, 0);
 }
 
 shieldcleanup() {
   if(isDefined(self.shields)) {
     self notify("killshield");
-    foreach(var_01 in self.shields) {
-      var_01 delete();
+    foreach(var_1 in self.shields) {
+      var_1 delete();
     }
 
     self.shields = undefined;

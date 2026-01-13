@@ -9,8 +9,8 @@ main() {
 }
 
 bot_gun_think() {
-  var_00 = self botgetdifficultysetting("throwKnifeChance");
-  if(var_00 < 0.25) {
+  var_0 = self botgetdifficultysetting("throwKnifeChance");
+  if(var_0 < 0.25) {
     self getpassivestruct("throwKnifeChance", 0.25);
   }
 

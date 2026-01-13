@@ -108,23 +108,23 @@ func_CA3D() {
 func_7C4D() {}
 
 func_7C4E() {
-  var_00 = "perk_none";
-  return var_00;
+  var_0 = "perk_none";
+  return var_0;
 }
 
 func_E2BC() {
-  var_00 = func_7C4D();
-  var_01 = func_7B75();
-  scripts\cp\cp_persistence::set_perk(func_7B79("perk_0", var_00, var_01));
-  var_02 = func_7C4E();
-  if(var_02 != "perk_none") {
-    var_03 = level.alien_perks["perk_0"][var_02];
-    scripts\cp\cp_persistence::set_perk(func_7B79("perk_0", var_03.ref, var_01));
+  var_0 = func_7C4D();
+  var_1 = func_7B75();
+  scripts\cp\cp_persistence::set_perk(func_7B79("perk_0", var_0, var_1));
+  var_2 = func_7C4E();
+  if(var_2 != "perk_none") {
+    var_3 = level.alien_perks["perk_0"][var_2];
+    scripts\cp\cp_persistence::set_perk(func_7B79("perk_0", var_3.ref, var_1));
   }
 }
 
-func_7B79(param_00, param_01, param_02) {
-  return level.alien_perks[param_00][param_01].var_12F7A[param_02].ref;
+func_7B79(var_0, var_1, var_2) {
+  return level.alien_perks[var_0][var_1].var_12F7A[var_2].ref;
 }
 
 func_7B75() {

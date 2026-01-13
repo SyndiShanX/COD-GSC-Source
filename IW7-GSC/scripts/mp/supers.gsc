@@ -11,104 +11,104 @@ init() {
   level.var_11264 = [];
   scripts\mp\bots\_bots_supers::func_2EA3();
   if(scripts\mp\utility::isanymlgmatch()) {
-    var_00 = 24;
-    var_01 = 25;
-    var_02 = 26;
+    var_0 = 24;
+    var_1 = 25;
+    var_2 = 26;
     if(level.gametype == "sd") {
-      var_02 = 2;
+      var_2 = 2;
     }
   } else {
-    var_00 = 4;
-    var_01 = 14;
-    var_02 = 2;
+    var_0 = 4;
+    var_1 = 14;
+    var_2 = 2;
   }
 
-  var_03 = 1;
+  var_3 = 1;
   for(;;) {
-    var_04 = tablelookupbyrow("mp\supertable.csv", var_03, 0);
-    if(!isDefined(var_04) || var_04 == "") {
+    var_4 = tablelookupbyrow("mp\supertable.csv", var_3, 0);
+    if(!isDefined(var_4) || var_4 == "") {
       break;
     }
 
-    var_05 = spawnStruct();
-    level.var_10E4E[var_04] = var_05;
-    var_05.id = var_03;
-    var_05.ref = var_04;
-    var_05.var_394 = func_DD68(var_03, 1);
-    var_05.cooldown = func_DD68(var_03, var_02, 1);
-    var_05.var_EC3E = func_DD68(var_03, 3, 1);
-    var_05.var_5F36 = func_DD68(var_03, var_00, 1);
-    var_05.var_B473 = func_DD68(var_03, 5, 1);
-    var_05.useweapon = func_DD68(var_03, 10);
-    var_05.var_130F9 = func_DD68(var_03, 11, 1);
-    var_05.var_130FA = func_DD68(var_03, 12, 1);
-    var_05.var_BCEF = func_DD68(var_03, 13, 1);
-    var_05._meth_8487 = func_DD68(var_03, var_01, 1);
-    var_05.var_B474 = func_DD68(var_03, 15, 1);
-    var_05.var_12B28 = func_DD68(var_03, 17, 1);
-    var_05.archetype = func_DD68(var_03, 16);
-    var_05.var_9FF8 = func_DD68(var_03, 18, 1);
-    level.var_11264[var_03] = var_04;
+    var_5 = spawnStruct();
+    level.var_10E4E[var_4] = var_5;
+    var_5.id = var_3;
+    var_5.ref = var_4;
+    var_5.var_394 = func_DD68(var_3, 1);
+    var_5.cooldown = func_DD68(var_3, var_2, 1);
+    var_5.var_EC3E = func_DD68(var_3, 3, 1);
+    var_5.var_5F36 = func_DD68(var_3, var_0, 1);
+    var_5.var_B473 = func_DD68(var_3, 5, 1);
+    var_5.useweapon = func_DD68(var_3, 10);
+    var_5.var_130F9 = func_DD68(var_3, 11, 1);
+    var_5.var_130FA = func_DD68(var_3, 12, 1);
+    var_5.var_BCEF = func_DD68(var_3, 13, 1);
+    var_5._meth_8487 = func_DD68(var_3, var_1, 1);
+    var_5.var_B474 = func_DD68(var_3, 15, 1);
+    var_5.var_12B28 = func_DD68(var_3, 17, 1);
+    var_5.archetype = func_DD68(var_3, 16);
+    var_5.var_9FF8 = func_DD68(var_3, 18, 1);
+    level.var_11264[var_3] = var_4;
     if(!isDefined(level.var_2EFC)) {
-      level.var_2EFC[var_05.archetype] = [];
+      level.var_2EFC[var_5.archetype] = [];
     }
 
-    if(!isDefined(level.var_2EFC[var_05.archetype])) {
-      level.var_2EFC[var_05.archetype] = [];
+    if(!isDefined(level.var_2EFC[var_5.archetype])) {
+      level.var_2EFC[var_5.archetype] = [];
     }
 
-    if(scripts\mp\bots\_bots_supers::func_9F8B(var_04)) {
-      level.var_2EFC[var_05.archetype][level.var_2EFC[var_05.archetype].size] = var_04;
+    if(scripts\mp\bots\_bots_supers::func_9F8B(var_4)) {
+      level.var_2EFC[var_5.archetype][level.var_2EFC[var_5.archetype].size] = var_4;
     }
 
-    if(!isDefined(var_05.var_394)) {
-      level.var_10E4E[var_04] = undefined;
+    if(!isDefined(var_5.var_394)) {
+      level.var_10E4E[var_4] = undefined;
     }
 
-    if(!isDefined(var_05.cooldown)) {
-      level.var_10E4E[var_04] = undefined;
+    if(!isDefined(var_5.cooldown)) {
+      level.var_10E4E[var_4] = undefined;
     }
 
-    if(isDefined(var_05.var_B473)) {
-      if(var_05.var_B473 > 0) {
-        var_05.var_1616 = var_05.var_5F36 / var_05.var_B473 * 1000;
+    if(isDefined(var_5.var_B473)) {
+      if(var_5.var_B473 > 0) {
+        var_5.var_1616 = var_5.var_5F36 / var_5.var_B473 * 1000;
       } else {
-        var_05.var_1616 = var_05.var_5F36;
+        var_5.var_1616 = var_5.var_5F36;
       }
     }
 
-    if(isDefined(var_05.var_B474)) {
-      if(var_05.var_B474 > 0) {
-        var_05.var_1617 = var_05.var_5F36 / var_05.var_B474 * 1000;
+    if(isDefined(var_5.var_B474)) {
+      if(var_5.var_B474 > 0) {
+        var_5.var_1617 = var_5.var_5F36 / var_5.var_B474 * 1000;
       }
     }
 
-    if(isDefined(var_05.useweapon)) {
-      func_1831(var_05.useweapon, var_04, var_05);
+    if(isDefined(var_5.useweapon)) {
+      func_1831(var_5.useweapon, var_4, var_5);
     }
 
-    if(var_05.var_394 == "<default>") {
-      var_05.var_394 = "super_default_mp";
+    if(var_5.var_394 == "<default>") {
+      var_5.var_394 = "super_default_mp";
     }
 
-    if(isDefined(var_05._meth_8487)) {
-      var_05._meth_8487 = var_05._meth_8487 * 1000;
+    if(isDefined(var_5._meth_8487)) {
+      var_5._meth_8487 = var_5._meth_8487 * 1000;
     } else {
-      var_05._meth_8487 = 0;
+      var_5._meth_8487 = 0;
     }
 
-    if(isDefined(var_05.var_12B28)) {
-      var_05.var_12B28 = var_05.var_12B28 * 1000;
+    if(isDefined(var_5.var_12B28)) {
+      var_5.var_12B28 = var_5.var_12B28 * 1000;
     } else {
-      var_05.var_12B28 = 0;
+      var_5.var_12B28 = 0;
     }
 
-    var_03++;
+    var_3++;
   }
 
-  var_06 = tablelookup("mp\superratetable.csv", 0, level.gametype, 1);
-  if(isDefined(var_06) && var_06 != "") {
-    level.var_1125E = float(var_06);
+  var_6 = tablelookup("mp\superratetable.csv", 0, level.gametype, 1);
+  if(isDefined(var_6) && var_6 != "") {
+    level.var_1125E = float(var_6);
   }
 
   func_DF10();
@@ -124,11 +124,11 @@ init() {
   scripts\mp\supers\super_overdrive::func_98AB();
 }
 
-func_1831(param_00, param_01, param_02) {
-  param_00 = scripts\mp\utility::getweaponrootname(param_00);
-  level.superweapons[param_00] = spawnStruct();
-  level.superweapons[param_00].var_11263 = param_01;
-  level.superweapons[param_00].staticdata = param_02;
+func_1831(var_0, var_1, var_2) {
+  var_0 = scripts\mp\utility::getweaponrootname(var_0);
+  level.superweapons[var_0] = spawnStruct();
+  level.superweapons[var_0].var_11263 = var_1;
+  level.superweapons[var_0].staticdata = var_2;
 }
 
 func_DF10() {
@@ -152,75 +152,75 @@ func_DF10() {
   func_DF0F("super_invisible", ::func_F75E, ::func_12CDA, ::func_1309A, ::func_635C);
 }
 
-func_DF0F(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = level.var_10E4E[param_00];
-  if(!isDefined(var_05)) {
+func_DF0F(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = level.var_10E4E[var_0];
+  if(!isDefined(var_5)) {
     return;
   }
 
-  var_05.var_F71E = param_01;
-  var_05.var_12CC4 = param_02;
-  var_05.beginusefunc = param_03;
-  var_05.var_6398 = param_04;
-  var_05.var_9F1D = 1;
+  var_5.var_F71E = var_1;
+  var_5.var_12CC4 = var_2;
+  var_5.beginusefunc = var_3;
+  var_5.var_6398 = var_4;
+  var_5.var_9F1D = 1;
 }
 
-func_DD68(param_00, param_01, param_02) {
-  var_03 = tablelookupbyrow("mp\supertable.csv", param_00, param_01);
-  if(var_03 == "") {
+func_DD68(var_0, var_1, var_2) {
+  var_3 = tablelookupbyrow("mp\supertable.csv", var_0, var_1);
+  if(var_3 == "") {
     return undefined;
   }
 
-  if(scripts\mp\utility::istrue(param_02)) {
-    if(issubstr(var_03, ".")) {
-      var_03 = float(var_03);
+  if(scripts\mp\utility::istrue(var_2)) {
+    if(issubstr(var_3, ".")) {
+      var_3 = float(var_3);
     } else {
-      var_03 = int(var_03);
+      var_3 = int(var_3);
     }
   }
 
-  return var_03;
+  return var_3;
 }
 
-stopridingvehicle(param_00, param_01) {
-  clearsuper(param_01);
-  var_02 = level.var_10E4E[param_00];
-  if(!isDefined(var_02)) {
+stopridingvehicle(var_0, var_1) {
+  clearsuper(var_1);
+  var_2 = level.var_10E4E[var_0];
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var_03 = spawnStruct();
-  self.super = var_03;
-  var_03.staticdata = var_02;
-  var_03.isinuse = 0;
-  var_03.var_461F = undefined;
-  var_03.var_461E = undefined;
-  var_03.var_130DE = undefined;
-  var_03.var_130EF = undefined;
-  var_03.var_1CA3 = 1;
-  var_03.var_B143 = -1;
-  var_03.numkills = 0;
-  var_03.var_1391B = 0;
-  var_03.canstow = 0;
-  var_04 = var_03.staticdata.var_F71E;
-  if(isDefined(var_04)) {
-    self thread[[var_04]]();
+  var_3 = spawnStruct();
+  self.super = var_3;
+  var_3.staticdata = var_2;
+  var_3.isinuse = 0;
+  var_3.var_461F = undefined;
+  var_3.var_461E = undefined;
+  var_3.var_130DE = undefined;
+  var_3.var_130EF = undefined;
+  var_3.var_1CA3 = 1;
+  var_3.var_B143 = -1;
+  var_3.numkills = 0;
+  var_3.var_1391B = 0;
+  var_3.canstow = 0;
+  var_4 = var_3.staticdata.var_F71E;
+  if(isDefined(var_4)) {
+    self thread[[var_4]]();
   }
 
-  self setclientomnvar("ui_super_ref", param_00);
-  var_05 = 0;
-  var_06 = self.pers["superCooldownTime"];
-  if(isDefined(var_06)) {
-    var_05 = var_06 / 1000;
+  self setclientomnvar("ui_super_ref", var_0);
+  var_5 = 0;
+  var_6 = self.pers["superCooldownTime"];
+  if(isDefined(var_6)) {
+    var_5 = var_6 / 1000;
     self.pers["superCooldownTime"] = undefined;
   }
 
-  func_E276(var_05);
+  func_E276(var_5);
   if(func_1125C()) {
-    scripts\mp\utility::_giveweapon(var_02.var_394);
-    var_07 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-    self setweaponammoclip(var_02.var_394, var_07);
-    self assignweaponoffhandspecial(var_02.var_394);
+    scripts\mp\utility::_giveweapon(var_2.var_394);
+    var_7 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+    self setweaponammoclip(var_2.var_394, var_7);
+    self assignweaponoffhandspecial(var_2.var_394);
   } else {
     thread func_13B6D();
   }
@@ -233,22 +233,22 @@ stopridingvehicle(param_00, param_01) {
   thread func_89F0();
 }
 
-clearsuper(param_00) {
-  var_01 = getcurrentsuper();
-  if(isDefined(var_01) && isDefined(var_01.staticdata)) {
-    var_02 = var_01.staticdata.var_12CC4;
-    if(isDefined(var_02)) {
-      self thread[[var_02]]();
+clearsuper(var_0) {
+  var_1 = getcurrentsuper();
+  if(isDefined(var_1) && isDefined(var_1.staticdata)) {
+    var_2 = var_1.staticdata.var_12CC4;
+    if(isDefined(var_2)) {
+      self thread[[var_2]]();
     }
   }
 
-  if(scripts\mp\utility::istrue(param_00) && isDefined(var_01)) {
+  if(scripts\mp\utility::istrue(var_0) && isDefined(var_1)) {
     func_110C4();
   }
 
   self clearoffhandspecial();
-  if(isDefined(var_01)) {
-    scripts\mp\utility::_takeweapon(var_01.staticdata.var_394);
+  if(isDefined(var_1)) {
+    scripts\mp\utility::_takeweapon(var_1.staticdata.var_394);
   }
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
@@ -261,25 +261,25 @@ clearsuper(param_00) {
   self setclientomnvar("ui_super_ref", "none");
 }
 
-func_E276(param_00) {
-  var_01 = getcurrentsuper();
-  var_01.var_461E = getsupermaxcooldownmsec();
-  var_01.var_461F = 0;
-  var_01.var_1CA3 = 1;
-  if(isDefined(param_00)) {
-    var_01.var_461F = var_01.var_461F + int(param_00 * 1000);
-    var_01.var_461F = int(min(var_01.var_461F, var_01.var_461E));
+func_E276(var_0) {
+  var_1 = getcurrentsuper();
+  var_1.var_461E = getsupermaxcooldownmsec();
+  var_1.var_461F = 0;
+  var_1.var_1CA3 = 1;
+  if(isDefined(var_0)) {
+    var_1.var_461F = var_1.var_461F + int(var_0 * 1000);
+    var_1.var_461F = int(min(var_1.var_461F, var_1.var_461E));
   }
 
   self setclientomnvar("ui_super_state", 1);
-  self setweaponammoclip(var_01.staticdata.var_394, 0);
+  self setweaponammoclip(var_1.staticdata.var_394, 0);
   func_11257();
 }
 
-func_DE3A(param_00) {
-  var_01 = getcurrentsuper();
-  param_00 = int(param_00);
-  var_01.var_461F = var_01.var_461F + param_00;
+func_DE3A(var_0) {
+  var_1 = getcurrentsuper();
+  var_0 = int(var_0);
+  var_1.var_461F = var_1.var_461F + var_0;
   func_11257();
 }
 
@@ -288,42 +288,42 @@ func_11257() {
   thread func_12F31();
 }
 
-stopshellshock(param_00) {
-  var_01 = getcurrentsuper();
-  if(!isDefined(var_01) || !isDefined(var_01.staticdata.var_EC3E) || issuperready() || var_01.isinuse) {
+stopshellshock(var_0) {
+  var_1 = getcurrentsuper();
+  if(!isDefined(var_1) || !isDefined(var_1.staticdata.var_EC3E) || issuperready() || var_1.isinuse) {
     return;
   }
 
-  var_02 = param_00 / 100 * level.superpointsmod * var_01.staticdata.var_EC3E * 1000;
-  func_DE3A(var_02);
-  scripts\mp\analyticslog::logevent_reportsuperscore(param_00, gettime());
+  var_2 = var_0 / 100 * level.superpointsmod * var_1.staticdata.var_EC3E * 1000;
+  func_DE3A(var_2);
+  scripts\mp\analyticslog::logevent_reportsuperscore(var_0, gettime());
 }
 
 func_12F32() {
   self endon("disconnect");
   self endon("remove_super");
   for(;;) {
-    var_00 = getcurrentsuper();
-    var_01 = 0;
-    if(var_00.isinuse) {
-      var_01 = hudoutlinedisable();
+    var_0 = getcurrentsuper();
+    var_1 = 0;
+    if(var_0.isinuse) {
+      var_1 = hudoutlinedisable();
     } else {
-      var_02 = var_00.var_461E - var_00.var_461F;
-      var_03 = getsupermaxcooldownmsec();
-      var_01 = clamp(1 - var_02 / var_03, 0, 1);
+      var_2 = var_0.var_461E - var_0.var_461F;
+      var_3 = getsupermaxcooldownmsec();
+      var_1 = clamp(1 - var_2 / var_3, 0, 1);
     }
 
     if(!scripts\mp\utility::isinkillcam() && isalive(self)) {
-      self setclientomnvar("ui_super_progress", var_01);
+      self setclientomnvar("ui_super_progress", var_1);
     }
 
-    self _meth_8400(var_01);
+    self _meth_8400(var_1);
     scripts\engine\utility::waitframe();
   }
 }
 
 func_13A61() {
-  var_00 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self endon("disconnect");
   self endon("remove_super");
   for(;;) {
@@ -333,7 +333,7 @@ func_13A61() {
       self setclientomnvar("ui_super_state", 2);
     }
 
-    givesuperweapon(var_00);
+    givesuperweapon(var_0);
   }
 }
 
@@ -342,7 +342,7 @@ func_12F31() {
   self endon("super_cooldown_altered");
   self endon("remove_super");
   self endon("game_ended");
-  var_00 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self notify("super_finished");
   while(issupercharging()) {
     scripts\mp\utility::gameflagwait("prematch_done");
@@ -351,8 +351,8 @@ func_12F31() {
       continue;
     }
 
-    var_01 = int(50 * level.var_11260 * scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_overclock"), 1.4, 1));
-    var_00.var_461F = var_00.var_461F + var_01;
+    var_1 = int(50 * level.var_11260 * scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_overclock"), 1.4, 1));
+    var_0.var_461F = var_0.var_461F + var_1;
     wait(0.05);
   }
 
@@ -376,28 +376,28 @@ func_89E8() {
 func_89F0() {
   self endon("disconnect");
   self endon("remove_super");
-  var_00 = self.team;
+  var_0 = self.team;
   self waittill("joined_team");
-  if(self.team != var_00) {
+  if(self.team != var_0) {
     thread clearsuper(0);
   }
 }
 
 func_11258() {
-  var_00 = getcurrentsuper();
-  self setweaponammoclip(var_00.staticdata.var_394, 1);
+  var_0 = getcurrentsuper();
+  self setweaponammoclip(var_0.staticdata.var_394, 1);
   self setclientomnvar("ui_super_state", 2);
   self playlocalsound("mp_super_ready");
   self notify("super_ready");
-  if(!var_00.var_1391B) {
+  if(!var_0.var_1391B) {
     self.pers["supersEarned"]++;
     self notify("super_earned");
   }
 
   scripts\mp\lightbar::func_1768(2, 1, 1, 1, 0, "super_use_finished_lb");
-  var_00.var_B143 = gettime();
-  var_00.numkills = 0;
-  scripts\mp\analyticslog::logevent_superearned(var_00.var_B143);
+  var_0.var_B143 = gettime();
+  var_0.numkills = 0;
+  scripts\mp\analyticslog::logevent_superearned(var_0.var_B143);
   if(isDefined(self.matchdatalifeindex)) {
     scripts\mp\matchdata::logsuperavailableevent(self.matchdatalifeindex, self.origin);
   }
@@ -407,14 +407,14 @@ func_13A6F() {
   self endon("disconnect");
   self endon("remove_super");
   for(;;) {
-    self waittill("special_weapon_fired", var_00);
+    self waittill("special_weapon_fired", var_0);
     if(scripts\mp\utility::isreallyalive(self)) {
-      if(var_00 != getcurrentsuper().staticdata.var_394) {
+      if(var_0 != getcurrentsuper().staticdata.var_394) {
         continue;
       }
 
-      var_01 = func_2A79();
-      if(!isDefined(var_01) || var_01 == 0) {
+      var_1 = func_2A79();
+      if(!isDefined(var_1) || var_1 == 0) {
         continue;
       }
 
@@ -426,30 +426,30 @@ func_13A6F() {
 func_2A79() {
   self endon("death");
   self endon("disconnect");
-  var_00 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self notify("super_started");
   self playlocalsound("weap_super_activate_plr");
-  if(isDefined(var_00) && !var_00.isinuse) {
-    var_01 = 1;
-    if(isDefined(var_00.staticdata.useweapon)) {
-      if(scripts\mp\utility::isinarbitraryup() && superdisabledinarbitraryup(var_00.staticdata.ref)) {
+  if(isDefined(var_0) && !var_0.isinuse) {
+    var_1 = 1;
+    if(isDefined(var_0.staticdata.useweapon)) {
+      if(scripts\mp\utility::isinarbitraryup() && superdisabledinarbitraryup(var_0.staticdata.ref)) {
         superdisabledinarbitraryupmessage();
-        var_01 = 0;
-      } else if(scripts\mp\utility::istryingtousekillstreak() && superdisabledduringkillstreak(var_00.staticdata.ref)) {
+        var_1 = 0;
+      } else if(scripts\mp\utility::istryingtousekillstreak() && superdisabledduringkillstreak(var_0.staticdata.ref)) {
         superdisabledduringkillstreakmessage();
-        var_01 = 0;
+        var_1 = 0;
       } else {
-        var_01 = func_1289E(var_00.staticdata.useweapon, var_00.staticdata.var_130F9, var_00.staticdata.var_130FA);
+        var_1 = func_1289E(var_0.staticdata.useweapon, var_0.staticdata.var_130F9, var_0.staticdata.var_130FA);
       }
     }
 
-    if(var_01 && !isDefined(var_00.staticdata.beginusefunc) || scripts\mp\utility::istrue(self[[var_00.staticdata.beginusefunc]]())) {
-      var_02 = [];
-      var_02[0] = "super_use_finished_lb";
-      var_02[1] = "super_switched";
-      scripts\mp\lightbar::func_1768(2, 0, 2, 1, 0, var_02);
-      var_00.isinuse = 1;
-      var_00.var_1CA3 = scripts\engine\utility::ter_op(var_00.staticdata._meth_8487 > 0, 1, 0);
+    if(var_1 && !isDefined(var_0.staticdata.beginusefunc) || scripts\mp\utility::istrue(self[[var_0.staticdata.beginusefunc]]())) {
+      var_2 = [];
+      var_2[0] = "super_use_finished_lb";
+      var_2[1] = "super_switched";
+      scripts\mp\lightbar::func_1768(2, 0, 2, 1, 0, var_2);
+      var_0.isinuse = 1;
+      var_0.var_1CA3 = scripts\engine\utility::ter_op(var_0.staticdata._meth_8487 > 0, 1, 0);
       func_10DF7();
       if(isDefined(self.matchdatalifeindex)) {
         scripts\mp\matchdata::logsuperactivatedevent(self.matchdatalifeindex, self.origin);
@@ -460,58 +460,58 @@ func_2A79() {
         self getrandomweapon(1);
       }
 
-      scripts\mp\utility::printgameaction("super use started - " + var_00.staticdata.ref, self);
+      scripts\mp\utility::printgameaction("super use started - " + var_0.staticdata.ref, self);
       return 1;
     } else {
-      if(isDefined(var_01.staticdata.useweapon) && var_02) {
+      if(isDefined(var_1.staticdata.useweapon) && var_2) {
         thread func_11371();
       }
 
-      self setweaponammoclip(var_01.staticdata.var_394, 1);
+      self setweaponammoclip(var_1.staticdata.var_394, 1);
     }
   }
 
   return 0;
 }
 
-func_1613(param_00, param_01) {
-  var_02 = getcurrentsuper();
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_1613(var_0, var_1) {
+  var_2 = getcurrentsuper();
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var_03 = gettime();
-  if(var_02.var_12B2C > var_03) {
-    var_02.var_12B2C = var_03;
+  var_3 = gettime();
+  if(var_2.var_12B2C > var_3) {
+    var_2.var_12B2C = var_3;
   }
 
-  if(param_00 && isDefined(var_02.staticdata.var_1617)) {
-    func_DE3B(var_02.staticdata.var_1617 * param_01);
-  } else if(isDefined(var_02.staticdata.var_1616)) {
-    func_DE3B(var_02.staticdata.var_1616 * param_01);
+  if(var_0 && isDefined(var_2.staticdata.var_1617)) {
+    func_DE3B(var_2.staticdata.var_1617 * var_1);
+  } else if(isDefined(var_2.staticdata.var_1616)) {
+    func_DE3B(var_2.staticdata.var_1616 * var_1);
   }
 
   return 1;
 }
 
 func_10DF7() {
-  var_00 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self notify("super_use_started");
-  var_00.var_130DE = gettime();
-  var_00.var_130EF = _meth_8188() * 1000;
-  var_00.var_12B2C = gettime() + var_00.staticdata.var_12B28;
+  var_0.var_130DE = gettime();
+  var_0.var_130EF = _meth_8188() * 1000;
+  var_0.var_12B2C = gettime() + var_0.staticdata.var_12B28;
   func_112A5();
 }
 
-func_DE3B(param_00) {
-  var_01 = getcurrentsuper();
+func_DE3B(var_0) {
+  var_1 = getcurrentsuper();
   self setclientomnvar("ui_super_flash_progress", hudoutlinedisable());
-  var_01.var_130EF = max(var_01.var_130EF - param_00, 0);
-  var_01.var_1CA3 = 0;
+  var_1.var_130EF = max(var_1.var_130EF - var_0, 0);
+  var_1.var_1CA3 = 0;
   func_112A5();
 }
 
@@ -525,19 +525,19 @@ func_13B71() {
   self endon("super_use_duration_updated");
   self endon("super_use_finished");
   self endon("remove_super");
-  var_00 = getcurrentsuper();
-  while(var_00.var_130EF > 0) {
+  var_0 = getcurrentsuper();
+  while(var_0.var_130EF > 0) {
     if(scripts\mp\utility::istrue(level.hostmigration)) {
       scripts\engine\utility::waitframe();
       continue;
     }
 
     scripts\engine\utility::waitframe();
-    var_00.var_130EF = var_00.var_130EF - 50;
+    var_0.var_130EF = var_0.var_130EF - 50;
     if(isbot(self)) {
-      if(isDefined(var_00.staticdata.useweapon) && var_00.staticdata.var_9FF8 == 1) {
-        var_01 = self getrunningforwardpainanim(var_00.staticdata.useweapon);
-        if(!isDefined(var_01) || var_01 <= 0) {
+      if(isDefined(var_0.staticdata.useweapon) && var_0.staticdata.var_9FF8 == 1) {
+        var_1 = self getrunningforwardpainanim(var_0.staticdata.useweapon);
+        if(!isDefined(var_1) || var_1 <= 0) {
           break;
         }
       }
@@ -547,50 +547,50 @@ func_13B71() {
   superusefinished();
 }
 
-superusefinished(param_00, param_01, param_02) {
-  var_03 = getcurrentsuper();
-  var_04 = hudoutlinedisable();
+superusefinished(var_0, var_1, var_2) {
+  var_3 = getcurrentsuper();
+  var_4 = hudoutlinedisable();
   self notify("super_use_finished_lb");
-  var_03.isinuse = 0;
-  var_03.canstow = 0;
-  var_05 = undefined;
-  if(isDefined(var_03.staticdata.var_6398)) {
-    if(!isDefined(param_01)) {
-      param_01 = 0;
+  var_3.isinuse = 0;
+  var_3.canstow = 0;
+  var_5 = undefined;
+  if(isDefined(var_3.staticdata.var_6398)) {
+    if(!isDefined(var_1)) {
+      var_1 = 0;
     }
 
-    var_05 = self[[var_03.staticdata.var_6398]](param_01);
+    var_5 = self[[var_3.staticdata.var_6398]](var_1);
   }
 
-  if(shouldreacttonewenemy(param_02) || scripts\mp\utility::istrue(param_00) || scripts\mp\utility::istrue(var_05)) {
-    var_03.var_1391B = 1;
+  if(shouldreacttonewenemy(var_2) || scripts\mp\utility::istrue(var_0) || scripts\mp\utility::istrue(var_5)) {
+    var_3.var_1391B = 1;
     func_E276(getsupermaxcooldownsec());
-  } else if(scripts\mp\utility::istrue(param_02)) {
-    var_06 = getsupermaxcooldownsec() * var_04;
-    var_03.var_1391B = 1;
-    func_E276(var_06);
+  } else if(scripts\mp\utility::istrue(var_2)) {
+    var_6 = getsupermaxcooldownsec() * var_4;
+    var_3.var_1391B = 1;
+    func_E276(var_6);
   } else {
-    if(var_03.staticdata.ref != "super_chargemode") {
-      var_07 = getsubstr(self.loadoutarchetype, 10, self.loadoutarchetype.size);
-      scripts\mp\missions::func_D991("ch_" + var_07 + "_super");
-      combatrecordsuperuse(var_03.staticdata.ref);
+    if(var_3.staticdata.ref != "super_chargemode") {
+      var_7 = getsubstr(self.loadoutarchetype, 10, self.loadoutarchetype.size);
+      scripts\mp\missions::func_D991("ch_" + var_7 + "_super");
+      combatrecordsuperuse(var_3.staticdata.ref);
     }
 
-    var_03.var_A986 = gettime();
-    var_03.var_1391B = 0;
+    var_3.var_A986 = gettime();
+    var_3.var_1391B = 0;
     func_E276();
   }
 
   thread func_11371();
-  var_08 = var_03.var_130DE - var_03.var_B143;
-  scripts\mp\analyticslog::logevent_superended(var_03.staticdata.ref, var_08, 0, var_03.numkills);
+  var_8 = var_3.var_130DE - var_3.var_B143;
+  scripts\mp\analyticslog::logevent_superended(var_3.staticdata.ref, var_8, 0, var_3.numkills);
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
     self getrandomweapon(0);
   }
 
-  scripts\mp\utility::printgameaction("super use ended - " + var_03.staticdata.ref, self);
+  scripts\mp\utility::printgameaction("super use ended - " + var_3.staticdata.ref, self);
   if(isDefined(self.matchdatalifeindex)) {
-    if(isDefined(param_01)) {
+    if(isDefined(var_1)) {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 1);
     } else {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 0);
@@ -601,9 +601,9 @@ superusefinished(param_00, param_01, param_02) {
 }
 
 refundsuper() {
-  var_00 = getcurrentsuper();
-  if(isDefined(var_00)) {
-    if(var_00.isinuse) {
+  var_0 = getcurrentsuper();
+  if(isDefined(var_0)) {
+    if(var_0.isinuse) {
       superusefinished(1);
       return;
     }
@@ -621,50 +621,50 @@ handledeath() {
   superusefinished(undefined, 1);
 }
 
-func_BA37(param_00) {
+func_BA37(var_0) {
   self endon("disconnect");
   self endon("death");
   self endon("super_use_finished");
   self endon("remove_super");
   for(;;) {
-    self waittill("weapon_fired", var_01);
-    var_02 = scripts\mp\weapons::isaltmodeweapon(var_01);
-    var_01 = scripts\mp\utility::func_E0CF(var_01);
-    if(var_01 == param_00) {
-      func_1613(var_02);
+    self waittill("weapon_fired", var_1);
+    var_2 = scripts\mp\weapons::isaltmodeweapon(var_1);
+    var_1 = scripts\mp\utility::func_E0CF(var_1);
+    if(var_1 == var_0) {
+      func_1613(var_2);
     }
   }
 }
 
-func_1289E(param_00, param_01, param_02) {
+func_1289E(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("death");
-  scripts\mp\utility::_giveweapon(param_00);
-  self setweaponammoclip(param_00, param_01);
-  self setweaponammostock(param_00, param_02);
-  var_03 = scripts\mp\utility::func_11383(param_00, isbot(self));
-  if(var_03) {
-    thread func_B2F7(param_00);
-    thread func_BA37(param_00);
+  scripts\mp\utility::_giveweapon(var_0);
+  self setweaponammoclip(var_0, var_1);
+  self setweaponammostock(var_0, var_2);
+  var_3 = scripts\mp\utility::func_11383(var_0, isbot(self));
+  if(var_3) {
+    thread func_B2F7(var_0);
+    thread func_BA37(var_0);
     return 1;
   }
 
-  scripts\mp\utility::func_1529(param_00);
+  scripts\mp\utility::func_1529(var_0);
   return 0;
 }
 
-func_B2F7(param_00) {
+func_B2F7(var_0) {
   self endon("disconnect");
   self endon("death");
   self endon("super_use_finished");
-  var_01 = getcurrentsuper();
-  var_01.useweaponswapped = undefined;
-  var_02 = 0;
+  var_1 = getcurrentsuper();
+  var_1.useweaponswapped = undefined;
+  var_2 = 0;
   for(;;) {
-    var_03 = self getcurrentweapon();
-    if(!var_01.canstow && var_03 != "iw7_fistslethal_mp" && var_03 != "iw7_fistsperk_mp" && var_03 != param_00) {
-      if(var_03 == "iw7_uplinkball_mp" || var_03 == "iw7_tdefball_mp") {
-        var_02 = 1;
+    var_3 = self getcurrentweapon();
+    if(!var_1.canstow && var_3 != "iw7_fistslethal_mp" && var_3 != "iw7_fistsperk_mp" && var_3 != var_0) {
+      if(var_3 == "iw7_uplinkball_mp" || var_3 == "iw7_tdefball_mp") {
+        var_2 = 1;
       }
 
       break;
@@ -674,31 +674,31 @@ func_B2F7(param_00) {
   }
 
   if(issuperinuse()) {
-    var_01.useweaponswapped = 1;
-    superusefinished(undefined, undefined, var_02);
+    var_1.useweaponswapped = 1;
+    superusefinished(undefined, undefined, var_2);
   }
 }
 
 func_11371() {
   self endon("death");
-  var_00 = getcurrentsuper();
-  var_01 = var_00.staticdata.useweapon;
-  if(!isDefined(var_01)) {
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.useweapon;
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(scripts\mp\utility::isreliablyswitchingtoweapon(var_01)) {
-    scripts\mp\utility::func_1529(var_01);
+  if(scripts\mp\utility::isreliablyswitchingtoweapon(var_1)) {
+    scripts\mp\utility::func_1529(var_1);
     return;
   }
 
   self notify("super_switched");
-  scripts\mp\utility::forcethirdpersonwhenfollowing(var_01);
+  scripts\mp\utility::forcethirdpersonwhenfollowing(var_1);
 }
 
 func_110C4() {
-  var_00 = getcurrentsuper();
-  if(!isDefined(var_00)) {
+  var_0 = getcurrentsuper();
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -721,17 +721,17 @@ func_110C4() {
 }
 
 hudoutlinedisable() {
-  var_00 = getcurrentsuper();
-  var_01 = gettime();
-  var_02 = var_00.var_12B2C - var_00.var_130DE;
-  var_03 = _meth_8188() * 1000 - var_02;
-  var_04 = clamp(var_00.var_130EF / var_03, 0, 1);
-  return var_04;
+  var_0 = getcurrentsuper();
+  var_1 = gettime();
+  var_2 = var_0.var_12B2C - var_0.var_130DE;
+  var_3 = _meth_8188() * 1000 - var_2;
+  var_4 = clamp(var_0.var_130EF / var_3, 0, 1);
+  return var_4;
 }
 
 getsupermaxcooldownsec() {
-  var_00 = getcurrentsuper().staticdata.cooldown * level.var_1125E;
-  return scripts\engine\utility::ter_op(getdvarint("scr_super_short_cooldown") != 0, 1, var_00);
+  var_0 = getcurrentsuper().staticdata.cooldown * level.var_1125E;
+  return scripts\engine\utility::ter_op(getdvarint("scr_super_short_cooldown") != 0, 1, var_0);
 }
 
 getsupermaxcooldownmsec() {
@@ -743,12 +743,12 @@ _meth_8188() {
 }
 
 issuperready() {
-  var_00 = getcurrentsuper();
-  if(!isDefined(var_00) || var_00.isinuse) {
+  var_0 = getcurrentsuper();
+  if(!isDefined(var_0) || var_0.isinuse) {
     return 0;
   }
 
-  return var_00.var_461F >= var_00.var_461E;
+  return var_0.var_461F >= var_0.var_461E;
 }
 
 issuperinuse() {
@@ -764,33 +764,33 @@ getcurrentsuper() {
 }
 
 getcurrentsuperref() {
-  var_00 = getcurrentsuper();
-  if(!isDefined(var_00)) {
+  var_0 = getcurrentsuper();
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  return var_00.staticdata.ref;
+  return var_0.staticdata.ref;
 }
 
-shouldreacttonewenemy(param_00) {
-  var_01 = getcurrentsuper();
-  var_02 = var_01.staticdata._meth_8487;
-  var_03 = gettime() - var_01.var_130DE;
-  if(var_03 >= var_02) {
+shouldreacttonewenemy(var_0) {
+  var_1 = getcurrentsuper();
+  var_2 = var_1.staticdata._meth_8487;
+  var_3 = gettime() - var_1.var_130DE;
+  if(var_3 >= var_2) {
     return 0;
   }
 
-  if(var_01.numkills > 0) {
+  if(var_1.numkills > 0) {
     return 0;
   }
 
-  if(scripts\mp\utility::istrue(var_01.useweaponswapped) && !scripts\mp\utility::istrue(param_00)) {
-    if(var_01.staticdata.useweapon == "iw7_reaperblade_mp") {
+  if(scripts\mp\utility::istrue(var_1.useweaponswapped) && !scripts\mp\utility::istrue(var_0)) {
+    if(var_1.staticdata.useweapon == "iw7_reaperblade_mp") {
       return 0;
     }
   }
 
-  return var_01.var_1CA3;
+  return var_1.var_1CA3;
 }
 
 func_11759() {
@@ -819,7 +819,7 @@ func_130CA() {
   return scripts\mp\supers\super_reaper::func_DD9D();
 }
 
-func_637A(param_00) {
+func_637A(var_0) {
   scripts\mp\supers\super_reaper::func_DD97();
 }
 
@@ -827,7 +827,7 @@ func_1304E() {
   return scripts\mp\supers\super_blackholegun::beginuse();
 }
 
-func_630F(param_00) {
+func_630F(var_0) {
   scripts\mp\supers\super_blackholegun::stopuse();
 }
 
@@ -835,15 +835,15 @@ func_13044() {
   return scripts\mp\supers\super_armorup::func_2197();
 }
 
-func_630C(param_00) {
-  scripts\mp\supers\super_armorup::func_218E(param_00);
+func_630C(var_0) {
+  scripts\mp\supers\super_armorup::func_218E(var_0);
 }
 
 func_13041() {
   return scripts\mp\supers\super_amplify::func_12F9B();
 }
 
-func_630A(param_00) {
+func_630A(var_0) {
   scripts\mp\supers\super_amplify::end();
 }
 
@@ -897,28 +897,28 @@ func_1309A() {
   return scripts\mp\equipment\cloak::func_12F9B();
 }
 
-func_635C(param_00) {
-  scripts\mp\equipment\cloak::end(param_00);
+func_635C(var_0) {
+  scripts\mp\equipment\cloak::end(var_0);
 }
 
 func_130E2() {
   return scripts\mp\supers\super_supertrophy::func_11297();
 }
 
-func_638F(param_00) {
-  return scripts\mp\supers\super_supertrophy::func_11276(param_00);
+func_638F(var_0) {
+  return scripts\mp\supers\super_supertrophy::func_11276(var_0);
 }
 
-func_12D3F(param_00) {
-  scripts\mp\supers\super_supertrophy::func_11296(param_00);
+func_12D3F(var_0) {
+  scripts\mp\supers\super_supertrophy::func_11296(var_0);
 }
 
 usephaseshift() {
   return scripts\mp\equipment\phase_shift::func_E88D();
 }
 
-func_6376(param_00) {
-  scripts\mp\equipment\phase_shift::func_E154(param_00);
+func_6376(var_0) {
+  scripts\mp\equipment\phase_shift::func_E154(var_0);
 }
 
 func_F797() {
@@ -934,8 +934,8 @@ func_130A4() {
   return 1;
 }
 
-func_6364(param_00) {
-  return scripts\mp\equipment\micro_turret::func_B6F9(param_00);
+func_6364(var_0) {
+  return scripts\mp\equipment\micro_turret::func_B6F9(var_0);
 }
 
 func_F68E() {
@@ -950,8 +950,8 @@ func_13052() {
   return scripts\mp\equipment\charge_mode::func_3D1A();
 }
 
-func_6313(param_00) {
-  scripts\mp\equipment\charge_mode::func_3CDD(param_00);
+func_6313(var_0) {
+  scripts\mp\equipment\charge_mode::func_3CDD(var_0);
 }
 
 setrewind() {
@@ -975,94 +975,94 @@ func_1309C() {
   return 1;
 }
 
-_meth_8189(param_00) {
-  param_00 = scripts\mp\utility::getweaponrootname(param_00);
-  if(!isDefined(level.superweapons[param_00])) {
+_meth_8189(var_0) {
+  var_0 = scripts\mp\utility::getweaponrootname(var_0);
+  if(!isDefined(level.superweapons[var_0])) {
     return undefined;
   }
 
-  return level.superweapons[param_00].var_11263;
+  return level.superweapons[var_0].var_11263;
 }
 
-func_7F0D(param_00) {
-  param_00 = scripts\mp\utility::getweaponrootname(param_00);
-  if(isDefined(level.superweapons[param_00])) {
-    return level.superweapons[param_00].staticdata.id;
+func_7F0D(var_0) {
+  var_0 = scripts\mp\utility::getweaponrootname(var_0);
+  if(isDefined(level.superweapons[var_0])) {
+    return level.superweapons[var_0].staticdata.id;
   }
 
-  var_01 = undefined;
-  switch (param_00) {
+  var_1 = undefined;
+  switch (var_0) {
     case "micro_turret_gun_mp":
-      var_01 = "super_microturret";
+      var_1 = "super_microturret";
       break;
 
     case "chargemode_mp":
-      var_01 = "super_chargemode";
+      var_1 = "super_chargemode";
       break;
   }
 
-  if(isDefined(var_01)) {
-    var_02 = level.var_10E4E[var_01];
-    if(isDefined(var_02)) {
-      return var_02.id;
+  if(isDefined(var_1)) {
+    var_2 = level.var_10E4E[var_1];
+    if(isDefined(var_2)) {
+      return var_2.id;
     }
   }
 
   return undefined;
 }
 
-_meth_8186(param_00) {
-  if(!isDefined(param_00) || !isDefined(level.var_10E4E[param_00]) || param_00 == "none") {
+_meth_8186(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.var_10E4E[var_0]) || var_0 == "none") {
     return 0;
   }
 
-  return level.var_10E4E[param_00].id;
+  return level.var_10E4E[var_0].id;
 }
 
-func_7FD0(param_00) {
-  param_00 = scripts\mp\utility::getweaponrootname(param_00);
-  if(!isDefined(level.superweapons[param_00])) {
+func_7FD0(var_0) {
+  var_0 = scripts\mp\utility::getweaponrootname(var_0);
+  if(!isDefined(level.superweapons[var_0])) {
     return undefined;
   }
 
-  return level.superweapons[param_00].staticdata.var_BCEF;
+  return level.superweapons[var_0].staticdata.var_BCEF;
 }
 
-getrootsuperref(param_00) {
-  return getsubstr(param_00, 6);
+getrootsuperref(var_0) {
+  return getsubstr(var_0, 6);
 }
 
 allowsuperweaponstow() {
-  var_00 = getcurrentsuper();
-  if(!isDefined(var_00) || !var_00.isinuse) {
+  var_0 = getcurrentsuper();
+  if(!isDefined(var_0) || !var_0.isinuse) {
     return;
   }
 
-  var_00.canstow = 1;
+  var_0.canstow = 1;
 }
 
 unstowsuperweapon() {
-  var_00 = getcurrentsuper();
-  if(!isDefined(var_00) || !var_00.canstow) {
+  var_0 = getcurrentsuper();
+  if(!isDefined(var_0) || !var_0.canstow) {
     return;
   }
 
-  if(!var_00.isinuse || !isDefined(var_00.staticdata.useweapon)) {
-    var_00.canstow = 0;
+  if(!var_0.isinuse || !isDefined(var_0.staticdata.useweapon)) {
+    var_0.canstow = 0;
     return;
   }
 
-  scripts\mp\utility::func_11383(var_00.staticdata.useweapon);
-  var_00.canstow = 0;
+  scripts\mp\utility::func_11383(var_0.staticdata.useweapon);
+  var_0.canstow = 0;
 }
 
-modifysuperequipmentdamage(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_03;
-  if(isDefined(self.triggerportableradarping) && isDefined(param_00) && param_00 == self.triggerportableradarping) {
-    var_05 = int(ceil(param_03 * 0.5));
+modifysuperequipmentdamage(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  if(isDefined(self.triggerportableradarping) && isDefined(var_0) && var_0 == self.triggerportableradarping) {
+    var_5 = int(ceil(var_3 * 0.5));
   }
 
-  return var_05;
+  return var_5;
 }
 
 func_13B6B() {
@@ -1100,11 +1100,11 @@ func_13B6D() {
   stoprumble();
   thread func_411B();
   func_13B6E();
-  var_00 = getcurrentsuper().staticdata.var_394;
-  var_01 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-  scripts\mp\utility::_giveweapon(var_00);
-  self setweaponammoclip(var_00, var_01);
-  self assignweaponoffhandspecial(var_00);
+  var_0 = getcurrentsuper().staticdata.var_394;
+  var_1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+  scripts\mp\utility::_giveweapon(var_0);
+  self setweaponammoclip(var_0, var_1);
+  self assignweaponoffhandspecial(var_0);
   scripts\mp\utility::_takeweapon("super_delay_mp");
 }
 
@@ -1115,16 +1115,16 @@ func_13B6E() {
   }
 
   for(;;) {
-    self waittill("special_weapon_fired", var_00);
-    if(var_00 != "super_delay_mp") {
+    self waittill("special_weapon_fired", var_0);
+    if(var_0 != "super_delay_mp") {
       continue;
     }
 
     self setweaponammoclip("super_delay_mp", 1);
     if(issuperready()) {
-      var_01 = level.var_1125B - scripts\mp\utility::gettimepassed() / 1000;
-      var_01 = int(max(0, ceil(var_01)));
-      scripts\mp\hud_message::showerrormessage("MP_SUPERS_UNAVAILABLE_FOR_N", var_01);
+      var_1 = level.var_1125B - scripts\mp\utility::gettimepassed() / 1000;
+      var_1 = int(max(0, ceil(var_1)));
+      scripts\mp\hud_message::showerrormessage("MP_SUPERS_UNAVAILABLE_FOR_N", var_1);
     }
   }
 }
@@ -1161,13 +1161,13 @@ func_1125C() {
   return isDefined(level.var_1125B) && scripts\mp\utility::gettimepassed() > level.var_1125B;
 }
 
-givesuperweapon(param_00) {
+givesuperweapon(var_0) {
   if(func_1125C()) {
-    if(!self hasweapon(param_00.staticdata.var_394)) {
-      var_01 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-      scripts\mp\utility::_giveweapon(param_00.staticdata.var_394);
-      self setweaponammoclip(param_00.staticdata.var_394, var_01);
-      self assignweaponoffhandspecial(param_00.staticdata.var_394);
+    if(!self hasweapon(var_0.staticdata.var_394)) {
+      var_1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+      scripts\mp\utility::_giveweapon(var_0.staticdata.var_394);
+      self setweaponammoclip(var_0.staticdata.var_394, var_1);
+      self assignweaponoffhandspecial(var_0.staticdata.var_394);
       return;
     }
 
@@ -1177,13 +1177,13 @@ givesuperweapon(param_00) {
   stoprumble();
 }
 
-watchobjuse(param_00, param_01) {
+watchobjuse(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("obj_drain_end");
   self endon("ball_dropped");
   if(level.gametype == "sd" || level.gametype == "sr" || level.gametype == "dd") {
-    if(scripts\mp\utility::istrue(param_01)) {
+    if(scripts\mp\utility::istrue(var_1)) {
       self waittill("super_obj_drain");
     }
   } else if(!isDefined(self.carryobject)) {
@@ -1193,31 +1193,31 @@ watchobjuse(param_00, param_01) {
   }
 
   while(issuperinuse()) {
-    func_DE3B(param_00);
+    func_DE3B(var_0);
     wait(0.05);
   }
 }
 
-combatrecordsuperuse(param_00) {
+combatrecordsuperuse(var_0) {
   if(!scripts\mp\utility::canrecordcombatrecordstats()) {
     return;
   }
 
-  var_01 = self getplayerdata("mp", "superStats", param_00, "uses");
-  self setplayerdata("mp", "superStats", param_00, "uses", var_01 + 1);
+  var_1 = self getplayerdata("mp", "superStats", var_0, "uses");
+  self setplayerdata("mp", "superStats", var_0, "uses", var_1 + 1);
 }
 
-combatrecordsuperkill(param_00) {
+combatrecordsuperkill(var_0) {
   if(!scripts\mp\utility::canrecordcombatrecordstats()) {
     return;
   }
 
-  var_01 = self getplayerdata("mp", "superStats", param_00, "kills");
-  self setplayerdata("mp", "superStats", param_00, "kills", var_01 + 1);
+  var_1 = self getplayerdata("mp", "superStats", var_0, "kills");
+  self setplayerdata("mp", "superStats", var_0, "kills", var_1 + 1);
 }
 
-superdisabledinarbitraryup(param_00) {
-  if(param_00 == "super_microturret" || param_00 == "super_supertrophy") {
+superdisabledinarbitraryup(var_0) {
+  if(var_0 == "super_microturret" || var_0 == "super_supertrophy") {
     return 1;
   }
 
@@ -1228,8 +1228,8 @@ superdisabledinarbitraryupmessage() {
   scripts\mp\hud_message::showerrormessage("MP_SUPERS_UNAVAILABLE_ARB_UP");
 }
 
-superdisabledduringkillstreak(param_00) {
-  switch (param_00) {
+superdisabledduringkillstreak(var_0) {
+  switch (var_0) {
     case "super_visionpulse":
     case "super_invisible":
     case "super_armorup":

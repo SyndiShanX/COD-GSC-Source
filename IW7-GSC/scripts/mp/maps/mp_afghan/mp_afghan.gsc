@@ -34,44 +34,44 @@ main() {
   thread fix_broshot();
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
 spawn_oob_trigger() {
   wait(0.05);
-  var_00 = spawn("trigger_radius", (-674, 2090, -102), 0, 150, 140);
-  var_00.var_336 = "outofbounds";
-  var_00 hide();
-  var_01 = spawn("trigger_radius", (1704, 4299, 180), 0, 200, 50);
-  var_01.var_336 = "outofbounds";
-  var_01 hide();
-  level.var_C7B3[level.var_C7B3.size] = var_00;
-  level.var_C7B3[level.var_C7B3.size] = var_01;
+  var_0 = spawn("trigger_radius", (-674, 2090, -102), 0, 150, 140);
+  var_0.var_336 = "outofbounds";
+  var_0 hide();
+  var_1 = spawn("trigger_radius", (1704, 4299, 180), 0, 200, 50);
+  var_1.var_336 = "outofbounds";
+  var_1 hide();
+  level.var_C7B3[level.var_C7B3.size] = var_0;
+  level.var_C7B3[level.var_C7B3.size] = var_1;
 }
 
 fix_collision() {
-  var_00 = getent("player32x32x8", "targetname");
-  var_01 = spawn("script_model", (1772, 188.5, 415));
-  var_01.angles = (0, 0, -70);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player64x64x256", "targetname");
-  var_03 = spawn("script_model", (500, 1852, 136));
-  var_03.angles = (0, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player64x64x256", "targetname");
-  var_05 = spawn("script_model", (500, 1852, 392));
-  var_05.angles = (0, 0, 0);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("player64x64x256", "targetname");
-  var_07 = spawn("script_model", (700, 1852, 136));
-  var_07.angles = (0, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player64x64x256", "targetname");
-  var_09 = spawn("script_model", (700, 1852, 392));
-  var_09.angles = (0, 0, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player32x32x8", "targetname");
+  var_1 = spawn("script_model", (1772, 188.5, 415));
+  var_1.angles = (0, 0, -70);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player64x64x256", "targetname");
+  var_3 = spawn("script_model", (500, 1852, 136));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player64x64x256", "targetname");
+  var_5 = spawn("script_model", (500, 1852, 392));
+  var_5.angles = (0, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("player64x64x256", "targetname");
+  var_7 = spawn("script_model", (700, 1852, 136));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player64x64x256", "targetname");
+  var_9 = spawn("script_model", (700, 1852, 392));
+  var_9.angles = (0, 0, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player128x128x128", "targetname");
   var_0B = spawn("script_model", (1040, 3952, 78));
   var_0B.angles = (0, 30, 0);
@@ -99,7 +99,7 @@ fix_collision() {
 }
 
 fix_broshot() {
-  var_00 = getent("character_loc_broshot_e", "targetname");
-  var_01 = var_00.origin;
-  var_00.origin = (var_01[0], var_01[1], 242);
+  var_0 = getent("character_loc_broshot_e", "targetname");
+  var_1 = var_0.origin;
+  var_0.origin = (var_1[0], var_1[1], 242);
 }

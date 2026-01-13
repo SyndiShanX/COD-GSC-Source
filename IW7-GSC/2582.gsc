@@ -5,14 +5,14 @@
 ************************/
 
 func_98D2() {
-  self.var_3135.var_EB89 = spawnStruct();
-  self.var_3135.var_EB89.var_BF75 = gettime() + 500;
-  self.var_3135.var_EB89.var_BFB3["engage"] = gettime() + 1000;
-  self.var_3135.var_EB89.enabled = 1;
-  self.var_3135.var_EB89.var_D895 = undefined;
-  self.var_3135.var_EB89.var_3D4C = [];
+  self.bt.var_EB89 = spawnStruct();
+  self.bt.var_EB89.var_BF75 = gettime() + 500;
+  self.bt.var_EB89.var_BFB3["engage"] = gettime() + 1000;
+  self.bt.var_EB89.enabled = 1;
+  self.bt.var_EB89.var_D895 = undefined;
+  self.bt.var_EB89.var_3D4C = [];
   if(self.unittype == "c12") {
-    self.var_3135.var_EB89.var_71CE = ::func_360A;
+    self.bt.var_EB89.var_71CE = ::func_360A;
   }
 
   if(isDefined(level.var_10E5D)) {
@@ -23,42 +23,42 @@ func_98D2() {
   level.var_10E5E["c12"] = 500;
 }
 
-func_360A(param_00) {
-  switch (param_00.type) {
+func_360A(var_0) {
+  switch (var_0.type) {
     case "seek":
-      param_00.alias = "vox_c12_seeking";
-      param_00.priority = 0.2;
+      var_0.alias = "vox_c12_seeking";
+      var_0.priority = 0.2;
       break;
 
     case "targeting":
-      param_00.alias = "vox_c12_targetting";
-      param_00.priority = 1;
+      var_0.alias = "vox_c12_targetting";
+      var_0.priority = 1;
       break;
 
     case "newenemy":
-      param_00.alias = "vox_c12_threatdetected";
-      param_00.priority = 0.75;
+      var_0.alias = "vox_c12_threatdetected";
+      var_0.priority = 0.75;
       break;
 
     case "engage":
-      param_00.alias = "vox_c12_engaging";
-      param_00.priority = 0.5;
+      var_0.alias = "vox_c12_engaging";
+      var_0.priority = 0.5;
       break;
   }
 }
 
-func_12F2C(param_00) {
-  if(isDefined(self.var_3135.var_F1F8) && self.var_3135.var_F1F8) {
+func_12F2C(var_0) {
+  if(isDefined(self.bt.var_F1F8) && self.bt.var_F1F8) {
     return level.failure;
   }
 
-  if(gettime() < self.var_3135.var_EB89.var_BF75) {
+  if(gettime() < self.bt.var_EB89.var_BF75) {
     return level.failure;
   }
 
   updateenemy();
   if(func_D53D()) {
-    self.var_3135.var_EB89.var_BF75 = gettime() + randomfloatrange(level.var_10E5F[self.unittype], level.var_10E5E[self.unittype]);
+    self.bt.var_EB89.var_BF75 = gettime() + randomfloatrange(level.var_10E5F[self.unittype], level.var_10E5E[self.unittype]);
   }
 
   return level.failure;
@@ -66,36 +66,36 @@ func_12F2C(param_00) {
 
 updateenemy() {
   if(isDefined(self.isnodeoccupied)) {
-    if(!isDefined(self.var_3135.var_EB89.var_D895) || self.var_3135.var_EB89.var_D895 != self.isnodeoccupied) {
+    if(!isDefined(self.bt.var_EB89.var_D895) || self.bt.var_EB89.var_D895 != self.isnodeoccupied) {
       func_17BA("newenemy", self.isnodeoccupied);
-    } else if(gettime() > self.var_3135.var_EB89.var_BFB3["engage"]) {
-      self.var_3135.var_EB89.var_BFB3["engage"] = gettime() + randomfloatrange(1000, 3000);
+    } else if(gettime() > self.bt.var_EB89.var_BFB3["engage"]) {
+      self.bt.var_EB89.var_BFB3["engage"] = gettime() + randomfloatrange(1000, 3000);
       func_17BA("engage", self.isnodeoccupied);
     }
 
-    self.var_3135.var_EB89.var_D895 = self.isnodeoccupied;
+    self.bt.var_EB89.var_D895 = self.isnodeoccupied;
   }
 }
 
-_meth_81C5(param_00) {
-  var_01 = [];
-  foreach(var_03 in param_00) {
-    if(!func_9FA6(var_03)) {
+_meth_81C5(var_0) {
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    if(!func_9FA6(var_3)) {
       continue;
     }
 
-    var_01[var_01.size] = var_03;
+    var_1[var_1.size] = var_3;
   }
 
-  return sortbydistance(var_01, level.player.origin);
+  return sortbydistance(var_1, level.player.origin);
 }
 
-func_9FA6(param_00) {
-  if(distancesquared(level.player.origin, param_00.origin) > 6250000) {
+func_9FA6(var_0) {
+  if(distancesquared(level.player.origin, var_0.origin) > 6250000) {
     return 0;
   }
 
-  if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, param_00.origin, 0)) {
+  if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, 0)) {
     return 0;
   }
 
@@ -115,7 +115,7 @@ func_D53D() {
     return 0;
   }
 
-  if(!self.var_3135.var_EB89.enabled) {
+  if(!self.bt.var_EB89.enabled) {
     return 0;
   }
 
@@ -123,59 +123,59 @@ func_D53D() {
     return 0;
   }
 
-  var_00 = func_7EFD();
-  if(!isDefined(var_00)) {
+  var_0 = func_7EFD();
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  thread func_D53E(var_00);
+  thread func_D53E(var_0);
   return 1;
 }
 
 func_7EFD() {
-  var_00 = -1;
-  var_01 = undefined;
-  foreach(var_03 in self.var_3135.var_EB89.var_3D4C) {
-    if(var_03.priority > var_00) {
-      var_01 = var_03;
-      var_00 = var_03.priority;
+  var_0 = -1;
+  var_1 = undefined;
+  foreach(var_3 in self.bt.var_EB89.var_3D4C) {
+    if(var_3.priority > var_0) {
+      var_1 = var_3;
+      var_0 = var_3.priority;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_17BA(param_00, param_01, param_02) {
-  var_03 = spawnStruct();
-  var_03.alias = undefined;
-  var_03.type = param_00;
-  [[self.var_3135.var_EB89.var_71CE]](var_03);
-  if(!isDefined(var_03.alias)) {
+func_17BA(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.alias = undefined;
+  var_3.type = var_0;
+  [[self.bt.var_EB89.var_71CE]](var_3);
+  if(!isDefined(var_3.alias)) {
     return undefined;
   }
 
-  if(isDefined(param_01)) {
-    var_03.var_117B9 = param_01;
+  if(isDefined(var_1)) {
+    var_3.var_117B9 = var_1;
   }
 
-  if(!isDefined(var_03.priority)) {
-    var_03.priority = 0;
+  if(!isDefined(var_3.priority)) {
+    var_3.priority = 0;
   }
 
   if(!isDefined(self.var_3D4C)) {
-    self.var_3135.var_EB89.var_3D4C = [];
+    self.bt.var_EB89.var_3D4C = [];
   }
 
-  self.var_3135.var_EB89.var_3D4C[param_00] = var_03;
+  self.bt.var_EB89.var_3D4C[var_0] = var_3;
 }
 
-func_D53E(param_00) {
+func_D53E(var_0) {
   self endon("death");
   if(scripts\anim\battlechatter::battlechatter_canprint()) {}
 
-  self.var_3135.var_EB89.var_3D4C[param_00.type] = undefined;
+  self.bt.var_EB89.var_3D4C[var_0.type] = undefined;
   self.var_9F6B = 1;
-  self getyawtoenemy(param_00.alias, param_00.alias, 1);
-  self waittill(param_00.alias);
+  self getyawtoenemy(var_0.alias, var_0.alias, 1);
+  self waittill(var_0.alias);
   self.var_9F6B = 0;
 }

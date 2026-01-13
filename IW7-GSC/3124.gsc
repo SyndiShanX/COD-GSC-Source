@@ -11,33 +11,33 @@ func_4E36() {
   self notify("killanimscript");
 }
 
-func_CF0E(param_00, param_01, param_02, param_03) {
+func_CF0E(var_0, var_1, var_2, var_3) {
   self gib_fx_override("gravity");
   self ghostlaunched("anim deltas");
-  lib_0F3C::func_CEA8(param_00, param_01, param_02);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2);
 }
 
-func_3EE2(param_00, param_01, param_02) {
+func_3EE2(var_0, var_1, var_2) {
   return 0;
 }
 
-func_3ECA(param_00, param_01, param_02) {
+func_3ECA(var_0, var_1, var_2) {
   return 0;
 }
 
-func_3EC6(param_00, param_01, param_02) {
+func_3EC6(var_0, var_1, var_2) {
   return 0;
 }
 
-func_3F00(param_00, param_01, param_02) {
+func_3F00(var_0, var_1, var_2) {
   return 0;
 }
 
-func_3F02(param_00, param_01, param_02) {
+func_3F02(var_0, var_1, var_2) {
   return 0;
 }
 
-func_3F01(param_00, param_01, param_02) {
+func_3F01(var_0, var_1, var_2) {
   return 0;
 }
 
@@ -47,34 +47,34 @@ func_6DB2() {
 
 playdeathfx() {}
 
-play_blood_pool(param_00, param_01) {}
+play_blood_pool(var_0, var_1) {}
 
 func_C703() {}
 
 playdeathsound() {}
 
-func_E166(param_00) {}
+func_E166(var_0) {}
 
-func_41DC(param_00) {}
+func_41DC(var_0) {}
 
-func_FFFA(param_00, param_01, param_02, param_03) {
+func_FFFA(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-isdepot(param_00) {
-  if(param_00 == "deserteagle") {
+isdepot(var_0) {
+  if(var_0 == "deserteagle") {
     return 1;
   }
 
   return 0;
 }
 
-func_9D59(param_00, param_01) {
-  if(!isDefined(param_00)) {
+func_9D59(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(distance(self.origin, param_00.origin) > param_01) {
+  if(distance(self.origin, var_0.origin) > var_1) {
     return 0;
   }
 

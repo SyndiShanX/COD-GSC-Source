@@ -39,29 +39,29 @@ calculateslasherhealth() {
   return 30000;
 }
 
-onslasherdamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  var_0C = param_02;
-  param_02 = min(param_02, 300);
+onslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+  var_0C = var_2;
+  var_2 = min(var_2, 300);
   if(isDefined(self.nodamagescale)) {
-    param_02 = var_0C;
+    var_2 = var_0C;
   }
 
-  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
 }
 
-onslasherkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self detach("weapon_zmb_slasher_vm", "tag_weapon_right");
   self.nocorpse = 1;
   if(isDefined(level.slasher_loot_func)) {
-    self[[level.slasher_loot_func]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+    self[[level.slasher_loot_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  var_09 = 1000;
+  var_9 = 1000;
   foreach(var_0B in level.players) {
     if(var_0B scripts\cp\utility::is_valid_player()) {
-      var_0B scripts\cp\cp_persistence::give_player_currency(var_09);
+      var_0B scripts\cp\cp_persistence::give_player_currency(var_9);
     }
   }
 
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }

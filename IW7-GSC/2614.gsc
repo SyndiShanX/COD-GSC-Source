@@ -3,10 +3,10 @@
  * Script: 2614.gsc
 ***************************************/
 
-func_9707(var_00) {
+func_9707(var_0) {
   precachemodel("test_sphere_silver");
   precachemodel("test_sphere_redchrome");
-  level.func_4F12 = 0;
+  level.var_4F12 = 0;
 }
 
 func_10AA0() {}

@@ -14,10 +14,10 @@ main() {
 }
 
 func_A4DD() {
-  var_00 = [];
-  var_00["traverseAnim"] = func_7814();
+  var_0 = [];
+  var_0["traverseAnim"] = func_7814();
   if(getdvarint("ai_iw7", 0) == 0) {
-    scripts\anim\traverse\shared::func_5AC3(var_00);
+    scripts\anim\traverse\shared::func_5AC3(var_0);
     return;
   }
 

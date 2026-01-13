@@ -60,10 +60,10 @@ func_B3CD() {
 }
 
 func_F7C2() {
-  var_00 = "1.0 1.0 1.0";
-  var_01 = "0.9 0.9 0.9";
-  var_02 = "0.85 0.85 0.85";
-  setsaveddvar("con_typewriterColorBase", var_00);
+  var_0 = "1.0 1.0 1.0";
+  var_1 = "0.9 0.9 0.9";
+  var_2 = "0.85 0.85 0.85";
+  setsaveddvar("con_typewriterColorBase", var_0);
 }
 
 func_579A() {
@@ -75,9 +75,9 @@ func_579A() {
 func_E810() {
   scripts\engine\utility::flag_set("load_finished");
   if(isDefined(level.var_D6D8)) {
-    foreach(var_01 in level.var_D6D8) {
+    foreach(var_1 in level.var_D6D8) {
       [
-        [var_01]
+        [var_1]
       ]();
     }
   }
@@ -89,9 +89,9 @@ func_51C4() {
   if(!scripts\sp\utility::func_93A6()) {
     scripts\sp\utility::func_51D5("helmet_pickup", "script_noteworthy");
     scripts\sp\utility::func_51D5("nanoshot_pickup", "script_noteworthy");
-    var_00 = getEntArray("specialist_mode_only", "targetname");
-    if(isDefined(var_00) && isarray(var_00) && var_00.size > 0) {
-      scripts\sp\utility::func_228A(var_00);
+    var_0 = getEntArray("specialist_mode_only", "targetname");
+    if(isDefined(var_0) && isarray(var_0) && var_0.size > 0) {
+      scripts\sp\utility::func_228A(var_0);
     }
   }
 }

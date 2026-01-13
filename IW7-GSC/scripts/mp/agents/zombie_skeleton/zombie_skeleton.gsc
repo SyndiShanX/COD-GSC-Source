@@ -39,15 +39,15 @@ func_899C() {
   self endon("death");
   level waittill("game_ended");
   self clearpath();
-  foreach(var_04, var_01 in self.var_164D) {
-    var_02 = var_01.var_4BC0;
-    var_03 = level.asm[var_04].states[var_02];
-    scripts\asm\asm::func_2388(var_04, var_02, var_03, var_03.var_116FB);
-    scripts\asm\asm::func_238A(var_04, "idle", 0.2, undefined, undefined, undefined);
+  foreach(var_4, var_1 in self.var_164D) {
+    var_2 = var_1.var_4BC0;
+    var_3 = level.asm[var_4].states[var_2];
+    scripts\asm\asm::func_2388(var_4, var_2, var_3, var_3.var_116FB);
+    scripts\asm\asm::func_238A(var_4, "idle", 0.2, undefined, undefined, undefined);
   }
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   if(isDefined(level.skeleton_model_override)) {
     self setModel(level.skeleton_model_override);
   } else {

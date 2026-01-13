@@ -159,70 +159,70 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_check_move_to_check_idle_exit0(param_00, param_01, param_02, param_03) {
+trans_check_move_to_check_idle_exit0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_in_to_walk_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_walk_in_to_walk_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_out_to_choose_movetype0(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_choose_movetype0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_walk_out_to_move_done4(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_move_done4(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_choose_movetype_to_pass_walk_in0(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_pass_walk_in0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-trans_choose_movetype_to_pass_run_in1(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_pass_run_in1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-trans_choose_movetype_to_pass_sprint_in2(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_pass_sprint_in2(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-trans_check_idle_exit_to_idle_exit_walk0(param_00, param_01, param_02, param_03) {
+trans_check_idle_exit_to_idle_exit_walk0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-trans_check_idle_exit_to_idle_exit_run1(param_00, param_01, param_02, param_03) {
+trans_check_idle_exit_to_idle_exit_run1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-trans_check_idle_exit_to_idle_exit_sprint2(param_00, param_01, param_02, param_03) {
+trans_check_idle_exit_to_idle_exit_sprint2(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-trans_pass_run_in_to_run_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_run_in_to_run_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_out_to_choose_movetype0(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_choose_movetype0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_run_out_to_move_done3(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_move_done3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_in_to_sprint_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_in_to_sprint_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_out_to_choose_movetype0(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_choose_movetype0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_sprint_out_to_move_done3(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_move_done3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_teleport_done_to_revive_player_loop0(param_00, param_01, param_02, param_03) {
+trans_teleport_done_to_revive_player_loop0(var_0, var_1, var_2, var_3) {
   return isDefined(self.teleporttype) && self.teleporttype == "revive_player";
 }

@@ -38,61 +38,61 @@ func_9758() {
   func_DEF0("avoidCloseToBallSpawn", ::func_26B1, ["avoidBallDeadZoneDistSq"]);
 }
 
-func_DEF0(param_00, param_01, param_02) {
+func_DEF0(var_0, var_1, var_2) {
   if(!isDefined(level.spawnglobals.factors)) {
     level.spawnglobals.factors = [];
   }
 
-  var_03 = spawnStruct();
-  level.spawnglobals.factors[param_00] = var_03;
-  var_03.var_74D6 = param_01;
-  var_03.var_C8EF = param_02;
+  var_3 = spawnStruct();
+  level.spawnglobals.factors[var_0] = var_3;
+  var_3.var_74D6 = var_1;
+  var_3.var_C8EF = var_2;
 }
 
-isfactorregistered(param_00) {
-  return isDefined(level.spawnglobals.factors[param_00]);
+isfactorregistered(var_0) {
+  return isDefined(level.spawnglobals.factors[var_0]);
 }
 
-func_7EAF(param_00) {
-  return level.spawnglobals.factors[param_00].var_74D6;
+func_7EAF(var_0) {
+  return level.spawnglobals.factors[var_0].var_74D6;
 }
 
-func_7EB1(param_00) {
-  return level.spawnglobals.factors[param_00].var_C8EF;
+func_7EB1(var_0) {
+  return level.spawnglobals.factors[var_0].var_C8EF;
 }
 
-calculatefactorscore(param_00, param_01, param_02, param_03) {
-  var_04 = func_7EAF(param_01);
-  var_05 = func_7EB1(param_01);
-  if(isDefined(var_05)) {
-    if(!isDefined(param_03)) {}
+calculatefactorscore(var_0, var_1, var_2, var_3) {
+  var_4 = func_7EAF(var_1);
+  var_5 = func_7EB1(var_1);
+  if(isDefined(var_5)) {
+    if(!isDefined(var_3)) {}
 
-    var_0D = [[var_04]](param_00, param_03);
+    var_0D = [[var_4]](var_0, var_3);
   } else {
-    var_0D = [[var_05]](param_01);
+    var_0D = [[var_5]](var_1);
   }
 
   var_0D = clamp(var_0D, 0, 100);
-  var_0D = var_0D * param_02;
-  param_00.var_11A3A = param_00.var_11A3A + 100 * param_02;
-  param_00.var_A9E9[self.team] = param_00.var_A9E9[self.team] + var_0D;
-  param_00.totalscore = param_00.totalscore + var_0D;
+  var_0D = var_0D * var_2;
+  var_0.var_11A3A = var_0.var_11A3A + 100 * var_2;
+  var_0.var_A9E9[self.team] = var_0.var_A9E9[self.team] + var_0D;
+  var_0.totalscore = var_0.totalscore + var_0D;
   return var_0D;
 }
 
-critical_factor(param_00, param_01) {
-  var_02 = [[param_00]](param_01);
-  var_02 = clamp(var_02, 0, 100);
-  return var_02;
+critical_factor(var_0, var_1) {
+  var_2 = [[var_0]](var_1);
+  var_2 = clamp(var_2, 0, 100);
+  return var_2;
 }
 
-avoidcarepackages(param_00) {
-  foreach(var_02 in level.carepackages) {
-    if(!isDefined(var_02)) {
+avoidcarepackages(var_0) {
+  foreach(var_2 in level.carepackages) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_02.origin) < 22500) {
+    if(distancesquared(var_0.origin, var_2.origin) < 22500) {
       return 0;
     }
   }
@@ -100,13 +100,13 @@ avoidcarepackages(param_00) {
   return 100;
 }
 
-func_26B8(param_00) {
-  foreach(var_02 in level.grenades) {
-    if(!isDefined(var_02) || !var_02 isexplosivedangeroustoplayer(self) || scripts\mp\utility::istrue(var_02.shouldnotblockspawns)) {
+func_26B8(var_0) {
+  foreach(var_2 in level.grenades) {
+    if(!isDefined(var_2) || !var_2 isexplosivedangeroustoplayer(self) || scripts\mp\utility::istrue(var_2.shouldnotblockspawns)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_02.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_2.origin) < 122500) {
       return 0;
     }
   }
@@ -114,18 +114,18 @@ func_26B8(param_00) {
   return 100;
 }
 
-func_26BC(param_00) {
-  var_01 = scripts\engine\utility::array_combine(level.mines, level.placedims);
+func_26BC(var_0) {
+  var_1 = scripts\engine\utility::array_combine(level.mines, level.placedims);
   if(isDefined(level.var_126BC) && level.var_126BC.size > 0) {
-    var_01 = scripts\engine\utility::array_combine(var_01, level.var_126BC);
+    var_1 = scripts\engine\utility::array_combine(var_1, level.var_126BC);
   }
 
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_03) || !var_03 isexplosivedangeroustoplayer(self) || scripts\mp\utility::istrue(var_03.shouldnotblockspawns)) {
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3) || !var_3 isexplosivedangeroustoplayer(self) || scripts\mp\utility::istrue(var_3.shouldnotblockspawns)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_03.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_3.origin) < 122500) {
       return 0;
     }
   }
@@ -133,93 +133,93 @@ func_26BC(param_00) {
   return 100;
 }
 
-isexplosivedangeroustoplayer(param_00) {
-  if(!level.teambased || level.friendlyfire || !isDefined(param_00.team)) {
+isexplosivedangeroustoplayer(var_0) {
+  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team)) {
     return 1;
   }
 
-  var_01 = undefined;
+  var_1 = undefined;
   if(isDefined(self.triggerportableradarping)) {
-    if(param_00 == self.triggerportableradarping) {
+    if(var_0 == self.triggerportableradarping) {
       return 1;
     }
 
-    var_01 = self.triggerportableradarping.team;
+    var_1 = self.triggerportableradarping.team;
   }
 
-  if(isDefined(var_01)) {
-    return var_01 != param_00.team;
+  if(isDefined(var_1)) {
+    return var_1 != var_0.team;
   }
 
   return 1;
 }
 
-func_26AB(param_00) {
+func_26AB(var_0) {
   if(!isDefined(level.artillerydangercenters)) {
     return 100;
   }
 
-  if(!param_00.var_C7DA) {
+  if(!var_0.var_C7DA) {
     return 100;
   }
 
-  var_01 = scripts\mp\killstreaks\_airstrike::getairstrikedanger(param_00.origin);
-  if(var_01 > 0) {
+  var_1 = scripts\mp\killstreaks\_airstrike::getairstrikedanger(var_0.origin);
+  if(var_1 > 0) {
     return 0;
   }
 
   return 100;
 }
 
-func_26B3(param_00) {
-  var_01 = "all";
+func_26B3(var_0) {
+  var_1 = "all";
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  if(param_00.var_466B[var_01] > 0) {
+  if(var_0.var_466B[var_1] > 0) {
     return 0;
   }
 
   return 100;
 }
 
-func_26B7(param_00) {
-  var_01 = "all";
+func_26B7(var_0) {
+  var_1 = "all";
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  if(param_00.var_74BC[var_01] > 0) {
+  if(var_0.var_74BC[var_1] > 0) {
     return 0;
   }
 
   return 100;
 }
 
-func_26AE(param_00) {
-  var_01 = [];
-  var_02 = [];
+func_26AE(var_0) {
+  var_1 = [];
+  var_2 = [];
   if(level.teambased) {
-    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
-    var_01[var_01.size] = "all";
+    var_1[var_1.size] = "all";
   }
 
-  foreach(var_04 in var_01) {
-    if(param_00.totalplayers[var_04] == 0) {
+  foreach(var_4 in var_1) {
+    if(var_0.totalplayers[var_4] == 0) {
       continue;
     }
 
-    var_02[var_02.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  if(var_02.size == 0) {
+  if(var_2.size == 0) {
     return 100;
   }
 
-  foreach(var_04 in var_02) {
-    if(param_00.mindistsquared[var_04] < level.var_10680) {
+  foreach(var_4 in var_2) {
+    if(var_0.mindistsquared[var_4] < level.var_10680) {
       return 0;
     }
   }
@@ -227,14 +227,14 @@ func_26AE(param_00) {
   return 100;
 }
 
-func_26C4(param_00) {
+func_26C4(var_0) {
   if(isDefined(self.var_1CAE)) {
     return 100;
   }
 
-  if(positionwouldtelefrag(param_00.origin)) {
-    foreach(var_02 in param_00.alternates) {
-      if(!positionwouldtelefrag(var_02)) {
+  if(positionwouldtelefrag(var_0.origin)) {
+    foreach(var_2 in var_0.alternates) {
+      if(!positionwouldtelefrag(var_2)) {
         return 100;
       }
     }
@@ -245,18 +245,18 @@ func_26C4(param_00) {
   return 100;
 }
 
-avoidsamespawn(param_00) {
-  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == param_00) {
+avoidsamespawn(var_0) {
+  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_0) {
     return 0;
   }
 
   return 100;
 }
 
-func_26B6(param_00) {
-  if(isDefined(param_00.lastspawnteam) && !level.teambased || param_00.lastspawnteam != self.team) {
-    var_01 = param_00.lastspawntime + 500;
-    if(gettime() < var_01) {
+func_26B6(var_0) {
+  if(isDefined(var_0.lastspawnteam) && !level.teambased || var_0.lastspawnteam != self.team) {
+    var_1 = var_0.lastspawntime + 500;
+    if(gettime() < var_1) {
       return 0;
     }
   }
@@ -264,50 +264,50 @@ func_26B6(param_00) {
   return 100;
 }
 
-avoidrecentlyusedbyenemies(param_00) {
-  var_01 = !level.teambased || isDefined(param_00.lastspawnteam) && self.team != param_00.lastspawnteam;
-  if(var_01 && isDefined(param_00.lastspawntime)) {
-    var_02 = gettime() - param_00.lastspawntime;
-    param_00.analytics.spawnusedbyenemies = var_02 / 1000;
-    if(var_02 > 4000) {
+avoidrecentlyusedbyenemies(var_0) {
+  var_1 = !level.teambased || isDefined(var_0.lastspawnteam) && self.team != var_0.lastspawnteam;
+  if(var_1 && isDefined(var_0.lastspawntime)) {
+    var_2 = gettime() - var_0.lastspawntime;
+    var_0.analytics.spawnusedbyenemies = var_2 / 1000;
+    if(var_2 > 4000) {
       return 100;
     }
 
-    return var_02 / 4000 * 100;
+    return var_2 / 4000 * 100;
   }
 
   return 100;
 }
 
-avoidrecentlyusedbyanyone(param_00) {
-  if(isDefined(param_00.lastspawntime)) {
-    var_01 = gettime() - param_00.lastspawntime;
-    param_00.analytics.timesincelastspawn = var_01 / 1000;
-    if(var_01 > 4000) {
+avoidrecentlyusedbyanyone(var_0) {
+  if(isDefined(var_0.lastspawntime)) {
+    var_1 = gettime() - var_0.lastspawntime;
+    var_0.analytics.timesincelastspawn = var_1 / 1000;
+    if(var_1 > 4000) {
       return 100;
     }
 
-    return var_01 / 4000 * 100;
+    return var_1 / 4000 * 100;
   }
 
   return 100;
 }
 
-avoidlastdeathlocation(param_00) {
+avoidlastdeathlocation(var_0) {
   if(!isDefined(self.lastdeathpos)) {
     return 100;
   }
 
-  var_01 = distancesquared(param_00.origin, self.lastdeathpos);
-  if(var_01 > 810000) {
+  var_1 = distancesquared(var_0.origin, self.lastdeathpos);
+  if(var_1 > 810000) {
     return 100;
   }
 
-  var_02 = var_01 / 810000;
-  return var_02 * 100;
+  var_2 = var_1 / 810000;
+  return var_2 * 100;
 }
 
-avoidlastattackerlocation(param_00) {
+avoidlastattackerlocation(var_0) {
   if(!isDefined(self.sethalfresparticles) || !isDefined(self.sethalfresparticles.origin)) {
     return 100;
   }
@@ -316,21 +316,21 @@ avoidlastattackerlocation(param_00) {
     return 100;
   }
 
-  var_01 = distancesquared(param_00.origin, self.sethalfresparticles.origin);
-  if(var_01 > 810000) {
+  var_1 = distancesquared(var_0.origin, self.sethalfresparticles.origin);
+  if(var_1 > 810000) {
     return 100;
   }
 
-  var_02 = var_01 / 810000;
-  return var_02 * 100;
+  var_2 = var_1 / 810000;
+  return var_2 * 100;
 }
 
-updatefrontline(param_00) {
+updatefrontline(var_0) {
   if(!updatefrontlineposition()) {
     return;
   }
 
-  runfrontlinespawntrapchecks(param_00);
+  runfrontlinespawntrapchecks(var_0);
   updatefrontlinedebug();
 }
 
@@ -339,68 +339,68 @@ updatefrontlineposition() {
     return 0;
   }
 
-  var_00 = getglobalfrontlineinfo();
-  var_01 = gettime();
-  if(!isDefined(var_00.lastupdatetime)) {
-    var_00.lastupdatetime = var_01;
-  } else if(var_00.isactive["allies"] && var_00.isactive["axis"]) {
-    var_00.var_12F92 = var_00.var_12F92 + var_00.var_AA37;
+  var_0 = getglobalfrontlineinfo();
+  var_1 = gettime();
+  if(!isDefined(var_0.lastupdatetime)) {
+    var_0.lastupdatetime = var_1;
+  } else if(var_0.isactive["allies"] && var_0.isactive["axis"]) {
+    var_0.var_12F92 = var_0.var_12F92 + var_0.var_AA37;
   } else {
-    var_00.var_5AFE = var_00.var_5AFE + var_00.var_AA37;
+    var_0.var_5AFE = var_0.var_5AFE + var_0.var_AA37;
   }
 
-  var_02 = var_01 - var_00.lastupdatetime / 1000;
-  var_00.lastupdatetime = var_01;
-  var_00.var_AA37 = var_02;
-  var_03 = func_7ECA("allies");
-  if(!isDefined(var_03)) {
+  var_2 = var_1 - var_0.lastupdatetime / 1000;
+  var_0.lastupdatetime = var_1;
+  var_0.var_AA37 = var_2;
+  var_3 = func_7ECA("allies");
+  if(!isDefined(var_3)) {
     return 0;
   }
 
-  var_03 = (var_03[0], var_03[1], 0);
-  var_00.var_1C27 = var_03;
-  var_04 = func_7ECA("axis");
-  if(!isDefined(var_04)) {
+  var_3 = (var_3[0], var_3[1], 0);
+  var_0.var_1C27 = var_3;
+  var_4 = func_7ECA("axis");
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_04 = (var_04[0], var_04[1], 0);
-  var_00.var_26F3 = var_04;
-  var_05 = var_04 - var_03;
-  var_06 = vectortoyaw(var_05);
-  if(!isDefined(var_00.teamdiffyaw) || !var_00.isactive["allies"] || !var_00.isactive["axis"]) {
-    var_00.teamdiffyaw = var_06;
+  var_4 = (var_4[0], var_4[1], 0);
+  var_0.var_26F3 = var_4;
+  var_5 = var_4 - var_3;
+  var_6 = vectortoyaw(var_5);
+  if(!isDefined(var_0.teamdiffyaw) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
+    var_0.teamdiffyaw = var_6;
   }
 
-  var_07 = 80 * var_02;
-  var_08 = var_06 - var_00.teamdiffyaw;
-  if(var_08 > 180) {
-    var_08 = var_08 - 360;
-  } else if(var_08 < -180) {
-    var_08 = 360 + var_08;
+  var_7 = 80 * var_2;
+  var_8 = var_6 - var_0.teamdiffyaw;
+  if(var_8 > 180) {
+    var_8 = var_8 - 360;
+  } else if(var_8 < -180) {
+    var_8 = 360 + var_8;
   }
 
-  var_07 = clamp(var_08, var_07 * -1, var_07);
-  var_00.teamdiffyaw = var_00.teamdiffyaw + var_07;
-  var_09 = var_03 + var_05 * 0.5;
-  if(!isDefined(var_00.midpoint) || !var_00.isactive["allies"] || !var_00.isactive["axis"]) {
-    var_00.midpoint = var_09;
+  var_7 = clamp(var_8, var_7 * -1, var_7);
+  var_0.teamdiffyaw = var_0.teamdiffyaw + var_7;
+  var_9 = var_3 + var_5 * 0.5;
+  if(!isDefined(var_0.midpoint) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
+    var_0.midpoint = var_9;
   }
 
-  var_0A = var_09 - var_00.midpoint;
+  var_0A = var_9 - var_0.midpoint;
   var_0B = length2d(var_0A);
-  var_0C = min(var_0B, 200 * var_02);
+  var_0C = min(var_0B, 200 * var_2);
   if(var_0C > 0) {
     var_0A = var_0A * var_0C / var_0B;
-    var_00.midpoint = var_00.midpoint + var_0A;
+    var_0.midpoint = var_0.midpoint + var_0A;
   }
 
-  var_0D = anglesToForward((0, var_00.teamdiffyaw, 0));
+  var_0D = anglesToForward((0, var_0.teamdiffyaw, 0));
   var_0E = level.spawnpoints;
   var_0E = scripts\mp\spawnscoring::checkdynamicspawns(var_0E);
   foreach(var_10 in var_0E) {
     var_11 = undefined;
-    var_12 = var_00.midpoint - var_10.origin;
+    var_12 = var_0.midpoint - var_10.origin;
     var_13 = vectordot(var_12, var_0D);
     if(var_13 > 0) {
       var_11 = "allies";
@@ -416,111 +416,111 @@ updatefrontlineposition() {
 }
 
 updatefrontlinedebug() {
-  var_00 = isDefined(level.matchrecording_logevent) && isDefined(level.matchrecording_generateid);
-  var_01 = scripts\mp\analyticslog::analyticslogenabled();
-  if(!var_00 && !var_01) {
+  var_0 = isDefined(level.matchrecording_logevent) && isDefined(level.matchrecording_generateid);
+  var_1 = scripts\mp\analyticslog::analyticslogenabled();
+  if(!var_0 && !var_1) {
     return;
   }
 
-  var_02 = getglobalfrontlineinfo();
-  if(!isDefined(var_02.logids) && isDefined(level.matchrecording_generateid)) {
-    var_02.logids = [];
-    var_02.logids["line"] = [[level.matchrecording_generateid]]();
-    var_02.logids["alliesCenter"] = [[level.matchrecording_generateid]]();
-    var_02.logids["axisCenter"] = [[level.matchrecording_generateid]]();
+  var_2 = getglobalfrontlineinfo();
+  if(!isDefined(var_2.logids) && isDefined(level.matchrecording_generateid)) {
+    var_2.logids = [];
+    var_2.logids["line"] = [[level.matchrecording_generateid]]();
+    var_2.logids["alliesCenter"] = [[level.matchrecording_generateid]]();
+    var_2.logids["axisCenter"] = [[level.matchrecording_generateid]]();
   }
 
-  if(!var_02.isactive["allies"] && !var_02.isactive["axis"]) {
+  if(!var_2.isactive["allies"] && !var_2.isactive["axis"]) {
     return;
   }
 
-  var_03 = (var_02.midpoint[0], var_02.midpoint[1], level.mapcenter[2]);
-  var_04 = anglestoright((0, var_02.teamdiffyaw, 0));
-  var_05 = var_03 + var_04 * 5000;
-  var_06 = var_03 - var_04 * 5000;
+  var_3 = (var_2.midpoint[0], var_2.midpoint[1], level.mapcenter[2]);
+  var_4 = anglestoright((0, var_2.teamdiffyaw, 0));
+  var_5 = var_3 + var_4 * 5000;
+  var_6 = var_3 - var_4 * 5000;
   if(isDefined(level.matchrecording_logevent)) {
-    var_07 = undefined;
-    if(var_02.isactive["allies"] && var_02.isactive["axis"]) {
-      var_07 = "FRONT_LINE";
+    var_7 = undefined;
+    if(var_2.isactive["allies"] && var_2.isactive["axis"]) {
+      var_7 = "FRONT_LINE";
     } else {
-      var_07 = scripts\engine\utility::ter_op(var_02.isactive["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
+      var_7 = scripts\engine\utility::ter_op(var_2.isactive["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
     }
 
-    [[level.matchrecording_logevent]](var_02.logids["line"], "allies", var_07, var_05[0], var_05[1], gettime(), undefined, var_06[0], var_06[1]);
+    [[level.matchrecording_logevent]](var_2.logids["line"], "allies", var_7, var_5[0], var_5[1], gettime(), undefined, var_6[0], var_6[1]);
   }
 
-  scripts\mp\analyticslog::logevent_frontlineupdate(var_05, var_06, var_02.var_1C27, var_02.var_26F3, 1);
+  scripts\mp\analyticslog::logevent_frontlineupdate(var_5, var_6, var_2.var_1C27, var_2.var_26F3, 1);
   if(isDefined(level.matchrecording_logevent)) {
-    var_08 = scripts\engine\utility::ter_op(var_02.isactive["axis"], var_02.var_26F3, (10000, 10000, 10000));
-    [[level.matchrecording_logevent]](var_02.logids["axisCenter"], "axis", "ANCHOR", var_08[0], var_08[1], gettime());
-    var_09 = scripts\engine\utility::ter_op(var_02.isactive["allies"], var_02.var_1C27, (10000, 10000, 10000));
-    [[level.matchrecording_logevent]](var_02.logids["alliesCenter"], "allies", "ANCHOR", var_09[0], var_09[1], gettime());
+    var_8 = scripts\engine\utility::ter_op(var_2.isactive["axis"], var_2.var_26F3, (10000, 10000, 10000));
+    [[level.matchrecording_logevent]](var_2.logids["axisCenter"], "axis", "ANCHOR", var_8[0], var_8[1], gettime());
+    var_9 = scripts\engine\utility::ter_op(var_2.isactive["allies"], var_2.var_1C27, (10000, 10000, 10000));
+    [[level.matchrecording_logevent]](var_2.logids["alliesCenter"], "allies", "ANCHOR", var_9[0], var_9[1], gettime());
   }
 }
 
-func_7ECA(param_00) {
-  var_01 = [];
-  foreach(var_03 in level.players) {
-    if(!isDefined(var_03)) {
+func_7ECA(var_0) {
+  var_1 = [];
+  foreach(var_3 in level.players) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isreallyalive(var_03)) {
+    if(!scripts\mp\utility::isreallyalive(var_3)) {
       continue;
     }
 
-    if(var_03.team == param_00) {
-      var_01[var_01.size] = var_03;
+    if(var_3.team == var_0) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  if(var_01.size == 0) {
+  if(var_1.size == 0) {
     return undefined;
   }
 
-  var_05 = scripts\mp\utility::func_7DEA(var_01);
-  return var_05;
+  var_5 = scripts\mp\utility::func_7DEA(var_1);
+  return var_5;
 }
 
-runfrontlinespawntrapchecks(param_00) {
+runfrontlinespawntrapchecks(var_0) {
   if(!func_4BED()) {
     return;
   }
 
-  var_01 = getglobalfrontlineinfo();
-  var_01.isactive[param_00] = 1;
+  var_1 = getglobalfrontlineinfo();
+  var_1.isactive[var_0] = 1;
   if(getdvarint("scr_frontline_trap_checks") == 0) {
     return;
   }
 
-  var_02 = getdvarint("scr_frontline_min_spawns", 0);
-  if(var_02 == 0) {
-    var_02 = 4;
+  var_2 = getdvarint("scr_frontline_min_spawns", 0);
+  if(var_2 == 0) {
+    var_2 = 4;
   }
 
-  var_03 = scripts\mp\utility::getotherteam(param_00);
-  var_04 = 0;
-  var_05 = level.spawnpoints;
-  var_05 = scripts\mp\spawnscoring::checkdynamicspawns(var_05);
-  foreach(var_07 in var_05) {
-    if(!isDefined(var_07.var_7450) || var_07.var_7450 != param_00) {
+  var_3 = scripts\mp\utility::getotherteam(var_0);
+  var_4 = 0;
+  var_5 = level.spawnpoints;
+  var_5 = scripts\mp\spawnscoring::checkdynamicspawns(var_5);
+  foreach(var_7 in var_5) {
+    if(!isDefined(var_7.var_7450) || var_7.var_7450 != var_0) {
       continue;
     }
 
-    if(!isDefined(var_07.var_74BC) || !isDefined(var_07.var_74BC[var_03]) || var_07.var_74BC[var_03] <= 0) {
-      var_04++;
+    if(!isDefined(var_7.var_74BC) || !isDefined(var_7.var_74BC[var_3]) || var_7.var_74BC[var_3] <= 0) {
+      var_4++;
     }
   }
 
-  var_09 = var_04 / var_05.size;
-  if(var_04 < var_02 || var_09 < 0) {
-    if(var_04 < var_02) {
-      var_01.disabledreason[param_00] = 0;
+  var_9 = var_4 / var_5.size;
+  if(var_4 < var_2 || var_9 < 0) {
+    if(var_4 < var_2) {
+      var_1.disabledreason[var_0] = 0;
     } else {
-      var_01.disabledreason[param_00] = 1;
+      var_1.disabledreason[var_0] = 1;
     }
 
-    var_01.isactive[param_00] = 0;
+    var_1.isactive[var_0] = 0;
   }
 }
 
@@ -545,75 +545,75 @@ getglobalfrontlineinfo() {
   return level.var_744D;
 }
 
-preferalliesbydistance(param_00) {
-  if(param_00.totalplayers[self.team] == 0) {
+preferalliesbydistance(var_0) {
+  if(var_0.totalplayers[self.team] == 0) {
     return 0;
   }
 
-  var_01 = param_00.distsumsquared[self.team] / param_00.totalplayers[self.team];
-  var_01 = min(var_01, 3240000);
-  param_00.analytics.allyaveragedist = var_01;
-  var_02 = 1 - var_01 / 3240000;
-  return var_02 * 100;
+  var_1 = var_0.distsumsquared[self.team] / var_0.totalplayers[self.team];
+  var_1 = min(var_1, 3240000);
+  var_0.analytics.allyaveragedist = var_1;
+  var_2 = 1 - var_1 / 3240000;
+  return var_2 * 100;
 }
 
-preferclosetoally(param_00) {
-  var_01 = min(param_00.mindistsquared[self.team], 3240000);
-  var_02 = 1 - var_01 / 3240000;
-  return var_02 * 100;
+preferclosetoally(var_0) {
+  var_1 = min(var_0.mindistsquared[self.team], 3240000);
+  var_2 = 1 - var_1 / 3240000;
+  return var_2 * 100;
 }
 
-func_26B4(param_00) {
-  var_01 = [];
-  var_02 = [];
+func_26B4(var_0) {
+  var_1 = [];
+  var_2 = [];
   if(level.teambased) {
-    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
-    var_01[var_01.size] = "all";
+    var_1[var_1.size] = "all";
   }
 
-  foreach(var_04 in var_01) {
-    if(param_00.totalplayers[var_04] == 0) {
+  foreach(var_4 in var_1) {
+    if(var_0.totalplayers[var_4] == 0) {
       continue;
     }
 
-    var_02[var_02.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  if(var_02.size == 0) {
+  if(var_2.size == 0) {
     return 100;
   }
 
-  foreach(var_04 in var_02) {
-    if(param_00.mindistsquared[var_04] < 250000) {
+  foreach(var_4 in var_2) {
+    if(var_0.mindistsquared[var_4] < 250000) {
       return 0;
     }
   }
 
-  var_08 = 0;
-  var_09 = 0;
-  foreach(var_04 in var_02) {
-    var_08 = var_08 + param_00.distsumsquaredcapped[var_04];
-    var_09 = var_09 + param_00.totalplayers[var_04];
+  var_8 = 0;
+  var_9 = 0;
+  foreach(var_4 in var_2) {
+    var_8 = var_8 + var_0.distsumsquaredcapped[var_4];
+    var_9 = var_9 + var_0.totalplayers[var_4];
   }
 
-  var_0C = var_08 / var_09;
+  var_0C = var_8 / var_9;
   var_0C = min(var_0C, 7290000);
   var_0D = var_0C / 7290000;
-  param_00.analytics.enemyaveragedist = var_0C;
+  var_0.analytics.enemyaveragedist = var_0C;
   return var_0D * 100;
 }
 
-func_26B5(param_00) {
-  var_01 = undefined;
+func_26B5(var_0) {
+  var_1 = undefined;
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
-    var_01 = "all";
+    var_1 = "all";
   }
 
-  foreach(var_03 in param_00.var_5721[var_01]) {
-    if(var_03 < level.var_656F) {
+  foreach(var_3 in var_0.var_5721[var_1]) {
+    if(var_3 < level.var_656F) {
       return 0;
     }
   }
@@ -621,99 +621,99 @@ func_26B5(param_00) {
   return 100;
 }
 
-func_26AF(param_00) {
-  var_01 = [];
-  var_02 = [];
+func_26AF(var_0) {
+  var_1 = [];
+  var_2 = [];
   if(level.teambased) {
-    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
-    var_01[var_01.size] = "all";
+    var_1[var_1.size] = "all";
   }
 
-  foreach(var_04 in var_01) {
-    if(param_00.totalplayers[var_04] == 0) {
+  foreach(var_4 in var_1) {
+    if(var_0.totalplayers[var_4] == 0) {
       continue;
     }
 
-    var_02[var_02.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  if(var_02.size == 0) {
+  if(var_2.size == 0) {
     return 100;
   }
 
-  var_06 = 0;
-  foreach(var_04 in var_02) {
-    if(param_00.mindistsquared[var_04] < 250000) {
+  var_6 = 0;
+  foreach(var_4 in var_2) {
+    if(var_0.mindistsquared[var_4] < 250000) {
       return 0;
     }
 
-    var_08 = min(param_00.mindistsquared[var_04], 3240000);
-    var_09 = var_08 / 3240000;
-    var_06 = var_06 + var_09 * 100;
+    var_8 = min(var_0.mindistsquared[var_4], 3240000);
+    var_9 = var_8 / 3240000;
+    var_6 = var_6 + var_9 * 100;
   }
 
-  return var_06 / var_02.size;
+  return var_6 / var_2.size;
 }
 
-avoidclosestenemybydistance(param_00, param_01) {
-  var_02 = param_01["closestEnemyInfluenceDistSq"];
-  var_03 = "all";
+avoidclosestenemybydistance(var_0, var_1) {
+  var_2 = var_1["closestEnemyInfluenceDistSq"];
+  var_3 = "all";
   if(level.teambased) {
-    var_03 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_3 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  if(param_00.mindistsquared[var_03] < 250000) {
+  if(var_0.mindistsquared[var_3] < 250000) {
     return 0;
   }
 
-  var_04 = min(param_00.mindistsquared[var_03], var_02);
-  var_05 = var_04 / var_02;
-  return var_05 * 100;
+  var_4 = min(var_0.mindistsquared[var_3], var_2);
+  var_5 = var_4 / var_2;
+  return var_5 * 100;
 }
 
-scoreeventalwaysshowassplash(param_00) {
-  var_01 = undefined;
-  foreach(var_03 in level.domflags) {
-    if(isDefined(var_03.dompointnumber) && var_03.dompointnumber == param_00) {
-      var_01 = var_03;
+scoreeventalwaysshowassplash(var_0) {
+  var_1 = undefined;
+  foreach(var_3 in level.domflags) {
+    if(isDefined(var_3.dompointnumber) && var_3.dompointnumber == var_0) {
+      var_1 = var_3;
       break;
     }
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return 100;
   }
 
-  var_05 = var_01 scripts\mp\gameobjects::func_7E29();
-  if(var_05 == "none") {
+  var_5 = var_1 scripts\mp\gameobjects::func_7E29();
+  if(var_5 == "none") {
     return 100;
   }
 
   return 50;
 }
 
-func_D82E(param_00, param_01) {
-  var_02 = param_01["preferredDomPoints"];
-  if(var_02[0] && param_00.dompointa) {
+func_D82E(var_0, var_1) {
+  var_2 = var_1["preferredDomPoints"];
+  if(var_2[0] && var_0.dompointa) {
     return scoreeventalwaysshowassplash(0);
   }
 
-  if(var_02[1] && param_00.dompointb) {
+  if(var_2[1] && var_0.dompointb) {
     return scoreeventalwaysshowassplash(1);
   }
 
-  if(var_02[2] && param_00.dompointc) {
+  if(var_2[2] && var_0.dompointc) {
     return scoreeventalwaysshowassplash(2);
   }
 
   return 0;
 }
 
-func_D82B(param_00, param_01) {
-  var_02 = param_01["closestPoints"];
-  foreach(var_04 in var_02) {
-    if(param_00 == var_04) {
+func_D82B(var_0, var_1) {
+  var_2 = var_1["closestPoints"];
+  foreach(var_4 in var_2) {
+    if(var_0 == var_4) {
       return 100;
     }
   }
@@ -721,118 +721,118 @@ func_D82B(param_00, param_01) {
   return 0;
 }
 
-preferbyteambase(param_00, param_01) {
-  if(isDefined(param_00.teambase) && param_00.teambase == param_01) {
+preferbyteambase(var_0, var_1) {
+  if(isDefined(var_0.teambase) && var_0.teambase == var_1) {
     return 100;
   }
 
   return 0;
 }
 
-func_26C2(param_00) {
-  var_01 = "all";
+func_26C2(var_0) {
+  var_1 = "all";
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  var_02 = scripts\engine\utility::ter_op(isDefined(param_00.var_B4C4) && isDefined(param_00.var_B4C4[var_01]), 1 - param_00.var_B4C4[var_01], 0);
-  param_00.analytics.maxenemysightfraction = var_02;
-  return 1 - var_02 * 0 + var_02 * 100;
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.var_B4C4) && isDefined(var_0.var_B4C4[var_1]), 1 - var_0.var_B4C4[var_1], 0);
+  var_0.analytics.maxenemysightfraction = var_2;
+  return 1 - var_2 * 0 + var_2 * 100;
 }
 
-func_26C3(param_00) {
-  var_01 = "all";
+func_26C3(var_0) {
+  var_1 = "all";
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  var_02 = scripts\engine\utility::ter_op(isDefined(param_00.var_B4A6) && isDefined(param_00.var_B4A6[var_01]), 1 - param_00.var_B4A6[var_01], 0);
-  param_00.analytics.maxjumpingenemysightfraction = var_02;
-  return 1 - var_02 * 0 + var_02 * 100;
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.var_B4A6) && isDefined(var_0.var_B4A6[var_1]), 1 - var_0.var_B4A6[var_1], 0);
+  var_0.analytics.maxjumpingenemysightfraction = var_2;
+  return 1 - var_2 * 0 + var_2 * 100;
 }
 
-func_26C5(param_00) {
-  var_01 = "all";
+func_26C5(var_0) {
+  var_1 = "all";
   if(level.teambased) {
-    var_01 = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1 = scripts\mp\gameobjects::getenemyteam(self.team);
   }
 
-  var_02 = scripts\engine\utility::ter_op(isDefined(param_00.var_B4A6) && isDefined(param_00.var_B4A6[var_01]), 1 - param_00.var_B4A6[var_01], 0);
-  var_03 = var_02 * scripts\mp\spawnlogic::getmaxdistancetolos();
-  if(var_03 < 300) {
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.var_B4A6) && isDefined(var_0.var_B4A6[var_1]), 1 - var_0.var_B4A6[var_1], 0);
+  var_3 = var_2 * scripts\mp\spawnlogic::getmaxdistancetolos();
+  if(var_3 < 300) {
     return 0;
   }
 
   return 100;
 }
 
-randomspawnscore(param_00) {
-  param_00.analytics.randomscore = randomintrange(0, 99);
-  return param_00.analytics.randomscore;
+randomspawnscore(var_0) {
+  var_0.analytics.randomscore = randomintrange(0, 99);
+  return var_0.analytics.randomscore;
 }
 
-maxplayerspawninfluencedistsquared(param_00) {
+maxplayerspawninfluencedistsquared(var_0) {
   return 3240000;
 }
 
-func_D837(param_00, param_01) {
-  var_02 = param_01["activeKOTHZoneNumber"];
-  var_03 = param_00.distsqtokothzones[var_02];
-  var_04 = param_01["maxSquaredDistToObjective"];
-  var_05 = 1 - var_03 / var_04;
-  return 100 * var_05 + 0;
+func_D837(var_0, var_1) {
+  var_2 = var_1["activeKOTHZoneNumber"];
+  var_3 = var_0.distsqtokothzones[var_2];
+  var_4 = var_1["maxSquaredDistToObjective"];
+  var_5 = 1 - var_3 / var_4;
+  return 100 * var_5 + 0;
 }
 
-func_26B2(param_00, param_01) {
-  var_02 = param_01["activeKOTHZoneNumber"];
-  var_03 = param_00.distsqtokothzones[var_02];
-  var_04 = param_01["kothZoneDeadzoneDistSq"];
-  return scripts\engine\utility::ter_op(var_03 < var_04, 0, 100);
+func_26B2(var_0, var_1) {
+  var_2 = var_1["activeKOTHZoneNumber"];
+  var_3 = var_0.distsqtokothzones[var_2];
+  var_4 = var_1["kothZoneDeadzoneDistSq"];
+  return scripts\engine\utility::ter_op(var_3 < var_4, 0, 100);
 }
 
-func_D82C(param_00, param_01) {
-  var_02 = param_01["homeBaseTeam"];
-  var_03 = param_00.disttohomebase[var_02];
-  var_04 = param_01["maxDistToHomeBase"];
-  var_05 = var_03 * var_03;
-  var_06 = var_04 * var_04;
-  var_07 = 1 - var_05 / var_06;
-  return 100 * var_07 + 0;
+func_D82C(var_0, var_1) {
+  var_2 = var_1["homeBaseTeam"];
+  var_3 = var_0.disttohomebase[var_2];
+  var_4 = var_1["maxDistToHomeBase"];
+  var_5 = var_3 * var_3;
+  var_6 = var_4 * var_4;
+  var_7 = 1 - var_5 / var_6;
+  return 100 * var_7 + 0;
 }
 
-func_26B0(param_00, param_01) {
-  var_02 = undefined;
-  var_03 = param_01["activeCarrierPosition"];
-  var_04 = param_01["ballPosition"];
-  var_05 = param_01["avoidBallDeadZoneDistSq"];
-  if(isDefined(var_03)) {
-    var_02 = var_03;
-  } else if(isDefined(var_04)) {
-    var_02 = var_04;
+func_26B0(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = var_1["activeCarrierPosition"];
+  var_4 = var_1["ballPosition"];
+  var_5 = var_1["avoidBallDeadZoneDistSq"];
+  if(isDefined(var_3)) {
+    var_2 = var_3;
+  } else if(isDefined(var_4)) {
+    var_2 = var_4;
   }
 
-  if(isDefined(var_02)) {
-    var_06 = distancesquared(var_02, param_00.origin);
-    return scripts\engine\utility::ter_op(var_06 < var_05, 0, 100);
+  if(isDefined(var_2)) {
+    var_6 = distancesquared(var_2, var_0.origin);
+    return scripts\engine\utility::ter_op(var_6 < var_5, 0, 100);
   }
 
   return 100;
 }
 
-func_26B1(param_00, param_01) {
-  var_02 = param_00.distsqtoballstart;
-  var_03 = param_01["avoidBallDeadZoneDistSq"];
-  return scripts\engine\utility::ter_op(var_02 < var_03, 0, 100);
+func_26B1(var_0, var_1) {
+  var_2 = var_0.distsqtoballstart;
+  var_3 = var_1["avoidBallDeadZoneDistSq"];
+  return scripts\engine\utility::ter_op(var_2 < var_3, 0, 100);
 }
 
-prefernearlastteamspawn(param_00) {
-  var_01 = level.spawnglobals.lastteamspawnpoints[self.team];
-  if(!isDefined(var_01)) {
+prefernearlastteamspawn(var_0) {
+  var_1 = level.spawnglobals.lastteamspawnpoints[self.team];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var_02 = distancesquared(var_01.origin, param_00.origin);
-  var_02 = int(min(var_02, 9000000));
-  var_03 = 1 - var_02 / 9000000;
-  return 100 * var_03 + 0;
+  var_2 = distancesquared(var_1.origin, var_0.origin);
+  var_2 = int(min(var_2, 9000000));
+  var_3 = 1 - var_2 / 9000000;
+  return 100 * var_3 + 0;
 }

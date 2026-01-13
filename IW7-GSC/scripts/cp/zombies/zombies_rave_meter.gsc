@@ -4,33 +4,33 @@
  * Script: scripts\cp\zombies\zombies_rave_meter.gsc
 *****************************************************/
 
-init_rave_meter(param_00) {
-  param_00.rave_meter_adustment = 0;
+init_rave_meter(var_0) {
+  var_0.rave_meter_adustment = 0;
 }
 
-rave_meter_on(param_00) {
-  param_00 setclientomnvar("zm_ui_show_general", 1);
-  param_00 thread clean_up_rave_meter_on_last_stand(param_00);
-  param_00 thread clean_up_rave_meter_on_death();
-  param_00 rave_drain_time(600);
+rave_meter_on(var_0) {
+  var_0 setclientomnvar("zm_ui_show_general", 1);
+  var_0 thread clean_up_rave_meter_on_last_stand(var_0);
+  var_0 thread clean_up_rave_meter_on_death();
+  var_0 rave_drain_time(600);
 }
 
-rave_meter_off(param_00) {
-  param_00 setclientomnvar("zm_ui_show_general", 0);
-  param_00 setclientomnvar("zom_general_fill_percent", 0);
-  param_00 notify("rave_mode_exited");
+rave_meter_off(var_0) {
+  var_0 setclientomnvar("zm_ui_show_general", 0);
+  var_0 setclientomnvar("zom_general_fill_percent", 0);
+  var_0 notify("rave_mode_exited");
 }
 
-clean_up_rave_meter_on_last_stand(param_00) {
+clean_up_rave_meter_on_last_stand(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("rave_mode_exited");
+  var_0 endon("disconnect");
+  var_0 endon("rave_mode_exited");
   for(;;) {
-    param_00 waittill("last_stand");
-    if(scripts\engine\utility::istrue(param_00.unlimited_rave)) {
+    var_0 waittill("last_stand");
+    if(scripts\engine\utility::istrue(var_0.unlimited_rave)) {
       continue;
     } else {
-      param_00 rave_meter_off(param_00);
+      var_0 rave_meter_off(var_0);
     }
   }
 }
@@ -44,14 +44,14 @@ clean_up_rave_meter_on_death() {
   scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(self);
 }
 
-rave_drain_time(param_00) {
+rave_drain_time(var_0) {
   self endon("disconnect");
   self endon("rave_mode_exited");
   level endon("game_ended");
   thread watchforearlyraveexit();
-  var_01 = 1000;
-  var_02 = var_01 / 1000;
-  var_03 = var_01 / param_00;
+  var_1 = 1000;
+  var_2 = var_1 / 1000;
+  var_3 = var_1 / var_0;
   for(;;) {
     if(!scripts\engine\utility::istrue(self.spectating) && !scripts\engine\utility::istrue(self.inlaststand)) {
       if(scripts\engine\utility::istrue(self.rave_mode_od)) {
@@ -59,27 +59,27 @@ rave_drain_time(param_00) {
       }
 
       if(!scripts\engine\utility::istrue(self.unlimited_rave)) {
-        var_01 = var_01 - var_03 + self.rave_meter_adustment;
+        var_1 = var_1 - var_3 + self.rave_meter_adustment;
         self setclientomnvar("zm_ui_general_two", 0);
       } else {
         self setclientomnvar("zm_ui_general_two", 1);
       }
 
-      if(var_01 > 1000) {
-        var_01 = 1000;
-      } else if(var_01 <= 0) {
-        var_01 = 0;
+      if(var_1 > 1000) {
+        var_1 = 1000;
+      } else if(var_1 <= 0) {
+        var_1 = 0;
       }
 
       self.rave_meter_adustment = 0;
-      var_02 = var_01 / 1000;
-      if(var_02 > 1) {
-        var_02 = 1;
+      var_2 = var_1 / 1000;
+      if(var_2 > 1) {
+        var_2 = 1;
       }
 
-      var_04 = 1 - var_02;
-      self setclientomnvar("zom_general_fill_percent", var_04);
-      if(var_02 <= 0) {
+      var_4 = 1 - var_2;
+      self setclientomnvar("zom_general_fill_percent", var_4);
+      if(var_2 <= 0) {
         self setclientomnvar("zom_general_fill_percent", 0);
         scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(self);
         break;

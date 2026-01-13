@@ -229,26 +229,26 @@ register_interactions() {
   }
 }
 
-give_player_cryobomb(param_00, param_01) {
-  param_01 scripts\cp\powers\coop_powers::givepower("power_cryobomb", "primary", undefined, undefined, 0, 1);
-  thread scripts\cp\zombies\interaction_small_ticket_counter::deactivate_ticket_counter_slot(param_00, param_01);
+give_player_cryobomb(var_0, var_1) {
+  var_1 scripts\cp\powers\coop_powers::givepower("power_cryobomb", "primary", undefined, undefined, 0, 1);
+  thread scripts\cp\zombies\interaction_small_ticket_counter::deactivate_ticket_counter_slot(var_0, var_1);
 }
 
 init_cryobomb() {
-  var_00 = scripts\engine\utility::getstruct("zfreeze_semtex_mp", "script_noteworthy");
-  var_00.randomintrange = var_00.trigger;
-  var_00.randomintrange.hint_string = level.interaction_hintstrings["zfreeze_semtex_mp"];
+  var_0 = scripts\engine\utility::getstruct("zfreeze_semtex_mp", "script_noteworthy");
+  var_0.randomintrange = var_0.trigger;
+  var_0.randomintrange.hint_string = level.interaction_hintstrings["zfreeze_semtex_mp"];
 }
 
 init_cryobomb() {
-  var_00 = scripts\engine\utility::getstruct("iw7_forgefreeze_zm+forgefreezealtfire", "script_noteworthy");
-  var_00.randomintrange = var_00.trigger;
-  var_00.randomintrange.hint_string = level.interaction_hintstrings["iw7_forgefreeze_zm"];
+  var_0 = scripts\engine\utility::getstruct("iw7_forgefreeze_zm+forgefreezealtfire", "script_noteworthy");
+  var_0.randomintrange = var_0.trigger;
+  var_0.randomintrange.hint_string = level.interaction_hintstrings["iw7_forgefreeze_zm"];
 }
 
-interact_spaceland_tutorial(param_00, param_01) {
-  param_01 thread scripts\cp\cp_hud_message::tutorial_interaction();
-  param_01 setclientomnvar("zm_tutorial_num", -1);
+interact_spaceland_tutorial(var_0, var_1) {
+  var_1 thread scripts\cp\cp_hud_message::tutorial_interaction();
+  var_1 setclientomnvar("zm_tutorial_num", -1);
 }
 
 init_spaceland_tutorial() {
@@ -256,18 +256,18 @@ init_spaceland_tutorial() {
   level.tutorial_interaction_2 = spawn_tutorial_interaction((688, 3203, 0));
 }
 
-spawn_tutorial_interaction(param_00) {
-  var_01 = spawnStruct();
-  var_01.script_noteworthy = "tutorial";
-  var_01.origin = param_00;
-  var_01.requires_power = 0;
-  var_01.powered_on = 1;
-  var_01.script_parameters = "tutorial";
-  var_01.name = "tutorial";
-  var_01.spend_type = "quest";
-  var_01.var_336 = "interaction";
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
-  return var_01;
+spawn_tutorial_interaction(var_0) {
+  var_1 = spawnStruct();
+  var_1.script_noteworthy = "tutorial";
+  var_1.origin = var_0;
+  var_1.requires_power = 0;
+  var_1.powered_on = 1;
+  var_1.script_parameters = "tutorial";
+  var_1.name = "tutorial";
+  var_1.spend_type = "quest";
+  var_1.var_336 = "interaction";
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+  return var_1;
 }
 
 zmb_player_interaction_monitor() {
@@ -275,23 +275,23 @@ zmb_player_interaction_monitor() {
   self endon("player_interaction_monitor");
   self endon("disconnect");
   self endon("death");
-  var_00 = 5184;
-  var_01 = 9216;
-  var_02 = 2304;
+  var_0 = 5184;
+  var_1 = 9216;
+  var_2 = 2304;
   for(;;) {
     if(isDefined(level.interactions_disabled)) {
       wait(1);
       continue;
     }
 
-    var_04 = undefined;
+    var_4 = undefined;
     level.current_interaction_structs = scripts\engine\utility::array_removeundefined(level.current_interaction_structs);
-    var_05 = sortbydistance(level.current_interaction_structs, self.origin);
-    foreach(var_07 in self.disabled_interactions) {
-      var_05 = scripts\engine\utility::array_remove(var_05, var_07);
+    var_5 = sortbydistance(level.current_interaction_structs, self.origin);
+    foreach(var_7 in self.disabled_interactions) {
+      var_5 = scripts\engine\utility::array_remove(var_5, var_7);
     }
 
-    if(var_05.size == 0) {
+    if(var_5.size == 0) {
       wait(0.1);
       continue;
     }
@@ -301,33 +301,33 @@ zmb_player_interaction_monitor() {
       continue;
     }
 
-    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_05[0]) && distancesquared(var_05[0].origin, self.origin) < var_02) {
-      var_04 = var_05[0];
+    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_5[0]) && distancesquared(var_5[0].origin, self.origin) < var_2) {
+      var_4 = var_5[0];
     }
 
-    if(!isDefined(var_04) && !scripts\cp\cp_interaction::interaction_is_window_entrance(var_05[0]) && distancesquared(var_05[0].origin, self.origin) <= var_00) {
-      var_04 = var_05[0];
+    if(!isDefined(var_4) && !scripts\cp\cp_interaction::interaction_is_window_entrance(var_5[0]) && distancesquared(var_5[0].origin, self.origin) <= var_0) {
+      var_4 = var_5[0];
     }
 
-    if(isDefined(var_04) && scripts\cp\cp_interaction::interaction_is_door_buy(var_04) || scripts\cp\cp_interaction::interaction_is_chi_door(var_04) && !scripts\cp\cp_interaction::interaction_is_special_door_buy(var_04)) {
-      var_04 = undefined;
+    if(isDefined(var_4) && scripts\cp\cp_interaction::interaction_is_door_buy(var_4) || scripts\cp\cp_interaction::interaction_is_chi_door(var_4) && !scripts\cp\cp_interaction::interaction_is_special_door_buy(var_4)) {
+      var_4 = undefined;
     }
 
-    if(!isDefined(var_04) && isDefined(level.should_allow_far_search_dist_func)) {
-      if(distancesquared(var_05[0].origin, self.origin) <= var_01) {
-        var_04 = var_05[0];
+    if(!isDefined(var_4) && isDefined(level.should_allow_far_search_dist_func)) {
+      if(distancesquared(var_5[0].origin, self.origin) <= var_1) {
+        var_4 = var_5[0];
       }
 
-      if(isDefined(var_04) && ![[level.should_allow_far_search_dist_func]](var_04)) {
-        var_04 = undefined;
+      if(isDefined(var_4) && ![[level.should_allow_far_search_dist_func]](var_4)) {
+        var_4 = undefined;
       }
-    } else if(!isDefined(var_04) && isDefined(var_05[0].custom_search_dist)) {
-      if(distance(var_05[0].origin, self.origin) <= var_05[0].custom_search_dist) {
-        var_04 = var_05[0];
+    } else if(!isDefined(var_4) && isDefined(var_5[0].custom_search_dist)) {
+      if(distance(var_5[0].origin, self.origin) <= var_5[0].custom_search_dist) {
+        var_4 = var_5[0];
       }
     }
 
-    if(!scripts\cp\cp_interaction::can_use_interaction(var_04)) {
+    if(!scripts\cp\cp_interaction::can_use_interaction(var_4)) {
       scripts\cp\cp_interaction::reset_interaction();
       if(isDefined(self.ticket_item_outlined)) {
         self.ticket_item_outlined hudoutlinedisableforclient(self);
@@ -337,17 +337,17 @@ zmb_player_interaction_monitor() {
       continue;
     }
 
-    if(!scripts\cp\cp_interaction::interaction_is_ticket_buy(var_04)) {
+    if(!scripts\cp\cp_interaction::interaction_is_ticket_buy(var_4)) {
       if(isDefined(self.ticket_item_outlined)) {
         self.ticket_item_outlined hudoutlinedisableforclient(self);
         self.ticket_item_outlined = undefined;
       }
     }
 
-    if(scripts\cp\cp_interaction::interaction_is_ark_quest_station(var_04) && !isDefined(var_04.crystals) || isDefined(var_04.crystals) && var_04.crystals.size < 1) {
+    if(scripts\cp\cp_interaction::interaction_is_ark_quest_station(var_4) && !isDefined(var_4.crystals) || isDefined(var_4.crystals) && var_4.crystals.size < 1) {
       scripts\cp\cp_interaction::reset_interaction();
       continue;
-    } else if(scripts\cp\cp_interaction::interaction_is_white_ark(var_04)) {
+    } else if(scripts\cp\cp_interaction::interaction_is_white_ark(var_4)) {
       if(!scripts\cp\cp_weapon::can_use_attachment("arkpink", self getcurrentweapon())) {
         scripts\cp\cp_interaction::reset_interaction();
         continue;
@@ -357,23 +357,23 @@ zmb_player_interaction_monitor() {
       }
     }
 
-    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_04)) {
-      var_09 = scripts\cp\utility::get_closest_entrance(var_04.origin);
-      if(!isDefined(var_09)) {
+    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_4)) {
+      var_9 = scripts\cp\utility::get_closest_entrance(var_4.origin);
+      if(!isDefined(var_9)) {
         self.last_interaction_point = undefined;
         wait(0.05);
         continue;
       }
 
-      if(scripts\cp\utility::entrance_is_fully_repaired(var_09)) {
+      if(scripts\cp\utility::entrance_is_fully_repaired(var_9)) {
         scripts\cp\cp_interaction::reset_interaction();
         if(isDefined(self.current_crafted_inventory) && self.current_crafted_inventory.randomintrange == "crafted_windowtrap") {
-          if(!isDefined(var_04.has_trap)) {
+          if(!isDefined(var_4.has_trap)) {
             thread scripts\cp\cp_interaction::flash_inventory();
           }
         }
 
-        self.last_interaction_point = var_04;
+        self.last_interaction_point = var_4;
         continue;
       } else {
         self notify("stop_interaction_logic");
@@ -381,214 +381,214 @@ zmb_player_interaction_monitor() {
       }
 
       if(isDefined(self.current_crafted_inventory) && self.current_crafted_inventory.randomintrange == "crafted_windowtrap") {
-        if(!isDefined(var_04.has_trap)) {
+        if(!isDefined(var_4.has_trap)) {
           thread scripts\cp\cp_interaction::flash_inventory();
         }
       }
     }
 
     if(!isDefined(self.last_interaction_point)) {
-      scripts\cp\cp_interaction::set_interaction_point(var_04);
-    } else if(self.last_interaction_point == var_04 && scripts\cp\cp_interaction::interaction_is_weapon_buy(var_04) && !scripts\engine\utility::istrue(self.delay_hint)) {
-      scripts\cp\cp_interaction::set_interaction_point(var_04, 0);
-    } else if(self.last_interaction_point != var_04) {
-      scripts\cp\cp_interaction::set_interaction_point(var_04);
+      scripts\cp\cp_interaction::set_interaction_point(var_4);
+    } else if(self.last_interaction_point == var_4 && scripts\cp\cp_interaction::interaction_is_weapon_buy(var_4) && !scripts\engine\utility::istrue(self.delay_hint)) {
+      scripts\cp\cp_interaction::set_interaction_point(var_4, 0);
+    } else if(self.last_interaction_point != var_4) {
+      scripts\cp\cp_interaction::set_interaction_point(var_4);
     }
 
     wait(0.05);
   }
 }
 
-zmb_wait_for_interaction_triggered(param_00) {
+zmb_wait_for_interaction_triggered(var_0) {
   self notify("interaction_logic_started");
   self endon("interaction_logic_started");
   self endon("stop_interaction_logic");
   self endon("disconnect");
   for(;;) {
-    self.interaction_trigger waittill("trigger", var_01);
-    if(var_01 isinphase()) {
+    self.interaction_trigger waittill("trigger", var_1);
+    if(var_1 isinphase()) {
       continue;
     }
 
-    if(!scripts\cp\cp_interaction::interaction_is_valid(param_00, var_01)) {
+    if(!scripts\cp\cp_interaction::interaction_is_valid(var_0, var_1)) {
       wait(0.1);
       continue;
     }
 
-    param_00.triggered = 1;
-    param_00 thread scripts\cp\cp_interaction::delayed_trigger_unset();
-    if(isDefined(param_00.available_ingredient_slots)) {
-      if(param_00.available_ingredient_slots > 0) {
-        if(!isDefined(var_01.current_crafting_struct)) {
-          var_01 thread scripts\cp\cp_vo::try_to_play_vo("no_souvenir_coin", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
+    var_0.triggered = 1;
+    var_0 thread scripts\cp\cp_interaction::delayed_trigger_unset();
+    if(isDefined(var_0.available_ingredient_slots)) {
+      if(var_0.available_ingredient_slots > 0) {
+        if(!isDefined(var_1.current_crafting_struct)) {
+          var_1 thread scripts\cp\cp_vo::try_to_play_vo("no_souvenir_coin", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
         }
       }
     }
 
-    var_02 = level.interactions[param_00.script_noteworthy].cost;
-    if(!isDefined(level.interactions[param_00.script_noteworthy].spend_type)) {
-      level.interactions[param_00.script_noteworthy].spend_type = "null";
+    var_2 = level.interactions[var_0.script_noteworthy].cost;
+    if(!isDefined(level.interactions[var_0.script_noteworthy].spend_type)) {
+      level.interactions[var_0.script_noteworthy].spend_type = "null";
     }
 
-    if(isDefined(level.interactions[param_00.script_noteworthy].can_use_override_func)) {
-      if(![[level.interactions[param_00.script_noteworthy].can_use_override_func]](param_00, var_01)) {
+    if(isDefined(level.interactions[var_0.script_noteworthy].can_use_override_func)) {
+      if(![[level.interactions[var_0.script_noteworthy].can_use_override_func]](var_0, var_1)) {
         wait(0.1);
         continue;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_souvenir(param_00) && scripts\cp\cp_interaction::player_has_souvenir(param_00, self)) {
-      scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
+    } else if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0) && scripts\cp\cp_interaction::player_has_souvenir(var_0, self)) {
+      scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_ALREADY_HAVE");
       wait(0.1);
       continue;
-    } else if(param_00.script_noteworthy == "dj_quest_speaker") {
-      var_03 = self canplayerplacesentry(1, 24);
-      if(!self isonground() || !var_03["result"] || abs(param_00.origin[2] - self.origin[2]) > 24) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
+    } else if(var_0.script_noteworthy == "dj_quest_speaker") {
+      var_3 = self canplayerplacesentry(1, 24);
+      if(!self isonground() || !var_3["result"] || abs(var_0.origin[2] - self.origin[2]) > 24) {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
         wait(0.1);
         continue;
       }
-    } else if(param_00.script_noteworthy == "lost_and_found") {
+    } else if(var_0.script_noteworthy == "lost_and_found") {
       if(!scripts\engine\utility::istrue(self.have_things_in_lost_and_found)) {
         wait(0.1);
         continue;
       }
 
-      if(isDefined(self.lost_and_found_spot) && self.lost_and_found_spot != param_00) {
+      if(isDefined(self.lost_and_found_spot) && self.lost_and_found_spot != var_0) {
         wait(0.1);
         continue;
       }
 
       if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
-        var_02 = 0;
+        var_2 = 0;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_weapon_upgrade(param_00)) {
+    } else if(scripts\cp\cp_interaction::interaction_is_weapon_upgrade(var_0)) {
       if(scripts\cp\utility::is_codxp()) {
         wait(0.1);
         continue;
       }
 
-      var_04 = var_01 getcurrentweapon();
-      level.prevweapon = var_01 getcurrentweapon();
-      var_05 = scripts\cp\cp_weapon::get_weapon_level(var_04);
-      if(scripts\engine\utility::istrue(var_01.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
-        if(var_05 == 3) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
+      var_4 = var_1 getcurrentweapon();
+      level.prevweapon = var_1 getcurrentweapon();
+      var_5 = scripts\cp\cp_weapon::get_weapon_level(var_4);
+      if(scripts\engine\utility::istrue(var_1.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
+        if(var_5 == 3) {
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_UPGRADE_MAXED");
           wait(0.1);
           continue;
-        } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
-          if(var_05 == 1) {
-            var_02 = 5000;
-          } else if(var_05 == 2) {
-            var_02 = 10000;
+        } else if(scripts\cp\cp_weapon::can_upgrade(var_4)) {
+          if(var_5 == 1) {
+            var_2 = 5000;
+          } else if(var_5 == 2) {
+            var_2 = 10000;
           }
         } else {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
           wait(0.1);
           continue;
         }
-      } else if(var_05 == level.pap_max) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
+      } else if(var_5 == level.pap_max) {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_UPGRADE_MAXED");
         wait(0.1);
         continue;
-      } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
-        if(var_05 == 1) {
-          var_02 = 5000;
-        } else if(var_05 == 2) {
-          var_02 = 10000;
+      } else if(scripts\cp\cp_weapon::can_upgrade(var_4)) {
+        if(var_5 == 1) {
+          var_2 = 5000;
+        } else if(var_5 == 2) {
+          var_2 = 10000;
         }
       } else {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
         wait(0.1);
         continue;
       }
-    } else if(isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "spawned_essence") {
-      if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
+    } else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "spawned_essence") {
+      if(!scripts\cp\utility::weaponhasattachment(var_1 getcurrentweapon(), "arcane_base")) {
         thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_nocore_fail", "zmb_comment_vo", "medium", 10, 0, 0, 1, 100);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_white_ark(param_00)) {
-      if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+    } else if(scripts\cp\cp_interaction::interaction_is_white_ark(var_0)) {
+      if(!scripts\cp\utility::weaponhasattachment(var_1 getcurrentweapon(), "arcane_base")) {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_weapon_buy(param_00)) {
+    } else if(scripts\cp\cp_interaction::interaction_is_weapon_buy(var_0)) {
       if(scripts\cp\utility::is_weapon_purchase_disabled()) {
         wait(0.1);
         continue;
       }
 
-      var_06 = var_01 getcurrentweapon();
-      var_07 = scripts\cp\utility::getbaseweaponname(var_06);
-      if(param_00.script_parameters == "tickets") {
-        if(self hasweapon(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
+      var_6 = var_1 getcurrentweapon();
+      var_7 = scripts\cp\utility::getbaseweaponname(var_6);
+      if(var_0.script_parameters == "tickets") {
+        if(self hasweapon(var_0.script_noteworthy)) {
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
 
-        self.itempicked = param_00.script_noteworthy;
+        self.itempicked = var_0.script_noteworthy;
         scripts\cp\zombies\zombie_analytics::log_item_purchase_with_tickets(level.wave_num, self.itempicked, level.transactionid);
       }
 
-      if(scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
-        if(!scripts\cp\cp_interaction::can_purchase_ammo(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
+      if(scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
+        if(!scripts\cp\cp_interaction::can_purchase_ammo(var_0.script_noteworthy)) {
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_GAME_PLAY_AMMO_MAX");
           wait(0.1);
           continue;
         } else {
-          var_08 = scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy);
-          var_05 = scripts\cp\cp_weapon::get_weapon_level(var_08);
-          if(var_05 > 1) {
-            var_02 = 4500;
+          var_8 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
+          var_5 = scripts\cp\cp_weapon::get_weapon_level(var_8);
+          if(var_5 > 1) {
+            var_2 = 4500;
           } else {
-            var_02 = var_02 * 0.5;
+            var_2 = var_2 * 0.5;
           }
         }
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_perk(param_00)) {
-      if(!var_01 scripts\cp\cp_interaction::can_use_perk(param_00)) {
-        var_02 = 0;
-      } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && param_00.perk_type == "perk_machine_revive" && var_01.self_revives_purchased <= var_01.max_self_revive_machine_use) {
-        var_02 = 500;
+    } else if(scripts\cp\cp_interaction::interaction_is_perk(var_0)) {
+      if(!var_1 scripts\cp\cp_interaction::can_use_perk(var_0)) {
+        var_2 = 0;
+      } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && var_1.self_revives_purchased <= var_1.max_self_revive_machine_use) {
+        var_2 = 500;
       } else {
-        var_02 = scripts\cp\cp_interaction::get_perk_machine_cost(param_00);
+        var_2 = scripts\cp\cp_interaction::get_perk_machine_cost(var_0);
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_crafting_station(param_00)) {
-      if(!isDefined(var_01.current_crafting_struct) && param_00.available_ingredient_slots > 0) {
-        level notify("interaction", "purchase_denied", level.interactions[param_00.script_noteworthy], self);
+    } else if(scripts\cp\cp_interaction::interaction_is_crafting_station(var_0)) {
+      if(!isDefined(var_1.current_crafting_struct) && var_0.available_ingredient_slots > 0) {
+        level notify("interaction", "purchase_denied", level.interactions[var_0.script_noteworthy], self);
         wait(0.1);
         continue;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_ticket_buy(param_00)) {
-      if(param_00.script_noteworthy == "large_ticket_prize") {
-        var_04 = self getcurrentweapon();
-        var_09 = strtok(var_04, "_");
-        if(var_09[0] == "alt" && issubstr(var_04, "meleervn")) {
+    } else if(scripts\cp\cp_interaction::interaction_is_ticket_buy(var_0)) {
+      if(var_0.script_noteworthy == "large_ticket_prize") {
+        var_4 = self getcurrentweapon();
+        var_9 = strtok(var_4, "_");
+        if(var_9[0] == "alt" && issubstr(var_4, "meleervn")) {
           continue;
         }
 
-        var_0A = scripts\cp\utility::get_attachment_from_interaction(param_00);
+        var_0A = scripts\cp\utility::get_attachment_from_interaction(var_0);
         if(scripts\cp\utility::weaponhasattachment(self getcurrentweapon(), var_0A)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
 
         if(!scripts\cp\cp_weapon::can_use_attachment(var_0A)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_PILLAGE_CANT_USE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_PILLAGE_CANT_USE");
           wait(0.1);
           continue;
         }
-      } else if(param_00.script_noteworthy == "arcade_counter_grenade") {
+      } else if(var_0.script_noteworthy == "arcade_counter_grenade") {
         var_0B = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
         if(self.powers[var_0B].charges >= level.powers[var_0B].maxcharges) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
           wait(0.1);
           continue;
         }
-      } else if(param_00.script_noteworthy == "arcade_counter_ammo") {
+      } else if(var_0.script_noteworthy == "arcade_counter_ammo") {
         var_0C = self getcurrentweapon();
         if(self getweaponammostock(var_0C) >= weaponmaxammo(var_0C)) {
           var_0D = 1;
@@ -599,108 +599,108 @@ zmb_wait_for_interaction_triggered(param_00) {
           }
 
           if(var_0D) {
-            scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
+            scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_GAME_PLAY_AMMO_MAX");
             wait(0.1);
             continue;
           }
         }
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_fortune_teller(param_00)) {
+    } else if(scripts\cp\cp_interaction::interaction_is_fortune_teller(var_0)) {
       if(!scripts\engine\utility::istrue(level.unlimited_fnf)) {
-        if(var_01.card_refills == 2) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
+        if(var_1.card_refills == 2) {
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
           wait(0.1);
           continue;
         }
       }
 
       if(self.card_refills >= 1) {
-        var_02 = level.fortune_visit_cost_2;
+        var_2 = level.fortune_visit_cost_2;
       } else {
-        var_02 = level.fortune_visit_cost_1;
+        var_2 = level.fortune_visit_cost_1;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_grenade_wall_buy(param_00)) {
-      if(!isDefined(param_00.power_name)) {
-        param_00.power_name = param_00.script_noteworthy;
+    } else if(scripts\cp\cp_interaction::interaction_is_grenade_wall_buy(var_0)) {
+      if(!isDefined(var_0.power_name)) {
+        var_0.power_name = var_0.script_noteworthy;
       }
 
-      if(isDefined(self.powers[param_00.power_name]) && self.powers[param_00.power_name].charges >= level.powers[param_00.power_name].maxcharges) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
+      if(isDefined(self.powers[var_0.power_name]) && self.powers[var_0.power_name].charges >= level.powers[var_0.power_name].maxcharges) {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
         wait(0.1);
         continue;
       }
-    } else if(scripts\cp\cp_interaction::interaction_is_challenge_station(param_00)) {
+    } else if(scripts\cp\cp_interaction::interaction_is_challenge_station(var_0)) {
       if(!isDefined(self.completed_challenges)) {
-        var_02 = 0;
-      } else if(scripts\engine\utility::array_contains(self.completed_challenges, param_00.script_type)) {
-        var_02 = 0;
+        var_2 = 0;
+      } else if(scripts\engine\utility::array_contains(self.completed_challenges, var_0.script_type)) {
+        var_2 = 0;
       } else {
-        var_02 = 0;
+        var_2 = 0;
       }
     }
 
-    if(!scripts\cp\cp_interaction::can_purchase_interaction(param_00, var_02, level.interactions[param_00.script_noteworthy].spend_type)) {
-      level notify("interaction", "purchase_denied", level.interactions[param_00.script_noteworthy], self);
-      if(param_00.script_parameters == "tickets") {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_NEED_TICKETS");
+    if(!scripts\cp\cp_interaction::can_purchase_interaction(var_0, var_2, level.interactions[var_0.script_noteworthy].spend_type)) {
+      level notify("interaction", "purchase_denied", level.interactions[var_0.script_noteworthy], self);
+      if(var_0.script_parameters == "tickets") {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_ZMB_INTERACTIONS_NEED_TICKETS");
         thread scripts\cp\cp_vo::try_to_play_vo("no_tickets", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
-      } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\cp_interaction::interaction_is_perk(param_00) && param_00.perk_type == "perk_machine_revive" && var_01.self_revives_purchased >= var_01.max_self_revive_machine_use) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
+      } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\cp_interaction::interaction_is_perk(var_0) && var_0.perk_type == "perk_machine_revive" && var_1.self_revives_purchased >= var_1.max_self_revive_machine_use) {
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
       } else {
         thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_NEED_MONEY");
       }
 
       wait(0.1);
       continue;
     }
 
-    if(param_00.script_noteworthy == "atm_withdrawal") {
+    if(var_0.script_noteworthy == "atm_withdrawal") {
       if(isDefined(level.atm_transaction_amount)) {
         if(level.atm_amount_deposited < level.atm_transaction_amount) {
           thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_NEED_MONEY");
           wait(0.1);
           continue;
         }
       }
     }
 
-    thread scripts\cp\cp_interaction::interaction_post_activate_delay(param_00);
-    if(scripts\cp\cp_interaction::interaction_is_weapon_buy(param_00)) {
-      level notify("interaction", param_00.name, undefined, self);
+    thread scripts\cp\cp_interaction::interaction_post_activate_delay(var_0);
+    if(scripts\cp\cp_interaction::interaction_is_weapon_buy(var_0)) {
+      level notify("interaction", var_0.name, undefined, self);
     } else {
-      level notify("interaction", "purchase", level.interactions[param_00.script_noteworthy], self);
+      level notify("interaction", "purchase", level.interactions[var_0.script_noteworthy], self);
     }
 
-    if(param_00.script_parameters == "tickets") {
-      self.num_tickets = self.num_tickets - var_02;
+    if(var_0.script_parameters == "tickets") {
+      self.num_tickets = self.num_tickets - var_2;
       self setclientomnvar("zombie_number_of_ticket", int(self.num_tickets));
-      self notify("spent_tickets_notify", var_02);
-      if(isDefined(param_00.randomintrange) && isDefined(param_00.randomintrange.model)) {
-        self.itempicked = param_00.randomintrange.model;
+      self notify("spent_tickets_notify", var_2);
+      if(isDefined(var_0.randomintrange) && isDefined(var_0.randomintrange.model)) {
+        self.itempicked = var_0.randomintrange.model;
       } else {
-        self.itempicked = param_00.script_noteworthy;
+        self.itempicked = var_0.script_noteworthy;
       }
 
       level.transactionid = randomint(100);
       scripts\cp\zombies\zombie_analytics::log_item_purchase_with_tickets(level.wave_num, self.itempicked, level.transactionid);
       thread scripts\cp\cp_vo::try_to_play_vo("purchase_tickets", "zmb_comment_vo", "medium", 2, 0, 0, 1, 40);
-      level thread[[level.interactions[param_00.script_noteworthy].activation_func]](param_00, self);
-      scripts\cp\cp_interaction::interaction_post_activate_update(param_00);
+      level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
+      scripts\cp\cp_interaction::interaction_post_activate_update(var_0);
       wait(0.1);
       return;
     }
 
-    var_0E = level.interactions[param_00.script_noteworthy].spend_type;
-    thread scripts\cp\cp_interaction::take_player_money(var_02, var_0E);
-    level thread[[level.interactions[param_00.script_noteworthy].activation_func]](param_00, self);
-    if(scripts\cp\cp_interaction::interaction_is_souvenir(param_00)) {
-      level thread scripts\cp\cp_interaction::souvenir_team_splash(param_00.script_noteworthy, self);
+    var_0E = level.interactions[var_0.script_noteworthy].spend_type;
+    thread scripts\cp\cp_interaction::take_player_money(var_2, var_0E);
+    level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
+    if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0)) {
+      level thread scripts\cp\cp_interaction::souvenir_team_splash(var_0.script_noteworthy, self);
     }
 
-    scripts\cp\cp_interaction::interaction_post_activate_update(param_00);
+    scripts\cp\cp_interaction::interaction_post_activate_update(var_0);
     wait(0.1);
-    param_00.triggered = undefined;
+    var_0.triggered = undefined;
   }
 }

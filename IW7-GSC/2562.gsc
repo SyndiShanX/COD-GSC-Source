@@ -23,14 +23,14 @@ bt_init() {
   if(isDefined(self.behaviortreeasset)) {
     self btregistertreeinstance(self.behaviortreeasset);
   } else {
-    self.var_3135.var_E87F = [];
-    self.var_3135.var_D8BE = [];
-    self.var_3135.var_BE5D = 0;
+    self.bt.var_E87F = [];
+    self.bt.var_D8BE = [];
+    self.bt.var_BE5D = 0;
     self.var_C9D9 = level._btactions[self.behavior];
     self[[self.var_C9D9.var_71AD]]();
   }
 
-  self.var_3135.instancedata = [];
+  self.bt.instancedata = [];
   thread bt_eventlistener();
 }
 
@@ -38,14 +38,14 @@ bt_eventlistener() {
   self endon("death");
   self endon("terminate_ai_threads");
   for(;;) {
-    self waittill("ai_notify", var_00, var_01);
-    scripts\asm\asm::asm_fireephemeralevent("ai_notify", var_00, var_01);
+    self waittill("ai_notify", var_0, var_1);
+    scripts\asm\asm::asm_fireephemeralevent("ai_notify", var_0, var_1);
   }
 }
 
-bt_registertree(param_00, param_01) {
-  level._btactions[param_00] = param_01;
-  switch (param_00) {
+bt_registertree(var_0, var_1) {
+  level._btactions[var_0] = var_1;
+  switch (var_0) {
     case "human\ally_combatant":
     case "human\enemy_combatant":
       lib_09FD::soldier();
@@ -65,47 +65,47 @@ bt_registertree(param_00, param_01) {
   }
 }
 
-bt_istreeregistered(param_00) {
-  return isDefined(level._btactions) && isDefined(level._btactions[param_00]);
+bt_istreeregistered(var_0) {
+  return isDefined(level._btactions) && isDefined(level._btactions[var_0]);
 }
 
-bt_getchildtaskid(param_00, param_01) {
-  return self.var_C9D9.var_11591[param_00] + param_01;
+bt_getchildtaskid(var_0, var_1) {
+  return self.var_C9D9.var_11591[var_0] + var_1;
 }
 
-func_0076(param_00) {
-  return [[self.var_C9D9.var_1158E[param_00]]]();
+func_0076(var_0) {
+  return [[self.var_C9D9.var_1158E[var_0]]]();
 }
 
-bt_terminateprevrunningaction(param_00, param_01, param_02, param_03) {
-  var_04 = param_00.var_D8BE[param_02];
-  if(!isDefined(var_04)) {
+bt_terminateprevrunningaction(var_0, var_1, var_2, var_3) {
+  var_4 = var_0.var_D8BE[var_2];
+  if(!isDefined(var_4)) {
     return;
   }
 
-  if(var_04 <= param_03) {
+  if(var_4 <= var_3) {
     return;
   }
 
-  var_05 = spawnStruct();
-  var_05.var_71D2 = param_01;
-  var_05.taskid = param_02;
+  var_5 = spawnStruct();
+  var_5.var_71D2 = var_1;
+  var_5.taskid = var_2;
   for(;;) {
-    self[[var_05.var_71D2]](param_00, var_05.taskid, var_05);
-    if(!isDefined(var_05.var_71D2)) {
+    self[[var_5.var_71D2]](var_0, var_5.taskid, var_5);
+    if(!isDefined(var_5.var_71D2)) {
       break;
     }
   }
 }
 
-bt_negateresult(param_00) {
-  if(param_00 == level.success) {
+bt_negateresult(var_0) {
+  if(var_0 == level.success) {
     return level.failure;
-  } else if(param_00 == level.failure) {
+  } else if(var_0 == level.failure) {
     return level.success;
   }
 
-  return param_00;
+  return var_0;
 }
 
 bt_tick() {
@@ -119,8 +119,8 @@ bt_getdemeanor() {
     return self.demeanoroverride;
   }
 
-  if(isDefined(self.var_1198.var_7366)) {
-    return self.var_1198.var_7366;
+  if(isDefined(self._blackboard.var_7366)) {
+    return self._blackboard.var_7366;
   }
 
   return "combat";

@@ -4,104 +4,104 @@
  * Script: 2571.gsc
 ************************/
 
-func_98C9(param_00) {
-  if(!isDefined(self.var_1198.scriptableparts)) {
-    self.var_1198.scriptableparts = [];
+func_98C9(var_0) {
+  if(!isDefined(self._blackboard.scriptableparts)) {
+    self._blackboard.scriptableparts = [];
   }
 
-  if(!isDefined(self.var_1198.scriptableparts[param_00])) {
-    self.var_1198.scriptableparts[param_00] = spawnStruct();
-    self.var_1198.scriptableparts[param_00].state = "normal";
+  if(!isDefined(self._blackboard.scriptableparts[var_0])) {
+    self._blackboard.scriptableparts[var_0] = spawnStruct();
+    self._blackboard.scriptableparts[var_0].state = "normal";
   }
 }
 
-func_F591(param_00, param_01) {
-  if(self.var_1198.scriptableparts[param_00].state == "dismember") {
+func_F591(var_0, var_1) {
+  if(self._blackboard.scriptableparts[var_0].state == "dismember") {
     return;
   }
 
-  if(self.var_1198.scriptableparts[param_00].state != "normal" && param_01 != "dismember") {
-    self.var_1198.scriptableparts[param_00].state = self.var_1198.scriptableparts[param_00].state + "_both";
+  if(self._blackboard.scriptableparts[var_0].state != "normal" && var_1 != "dismember") {
+    self._blackboard.scriptableparts[var_0].state = self._blackboard.scriptableparts[var_0].state + "_both";
   } else {
-    self.var_1198.scriptableparts[param_00].state = param_01;
+    self._blackboard.scriptableparts[var_0].state = var_1;
   }
 
-  self.var_1198.scriptableparts[param_00].time = gettime();
+  self._blackboard.scriptableparts[var_0].time = gettime();
 }
 
-func_F592(param_00, param_01, param_02) {
+func_F592(var_0, var_1, var_2) {
   self endon("entitydeleted");
-  func_F591(param_00, param_01);
-  if(isDefined(param_02)) {
-    wait(param_02);
+  func_F591(var_0, var_1);
+  if(isDefined(var_2)) {
+    wait(var_2);
   }
 
   if(isDefined(self.var_EF39)) {
     return 1;
   }
 
-  var_03 = self.var_1198.scriptableparts[param_00].state;
+  var_3 = self._blackboard.scriptableparts[var_0].state;
   if(isDefined(level.var_5667[self.unittype])) {
-    if(param_00 != "head" && var_03 != "dismember") {
+    if(var_0 != "head" && var_3 != "dismember") {
       if(func_13077(self.unittype)) {
-        var_03 = var_03 + "_lite";
+        var_3 = var_3 + "_lite";
       }
     }
   }
 
-  self setscriptablepartstate(param_00, var_03);
+  self setscriptablepartstate(var_0, var_3);
 }
 
-func_F6C9(param_00) {
-  var_01 = param_00 + "_dism_fx";
-  var_02 = func_7C35(param_00);
-  if(var_02 == "normal") {
-    var_02 = "undamaged";
-  } else if(issubstr(var_02, "_both")) {
-    var_02 = "dmg_both";
+func_F6C9(var_0) {
+  var_1 = var_0 + "_dism_fx";
+  var_2 = func_7C35(var_0);
+  if(var_2 == "normal") {
+    var_2 = "undamaged";
+  } else if(issubstr(var_2, "_both")) {
+    var_2 = "dmg_both";
   }
 
   if(!isDefined(level.var_93A9) && isDefined(level.var_5667[self.unittype])) {
-    if(param_00 != "head") {
+    if(var_0 != "head") {
       if(func_13077(self.unittype)) {
-        var_02 = var_02 + "_lite";
+        var_2 = var_2 + "_lite";
       }
     }
   }
 
-  self setscriptablepartstate(var_01, var_02);
+  self setscriptablepartstate(var_1, var_2);
 }
 
-func_13077(param_00) {
-  var_01 = [];
-  for(var_02 = 0; var_02 < level.var_5667[param_00].size; var_02++) {
-    if(gettime() - level.var_5667[param_00][var_02] > 1000) {
+func_13077(var_0) {
+  var_1 = [];
+  for(var_2 = 0; var_2 < level.var_5667[var_0].size; var_2++) {
+    if(gettime() - level.var_5667[var_0][var_2] > 1000) {
       continue;
     }
 
-    var_01[var_01.size] = level.var_5667[param_00][var_02];
+    var_1[var_1.size] = level.var_5667[var_0][var_2];
   }
 
-  if(var_01.size < 0) {
-    var_01[var_01.size] = gettime();
-    level.var_5667[param_00] = var_01;
+  if(var_1.size < 0) {
+    var_1[var_1.size] = gettime();
+    level.var_5667[var_0] = var_1;
     return 0;
   }
 
-  level.var_5667[param_00] = var_01;
+  level.var_5667[var_0] = var_1;
   return 1;
 }
 
-func_7C35(param_00) {
-  if(!isDefined(self.var_1198.scriptableparts)) {
+func_7C35(var_0) {
+  if(!isDefined(self._blackboard.scriptableparts)) {
     return "normal";
   }
 
-  if(!isDefined(self.var_1198.scriptableparts[param_00])) {
+  if(!isDefined(self._blackboard.scriptableparts[var_0])) {
     return "normal";
   }
 
-  return self.var_1198.scriptableparts[param_00].state;
+  return self._blackboard.scriptableparts[var_0].state;
 }
 
 func_2040() {

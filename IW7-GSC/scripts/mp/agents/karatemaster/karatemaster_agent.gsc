@@ -27,14 +27,14 @@ func_FAB0() {
   level.var_1094E["karatemaster"] = ::should_spawn_karatemaster;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   if(isDefined(level.karate_zombie_model_list)) {
-    var_01 = scripts\engine\utility::random(level.karate_zombie_model_list);
+    var_1 = scripts\engine\utility::random(level.karate_zombie_model_list);
   } else {
-    var_01 = "karatemaster_male_3_black";
+    var_1 = "karatemaster_male_3_black";
   }
 
-  self setModel(var_01);
+  self setModel(var_1);
   thread scripts\mp\agents\zombie\zmb_zombie_agent::func_50EF();
 }
 
@@ -157,37 +157,37 @@ getenemy() {
   return self.myenemy;
 }
 
-setmovemode(param_00) {
-  self.desiredmovemode = param_00;
+setmovemode(var_0) {
+  self.desiredmovemode = var_0;
 }
 
 findgoodteleportcloserspot() {
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_00 = self pathdisttogoal();
-    var_01 = self getposonpath(var_00 - scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cteleportthisclosetoplayer);
-    return var_01;
+    var_0 = self pathdisttogoal();
+    var_1 = self getposonpath(var_0 - scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cteleportthisclosetoplayer);
+    return var_1;
   }
 
   return self.initialteleportpos;
 }
 
-accumulatedamage(param_00, param_01) {
-  var_02 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+accumulatedamage(var_0, var_1) {
+  var_2 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
   if(!isDefined(self.damageaccumulator)) {
     self.damageaccumulator = spawnStruct();
     self.damageaccumulator.accumulateddamage = 0;
-  } else if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + var_02.cdamageaccumulationcleartimems) {
+  } else if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + var_2.cdamageaccumulationcleartimems) {
     self.damageaccumulator.accumulateddamage = 0;
     self.damageaccumulator.lastdamagetime = 0;
   }
 
   self.damageaccumulator.lastdamagetime = gettime();
-  if(!isDefined(param_01)) {
-    param_01 = (1, 1, 1);
+  if(!isDefined(var_1)) {
+    var_1 = (1, 1, 1);
   }
 
-  self.damageaccumulator.lastdir = param_01;
-  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
+  self.damageaccumulator.lastdir = var_1;
+  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
 getdamageaccumulator() {
@@ -196,8 +196,8 @@ getdamageaccumulator() {
     self.damageaccumulator.accumulateddamage = 0;
   }
 
-  var_00 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
-  if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + var_00.cdamageaccumulationcleartimems) {
+  var_0 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + var_0.cdamageaccumulationcleartimems) {
     self.damageaccumulator.accumulateddamage = 0;
     self.damageaccumulator.lastdamagetime = 0;
   }
@@ -214,17 +214,17 @@ cleardamageaccumulator() {
   self.damageaccumulator.lastdamagetime = 0;
 }
 
-ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  accumulatedamage(param_02, param_07);
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  accumulatedamage(var_2, var_7);
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
 }
 
-func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(scripts\engine\utility::istrue(self.ishidden)) {
     return;
   }
 
-  [[level.on_zombie_damaged_func]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  [[level.on_zombie_damaged_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
 }
 
 should_spawn_karatemaster() {
@@ -232,26 +232,26 @@ should_spawn_karatemaster() {
     return undefined;
   }
 
-  var_00 = 0;
+  var_0 = 0;
   if(level.wave_num >= 20) {
-    var_00 = min(level.wave_num - 19, 10);
+    var_0 = min(level.wave_num - 19, 10);
   } else if(level.wave_num < 10) {
     return undefined;
   }
 
-  var_01 = 5;
+  var_1 = 5;
   if(getdvarint("scr_force_karatemaster_spawn", 0) == 1) {
-    var_01 = 0;
-    var_00 = 100;
+    var_1 = 0;
+    var_0 = 100;
   }
 
   if(getdvarint("scr_force_no_karatemaster_spawn", 0) == 1) {
-    var_01 = 500;
-    var_00 = 0;
+    var_1 = 500;
+    var_0 = 0;
   }
 
-  if(level.wave_num > var_01) {
-    if(randomint(100) < var_00) {
+  if(level.wave_num > var_1) {
+    if(randomint(100) < var_0) {
       return "karatemaster";
     }
 

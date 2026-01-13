@@ -208,50 +208,50 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_11BF4(param_00, param_01, param_02, param_03) {
+func_11BF4(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_1206F(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_232B(param_01, "end") && self.var_1198.movetype == "combat";
+func_1206F(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_232B(var_1, "end") && self._blackboard.movetype == "combat";
 }
 
-func_1205A(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_232B(param_01, "abort") && self.var_1198.movetype == "combat";
+func_1205A(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_232B(var_1, "abort") && self._blackboard.movetype == "combat";
 }
 
-func_11B5C(param_00, param_01, param_02, param_03) {
+func_11B5C(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_697F);
 }
 
-func_11B63(param_00, param_01, param_02, param_03) {
+func_11B63(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_92FA);
 }
 
-func_11B59(param_00, param_01, param_02, param_03) {
+func_11B59(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimscripted();
 }
 
-func_12376(param_00, param_01, param_02, param_03) {
+func_12376(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_12377(param_00, param_01, param_02, param_03) {
+func_12377(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_1246C(param_00, param_01, param_02, param_03) {
+func_1246C(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12617(param_00, param_01, param_02, param_03) {
+func_12617(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_125DA(param_00, param_01, param_02, param_03) {
+func_125DA(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_125D7(param_00, param_01, param_02, param_03) {
+func_125D7(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }

@@ -4,7 +4,7 @@
  * Script: 3175.gsc
 ************************/
 
-func_C97D(param_00, param_01, param_02, param_03) {
+func_C97D(var_0, var_1, var_2, var_3) {
   if(self.var_527B != "patrol") {
     return 1;
   }
@@ -12,35 +12,35 @@ func_C97D(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-func_C9A0(param_00, param_01, param_02, param_03) {
+func_C9A0(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_10E6D)) {
     return 0;
   }
 
   if(isDefined(self.var_10E6D.var_C996) && isDefined(self.var_10E6D.var_C999)) {
-    var_04 = self.var_10E6D.var_C996 + "_" + self.var_10E6D.var_C999;
-    var_05 = 0;
+    var_4 = self.var_10E6D.var_C996 + "_" + self.var_10E6D.var_C999;
+    var_5 = 0;
     if(isDefined(self.var_10E6D.var_C998)) {
-      var_06 = self.var_10E6D.var_C998 - self.origin;
-      var_06 = vectornormalize((var_06[0], var_06[1], 0));
-      var_07 = vectortoangles(var_06);
-      self.var_10E6D.var_C99A = var_07[1];
-      var_05 = self.angles[1] - var_07[1];
+      var_6 = self.var_10E6D.var_C998 - self.origin;
+      var_6 = vectornormalize((var_6[0], var_6[1], 0));
+      var_7 = vectortoangles(var_6);
+      self.var_10E6D.var_C99A = var_7[1];
+      var_5 = self.angles[1] - var_7[1];
     }
 
-    var_08 = _meth_80DE(var_05);
+    var_8 = _meth_80DE(var_5);
     if(self.getcsplinepointtargetname != "none") {
-      var_04 = var_04 + "_stairs_" + self.getcsplinepointtargetname;
+      var_4 = var_4 + "_stairs_" + self.getcsplinepointtargetname;
       if(self.asm.footsteps.foot == "left") {
-        var_04 = var_04 + "_r";
+        var_4 = var_4 + "_r";
       } else {
-        var_04 = var_04 + "_l";
+        var_4 = var_4 + "_l";
       }
     }
 
-    var_04 = var_04 + "_" + var_08;
-    if(lib_0A1E::func_2348(param_02, var_04)) {
-      self.var_10E6D.var_C995 = var_04;
+    var_4 = var_4 + "_" + var_8;
+    if(lib_0A1E::func_2348(var_2, var_4)) {
+      self.var_10E6D.var_C995 = var_4;
       self.var_10E6D.var_C994 = undefined;
       return 1;
     } else {
@@ -54,7 +54,7 @@ func_C9A0(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-func_C9A1(param_00, param_01, param_02, param_03) {
+func_C9A1(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_10E6D)) {
     return 0;
   }
@@ -62,117 +62,117 @@ func_C9A1(param_00, param_01, param_02, param_03) {
   return scripts\engine\utility::istrue(self.var_10E6D.var_C994);
 }
 
-func_CEBF(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.var_10E6D.var_C995;
+func_CEBF(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.var_10E6D.var_C995;
   self.var_10E6D.var_C996 = undefined;
   self.var_10E6D.var_C998 = undefined;
   self.var_10E6D.var_C995 = undefined;
-  var_05 = lib_0A1E::func_235B(param_01, var_04);
-  if(!isDefined(var_05)) {
-    scripts\asm\asm::asm_fireevent(param_01, "end");
+  var_5 = lib_0A1E::func_235B(var_1, var_4);
+  if(!isDefined(var_5)) {
+    scripts\asm\asm::asm_fireevent(var_1, "end");
     return;
   }
 
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82EA(param_01, var_05, 1, param_02, 1);
-  lib_0A1E::func_2322(param_00, param_01, ::func_89A1);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  lib_0A1E::func_2322(var_0, var_1, ::func_89A1);
   self.var_10E6D.var_C999 = undefined;
 }
 
-_meth_80DE(param_00) {
-  param_00 = angleclamp180(param_00);
-  if(param_00 > 135 || param_00 < -135) {
-    var_01 = 2;
-  } else if(var_01 < -45) {
-    var_01 = 4;
-  } else if(var_01 > 45) {
-    var_01 = 6;
+_meth_80DE(var_0) {
+  var_0 = angleclamp180(var_0);
+  if(var_0 > 135 || var_0 < -135) {
+    var_1 = 2;
+  } else if(var_1 < -45) {
+    var_1 = 4;
+  } else if(var_1 > 45) {
+    var_1 = 6;
   } else {
-    var_01 = 8;
+    var_1 = 8;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_89A1(param_00, param_01, param_02) {
-  if(param_01 == "face_goal" && isDefined(self.var_10E6D.var_C99A)) {
-    var_03 = self.var_10E6D.var_C99A;
-    thread func_6A71(param_00, var_03);
+func_89A1(var_0, var_1, var_2) {
+  if(var_1 == "face_goal" && isDefined(self.var_10E6D.var_C99A)) {
+    var_3 = self.var_10E6D.var_C99A;
+    thread func_6A71(var_0, var_3);
     return 1;
   }
 
   return 0;
 }
 
-func_6A71(param_00, param_01) {
+func_6A71(var_0, var_1) {
   self notify("FaceGoalThread");
   self endon("FaceGoalThread");
   self endon("death");
-  self endon(param_00 + "_finished");
+  self endon(var_0 + "_finished");
   for(;;) {
-    var_02 = level.player;
+    var_2 = level.player;
     if(isDefined(self.isnodeoccupied)) {
-      var_02 = self.isnodeoccupied;
+      var_2 = self.isnodeoccupied;
     }
 
-    if(issentient(var_02) && self getpersstat(var_02)) {
-      var_03 = var_02.origin - self.origin;
-      var_03 = vectornormalize((var_03[0], var_03[1], 0));
-      var_04 = vectortoangles(var_03);
-      param_01 = var_04[1];
+    if(issentient(var_2) && self getpersstat(var_2)) {
+      var_3 = var_2.origin - self.origin;
+      var_3 = vectornormalize((var_3[0], var_3[1], 0));
+      var_4 = vectortoangles(var_3);
+      var_1 = var_4[1];
     }
 
-    var_05 = angleclamp180(param_01 - self.angles[1]);
-    self orientmode("face angle", self.angles[1] + var_05 * 0.1);
+    var_5 = angleclamp180(var_1 - self.angles[1]);
+    self orientmode("face angle", self.angles[1] + var_5 * 0.1);
     wait(0.05);
   }
 }
 
-func_D4DF(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_D4DF(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   self.a.var_C985 = gettime() + randomfloatrange(5, 30) * 1000;
   self.a.var_C98E = gettime();
   if(isDefined(self.a.var_C98D)) {
-    func_D4DE(param_00, param_01, param_02, param_03, self.a.var_C98D);
+    func_D4DE(var_0, var_1, var_2, var_3, self.a.var_C98D);
     return;
   }
 
-  lib_0F3D::func_D4DD(param_00, param_01, param_02, param_03);
+  lib_0F3D::func_D4DD(var_0, var_1, var_2, var_3);
 }
 
-func_D4DE(param_00, param_01, param_02, param_03, param_04) {
-  self endon(param_01 + "_finished");
-  var_05 = scripts\asm\asm::asm_getmoveplaybackrate();
-  self _meth_84F1(var_05);
-  var_06 = lib_0A1E::asm_getbodyknob();
-  self clearanim(var_06, param_02);
+func_D4DE(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  var_5 = scripts\asm\asm::asm_getmoveplaybackrate();
+  self _meth_84F1(var_5);
+  var_6 = lib_0A1E::asm_getbodyknob();
+  self clearanim(var_6, var_2);
   if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
-    var_07 = lib_0A1E::func_2356("Knobs", "move");
-    self _meth_84F2(var_07);
+    var_7 = lib_0A1E::func_2356("Knobs", "move");
+    self _meth_84F2(var_7);
   }
 
-  var_08 = var_06;
+  var_8 = var_6;
   for(;;) {
-    if(param_04 != var_08) {
-      self _meth_82E7(param_01, param_04, 1, param_02, 1);
+    if(var_4 != var_8) {
+      self _meth_82E7(var_1, var_4, 1, var_2, 1);
     }
 
-    lib_0A1E::func_2369(param_00, param_01, param_04);
-    var_08 = param_04;
-    lib_0A1E::func_2320(param_00, param_01, param_04, scripts\asm\asm::func_2341(param_00, param_01));
+    lib_0A1E::func_2369(var_0, var_1, var_4);
+    var_8 = var_4;
+    lib_0A1E::func_2320(var_0, var_1, var_4, scripts\asm\asm::func_2341(var_0, var_1));
   }
 }
 
-func_C99F(param_00, param_01, param_02, param_03) {
+func_C99F(var_0, var_1, var_2, var_3) {
   self.a.var_C984 = undefined;
-  var_04 = "";
-  if(isDefined(param_03)) {
-    var_04 = scripts\asm\asm_bb::func_2928(param_03);
+  var_4 = "";
+  if(isDefined(var_3)) {
+    var_4 = scripts\asm\asm_bb::func_2928(var_3);
   }
 
-  var_05 = lib_0A1E::func_235D(param_02, var_04, 1);
-  if(!isDefined(var_05)) {
+  var_5 = lib_0A1E::func_235D(var_2, var_4, 1);
+  if(!isDefined(var_5)) {
     return 0;
   }
 
@@ -196,32 +196,32 @@ func_C99F(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  var_06 = gettime();
-  if(var_06 < self.var_10E6D.var_C985) {
+  var_6 = gettime();
+  if(var_6 < self.var_10E6D.var_C985) {
     return 0;
   }
 
-  if(var_06 < self.a.var_C985) {
+  if(var_6 < self.a.var_C985) {
     return 0;
   }
 
-  var_07 = anglesToForward(self.angles);
-  var_08 = self.origin + var_07 * self.setomnvar;
-  if(distancesquared(self.origin, var_08) < squared(300)) {
+  var_7 = anglesToForward(self.angles);
+  var_8 = self.origin + var_7 * self.setomnvar;
+  if(distancesquared(self.origin, var_8) < squared(300)) {
     return 0;
   }
 
-  if(vectordot(var_07, self.setocclusionpreset) < 0.99) {
+  if(vectordot(var_7, self.setocclusionpreset) < 0.99) {
     return 0;
   }
 
-  self.a.var_C984 = scripts\asm\asm::asm_lookupanimfromalias(param_02, var_05);
+  self.a.var_C984 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_5);
   return isDefined(self.a.var_C984);
 }
 
-func_CEBE(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82EA(param_01, self.a.var_C984, 1, param_02, 1);
-  lib_0A1E::func_231F(param_00, param_01);
+func_CEBE(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, self.a.var_C984, 1, var_2, 1);
+  lib_0A1E::func_231F(var_0, var_1);
 }

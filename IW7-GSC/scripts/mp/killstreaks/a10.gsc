@@ -5,53 +5,53 @@
 ******************************************/
 
 init() {
-  var_00 = spawnStruct();
-  var_00.var_B923 = [];
-  var_00.var_B923["allies"] = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-  var_00.var_B923["axis"] = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-  var_00.vehicle = "a10_warthog_mp";
-  var_00.inboundsfx = "veh_mig29_dist_loop";
-  var_00.getclosestpointonnavmesh3d = 3000;
-  var_00.halfdistance = 12500;
-  var_00.heightrange = 750;
-  var_00.choosedirection = 1;
-  var_00.selectlocationvo = "KS_hqr_airstrike";
-  var_00.inboundvo = "KS_ast_inbound";
-  var_00.cannonfirevfx = loadfx("vfx\core\smktrail\smoke_trail_white_heli");
-  var_00.cannonrumble = "ac130_25mm_fire";
-  var_00.turretname = "a10_30mm_turret_mp";
-  var_00.turretattachpoint = "tag_barrel";
-  var_00.rocketmodelname = "maverick_projectile_mp";
-  var_00.numrockets = 4;
-  var_00.delaybetweenrockets = 0.125;
-  var_00.delaybetweenlockon = 0.4;
-  var_00.lockonicon = "veh_hud_target_chopperfly";
-  var_00.maxhealth = 1000;
-  var_00.scorepopup = "destroyed_a10_strafe";
-  var_00.callout = "callout_destroyed_a10";
-  var_00.vodestroyed = undefined;
-  var_00.explodevfx = loadfx("vfx\core\expl\aerial_explosion");
-  var_00.sfxcannonfireloop_1p = "veh_a10_plr_fire_gatling_lp";
-  var_00.sfxcannonfirestop_1p = "veh_a10_plr_fire_gatling_cooldown";
-  var_00.sfxcannonfireloop_3p = "veh_a10_npc_fire_gatling_lp";
-  var_00.sfxcannonfirestop_3p = "veh_a10_npc_fire_gatling_cooldown";
-  var_00.sfxcannonfireburptime = 500;
-  var_00.sfxcannonfireburpshort_3p = "veh_a10_npc_fire_gatling_short_burst";
-  var_00.sfxcannonfireburplong_3p = "veh_a10_npc_fire_gatling_long_burst";
-  var_00.sfxcannonbulletimpact = "veh_a10_bullet_impact_lp";
-  var_00.sfxmissilefire_1p = [];
-  var_00.sfxmissilefire_1p[0] = "veh_a10_plr_missile_ignition_left";
-  var_00.sfxmissilefire_1p[1] = "veh_a10_plr_missile_ignition_right";
-  var_00.sfxmissilefire_3p = "veh_a10_npc_missile_fire";
-  var_00.sfxmissile = "veh_a10_missile_loop";
-  var_00.sfxengine_1p = "veh_a10_plr_engine_lp";
-  var_00.sfxengine_3p = "veh_a10_dist_loop";
-  level.planeconfigs["a10_strafe"] = var_00;
+  var_0 = spawnStruct();
+  var_0.var_B923 = [];
+  var_0.var_B923["allies"] = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
+  var_0.var_B923["axis"] = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
+  var_0.vehicle = "a10_warthog_mp";
+  var_0.inboundsfx = "veh_mig29_dist_loop";
+  var_0.getclosestpointonnavmesh3d = 3000;
+  var_0.halfdistance = 12500;
+  var_0.heightrange = 750;
+  var_0.choosedirection = 1;
+  var_0.selectlocationvo = "KS_hqr_airstrike";
+  var_0.inboundvo = "KS_ast_inbound";
+  var_0.cannonfirevfx = loadfx("vfx\core\smktrail\smoke_trail_white_heli");
+  var_0.cannonrumble = "ac130_25mm_fire";
+  var_0.turretname = "a10_30mm_turret_mp";
+  var_0.turretattachpoint = "tag_barrel";
+  var_0.rocketmodelname = "maverick_projectile_mp";
+  var_0.numrockets = 4;
+  var_0.delaybetweenrockets = 0.125;
+  var_0.delaybetweenlockon = 0.4;
+  var_0.lockonicon = "veh_hud_target_chopperfly";
+  var_0.maxhealth = 1000;
+  var_0.scorepopup = "destroyed_a10_strafe";
+  var_0.callout = "callout_destroyed_a10";
+  var_0.vodestroyed = undefined;
+  var_0.explodevfx = loadfx("vfx\core\expl\aerial_explosion");
+  var_0.sfxcannonfireloop_1p = "veh_a10_plr_fire_gatling_lp";
+  var_0.sfxcannonfirestop_1p = "veh_a10_plr_fire_gatling_cooldown";
+  var_0.sfxcannonfireloop_3p = "veh_a10_npc_fire_gatling_lp";
+  var_0.sfxcannonfirestop_3p = "veh_a10_npc_fire_gatling_cooldown";
+  var_0.sfxcannonfireburptime = 500;
+  var_0.sfxcannonfireburpshort_3p = "veh_a10_npc_fire_gatling_short_burst";
+  var_0.sfxcannonfireburplong_3p = "veh_a10_npc_fire_gatling_long_burst";
+  var_0.sfxcannonbulletimpact = "veh_a10_bullet_impact_lp";
+  var_0.sfxmissilefire_1p = [];
+  var_0.sfxmissilefire_1p[0] = "veh_a10_plr_missile_ignition_left";
+  var_0.sfxmissilefire_1p[1] = "veh_a10_plr_missile_ignition_right";
+  var_0.sfxmissilefire_3p = "veh_a10_npc_missile_fire";
+  var_0.sfxmissile = "veh_a10_missile_loop";
+  var_0.sfxengine_1p = "veh_a10_plr_engine_lp";
+  var_0.sfxengine_3p = "veh_a10_dist_loop";
+  level.planeconfigs["a10_strafe"] = var_0;
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("a10_strafe", ::onuse);
   buildallflightpathsdefault();
 }
 
-onuse(param_00, param_01) {
+onuse(var_0, var_1) {
   if(isDefined(level.a10strafeactive)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
@@ -65,34 +65,34 @@ onuse(param_00, param_01) {
     return 0;
   }
 
-  thread dostrike(param_00, "a10_strafe");
+  thread dostrike(var_0, "a10_strafe");
   return 1;
 }
 
-dostrike(param_00, param_01) {
+dostrike(var_0, var_1) {
   self endon("end_remote");
   self endon("death");
   level endon("game_ended");
-  var_02 = getpathindex();
-  var_03 = startstrafesequence(param_01, param_00);
-  if(var_03) {
-    var_04 = spawnaircraft(param_01, param_00, level.a10splinesin[var_02]);
-    if(isDefined(var_04)) {
-      var_04 dooneflyby();
-      switchaircraft(var_04, param_01);
-      var_04 = spawnaircraft(param_01, param_00, level.a10splinesin[var_02]);
-      if(isDefined(var_04)) {
+  var_2 = getpathindex();
+  var_3 = startstrafesequence(var_1, var_0);
+  if(var_3) {
+    var_4 = spawnaircraft(var_1, var_0, level.a10splinesin[var_2]);
+    if(isDefined(var_4)) {
+      var_4 dooneflyby();
+      switchaircraft(var_4, var_1);
+      var_4 = spawnaircraft(var_1, var_0, level.a10splinesin[var_2]);
+      if(isDefined(var_4)) {
         thread scripts\mp\killstreaks\_killstreaks::clearrideintro(1, 0.75);
-        var_04 dooneflyby();
-        var_04 thread endflyby(param_01);
-        endstrafesequence(param_01);
+        var_4 dooneflyby();
+        var_4 thread endflyby(var_1);
+        endstrafesequence(var_1);
         return;
       }
     }
   }
 }
 
-startstrafesequence(param_00, param_01) {
+startstrafesequence(var_0, var_1) {
   scripts\mp\utility::setusingremote("a10_strafe");
   if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility::setthirdpersondof(0);
@@ -100,9 +100,9 @@ startstrafesequence(param_00, param_01) {
 
   self.restoreangles = self.angles;
   scripts\mp\utility::freezecontrolswrapper(1);
-  var_02 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("a10_strafe");
-  if(var_02 != "success") {
-    if(var_02 != "disconnect") {
+  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("a10_strafe");
+  if(var_2 != "success") {
+    if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
     }
 
@@ -121,11 +121,11 @@ startstrafesequence(param_00, param_01) {
   scripts\mp\utility::freezecontrolswrapper(0);
   level.a10strafeactive = 1;
   self.using_remote_a10 = 1;
-  level thread scripts\mp\utility::teamplayercardsplash("used_" + param_00, self, self.team);
+  level thread scripts\mp\utility::teamplayercardsplash("used_" + var_0, self, self.team);
   return 1;
 }
 
-endstrafesequence(param_00) {
+endstrafesequence(var_0) {
   scripts\mp\utility::clearusingremote();
   if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility::setthirdpersondof(1);
@@ -142,48 +142,48 @@ endstrafesequence(param_00) {
   self.using_remote_a10 = undefined;
 }
 
-switchaircraft(param_00, param_01) {
+switchaircraft(var_0, var_1) {
   self.usingremote = undefined;
   self visionsetnakedforplayer("black_bw", 0.75);
   thread scripts\mp\utility::set_visionset_for_watching_players("black_bw", 0.75, 0.75);
   wait(0.75);
-  if(isDefined(param_00)) {
-    param_00 thread endflyby(param_01);
+  if(isDefined(var_0)) {
+    var_0 thread endflyby(var_1);
   }
 }
 
-spawnaircraft(param_00, param_01, param_02) {
-  var_03 = createplaneasheli(param_00, param_01, param_02);
-  if(!isDefined(var_03)) {
+spawnaircraft(var_0, var_1, var_2) {
+  var_3 = createplaneasheli(var_0, var_1, var_2);
+  if(!isDefined(var_3)) {
     return undefined;
   }
 
-  var_03.streakname = param_00;
-  self remotecontrolvehicle(var_03);
-  thread watchintrocleared(param_00, var_03);
-  var_04 = level.planeconfigs[param_00];
-  var_03 playLoopSound(var_04.sfxengine_1p);
-  var_03 thread a10_handledamage();
-  scripts\mp\killstreaks\_plane::starttrackingplane(var_03);
-  return var_03;
+  var_3.streakname = var_0;
+  self remotecontrolvehicle(var_3);
+  thread watchintrocleared(var_0, var_3);
+  var_4 = level.planeconfigs[var_0];
+  var_3 playLoopSound(var_4.sfxengine_1p);
+  var_3 thread a10_handledamage();
+  scripts\mp\killstreaks\_plane::starttrackingplane(var_3);
+  return var_3;
 }
 
-attachturret(param_00) {
-  var_01 = level.planeconfigs[param_00];
-  var_02 = self gettagorigin(var_01.turretattachpoint);
-  var_03 = spawnturret("misc_turret", self.origin + var_02, var_01.turretname, 0);
-  var_03 linkto(self, var_01.turretattachpoint, (0, 0, 0), (0, 0, 0));
-  var_03 setModel("vehicle_ugv_talon_gun_mp");
-  var_03.angles = self.angles;
-  var_03.triggerportableradarping = self.triggerportableradarping;
-  var_03 getvalidattachments();
-  var_03 setturretmodechangewait(0);
-  var_03 give_player_session_tokens("sentry_offline");
-  var_03 makeunusable();
-  var_03 setCanDamage(0);
-  var_03 setsentryowner(self.triggerportableradarping);
-  self.triggerportableradarping remotecontrolturret(var_03);
-  self.turret = var_03;
+attachturret(var_0) {
+  var_1 = level.planeconfigs[var_0];
+  var_2 = self gettagorigin(var_1.turretattachpoint);
+  var_3 = spawnturret("misc_turret", self.origin + var_2, var_1.turretname, 0);
+  var_3 linkto(self, var_1.turretattachpoint, (0, 0, 0), (0, 0, 0));
+  var_3 setModel("vehicle_ugv_talon_gun_mp");
+  var_3.angles = self.angles;
+  var_3.triggerportableradarping = self.triggerportableradarping;
+  var_3 getvalidattachments();
+  var_3 setturretmodechangewait(0);
+  var_3 give_player_session_tokens("sentry_offline");
+  var_3 makeunusable();
+  var_3 setCanDamage(0);
+  var_3 setsentryowner(self.triggerportableradarping);
+  self.triggerportableradarping remotecontrolturret(var_3);
+  self.turret = var_3;
 }
 
 cleanupaircraft() {
@@ -191,10 +191,10 @@ cleanupaircraft() {
     self.turret delete();
   }
 
-  foreach(var_01 in self.targetlist) {
-    if(isDefined(var_01["icon"])) {
-      var_01["icon"] destroy();
-      var_01["icon"] = undefined;
+  foreach(var_1 in self.targetlist) {
+    if(isDefined(var_1["icon"])) {
+      var_1["icon"] destroy();
+      var_1["icon"] = undefined;
     }
   }
 
@@ -209,15 +209,15 @@ dooneflyby() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("splinePlaneReachedNode", var_00);
-    if(isDefined(var_00) && var_00 == "End") {
+    self waittill("splinePlaneReachedNode", var_0);
+    if(isDefined(var_0) && var_0 == "End") {
       self notify("a10_end_strafe");
       break;
     }
   }
 }
 
-endflyby(param_00) {
+endflyby(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -229,32 +229,32 @@ endflyby(param_00) {
 
   self notify("end_remote");
   self.triggerportableradarping thermalvisionfofoverlayoff();
-  var_01 = level.planeconfigs[param_00];
-  self stoploopsound(var_01.sfxcannonfireloop_1p);
+  var_1 = level.planeconfigs[var_0];
+  self stoploopsound(var_1.sfxcannonfireloop_1p);
   scripts\mp\killstreaks\_plane::stoptrackingplane(self);
   wait(5);
   if(isDefined(self)) {
-    self stoploopsound(var_01.sfxengine_1p);
+    self stoploopsound(var_1.sfxengine_1p);
     cleanupaircraft();
   }
 }
 
-createplaneasheli(param_00, param_01, param_02) {
-  var_03 = level.planeconfigs[param_00];
-  var_04 = getcsplinepointposition(param_02, 0);
-  var_05 = getcsplinepointtangent(param_02, 0);
-  var_06 = vectortoangles(var_05);
-  var_07 = spawnhelicopter(self, var_04, var_06, var_03.vehicle, var_03.var_B923[self.team]);
-  if(!isDefined(var_07)) {
+createplaneasheli(var_0, var_1, var_2) {
+  var_3 = level.planeconfigs[var_0];
+  var_4 = getcsplinepointposition(var_2, 0);
+  var_5 = getcsplinepointtangent(var_2, 0);
+  var_6 = vectortoangles(var_5);
+  var_7 = spawnhelicopter(self, var_4, var_6, var_3.vehicle, var_3.var_B923[self.team]);
+  if(!isDefined(var_7)) {
     return undefined;
   }
 
-  var_07 makevehiclesolidcapsule(18, -9, 18);
-  var_07.triggerportableradarping = self;
-  var_07.team = self.team;
-  var_07.lifeid = param_01;
-  var_07 thread scripts\mp\killstreaks\_plane::playplanefx();
-  return var_07;
+  var_7 makevehiclesolidcapsule(18, -9, 18);
+  var_7.triggerportableradarping = self;
+  var_7.team = self.team;
+  var_7.lifeid = var_1;
+  var_7 thread scripts\mp\killstreaks\_plane::playplanefx();
+  return var_7;
 }
 
 handledeath() {
@@ -275,82 +275,82 @@ a10_freezebuffer() {
   scripts\mp\utility::freezecontrolswrapper(0);
 }
 
-monitorrocketfire(param_00, param_01) {
-  param_01 endon("end_remote");
-  param_01 endon("death");
+monitorrocketfire(var_0, var_1) {
+  var_1 endon("end_remote");
+  var_1 endon("death");
   self endon("death");
   level endon("game_ended");
-  var_02 = level.planeconfigs[param_00];
-  param_01.numrocketsleft = var_02.numrockets;
+  var_2 = level.planeconfigs[var_0];
+  var_1.numrocketsleft = var_2.numrockets;
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
   if(!level.console) {
     self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
   }
 
-  while(param_01.numrocketsleft > 0) {
+  while(var_1.numrocketsleft > 0) {
     self waittill("rocket_fire_pressed");
-    param_01 onfirerocket(param_00);
-    wait(var_02.delaybetweenrockets);
+    var_1 onfirerocket(var_0);
+    wait(var_2.delaybetweenrockets);
   }
 }
 
-monitorrocketfire2(param_00, param_01) {
-  param_01 endon("end_remote");
-  param_01 endon("death");
+monitorrocketfire2(var_0, var_1) {
+  var_1 endon("end_remote");
+  var_1 endon("death");
   self endon("death");
   level endon("game_ended");
-  var_02 = level.planeconfigs[param_00];
-  param_01.numrocketsleft = var_02.numrockets;
+  var_2 = level.planeconfigs[var_0];
+  var_1.numrocketsleft = var_2.numrockets;
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
   if(!level.console) {
     self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
   }
 
-  param_01.targetlist = [];
-  while(param_01.numrocketsleft > 0) {
+  var_1.targetlist = [];
+  while(var_1.numrocketsleft > 0) {
     if(!self adsbuttonpressed()) {
       self waittill("rocket_fire_pressed");
     }
 
-    param_01 missileacquiretargets();
-    if(param_01.targetlist.size > 0) {
-      param_01 thread firemissiles();
+    var_1 missileacquiretargets();
+    if(var_1.targetlist.size > 0) {
+      var_1 thread firemissiles();
     }
   }
 }
 
 missilegetbesttarget() {
-  var_00 = [];
-  foreach(var_02 in level.players) {
-    if(missileisgoodtarget(var_02)) {
-      var_00[var_00.size] = var_02;
+  var_0 = [];
+  foreach(var_2 in level.players) {
+    if(missileisgoodtarget(var_2)) {
+      var_0[var_0.size] = var_2;
     }
   }
 
-  foreach(var_05 in level.uplinks) {
-    if(missileisgoodtarget(var_05)) {
-      var_00[var_00.size] = var_05;
+  foreach(var_5 in level.uplinks) {
+    if(missileisgoodtarget(var_5)) {
+      var_0[var_0.size] = var_5;
     }
   }
 
-  if(var_00.size > 0) {
-    var_07 = sortbydistance(var_00, self.origin);
-    return var_07[0];
+  if(var_0.size > 0) {
+    var_7 = sortbydistance(var_0, self.origin);
+    return var_7[0];
   }
 
   return undefined;
 }
 
-missileisgoodtarget(param_00) {
-  return isalive(param_00) && param_00.team != self.triggerportableradarping.team && !ismissiletargeted(param_00) && isplayer(param_00) && !param_00 scripts\mp\utility::_hasperk("specialty_blindeye") && missiletargetangle(param_00) > 0.25;
+missileisgoodtarget(var_0) {
+  return isalive(var_0) && var_0.team != self.triggerportableradarping.team && !ismissiletargeted(var_0) && isplayer(var_0) && !var_0 scripts\mp\utility::_hasperk("specialty_blindeye") && missiletargetangle(var_0) > 0.25;
 }
 
-missiletargetangle(param_00) {
-  var_01 = vectornormalize(param_00.origin - self.origin);
-  var_02 = anglesToForward(self.angles);
-  return vectordot(var_01, var_02);
+missiletargetangle(var_0) {
+  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_2 = anglesToForward(self.angles);
+  return vectordot(var_1, var_2);
 }
 
 missileacquiretargets() {
@@ -358,17 +358,17 @@ missileacquiretargets() {
   self endon("end_remote");
   level endon("game_ended");
   self endon("a10_missiles_fired");
-  var_00 = level.planeconfigs[self.streakname];
+  var_0 = level.planeconfigs[self.streakname];
   self.triggerportableradarping setclientomnvar("ui_a10_rocket_lock", 1);
   thread missilewaitfortriggerrelease();
-  var_01 = undefined;
+  var_1 = undefined;
   while(self.targetlist.size < self.numrocketsleft) {
-    if(!isDefined(var_01)) {
-      var_01 = missilegetbesttarget();
-      if(isDefined(var_01)) {
-        thread missilelocktarget(var_01);
-        wait(var_00.delaybetweenlockon);
-        var_01 = undefined;
+    if(!isDefined(var_1)) {
+      var_1 = missilegetbesttarget();
+      if(isDefined(var_1)) {
+        thread missilelocktarget(var_1);
+        wait(var_0.delaybetweenlockon);
+        var_1 = undefined;
         continue;
       }
     }
@@ -385,92 +385,92 @@ missilewaitfortriggerrelease() {
   self endon("death");
   level endon("game_ended");
   self endon("a10_missiles_fired");
-  var_00 = self.triggerportableradarping;
-  var_00 notifyonplayercommand("rocket_fire_released", "-speed_throw");
-  var_00 notifyonplayercommand("rocket_fire_released", "-ads_akimbo_accessible");
+  var_0 = self.triggerportableradarping;
+  var_0 notifyonplayercommand("rocket_fire_released", "-speed_throw");
+  var_0 notifyonplayercommand("rocket_fire_released", "-ads_akimbo_accessible");
   if(!level.console) {
-    var_00 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
+    var_0 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
   }
 
   self.triggerportableradarping waittill("rocket_fire_released");
-  var_00 setclientomnvar("ui_a10_rocket_lock", 0);
+  var_0 setclientomnvar("ui_a10_rocket_lock", 0);
   self notify("a10_missiles_fired");
 }
 
-missilelocktarget(param_00) {
-  var_01 = level.planeconfigs[self.streakname];
-  var_02 = [];
-  var_02["icon"] = param_00 scripts\mp\entityheadicons::setheadicon(self.triggerportableradarping, var_01.lockonicon, (0, 0, -70), 10, 10, 0, 0.05, 1, 0, 0, 0);
-  var_02["target"] = param_00;
-  self.targetlist[param_00 getentitynumber()] = var_02;
+missilelocktarget(var_0) {
+  var_1 = level.planeconfigs[self.streakname];
+  var_2 = [];
+  var_2["icon"] = var_0 scripts\mp\entityheadicons::setheadicon(self.triggerportableradarping, var_1.lockonicon, (0, 0, -70), 10, 10, 0, 0.05, 1, 0, 0, 0);
+  var_2["target"] = var_0;
+  self.targetlist[var_0 getentitynumber()] = var_2;
   self.triggerportableradarping playlocalsound("recondrone_lockon");
 }
 
-ismissiletargeted(param_00) {
-  return isDefined(self.targetlist[param_00 getentitynumber()]);
+ismissiletargeted(var_0) {
+  return isDefined(self.targetlist[var_0 getentitynumber()]);
 }
 
 firemissiles() {
   self endon("death");
   level endon("game_ended");
-  var_00 = level.planeconfigs[self.streakname];
-  foreach(var_02 in self.targetlist) {
+  var_0 = level.planeconfigs[self.streakname];
+  foreach(var_2 in self.targetlist) {
     if(self.numrocketsleft > 0) {
-      var_03 = onfirehomingmissile(self.streakname, var_02["target"], (0, 0, -70));
-      if(isDefined(var_02["icon"])) {
-        var_03.icon = var_02["icon"];
-        var_02["icon"] = undefined;
+      var_3 = onfirehomingmissile(self.streakname, var_2["target"], (0, 0, -70));
+      if(isDefined(var_2["icon"])) {
+        var_3.icon = var_2["icon"];
+        var_2["icon"] = undefined;
       }
 
-      wait(var_00.delaybetweenrockets);
+      wait(var_0.delaybetweenrockets);
       continue;
     }
 
     break;
   }
 
-  var_05 = [];
+  var_5 = [];
 }
 
-onfirehomingmissile(param_00, param_01, param_02) {
-  var_03 = self.numrocketsleft % 2;
-  var_04 = "tag_missile_" + var_03 + 1;
-  var_05 = self gettagorigin(var_04);
-  if(isDefined(var_05)) {
-    var_06 = self.triggerportableradarping;
-    var_07 = level.planeconfigs[param_00];
-    var_08 = scripts\mp\utility::_magicbullet(var_07.rocketmodelname, var_05, var_05 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
-    var_08 thread a10_missile_set_target(param_01, param_02);
+onfirehomingmissile(var_0, var_1, var_2) {
+  var_3 = self.numrocketsleft % 2;
+  var_4 = "tag_missile_" + var_3 + 1;
+  var_5 = self gettagorigin(var_4);
+  if(isDefined(var_5)) {
+    var_6 = self.triggerportableradarping;
+    var_7 = level.planeconfigs[var_0];
+    var_8 = scripts\mp\utility::_magicbullet(var_7.rocketmodelname, var_5, var_5 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
+    var_8 thread a10_missile_set_target(var_1, var_2);
     earthquake(0.25, 0.05, self.origin, 512);
     self.numrocketsleft--;
-    var_07 = level.planeconfigs[param_00];
-    var_08 playsoundonmovingent(var_07.sfxmissilefire_1p[var_03]);
-    var_08 playLoopSound(var_07.sfxmissile);
-    return var_08;
+    var_7 = level.planeconfigs[var_0];
+    var_8 playsoundonmovingent(var_7.sfxmissilefire_1p[var_3]);
+    var_8 playLoopSound(var_7.sfxmissile);
+    return var_8;
   }
 
   return undefined;
 }
 
-onfirerocket(param_00) {
-  var_01 = "tag_missile_" + self.numrocketsleft;
-  var_02 = self gettagorigin(var_01);
-  if(isDefined(var_02)) {
-    var_03 = self.triggerportableradarping;
-    var_04 = level.planeconfigs[param_00];
-    var_05 = scripts\mp\utility::_magicbullet(var_04.rocketmodelname, var_02, var_02 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
+onfirerocket(var_0) {
+  var_1 = "tag_missile_" + self.numrocketsleft;
+  var_2 = self gettagorigin(var_1);
+  if(isDefined(var_2)) {
+    var_3 = self.triggerportableradarping;
+    var_4 = level.planeconfigs[var_0];
+    var_5 = scripts\mp\utility::_magicbullet(var_4.rocketmodelname, var_2, var_2 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
     earthquake(0.25, 0.05, self.origin, 512);
     self.numrocketsleft--;
-    var_05 playsoundonmovingent(var_04.sfxmissilefire_1p[self.numrocketsleft]);
-    var_05 playLoopSound(var_04.sfxmissile);
+    var_5 playsoundonmovingent(var_4.sfxmissilefire_1p[self.numrocketsleft]);
+    var_5 playLoopSound(var_4.sfxmissile);
     self playsoundonmovingent("a10p_missile_launch");
   }
 }
 
-a10_missile_set_target(param_00, param_01) {
+a10_missile_set_target(var_0, var_1) {
   thread a10_missile_cleanup();
   wait(0.2);
-  self missile_settargetent(param_00, param_01);
+  self missile_settargetent(var_0, var_1);
 }
 
 a10_missile_cleanup() {
@@ -480,68 +480,68 @@ a10_missile_cleanup() {
   }
 }
 
-monitorweaponfire(param_00, param_01) {
-  param_01 endon("end_remote");
-  param_01 endon("death");
+monitorweaponfire(var_0, var_1) {
+  var_1 endon("end_remote");
+  var_1 endon("death");
   self endon("death");
   level endon("game_ended");
-  var_02 = level.planeconfigs[param_00];
-  param_01.ammocount = 1350;
+  var_2 = level.planeconfigs[var_0];
+  var_1.ammocount = 1350;
   self notifyonplayercommand("a10_cannon_start", "+attack");
   self notifyonplayercommand("a10_cannon_start", "+attack_akimbo_accessible");
   self notifyonplayercommand("a10_cannon_stop", "-attack");
   self notifyonplayercommand("a10_cannon_stop", "-attack_akimbo_accessible");
-  while(param_01.ammocount > 0) {
+  while(var_1.ammocount > 0) {
     if(!self attackbuttonpressed()) {
       self waittill("a10_cannon_start");
     }
 
-    var_03 = gettime() + var_02.sfxcannonfireburptime;
-    param_01 playLoopSound(var_02.sfxcannonfireloop_1p);
-    param_01 thread updatecannonshake(param_00);
+    var_3 = gettime() + var_2.sfxcannonfireburptime;
+    var_1 playLoopSound(var_2.sfxcannonfireloop_1p);
+    var_1 thread updatecannonshake(var_0);
     self waittill("a10_cannon_stop");
-    param_01 stoploopsound(var_02.sfxcannonfireloop_1p);
-    param_01 playsoundonmovingent(var_02.sfxcannonfirestop_1p);
-    if(gettime() < var_03) {
-      playsoundatpos(param_01.origin, var_02.sfxcannonfireburpshort_3p);
+    var_1 stoploopsound(var_2.sfxcannonfireloop_1p);
+    var_1 playsoundonmovingent(var_2.sfxcannonfirestop_1p);
+    if(gettime() < var_3) {
+      playsoundatpos(var_1.origin, var_2.sfxcannonfireburpshort_3p);
       continue;
     }
 
-    playsoundatpos(param_01.origin, var_02.sfxcannonfireburplong_3p);
+    playsoundatpos(var_1.origin, var_2.sfxcannonfireburplong_3p);
   }
 }
 
-updatecannonshake(param_00) {
+updatecannonshake(var_0) {
   self.triggerportableradarping endon("a10_cannon_stop");
   self endon("death");
   level endon("game_ended");
-  var_01 = level.planeconfigs[param_00];
+  var_1 = level.planeconfigs[var_0];
   while(self.ammocount > 0) {
     earthquake(0.2, 0.5, self.origin, 512);
     self.ammocount = self.ammocount - 10;
-    var_02 = self gettagorigin("tag_flash_attach") + 20 * anglesToForward(self.angles);
-    playFX(var_01.cannonfirevfx, var_02);
-    self playrumbleonentity(var_01.cannonrumble);
+    var_2 = self gettagorigin("tag_flash_attach") + 20 * anglesToForward(self.angles);
+    playFX(var_1.cannonfirevfx, var_2);
+    self playrumbleonentity(var_1.cannonrumble);
     wait(0.1);
   }
 
   self.turret turretfiredisable();
 }
 
-monitoraltitude(param_00, param_01) {
-  param_01 endon("end_remote");
-  param_01 endon("death");
+monitoraltitude(var_0, var_1) {
+  var_1 endon("end_remote");
+  var_1 endon("death");
   self endon("death");
   level endon("game_ended");
   self setclientomnvar("ui_a10_alt_warn", 0);
   for(;;) {
-    var_02 = int(clamp(param_01.origin[2], 0, 16383));
-    self setclientomnvar("ui_a10_alt", var_02);
-    if(var_02 <= 1000 && !isDefined(param_01.altwarning)) {
-      param_01.altwarning = 1;
+    var_2 = int(clamp(var_1.origin[2], 0, 16383));
+    self setclientomnvar("ui_a10_alt", var_2);
+    if(var_2 <= 1000 && !isDefined(var_1.altwarning)) {
+      var_1.altwarning = 1;
       self setclientomnvar("ui_a10_alt_warn", 1);
-    } else if(var_02 > 1000 && isDefined(param_01.altwarning)) {
-      param_01.altwarning = undefined;
+    } else if(var_2 > 1000 && isDefined(var_1.altwarning)) {
+      var_1.altwarning = undefined;
       self setclientomnvar("ui_a10_alt_warn", 0);
     }
 
@@ -549,55 +549,55 @@ monitoraltitude(param_00, param_01) {
   }
 }
 
-watchintrocleared(param_00, param_01) {
+watchintrocleared(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("intro_cleared");
-  thread monitoraltitude(param_00, param_01);
-  thread monitorrocketfire2(param_00, param_01);
-  thread monitorweaponfire(param_00, param_01);
-  thread watchroundend(param_01, param_00);
+  thread monitoraltitude(var_0, var_1);
+  thread monitorrocketfire2(var_0, var_1);
+  thread monitorweaponfire(var_0, var_1);
+  thread watchroundend(var_1, var_0);
   self thermalvisionfofoverlayon();
-  thread watchearlyexit(param_01);
+  thread watchearlyexit(var_1);
 }
 
-watchroundend(param_00, param_01) {
-  param_00 endon("death");
-  param_00 endon("leaving");
+watchroundend(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("leaving");
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
   level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
-  param_00 thread endflyby(param_01);
-  endstrafesequence(param_01);
+  var_0 thread endflyby(var_1);
+  endstrafesequence(var_1);
   a10_explode();
 }
 
 buildallflightpathsdefault() {
-  var_00 = [];
-  var_00[0] = 1;
-  var_00[1] = 2;
-  var_00[2] = 3;
-  var_00[3] = 4;
-  var_00[4] = 1;
-  var_00[5] = 2;
-  var_00[6] = 4;
-  var_00[7] = 3;
-  var_01 = [];
-  var_01[0] = 2;
-  var_01[1] = 1;
-  var_01[2] = 4;
-  var_01[3] = 3;
-  var_01[4] = 1;
-  var_01[5] = 4;
-  var_01[6] = 3;
-  var_01[7] = 2;
-  buildallflightpaths(var_00, var_01);
+  var_0 = [];
+  var_0[0] = 1;
+  var_0[1] = 2;
+  var_0[2] = 3;
+  var_0[3] = 4;
+  var_0[4] = 1;
+  var_0[5] = 2;
+  var_0[6] = 4;
+  var_0[7] = 3;
+  var_1 = [];
+  var_1[0] = 2;
+  var_1[1] = 1;
+  var_1[2] = 4;
+  var_1[3] = 3;
+  var_1[4] = 1;
+  var_1[5] = 4;
+  var_1[6] = 3;
+  var_1[7] = 2;
+  buildallflightpaths(var_0, var_1);
 }
 
-buildallflightpaths(param_00, param_01) {
-  level.a10splinesin = param_00;
-  level.a10splinesout = param_01;
+buildallflightpaths(var_0, var_1) {
+  level.a10splinesin = var_0;
+  level.a10splinesout = var_1;
 }
 
 a10_cockpit_breathing() {
@@ -605,41 +605,41 @@ a10_cockpit_breathing() {
   wait(randomfloatrange(3, 7));
 }
 
-watchearlyexit(param_00) {
+watchearlyexit(var_0) {
   level endon("game_ended");
-  param_00 endon("death");
-  param_00 endon("a10_end_strafe");
-  param_00 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
-  param_00 waittill("killstreakExit");
+  var_0 endon("death");
+  var_0 endon("a10_end_strafe");
+  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 waittill("killstreakExit");
   self notify("end_remote");
-  param_00 thread endflyby(param_00.streakname);
-  endstrafesequence(param_00.streakname);
-  param_00 a10_explode();
+  var_0 thread endflyby(var_0.streakname);
+  endstrafesequence(var_0.streakname);
+  var_0 a10_explode();
 }
 
 a10_handledamage() {
   self endon("end_remote");
-  var_00 = level.planeconfigs[self.streakname];
-  scripts\mp\damage::monitordamage(var_00.maxhealth, "helicopter", ::handledeathdamage, ::modifydamage, 1);
+  var_0 = level.planeconfigs[self.streakname];
+  scripts\mp\damage::monitordamage(var_0.maxhealth, "helicopter", ::handledeathdamage, ::modifydamage, 1);
 }
 
-modifydamage(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_03;
-  var_05 = scripts\mp\damage::handleempdamage(param_01, param_02, var_05);
-  var_05 = scripts\mp\damage::handlemissiledamage(param_01, param_02, var_05);
-  var_05 = scripts\mp\damage::handleapdamage(param_01, param_02, var_05);
-  return var_05;
+modifydamage(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  var_5 = scripts\mp\damage::handleempdamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handlemissiledamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
+  return var_5;
 }
 
-handledeathdamage(param_00, param_01, param_02, param_03) {
-  var_04 = level.planeconfigs[self.streakname];
-  scripts\mp\damage::onkillstreakkilled("a10", param_00, param_01, param_02, param_03, var_04.scorepopup, var_04.vodestroyed, var_04.callout);
+handledeathdamage(var_0, var_1, var_2, var_3) {
+  var_4 = level.planeconfigs[self.streakname];
+  scripts\mp\damage::onkillstreakkilled("a10", var_0, var_1, var_2, var_3, var_4.scorepopup, var_4.vodestroyed, var_4.callout);
   a10_explode();
 }
 
 a10_explode() {
-  var_00 = level.planeconfigs[self.streakname];
+  var_0 = level.planeconfigs[self.streakname];
   scripts\mp\killstreaks\_plane::stoptrackingplane(self);
-  playFX(var_00.explodevfx, self.origin);
+  playFX(var_0.explodevfx, self.origin);
   self delete();
 }

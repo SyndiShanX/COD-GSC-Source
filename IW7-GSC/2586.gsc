@@ -12,17 +12,17 @@ asm_globalinit() {
   anim.asm = [];
 }
 
-func_230B(param_00, param_01) {
+func_230B(var_0, var_1) {
   asm_globalinit();
-  level.asm[param_00] = spawnStruct();
-  level.asm[param_00].var_9881 = param_01;
-  level.asm[param_00].states = [];
-  level.asm[param_00].var_F281 = [];
-  anim.var_DEF5 = param_00;
+  level.asm[var_0] = spawnStruct();
+  level.asm[var_0].var_9881 = var_1;
+  level.asm[var_0].states = [];
+  level.asm[var_0].var_F281 = [];
+  anim.var_DEF5 = var_0;
 }
 
-func_232E(param_00) {
-  return isDefined(level.asm) && isDefined(level.asm[param_00]);
+func_232E(var_0) {
+  return isDefined(level.asm) && isDefined(level.asm[var_0]);
 }
 
 func_2327() {
@@ -30,133 +30,133 @@ func_2327() {
   anim.var_DEF7 = undefined;
 }
 
-func_2373(param_00, param_01) {
-  level.asm[level.var_DEF5].var_F281[param_00] = param_01;
+func_2373(var_0, var_1) {
+  level.asm[level.var_DEF5].var_F281[var_0] = var_1;
 }
 
-func_2374(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D, param_0E, param_0F, param_10, param_11, param_12, param_13, param_14, param_15) {
+func_2374(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, param_10, param_11, param_12, param_13, param_14, param_15) {
   var_16 = level.asm[level.var_DEF5];
-  var_16.states[param_00] = spawnStruct();
-  var_16.states[param_00].var_7048 = param_01;
-  var_16.states[param_00].var_E88A = param_02;
-  var_16.states[param_00].var_71C5 = param_03;
-  var_16.states[param_00].var_71D2 = param_04;
-  var_16.states[param_00].var_116FB = param_05;
-  var_16.states[param_00].var_71A5 = param_06;
-  var_16.states[param_00].var_7DC8 = param_07;
-  var_16.states[param_00].transitions = [];
-  var_16.states[param_00].magicbullet = param_08;
-  var_16.states[param_00].var_10B53 = param_09;
-  var_16.states[param_00].var_6A8B = param_0B;
-  var_16.states[param_00].var_C87F = param_0C;
-  var_16.states[param_00].var_C87C = param_0D;
-  var_16.states[param_00].var_4E6D = param_0E;
-  var_16.states[param_00].var_4E54 = param_0F;
-  var_16.states[param_00].var_D773 = param_10;
-  var_16.states[param_00].var_D772 = param_11;
-  var_16.states[param_00].var_116FA = param_12;
-  var_16.states[param_00].var_C704 = param_13;
-  var_16.states[param_00].var_1FBA = param_14;
-  var_16.states[param_00].var_C94B = param_15;
-  var_16.states[param_00].var_111AC = param_0A;
-  anim.var_DEF7 = param_00;
+  var_16.states[var_0] = spawnStruct();
+  var_16.states[var_0].var_7048 = var_1;
+  var_16.states[var_0].var_E88A = var_2;
+  var_16.states[var_0].var_71C5 = var_3;
+  var_16.states[var_0].var_71D2 = var_4;
+  var_16.states[var_0].var_116FB = var_5;
+  var_16.states[var_0].var_71A5 = var_6;
+  var_16.states[var_0].var_7DC8 = var_7;
+  var_16.states[var_0].transitions = [];
+  var_16.states[var_0].magicbullet = var_8;
+  var_16.states[var_0].var_10B53 = var_9;
+  var_16.states[var_0].var_6A8B = var_0B;
+  var_16.states[var_0].var_C87F = var_0C;
+  var_16.states[var_0].var_C87C = var_0D;
+  var_16.states[var_0].var_4E6D = var_0E;
+  var_16.states[var_0].var_4E54 = var_0F;
+  var_16.states[var_0].var_D773 = param_10;
+  var_16.states[var_0].var_D772 = param_11;
+  var_16.states[var_0].var_116FA = param_12;
+  var_16.states[var_0].var_C704 = param_13;
+  var_16.states[var_0].var_1FBA = param_14;
+  var_16.states[var_0].var_C94B = param_15;
+  var_16.states[var_0].var_111AC = var_0A;
+  anim.var_DEF7 = var_0;
 }
 
-func_2375(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = level.asm[level.var_DEF5];
-  var_07 = spawnStruct();
-  var_07.var_2B93 = param_01;
-  var_07.var_71D1 = param_02;
-  var_07.var_100B1 = param_03;
-  var_07.var_11A1A = param_00;
-  var_06.states[level.var_DEF7].transitions[var_06.states[level.var_DEF7].transitions.size] = var_07;
+func_2375(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = level.asm[level.var_DEF5];
+  var_7 = spawnStruct();
+  var_7.var_2B93 = var_1;
+  var_7.var_71D1 = var_2;
+  var_7.var_100B1 = var_3;
+  var_7.var_11A1A = var_0;
+  var_6.states[level.var_DEF7].transitions[var_6.states[level.var_DEF7].transitions.size] = var_7;
 }
 
-asm_fireephemeralevent(param_00, param_01, param_02) {
-  var_03 = spawnStruct();
-  var_03.var_7686 = gettime();
-  var_03.name = param_01;
-  var_03.params = param_02;
-  if(!isDefined(self.var_1198.var_2329[param_00])) {
-    self.var_1198.var_2329[param_00] = [];
+asm_fireephemeralevent(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.var_7686 = gettime();
+  var_3.name = var_1;
+  var_3.params = var_2;
+  if(!isDefined(self._blackboard.var_2329[var_0])) {
+    self._blackboard.var_2329[var_0] = [];
   }
 
-  self.var_1198.var_2329[param_00][self.var_1198.var_2329[param_00].size] = var_03;
-  if(isDefined(self.var_1198.asm_ephemeral_event_watchlist[param_00]) && self.var_1198.asm_ephemeral_event_watchlist[param_00] == param_01) {
-    self.var_3135.var_72EB = 1;
-    self.var_1198.asm_ephemeral_event_watchlist[param_00] = undefined;
+  self._blackboard.var_2329[var_0][self._blackboard.var_2329[var_0].size] = var_3;
+  if(isDefined(self._blackboard.asm_ephemeral_event_watchlist[var_0]) && self._blackboard.asm_ephemeral_event_watchlist[var_0] == var_1) {
+    self.bt.var_72EB = 1;
+    self._blackboard.asm_ephemeral_event_watchlist[var_0] = undefined;
   }
 }
 
-func_2351(param_00, param_01) {
-  var_02 = level.asm[param_00];
-  self.var_164D[param_00] = spawnStruct();
-  self.var_164D[param_00].var_4BC0 = undefined;
-  if(param_01) {
-    self.var_164D[param_00].var_2F3C = 1;
+func_2351(var_0, var_1) {
+  var_2 = level.asm[var_0];
+  self.var_164D[var_0] = spawnStruct();
+  self.var_164D[var_0].var_4BC0 = undefined;
+  if(var_1) {
+    self.var_164D[var_0].var_2F3C = 1;
   }
 
-  foreach(var_04 in var_02.var_F281) {
-    self thread[[var_04]](param_00);
+  foreach(var_4 in var_2.var_F281) {
+    self thread[[var_4]](var_0);
   }
 
-  func_238A(param_00, var_02.var_9881, 0);
+  func_238A(var_0, var_2.var_9881, 0);
 }
 
 func_234E() {
-  self.var_1198 = spawnStruct();
-  self.var_1198.var_527D = "stand";
-  self.var_1198.asm_events = [];
-  self.var_1198.var_2329 = [];
-  self.var_1198.asm_ephemeral_event_watchlist = [];
-  self.var_1198.breload = 0;
-  self.var_1198.var_2AA6 = 0;
-  self.var_1198.movetype = "combat";
-  self.var_1198.animscriptedactive = 0;
-  self.var_1198.alwaysrunforward = 0;
-  self.var_1198.var_444A = 0;
+  self._blackboard = spawnStruct();
+  self._blackboard.var_527D = "stand";
+  self._blackboard.asm_events = [];
+  self._blackboard.var_2329 = [];
+  self._blackboard.asm_ephemeral_event_watchlist = [];
+  self._blackboard.breload = 0;
+  self._blackboard.var_2AA6 = 0;
+  self._blackboard.movetype = "combat";
+  self._blackboard.animscriptedactive = 0;
+  self._blackboard.alwaysrunforward = 0;
+  self._blackboard.var_444A = 0;
 }
 
-asm_clearevents(param_00) {
-  if(isDefined(self.var_1198.asm_events[param_00])) {
-    self.var_1198.asm_events[param_00] = undefined;
+asm_clearevents(var_0) {
+  if(isDefined(self._blackboard.asm_events[var_0])) {
+    self._blackboard.asm_events[var_0] = undefined;
   }
 }
 
-func_2388(param_00, param_01, param_02, param_03) {
-  self notify(param_01 + "_finished");
-  asm_fireevent(param_01, "ASM_Finished");
-  if(isDefined(param_02.var_71D2)) {
-    self[[param_02.var_71D2]](param_00, param_01, param_03);
+func_2388(var_0, var_1, var_2, var_3) {
+  self notify(var_1 + "_finished");
+  asm_fireevent(var_1, "ASM_Finished");
+  if(isDefined(var_2.var_71D2)) {
+    self[[var_2.var_71D2]](var_0, var_1, var_3);
   }
 
-  if(isDefined(param_02.var_116FA)) {
-    asm_fireephemeralevent(param_02.var_116FA, "end");
+  if(isDefined(var_2.var_116FA)) {
+    asm_fireephemeralevent(var_2.var_116FA, "end");
   }
 }
 
-func_2387(param_00) {
-  var_01 = level.asm[param_00];
-  var_02 = self.var_164D[param_00].var_4BC0;
-  func_2388(param_00, var_02, var_01.states[var_02], var_01.states[var_02].var_116FB);
-  self.var_164D[param_00] = undefined;
+func_2387(var_0) {
+  var_1 = level.asm[var_0];
+  var_2 = self.var_164D[var_0].var_4BC0;
+  func_2388(var_0, var_2, var_1.states[var_2], var_1.states[var_2].var_116FB);
+  self.var_164D[var_0] = undefined;
 }
 
-func_238A(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = level.asm[param_00];
-  var_07 = var_06.states[param_01];
-  var_08 = self.var_164D[param_00];
-  var_08.var_10E23 = var_08.var_4BC0;
-  var_08.var_4BC0 = param_01;
-  asm_clearevents(param_01);
+func_238A(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = level.asm[var_0];
+  var_7 = var_6.states[var_1];
+  var_8 = self.var_164D[var_0];
+  var_8.var_10E23 = var_8.var_4BC0;
+  var_8.var_4BC0 = var_1;
+  asm_clearevents(var_1);
   self.asm.var_4E6E = undefined;
-  var_09 = var_07.var_111AC;
+  var_9 = var_7.var_111AC;
   var_0A = undefined;
-  if(isDefined(var_08.var_10E23)) {
-    var_0A = var_06.states[var_08.var_10E23].var_111AC;
+  if(isDefined(var_8.var_10E23)) {
+    var_0A = var_6.states[var_8.var_10E23].var_111AC;
     if(isDefined(var_0A)) {
       foreach(var_0C in var_0A) {
-        if(!isDefined(var_09) || !scripts\engine\utility::array_contains(var_09, var_0C)) {
+        if(!isDefined(var_9) || !scripts\engine\utility::array_contains(var_9, var_0C)) {
           func_2387(var_0C);
         }
       }
@@ -164,32 +164,32 @@ func_238A(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   if(isDefined(self.var_7195)) {
-    self[[self.var_7195]](var_07);
+    self[[self.var_7195]](var_7);
   }
 
-  self[[self.var_718F]](var_07);
-  if(isDefined(var_08.var_2F3C) && var_08.var_2F3C) {
-    self.var_34 = isDefined(var_07.var_C87F);
+  self[[self.var_718F]](var_7);
+  if(isDefined(var_8.var_2F3C) && var_8.var_2F3C) {
+    self.var_34 = isDefined(var_7.var_C87F);
   }
 
   var_0E = undefined;
-  if(isDefined(param_05)) {
-    var_0E = param_05;
-  } else if(isDefined(var_07.var_E88A)) {
-    var_0E = var_07.var_E88A;
+  if(isDefined(var_5)) {
+    var_0E = var_5;
+  } else if(isDefined(var_7.var_E88A)) {
+    var_0E = var_7.var_E88A;
   }
 
-  self thread[[var_07.var_7048]](param_00, param_01, param_02, var_0E);
+  self thread[[var_7.var_7048]](var_0, var_1, var_2, var_0E);
   if(isDefined(self.var_718D)) {
-    self[[self.var_718D]](param_00, var_08.var_10E23, param_01, param_02);
+    self[[self.var_718D]](var_0, var_8.var_10E23, var_1, var_2);
   }
 
   if(isDefined(self.var_718E)) {
-    self[[self.var_718E]](param_00, param_01);
+    self[[self.var_718E]](var_0, var_1);
   }
 
-  if(isDefined(var_07.var_111AC)) {
-    foreach(var_0C in var_07.var_111AC) {
+  if(isDefined(var_7.var_111AC)) {
+    foreach(var_0C in var_7.var_111AC) {
       if(!isDefined(var_0A) || !scripts\engine\utility::array_contains(var_0A, var_0C)) {
         func_2351(var_0C, 0);
       }
@@ -197,107 +197,107 @@ func_238A(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 }
 
-func_2341(param_00, param_01) {
-  if(isDefined(level.asm[param_00].states[param_01].var_71C5)) {
-    return level.asm[param_00].states[param_01].var_71C5;
+func_2341(var_0, var_1) {
+  if(isDefined(level.asm[var_0].states[var_1].var_71C5)) {
+    return level.asm[var_0].states[var_1].var_71C5;
   }
 
   return undefined;
 }
 
-func_231E(param_00, param_01, param_02) {
+func_231E(var_0, var_1, var_2) {
   if(isDefined(self.asm.var_4E6E)) {
-    var_03 = self.asm.var_4E6E.var_10E2C;
-    var_04 = self.asm.var_4E6E.params;
+    var_3 = self.asm.var_4E6E.var_10E2C;
+    var_4 = self.asm.var_4E6E.params;
   } else {
-    var_03 = var_03.var_4E6D;
-    var_04 = param_02.var_4E54;
+    var_3 = var_3.var_4E6D;
+    var_4 = var_2.var_4E54;
   }
 
-  var_05 = level.asm[param_00].states[var_03];
-  func_2388(param_00, param_02, param_01, param_01.var_116FB);
-  var_06 = var_03;
-  if(isDefined(var_05.var_C94B) && var_05.var_C94B) {
-    var_07 = func_2310(param_00, var_03, 1);
-    var_06 = var_07[0];
-    var_08 = var_07[1];
+  var_5 = level.asm[var_0].states[var_3];
+  func_2388(var_0, var_2, var_1, var_1.var_116FB);
+  var_6 = var_3;
+  if(isDefined(var_5.var_C94B) && var_5.var_C94B) {
+    var_7 = func_2310(var_0, var_3, 1);
+    var_6 = var_7[0];
+    var_8 = var_7[1];
   }
 
-  func_238A(param_00, var_06, 0.2, undefined, undefined, var_04);
+  func_238A(var_0, var_6, 0.2, undefined, undefined, var_4);
 }
 
-func_231B(param_00, param_01) {
-  var_02 = self.var_164D[param_00];
-  if(!isDefined(var_02.var_4BC0)) {
+func_231B(var_0, var_1) {
+  var_2 = self.var_164D[var_0];
+  if(!isDefined(var_2.var_4BC0)) {
     return 0;
   }
 
-  var_03 = level.asm[param_00].states[var_02.var_4BC0].magicbullet;
-  if(isDefined(var_03) && scripts\engine\utility::array_contains(var_03, param_01)) {
+  var_3 = level.asm[var_0].states[var_2.var_4BC0].magicbullet;
+  if(isDefined(var_3) && scripts\engine\utility::array_contains(var_3, var_1)) {
     return 1;
   }
 
   return 0;
 }
 
-func_2384(param_00, param_01, param_02) {
-  var_03 = self.var_164D[param_00];
-  var_04 = level.asm[param_00].states[param_01].magicbullet;
-  if(isDefined(var_04) && scripts\engine\utility::array_contains(var_04, param_02)) {
+func_2384(var_0, var_1, var_2) {
+  var_3 = self.var_164D[var_0];
+  var_4 = level.asm[var_0].states[var_1].magicbullet;
+  if(isDefined(var_4) && scripts\engine\utility::array_contains(var_4, var_2)) {
     return 1;
   }
 
   return 0;
 }
 
-asm_fireevent_internal(param_00, param_01, param_02) {
-  if(!isDefined(self.var_1198.asm_events[param_00])) {
-    self.var_1198.asm_events[param_00] = [];
+asm_fireevent_internal(var_0, var_1, var_2) {
+  if(!isDefined(self._blackboard.asm_events[var_0])) {
+    self._blackboard.asm_events[var_0] = [];
   }
 
-  var_03 = func_233F(param_00, param_01);
-  if(!isDefined(var_03)) {
-    var_03 = spawnStruct();
+  var_3 = func_233F(var_0, var_1);
+  if(!isDefined(var_3)) {
+    var_3 = spawnStruct();
   }
 
-  var_03.var_7686 = gettime();
-  var_03.params = param_02;
-  self.var_1198.asm_events[param_00][param_01] = var_03;
-  asm_fireephemeralevent(param_00, param_01, param_02);
+  var_3.var_7686 = gettime();
+  var_3.params = var_2;
+  self._blackboard.asm_events[var_0][var_1] = var_3;
+  asm_fireephemeralevent(var_0, var_1, var_2);
 }
 
-asm_fireevent(param_00, param_01, param_02) {
-  asm_fireevent_internal(param_00, param_01, param_02);
-  if(param_01 == "anim_will_finish" || param_01 == "finish") {
-    param_01 = "end";
-    asm_fireevent_internal(param_00, param_01);
+asm_fireevent(var_0, var_1, var_2) {
+  asm_fireevent_internal(var_0, var_1, var_2);
+  if(var_1 == "anim_will_finish" || var_1 == "finish") {
+    var_1 = "end";
+    asm_fireevent_internal(var_0, var_1);
   }
 }
 
-asm_addephemeraleventtowatchlist(param_00, param_01) {
-  self.var_1198.asm_ephemeral_event_watchlist[param_00] = param_01;
+asm_addephemeraleventtowatchlist(var_0, var_1) {
+  self._blackboard.asm_ephemeral_event_watchlist[var_0] = var_1;
 }
 
-asm_ephemeraleventfired(param_00, param_01, param_02) {
-  if(isDefined(self.var_1198.var_2329[param_00])) {
-    foreach(var_04 in self.var_1198.var_2329[param_00]) {
-      if(var_04.name == param_01) {
+asm_ephemeraleventfired(var_0, var_1, var_2) {
+  if(isDefined(self._blackboard.var_2329[var_0])) {
+    foreach(var_4 in self._blackboard.var_2329[var_0]) {
+      if(var_4.name == var_1) {
         return 1;
       }
     }
   }
 
-  if(!isDefined(param_02) || param_02) {
-    asm_addephemeraleventtowatchlist(param_00, param_01);
+  if(!isDefined(var_2) || var_2) {
+    asm_addephemeraleventtowatchlist(var_0, var_1);
   }
 
   return 0;
 }
 
-func_232C(param_00, param_01) {
-  var_02 = func_233F(param_00, param_01);
-  if(isDefined(var_02)) {
-    if(var_02.var_7686 >= gettime() - 50) {
+func_232C(var_0, var_1) {
+  var_2 = func_233F(var_0, var_1);
+  if(isDefined(var_2)) {
+    if(var_2.var_7686 >= gettime() - 50) {
       return 1;
     }
   }
@@ -305,28 +305,28 @@ func_232C(param_00, param_01) {
   return 0;
 }
 
-func_233F(param_00, param_01) {
-  if(!isDefined(self.var_1198.asm_events[param_00])) {
+func_233F(var_0, var_1) {
+  if(!isDefined(self._blackboard.asm_events[var_0])) {
     return undefined;
   }
 
-  foreach(var_04, var_03 in self.var_1198.asm_events[param_00]) {
-    if(var_04 == param_01) {
-      return var_03;
+  foreach(var_4, var_3 in self._blackboard.asm_events[var_0]) {
+    if(var_4 == var_1) {
+      return var_3;
     }
   }
 
   return undefined;
 }
 
-func_233E(param_00, param_01) {
-  if(!isDefined(self.var_1198.var_2329[param_00]) || self.var_1198.var_2329[param_00].size == 0) {
+func_233E(var_0, var_1) {
+  if(!isDefined(self._blackboard.var_2329[var_0]) || self._blackboard.var_2329[var_0].size == 0) {
     return undefined;
   }
 
-  foreach(var_03 in self.var_1198.var_2329[param_00]) {
-    if(var_03.name == param_01) {
-      return var_03;
+  foreach(var_3 in self._blackboard.var_2329[var_0]) {
+    if(var_3.name == var_1) {
+      return var_3;
     }
   }
 
@@ -334,10 +334,10 @@ func_233E(param_00, param_01) {
 }
 
 func_2314() {
-  self.var_1198.var_2329 = [];
+  self._blackboard.var_2329 = [];
 }
 
-asm_shouldpowerdown(param_00, param_01) {
+asm_shouldpowerdown(var_0, var_1) {
   if(!isDefined(self.bpowerdown) || !self.bpowerdown) {
     return 0;
   }
@@ -354,7 +354,7 @@ asm_shouldpowerdown(param_00, param_01) {
     return 0;
   }
 
-  if(isDefined(self.var_1198.btraversing)) {
+  if(isDefined(self._blackboard.btraversing)) {
     return 0;
   }
 
@@ -365,20 +365,20 @@ asm_shouldpowerdown(param_00, param_01) {
   return 1;
 }
 
-func_2325(param_00, param_01, param_02) {
-  var_03 = 1;
-  var_04 = param_01.var_D773;
-  if(!isDefined(var_04)) {
-    var_04 = "powerdown_default";
+func_2325(var_0, var_1, var_2) {
+  var_3 = 1;
+  var_4 = var_1.var_D773;
+  if(!isDefined(var_4)) {
+    var_4 = "powerdown_default";
   }
 
-  func_2388(param_00, param_02, param_01, param_01.var_116FB);
-  func_238A(param_00, var_04, var_03, undefined, undefined, param_01.var_D772);
+  func_2388(var_0, var_2, var_1, var_1.var_116FB);
+  func_238A(var_0, var_4, var_3, undefined, undefined, var_1.var_D772);
 }
 
-asm_isinstate(param_00) {
-  foreach(var_02 in self.var_164D) {
-    if(var_02.var_4BC0 == param_00) {
+asm_isinstate(var_0) {
+  foreach(var_2 in self.var_164D) {
+    if(var_2.var_4BC0 == var_0) {
       return 1;
     }
   }
@@ -386,13 +386,13 @@ asm_isinstate(param_00) {
   return 0;
 }
 
-func_232B(param_00, param_01) {
-  if(!isDefined(self.var_1198.asm_events[param_00]) || self.var_1198.asm_events[param_00].size == 0) {
+func_232B(var_0, var_1) {
+  if(!isDefined(self._blackboard.asm_events[var_0]) || self._blackboard.asm_events[var_0].size == 0) {
     return 0;
   }
 
-  foreach(var_04, var_03 in self.var_1198.asm_events[param_00]) {
-    if(var_04 == param_01) {
+  foreach(var_4, var_3 in self._blackboard.asm_events[var_0]) {
+    if(var_4 == var_1) {
       return 1;
     }
   }
@@ -400,40 +400,40 @@ func_232B(param_00, param_01) {
   return 0;
 }
 
-func_68B0(param_00, param_01, param_02, param_03) {
-  return func_232B(param_01, param_03);
+func_68B0(var_0, var_1, var_2, var_3) {
+  return func_232B(var_1, var_3);
 }
 
-func_666F(param_00, param_01, param_02, param_03) {
-  return asm_ephemeraleventfired(param_01, param_03);
+func_666F(var_0, var_1, var_2, var_3) {
+  return asm_ephemeraleventfired(var_1, var_3);
 }
 
-func_2310(param_00, param_01, param_02) {
-  var_03 = level.asm[param_00];
-  var_04 = level.asm[param_00].states[param_01];
-  foreach(var_06 in var_04.transitions) {
-    var_07 = var_06.var_11A1A;
-    var_08 = self[[var_06.var_71D1]](param_00, param_01, var_07, var_06.var_100B1);
-    if(var_08) {
-      var_09 = level.asm[param_00].states[var_06.var_11A1A];
-      var_0A = var_06.var_2B93;
+func_2310(var_0, var_1, var_2) {
+  var_3 = level.asm[var_0];
+  var_4 = level.asm[var_0].states[var_1];
+  foreach(var_6 in var_4.transitions) {
+    var_7 = var_6.var_11A1A;
+    var_8 = self[[var_6.var_71D1]](var_0, var_1, var_7, var_6.var_100B1);
+    if(var_8) {
+      var_9 = level.asm[var_0].states[var_6.var_11A1A];
+      var_0A = var_6.var_2B93;
       if(!isDefined(var_0A)) {
         var_0A = 0.2;
       }
 
-      if(isDefined(var_09.var_C94B) && var_09.var_C94B) {
-        var_0B = func_2310(param_00, var_07, 1);
-        var_07 = var_0B[0];
+      if(isDefined(var_9.var_C94B) && var_9.var_C94B) {
+        var_0B = func_2310(var_0, var_7, 1);
+        var_7 = var_0B[0];
         var_0A = var_0B[1];
       }
 
-      if(isDefined(var_07)) {
-        if(!param_02) {
-          func_2388(param_00, param_01, var_04, var_04.var_116FB);
-          func_238A(param_00, var_07, var_0A);
+      if(isDefined(var_7)) {
+        if(!var_2) {
+          func_2388(var_0, var_1, var_4, var_4.var_116FB);
+          func_238A(var_0, var_7, var_0A);
         }
 
-        return [var_07, var_0A];
+        return [var_7, var_0A];
       }
     }
   }
@@ -441,112 +441,112 @@ func_2310(param_00, param_01, param_02) {
   return [undefined, undefined];
 }
 
-asm_setstate(param_00, param_01) {
-  foreach(var_0A, var_03 in self.var_164D) {
-    var_04 = var_03.var_4BC0;
-    var_05 = level.asm[var_0A].states[var_04];
-    var_06 = level.asm[var_0A].states[param_00];
-    if(!isDefined(var_06)) {
+asm_setstate(var_0, var_1) {
+  foreach(var_0A, var_3 in self.var_164D) {
+    var_4 = var_3.var_4BC0;
+    var_5 = level.asm[var_0A].states[var_4];
+    var_6 = level.asm[var_0A].states[var_0];
+    if(!isDefined(var_6)) {
       continue;
     }
 
-    var_07 = param_00;
-    if(isDefined(var_06.var_C94B) && var_06.var_C94B) {
-      var_08 = func_2310(var_0A, param_00, 1);
-      var_07 = var_08[0];
-      var_09 = var_08[1];
-      if(!isDefined(var_07)) {
+    var_7 = var_0;
+    if(isDefined(var_6.var_C94B) && var_6.var_C94B) {
+      var_8 = func_2310(var_0A, var_0, 1);
+      var_7 = var_8[0];
+      var_9 = var_8[1];
+      if(!isDefined(var_7)) {
         continue;
       }
     }
 
-    func_2388(var_0A, var_04, var_05, var_05.var_116FB);
-    func_238A(var_0A, var_07, 0.2, undefined, undefined, param_01);
+    func_2388(var_0A, var_4, var_5, var_5.var_116FB);
+    func_238A(var_0A, var_7, 0.2, undefined, undefined, var_1);
   }
 }
 
 func_2389() {
-  var_00 = self.var_164D[self.asmname].var_4BC0;
-  var_01 = level.asm[self.asmname].states[var_00];
+  var_0 = self.var_164D[self.asmname].var_4BC0;
+  var_1 = level.asm[self.asmname].states[var_0];
   if(isDefined(self.var_7194)) {
-    if(self[[self.var_7194]](self.asmname, var_01)) {
-      func_231E(self.asmname, var_01, var_00);
+    if(self[[self.var_7194]](self.asmname, var_1)) {
+      func_231E(self.asmname, var_1, var_0);
       return;
     }
   }
 
-  if(asm_shouldpowerdown(self.asmname, var_01)) {
-    func_2325(self.asmname, var_01, var_00);
+  if(asm_shouldpowerdown(self.asmname, var_1)) {
+    func_2325(self.asmname, var_1, var_0);
     return;
   }
 
-  var_03 = 0;
-  foreach(var_09, var_05 in self.var_164D) {
-    var_00 = var_05.var_4BC0;
-    var_06 = func_2310(var_09, var_00, 0);
-    var_07 = var_06[0];
-    var_08 = var_06[1];
-    if(isDefined(var_07)) {
-      var_03 = 1;
+  var_3 = 0;
+  foreach(var_9, var_5 in self.var_164D) {
+    var_0 = var_5.var_4BC0;
+    var_6 = func_2310(var_9, var_0, 0);
+    var_7 = var_6[0];
+    var_8 = var_6[1];
+    if(isDefined(var_7)) {
+      var_3 = 1;
     }
 
-    if(var_03) {
+    if(var_3) {
       return;
     }
   }
 }
 
-func_6A18(param_00, param_01, param_02, param_03) {
+func_6A18(var_0, var_1, var_2, var_3) {
   if(weaponclass(self.var_394) == "pistol") {
     if(weaponclass(self.primaryweapon) != "mg" && weaponclass(self.primaryweapon) != "rocketlauncher" && weaponclass(self.primaryweapon) != "pistol") {
       return 0;
     }
   }
 
-  return func_BCE7(param_00, param_01, param_02, param_03);
+  return func_BCE7(var_0, var_1, var_2, var_3);
 }
 
-func_BCE7(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_03) && asm_getdemeanor() != param_03) {
+func_BCE7(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_3) && asm_getdemeanor() != var_3) {
     return 0;
   }
 
   return scripts\asm\asm_bb::bb_moverequested() && distancesquared(self.vehicle_getspawnerarray, self.origin) > 4;
 }
 
-func_C17F(param_00, param_01, param_02, param_03) {
-  return !func_BCE7(param_00, param_01, param_02, param_03);
+func_C17F(var_0, var_1, var_2, var_3) {
+  return !func_BCE7(var_0, var_1, var_2, var_3);
 }
 
-func_BCE8(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_03)) {
-    var_04 = self[[self.var_71A6]]();
-    if(var_04 != param_03) {
+func_BCE8(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_3)) {
+    var_4 = self[[self.var_71A6]]();
+    if(var_4 != var_3) {
       return 0;
     }
   }
 
-  return func_BCE7(param_00, param_01, param_02, undefined);
+  return func_BCE7(var_0, var_1, var_2, undefined);
 }
 
-func_9E41(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  if(isarray(param_03)) {
-    var_04 = param_03[0];
+func_9E41(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  if(isarray(var_3)) {
+    var_4 = var_3[0];
   } else {
-    var_04 = param_03;
+    var_4 = var_3;
   }
 
-  if(scripts\asm\asm_bb::bb_isincombat() != var_04) {
+  if(scripts\asm\asm_bb::bb_isincombat() != var_4) {
     return 0;
   }
 
-  var_05 = undefined;
-  if(isarray(param_03) && isDefined(param_03[1])) {
-    var_05 = param_03[1];
+  var_5 = undefined;
+  if(isarray(var_3) && isDefined(var_3[1])) {
+    var_5 = var_3[1];
   }
 
-  return func_BCE7(param_00, param_01, param_02, var_05);
+  return func_BCE7(var_0, var_1, var_2, var_5);
 }
 
 asm_getdemeanor() {
@@ -558,7 +558,7 @@ asm_getdemeanor() {
     return "cqb";
   }
 
-  return self.var_1198.movetype;
+  return self._blackboard.movetype;
 }
 
 asm_updatefrantic() {
@@ -575,115 +575,115 @@ asm_iscrawlmelee() {
   return isDefined(self.asm.crawlmelee);
 }
 
-asm_setcrawlmelee(param_00) {
-  self.asm.crawlmelee = param_00;
+asm_setcrawlmelee(var_0) {
+  self.asm.crawlmelee = var_0;
 }
 
-asm_setdemeanoranimoverride(param_00, param_01, param_02) {
-  self.asm.animoverrides[param_00][param_01] = param_02;
+asm_setdemeanoranimoverride(var_0, var_1, var_2) {
+  self.asm.animoverrides[var_0][var_1] = var_2;
 }
 
-asm_cleardemeanoranimoverride(param_00, param_01) {
-  if(asm_hasdemeanoranimoverride(param_00, param_01)) {
-    self.asm.animoverrides[param_00][param_01] = undefined;
+asm_cleardemeanoranimoverride(var_0, var_1) {
+  if(asm_hasdemeanoranimoverride(var_0, var_1)) {
+    self.asm.animoverrides[var_0][var_1] = undefined;
   }
 }
 
-asm_hasdemeanoranimoverride(param_00, param_01) {
-  return isDefined(self.asm.animoverrides[param_00]) && isDefined(self.asm.animoverrides[param_00][param_01]);
+asm_hasdemeanoranimoverride(var_0, var_1) {
+  return isDefined(self.asm.animoverrides[var_0]) && isDefined(self.asm.animoverrides[var_0][var_1]);
 }
 
-asm_getdemeanoranimoverride(param_00, param_01) {
-  return self.asm.animoverrides[param_00][param_01];
+asm_getdemeanoranimoverride(var_0, var_1) {
+  return self.asm.animoverrides[var_0][var_1];
 }
 
-asm_getcurrentstate(param_00) {
-  var_01 = self.var_164D[param_00];
-  return var_01.var_4BC0;
+asm_getcurrentstate(var_0) {
+  var_1 = self.var_164D[var_0];
+  return var_1.var_4BC0;
 }
 
-asm_hasalias(param_00, param_01) {
-  return self[[self.var_7192]](param_00, param_01);
+asm_hasalias(var_0, var_1) {
+  return self[[self.var_7192]](var_0, var_1);
 }
 
-asm_lookupanimfromalias(param_00, param_01) {
-  return self[[self.var_7193]](param_00, param_01);
+asm_lookupanimfromalias(var_0, var_1) {
+  return self[[self.var_7193]](var_0, var_1);
 }
 
-asm_getallanimindicesforalias(param_00, param_01, param_02) {
-  return self[[self.var_7190]](param_00, param_01, param_02);
+asm_getallanimindicesforalias(var_0, var_1, var_2) {
+  return self[[self.var_7190]](var_0, var_1, var_2);
 }
 
-func_235C(param_00, param_01, param_02, param_03) {
-  var_04 = "";
-  if(isDefined(param_03)) {
-    var_04 = param_03;
+func_235C(var_0, var_1, var_2, var_3) {
+  var_4 = "";
+  if(isDefined(var_3)) {
+    var_4 = var_3;
   }
 
-  if(param_02) {
-    if(func_232C(param_01, "pass_left")) {
-      var_05 = var_04 + "left";
-    } else if(func_232C(param_02, "pass_right")) {
-      var_05 = var_05 + "right";
+  if(var_2) {
+    if(func_232C(var_1, "pass_left")) {
+      var_5 = var_4 + "left";
+    } else if(func_232C(var_2, "pass_right")) {
+      var_5 = var_5 + "right";
     } else if(self.asm.footsteps.foot == "right") {
-      var_05 = var_05 + "right";
+      var_5 = var_5 + "right";
     } else {
-      var_05 = var_05 + "left";
+      var_5 = var_5 + "left";
     }
   } else {
-    var_05 = var_05;
+    var_5 = var_5;
   }
 
-  if(asm_hasalias(param_01, var_05 + param_00)) {
-    return asm_lookupanimfromalias(param_01, var_05 + param_00);
+  if(asm_hasalias(var_1, var_5 + var_0)) {
+    return asm_lookupanimfromalias(var_1, var_5 + var_0);
   }
 
-  if(var_04 != var_05 && asm_hasalias(param_01, var_04 + param_00)) {
-    return asm_lookupanimfromalias(param_01, var_04 + param_00);
+  if(var_4 != var_5 && asm_hasalias(var_1, var_4 + var_0)) {
+    return asm_lookupanimfromalias(var_1, var_4 + var_0);
   }
 
   return undefined;
 }
 
-func_237B(param_00) {
+func_237B(var_0) {
   if(getdvarint("ai_iw7", 0) == 1) {
-    self.moveplaybackrate = param_00;
+    self.moveplaybackrate = var_0;
     return;
   }
 
-  self.moveplaybackrate = param_00;
+  self.moveplaybackrate = var_0;
 }
 
 asm_getmoveplaybackrate() {
   return self.moveplaybackrate;
 }
 
-func_231D(param_00, param_01, param_02, param_03) {
-  var_04 = level.asm[param_00].states[param_02];
+func_231D(var_0, var_1, var_2, var_3) {
+  var_4 = level.asm[var_0].states[var_2];
   self.asm.var_DCC7 = undefined;
-  var_05 = 0;
-  for(var_06 = 0; var_06 < var_04.transitions.size; var_06++) {
-    var_07 = var_04.transitions[var_06].var_100B1;
-    var_08 = var_07[1];
-    for(var_09 = var_06 - 1; var_09 >= 0; var_09--) {}
+  var_5 = 0;
+  for(var_6 = 0; var_6 < var_4.transitions.size; var_6++) {
+    var_7 = var_4.transitions[var_6].var_100B1;
+    var_8 = var_7[1];
+    for(var_9 = var_6 - 1; var_9 >= 0; var_9--) {}
 
     var_0A = 1;
-    if(var_07.size > 2) {
-      var_0A = var_07[3];
+    if(var_7.size > 2) {
+      var_0A = var_7[3];
     }
 
-    var_05 = var_05 + var_0A;
+    var_5 = var_5 + var_0A;
   }
 
-  var_0B = randomfloat(var_05);
+  var_0B = randomfloat(var_5);
   var_0C = undefined;
-  for(var_06 = 0; var_06 < var_04.transitions.size; var_06++) {
-    var_0D = var_04.transitions[var_06];
-    var_07 = var_0D.var_100B1;
-    var_0C = var_07[1];
+  for(var_6 = 0; var_6 < var_4.transitions.size; var_6++) {
+    var_0D = var_4.transitions[var_6];
+    var_7 = var_0D.var_100B1;
+    var_0C = var_7[1];
     var_0A = 1;
-    if(var_07.size > 2) {
-      var_0A = var_07[3];
+    if(var_7.size > 2) {
+      var_0A = var_7[3];
     }
 
     if(var_0B < var_0A) {
@@ -693,15 +693,15 @@ func_231D(param_00, param_01, param_02, param_03) {
     }
   }
 
-  self.asm.var_DCC7 = param_00 + "_" + param_02 + "_" + var_0C;
+  self.asm.var_DCC7 = var_0 + "_" + var_2 + "_" + var_0C;
   return 1;
 }
 
-func_230C(param_00, param_01, param_02, param_03) {
-  var_04 = param_00 + "_" + param_01 + "_" + param_03[1];
-  return var_04 == self.asm.var_DCC7;
+func_230C(var_0, var_1, var_2, var_3) {
+  var_4 = var_0 + "_" + var_1 + "_" + var_3[1];
+  return var_4 == self.asm.var_DCC7;
 }
 
-asm_getcurrentstatename(param_00) {
-  return self.var_164D[param_00].var_4BC0;
+asm_getcurrentstatename(var_0) {
+  return self.var_164D[var_0].var_4BC0;
 }

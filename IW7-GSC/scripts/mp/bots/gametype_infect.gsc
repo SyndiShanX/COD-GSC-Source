@@ -48,8 +48,8 @@ bot_infect_think() {
     }
 
     if(self.team == "axis") {
-      var_00 = scripts\mp\bots\_bots_strategy::bot_melee_tactical_insertion_check();
-      if(!isDefined(var_00) || var_00) {
+      var_0 = scripts\mp\bots\_bots_strategy::bot_melee_tactical_insertion_check();
+      if(!isDefined(var_0) || var_0) {
         self botclearscriptgoal();
       }
     }
@@ -64,66 +64,66 @@ bot_infect_ai_director_update() {
   level endon("bot_infect_ai_director_update");
   level endon("game_ended");
   for(;;) {
-    var_00 = [];
-    var_01 = [];
-    foreach(var_03 in level.players) {
-      if(!isDefined(var_03.initial_spawn_time) && var_03.health > 0 && isDefined(var_03.team) && var_03.team == "allies" || var_03.team == "axis") {
-        var_03.initial_spawn_time = gettime();
+    var_0 = [];
+    var_1 = [];
+    foreach(var_3 in level.players) {
+      if(!isDefined(var_3.initial_spawn_time) && var_3.health > 0 && isDefined(var_3.team) && var_3.team == "allies" || var_3.team == "axis") {
+        var_3.initial_spawn_time = gettime();
       }
 
-      if(isDefined(var_03.initial_spawn_time) && gettime() - var_03.initial_spawn_time > 5000) {
-        if(!isDefined(var_03.team)) {
+      if(isDefined(var_3.initial_spawn_time) && gettime() - var_3.initial_spawn_time > 5000) {
+        if(!isDefined(var_3.team)) {
           continue;
         }
 
-        if(var_03.team == "axis") {
-          var_00[var_00.size] = var_03;
+        if(var_3.team == "axis") {
+          var_0[var_0.size] = var_3;
           continue;
         }
 
-        if(var_03.team == "allies") {
-          var_01[var_01.size] = var_03;
+        if(var_3.team == "allies") {
+          var_1[var_1.size] = var_3;
         }
       }
     }
 
-    if(var_00.size > 0 && var_01.size > 0) {
-      var_05 = 1;
-      foreach(var_07 in var_01) {
-        if(isbot(var_07)) {
-          var_05 = 0;
+    if(var_0.size > 0 && var_1.size > 0) {
+      var_5 = 1;
+      foreach(var_7 in var_1) {
+        if(isbot(var_7)) {
+          var_5 = 0;
         }
       }
 
-      if(var_05) {
-        foreach(var_03 in var_01) {
-          if(!isDefined(var_03.last_infected_hiding_time)) {
-            var_03.last_infected_hiding_time = gettime();
-            var_03.last_infected_hiding_loc = var_03.origin;
-            var_03.var_118DA = 0;
+      if(var_5) {
+        foreach(var_3 in var_1) {
+          if(!isDefined(var_3.last_infected_hiding_time)) {
+            var_3.last_infected_hiding_time = gettime();
+            var_3.last_infected_hiding_loc = var_3.origin;
+            var_3.var_118DA = 0;
           }
 
-          if(gettime() >= var_03.last_infected_hiding_time + 5000) {
-            var_03.last_infected_hiding_time = gettime();
-            var_0A = distancesquared(var_03.origin, var_03.last_infected_hiding_loc);
-            var_03.last_infected_hiding_loc = var_03.origin;
+          if(gettime() >= var_3.last_infected_hiding_time + 5000) {
+            var_3.last_infected_hiding_time = gettime();
+            var_0A = distancesquared(var_3.origin, var_3.last_infected_hiding_loc);
+            var_3.last_infected_hiding_loc = var_3.origin;
             if(var_0A < 90000) {
-              var_03.var_118DA = var_03.var_118DA + 5000;
-              if(var_03.var_118DA >= 20000) {
-                var_0B = scripts\engine\utility::get_array_of_closest(var_03.origin, var_00);
+              var_3.var_118DA = var_3.var_118DA + 5000;
+              if(var_3.var_118DA >= 20000) {
+                var_0B = scripts\engine\utility::get_array_of_closest(var_3.origin, var_0);
                 foreach(var_0D in var_0B) {
                   if(isbot(var_0D)) {
                     var_0E = var_0D botgetscriptgoaltype();
                     if(var_0E != "tactical" && var_0E != "critical") {
-                      var_0D thread hunt_human(var_03);
+                      var_0D thread hunt_human(var_3);
                       break;
                     }
                   }
                 }
               }
             } else {
-              var_03.var_118DA = 0;
-              var_03.last_infected_hiding_loc = var_03.origin;
+              var_3.var_118DA = 0;
+              var_3.last_infected_hiding_loc = var_3.origin;
             }
           }
         }
@@ -134,10 +134,10 @@ bot_infect_ai_director_update() {
   }
 }
 
-hunt_human(param_00) {
+hunt_human(var_0) {
   self endon("disconnect");
   self endon("death");
-  self botsetscriptgoal(param_00.origin, 0, "critical");
+  self botsetscriptgoal(var_0.origin, 0, "critical");
   scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
   self botclearscriptgoal();
 }
@@ -150,8 +150,8 @@ bot_infect_retrieve_knife() {
     self.melee_enemy_new_node_time = 0;
     self.melee_self_node = undefined;
     self.melee_self_new_node_time = 0;
-    var_00 = self botgetdifficultysetting("throwKnifeChance");
-    if(var_00 < 0.25) {
+    var_0 = self botgetdifficultysetting("throwKnifeChance");
+    if(var_0 < 0.25) {
       self getpassivestruct("throwKnifeChance", 0.25);
     }
 
@@ -160,34 +160,34 @@ bot_infect_retrieve_knife() {
     for(;;) {
       if(self hasweapon("throwingknife_mp")) {
         if(scripts\mp\utility::isgameparticipant(self.isnodeoccupied)) {
-          var_01 = gettime();
+          var_1 = gettime();
           if(!isDefined(self.melee_enemy) || self.melee_enemy != self.isnodeoccupied) {
             self.melee_enemy = self.isnodeoccupied;
             self.melee_enemy_node = self.isnodeoccupied getnearestnode();
-            self.melee_enemy_new_node_time = var_01;
+            self.melee_enemy_new_node_time = var_1;
           } else {
-            var_02 = squared(self botgetdifficultysetting("meleeDist"));
-            if(distancesquared(self.isnodeoccupied.origin, self.origin) <= var_02) {
-              self.can_melee_enemy_time = var_01;
+            var_2 = squared(self botgetdifficultysetting("meleeDist"));
+            if(distancesquared(self.isnodeoccupied.origin, self.origin) <= var_2) {
+              self.can_melee_enemy_time = var_1;
             }
 
-            var_03 = self.isnodeoccupied getnearestnode();
-            var_04 = self getnearestnode();
-            if(!isDefined(self.melee_enemy_node) || self.melee_enemy_node != var_03) {
-              self.melee_enemy_new_node_time = var_01;
-              self.melee_enemy_node = var_03;
+            var_3 = self.isnodeoccupied getnearestnode();
+            var_4 = self getnearestnode();
+            if(!isDefined(self.melee_enemy_node) || self.melee_enemy_node != var_3) {
+              self.melee_enemy_new_node_time = var_1;
+              self.melee_enemy_node = var_3;
             }
 
-            if(!isDefined(self.melee_self_node) || self.melee_self_node != var_04) {
-              self.melee_self_new_node_time = var_01;
-              self.melee_self_node = var_04;
+            if(!isDefined(self.melee_self_node) || self.melee_self_node != var_4) {
+              self.melee_self_new_node_time = var_1;
+              self.melee_self_node = var_4;
             } else if(distancesquared(self.origin, self.melee_self_node.origin) > 9216) {
-              self.var_B5B0 = var_01;
+              self.var_B5B0 = var_1;
             }
 
-            if(self.can_melee_enemy_time + 3000 < var_01) {
-              if(self.melee_self_new_node_time + 3000 < var_01) {
-                if(self.melee_enemy_new_node_time + 3000 < var_01) {
+            if(self.can_melee_enemy_time + 3000 < var_1) {
+              if(self.melee_self_new_node_time + 3000 < var_1) {
+                if(self.melee_enemy_new_node_time + 3000 < var_1) {
                   if(bot_infect_angle_too_steep_for_knife_throw(self.origin, self.isnodeoccupied.origin)) {
                     scripts\mp\bots\_bots_util::bot_queued_process("find_node_can_see_ent", ::bot_infect_find_node_can_see_ent, self.isnodeoccupied, self.melee_self_node);
                   }
@@ -210,46 +210,46 @@ bot_infect_retrieve_knife() {
   }
 }
 
-bot_infect_angle_too_steep_for_knife_throw(param_00, param_01) {
-  if(abs(param_00[2] - param_01[2]) > 56 && distance2dsquared(param_00, param_01) < 2304) {
+bot_infect_angle_too_steep_for_knife_throw(var_0, var_1) {
+  if(abs(var_0[2] - var_1[2]) > 56 && distance2dsquared(var_0, var_1) < 2304) {
     return 1;
   }
 
   return 0;
 }
 
-bot_infect_find_node_can_see_ent(param_00, param_01) {
-  if(!isDefined(param_00) || !isDefined(param_01)) {
+bot_infect_find_node_can_see_ent(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var_02 = 0;
-  if(issubstr(param_01.type, "Begin")) {
-    var_02 = 1;
+  var_2 = 0;
+  if(issubstr(var_1.type, "Begin")) {
+    var_2 = 1;
   }
 
-  var_03 = getlinkednodes(param_01);
-  if(isDefined(var_03) && var_03.size) {
-    var_04 = scripts\engine\utility::array_randomize(var_03);
-    foreach(var_06 in var_04) {
-      if(var_02 && issubstr(var_06.type, "End")) {
+  var_3 = getlinkednodes(var_1);
+  if(isDefined(var_3) && var_3.size) {
+    var_4 = scripts\engine\utility::array_randomize(var_3);
+    foreach(var_6 in var_4) {
+      if(var_2 && issubstr(var_6.type, "End")) {
         continue;
       }
 
-      if(bot_infect_angle_too_steep_for_knife_throw(var_06.origin, param_00.origin)) {
+      if(bot_infect_angle_too_steep_for_knife_throw(var_6.origin, var_0.origin)) {
         continue;
       }
 
-      var_07 = self getEye() - self.origin;
-      var_08 = var_06.origin + var_07;
-      var_09 = param_00.origin;
-      if(isplayer(param_00)) {
-        var_09 = param_00 scripts\mp\utility::getstancecenter();
+      var_7 = self getEye() - self.origin;
+      var_8 = var_6.origin + var_7;
+      var_9 = var_0.origin;
+      if(isplayer(var_0)) {
+        var_9 = var_0 scripts\mp\utility::getstancecenter();
       }
 
-      if(sighttracepassed(var_08, var_09, 0, self, param_00)) {
-        var_0A = vectortoyaw(var_09 - var_08);
-        self botsetscriptgoalnode(var_06, "critical", var_0A);
+      if(sighttracepassed(var_8, var_9, 0, self, var_0)) {
+        var_0A = vectortoyaw(var_9 - var_8);
+        self botsetscriptgoalnode(var_6, "critical", var_0A);
         scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail(3);
         return;
       }

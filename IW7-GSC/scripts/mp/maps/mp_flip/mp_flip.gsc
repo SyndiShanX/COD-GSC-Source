@@ -23,9 +23,9 @@ main() {
   thread scripts\mp\animation_suite::animationsuite();
   thread func_CDA4("mp_flip_screen");
   thread rotatefans();
-  var_00 = getEntArray("floatingJackal", "targetname");
-  foreach(var_02 in var_00) {
-    thread func_90EF(var_02);
+  var_0 = getEntArray("floatingJackal", "targetname");
+  foreach(var_2 in var_0) {
+    thread func_90EF(var_2);
   }
 
   thread fix_via_models();
@@ -34,26 +34,26 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player32x32x32", "targetname");
-  var_01 = spawn("script_model", (1360, 301, 110));
-  var_01.angles = (0, 0, 6.5);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player32x32x32", "targetname");
-  var_03 = spawn("script_model", (1198, 301, 110));
-  var_03.angles = (0, 0, 6.5);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player64x64x8", "targetname");
-  var_05 = spawn("script_model", (-376, 1300, 29));
-  var_05.angles = (0, 0, 115);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("player128x128x128", "targetname");
-  var_07 = spawn("script_model", (1616, 1074, 112));
-  var_07.angles = (0, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player256x256x8", "targetname");
-  var_09 = spawn("script_model", (-1035.5, -1622.5, 387));
-  var_09.angles = (360, 55.1, -90);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player32x32x32", "targetname");
+  var_1 = spawn("script_model", (1360, 301, 110));
+  var_1.angles = (0, 0, 6.5);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player32x32x32", "targetname");
+  var_3 = spawn("script_model", (1198, 301, 110));
+  var_3.angles = (0, 0, 6.5);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player64x64x8", "targetname");
+  var_5 = spawn("script_model", (-376, 1300, 29));
+  var_5.angles = (0, 0, 115);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("player128x128x128", "targetname");
+  var_7 = spawn("script_model", (1616, 1074, 112));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player256x256x8", "targetname");
+  var_9 = spawn("script_model", (-1035.5, -1622.5, 387));
+  var_9.angles = (360, 55.1, -90);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player256x256x8", "targetname");
   var_0B = spawn("script_model", (-1569.5, -1171.5, 387));
   var_0B.angles = (360, 34.6, -90);
@@ -71,10 +71,10 @@ fix_collision() {
 runmodespecifictriggers() {
   if(level.gametype == "ball" || level.gametype == "tdef") {
     wait(1);
-    var_00 = spawn("trigger_radius", (532, -48, 16), 0, 32, 52);
-    var_00.var_336 = "uplink_nozone";
-    var_00 hide();
-    level.nozonetriggers[level.nozonetriggers.size] = var_00;
+    var_0 = spawn("trigger_radius", (532, -48, 16), 0, 32, 52);
+    var_0.var_336 = "uplink_nozone";
+    var_0 hide();
+    level.nozonetriggers[level.nozonetriggers.size] = var_0;
   }
 }
 
@@ -85,88 +85,88 @@ fix_via_models() {
   func_107CC("p7_picture_frame_modern_01_mp_flip_patch", (-652, 691.5, 92), (0, 270, 0));
 }
 
-func_107CC(param_00, param_01, param_02) {
-  var_03 = spawn("script_model", param_01);
-  var_03 setModel(param_00);
-  var_03.angles = param_02;
+func_107CC(var_0, var_1, var_2) {
+  var_3 = spawn("script_model", var_1);
+  var_3 setModel(var_0);
+  var_3.angles = var_2;
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
-func_90EF(param_00) {
-  param_00.areanynavvolumesloaded = param_00.origin;
-  param_00.var_10D6C = param_00.angles;
-  thread func_5EE1(param_00);
-  thread func_5EE9(param_00);
+func_90EF(var_0) {
+  var_0.areanynavvolumesloaded = var_0.origin;
+  var_0.var_10D6C = var_0.angles;
+  thread func_5EE1(var_0);
+  thread func_5EE9(var_0);
 }
 
-func_5EE1(param_00) {
-  var_01 = 1;
+func_5EE1(var_0) {
+  var_1 = 1;
   for(;;) {
-    var_02 = randomintrange(6, 13);
-    param_00.objective_playermask_hidefromall = param_00.areanynavvolumesloaded + (randomintrange(-16, 16), randomintrange(-16, 16), var_01 * randomintrange(4, 16));
-    param_00 moveto(param_00.objective_playermask_hidefromall, var_02, var_02 * 0.4, var_02 * 0.4);
-    var_01 = var_01 * -1;
-    wait(var_02);
+    var_2 = randomintrange(6, 13);
+    var_0.objective_playermask_hidefromall = var_0.areanynavvolumesloaded + (randomintrange(-16, 16), randomintrange(-16, 16), var_1 * randomintrange(4, 16));
+    var_0 moveto(var_0.objective_playermask_hidefromall, var_2, var_2 * 0.4, var_2 * 0.4);
+    var_1 = var_1 * -1;
+    wait(var_2);
   }
 }
 
-func_5EE9(param_00) {
-  var_01 = 1;
+func_5EE9(var_0) {
+  var_1 = 1;
   for(;;) {
-    var_02 = randomintrange(7, 10);
-    param_00.energy_getrestorerate = param_00.var_10D6C + (var_01 * randomintrange(1, 3), randomintrange(-2, 2), randomintrange(-3, 3));
-    param_00 rotateto(param_00.energy_getrestorerate, var_02, var_02 * 0.4, var_02 * 0.4);
-    var_01 = var_01 * -1;
-    wait(var_02);
+    var_2 = randomintrange(7, 10);
+    var_0.energy_getrestorerate = var_0.var_10D6C + (var_1 * randomintrange(1, 3), randomintrange(-2, 2), randomintrange(-3, 3));
+    var_0 rotateto(var_0.energy_getrestorerate, var_2, var_2 * 0.4, var_2 * 0.4);
+    var_1 = var_1 * -1;
+    wait(var_2);
   }
 }
 
-func_5EE7(param_00) {
-  foreach(var_02 in param_00.var_BE1E) {
-    var_02 thread func_5EE8();
+func_5EE7(var_0) {
+  foreach(var_2 in var_0.var_BE1E) {
+    var_2 thread func_5EE8();
   }
 }
 
 func_5EE8() {
   wait(5);
-  var_00 = scripts\engine\utility::spawn_tag_origin();
-  var_00 show();
-  var_00 linkto(self);
+  var_0 = scripts\engine\utility::spawn_tag_origin();
+  var_0 show();
+  var_0 linkto(self);
   scripts\engine\utility::waitframe();
   if(isDefined(self.var_336)) {
-    playFXOnTag(scripts\engine\utility::getfx(self.var_336), var_00, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx(self.var_336), var_0, "tag_origin");
   }
 }
 
 rotatefans() {
-  var_00 = getEntArray("rotating_fan", "targetname");
-  foreach(var_02 in var_00) {
-    var_03 = 3 + randomint(8);
-    var_02 thread func_E72B(var_03);
+  var_0 = getEntArray("rotating_fan", "targetname");
+  foreach(var_2 in var_0) {
+    var_3 = 3 + randomint(8);
+    var_2 thread func_E72B(var_3);
   }
 }
 
-func_E72B(param_00) {
+func_E72B(var_0) {
   level endon("game_ended");
-  var_01 = "roll";
+  var_1 = "roll";
   if(isDefined(self.script_noteworthy)) {
-    var_01 = self.script_noteworthy;
+    var_1 = self.script_noteworthy;
   }
 
-  var_02 = "Custom rotation axis must be one of yaw\pitch\roll";
+  var_2 = "Custom rotation axis must be one of yaw\pitch\roll";
   for(;;) {
-    if(var_01 == "yaw") {
-      self rotateyaw(360, param_00, 0, 0);
-    } else if(var_01 == "pitch") {
-      self rotatepitch(360, param_00, 0, 0);
-    } else if(var_01 == "roll") {
-      self rotateroll(360, param_00, 0, 0);
+    if(var_1 == "yaw") {
+      self rotateyaw(360, var_0, 0, 0);
+    } else if(var_1 == "pitch") {
+      self rotatepitch(360, var_0, 0, 0);
+    } else if(var_1 == "roll") {
+      self rotateroll(360, var_0, 0, 0);
     }
 
-    wait(param_00);
+    wait(var_0);
   }
 }

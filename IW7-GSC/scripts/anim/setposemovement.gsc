@@ -4,20 +4,20 @@
  * Script: scripts\anim\setposemovement.gsc
 ********************************************/
 
-setposemovement(param_00, param_01) {
-  if(param_00 == "") {
-    if(self.a.pose == "prone" && param_01 == "walk" || param_01 == "run") {
-      param_00 = "crouch";
+setposemovement(var_0, var_1) {
+  if(var_0 == "") {
+    if(self.a.pose == "prone" && var_1 == "walk" || var_1 == "run") {
+      var_0 = "crouch";
     } else {
-      param_00 = self.a.pose;
+      var_0 = self.a.pose;
     }
   }
 
-  if(!isDefined(param_01) || param_01 == "") {
-    param_01 = self.a.movement;
+  if(!isDefined(var_1) || var_1 == "") {
+    var_1 = self.a.movement;
   }
 
-  [[level.setposemovementfnarray[param_00][param_01]]]();
+  [[level.setposemovementfnarray[var_0][var_1]]]();
 }
 
 func_98BF() {
@@ -423,26 +423,26 @@ func_DA84() {
   return 1;
 }
 
-func_CEED(param_00, param_01, param_02, param_03) {
-  var_04 = gettime() + param_01 * 1000;
-  if(isarray(param_00)) {
-    param_00 = param_00[randomint(param_00.size)];
+func_CEED(var_0, var_1, var_2, var_3) {
+  var_4 = gettime() + var_1 * 1000;
+  if(isarray(var_0)) {
+    var_0 = var_0[randomint(var_0.size)];
   }
 
-  self _meth_82E3("blendTransition", param_00, % body, 1, param_01, 1);
-  scripts\anim\notetracks::donotetracksfortime(param_01 / 2, "blendTransition");
-  self.a.pose = param_02;
-  self.a.movement = param_03;
-  var_05 = var_04 - gettime() / 1000;
-  if(var_05 < 0.05) {
-    var_05 = 0.05;
+  self _meth_82E3("blendTransition", var_0, % body, 1, var_1, 1);
+  scripts\anim\notetracks::donotetracksfortime(var_1 / 2, "blendTransition");
+  self.a.pose = var_2;
+  self.a.movement = var_3;
+  var_5 = var_4 - gettime() / 1000;
+  if(var_5 < 0.05) {
+    var_5 = 0.05;
   }
 
-  scripts\anim\notetracks::donotetracksfortime(var_05, "blendTransition");
+  scripts\anim\notetracks::donotetracksfortime(var_5, "blendTransition");
 }
 
-func_D557(param_00, param_01) {
-  func_D554(param_00, "stand", "walk", param_01);
+func_D557(var_0, var_1) {
+  func_D554(var_0, "stand", "walk", var_1);
 }
 
 func_10B86() {
@@ -463,14 +463,14 @@ func_10B7C() {
   self.a.pose = "crouch";
 }
 
-func_CEEE(param_00) {
-  var_01 = 0.3;
+func_CEEE(var_0) {
+  var_1 = 0.3;
   if(self.a.movement != "stop") {
     self endon("movemode");
-    var_01 = 1;
+    var_1 = 1;
   }
 
-  func_CEED(param_00, var_01, "stand", "run");
+  func_CEED(var_0, var_1, "stand", "run");
 }
 
 func_2B91() {
@@ -485,15 +485,15 @@ func_2B91() {
     return 1;
   }
 
-  var_00 = 0.1;
+  var_0 = 0.1;
   if(self.a.movement != "stop" && self.getcsplinepointtargetname == "none") {
-    var_00 = 0.5;
+    var_0 = 0.5;
   }
 
   if(isDefined(self.var_10AB7)) {
-    self _meth_82A9(scripts\anim\utility::func_7FCC("sprint"), 1, var_00, 1);
+    self _meth_82A9(scripts\anim\utility::func_7FCC("sprint"), 1, var_0, 1);
   } else {
-    self _meth_82A9(scripts\anim\run::getrunningforwardpainanim(), 1, var_00, 1);
+    self _meth_82A9(scripts\anim\run::getrunningforwardpainanim(), 1, var_0, 1);
   }
 
   scripts\anim\run::func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"), self.var_101BB);
@@ -517,9 +517,9 @@ func_2B92() {
 }
 
 func_4AAD() {
-  var_00 = 1;
+  var_0 = 1;
   if(isDefined(self.var_6B9F)) {
-    var_00 = 1.8;
+    var_0 = 1.8;
     self.var_6B9F = undefined;
   }
 
@@ -608,9 +608,9 @@ func_2B90() {
 
 func_10B7F() {
   scripts\anim\utility::func_DCB7();
-  var_00 = 1;
+  var_0 = 1;
   if(isDefined(self.var_6B99)) {
-    var_00 = 1.8;
+    var_0 = 1.8;
     self.var_6B99 = undefined;
   }
 }
@@ -636,7 +636,7 @@ func_DA8F() {
   func_2B92();
 }
 
-func_DA8B(param_00) {
+func_DA8B(var_0) {
   func_DA81(0.1);
   scripts\anim\cover_prone::func_12EF6(0.1);
 }
@@ -686,26 +686,26 @@ func_4AA4() {
   func_DA8C();
 }
 
-func_D556(param_00, param_01, param_02, param_03, param_04) {
+func_D556(var_0, var_1, var_2, var_3, var_4) {
   self endon("killanimscript");
-  self endon("entered_pose" + param_01);
-  func_D555(param_00, param_01, param_02, param_03, param_04, 0);
+  self endon("entered_pose" + var_1);
+  func_D555(var_0, var_1, var_2, var_3, var_4, 0);
 }
 
-func_D554(param_00, param_01, param_02, param_03, param_04) {
-  func_D555(param_00, param_01, param_02, param_03, param_04, 1);
+func_D554(var_0, var_1, var_2, var_3, var_4) {
+  func_D555(var_0, var_1, var_2, var_3, var_4, 1);
 }
 
-func_D555(param_00, param_01, param_02, param_03, param_04, param_05) {
-  if(!isDefined(param_04)) {
-    param_04 = 1;
+func_D555(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(param_05) {
-    thread func_13712(getanimlength(param_00) / 2, "killtimerscript", param_01);
+  if(var_5) {
+    thread func_13712(getanimlength(var_0) / 2, "killtimerscript", var_1);
   }
 
-  self _meth_82E4("transAnimDone2", param_00, % body, 1, 0.2, param_04);
+  self _meth_82E4("transAnimDone2", var_0, % body, 1, 0.2, var_4);
   if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
   }
@@ -714,33 +714,33 @@ func_D555(param_00, param_01, param_02, param_03, param_04, param_05) {
     self.movement = "undefined";
   }
 
-  var_06 = "";
-  scripts\anim\shared::donotetracks("transAnimDone2", undefined, var_06);
+  var_6 = "";
+  scripts\anim\shared::donotetracks("transAnimDone2", undefined, var_6);
   self notify("killtimerscript");
-  self.a.pose = param_01;
-  self notify("entered_pose" + param_01);
-  self.a.movement = param_02;
-  if(isDefined(param_03)) {
-    self _meth_82A5(param_03, % body, 1, 0.3, param_04);
+  self.a.pose = var_1;
+  self notify("entered_pose" + var_1);
+  self.a.movement = var_2;
+  if(isDefined(var_3)) {
+    self _meth_82A5(var_3, % body, 1, 0.3, var_4);
   }
 }
 
-func_13712(param_00, param_01, param_02) {
+func_13712(var_0, var_1, var_2) {
   self endon("killanimscript");
   self endon("death");
-  self endon(param_01);
-  var_03 = self.a.pose;
-  wait(param_00);
-  if(var_03 != "prone" && param_02 == "prone") {
+  self endon(var_1);
+  var_3 = self.a.pose;
+  wait(var_0);
+  if(var_3 != "prone" && var_2 == "prone") {
     scripts\anim\cover_prone::func_12EF6(0.1);
     scripts\anim\utility::enterpronewrapper(1);
     return;
   }
 
-  if(var_03 == "prone" && param_02 != "prone") {
+  if(var_3 == "prone" && var_2 != "prone") {
     scripts\anim\utility::exitpronewrapper(1);
     self orientmode("face default");
   }
 }
 
-func_DA81(param_00) {}
+func_DA81(var_0) {}

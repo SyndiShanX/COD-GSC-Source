@@ -18,7 +18,7 @@ crane_kill_fx() {
   level._effect["screen_blood"] = loadfx("vfx\iw7\levels\cp_disco\abilities\vfx_kf_crane_screen_blood.vfx");
 }
 
-crane_super_use(param_00) {
+crane_super_use(var_0) {
   self.crane_super = 1;
   self notify("super_fired");
   self notify("put_shuriken_away");
@@ -26,21 +26,21 @@ crane_super_use(param_00) {
   scripts\engine\utility::allow_jump(0);
   scripts\engine\utility::allow_melee(0);
   self getquadrant();
-  var_01 = 500;
-  if(self.chi_meter_amount - var_01 <= 0) {
+  var_1 = 500;
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
   }
 
   self playgestureviewmodel("ges_crane_super_air_short", undefined, 1);
   self playanimscriptevent("power_active_cp", "gesture023");
   thread play_crane_feet_fx();
-  var_02 = 500;
-  var_03 = self getplayerangles();
-  var_04 = anglesToForward(var_03);
-  var_05 = vectornormalize(var_04) * var_02;
-  var_05 = (var_05[0], var_05[1], 0);
-  var_06 = create_move_path(var_05);
-  if(var_06) {
+  var_2 = 500;
+  var_3 = self getplayerangles();
+  var_4 = anglesToForward(var_3);
+  var_5 = vectornormalize(var_4) * var_2;
+  var_5 = (var_5[0], var_5[1], 0);
+  var_6 = create_move_path(var_5);
+  if(var_6) {
     wait(0.25);
     self playanimscriptevent("power_active_cp", "gesture026");
   }
@@ -57,15 +57,15 @@ crane_super_use(param_00) {
   scripts\cp\powers\coop_powers::power_enablepower();
 }
 
-stay_in_kung_fu_till_gesture_done(param_00) {
+stay_in_kung_fu_till_gesture_done(var_0) {
   self endon("disconnect");
-  var_01 = 500;
-  if(self.chi_meter_amount - var_01 <= 0) {
+  var_1 = 500;
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
   }
 
-  var_02 = self getgestureanimlength(param_00);
-  wait(var_02);
+  var_2 = self getgestureanimlength(var_0);
+  wait(var_2);
   self.kung_fu_exit_delay = 0;
 }
 
@@ -122,17 +122,17 @@ slide_anim() {
   self endon("disconnect");
   self endon("offslide");
   self endon("stopslideanim");
-  var_00 = 0;
+  var_0 = 0;
   while(scripts\engine\utility::istrue(self.onslide)) {
     if(self isgestureplaying()) {
       wait(0.1);
       continue;
     }
 
-    if(!var_00) {
+    if(!var_0) {
       self playanimscriptevent("power_active_cp", "gesture012");
       wait(0.1);
-      var_00 = 1;
+      var_0 = 1;
     }
 
     self playanimscriptevent("power_active_cp", "gesture020");
@@ -141,14 +141,14 @@ slide_anim() {
 }
 
 move_in_line() {
-  var_00 = 0.1405408;
-  var_01 = 1300;
-  var_02 = getclosestpointonnavmesh(self.origin);
-  var_03 = anglesToForward(self getplayerangles());
-  var_04 = getclosestpointonnavmesh(var_02 + var_03);
-  var_05 = vectornormalize(var_04 - var_02);
-  var_05 = vectornormalize(var_05 + (0, 0, var_00));
-  self setvelocity(var_05 * var_01);
+  var_0 = 0.1405408;
+  var_1 = 1300;
+  var_2 = getclosestpointonnavmesh(self.origin);
+  var_3 = anglesToForward(self getplayerangles());
+  var_4 = getclosestpointonnavmesh(var_2 + var_3);
+  var_5 = vectornormalize(var_4 - var_2);
+  var_5 = vectornormalize(var_5 + (0, 0, var_0));
+  self setvelocity(var_5 * var_1);
   thread kill_near_me();
   wait(2.5);
   self notify("crane_power_done");
@@ -156,47 +156,47 @@ move_in_line() {
   thread check_invalid_landing_place_and_teleport(self);
 }
 
-create_move_path(param_00) {
-  var_01 = self getEye();
-  var_02 = self.origin + (0, 0, 60);
-  var_03 = self getplayerangles();
-  var_04 = anglesToForward(var_03);
-  var_04 = (var_04[0], var_04[1], 0);
-  var_04 = vectornormalize(var_04) * 1000 + var_01;
-  var_05 = level.players;
-  var_06 = drop_points_on_path(var_02, var_04, 10);
-  if(var_06.size < 1) {
+create_move_path(var_0) {
+  var_1 = self getEye();
+  var_2 = self.origin + (0, 0, 60);
+  var_3 = self getplayerangles();
+  var_4 = anglesToForward(var_3);
+  var_4 = (var_4[0], var_4[1], 0);
+  var_4 = vectornormalize(var_4) * 1000 + var_1;
+  var_5 = level.players;
+  var_6 = drop_points_on_path(var_2, var_4, 10);
+  if(var_6.size < 1) {
     return 0;
   }
 
-  var_07 = spawn("script_origin", self.origin + (0, 0, 30));
-  var_07.angles = self.angles;
-  self playerlinkto(var_07, undefined, 0, 10, 10, 10, 10, 1);
+  var_7 = spawn("script_origin", self.origin + (0, 0, 30));
+  var_7.angles = self.angles;
+  self playerlinkto(var_7, undefined, 0, 10, 10, 10, 10, 1);
   thread kill_near_me();
-  var_07 move_along_point_path(var_06, 0.5);
+  var_7 move_along_point_path(var_6, 0.5);
   self unlink();
   scripts\engine\utility::waitframe();
   thread final_location_check_loop();
-  self setvelocity(param_00);
+  self setvelocity(var_0);
   wait(0.25);
   return 1;
 }
 
-drop_points_on_path(param_00, param_01, param_02) {
-  var_03 = distance(param_00, param_01);
-  var_04 = vectornormalize(param_01 - param_00);
-  var_05 = var_03 / param_02;
-  var_06 = level.players;
-  var_07 = [];
-  for(var_08 = 0; var_08 < param_02; var_08++) {
-    var_09 = 0;
-    if(var_07.size > 0) {
-      param_00 = var_07[var_07.size - 1] + (0, 0, 30);
+drop_points_on_path(var_0, var_1, var_2) {
+  var_3 = distance(var_0, var_1);
+  var_4 = vectornormalize(var_1 - var_0);
+  var_5 = var_3 / var_2;
+  var_6 = level.players;
+  var_7 = [];
+  for(var_8 = 0; var_8 < var_2; var_8++) {
+    var_9 = 0;
+    if(var_7.size > 0) {
+      var_0 = var_7[var_7.size - 1] + (0, 0, 30);
     }
 
-    var_0A = param_00 + var_05 * var_04;
+    var_0A = var_0 + var_5 * var_4;
     var_0A = scripts\engine\utility::drop_to_ground(var_0A, 30, -5000);
-    if(!navisstraightlinereachable(param_00, var_0A)) {
+    if(!navisstraightlinereachable(var_0, var_0A)) {
       var_0B = getclosestpointonnavmesh(var_0A);
       if(distancesquared(var_0B, var_0A) < 10000) {
         var_0A = var_0B;
@@ -205,32 +205,32 @@ drop_points_on_path(param_00, param_01, param_02) {
 
     var_0A = var_0A + (0, 0, 10);
     if(!is_point_in_valid_place(var_0A, self)) {
-      var_09 = 1;
+      var_9 = 1;
     }
 
-    if(var_07.size > 0) {
+    if(var_7.size > 0) {
       var_0C = var_0A[2];
-      var_0D = var_07[var_07.size - 1][2];
+      var_0D = var_7[var_7.size - 1][2];
       if(var_0C > var_0D + 100) {
-        var_09 = 1;
+        var_9 = 1;
       }
 
       var_0E = var_0D - var_0C;
       if(var_0E > 1000) {
-        var_09 = 1;
+        var_9 = 1;
       } else if(var_0E > 100) {
         var_0A = (var_0A[0], var_0A[1], var_0C + var_0D / 2);
       }
     }
 
-    if(!var_09) {
-      var_07[var_07.size] = var_0A;
+    if(!var_9) {
+      var_7[var_7.size] = var_0A;
     }
 
     scripts\engine\utility::waitframe();
   }
 
-  return var_07;
+  return var_7;
 }
 
 setupinvalidcranevolumes() {
@@ -248,25 +248,25 @@ setupinvalidcranevolumes() {
   level.invalidcranevolumes[level.invalidcranevolumes.size] = [(-1440, 3968, 1032), (-1040, 4272, 1112)];
 }
 
-is_point_in_valid_place(param_00, param_01) {
+is_point_in_valid_place(var_0, var_1) {
   if(isDefined(level.active_volume_check)) {
-    if(!self[[level.active_volume_check]](param_00)) {
-      if(!is_in_valid_patch_zone(param_00)) {
+    if(!self[[level.active_volume_check]](var_0)) {
+      if(!is_in_valid_patch_zone(var_0)) {
         return 0;
       }
     }
   }
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(param_00, level.invalid_spawn_volume_array, param_01)) {
+  if(!scripts\cp\cp_weapon::isinvalidzone(var_0, level.invalid_spawn_volume_array, var_1)) {
     return 0;
   }
 
   if(isDefined(level.invalidcranevolumes)) {
     if(isDefined(level.is_in_crane_box_func)) {
-      foreach(var_03 in level.invalidcranevolumes) {
+      foreach(var_3 in level.invalidcranevolumes) {
         if([
             [level.is_in_crane_box_func]
-          ](var_03[0], var_03[1], param_00)) {
+          ](var_3[0], var_3[1], var_0)) {
           return 0;
         }
       }
@@ -275,17 +275,17 @@ is_point_in_valid_place(param_00, param_01) {
 
   if(isDefined(level.invalidtranspondervolumes)) {
     if(isDefined(level.is_in_box_func)) {
-      foreach(var_03 in level.invalidtranspondervolumes) {
+      foreach(var_3 in level.invalidtranspondervolumes) {
         if([
             [level.is_in_box_func]
-          ](var_03[0], var_03[1], var_03[2], var_03[3], param_00)) {
+          ](var_3[0], var_3[1], var_3[2], var_3[3], var_0)) {
           return 0;
         }
       }
     }
   }
 
-  if(positionwouldtelefrag(param_00)) {
+  if(positionwouldtelefrag(var_0)) {
     return 0;
   }
 
@@ -294,24 +294,24 @@ is_point_in_valid_place(param_00, param_01) {
 
 final_location_check_loop() {
   self endon("death");
-  var_00 = 20;
-  for(var_01 = 0; var_01 < var_00; var_01++) {
+  var_0 = 20;
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     final_location_check();
     scripts\engine\utility::waitframe();
   }
 }
 
 final_location_check() {
-  var_00 = self.origin;
+  var_0 = self.origin;
   if(isDefined(level.invalidcranevolumes)) {
     if(isDefined(level.is_in_crane_box_func)) {
-      foreach(var_02 in level.invalidcranevolumes) {
+      foreach(var_2 in level.invalidcranevolumes) {
         if([
             [level.is_in_crane_box_func]
-          ](var_02[0], var_02[1], var_00)) {
-          var_03 = find_closest_crane_teleport(var_00);
+          ](var_2[0], var_2[1], var_0)) {
+          var_3 = find_closest_crane_teleport(var_0);
           self dontinterpolate();
-          self setorigin(var_03);
+          self setorigin(var_3);
           scripts\engine\utility::waitframe();
         }
       }
@@ -336,27 +336,27 @@ init_crane_teleport_spots() {
   level.crane_teleport_spots[level.crane_teleport_spots.size] = (-1274, 3933, 1061);
 }
 
-find_closest_crane_teleport(param_00) {
+find_closest_crane_teleport(var_0) {
   if(isDefined(level.crane_teleport_spots)) {
-    var_01 = get_closest_vector(param_00, level.crane_teleport_spots);
-    return var_01;
+    var_1 = get_closest_vector(var_0, level.crane_teleport_spots);
+    return var_1;
   }
 }
 
-get_closest_vector(param_00, param_01) {
-  var_02 = undefined;
-  var_03 = 100000;
-  foreach(var_05 in param_01) {
-    var_06 = distance(var_05, param_00);
-    if(var_06 >= var_03) {
+get_closest_vector(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = 100000;
+  foreach(var_5 in var_1) {
+    var_6 = distance(var_5, var_0);
+    if(var_6 >= var_3) {
       continue;
     }
 
-    var_03 = var_06;
-    var_02 = var_05;
+    var_3 = var_6;
+    var_2 = var_5;
   }
 
-  return var_02;
+  return var_2;
 }
 
 init_valid_patch_nodes() {
@@ -367,24 +367,24 @@ init_valid_patch_nodes() {
   create_valid_patch_node((544, 320, 952), 100);
 }
 
-create_valid_patch_node(param_00, param_01) {
-  var_02 = spawnStruct();
-  var_02.origin = param_00;
-  var_02.var_56E8 = param_01 * param_01;
-  level.valid_patch_nodes[level.valid_patch_nodes.size] = var_02;
+create_valid_patch_node(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.var_56E8 = var_1 * var_1;
+  level.valid_patch_nodes[level.valid_patch_nodes.size] = var_2;
 }
 
-is_in_basic_box(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
+is_in_basic_box(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
     if(isplayer(self) || isagent(self)) {
-      param_02 = self.origin;
+      var_2 = self.origin;
     } else {
       return 0;
     }
   }
 
-  for(var_03 = 0; var_03 < 3; var_03++) {
-    if(!(param_02[var_03] > param_00[var_03] && param_02[var_03] < param_01[var_03]) || param_02[var_03] > param_01[var_03] && param_02[var_03] < param_00[var_03]) {
+  for(var_3 = 0; var_3 < 3; var_3++) {
+    if(!(var_2[var_3] > var_0[var_3] && var_2[var_3] < var_1[var_3]) || var_2[var_3] > var_1[var_3] && var_2[var_3] < var_0[var_3]) {
       return 0;
     }
   }
@@ -392,87 +392,87 @@ is_in_basic_box(param_00, param_01, param_02) {
   return 1;
 }
 
-is_in_valid_patch_zone(param_00) {
-  var_01 = 0;
-  foreach(var_03 in level.valid_patch_nodes) {
-    if(distancesquared(param_00, var_03.origin) < var_03.var_56E8) {
-      var_01 = 1;
+is_in_valid_patch_zone(var_0) {
+  var_1 = 0;
+  foreach(var_3 in level.valid_patch_nodes) {
+    if(distancesquared(var_0, var_3.origin) < var_3.var_56E8) {
+      var_1 = 1;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-move_along_point_path(param_00, param_01) {
-  var_02 = param_01 / param_00.size;
-  for(var_03 = 0; var_03 < param_00.size - 1; var_03++) {
-    var_04 = param_00[var_03];
-    var_05 = param_00[var_03 + 1];
-    move_to_spot(var_04, var_05, var_02);
+move_along_point_path(var_0, var_1) {
+  var_2 = var_1 / var_0.size;
+  for(var_3 = 0; var_3 < var_0.size - 1; var_3++) {
+    var_4 = var_0[var_3];
+    var_5 = var_0[var_3 + 1];
+    move_to_spot(var_4, var_5, var_2);
   }
 }
 
-move_to_spot(param_00, param_01, param_02) {
-  var_03 = param_02 / 0.05;
-  for(var_04 = 0; var_04 < var_03; var_04++) {
-    var_05 = var_04 / var_03;
-    var_06 = vectorlerp(param_00, param_01, var_05);
-    self.origin = var_06;
+move_to_spot(var_0, var_1, var_2) {
+  var_3 = var_2 / 0.05;
+  for(var_4 = 0; var_4 < var_3; var_4++) {
+    var_5 = var_4 / var_3;
+    var_6 = vectorlerp(var_0, var_1, var_5);
+    self.origin = var_6;
     scripts\engine\utility::waitframe();
   }
 }
 
-check_invalid_landing_place_and_teleport(param_00) {
-  param_00 notify("crane_invalid_landing_check");
-  param_00 endon("crane_invalid_landing_check");
-  param_00 endon("disconnect");
-  var_01 = get_teleport_spot_n_landing_z_coordinate(param_00);
-  if(isDefined(var_01.landing_z_coordinate)) {
-    while(param_00.origin[2] > var_01.landing_z_coordinate) {
+check_invalid_landing_place_and_teleport(var_0) {
+  var_0 notify("crane_invalid_landing_check");
+  var_0 endon("crane_invalid_landing_check");
+  var_0 endon("disconnect");
+  var_1 = get_teleport_spot_n_landing_z_coordinate(var_0);
+  if(isDefined(var_1.landing_z_coordinate)) {
+    while(var_0.origin[2] > var_1.landing_z_coordinate) {
       scripts\engine\utility::waitframe();
     }
   }
 
-  if(isDefined(var_01.teleport_spot)) {
-    kill_nearby_zombies(var_01.teleport_spot, param_00);
-    param_00 setorigin(var_01.teleport_spot);
+  if(isDefined(var_1.teleport_spot)) {
+    kill_nearby_zombies(var_1.teleport_spot, var_0);
+    var_0 setorigin(var_1.teleport_spot);
   }
 }
 
-kill_nearby_zombies(param_00, param_01) {
-  var_02 = 625;
-  foreach(var_04 in level.spawned_enemies) {
-    if(distancesquared(var_04.origin, param_00) < var_02) {
-      var_04.nocorpse = 1;
-      var_04.full_gib = 1;
-      var_04 dodamage(var_04.maxhealth, param_00, param_01, undefined, "MOD_EXPLOSIVE");
+kill_nearby_zombies(var_0, var_1) {
+  var_2 = 625;
+  foreach(var_4 in level.spawned_enemies) {
+    if(distancesquared(var_4.origin, var_0) < var_2) {
+      var_4.nocorpse = 1;
+      var_4.full_gib = 1;
+      var_4 dodamage(var_4.maxhealth, var_0, var_1, undefined, "MOD_EXPLOSIVE");
     }
   }
 }
 
-get_teleport_spot_n_landing_z_coordinate(param_00) {
-  var_01 = spawnStruct();
-  var_01.teleport_spot = undefined;
-  var_01.landing_z_coordinate = undefined;
+get_teleport_spot_n_landing_z_coordinate(var_0) {
+  var_1 = spawnStruct();
+  var_1.teleport_spot = undefined;
+  var_1.landing_z_coordinate = undefined;
   if(!scripts\engine\utility::flag("rooftop_walkway_open")) {
-    var_01.landing_z_coordinate = 990;
-    if(param_00.origin[0] > -567) {
-      var_01.teleport_spot = getclosestpointonnavmesh((-597, param_00.origin[1], param_00.origin[2]));
+    var_1.landing_z_coordinate = 990;
+    if(var_0.origin[0] > -567) {
+      var_1.teleport_spot = getclosestpointonnavmesh((-597, var_0.origin[1], var_0.origin[2]));
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 kill_near_me() {
   self endon("crane_power_done");
-  var_00 = 150;
-  var_01 = var_00 * var_00;
+  var_0 = 150;
+  var_1 = var_0 * var_0;
   for(;;) {
-    foreach(var_03 in level.spawned_enemies) {
-      if(distancesquared(var_03.origin, self.origin) < var_01) {
-        playFX(level._effect["nunchuck_pap1"], var_03.origin + (0, 0, 30));
-        var_03 dodamage(var_03.maxhealth, self.origin, self, undefined, "MOD_EXPLOSIVE");
+    foreach(var_3 in level.spawned_enemies) {
+      if(distancesquared(var_3.origin, self.origin) < var_1) {
+        playFX(level._effect["nunchuck_pap1"], var_3.origin + (0, 0, 30));
+        var_3 dodamage(var_3.maxhealth, self.origin, self, undefined, "MOD_EXPLOSIVE");
       }
     }
 

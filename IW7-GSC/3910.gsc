@@ -39,58 +39,58 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_11BF0(param_00, param_01, param_02, param_03) {
+func_11BF0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }
 
-func_11BF2(param_00, param_01, param_02, param_03) {
+func_11BF2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F66();
 }
 
-func_11BF1(param_00, param_01, param_02, param_03) {
+func_11BF1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F64();
 }
 
-func_12242(param_00, param_01, param_02, param_03) {
+func_12242(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }
 
-func_12251(param_00, param_01, param_02, param_03) {
+func_12251(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F66();
 }
 
-func_12247(param_00, param_01, param_02, param_03) {
+func_12247(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F64();
 }
 
-func_12173(param_00, param_01, param_02, param_03) {
+func_12173(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }
 
-func_12179(param_00, param_01, param_02, param_03) {
+func_12179(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F66();
 }
 
-func_12175(param_00, param_01, param_02, param_03) {
+func_12175(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F65();
 }
 
-func_12177(param_00, param_01, param_02, param_03) {
+func_12177(var_0, var_1, var_2, var_3) {
   return !scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F64();
 }
 
-func_122A0(param_00, param_01, param_02, param_03) {
+func_122A0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }
 
-func_1217B(param_00, param_01, param_02, param_03) {
+func_1217B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }
 
-func_120C5(param_00, param_01, param_02, param_03) {
+func_120C5(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F68();
 }
 
-func_120C3(param_00, param_01, param_02, param_03) {
+func_120C3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\zombie_ghost\zombie_ghost_asm::func_13F67();
 }

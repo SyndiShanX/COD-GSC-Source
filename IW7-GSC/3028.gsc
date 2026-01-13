@@ -4,8 +4,8 @@
 ***************************************/
 
 func_A298() {
-  if(isDefined(level.func_A3B9)) {
-    self[[level.func_A3B9.func_375D.func_444F]]();
+  if(isDefined(level.var_A3B9)) {
+    self[[level.var_A3B9.var_375D.var_444F]]();
   }
 }
 
@@ -16,7 +16,7 @@ func_9640() {
 
   if(func_0BDC::func_9CF5()) {
     func_0BDC::func_F43D("player");
-  } else if(isDefined(self.func_C0B0) && self.func_C0B0) {
+  } else if(isDefined(self.var_C0B0) && self.var_C0B0) {
     func_0BDC::func_F43D("null");
   } else if(self.model == "tag_origin") {
     func_0BDC::func_F43D("null");
@@ -26,18 +26,18 @@ func_9640() {
     func_0BDC::func_F43D("ai");
   }
 
-  self.func_5960 = 1;
+  self.var_5960 = 1;
   self setneargoalnotifydist(128.0);
 
   if(isDefined(self.target)) {
-    var_00 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
 
-    if(isDefined(var_00)) {
+    if(isDefined(var_0)) {
       return;
     }
-    var_01 = _getcsplineidarray(self.target);
+    var_1 = _getcsplineidarray(self.target);
 
-    if(isDefined(var_01)) {
+    if(isDefined(var_1)) {
       return;
     }
     return;
@@ -45,21 +45,21 @@ func_9640() {
 }
 
 func_F8A5() {
-  self.func_9B4C = level.vehicle.func_116CE.func_155C[self.classname];
+  self.var_9B4C = level.vehicle.var_116CE.var_155C[self.classname];
 }
 
 func_FA3D() {
-  self.func_9CB8 = level.vehicle.func_116CE.func_F216[self.classname];
+  self.var_9CB8 = level.vehicle.var_116CE.var_F216[self.classname];
 }
 
-func_A329(var_00) {
+func_A329(var_0) {
   if(getdvarint("jackalHandbrakeMode")) {
     level.player allowads(0);
   }
 
-  level.player func_0BCE::func_A2B2(self, undefined, var_00);
+  level.player func_0BCE::func_A2B2(self, undefined, var_0);
   level.player setorigin((100000, 100000, 100000));
-  level.player.func_D409 = self;
+  level.player.var_D409 = self;
   _setsaveddvar("spaceship_disableViewModelNotetracks", 1);
 }
 
@@ -75,11 +75,11 @@ func_A2D9() {
 }
 
 func_10492() {
-  var_00 = spawnStruct();
-  var_0.func_B8F9 = "sp";
+  var_0 = spawnStruct();
+  var_0.var_B8F9 = "sp";
   var_0.dvarfuncs = ::dvarfuncs;
   var_0.init = ::func_9640;
-  func_0BCE::main(var_00);
+  func_0BCE::main(var_0);
   func_104AB();
   func_104A5();
   func_10496();
@@ -87,22 +87,22 @@ func_10492() {
   func_104A7();
   func_104A8();
 
-  if(level.func_A056.func_B323) {
+  if(level.var_A056.var_B323) {
     func_104A4();
     func_ABD7();
   }
 }
 
 func_ABD7() {
-  level.func_A056.func_3A02 = func_0BD5::func_3A02;
-  level.func_A056.func_11543 = func_0BDC::func_105DB;
-  level.func_A056.func_11540 = func_0BDC::func_105DA;
-  level.func_A056.func_1151D = func_0BDC::func_105D2;
-  level.func_A056.func_F389 = func_0BDC::func_F389;
-  level.func_A056.func_B81C = func_0BD5::func_B81C;
-  level.func_A056.func_A16E = func_0BDC::func_A16E;
-  level.func_A056.func_A16D = func_0BDC::func_A2DF;
-  level.func_A056.func_20A9 = func_0BDC::func_A079;
+  level.var_A056.var_3A02 = func_0BD5::func_3A02;
+  level.var_A056.var_11543 = func_0BDC::func_105DB;
+  level.var_A056.var_11540 = func_0BDC::func_105DA;
+  level.var_A056.var_1151D = func_0BDC::func_105D2;
+  level.var_A056.var_F389 = func_0BDC::func_F389;
+  level.var_A056.var_B81C = func_0BD5::func_B81C;
+  level.var_A056.var_A16E = func_0BDC::func_A16E;
+  level.var_A056.var_A16D = func_0BDC::func_A2DF;
+  level.var_A056.var_20A9 = func_0BDC::func_A079;
 }
 
 func_10496() {
@@ -218,26 +218,26 @@ func_10498() {
   scripts\sp\utility::func_16EB("jackal_dogfight_hint", &"JACKAL_DOGFIGHT", ::func_A20D);
 }
 
-func_75E7(var_00, var_01) {
-  var_02 = "";
+func_75E7(var_0, var_1) {
+  var_2 = "";
 
-  if(var_00 == "axis") {
-    var_02 = "_enemy";
+  if(var_0 == "axis") {
+    var_2 = "_enemy";
   }
 
-  level._effect[var_00 + "_rearThrustBoost"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_boost.vfx");
-  level._effect[var_00 + "_rearThrustMax"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_fly_atmosphere.vfx");
-  level._effect[var_00 + "_rearThrustMax_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_fly_space.vfx");
-  level._effect[var_00 + "_rearThrustIdle"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_idle_atmosphere.vfx");
-  level._effect[var_00 + "_rearThrustIdle_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_idle_space.vfx");
-  level._effect[var_00 + "_vtolThrustCenter"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_vtol_center.vfx");
-  level._effect[var_00 + "_vtolThrustSide"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_vtol_side.vfx");
+  level._effect[var_0 + "_rearThrustBoost"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_boost.vfx");
+  level._effect[var_0 + "_rearThrustMax"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_fly_atmosphere.vfx");
+  level._effect[var_0 + "_rearThrustMax_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_fly_space.vfx");
+  level._effect[var_0 + "_rearThrustIdle"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_idle_atmosphere.vfx");
+  level._effect[var_0 + "_rearThrustIdle_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_idle_space.vfx");
+  level._effect[var_0 + "_vtolThrustCenter"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_vtol_center.vfx");
+  level._effect[var_0 + "_vtolThrustSide"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_vtol_side.vfx");
 
-  if(var_02 == "") {
-    level._effect[var_00 + "_rearThrustLaunch_med"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_launch_child_med.vfx");
-    level._effect[var_00 + "_rearThrustLaunch_lrg"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_launch_child_lrg.vfx");
-    level._effect[var_00 + "_rearThrustLaunch_panels_blow_med"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_bottom_burst.vfx");
-    level._effect[var_00 + "_rearThrustLaunch_charge_lrg"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_launch_charge_lrg.vfx");
+  if(var_2 == "") {
+    level._effect[var_0 + "_rearThrustLaunch_med"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_launch_child_med.vfx");
+    level._effect[var_0 + "_rearThrustLaunch_lrg"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_launch_child_lrg.vfx");
+    level._effect[var_0 + "_rearThrustLaunch_panels_blow_med"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_bottom_burst.vfx");
+    level._effect[var_0 + "_rearThrustLaunch_charge_lrg"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_launch_charge_lrg.vfx");
   }
 
   level._effect["allies_winglight"] = loadfx("vfx\iw7\core\vehicle\global\vfx_acraft_light_wingtip_blue_blink.vfx");
@@ -255,11 +255,11 @@ func_75E7(var_00, var_01) {
   level._effect["fighter_spaceship_explosion_cheap"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_01_cheap.vfx");
   level._effect["fighter_spaceship_explosion_ground"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_ground.vfx");
   level._effect["jackal_debris_impact"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_windshield_reflect.vfx");
-  level._effect[var_00 + "_spaceship_explosion"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_death_01.vfx");
-  level._effect[var_00 + "_spaceship_explosion_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_death_01.vfx");
-  level._effect[var_00 + "_spaceship_explosion_cheap"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_death_01_cheap.vfx");
-  level._effect[var_00 + "_spaceship_explosion_hov"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_death_hover_01.vfx");
-  level._effect[var_00 + "_spaceship_explosion_hov_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_death_hover_01.vfx");
+  level._effect[var_0 + "_spaceship_explosion"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_death_01.vfx");
+  level._effect[var_0 + "_spaceship_explosion_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_death_01.vfx");
+  level._effect[var_0 + "_spaceship_explosion_cheap"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_death_01_cheap.vfx");
+  level._effect[var_0 + "_spaceship_explosion_hov"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_death_hover_01.vfx");
+  level._effect[var_0 + "_spaceship_explosion_hov_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_death_hover_01.vfx");
   level._effect["fighter_spaceship_damage_med_hov_trail"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hit_hov_damage_linger.vfx");
   level._effect["fighter_spaceship_explosion_hov_space"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_hover_01.vfx");
   level._effect["fighter_spaceship_explosion_hov"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_hover_01.vfx");
@@ -304,33 +304,33 @@ func_75E7(var_00, var_01) {
   level._effect["fake_follow_jackal_tracer"] = loadfx("vfx\core\projectile\jackal\vfx_core_projectile_jackal_ai_modern_tail_fake.vfx");
   level._effect["30mm_flash"] = loadfx("vfx\core\muzflash\jackal\vfx_core_flash_jackal_30mm.vfx");
 
-  if(!isDefined(level.func_A1E3)) {
-    level.func_A1E3 = [];
+  if(!isDefined(level.var_A1E3)) {
+    level.var_A1E3 = [];
   }
 
-  if(var_00 == "axis") {
-    level.func_A1E3[var_00 + "_rear_thrusters"] = ["tag_thrust_rear1"];
-    level.func_A1E3[var_00 + "_launch_boosters_sml"] = [];
-    level.func_A1E3[var_00 + "_launch_boosters_med"] = [];
-    level.func_A1E3[var_00 + "_launch_boosters_lrg"] = [];
-  } else if(var_00 == "allies") {
-    level.func_A1E3[var_00 + "_rear_thrusters"] = ["tag_thrust_rear_LE", "tag_thrust_rear_RI"];
-    level.func_A1E3[var_00 + "_launch_boosters_med"] = ["j_rocket_booster_rear_left1", "j_rocket_booster_rear_right1"];
-    level.func_A1E3[var_00 + "_launch_boosters_lrg"] = ["j_rocket_booster_rear_left2", "j_rocket_booster_rear_right2"];
+  if(var_0 == "axis") {
+    level.var_A1E3[var_0 + "_rear_thrusters"] = ["tag_thrust_rear1"];
+    level.var_A1E3[var_0 + "_launch_boosters_sml"] = [];
+    level.var_A1E3[var_0 + "_launch_boosters_med"] = [];
+    level.var_A1E3[var_0 + "_launch_boosters_lrg"] = [];
+  } else if(var_0 == "allies") {
+    level.var_A1E3[var_0 + "_rear_thrusters"] = ["tag_thrust_rear_LE", "tag_thrust_rear_RI"];
+    level.var_A1E3[var_0 + "_launch_boosters_med"] = ["j_rocket_booster_rear_left1", "j_rocket_booster_rear_right1"];
+    level.var_A1E3[var_0 + "_launch_boosters_lrg"] = ["j_rocket_booster_rear_left2", "j_rocket_booster_rear_right2"];
   }
 
-  if(issubstr(var_01, "_moon")) {
-    level._effect[var_00 + "_rearThrustBoost"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_boost.vfx");
-    level._effect[var_00 + "_rearThrustMax"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_fly_atmosphere.vfx");
-    level._effect[var_00 + "_rearThrustMax_space"] = loadfx("vfx\iw7\levels\sa_moon\vfx_sa_moon_jackal" + var_02 + "_rear_thrust_fly_space.vfx");
-    level._effect[var_00 + "_rearThrustIdle"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_idle_atmosphere.vfx");
-    level._effect[var_00 + "_rearThrustIdle_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_idle_space.vfx");
-    level._effect[var_00 + "_vtolThrustCenter"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_vtol_center.vfx");
-    level._effect[var_00 + "_vtolThrustSide"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_vtol_side.vfx");
+  if(issubstr(var_1, "_moon")) {
+    level._effect[var_0 + "_rearThrustBoost"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_boost.vfx");
+    level._effect[var_0 + "_rearThrustMax"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_fly_atmosphere.vfx");
+    level._effect[var_0 + "_rearThrustMax_space"] = loadfx("vfx\iw7\levels\sa_moon\vfx_sa_moon_jackal" + var_2 + "_rear_thrust_fly_space.vfx");
+    level._effect[var_0 + "_rearThrustIdle"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_idle_atmosphere.vfx");
+    level._effect[var_0 + "_rearThrustIdle_space"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_rear_thrust_idle_space.vfx");
+    level._effect[var_0 + "_vtolThrustCenter"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_vtol_center.vfx");
+    level._effect[var_0 + "_vtolThrustSide"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_2 + "\vfx_jackal" + var_2 + "_vtol_side.vfx");
     level._effect["fighter_spaceship_explosion_space"] = loadfx("vfx\iw7\levels\sa_moon\vfx_sa_moon_jackal_death_intro.vfx");
   }
 
-  if(level.func_A056.func_B323) {
+  if(level.var_A056.var_B323) {
     level._effect["vfx_jackal_cockpit_decomp"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_cockpit_decomp.vfx");
     level._effect["vfx_jackal_cockpit_canopy"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_cockpit_canopy.vfx");
     level._effect["missile_flare_short"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_player_missile_short.vfx");
@@ -359,23 +359,23 @@ func_75E7(var_00, var_01) {
 #using_animtree("jackal");
 
 func_31A1() {
-  level.func_A065["evasion"] = [ % jackal_vehicle_evade_01, % jackal_vehicle_evade_02, % jackal_vehicle_evade_03, % jackal_vehicle_evade_04, % jackal_vehicle_evade_05, % jackal_vehicle_evade_06, % jackal_vehicle_evade_07, % jackal_vehicle_evade_08];
-  level.func_A065["evasion_overlay"] = % jackal_evade_overlay;
-  level.func_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.func_A065["evasion"]);
+  level.var_A065["evasion"] = [ % jackal_vehicle_evade_01, % jackal_vehicle_evade_02, % jackal_vehicle_evade_03, % jackal_vehicle_evade_04, % jackal_vehicle_evade_05, % jackal_vehicle_evade_06, % jackal_vehicle_evade_07, % jackal_vehicle_evade_08];
+  level.var_A065["evasion_overlay"] = % jackal_evade_overlay;
+  level.var_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.var_A065["evasion"]);
 }
 
 func_104A7() {
-  level.func_A056.func_A82D = [];
-  level.func_A056.func_1632 = [];
-  var_00 = getEntArray("jackal_landingzone", "targetname");
+  level.var_A056.var_A82D = [];
+  level.var_A056.var_1632 = [];
+  var_0 = getEntArray("jackal_landingzone", "targetname");
 
-  foreach(var_02 in var_00) {
-    var_03 = scripts\engine\utility::getstruct(var_2.target, "targetname");
-    var_04 = scripts\engine\utility::spawn_tag_origin();
+  foreach(var_2 in var_0) {
+    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::spawn_tag_origin();
     var_4.origin = var_3.origin;
     var_4.angles = var_3.angles;
     var_4.targetname = var_3.targetname;
-    var_4.func_1270F = var_02;
+    var_4.var_1270F = var_2;
     var_4.tag_origin = scripts\engine\utility::spawn_tag_origin();
     var_4.tag_origin.origin = var_4.origin;
     var_4.tag_origin.angles = var_4.angles;
@@ -384,68 +384,68 @@ func_104A7() {
       var_4.script_noteworthy = var_3.script_noteworthy;
     }
 
-    if(isDefined(var_3.func_EE10)) {
-      var_4.func_EE10 = var_3.func_EE10;
+    if(isDefined(var_3.var_EE10)) {
+      var_4.var_EE10 = var_3.var_EE10;
     }
 
-    var_03 = undefined;
-    var_05 = undefined;
+    var_3 = undefined;
+    var_5 = undefined;
 
     if(isDefined(var_2.script_noteworthy)) {
-      var_05 = getent(var_2.script_noteworthy, "targetname");
+      var_5 = getent(var_2.script_noteworthy, "targetname");
 
-      if(isDefined(var_05)) {
+      if(isDefined(var_5)) {
         if(issubstr(var_5.classname, "_vehicle")) {
-          var_05 = scripts\sp\utility::func_7D40(var_2.script_noteworthy, "targetname");
+          var_5 = scripts\sp\utility::func_7D40(var_2.script_noteworthy, "targetname");
         }
 
-        var_02 getrankxp();
-        var_02 _meth_8314();
-        var_02 linkto(var_05);
-        var_04 linkto(var_05);
-        var_4.tag_origin linkto(var_05);
+        var_2 getrankxp();
+        var_2 _meth_8314();
+        var_2 linkto(var_5);
+        var_4 linkto(var_5);
+        var_4.tag_origin linkto(var_5);
       }
     }
 
-    level.func_A056.func_A82D = scripts\engine\utility::array_add(level.func_A056.func_A82D, var_04);
+    level.var_A056.var_A82D = scripts\engine\utility::array_add(level.var_A056.var_A82D, var_4);
     var_4.lights = [];
-    var_06 = scripts\engine\utility::getstructarray(var_4.targetname, "target");
+    var_6 = scripts\engine\utility::getstructarray(var_4.targetname, "target");
 
-    foreach(var_08 in var_06) {
+    foreach(var_8 in var_6) {
       if(var_8.script_parameters == "landing_pad_light") {
-        var_09 = scripts\engine\utility::spawn_tag_origin();
+        var_9 = scripts\engine\utility::spawn_tag_origin();
         var_9.origin = var_8.origin;
 
-        if(isDefined(var_05)) {
-          var_09 linkto(var_05);
+        if(isDefined(var_5)) {
+          var_9 linkto(var_5);
         }
 
-        var_4.lights = scripts\engine\utility::array_add(var_4.lights, var_09);
+        var_4.lights = scripts\engine\utility::array_add(var_4.lights, var_9);
       }
     }
 
     var_4.enabled = 0;
-    var_4.func_B36C = 0;
-    func_0BDC::func_6211(var_04, 1);
+    var_4.var_B36C = 0;
+    func_0BDC::func_6211(var_4, 1);
   }
 
   func_0BDC::func_A06A(1);
 }
 
 func_104A8() {
-  var_00 = getEntArray("jackal_cockpit_probe", "targetname");
+  var_0 = getEntArray("jackal_cockpit_probe", "targetname");
 
   if(var_0.size == 0) {
     return;
   } else {
-    level.func_A056.func_DE59 = var_0[0];
+    level.var_A056.var_DE59 = var_0[0];
   }
 }
 
 init_location() {}
 
-dvarfuncs(var_00, var_01) {
-  _setsaveddvar(var_00, var_01);
+dvarfuncs(var_0, var_1) {
+  _setsaveddvar(var_0, var_1);
 }
 
 func_10499() {}
@@ -511,15 +511,15 @@ func_104AB() {
 }
 
 func_A220() {
-  return !scripts\engine\utility::flag("jackal_supply_drop_hint") || isDefined(level.func_10260);
+  return !scripts\engine\utility::flag("jackal_supply_drop_hint") || isDefined(level.var_10260);
 }
 
 func_A217() {
-  return !scripts\engine\utility::flag("flag_mount_jackal") || level.player.func_C53F;
+  return !scripts\engine\utility::flag("flag_mount_jackal") || level.player.var_C53F;
 }
 
 func_A221() {
-  return level.player gettimeremainingpercentage() || isDefined(level.func_D127.func_7294);
+  return level.player gettimeremainingpercentage() || isDefined(level.var_D127.var_7294);
 }
 
 func_A21D() {
@@ -539,11 +539,11 @@ func_A213() {
 }
 
 func_A20A() {
-  if(!isDefined(level.func_D127)) {
+  if(!isDefined(level.var_D127)) {
     return 1;
   }
 
-  if(level.func_D127.spaceship_mode == "hover") {
+  if(level.var_D127.spaceship_mode == "hover") {
     return 1;
   } else {
     return 0;
@@ -551,11 +551,11 @@ func_A20A() {
 }
 
 func_A21F() {
-  if(!isDefined(level.func_D127)) {
+  if(!isDefined(level.var_D127)) {
     return 1;
   }
 
-  if(level.func_D127.spaceship_mode == "fly") {
+  if(level.var_D127.spaceship_mode == "fly") {
     return 1;
   } else {
     return 0;

@@ -209,62 +209,62 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_122DB(param_00, param_01, param_02, param_03) {
+func_122DB(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_122E1(param_00, param_01, param_02, param_03) {
+func_122E1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_122D7(param_00, param_01, param_02, param_03) {
+func_122D7(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_12125(param_00, param_01, param_02, param_03) {
+func_12125(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_throwgrenaderequested();
 }
 
-trans_exposed_idle_to_exposed_crouch_exit3(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm_bb::bb_moverequested() && self.var_1198.movetype == "combat" && lib_0F3C::func_138E2();
+trans_exposed_idle_to_exposed_crouch_exit3(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested() && self._blackboard.movetype == "combat" && lib_0F3C::func_138E2();
 }
 
-func_120FD(param_00, param_01, param_02, param_03) {
-  return isDefined(self.var_1198.var_2BDF) && self.var_1198.var_2BDF && lib_0F3C::func_138E2();
+func_120FD(var_0, var_1, var_2, var_3) {
+  return isDefined(self._blackboard.var_2BDF) && self._blackboard.var_2BDF && lib_0F3C::func_138E2();
 }
 
-func_12113(param_00, param_01, param_02, param_03) {
+func_12113(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_120ED(param_00, param_01, param_02, param_03) {
+func_120ED(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_1257C(param_00, param_01, param_02, param_03) {
+func_1257C(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_1255B(param_00, param_01, param_02, param_03) {
+func_1255B(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12594(param_00, param_01, param_02, param_03) {
+func_12594(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12595(param_00, param_01, param_02, param_03) {
+func_12595(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_12591(param_00, param_01, param_02, param_03) {
+func_12591(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_12511(param_00, param_01, param_02, param_03) {
+func_12511(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_122B0(param_00, param_01, param_02, param_03) {
+func_122B0(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }

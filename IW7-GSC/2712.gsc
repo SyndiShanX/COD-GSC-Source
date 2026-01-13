@@ -4,14 +4,14 @@
 ***************************************/
 
 createfx() {
-  level.func_position_player = scripts\engine\utility::void;
-  level.func_position_player_get = ::func_position_player_get;
-  level.func_loopfxthread = scripts\common\fx::loopfxthread;
-  level.func_oneshotfxthread = scripts\common\fx::oneshotfxthread;
-  level.func_create_loopsound = scripts\common\fx::create_loopsound;
-  level.func_updatefx = scripts\common\createfx::restart_fx_looper;
-  level.func_process_fx_rotater = scripts\common\createfx::process_fx_rotater;
-  level.func_player_speed = ::func_player_speed;
+  level.var_position_player = scripts\engine\utility::void;
+  level.var_position_player_get = ::func_position_player_get;
+  level.var_loopfxthread = scripts\common\fx::loopfxthread;
+  level.var_oneshotfxthread = scripts\common\fx::oneshotfxthread;
+  level.var_create_loopsound = scripts\common\fx::create_loopsound;
+  level.var_updatefx = scripts\common\createfx::restart_fx_looper;
+  level.var_process_fx_rotater = scripts\common\createfx::process_fx_rotater;
+  level.var_player_speed = ::func_player_speed;
   level.mp_createfx = 1;
   level.callbackstartgametype = scripts\engine\utility::void;
   level.callbackplayerconnect = scripts\engine\utility::void;
@@ -28,7 +28,7 @@ createfx() {
   level waittill("eternity");
 }
 
-func_position_player_get(var_00) {
+func_position_player_get(var_0) {
   return level.player.origin;
 }
 
@@ -36,7 +36,7 @@ callback_playerconnect() {
   self waittill("begin");
 
   if(!isDefined(level.player)) {
-    var_00 = getEntArray("mp_global_intermission", "classname");
+    var_0 = getEntArray("mp_global_intermission", "classname");
     self spawn(var_0[0].origin, var_0[0].angles);
     scripts\mp\utility\game::updatesessionstate("playing", "");
     self.maxhealth = 10000000;
@@ -48,8 +48,8 @@ callback_playerconnect() {
 }
 
 func_player_speed() {
-  var_00 = level._createfx.player_speed / 190;
-  level.player setmovespeedscale(var_00);
+  var_0 = level._createfx.player_speed / 190;
+  level.player setmovespeedscale(var_0);
 }
 
 reflectionprobe_hide_hp() {}

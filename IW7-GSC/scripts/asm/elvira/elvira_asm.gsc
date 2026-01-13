@@ -4,13 +4,13 @@
  * Script: scripts\asm\elvira\elvira_asm.gsc
 *********************************************/
 
-elvirainit(param_00, param_01, param_02, param_03) {
+elvirainit(var_0, var_1, var_2, var_3) {
   self.var_FFEF = 1;
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "cast_return_spell":
     case "cast_reveal_spell":
     case "cast_revive_spell":
@@ -24,35 +24,35 @@ isvalidaction(param_00) {
   return 0;
 }
 
-setaction(param_00) {
-  self.requested_action = param_00;
+setaction(var_0) {
+  self.requested_action = var_0;
 }
 
 clearaction() {
   self.requested_action = undefined;
 }
 
-isanimdone(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "end")) {
+isanimdone(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "early_end")) {
+  if(scripts\asm\asm::func_232B(var_1, "early_end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "finish_early")) {
+  if(scripts\asm\asm::func_232B(var_1, "finish_early")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "code_move")) {
+  if(scripts\asm\asm::func_232B(var_1, "code_move")) {
     return 1;
   }
 
   return 0;
 }
 
-isrevivedone(param_00, param_01, param_02, param_03) {
+isrevivedone(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.reviveplayer)) {
     return 1;
   }
@@ -64,29 +64,29 @@ isrevivedone(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-dorevive(param_00, param_01) {
-  self endon(param_00 + "_finished");
-  param_01 endon("disconnect");
-  var_02 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
-  wait(var_02.revive_wait_time);
-  if(!isDefined(param_01.reviveent)) {
+dorevive(var_0, var_1) {
+  self endon(var_0 + "_finished");
+  var_1 endon("disconnect");
+  var_2 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+  wait(var_2.revive_wait_time);
+  if(!isDefined(var_1.reviveent)) {
     return;
   }
 
-  param_01.reviveent notify("pg_trigger", self);
+  var_1.reviveent notify("pg_trigger", self);
 }
 
-playreviveanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playreviveanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(isDefined(self.reviveplayer)) {
-    thread scripts\asm\zombie\melee::func_6A6A(param_01, self.reviveplayer);
-    thread dorevive(param_01, self.reviveplayer);
+    thread scripts\asm\zombie\melee::func_6A6A(var_1, self.reviveplayer);
+    thread dorevive(var_1, self.reviveplayer);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-shouldabortaction(param_00, param_01, param_02, param_03) {
+shouldabortaction(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.btraversalteleport)) {
     return 0;
   }
@@ -95,8 +95,8 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(isDefined(param_03)) {
-    if(self.requested_action != param_03) {
+  if(isDefined(var_3)) {
+    if(self.requested_action != var_3) {
       return 1;
     }
   }
@@ -104,62 +104,62 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-shoulddoaction(param_00, param_01, param_02, param_03) {
+shoulddoaction(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.requested_action)) {
     return 0;
   }
 
-  if(isDefined(param_03) && param_03 != "") {
-    if(self.requested_action == param_03) {
+  if(isDefined(var_3) && var_3 != "") {
+    if(self.requested_action == var_3) {
       return 1;
     }
 
     return 0;
   }
 
-  if(self.requested_action == param_02) {
+  if(self.requested_action == var_2) {
     return 1;
   }
 
   return 0;
 }
 
-playanimwithplaybackrate(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-func_3EE4(param_00, param_01, param_02) {
-  return lib_0F3C::func_3EF4(param_00, param_01, param_02);
+func_3EE4(var_0, var_1, var_2) {
+  return lib_0F3C::func_3EF4(var_0, var_1, var_2);
 }
 
-playmovingpainanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playmovingpainanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(!isDefined(self.vehicle_getspawnerarray) || self pathdisttogoal() < scripts\mp\agents\elvira\elvira_tunedata::gettunedata().min_moving_pain_dist) {
-    var_04 = func_3EE4(param_00, "pain_generic", param_03);
+    var_4 = func_3EE4(var_0, "pain_generic", var_3);
     self orientmode("face angle abs", self.angles);
-    scripts\asm\asm_mp::func_2365(param_00, "pain_generic", param_02, var_04, 1);
+    scripts\asm\asm_mp::func_2365(var_0, "pain_generic", var_2, var_4, 1);
     return;
   }
 
-  scripts\asm\asm_mp::func_2364(param_01, param_02, param_03, var_04);
+  scripts\asm\asm_mp::func_2364(var_1, var_2, var_3, var_4);
 }
 
-choosereviveanim(param_00, param_01, param_02) {
+choosereviveanim(var_0, var_1, var_2) {
   if(!isDefined(self.reviveanimindex)) {
-    self.reviveanimindex = lib_0F3C::func_3EF4(param_00, param_01, param_02);
+    self.reviveanimindex = lib_0F3C::func_3EF4(var_0, var_1, var_2);
   }
 
   return self.reviveanimindex;
 }
 
-faceplayer(param_00, param_01) {
-  self endon(param_00 + "_finished");
+faceplayer(var_0, var_1) {
+  self endon(var_0 + "_finished");
   for(;;) {
-    if(isDefined(param_01)) {
-      self orientmode("face angle abs", (0, vectortoyaw(param_01.origin - self.origin), 0));
+    if(isDefined(var_1)) {
+      self orientmode("face angle abs", (0, vectortoyaw(var_1.origin - self.origin), 0));
     } else {
       break;
     }
@@ -168,60 +168,60 @@ faceplayer(param_00, param_01) {
   }
 }
 
-playcastspellanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+playcastspellanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   playFXOnTag(level._effect["vfx_spell_tornado"], self, "j_wrist_le");
   self playSound("elvira_fire_spell_cast");
   thread scripts\cp\maps\cp_town\cp_town_elvira::elvira_timely_torrent();
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-playrevealspellanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+playrevealspellanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   playFXOnTag(level._effect["vfx_spell_anom"], self, "j_wrist_le");
   self playSound("elvira_portal_spell_cast");
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-playteleportfx(param_00, param_01) {
-  self endon(param_00 + "_finished");
-  wait(param_01);
+playteleportfx(var_0, var_1) {
+  self endon(var_0 + "_finished");
+  wait(var_1);
   playFX(level._effect["elvira_stand_smoke"], self.origin);
 }
 
-terminate_traverseexternal(param_00, param_01, param_02) {
+terminate_traverseexternal(var_0, var_1, var_2) {
   self.earlytraversalteleportpos = undefined;
   self.ishidden = undefined;
   self.is_traversing = undefined;
 }
 
-dotraverseteleport(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
-  thread playteleportfx(param_01, 0.75);
-  var_04 = undefined;
+dotraverseteleport(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
+  thread playteleportfx(var_1, 0.75);
+  var_4 = undefined;
   if(isDefined(self.earlytraversalteleportpos)) {
-    var_04 = self.earlytraversalteleportpos;
+    var_4 = self.earlytraversalteleportpos;
   } else {
-    var_04 = self _meth_8146();
+    var_4 = self _meth_8146();
   }
 
-  var_05 = vectornormalize(var_04 - self.origin * (1, 1, 0));
-  var_06 = vectortoangles(var_05);
-  self orientmode("face angle abs", var_06);
+  var_5 = vectornormalize(var_4 - self.origin * (1, 1, 0));
+  var_6 = vectortoangles(var_5);
+  self orientmode("face angle abs", var_6);
   wait(0.9);
   self hide();
   self.ishidden = 1;
-  self setorigin(var_04, 0);
-  playFX(level._effect["elvira_stand_smoke"], var_04);
+  self setorigin(var_4, 0);
+  playFX(level._effect["elvira_stand_smoke"], var_4);
   wait(0.25);
   self show();
   self.ishidden = undefined;
   self.is_traversing = undefined;
   self notify("traverse_end");
-  thread scripts\asm\asm::asm_setstate("exposed_idle", param_03);
+  thread scripts\asm\asm::asm_setstate("exposed_idle", var_3);
 }

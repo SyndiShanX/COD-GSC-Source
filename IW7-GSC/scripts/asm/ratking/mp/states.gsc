@@ -139,30 +139,30 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_check_move_to_pass_walk_in0(param_00, param_01, param_02, param_03) {
+trans_check_move_to_pass_walk_in0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-trans_check_move_to_pass_run_in1(param_00, param_01, param_02, param_03) {
+trans_check_move_to_pass_run_in1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-trans_pass_walk_in_to_walk_start2(param_00, param_01, param_02, param_03) {
+trans_pass_walk_in_to_walk_start2(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_out_to_move_done4(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_move_done4(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_in_to_run_start2(param_00, param_01, param_02, param_03) {
+trans_pass_run_in_to_run_start2(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_decide_idle_to_platform_idle0(param_00, param_01, param_02, param_03) {
+trans_decide_idle_to_platform_idle0(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::istrue(self.isonplatform);
 }
 
-trans_platform_idle_to_decide_idle0(param_00, param_01, param_02, param_03) {
+trans_platform_idle_to_decide_idle0(var_0, var_1, var_2, var_3) {
   return !scripts\engine\utility::istrue(self.isonplatform);
 }

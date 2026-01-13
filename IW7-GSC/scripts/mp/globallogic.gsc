@@ -37,16 +37,16 @@ init() {
   level.var_D420 = [];
   func_DEEC();
   if(scripts\mp\utility::matchmakinggame()) {
-    var_00 = " LB_MAP_" + getdvar("ui_mapname");
-    var_01 = "";
-    var_02 = "";
-    var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
-    var_01 = " LB_GM_" + level.gametype;
+    var_0 = " LB_MAP_" + getdvar("ui_mapname");
+    var_1 = "";
+    var_2 = "";
+    var_2 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
+    var_1 = " LB_GM_" + level.gametype;
     if(getdvarint("g_hardcore")) {
-      var_01 = var_01 + "_HC";
+      var_1 = var_1 + "_HC";
     }
 
-    precacheleaderboards(var_02 + var_01 + var_00);
+    precacheleaderboards(var_2 + var_1 + var_0);
   }
 
   level.teamcount["allies"] = 0;
@@ -60,32 +60,32 @@ init() {
   level.var_C50B = [];
   level.hasspawned["allies"] = 0;
   level.hasspawned["axis"] = 0;
-  var_03 = 9;
-  func_9694(var_03);
+  var_3 = 9;
+  func_9694(var_3);
 }
 
 endmatchonhostdisconnect() {
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_00);
-    if(var_00 ishost()) {
-      var_01 = var_00;
+    level waittill("connected", var_0);
+    if(var_0 ishost()) {
+      var_1 = var_0;
       break;
     }
   }
 
-  var_01 waittill("disconnect");
+  var_1 waittill("disconnect");
   thread scripts\mp\gamelogic::endgame("draw", game["end_reason"]["host_ended_game"]);
 }
 
-func_9694(param_00) {
-  for(var_01 = 0; var_01 < param_00; var_01++) {
-    var_02 = "team_" + var_01;
-    level.placement[var_02] = [];
-    level.teamcount[var_02] = 0;
-    level.alivecount[var_02] = 0;
-    level.livescount[var_02] = 0;
-    level.hasspawned[var_02] = 0;
+func_9694(var_0) {
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    var_2 = "team_" + var_1;
+    level.placement[var_2] = [];
+    level.teamcount[var_2] = 0;
+    level.alivecount[var_2] = 0;
+    level.livescount[var_2] = 0;
+    level.hasspawned[var_2] = 0;
   }
 }
 
@@ -141,24 +141,24 @@ setdefaultcallbacks() {
   level.callbackfinishweaponchange = ::scripts\mp\weapons::callback_finishweaponchange;
 }
 
-blank(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
+blank(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
 func_11757() {
   self endon("death");
   self endon("disconnect");
   for(;;) {
     wait(3);
-    var_00 = randomint(6);
-    for(var_01 = 0; var_01 < var_00; var_01++) {
-      iprintlnbold(var_00);
+    var_0 = randomint(6);
+    for(var_1 = 0; var_1 < var_0; var_1++) {
+      iprintlnbold(var_0);
       self shellshock("frag_grenade_mp", 0.2);
       wait(0.1);
     }
   }
 }
 
-debugline(param_00, param_01) {
-  for(var_02 = 0; var_02 < 50; var_02++) {
+debugline(var_0, var_1) {
+  for(var_2 = 0; var_2 < 50; var_2++) {
     wait(0.05);
   }
 }

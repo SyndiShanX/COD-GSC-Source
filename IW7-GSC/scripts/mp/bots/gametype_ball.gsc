@@ -23,29 +23,29 @@ setup_bot_ball() {
 }
 
 bot_get_available_ball() {
-  foreach(var_01 in level.balls) {
-    if(isDefined(var_01.carrier)) {
+  foreach(var_1 in level.balls) {
+    if(isDefined(var_1.carrier)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_01.in_goal)) {
+    if(scripts\engine\utility::istrue(var_1.in_goal)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_01.isresetting)) {
+    if(scripts\engine\utility::istrue(var_1.isresetting)) {
       continue;
     }
 
-    return var_01;
+    return var_1;
   }
 
   return undefined;
 }
 
 bot_get_ball_carrier() {
-  foreach(var_01 in level.balls) {
-    if(isDefined(var_01.carrier)) {
-      return var_01.carrier;
+  foreach(var_1 in level.balls) {
+    if(isDefined(var_1.carrier)) {
+      return var_1.carrier;
     }
   }
 
@@ -57,14 +57,14 @@ bot_do_doublejump() {
   self endon("disconnect");
   level endon("game_ended");
   self botsetstance("stand");
-  for(var_00 = 0; var_00 < 5; var_00++) {
+  for(var_0 = 0; var_0 < 5; var_0++) {
     self botpressbutton("jump");
     scripts\engine\utility::waitframe();
   }
 
   scripts\engine\utility::waitframe();
   scripts\engine\utility::waitframe();
-  for(var_00 = 0; var_00 < 60; var_00++) {
+  for(var_0 = 0; var_0 < 60; var_0++) {
     self botpressbutton("jump");
     scripts\engine\utility::waitframe();
     if(!isDefined(self.carryobject)) {
@@ -77,7 +77,7 @@ bot_throw_ball() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  for(var_00 = 0; var_00 < 5; var_00++) {
+  for(var_0 = 0; var_0 < 5; var_0++) {
     self botpressbutton("attack");
     scripts\engine\utility::waitframe();
   }
@@ -102,34 +102,34 @@ func_2D12() {
   }
 
   self botsetflag("separation", 0);
-  var_00 = undefined;
-  var_01 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   for(;;) {
     wait(0.05);
     if(!isDefined(self.role)) {
       initialize_ball_role();
-      var_00 = undefined;
+      var_0 = undefined;
     }
 
     if(scripts\mp\bots\_bots_strategy::bot_has_tactical_goal()) {
-      var_00 = undefined;
+      var_0 = undefined;
       continue;
     }
 
     if(self.role != "carrier" && isDefined(self.carryobject)) {
-      var_00 = undefined;
+      var_0 = undefined;
       ball_set_role("carrier");
     }
 
     if(self.role == "carrier") {
       if(isDefined(self.carryobject)) {
         self botsetflag("disable_attack", 1);
-        var_02 = 0;
+        var_2 = 0;
         if(isDefined(self.isnodeoccupied)) {
-          var_02 = distancesquared(self.isnodeoccupied.origin, self.origin);
+          var_2 = distancesquared(self.isnodeoccupied.origin, self.origin);
         }
 
-        if(isDefined(self.isnodeoccupied) && var_02 < 9216) {
+        if(isDefined(self.isnodeoccupied) && var_2 < 9216) {
           self botsetflag("disable_attack", 0);
           self botsetflag("prefer_melee", 1);
         } else {
@@ -138,22 +138,22 @@ func_2D12() {
         }
 
         if(isDefined(level.ball_goals)) {
-          var_03 = level.ball_goals[bot_get_enemy_team()].origin;
-          if(!isDefined(var_00)) {
-            var_00 = getclosestpointonnavmesh(var_03, self);
-            if(distance2dsquared(var_00, var_03) > 256) {
-              var_04 = (var_03[0], var_03[1], var_03[2] - 90);
-              var_00 = getclosestpointonnavmesh(var_04, self);
+          var_3 = level.ball_goals[bot_get_enemy_team()].origin;
+          if(!isDefined(var_0)) {
+            var_0 = getclosestpointonnavmesh(var_3, self);
+            if(distance2dsquared(var_0, var_3) > 256) {
+              var_4 = (var_3[0], var_3[1], var_3[2] - 90);
+              var_0 = getclosestpointonnavmesh(var_4, self);
             }
           }
 
-          self botsetscriptgoal(var_00, 16, "critical");
-          var_05 = distance2dsquared(self.origin, var_03);
-          if(var_05 < 30625) {
-            var_06 = self getEye();
-            var_07 = var_03;
-            if(scripts\common\trace::ray_trace_passed(var_06, var_07, self)) {
-              if(var_05 < 256) {
+          self botsetscriptgoal(var_0, 16, "critical");
+          var_5 = distance2dsquared(self.origin, var_3);
+          if(var_5 < 30625) {
+            var_6 = self getEye();
+            var_7 = var_3;
+            if(scripts\common\trace::ray_trace_passed(var_6, var_7, self)) {
+              if(var_5 < 256) {
                 self botsetscriptgoal(self.origin, 16, "critical");
                 wait(0.25);
               }
@@ -167,20 +167,20 @@ func_2D12() {
           }
         } else {
           self botclearscriptgoal();
-          if(!isDefined(var_01)) {
-            var_01 = gettime() + randomintrange(500, 1000);
+          if(!isDefined(var_1)) {
+            var_1 = gettime() + randomintrange(500, 1000);
           }
 
-          if(gettime() > var_01) {
-            var_01 = gettime() + randomintrange(500, 1000);
+          if(gettime() > var_1) {
+            var_1 = gettime() + randomintrange(500, 1000);
             if(isDefined(self.isnodeoccupied)) {
               if(self botcanseeentity(self.isnodeoccupied)) {
-                var_08 = anglesToForward(self.angles);
-                var_09 = self.isnodeoccupied.origin - self.origin;
-                var_0A = vectornormalize((var_09[0], var_09[1], 0));
-                var_0B = vectordot(var_08, var_0A);
+                var_8 = anglesToForward(self.angles);
+                var_9 = self.isnodeoccupied.origin - self.origin;
+                var_0A = vectornormalize((var_9[0], var_9[1], 0));
+                var_0B = vectordot(var_8, var_0A);
                 if(var_0B > 0.707) {
-                  if(var_02 < -7936 && var_02 > 9216) {
+                  if(var_2 < -7936 && var_2 > 9216) {
                     bot_throw_ball();
                   }
                 }
@@ -203,7 +203,7 @@ func_2D12() {
         }
       }
     } else {
-      var_00 = undefined;
+      var_0 = undefined;
     }
 
     if(self.role == "attacker") {
@@ -231,32 +231,32 @@ func_2D12() {
       self botsetflag("disable_attack", 0);
       self botsetflag("prefer_melee", 0);
       var_0F = level.ball_goals[self.team];
-      var_03 = var_0F.origin;
-      if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_03)) {
-        scripts\mp\bots\_bots_strategy::bot_protect_point(var_03, level.protect_radius);
+      var_3 = var_0F.origin;
+      if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_3)) {
+        scripts\mp\bots\_bots_strategy::bot_protect_point(var_3, level.protect_radius);
       }
     }
   }
 }
 
 initialize_ball_role() {
-  var_00 = get_allied_attackers_for_team(self.team);
-  var_01 = get_allied_defenders_for_team(self.team);
-  var_02 = ball_bot_attacker_limit_for_team(self.team);
-  var_03 = ball_bot_defender_limit_for_team(self.team);
-  var_04 = level.bot_personality_type[self.personality];
-  if(var_04 == "active") {
-    if(var_00.size >= var_02) {
-      var_05 = 0;
-      foreach(var_07 in var_00) {
-        if(isai(var_07) && level.bot_personality_type[var_07.personality] == "stationary") {
-          var_07.role = undefined;
-          var_05 = 1;
+  var_0 = get_allied_attackers_for_team(self.team);
+  var_1 = get_allied_defenders_for_team(self.team);
+  var_2 = ball_bot_attacker_limit_for_team(self.team);
+  var_3 = ball_bot_defender_limit_for_team(self.team);
+  var_4 = level.bot_personality_type[self.personality];
+  if(var_4 == "active") {
+    if(var_0.size >= var_2) {
+      var_5 = 0;
+      foreach(var_7 in var_0) {
+        if(isai(var_7) && level.bot_personality_type[var_7.personality] == "stationary") {
+          var_7.role = undefined;
+          var_5 = 1;
           break;
         }
       }
 
-      if(var_05) {
+      if(var_5) {
         ball_set_role("attacker");
         return;
       }
@@ -269,18 +269,18 @@ initialize_ball_role() {
     return;
   }
 
-  if(var_04 == "stationary") {
-    if(var_01.size >= var_03) {
-      var_05 = 0;
-      foreach(var_0A in var_01) {
+  if(var_4 == "stationary") {
+    if(var_1.size >= var_3) {
+      var_5 = 0;
+      foreach(var_0A in var_1) {
         if(isai(var_0A) && level.bot_personality_type[var_0A.personality] == "active") {
           var_0A.role = undefined;
-          var_05 = 1;
+          var_5 = 1;
           break;
         }
       }
 
-      if(var_05) {
+      if(var_5) {
         ball_set_role("defender");
         return;
       }
@@ -298,39 +298,39 @@ func_2D11() {
   level notify("bot_ball_ai_director_update");
   level endon("bot_ball_ai_director_update");
   level endon("game_ended");
-  var_00[0] = "allies";
-  var_00[1] = "axis";
-  var_01 = [];
+  var_0[0] = "allies";
+  var_0[1] = "axis";
+  var_1 = [];
   for(;;) {
-    foreach(var_03 in var_00) {
-      var_04 = ball_bot_attacker_limit_for_team(var_03);
-      var_05 = ball_bot_defender_limit_for_team(var_03);
-      var_06 = get_allied_attackers_for_team(var_03);
-      var_07 = get_allied_defenders_for_team(var_03);
-      if(var_06.size > var_04) {
-        var_08 = [];
-        var_09 = 0;
-        foreach(var_0B in var_06) {
+    foreach(var_3 in var_0) {
+      var_4 = ball_bot_attacker_limit_for_team(var_3);
+      var_5 = ball_bot_defender_limit_for_team(var_3);
+      var_6 = get_allied_attackers_for_team(var_3);
+      var_7 = get_allied_defenders_for_team(var_3);
+      if(var_6.size > var_4) {
+        var_8 = [];
+        var_9 = 0;
+        foreach(var_0B in var_6) {
           if(isai(var_0B)) {
             if(level.bot_personality_type[var_0B.personality] == "stationary") {
               var_0B ball_set_role("defender");
-              var_09 = 1;
+              var_9 = 1;
               break;
             } else {
-              var_08 = scripts\engine\utility::array_add(var_08, var_0B);
+              var_8 = scripts\engine\utility::array_add(var_8, var_0B);
             }
           }
         }
 
-        if(!var_09 && var_08.size > 0) {
-          scripts\engine\utility::random(var_08) ball_set_role("defender");
+        if(!var_9 && var_8.size > 0) {
+          scripts\engine\utility::random(var_8) ball_set_role("defender");
         }
       }
 
-      if(var_07.size > var_05) {
+      if(var_7.size > var_5) {
         var_0D = [];
         var_0E = 0;
-        foreach(var_10 in var_07) {
+        foreach(var_10 in var_7) {
           if(isai(var_10)) {
             if(level.bot_personality_type[var_10.personality] == "active") {
               var_10 ball_set_role("attacker");
@@ -349,16 +349,16 @@ func_2D11() {
 
       var_12 = bot_get_available_ball();
       if(isDefined(var_12)) {
-        var_13 = pick_ball_carrier(var_03, var_12);
+        var_13 = pick_ball_carrier(var_3, var_12);
         if(isDefined(var_13) && isDefined(var_13.role) && var_13.role != "carrier") {
           if(!isDefined(var_13.carryobject)) {
-            var_14 = var_01[var_03];
+            var_14 = var_1[var_3];
             if(isDefined(var_14)) {
               var_14 ball_set_role(undefined);
             }
 
             var_13 ball_set_role("carrier");
-            var_01[var_13.team] = var_13;
+            var_1[var_13.team] = var_13;
           }
         }
       }
@@ -368,139 +368,139 @@ func_2D11() {
   }
 }
 
-ball_bot_attacker_limit_for_team(param_00) {
-  var_01 = ball_get_num_players_on_team(param_00);
+ball_bot_attacker_limit_for_team(var_0) {
+  var_1 = ball_get_num_players_on_team(var_0);
   if(!isDefined(level.ball_goals)) {
-    return var_01;
+    return var_1;
   }
 
-  return int(int(var_01) / 2) + 1 + int(var_01) % 2;
+  return int(int(var_1) / 2) + 1 + int(var_1) % 2;
 }
 
-ball_bot_defender_limit_for_team(param_00) {
+ball_bot_defender_limit_for_team(var_0) {
   if(!isDefined(level.ball_goals)) {
     return 0;
   }
 
-  var_01 = ball_get_num_players_on_team(param_00);
-  return max(int(int(var_01) / 2) - 1, 0);
+  var_1 = ball_get_num_players_on_team(var_0);
+  return max(int(int(var_1) / 2) - 1, 0);
 }
 
-ball_get_num_players_on_team(param_00) {
-  var_01 = 0;
-  foreach(var_03 in level.participants) {
-    if(scripts\mp\utility::isteamparticipant(var_03) && isDefined(var_03.team) && var_03.team == param_00) {
-      var_01++;
+ball_get_num_players_on_team(var_0) {
+  var_1 = 0;
+  foreach(var_3 in level.participants) {
+    if(scripts\mp\utility::isteamparticipant(var_3) && isDefined(var_3.team) && var_3.team == var_0) {
+      var_1++;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-pick_ball_carrier(param_00, param_01) {
-  var_02 = undefined;
-  var_03 = undefined;
-  foreach(var_05 in level.participants) {
-    if(!isDefined(var_05.team)) {
+pick_ball_carrier(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = undefined;
+  foreach(var_5 in level.participants) {
+    if(!isDefined(var_5.team)) {
       continue;
     }
 
-    if(var_05.team != param_00) {
+    if(var_5.team != var_0) {
       continue;
     }
 
-    if(!isalive(var_05)) {
+    if(!isalive(var_5)) {
       continue;
     }
 
-    if(!isai(var_05)) {
+    if(!isai(var_5)) {
       continue;
     }
 
-    if(isDefined(var_05.role) && var_05.role == "defender") {
+    if(isDefined(var_5.role) && var_5.role == "defender") {
       continue;
     }
 
-    var_06 = distancesquared(var_05.origin, param_01.curorigin);
-    if(!isDefined(var_03) || var_06 < var_03) {
-      var_03 = var_06;
-      var_02 = var_05;
+    var_6 = distancesquared(var_5.origin, var_1.curorigin);
+    if(!isDefined(var_3) || var_6 < var_3) {
+      var_3 = var_6;
+      var_2 = var_5;
     }
   }
 
-  if(isDefined(var_02)) {
-    return var_02;
+  if(isDefined(var_2)) {
+    return var_2;
   }
 
   return undefined;
 }
 
-get_allied_attackers_for_team(param_00) {
-  var_01 = get_players_by_role("attacker", param_00);
+get_allied_attackers_for_team(var_0) {
+  var_1 = get_players_by_role("attacker", var_0);
   if(isDefined(level.ball_goals)) {
-    foreach(var_03 in level.players) {
-      if(!isai(var_03) && isDefined(var_03.team) && var_03.team == param_00) {
-        if(distancesquared(level.ball_goals[param_00].origin, var_03.origin) > level.protect_radius * level.protect_radius) {
-          var_01 = scripts\engine\utility::array_add(var_01, var_03);
+    foreach(var_3 in level.players) {
+      if(!isai(var_3) && isDefined(var_3.team) && var_3.team == var_0) {
+        if(distancesquared(level.ball_goals[var_0].origin, var_3.origin) > level.protect_radius * level.protect_radius) {
+          var_1 = scripts\engine\utility::array_add(var_1, var_3);
         }
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-get_allied_defenders_for_team(param_00) {
-  var_01 = get_players_by_role("defender", param_00);
+get_allied_defenders_for_team(var_0) {
+  var_1 = get_players_by_role("defender", var_0);
   if(isDefined(level.ball_goals)) {
-    foreach(var_03 in level.players) {
-      if(!isai(var_03) && isDefined(var_03.team) && var_03.team == param_00) {
-        if(distancesquared(level.ball_goals[param_00].origin, var_03.origin) <= level.protect_radius * level.protect_radius) {
-          var_01 = scripts\engine\utility::array_add(var_01, var_03);
+    foreach(var_3 in level.players) {
+      if(!isai(var_3) && isDefined(var_3.team) && var_3.team == var_0) {
+        if(distancesquared(level.ball_goals[var_0].origin, var_3.origin) <= level.protect_radius * level.protect_radius) {
+          var_1 = scripts\engine\utility::array_add(var_1, var_3);
         }
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-ball_set_role(param_00) {
-  self.role = param_00;
+ball_set_role(var_0) {
+  self.role = var_0;
   self botclearscriptgoal();
   scripts\mp\bots\_bots_strategy::bot_defend_stop();
 }
 
-get_players_by_role(param_00, param_01) {
-  var_02 = [];
-  foreach(var_04 in level.participants) {
-    if(!isDefined(var_04.team)) {
+get_players_by_role(var_0, var_1) {
+  var_2 = [];
+  foreach(var_4 in level.participants) {
+    if(!isDefined(var_4.team)) {
       continue;
     }
 
-    if(isalive(var_04) && scripts\mp\utility::isteamparticipant(var_04) && var_04.team == param_01 && isDefined(var_04.role) && var_04.role == param_00) {
-      var_02[var_02.size] = var_04;
+    if(isalive(var_4) && scripts\mp\utility::isteamparticipant(var_4) && var_4.team == var_1 && isDefined(var_4.role) && var_4.role == var_0) {
+      var_2[var_2.size] = var_4;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 monitor_ball_carrier() {
   level endon("game_ended");
-  var_00 = undefined;
+  var_0 = undefined;
   for(;;) {
-    var_01 = bot_get_ball_carrier();
-    if(!isDefined(var_00) || !isDefined(var_01) || var_01 != var_00) {
-      if(isDefined(var_00) && var_00.var_33F == 505) {
-        var_00.var_33F = 0;
+    var_1 = bot_get_ball_carrier();
+    if(!isDefined(var_0) || !isDefined(var_1) || var_1 != var_0) {
+      if(isDefined(var_0) && var_0.var_33F == 505) {
+        var_0.var_33F = 0;
       }
 
-      var_00 = var_01;
+      var_0 = var_1;
     }
 
-    if(isDefined(var_01) && var_01.var_33F == 0) {
-      var_01.var_33F = 505;
+    if(isDefined(var_1) && var_1.var_33F == 0) {
+      var_1.var_33F = 505;
     }
 
     wait(0.05);

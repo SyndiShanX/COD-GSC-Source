@@ -148,129 +148,129 @@ func_91DC() {
   level.var_EC85["generic"]["hm_grnd_yel_patrol_react_to_combat_4_ar"] = % hm_grnd_yel_patrol_react_to_combat_4_ar;
 }
 
-func_12921(param_00) {
-  playFX(scripts\engine\utility::getfx("vfx_eu_icecave_landing_kickup_sml"), scripts\sp\utility::func_864C(param_00.origin));
+func_12921(var_0) {
+  playFX(scripts\engine\utility::getfx("vfx_eu_icecave_landing_kickup_sml"), scripts\sp\utility::func_864C(var_0.origin));
 }
 
-func_12924(param_00) {
-  param_00.var_38DF = 1;
-  param_00 notify("cannot_interupt");
+func_12924(var_0) {
+  var_0.var_38DF = 1;
+  var_0 notify("cannot_interupt");
 }
 
-func_C7C7(param_00) {
-  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), param_00 gettagorigin("j_head"), (0, 0, 1));
-  param_00.a.nodeath = 1;
-  param_00 _meth_81D0();
+func_C7C7(var_0) {
+  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), var_0 gettagorigin("j_head"), (0, 0, 1));
+  var_0.a.nodeath = 1;
+  var_0 _meth_81D0();
 }
 
-func_C7BE(param_00) {
-  if(!isDefined(param_00.var_6D66)) {
-    param_00.var_6D66 = 1;
+func_C7BE(var_0) {
+  if(!isDefined(var_0.var_6D66)) {
+    var_0.var_6D66 = 1;
     return;
   }
 
   playFXOnTag(scripts\engine\utility::getfx("kotch_muzzleflash"), level.var_A70E.var_1FB6, "tag_flash");
-  var_01 = scripts\engine\utility::getfx("outro_gun_impact");
-  var_02 = anglesToForward(level.var_A70E.origin - level.var_C7D2.origin);
-  var_03 = anglestoright(level.var_C7D2.origin - level.var_A70E.origin);
-  var_04 = anglestoup(level.var_C7D2.origin - level.var_A70E.origin);
-  var_05 = level.var_C7D2 gettagorigin("j_head");
-  var_05 = var_05 + var_03 * -3;
-  var_05 = var_05 + var_04 * -5;
-  playFX(var_01, var_05, var_02);
-  var_06 = scripts\engine\utility::spawn_tag_origin(var_05, vectortoangles(var_02));
-  var_06 linkto(level.var_C7D2, "j_spineupper");
-  playFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_06, "tag_origin");
+  var_1 = scripts\engine\utility::getfx("outro_gun_impact");
+  var_2 = anglesToForward(level.var_A70E.origin - level.var_C7D2.origin);
+  var_3 = anglestoright(level.var_C7D2.origin - level.var_A70E.origin);
+  var_4 = anglestoup(level.var_C7D2.origin - level.var_A70E.origin);
+  var_5 = level.var_C7D2 gettagorigin("j_head");
+  var_5 = var_5 + var_3 * -3;
+  var_5 = var_5 + var_4 * -5;
+  playFX(var_1, var_5, var_2);
+  var_6 = scripts\engine\utility::spawn_tag_origin(var_5, vectortoangles(var_2));
+  var_6 linkto(level.var_C7D2, "j_spineupper");
+  playFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_6, "tag_origin");
   wait(3.75);
-  stopFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_06, "tag_origin");
+  stopFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_6, "tag_origin");
 }
 
-func_C7BB(param_00) {
-  param_00.var_1FB6 hide();
+func_C7BB(var_0) {
+  var_0.var_1FB6 hide();
 }
 
-func_C7CB(param_00) {
+func_C7CB(var_0) {
   level.var_8E0F = "good";
   level.player notify("o2_in");
 }
 
-func_C7CC(param_00) {
+func_C7CC(var_0) {
   level.var_8E0F = "depleted";
   level.player notify("o2_out");
 }
 
-func_C7BA(param_00) {
-  var_01 = "tag_accessory_right";
-  var_02 = param_00 gettagorigin(var_01);
-  var_03 = param_00 gettagangles(var_01);
-  var_04 = spawn("script_model", var_02);
-  var_04.angles = var_03;
-  var_04 setModel("oxygen_bottle_air_boss");
+func_C7BA(var_0) {
+  var_1 = "tag_accessory_right";
+  var_2 = var_0 gettagorigin(var_1);
+  var_3 = var_0 gettagangles(var_1);
+  var_4 = spawn("script_model", var_2);
+  var_4.angles = var_3;
+  var_4 setModel("oxygen_bottle_air_boss");
   wait(0.05);
-  param_00 detach("oxygen_bottle_air_boss", var_01);
+  var_0 detach("oxygen_bottle_air_boss", var_1);
 }
 
-func_8E1D(param_00) {
-  playFX(level.var_7649["human_gib_head"], param_00 gettagorigin("j_head"), (0, 0, 1));
-  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), param_00 gettagorigin("j_head"), (0, 0, 1));
-  param_00.var_C065 = 1;
-  param_00 thread scripts\sp\utility::func_19D3();
-  param_00 givescorefortrophyblocks();
+func_8E1D(var_0) {
+  playFX(level.var_7649["human_gib_head"], var_0 gettagorigin("j_head"), (0, 0, 1));
+  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), var_0 gettagorigin("j_head"), (0, 0, 1));
+  var_0.var_C065 = 1;
+  var_0 thread scripts\sp\utility::func_19D3();
+  var_0 givescorefortrophyblocks();
 }
 
-func_8CA1(param_00) {
-  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), param_00 gettagorigin("j_head"), (0, 0, 1));
-  param_00 lib_0C60::func_8C99();
-  param_00 detach(param_00.hatmodel);
-  if(param_00 == level.var_EBBB) {
-    param_00 attach("helmet_hero_sipes_crushed");
+func_8CA1(var_0) {
+  playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), var_0 gettagorigin("j_head"), (0, 0, 1));
+  var_0 lib_0C60::func_8C99();
+  var_0 detach(var_0.hatmodel);
+  if(var_0 == level.var_EBBB) {
+    var_0 attach("helmet_hero_sipes_crushed");
     return;
   }
 
-  param_00 attach("helmet_hero_t_crushed");
+  var_0 attach("helmet_hero_t_crushed");
 }
 
-func_C7BF(param_00) {
-  level.player viewkick(100, param_00.origin, 0);
+func_C7BF(var_0) {
+  level.player viewkick(100, var_0.origin, 0);
   level.player thread func_54D7(0.5, 2, 0.5);
   level.player thread scripts\sp\gameskill::func_2BDB(2, 0.5);
-  var_01 = getEntArray("europa_lights_outro_2", "targetname");
-  foreach(var_03 in var_01) {
-    var_03 setlightintensity(0);
+  var_1 = getEntArray("europa_lights_outro_2", "targetname");
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(0);
   }
 }
 
-func_54D7(param_00, param_01, param_02) {
-  level.player _meth_809A(param_00, param_01);
-  wait(param_02);
+func_54D7(var_0, var_1, var_2) {
+  level.player _meth_809A(var_0, var_1);
+  wait(var_2);
   level.player _meth_809A(0, 1);
 }
 
-func_C7C5(param_00) {
-  if(!isDefined(param_00.var_902B)) {
-    param_00.var_902B = 0;
+func_C7C5(var_0) {
+  if(!isDefined(var_0.var_902B)) {
+    var_0.var_902B = 0;
   }
 
   if(scripts\sp\utility::func_93A6() && !isDefined(level.player.helmet)) {
     level.player.helmet = level.var_10964.helmet;
   }
 
-  param_00.var_902B++;
-  var_01 = 1;
-  if(param_00.var_902B == 1) {
+  var_0.var_902B++;
+  var_1 = 1;
+  if(var_0.var_902B == 1) {
     level.player thread scripts\sp\gameskill::func_2BDB(2.5, 0.5);
     level.player _meth_809A(0.25, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_02_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_01");
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_2");
     level.player notify("sfx_beep_fade");
-  } else if(param_00.var_902B == 2) {
+  } else if(var_0.var_902B == 2) {
     level.player thread scripts\sp\gameskill::func_2BDB(2.7, 0.5);
     level.player _meth_809A(0.5, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_03_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_03");
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_3");
-  } else if(param_00.var_902B == 3) {
+  } else if(var_0.var_902B == 3) {
     thread scripts\sp\hud::func_8DF7(0.05);
     level.player _meth_809A(0, 1);
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_4");
@@ -278,22 +278,22 @@ func_C7C5(param_00) {
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_04");
     func_C7CD();
     wait(0.05);
-    var_01 = 0;
+    var_1 = 0;
     level.player.var_E505 _meth_82B1(level.player.var_E505 scripts\sp\utility::func_7DC1("outro"), 0);
-    param_00 _meth_82B1(param_00 scripts\sp\utility::func_7DC1("outro"), 0);
+    var_0 _meth_82B1(var_0 scripts\sp\utility::func_7DC1("outro"), 0);
     level.player freezecontrols(1);
     setomnvar("ui_show_compass", 1);
     scripts\engine\utility::flag_set("outro_freeze");
   }
 
-  if(var_01) {
-    level.player viewkick(100, param_00.origin, 0);
+  if(var_1) {
+    level.player viewkick(100, var_0.origin, 0);
   }
 }
 
 func_C7CD() {
-  var_00 = anglesToForward(level.player getplayerangles());
-  playFX(scripts\engine\utility::getfx("outro_player_glass_punch"), level.player getEye(), var_00);
+  var_0 = anglesToForward(level.player getplayerangles());
+  playFX(scripts\engine\utility::getfx("outro_player_glass_punch"), level.player getEye(), var_0);
   if(scripts\sp\utility::func_93A6()) {
     level.var_10964.helmet delete();
     return;
@@ -302,40 +302,40 @@ func_C7CD() {
   level.player.helmet delete();
 }
 
-func_C7C4(param_00) {
+func_C7C4(var_0) {
   level.player notify("connor");
   level notify("stop_dof_target_thread");
-  level.var_584B = param_00;
+  level.var_584B = var_0;
   level.var_5844 = 1;
 }
 
-func_C7CE(param_00) {
-  var_01 = 0.4;
-  var_02 = 0.05;
-  var_03 = 1;
-  var_04 = [level.player.var_E505, param_00];
-  foreach(var_06 in var_04) {
-    var_06 thread func_AB76(var_06 scripts\sp\utility::func_7DC1("outro"), var_01, var_03, var_02);
+func_C7CE(var_0) {
+  var_1 = 0.4;
+  var_2 = 0.05;
+  var_3 = 1;
+  var_4 = [level.player.var_E505, var_0];
+  foreach(var_6 in var_4) {
+    var_6 thread func_AB76(var_6 scripts\sp\utility::func_7DC1("outro"), var_1, var_3, var_2);
   }
 
   wait(0.5);
-  foreach(var_06 in var_04) {
-    var_06 thread func_AB76(var_06 scripts\sp\utility::func_7DC1("outro"), var_01, var_02, var_03);
+  foreach(var_6 in var_4) {
+    var_6 thread func_AB76(var_6 scripts\sp\utility::func_7DC1("outro"), var_1, var_2, var_3);
   }
 }
 
-func_AB76(param_00, param_01, param_02, param_03) {
+func_AB76(var_0, var_1, var_2, var_3) {
   self notify("stop_lerp_animrate");
   self endon("stop_lerp_animrate");
-  var_04 = param_01 * 20;
-  var_05 = param_03 - param_02 / var_04;
-  for(var_06 = 0; var_06 < var_04; var_06++) {
-    param_02 = param_02 + var_05;
-    self _meth_82B1(param_00, param_02);
+  var_4 = var_1 * 20;
+  var_5 = var_3 - var_2 / var_4;
+  for(var_6 = 0; var_6 < var_4; var_6++) {
+    var_2 = var_2 + var_5;
+    self _meth_82B1(var_0, var_2);
     wait(0.05);
   }
 
-  self _meth_82B1(param_00, param_03);
+  self _meth_82B1(var_0, var_3);
 }
 
 func_3353() {
@@ -404,40 +404,40 @@ player() {
   level.var_EC85["player_rig"]["fire_fspar"] = % europa_plr_fires_large_steel_dragon;
 }
 
-func_8C5B(param_00) {
-  var_01 = (29221, -5369, -76);
-  playFX(level._effect["small_cracks"], var_01);
+func_8C5B(var_0) {
+  var_1 = (29221, -5369, -76);
+  playFX(level._effect["small_cracks"], var_1);
 }
 
-func_12922(param_00) {
-  var_01 = spawn("script_model", param_00 gettagorigin("tag_accessory_right"));
-  var_01.angles = param_00 gettagangles("tag_accessory_right");
-  var_01 linkto(param_00, "tag_accessory_right");
-  var_01 setModel("tactical_knife_iw7_wm");
+func_12922(var_0) {
+  var_1 = spawn("script_model", var_0 gettagorigin("tag_accessory_right"));
+  var_1.angles = var_0 gettagangles("tag_accessory_right");
+  var_1 linkto(var_0, "tag_accessory_right");
+  var_1 setModel("tactical_knife_iw7_wm");
   level waittill("scar_stab");
-  playFX(scripts\engine\utility::getfx("player_stab"), var_01 gettagorigin("tag_knife_fx"));
+  playFX(scripts\engine\utility::getfx("player_stab"), var_1 gettagorigin("tag_knife_fx"));
   level waittill("knife_off");
-  var_01 delete();
+  var_1 delete();
 }
 
-func_12923(param_00) {
-  param_00 func_8E18();
+func_12923(var_0) {
+  var_0 func_8E18();
   level.player playSound("scn_cave_jump_boostkill");
 }
 
-func_8E18(param_00) {
+func_8E18(var_0) {
   if(!isDefined(self.hatmodel)) {
     return;
   }
 
-  var_01 = self gettagorigin("j_head");
-  var_02 = anglesToForward(self gettagangles("j_head"));
-  playFX(scripts\engine\utility::getfx("helmet_sdf_army_broken_europa"), var_01, var_02);
+  var_1 = self gettagorigin("j_head");
+  var_2 = anglesToForward(self gettagangles("j_head"));
+  playFX(scripts\engine\utility::getfx("helmet_sdf_army_broken_europa"), var_1, var_2);
   if(isDefined(self.var_8E1E)) {
     self.var_8E1E = undefined;
-    var_03 = self _meth_850C("helmet", "helmet");
-    if(var_03 > 0) {
-      self _meth_850B(var_03, "helmet", "helmet");
+    var_3 = self _meth_850C("helmet", "helmet");
+    if(var_3 > 0) {
+      self _meth_850B(var_3, "helmet", "helmet");
     }
   }
 
@@ -445,7 +445,7 @@ func_8E18(param_00) {
   self.hatmodel = undefined;
 }
 
-func_D1B0(param_00) {
+func_D1B0(var_0) {
   level endon("scar_saved_player");
   level.var_4214 = spawn("script_model", level.player.origin);
   level.var_4214 setModel("tactical_knife_iw7_vm");
@@ -458,15 +458,15 @@ func_D1B0(param_00) {
   playFX(scripts\engine\utility::getfx("vfx_eu_icecave_takedown_bloodpool"), level.var_4214 gettagorigin("tag_knife_fx"));
 }
 
-func_67AF(param_00) {
+func_67AF(var_0) {
   setglobalsoundcontext("atmosphere", "helmet", 1);
 }
 
-func_D015(param_00) {
+func_D015(var_0) {
   thread scripts\sp\utility::func_1034F("europa_plr_effortsholdingontod");
 }
 
-func_C7CA(param_00) {
+func_C7CA(var_0) {
   level.var_8E0F = "depleted";
 }
 
@@ -520,36 +520,36 @@ func_EE25() {
   level.var_EC85["kotch_gun"]["outro"] = % europa_end_emcpistol_scene;
 }
 
-func_12920(param_00) {
-  if(isDefined(param_00.var_B14F)) {
-    param_00 scripts\sp\utility::func_1101B();
+func_12920(var_0) {
+  if(isDefined(var_0.var_B14F)) {
+    var_0 scripts\sp\utility::func_1101B();
   }
 
-  param_00.var_EF = 1;
-  param_00.var_DC1A = 1;
-  param_00.var_30 = 1;
-  param_00 scripts\sp\utility::func_F2DA(0);
-  param_00 _meth_81D0();
+  var_0.var_EF = 1;
+  var_0.var_DC1A = 1;
+  var_0.var_30 = 1;
+  var_0 scripts\sp\utility::func_F2DA(0);
+  var_0 _meth_81D0();
 }
 
-func_C0C7(param_00) {
-  if(isDefined(param_00.var_B14F)) {
-    param_00 scripts\sp\utility::func_1101B();
+func_C0C7(var_0) {
+  if(isDefined(var_0.var_B14F)) {
+    var_0 scripts\sp\utility::func_1101B();
   }
 
-  param_00.a.nodeath = 1;
-  param_00 scripts\sp\utility::func_54C6();
+  var_0.a.nodeath = 1;
+  var_0 scripts\sp\utility::func_54C6();
 }
 
-func_7348(param_00) {
+func_7348(var_0) {
   level endon("fpar_fire_stop");
   for(;;) {
-    param_00 _meth_8494("iw7_steeldragon", level.var_21F7 gettagorigin("tag_flash"), level.var_21F7 gettagangles("tag_flash"));
+    var_0 _meth_8494("iw7_steeldragon", level.var_21F7 gettagorigin("tag_flash"), level.var_21F7 gettagangles("tag_flash"));
     wait(0.05);
   }
 }
 
-func_F1EC(param_00) {
+func_F1EC(var_0) {
   setomnvar("ui_europa_selfdestruct", 1);
   setsaveddvar("bg_cinematicFullScreen", "0");
   setsaveddvar("bg_cinematicCanPause", "1");
@@ -571,61 +571,61 @@ func_F1EC(param_00) {
   setomnvar("ui_europa_selfdestruct", 0);
 }
 
-func_C0D7(param_00) {
+func_C0D7(var_0) {
   scripts\engine\utility::flag_set("scar1_moveto_fspar");
   scripts\sp\maps\europa\europa_util::func_117FF(75);
-  var_01 = "iw7_steeldragon+europaspeedmod";
-  level.player giveweapon(var_01);
-  level.player switchtoweaponimmediate(var_01);
+  var_1 = "iw7_steeldragon+europaspeedmod";
+  level.player giveweapon(var_1);
+  level.player switchtoweaponimmediate(var_1);
 }
 
-func_F2DF(param_00) {
+func_F2DF(var_0) {
   if(!isDefined(self.var_1310C)) {
     level.var_11B30.var_2AA2 glinton(#animtree);
     level.var_11B30.var_2AA2.var_1310C = 1;
   }
 
   level.var_11B30.var_2AA2 notify("stop_idle_thread");
-  var_01["powerup"] = % steel_dragon_powerup;
-  var_01["idle"] = % steel_dragon_idle;
-  var_01["fire"] = % steel_dragon_fire;
-  var_01["powerdown"] = % steel_dragon_powerdown;
-  var_02 = "bfganim";
+  var_1["powerup"] = % steel_dragon_powerup;
+  var_1["idle"] = % steel_dragon_idle;
+  var_1["fire"] = % steel_dragon_fire;
+  var_1["powerdown"] = % steel_dragon_powerdown;
+  var_2 = "bfganim";
   level.var_11B30.var_2AA2 clearanim( % root, 0.2);
-  if(param_00 == "idle") {
-    level.var_11B30.var_2AA2 thread func_2AA4(var_01[param_00]);
+  if(var_0 == "idle") {
+    level.var_11B30.var_2AA2 thread func_2AA4(var_1[var_0]);
   }
 
-  level.var_11B30.var_2AA2 _meth_82E1(var_02, var_01[param_00], 1, 0.2, 1);
-  if(param_00 == "fire") {
+  level.var_11B30.var_2AA2 _meth_82E1(var_2, var_1[var_0], 1, 0.2, 1);
+  if(var_0 == "fire") {
     thread func_2AA3();
   }
 
-  if(param_00 != "idle") {
-    level.var_11B30.var_2AA2 waittillmatch("end", var_02);
+  if(var_0 != "idle") {
+    level.var_11B30.var_2AA2 waittillmatch("end", var_2);
   }
 }
 
-func_2AA4(param_00) {
+func_2AA4(var_0) {
   self endon("death");
   self endon("stop_idle_thread");
   wait(0.05);
-  var_01 = 1;
+  var_1 = 1;
   for(;;) {
     wait(randomfloatrange(2, 5));
-    var_02 = randomfloatrange(3, 5);
-    var_03 = randomfloatrange(0.2, 1);
-    var_04 = var_03 - var_01;
-    var_05 = int(var_02 / 0.05);
-    var_06 = var_04 / var_05;
-    for(var_07 = 0; var_07 < var_05; var_07++) {
-      var_01 = var_01 + var_06;
-      self _meth_82B1(param_00, var_01);
+    var_2 = randomfloatrange(3, 5);
+    var_3 = randomfloatrange(0.2, 1);
+    var_4 = var_3 - var_1;
+    var_5 = int(var_2 / 0.05);
+    var_6 = var_4 / var_5;
+    for(var_7 = 0; var_7 < var_5; var_7++) {
+      var_1 = var_1 + var_6;
+      self _meth_82B1(var_0, var_1);
       wait(0.05);
     }
 
-    var_01 = var_03;
-    self _meth_82B1(param_00, var_01);
+    var_1 = var_3;
+    self _meth_82B1(var_0, var_1);
   }
 }
 

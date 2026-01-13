@@ -15,7 +15,7 @@ init() {
   level thread func_13AB0();
 }
 
-givejuggernaut(param_00) {
+givejuggernaut(var_0) {
   self endon("death");
   self endon("disconnect");
   wait(0.05);
@@ -29,12 +29,12 @@ givejuggernaut(param_00) {
   }
 
   self.health = self.maxhealth;
-  var_01 = 1;
-  switch (param_00) {
+  var_1 = 1;
+  switch (var_0) {
     case "juggernaut":
       self.isjuggernaut = 1;
       self.var_A4AA = 0.8;
-      scripts\mp\class::giveloadout(self.pers["team"], param_00, 0);
+      scripts\mp\class::giveloadout(self.pers["team"], var_0, 0);
       self.movespeedscaler = 0.8;
       scripts\mp\utility::giveperk("specialty_scavenger");
       scripts\mp\utility::giveperk("specialty_quickdraw");
@@ -46,7 +46,7 @@ givejuggernaut(param_00) {
     case "juggernaut_recon":
       self.isjuggernautrecon = 1;
       self.var_A4AA = 0.8;
-      scripts\mp\class::giveloadout(self.pers["team"], param_00);
+      scripts\mp\class::giveloadout(self.pers["team"], var_0);
       self.movespeedscaler = 0.8;
       scripts\mp\utility::giveperk("specialty_scavenger");
       scripts\mp\utility::giveperk("specialty_coldblooded");
@@ -63,7 +63,7 @@ givejuggernaut(param_00) {
     case "juggernaut_maniac":
       self.isjuggernautmaniac = 1;
       self.var_A4AA = 1.15;
-      scripts\mp\class::giveloadout(self.pers["team"], param_00, 0);
+      scripts\mp\class::giveloadout(self.pers["team"], var_0, 0);
       scripts\mp\utility::giveperk("specialty_blindeye");
       scripts\mp\utility::giveperk("specialty_coldblooded");
       scripts\mp\utility::giveperk("specialty_noscopeoutline");
@@ -74,7 +74,7 @@ givejuggernaut(param_00) {
       break;
 
     default:
-      var_01 = self[[level.var_B331]](param_00);
+      var_1 = self[[level.var_B331]](var_0);
       break;
   }
 
@@ -85,9 +85,9 @@ givejuggernaut(param_00) {
   scripts\mp\weapons::updatemovespeedscale();
   self disableweaponpickup();
   if(!isagent(self)) {
-    if(var_01) {
+    if(var_1) {
       self setclientomnvar("ui_juggernaut", 1);
-      thread scripts\mp\utility::teamplayercardsplash(level.var_A4AD[param_00].var_10A41, self);
+      thread scripts\mp\utility::teamplayercardsplash(level.var_A4AD[var_0].var_10A41, self);
       thread func_A4A9();
       thread func_139F1();
       thread func_13A13();
@@ -105,13 +105,13 @@ givejuggernaut(param_00) {
   }
 
   level notify("juggernaut_equipped", self);
-  scripts\mp\matchdata::logkillstreakevent(param_00, self.origin);
+  scripts\mp\matchdata::logkillstreakevent(var_0, self.origin);
 }
 
-func_CA4E(param_00) {
-  var_01 = self.pers["loadoutPerks"];
-  foreach(var_03 in var_01) {
-    if(var_03 == param_00) {
+func_CA4E(var_0) {
+  var_1 = self.pers["loadoutPerks"];
+  foreach(var_3 in var_1) {
+    if(var_3 == var_0) {
       return 1;
     }
   }
@@ -134,16 +134,16 @@ func_13AB0() {
   level endon("game_ended");
   for(;;) {
     level waittill("host_migration_end");
-    foreach(var_01 in level.players) {
-      if(isai(var_01)) {
+    foreach(var_1 in level.players) {
+      if(isai(var_1)) {
         continue;
       } else {
-        if(var_01 scripts\mp\utility::isjuggernaut() && !isDefined(var_01.isjuggernautlevelcustom) && var_01.isjuggernautlevelcustom) {
-          var_01 setclientomnvar("ui_juggernaut", 1);
+        if(var_1 scripts\mp\utility::isjuggernaut() && !isDefined(var_1.isjuggernautlevelcustom) && var_1.isjuggernautlevelcustom) {
+          var_1 setclientomnvar("ui_juggernaut", 1);
           continue;
         }
 
-        var_01 setclientomnvar("ui_juggernaut", 0);
+        var_1 setclientomnvar("ui_juggernaut", 0);
       }
     }
   }
@@ -246,10 +246,10 @@ func_13A13() {
   }
 }
 
-func_988F(param_00, param_01, param_02, param_03) {
-  level.var_B331 = param_00;
-  level.var_B333 = param_01;
-  level.var_B332 = param_03;
-  game["allies_model"]["JUGGERNAUT_CUSTOM"] = param_02;
-  game["axis_model"]["JUGGERNAUT_CUSTOM"] = param_02;
+func_988F(var_0, var_1, var_2, var_3) {
+  level.var_B331 = var_0;
+  level.var_B333 = var_1;
+  level.var_B332 = var_3;
+  game["allies_model"]["JUGGERNAUT_CUSTOM"] = var_2;
+  game["axis_model"]["JUGGERNAUT_CUSTOM"] = var_2;
 }

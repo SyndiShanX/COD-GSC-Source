@@ -42,7 +42,7 @@ func_FAB0() {
   level.special_zombie_damage_func["crab_mini"] = ::crab_mini_special_damage_func;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_minicrab");
 }
 
@@ -167,11 +167,11 @@ getenemy() {
 }
 
 lookatenemy() {
-  var_00 = getenemy();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", var_02);
+  var_0 = getenemy();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", var_2);
     return;
   }
 
@@ -179,68 +179,68 @@ lookatenemy() {
 }
 
 calculatecrabminihealth() {
-  var_00 = 200;
+  var_0 = 200;
   switch (level.specialroundcounter) {
     case 0:
-      var_00 = 300;
+      var_0 = 300;
       break;
 
     case 1:
-      var_00 = 450;
+      var_0 = 450;
       break;
 
     case 2:
-      var_00 = 450;
+      var_0 = 450;
       break;
 
     case 3:
-      var_00 = 600;
+      var_0 = 600;
       break;
 
     default:
-      var_00 = 600;
+      var_0 = 600;
       break;
   }
 
-  return var_00;
+  return var_0;
 }
 
-create_sludge_pool(param_00) {
+create_sludge_pool(var_0) {
   self.var_CE65 = 1;
   if(!isDefined(level.goo_pool_ent_array)) {
     level.goo_pool_ent_array = [];
   }
 
-  var_01 = 2500;
-  foreach(var_03 in level.goo_pool_ent_array) {
-    if(!isDefined(var_03)) {
+  var_1 = 2500;
+  foreach(var_3 in level.goo_pool_ent_array) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(distancesquared(param_00, var_03.origin) < var_01) {
-      var_03.var_AC75 = gettime() + 10000;
+    if(distancesquared(var_0, var_3.origin) < var_1) {
+      var_3.var_AC75 = gettime() + 10000;
       return;
     }
   }
 
-  var_05 = spawn("script_model", param_00);
-  var_05 setModel("tag_origin_crab_goo");
-  level.goo_pool_ent_array[level.goo_pool_ent_array.size] = var_05;
-  var_05 setscriptablepartstate("blood_pool", "active");
-  var_05 thread run_sludge_pool_damage_func();
+  var_5 = spawn("script_model", var_0);
+  var_5 setModel("tag_origin_crab_goo");
+  level.goo_pool_ent_array[level.goo_pool_ent_array.size] = var_5;
+  var_5 setscriptablepartstate("blood_pool", "active");
+  var_5 thread run_sludge_pool_damage_func();
 }
 
 run_sludge_pool_damage_func() {
   self endon("death");
-  var_00 = 2500;
+  var_0 = 2500;
   self.var_AC75 = gettime() + 10000;
   while(self.var_AC75 > gettime()) {
-    foreach(var_02 in level.players) {
-      if(distancesquared(self.origin, var_02.origin) < var_00) {
-        var_03 = gettime();
-        if(!isDefined(var_02.last_crab_sludge_time) || var_02.last_crab_sludge_time + 1000 < var_03) {
-          var_02 dodamage(20, self.origin, self, self, "MOD_UNKNOWN");
-          var_02.last_crab_sludge_time = gettime();
+    foreach(var_2 in level.players) {
+      if(distancesquared(self.origin, var_2.origin) < var_0) {
+        var_3 = gettime();
+        if(!isDefined(var_2.last_crab_sludge_time) || var_2.last_crab_sludge_time + 1000 < var_3) {
+          var_2 dodamage(20, self.origin, self, self, "MOD_UNKNOWN");
+          var_2.last_crab_sludge_time = gettime();
         }
       }
     }
@@ -251,43 +251,43 @@ run_sludge_pool_damage_func() {
   self delete();
 }
 
-setisstuck(param_00) {
-  self.bisstuck = param_00;
+setisstuck(var_0) {
+  self.bisstuck = var_0;
 }
 
 iscrabministuck() {
   return isDefined(self.bisstuck) && self.bisstuck;
 }
 
-crab_mini_special_damage_func(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+crab_mini_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(isDefined(level.insta_kill) && level.insta_kill) {
     return self.health;
   }
 
-  if(isDefined(param_05) && param_05 == "iw7_knife_zm_cleaver") {
+  if(isDefined(var_5) && var_5 == "iw7_knife_zm_cleaver") {
     return self.health;
   }
 
-  if(isDefined(param_07)) {
+  if(isDefined(var_7)) {
     var_0C = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
     var_0D = anglesToForward(self.angles) * -1;
-    var_0E = vectordot(var_0D, param_07);
+    var_0E = vectordot(var_0D, var_7);
     if(var_0E > var_0C.reduce_damage_dot) {
-      param_02 = param_02 * var_0C.reduce_damage_pct;
+      var_2 = var_2 * var_0C.reduce_damage_pct;
       self.armor_hit = 1;
     }
   }
 
-  return param_02;
+  return var_2;
 }
 
-onkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   thread play_death_sfx(1);
-  return scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  return scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-play_death_sfx(param_00) {
+play_death_sfx(var_0) {
   playsoundatpos(self.origin, "minion_crog_pre_explo");
-  wait(param_00);
+  wait(var_0);
   playsoundatpos(self.origin, "minion_crog_explode");
 }

@@ -5,125 +5,125 @@
 ***************************************************/
 
 powershud_init() {
-  var_00 = spawnStruct();
-  level.power_hud_info = var_00;
-  var_00.omnvarnames = ["primary", "secondary"];
-  var_00.omnvarnames["primary"][0] = "ui_power_num_charges";
-  var_00.omnvarnames["primary"][1] = "ui_power_max_charges";
-  var_00.omnvarnames["primary"][2] = "ui_power_recharge";
-  var_00.omnvarnames["primary"][3] = "ui_power_id";
-  var_00.omnvarnames["primary"][4] = "ui_power_consume";
-  var_00.omnvarnames["primary"][5] = "ui_power_disabled";
-  var_00.omnvarnames["primary"][6] = "ui_power_state";
-  var_00.omnvarnames["secondary"][0] = "ui_power_secondary_num_charges";
-  var_00.omnvarnames["secondary"][1] = "ui_power_secondary_max_charges";
-  var_00.omnvarnames["secondary"][2] = "ui_power_secondary_recharge";
-  var_00.omnvarnames["secondary"][3] = "ui_powerfunc_secondary";
-  var_00.omnvarnames["secondary"][4] = "ui_power_secondary_consume";
-  var_00.omnvarnames["secondary"][5] = "ui_power_secondary_disabled";
-  var_00.omnvarnames["secondary"][6] = "ui_power_secondary_state";
+  var_0 = spawnStruct();
+  level.power_hud_info = var_0;
+  var_0.omnvarnames = ["primary", "secondary"];
+  var_0.omnvarnames["primary"][0] = "ui_power_num_charges";
+  var_0.omnvarnames["primary"][1] = "ui_power_max_charges";
+  var_0.omnvarnames["primary"][2] = "ui_power_recharge";
+  var_0.omnvarnames["primary"][3] = "ui_power_id";
+  var_0.omnvarnames["primary"][4] = "ui_power_consume";
+  var_0.omnvarnames["primary"][5] = "ui_power_disabled";
+  var_0.omnvarnames["primary"][6] = "ui_power_state";
+  var_0.omnvarnames["secondary"][0] = "ui_power_secondary_num_charges";
+  var_0.omnvarnames["secondary"][1] = "ui_power_secondary_max_charges";
+  var_0.omnvarnames["secondary"][2] = "ui_power_secondary_recharge";
+  var_0.omnvarnames["secondary"][3] = "ui_powerfunc_secondary";
+  var_0.omnvarnames["secondary"][4] = "ui_power_secondary_consume";
+  var_0.omnvarnames["secondary"][5] = "ui_power_secondary_disabled";
+  var_0.omnvarnames["secondary"][6] = "ui_power_secondary_state";
 }
 
-powershud_assignpower(param_00, param_01, param_02, param_03) {
-  if(param_00 == "scripted") {
+powershud_assignpower(var_0, var_1, var_2, var_3) {
+  if(var_0 == "scripted") {
     return;
   }
 
-  self setclientomnvar(powershud_getslotomnvar(param_00, 3), param_01);
-  var_04 = scripts\engine\utility::ter_op(param_02, 1000, 0);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 2), var_04);
-  if(!isDefined(param_03)) {
-    param_03 = 0;
+  self setclientomnvar(powershud_getslotomnvar(var_0, 3), var_1);
+  var_4 = scripts\engine\utility::ter_op(var_2, 1000, 0);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 2), var_4);
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  self setclientomnvar(powershud_getslotomnvar(param_00, 0), param_03);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 4), 0);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 0), var_3);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 4), 0);
 }
 
-powershud_clearpower(param_00) {
-  if(param_00 == "scripted") {
+powershud_clearpower(var_0) {
+  if(var_0 == "scripted") {
     return;
   }
 
-  self setclientomnvar(powershud_getslotomnvar(param_00, 3), -1);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 2), -1);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 0), 0);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 4), -1);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 3), -1);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 2), -1);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 0), 0);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 4), -1);
 }
 
-powershud_updatepowercharges(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 0), int(param_01));
+powershud_updatepowercharges(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 0), int(var_1));
 }
 
-powershud_updatepowermaxcharges(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 1), int(param_01));
+powershud_updatepowermaxcharges(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 1), int(var_1));
 }
 
-powershud_updatepowerdrain(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 4), param_01);
+powershud_updatepowerdrain(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 4), var_1);
 }
 
-powershud_updatepowermeter(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 2), int(param_01));
+powershud_updatepowermeter(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 2), int(var_1));
 }
 
-powershud_updatepowerdisabled(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 5), param_01);
+powershud_updatepowerdisabled(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 5), var_1);
 }
 
-powershud_updatepoweroffcooldown(param_00, param_01) {
-  var_02 = scripts\engine\utility::ter_op(param_01, 1, 0);
-  self setclientomnvar(powershud_getslotomnvar(param_00, 6), var_02);
+powershud_updatepoweroffcooldown(var_0, var_1) {
+  var_2 = scripts\engine\utility::ter_op(var_1, 1, 0);
+  self setclientomnvar(powershud_getslotomnvar(var_0, 6), var_2);
 }
 
-powershud_updatepowerstate(param_00, param_01) {
-  self setclientomnvar(powershud_getslotomnvar(param_00, 6), param_01);
+powershud_updatepowerstate(var_0, var_1) {
+  self setclientomnvar(powershud_getslotomnvar(var_0, 6), var_1);
 }
 
-powershud_beginpowerdrain(param_00) {
-  powershud_updatepowerdrain(param_00, 1);
+powershud_beginpowerdrain(var_0) {
+  powershud_updatepowerdrain(var_0, 1);
 }
 
-powershud_endpowerdrain(param_00) {
-  powershud_updatepowerdrain(param_00, 0);
+powershud_endpowerdrain(var_0) {
+  powershud_updatepowerdrain(var_0, 0);
 }
 
-powershud_beginpowercooldown(param_00, param_01) {
-  powershud_updatepowermeter(param_00, 0);
-  if(isDefined(param_01) && param_01) {
-    powershud_updatepowerdisabled(param_00, 1);
+powershud_beginpowercooldown(var_0, var_1) {
+  powershud_updatepowermeter(var_0, 0);
+  if(isDefined(var_1) && var_1) {
+    powershud_updatepowerdisabled(var_0, 1);
   }
 
-  powershud_updatepowerstate(param_00, 1);
+  powershud_updatepowerstate(var_0, 1);
 }
 
-powershud_finishpowercooldown(param_00, param_01) {
-  powershud_updatepowermeter(param_00, 1000);
-  if(isDefined(param_01) && param_01) {
-    powershud_updatepowerdisabled(param_00, 0);
+powershud_finishpowercooldown(var_0, var_1) {
+  powershud_updatepowermeter(var_0, 1000);
+  if(isDefined(var_1) && var_1) {
+    powershud_updatepowerdisabled(var_0, 0);
   }
 
-  if(param_00 == "primary") {
+  if(var_0 == "primary") {
     self playlocalsound("mp_ability_ready_L1");
   } else {
     self playlocalsound("mp_ability_ready_R1");
   }
 
-  powershud_updatepowerstate(param_00, 0);
+  powershud_updatepowerstate(var_0, 0);
 }
 
-powershud_updatepowercooldown(param_00, param_01) {
-  powershud_updatepowermeter(param_00, 1000 * param_01);
+powershud_updatepowercooldown(var_0, var_1) {
+  powershud_updatepowermeter(var_0, 1000 * var_1);
 }
 
-powershud_updatepowerdrainprogress(param_00, param_01) {
-  powershud_updatepowermeter(param_00, 1000 * param_01);
+powershud_updatepowerdrainprogress(var_0, var_1) {
+  powershud_updatepowermeter(var_0, 1000 * var_1);
 }
 
-powershud_getslotomnvar(param_00, param_01) {
-  if(param_00 == "scripted") {
+powershud_getslotomnvar(var_0, var_1) {
+  if(var_0 == "scripted") {
     return;
   }
 
-  return level.power_hud_info.omnvarnames[param_00][param_01];
+  return level.power_hud_info.omnvarnames[var_0][var_1];
 }

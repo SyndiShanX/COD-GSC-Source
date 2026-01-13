@@ -21,145 +21,145 @@ init() {
 
 registerkillstreakvariantinfo() {
   level endon("game_ended");
-  var_00 = 0;
-  var_01 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_00, 0);
-  while(var_01 != "") {
-    level.var_110EC.costoverride[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 17));
-    level.var_110EC.costoverridepersist[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 18));
-    level.var_110EC.rarity[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 2));
-    level.var_110EC.var_E76D[int(var_01)] = var_00;
-    level.var_110EC.baseref[int(var_01)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 6);
-    level.var_110EC.ref[int(var_01)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 1);
-    var_00++;
-    var_01 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_00, 0);
+  var_0 = 0;
+  var_1 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_0, 0);
+  while(var_1 != "") {
+    level.var_110EC.costoverride[int(var_1)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_1, 17));
+    level.var_110EC.costoverridepersist[int(var_1)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_1, 18));
+    level.var_110EC.rarity[int(var_1)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_1, 2));
+    level.var_110EC.var_E76D[int(var_1)] = var_0;
+    level.var_110EC.baseref[int(var_1)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_1, 6);
+    level.var_110EC.ref[int(var_1)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_1, 1);
+    var_0++;
+    var_1 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_0, 0);
   }
 }
 
-getrandomvariantfrombaseref(param_00) {
-  var_01 = [];
-  foreach(var_04, var_03 in level.var_110EC.baseref) {
-    if(var_03 == param_00) {
-      var_01[var_01.size] = var_04;
+getrandomvariantfrombaseref(var_0) {
+  var_1 = [];
+  foreach(var_4, var_3 in level.var_110EC.baseref) {
+    if(var_3 == var_0) {
+      var_1[var_1.size] = var_4;
     }
   }
 
-  if(var_01.size == 0) {
+  if(var_1.size == 0) {
     return undefined;
   }
 
-  return var_01[randomint(var_01.size)];
+  return var_1[randomint(var_1.size)];
 }
 
-modifycostforlootitem(param_00, param_01) {
-  if(isDefined(param_00) && param_00 >= 0) {
-    var_02 = scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_support_killstreaks"), level.var_110EC.costoverridepersist[param_00], level.var_110EC.costoverride[param_00]);
-    if(isDefined(var_02)) {
-      return var_02;
+modifycostforlootitem(var_0, var_1) {
+  if(isDefined(var_0) && var_0 >= 0) {
+    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_support_killstreaks"), level.var_110EC.costoverridepersist[var_0], level.var_110EC.costoverride[var_0]);
+    if(isDefined(var_2)) {
+      return var_2;
     }
   }
 
-  return param_01;
+  return var_1;
 }
 
-getrarityforlootitem(param_00) {
-  var_01 = "";
-  var_02 = undefined;
-  if(isDefined(param_00)) {
-    var_02 = level.var_110EC.rarity[param_00];
+getrarityforlootitem(var_0) {
+  var_1 = "";
+  var_2 = undefined;
+  if(isDefined(var_0)) {
+    var_2 = level.var_110EC.rarity[var_0];
   }
 
-  if(!isDefined(var_02)) {
-    return var_01;
+  if(!isDefined(var_2)) {
+    return var_1;
   }
 
-  if(var_02 == 1) {
-    var_01 = "";
-  } else if(var_02 == 2) {
-    var_01 = "rare";
-  } else if(var_02 == 3) {
-    var_01 = "legend";
+  if(var_2 == 1) {
+    var_1 = "";
+  } else if(var_2 == 2) {
+    var_1 = "rare";
+  } else if(var_2 == 3) {
+    var_1 = "legend";
   } else {
-    var_01 = "epic";
+    var_1 = "epic";
   }
 
-  return var_01;
+  return var_1;
 }
 
-getpassiveperk(param_00) {
-  if(param_00 <= 0) {
+getpassiveperk(var_0) {
+  if(var_0 <= 0) {
     return [];
   }
 
-  var_01 = level.var_110EC.passivestringref[param_00];
-  if(!isDefined(var_01)) {
-    var_02 = tablelookuprownum("mp\loot\iw7_killstreak_loot_master.csv", 0, param_00);
-    var_03 = [7, 8, 9];
-    var_01 = [];
-    foreach(var_05 in var_03) {
-      var_06 = func_B030(var_02, var_05);
-      if(!isDefined(var_06)) {
+  var_1 = level.var_110EC.passivestringref[var_0];
+  if(!isDefined(var_1)) {
+    var_2 = tablelookuprownum("mp\loot\iw7_killstreak_loot_master.csv", 0, var_0);
+    var_3 = [7, 8, 9];
+    var_1 = [];
+    foreach(var_5 in var_3) {
+      var_6 = func_B030(var_2, var_5);
+      if(!isDefined(var_6)) {
         break;
       }
 
-      var_01[var_01.size] = var_06;
+      var_1[var_1.size] = var_6;
     }
 
-    level.var_110EC.passivestringref[param_00] = var_01;
+    level.var_110EC.passivestringref[var_0] = var_1;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_B030(param_00, param_01) {
-  var_02 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", param_00, param_01);
-  return scripts\engine\utility::ter_op(isDefined(var_02) && var_02 != "", var_02, undefined);
+func_B030(var_0, var_1) {
+  var_2 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_0, var_1);
+  return scripts\engine\utility::ter_op(isDefined(var_2) && var_2 != "", var_2, undefined);
 }
 
-func_988A(param_00, param_01) {
-  param_00.passives = param_01;
+func_988A(var_0, var_1) {
+  var_0.passives = var_1;
 }
 
-func_DF07(param_00, param_01) {
-  var_02 = level.var_110EC;
-  foreach(var_04 in param_01) {
-    if(!isDefined(var_02.streaktable[var_04])) {
-      var_02.streaktable[var_04] = [];
+func_DF07(var_0, var_1) {
+  var_2 = level.var_110EC;
+  foreach(var_4 in var_1) {
+    if(!isDefined(var_2.streaktable[var_4])) {
+      var_2.streaktable[var_4] = [];
     }
 
-    var_02.streaktable[var_04][param_00] = 1;
+    var_2.streaktable[var_4][var_0] = 1;
   }
 }
 
-func_DF05(param_00) {
-  var_01 = level.var_110EC;
-  if(!isDefined(var_01.streaktable[param_00])) {
-    var_01.streaktable[param_00] = [];
+func_DF05(var_0) {
+  var_1 = level.var_110EC;
+  if(!isDefined(var_1.streaktable[var_0])) {
+    var_1.streaktable[var_0] = [];
   }
 
-  var_01.streaktable[param_00]["all"] = 1;
+  var_1.streaktable[var_0]["all"] = 1;
 }
 
-func_9ED5(param_00, param_01) {
-  var_02 = level.var_110EC;
-  if(!isDefined(var_02.streaktable[param_01])) {
+func_9ED5(var_0, var_1) {
+  var_2 = level.var_110EC;
+  if(!isDefined(var_2.streaktable[var_1])) {
     return 0;
   }
 
-  if(scripts\mp\utility::istrue(var_02.streaktable[param_01]["all"])) {
+  if(scripts\mp\utility::istrue(var_2.streaktable[var_1]["all"])) {
     return 1;
   }
 
-  return scripts\mp\utility::istrue(var_02.streaktable[param_01][param_00]);
+  return scripts\mp\utility::istrue(var_2.streaktable[var_1][var_0]);
 }
 
-func_89BC(param_00) {
-  if(scripts\mp\killstreaks\_utility::func_A69F(param_00, "passive_extra_points")) {
-    thread func_2A66(self, param_00);
+func_89BC(var_0) {
+  if(scripts\mp\killstreaks\_utility::func_A69F(var_0, "passive_extra_points")) {
+    thread func_2A66(self, var_0);
   }
 }
 
-func_2A66(param_00, param_01) {
-  param_00 endon("death");
-  param_00 waittill("killed_enemy");
-  param_00 thread scripts\mp\utility::giveunifiedpoints("extra_points_loot");
+func_2A66(var_0, var_1) {
+  var_0 endon("death");
+  var_0 waittill("killed_enemy");
+  var_0 thread scripts\mp\utility::giveunifiedpoints("extra_points_loot");
 }

@@ -4,8 +4,8 @@
  * Script: 3010.gsc
 ************************/
 
-main(param_00, param_01, param_02) {
-  scripts\sp\vehicle_build::func_31C5(param_01, param_00, undefined, param_02);
+main(var_0, var_1, var_2) {
+  scripts\sp\vehicle_build::func_31C5(var_1, var_0, undefined, var_2);
   scripts\sp\vehicle_build::func_31A6(::init_location);
   scripts\sp\vehicle_build::func_31A3(90000);
   scripts\sp\vehicle_build::func_319F();

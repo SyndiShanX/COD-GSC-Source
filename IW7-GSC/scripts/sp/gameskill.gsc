@@ -27,12 +27,12 @@ func_95F9() {
   level thread func_13C1A();
 }
 
-func_F848(param_00) {
+func_F848(var_0) {
   if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
   }
 
-  if(!isDefined(param_00) || param_00 == 0) {
+  if(!isDefined(var_0) || var_0 == 0) {
     if(isDefined(level.var_7683)) {
       return;
     }
@@ -45,30 +45,30 @@ func_F848(param_00) {
     level._meth_83D3 = ::func_61BA;
     level.vehicle_canturrettargetpoint = ::func_61BA;
     scripts\sp\utility::func_F305();
-    foreach(var_02 in level.players) {
-      var_02 scripts\sp\utility::func_65E0("player_has_red_flashing_overlay");
-      var_02 scripts\sp\utility::func_65E0("player_is_invulnerable");
-      var_02 scripts\sp\utility::func_65E0("player_zero_attacker_accuracy");
-      var_02 scripts\sp\utility::func_65E0("player_no_auto_blur");
-      var_02 scripts\sp\utility::func_65E0("redflashoverlay_complete");
-      var_02 scripts\sp\utility::func_65E0("near_death_vision_enabled");
-      var_02 scripts\sp\utility::func_65E1("near_death_vision_enabled");
-      var_02.gs = spawnStruct();
-      var_02.gs.var_B639 = spawnStruct();
-      var_02 func_9723();
-      var_02.a = spawnStruct();
-      var_02.var_4CF5 = [];
-      var_02 scripts\sp\player_stats::func_9768();
-      var_02 scripts\sp\utility::func_65E0("global_hint_in_use");
-      var_02.pers = [];
-      if(!isDefined(var_02.var_28A4)) {
-        var_02.var_28A4 = 0;
+    foreach(var_2 in level.players) {
+      var_2 scripts\sp\utility::func_65E0("player_has_red_flashing_overlay");
+      var_2 scripts\sp\utility::func_65E0("player_is_invulnerable");
+      var_2 scripts\sp\utility::func_65E0("player_zero_attacker_accuracy");
+      var_2 scripts\sp\utility::func_65E0("player_no_auto_blur");
+      var_2 scripts\sp\utility::func_65E0("redflashoverlay_complete");
+      var_2 scripts\sp\utility::func_65E0("near_death_vision_enabled");
+      var_2 scripts\sp\utility::func_65E1("near_death_vision_enabled");
+      var_2.gs = spawnStruct();
+      var_2.gs.var_B639 = spawnStruct();
+      var_2 func_9723();
+      var_2.a = spawnStruct();
+      var_2.var_4CF5 = [];
+      var_2 scripts\sp\player_stats::func_9768();
+      var_2 scripts\sp\utility::func_65E0("global_hint_in_use");
+      var_2.pers = [];
+      if(!isDefined(var_2.var_28A4)) {
+        var_2.var_28A4 = 0;
       }
 
-      var_02.disabledweapon = 0;
-      var_02.disabledweaponswitch = 0;
-      var_02.disabledusability = 0;
-      var_02 _meth_831C("frag");
+      var_2.disabledweapon = 0;
+      var_2.disabledweaponswitch = 0;
+      var_2.disabledusability = 0;
+      var_2 _meth_831C("frag");
     }
 
     level.var_54D3[0] = "easy";
@@ -87,9 +87,9 @@ func_F848(param_00) {
   anim.var_1385F = 0.8;
   setdvar("autodifficulty_frac", 0);
   level.var_54D1 = [];
-  foreach(var_02 in level.players) {
-    var_02 func_9772();
-    var_02 thread func_93F7();
+  foreach(var_2 in level.players) {
+    var_2 func_9772();
+    var_2 thread func_93F7();
   }
 
   level.var_B6AD = 8;
@@ -346,19 +346,19 @@ func_F848(param_00) {
   setdvar("autodifficulty_original_setting", level.var_7683);
 }
 
-func_F52D(param_00, param_01) {
-  level.var_54D0["regularRegenDelayScalar"] = param_00;
-  level.var_54D0["longRegenTimeScalar"] = param_01;
+func_F52D(var_0, var_1) {
+  level.var_54D0["regularRegenDelayScalar"] = var_0;
+  level.var_54D0["longRegenTimeScalar"] = var_1;
 }
 
 func_9723() {
   self.gs.var_ECCC = [];
-  var_00 = ["bottom", "left", "right"];
-  var_01 = ["bloodsplat", "dirt"];
-  foreach(var_03 in var_01) {
-    foreach(var_05 in var_00) {
-      self.gs.var_ECCC[var_03][var_05] = 0;
-      self.gs.var_ECCC[var_03 + "_count"][var_05] = 0;
+  var_0 = ["bottom", "left", "right"];
+  var_1 = ["bloodsplat", "dirt"];
+  foreach(var_3 in var_1) {
+    foreach(var_5 in var_0) {
+      self.gs.var_ECCC[var_3][var_5] = 0;
+      self.gs.var_ECCC[var_3 + "_count"][var_5] = 0;
     }
   }
 }
@@ -366,8 +366,8 @@ func_9723() {
 func_12E5A() {
   func_F725();
   func_F761();
-  for(var_00 = 0; var_00 < level.players.size; var_00++) {
-    level.players[var_00] func_F6C3();
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    level.players[var_0] func_F6C3();
   }
 }
 
@@ -376,18 +376,18 @@ func_F6C3() {
 }
 
 func_F725() {
-  var_00 = ::func_7AAF;
-  var_01 = func_7C6D(level.var_7683);
-  anim.var_C86F = level.var_54D0["pain_test"][var_01];
-  level.var_6A04 = level.var_54D0["explosivePlantTime"][var_01];
-  anim.var_B750 = [[var_00]]("min_sniper_burst_delay_time", level.var_7683);
-  anim.var_B461 = [[var_00]]("max_sniper_burst_delay_time", level.var_7683);
-  setsaveddvar("ai_accuracyDistScale", [[var_00]]("accuracyDistScale", level.var_7683));
+  var_0 = ::func_7AAF;
+  var_1 = func_7C6D(level.var_7683);
+  anim.var_C86F = level.var_54D0["pain_test"][var_1];
+  level.var_6A04 = level.var_54D0["explosivePlantTime"][var_1];
+  anim.var_B750 = [[var_0]]("min_sniper_burst_delay_time", level.var_7683);
+  anim.var_B461 = [[var_0]]("max_sniper_burst_delay_time", level.var_7683);
+  setsaveddvar("ai_accuracyDistScale", [[var_0]]("accuracyDistScale", level.var_7683));
   func_F679();
-  anim.var_3546 = level.var_54D0["c12_DismemberRecoveryTime"][var_01];
-  anim.var_35EC = level.var_54D0["c12_RocketTellHoldTime"][var_01];
-  anim.var_35C6 = level.var_54D0["c12_MinigunStruggleDamage"][var_01];
-  anim.var_33BB = level.var_54D0["c6_TorsoDamageDismemberLimbChance"][var_01];
+  anim.var_3546 = level.var_54D0["c12_DismemberRecoveryTime"][var_1];
+  anim.var_35EC = level.var_54D0["c12_RocketTellHoldTime"][var_1];
+  anim.var_35C6 = level.var_54D0["c12_MinigunStruggleDamage"][var_1];
+  anim.var_33BB = level.var_54D0["c6_TorsoDamageDismemberLimbChance"][var_1];
   scripts\sp\mgturret::func_F6C3();
 }
 
@@ -397,37 +397,37 @@ func_F761() {
   }
 
   if(scripts\sp\utility::func_93A6()) {
-    var_00 = "veteran";
+    var_0 = "veteran";
     level.var_A48E.var_A3FB = level.var_54D0["JackalIncomingMissileSpeedScale"]["hardened"];
   } else {
-    var_00 = func_7C6D(level.var_7683);
-    level.var_A48E.var_A3FB = level.var_54D0["JackalIncomingMissileSpeedScale"][var_00];
+    var_0 = func_7C6D(level.var_7683);
+    level.var_A48E.var_A3FB = level.var_54D0["JackalIncomingMissileSpeedScale"][var_0];
   }
 
-  level.var_A48E.var_D3BA = level.var_54D0["playerJackalHealth"][var_00];
-  level.var_A48E.var_D3BD = level.var_54D0["playerJackalInvulnerableTime"][var_00];
-  level.var_A48E.var_D3B9 = level.var_54D0["playerJackalBaseAimAssist"][var_00];
-  level.var_A48E.var_D3C0 = level.var_54D0["playerJackalRegularRegenDelay"][var_00];
-  level.var_A48E.var_D3BF = level.var_54D0["playerJackalLongRegenDelay"][var_00];
-  level.var_A48E.var_D3BB = level.var_54D0["playerJackalHealthRegenRate"][var_00];
-  level.var_A48E.var_D3BC = level.var_54D0["playerJackalImpactDamageScale"][var_00];
-  level.var_A48E.var_A3F5 = level.var_54D0["JackalHoverheatRampTime"][var_00];
-  level.var_A48E.var_A3F4 = level.var_54D0["JackalHoverheatMaxEnemies"][var_00];
-  level.var_A48E.var_A3AE = level.var_54D0["JackalAttackercountMaxScalar"][var_00];
-  level.var_A48E.var_A3AD = level.var_54D0["JackalAttackercountMax"][var_00];
-  level.var_A48E.var_A3A6 = level.var_54D0["JackalAccuracyPerSecond"][var_00];
-  level.var_A48E.var_A40A = level.var_54D0["JackalLockingBoostEscapeScale"][var_00];
-  level.var_A48E.var_A408 = level.var_54D0["JackalLockedBoostEscapeScale"][var_00];
-  level.var_A48E.var_A409 = level.var_54D0["JackalLockedTurnEscapeScale"][var_00];
-  level.var_A48E.var_A425 = level.var_54D0["JackalTargetAidMinTime"][var_00];
-  level.var_A48E.var_A424 = level.var_54D0["JackalTargetAidMaxTime"][var_00];
-  level.var_A48E.var_A40B = level.var_54D0["JackallockonEnemyShowdownAccuracy"][var_00];
-  level.var_A48E.var_3A06 = level.var_54D0["CapShipMiniflakThresholdMin"][var_00];
-  level.var_A48E.var_3A05 = level.var_54D0["CapShipMiniflakThresholdMax"][var_00];
-  level.var_A48E.var_3A04 = level.var_54D0["CapShipMiniflakThresholdHyperAggressiveMin"][var_00];
-  level.var_A48E.var_3A03 = level.var_54D0["CapShipMiniflakThresholdHyperAggressiveMax"][var_00];
-  level.var_A48E.var_39F9 = level.var_54D0["CapitalshipTurretHealthmod"][var_00];
-  level.var_A48E.var_1B13 = level.var_54D0["AjaxEngineHealthmod"][var_00];
+  level.var_A48E.var_D3BA = level.var_54D0["playerJackalHealth"][var_0];
+  level.var_A48E.var_D3BD = level.var_54D0["playerJackalInvulnerableTime"][var_0];
+  level.var_A48E.var_D3B9 = level.var_54D0["playerJackalBaseAimAssist"][var_0];
+  level.var_A48E.var_D3C0 = level.var_54D0["playerJackalRegularRegenDelay"][var_0];
+  level.var_A48E.var_D3BF = level.var_54D0["playerJackalLongRegenDelay"][var_0];
+  level.var_A48E.var_D3BB = level.var_54D0["playerJackalHealthRegenRate"][var_0];
+  level.var_A48E.var_D3BC = level.var_54D0["playerJackalImpactDamageScale"][var_0];
+  level.var_A48E.var_A3F5 = level.var_54D0["JackalHoverheatRampTime"][var_0];
+  level.var_A48E.var_A3F4 = level.var_54D0["JackalHoverheatMaxEnemies"][var_0];
+  level.var_A48E.var_A3AE = level.var_54D0["JackalAttackercountMaxScalar"][var_0];
+  level.var_A48E.var_A3AD = level.var_54D0["JackalAttackercountMax"][var_0];
+  level.var_A48E.var_A3A6 = level.var_54D0["JackalAccuracyPerSecond"][var_0];
+  level.var_A48E.var_A40A = level.var_54D0["JackalLockingBoostEscapeScale"][var_0];
+  level.var_A48E.var_A408 = level.var_54D0["JackalLockedBoostEscapeScale"][var_0];
+  level.var_A48E.var_A409 = level.var_54D0["JackalLockedTurnEscapeScale"][var_0];
+  level.var_A48E.var_A425 = level.var_54D0["JackalTargetAidMinTime"][var_0];
+  level.var_A48E.var_A424 = level.var_54D0["JackalTargetAidMaxTime"][var_0];
+  level.var_A48E.var_A40B = level.var_54D0["JackallockonEnemyShowdownAccuracy"][var_0];
+  level.var_A48E.var_3A06 = level.var_54D0["CapShipMiniflakThresholdMin"][var_0];
+  level.var_A48E.var_3A05 = level.var_54D0["CapShipMiniflakThresholdMax"][var_0];
+  level.var_A48E.var_3A04 = level.var_54D0["CapShipMiniflakThresholdHyperAggressiveMin"][var_0];
+  level.var_A48E.var_3A03 = level.var_54D0["CapShipMiniflakThresholdHyperAggressiveMax"][var_0];
+  level.var_A48E.var_39F9 = level.var_54D0["CapitalshipTurretHealthmod"][var_0];
+  level.var_A48E.var_1B13 = level.var_54D0["AjaxEngineHealthmod"][var_0];
   func_F762();
   level.var_A48E.var_D3BE = level.var_A48E.var_D3BA;
 }
@@ -438,8 +438,8 @@ func_F762() {
   }
 
   if(isDefined(level.var_A48E.var_D3BE) && isDefined(level.var_D127.var_B154)) {
-    var_00 = level.var_A48E.var_D3BA / level.var_A48E.var_D3BE;
-    level.var_D127.var_B154 = level.var_D127.var_B154 * var_00;
+    var_0 = level.var_A48E.var_D3BA / level.var_A48E.var_D3BE;
+    level.var_D127.var_B154 = level.var_D127.var_B154 * var_0;
   }
 
   if(isDefined(level.var_D127.var_4C15) && isDefined(level.var_D127.var_4C15.var_105EE)) {
@@ -451,24 +451,24 @@ func_F762() {
 }
 
 func_F679() {
-  var_00 = scripts\sp\utility::func_7E72();
+  var_0 = scripts\sp\utility::func_7E72();
   level.player.gs.var_B63A = 1000;
   level.player.gs.var_B63C = 10;
-  if(var_00 == "medium") {
+  if(var_0 == "medium") {
     level.player.gs.var_B63A = 5000;
     level.player.gs.var_B63C = 4;
     return;
   }
 
-  if(var_00 == "hard") {
+  if(var_0 == "hard") {
     level.player.gs.var_B63A = 1000;
     level.player.gs.var_B63C = 1;
   }
 }
 
 updategameskill() {
-  foreach(var_01 in level.players) {
-    var_01.var_7683 = var_01 scripts\sp\utility::func_7B93();
+  foreach(var_1 in level.players) {
+    var_1.var_7683 = var_1 scripts\sp\utility::func_7B93();
   }
 
   level.var_7683 = level.player.var_7683;
@@ -480,16 +480,16 @@ updategameskill() {
 }
 
 func_7685() {
-  var_00 = level.var_7683;
+  var_0 = level.var_7683;
   for(;;) {
-    if(!isDefined(var_00)) {
+    if(!isDefined(var_0)) {
       wait(1);
-      var_00 = level.var_7683;
+      var_0 = level.var_7683;
       continue;
     }
 
-    if(var_00 != updategameskill()) {
-      var_00 = level.var_7683;
+    if(var_0 != updategameskill()) {
+      var_0 = level.var_7683;
       func_12E5A();
     }
 
@@ -497,34 +497,34 @@ func_7685() {
   }
 }
 
-func_7C6D(param_00) {
-  return level.var_54D3[param_00];
+func_7C6D(var_0) {
+  return level.var_54D3[var_0];
 }
 
 func_14F3() {
   return level.var_7683 == getdvarint("autodifficulty_original_setting");
 }
 
-func_20A1(param_00, param_01) {
-  self.gs.invultime_preshield = [[param_00]]("invulTime_preShield", param_01);
-  self.gs.invultime_onshield = [[param_00]]("invulTime_onShield", param_01);
-  self.gs.invultime_postshield = [[param_00]]("invulTime_postShield", param_01);
-  self.gs.playerhealth_regularregendelay = [[param_00]]("playerHealth_RegularRegenDelay", param_01) * level.var_54D0["regularRegenDelayScalar"];
-  self.gs.worthydamageratio = [[param_00]]("worthyDamageRatio", param_01);
-  self.var_33F = int([[param_00]]("threatbias", param_01));
-  self.gs.longregentime = [[param_00]]("longRegenTime", param_01) * level.var_54D0["longRegenTimeScalar"];
-  self.gs.healthoverlaycutoff = [[param_00]]("healthOverlayCutoff", param_01);
-  self.gs.var_DE8D = [[param_00]]("health_regenRate", param_01);
-  self.gs.var_CF81 = [[param_00]]("base_enemy_accuracy", param_01);
+func_20A1(var_0, var_1) {
+  self.gs.invultime_preshield = [[var_0]]("invulTime_preShield", var_1);
+  self.gs.invultime_onshield = [[var_0]]("invulTime_onShield", var_1);
+  self.gs.invultime_postshield = [[var_0]]("invulTime_postShield", var_1);
+  self.gs.playerhealth_regularregendelay = [[var_0]]("playerHealth_RegularRegenDelay", var_1) * level.var_54D0["regularRegenDelayScalar"];
+  self.gs.worthydamageratio = [[var_0]]("worthyDamageRatio", var_1);
+  self.var_33F = int([[var_0]]("threatbias", var_1));
+  self.gs.longregentime = [[var_0]]("longRegenTime", var_1) * level.var_54D0["longRegenTimeScalar"];
+  self.gs.healthoverlaycutoff = [[var_0]]("healthOverlayCutoff", var_1);
+  self.gs.var_DE8D = [[var_0]]("health_regenRate", var_1);
+  self.gs.var_CF81 = [[var_0]]("base_enemy_accuracy", var_1);
   func_12E0B();
-  self.gs.var_D396 = int([[param_00]]("playerGrenadeBaseTime", param_01));
-  self.gs.var_D397 = int([[param_00]]("playerGrenadeRangeTime", param_01));
-  self.gs.var_D382 = int([[param_00]]("playerDoubleGrenadeTime", param_01));
-  self.gs.var_B750 = [[param_00]]("min_sniper_burst_delay_time", param_01);
-  self.gs.var_B461 = [[param_00]]("max_sniper_burst_delay_time", param_01);
-  self.var_E7 = int([[param_00]]("player_deathInvulnerableTime", param_01));
-  self.var_C6 = int([[param_00]]("player_criticalBulletDamageDist", param_01));
-  self.var_DF = 100 / [[param_00]]("playerDifficultyHealth", param_01);
+  self.gs.var_D396 = int([[var_0]]("playerGrenadeBaseTime", var_1));
+  self.gs.var_D397 = int([[var_0]]("playerGrenadeRangeTime", var_1));
+  self.gs.var_D382 = int([[var_0]]("playerDoubleGrenadeTime", var_1));
+  self.gs.var_B750 = [[var_0]]("min_sniper_burst_delay_time", var_1);
+  self.gs.var_B461 = [[var_0]]("max_sniper_burst_delay_time", var_1);
+  self.var_E7 = int([[var_0]]("player_deathInvulnerableTime", var_1));
+  self.var_C6 = int([[var_0]]("player_criticalBulletDamageDist", var_1));
+  self.var_DF = 100 / [[var_0]]("playerDifficultyHealth", var_1);
 }
 
 func_12E0B() {
@@ -536,10 +536,10 @@ func_12E0B() {
   self.var_50 = self.gs.var_CF81;
 }
 
-func_20A2(param_00, param_01) {
-  self.gs.var_B8D7 = [[param_00]]("missTimeConstant", param_01);
-  self.gs.var_B8D9 = [[param_00]]("missTimeDistanceFactor", param_01);
-  self.gs.double_grenades_allowed = [[param_00]]("double_grenades_allowed", param_01);
+func_20A2(var_0, var_1) {
+  self.gs.var_B8D7 = [[var_0]]("missTimeConstant", var_1);
+  self.gs.var_B8D9 = [[var_0]]("missTimeDistanceFactor", var_1);
+  self.gs.double_grenades_allowed = [[var_0]]("double_grenades_allowed", var_1);
 }
 
 func_F355() {
@@ -547,50 +547,50 @@ func_F355() {
   func_20A2(::func_7AAE, 1);
 }
 
-func_7AAE(param_00, param_01) {
-  return level.var_54D0[param_00][func_7C6D(self.var_7683)];
+func_7AAE(var_0, var_1) {
+  return level.var_54D0[var_0][func_7C6D(self.var_7683)];
 }
 
-func_7AAD(param_00, param_01) {
-  return level.var_54D0[param_00][func_7C6D(level.var_7683)];
+func_7AAD(var_0, var_1) {
+  return level.var_54D0[var_0][func_7C6D(level.var_7683)];
 }
 
-func_786D(param_00, param_01) {
-  var_02 = level.var_54D1[param_00];
-  var_03 = 1;
-  while(var_03 < var_02.size) {
-    var_04 = var_02[var_03]["frac"];
-    var_05 = var_02[var_03]["val"];
-    if(param_01 <= var_04) {
-      var_06 = var_02[var_03 - 1]["frac"];
-      var_07 = var_02[var_03 - 1]["val"];
-      var_08 = var_04 - var_06;
-      var_09 = var_05 - var_07;
-      var_0A = param_01 - var_06;
-      var_0B = var_0A / var_08;
-      return var_07 + var_0B * var_09;
+func_786D(var_0, var_1) {
+  var_2 = level.var_54D1[var_0];
+  var_3 = 1;
+  while(var_3 < var_2.size) {
+    var_4 = var_2[var_3]["frac"];
+    var_5 = var_2[var_3]["val"];
+    if(var_1 <= var_4) {
+      var_6 = var_2[var_3 - 1]["frac"];
+      var_7 = var_2[var_3 - 1]["val"];
+      var_8 = var_4 - var_6;
+      var_9 = var_5 - var_7;
+      var_0A = var_1 - var_6;
+      var_0B = var_0A / var_8;
+      return var_7 + var_0B * var_9;
     }
 
-    var_09++;
+    var_9++;
   }
 
-  return var_08[var_08.size - 1]["val"];
+  return var_8[var_8.size - 1]["val"];
 }
 
-func_7E4A(param_00) {
-  return level.var_54D0[param_00][func_7C6D(self.var_7683)];
+func_7E4A(var_0) {
+  return level.var_54D0[var_0][func_7C6D(self.var_7683)];
 }
 
-_meth_80D5(param_00, param_01, param_02) {
-  return level.var_54D0[param_00][level.var_54D3[param_01]] * 100 - getdvarint("autodifficulty_frac") + level.var_54D0[param_00][level.var_54D3[param_02]] * getdvarint("autodifficulty_frac") * 0.01;
+_meth_80D5(var_0, var_1, var_2) {
+  return level.var_54D0[var_0][level.var_54D3[var_1]] * 100 - getdvarint("autodifficulty_frac") + level.var_54D0[var_0][level.var_54D3[var_2]] * getdvarint("autodifficulty_frac") * 0.01;
 }
 
-func_7AB0(param_00, param_01) {
-  return level.var_54D0[param_00][func_7C6D(self.var_7683)];
+func_7AB0(var_0, var_1) {
+  return level.var_54D0[var_0][func_7C6D(self.var_7683)];
 }
 
-func_7AAF(param_00, param_01) {
-  return level.var_54D0[param_00][func_7C6D(level.var_7683)];
+func_7AAF(var_0, var_1) {
+  return level.var_54D0[var_0][func_7C6D(level.var_7683)];
 }
 
 func_1D5A() {
@@ -644,7 +644,7 @@ func_F288() {
   }
 
   if(self.script == "move") {
-    if(scripts\engine\utility::actor_is3d() && isDefined(self.var_1198.var_AA3D) && self.var_1198.var_AA3D.type == "Exposed 3D" || self.var_1198.var_AA3D.type == "Path 3D") {
+    if(scripts\engine\utility::actor_is3d() && isDefined(self._blackboard.var_AA3D) && self._blackboard.var_AA3D.type == "Exposed 3D" || self._blackboard.var_AA3D.type == "Path 3D") {
       self.accuracy = self.var_2894;
     } else if(scripts\anim\utility::func_9D9C()) {
       self.accuracy = level.var_1385F * self.var_2894;
@@ -669,20 +669,20 @@ func_F84B() {
 
   if(!isDefined(self.var_103B2)) {
     self.var_103B2 = 1;
-    var_00 = func_7C6D(level.var_7683);
-    var_01 = level.var_54D0["sniperAccuDiffScale"][var_00];
-    self.var_2894 = self.accuracy * var_01;
+    var_0 = func_7C6D(level.var_7683);
+    var_1 = level.var_54D0["sniperAccuDiffScale"][var_0];
+    self.var_2894 = self.accuracy * var_1;
   }
 
   self.var_103BF++;
-  var_02 = level.var_7683;
+  var_2 = level.var_7683;
   if(isplayer(self.isnodeoccupied)) {
-    var_02 = self.isnodeoccupied.var_7683;
+    var_2 = self.isnodeoccupied.var_7683;
   }
 
   if(func_10019()) {
     self.accuracy = 0;
-    if(var_02 > 0 || self.var_103BF > 1) {
+    if(var_2 > 0 || self.var_103BF > 1) {
       self.var_A9BA = self.isnodeoccupied;
     }
 
@@ -694,7 +694,7 @@ func_F84B() {
   }
 
   self.var_103BA++;
-  if(var_02 < 1 && self.var_103BA == 1) {
+  if(var_2 < 1 && self.var_103BA == 1) {
     self.var_A9BA = undefined;
   }
 }
@@ -732,26 +732,26 @@ func_E242() {
 }
 
 func_13847() {
-  var_00 = 0;
+  var_0 = 0;
   waittillframeend;
   if(!isalive(self.isnodeoccupied)) {
-    return var_00;
+    return var_0;
   }
 
   if(!isplayer(self.isnodeoccupied)) {
-    return var_00;
+    return var_0;
   }
 
   if(self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable")) {
-    var_00 = 0.3 + randomfloat(0.4);
+    var_0 = 0.3 + randomfloat(0.4);
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_D8EB(param_00, param_01, param_02, param_03) {
-  param_03 = param_03 * 20;
-  for(var_04 = 0; var_04 < param_03; var_04++) {
+func_D8EB(var_0, var_1, var_2, var_3) {
+  var_3 = var_3 * 20;
+  for(var_4 = 0; var_4 < var_3; var_4++) {
     wait(0.05);
   }
 }
@@ -783,25 +783,25 @@ resetmisstime_code() {
     return;
   }
 
-  var_00 = distance(self.isnodeoccupied.origin, self.origin);
-  func_F79C(self.isnodeoccupied.gs.var_B8D7 + var_00 * self.isnodeoccupied.gs.var_B8D9);
+  var_0 = distance(self.isnodeoccupied.origin, self.origin);
+  func_F79C(self.isnodeoccupied.gs.var_B8D7 + var_0 * self.isnodeoccupied.gs.var_B8D9);
 }
 
 func_E258() {
   self.a.var_B8D8 = gettime() + 3000;
 }
 
-func_F79C(param_00) {
+func_F79C(var_0) {
   if(self.a.var_B8D8 > gettime()) {
     return;
   }
 
-  if(param_00 > 0) {
+  if(var_0 > 0) {
     self.accuracy = 0;
   }
 
-  param_00 = param_00 * 1000;
-  self.a.var_B8D6 = gettime() + param_00;
+  var_0 = var_0 * 1000;
+  self.a.var_B8D6 = gettime() + var_0;
   self.a.var_154C = 1;
 }
 
@@ -810,87 +810,87 @@ func_CF4D() {
   self notify("playeraim");
   self endon("playeraim");
   for(;;) {
-    var_00 = (0, 1, 0);
+    var_0 = (0, 1, 0);
     if(self.a.var_B8D6 > gettime()) {
-      var_00 = (1, 0, 0);
+      var_0 = (1, 0, 0);
     }
 
     wait(0.05);
   }
 }
 
-func_ECC2(param_00, param_01, param_02) {
-  var_03 = randomfloatrange(-15, 15);
-  var_04 = randomfloatrange(-15, 15);
-  self scaleovertime(0.1, int(2048 * param_01), int(1152 * param_01));
-  self.y = 100 + var_04;
+func_ECC2(var_0, var_1, var_2) {
+  var_3 = randomfloatrange(-15, 15);
+  var_4 = randomfloatrange(-15, 15);
+  self scaleovertime(0.1, int(2048 * var_1), int(1152 * var_1));
+  self.y = 100 + var_4;
   self moveovertime(0.08);
-  self.y = 0 + var_04;
-  self.x = self.x + var_03;
-  if(isDefined(param_02)) {
+  self.y = 0 + var_4;
+  self.x = self.x + var_3;
+  if(isDefined(var_2)) {
     return;
   }
 
   func_ECC1();
 }
 
-func_ECC3(param_00, param_01, param_02) {
-  var_03 = 1;
-  if(param_02) {
-    var_03 = -1;
+func_ECC3(var_0, var_1, var_2) {
+  var_3 = 1;
+  if(var_2) {
+    var_3 = -1;
   }
 
-  var_04 = randomfloatrange(-15, 15);
-  var_05 = randomfloatrange(-15, 15);
-  self scaleovertime(0.1, int(2048 * param_01), int(1152 * param_01));
-  self.x = 1000 * var_03 + var_04;
+  var_4 = randomfloatrange(-15, 15);
+  var_5 = randomfloatrange(-15, 15);
+  self scaleovertime(0.1, int(2048 * var_1), int(1152 * var_1));
+  self.x = 1000 * var_3 + var_4;
   self moveovertime(0.1);
-  self.x = 0 + var_04;
-  self.y = self.y + var_05;
+  self.x = 0 + var_4;
+  self.y = self.y + var_5;
   func_ECC1();
 }
 
 func_ECC1() {
   self endon("death");
-  var_00 = gettime();
-  var_01 = 1;
-  var_02 = 0.05;
+  var_0 = gettime();
+  var_1 = 1;
+  var_2 = 0.05;
   self.alpha = 0;
-  self fadeovertime(var_02);
+  self fadeovertime(var_2);
   self.alpha = 1;
-  wait(var_02);
-  scripts\sp\utility::func_135AF(var_00, 2);
-  self fadeovertime(var_01);
+  wait(var_2);
+  scripts\sp\utility::func_135AF(var_0, 2);
+  self fadeovertime(var_1);
   self.alpha = 0;
-  scripts\engine\utility::waittill_notify_or_timeout("screenfx_force_delete", var_01);
+  scripts\engine\utility::waittill_notify_or_timeout("screenfx_force_delete", var_1);
   self destroy();
 }
 
 func_ECC0() {
-  var_00 = 0.2;
+  var_0 = 0.2;
   self.alpha = 0.7;
-  self fadeovertime(var_00);
+  self fadeovertime(var_0);
   self.alpha = 0;
-  wait(var_00);
+  wait(var_0);
   self destroy();
 }
 
-forcehidegrenadehudwarning(param_00) {
-  var_01 = "fullscreen_dirt_" + param_00;
-  var_02 = undefined;
-  if(param_00 == "bottom") {
-    var_02 = "fullscreen_dirt_bottom_b";
+forcehidegrenadehudwarning(var_0) {
+  var_1 = "fullscreen_dirt_" + var_0;
+  var_2 = undefined;
+  if(var_0 == "bottom") {
+    var_2 = "fullscreen_dirt_bottom_b";
   }
 
-  thread func_56C6("dirt", param_00, var_01, var_02, randomfloatrange(0.55, 0.66));
+  thread func_56C6("dirt", var_0, var_1, var_2, randomfloatrange(0.55, 0.66));
 }
 
-func_2BC1(param_00) {
-  var_01 = "fullscreen_bloodsplat_" + param_00;
-  thread func_56C6("bloodsplat", param_00, var_01, undefined, randomfloatrange(0.45, 0.56));
+func_2BC1(var_0) {
+  var_1 = "fullscreen_bloodsplat_" + var_0;
+  thread func_56C6("bloodsplat", var_0, var_1, undefined, randomfloatrange(0.45, 0.56));
 }
 
-func_56C6(param_00, param_01, param_02, param_03, param_04) {
+func_56C6(var_0, var_1, var_2, var_3, var_4) {
   if(!isalive(self)) {
     return;
   }
@@ -899,86 +899,86 @@ func_56C6(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  var_05 = gettime();
-  if(self.gs.var_ECCC[param_00][param_01] == var_05) {
+  var_5 = gettime();
+  if(self.gs.var_ECCC[var_0][var_1] == var_5) {
     return;
   }
 
-  if(self.gs.var_ECCC[param_00 + "_count"][param_01] == 1) {
+  if(self.gs.var_ECCC[var_0 + "_count"][var_1] == 1) {
     return;
   }
 
-  self.gs.var_ECCC[param_00 + "_count"][param_01]++;
-  self.gs.var_ECCC[param_00][param_01] = var_05;
+  self.gs.var_ECCC[var_0 + "_count"][var_1]++;
+  self.gs.var_ECCC[var_0][var_1] = var_5;
   self endon("death");
-  switch (param_01) {
+  switch (var_1) {
     case "bottom":
-      var_06 = int(640);
-      var_07 = int(480);
-      if(param_00 == "dirt") {
-        var_08 = scripts\sp\hud_util::func_48B8(param_02, 1);
-        var_08 thread func_ECC2(param_00, param_04, 1);
-        var_08 func_ECC0();
+      var_6 = int(640);
+      var_7 = int(480);
+      if(var_0 == "dirt") {
+        var_8 = scripts\sp\hud_util::func_48B8(var_2, 1);
+        var_8 thread func_ECC2(var_0, var_4, 1);
+        var_8 func_ECC0();
       } else {
-        var_08 = scripts\sp\hud_util::func_48B8(param_03, 0);
-        var_08 func_ECC2(param_00, param_04);
+        var_8 = scripts\sp\hud_util::func_48B8(var_3, 0);
+        var_8 func_ECC2(var_0, var_4);
       }
 
-      if(isDefined(param_03)) {
-        var_09 = scripts\sp\hud_util::func_48B8(param_03, 0);
-        var_09 func_ECC2(param_00, param_04);
+      if(isDefined(var_3)) {
+        var_9 = scripts\sp\hud_util::func_48B8(var_3, 0);
+        var_9 func_ECC2(var_0, var_4);
       }
       break;
 
     case "left":
-      var_08 = scripts\sp\hud_util::func_48B8(param_02, 0, 1, 1);
-      var_08 func_ECC3(param_00, param_04, 1);
+      var_8 = scripts\sp\hud_util::func_48B8(var_2, 0, 1, 1);
+      var_8 func_ECC3(var_0, var_4, 1);
       break;
 
     case "right":
-      var_08 = scripts\sp\hud_util::func_48B8(param_02, 0, 1, 1);
-      var_08 func_ECC3(param_00, param_04, 0);
+      var_8 = scripts\sp\hud_util::func_48B8(var_2, 0, 1, 1);
+      var_8 func_ECC3(var_0, var_4, 0);
       break;
 
     default:
       break;
   }
 
-  self.gs.var_ECCC[param_00 + "_count"][param_01]--;
+  self.gs.var_ECCC[var_0 + "_count"][var_1]--;
 }
 
 func_D3A9() {
-  var_00 = ::scripts\sp\utility::func_7751;
-  var_01 = ::scripts\sp\utility::func_2BC6;
-  var_02 = [];
-  var_02["MOD_GRENADE"] = var_00;
-  var_02["MOD_GRENADE_SPLASH"] = var_00;
-  var_02["MOD_PROJECTILE"] = var_00;
-  var_02["MOD_PROJECTILE_SPLASH"] = var_00;
-  var_02["MOD_EXPLOSIVE"] = var_00;
-  var_02["MOD_PISTOL_BULLET"] = var_01;
-  var_02["MOD_RIFLE_BULLET"] = var_01;
-  var_02["MOD_EXPLOSIVE_BULLET"] = var_01;
+  var_0 = ::scripts\sp\utility::func_7751;
+  var_1 = ::scripts\sp\utility::func_2BC6;
+  var_2 = [];
+  var_2["MOD_GRENADE"] = var_0;
+  var_2["MOD_GRENADE_SPLASH"] = var_0;
+  var_2["MOD_PROJECTILE"] = var_0;
+  var_2["MOD_PROJECTILE_SPLASH"] = var_0;
+  var_2["MOD_EXPLOSIVE"] = var_0;
+  var_2["MOD_PISTOL_BULLET"] = var_1;
+  var_2["MOD_RIFLE_BULLET"] = var_1;
+  var_2["MOD_EXPLOSIVE_BULLET"] = var_1;
   self.var_91F2 = 0;
   for(;;) {
-    self waittill("damage", var_03, var_04, var_05, var_06, var_07);
+    self waittill("damage", var_3, var_4, var_5, var_6, var_7);
     self.var_91F2 = 1;
-    self.var_4D62 = var_06;
-    self.damageattacker = var_04;
-    var_08 = undefined;
+    self.var_4D62 = var_6;
+    self.damageattacker = var_4;
+    var_8 = undefined;
     if(isDefined(self.var_B940)) {
-      var_08 = self.var_B940[var_07];
+      var_8 = self.var_B940[var_7];
     }
 
-    if(!isDefined(var_08) && isDefined(var_02[var_07])) {
-      var_08 = var_02[var_07];
+    if(!isDefined(var_8) && isDefined(var_2[var_7])) {
+      var_8 = var_2[var_7];
     }
 
-    if(isDefined(var_08)) {
+    if(isDefined(var_8)) {
       waittillframeend;
       [
-        [var_08]
-      ](var_06);
+        [var_8]
+      ](var_6);
     }
   }
 }
@@ -1000,16 +1000,16 @@ playerhealthregen() {
     return;
   }
 
-  var_00 = 1;
-  var_01 = 0;
+  var_0 = 1;
+  var_1 = 0;
   thread func_D0CE();
-  var_02 = 0;
-  var_03 = 0;
+  var_2 = 0;
+  var_3 = 0;
   thread func_D369(self.maxhealth * 0.35);
-  var_04 = 0;
-  var_05 = 0;
-  var_06 = 0;
-  var_07 = 1;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 1;
   thread func_D3A9();
   self.var_2C42 = 0;
   for(;;) {
@@ -1020,9 +1020,9 @@ playerhealthregen() {
         func_D259();
       }
 
-      var_07 = 1;
-      var_03 = 0;
-      var_02 = 0;
+      var_7 = 1;
+      var_3 = 0;
+      var_2 = 0;
       continue;
     }
 
@@ -1030,12 +1030,12 @@ playerhealthregen() {
       return;
     }
 
-    var_08 = var_02;
-    var_09 = self.health / self.maxhealth;
-    if(var_09 <= self.gs.healthoverlaycutoff && self.var_D0CE > 1) {
-      var_02 = 1;
-      if(!var_08) {
-        var_05 = gettime();
+    var_8 = var_2;
+    var_9 = self.health / self.maxhealth;
+    if(var_9 <= self.gs.healthoverlaycutoff && self.var_D0CE > 1) {
+      var_2 = 1;
+      if(!var_8) {
+        var_5 = gettime();
         if(scripts\sp\utility::func_65DB("near_death_vision_enabled")) {
           thread func_2BDB(3.6, 2);
           thread scripts\sp\audio::func_F334();
@@ -1043,62 +1043,62 @@ playerhealthregen() {
         }
 
         scripts\sp\utility::func_65E1("player_has_red_flashing_overlay");
-        var_03 = 1;
+        var_3 = 1;
       }
     }
 
     if(self.var_91F2) {
-      var_05 = gettime();
+      var_5 = gettime();
       self.var_91F2 = 0;
     }
 
-    if(self.health / self.maxhealth >= var_00) {
-      if(gettime() - var_05 < self.gs.playerhealth_regularregendelay) {
+    if(self.health / self.maxhealth >= var_0) {
+      if(gettime() - var_5 < self.gs.playerhealth_regularregendelay) {
         continue;
       }
 
-      if(var_02) {
-        var_06 = var_09;
-        if(gettime() > var_05 + self.gs.longregentime) {
-          var_06 = var_06 + self.gs.var_DE8D;
+      if(var_2) {
+        var_6 = var_9;
+        if(gettime() > var_5 + self.gs.longregentime) {
+          var_6 = var_6 + self.gs.var_DE8D;
         }
 
-        if(var_06 >= 1) {
+        if(var_6 >= 1) {
           func_DE3C();
         }
       } else {
-        var_06 = 1;
+        var_6 = 1;
       }
 
-      if(var_06 > 1) {
-        var_06 = 1;
+      if(var_6 > 1) {
+        var_6 = 1;
       }
 
-      if(var_06 <= 0) {
+      if(var_6 <= 0) {
         return;
       }
 
-      self setnormalhealth(var_06);
-      var_00 = self.health / self.maxhealth;
+      self setnormalhealth(var_6);
+      var_0 = self.health / self.maxhealth;
       continue;
     }
 
-    var_00 = var_07;
+    var_0 = var_7;
     var_0A = self.gs.worthydamageratio;
     if(self.var_51 == 1) {
       var_0A = var_0A * 3;
     }
 
-    var_0B = var_00 - var_09 >= var_0A;
+    var_0B = var_0 - var_9 >= var_0A;
     if(self.health <= 1) {
       self setnormalhealth(2 / self.maxhealth);
       var_0B = 1;
     }
 
-    var_00 = self.health / self.maxhealth;
+    var_0 = self.health / self.maxhealth;
     self notify("hit_again");
-    var_01 = 0;
-    var_05 = gettime();
+    var_1 = 0;
+    var_5 = gettime();
     thread func_2BDB(3, 0.8);
     if(!var_0B) {
       continue;
@@ -1110,17 +1110,17 @@ playerhealthregen() {
 
     scripts\sp\utility::func_65E1("player_is_invulnerable");
     level notify("player_becoming_invulnerable");
-    if(var_03) {
-      var_04 = self.gs.invultime_onshield;
-      var_03 = 0;
-    } else if(var_02) {
-      var_04 = self.gs.invultime_postshield;
+    if(var_3) {
+      var_4 = self.gs.invultime_onshield;
+      var_3 = 0;
+    } else if(var_2) {
+      var_4 = self.gs.invultime_postshield;
     } else {
-      var_04 = self.gs.invultime_preshield;
+      var_4 = self.gs.invultime_preshield;
     }
 
-    var_07 = self.health / self.maxhealth;
-    thread func_D3B1(var_04);
+    var_7 = self.health / self.maxhealth;
+    thread func_D3B1(var_4);
   }
 }
 
@@ -1130,26 +1130,26 @@ func_DE3C() {
   }
 
   if(isalive(self)) {
-    var_00 = self _meth_8139("takeCoverWarnings");
-    if(var_00 > 0) {
-      var_00--;
-      self _meth_8302("takeCoverWarnings", var_00);
+    var_0 = self _meth_8139("takeCoverWarnings");
+    if(var_0 > 0) {
+      var_0--;
+      self _meth_8302("takeCoverWarnings", var_0);
     }
   }
 }
 
-func_D3B1(param_00) {
+func_D3B1(var_0) {
   if(isDefined(self.flashendtime) && self.flashendtime > gettime()) {
-    param_00 = param_00 * func_7E4A("flashbangedInvulFactor");
+    var_0 = var_0 * func_7E4A("flashbangedInvulFactor");
   }
 
-  if(param_00 > 0) {
+  if(var_0 > 0) {
     if(!isDefined(self.var_C088)) {
       self.var_50 = 0;
     }
 
     self.precachenightvisioncodeassets = 1;
-    wait(param_00);
+    wait(var_0);
   }
 
   func_12E0B();
@@ -1205,19 +1205,19 @@ grenadeawareness() {
   }
 }
 
-func_2BDB(param_00, param_01) {
+func_2BDB(var_0, var_1) {
   if(scripts\sp\utility::func_65DB("player_no_auto_blur")) {
     return;
   }
 
   self notify("blurview_stop");
   self endon("blurview_stop");
-  self setblurforplayer(param_00, 0);
+  self setblurforplayer(var_0, 0);
   wait(0.05);
-  self setblurforplayer(0, param_01);
+  self setblurforplayer(0, var_1);
 }
 
-func_D369(param_00) {
+func_D369(var_0) {
   wait(2);
   for(;;) {
     wait(0.2);
@@ -1225,8 +1225,8 @@ func_D369(param_00) {
       return;
     }
 
-    var_01 = self.health / self.maxhealth;
-    if(var_01 > self.gs.healthoverlaycutoff) {
+    var_1 = self.health / self.maxhealth;
+    if(var_1 > self.gs.healthoverlaycutoff) {
       continue;
     }
 
@@ -1242,67 +1242,67 @@ func_D369(param_00) {
       self playlocalsound("breathing_hurt");
     }
 
-    var_02 = 0.1;
+    var_2 = 0.1;
     if(isDefined(level.player.gs.var_4C82)) {
-      var_02 = level.player.gs.var_4C82;
+      var_2 = level.player.gs.var_4C82;
     }
 
-    wait(var_02 + randomfloat(0.8));
+    wait(var_2 + randomfloat(0.8));
   }
 }
 
 func_8CBA() {
   self endon("noHealthOverlay");
-  var_00 = newclienthudelem(self);
-  self.var_8CAE = var_00;
-  var_00.x = 0;
-  var_00.y = 0;
-  var_01 = "vfx_ui_player_pain_overlay";
-  var_00 setshader(var_01, 640, 480);
-  var_00.ispointonnavmesh3d = 1;
-  var_00.alignx = "left";
-  var_00.aligny = "top";
-  var_00.sort = 1;
-  var_00.foreground = 0;
-  var_00.horzalign = "fullscreen";
-  var_00.vertalign = "fullscreen";
-  var_00.alpha = 0;
-  var_00.isexplosivedamagemod = 1;
-  thread func_8CBB(var_00);
-  childthread func_11431(var_00);
-  var_02 = 0;
-  var_03 = 0.05;
-  var_04 = 0.3;
+  var_0 = newclienthudelem(self);
+  self.var_8CAE = var_0;
+  var_0.x = 0;
+  var_0.y = 0;
+  var_1 = "vfx_ui_player_pain_overlay";
+  var_0 setshader(var_1, 640, 480);
+  var_0.ispointonnavmesh3d = 1;
+  var_0.alignx = "left";
+  var_0.aligny = "top";
+  var_0.sort = 1;
+  var_0.foreground = 0;
+  var_0.horzalign = "fullscreen";
+  var_0.vertalign = "fullscreen";
+  var_0.alpha = 0;
+  var_0.isexplosivedamagemod = 1;
+  thread func_8CBB(var_0);
+  childthread func_11431(var_0);
+  var_2 = 0;
+  var_3 = 0.05;
+  var_4 = 0.3;
   while(isalive(self)) {
-    wait(var_03);
+    wait(var_3);
     if(!isalive(self)) {
       break;
     }
 
     if(scripts\sp\utility::func_93A6()) {
       if(scripts\sp\specialist_MAYBE::func_2C97()) {
-        var_02 = 0;
+        var_2 = 0;
       } else {
-        var_04 = 0.1;
-        var_05 = 1 - self.health / level.player.maxhealth;
-        var_05 = var_05 * 1.5;
-        var_06 = var_05 - var_00.alpha;
-        var_07 = var_00.alpha + var_06 * var_04;
-        var_02 = clamp(var_07, 0, 1);
+        var_4 = 0.1;
+        var_5 = 1 - self.health / level.player.maxhealth;
+        var_5 = var_5 * 1.5;
+        var_6 = var_5 - var_0.alpha;
+        var_7 = var_0.alpha + var_6 * var_4;
+        var_2 = clamp(var_7, 0, 1);
       }
     } else if(level.player scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
-      var_02 = 0;
+      var_2 = 0;
       level.player scripts\sp\utility::func_65E8("player_has_red_flashing_overlay");
     } else {
-      var_05 = 1 - self.health / level.player.maxhealth;
-      var_08 = var_05 * var_05 * 1.2;
-      var_08 = clamp(var_08, 0, 1);
-      if(var_02 > var_08) {
-        var_02 = var_02 - var_04 * var_03;
+      var_5 = 1 - self.health / level.player.maxhealth;
+      var_8 = var_5 * var_5 * 1.2;
+      var_8 = clamp(var_8, 0, 1);
+      if(var_2 > var_8) {
+        var_2 = var_2 - var_4 * var_3;
       }
 
-      if(var_02 < var_08) {
-        var_02 = var_08;
+      if(var_2 < var_8) {
+        var_2 = var_8;
       }
     }
 
@@ -1310,19 +1310,19 @@ func_8CBA() {
       continue;
     }
 
-    var_00.alpha = var_02;
+    var_0.alpha = var_2;
   }
 }
 
-func_11431(param_00) {
+func_11431(var_0) {
   self endon("death");
   while(isalive(self)) {
     scripts\sp\utility::func_65E3("player_has_red_flashing_overlay");
-    func_11430(param_00);
+    func_11430(var_0);
   }
 }
 
-func_16F1(param_00) {
+func_16F1(var_0) {
   if(level.console) {
     self.fontscale = 2;
   } else {
@@ -1360,11 +1360,11 @@ func_1383C() {
   self waittill("damage");
 }
 
-func_52BD(param_00) {
-  param_00 endon("being_destroyed");
+func_52BD(var_0) {
+  var_0 endon("being_destroyed");
   func_1383C();
-  var_01 = !isalive(self);
-  param_00 thread func_52BC(var_01);
+  var_1 = !isalive(self);
+  var_0 thread func_52BC(var_1);
 }
 
 func_52BE() {
@@ -1373,10 +1373,10 @@ func_52BE() {
   thread func_52BC(1);
 }
 
-func_52BC(param_00) {
+func_52BC(var_0) {
   self notify("being_destroyed");
   self.var_2A88 = 1;
-  if(param_00) {
+  if(var_0) {
     self fadeovertime(0.5);
     self.alpha = 0;
     wait(0.5);
@@ -1386,12 +1386,12 @@ func_52BC(param_00) {
   self destroy();
 }
 
-func_B4DA(param_00) {
-  if(!isDefined(param_00)) {
+func_B4DA(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(isDefined(param_00.var_2A88)) {
+  if(isDefined(var_0.var_2A88)) {
     return 0;
   }
 
@@ -1415,9 +1415,9 @@ func_11432() {
 }
 
 func_8C1D() {
-  var_00 = self getweaponslist("offhand");
-  foreach(var_02 in var_00) {
-    if(issubstr(var_02, "offhandshield")) {
+  var_0 = self getweaponslist("offhand");
+  foreach(var_2 in var_0) {
+    if(issubstr(var_2, "offhandshield")) {
       return 1;
     }
   }
@@ -1462,8 +1462,8 @@ func_FF8B() {
     return 0;
   }
 
-  var_00 = self _meth_8139("takeCoverWarnings");
-  if(var_00 <= 3) {
+  var_0 = self _meth_8139("takeCoverWarnings");
+  if(var_0 <= 3) {
     return 0;
   }
 
@@ -1499,8 +1499,8 @@ func_FF89() {
     return 0;
   }
 
-  var_00 = self _meth_8139("takeCoverWarnings");
-  if(var_00 <= 3) {
+  var_0 = self _meth_8139("takeCoverWarnings");
+  if(var_0 <= 3) {
     return 0;
   }
 
@@ -1532,15 +1532,15 @@ jackal_arena_is_early_in_the_game() {
 }
 
 get_num_jackal_arenas_completed() {
-  var_00 = 0;
-  foreach(var_02 in maps_with_jackal_arenas()) {
-    var_03 = level.player _meth_84C6("missionStateData", var_02);
-    if(isDefined(var_03) && var_03 == "complete") {
-      var_00++;
+  var_0 = 0;
+  foreach(var_2 in maps_with_jackal_arenas()) {
+    var_3 = level.player _meth_84C6("missionStateData", var_2);
+    if(isDefined(var_3) && var_3 == "complete") {
+      var_0++;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 map_has_jackal_arena() {
@@ -1551,25 +1551,25 @@ map_has_jackal_arena() {
   return 0;
 }
 
-func_11430(param_00) {
+func_11430(var_0) {
   self endon("hit_again");
   self endon("damage");
   self endon("death");
-  childthread func_DE16(param_00);
+  childthread func_DE16(var_0);
   if(level.player scripts\sp\utility::func_7B93() < 2) {
-    var_01 = func_7D51();
-    var_02 = [[var_01]]();
-    var_03 = gettime() + self.gs.longregentime;
-    func_4766(1, var_02);
-    while(gettime() < var_03 && isalive(self) && scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\utility::func_65DB("player_retract_shield_active")) {
-      func_4766(0.9, var_02);
+    var_1 = func_7D51();
+    var_2 = [[var_1]]();
+    var_3 = gettime() + self.gs.longregentime;
+    func_4766(1, var_2);
+    while(gettime() < var_3 && isalive(self) && scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\utility::func_65DB("player_retract_shield_active")) {
+      func_4766(0.9, var_2);
     }
 
     if(isalive(self)) {
-      func_4766(0.65, var_02);
+      func_4766(0.65, var_2);
     }
 
-    func_4766(0, var_02);
+    func_4766(0, var_2);
   }
 
   scripts\sp\utility::func_65E3("redflashoverlay_complete");
@@ -1577,13 +1577,13 @@ func_11430(param_00) {
   self notify("hit_again");
 }
 
-func_4766(param_00, param_01) {
-  if(getomnvar("ui_gettocover_state") == 0 && param_00 == 0 || param_00 == 5) {
+func_4766(var_0, var_1) {
+  if(getomnvar("ui_gettocover_state") == 0 && var_0 == 0 || var_0 == 5) {
     return;
   }
 
-  if(param_00 == 1) {
-    if(param_01) {
+  if(var_0 == 1) {
+    if(var_1) {
       setomnvar("ui_gettocover_state", 1);
     }
 
@@ -1591,8 +1591,8 @@ func_4766(param_00, param_01) {
     return;
   }
 
-  if(param_00 == 0.9) {
-    if(param_01) {
+  if(var_0 == 0.9) {
+    if(var_1) {
       setomnvar("ui_gettocover_state", 2);
     }
 
@@ -1600,8 +1600,8 @@ func_4766(param_00, param_01) {
     return;
   }
 
-  if(param_00 == 6.5) {
-    if(param_01) {
+  if(var_0 == 6.5) {
+    if(var_1) {
       setomnvar("ui_gettocover_state", 3);
     }
 
@@ -1609,8 +1609,8 @@ func_4766(param_00, param_01) {
     return;
   }
 
-  if(param_00 == 0) {
-    if(param_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 4) {
+  if(var_0 == 0) {
+    if(var_1 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 4) {
       setomnvar("ui_gettocover_state", 4);
     }
 
@@ -1618,8 +1618,8 @@ func_4766(param_00, param_01) {
     return;
   }
 
-  if(param_00 == 5) {
-    if(param_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 5) {
+  if(var_0 == 5) {
+    if(var_1 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 5) {
       setomnvar("ui_gettocover_state", 5);
     }
 
@@ -1628,62 +1628,62 @@ func_4766(param_00, param_01) {
   }
 }
 
-func_DE16(param_00) {
+func_DE16(var_0) {
   scripts\sp\utility::func_65DD("redflashoverlay_complete");
-  var_01 = gettime() + level.player.gs.longregentime;
-  func_DE15(param_00, 1, 1);
-  while(gettime() < var_01 && isalive(level.player)) {
-    func_DE15(param_00, 0.9, 1);
+  var_1 = gettime() + level.player.gs.longregentime;
+  func_DE15(var_0, 1, 1);
+  while(gettime() < var_1 && isalive(level.player)) {
+    func_DE15(var_0, 0.9, 1);
   }
 
   if(isalive(level.player)) {
-    func_DE15(param_00, 0.65, 0.8);
+    func_DE15(var_0, 0.65, 0.8);
   }
 
-  func_DE15(param_00, 0, 0.6);
-  param_00 fadeovertime(0.5);
-  param_00.alpha = 0;
+  func_DE15(var_0, 0, 0.6);
+  var_0 fadeovertime(0.5);
+  var_0.alpha = 0;
   wait(0.5);
   scripts\sp\utility::func_65E3("redflashoverlay_complete");
 }
 
-func_DE15(param_00, param_01, param_02) {
-  var_03 = 0.8;
-  var_04 = 0.5;
-  var_05 = var_03 * 0.1;
-  var_06 = var_03 * 0.1 + param_01 * 0.2;
-  var_07 = var_03 * 0.1 + param_01 * 0.1;
-  var_08 = var_03 * 0.3;
-  var_09 = var_03 - var_05 - var_06 - var_07 - var_08;
-  if(var_09 < 0) {
-    var_09 = 0;
+func_DE15(var_0, var_1, var_2) {
+  var_3 = 0.8;
+  var_4 = 0.5;
+  var_5 = var_3 * 0.1;
+  var_6 = var_3 * 0.1 + var_1 * 0.2;
+  var_7 = var_3 * 0.1 + var_1 * 0.1;
+  var_8 = var_3 * 0.3;
+  var_9 = var_3 - var_5 - var_6 - var_7 - var_8;
+  if(var_9 < 0) {
+    var_9 = 0;
   }
 
-  var_0A = 0.8 + param_01 * 0.1;
-  var_0B = 0.5 + param_01 * 0.3;
-  param_00 fadeovertime(var_05);
-  param_00.alpha = param_02 * 1;
-  wait(var_05 + var_06);
-  param_00 fadeovertime(var_07);
-  param_00.alpha = param_02 * var_0A;
-  wait(var_07);
-  param_00 fadeovertime(var_08);
-  param_00.alpha = param_02 * var_0B;
-  wait(var_08);
-  wait(var_09);
+  var_0A = 0.8 + var_1 * 0.1;
+  var_0B = 0.5 + var_1 * 0.3;
+  var_0 fadeovertime(var_5);
+  var_0.alpha = var_2 * 1;
+  wait(var_5 + var_6);
+  var_0 fadeovertime(var_7);
+  var_0.alpha = var_2 * var_0A;
+  wait(var_7);
+  var_0 fadeovertime(var_8);
+  var_0.alpha = var_2 * var_0B;
+  wait(var_8);
+  wait(var_9);
 }
 
 func_7D51() {
-  var_00 = undefined;
+  var_0 = undefined;
   if(func_8C1D() && func_E34F()) {
-    var_00 = ::func_FF8B;
+    var_0 = ::func_FF8B;
     setomnvar("ui_gettocover_text", "game_use_retract_shield");
   } else {
-    var_00 = ::func_FF89;
+    var_0 = ::func_FF89;
     setomnvar("ui_gettocover_text", "game_get_to_cover");
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_7A59() {
@@ -1704,9 +1704,9 @@ func_D259() {
   self notify("take_cover_done");
 }
 
-func_8CBB(param_00) {
+func_8CBB(var_0) {
   self waittill("noHealthOverlay");
-  param_00 destroy();
+  var_0 destroy();
 }
 
 func_E26C() {
@@ -1715,8 +1715,8 @@ func_E26C() {
 }
 
 func_9772() {
-  var_00 = isDefined(level.var_9F0B) && level.var_9F0B;
-  if(self _meth_8139("takeCoverWarnings") == -1 || var_00) {
+  var_0 = isDefined(level.var_9F0B) && level.var_9F0B;
+  if(self _meth_8139("takeCoverWarnings") == -1 || var_0) {
     self _meth_8302("takeCoverWarnings", 9);
   }
 }
@@ -1733,22 +1733,22 @@ func_93F7() {
     return;
   }
 
-  var_00 = self _meth_8139("takeCoverWarnings");
-  if(var_00 < 10) {
-    self _meth_8302("takeCoverWarnings", var_00 + 1);
+  var_0 = self _meth_8139("takeCoverWarnings");
+  if(var_0 < 10) {
+    self _meth_8302("takeCoverWarnings", var_0 + 1);
   }
 }
 
 func_2624() {
-  var_00 = self.origin;
+  var_0 = self.origin;
   wait(5);
-  if(func_2693(var_00)) {
-    level.var_2641[level.var_2641.size] = var_00;
+  if(func_2693(var_0)) {
+    level.var_2641[level.var_2641.size] = var_0;
   }
 }
 
-func_2693(param_00) {
-  return distancesquared(self.origin, param_00) < 19600;
+func_2693(var_0) {
+  return distancesquared(self.origin, var_0) < 19600;
 }
 
 func_2623() {
@@ -1758,150 +1758,150 @@ func_2623() {
   for(;;) {
     level.player thread func_2624();
     level.player.var_BCB6 = 1;
-    var_00 = [];
-    var_01 = level.var_2641.size - 5;
-    if(var_01 < 0) {
-      var_01 = 0;
+    var_0 = [];
+    var_1 = level.var_2641.size - 5;
+    if(var_1 < 0) {
+      var_1 = 0;
     }
 
-    for(var_02 = var_01; var_02 < level.var_2641.size; var_02++) {
-      if(!level.player func_2693(level.var_2641[var_02])) {
+    for(var_2 = var_1; var_2 < level.var_2641.size; var_2++) {
+      if(!level.player func_2693(level.var_2641[var_2])) {
         continue;
       }
 
-      var_00[var_00.size] = level.var_2641[var_02];
+      var_0[var_0.size] = level.var_2641[var_2];
       level.player.var_BCB6 = 0;
     }
 
-    level.var_2641 = var_00;
+    level.var_2641 = var_0;
     wait(1);
   }
 }
 
 func_2625() {
   level.player waittill("death");
-  var_00 = getdvarint("autodifficulty_playerDeathTimer");
-  var_00 = var_00 - 60;
-  setdvar("autodifficulty_playerDeathTimer", var_00);
+  var_0 = getdvarint("autodifficulty_playerDeathTimer");
+  var_0 = var_0 - 60;
+  setdvar("autodifficulty_playerDeathTimer", var_0);
 }
 
 func_2626() {
-  var_00 = gettime();
+  var_0 = gettime();
   for(;;) {
     if(level.player attackbuttonpressed()) {
-      var_00 = gettime();
+      var_0 = gettime();
     }
 
-    level.var_118E5 = gettime() - var_00;
+    level.var_118E5 = gettime() - var_0;
     wait(0.05);
   }
 }
 
-func_9138(param_00, param_01) {
-  func_9137(param_00, param_01 * 100, 1);
+func_9138(var_0, var_1) {
+  func_9137(var_0, var_1 * 100, 1);
 }
 
-func_9136(param_00, param_01) {
-  func_9137(param_00, param_01, 0);
+func_9136(var_0, var_1) {
+  func_9137(var_0, var_1, 0);
 }
 
 func_913D() {
   level.var_9184 = 0;
   if(isDefined(level.var_9177)) {
-    for(var_00 = 0; var_00 < level.var_9177.size; var_00++) {
-      level.var_9177[var_00] destroy();
+    for(var_0 = 0; var_0 < level.var_9177.size; var_0++) {
+      level.var_9177[var_0] destroy();
     }
   }
 
   level.var_9177 = [];
 }
 
-func_9139(param_00) {
+func_9139(var_0) {
   if(!isDefined(level.var_9183)) {
     level.var_9183 = [];
   }
 
-  if(!isDefined(level.var_9183[param_00])) {
-    var_01 = newhudelem();
-    var_01.x = level.var_4F47;
-    var_01.y = level.var_4F45 + level.var_9184 * 15;
-    var_01.foreground = 1;
-    var_01.sort = 100;
-    var_01.alpha = 1;
-    var_01.alignx = "left";
-    var_01.horzalign = "left";
-    var_01.fontscale = 1;
-    var_01 settext(param_00);
-    level.var_9183[param_00] = 1;
+  if(!isDefined(level.var_9183[var_0])) {
+    var_1 = newhudelem();
+    var_1.x = level.var_4F47;
+    var_1.y = level.var_4F45 + level.var_9184 * 15;
+    var_1.foreground = 1;
+    var_1.sort = 100;
+    var_1.alpha = 1;
+    var_1.alignx = "left";
+    var_1.horzalign = "left";
+    var_1.fontscale = 1;
+    var_1 settext(var_0);
+    level.var_9183[var_0] = 1;
   }
 }
 
-func_9137(param_00, param_01, param_02) {
-  func_9139(param_00);
-  param_01 = int(param_01);
-  var_03 = 0;
-  if(param_01 < 0) {
-    var_03 = 1;
-    param_01 = param_01 * -1;
+func_9137(var_0, var_1, var_2) {
+  func_9139(var_0);
+  var_1 = int(var_1);
+  var_3 = 0;
+  if(var_1 < 0) {
+    var_3 = 1;
+    var_1 = var_1 * -1;
   }
 
-  var_04 = 0;
-  var_05 = 0;
-  var_06 = 0;
-  var_07 = 0;
-  while(param_01 >= 10000) {
-    param_01 = param_01 - 10000;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 0;
+  while(var_1 >= 10000) {
+    var_1 = var_1 - 10000;
   }
 
-  while(param_01 >= 1000) {
-    param_01 = param_01 - 1000;
-    var_04++;
+  while(var_1 >= 1000) {
+    var_1 = var_1 - 1000;
+    var_4++;
   }
 
-  while(param_01 >= 100) {
-    param_01 = param_01 - 100;
-    var_05++;
+  while(var_1 >= 100) {
+    var_1 = var_1 - 100;
+    var_5++;
   }
 
-  while(param_01 >= 10) {
-    param_01 = param_01 - 10;
-    var_06++;
+  while(var_1 >= 10) {
+    var_1 = var_1 - 10;
+    var_6++;
   }
 
-  while(param_01 >= 1) {
-    param_01 = param_01 - 1;
-    var_07++;
+  while(var_1 >= 1) {
+    var_1 = var_1 - 1;
+    var_7++;
   }
 
-  var_08 = 0;
-  var_09 = 10;
-  if(var_04 > 0) {
-    func_913A(var_04, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_05, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_06, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_07, var_08);
-    var_08 = var_08 + var_09;
-  } else if(var_05 > 0 || param_02) {
-    func_913A(var_05, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_06, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_07, var_08);
-    var_08 = var_08 + var_09;
-  } else if(var_06 > 0) {
-    func_913A(var_06, var_08);
-    var_08 = var_08 + var_09;
-    func_913A(var_07, var_08);
-    var_08 = var_08 + var_09;
+  var_8 = 0;
+  var_9 = 10;
+  if(var_4 > 0) {
+    func_913A(var_4, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_5, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_6, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_7, var_8);
+    var_8 = var_8 + var_9;
+  } else if(var_5 > 0 || var_2) {
+    func_913A(var_5, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_6, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_7, var_8);
+    var_8 = var_8 + var_9;
+  } else if(var_6 > 0) {
+    func_913A(var_6, var_8);
+    var_8 = var_8 + var_9;
+    func_913A(var_7, var_8);
+    var_8 = var_8 + var_9;
   } else {
-    func_913A(var_07, var_08);
-    var_08 = var_08 + var_09;
+    func_913A(var_7, var_8);
+    var_8 = var_8 + var_9;
   }
 
-  if(param_02) {
+  if(var_2) {
     var_0A = newhudelem();
     var_0A.x = 204.5;
     var_0A.y = level.var_4F45 + level.var_9184 * 15;
@@ -1915,7 +1915,7 @@ func_9137(param_00, param_01, param_02) {
     level.var_9177[level.var_9177.size] = var_0A;
   }
 
-  if(var_03) {
+  if(var_3) {
     var_0B = newhudelem();
     var_0B.x = 195.5;
     var_0B.y = level.var_4F45 + level.var_9184 * 15;
@@ -1932,38 +1932,38 @@ func_9137(param_00, param_01, param_02) {
   level.var_9184++;
 }
 
-func_913C(param_00, param_01) {
-  func_9139(param_00);
-  func_913B(param_01, 0);
+func_913C(var_0, var_1) {
+  func_9139(var_0);
+  func_913B(var_1, 0);
   level.var_9184++;
 }
 
-func_913A(param_00, param_01) {
-  var_02 = newhudelem();
-  var_02.x = 200 + param_01 * 0.65;
-  var_02.y = level.var_4F45 + level.var_9184 * 15;
-  var_02.foreground = 1;
-  var_02.sort = 100;
-  var_02.alpha = 1;
-  var_02.alignx = "left";
-  var_02.horzalign = "left";
-  var_02.fontscale = 1;
-  var_02 settext(param_00 + "");
-  level.var_9177[level.var_9177.size] = var_02;
+func_913A(var_0, var_1) {
+  var_2 = newhudelem();
+  var_2.x = 200 + var_1 * 0.65;
+  var_2.y = level.var_4F45 + level.var_9184 * 15;
+  var_2.foreground = 1;
+  var_2.sort = 100;
+  var_2.alpha = 1;
+  var_2.alignx = "left";
+  var_2.horzalign = "left";
+  var_2.fontscale = 1;
+  var_2 settext(var_0 + "");
+  level.var_9177[level.var_9177.size] = var_2;
 }
 
-func_913B(param_00, param_01) {
-  var_02 = newhudelem();
-  var_02.x = 200 + param_01 * 0.65;
-  var_02.y = level.var_4F45 + level.var_9184 * 15;
-  var_02.foreground = 1;
-  var_02.sort = 100;
-  var_02.alpha = 1;
-  var_02.alignx = "left";
-  var_02.horzalign = "left";
-  var_02.fontscale = 1;
-  var_02 settext(param_00);
-  level.var_9177[level.var_9177.size] = var_02;
+func_913B(var_0, var_1) {
+  var_2 = newhudelem();
+  var_2.x = 200 + var_1 * 0.65;
+  var_2.y = level.var_4F45 + level.var_9184 * 15;
+  var_2.foreground = 1;
+  var_2.sort = 100;
+  var_2.alpha = 1;
+  var_2.alignx = "left";
+  var_2.horzalign = "left";
+  var_2.fontscale = 1;
+  var_2 settext(var_0);
+  level.var_9177[level.var_9177.size] = var_2;
 }
 
 func_14ED() {
@@ -1986,14 +1986,14 @@ func_14ED() {
   scripts\engine\utility::flag_set("aa_main_" + level.script);
 }
 
-func_4423(param_00) {
-  var_01 = getkeybinding(param_00);
-  if(var_01["count"] <= 0) {
+func_4423(var_0) {
+  var_1 = getkeybinding(var_0);
+  if(var_1["count"] <= 0) {
     return 0;
   }
 
-  for(var_02 = 1; var_02 < var_01["count"] + 1; var_02++) {
-    if(self buttonpressed(var_01["key" + var_02])) {
+  for(var_2 = 1; var_2 < var_1["count"] + 1; var_2++) {
+    if(self buttonpressed(var_1["key" + var_2])) {
       return 1;
     }
   }
@@ -2025,8 +2025,8 @@ func_14EF() {
 
 func_14F1() {
   for(;;) {
-    level.player waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06);
-    func_14DB("aa_player_damage_taken", var_00);
+    level.player waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+    func_14DB("aa_player_damage_taken", var_0);
     if(!isalive(level.player)) {
       func_14DB("aa_deaths", 1);
       return;
@@ -2034,50 +2034,50 @@ func_14F1() {
   }
 }
 
-func_262A(param_00) {
+func_262A(var_0) {
   if(!isDefined(level.var_2629)) {
     level.var_2629 = [];
   }
 
   scripts\engine\utility::flag_wait("auto_adjust_initialized");
-  level.var_262B[param_00] = [];
-  level.var_2629[param_00] = 0;
-  scripts\engine\utility::flag_wait(param_00);
-  if(getdvar("aa_zone" + param_00) == "") {
-    setdvar("aa_zone" + param_00, "on");
-    level.var_2629[param_00] = 1;
+  level.var_262B[var_0] = [];
+  level.var_2629[var_0] = 0;
+  scripts\engine\utility::flag_wait(var_0);
+  if(getdvar("aa_zone" + var_0) == "") {
+    setdvar("aa_zone" + var_0, "on");
+    level.var_2629[var_0] = 1;
     func_14F5();
-    setdvar("start_time" + param_00, getdvar("aa_time_tracking"));
-    setdvar("starting_player_kills" + param_00, getdvar("aa_player_kills"));
-    setdvar("starting_deaths" + param_00, getdvar("aa_deaths"));
-    setdvar("starting_ads_damage_dealt" + param_00, getdvar("aa_ads_damage_dealt"));
-    setdvar("starting_player_damage_dealt" + param_00, getdvar("aa_player_damage_dealt"));
-    setdvar("starting_player_damage_taken" + param_00, getdvar("aa_player_damage_taken"));
-    setdvar("starting_enemy_damage_taken" + param_00, getdvar("aa_enemy_damage_taken"));
-    setdvar("starting_enemy_deaths" + param_00, getdvar("aa_enemy_deaths"));
-  } else if(getdvar("aa_zone" + param_00) == "done") {
+    setdvar("start_time" + var_0, getdvar("aa_time_tracking"));
+    setdvar("starting_player_kills" + var_0, getdvar("aa_player_kills"));
+    setdvar("starting_deaths" + var_0, getdvar("aa_deaths"));
+    setdvar("starting_ads_damage_dealt" + var_0, getdvar("aa_ads_damage_dealt"));
+    setdvar("starting_player_damage_dealt" + var_0, getdvar("aa_player_damage_dealt"));
+    setdvar("starting_player_damage_taken" + var_0, getdvar("aa_player_damage_taken"));
+    setdvar("starting_enemy_damage_taken" + var_0, getdvar("aa_enemy_damage_taken"));
+    setdvar("starting_enemy_deaths" + var_0, getdvar("aa_enemy_deaths"));
+  } else if(getdvar("aa_zone" + var_0) == "done") {
     return;
   }
 
-  scripts\engine\utility::flag_waitopen(param_00);
-  func_262C(param_00);
+  scripts\engine\utility::flag_waitopen(var_0);
+  func_262C(var_0);
 }
 
-func_262C(param_00) {
-  setdvar("aa_zone" + param_00, "done");
-  var_01 = getdvarfloat("start_time" + param_00);
-  var_02 = getdvarint("starting_player_kills" + param_00);
-  var_03 = getdvarint("aa_enemy_deaths" + param_00);
-  var_04 = getdvarint("aa_enemy_damage_taken" + param_00);
-  var_05 = getdvarint("aa_player_damage_taken" + param_00);
-  var_06 = getdvarint("aa_player_damage_dealt" + param_00);
-  var_07 = getdvarint("aa_ads_damage_dealt" + param_00);
-  var_08 = getdvarint("aa_deaths" + param_00);
-  level.var_2629[param_00] = 0;
+func_262C(var_0) {
+  setdvar("aa_zone" + var_0, "done");
+  var_1 = getdvarfloat("start_time" + var_0);
+  var_2 = getdvarint("starting_player_kills" + var_0);
+  var_3 = getdvarint("aa_enemy_deaths" + var_0);
+  var_4 = getdvarint("aa_enemy_damage_taken" + var_0);
+  var_5 = getdvarint("aa_player_damage_taken" + var_0);
+  var_6 = getdvarint("aa_player_damage_dealt" + var_0);
+  var_7 = getdvarint("aa_ads_damage_dealt" + var_0);
+  var_8 = getdvarint("aa_deaths" + var_0);
+  level.var_2629[var_0] = 0;
   func_14F5();
-  var_09 = getdvarfloat("aa_time_tracking") - var_01;
-  var_0A = getdvarint("aa_player_kills") - var_02;
-  var_0B = getdvarint("aa_enemy_deaths") - var_03;
+  var_9 = getdvarfloat("aa_time_tracking") - var_1;
+  var_0A = getdvarint("aa_player_kills") - var_2;
+  var_0B = getdvarint("aa_enemy_deaths") - var_3;
   var_0C = 0;
   if(var_0B > 0) {
     var_0C = var_0A / var_0B;
@@ -2085,20 +2085,20 @@ func_262C(param_00) {
     var_0C = int(var_0C);
   }
 
-  var_0D = getdvarint("aa_enemy_damage_taken") - var_04;
-  var_0E = getdvarint("aa_player_damage_dealt") - var_06;
+  var_0D = getdvarint("aa_enemy_damage_taken") - var_4;
+  var_0E = getdvarint("aa_player_damage_dealt") - var_6;
   var_0F = 0;
   var_10 = 0;
-  if(var_0D > 0 && var_09 > 0) {
+  if(var_0D > 0 && var_9 > 0) {
     var_0F = var_0E / var_0D;
     var_0F = var_0F * 100;
     var_0F = int(var_0F);
-    var_10 = var_0E / var_09;
+    var_10 = var_0E / var_9;
     var_10 = var_10 * 60;
     var_10 = int(var_10);
   }
 
-  var_11 = getdvarint("aa_ads_damage_dealt") - var_07;
+  var_11 = getdvarint("aa_ads_damage_dealt") - var_7;
   var_12 = 0;
   if(var_0E > 0) {
     var_12 = var_11 / var_0E;
@@ -2106,24 +2106,24 @@ func_262C(param_00) {
     var_12 = int(var_12);
   }
 
-  var_13 = getdvarint("aa_player_damage_taken") - var_05;
+  var_13 = getdvarint("aa_player_damage_taken") - var_5;
   var_14 = 0;
-  if(var_09 > 0) {
-    var_14 = var_13 / var_09;
+  if(var_9 > 0) {
+    var_14 = var_13 / var_9;
   }
 
   var_15 = var_14 * 60;
   var_15 = int(var_15);
-  var_16 = getdvarint("aa_deaths") - var_08;
+  var_16 = getdvarint("aa_deaths") - var_8;
   var_17 = [];
   var_17["player_damage_taken_per_minute"] = var_15;
   var_17["player_damage_dealt_per_minute"] = var_10;
-  var_17["minutes"] = var_09 / 60;
+  var_17["minutes"] = var_9 / 60;
   var_17["deaths"] = var_16;
   var_17["gameskill"] = level.var_7683;
-  level.var_262B[param_00] = var_17;
+  level.var_262B[var_0] = var_17;
   var_18 = "Completed AA sequence: ";
-  var_18 = var_18 + level.script + "\" + param_00;
+  var_18 = var_18 + level.script + "\" + var_0;
   var_19 = getarraykeys(var_17);
   for(var_1A = 0; var_1A < var_19.size; var_1A++) {
     var_18 = var_18 + ", " + var_19[var_1A] + ": " + var_17[var_19[var_1A]];
@@ -2132,109 +2132,109 @@ func_262C(param_00) {
   logstring(var_18);
 }
 
-func_14F2(param_00, param_01) {
-  logstring(param_00 + ": " + param_01[param_00]);
+func_14F2(var_0, var_1) {
+  logstring(var_0 + ": " + var_1[var_0]);
 }
 
 func_14F5() {}
 
-func_14DB(param_00, param_01) {
-  var_02 = getdvarint(param_00);
-  setdvar(param_00, var_02 + param_01);
+func_14DB(var_0, var_1) {
+  var_2 = getdvarint(var_0);
+  setdvar(var_0, var_2 + var_1);
 }
 
-func_14DC(param_00, param_01) {
-  var_02 = getdvarfloat(param_00);
-  setdvar(param_00, var_02 + param_01);
+func_14DC(var_0, var_1) {
+  var_2 = getdvarfloat(var_0);
+  setdvar(var_0, var_2 + var_1);
 }
 
-func_E44D(param_00) {
+func_E44D(var_0) {
   return 0;
 }
 
-func_CF80(param_00) {
-  if([[level.var_4C6B]](param_00)) {
+func_CF80(var_0) {
+  if([[level.var_4C6B]](var_0)) {
     return 1;
   }
 
-  if(isplayer(param_00)) {
+  if(isplayer(var_0)) {
     return 1;
   }
 
-  if(!isDefined(param_00.var_3A49)) {
+  if(!isDefined(var_0.var_3A49)) {
     return 0;
   }
 
-  return param_00 func_D021();
+  return var_0 func_D021();
 }
 
 func_D021() {
   return self.var_CFED * 1.75 > self.var_C078;
 }
 
-func_61BA(param_00, param_01, param_02) {}
+func_61BA(var_0, var_1, var_2) {}
 
-func_2628(param_00, param_01, param_02, param_03) {
+func_2628(var_0, var_1, var_2, var_3) {
   func_14DB("aa_enemy_deaths", 1);
-  if(!isDefined(param_01)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!func_CF80(param_01)) {
+  if(!func_CF80(var_1)) {
     return;
   }
 
-  [[level.vehicle_canturrettargetpoint]](param_02, self.var_DD, param_03);
+  [[level.vehicle_canturrettargetpoint]](var_2, self.var_DD, var_3);
   func_14DB("aa_player_kills", 1);
 }
 
-func_2627(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+func_2627(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isalive(self) || self.var_EB) {
-    func_2628(param_00, param_01, param_04, param_03);
+    func_2628(var_0, var_1, var_4, var_3);
     return;
   }
 
-  if(!func_CF80(param_01)) {
+  if(!func_CF80(var_1)) {
     return;
   }
 
-  func_14F0(param_00, param_04, param_03);
+  func_14F0(var_0, var_4, var_3);
 }
 
-func_14F0(param_00, param_01, param_02) {
-  func_14DB("aa_player_damage_dealt", param_00);
+func_14F0(var_0, var_1, var_2) {
+  func_14DB("aa_player_damage_dealt", var_0);
   if(!level.player scripts\sp\utility::func_9D27()) {
-    [[level._meth_83D3]](param_01, self.var_DD, param_02);
+    [[level._meth_83D3]](var_1, self.var_DD, var_2);
     return 0;
   }
 
-  if(!func_3234(param_01)) {
-    [[level._meth_83D3]](param_01, self.var_DD, param_02);
+  if(!func_3234(var_1)) {
+    [[level._meth_83D3]](var_1, self.var_DD, var_2);
     return 0;
   }
 
-  [[level._meth_83D4]](param_01, self.var_DD, param_02);
-  func_14DB("aa_ads_damage_dealt", param_00);
+  [[level._meth_83D4]](var_1, self.var_DD, var_2);
+  func_14DB("aa_ads_damage_dealt", var_0);
   return 1;
 }
 
-func_3234(param_00) {
-  if(param_00 == "MOD_PISTOL_BULLET") {
+func_3234(var_0) {
+  if(var_0 == "MOD_PISTOL_BULLET") {
     return 1;
   }
 
-  return param_00 == "MOD_RIFLE_BULLET";
+  return var_0 == "MOD_RIFLE_BULLET";
 }
 
-func_16D9(param_00, param_01, param_02) {
-  if(!isDefined(level.var_54D1[param_00])) {
-    level.var_54D1[param_00] = [];
+func_16D9(var_0, var_1, var_2) {
+  if(!isDefined(level.var_54D1[var_0])) {
+    level.var_54D1[var_0] = [];
   }
 
-  var_03 = [];
-  var_03["frac"] = param_01;
-  var_03["val"] = param_02;
-  level.var_54D1[param_00][level.var_54D1[param_00].size] = var_03;
+  var_3 = [];
+  var_3["frac"] = var_1;
+  var_3["val"] = var_2;
+  level.var_54D1[var_0][level.var_54D1[var_0].size] = var_3;
 }
 
 func_F385() {
@@ -2273,7 +2273,7 @@ func_13069() {
   return level.var_13069;
 }
 
-func_12855(param_00) {
+func_12855(var_0) {
   level.player endon("weapon_change");
   wait(10);
   if(scripts\engine\utility::flag("disable_weapon_help")) {
@@ -2312,7 +2312,7 @@ func_12855(param_00) {
     return;
   }
 
-  scripts\sp\utility::func_56BE(param_00, 6);
+  scripts\sp\utility::func_56BE(var_0, 6);
 }
 
 func_13C1A() {
@@ -2323,14 +2323,14 @@ func_13C1A() {
   scripts\sp\utility::func_16EB("alt_erad", &"WEAPON_HELP_ERAD_SHOTGUN_DPAD", ::func_1305E);
   scripts\sp\utility::func_16EB("alt_ripper", &"WEAPON_HELP_RIPPER_SMG_DPAD", ::func_13069);
   wait(30);
-  var_00 = scripts\sp\endmission::func_7F6B(level.script);
-  if(!isDefined(var_00)) {
+  var_0 = scripts\sp\endmission::func_7F6B(level.script);
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(scripts\sp\endmission::getitemslot(var_00)) {
+  if(scripts\sp\endmission::getitemslot(var_0)) {
     return;
-  } else if(scripts\sp\endmission::getitemdroporiginandangles(var_00)) {
+  } else if(scripts\sp\endmission::getitemdroporiginandangles(var_0)) {
     return;
   } else if(scripts\sp\utility::func_93A6()) {
     return;
@@ -2342,99 +2342,99 @@ func_13C1A() {
   level.var_1305F = 1;
   level.var_1305E = 1;
   level.var_13069 = 1;
-  var_01 = level.player _meth_84C6("hintAltM8");
-  var_02 = level.player _meth_84C6("hintAltFMG");
-  var_03 = level.player _meth_84C6("hintAltERAD");
-  var_04 = level.player _meth_84C6("hintAltRipper");
-  if(isDefined(var_01)) {
-    level.var_13062 = var_01;
+  var_1 = level.player _meth_84C6("hintAltM8");
+  var_2 = level.player _meth_84C6("hintAltFMG");
+  var_3 = level.player _meth_84C6("hintAltERAD");
+  var_4 = level.player _meth_84C6("hintAltRipper");
+  if(isDefined(var_1)) {
+    level.var_13062 = var_1;
   }
 
-  if(isDefined(var_02)) {
-    level.var_1305F = var_02;
+  if(isDefined(var_2)) {
+    level.var_1305F = var_2;
   }
 
-  if(isDefined(var_03)) {
-    level.var_1305E = var_03;
+  if(isDefined(var_3)) {
+    level.var_1305E = var_3;
   }
 
-  if(isDefined(var_04)) {
-    level.var_13069 = var_04;
+  if(isDefined(var_4)) {
+    level.var_13069 = var_4;
   }
 
-  var_05 = 0;
+  var_5 = 0;
   if(level.var_13062) {
-    var_05++;
+    var_5++;
   }
 
   if(level.var_1305F) {
-    var_05++;
+    var_5++;
   }
 
   if(level.var_1305E) {
-    var_05++;
+    var_5++;
   }
 
   if(level.var_13069) {
-    var_05++;
+    var_5++;
   }
 
   wait(300);
   for(;;) {
-    if(var_05 >= 3) {
+    if(var_5 >= 3) {
       return;
     }
 
-    level.player waittill("weapon_change", var_06);
-    var_07 = level.player _meth_8519(var_06, 1);
-    var_08 = getweaponbasename(var_06);
-    var_09 = "";
-    switch (var_08) {
+    level.player waittill("weapon_change", var_6);
+    var_7 = level.player _meth_8519(var_6, 1);
+    var_8 = getweaponbasename(var_6);
+    var_9 = "";
+    switch (var_8) {
       case "iw7_m8":
-        if(var_07) {
+        if(var_7) {
           if(!level.var_13062) {
             level.player _meth_84C7("hintAltM8", 1);
             level.var_13062 = 1;
-            var_05++;
+            var_5++;
           }
         } else {
-          var_09 = "alt_m8";
+          var_9 = "alt_m8";
         }
         break;
 
       case "iw7_fmg":
-        if(var_07) {
+        if(var_7) {
           if(!level.var_1305F) {
             level.player _meth_84C7("hintAltFMG", 1);
             level.var_1305F = 1;
-            var_05++;
+            var_5++;
           }
         } else {
-          var_09 = "alt_fmg";
+          var_9 = "alt_fmg";
         }
         break;
 
       case "iw7_erad":
-        if(var_07) {
+        if(var_7) {
           if(!level.var_1305E) {
             level.player _meth_84C7("hintAltERAD", 1);
             level.var_1305E = 1;
-            var_05++;
+            var_5++;
           }
         } else {
-          var_09 = "alt_erad";
+          var_9 = "alt_erad";
         }
         break;
 
       case "iw7_ripper":
-        if(var_07) {
+        if(var_7) {
           if(!level.var_13069) {
             level.player _meth_84C7("hintAltRipper", 1);
             level.var_13069 = 1;
-            var_05++;
+            var_5++;
           }
         } else {
-          var_09 = "alt_ripper";
+          var_9 = "alt_ripper";
         }
         break;
 
@@ -2442,8 +2442,8 @@ func_13C1A() {
         break;
     }
 
-    if(var_09 != "") {
-      thread func_12855(var_09);
+    if(var_9 != "") {
+      thread func_12855(var_9);
     }
   }
 }

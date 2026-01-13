@@ -37,21 +37,21 @@ func_10285() {
       continue;
     }
 
-    var_00 = undefined;
+    var_0 = undefined;
     if(isDefined(self.var_EE6B)) {
-      var_00 = self.var_EE6B;
+      var_0 = self.var_EE6B;
     }
 
     if(isDefined(self.var_EF1C) && isDefined(self.var_EF1B)) {
-      var_00 = [self.var_EF1C, self.var_EF1B];
+      var_0 = [self.var_EF1C, self.var_EF1B];
     }
 
-    var_01 = undefined;
+    var_1 = undefined;
     if(isDefined(self.var_EE11)) {
-      var_01 = self.var_EE11;
+      var_1 = self.var_EE11;
     }
 
-    func_10D23(self.target, var_00, var_01);
+    func_10D23(self.target, var_0, var_1);
   }
 }
 
@@ -63,338 +63,338 @@ func_10284() {
       continue;
     }
 
-    var_00 = 0;
+    var_0 = 0;
     if(func_C8ED("immediate", "")) {
-      var_00 = 1;
+      var_0 = 1;
     }
 
-    var_01 = 0;
+    var_1 = 0;
     if(func_C8ED("forGood", "")) {
-      var_01 = 1;
+      var_1 = 1;
     }
 
-    thread func_1103F(self.target, var_00, var_01);
+    thread func_1103F(self.target, var_0, var_1);
   }
 }
 
-func_10D23(param_00, param_01, param_02) {
-  level endon("stop_" + param_00);
+func_10D23(var_0, var_1, var_2) {
+  level endon("stop_" + var_0);
   if(getdvarint("skyambient_off")) {
     return;
   }
 
-  func_9746(param_00);
-  if(level.var_1027E[param_00].state) {
+  func_9746(var_0);
+  if(level.var_1027E[var_0].state) {
     return;
   }
 
-  level.var_1027E[param_00].state = 1;
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  level.var_1027E[var_0].state = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var_03 = 15;
+  var_3 = 15;
   if(isDefined(level.var_B460)) {
-    var_03 = level.var_B460;
+    var_3 = level.var_B460;
   }
 
-  var_04 = level.var_1027E[param_00].var_108D5;
+  var_4 = level.var_1027E[var_0].var_108D5;
   for(;;) {
     if(isDefined(level.var_B460)) {
-      var_03 = level.var_B460;
+      var_3 = level.var_B460;
     }
 
-    foreach(var_06 in var_04) {
-      if(isDefined(var_06.cooldown) && isDefined(var_06.lastspawntime)) {
-        if(gettime() - var_06.lastspawntime <= var_06.cooldown) {
+    foreach(var_6 in var_4) {
+      if(isDefined(var_6.cooldown) && isDefined(var_6.lastspawntime)) {
+        if(gettime() - var_6.lastspawntime <= var_6.cooldown) {
           continue;
         }
       }
 
-      var_07 = func_10283(var_06.spawners);
-      if(!isDefined(var_07)) {
+      var_7 = func_10283(var_6.spawners);
+      if(!isDefined(var_7)) {
         continue;
       }
 
-      if(level.var_11A24 >= var_03) {
+      if(level.var_11A24 >= var_3) {
         continue;
       }
 
-      var_06.lastspawntime = gettime();
-      var_08 = undefined;
-      if(!isDefined(var_07.target)) {
-        var_08 = scripts\sp\vehicle::func_13237(var_07);
+      var_6.lastspawntime = gettime();
+      var_8 = undefined;
+      if(!isDefined(var_7.target)) {
+        var_8 = scripts\sp\vehicle::func_13237(var_7);
       } else {
-        var_08 = var_07 scripts\sp\vehicle::func_1080B();
+        var_8 = var_7 scripts\sp\vehicle::func_1080B();
       }
 
-      var_08 notsolid();
-      var_08 dontcastshadows();
-      var_08.var_1326A = var_07;
-      level.var_1027E[param_00].precachesuit = scripts\engine\utility::array_add(level.var_1027E[param_00].precachesuit, var_08);
-      var_08 thread func_E02B(param_00);
-      var_09 = 0;
-      if(isaircraft(var_08) && !var_07 func_C8ED("no_chase", " ")) {
+      var_8 notsolid();
+      var_8 dontcastshadows();
+      var_8.var_1326A = var_7;
+      level.var_1027E[var_0].precachesuit = scripts\engine\utility::array_add(level.var_1027E[var_0].precachesuit, var_8);
+      var_8 thread func_E02B(var_0);
+      var_9 = 0;
+      if(isaircraft(var_8) && !var_7 func_C8ED("no_chase", " ")) {
         var_0A = 1;
-        if(level.var_11A24 >= var_03) {
+        if(level.var_11A24 >= var_3) {
           var_0A = 0;
-        } else if(!var_07 func_C8ED("always_chase", " ") && !scripts\engine\utility::cointoss()) {
+        } else if(!var_7 func_C8ED("always_chase", " ") && !scripts\engine\utility::cointoss()) {
           var_0A = 0;
         }
 
         if(var_0A) {
-          var_09 = 1;
-          var_08 thread func_48B2(var_07, undefined, param_00);
+          var_9 = 1;
+          var_8 thread func_48B2(var_7, undefined, var_0);
         }
       }
 
-      if(isDefined(var_07.var_EE11) && !var_09) {
+      if(isDefined(var_7.var_EE11) && !var_9) {
         var_0B = ["right", "left"];
         var_0B = scripts\engine\utility::array_randomize(var_0B);
-        var_0C = randomint(var_07.var_EE11 + 1);
+        var_0C = randomint(var_7.var_EE11 + 1);
         for(var_0D = 0; var_0D < var_0C; var_0D++) {
           var_0E = var_0B[var_0D];
           wait(0.1);
-          var_08 thread func_4958(var_0E);
+          var_8 thread func_4958(var_0E);
         }
       }
     }
 
-    if(isarray(param_01)) {
-      wait(randomfloatrange(param_01[0], param_01[1]));
+    if(isarray(var_1)) {
+      wait(randomfloatrange(var_1[0], var_1[1]));
       continue;
     }
 
-    wait(param_01);
+    wait(var_1);
   }
 }
 
-func_1103F(param_00, param_01, param_02) {
+func_1103F(var_0, var_1, var_2) {
   if(level.var_1027E.size == 0) {
     return;
   }
 
-  if(!level.var_1027E[param_00].state) {
+  if(!level.var_1027E[var_0].state) {
     return;
   }
 
-  level.var_1027E[param_00].state = 0;
-  level notify("stop_" + param_00);
-  if(isDefined(param_01) && param_01) {
-    foreach(var_04 in level.var_1027E[param_00].precachesuit) {
-      if(!isDefined(var_04)) {
+  level.var_1027E[var_0].state = 0;
+  level notify("stop_" + var_0);
+  if(isDefined(var_1) && var_1) {
+    foreach(var_4 in level.var_1027E[var_0].precachesuit) {
+      if(!isDefined(var_4)) {
         continue;
       }
 
-      if(isDefined(var_04.var_3D38)) {
-        if(isDefined(var_04.var_3D38.var_B911)) {
-          var_04.var_3D38.var_B911 delete();
+      if(isDefined(var_4.var_3D38)) {
+        if(isDefined(var_4.var_3D38.var_B911)) {
+          var_4.var_3D38.var_B911 delete();
         }
 
-        var_04.var_3D38 delete();
+        var_4.var_3D38 delete();
       }
 
-      if(isDefined(var_04.var_A420)) {
-        foreach(var_06 in var_04.var_A420) {
-          var_06 delete();
+      if(isDefined(var_4.var_A420)) {
+        foreach(var_6 in var_4.var_A420) {
+          var_6 delete();
         }
       }
 
-      var_04 delete();
+      var_4 delete();
     }
   }
 
-  if(isDefined(param_02) && param_02) {
-    func_40C5(param_00);
+  if(isDefined(var_2) && var_2) {
+    func_40C5(var_0);
   }
 }
 
-func_40C5(param_00) {
-  if(!isDefined(level.var_1027E[param_00])) {
+func_40C5(var_0) {
+  if(!isDefined(level.var_1027E[var_0])) {
     return;
   }
 
-  level notify("delete_" + param_00);
-  scripts\sp\utility::func_228A(getEntArray(param_00, "targetname"));
-  level.var_1027E[param_00] = undefined;
+  level notify("delete_" + var_0);
+  scripts\sp\utility::func_228A(getEntArray(var_0, "targetname"));
+  level.var_1027E[var_0] = undefined;
 }
 
-func_10283(param_00) {
-  var_01 = undefined;
-  var_02 = scripts\engine\utility::array_randomize(param_00);
-  foreach(var_04 in var_02) {
-    if(isDefined(var_04.disabled)) {
+func_10283(var_0) {
+  var_1 = undefined;
+  var_2 = scripts\engine\utility::array_randomize(var_0);
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4.disabled)) {
       continue;
     }
 
-    if(isDefined(var_04.var_C374) && isDefined(var_04.var_A9F3)) {
-      if(gettime() - var_04.var_A9F3 < var_04.var_C374) {
+    if(isDefined(var_4.var_C374) && isDefined(var_4.var_A9F3)) {
+      if(gettime() - var_4.var_A9F3 < var_4.var_C374) {
         continue;
       }
     }
 
-    var_01 = var_04;
-    var_01.var_A9F3 = gettime();
+    var_1 = var_4;
+    var_1.var_A9F3 = gettime();
     break;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_10282(param_00, param_01, param_02) {
-  level.var_1027E[param_00].var_108D5[param_01].cooldown = param_02 * 1000;
+func_10282(var_0, var_1, var_2) {
+  level.var_1027E[var_0].var_108D5[var_1].cooldown = var_2 * 1000;
 }
 
-func_9746(param_00) {
-  if(isDefined(level.var_1027E[param_00])) {
+func_9746(var_0) {
+  if(isDefined(level.var_1027E[var_0])) {
     return;
   }
 
-  level.var_1027E[param_00] = spawnStruct();
-  level.var_1027E[param_00].state = 0;
-  level.var_1027E[param_00].spawners = [];
-  level.var_1027E[param_00].precachesuit = [];
-  var_01 = func_9747(param_00);
-  level.var_1027E[param_00].var_108D5 = var_01;
+  level.var_1027E[var_0] = spawnStruct();
+  level.var_1027E[var_0].state = 0;
+  level.var_1027E[var_0].spawners = [];
+  level.var_1027E[var_0].precachesuit = [];
+  var_1 = func_9747(var_0);
+  level.var_1027E[var_0].var_108D5 = var_1;
 }
 
-func_9747(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  var_02 = 0;
-  var_03 = [];
-  foreach(var_05 in var_01) {
-    var_06 = "group_" + var_02;
-    if(isDefined(var_05.groupname)) {
-      var_06 = var_05.groupname;
+func_9747(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  var_2 = 0;
+  var_3 = [];
+  foreach(var_5 in var_1) {
+    var_6 = "group_" + var_2;
+    if(isDefined(var_5.groupname)) {
+      var_6 = var_5.groupname;
     } else {
-      var_02++;
+      var_2++;
     }
 
-    if(!isDefined(var_03[var_06])) {
-      var_03[var_06] = spawnStruct();
-      var_03[var_06].spawners = [];
+    if(!isDefined(var_3[var_6])) {
+      var_3[var_6] = spawnStruct();
+      var_3[var_6].spawners = [];
     }
 
-    var_05.var_C374 = 4;
-    if(isDefined(var_05.var_EE6B)) {
-      var_05.var_C374 = var_05.var_EE6B;
+    var_5.var_C374 = 4;
+    if(isDefined(var_5.var_EE6B)) {
+      var_5.var_C374 = var_5.var_EE6B;
     }
 
-    var_05.var_C374 = var_05.var_C374 * 1000;
-    var_03[var_06].spawners = scripts\engine\utility::array_add(var_03[var_06].spawners, var_05);
+    var_5.var_C374 = var_5.var_C374 * 1000;
+    var_3[var_6].spawners = scripts\engine\utility::array_add(var_3[var_6].spawners, var_5);
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_E02B(param_00) {
-  level endon("delete_" + param_00);
-  var_01 = 0;
+func_E02B(var_0) {
+  level endon("delete_" + var_0);
+  var_1 = 0;
   if(isaircraft(self)) {
     level.var_11A24++;
-    var_01 = 1;
+    var_1 = 1;
   }
 
   self waittill("death");
-  level.var_1027E[param_00].precachesuit = scripts\engine\utility::array_remove(level.var_1027E[param_00].precachesuit, self);
+  level.var_1027E[var_0].precachesuit = scripts\engine\utility::array_remove(level.var_1027E[var_0].precachesuit, self);
   if(isDefined(self.var_3D38)) {
-    level.var_1027E[param_00].var_3D3A = scripts\engine\utility::array_remove(level.var_1027E[param_00].var_3D3A, self);
+    level.var_1027E[var_0].var_3D3A = scripts\engine\utility::array_remove(level.var_1027E[var_0].var_3D3A, self);
   }
 
-  if(var_01) {
+  if(var_1) {
     level.var_11A24--;
   }
 }
 
-func_5582(param_00) {
-  var_01 = getEntArray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
-    if(isspawner(var_03)) {
-      var_03.disabled = 1;
+func_5582(var_0) {
+  var_1 = getEntArray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
+    if(isspawner(var_3)) {
+      var_3.disabled = 1;
     }
   }
 }
 
-func_6238(param_00) {
-  var_01 = getEntArray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
-    if(isspawner(var_03)) {
-      var_03.disabled = undefined;
+func_6238(var_0) {
+  var_1 = getEntArray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
+    if(isspawner(var_3)) {
+      var_3.disabled = undefined;
     }
   }
 }
 
-func_48B2(param_00, param_01, param_02) {
+func_48B2(var_0, var_1, var_2) {
   wait(randomfloatrange(0.5, 1.2));
   if(!isDefined(self)) {
     return;
   }
 
   thread func_A147();
-  var_03 = getcsplineid(param_00.target);
-  var_04 = getcsplinepointposition(var_03, 0);
-  var_05 = getcsplinepointtangent(var_03, 0);
-  var_06 = level.var_10281["axis"];
-  var_07 = "axis";
-  if(param_00.script_team == "axis") {
-    var_06 = level.var_10281["allies"];
-    var_07 = "allies";
+  var_3 = getcsplineid(var_0.target);
+  var_4 = getcsplinepointposition(var_3, 0);
+  var_5 = getcsplinepointtangent(var_3, 0);
+  var_6 = level.var_10281["axis"];
+  var_7 = "axis";
+  if(var_0.script_team == "axis") {
+    var_6 = level.var_10281["allies"];
+    var_7 = "allies";
   }
 
-  var_08 = spawnvehicle(var_06, param_00.target + "_chase", "jackal_un", var_04, var_05);
-  var_08.script_team = param_00.script_team;
-  var_08.origin = param_00.origin;
-  var_08.angles = param_00.angles;
-  var_08 _meth_8184();
-  var_08 notsolid();
-  var_08 dontcastshadows();
-  var_08 lib_0C24::func_10A49();
-  var_08 thread lib_0C24::func_517E();
-  self.var_3D38 = var_08;
-  if(!isDefined(level.var_1027E[param_02].var_3D3A)) {
-    level.var_1027E[param_02].var_3D3A = [];
-    thread func_3D39(param_02);
+  var_8 = spawnvehicle(var_6, var_0.target + "_chase", "jackal_un", var_4, var_5);
+  var_8.script_team = var_0.script_team;
+  var_8.origin = var_0.origin;
+  var_8.angles = var_0.angles;
+  var_8 _meth_8184();
+  var_8 notsolid();
+  var_8 dontcastshadows();
+  var_8 lib_0C24::func_10A49();
+  var_8 thread lib_0C24::func_517E();
+  self.var_3D38 = var_8;
+  if(!isDefined(level.var_1027E[var_2].var_3D3A)) {
+    level.var_1027E[var_2].var_3D3A = [];
+    thread func_3D39(var_2);
   }
 
-  var_09 = level.var_1027E[param_02].var_3D3A;
-  var_09[var_09.size] = self;
-  level.var_1027E[param_02].var_3D3A = var_09;
-  level.var_1027E[param_00.var_336].precachesuit = scripts\engine\utility::array_add(level.var_1027E[param_00.var_336].precachesuit, var_08);
-  var_08 thread func_E02B(param_00.var_336);
-  var_0A = func_4921(var_08.origin, var_08.angles, var_07);
-  var_08.var_B921 = var_0A;
+  var_9 = level.var_1027E[var_2].var_3D3A;
+  var_9[var_9.size] = self;
+  level.var_1027E[var_2].var_3D3A = var_9;
+  level.var_1027E[var_0.var_336].precachesuit = scripts\engine\utility::array_add(level.var_1027E[var_0.var_336].precachesuit, var_8);
+  var_8 thread func_E02B(var_0.var_336);
+  var_0A = func_4921(var_8.origin, var_8.angles, var_7);
+  var_8.var_B921 = var_0A;
   var_0B = 1000;
-  param_01 = (randomint(var_0B), randomint(500), randomint(var_0B));
-  var_0A linkto(var_08, "tag_origin", param_01, (0, 0, 0));
-  var_08 thread lib_0BDC::func_A342(var_03);
-  var_08 waittill("death");
+  var_1 = (randomint(var_0B), randomint(500), randomint(var_0B));
+  var_0A linkto(var_8, "tag_origin", var_1, (0, 0, 0));
+  var_8 thread lib_0BDC::func_A342(var_3);
+  var_8 waittill("death");
   var_0A delete();
 }
 
-func_3D39(param_00) {
-  level endon("stop_" + param_00);
-  var_01 = cos(25);
+func_3D39(var_0) {
+  level endon("stop_" + var_0);
+  var_1 = cos(25);
   for(;;) {
     wait(randomfloatrange(5, 7));
-    var_02 = level.var_1027E[param_00].var_3D3A;
-    var_03 = undefined;
-    var_04 = undefined;
-    foreach(var_03 in var_02) {
-      if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_03.origin, var_01)) {
-        var_04 = var_03;
+    var_2 = level.var_1027E[var_0].var_3D3A;
+    var_3 = undefined;
+    var_4 = undefined;
+    foreach(var_3 in var_2) {
+      if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_3.origin, var_1)) {
+        var_4 = var_3;
         break;
       }
     }
 
-    if(!isDefined(var_04)) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    var_04 scripts\sp\utility::func_54C6();
+    var_4 scripts\sp\utility::func_54C6();
   }
 }
 
-func_4958(param_00) {
+func_4958(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -404,62 +404,62 @@ func_4958(param_00) {
   }
 
   if(isaircraft(self)) {
-    var_01 = func_4921(self.origin, self.angles, self.script_team);
+    var_1 = func_4921(self.origin, self.angles, self.script_team);
   } else {
-    var_01 = self.var_1326A scripts\sp\utility::func_10808();
+    var_1 = self.var_1326A scripts\sp\utility::func_10808();
   }
 
-  self.var_A420[param_00] = var_01;
-  var_02 = (0, 0, randomintrange(-500, 500));
-  var_03 = randomintrange(-1000, -500);
+  self.var_A420[var_0] = var_1;
+  var_2 = (0, 0, randomintrange(-500, 500));
+  var_3 = randomintrange(-1000, -500);
   if(scripts\engine\utility::cointoss()) {
-    var_03 = var_03 * -1;
+    var_3 = var_3 * -1;
   }
 
-  var_04 = randomintrange(800, 1300);
-  if(param_00 == "left") {
-    var_04 = var_04 * -1;
+  var_4 = randomintrange(800, 1300);
+  if(var_0 == "left") {
+    var_4 = var_4 * -1;
   }
 
-  var_02 = (var_03, var_04, var_02[2]);
-  var_01 linkto(self, "tag_origin", var_02, (0, 0, 0));
+  var_2 = (var_3, var_4, var_2[2]);
+  var_1 linkto(self, "tag_origin", var_2, (0, 0, 0));
   self waittill("death");
-  if(isDefined(var_01)) {
-    var_01 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
   }
 }
 
-func_4921(param_00, param_01, param_02) {
-  var_03 = level.var_10281[param_02];
-  var_04 = undefined;
+func_4921(var_0, var_1, var_2) {
+  var_3 = level.var_10281[var_2];
+  var_4 = undefined;
   if(!isDefined(level.var_1027F) || isDefined(level.var_1027F) && level.var_1027F) {
-    var_04 = % jackal_vehicle_strike_state_idle;
-    if(param_02 == "axis") {
-      var_04 = % jackal_ca_vehicle_strike_state_idle;
+    var_4 = % jackal_vehicle_strike_state_idle;
+    if(var_2 == "axis") {
+      var_4 = % jackal_ca_vehicle_strike_state_idle;
     }
   }
 
-  var_05 = spawn("script_model", param_00);
-  var_05 setModel(var_03);
-  var_05 notsolid();
-  var_05 dontcastshadows();
-  var_05 glinton(#animtree);
-  var_05.angles = param_01;
-  var_05.script_team = param_02;
-  var_05.var_380 = self.var_380;
-  var_05 lib_0C20::func_7598(0);
-  var_05 lib_0C1A::func_25C5();
-  if(isDefined(var_04)) {
-    var_05 setanimknob(var_04, 1, 0.2);
+  var_5 = spawn("script_model", var_0);
+  var_5 setModel(var_3);
+  var_5 notsolid();
+  var_5 dontcastshadows();
+  var_5 glinton(#animtree);
+  var_5.angles = var_1;
+  var_5.script_team = var_2;
+  var_5.var_380 = self.var_380;
+  var_5 lib_0C20::func_7598(0);
+  var_5 lib_0C1A::func_25C5();
+  if(isDefined(var_4)) {
+    var_5 setanimknob(var_4, 1, 0.2);
   }
 
-  var_05 give_attacker_kill_rewards( % jackal_motion_idle_ai, 1, 0);
-  var_05 lib_0C24::func_10A49();
-  var_05 lib_0C20::func_11132();
-  var_05.var_284B = 0;
-  var_05.var_284C[0] = "tag_flash_left";
-  var_05.var_284C[1] = "tag_flash_right";
-  return var_05;
+  var_5 give_attacker_kill_rewards( % jackal_motion_idle_ai, 1, 0);
+  var_5 lib_0C24::func_10A49();
+  var_5 lib_0C20::func_11132();
+  var_5.var_284B = 0;
+  var_5.var_284C[0] = "tag_flash_left";
+  var_5.var_284C[1] = "tag_flash_right";
+  return var_5;
 }
 
 func_A147() {
@@ -474,26 +474,26 @@ func_A147() {
   }
 }
 
-func_A1C2(param_00) {
+func_A1C2(var_0) {
   self endon("stop_firing_turrets_scripted");
   self endon("death");
   self endon("entitydeleted");
-  param_00 endon("death");
+  var_0 endon("death");
   for(;;) {
     wait(randomfloatrange(2, 4));
-    var_01 = gettime();
-    var_02 = randomfloatrange(1, 3);
-    while(gettime() - var_01 <= var_02) {
-      func_B912(param_00);
+    var_1 = gettime();
+    var_2 = randomfloatrange(1, 3);
+    while(gettime() - var_1 <= var_2) {
+      func_B912(var_0);
       wait(0.1);
     }
   }
 }
 
-func_B912(param_00) {
-  var_01 = self gettagorigin(self.var_284C[self.var_284B]);
-  var_02 = param_00.origin;
-  magicbullet("magic_spaceship_30mm_projectile_fake", var_01, var_02);
+func_B912(var_0) {
+  var_1 = self gettagorigin(self.var_284C[self.var_284B]);
+  var_2 = var_0.origin;
+  magicbullet("magic_spaceship_30mm_projectile_fake", var_1, var_2);
   self.var_284B = self.var_284B + 1 % self.var_284C.size;
 }
 
@@ -513,187 +513,187 @@ func_1A01() {
   }
 }
 
-func_19FF(param_00) {
-  var_01 = self;
-  if(isDefined(param_00)) {
-    var_01 = getent(param_00, "targetname");
+func_19FF(var_0) {
+  var_1 = self;
+  if(isDefined(var_0)) {
+    var_1 = getent(var_0, "targetname");
   }
 
-  if(var_01 func_9B57()) {
+  if(var_1 func_9B57()) {
     return;
   }
 
-  if(!isDefined(var_01.spawners)) {
-    var_01.spawners = [];
-    var_02 = getEntArray(var_01.target, "targetname");
-    var_03 = getspawnerarray(var_01.target);
-    var_02 = scripts\engine\utility::array_combine(var_02, var_03);
-    var_04 = 0;
-    foreach(var_06 in var_02) {
-      var_07 = var_06.script_noteworthy;
-      if(!isDefined(var_07)) {
-        var_07 = "spawner_" + var_04;
-        var_04++;
+  if(!isDefined(var_1.spawners)) {
+    var_1.spawners = [];
+    var_2 = getEntArray(var_1.target, "targetname");
+    var_3 = getspawnerarray(var_1.target);
+    var_2 = scripts\engine\utility::array_combine(var_2, var_3);
+    var_4 = 0;
+    foreach(var_6 in var_2) {
+      var_7 = var_6.script_noteworthy;
+      if(!isDefined(var_7)) {
+        var_7 = "spawner_" + var_4;
+        var_4++;
       }
 
-      var_01.spawners[var_07] = var_06;
+      var_1.spawners[var_7] = var_6;
     }
   }
 
-  if(!isDefined(var_01.var_1B04)) {
-    var_01.var_1B04 = var_01 scripts\engine\utility::getstructarray(var_01.target, "targetname");
+  if(!isDefined(var_1.var_1B04)) {
+    var_1.var_1B04 = var_1 scripts\engine\utility::getstructarray(var_1.target, "targetname");
   }
 
-  if(!isDefined(var_01.var_C375)) {
-    var_01.var_C375 = var_01 scripts\sp\utility::func_7A8F();
+  if(!isDefined(var_1.var_C375)) {
+    var_1.var_C375 = var_1 scripts\sp\utility::func_7A8F();
   }
 
-  if(!isDefined(var_01.var_C5B7)) {
-    var_01.var_C5B7 = [];
-    var_09 = getEntArray("aiAmbient_on", "script_noteworthy");
-    foreach(var_0B in var_09) {
-      if(var_0B == var_01) {
+  if(!isDefined(var_1.var_C5B7)) {
+    var_1.var_C5B7 = [];
+    var_9 = getEntArray("aiAmbient_on", "script_noteworthy");
+    foreach(var_0B in var_9) {
+      if(var_0B == var_1) {
         continue;
       }
 
-      if(var_0B.target != var_01.target) {
+      if(var_0B.target != var_1.target) {
         continue;
       }
 
-      var_01.var_C5B7[var_01.var_C5B7.size] = var_0B;
+      var_1.var_C5B7[var_1.var_C5B7.size] = var_0B;
     }
   }
 
-  if(!isDefined(var_01.var_1E08)) {
-    var_01.var_1E08 = [];
+  if(!isDefined(var_1.var_1E08)) {
+    var_1.var_1E08 = [];
   }
 
-  var_01.enabled = 1;
-  foreach(var_0B in var_01.var_C5B7) {
+  var_1.enabled = 1;
+  foreach(var_0B in var_1.var_C5B7) {
     var_0B.enabled = 1;
   }
 
-  var_06 = var_01.spawner;
-  var_0F = var_01.var_1B04;
-  var_10 = var_01.var_C375;
+  var_6 = var_1.spawner;
+  var_0F = var_1.var_1B04;
+  var_10 = var_1.var_C375;
   foreach(var_12 in var_0F) {
-    var_13 = var_12 func_489B(var_01.spawners, var_01);
+    var_13 = var_12 func_489B(var_1.spawners, var_1);
     var_13 hide();
-    var_01.var_1E08[var_01.var_1E08.size] = var_13;
+    var_1.var_1E08[var_1.var_1E08.size] = var_13;
     wait(0.05);
   }
 
-  var_01 notify("aiAmbient_spawned");
-  scripts\engine\utility::array_thread(var_10, ::func_1A00, var_01);
+  var_1 notify("aiAmbient_spawned");
+  scripts\engine\utility::array_thread(var_10, ::func_1A00, var_1);
 }
 
-func_489B(param_00, param_01) {
-  var_02 = undefined;
-  var_03 = self.script_noteworthy;
-  if(isDefined(var_03) && isDefined(param_00[var_03])) {
-    var_02 = param_00[var_03];
+func_489B(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = self.script_noteworthy;
+  if(isDefined(var_3) && isDefined(var_0[var_3])) {
+    var_2 = var_0[var_3];
   } else {
-    var_02 = scripts\engine\utility::random(param_00);
+    var_2 = scripts\engine\utility::random(var_0);
   }
 
-  var_02.var_C1 = 1;
-  var_04 = var_02 scripts\sp\utility::func_10619();
-  var_04 dontinterpolate();
-  if(!isai(var_04)) {
-    var_04.var_6B14 = 1;
+  var_2.var_C1 = 1;
+  var_4 = var_2 scripts\sp\utility::func_10619();
+  var_4 dontinterpolate();
+  if(!isai(var_4)) {
+    var_4.var_6B14 = 1;
   }
 
   if(func_C8ED("notsolid", " ")) {
-    var_04 notsolid();
+    var_4 notsolid();
   }
 
   if(func_C8ED("gun_remove", " ")) {
-    var_04 scripts\sp\utility::func_86E4();
+    var_4 scripts\sp\utility::func_86E4();
   }
 
   if(func_C8ED("friendname", " ")) {
-    var_04 func_2C16();
+    var_4 func_2C16();
   }
 
   if(func_C8ED("explo_ragdoll", " ")) {
-    var_04 thread func_DC18();
+    var_4 thread func_DC18();
   }
 
   if(func_C8ED("friendlyfire", " ")) {
-    var_04 thread func_19FC(issubstr(var_02.classname, "civilian"), 1);
+    var_4 thread func_19FC(issubstr(var_2.classname, "civilian"), 1);
   }
 
   if(isDefined(self.script_sound)) {
-    var_04 thread func_489C(self.script_sound, self.fgetarg, param_01);
+    var_4 thread func_489C(self.script_sound, self.fgetarg, var_1);
   }
 
   if(isDefined(self.animation)) {
-    var_04 thread func_1E09(param_01, self);
+    var_4 thread func_1E09(var_1, self);
   }
 
   if(func_C8ED("bloodpool", " ")) {
-    var_04 thread func_19FD();
+    var_4 thread func_19FD();
   }
 
-  return var_04;
+  return var_4;
 }
 
-func_1E09(param_00, param_01) {
-  param_00 endon("entitydeleted");
-  param_00 waittill("aiAmbient_spawned");
-  var_02 = param_01.animation;
+func_1E09(var_0, var_1) {
+  var_0 endon("entitydeleted");
+  var_0 waittill("aiAmbient_spawned");
+  var_2 = var_1.animation;
   if(issubstr(self.model, "female")) {
-    var_02 = func_79B6(var_02);
+    var_2 = func_79B6(var_2);
   }
 
-  var_03 = 0;
-  if(func_9DB6(var_02)) {
-    var_03 = 1;
+  var_3 = 0;
+  if(func_9DB6(var_2)) {
+    var_3 = 1;
   }
 
   lib_0A1E::func_236C(self);
-  if(var_03) {
+  if(var_3) {
     if(!isDefined(self.var_1FBB)) {
-      if(isDefined(level.var_EC85["generic"][var_02])) {
+      if(isDefined(level.var_EC85["generic"][var_2])) {
         self.var_1FBB = "generic";
       }
     }
 
     if(!isDefined(self.angles)) {
-      param_01.angles = (0, 0, 0);
+      var_1.angles = (0, 0, 0);
     }
 
-    thread scripts\sp\anim::func_1EC2(self, var_02, param_01.origin, param_01.angles);
+    thread scripts\sp\anim::func_1EC2(self, var_2, var_1.origin, var_1.angles);
   } else {
-    param_01 thread scripts\sp\anim::func_1ECC(self, var_02);
+    var_1 thread scripts\sp\anim::func_1ECC(self, var_2);
   }
 
   self show();
 }
 
-func_79B6(param_00) {
-  var_01 = self.var_1FBB;
-  if(!isDefined(var_01)) {
-    var_01 = "generic";
+func_79B6(var_0) {
+  var_1 = self.var_1FBB;
+  if(!isDefined(var_1)) {
+    var_1 = "generic";
   }
 
-  if(isDefined(level.var_EC85[var_01][param_00 + "_fem"])) {
-    return param_00 + "_fem";
+  if(isDefined(level.var_EC85[var_1][var_0 + "_fem"])) {
+    return var_0 + "_fem";
   }
 
-  return param_00;
+  return var_0;
 }
 
-func_489C(param_00, param_01, param_02) {
-  param_02 waittill("aiAmbient_spawned");
+func_489C(var_0, var_1, var_2) {
+  var_2 waittill("aiAmbient_spawned");
   scripts\engine\utility::waitframe();
-  var_03 = spawn("trigger_radius", self.origin, 0, param_01, param_01);
-  var_03 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
+  var_3 = spawn("trigger_radius", self.origin, 0, var_1, var_1);
+  var_3 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
   scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "entitydeleted");
   scripts\sp\utility::func_57D6();
-  var_03 delete();
+  var_3 delete();
   if(isDefined(self)) {
-    playworldsound(param_00, self.origin);
+    playworldsound(var_0, self.origin);
   }
 }
 
@@ -703,8 +703,8 @@ func_DC18() {
   self.health = 500;
   wait(2);
   for(;;) {
-    self waittill("damage", var_00, var_00, var_00, var_00, var_01);
-    if(isDefined(var_01) && isexplosivedamagemod(var_01)) {
+    self waittill("damage", var_0, var_0, var_0, var_0, var_1);
+    if(isDefined(var_1) && isexplosivedamagemod(var_1)) {
       if(isDefined(self.var_71C8)) {
         self[[self.var_71C8]]();
       }
@@ -720,12 +720,12 @@ func_2C16() {
   self _meth_8307(self.name, &"");
 }
 
-func_9DB6(param_00) {
-  if(issubstr(param_00, "dead")) {
+func_9DB6(var_0) {
+  if(issubstr(var_0, "dead")) {
     return 1;
   }
 
-  if(issubstr(param_00, "death")) {
+  if(issubstr(var_0, "death")) {
     return 1;
   }
 
@@ -734,27 +734,27 @@ func_9DB6(param_00) {
 
 func_19FD() {
   wait(0.05);
-  var_00 = spawn("trigger_radius", self.origin, 0, 512, 64);
-  var_00 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
+  var_0 = spawn("trigger_radius", self.origin, 0, 512, 64);
+  var_0 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
   scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "entitydeleted");
   scripts\sp\utility::func_57D6();
-  var_00 delete();
+  var_0 delete();
   if(isDefined(self)) {
     lib_0C60::play_blood_pool();
   }
 }
 
-func_19FC(param_00, param_01) {
+func_19FC(var_0, var_1) {
   self endon("entitydeleted");
   self setCanDamage(1);
   thread scripts\sp\utility::func_7748();
   scripts\sp\utility::func_16B7(::scripts\sp\damagefeedback::func_4D4C);
-  if(isDefined(param_00) && param_00) {
+  if(isDefined(var_0) && var_0) {
     self.type = "civilian";
   }
 
   thread scripts\sp\friendlyfire::func_73B1(self);
-  if(!isDefined(param_01) || !param_01) {
+  if(!isDefined(var_1) || !var_1) {
     return;
   }
 
@@ -762,32 +762,32 @@ func_19FC(param_00, param_01) {
   self giverankxp();
 }
 
-func_1A00(param_00) {
-  param_00 endon("aiAmbient_off");
+func_1A00(var_0) {
+  var_0 endon("aiAmbient_off");
   self waittill("trigger");
-  param_00 func_19FE();
+  var_0 func_19FE();
 }
 
-func_19FE(param_00) {
-  var_01 = self;
-  if(isDefined(param_00)) {
-    var_01 = getent(param_00, "targetname");
+func_19FE(var_0) {
+  var_1 = self;
+  if(isDefined(var_0)) {
+    var_1 = getent(var_0, "targetname");
   }
 
-  if(!var_01 func_9B57()) {
+  if(!var_1 func_9B57()) {
     return;
   }
 
-  var_01.enabled = 0;
-  foreach(var_03 in var_01.var_1E08) {
-    if(isDefined(var_03.var_3122)) {
-      var_03.var_3122 delete();
+  var_1.enabled = 0;
+  foreach(var_3 in var_1.var_1E08) {
+    if(isDefined(var_3.var_3122)) {
+      var_3.var_3122 delete();
     }
 
-    var_03 delete();
+    var_3 delete();
   }
 
-  var_01.var_1E08 = [];
+  var_1.var_1E08 = [];
   self notify("aiAmbient_off");
 }
 
@@ -804,41 +804,41 @@ func_9B57() {
 }
 
 func_1D84() {
-  var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
-  var_01 = func_39D3(var_00);
-  var_02 = func_39D2();
-  self.var_B8B4 = var_01;
-  self.var_B8B2 = var_02;
+  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = func_39D3(var_0);
+  var_2 = func_39D2();
+  self.var_B8B4 = var_1;
+  self.var_B8B2 = var_2;
 }
 
 func_39BC() {
   self endon("reached_end_node");
   self endon("death");
   func_1D84();
-  var_00 = undefined;
+  var_0 = undefined;
   for(;;) {
-    self waittill("noteworthy", var_01);
-    var_02 = strtok(var_01, " ");
-    foreach(var_04 in var_02) {
-      switch (var_04) {
+    self waittill("noteworthy", var_1);
+    var_2 = strtok(var_1, " ");
+    foreach(var_4 in var_2) {
+      switch (var_4) {
         case "start_entry":
-          var_00 = scripts\engine\utility::spawn_tag_origin();
-          var_00 linkto(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
-          playFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_00, "tag_origin");
+          var_0 = scripts\engine\utility::spawn_tag_origin();
+          var_0 linkto(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
+          playFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_0, "tag_origin");
           break;
 
         case "stop_entry":
-          stopFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_00, "tag_origin");
-          var_00 delete();
+          stopFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_0, "tag_origin");
+          var_0 delete();
           break;
 
         case "fire_missiles":
           self notify("stop_fire_missiles");
-          var_05 = self.var_4BF7;
-          var_06 = var_05 scripts\sp\utility::func_7A97();
-          var_07 = func_39D3(var_06);
-          foreach(var_09 in var_07) {
-            thread func_3987(var_09, [1, 3], [0.25, 0.5]);
+          var_5 = self.var_4BF7;
+          var_6 = var_5 scripts\sp\utility::func_7A97();
+          var_7 = func_39D3(var_6);
+          foreach(var_9 in var_7) {
+            thread func_3987(var_9, [1, 3], [0.25, 0.5]);
           }
           break;
 
@@ -856,151 +856,151 @@ func_1D83() {
   scripts\sp\utility::func_228A(self.var_B8B4);
 }
 
-func_3987(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_3987(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("stop_fire_missiles");
-  if(isDefined(param_03)) {
-    self endon(param_03);
+  if(isDefined(var_3)) {
+    self endon(var_3);
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   for(;;) {
-    if(isarray(param_01)) {
-      var_07 = randomintrange(param_01[0], param_01[1]);
+    if(isarray(var_1)) {
+      var_7 = randomintrange(var_1[0], var_1[1]);
     } else {
-      var_07 = param_01;
+      var_7 = var_1;
     }
 
-    for(var_08 = 0; var_08 <= var_07; var_08++) {
-      if(isarray(param_00)) {
-        var_09 = scripts\engine\utility::random(param_00);
+    for(var_8 = 0; var_8 <= var_7; var_8++) {
+      if(isarray(var_0)) {
+        var_9 = scripts\engine\utility::random(var_0);
       } else {
-        var_09 = param_00;
+        var_9 = var_0;
       }
 
       var_0A = undefined;
-      if(isDefined(var_09.script_radius) && var_09.script_radius) {
+      if(isDefined(var_9.script_radius) && var_9.script_radius) {
         var_0A = spawnStruct();
-        var_0A.var_FF23 = var_09.var_FF23;
-        var_0A.var_FF3E = var_09.var_FF3E;
-        var_0A.origin = func_E45E(var_09.origin, var_09.fgetarg);
-        var_09 = var_0A;
+        var_0A.var_FF23 = var_9.var_FF23;
+        var_0A.var_FF3E = var_9.var_FF3E;
+        var_0A.origin = func_E45E(var_9.origin, var_9.fgetarg);
+        var_9 = var_0A;
       }
 
-      func_3986(var_09, param_04, param_05, param_06);
+      func_3986(var_9, var_4, var_5, var_6);
       wait(randomfloatrange(0.45, 0.9));
     }
 
-    wait(randomfloatrange(param_02[0], param_02[1]));
+    wait(randomfloatrange(var_2[0], var_2[1]));
   }
 }
 
-func_3986(param_00, param_01, param_02, param_03) {
-  var_04 = 1;
-  if(isDefined(param_00.var_FF23)) {
-    var_04 = param_00.var_FF23;
+func_3986(var_0, var_1, var_2, var_3) {
+  var_4 = 1;
+  if(isDefined(var_0.var_FF23)) {
+    var_4 = var_0.var_FF23;
   }
 
-  var_05 = 1;
-  if(isDefined(param_00.var_FF3E)) {
-    var_05 = param_00.var_FF3E;
+  var_5 = 1;
+  if(isDefined(var_0.var_FF3E)) {
+    var_5 = var_0.var_FF3E;
   }
 
-  var_06 = undefined;
-  if(isDefined(param_02)) {
-    var_06 = [];
-    var_06[0] = param_02;
-    var_06[1] = param_03;
-    var_06[2] = 5;
+  var_6 = undefined;
+  if(isDefined(var_2)) {
+    var_6 = [];
+    var_6[0] = var_2;
+    var_6[1] = var_3;
+    var_6[2] = 5;
   }
 
-  thread lib_0BB6::func_3989(param_00, param_01, var_06, var_04, var_05);
+  thread lib_0BB6::func_3989(var_0, var_1, var_6, var_4, var_5);
 }
 
-func_39B9(param_00) {
-  var_01 = self.origin;
+func_39B9(var_0) {
+  var_1 = self.origin;
   while(isDefined(self)) {
-    var_01 = self.origin;
+    var_1 = self.origin;
     wait(0.05);
   }
 
-  earthquake(0.25, 1, var_01, 5000);
-  if(isDefined(param_00)) {
-    playFX(scripts\engine\utility::getfx(param_00), var_01);
+  earthquake(0.25, 1, var_1, 5000);
+  if(isDefined(var_0)) {
+    playFX(scripts\engine\utility::getfx(var_0), var_1);
   }
 }
 
 func_39D2() {
-  var_00 = ["l", "r"];
-  var_01 = [];
-  foreach(var_03 in var_00) {
-    var_01[var_03] = [];
-    for(var_04 = 1; var_04 < 25; var_04++) {
-      var_05 = "amb_missile_" + var_03 + "_" + var_04;
-      if(!scripts\sp\utility::hastag(self.model, var_05)) {
+  var_0 = ["l", "r"];
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    var_1[var_3] = [];
+    for(var_4 = 1; var_4 < 25; var_4++) {
+      var_5 = "amb_missile_" + var_3 + "_" + var_4;
+      if(!scripts\sp\utility::hastag(self.model, var_5)) {
         break;
       }
 
-      var_01[var_03][var_04] = var_05;
+      var_1[var_3][var_4] = var_5;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_39D3(param_00) {
-  var_01 = [];
-  foreach(var_03 in param_00) {
-    var_04 = var_03;
-    var_04.var_F1 = 0;
-    if(var_04 func_C8ED("direct")) {
-      var_04.var_F1 = 1;
+func_39D3(var_0) {
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    var_4 = var_3;
+    var_4.var_F1 = 0;
+    if(var_4 func_C8ED("direct")) {
+      var_4.var_F1 = 1;
     }
 
-    if(isDefined(var_03.script_damage)) {
-      if(!int(var_03.script_damage)) {
-        var_04.var_FF23 = int(var_03.script_damage);
+    if(isDefined(var_3.script_damage)) {
+      if(!int(var_3.script_damage)) {
+        var_4.var_FF23 = int(var_3.script_damage);
       }
     }
 
-    if(isDefined(var_03.script_earthquake)) {
-      if(!int(var_03.script_earthquake)) {
-        var_04.var_FF3E = int(var_03.script_earthquake);
+    if(isDefined(var_3.script_earthquake)) {
+      if(!int(var_3.script_earthquake)) {
+        var_4.var_FF3E = int(var_3.script_earthquake);
       }
     }
 
-    var_05 = var_03.script_noteworthy;
-    if(!isDefined(var_01[var_05])) {
-      var_01[var_05] = [];
+    var_5 = var_3.script_noteworthy;
+    if(!isDefined(var_1[var_5])) {
+      var_1[var_5] = [];
     }
 
-    var_01[var_05] = ::scripts\engine\utility::array_add(var_01[var_05], var_04);
+    var_1[var_5] = ::scripts\engine\utility::array_add(var_1[var_5], var_4);
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_C120(param_00, param_01) {
+func_C120(var_0, var_1) {
   if(!isDefined(self.script_noteworthy)) {
     return 0;
   }
 
-  param_00 = tolower(param_00);
-  var_02 = tolower(self.script_noteworthy);
-  if(!isDefined(param_01)) {
-    if(var_02 == param_00) {
+  var_0 = tolower(var_0);
+  var_2 = tolower(self.script_noteworthy);
+  if(!isDefined(var_1)) {
+    if(var_2 == var_0) {
       return 1;
     }
 
     return 0;
   }
 
-  var_03 = strtok(var_02, param_01);
-  foreach(var_05 in var_03) {
-    if(var_05 == param_00) {
+  var_3 = strtok(var_2, var_1);
+  foreach(var_5 in var_3) {
+    if(var_5 == var_0) {
       return 1;
     }
   }
@@ -1008,24 +1008,24 @@ func_C120(param_00, param_01) {
   return 0;
 }
 
-func_C8ED(param_00, param_01) {
+func_C8ED(var_0, var_1) {
   if(!isDefined(self.script_parameters)) {
     return 0;
   }
 
-  param_00 = tolower(param_00);
-  var_02 = tolower(self.script_parameters);
-  if(!isDefined(param_01)) {
-    if(var_02 == param_00) {
+  var_0 = tolower(var_0);
+  var_2 = tolower(self.script_parameters);
+  if(!isDefined(var_1)) {
+    if(var_2 == var_0) {
       return 1;
     }
 
     return 0;
   }
 
-  var_03 = strtok(var_02, param_01);
-  foreach(var_05 in var_03) {
-    if(var_05 == param_00) {
+  var_3 = strtok(var_2, var_1);
+  foreach(var_5 in var_3) {
+    if(var_5 == var_0) {
       return 1;
     }
   }
@@ -1033,27 +1033,27 @@ func_C8ED(param_00, param_01) {
   return 0;
 }
 
-func_E45E(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  if(isDefined(param_03)) {
-    var_05 = param_03 / param_01;
-    var_04 = param_01 - param_01 * randomfloat(var_05);
+func_E45E(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  if(isDefined(var_3)) {
+    var_5 = var_3 / var_1;
+    var_4 = var_1 - var_1 * randomfloat(var_5);
   } else {
-    var_04 = param_01 * randomfloat(1);
+    var_4 = var_1 * randomfloat(1);
   }
 
-  var_06 = randomfloat(360);
-  var_07 = sin(var_06);
-  var_08 = cos(var_06);
-  var_09 = var_04 * var_08;
-  var_0A = var_04 * var_07;
+  var_6 = randomfloat(360);
+  var_7 = sin(var_6);
+  var_8 = cos(var_6);
+  var_9 = var_4 * var_8;
+  var_0A = var_4 * var_7;
   var_0B = 0;
-  if(isDefined(param_02)) {
-    var_0B = randomfloatrange(param_02 * -1, param_02);
+  if(isDefined(var_2)) {
+    var_0B = randomfloatrange(var_2 * -1, var_2);
   }
 
-  var_09 = var_09 + param_00[0];
-  var_0A = var_0A + param_00[1];
-  var_0B = var_0B + param_00[2];
-  return (var_09, var_0A, var_0B);
+  var_9 = var_9 + var_0[0];
+  var_0A = var_0A + var_0[1];
+  var_0B = var_0B + var_0[2];
+  return (var_9, var_0A, var_0B);
 }

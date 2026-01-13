@@ -14,7 +14,7 @@ func_488D() {
   self.fnismeleevalid = ::func_9DA2;
 }
 
-func_9DA0(param_00) {
+func_9DA0(var_0) {
   if(isDefined(self.dontmelee)) {
     return 0;
   }
@@ -31,7 +31,7 @@ func_9DA0(param_00) {
     return 0;
   }
 
-  if(isDefined(param_00) && param_00) {
+  if(isDefined(var_0) && var_0) {
     return 1;
   }
 
@@ -42,7 +42,7 @@ func_9DA0(param_00) {
   return 1;
 }
 
-func_9D9F(param_00) {
+func_9D9F(var_0) {
   if(!scripts\asm\asm_bb::bb_iscrawlmelee()) {
     return level.failure;
   }
@@ -50,7 +50,7 @@ func_9D9F(param_00) {
   return level.success;
 }
 
-func_487C(param_00) {
+func_487C(var_0) {
   if(randomint(100) < 25) {
     lib_0BFE::func_E1B1(randomintrange(3000, 8000));
   } else {
@@ -68,7 +68,7 @@ func_487B() {
   lib_0BFE::func_F6C7();
 }
 
-func_FFDD(param_00) {
+func_FFDD(var_0) {
   if(!func_9DA0(0)) {
     func_487B();
     return level.failure;
@@ -82,32 +82,32 @@ func_FFDD(param_00) {
   return level.success;
 }
 
-func_4881(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].var_3E30 = gettime() + 100;
-  self.var_3135.instancedata[param_00].timeout = gettime() + 4000;
-  self.var_3135.instancedata[param_00].var_6572 = self.isnodeoccupied.origin;
+func_4881(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].var_3E30 = gettime() + 100;
+  self.bt.instancedata[var_0].timeout = gettime() + 4000;
+  self.bt.instancedata[var_0].var_6572 = self.isnodeoccupied.origin;
   self.melee.var_2AC7 = 1;
   self.melee.var_2AC6 = 1;
   self.var_B651 = 1;
-  if(scripts\asm\asm_bb::bb_isselfdestruct() && isDefined(self.var_3135.var_F1F7)) {
-    self.var_3135.var_F1F7 stoploopsound();
-    self.var_3135.var_F1F7 playLoopSound("c6_mvmt_crawl_loop_vocal");
+  if(scripts\asm\asm_bb::bb_isselfdestruct() && isDefined(self.bt.var_F1F7)) {
+    self.bt.var_F1F7 stoploopsound();
+    self.bt.var_F1F7 playLoopSound("c6_mvmt_crawl_loop_vocal");
     return;
   }
 
   self playLoopSound("c6_mvmt_crawl_loop_vocal");
 }
 
-func_487A(param_00) {
+func_487A(var_0) {
   self.melee.var_29B4 = 1;
   return level.success;
 }
 
-func_488C(param_00) {
+func_488C(var_0) {
   if(lib_0A0B::func_2EE1()) {
-    if(!isDefined(self.var_3135.var_487E)) {
-      self.var_3135.var_487E = 1;
+    if(!isDefined(self.bt.var_487E)) {
+      self.bt.var_487E = 1;
       self.var_6D = 16;
       self _meth_8481(self.origin);
       thread lib_0BFE::func_F1F8();
@@ -119,12 +119,12 @@ func_488C(param_00) {
   return level.success;
 }
 
-func_9DA2(param_00, param_01) {
-  if(scripts\aitypes\melee::ismeleevalid_common(param_00, param_01) == 0) {
+func_9DA2(var_0, var_1) {
+  if(scripts\aitypes\melee::ismeleevalid_common(var_0, var_1) == 0) {
     return 0;
   }
 
-  if(param_01) {
+  if(var_1) {
     if(scripts\anim\utility_common::isusingsidearm()) {
       return 0;
     }
@@ -134,55 +134,55 @@ func_9DA2(param_00, param_01) {
     return 0;
   }
 
-  if(isDefined(param_00.var_5951) || isDefined(param_00.ignoreme) && param_00.ignoreme) {
+  if(isDefined(var_0.var_5951) || isDefined(var_0.ignoreme) && var_0.ignoreme) {
     return 0;
   }
 
-  if(!isai(param_00) && !isplayer(param_00)) {
+  if(!isai(var_0) && !isplayer(var_0)) {
     return 0;
   }
 
-  if(isDefined(self.var_B5DD) && isDefined(param_00.var_B5DD)) {
+  if(isDefined(self.var_B5DD) && isDefined(var_0.var_B5DD)) {
     return 0;
   }
 
-  if((isDefined(self.var_B5DD) && isDefined(param_00.var_B14F)) || isDefined(param_00.var_B5DD) && isDefined(self.var_B14F)) {
+  if((isDefined(self.var_B5DD) && isDefined(var_0.var_B14F)) || isDefined(var_0.var_B5DD) && isDefined(self.var_B14F)) {
     return 0;
   }
 
-  if(isai(param_00)) {
-    if(param_00 _meth_81A6()) {
+  if(isai(var_0)) {
+    if(var_0 _meth_81A6()) {
       return 0;
     }
 
-    if(param_00 scripts\sp\utility::func_58DA() || param_00.var_EB) {
+    if(var_0 scripts\sp\utility::func_58DA() || var_0.var_EB) {
       return 0;
     }
 
-    if(self.getcsplinepointtargetname != "none" || param_00.getcsplinepointtargetname != "none") {
+    if(self.getcsplinepointtargetname != "none" || var_0.getcsplinepointtargetname != "none") {
       return 0;
     }
 
-    if(param_00.unittype != "soldier" && param_00.unittype != "c6" && param_00.unittype != "c6i") {
+    if(var_0.unittype != "soldier" && var_0.unittype != "c6" && var_0.unittype != "c6i") {
       return 0;
     }
   }
 
-  if(isplayer(param_00)) {
-    var_02 = param_00 getstance();
+  if(isplayer(var_0)) {
+    var_2 = var_0 getstance();
   } else {
-    var_02 = param_01.a.pose;
+    var_2 = var_1.a.pose;
   }
 
-  if(var_02 != "stand" && var_02 != "crouch") {
+  if(var_2 != "stand" && var_2 != "crouch") {
     return 0;
   }
 
-  if(isDefined(self.var_B14F) && isDefined(param_00.var_B14F)) {
+  if(isDefined(self.var_B14F) && isDefined(var_0.var_B14F)) {
     return 0;
   }
 
-  if(isDefined(param_00.objective_position)) {
+  if(isDefined(var_0.objective_position)) {
     return 0;
   }
 

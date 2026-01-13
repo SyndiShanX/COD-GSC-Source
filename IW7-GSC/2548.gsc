@@ -20,5 +20,5 @@ main() {
   var_0[13] = "head_bg_var_head_sc_female_05_head_sc_female_marine";
   var_0[14] = "head_sc_female_05";
   var_0[15] = "head_bg_var_head_sc_female_05_head_sc_female_13";
-  return var_00;
+  return var_0;
 }

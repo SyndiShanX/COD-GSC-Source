@@ -4,141 +4,141 @@
  * Script: scripts\common\trace.gsc
 ************************************/
 
-ray_trace(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_03), param_03, create_default_contents());
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_05), param_05, 0);
-  var_08 = physics_raycast(param_00, param_01, var_06, param_02, 0, "physicsquery_closest", var_07);
-  if(var_08.size) {
-    var_08 = var_08[0];
+ray_trace(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, 0);
+  var_8 = physics_raycast(var_0, var_1, var_6, var_2, 0, "physicsquery_closest", var_7);
+  if(var_8.size) {
+    var_8 = var_8[0];
   } else {
-    var_08 = internal_pack_default_trace(param_01);
+    var_8 = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_04) && param_04) {
-    var_08 = convert_surface_flag(var_08);
+  if(isDefined(var_4) && var_4) {
+    var_8 = convert_surface_flag(var_8);
   }
 
-  return var_08;
+  return var_8;
 }
 
-ray_trace_detail(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_03), param_03, create_default_contents());
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_05), param_05, 0);
-  var_08 = physics_raycast(param_00, param_01, var_06, param_02, 1, "physicsquery_closest", var_07);
-  if(var_08.size) {
-    var_08 = var_08[0];
+ray_trace_detail(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, 0);
+  var_8 = physics_raycast(var_0, var_1, var_6, var_2, 1, "physicsquery_closest", var_7);
+  if(var_8.size) {
+    var_8 = var_8[0];
   } else {
-    var_08 = internal_pack_default_trace(param_01);
+    var_8 = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_04) && param_04) {
-    var_08 = convert_surface_flag(var_08);
+  if(isDefined(var_4) && var_4) {
+    var_8 = convert_surface_flag(var_8);
   }
 
-  return var_08;
+  return var_8;
 }
 
-ray_trace_get_all_results(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = scripts\engine\utility::ter_op(isDefined(param_03), param_03, create_default_contents());
-  var_06 = physics_raycast(param_00, param_01, var_05, param_02, 0, "physicsquery_all");
-  if(isDefined(param_04) && param_04) {
-    foreach(var_08 in var_06) {
-      var_08 = convert_surface_flag(var_08);
+ray_trace_get_all_results(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());
+  var_6 = physics_raycast(var_0, var_1, var_5, var_2, 0, "physicsquery_all");
+  if(isDefined(var_4) && var_4) {
+    foreach(var_8 in var_6) {
+      var_8 = convert_surface_flag(var_8);
     }
   }
 
-  return var_06;
+  return var_6;
 }
 
-ray_trace_passed(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\engine\utility::ter_op(isDefined(param_03), param_03, create_default_contents());
-  return !physics_raycast(param_00, param_01, var_04, param_02, 0, "physicsquery_any");
+ray_trace_passed(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());
+  return !physics_raycast(var_0, var_1, var_4, var_2, 0, "physicsquery_any");
 }
 
-ray_trace_detail_passed(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\engine\utility::ter_op(isDefined(param_03), param_03, create_default_contents());
-  return !physics_raycast(param_00, param_01, var_04, param_02, 1, "physicsquery_any");
+ray_trace_detail_passed(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());
+  return !physics_raycast(var_0, var_1, var_4, var_2, 1, "physicsquery_any");
 }
 
-sphere_trace(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  var_07 = physics_spherecast(param_00, param_01, param_02, var_06, param_03, "physicsquery_closest");
-  if(var_07.size) {
-    var_07 = var_07[0];
+sphere_trace(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  var_7 = physics_spherecast(var_0, var_1, var_2, var_6, var_3, "physicsquery_closest");
+  if(var_7.size) {
+    var_7 = var_7[0];
   } else {
-    var_07 = internal_pack_default_trace(param_01);
+    var_7 = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_07 = convert_surface_flag(var_07);
+  if(isDefined(var_5) && var_5) {
+    var_7 = convert_surface_flag(var_7);
   }
 
-  return var_07;
+  return var_7;
 }
 
-sphere_trace_get_all_results(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  var_07 = physics_spherecast(param_00, param_01, param_02, var_06, param_03, "physicsquery_all");
-  if(isDefined(param_05) && param_05) {
-    foreach(var_09 in var_07) {
-      var_09 = convert_surface_flag(var_09);
+sphere_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  var_7 = physics_spherecast(var_0, var_1, var_2, var_6, var_3, "physicsquery_all");
+  if(isDefined(var_5) && var_5) {
+    foreach(var_9 in var_7) {
+      var_9 = convert_surface_flag(var_9);
     }
   }
 
-  return var_07;
+  return var_7;
 }
 
-sphere_trace_passed(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  return !physics_spherecast(param_00, param_01, param_02, var_05, param_03, "physicsquery_any");
+sphere_trace_passed(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  return !physics_spherecast(var_0, var_1, var_2, var_5, var_3, "physicsquery_any");
 }
 
-sphere_get_closest_point(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  var_07 = physics_getclosestpointtosphere(param_00, param_01, param_02, var_06, param_03, "physicsquery_closest");
-  if(var_07.size) {
-    var_07 = var_07[0];
+sphere_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  var_7 = physics_getclosestpointtosphere(var_0, var_1, var_2, var_6, var_3, "physicsquery_closest");
+  if(var_7.size) {
+    var_7 = var_7[0];
   } else {
-    var_07 = internal_pack_default_trace(param_00);
+    var_7 = internal_pack_default_trace(var_0);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_07 = convert_surface_flag(var_07);
+  if(isDefined(var_5) && var_5) {
+    var_7 = convert_surface_flag(var_7);
   }
 
-  return var_07;
+  return var_7;
 }
 
-capsule_trace(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(!isDefined(param_04)) {
-    param_04 = (0, 0, 0);
+capsule_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_4)) {
+    var_4 = (0, 0, 0);
   }
 
-  var_08 = scripts\engine\utility::ter_op(isDefined(param_06), param_06, create_default_contents());
-  var_09 = convert_capsule_data(param_00, param_01, param_02, param_03, param_04);
-  var_0A = physics_capsulecast(var_09["trace_start"], var_09["trace_end"], param_02, var_09["half_height"], param_04, var_08, param_05, "physicsquery_closest");
+  var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
+  var_9 = convert_capsule_data(var_0, var_1, var_2, var_3, var_4);
+  var_0A = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_closest");
   if(var_0A.size) {
     var_0A = var_0A[0];
   } else {
-    var_0A = internal_pack_default_trace(param_01);
+    var_0A = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_07) && param_07) {
+  if(isDefined(var_7) && var_7) {
     var_0A = convert_surface_flag(var_0A);
   }
 
   return var_0A;
 }
 
-capsule_trace_get_all_results(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(!isDefined(param_04)) {
-    param_04 = (0, 0, 0);
+capsule_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_4)) {
+    var_4 = (0, 0, 0);
   }
 
-  var_08 = scripts\engine\utility::ter_op(isDefined(param_06), param_06, create_default_contents());
-  var_09 = convert_capsule_data(param_00, param_01, param_02, param_03, param_04);
-  var_0A = physics_capsulecast(var_09["trace_start"], var_09["trace_end"], param_02, var_09["half_height"], param_04, var_08, param_05, "physicsquery_all");
-  if(isDefined(param_07) && param_07) {
+  var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
+  var_9 = convert_capsule_data(var_0, var_1, var_2, var_3, var_4);
+  var_0A = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_all");
+  if(isDefined(var_7) && var_7) {
     foreach(var_0C in var_0A) {
       var_0C = convert_surface_flag(var_0C);
     }
@@ -147,375 +147,375 @@ capsule_trace_get_all_results(param_00, param_01, param_02, param_03, param_04, 
   return var_0A;
 }
 
-capsule_trace_passed(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  if(!isDefined(param_04)) {
-    param_04 = (0, 0, 0);
+capsule_trace_passed(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_4)) {
+    var_4 = (0, 0, 0);
   }
 
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_06), param_06, create_default_contents());
-  var_08 = convert_capsule_data(param_00, param_01, param_02, param_03, param_04);
-  return !physics_capsulecast(var_08["trace_start"], var_08["trace_end"], param_02, var_08["half_height"], param_04, var_07, param_05, "physicsquery_any");
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
+  var_8 = convert_capsule_data(var_0, var_1, var_2, var_3, var_4);
+  return !physics_capsulecast(var_8["trace_start"], var_8["trace_end"], var_2, var_8["half_height"], var_4, var_7, var_5, "physicsquery_any");
 }
 
-capsule_get_closest_point(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(!isDefined(param_03)) {
-    param_03 = (0, 0, 0);
+capsule_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_3)) {
+    var_3 = (0, 0, 0);
   }
 
-  var_08 = scripts\engine\utility::ter_op(isDefined(param_06), param_06, create_default_contents());
-  var_09 = convert_capsule_data(param_00, undefined, param_01, param_02, param_03);
-  var_0A = physics_getclosestpointtocapsule(var_09["trace_start"], param_01, var_09["half_height"], param_03, param_04, var_08, param_05, "physicsquery_closest");
+  var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
+  var_9 = convert_capsule_data(var_0, undefined, var_1, var_2, var_3);
+  var_0A = physics_getclosestpointtocapsule(var_9["trace_start"], var_1, var_9["half_height"], var_3, var_4, var_8, var_5, "physicsquery_closest");
   if(var_0A.size) {
     var_0A = var_0A[0];
   } else {
-    var_0A = internal_pack_default_trace(param_00);
+    var_0A = internal_pack_default_trace(var_0);
   }
 
-  if(isDefined(param_07) && param_07) {
+  if(isDefined(var_7) && var_7) {
     var_0A = convert_surface_flag(var_0A);
   }
 
   return var_0A;
 }
 
-player_trace(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+player_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self getplayerangles();
+  if(!isDefined(var_2)) {
+    var_2 = self getplayerangles();
   }
 
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_06)) {
-    param_06 = 0;
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  var_08 = physics_charactercast(param_00, param_01, self, param_06, param_02, var_07, param_03, "physicsquery_closest");
-  if(var_08.size) {
-    var_08 = var_08[0];
+  var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_closest");
+  if(var_8.size) {
+    var_8 = var_8[0];
   } else {
-    var_08 = internal_pack_default_trace(param_01);
+    var_8 = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_08 = convert_surface_flag(var_08);
+  if(isDefined(var_5) && var_5) {
+    var_8 = convert_surface_flag(var_8);
   }
 
-  return var_08;
+  return var_8;
 }
 
-player_trace_get_all_results(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+player_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self getplayerangles();
+  if(!isDefined(var_2)) {
+    var_2 = self getplayerangles();
   }
 
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_06)) {
-    param_06 = 0;
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  var_08 = physics_charactercast(param_00, param_01, self, param_06, param_02, var_07, param_03, "physicsquery_all");
-  if(isDefined(param_05) && param_05) {
-    foreach(var_0A in var_08) {
+  var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_all");
+  if(isDefined(var_5) && var_5) {
+    foreach(var_0A in var_8) {
       var_0A = convert_surface_flag(var_0A);
     }
   }
 
-  return var_08;
+  return var_8;
 }
 
-player_trace_passed(param_00, param_01, param_02, param_03, param_04, param_05) {
+player_trace_passed(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self getplayerangles();
+  if(!isDefined(var_2)) {
+    var_2 = self getplayerangles();
   }
 
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_05)) {
-    param_05 = 0;
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  return !physics_charactercast(param_00, param_01, self, param_05, param_02, var_06, param_03, "physicsquery_any");
+  return !physics_charactercast(var_0, var_1, self, var_5, var_2, var_6, var_3, "physicsquery_any");
 }
 
-player_get_closest_point_static(param_00, param_01, param_02, param_03) {
-  return player_get_closest_point(self.origin, self.angles, param_00, param_01, param_02, param_03);
+player_get_closest_point_static(var_0, var_1, var_2, var_3) {
+  return player_get_closest_point(self.origin, self.angles, var_0, var_1, var_2, var_3);
 }
 
-player_get_closest_point(param_00, param_01, param_02, param_03, param_04, param_05) {
+player_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = self getplayerangles();
+  if(!isDefined(var_1)) {
+    var_1 = self getplayerangles();
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(isarray(param_03)) {
-    param_03 = scripts\engine\utility::array_add(param_03, self);
+  if(isarray(var_3)) {
+    var_3 = scripts\engine\utility::array_add(var_3, self);
   } else {
-    param_03 = self;
+    var_3 = self;
   }
 
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  var_07 = physics_getclosestpointtocharacter(param_00, self, 0, param_01, param_02, var_06, param_03, "physicsquery_closest");
-  if(var_07.size) {
-    var_07 = var_07[0];
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  var_7 = physics_getclosestpointtocharacter(var_0, self, 0, var_1, var_2, var_6, var_3, "physicsquery_closest");
+  if(var_7.size) {
+    var_7 = var_7[0];
   } else {
-    var_07 = internal_pack_default_trace(param_00);
+    var_7 = internal_pack_default_trace(var_0);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_07 = convert_surface_flag(var_07);
+  if(isDefined(var_5) && var_5) {
+    var_7 = convert_surface_flag(var_7);
   }
 
-  return var_07;
+  return var_7;
 }
 
-ai_trace(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+ai_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isai(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self.angles;
+  if(!isDefined(var_2)) {
+    var_2 = self.angles;
   }
 
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_06)) {
-    param_06 = 0;
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  var_08 = physics_charactercast(param_00, param_01, self, param_06, param_02, var_07, param_03, "physicsquery_closest");
-  if(var_08.size) {
-    var_08 = var_08[0];
+  var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_closest");
+  if(var_8.size) {
+    var_8 = var_8[0];
   } else {
-    var_08 = internal_pack_default_trace(param_01);
+    var_8 = internal_pack_default_trace(var_1);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_08 = convert_surface_flag(var_08);
+  if(isDefined(var_5) && var_5) {
+    var_8 = convert_surface_flag(var_8);
   }
 
-  return var_08;
+  return var_8;
 }
 
-ai_trace_get_all_results(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+ai_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isai(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self.angles;
+  if(!isDefined(var_2)) {
+    var_2 = self.angles;
   }
 
-  var_07 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_06)) {
-    param_06 = 0;
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  var_08 = physics_charactercast(param_00, param_01, self, param_06, param_02, var_07, param_03, "physicsquery_all");
-  if(isDefined(param_05) && param_05) {
-    foreach(var_0A in var_08) {
+  var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_all");
+  if(isDefined(var_5) && var_5) {
+    foreach(var_0A in var_8) {
       var_0A = convert_surface_flag(var_0A);
     }
   }
 
-  return var_08;
+  return var_8;
 }
 
-ai_trace_passed(param_00, param_01, param_02, param_03, param_04, param_05) {
+ai_trace_passed(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isai(self)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = self.angles;
+  if(!isDefined(var_2)) {
+    var_2 = self.angles;
   }
 
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  if(!isDefined(param_05)) {
-    param_05 = 0;
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  return !physics_charactercast(param_00, param_01, self, param_05, param_02, var_06, param_03, "physicsquery_any");
+  return !physics_charactercast(var_0, var_1, self, var_5, var_2, var_6, var_3, "physicsquery_any");
 }
 
-ai_get_closest_point(param_00, param_01, param_02, param_03, param_04, param_05) {
+ai_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isai(self)) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = self.angles;
+  if(!isDefined(var_1)) {
+    var_1 = self.angles;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var_06 = scripts\engine\utility::ter_op(isDefined(param_04), param_04, create_default_contents());
-  var_07 = physics_getclosestpointtocharacter(param_00, self, param_01, param_02, var_06, param_03, "physicsquery_closest");
-  if(var_07.size) {
-    var_07 = var_07[0];
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, create_default_contents());
+  var_7 = physics_getclosestpointtocharacter(var_0, self, var_1, var_2, var_6, var_3, "physicsquery_closest");
+  if(var_7.size) {
+    var_7 = var_7[0];
   } else {
-    var_07 = internal_pack_default_trace(param_00);
+    var_7 = internal_pack_default_trace(var_0);
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_07 = convert_surface_flag(var_07);
+  if(isDefined(var_5) && var_5) {
+    var_7 = convert_surface_flag(var_7);
   }
 
-  return var_07;
+  return var_7;
 }
 
-create_solid_ai_contents(param_00) {
-  var_01 = ["physicscontents_solid", "physicscontents_monsterclip", "physicscontents_aiavoid", "physicscontents_glass", "physicscontents_vehicle"];
-  if(!isDefined(param_00) || !param_00) {
-    var_01 = scripts\engine\utility::array_add(var_01, "physicscontents_player");
+create_solid_ai_contents(var_0) {
+  var_1 = ["physicscontents_solid", "physicscontents_monsterclip", "physicscontents_aiavoid", "physicscontents_glass", "physicscontents_vehicle"];
+  if(!isDefined(var_0) || !var_0) {
+    var_1 = scripts\engine\utility::array_add(var_1, "physicscontents_player");
   }
 
-  return physics_createcontents(var_01);
+  return physics_createcontents(var_1);
 }
 
 create_world_contents() {
-  var_00 = ["physicscontents_solid", "physicscontents_water", "physicscontents_sky"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_solid", "physicscontents_water", "physicscontents_sky"];
+  return physics_createcontents(var_0);
 }
 
 create_glass_contents() {
-  var_00 = ["physicscontents_glass"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_glass"];
+  return physics_createcontents(var_0);
 }
 
 create_item_contents() {
-  var_00 = ["physicscontents_item"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_item"];
+  return physics_createcontents(var_0);
 }
 
 create_vehicle_contents() {
-  var_00 = ["physicscontents_vehicle"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_vehicle"];
+  return physics_createcontents(var_0);
 }
 
 create_shotclip_contents() {
-  var_00 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip"];
+  return physics_createcontents(var_0);
 }
 
 create_playerclip_contents() {
-  var_00 = ["physicscontents_playerclip"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_playerclip"];
+  return physics_createcontents(var_0);
 }
 
 create_character_contents() {
-  var_00 = ["physicscontents_player", "physicscontents_actor"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_player", "physicscontents_actor"];
+  return physics_createcontents(var_0);
 }
 
-create_default_contents(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+create_default_contents(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  return create_contents(!param_00, 1, 1, 1, 0, 1);
+  return create_contents(!var_0, 1, 1, 1, 0, 1);
 }
 
-create_contents(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = 0;
-  if(isDefined(param_00) && param_00) {
-    var_07 = var_07 + create_character_contents();
+create_contents(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = 0;
+  if(isDefined(var_0) && var_0) {
+    var_7 = var_7 + create_character_contents();
   }
 
-  if(isDefined(param_01) && param_01) {
-    var_07 = var_07 + create_world_contents();
+  if(isDefined(var_1) && var_1) {
+    var_7 = var_7 + create_world_contents();
   }
 
-  if(isDefined(param_02) && param_02) {
-    var_07 = var_07 + create_glass_contents();
+  if(isDefined(var_2) && var_2) {
+    var_7 = var_7 + create_glass_contents();
   }
 
-  if(isDefined(param_03) && param_03) {
-    var_07 = var_07 + create_shotclip_contents();
+  if(isDefined(var_3) && var_3) {
+    var_7 = var_7 + create_shotclip_contents();
   }
 
-  if(isDefined(param_04) && param_04) {
-    var_07 = var_07 + create_item_contents();
+  if(isDefined(var_4) && var_4) {
+    var_7 = var_7 + create_item_contents();
   }
 
-  if(isDefined(param_05) && param_05) {
-    var_07 = var_07 + create_vehicle_contents();
+  if(isDefined(var_5) && var_5) {
+    var_7 = var_7 + create_vehicle_contents();
   }
 
-  if(isDefined(param_06) && param_06) {
-    var_07 = var_07 + create_playerclip_contents();
+  if(isDefined(var_6) && var_6) {
+    var_7 = var_7 + create_playerclip_contents();
   }
 
-  return var_07;
+  return var_7;
 }
 
 create_all_contents() {
-  var_00 = ["physicscontents_solid", "physicscontents_foliage", "physicscontents_aiavoid", "physicscontents_vehicletrigger", "physicscontents_glass", "physicscontents_water", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicleclip", "physicscontents_itemclip", "physicscontents_sky", "physicscontents_ainosight", "physicscontents_clipshot", "physicscontents_actor", "physicscontents_corpseclipshot", "physicscontents_playerclip", "physicscontents_monsterclip", "physicscontents_sentienttrigger", "physicscontents_teamtrigger", "physicscontents_use", "physicscontents_nonsentienttrigger", "physicscontents_vehicle", "physicscontents_mantle", "physicscontents_player", "physicscontents_corpse", "physicscontents_detail", "physicscontents_structural", "physicscontents_translucent", "physicscontents_playertrigger", "physicscontents_nodrop"];
-  return physics_createcontents(var_00);
+  var_0 = ["physicscontents_solid", "physicscontents_foliage", "physicscontents_aiavoid", "physicscontents_vehicletrigger", "physicscontents_glass", "physicscontents_water", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicleclip", "physicscontents_itemclip", "physicscontents_sky", "physicscontents_ainosight", "physicscontents_clipshot", "physicscontents_actor", "physicscontents_corpseclipshot", "physicscontents_playerclip", "physicscontents_monsterclip", "physicscontents_sentienttrigger", "physicscontents_teamtrigger", "physicscontents_use", "physicscontents_nonsentienttrigger", "physicscontents_vehicle", "physicscontents_mantle", "physicscontents_player", "physicscontents_corpse", "physicscontents_detail", "physicscontents_structural", "physicscontents_translucent", "physicscontents_playertrigger", "physicscontents_nodrop"];
+  return physics_createcontents(var_0);
 }
 
-convert_surface_flag(param_00) {
-  var_01 = physics_getsurfacetypefromflags(param_00["surfaceflags"]);
-  param_00["surfaceindex"] = var_01["index"];
-  param_00["surfacetype"] = var_01["name"];
-  return param_00;
+convert_surface_flag(var_0) {
+  var_1 = physics_getsurfacetypefromflags(var_0["surfaceflags"]);
+  var_0["surfaceindex"] = var_1["index"];
+  var_0["surfacetype"] = var_1["name"];
+  return var_0;
 }
 
-convert_capsule_data(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_04)) {
-    param_04 = (0, 0, 0);
+convert_capsule_data(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = (0, 0, 0);
   }
 
-  var_05 = param_03 * 0.5;
-  var_06 = anglesToForward(param_04);
-  var_07 = anglestoup(param_04);
-  var_08 = [];
-  var_08["trace_start"] = param_00 + var_07 * var_05;
-  if(isDefined(param_01)) {
-    var_08["trace_end"] = param_01 + var_07 * var_05;
+  var_5 = var_3 * 0.5;
+  var_6 = anglesToForward(var_4);
+  var_7 = anglestoup(var_4);
+  var_8 = [];
+  var_8["trace_start"] = var_0 + var_7 * var_5;
+  if(isDefined(var_1)) {
+    var_8["trace_end"] = var_1 + var_7 * var_5;
   }
 
-  var_08["radius"] = param_02;
-  var_08["angles"] = param_04;
-  var_08["half_height"] = var_05;
-  return var_08;
+  var_8["radius"] = var_2;
+  var_8["angles"] = var_4;
+  var_8["half_height"] = var_5;
+  return var_8;
 }
 
-draw_trace(param_00, param_01, param_02, param_03) {}
+draw_trace(var_0, var_1, var_2, var_3) {}
 
-draw_trace_hit(param_00, param_01, param_02, param_03, param_04) {}
+draw_trace_hit(var_0, var_1, var_2, var_3, var_4) {}
 
-draw_trace_type(param_00, param_01, param_02) {}
+draw_trace_type(var_0, var_1, var_2) {}
 
-internal_pack_default_trace(param_00) {
-  var_01 = [];
-  var_01["fraction"] = 1;
-  var_01["surfaceflags"] = 0;
-  var_01["distance"] = 0;
-  var_01["position"] = param_00;
-  var_01["shape_position"] = param_00;
-  var_01["normal"] = (0, 0, 0);
-  var_01["contact_normal"] = (0, 0, 0);
-  var_01["hittype"] = "hittype_none";
-  return var_01;
+internal_pack_default_trace(var_0) {
+  var_1 = [];
+  var_1["fraction"] = 1;
+  var_1["surfaceflags"] = 0;
+  var_1["distance"] = 0;
+  var_1["position"] = var_0;
+  var_1["shape_position"] = var_0;
+  var_1["normal"] = (0, 0, 0);
+  var_1["contact_normal"] = (0, 0, 0);
+  var_1["hittype"] = "hittype_none";
+  return var_1;
 }
 
-internal_create_debug_data(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {}
+internal_create_debug_data(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}

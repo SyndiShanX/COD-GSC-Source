@@ -3,83 +3,83 @@
  * Script: 3483.gsc
 ***************************************/
 
-flares_monitor(var_00) {
-  self.flaresreservecount = var_00;
+flares_monitor(var_0) {
+  self.flaresreservecount = var_0;
   self.flareslive = [];
   thread ks_laserguidedmissile_handleincoming();
 }
 
-func_6EAE(var_00) {
-  var_01 = "tag_origin";
+func_6EAE(var_0) {
+  var_1 = "tag_origin";
 
-  if(isDefined(var_00)) {
-    var_01 = var_00;
+  if(isDefined(var_0)) {
+    var_1 = var_0;
   }
 
-  playLoopSound(self gettagorigin(var_01), "ks_warden_flares");
+  playLoopSound(self gettagorigin(var_1), "ks_warden_flares");
 
-  for(var_02 = 0; var_02 < 10; var_2++) {
+  for(var_2 = 0; var_2 < 10; var_2++) {
     if(!isDefined(self)) {
       return;
     }
-    playFXOnTag(level._effect["vehicle_flares"], self, var_01);
+    playFXOnTag(level._effect["vehicle_flares"], self, var_1);
     wait 0.15;
   }
 }
 
 func_6EA0() {
-  var_00 = spawn("script_origin", self.origin + (0, 0, -256));
+  var_0 = spawn("script_origin", self.origin + (0, 0, -256));
   var_0.angles = self.angles;
-  var_00 movegravity((0, 0, -1), 5.0);
-  self.flareslive[self.flareslive.size] = var_00;
-  var_00 thread func_6E9F(5.0, 2.0, self);
+  var_0 movegravity((0, 0, -1), 5.0);
+  self.flareslive[self.flareslive.size] = var_0;
+  var_0 thread func_6E9F(5.0, 2.0, self);
   playLoopSound(var_0.origin, "veh_helo_flares_npc");
-  return var_00;
+  return var_0;
 }
 
-func_6E9F(var_00, var_01, var_02) {
-  if(isDefined(var_01) && isDefined(var_02)) {
-    var_00 = var_00 - var_01;
-    wait(var_01);
+func_6E9F(var_0, var_1, var_2) {
+  if(isDefined(var_1) && isDefined(var_2)) {
+    var_0 = var_0 - var_1;
+    wait(var_1);
 
-    if(isDefined(var_02)) {
+    if(isDefined(var_2)) {
       var_2.flareslive = scripts\engine\utility::array_remove(var_2.flareslive, self);
     }
   }
 
-  wait(var_00);
+  wait(var_0);
   self delete();
 }
 
-flares_getnumleft(var_00) {
+flares_getnumleft(var_0) {
   return var_0.flaresreservecount;
 }
 
-flares_areavailable(var_00) {
-  flares_cleanflareslivearray(var_00);
+flares_areavailable(var_0) {
+  flares_cleanflareslivearray(var_0);
   return var_0.flaresreservecount > 0 || var_0.flareslive.size > 0;
 }
 
-flares_getflarereserve(var_00) {
+flares_getflarereserve(var_0) {
   var_0.flaresreservecount--;
-  var_00 thread func_6EAE();
-  var_01 = var_00 func_6EA0();
-  return var_01;
+  var_0 thread func_6EAE();
+  var_1 = var_0 func_6EA0();
+  return var_1;
 }
 
-flares_cleanflareslivearray(var_00) {
+flares_cleanflareslivearray(var_0) {
   var_0.flareslive = scripts\engine\utility::array_removeundefined(var_0.flareslive);
 }
 
-flares_getflarelive(var_00) {
-  flares_cleanflareslivearray(var_00);
-  var_01 = undefined;
+flares_getflarelive(var_0) {
+  flares_cleanflareslivearray(var_0);
+  var_1 = undefined;
 
   if(var_0.flareslive.size > 0) {
-    var_01 = var_0.flareslive[var_0.flareslive.size - 1];
+    var_1 = var_0.flareslive[var_0.flareslive.size - 1];
   }
 
-  return var_01;
+  return var_1;
 }
 
 ks_laserguidedmissile_handleincoming() {
@@ -90,43 +90,43 @@ ks_laserguidedmissile_handleincoming() {
   self endon("helicopter_done");
 
   while(flares_areavailable(self)) {
-    level waittill("laserGuidedMissiles_incoming", var_00, var_01, var_02);
+    level waittill("laserGuidedMissiles_incoming", var_0, var_1, var_2);
 
-    if(!isDefined(var_02) || var_02 != self) {
+    if(!isDefined(var_2) || var_2 != self) {
       continue;
     }
-    if(!isarray(var_01)) {
-      var_01 = [var_01];
+    if(!isarray(var_1)) {
+      var_1 = [var_1];
     }
 
-    foreach(var_04 in var_01) {
-      if(isvalidmissile(var_04)) {
-        level thread ks_laserguidedmissile_monitorproximity(var_04, var_00, var_0.team, var_02);
+    foreach(var_4 in var_1) {
+      if(isvalidmissile(var_4)) {
+        level thread ks_laserguidedmissile_monitorproximity(var_4, var_0, var_0.team, var_2);
       }
     }
   }
 }
 
-ks_laserguidedmissile_monitorproximity(var_00, var_01, var_02, var_03) {
-  var_03 endon("death");
-  var_00 endon("death");
-  var_00 endon("missile_targetChanged");
+ks_laserguidedmissile_monitorproximity(var_0, var_1, var_2, var_3) {
+  var_3 endon("death");
+  var_0 endon("death");
+  var_0 endon("missile_targetChanged");
 
-  while(flares_areavailable(var_03)) {
-    if(!isDefined(var_03) || !isvalidmissile(var_00)) {
+  while(flares_areavailable(var_3)) {
+    if(!isDefined(var_3) || !isvalidmissile(var_0)) {
       break;
     }
-    var_04 = var_03 getpointinbounds(0, 0, 0);
+    var_4 = var_3 getpointinbounds(0, 0, 0);
 
-    if(distancesquared(var_0.origin, var_04) < 4000000) {
-      var_05 = flares_getflarelive(var_03);
+    if(distancesquared(var_0.origin, var_4) < 4000000) {
+      var_5 = flares_getflarelive(var_3);
 
-      if(!isDefined(var_05)) {
-        var_05 = flares_getflarereserve(var_03);
+      if(!isDefined(var_5)) {
+        var_5 = flares_getflarereserve(var_3);
       }
 
-      var_00 missile_settargetent(var_05);
-      var_00 notify("missile_pairedWithFlare");
+      var_0 missile_settargetent(var_5);
+      var_0 notify("missile_pairedWithFlare");
       break;
     }
 
@@ -134,7 +134,7 @@ ks_laserguidedmissile_monitorproximity(var_00, var_01, var_02, var_03) {
   }
 }
 
-func_6EAA(var_00) {
+func_6EAA(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -142,45 +142,45 @@ func_6EAA(var_00) {
   self endon("helicopter_done");
 
   for(;;) {
-    level waittill("sam_fired", var_01, var_02, var_03);
+    level waittill("sam_fired", var_1, var_2, var_3);
 
-    if(!isDefined(var_03) || var_03 != self) {
+    if(!isDefined(var_3) || var_3 != self) {
       continue;
     }
-    if(isDefined(var_00)) {
-      level thread[[var_00]](var_01, var_1.team, var_03, var_02);
+    if(isDefined(var_0)) {
+      level thread[[var_0]](var_1, var_1.team, var_3, var_2);
       continue;
     }
 
-    level thread func_6EB1(var_01, var_1.team, var_03, var_02);
+    level thread func_6EB1(var_1, var_1.team, var_3, var_2);
   }
 }
 
-func_6EB1(var_00, var_01, var_02, var_03) {
+func_6EB1(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  var_02 endon("death");
+  var_2 endon("death");
 
   for(;;) {
-    var_04 = var_02 getpointinbounds(0, 0, 0);
-    var_05 = [];
+    var_4 = var_2 getpointinbounds(0, 0, 0);
+    var_5 = [];
 
-    for(var_06 = 0; var_06 < var_3.size; var_6++) {
-      if(isDefined(var_3[var_06])) {
-        var_5[var_06] = distance(var_3[var_06].origin, var_04);
+    for(var_6 = 0; var_6 < var_3.size; var_6++) {
+      if(isDefined(var_3[var_6])) {
+        var_5[var_6] = distance(var_3[var_6].origin, var_4);
       }
     }
 
-    for(var_06 = 0; var_06 < var_5.size; var_6++) {
-      if(isDefined(var_5[var_06])) {
-        if(var_5[var_06] < 4000 && var_2.flaresreservecount > 0) {
+    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+      if(isDefined(var_5[var_6])) {
+        if(var_5[var_6] < 4000 && var_2.flaresreservecount > 0) {
           var_2.flaresreservecount--;
-          var_02 thread func_6EAE();
-          var_07 = var_02 func_6EA0();
+          var_2 thread func_6EAE();
+          var_7 = var_2 func_6EA0();
 
-          for(var_08 = 0; var_08 < var_3.size; var_8++) {
-            if(isDefined(var_3[var_08])) {
-              var_3[var_08] missile_settargetent(var_07);
-              var_3[var_08] notify("missile_pairedWithFlare");
+          for(var_8 = 0; var_8 < var_3.size; var_8++) {
+            if(isDefined(var_3[var_8])) {
+              var_3[var_8] missile_settargetent(var_7);
+              var_3[var_8] notify("missile_pairedWithFlare");
             }
           }
 
@@ -193,7 +193,7 @@ func_6EB1(var_00, var_01, var_02, var_03) {
   }
 }
 
-func_6EAB(var_00, var_01) {
+func_6EAB(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -201,35 +201,35 @@ func_6EAB(var_00, var_01) {
   self endon("helicopter_done");
 
   for(;;) {
-    level waittill("stinger_fired", var_02, var_03, var_04);
+    level waittill("stinger_fired", var_2, var_3, var_4);
 
-    if(!isDefined(var_04) || var_04 != self) {
+    if(!isDefined(var_4) || var_4 != self) {
       continue;
     }
-    if(isDefined(var_00)) {
-      var_03 thread[[var_00]](var_02, var_2.team, var_04, var_01);
+    if(isDefined(var_0)) {
+      var_3 thread[[var_0]](var_2, var_2.team, var_4, var_1);
       continue;
     }
 
-    var_03 thread func_6EB2(var_02, var_2.team, var_04, var_01);
+    var_3 thread func_6EB2(var_2, var_2.team, var_4, var_1);
   }
 }
 
-func_6EB2(var_00, var_01, var_02, var_03) {
+func_6EB2(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   for(;;) {
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       break;
     }
-    var_04 = var_02 getpointinbounds(0, 0, 0);
-    var_05 = distance(self.origin, var_04);
+    var_4 = var_2 getpointinbounds(0, 0, 0);
+    var_5 = distance(self.origin, var_4);
 
-    if(var_05 < 4000 && var_2.flaresreservecount > 0) {
+    if(var_5 < 4000 && var_2.flaresreservecount > 0) {
       var_2.flaresreservecount--;
-      var_02 thread func_6EAE(var_03);
-      var_06 = var_02 func_6EA0();
-      self missile_settargetent(var_06);
+      var_2 thread func_6EAE(var_3);
+      var_6 = var_2 func_6EA0();
+      self missile_settargetent(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -238,19 +238,19 @@ func_6EB2(var_00, var_01, var_02, var_03) {
   }
 }
 
-func_A730(var_00, var_01, var_02, var_03) {
-  self.flaresreservecount = var_00;
+func_A730(var_0, var_1, var_2, var_3) {
+  self.flaresreservecount = var_0;
   self.flareslive = [];
 
-  if(isDefined(var_02)) {
-    self.owner setclientomnvar(var_02, var_00);
+  if(isDefined(var_2)) {
+    self.owner setclientomnvar(var_2, var_0);
   }
 
-  thread func_A72F(var_01, var_02);
-  thread func_A72D(var_03);
+  thread func_A72F(var_1, var_2);
+  thread func_A72D(var_3);
 }
 
-func_A72F(var_00, var_01) {
+func_A72F(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -258,24 +258,24 @@ func_A72F(var_00, var_01) {
   self endon("helicopter_done");
 
   if(!isai(self.owner)) {
-    self.owner notifyonplayercommand("manual_flare_popped", var_00);
+    self.owner notifyonplayercommand("manual_flare_popped", var_0);
   }
 
   while(flares_getnumleft(self)) {
     self.owner waittill("manual_flare_popped");
-    var_02 = flares_getflarereserve(self);
+    var_2 = flares_getflarereserve(self);
 
-    if(isDefined(var_02) && isDefined(self.owner) && !isai(self.owner)) {
+    if(isDefined(var_2) && isDefined(self.owner) && !isai(self.owner)) {
       self.owner playlocalsound("veh_helo_flares_plr");
 
-      if(isDefined(var_01)) {
-        self.owner setclientomnvar(var_01, flares_getnumleft(self));
+      if(isDefined(var_1)) {
+        self.owner setclientomnvar(var_1, flares_getnumleft(self));
       }
     }
   }
 }
 
-func_A72D(var_00) {
+func_A72D(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -283,53 +283,53 @@ func_A72D(var_00) {
   self endon("helicopter_done");
 
   while(flares_areavailable(self)) {
-    self waittill("targeted_by_incoming_missile", var_01);
+    self waittill("targeted_by_incoming_missile", var_1);
 
-    if(!isDefined(var_01)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     self.owner playlocalsound("missile_incoming");
     self.owner thread ks_watch_death_stop_sound(self, "missile_incoming");
 
-    if(isDefined(var_00)) {
-      var_02 = vectornormalize(var_1[0].origin - self.origin);
-      var_03 = vectornormalize(anglestoright(self.angles));
-      var_04 = vectordot(var_02, var_03);
-      var_05 = 1;
+    if(isDefined(var_0)) {
+      var_2 = vectornormalize(var_1[0].origin - self.origin);
+      var_3 = vectornormalize(anglestoright(self.angles));
+      var_4 = vectordot(var_2, var_3);
+      var_5 = 1;
 
-      if(var_04 > 0) {
-        var_05 = 2;
-      } else if(var_04 < 0) {
-        var_05 = 3;
+      if(var_4 > 0) {
+        var_5 = 2;
+      } else if(var_4 < 0) {
+        var_5 = 3;
       }
 
-      self.owner setclientomnvar(var_00, var_05);
+      self.owner setclientomnvar(var_0, var_5);
     }
 
-    foreach(var_07 in var_01) {
-      if(isvalidmissile(var_07)) {
-        thread func_A72E(var_07);
+    foreach(var_7 in var_1) {
+      if(isvalidmissile(var_7)) {
+        thread func_A72E(var_7);
       }
     }
   }
 }
 
-func_A72E(var_00) {
+func_A72E(var_0) {
   self endon("death");
-  var_00 endon("death");
+  var_0 endon("death");
 
   for(;;) {
-    if(!isDefined(self) || !isvalidmissile(var_00)) {
+    if(!isDefined(self) || !isvalidmissile(var_0)) {
       break;
     }
-    var_01 = self getpointinbounds(0, 0, 0);
+    var_1 = self getpointinbounds(0, 0, 0);
 
-    if(distancesquared(var_0.origin, var_01) < 4000000) {
-      var_02 = flares_getflarelive(self);
+    if(distancesquared(var_0.origin, var_1) < 4000000) {
+      var_2 = flares_getflarelive(self);
 
-      if(isDefined(var_02)) {
-        var_00 missile_settargetent(var_02);
-        var_00 notify("missile_pairedWithFlare");
+      if(isDefined(var_2)) {
+        var_0 missile_settargetent(var_2);
+        var_0 notify("missile_pairedWithFlare");
         self.owner stopolcalsound("missile_incoming");
         break;
       }
@@ -339,8 +339,8 @@ func_A72E(var_00) {
   }
 }
 
-ks_watch_death_stop_sound(var_00, var_01) {
+ks_watch_death_stop_sound(var_0, var_1) {
   self endon("disconnect");
-  var_00 waittill("death");
-  self stopolcalsound(var_01);
+  var_0 waittill("death");
+  self stopolcalsound(var_1);
 }

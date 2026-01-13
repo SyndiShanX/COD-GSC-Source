@@ -143,32 +143,32 @@ func_B594() {
 
   level.player.var_C337.var_B620++;
   level.player.var_C337.var_28B5 = 1;
-  var_00 = scripts\sp\hud_util::createfontstring("objective", 1.25);
-  var_00 scripts\sp\hud_util::setpoint("CENTER", undefined, 0, 116);
-  var_00.alpha = 1;
-  var_00 settext(&"EQUIPMENT_SHIELD_MELEE_HINT");
+  var_0 = scripts\sp\hud_util::createfontstring("objective", 1.25);
+  var_0 scripts\sp\hud_util::setpoint("CENTER", undefined, 0, 116);
+  var_0.alpha = 1;
+  var_0 settext(&"EQUIPMENT_SHIELD_MELEE_HINT");
   func_13746(1);
-  var_01 = 0.25;
-  var_00 fadeovertime(var_01);
-  var_00.alpha = 0;
-  wait(var_01);
-  var_00 destroy();
+  var_1 = 0.25;
+  var_0 fadeovertime(var_1);
+  var_0.alpha = 0;
+  wait(var_1);
+  var_0 destroy();
   level.player.var_C337.var_28B5 = undefined;
 }
 
-func_13746(param_00) {
+func_13746(var_0) {
   self endon("offhandshield_retract");
-  wait(param_00);
+  wait(var_0);
 }
 
 func_C330() {
-  var_00 = level.player _meth_84CF() * 0.25;
+  var_0 = level.player _meth_84CF() * 0.25;
   for(;;) {
-    var_01 = level.player _meth_84D0();
-    if(var_01 <= var_00 && self.var_C337.var_19) {
+    var_1 = level.player _meth_84D0();
+    if(var_1 <= var_0 && self.var_C337.var_19) {
       thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_alarm");
-      childthread func_C339(var_00);
-      while(self _meth_84D0() < var_00 && self.var_C337.var_19) {
+      childthread func_C339(var_0);
+      while(self _meth_84D0() < var_0 && self.var_C337.var_19) {
         wait(0.05);
       }
 
@@ -179,13 +179,13 @@ func_C330() {
   }
 }
 
-func_C339(param_00) {
+func_C339(var_0) {
   if(isDefined(self.var_C337.var_FC8E)) {
     return;
   }
 
   self.var_C337.var_FC8E = 1;
-  while(self _meth_84D0() < param_00) {
+  while(self _meth_84D0() < var_0) {
     wait(0.05);
   }
 
@@ -193,79 +193,79 @@ func_C339(param_00) {
   self.var_C337.var_FC8E = undefined;
 }
 
-func_C32D(param_00) {
-  if(param_00 && !level.player.var_C337.var_260E) {
+func_C32D(var_0) {
+  if(var_0 && !level.player.var_C337.var_260E) {
     level.player.var_C337.var_260E = 1;
     level.player thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_hum");
     return;
   }
 
-  if(!param_00 && level.player.var_C337.var_260E) {
+  if(!var_0 && level.player.var_C337.var_260E) {
     level.player.var_C337.var_260E = 0;
     level.player notify("stop soundretract_shield_energy_hum");
   }
 }
 
-func_CB92(param_00) {
+func_CB92(var_0) {
   self endon("offhandshield_retract");
-  var_01 = 1;
-  var_02 = [];
+  var_1 = 1;
+  var_2 = [];
   wait(0.15);
   for(;;) {
     level.player.var_C337.var_CB8F.queuedialog = 5;
-    var_02 = scripts\engine\utility::array_remove_array(var_02, var_02);
-    var_03 = getaiarray();
+    var_2 = scripts\engine\utility::array_remove_array(var_2, var_2);
+    var_3 = getaiarray();
     if(isDefined(level.player.var_C337.var_6A48)) {
-      var_03 = scripts\engine\utility::array_combine(var_03, level.var_C337.var_6A48);
+      var_3 = scripts\engine\utility::array_combine(var_3, level.var_C337.var_6A48);
     }
 
-    foreach(var_05 in var_03) {
-      var_06 = distance(var_05.origin, self.origin);
-      if(var_06 > level.player.var_C337.var_CB8F.var_56E8) {
-        var_03 = scripts\engine\utility::array_remove(var_03, var_05);
+    foreach(var_5 in var_3) {
+      var_6 = distance(var_5.origin, self.origin);
+      if(var_6 > level.player.var_C337.var_CB8F.var_56E8) {
+        var_3 = scripts\engine\utility::array_remove(var_3, var_5);
         continue;
       }
 
-      if(var_05.ignoreme) {
-        var_03 = scripts\engine\utility::array_remove(var_03, var_05);
+      if(var_5.ignoreme) {
+        var_3 = scripts\engine\utility::array_remove(var_3, var_5);
         continue;
       }
 
-      var_05.var_D028 = var_06;
+      var_5.var_D028 = var_6;
     }
 
-    if(!var_03.size) {
+    if(!var_3.size) {
       wait(level.player.var_C337.var_CB8F.queuedialog);
       continue;
     }
 
-    var_08 = scripts\sp\utility::func_78BB(self.origin, var_03, level.player.var_C337.var_CB8F.var_56E8);
-    var_09 = scripts\sp\utility::func_79B3(self.origin, var_03);
-    var_0A = distance2d(level.player.origin, var_08.origin) / level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d;
-    if(!isDefined(var_08)) {
+    var_8 = scripts\sp\utility::func_78BB(self.origin, var_3, level.player.var_C337.var_CB8F.var_56E8);
+    var_9 = scripts\sp\utility::func_79B3(self.origin, var_3);
+    var_0A = distance2d(level.player.origin, var_8.origin) / level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d;
+    if(!isDefined(var_8)) {
       wait(level.player.var_C337.var_CB8F.queuedialog);
       continue;
     }
 
-    if(var_08.var_D028 <= level.player.var_C337.var_CB8F.var_56E8) {
-      if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.5) {
+    if(var_8.var_D028 <= level.player.var_C337.var_CB8F.var_56E8) {
+      if(var_8.var_D028 <= level.player.var_C337.var_CB8F.time * 0.5) {
         level.player.var_C337.var_CB8F.queuedialog = level.player.var_C337.var_CB8F.queuedialog * 0.5;
-      } else if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.75) {
+      } else if(var_8.var_D028 <= level.player.var_C337.var_CB8F.time * 0.75) {
         level.player.var_C337.var_CB8F.queuedialog = level.player.var_C337.var_CB8F.queuedialog * 0.75;
       }
     }
 
-    if(level.player.var_C337.var_CB8F.queuedialog < var_01) {
-      level.player.var_C337.var_CB8F.queuedialog = var_01;
+    if(level.player.var_C337.var_CB8F.queuedialog < var_1) {
+      level.player.var_C337.var_CB8F.queuedialog = var_1;
     }
 
-    if(var_03.size && level.var_6DD1) {
+    if(var_3.size && level.var_6DD1) {
       level.var_6DD1 = 0;
       level notify("first_pinged_ents");
     }
 
     doping();
-    scripts\engine\utility::array_thread([var_08, var_09], ::func_CB94, level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d);
+    scripts\engine\utility::array_thread([var_8, var_9], ::func_CB94, level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d);
     var_0B = 1;
     var_0C = level.player.var_C337.var_CB8F.queuedialog - var_0B;
     if(var_0C > var_0B) {
@@ -282,55 +282,55 @@ doping() {
   self _meth_854F();
 }
 
-func_CB94(param_00) {
+func_CB94(var_0) {
   self endon("death");
-  var_01 = distance2d(level.player.origin, self.origin) / param_00;
-  var_01 = var_01 / 1000;
-  wait(var_01);
-  thread func_CB95(var_01);
+  var_1 = distance2d(level.player.origin, self.origin) / var_0;
+  var_1 = var_1 / 1000;
+  wait(var_1);
+  thread func_CB95(var_1);
 }
 
-func_CB95(param_00) {
+func_CB95(var_0) {
   if(!isalive(self)) {
     return;
   }
 
-  var_01 = scripts\sp\math::func_C097(0.1, 1, param_00);
-  var_02 = scripts\sp\math::func_6A8E(1.1, 0.8, var_01);
+  var_1 = scripts\sp\math::func_C097(0.1, 1, var_0);
+  var_2 = scripts\sp\math::func_6A8E(1.1, 0.8, var_1);
   if(issentient(self)) {
-    var_03 = self getEye();
+    var_3 = self getEye();
   } else {
-    var_03 = self.origin;
+    var_3 = self.origin;
   }
 
-  var_04 = spawn("script_origin", var_03);
-  var_04 playSound("retract_shield_tracker_3d_target", "sounddone");
-  var_04 _meth_8277(var_02);
-  var_04 waittill("sounddone");
-  var_04 delete();
+  var_4 = spawn("script_origin", var_3);
+  var_4 playSound("retract_shield_tracker_3d_target", "sounddone");
+  var_4 _meth_8277(var_2);
+  var_4 waittill("sounddone");
+  var_4 delete();
 }
 
-func_C76C(param_00, param_01) {
+func_C76C(var_0, var_1) {
   self endon("death");
-  if(isDefined(param_01)) {
-    wait(param_01);
+  if(isDefined(var_1)) {
+    wait(var_1);
   }
 
-  var_02 = getaiarray();
-  var_03 = getspawnerarray();
-  if(param_00) {
-    scripts\engine\utility::array_thread(var_02, ::func_C76A);
-    if(var_03.size) {
-      scripts\sp\utility::func_22C7(var_03, ::func_C76A);
+  var_2 = getaiarray();
+  var_3 = getspawnerarray();
+  if(var_0) {
+    scripts\engine\utility::array_thread(var_2, ::func_C76A);
+    if(var_3.size) {
+      scripts\sp\utility::func_22C7(var_3, ::func_C76A);
       return;
     }
 
     return;
   }
 
-  scripts\engine\utility::array_thread(var_02, ::func_C769);
-  if(var_03.size) {
-    scripts\engine\utility::array_thread(var_03, ::scripts\sp\utility::func_E08B, ::func_C76A);
+  scripts\engine\utility::array_thread(var_2, ::func_C769);
+  if(var_3.size) {
+    scripts\engine\utility::array_thread(var_3, ::scripts\sp\utility::func_E08B, ::func_C76A);
   }
 }
 
@@ -365,51 +365,51 @@ func_C77F() {
 }
 
 func_FC8B() {
-  var_00 = [];
-  var_00["r_hudoutlineWidth"] = 1;
-  var_00["r_hudoutlineFillColor1"] = "0 0 0 1";
-  var_00["r_hudoutlineFillColor0"] = "0.8 0.8 0.8 1";
-  var_00["r_hudoutlineOccludedOutlineColor"] = "0.8 0.8 0.8 1";
-  var_00["r_hudoutlineOccludedInteriorColor"] = "0.5 0.5 0.5 .2";
-  var_00["r_hudoutlineOccludedInlineColor"] = "0.5 0.5 0.5 .5";
-  var_00["r_hudoutlineFillColor1"] = "0.8 0.8 0.8 .2";
-  var_00["r_hudOutlineOccludedColorFromFill"] = 1;
-  return var_00;
+  var_0 = [];
+  var_0["r_hudoutlineWidth"] = 1;
+  var_0["r_hudoutlineFillColor1"] = "0 0 0 1";
+  var_0["r_hudoutlineFillColor0"] = "0.8 0.8 0.8 1";
+  var_0["r_hudoutlineOccludedOutlineColor"] = "0.8 0.8 0.8 1";
+  var_0["r_hudoutlineOccludedInteriorColor"] = "0.5 0.5 0.5 .2";
+  var_0["r_hudoutlineOccludedInlineColor"] = "0.5 0.5 0.5 .5";
+  var_0["r_hudoutlineFillColor1"] = "0.8 0.8 0.8 .2";
+  var_0["r_hudOutlineOccludedColorFromFill"] = 1;
+  return var_0;
 }
 
-func_C780(param_00) {
+func_C780(var_0) {
   func_AB81(1);
-  if(isDefined(param_00)) {
-    wait(param_00);
+  if(isDefined(var_0)) {
+    wait(var_0);
   }
 
   func_AB81(0);
 }
 
-func_AB81(param_00) {
-  var_01 = scripts\engine\utility::ter_op(param_00, 0.1, 1);
-  var_02 = 0.05;
-  var_03 = "0.8 0.8 0.8 ";
-  var_04 = "0.5 0.5 0.5 ";
-  for(var_05 = 1; var_05 < 11; var_05++) {
-    setsaveddvar("r_hudoutlineFillColor0", var_03 + var_01 + "");
-    setsaveddvar("r_hudoutlineOccludedOutlineColor", var_03 + var_01 + "");
-    setsaveddvar("r_hudoutlineOccludedInteriorColor", var_04 + var_01 + "");
-    if(param_00 && var_05 < 2) {
-      setsaveddvar("r_hudoutlineFillColor1", var_03 + var_01 + "");
-    } else if(!param_00 && var_05 > 2) {
-      setsaveddvar("r_hudoutlineFillColor1", var_03 + var_01 + "");
+func_AB81(var_0) {
+  var_1 = scripts\engine\utility::ter_op(var_0, 0.1, 1);
+  var_2 = 0.05;
+  var_3 = "0.8 0.8 0.8 ";
+  var_4 = "0.5 0.5 0.5 ";
+  for(var_5 = 1; var_5 < 11; var_5++) {
+    setsaveddvar("r_hudoutlineFillColor0", var_3 + var_1 + "");
+    setsaveddvar("r_hudoutlineOccludedOutlineColor", var_3 + var_1 + "");
+    setsaveddvar("r_hudoutlineOccludedInteriorColor", var_4 + var_1 + "");
+    if(var_0 && var_5 < 2) {
+      setsaveddvar("r_hudoutlineFillColor1", var_3 + var_1 + "");
+    } else if(!var_0 && var_5 > 2) {
+      setsaveddvar("r_hudoutlineFillColor1", var_3 + var_1 + "");
     }
 
-    setsaveddvar("r_hudoutlineOccludedInlineColor", var_04 + var_01 + "");
-    if(param_00) {
-      var_01 = scripts\engine\utility::ter_op(var_05 == 9, 1, var_01 + 0.1);
+    setsaveddvar("r_hudoutlineOccludedInlineColor", var_4 + var_1 + "");
+    if(var_0) {
+      var_1 = scripts\engine\utility::ter_op(var_5 == 9, 1, var_1 + 0.1);
     } else {
-      var_01 = scripts\engine\utility::ter_op(var_05 == 9, 0, var_01 - 0.1);
+      var_1 = scripts\engine\utility::ter_op(var_5 == 9, 0, var_1 - 0.1);
     }
 
-    wait(var_02);
+    wait(var_2);
   }
 
-  wait(var_02);
+  wait(var_2);
 }

@@ -68,10 +68,10 @@ onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var_00 = game["attackers"];
-    var_01 = game["defenders"];
-    game["attackers"] = var_01;
-    game["defenders"] = var_00;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_FRONT");
@@ -89,8 +89,8 @@ onstartgametype() {
   level.iconkill3d = "waypoint_capture_kill";
   level.iconkill2d = "waypoint_capture_kill";
   initspawns();
-  var_02[0] = level.gametype;
-  scripts\mp\gameobjects::main(var_02);
+  var_2[0] = level.gametype;
+  scripts\mp\gameobjects::main(var_2);
   base_setupvfx();
   thread setupbases();
   thread setupbaseareabrushes();
@@ -130,53 +130,53 @@ onspawnplayer() {
     self.outlineid = undefined;
     thread friendlybasewatcher();
     thread func_654F();
-    foreach(var_01 in level.zones) {
-      var_01 showbaseeffecttoplayer(self);
+    foreach(var_1 in level.zones) {
+      var_1 showbaseeffecttoplayer(self);
     }
   }
 }
 
 getspawnpoint() {
-  var_00 = self.pers["team"];
+  var_0 = self.pers["team"];
   if(game["switchedsides"]) {
-    var_00 = scripts\mp\utility::getotherteam(var_00);
+    var_0 = scripts\mp\utility::getotherteam(var_0);
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_00);
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01);
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_0);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1);
   } else {
-    var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
-    var_03 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_01);
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01, var_03);
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_2);
+    var_3 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_1);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1, var_3);
   }
 
-  return var_02;
+  return var_2;
 }
 
-onnormaldeath(param_00, param_01, param_02, param_03, param_04) {
-  scripts\mp\gametypes\common::onnormaldeath(param_00, param_01, param_02, param_03, param_04);
-  var_05 = 0;
-  if(param_00.infriendlybase || param_01.inenemybase) {
-    param_01 thread scripts\mp\utility::giveunifiedpoints("enemy_base_kill", param_04);
-    var_05 = level.enemybasescore;
-  } else if(param_01.infriendlybase || param_00.inenemybase) {
-    param_01 thread scripts\mp\utility::giveunifiedpoints("friendly_base_kill", param_04);
-    var_05 = level.friendlybasescore;
+onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::onnormaldeath(var_0, var_1, var_2, var_3, var_4);
+  var_5 = 0;
+  if(var_0.infriendlybase || var_1.inenemybase) {
+    var_1 thread scripts\mp\utility::giveunifiedpoints("enemy_base_kill", var_4);
+    var_5 = level.enemybasescore;
+  } else if(var_1.infriendlybase || var_0.inenemybase) {
+    var_1 thread scripts\mp\utility::giveunifiedpoints("friendly_base_kill", var_4);
+    var_5 = level.friendlybasescore;
   } else {
-    param_01 thread scripts\mp\utility::giveunifiedpoints("midfield_kill", param_04);
-    var_05 = level.midfieldscore;
+    var_1 thread scripts\mp\utility::giveunifiedpoints("midfield_kill", var_4);
+    var_5 = level.midfieldscore;
   }
 
-  var_06 = game["teamScores"][param_01.pers["team"]] + var_05;
-  var_07 = var_06 >= level.roundscorelimit;
-  if(var_07 && level.roundscorelimit != 0) {
-    var_05 = level.roundscorelimit - game["teamScores"][param_01.pers["team"]];
+  var_6 = game["teamScores"][var_1.pers["team"]] + var_5;
+  var_7 = var_6 >= level.roundscorelimit;
+  if(var_7 && level.roundscorelimit != 0) {
+    var_5 = level.roundscorelimit - game["teamScores"][var_1.pers["team"]];
   }
 
-  if(var_05 > 0) {
-    scripts\mp\gamescore::giveteamscoreforobjective(param_01.pers["team"], var_05, 0);
-    param_01 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_05);
+  if(var_5 > 0) {
+    scripts\mp\gamescore::giveteamscoreforobjective(var_1.pers["team"], var_5, 0);
+    var_1 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_5);
   }
 }
 
@@ -205,26 +205,26 @@ setupbases() {
   level.zones = [];
   if(game["switchedsides"]) {
     level.allieszone = getEntArray("frontline_zone_allies", "targetname");
-    foreach(var_01 in level.allieszone) {
-      var_01.team = "axis";
-      var_01 thread friendlybasewatcher();
-      var_01 thread func_654F();
-      var_01 thread enemybasekillstreakwatcher();
+    foreach(var_1 in level.allieszone) {
+      var_1.team = "axis";
+      var_1 thread friendlybasewatcher();
+      var_1 thread func_654F();
+      var_1 thread enemybasekillstreakwatcher();
     }
 
     thread setupvisuals(level.allieszone[0]);
     level.zones[level.zones.size] = level.allieszone[0];
     level.axiszone = getEntArray("frontline_zone_axis", "targetname");
     if(level.mapname == "mp_junk") {
-      var_03 = spawn("trigger_radius", (-1410, -2080, 240), 0, 1000, 600);
-      level.axiszone[level.axiszone.size] = var_03;
+      var_3 = spawn("trigger_radius", (-1410, -2080, 240), 0, 1000, 600);
+      level.axiszone[level.axiszone.size] = var_3;
     }
 
-    foreach(var_01 in level.axiszone) {
-      var_01.team = "allies";
-      var_01 thread friendlybasewatcher();
-      var_01 thread func_654F();
-      var_01 thread enemybasekillstreakwatcher();
+    foreach(var_1 in level.axiszone) {
+      var_1.team = "allies";
+      var_1 thread friendlybasewatcher();
+      var_1 thread func_654F();
+      var_1 thread enemybasekillstreakwatcher();
     }
 
     thread setupvisuals(level.axiszone[0]);
@@ -233,83 +233,83 @@ setupbases() {
   }
 
   level.allieszone = getEntArray("frontline_zone_allies", "targetname");
-  foreach(var_01 in level.allieszone) {
-    var_01.team = "allies";
-    var_01 thread friendlybasewatcher();
-    var_01 thread func_654F();
-    var_01 thread enemybasekillstreakwatcher();
+  foreach(var_1 in level.allieszone) {
+    var_1.team = "allies";
+    var_1 thread friendlybasewatcher();
+    var_1 thread func_654F();
+    var_1 thread enemybasekillstreakwatcher();
   }
 
   thread setupvisuals(level.allieszone[0]);
   level.zones[level.zones.size] = level.allieszone[0];
   level.axiszone = getEntArray("frontline_zone_axis", "targetname");
   if(level.mapname == "mp_junk") {
-    var_03 = spawn("trigger_radius", (-1410, -2080, 240), 0, 1000, 600);
-    level.axiszone[level.axiszone.size] = var_03;
+    var_3 = spawn("trigger_radius", (-1410, -2080, 240), 0, 1000, 600);
+    level.axiszone[level.axiszone.size] = var_3;
   }
 
-  foreach(var_01 in level.axiszone) {
-    var_01.team = "axis";
-    var_01 thread friendlybasewatcher();
-    var_01 thread func_654F();
-    var_01 thread enemybasekillstreakwatcher();
+  foreach(var_1 in level.axiszone) {
+    var_1.team = "axis";
+    var_1 thread friendlybasewatcher();
+    var_1 thread func_654F();
+    var_1 thread enemybasekillstreakwatcher();
   }
 
   thread setupvisuals(level.axiszone[0]);
   level.zones[level.zones.size] = level.axiszone[0];
 }
 
-setupvisuals(param_00) {
-  var_01 = [];
-  var_01[0] = param_00;
-  if(isDefined(param_00.target)) {
-    var_02 = getEntArray(param_00.target, "targetname");
-    for(var_03 = 0; var_03 < var_02.size; var_03++) {
-      var_01[var_01.size] = var_02[var_03];
+setupvisuals(var_0) {
+  var_1 = [];
+  var_1[0] = var_0;
+  if(isDefined(var_0.target)) {
+    var_2 = getEntArray(var_0.target, "targetname");
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      var_1[var_1.size] = var_2[var_3];
     }
   }
 
-  var_01 = mappatchborders(var_01, param_00.target);
-  param_00.visuals = var_01;
+  var_1 = mappatchborders(var_1, var_0.target);
+  var_0.visuals = var_1;
 }
 
-mappatchborders(param_00, param_01) {
-  if(level.mapname == "mp_parkour" && param_01 == "front_vis_axis") {
-    var_02 = spawn("script_origin", (-1088, -1504, 136));
-    var_02.angles = (0, 180, 0);
-    var_02.var_336 = param_01;
-    param_00[param_00.size] = var_02;
-    var_03 = spawn("script_origin", (-1088, -1440, 136));
-    var_03.angles = (0, 180, 0);
-    var_02.var_336 = param_01;
-    param_00[param_00.size] = var_03;
+mappatchborders(var_0, var_1) {
+  if(level.mapname == "mp_parkour" && var_1 == "front_vis_axis") {
+    var_2 = spawn("script_origin", (-1088, -1504, 136));
+    var_2.angles = (0, 180, 0);
+    var_2.var_336 = var_1;
+    var_0[var_0.size] = var_2;
+    var_3 = spawn("script_origin", (-1088, -1440, 136));
+    var_3.angles = (0, 180, 0);
+    var_2.var_336 = var_1;
+    var_0[var_0.size] = var_3;
   }
 
-  return param_00;
+  return var_0;
 }
 
 friendlybasewatcher() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("trigger", var_00);
-    if(!isplayer(var_00)) {
+    self waittill("trigger", var_0);
+    if(!isplayer(var_0)) {
       continue;
     }
 
-    if(var_00.team != self.team) {
+    if(var_0.team != self.team) {
       continue;
     }
 
-    if(var_00.infriendlybase) {
+    if(var_0.infriendlybase) {
       continue;
     }
 
-    var_00 thread friendlybasetriggerwatcher(self);
+    var_0 thread friendlybasetriggerwatcher(self);
   }
 }
 
-friendlybasetriggerwatcher(param_00) {
+friendlybasetriggerwatcher(var_0) {
   self notify("friendlyTriggerWatcher");
   self endon("friendlyTriggerWatcher");
   self endon("death");
@@ -317,20 +317,20 @@ friendlybasetriggerwatcher(param_00) {
   level endon("game_ended");
   if(game["switchedsides"]) {
     if(self.team == "allies") {
-      var_01 = level.axiszone;
+      var_1 = level.axiszone;
     } else {
-      var_01 = level.allieszone;
+      var_1 = level.allieszone;
     }
   } else if(self.team == "allies") {
-    var_01 = level.allieszone;
+    var_1 = level.allieszone;
   } else {
-    var_01 = level.axiszone;
+    var_1 = level.axiszone;
   }
 
   for(;;) {
     self.infriendlybase = 0;
-    foreach(param_00 in var_01) {
-      if(self istouching(param_00)) {
+    foreach(var_0 in var_1) {
+      if(self istouching(var_0)) {
         self.infriendlybase = 1;
         break;
       }
@@ -351,19 +351,19 @@ friendlybasetriggerwatcher(param_00) {
 func_654F() {
   level endon("game_ended");
   for(;;) {
-    self waittill("trigger", var_00);
-    if(isDefined(var_00.team) && var_00.team == self.team) {
+    self waittill("trigger", var_0);
+    if(isDefined(var_0.team) && var_0.team == self.team) {
       continue;
     }
 
-    if((isalive(var_00) && isDefined(var_00.sessionstate) && var_00.sessionstate != "spectator") || playercontrolledstreak(var_00)) {
-      var_00.inenemybase = 1;
-      var_00 thread func_654E(self);
+    if((isalive(var_0) && isDefined(var_0.sessionstate) && var_0.sessionstate != "spectator") || playercontrolledstreak(var_0)) {
+      var_0.inenemybase = 1;
+      var_0 thread func_654E(self);
     }
   }
 }
 
-func_654E(param_00) {
+func_654E(var_0) {
   self endon("death");
   level endon("game_ended");
   if(scripts\mp\utility::istrue(self.useoutline)) {
@@ -371,7 +371,7 @@ func_654E(param_00) {
   }
 
   for(;;) {
-    if(isDefined(self) && self istouching(param_00)) {
+    if(isDefined(self) && self istouching(var_0)) {
       if(!scripts\mp\utility::istrue(self.useoutline)) {
         thread enableenemybaseoutline();
       }
@@ -413,14 +413,14 @@ enemybasekillstreakwatcher() {
   level endon("game_ended");
   for(;;) {
     if(level.turrets.size > 0) {
-      foreach(var_01 in level.turrets) {
-        handleoutlinesforstreaks(var_01);
+      foreach(var_1 in level.turrets) {
+        handleoutlinesforstreaks(var_1);
       }
     }
 
     if(level.balldrones.size > 0) {
-      foreach(var_04 in level.balldrones) {
-        handleoutlinesforstreaks(var_04);
+      foreach(var_4 in level.balldrones) {
+        handleoutlinesforstreaks(var_4);
       }
     }
 
@@ -428,30 +428,30 @@ enemybasekillstreakwatcher() {
   }
 }
 
-handleoutlinesforstreaks(param_00) {
-  if(param_00.triggerportableradarping.team == self.team) {
+handleoutlinesforstreaks(var_0) {
+  if(var_0.triggerportableradarping.team == self.team) {
     return;
   }
 
-  if(param_00 istouching(self)) {
-    if(!isDefined(param_00.outlineid)) {
-      param_00.outlineid = scripts\mp\utility::outlineenableforteam(param_00, "orange", self.team, 0, 0, "lowest");
+  if(var_0 istouching(self)) {
+    if(!isDefined(var_0.outlineid)) {
+      var_0.outlineid = scripts\mp\utility::outlineenableforteam(var_0, "orange", self.team, 0, 0, "lowest");
       return;
     }
 
     return;
   }
 
-  if(isDefined(param_00.outlineid)) {
-    scripts\mp\utility::outlinedisable(param_00.outlineid, param_00);
-    param_00.outlineid = undefined;
+  if(isDefined(var_0.outlineid)) {
+    scripts\mp\utility::outlinedisable(var_0.outlineid, var_0);
+    var_0.outlineid = undefined;
     return;
   }
 }
 
-playercontrolledstreak(param_00) {
-  if(isDefined(param_00.streakname)) {
-    switch (param_00.streakname) {
+playercontrolledstreak(var_0) {
+  if(isDefined(var_0.streakname)) {
+    switch (var_0.streakname) {
       case "remote_c8":
       case "venom":
       case "minijackal":
@@ -465,58 +465,58 @@ playercontrolledstreak(param_00) {
   return 0;
 }
 
-showbaseeffecttoplayer(param_00) {
-  var_01 = self.team;
-  var_02 = undefined;
-  var_03 = param_00.team;
-  if(!isDefined(var_03)) {
-    var_03 = "allies";
+showbaseeffecttoplayer(var_0) {
+  var_1 = self.team;
+  var_2 = undefined;
+  var_3 = var_0.team;
+  if(!isDefined(var_3)) {
+    var_3 = "allies";
   }
 
-  var_04 = param_00 ismlgspectator();
-  if(var_04) {
-    var_03 = param_00 getmlgspectatorteam();
-  } else if(var_03 == "spectator") {
-    var_03 = "allies";
+  var_4 = var_0 ismlgspectator();
+  if(var_4) {
+    var_3 = var_0 getmlgspectatorteam();
+  } else if(var_3 == "spectator") {
+    var_3 = "allies";
   }
 
-  var_05 = level.basefxid["friendly"];
-  var_06 = level.basefxid["enemy"];
-  if(var_03 == var_01) {
-    showfxarray(self._baseeffectfriendly, param_00);
-    hidefxarray(self._baseeffectenemy, param_00);
+  var_5 = level.basefxid["friendly"];
+  var_6 = level.basefxid["enemy"];
+  if(var_3 == var_1) {
+    showfxarray(self._baseeffectfriendly, var_0);
+    hidefxarray(self._baseeffectenemy, var_0);
     return;
   }
 
-  showfxarray(self._baseeffectenemy, param_00);
-  hidefxarray(self._baseeffectfriendly, param_00);
+  showfxarray(self._baseeffectenemy, var_0);
+  hidefxarray(self._baseeffectfriendly, var_0);
 }
 
-showfxarray(param_00, param_01) {
-  for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    param_00[var_02] showtoplayer(param_01);
+showfxarray(var_0, var_1) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_0[var_2] showtoplayer(var_1);
   }
 }
 
-hidefxarray(param_00, param_01) {
-  for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    param_00[var_02] hidefromplayer(param_01);
+hidefxarray(var_0, var_1) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_0[var_2] hidefromplayer(var_1);
   }
 }
 
 spawnfxarray() {
   self._baseeffectfriendly = [];
   self._baseeffectenemy = [];
-  for(var_00 = 1; var_00 < self.visuals.size; var_00++) {
-    var_01 = anglesToForward(self.visuals[var_00].angles);
-    self._baseeffectfriendly[self._baseeffectfriendly.size] = spawnfx(level.basefxid["friendly"], self.visuals[var_00].origin, var_01);
+  for(var_0 = 1; var_0 < self.visuals.size; var_0++) {
+    var_1 = anglesToForward(self.visuals[var_0].angles);
+    self._baseeffectfriendly[self._baseeffectfriendly.size] = spawnfx(level.basefxid["friendly"], self.visuals[var_0].origin, var_1);
     self._baseeffectfriendly[self._baseeffectfriendly.size - 1] setfxkilldefondelete();
     triggerfx(self._baseeffectfriendly[self._baseeffectfriendly.size - 1]);
   }
 
-  for(var_00 = 1; var_00 < self.visuals.size; var_00++) {
-    var_01 = anglesToForward(self.visuals[var_00].angles);
-    self._baseeffectenemy[self._baseeffectenemy.size] = spawnfx(level.basefxid["enemy"], self.visuals[var_00].origin, var_01);
+  for(var_0 = 1; var_0 < self.visuals.size; var_0++) {
+    var_1 = anglesToForward(self.visuals[var_0].angles);
+    self._baseeffectenemy[self._baseeffectenemy.size] = spawnfx(level.basefxid["enemy"], self.visuals[var_0].origin, var_1);
     self._baseeffectenemy[self._baseeffectenemy.size - 1] setfxkilldefondelete();
     triggerfx(self._baseeffectenemy[self._baseeffectenemy.size - 1]);
   }
@@ -528,51 +528,51 @@ base_setupvfx() {
 }
 
 onplayerconnect() {
-  var_00 = 1;
+  var_0 = 1;
   for(;;) {
-    level waittill("connected", var_01);
-    if(var_00) {
-      foreach(var_03 in level.zones) {
-        var_03 spawnfxarray();
+    level waittill("connected", var_1);
+    if(var_0) {
+      foreach(var_3 in level.zones) {
+        var_3 spawnfxarray();
       }
 
-      var_00 = 0;
+      var_0 = 0;
     }
 
-    foreach(var_03 in level.zones) {
-      var_03 showbaseeffecttoplayer(var_01);
+    foreach(var_3 in level.zones) {
+      var_3 showbaseeffecttoplayer(var_1);
     }
   }
 }
 
 setupbaseareabrushes() {
-  var_00 = getbasearray("front_zone_visual_allies_contest");
-  var_01 = getbasearray("front_zone_visual_axis_contest");
-  var_02 = getbasearray("front_zone_visual_allies_friend");
-  var_03 = getbasearray("front_zone_visual_axis_friend");
-  var_04 = getbasearray("front_zone_visual_allies_enemy");
-  var_05 = getbasearray("front_zone_visual_axis_enemy");
-  hidebasebrushes(var_00);
-  hidebasebrushes(var_01);
-  hidebasebrushes(var_02);
-  hidebasebrushes(var_03);
-  hidebasebrushes(var_04);
-  hidebasebrushes(var_05);
+  var_0 = getbasearray("front_zone_visual_allies_contest");
+  var_1 = getbasearray("front_zone_visual_axis_contest");
+  var_2 = getbasearray("front_zone_visual_allies_friend");
+  var_3 = getbasearray("front_zone_visual_axis_friend");
+  var_4 = getbasearray("front_zone_visual_allies_enemy");
+  var_5 = getbasearray("front_zone_visual_axis_enemy");
+  hidebasebrushes(var_0);
+  hidebasebrushes(var_1);
+  hidebasebrushes(var_2);
+  hidebasebrushes(var_3);
+  hidebasebrushes(var_4);
+  hidebasebrushes(var_5);
 }
 
-hidebasebrushes(param_00) {
-  if(isDefined(param_00)) {
-    for(var_01 = 0; var_01 < param_00.size; var_01++) {
-      param_00[var_01] hide();
+hidebasebrushes(var_0) {
+  if(isDefined(var_0)) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      var_0[var_1] hide();
     }
   }
 }
 
-getbasearray(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  if(!isDefined(var_01) || var_01.size == 0) {
+getbasearray(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  if(!isDefined(var_1) || var_1.size == 0) {
     return undefined;
   }
 
-  return var_01;
+  return var_1;
 }

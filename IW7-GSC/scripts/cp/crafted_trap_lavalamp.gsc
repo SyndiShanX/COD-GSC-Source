@@ -6,31 +6,31 @@
 
 init() {
   level.lavalamp_trap_settings = [];
-  var_00 = spawnStruct();
-  var_00.modelbase = "cp_disco_lava_lamp_bomb";
-  var_00.modelplacement = "cp_disco_lava_lamp_bomb";
-  var_00.modelplacementfailed = "cp_disco_lava_lamp_bomb_bad";
-  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_00.lifespan = 120;
-  var_00.var_DDAC = 2;
-  var_00._meth_8487 = 0.4;
-  var_00.var_C228 = 12;
-  var_00.placementheighttolerance = 30;
-  var_00.placementradius = 16;
-  var_00.carriedtrapoffset = (0, 0, 35);
-  var_00.carriedtrapangles = (0, -90, 0);
-  level.lavalamp_trap_settings["crafted_lavalamp"] = var_00;
+  var_0 = spawnStruct();
+  var_0.modelbase = "cp_disco_lava_lamp_bomb";
+  var_0.modelplacement = "cp_disco_lava_lamp_bomb";
+  var_0.modelplacementfailed = "cp_disco_lava_lamp_bomb_bad";
+  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.lifespan = 120;
+  var_0.var_DDAC = 2;
+  var_0._meth_8487 = 0.4;
+  var_0.var_C228 = 12;
+  var_0.placementheighttolerance = 30;
+  var_0.placementradius = 16;
+  var_0.carriedtrapoffset = (0, 0, 35);
+  var_0.carriedtrapangles = (0, -90, 0);
+  level.lavalamp_trap_settings["crafted_lavalamp"] = var_0;
 }
 
-give_crafted_lavalamp_trap(param_00, param_01) {
-  param_01 thread watch_dpad();
-  param_01 notify("new_power", "crafted_lavalamp");
-  param_01 setclientomnvar("zom_crafted_weapon", 11);
-  param_01 thread scripts\cp\utility::usegrenadegesture(param_01, "iw7_pickup_zm");
-  scripts\cp\utility::set_crafted_inventory_item("crafted_lavalamp", ::give_crafted_lavalamp_trap, param_01);
+give_crafted_lavalamp_trap(var_0, var_1) {
+  var_1 thread watch_dpad();
+  var_1 notify("new_power", "crafted_lavalamp");
+  var_1 setclientomnvar("zom_crafted_weapon", 11);
+  var_1 thread scripts\cp\utility::usegrenadegesture(var_1, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_lavalamp", ::give_crafted_lavalamp_trap, var_1);
 }
 
 watch_dpad() {
@@ -61,23 +61,23 @@ watch_dpad() {
   thread give_lavalamp_trap("crafted_lavalamp");
 }
 
-give_lavalamp_trap(param_00) {
+give_lavalamp_trap(var_0) {
   self endon("disconnect");
   scripts\cp\utility::clearlowermessage("msg_power_hint");
-  var_01 = create_lavalamp_trap_for_player(param_00, self);
-  self.itemtype = var_01.name;
+  var_1 = create_lavalamp_trap_for_player(var_0, self);
+  self.itemtype = var_1.name;
   scripts\cp\utility::remove_player_perks();
-  self.carried_lavalamp_trap = var_01;
-  var_01.firstplacement = 1;
-  var_02 = func_F684(var_01, 1);
+  self.carried_lavalamp_trap = var_1;
+  var_1.firstplacement = 1;
+  var_2 = func_F684(var_1, 1);
   self.carried_lavalamp_trap = undefined;
   thread scripts\cp\utility::restore_player_perk();
-  return var_02;
+  return var_2;
 }
 
-func_F684(param_00, param_01, param_02) {
+func_F684(var_0, var_1, var_2) {
   self endon("disconnect");
-  param_00 thread lavalamp_trap_setcarried(self);
+  var_0 thread lavalamp_trap_setcarried(self);
   scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_ims", "+attack");
   self notifyonplayercommand("place_ims", "+attack_akimbo_accessible");
@@ -89,94 +89,94 @@ func_F684(param_00, param_01, param_02) {
   }
 
   for(;;) {
-    var_03 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
-    if(!isDefined(var_03)) {
-      var_03 = "force_cancel_placement";
+    var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
+    if(!isDefined(var_3)) {
+      var_3 = "force_cancel_placement";
     }
 
-    if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
-      if(!param_01 && var_03 == "cancel_ims") {
+    if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
+      if(!var_1 && var_3 == "cancel_ims") {
         continue;
       }
 
-      param_00 lavalamp_trap_setcancelled(var_03 == "force_cancel_placement" && !isDefined(param_00.firstplacement));
-      if(var_03 != "force_cancel_placement") {
+      var_0 lavalamp_trap_setcancelled(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      } else if(param_01) {
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
       return 0;
     }
 
-    if(!param_00.canbeplaced) {
+    if(!var_0.canbeplaced) {
       continue;
     }
 
-    if(param_01) {
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
     }
 
-    param_00 thread lavalamp_trap_setplaced(param_02);
+    var_0 thread lavalamp_trap_setplaced(var_2);
     self notify("IMS_placed");
     scripts\engine\utility::allow_weapon(1);
     return 1;
   }
 }
 
-create_lavalamp_trap_for_player(param_00, param_01) {
-  if(isDefined(param_01.iscarrying) && param_01.iscarrying) {
+create_lavalamp_trap_for_player(var_0, var_1) {
+  if(isDefined(var_1.iscarrying) && var_1.iscarrying) {
     return;
   }
 
-  var_02 = spawnturret("misc_turret", param_01.origin + (0, 0, 25), "sentry_minigun_mp");
-  var_02.angles = param_01.angles;
-  var_02.lavalamp_trap_type = param_00;
-  var_02.triggerportableradarping = param_01;
-  var_02.name = "crafted_lavalamp";
-  var_02.carried_lavalamp_trap = spawn("script_model", var_02.origin);
-  var_02.carried_lavalamp_trap.angles = param_01.angles;
-  var_02 getvalidattachments();
-  var_02 setturretmodechangewait(1);
-  var_02 give_player_session_tokens("sentry_offline");
-  var_02 makeunusable();
-  var_02 setsentryowner(param_01);
-  return var_02;
+  var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
+  var_2.angles = var_1.angles;
+  var_2.lavalamp_trap_type = var_0;
+  var_2.triggerportableradarping = var_1;
+  var_2.name = "crafted_lavalamp";
+  var_2.carried_lavalamp_trap = spawn("script_model", var_2.origin);
+  var_2.carried_lavalamp_trap.angles = var_1.angles;
+  var_2 getvalidattachments();
+  var_2 setturretmodechangewait(1);
+  var_2 give_player_session_tokens("sentry_offline");
+  var_2 makeunusable();
+  var_2 setsentryowner(var_1);
+  return var_2;
 }
 
-create_lavalamp_trap(param_00, param_01) {
-  var_02 = param_00.triggerportableradarping;
-  var_03 = param_00.lavalamp_trap_type;
-  var_04 = spawn("script_model", param_00.origin + (0, 0, 1));
-  var_04 setModel(level.lavalamp_trap_settings[var_03].modelbase);
-  var_04.var_EB9C = 3;
-  var_04.angles = param_00.angles + (0, -90, 0);
-  var_04.lavalamp_trap_type = var_03;
-  var_04.triggerportableradarping = var_02;
-  var_04 setotherent(var_02);
-  var_04.team = var_02.team;
-  var_04.name = "crafted_lavalamp";
-  var_04.shouldsplash = 0;
-  var_04.hidden = 0;
-  var_04.var_252E = 1;
-  var_04.var_8BF0 = [];
-  var_04.config = level.lavalamp_trap_settings[var_03];
-  var_04 thread lavalamp_trap_handleuse();
-  if(isDefined(param_01)) {
-    var_04 thread scripts\cp\utility::item_timeout(param_01);
+create_lavalamp_trap(var_0, var_1) {
+  var_2 = var_0.triggerportableradarping;
+  var_3 = var_0.lavalamp_trap_type;
+  var_4 = spawn("script_model", var_0.origin + (0, 0, 1));
+  var_4 setModel(level.lavalamp_trap_settings[var_3].modelbase);
+  var_4.var_EB9C = 3;
+  var_4.angles = var_0.angles + (0, -90, 0);
+  var_4.lavalamp_trap_type = var_3;
+  var_4.triggerportableradarping = var_2;
+  var_4 setotherent(var_2);
+  var_4.team = var_2.team;
+  var_4.name = "crafted_lavalamp";
+  var_4.shouldsplash = 0;
+  var_4.hidden = 0;
+  var_4.var_252E = 1;
+  var_4.var_8BF0 = [];
+  var_4.config = level.lavalamp_trap_settings[var_3];
+  var_4 thread lavalamp_trap_handleuse();
+  if(isDefined(var_1)) {
+    var_4 thread scripts\cp\utility::item_timeout(var_1);
   } else {
-    var_04 thread scripts\cp\utility::item_timeout(undefined, level.lavalamp_trap_settings[self.lavalamp_trap_type].lifespan);
+    var_4 thread scripts\cp\utility::item_timeout(undefined, level.lavalamp_trap_settings[self.lavalamp_trap_type].lifespan);
   }
 
-  return var_04;
+  return var_4;
 }
 
-func_936D(param_00) {
+func_936D(var_0) {
   self.var_933C = 1;
   self notify("death");
 }
 
-func_9367(param_00) {
+func_9367(var_0) {
   self endon("carried");
   self waittill("death");
   if(!isDefined(self)) {
@@ -205,17 +205,17 @@ lavalamp_trap_handleuse() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("trigger", var_00);
-    if(!var_00 scripts\cp\utility::is_valid_player()) {
+    self waittill("trigger", var_0);
+    if(!var_0 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_00.iscarrying)) {
+    if(scripts\engine\utility::istrue(var_0.iscarrying)) {
       continue;
     }
 
-    var_01 = create_lavalamp_trap_for_player(self.lavalamp_trap_type, var_00);
-    if(!isDefined(var_01)) {
+    var_1 = create_lavalamp_trap_for_player(self.lavalamp_trap_type, var_0);
+    if(!isDefined(var_1)) {
       continue;
     }
 
@@ -224,13 +224,13 @@ lavalamp_trap_handleuse() {
       self unlink();
     }
 
-    var_00 thread func_F684(var_01, 0, self.lifespan);
+    var_0 thread func_F684(var_1, 0, self.lifespan);
     self delete();
     break;
   }
 }
 
-lavalamp_trap_setplaced(param_00) {
+lavalamp_trap_setplaced(var_0) {
   self endon("death");
   level endon("game_ended");
   if(isDefined(self.carriedby)) {
@@ -243,33 +243,33 @@ lavalamp_trap_setplaced(param_00) {
   }
 
   self.firstplacement = undefined;
-  var_01 = create_lavalamp_trap(self, param_00);
-  var_01.isplaced = 1;
-  var_01 thread func_9367(self.triggerportableradarping);
+  var_1 = create_lavalamp_trap(self, var_0);
+  var_1.isplaced = 1;
+  var_1 thread func_9367(self.triggerportableradarping);
   self notify("placed");
-  var_01 thread lavalamp_trap_setactive();
-  var_02 = spawnStruct();
+  var_1 thread lavalamp_trap_setactive();
+  var_2 = spawnStruct();
   if(isDefined(self.moving_platform)) {
-    var_02.linkparent = self.moving_platform;
+    var_2.linkparent = self.moving_platform;
   }
 
-  var_02.endonstring = "carried";
-  var_02.deathoverridecallback = ::func_936D;
-  var_01 thread scripts\cp\cp_movers::handle_moving_platforms(var_02);
+  var_2.endonstring = "carried";
+  var_2.deathoverridecallback = ::func_936D;
+  var_1 thread scripts\cp\cp_movers::handle_moving_platforms(var_2);
   self.carried_lavalamp_trap delete();
   self delete();
 }
 
-lavalamp_trap_setcancelled(param_00) {
+lavalamp_trap_setcancelled(var_0) {
   if(isDefined(self.carriedby)) {
-    var_01 = self.carriedby;
-    var_01 getrigindexfromarchetyperef();
-    var_01.iscarrying = undefined;
-    var_01.carrieditem = undefined;
-    var_01 scripts\engine\utility::allow_weapon(1);
+    var_1 = self.carriedby;
+    var_1 getrigindexfromarchetyperef();
+    var_1.iscarrying = undefined;
+    var_1.carrieditem = undefined;
+    var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(param_00) && param_00) {
+  if(isDefined(var_0) && var_0) {
     func_66A7();
   }
 
@@ -277,31 +277,31 @@ lavalamp_trap_setcancelled(param_00) {
   self delete();
 }
 
-lavalamp_trap_setcarried(param_00) {
-  self setsentrycarrier(param_00);
+lavalamp_trap_setcarried(var_0) {
+  self setsentrycarrier(var_0);
   self setcontents(0);
   self setCanDamage(0);
-  self.carriedby = param_00;
-  param_00.iscarrying = 1;
-  param_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_lavalamp_trap, level.lavalamp_trap_settings["crafted_lavalamp"]);
-  thread scripts\cp\utility::item_oncarrierdeath(param_00);
-  thread func_936F(param_00);
-  thread func_9371(param_00);
+  self.carriedby = var_0;
+  var_0.iscarrying = 1;
+  var_0 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_lavalamp_trap, level.lavalamp_trap_settings["crafted_lavalamp"]);
+  thread scripts\cp\utility::item_oncarrierdeath(var_0);
+  thread func_936F(var_0);
+  thread func_9371(var_0);
   self notify("carried");
 }
 
-func_936F(param_00) {
+func_936F(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 endon("last_stand");
-  param_00 waittill("disconnect");
+  var_0 endon("last_stand");
+  var_0 waittill("disconnect");
   lavalamp_trap_setcancelled();
 }
 
-func_9371(param_00) {
+func_9371(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 endon("last_stand");
+  var_0 endon("last_stand");
   level waittill("game_ended");
   lavalamp_trap_setcancelled();
 }
@@ -311,8 +311,8 @@ lavalamp_trap_setactive() {
   self setcursorhint("HINT_NOICON");
   self makeunusable();
   scripts\cp\utility::addtotraplist();
-  var_00 = self.triggerportableradarping;
-  var_00 getrigindexfromarchetyperef();
+  var_0 = self.triggerportableradarping;
+  var_0 getrigindexfromarchetyperef();
   self.var_2536 = spawn("trigger_radius", self.origin, 0, 96, 96);
   thread scripts\cp\utility::item_handleownerdisconnect("fireworks_disconnect");
   earthquake(0.25, 5, self.origin, 128);
@@ -350,15 +350,15 @@ lavalamp_trap_attackzombies() {
       break;
     }
 
-    self.var_2536 waittill("trigger", var_00);
-    if(isplayer(var_00) && isalive(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00) && !isDefined(var_00.padding_damage)) {
-      var_00.padding_damage = 1;
-      var_00 dodamage(20, var_00.origin);
-      var_00 thread remove_padding_damage();
+    self.var_2536 waittill("trigger", var_0);
+    if(isplayer(var_0) && isalive(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0) && !isDefined(var_0.padding_damage)) {
+      var_0.padding_damage = 1;
+      var_0 dodamage(20, var_0.origin);
+      var_0 thread remove_padding_damage();
       continue;
     }
 
-    if(!scripts\cp\utility::should_be_affected_by_trap(var_00, 0, 1)) {
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_0, 0, 1)) {
       continue;
     }
 
@@ -366,17 +366,17 @@ lavalamp_trap_attackzombies() {
       break;
     }
 
-    if(isDefined(var_00.pet) || isDefined(var_00.team) && var_00.team == "allies") {
+    if(isDefined(var_0.pet) || isDefined(var_0.team) && var_0.team == "allies") {
       continue;
     }
 
-    if(isDefined(var_00.marked_for_death)) {
+    if(isDefined(var_0.marked_for_death)) {
       continue;
     }
 
-    var_00.marked_for_death = 1;
-    var_00.dontmutilate = 1;
-    var_00 thread scripts\cp\utility::damage_over_time(var_00, self, 3, int(var_00.health + 1000), "MOD_EXPLOSIVE", "incendiary_ammo_mp", undefined, "burning");
+    var_0.marked_for_death = 1;
+    var_0.dontmutilate = 1;
+    var_0 thread scripts\cp\utility::damage_over_time(var_0, self, 3, int(var_0.health + 1000), "MOD_EXPLOSIVE", "incendiary_ammo_mp", undefined, "burning");
   }
 
   if(isDefined(self.carriedby) && isDefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {

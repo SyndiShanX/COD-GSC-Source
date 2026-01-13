@@ -26,28 +26,28 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("clip64x64x128", "targetname");
-  var_01 = spawn("script_model", (2342, -92, 354));
-  var_01.angles = (2, 50, 2);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("clip64x64x256", "targetname");
-  var_03 = spawn("script_model", (2292, -212, 362));
-  var_03.angles = (6, 51, 18);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("clip256x256x8", "targetname");
-  var_05 = spawn("script_model", (996, 796, 524));
-  var_05.angles = (0, 335, 90);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = spawn("script_model", (313.1, -516, 470));
-  var_06.angles = (356.01, 210.28, -4.00982);
-  var_06 setModel("mp_desert_uplink_col_01");
-  var_07 = getent("clip512x512x8", "targetname");
-  var_08 = spawn("script_model", (896, 656, 584));
-  var_08.angles = (0, 0, 0);
-  var_08 clonebrushmodeltoscriptmodel(var_07);
-  var_09 = spawn("script_model", (1064, 616, 584));
-  var_09.angles = (0, 45, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_07);
+  var_0 = getent("clip64x64x128", "targetname");
+  var_1 = spawn("script_model", (2342, -92, 354));
+  var_1.angles = (2, 50, 2);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("clip64x64x256", "targetname");
+  var_3 = spawn("script_model", (2292, -212, 362));
+  var_3.angles = (6, 51, 18);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("clip256x256x8", "targetname");
+  var_5 = spawn("script_model", (996, 796, 524));
+  var_5.angles = (0, 335, 90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = spawn("script_model", (313.1, -516, 470));
+  var_6.angles = (356.01, 210.28, -4.00982);
+  var_6 setModel("mp_desert_uplink_col_01");
+  var_7 = getent("clip512x512x8", "targetname");
+  var_8 = spawn("script_model", (896, 656, 584));
+  var_8.angles = (0, 0, 0);
+  var_8 clonebrushmodeltoscriptmodel(var_7);
+  var_9 = spawn("script_model", (1064, 616, 584));
+  var_9.angles = (0, 45, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_7);
   var_0A = spawn("script_model", (-2841.4, -24.5, 757.2));
   var_0A.angles = (303, 309, 145);
   var_0A setModel("rock_large_titan_02_mp_desert_patch");
@@ -139,49 +139,49 @@ fix_collision() {
   var_32 clonebrushmodeltoscriptmodel(var_31);
 }
 
-func_FAE6(param_00, param_01, param_02) {
-  var_03 = getent(param_00, "targetname");
-  var_03.destination = scripts\engine\utility::getstruct(var_03.target, "targetname");
-  var_03.var_BCEF = 1 / param_01;
-  var_03.destination = func_E6E1(var_03, param_02);
+func_FAE6(var_0, var_1, var_2) {
+  var_3 = getent(var_0, "targetname");
+  var_3.destination = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_3.var_BCEF = 1 / var_1;
+  var_3.destination = func_E6E1(var_3, var_2);
 }
 
-func_E6E1(param_00, param_01) {
-  param_00 endon("death");
-  var_02 = scripts\engine\utility::getstruct(param_00.destination.target, "targetname");
-  var_03 = abs(distance(param_00.origin, var_02.origin) * param_00.var_BCEF);
-  param_00 playLoopSound("rolling_bot_move_lp");
-  param_00 moveto(var_02.origin, var_03, var_03 * 0.25, var_03 * 0.25);
-  wait(var_03);
-  param_00 stoploopsound("rolling_bot_move_lp");
-  param_00 rotateto(var_02.angles, param_01, 0, 0);
-  param_00 playLoopSound("rolling_bot_turn_lp");
-  wait(param_01);
-  param_00 stoploopsound("rolling_bot_turn_lp");
-  return var_02;
+func_E6E1(var_0, var_1) {
+  var_0 endon("death");
+  var_2 = scripts\engine\utility::getstruct(var_0.destination.target, "targetname");
+  var_3 = abs(distance(var_0.origin, var_2.origin) * var_0.var_BCEF);
+  var_0 playLoopSound("rolling_bot_move_lp");
+  var_0 moveto(var_2.origin, var_3, var_3 * 0.25, var_3 * 0.25);
+  wait(var_3);
+  var_0 stoploopsound("rolling_bot_move_lp");
+  var_0 rotateto(var_2.angles, var_1, 0, 0);
+  var_0 playLoopSound("rolling_bot_turn_lp");
+  wait(var_1);
+  var_0 stoploopsound("rolling_bot_turn_lp");
+  return var_2;
 }
 
 runmodespecifictriggers() {
   if(level.gametype == "ball" || level.gametype == "tdef") {
-    var_00 = spawn("trigger_radius", (-596, -972, 336), 0, 64, 128);
-    var_00.var_336 = "uplink_nozone";
-    var_00.angles = (0, 0, 0);
-    var_00 hide();
-    var_00 = spawn("trigger_radius", (-240, -608, 496), 0, 160, 150);
-    var_00.var_336 = "OutOfBounds";
-    var_00 hide();
-    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_00);
-    var_00 = spawn("trigger_radius", (-1088, -1584, 416), 0, 230, 80);
-    var_00.var_336 = "OutOfBounds";
-    var_00 hide();
-    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_00);
-    var_00 = spawn("trigger_radius", (-1952, -96, 272), 0, 100, 100);
-    var_00.var_336 = "OutOfBounds";
-    var_00 hide();
-    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_00);
-    var_00 = spawn("trigger_radius", (580, -580, 730), 0, 100, 90);
-    var_00.var_336 = "OutOfBounds";
-    var_00 hide();
-    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_00);
+    var_0 = spawn("trigger_radius", (-596, -972, 336), 0, 64, 128);
+    var_0.var_336 = "uplink_nozone";
+    var_0.angles = (0, 0, 0);
+    var_0 hide();
+    var_0 = spawn("trigger_radius", (-240, -608, 496), 0, 160, 150);
+    var_0.var_336 = "OutOfBounds";
+    var_0 hide();
+    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_0);
+    var_0 = spawn("trigger_radius", (-1088, -1584, 416), 0, 230, 80);
+    var_0.var_336 = "OutOfBounds";
+    var_0 hide();
+    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_0);
+    var_0 = spawn("trigger_radius", (-1952, -96, 272), 0, 100, 100);
+    var_0.var_336 = "OutOfBounds";
+    var_0 hide();
+    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_0);
+    var_0 = spawn("trigger_radius", (580, -580, 730), 0, 100, 90);
+    var_0.var_336 = "OutOfBounds";
+    var_0 hide();
+    level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3, var_0);
   }
 }

@@ -16,7 +16,7 @@ func_7FD3() {
   return scripts\aitypes\bt_util::func_75();
 }
 
-func_12E90(param_00) {
+func_12E90(var_0) {
   if(!isalive(self)) {
     return level.failure;
   }
@@ -25,7 +25,7 @@ func_12E90(param_00) {
   return level.success;
 }
 
-func_9D5B(param_00) {
+func_9D5B(var_0) {
   if(self.var_290A) {
     return level.success;
   }
@@ -37,245 +37,245 @@ func_3596() {
   return ["left", "right"];
 }
 
-func_351D(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+func_351D(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  self.var_3135.var_13C83[param_00] = param_01;
+  self.bt.var_13C83[var_0] = var_1;
 }
 
 func_357A() {
-  var_00 = [];
-  var_01 = func_3596();
-  foreach(var_03 in var_01) {
-    if(func_8C3C(var_03)) {
-      var_00[var_00.size] = var_03;
+  var_0 = [];
+  var_1 = func_3596();
+  foreach(var_3 in var_1) {
+    if(func_8C3C(var_3)) {
+      var_0[var_0.size] = var_3;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_357C() {
-  var_00 = [];
-  var_01 = func_3596();
-  foreach(var_03 in var_01) {
-    if(func_8C3C(var_03) && func_9F5B(var_03)) {
-      var_00[var_00.size] = var_03;
+  var_0 = [];
+  var_1 = func_3596();
+  foreach(var_3 in var_1) {
+    if(func_8C3C(var_3) && func_9F5B(var_3)) {
+      var_0[var_0.size] = var_3;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_357D() {
-  var_00 = [];
-  var_01 = func_3596();
-  foreach(var_03 in var_01) {
-    if(func_8C3C(var_03) && func_9F5B(var_03)) {
-      var_04 = self.var_1198.shootparams.var_13CC3[var_03];
-      if(isDefined(var_04) && isDefined(var_04.var_3124) && var_04.var_3124 && isDefined(var_04.var_2AB9) && var_04.var_2AB9) {
-        var_00[var_00.size] = var_03;
+  var_0 = [];
+  var_1 = func_3596();
+  foreach(var_3 in var_1) {
+    if(func_8C3C(var_3) && func_9F5B(var_3)) {
+      var_4 = self._blackboard.shootparams.var_13CC3[var_3];
+      if(isDefined(var_4) && isDefined(var_4.var_3124) && var_4.var_3124 && isDefined(var_4.var_2AB9) && var_4.var_2AB9) {
+        var_0[var_0.size] = var_3;
       }
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_8C3C(param_00) {
-  return isDefined(self.var_13CC3[param_00]);
+func_8C3C(var_0) {
+  return isDefined(self.var_13CC3[var_0]);
 }
 
-func_9F5B(param_00) {
-  if(!self.var_3135.var_13C83[param_00]) {
+func_9F5B(var_0) {
+  if(!self.bt.var_13C83[var_0]) {
     return 0;
   }
 
-  return self.var_13C83[param_00];
+  return self.var_13C83[var_0];
 }
 
-func_B2AB(param_00, param_01) {
-  var_02 = spawnStruct();
-  var_02.state = 0;
-  var_02.var_1158D = param_01;
-  if(self.var_13CC3[param_00] == "minigun") {
-    var_02.var_71A2 = ::func_FEE5;
-    var_02.var_DCE8 = 100;
+func_B2AB(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.state = 0;
+  var_2.var_1158D = var_1;
+  if(self.var_13CC3[var_0] == "minigun") {
+    var_2.var_71A2 = ::func_FEE5;
+    var_2.var_DCE8 = 100;
   } else {
-    var_02.var_71A2 = ::func_FEE9;
-    var_02.var_DCE8 = 250;
-    if(!isDefined(var_02.var_C241)) {
-      var_02.var_C241 = randomintrange(1, 3);
+    var_2.var_71A2 = ::func_FEE9;
+    var_2.var_DCE8 = 250;
+    if(!isDefined(var_2.var_C241)) {
+      var_2.var_C241 = randomintrange(1, 3);
     }
   }
 
-  var_02.var_29A9 = 1;
-  var_02.var_29A1 = 1;
-  var_02.var_3124 = 1;
-  var_02.var_2AB9 = 1;
-  var_02.var_312A = 1;
-  var_02.var_3139 = 0;
-  return var_02;
+  var_2.var_29A9 = 1;
+  var_2.var_29A1 = 1;
+  var_2.var_3124 = 1;
+  var_2.var_2AB9 = 1;
+  var_2.var_312A = 1;
+  var_2.var_3139 = 0;
+  return var_2;
 }
 
-func_97EB(param_00) {
-  var_01 = spawnStruct();
-  var_01.var_11590 = [];
-  var_02 = func_357A();
-  foreach(var_04 in var_02) {
-    var_05 = func_B2AB(var_04, undefined);
-    var_01.var_13CC3[var_04] = var_05;
+func_97EB(var_0) {
+  var_1 = spawnStruct();
+  var_1.var_11590 = [];
+  var_2 = func_357A();
+  foreach(var_4 in var_2) {
+    var_5 = func_B2AB(var_4, undefined);
+    var_1.var_13CC3[var_4] = var_5;
   }
 
-  var_01.var_A98F = gettime();
-  var_01.var_A993 = gettime();
-  self.var_1198.shootparams = var_01;
+  var_1.var_A98F = gettime();
+  var_1.var_A993 = gettime();
+  self._blackboard.shootparams = var_1;
   self.setthermalbodymaterial = 1024;
-  if(!isDefined(self.var_3135.lasttimefired)) {
-    self.var_3135.lasttimefired = 0;
+  if(!isDefined(self.bt.lasttimefired)) {
+    self.bt.lasttimefired = 0;
   }
 
   return level.success;
 }
 
-func_40E9(param_00) {
-  if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.var_13CC3) && !isDefined(self.var_EF6D)) {
-    var_01 = func_3596();
-    foreach(var_03 in var_01) {
-      self.var_1198.shootparams.var_13CC3[var_03] = undefined;
+func_40E9(var_0) {
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.var_13CC3) && !isDefined(self.var_EF6D)) {
+    var_1 = func_3596();
+    foreach(var_3 in var_1) {
+      self._blackboard.shootparams.var_13CC3[var_3] = undefined;
     }
 
-    self.var_1198.shootparams = undefined;
+    self._blackboard.shootparams = undefined;
   }
 
   return level.success;
 }
 
-func_12E77(param_00) {
+func_12E77(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
-    self.var_3135.lasttimefired = gettime();
+    self.bt.lasttimefired = gettime();
   }
 
   return level.success;
 }
 
-func_FB1E(param_00, param_01) {
-  if(!isDefined(self.var_1198.shootparams)) {
+func_FB1E(var_0, var_1) {
+  if(!isDefined(self._blackboard.shootparams)) {
     return level.failure;
   }
 
-  self.var_1198.shootparams.var_12F1C = param_01;
+  self._blackboard.shootparams.var_12F1C = var_1;
   return level.success;
 }
 
-func_7E30(param_00) {
-  if(!isDefined(self.var_1198.shootparams)) {
+func_7E30(var_0) {
+  if(!isDefined(self._blackboard.shootparams)) {
     return undefined;
   }
 
-  var_01 = gettime();
-  var_02 = undefined;
-  var_03 = 999999999;
-  foreach(var_05 in func_357A()) {
-    var_06 = self.var_1198.shootparams.var_13CC3[var_05];
-    if(isDefined(var_06.ent)) {
-      if(var_06.var_3124 || isDefined(param_00) && var_01 - var_06.var_A9AB <= param_00) {
-        var_07 = distancesquared(self.origin, var_06.ent.origin);
-        if(var_07 < var_03) {
-          var_03 = var_07;
-          var_02 = var_06.ent;
+  var_1 = gettime();
+  var_2 = undefined;
+  var_3 = 999999999;
+  foreach(var_5 in func_357A()) {
+    var_6 = self._blackboard.shootparams.var_13CC3[var_5];
+    if(isDefined(var_6.ent)) {
+      if(var_6.var_3124 || isDefined(var_0) && var_1 - var_6.var_A9AB <= var_0) {
+        var_7 = distancesquared(self.origin, var_6.ent.origin);
+        if(var_7 < var_3) {
+          var_3 = var_7;
+          var_2 = var_6.ent;
         }
       }
 
       continue;
     }
 
-    if(isDefined(var_06.var_EF76) && var_06.var_EF76.size > 0) {
-      foreach(var_09 in var_06.var_EF76) {
-        if(isDefined(var_09)) {
-          var_07 = distancesquared(self.origin, var_09.origin);
-          if(var_07 < var_03) {
-            var_03 = var_07;
-            var_02 = var_09;
+    if(isDefined(var_6.var_EF76) && var_6.var_EF76.size > 0) {
+      foreach(var_9 in var_6.var_EF76) {
+        if(isDefined(var_9)) {
+          var_7 = distancesquared(self.origin, var_9.origin);
+          if(var_7 < var_3) {
+            var_3 = var_7;
+            var_2 = var_9;
           }
         }
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_FE5F(param_00, param_01) {
-  self[[param_00.var_71A2]](param_00, param_01);
+func_FE5F(var_0, var_1) {
+  self[[var_0.var_71A2]](var_0, var_1);
 }
 
-canseetarget(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_13CC3[param_00];
-  if(!isDefined(var_02)) {
+canseetarget(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_13CC3[var_0];
+  if(!isDefined(var_2)) {
     return 0;
   }
 
-  var_03 = undefined;
-  if(isDefined(var_02.var_EF76) && var_02.var_EF76.size > 0) {
-    var_03 = var_02.var_EF76[0];
-  } else if(isDefined(var_02.ent)) {
-    var_03 = var_02.ent;
+  var_3 = undefined;
+  if(isDefined(var_2.var_EF76) && var_2.var_EF76.size > 0) {
+    var_3 = var_2.var_EF76[0];
+  } else if(isDefined(var_2.ent)) {
+    var_3 = var_2.ent;
   }
 
-  if(isDefined(var_03)) {
-    return self getpersstat(var_03);
+  if(isDefined(var_3)) {
+    return self getpersstat(var_3);
   }
 
   return 1;
 }
 
-func_8C27(param_00, param_01) {
-  if(!isDefined(param_01)) {
+func_8C27(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return 1;
   }
 
-  var_02 = self.var_1198.shootparams;
-  var_03 = var_02.var_13CC3[param_00];
-  if(!isDefined(var_03)) {
+  var_2 = self._blackboard.shootparams;
+  var_3 = var_2.var_13CC3[var_0];
+  if(!isDefined(var_3)) {
     return 0;
   }
 
-  var_04 = undefined;
-  if(self.var_13CC3[param_00] == "minigun") {
-    var_04 = lib_0C41::func_3587(param_00);
-  } else if(self.var_13CC3[param_00] == "rocket") {
-    var_04 = lib_0C41::func_3593(param_00, "top");
+  var_4 = undefined;
+  if(self.var_13CC3[var_0] == "minigun") {
+    var_4 = lib_0C41::func_3587(var_0);
+  } else if(self.var_13CC3[var_0] == "rocket") {
+    var_4 = lib_0C41::func_3593(var_0, "top");
   }
 
-  var_05 = 256;
-  var_06 = param_01 - var_04;
-  var_07 = length(var_06);
-  if(var_07 > var_05) {
-    var_08 = var_04 + var_06 / var_07 * 256;
+  var_5 = 256;
+  var_6 = var_1 - var_4;
+  var_7 = length(var_6);
+  if(var_7 > var_5) {
+    var_8 = var_4 + var_6 / var_7 * 256;
   } else {
-    var_08 = var_02;
+    var_8 = var_2;
   }
 
-  return sighttracepassed(var_04, var_08, 0, self);
+  return sighttracepassed(var_4, var_8, 0, self);
 }
 
-func_8BEC(param_00) {
-  if(!isDefined(param_00)) {
+func_8BEC(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!isDefined(param_00.ent) && !isDefined(param_00.var_EF76) && !isDefined(param_00.pos)) {
+  if(!isDefined(var_0.ent) && !isDefined(var_0.var_EF76) && !isDefined(var_0.pos)) {
     return 0;
   }
 
   return 1;
 }
 
-shouldshoot(param_00) {
+shouldshoot(var_0) {
   if(isDefined(self.dontevershoot)) {
     return level.failure;
   }
@@ -287,112 +287,112 @@ shouldshoot(param_00) {
   return level.success;
 }
 
-func_FE7B(param_00, param_01) {
-  var_02 = self.var_1198.shootparams;
-  if(!isDefined(var_02.var_13CC3[param_00])) {
+func_FE7B(var_0, var_1) {
+  var_2 = self._blackboard.shootparams;
+  if(!isDefined(var_2.var_13CC3[var_0])) {
     return;
   }
 
-  if(!isDefined(param_01) || !isDefined(var_02.var_13CC3[param_00].ent) || var_02.var_13CC3[param_00].ent != param_01) {
-    var_03 = func_B2AB(param_00, var_02.var_13CC3[param_00].var_1158D);
-    var_02.var_13CC3[param_00].state = -1;
-    var_03.var_C249 = var_02.var_13CC3[param_00].var_C249;
-    var_02.var_13CC3[param_00] = var_03;
-    var_04 = gettime();
-    var_03.var_656E = var_04;
-    if(isDefined(param_01)) {
-      var_03.lastenemypos = param_01.origin;
-      var_03.var_A97D = var_04;
+  if(!isDefined(var_1) || !isDefined(var_2.var_13CC3[var_0].ent) || var_2.var_13CC3[var_0].ent != var_1) {
+    var_3 = func_B2AB(var_0, var_2.var_13CC3[var_0].var_1158D);
+    var_2.var_13CC3[var_0].state = -1;
+    var_3.var_C249 = var_2.var_13CC3[var_0].var_C249;
+    var_2.var_13CC3[var_0] = var_3;
+    var_4 = gettime();
+    var_3.var_656E = var_4;
+    if(isDefined(var_1)) {
+      var_3.lastenemypos = var_1.origin;
+      var_3.var_A97D = var_4;
     }
   }
 
-  var_05 = var_02.var_13CC3[param_00];
-  var_05.ent = param_01;
+  var_5 = var_2.var_13CC3[var_0];
+  var_5.ent = var_1;
 }
 
-func_FE8B(param_00) {
-  var_01 = func_3596();
-  var_02 = undefined;
-  foreach(var_04 in var_01) {
-    if(self.var_1198.shootparams.var_13CC3[var_04] == param_00) {
-      var_02 = var_04;
+func_FE8B(var_0) {
+  var_1 = func_3596();
+  var_2 = undefined;
+  foreach(var_4 in var_1) {
+    if(self._blackboard.shootparams.var_13CC3[var_4] == var_0) {
+      var_2 = var_4;
       break;
     }
   }
 
-  var_06 = gettime();
-  if(isDefined(param_00.ent)) {
-    param_00.var_29A1 = self getpersstat(param_00.ent);
-    param_00.var_3124 = self seerecently(param_00.ent, 1);
-    if(issentient(param_00.ent)) {
-      param_00.var_A9AB = self lastknowntime(param_00.ent);
+  var_6 = gettime();
+  if(isDefined(var_0.ent)) {
+    var_0.var_29A1 = self getpersstat(var_0.ent);
+    var_0.var_3124 = self seerecently(var_0.ent, 1);
+    if(issentient(var_0.ent)) {
+      var_0.var_A9AB = self lastknowntime(var_0.ent);
     } else {
-      param_00.var_A9AB = var_06;
+      var_0.var_A9AB = var_6;
     }
 
-    var_07 = 1024;
-    var_08 = 500;
-    if(var_06 > param_00.var_A97D + var_08) {
-      if(distancesquared(param_00.ent.origin, param_00.lastenemypos) > var_07) {
-        param_00.var_3139 = 0;
+    var_7 = 1024;
+    var_8 = 500;
+    if(var_6 > var_0.var_A97D + var_8) {
+      if(distancesquared(var_0.ent.origin, var_0.lastenemypos) > var_7) {
+        var_0.var_3139 = 0;
       } else {
-        param_00.var_3139 = 1;
+        var_0.var_3139 = 1;
       }
 
-      param_00.lastenemypos = param_00.ent.origin;
-      param_00.var_A97D = var_06;
+      var_0.lastenemypos = var_0.ent.origin;
+      var_0.var_A97D = var_6;
     }
   } else {
-    param_00.var_29A1 = 1;
-    param_00.var_3124 = 1;
-    param_00.var_A9AB = var_06;
+    var_0.var_29A1 = 1;
+    var_0.var_3124 = 1;
+    var_0.var_A9AB = var_6;
   }
 
-  var_09 = self.var_13CC3[var_02] == "rocket";
-  param_00.var_1A46 = func_FE67(param_00, var_09);
-  param_00.var_1A47 = var_06;
-  param_00.var_312A = param_00.var_3124;
-  param_00.var_2AB9 = func_8C27(var_02, param_00.var_1A46);
+  var_9 = self.var_13CC3[var_2] == "rocket";
+  var_0.var_1A46 = func_FE67(var_0, var_9);
+  var_0.var_1A47 = var_6;
+  var_0.var_312A = var_0.var_3124;
+  var_0.var_2AB9 = func_8C27(var_2, var_0.var_1A46);
 }
 
-func_FE8C(param_00) {
-  var_01 = self.var_1198.shootparams;
+func_FE8C(var_0) {
+  var_1 = self._blackboard.shootparams;
   if(isDefined(self.var_7212) && gettime() < self.var_7212) {
     if(func_9F5B("left")) {
-      var_02 = level.player;
+      var_2 = level.player;
     } else {
-      var_02 = undefined;
+      var_2 = undefined;
     }
 
     if(func_9F5B("right")) {
-      var_03 = level.player;
+      var_3 = level.player;
     } else {
-      var_03 = undefined;
+      var_3 = undefined;
     }
   } else {
-    var_02 = self.isnodeoccupied;
-    var_03 = self.isnodeoccupied;
+    var_2 = self.isnodeoccupied;
+    var_3 = self.isnodeoccupied;
     if(self.var_27F7) {
       if(func_8C3C("left") && func_9F5B("left") && func_8C3C("right") && func_9F5B("right")) {
-        var_04 = self _meth_848B();
-        if(isDefined(var_04) && var_04.size > 0) {
-          var_05 = var_04[0];
-          var_06 = self.isnodeoccupied.origin - self.origin;
-          var_07 = var_05.origin - self.origin;
-          var_08 = vectornormalize(var_07);
-          var_09 = self.isnodeoccupied.origin + var_05.origin * 0.5;
-          var_0A = vectornormalize(var_09 - self.origin);
+        var_4 = self _meth_848B();
+        if(isDefined(var_4) && var_4.size > 0) {
+          var_5 = var_4[0];
+          var_6 = self.isnodeoccupied.origin - self.origin;
+          var_7 = var_5.origin - self.origin;
+          var_8 = vectornormalize(var_7);
+          var_9 = self.isnodeoccupied.origin + var_5.origin * 0.5;
+          var_0A = vectornormalize(var_9 - self.origin);
           var_0B = vectortoangles(var_0A);
           var_0C = anglesToForward(self.angles);
           if(vectordot(var_0A, var_0C) > 0) {
             var_0D = anglestoright(var_0B);
-            if(vectordot(var_08, var_0A) > 0) {
-              var_0E = vectordot(var_0D, var_06);
-              var_0F = vectordot(var_0D, var_07);
+            if(vectordot(var_8, var_0A) > 0) {
+              var_0E = vectordot(var_0D, var_6);
+              var_0F = vectordot(var_0D, var_7);
               if(var_0F > var_0E) {
-                var_03 = var_05;
+                var_3 = var_5;
               } else {
-                var_02 = var_05;
+                var_2 = var_5;
               }
             }
           }
@@ -401,91 +401,91 @@ func_FE8C(param_00) {
     }
 
     if(!func_9F5B("left")) {
-      var_02 = undefined;
-    } else if(isDefined(var_01.var_13CC3["left"]) && isDefined(var_01.var_13CC3["left"].var_313A) && isDefined(var_01.var_13CC3["left"].ent)) {
-      var_02 = var_01.var_13CC3["left"].ent;
+      var_2 = undefined;
+    } else if(isDefined(var_1.var_13CC3["left"]) && isDefined(var_1.var_13CC3["left"].var_313A) && isDefined(var_1.var_13CC3["left"].ent)) {
+      var_2 = var_1.var_13CC3["left"].ent;
     }
 
     if(!func_9F5B("right")) {
-      var_03 = undefined;
-    } else if(isDefined(var_01.var_13CC3["right"]) && isDefined(var_01.var_13CC3["right"].var_313A) && isDefined(var_01.var_13CC3["right"].ent)) {
-      var_03 = var_01.var_13CC3["right"].ent;
+      var_3 = undefined;
+    } else if(isDefined(var_1.var_13CC3["right"]) && isDefined(var_1.var_13CC3["right"].var_313A) && isDefined(var_1.var_13CC3["right"].ent)) {
+      var_3 = var_1.var_13CC3["right"].ent;
     }
   }
 
-  func_FE7B("left", var_02);
-  func_FE7B("right", var_03);
-  func_FE8B(var_01.var_13CC3["left"]);
-  func_FE8B(var_01.var_13CC3["right"]);
+  func_FE7B("left", var_2);
+  func_FE7B("right", var_3);
+  func_FE8B(var_1.var_13CC3["left"]);
+  func_FE8B(var_1.var_13CC3["right"]);
   return level.success;
 }
 
-func_FE7A(param_00) {
-  if(isDefined(param_00)) {
-    self.var_1198.shootparams.var_BFB6 = param_00;
+func_FE7A(var_0) {
+  if(isDefined(var_0)) {
+    self._blackboard.shootparams.var_BFB6 = var_0;
     return;
   }
 
-  self.var_1198.shootparams.var_BFB6 = gettime() + randomintrange(1000, 1500);
+  self._blackboard.shootparams.var_BFB6 = gettime() + randomintrange(1000, 1500);
 }
 
-func_3873(param_00) {
+func_3873(var_0) {
   setdvarifuninitialized("enable_c12_berserk", 0);
   if(!getdvarint("enable_c12_berserk")) {
     return 0;
   }
 
-  if(!isDefined(param_00.ent)) {
+  if(!isDefined(var_0.ent)) {
     return 0;
   }
 
-  var_01 = self.var_1198.shootparams;
-  var_02 = ["left", "right"];
-  var_03 = undefined;
-  foreach(var_05 in var_02) {
-    if(var_01.var_13CC3[var_05] == param_00) {
-      if(self.var_13CC3[var_05] != "minigun") {
+  var_1 = self._blackboard.shootparams;
+  var_2 = ["left", "right"];
+  var_3 = undefined;
+  foreach(var_5 in var_2) {
+    if(var_1.var_13CC3[var_5] == var_0) {
+      if(self.var_13CC3[var_5] != "minigun") {
         return 0;
       }
 
-      var_03 = var_05;
+      var_3 = var_5;
       break;
     }
   }
 
-  var_07 = "left";
-  if(var_07 == var_03) {
-    var_07 = "right";
+  var_7 = "left";
+  if(var_7 == var_3) {
+    var_7 = "right";
   }
 
-  if(!scripts\asm\asm_bb::ispartdismembered(var_07 + "_arm")) {
+  if(!scripts\asm\asm_bb::ispartdismembered(var_7 + "_arm")) {
     return 0;
   }
 
-  var_08 = gettime();
-  if(!isDefined(var_01.var_BF71)) {
-    var_01.var_BF71 = var_08;
+  var_8 = gettime();
+  if(!isDefined(var_1.var_BF71)) {
+    var_1.var_BF71 = var_8;
   }
 
-  return var_08 >= var_01.var_BF71;
+  return var_8 >= var_1.var_BF71;
 }
 
 func_FE79() {
-  var_00 = self.var_1198.shootparams;
-  if(isDefined(var_00)) {
-    var_00.var_BF71 = gettime() + randomintrange(10000, 20000);
+  var_0 = self._blackboard.shootparams;
+  if(isDefined(var_0)) {
+    var_0.var_BF71 = gettime() + randomintrange(10000, 20000);
   }
 }
 
-func_FE78(param_00) {
-  param_00.var_2763 = gettime() + 2000;
+func_FE78(var_0) {
+  var_0.var_2763 = gettime() + 2000;
 }
 
 func_FE63() {
-  var_00 = func_357A();
-  foreach(var_02 in var_00) {
-    if(self.var_13CC3[var_02] == "minigun") {
-      return var_02;
+  var_0 = func_357A();
+  foreach(var_2 in var_0) {
+    if(self.var_13CC3[var_2] == "minigun") {
+      return var_2;
     }
   }
 
@@ -493,22 +493,22 @@ func_FE63() {
 }
 
 func_FE65() {
-  var_00 = func_357A();
-  foreach(var_02 in var_00) {
-    if(self.var_13CC3[var_02] == "rocket") {
-      return var_02;
+  var_0 = func_357A();
+  foreach(var_2 in var_0) {
+    if(self.var_13CC3[var_2] == "rocket") {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-func_FE68(param_00) {
-  if(isDefined(param_00.unittype) && param_00.unittype == "c12") {
+func_FE68(var_0) {
+  if(isDefined(var_0.unittype) && var_0.unittype == "c12") {
     return 1000;
   }
 
-  if(scripts\sp\vehicle::func_9FEF(param_00)) {
+  if(scripts\sp\vehicle::func_9FEF(var_0)) {
     return 500;
   }
 
@@ -516,119 +516,119 @@ func_FE68(param_00) {
 }
 
 func_FE62() {
-  var_00 = self.var_1198.shootparams;
-  var_01 = 0;
-  var_02 = undefined;
-  var_03 = func_357C();
-  foreach(var_05 in var_03) {
-    var_06 = var_00.var_13CC3[var_05];
-    if(isDefined(var_06) && isDefined(var_06.ent)) {
-      var_07 = func_FE68(var_06.ent);
-      if(var_07 > var_01) {
-        var_02 = var_05;
-        var_01 = var_07;
+  var_0 = self._blackboard.shootparams;
+  var_1 = 0;
+  var_2 = undefined;
+  var_3 = func_357C();
+  foreach(var_5 in var_3) {
+    var_6 = var_0.var_13CC3[var_5];
+    if(isDefined(var_6) && isDefined(var_6.ent)) {
+      var_7 = func_FE68(var_6.ent);
+      if(var_7 > var_1) {
+        var_2 = var_5;
+        var_1 = var_7;
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_41EC(param_00) {
+func_41EC(var_0) {
   return level.failure;
 }
 
-func_FE8E(param_00) {
-  func_FE8C(param_00);
-  var_01 = func_FE8D(param_00);
-  func_FE8A(var_01);
+func_FE8E(var_0) {
+  func_FE8C(var_0);
+  var_1 = func_FE8D(var_0);
+  func_FE8A(var_1);
   return level.success;
 }
 
-func_FE8D(param_00) {
-  var_01 = self.var_1198.shootparams;
+func_FE8D(var_0) {
+  var_1 = self._blackboard.shootparams;
   if(isDefined(self.var_9DD2) && self.var_9DD2) {
     return func_FE63();
   }
 
-  if(isDefined(var_01.var_1675) && func_9F5B(var_01.var_1675)) {
-    var_02 = var_01.var_13CC3[var_01.var_1675];
-    if(var_02.state != 0) {
-      return var_01.var_1675;
+  if(isDefined(var_1.var_1675) && func_9F5B(var_1.var_1675)) {
+    var_2 = var_1.var_13CC3[var_1.var_1675];
+    if(var_2.state != 0) {
+      return var_1.var_1675;
     }
   }
 
-  var_03 = func_357D();
-  if(var_03.size == 0) {
+  var_3 = func_357D();
+  if(var_3.size == 0) {
     return undefined;
   }
 
-  var_04 = var_03;
-  foreach(var_06 in var_03) {
-    var_02 = var_01.var_13CC3[var_06];
-    if(self.var_13CC3[var_06] == "rocket") {
-      var_07 = var_02.ent;
-      if(isDefined(var_07)) {
-        if(distancesquared(var_07.origin, self.origin) < -25536) {
-          var_04 = scripts\engine\utility::array_remove(var_04, var_06);
-        } else if(!var_02.var_3139) {
-          var_04 = scripts\engine\utility::array_remove(var_04, var_06);
+  var_4 = var_3;
+  foreach(var_6 in var_3) {
+    var_2 = var_1.var_13CC3[var_6];
+    if(self.var_13CC3[var_6] == "rocket") {
+      var_7 = var_2.ent;
+      if(isDefined(var_7)) {
+        if(distancesquared(var_7.origin, self.origin) < -25536) {
+          var_4 = scripts\engine\utility::array_remove(var_4, var_6);
+        } else if(!var_2.var_3139) {
+          var_4 = scripts\engine\utility::array_remove(var_4, var_6);
         }
       }
 
       continue;
     }
 
-    if(isDefined(var_01.var_1675) && var_01.var_1675 == var_06) {
-      if(var_02.var_3124 && var_01.var_C24A >= 3) {
-        var_04 = scripts\engine\utility::array_remove(var_04, var_06);
+    if(isDefined(var_1.var_1675) && var_1.var_1675 == var_6) {
+      if(var_2.var_3124 && var_1.var_C24A >= 3) {
+        var_4 = scripts\engine\utility::array_remove(var_4, var_6);
       }
     }
   }
 
-  if(var_04.size == 0) {
-    var_03 = func_357D();
-    if(var_03.size > 0) {
-      return var_03[randomint(var_03.size)];
+  if(var_4.size == 0) {
+    var_3 = func_357D();
+    if(var_3.size > 0) {
+      return var_3[randomint(var_3.size)];
     }
 
     return;
   }
 
-  if(var_04.size == 1) {
-    return var_04[0];
+  if(var_4.size == 1) {
+    return var_4[0];
   }
 
-  return var_04[randomint(var_04.size)];
+  return var_4[randomint(var_4.size)];
 }
 
-func_FE8A(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = func_357A();
-  foreach(var_04 in var_02) {
-    if(!func_9F5B(var_04) && isDefined(var_01.var_13CC3[var_04])) {
-      func_FE5F(var_01.var_13CC3[var_04], 0);
+func_FE8A(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = func_357A();
+  foreach(var_4 in var_2) {
+    if(!func_9F5B(var_4) && isDefined(var_1.var_13CC3[var_4])) {
+      func_FE5F(var_1.var_13CC3[var_4], 0);
     }
   }
 
-  if(!isDefined(var_01.var_1675)) {
+  if(!isDefined(var_1.var_1675)) {
     func_FE7A(gettime());
   }
 
-  var_06 = isDefined(param_00);
-  if(var_06 && isDefined(var_01.var_1675) && param_00 == var_01.var_1675) {
-    if(var_01.var_13CC3[param_00].var_29A9 && !var_01.var_13CC3[param_00].var_29A1) {
-      func_FE5F(var_01.var_13CC3[param_00], 0);
+  var_6 = isDefined(var_0);
+  if(var_6 && isDefined(var_1.var_1675) && var_0 == var_1.var_1675) {
+    if(var_1.var_13CC3[var_0].var_29A9 && !var_1.var_13CC3[var_0].var_29A1) {
+      func_FE5F(var_1.var_13CC3[var_0], 0);
     } else {
-      if(var_01.var_13CC3[param_00].state == 0) {
-        if(!isDefined(var_01.var_BFB6)) {
+      if(var_1.var_13CC3[var_0].state == 0) {
+        if(!isDefined(var_1.var_BFB6)) {
           func_FE7A();
         }
 
-        if(gettime() > var_01.var_BFB6) {
-          var_01.var_BFB6 = undefined;
-          var_01.var_C24A++;
-          func_FE5F(var_01.var_13CC3[param_00], 1);
+        if(gettime() > var_1.var_BFB6) {
+          var_1.var_BFB6 = undefined;
+          var_1.var_C24A++;
+          func_FE5F(var_1.var_13CC3[var_0], 1);
         }
       }
 
@@ -636,299 +636,299 @@ func_FE8A(param_00) {
     }
   }
 
-  var_02 = func_357A();
-  foreach(var_08 in var_02) {
-    if(!var_06 || var_08 != param_00) {
-      var_09 = var_01.var_13CC3[var_08];
-      func_FE5F(var_09, 0);
+  var_2 = func_357A();
+  foreach(var_8 in var_2) {
+    if(!var_6 || var_8 != var_0) {
+      var_9 = var_1.var_13CC3[var_8];
+      func_FE5F(var_9, 0);
     }
   }
 
-  var_01.var_1675 = param_00;
-  var_01.var_C24A = 0;
-  if(var_06 && var_01.var_13CC3[param_00].var_29A1) {
-    if(!isDefined(var_01.var_BFB6)) {
+  var_1.var_1675 = var_0;
+  var_1.var_C24A = 0;
+  if(var_6 && var_1.var_13CC3[var_0].var_29A1) {
+    if(!isDefined(var_1.var_BFB6)) {
       func_FE7A();
     }
 
-    if(gettime() > var_01.var_BFB6) {
-      var_09 = var_01.var_13CC3[param_00];
-      var_01.var_C24A = 1;
-      var_01.var_BFB6 = undefined;
-      func_FE5F(var_09, 1);
+    if(gettime() > var_1.var_BFB6) {
+      var_9 = var_1.var_13CC3[var_0];
+      var_1.var_C24A = 1;
+      var_1.var_BFB6 = undefined;
+      func_FE5F(var_9, 1);
     }
   }
 }
 
-func_10079(param_00) {
-  var_01 = self.var_1198.shootparams.var_13CC3[param_00];
-  if(!isDefined(var_01)) {
+func_10079(var_0) {
+  var_1 = self._blackboard.shootparams.var_13CC3[var_0];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return var_01.state == 2 || var_01.state == 3;
+  return var_1.state == 2 || var_1.state == 3;
 }
 
-func_9F7B(param_00) {
-  var_01 = self.var_1198.shootparams.var_13CC3[param_00];
-  if(!isDefined(var_01)) {
+func_9F7B(var_0) {
+  var_1 = self._blackboard.shootparams.var_13CC3[var_0];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return var_01.state == 3;
+  return var_1.state == 3;
 }
 
-func_1391C(param_00) {
-  return param_00.state == 3;
+func_1391C(var_0) {
+  return var_0.state == 3;
 }
 
-func_A004(param_00) {
-  var_01 = self.var_1198.shootparams.var_13CC3[param_00];
-  if(!isDefined(var_01)) {
+func_A004(var_0) {
+  var_1 = self._blackboard.shootparams.var_13CC3[var_0];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return var_01.state == 4;
+  return var_1.state == 4;
 }
 
-func_A005(param_00) {
-  var_01 = self.var_1198.shootparams.var_12F1C;
-  var_02 = self.var_1198.shootparams.var_13CC3[var_01];
-  if(!isDefined(var_02)) {
+func_A005(var_0) {
+  var_1 = self._blackboard.shootparams.var_12F1C;
+  var_2 = self._blackboard.shootparams.var_13CC3[var_1];
+  if(!isDefined(var_2)) {
     return level.failure;
   }
 
-  if(var_02.state == 0) {
+  if(var_2.state == 0) {
     return level.failure;
   }
 
   return level.success;
 }
 
-func_A006(param_00, param_01) {
-  var_02 = self.var_1198.shootparams.var_12F1C;
-  if(func_A007(var_02, param_01)) {
+func_A006(var_0, var_1) {
+  var_2 = self._blackboard.shootparams.var_12F1C;
+  if(func_A007(var_2, var_1)) {
     return level.success;
   }
 
   return level.failure;
 }
 
-func_A007(param_00, param_01) {
-  if(!func_8C3C(param_00)) {
+func_A007(var_0, var_1) {
+  if(!func_8C3C(var_0)) {
     return 0;
   }
 
-  if(self.var_13CC3[param_00] == param_01) {
+  if(self.var_13CC3[var_0] == var_1) {
     return 1;
   }
 
   return 0;
 }
 
-func_FE66(param_00) {
-  if(!func_8C3C(param_00)) {
+func_FE66(var_0) {
+  if(!func_8C3C(var_0)) {
     return undefined;
   }
 
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_13CC3[param_00];
-  var_03 = self.var_13CC3[param_00] == "rocket";
-  return func_FE67(var_02, var_03);
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_13CC3[var_0];
+  var_3 = self.var_13CC3[var_0] == "rocket";
+  return func_FE67(var_2, var_3);
 }
 
-func_FE67(param_00, param_01) {
-  if(param_00.state == 4) {
+func_FE67(var_0, var_1) {
+  if(var_0.state == 4) {
     return self.origin + anglesToForward(self.angles) * 192;
   }
 
-  if(isDefined(param_00.var_E5E0)) {
-    return param_00.var_E5E0;
+  if(isDefined(var_0.var_E5E0)) {
+    return var_0.var_E5E0;
   }
 
-  if(isDefined(param_00.var_EF76)) {
-    var_02 = (0, 0, 0);
-    var_03 = 0;
-    foreach(var_07, var_05 in param_00.var_EF76) {
-      if(isDefined(var_05)) {
-        if(param_01) {
-          var_06 = var_05.origin;
+  if(isDefined(var_0.var_EF76)) {
+    var_2 = (0, 0, 0);
+    var_3 = 0;
+    foreach(var_7, var_5 in var_0.var_EF76) {
+      if(isDefined(var_5)) {
+        if(var_1) {
+          var_6 = var_5.origin;
         } else {
-          var_06 = var_07 getshootatpos();
+          var_6 = var_7 getshootatpos();
         }
 
-        var_02 = var_02 + var_06;
-        var_03++;
+        var_2 = var_2 + var_6;
+        var_3++;
       }
     }
 
-    if(var_03 == 0) {
+    if(var_3 == 0) {
       return undefined;
     }
 
-    var_08 = var_02 / var_03;
-    return var_08 + func_FE69(param_00, var_08);
+    var_8 = var_2 / var_3;
+    return var_8 + func_FE69(var_0, var_8);
   }
 
-  if(isDefined(var_07.ent)) {
-    var_09 = func_3596();
+  if(isDefined(var_7.ent)) {
+    var_9 = func_3596();
     var_0A = undefined;
-    foreach(var_0C in var_09) {
-      if(self.var_1198.shootparams.var_13CC3[var_0C] == var_07) {
+    foreach(var_0C in var_9) {
+      if(self._blackboard.shootparams.var_13CC3[var_0C] == var_7) {
         var_0A = var_0C;
         break;
       }
     }
 
-    if(self getpersstat(var_07.ent)) {
-      if(var_08) {
-        return var_07.ent.origin;
+    if(self getpersstat(var_7.ent)) {
+      if(var_8) {
+        return var_7.ent.origin;
       }
 
-      var_0E = var_07.ent getshootatpos();
-      return var_0E + func_FE69(var_07, var_0E);
+      var_0E = var_7.ent getshootatpos();
+      return var_0E + func_FE69(var_7, var_0E);
     } else {
-      var_0E = self lastknownpos(var_08.ent) + (0, 0, 60);
-      return var_0E + func_FE69(var_07, var_0E);
+      var_0E = self lastknownpos(var_8.ent) + (0, 0, 60);
+      return var_0E + func_FE69(var_7, var_0E);
     }
   }
 
-  if(isDefined(var_08.pos)) {
-    return var_08.pos + func_FE69(var_08, var_08.pos);
+  if(isDefined(var_8.pos)) {
+    return var_8.pos + func_FE69(var_8, var_8.pos);
   }
 
   return undefined;
 }
 
-func_FE69(param_00, param_01) {
-  if(!func_1391C(param_00)) {
+func_FE69(var_0, var_1) {
+  if(!func_1391C(var_0)) {
     return (0, 0, 0);
   }
 
-  var_02 = gettime() - param_00.var_110D8 / 1000;
-  var_03 = int(var_02 * 256);
-  var_04 = var_03 % 256;
-  if(var_04 > 128) {
-    var_04 = 256 - var_04;
+  var_2 = gettime() - var_0.var_110D8 / 1000;
+  var_3 = int(var_2 * 256);
+  var_4 = var_3 % 256;
+  if(var_4 > 128) {
+    var_4 = 256 - var_4;
   }
 
-  if(int(var_03 / 256) % 2) {
-    var_04 = var_04 * -1;
+  if(int(var_3 / 256) % 2) {
+    var_4 = var_4 * -1;
   }
 
-  return rotatevector((0, var_04, 0), vectortoangles(self.origin - param_01));
+  return rotatevector((0, var_4, 0), vectortoangles(self.origin - var_1));
 }
 
-func_FEE6(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = self.var_1198.shootparams.var_12F1C;
-  var_01.var_11590[param_00] = var_02;
-  var_03 = var_01.var_13CC3[var_02];
-  var_03.var_1158D = param_00;
-  func_FEE5(var_03, 1);
+func_FEE6(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = self._blackboard.shootparams.var_12F1C;
+  var_1.var_11590[var_0] = var_2;
+  var_3 = var_1.var_13CC3[var_2];
+  var_3.var_1158D = var_0;
+  func_FEE5(var_3, 1);
 }
 
-func_FEE5(param_00, param_01) {
-  var_02 = -999;
-  var_03 = param_00.state;
-  if(!isDefined(var_03)) {
-    var_03 = var_02;
+func_FEE5(var_0, var_1) {
+  var_2 = -999;
+  var_3 = var_0.state;
+  if(!isDefined(var_3)) {
+    var_3 = var_2;
   }
 
-  if(var_03 == param_01) {
+  if(var_3 == var_1) {
     return;
   }
 
-  param_00.state = param_01;
-  switch (param_01) {
+  var_0.state = var_1;
+  switch (var_1) {
     case 0:
       break;
 
     case 1:
-      if(var_03 == 0) {
-        param_00.var_DCE8 = 100;
-        param_00.var_C21B = randomintrange(2, 4);
-        param_00.var_BF72 = gettime();
-        param_00.var_927E = 0;
-      } else if(var_03 == 2) {
-        param_00.var_BF72 = gettime() + 1000;
+      if(var_3 == 0) {
+        var_0.var_DCE8 = 100;
+        var_0.var_C21B = randomintrange(2, 4);
+        var_0.var_BF72 = gettime();
+        var_0.var_927E = 0;
+      } else if(var_3 == 2) {
+        var_0.var_BF72 = gettime() + 1000;
       }
 
-      func_FE78(param_00);
+      func_FE78(var_0);
       break;
 
     case 2:
-      param_00.var_927E++;
-      param_00.var_32BC = gettime() + randomintrange(2000, 4000);
+      var_0.var_927E++;
+      var_0.var_32BC = gettime() + randomintrange(2000, 4000);
       scripts\sp\gameskill::func_F288();
       break;
 
     case 3:
-      param_00.var_DCE8 = 33.33333;
-      param_00.var_110D8 = gettime();
-      param_00.var_32BC = gettime() + 12000;
-      param_00.var_313A = 1;
+      var_0.var_DCE8 = 33.33333;
+      var_0.var_110D8 = gettime();
+      var_0.var_32BC = gettime() + 12000;
+      var_0.var_313A = 1;
       break;
   }
 }
 
-func_FEE3(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_12F1C;
-  var_03 = var_01.var_13CC3[var_02];
-  if(!func_8BEC(var_03)) {
-    func_FEE5(var_03, 0);
+func_FEE3(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_12F1C;
+  var_3 = var_1.var_13CC3[var_2];
+  if(!func_8BEC(var_3)) {
+    func_FEE5(var_3, 0);
     return level.success;
   }
 
-  var_04 = gettime();
-  if(var_04 > var_01.var_A993 + 30000) {
-    func_128AE(var_02, var_03);
+  var_4 = gettime();
+  if(var_4 > var_1.var_A993 + 30000) {
+    func_128AE(var_2, var_3);
   }
 
-  switch (var_03.state) {
+  switch (var_3.state) {
     case 1:
-      if(!isDefined(var_03.var_2763)) {
-        func_FE78(var_03);
+      if(!isDefined(var_3.var_2763)) {
+        func_FE78(var_3);
       }
 
-      if(var_04 > var_03.var_2763) {
-        func_128AE(var_02, var_03);
-        func_FEE5(var_03, 0);
+      if(var_4 > var_3.var_2763) {
+        func_128AE(var_2, var_3);
+        func_FEE5(var_3, 0);
         return level.failure;
       }
 
-      if(var_04 >= var_03.var_BF72 && func_9EA0(var_02, var_03.var_1A46)) {
-        var_05 = 1;
-        if(var_03.var_29A9) {
-          var_05 = canseetarget(var_02);
+      if(var_4 >= var_3.var_BF72 && func_9EA0(var_2, var_3.var_1A46)) {
+        var_5 = 1;
+        if(var_3.var_29A9) {
+          var_5 = canseetarget(var_2);
         }
 
-        if(var_05) {
+        if(var_5) {
           if(isDefined(self.var_3131)) {
-            func_FEE5(var_03, 3);
+            func_FEE5(var_3, 3);
           } else {
-            func_FEE5(var_03, 2);
+            func_FEE5(var_3, 2);
           }
         }
       }
       break;
 
     case 2:
-      if(var_04 >= var_03.var_32BC) {
-        if(var_03.var_927E >= var_03.var_C21B) {
-          func_FEE5(var_03, 0);
+      if(var_4 >= var_3.var_32BC) {
+        if(var_3.var_927E >= var_3.var_C21B) {
+          func_FEE5(var_3, 0);
           func_FE7A();
           return level.success;
         } else {
-          func_FEE5(var_03, 1);
+          func_FEE5(var_3, 1);
         }
       }
       break;
 
     case 3:
-      if(var_04 >= var_03.var_32BC) {
-        func_FEE5(var_03, 0);
+      if(var_4 >= var_3.var_32BC) {
+        func_FEE5(var_3, 0);
         func_FE7A();
         return level.success;
       }
@@ -941,103 +941,103 @@ func_FEE3(param_00) {
   return level.running;
 }
 
-func_FEE4(param_00) {
-  var_01 = self.var_1198.shootparams;
-  if(!isDefined(var_01)) {
+func_FEE4(var_0) {
+  var_1 = self._blackboard.shootparams;
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = var_01.var_11590[param_00];
-  var_03 = var_01.var_13CC3[var_02];
-  if(var_03.var_1158D == param_00) {
-    func_FEE5(var_03, 0);
+  var_2 = var_1.var_11590[var_0];
+  var_3 = var_1.var_13CC3[var_2];
+  if(var_3.var_1158D == var_0) {
+    func_FEE5(var_3, 0);
   }
 }
 
-func_FEE9(param_00, param_01) {
-  var_02 = param_00.state;
-  if(var_02 == param_01) {
+func_FEE9(var_0, var_1) {
+  var_2 = var_0.state;
+  if(var_2 == var_1) {
     return;
   }
 
-  param_00.state = param_01;
-  if(param_01 == 1) {
-    func_FE78(param_00);
+  var_0.state = var_1;
+  if(var_1 == 1) {
+    func_FE78(var_0);
   }
 
-  if(param_01 == 2) {
-    param_00.var_313A = 1;
-    param_00.var_29A9 = 0;
+  if(var_1 == 2) {
+    var_0.var_313A = 1;
+    var_0.var_29A9 = 0;
     return;
   }
 
-  param_00.var_313A = undefined;
-  param_00.var_29A9 = 1;
+  var_0.var_313A = undefined;
+  var_0.var_29A9 = 1;
 }
 
-func_FEEA(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_12F1C;
-  var_01.var_11590[param_00] = var_02;
-  var_03 = var_01.var_13CC3[var_02];
-  var_03.var_1158D = param_00;
-  var_03.state = 1;
-  if(isDefined(var_03.var_EF76)) {
-    var_03.var_C241 = var_03.var_EF76.size;
+func_FEEA(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_12F1C;
+  var_1.var_11590[var_0] = var_2;
+  var_3 = var_1.var_13CC3[var_2];
+  var_3.var_1158D = var_0;
+  var_3.state = 1;
+  if(isDefined(var_3.var_EF76)) {
+    var_3.var_C241 = var_3.var_EF76.size;
   } else {
-    var_03.var_C241 = randomintrange(1, 3);
+    var_3.var_C241 = randomintrange(1, 3);
   }
 
-  var_03.var_DCE8 = 250;
+  var_3.var_DCE8 = 250;
   scripts\sp\gameskill::func_F288();
-  func_FE78(var_03);
+  func_FE78(var_3);
 }
 
-func_FEE7(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_12F1C;
-  var_03 = self.var_1198.shootparams.var_13CC3[var_02];
-  if(scripts\asm\asm::asm_ephemeraleventfired("rocket_shoot_complete", var_02)) {
+func_FEE7(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_12F1C;
+  var_3 = self._blackboard.shootparams.var_13CC3[var_2];
+  if(scripts\asm\asm::asm_ephemeraleventfired("rocket_shoot_complete", var_2)) {
     func_FE7A();
-    if(isDefined(var_03)) {
-      var_03.var_2720 = undefined;
+    if(isDefined(var_3)) {
+      var_3.var_2720 = undefined;
     }
 
     return level.success;
   }
 
-  var_04 = var_03.var_1A46;
-  if(!isDefined(var_04)) {
+  var_4 = var_3.var_1A46;
+  if(!isDefined(var_4)) {
     return level.failure;
   }
 
-  var_05 = gettime();
-  if(var_05 > var_01.var_A993 + 30000) {
-    func_128AE(var_02, var_03);
+  var_5 = gettime();
+  if(var_5 > var_1.var_A993 + 30000) {
+    func_128AE(var_2, var_3);
   }
 
-  if(var_03.state == 1) {
-    if(!isDefined(var_03.var_2763)) {
-      func_FE78(var_03);
+  if(var_3.state == 1) {
+    if(!isDefined(var_3.var_2763)) {
+      func_FE78(var_3);
     }
 
-    if(var_05 > var_03.var_2763) {
-      func_128AE(var_02, var_03);
-      func_FE5F(var_03, 0);
+    if(var_5 > var_3.var_2763) {
+      func_128AE(var_2, var_3);
+      func_FE5F(var_3, 0);
       return level.failure;
     }
   }
 
-  if(var_03.state != 2) {
-    if(distancesquared(self.origin, var_04) > 65536) {
-      if(func_9F30(var_02, var_04)) {
-        var_06 = 1;
-        if(var_03.var_29A9) {
-          var_06 = var_03.var_2AB9;
+  if(var_3.state != 2) {
+    if(distancesquared(self.origin, var_4) > 65536) {
+      if(func_9F30(var_2, var_4)) {
+        var_6 = 1;
+        if(var_3.var_29A9) {
+          var_6 = var_3.var_2AB9;
         }
 
-        if(var_06) {
-          func_FE5F(var_03, 2);
+        if(var_6) {
+          func_FE5F(var_3, 2);
         }
       }
     }
@@ -1046,42 +1046,42 @@ func_FEE7(param_00) {
   return level.running;
 }
 
-func_FEE8(param_00) {
-  var_01 = self.var_1198.shootparams;
-  if(!isDefined(var_01)) {
+func_FEE8(var_0) {
+  var_1 = self._blackboard.shootparams;
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = var_01.var_11590[param_00];
-  if(!isDefined(var_02)) {
+  var_2 = var_1.var_11590[var_0];
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var_03 = self.var_1198.shootparams.var_13CC3[var_02];
-  if(var_03.var_1158D == param_00) {
-    var_03.state = 0;
+  var_3 = self._blackboard.shootparams.var_13CC3[var_2];
+  if(var_3.var_1158D == var_0) {
+    var_3.state = 0;
   }
 }
 
-func_9F30(param_00, param_01) {
-  var_02 = lib_0C41::func_3593(param_00, "top");
-  var_03 = lib_0C41::func_3592(param_00, "top");
+func_9F30(var_0, var_1) {
+  var_2 = lib_0C41::func_3593(var_0, "top");
+  var_3 = lib_0C41::func_3592(var_0, "top");
   if(isDefined(self.var_E5C4)) {
-    var_04 = anglesToForward(var_03);
-    var_04 = rotatevector(var_04, (self.var_E5C4, 0, 0));
-    var_03 = vectortoangles(var_04);
+    var_4 = anglesToForward(var_3);
+    var_4 = rotatevector(var_4, (self.var_E5C4, 0, 0));
+    var_3 = vectortoangles(var_4);
   }
 
-  var_05 = 15;
-  var_06 = func_9FFA(var_02, var_03, param_01, var_05);
-  if(var_06) {
+  var_5 = 15;
+  var_6 = func_9FFA(var_2, var_3, var_1, var_5);
+  if(var_6) {
     return 1;
   }
 
   if(isDefined(self.var_E5C4)) {
-    var_07 = lib_0C41::func_3628(param_00, "pitch", "min");
-    var_08 = lib_0C41::func_3628(param_00, "pitch", "max");
-    if(var_03[0] > var_07 - 3 || var_03[0] < var_08 + 3) {
+    var_7 = lib_0C41::func_3628(var_0, "pitch", "min");
+    var_8 = lib_0C41::func_3628(var_0, "pitch", "max");
+    if(var_3[0] > var_7 - 3 || var_3[0] < var_8 + 3) {
       return 1;
     }
   }
@@ -1089,27 +1089,27 @@ func_9F30(param_00, param_01) {
   return 0;
 }
 
-func_9EA0(param_00, param_01) {
-  var_02 = lib_0C41::func_3587(param_00);
-  var_03 = lib_0C41::func_3585(param_00);
-  var_04 = 15;
-  return func_9FFA(var_02, var_03, param_01, var_04);
+func_9EA0(var_0, var_1) {
+  var_2 = lib_0C41::func_3587(var_0);
+  var_3 = lib_0C41::func_3585(var_0);
+  var_4 = 15;
+  return func_9FFA(var_2, var_3, var_1, var_4);
 }
 
-func_9FFA(param_00, param_01, param_02, param_03) {
-  var_04 = vectornormalize(param_02 - param_00);
-  var_05 = anglesToForward(param_01);
-  var_06 = cos(param_03);
-  return vectordot(var_04, var_05) >= var_06;
+func_9FFA(var_0, var_1, var_2, var_3) {
+  var_4 = vectornormalize(var_2 - var_0);
+  var_5 = anglesToForward(var_1);
+  var_6 = cos(var_3);
+  return vectordot(var_4, var_5) >= var_6;
 }
 
-func_8C23(param_00) {
+func_8C23(var_0) {
   if(isDefined(self.var_EF6D)) {
-    foreach(var_02 in self.var_EF6D) {
-      var_03 = var_02.size;
-      if(var_03 > 0) {
-        for(var_04 = 0; var_04 < var_03; var_04++) {
-          if(isDefined(var_02[var_04])) {
+    foreach(var_2 in self.var_EF6D) {
+      var_3 = var_2.size;
+      if(var_3 > 0) {
+        for(var_4 = 0; var_4 < var_3; var_4++) {
+          if(isDefined(var_2[var_4])) {
             return level.success;
           }
         }
@@ -1120,73 +1120,73 @@ func_8C23(param_00) {
   return level.failure;
 }
 
-func_FE90(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = var_01.var_13CC3[param_00];
-  func_FE8B(var_02);
-  if(isDefined(var_01.var_BFB6)) {
-    if(gettime() < var_01.var_BFB6) {
+func_FE90(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = var_1.var_13CC3[var_0];
+  func_FE8B(var_2);
+  if(isDefined(var_1.var_BFB6)) {
+    if(gettime() < var_1.var_BFB6) {
       return;
     }
   }
 
-  var_03 = 1;
-  if(isDefined(var_02.var_EF76)) {
-    var_03 = !scripts\sp\utility::array_compare(self.var_EF6D[param_00], var_02.var_EF76);
+  var_3 = 1;
+  if(isDefined(var_2.var_EF76)) {
+    var_3 = !scripts\sp\utility::array_compare(self.var_EF6D[var_0], var_2.var_EF76);
   }
 
-  if(var_03) {
-    var_04 = var_02.var_1158D;
-    var_02.state = -1;
-    var_02 = func_B2AB(param_00, var_04);
-    var_01.var_13CC3[param_00] = var_02;
+  if(var_3) {
+    var_4 = var_2.var_1158D;
+    var_2.state = -1;
+    var_2 = func_B2AB(var_0, var_4);
+    var_1.var_13CC3[var_0] = var_2;
   }
 
-  var_02.var_EF76 = self.var_EF6D[param_00];
-  var_02.var_EF77 = self.var_EF70[param_00];
-  var_02.var_29A9 = self.var_EF6E[param_00];
-  var_02.var_C241 = self.var_EF6D[param_00].size;
-  if(!isDefined(var_02.var_656E)) {
-    var_02.var_656E = gettime();
+  var_2.var_EF76 = self.var_EF6D[var_0];
+  var_2.var_EF77 = self.var_EF70[var_0];
+  var_2.var_29A9 = self.var_EF6E[var_0];
+  var_2.var_C241 = self.var_EF6D[var_0].size;
+  if(!isDefined(var_2.var_656E)) {
+    var_2.var_656E = gettime();
   }
 
-  func_FE8B(var_02);
-  if(var_02.state == 0) {
-    func_FE5F(var_02, 1);
+  func_FE8B(var_2);
+  if(var_2.state == 0) {
+    func_FE5F(var_2, 1);
   }
 }
 
-func_FE8F(param_00) {
-  var_01 = self.var_1198.shootparams;
-  if(!isDefined(var_01)) {
+func_FE8F(var_0) {
+  var_1 = self._blackboard.shootparams;
+  if(!isDefined(var_1)) {
     func_97EB(undefined);
-    var_01 = self.var_1198.shootparams;
+    var_1 = self._blackboard.shootparams;
   }
 
-  var_02 = func_357A();
-  foreach(var_04 in var_02) {
-    if(func_9F5B(var_04) && isDefined(self.var_EF6D[var_04])) {
-      func_FE90(var_04);
+  var_2 = func_357A();
+  foreach(var_4 in var_2) {
+    if(func_9F5B(var_4) && isDefined(self.var_EF6D[var_4])) {
+      func_FE90(var_4);
       continue;
     }
 
-    var_05 = self.var_1198.shootparams.var_13CC3[var_04];
-    if(isDefined(var_05)) {
-      func_FE5F(var_05, 0);
+    var_5 = self._blackboard.shootparams.var_13CC3[var_4];
+    if(isDefined(var_5)) {
+      func_FE5F(var_5, 0);
     }
   }
 
   return level.success;
 }
 
-func_F811(param_00) {
-  var_01 = getrandomnavpoint(self.origin, 2048, self);
-  self _meth_8481(var_01);
+func_F811(var_0) {
+  var_1 = getrandomnavpoint(self.origin, 2048, self);
+  self _meth_8481(var_1);
   self give_mp_super_weapon((0, 0, 0));
   return level.success;
 }
 
-func_1383A(param_00) {
+func_1383A(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     return level.running;
   }
@@ -1195,23 +1195,23 @@ func_1383A(param_00) {
   return level.success;
 }
 
-func_3906(param_00) {
-  var_01 = self.var_1198.shootparams;
-  var_02 = func_357C();
-  foreach(var_04 in var_02) {
-    var_05 = var_01.var_13CC3[var_04];
-    if(isDefined(var_05)) {
-      if(isDefined(var_05.ent)) {
-        if(self getpersstat(var_05.ent)) {
+func_3906(var_0) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = func_357C();
+  foreach(var_4 in var_2) {
+    var_5 = var_1.var_13CC3[var_4];
+    if(isDefined(var_5)) {
+      if(isDefined(var_5.ent)) {
+        if(self getpersstat(var_5.ent)) {
           return level.success;
         }
 
         continue;
       }
 
-      if(isDefined(var_05.var_EF76)) {
-        foreach(var_07 in var_05.var_EF76) {
-          if(self getpersstat(var_07)) {
+      if(isDefined(var_5.var_EF76)) {
+        foreach(var_7 in var_5.var_EF76) {
+          if(self getpersstat(var_7)) {
             return level.success;
           }
         }
@@ -1222,23 +1222,23 @@ func_3906(param_00) {
   return level.failure;
 }
 
-func_8C25(param_00, param_01) {
-  var_02 = self.var_1198.shootparams;
-  var_03 = func_357C();
-  foreach(var_05 in var_03) {
-    var_06 = var_02.var_13CC3[var_05];
-    if(isDefined(var_06)) {
-      if(isDefined(var_06.ent)) {
-        if(self seerecently(var_06.ent, param_01)) {
+func_8C25(var_0, var_1) {
+  var_2 = self._blackboard.shootparams;
+  var_3 = func_357C();
+  foreach(var_5 in var_3) {
+    var_6 = var_2.var_13CC3[var_5];
+    if(isDefined(var_6)) {
+      if(isDefined(var_6.ent)) {
+        if(self seerecently(var_6.ent, var_1)) {
           return level.success;
         }
 
         continue;
       }
 
-      if(isDefined(var_06.var_EF76)) {
-        foreach(var_08 in var_06.var_EF76) {
-          if(!isent(var_06.ent) || self seerecently(var_08, param_01)) {
+      if(isDefined(var_6.var_EF76)) {
+        foreach(var_8 in var_6.var_EF76) {
+          if(!isent(var_6.ent) || self seerecently(var_8, var_1)) {
             return level.success;
           }
         }
@@ -1249,10 +1249,10 @@ func_8C25(param_00, param_01) {
   return level.failure;
 }
 
-func_2CD6(param_00) {
-  var_01 = 6000;
-  var_02 = gettime();
-  if(var_02 - self.var_3135.lasttimefired > var_01) {
+func_2CD6(var_0) {
+  var_1 = 6000;
+  var_2 = gettime();
+  if(var_2 - self.bt.lasttimefired > var_1) {
     return level.success;
   }
 
@@ -1260,20 +1260,20 @@ func_2CD6(param_00) {
 }
 
 func_7FCB() {
-  var_00 = self.var_1198.shootparams;
-  var_01 = [];
-  var_02 = func_357C();
-  foreach(var_04 in var_02) {
-    var_05 = var_00.var_13CC3[var_04];
-    if(isDefined(var_05)) {
-      if(isDefined(var_05.ent)) {
-        var_01[var_01.size] = var_05.ent;
+  var_0 = self._blackboard.shootparams;
+  var_1 = [];
+  var_2 = func_357C();
+  foreach(var_4 in var_2) {
+    var_5 = var_0.var_13CC3[var_4];
+    if(isDefined(var_5)) {
+      if(isDefined(var_5.ent)) {
+        var_1[var_1.size] = var_5.ent;
         continue;
       }
 
-      if(isDefined(var_05.var_EF76)) {
-        foreach(var_07 in var_05.var_EF76) {
-          var_01[var_01.size] = var_07;
+      if(isDefined(var_5.var_EF76)) {
+        foreach(var_7 in var_5.var_EF76) {
+          var_1[var_1.size] = var_7;
         }
       }
     }
@@ -1282,7 +1282,7 @@ func_7FCB() {
   var_0A = undefined;
   var_0B = undefined;
   var_0C = 0;
-  foreach(var_0E in var_01) {
+  foreach(var_0E in var_1) {
     var_0F = self lastknowntime(var_0E);
     if(var_0F > var_0C) {
       var_0C = var_0F;
@@ -1293,7 +1293,7 @@ func_7FCB() {
   return var_0A;
 }
 
-func_B4EA(param_00) {
+func_B4EA(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     return level.failure;
   }
@@ -1302,81 +1302,81 @@ func_B4EA(param_00) {
     return level.failure;
   }
 
-  if(gettime() - self.var_3135.lasttimefired < 1000) {
+  if(gettime() - self.bt.lasttimefired < 1000) {
     return level.failure;
   }
 
   return level.success;
 }
 
-enableweapons(param_00) {
-  if(isDefined(param_00)) {
-    var_01 = 24;
+enableweapons(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = 24;
     if(!isDefined(self.var_DD25)) {
       self.var_DD25 = 0;
     }
 
-    var_02 = self lastknownpos(param_00);
-    var_03 = 256 + self.var_DD25 * var_01;
-    var_04 = getrandomnavpoints(var_02, var_03, 1, self);
-    if(!isDefined(var_04) || var_04.size == 0) {
+    var_2 = self lastknownpos(var_0);
+    var_3 = 256 + self.var_DD25 * var_1;
+    var_4 = getrandomnavpoints(var_2, var_3, 1, self);
+    if(!isDefined(var_4) || var_4.size == 0) {
       return undefined;
     }
 
-    return var_04[0];
+    return var_4[0];
   }
 
   return undefined;
 }
 
-func_4459(param_00, param_01, param_02) {
-  var_03 = distance2dsquared(param_02, param_00.origin);
-  var_04 = distance2dsquared(param_02, param_01.origin);
-  return var_03 < var_04;
+func_4459(var_0, var_1, var_2) {
+  var_3 = distance2dsquared(var_2, var_0.origin);
+  var_4 = distance2dsquared(var_2, var_1.origin);
+  return var_3 < var_4;
 }
 
-func_1043E(param_00, param_01) {
-  var_02 = param_01.origin;
-  for(var_03 = 1; var_03 < param_00.size; var_03++) {
-    var_04 = param_00[var_03];
-    for(var_05 = var_03 - 1; var_05 >= 0; var_05--) {
-      if(func_4459(param_00[var_05], var_04, var_02)) {
+func_1043E(var_0, var_1) {
+  var_2 = var_1.origin;
+  for(var_3 = 1; var_3 < var_0.size; var_3++) {
+    var_4 = var_0[var_3];
+    for(var_5 = var_3 - 1; var_5 >= 0; var_5--) {
+      if(func_4459(var_0[var_5], var_4, var_2)) {
         break;
       }
 
-      param_00[var_05 + 1] = param_00[var_05];
+      var_0[var_5 + 1] = var_0[var_5];
     }
 
-    param_00[var_05 + 1] = var_04;
+    var_0[var_5 + 1] = var_4;
   }
 
-  return param_00;
+  return var_0;
 }
 
-enableweaponswitch(param_00) {
-  if(isDefined(param_00)) {
-    var_01 = param_00.target_getindexoftarget;
-    if(!isDefined(var_01)) {
-      var_01 = getclosestnodeinsight(param_00.origin);
+enableweaponswitch(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = var_0.target_getindexoftarget;
+    if(!isDefined(var_1)) {
+      var_1 = getclosestnodeinsight(var_0.origin);
     }
 
-    if(isDefined(var_01)) {
-      var_02 = getnodesinradius(self.origin, 512, 72, 72);
-      var_03 = [];
-      var_04 = var_02.size;
-      for(var_05 = 0; var_05 < var_04; var_05++) {
-        var_06 = var_02[var_05];
-        if(nodesvisible(var_06, var_01) && distance2dsquared(var_06.origin, param_00.origin) >= squared(256)) {
-          var_03[var_03.size] = var_06;
+    if(isDefined(var_1)) {
+      var_2 = getnodesinradius(self.origin, 512, 72, 72);
+      var_3 = [];
+      var_4 = var_2.size;
+      for(var_5 = 0; var_5 < var_4; var_5++) {
+        var_6 = var_2[var_5];
+        if(nodesvisible(var_6, var_1) && distance2dsquared(var_6.origin, var_0.origin) >= squared(256)) {
+          var_3[var_3.size] = var_6;
         }
       }
 
-      if(var_03.size > 0) {
-        var_07 = func_1043E(var_03, param_00);
-        var_08 = var_07[0];
-        var_09 = getclosestpointonnavmesh(var_08.origin, self);
-        if(distance2dsquared(var_09, self.origin) > 16384) {
-          return var_09;
+      if(var_3.size > 0) {
+        var_7 = func_1043E(var_3, var_0);
+        var_8 = var_7[0];
+        var_9 = getclosestpointonnavmesh(var_8.origin, self);
+        if(distance2dsquared(var_9, self.origin) > 16384) {
+          return var_9;
         }
       }
     }
@@ -1385,22 +1385,22 @@ enableweaponswitch(param_00) {
   return undefined;
 }
 
-func_F814(param_00) {
-  var_01 = func_7FCB();
-  if(!self _meth_84BA() && !isDefined(var_01) || !self _meth_84BA(var_01.origin)) {
+func_F814(var_0) {
+  var_1 = func_7FCB();
+  if(!self _meth_84BA() && !isDefined(var_1) || !self _meth_84BA(var_1.origin)) {
     return level.failure;
   }
 
-  if(isDefined(var_01)) {
-    var_02 = enableweaponswitch(var_01);
-    if(!isDefined(var_02)) {
-      var_02 = enableweapons(var_01);
+  if(isDefined(var_1)) {
+    var_2 = enableweaponswitch(var_1);
+    if(!isDefined(var_2)) {
+      var_2 = enableweapons(var_1);
     }
 
-    if(isDefined(var_02)) {
+    if(isDefined(var_2)) {
       self.var_6D = 128;
-      self _meth_8481(var_02);
-      self.var_1198.var_C974 = var_01;
+      self _meth_8481(var_2);
+      self._blackboard.var_C974 = var_1;
       return level.success;
     }
   }
@@ -1408,37 +1408,37 @@ func_F814(param_00) {
   return level.failure;
 }
 
-func_12845(param_00) {
+func_12845(var_0) {
   if(!isDefined(self.vehicle_getspawnerarray)) {
     return level.failure;
   }
 
-  var_01 = self _meth_84B6();
-  if(!isDefined(var_01) || distancesquared(var_01, self.origin) < 1296) {
+  var_1 = self _meth_84B6();
+  if(!isDefined(var_1) || distancesquared(var_1, self.origin) < 1296) {
     self clearpath();
     self _meth_8484();
     return level.failure;
   }
 
-  self _meth_8481(var_01);
+  self _meth_8481(var_1);
   return level.success;
 }
 
-func_41D4(param_00) {
+func_41D4(var_0) {
   self.var_DD25 = undefined;
 }
 
-func_9E1B(param_00) {
-  if(!isDefined(param_00)) {
+func_9E1B(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  var_01 = self.var_1198.shootparams;
-  var_02 = func_357C();
-  foreach(var_04 in var_02) {
-    var_05 = var_01.var_13CC3[var_04];
-    if(isDefined(var_05)) {
-      if(isDefined(var_05.ent) && var_05.ent == param_00) {
+  var_1 = self._blackboard.shootparams;
+  var_2 = func_357C();
+  foreach(var_4 in var_2) {
+    var_5 = var_1.var_13CC3[var_4];
+    if(isDefined(var_5)) {
+      if(isDefined(var_5.ent) && var_5.ent == var_0) {
         return 1;
       }
     }
@@ -1448,61 +1448,61 @@ func_9E1B(param_00) {
 }
 
 func_213A() {
-  var_00 = self.var_1198.shootparams;
-  var_01 = 0;
-  var_02 = anglesToForward(self.angles);
-  var_03 = func_357C();
-  foreach(var_05 in var_03) {
-    var_06 = var_00.var_13CC3[var_05];
-    if(isDefined(var_06) && isDefined(var_06.ent)) {
-      var_07 = var_06.ent.origin - self.origin;
-      if(vectordot(var_07, var_02) < 0) {
-        var_01 = 1;
+  var_0 = self._blackboard.shootparams;
+  var_1 = 0;
+  var_2 = anglesToForward(self.angles);
+  var_3 = func_357C();
+  foreach(var_5 in var_3) {
+    var_6 = var_0.var_13CC3[var_5];
+    if(isDefined(var_6) && isDefined(var_6.ent)) {
+      var_7 = var_6.ent.origin - self.origin;
+      if(vectordot(var_7, var_2) < 0) {
+        var_1 = 1;
         break;
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_1382A(param_00) {
+func_1382A(var_0) {
   if(!isDefined(self.vehicle_getspawnerarray)) {
     return level.success;
   }
 
-  if(func_3906(param_00) == level.success) {
+  if(func_3906(var_0) == level.success) {
     return level.success;
   }
 
-  if(!isDefined(self.var_1198.var_C974)) {
+  if(!isDefined(self._blackboard.var_C974)) {
     return level.success;
   }
 
-  if(!func_9E1B(self.var_1198.var_C974)) {
+  if(!func_9E1B(self._blackboard.var_C974)) {
     return level.success;
   }
 
-  var_01 = self pathdisttogoal();
-  if(var_01 < 175 && func_213A()) {
+  var_1 = self pathdisttogoal();
+  if(var_1 < 175 && func_213A()) {
     return level.success;
   }
 
   return level.running;
 }
 
-func_41B3(param_00) {
+func_41B3(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_01 = 84;
-    var_02 = self getposonpath(var_01);
-    self _meth_8481(var_02);
+    var_1 = 84;
+    var_2 = self getposonpath(var_1);
+    self _meth_8481(var_2);
   }
 
   return level.success;
 }
 
-func_128A9(param_00) {
-  if(!self.var_3135.var_E5FA) {
+func_128A9(var_0) {
+  if(!self.bt.var_E5FA) {
     return level.failure;
   }
 
@@ -1534,34 +1534,34 @@ func_128A9(param_00) {
     return level.failure;
   }
 
-  var_01 = undefined;
+  var_1 = undefined;
   if(scripts\asm\asm_bb::bb_canrodeo("left")) {
-    var_01 = "left";
+    var_1 = "left";
   } else if(scripts\asm\asm_bb::bb_canrodeo("right")) {
-    var_01 = "right";
+    var_1 = "right";
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  var_02 = anglestoright(self gettagangles("j_spineupper"));
-  var_03 = level.player.origin - self gettagorigin("j_spineupper");
-  var_04 = angleclamp180(vectortoyaw(var_03) - vectortoyaw(var_02));
-  var_05 = 1;
-  if(var_01 == "right") {
-    var_05 = var_05 * -1;
+  var_2 = anglestoright(self gettagangles("j_spineupper"));
+  var_3 = level.player.origin - self gettagorigin("j_spineupper");
+  var_4 = angleclamp180(vectortoyaw(var_3) - vectortoyaw(var_2));
+  var_5 = 1;
+  if(var_1 == "right") {
+    var_5 = var_5 * -1;
   }
 
-  var_06 = 0;
-  if(func_1E76(var_04, var_05 * -60, var_05 * 60)) {
-    var_06 = 1;
+  var_6 = 0;
+  if(func_1E76(var_4, var_5 * -60, var_5 * 60)) {
+    var_6 = 1;
     self.var_E5F8 = "front";
-  } else if(func_1E76(var_04, var_05 * 60, var_05 * 120)) {
-    self.var_E5F8 = var_01;
-  } else if(func_1E76(var_04, var_05 * -60, var_05 * -160)) {
-    var_06 = 1;
-    if(var_01 == "left") {
+  } else if(func_1E76(var_4, var_5 * 60, var_5 * 120)) {
+    self.var_E5F8 = var_1;
+  } else if(func_1E76(var_4, var_5 * -60, var_5 * -160)) {
+    var_6 = 1;
+    if(var_1 == "left") {
       self.var_E5F8 = "right";
     } else {
       self.var_E5F8 = "left";
@@ -1570,7 +1570,7 @@ func_128A9(param_00) {
     self.var_E5F8 = "rear";
   }
 
-  if(!isplayerusing(var_06)) {
+  if(!isplayerusing(var_6)) {
     return level.failure;
   }
 
@@ -1578,36 +1578,36 @@ func_128A9(param_00) {
     self notify("asm_stop_grabtargetthread");
   }
 
-  scripts\asm\asm_bb::bb_setrodeorequest(var_01);
+  scripts\asm\asm_bb::bb_setrodeorequest(var_1);
   return level.success;
 }
 
-func_1E76(param_00, param_01, param_02) {
-  return (param_00 >= param_01 && param_00 <= param_02) || param_00 <= param_01 && param_00 >= param_02;
+func_1E76(var_0, var_1, var_2) {
+  return (var_0 >= var_1 && var_0 <= var_2) || var_0 <= var_1 && var_0 >= var_2;
 }
 
-isplayerusing(param_00) {
-  var_01 = self gettagorigin("j_spineupper");
-  var_02 = vectortoangles(anglestoright(self gettagangles("j_spineupper")));
-  var_03 = var_01 + rotatevector((-20, 0, 30), var_02);
-  var_04 = level.player getEye();
-  if(var_04[2] < var_03[2] - 90) {
+isplayerusing(var_0) {
+  var_1 = self gettagorigin("j_spineupper");
+  var_2 = vectortoangles(anglestoright(self gettagangles("j_spineupper")));
+  var_3 = var_1 + rotatevector((-20, 0, 30), var_2);
+  var_4 = level.player getEye();
+  if(var_4[2] < var_3[2] - 90) {
     return 0;
   }
 
-  if(var_04[2] < var_03[2] && param_00 || level.player getvelocity()[2] < 1) {
+  if(var_4[2] < var_3[2] && var_0 || level.player getvelocity()[2] < 1) {
     return 0;
   }
 
-  if(var_04[2] > var_03[2] + 90) {
+  if(var_4[2] > var_3[2] + 90) {
     return 0;
   }
 
-  if(distance2dsquared(var_04, var_03) > 12000) {
+  if(distance2dsquared(var_4, var_3) > 12000) {
     return 0;
   }
 
-  if(!level.player scripts\common\trace::player_trace_passed(level.player.origin, var_01, level.player.angles, [self, level.player])) {
+  if(!level.player scripts\common\trace::player_trace_passed(level.player.origin, var_1, level.player.angles, [self, level.player])) {
     return 0;
   }
 
@@ -1618,48 +1618,48 @@ func_4F40() {}
 
 func_4F3E() {}
 
-func_4F3D(param_00) {}
+func_4F3D(var_0) {}
 
-func_4F3F(param_00, param_01, param_02) {}
+func_4F3F(var_0, var_1, var_2) {}
 
 func_4F43() {}
 
-func_E602(param_00) {
-  if(isDefined(self.var_1198.var_E5FD) && !self.var_1198.var_E5FD) {
-    if(isDefined(self.var_3135.var_E5FB)) {
-      self.var_3135.var_E5FB = undefined;
+func_E602(var_0) {
+  if(isDefined(self._blackboard.var_E5FD) && !self._blackboard.var_E5FD) {
+    if(isDefined(self.bt.var_E5FB)) {
+      self.bt.var_E5FB = undefined;
       self.var_6D = 32;
       self _meth_8481(self.origin);
     }
 
     if(isDefined(self.var_30EA)) {
-      scripts\asm\asm_bb::bb_setcanrodeo(self.var_1198.rodeorequested, 0);
+      scripts\asm\asm_bb::bb_setcanrodeo(self._blackboard.rodeorequested, 0);
     }
 
-    self.var_1198.rodeorequested = undefined;
-    self.var_1198.var_E5FD = undefined;
+    self._blackboard.rodeorequested = undefined;
+    self._blackboard.var_E5FD = undefined;
     return level.failure;
   }
 
-  if(!isDefined(self.var_3135.var_E5FB)) {
-    var_01 = scripts\engine\utility::getstructarray("c12_rodeo_struct", "targetname");
-    if(var_01.size == 0) {
-      self.var_3135.var_E5FB = self.origin;
+  if(!isDefined(self.bt.var_E5FB)) {
+    var_1 = scripts\engine\utility::getstructarray("c12_rodeo_struct", "targetname");
+    if(var_1.size == 0) {
+      self.bt.var_E5FB = self.origin;
       self.var_6D = 32;
     } else {
-      var_02 = sortbydistance(var_01, self.origin)[0];
-      self.var_3135.var_E5FB = getclosestpointonnavmesh(var_02.origin, self);
-      self.var_6D = max(var_02.fgetarg - 180, 32);
+      var_2 = sortbydistance(var_1, self.origin)[0];
+      self.bt.var_E5FB = getclosestpointonnavmesh(var_2.origin, self);
+      self.var_6D = max(var_2.fgetarg - 180, 32);
     }
 
-    self _meth_8481(self.var_3135.var_E5FB);
+    self _meth_8481(self.bt.var_E5FB);
   }
 
   return level.running;
 }
 
-func_12F13(param_00) {
-  if(isDefined(self.var_3135.var_F1F8)) {
+func_12F13(var_0) {
+  if(isDefined(self.bt.var_F1F8)) {
     return level.running;
   }
 
@@ -1673,7 +1673,7 @@ func_F1F8() {
   self endon("death");
   createnavrepulsor("c12_selfdestruct", -1, self, 1024, 1);
   self.ignoreme = 1;
-  self.var_3135.var_F1F8 = 1;
+  self.bt.var_F1F8 = 1;
   wait(0.2);
   playFXOnTag(level.var_7649["c12_selfdestruct_buildup"], self, "j_spineupper");
   self playSound("c12_selfdestruct_1beep", "beep_done", 1);
@@ -1686,11 +1686,11 @@ func_F1F8() {
 func_F1FA() {
   self endon("death");
   self.var_6D = 128;
-  var_00 = self.origin;
+  var_0 = self.origin;
   for(;;) {
-    if(distance2dsquared(var_00, level.player.origin) > squared(self.var_6D)) {
-      var_00 = getclosestpointonnavmesh(level.player.origin, self);
-      self _meth_8481(var_00);
+    if(distance2dsquared(var_0, level.player.origin) > squared(self.var_6D)) {
+      var_0 = getclosestpointonnavmesh(level.player.origin, self);
+      self _meth_8481(var_0);
     }
 
     wait(1);
@@ -1699,8 +1699,8 @@ func_F1FA() {
 
 func_F1FB() {
   self endon("death");
-  var_00 = 1;
-  for(var_01 = 0; var_01 < 4; var_01++) {
+  var_0 = 1;
+  for(var_1 = 0; var_1 < 4; var_1++) {
     if(soundexists("c12_selfdestruct_beep")) {
       self playSound("c12_selfdestruct_beep");
       wait(0.8);
@@ -1708,15 +1708,15 @@ func_F1FB() {
       wait(1);
     }
 
-    var_00 = var_00 - 0.2;
-    var_00 = max(0, var_00);
-    if(var_00 > 0) {
-      wait(var_00);
+    var_0 = var_0 - 0.2;
+    var_0 = max(0, var_0);
+    if(var_0 > 0) {
+      wait(var_0);
     }
   }
 }
 
-func_35AD(param_00, param_01) {
+func_35AD(var_0, var_1) {
   if(scripts\asm\asm_bb::ispartdismembered("right_arm") || scripts\asm\asm_bb::ispartdismembered("right_leg") || scripts\asm\asm_bb::ispartdismembered("left_leg")) {
     return 0;
   }
@@ -1725,61 +1725,61 @@ func_35AD(param_00, param_01) {
     return 0;
   }
 
-  var_02 = self.isnodeoccupied;
-  if(isDefined(param_00)) {
-    var_02 = param_00;
+  var_2 = self.isnodeoccupied;
+  if(isDefined(var_0)) {
+    var_2 = var_0;
   }
 
-  if(!isplayer(var_02)) {
+  if(!isplayer(var_2)) {
     return 0;
   }
 
-  var_03 = vectortoyaw(var_02.origin - self.origin);
-  if(abs(angleclamp180(var_03 - self.angles[1])) > 90) {
+  var_3 = vectortoyaw(var_2.origin - self.origin);
+  if(abs(angleclamp180(var_3 - self.angles[1])) > 90) {
     return level.failure;
   }
 
-  return lib_0A10::ismeleevalid(param_00, param_01);
+  return lib_0A10::ismeleevalid(var_0, var_1);
 }
 
-func_128AE(param_00, param_01) {
-  var_02 = self.var_1198.shootparams;
-  var_03 = gettime();
+func_128AE(var_0, var_1) {
+  var_2 = self._blackboard.shootparams;
+  var_3 = gettime();
   if(isDefined(self.asm.var_2AD2)) {
-    var_02.var_A993 = var_03;
+    var_2.var_A993 = var_3;
     return;
   }
 
-  if(var_03 - var_02.var_A98F < 500) {
+  if(var_3 - var_2.var_A98F < 500) {
     return;
   }
 
-  if(var_03 - var_02.var_A993 < 10000) {
+  if(var_3 - var_2.var_A993 < 10000) {
     return;
   }
 
-  if(!isDefined(param_01.ent)) {
+  if(!isDefined(var_1.ent)) {
     return;
   }
 
-  var_04 = param_01.ent;
-  var_05 = var_04.origin - self.origin;
-  var_06 = lengthsquared(var_05);
-  if(var_06 < -25536) {
+  var_4 = var_1.ent;
+  var_5 = var_4.origin - self.origin;
+  var_6 = lengthsquared(var_5);
+  if(var_6 < -25536) {
     return;
   }
 
-  var_02.var_A98F = var_03;
-  var_07 = 128;
-  var_08 = sqrt(var_06);
-  if(var_08 < 800) {
-    var_07 = var_07 * 1 - 800 - var_08 / 800;
+  var_2.var_A98F = var_3;
+  var_7 = 128;
+  var_8 = sqrt(var_6);
+  if(var_8 < 800) {
+    var_7 = var_7 * 1 - 800 - var_8 / 800;
   }
 
-  var_07 = randomfloat(var_07);
-  var_09 = randomfloat(360);
-  var_0A = var_04.origin + (var_07 * cos(var_09), var_07 * sin(var_09), 0);
-  if(param_00 == "left") {
+  var_7 = randomfloat(var_7);
+  var_9 = randomfloat(360);
+  var_0A = var_4.origin + (var_7 * cos(var_9), var_7 * sin(var_9), 0);
+  if(var_0 == "left") {
     var_0B = "tag_brass_le";
   } else {
     var_0B = "tag_brass_ri";
@@ -1791,6 +1791,6 @@ func_128AE(param_00, param_01) {
   if(isDefined(var_0E)) {
     self playSound("c12_grenade_launch");
     var_0E makeunusable();
-    var_02.var_A993 = var_03;
+    var_2.var_A993 = var_3;
   }
 }

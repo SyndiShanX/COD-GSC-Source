@@ -5,14 +5,14 @@
 *************************************************/
 
 rat_king_init() {
-  var_00 = scripts\engine\utility::getstructarray("rat_king_spawner", "targetname");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.script_noteworthy)) {
+  var_0 = scripts\engine\utility::getstructarray("rat_king_spawner", "targetname");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.script_noteworthy)) {
       continue;
     }
 
-    level.rat_king_spawn_loc = var_02.origin;
-    level.rat_king_spawn_angles = var_02.angles;
+    level.rat_king_spawn_loc = var_2.origin;
+    level.rat_king_spawn_angles = var_2.angles;
   }
 
   level.rat_king_vo_prefix = "disco_ratking_";
@@ -23,28 +23,28 @@ setuprkbouncestructs() {
   level.rat_king_bounce_structs = scripts\engine\utility::getstructarray("shield_bounce_loc", "targetname");
 }
 
-spawn_rat_king(param_00, param_01, param_02) {
+spawn_rat_king(var_0, var_1, var_2) {
   level notify("spawn_rat_king");
   level endon("spawn_rat_king");
   scripts\engine\utility::flag_wait("interactions_initialized");
   if(isDefined(level.rat_king)) {
-    if(scripts\engine\utility::istrue(param_02)) {
+    if(scripts\engine\utility::istrue(var_2)) {
       level.rat_king suicide();
     } else {
       return;
     }
   }
 
-  if(!isDefined(param_00)) {
-    param_00 = level.rat_king_spawn_loc;
+  if(!isDefined(var_0)) {
+    var_0 = level.rat_king_spawn_loc;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = level.rat_king_spawn_angles;
+  if(!isDefined(var_1)) {
+    var_1 = level.rat_king_spawn_angles;
   }
 
   for(;;) {
-    level.rat_king = scripts\mp\mp_agent::spawnnewagent("ratking", "axis", param_00, param_01);
+    level.rat_king = scripts\mp\mp_agent::spawnnewagent("ratking", "axis", var_0, var_1);
     if(isDefined(level.rat_king)) {
       level.rat_king.voprefix = level.rat_king_vo_prefix;
       level.rat_king thread setrkscriptablestates();
@@ -85,12 +85,12 @@ runspawnlogic() {
 rkaudiomonitor() {
   level endon("game_ended");
   self endon("death");
-  var_00 = 10;
+  var_0 = 10;
   self.playing_stumble = 0;
   for(;;) {
-    var_01 = scripts\engine\utility::waittill_any_in_array_or_timeout(["spawn", "summon", "pain", "melee", "shield_throw", "over", "under", "stomp"], var_00);
-    var_00 = randomintrange(4, 10);
-    switch (var_01) {
+    var_1 = scripts\engine\utility::waittill_any_in_array_or_timeout(["spawn", "summon", "pain", "melee", "shield_throw", "over", "under", "stomp"], var_0);
+    var_0 = randomintrange(4, 10);
+    switch (var_1) {
       case "spawn":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "spawn", 0);
         break;

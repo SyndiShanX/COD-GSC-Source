@@ -4,12 +4,12 @@
 ***************************************/
 
 init() {
-  var_00 = getdvarint("scr_match_recording", 0);
+  var_0 = getdvarint("scr_match_recording", 0);
 
-  if(!func_B408(var_00)) {
+  if(!func_B408(var_0)) {
     return;
   } else {
-    level.matchrecording_type = var_00;
+    level.matchrecording_type = var_0;
   }
 
   level.matchreceventcountline = 0;
@@ -32,119 +32,119 @@ init() {
   level thread func_B3FE();
 }
 
-func_B408(var_00) {
-  var_01 = 1;
+func_B408(var_0) {
+  var_1 = 1;
 
-  if(var_00 == 0) {
-    var_01 = 0;
-  } else if(var_00 < 0 || var_00 > 4) {
-    var_01 = 0;
-  } else if(var_00 == 3 || var_00 == 4) {
-    var_02 = 0;
+  if(var_0 == 0) {
+    var_1 = 0;
+  } else if(var_0 < 0 || var_0 > 4) {
+    var_1 = 0;
+  } else if(var_0 == 3 || var_0 == 4) {
+    var_2 = 0;
 
-    if(!var_02) {
-      var_01 = 0;
+    if(!var_2) {
+      var_1 = 0;
     }
-  } else if(var_00 == 1 || var_00 == 2) {
-    var_03 = getdvarint("g_logEnable", 0);
-    var_01 = var_03 == 1;
+  } else if(var_0 == 1 || var_0 == 2) {
+    var_3 = getdvarint("g_logEnable", 0);
+    var_1 = var_3 == 1;
   }
 
-  return var_01;
+  return var_1;
 }
 
 matchrecording_isenabled() {
   return isDefined(level.matchrecording_type) && level.matchrecording_type > 0;
 }
 
-matchrecording_teammap(var_00) {
+matchrecording_teammap(var_0) {
   if(isDefined(level.teambased) && !level.teambased) {
-    var_01 = 2;
-  } else if(!isDefined(var_00) || var_00 == "allies") {
-    var_01 = 2;
+    var_1 = 2;
+  } else if(!isDefined(var_0) || var_0 == "allies") {
+    var_1 = 2;
   } else {
-    var_01 = 3;
+    var_1 = 3;
   }
 
-  return var_01;
+  return var_1;
 }
 
-matchrecording_eventcharmap(var_00) {
-  var_01 = undefined;
+matchrecording_eventcharmap(var_0) {
+  var_1 = undefined;
 
-  switch (var_00) {
+  switch (var_0) {
     case "PATH":
-      var_01 = "p";
+      var_1 = "p";
       break;
     case "SPAWN":
-      var_01 = "s";
+      var_1 = "s";
       break;
     case "DEATH":
-      var_01 = "d";
+      var_1 = "d";
       break;
     case "BULLET":
-      var_01 = "b";
+      var_1 = "b";
       break;
     case "EXPLOSION":
-      var_01 = "e";
+      var_1 = "e";
       break;
     case "ANCHOR":
-      var_01 = "t";
+      var_1 = "t";
       break;
     case "FRONT_LINE":
-      var_01 = "l";
+      var_1 = "l";
       break;
     case "FRONT_LINE_ALLIES":
-      var_01 = "[";
+      var_1 = "[";
       break;
     case "FRONT_LINE_AXIS":
-      var_01 = "]";
+      var_1 = "]";
       break;
     case "FLAG_A":
-      var_01 = "A";
+      var_1 = "A";
       break;
     case "FLAG_B":
-      var_01 = "B";
+      var_1 = "B";
       break;
     case "FLAG_C":
-      var_01 = "C";
+      var_1 = "C";
       break;
     case "SPAWN_ENTITY":
-      var_01 = "S";
+      var_1 = "S";
       break;
     case "PORTAL":
-      var_01 = "O";
+      var_1 = "O";
       break;
     case "LOG_BAD_SPAWN":
-      var_01 = "!";
+      var_1 = "!";
       break;
     case "LOG_GENERIC_MESSAGE":
-      var_01 = "m";
+      var_1 = "m";
       break;
     case "LOG_USER_EVENT":
-      var_01 = "u";
+      var_1 = "u";
       break;
     case "LOG_STAT":
-      var_01 = "?";
+      var_1 = "?";
       break;
     case "PLAYER_NAME":
-      var_01 = "n";
+      var_1 = "n";
       break;
     case "BEST_SPAWN_ALLIES":
-      var_01 = "+";
+      var_1 = "+";
       break;
     case "BEST_SPAWN_AXIS":
-      var_01 = "^";
+      var_1 = "^";
       break;
     default:
       break;
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_B3F4() {
-  var_00 = [];
+  var_0 = [];
   var_0[var_0.size] = "<mrec_map> " + level.script + "\\n";
   var_0[var_0.size] = "<mrec_game_type> " + level.gametype + "\\n";
   var_0[var_0.size] = "<mrec_event_def> PATH p\\n";
@@ -168,64 +168,64 @@ func_B3F4() {
   var_0[var_0.size] = "<mrec_event_def> PLAYER_NAME n\\n";
   var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE + bestSpawnAllies.tga\\n";
   var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE ^ bestSpawnAxis.tga\\n";
-  return var_00;
+  return var_0;
 }
 
-matchrecording_logevent(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
+matchrecording_logevent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!matchrecording_isenabled()) {
     return;
   }
   matchrecording_inceventlinecount();
-  var_09 = matchrecording_teammap(var_01);
-  var_10 = int(var_03) + "," + int(var_04);
-  var_11 = matchrecording_eventcharmap(var_02);
+  var_9 = matchrecording_teammap(var_1);
+  var_10 = int(var_3) + "," + int(var_4);
+  var_11 = matchrecording_eventcharmap(var_2);
 
-  if(var_02 == "BULLET" || var_02 == "FRONT_LINE" || var_02 == "FRONT_LINE_ALLIES" || var_02 == "FRONT_LINE_AXIS") {}
+  if(var_2 == "BULLET" || var_2 == "FRONT_LINE" || var_2 == "FRONT_LINE_ALLIES" || var_2 == "FRONT_LINE_AXIS") {}
 
   var_12 = "";
 
-  if(isDefined(var_06)) {
-    var_12 = " s:" + var_06;
+  if(isDefined(var_6)) {
+    var_12 = " s:" + var_6;
   }
 
   var_13 = "";
 
-  if(isDefined(var_07) && isDefined(var_08)) {
-    var_13 = " " + int(var_07) + "," + int(var_08);
+  if(isDefined(var_7) && isDefined(var_8)) {
+    var_13 = " " + int(var_7) + "," + int(var_8);
   }
 
-  var_14 = "|" + var_00 + " " + var_09 + " " + var_11 + " " + var_10 + " " + var_05 + var_13 + var_12;
+  var_14 = "|" + var_0 + " " + var_9 + " " + var_11 + " " + var_10 + " " + var_5 + var_13 + var_12;
   level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_14;
 }
 
-matchrecording_logeventmsg(var_00, var_01, var_02) {
+matchrecording_logeventmsg(var_0, var_1, var_2) {
   if(!matchrecording_isenabled()) {
     return;
   }
   matchrecording_inceventlinecount();
-  var_03 = matchrecording_eventcharmap(var_00);
+  var_3 = matchrecording_eventcharmap(var_0);
 
-  if(var_02 != "") {
-    if(!isDefined(var_02)) {
-      var_02 = "";
+  if(var_2 != "") {
+    if(!isDefined(var_2)) {
+      var_2 = "";
     } else {
-      var_02 = " \"" + var_02 + "\"";
+      var_2 = " \"" + var_2 + "\"";
     }
   }
 
-  var_04 = "|0 0 " + var_03 + " " + var_01 + var_02;
-  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_04;
+  var_4 = "|0 0 " + var_3 + " " + var_1 + var_2;
+  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_4;
 }
 
-matchrecording_logeventplayername(var_00, var_01, var_02) {
+matchrecording_logeventplayername(var_0, var_1, var_2) {
   if(!matchrecording_isenabled()) {
     return;
   }
   matchrecording_inceventlinecount();
-  var_03 = matchrecording_teammap(var_01);
-  var_04 = matchrecording_eventcharmap("PLAYER_NAME");
-  var_05 = "|" + var_00 + " " + var_03 + " " + var_04 + " " + "\"" + var_02 + "\"";
-  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_05;
+  var_3 = matchrecording_teammap(var_1);
+  var_4 = matchrecording_eventcharmap("PLAYER_NAME");
+  var_5 = "|" + var_0 + " " + var_3 + " " + var_4 + " " + "\"" + var_2 + "\"";
+  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_5;
 }
 
 matchrecording_inceventlinecount() {
@@ -270,18 +270,18 @@ matchrecording_glog_dump() {
     func_B3F5();
   }
 
-  foreach(var_01 in level.matchrecevents) {
-    logprint(var_01 + "\\n");
+  foreach(var_1 in level.matchrecevents) {
+    logprint(var_1 + "\\n");
   }
 
   level.matchrecevents = [];
 }
 
 func_B3F5() {
-  var_00 = func_B3F4();
+  var_0 = func_B3F4();
 
-  foreach(var_02 in var_00) {
-    logprint(var_02);
+  foreach(var_2 in var_0) {
+    logprint(var_2);
   }
 }
 
@@ -289,7 +289,7 @@ matchrecording_scriptdata_openfilewrite() {}
 
 matchrecording_scriptdata_openfileappend() {}
 
-matchrecording_scriptdata_openfileaddheader(var_00) {}
+matchrecording_scriptdata_openfileaddheader(var_0) {}
 
 matchrecording_scriptdata_dump() {}
 
@@ -301,44 +301,44 @@ matchrecording_logallplayerposthink() {
   scripts\mp\utility\game::gameflagwait("prematch_done");
 
   for(;;) {
-    var_00 = gettime();
-    var_01 = level.players;
+    var_0 = gettime();
+    var_1 = level.players;
 
-    foreach(var_03 in var_01) {
-      var_04 = gettime();
+    foreach(var_3 in var_1) {
+      var_4 = gettime();
 
-      if(isDefined(var_03) && scripts\mp\utility\game::isreallyalive(var_03)) {
-        matchrecording_logevent(var_3.clientid, var_3.team, "PATH", var_3.origin[0], var_3.origin[1], var_04);
+      if(isDefined(var_3) && scripts\mp\utility\game::isreallyalive(var_3)) {
+        matchrecording_logevent(var_3.clientid, var_3.team, "PATH", var_3.origin[0], var_3.origin[1], var_4);
         scripts\engine\utility::waitframe();
       }
     }
 
-    wait(max(0.05, 1.5 - (gettime() - var_00) / 1000));
+    wait(max(0.05, 1.5 - (gettime() - var_0) / 1000));
   }
 }
 
 matchrecording_onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread matchrecording_usereventthink();
+    level waittill("connected", var_0);
+    var_0 thread matchrecording_usereventthink();
   }
 }
 
 func_B3FE() {
   level waittill("game_ended");
-  var_00 = 0;
-  var_01 = 0;
-  var_02 = 0.0;
-  var_03 = 0;
-  var_04 = 0.0;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = 0.0;
+  var_3 = 0;
+  var_4 = 0.0;
 
-  foreach(var_06 in level.players) {
-    if(isDefined(var_6.func_D37E)) {
-      foreach(var_08 in var_6.func_D37E) {
-        var_02 = var_02 + var_08;
+  foreach(var_6 in level.players) {
+    if(isDefined(var_6.var_D37E)) {
+      foreach(var_8 in var_6.var_D37E) {
+        var_2 = var_2 + var_8;
         var_1++;
 
-        if(var_08 > 75.0) {
+        if(var_8 > 75.0) {
           var_0++;
         }
       }
@@ -346,26 +346,26 @@ func_B3FE() {
 
     if(isDefined(var_6.engagementtimes)) {
       foreach(var_11 in var_6.engagementtimes) {
-        var_04 = var_04 + var_11;
+        var_4 = var_4 + var_11;
         var_3++;
       }
     }
   }
 
-  if(var_01 > 0) {
-    matchrecording_logeventmsg("LOG_STAT", gettime(), "Shot in the back percent: " + var_00 / var_01 * 100.0 + "%");
-    matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Death Angle: " + var_02 / var_01);
+  if(var_1 > 0) {
+    matchrecording_logeventmsg("LOG_STAT", gettime(), "Shot in the back percent: " + var_0 / var_1 * 100.0 + "%");
+    matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Death Angle: " + var_2 / var_1);
   }
 
-  if(var_03 > 0) {
-    matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Engagement Length: " + var_04 / var_03 / 1000.0 + "s");
+  if(var_3 > 0) {
+    matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Engagement Length: " + var_4 / var_3 / 1000.0 + "s");
   }
 
-  if(isDefined(level.func_744D) && isDefined(level.func_744D.func_12F92) && isDefined(level.func_744D.func_5AFE)) {
-    var_14 = level.func_744D.func_12F92 + level.func_744D.func_5AFE;
+  if(isDefined(level.var_744D) && isDefined(level.var_744D.var_12F92) && isDefined(level.var_744D.var_5AFE)) {
+    var_14 = level.var_744D.var_12F92 + level.var_744D.var_5AFE;
 
     if(var_14 > 0.0) {
-      matchrecording_logeventmsg("LOG_STAT", gettime(), "Frontline Uptime: " + level.func_744D.func_12F92 / var_14 * 100.0 + "%");
+      matchrecording_logeventmsg("LOG_STAT", gettime(), "Frontline Uptime: " + level.var_744D.var_12F92 / var_14 * 100.0 + "%");
     }
   }
 }
@@ -383,9 +383,9 @@ matchrecording_usereventthink() {
 
   for(;;) {
     self waittill("log_user_event_start");
-    var_00 = scripts\engine\utility::waittill_any_return("log_user_event_end", "log_user_event_generic_event");
+    var_0 = scripts\engine\utility::waittill_any_return("log_user_event_end", "log_user_event_generic_event");
 
-    if(var_00 == "log_user_event_generic_event") {
+    if(var_0 == "log_user_event_generic_event") {
       self iprintlnbold("Event Logged");
       matchrecording_logeventmsg("LOG_USER_EVENT", gettime(), self.name);
     }
@@ -397,7 +397,7 @@ matchrecording_generateid() {
     game["matchRecording_nextID"] = 100;
   }
 
-  var_00 = game["matchRecording_nextID"];
+  var_0 = game["matchRecording_nextID"];
   game["matchRecording_nextID"]++;
-  return var_00;
+  return var_0;
 }

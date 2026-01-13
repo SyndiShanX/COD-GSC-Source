@@ -837,578 +837,578 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_12256(param_00, param_01, param_02, param_03) {
+func_12256(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12241(param_00, param_01, param_02, param_03) {
+func_12241(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_11BCA(param_00, param_01, param_02, param_03) {
+func_11BCA(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE96();
 }
 
-func_11BCE(param_00, param_01, param_02, param_03) {
+func_11BCE(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE97();
 }
 
-func_11BBB(param_00, param_01, param_02, param_03) {
+func_11BBB(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_11BC6(param_00, param_01, param_02, param_03) {
+func_11BC6(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_11BC1(param_00, param_01, param_02, param_03) {
+func_11BC1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_12203(param_00, param_01, param_02, param_03) {
+func_12203(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_12204(param_00, param_01, param_02, param_03) {
+func_12204(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_12208(param_00, param_01, param_02, param_03) {
+func_12208(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12212(param_00, param_01, param_02, param_03) {
+func_12212(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1221D(param_00, param_01, param_02, param_03) {
+func_1221D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12222(param_00, param_01, param_02, param_03) {
+func_12222(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12405(param_00, param_01, param_02, param_03) {
+func_12405(var_0, var_1, var_2, var_3) {
   return self.hasplayedvignetteanim;
 }
 
-func_120B5(param_00, param_01, param_02, param_03) {
+func_120B5(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_9E2E();
 }
 
-func_121B4(param_00, param_01, param_02, param_03) {
+func_121B4(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B6();
 }
 
-func_121EA(param_00, param_01, param_02, param_03) {
+func_121EA(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("walk");
 }
 
-func_121EB(param_00, param_01, param_02, param_03) {
+func_121EB(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_121E3(param_00, param_01, param_02, param_03) {
+func_121E3(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("run");
 }
 
-func_121E4(param_00, param_01, param_02, param_03) {
+func_121E4(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("sprint");
 }
 
-func_121FE(param_00, param_01, param_02, param_03) {
+func_121FE(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("walk");
 }
 
-func_121FF(param_00, param_01, param_02, param_03) {
+func_121FF(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_121F6(param_00, param_01, param_02, param_03) {
+func_121F6(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("run");
 }
 
-func_121F7(param_00, param_01, param_02, param_03) {
+func_121F7(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("sprint");
 }
 
-func_121D0(param_00, param_01, param_02, param_03) {
+func_121D0(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("run");
 }
 
-func_121D1(param_00, param_01, param_02, param_03) {
+func_121D1(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("sprint");
 }
 
-func_121D8(param_00, param_01, param_02, param_03) {
+func_121D8(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("walk");
 }
 
-func_121D9(param_00, param_01, param_02, param_03) {
+func_121D9(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_121BE(param_00, param_01, param_02, param_03) {
+func_121BE(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("run");
 }
 
-func_121BF(param_00, param_01, param_02, param_03) {
+func_121BF(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("sprint");
 }
 
-func_121C4(param_00, param_01, param_02, param_03) {
+func_121C4(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("walk");
 }
 
-func_121C5(param_00, param_01, param_02, param_03) {
+func_121C5(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_121DE(param_00, param_01, param_02, param_03) {
+func_121DE(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9();
 }
 
-func_121F0(param_00, param_01, param_02, param_03) {
+func_121F0(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA();
 }
 
-func_121CA(param_00, param_01, param_02, param_03) {
+func_121CA(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8();
 }
 
-func_121B9(param_00, param_01, param_02, param_03) {
+func_121B9(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8();
 }
 
-func_122F3(param_00, param_01, param_02, param_03) {
+func_122F3(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B6();
 }
 
-func_12329(param_00, param_01, param_02, param_03) {
+func_12329(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("walk");
 }
 
-func_1232A(param_00, param_01, param_02, param_03) {
+func_1232A(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_12322(param_00, param_01, param_02, param_03) {
+func_12322(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("run");
 }
 
-func_12323(param_00, param_01, param_02, param_03) {
+func_12323(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9() && lib_0C72::func_9EDD("sprint");
 }
 
-func_1233D(param_00, param_01, param_02, param_03) {
+func_1233D(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("walk");
 }
 
-func_1233E(param_00, param_01, param_02, param_03) {
+func_1233E(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_12335(param_00, param_01, param_02, param_03) {
+func_12335(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("run");
 }
 
-func_12336(param_00, param_01, param_02, param_03) {
+func_12336(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA() && lib_0C72::func_9EDD("sprint");
 }
 
-func_12303(param_00, param_01, param_02, param_03) {
+func_12303(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("walk");
 }
 
-func_12304(param_00, param_01, param_02, param_03) {
+func_12304(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_122FD(param_00, param_01, param_02, param_03) {
+func_122FD(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("run");
 }
 
-func_122FE(param_00, param_01, param_02, param_03) {
+func_122FE(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7() && lib_0C72::func_9EDD("sprint");
 }
 
-func_12317(param_00, param_01, param_02, param_03) {
+func_12317(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("walk");
 }
 
-func_12318(param_00, param_01, param_02, param_03) {
+func_12318(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("slow_walk");
 }
 
-func_1230F(param_00, param_01, param_02, param_03) {
+func_1230F(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("run");
 }
 
-func_12310(param_00, param_01, param_02, param_03) {
+func_12310(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8() && lib_0C72::func_9EDD("sprint");
 }
 
-func_1232F(param_00, param_01, param_02, param_03) {
+func_1232F(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54BA();
 }
 
-func_1231D(param_00, param_01, param_02, param_03) {
+func_1231D(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B9();
 }
 
-func_12309(param_00, param_01, param_02, param_03) {
+func_12309(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B8();
 }
 
-func_122F8(param_00, param_01, param_02, param_03) {
+func_122F8(var_0, var_1, var_2, var_3) {
   return lib_0C72::func_54B7();
 }
 
-func_1208A(param_00, param_01, param_02, param_03) {
+func_1208A(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12379(param_00, param_01, param_02, param_03) {
+func_12379(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_12385(param_00, param_01, param_02, param_03) {
+func_12385(var_0, var_1, var_2, var_3) {
   return self.var_DD == "head";
 }
 
-func_1238B(param_00, param_01, param_02, param_03) {
+func_1238B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_9E89(self.var_DD);
 }
 
-func_1237F(param_00, param_01, param_02, param_03) {
+func_1237F(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_123B7(param_00, param_01, param_02, param_03) {
+func_123B7(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_123BD(param_00, param_01, param_02, param_03) {
+func_123BD(var_0, var_1, var_2, var_3) {
   return !scripts\asm\zombie\zombie::func_10057(self.var_E1, self.var_E2, self.var_DE, self.var_DD);
 }
 
-func_123C9(param_00, param_01, param_02, param_03) {
+func_123C9(var_0, var_1, var_2, var_3) {
   return self.var_DD == "head";
 }
 
-func_123C3(param_00, param_01, param_02, param_03) {
+func_123C3(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_123A4(param_00, param_01, param_02, param_03) {
+func_123A4(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_9E89(self.var_DD) && scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_1239E(param_00, param_01, param_02, param_03) {
+func_1239E(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_12399(param_00, param_01, param_02, param_03) {
+func_12399(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_9E89(self.var_DD) && scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_12392(param_00, param_01, param_02, param_03) {
+func_12392(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_123AA(param_00, param_01, param_02, param_03) {
+func_123AA(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_9E89(self.var_DD) && scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_123AB(param_00, param_01, param_02, param_03) {
+func_123AB(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_123B4(param_00, param_01, param_02, param_03) {
+func_123B4(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_123B5(param_00, param_01, param_02, param_03) {
+func_123B5(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_10057(self.var_E1, self.var_E2, self.var_DE, self.var_DD);
 }
 
-func_123CE(param_00, param_01, param_02, param_03) {
+func_123CE(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_123CF(param_00, param_01, param_02, param_03) {
+func_123CF(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_10057(self.var_E1, self.var_E2, self.var_DE, self.var_DD);
 }
 
-func_12294(param_00, param_01, param_02, param_03) {
+func_12294(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92() && scripts\asm\zombie\melee::func_138E0();
 }
 
-func_1228A(param_00, param_01, param_02, param_03) {
+func_1228A(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_1228F(param_00, param_01, param_02, param_03) {
+func_1228F(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E0();
 }
 
-func_122A3(param_00, param_01, param_02, param_03) {
+func_122A3(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E1();
 }
 
-func_1229F(param_00, param_01, param_02, param_03) {
+func_1229F(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_1227B(param_00, param_01, param_02, param_03) {
+func_1227B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::shouldplayarenaintro();
 }
 
-func_12283(param_00, param_01, param_02, param_03) {
+func_12283(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_12276(param_00, param_01, param_02, param_03) {
+func_12276(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_1227D(param_00, param_01, param_02, param_03) {
+func_1227D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_1217D(param_00, param_01, param_02, param_03) {
+func_1217D(var_0, var_1, var_2, var_3) {
   return !isDefined(self.isfrozen) || !self.isfrozen;
 }
 
-func_12181(param_00, param_01, param_02, param_03) {
+func_12181(var_0, var_1, var_2, var_3) {
   return !isDefined(self.isfrozen) || !self.isfrozen;
 }
 
-func_125CB(param_00, param_01, param_02, param_03) {
+func_125CB(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E5();
 }
 
-func_125CC(param_00, param_01, param_02, param_03) {
+func_125CC(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E6();
 }
 
-func_11BEF(param_00, param_01, param_02, param_03) {
+func_11BEF(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::shouldplayarenaintro();
 }
 
-func_11BEE(param_00, param_01, param_02, param_03) {
+func_11BEE(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_11BD0(param_00, param_01, param_02, param_03) {
+func_11BD0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_11BD8(param_00, param_01, param_02, param_03) {
+func_11BD8(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-func_11BD9(param_00, param_01, param_02, param_03) {
+func_11BD9(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_11BD6(param_00, param_01, param_02, param_03) {
+func_11BD6(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_11BD7(param_00, param_01, param_02, param_03) {
+func_11BD7(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("slow_walk");
 }
 
-func_12616(param_00, param_01, param_02, param_03) {
+func_12616(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1246B(param_00, param_01, param_02, param_03) {
+func_1246B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1253D(param_00, param_01, param_02, param_03) {
+func_1253D(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12619(param_00, param_01, param_02, param_03) {
+func_12619(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_A013();
 }
 
-func_1262E(param_00, param_01, param_02, param_03) {
+func_1262E(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12481(param_00, param_01, param_02, param_03) {
+func_12481(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12550(param_00, param_01, param_02, param_03) {
+func_12550(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_11B9B(param_00, param_01, param_02, param_03) {
+func_11B9B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_11BAA(param_00, param_01, param_02, param_03) {
+func_11BAA(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-func_11BAF(param_00, param_01, param_02, param_03) {
+func_11BAF(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_11BA1(param_00, param_01, param_02, param_03) {
+func_11BA1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_11BA7(param_00, param_01, param_02, param_03) {
+func_11BA7(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("slow_walk");
 }
 
-trans_slow_walk_crawl_loop_to_to_melee1(param_00, param_01, param_02, param_03) {
+trans_slow_walk_crawl_loop_to_to_melee1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_slow_walk_crawl_loop_to_move_done5(param_00, param_01, param_02, param_03) {
+trans_slow_walk_crawl_loop_to_move_done5(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_slow_walk_crawl_turn_to_to_melee1(param_00, param_01, param_02, param_03) {
+trans_slow_walk_crawl_turn_to_to_melee1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_crawl_stop_to_to_melee1(param_00, param_01, param_02, param_03) {
+trans_crawl_stop_to_to_melee1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_124EE(param_00, param_01, param_02, param_03) {
+func_124EE(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_124E6(param_00, param_01, param_02, param_03) {
+func_124E6(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_A013();
 }
 
-func_124E2(param_00, param_01, param_02, param_03) {
+func_124E2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_11B98(param_00, param_01, param_02, param_03) {
+func_11B98(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("slow_walk");
 }
 
-func_11B9A(param_00, param_01, param_02, param_03) {
+func_11B9A(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_11B97(param_00, param_01, param_02, param_03) {
+func_11B97(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_11B99(param_00, param_01, param_02, param_03) {
+func_11B99(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-trans_run_crawl_loop_to_to_melee3(param_00, param_01, param_02, param_03) {
+trans_run_crawl_loop_to_to_melee3(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_run_crawl_loop_to_move_done7(param_00, param_01, param_02, param_03) {
+trans_run_crawl_loop_to_move_done7(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_walk_crawl_loop_to_to_melee2(param_00, param_01, param_02, param_03) {
+trans_walk_crawl_loop_to_to_melee2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_walk_crawl_loop_to_move_done6(param_00, param_01, param_02, param_03) {
+trans_walk_crawl_loop_to_move_done6(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_sprint_crawl_loop_to_to_melee2(param_00, param_01, param_02, param_03) {
+trans_sprint_crawl_loop_to_to_melee2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_sprint_crawl_loop_to_move_done4(param_00, param_01, param_02, param_03) {
+trans_sprint_crawl_loop_to_move_done4(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_125D1(param_00, param_01, param_02, param_03) {
+func_125D1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_pass_slow_walk_out_to_move_done3(param_00, param_01, param_02, param_03) {
+trans_pass_slow_walk_out_to_move_done3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_slow_walk_out_to_choose_movetype4(param_00, param_01, param_02, param_03) {
+trans_pass_slow_walk_out_to_choose_movetype4(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-func_123EB(param_00, param_01, param_02, param_03) {
+func_123EB(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_pass_walk_out_to_choose_movetype3(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_choose_movetype3(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_walk_out_to_to_melee5(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_to_melee5(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_pass_walk_out_to_move_done8(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_move_done8(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_out_to_choose_movetype4(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_choose_movetype4(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_run_out_to_choose_idle_exit5(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_choose_idle_exit5(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_A013();
 }
 
-trans_pass_run_out_to_to_melee6(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_to_melee6(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_pass_run_out_to_move_done9(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_move_done9(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_out_to_to_melee4(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_to_melee4(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-trans_pass_sprint_out_to_choose_movetype7(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_choose_movetype7(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-trans_pass_sprint_out_to_move_done8(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_move_done8(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_123E1(param_00, param_01, param_02, param_03) {
+func_123E1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_123E2(param_00, param_01, param_02, param_03) {
+func_123E2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE92();
 }
 
-func_12402(param_00, param_01, param_02, param_03) {
+func_12402(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_1009C();
 }
 
-func_12403(param_00, param_01, param_02, param_03) {
+func_12403(var_0, var_1, var_2, var_3) {
   return self.var_8C12;
 }
 
-trans_headcutter_death_style_to_headcutter_death_prone0(param_00, param_01, param_02, param_03) {
+trans_headcutter_death_style_to_headcutter_death_prone0(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::istrue(self.dismember_crawl);
 }

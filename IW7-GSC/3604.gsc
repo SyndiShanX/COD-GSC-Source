@@ -10,8 +10,8 @@ func_B557() {
 
 func_B559() {
   for(;;) {
-    level waittill("player_spawned", var_00);
-    if(isai(var_00)) {
+    level waittill("player_spawned", var_0);
+    if(isai(var_0)) {
       continue;
     }
   }
@@ -19,43 +19,43 @@ func_B559() {
 
 func_B558() {}
 
-func_B554(param_00) {
+func_B554(var_0) {
   self.var_B551 = 1;
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!param_00) {
+  if(!var_0) {
     self iprintlnbold("C.E.C.O.T drive active");
     thread func_B553();
   }
 
-  var_01 = 450;
-  var_02 = 1200;
-  var_03 = 350;
-  self energy_setmax(0, var_01);
-  self goal_radius(0, var_01);
-  self goalflag(0, var_02);
-  self goal_type(0, var_03);
+  var_1 = 450;
+  var_2 = 1200;
+  var_3 = 350;
+  self energy_setmax(0, var_1);
+  self goal_radius(0, var_1);
+  self goalflag(0, var_2);
+  self goal_type(0, var_3);
   return 1;
 }
 
-func_B552(param_00) {
+func_B552(var_0) {
   if(!isDefined(self)) {
     return;
   }
 
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var_01 = 400;
-  var_02 = 400;
-  self energy_setmax(0, var_01);
-  self goal_radius(0, var_01);
-  self goalflag(0, var_02);
+  var_1 = 400;
+  var_2 = 400;
+  self energy_setmax(0, var_1);
+  self goal_radius(0, var_1);
+  self goalflag(0, var_2);
   self goal_type(0, 900);
-  if(!param_00) {
+  if(!var_0) {
     self.var_B551 = 0;
     self setscriptablepartstate("megaboost", "megaboostOff", 0);
     self notify("megaboost_end");

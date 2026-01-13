@@ -36,21 +36,21 @@ func_1177B() {
     level.var_5CCB = "all";
   }
 
-  var_00 = 0;
+  var_0 = 0;
   switch (level.var_5CCB) {
     case "all":
-      var_00 = 1;
+      var_0 = 1;
       break;
 
     case "axis":
-      var_00 = self.team == "axis";
+      var_0 = self.team == "axis";
       break;
 
     default:
       break;
   }
 
-  if(var_00) {
+  if(var_0) {
     self thermaldrawenable();
   }
 }
@@ -65,102 +65,102 @@ func_5C3A() {
   }
 
   level.var_5C63[self.target] = 1;
-  var_00 = self.target;
-  var_01 = scripts\engine\utility::getstruct(var_00, "targetname");
-  if(!isDefined(var_01)) {
+  var_0 = self.target;
+  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = [];
-  var_03 = [];
-  var_04 = var_01;
+  var_2 = [];
+  var_3 = [];
+  var_4 = var_1;
   for(;;) {
-    var_01 = var_04;
-    var_05 = 0;
+    var_1 = var_4;
+    var_5 = 0;
     for(;;) {
-      if(!isDefined(var_01.target)) {
+      if(!isDefined(var_1.target)) {
         break;
       }
 
-      var_06 = scripts\engine\utility::getstructarray(var_01.target, "targetname");
-      if(var_06.size) {
+      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      if(var_6.size) {
         break;
       }
 
-      var_07 = undefined;
-      foreach(var_09 in var_06) {
-        if(isDefined(var_03[var_09.origin + ""])) {
+      var_7 = undefined;
+      foreach(var_9 in var_6) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
 
-        var_07 = var_09;
+        var_7 = var_9;
         break;
       }
 
-      if(!isDefined(var_07)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      var_03[var_07.origin + ""] = 1;
-      var_02[var_01.var_336] = var_07.origin - var_01.origin;
-      var_01.angles = vectortoangles(var_02[var_01.var_336]);
-      var_01 = var_07;
-      var_05 = 1;
+      var_3[var_7.origin + ""] = 1;
+      var_2[var_1.var_336] = var_7.origin - var_1.origin;
+      var_1.angles = vectortoangles(var_2[var_1.var_336]);
+      var_1 = var_7;
+      var_5 = 1;
     }
 
-    if(!var_05) {
+    if(!var_5) {
       break;
     }
   }
 
-  var_00 = self.target;
-  var_01 = scripts\engine\utility::getstruct(var_00, "targetname");
-  var_0B = var_01;
-  var_03 = [];
+  var_0 = self.target;
+  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_0B = var_1;
+  var_3 = [];
   for(;;) {
-    var_01 = var_04;
-    var_05 = 0;
+    var_1 = var_4;
+    var_5 = 0;
     for(;;) {
-      if(!isDefined(var_01.target)) {
+      if(!isDefined(var_1.target)) {
         return;
       }
 
-      if(!isDefined(var_02[var_01.var_336])) {
+      if(!isDefined(var_2[var_1.var_336])) {
         return;
       }
 
-      var_06 = scripts\engine\utility::getstructarray(var_01.target, "targetname");
-      if(var_06.size) {
+      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      if(var_6.size) {
         break;
       }
 
-      var_07 = undefined;
-      foreach(var_09 in var_06) {
-        if(isDefined(var_03[var_09.origin + ""])) {
+      var_7 = undefined;
+      foreach(var_9 in var_6) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
 
-        var_07 = var_09;
+        var_7 = var_9;
         break;
       }
 
-      if(!isDefined(var_07)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      if(isDefined(var_01.fgetarg)) {
-        var_0E = var_02[var_0B.var_336];
-        var_0F = var_02[var_01.var_336];
+      if(isDefined(var_1.fgetarg)) {
+        var_0E = var_2[var_0B.var_336];
+        var_0F = var_2[var_1.var_336];
         var_10 = var_0E + var_0F * 0.5;
-        var_01.angles = vectortoangles(var_10);
+        var_1.angles = vectortoangles(var_10);
       }
 
-      var_05 = 1;
-      var_0B = var_01;
-      var_01 = var_07;
+      var_5 = 1;
+      var_0B = var_1;
+      var_1 = var_7;
     }
 
-    if(!var_05) {
+    if(!var_5) {
       break;
     }
   }

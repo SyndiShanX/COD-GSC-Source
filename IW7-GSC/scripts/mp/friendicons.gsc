@@ -20,9 +20,9 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
-    var_00 thread onplayerkilled();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
+    var_0 thread onplayerkilled();
   }
 }
 
@@ -56,35 +56,35 @@ showfriendicon() {
 }
 
 updatefriendiconsettings() {
-  var_00 = scripts\mp\utility::getintproperty("scr_drawfriend", level.drawfriend);
-  if(level.drawfriend != var_00) {
-    level.drawfriend = var_00;
+  var_0 = scripts\mp\utility::getintproperty("scr_drawfriend", level.drawfriend);
+  if(level.drawfriend != var_0) {
+    level.drawfriend = var_0;
     updatefriendicons();
   }
 }
 
 updatefriendicons() {
-  var_00 = level.players;
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_02 = var_00[var_01];
-    if(isDefined(var_02.pers["team"]) && var_02.pers["team"] != "spectator" && var_02.sessionstate == "playing") {
+  var_0 = level.players;
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
+    if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
       if(level.drawfriend) {
-        if(var_02.pers["team"] == "allies") {
-          var_02.playerphysicstrace = game["headicon_allies"];
-          var_02.playfx = "allies";
+        if(var_2.pers["team"] == "allies") {
+          var_2.playerphysicstrace = game["headicon_allies"];
+          var_2.playfx = "allies";
         } else {
-          var_02.playerphysicstrace = game["headicon_axis"];
-          var_02.playfx = "axis";
+          var_2.playerphysicstrace = game["headicon_axis"];
+          var_2.playfx = "axis";
         }
 
         continue;
       }
 
-      var_00 = level.players;
-      for(var_01 = 0; var_01 < var_00.size; var_01++) {
-        var_02 = var_00[var_01];
-        if(isDefined(var_02.pers["team"]) && var_02.pers["team"] != "spectator" && var_02.sessionstate == "playing") {
-          var_02.playerphysicstrace = "";
+      var_0 = level.players;
+      for(var_1 = 0; var_1 < var_0.size; var_1++) {
+        var_2 = var_0[var_1];
+        if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
+          var_2.playerphysicstrace = "";
         }
       }
     }

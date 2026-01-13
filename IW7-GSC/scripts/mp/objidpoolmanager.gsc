@@ -5,219 +5,219 @@
 *******************************************/
 
 init() {
-  var_00 = spawnStruct();
-  var_00.var_19 = [];
-  var_00.reclaimed = [];
-  var_00.index = 0;
-  level.objidpool = var_00;
+  var_0 = spawnStruct();
+  var_0.var_19 = [];
+  var_0.reclaimed = [];
+  var_0.index = 0;
+  level.objidpool = var_0;
 }
 
-requestminimapid(param_00) {
-  var_01 = getnext(param_00);
-  if(var_01 == -1) {
+requestminimapid(var_0) {
+  var_1 = getnext(var_0);
+  if(var_1 == -1) {
     return -1;
   }
 
-  var_02 = spawnStruct();
-  var_02.priority = param_00;
-  var_02.requesttime = gettime();
-  var_02.objid = var_01;
-  level.objidpool.var_19[var_01] = var_02;
-  return var_01;
+  var_2 = spawnStruct();
+  var_2.priority = var_0;
+  var_2.requesttime = gettime();
+  var_2.objid = var_1;
+  level.objidpool.var_19[var_1] = var_2;
+  return var_1;
 }
 
-removebest(param_00) {
-  var_01 = [];
-  foreach(var_03 in level.objidpool.var_19) {
-    if(var_03.priority <= param_00) {
-      var_01[var_01.size] = var_03;
+removebest(var_0) {
+  var_1 = [];
+  foreach(var_3 in level.objidpool.var_19) {
+    if(var_3.priority <= var_0) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  scripts\engine\utility::array_sort_with_func(var_01, ::comparepriorityandtime);
-  return returnminimapid(var_01[0].objid);
+  scripts\engine\utility::array_sort_with_func(var_1, ::comparepriorityandtime);
+  return returnminimapid(var_1[0].objid);
 }
 
-comparepriorityandtime(param_00, param_01) {
-  if(param_00.priority == param_01.priority) {
-    return param_00.requesttime < param_01.requesttime;
+comparepriorityandtime(var_0, var_1) {
+  if(var_0.priority == var_1.priority) {
+    return var_0.requesttime < var_1.requesttime;
   }
 
-  return param_00.priority < param_01.priority;
+  return var_0.priority < var_1.priority;
 }
 
-getnext(param_00) {
+getnext(var_0) {
   if(!level.objidpool.reclaimed.size) {
     if(level.objidpool.index == 32) {
       return -1;
     } else {
-      var_01 = level.objidpool.index;
+      var_1 = level.objidpool.index;
       level.objidpool.index++;
     }
   } else {
-    var_01 = level.objidpool.reclaimed[level.objidpool.reclaimed.size - 1];
+    var_1 = level.objidpool.reclaimed[level.objidpool.reclaimed.size - 1];
     level.objidpool.reclaimed[level.objidpool.reclaimed.size - 1] = undefined;
   }
 
-  return var_01;
+  return var_1;
 }
 
-returnminimapid(param_00) {
-  if(!isDefined(param_00) || param_00 == -1) {
+returnminimapid(var_0) {
+  if(!isDefined(var_0) || var_0 == -1) {
     return 0;
   }
 
-  for(var_01 = 0; var_01 < level.objidpool.reclaimed.size; var_01++) {
-    if(param_00 == level.objidpool.reclaimed[var_01]) {
+  for(var_1 = 0; var_1 < level.objidpool.reclaimed.size; var_1++) {
+    if(var_0 == level.objidpool.reclaimed[var_1]) {
       return 0;
     }
   }
 
-  level.objidpool.var_19[param_00] = undefined;
-  objective_delete(param_00);
-  level.objidpool.reclaimed[level.objidpool.reclaimed.size] = param_00;
+  level.objidpool.var_19[var_0] = undefined;
+  objective_delete(var_0);
+  level.objidpool.reclaimed[level.objidpool.reclaimed.size] = var_0;
   return 1;
 }
 
-minimap_objective_add(param_00, param_01, param_02, param_03, param_04) {
-  if(param_00 == -1) {
+minimap_objective_add(var_0, var_1, var_2, var_3, var_4) {
+  if(var_0 == -1) {
     return;
   }
 
-  if(isDefined(param_02)) {
-    if(isDefined(param_03)) {
-      if(isDefined(param_04)) {
-        objective_add(param_00, param_01, param_02, param_03, param_04);
+  if(isDefined(var_2)) {
+    if(isDefined(var_3)) {
+      if(isDefined(var_4)) {
+        objective_add(var_0, var_1, var_2, var_3, var_4);
         return;
       }
 
-      objective_add(param_00, param_01, param_02, param_03);
+      objective_add(var_0, var_1, var_2, var_3);
       return;
     }
 
-    objective_add(param_00, param_01, param_02);
+    objective_add(var_0, var_1, var_2);
     return;
   }
 
-  objective_add(param_00, param_01);
+  objective_add(var_0, var_1);
 }
 
-minimap_objective_state(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_state(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_state(param_00, param_01);
+  objective_state(var_0, var_1);
 }
 
-minimap_objective_position(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_position(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_position(param_00, param_01);
+  objective_position(var_0, var_1);
 }
 
-minimap_objective_icon(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_icon(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_icon(param_00, param_01);
+  objective_icon(var_0, var_1);
 }
 
-minimap_objective_icon_colortype(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_icon_colortype(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_icon_colortype(param_00, param_01);
+  objective_icon_colortype(var_0, var_1);
 }
 
-minimap_objective_icon_backgroundtype(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_icon_backgroundtype(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_icon_backgroundtype(param_00, param_01);
+  objective_icon_backgroundtype(var_0, var_1);
 }
 
-minimap_objective_onentity(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_onentity(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_onentity(param_00, param_01);
+  objective_onentity(var_0, var_1);
 }
 
-minimap_objective_onentitywithrotation(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_onentitywithrotation(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_onentitywithrotation(param_00, param_01);
+  objective_onentitywithrotation(var_0, var_1);
 }
 
-minimap_objective_player(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_player(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_player(param_00, param_01);
+  objective_player(var_0, var_1);
 }
 
-minimap_objective_team(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_team(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_team(param_00, param_01);
+  objective_team(var_0, var_1);
 }
 
-minimap_objective_playermask_hidefromall(param_00) {
-  if(param_00 == -1) {
+minimap_objective_playermask_hidefromall(var_0) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playermask_hidefromall(param_00);
+  objective_playermask_hidefromall(var_0);
 }
 
-minimap_objective_playermask_hidefrom(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_playermask_hidefrom(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playermask_hidefrom(param_00, param_01);
+  objective_playermask_hidefrom(var_0, var_1);
 }
 
-minimap_objective_playermask_showto(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_playermask_showto(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playermask_showto(param_00, param_01);
+  objective_playermask_showto(var_0, var_1);
 }
 
-minimap_objective_playermask_showtoall(param_00) {
-  if(param_00 == -1) {
+minimap_objective_playermask_showtoall(var_0) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playermask_showtoall(param_00);
+  objective_playermask_showtoall(var_0);
 }
 
-minimap_objective_playerteam(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_playerteam(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playerteam(param_00, param_01);
+  objective_playerteam(var_0, var_1);
 }
 
-minimap_objective_playerenemyteam(param_00, param_01) {
-  if(param_00 == -1) {
+minimap_objective_playerenemyteam(var_0, var_1) {
+  if(var_0 == -1) {
     return;
   }
 
-  objective_playerenemyteam(param_00, param_01);
+  objective_playerenemyteam(var_0, var_1);
 }

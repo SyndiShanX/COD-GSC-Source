@@ -21,11 +21,11 @@ func_CA2C() {
   thread func_CA29();
 }
 
-func_CA29(param_00) {
+func_CA29(var_0) {
   self endon("disconnect");
   self notify("periphVis_end");
   self notify("periphVis_update", 0);
-  if(scripts\mp\utility::istrue(param_00)) {
+  if(scripts\mp\utility::istrue(var_0)) {
     self setclientomnvar("ui_ringradar_enabled", 0);
     self setscriptablepartstate("periphVis", "neutral", 0);
   } else {

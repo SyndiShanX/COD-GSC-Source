@@ -30,36 +30,36 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("clip512x512x8", "targetname");
-  var_01 = spawn("script_model", (-43104, 296, 512));
-  var_01.angles = (0, 0, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("clip512x512x8", "targetname");
-  var_03 = spawn("script_model", (-43104, 808, 512));
-  var_03.angles = (0, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = spawn("script_model", (-38963.5, -781.5, 80));
-  var_04.angles = (0, 0, 0);
-  var_04 setModel("cnd_electric_panels_004_grey_dk_mp_breakneck_patch");
-  var_05 = spawn("script_model", (-40748.5, -520.5, 80));
-  var_05.angles = (0, 180, 0);
-  var_05 setModel("cnd_electric_panels_004_grey_dk_mp_breakneck_patch");
-  var_05 = spawn("script_model", (-37408, 288, 80));
-  var_05.angles = (0, 270, 0);
-  var_05 setModel("panel_metal_03_16x208_mp_parkour_patch");
-  var_06 = spawn("script_model", (-37408, 496, 80));
-  var_06.angles = (0, 270, 0);
-  var_06 setModel("panel_metal_03_16x208_mp_parkour_patch");
-  var_07 = spawn("script_model", (-37504, 208, 80));
-  var_07.angles = (0, 180, 0);
-  var_07 setModel("panel_metal_03_16x208_mp_parkour_patch");
-  var_08 = spawn("script_model", (-39852, 416, 168));
-  var_08.angles = (0, 0, 0);
-  var_08 setModel("mp_breakneck_missile_patch_01");
-  var_09 = spawn("trigger_radius", (-37408, 1056, -16), 0, 128, 64);
-  var_09.fgetarg = 128;
-  var_09.height = 64;
-  thread killtriggerloop(var_09);
+  var_0 = getent("clip512x512x8", "targetname");
+  var_1 = spawn("script_model", (-43104, 296, 512));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("clip512x512x8", "targetname");
+  var_3 = spawn("script_model", (-43104, 808, 512));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = spawn("script_model", (-38963.5, -781.5, 80));
+  var_4.angles = (0, 0, 0);
+  var_4 setModel("cnd_electric_panels_004_grey_dk_mp_breakneck_patch");
+  var_5 = spawn("script_model", (-40748.5, -520.5, 80));
+  var_5.angles = (0, 180, 0);
+  var_5 setModel("cnd_electric_panels_004_grey_dk_mp_breakneck_patch");
+  var_5 = spawn("script_model", (-37408, 288, 80));
+  var_5.angles = (0, 270, 0);
+  var_5 setModel("panel_metal_03_16x208_mp_parkour_patch");
+  var_6 = spawn("script_model", (-37408, 496, 80));
+  var_6.angles = (0, 270, 0);
+  var_6 setModel("panel_metal_03_16x208_mp_parkour_patch");
+  var_7 = spawn("script_model", (-37504, 208, 80));
+  var_7.angles = (0, 180, 0);
+  var_7 setModel("panel_metal_03_16x208_mp_parkour_patch");
+  var_8 = spawn("script_model", (-39852, 416, 168));
+  var_8.angles = (0, 0, 0);
+  var_8 setModel("mp_breakneck_missile_patch_01");
+  var_9 = spawn("trigger_radius", (-37408, 1056, -16), 0, 128, 64);
+  var_9.fgetarg = 128;
+  var_9.height = 64;
+  thread killtriggerloop(var_9);
   var_0A = getent("player32x32x8", "targetname");
   var_0B = spawn("script_model", (-40556, -288, 294));
   var_0B.angles = (290, 0, 0);
@@ -149,25 +149,25 @@ fix_collision() {
   thread killtriggerloop(var_33);
 }
 
-killtriggerloop(param_00) {
+killtriggerloop(var_0) {
   level endon("game_ended");
   for(;;) {
-    param_00 waittill("trigger", var_01);
-    if(isDefined(var_01)) {
-      if(isplayer(var_01)) {
-        var_01 suicide();
+    var_0 waittill("trigger", var_1);
+    if(isDefined(var_1)) {
+      if(isplayer(var_1)) {
+        var_1 suicide();
         continue;
       }
 
-      if(isDefined(var_01.classname) && var_01.classname == "script_vehicle") {
-        if(isDefined(var_01.streakname)) {
-          if(var_01.streakname == "minijackal") {
-            var_01 notify("minijackal_end");
+      if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
+        if(isDefined(var_1.streakname)) {
+          if(var_1.streakname == "minijackal") {
+            var_1 notify("minijackal_end");
             continue;
           }
 
-          if(var_01.streakname == "venom") {
-            var_01 notify("venom_end", var_01.origin);
+          if(var_1.streakname == "venom") {
+            var_1 notify("venom_end", var_1.origin);
           }
         }
       }
@@ -177,13 +177,13 @@ killtriggerloop(param_00) {
 
 func_D80C() {
   level.var_2B31 = ["superstructure_hull_chunk_01", "superstructure_hull_chunk_02", "debris_exterior_damaged_metal_panels_01", "debris_exterior_damaged_metal_panels_02", "debris_exterior_damaged_metal_panels_03", "debris_exterior_damaged_metal_panels_08", "machinery_tower_pipe_beam_support_01_destroyed"];
-  foreach(var_01 in level.var_2B31) {
-    precachemodel(var_01);
+  foreach(var_1 in level.var_2B31) {
+    precachemodel(var_1);
   }
 
   level.var_871B = ["weapon_spas12_wm", "weapon_ripper_rare_wm", "weapon_vr_rifle_wm"];
-  foreach(var_04 in level.var_871B) {
-    precachemodel(var_04);
+  foreach(var_4 in level.var_871B) {
+    precachemodel(var_4);
   }
 
   precachemodel("armory_weapon_locker_clamp_bn");
@@ -214,64 +214,64 @@ func_226A() {
   }
 }
 
-func_226B(param_00, param_01) {
+func_226B(var_0, var_1) {
   level endon("game_ended");
-  var_02 = [];
+  var_2 = [];
   for(;;) {
-    var_03 = spawn("script_model", (0, 0, 0));
-    var_03 setModel("armory_weapon_locker_clamp_bn");
-    var_03.var_870F = spawn("script_model", (0, 0, 0));
-    var_03.var_870F setModel("tag_origin");
-    var_03.var_870F.offsets = [];
-    if(param_01 == 1) {
-      var_03.angles = (90, 0, 0);
-      var_03.var_870F.angles = (0, 354, 0);
-      var_03.var_870F.offsets["weapon_spas12_wm"] = (-15.7, -5, 3.2);
-      var_03.var_870F.offsets["weapon_ripper_rare_wm"] = (-14.1, -3.7, 2.8);
-      var_03.var_870F.offsets["weapon_vr_rifle_wm"] = (-15.5, -4.8, 2.3);
+    var_3 = spawn("script_model", (0, 0, 0));
+    var_3 setModel("armory_weapon_locker_clamp_bn");
+    var_3.var_870F = spawn("script_model", (0, 0, 0));
+    var_3.var_870F setModel("tag_origin");
+    var_3.var_870F.offsets = [];
+    if(var_1 == 1) {
+      var_3.angles = (90, 0, 0);
+      var_3.var_870F.angles = (0, 354, 0);
+      var_3.var_870F.offsets["weapon_spas12_wm"] = (-15.7, -5, 3.2);
+      var_3.var_870F.offsets["weapon_ripper_rare_wm"] = (-14.1, -3.7, 2.8);
+      var_3.var_870F.offsets["weapon_vr_rifle_wm"] = (-15.5, -4.8, 2.3);
     } else {
-      var_03.angles = (90, 0, -180);
-      var_03.var_870F.angles = (0, 174, 0);
-      var_03.var_870F.offsets["weapon_spas12_wm"] = (15.7, 5, 3.2);
-      var_03.var_870F.offsets["weapon_ripper_rare_wm"] = (14.1, 3.7, 2.8);
-      var_03.var_870F.offsets["weapon_vr_rifle_wm"] = (15.5, 4.8, 2.3);
+      var_3.angles = (90, 0, -180);
+      var_3.var_870F.angles = (0, 174, 0);
+      var_3.var_870F.offsets["weapon_spas12_wm"] = (15.7, 5, 3.2);
+      var_3.var_870F.offsets["weapon_ripper_rare_wm"] = (14.1, 3.7, 2.8);
+      var_3.var_870F.offsets["weapon_vr_rifle_wm"] = (15.5, 4.8, 2.3);
     }
 
-    var_03.var_870F linkto(var_03);
-    var_03.origin = param_00;
-    var_02[var_02.size] = var_03;
-    if(var_02.size == 10) {
+    var_3.var_870F linkto(var_3);
+    var_3.origin = var_0;
+    var_2[var_2.size] = var_3;
+    if(var_2.size == 10) {
       break;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_2268() {
-  foreach(var_01 in self.var_871C) {
-    thread func_2269(var_01);
+  foreach(var_1 in self.var_871C) {
+    thread func_2269(var_1);
     wait(8);
   }
 }
 
-func_2269(param_00) {
+func_2269(var_0) {
   for(;;) {
-    param_00.var_870F unlink();
-    param_00 dontinterpolate();
-    param_00.origin = self.start.origin;
+    var_0.var_870F unlink();
+    var_0 dontinterpolate();
+    var_0.origin = self.start.origin;
     scripts\engine\utility::waitframe();
     if(randomint(100) < 90) {
-      param_00.var_870F setModel(scripts\engine\utility::random(level.var_871B));
-      param_00.var_870F.origin = param_00.origin + param_00.var_870F.offsets[param_00.var_870F.model];
+      var_0.var_870F setModel(scripts\engine\utility::random(level.var_871B));
+      var_0.var_870F.origin = var_0.origin + var_0.var_870F.offsets[var_0.var_870F.model];
     } else {
-      param_00.var_870F setModel("tag_origin");
-      param_00.var_870F.origin = param_00.origin;
+      var_0.var_870F setModel("tag_origin");
+      var_0.var_870F.origin = var_0.origin;
     }
 
-    param_00.var_870F linkto(param_00);
-    param_00 moveto(self.end.origin, 80);
-    param_00 waittill("movedone");
+    var_0.var_870F linkto(var_0);
+    var_0 moveto(self.end.origin, 80);
+    var_0 waittill("movedone");
   }
 }
 
@@ -299,34 +299,34 @@ func_FA94() {
   level thread func_2B44();
 }
 
-func_FA93(param_00) {
-  var_01 = [];
-  foreach(var_03 in param_00) {
-    var_04 = spawn("script_model", var_03.origin);
-    var_04 setModel("tag_origin");
-    var_04.angles = (0, 0, 0);
-    var_04.var_2887 = var_04.origin;
-    var_04.physicsactivated = 0;
-    var_04.var_C2CD = 0;
-    var_01[var_01.size] = var_04;
+func_FA93(var_0) {
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    var_4 = spawn("script_model", var_3.origin);
+    var_4 setModel("tag_origin");
+    var_4.angles = (0, 0, 0);
+    var_4.var_2887 = var_4.origin;
+    var_4.physicsactivated = 0;
+    var_4.var_C2CD = 0;
+    var_1[var_1.size] = var_4;
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_2B44() {
   level waittill("match_start_real_countdown");
-  var_00 = getscriptablearray("scriptable_spawn_pulls", "targetname");
+  var_0 = getscriptablearray("scriptable_spawn_pulls", "targetname");
   if(game["roundsPlayed"] == 0) {
-    foreach(var_02 in var_00) {
-      var_02 setscriptablepartstate("default", "countdown_anim");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("default", "countdown_anim");
     }
 
     return;
   }
 
-  foreach(var_02 in var_02) {
-    var_02 setscriptablepartstate("default", "fast_anim");
+  foreach(var_2 in var_2) {
+    var_2 setscriptablepartstate("default", "fast_anim");
   }
 }
 
@@ -348,15 +348,15 @@ func_139AE() {
 
 func_139AF() {
   level endon("game_ended");
-  foreach(var_01 in level.var_2B2F.var_DAE4) {
-    var_01.physicsactivated = 0;
+  foreach(var_1 in level.var_2B2F.var_DAE4) {
+    var_1.physicsactivated = 0;
   }
 
   for(;;) {
     wait(15 + scripts\engine\utility::cointoss() * randomint(15));
-    var_03 = scripts\engine\utility::random(level.var_2B2F.var_DAE4);
-    var_03 thread func_2B43();
-    level.var_2B2F.var_DAE4 = scripts\engine\utility::array_remove(level.var_2B2F.var_DAE4, var_03);
+    var_3 = scripts\engine\utility::random(level.var_2B2F.var_DAE4);
+    var_3 thread func_2B43();
+    level.var_2B2F.var_DAE4 = scripts\engine\utility::array_remove(level.var_2B2F.var_DAE4, var_3);
     if(level.var_2B2F.var_DAE4.size == 0) {
       break;
     }
@@ -370,22 +370,22 @@ func_2B43() {
     self.angles = (0, 0, 0);
   }
 
-  var_00 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 32), self.angles);
-  var_00 show();
-  var_01 = vectortoangles(level.var_2B2F.var_DAE3.origin - self.origin);
-  self rotateto(var_01, 1);
+  var_0 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 32), self.angles);
+  var_0 show();
+  var_1 = vectortoangles(level.var_2B2F.var_DAE3.origin - self.origin);
+  self rotateto(var_1, 1);
   wait(1);
   self moveto(level.var_2B2F.var_DAE3.origin, 60 + scripts\engine\utility::cointoss() * randomint(15), 0, 0);
   wait(0.1);
-  playFXOnTag(level._effect["vfx_breakneck_explosion_01"], var_00, "tag_origin");
-  self rotatevelocity((var_01[0] / 4, 0, 0), 30);
+  playFXOnTag(level._effect["vfx_breakneck_explosion_01"], var_0, "tag_origin");
+  self rotatevelocity((var_1[0] / 4, 0, 0), 30);
   self waittill("movedone");
-  stopFXOnTag(level._effect["vfx_breakneck_explosion_01"], var_00, "tag_origin");
-  var_00 delete();
+  stopFXOnTag(level._effect["vfx_breakneck_explosion_01"], var_0, "tag_origin");
+  var_0 delete();
   self delete();
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }

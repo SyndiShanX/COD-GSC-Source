@@ -12,8 +12,8 @@ init() {
   setairdropcratecollision("airdrop_crate");
   setairdropcratecollision("care_package");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("dronedrop", ::func_1AA2, undefined, undefined, ::tryuseairdrop, undefined, ::func_1A9F);
-  var_00 = ["passive_bomb_trap", "passive_decreased_cost", "passive_increased_cost", "passive_reroll", "passive_high_roller", "passive_low_roller"];
-  scripts\mp\killstreak_loot::func_DF07("dronedrop", var_00);
+  var_0 = ["passive_bomb_trap", "passive_decreased_cost", "passive_increased_cost", "passive_reroll", "passive_high_roller", "passive_low_roller"];
+  scripts\mp\killstreak_loot::func_DF07("dronedrop", var_0);
   level.numdropcrates = 0;
   level.littlebirds = [];
   level.cratetypes = [];
@@ -82,110 +82,110 @@ init() {
   }
 
   generatemaxweightedcratevalue();
-  var_01 = spawnStruct();
+  var_1 = spawnStruct();
   var_1.scorepopup = "destroyed_airdrop";
   var_1.vodestroyed = "dronedrop_destroyed";
   var_1.callout = "callout_destroyed_airdrop";
   var_1.samdamagescale = 0.09;
-  level.heliconfigs["airdrop"] = var_01;
+  level.heliconfigs["airdrop"] = var_1;
   scripts\mp\rank::registerscoreinfo("little_bird", "value", 200);
   level setupcaptureflares();
   level.carepackagedropnodes = getEntArray("carepackage_drop_area", "targetname");
 }
 
 generatemaxweightedcratevalue() {
-  foreach(var_06, var_01 in level.cratetypes) {
-    level.cratemaxval[var_06] = 0;
+  foreach(var_6, var_1 in level.cratetypes) {
+    level.cratemaxval[var_6] = 0;
 
-    foreach(var_03 in var_01) {
-      var_04 = var_3.type;
+    foreach(var_3 in var_1) {
+      var_4 = var_3.type;
 
-      if(!level.cratetypes[var_06][var_04].raw_weight) {
-        level.cratetypes[var_06][var_04].weight = level.cratetypes[var_06][var_04].raw_weight;
+      if(!level.cratetypes[var_6][var_4].raw_weight) {
+        level.cratetypes[var_6][var_4].weight = level.cratetypes[var_6][var_4].raw_weight;
         continue;
       }
 
-      level.cratemaxval[var_06] = level.cratemaxval[var_06] + level.cratetypes[var_06][var_04].raw_weight;
-      level.cratetypes[var_06][var_04].weight = level.cratemaxval[var_06];
+      level.cratemaxval[var_6] = level.cratemaxval[var_6] + level.cratetypes[var_6][var_4].raw_weight;
+      level.cratetypes[var_6][var_4].weight = level.cratemaxval[var_6];
     }
   }
 }
 
-changecrateweight(var_00, var_01, var_02) {
-  if(!isDefined(level.cratetypes[var_00]) || !isDefined(level.cratetypes[var_00][var_01])) {
+changecrateweight(var_0, var_1, var_2) {
+  if(!isDefined(level.cratetypes[var_0]) || !isDefined(level.cratetypes[var_0][var_1])) {
     return;
   }
-  level.cratetypes[var_00][var_01].raw_weight = var_02;
+  level.cratetypes[var_0][var_1].raw_weight = var_2;
   generatemaxweightedcratevalue();
 }
 
-setairdropcratecollision(var_00) {
-  var_01 = getEntArray(var_00, "targetname");
+setairdropcratecollision(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  if(!isDefined(var_01) || var_1.size == 0) {
+  if(!isDefined(var_1) || var_1.size == 0) {
     return;
   }
   level.airdropcratecollision = getent(var_1[0].target, "targetname");
 
-  foreach(var_03 in var_01) {
-    var_03 deletecrateold();
+  foreach(var_3 in var_1) {
+    var_3 deletecrateold();
   }
 }
 
-addcratetype(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
-  if(!isDefined(var_04)) {
-    var_04 = "care_package_iw7_un_wm";
+addcratetype(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(!isDefined(var_4)) {
+    var_4 = "care_package_iw7_un_wm";
   }
 
-  if(!isDefined(var_05)) {
-    var_05 = "care_package_iw7_ca_wm";
+  if(!isDefined(var_5)) {
+    var_5 = "care_package_iw7_ca_wm";
   }
 
-  if(!isDefined(var_08)) {
-    var_08 = "care_package_iw7_dummy";
+  if(!isDefined(var_8)) {
+    var_8 = "care_package_iw7_dummy";
   }
 
-  level.cratetypes[var_00][var_01] = spawnStruct();
-  level.cratetypes[var_00][var_01].droptype = var_00;
-  level.cratetypes[var_00][var_01].type = var_01;
-  level.cratetypes[var_00][var_01].raw_weight = var_02;
-  level.cratetypes[var_00][var_01].weight = var_02;
-  level.cratetypes[var_00][var_01].func = var_03;
-  level.cratetypes[var_00][var_01].model_name_friendly = var_04;
-  level.cratetypes[var_00][var_01].model_name_enemy = var_05;
-  level.cratetypes[var_00][var_01].model_name_dummy = var_08;
+  level.cratetypes[var_0][var_1] = spawnStruct();
+  level.cratetypes[var_0][var_1].droptype = var_0;
+  level.cratetypes[var_0][var_1].type = var_1;
+  level.cratetypes[var_0][var_1].raw_weight = var_2;
+  level.cratetypes[var_0][var_1].weight = var_2;
+  level.cratetypes[var_0][var_1].func = var_3;
+  level.cratetypes[var_0][var_1].model_name_friendly = var_4;
+  level.cratetypes[var_0][var_1].model_name_enemy = var_5;
+  level.cratetypes[var_0][var_1].model_name_dummy = var_8;
 
-  if(isDefined(var_06)) {
-    game["strings"][var_01 + "_hint"] = var_06;
+  if(isDefined(var_6)) {
+    game["strings"][var_1 + "_hint"] = var_6;
   }
 
-  if(isDefined(var_07)) {
-    game["strings"][var_01 + "_rerollHint"] = var_07;
+  if(isDefined(var_7)) {
+    game["strings"][var_1 + "_rerollHint"] = var_7;
   }
 }
 
-getrandomcratetype(var_00) {
-  var_01 = randomint(level.cratemaxval[var_00]);
-  var_02 = undefined;
+getrandomcratetype(var_0) {
+  var_1 = randomint(level.cratemaxval[var_0]);
+  var_2 = undefined;
 
-  foreach(var_04 in level.cratetypes[var_00]) {
-    var_05 = var_4.type;
+  foreach(var_4 in level.cratetypes[var_0]) {
+    var_5 = var_4.type;
 
-    if(!level.cratetypes[var_00][var_05].weight) {
+    if(!level.cratetypes[var_0][var_5].weight) {
       continue;
     }
-    var_02 = var_05;
+    var_2 = var_5;
 
-    if(level.cratetypes[var_00][var_05].weight > var_01) {
+    if(level.cratetypes[var_0][var_5].weight > var_1) {
       break;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-getcratetypefordroptype(var_00) {
-  switch (var_00) {
+getcratetypefordroptype(var_0) {
+  switch (var_0) {
     case "airdrop_sentry_minigun":
       return "sentry";
     case "airdrop_predator_missile":
@@ -224,30 +224,30 @@ getcratetypefordroptype(var_00) {
         return [
           }
           [level.getrandomcratetypeforgamemode]
-      ](var_00);
+      ](var_0);
 
-      return getrandomcratetype(var_00);
+      return getrandomcratetype(var_0);
   }
 }
 
-tryuseairdrop(var_00) {
-  var_01 = var_0.streakname;
-  var_02 = var_01;
-  var_03 = undefined;
+tryuseairdrop(var_0) {
+  var_1 = var_0.streakname;
+  var_2 = var_1;
+  var_3 = undefined;
 
-  if(!isDefined(var_02)) {
-    var_02 = "airdrop";
+  if(!isDefined(var_2)) {
+    var_2 = "airdrop";
   }
 
-  var_04 = 1;
+  var_4 = 1;
 
-  if((level.littlebirds.size >= 4 || level.fauxvehiclecount >= 4) && var_02 != "airdrop_mega" && !issubstr(tolower(var_02), "juggernaut")) {
+  if((level.littlebirds.size >= 4 || level.fauxvehiclecount >= 4) && var_2 != "airdrop_mega" && !issubstr(tolower(var_2), "juggernaut")) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
-  } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_04 >= scripts\mp\utility\game::maxvehiclesallowed()) {
+  } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_4 >= scripts\mp\utility\game::maxvehiclesallowed()) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
-  } else if(var_02 == "airdrop_lase" && isDefined(level.lasedstrikecrateactive) && level.lasedstrikecrateactive) {
+  } else if(var_2 == "airdrop_lase" && isDefined(level.lasedstrikecrateactive) && level.lasedstrikecrateactive) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
@@ -255,72 +255,72 @@ tryuseairdrop(var_00) {
   return 1;
 }
 
-func_1AA2(var_00) {
-  var_0.func_1AA0 = var_0.streakname;
+func_1AA2(var_0) {
+  var_0.var_1AA0 = var_0.streakname;
   scripts\mp\utility\game::incrementfauxvehiclecount();
-  var_01 = scripts\mp\killstreaks\target_marker::_meth_819B(var_00);
+  var_1 = scripts\mp\killstreaks\target_marker::_meth_819B(var_0);
 
   if(!isDefined(var_1.location)) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
-  scripts\mp\matchdata::logkillstreakevent(var_0.func_1AA0, self.origin);
-  func_1AA1(var_01, var_0.func_1AA0, var_00);
+  scripts\mp\matchdata::logkillstreakevent(var_0.var_1AA0, self.origin);
+  func_1AA1(var_1, var_0.var_1AA0, var_0);
   return 1;
 }
 
-func_1AA1(var_00, var_01, var_02) {
-  switch (var_01) {
+func_1AA1(var_0, var_1, var_2) {
+  switch (var_1) {
     case "dronedrop":
-      level func_581F(self, var_00, randomfloat(360), var_01, var_02);
+      level func_581F(self, var_0, randomfloat(360), var_1, var_2);
       break;
   }
 }
 
-func_1A9E(var_00, var_01) {
-  var_01 thread airdropdetonateonstuck();
+func_1A9E(var_0, var_1) {
+  var_1 thread airdropdetonateonstuck();
   var_1.owner = self;
-  var_0.func_1AA0 = var_0.streakname;
+  var_0.var_1AA0 = var_0.streakname;
   scripts\mp\utility\game::incrementfauxvehiclecount();
   thread func_4FC3();
-  var_01 thread airdropmarkeractivate(var_0.func_1AA0);
-  scripts\mp\matchdata::logkillstreakevent(var_0.func_1AA0, self.origin);
-  var_0.func_1A9E = 1;
+  var_1 thread airdropmarkeractivate(var_0.var_1AA0);
+  scripts\mp\matchdata::logkillstreakevent(var_0.var_1AA0, self.origin);
+  var_0.var_1A9E = 1;
   return 1;
 }
 
-airdropmarkeractivate(var_00, var_01) {
+airdropmarkeractivate(var_0, var_1) {
   level endon("game_ended");
   self notify("airDropMarkerActivate");
   self endon("airDropMarkerActivate");
-  self waittill("explode", var_02);
-  var_03 = self.owner;
+  self waittill("explode", var_2);
+  var_3 = self.owner;
 
-  if(!isDefined(var_03)) {
+  if(!isDefined(var_3)) {
     return;
   }
-  if(var_03 scripts\mp\utility\game::iskillstreakdenied()) {
+  if(var_3 scripts\mp\utility\game::iskillstreakdenied()) {
     return;
   }
-  if(issubstr(tolower(var_00), "escort_airdrop") && isDefined(level.chopper)) {
+  if(issubstr(tolower(var_0), "escort_airdrop") && isDefined(level.chopper)) {
     return;
   }
   wait 0.05;
 
-  if(issubstr(tolower(var_00), "juggernaut")) {
-    level doc130flyby(var_03, var_02, randomfloat(360), var_00);
-  } else if(issubstr(tolower(var_00), "escort_airdrop")) {
-    var_03 scripts\mp\killstreaks\escort_airdrop::func_6CE4(var_01, var_02, randomfloat(360), "escort_airdrop");
-  } else if(var_00 == "dronedrop") {
-    level func_581F(var_03, var_02, randomfloat(360), var_00);
+  if(issubstr(tolower(var_0), "juggernaut")) {
+    level doc130flyby(var_3, var_2, randomfloat(360), var_0);
+  } else if(issubstr(tolower(var_0), "escort_airdrop")) {
+    var_3 scripts\mp\killstreaks\escort_airdrop::func_6CE4(var_1, var_2, randomfloat(360), "escort_airdrop");
+  } else if(var_0 == "dronedrop") {
+    level func_581F(var_3, var_2, randomfloat(360), var_0);
   } else {
-    level doflyby(var_03, var_02, randomfloat(360), var_00);
+    level doflyby(var_3, var_2, randomfloat(360), var_0);
   }
 }
 
-func_1A9F(var_00) {
-  if(isDefined(var_0.func_1AA0) && !issubstr(var_0.func_1AA0, "juggernaut") && !scripts\mp\utility\game::istrue(var_0.func_1A9E)) {
+func_1A9F(var_0) {
+  if(isDefined(var_0.var_1AA0) && !issubstr(var_0.var_1AA0, "juggernaut") && !scripts\mp\utility\game::istrue(var_0.var_1A9E)) {
     scripts\mp\utility::decrementfauxvehiclecount();
   }
 }
@@ -342,10 +342,10 @@ initairdropcrate() {
     self.collision = undefined;
 }
 
-deleteonownerdeath(var_00) {
+deleteonownerdeath(var_0) {
   wait 0.25;
-  self linkto(var_00, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_00 waittill("death");
+  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 waittill("death");
   self delete();
 }
 
@@ -353,9 +353,9 @@ crateteammodelupdater() {
   self endon("death");
   self hide();
 
-  foreach(var_01 in level.players) {
+  foreach(var_1 in level.players) {
     if(var_1.team != "spectator") {
-      self giveperkequipment(var_01);
+      self giveperkequipment(var_1);
     }
   }
 
@@ -363,29 +363,29 @@ crateteammodelupdater() {
     level waittill("joined_team");
     self hide();
 
-    foreach(var_01 in level.players) {
+    foreach(var_1 in level.players) {
       if(var_1.team != "spectator") {
-        self giveperkequipment(var_01);
+        self giveperkequipment(var_1);
       }
     }
   }
 }
 
-cratemodelteamupdater(var_00) {
+cratemodelteamupdater(var_0) {
   self endon("death");
   self hide();
 
-  foreach(var_02 in level.players) {
+  foreach(var_2 in level.players) {
     if(var_2.team == "spectator") {
-      if(var_00 == "allies") {
-        self giveperkequipment(var_02);
+      if(var_0 == "allies") {
+        self giveperkequipment(var_2);
       }
 
       continue;
     }
 
-    if(var_2.team == var_00) {
-      self giveperkequipment(var_02);
+    if(var_2.team == var_0) {
+      self giveperkequipment(var_2);
     }
   }
 
@@ -393,29 +393,29 @@ cratemodelteamupdater(var_00) {
     level waittill("joined_team");
     self hide();
 
-    foreach(var_02 in level.players) {
+    foreach(var_2 in level.players) {
       if(var_2.team == "spectator") {
-        if(var_00 == "allies") {
-          self giveperkequipment(var_02);
+        if(var_0 == "allies") {
+          self giveperkequipment(var_2);
         }
 
         continue;
       }
 
-      if(var_2.team == var_00) {
-        self giveperkequipment(var_02);
+      if(var_2.team == var_0) {
+        self giveperkequipment(var_2);
       }
     }
   }
 }
 
-cratemodelenemyteamsupdater(var_00) {
+cratemodelenemyteamsupdater(var_0) {
   self endon("death");
   self hide();
 
-  foreach(var_02 in level.players) {
-    if(var_2.team != var_00) {
-      self giveperkequipment(var_02);
+  foreach(var_2 in level.players) {
+    if(var_2.team != var_0) {
+      self giveperkequipment(var_2);
     }
   }
 
@@ -423,58 +423,58 @@ cratemodelenemyteamsupdater(var_00) {
     level waittill("joined_team");
     self hide();
 
-    foreach(var_02 in level.players) {
-      if(var_2.team != var_00) {
-        self giveperkequipment(var_02);
+    foreach(var_2 in level.players) {
+      if(var_2.team != var_0) {
+        self giveperkequipment(var_2);
       }
     }
   }
 }
 
-cratemodelplayerupdater(var_00, var_01) {
+cratemodelplayerupdater(var_0, var_1) {
   self endon("death");
   self hide();
 
-  foreach(var_03 in level.players) {
-    if(var_01 && isDefined(var_00) && var_03 != var_00) {
+  foreach(var_3 in level.players) {
+    if(var_1 && isDefined(var_0) && var_3 != var_0) {
       continue;
     }
-    if(!var_01 && isDefined(var_00) && var_03 == var_00) {
+    if(!var_1 && isDefined(var_0) && var_3 == var_0) {
       continue;
     }
-    self giveperkequipment(var_03);
+    self giveperkequipment(var_3);
   }
 
   for(;;) {
     level waittill("joined_team");
     self hide();
 
-    foreach(var_03 in level.players) {
-      if(var_01 && isDefined(var_00) && var_03 != var_00) {
+    foreach(var_3 in level.players) {
+      if(var_1 && isDefined(var_0) && var_3 != var_0) {
         continue;
       }
-      if(!var_01 && isDefined(var_00) && var_03 == var_00) {
+      if(!var_1 && isDefined(var_0) && var_3 == var_0) {
         continue;
       }
-      self giveperkequipment(var_03);
+      self giveperkequipment(var_3);
     }
   }
 }
 
-crateuseteamupdater(var_00) {
+crateuseteamupdater(var_0) {
   self endon("death");
 
   for(;;) {
-    setusablebyteam(var_00);
+    setusablebyteam(var_0);
     level waittill("joined_team");
   }
 }
 
-crateuseteamupdater_multiteams(var_00) {
+crateuseteamupdater_multiteams(var_0) {
   self endon("death");
 
   for(;;) {
-    setusablebyotherteams(var_00);
+    setusablebyotherteams(var_0);
     level waittill("joined_team");
   }
 }
@@ -487,285 +487,285 @@ crateusejuggernautupdater() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("juggernaut_equipped", var_00);
-    self disableplayeruse(var_00);
-    thread crateusepostjuggernautupdater(var_00);
+    level waittill("juggernaut_equipped", var_0);
+    self disableplayeruse(var_0);
+    thread crateusepostjuggernautupdater(var_0);
   }
 }
 
-crateusepostjuggernautupdater(var_00) {
+crateusepostjuggernautupdater(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_00 endon("disconnect");
-  var_00 waittill("death");
-  self enableplayeruse(var_00);
+  var_0 endon("disconnect");
+  var_0 waittill("death");
+  self enableplayeruse(var_0);
 }
 
-createairdropcrate(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = spawn("script_model", var_03);
+createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawn("script_model", var_3);
   var_6.curprogress = 0;
   var_6.usetime = 0;
   var_6.userate = 0;
   var_6.team = self.team;
-  var_6.destination = var_04;
+  var_6.destination = var_4;
   var_6.id = "care_package";
-  var_06 give_player_tickets(1);
+  var_6 give_player_tickets(1);
 
-  if(isDefined(var_00)) {
-    var_6.owner = var_00;
-    var_06 setotherent(var_00);
+  if(isDefined(var_0)) {
+    var_6.owner = var_0;
+    var_6 setotherent(var_0);
   } else
     var_6.owner = undefined;
 
-  var_6.cratetype = var_02;
-  var_6.droptype = var_01;
+  var_6.cratetype = var_2;
+  var_6.droptype = var_1;
   var_6.targetname = "care_package";
-  var_06 _meth_85C8(1);
-  var_07 = "care_package_iw7_dummy";
+  var_6 _meth_85C8(1);
+  var_7 = "care_package_iw7_dummy";
 
   if(isDefined(level.custom_dummy_crate_model)) {
-    var_07 = level.custom_dummy_crate_model;
+    var_7 = level.custom_dummy_crate_model;
   }
 
-  var_06 setModel(var_07);
+  var_6 setModel(var_7);
 
-  if(var_02 == "airdrop_jackpot") {
-    var_6.friendlymodel = spawn("script_model", var_03);
-    var_6.friendlymodel setModel(level.cratetypes[var_01][var_02].model_name_friendly);
-    var_6.friendlymodel thread deleteonownerdeath(var_06);
+  if(var_2 == "airdrop_jackpot") {
+    var_6.friendlymodel = spawn("script_model", var_3);
+    var_6.friendlymodel setModel(level.cratetypes[var_1][var_2].model_name_friendly);
+    var_6.friendlymodel thread deleteonownerdeath(var_6);
   } else {
-    var_6.friendlymodel = spawn("script_model", var_03);
-    var_6.friendlymodel setModel(level.cratetypes[var_01][var_02].model_name_friendly);
+    var_6.friendlymodel = spawn("script_model", var_3);
+    var_6.friendlymodel setModel(level.cratetypes[var_1][var_2].model_name_friendly);
 
     if(isDefined(level.highlightairdrop) && level.highlightairdrop) {
-      if(!isDefined(var_05)) {
-        var_05 = 2;
+      if(!isDefined(var_5)) {
+        var_5 = 2;
       }
 
-      var_6.friendlymodel hudoutlineenable(var_05, 0, 0);
-      var_6.outlinecolor = var_05;
+      var_6.friendlymodel hudoutlineenable(var_5, 0, 0);
+      var_6.outlinecolor = var_5;
     }
 
-    var_6.enemymodel = spawn("script_model", var_03);
-    var_6.enemymodel setModel(level.cratetypes[var_01][var_02].model_name_enemy);
-    var_6.friendlymodel setentityowner(var_06);
-    var_6.enemymodel setentityowner(var_06);
-    var_6.friendlymodel thread deleteonownerdeath(var_06);
+    var_6.enemymodel = spawn("script_model", var_3);
+    var_6.enemymodel setModel(level.cratetypes[var_1][var_2].model_name_enemy);
+    var_6.friendlymodel setentityowner(var_6);
+    var_6.enemymodel setentityowner(var_6);
+    var_6.friendlymodel thread deleteonownerdeath(var_6);
 
     if(level.teambased) {
       var_6.friendlymodel thread cratemodelteamupdater(var_6.team);
     } else {
-      var_6.friendlymodel thread cratemodelplayerupdater(var_00, 1);
+      var_6.friendlymodel thread cratemodelplayerupdater(var_0, 1);
     }
 
-    var_6.enemymodel thread deleteonownerdeath(var_06);
+    var_6.enemymodel thread deleteonownerdeath(var_6);
 
     if(level.multiteambased) {
       var_6.enemymodel thread cratemodelenemyteamsupdater(var_6.team);
     } else if(level.teambased) {
       var_6.enemymodel thread cratemodelteamupdater(level.otherteam[var_6.team]);
     } else {
-      var_6.enemymodel thread cratemodelplayerupdater(var_00, 0);
+      var_6.enemymodel thread cratemodelplayerupdater(var_0, 0);
     }
   }
 
   var_6.inuse = 0;
   var_6.killcament = spawn("script_model", var_6.origin + (0, 0, 300), 0, 1);
   var_6.killcament setscriptmoverkillcam("explosive");
-  var_6.killcament linkto(var_06);
+  var_6.killcament linkto(var_6);
   level.numdropcrates++;
-  var_06 thread dropcrateexistence(var_04);
-  level notify("createAirDropCrate", var_06);
-  return var_06;
+  var_6 thread dropcrateexistence(var_4);
+  level notify("createAirDropCrate", var_6);
+  return var_6;
 }
 
-dropcrateexistence(var_00) {
+dropcrateexistence(var_0) {
   level endon("game_ended");
   self waittill("death");
 
   if(isDefined(level.cratekill)) {
-    [[level.cratekill]](var_00);
+    [[level.cratekill]](var_0);
   }
 
   level.numdropcrates--;
 }
 
-cratesetupforuse(var_00, var_01, var_02, var_03) {
+cratesetupforuse(var_0, var_1, var_2, var_3) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(var_00);
+  self sethintstring(var_0);
   self _meth_84A7("none");
   self makeusable();
 
-  if(isDefined(var_03)) {
-    self setusepriority(var_03);
+  if(isDefined(var_3)) {
+    self setusepriority(var_3);
   }
 
-  if(scripts\mp\utility\game::istrue(var_02)) {
+  if(scripts\mp\utility\game::istrue(var_2)) {
     thread watchcratereroll(self.owner);
     thread watchcratererollcommand(self.owner);
-    thread fakererollcratesetupforuse(self.owner, var_03);
+    thread fakererollcratesetupforuse(self.owner, var_3);
   }
 
-  var_04 = "icon_minimap_drone_package_friendly";
+  var_4 = "icon_minimap_drone_package_friendly";
 
   if(isDefined(level.objvisall)) {
-    var_05 = "icon_minimap_drone_package_friendly";
+    var_5 = "icon_minimap_drone_package_friendly";
   }
 
   if(!isDefined(self.minimapid)) {
-    self.minimapid = createobjective(var_04, undefined, 1, 1, 0);
+    self.minimapid = createobjective(var_4, undefined, 1, 1, 0);
   }
 
   thread crateuseteamupdater();
   thread crateusejuggernautupdater();
 
   if(issubstr(self.cratetype, "juggernaut")) {
-    foreach(var_07 in level.players) {
-      if(var_07 scripts\mp\utility\game::isjuggernaut()) {
-        thread crateusepostjuggernautupdater(var_07);
+    foreach(var_7 in level.players) {
+      if(var_7 scripts\mp\utility\game::isjuggernaut()) {
+        thread crateusepostjuggernautupdater(var_7);
       }
     }
   }
 
-  var_09 = undefined;
+  var_9 = undefined;
 
   if(level.teambased) {
-    var_09 = scripts\mp\entityheadicons::setheadicon(self.team, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+    var_9 = scripts\mp\entityheadicons::setheadicon(self.team, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   } else if(isDefined(self.owner)) {
-    var_09 = scripts\mp\entityheadicons::setheadicon(self.owner, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+    var_9 = scripts\mp\entityheadicons::setheadicon(self.owner, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
-  if(isDefined(var_09)) {
+  if(isDefined(var_9)) {
     var_9.showinkillcam = 0;
   }
 
   if(isDefined(level.iconvisall)) {
-    [[level.iconvisall]](self, var_01);
+    [[level.iconvisall]](self, var_1);
   } else {
-    foreach(var_07 in level.players) {
+    foreach(var_7 in level.players) {
       if(var_7.team == "spectator") {
-        var_09 = scripts\mp\entityheadicons::setheadicon(var_07, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+        var_9 = scripts\mp\entityheadicons::setheadicon(var_7, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
       }
     }
   }
 }
 
-fakererollcratesetupforuse(var_00, var_01) {
-  var_02 = &"PLATFORM_GET_KILLSTREAK";
+fakererollcratesetupforuse(var_0, var_1) {
+  var_2 = &"PLATFORM_GET_KILLSTREAK";
 
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
-    var_02 = game["strings"][self.cratetype + "_hint"];
+    var_2 = game["strings"][self.cratetype + "_hint"];
   }
 
-  var_03 = 128;
-  var_04 = 360;
-  var_05 = 128;
-  var_06 = 360;
-  var_07 = -10000;
+  var_3 = 128;
+  var_4 = 360;
+  var_5 = 128;
+  var_6 = 360;
+  var_7 = -10000;
 
-  if(isDefined(var_01)) {
-    var_07 = var_01;
+  if(isDefined(var_1)) {
+    var_7 = var_1;
   }
 
-  var_08 = spawn("script_model", self.origin);
+  var_8 = spawn("script_model", self.origin);
   var_8.curprogress = 0;
   var_8.usetime = 0;
   var_8.userate = 3000;
   var_8.inuse = 0;
   var_8.id = self.id;
-  var_08 linkto(self);
-  var_08 makeusable();
-  var_08 disableplayeruse(var_00);
-  var_08 setcursorhint("HINT_NOICON");
-  var_08 _meth_84A9("show");
-  var_08 sethintstring(var_02);
-  var_08 _meth_84A6(var_04);
-  var_08 setusefov(var_06);
-  var_08 _meth_84A4(var_03);
-  var_08 setuserange(var_05);
-  var_08 setusepriority(var_07);
-  var_08 thread deleteuseent(self);
-  self.fakeuseobj = var_08;
+  var_8 linkto(self);
+  var_8 makeusable();
+  var_8 disableplayeruse(var_0);
+  var_8 setcursorhint("HINT_NOICON");
+  var_8 _meth_84A9("show");
+  var_8 sethintstring(var_2);
+  var_8 _meth_84A6(var_4);
+  var_8 setusefov(var_6);
+  var_8 _meth_84A4(var_3);
+  var_8 setuserange(var_5);
+  var_8 setusepriority(var_7);
+  var_8 thread deleteuseent(self);
+  self.fakeuseobj = var_8;
 }
 
-watchcratereroll(var_00) {
+watchcratereroll(var_0) {
   self endon("death");
-  var_00 endon("disconnect");
+  var_0 endon("disconnect");
   self waittill("crate_reroll");
-  var_00 playlocalsound("mp_killconfirm_tags_drop");
-  var_01 = level.cratetypes[self.droptype][self.cratetype].raw_weight;
+  var_0 playlocalsound("mp_killconfirm_tags_drop");
+  var_1 = level.cratetypes[self.droptype][self.cratetype].raw_weight;
   changecrateweight(self.droptype, self.cratetype, 0);
-  var_02 = getcratetypefordroptype(self.droptype);
-  changecrateweight(self.droptype, self.cratetype, var_01);
-  self.cratetype = var_02;
-  var_03 = &"PLATFORM_GET_KILLSTREAK";
+  var_2 = getcratetypefordroptype(self.droptype);
+  changecrateweight(self.droptype, self.cratetype, var_1);
+  self.cratetype = var_2;
+  var_3 = &"PLATFORM_GET_KILLSTREAK";
 
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
-    var_03 = game["strings"][self.cratetype + "_hint"];
+    var_3 = game["strings"][self.cratetype + "_hint"];
   }
 
-  self sethintstring(var_03);
+  self sethintstring(var_3);
 
   if(isDefined(self.fakeuseobj)) {
-    self.fakeuseobj sethintstring(var_03);
+    self.fakeuseobj sethintstring(var_3);
   }
 
-  var_04 = scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype);
-  var_05 = undefined;
+  var_4 = scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype);
+  var_5 = undefined;
 
   if(level.teambased) {
-    var_05 = scripts\mp\entityheadicons::setheadicon(self.team, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+    var_5 = scripts\mp\entityheadicons::setheadicon(self.team, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   } else if(isDefined(self.owner)) {
-    var_05 = scripts\mp\entityheadicons::setheadicon(self.owner, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+    var_5 = scripts\mp\entityheadicons::setheadicon(self.owner, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
-  if(isDefined(var_05)) {
+  if(isDefined(var_5)) {
     var_5.showinkillcam = 0;
   }
 
   if(isDefined(level.iconvisall)) {
-    [[level.iconvisall]](self, var_04);
+    [[level.iconvisall]](self, var_4);
   } else {
-    foreach(var_07 in level.players) {
+    foreach(var_7 in level.players) {
       if(var_7.team == "spectator") {
-        var_05 = scripts\mp\entityheadicons::setheadicon(var_07, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+        var_5 = scripts\mp\entityheadicons::setheadicon(var_7, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
       }
     }
   }
 }
 
-watchcratererollcommand(var_00) {
+watchcratererollcommand(var_0) {
   self endon("death");
-  var_00 endon("disconnect");
-  var_01 = 0;
-  var_02 = 16384;
+  var_0 endon("disconnect");
+  var_1 = 0;
+  var_2 = 16384;
 
   for(;;) {
-    if(var_00 usebuttonpressed()) {
-      var_01 = 0;
+    if(var_0 usebuttonpressed()) {
+      var_1 = 0;
 
-      while(var_00 usebuttonpressed()) {
-        var_01 = var_01 + 0.05;
+      while(var_0 usebuttonpressed()) {
+        var_1 = var_1 + 0.05;
         wait 0.05;
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
-      var_01 = 0;
+      var_1 = 0;
 
-      while(!var_00 usebuttonpressed() && var_01 < 0.5) {
-        var_01 = var_01 + 0.05;
+      while(!var_0 usebuttonpressed() && var_1 < 0.5) {
+        var_1 = var_1 + 0.05;
         wait 0.05;
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
-      if(!scripts\mp\utility\game::isreallyalive(var_00)) {
+      if(!scripts\mp\utility\game::isreallyalive(var_0)) {
         continue;
       }
-      if(distance2dsquared(var_0.origin, self.origin) > var_02) {
+      if(distance2dsquared(var_0.origin, self.origin) > var_2) {
         continue;
       }
       self notify("crate_reroll");
@@ -775,131 +775,131 @@ watchcratererollcommand(var_00) {
   }
 }
 
-createobjective(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = scripts\mp\objidpoolmanager::requestminimapid(10);
+createobjective(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\objidpoolmanager::requestminimapid(10);
 
-  if(var_05 == -1) {
+  if(var_5 == -1) {
     return -1;
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_05, "invisible", (0, 0, 0));
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_5, "invisible", (0, 0, 0));
 
-  if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_03)) {
-    scripts\mp\objidpoolmanager::minimap_objective_position(var_05, self.origin);
-  } else if(scripts\mp\utility\game::istrue(var_03) && scripts\mp\utility\game::istrue(var_04)) {
-    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_05, self);
+  if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_3)) {
+    scripts\mp\objidpoolmanager::minimap_objective_position(var_5, self.origin);
+  } else if(scripts\mp\utility\game::istrue(var_3) && scripts\mp\utility\game::istrue(var_4)) {
+    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_5, self);
   } else {
-    scripts\mp\objidpoolmanager::minimap_objective_onentity(var_05, self);
+    scripts\mp\objidpoolmanager::minimap_objective_onentity(var_5, self);
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_state(var_05, "active");
-  scripts\mp\objidpoolmanager::minimap_objective_icon(var_05, var_00);
+  scripts\mp\objidpoolmanager::minimap_objective_state(var_5, "active");
+  scripts\mp\objidpoolmanager::minimap_objective_icon(var_5, var_0);
 
-  if(isDefined(var_01)) {
+  if(isDefined(var_1)) {
     if(!level.teambased && isDefined(self.owner)) {
-      if(scripts\mp\utility\game::istrue(var_02)) {
-        scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_05, self.owner getentitynumber());
+      if(scripts\mp\utility\game::istrue(var_2)) {
+        scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_5, self.owner getentitynumber());
       } else {
-        scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_05, self.owner getentitynumber());
+        scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_5, self.owner getentitynumber());
       }
     } else
-      scripts\mp\objidpoolmanager::minimap_objective_team(var_05, var_01);
+      scripts\mp\objidpoolmanager::minimap_objective_team(var_5, var_1);
   } else
-    scripts\mp\objidpoolmanager::minimap_objective_playermask_showtoall(var_05);
+    scripts\mp\objidpoolmanager::minimap_objective_playermask_showtoall(var_5);
 
   if(isDefined(level.objvisall)) {
-    [[level.objvisall]](var_05);
+    [[level.objvisall]](var_5);
   }
 
-  return var_05;
+  return var_5;
 }
 
-createobjective_engineer(var_00, var_01, var_02) {
-  var_03 = scripts\mp\objidpoolmanager::requestminimapid(10);
+createobjective_engineer(var_0, var_1, var_2) {
+  var_3 = scripts\mp\objidpoolmanager::requestminimapid(10);
 
-  if(var_03 == -1) {
+  if(var_3 == -1) {
     return -1;
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_03, "invisible", (0, 0, 0));
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_3, "invisible", (0, 0, 0));
 
-  if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_01)) {
-    scripts\mp\objidpoolmanager::minimap_objective_position(var_03, self.origin);
-  } else if(scripts\mp\utility\game::istrue(var_01) && scripts\mp\utility\game::istrue(var_02)) {
-    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_03, self);
+  if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_1)) {
+    scripts\mp\objidpoolmanager::minimap_objective_position(var_3, self.origin);
+  } else if(scripts\mp\utility\game::istrue(var_1) && scripts\mp\utility\game::istrue(var_2)) {
+    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_3, self);
   } else {
-    scripts\mp\objidpoolmanager::minimap_objective_onentity(var_03, self);
+    scripts\mp\objidpoolmanager::minimap_objective_onentity(var_3, self);
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_state(var_03, "active");
-  scripts\mp\objidpoolmanager::minimap_objective_icon(var_03, var_00);
-  scripts\mp\objidpoolmanager::minimap_objective_playermask_hidefromall(var_03);
-  return var_03;
+  scripts\mp\objidpoolmanager::minimap_objective_state(var_3, "active");
+  scripts\mp\objidpoolmanager::minimap_objective_icon(var_3, var_0);
+  scripts\mp\objidpoolmanager::minimap_objective_playermask_hidefromall(var_3);
+  return var_3;
 }
 
-setusablebyteam(var_00) {
-  foreach(var_02 in level.players) {
-    if(issubstr(self.cratetype, "juggernaut") && var_02 scripts\mp\utility\game::isjuggernaut()) {
-      self disableplayeruse(var_02);
+setusablebyteam(var_0) {
+  foreach(var_2 in level.players) {
+    if(issubstr(self.cratetype, "juggernaut") && var_2 scripts\mp\utility\game::isjuggernaut()) {
+      self disableplayeruse(var_2);
       continue;
     }
 
     if(issubstr(self.cratetype, "lased") && isDefined(var_2.hassoflam) && var_2.hassoflam) {
-      self disableplayeruse(var_02);
+      self disableplayeruse(var_2);
       continue;
     }
 
     if(issubstr(self.cratetype, "trap") && scripts\mp\utility\game::istrue(level.teambased) && var_2.team == self.owner.team) {
-      self disableplayeruse(var_02);
+      self disableplayeruse(var_2);
       continue;
     }
 
-    if(issubstr(self.cratetype, "trap") && !scripts\mp\utility\game::istrue(level.teambased) && var_02 == self.owner) {
-      self disableplayeruse(var_02);
+    if(issubstr(self.cratetype, "trap") && !scripts\mp\utility\game::istrue(level.teambased) && var_2 == self.owner) {
+      self disableplayeruse(var_2);
       continue;
     }
 
-    if(issubstr(self.droptype, "reroll") && var_02 != self.owner) {
-      self disableplayeruse(var_02);
+    if(issubstr(self.droptype, "reroll") && var_2 != self.owner) {
+      self disableplayeruse(var_2);
       continue;
     }
 
-    if(!isDefined(var_00) || var_00 == var_2.team) {
-      self enableplayeruse(var_02);
+    if(!isDefined(var_0) || var_0 == var_2.team) {
+      self enableplayeruse(var_2);
       continue;
     }
 
-    self disableplayeruse(var_02);
+    self disableplayeruse(var_2);
   }
 }
 
-setusablebyotherteams(var_00) {
-  foreach(var_02 in level.players) {
-    if(issubstr(self.cratetype, "juggernaut") && var_02 scripts\mp\utility\game::isjuggernaut()) {
-      self disableplayeruse(var_02);
+setusablebyotherteams(var_0) {
+  foreach(var_2 in level.players) {
+    if(issubstr(self.cratetype, "juggernaut") && var_2 scripts\mp\utility\game::isjuggernaut()) {
+      self disableplayeruse(var_2);
       continue;
     }
 
-    if(!isDefined(var_00) || var_00 != var_2.team) {
-      self enableplayeruse(var_02);
+    if(!isDefined(var_0) || var_0 != var_2.team) {
+      self enableplayeruse(var_2);
       continue;
     }
 
-    self disableplayeruse(var_02);
+    self disableplayeruse(var_2);
   }
 }
 
-dropthecrate(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
-  var_09 = [];
+dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = [];
   self.owner endon("disconnect");
 
-  if(!isDefined(var_04)) {
-    if(isDefined(var_07)) {
+  if(!isDefined(var_4)) {
+    if(isDefined(var_7)) {
       var_10 = undefined;
       var_11 = undefined;
 
       for(var_12 = 0; var_12 < 100; var_12++) {
-        var_11 = getcratetypefordroptype(var_01);
+        var_11 = getcratetypefordroptype(var_1);
         var_10 = 0;
 
         for(var_13 = 0; var_13 < var_7.size; var_13++) {
@@ -915,62 +915,62 @@ dropthecrate(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var
       }
 
       if(var_10 == 1) {
-        var_11 = getcratetypefordroptype(var_01);
+        var_11 = getcratetypefordroptype(var_1);
       }
     } else
-      var_11 = getcratetypefordroptype(var_01);
+      var_11 = getcratetypefordroptype(var_1);
   } else
-    var_11 = var_04;
+    var_11 = var_4;
 
-  var_06 = (0, 0, 0);
+  var_6 = (0, 0, 0);
 
-  if(!isDefined(var_06)) {
-    var_06 = (randomint(5), randomint(5), randomint(5));
+  if(!isDefined(var_6)) {
+    var_6 = (randomint(5), randomint(5), randomint(5));
   }
 
-  var_09 = createairdropcrate(self.owner, var_01, var_11, var_05, var_00);
+  var_9 = createairdropcrate(self.owner, var_1, var_11, var_5, var_0);
 
-  switch (var_01) {
+  switch (var_1) {
     case "nuke_drop":
     case "airdrop_mega":
     case "airdrop_juggernaut_maniac":
     case "airdrop_juggernaut_recon":
     case "airdrop_juggernaut":
-      var_09 linkto(self, "tag_ground", (64, 32, -128), (0, 0, 0));
+      var_9 linkto(self, "tag_ground", (64, 32, -128), (0, 0, 0));
       break;
     case "airdrop_osprey_gunner":
     case "airdrop_escort":
-      var_09 linkto(self, var_08, (0, 0, 0), (0, 0, 0));
+      var_9 linkto(self, var_8, (0, 0, 0), (0, 0, 0));
       break;
     default:
-      var_09 linkto(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+      var_9 linkto(self, "tag_ground", (32, 0, 5), (0, 0, 0));
       break;
   }
 
   var_9.angles = (0, 0, 0);
-  var_09 show();
+  var_9 show();
   var_14 = self.veh_speed;
 
   if(issubstr(var_11, "juggernaut")) {
-    var_06 = (0, 0, 0);
+    var_6 = (0, 0, 0);
   }
 
-  thread waitfordropcratemsg(var_09, var_06, var_01, var_11);
+  thread waitfordropcratemsg(var_9, var_6, var_1, var_11);
   var_9.droppingtoground = 1;
   return var_11;
 }
 
-killplayerfromcrate_dodamage(var_00) {
+killplayerfromcrate_dodamage(var_0) {
   if(!scripts\mp\utility\game::istrue(level.noairdropkills)) {
-    var_00 getrandomarmkillstreak(1000, var_0.origin, self, self, "MOD_CRUSH");
+    var_0 getrandomarmkillstreak(1000, var_0.origin, self, self, "MOD_CRUSH");
   }
 
   self endon("death");
-  var_00 endon("death");
-  var_00 endon("disconnect");
+  var_0 endon("death");
+  var_0 endon("disconnect");
 
-  if(scripts\mp\utility\game::isreallyalive(var_00)) {
-    childthread scripts\mp\movers::unresolved_collision_nearest_node(var_00, undefined, self);
+  if(scripts\mp\utility\game::isreallyalive(var_0)) {
+    childthread scripts\mp\movers::unresolved_collision_nearest_node(var_0, undefined, self);
   }
 }
 
@@ -978,11 +978,11 @@ killplayerfromcrate_fastvelocitypush() {
   self endon("death");
 
   for(;;) {
-    self waittill("player_pushed", var_00, var_01);
+    self waittill("player_pushed", var_0, var_1);
 
-    if(isplayer(var_00) || isagent(var_00)) {
+    if(isplayer(var_0) || isagent(var_0)) {
       if(var_1[2] < -20) {
-        killplayerfromcrate_dodamage(var_00);
+        killplayerfromcrate_dodamage(var_0);
       }
     }
 
@@ -990,7 +990,7 @@ killplayerfromcrate_fastvelocitypush() {
   }
 }
 
-airdrop_override_death_moving_platform(var_00) {
+airdrop_override_death_moving_platform(var_0) {
   if(isDefined(var_0.lasttouchedplatform.destroyairdroponcollision) && var_0.lasttouchedplatform.destroyairdroponcollision) {
     playFX(scripts\engine\utility::getfx("airdrop_crate_destroy"), self.origin);
     deletecrateold();
@@ -998,25 +998,25 @@ airdrop_override_death_moving_platform(var_00) {
 }
 
 cleanup_crate_capture() {
-  var_00 = self getlinkedchildren(1);
+  var_0 = self getlinkedchildren(1);
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  foreach(var_02 in var_00) {
-    if(!isplayer(var_02)) {
+  foreach(var_2 in var_0) {
+    if(!isplayer(var_2)) {
       continue;
     }
     if(isDefined(var_2.iscapturingcrate) && var_2.iscapturingcrate) {
-      var_03 = var_02 getlinkedparent();
+      var_3 = var_2 getlinkedparent();
 
-      if(isDefined(var_03)) {
-        var_02 scripts\mp\gameobjects::updateuiprogress(var_03, 0);
-        var_02 unlink();
+      if(isDefined(var_3)) {
+        var_2 scripts\mp\gameobjects::updateuiprogress(var_3, 0);
+        var_2 unlink();
       }
 
-      if(isalive(var_02)) {
-        var_02 scripts\engine\utility::allow_weapon(1);
+      if(isalive(var_2)) {
+        var_2 scripts\engine\utility::allow_weapon(1);
       }
 
       var_2.iscapturingcrate = 0;
@@ -1024,7 +1024,7 @@ cleanup_crate_capture() {
   }
 }
 
-airdrop_override_invalid_moving_platform(var_00) {
+airdrop_override_invalid_moving_platform(var_0) {
   wait 0.05;
   self notify("restarting_physics");
   cleanup_crate_capture();
@@ -1032,37 +1032,37 @@ airdrop_override_invalid_moving_platform(var_00) {
   thread physicswaiter(var_0.droptype, var_0.cratetype, var_0.dropimpulse, var_0.airdrop_max_linear_velocity);
 }
 
-waitfordropcratemsg(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_00 endon("death");
+waitfordropcratemsg(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_0 endon("death");
 
-  if(!isDefined(var_05) || !var_05) {
+  if(!isDefined(var_5) || !var_5) {
     self waittill("drop_crate");
   }
 
-  var_06 = 1200;
+  var_6 = 1200;
 
-  if(isDefined(var_04)) {
-    var_06 = var_04;
+  if(isDefined(var_4)) {
+    var_6 = var_4;
   }
 
-  var_00 unlink();
-  var_00 physicslaunchserver((0, 0, 0), var_01, var_06);
-  var_00 thread physicswaiter(var_02, var_03, var_01, var_06);
-  var_00 thread killplayerfromcrate_fastvelocitypush();
+  var_0 unlink();
+  var_0 physicslaunchserver((0, 0, 0), var_1, var_6);
+  var_0 thread physicswaiter(var_2, var_3, var_1, var_6);
+  var_0 thread killplayerfromcrate_fastvelocitypush();
   var_0.unresolved_collision_func = ::killplayerfromcrate_dodamage;
 
   if(isDefined(var_0.killcament)) {
     if(isDefined(var_0.carestrike)) {
-      var_07 = -2100;
+      var_7 = -2100;
     } else {
-      var_07 = 0;
+      var_7 = 0;
     }
 
     var_0.killcament unlink();
-    var_08 = bulletTrace(var_0.origin, var_0.origin + (0, 0, -10000), 0, var_00);
-    var_09 = distance(var_0.origin, var_8["position"]);
-    var_10 = var_09 / 800;
-    var_0.killcament moveto(var_8["position"] + (0, 0, 300) + (var_07, 0, 0), var_10);
+    var_8 = bulletTrace(var_0.origin, var_0.origin + (0, 0, -10000), 0, var_0);
+    var_9 = distance(var_0.origin, var_8["position"]);
+    var_10 = var_9 / 800;
+    var_0.killcament moveto(var_8["position"] + (0, 0, 300) + (var_7, 0, 0), var_10);
   }
 }
 
@@ -1074,25 +1074,25 @@ waitandanimate() {
   self.enemymodel scriptmodelplayanim("juggernaut_carepackage");
 }
 
-physicswaiter(var_00, var_01, var_02, var_03, var_04) {
-  if(scripts\mp\utility\game::istrue(var_04)) {
+physicswaiter(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\mp\utility\game::istrue(var_4)) {
     self endon("death");
   }
 
   self endon("restarting_physics");
   func_136A7();
   self.droppingtoground = 0;
-  self thread[[level.cratetypes[var_00][var_01].func]](var_00);
-  level thread droptimeout(self, self.owner, var_01);
-  var_05 = spawnStruct();
+  self thread[[level.cratetypes[var_0][var_1].func]](var_0);
+  level thread droptimeout(self, self.owner, var_1);
+  var_5 = spawnStruct();
   var_5.endonstring = "restarting_physics";
   var_5.deathoverridecallback = ::airdrop_override_death_moving_platform;
   var_5.invalidparentoverridecallback = ::airdrop_override_invalid_moving_platform;
-  var_5.droptype = var_00;
-  var_5.cratetype = var_01;
-  var_5.dropimpulse = var_02;
-  var_5.airdrop_max_linear_velocity = var_03;
-  thread scripts\mp\movers::handle_moving_platforms(var_05);
+  var_5.droptype = var_0;
+  var_5.cratetype = var_1;
+  var_5.dropimpulse = var_2;
+  var_5.airdrop_max_linear_velocity = var_3;
+  thread scripts\mp\movers::handle_moving_platforms(var_5);
 
   if(self.friendlymodel scripts\mp\utility\game::touchingbadtrigger()) {
     deletecrateold();
@@ -1108,10 +1108,10 @@ func_136A7() {
   wait 0.5;
 
   for(;;) {
-    var_00 = self physics_getbodyid(0);
-    var_01 = physics_getbodylinvel(var_00);
+    var_0 = self physics_getbodyid(0);
+    var_1 = physics_getbodylinvel(var_0);
 
-    if(lengthsquared(var_01) > 0.5) {
+    if(lengthsquared(var_1) > 0.5) {
       wait 0.1;
       continue;
     }
@@ -1120,116 +1120,116 @@ func_136A7() {
   }
 }
 
-droptimeout(var_00, var_01, var_02) {
+droptimeout(var_0, var_1, var_2) {
   if(isDefined(level.nod_gesture) && level.nod_gesture) {
     return;
   }
   level endon("game_ended");
-  var_00 endon("death");
+  var_0 endon("death");
 
   if(var_0.droptype == "nuke_drop") {
     return;
   }
-  var_03 = 90.0;
+  var_3 = 90.0;
 
-  if(var_02 == "supply") {
-    var_03 = 20.0;
-  } else if(var_02 == "bomb_trap") {
-    var_03 = 60.0;
+  if(var_2 == "supply") {
+    var_3 = 20.0;
+  } else if(var_2 == "bomb_trap") {
+    var_3 = 60.0;
   }
 
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_03);
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_3);
 
   while(var_0.curprogress != 0) {
     wait 1;
   }
 
-  var_00 deletecrateold();
+  var_0 deletecrateold();
 }
 
-getpathstart(var_00, var_01) {
-  var_02 = 100;
-  var_03 = 15000;
-  var_04 = (0, var_01, 0);
-  var_05 = var_00 + anglesToForward(var_04) * (-1 * var_03);
-  var_05 = var_05 + ((randomfloat(2) - 1) * var_02, (randomfloat(2) - 1) * var_02, 0);
-  return var_05;
+getpathstart(var_0, var_1) {
+  var_2 = 100;
+  var_3 = 15000;
+  var_4 = (0, var_1, 0);
+  var_5 = var_0 + anglesToForward(var_4) * (-1 * var_3);
+  var_5 = var_5 + ((randomfloat(2) - 1) * var_2, (randomfloat(2) - 1) * var_2, 0);
+  return var_5;
 }
 
-getpathend(var_00, var_01) {
-  var_02 = 150;
-  var_03 = 15000;
-  var_04 = (0, var_01, 0);
-  var_05 = var_00 + anglesToForward(var_04 + (0, 90, 0)) * var_03;
-  var_05 = var_05 + ((randomfloat(2) - 1) * var_02, (randomfloat(2) - 1) * var_02, 0);
-  return var_05;
+getpathend(var_0, var_1) {
+  var_2 = 150;
+  var_3 = 15000;
+  var_4 = (0, var_1, 0);
+  var_5 = var_0 + anglesToForward(var_4 + (0, 90, 0)) * var_3;
+  var_5 = var_5 + ((randomfloat(2) - 1) * var_2, (randomfloat(2) - 1) * var_2, 0);
+  return var_5;
 }
 
-getflyheightoffset(var_00) {
-  var_01 = 850;
-  var_02 = getent("airstrikeheight", "targetname");
+getflyheightoffset(var_0) {
+  var_1 = 850;
+  var_2 = getent("airstrikeheight", "targetname");
 
-  if(!isDefined(var_02)) {
+  if(!isDefined(var_2)) {
     if(isDefined(level.airstrikeheightscale)) {
       if(level.airstrikeheightscale > 2) {
-        var_01 = 1500;
-        return var_01 * level.airstrikeheightscale;
+        var_1 = 1500;
+        return var_1 * level.airstrikeheightscale;
       }
 
-      return var_01 * level.airstrikeheightscale + 256 + var_0[2];
+      return var_1 * level.airstrikeheightscale + 256 + var_0[2];
     } else
-      return var_01 + var_0[2];
+      return var_1 + var_0[2];
   } else
     return var_2.origin[2];
 }
 
-func_581F(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_00)) {
+func_581F(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed()) {
     return;
   }
-  if(var_03 == "dronedrop_grnd") {
-    var_05 = var_1.droporigin;
+  if(var_3 == "dronedrop_grnd") {
+    var_5 = var_1.droporigin;
   } else {
-    var_05 = var_1.location;
+    var_5 = var_1.location;
   }
 
-  var_06 = getflyheightoffset(var_05);
-  var_07 = var_05 * (1, 1, 0) + (0, 0, var_06);
-  var_08 = getpathstart(var_07, var_02);
-  var_09 = getpathend(var_07, var_02);
-  var_07 = var_07 + anglesToForward((0, var_02, 0)) * -50;
-  var_10 = func_5CC7(var_00, var_08, var_07, var_03, var_01, var_04);
+  var_6 = getflyheightoffset(var_5);
+  var_7 = var_5 * (1, 1, 0) + (0, 0, var_6);
+  var_8 = getpathstart(var_7, var_2);
+  var_9 = getpathend(var_7, var_2);
+  var_7 = var_7 + anglesToForward((0, var_2, 0)) * -50;
+  var_10 = func_5CC7(var_0, var_8, var_7, var_3, var_1, var_4);
   var_11 = undefined;
   var_12 = 999999;
-  var_13 = scripts\engine\trace::ray_trace(var_05, var_05 + (0, 0, 10000), level.characters, scripts\engine\trace::create_contents(0, 1, 0, 1, 0, 1, 0));
+  var_13 = scripts\engine\trace::ray_trace(var_5, var_5 + (0, 0, 10000), level.characters, scripts\engine\trace::create_contents(0, 1, 0, 1, 0, 1, 0));
   var_14 = undefined;
   var_15 = 0;
 
   if(var_13["hittype"] == "hittype_none") {
-    var_14 = var_05 * (1, 1, 0) + (0, 0, var_06);
+    var_14 = var_5 * (1, 1, 0) + (0, 0, var_6);
     var_15 = 1;
   } else {
     if(isDefined(level.carepackagedropnodes) && level.carepackagedropnodes.size > 0) {
       foreach(var_17 in level.carepackagedropnodes) {
-        var_18 = distance(var_17.origin, var_05);
+        var_18 = distance(var_17.origin, var_5);
 
         if(var_18 < var_12) {
           var_11 = var_17;
           var_12 = var_18;
         }
       }
-    } else {}
+    }
 
-    var_14 = var_11.origin * (1, 1, 0) + (0, 0, var_06);
+    var_14 = var_11.origin * (1, 1, 0) + (0, 0, var_6);
   }
 
   var_20 = "";
   var_21 = "used_dronedrop";
 
-  if(isDefined(var_04)) {
+  if(isDefined(var_4)) {
     var_20 = scripts\mp\killstreak_loot::getrarityforlootitem(var_4.variantid);
     var_21 = "used_" + var_4.streakname;
   }
@@ -1239,111 +1239,111 @@ func_581F(var_00, var_01, var_02, var_03, var_04) {
   }
 
   if(level.gametype != "grnd") {
-    level thread scripts\mp\utility\game::teamplayercardsplash(var_21, var_00);
+    level thread scripts\mp\utility\game::teamplayercardsplash(var_21, var_0);
   }
 
   var_10 setvehgoalpos(var_14, 1);
   var_10 setscriptablepartstate("lights", "idle");
   var_10 setscriptablepartstate("thrusters", "fly", 0);
-  var_10 thread func_13A04(var_14, var_05, var_15);
+  var_10 thread func_13A04(var_14, var_5, var_15);
 }
 
-func_5CC7(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = vectortoangles(var_02 - var_01);
-  var_07 = "veh_mil_air_un_delivery_drone";
-  var_08 = "";
+func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = vectortoangles(var_2 - var_1);
+  var_7 = "veh_mil_air_un_delivery_drone";
+  var_8 = "";
 
-  if(isDefined(var_05)) {
-    var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(var_5.variantid);
+  if(isDefined(var_5)) {
+    var_8 = scripts\mp\killstreak_loot::getrarityforlootitem(var_5.variantid);
   }
 
-  if(var_08 != "") {
-    var_07 = var_07 + "_" + var_08;
+  if(var_8 != "") {
+    var_7 = var_7 + "_" + var_8;
   }
 
-  if(isDefined(var_05)) {
-    if(scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_bomb_trap")) {
-      var_03 = "dronedrop_trap";
+  if(isDefined(var_5)) {
+    if(scripts\mp\killstreaks\utility::func_A69F(var_5, "passive_bomb_trap")) {
+      var_3 = "dronedrop_trap";
     }
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_reroll")) {
-      var_03 = "dronedrop_reroll";
+    if(scripts\mp\killstreaks\utility::func_A69F(var_5, "passive_reroll")) {
+      var_3 = "dronedrop_reroll";
     }
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_high_roller")) {
-      var_03 = "dronedrop_highroll";
+    if(scripts\mp\killstreaks\utility::func_A69F(var_5, "passive_high_roller")) {
+      var_3 = "dronedrop_highroll";
     }
   }
 
-  var_09 = spawnhelicopter(var_00, var_01, var_06, "delivery_drone_mp", var_07);
+  var_9 = spawnhelicopter(var_0, var_1, var_6, "delivery_drone_mp", var_7);
 
-  if(!isDefined(var_09)) {
+  if(!isDefined(var_9)) {
     return;
   }
   var_9.maxhealth = 100;
-  var_9.owner = var_00;
+  var_9.owner = var_0;
   var_9.team = var_0.team;
   var_9.isairdrop = 1;
-  var_09 setmaxpitchroll(35, 35);
-  var_09 vehicle_setspeed(1600, 200, 200);
-  var_09 setyawspeed(250, 100);
-  var_09 setneargoalnotifydist(1000);
-  var_09 sethoverparams(5, 5, 2);
-  var_09 setCanDamage(1);
-  var_09 setturningability(1.0);
-  var_09 _meth_84E1(1);
-  var_09 _meth_84E0(1);
-  var_9.streakinfo = var_05;
+  var_9 setmaxpitchroll(35, 35);
+  var_9 vehicle_setspeed(1600, 200, 200);
+  var_9 setyawspeed(250, 100);
+  var_9 setneargoalnotifydist(1000);
+  var_9 sethoverparams(5, 5, 2);
+  var_9 setCanDamage(1);
+  var_9 setturningability(1.0);
+  var_9 _meth_84E1(1);
+  var_9 _meth_84E0(1);
+  var_9.streakinfo = var_5;
   var_9.helitype = "dronedrop";
-  var_09 scripts\mp\killstreaks\utility::func_1843(var_9.helitype, "Killstreak_Air", var_00, 1);
-  var_10 = getcratetypefordroptype(var_03);
-  var_11 = var_09 createairdropcrate(var_00, var_03, var_10, var_9.origin);
-  var_11 linkto(var_09, "tag_origin", (0, 0, 5), (0, 0, 0));
-  var_11.streakinfo = var_05;
-  var_9.func_5D26 = var_11;
-  var_09 thread watchtimeout(60);
-  var_09 thread func_13A01(var_11, var_03, var_10, var_04);
-  var_09 thread scripts\mp\killstreaks\helicopter::heli_damage_monitor("dronedrop", undefined, 1);
-  var_09 thread watchempdamage();
+  var_9 scripts\mp\killstreaks\utility::func_1843(var_9.helitype, "Killstreak_Air", var_0, 1);
+  var_10 = getcratetypefordroptype(var_3);
+  var_11 = var_9 createairdropcrate(var_0, var_3, var_10, var_9.origin);
+  var_11 linkto(var_9, "tag_origin", (0, 0, 5), (0, 0, 0));
+  var_11.streakinfo = var_5;
+  var_9.var_5D26 = var_11;
+  var_9 thread watchtimeout(60);
+  var_9 thread func_13A01(var_11, var_3, var_10, var_4);
+  var_9 thread scripts\mp\killstreaks\helicopter::heli_damage_monitor("dronedrop", undefined, 1);
+  var_9 thread watchempdamage();
 
-  if(var_03 == "dronedrop_trap") {
-    var_09 thread watchownerdisconnect(var_11, var_04);
+  if(var_3 == "dronedrop_trap") {
+    var_9 thread watchownerdisconnect(var_11, var_4);
   }
 
-  var_09 setscriptablepartstate("dust", "active", 0);
-  var_09 thread dronewatchgameover();
-  return var_09;
+  var_9 setscriptablepartstate("dust", "active", 0);
+  var_9 thread dronewatchgameover();
+  return var_9;
 }
 
-func_13A01(var_00, var_01, var_02, var_03) {
+func_13A01(var_0, var_1, var_2, var_3) {
   self waittill("death");
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  var_04 = (0, 0, 0);
-  var_05 = 1200;
-  var_06 = undefined;
+  var_4 = (0, 0, 0);
+  var_5 = 1200;
+  var_6 = undefined;
 
-  if(var_01 == "dronedrop_trap") {
-    var_06 = 1;
+  if(var_1 == "dronedrop_trap") {
+    var_6 = 1;
   }
 
-  var_00 unlink();
-  var_00 physicslaunchserver((0, 0, 0), var_04, var_05);
-  var_00 thread physicswaiter(var_01, var_02, var_04, var_05, var_06);
-  var_00 thread killplayerfromcrate_fastvelocitypush();
+  var_0 unlink();
+  var_0 physicslaunchserver((0, 0, 0), var_4, var_5);
+  var_0 thread physicswaiter(var_1, var_2, var_4, var_5, var_6);
+  var_0 thread killplayerfromcrate_fastvelocitypush();
   var_0.unresolved_collision_func = ::killplayerfromcrate_dodamage;
 
   if(isDefined(var_0.killcament)) {
     var_0.killcament unlink();
   }
 
-  if(isDefined(var_3.func_1349C)) {
-    var_3.func_1349C delete();
+  if(isDefined(var_3.var_1349C)) {
+    var_3.var_1349C delete();
   }
 
-  var_00 thread handlenavobstacle();
+  var_0 thread handlenavobstacle();
   func_5CAC();
   scripts\mp\utility\game::printgameaction("killstreak ended - dronedrop", self.owner);
 }
@@ -1352,14 +1352,14 @@ handlenavobstacle() {
   self endon("death");
   self endon("nav_obstacle_destroyed");
   wait 1;
-  self.func_BE6F = _createnavobstaclebybounds(self.origin, (30, 10, 64), self.angles);
-  var_00 = self.origin;
+  self.var_BE6F = _createnavobstaclebybounds(self.origin, (30, 10, 64), self.angles);
+  var_0 = self.origin;
 
-  while(isDefined(self) && isDefined(self.func_BE6F)) {
-    if(distance2dsquared(var_00, self.origin) > 64) {
-      _destroynavobstacle(self.func_BE6F);
-      self.func_BE6F = _createnavobstaclebybounds(self.origin, (30, 10, 64), self.angles);
-      var_00 = self.origin;
+  while(isDefined(self) && isDefined(self.var_BE6F)) {
+    if(distance2dsquared(var_0, self.origin) > 64) {
+      _destroynavobstacle(self.var_BE6F);
+      self.var_BE6F = _createnavobstaclebybounds(self.origin, (30, 10, 64), self.angles);
+      var_0 = self.origin;
     }
 
     wait 1;
@@ -1371,27 +1371,27 @@ watchempdamage() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
+    self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_03) && var_03 == "concussion_grenade_mp") {
-      if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
-        var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+    if(isDefined(var_3) && var_3 == "concussion_grenade_mp") {
+      if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_0))) {
+        var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
       }
     }
 
-    scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
+    scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_0, var_0, self.team, var_2, var_4, var_3);
   }
 }
 
-watchownerdisconnect(var_00, var_01) {
+watchownerdisconnect(var_0, var_1) {
   self endon("death");
   self.owner waittill("disconnect");
 
-  if(isDefined(var_1.func_1349C)) {
-    var_1.func_1349C delete();
+  if(isDefined(var_1.var_1349C)) {
+    var_1.var_1349C delete();
   }
 
-  var_00 deletecrateold();
+  var_0 deletecrateold();
   func_5CAC();
 }
 
@@ -1402,42 +1402,42 @@ func_5CAC() {
   self delete();
 }
 
-func_13A04(var_00, var_01, var_02) {
+func_13A04(var_0, var_1, var_2) {
   self endon("death");
   self waittill("goal");
   thread watchmantledisable();
-  var_03 = (0, 0, -30);
-  var_04 = (0, 0, 12);
+  var_3 = (0, 0, -30);
+  var_4 = (0, 0, 12);
   self setscriptablepartstate("thrusters", "descend", 0);
-  thread watchfailsafe(var_00);
-  var_05 = undefined;
+  thread watchfailsafe(var_0);
+  var_5 = undefined;
 
-  if(!scripts\mp\utility\game::istrue(var_02)) {
+  if(!scripts\mp\utility\game::istrue(var_2)) {
     if(_areanynavvolumesloaded()) {
-      var_06 = var_01 + (0, 0, 12);
-      var_05 = _findpath3d(self.origin, var_06);
+      var_6 = var_1 + (0, 0, 12);
+      var_5 = _findpath3d(self.origin, var_6);
     } else {
-      var_07 = scripts\engine\trace::create_solid_ai_contents();
-      var_08 = scripts\engine\trace::ray_trace(self.origin, self.origin - (0, 0, 500), self, var_07);
-      var_09 = getclosestpointonnavmesh(var_8["position"], self);
-      var_05 = self.owner findpath(var_09, var_01);
+      var_7 = scripts\engine\trace::create_solid_ai_contents();
+      var_8 = scripts\engine\trace::ray_trace(self.origin, self.origin - (0, 0, 500), self, var_7);
+      var_9 = getclosestpointonnavmesh(var_8["position"], self);
+      var_5 = self.owner findpath(var_9, var_1);
       self.owner iprintlnbold("3D Nav Volume is not present, using 2D path instead");
     }
   } else
-    var_05 = [var_01 + (0, 0, 12)];
+    var_5 = [var_1 + (0, 0, 12)];
 
   var_10 = 0;
   var_11 = self.origin;
 
-  foreach(var_16, var_13 in var_05) {
+  foreach(var_16, var_13 in var_5) {
     if(var_16 == var_5.size - 1) {
       var_10 = 1;
     }
 
     if(var_10) {
-      var_14 = var_04;
+      var_14 = var_4;
     } else {
-      var_14 = var_03;
+      var_14 = var_3;
     }
 
     var_15 = 50;
@@ -1453,7 +1453,7 @@ func_13A04(var_00, var_01, var_02) {
     self setscriptablepartstate("thrusters", "navigate", 0);
     self setvehgoalpos(var_13 + var_14, var_10);
 
-    if(!var_10 || scripts\mp\utility\game::istrue(var_02)) {
+    if(!var_10 || scripts\mp\utility\game::istrue(var_2)) {
       self waittill("near_goal");
       continue;
     }
@@ -1468,14 +1468,14 @@ watchmantledisable() {
   self endon("death");
 
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(!scripts\mp\utility\game::isreallyalive(var_01)) {
+    foreach(var_1 in level.players) {
+      if(!scripts\mp\utility\game::isreallyalive(var_1)) {
         continue;
       }
       if(distancesquared(self.origin, var_1.origin) <= 10000 && !isDefined(var_1.cratemantle)) {
         var_1.cratemantle = 0;
-        var_01 scripts\engine\utility::allow_mantle(0);
-        var_01 thread watchdistancefromcrate(self);
+        var_1 scripts\engine\utility::allow_mantle(0);
+        var_1 thread watchdistancefromcrate(self);
       }
     }
 
@@ -1483,12 +1483,12 @@ watchmantledisable() {
   }
 }
 
-watchdistancefromcrate(var_00) {
+watchdistancefromcrate(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 
-  while(isDefined(var_00)) {
+  while(isDefined(var_0)) {
     if(distancesquared(var_0.origin, self.origin) > 10000) {
       break;
     }
@@ -1499,35 +1499,35 @@ watchdistancefromcrate(var_00) {
   scripts\engine\utility::allow_mantle(1);
 }
 
-watchfailsafe(var_00) {
+watchfailsafe(var_0) {
   self endon("death");
   self endon("near_goal");
-  var_01 = 3;
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
+  var_1 = 3;
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
 
-  if(distancesquared(self.origin, var_00) < 2500) {
+  if(distancesquared(self.origin, var_0) < 2500) {
     self notify("death");
   }
 }
 
-func_7E84(var_00) {
-  var_01 = abs(var_0[0]);
-  var_02 = abs(var_0[1]);
-  var_03 = abs(var_0[2]);
-  return int(max(var_03, max(var_01, var_02)));
+func_7E84(var_0) {
+  var_1 = abs(var_0[0]);
+  var_2 = abs(var_0[1]);
+  var_3 = abs(var_0[2]);
+  return int(max(var_3, max(var_1, var_2)));
 }
 
-func_BA00(var_00, var_01) {
+func_BA00(var_0, var_1) {
   self notify("stop_MonitorPath");
   self endon("death");
   self endon("stop_MonitorPath");
   self endon("goal");
   self endon("near_goal");
   var_2[0] = self;
-  var_2[1] = self.func_5D26;
+  var_2[1] = self.var_5D26;
 
   for(;;) {
-    var_03 = scripts\engine\trace::sphere_trace(self.origin, var_01, 16, var_02);
+    var_3 = scripts\engine\trace::sphere_trace(self.origin, var_1, 16, var_2);
 
     if(var_3["fraction"] == 1.0) {
       self notify("near_goal");
@@ -1537,14 +1537,14 @@ func_BA00(var_00, var_01) {
   }
 }
 
-setupchallengelocales(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = spawnStruct();
-  var_6.func_B75B = var_01;
-  var_6.func_B491 = var_02;
-  var_6.func_B7CB = var_03;
-  var_6.func_B4C9 = var_04;
-  var_6.func_1545 = var_05;
-  level.func_109C4[var_00] = var_06;
+setupchallengelocales(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawnStruct();
+  var_6.var_B75B = var_1;
+  var_6.var_B491 = var_2;
+  var_6.var_B7CB = var_3;
+  var_6.var_B4C9 = var_4;
+  var_6.var_1545 = var_5;
+  level.var_109C4[var_0] = var_6;
 }
 
 setupcaptureflares() {
@@ -1556,103 +1556,103 @@ setupcaptureflares() {
   setupchallengelocales("final", 50, 1000, 10, 45, 100);
 }
 
-func_12F22(var_00, var_01) {
-  var_02 = 9999;
-  var_03 = level.func_109C4[var_00];
+func_12F22(var_0, var_1) {
+  var_2 = 9999;
+  var_3 = level.var_109C4[var_0];
 
-  if(var_01 < var_3.func_B75B) {
-    var_01 = var_3.func_B75B;
+  if(var_1 < var_3.var_B75B) {
+    var_1 = var_3.var_B75B;
   }
 
-  if(var_01 > var_3.func_B491) {
-    var_01 = var_3.func_B491;
+  if(var_1 > var_3.var_B491) {
+    var_1 = var_3.var_B491;
   }
 
-  var_04 = (var_01 - var_3.func_B75B) / (var_3.func_B491 - var_3.func_B75B);
-  var_05 = var_3.func_B7CB + var_04 * (var_3.func_B4C9 - var_3.func_B7CB);
-  var_06 = var_3.func_1545;
+  var_4 = (var_1 - var_3.var_B75B) / (var_3.var_B491 - var_3.var_B75B);
+  var_5 = var_3.var_B7CB + var_4 * (var_3.var_B4C9 - var_3.var_B7CB);
+  var_6 = var_3.var_1545;
 
-  if(var_06 > var_05) {
-    var_06 = var_05;
+  if(var_6 > var_5) {
+    var_6 = var_5;
   }
 
-  self vehicle_setspeed(var_05, var_06, var_02);
+  self vehicle_setspeed(var_5, var_6, var_2);
 }
 
-func_BA1D(var_00) {
+func_BA1D(var_0) {
   self notify("stop_MonitorSpeed");
   self endon("death");
   self endon("stop_MonitorSpeed");
   self endon("goal");
-  var_01 = "none";
+  var_1 = "none";
 
   for(;;) {
-    var_02 = distance(self.origin, var_00);
-    func_12F22("final", var_02);
+    var_2 = distance(self.origin, var_0);
+    func_12F22("final", var_2);
     scripts\engine\utility::waitframe();
   }
 }
 
-func_BA1C(var_00, var_01) {
+func_BA1C(var_0, var_1) {
   self notify("stop_MonitorSpeed");
   self endon("death");
   self endon("stop_MonitorSpeed");
-  var_02 = "none";
-  var_03 = vectornormalize(var_01 - var_00);
-  var_04 = distance(var_00, var_01);
+  var_2 = "none";
+  var_3 = vectornormalize(var_1 - var_0);
+  var_4 = distance(var_0, var_1);
 
   for(;;) {
-    var_05 = distance(self.origin, var_00);
-    var_06 = vectornormalize(var_00 - self.origin);
-    var_07 = vectordot(var_03, var_06);
-    var_08 = 0;
+    var_5 = distance(self.origin, var_0);
+    var_6 = vectornormalize(var_0 - self.origin);
+    var_7 = vectordot(var_3, var_6);
+    var_8 = 0;
 
-    if(var_07 < 0.707 || var_04 < 300) {
-      var_08 = 1;
+    if(var_7 < 0.707 || var_4 < 300) {
+      var_8 = 1;
     }
 
-    if(var_08) {
-      if(var_05 < level.func_109C4["medium_sharpturn"].func_B75B) {
-        func_12F22("near_sharpturn", var_05);
+    if(var_8) {
+      if(var_5 < level.var_109C4["medium_sharpturn"].var_B75B) {
+        func_12F22("near_sharpturn", var_5);
       } else {
-        func_12F22("medium_sharpturn", var_05);
+        func_12F22("medium_sharpturn", var_5);
       }
-    } else if(var_05 < level.func_109C4["near"].func_B491)
-      func_12F22("near", var_05);
-    else if(var_05 < level.func_109C4["medium"].func_B491) {
-      func_12F22("medium", var_05);
+    } else if(var_5 < level.var_109C4["near"].var_B491)
+      func_12F22("near", var_5);
+    else if(var_5 < level.var_109C4["medium"].var_B491) {
+      func_12F22("medium", var_5);
     } else {
-      func_12F22("far", var_05);
+      func_12F22("far", var_5);
     }
 
     scripts\engine\utility::waitframe();
   }
 }
 
-doflyby(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(var_00)) {
+doflyby(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed()) {
     return;
   }
-  var_06 = getflyheightoffset(var_01);
+  var_6 = getflyheightoffset(var_1);
 
-  if(isDefined(var_04)) {
-    var_06 = var_06 + var_04;
+  if(isDefined(var_4)) {
+    var_6 = var_6 + var_4;
   }
 
-  foreach(var_08 in level.littlebirds) {
+  foreach(var_8 in level.littlebirds) {
     if(isDefined(var_8.droptype)) {
-      var_06 = var_06 + 128;
+      var_6 = var_6 + 128;
     }
   }
 
-  var_10 = var_01 * (1, 1, 0) + (0, 0, var_06);
-  var_11 = getpathstart(var_10, var_02);
-  var_12 = getpathend(var_10, var_02);
-  var_10 = var_10 + anglesToForward((0, var_02, 0)) * -50;
-  var_13 = helisetup(var_00, var_11, var_10);
+  var_10 = var_1 * (1, 1, 0) + (0, 0, var_6);
+  var_11 = getpathstart(var_10, var_2);
+  var_12 = getpathend(var_10, var_2);
+  var_10 = var_10 + anglesToForward((0, var_2, 0)) * -50;
+  var_13 = helisetup(var_0, var_11, var_10);
 
   if(isDefined(level.highlightairdrop) && level.highlightairdrop) {
     var_13 hudoutlineenable(3, 0, 0);
@@ -1660,9 +1660,9 @@ doflyby(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   var_13 endon("death");
   var_13 thread func_4FC2();
-  var_13.droptype = var_03;
+  var_13.droptype = var_3;
   var_13 setvehgoalpos(var_10, 1);
-  var_13 thread dropthecrate(var_01, var_03, var_06, 0, var_05, var_11);
+  var_13 thread dropthecrate(var_1, var_3, var_6, 0, var_5, var_11);
   wait 2;
   var_13 vehicle_setspeed(75, 40);
   var_13 setyawspeed(180, 180, 180, 0.3);
@@ -1671,7 +1671,7 @@ doflyby(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_13 notify("drop_crate");
   var_13 setvehgoalpos(var_12, 1);
   var_13 vehicle_setspeed(300, 75);
-  var_13.func_AB32 = 1;
+  var_13.var_AB32 = 1;
   var_13 waittill("goal");
   var_13 notify("leaving");
   var_13 notify("delete");
@@ -1684,40 +1684,40 @@ func_4FC2() {
   scripts\mp\utility::decrementfauxvehiclecount();
 }
 
-domegaflyby(var_00, var_01, var_02, var_03) {
-  level thread doflyby(var_00, var_01, var_02, var_03, 0);
+domegaflyby(var_0, var_1, var_2, var_3) {
+  level thread doflyby(var_0, var_1, var_2, var_3, 0);
   wait(randomintrange(1, 2));
-  level thread doflyby(var_00, var_01 + (128, 128, 0), var_02, var_03, 128);
+  level thread doflyby(var_0, var_1 + (128, 128, 0), var_2, var_3, 128);
   wait(randomintrange(1, 2));
-  level thread doflyby(var_00, var_01 + (172, 256, 0), var_02, var_03, 256);
+  level thread doflyby(var_0, var_1 + (172, 256, 0), var_2, var_3, 256);
   wait(randomintrange(1, 2));
-  level thread doflyby(var_00, var_01 + (64, 0, 0), var_02, var_03, 0);
+  level thread doflyby(var_0, var_1 + (64, 0, 0), var_2, var_3, 0);
 }
 
-doc130flyby(var_00, var_01, var_02, var_03) {
-  var_04 = 18000;
-  var_05 = 3000;
-  var_06 = vectortoyaw(var_01 - var_0.origin);
-  var_07 = (0, var_06, 0);
-  var_08 = getflyheightoffset(var_01);
-  var_09 = var_01 + anglesToForward(var_07) * (-1 * var_04);
-  var_09 = var_09 * (1, 1, 0) + (0, 0, var_08);
-  var_10 = var_01 + anglesToForward(var_07) * var_04;
-  var_10 = var_10 * (1, 1, 0) + (0, 0, var_08);
-  var_11 = length(var_09 - var_10);
-  var_12 = var_11 / var_05;
-  var_13 = c130setup(var_00, var_09, var_10);
-  var_13.veh_speed = var_05;
-  var_13.droptype = var_03;
+doc130flyby(var_0, var_1, var_2, var_3) {
+  var_4 = 18000;
+  var_5 = 3000;
+  var_6 = vectortoyaw(var_1 - var_0.origin);
+  var_7 = (0, var_6, 0);
+  var_8 = getflyheightoffset(var_1);
+  var_9 = var_1 + anglesToForward(var_7) * (-1 * var_4);
+  var_9 = var_9 * (1, 1, 0) + (0, 0, var_8);
+  var_10 = var_1 + anglesToForward(var_7) * var_4;
+  var_10 = var_10 * (1, 1, 0) + (0, 0, var_8);
+  var_11 = length(var_9 - var_10);
+  var_12 = var_11 / var_5;
+  var_13 = c130setup(var_0, var_9, var_10);
+  var_13.veh_speed = var_5;
+  var_13.droptype = var_3;
   var_13 playLoopSound("veh_ac130_dist_loop");
-  var_13.angles = var_07;
-  var_14 = anglesToForward(var_07);
+  var_13.angles = var_7;
+  var_14 = anglesToForward(var_7);
   var_13 moveto(var_10, var_12, 0, 0);
-  var_15 = distance2d(var_13.origin, var_01);
+  var_15 = distance2d(var_13.origin, var_1);
   var_16 = 0;
 
   for(;;) {
-    var_17 = distance2d(var_13.origin, var_01);
+    var_17 = distance2d(var_13.origin, var_1);
 
     if(var_17 < var_15) {
       var_15 = var_17;
@@ -1727,7 +1727,7 @@ doc130flyby(var_00, var_01, var_02, var_03) {
     if(var_17 < 320) {
       break;
     } else if(var_17 < 768) {
-      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_01, 1500);
+      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_1, 1500);
 
       if(!var_16) {
         var_13 playSound("veh_ac130_sonic_boom");
@@ -1740,45 +1740,45 @@ doc130flyby(var_00, var_01, var_02, var_03) {
 
   wait 0.05;
   var_18 = (0, 0, 0);
-  var_19[0] = var_13 thread dropthecrate(var_01, var_03, var_08, 0, undefined, var_09, var_18);
+  var_19[0] = var_13 thread dropthecrate(var_1, var_3, var_8, 0, undefined, var_9, var_18);
   wait 0.05;
   var_13 notify("drop_crate");
-  var_20 = var_01 + anglesToForward(var_07) * (var_04 * 1.5);
+  var_20 = var_1 + anglesToForward(var_7) * (var_4 * 1.5);
   var_13 moveto(var_20, var_12 / 2, 0, 0);
   wait 6;
   var_13 delete();
 }
 
-domegac130flyby(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = 24000;
-  var_06 = 2000;
-  var_07 = vectortoyaw(var_01 - var_0.origin);
-  var_08 = (0, var_07, 0);
-  var_09 = anglesToForward(var_08);
+domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 24000;
+  var_6 = 2000;
+  var_7 = vectortoyaw(var_1 - var_0.origin);
+  var_8 = (0, var_7, 0);
+  var_9 = anglesToForward(var_8);
 
-  if(isDefined(var_04)) {
-    var_01 = var_01 + var_09 * var_04;
+  if(isDefined(var_4)) {
+    var_1 = var_1 + var_9 * var_4;
   }
 
-  var_10 = getflyheightoffset(var_01);
-  var_11 = var_01 + anglesToForward(var_08) * (-1 * var_05);
+  var_10 = getflyheightoffset(var_1);
+  var_11 = var_1 + anglesToForward(var_8) * (-1 * var_5);
   var_11 = var_11 * (1, 1, 0) + (0, 0, var_10);
-  var_12 = var_01 + anglesToForward(var_08) * var_05;
+  var_12 = var_1 + anglesToForward(var_8) * var_5;
   var_12 = var_12 * (1, 1, 0) + (0, 0, var_10);
   var_13 = length(var_11 - var_12);
-  var_14 = var_13 / var_06;
-  var_15 = c130setup(var_00, var_11, var_12);
-  var_15.veh_speed = var_06;
-  var_15.droptype = var_03;
+  var_14 = var_13 / var_6;
+  var_15 = c130setup(var_0, var_11, var_12);
+  var_15.veh_speed = var_6;
+  var_15.droptype = var_3;
   var_15 playLoopSound("veh_ac130_dist_loop");
-  var_15.angles = var_08;
-  var_09 = anglesToForward(var_08);
+  var_15.angles = var_8;
+  var_9 = anglesToForward(var_8);
   var_15 moveto(var_12, var_14, 0, 0);
-  var_16 = distance2d(var_15.origin, var_01);
+  var_16 = distance2d(var_15.origin, var_1);
   var_17 = 0;
 
   for(;;) {
-    var_18 = distance2d(var_15.origin, var_01);
+    var_18 = distance2d(var_15.origin, var_1);
 
     if(var_18 < var_16) {
       var_16 = var_18;
@@ -1788,7 +1788,7 @@ domegac130flyby(var_00, var_01, var_02, var_03, var_04) {
     if(var_18 < 256) {
       break;
     } else if(var_18 < 768) {
-      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_01, 1500);
+      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_1, 1500);
 
       if(!var_17) {
         var_15 playSound("veh_ac130_sonic_boom");
@@ -1800,49 +1800,49 @@ domegac130flyby(var_00, var_01, var_02, var_03, var_04) {
   }
 
   wait 0.05;
-  var_19[0] = var_15 thread dropthecrate(var_01, var_03, var_10, 0, undefined, var_11);
+  var_19[0] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11);
   wait 0.05;
   var_15 notify("drop_crate");
   wait 0.05;
-  var_19[1] = var_15 thread dropthecrate(var_01, var_03, var_10, 0, undefined, var_11, undefined, var_19);
+  var_19[1] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_19);
   wait 0.05;
   var_15 notify("drop_crate");
   wait 0.05;
-  var_19[2] = var_15 thread dropthecrate(var_01, var_03, var_10, 0, undefined, var_11, undefined, var_19);
+  var_19[2] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_19);
   wait 0.05;
   var_15 notify("drop_crate");
   wait 0.05;
-  var_19[3] = var_15 thread dropthecrate(var_01, var_03, var_10, 0, undefined, var_11, undefined, var_19);
+  var_19[3] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_19);
   wait 0.05;
   var_15 notify("drop_crate");
   wait 4;
   var_15 delete();
 }
 
-dropnuke(var_00, var_01, var_02) {
-  var_03 = 24000;
-  var_04 = 2000;
-  var_05 = randomint(360);
-  var_06 = (0, var_05, 0);
-  var_07 = getflyheightoffset(var_00);
-  var_08 = var_00 + anglesToForward(var_06) * (-1 * var_03);
-  var_08 = var_08 * (1, 1, 0) + (0, 0, var_07);
-  var_09 = var_00 + anglesToForward(var_06) * var_03;
-  var_09 = var_09 * (1, 1, 0) + (0, 0, var_07);
-  var_10 = length(var_08 - var_09);
-  var_11 = var_10 / var_04;
-  var_12 = c130setup(var_01, var_08, var_09);
-  var_12.veh_speed = var_04;
-  var_12.droptype = var_02;
+dropnuke(var_0, var_1, var_2) {
+  var_3 = 24000;
+  var_4 = 2000;
+  var_5 = randomint(360);
+  var_6 = (0, var_5, 0);
+  var_7 = getflyheightoffset(var_0);
+  var_8 = var_0 + anglesToForward(var_6) * (-1 * var_3);
+  var_8 = var_8 * (1, 1, 0) + (0, 0, var_7);
+  var_9 = var_0 + anglesToForward(var_6) * var_3;
+  var_9 = var_9 * (1, 1, 0) + (0, 0, var_7);
+  var_10 = length(var_8 - var_9);
+  var_11 = var_10 / var_4;
+  var_12 = c130setup(var_1, var_8, var_9);
+  var_12.veh_speed = var_4;
+  var_12.droptype = var_2;
   var_12 playLoopSound("veh_ac130_dist_loop");
-  var_12.angles = var_06;
-  var_13 = anglesToForward(var_06);
-  var_12 moveto(var_09, var_11, 0, 0);
+  var_12.angles = var_6;
+  var_13 = anglesToForward(var_6);
+  var_12 moveto(var_9, var_11, 0, 0);
   var_14 = 0;
-  var_15 = distance2d(var_12.origin, var_00);
+  var_15 = distance2d(var_12.origin, var_0);
 
   for(;;) {
-    var_16 = distance2d(var_12.origin, var_00);
+    var_16 = distance2d(var_12.origin, var_0);
 
     if(var_16 < var_15) {
       var_15 = var_16;
@@ -1852,7 +1852,7 @@ dropnuke(var_00, var_01, var_02) {
     if(var_16 < 256) {
       break;
     } else if(var_16 < 768) {
-      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_00, 1500);
+      scripts\mp\shellshock::_earthquake(0.15, 1.5, var_0, 1500);
 
       if(!var_14) {
         var_12 playSound("veh_ac130_sonic_boom");
@@ -1863,88 +1863,88 @@ dropnuke(var_00, var_01, var_02) {
     wait 0.05;
   }
 
-  var_12 thread dropthecrate(var_00, var_02, var_07, 0, "nuke", var_08);
+  var_12 thread dropthecrate(var_0, var_2, var_7, 0, "nuke", var_8);
   wait 0.05;
   var_12 notify("drop_crate");
   wait 4;
   var_12 delete();
 }
 
-stoploopafter(var_00) {
+stoploopafter(var_0) {
   self endon("death");
-  wait(var_00);
+  wait(var_0);
   self stoploopsound();
 }
 
-playlooponent(var_00) {
-  var_01 = spawn("script_origin", (0, 0, 0));
-  var_01 hide();
-  var_01 endon("death");
-  thread scripts\engine\utility::delete_on_death(var_01);
+playlooponent(var_0) {
+  var_1 = spawn("script_origin", (0, 0, 0));
+  var_1 hide();
+  var_1 endon("death");
+  thread scripts\engine\utility::delete_on_death(var_1);
   var_1.origin = self.origin;
   var_1.angles = self.angles;
-  var_01 linkto(self);
-  var_01 playLoopSound(var_00);
-  self waittill("stop sound" + var_00);
-  var_01 stoploopsound(var_00);
-  var_01 delete();
+  var_1 linkto(self);
+  var_1 playLoopSound(var_0);
+  self waittill("stop sound" + var_0);
+  var_1 stoploopsound(var_0);
+  var_1 delete();
 }
 
-c130setup(var_00, var_01, var_02) {
-  var_03 = vectortoangles(var_02 - var_01);
-  var_04 = spawnplane(var_00, "script_model", var_01, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
-  var_04 setModel("vehicle_ac130_low_mp");
+c130setup(var_0, var_1, var_2) {
+  var_3 = vectortoangles(var_2 - var_1);
+  var_4 = spawnplane(var_0, "script_model", var_1, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
+  var_4 setModel("vehicle_ac130_low_mp");
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return;
   }
-  var_4.owner = var_00;
+  var_4.owner = var_0;
   var_4.team = var_0.team;
-  level.c130 = var_04;
-  return var_04;
+  level.c130 = var_4;
+  return var_4;
 }
 
-helisetup(var_00, var_01, var_02) {
-  var_03 = vectortoangles(var_02 - var_01);
-  var_04 = "littlebird_mp";
+helisetup(var_0, var_1, var_2) {
+  var_3 = vectortoangles(var_2 - var_1);
+  var_4 = "littlebird_mp";
 
   if(isDefined(level.vehicleoverride)) {
-    var_04 = level.vehicleoverride;
+    var_4 = level.vehicleoverride;
   }
 
-  var_05 = spawnhelicopter(var_00, var_01, var_03, var_04, "vehicle_aas_72x_killstreak");
+  var_5 = spawnhelicopter(var_0, var_1, var_3, var_4, "vehicle_aas_72x_killstreak");
 
-  if(!isDefined(var_05)) {
+  if(!isDefined(var_5)) {
     return;
   }
   var_5.maxhealth = 500;
-  var_5.owner = var_00;
+  var_5.owner = var_0;
   var_5.team = var_0.team;
   var_5.isairdrop = 1;
-  var_05 thread watchtimeout();
-  var_05 thread heli_existence();
-  var_05 thread helidestroyed();
-  var_05 thread scripts\mp\killstreaks\helicopter::heli_damage_monitor("airdrop");
-  var_05 setmaxpitchroll(45, 85);
-  var_05 vehicle_setspeed(250, 175);
+  var_5 thread watchtimeout();
+  var_5 thread heli_existence();
+  var_5 thread helidestroyed();
+  var_5 thread scripts\mp\killstreaks\helicopter::heli_damage_monitor("airdrop");
+  var_5 setmaxpitchroll(45, 85);
+  var_5 vehicle_setspeed(250, 175);
   var_5.helitype = "airdrop";
-  var_05 scripts\mp\killstreaks\utility::func_1843(var_5.helitype, "Killstreak_Air", var_00, 1);
-  var_05 hidepart("tag_wings");
-  return var_05;
+  var_5 scripts\mp\killstreaks\utility::func_1843(var_5.helitype, "Killstreak_Air", var_0, 1);
+  var_5 hidepart("tag_wings");
+  return var_5;
 }
 
-watchtimeout(var_00) {
+watchtimeout(var_0) {
   level endon("game_ended");
   self endon("leaving");
   self endon("helicopter_gone");
   self endon("death");
-  var_01 = 25.0;
+  var_1 = 25.0;
 
-  if(isDefined(var_00)) {
-    var_01 = var_00;
+  if(isDefined(var_0)) {
+    var_1 = var_0;
   }
 
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
   self notify("death");
 }
 
@@ -1969,161 +1969,161 @@ helidestroyed() {
 }
 
 lbexplode() {
-  var_00 = self.origin + (0, 0, 1) - self.origin;
-  playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, var_00);
+  var_0 = self.origin + (0, 0, 1) - self.origin;
+  playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, var_0);
   self playSound("exp_helicopter_fuel");
   self notify("explode");
   scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 
-lbspin(var_00) {
+lbspin(var_0) {
   self endon("explode");
   playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   playFXOnTag(level.chopper_fx["fire"]["trail"]["medium"], self, "tail_rotor_jnt");
-  self setyawspeed(var_00, var_00, var_00);
+  self setyawspeed(var_0, var_0, var_0);
 
   while(isDefined(self)) {
-    self settargetyaw(self.angles[1] + var_00 * 0.9);
+    self settargetyaw(self.angles[1] + var_0 * 0.9);
     wait 1;
   }
 }
 
 nukecapturethink() {
   while(isDefined(self)) {
-    self waittill("trigger", var_00);
+    self waittill("trigger", var_0);
 
-    if(!var_00 isonground()) {
+    if(!var_0 isonground()) {
       continue;
     }
-    if(!useholdthink(var_00)) {
+    if(!useholdthink(var_0)) {
       continue;
     }
-    self notify("captured", var_00);
+    self notify("captured", var_0);
   }
 }
 
-crateothercapturethink(var_00, var_01) {
+crateothercapturethink(var_0, var_1) {
   self endon("restarting_physics");
-  var_02 = self;
-  var_03 = undefined;
+  var_2 = self;
+  var_3 = undefined;
 
-  if(scripts\mp\utility\game::istrue(var_01)) {
-    var_02 = self.fakeuseobj;
-    var_03 = self.fakeuseobj;
+  if(scripts\mp\utility\game::istrue(var_1)) {
+    var_2 = self.fakeuseobj;
+    var_3 = self.fakeuseobj;
   }
 
   while(isDefined(self)) {
-    var_02 waittill("trigger", var_04);
+    var_2 waittill("trigger", var_4);
 
-    if(isDefined(self.owner) && var_04 == self.owner) {
+    if(isDefined(self.owner) && var_4 == self.owner) {
       continue;
     }
-    if(!validateopenconditions(var_04)) {
+    if(!validateopenconditions(var_4)) {
       continue;
     }
     if(isDefined(level.overridecrateusetime)) {
-      var_05 = level.overridecrateusetime;
+      var_5 = level.overridecrateusetime;
     } else {
-      var_05 = undefined;
+      var_5 = undefined;
     }
 
     var_4.iscapturingcrate = 1;
 
-    if(!scripts\mp\utility\game::istrue(var_01)) {
-      var_03 = createuseent();
+    if(!scripts\mp\utility\game::istrue(var_1)) {
+      var_3 = createuseent();
     }
 
-    var_06 = var_03 useholdthink(var_04, var_05, var_00);
+    var_6 = var_3 useholdthink(var_4, var_5, var_0);
 
-    if(!scripts\mp\utility\game::istrue(var_01)) {
-      if(isDefined(var_03)) {
-        var_03 delete();
+    if(!scripts\mp\utility\game::istrue(var_1)) {
+      if(isDefined(var_3)) {
+        var_3 delete();
       }
     }
 
-    if(!isDefined(var_04)) {
+    if(!isDefined(var_4)) {
       return;
     }
-    if(!var_06) {
+    if(!var_6) {
       var_4.iscapturingcrate = 0;
       continue;
     }
 
     var_4.iscapturingcrate = 0;
-    self notify("captured", var_04);
+    self notify("captured", var_4);
   }
 }
 
-crateownercapturethink(var_00) {
+crateownercapturethink(var_0) {
   self endon("restarting_physics");
 
   while(isDefined(self)) {
-    self waittill("trigger", var_01);
+    self waittill("trigger", var_1);
 
-    if(isDefined(self.owner) && var_01 != self.owner) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       continue;
     }
-    if(!validateopenconditions(var_01)) {
+    if(!validateopenconditions(var_1)) {
       continue;
     }
     var_1.iscapturingcrate = 1;
 
-    if(!useholdthink(var_01, 500, var_00)) {
+    if(!useholdthink(var_1, 500, var_0)) {
       var_1.iscapturingcrate = 0;
       continue;
     }
 
     var_1.iscapturingcrate = 0;
-    self notify("captured", var_01);
+    self notify("captured", var_1);
   }
 }
 
-crateallcapturethink(var_00) {
+crateallcapturethink(var_0) {
   self endon("restarting_physics");
   self.crateuseents = [];
 
   while(isDefined(self)) {
-    self waittill("trigger", var_01);
+    self waittill("trigger", var_1);
 
-    if(!validateopenconditions(var_01)) {
+    if(!validateopenconditions(var_1)) {
       continue;
     }
     if(isDefined(level.overridecrateusetime)) {
-      var_02 = level.overridecrateusetime;
+      var_2 = level.overridecrateusetime;
     } else {
-      var_02 = undefined;
+      var_2 = undefined;
     }
 
-    childthread cratealluselogic(var_01, var_02, var_00);
+    childthread cratealluselogic(var_1, var_2, var_0);
   }
 }
 
-cratealluselogic(var_00, var_01, var_02) {
+cratealluselogic(var_0, var_1, var_2) {
   var_0.iscapturingcrate = 1;
   self.crateuseents[var_0.name] = createuseent();
-  var_03 = self.crateuseents[var_0.name];
-  var_04 = self.crateuseents[var_0.name] useholdthink(var_00, var_01, var_02, self);
+  var_3 = self.crateuseents[var_0.name];
+  var_4 = self.crateuseents[var_0.name] useholdthink(var_0, var_1, var_2, self);
 
-  if(isDefined(self.crateuseents) && isDefined(var_03)) {
-    self.crateuseents = scripts\mp\utility\game::func_22B1(self.crateuseents, var_03);
-    var_03 delete();
+  if(isDefined(self.crateuseents) && isDefined(var_3)) {
+    self.crateuseents = scripts\mp\utility\game::func_22B1(self.crateuseents, var_3);
+    var_3 delete();
   }
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_0.iscapturingcrate = 0;
 
-  if(var_04) {
-    self notify("captured", var_00);
+  if(var_4) {
+    self notify("captured", var_0);
   }
 }
 
 updatecraftingomnvars() {
   self.inuse = 0;
 
-  foreach(var_01 in self.crateuseents) {
+  foreach(var_1 in self.crateuseents) {
     if(var_1.inuse) {
       self.inuse = 1;
       break;
@@ -2131,8 +2131,8 @@ updatecraftingomnvars() {
   }
 }
 
-validateopenconditions(var_00) {
-  if((self.cratetype == "airdrop_juggernaut_recon" || self.cratetype == "airdrop_juggernaut" || self.cratetype == "airdrop_juggernaut_maniac") && var_00 scripts\mp\utility\game::isjuggernaut()) {
+validateopenconditions(var_0) {
+  if((self.cratetype == "airdrop_juggernaut_recon" || self.cratetype == "airdrop_juggernaut" || self.cratetype == "airdrop_juggernaut_maniac") && var_0 scripts\mp\utility\game::isjuggernaut()) {
     return 0;
   }
 
@@ -2140,13 +2140,13 @@ validateopenconditions(var_00) {
     return 0;
   }
 
-  var_01 = var_00 getcurrentweapon();
+  var_1 = var_0 getcurrentweapon();
 
-  if(scripts\mp\utility\game::iskillstreakweapon(var_01) && !scripts\mp\utility\game::isjuggernautweapon(var_01)) {
+  if(scripts\mp\utility\game::iskillstreakweapon(var_1) && !scripts\mp\utility\game::isjuggernautweapon(var_1)) {
     return 0;
   }
 
-  if(isbot(var_00)) {
+  if(isbot(var_0)) {
     if(level.gametype != "grnd" && !scripts\mp\bots\bots_killstreaks::bot_is_killstreak_supported(self.cratetype)) {
       return 0;
     }
@@ -2159,73 +2159,73 @@ validateopenconditions(var_00) {
   return 1;
 }
 
-killstreakcratethink(var_00) {
+killstreakcratethink(var_0) {
   self endon("restarting_physics");
   self endon("death");
 
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
-    var_01 = game["strings"][self.cratetype + "_hint"];
+    var_1 = game["strings"][self.cratetype + "_hint"];
   } else {
-    var_01 = &"PLATFORM_GET_KILLSTREAK";
+    var_1 = &"PLATFORM_GET_KILLSTREAK";
   }
 
-  var_02 = -10000;
-  var_03 = undefined;
+  var_2 = -10000;
+  var_3 = undefined;
 
   if(!scripts\mp\utility\game::istrue(level.gameended)) {
-    if(var_00 == "dronedrop_reroll") {
-      var_03 = 1;
+    if(var_0 == "dronedrop_reroll") {
+      var_3 = 1;
 
       if(isDefined(game["strings"][self.cratetype + "_rerollHint"])) {
-        var_01 = game["strings"][self.cratetype + "_rerollHint"];
+        var_1 = game["strings"][self.cratetype + "_rerollHint"];
       }
     }
 
-    cratesetupforuse(var_01, scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype), var_03, var_02);
+    cratesetupforuse(var_1, scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype), var_3, var_2);
   }
 
-  thread crateothercapturethink(undefined, var_03);
+  thread crateothercapturethink(undefined, var_3);
   thread crateownercapturethink();
   thread cratewatchgameover();
 
   for(;;) {
-    self waittill("captured", var_04);
+    self waittill("captured", var_4);
 
-    if(isplayer(var_04)) {
-      var_04 setclientomnvar("ui_securing", 0);
+    if(isplayer(var_4)) {
+      var_4 setclientomnvar("ui_securing", 0);
       var_4.ui_securing = undefined;
     }
 
     if(isDefined(self.owner)) {
-      if(var_04 == self.owner) {
-        var_04 thread scripts\mp\missions::func_D991("ch_scorestreak_uses_dronepackage");
+      if(var_4 == self.owner) {
+        var_4 thread scripts\mp\missions::func_D991("ch_scorestreak_uses_dronepackage");
       } else if(!level.teambased || var_4.team != self.team) {
-        switch (var_00) {
+        switch (var_0) {
           case "airdrop_osprey_gunner":
           case "airdrop_escort":
           case "airdrop_support":
           case "airdrop_assault":
-            var_04 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
-            var_04 thread hijacknotify(self, "airdrop");
+            var_4 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
+            var_4 thread hijacknotify(self, "airdrop");
             break;
           case "airdrop_sentry_minigun":
-            var_04 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
-            var_04 thread hijacknotify(self, "sentry");
+            var_4 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
+            var_4 thread hijacknotify(self, "sentry");
             break;
           case "airdrop_remote_tank":
-            var_04 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
-            var_04 thread hijacknotify(self, "remote_tank");
+            var_4 thread scripts\mp\missions::processchallenge("hijacker_airdrop");
+            var_4 thread hijacknotify(self, "remote_tank");
             break;
           case "airdrop_mega":
-            var_04 thread scripts\mp\missions::processchallenge("hijacker_airdrop_mega");
-            var_04 thread hijacknotify(self, "emergency_airdrop");
+            var_4 thread scripts\mp\missions::processchallenge("hijacker_airdrop_mega");
+            var_4 thread hijacknotify(self, "emergency_airdrop");
             break;
           case "dronedrop_highroll":
           case "jackaldrop":
           case "dronedrop_reroll":
           case "dronedrop":
-            var_04 thread hijacknotify(self, "dronedrop");
-            var_04 thread scripts\mp\missions::func_D991("ch_hijack");
+            var_4 thread hijacknotify(self, "dronedrop");
+            var_4 thread scripts\mp\missions::func_D991("ch_hijack");
             break;
         }
       } else if(level.gametype != "grnd") {
@@ -2234,33 +2234,33 @@ killstreakcratethink(var_00) {
       }
     }
 
-    var_04 playlocalsound("ammo_crate_use");
-    var_05 = undefined;
+    var_4 playlocalsound("ammo_crate_use");
+    var_5 = undefined;
 
     if(scripts\mp\utility\game::istrue(level.enablevariantdrops)) {
-      var_05 = scripts\mp\killstreak_loot::getrandomvariantfrombaseref(self.cratetype);
+      var_5 = scripts\mp\killstreak_loot::getrandomvariantfrombaseref(self.cratetype);
     }
 
-    if(isDefined(var_05)) {
-      var_06 = scripts\mp\killstreak_loot::getpassiveperk(var_05);
-      var_04 thread scripts\mp\killstreaks\killstreaks::awardkillstreak(self.cratetype, self.owner, var_06, var_05);
-      var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_05);
-      var_08 = self.cratetype + "_" + var_07;
-      var_04 scripts\mp\hud_message::showkillstreaksplash(var_08, undefined, 1);
+    if(isDefined(var_5)) {
+      var_6 = scripts\mp\killstreak_loot::getpassiveperk(var_5);
+      var_4 thread scripts\mp\killstreaks\killstreaks::awardkillstreak(self.cratetype, self.owner, var_6, var_5);
+      var_7 = scripts\mp\killstreak_loot::getrarityforlootitem(var_5);
+      var_8 = self.cratetype + "_" + var_7;
+      var_4 scripts\mp\hud_message::showkillstreaksplash(var_8, undefined, 1);
     } else {
-      var_04 thread scripts\mp\killstreaks\killstreaks::givekillstreak(self.cratetype, 0, 0, self.owner);
-      var_04 scripts\mp\hud_message::showkillstreaksplash(self.cratetype, undefined, 1);
+      var_4 thread scripts\mp\killstreaks\killstreaks::givekillstreak(self.cratetype, 0, 0, self.owner);
+      var_4 scripts\mp\hud_message::showkillstreaksplash(self.cratetype, undefined, 1);
     }
 
     if(scripts\mp\killstreaks\killstreaks::getstreakcost(self.cratetype) > 1000) {
-      var_04 thread scripts\mp\missions::func_D991("ch_dronepackage_jackpot");
+      var_4 thread scripts\mp\missions::func_D991("ch_dronepackage_jackpot");
     }
 
     deletecrateold();
   }
 }
 
-killstreakbombcratethink(var_00) {
+killstreakbombcratethink(var_0) {
   self endon("restarting_physics");
   self endon("death");
 
@@ -2268,16 +2268,16 @@ killstreakbombcratethink(var_00) {
     self.owner endon("disconnect");
   }
 
-  var_01 = [ &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", &"KILLSTREAKS_HINTS_THOR_PICKUP", &"KILLSTREAKS_HINTS_RC8_PICKUP", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP"];
-  var_02 = scripts\engine\utility::random(var_01);
-  var_03 = undefined;
+  var_1 = [ &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", &"KILLSTREAKS_HINTS_THOR_PICKUP", &"KILLSTREAKS_HINTS_RC8_PICKUP", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP"];
+  var_2 = scripts\engine\utility::random(var_1);
+  var_3 = undefined;
 
   if(level.gametype == "grnd") {
-    var_03 = -10000;
+    var_3 = -10000;
   }
 
   if(!scripts\mp\utility\game::istrue(level.gameended)) {
-    cratesetupforuse(var_02, "hud_icon_trap_package", 0, var_03);
+    cratesetupforuse(var_2, "hud_icon_trap_package", 0, var_3);
   }
 
   thread crateothercapturethink();
@@ -2289,28 +2289,28 @@ killstreakbombcratethink(var_00) {
     self.killcament moveto(self.origin + (0, 0, 30), 0.05);
   }
 
-  self waittill("captured", var_04);
+  self waittill("captured", var_4);
 
-  if(isplayer(var_04)) {
-    var_04 setclientomnvar("ui_securing", 0);
+  if(isplayer(var_4)) {
+    var_4 setclientomnvar("ui_securing", 0);
     var_4.ui_securing = undefined;
   }
 
-  var_04 playlocalsound("ammo_crate_use");
-  var_05 = self.owner scripts\mp\utility\game::_launchgrenade("dummy_spike_mp", self.origin, self.origin, 2);
+  var_4 playlocalsound("ammo_crate_use");
+  var_5 = self.owner scripts\mp\utility\game::_launchgrenade("dummy_spike_mp", self.origin, self.origin, 2);
 
   if(!isDefined(var_5.weapon_name)) {
     var_5.weapon_name = "dummy_spike_mp";
   }
 
-  var_05 linkto(self);
-  var_06 = 0.1;
-  var_07 = 0;
+  var_5 linkto(self);
+  var_6 = 0.1;
+  var_7 = 0;
 
-  while(var_07 < 0.8) {
+  while(var_7 < 0.8) {
     playLoopSound(self.origin + (0, 0, 10), "mp_dronepackage_trap_warning");
-    var_07 = var_07 + var_06;
-    wait(var_06);
+    var_7 = var_7 + var_6;
+    wait(var_6);
   }
 
   playFX(scripts\engine\utility::getfx("crate_explode"), self.origin);
@@ -2348,27 +2348,27 @@ dronewatchgameover() {
   }
 }
 
-nukecratethink(var_00) {
+nukecratethink(var_0) {
   self endon("restarting_physics");
   self endon("death");
   cratesetupforuse(&"PLATFORM_CALL_NUKE", scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype));
   thread nukecapturethink();
 
   for(;;) {
-    self waittill("captured", var_01);
-    var_01 thread scripts\mp\killstreaks\killstreaks::func_729F(self.cratetype);
-    level notify("nukeCaptured", var_01);
+    self waittill("captured", var_1);
+    var_1 thread scripts\mp\killstreaks\killstreaks::func_729F(self.cratetype);
+    level notify("nukeCaptured", var_1);
 
     if(isDefined(level.gtnw) && level.gtnw) {
       var_1.capturednuke = 1;
     }
 
-    var_01 playlocalsound("ammo_crate_use");
+    var_1 playlocalsound("ammo_crate_use");
     deletecrateold();
   }
 }
 
-juggernautcratethink(var_00) {
+juggernautcratethink(var_0) {
   self endon("restarting_physics");
   self endon("death");
   cratesetupforuse(game["strings"][self.cratetype + "_hint"], scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype));
@@ -2376,76 +2376,76 @@ juggernautcratethink(var_00) {
   thread crateownercapturethink();
 
   for(;;) {
-    self waittill("captured", var_01);
+    self waittill("captured", var_1);
 
-    if(isDefined(self.owner) && var_01 != self.owner) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       if(!level.teambased || var_1.team != self.team) {
         if(self.cratetype == "airdrop_juggernaut_maniac") {
-          var_01 thread hijacknotify(self, "maniac");
+          var_1 thread hijacknotify(self, "maniac");
         } else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
-          var_01 thread hijacknotify(self, self.cratetype);
+          var_1 thread hijacknotify(self, self.cratetype);
         } else {
-          var_01 thread hijacknotify(self, "juggernaut");
+          var_1 thread hijacknotify(self, "juggernaut");
         }
       } else if(self.cratetype == "airdrop_juggernaut_maniac")
-        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_01);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_1);
       else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
-        self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_01);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_1);
       } else {
-        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_01);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_1);
       }
     }
 
-    var_01 playlocalsound("ammo_crate_use");
-    var_02 = "juggernaut";
+    var_1 playlocalsound("ammo_crate_use");
+    var_2 = "juggernaut";
 
     switch (self.cratetype) {
       case "airdrop_juggernaut":
-        var_02 = "juggernaut";
+        var_2 = "juggernaut";
         break;
       case "airdrop_juggernaut_recon":
-        var_02 = "juggernaut_recon";
+        var_2 = "juggernaut_recon";
         break;
       case "airdrop_juggernaut_maniac":
-        var_02 = "juggernaut_maniac";
+        var_2 = "juggernaut_maniac";
         break;
       default:
         if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
-          var_02 = self.cratetype;
+          var_2 = self.cratetype;
         }
 
         break;
     }
 
-    var_01 thread scripts\mp\killstreaks\juggernaut::givejuggernaut(var_02);
+    var_1 thread scripts\mp\killstreaks\juggernaut::givejuggernaut(var_2);
     deletecrateold();
   }
 }
 
-sentrycratethink(var_00) {
+sentrycratethink(var_0) {
   self endon("death");
   cratesetupforuse(game["strings"]["sentry_hint"], scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype));
   thread crateothercapturethink();
   thread crateownercapturethink();
 
   for(;;) {
-    self waittill("captured", var_01);
+    self waittill("captured", var_1);
 
-    if(isDefined(self.owner) && var_01 != self.owner) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       if(!level.teambased || var_1.team != self.team) {
-        if(issubstr(var_00, "airdrop_sentry")) {
-          var_01 thread hijacknotify(self, "sentry");
+        if(issubstr(var_0, "airdrop_sentry")) {
+          var_1 thread hijacknotify(self, "sentry");
         } else {
-          var_01 thread hijacknotify(self, "emergency_airdrop");
+          var_1 thread hijacknotify(self, "emergency_airdrop");
         }
       } else {
         self.owner thread scripts\mp\utility\game::giveunifiedpoints("killstreak_giveaway", undefined, int(scripts\mp\killstreaks\killstreaks::getstreakcost("sentry") / 10) * 50);
-        self.owner scripts\mp\hud_message::showsplash("giveaway_sentry", undefined, var_01);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_sentry", undefined, var_1);
       }
     }
 
-    var_01 playlocalsound("ammo_crate_use");
-    var_01 thread sentryusetracker();
+    var_1 playlocalsound("ammo_crate_use");
+    var_1 thread sentryusetracker();
     deletecrateold();
   }
 }
@@ -2454,8 +2454,8 @@ deletecrateold() {
   self notify("crate_deleting");
 
   if(isDefined(self.usedby)) {
-    foreach(var_01 in self.usedby) {
-      var_01 setclientomnvar("ui_securing", 0);
+    foreach(var_1 in self.usedby) {
+      var_1 setclientomnvar("ui_securing", 0);
       var_1.ui_securing = undefined;
     }
   }
@@ -2480,10 +2480,10 @@ deletecrateold() {
     playFX(scripts\engine\utility::getfx("airdrop_crate_destroy"), self.origin);
   }
 
-  if(isDefined(self.func_BE6F)) {
+  if(isDefined(self.var_BE6F)) {
     self notify("nav_obstacle_destroyed");
-    _destroynavobstacle(self.func_BE6F);
-    self.func_BE6F = undefined;
+    _destroynavobstacle(self.var_BE6F);
+    self.var_BE6F = undefined;
   }
 
   self delete();
@@ -2495,51 +2495,51 @@ sentryusetracker() {
   }
 }
 
-hijacknotify(var_00, var_01) {
-  self notify("hijacker", var_01, var_0.owner);
+hijacknotify(var_0, var_1) {
+  self notify("hijacker", var_1, var_0.owner);
 }
 
-refillammo(var_00) {
-  var_01 = self getweaponslistall();
+refillammo(var_0) {
+  var_1 = self getweaponslistall();
 
-  if(var_00) {}
+  if(var_0) {}
 
-  foreach(var_03 in var_01) {
-    if(issubstr(var_03, "grenade") || getsubstr(var_03, 0, 2) == "gl") {
-      if(!var_00 || self getammocount(var_03) >= 1) {
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3, "grenade") || getsubstr(var_3, 0, 2) == "gl") {
+      if(!var_0 || self getammocount(var_3) >= 1) {
         continue;
       }
     }
 
-    self givemaxammo(var_03);
+    self givemaxammo(var_3);
   }
 }
 
-useholdthink(var_00, var_01, var_02, var_03) {
-  scripts\mp\movers::script_mover_link_to_use_object(var_00);
-  var_00 scripts\engine\utility::allow_weapon(0);
+useholdthink(var_0, var_1, var_2, var_3) {
+  scripts\mp\movers::script_mover_link_to_use_object(var_0);
+  var_0 scripts\engine\utility::allow_weapon(0);
   self.curprogress = 0;
   self.inuse = 1;
   self.userate = 0;
 
-  if(isDefined(var_03)) {
-    var_03 updatecraftingomnvars();
+  if(isDefined(var_3)) {
+    var_3 updatecraftingomnvars();
   }
 
-  if(isDefined(var_01)) {
-    self.usetime = var_01;
+  if(isDefined(var_1)) {
+    self.usetime = var_1;
   } else {
     self.usetime = 3000;
   }
 
-  var_04 = useholdthinkloop(var_00);
+  var_4 = useholdthinkloop(var_0);
 
-  if(isalive(var_00)) {
-    var_00 scripts\engine\utility::allow_weapon(1);
+  if(isalive(var_0)) {
+    var_0 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_00)) {
-    scripts\mp\movers::script_mover_unlink_from_use_object(var_00);
+  if(isDefined(var_0)) {
+    scripts\mp\movers::script_mover_unlink_from_use_object(var_0);
   }
 
   if(!isDefined(self)) {
@@ -2549,17 +2549,17 @@ useholdthink(var_00, var_01, var_02, var_03) {
   self.inuse = 0;
   self.curprogress = 0;
 
-  if(isDefined(var_03)) {
-    var_03 updatecraftingomnvars();
+  if(isDefined(var_3)) {
+    var_3 updatecraftingomnvars();
   }
 
-  return var_04;
+  return var_4;
 }
 
-useholdthinkloop(var_00) {
-  while(var_00 scripts\mp\killstreaks\deployablebox::isplayerusingbox(self)) {
-    if(!var_00 scripts\mp\movers::script_mover_use_can_link(self)) {
-      var_00 scripts\mp\gameobjects::updateuiprogress(self, 0);
+useholdthinkloop(var_0) {
+  while(var_0 scripts\mp\killstreaks\deployablebox::isplayerusingbox(self)) {
+    if(!var_0 scripts\mp\movers::script_mover_use_can_link(self)) {
+      var_0 scripts\mp\gameobjects::updateuiprogress(self, 0);
       return 0;
     }
 
@@ -2571,42 +2571,42 @@ useholdthinkloop(var_00) {
       self.userate = 1;
     }
 
-    var_00 scripts\mp\gameobjects::updateuiprogress(self, 1);
+    var_0 scripts\mp\gameobjects::updateuiprogress(self, 1);
 
     if(self.curprogress >= self.usetime) {
-      var_00 scripts\mp\gameobjects::updateuiprogress(self, 0);
-      return scripts\mp\utility\game::isreallyalive(var_00);
+      var_0 scripts\mp\gameobjects::updateuiprogress(self, 0);
+      return scripts\mp\utility\game::isreallyalive(var_0);
     }
 
     wait 0.05;
   }
 
   if(isDefined(self)) {
-    var_00 scripts\mp\gameobjects::updateuiprogress(self, 0);
+    var_0 scripts\mp\gameobjects::updateuiprogress(self, 0);
   }
 
   return 0;
 }
 
 createuseent() {
-  var_00 = spawn("script_origin", self.origin);
+  var_0 = spawn("script_origin", self.origin);
   var_0.curprogress = 0;
   var_0.usetime = 0;
   var_0.userate = 3000;
   var_0.inuse = 0;
   var_0.id = self.id;
-  var_00 linkto(self);
-  var_00 thread deleteuseent(self);
-  return var_00;
+  var_0 linkto(self);
+  var_0 thread deleteuseent(self);
+  return var_0;
 }
 
-deleteuseent(var_00) {
+deleteuseent(var_0) {
   self endon("death");
-  var_00 waittill("death");
+  var_0 waittill("death");
 
   if(isDefined(self.usedby)) {
-    foreach(var_02 in self.usedby) {
-      var_02 setclientomnvar("ui_securing", 0);
+    foreach(var_2 in self.usedby) {
+      var_2 setclientomnvar("ui_securing", 0);
       var_2.ui_securing = undefined;
     }
   }
@@ -2620,36 +2620,36 @@ airdropdetonateonstuck() {
   self detonate();
 }
 
-throw_linked_care_packages(var_00, var_01, var_02, var_03) {
+throw_linked_care_packages(var_0, var_1, var_2, var_3) {
   if(isDefined(level.carepackages)) {
-    foreach(var_05 in level.carepackages) {
+    foreach(var_5 in level.carepackages) {
       if(isDefined(var_5.inuse) && var_5.inuse) {
         continue;
       }
-      var_06 = var_05 getlinkedparent();
+      var_6 = var_5 getlinkedparent();
 
-      if(isDefined(var_06) && var_06 == var_00) {
-        thread spawn_new_care_package(var_05, var_01, var_02);
+      if(isDefined(var_6) && var_6 == var_0) {
+        thread spawn_new_care_package(var_5, var_1, var_2);
 
-        if(isDefined(var_03)) {
-          scripts\engine\utility::delaythread(1.0, ::remove_care_packages_in_volume, var_03);
+        if(isDefined(var_3)) {
+          scripts\engine\utility::delaythread(1.0, ::remove_care_packages_in_volume, var_3);
         }
       }
     }
   }
 }
 
-spawn_new_care_package(var_00, var_01, var_02) {
-  var_03 = var_0.owner;
-  var_04 = var_0.droptype;
-  var_05 = var_0.cratetype;
-  var_06 = var_0.origin;
-  var_00 deletecrateold();
-  var_07 = var_03 createairdropcrate(var_03, var_04, var_05, var_06 + var_01, var_06 + var_01);
+spawn_new_care_package(var_0, var_1, var_2) {
+  var_3 = var_0.owner;
+  var_4 = var_0.droptype;
+  var_5 = var_0.cratetype;
+  var_6 = var_0.origin;
+  var_0 deletecrateold();
+  var_7 = var_3 createairdropcrate(var_3, var_4, var_5, var_6 + var_1, var_6 + var_1);
   var_7.droppingtoground = 1;
-  var_07 thread[[level.cratetypes[var_7.droptype][var_7.cratetype].func]](var_7.droptype);
+  var_7 thread[[level.cratetypes[var_7.droptype][var_7.cratetype].func]](var_7.droptype);
   scripts\engine\utility::waitframe();
-  var_07 physicslaunchserver(var_7.origin, var_02);
+  var_7 physicslaunchserver(var_7.origin, var_2);
 
   if(isbot(var_7.owner)) {
     wait 0.1;
@@ -2657,11 +2657,11 @@ spawn_new_care_package(var_00, var_01, var_02) {
   }
 }
 
-remove_care_packages_in_volume(var_00) {
+remove_care_packages_in_volume(var_0) {
   if(isDefined(level.carepackages)) {
-    foreach(var_02 in level.carepackages) {
-      if(isDefined(var_02) && isDefined(var_2.friendlymodel) && var_2.friendlymodel istouching(var_00)) {
-        var_02 deletecrateold();
+    foreach(var_2 in level.carepackages) {
+      if(isDefined(var_2) && isDefined(var_2.friendlymodel) && var_2.friendlymodel istouching(var_0)) {
+        var_2 deletecrateold();
       }
     }
   }

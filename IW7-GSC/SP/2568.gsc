@@ -4,7 +4,7 @@
  * Script: SP\2568.gsc
 ************************/
 
-func_97EC(param_00) {
+func_97EC(var_0) {
   self.var_71A8 = ::func_7FD3;
   self.var_71AE = ::isaimedataimtarget;
   self.var_71CA = ::resetmisstime_code;
@@ -22,7 +22,7 @@ func_97EC(param_00) {
   return level.success;
 }
 
-func_103F5(param_00) {
+func_103F5(var_0) {
   if(isDefined(self.var_4D5D)) {
     lib_0A15::setupdestructibledoors();
     thread lib_0A1E::func_111A9();
@@ -50,8 +50,8 @@ func_7FD3() {
     return self.var_527B;
   }
 
-  var_00 = scripts\aitypes\bt_util::func_75();
-  return var_00;
+  var_0 = scripts\aitypes\bt_util::func_75();
+  return var_0;
 }
 
 isaimedataimtarget() {
@@ -66,16 +66,16 @@ func_129AA() {
   self _meth_81D5();
 }
 
-saygenericdialogue(param_00) {
-  scripts\anim\face::saygenericdialogue(param_00);
+saygenericdialogue(var_0) {
+  scripts\anim\face::saygenericdialogue(var_0);
 }
 
 _meth_811D() {
   return scripts\anim\shared::_meth_811C();
 }
 
-_meth_81E3(param_00) {
-  return param_00 _meth_851F();
+_meth_81E3(var_0) {
+  return var_0 _meth_851F();
 }
 
 func_4F67() {
@@ -83,40 +83,40 @@ func_4F67() {
 }
 
 func_7EFC() {
-  var_00 = undefined;
-  var_01 = 1;
-  var_02 = 1;
-  var_03 = 1;
+  var_0 = undefined;
+  var_1 = 1;
+  var_2 = 1;
+  var_3 = 1;
   if(isDefined(self.target_getindexoftarget) && scripts\asm\shared_utility::isatcovernode()) {
-    var_01 = self.target_getindexoftarget getrandomattachments("stand");
-    var_02 = self.target_getindexoftarget getrandomattachments("crouch");
-    var_03 = self.target_getindexoftarget getrandomattachments("prone");
-  } else if(!scripts\asm\asm_bb::bb_moverequested() && isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.pos)) {
-    var_04 = distancesquared(self.origin, self.var_1198.shootparams.pos);
-    if(var_04 > 262144 && self getteleportlonertargetplayer("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
-      if(sighttracepassed(self.origin + (0, 0, 32), self.var_1198.shootparams.pos, 0, undefined)) {
+    var_1 = self.target_getindexoftarget getrandomattachments("stand");
+    var_2 = self.target_getindexoftarget getrandomattachments("crouch");
+    var_3 = self.target_getindexoftarget getrandomattachments("prone");
+  } else if(!scripts\asm\asm_bb::bb_moverequested() && isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
+    var_4 = distancesquared(self.origin, self._blackboard.shootparams.pos);
+    if(var_4 > 262144 && self getteleportlonertargetplayer("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
+      if(sighttracepassed(self.origin + (0, 0, 32), self._blackboard.shootparams.pos, 0, undefined)) {
         return "crouch";
       }
     }
   }
 
   for(;;) {
-    if(self getteleportlonertargetplayer("stand") && var_01) {
+    if(self getteleportlonertargetplayer("stand") && var_1) {
       return "stand";
     }
 
-    if(self getteleportlonertargetplayer("crouch") && var_02) {
+    if(self getteleportlonertargetplayer("crouch") && var_2) {
       return "crouch";
     }
 
-    if(self getteleportlonertargetplayer("prone") && var_03) {
+    if(self getteleportlonertargetplayer("prone") && var_3) {
       return "prone";
     }
 
-    if(!var_01 || !var_02 || !var_03) {
-      var_01 = 1;
-      var_02 = 1;
-      var_03 = 1;
+    if(!var_1 || !var_2 || !var_3) {
+      var_1 = 1;
+      var_2 = 1;
+      var_3 = 1;
       continue;
     }
 
@@ -147,8 +147,8 @@ func_3DE5() {
     level.var_18D5[self.team] = 0;
   }
 
-  var_00 = isDefined(self.var_18CC) && self.var_18CC;
-  if(!var_00 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
+  var_0 = isDefined(self.var_18CC) && self.var_18CC;
+  if(!var_0 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
     return 0;
   }
 
@@ -186,12 +186,12 @@ func_2543() {
   return 0;
 }
 
-func_2542(param_00) {
+func_2542(var_0) {
   if(!scripts\aitypes\combat::func_FFC2()) {
     return level.failure;
   }
 
-  switch (self.var_3135.instancedata[param_00]) {
+  switch (self.bt.instancedata[var_0]) {
     case 0:
       if(self getzonearray(32)) {
         return level.success;
@@ -221,9 +221,9 @@ func_2542(param_00) {
       break;
   }
 
-  self.var_3135.instancedata[param_00]++;
-  if(self.var_3135.instancedata[param_00] > 60) {
-    self.var_3135.instancedata[param_00] = 0;
+  self.bt.instancedata[var_0]++;
+  if(self.bt.instancedata[var_0] > 60) {
+    self.bt.instancedata[var_0] = 0;
   }
 
   return level.running;
@@ -238,34 +238,34 @@ func_12E93() {
     return level.success;
   }
 
-  var_00 = gettime();
-  if(!isDefined(self.var_1198.var_7362) || self.var_1198.var_7362 > var_00) {
-    var_01 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
-    var_02 = 0;
-    var_03 = 10000;
-    var_04 = 4194304;
-    var_05 = 5;
-    self.var_1198.var_7362 = var_00 + 10000;
-    self.var_1198.var_7366 = "combat";
-    foreach(var_07 in var_01) {
-      var_08 = distancesquared(self lastknownpos(var_07), self.origin);
-      if(var_08 > var_04) {
+  var_0 = gettime();
+  if(!isDefined(self._blackboard.var_7362) || self._blackboard.var_7362 > var_0) {
+    var_1 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
+    var_2 = 0;
+    var_3 = 10000;
+    var_4 = 4194304;
+    var_5 = 5;
+    self._blackboard.var_7362 = var_0 + 10000;
+    self._blackboard.var_7366 = "combat";
+    foreach(var_7 in var_1) {
+      var_8 = distancesquared(self lastknownpos(var_7), self.origin);
+      if(var_8 > var_4) {
         continue;
       }
 
-      var_09 = gettime() - self lastknowntime(var_07);
-      if(var_09 > var_03) {
+      var_9 = gettime() - self lastknowntime(var_7);
+      if(var_9 > var_3) {
         continue;
       }
 
-      var_02++;
-      if(var_07.unittype == "c8" || var_07.unittype == "c12") {
-        self.var_1198.var_7366 = "frantic";
+      var_2++;
+      if(var_7.unittype == "c8" || var_7.unittype == "c12") {
+        self._blackboard.var_7366 = "frantic";
         break;
       }
 
-      if(var_02 >= 3) {
-        self.var_1198.var_7366 = "frantic";
+      if(var_2 >= 3) {
+        self._blackboard.var_7366 = "frantic";
         break;
       }
     }
@@ -274,8 +274,8 @@ func_12E93() {
   return level.success;
 }
 
-func_103F3(param_00) {
-  switch (param_00.updategamerprofileall) {
+func_103F3(var_0) {
+  switch (var_0.updategamerprofileall) {
     case "helmet":
       if(isDefined(self.var_C065) && self.var_C065) {}
 

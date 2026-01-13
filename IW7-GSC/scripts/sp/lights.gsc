@@ -5,31 +5,31 @@
 *********************************/
 
 init() {
-  var_00 = getEntArray("script_light", "targetname");
-  var_01 = getEntArray("script_light_toggle", "targetname");
-  var_02 = getEntArray("script_light_flicker", "targetname");
-  var_03 = getEntArray("script_light_pulse", "targetname");
-  var_04 = getEntArray("generic_double_strobe", "targetname");
-  var_05 = getEntArray("burning_trash_fire", "targetname");
-  var_06 = getEntArray("generic_pulsing", "targetname");
-  scripts\engine\utility::array_thread(var_00, ::init_light_generic_iw7);
-  scripts\engine\utility::array_thread(var_01, ::init_light_generic_iw7);
-  scripts\engine\utility::array_thread(var_02, ::init_light_flicker);
-  scripts\engine\utility::array_thread(var_03, ::init_light_pulse_iw7);
-  scripts\engine\utility::array_thread(var_04, ::func_774A);
-  scripts\engine\utility::array_thread(var_05, ::func_3299);
-  scripts\engine\utility::array_thread(var_06, ::func_7765);
+  var_0 = getEntArray("script_light", "targetname");
+  var_1 = getEntArray("script_light_toggle", "targetname");
+  var_2 = getEntArray("script_light_flicker", "targetname");
+  var_3 = getEntArray("script_light_pulse", "targetname");
+  var_4 = getEntArray("generic_double_strobe", "targetname");
+  var_5 = getEntArray("burning_trash_fire", "targetname");
+  var_6 = getEntArray("generic_pulsing", "targetname");
+  scripts\engine\utility::array_thread(var_0, ::init_light_generic_iw7);
+  scripts\engine\utility::array_thread(var_1, ::init_light_generic_iw7);
+  scripts\engine\utility::array_thread(var_2, ::init_light_flicker);
+  scripts\engine\utility::array_thread(var_3, ::init_light_pulse_iw7);
+  scripts\engine\utility::array_thread(var_4, ::func_774A);
+  scripts\engine\utility::array_thread(var_5, ::func_3299);
+  scripts\engine\utility::array_thread(var_6, ::func_7765);
 }
 
-init_light_generic_iw7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   wait(0.05);
-  self.var_99E6 = func_95A8([self.script_intensity_01, param_00, self _meth_8134()]);
-  self.var_438F = func_95A8([self.var_ED31, param_01, self _meth_8131()]);
-  self.var_99E7 = func_95A8([self.var_EDEE, param_02, 0]);
-  self.var_4390 = func_95A8([self.var_ED32, param_03, (0, 0, 0)]);
-  self.var_C14B = func_95A8([self.var_EDFF, param_04]);
-  self.var_C14C = func_95A8([self.var_EE00, param_05]);
-  self.var_10D0C = func_95A8([self.var_EECC, param_06]);
+  self.var_99E6 = func_95A8([self.script_intensity_01, var_0, self _meth_8134()]);
+  self.var_438F = func_95A8([self.var_ED31, var_1, self _meth_8131()]);
+  self.var_99E7 = func_95A8([self.var_EDEE, var_2, 0]);
+  self.var_4390 = func_95A8([self.var_ED32, var_3, (0, 0, 0)]);
+  self.var_C14B = func_95A8([self.var_EDFF, var_4]);
+  self.var_C14C = func_95A8([self.var_EE00, var_5]);
+  self.var_10D0C = func_95A8([self.var_EECC, var_6]);
   self.var_ACA5 = func_95A8([self.script_type, "generic"]);
   self.var_50D3 = issubstr(self.var_ACA5, "delaystart");
   if(!scripts\sp\utility::func_65DF("light_on")) {
@@ -40,8 +40,8 @@ init_light_generic_iw7(param_00, param_01, param_02, param_03, param_04, param_0
   self.var_12BB6 = [];
   self.var_AD22 = [];
   self.var_127C9 = [];
-  var_08 = scripts\sp\utility::func_7A8F();
-  foreach(var_0A in var_08) {
+  var_8 = scripts\sp\utility::func_7A8F();
+  foreach(var_0A in var_8) {
     if(func_9C37(var_0A)) {
       self.var_AD22[self.var_AD22.size] = var_0A;
       continue;
@@ -94,7 +94,7 @@ init_light_generic_iw7(param_00, param_01, param_02, param_03, param_04, param_0
 
   self.var_9586 = 1;
   self notify("script_light_init_complete");
-  if(isDefined(param_07) && param_07) {
+  if(isDefined(var_7) && var_7) {
     return;
   }
 
@@ -175,33 +175,33 @@ func_ACA2() {
   }
 }
 
-init_light_flicker(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D, param_0E) {
-  init_light_generic_iw7(param_00, param_01, param_04, param_05, param_09, param_0A, param_0B, 1);
+init_light_flicker(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E) {
+  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_0A, var_0B, 1);
   if(getdvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
-  func_B27A(param_02, param_03, param_06, param_07, param_08, param_0C, param_0D);
-  if(isDefined(param_0E) && param_0E) {
+  func_B27A(var_2, var_3, var_6, var_7, var_8, var_0C, var_0D);
+  if(isDefined(var_0E) && var_0E) {
     return;
   }
 
   thread func_10C9A();
 }
 
-func_B27A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  init_light_type(param_05);
-  self.var_1098E = func_95A8([self.var_EEBF, param_04, 1]);
-  self.var_C4B5 = max(func_95A8([self.var_ED75, param_06, 3]) / self.var_1098E, 0.25);
+func_B27A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  init_light_type(var_5);
+  self.var_1098E = func_95A8([self.var_EEBF, var_4, 1]);
+  self.var_C4B5 = max(func_95A8([self.var_ED75, var_6, 3]) / self.var_1098E, 0.25);
   if((isDefined(self.var_EF17) && !isDefined(self.var_EF16)) || !isDefined(self.var_EF17) && isDefined(self.var_EF16)) {
     self.var_8E57 = max(func_95A8([self.var_EF17, self.var_EF16]) / self.var_1098E, 0.05);
   } else {
-    self.var_13585 = max(func_95A8([self.var_EF17, param_00, 0.05]) / self.var_1098E, 0.05);
-    self.var_13584 = max(func_95A8([self.var_EF16, param_01, 0.1]) / self.var_1098E, 0.1);
+    self.var_13585 = max(func_95A8([self.var_EF17, var_0, 0.05]) / self.var_1098E, 0.05);
+    self.var_13584 = max(func_95A8([self.var_EF16, var_1, 0.1]) / self.var_1098E, 0.1);
     if(self.var_13585 > self.var_13584) {
-      var_07 = self.var_13584;
+      var_7 = self.var_13584;
       self.var_13584 = self.var_13585;
-      self.var_13585 = var_07;
+      self.var_13585 = var_7;
     }
   }
 
@@ -210,12 +210,12 @@ func_B27A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     return;
   }
 
-  self.var_13587 = max(func_95A8([self.var_EF19, param_02, 0.05]) / self.var_1098E, 0.05);
-  self.var_13586 = max(func_95A8([self.var_EF18, param_03, 0.75]) / self.var_1098E, 0.1);
+  self.var_13587 = max(func_95A8([self.var_EF19, var_2, 0.05]) / self.var_1098E, 0.05);
+  self.var_13586 = max(func_95A8([self.var_EF18, var_3, 0.75]) / self.var_1098E, 0.1);
   if(self.var_13587 > self.var_13586) {
-    var_07 = self.var_13586;
+    var_7 = self.var_13586;
     self.var_13586 = self.var_13587;
-    self.var_13587 = var_07;
+    self.var_13587 = var_7;
   }
 }
 
@@ -380,7 +380,7 @@ func_AC89() {
   }
 }
 
-func_AC8A(param_00, param_01) {
+func_AC8A(var_0, var_1) {
   self notify("stop_flicker");
   self endon("stop_flicker");
   if(isDefined(self.var_12712)) {
@@ -391,19 +391,19 @@ func_AC8A(param_00, param_01) {
     level endon(self.var_C14C);
   }
 
-  if(!isDefined(param_00) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
+  if(!isDefined(var_0) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
     level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
   }
 
   for(;;) {
-    func_ACA4(param_01);
+    func_ACA4(var_1);
     if(isDefined(self.var_8E57)) {
       wait(self.var_8E57);
     } else {
       wait(randomfloatrange(self.var_13585, self.var_13584));
     }
 
-    func_ACA3(param_01);
+    func_ACA3(var_1);
     if(isDefined(self.var_ADA3)) {
       wait(self.var_ADA3);
       continue;
@@ -413,56 +413,56 @@ func_AC8A(param_00, param_01) {
   }
 }
 
-init_light_pulse_iw7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D, param_0E) {
-  init_light_generic_iw7(param_00, param_01, param_04, param_05, param_09, param_0A, undefined, 1);
+init_light_pulse_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E) {
+  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_0A, undefined, 1);
   if(getdvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
-  func_B27B(param_02, param_03, param_06, param_07, param_08, param_0C, param_0D, param_0B);
-  if(isDefined(param_0E) && param_0E) {
+  func_B27B(var_2, var_3, var_6, var_7, var_8, var_0C, var_0D, var_0B);
+  if(isDefined(var_0E) && var_0E) {
     return;
   }
 
   thread func_10C9B();
 }
 
-func_B27B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  self.var_10D0C = func_95A8([self.var_EECC, param_07, 1]);
-  init_light_type(param_05);
-  self.var_1098E = func_95A8([self.var_EEBF, param_04, 1]);
-  self.var_C4B5 = max(func_95A8([self.var_ED75, param_06, 3]) / self.var_1098E, 3);
+func_B27B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  self.var_10D0C = func_95A8([self.var_EECC, var_7, 1]);
+  init_light_type(var_5);
+  self.var_1098E = func_95A8([self.var_EEBF, var_4, 1]);
+  self.var_C4B5 = max(func_95A8([self.var_ED75, var_6, 3]) / self.var_1098E, 3);
   if((isDefined(self.var_EF17) && !isDefined(self.var_EF16)) || !isDefined(self.var_EF17) && isDefined(self.var_EF16)) {
     self.var_8E57 = max(func_95A8([self.var_EF17, self.var_EF16]) / self.var_1098E, 0.05);
   } else {
-    self.var_13585 = max(func_95A8([self.var_EF17, param_00, 0.05]) / self.var_1098E, 0.05);
-    self.var_13584 = max(func_95A8([self.var_EF16, param_01, 0.5]) / self.var_1098E, 0.1);
+    self.var_13585 = max(func_95A8([self.var_EF17, var_0, 0.05]) / self.var_1098E, 0.05);
+    self.var_13584 = max(func_95A8([self.var_EF16, var_1, 0.5]) / self.var_1098E, 0.1);
     if(self.var_13585 > self.var_13584) {
-      var_08 = self.var_13584;
+      var_8 = self.var_13584;
       self.var_13584 = self.var_13585;
-      self.var_13585 = var_08;
+      self.var_13585 = var_8;
     }
   }
 
   if((isDefined(self.var_EF19) && !isDefined(self.var_EF18)) || !isDefined(self.var_EF19) && isDefined(self.var_EF18)) {
     self.var_ADA3 = max(func_95A8([self.var_EF19, self.var_EF18]) / self.var_1098E, 0.05);
-    var_09 = int(self.var_ADA3 * 20);
-    self.var_10F88 = 2 / var_09;
-    self.var_99EA = 2 * self.var_99E6 - self.var_99E7 / var_09;
+    var_9 = int(self.var_ADA3 * 20);
+    self.var_10F88 = 2 / var_9;
+    self.var_99EA = 2 * self.var_99E6 - self.var_99E7 / var_9;
     return;
   }
 
-  self.var_13587 = max(func_95A8([self.var_EF19, param_03, 0.25]) / self.var_1098E, 0.05);
-  self.var_13586 = max(func_95A8([self.var_EF18, param_04, 0.75]) / self.var_1098E, 0.1);
+  self.var_13587 = max(func_95A8([self.var_EF19, var_3, 0.25]) / self.var_1098E, 0.05);
+  self.var_13586 = max(func_95A8([self.var_EF18, var_4, 0.75]) / self.var_1098E, 0.1);
   if(self.var_13587 > self.var_13586) {
-    var_08 = self.var_13586;
+    var_8 = self.var_13586;
     self.var_13586 = self.var_13587;
-    self.var_13587 = var_08;
+    self.var_13587 = var_8;
   }
 
-  var_09 = int(self.var_13586 * 20);
-  self.var_10F88 = 2 / var_09;
-  self.var_99EA = 2 * self.var_99E6 - self.var_99E7 / var_09;
+  var_9 = int(self.var_13586 * 20);
+  self.var_10F88 = 2 / var_9;
+  self.var_99EA = 2 * self.var_99E6 - self.var_99E7 / var_9;
 }
 
 func_10C9B() {
@@ -595,7 +595,7 @@ func_AC9D() {
   }
 }
 
-func_AC9E(param_00) {
+func_AC9E(var_0) {
   self notify("stop_pulse");
   self endon("stop_pulse");
   if(isDefined(self.var_12712)) {
@@ -606,7 +606,7 @@ func_AC9E(param_00) {
     level endon(self.var_C14C);
   }
 
-  if(!isDefined(param_00) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
+  if(!isDefined(var_0) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
     level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
   }
 
@@ -627,24 +627,24 @@ func_AC9E(param_00) {
   }
 }
 
-init_light_trig(param_00) {
+init_light_trig(var_0) {
   self endon("death");
-  var_01 = undefined;
+  var_1 = undefined;
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "stop") {
-    var_01 = "trig_light_stop_" + scripts\sp\utility::string(param_00 getentitynumber());
-    param_00.var_12712 = var_01;
+    var_1 = "trig_light_stop_" + scripts\sp\utility::string(var_0 getentitynumber());
+    var_0.var_12712 = var_1;
   } else {
-    var_01 = "trig_light_start_" + scripts\sp\utility::string(param_00 getentitynumber());
-    param_00.var_12711 = var_01;
+    var_1 = "trig_light_start_" + scripts\sp\utility::string(var_0 getentitynumber());
+    var_0.var_12711 = var_1;
   }
 
   self waittill("trigger");
-  level notify(var_01);
+  level notify(var_1);
 }
 
-func_ACA4(param_00) {
+func_ACA4(var_0) {
   scripts\sp\utility::func_65E1("light_on");
-  if(isDefined(param_00) && param_00 && self.var_99E6 > 0) {
+  if(isDefined(var_0) && var_0 && self.var_99E6 > 0) {
     func_F466(randomfloatrange(self.var_99E6 * 0.25, self.var_99E6), self.var_438F);
   } else {
     func_F466(self.var_99E6, self.var_438F);
@@ -654,24 +654,24 @@ func_ACA4(param_00) {
     scripts\engine\utility::exploder(self.script_prefab_exploder);
   }
 
-  foreach(var_02 in self.var_EF3C) {
-    var_02 setscriptablepartstate("onoff", "on");
+  foreach(var_2 in self.var_EF3C) {
+    var_2 setscriptablepartstate("onoff", "on");
   }
 
   scripts\engine\utility::array_call(self.var_12BB6, ::hide);
-  foreach(var_05 in self.var_AD83) {
-    var_05 show();
-    if(isDefined(var_05.effect)) {
-      var_05.effect scripts\sp\utility::func_E2B0();
+  foreach(var_5 in self.var_AD83) {
+    var_5 show();
+    if(isDefined(var_5.effect)) {
+      var_5.effect scripts\sp\utility::func_E2B0();
     }
   }
 }
 
-func_ACA3(param_00, param_01) {
+func_ACA3(var_0, var_1) {
   scripts\sp\utility::func_65DD("light_on");
-  if(isDefined(param_01) && param_01) {
+  if(isDefined(var_1) && var_1) {
     func_F466(0, (0, 0, 0));
-  } else if(isDefined(param_00) && param_00 && self.var_99E7 > 0) {
+  } else if(isDefined(var_0) && var_0 && self.var_99E7 > 0) {
     func_F466(randomfloatrange(self.var_99E7 * 0.25, self.var_99E7), self.var_4390);
   } else {
     func_F466(self.var_99E7, self.var_4390);
@@ -681,157 +681,157 @@ func_ACA3(param_00, param_01) {
     scripts\sp\utility::func_10FEC(self.script_prefab_exploder);
   }
 
-  foreach(var_03 in self.var_EF3C) {
-    var_03 setscriptablepartstate("onoff", "off");
+  foreach(var_3 in self.var_EF3C) {
+    var_3 setscriptablepartstate("onoff", "off");
   }
 
-  foreach(var_06 in self.var_AD83) {
-    var_06 hide();
-    if(isDefined(var_06.effect)) {
-      var_06.effect scripts\engine\utility::pauseeffect();
+  foreach(var_6 in self.var_AD83) {
+    var_6 hide();
+    if(isDefined(var_6.effect)) {
+      var_6.effect scripts\engine\utility::pauseeffect();
     }
   }
 
   scripts\engine\utility::array_call(self.var_12BB6, ::show);
 }
 
-func_AC9B(param_00) {
+func_AC9B(var_0) {
   scripts\sp\utility::func_65DD("light_on");
-  var_01 = int(param_00 / 0.1);
-  for(var_02 = 1; var_02 <= var_01; var_02++) {
-    var_03 = max(0, self.var_99E6 - self.var_99EA * var_02);
-    var_04 = vectorlerp(self.var_438F, self.var_4390, self.var_10F88 * var_02);
-    func_F466(var_03, var_04);
+  var_1 = int(var_0 / 0.1);
+  for(var_2 = 1; var_2 <= var_1; var_2++) {
+    var_3 = max(0, self.var_99E6 - self.var_99EA * var_2);
+    var_4 = vectorlerp(self.var_438F, self.var_4390, self.var_10F88 * var_2);
+    func_F466(var_3, var_4);
     wait(0.05);
   }
 
-  for(var_02 = var_01; var_02 > 0; var_02--) {
-    var_03 = max(0, self.var_99E6 - self.var_99EA * var_02);
-    var_04 = vectorlerp(self.var_438F, self.var_4390, self.var_10F88 * var_02);
-    func_F466(var_03, var_04);
+  for(var_2 = var_1; var_2 > 0; var_2--) {
+    var_3 = max(0, self.var_99E6 - self.var_99EA * var_2);
+    var_4 = vectorlerp(self.var_438F, self.var_4390, self.var_10F88 * var_2);
+    func_F466(var_3, var_4);
     wait(0.05);
   }
 }
 
-func_ACD1(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = getEntArray(param_00, param_01);
-  scripts\engine\utility::array_thread(var_05, ::func_1298C, param_02, param_03, param_04);
+func_ACD1(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getEntArray(var_0, var_1);
+  scripts\engine\utility::array_thread(var_5, ::func_1298C, var_2, var_3, var_4);
 }
 
-func_1298C(param_00, param_01, param_02) {
+func_1298C(var_0, var_1, var_2) {
   if(!isDefined(self.var_9586)) {
     self waittill("script_light_init_complete");
   }
 
-  if(isDefined(param_02) && param_02) {
+  if(isDefined(var_2) && var_2) {
     self notify("stop_script_light_loop");
   }
 
-  var_03 = self.var_99E6;
-  var_04 = self.var_438F;
-  if(isDefined(param_00)) {
-    var_03 = param_00;
+  var_3 = self.var_99E6;
+  var_4 = self.var_438F;
+  if(isDefined(var_0)) {
+    var_3 = var_0;
   }
 
-  if(isDefined(param_01)) {
-    var_04 = param_01;
+  if(isDefined(var_1)) {
+    var_4 = var_1;
   }
 
   scripts\sp\utility::func_65E1("light_on");
-  func_F466(var_03, var_04);
-  foreach(var_06 in self.var_EF3C) {
-    var_06 setscriptablepartstate("onoff", "on");
+  func_F466(var_3, var_4);
+  foreach(var_6 in self.var_EF3C) {
+    var_6 setscriptablepartstate("onoff", "on");
   }
 
   scripts\engine\utility::array_call(self.var_12BB6, ::hide);
-  foreach(var_09 in self.var_AD83) {
-    var_09 show();
-    if(isDefined(var_09.effect)) {
-      var_09.effect scripts\sp\utility::func_E2B0();
+  foreach(var_9 in self.var_AD83) {
+    var_9 show();
+    if(isDefined(var_9.effect)) {
+      var_9.effect scripts\sp\utility::func_E2B0();
     }
   }
 }
 
-func_ACD0(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = getEntArray(param_00, param_01);
-  scripts\engine\utility::array_thread(var_05, ::func_12968, param_02, param_03, param_04);
+func_ACD0(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getEntArray(var_0, var_1);
+  scripts\engine\utility::array_thread(var_5, ::func_12968, var_2, var_3, var_4);
 }
 
-func_12968(param_00, param_01, param_02) {
+func_12968(var_0, var_1, var_2) {
   if(!isDefined(self.var_9586)) {
     self waittill("script_light_init_complete");
   }
 
-  if(isDefined(param_02) && param_02) {
+  if(isDefined(var_2) && var_2) {
     self notify("stop_script_light_loop");
   }
 
-  var_03 = self.var_99E7;
-  var_04 = self.var_4390;
-  if(isDefined(param_00)) {
-    var_03 = param_00;
+  var_3 = self.var_99E7;
+  var_4 = self.var_4390;
+  if(isDefined(var_0)) {
+    var_3 = var_0;
   }
 
-  if(isDefined(param_01)) {
-    var_04 = param_01;
+  if(isDefined(var_1)) {
+    var_4 = var_1;
   }
 
   scripts\sp\utility::func_65DD("light_on");
-  func_F466(var_03, var_04);
-  foreach(var_06 in self.var_EF3C) {
-    var_06 setscriptablepartstate("onoff", "off");
+  func_F466(var_3, var_4);
+  foreach(var_6 in self.var_EF3C) {
+    var_6 setscriptablepartstate("onoff", "off");
   }
 
-  foreach(var_09 in self.var_AD83) {
-    var_09 hide();
-    if(isDefined(var_09.effect)) {
-      var_09.effect scripts\engine\utility::pauseeffect();
+  foreach(var_9 in self.var_AD83) {
+    var_9 hide();
+    if(isDefined(var_9.effect)) {
+      var_9.effect scripts\engine\utility::pauseeffect();
     }
   }
 
   scripts\engine\utility::array_call(self.var_12BB6, ::show);
 }
 
-func_F466(param_00, param_01) {
-  if(isDefined(param_00)) {
-    param_00 = max(0, param_00);
+func_F466(var_0, var_1) {
+  if(isDefined(var_0)) {
+    var_0 = max(0, var_0);
   }
 
-  if(isDefined(param_01)) {
-    param_01 = (max(0, param_01[0]), max(0, param_01[1]), max(0, param_01[2]));
+  if(isDefined(var_1)) {
+    var_1 = (max(0, var_1[0]), max(0, var_1[1]), max(0, var_1[2]));
   }
 
-  if(isDefined(param_00)) {
-    self setlightintensity(param_00);
+  if(isDefined(var_0)) {
+    self setlightintensity(var_0);
     if(isDefined(self.var_AD22)) {
-      scripts\engine\utility::array_call(self.var_AD22, ::setlightintensity, param_00);
+      scripts\engine\utility::array_call(self.var_AD22, ::setlightintensity, var_0);
     }
   }
 
-  if(isDefined(param_01)) {
-    self _meth_82FC(param_01);
+  if(isDefined(var_1)) {
+    self _meth_82FC(var_1);
     if(isDefined(self.var_AD22)) {
-      scripts\engine\utility::array_call(self.var_AD22, ::_meth_82FC, param_01);
+      scripts\engine\utility::array_call(self.var_AD22, ::_meth_82FC, var_1);
     }
   }
 }
 
-func_9C37(param_00) {
-  return param_00.classname == "light_spot" || param_00.classname == "light_omni" || param_00.classname == "light";
+func_9C37(var_0) {
+  return var_0.classname == "light_spot" || var_0.classname == "light_omni" || var_0.classname == "light";
 }
 
-func_95A8(param_00) {
-  foreach(var_02 in param_00) {
-    if(isDefined(var_02)) {
-      return var_02;
+func_95A8(var_0) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-init_light_type(param_00) {
-  self.var_ACA5 = func_95A8([self.script_type, param_00, "generic"]);
+init_light_type(var_0) {
+  self.var_ACA5 = func_95A8([self.script_type, var_0, "generic"]);
   self.var_12ACF = issubstr(self.var_ACA5, "two_color");
   self.var_12AE2 = issubstr(self.var_ACA5, "on");
   self.var_12AE1 = issubstr(self.var_ACA5, "off");
@@ -848,30 +848,30 @@ func_7765() {
     return;
   }
 
-  var_00 = self _meth_8134();
-  var_01 = 0.05;
-  var_02 = var_00;
-  var_03 = 0.3;
-  var_04 = 0.6;
-  var_05 = var_00 - var_01 / var_03 / 0.05;
-  var_06 = var_00 - var_01 / var_04 / 0.05;
+  var_0 = self _meth_8134();
+  var_1 = 0.05;
+  var_2 = var_0;
+  var_3 = 0.3;
+  var_4 = 0.6;
+  var_5 = var_0 - var_1 / var_3 / 0.05;
+  var_6 = var_0 - var_1 / var_4 / 0.05;
   for(;;) {
-    var_07 = 0;
-    while(var_07 < var_04) {
-      var_02 = var_02 - var_06;
-      var_02 = clamp(var_02, 0, 100);
-      self setlightintensity(var_02);
-      var_07 = var_07 + 0.05;
+    var_7 = 0;
+    while(var_7 < var_4) {
+      var_2 = var_2 - var_6;
+      var_2 = clamp(var_2, 0, 100);
+      self setlightintensity(var_2);
+      var_7 = var_7 + 0.05;
       wait(0.05);
     }
 
     wait(1);
-    var_07 = 0;
-    while(var_07 < var_03) {
-      var_02 = var_02 + var_05;
-      var_02 = clamp(var_02, 0, 100);
-      self setlightintensity(var_02);
-      var_07 = var_07 + 0.05;
+    var_7 = 0;
+    while(var_7 < var_3) {
+      var_2 = var_2 + var_5;
+      var_2 = clamp(var_2, 0, 100);
+      self setlightintensity(var_2);
+      var_7 = var_7 + 0.05;
       wait(0.05);
     }
 
@@ -885,55 +885,55 @@ func_774A() {
     return;
   }
 
-  var_00 = self _meth_8134();
-  var_01 = 0.05;
-  var_02 = 0;
-  var_03 = undefined;
-  var_04 = undefined;
-  var_05 = 0;
-  var_06 = [];
+  var_0 = self _meth_8134();
+  var_1 = 0.05;
+  var_2 = 0;
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = 0;
+  var_6 = [];
   if(isDefined(self.script_noteworthy)) {
-    var_07 = getEntArray(self.script_noteworthy, "targetname");
-    for(var_08 = 0; var_08 < var_07.size; var_08++) {
-      if(func_9C37(var_07[var_08])) {
-        var_05 = 1;
-        var_06[var_06.size] = var_07[var_08];
+    var_7 = getEntArray(self.script_noteworthy, "targetname");
+    for(var_8 = 0; var_8 < var_7.size; var_8++) {
+      if(func_9C37(var_7[var_8])) {
+        var_5 = 1;
+        var_6[var_6.size] = var_7[var_8];
       }
 
-      if(var_07[var_08].classname == "script_model") {
-        var_03 = var_07[var_08];
-        var_04 = getent(var_03.target, "targetname");
-        var_02 = 1;
+      if(var_7[var_8].classname == "script_model") {
+        var_3 = var_7[var_8];
+        var_4 = getent(var_3.target, "targetname");
+        var_2 = 1;
       }
     }
   }
 
   for(;;) {
-    self setlightintensity(var_01);
-    if(var_02) {
-      var_03 hide();
-      var_04 show();
+    self setlightintensity(var_1);
+    if(var_2) {
+      var_3 hide();
+      var_4 show();
     }
 
     wait(0.8);
-    self setlightintensity(var_00);
-    if(var_02) {
-      var_03 show();
-      var_04 hide();
+    self setlightintensity(var_0);
+    if(var_2) {
+      var_3 show();
+      var_4 hide();
     }
 
     wait(0.1);
-    self setlightintensity(var_01);
-    if(var_02) {
-      var_03 hide();
-      var_04 show();
+    self setlightintensity(var_1);
+    if(var_2) {
+      var_3 hide();
+      var_4 show();
     }
 
     wait(0.12);
-    self setlightintensity(var_00);
-    if(var_02) {
-      var_03 show();
-      var_04 hide();
+    self setlightintensity(var_0);
+    if(var_2) {
+      var_3 show();
+      var_4 hide();
     }
 
     wait(0.1);
@@ -950,231 +950,231 @@ func_3299() {
     return;
   }
 
-  var_00 = self _meth_8134();
-  var_01 = var_00;
+  var_0 = self _meth_8134();
+  var_1 = var_0;
   for(;;) {
-    var_02 = randomfloatrange(var_00 * 0.7, var_00 * 1.2);
-    var_03 = randomfloatrange(0.3, 0.6);
-    var_03 = var_03 * 20;
-    for(var_04 = 0; var_04 < var_03; var_04++) {
-      var_05 = var_02 * var_04 / var_03 + var_01 * var_03 - var_04 / var_03;
-      self setlightintensity(var_05);
+    var_2 = randomfloatrange(var_0 * 0.7, var_0 * 1.2);
+    var_3 = randomfloatrange(0.3, 0.6);
+    var_3 = var_3 * 20;
+    for(var_4 = 0; var_4 < var_3; var_4++) {
+      var_5 = var_2 * var_4 / var_3 + var_1 * var_3 - var_4 / var_3;
+      self setlightintensity(var_5);
       wait(0.05);
     }
 
-    var_01 = var_02;
+    var_1 = var_2;
   }
 }
 
-func_11155(param_00, param_01, param_02, param_03) {
-  var_04 = 360 / param_02;
-  var_05 = 0;
+func_11155(var_0, var_1, var_2, var_3) {
+  var_4 = 360 / var_2;
+  var_5 = 0;
   for(;;) {
-    var_06 = sin(var_05 * var_04) * 0.5 + 0.5;
-    self setlightintensity(param_00 + param_01 - param_00 * var_06);
+    var_6 = sin(var_5 * var_4) * 0.5 + 0.5;
+    self setlightintensity(var_0 + var_1 - var_0 * var_6);
     wait(0.05);
-    var_05 = var_05 + 0.05;
-    if(var_05 > param_02) {
-      var_05 = var_05 - param_02;
+    var_5 = var_5 + 0.05;
+    if(var_5 > var_2) {
+      var_5 = var_5 - var_2;
     }
 
-    if(isDefined(param_03)) {
-      if(scripts\engine\utility::flag(param_03)) {
+    if(isDefined(var_3)) {
+      if(scripts\engine\utility::flag(var_3)) {
         return;
       }
     }
   }
 }
 
-func_3C57(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+func_3C57(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  thread func_3C58(param_00, param_01, param_02, param_03);
+  thread func_3C58(var_0, var_1, var_2, var_3);
 }
 
-func_3C58(param_00, param_01, param_02, param_03) {
-  var_04 = self _meth_8131();
-  var_05 = 1 / param_01 * 2 - param_02 + param_03;
-  var_06 = 0;
-  if(var_06 < param_02) {
-    var_07 = var_05 / param_02;
-    while(var_06 < param_02) {
-      var_08 = var_07 * var_06 * var_06;
-      self _meth_82FC(vectorlerp(var_04, param_00, var_08));
+func_3C58(var_0, var_1, var_2, var_3) {
+  var_4 = self _meth_8131();
+  var_5 = 1 / var_1 * 2 - var_2 + var_3;
+  var_6 = 0;
+  if(var_6 < var_2) {
+    var_7 = var_5 / var_2;
+    while(var_6 < var_2) {
+      var_8 = var_7 * var_6 * var_6;
+      self _meth_82FC(vectorlerp(var_4, var_0, var_8));
       wait(0.05);
-      var_06 = var_06 + 0.05;
+      var_6 = var_6 + 0.05;
     }
   }
 
-  while(var_06 < param_01 - param_03) {
-    var_08 = var_05 * 2 * var_06 - param_02;
-    self _meth_82FC(vectorlerp(var_04, param_00, var_08));
+  while(var_6 < var_1 - var_3) {
+    var_8 = var_5 * 2 * var_6 - var_2;
+    self _meth_82FC(vectorlerp(var_4, var_0, var_8));
     wait(0.05);
-    var_06 = var_06 + 0.05;
+    var_6 = var_6 + 0.05;
   }
 
-  var_06 = param_01 - var_06;
-  if(var_06 > 0) {
-    var_07 = var_05 / param_03;
-    while(var_06 > 0) {
-      var_08 = 1 - var_07 * var_06 * var_06;
-      self _meth_82FC(vectorlerp(var_04, param_00, var_08));
+  var_6 = var_1 - var_6;
+  if(var_6 > 0) {
+    var_7 = var_5 / var_3;
+    while(var_6 > 0) {
+      var_8 = 1 - var_7 * var_6 * var_6;
+      self _meth_82FC(vectorlerp(var_4, var_0, var_8));
       wait(0.05);
-      var_06 = var_06 - 0.05;
+      var_6 = var_6 - 0.05;
     }
   }
 
-  self _meth_82FC(param_00);
+  self _meth_82FC(var_0);
 }
 
-func_6F19(param_00, param_01) {
-  var_02 = self _meth_8134();
-  var_03 = 0;
-  var_04 = var_02;
-  var_05 = 0;
+func_6F19(var_0, var_1) {
+  var_2 = self _meth_8134();
+  var_3 = 0;
+  var_4 = var_2;
+  var_5 = 0;
   for(;;) {
-    for(var_05 = randomintrange(1, 10); var_05; var_05--) {
+    for(var_5 = randomintrange(1, 10); var_5; var_5--) {
       wait(randomfloatrange(0.05, 0.1));
-      if(var_04 > 0.2) {
-        var_04 = randomfloatrange(0, 0.3);
+      if(var_4 > 0.2) {
+        var_4 = randomfloatrange(0, 0.3);
       } else {
-        var_04 = var_02;
+        var_4 = var_2;
       }
 
-      self setlightintensity(var_04);
+      self setlightintensity(var_4);
     }
 
-    self setlightintensity(var_02);
-    wait(randomfloatrange(param_00, param_01));
+    self setlightintensity(var_2);
+    wait(randomfloatrange(var_0, var_1));
   }
 }
 
-func_11203(param_00) {
-  var_01 = 1;
-  if(isDefined(param_00.var_ED75)) {
-    var_01 = param_00.var_ED75;
+func_11203(var_0) {
+  var_1 = 1;
+  if(isDefined(var_0.var_ED75)) {
+    var_1 = var_0.var_ED75;
   }
 
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    param_00 func_F5B8(var_01);
+    var_0 waittill("trigger", var_2);
+    var_0 func_F5B8(var_1);
   }
 }
 
-func_F5B8(param_00) {
-  var_01 = getdvarint("sm_sunenable", 1);
-  var_02 = getdvarfloat("sm_sunshadowscale", 1);
-  var_03 = getdvarfloat("sm_sunsamplesizenear", 0.25);
-  var_04 = getdvarfloat("sm_qualityspotshadow", 1);
+func_F5B8(var_0) {
+  var_1 = getdvarint("sm_sunenable", 1);
+  var_2 = getdvarfloat("sm_sunshadowscale", 1);
+  var_3 = getdvarfloat("sm_sunsamplesizenear", 0.25);
+  var_4 = getdvarfloat("sm_qualityspotshadow", 1);
   if(isDefined(self.var_EED5)) {
-    var_01 = self.var_EED5;
+    var_1 = self.var_EED5;
   }
 
   if(isDefined(self.var_EED7)) {
-    var_02 = self.var_EED7;
+    var_2 = self.var_EED7;
   }
 
   if(isDefined(self.var_EED6)) {
-    var_03 = self.var_EED6;
+    var_3 = self.var_EED6;
   }
 
-  var_03 = min(max(0.016, var_03), 32);
+  var_3 = min(max(0.016, var_3), 32);
   if(isDefined(self.var_EE8E)) {
-    var_04 = self.var_EE8E;
+    var_4 = self.var_EE8E;
   }
 
-  var_05 = getdvarint("sm_sunenable", 1);
-  var_06 = getdvarfloat("sm_sunshadowscale", 1);
-  var_07 = getdvarint("sm_qualityspotshadow", 1);
-  setsaveddvar("sm_sunenable", var_01);
-  setsaveddvar("sm_sunshadowscale", var_02);
-  setsaveddvar("sm_qualityspotshadow", var_04);
-  func_ABA0(var_03, param_00);
+  var_5 = getdvarint("sm_sunenable", 1);
+  var_6 = getdvarfloat("sm_sunshadowscale", 1);
+  var_7 = getdvarint("sm_qualityspotshadow", 1);
+  setsaveddvar("sm_sunenable", var_1);
+  setsaveddvar("sm_sunshadowscale", var_2);
+  setsaveddvar("sm_qualityspotshadow", var_4);
+  func_ABA0(var_3, var_0);
 }
 
-func_ABA0(param_00, param_01) {
+func_ABA0(var_0, var_1) {
   level notify("changing_sunsamplesizenear");
   level endon("changing_sunsamplesizenear");
-  var_02 = getdvarfloat("sm_sunSampleSizeNear", 0.25);
-  if(param_00 == var_02) {
+  var_2 = getdvarfloat("sm_sunSampleSizeNear", 0.25);
+  if(var_0 == var_2) {
     return;
   }
 
-  var_03 = param_00 - var_02;
-  var_04 = param_01 / 0.05;
-  if(var_04 > 0) {
-    var_05 = var_03 / var_04;
-    var_06 = var_02;
-    for(var_07 = 0; var_07 < var_04; var_07++) {
-      var_06 = var_06 + var_05;
-      setsaveddvar("sm_sunSampleSizeNear", var_06);
+  var_3 = var_0 - var_2;
+  var_4 = var_1 / 0.05;
+  if(var_4 > 0) {
+    var_5 = var_3 / var_4;
+    var_6 = var_2;
+    for(var_7 = 0; var_7 < var_4; var_7++) {
+      var_6 = var_6 + var_5;
+      setsaveddvar("sm_sunSampleSizeNear", var_6);
       wait(0.05);
     }
   }
 
-  setsaveddvar("sm_sunSampleSizeNear", param_00);
+  setsaveddvar("sm_sunSampleSizeNear", var_0);
 }
 
-func_AB83(param_00, param_01) {
-  var_02 = int(param_01 * 20);
-  var_03 = self _meth_8134();
-  var_04 = param_00 - var_03 / var_02;
-  for(var_05 = 0; var_05 < var_02; var_05++) {
-    thread func_8924(param_00);
-    self setlightintensity(var_03 + var_05 * var_04);
+func_AB83(var_0, var_1) {
+  var_2 = int(var_1 * 20);
+  var_3 = self _meth_8134();
+  var_4 = var_0 - var_3 / var_2;
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    thread func_8924(var_0);
+    self setlightintensity(var_3 + var_5 * var_4);
     wait(0.05);
   }
 
-  var_06[0] = self;
+  var_6[0] = self;
   if(isDefined(self.var_AD22)) {
-    var_06 = scripts\engine\utility::array_combine(var_06, self.var_AD22);
+    var_6 = scripts\engine\utility::array_combine(var_6, self.var_AD22);
   }
 
-  foreach(var_08 in var_06) {
-    var_08 thread func_8924(param_00);
-    var_08 setlightintensity(param_00);
+  foreach(var_8 in var_6) {
+    var_8 thread func_8924(var_0);
+    var_8 setlightintensity(var_0);
   }
 }
 
-func_8924(param_00) {
+func_8924(var_0) {
   if(isDefined(self.script_threshold)) {
-    var_01 = param_00 > self.script_threshold;
-    foreach(var_03 in self.var_AD83) {
-      if(var_01 && !var_03.var_13438) {
-        var_03.var_13438 = var_01;
-        var_03 show();
-        if(isDefined(var_03.effect)) {
-          var_03.effect thread scripts\sp\utility::func_E2B0();
+    var_1 = var_0 > self.script_threshold;
+    foreach(var_3 in self.var_AD83) {
+      if(var_1 && !var_3.var_13438) {
+        var_3.var_13438 = var_1;
+        var_3 show();
+        if(isDefined(var_3.effect)) {
+          var_3.effect thread scripts\sp\utility::func_E2B0();
         }
 
         continue;
       }
 
-      if(!var_01 && var_03.var_13438) {
-        var_03.var_13438 = var_01;
-        var_03 hide();
-        if(isDefined(var_03.effect)) {
-          var_03.effect thread scripts\engine\utility::pauseeffect();
+      if(!var_1 && var_3.var_13438) {
+        var_3.var_13438 = var_1;
+        var_3 hide();
+        if(isDefined(var_3.effect)) {
+          var_3.effect thread scripts\engine\utility::pauseeffect();
         }
       }
     }
 
-    foreach(var_03 in self.var_12BB6) {
-      if(!var_01 && !var_03.var_13438) {
-        var_03.var_13438 = 1;
-        var_03 show();
+    foreach(var_3 in self.var_12BB6) {
+      if(!var_1 && !var_3.var_13438) {
+        var_3.var_13438 = 1;
+        var_3 show();
         continue;
       }
 
-      if(var_01 && var_03.var_13438) {
-        var_03.var_13438 = 0;
-        var_03 hide();
+      if(var_1 && var_3.var_13438) {
+        var_3.var_13438 = 0;
+        var_3 hide();
       }
     }
   }

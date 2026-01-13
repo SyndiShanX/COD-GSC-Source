@@ -23,17 +23,17 @@ turnstile_damage_listener() {
   level endon("turnstile_success");
   self setModel("cp_disco_subway_turnstyle");
   self setCanDamage(1);
-  var_00 = undefined;
+  var_0 = undefined;
   for(;;) {
-    self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
     if(isDefined(var_0A)) {
       if(var_0A == "iw7_entangler2_zm") {
-        var_02.has_turnstile = 1;
-        var_00 = var_02;
-        level.turnstile_piece = spawn("script_model", var_04);
+        var_2.has_turnstile = 1;
+        var_0 = var_2;
+        level.turnstile_piece = spawn("script_model", var_4);
         var_0B = "cp_final_subway_turnstyle_arm";
         level.turnstile_piece setModel(var_0B);
-        var_00.entangledmodel = level.turnstile_piece;
+        var_0.entangledmodel = level.turnstile_piece;
         break;
       }
     }
@@ -43,13 +43,13 @@ turnstile_damage_listener() {
   var_0C = spawnStruct();
   level.turnstile_piece.collisionfunc = ::check_turnstile_collision;
   level.turnstile_piece thread turnstile_check();
-  scripts\cp\crafted_entangler::entangleitem(var_00, var_0C, level.turnstile_piece);
+  scripts\cp\crafted_entangler::entangleitem(var_0, var_0C, level.turnstile_piece);
 }
 
-check_turnstile_collision(param_00, param_01, param_02) {
+check_turnstile_collision(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("turnstile_success");
-  param_00 waittill("collision");
+  var_0 waittill("collision");
   level.turnstile_piece delete();
   level.turnstile thread turnstile_damage_listener();
 }
@@ -57,16 +57,16 @@ check_turnstile_collision(param_00, param_01, param_02) {
 shoot_piece_into_machine() {
   for(;;) {
     level waittill("70s_activated");
-    var_00 = spawn("script_model", level.turnstile_portal.origin);
+    var_0 = spawn("script_model", level.turnstile_portal.origin);
     level.turnstile_portal.var_C5D9 = 1;
-    var_00 setModel("tag_origin_turnstile_portal");
+    var_0 setModel("tag_origin_turnstile_portal");
     level thread portal_timer(100);
-    var_01 = scripts\engine\utility::waittill_any_return("portal_timeout", "turnstile_success");
+    var_1 = scripts\engine\utility::waittill_any_return("portal_timeout", "turnstile_success");
     level.turnstile_portal.var_C5D9 = 0;
-    var_00 setscriptablepartstate("portal", "portal_end");
-    if(var_01 == "turnstile_success") {
-      foreach(var_03 in level.players) {
-        var_03 scripts\cp\zombies\achievement::update_achievement("MESSAGE_SENT", 1);
+    var_0 setscriptablepartstate("portal", "portal_end");
+    if(var_1 == "turnstile_success") {
+      foreach(var_3 in level.players) {
+        var_3 scripts\cp\zombies\achievement::update_achievement("MESSAGE_SENT", 1);
       }
 
       level.turnstile_piece delete();
@@ -75,19 +75,19 @@ shoot_piece_into_machine() {
   }
 }
 
-portal_timer(param_00) {
-  wait(param_00);
+portal_timer(var_0) {
+  wait(var_0);
   level notify("portal_timeout");
 }
 
 turnstile_check() {
   self endon("death");
-  var_00 = 0;
-  var_01 = 250;
-  var_02 = var_01 * var_01;
+  var_0 = 0;
+  var_1 = 250;
+  var_2 = var_1 * var_1;
   for(;;) {
     if(level.turnstile_portal.var_C5D9) {
-      if(distancesquared(level.turnstile_portal.origin, self.origin) < var_02) {
+      if(distancesquared(level.turnstile_portal.origin, self.origin) < var_2) {
         level thread turnstile_sent();
         return;
       }

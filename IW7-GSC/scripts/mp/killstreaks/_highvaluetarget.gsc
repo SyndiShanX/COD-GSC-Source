@@ -11,8 +11,8 @@ init() {
   game["dialog"]["hvt_gone"] = "hvt_gone";
 }
 
-func_128E9(param_00, param_01) {
-  return usehighvaluetarget(self, param_00);
+func_128E9(var_0, var_1) {
+  return usehighvaluetarget(self, var_0);
 }
 
 func_DD18() {
@@ -25,40 +25,40 @@ func_DD18() {
   return 0;
 }
 
-usehighvaluetarget(param_00, param_01) {
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+usehighvaluetarget(var_0, var_1) {
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return 0;
   }
 
-  if(param_00.team == "spectator") {
+  if(var_0.team == "spectator") {
     return 0;
   }
 
-  if(func_DD18() || isDefined(param_00.var_9264) && param_00.var_9264 >= 2) {
+  if(func_DD18() || isDefined(var_0.var_9264) && var_0.var_9264 >= 2) {
     self iprintlnbold(&"KILLSTREAKS_HVT_MAX");
     return 0;
   }
 
-  param_00 thread func_F745();
-  level thread scripts\mp\utility::teamplayercardsplash("used_hvt", param_00, param_00.team);
+  var_0 thread func_F745();
+  level thread scripts\mp\utility::teamplayercardsplash("used_hvt", var_0, var_0.team);
   return 1;
 }
 
 func_F745() {
   level endon("game_ended");
   self endon("disconnect");
-  var_00 = self.team;
+  var_0 = self.team;
   func_93F0();
-  thread func_13AA6(var_00);
+  thread func_13AA6(var_0);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(10);
   if(level.teambased) {
-    scripts\mp\utility::leaderdialog("hvt_gone", var_00);
+    scripts\mp\utility::leaderdialog("hvt_gone", var_0);
   } else {
     scripts\mp\utility::leaderdialogonplayer("hvt_gone");
   }
 
   if(level.teambased) {
-    level func_4FBA(var_00);
+    level func_4FBA(var_0);
     return;
   }
 
@@ -66,11 +66,11 @@ func_F745() {
 }
 
 func_93F0() {
-  var_00 = 0;
+  var_0 = 0;
   if(level.teambased) {
     level.var_9264[self.team]++;
-    var_00 = level.var_9264[self.team];
-    var_01 = self.team;
+    var_0 = level.var_9264[self.team];
+    var_1 = self.team;
   } else {
     if(!isDefined(self.var_9264)) {
       self.var_9264 = 1;
@@ -78,45 +78,45 @@ func_93F0() {
       self.var_9264++;
     }
 
-    var_01 = self.var_9264;
-    var_01 = self getentitynumber();
+    var_1 = self.var_9264;
+    var_1 = self getentitynumber();
   }
 
-  var_02 = 1 + var_00 * 0.5;
-  level.var_115F3[var_01] = clamp(var_02, 1, 4);
+  var_2 = 1 + var_0 * 0.5;
+  level.var_115F3[var_1] = clamp(var_2, 1, 4);
 }
 
-func_4FBA(param_00) {
-  var_01 = 0;
+func_4FBA(var_0) {
+  var_1 = 0;
   if(level.teambased) {
-    if(level.var_9264[param_00] > 0) {
-      level.var_9264[param_00]--;
+    if(level.var_9264[var_0] > 0) {
+      level.var_9264[var_0]--;
     }
 
-    var_01 = level.var_9264[param_00];
-    var_02 = param_00;
+    var_1 = level.var_9264[var_0];
+    var_2 = var_0;
   } else {
     if(self.var_9264 > 0) {
       self.var_9264--;
     }
 
-    var_02 = self.var_9264;
-    var_02 = self getentitynumber();
+    var_2 = self.var_9264;
+    var_2 = self getentitynumber();
   }
 
-  var_03 = 1 + var_01 * 0.5;
-  level.var_115F3[var_02] = clamp(var_03, 1, 4);
+  var_3 = 1 + var_1 * 0.5;
+  level.var_115F3[var_2] = clamp(var_3, 1, 4);
 }
 
-func_13AA6(param_00) {
+func_13AA6(var_0) {
   level endon("game_ended");
-  var_01 = scripts\engine\utility::waittill_any_return("disconnect", "joined_team", "joined_spectators");
+  var_1 = scripts\engine\utility::waittill_any_return("disconnect", "joined_team", "joined_spectators");
   if(level.teambased) {
-    level func_4FBA(param_00);
+    level func_4FBA(var_0);
     return;
   }
 
-  if(isDefined(self) && var_01 != "disconnect") {
+  if(isDefined(self) && var_1 != "disconnect") {
     func_4FBA();
   }
 }

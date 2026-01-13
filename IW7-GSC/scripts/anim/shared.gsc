@@ -4,78 +4,78 @@
  * Script: scripts\anim\shared.gsc
 ***********************************/
 
-placeweaponon(param_00, param_01, param_02) {
+placeweaponon(var_0, var_1, var_2) {
   self notify("weapon_position_change");
-  var_03 = self.var_39B[param_00].weaponisauto;
-  if(param_01 != "none" && self.a.weaponpos[param_01] == param_00) {
+  var_3 = self.var_39B[var_0].weaponisauto;
+  if(var_1 != "none" && self.a.weaponpos[var_1] == var_0) {
     return;
   }
 
   func_5390();
-  if(var_03 != "none") {
-    func_5398(param_00);
+  if(var_3 != "none") {
+    func_5398(var_0);
   }
 
-  if(param_01 == "none") {
+  if(var_1 == "none") {
     func_12E61();
     return;
   }
 
-  if(self.a.weaponpos[param_01] != "none") {
-    func_5398(self.a.weaponpos[param_01]);
+  if(self.a.weaponpos[var_1] != "none") {
+    func_5398(self.a.weaponpos[var_1]);
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(param_02 && param_01 == "left" || param_01 == "right") {
-    func_24AF(param_00, param_01);
-    self.var_394 = param_00;
+  if(var_2 && var_1 == "left" || var_1 == "right") {
+    func_24AF(var_0, var_1);
+    self.var_394 = var_0;
   } else {
-    func_24AF(param_00, param_01);
+    func_24AF(var_0, var_1);
   }
 
   func_12E61();
 }
 
-func_5398(param_00) {
-  self.a.weaponpos[self.var_39B[param_00].weaponisauto] = "none";
-  self.var_39B[param_00].weaponisauto = "none";
+func_5398(var_0) {
+  self.a.weaponpos[self.var_39B[var_0].weaponisauto] = "none";
+  self.var_39B[var_0].weaponisauto = "none";
 }
 
-func_24AF(param_00, param_01) {
-  self.var_39B[param_00].weaponisauto = param_01;
-  self.a.weaponpos[param_01] = param_00;
-  if(self.a.weaponposdropping[param_01] != "none") {
-    self notify("end_weapon_drop_" + param_01);
-    self.a.weaponposdropping[param_01] = "none";
+func_24AF(var_0, var_1) {
+  self.var_39B[var_0].weaponisauto = var_1;
+  self.a.weaponpos[var_1] = var_0;
+  if(self.a.weaponposdropping[var_1] != "none") {
+    self notify("end_weapon_drop_" + var_1);
+    self.a.weaponposdropping[var_1] = "none";
   }
 }
 
-orientmode(param_00) {
-  var_01 = self.a.weaponpos[param_00];
-  if(var_01 == "none") {
-    return self.a.weaponposdropping[param_00];
+orientmode(var_0) {
+  var_1 = self.a.weaponpos[var_0];
+  if(var_1 == "none") {
+    return self.a.weaponposdropping[var_0];
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_5390() {
-  var_00 = [];
-  var_00[var_00.size] = "right";
-  var_00[var_00.size] = "left";
-  var_00[var_00.size] = "chest";
-  var_00[var_00.size] = "back";
+  var_0 = [];
+  var_0[var_0.size] = "right";
+  var_0[var_0.size] = "left";
+  var_0[var_0.size] = "chest";
+  var_0[var_0.size] = "back";
   self laseroff();
-  foreach(var_02 in var_00) {
-    var_03 = orientmode(var_02);
-    if(var_03 == "none") {
+  foreach(var_2 in var_0) {
+    var_3 = orientmode(var_2);
+    if(var_3 == "none") {
       continue;
     }
 
-    if(weapontype(var_03) == "riotshield" && isDefined(self.var_FCA0)) {
+    if(weapontype(var_3) == "riotshield" && isDefined(self.var_FCA0)) {
       if(isDefined(self.var_FC94) && self.var_FC94) {
         playFXOnTag(scripts\engine\utility::getfx("riot_shield_dmg"), self, "TAG_BRASS");
         self.var_FC94 = undefined;
@@ -87,26 +87,26 @@ func_5390() {
 }
 
 func_12E61() {
-  var_00 = [];
-  var_01 = [];
-  var_02 = [];
-  var_00[var_00.size] = "right";
-  var_00[var_00.size] = "left";
-  var_00[var_00.size] = "chest";
-  var_00[var_00.size] = "back";
-  foreach(var_04 in var_00) {
-    var_01[var_01.size] = orientmode(var_04);
-    var_02[var_02.size] = _meth_8193(var_04);
+  var_0 = [];
+  var_1 = [];
+  var_2 = [];
+  var_0[var_0.size] = "right";
+  var_0[var_0.size] = "left";
+  var_0[var_0.size] = "chest";
+  var_0[var_0.size] = "back";
+  foreach(var_4 in var_0) {
+    var_1[var_1.size] = orientmode(var_4);
+    var_2[var_2.size] = _meth_8193(var_4);
   }
 
-  self _meth_83CD(var_01[0], var_02[0], var_01[1], var_02[1], var_01[2], var_02[2], var_01[3], var_02[3]);
-  foreach(var_04 in var_00) {
-    var_07 = orientmode(var_04);
-    if(var_07 == "none") {
+  self _meth_83CD(var_1[0], var_2[0], var_1[1], var_2[1], var_1[2], var_2[2], var_1[3], var_2[3]);
+  foreach(var_4 in var_0) {
+    var_7 = orientmode(var_4);
+    if(var_7 == "none") {
       continue;
     }
 
-    if(self.var_39B[var_07].var_13053 && !self.var_39B[var_07].var_8BDE) {
+    if(self.var_39B[var_7].var_13053 && !self.var_39B[var_7].var_8BDE) {
       self hidepart("tag_clip");
     }
   }
@@ -144,8 +144,8 @@ func_3939() {
   return isalive(self);
 }
 
-_meth_8193(param_00) {
-  switch (param_00) {
+_meth_8193(var_0) {
+  switch (var_0) {
     case "chest":
       return "tag_weapon_chest";
 
@@ -169,12 +169,12 @@ _meth_8193(param_00) {
   }
 }
 
-func_5D19(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = self.var_394;
+func_5D19(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.var_394;
   }
 
-  if(param_00 == "none") {
+  if(var_0 == "none") {
     return;
   }
 
@@ -183,13 +183,13 @@ func_5D19(param_00) {
   }
 
   func_5390();
-  var_01 = self.var_39B[param_00].weaponisauto;
-  if(self.iscinematicplaying && var_01 != "none") {
-    thread func_5EF5(param_00, var_01);
+  var_1 = self.var_39B[var_0].weaponisauto;
+  if(self.iscinematicplaying && var_1 != "none") {
+    thread func_5EF5(var_0, var_1);
   }
 
-  func_5398(param_00);
-  if(param_00 == self.var_394) {
+  func_5398(var_0);
+  if(var_0 == self.var_394) {
     self.var_394 = "none";
   }
 
@@ -201,22 +201,22 @@ func_5D1A() {
     return "none";
   }
 
-  var_00 = [];
-  var_00[var_00.size] = "left";
-  var_00[var_00.size] = "right";
-  var_00[var_00.size] = "chest";
-  var_00[var_00.size] = "back";
+  var_0 = [];
+  var_0[var_0.size] = "left";
+  var_0[var_0.size] = "right";
+  var_0[var_0.size] = "chest";
+  var_0[var_0.size] = "back";
   func_5390();
-  foreach(var_02 in var_00) {
-    var_03 = self.a.weaponpos[var_02];
-    if(var_03 == "none") {
+  foreach(var_2 in var_0) {
+    var_3 = self.a.weaponpos[var_2];
+    if(var_3 == "none") {
       continue;
     }
 
-    self.var_39B[var_03].weaponisauto = "none";
-    self.a.weaponpos[var_02] = "none";
+    self.var_39B[var_3].weaponisauto = "none";
+    self.a.weaponpos[var_2] = "none";
     if(self.iscinematicplaying) {
-      thread func_5EF5(var_03, var_02);
+      thread func_5EF5(var_3, var_2);
     }
   }
 
@@ -224,47 +224,47 @@ func_5D1A() {
   func_12E61();
 }
 
-func_5EF5(param_00, param_01) {
+func_5EF5(var_0, var_1) {
   if(self _meth_81B7()) {
     return "none";
   }
 
-  self.a.weaponposdropping[param_01] = param_00;
-  var_02 = getweaponbasename(param_00);
-  var_03 = getsubstr(param_00, var_02.size, param_00.size);
-  if(issubstr(tolower(var_02), "_ai")) {
-    var_02 = getsubstr(var_02, 0, var_02.size - 3);
+  self.a.weaponposdropping[var_1] = var_0;
+  var_2 = getweaponbasename(var_0);
+  var_3 = getsubstr(var_0, var_2.size, var_0.size);
+  if(issubstr(tolower(var_2), "_ai")) {
+    var_2 = getsubstr(var_2, 0, var_2.size - 3);
   }
 
-  var_04 = var_02 + var_03;
-  self dropweapon(var_04, param_01, 0);
-  self endon("end_weapon_drop_" + param_01);
+  var_4 = var_2 + var_3;
+  self dropweapon(var_4, var_1, 0);
+  self endon("end_weapon_drop_" + var_1);
   wait(0.05);
   if(!isDefined(self)) {
     return;
   }
 
   func_5390();
-  self.a.weaponposdropping[param_01] = "none";
+  self.a.weaponposdropping[var_1] = "none";
   func_12E61();
 }
 
-donotetracks(param_00, param_01, param_02) {
+donotetracks(var_0, var_1, var_2) {
   for(;;) {
-    self waittill(param_00, var_03);
-    if(!isDefined(var_03)) {
-      var_03 = ["undefined"];
+    self waittill(var_0, var_3);
+    if(!isDefined(var_3)) {
+      var_3 = ["undefined"];
     }
 
-    if(!isarray(var_03)) {
-      var_03 = [var_03];
+    if(!isarray(var_3)) {
+      var_3 = [var_3];
     }
 
-    scripts\anim\utility::validatenotetracks(param_00, var_03);
-    foreach(var_05 in var_03) {
-      var_06 = scripts\anim\notetracks::handlenotetrack(var_05, param_00, param_01);
-      if(isDefined(var_06)) {
-        return var_06;
+    scripts\anim\utility::validatenotetracks(var_0, var_3);
+    foreach(var_5 in var_3) {
+      var_6 = scripts\anim\notetracks::handlenotetrack(var_5, var_0, var_1);
+      if(isDefined(var_6)) {
+        return var_6;
       }
     }
   }
@@ -283,12 +283,12 @@ getaimyawtoshootentorpos() {
 }
 
 func_7DA5() {
-  var_00 = _meth_8064();
+  var_0 = _meth_8064();
   if(self.script == "cover_crouch" && isDefined(self.a.var_4727) && self.a.var_4727 == "lean") {
-    var_00 = var_00 - level.covercrouchleanpitch;
+    var_0 = var_0 - level.covercrouchleanpitch;
   }
 
-  return var_00;
+  return var_0;
 }
 
 _meth_8064() {
@@ -309,73 +309,73 @@ _meth_811C() {
   }
 
   if(isDefined(self.var_130A9) && self.var_130A9) {
-    var_00 = self getspawnteam();
+    var_0 = self getspawnteam();
     if(isDefined(self.var_130A8)) {
-      return var_00;
+      return var_0;
     }
 
-    return (var_00[0], var_00[1], self getEye()[2]);
+    return (var_0[0], var_0[1], self getEye()[2]);
   }
 
   return (self.origin[0], self.origin[1], self getEye()[2]);
 }
 
-func_DC59(param_00) {
+func_DC59(var_0) {
   self endon("killanimscript");
-  func_DC5A(param_00);
+  func_DC5A(var_0);
 }
 
-func_DC5A(param_00) {
+func_DC5A(var_0) {
   self endon("rambo_aim_end");
   waittillframeend;
-  var_01 = 0.2;
-  var_02 = 0;
+  var_1 = 0.2;
+  var_2 = 0;
   for(;;) {
     if(isDefined(self.var_FECF)) {
-      var_03 = scripts\engine\utility::getyaw(self.var_FECF) - self.covernode.angles[1];
-      var_03 = angleclamp180(var_03 - param_00);
-      if(abs(var_03 - var_02) > 10) {
-        if(var_03 > var_02) {
-          var_03 = var_02 + 10;
+      var_3 = scripts\engine\utility::getyaw(self.var_FECF) - self.covernode.angles[1];
+      var_3 = angleclamp180(var_3 - var_0);
+      if(abs(var_3 - var_2) > 10) {
+        if(var_3 > var_2) {
+          var_3 = var_2 + 10;
         } else {
-          var_03 = var_02 - 10;
+          var_3 = var_2 - 10;
         }
       }
 
-      var_02 = var_03;
+      var_2 = var_3;
     }
 
-    if(var_02 < 0) {
-      var_04 = var_02 / -45;
-      if(var_04 > 1) {
-        var_04 = 1;
+    if(var_2 < 0) {
+      var_4 = var_2 / -45;
+      if(var_4 > 1) {
+        var_4 = 1;
       }
     } else {
-      var_04 = var_02 / 45;
-      if(var_04 > 1) {
-        var_04 = 1;
+      var_4 = var_2 / 45;
+      if(var_4 > 1) {
+        var_4 = 1;
       }
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
 func_4F65() {
-  var_00 = 0;
-  var_01 = weaponburstcount(self.var_394);
-  if(var_01) {
-    var_00 = var_01;
+  var_0 = 0;
+  var_1 = weaponburstcount(self.var_394);
+  if(var_1) {
+    var_0 = var_1;
   } else if(scripts\anim\weaponlist::usingsemiautoweapon()) {
-    var_00 = level.var_F217[randomint(level.var_F217.size)];
+    var_0 = level.var_F217[randomint(level.var_F217.size)];
   } else if(self.var_6B92) {
-    var_00 = level.var_6B93[randomint(level.var_6B93.size)];
+    var_0 = level.var_6B93[randomint(level.var_6B93.size)];
   } else {
-    var_00 = level.var_32BF[randomint(level.var_32BF.size)];
+    var_0 = level.var_32BF[randomint(level.var_32BF.size)];
   }
 
-  if(var_00 <= self.bulletsinclip) {
-    return var_00;
+  if(var_0 <= self.bulletsinclip) {
+    return var_0;
   }
 
   if(self.bulletsinclip <= 0) {
@@ -386,28 +386,28 @@ func_4F65() {
 }
 
 func_4F66() {
-  var_00 = self.bulletsinclip;
+  var_0 = self.bulletsinclip;
   if(weaponclass(self.var_394) == "mg") {
-    var_01 = randomfloat(10);
-    if(var_01 < 3) {
-      var_00 = randomintrange(2, 6);
-    } else if(var_01 < 8) {
-      var_00 = randomintrange(6, 12);
+    var_1 = randomfloat(10);
+    if(var_1 < 3) {
+      var_0 = randomintrange(2, 6);
+    } else if(var_1 < 8) {
+      var_0 = randomintrange(6, 12);
     } else {
-      var_00 = randomintrange(12, 20);
+      var_0 = randomintrange(12, 20);
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-handledropclip(param_00) {
+handledropclip(var_0) {
   self endon("abort_reload");
-  self endon(param_00 + "_finished");
-  var_01 = self.var_394;
-  var_02 = undefined;
+  self endon(var_0 + "_finished");
+  var_1 = self.var_394;
+  var_2 = undefined;
   if(self.var_39B[self.var_394].var_13053) {
-    var_02 = getweaponclipmodel(self.var_394);
+    var_2 = getweaponclipmodel(self.var_394);
   }
 
   if(self.var_39B[self.var_394].var_8BDE) {
@@ -417,25 +417,25 @@ handledropclip(param_00) {
       self playSound("weap_reload_smg_clipout_npc");
     }
 
-    if(isDefined(var_02)) {
+    if(isDefined(var_2)) {
       self hidepart("tag_clip");
-      thread func_5D25(var_02, "tag_clip");
+      thread func_5D25(var_2, "tag_clip");
       self.var_39B[self.var_394].var_8BDE = 0;
     }
   }
 
-  var_03 = 0;
-  while(!var_03) {
-    self waittill(param_00, var_04);
-    if(!isarray(var_04)) {
-      var_04 = [var_04];
+  var_3 = 0;
+  while(!var_3) {
+    self waittill(var_0, var_4);
+    if(!isarray(var_4)) {
+      var_4 = [var_4];
     }
 
-    foreach(var_06 in var_04) {
-      switch (var_06) {
+    foreach(var_6 in var_4) {
+      switch (var_6) {
         case "attach clip left":
-          if(isDefined(var_02)) {
-            self attach(var_02, "tag_accessory_left");
+          if(isDefined(var_2)) {
+            self attach(var_2, "tag_accessory_left");
             if(!self.var_39B[self.var_394].var_8BDE) {
               self hidepart("tag_clip");
             }
@@ -445,8 +445,8 @@ handledropclip(param_00) {
           break;
 
         case "attach clip right":
-          if(isDefined(var_02)) {
-            self attach(var_02, "tag_accessory_right");
+          if(isDefined(var_2)) {
+            self attach(var_2, "tag_accessory_right");
             if(!self.var_39B[self.var_394].var_8BDE) {
               self hidepart("tag_clip");
             }
@@ -456,18 +456,18 @@ handledropclip(param_00) {
           break;
 
         case "detach clip nohand":
-          if(isDefined(var_02)) {
-            self detach(var_02, "tag_accessory_right");
+          if(isDefined(var_2)) {
+            self detach(var_2, "tag_accessory_right");
           }
           break;
 
         case "detach clip right":
-          if(isDefined(var_02)) {
-            self detach(var_02, "tag_accessory_right");
-            if(var_01 == self.var_394) {
+          if(isDefined(var_2)) {
+            self detach(var_2, "tag_accessory_right");
+            if(var_1 == self.var_394) {
               self giveperk("tag_clip");
             } else {
-              self.var_39B[var_01].var_8BDE = 1;
+              self.var_39B[var_1].var_8BDE = 1;
             }
 
             self notify("clip_detached");
@@ -481,16 +481,16 @@ handledropclip(param_00) {
           }
 
           self.a.needstorechamber = 0;
-          var_03 = 1;
+          var_3 = 1;
           break;
 
         case "detach clip left":
-          if(isDefined(var_02)) {
-            self detach(var_02, "tag_accessory_left");
-            if(var_01 == self.var_394) {
+          if(isDefined(var_2)) {
+            self detach(var_2, "tag_accessory_left");
+            if(var_1 == self.var_394) {
               self giveperk("tag_clip");
             } else {
-              self.var_39B[var_01].var_8BDE = 1;
+              self.var_39B[var_1].var_8BDE = 1;
             }
 
             self notify("clip_detached");
@@ -504,14 +504,14 @@ handledropclip(param_00) {
           }
 
           self.a.needstorechamber = 0;
-          var_03 = 1;
+          var_3 = 1;
           break;
       }
     }
   }
 }
 
-func_E24C(param_00, param_01) {
+func_E24C(var_0, var_1) {
   self notify("clip_detached");
   self endon("clip_detached");
   scripts\engine\utility::waittill_any_3("killanimscript", "abort_reload");
@@ -519,8 +519,8 @@ func_E24C(param_00, param_01) {
     return;
   }
 
-  if(isDefined(param_01)) {
-    self detach(param_00, param_01);
+  if(isDefined(var_1)) {
+    self detach(var_0, var_1);
   }
 
   if(isalive(self)) {
@@ -532,46 +532,46 @@ func_E24C(param_00, param_01) {
     return;
   }
 
-  if(isDefined(param_01)) {
-    func_5D25(param_00, param_01);
+  if(isDefined(var_1)) {
+    func_5D25(var_0, var_1);
   }
 }
 
-func_5D25(param_00, param_01) {
-  var_02 = spawn("script_model", self gettagorigin(param_01));
-  var_02 setModel(param_00);
-  var_02.angles = self gettagangles(param_01);
+func_5D25(var_0, var_1) {
+  var_2 = spawn("script_model", self gettagorigin(var_1));
+  var_2 setModel(var_0);
+  var_2.angles = self gettagangles(var_1);
   wait(0.05);
-  var_02 physicslaunchclient(var_02.origin, (0, 0, -0.1));
+  var_2 physicslaunchclient(var_2.origin, (0, 0, -0.1));
   wait(10);
-  if(isDefined(var_02)) {
-    var_02 delete();
+  if(isDefined(var_2)) {
+    var_2 delete();
   }
 }
 
-func_BD1D(param_00, param_01) {
+func_BD1D(var_0, var_1) {
   self endon("killanimscript");
-  var_02 = param_00.origin;
-  var_03 = distancesquared(self.origin, var_02);
-  if(var_03 < 1) {
-    self ghost_target_position(var_02);
+  var_2 = var_0.origin;
+  var_3 = distancesquared(self.origin, var_2);
+  if(var_3 < 1) {
+    self ghost_target_position(var_2);
     return;
   }
 
-  if(var_03 > 256 && !self maymovetopoint(var_02, !scripts\engine\utility::actor_is3d())) {
+  if(var_3 > 256 && !self maymovetopoint(var_2, !scripts\engine\utility::actor_is3d())) {
     return;
   }
 
   self.sendmatchdata = 1;
-  var_04 = distance(self.origin, var_02);
-  var_05 = int(param_01 * 20);
-  for(var_06 = 0; var_06 < var_05; var_06++) {
-    var_02 = param_00.origin;
-    var_07 = self.origin - var_02;
-    var_07 = vectornormalize(var_07);
-    var_08 = var_02 + var_07 * var_04;
-    var_09 = var_08 + var_02 - var_08 * var_06 + 1 / var_05;
-    self ghost_target_position(var_09);
+  var_4 = distance(self.origin, var_2);
+  var_5 = int(var_1 * 20);
+  for(var_6 = 0; var_6 < var_5; var_6++) {
+    var_2 = var_0.origin;
+    var_7 = self.origin - var_2;
+    var_7 = vectornormalize(var_7);
+    var_8 = var_2 + var_7 * var_4;
+    var_9 = var_8 + var_2 - var_8 * var_6 + 1 / var_5;
+    self ghost_target_position(var_9);
     wait(0.05);
   }
 
@@ -582,53 +582,53 @@ func_E47B() {
   return 1;
 }
 
-func_D4C2(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = ::func_E47B;
+func_D4C2(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = ::func_E47B;
   }
 
-  for(var_03 = 0; var_03 < param_01 * 10; var_03++) {
+  for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.isnodeoccupied)) {
-      if(scripts\anim\utility_common::canseeenemy() && [[param_02]]()) {
+      if(scripts\anim\utility_common::canseeenemy() && [[var_2]]()) {
         return;
       }
     }
 
     if(scripts\anim\utility_common::issuppressedwrapper() && [
-        [param_02]
+        [var_2]
       ]()) {
       return;
     }
 
-    self _meth_82A5(param_00, % body, 1, 0.1);
+    self _meth_82A5(var_0, % body, 1, 0.1);
     wait(0.1);
   }
 }
 
-func_1180E(param_00) {
+func_1180E(var_0) {
   self endon("killanimscript");
   placeweaponon(self.secondaryweapon, "right");
   scripts\sp\gameskill::func_54C4();
 }
 
 func_E775() {
-  var_00 = func_E777();
-  if(var_00 == 0) {
+  var_0 = func_E777();
+  if(var_0 == 0) {
     return;
   }
 
   self endon("death");
   for(;;) {
-    level waittill("an_enemy_shot", var_01);
-    if(var_01 != self) {
+    level waittill("an_enemy_shot", var_1);
+    if(var_1 != self) {
       continue;
     }
 
-    if(!isDefined(var_01.isnodeoccupied)) {
+    if(!isDefined(var_1.isnodeoccupied)) {
       continue;
     }
 
-    if(var_01.isnodeoccupied != level.player) {
+    if(var_1.isnodeoccupied != level.player) {
       continue;
     }
 
@@ -637,16 +637,16 @@ func_E775() {
     }
 
     thread func_E776();
-    var_00--;
-    if(var_00 <= 0) {
+    var_0--;
+    if(var_0 <= 0) {
       return;
     }
   }
 }
 
 func_E777() {
-  var_00 = scripts\sp\utility::func_7E72();
-  switch (var_00) {
+  var_0 = scripts\sp\utility::func_7E72();
+  switch (var_0) {
     case "gimp":
     case "easy":
       return 2;
@@ -664,9 +664,9 @@ func_E777() {
 }
 
 func_E776() {
-  var_00 = missile_createrepulsorent(level.player, 5000, 800);
+  var_0 = missile_createrepulsorent(level.player, 5000, 800);
   wait(4);
-  missile_deleteattractor(var_00);
+  missile_deleteattractor(var_0);
 }
 
 func_CB29() {
@@ -679,14 +679,14 @@ func_CB29() {
   }
 
   if(distancesquared(self.origin, self.isnodeoccupied.origin) < self.var_42AE * self.var_42AE) {
-    var_00 = self.var_72BB;
+    var_0 = self.var_72BB;
   } else {
-    var_00 = self.var_72BC;
+    var_0 = self.var_72BC;
   }
 
-  if(var_00 != self.var_394) {
-    scripts\sp\utility::func_72EC(var_00, "primary");
+  if(var_0 != self.var_394) {
+    scripts\sp\utility::func_72EC(var_0, "primary");
     self.var_13C4D setModel(getweaponmodel(self.var_72BA));
-    self.var_72BA = var_00;
+    self.var_72BA = var_0;
   }
 }

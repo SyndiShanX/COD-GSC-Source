@@ -4,7 +4,7 @@
  * Script: 3117.gsc
 ************************/
 
-initzombieghost(param_00) {
+initzombieghost(var_0) {
   self.bisghost = 1;
   self.animplaybackrate = 1;
   self.currentanimstate = undefined;
@@ -17,7 +17,7 @@ initzombieghost(param_00) {
   return level.success;
 }
 
-ghostlaunched(param_00) {
+ghostlaunched(var_0) {
   if(getghostnavmode() == "launched") {
     if(ghostshouldexplode(self)) {
       ghostexplode(self, self.player_entangled_by, getghostdetonateexplosionrange());
@@ -29,24 +29,24 @@ ghostlaunched(param_00) {
   return level.failure;
 }
 
-ghostentangled(param_00) {
+ghostentangled(var_0) {
   if(getghostnavmode() == "entangled") {
     if(isDefined(self.player_entangled_by) && !scripts\cp\cp_laststand::player_in_laststand(self.player_entangled_by) && self.player_entangled_by attackbuttonpressed()) {
-      var_01 = self.player_entangled_by;
-      var_02 = anglesToForward(self.player_entangled_by getplayerangles());
-      var_03 = var_01.origin + (0, 0, 5);
-      var_04 = var_03 + var_02 * get_ghost_entangled_dist_from_player();
-      var_05 = bulletTrace(var_03, var_04, 0, var_01)["position"];
-      if(distancesquared(self.origin, var_05) < 360000) {
-        var_06 = var_05;
+      var_1 = self.player_entangled_by;
+      var_2 = anglesToForward(self.player_entangled_by getplayerangles());
+      var_3 = var_1.origin + (0, 0, 5);
+      var_4 = var_3 + var_2 * get_ghost_entangled_dist_from_player();
+      var_5 = bulletTrace(var_3, var_4, 0, var_1)["position"];
+      if(distancesquared(self.origin, var_5) < 360000) {
+        var_6 = var_5;
       } else {
-        var_07 = vectornormalize(var_06 - self.origin);
-        var_06 = self.origin + var_07 * 600;
+        var_7 = vectornormalize(var_6 - self.origin);
+        var_6 = self.origin + var_7 * 600;
       }
 
-      self setorigin(var_06, 0);
-      self.ghost_target_position = var_01.origin;
-      scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_entangler_progress(var_01, self);
+      self setorigin(var_6, 0);
+      self.ghost_target_position = var_1.origin;
+      scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_entangler_progress(var_1, self);
       return level.success;
     } else {
       launchedawayfromplayer(self);
@@ -61,7 +61,7 @@ get_ghost_entangled_dist_from_player() {
   return 175;
 }
 
-ghosthover(param_00) {
+ghosthover(var_0) {
   if(getghostnavmode() == "hover") {
     clearhidenode();
     scripts\asm\asm_bb::bb_requestmovetype("fly");
@@ -73,15 +73,15 @@ ghosthover(param_00) {
 
     if(distancesquared(self.ghost_hover_node.origin, self.origin) < 4096) {
       self notify("ghost_reached_hover_node");
-      var_01 = scripts\engine\utility::array_remove(level.zombie_ghost_hover_nodes, self.ghost_hover_node);
-      var_02 = getaliveenemies();
-      if(var_02.size > 0) {
-        var_03 = scripts\engine\utility::random(var_02).origin;
+      var_1 = scripts\engine\utility::array_remove(level.zombie_ghost_hover_nodes, self.ghost_hover_node);
+      var_2 = getaliveenemies();
+      if(var_2.size > 0) {
+        var_3 = scripts\engine\utility::random(var_2).origin;
       } else {
-        var_03 = self.origin;
+        var_3 = self.origin;
       }
 
-      self.ghost_hover_node = getrandomhovernodesaroundtargetpos(var_03, var_01);
+      self.ghost_hover_node = getrandomhovernodesaroundtargetpos(var_3, var_1);
       self.ghost_target_position = self.ghost_hover_node.origin;
     }
 
@@ -91,7 +91,7 @@ ghosthover(param_00) {
   return level.failure;
 }
 
-ghosthide(param_00) {
+ghosthide(var_0) {
   if(getghostnavmode() == "hide") {
     clearhovernode();
     scripts\asm\asm_bb::bb_requestmovetype("fly");
@@ -113,7 +113,7 @@ ghosthide(param_00) {
   return level.failure;
 }
 
-checkattack(param_00) {
+checkattack(var_0) {
   scripts\asm\asm_bb::bb_clearmeleerequest();
   if(!getghostnavmode() == "attack") {
     return level.failure;
@@ -147,7 +147,7 @@ checkattack(param_00) {
   return level.failure;
 }
 
-chaseenemy(param_00) {
+chaseenemy(var_0) {
   if(!getghostnavmode() == "attack") {
     return level.failure;
   }
@@ -170,7 +170,7 @@ chaseenemy(param_00) {
   return level.success;
 }
 
-seekenemy(param_00) {
+seekenemy(var_0) {
   if(!getghostnavmode() == "attack") {
     return level.failure;
   }
@@ -188,28 +188,28 @@ seekenemy(param_00) {
   return level.failure;
 }
 
-ghostattack(param_00) {
-  var_01 = self;
-  var_01 endon("death");
-  var_01 endon("ghost_stop_attack");
+ghostattack(var_0) {
+  var_1 = self;
+  var_1 endon("death");
+  var_1 endon("ghost_stop_attack");
   level endon("game_ended");
-  var_01 ghostattack_internal(param_00);
-  var_02 = get_min_num_of_attacks();
-  var_03 = get_max_num_of_attacks();
-  var_04 = randomintrange(get_min_num_of_attacks(), get_max_num_of_attacks() + 1);
-  for(var_05 = 0; var_05 < var_04; var_05++) {
-    var_01 waittill("ghost_played_melee_anim");
+  var_1 ghostattack_internal(var_0);
+  var_2 = get_min_num_of_attacks();
+  var_3 = get_max_num_of_attacks();
+  var_4 = randomintrange(get_min_num_of_attacks(), get_max_num_of_attacks() + 1);
+  for(var_5 = 0; var_5 < var_4; var_5++) {
+    var_1 waittill("ghost_played_melee_anim");
   }
 
-  if(isDefined(param_00)) {
-    param_00.num_of_ghosts_attacking_me--;
+  if(isDefined(var_0)) {
+    var_0.num_of_ghosts_attacking_me--;
   }
 
-  var_01 scripts\asm\asm_bb::bb_clearmeleerequest();
-  var_01 clearhovernode();
-  var_01 setghostnavmode("hover");
-  var_01 waittill("ghost_reached_hover_node");
-  var_01 updateghostanimplaybackrate(1);
+  var_1 scripts\asm\asm_bb::bb_clearmeleerequest();
+  var_1 clearhovernode();
+  var_1 setghostnavmode("hover");
+  var_1 waittill("ghost_reached_hover_node");
+  var_1 updateghostanimplaybackrate(1);
 }
 
 get_min_num_of_attacks() {
@@ -220,44 +220,44 @@ get_max_num_of_attacks() {
   return 1;
 }
 
-ghostattack_internal(param_00) {
-  setghosttarget(param_00);
+ghostattack_internal(var_0) {
+  setghosttarget(var_0);
   setghostnavmode("attack");
   updateghostanimplaybackrate(2.5);
 }
 
-setghosttarget(param_00) {
-  self.zombie_ghost_target = param_00;
-  self.ghost_target_position = param_00.origin;
+setghosttarget(var_0) {
+  self.zombie_ghost_target = var_0;
+  self.ghost_target_position = var_0.origin;
 }
 
 getaliveenemies() {
-  var_00 = [];
-  foreach(var_02 in level.players) {
-    if(var_02.ignoreme || isDefined(var_02.triggerportableradarping) && var_02.triggerportableradarping.ignoreme) {
+  var_0 = [];
+  foreach(var_2 in level.players) {
+    if(var_2.ignoreme || isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping.ignoreme) {
       continue;
     }
 
-    if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_02)) {
+    if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_2)) {
       continue;
     }
 
-    if(!isalive(var_02)) {
+    if(!isalive(var_2)) {
       continue;
     }
 
-    var_00[var_00.size] = var_02;
+    var_0[var_0.size] = var_2;
   }
 
-  return var_00;
+  return var_0;
 }
 
-try_request_fly_type(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 1;
+try_request_fly_type(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  if(isDefined(self.ghost_target_position) && distancesquared(self.ghost_target_position, self.origin) > param_00) {
+  if(isDefined(self.ghost_target_position) && distancesquared(self.ghost_target_position, self.origin) > var_0) {
     scripts\asm\asm_bb::bb_requestmovetype("fly");
     return;
   }
@@ -265,144 +265,144 @@ try_request_fly_type(param_00) {
   scripts\asm\asm_bb::bb_requestmovetype("");
 }
 
-entangleghost(param_00, param_01) {
-  param_00 notify("ghost_stop_attack");
-  param_01.ghost_in_entanglement = param_00;
-  param_00.player_entangled_by = param_01;
-  param_00 setisentangled(param_00, 1);
-  param_00 setghostnavmode("entangled");
-  param_00 clearhidenode();
-  param_00 clearhovernode();
-  param_00 updateghostanimplaybackrate(1);
-  param_00 scripts\asm\asm_bb::bb_requestmovetype("entangled");
-  param_00 scripts\asm\asm_bb::bb_clearmeleerequest();
-  param_00 setmisttrailscriptable("off", param_00);
+entangleghost(var_0, var_1) {
+  var_0 notify("ghost_stop_attack");
+  var_1.ghost_in_entanglement = var_0;
+  var_0.player_entangled_by = var_1;
+  var_0 setisentangled(var_0, 1);
+  var_0 setghostnavmode("entangled");
+  var_0 clearhidenode();
+  var_0 clearhovernode();
+  var_0 updateghostanimplaybackrate(1);
+  var_0 scripts\asm\asm_bb::bb_requestmovetype("entangled");
+  var_0 scripts\asm\asm_bb::bb_clearmeleerequest();
+  var_0 setmisttrailscriptable("off", var_0);
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
-    param_00 setscriptablepartstate("soul", "captured");
+    var_0 setscriptablepartstate("soul", "captured");
   }
 }
 
-escapefromentanglement(param_00) {
-  param_00 updateghostanimplaybackrate(1);
-  param_00 setisentangled(param_00, 0);
-  param_00 setghostnavmode("hover");
-  param_00 scripts\asm\asm_bb::bb_requestmovetype("fly");
-  param_00 setbeingentangledscriptable("off", param_00);
-  param_00 setmisttrailscriptable("active", param_00);
+escapefromentanglement(var_0) {
+  var_0 updateghostanimplaybackrate(1);
+  var_0 setisentangled(var_0, 0);
+  var_0 setghostnavmode("hover");
+  var_0 scripts\asm\asm_bb::bb_requestmovetype("fly");
+  var_0 setbeingentangledscriptable("off", var_0);
+  var_0 setmisttrailscriptable("active", var_0);
 }
 
-launchedawayfromplayer(param_00) {
-  level thread launchfakeghost(param_00.origin, param_00.angles, param_00.color, param_00.player_entangled_by);
-  param_00.nocorpse = 1;
-  param_00 suicide();
+launchedawayfromplayer(var_0) {
+  level thread launchfakeghost(var_0.origin, var_0.angles, var_0.color, var_0.player_entangled_by);
+  var_0.nocorpse = 1;
+  var_0 suicide();
 }
 
-launchfakeghost(param_00, param_01, param_02, param_03) {
+launchfakeghost(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  param_03 endon("disconnect");
-  param_03.ghost_in_entanglement = undefined;
-  var_04 = spawn("script_model", param_00);
-  var_04.angles = vectortoangles(param_01);
-  var_04.color = get_fake_ghost_color(param_02);
-  var_04 setModel(get_fake_ghost_model(var_04.color));
-  var_04 setscriptablepartstate("animation", "on");
-  if(isDefined(param_03)) {
-    var_05 = anglesToForward(param_03 getplayerangles());
+  var_3 endon("disconnect");
+  var_3.ghost_in_entanglement = undefined;
+  var_4 = spawn("script_model", var_0);
+  var_4.angles = vectortoangles(var_1);
+  var_4.color = get_fake_ghost_color(var_2);
+  var_4 setModel(get_fake_ghost_model(var_4.color));
+  var_4 setscriptablepartstate("animation", "on");
+  if(isDefined(var_3)) {
+    var_5 = anglesToForward(var_3 getplayerangles());
   } else {
-    var_05 = (0, 0, 1);
+    var_5 = (0, 0, 1);
   }
 
-  var_05 = var_05 * 9000;
-  var_04 physicslaunchserver(var_04.origin, var_05);
-  var_04 physics_registerforcollisioncallback();
+  var_5 = var_5 * 9000;
+  var_4 physicslaunchserver(var_4.origin, var_5);
+  var_4 physics_registerforcollisioncallback();
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
-    thread[[level.fbd.soulprojectilemonitorfunc]](var_04, param_03);
-    thread[[level.fbd.soulprojectiledeathfunc]](var_04);
+    thread[[level.fbd.soulprojectilemonitorfunc]](var_4, var_3);
+    thread[[level.fbd.soulprojectiledeathfunc]](var_4);
   }
 
-  var_04 thread physics_callback_monitor(var_04, param_03);
+  var_4 thread physics_callback_monitor(var_4, var_3);
 }
 
-get_fake_ghost_color(param_00) {
-  return param_00;
+get_fake_ghost_color(var_0) {
+  return var_0;
 }
 
-get_fake_ghost_model(param_00) {
+get_fake_ghost_model(var_0) {
   if(isDefined(level.get_fake_ghost_model_func)) {
-    return [[level.get_fake_ghost_model_func]](param_00);
+    return [[level.get_fake_ghost_model_func]](var_0);
   }
 
-  return "fake_zombie_ghost_" + param_00;
+  return "fake_zombie_ghost_" + var_0;
 }
 
-physics_callback_monitor(param_00, param_01) {
-  param_00 endon("death");
-  param_00 waittill("collision", var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
+physics_callback_monitor(var_0, var_1) {
+  var_0 endon("death");
+  var_0 waittill("collision", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
-    var_0A = param_00 gettagorigin("j_spine4");
-    playFX(level._effect["flying_soul_hit_fail"], var_0A, anglesToForward(param_00.angles), anglestoup(param_00.angles));
+    var_0A = var_0 gettagorigin("j_spine4");
+    playFX(level._effect["flying_soul_hit_fail"], var_0A, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   }
 
-  fake_ghost_explode(param_00, param_01, getghostimpactexplosionrange());
+  fake_ghost_explode(var_0, var_1, getghostimpactexplosionrange());
 }
 
-fake_ghost_explode(param_00, param_01, param_02) {
+fake_ghost_explode(var_0, var_1, var_2) {
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
-    param_00 delete();
+    var_0 delete();
     return;
   }
 
-  ghostexplosionradiusdamage(param_00, param_01, param_02);
-  playFX(level._effect["ghost_explosion_death_" + get_exp_vfx_color(param_00.color)], param_00.origin, anglesToForward(param_00.angles), anglestoup(param_00.angles));
-  param_00 setscriptablepartstate("animation", "off");
-  param_00 delete();
+  ghostexplosionradiusdamage(var_0, var_1, var_2);
+  playFX(level._effect["ghost_explosion_death_" + get_exp_vfx_color(var_0.color)], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+  var_0 setscriptablepartstate("animation", "off");
+  var_0 delete();
 }
 
-get_exp_vfx_color(param_00) {
-  if(issubstr(param_00, "bomb")) {
-    return strtok(param_00, "_")[0];
+get_exp_vfx_color(var_0) {
+  if(issubstr(var_0, "bomb")) {
+    return strtok(var_0, "_")[0];
   }
 
-  return param_00;
+  return var_0;
 }
 
-ghostshouldexplode(param_00) {
-  if(isDefined(param_00.player_entangled_by) && param_00.player_entangled_by secondaryoffhandbuttonpressed()) {
+ghostshouldexplode(var_0) {
+  if(isDefined(var_0.player_entangled_by) && var_0.player_entangled_by secondaryoffhandbuttonpressed()) {
     return 1;
   }
 
-  if(gettime() - param_00.start_being_launched > 5000) {
+  if(gettime() - var_0.start_being_launched > 5000) {
     return 1;
   }
 
   return 0;
 }
 
-ghostexplode(param_00, param_01, param_02) {
-  playghostexplosionvfx(param_00);
-  ghostexplosionradiusdamage(param_00, param_01, param_02);
-  param_00.nocorpse = 1;
-  param_00 suicide();
+ghostexplode(var_0, var_1, var_2) {
+  playghostexplosionvfx(var_0);
+  ghostexplosionradiusdamage(var_0, var_1, var_2);
+  var_0.nocorpse = 1;
+  var_0 suicide();
 }
 
-ghostexplosionradiusdamage(param_00, param_01, param_02) {
-  var_03 = getclosestactivemovingtargetwithinrange(param_00, param_02);
-  if(isplayer(param_01)) {
-    if(isDefined(var_03)) {
-      param_01 thread scripts\cp\cp_damage::updatedamagefeedback("hitcritical");
-      if([[level.should_moving_target_explode]](param_00, var_03)) {
+ghostexplosionradiusdamage(var_0, var_1, var_2) {
+  var_3 = getclosestactivemovingtargetwithinrange(var_0, var_2);
+  if(isplayer(var_1)) {
+    if(isDefined(var_3)) {
+      var_1 thread scripts\cp\cp_damage::updatedamagefeedback("hitcritical");
+      if([[level.should_moving_target_explode]](var_0, var_3)) {
         if(isDefined(level.process_player_gns_combo_func)) {
           [
             [level.process_player_gns_combo_func]
-          ](param_01, var_03);
+          ](var_1, var_3);
         }
 
-        process_moving_target_hit(var_03, param_01, param_00);
+        process_moving_target_hit(var_3, var_1, var_0);
         return;
       }
 
       if(isDefined(level.hit_wrong_moving_target_func)) {
-        [[level.hit_wrong_moving_target_func]](param_01, var_03, param_00);
+        [[level.hit_wrong_moving_target_func]](var_1, var_3, var_0);
         return;
       }
 
@@ -412,72 +412,72 @@ ghostexplosionradiusdamage(param_00, param_01, param_02) {
     if(isDefined(level.process_player_gns_combo_func)) {
       [
         [level.process_player_gns_combo_func]
-      ](param_01, var_03);
+      ](var_1, var_3);
       return;
     }
   }
 }
 
-process_moving_target_hit(param_00, param_01, param_02) {
+process_moving_target_hit(var_0, var_1, var_2) {
   if(isDefined(level.process_moving_target_hit_func)) {
-    [[level.process_moving_target_hit_func]](param_00, param_01, param_02);
+    [[level.process_moving_target_hit_func]](var_0, var_1, var_2);
     return;
   }
 
-  remove_moving_target_default(param_00, param_01);
+  remove_moving_target_default(var_0, var_1);
 }
 
-remove_moving_target_default(param_00, param_01) {
-  remove_moving_target(param_00, param_01);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::increment_alien_head_destroyed_count(param_01);
+remove_moving_target_default(var_0, var_1) {
+  remove_moving_target(var_0, var_1);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::increment_alien_head_destroyed_count(var_1);
 }
 
-remove_moving_target(param_00, param_01) {
-  param_00 setscriptablepartstate("skull_vfx", "off");
-  param_00 delete();
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ghost", "zmb_comment_vo", "highest", 10, 0, 0, 1, 10);
+remove_moving_target(var_0, var_1) {
+  var_0 setscriptablepartstate("skull_vfx", "off");
+  var_0 delete();
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ghost", "zmb_comment_vo", "highest", 10, 0, 0, 1, 10);
   scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::purge_undefined_from_moving_target_array();
 }
 
-getclosestactivemovingtargetwithinrange(param_00, param_01) {
+getclosestactivemovingtargetwithinrange(var_0, var_1) {
   if(!isDefined(level.moving_target_groups)) {
     return undefined;
   }
 
-  var_02 = [];
-  foreach(var_04 in level.moving_target_groups) {
-    foreach(var_06 in var_04) {
-      if(!isDefined(var_06)) {
+  var_2 = [];
+  foreach(var_4 in level.moving_target_groups) {
+    foreach(var_6 in var_4) {
+      if(!isDefined(var_6)) {
         continue;
       }
 
-      if(distancesquared(param_00.origin, var_06.origin) < param_01) {
-        var_02[var_02.size] = var_06;
+      if(distancesquared(var_0.origin, var_6.origin) < var_1) {
+        var_2[var_2.size] = var_6;
       }
     }
   }
 
-  var_09 = sortbydistance(var_02, param_00.origin);
-  return var_09[0];
+  var_9 = sortbydistance(var_2, var_0.origin);
+  return var_9[0];
 }
 
-getactiveghostswithinrange(param_00, param_01) {
-  var_02 = [];
-  foreach(var_04 in level.zombie_ghosts) {
-    if(var_04 == param_00) {
+getactiveghostswithinrange(var_0, var_1) {
+  var_2 = [];
+  foreach(var_4 in level.zombie_ghosts) {
+    if(var_4 == var_0) {
       continue;
     }
 
-    if(isentangled(var_04)) {
+    if(isentangled(var_4)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_04.origin) < param_01) {
-      var_02[var_02.size] = var_04;
+    if(distancesquared(var_0.origin, var_4.origin) < var_1) {
+      var_2[var_2.size] = var_4;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 getghostdetonateexplosionrange() {
@@ -488,20 +488,20 @@ getghostimpactexplosionrange() {
   return 7225;
 }
 
-setisentangled(param_00, param_01) {
-  param_00.is_entangled = param_01;
+setisentangled(var_0, var_1) {
+  var_0.is_entangled = var_1;
 }
 
-isentangled(param_00) {
-  return scripts\engine\utility::istrue(param_00.is_entangled);
+isentangled(var_0) {
+  return scripts\engine\utility::istrue(var_0.is_entangled);
 }
 
-notargetfound(param_00) {
+notargetfound(var_0) {
   return level.failure;
 }
 
-setghostnavmode(param_00) {
-  self.ghost_nav_mode = param_00;
+setghostnavmode(var_0) {
+  self.ghost_nav_mode = var_0;
 }
 
 getghostnavmode() {
@@ -516,7 +516,7 @@ clearhovernode() {
   self.ghost_hover_node = undefined;
 }
 
-updateghostanimplaybackrate(param_00) {
+updateghostanimplaybackrate(var_0) {
   if(!isDefined(self.currentanimstate)) {
     return;
   }
@@ -525,32 +525,32 @@ updateghostanimplaybackrate(param_00) {
     return;
   }
 
-  self.animplaybackrate = param_00;
+  self.animplaybackrate = var_0;
   self setanimstate(self.currentanimstate, self.currentanimindex, self.animplaybackrate);
 }
 
-setbeingentangledscriptable(param_00, param_01) {
-  param_01 setscriptablepartstate("being_entangled", param_00);
+setbeingentangledscriptable(var_0, var_1) {
+  var_1 setscriptablepartstate("being_entangled", var_0);
 }
 
-setmisttrailscriptable(param_00, param_01) {
-  param_01 setscriptablepartstate("mist_trail", param_00);
+setmisttrailscriptable(var_0, var_1) {
+  var_1 setscriptablepartstate("mist_trail", var_0);
 }
 
-getrandomhovernodesaroundtargetpos(param_00, param_01) {
-  var_02 = 4;
-  var_03 = sortbydistance(param_01, param_00);
-  var_04 = scripts\engine\utility::ter_op(var_03.size > var_02, var_02, var_03.size);
-  var_05 = randomint(var_04);
-  return var_03[var_05];
+getrandomhovernodesaroundtargetpos(var_0, var_1) {
+  var_2 = 4;
+  var_3 = sortbydistance(var_1, var_0);
+  var_4 = scripts\engine\utility::ter_op(var_3.size > var_2, var_2, var_3.size);
+  var_5 = randomint(var_4);
+  return var_3[var_5];
 }
 
-playghostexplosionvfx(param_00) {
-  var_01 = vectornormalize(param_00.var_381);
-  if(var_01 == (0, 0, 0)) {
-    var_01 = (0, 0, 1);
+playghostexplosionvfx(var_0) {
+  var_1 = vectornormalize(var_0.var_381);
+  if(var_1 == (0, 0, 0)) {
+    var_1 = (0, 0, 1);
   }
 
-  var_02 = vectortoangles(var_01);
-  playFX(level._effect["ghost_explosion_death"], param_00.origin, var_01, anglestoup(var_02));
+  var_2 = vectortoangles(var_1);
+  playFX(level._effect["ghost_explosion_death"], var_0.origin, var_1, anglestoup(var_2));
 }

@@ -4,192 +4,192 @@
  * Script: 3179.gsc
 ************************/
 
-func_D55D(param_00, param_01, param_02, param_03) {
+func_D55D(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
-  func_3E58(param_01);
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
+  func_3E58(var_1);
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self.var_5270 = "crouch";
   scripts\anim\utility::func_12E5F();
   self endon("killanimscript");
   self animmode("noclip");
-  var_05 = self getspectatepoint();
-  self orientmode("face angle", var_05.angles[1]);
-  var_05.var_126D4 = var_05.origin[2] + var_05.var_126D5;
-  var_06 = var_05.var_126D4 - var_05.origin[2];
-  thread func_11661(var_06 - param_03);
-  param_02 = 0.15;
-  var_07 = lib_0A1E::asm_getbodyknob();
-  self clearanim(var_07, param_02);
-  self _meth_82E7(param_01, var_04, 1, param_02, 1);
-  var_08 = 0.2;
-  var_09 = 0.2;
-  thread func_126D1(param_00, param_01);
-  if(!animhasnotetrack(var_04, "gravity on")) {
+  var_5 = self getspectatepoint();
+  self orientmode("face angle", var_5.angles[1]);
+  var_5.var_126D4 = var_5.origin[2] + var_5.var_126D5;
+  var_6 = var_5.var_126D4 - var_5.origin[2];
+  thread func_11661(var_6 - var_3);
+  var_2 = 0.15;
+  var_7 = lib_0A1E::asm_getbodyknob();
+  self clearanim(var_7, var_2);
+  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  var_8 = 0.2;
+  var_9 = 0.2;
+  thread func_126D1(var_0, var_1);
+  if(!animhasnotetrack(var_4, "gravity on")) {
     var_0A = 1.23;
-    wait(var_0A - var_08);
+    wait(var_0A - var_8);
     self animmode("gravity");
-    wait(var_08);
+    wait(var_8);
   } else {
     self waittillmatch("gravity on", "traverse");
     self animmode("gravity");
-    if(!animhasnotetrack(var_04, "blend")) {
-      wait(var_08);
+    if(!animhasnotetrack(var_4, "blend")) {
+      wait(var_8);
     } else {
       self waittillmatch("blend", "traverse");
     }
   }
 
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_D566(param_00, param_01, param_02, param_03) {
+func_D566(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
-  func_3E58(param_01);
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
+  func_3E58(var_1);
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   scripts\asm\asm_bb::bb_requestsmartobject("stand");
-  var_05 = self getspectatepoint();
-  var_05.var_126D4 = var_05.origin[2] + var_05.var_126D5;
-  self orientmode("face angle", var_05.angles[1]);
-  self.var_126E6 = param_03;
-  self.var_126EB = var_05;
-  var_06 = 0;
+  var_5 = self getspectatepoint();
+  var_5.var_126D4 = var_5.origin[2] + var_5.var_126D5;
+  self orientmode("face angle", var_5.angles[1]);
+  self.var_126E6 = var_3;
+  self.var_126EB = var_5;
+  var_6 = 0;
   self animmode("noclip");
   self.var_126EC = self.origin[2];
-  if(!animhasnotetrack(var_04, "traverse_align")) {
+  if(!animhasnotetrack(var_4, "traverse_align")) {
     func_89F5();
   }
 
-  var_07 = 0;
-  lib_0A1E::func_2369(param_00, param_01, var_04);
-  self.var_126DB = var_04;
+  var_7 = 0;
+  lib_0A1E::func_2369(var_0, var_1, var_4);
+  self.var_126DB = var_4;
   self.var_126DD = lib_0A1E::asm_getbodyknob();
-  self _meth_82E4(param_01, var_04, self.var_126DD, 1, 0.2, 1);
+  self _meth_82E4(var_1, var_4, self.var_126DD, 1, 0.2, 1);
   self.var_126E3 = 0;
   self.var_126E2 = undefined;
-  lib_0A1E::func_231F(param_00, param_01, ::func_89F8);
+  lib_0A1E::func_231F(var_0, var_1, ::func_89F8);
   self animmode("gravity");
   if(self.var_EB) {
-    func_11701(param_00, param_01);
+    func_11701(var_0, var_1);
     return;
   }
 
   self.a.nodeath = 0;
-  if(var_07 && isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
+  if(var_7 && isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
     self.a.movement = "stop";
     self _meth_83B9(self.target_getindexoftarget.origin);
   } else {
     self.a.movement = "run";
-    self clearanim(var_04, 0.2);
+    self clearanim(var_4, 0.2);
   }
 
   self.var_126DD = undefined;
   self.var_126DB = undefined;
   self.var_4E2A = undefined;
   self.var_126EB = undefined;
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_D55C(param_00, param_01, param_02, param_03) {
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  func_3E58(param_01);
+func_D55C(var_0, var_1, var_2, var_3) {
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  func_3E58(var_1);
   self animmode("noclip");
-  var_05 = self getspectatepoint();
-  self orientmode("face angle", var_05.angles[1]);
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82E7(param_01, var_04, 1, param_02, 1);
-  lib_0A1E::func_231F(param_00, param_01);
-  func_11701(param_00, param_01);
+  var_5 = self getspectatepoint();
+  self orientmode("face angle", var_5.angles[1]);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  lib_0A1E::func_231F(var_0, var_1);
+  func_11701(var_0, var_1);
 }
 
-func_11701(param_00, param_01) {
+func_11701(var_0, var_1) {
   self.var_36A = 0;
   self.var_A4CA = undefined;
   self.var_126C5 = undefined;
   self.var_126C3 = undefined;
-  var_02 = level.asm[param_00].states[param_01];
-  var_03 = undefined;
-  if(isDefined(var_02.var_116FB)) {
-    if(isarray(var_02.var_116FB[0])) {
-      var_03 = var_02.var_116FB[0];
+  var_2 = level.asm[var_0].states[var_1];
+  var_3 = undefined;
+  if(isDefined(var_2.var_116FB)) {
+    if(isarray(var_2.var_116FB[0])) {
+      var_3 = var_2.var_116FB[0];
     } else {
-      var_03 = var_02.var_116FB;
+      var_3 = var_2.var_116FB;
     }
   }
 
-  var_04 = isDefined(var_02.transitions) && var_02.transitions.size > 0;
-  if(!var_04 && !isDefined(var_03)) {
-    var_03 = "exposed_idle";
+  var_4 = isDefined(var_2.transitions) && var_2.transitions.size > 0;
+  if(!var_4 && !isDefined(var_3)) {
+    var_3 = "exposed_idle";
   }
 
-  if(isDefined(var_03)) {
-    thread scripts\asm\asm::asm_setstate(var_03, undefined);
+  if(isDefined(var_3)) {
+    thread scripts\asm\asm::asm_setstate(var_3, undefined);
   } else {
-    scripts\asm\asm::asm_fireevent(param_01, "traverse_end");
+    scripts\asm\asm::asm_fireevent(var_1, "traverse_end");
   }
 
   self notify("killanimscript");
 }
 
-func_11661(param_00) {
+func_11661(var_0) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  var_01 = 5;
-  var_02 = (0, 0, param_00 / var_01);
-  for(var_03 = 0; var_03 < var_01; var_03++) {
-    self _meth_80F1(self.origin + var_02);
+  var_1 = 5;
+  var_2 = (0, 0, var_0 / var_1);
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    self _meth_80F1(self.origin + var_2);
     scripts\engine\utility::waitframe();
   }
 }
 
-func_11662(param_00, param_01, param_02, param_03) {
+func_11662(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
   self endon("death");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  if(param_00 == 0 || param_02 <= 0) {
+  if(var_0 == 0 || var_2 <= 0) {
     return;
   }
 
-  if(param_01 > 0) {
-    wait(param_01);
+  if(var_1 > 0) {
+    wait(var_1);
   }
 
-  var_04 = (0, 0, param_00 / param_02);
-  if(isDefined(param_03) && param_03 < 1) {
-    self _meth_82B1(self.var_126DB, param_03);
+  var_4 = (0, 0, var_0 / var_2);
+  if(isDefined(var_3) && var_3 < 1) {
+    self _meth_82B1(self.var_126DB, var_3);
   }
 
-  for(var_05 = 0; var_05 < param_02; var_05++) {
-    self _meth_80F1(self.origin + var_04);
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    self _meth_80F1(self.origin + var_4);
     scripts\engine\utility::waitframe();
   }
 
-  if(isDefined(param_03) && param_03 < 1) {
+  if(isDefined(var_3) && var_3 < 1) {
     self _meth_82B1(self.var_126DB, 1);
   }
 }
 
-func_89F8(param_00) {
-  if(param_00 == "traverse_death") {
+func_89F8(var_0) {
+  if(var_0 == "traverse_death") {
     return func_89F6();
   }
 
-  if(param_00 == "traverse_align") {
+  if(var_0 == "traverse_align") {
     return func_89F5();
   }
 
-  if(param_00 == "traverse_drop") {
+  if(var_0 == "traverse_drop") {
     return func_89F7();
   }
 }
 
 func_89F6() {
   if(isDefined(self.var_126E2)) {
-    var_00 = self.var_126E2[self.var_126E3];
-    self.var_4E2A = var_00[randomint(var_00.size)];
+    var_0 = self.var_126E2[self.var_126E3];
+    self.var_4E2A = var_0[randomint(var_0.size)];
     self.var_126E3++;
   }
 }
@@ -197,41 +197,41 @@ func_89F6() {
 func_89F5() {
   self animmode("noclip");
   if(isDefined(self.var_126E6) && isDefined(self.var_126EB.var_126D4)) {
-    var_00 = self.var_126EB.var_126D4 - self.var_126EC;
-    thread func_11661(var_00 - self.var_126E6);
+    var_0 = self.var_126EB.var_126D4 - self.var_126EC;
+    thread func_11661(var_0 - self.var_126E6);
   }
 }
 
 func_89F7() {
-  var_00 = self.origin + (0, 0, 32);
-  var_01 = physicstrace(var_00, self.origin + (0, 0, -512));
-  var_02 = distance(var_00, var_01);
-  var_03 = var_02 - 32 - 0.5;
-  var_04 = self getscoreinfocategory(self.var_126DB);
-  var_05 = getmovedelta(self.var_126DB, var_04, 1);
-  var_06 = getanimlength(self.var_126DB);
-  var_07 = var_04 * var_06;
-  var_08 = 0 - var_05[2];
-  var_09 = var_08 - var_03;
-  if(var_08 < var_03) {
-    var_0A = var_08 / var_03;
+  var_0 = self.origin + (0, 0, 32);
+  var_1 = physicstrace(var_0, self.origin + (0, 0, -512));
+  var_2 = distance(var_0, var_1);
+  var_3 = var_2 - 32 - 0.5;
+  var_4 = self getscoreinfocategory(self.var_126DB);
+  var_5 = getmovedelta(self.var_126DB, var_4, 1);
+  var_6 = getanimlength(self.var_126DB);
+  var_7 = var_4 * var_6;
+  var_8 = 0 - var_5[2];
+  var_9 = var_8 - var_3;
+  if(var_8 < var_3) {
+    var_0A = var_8 / var_3;
   } else {
     var_0A = 1;
   }
 
-  var_0B = var_06 - var_04 / 3;
-  var_0C = var_06 - var_07 / 3;
+  var_0B = var_6 - var_4 / 3;
+  var_0C = var_6 - var_7 / 3;
   var_0D = ceil(var_0C * 20);
-  thread func_11662(var_09, 0, var_0D, var_0A);
-  thread func_6CE5(var_01[2]);
+  thread func_11662(var_9, 0, var_0D, var_0A);
+  thread func_6CE5(var_1[2]);
 }
 
-func_6CE5(param_00) {
+func_6CE5(var_0) {
   self endon("killanimscript");
   self endon("death");
-  param_00 = param_00 + 4;
+  var_0 = var_0 + 4;
   for(;;) {
-    if(self.origin[2] < param_00) {
+    if(self.origin[2] < var_0) {
       self animmode("gravity");
       break;
     }
@@ -240,41 +240,41 @@ func_6CE5(param_00) {
   }
 }
 
-func_D55E(param_00, param_01, param_02, param_03) {
+func_D55E(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
-  self endon(param_01 + "_finished");
-  var_04 = getdvarint("ai_debug_doublejump", 0);
-  if(var_04 != 3 && var_04 != 4) {
-    func_3E58(param_01);
+  self endon(var_1 + "_finished");
+  var_4 = getdvarint("ai_debug_doublejump", 0);
+  if(var_4 != 3 && var_4 != 4) {
+    func_3E58(var_1);
   }
 
   self.var_DC1A = 1;
-  var_05 = self getspectatepoint();
-  var_06 = self _meth_8146();
-  var_05.var_126D4 = var_05.origin[2] + var_05.var_126D5 - 44;
-  var_07 = [];
-  if(var_05.var_126D4 > var_06[2]) {
-    var_08 = var_05.origin[0] + var_06[0] * 0.5;
-    var_09 = var_05.origin[1] + var_06[1] * 0.5;
-    var_07[var_07.size] = (var_08, var_09, var_05.var_126D4);
+  var_5 = self getspectatepoint();
+  var_6 = self _meth_8146();
+  var_5.var_126D4 = var_5.origin[2] + var_5.var_126D5 - 44;
+  var_7 = [];
+  if(var_5.var_126D4 > var_6[2]) {
+    var_8 = var_5.origin[0] + var_6[0] * 0.5;
+    var_9 = var_5.origin[1] + var_6[1] * 0.5;
+    var_7[var_7.size] = (var_8, var_9, var_5.var_126D4);
   }
 
-  var_07[var_07.size] = var_06;
-  var_0B = spawn("script_model", var_05.origin);
+  var_7[var_7.size] = var_6;
+  var_0B = spawn("script_model", var_5.origin);
   var_0B setModel("tag_origin");
-  var_0B.angles = var_05.angles;
+  var_0B.angles = var_5.angles;
   thread scripts\engine\utility::delete_on_death(var_0B);
-  self orientmode("face angle", var_05.angles[1]);
+  self orientmode("face angle", var_5.angles[1]);
   var_0C = 1.63;
   self linkto(var_0B);
-  var_0D = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
+  var_0D = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
-  lib_0A1E::func_2369(param_00, param_01, var_0D);
-  self _meth_82EA(param_01, var_0D, 1, param_02, 1);
-  thread func_126D1(param_00, param_01);
-  foreach(var_0F in var_07) {
-    var_10 = var_0C / var_07.size;
+  lib_0A1E::func_2369(var_0, var_1, var_0D);
+  self _meth_82EA(var_1, var_0D, 1, var_2, 1);
+  thread func_126D1(var_0, var_1);
+  foreach(var_0F in var_7) {
+    var_10 = var_0C / var_7.size;
     var_0B moveto(var_0F, var_10);
     var_0B waittill("movedone");
   }
@@ -283,109 +283,109 @@ func_D55E(param_00, param_01, param_02, param_03) {
   self unlink();
   self.var_DC1A = undefined;
   var_0B delete();
-  thread func_11701(param_00, param_01);
+  thread func_11701(var_0, var_1);
 }
 
-func_126D2(param_00, param_01, param_02) {
+func_126D2(var_0, var_1, var_2) {
   self unlink();
   self.var_DC1A = undefined;
 }
 
-func_D565(param_00, param_01, param_02, param_03) {
-  var_04 = self getspectatepoint();
-  var_05 = self _meth_8145();
-  func_3E58(param_01);
-  var_06 = distance(var_04.origin, var_05.origin);
+func_D565(var_0, var_1, var_2, var_3) {
+  var_4 = self getspectatepoint();
+  var_5 = self _meth_8145();
+  func_3E58(var_1);
+  var_6 = distance(var_4.origin, var_5.origin);
   self animmode("noclip");
-  self orientmode("face angle", var_04.angles[1]);
-  var_07 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_08 = getanimlength(var_07);
-  var_09 = getmovedelta(var_07);
-  var_0A = length(var_09) / var_08;
-  var_0B = var_06 / var_0A;
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82EA(param_01, var_07, 1, param_02, 1);
+  self orientmode("face angle", var_4.angles[1]);
+  var_7 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_8 = getanimlength(var_7);
+  var_9 = getmovedelta(var_7);
+  var_0A = length(var_9) / var_8;
+  var_0B = var_6 / var_0A;
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, var_7, 1, var_2, 1);
   wait(var_0B);
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_126D1(param_00, param_01) {
+func_126D1(var_0, var_1) {
   self endon("death");
   self endon("terminate_ai_threads");
-  self endon(param_01 + "_finished");
+  self endon(var_1 + "_finished");
   self endon("double_jumped");
-  lib_0A1E::func_231F(param_00, param_01);
+  lib_0A1E::func_231F(var_0, var_1);
 }
 
-func_D560(param_00, param_01, param_02, param_03) {
+func_D560(var_0, var_1, var_2, var_3) {
   self waittill("external_traverse_complete");
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_CF1E(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_CF1E(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   self animmode("noclip");
   self orientmode("face angle", self.angles[1]);
   self.var_36A = 1;
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self _meth_82E7(param_01, var_04, 1, param_02, 1);
-  lib_0A1E::func_2369(param_00, param_01, var_04);
-  lib_0A1E::func_231F(param_00, param_01);
-  thread func_11701(param_00, param_01);
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  lib_0A1E::func_2369(var_0, var_1, var_4);
+  lib_0A1E::func_231F(var_0, var_1);
+  thread func_11701(var_0, var_1);
 }
 
-func_7E83(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = lib_0F3D::func_3E96(param_00, param_01);
-  var_06 = getnotetracktimes(var_05, param_04);
-  var_07 = var_06[0];
-  var_08 = getmovedelta(var_05, 0, var_07);
-  var_09 = getangledelta(var_05, 0, var_07);
-  return lib_0C5E::func_36D9(param_02, param_03[1], var_08, var_09);
+func_7E83(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = lib_0F3D::func_3E96(var_0, var_1);
+  var_6 = getnotetracktimes(var_5, var_4);
+  var_7 = var_6[0];
+  var_8 = getmovedelta(var_5, 0, var_7);
+  var_9 = getangledelta(var_5, 0, var_7);
+  return lib_0C5E::func_36D9(var_2, var_3[1], var_8, var_9);
 }
 
-func_5AE3(param_00, param_01, param_02, param_03) {
-  var_04 = param_03[2] - param_02.origin[2];
-  if(var_04 < 0) {
+func_5AE3(var_0, var_1, var_2, var_3) {
+  var_4 = var_3[2] - var_2.origin[2];
+  if(var_4 < 0) {
     return 0;
   }
 
-  if(isDefined(param_02.var_A4C9) && getdvarint("ai_debug_doublejump", 0) != 2) {
-    var_05 = param_02.var_A4C9;
-    var_06 = param_02.angles - param_02.var_10DCE;
-    if(var_06 != (0, 0, 0)) {
-      var_05 = rotatevector(var_05, var_06);
+  if(isDefined(var_2.var_A4C9) && getdvarint("ai_debug_doublejump", 0) != 2) {
+    var_5 = var_2.var_A4C9;
+    var_6 = var_2.angles - var_2.var_10DCE;
+    if(var_6 != (0, 0, 0)) {
+      var_5 = rotatevector(var_5, var_6);
     }
 
-    var_07 = param_02.origin + var_05;
-    var_08 = var_07[2];
-    var_08 = var_08 - 44;
-    if(param_03[2] < var_08) {
+    var_7 = var_2.origin + var_5;
+    var_8 = var_7[2];
+    var_8 = var_8 - 44;
+    if(var_3[2] < var_8) {
       return 0;
     }
   }
 
-  var_09 = param_03 - param_02.origin;
-  var_09 = (var_09[0], var_09[1], 0);
-  var_0A = vectortoangles(var_09);
-  var_0B = func_7E83(param_00, param_01, param_03, var_0A, "footstep_left_small");
-  var_0C = var_0B - param_02.origin;
-  if(vectordot(var_0C, var_09) < 0) {
+  var_9 = var_3 - var_2.origin;
+  var_9 = (var_9[0], var_9[1], 0);
+  var_0A = vectortoangles(var_9);
+  var_0B = func_7E83(var_0, var_1, var_3, var_0A, "footstep_left_small");
+  var_0C = var_0B - var_2.origin;
+  if(vectordot(var_0C, var_9) < 0) {
     return 0;
   }
 
   return 1;
 }
 
-func_3E04(param_00, param_01, param_02, param_03) {
-  var_04 = laseroff();
-  if(!isDefined(var_04)) {
-    thread func_11701(param_00, "double_jump");
+func_3E04(var_0, var_1, var_2, var_3) {
+  var_4 = laseroff();
+  if(!isDefined(var_4)) {
+    thread func_11701(var_0, "double_jump");
     return 0;
   }
 
-  var_05 = _meth_81D7();
-  if(!func_5AE3(param_00, param_02, var_04, var_05)) {
-    thread func_11701(param_00, "double_jump");
+  var_5 = _meth_81D7();
+  if(!func_5AE3(var_0, var_2, var_4, var_5)) {
+    thread func_11701(var_0, "double_jump");
     return 0;
   }
 
@@ -408,89 +408,89 @@ _meth_81D7() {
   return self _meth_8146();
 }
 
-func_CF21(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = laseroff();
-  var_05 = var_04.var_5AE2;
-  var_06 = var_05 - var_04.origin;
-  var_06 = (var_06[0], var_06[1], 0);
-  var_07 = vectortoangles(var_06);
-  var_08 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_09 = param_01 + "_finish";
-  var_0A = func_7E83(param_00, var_09, var_05, var_07, "mantle_align");
-  var_0A = (var_0A[0], var_0A[1], var_0A[2] + param_03);
-  func_D50F(param_00, param_01, var_08, param_02, var_0A, var_07, 1, 0, 1);
+func_CF21(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = laseroff();
+  var_5 = var_4.var_5AE2;
+  var_6 = var_5 - var_4.origin;
+  var_6 = (var_6[0], var_6[1], 0);
+  var_7 = vectortoangles(var_6);
+  var_8 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_9 = var_1 + "_finish";
+  var_0A = func_7E83(var_0, var_9, var_5, var_7, "mantle_align");
+  var_0A = (var_0A[0], var_0A[1], var_0A[2] + var_3);
+  func_D50F(var_0, var_1, var_8, var_2, var_0A, var_7, 1, 0, 1);
 }
 
-func_CF1F(param_00, param_01, param_02, param_03) {
-  func_CF21(param_00, param_01, param_02, -8);
+func_CF1F(var_0, var_1, var_2, var_3) {
+  func_CF21(var_0, var_1, var_2, -8);
 }
 
-func_CF26(param_00, param_01, param_02, param_03) {
-  func_CF21(param_00, param_01, param_02, -42);
+func_CF26(var_0, var_1, var_2, var_3) {
+  func_CF21(var_0, var_1, var_2, -42);
 }
 
-doublejumpterminate(param_00, param_01, param_02) {
+doublejumpterminate(var_0, var_1, var_2) {
   self.var_36A = 0;
   self.var_A4CA = undefined;
   self.var_126C5 = undefined;
   self.var_126C3 = undefined;
 }
 
-doublejumpearlyterminate(param_00, param_01, param_02) {
-  if(!scripts\asm\asm::func_232B(param_01, "end")) {
-    doublejumpterminate(param_00, param_01, param_02);
+doublejumpearlyterminate(var_0, var_1, var_2) {
+  if(!scripts\asm\asm::func_232B(var_1, "end")) {
+    doublejumpterminate(var_0, var_1, var_2);
   }
 }
 
-isdriving(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_68B0(param_00, param_01, param_02, "end");
+isdriving(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_68B0(var_0, var_1, var_2, "end");
 }
 
-func_CF24(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = laseroff();
-  var_05 = _meth_81D7();
-  var_06 = var_04.angles - var_04.var_10DCE;
-  if(var_06 != (0, 0, 0)) {
-    var_05 = rotatevector(var_05, var_06);
+func_CF24(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = laseroff();
+  var_5 = _meth_81D7();
+  var_6 = var_4.angles - var_4.var_10DCE;
+  if(var_6 != (0, 0, 0)) {
+    var_5 = rotatevector(var_5, var_6);
   }
 
-  var_07 = undefined;
-  var_08 = getdvarint("ai_debug_doublejump", 0);
-  if(var_08 != 2) {
-    if(isDefined(var_04.var_A4C9)) {
-      var_09 = var_04.var_A4C9;
-      if(var_06 != (0, 0, 0)) {
-        var_09 = rotatevector(var_09, var_06);
+  var_7 = undefined;
+  var_8 = getdvarint("ai_debug_doublejump", 0);
+  if(var_8 != 2) {
+    if(isDefined(var_4.var_A4C9)) {
+      var_9 = var_4.var_A4C9;
+      if(var_6 != (0, 0, 0)) {
+        var_9 = rotatevector(var_9, var_6);
       }
 
-      var_07 = var_04.origin + var_09;
-      var_0A = var_07[2];
+      var_7 = var_4.origin + var_9;
+      var_0A = var_7[2];
       var_0A = var_0A - 44;
-      if(var_0A > var_05[2]) {
-        var_0B = var_04.origin[0] + var_05[0] * 0.5;
-        var_0C = var_04.origin[1] + var_05[1] * 0.5;
-        var_07 = (var_0B, var_0C, var_07[2]);
+      if(var_0A > var_5[2]) {
+        var_0B = var_4.origin[0] + var_5[0] * 0.5;
+        var_0C = var_4.origin[1] + var_5[1] * 0.5;
+        var_7 = (var_0B, var_0C, var_7[2]);
       } else {
-        var_07 = undefined;
+        var_7 = undefined;
       }
     }
   }
 
-  var_0D = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self.var_A4CA = var_07;
-  var_0E = param_01 + "_finish";
-  if(func_5AE3(param_00, var_0E, var_04, var_05)) {
-    var_0F = var_05 - var_04.origin;
+  var_0D = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  self.var_A4CA = var_7;
+  var_0E = var_1 + "_finish";
+  if(func_5AE3(var_0, var_0E, var_4, var_5)) {
+    var_0F = var_5 - var_4.origin;
     var_0F = (var_0F[0], var_0F[1], 0);
     var_10 = vectortoangles(var_0F);
-    var_0E = param_01 + "_finish";
-    var_11 = func_7E83(param_00, var_0E, var_05, var_10, "footstep_left_small");
-    var_05 = var_11;
+    var_0E = var_1 + "_finish";
+    var_11 = func_7E83(var_0, var_0E, var_5, var_10, "footstep_left_small");
+    var_5 = var_11;
   }
 
-  var_0F = var_05 - var_04.origin;
+  var_0F = var_5 - var_4.origin;
   var_12 = 0;
   var_13 = 1;
   if(var_0F[2] < 0) {
@@ -503,55 +503,55 @@ func_CF24(param_00, param_01, param_02, param_03) {
 
   var_0F = (var_0F[0], var_0F[1], 0);
   var_10 = vectortoangles(var_0F);
-  func_D50F(param_00, param_01, var_0D, param_02, var_05, var_10, var_13, var_12, 1);
+  func_D50F(var_0, var_1, var_0D, var_2, var_5, var_10, var_13, var_12, 1);
 }
 
-func_3ED2(param_00, param_01, param_02) {
-  var_03 = _meth_81D7();
-  var_04 = "double_jump_up";
-  if(isDefined(param_02)) {
-    var_04 = "double_jump_" + param_02;
-  } else if(var_03[2] < self.origin[2]) {
-    var_04 = "double_jump_down";
+func_3ED2(var_0, var_1, var_2) {
+  var_3 = _meth_81D7();
+  var_4 = "double_jump_up";
+  if(isDefined(var_2)) {
+    var_4 = "double_jump_" + var_2;
+  } else if(var_3[2] < self.origin[2]) {
+    var_4 = "double_jump_down";
   }
 
   if(self.asm.footsteps.foot == "right") {
-    var_05 = "right_";
+    var_5 = "right_";
   } else {
-    var_05 = "left_";
+    var_5 = "left_";
   }
 
-  var_04 = var_05 + var_04;
-  var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_04);
-  return var_06;
+  var_4 = var_5 + var_4;
+  var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
+  return var_6;
 }
 
-moveshieldmodel(param_00, param_01) {
-  var_02 = param_00.angles - param_00.var_138A6.var_10DCE;
-  if(var_02 != (0, 0, 0)) {
-    var_03 = rotatevector(param_00.var_138A6.var_C050[param_01], var_02);
-    var_04 = param_00.origin + var_03;
+moveshieldmodel(var_0, var_1) {
+  var_2 = var_0.angles - var_0.var_138A6.var_10DCE;
+  if(var_2 != (0, 0, 0)) {
+    var_3 = rotatevector(var_0.var_138A6.var_C050[var_1], var_2);
+    var_4 = var_0.origin + var_3;
   } else {
-    var_04 = param_01.origin + param_01.var_138A6.var_C050[var_02];
+    var_4 = var_1.origin + var_1.var_138A6.var_C050[var_2];
   }
 
-  return var_04;
+  return var_4;
 }
 
-func_100BF(param_00, param_01, param_02, param_03) {
+func_100BF(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.isnodeoccupied)) {
     return 0;
   }
 
-  var_04 = self.isnodeoccupied.origin;
-  var_05 = self.var_126C5;
-  var_06 = moveshieldmodel(var_05, self.var_138BA);
-  var_07 = moveshieldmodel(var_05, self.var_138BA + 1);
-  var_07 = (var_07[0], var_07[1], var_06[2]);
-  var_04 = (var_04[0], var_04[1], var_06[2]);
-  var_08 = vectornormalize(var_07 - var_06);
-  var_09 = vectornormalize(var_04 - var_06);
-  var_0A = vectordot(var_08, var_09);
+  var_4 = self.isnodeoccupied.origin;
+  var_5 = self.var_126C5;
+  var_6 = moveshieldmodel(var_5, self.var_138BA);
+  var_7 = moveshieldmodel(var_5, self.var_138BA + 1);
+  var_7 = (var_7[0], var_7[1], var_6[2]);
+  var_4 = (var_4[0], var_4[1], var_6[2]);
+  var_8 = vectornormalize(var_7 - var_6);
+  var_9 = vectornormalize(var_4 - var_6);
+  var_0A = vectordot(var_8, var_9);
   if(var_0A < 0.2588) {
     return 0;
   }
@@ -559,75 +559,75 @@ func_100BF(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-func_3F0E(param_00, param_01, param_02) {
-  var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01, self.var_138BC);
-  return var_03;
+func_3F0E(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, self.var_138BC);
+  return var_3;
 }
 
-_meth_812B(param_00) {
-  return param_00 * param_00 * 3 - 2 * param_00;
+_meth_812B(var_0) {
+  return var_0 * var_0 * 3 - 2 * var_0;
 }
 
-func_11657(param_00, param_01, param_02, param_03, param_04, param_05) {
-  self endon(param_00 + "_finished");
-  if(param_01 > 0) {
-    wait(param_01);
+func_11657(var_0, var_1, var_2, var_3, var_4, var_5) {
+  self endon(var_0 + "_finished");
+  if(var_1 > 0) {
+    wait(var_1);
   }
 
-  var_06 = param_02 / param_03;
-  var_07 = self.origin[2];
-  var_08 = var_07 + param_02[2];
-  var_09 = self.origin[2];
-  self _meth_82B1(param_04, param_05);
-  for(var_0A = 0; var_0A < param_03; var_0A++) {
+  var_6 = var_2 / var_3;
+  var_7 = self.origin[2];
+  var_8 = var_7 + var_2[2];
+  var_9 = self.origin[2];
+  self _meth_82B1(var_4, var_5);
+  for(var_0A = 0; var_0A < var_3; var_0A++) {
     var_0B = 1;
     if(var_0B) {
-      var_0C = var_0A / param_03 - 1;
+      var_0C = var_0A / var_3 - 1;
       var_0D = _meth_812B(var_0C);
-      var_0E = var_08 * var_0D + var_07 * 1 - var_0D;
-      var_0F = var_0E - var_09;
-      var_06 = (var_06[0], var_06[1], var_0F);
-      var_09 = var_0E;
+      var_0E = var_8 * var_0D + var_7 * 1 - var_0D;
+      var_0F = var_0E - var_9;
+      var_6 = (var_6[0], var_6[1], var_0F);
+      var_9 = var_0E;
     }
 
-    var_10 = self.origin + var_06;
+    var_10 = self.origin + var_6;
     self _meth_80F1(var_10);
-    if(var_0A + 1 < param_03) {
+    if(var_0A + 1 < var_3) {
       scripts\engine\utility::waitframe();
     }
   }
 
-  self _meth_82B1(param_04, 1);
+  self _meth_82B1(var_4, 1);
 }
 
-func_138D4(param_00, param_01) {
-  if(param_00 == "start_jump") {
-    thread func_89BB(param_01);
+func_138D4(var_0, var_1) {
+  if(var_0 == "start_jump") {
+    thread func_89BB(var_1);
     return;
   }
 
-  if(param_00 == "end_mantle") {
+  if(var_0 == "end_mantle") {
     self animmode("gravity");
   }
 }
 
-func_89BB(param_00, param_01, param_02) {
-  var_03 = param_00[0];
-  var_04 = param_00[1];
-  var_05 = param_00[2];
-  var_06 = param_00[3];
-  var_07 = param_00[4];
-  var_08 = param_00[5];
-  var_09 = param_00[6];
-  self endon(var_03 + "_finished");
-  var_0A = getanimlength(var_04);
-  if(!isDefined(param_01)) {
-    param_01 = gettime() - var_06 * 0.001;
+func_89BB(var_0, var_1, var_2) {
+  var_3 = var_0[0];
+  var_4 = var_0[1];
+  var_5 = var_0[2];
+  var_6 = var_0[3];
+  var_7 = var_0[4];
+  var_8 = var_0[5];
+  var_9 = var_0[6];
+  self endon(var_3 + "_finished");
+  var_0A = getanimlength(var_4);
+  if(!isDefined(var_1)) {
+    var_1 = gettime() - var_6 * 0.001;
   }
 
-  var_0B = param_01 / var_0A;
-  var_0C = getnotetracktimes(var_04, "end_jump");
-  var_0D = getnotetracktimes(var_04, "end_double_jump");
+  var_0B = var_1 / var_0A;
+  var_0C = getnotetracktimes(var_4, "end_jump");
+  var_0D = getnotetracktimes(var_4, "end_double_jump");
   if(var_0D.size > 0) {
     self.var_138BD = 1;
     var_0C = var_0D;
@@ -636,61 +636,61 @@ func_89BB(param_00, param_01, param_02) {
   }
 
   if(isDefined(self.var_A4CA)) {
-    var_07 = var_0C[0] - var_0B / 2 + var_0B;
-    var_0C[0] = var_07;
-    var_05 = self.var_A4CA;
+    var_7 = var_0C[0] - var_0B / 2 + var_0B;
+    var_0C[0] = var_7;
+    var_5 = self.var_A4CA;
   }
 
-  var_0E = getmovedelta(var_04, var_0B, var_07);
+  var_0E = getmovedelta(var_4, var_0B, var_7);
   var_0F = self gettweakablevalue(var_0E);
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(var_09) {
+  if(var_9) {
     var_10 = distance(self.origin, var_0F);
-    var_11 = distance(self.origin, var_05);
-    param_02 = var_10 / var_11;
-    if(param_02 < 0.7) {
-      param_02 = 0.7;
-    } else if(param_02 > 1.3) {
-      param_02 = 1.3;
+    var_11 = distance(self.origin, var_5);
+    var_2 = var_10 / var_11;
+    if(var_2 < 0.7) {
+      var_2 = 0.7;
+    } else if(var_2 > 1.3) {
+      var_2 = 1.3;
     }
   }
 
-  var_13 = var_05 - var_0F;
+  var_13 = var_5 - var_0F;
   var_14 = var_0C[0] * var_0A;
   var_15 = var_14 - var_0B * var_0A;
-  var_15 = var_15 * 1 / param_02;
+  var_15 = var_15 * 1 / var_2;
   var_16 = var_15 * 20;
   var_16 = ceil(var_16);
   var_17 = gettime();
-  func_11657(var_03, 0, var_13, var_16, var_04, param_02);
+  func_11657(var_3, 0, var_13, var_16, var_4, var_2);
   if(isDefined(self.var_A4CA)) {
-    var_18 = gettime() - var_17 * param_02;
-    var_19 = param_01 + var_18 * 0.001;
+    var_18 = gettime() - var_17 * var_2;
+    var_19 = var_1 + var_18 * 0.001;
     self.var_A4CA = undefined;
-    param_00[6] = 0;
-    func_89BB(param_00, var_19, param_02);
+    var_0[6] = 0;
+    func_89BB(var_0, var_19, var_2);
   }
 }
 
-_meth_8213(param_00) {
-  var_01 = moveshieldmodel(param_00, 1) - moveshieldmodel(param_00, 0);
-  var_02 = vectortoangles(var_01);
-  return var_02[1];
+_meth_8213(var_0) {
+  var_1 = moveshieldmodel(var_0, 1) - moveshieldmodel(var_0, 0);
+  var_2 = vectortoangles(var_1);
+  return var_2[1];
 }
 
-moveto(param_00) {
+moveto(var_0) {
   self.var_138BA = 0;
-  var_01 = moveshieldmodel(param_00, 1) - moveshieldmodel(param_00, 0);
-  var_02 = vectortoangles(var_01);
-  self.var_138C1 = var_02[1];
-  var_03 = moveshieldmodel(param_00, self.var_138BA);
-  var_04 = anglestoright(var_02);
-  var_05 = var_03 - param_00.origin;
-  var_06 = vectordot(var_04, var_05);
-  if(var_06 > 0) {
+  var_1 = moveshieldmodel(var_0, 1) - moveshieldmodel(var_0, 0);
+  var_2 = vectortoangles(var_1);
+  self.var_138C1 = var_2[1];
+  var_3 = moveshieldmodel(var_0, self.var_138BA);
+  var_4 = anglestoright(var_2);
+  var_5 = var_3 - var_0.origin;
+  var_6 = vectordot(var_4, var_5);
+  if(var_6 > 0) {
     return "right";
   }
 
@@ -707,8 +707,8 @@ func_FAF8() {
     self.var_126C3 = self _meth_8146();
   }
 
-  var_00 = self.var_126C5;
-  self.var_138BC = moveto(var_00);
+  var_0 = self.var_126C5;
+  self.var_138BC = moveto(var_0);
 }
 
 moveslide() {
@@ -716,7 +716,7 @@ moveslide() {
   return self.var_138BC;
 }
 
-wallrunterminate(param_00, param_01, param_02) {
+wallrunterminate(var_0, var_1, var_2) {
   self.var_138BA = undefined;
   self.var_138BC = undefined;
   self.var_138BD = undefined;
@@ -729,279 +729,279 @@ wallrunterminate(param_00, param_01, param_02) {
   self.var_126C3 = undefined;
 }
 
-traversalorientearlyterminate(param_00, param_01, param_02) {
-  if(!scripts\asm\asm::func_232B(param_01, "end") && !scripts\asm\asm::func_232B(param_01, "code_move")) {
-    func_4123(param_00, param_01, param_02);
+traversalorientearlyterminate(var_0, var_1, var_2) {
+  if(!scripts\asm\asm::func_232B(var_1, "end") && !scripts\asm\asm::func_232B(var_1, "code_move")) {
+    func_4123(var_0, var_1, var_2);
   }
 }
 
-func_D5CF(param_00, param_01, param_02, param_03) {
+func_D5CF(var_0, var_1, var_2, var_3) {
   self animmode("noclip");
   self orientmode("face angle", self.angles[1]);
   self.var_36A = 1;
-  if(isDefined(param_03) && param_03 == "shoot") {
+  if(isDefined(var_3) && var_3 == "shoot") {
     func_FAF7();
   }
 
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_05 = getnotetracktimes(var_04, "wall_contact");
-  var_06 = var_05[0];
-  var_07 = getangledelta(var_04, 0, var_06);
-  var_08 = self.var_138C1 - var_07;
-  var_09 = (0, var_08, 0);
-  self _meth_80F1(self.origin, var_09);
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82E7(param_01, var_04, 1, param_02, 1);
-  lib_0A1E::func_2369(param_00, param_01, var_04);
-  var_0A = lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_5 = getnotetracktimes(var_4, "wall_contact");
+  var_6 = var_5[0];
+  var_7 = getangledelta(var_4, 0, var_6);
+  var_8 = self.var_138C1 - var_7;
+  var_9 = (0, var_8, 0);
+  self _meth_80F1(self.origin, var_9);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  lib_0A1E::func_2369(var_0, var_1, var_4);
+  var_0A = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   if(var_0A == "end") {
-    thread scripts\asm\asm::func_2310(param_00, param_01, 0);
+    thread scripts\asm\asm::func_2310(var_0, var_1, 0);
   }
 }
 
-moveovertime(param_00) {
-  var_01 = func_3F0D(param_00, "wall_run_attach");
-  var_02 = getnotetracktimes(var_01, "wall_contact");
-  var_03 = var_02[0];
-  var_04 = getmovedelta(var_01, 0, var_03);
-  var_05 = getangledelta(var_01, 0, var_03);
-  return lib_0C5E::func_36D9(moveshieldmodel(self.var_126C5, 0), self.var_138C1, var_04, var_05);
+moveovertime(var_0) {
+  var_1 = func_3F0D(var_0, "wall_run_attach");
+  var_2 = getnotetracktimes(var_1, "wall_contact");
+  var_3 = var_2[0];
+  var_4 = getmovedelta(var_1, 0, var_3);
+  var_5 = getangledelta(var_1, 0, var_3);
+  return lib_0C5E::func_36D9(moveshieldmodel(self.var_126C5, 0), self.var_138C1, var_4, var_5);
 }
 
-func_D5D2(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_05 = self.var_126C5;
+func_D5D2(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_5 = self.var_126C5;
   self.var_138BA = 0;
-  var_06 = moveshieldmodel(var_05, 0);
-  var_07 = var_06 - self.origin;
-  var_07 = (var_07[0], var_07[1], 0);
-  var_08 = vectortoangles(var_07);
-  var_09 = moveovertime();
-  self orientmode("face angle", var_08[1]);
+  var_6 = moveshieldmodel(var_5, 0);
+  var_7 = var_6 - self.origin;
+  var_7 = (var_7[0], var_7[1], 0);
+  var_8 = vectortoangles(var_7);
+  var_9 = moveovertime();
+  self orientmode("face angle", var_8[1]);
   var_0A = 1;
-  var_0B = getnotetracktimes(var_04, "code_move");
+  var_0B = getnotetracktimes(var_4, "code_move");
   if(isDefined(var_0B) && var_0B.size > 0) {
     var_0A = var_0B[0];
   }
 
-  func_D50F(param_00, param_01, var_04, param_02, var_09, var_08, var_0A, 0, 1);
-  self _meth_80F1(var_09, var_08);
-  thread scripts\asm\asm::func_2310(param_00, param_01, 0);
+  func_D50F(var_0, var_1, var_4, var_2, var_9, var_8, var_0A, 0, 1);
+  self _meth_80F1(var_9, var_8);
+  thread scripts\asm\asm::func_2310(var_0, var_1, 0);
 }
 
-func_D50F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  self endon(param_01 + "_finished");
-  if(!isDefined(param_06)) {
-    param_06 = 1;
+func_D50F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  self endon(var_1 + "_finished");
+  if(!isDefined(var_6)) {
+    var_6 = 1;
   }
 
-  if(!isDefined(param_07)) {
-    param_07 = 0;
+  if(!isDefined(var_7)) {
+    var_7 = 0;
   }
 
-  if(!isDefined(param_08)) {
-    param_08 = 0;
+  if(!isDefined(var_8)) {
+    var_8 = 0;
   }
 
-  self _meth_80F1(self.origin, param_05);
+  self _meth_80F1(self.origin, var_5);
   self animmode("noclip");
-  self orientmode("face angle", param_05[1]);
-  var_09 = getanimlength(param_02);
-  var_0A = int(var_09 * 1000);
+  self orientmode("face angle", var_5[1]);
+  var_9 = getanimlength(var_2);
+  var_0A = int(var_9 * 1000);
   self _meth_85A1(gettime() + var_0A - 1000);
   self.var_36A = 1;
-  self _meth_82E7(param_01, param_02, 1, param_03, 1);
-  lib_0A1E::func_2369(param_00, param_01, param_02);
-  var_0B = [param_01, param_02, param_04, gettime(), param_06, param_07, param_08];
-  lib_0A1E::func_231F(param_00, param_01, ::func_138D4, var_0B);
+  self _meth_82E7(var_1, var_2, 1, var_3, 1);
+  lib_0A1E::func_2369(var_0, var_1, var_2);
+  var_0B = [var_1, var_2, var_4, gettime(), var_6, var_7, var_8];
+  lib_0A1E::func_231F(var_0, var_1, ::func_138D4, var_0B);
 }
 
-func_3F0D(param_00, param_01, param_02) {
+func_3F0D(var_0, var_1, var_2) {
   if(isDefined(self.var_138B9)) {
     return self.var_138B9;
   }
 
-  var_03 = self.var_138BC;
-  var_04 = angleclamp180(self.var_138C1 - self.angles[1]);
-  var_04 = abs(var_04);
-  if(var_04 >= 22.5) {
-    if(var_04 > 67.5) {
-      var_03 = var_03 + "_90";
+  var_3 = self.var_138BC;
+  var_4 = angleclamp180(self.var_138C1 - self.angles[1]);
+  var_4 = abs(var_4);
+  if(var_4 >= 22.5) {
+    if(var_4 > 67.5) {
+      var_3 = var_3 + "_90";
     } else {
-      var_03 = var_03 + "_45";
+      var_3 = var_3 + "_45";
     }
   }
 
-  self.var_138B9 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  self.var_138B9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   return self.var_138B9;
 }
 
-func_3F0F(param_00, param_01, param_02) {
+func_3F0F(var_0, var_1, var_2) {
   func_FAF8();
-  var_03 = self.var_138BC;
-  var_04 = self.var_126C5;
-  var_05 = moveshieldmodel(var_04, 0);
-  var_06 = var_05[2] - self.origin[2];
-  var_07 = 0;
-  if(var_06 >= 0) {
-    if(var_06 > 120) {
-      var_07 = 1;
+  var_3 = self.var_138BC;
+  var_4 = self.var_126C5;
+  var_5 = moveshieldmodel(var_4, 0);
+  var_6 = var_5[2] - self.origin[2];
+  var_7 = 0;
+  if(var_6 >= 0) {
+    if(var_6 > 120) {
+      var_7 = 1;
     }
-  } else if(0 - var_06 > 240) {
-    var_07 = 1;
+  } else if(0 - var_6 > 240) {
+    var_7 = 1;
   }
 
-  if(var_07 == 0) {
-    var_08 = distancesquared(self.origin, var_05);
-    if(var_08 > -25536) {
-      var_07 = 1;
+  if(var_7 == 0) {
+    var_8 = distancesquared(self.origin, var_5);
+    if(var_8 > -25536) {
+      var_7 = 1;
     }
   }
 
-  var_09 = "left_";
+  var_9 = "left_";
   if(self.asm.footsteps.foot == "right") {
-    var_09 = "right_";
+    var_9 = "right_";
   }
 
-  if(var_07) {
-    var_03 = var_09 + "double_jump";
+  if(var_7) {
+    var_3 = var_9 + "double_jump";
   } else {
-    var_03 = var_09 + "single_jump";
+    var_3 = var_9 + "single_jump";
   }
 
-  var_0A = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  var_0A = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   return var_0A;
 }
 
-func_F22D(param_00, param_01, param_02, param_03) {
-  self endon(param_00 + "_finished");
-  wait(param_01);
-  scripts\asm\asm::asm_fireevent(param_00, param_02);
-  if(param_03) {
-    self notify(param_02);
+func_F22D(var_0, var_1, var_2, var_3) {
+  self endon(var_0 + "_finished");
+  wait(var_1);
+  scripts\asm\asm::asm_fireevent(var_0, var_2);
+  if(var_3) {
+    self notify(var_2);
   }
 }
 
-func_8BCB(param_00, param_01, param_02, param_03) {
+func_8BCB(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_138BA)) {
     return 0;
   }
 
-  var_04 = self.var_126C5;
-  if(!isDefined(var_04)) {
+  var_4 = self.var_126C5;
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_05 = self.var_138BA + 2;
-  if(var_04.var_138A6.var_C050.size <= var_05) {
+  var_5 = self.var_138BA + 2;
+  if(var_4.var_138A6.var_C050.size <= var_5) {
     return 0;
   }
 
   return 1;
 }
 
-func_D5D0(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.var_126C5;
+func_D5D0(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.var_126C5;
   scripts\anim\combat::func_F296();
   self.var_138BA = self.var_138BA + 2;
-  var_05 = moveshieldmodel(var_04, self.var_138BA);
-  var_06 = self.angles;
+  var_5 = moveshieldmodel(var_4, self.var_138BA);
+  var_6 = self.angles;
   if(self.var_138BC == "left") {
     self.var_138BC = "right";
   } else {
     self.var_138BC = "left";
   }
 
-  var_07 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  func_D50F(param_00, param_01, var_07, param_02, var_05, var_06);
+  var_7 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  func_D50F(var_0, var_1, var_7, var_2, var_5, var_6);
 }
 
-movey(param_00) {
-  var_01 = param_00.angles - param_00.var_138A6.var_10DCE;
-  if(var_01 == (0, 0, 0)) {
-    return param_00.origin + param_00.var_138A6.var_B313;
+movey(var_0) {
+  var_1 = var_0.angles - var_0.var_138A6.var_10DCE;
+  if(var_1 == (0, 0, 0)) {
+    return var_0.origin + var_0.var_138A6.var_B313;
   }
 
-  var_02 = rotatevector(param_00.var_138A6.var_B313, var_01);
-  return param_00.origin + var_02;
+  var_2 = rotatevector(var_0.var_138A6.var_B313, var_1);
+  return var_0.origin + var_2;
 }
 
-movex(param_00) {
-  if(!isDefined(param_00.var_138A6.var_B312)) {
+movex(var_0) {
+  if(!isDefined(var_0.var_138A6.var_B312)) {
     return undefined;
   }
 
-  var_01 = param_00.angles[1] - param_00.var_138A6.var_10DCE[1];
-  if(var_01 == 0) {
-    return param_00.var_138A6.var_B312;
+  var_1 = var_0.angles[1] - var_0.var_138A6.var_10DCE[1];
+  if(var_1 == 0) {
+    return var_0.var_138A6.var_B312;
   }
 
-  return (0, angleclamp180(param_00.var_138A6.var_B312[1] + var_01), 0);
+  return (0, angleclamp180(var_0.var_138A6.var_B312[1] + var_1), 0);
 }
 
 movez() {
-  var_00 = self.var_126C5;
-  if(!isDefined(var_00.var_138A6.var_B313)) {
+  var_0 = self.var_126C5;
+  if(!isDefined(var_0.var_138A6.var_B313)) {
     return "none";
   }
 
-  var_01 = movey(var_00);
-  if(var_01[2] >= self.origin[2]) {
+  var_1 = movey(var_0);
+  if(var_1[2] >= self.origin[2]) {
     return "high";
   }
 
   return "low";
 }
 
-func_100C0(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_126C5;
-  if(!isDefined(var_04.var_138A6.var_331A)) {
+func_100C0(var_0, var_1, var_2, var_3) {
+  var_4 = self.var_126C5;
+  if(!isDefined(var_4.var_138A6.var_331A)) {
     return 0;
   }
 
-  return var_04.var_138A6.var_331A;
+  return var_4.var_138A6.var_331A;
 }
 
-func_D5D4(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.var_126C5;
+func_D5D4(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.var_126C5;
   func_FAF7();
-  var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_06 = getmovedelta(var_05);
-  var_07 = length2d(var_06);
-  if(!isDefined(var_04.var_138A6.var_B313) && self.var_138BA == var_04.var_138A6.var_C050.size - 2) {
-    var_08 = lib_0A1E::asm_getallanimsforstate(param_00, "wall_run_exit");
-    var_09 = getnotetracktimes(var_08, "start_jump");
-    var_0A = getanimlength(var_08);
-    var_0B = getmovedelta(var_08, 0, var_09[0]);
+  var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_6 = getmovedelta(var_5);
+  var_7 = length2d(var_6);
+  if(!isDefined(var_4.var_138A6.var_B313) && self.var_138BA == var_4.var_138A6.var_C050.size - 2) {
+    var_8 = lib_0A1E::asm_getallanimsforstate(var_0, "wall_run_exit");
+    var_9 = getnotetracktimes(var_8, "start_jump");
+    var_0A = getanimlength(var_8);
+    var_0B = getmovedelta(var_8, 0, var_9[0]);
     var_0C = length2d(var_0B);
   } else {
     var_0C = 0;
   }
 
-  var_0D = moveshieldmodel(var_04, self.var_138BA + 1) - self.origin;
+  var_0D = moveshieldmodel(var_4, self.var_138BA + 1) - self.origin;
   var_0E = length(var_0D);
   var_0E = var_0E - var_0C;
   if(var_0E < 0) {
     var_0E = 0;
   }
 
-  var_0F = var_0E / var_07;
-  var_10 = getanimlength(var_05);
+  var_0F = var_0E / var_7;
+  var_10 = getanimlength(var_5);
   var_11 = var_10 * var_0F;
-  thread func_F22D(param_01, var_11, "wall_run_loop_done", 1);
+  thread func_F22D(var_1, var_11, "wall_run_loop_done", 1);
   var_12 = vectornormalize(var_0D);
   self orientmode("face direction", var_12);
-  thread func_D5D1(param_01);
+  thread func_D5D1(var_1);
   self animmode("noclip");
-  self _meth_82E7(param_01, var_05, 1, param_02, 1);
-  lib_0A1E::func_2369(param_00, param_01, var_05);
-  lib_0A1E::func_231F(param_00, param_01);
+  self _meth_82E7(var_1, var_5, 1, var_2, 1);
+  lib_0A1E::func_2369(var_0, var_1, var_5);
+  lib_0A1E::func_231F(var_0, var_1);
 }
 
-func_D5D1(param_00) {
+func_D5D1(var_0) {
   self endon("death");
   if(soundexists("wallrun_end_npc")) {
     self waittill("wall_run_loop_done");
@@ -1009,69 +1009,69 @@ func_D5D1(param_00) {
   }
 }
 
-func_3F10(param_00, param_01, param_02) {
-  var_03 = self.var_138BC;
-  var_04 = self.var_126C3;
-  var_05 = var_04[2] - self.origin[2];
-  var_06 = 0;
-  if(var_05 >= 0) {
-    if(var_05 > 120) {
-      var_06 = 1;
+func_3F10(var_0, var_1, var_2) {
+  var_3 = self.var_138BC;
+  var_4 = self.var_126C3;
+  var_5 = var_4[2] - self.origin[2];
+  var_6 = 0;
+  if(var_5 >= 0) {
+    if(var_5 > 120) {
+      var_6 = 1;
     }
-  } else if(0 - var_05 > 240) {
-    var_06 = 1;
+  } else if(0 - var_5 > 240) {
+    var_6 = 1;
   }
 
-  if(var_06 == 0) {
-    var_07 = distancesquared(self.origin, var_04);
-    if(var_07 > -19311) {
-      var_06 = 1;
+  if(var_6 == 0) {
+    var_7 = distancesquared(self.origin, var_4);
+    if(var_7 > -19311) {
+      var_6 = 1;
     }
   }
 
-  if(var_06) {
-    var_03 = var_03 + "_double";
+  if(var_6) {
+    var_3 = var_3 + "_double";
   }
 
-  var_04 = self.var_126C3;
-  var_08 = self.var_126C5;
-  var_09 = self.var_126C3 - moveshieldmodel(var_08, var_08.var_138A6.var_C050.size - 1);
-  var_09 = (var_09[0], var_09[1], 0);
-  var_09 = vectornormalize(var_09);
-  var_0A = vectortoangles(var_09);
+  var_4 = self.var_126C3;
+  var_8 = self.var_126C5;
+  var_9 = self.var_126C3 - moveshieldmodel(var_8, var_8.var_138A6.var_C050.size - 1);
+  var_9 = (var_9[0], var_9[1], 0);
+  var_9 = vectornormalize(var_9);
+  var_0A = vectortoangles(var_9);
   var_0B = angleclamp180(var_0A[1] - self.angles[1]);
   var_0B = abs(var_0B);
   if(var_0B >= 22.5) {
     if(var_0B > 67.5) {
-      var_03 = var_03 + "_90";
+      var_3 = var_3 + "_90";
     } else {
-      var_03 = var_03 + "_45";
+      var_3 = var_3 + "_45";
     }
   }
 
-  var_0C = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  var_0C = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   return var_0C;
 }
 
-func_D5D3(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.var_126C5;
-  var_05 = self.var_126C3;
-  var_06 = self.angles;
-  var_07 = 1;
-  var_08 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_09 = getnotetracktimes(var_08, "ground");
+func_D5D3(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.var_126C5;
+  var_5 = self.var_126C3;
+  var_6 = self.angles;
+  var_7 = 1;
+  var_8 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_9 = getnotetracktimes(var_8, "ground");
   scripts\anim\combat::func_F296();
-  if(isDefined(var_09) && var_09.size > 0) {
-    var_07 = var_09[0];
+  if(isDefined(var_9) && var_9.size > 0) {
+    var_7 = var_9[0];
   } else {
-    var_0A = getnotetracktimes(var_08, "end_double_jump");
+    var_0A = getnotetracktimes(var_8, "end_double_jump");
     if(isDefined(var_0A) && var_0A.size > 0) {
-      var_07 = var_0A[0];
+      var_7 = var_0A[0];
     } else {
-      var_0B = getnotetracktimes(var_08, "end_jump");
+      var_0B = getnotetracktimes(var_8, "end_jump");
       if(isDefined(var_0B) && var_0B.size > 0) {
-        var_07 = var_0B[0];
+        var_7 = var_0B[0];
       }
     }
   }
@@ -1080,11 +1080,11 @@ func_D5D3(param_00, param_01, param_02, param_03) {
     self playSound("wallrun_end_npc");
   }
 
-  func_D50F(param_00, param_01, var_08, param_02, var_05, var_06, var_07, 1, 1);
-  thread func_11705(param_00, param_01);
+  func_D50F(var_0, var_1, var_8, var_2, var_5, var_6, var_7, 1, 1);
+  thread func_11705(var_0, var_1);
 }
 
-func_9EBA(param_00, param_01, param_02, param_03) {
+func_9EBA(var_0, var_1, var_2, var_3) {
   if(isDefined(self.var_126C5)) {
     return 0;
   }
@@ -1092,75 +1092,75 @@ func_9EBA(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-func_11705(param_00, param_01) {
+func_11705(var_0, var_1) {
   self.var_138BA = undefined;
   self.var_138BC = undefined;
   self.var_138BD = undefined;
   self.var_138C1 = undefined;
   self.var_138B9 = undefined;
   self _meth_82D0();
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_D5D5(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.var_126C5;
-  var_05 = self.var_126C3;
-  var_06 = movey(var_04);
-  if(isDefined(var_04.var_138A6.var_331A) || movez() == "high") {
-    var_07 = movex(var_04);
-    if(!isDefined(var_07)) {
-      var_08 = var_05 - var_06;
-      var_08 = (var_08[0], var_08[1], 0);
-      var_07 = vectortoangles(var_08);
+func_D5D5(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.var_126C5;
+  var_5 = self.var_126C3;
+  var_6 = movey(var_4);
+  if(isDefined(var_4.var_138A6.var_331A) || movez() == "high") {
+    var_7 = movex(var_4);
+    if(!isDefined(var_7)) {
+      var_8 = var_5 - var_6;
+      var_8 = (var_8[0], var_8[1], 0);
+      var_7 = vectortoangles(var_8);
     }
   } else {
-    var_08 = var_07 - self.origin;
-    var_08 = (var_08[0], var_08[1], 0);
-    var_07 = vectortoangles(var_08);
+    var_8 = var_7 - self.origin;
+    var_8 = (var_8[0], var_8[1], 0);
+    var_7 = vectortoangles(var_8);
   }
 
-  var_09 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_0A = getanimlength(var_09);
-  var_0B = getnotetracktimes(var_09, "start_mantle");
+  var_9 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_0A = getanimlength(var_9);
+  var_0B = getnotetracktimes(var_9, "start_mantle");
   var_0C = var_0B[0];
-  var_0D = getnotetracktimes(var_09, "end_mantle");
+  var_0D = getnotetracktimes(var_9, "end_mantle");
   var_0E = var_0D[0];
-  var_0F = getmovedelta(var_09, var_0C, var_0E);
-  self _meth_80F1(self.origin, var_07);
+  var_0F = getmovedelta(var_9, var_0C, var_0E);
+  self _meth_80F1(self.origin, var_7);
   var_10 = self gettweakablevalue(var_0F);
   var_11 = var_10 - self.origin;
-  var_12 = var_06 - var_11;
-  func_D50F(param_00, param_01, var_09, param_02, var_12, var_07, var_0C, 0, 1);
-  thread func_11705(param_00, param_01);
+  var_12 = var_6 - var_11;
+  func_D50F(var_0, var_1, var_9, var_2, var_12, var_7, var_0C, 0, 1);
+  thread func_11705(var_0, var_1);
 }
 
-func_D55B(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  if(!isDefined(var_04)) {
-    scripts\asm\asm::asm_fireevent(param_01, "code_move");
+func_D55B(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  if(!isDefined(var_4)) {
+    scripts\asm\asm::asm_fireevent(var_1, "code_move");
     return;
   }
 
-  var_05 = 1;
-  var_06 = undefined;
+  var_5 = 1;
+  var_6 = undefined;
   if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1) {
-    var_06 = getnotetracktimes(var_04, "align");
+    var_6 = getnotetracktimes(var_4, "align");
   }
 
-  if(!isDefined(var_06) || var_06.size == 0) {
-    var_06 = getnotetracktimes(var_04, "code_move");
+  if(!isDefined(var_6) || var_6.size == 0) {
+    var_6 = getnotetracktimes(var_4, "code_move");
   }
 
-  if(isDefined(var_06) && var_06.size > 0) {
-    var_05 = var_06[0];
+  if(isDefined(var_6) && var_6.size > 0) {
+    var_5 = var_6[0];
   }
 
-  var_07 = getmovedelta(var_04, 0, var_05);
-  var_08 = getangledelta(var_04, 0, var_05);
-  var_09 = self.var_126C5;
-  var_0A = getanimlength(var_04) * var_05;
+  var_7 = getmovedelta(var_4, 0, var_5);
+  var_8 = getangledelta(var_4, 0, var_5);
+  var_9 = self.var_126C5;
+  var_0A = getanimlength(var_4) * var_5;
   var_0B = int(ceil(var_0A * 20));
   if(self.var_126C5.var_48 == "wall_run") {
     var_0C = moveshieldmodel(self.var_126C5, 0) - self.origin;
@@ -1173,81 +1173,81 @@ func_D55B(param_00, param_01, param_02, param_03) {
     var_0E = var_10[1];
   }
 
-  var_11 = lib_0C5E::func_36D9(var_09.origin, var_0E, var_07, var_08);
-  var_12 = var_0E - var_08;
+  var_11 = lib_0C5E::func_36D9(var_9.origin, var_0E, var_7, var_8);
+  var_12 = var_0E - var_8;
   self.var_4C7E = ::lib_0F3D::func_22EA;
-  self.a.var_22E5 = param_01;
+  self.a.var_22E5 = var_1;
   self.var_36A = 1;
   self _meth_8396(var_11, var_12, var_0B);
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
-  self _meth_82E7(param_01, var_04, 1, param_02, 1);
-  lib_0A1E::func_2369(param_00, param_01, var_04);
-  lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
-  thread scripts\asm\asm::func_2310(param_00, param_01, 0);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  lib_0A1E::func_2369(var_0, var_1, var_4);
+  lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
+  thread scripts\asm\asm::func_2310(var_0, var_1, 0);
 }
 
-func_3F12(param_00, param_01, param_02) {
-  return lib_0C65::func_3EF5(param_00, param_01, param_02);
+func_3F12(var_0, var_1, var_2) {
+  return lib_0C65::func_3EF5(var_0, var_1, var_2);
 }
 
-func_3F07(param_00, param_01, param_02) {
-  var_03 = anglesToForward(self.angles);
-  var_04 = vectortoangles(var_03);
+func_3F07(var_0, var_1, var_2) {
+  var_3 = anglesToForward(self.angles);
+  var_4 = vectortoangles(var_3);
   if(self.var_126C5.var_48 == "wall_run") {
-    var_05 = vectortoangles(moveshieldmodel(self.var_126C5, 0) - self.origin);
+    var_5 = vectortoangles(moveshieldmodel(self.var_126C5, 0) - self.origin);
   } else {
-    var_06 = self.var_126C3 - self.var_126C5.origin;
-    var_06 = (var_06[0], var_06[1], 0);
-    var_05 = vectortoangles(var_06);
+    var_6 = self.var_126C3 - self.var_126C5.origin;
+    var_6 = (var_6[0], var_6[1], 0);
+    var_5 = vectortoangles(var_6);
   }
 
-  var_07 = var_05[1];
-  var_08 = angleclamp180(var_07 - var_04[1]);
-  var_09 = getangleindex(var_08, 22.5);
-  var_0A = lib_0C5D::_meth_8174(param_01, undefined, 1);
-  if(!isDefined(var_0A[var_09])) {
+  var_7 = var_5[1];
+  var_8 = angleclamp180(var_7 - var_4[1]);
+  var_9 = getangleindex(var_8, 22.5);
+  var_0A = lib_0C5D::_meth_8174(var_1, undefined, 1);
+  if(!isDefined(var_0A[var_9])) {
     return undefined;
   }
 
-  return var_0A[var_09];
+  return var_0A[var_9];
 }
 
-func_FAF0(param_00, param_01, param_02, param_03) {
-  var_04 = self _meth_84F9(120);
-  if(!isDefined(var_04)) {
+func_FAF0(var_0, var_1, var_2, var_3) {
+  var_4 = self _meth_84F9(120);
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_05 = var_04["node"];
-  var_06 = var_04["position"];
-  if(!isDefined(var_05) || !isDefined(var_05.var_48)) {
+  var_5 = var_4["node"];
+  var_6 = var_4["position"];
+  if(!isDefined(var_5) || !isDefined(var_5.var_48)) {
     return 0;
   }
 
-  self.var_126C5 = var_05;
-  self.var_126C3 = var_06;
+  self.var_126C5 = var_5;
+  self.var_126C3 = var_6;
   return 1;
 }
 
-func_4123(param_00, param_01, param_02, param_03) {
+func_4123(var_0, var_1, var_2, var_3) {
   self.var_126C5 = undefined;
   self.var_126C3 = undefined;
   self.var_138BC = undefined;
   return 0;
 }
 
-func_FFB7(param_00, param_01, param_02, param_03) {
-  var_04 = distance2dsquared(self.origin, moveshieldmodel(self.var_126C5, 1));
-  if(var_04 < 144) {
+func_FFB7(var_0, var_1, var_2, var_3) {
+  var_4 = distance2dsquared(self.origin, moveshieldmodel(self.var_126C5, 1));
+  if(var_4 < 144) {
     return 1;
   }
 
   return 0;
 }
 
-func_FFFD(param_00, param_01, param_02, param_03) {
-  if(func_9EBA(param_00, param_01, param_02, param_03)) {
-    func_FAF0(param_00, param_01, param_02, param_03);
+func_FFFD(var_0, var_1, var_2, var_3) {
+  if(func_9EBA(var_0, var_1, var_2, var_3)) {
+    func_FAF0(var_0, var_1, var_2, var_3);
     if(!isDefined(self.var_126C5)) {
       return 0;
     }
@@ -1256,14 +1256,14 @@ func_FFFD(param_00, param_01, param_02, param_03) {
       return 0;
     }
 
-    var_04 = self.var_126C5;
-    var_05 = vectornormalize(moveshieldmodel(var_04, 0) - self.origin);
-    var_06 = lib_0C65::func_371C(param_01, param_02, var_05, 0, 1);
-    if(!isDefined(var_06)) {
+    var_4 = self.var_126C5;
+    var_5 = vectornormalize(moveshieldmodel(var_4, 0) - self.origin);
+    var_6 = lib_0C65::func_371C(var_1, var_2, var_5, 0, 1);
+    if(!isDefined(var_6)) {
       return 0;
     }
 
-    self.a.var_FC61 = var_06;
+    self.a.var_FC61 = var_6;
     self.var_138BC = moveto(self.var_126C5);
     return 1;
   }
@@ -1271,16 +1271,16 @@ func_FFFD(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-func_100B3(param_00, param_01, param_02, param_03) {
-  if(param_02 == self.var_126C5.var_48) {
+func_100B3(var_0, var_1, var_2, var_3) {
+  if(var_2 == self.var_126C5.var_48) {
     return 1;
   }
 
   return 0;
 }
 
-func_9FB1(param_00) {
-  switch (param_00) {
+func_9FB1(var_0) {
+  switch (var_0) {
     case "rail_hop_double_jump_down":
     case "double_jump":
     case "double_jump_mantle":
@@ -1292,7 +1292,7 @@ func_9FB1(param_00) {
   return 0;
 }
 
-func_FFFC(param_00, param_01, param_02, param_03) {
+func_FFFC(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_126C5)) {
     return 0;
   }
@@ -1305,24 +1305,24 @@ func_FFFC(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  var_04 = undefined;
+  var_4 = undefined;
   if(self.var_126C5.var_48 == "wall_run") {
-    var_04 = moveto(self.var_126C5);
-    var_05 = moveshieldmodel(self.var_126C5, 0) - self.origin;
-    var_06 = vectortoangles(var_05);
+    var_4 = moveto(self.var_126C5);
+    var_5 = moveshieldmodel(self.var_126C5, 0) - self.origin;
+    var_6 = vectortoangles(var_5);
   } else {
-    var_05 = self.var_126C3 - self.var_126C5.origin;
-    var_06 = (var_06[0], var_06[1], 0);
-    var_05 = vectornormalize(var_06);
-    var_06 = vectortoangles(var_05);
+    var_5 = self.var_126C3 - self.var_126C5.origin;
+    var_6 = (var_6[0], var_6[1], 0);
+    var_5 = vectornormalize(var_6);
+    var_6 = vectortoangles(var_5);
   }
 
-  var_07 = var_06[1];
-  var_08 = anglesToForward(self.angles);
-  var_09 = vectortoangles(var_08);
-  var_0A = angleclamp180(var_07 - var_09[1]);
+  var_7 = var_6[1];
+  var_8 = anglesToForward(self.angles);
+  var_9 = vectortoangles(var_8);
+  var_0A = angleclamp180(var_7 - var_9[1]);
   var_0B = getangleindex(var_0A, 22.5);
-  var_0C = lib_0C5D::_meth_8174(param_02, undefined, 1);
+  var_0C = lib_0C5D::_meth_8174(var_2, undefined, 1);
   var_0D = var_0C[var_0B];
   if(!isDefined(var_0D)) {
     return 0;
@@ -1348,8 +1348,8 @@ func_FFFC(param_00, param_01, param_02, param_03) {
   var_13 = length(var_10);
   var_14 = var_12 - var_13;
   if(var_14 < 0) {
-    var_15 = anglesToForward(var_06);
-    var_16 = vectordot(var_08, var_15);
+    var_15 = anglesToForward(var_6);
+    var_16 = vectordot(var_8, var_15);
     if(var_16 > 0.707) {
       if(abs(var_14) > 10) {
         return 0;
@@ -1362,14 +1362,14 @@ func_FFFC(param_00, param_01, param_02, param_03) {
   }
 
   if(self.var_126C5.var_48 == "wall_run") {
-    self.var_138BC = var_04;
+    self.var_138BC = var_4;
   }
 
   return 1;
 }
 
-func_89FB(param_00) {
-  if(param_00 == "wall_contact") {
+func_89FB(var_0) {
+  if(var_0 == "wall_contact") {
     if(soundexists("wallrun_start_npc")) {
       self playSound("wallrun_start_npc");
     }
@@ -1383,16 +1383,16 @@ func_FAF7() {
   self.setmatchdatadef = 90;
 }
 
-func_126CE(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
+func_126CE(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self animmode("noclip", 0);
-  var_05 = self getspectatepoint();
-  self orientmode("face angle", var_05.angles[1]);
-  self _meth_82EA(param_01, var_04, 1, param_02, 1);
-  lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
-  func_11701(param_00, param_01);
+  var_5 = self getspectatepoint();
+  self orientmode("face angle", var_5.angles[1]);
+  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
+  func_11701(var_0, var_1);
 }
 
-func_3E58(param_00) {}
+func_3E58(var_0) {}

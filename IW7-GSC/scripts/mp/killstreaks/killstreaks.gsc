@@ -6,46 +6,46 @@
 
 func_9888() {
   level.var_A697 = [];
-  var_00 = 1;
+  var_0 = 1;
   for(;;) {
-    var_01 = scripts\mp\utility::func_7F4B(var_00);
-    if(!isDefined(var_01) || var_01 == "") {
+    var_1 = scripts\mp\utility::func_7F4B(var_0);
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var_02 = var_01;
-    var_03 = scripts\mp\utility::func_7F3C(var_02);
-    var_04 = scripts\mp\utility::func_7F3B(var_02);
-    game["dialog"][var_02] = var_04;
-    var_05 = scripts\mp\utility::func_7F34(var_02);
-    game["dialog"]["allies_friendly_" + var_02 + "_inbound"] = "friendly_" + var_05;
-    game["dialog"]["allies_enemy_" + var_02 + "_inbound"] = "enemy_" + var_05;
-    var_06 = scripts\mp\utility::func_7F3E(var_02);
-    game["dialog"]["axis_friendly_" + var_02 + "_inbound"] = "friendly_" + var_06;
-    game["dialog"]["axis_enemy_" + var_02 + "_inbound"] = "enemy_" + var_06;
-    var_07 = scripts\mp\utility::func_7F4E(var_02);
-    scripts\mp\rank::registerscoreinfo("killstreak_" + var_02, "value", var_07);
-    level.var_A697[level.var_A697.size] = var_02;
-    var_00++;
+    var_2 = var_1;
+    var_3 = scripts\mp\utility::func_7F3C(var_2);
+    var_4 = scripts\mp\utility::func_7F3B(var_2);
+    game["dialog"][var_2] = var_4;
+    var_5 = scripts\mp\utility::func_7F34(var_2);
+    game["dialog"]["allies_friendly_" + var_2 + "_inbound"] = "friendly_" + var_5;
+    game["dialog"]["allies_enemy_" + var_2 + "_inbound"] = "enemy_" + var_5;
+    var_6 = scripts\mp\utility::func_7F3E(var_2);
+    game["dialog"]["axis_friendly_" + var_2 + "_inbound"] = "friendly_" + var_6;
+    game["dialog"]["axis_enemy_" + var_2 + "_inbound"] = "enemy_" + var_6;
+    var_7 = scripts\mp\utility::func_7F4E(var_2);
+    scripts\mp\rank::registerscoreinfo("killstreak_" + var_2, "value", var_7);
+    level.var_A697[level.var_A697.size] = var_2;
+    var_0++;
   }
 }
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    if(!isDefined(var_00.pers["killstreaks"])) {
-      var_00.pers["killstreaks"] = [];
+    level waittill("connected", var_0);
+    if(!isDefined(var_0.pers["killstreaks"])) {
+      var_0.pers["killstreaks"] = [];
     }
 
-    if(!isDefined(var_00.pers["startedMapSelect"])) {
-      var_00.pers["startedMapSelect"] = 0;
+    if(!isDefined(var_0.pers["startedMapSelect"])) {
+      var_0.pers["startedMapSelect"] = 0;
     }
 
-    var_00 visionsetmissilecamforplayer(game["thermal_vision"]);
-    var_00 thread onplayerspawned();
-    var_00 thread func_B9CB();
-    var_00 thread func_110C3();
-    var_00 thread monitorrigswitch();
+    var_0 visionsetmissilecamforplayer(game["thermal_vision"]);
+    var_0 thread onplayerspawned();
+    var_0 thread func_B9CB();
+    var_0 thread func_110C3();
+    var_0 thread monitorrigswitch();
   }
 }
 
@@ -139,7 +139,7 @@ updatestreakcount() {
     return;
   }
 
-  var_00 = self.streakpoints;
+  var_0 = self.streakpoints;
   self setkillstreakpoints(int(min(self.streakpoints, 16384)));
   if(self.streakpoints >= self.var_BFB0) {
     func_F866();
@@ -167,26 +167,26 @@ func_F866() {
     return;
   }
 
-  var_00 = self.var_BFB0;
-  var_01 = func_7FEE();
-  if(!isDefined(var_01)) {
+  var_0 = self.var_BFB0;
+  var_1 = func_7FEE();
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = getstreakcost(var_01);
-  self.var_BFB0 = var_02;
+  var_2 = getstreakcost(var_1);
+  self.var_BFB0 = var_2;
   if(scripts\mp\utility::_hasperk("specialty_support_killstreaks") && isDefined(self.pers["killstreaks"][1]) && !scripts\mp\utility::istrue(self.var_5FBD)) {
-    var_03 = 0;
-    foreach(var_05 in self.pers["killstreaks"]) {
-      if(scripts\mp\utility::istrue(var_05.earned)) {
-        var_03 = 1;
+    var_3 = 0;
+    foreach(var_5 in self.pers["killstreaks"]) {
+      if(scripts\mp\utility::istrue(var_5.earned)) {
+        var_3 = 1;
         continue;
       }
 
-      var_03 = 0;
+      var_3 = 0;
     }
 
-    if(var_03 && !isDefined(self.var_5FBD)) {
+    if(var_3 && !isDefined(self.var_5FBD)) {
       self.var_5FBD = 1;
       self.var_BFB0 = 0;
       self getrandompoint(0);
@@ -199,27 +199,27 @@ func_F866() {
     }
   }
 
-  self getrandompoint(var_02);
+  self getrandompoint(var_2);
 }
 
 func_7FEE() {
   if(self.streakpoints == func_7FA2() && self.streaktype != "specialist") {
-    var_00 = 0;
+    var_0 = 0;
   } else {
-    var_00 = self.streakpoints;
+    var_0 = self.streakpoints;
   }
 
-  foreach(var_02 in self.var_A6AB) {
-    var_03 = getstreakcost(var_02);
-    if(var_03 > var_00) {
-      return var_02;
+  foreach(var_2 in self.var_A6AB) {
+    var_3 = getstreakcost(var_2);
+    if(var_3 > var_0) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-func_12F2E(param_00) {
+func_12F2E(var_0) {
   if(scripts\mp\utility::istrue(self.var_5FBD) && scripts\mp\utility::_hasperk("specialty_support_killstreaks")) {
     self setclientomnvar("ui_score_streak", 0);
     self setclientomnvar("ui_score_streak_two", 0);
@@ -231,42 +231,42 @@ func_12F2E(param_00) {
     return;
   }
 
-  var_01 = 0;
+  var_1 = 0;
   if(isDefined(self.var_A6AB)) {
-    foreach(var_03 in self.var_A6AB) {
-      if(var_01 == 0) {
-        var_04 = getstreakcost(var_03);
-        self setclientomnvar("ui_score_streak_cost", var_04);
-        self setclientomnvar("ui_score_streak", param_00);
-        var_01++;
+    foreach(var_3 in self.var_A6AB) {
+      if(var_1 == 0) {
+        var_4 = getstreakcost(var_3);
+        self setclientomnvar("ui_score_streak_cost", var_4);
+        self setclientomnvar("ui_score_streak", var_0);
+        var_1++;
         continue;
       }
 
-      if(var_01 == 1) {
-        var_04 = getstreakcost(var_03);
-        self setclientomnvar("ui_score_streak_two_cost", var_04);
-        self setclientomnvar("ui_score_streak_two", param_00);
-        var_01++;
+      if(var_1 == 1) {
+        var_4 = getstreakcost(var_3);
+        self setclientomnvar("ui_score_streak_two_cost", var_4);
+        self setclientomnvar("ui_score_streak_two", var_0);
+        var_1++;
         continue;
       }
 
-      var_04 = getstreakcost(var_03);
-      self setclientomnvar("ui_score_streak_three_cost", var_04);
-      self setclientomnvar("ui_score_streak_three", param_00);
+      var_4 = getstreakcost(var_3);
+      self setclientomnvar("ui_score_streak_three_cost", var_4);
+      self setclientomnvar("ui_score_streak_three", var_0);
     }
   }
 }
 
 func_7FA2() {
-  var_00 = 0;
-  foreach(var_02 in self.var_A6AB) {
-    var_03 = getstreakcost(var_02);
-    if(var_03 > var_00) {
-      var_00 = var_03;
+  var_0 = 0;
+  foreach(var_2 in self.var_A6AB) {
+    var_3 = getstreakcost(var_2);
+    if(var_3 > var_0) {
+      var_0 = var_3;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 updatekillstreakselectedui() {
@@ -274,22 +274,22 @@ updatekillstreakselectedui() {
     return;
   }
 
-  var_00 = self.pers["killstreaks"];
-  for(var_01 = 0; var_01 <= 3; var_01++) {
-    var_02 = var_00[var_01];
-    if(isDefined(var_02) && isDefined(var_02.streakname)) {
-      self setclientomnvar("ui_score_streak_index_" + var_01, scripts\mp\utility::getkillstreakindex(var_02.streakname));
-      self setclientomnvar("ui_score_streak_available_" + var_01, var_00[var_01].var_269A);
+  var_0 = self.pers["killstreaks"];
+  for(var_1 = 0; var_1 <= 3; var_1++) {
+    var_2 = var_0[var_1];
+    if(isDefined(var_2) && isDefined(var_2.streakname)) {
+      self setclientomnvar("ui_score_streak_index_" + var_1, scripts\mp\utility::getkillstreakindex(var_2.streakname));
+      self setclientomnvar("ui_score_streak_available_" + var_1, var_0[var_1].var_269A);
       continue;
     }
 
-    self setclientomnvar("ui_score_streak_index_" + var_01, 0);
-    self setclientomnvar("ui_score_streak_available_" + var_01, 0);
+    self setclientomnvar("ui_score_streak_index_" + var_1, 0);
+    self setclientomnvar("ui_score_streak_available_" + var_1, 0);
   }
 
-  var_03 = getclosestenemysqdist();
-  if(isDefined(var_03)) {
-    self setclientomnvar("ui_score_streak_selected_slot", var_03);
+  var_3 = getclosestenemysqdist();
+  if(isDefined(var_3)) {
+    self setclientomnvar("ui_score_streak_selected_slot", var_3);
     return;
   }
 
@@ -317,14 +317,14 @@ func_A6BA() {
   self notify("killstreakTriggeredWatcher");
   self endon("killstreakTriggeredWatcher");
   for(;;) {
-    var_00 = scripts\engine\utility::waittill_any_return("ks_action_3", "ks_action_4", "ks_action_5", "ks_action_6");
-    var_01 = laseron(var_00);
-    if(!isDefined(var_01)) {
+    var_0 = scripts\engine\utility::waittill_any_return("ks_action_3", "ks_action_4", "ks_action_5", "ks_action_6");
+    var_1 = laseron(var_0);
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    var_02 = func_7F45(var_01);
-    if(!isDefined(var_02) || !var_02.var_269A) {
+    var_2 = func_7F45(var_1);
+    if(!isDefined(var_2) || !var_2.var_269A) {
       continue;
     }
 
@@ -333,107 +333,107 @@ func_A6BA() {
       continue;
     }
 
-    if(isDefined(var_02.var_394)) {
-      var_03 = func_392B(var_02.var_394, var_02);
-      if(isDefined(var_03)) {
-        var_04 = undefined;
-        if(var_03 == "KILLSTREAKS_UNAVAILABLE_FOR_N") {
-          var_04 = level.var_A6AA - level._meth_8487 - level.ingraceperiod;
+    if(isDefined(var_2.var_394)) {
+      var_3 = func_392B(var_2.var_394, var_2);
+      if(isDefined(var_3)) {
+        var_4 = undefined;
+        if(var_3 == "KILLSTREAKS_UNAVAILABLE_FOR_N") {
+          var_4 = level.var_A6AA - level._meth_8487 - level.ingraceperiod;
         }
 
-        scripts\mp\hud_message::showerrormessage(var_03, var_04);
+        scripts\mp\hud_message::showerrormessage(var_3, var_4);
         continue;
       }
     }
 
     if(isDefined(self.var_13111)) {
-      self notify("killstreak_trigger_blocked", var_02);
+      self notify("killstreak_trigger_blocked", var_2);
       continue;
     }
 
-    var_05 = var_02.streakshouldchain;
-    if(isDefined(var_05.var_127BD)) {
-      if(!self[[var_05.var_127BD]](var_02)) {
+    var_5 = var_2.streakshouldchain;
+    if(isDefined(var_5.var_127BD)) {
+      if(!self[[var_5.var_127BD]](var_2)) {
         continue;
       }
     }
 
-    self.var_AA35 = var_02;
+    self.var_AA35 = var_2;
     if(!scripts\engine\utility::is_player_gamepad_enabled()) {
-      func_F837(var_01);
+      func_F837(var_1);
     }
 
-    if(var_02.var_EF88 == "no_fire_weapon") {
-      thread func_127C7(var_02.var_394, var_02, 1);
-    } else if(var_02.var_EF88 == "gesture_script_weapon") {
-      self giveandfireoffhand(var_02.var_394);
-    } else if(isDefined(var_02.var_394) && var_02.var_394 != "none") {
-      thread func_127C7(var_02.var_394, var_02);
+    if(var_2.var_EF88 == "no_fire_weapon") {
+      thread func_127C7(var_2.var_394, var_2, 1);
+    } else if(var_2.var_EF88 == "gesture_script_weapon") {
+      self giveandfireoffhand(var_2.var_394);
+    } else if(isDefined(var_2.var_394) && var_2.var_394 != "none") {
+      thread func_127C7(var_2.var_394, var_2);
     } else {
-      var_01 = getclosestenemysqdist();
-      thread func_A69A(var_02);
+      var_1 = getclosestenemysqdist();
+      thread func_A69A(var_2);
     }
 
-    var_06 = int(tablelookup("mp\killstreaktable.csv", 1, var_02.streakname, 4));
-    if(var_06 >= 1000) {
-      var_07 = tablelookup("mp\killstreaktable.csv", 1, var_02.streakname, 0);
-      if(var_07 != "") {
-        var_08 = int(var_07);
-        scripts\mp\utility::setmlgannouncement(20, self.team, self getentitynumber(), var_08);
+    var_6 = int(tablelookup("mp\killstreaktable.csv", 1, var_2.streakname, 4));
+    if(var_6 >= 1000) {
+      var_7 = tablelookup("mp\killstreaktable.csv", 1, var_2.streakname, 0);
+      if(var_7 != "") {
+        var_8 = int(var_7);
+        scripts\mp\utility::setmlgannouncement(20, self.team, self getentitynumber(), var_8);
       }
     }
   }
 }
 
-laseron(param_00) {
-  var_01 = undefined;
+laseron(var_0) {
+  var_1 = undefined;
   if(!isai(self) && scripts\engine\utility::is_player_gamepad_enabled()) {
-    if(param_00 == "ks_action_4") {
-      var_01 = getclosestenemysqdist();
+    if(var_0 == "ks_action_4") {
+      var_1 = getclosestenemysqdist();
     }
   } else if(level.gametype == "grnd" && !scripts\engine\utility::is_player_gamepad_enabled()) {
-    switch (param_00) {
+    switch (var_0) {
       case "ks_action_3":
-        var_01 = 0;
+        var_1 = 0;
         break;
 
       case "ks_action_4":
-        var_01 = 0;
+        var_1 = 0;
         break;
 
       case "ks_action_5":
-        var_01 = 0;
+        var_1 = 0;
         break;
 
       case "ks_action_6":
-        var_01 = 0;
+        var_1 = 0;
         break;
     }
   } else {
-    switch (param_00) {
+    switch (var_0) {
       case "ks_action_3":
-        var_01 = 1;
+        var_1 = 1;
         break;
 
       case "ks_action_4":
-        var_01 = 2;
+        var_1 = 2;
         break;
 
       case "ks_action_5":
-        var_01 = 3;
+        var_1 = 3;
         break;
 
       case "ks_action_6":
-        var_01 = 0;
+        var_1 = 0;
         break;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_392B(param_00, param_01) {
-  if(scripts\mp\utility::func_10060(param_01.streakname)) {
+func_392B(var_0, var_1) {
+  if(scripts\mp\utility::func_10060(var_1.streakname)) {
     if(isDefined(level.var_A6AA) && level.var_A6AA > 0) {
       if(level._meth_8487 - level.ingraceperiod < level.var_A6AA) {
         return "KILLSTREAKS_UNAVAILABLE_FOR_N";
@@ -441,7 +441,7 @@ func_392B(param_00, param_01) {
     }
   }
 
-  if(self hasweapon(param_00)) {
+  if(self hasweapon(var_0)) {
     return "KILLSTREAKS_CANNOT_BE_USED";
   }
 
@@ -461,59 +461,59 @@ func_392B(param_00, param_01) {
     return "KILLSTREAKS_CANNOT_BE_USED";
   }
 
-  if((scripts\mp\utility::func_9F2C(param_01.streakname) || scripts\mp\utility::func_9E90(param_01.streakname)) && !self isonground() || self iswallrunning()) {
+  if((scripts\mp\utility::func_9F2C(var_1.streakname) || scripts\mp\utility::func_9E90(var_1.streakname)) && !self isonground() || self iswallrunning()) {
     return "KILLSTREAKS_CANNOT_BE_USED";
   }
 }
 
-func_127C7(param_00, param_01, param_02) {
+func_127C7(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  if(self hasweapon(param_00)) {
+  if(self hasweapon(var_0)) {
     return 0;
   }
 
   self.tryingtousekillstreak = 1;
   thread triggerkillstreakweaponwatchdeath();
   scripts\mp\supers::allowsuperweaponstow();
-  scripts\mp\utility::_giveweapon(param_00, 0, 0, 1);
-  var_03 = param_01.streakshouldchain;
-  if(isDefined(var_03.var_13C8D)) {
-    var_04 = self[[var_03.var_13C8D]](param_01);
-    if(isDefined(var_04) && var_04 == 0) {
-      scripts\mp\utility::_takeweapon(param_00);
+  scripts\mp\utility::_giveweapon(var_0, 0, 0, 1);
+  var_3 = var_1.streakshouldchain;
+  if(isDefined(var_3.var_13C8D)) {
+    var_4 = self[[var_3.var_13C8D]](var_1);
+    if(isDefined(var_4) && var_4 == 0) {
+      scripts\mp\utility::_takeweapon(var_0);
       self.tryingtousekillstreak = undefined;
       self notify("stopTryingToUseKillstreak");
       return;
     }
   }
 
-  var_05 = scripts\mp\utility::func_11383(param_00);
-  if(isDefined(var_03.weaponswapwatcher)) {
-    self[[var_03.weaponswapwatcher]](param_01, var_05);
+  var_5 = scripts\mp\utility::func_11383(var_0);
+  if(isDefined(var_3.weaponswapwatcher)) {
+    self[[var_3.weaponswapwatcher]](var_1, var_5);
   }
 
-  if(var_05) {
-    if(scripts\mp\utility::istrue(param_02)) {
-      thread func_510E(0.05, param_01);
+  if(var_5) {
+    if(scripts\mp\utility::istrue(var_2)) {
+      thread func_510E(0.05, var_1);
     }
 
-    self waittill("killstreak_finished_with_weapon_" + param_00);
+    self waittill("killstreak_finished_with_weapon_" + var_0);
   }
 
   self.tryingtousekillstreak = undefined;
   self notify("stopTryingToUseKillstreak");
-  if(self hasweapon(param_00)) {
+  if(self hasweapon(var_0)) {
     scripts\mp\supers::unstowsuperweapon();
-    scripts\mp\utility::forcethirdpersonwhenfollowing(param_00);
+    scripts\mp\utility::forcethirdpersonwhenfollowing(var_0);
     if(self getcurrentweapon() == "none") {
       scripts\mp\utility::_switchtoweapon(self.lastdroppableweaponobj);
     }
   }
 
-  if(isDefined(var_03.weapontouse)) {
-    self[[var_03.weapontouse]](param_01);
+  if(isDefined(var_3.weapontouse)) {
+    self[[var_3.weapontouse]](var_1);
   }
 }
 
@@ -524,22 +524,22 @@ triggerkillstreakweaponwatchdeath() {
   self.tryingtousekillstreak = undefined;
 }
 
-func_510E(param_00, param_01) {
+func_510E(var_0, var_1) {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  wait(param_00);
-  thread func_A69A(param_01);
+  wait(var_0);
+  thread func_A69A(var_1);
 }
 
-func_13B96(param_00) {
+func_13B96(var_0) {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
   self endon("killstreak_finished_with_weapon");
   for(;;) {
-    if(self getcurrentweapon() != param_00) {
-      self notify("killstreak_finished_with_weapon_" + param_00);
+    if(self getcurrentweapon() != var_0) {
+      self notify("killstreak_finished_with_weapon_" + var_0);
       break;
     }
 
@@ -557,8 +557,8 @@ func_A69C() {
   self notify("killstreakFiredWatcher_offhand");
   self endon("killstreakFiredWatcher_offhand");
   for(;;) {
-    self waittill("offhand_fired", var_00);
-    thread func_128A4(var_00, "offhand_fired");
+    self waittill("offhand_fired", var_0);
+    thread func_128A4(var_0, "offhand_fired");
   }
 }
 
@@ -572,8 +572,8 @@ func_A69B() {
   self notify("killstreakFiredWatcher_grenade");
   self endon("killstreakFiredWatcher_grenade");
   for(;;) {
-    self waittill("grenade_fire", var_00, var_01);
-    thread func_128A4(var_01, "grenade_fire", var_00);
+    self waittill("grenade_fire", var_0, var_1);
+    thread func_128A4(var_1, "grenade_fire", var_0);
   }
 }
 
@@ -587,53 +587,53 @@ func_A69D() {
   self notify("killstreakFiredWatcher_weaponFired");
   self endon("killstreakFiredWatcher_weaponFired");
   for(;;) {
-    self waittill("weapon_fired", var_00);
-    thread func_128A4(var_00, "weapon_fired");
+    self waittill("weapon_fired", var_0);
+    thread func_128A4(var_0, "weapon_fired");
   }
 }
 
-func_128A4(param_00, param_01, param_02) {
-  var_03 = func_7F61();
-  if(!isDefined(var_03)) {
+func_128A4(var_0, var_1, var_2) {
+  var_3 = func_7F61();
+  if(!isDefined(var_3)) {
     return;
   }
 
-  if(var_03.var_394 != param_00) {
+  if(var_3.var_394 != var_0) {
     return;
   }
 
-  var_04 = self.pers["killstreaks"];
-  var_05 = undefined;
-  for(var_06 = 0; var_06 < 36; var_06++) {
-    if(!isDefined(var_04[var_06])) {
-      if(var_06 >= 4) {
+  var_4 = self.pers["killstreaks"];
+  var_5 = undefined;
+  for(var_6 = 0; var_6 < 36; var_6++) {
+    if(!isDefined(var_4[var_6])) {
+      if(var_6 >= 4) {
         break;
       } else {
         continue;
       }
     }
 
-    if(var_04[var_06] == var_03) {
-      var_05 = var_06;
+    if(var_4[var_6] == var_3) {
+      var_5 = var_6;
       break;
     }
   }
 
-  if(!isDefined(var_05)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  if(var_03.var_6D6B == param_01) {
-    thread func_A69A(var_03, param_02);
+  if(var_3.var_6D6B == var_1) {
+    thread func_A69A(var_3, var_2);
   }
 }
 
-func_9E6B(param_00) {
-  if(!isDefined(param_00)) {
+func_9E6B(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "jammer":
     case "dronedrop":
     case "directional_uav":
@@ -646,93 +646,93 @@ func_9E6B(param_00) {
   }
 }
 
-func_A69A(param_00, param_01) {
+func_A69A(var_0, var_1) {
   self endon("disconnect");
   self endon("joined_team");
   level endon("game_ended");
-  var_02 = param_00.streakshouldchain;
-  if(!scripts\mp\utility::validateusestreak(param_00.streakname)) {
-    if(isDefined(var_02.var_9B12)) {
-      self[[var_02.var_9B12]](param_00);
+  var_2 = var_0.streakshouldchain;
+  if(!scripts\mp\utility::validateusestreak(var_0.streakname)) {
+    if(isDefined(var_2.var_9B12)) {
+      self[[var_2.var_9B12]](var_0);
     }
 
-    if(isDefined(param_00.var_394) && param_00.var_394 != "none") {
-      self notify("killstreak_finished_with_weapon_" + param_00.var_394);
+    if(isDefined(var_0.var_394) && var_0.var_394 != "none") {
+      self notify("killstreak_finished_with_weapon_" + var_0.var_394);
     }
 
     return 0;
   }
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
-    if(func_9E6B(param_00.streakname)) {
+    if(func_9E6B(var_0.streakname)) {
       self _meth_80C3(1);
     }
   }
 
-  self.var_13111 = param_00;
-  var_03 = 1;
-  if(isDefined(var_02.usefunc)) {
-    var_03 = self[[var_02.usefunc]](param_00);
+  self.var_13111 = var_0;
+  var_3 = 1;
+  if(isDefined(var_2.usefunc)) {
+    var_3 = self[[var_2.usefunc]](var_0);
   }
 
-  var_04 = 1;
-  if(isDefined(var_02.user_triggered)) {
-    var_04 = self[[var_02.user_triggered]](param_00, param_01);
+  var_4 = 1;
+  if(isDefined(var_2.user_triggered)) {
+    var_4 = self[[var_2.user_triggered]](var_0, var_1);
   }
 
-  self notify("killstreak_use_finished", param_00.streakname, var_03);
+  self notify("killstreak_use_finished", var_0.streakname, var_3);
   self.var_13111 = undefined;
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
     self _meth_80C3(0);
   }
 
-  if(!var_03 || !var_04) {
+  if(!var_3 || !var_4) {
     return 0;
   }
 
-  func_C5A9(param_00);
+  func_C5A9(var_0);
 }
 
-func_729F(param_00, param_01) {
-  var_02 = func_4A1C(param_00, param_01);
-  func_A69A(var_02);
+func_729F(var_0, var_1) {
+  var_2 = func_4A1C(var_0, var_1);
+  func_A69A(var_2);
 }
 
 func_729E() {
-  var_00 = func_7F45(0);
-  func_A69A(var_00, 0);
+  var_0 = func_7F45(0);
+  func_A69A(var_0, 0);
 }
 
-func_C5A9(param_00) {
-  var_01 = param_00.streakname;
-  var_02 = func_6CBA(param_00);
-  param_00.var_269A = 0;
-  if(isDefined(var_02)) {
-    if(var_02 == 0 || var_02 >= 4) {
-      func_E131(var_02);
+func_C5A9(var_0) {
+  var_1 = var_0.streakname;
+  var_2 = func_6CBA(var_0);
+  var_0.var_269A = 0;
+  if(isDefined(var_2)) {
+    if(var_2 == 0 || var_2 >= 4) {
+      func_E131(var_2);
     }
 
     func_F1CB();
-  } else {}
+  }
 
-  thread scripts\mp\killstreak_loot::func_89BC(param_00);
-  thread scripts\mp\missions::func_13079(var_01);
-  scripts\mp\utility::printgameaction("killstreak started - " + var_01, self);
-  self notify("killstreak_used", var_01);
-  scripts\mp\utility::func_D4B7(var_01);
-  var_06 = gettime() - param_00.var_B143;
-  scripts\mp\analyticslog::logevent_killstreakavailable(var_01, var_06);
-  combatrecordkillstreakuse(var_01);
+  thread scripts\mp\killstreak_loot::func_89BC(var_0);
+  thread scripts\mp\missions::func_13079(var_1);
+  scripts\mp\utility::printgameaction("killstreak started - " + var_1, self);
+  self notify("killstreak_used", var_1);
+  scripts\mp\utility::func_D4B7(var_1);
+  var_6 = gettime() - var_0.var_B143;
+  scripts\mp\analyticslog::logevent_killstreakavailable(var_1, var_6);
+  combatrecordkillstreakuse(var_1);
 }
 
-func_DDF0(param_00) {
+func_DDF0(var_0) {
   if(isDefined(self.class_num)) {
-    if(self getplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 0, "killstreak") == param_00) {
+    if(self getplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 0, "killstreak") == var_0) {
       self.var_6DEB = gettime();
       return;
     }
 
-    if(self getplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 2, "killstreak") == param_00 && isDefined(self.var_6DEB)) {
+    if(self getplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 2, "killstreak") == var_0 && isDefined(self.var_6DEB)) {
       if(gettime() - self.var_6DEB < 20000) {
         thread scripts\mp\missions::processchallenge("wargasm");
         return;
@@ -743,152 +743,152 @@ func_DDF0(param_00) {
   }
 }
 
-func_4A1C(param_00, param_01, param_02) {
-  var_03 = spawnStruct();
-  var_03.var_269A = 0;
-  var_03.streakname = param_00;
-  var_03.var_9E0B = 0;
-  var_03.var_FFC4 = 0;
-  var_03.triggerportableradarping = param_01;
-  var_03.var_A5B0 = _meth_81ED(self);
-  var_03.lifeid = self.pers["deaths"];
-  var_03.isgimme = 0;
-  var_03.var_9F6E = 0;
-  var_03.var_394 = scripts\mp\utility::getkillstreakweapon(param_00);
-  var_03.var_6D6B = func_7F41(param_00);
-  var_03.streakshouldchain = getkillstreaksetupinfo(param_00);
-  var_03.var_EF88 = scripts\mp\utility::func_7F4F(param_00);
-  var_03.var_B143 = -1;
-  var_03.variantid = param_02;
-  return var_03;
+func_4A1C(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.var_269A = 0;
+  var_3.streakname = var_0;
+  var_3.var_9E0B = 0;
+  var_3.var_FFC4 = 0;
+  var_3.triggerportableradarping = var_1;
+  var_3.var_A5B0 = _meth_81ED(self);
+  var_3.lifeid = self.pers["deaths"];
+  var_3.isgimme = 0;
+  var_3.var_9F6E = 0;
+  var_3.var_394 = scripts\mp\utility::getkillstreakweapon(var_0);
+  var_3.var_6D6B = func_7F41(var_0);
+  var_3.streakshouldchain = getkillstreaksetupinfo(var_0);
+  var_3.var_EF88 = scripts\mp\utility::func_7F4F(var_0);
+  var_3.var_B143 = -1;
+  var_3.variantid = var_2;
+  return var_3;
 }
 
-_meth_81ED(param_00) {
-  if(!isDefined(param_00.pers["nextKillstreakID"])) {
-    param_00.pers["nextKillstreakID"] = 0;
+_meth_81ED(var_0) {
+  if(!isDefined(var_0.pers["nextKillstreakID"])) {
+    var_0.pers["nextKillstreakID"] = 0;
   }
 
-  var_01 = param_00.pers["nextKillstreakID"];
-  param_00.pers["nextKillstreakID"]++;
-  return var_01;
+  var_1 = var_0.pers["nextKillstreakID"];
+  var_0.pers["nextKillstreakID"]++;
+  return var_1;
 }
 
-awardkillstreak(param_00, param_01, param_02, param_03) {
-  var_04 = func_4A1C(param_00, param_01, param_03);
-  func_26D5(var_04, param_02);
+awardkillstreak(var_0, var_1, var_2, var_3) {
+  var_4 = func_4A1C(var_0, var_1, var_3);
+  func_26D5(var_4, var_2);
 }
 
-func_26D5(param_00, param_01) {
-  param_00.isgimme = 1;
-  if(isDefined(param_01) && param_01.size > 0) {
-    scripts\mp\killstreak_loot::func_988A(param_00, param_01);
+func_26D5(var_0, var_1) {
+  var_0.isgimme = 1;
+  if(isDefined(var_1) && var_1.size > 0) {
+    scripts\mp\killstreak_loot::func_988A(var_0, var_1);
   }
 
-  func_1030D(param_00, 0);
+  func_1030D(var_0, 0);
   func_F837(0);
   func_B2A9(0);
 }
 
-func_6693(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00) || !isDefined(param_01)) {
+func_6693(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var_04 = func_4A1C(param_00, self, param_03);
-  var_04.var_9E0B = 1;
-  var_04.var_FFC4 = 1;
-  if(isDefined(param_02) && param_02.size > 0) {
-    scripts\mp\killstreak_loot::func_988A(var_04, param_02);
+  var_4 = func_4A1C(var_0, self, var_3);
+  var_4.var_9E0B = 1;
+  var_4.var_FFC4 = 1;
+  if(isDefined(var_2) && var_2.size > 0) {
+    scripts\mp\killstreak_loot::func_988A(var_4, var_2);
   }
 
-  func_1030D(var_04, param_01);
+  func_1030D(var_4, var_1);
 }
 
-func_66B9(param_00, param_01, param_02) {
-  func_6693(param_00, 1, param_01, param_02);
+func_66B9(var_0, var_1, var_2) {
+  func_6693(var_0, 1, var_1, var_2);
 }
 
-func_66BB(param_00, param_01, param_02) {
-  func_6693(param_00, 2, param_01, param_02);
+func_66BB(var_0, var_1, var_2) {
+  func_6693(var_0, 2, var_1, var_2);
 }
 
-func_66BA(param_00, param_01, param_02) {
-  func_6693(param_00, 3, param_01, param_02);
+func_66BA(var_0, var_1, var_2) {
+  func_6693(var_0, 3, var_1, var_2);
 }
 
 func_DB1C() {
-  var_00 = self.pers["killstreaks"];
-  if(isDefined(var_00[35])) {
+  var_0 = self.pers["killstreaks"];
+  if(isDefined(var_0[35])) {
     return 0;
   }
 
-  var_01 = var_00[0];
-  if(!isDefined(var_01)) {
+  var_1 = var_0[0];
+  if(!isDefined(var_1)) {
     return 1;
   }
 
-  for(var_02 = 4; var_02 < 36; var_02++) {
-    if(!isDefined(var_00[var_02])) {
-      var_00[var_02] = var_01;
-      var_00[0] = undefined;
+  for(var_2 = 4; var_2 < 36; var_2++) {
+    if(!isDefined(var_0[var_2])) {
+      var_0[var_2] = var_1;
+      var_0[0] = undefined;
       break;
     }
   }
 
-  self.pers["killstreaks"] = var_00;
+  self.pers["killstreaks"] = var_0;
   return 1;
 }
 
 func_D65E() {
-  var_00 = self.pers["killstreaks"];
-  var_01 = var_00[0];
-  var_02 = undefined;
-  var_03 = undefined;
-  for(var_04 = 4; var_04 < 36; var_04++) {
-    var_05 = var_00[var_04];
-    if(isDefined(var_05)) {
-      var_02 = var_05;
-      var_03 = var_04;
+  var_0 = self.pers["killstreaks"];
+  var_1 = var_0[0];
+  var_2 = undefined;
+  var_3 = undefined;
+  for(var_4 = 4; var_4 < 36; var_4++) {
+    var_5 = var_0[var_4];
+    if(isDefined(var_5)) {
+      var_2 = var_5;
+      var_3 = var_4;
       continue;
     }
 
     break;
   }
 
-  self.pers["killstreaks"][0] = var_02;
-  if(isDefined(var_03)) {
-    self.pers["killstreaks"][var_03] = undefined;
+  self.pers["killstreaks"][0] = var_2;
+  if(isDefined(var_3)) {
+    self.pers["killstreaks"][var_3] = undefined;
   }
 }
 
-func_51D3(param_00) {
-  if(param_00 == 35) {
-    self.pers["killstreaks"][param_00] = undefined;
+func_51D3(var_0) {
+  if(var_0 == 35) {
+    self.pers["killstreaks"][var_0] = undefined;
     return;
   }
 
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = param_00; var_02 < 35; var_02++) {
-    var_03 = var_01[var_02 + 1];
-    if(!isDefined(var_03)) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = var_0; var_2 < 35; var_2++) {
+    var_3 = var_1[var_2 + 1];
+    if(!isDefined(var_3)) {
       break;
     }
 
-    var_01[param_00] = var_03;
+    var_1[var_0] = var_3;
   }
 
-  self.pers["killstreaks"] = var_01;
+  self.pers["killstreaks"] = var_1;
 }
 
-func_E131(param_00) {
-  self.pers["killstreaks"][param_00] = undefined;
-  if(param_00 == 0) {
+func_E131(var_0) {
+  self.pers["killstreaks"][var_0] = undefined;
+  if(var_0 == 0) {
     func_D65E();
     return;
   }
 
-  if(param_00 >= 4) {
-    func_51D3(param_00);
+  if(var_0 >= 4) {
+    func_51D3(var_0);
   }
 }
 
@@ -899,152 +899,152 @@ func_41C0() {
   updatekillstreakselectedui();
 }
 
-func_1030D(param_00, param_01) {
-  if(param_01 == 0) {
+func_1030D(var_0, var_1) {
+  if(var_1 == 0) {
     if(!func_DB1C()) {
       return;
     }
-  } else {}
+  }
 
-  self.pers["killstreaks"][param_01] = param_00;
+  self.pers["killstreaks"][var_1] = var_0;
   updatekillstreakselectedui();
 }
 
-func_5FBF(param_00, param_01) {
-  var_02 = func_7F45(param_00);
-  var_03 = var_02.streakname;
-  scripts\mp\utility::bufferednotify("earned_killstreak_buffered", var_03);
-  self.var_5FBE = param_01;
+func_5FBF(var_0, var_1) {
+  var_2 = func_7F45(var_0);
+  var_3 = var_2.streakname;
+  scripts\mp\utility::bufferednotify("earned_killstreak_buffered", var_3);
+  self.var_5FBE = var_1;
   if(scripts\mp\utility::_hasperk("specialty_support_killstreaks")) {
-    self.pers["killstreaks"][param_00].earned = 1;
+    self.pers["killstreaks"][var_0].earned = 1;
   }
 
   if(!level.gameended) {
-    var_04 = var_03;
-    var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(var_02.variantid);
-    if(var_05 != "") {
-      var_04 = var_04 + "_" + var_05;
+    var_4 = var_3;
+    var_5 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
+    if(var_5 != "") {
+      var_4 = var_4 + "_" + var_5;
     }
 
-    thread scripts\mp\hud_message::showkillstreaksplash(var_04, param_01);
+    thread scripts\mp\hud_message::showkillstreaksplash(var_4, var_1);
   }
 
   if(scripts\mp\utility::_hasperk("specialty_support_killstreaks")) {
     scripts\mp\missions::func_D991("ch_trait_support");
   }
 
-  func_DDF0(var_03);
+  func_DDF0(var_3);
   func_F866();
-  func_B2A9(param_00);
+  func_B2A9(var_0);
 }
 
-func_B2A9(param_00) {
-  var_01 = func_7F45(param_00);
-  if(!isDefined(var_01)) {
+func_B2A9(var_0) {
+  var_1 = func_7F45(var_0);
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = var_01.streakname;
-  var_03 = var_01.streakshouldchain;
+  var_2 = var_1.streakname;
+  var_3 = var_1.streakshouldchain;
   if(self.team == "spectator") {
     return;
   }
 
-  var_01.var_269A = 1;
-  if(param_00 >= 0 && param_00 <= 3) {
-    func_F837(param_00);
+  var_1.var_269A = 1;
+  if(var_0 >= 0 && var_0 <= 3) {
+    func_F837(var_0);
   }
 
   updatekillstreakselectedui();
-  if(isDefined(var_03.var_26A2)) {
-    self[[var_03.var_26A2]](var_01);
+  if(isDefined(var_3.var_26A2)) {
+    self[[var_3.var_26A2]](var_1);
   }
 
-  if(isDefined(var_01.var_9E0B) && var_01.var_9E0B && isDefined(var_01.var_FFC4) && var_01.var_FFC4) {
+  if(isDefined(var_1.var_9E0B) && var_1.var_9E0B && isDefined(var_1.var_FFC4) && var_1.var_FFC4) {
     self notify("received_earned_killstreak");
   }
 
-  var_01.var_B143 = gettime();
-  var_04 = scripts\mp\utility::getkillstreakindex(var_02);
-  scripts\mp\analyticslog::logevent_killstreakearned(var_04, var_01.var_B143);
-  scripts\mp\matchdata::logkillstreakavailableevent(var_02);
+  var_1.var_B143 = gettime();
+  var_4 = scripts\mp\utility::getkillstreakindex(var_2);
+  scripts\mp\analyticslog::logevent_killstreakearned(var_4, var_1.var_B143);
+  scripts\mp\matchdata::logkillstreakavailableevent(var_2);
 }
 
-givekillstreak(param_00, param_01, param_02, param_03) {
-  awardkillstreak(param_00, param_03);
+givekillstreak(var_0, var_1, var_2, var_3) {
+  awardkillstreak(var_0, var_3);
 }
 
-getstreakcost(param_00) {
-  var_01 = int(scripts\mp\utility::func_7F46(param_00));
+getstreakcost(var_0) {
+  var_1 = int(scripts\mp\utility::func_7F46(var_0));
   if(isDefined(self) && isplayer(self)) {
-    var_01 = scripts\mp\killstreak_loot::modifycostforlootitem(self.streakvariantids[param_00], var_01);
-    if(scripts\mp\utility::isspecialistkillstreak(param_00)) {
+    var_1 = scripts\mp\killstreak_loot::modifycostforlootitem(self.streakvariantids[var_0], var_1);
+    if(scripts\mp\utility::isspecialistkillstreak(var_0)) {
       if(isDefined(self.pers["gamemodeLoadout"])) {
-        if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak1"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak1"] == param_00) {
-          var_01 = 2;
-        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == param_00) {
-          var_01 = 4;
-        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == param_00) {
-          var_01 = 6;
-        } else {}
+        if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak1"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak1"] == var_0) {
+          var_1 = 2;
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == var_0) {
+          var_1 = 4;
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == var_0) {
+          var_1 = 6;
+        }
       } else if(issubstr(self.curclass, "custom")) {
-        for(var_02 = 0; var_02 < 3; var_02++) {
-          var_03 = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", self.class_num, "specialistStreaks", var_02);
-          if(var_03 == param_00) {
+        for(var_2 = 0; var_2 < 3; var_2++) {
+          var_3 = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", self.class_num, "specialistStreaks", var_2);
+          if(var_3 == var_0) {
             break;
           }
         }
 
-        if(var_02 == 1) {
-          var_01 = 500;
-        } else if(var_02 == 2) {
-          var_01 = 800;
+        if(var_2 == 1) {
+          var_1 = 500;
+        } else if(var_2 == 2) {
+          var_1 = 800;
         }
       } else if(issubstr(self.curclass, "callback")) {
-        var_02 = 0;
-        foreach(var_05 in self.pers["specialistStreaks"]) {
-          if(var_05 == param_00) {
+        var_2 = 0;
+        foreach(var_5 in self.pers["specialistStreaks"]) {
+          if(var_5 == var_0) {
             break;
           }
         }
 
-        var_01 = self.pers["specialistStreakKills"][var_02];
+        var_1 = self.pers["specialistStreakKills"][var_2];
       } else if(issubstr(self.curclass, "axis") || issubstr(self.curclass, "allies")) {
-        var_02 = 0;
-        var_06 = "none";
+        var_2 = 0;
+        var_6 = "none";
         if(issubstr(self.curclass, "axis")) {
-          var_06 = "axis";
+          var_6 = "axis";
         } else if(issubstr(self.curclass, "allies")) {
-          var_06 = "allies";
+          var_6 = "allies";
         }
 
-        var_07 = scripts\mp\utility::getclassindex(self.curclass);
-        while(var_02 < 3) {
-          var_03 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_06, var_07, "class", "specialistStreaks", var_02);
-          if(var_03 == param_00) {
+        var_7 = scripts\mp\utility::getclassindex(self.curclass);
+        while(var_2 < 3) {
+          var_3 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_6, var_7, "class", "specialistStreaks", var_2);
+          if(var_3 == var_0) {
             break;
           }
 
-          var_02++;
+          var_2++;
         }
 
-        var_01 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_06, var_07, "class", "specialistStreakKills", var_02);
+        var_1 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_6, var_7, "class", "specialistStreakKills", var_2);
       }
     }
   }
 
-  var_01 = int(clamp(var_01, 0, 7000));
-  return var_01;
+  var_1 = int(clamp(var_1, 0, 7000));
+  return var_1;
 }
 
-buttonpressed(param_00, param_01) {
-  var_02 = 0;
+buttonpressed(var_0, var_1) {
+  var_2 = 0;
   if(scripts\mp\utility::_hasperk("specialty_support_killstreaks")) {
-    var_03 = scripts\mp\utility::getkillstreakindex(param_00);
-    var_02 = 175 * var_03;
+    var_3 = scripts\mp\utility::getkillstreakindex(var_0);
+    var_2 = 175 * var_3;
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_A6B0() {
@@ -1053,35 +1053,35 @@ func_A6B0() {
   self endon("faux_spawn");
   level endon("game_ended");
   for(;;) {
-    var_00 = scripts\engine\utility::waittill_any_return("ks_select_up", "ks_select_down");
+    var_0 = scripts\engine\utility::waittill_any_return("ks_select_up", "ks_select_down");
     if(!scripts\engine\utility::is_player_gamepad_enabled()) {
       continue;
     }
 
     if(!scripts\mp\utility::isjuggernaut() && !scripts\mp\utility::istrue(self.iscarrying) && !isDefined(self.var_13111)) {
-      var_01 = getclosestenemysqdist();
-      if(!isDefined(var_01)) {
+      var_1 = getclosestenemysqdist();
+      if(!isDefined(var_1)) {
         continue;
       }
 
-      var_02 = var_01;
-      if(var_00 == "ks_select_up") {
-        var_02 = func_7FED(var_01);
-      } else if(var_00 == "ks_select_down") {
-        var_02 = detonate(var_01);
-      } else {}
+      var_2 = var_1;
+      if(var_0 == "ks_select_up") {
+        var_2 = func_7FED(var_1);
+      } else if(var_0 == "ks_select_down") {
+        var_2 = detonate(var_1);
+      }
 
-      func_F837(var_02);
+      func_F837(var_2);
     }
   }
 }
 
 func_F1C5() {
-  var_00 = self.pers["killstreaks"];
-  for(var_01 = 3; var_01 >= 0; var_01--) {
-    var_02 = var_00[var_01];
-    if(isDefined(var_02) && var_02.var_269A) {
-      func_F837(var_01);
+  var_0 = self.pers["killstreaks"];
+  for(var_1 = 3; var_1 >= 0; var_1--) {
+    var_2 = var_0[var_1];
+    if(isDefined(var_2) && var_2.var_269A) {
+      func_F837(var_1);
       return;
     }
   }
@@ -1089,76 +1089,76 @@ func_F1C5() {
   clearkillstreakselection();
 }
 
-func_7FED(param_00) {
-  var_01 = self.pers["killstreaks"];
-  var_02 = param_00;
-  var_03 = scripts\engine\utility::ter_op(param_00 >= 3, 0, param_00 + 1);
-  var_04 = param_00;
-  var_05 = var_03;
-  while(var_05 != var_04) {
-    var_06 = var_01[var_05];
-    if(isDefined(var_06) && var_06.var_269A) {
-      var_02 = var_05;
+func_7FED(var_0) {
+  var_1 = self.pers["killstreaks"];
+  var_2 = var_0;
+  var_3 = scripts\engine\utility::ter_op(var_0 >= 3, 0, var_0 + 1);
+  var_4 = var_0;
+  var_5 = var_3;
+  while(var_5 != var_4) {
+    var_6 = var_1[var_5];
+    if(isDefined(var_6) && var_6.var_269A) {
+      var_2 = var_5;
       break;
     }
 
-    var_05++;
-    if(var_05 > 3) {
-      var_05 = 0;
+    var_5++;
+    if(var_5 > 3) {
+      var_5 = 0;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-detonate(param_00) {
-  var_01 = self.pers["killstreaks"];
-  var_02 = param_00;
-  var_03 = scripts\engine\utility::ter_op(param_00 <= 0, 3, param_00 - 1);
-  var_04 = param_00;
-  var_05 = var_03;
-  while(var_05 != var_04) {
-    var_06 = var_01[var_05];
-    if(isDefined(var_06) && var_06.var_269A) {
-      var_02 = var_05;
+detonate(var_0) {
+  var_1 = self.pers["killstreaks"];
+  var_2 = var_0;
+  var_3 = scripts\engine\utility::ter_op(var_0 <= 0, 3, var_0 - 1);
+  var_4 = var_0;
+  var_5 = var_3;
+  while(var_5 != var_4) {
+    var_6 = var_1[var_5];
+    if(isDefined(var_6) && var_6.var_269A) {
+      var_2 = var_5;
       break;
     }
 
-    var_05--;
-    if(var_05 < 0) {
-      var_05 = 3;
+    var_5--;
+    if(var_5 < 0) {
+      var_5 = 3;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_F1CB() {
-  var_00 = self.pers["killstreaks"];
-  var_01 = undefined;
-  var_02 = -1;
-  for(var_03 = 3; var_03 >= 0; var_03--) {
-    var_04 = var_00[var_03];
-    if(isDefined(var_04) && var_04.var_269A) {
-      var_05 = getstreakcost(var_04.streakname);
-      if(var_05 > var_02) {
-        var_01 = var_03;
-        var_02 = var_05;
+  var_0 = self.pers["killstreaks"];
+  var_1 = undefined;
+  var_2 = -1;
+  for(var_3 = 3; var_3 >= 0; var_3--) {
+    var_4 = var_0[var_3];
+    if(isDefined(var_4) && var_4.var_269A) {
+      var_5 = getstreakcost(var_4.streakname);
+      if(var_5 > var_2) {
+        var_1 = var_3;
+        var_2 = var_5;
       }
     }
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     clearkillstreakselection();
     return;
   }
 
-  func_F837(var_01);
+  func_F837(var_1);
 }
 
-func_F837(param_00) {
-  var_01 = func_7F45(param_00);
-  self.currentselectedkillstreakslot = param_00;
+func_F837(var_0) {
+  var_1 = func_7F45(var_0);
+  self.currentselectedkillstreakslot = var_0;
   updatekillstreakselectedui();
 }
 
@@ -1168,64 +1168,64 @@ clearkillstreakselection() {
 }
 
 _meth_8110() {
-  var_00 = getclosestenemysqdist();
-  if(!isDefined(var_00)) {
+  var_0 = getclosestenemysqdist();
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  return self.pers["killstreaks"][var_00];
+  return self.pers["killstreaks"][var_0];
 }
 
 getclosestenemysqdist() {
   return self.currentselectedkillstreakslot;
 }
 
-func_7F45(param_00) {
-  return self.pers["killstreaks"][param_00];
+func_7F45(var_0) {
+  return self.pers["killstreaks"][var_0];
 }
 
-func_7E9E(param_00) {
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = 1; var_02 <= 3; var_02++) {
-    var_03 = var_01[var_02];
-    if(isDefined(var_03) && var_03.streakname == param_00) {
-      return var_03;
+func_7E9E(var_0) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = 1; var_2 <= 3; var_2++) {
+    var_3 = var_1[var_2];
+    if(isDefined(var_3) && var_3.streakname == var_0) {
+      return var_3;
     }
   }
 
   return undefined;
 }
 
-func_7E9F(param_00) {
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = 1; var_02 <= 3; var_02++) {
-    var_03 = var_01[var_02];
-    if(isDefined(var_03) && var_03.streakname == param_00) {
-      return var_02;
+func_7E9F(var_0) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = 1; var_2 <= 3; var_2++) {
+    var_3 = var_1[var_2];
+    if(isDefined(var_3) && var_3.streakname == var_0) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-missile_settargetpos(param_00) {
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = 0; var_02 <= 3; var_02++) {
-    var_03 = var_01[var_02];
-    if(isDefined(var_03) && var_03.streakname == param_00 && var_03.var_269A) {
-      return var_02;
+missile_settargetpos(var_0) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = 0; var_2 <= 3; var_2++) {
+    var_3 = var_1[var_2];
+    if(isDefined(var_3) && var_3.streakname == var_0 && var_3.var_269A) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-func_7F54(param_00) {
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = 0; var_02 <= 3; var_02++) {
-    var_03 = var_01[var_02];
-    if(isDefined(var_03) && var_03.streakname == param_00) {
-      return var_02;
+func_7F54(var_0) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = 0; var_2 <= 3; var_2++) {
+    var_3 = var_1[var_2];
+    if(isDefined(var_3) && var_3.streakname == var_0) {
+      return var_2;
     }
   }
 
@@ -1233,15 +1233,15 @@ func_7F54(param_00) {
 }
 
 func_7ED6() {
-  var_00 = [];
-  var_01 = self.pers["killstreaks"];
-  var_02 = func_7F45(0);
-  if(isDefined(var_02)) {
-    var_00[0] = var_02;
-    for(var_03 = 4; var_03 < 36; var_03++) {
-      var_04 = var_01[var_03];
-      if(isDefined(var_04)) {
-        var_00[var_00.size] = var_04;
+  var_0 = [];
+  var_1 = self.pers["killstreaks"];
+  var_2 = func_7F45(0);
+  if(isDefined(var_2)) {
+    var_0[0] = var_2;
+    for(var_3 = 4; var_3 < 36; var_3++) {
+      var_4 = var_1[var_3];
+      if(isDefined(var_4)) {
+        var_0[var_0.size] = var_4;
         continue;
       }
 
@@ -1249,57 +1249,57 @@ func_7ED6() {
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_7DE7() {
-  var_00 = [];
-  var_01 = self.pers["killstreaks"];
-  if(var_01.size) {
-    for(var_02 = 1; var_02 < 4; var_02++) {
-      var_03 = var_01[var_02];
-      if(isDefined(var_03) && isDefined(var_03.streakname) && var_03.var_269A) {
-        var_00[var_00.size] = var_03;
+  var_0 = [];
+  var_1 = self.pers["killstreaks"];
+  if(var_1.size) {
+    for(var_2 = 1; var_2 < 4; var_2++) {
+      var_3 = var_1[var_2];
+      if(isDefined(var_3) && isDefined(var_3.streakname) && var_3.var_269A) {
+        var_0[var_0.size] = var_3;
       }
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-registerkillstreak(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+registerkillstreak(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isDefined(level.killstreaksetups)) {
     level.killstreaksetups = [];
   }
 
-  var_09 = spawnStruct();
-  level.killstreaksetups[param_00] = var_09;
-  var_09.usefunc = param_01;
-  var_09.user_triggered = param_02;
-  var_09.var_26A2 = param_03;
-  var_09.var_127BD = param_04;
-  var_09.var_13C8D = param_05;
-  var_09.weapontouse = param_06;
-  var_09.var_9B12 = param_07;
-  var_09.weaponswapwatcher = param_08;
+  var_9 = spawnStruct();
+  level.killstreaksetups[var_0] = var_9;
+  var_9.usefunc = var_1;
+  var_9.user_triggered = var_2;
+  var_9.var_26A2 = var_3;
+  var_9.var_127BD = var_4;
+  var_9.var_13C8D = var_5;
+  var_9.weapontouse = var_6;
+  var_9.var_9B12 = var_7;
+  var_9.weaponswapwatcher = var_8;
 }
 
-getkillstreaksetupinfo(param_00) {
-  var_01 = level.killstreaksetups[param_00];
-  return var_01;
+getkillstreaksetupinfo(var_0) {
+  var_1 = level.killstreaksetups[var_0];
+  return var_1;
 }
 
-func_7F41(param_00) {
-  if(param_00 == "none") {
+func_7F41(var_0) {
+  if(var_0 == "none") {
     return "";
   }
 
-  var_01 = scripts\mp\utility::func_7F4F(param_00);
-  if(!isDefined(var_01) || var_01 == "") {
+  var_1 = scripts\mp\utility::func_7F4F(var_0);
+  if(!isDefined(var_1) || var_1 == "") {
     return "";
   }
 
-  switch (var_01) {
+  switch (var_1) {
     case "script_weapon":
     case "gesture_script_weapon":
       return "offhand_fired";
@@ -1325,35 +1325,35 @@ func_7F61() {
   return self.var_AA35;
 }
 
-func_3E4E(param_00) {
-  foreach(var_02 in self.var_A6AB) {
-    var_03 = getstreakcost(var_02);
-    var_04 = func_7E9F(var_02);
-    var_05 = func_7F45(var_04);
-    if(self.previousstreakpoints < var_03 && param_00 >= var_03) {
-      if(scripts\mp\utility::_hasperk("specialty_support_killstreaks") && scripts\mp\utility::istrue(self.pers["killstreaks"][var_04].earned)) {
+func_3E4E(var_0) {
+  foreach(var_2 in self.var_A6AB) {
+    var_3 = getstreakcost(var_2);
+    var_4 = func_7E9F(var_2);
+    var_5 = func_7F45(var_4);
+    if(self.previousstreakpoints < var_3 && var_0 >= var_3) {
+      if(scripts\mp\utility::_hasperk("specialty_support_killstreaks") && scripts\mp\utility::istrue(self.pers["killstreaks"][var_4].earned)) {
         continue;
       }
 
-      func_5FBF(var_04, var_03);
+      func_5FBF(var_4, var_3);
     }
   }
 }
 
-func_213F(param_00) {
-  var_01 = self.pers["killstreaks"];
-  if(!isDefined(var_01)) {
+func_213F(var_0) {
+  var_1 = self.pers["killstreaks"];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  foreach(var_03 in param_00) {
-    var_04 = 0;
-    for(var_05 = 1; var_05 <= 3; var_05++) {
-      var_06 = var_01[var_05];
-      if(isDefined(var_06)) {
-        if(isDefined(var_06.streakname)) {
-          if(var_06.streakname == var_03) {
-            var_04 = 1;
+  foreach(var_3 in var_0) {
+    var_4 = 0;
+    for(var_5 = 1; var_5 <= 3; var_5++) {
+      var_6 = var_1[var_5];
+      if(isDefined(var_6)) {
+        if(isDefined(var_6.streakname)) {
+          if(var_6.streakname == var_3) {
+            var_4 = 1;
             break;
           }
         }
@@ -1361,13 +1361,13 @@ func_213F(param_00) {
         continue;
       }
 
-      if(var_03 == "none") {
-        var_04 = 1;
+      if(var_3 == "none") {
+        var_4 = 1;
         break;
       }
     }
 
-    if(!var_04) {
+    if(!var_4) {
       return 0;
     }
   }
@@ -1375,50 +1375,50 @@ func_213F(param_00) {
   return 1;
 }
 
-func_6CBA(param_00) {
-  var_01 = self.pers["killstreaks"];
-  for(var_02 = 0; var_02 <= 36; var_02++) {
-    var_03 = var_01[var_02];
-    if(!isDefined(var_03)) {
-      if(var_02 >= 4) {
+func_6CBA(var_0) {
+  var_1 = self.pers["killstreaks"];
+  for(var_2 = 0; var_2 <= 36; var_2++) {
+    var_3 = var_1[var_2];
+    if(!isDefined(var_3)) {
+      if(var_2 >= 4) {
         break;
       }
 
       continue;
     }
 
-    if(param_00 == var_03) {
-      return var_02;
+    if(var_0 == var_3) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-_meth_83A7(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = scripts\mp\rank::getscoreinfovalue(param_00);
+_meth_83A7(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = scripts\mp\rank::getscoreinfovalue(var_0);
   }
 
-  if(param_01 == 0) {
+  if(var_1 == 0) {
     return;
   }
 
-  var_02 = self.streakpoints + param_01;
-  var_03 = var_02;
-  var_04 = func_7FA2();
-  if(var_03 >= var_04) {
-    var_03 = var_03 - var_04;
+  var_2 = self.streakpoints + var_1;
+  var_3 = var_2;
+  var_4 = func_7FA2();
+  if(var_3 >= var_4) {
+    var_3 = var_3 - var_4;
   }
 
-  setstreakpoints(var_03);
-  func_3E4E(var_02);
-  if(var_02 >= var_04) {
-    setstreakpoints(var_03);
+  setstreakpoints(var_3);
+  func_3E4E(var_2);
+  if(var_2 >= var_4) {
+    setstreakpoints(var_3);
   }
 
-  func_12F2E(var_03);
-  scripts\mp\analyticslog::logevent_reportstreakscore(param_01, gettime(), scripts\mp\rank::getscoreinfocategory(param_00, "eventID"));
+  func_12F2E(var_3);
+  scripts\mp\analyticslog::logevent_reportstreakscore(var_1, gettime(), scripts\mp\rank::getscoreinfocategory(var_0, "eventID"));
 }
 
 func_E275() {
@@ -1428,9 +1428,9 @@ func_E275() {
   func_12F2E(0);
 }
 
-setstreakpoints(param_00) {
-  if(param_00 < 0) {
-    param_00 = 0;
+setstreakpoints(var_0) {
+  if(var_0 < 0) {
+    var_0 = 0;
   }
 
   if(isDefined(self.streakpoints)) {
@@ -1439,7 +1439,7 @@ setstreakpoints(param_00) {
     self.previousstreakpoints = 0;
   }
 
-  self.streakpoints = param_00;
+  self.streakpoints = var_0;
   updatestreakcount();
 }
 
@@ -1449,27 +1449,27 @@ func_110C3() {
   scripts\mp\utility::setpersstat("streakPoints", scripts\engine\utility::ter_op(isDefined(self.streakpoints), self.streakpoints, 0));
 }
 
-findunobstructedfiringpointaroundz(param_00, param_01, param_02, param_03) {
-  var_04 = rotatevector((0, 0, 1), (-1 * param_03, 0, 0));
-  var_05 = vectortoangles(param_01 - param_00.origin);
-  for(var_06 = 0; var_06 < 360; var_06 = var_06 + 30) {
-    var_07 = param_02 * rotatevector(var_04, (0, var_06 + var_05[1], 0));
-    var_08 = param_01 + var_07;
-    if(_findunobstructedfiringpointhelper(param_00, var_08, param_01)) {
-      return var_08;
+findunobstructedfiringpointaroundz(var_0, var_1, var_2, var_3) {
+  var_4 = rotatevector((0, 0, 1), (-1 * var_3, 0, 0));
+  var_5 = vectortoangles(var_1 - var_0.origin);
+  for(var_6 = 0; var_6 < 360; var_6 = var_6 + 30) {
+    var_7 = var_2 * rotatevector(var_4, (0, var_6 + var_5[1], 0));
+    var_8 = var_1 + var_7;
+    if(_findunobstructedfiringpointhelper(var_0, var_8, var_1)) {
+      return var_8;
     }
   }
 
   return undefined;
 }
 
-findunobstructedfiringpointaroundy(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = vectortoangles(param_00.origin - param_01);
-  for(var_07 = param_03; var_07 <= param_04; var_07 = var_07 + param_05) {
-    var_08 = rotatevector((1, 0, 0), (var_07 - 90, 0, 0));
-    var_09 = param_02 * rotatevector(var_08, (0, var_06[1], 0));
-    var_0A = param_01 + var_09;
-    if(_findunobstructedfiringpointhelper(param_00, var_0A, param_01)) {
+findunobstructedfiringpointaroundy(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = vectortoangles(var_0.origin - var_1);
+  for(var_7 = var_3; var_7 <= var_4; var_7 = var_7 + var_5) {
+    var_8 = rotatevector((1, 0, 0), (var_7 - 90, 0, 0));
+    var_9 = var_2 * rotatevector(var_8, (0, var_6[1], 0));
+    var_0A = var_1 + var_9;
+    if(_findunobstructedfiringpointhelper(var_0, var_0A, var_1)) {
       return var_0A;
     }
   }
@@ -1477,22 +1477,22 @@ findunobstructedfiringpointaroundy(param_00, param_01, param_02, param_03, param
   return undefined;
 }
 
-_findunobstructedfiringpointhelper(param_00, param_01, param_02) {
-  var_03 = bulletTrace(param_01, param_02, 0);
-  if(var_03["fraction"] > 0.99) {
+_findunobstructedfiringpointhelper(var_0, var_1, var_2) {
+  var_3 = bulletTrace(var_1, var_2, 0);
+  if(var_3["fraction"] > 0.99) {
     return 1;
   }
 
   return 0;
 }
 
-findunobstructedfiringpoint(param_00, param_01, param_02) {
-  var_03 = findunobstructedfiringpointaroundz(param_00, param_01, param_02, 30);
-  if(!isDefined(var_03)) {
-    var_03 = findunobstructedfiringpointaroundy(param_00, param_01, param_02, 15, 75, 15);
+findunobstructedfiringpoint(var_0, var_1, var_2) {
+  var_3 = findunobstructedfiringpointaroundz(var_0, var_1, var_2, 30);
+  if(!isDefined(var_3)) {
+    var_3 = findunobstructedfiringpointaroundy(var_0, var_1, var_2, 15, 75, 15);
   }
 
-  return var_03;
+  return var_3;
 }
 
 isusinggunship() {
@@ -1503,23 +1503,23 @@ func_9FC4() {
   return isDefined(self.var_98FF) && self.var_98FF;
 }
 
-func_532A(param_00, param_01, param_02, param_03) {
-  var_04 = "MOD_EXPLOSIVE";
-  var_05 = 5000;
-  var_06 = (0, 0, 0);
-  var_07 = (0, 0, 0);
-  var_08 = "";
-  var_09 = "";
+func_532A(var_0, var_1, var_2, var_3) {
+  var_4 = "MOD_EXPLOSIVE";
+  var_5 = 5000;
+  var_6 = (0, 0, 0);
+  var_7 = (0, 0, 0);
+  var_8 = "";
+  var_9 = "";
   var_0A = "";
   var_0B = undefined;
-  if(!isDefined(param_03)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
   if(level.teambased) {
-    foreach(var_0D in param_03) {
-      if(scripts\mp\utility::func_9FE7(param_00, param_01, var_0D)) {
-        var_0D notify("damage", var_05, param_00, var_06, var_07, var_04, var_08, var_09, var_0A, var_0B, param_02);
+    foreach(var_0D in var_3) {
+      if(scripts\mp\utility::func_9FE7(var_0, var_1, var_0D)) {
+        var_0D notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_0A, var_0B, var_2);
         wait(0.05);
       }
     }
@@ -1527,50 +1527,50 @@ func_532A(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  foreach(var_0D in var_04) {
-    if(scripts\mp\utility::func_9FD8(param_00, param_01, var_0D)) {
-      var_0D notify("damage", var_05, param_00, var_06, var_07, var_04, var_08, var_09, var_0A, var_0B, param_02);
+  foreach(var_0D in var_4) {
+    if(scripts\mp\utility::func_9FD8(var_0, var_1, var_0D)) {
+      var_0D notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_0A, var_0B, var_2);
       wait(0.05);
     }
   }
 }
 
-killstreakhit(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_01) && isplayer(param_00) && isDefined(param_02.triggerportableradarping) && isDefined(param_02.triggerportableradarping.team)) {
-    if(scripts\mp\utility::playersareenemies(param_00, param_02.triggerportableradarping)) {
-      if(scripts\mp\utility::iskillstreakweapon(param_01)) {
+killstreakhit(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.triggerportableradarping) && isDefined(var_2.triggerportableradarping.team)) {
+    if(scripts\mp\utility::playersareenemies(var_0, var_2.triggerportableradarping)) {
+      if(scripts\mp\utility::iskillstreakweapon(var_1)) {
         return;
       }
 
-      if(!isDefined(param_00.lasthittime[param_01])) {
-        param_00.lasthittime[param_01] = 0;
+      if(!isDefined(var_0.lasthittime[var_1])) {
+        var_0.lasthittime[var_1] = 0;
       }
 
-      if(param_00.lasthittime[param_01] == gettime()) {
+      if(var_0.lasthittime[var_1] == gettime()) {
         return;
       }
 
-      param_00.lasthittime[param_01] = gettime();
-      param_00 thread scripts\mp\gamelogic::threadedsetweaponstatbyname(param_01, 1, "hits");
-      var_04 = param_00 scripts\mp\persistence::statgetbuffered("totalShots");
-      var_05 = param_00 scripts\mp\persistence::statgetbuffered("hits") + 1;
-      if(var_05 <= var_04) {
-        param_00 scripts\mp\persistence::func_10E55("hits", var_05);
-        param_00 scripts\mp\persistence::func_10E55("misses", int(var_04 - var_05));
-        param_00 scripts\mp\persistence::func_10E55("accuracy", int(var_05 * 10000 / var_04));
+      var_0.lasthittime[var_1] = gettime();
+      var_0 thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_1, 1, "hits");
+      var_4 = var_0 scripts\mp\persistence::statgetbuffered("totalShots");
+      var_5 = var_0 scripts\mp\persistence::statgetbuffered("hits") + 1;
+      if(var_5 <= var_4) {
+        var_0 scripts\mp\persistence::func_10E55("hits", var_5);
+        var_0 scripts\mp\persistence::func_10E55("misses", int(var_4 - var_5));
+        var_0 scripts\mp\persistence::func_10E55("accuracy", int(var_5 * 10000 / var_4));
       }
 
-      if((isDefined(param_03) && scripts\engine\utility::isbulletdamage(param_03)) || scripts\mp\utility::isprojectiledamage(param_03)) {
-        param_00 thread scripts\mp\contractchallenges::contractshotslanded(param_01);
-        param_00.lastdamagetime = gettime();
-        var_06 = scripts\mp\utility::getweapongroup(param_01);
-        if(var_06 == "weapon_lmg") {
-          if(!isDefined(param_00.shotslandedlmg)) {
-            param_00.shotslandedlmg = 1;
+      if((isDefined(var_3) && scripts\engine\utility::isbulletdamage(var_3)) || scripts\mp\utility::isprojectiledamage(var_3)) {
+        var_0 thread scripts\mp\contractchallenges::contractshotslanded(var_1);
+        var_0.lastdamagetime = gettime();
+        var_6 = scripts\mp\utility::getweapongroup(var_1);
+        if(var_6 == "weapon_lmg") {
+          if(!isDefined(var_0.shotslandedlmg)) {
+            var_0.shotslandedlmg = 1;
             return;
           }
 
-          param_00.shotslandedlmg++;
+          var_0.shotslandedlmg++;
           return;
         }
 
@@ -1592,12 +1592,12 @@ givescoreforblackhat() {
   thread scripts\mp\utility::giveunifiedpoints("blackhat_hack");
 }
 
-func_9E9F(param_00) {
-  return param_00 == "iw6_minigunjugg_mp";
+func_9E9F(var_0) {
+  return var_0 == "iw6_minigunjugg_mp";
 }
 
-streaktyperesetsondeath(param_00) {
-  switch (param_00) {
+streaktyperesetsondeath(var_0) {
+  switch (var_0) {
     case "assault":
     case "specialist":
       return 1;
@@ -1611,25 +1611,25 @@ streaktyperesetsondeath(param_00) {
   }
 }
 
-initridekillstreak(param_00) {
+initridekillstreak(var_0) {
   scripts\engine\utility::allow_usability(0);
-  var_01 = initridekillstreak_internal(param_00);
+  var_1 = initridekillstreak_internal(var_0);
   if(isDefined(self)) {
     scripts\engine\utility::allow_usability(1);
   }
 
-  return var_01;
+  return var_1;
 }
 
-initridekillstreak_internal(param_00) {
-  if(isDefined(param_00) && func_9E6F(param_00)) {
-    var_01 = "timeout";
+initridekillstreak_internal(var_0) {
+  if(isDefined(var_0) && func_9E6F(var_0)) {
+    var_1 = "timeout";
   } else {
-    var_01 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death", "weapon_switch_started");
+    var_1 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death", "weapon_switch_started");
   }
 
   scripts\mp\hostmigration::waittillhostmigrationdone();
-  if(var_01 == "weapon_switch_started") {
+  if(var_1 == "weapon_switch_started") {
     return "fail";
   }
 
@@ -1637,8 +1637,8 @@ initridekillstreak_internal(param_00) {
     return "fail";
   }
 
-  if(var_01 == "disconnect" || var_01 == "death") {
-    if(var_01 == "disconnect") {
+  if(var_1 == "disconnect" || var_1 == "death") {
+    if(var_1 == "disconnect") {
       return "disconnect";
     }
 
@@ -1653,24 +1653,24 @@ initridekillstreak_internal(param_00) {
     return "fail";
   }
 
-  if(!isDefined(param_00) || !issubstr(param_00, "odin") || !issubstr(param_00, "pointSelect")) {
-    if(param_00 == "orbital_deployment" || param_00 == "drone_hive") {
+  if(!isDefined(var_0) || !issubstr(var_0, "odin") || !issubstr(var_0, "pointSelect")) {
+    if(var_0 == "orbital_deployment" || var_0 == "drone_hive") {
       self visionsetfadetoblackforplayer("black_bw", 0);
       thread scripts\mp\utility::set_visionset_for_watching_players("black_bw", 0, 1, undefined, 1);
-      var_02 = scripts\engine\utility::waittill_any_timeout_1(0, "disconnect", "death");
+      var_2 = scripts\engine\utility::waittill_any_timeout_1(0, "disconnect", "death");
     } else {
       self visionsetfadetoblackforplayer("black_bw", 0.75);
       thread scripts\mp\utility::set_visionset_for_watching_players("black_bw", 0.75, 1, undefined, 1);
-      var_02 = scripts\engine\utility::waittill_any_timeout_1(0.8, "disconnect", "death");
+      var_2 = scripts\engine\utility::waittill_any_timeout_1(0.8, "disconnect", "death");
     }
   } else {
-    var_02 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death");
+    var_2 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death");
   }
 
   self notify("black_out_done");
   scripts\mp\hostmigration::waittillhostmigrationdone();
-  if(var_02 != "disconnect") {
-    if(!isDefined(param_00) || !issubstr(param_00, "odin") || !issubstr(param_00, "pointSelect")) {
+  if(var_2 != "disconnect") {
+    if(!isDefined(var_0) || !issubstr(var_0, "odin") || !issubstr(var_0, "pointSelect")) {
       thread clearrideintro(1);
     } else {
       self notify("intro_cleared");
@@ -1693,15 +1693,15 @@ initridekillstreak_internal(param_00) {
     return "fail";
   }
 
-  if(var_02 == "disconnect") {
+  if(var_2 == "disconnect") {
     return "disconnect";
   }
 
   return "success";
 }
 
-func_9E6F(param_00) {
-  switch (param_00) {
+func_9E6F(var_0) {
+  switch (var_0) {
     case "remote_tank":
     case "remote_uav":
     case "osprey_gunner":
@@ -1726,40 +1726,40 @@ func_9E6F(param_00) {
   return 0;
 }
 
-clearrideintro(param_00, param_01) {
+clearrideintro(var_0, var_1) {
   self endon("disconnect");
-  if(isDefined(param_00)) {
-    wait(param_00);
+  if(isDefined(var_0)) {
+    wait(var_0);
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  self visionsetfadetoblackforplayer("", param_01);
-  scripts\mp\utility::set_visionset_for_watching_players("", param_01);
+  self visionsetfadetoblackforplayer("", var_1);
+  scripts\mp\utility::set_visionset_for_watching_players("", var_1);
   self notify("intro_cleared");
 }
 
-allowridekillstreakplayerexit(param_00) {
-  if(isDefined(param_00)) {
-    self endon(param_00);
+allowridekillstreakplayerexit(var_0) {
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
   if(!isDefined(self.triggerportableradarping)) {
     return;
   }
 
-  var_01 = self.triggerportableradarping;
+  var_1 = self.triggerportableradarping;
   level endon("game_ended");
-  var_01 endon("disconnect");
-  var_01 endon("end_remote");
+  var_1 endon("disconnect");
+  var_1 endon("end_remote");
   self endon("death");
   for(;;) {
-    var_02 = 0;
-    while(var_01 usebuttonpressed()) {
-      var_02 = var_02 + 0.05;
-      if(var_02 > 0.75) {
+    var_2 = 0;
+    while(var_1 usebuttonpressed()) {
+      var_2 = var_2 + 0.05;
+      if(var_2 > 0.75) {
         self notify("killstreakExit");
         return;
       }
@@ -1771,7 +1771,7 @@ allowridekillstreakplayerexit(param_00) {
   }
 }
 
-func_D507(param_00, param_01) {
+func_D507(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   if(scripts\mp\utility::isusingremote()) {
@@ -1783,36 +1783,36 @@ func_D507(param_00, param_01) {
   }
 
   self notify("play_remote_sequence");
-  var_02 = undefined;
-  if(scripts\mp\utility::istrue(param_01)) {
+  var_2 = undefined;
+  if(scripts\mp\utility::istrue(var_1)) {
     if(self isonladder() || self ismantling() || !self isonground()) {
       scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE");
       return 0;
     }
 
-    var_02 = "ks_remote_device_mp";
+    var_2 = "ks_remote_device_mp";
     scripts\mp\supers::allowsuperweaponstow();
-    scripts\mp\utility::_giveweapon(var_02, 0, 0, 1);
+    scripts\mp\utility::_giveweapon(var_2, 0, 0, 1);
     self setclientomnvar("ui_remote_control_sequence", 1);
-    var_03 = scripts\mp\utility::func_11383(var_02);
-    if(scripts\mp\utility::istrue(var_03)) {
-      thread func_13A4C(var_02);
+    var_3 = scripts\mp\utility::func_11383(var_2);
+    if(scripts\mp\utility::istrue(var_3)) {
+      thread func_13A4C(var_2);
     } else {
       return 0;
     }
   }
 
-  scripts\mp\utility::setusingremote(param_00.streakname);
+  scripts\mp\utility::setusingremote(var_0.streakname);
   scripts\mp\utility::freezecontrolswrapper(1);
   thread func_12B9C();
-  var_04 = scripts\engine\utility::waittill_any_timeout_1(1, "death");
+  var_4 = scripts\engine\utility::waittill_any_timeout_1(1, "death");
   self notify("ks_freeze_end");
-  if(!isDefined(var_04) || var_04 != "timeout") {
+  if(!isDefined(var_4) || var_4 != "timeout") {
     self setclientomnvar("ui_remote_control_sequence", 0);
     scripts\mp\utility::freezecontrolswrapper(0);
     scripts\mp\utility::clearusingremote();
-    if(isDefined(var_02)) {
-      self notify("finished_with_manual_weapon_" + var_02);
+    if(isDefined(var_2)) {
+      self notify("finished_with_manual_weapon_" + var_2);
     }
 
     return 0;
@@ -1832,14 +1832,14 @@ func_12B9C() {
   scripts\mp\utility::freezecontrolswrapper(0);
 }
 
-func_13A4C(param_00) {
+func_13A4C(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  self waittill("finished_with_manual_weapon_" + param_00);
-  if(self hasweapon(param_00)) {
+  self waittill("finished_with_manual_weapon_" + var_0);
+  if(self hasweapon(var_0)) {
     scripts\mp\supers::unstowsuperweapon();
-    scripts\mp\utility::forcethirdpersonwhenfollowing(param_00);
+    scripts\mp\utility::forcethirdpersonwhenfollowing(var_0);
     if(self getcurrentweapon() == "none") {
       scripts\mp\utility::_switchtoweapon(self.lastdroppableweaponobj);
     }
@@ -1854,7 +1854,7 @@ func_13BA2() {
   self setscriptablepartstate("killstreak", "neutral", 0);
 }
 
-func_11086(param_00) {
+func_11086(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("stop_remote_sequence");
@@ -1864,12 +1864,12 @@ func_11086(param_00) {
     }
 
     self setclientomnvar("ui_remote_control_sequence", 2);
-    var_01 = "ks_remote_device_mp";
-    if(scripts\mp\utility::istrue(param_00)) {
+    var_1 = "ks_remote_device_mp";
+    if(scripts\mp\utility::istrue(var_0)) {
       wait(0.1);
-      self notify("finished_with_manual_weapon_" + var_01);
+      self notify("finished_with_manual_weapon_" + var_1);
     } else {
-      self notify("killstreak_finished_with_weapon_" + var_01);
+      self notify("killstreak_finished_with_weapon_" + var_1);
     }
   }
 
@@ -1878,18 +1878,18 @@ func_11086(param_00) {
   scripts\mp\utility::clearusingremote();
 }
 
-combatrecordkillstreakuse(param_00) {
+combatrecordkillstreakuse(var_0) {
   if(!scripts\mp\utility::canrecordcombatrecordstats()) {
     return;
   }
 
-  var_01 = scripts\mp\utility::getstreakrecordtype(param_00);
-  if(!isDefined(var_01)) {
-    if(param_00 != "nuke") {}
+  var_1 = scripts\mp\utility::getstreakrecordtype(var_0);
+  if(!isDefined(var_1)) {
+    if(var_0 != "nuke") {}
 
     return;
   }
 
-  var_02 = self getplayerdata("mp", var_01, param_00, "uses");
-  self setplayerdata("mp", var_01, param_00, "uses", var_02 + 1);
+  var_2 = self getplayerdata("mp", var_1, var_0, "uses");
+  self setplayerdata("mp", var_1, var_0, "uses", var_2 + 1);
 }

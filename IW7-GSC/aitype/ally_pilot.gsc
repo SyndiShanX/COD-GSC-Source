@@ -24,9 +24,9 @@ main() {
   }
 
   self.var_394 = lib_0A2F::func_7BEC("rifle");
-  var_00 = undefined;
-  var_01 = ["character_un_jackal_pilots", "character_un_jackal_pilots", "character_un_jackal_pilots_pt2"];
-  switch (scripts\code\character::get_random_character(3, var_00, var_01)) {
+  var_0 = undefined;
+  var_1 = ["character_un_jackal_pilots", "character_un_jackal_pilots", "character_un_jackal_pilots_pt2"];
+  switch (scripts\code\character::get_random_character(3, var_0, var_1)) {
     case 0:
       lib_0829::main();
       break;

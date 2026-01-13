@@ -32,26 +32,26 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player128x128x256", "targetname");
-  var_01 = spawn("script_model", (-2504, 842, 676));
-  var_01.angles = (0, 0, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player128x128x256", "targetname");
-  var_03 = spawn("script_model", (-2504, 842, 420));
-  var_03.angles = (0, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player256x256x256", "targetname");
-  var_05 = spawn("script_model", (-892, 1380, 464));
-  var_05.angles = (0, 0, 0);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("player64x64x128", "targetname");
-  var_07 = spawn("script_model", (-599, 339, 139.5));
-  var_07.angles = (0, 0, -9.5);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player64x64x256", "targetname");
-  var_09 = spawn("script_model", (-1440, -1424, -92));
-  var_09.angles = (0, 0, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player128x128x256", "targetname");
+  var_1 = spawn("script_model", (-2504, 842, 676));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player128x128x256", "targetname");
+  var_3 = spawn("script_model", (-2504, 842, 420));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player256x256x256", "targetname");
+  var_5 = spawn("script_model", (-892, 1380, 464));
+  var_5.angles = (0, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("player64x64x128", "targetname");
+  var_7 = spawn("script_model", (-599, 339, 139.5));
+  var_7.angles = (0, 0, -9.5);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player64x64x256", "targetname");
+  var_9 = spawn("script_model", (-1440, -1424, -92));
+  var_9.angles = (0, 0, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player64x64x256", "targetname");
   var_0B = spawn("script_model", (-1440, -1424, -348));
   var_0B.angles = (0, 0, 0);
@@ -74,43 +74,43 @@ fix_collision() {
   var_13 clonebrushmodeltoscriptmodel(var_12);
 }
 
-callback_vr_playerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  if(param_04 != "MOD_TRIGGER_HURT") {
+callback_vr_playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(var_4 != "MOD_TRIGGER_HURT") {
     self.nocorpse = 1;
   }
 
   thread vrdeatheffects();
-  scripts\mp\damage::playerkilled_internal(param_00, param_01, self, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0);
+  scripts\mp\damage::playerkilled_internal(var_0, var_1, self, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0);
 }
 
 vrdeatheffects() {
-  var_00 = ["j_head", "j_chest", "j_shoulder_ri", "j_shoulder_le", "j_elbow_ri", "j_elbow_le", "j_hip_ri", "j_hip_le", "j_knee_ri", "j_knee_le"];
-  var_01 = var_00.size;
+  var_0 = ["j_head", "j_chest", "j_shoulder_ri", "j_shoulder_le", "j_elbow_ri", "j_elbow_le", "j_hip_ri", "j_hip_le", "j_knee_ri", "j_knee_le"];
+  var_1 = var_0.size;
   thread playbodyfx(0);
 }
 
-playbodyfx(param_00) {
-  var_01[0][1]["org"] = self gettagorigin("j_spinelower");
-  var_01[0][1]["angles"] = self gettagangles("j_spinelower");
-  var_01[0][1]["effect"] = "vfx_vr_death_player_vol_chest";
-  var_01[0][2]["org"] = self gettagorigin("j_head");
-  var_01[0][2]["angles"] = self gettagangles("j_head");
-  var_01[0][2]["effect"] = "vfx_vr_enemy_death";
-  var_01[1][0]["org"] = self gettagorigin("j_knee_ri");
-  var_01[1][0]["angles"] = self gettagangles("j_knee_ri");
-  var_01[1][0]["effect"] = "vfx_vr_death_player_volume";
-  var_01[1][1]["org"] = self gettagorigin("j_knee_le");
-  var_01[1][1]["angles"] = self gettagangles("j_knee_le");
-  var_01[1][1]["effect"] = "vfx_vr_death_player_volume";
-  var_01[1][2]["org"] = self gettagorigin("j_elbow_ri");
-  var_01[1][2]["angles"] = self gettagangles("j_elbow_ri");
-  var_01[1][2]["effect"] = "vfx_vr_enemy_death";
-  var_01[1][3]["org"] = self gettagorigin("j_elbow_le");
-  var_01[1][3]["angles"] = self gettagangles("j_elbow_le");
-  var_01[1][3]["effect"] = "vfx_vr_enemy_death";
-  foreach(var_03 in var_01) {
-    foreach(var_05 in var_03) {
-      playFX(scripts\engine\utility::getfx(var_05["effect"]), var_05["org"]);
+playbodyfx(var_0) {
+  var_1[0][1]["org"] = self gettagorigin("j_spinelower");
+  var_1[0][1]["angles"] = self gettagangles("j_spinelower");
+  var_1[0][1]["effect"] = "vfx_vr_death_player_vol_chest";
+  var_1[0][2]["org"] = self gettagorigin("j_head");
+  var_1[0][2]["angles"] = self gettagangles("j_head");
+  var_1[0][2]["effect"] = "vfx_vr_enemy_death";
+  var_1[1][0]["org"] = self gettagorigin("j_knee_ri");
+  var_1[1][0]["angles"] = self gettagangles("j_knee_ri");
+  var_1[1][0]["effect"] = "vfx_vr_death_player_volume";
+  var_1[1][1]["org"] = self gettagorigin("j_knee_le");
+  var_1[1][1]["angles"] = self gettagangles("j_knee_le");
+  var_1[1][1]["effect"] = "vfx_vr_death_player_volume";
+  var_1[1][2]["org"] = self gettagorigin("j_elbow_ri");
+  var_1[1][2]["angles"] = self gettagangles("j_elbow_ri");
+  var_1[1][2]["effect"] = "vfx_vr_enemy_death";
+  var_1[1][3]["org"] = self gettagorigin("j_elbow_le");
+  var_1[1][3]["angles"] = self gettagangles("j_elbow_le");
+  var_1[1][3]["effect"] = "vfx_vr_enemy_death";
+  foreach(var_3 in var_1) {
+    foreach(var_5 in var_3) {
+      playFX(scripts\engine\utility::getfx(var_5["effect"]), var_5["org"]);
     }
 
     wait(0.01);
@@ -120,8 +120,8 @@ playbodyfx(param_00) {
 runholodome() {
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread executeholodome();
+    level waittill("connected", var_0);
+    var_0 thread executeholodome();
   }
 }
 
@@ -133,97 +133,97 @@ executeholodome() {
 
 handleholograms() {
   wait(5);
-  var_00 = getscriptablearray("hologram_object", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread runholograminitialization();
+  var_0 = getscriptablearray("hologram_object", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread runholograminitialization();
   }
 }
 
 runholograminitialization() {
   level endon("game_ended");
-  var_00 = spawn("trigger_radius", self.origin - (0, 0, 512), 0, 800, 1300);
+  var_0 = spawn("trigger_radius", self.origin - (0, 0, 512), 0, 800, 1300);
   if(self.script_noteworthy == "car") {
     self setscriptablepartstate("rootModelManager", "map_start");
-    var_01 = "rootModelManager";
-    var_02 = "regen";
+    var_1 = "rootModelManager";
+    var_2 = "regen";
   } else {
-    var_01 = "tree";
-    var_02 = "build";
+    var_1 = "tree";
+    var_2 = "build";
   }
 
-  var_00 waittill("trigger");
-  self setscriptablepartstate(var_01, var_02);
+  var_0 waittill("trigger");
+  self setscriptablepartstate(var_1, var_2);
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
 handlelightinggeo() {
   wait(5);
-  var_00 = getEntArray("big_screen", "targetname");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.script_parameters)) {
-      var_02 moveto((-2444, 1279.5, 95), 0.1);
+  var_0 = getEntArray("big_screen", "targetname");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.script_parameters)) {
+      var_2 moveto((-2444, 1279.5, 95), 0.1);
     }
   }
 }
 
 sfx_club_music() {
-  var_00 = spawn("script_origin", (1200, 703, 238));
+  var_0 = spawn("script_origin", (1200, 703, 238));
   scripts\engine\utility::waitframe();
-  var_00 playLoopSound("emt_mus_neon_club");
+  var_0 playLoopSound("emt_mus_neon_club");
 }
 
 spawn_ball_allowed_trigger() {
   if(level.gametype == "ball") {
     wait(1);
-    var_00 = spawn("trigger_radius", (-970, 750, 750), 0, 4000, 500);
-    var_01 = spawn("trigger_radius", (-720, -400, 470), 0, 230, 400);
-    var_02 = spawn("trigger_radius", (-2090, 1100, 350), 0, 450, 400);
-    var_00 hide();
-    var_01 hide();
-    var_02 hide();
+    var_0 = spawn("trigger_radius", (-970, 750, 750), 0, 4000, 500);
+    var_1 = spawn("trigger_radius", (-720, -400, 470), 0, 230, 400);
+    var_2 = spawn("trigger_radius", (-2090, 1100, 350), 0, 450, 400);
+    var_0 hide();
+    var_1 hide();
+    var_2 hide();
     level.ballallowedtriggers = getEntArray("uplinkAllowedOOB", "targetname");
-    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_00;
-    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_01;
-    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_02;
+    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_0;
+    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_1;
+    level.ballallowedtriggers[level.ballallowedtriggers.size] = var_2;
   }
 }
 
 spawn_oob_trigger() {
   if(level.gametype == "ball") {
     wait(1);
-    var_00 = spawn("trigger_radius", (150, -28, 560), 0, 430, 300);
-    var_01 = spawn("trigger_radius", (1000, -28, 560), 0, 530, 300);
-    var_02 = spawn("trigger_radius", (150, 1090, 560), 0, 430, 300);
-    var_03 = spawn("trigger_radius", (680, 1925, 560), 0, 330, 300);
-    var_00 hide();
-    var_01 hide();
-    var_02 hide();
-    var_03 hide();
-    level.var_C7B3[level.var_C7B3.size] = var_00;
-    level.var_C7B3[level.var_C7B3.size] = var_01;
-    level.var_C7B3[level.var_C7B3.size] = var_02;
-    level.var_C7B3[level.var_C7B3.size] = var_03;
+    var_0 = spawn("trigger_radius", (150, -28, 560), 0, 430, 300);
+    var_1 = spawn("trigger_radius", (1000, -28, 560), 0, 530, 300);
+    var_2 = spawn("trigger_radius", (150, 1090, 560), 0, 430, 300);
+    var_3 = spawn("trigger_radius", (680, 1925, 560), 0, 330, 300);
+    var_0 hide();
+    var_1 hide();
+    var_2 hide();
+    var_3 hide();
+    level.var_C7B3[level.var_C7B3.size] = var_0;
+    level.var_C7B3[level.var_C7B3.size] = var_1;
+    level.var_C7B3[level.var_C7B3.size] = var_2;
+    level.var_C7B3[level.var_C7B3.size] = var_3;
   }
 }
 
 spawn_no_zone_trigger() {
   if(level.gametype == "ball") {
     wait(1);
-    var_00 = spawn("trigger_radius", (-2186, -119, 780), 0, 350, 50);
-    var_00.var_336 = "uplink_nozone";
-    var_00 hide();
-    var_01 = spawn("trigger_radius", (-2050, 790, 780), 0, 380, 50);
-    var_01.var_336 = "uplink_nozone";
-    var_01 hide();
-    var_02 = spawn("trigger_radius", (-2772, 320, 780), 0, 560, 50);
-    var_02.var_336 = "uplink_nozone";
-    var_02 hide();
-    level.nozonetriggers[level.nozonetriggers.size] = var_00;
-    level.nozonetriggers[level.nozonetriggers.size] = var_01;
-    level.nozonetriggers[level.nozonetriggers.size] = var_02;
+    var_0 = spawn("trigger_radius", (-2186, -119, 780), 0, 350, 50);
+    var_0.var_336 = "uplink_nozone";
+    var_0 hide();
+    var_1 = spawn("trigger_radius", (-2050, 790, 780), 0, 380, 50);
+    var_1.var_336 = "uplink_nozone";
+    var_1 hide();
+    var_2 = spawn("trigger_radius", (-2772, 320, 780), 0, 560, 50);
+    var_2.var_336 = "uplink_nozone";
+    var_2 hide();
+    level.nozonetriggers[level.nozonetriggers.size] = var_0;
+    level.nozonetriggers[level.nozonetriggers.size] = var_1;
+    level.nozonetriggers[level.nozonetriggers.size] = var_2;
   }
 }

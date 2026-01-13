@@ -38,10 +38,10 @@ bot_mugger_think() {
     if(self botgetdifficultysetting("strategyLevel") > 1) {
       if(isDefined(self.tags_carried) && level.mugger_bank_limit <= self.tags_carried) {
         if(!self.hiding_until_bank) {
-          var_00 = getnodesinradius(self.origin, 1000, 0, 500, "node_hide");
-          var_01 = self botnodepick(var_00, 3, "node_hide");
-          if(isDefined(var_01)) {
-            self botsetscriptgoalnode(var_01, "critical");
+          var_0 = getnodesinradius(self.origin, 1000, 0, 500, "node_hide");
+          var_1 = self botnodepick(var_0, 3, "node_hide");
+          if(isDefined(var_1)) {
+            self botsetscriptgoalnode(var_1, "critical");
             self.hiding_until_bank = 1;
           }
         }
@@ -84,7 +84,7 @@ enemy_watcher() {
 
 tag_pile_watcher() {
   for(;;) {
-    level waittill("mugger_tag_pile", var_00);
+    level waittill("mugger_tag_pile", var_0);
     if(self.health <= 0) {
       continue;
     }
@@ -99,54 +99,54 @@ tag_pile_watcher() {
       self.heading_for_tag_pile = 0;
     }
 
-    if(!isDefined(self.last_tag_pile_location) || distancesquared(self.origin, self.last_tag_pile_location) > distancesquared(self.origin, var_00)) {
+    if(!isDefined(self.last_tag_pile_location) || distancesquared(self.origin, self.last_tag_pile_location) > distancesquared(self.origin, var_0)) {
       self.last_tag_pile_time = gettime();
-      self.last_tag_pile_location = var_00;
+      self.last_tag_pile_location = var_0;
     }
   }
 }
 
 bot_find_closest_tag() {
-  var_00 = self getnearestnode();
-  var_01 = undefined;
-  if(isDefined(var_00)) {
-    var_02 = 1000000;
-    var_03 = scripts\engine\utility::array_combine(level.dogtags, level.mugger_extra_tags);
-    foreach(var_05 in var_03) {
-      if(var_05 scripts\mp\gameobjects::caninteractwith(self.team)) {
-        var_06 = distancesquared(self.origin, var_05.curorigin);
-        if(!isDefined(var_01) || var_06 < var_02) {
-          if((self botgetdifficultysetting("strategyLevel") > 0 && var_06 < 122500) || var_06 < 1000000 && scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_05, var_00, self botgetfovdot())) {
-            var_02 = var_06;
-            var_01 = var_05;
+  var_0 = self getnearestnode();
+  var_1 = undefined;
+  if(isDefined(var_0)) {
+    var_2 = 1000000;
+    var_3 = scripts\engine\utility::array_combine(level.dogtags, level.mugger_extra_tags);
+    foreach(var_5 in var_3) {
+      if(var_5 scripts\mp\gameobjects::caninteractwith(self.team)) {
+        var_6 = distancesquared(self.origin, var_5.curorigin);
+        if(!isDefined(var_1) || var_6 < var_2) {
+          if((self botgetdifficultysetting("strategyLevel") > 0 && var_6 < 122500) || var_6 < 1000000 && scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_5, var_0, self botgetfovdot())) {
+            var_2 = var_6;
+            var_1 = var_5;
           }
         }
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-bot_find_visible_tags_mugger(param_00, param_01) {
-  var_02 = [];
-  if(isDefined(param_00)) {
-    var_03 = scripts\engine\utility::array_combine(level.dogtags, level.mugger_extra_tags);
-    foreach(var_05 in var_03) {
-      if(var_05 scripts\mp\gameobjects::caninteractwith(self.team)) {
-        if(isplayer(self) || distancesquared(self.origin, var_05.curorigin) < 1000000) {
-          if(scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_05, param_00, param_01)) {
-            var_06 = spawnStruct();
-            var_06.origin = var_05.curorigin;
-            var_06.physics_setgravitydynentscalar = var_05;
-            var_02[var_02.size] = var_06;
+bot_find_visible_tags_mugger(var_0, var_1) {
+  var_2 = [];
+  if(isDefined(var_0)) {
+    var_3 = scripts\engine\utility::array_combine(level.dogtags, level.mugger_extra_tags);
+    foreach(var_5 in var_3) {
+      if(var_5 scripts\mp\gameobjects::caninteractwith(self.team)) {
+        if(isplayer(self) || distancesquared(self.origin, var_5.curorigin) < 1000000) {
+          if(scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_5, var_0, var_1)) {
+            var_6 = spawnStruct();
+            var_6.origin = var_5.curorigin;
+            var_6.physics_setgravitydynentscalar = var_5;
+            var_2[var_2.size] = var_6;
           }
         }
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 tag_watcher() {
@@ -172,9 +172,9 @@ tag_watcher() {
       continue;
     }
 
-    var_00 = bot_find_closest_tag();
-    if(isDefined(var_00)) {
-      mugger_pick_up_tag(var_00);
+    var_0 = bot_find_closest_tag();
+    if(isDefined(var_0)) {
+      mugger_pick_up_tag(var_0);
       continue;
     }
 
@@ -186,50 +186,50 @@ tag_watcher() {
   }
 }
 
-mugger_go_to_tag_pile(param_00) {
+mugger_go_to_tag_pile(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self.heading_for_tag_pile = 1;
-  var_01 = spawnStruct();
-  var_01.script_goal_type = "objective";
-  var_01.objective_radius = level.bot_tag_obj_radius;
-  scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("kill_tag_pile", param_00, 25, var_01);
-  var_02 = scripts\engine\utility::waittill_any_return("death", "tag_spotted");
+  var_1 = spawnStruct();
+  var_1.script_goal_type = "objective";
+  var_1.objective_radius = level.bot_tag_obj_radius;
+  scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("kill_tag_pile", var_0, 25, var_1);
+  var_2 = scripts\engine\utility::waittill_any_return("death", "tag_spotted");
   self botclearscriptgoal();
   self.heading_for_tag_pile = 0;
   scripts\mp\bots\_bots_strategy::bot_abort_tactical_goal("kill_tag_pile");
 }
 
-mugger_pick_up_tag(param_00) {
+mugger_pick_up_tag(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  self.tag_getting = param_00;
+  self.tag_getting = var_0;
   self notify("tag_spotted");
-  childthread notify_when_tag_picked_up(param_00, "tag_picked_up");
+  childthread notify_when_tag_picked_up(var_0, "tag_picked_up");
   scripts\mp\bots\_bots_strategy::bot_abort_tactical_goal("kill_tag");
-  var_01 = param_00.curorigin;
-  if(scripts\mp\bots\_bots_util::bot_vectors_are_equal(self.last_killtag_tactical_goal_pos, param_00.curorigin)) {
-    var_02 = param_00.nearest_node;
-    if(isDefined(var_02)) {
-      var_03 = var_02.origin - var_01;
-      var_01 = var_01 + vectornormalize(var_03) * length(var_03) * 0.5;
+  var_1 = var_0.curorigin;
+  if(scripts\mp\bots\_bots_util::bot_vectors_are_equal(self.last_killtag_tactical_goal_pos, var_0.curorigin)) {
+    var_2 = var_0.nearest_node;
+    if(isDefined(var_2)) {
+      var_3 = var_2.origin - var_1;
+      var_1 = var_1 + vectornormalize(var_3) * length(var_3) * 0.5;
     }
   }
 
-  self.last_killtag_tactical_goal_pos = param_00.curorigin;
-  var_04 = spawnStruct();
-  var_04.script_goal_type = "objective";
-  var_04.objective_radius = level.bot_tag_obj_radius;
-  scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("kill_tag", var_01, 25, var_04);
+  self.last_killtag_tactical_goal_pos = var_0.curorigin;
+  var_4 = spawnStruct();
+  var_4.script_goal_type = "objective";
+  var_4.objective_radius = level.bot_tag_obj_radius;
+  scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("kill_tag", var_1, 25, var_4);
   thread notify_when_tag_aborted("tag_aborted");
-  var_05 = scripts\engine\utility::waittill_any_return("death", "tag_picked_up");
+  var_5 = scripts\engine\utility::waittill_any_return("death", "tag_picked_up");
   self notify("tag_watch_stop");
   self.tag_getting = undefined;
   self botclearscriptgoal();
   scripts\mp\bots\_bots_strategy::bot_abort_tactical_goal("kill_tag");
 }
 
-notify_when_tag_aborted(param_00) {
+notify_when_tag_aborted(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self endon("tag_watch_stop");
@@ -237,123 +237,123 @@ notify_when_tag_aborted(param_00) {
     wait(0.05);
   }
 
-  self notify(param_00);
+  self notify(var_0);
 }
 
-notify_when_tag_picked_up(param_00, param_01) {
+notify_when_tag_picked_up(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   self endon("tag_watch_stop");
-  while(param_00 scripts\mp\gameobjects::caninteractwith(self.team)) {
+  while(var_0 scripts\mp\gameobjects::caninteractwith(self.team)) {
     wait(0.05);
   }
 
-  self notify(param_01);
+  self notify(var_1);
 }
 
-bot_mugger_loadout_modify(param_00) {
-  var_01 = 0;
-  var_02 = self botgetdifficulty();
-  if(var_02 == "recruit") {
-    var_01 = 0.1;
-  } else if(var_02 == "regular") {
-    var_01 = 0.25;
-  } else if(var_02 == "hardened") {
-    var_01 = 0.6;
-  } else if(var_02 == "veteran") {
-    var_01 = 0.9;
+bot_mugger_loadout_modify(var_0) {
+  var_1 = 0;
+  var_2 = self botgetdifficulty();
+  if(var_2 == "recruit") {
+    var_1 = 0.1;
+  } else if(var_2 == "regular") {
+    var_1 = 0.25;
+  } else if(var_2 == "hardened") {
+    var_1 = 0.6;
+  } else if(var_2 == "veteran") {
+    var_1 = 0.9;
   }
 
-  var_03 = param_00["loadoutEquipment"] == "throwingknife_mp";
-  if(!var_03) {
-    if(var_01 >= randomfloat(1)) {
-      param_00["loadoutEquipment"] = "throwingknife_mp";
-      var_03 = 1;
+  var_3 = var_0["loadoutEquipment"] == "throwingknife_mp";
+  if(!var_3) {
+    if(var_1 >= randomfloat(1)) {
+      var_0["loadoutEquipment"] = "throwingknife_mp";
+      var_3 = 1;
     }
   }
 
-  if(var_01 >= randomfloat(1)) {
-    if(param_00["loadoutOffhand"] != "concussion_grenade_mp") {
-      param_00["loadoutOffhand"] = "concussion_grenade_mp";
+  if(var_1 >= randomfloat(1)) {
+    if(var_0["loadoutOffhand"] != "concussion_grenade_mp") {
+      var_0["loadoutOffhand"] = "concussion_grenade_mp";
     }
   }
 
-  if(var_01 >= randomfloat(1)) {
-    if(param_00["loadoutPrimaryAttachment"] != "tactical" && param_00["loadoutPrimaryAttachment2"] != "tactical") {
-      var_04 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(param_00["loadoutPrimary"], param_00["loadoutPrimaryAttachment"], "tactical");
-      if(var_04) {
-        param_00["loadoutPrimaryAttachment2"] = "tactical";
+  if(var_1 >= randomfloat(1)) {
+    if(var_0["loadoutPrimaryAttachment"] != "tactical" && var_0["loadoutPrimaryAttachment2"] != "tactical") {
+      var_4 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(var_0["loadoutPrimary"], var_0["loadoutPrimaryAttachment"], "tactical");
+      if(var_4) {
+        var_0["loadoutPrimaryAttachment2"] = "tactical";
       } else {
-        var_04 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(param_00["loadoutPrimary"], "tactical", param_00["loadoutPrimaryAttachment2"]);
-        if(var_04) {
-          param_00["loadoutPrimaryAttachment"] = "tactical";
+        var_4 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(var_0["loadoutPrimary"], "tactical", var_0["loadoutPrimaryAttachment2"]);
+        if(var_4) {
+          var_0["loadoutPrimaryAttachment"] = "tactical";
         }
       }
     }
   }
 
-  if(var_01 >= randomfloat(1)) {
-    if(param_00["loadoutSecondaryAttachment"] != "tactical" && param_00["loadoutSecondaryAttachment2"] != "tactical") {
-      var_04 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(param_00["loadoutSecondary"], param_00["loadoutSecondaryAttachment"], "tactical");
-      if(var_04) {
-        param_00["loadoutSecondaryAttachment2"] = "tactical";
+  if(var_1 >= randomfloat(1)) {
+    if(var_0["loadoutSecondaryAttachment"] != "tactical" && var_0["loadoutSecondaryAttachment2"] != "tactical") {
+      var_4 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(var_0["loadoutSecondary"], var_0["loadoutSecondaryAttachment"], "tactical");
+      if(var_4) {
+        var_0["loadoutSecondaryAttachment2"] = "tactical";
       } else {
-        var_04 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(param_00["loadoutSecondary"], "tactical", param_00["loadoutSecondaryAttachment2"]);
-        if(var_04) {
-          param_00["loadoutSecondaryAttachment"] = "tactical";
+        var_4 = scripts\mp\bots\_bots_loadout::bot_validate_weapon(var_0["loadoutSecondary"], "tactical", var_0["loadoutSecondaryAttachment2"]);
+        if(var_4) {
+          var_0["loadoutSecondaryAttachment"] = "tactical";
         }
       }
     }
   }
 
-  var_05 = [];
-  var_06 = [];
-  var_07 = [];
-  var_08 = [];
-  if(var_03) {
-    var_08[var_08.size] = "specialty_extra_deadly";
+  var_5 = [];
+  var_6 = [];
+  var_7 = [];
+  var_8 = [];
+  if(var_3) {
+    var_8[var_8.size] = "specialty_extra_deadly";
   }
 
-  var_08[var_08.size] = "specialty_lightweight";
-  var_08[var_08.size] = "specialty_marathon";
-  var_08[var_08.size] = "specialty_fastsprintrecovery";
-  var_08[var_08.size] = "specialty_stun_resistance";
-  for(var_09 = 1; var_09 < 9; var_09++) {
-    if(isDefined(param_00["loadoutPerk" + var_09])) {
-      if(param_00["loadoutPerk" + var_09] != "none") {
-        var_05[var_05.size] = param_00["loadoutPerk" + var_09];
-        var_06[var_06.size] = var_09;
+  var_8[var_8.size] = "specialty_lightweight";
+  var_8[var_8.size] = "specialty_marathon";
+  var_8[var_8.size] = "specialty_fastsprintrecovery";
+  var_8[var_8.size] = "specialty_stun_resistance";
+  for(var_9 = 1; var_9 < 9; var_9++) {
+    if(isDefined(var_0["loadoutPerk" + var_9])) {
+      if(var_0["loadoutPerk" + var_9] != "none") {
+        var_5[var_5.size] = var_0["loadoutPerk" + var_9];
+        var_6[var_6.size] = var_9;
         continue;
       }
 
-      var_07[var_07.size] = var_09;
+      var_7[var_7.size] = var_9;
     }
   }
 
-  foreach(var_0B in var_08) {
-    if(var_01 >= randomfloat(1)) {
-      if(!scripts\engine\utility::array_contains(var_05, var_0B)) {
+  foreach(var_0B in var_8) {
+    if(var_1 >= randomfloat(1)) {
+      if(!scripts\engine\utility::array_contains(var_5, var_0B)) {
         var_0C = -1;
-        if(var_07.size) {
-          var_0C = var_07[0];
-          var_07 = scripts\engine\utility::array_remove(var_07, var_0C);
-        } else if(var_06.size) {
-          var_0C = scripts\engine\utility::random(var_06);
-          var_06 = scripts\engine\utility::array_remove(var_06, var_0C);
+        if(var_7.size) {
+          var_0C = var_7[0];
+          var_7 = scripts\engine\utility::array_remove(var_7, var_0C);
+        } else if(var_6.size) {
+          var_0C = scripts\engine\utility::random(var_6);
+          var_6 = scripts\engine\utility::array_remove(var_6, var_0C);
         }
 
         if(var_0C != -1) {
-          param_00["loadoutPerk" + var_0C] = var_0B;
+          var_0["loadoutPerk" + var_0C] = var_0B;
         }
       }
     }
   }
 
-  if(var_01 >= randomfloat(1)) {
-    if(param_00["loadoutStreakType"] == "streaktype_assault" && param_00["loadoutStreak1"] != "airdrop_juggernaut_maniac" && param_00["loadoutStreak2"] != "airdrop_juggernaut_maniac" && param_00["loadoutStreak3"] != "airdrop_juggernaut_maniac") {
-      param_00["loadoutStreak3"] = "airdrop_juggernaut_maniac";
+  if(var_1 >= randomfloat(1)) {
+    if(var_0["loadoutStreakType"] == "streaktype_assault" && var_0["loadoutStreak1"] != "airdrop_juggernaut_maniac" && var_0["loadoutStreak2"] != "airdrop_juggernaut_maniac" && var_0["loadoutStreak3"] != "airdrop_juggernaut_maniac") {
+      var_0["loadoutStreak3"] = "airdrop_juggernaut_maniac";
     }
   }
 
-  return param_00;
+  return var_0;
 }

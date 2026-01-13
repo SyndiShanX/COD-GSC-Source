@@ -4,21 +4,21 @@
  * Script: SP\3172.gsc
 ************************/
 
-func_9D87(param_00, param_01, param_02, param_03) {
+func_9D87(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee) && isDefined(self.melee.var_2FB1);
 }
 
-func_D4CD(param_00) {
-  self endon(param_00 + "_finished");
-  var_01 = 4900;
-  var_02 = scripts\asm\asm_bb::bb_getmeleetarget();
+func_D4CD(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = 4900;
+  var_2 = scripts\asm\asm_bb::bb_getmeleetarget();
   for(;;) {
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var_03 = distancesquared(self.origin, var_02.origin);
-    if(var_03 <= var_01) {
+    var_3 = distancesquared(self.origin, var_2.origin);
+    if(var_3 <= var_1) {
       if(isDefined(self.melee)) {
         self.melee.var_2FB1 = 1;
       }
@@ -30,59 +30,59 @@ func_D4CD(param_00) {
   }
 }
 
-donotetracks_vsplayer(param_00, param_01) {
+donotetracks_vsplayer(var_0, var_1) {
   for(;;) {
-    self waittill(param_01, var_02);
-    if(!isarray(var_02)) {
-      var_02 = [var_02];
+    self waittill(var_1, var_2);
+    if(!isarray(var_2)) {
+      var_2 = [var_2];
     }
 
-    foreach(var_10, var_04 in var_02) {
-      switch (var_04) {
+    foreach(var_10, var_4 in var_2) {
+      switch (var_4) {
         case "end":
           break;
 
         case "stop":
-          var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
-          if(!isDefined(var_05)) {
+          var_5 = scripts\asm\asm_bb::bb_getmeleetarget();
+          if(!isDefined(var_5)) {
             return;
           }
 
-          if(!isalive(var_05)) {
+          if(!isalive(var_5)) {
             return;
           }
 
-          if(!isDefined(self.isnodeoccupied) || self.isnodeoccupied != var_05) {
+          if(!isDefined(self.isnodeoccupied) || self.isnodeoccupied != var_5) {
             return;
           }
 
-          var_06 = distancesquared(var_05.origin, self.origin);
-          if(var_06 > 4096) {
+          var_6 = distancesquared(var_5.origin, self.origin);
+          if(var_6 > 4096) {
             return;
           }
           break;
 
         case "fire":
-          var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
-          if(!isDefined(var_05)) {
+          var_5 = scripts\asm\asm_bb::bb_getmeleetarget();
+          if(!isDefined(var_5)) {
             return;
           }
 
-          if(isalive(var_05)) {
-            if(isplayer(var_05)) {
+          if(isalive(var_5)) {
+            if(isplayer(var_5)) {
               if(isDefined(self.var_B621)) {
-                var_07 = distance2dsquared(var_05.origin, self.origin);
+                var_7 = distance2dsquared(var_5.origin, self.origin);
               } else {
-                var_07 = distancesquared(var_07.origin, self.origin);
+                var_7 = distancesquared(var_7.origin, self.origin);
               }
 
-              var_08 = 4096;
+              var_8 = 4096;
               if(isDefined(self.var_B5E1)) {
-                var_08 = self.var_B5E1;
+                var_8 = self.var_B5E1;
               }
 
-              if(var_07 <= var_08) {
-                var_09 = undefined;
+              if(var_7 <= var_8) {
+                var_9 = undefined;
                 var_0A = undefined;
                 var_0B = undefined;
                 var_0C = 20;
@@ -90,11 +90,11 @@ donotetracks_vsplayer(param_00, param_01) {
                 var_0E = 0.35;
                 var_0F = isDefined(level.player.var_C337) && level.player.var_C337.var_19;
                 if(self.var_394 == "none") {
-                  var_09 = self.var_12B7F;
+                  var_9 = self.var_12B7F;
                 }
 
                 if(self.unittype == "c8") {
-                  var_09 = self.var_3507;
+                  var_9 = self.var_3507;
                   var_0A = 24;
                   var_0B = 24;
                   self playSound("c8_melee_shield_swing");
@@ -107,7 +107,7 @@ donotetracks_vsplayer(param_00, param_01) {
                   setsaveddvar("player_meleeDamageMultiplier", 0.05);
                 }
 
-                self melee(undefined, var_09, sqrt(var_08), var_0A, var_0B);
+                self melee(undefined, var_9, sqrt(var_8), var_0A, var_0B);
                 if(var_0F && self.unittype == "soldier") {
                   self playSound("ai_melee_vs_shield");
                 }
@@ -135,52 +135,52 @@ donotetracks_vsplayer(param_00, param_01) {
           break;
 
         default:
-          scripts\anim\notetracks::handlenotetrack(var_04, param_01);
+          scripts\anim\notetracks::handlenotetrack(var_4, var_1);
           break;
       }
     }
   }
 }
 
-func_D0EA(param_00, param_01) {
+func_D0EA(var_0, var_1) {
   if(!self isonground()) {
-    param_01 = param_01 * 0.1;
+    var_1 = var_1 * 0.1;
   }
 
-  var_02 = vectornormalize(self.origin + (0, 0, 45) - param_00);
-  var_03 = var_02 * param_01 * 10;
-  self setvelocity(var_03);
+  var_2 = vectornormalize(self.origin + (0, 0, 45) - var_0);
+  var_3 = var_2 * var_1 * 10;
+  self setvelocity(var_3);
 }
 
 func_B57F() {
-  var_00 = self.melee.target;
+  var_0 = self.melee.target;
   if(isDefined(self.var_B5DD)) {
     self.melee.var_13D8A = 1;
-    var_00.melee.var_13D8A = 0;
+    var_0.melee.var_13D8A = 0;
     return;
-  } else if(isDefined(var_00.var_B5DD)) {
+  } else if(isDefined(var_0.var_B5DD)) {
     self.melee.var_13D8A = 0;
-    var_00.melee.var_13D8A = 1;
+    var_0.melee.var_13D8A = 1;
     return;
   }
 
   if(isDefined(self.var_B14F)) {
     self.melee.var_13D8A = 1;
-    var_00.melee.var_13D8A = 0;
+    var_0.melee.var_13D8A = 0;
     return;
   }
 
-  if(isDefined(var_00.var_B14F)) {
+  if(isDefined(var_0.var_B14F)) {
     self.melee.var_13D8A = 0;
-    var_00.melee.var_13D8A = 1;
+    var_0.melee.var_13D8A = 1;
     return;
   }
 
   self.melee.var_13D8A = scripts\engine\utility::cointoss();
-  var_00.melee.var_13D8A = !self.melee.var_13D8A;
+  var_0.melee.var_13D8A = !self.melee.var_13D8A;
 }
 
-func_B5B6(param_00, param_01, param_02, param_03) {
+func_B5B6(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.melee)) {
     return 1;
   }
@@ -204,22 +204,22 @@ func_B5B6(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-melee_shouldabort(param_00, param_01, param_02, param_03) {
+melee_shouldabort(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.melee)) {
     return 1;
   }
 
   if(isDefined(self.melee.var_2720)) {
     if(isDefined(self.melee.var_3321)) {
-      var_04 = scripts\asm\asm::func_232B(param_01, "melee_stop");
-      if(var_04) {
+      var_4 = scripts\asm\asm::func_232B(var_1, "melee_stop");
+      if(var_4) {
         self.melee.var_312C = 1;
       }
 
-      return var_04;
+      return var_4;
     } else if(isDefined(self.melee.var_11095)) {
-      var_05 = scripts\asm\asm::func_233F(param_02, "melee_stop");
-      if(!isDefined(var_05)) {
+      var_5 = scripts\asm\asm::func_233F(var_2, "melee_stop");
+      if(!isDefined(var_5)) {
         self.melee.var_3321 = 1;
         return 0;
       } else {
@@ -233,14 +233,14 @@ melee_shouldabort(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-func_B5AD(param_00, param_01, param_02) {
+func_B5AD(var_0, var_1, var_2) {
   self.melee.bcharge = 1;
-  self.melee.var_B5DE = param_00;
-  self.melee.var_22E6 = param_01;
-  self.melee.var_29B0 = param_02;
+  self.melee.var_B5DE = var_0;
+  self.melee.var_22E6 = var_1;
+  self.melee.var_29B0 = var_2;
 }
 
-func_B573(param_00, param_01, param_02, param_03) {
+func_B573(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.bcharge) && self.melee.bcharge;
 }
 
@@ -248,116 +248,116 @@ func_B571() {
   self.melee.bcharge = undefined;
 }
 
-func_B59A(param_00, param_01, param_02, param_03) {
-  if(self.melee.var_13D8A != param_03) {
+func_B59A(var_0, var_1, var_2, var_3) {
+  if(self.melee.var_13D8A != var_3) {
     return 0;
   }
 
   return !func_B573();
 }
 
-func_B5B8(param_00, param_01, param_02, param_03) {
+func_B5B8(var_0, var_1, var_2, var_3) {
   return !isai(self.melee.target);
 }
 
-func_B59B(param_00, param_01, param_02, param_03) {
-  var_04 = self.melee.target scripts\asm\asm_bb::bb_getcovernode();
-  return var_04.type == param_03;
+func_B59B(var_0, var_1, var_2, var_3) {
+  var_4 = self.melee.target scripts\asm\asm_bb::bb_getcovernode();
+  return var_4.type == var_3;
 }
 
-func_38A0(param_00, param_01, param_02, param_03) {}
+func_38A0(var_0, var_1, var_2, var_3) {}
 
-func_67D6(param_00, param_01, param_02, param_03) {
-  var_04 = self.melee.target;
-  if(isplayer(var_04)) {
+func_67D6(var_0, var_1, var_2, var_3) {
+  var_4 = self.melee.target;
+  if(isplayer(var_4)) {
     return 0;
   }
 
-  if(isDefined(var_04.var_596E) && var_04.var_596E) {
+  if(isDefined(var_4.var_596E) && var_4.var_596E) {
     return 0;
   }
 
-  if(!isDefined(self.melee.var_13D8A) || !isDefined(var_04.melee.var_13D8A)) {
+  if(!isDefined(self.melee.var_13D8A) || !isDefined(var_4.melee.var_13D8A)) {
     func_B57F();
   }
 
-  var_05 = param_03[0];
-  if(self.melee.var_13D8A != var_05) {
+  var_5 = var_3[0];
+  if(self.melee.var_13D8A != var_5) {
     return 0;
   }
 
-  var_06 = self[[self.var_7191]](param_00, param_02);
-  var_07 = func_38A7(var_06);
-  if(!var_07) {
+  var_6 = self[[self.var_7191]](var_0, var_2);
+  var_7 = func_38A7(var_6);
+  if(!var_7) {
     return 0;
   }
 
-  var_08 = param_03[1];
-  var_09 = 30;
+  var_8 = var_3[1];
+  var_9 = 30;
   var_0A = angleclamp180(self.melee.var_10D6D[1] - self.angles[1]);
-  if(abs(var_0A) > var_09) {
+  if(abs(var_0A) > var_9) {
     return 0;
   }
 
-  if(var_08) {
-    var_0B = var_04.angles - (0, var_0A * 0.5, 0);
-    var_0C = getstartorigin(var_04.origin, var_0B, var_06);
+  if(var_8) {
+    var_0B = var_4.angles - (0, var_0A * 0.5, 0);
+    var_0C = getstartorigin(var_4.origin, var_0B, var_6);
   } else {
     var_0C = self.melee.areanynavvolumesloaded;
     var_0B = self.melee.var_10D6D;
   }
 
   var_0D = self.origin - var_0C;
-  var_0E = vectornormalize(var_04.origin - var_0C);
+  var_0E = vectornormalize(var_4.origin - var_0C);
   var_0F = vectordot(var_0E, var_0D);
   if(var_0F > 12) {
     return 0;
   }
 
-  if(var_08) {
+  if(var_8) {
     self.melee.var_10D6D = self.angles + (0, var_0A * 0.5, 0);
-    var_04.melee.var_10D6D = var_0B;
+    var_4.melee.var_10D6D = var_0B;
   }
 
-  var_04.melee.var_331C = 1;
+  var_4.melee.var_331C = 1;
   return 1;
 }
 
-func_38AA(param_00, param_01, param_02, param_03) {}
+func_38AA(var_0, var_1, var_2, var_3) {}
 
-func_38AB(param_00, param_01, param_02, param_03) {}
+func_38AB(var_0, var_1, var_2, var_3) {}
 
-func_38AC(param_00, param_01, param_02, param_03) {}
+func_38AC(var_0, var_1, var_2, var_3) {}
 
-func_38AD(param_00, param_01, param_02, param_03) {}
+func_38AD(var_0, var_1, var_2, var_3) {}
 
-func_38A8(param_00, param_01, param_02, param_03) {}
+func_38A8(var_0, var_1, var_2, var_3) {}
 
-func_38A9(param_00, param_01, param_02, param_03) {}
+func_38A9(var_0, var_1, var_2, var_3) {}
 
-func_38A7(param_00) {
-  var_01 = self.melee.target;
-  var_02 = var_01.origin;
-  var_03 = self.origin - var_02;
-  var_04 = vectortoangles(var_03);
-  var_05 = getstartorigin(var_02, var_04, param_00);
-  self.melee.areanynavvolumesloaded = var_05;
-  self.melee.var_10D6D = getstartangles(var_02, var_04, param_00);
-  var_01.melee.var_10E0E = var_04[1];
+func_38A7(var_0) {
+  var_1 = self.melee.target;
+  var_2 = var_1.origin;
+  var_3 = self.origin - var_2;
+  var_4 = vectortoangles(var_3);
+  var_5 = getstartorigin(var_2, var_4, var_0);
+  self.melee.areanynavvolumesloaded = var_5;
+  self.melee.var_10D6D = getstartangles(var_2, var_4, var_0);
+  var_1.melee.var_10E0E = var_4[1];
   return 1;
 }
 
-func_38A6(param_00) {}
+func_38A6(var_0) {}
 
-func_B5D5(param_00, param_01, param_02) {}
+func_B5D5(var_0, var_1, var_2) {}
 
-func_D4D6(param_00) {
-  self endon(param_00 + "_finished");
+func_D4D6(var_0) {
+  self endon(var_0 + "_finished");
   self waittill("melee_exit");
   self unlink();
-  if(scripts\asm\asm::func_232B(param_00, "melee_interact") && !scripts\asm\asm::func_232B(param_00, "melee_death")) {
+  if(scripts\asm\asm::func_232B(var_0, "melee_interact") && !scripts\asm\asm::func_232B(var_0, "melee_death")) {
     if(isDefined(self.melee.var_9A08)) {
-      self.melee.var_112E2 = !scripts\asm\asm::func_232B(param_00, "drop");
+      self.melee.var_112E2 = !scripts\asm\asm::func_232B(var_0, "drop");
     } else {
       self.melee.var_112E2 = 1;
     }
@@ -368,19 +368,19 @@ func_D4D6(param_00) {
   }
 }
 
-func_B5B7(param_00, param_01, param_02, param_03) {
+func_B5B7(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.var_112E2);
 }
 
-func_B5B9(param_00, param_01, param_02, param_03) {
+func_B5B9(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.var_312C);
 }
 
-func_B5D7(param_00) {
-  self endon(param_00 + "_finished");
-  self waittill("weapon_dropped", var_01);
-  if(isDefined(var_01)) {
-    self.melee.var_5D3E = var_01;
+func_B5D7(var_0) {
+  self endon(var_0 + "_finished");
+  self waittill("weapon_dropped", var_1);
+  if(isDefined(var_1)) {
+    self.melee.var_5D3E = var_1;
   }
 }
 
@@ -390,14 +390,14 @@ func_B58E() {
   self.physics_setgravityragdollscalar = undefined;
 }
 
-func_B590(param_00) {
-  if(issubstr(param_00, "ps_")) {
-    var_01 = getsubstr(param_00, 3);
-    self playSound(var_01);
+func_B590(var_0) {
+  if(issubstr(var_0, "ps_")) {
+    var_1 = getsubstr(var_0, 3);
+    self playSound(var_1);
     return;
   }
 
-  switch (var_01) {
+  switch (var_1) {
     case "sync":
       if(!isDefined(self.melee.var_2720)) {
         if(isDefined(self.melee.target)) {
@@ -426,9 +426,9 @@ func_B590(param_00) {
 
     case "melee_death":
       if(isDefined(self.melee.var_112E2)) {
-        return var_01;
+        return var_1;
       }
-      return var_01;
+      return var_1;
 
     case "attach_knife":
       self attach("tactical_knife_iw7", "TAG_INHAND", 1);

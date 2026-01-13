@@ -4,40 +4,40 @@
  * Script: 3086.gsc
 ************************/
 
-func_97E6(param_00) {
-  if(isDefined(self.var_3135.var_9882)) {
+func_97E6(var_0) {
+  if(isDefined(self.bt.var_9882)) {
     return level.success;
   }
 
-  self.var_1198.civstate = "noncombat";
-  self.var_1198.civstatetime = gettime();
-  self.var_3135.var_9882 = 1;
+  self._blackboard.civstate = "noncombat";
+  self._blackboard.civstatetime = gettime();
+  self.bt.var_9882 = 1;
   return level.success;
 }
 
-func_12E8F(param_00) {
-  var_01 = scripts\asm\asm::func_233E("ai_notify", "bulletwhizby");
-  if(isDefined(var_01)) {
+func_12E8F(var_0) {
+  var_1 = scripts\asm\asm::func_233E("ai_notify", "bulletwhizby");
+  if(isDefined(var_1)) {
     if(!isDefined(self.disablebulletwhizbyreaction)) {
-      var_02 = var_01.params[0];
-      var_03 = isDefined(var_02) && distancesquared(self.origin, var_02.origin) < 262144;
-      if(var_03 || scripts\engine\utility::cointoss()) {
+      var_2 = var_1.params[0];
+      var_3 = isDefined(var_2) && distancesquared(self.origin, var_2.origin) < 262144;
+      if(var_3 || scripts\engine\utility::cointoss()) {
         scripts\asm\asm_bb::bb_setcivilianstate("combat");
-        scripts\asm\asm_bb::bb_requestwhizby(var_01);
+        scripts\asm\asm_bb::bb_requestwhizby(var_1);
         return level.success;
       }
     }
   } else {
-    var_04 = 5000;
-    var_01 = scripts\asm\asm_bb::bb_getrequestedwhizby();
-    if(!isDefined(var_01) || gettime() > var_01.var_7686 + var_04) {
+    var_4 = 5000;
+    var_1 = scripts\asm\asm_bb::bb_getrequestedwhizby();
+    if(!isDefined(var_1) || gettime() > var_1.var_7686 + var_4) {
       scripts\asm\asm_bb::bb_requestwhizby(undefined);
     }
   }
 
-  var_05 = getaiarray("axis");
-  foreach(var_07 in var_05) {
-    if(distancesquared(var_07.origin, self.origin) < 262144) {
+  var_5 = getaiarray("axis");
+  foreach(var_7 in var_5) {
+    if(distancesquared(var_7.origin, self.origin) < 262144) {
       scripts\asm\asm_bb::bb_setcivilianstate("combat");
       return level.success;
     }

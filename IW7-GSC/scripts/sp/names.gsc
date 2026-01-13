@@ -11,124 +11,124 @@ func_F9E6() {
     return;
   }
 
-  var_00["unitednations"] = 1;
-  var_00["unitednationsjackal"] = 0;
-  var_00["unitednationshelmet"] = 0;
-  var_00["unitednationsfemale"] = 2;
-  var_00["setdef"] = 3;
-  var_00["c6"] = -1;
-  foreach(var_03, var_02 in var_00) {
-    level.var_BE4D[var_03] = [];
-    if(var_02 < 0) {
+  var_0["unitednations"] = 1;
+  var_0["unitednationsjackal"] = 0;
+  var_0["unitednationshelmet"] = 0;
+  var_0["unitednationsfemale"] = 2;
+  var_0["setdef"] = 3;
+  var_0["c6"] = -1;
+  foreach(var_3, var_2 in var_0) {
+    level.var_BE4D[var_3] = [];
+    if(var_2 < 0) {
       continue;
     }
 
-    func_113B2(var_03, var_02);
+    func_113B2(var_3, var_2);
   }
 
   func_1718("c6", "C6A");
   func_1718("c6", "C6B");
   func_1718("c6", "C6C");
   func_9725();
-  foreach(var_03, var_02 in var_00) {
-    func_E081(var_03);
-    func_DCB5(var_03);
-    level.var_BE4B[var_03] = 0;
+  foreach(var_3, var_2 in var_0) {
+    func_E081(var_3);
+    func_DCB5(var_3);
+    level.var_BE4B[var_3] = 0;
   }
 
-  var_00 = undefined;
+  var_0 = undefined;
 }
 
-func_113B2(param_00, param_01) {
-  var_02 = tablelookuprownum("sp\names.csv", param_01, "__END__");
-  var_03 = [];
-  for(var_04 = 0; var_04 < var_02; var_04++) {
-    var_03[var_04] = var_04;
+func_113B2(var_0, var_1) {
+  var_2 = tablelookuprownum("sp\names.csv", var_1, "__END__");
+  var_3 = [];
+  for(var_4 = 0; var_4 < var_2; var_4++) {
+    var_3[var_4] = var_4;
   }
 
-  var_03 = scripts\engine\utility::array_randomize(var_03);
-  var_05 = min(50, var_02);
-  for(var_04 = 0; var_04 < var_05; var_04++) {
-    func_1719(param_00, var_03[var_04], param_01);
+  var_3 = scripts\engine\utility::array_randomize(var_3);
+  var_5 = min(50, var_2);
+  for(var_4 = 0; var_4 < var_5; var_4++) {
+    func_1719(var_0, var_3[var_4], var_1);
   }
 
-  var_03 = undefined;
+  var_3 = undefined;
 }
 
-func_1719(param_00, param_01, param_02) {
-  var_03 = tablelookupbyrow("sp\names.csv", param_01, param_02);
-  func_1718(param_00, var_03);
+func_1719(var_0, var_1, var_2) {
+  var_3 = tablelookupbyrow("sp\names.csv", var_1, var_2);
+  func_1718(var_0, var_3);
 }
 
-func_4646(param_00, param_01) {
-  level.var_BE4D[param_00] = level.var_BE4D[param_01];
+func_4646(var_0, var_1) {
+  level.var_BE4D[var_0] = level.var_BE4D[var_1];
 }
 
-func_1718(param_00, param_01) {
-  level.var_BE4D[param_00][level.var_BE4D[param_00].size] = param_01;
+func_1718(var_0, var_1) {
+  level.var_BE4D[var_0][level.var_BE4D[var_0].size] = var_1;
 }
 
-func_171A(param_00, param_01) {
-  foreach(var_03 in param_01) {
-    level.var_BE4D[param_00][level.var_BE4D[param_00].size] = var_03;
+func_171A(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    level.var_BE4D[var_0][level.var_BE4D[var_0].size] = var_3;
   }
 }
 
-func_E05B(param_00, param_01) {
-  level.var_BE4D[param_00] = ::scripts\engine\utility::array_remove(level.var_BE4D[param_00], param_01);
+func_E05B(var_0, var_1) {
+  level.var_BE4D[var_0] = ::scripts\engine\utility::array_remove(level.var_BE4D[var_0], var_1);
 }
 
 func_9725() {
-  var_00 = [];
-  var_01 = getspawnerarray();
-  var_02 = getaiarray();
-  foreach(var_04 in var_01) {
-    if(isDefined(var_04.var_EDB8) && var_04.var_EDB8 != "none") {
-      var_05 = func_C096(var_04.var_EDB8);
-      var_00[var_00.size] = var_05;
+  var_0 = [];
+  var_1 = getspawnerarray();
+  var_2 = getaiarray();
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4.var_EDB8) && var_4.var_EDB8 != "none") {
+      var_5 = func_C096(var_4.var_EDB8);
+      var_0[var_0.size] = var_5;
     }
   }
 
-  foreach(var_08 in var_02) {
-    if(isDefined(var_08.var_EDB8) && var_08.var_EDB8 != "none") {
-      var_05 = func_C096(var_08.var_EDB8);
-      var_00[var_00.size] = var_05;
+  foreach(var_8 in var_2) {
+    if(isDefined(var_8.var_EDB8) && var_8.var_EDB8 != "none") {
+      var_5 = func_C096(var_8.var_EDB8);
+      var_0[var_0.size] = var_5;
     }
   }
 
-  level.var_EDB9 = var_00;
+  level.var_EDB9 = var_0;
 }
 
-func_C096(param_00) {
-  var_01 = strtok(param_00, " ");
-  if(var_01.size > 1) {
-    param_00 = var_01[1];
+func_C096(var_0) {
+  var_1 = strtok(var_0, " ");
+  if(var_1.size > 1) {
+    var_0 = var_1[1];
   }
 
-  return param_00;
+  return var_0;
 }
 
-func_E081(param_00) {
-  foreach(var_02 in level.var_EDB9) {
-    foreach(var_04 in level.var_BE4D[param_00]) {
-      if(var_02 == var_04) {
-        func_E05B(param_00, var_04);
+func_E081(var_0) {
+  foreach(var_2 in level.var_EDB9) {
+    foreach(var_4 in level.var_BE4D[var_0]) {
+      if(var_2 == var_4) {
+        func_E05B(var_0, var_4);
       }
     }
   }
 }
 
-func_DCB5(param_00) {
-  var_01 = level.var_BE4D[param_00].size;
-  for(var_02 = 0; var_02 < var_01; var_02++) {
-    var_03 = randomint(var_01);
-    var_04 = level.var_BE4D[param_00][var_02];
-    level.var_BE4D[param_00][var_02] = level.var_BE4D[param_00][var_03];
-    level.var_BE4D[param_00][var_03] = var_04;
+func_DCB5(var_0) {
+  var_1 = level.var_BE4D[var_0].size;
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_3 = randomint(var_1);
+    var_4 = level.var_BE4D[var_0][var_2];
+    level.var_BE4D[var_0][var_2] = level.var_BE4D[var_0][var_3];
+    level.var_BE4D[var_0][var_3] = var_4;
   }
 }
 
-func_7B05(param_00) {
+func_7B05(var_0) {
   if(isDefined(self.team) && self.team == "neutral") {
     return;
   }
@@ -156,46 +156,46 @@ func_7B05(param_00) {
   self notify("set name and rank");
 }
 
-func_7B07(param_00) {
-  level.var_BE4B[param_00] = level.var_BE4B[param_00] + 1 % level.var_BE4D[param_00].size;
-  var_01 = level.var_BE4D[param_00][level.var_BE4B[param_00]];
-  var_02 = randomint(10);
-  if(func_BE5B(param_00)) {
-    var_03 = param_00 + "_surnames";
-    level.var_BE4B[var_03] = level.var_BE4B[var_03] + 1 % level.var_BE4D[var_03].size;
-    var_01 = var_01 + " " + level.var_BE4D[var_03][level.var_BE4B[var_03]];
+func_7B07(var_0) {
+  level.var_BE4B[var_0] = level.var_BE4B[var_0] + 1 % level.var_BE4D[var_0].size;
+  var_1 = level.var_BE4D[var_0][level.var_BE4B[var_0]];
+  var_2 = randomint(10);
+  if(func_BE5B(var_0)) {
+    var_3 = var_0 + "_surnames";
+    level.var_BE4B[var_3] = level.var_BE4B[var_3] + 1 % level.var_BE4D[var_3].size;
+    var_1 = var_1 + " " + level.var_BE4D[var_3][level.var_BE4B[var_3]];
   }
 
-  if(func_BE5A(param_00)) {
-    var_04 = var_01;
+  if(func_BE5A(var_0)) {
+    var_4 = var_1;
     self.var_1A70 = "private";
   } else if(isDefined(self.subclass) && self.subclass == "MDF") {
-    var_05 = func_7E38(var_04);
-    var_04 = var_05 + var_01;
+    var_5 = func_7E38(var_4);
+    var_4 = var_5 + var_1;
   } else if(isDefined(self.subclass) && self.subclass == "jackal") {
-    var_05 = canshoot(var_04);
-    var_04 = var_05 + var_01;
-  } else if(var_04 > 5) {
-    var_04 = "Pvt. " + var_02;
+    var_5 = canshoot(var_4);
+    var_4 = var_5 + var_1;
+  } else if(var_4 > 5) {
+    var_4 = "Pvt. " + var_2;
     self.var_1A70 = "private";
-  } else if(var_04 > 2) {
-    var_04 = "Cpl. " + var_02;
+  } else if(var_4 > 2) {
+    var_4 = "Cpl. " + var_2;
     self.var_1A70 = "private";
   } else {
-    var_04 = "Sgt. " + var_02;
+    var_4 = "Sgt. " + var_2;
     self.var_1A70 = "sergeant";
   }
 
   if(isai(self) && self gettargetchargepos()) {
-    self.var_1A53 = var_04;
+    self.var_1A53 = var_4;
     return;
   }
 
-  self.name = var_04;
+  self.name = var_4;
 }
 
-func_7E38(param_00) {
-  if(param_00 > 5) {
+func_7E38(var_0) {
+  if(var_0 > 5) {
     self.var_1A70 = "private";
     if(scripts\engine\utility::cointoss()) {
       return "SN ";
@@ -204,22 +204,22 @@ func_7E38(param_00) {
     return "AN ";
   }
 
-  if(param_00 == 5) {
+  if(var_0 == 5) {
     self.var_1A70 = "private";
     return "PO3 ";
   }
 
-  if(param_00 == 4) {
+  if(var_0 == 4) {
     self.var_1A70 = "private";
     return "PO2 ";
   }
 
-  if(param_00 == 3) {
+  if(var_0 == 3) {
     self.var_1A70 = "private";
     return "PO1 ";
   }
 
-  if(param_00 == 2) {
+  if(var_0 == 2) {
     self.var_1A70 = "sergeant";
     return "CPO ";
   }
@@ -228,13 +228,13 @@ func_7E38(param_00) {
   return "SCPO ";
 }
 
-canshoot(param_00) {
-  if(param_00 > 5) {
+canshoot(var_0) {
+  if(var_0 > 5) {
     self.var_1A70 = "private";
     return "Lt ";
   }
 
-  if(param_00 > 2) {
+  if(var_0 > 2) {
     self.var_1A70 = "private";
     return "Ltjg ";
   }
@@ -243,14 +243,14 @@ canshoot(param_00) {
   return "Ens ";
 }
 
-getrankfromname(param_00) {
-  if(!isDefined(param_00)) {
+getrankfromname(var_0) {
+  if(!isDefined(var_0)) {
     self.var_1A70 = "private";
   }
 
-  var_01 = strtok(param_00, " ");
-  var_02 = var_01[0];
-  switch (var_02) {
+  var_1 = strtok(var_0, " ");
+  var_2 = var_1[0];
+  switch (var_2) {
     case "Pvt.":
       self.var_1A70 = "private";
       break;
@@ -285,8 +285,8 @@ getrankfromname(param_00) {
   }
 }
 
-func_BE5A(param_00) {
-  switch (param_00) {
+func_BE5A(var_0) {
+  switch (var_0) {
     case "czech":
     case "taskforce":
     case "delta":
@@ -297,6 +297,6 @@ func_BE5A(param_00) {
   return 0;
 }
 
-func_BE5B(param_00) {
-  return isDefined(level.var_BE4D[param_00 + "_surnames"]);
+func_BE5B(var_0) {
+  return isDefined(level.var_BE4D[var_0 + "_surnames"]);
 }

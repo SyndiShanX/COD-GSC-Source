@@ -4,8 +4,8 @@
  * Script: scripts\mp\equipment\blackout_grenade.gsc
 *****************************************************/
 
-func_10D6F(param_00, param_01, param_02) {
-  if(!func_13151(param_00, param_01)) {
+func_10D6F(var_0, var_1, var_2) {
+  if(!func_13151(var_0, var_1)) {
     return;
   }
 
@@ -13,171 +13,171 @@ func_10D6F(param_00, param_01, param_02) {
     self.var_2B4B thread func_6310(0, 1, 1);
   }
 
-  var_03 = spawnStruct();
-  self.var_2B4B = var_03;
-  var_03.victim = self;
-  var_03.var_4F = param_00;
-  var_03.starttime = gettime();
-  if(!isDefined(param_02)) {
-    param_02 = func_7F68(max(0, getweightedchanceroll(param_01, self) + getwholescenedurationmin(param_00)));
+  var_3 = spawnStruct();
+  self.var_2B4B = var_3;
+  var_3.victim = self;
+  var_3.var_4F = var_0;
+  var_3.starttime = gettime();
+  if(!isDefined(var_2)) {
+    var_2 = func_7F68(max(0, getweightedchanceroll(var_1, self) + getwholescenedurationmin(var_0)));
   }
 
-  switch (param_02) {
+  switch (var_2) {
     case 4:
-      var_03.var_5FEB = 4;
-      var_03.refreshwindowms = 3000;
-      var_03.var_10475 = "blackout_grenade_drone_lr";
-      var_03.blurstrength = 7;
-      var_03.blursnapstrength = 12;
-      var_03.blurindur = 0.2;
-      var_03.blurdur = 1.9;
-      var_03.bluroutdur = 3.2;
-      var_03.overlayinalpha = 1;
-      var_03.overlayindur = 0.2;
-      var_03.overlaydur = 0.35;
-      var_03.overlayoutalpha = 0.3;
-      var_03.overlayoutdur = 0.4;
-      var_03.useoverlay2 = 1;
-      var_03.overlay2delay = 0.15;
-      var_03.overlay2inalpha = 1;
-      var_03.overlay2indur = 0.65;
-      var_03.overlay2dur = 0.35;
-      var_03.overlay2outalpha = 0;
-      var_03.overlay2outdur = 3.2;
-      var_03.shockdelay = 0.55;
-      var_03.shockdur = 1;
-      var_03.shock2delay = 0.35;
-      var_03.shock2dur = 2;
+      var_3.var_5FEB = 4;
+      var_3.refreshwindowms = 3000;
+      var_3.var_10475 = "blackout_grenade_drone_lr";
+      var_3.blurstrength = 7;
+      var_3.blursnapstrength = 12;
+      var_3.blurindur = 0.2;
+      var_3.blurdur = 1.9;
+      var_3.bluroutdur = 3.2;
+      var_3.overlayinalpha = 1;
+      var_3.overlayindur = 0.2;
+      var_3.overlaydur = 0.35;
+      var_3.overlayoutalpha = 0.3;
+      var_3.overlayoutdur = 0.4;
+      var_3.useoverlay2 = 1;
+      var_3.overlay2delay = 0.15;
+      var_3.overlay2inalpha = 1;
+      var_3.overlay2indur = 0.65;
+      var_3.overlay2dur = 0.35;
+      var_3.overlay2outalpha = 0;
+      var_3.overlay2outdur = 3.2;
+      var_3.shockdelay = 0.55;
+      var_3.shockdur = 1;
+      var_3.shock2delay = 0.35;
+      var_3.shock2dur = 2;
       break;
 
     case 3:
-      var_03.var_5FEB = 3;
-      var_03.refreshwindowms = 2000;
-      var_03.var_10475 = "blackout_grenade_drone_lr";
-      var_03.blurstrength = 7;
-      var_03.blursnapstrength = 12;
-      var_03.blurindur = 0.2;
-      var_03.blurdur = 1.9;
-      var_03.bluroutdur = 2.2;
-      var_03.overlayinalpha = 1;
-      var_03.overlayindur = 0.2;
-      var_03.overlaydur = 0.35;
-      var_03.overlayoutalpha = 0.3;
-      var_03.overlayoutdur = 0.4;
-      var_03.useoverlay2 = 1;
-      var_03.overlay2delay = 0.15;
-      var_03.overlay2inalpha = 1;
-      var_03.overlay2indur = 0.65;
-      var_03.overlay2dur = 0.35;
-      var_03.overlay2outalpha = 0;
-      var_03.overlay2outdur = 2.2;
-      var_03.shockdelay = 0.55;
-      var_03.shockdur = 1;
-      var_03.shock2delay = 0.35;
-      var_03.shock2dur = 2;
+      var_3.var_5FEB = 3;
+      var_3.refreshwindowms = 2000;
+      var_3.var_10475 = "blackout_grenade_drone_lr";
+      var_3.blurstrength = 7;
+      var_3.blursnapstrength = 12;
+      var_3.blurindur = 0.2;
+      var_3.blurdur = 1.9;
+      var_3.bluroutdur = 2.2;
+      var_3.overlayinalpha = 1;
+      var_3.overlayindur = 0.2;
+      var_3.overlaydur = 0.35;
+      var_3.overlayoutalpha = 0.3;
+      var_3.overlayoutdur = 0.4;
+      var_3.useoverlay2 = 1;
+      var_3.overlay2delay = 0.15;
+      var_3.overlay2inalpha = 1;
+      var_3.overlay2indur = 0.65;
+      var_3.overlay2dur = 0.35;
+      var_3.overlay2outalpha = 0;
+      var_3.overlay2outdur = 2.2;
+      var_3.shockdelay = 0.55;
+      var_3.shockdur = 1;
+      var_3.shock2delay = 0.35;
+      var_3.shock2dur = 2;
       break;
 
     case 2:
-      var_03.var_5FEB = 2;
-      var_03.refreshwindowms = 1000;
-      var_03.var_10475 = "blackout_grenade_drone_lr";
-      var_03.blurstrength = 7;
-      var_03.blursnapstrength = 12;
-      var_03.blurindur = 0.2;
-      var_03.blurdur = 1.9;
-      var_03.bluroutdur = 1.2;
-      var_03.overlayinalpha = 1;
-      var_03.overlayindur = 0.2;
-      var_03.overlaydur = 0.35;
-      var_03.overlayoutalpha = 0.3;
-      var_03.overlayoutdur = 0.4;
-      var_03.useoverlay2 = 1;
-      var_03.overlay2delay = 0.15;
-      var_03.overlay2inalpha = 1;
-      var_03.overlay2indur = 0.65;
-      var_03.overlay2dur = 0.35;
-      var_03.overlay2outalpha = 0;
-      var_03.overlay2outdur = 1.2;
-      var_03.shockdelay = 0.55;
-      var_03.shockdur = 1;
-      var_03.shock2delay = 0.35;
-      var_03.shock2dur = 1.6;
+      var_3.var_5FEB = 2;
+      var_3.refreshwindowms = 1000;
+      var_3.var_10475 = "blackout_grenade_drone_lr";
+      var_3.blurstrength = 7;
+      var_3.blursnapstrength = 12;
+      var_3.blurindur = 0.2;
+      var_3.blurdur = 1.9;
+      var_3.bluroutdur = 1.2;
+      var_3.overlayinalpha = 1;
+      var_3.overlayindur = 0.2;
+      var_3.overlaydur = 0.35;
+      var_3.overlayoutalpha = 0.3;
+      var_3.overlayoutdur = 0.4;
+      var_3.useoverlay2 = 1;
+      var_3.overlay2delay = 0.15;
+      var_3.overlay2inalpha = 1;
+      var_3.overlay2indur = 0.65;
+      var_3.overlay2dur = 0.35;
+      var_3.overlay2outalpha = 0;
+      var_3.overlay2outdur = 1.2;
+      var_3.shockdelay = 0.55;
+      var_3.shockdur = 1;
+      var_3.shock2delay = 0.35;
+      var_3.shock2dur = 1.6;
       break;
 
     case 1:
-      var_03.var_5FEB = 1;
-      var_03.refreshwindowms = 1000;
-      var_03.var_10475 = "blackout_grenade_drone_short_lr";
-      var_03.blurstrength = 7;
-      var_03.blursnapstrength = 12;
-      var_03.blurindur = 0.2;
-      var_03.blurdur = 0.35;
-      var_03.bluroutdur = 1.2;
-      var_03.overlayinalpha = 1;
-      var_03.overlayindur = 0.2;
-      var_03.overlaydur = 0.35;
-      var_03.overlayoutalpha = 0;
-      var_03.overlayoutdur = 1.2;
-      var_03.useoverlay2 = 0;
-      var_03.overlay2delay = 0;
-      var_03.overlay2inalpha = 0;
-      var_03.overlay2indur = 0;
-      var_03.overlay2dur = 0;
-      var_03.overlay2outalpha = 0;
-      var_03.overlay2outdur = 0;
-      var_03.shockdelay = 0.55;
-      var_03.shockdur = 1.6;
-      var_03.shock2delay = 0;
-      var_03.shock2dur = 0;
+      var_3.var_5FEB = 1;
+      var_3.refreshwindowms = 1000;
+      var_3.var_10475 = "blackout_grenade_drone_short_lr";
+      var_3.blurstrength = 7;
+      var_3.blursnapstrength = 12;
+      var_3.blurindur = 0.2;
+      var_3.blurdur = 0.35;
+      var_3.bluroutdur = 1.2;
+      var_3.overlayinalpha = 1;
+      var_3.overlayindur = 0.2;
+      var_3.overlaydur = 0.35;
+      var_3.overlayoutalpha = 0;
+      var_3.overlayoutdur = 1.2;
+      var_3.useoverlay2 = 0;
+      var_3.overlay2delay = 0;
+      var_3.overlay2inalpha = 0;
+      var_3.overlay2indur = 0;
+      var_3.overlay2dur = 0;
+      var_3.overlay2outalpha = 0;
+      var_3.overlay2outdur = 0;
+      var_3.shockdelay = 0.55;
+      var_3.shockdur = 1.6;
+      var_3.shock2delay = 0;
+      var_3.shock2dur = 0;
       break;
   }
 
-  var_03.blurdurtotal = var_03.blurindur + var_03.blurdur + var_03.bluroutdur;
-  var_03.overlaydurtotal = var_03.overlayindur + var_03.overlaydur + var_03.overlayoutdur;
-  if(var_03.useoverlay2) {
-    var_03.overlaydurtotal = var_03.overlaydurtotal + var_03.overlay2delay + var_03.overlay2indur + var_03.overlay2dur + var_03.overlay2outdur;
+  var_3.blurdurtotal = var_3.blurindur + var_3.blurdur + var_3.bluroutdur;
+  var_3.overlaydurtotal = var_3.overlayindur + var_3.overlaydur + var_3.overlayoutdur;
+  if(var_3.useoverlay2) {
+    var_3.overlaydurtotal = var_3.overlaydurtotal + var_3.overlay2delay + var_3.overlay2indur + var_3.overlay2dur + var_3.overlay2outdur;
   }
 
-  var_03.durtotal = max(var_03.blurdurtotal, var_03.overlaydurtotal);
-  var_04 = newclienthudelem(self);
-  var_04.x = 0;
-  var_04.y = 0;
-  var_04.alignx = "left";
-  var_04.aligny = "top";
-  var_04.sort = 1;
-  var_04.horzalign = "fullscreen";
-  var_04.vertalign = "fullscreen";
-  var_04.alpha = 0;
-  var_04.foreground = 1;
-  var_04 setshader("black", 640, 480);
-  var_03.var_C7FD = var_04;
-  var_03 thread func_B9BB();
-  param_00 scripts\mp\damage::combatrecordtacticalstat("power_blackoutGrenade");
+  var_3.durtotal = max(var_3.blurdurtotal, var_3.overlaydurtotal);
+  var_4 = newclienthudelem(self);
+  var_4.x = 0;
+  var_4.y = 0;
+  var_4.alignx = "left";
+  var_4.aligny = "top";
+  var_4.sort = 1;
+  var_4.horzalign = "fullscreen";
+  var_4.vertalign = "fullscreen";
+  var_4.alpha = 0;
+  var_4.foreground = 1;
+  var_4 setshader("black", 640, 480);
+  var_3.var_C7FD = var_4;
+  var_3 thread func_B9BB();
+  var_0 scripts\mp\damage::combatrecordtacticalstat("power_blackoutGrenade");
 }
 
-func_6310(param_00, param_01, param_02) {
+func_6310(var_0, var_1, var_2) {
   self notify("blackoutEnded");
-  var_03 = self.var_4F;
-  var_04 = self.victim;
-  if(isDefined(var_04)) {
-    var_04.var_2B4B = undefined;
-    if(!param_00) {
-      if(param_02) {
+  var_3 = self.var_4F;
+  var_4 = self.victim;
+  if(isDefined(var_4)) {
+    var_4.var_2B4B = undefined;
+    if(!var_0) {
+      if(var_2) {
         thread endblackoutsfx();
       } else {
         thread endblackoutsfx(2);
       }
 
-      if(param_01) {
-        var_04 setblurforplayer(0, 0.05);
+      if(var_1) {
+        var_4 setblurforplayer(0, 0.05);
       }
 
-      if(isDefined(var_03)) {
-        scripts\mp\gamescore::untrackdebuffassist(var_03, var_04, "blackout_grenade_mp");
+      if(isDefined(var_3)) {
+        scripts\mp\gamescore::untrackdebuffassist(var_3, var_4, "blackout_grenade_mp");
       }
 
-      var_04 scripts\mp\weapons::func_F7FF();
-      var_04 scripts\mp\utility::func_8EC4();
+      var_4 scripts\mp\weapons::func_F7FF();
+      var_4 scripts\mp\utility::func_8EC4();
     } else {
       thread endblackoutsfx();
     }
@@ -186,12 +186,12 @@ func_6310(param_00, param_01, param_02) {
   self.var_C7FD destroy();
 }
 
-endblackoutsfx(param_00) {
+endblackoutsfx(var_0) {
   self.victim endon("disconnect");
   self notify("endBlackoutSfx");
   self endon("endBlackoutSfx");
-  if(isDefined(param_00)) {
-    wait(param_00);
+  if(isDefined(var_0)) {
+    wait(var_0);
   }
 
   self.victim stoplocalsound("blackout_grenade_drone_lr");
@@ -201,18 +201,18 @@ endblackoutsfx(param_00) {
 }
 
 func_B9BB() {
-  var_00 = self.victim;
-  var_00 endon("disconnect");
+  var_0 = self.victim;
+  var_0 endon("disconnect");
   self endon("blackoutEnded");
-  var_01 = self.var_4F;
-  var_02 = self.var_10475;
-  var_03 = self.durtotal;
-  var_00 shellshock("blackout_grenade_mp", 1);
-  var_00 playlocalsound(var_02);
-  var_00 scripts\mp\weapons::func_F7EE();
-  var_00 scripts\mp\utility::func_8EC6();
+  var_1 = self.var_4F;
+  var_2 = self.var_10475;
+  var_3 = self.durtotal;
+  var_0 shellshock("blackout_grenade_mp", 1);
+  var_0 playlocalsound(var_2);
+  var_0 scripts\mp\weapons::func_F7EE();
+  var_0 scripts\mp\utility::func_8EC6();
   if(isDefined(self.var_4F)) {
-    scripts\mp\gamescore::func_11ACE(var_01, var_00, "blackout_grenade_mp");
+    scripts\mp\gamescore::func_11ACE(var_1, var_0, "blackout_grenade_mp");
   }
 
   thread monitorvictimdeathdisconnect();
@@ -220,77 +220,77 @@ func_B9BB() {
   childthread monitoroverlay();
   childthread monitorshock();
   childthread monitorgameended();
-  wait(var_03 + 0.05);
+  wait(var_3 + 0.05);
   thread func_6310(0, 0, 0);
 }
 
 monitorblur() {
-  var_00 = self.victim;
-  var_00 endon("disconnect");
+  var_0 = self.victim;
+  var_0 endon("disconnect");
   self endon("blackoutEnded");
-  var_01 = self.blurstrength;
-  var_02 = self.blursnapstrength;
-  var_03 = self.blurindur;
-  var_04 = self.blurdur;
-  var_05 = self.bluroutdur;
-  var_00 setblurforplayer(var_01, var_03);
-  if(var_02 != var_01 && var_04 > 0.1) {
-    wait(var_03 + var_04 - 0.1);
-    var_00 setblurforplayer(var_02, 0.05);
+  var_1 = self.blurstrength;
+  var_2 = self.blursnapstrength;
+  var_3 = self.blurindur;
+  var_4 = self.blurdur;
+  var_5 = self.bluroutdur;
+  var_0 setblurforplayer(var_1, var_3);
+  if(var_2 != var_1 && var_4 > 0.1) {
+    wait(var_3 + var_4 - 0.1);
+    var_0 setblurforplayer(var_2, 0.05);
     wait(0.1);
   } else {
-    wait(var_03 + var_04);
+    wait(var_3 + var_4);
   }
 
-  var_00 setblurforplayer(0, var_05);
+  var_0 setblurforplayer(0, var_5);
 }
 
 monitoroverlay() {
-  var_00 = self.victim;
-  var_00 endon("disconnect");
+  var_0 = self.victim;
+  var_0 endon("disconnect");
   self endon("blackoutEnded");
-  var_01 = self.var_C7FD;
-  var_02 = self.overlayinalpha;
-  var_03 = self.overlayindur;
-  var_04 = self.overlaydur;
-  var_05 = self.overlayoutalpha;
-  var_06 = self.overlayoutdur;
-  var_07 = self.useoverlay2;
-  var_08 = self.overlay2delay;
-  var_09 = self.overlay2inalpha;
+  var_1 = self.var_C7FD;
+  var_2 = self.overlayinalpha;
+  var_3 = self.overlayindur;
+  var_4 = self.overlaydur;
+  var_5 = self.overlayoutalpha;
+  var_6 = self.overlayoutdur;
+  var_7 = self.useoverlay2;
+  var_8 = self.overlay2delay;
+  var_9 = self.overlay2inalpha;
   var_0A = self.overlay2indur;
   var_0B = self.overlay2dur;
   var_0C = self.overlay2outalpha;
   var_0D = self.overlay2outdur;
-  var_01 fadeovertime(var_03);
-  var_01.alpha = var_02;
-  wait(var_03 + var_04);
-  var_01 fadeovertime(var_06);
-  var_01.alpha = var_05;
-  if(var_07) {
-    wait(var_06 + var_08);
-    var_01 fadeovertime(var_0A);
-    var_01.alpha = var_09;
+  var_1 fadeovertime(var_3);
+  var_1.alpha = var_2;
+  wait(var_3 + var_4);
+  var_1 fadeovertime(var_6);
+  var_1.alpha = var_5;
+  if(var_7) {
+    wait(var_6 + var_8);
+    var_1 fadeovertime(var_0A);
+    var_1.alpha = var_9;
     wait(var_0A + var_0B);
-    var_01 fadeovertime(var_0D);
-    var_01.alpha = var_0C;
+    var_1 fadeovertime(var_0D);
+    var_1.alpha = var_0C;
   }
 }
 
 monitorshock() {
-  var_00 = self.victim;
-  var_00 endon("disconnect");
+  var_0 = self.victim;
+  var_0 endon("disconnect");
   self endon("blackoutEnded");
-  var_01 = self.shockdelay;
-  var_02 = self.shockdur;
-  var_03 = self.useoverlay2;
-  var_04 = self.shock2delay;
-  var_05 = self.shock2dur;
-  wait(var_01);
-  var_00 shellshock("blackout_grenade_mp", var_02, 0);
-  if(var_03) {
-    wait(var_02 + var_04);
-    var_00 shellshock("blackout_grenade_mp", var_05, 0);
+  var_1 = self.shockdelay;
+  var_2 = self.shockdur;
+  var_3 = self.useoverlay2;
+  var_4 = self.shock2delay;
+  var_5 = self.shock2dur;
+  wait(var_1);
+  var_0 shellshock("blackout_grenade_mp", var_2, 0);
+  if(var_3) {
+    wait(var_2 + var_4);
+    var_0 shellshock("blackout_grenade_mp", var_5, 0);
   }
 }
 
@@ -306,42 +306,42 @@ monitorgameended() {
   thread func_6310(0, 1, 1);
 }
 
-getweightedchanceroll(param_00, param_01) {
-  var_02 = param_00 - param_01 getEye();
-  var_03 = clamp(length(var_02), 100, 512);
-  var_04 = 1 - var_03 - 100 / 412 * 70;
-  var_05 = anglesToForward(param_01 getplayerangles());
-  var_06 = scripts\engine\utility::anglebetweenvectors(var_02, var_05);
-  var_06 = clamp(var_06, 15, 60);
-  var_07 = 1 - var_06 - 15 / 45 * 30;
-  return var_04 + var_07;
+getweightedchanceroll(var_0, var_1) {
+  var_2 = var_0 - var_1 getEye();
+  var_3 = clamp(length(var_2), 100, 512);
+  var_4 = 1 - var_3 - 100 / 412 * 70;
+  var_5 = anglesToForward(var_1 getplayerangles());
+  var_6 = scripts\engine\utility::anglebetweenvectors(var_2, var_5);
+  var_6 = clamp(var_6, 15, 60);
+  var_7 = 1 - var_6 - 15 / 45 * 30;
+  return var_4 + var_7;
 }
 
-func_7F68(param_00) {
-  if(param_00 > 70) {
+func_7F68(var_0) {
+  if(var_0 > 70) {
     return 4;
   }
 
-  if(param_00 > 55) {
+  if(var_0 > 55) {
     return 3;
   }
 
-  if(param_00 > 30) {
+  if(var_0 > 30) {
     return 2;
   }
 
   return 1;
 }
 
-getwholescenedurationmin(param_00) {
-  if(self == param_00) {
+getwholescenedurationmin(var_0) {
+  if(self == var_0) {
     return -30;
   }
 
   return 0;
 }
 
-func_13151(param_00, param_01) {
+func_13151(var_0, var_1) {
   if(!isplayer(self)) {
     return 0;
   }
@@ -351,13 +351,13 @@ func_13151(param_00, param_01) {
   }
 
   if(scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
-    scripts\mp\perks\_perkfunctions::applystunresistence(param_00, self);
+    scripts\mp\perks\_perkfunctions::applystunresistence(var_0, self);
     return 0;
   }
 
-  var_02 = func_7E09();
-  var_03 = getblackoutrefreshwindowms();
-  if(isDefined(var_02) && isDefined(var_03) && var_02 - gettime() > var_03) {
+  var_2 = func_7E09();
+  var_3 = getblackoutrefreshwindowms();
+  if(isDefined(var_2) && isDefined(var_3) && var_2 - gettime() > var_3) {
     return 0;
   }
 
@@ -380,21 +380,21 @@ getblackoutrefreshwindowms() {
   return self.var_2B4B.refreshwindowms;
 }
 
-func_B92C(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_03) || !isDefined(param_04) || !isDefined(param_01) || !isDefined(param_02)) {
-    return param_00;
+func_B92C(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_3) || !isDefined(var_4) || !isDefined(var_1) || !isDefined(var_2)) {
+    return var_0;
   }
 
-  if(param_04 != "blackout_grenade_mp") {
-    return param_00;
+  if(var_4 != "blackout_grenade_mp") {
+    return var_0;
   }
 
-  if(param_01 != param_02) {
-    return param_00;
+  if(var_1 != var_2) {
+    return var_0;
   }
 
-  if(distancesquared(param_02.origin, param_03.origin) <= 65536) {
-    return param_00;
+  if(distancesquared(var_2.origin, var_3.origin) <= 65536) {
+    return var_0;
   }
 
   return 0;
@@ -407,10 +407,10 @@ debug_blackouttestlevels() {
   self notifyonplayercommand("debug_startBlackout_3", "+actionslot 2");
   self notifyonplayercommand("debug_startBlackout_4", "+actionslot 3");
   for(;;) {
-    var_00 = scripts\engine\utility::waittill_any_return_no_endon_death_3("debug_startBlackout_1", "debug_startBlackout_2", "debug_startBlackout_3", "debug_startBlackout_4");
-    var_01 = strtok(var_00, "_");
-    var_02 = int(var_01[2]);
-    func_10D6F(self, self.origin, var_02);
+    var_0 = scripts\engine\utility::waittill_any_return_no_endon_death_3("debug_startBlackout_1", "debug_startBlackout_2", "debug_startBlackout_3", "debug_startBlackout_4");
+    var_1 = strtok(var_0, "_");
+    var_2 = int(var_1[2]);
+    func_10D6F(self, self.origin, var_2);
     wait(0.1);
   }
 }

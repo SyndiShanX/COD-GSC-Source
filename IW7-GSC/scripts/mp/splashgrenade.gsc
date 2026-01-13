@@ -9,91 +9,91 @@ splashgrenadeinit() {
   scripts\mp\powerloot::func_DF06("power_splashGrenade", ["passive_smoke", "passive_increased_duration", "passive_increased_spread", "passive_increased_radius", "passive_increased_entities"]);
 }
 
-splashgrenadeused(param_00) {
-  param_00.grenades = [];
-  var_01 = scripts\mp\powerloot::func_7FC2("power_splashGrenade", 6);
-  for(var_02 = 0; var_02 < var_01; var_02++) {
-    var_03 = scripts\mp\utility::_launchgrenade("globproj_mp", (0, 0, 0), (0, 0, 0));
-    var_03.triggerportableradarping = self;
-    var_03.team = self.team;
-    var_03.weapon_name = "globproj_mp";
-    var_03.parentinflictor = param_00 getentitynumber();
-    var_03 linkto(param_00, "", (0, 0, 0), (0, 0, 0));
-    var_03 hide(1);
-    param_00.grenades[param_00.grenades.size] = var_03;
-    var_03 thread istrialversion();
+splashgrenadeused(var_0) {
+  var_0.grenades = [];
+  var_1 = scripts\mp\powerloot::func_7FC2("power_splashGrenade", 6);
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_3 = scripts\mp\utility::_launchgrenade("globproj_mp", (0, 0, 0), (0, 0, 0));
+    var_3.triggerportableradarping = self;
+    var_3.team = self.team;
+    var_3.weapon_name = "globproj_mp";
+    var_3.parentinflictor = var_0 getentitynumber();
+    var_3 linkto(var_0, "", (0, 0, 0), (0, 0, 0));
+    var_3 hide(1);
+    var_0.grenades[var_0.grenades.size] = var_3;
+    var_3 thread istrialversion();
   }
 
-  thread func_85CE(param_00);
-  thread func_85CD(param_00);
-  param_00 thread istrialversion();
+  thread func_85CE(var_0);
+  thread func_85CD(var_0);
+  var_0 thread istrialversion();
 }
 
-func_85CD(param_00, param_01) {
-  param_00 notify("grenadeOnExplode");
-  param_00 endon("grenadeOnExplode");
-  param_00 thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
-  param_00 endon("end_explode");
-  var_02 = param_00.triggerportableradarping;
-  var_03 = param_00.grenades;
-  var_04 = param_00.power;
-  param_00 waittill("explode", var_05);
-  if(!isDefined(var_02)) {
+func_85CD(var_0, var_1) {
+  var_0 notify("grenadeOnExplode");
+  var_0 endon("grenadeOnExplode");
+  var_0 thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
+  var_0 endon("end_explode");
+  var_2 = var_0.triggerportableradarping;
+  var_3 = var_0.grenades;
+  var_4 = var_0.power;
+  var_0 waittill("explode", var_5);
+  if(!isDefined(var_2)) {
     return;
   }
 
-  setinteractwithethereal(var_05, param_01, var_03, var_04);
+  setinteractwithethereal(var_5, var_1, var_3, var_4);
 }
 
-func_85CE(param_00) {
-  param_00 endon("death");
-  param_00 waittill("missile_stuck", var_01);
-  param_00 setscriptablepartstate("beacon", "active", 0);
-  if(isDefined(var_01) && isplayer(var_01)) {
-    scripts\mp\weapons::grenadestuckto(param_00, var_01);
-    foreach(var_03 in param_00.grenades) {
-      var_03.isstuck = param_00.isstuck;
+func_85CE(var_0) {
+  var_0 endon("death");
+  var_0 waittill("missile_stuck", var_1);
+  var_0 setscriptablepartstate("beacon", "active", 0);
+  if(isDefined(var_1) && isplayer(var_1)) {
+    scripts\mp\weapons::grenadestuckto(var_0, var_1);
+    foreach(var_3 in var_0.grenades) {
+      var_3.isstuck = var_0.isstuck;
     }
 
-    thread scripts\mp\missions::func_D3A8(var_01, self);
+    thread scripts\mp\missions::func_D3A8(var_1, self);
     return;
   }
 
-  thread func_85CD(param_00, param_00.angles);
+  thread func_85CD(var_0, var_0.angles);
 }
 
-setinteractwithethereal(param_00, param_01, param_02, param_03) {
-  var_04 = 0;
-  var_05 = 0;
-  var_06 = undefined;
-  if(isDefined(param_01)) {
-    var_06 = anglestoup(param_01);
-    var_07 = vectordot(var_06, (0, 0, 1));
-    var_08 = acos(var_07);
-    var_04 = var_08 >= 45;
-    var_05 = var_08 >= 145;
+setinteractwithethereal(var_0, var_1, var_2, var_3) {
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = undefined;
+  if(isDefined(var_1)) {
+    var_6 = anglestoup(var_1);
+    var_7 = vectordot(var_6, (0, 0, 1));
+    var_8 = acos(var_7);
+    var_4 = var_8 >= 45;
+    var_5 = var_8 >= 145;
   }
 
-  var_09 = undefined;
+  var_9 = undefined;
   var_0A = [];
   if(level.teambased) {
-    var_09 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
+    var_9 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
   } else {
-    var_09 = level.characters;
+    var_9 = level.characters;
   }
 
   var_0B = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
-  foreach(var_0D in var_09) {
+  foreach(var_0D in var_9) {
     if(!isDefined(var_0D) || var_0D == self || !scripts\mp\utility::isreallyalive(var_0D)) {
       continue;
     }
 
-    var_0E = distancesquared(param_00, var_0D.origin);
+    var_0E = distancesquared(var_0, var_0D.origin);
     if(var_0E > 13225 || var_0E < 7225) {
       continue;
     }
 
-    var_0F = physics_raycast(param_00, var_0D.origin, var_0B, undefined, 0, "physicsquery_closest");
+    var_0F = physics_raycast(var_0, var_0D.origin, var_0B, undefined, 0, "physicsquery_closest");
     if(!isDefined(var_0F) || var_0F.size > 0) {
       continue;
     }
@@ -110,18 +110,18 @@ setinteractwithethereal(param_00, param_01, param_02, param_03) {
   var_13 = scripts\mp\powerloot::func_7FC1("power_splashGrenade", 1.5);
   var_14 = (0, 0, 0);
   var_15 = (0, 0, 0);
-  if(var_04 || var_05) {
-    var_14 = var_06 * 115;
-    var_15 = var_06 * 3;
+  if(var_4 || var_5) {
+    var_14 = var_6 * 115;
+    var_15 = var_6 * 3;
   }
 
   var_16 = randomint(46);
   var_17 = 0;
-  for(var_18 = 0; var_18 < param_02.size; var_18++) {
+  for(var_18 = 0; var_18 < var_2.size; var_18++) {
     var_19 = undefined;
     var_1A = randomint(2);
     if(var_1A && var_11 < var_0A.size) {
-      var_1B = var_0A[var_11].origin - param_00;
+      var_1B = var_0A[var_11].origin - var_0;
       var_1B = (var_1B[0], var_1B[1], 0);
       var_11++;
     } else if(var_17 < 6) {
@@ -139,13 +139,13 @@ setinteractwithethereal(param_00, param_01, param_02, param_03) {
       var_1B = (cos(var_1E), sin(var_1E), 0) * var_1F + var_14;
     }
 
-    if(!var_05) {
+    if(!var_5) {
       var_1B = var_1B + (0, 0, 200 + randomint(200));
     }
 
     var_1B = scripts\mp\powerloot::func_7FC7("power_splashGrenade", var_1B);
-    var_20 = param_00 + var_15;
-    var_21 = param_02[var_18];
+    var_20 = var_0 + var_15;
+    var_21 = var_2[var_18];
     var_21 show();
     var_21 unlink(1);
     var_21 = scripts\mp\utility::_launchgrenade("globproj_mp", var_20, var_1B, undefined, undefined, var_21);
@@ -161,42 +161,42 @@ setinteractwithethereal(param_00, param_01, param_02, param_03) {
   }
 }
 
-func_B79A(param_00, param_01) {
-  param_00 endon("death");
-  param_00 waittill("missile_stuck", var_02);
-  var_03 = 3 + randomfloat(0.15);
-  param_00 thread istrialversion(param_01 + var_03);
-  param_00 setscriptablepartstate("trail", "neutral");
-  param_00 setscriptablepartstate("explosion", "active");
-  var_04 = scripts\mp\powerloot::func_7FC4("power_splashGrenade", 60);
-  var_05 = spawn("trigger_rotatable_radius", param_00.origin, 0, var_04, 60);
-  var_05.angles = param_00.angles;
-  var_05.triggerportableradarping = self;
-  var_05 enablelinkto();
-  var_05 linkto(param_00);
-  var_05 hide();
-  var_05.var_B799 = param_00;
-  var_05 thread func_13B91();
-  var_06 = vectordot(anglestoup(var_05.angles), (0, 0, 1));
-  if(var_06 <= 0) {
-    param_00.poolscriptablepart = "poolWall";
-    param_00 setscriptablepartstate("poolWall", "active");
+func_B79A(var_0, var_1) {
+  var_0 endon("death");
+  var_0 waittill("missile_stuck", var_2);
+  var_3 = 3 + randomfloat(0.15);
+  var_0 thread istrialversion(var_1 + var_3);
+  var_0 setscriptablepartstate("trail", "neutral");
+  var_0 setscriptablepartstate("explosion", "active");
+  var_4 = scripts\mp\powerloot::func_7FC4("power_splashGrenade", 60);
+  var_5 = spawn("trigger_rotatable_radius", var_0.origin, 0, var_4, 60);
+  var_5.angles = var_0.angles;
+  var_5.triggerportableradarping = self;
+  var_5 enablelinkto();
+  var_5 linkto(var_0);
+  var_5 hide();
+  var_5.var_B799 = var_0;
+  var_5 thread func_13B91();
+  var_6 = vectordot(anglestoup(var_5.angles), (0, 0, 1));
+  if(var_6 <= 0) {
+    var_0.poolscriptablepart = "poolWall";
+    var_0 setscriptablepartstate("poolWall", "active");
   } else {
-    param_00.poolscriptablepart = "poolGround";
-    param_00 setscriptablepartstate("poolGround", "active");
+    var_0.poolscriptablepart = "poolGround";
+    var_0 setscriptablepartstate("poolGround", "active");
   }
 
-  wait(param_01);
-  param_00 notify("extinguish");
-  param_00 setscriptablepartstate(param_00.poolscriptablepart, "activeEnd", 0);
+  wait(var_1);
+  var_0 notify("extinguish");
+  var_0 setscriptablepartstate(var_0.poolscriptablepart, "activeEnd", 0);
 }
 
-istrialversion(param_00) {
+istrialversion(var_0) {
   self endon("death");
   self notify("grenadeCleanup");
   self endon("grenadeCleanup");
-  if(isDefined(param_00)) {
-    self.triggerportableradarping scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_00, "disconnect");
+  if(isDefined(var_0)) {
+    self.triggerportableradarping scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_0, "disconnect");
   } else {
     self.triggerportableradarping waittill("disconnect");
   }
@@ -206,19 +206,19 @@ istrialversion(param_00) {
   }
 }
 
-func_B24D(param_00, param_01, param_02) {
+func_B24D(var_0, var_1, var_2) {
   self endon("death");
-  var_03 = self getentitynumber();
-  self notify("mainScriptableCleanup" + var_03);
-  self endon("mainScriptableCleanup" + var_03);
-  if(isDefined(param_01)) {
-    wait(param_01);
+  var_3 = self getentitynumber();
+  self notify("mainScriptableCleanup" + var_3);
+  self endon("mainScriptableCleanup" + var_3);
+  if(isDefined(var_1)) {
+    wait(var_1);
   } else {
-    param_00 waittill("death");
+    var_0 waittill("death");
   }
 
-  if(isDefined(param_02)) {
-    wait(param_02);
+  if(isDefined(var_2)) {
+    wait(var_2);
   }
 
   if(isDefined(self)) {
@@ -229,8 +229,8 @@ func_B24D(param_00, param_01, param_02) {
 func_13B91() {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
-  var_00 = self.triggerportableradarping;
-  var_01 = var_00.team;
+  var_0 = self.triggerportableradarping;
+  var_1 = var_0.team;
   if(!isDefined(self.var_127C0)) {
     self.var_127C0 = [];
   }
@@ -238,23 +238,23 @@ func_13B91() {
   thread func_13B93();
   thread func_127B9();
   for(;;) {
-    self waittill("trigger", var_02);
-    if(!isplayer(var_02) && !scripts\mp\utility::func_9F22(var_02)) {
+    self waittill("trigger", var_2);
+    if(!isplayer(var_2) && !scripts\mp\utility::func_9F22(var_2)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isreallyalive(var_02)) {
+    if(!scripts\mp\utility::isreallyalive(var_2)) {
       continue;
     }
 
-    var_03 = scripts\engine\utility::ter_op(isDefined(var_02.triggerportableradarping), var_02.triggerportableradarping, var_02);
-    if(!level.friendlyfire && var_03 != var_00 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_03, var_00))) {
+    var_3 = scripts\engine\utility::ter_op(isDefined(var_2.triggerportableradarping), var_2.triggerportableradarping, var_2);
+    if(!level.friendlyfire && var_3 != var_0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_3, var_0))) {
       continue;
     }
 
-    thread scripts\mp\missions::func_D3A8(var_02, var_00);
-    self.var_127C0[var_02 getentitynumber()] = var_02;
-    var_02 func_17B0(self.var_B799);
+    thread scripts\mp\missions::func_D3A8(var_2, var_0);
+    self.var_127C0[var_2 getentitynumber()] = var_2;
+    var_2 func_17B0(self.var_B799);
   }
 }
 
@@ -262,15 +262,15 @@ func_13B93() {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
   for(;;) {
-    foreach(var_02, var_01 in self.var_127C0) {
-      if(!isDefined(var_01)) {
-        self.var_127C0[var_02] = undefined;
+    foreach(var_2, var_1 in self.var_127C0) {
+      if(!isDefined(var_1)) {
+        self.var_127C0[var_2] = undefined;
         continue;
       }
 
-      if(!scripts\mp\utility::isreallyalive(var_01) || !var_01 istouching(self)) {
-        self.var_127C0[var_02] = undefined;
-        var_01 thread func_E0DC(self.var_B799);
+      if(!scripts\mp\utility::isreallyalive(var_1) || !var_1 istouching(self)) {
+        self.var_127C0[var_2] = undefined;
+        var_1 thread func_E0DC(self.var_B799);
       }
     }
 
@@ -282,20 +282,20 @@ func_127B9() {
   self endon("death");
   self.var_B799 endon("death");
   self.var_B799 waittill("extinguish");
-  foreach(var_01 in self.var_127C0) {
-    if(isDefined(var_01)) {
-      var_01 thread func_E0DC(self.var_B799);
+  foreach(var_1 in self.var_127C0) {
+    if(isDefined(var_1)) {
+      var_1 thread func_E0DC(self.var_B799);
     }
   }
 
   self delete();
 }
 
-func_D51E(param_00, param_01) {
-  var_02 = spawnfx(scripts\engine\utility::getfx("base_plasma_smoke"), param_00);
-  triggerfx(var_02);
-  wait(param_01);
-  var_02 delete();
+func_D51E(var_0, var_1) {
+  var_2 = spawnfx(scripts\engine\utility::getfx("base_plasma_smoke"), var_0);
+  triggerfx(var_2);
+  wait(var_1);
+  var_2 delete();
 }
 
 func_10D77() {
@@ -319,25 +319,25 @@ func_139C0() {
   self endon("disconnect");
   self endon("endBurning");
   thread func_40E8();
-  var_00 = self.var_3291;
-  var_01 = 0;
+  var_0 = self.var_3291;
+  var_1 = 0;
   for(;;) {
     if(func_9D76()) {
-      var_00.var_32A1 = var_00.var_32A1 + 0.05;
-      var_00.var_32A0 = 0;
-      if(var_01 <= 0 && var_00.var_32A4.size > 0) {
-        var_02 = var_00.var_32A4[0];
-        var_03 = var_02.triggerportableradarping;
-        var_04 = var_02.weapon_name;
-        var_05 = func_7E11();
-        self dodamage(var_05, var_02.origin, var_03, var_02, "MOD_EXPLOSIVE", var_04);
-        var_01 = 0.25;
+      var_0.var_32A1 = var_0.var_32A1 + 0.05;
+      var_0.var_32A0 = 0;
+      if(var_1 <= 0 && var_0.var_32A4.size > 0) {
+        var_2 = var_0.var_32A4[0];
+        var_3 = var_2.triggerportableradarping;
+        var_4 = var_2.weapon_name;
+        var_5 = func_7E11();
+        self dodamage(var_5, var_2.origin, var_3, var_2, "MOD_EXPLOSIVE", var_4);
+        var_1 = 0.25;
       } else {
-        var_01 = var_01 - 0.05;
+        var_1 = var_1 - 0.05;
       }
     } else {
-      var_00.var_32A0 = var_00.var_32A0 + 0.05;
-      if(var_00.var_32A0 > 0.25) {
+      var_0.var_32A0 = var_0.var_32A0 + 0.05;
+      if(var_0.var_32A0 > 0.25) {
         thread func_6312();
       }
     }
@@ -353,45 +353,45 @@ func_40E8() {
   thread func_6312();
 }
 
-func_17B0(param_00) {
-  var_01 = self.var_3291;
-  if(!isDefined(var_01)) {
-    var_01 = spawnStruct();
-    var_01.var_32A4 = [];
-    var_01.var_32A1 = 0;
-    var_01.var_32A0 = 0;
-    self.var_3291 = var_01;
+func_17B0(var_0) {
+  var_1 = self.var_3291;
+  if(!isDefined(var_1)) {
+    var_1 = spawnStruct();
+    var_1.var_32A4 = [];
+    var_1.var_32A1 = 0;
+    var_1.var_32A0 = 0;
+    self.var_3291 = var_1;
   }
 
-  var_02 = var_01.var_32A4.size;
-  if(!func_8BD9(param_00)) {
-    var_01.var_32A4[var_02] = param_00;
+  var_2 = var_1.var_32A4.size;
+  if(!func_8BD9(var_0)) {
+    var_1.var_32A4[var_2] = var_0;
   }
 
-  if(var_02 == 0) {
+  if(var_2 == 0) {
     func_10D77();
   }
 }
 
-func_E0DC(param_00) {
+func_E0DC(var_0) {
   if(isDefined(self.var_3291)) {
-    var_01 = self.var_3291;
-    var_02 = [];
-    for(var_03 = 0; var_03 > var_01.var_32A4.size; var_03++) {
-      var_04 = var_01.var_32A4[var_03];
-      if(!isDefined(var_04)) {
+    var_1 = self.var_3291;
+    var_2 = [];
+    for(var_3 = 0; var_3 > var_1.var_32A4.size; var_3++) {
+      var_4 = var_1.var_32A4[var_3];
+      if(!isDefined(var_4)) {
         continue;
       }
 
-      if(var_04 == param_00) {
+      if(var_4 == var_0) {
         continue;
       }
 
-      var_02[var_02.size] = var_04;
+      var_2[var_2.size] = var_4;
     }
 
-    if(var_02.size > 0) {
-      var_01.var_32A4 = var_02;
+    if(var_2.size > 0) {
+      var_1.var_32A4 = var_2;
       return;
     }
 
@@ -399,11 +399,11 @@ func_E0DC(param_00) {
   }
 }
 
-func_8BD9(param_00) {
+func_8BD9(var_0) {
   if(isDefined(self.var_3291)) {
-    var_01 = self.var_3291;
-    foreach(var_03 in var_01.var_32A4) {
-      if(var_03 == param_00) {
+    var_1 = self.var_3291;
+    foreach(var_3 in var_1.var_32A4) {
+      if(var_3 == var_0) {
         return 1;
       }
     }
@@ -417,15 +417,15 @@ func_9D76() {
 }
 
 func_7E11() {
-  var_00 = self.var_3291.var_32A1;
-  var_01 = undefined;
-  if(var_00 > 1) {
-    var_01 = 25;
-  } else if(var_00 > 0.5) {
-    var_01 = 25;
+  var_0 = self.var_3291.var_32A1;
+  var_1 = undefined;
+  if(var_0 > 1) {
+    var_1 = 25;
+  } else if(var_0 > 0.5) {
+    var_1 = 25;
   } else {
-    var_01 = 25;
+    var_1 = 25;
   }
 
-  return var_01;
+  return var_1;
 }

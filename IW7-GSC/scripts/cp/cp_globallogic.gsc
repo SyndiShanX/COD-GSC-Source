@@ -39,11 +39,11 @@ init() {
   setmapcenter(level.mapcenter);
 }
 
-findboxcenter(param_00, param_01) {
-  var_02 = (0, 0, 0);
-  var_02 = param_01 - param_00;
-  var_02 = (var_02[0] / 2, var_02[1] / 2, var_02[2] / 2) + param_00;
-  return var_02;
+findboxcenter(var_0, var_1) {
+  var_2 = (0, 0, 0);
+  var_2 = var_1 - var_0;
+  var_2 = (var_2[0] / 2, var_2[1] / 2, var_2[2] / 2) + var_0;
+  return var_2;
 }
 
 func_F6BD() {
@@ -117,21 +117,21 @@ func_AE18() {
   level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
-func_5044(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {}
+func_5044(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {}
 
-func_5046(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {}
+func_5046(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 
 func_FAAB() {
-  var_00 = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_damage"];
-  foreach(var_02 in var_00) {
-    var_03 = getEntArray(var_02, "classname");
-    for(var_04 = 0; var_04 < var_03.size; var_04++) {
-      if(isDefined(var_03[var_04].script_prefab_exploder)) {
-        var_03[var_04].script_exploder = var_03[var_04].script_prefab_exploder;
+  var_0 = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_damage"];
+  foreach(var_2 in var_0) {
+    var_3 = getEntArray(var_2, "classname");
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
+      if(isDefined(var_3[var_4].script_prefab_exploder)) {
+        var_3[var_4].script_exploder = var_3[var_4].script_prefab_exploder;
       }
 
-      if(isDefined(var_03[var_04].script_exploder)) {
-        level thread exploder_load(var_03[var_04]);
+      if(isDefined(var_3[var_4].script_exploder)) {
+        level thread exploder_load(var_3[var_4]);
       }
     }
   }
@@ -206,13 +206,13 @@ defaultgetspawnpoint() {
   return getassignedspawnpoint(scripts\engine\utility::getstructarray("default_player_start", "targetname"));
 }
 
-getassignedspawnpoint(param_00) {
-  var_01 = self getentitynumber();
-  if(var_01 == 4) {
-    var_01 = 1;
+getassignedspawnpoint(var_0) {
+  var_1 = self getentitynumber();
+  if(var_1 == 4) {
+    var_1 = 1;
   }
 
-  return param_00[var_01];
+  return var_0[var_1];
 }
 
 func_5038() {
@@ -329,7 +329,7 @@ func_5043() {
   self.getgrenadefusetime = "hud_status_connecting";
   self waittill("begin");
   self.getgrenadefusetime = "";
-  var_00 = gettime();
+  var_0 = gettime();
   level notify("connected", self);
   game["clientid"]++;
   func_98BC();
@@ -423,17 +423,17 @@ initclientdvarssplitscreenspecific() {
 
 setupsavedactionslots() {
   self.saved_actionslotdata = [];
-  for(var_00 = 1; var_00 <= 4; var_00++) {
-    self.saved_actionslotdata[var_00] = spawnStruct();
-    self.saved_actionslotdata[var_00].type = "";
-    self.saved_actionslotdata[var_00].randomintrange = undefined;
+  for(var_0 = 1; var_0 <= 4; var_0++) {
+    self.saved_actionslotdata[var_0] = spawnStruct();
+    self.saved_actionslotdata[var_0].type = "";
+    self.saved_actionslotdata[var_0].randomintrange = undefined;
   }
 
   if(!level.console) {
-    for(var_00 = 5; var_00 <= 8; var_00++) {
-      self.saved_actionslotdata[var_00] = spawnStruct();
-      self.saved_actionslotdata[var_00].type = "";
-      self.saved_actionslotdata[var_00].randomintrange = undefined;
+    for(var_0 = 5; var_0 <= 8; var_0++) {
+      self.saved_actionslotdata[var_0] = spawnStruct();
+      self.saved_actionslotdata[var_0].type = "";
+      self.saved_actionslotdata[var_0].randomintrange = undefined;
     }
   }
 }
@@ -455,21 +455,21 @@ func_72C1() {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "arcade_off") {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "arcade_off") {
       self notify("adjustedStance");
     }
 
-    if(var_00 == "end_game") {
+    if(var_0 == "end_game") {
       level thread[[level.var_72BF]]();
       self notify("disconnect");
     }
   }
 }
 
-spawnintermission(param_00) {
+spawnintermission(var_0) {
   func_F726();
-  var_01 = self.forcespawnangles;
+  var_1 = self.forcespawnangles;
   spawnplayer();
   self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
@@ -481,25 +481,25 @@ spawnintermission(param_00) {
 }
 
 func_F726() {
-  var_00 = func_7ED8();
-  func_F717(var_00.origin, var_00.angles);
+  var_0 = func_7ED8();
+  func_F717(var_0.origin, var_0.angles);
 }
 
-func_F717(param_00, param_01) {
-  self.forcespawnorigin = param_00;
-  self.forcespawnangles = param_01;
+func_F717(var_0, var_1) {
+  self.forcespawnorigin = var_0;
+  self.forcespawnangles = var_1;
 }
 
 func_7ED8() {
-  var_00 = getEntArray("mp_global_intermission", "classname");
-  return var_00[0];
+  var_0 = getEntArray("mp_global_intermission", "classname");
+  return var_0[0];
 }
 
-spawnplayer(param_00) {
-  thread func_108F4(param_00);
+spawnplayer(var_0) {
+  thread func_108F4(var_0);
 }
 
-func_108F4(param_00) {
+func_108F4(var_0) {
   self endon("disconnect");
   self endon("joined_spectators");
   level endon("game_ended");
@@ -508,7 +508,7 @@ func_108F4(param_00) {
   }
 
   func_136E9();
-  func_108F3(param_00);
+  func_108F3(var_0);
 }
 
 func_136E9() {
@@ -520,7 +520,7 @@ func_136E9() {
   self.waitingtospawn = 0;
 }
 
-func_108F3(param_00) {
+func_108F3(var_0) {
   self notify("spawned");
   self notify("started_spawnPlayer");
   if(level.gameended) {
@@ -533,13 +533,13 @@ func_108F3(param_00) {
   func_E261();
   func_E263();
   resetplayerdamagemodifiers();
-  param_00 = scripts\engine\utility::ter_op(isDefined(param_00), param_00, 0);
-  if(!param_00) {
+  var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 0);
+  if(!var_0) {
     func_C07F();
   }
 
   if(isai(self)) {
-    func_10828(param_00);
+    func_10828(var_0);
   }
 
   [[level.onspawnplayer]]();
@@ -547,7 +547,7 @@ func_108F3(param_00) {
     scripts\cp\utility::freezecontrolswrapper(1);
   }
 
-  self[[level.custom_giveloadout]](param_00);
+  self[[level.custom_giveloadout]](var_0);
   if(getdvarint("camera_thirdPerson")) {
     scripts\cp\utility::setthirdpersondof(1);
   }
@@ -577,25 +577,25 @@ func_E261() {
 
 resetplayerdamagemodifiers() {
   if(isDefined(self.additivedamagemodifiers)) {
-    var_00 = getarraykeys(self.additivedamagemodifiers);
-    foreach(var_02 in var_00) {
-      scripts\cp\utility::removedamagemodifier(var_02, 1);
+    var_0 = getarraykeys(self.additivedamagemodifiers);
+    foreach(var_2 in var_0) {
+      scripts\cp\utility::removedamagemodifier(var_2, 1);
     }
   }
 
   if(isDefined(self.multiplicativedamagemodifiers)) {
-    var_00 = getarraykeys(self.multiplicativedamagemodifiers);
-    foreach(var_02 in var_00) {
-      scripts\cp\utility::removedamagemodifier(var_02, 0);
+    var_0 = getarraykeys(self.multiplicativedamagemodifiers);
+    foreach(var_2 in var_0) {
+      scripts\cp\utility::removedamagemodifier(var_2, 0);
     }
   }
 }
 
 func_E263() {
-  var_00 = getnearestnode();
-  self.team = var_00;
-  self.sessionteam = var_00;
-  self.pers["team"] = var_00;
+  var_0 = getnearestnode();
+  self.team = var_0;
+  self.sessionteam = var_0;
+  self.pers["team"] = var_0;
   self.fauxdeath = undefined;
   self.movespeedscaler = 1;
   self.disabledweapon = 0;
@@ -627,51 +627,51 @@ func_E25B() {
   self.objectivescaler = 1;
 }
 
-func_10828(param_00) {
+func_10828(var_0) {
   scripts\cp\utility::freezecontrolswrapper(1);
-  if(!param_00) {
+  if(!var_0) {
     if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["player_spawned"])) {
       self[[level.bot_funcs["player_spawned"]]]();
     }
   }
 }
 
-getspawnorigin(param_00, param_01) {
-  var_02 = undefined;
-  if(isDefined(param_00.forcespawnorigin)) {
-    var_02 = param_00.forcespawnorigin;
-    var_02 = getclosestpointonnavmesh(var_02);
-    if(isDefined(param_01)) {
-      var_02 = param_00.forcespawnorigin;
+getspawnorigin(var_0, var_1) {
+  var_2 = undefined;
+  if(isDefined(var_0.forcespawnorigin)) {
+    var_2 = var_0.forcespawnorigin;
+    var_2 = getclosestpointonnavmesh(var_2);
+    if(isDefined(var_1)) {
+      var_2 = var_0.forcespawnorigin;
     }
 
-    param_00.forcespawnorigin = undefined;
+    var_0.forcespawnorigin = undefined;
   } else {
-    var_03 = param_00[[level.getspawnpoint]]();
-    var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::istrue(level.disable_start_spawn_on_navmesh), scripts\engine\utility::drop_to_ground(var_03.origin, 0, -100), getclosestpointonnavmesh(var_03.origin));
-    if(isDefined(param_01)) {
-      var_02 = var_03;
+    var_3 = var_0[[level.getspawnpoint]]();
+    var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::istrue(level.disable_start_spawn_on_navmesh), scripts\engine\utility::drop_to_ground(var_3.origin, 0, -100), getclosestpointonnavmesh(var_3.origin));
+    if(isDefined(var_1)) {
+      var_2 = var_3;
     }
 
     if(level.script == "cp_disco") {
-      var_02 = var_03.origin;
+      var_2 = var_3.origin;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-_meth_8132(param_00) {
-  var_01 = undefined;
-  if(isDefined(param_00.forcespawnangles)) {
-    var_01 = param_00.forcespawnangles;
-    param_00.forcespawnangles = undefined;
+_meth_8132(var_0) {
+  var_1 = undefined;
+  if(isDefined(var_0.forcespawnangles)) {
+    var_1 = var_0.forcespawnangles;
+    var_0.forcespawnangles = undefined;
   } else {
-    var_02 = param_00[[level.getspawnpoint]]();
-    var_01 = scripts\engine\utility::ter_op(isDefined(var_02.angles), var_02.angles, (0, 0, 0));
+    var_2 = var_0[[level.getspawnpoint]]();
+    var_1 = scripts\engine\utility::ter_op(isDefined(var_2.angles), var_2.angles, (0, 0, 0));
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_1001B() {
@@ -683,9 +683,9 @@ func_1001B() {
 }
 
 enterspectator() {
-  var_00 = func_7ED8();
-  self setspectatedefaults(var_00.origin, var_00.angles);
-  func_F717(var_00.origin, var_00.angles);
+  var_0 = func_7ED8();
+  self setspectatedefaults(var_0.origin, var_0.angles);
+  func_F717(var_0.origin, var_0.angles);
   func_F858();
   scripts\cp\utility::updatesessionstate("spectator");
 }
@@ -699,26 +699,26 @@ func_F858() {
   func_504C(self);
 }
 
-func_504C(param_00) {
-  param_00 allowspectateteam("allies", 1);
-  param_00 allowspectateteam("axis", 1);
-  param_00 allowspectateteam("freelook", 0);
-  param_00 allowspectateteam("none", 1);
+func_504C(var_0) {
+  var_0 allowspectateteam("allies", 1);
+  var_0 allowspectateteam("axis", 1);
+  var_0 allowspectateteam("freelook", 0);
+  var_0 allowspectateteam("none", 1);
 }
 
-func_5045(param_00) {
+func_5045(var_0) {
   if(!isDefined(self.connected)) {
     return;
   }
 
-  scripts\cp\cp_analytics::on_player_disconnect(param_00);
+  scripts\cp\cp_analytics::on_player_disconnect(var_0);
   func_E15A(self);
   if(func_563B()) {
     level thread[[level.var_72BF]]();
   }
 
   if(isDefined(level.onplayerdisconnected)) {
-    level thread[[level.onplayerdisconnected]](self, param_00);
+    level thread[[level.onplayerdisconnected]](self, var_0);
   }
 }
 
@@ -727,26 +727,26 @@ func_563B() {
     return level.players.size <= 1;
   }
 
-  var_00 = 0;
-  foreach(var_02 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
-      var_00 = scripts\cp\cp_laststand::gameshouldend(var_02);
+  var_0 = 0;
+  foreach(var_2 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_2)) {
+      var_0 = scripts\cp\cp_laststand::gameshouldend(var_2);
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_1810(param_00) {
-  level.players[level.players.size] = param_00;
-  level.participants[level.participants.size] = param_00;
-  level.characters[level.characters.size] = param_00;
+func_1810(var_0) {
+  level.players[level.players.size] = var_0;
+  level.participants[level.participants.size] = var_0;
+  level.characters[level.characters.size] = var_0;
 }
 
-func_E15A(param_00) {
-  level.players = scripts\engine\utility::array_remove(level.players, param_00);
-  level.participants = scripts\engine\utility::array_remove(level.participants, param_00);
-  level.characters = scripts\engine\utility::array_remove(level.characters, param_00);
+func_E15A(var_0) {
+  level.players = scripts\engine\utility::array_remove(level.players, var_0);
+  level.participants = scripts\engine\utility::array_remove(level.participants, var_0);
+  level.characters = scripts\engine\utility::array_remove(level.characters, var_0);
 }
 
 func_5049() {
@@ -755,22 +755,22 @@ func_5049() {
   }
 
   if(func_9E39(self)) {
-    var_00 = 0;
-    foreach(var_02 in level.players) {
-      if(func_9E39(var_02)) {
-        var_00++;
+    var_0 = 0;
+    foreach(var_2 in level.players) {
+      if(func_9E39(var_2)) {
+        var_0++;
       }
     }
 
     level.hostmigrationreturnedplayercount++;
-    if(level.hostmigrationreturnedplayercount >= var_00 * 2 / 3) {
+    if(level.hostmigrationreturnedplayercount >= var_0 * 2 / 3) {
       level notify("hostmigration_enoughplayers");
     }
   }
 }
 
-func_9E39(param_00) {
-  return !isDefined(param_00.pers["isBot"]) || param_00.pers["isBot"] == 0;
+func_9E39(var_0) {
+  return !isDefined(var_0.pers["isBot"]) || var_0.pers["isBot"] == 0;
 }
 
 func_503E() {
@@ -783,20 +783,20 @@ func_503E() {
   }
 
   level.hostmigrationreturnedplayercount = 0;
-  foreach(var_01 in level.characters) {
-    var_01.hostmigrationcontrolsfrozen = 0;
+  foreach(var_1 in level.characters) {
+    var_1.hostmigrationcontrolsfrozen = 0;
   }
 
   level.hostmigrationtimer = 1;
   setdvar("ui_inhostmigration", 1);
   level notify("host_migration_begin");
-  foreach(var_01 in level.characters) {
-    if(isDefined(var_01)) {
-      var_01 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
+  foreach(var_1 in level.characters) {
+    if(isDefined(var_1)) {
+      var_1 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
     }
 
-    if(isplayer(var_01)) {
-      var_01 setclientomnvar("ui_session_state", var_01.sessionstate);
+    if(isplayer(var_1)) {
+      var_1 setclientomnvar("ui_session_state", var_1.sessionstate);
     }
   }
 
@@ -813,42 +813,42 @@ func_503E() {
 }
 
 func_97F7() {
-  var_00 = getEntArray("destructable", "targetname");
+  var_0 = getEntArray("destructable", "targetname");
   if(getdvar("scr_destructables") == "0") {
-    for(var_01 = 0; var_01 < var_00.size; var_01++) {
-      var_00[var_01] delete();
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      var_0[var_1] delete();
     }
 
     return;
   }
 
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_00[var_01] thread destructable_think();
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_0[var_1] thread destructable_think();
   }
 }
 
 destructable_think() {
-  var_00 = 40;
-  var_01 = 0;
+  var_0 = 40;
+  var_1 = 0;
   if(isDefined(self.script_accumulate)) {
-    var_00 = self.script_accumulate;
+    var_0 = self.script_accumulate;
   }
 
   if(isDefined(self.script_threshold)) {
-    var_01 = self.script_threshold;
+    var_1 = self.script_threshold;
   }
 
   if(isDefined(self.script_fxid)) {
     self.fx = loadfx(self.script_fxid);
   }
 
-  var_02 = 0;
+  var_2 = 0;
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_03, var_04);
-    if(var_03 >= var_01) {
-      var_02 = var_02 + var_03;
-      if(var_02 >= var_00) {
+    self waittill("damage", var_3, var_4);
+    if(var_3 >= var_1) {
+      var_2 = var_2 + var_3;
+      if(var_2 >= var_0) {
         thread destructable_destruct();
         return;
       }
@@ -857,76 +857,76 @@ destructable_think() {
 }
 
 destructable_destruct() {
-  var_00 = self;
-  if(isDefined(var_00.fx)) {
-    playFX(var_00.fx, var_00.origin + (0, 0, 6));
+  var_0 = self;
+  if(isDefined(var_0.fx)) {
+    playFX(var_0.fx, var_0.origin + (0, 0, 6));
   }
 
-  var_00 delete();
+  var_0 delete();
 }
 
 setupexploders() {
-  var_00 = getEntArray("script_brushmodel", "classname");
-  var_01 = getEntArray("script_model", "classname");
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    var_00[var_00.size] = var_01[var_02];
+  var_0 = getEntArray("script_brushmodel", "classname");
+  var_1 = getEntArray("script_model", "classname");
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_0[var_0.size] = var_1[var_2];
   }
 
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    if(isDefined(var_00[var_02].script_prefab_exploder)) {
-      var_00[var_02].script_exploder = var_00[var_02].script_prefab_exploder;
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isDefined(var_0[var_2].script_prefab_exploder)) {
+      var_0[var_2].script_exploder = var_0[var_2].script_prefab_exploder;
     }
 
-    if(isDefined(var_00[var_02].script_exploder)) {
-      if(var_00[var_02].model == "fx" && !isDefined(var_00[var_02].var_336) || var_00[var_02].var_336 != "exploderchunk") {
-        var_00[var_02] hide();
+    if(isDefined(var_0[var_2].script_exploder)) {
+      if(var_0[var_2].model == "fx" && !isDefined(var_0[var_2].var_336) || var_0[var_2].var_336 != "exploderchunk") {
+        var_0[var_2] hide();
         continue;
       }
 
-      if(isDefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploder") {
-        var_00[var_02] hide();
-        var_00[var_02] notsolid();
+      if(isDefined(var_0[var_2].var_336) && var_0[var_2].var_336 == "exploder") {
+        var_0[var_2] hide();
+        var_0[var_2] notsolid();
         continue;
       }
 
-      if(isDefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploderchunk") {
-        var_00[var_02] hide();
-        var_00[var_02] notsolid();
+      if(isDefined(var_0[var_2].var_336) && var_0[var_2].var_336 == "exploderchunk") {
+        var_0[var_2] hide();
+        var_0[var_2] notsolid();
       }
     }
   }
 
-  var_03 = [];
-  var_04 = getEntArray("script_brushmodel", "classname");
-  for(var_02 = 0; var_02 < var_04.size; var_02++) {
-    if(isDefined(var_04[var_02].script_prefab_exploder)) {
-      var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
+  var_3 = [];
+  var_4 = getEntArray("script_brushmodel", "classname");
+  for(var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+      var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
     }
 
-    if(isDefined(var_04[var_02].script_exploder)) {
-      var_03[var_03.size] = var_04[var_02];
-    }
-  }
-
-  var_04 = getEntArray("script_model", "classname");
-  for(var_02 = 0; var_02 < var_04.size; var_02++) {
-    if(isDefined(var_04[var_02].script_prefab_exploder)) {
-      var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
-    }
-
-    if(isDefined(var_04[var_02].script_exploder)) {
-      var_03[var_03.size] = var_04[var_02];
+    if(isDefined(var_4[var_2].script_exploder)) {
+      var_3[var_3.size] = var_4[var_2];
     }
   }
 
-  var_04 = getEntArray("item_health", "classname");
-  for(var_02 = 0; var_02 < var_04.size; var_02++) {
-    if(isDefined(var_04[var_02].script_prefab_exploder)) {
-      var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
+  var_4 = getEntArray("script_model", "classname");
+  for(var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+      var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
     }
 
-    if(isDefined(var_04[var_02].script_exploder)) {
-      var_03[var_03.size] = var_04[var_02];
+    if(isDefined(var_4[var_2].script_exploder)) {
+      var_3[var_3.size] = var_4[var_2];
+    }
+  }
+
+  var_4 = getEntArray("item_health", "classname");
+  for(var_2 = 0; var_2 < var_4.size; var_2++) {
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
+      var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
+    }
+
+    if(isDefined(var_4[var_2].script_exploder)) {
+      var_3[var_3.size] = var_4[var_2];
     }
   }
 
@@ -934,59 +934,59 @@ setupexploders() {
     level.createfxent = [];
   }
 
-  var_05 = [];
-  var_05["exploderchunk visible"] = 1;
-  var_05["exploderchunk"] = 1;
-  var_05["exploder"] = 1;
-  for(var_02 = 0; var_02 < var_03.size; var_02++) {
-    var_06 = var_03[var_02];
-    var_07 = scripts\engine\utility::createexploder(var_06.script_fxid);
-    var_07.v = [];
-    var_07.v["origin"] = var_06.origin;
-    var_07.v["angles"] = var_06.angles;
-    var_07.v["delay"] = var_06.script_delay;
-    var_07.v["firefx"] = var_06.script_firefx;
-    var_07.v["firefxdelay"] = var_06.script_firefxdelay;
-    var_07.v["firefxsound"] = var_06.script_firefxsound;
-    var_07.v["firefxtimeout"] = var_06.var_ED96;
-    var_07.v["earthquake"] = var_06.script_earthquake;
-    var_07.v["damage"] = var_06.script_damage;
-    var_07.v["damage_radius"] = var_06.script_radius;
-    var_07.v["soundalias"] = var_06.script_soundalias;
-    var_07.v["repeat"] = var_06.script_repeat;
-    var_07.v["delay_min"] = var_06.script_delay_min;
-    var_07.v["delay_max"] = var_06.script_delay_max;
-    var_07.v["target"] = var_06.target;
-    var_07.v["ender"] = var_06.script_ender;
-    var_07.v["type"] = "exploder";
-    if(!isDefined(var_06.script_fxid)) {
-      var_07.v["fxid"] = "No FX";
+  var_5 = [];
+  var_5["exploderchunk visible"] = 1;
+  var_5["exploderchunk"] = 1;
+  var_5["exploder"] = 1;
+  for(var_2 = 0; var_2 < var_3.size; var_2++) {
+    var_6 = var_3[var_2];
+    var_7 = scripts\engine\utility::createexploder(var_6.script_fxid);
+    var_7.v = [];
+    var_7.v["origin"] = var_6.origin;
+    var_7.v["angles"] = var_6.angles;
+    var_7.v["delay"] = var_6.script_delay;
+    var_7.v["firefx"] = var_6.script_firefx;
+    var_7.v["firefxdelay"] = var_6.script_firefxdelay;
+    var_7.v["firefxsound"] = var_6.script_firefxsound;
+    var_7.v["firefxtimeout"] = var_6.var_ED96;
+    var_7.v["earthquake"] = var_6.script_earthquake;
+    var_7.v["damage"] = var_6.script_damage;
+    var_7.v["damage_radius"] = var_6.script_radius;
+    var_7.v["soundalias"] = var_6.script_soundalias;
+    var_7.v["repeat"] = var_6.script_repeat;
+    var_7.v["delay_min"] = var_6.script_delay_min;
+    var_7.v["delay_max"] = var_6.script_delay_max;
+    var_7.v["target"] = var_6.target;
+    var_7.v["ender"] = var_6.script_ender;
+    var_7.v["type"] = "exploder";
+    if(!isDefined(var_6.script_fxid)) {
+      var_7.v["fxid"] = "No FX";
     } else {
-      var_07.v["fxid"] = var_06.script_fxid;
+      var_7.v["fxid"] = var_6.script_fxid;
     }
 
-    var_07.v["exploder"] = var_06.script_exploder;
-    if(!isDefined(var_07.v["delay"])) {
-      var_07.v["delay"] = 0;
+    var_7.v["exploder"] = var_6.script_exploder;
+    if(!isDefined(var_7.v["delay"])) {
+      var_7.v["delay"] = 0;
     }
 
-    if(isDefined(var_06.target)) {
-      var_08 = getent(var_07.v["target"], "targetname").origin;
-      var_07.v["angles"] = vectortoangles(var_08 - var_07.v["origin"]);
+    if(isDefined(var_6.target)) {
+      var_8 = getent(var_7.v["target"], "targetname").origin;
+      var_7.v["angles"] = vectortoangles(var_8 - var_7.v["origin"]);
     }
 
-    if(var_06.classname == "script_brushmodel" || isDefined(var_06.model)) {
-      var_07.model = var_06;
-      var_07.model.disconnect_paths = var_06.script_disconnectpaths;
+    if(var_6.classname == "script_brushmodel" || isDefined(var_6.model)) {
+      var_7.model = var_6;
+      var_7.model.disconnect_paths = var_6.script_disconnectpaths;
     }
 
-    if(isDefined(var_06.var_336) && isDefined(var_05[var_06.var_336])) {
-      var_07.v["exploder_type"] = var_06.var_336;
+    if(isDefined(var_6.var_336) && isDefined(var_5[var_6.var_336])) {
+      var_7.v["exploder_type"] = var_6.var_336;
     } else {
-      var_07.v["exploder_type"] = "normal";
+      var_7.v["exploder_type"] = "normal";
     }
 
-    var_07 scripts\common\createfx::post_entity_creation_function();
+    var_7 scripts\common\createfx::post_entity_creation_function();
   }
 }
 
@@ -1021,22 +1021,22 @@ func_9817() {
   level.lowertextfontsize = 1.2;
 }
 
-exploder_load(param_00) {
-  level endon("killexplodertridgers" + param_00.script_exploder);
-  param_00 waittill("trigger");
-  if(isDefined(param_00.script_chance) && randomfloat(1) > param_00.script_chance) {
-    if(isDefined(param_00.script_delay)) {
-      wait(param_00.script_delay);
+exploder_load(var_0) {
+  level endon("killexplodertridgers" + var_0.script_exploder);
+  var_0 waittill("trigger");
+  if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
+    if(isDefined(var_0.script_delay)) {
+      wait(var_0.script_delay);
     } else {
       wait(4);
     }
 
-    level thread exploder_load(param_00);
+    level thread exploder_load(var_0);
     return;
   }
 
-  scripts\engine\utility::exploder(param_00.script_exploder);
-  level notify("killexplodertridgers" + param_00.script_exploder);
+  scripts\engine\utility::exploder(var_0.script_exploder);
+  level notify("killexplodertridgers" + var_0.script_exploder);
 }
 
 player_init_health_regen() {
@@ -1051,7 +1051,7 @@ player_init_damageshield() {
   self.damageshieldexpiretime = gettime();
 }
 
-blank(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
+blank(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
 func_98BC() {
   self setplayerdata("cp", "alienSession", "team_shots", 0);

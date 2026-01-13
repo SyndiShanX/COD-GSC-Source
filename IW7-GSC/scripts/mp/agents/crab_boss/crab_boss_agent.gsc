@@ -24,7 +24,7 @@ func_FAB0() {
   level.agent_funcs["crab_boss"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_boss_crab");
 }
 
@@ -150,6 +150,6 @@ getenemy() {
   return undefined;
 }
 
-ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  param_02 = 0;
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  var_2 = 0;
 }

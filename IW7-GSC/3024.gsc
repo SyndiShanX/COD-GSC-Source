@@ -4,249 +4,249 @@
  * Script: 3024.gsc
 ************************/
 
-func_F5E9(param_00, param_01) {
-  param_00.var_C8DF = [];
-  param_00.var_B813 = func_4963(param_00, "veh_hud_missile_locked");
-  param_00.var_AF23 = func_4963(param_00, "veh_hud_missile");
-  param_00.var_916B = func_48B6(param_00, 1, "hud_viper_booster_lft_on", 128, 480, 0, "LEFT", "LEFT", 0, 0);
-  param_00.var_916E = func_48B6(param_00, 1, "hud_viper_booster_rht_on", 128, 480, 0, "RIGHT", "RIGHT", 0, 0);
-  param_00.var_916C = func_48B6(param_00, 1, "hud_viper_booster_lft_on_red", 128, 480, 0, "LEFT", "LEFT", 0, 0);
-  param_00.var_916F = func_48B6(param_00, 1, "hud_viper_booster_rht_on_red", 128, 480, 0, "RIGHT", "RIGHT", 0, 0);
-  param_00.var_9173 = func_4920(param_00);
-  param_00 thread func_915E(param_00, param_01);
+func_F5E9(var_0, var_1) {
+  var_0.var_C8DF = [];
+  var_0.var_B813 = func_4963(var_0, "veh_hud_missile_locked");
+  var_0.var_AF23 = func_4963(var_0, "veh_hud_missile");
+  var_0.var_916B = func_48B6(var_0, 1, "hud_viper_booster_lft_on", 128, 480, 0, "LEFT", "LEFT", 0, 0);
+  var_0.var_916E = func_48B6(var_0, 1, "hud_viper_booster_rht_on", 128, 480, 0, "RIGHT", "RIGHT", 0, 0);
+  var_0.var_916C = func_48B6(var_0, 1, "hud_viper_booster_lft_on_red", 128, 480, 0, "LEFT", "LEFT", 0, 0);
+  var_0.var_916F = func_48B6(var_0, 1, "hud_viper_booster_rht_on_red", 128, 480, 0, "RIGHT", "RIGHT", 0, 0);
+  var_0.var_9173 = func_4920(var_0);
+  var_0 thread func_915E(var_0, var_1);
 }
 
-func_52B0(param_00) {
-  param_00.var_B813 destroyelem();
-  param_00.var_AF23 destroyelem();
-  param_00.var_916B destroyelem();
-  param_00.var_916E destroyelem();
-  param_00.var_916C destroyelem();
-  param_00.var_916F destroyelem();
-  func_52B1(param_00);
+func_52B0(var_0) {
+  var_0.var_B813 destroyelem();
+  var_0.var_AF23 destroyelem();
+  var_0.var_916B destroyelem();
+  var_0.var_916E destroyelem();
+  var_0.var_916C destroyelem();
+  var_0.var_916F destroyelem();
+  func_52B1(var_0);
 }
 
-func_490B(param_00) {
-  var_01 = param_00 createprimaryprogressbar(0, 212, 32, 3);
-  var_01 updatebar(1);
-  return var_01;
+func_490B(var_0) {
+  var_1 = var_0 createprimaryprogressbar(0, 212, 32, 3);
+  var_1 updatebar(1);
+  return var_1;
 }
 
-func_4963(param_00, param_01) {
-  var_02 = newclienthudelem(param_00, 200, 200);
-  var_02 setshader(param_01);
-  var_02 setwaypoint(0, 1, 1, 0);
-  var_02.alpha = 0;
-  var_02.children = [];
-  var_02.elemtype = "icon";
-  return var_02;
+func_4963(var_0, var_1) {
+  var_2 = newclienthudelem(var_0, 200, 200);
+  var_2 setshader(var_1);
+  var_2 setwaypoint(0, 1, 1, 0);
+  var_2.alpha = 0;
+  var_2.children = [];
+  var_2.elemtype = "icon";
+  return var_2;
 }
 
-func_48B7(param_00, param_01, param_02) {
-  var_03 = newclienthudelem(param_00);
-  var_03.x = 0;
-  var_03.y = 0;
-  var_03 setshader(param_01, 640, 480);
-  var_03.alignx = "left";
-  var_03.aligny = "top";
-  var_03.sort = 1;
-  var_03.horzalign = "fullscreen";
-  var_03.vertalign = "fullscreen";
-  var_03.alpha = param_02;
-  var_03.foreground = 1;
-  var_03.children = [];
-  var_03.elemtype = "overlay";
-  return var_03;
+func_48B7(var_0, var_1, var_2) {
+  var_3 = newclienthudelem(var_0);
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3 setshader(var_1, 640, 480);
+  var_3.alignx = "left";
+  var_3.aligny = "top";
+  var_3.sort = 1;
+  var_3.horzalign = "fullscreen";
+  var_3.vertalign = "fullscreen";
+  var_3.alpha = var_2;
+  var_3.foreground = 1;
+  var_3.children = [];
+  var_3.elemtype = "overlay";
+  return var_3;
 }
 
-func_48B6(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  var_0A = newclienthudelem(param_00);
+func_48B6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  var_0A = newclienthudelem(var_0);
   var_0A.elemtype = "icon";
   var_0A.children = [];
-  var_0A.alpha = param_05;
+  var_0A.alpha = var_5;
   var_0A.archived = 0;
   var_0A setparent(level.uiparent);
-  var_0A setshader(param_02, param_03, param_04);
-  var_0A setpoint(param_06, param_07, param_08, param_09);
-  if(param_01) {
-    param_00.var_C8DF[param_00.var_C8DF.size] = var_0A;
+  var_0A setshader(var_2, var_3, var_4);
+  var_0A setpoint(var_6, var_7, var_8, var_9);
+  if(var_1) {
+    var_0.var_C8DF[var_0.var_C8DF.size] = var_0A;
   }
 
   return var_0A;
 }
 
-func_4920(param_00) {
-  var_01 = [];
-  var_02 = 80;
-  var_03 = 15;
-  var_01[var_01.size] = func_48B6(param_00, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", -1 * var_02, -1 * var_03);
-  var_01[var_01.size] = func_48B6(param_00, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", -1 * var_02, var_03);
-  var_01[var_01.size] = func_48B6(param_00, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", var_02, -1 * var_03);
-  var_01[var_01.size] = func_48B6(param_00, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", var_02, var_03);
-  return var_01;
+func_4920(var_0) {
+  var_1 = [];
+  var_2 = 80;
+  var_3 = 15;
+  var_1[var_1.size] = func_48B6(var_0, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", -1 * var_2, -1 * var_3);
+  var_1[var_1.size] = func_48B6(var_0, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", -1 * var_2, var_3);
+  var_1[var_1.size] = func_48B6(var_0, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", var_2, -1 * var_3);
+  var_1[var_1.size] = func_48B6(var_0, 0, "hud_viper_missile", 14, 14, 0, "CENTER", "CENTER", var_2, var_3);
+  return var_1;
 }
 
-func_52B1(param_00) {
-  foreach(var_02 in param_00.var_9173) {
-    var_02 destroyelem();
+func_52B1(var_0) {
+  foreach(var_2 in var_0.var_9173) {
+    var_2 destroyelem();
   }
 }
 
-func_A0D1(param_00, param_01) {
+func_A0D1(var_0, var_1) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("exit_jackal");
-  param_01 endon("death");
-  param_00 notifyonplayercommand("jackal boost", "+breath_sprint");
+  var_0 endon("disconnect");
+  var_0 endon("exit_jackal");
+  var_1 endon("death");
+  var_0 notifyonplayercommand("jackal boost", "+breath_sprint");
   for(;;) {
-    param_00 waittill("jackal boost");
-    param_00 thread func_1297D(param_00, param_01);
-    while(param_00 issprinting()) {
+    var_0 waittill("jackal boost");
+    var_0 thread func_1297D(var_0, var_1);
+    while(var_0 issprinting()) {
       scripts\engine\utility::waitframe();
     }
 
-    param_00 thread func_12951(param_00, param_01);
+    var_0 thread func_12951(var_0, var_1);
   }
 }
 
-func_1297D(param_00, param_01) {
-  param_00 notify("engage boost");
-  param_00 endon("disconnect");
-  param_00 endon("engage boost");
-  param_00 endon("disengage boost");
-  param_00 endon("exit_jackal");
-  param_01 endon("death");
-  func_6EB6(param_00);
+func_1297D(var_0, var_1) {
+  var_0 notify("engage boost");
+  var_0 endon("disconnect");
+  var_0 endon("engage boost");
+  var_0 endon("disengage boost");
+  var_0 endon("exit_jackal");
+  var_1 endon("death");
+  func_6EB6(var_0);
 }
 
-func_12951(param_00, param_01) {
-  param_00 notify("disengage boost");
-  param_00 endon("disconnect");
-  param_00 endon("engage boost");
-  param_00 endon("disengage boost");
-  param_00 endon("exit_jackal");
-  param_01 endon("death");
-  func_12959(param_00.var_916B);
-  func_12959(param_00.var_916E);
-  func_12959(param_00.var_916C);
-  func_12959(param_00.var_916F);
+func_12951(var_0, var_1) {
+  var_0 notify("disengage boost");
+  var_0 endon("disconnect");
+  var_0 endon("engage boost");
+  var_0 endon("disengage boost");
+  var_0 endon("exit_jackal");
+  var_1 endon("death");
+  func_12959(var_0.var_916B);
+  func_12959(var_0.var_916E);
+  func_12959(var_0.var_916C);
+  func_12959(var_0.var_916F);
 }
 
-func_6EB6(param_00) {
+func_6EB6(var_0) {
   for(;;) {
     wait(0.3);
-    func_12959(param_00.var_916B);
-    func_12959(param_00.var_916E);
-    func_12985(param_00.var_916C);
-    func_12985(param_00.var_916F);
+    func_12959(var_0.var_916B);
+    func_12959(var_0.var_916E);
+    func_12985(var_0.var_916C);
+    func_12985(var_0.var_916F);
     wait(0.3);
-    func_12985(param_00.var_916B);
-    func_12985(param_00.var_916E);
-    func_12959(param_00.var_916C);
-    func_12959(param_00.var_916F);
+    func_12985(var_0.var_916B);
+    func_12985(var_0.var_916E);
+    func_12959(var_0.var_916C);
+    func_12959(var_0.var_916F);
   }
 }
 
-func_915E(param_00, param_01) {
+func_915E(var_0, var_1) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("exit_jackal");
-  param_01 endon("death");
+  var_0 endon("disconnect");
+  var_0 endon("exit_jackal");
+  var_1 endon("death");
   for(;;) {
-    var_02 = func_7B68(param_01, 0.05);
-    func_BC4C(param_00, var_02);
+    var_2 = func_7B68(var_1, 0.05);
+    func_BC4C(var_0, var_2);
     wait(0.05);
-    func_BC4C(param_00, -1 * var_02);
-    var_02 = func_7B68(param_01, 0.05);
-    func_BC4C(param_00, -1 * var_02);
+    func_BC4C(var_0, -1 * var_2);
+    var_2 = func_7B68(var_1, 0.05);
+    func_BC4C(var_0, -1 * var_2);
     wait(0.05);
-    func_BC4C(param_00, var_02);
+    func_BC4C(var_0, var_2);
   }
 }
 
-func_7B68(param_00, param_01) {
-  var_02 = param_00.origin;
-  wait(param_01);
-  var_03 = param_00.origin;
-  var_04 = distancesquared(var_02, var_03);
-  var_05 = var_04 / param_01;
-  var_06 = var_05 / 120000;
-  return clamp(var_06, 0, 1);
+func_7B68(var_0, var_1) {
+  var_2 = var_0.origin;
+  wait(var_1);
+  var_3 = var_0.origin;
+  var_4 = distancesquared(var_2, var_3);
+  var_5 = var_4 / var_1;
+  var_6 = var_5 / 120000;
+  return clamp(var_6, 0, 1);
 }
 
-func_BC4C(param_00, param_01) {
-  foreach(var_03 in param_00.var_C8DF) {
-    var_03.x = var_03.x + param_01;
-  }
-}
-
-func_12985(param_00) {
-  if(isDefined(param_00)) {
-    param_00.alpha = 1;
+func_BC4C(var_0, var_1) {
+  foreach(var_3 in var_0.var_C8DF) {
+    var_3.x = var_3.x + var_1;
   }
 }
 
-func_12959(param_00) {
-  if(isDefined(param_00)) {
-    param_00.alpha = 0;
+func_12985(var_0) {
+  if(isDefined(var_0)) {
+    var_0.alpha = 1;
   }
 }
 
-createprimaryprogressbar(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_12959(var_0) {
+  if(isDefined(var_0)) {
+    var_0.alpha = 0;
   }
-
-  if(!isDefined(param_01)) {
-    param_01 = -25;
-  }
-
-  if(!isDefined(param_02)) {
-    param_02 = level.primaryprogressbarwidth;
-  }
-
-  if(!isDefined(param_03)) {
-    param_03 = level.primaryprogressbarheight;
-  }
-
-  var_04 = createbar((1, 1, 1), param_02, param_03);
-  var_04 setpoint("CENTER", undefined, 0 + param_00, -61 + param_01);
-  return var_04;
 }
 
-createbar(param_00, param_01, param_02, param_03) {
-  var_04 = newclienthudelem(self);
-  var_04.x = 0;
-  var_04.y = 0;
-  var_04.frac = 0;
-  var_04.color = param_00;
-  var_04.sort = -2;
-  var_04.shader = "progress_bar_fill";
-  var_04 setshader("progress_bar_fill", param_01, param_02);
-  var_04.hidden = 0;
-  if(isDefined(param_03)) {
-    var_04.flashfrac = param_03;
+createprimaryprogressbar(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var_05 = newclienthudelem(self);
-  var_05.elemtype = "bar";
-  var_05.width = param_01;
-  var_05.height = param_02;
-  var_05.xoffset = 0;
-  var_05.yoffset = 0;
-  var_05.bar = var_04;
-  var_05.children = [];
-  var_05.sort = -3;
-  var_05.color = (0, 0, 0);
-  var_05.alpha = 0.5;
-  var_05 setparent(level.uiparent);
-  var_05 setshader("progress_bar_bg", param_01 + 4, param_02 + 4);
-  var_05.hidden = 0;
-  return var_05;
+  if(!isDefined(var_1)) {
+    var_1 = -25;
+  }
+
+  if(!isDefined(var_2)) {
+    var_2 = level.primaryprogressbarwidth;
+  }
+
+  if(!isDefined(var_3)) {
+    var_3 = level.primaryprogressbarheight;
+  }
+
+  var_4 = createbar((1, 1, 1), var_2, var_3);
+  var_4 setpoint("CENTER", undefined, 0 + var_0, -61 + var_1);
+  return var_4;
 }
 
-setparent(param_00) {
-  if(isDefined(self.parent) && self.parent == param_00) {
+createbar(var_0, var_1, var_2, var_3) {
+  var_4 = newclienthudelem(self);
+  var_4.x = 0;
+  var_4.y = 0;
+  var_4.frac = 0;
+  var_4.color = var_0;
+  var_4.sort = -2;
+  var_4.shader = "progress_bar_fill";
+  var_4 setshader("progress_bar_fill", var_1, var_2);
+  var_4.hidden = 0;
+  if(isDefined(var_3)) {
+    var_4.flashfrac = var_3;
+  }
+
+  var_5 = newclienthudelem(self);
+  var_5.elemtype = "bar";
+  var_5.width = var_1;
+  var_5.height = var_2;
+  var_5.xoffset = 0;
+  var_5.yoffset = 0;
+  var_5.bar = var_4;
+  var_5.children = [];
+  var_5.sort = -3;
+  var_5.color = (0, 0, 0);
+  var_5.alpha = 0.5;
+  var_5 setparent(level.uiparent);
+  var_5 setshader("progress_bar_bg", var_1 + 4, var_2 + 4);
+  var_5.hidden = 0;
+  return var_5;
+}
+
+setparent(var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
 
@@ -254,7 +254,7 @@ setparent(param_00) {
     self.parent removechild(self);
   }
 
-  self.parent = param_00;
+  self.parent = var_0;
   self.parent addchild(self);
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
@@ -264,9 +264,9 @@ setparent(param_00) {
   setpoint("TOPLEFT");
 }
 
-addchild(param_00) {
-  param_00.index = self.children.size;
-  self.children[self.children.size] = param_00;
+addchild(var_0) {
+  var_0.index = self.children.size;
+  self.children[self.children.size] = var_0;
   removedestroyedchildren();
 }
 
@@ -280,168 +280,168 @@ removedestroyedchildren() {
     return;
   }
 
-  var_00 = [];
-  foreach(var_02 in self.children) {
-    if(!isDefined(var_02)) {
+  var_0 = [];
+  foreach(var_2 in self.children) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var_02.index = var_00.size;
-    var_00[var_00.size] = var_02;
+    var_2.index = var_0.size;
+    var_0[var_0.size] = var_2;
   }
 
-  self.children = var_00;
+  self.children = var_0;
 }
 
-removechild(param_00) {
-  param_00.parent = undefined;
-  if(self.children[self.children.size - 1] != param_00) {
-    self.children[param_00.index] = self.children[self.children.size - 1];
-    self.children[param_00.index].index = param_00.index;
+removechild(var_0) {
+  var_0.parent = undefined;
+  if(self.children[self.children.size - 1] != var_0) {
+    self.children[var_0.index] = self.children[self.children.size - 1];
+    self.children[var_0.index].index = var_0.index;
   }
 
   self.children[self.children.size - 1] = undefined;
-  param_00.index = undefined;
+  var_0.index = undefined;
 }
 
-setpoint(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_04)) {
-    param_04 = 0;
+setpoint(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var_05 = getparent();
-  if(param_04) {
-    self moveovertime(param_04);
+  var_5 = getparent();
+  if(var_4) {
+    self moveovertime(var_4);
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  self.xoffset = param_02;
-  if(!isDefined(param_03)) {
-    param_03 = 0;
+  self.xoffset = var_2;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  self.yoffset = param_03;
-  self.point = param_00;
+  self.yoffset = var_3;
+  self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
-  if(issubstr(param_00, "TOP")) {
+  if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
   }
 
-  if(issubstr(param_00, "BOTTOM")) {
+  if(issubstr(var_0, "BOTTOM")) {
     self.aligny = "bottom";
   }
 
-  if(issubstr(param_00, "LEFT")) {
+  if(issubstr(var_0, "LEFT")) {
     self.alignx = "left";
   }
 
-  if(issubstr(param_00, "RIGHT")) {
+  if(issubstr(var_0, "RIGHT")) {
     self.alignx = "right";
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = param_00;
+  if(!isDefined(var_1)) {
+    var_1 = var_0;
   }
 
-  self.relativepoint = param_01;
-  var_06 = "center_adjustable";
-  var_07 = "middle";
-  if(issubstr(param_01, "TOP")) {
-    var_07 = "top_adjustable";
+  self.relativepoint = var_1;
+  var_6 = "center_adjustable";
+  var_7 = "middle";
+  if(issubstr(var_1, "TOP")) {
+    var_7 = "top_adjustable";
   }
 
-  if(issubstr(param_01, "BOTTOM")) {
-    var_07 = "bottom_adjustable";
+  if(issubstr(var_1, "BOTTOM")) {
+    var_7 = "bottom_adjustable";
   }
 
-  if(issubstr(param_01, "LEFT")) {
-    var_06 = "left_adjustable";
+  if(issubstr(var_1, "LEFT")) {
+    var_6 = "left_adjustable";
   }
 
-  if(issubstr(param_01, "RIGHT")) {
-    var_06 = "right_adjustable";
+  if(issubstr(var_1, "RIGHT")) {
+    var_6 = "right_adjustable";
   }
 
-  if(var_05 == level.uiparent) {
-    self.horzalign = var_06;
-    self.vertalign = var_07;
+  if(var_5 == level.uiparent) {
+    self.horzalign = var_6;
+    self.vertalign = var_7;
   } else {
-    self.horzalign = var_05.horzalign;
-    self.vertalign = var_05.vertalign;
+    self.horzalign = var_5.horzalign;
+    self.vertalign = var_5.vertalign;
   }
 
-  if(strip_suffix(var_06, "_adjustable") == var_05.alignx) {
-    var_08 = 0;
-    var_09 = 0;
-  } else if(var_08 == "center" || var_07.alignx == "center") {
-    var_08 = int(var_07.width / 2);
-    if(var_07 == "left_adjustable" || var_06.alignx == "right") {
-      var_09 = -1;
+  if(strip_suffix(var_6, "_adjustable") == var_5.alignx) {
+    var_8 = 0;
+    var_9 = 0;
+  } else if(var_8 == "center" || var_7.alignx == "center") {
+    var_8 = int(var_7.width / 2);
+    if(var_7 == "left_adjustable" || var_6.alignx == "right") {
+      var_9 = -1;
     } else {
-      var_09 = 1;
+      var_9 = 1;
     }
   } else {
-    var_08 = var_07.width;
-    if(var_07 == "left_adjustable") {
-      var_09 = -1;
+    var_8 = var_7.width;
+    if(var_7 == "left_adjustable") {
+      var_9 = -1;
     } else {
-      var_09 = 1;
+      var_9 = 1;
     }
   }
 
-  self.x = var_05.x + var_08 * var_09;
-  if(strip_suffix(var_07, "_adjustable") == var_05.aligny) {
+  self.x = var_5.x + var_8 * var_9;
+  if(strip_suffix(var_7, "_adjustable") == var_5.aligny) {
     var_0A = 0;
     var_0B = 0;
-  } else if(var_09 == "middle" || var_07.aligny == "middle") {
-    var_0A = int(var_07.height / 2);
-    if(var_08 == "top_adjustable" || var_06.aligny == "bottom") {
+  } else if(var_9 == "middle" || var_7.aligny == "middle") {
+    var_0A = int(var_7.height / 2);
+    if(var_8 == "top_adjustable" || var_6.aligny == "bottom") {
       var_0B = -1;
     } else {
       var_0B = 1;
     }
   } else {
-    var_0A = var_07.height;
-    if(var_08 == "top_adjustable") {
+    var_0A = var_7.height;
+    if(var_8 == "top_adjustable") {
       var_0B = -1;
     } else {
       var_0B = 1;
     }
   }
 
-  self.y = var_05.y + var_0A * var_0B;
+  self.y = var_5.y + var_0A * var_0B;
   self.x = self.x + self.xoffset;
   self.y = self.y + self.yoffset;
   switch (self.elemtype) {
     case "bar":
-      setpointbar(param_00, param_01, param_02, param_03);
+      setpointbar(var_0, var_1, var_2, var_3);
       break;
   }
 
   updatechildren();
 }
 
-strip_suffix(param_00, param_01) {
-  if(param_00.size <= param_01.size) {
-    return param_00;
+strip_suffix(var_0, var_1) {
+  if(var_0.size <= var_1.size) {
+    return var_0;
   }
 
-  if(getsubstr(param_00, param_00.size - param_01.size, param_00.size) == param_01) {
-    return getsubstr(param_00, 0, param_00.size - param_01.size);
+  if(getsubstr(var_0, var_0.size - var_1.size, var_0.size) == var_1) {
+    return getsubstr(var_0, 0, var_0.size - var_1.size);
   }
 
-  return param_00;
+  return var_0;
 }
 
 getparent() {
   return self.parent;
 }
 
-setpointbar(param_00, param_01, param_02, param_03) {
+setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.horzalign = self.horzalign;
   self.bar.vertalign = self.vertalign;
   self.bar.alignx = "left";
@@ -465,48 +465,48 @@ setpointbar(param_00, param_01, param_02, param_03) {
 }
 
 updatechildren() {
-  for(var_00 = 0; var_00 < self.children.size; var_00++) {
-    var_01 = self.children[var_00];
-    var_01 setpoint(var_01.point, var_01.relativepoint, var_01.xoffset, var_01.yoffset);
+  for(var_0 = 0; var_0 < self.children.size; var_0++) {
+    var_1 = self.children[var_0];
+    var_1 setpoint(var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
 }
 
-updatebar(param_00, param_01) {
+updatebar(var_0, var_1) {
   if(self.elemtype == "bar") {
-    updatebarscale(param_00, param_01);
+    updatebarscale(var_0, var_1);
   }
 }
 
-updatebarscale(param_00, param_01) {
-  var_02 = int(self.width * param_00 + 0.5);
-  if(!var_02) {
-    var_02 = 1;
+updatebarscale(var_0, var_1) {
+  var_2 = int(self.width * var_0 + 0.5);
+  if(!var_2) {
+    var_2 = 1;
   }
 
-  self.bar.frac = param_00;
-  self.bar setshader(self.bar.shader, var_02, self.height);
-  if(isDefined(param_01) && var_02 < self.width) {
-    if(param_01 > 0) {
-      self.bar scaleovertime(1 - param_00 / param_01, self.width, self.height);
-    } else if(param_01 < 0) {
-      self.bar scaleovertime(param_00 / -1 * param_01, 1, self.height);
+  self.bar.frac = var_0;
+  self.bar setshader(self.bar.shader, var_2, self.height);
+  if(isDefined(var_1) && var_2 < self.width) {
+    if(var_1 > 0) {
+      self.bar scaleovertime(1 - var_0 / var_1, self.width, self.height);
+    } else if(var_1 < 0) {
+      self.bar scaleovertime(var_0 / -1 * var_1, 1, self.height);
     }
   }
 
-  self.bar.rateofchange = param_01;
+  self.bar.rateofchange = var_1;
   self.bar.lastupdatetime = gettime();
 }
 
 destroyelem() {
-  var_00 = [];
-  for(var_01 = 0; var_01 < self.children.size; var_01++) {
-    if(isDefined(self.children[var_01])) {
-      var_00[var_00.size] = self.children[var_01];
+  var_0 = [];
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    if(isDefined(self.children[var_1])) {
+      var_0[var_0.size] = self.children[var_1];
     }
   }
 
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_00[var_01] setparent(getparent());
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_0[var_1] setparent(getparent());
   }
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {

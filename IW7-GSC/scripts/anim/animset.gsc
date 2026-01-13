@@ -50,20 +50,20 @@ func_94FD() {
   func_9503();
 }
 
-func_DEE7(param_00, param_01, param_02) {
+func_DEE7(var_0, var_1, var_2) {
   func_94FD();
-  level.archetypes[param_00] = param_01;
-  if(isDefined(param_01["flashed"])) {
-    level.var_6EC0[param_00] = 0;
+  level.archetypes[var_0] = var_1;
+  if(isDefined(var_1["flashed"])) {
+    level.var_6EC0[var_0] = 0;
   }
 
-  if(isDefined(param_02) && param_02) {
-    scripts\anim\init_move_transitions::_meth_814D(param_00);
+  if(isDefined(var_2) && var_2) {
+    scripts\anim\init_move_transitions::_meth_814D(var_0);
   }
 }
 
-func_2126(param_00) {
-  return archetypeassetloaded(param_00) || isDefined(level.archetypes[param_00]);
+func_2126(var_0) {
+  return archetypeassetloaded(var_0) || isDefined(level.archetypes[var_0]);
 }
 
 func_9520() {}
@@ -96,13 +96,13 @@ func_9522() {}
 
 func_9512() {}
 
-func_9506(param_00) {}
+func_9506(var_0) {}
 
-func_950F(param_00, param_01, param_02, param_03) {}
+func_950F(var_0, var_1, var_2, var_3) {}
 
-func_9505(param_00) {}
+func_9505(var_0) {}
 
-func_950E(param_00, param_01, param_02) {}
+func_950E(var_0, var_1, var_2) {}
 
 func_413F() {
   self.custommoveanimset = undefined;
@@ -111,7 +111,7 @@ func_413F() {
   self.var_4400 = undefined;
 }
 
-func_F2C2(param_00) {}
+func_F2C2(var_0) {}
 
 func_F2C1() {}
 
@@ -121,11 +121,11 @@ func_F2BD() {}
 
 func_F2B5() {}
 
-func_F2BB(param_00) {}
+func_F2BB(var_0) {}
 
 func_F2B4() {}
 
-func_F2BA(param_00) {}
+func_F2BA(var_0) {}
 
 func_F2B3() {}
 
@@ -225,15 +225,15 @@ func_8CD8() {
 
   if(isDefined(self.target_getindexoftarget)) {
     if(self getwatcheddvar()) {
-      var_00 = undefined;
+      var_0 = undefined;
       if(self.target_getindexoftarget.type == "Cover Left") {
-        var_00 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_left");
+        var_0 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_left");
       } else if(self.target_getindexoftarget.type == "Cover Right") {
-        var_00 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_right");
+        var_0 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_right");
       }
 
-      if(isDefined(var_00)) {
-        return var_00;
+      if(isDefined(var_0)) {
+        return var_0;
       }
     }
   }

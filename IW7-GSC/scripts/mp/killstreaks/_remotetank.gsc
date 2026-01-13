@@ -33,16 +33,16 @@ init() {
   level.remote_tank_armor_bulletdamage = 0.5;
 }
 
-func_128FE(param_00, param_01) {
-  var_02 = 1;
-  if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
+func_128FE(var_0, var_1) {
+  var_2 = 1;
+  if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_2 >= scripts\mp\utility::maxvehiclesallowed()) {
     self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_03 = _meth_83AC(param_00, "remote_tank");
-  if(var_03) {
+  var_3 = _meth_83AC(var_0, "remote_tank");
+  if(var_3) {
     scripts\mp\matchdata::logkillstreakevent("remote_tank", self.origin);
     thread scripts\mp\utility::teamplayercardsplash("used_remote_tank", self);
     func_1146D("remote_tank");
@@ -51,14 +51,14 @@ func_128FE(param_00, param_01) {
   }
 
   self.iscarrying = 0;
-  return var_03;
+  return var_3;
 }
 
-func_1146D(param_00) {
-  var_01 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[param_00].streakname);
-  scripts\mp\killstreaks\_killstreaks::func_1146C(var_01);
-  scripts\mp\utility::_takeweapon(level.tanksettings[param_00].var_A84D);
-  scripts\mp\utility::_takeweapon(level.tanksettings[param_00].remotedetonatethink);
+func_1146D(var_0) {
+  var_1 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[var_0].streakname);
+  scripts\mp\killstreaks\_killstreaks::func_1146C(var_1);
+  scripts\mp\utility::_takeweapon(level.tanksettings[var_0].var_A84D);
+  scripts\mp\utility::_takeweapon(level.tanksettings[var_0].remotedetonatethink);
 }
 
 removeperks() {
@@ -84,28 +84,28 @@ waitrestoreperks() {
 }
 
 removeweapons() {
-  var_00 = self getweaponslistprimaries();
-  foreach(var_02 in var_00) {
-    var_03 = strtok(var_02, "_");
-    if(var_03[0] == "alt") {
-      self.restoreweaponclipammo[var_02] = self getweaponammoclip(var_02);
-      self.var_E2E9[var_02] = self getweaponammostock(var_02);
+  var_0 = self getweaponslistprimaries();
+  foreach(var_2 in var_0) {
+    var_3 = strtok(var_2, "_");
+    if(var_3[0] == "alt") {
+      self.restoreweaponclipammo[var_2] = self getweaponammoclip(var_2);
+      self.var_E2E9[var_2] = self getweaponammostock(var_2);
       continue;
     }
 
-    self.restoreweaponclipammo[var_02] = self getweaponammoclip(var_02);
-    self.var_E2E9[var_02] = self getweaponammostock(var_02);
+    self.restoreweaponclipammo[var_2] = self getweaponammoclip(var_2);
+    self.var_E2E9[var_2] = self getweaponammostock(var_2);
   }
 
   self.var_13CD2 = [];
-  foreach(var_02 in var_00) {
-    var_03 = strtok(var_02, "_");
-    self.var_13CD2[self.var_13CD2.size] = var_02;
-    if(var_03[0] == "alt") {
+  foreach(var_2 in var_0) {
+    var_3 = strtok(var_2, "_");
+    self.var_13CD2[self.var_13CD2.size] = var_2;
+    if(var_3[0] == "alt") {
       continue;
     }
 
-    scripts\mp\utility::_takeweapon(var_02);
+    scripts\mp\utility::_takeweapon(var_2);
   }
 }
 
@@ -114,31 +114,31 @@ restoreweapons() {
     return;
   }
 
-  var_00 = [];
-  foreach(var_02 in self.var_13CD2) {
-    var_03 = strtok(var_02, "_");
-    if(var_03[0] == "alt") {
-      var_00[var_00.size] = var_02;
+  var_0 = [];
+  foreach(var_2 in self.var_13CD2) {
+    var_3 = strtok(var_2, "_");
+    if(var_3[0] == "alt") {
+      var_0[var_0.size] = var_2;
       continue;
     }
 
-    scripts\mp\utility::_giveweapon(var_02);
-    if(isDefined(self.restoreweaponclipammo[var_02])) {
-      self setweaponammoclip(var_02, self.restoreweaponclipammo[var_02]);
+    scripts\mp\utility::_giveweapon(var_2);
+    if(isDefined(self.restoreweaponclipammo[var_2])) {
+      self setweaponammoclip(var_2, self.restoreweaponclipammo[var_2]);
     }
 
-    if(isDefined(self.var_E2E9[var_02])) {
-      self setweaponammostock(var_02, self.var_E2E9[var_02]);
+    if(isDefined(self.var_E2E9[var_2])) {
+      self setweaponammostock(var_2, self.var_E2E9[var_2]);
     }
   }
 
-  foreach(var_06 in var_00) {
-    if(isDefined(self.restoreweaponclipammo[var_06])) {
-      self setweaponammoclip(var_06, self.restoreweaponclipammo[var_06]);
+  foreach(var_6 in var_0) {
+    if(isDefined(self.restoreweaponclipammo[var_6])) {
+      self setweaponammoclip(var_6, self.restoreweaponclipammo[var_6]);
     }
 
-    if(isDefined(self.var_E2E9[var_06])) {
-      self setweaponammostock(var_06, self.var_E2E9[var_06]);
+    if(isDefined(self.var_E2E9[var_6])) {
+      self setweaponammostock(var_6, self.var_E2E9[var_6]);
     }
   }
 
@@ -154,39 +154,39 @@ func_13710() {
   restoreweapons();
 }
 
-_meth_83AC(param_00, param_01) {
-  var_02 = func_4A20(param_01, self);
-  var_02.lifeid = param_00;
+_meth_83AC(var_0, var_1) {
+  var_2 = func_4A20(var_1, self);
+  var_2.lifeid = var_0;
   removeperks();
   removeweapons();
-  var_03 = func_F689(var_02, 1);
+  var_3 = func_F689(var_2, 1);
   thread restoreperks();
   thread restoreweapons();
-  if(!isDefined(var_03)) {
-    var_03 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_4A20(param_00, param_01) {
-  var_02 = spawnturret("misc_turret", param_01.origin + (0, 0, 25), level.tanksettings[param_00].mgturretinfo);
-  var_02.angles = param_01.angles;
-  var_02.tanktype = param_00;
-  var_02.triggerportableradarping = param_01;
-  var_02 setModel(level.tanksettings[param_00].modelbase);
-  var_02 getvalidattachments();
-  var_02 setturretmodechangewait(1);
-  var_02 give_player_session_tokens("sentry_offline");
-  var_02 makeunusable();
-  var_02 setsentryowner(param_01);
-  return var_02;
+func_4A20(var_0, var_1) {
+  var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), level.tanksettings[var_0].mgturretinfo);
+  var_2.angles = var_1.angles;
+  var_2.tanktype = var_0;
+  var_2.triggerportableradarping = var_1;
+  var_2 setModel(level.tanksettings[var_0].modelbase);
+  var_2 getvalidattachments();
+  var_2 setturretmodechangewait(1);
+  var_2 give_player_session_tokens("sentry_offline");
+  var_2 makeunusable();
+  var_2 setsentryowner(var_1);
+  return var_2;
 }
 
-func_F689(param_00, param_01) {
+func_F689(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
-  param_00 thread func_114CE(self);
+  var_0 thread func_114CE(self);
   scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_tank", "+attack");
   self notifyonplayercommand("place_tank", "+attack_akimbo_accessible");
@@ -198,96 +198,96 @@ func_F689(param_00, param_01) {
   }
 
   for(;;) {
-    var_02 = scripts\engine\utility::waittill_any_return("place_tank", "cancel_tank", "force_cancel_placement");
-    if(var_02 == "cancel_tank" || var_02 == "force_cancel_placement") {
-      if(!param_01 && var_02 == "cancel_tank") {
+    var_2 = scripts\engine\utility::waittill_any_return("place_tank", "cancel_tank", "force_cancel_placement");
+    if(var_2 == "cancel_tank" || var_2 == "force_cancel_placement") {
+      if(!var_1 && var_2 == "cancel_tank") {
         continue;
       }
 
       if(level.console) {
-        var_03 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[param_00.tanktype].streakname);
-        if(isDefined(self.var_A6A1) && var_03 == scripts\mp\utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
-          scripts\mp\utility::_giveweapon(var_03, 0);
-          scripts\mp\utility::_setactionslot(4, "weapon", var_03);
+        var_3 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[var_0.tanktype].streakname);
+        if(isDefined(self.var_A6A1) && var_3 == scripts\mp\utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
+          scripts\mp\utility::_giveweapon(var_3, 0);
+          scripts\mp\utility::_setactionslot(4, "weapon", var_3);
         }
       }
 
-      param_00 func_114CD();
+      var_0 func_114CD();
       scripts\engine\utility::allow_weapon(1);
       return 0;
     }
 
-    if(!param_00.canbeplaced) {
+    if(!var_0.canbeplaced) {
       continue;
     }
 
-    param_00 thread func_114D0();
+    var_0 thread func_114D0();
     scripts\engine\utility::allow_weapon(1);
     return 1;
   }
 }
 
-func_114CE(param_00) {
+func_114CE(var_0) {
   self setModel(level.tanksettings[self.tanktype].modelplacement);
-  self setsentrycarrier(param_00);
+  self setsentrycarrier(var_0);
   self setcontents(0);
   self setCanDamage(0);
-  self.carriedby = param_00;
-  param_00.iscarrying = 1;
-  param_00 thread func_12F34(self);
-  thread func_114C6(param_00);
-  thread func_114C7(param_00);
+  self.carriedby = var_0;
+  var_0.iscarrying = 1;
+  var_0 thread func_12F34(self);
+  thread func_114C6(var_0);
+  thread func_114C7(var_0);
   thread func_114C8();
   self notify("carried");
 }
 
-func_12F34(param_00) {
+func_12F34(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  param_00 endon("placed");
-  param_00 endon("death");
-  param_00.canbeplaced = 1;
-  var_01 = -1;
+  var_0 endon("placed");
+  var_0 endon("death");
+  var_0.canbeplaced = 1;
+  var_1 = -1;
   for(;;) {
-    var_02 = self canplayerplacetank(25, 25, 50, 40, 80, 0.7);
-    param_00.origin = var_02["origin"];
-    param_00.angles = var_02["angles"];
-    param_00.canbeplaced = self isonground() && var_02["result"] && abs(var_02["origin"][2] - self.origin[2]) < 20;
-    if(param_00.canbeplaced != var_01) {
-      if(param_00.canbeplaced) {
-        param_00 setModel(level.tanksettings[param_00.tanktype].modelplacement);
+    var_2 = self canplayerplacetank(25, 25, 50, 40, 80, 0.7);
+    var_0.origin = var_2["origin"];
+    var_0.angles = var_2["angles"];
+    var_0.canbeplaced = self isonground() && var_2["result"] && abs(var_2["origin"][2] - self.origin[2]) < 20;
+    if(var_0.canbeplaced != var_1) {
+      if(var_0.canbeplaced) {
+        var_0 setModel(level.tanksettings[var_0.tanktype].modelplacement);
         if(self.team != "spectator") {
-          self forceusehinton(level.tanksettings[param_00.tanktype].var_1114D);
+          self forceusehinton(level.tanksettings[var_0.tanktype].var_1114D);
         }
       } else {
-        param_00 setModel(level.tanksettings[param_00.tanktype].modelplacementfailed);
+        var_0 setModel(level.tanksettings[var_0.tanktype].modelplacementfailed);
         if(self.team != "spectator") {
-          self forceusehinton(level.tanksettings[param_00.tanktype].var_1114C);
+          self forceusehinton(level.tanksettings[var_0.tanktype].var_1114C);
         }
       }
     }
 
-    var_01 = param_00.canbeplaced;
+    var_1 = var_0.canbeplaced;
     wait(0.05);
   }
 }
 
-func_114C6(param_00) {
+func_114C6(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 waittill("death");
+  var_0 waittill("death");
   func_114CD();
 }
 
-func_114C7(param_00) {
+func_114C7(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 waittill("disconnect");
+  var_0 waittill("disconnect");
   func_114CD();
 }
 
-func_114C8(param_00) {
+func_114C8(var_0) {
   self endon("placed");
   self endon("death");
   level waittill("game_ended");
@@ -318,16 +318,16 @@ func_114D0() {
     return 0;
   }
 
-  var_00 = self.triggerportableradarping;
-  var_00.iscarrying = 0;
-  var_01 = func_4A1F(self);
-  if(!isDefined(var_01)) {
+  var_0 = self.triggerportableradarping;
+  var_0.iscarrying = 0;
+  var_1 = func_4A1F(self);
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var_01 playSound("sentry_gun_plant");
-  var_01 notify("placed");
-  var_01 thread func_114CC();
+  var_1 playSound("sentry_gun_plant");
+  var_1 notify("placed");
+  var_1 thread func_114CC();
   self delete();
 }
 
@@ -338,58 +338,58 @@ func_114BB() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
-  var_00 endon("death");
+  var_0 = self.triggerportableradarping;
+  var_0 endon("death");
   self waittill("placed");
-  var_00 func_1146D(self.tanktype);
-  var_00 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].var_A84D);
-  var_00 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].var_A84D);
+  var_0 func_1146D(self.tanktype);
+  var_0 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].var_A84D);
+  var_0 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].var_A84D);
 }
 
-func_4A1F(param_00) {
-  var_01 = param_00.triggerportableradarping;
-  var_02 = param_00.tanktype;
-  var_03 = param_00.lifeid;
-  var_04 = spawnvehicle(level.tanksettings[var_02].modelbase, var_02, level.tanksettings[var_02].vehicleinfo, param_00.origin, param_00.angles, var_01);
-  if(!isDefined(var_04)) {
+func_4A1F(var_0) {
+  var_1 = var_0.triggerportableradarping;
+  var_2 = var_0.tanktype;
+  var_3 = var_0.lifeid;
+  var_4 = spawnvehicle(level.tanksettings[var_2].modelbase, var_2, level.tanksettings[var_2].vehicleinfo, var_0.origin, var_0.angles, var_1);
+  if(!isDefined(var_4)) {
     return undefined;
   }
 
-  var_05 = var_04 gettagorigin("tag_turret_attach");
-  var_06 = spawnturret("misc_turret", var_05, level.tanksettings[var_02].mgturretinfo, 0);
-  var_06 linkto(var_04, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
-  var_06 setModel(level.tanksettings[var_02].var_B922);
-  var_06.health = level.tanksettings[var_02].health;
-  var_06.triggerportableradarping = var_01;
-  var_06.angles = var_01.angles;
-  var_06.var_10955 = ::func_3758;
-  var_06.var_114B1 = var_04;
-  var_06 makeunusable();
-  var_06 setdefaultdroppitch(0);
-  var_06 setCanDamage(0);
-  var_04.var_10955 = ::func_3758;
-  var_04.lifeid = var_03;
-  var_04.team = var_01.team;
-  var_04.triggerportableradarping = var_01;
-  var_04 setotherent(var_01);
-  var_04.mgturret = var_06;
-  var_04.health = level.tanksettings[var_02].health;
-  var_04.maxhealth = level.tanksettings[var_02].maxhealth;
-  var_04.var_E1 = 0;
-  var_04.var_52D0 = 0;
-  var_04 setCanDamage(0);
-  var_04.tanktype = var_02;
-  var_04 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", var_01, 1);
-  var_06 setturretmodechangewait(1);
-  var_04 func_114CF();
-  var_06 setsentryowner(var_01);
-  var_01.using_remote_tank = 0;
-  var_04.empgrenaded = 0;
-  var_04.var_4D49 = 1;
-  var_04 thread func_114C5();
-  var_04 thread func_114D7();
-  var_04 thread func_114BB();
-  return var_04;
+  var_5 = var_4 gettagorigin("tag_turret_attach");
+  var_6 = spawnturret("misc_turret", var_5, level.tanksettings[var_2].mgturretinfo, 0);
+  var_6 linkto(var_4, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  var_6 setModel(level.tanksettings[var_2].var_B922);
+  var_6.health = level.tanksettings[var_2].health;
+  var_6.triggerportableradarping = var_1;
+  var_6.angles = var_1.angles;
+  var_6.var_10955 = ::func_3758;
+  var_6.var_114B1 = var_4;
+  var_6 makeunusable();
+  var_6 setdefaultdroppitch(0);
+  var_6 setCanDamage(0);
+  var_4.var_10955 = ::func_3758;
+  var_4.lifeid = var_3;
+  var_4.team = var_1.team;
+  var_4.triggerportableradarping = var_1;
+  var_4 setotherent(var_1);
+  var_4.mgturret = var_6;
+  var_4.health = level.tanksettings[var_2].health;
+  var_4.maxhealth = level.tanksettings[var_2].maxhealth;
+  var_4.var_E1 = 0;
+  var_4.var_52D0 = 0;
+  var_4 setCanDamage(0);
+  var_4.tanktype = var_2;
+  var_4 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", var_1, 1);
+  var_6 setturretmodechangewait(1);
+  var_4 func_114CF();
+  var_6 setsentryowner(var_1);
+  var_1.using_remote_tank = 0;
+  var_4.empgrenaded = 0;
+  var_4.var_4D49 = 1;
+  var_4 thread func_114C5();
+  var_4 thread func_114D7();
+  var_4 thread func_114BB();
+  return var_4;
 }
 
 func_114CC() {
@@ -403,17 +403,17 @@ func_114CC() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
-  var_01 = (0, 0, 20);
+  var_0 = self.triggerportableradarping;
+  var_1 = (0, 0, 20);
   if(level.teambased) {
-    self.team = var_00.team;
-    self.mgturret.team = var_00.team;
-    self.mgturret setturretteam(var_00.team);
-    foreach(var_03 in level.players) {
-      if(var_03 != var_00 && var_03.team == var_00.team) {
-        var_04 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_03, scripts\mp\teams::_meth_81B0(self.team), var_01, 10, 10, 0, 0.05, 0, 1, 0, 1);
-        if(isDefined(var_04)) {
-          var_04 settargetent(self);
+    self.team = var_0.team;
+    self.mgturret.team = var_0.team;
+    self.mgturret setturretteam(var_0.team);
+    foreach(var_3 in level.players) {
+      if(var_3 != var_0 && var_3.team == var_0.team) {
+        var_4 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_3, scripts\mp\teams::_meth_81B0(self.team), var_1, 10, 10, 0, 0.05, 0, 1, 0, 1);
+        if(isDefined(var_4)) {
+          var_4 settargetent(self);
         }
       }
     }
@@ -430,44 +430,44 @@ func_114CC() {
 }
 
 func_10E09() {
-  var_00 = self.triggerportableradarping;
-  var_00 scripts\mp\utility::setusingremote(self.tanktype);
+  var_0 = self.triggerportableradarping;
+  var_0 scripts\mp\utility::setusingremote(self.tanktype);
   if(getdvarint("camera_thirdPerson")) {
-    var_00 scripts\mp\utility::setthirdpersondof(0);
+    var_0 scripts\mp\utility::setthirdpersondof(0);
   }
 
-  var_00.restoreangles = var_00.angles;
-  var_00 scripts\mp\utility::freezecontrolswrapper(1);
-  var_01 = var_00 scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_tank");
-  if(var_01 != "success") {
-    if(var_01 != "disconnect") {
-      var_00 scripts\mp\utility::clearusingremote();
+  var_0.restoreangles = var_0.angles;
+  var_0 scripts\mp\utility::freezecontrolswrapper(1);
+  var_1 = var_0 scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_tank");
+  if(var_1 != "success") {
+    if(var_1 != "disconnect") {
+      var_0 scripts\mp\utility::clearusingremote();
     }
 
-    if(isDefined(var_00.disabledweapon) && var_00.disabledweapon) {
-      var_00 scripts\engine\utility::allow_weapon(1);
+    if(isDefined(var_0.disabledweapon) && var_0.disabledweapon) {
+      var_0 scripts\engine\utility::allow_weapon(1);
     }
 
     self notify("death");
     return 0;
   }
 
-  var_00 scripts\mp\utility::freezecontrolswrapper(0);
+  var_0 scripts\mp\utility::freezecontrolswrapper(0);
   self.mgturret setCanDamage(1);
   self setCanDamage(1);
-  var_02 = spawnStruct();
-  var_02.playdeathfx = 1;
-  var_02.deathoverridecallback = ::func_114C9;
-  thread scripts\mp\movers::handle_moving_platforms(var_02);
-  var_00 remotecontrolvehicle(self);
-  var_00 remotecontrolturret(self.mgturret);
-  var_00 thread tank_watchfiring(self);
-  var_00 thread func_114B9(self);
+  var_2 = spawnStruct();
+  var_2.playdeathfx = 1;
+  var_2.deathoverridecallback = ::func_114C9;
+  thread scripts\mp\movers::handle_moving_platforms(var_2);
+  var_0 remotecontrolvehicle(self);
+  var_0 remotecontrolturret(self.mgturret);
+  var_0 thread tank_watchfiring(self);
+  var_0 thread func_114B9(self);
   thread func_114B7();
   thread func_114CA();
-  var_00.using_remote_tank = 1;
-  var_00 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].remotedetonatethink);
-  var_00 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].remotedetonatethink);
+  var_0.using_remote_tank = 1;
+  var_0 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].remotedetonatethink);
+  var_0 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].remotedetonatethink);
   thread func_114BD();
   self.mgturret thread func_114D5();
 }
@@ -502,25 +502,25 @@ func_114CF() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
-  if(isDefined(var_00.using_remote_tank) && var_00.using_remote_tank) {
-    var_00 notify("end_remote");
-    var_00 remotecontrolvehicleoff(self);
-    var_00 geysers_and_boatride(self.mgturret);
-    var_00 scripts\mp\utility::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
-    var_00 scripts\mp\utility::clearusingremote();
-    var_00 setplayerangles(var_00.restoreangles);
+  var_0 = self.triggerportableradarping;
+  if(isDefined(var_0.using_remote_tank) && var_0.using_remote_tank) {
+    var_0 notify("end_remote");
+    var_0 remotecontrolvehicleoff(self);
+    var_0 geysers_and_boatride(self.mgturret);
+    var_0 scripts\mp\utility::_switchtoweapon(var_0 scripts\engine\utility::getlastweapon());
+    var_0 scripts\mp\utility::clearusingremote();
+    var_0 setplayerangles(var_0.restoreangles);
     if(getdvarint("camera_thirdPerson")) {
-      var_00 scripts\mp\utility::setthirdpersondof(1);
+      var_0 scripts\mp\utility::setthirdpersondof(1);
     }
 
-    if(isDefined(var_00.disabledusability) && var_00.disabledusability) {
-      var_00 scripts\engine\utility::allow_usability(1);
+    if(isDefined(var_0.disabledusability) && var_0.disabledusability) {
+      var_0 scripts\engine\utility::allow_usability(1);
     }
 
-    var_00 func_1146D(level.tanksettings[self.tanktype].streakname);
-    var_00.using_remote_tank = 0;
-    var_00 thread func_114BA();
+    var_0 func_1146D(level.tanksettings[self.tanktype].streakname);
+    var_0.using_remote_tank = 0;
+    var_0 thread func_114BA();
   }
 }
 
@@ -557,22 +557,22 @@ func_114BC() {
 
 func_114C1() {
   self endon("death");
-  var_00 = level.tanksettings[self.tanktype].timeout;
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+  var_0 = level.tanksettings[self.tanktype].timeout;
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
   self notify("death");
 }
 
-func_114C9(param_00) {
+func_114C9(var_0) {
   self notify("death");
 }
 
 func_114BE() {
   level endon("game_ended");
-  var_00 = self getentitynumber();
-  addtougvlist(var_00);
+  var_0 = self getentitynumber();
+  addtougvlist(var_0);
   self waittill("death");
   self playSound("talon_destroyed");
-  removefromugvlist(var_00);
+  removefromugvlist(var_0);
   self setModel(level.tanksettings[self.tanktype].modeldestroyed);
   if(isDefined(self.triggerportableradarping) && self.triggerportableradarping.using_remote_tank || self.triggerportableradarping scripts\mp\utility::isusingremote()) {
     func_114CF();
@@ -590,7 +590,7 @@ func_114BE() {
   self delete();
 }
 
-func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   var_0C = self;
   if(isDefined(self.var_114B1)) {
     var_0C = self.var_114B1;
@@ -600,58 +600,58 @@ func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(!scripts\mp\weapons::friendlyfirecheck(var_0C.triggerportableradarping, param_01)) {
+  if(!scripts\mp\weapons::friendlyfirecheck(var_0C.triggerportableradarping, var_1)) {
     return;
   }
 
-  if(isDefined(param_03) && param_03 &level.idflags_penetration) {
+  if(isDefined(var_3) && var_3 &level.idflags_penetration) {
     var_0C.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(param_03) && param_03 &level.idflags_ricochet) {
+  if(isDefined(var_3) && var_3 &level.idflags_ricochet) {
     var_0C.wasdamagedfrombulletricochet = 1;
   }
 
   var_0C.wasdamaged = 1;
   var_0C.var_4D49 = 0;
   playfxontagforclients(level._effect["remote_tank_spark"], var_0C, "tag_player", var_0C.triggerportableradarping);
-  if(isDefined(param_05)) {
-    switch (param_05) {
+  if(isDefined(var_5)) {
+    switch (var_5) {
       case "stealth_bomb_mp":
       case "artillery_mp":
-        param_02 = param_02 * 4;
+        var_2 = var_2 * 4;
         break;
     }
   }
 
-  if(param_04 == "MOD_MELEE") {
-    param_02 = var_0C.maxhealth * 0.5;
+  if(var_4 == "MOD_MELEE") {
+    var_2 = var_0C.maxhealth * 0.5;
   }
 
-  var_0D = param_02;
-  if(isplayer(param_01)) {
-    param_01 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
-    if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
-      if(param_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0D = var_0D + param_02 * level.armorpiercingmod;
+  var_0D = var_2;
+  if(isplayer(var_1)) {
+    var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
+    if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
+      if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
+        var_0D = var_0D + var_2 * level.armorpiercingmod;
       }
     }
 
-    if(isexplosivedamagemod(param_04)) {
-      var_0D = var_0D + param_02;
+    if(isexplosivedamagemod(var_4)) {
+      var_0D = var_0D + var_2;
     }
   }
 
-  if(isexplosivedamagemod(param_04) && isDefined(param_05) && param_05 == "destructible_car") {
+  if(isexplosivedamagemod(var_4) && isDefined(var_5) && var_5 == "destructible_car") {
     var_0D = var_0C.maxhealth;
   }
 
-  if(isDefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
-    param_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
+  if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
+    var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
   }
 
-  if(isDefined(param_05)) {
-    switch (param_05) {
+  if(isDefined(var_5)) {
+    switch (var_5) {
       case "remotemissile_projectile_mp":
       case "javelin_mp":
       case "remote_mortar_missile_mp":
@@ -684,17 +684,17 @@ func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         break;
     }
 
-    scripts\mp\killstreaks\_killstreaks::killstreakhit(param_01, param_05, self);
+    scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_5, self);
   }
 
   var_0C.var_E1 = var_0C.var_E1 + var_0D;
   var_0C playSound("talon_damaged");
   if(var_0C.var_E1 >= var_0C.maxhealth) {
-    if(isplayer(param_01) && !isDefined(var_0C.triggerportableradarping) || param_01 != var_0C.triggerportableradarping) {
+    if(isplayer(var_1) && !isDefined(var_0C.triggerportableradarping) || var_1 != var_0C.triggerportableradarping) {
       var_0C.var_1D41 = 1;
-      param_01 notify("destroyed_killstreak", param_05);
-      thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_tank", param_01);
-      param_01 thread scripts\mp\utility::giveunifiedpoints("kill", param_05, 300);
+      var_1 notify("destroyed_killstreak", var_5);
+      thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_tank", var_1);
+      var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_5, 300);
     }
 
     var_0C notify("death");
@@ -717,15 +717,15 @@ func_114B8() {
 func_114C5() {
   self endon("death");
   level endon("game_ended");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
     if(!self.empgrenaded) {
       if(self.var_4D49 < 1) {
         self.var_4D49 = self.var_4D49 + 0.1;
-        var_00 = 1;
-      } else if(var_00) {
+        var_0 = 1;
+      } else if(var_0) {
         self.var_4D49 = 1;
-        var_00 = 0;
+        var_0 = 0;
       }
     }
 
@@ -736,17 +736,17 @@ func_114C5() {
 func_114D7() {
   self endon("death");
   level endon("game_ended");
-  var_00 = 0.1;
-  var_01 = 1;
-  var_02 = 1;
+  var_0 = 0.1;
+  var_1 = 1;
+  var_2 = 1;
   for(;;) {
-    if(var_02) {
+    if(var_2) {
       if(self.var_E1 > 0) {
-        var_02 = 0;
-        var_01++;
+        var_2 = 0;
+        var_1++;
       }
-    } else if(self.var_E1 >= self.maxhealth * var_00 * var_01) {
-      var_01++;
+    } else if(self.var_E1 >= self.maxhealth * var_0 * var_1) {
+      var_1++;
     }
 
     wait(0.05);
@@ -757,9 +757,9 @@ func_114BD() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     if(isDefined(self.var_10955)) {
-      self[[self.var_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
+      self[[self.var_10955]](undefined, var_1, var_0, var_8, var_4, var_9, var_3, var_2, undefined, undefined, var_5, var_7);
     }
   }
 }
@@ -768,66 +768,66 @@ func_114D5() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
-    if(isDefined(self.var_10955) && isDefined(self.var_114B1) && !isexplosivedamagemod(var_04) || isDefined(var_09) && isexplosivedamagemod(var_04) && var_09 == "stealth_bomb_mp" || var_09 == "artillery_mp") {
-      self.var_114B1[[self.var_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    if(isDefined(self.var_10955) && isDefined(self.var_114B1) && !isexplosivedamagemod(var_4) || isDefined(var_9) && isexplosivedamagemod(var_4) && var_9 == "stealth_bomb_mp" || var_9 == "artillery_mp") {
+      self.var_114B1[[self.var_10955]](undefined, var_1, var_0, var_8, var_4, var_9, var_3, var_2, undefined, undefined, var_5, var_7);
     }
   }
 }
 
-tank_watchfiring(param_00) {
+tank_watchfiring(var_0) {
   self endon("disconnect");
   self endon("end_remote");
-  param_00 endon("death");
-  var_01 = 50;
-  var_02 = var_01;
-  var_03 = weaponfiretime(level.tanksettings[param_00.tanktype].mgturretinfo);
+  var_0 endon("death");
+  var_1 = 50;
+  var_2 = var_1;
+  var_3 = weaponfiretime(level.tanksettings[var_0.tanktype].mgturretinfo);
   for(;;) {
-    if(param_00.mgturret isfiringvehicleturret()) {
-      var_02--;
-      if(var_02 <= 0) {
-        param_00.mgturret turretfiredisable();
+    if(var_0.mgturret isfiringvehicleturret()) {
+      var_2--;
+      if(var_2 <= 0) {
+        var_0.mgturret turretfiredisable();
         wait(2.5);
-        param_00 playSound("talon_reload");
+        var_0 playSound("talon_reload");
         self playlocalsound("talon_reload_plr");
-        var_02 = var_01;
-        param_00.mgturret turretfireenable();
+        var_2 = var_1;
+        var_0.mgturret turretfireenable();
       }
     }
 
-    wait(var_03);
+    wait(var_3);
   }
 }
 
-func_114B9(param_00) {
+func_114B9(var_0) {
   self endon("disconnect");
   self endon("end_remote");
   level endon("game_ended");
-  param_00 endon("death");
-  var_01 = 0;
+  var_0 endon("death");
+  var_1 = 0;
   for(;;) {
-    if(self fragbuttonpressed() && !param_00.empgrenaded) {
-      var_02 = param_00.mgturret.origin;
-      var_03 = param_00.mgturret.angles;
-      switch (var_01) {
+    if(self fragbuttonpressed() && !var_0.empgrenaded) {
+      var_2 = var_0.mgturret.origin;
+      var_3 = var_0.mgturret.angles;
+      switch (var_1) {
         case 0:
-          var_02 = param_00.mgturret gettagorigin("tag_missile1");
-          var_03 = param_00.mgturret gettagangles("tag_player");
+          var_2 = var_0.mgturret gettagorigin("tag_missile1");
+          var_3 = var_0.mgturret gettagangles("tag_player");
           break;
 
         case 1:
-          var_02 = param_00.mgturret gettagorigin("tag_missile2");
-          var_03 = param_00.mgturret gettagangles("tag_player");
+          var_2 = var_0.mgturret gettagorigin("tag_missile2");
+          var_3 = var_0.mgturret gettagangles("tag_player");
           break;
       }
 
-      param_00 playSound("talon_missile_fire");
+      var_0 playSound("talon_missile_fire");
       self playlocalsound("talon_missile_fire_plr");
-      var_04 = var_02 + anglesToForward(var_03) * 100;
-      var_05 = scripts\mp\utility::_magicbullet(level.tanksettings[param_00.tanktype].var_B88D, var_02, var_04, self);
-      var_01 = var_01 + 1 % 2;
+      var_4 = var_2 + anglesToForward(var_3) * 100;
+      var_5 = scripts\mp\utility::_magicbullet(level.tanksettings[var_0.tanktype].var_B88D, var_2, var_4, self);
+      var_1 = var_1 + 1 % 2;
       wait(5);
-      param_00 playSound("talon_rocket_reload");
+      var_0 playSound("talon_rocket_reload");
       self playlocalsound("talon_rocket_reload_plr");
       continue;
     }
@@ -836,19 +836,19 @@ func_114B9(param_00) {
   }
 }
 
-func_114B6(param_00) {
+func_114B6(var_0) {
   self endon("disconnect");
   self endon("end_remote");
   level endon("game_ended");
-  param_00 endon("death");
+  var_0 endon("death");
   for(;;) {
     if(self secondaryoffhandbuttonpressed()) {
-      var_01 = bulletTrace(param_00.origin + (0, 0, 4), param_00.origin - (0, 0, 4), 0, param_00);
-      var_02 = vectornormalize(var_01["normal"]);
-      var_03 = vectortoangles(var_02);
-      var_03 = var_03 + (90, 0, 0);
-      var_04 = scripts\mp\weapons::spawnmine(param_00.origin, self, "equipment", var_03);
-      param_00 playSound("item_blast_shield_on");
+      var_1 = bulletTrace(var_0.origin + (0, 0, 4), var_0.origin - (0, 0, 4), 0, var_0);
+      var_2 = vectornormalize(var_1["normal"]);
+      var_3 = vectortoangles(var_2);
+      var_3 = var_3 + (90, 0, 0);
+      var_4 = scripts\mp\weapons::spawnmine(var_0.origin, self, "equipment", var_3);
+      var_0 playSound("item_blast_shield_on");
       wait(8);
       continue;
     }
@@ -866,12 +866,12 @@ func_114B7() {
   }
 }
 
-addtougvlist(param_00) {
-  level.ugvs[param_00] = self;
+addtougvlist(var_0) {
+  level.ugvs[var_0] = self;
 }
 
-removefromugvlist(param_00) {
-  level.ugvs[param_00] = undefined;
+removefromugvlist(var_0) {
+  level.ugvs[var_0] = undefined;
 }
 
 func_114CA() {
@@ -879,16 +879,16 @@ func_114CA() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
+  var_0 = self.triggerportableradarping;
   level endon("game_ended");
-  var_00 endon("disconnect");
-  var_00 endon("end_remote");
+  var_0 endon("disconnect");
+  var_0 endon("end_remote");
   self endon("death");
   for(;;) {
-    var_01 = 0;
-    while(var_00 usebuttonpressed()) {
-      var_01 = var_01 + 0.05;
-      if(var_01 > 0.75) {
+    var_1 = 0;
+    while(var_0 usebuttonpressed()) {
+      var_1 = var_1 + 0.05;
+      if(var_1 > 0.75) {
         self notify("death");
         return;
       }

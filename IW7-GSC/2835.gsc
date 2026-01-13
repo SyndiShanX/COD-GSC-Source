@@ -11,57 +11,57 @@ init_colors() {
 }
 
 func_957E() {
-  var_00 = getallnodes();
+  var_0 = getallnodes();
   scripts\engine\utility::flag_init("player_looks_away_from_spawner");
   scripts\engine\utility::flag_init("friendly_spawner_locked");
-  level.func_22DD = [];
-  level.func_22DD["axis"] = [];
-  level.func_22DD["allies"] = [];
-  level.func_22DF = [];
-  level.func_22DF["axis"] = [];
-  level.func_22DF["allies"] = [];
-  var_01 = [];
-  var_01 = scripts\engine\utility::array_combine(var_01, getEntArray("trigger_multiple", "code_classname"));
-  var_01 = scripts\engine\utility::array_combine(var_01, getEntArray("trigger_radius", "code_classname"));
-  var_01 = scripts\engine\utility::array_combine(var_01, getEntArray("trigger_once", "code_classname"));
-  level.func_43A0 = [];
-  level.func_43A0["allies"] = "allies";
-  level.func_43A0["axis"] = "axis";
-  level.func_43A0["team3"] = "axis";
-  level.func_43A0["neutral"] = "neutral";
-  var_02 = getEntArray("info_volume", "code_classname");
+  level.var_22DD = [];
+  level.var_22DD["axis"] = [];
+  level.var_22DD["allies"] = [];
+  level.var_22DF = [];
+  level.var_22DF["axis"] = [];
+  level.var_22DF["allies"] = [];
+  var_1 = [];
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_multiple", "code_classname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_radius", "code_classname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_once", "code_classname"));
+  level.var_43A0 = [];
+  level.var_43A0["allies"] = "allies";
+  level.var_43A0["axis"] = "axis";
+  level.var_43A0["team3"] = "axis";
+  level.var_43A0["neutral"] = "neutral";
+  var_2 = getEntArray("info_volume", "code_classname");
 
-  foreach(var_04 in var_00) {
-    if(isDefined(var_4.func_ED33)) {
-      var_04 func_171E(var_4.func_ED33, "allies");
+  foreach(var_4 in var_0) {
+    if(isDefined(var_4.var_ED33)) {
+      var_4 func_171E(var_4.var_ED33, "allies");
     }
 
-    if(isDefined(var_4.func_ED34)) {
-      var_04 func_171E(var_4.func_ED34, "axis");
-    }
-  }
-
-  foreach(var_07 in var_02) {
-    if(isDefined(var_7.func_ED33)) {
-      var_07 func_178C(var_7.func_ED33, "allies");
-    }
-
-    if(isDefined(var_7.func_ED34)) {
-      var_07 func_178C(var_7.func_ED34, "axis");
+    if(isDefined(var_4.var_ED34)) {
+      var_4 func_171E(var_4.var_ED34, "axis");
     }
   }
 
-  foreach(var_10 in var_01) {
-    if(isDefined(var_10.func_ED33)) {
-      var_10 thread func_12757(var_10.func_ED33, "allies");
+  foreach(var_7 in var_2) {
+    if(isDefined(var_7.var_ED33)) {
+      var_7 func_178C(var_7.var_ED33, "allies");
     }
 
-    if(isDefined(var_10.func_ED34)) {
-      var_10 thread func_12757(var_10.func_ED34, "axis");
+    if(isDefined(var_7.var_ED34)) {
+      var_7 func_178C(var_7.var_ED34, "axis");
     }
   }
 
-  level.func_439B = [];
+  foreach(var_10 in var_1) {
+    if(isDefined(var_10.var_ED33)) {
+      var_10 thread func_12757(var_10.var_ED33, "allies");
+    }
+
+    if(isDefined(var_10.var_ED34)) {
+      var_10 thread func_12757(var_10.var_ED34, "axis");
+    }
+  }
+
+  level.var_439B = [];
   func_16B5("BAD NODE");
   func_16B5("Cover Stand");
   func_16B5("Cover Crouch");
@@ -90,71 +90,71 @@ func_957E() {
   func_1729("Cover Stand 3D");
   func_16B5("Begin 3D");
   func_16B5("End 3D");
-  level.func_43A8 = [];
-  level.func_43A8[level.func_43A8.size] = "r";
-  level.func_43A8[level.func_43A8.size] = "b";
-  level.func_43A8[level.func_43A8.size] = "y";
-  level.func_43A8[level.func_43A8.size] = "c";
-  level.func_43A8[level.func_43A8.size] = "g";
-  level.func_43A8[level.func_43A8.size] = "p";
-  level.func_43A8[level.func_43A8.size] = "o";
-  level.func_43A3["red"] = "r";
-  level.func_43A3["r"] = "r";
-  level.func_43A3["blue"] = "b";
-  level.func_43A3["b"] = "b";
-  level.func_43A3["yellow"] = "y";
-  level.func_43A3["y"] = "y";
-  level.func_43A3["cyan"] = "c";
-  level.func_43A3["c"] = "c";
-  level.func_43A3["green"] = "g";
-  level.func_43A3["g"] = "g";
-  level.func_43A3["purple"] = "p";
-  level.func_43A3["p"] = "p";
-  level.func_43A3["orange"] = "o";
-  level.func_43A3["o"] = "o";
-  level.func_4BE0 = [];
-  level.func_4BE0["allies"] = [];
-  level.func_4BE0["axis"] = [];
-  level.func_A95D = [];
-  level.func_A95D["allies"] = [];
-  level.func_A95D["axis"] = [];
+  level.var_43A8 = [];
+  level.var_43A8[level.var_43A8.size] = "r";
+  level.var_43A8[level.var_43A8.size] = "b";
+  level.var_43A8[level.var_43A8.size] = "y";
+  level.var_43A8[level.var_43A8.size] = "c";
+  level.var_43A8[level.var_43A8.size] = "g";
+  level.var_43A8[level.var_43A8.size] = "p";
+  level.var_43A8[level.var_43A8.size] = "o";
+  level.var_43A3["red"] = "r";
+  level.var_43A3["r"] = "r";
+  level.var_43A3["blue"] = "b";
+  level.var_43A3["b"] = "b";
+  level.var_43A3["yellow"] = "y";
+  level.var_43A3["y"] = "y";
+  level.var_43A3["cyan"] = "c";
+  level.var_43A3["c"] = "c";
+  level.var_43A3["green"] = "g";
+  level.var_43A3["g"] = "g";
+  level.var_43A3["purple"] = "p";
+  level.var_43A3["p"] = "p";
+  level.var_43A3["orange"] = "o";
+  level.var_43A3["o"] = "o";
+  level.var_4BE0 = [];
+  level.var_4BE0["allies"] = [];
+  level.var_4BE0["axis"] = [];
+  level.var_A95D = [];
+  level.var_A95D["allies"] = [];
+  level.var_A95D["axis"] = [];
 
-  foreach(var_13 in level.func_43A8) {
-    level.func_22E0["allies"][var_13] = [];
-    level.func_22E0["axis"][var_13] = [];
-    level.func_4BE0["allies"][var_13] = undefined;
-    level.func_4BE0["axis"][var_13] = undefined;
+  foreach(var_13 in level.var_43A8) {
+    level.var_22E0["allies"][var_13] = [];
+    level.var_22E0["axis"][var_13] = [];
+    level.var_4BE0["allies"][var_13] = undefined;
+    level.var_4BE0["axis"][var_13] = undefined;
   }
 
   thread func_CFD2();
   var_15 = _getspawnerteamarray("allies");
-  level.func_11AE = [];
+  level.var_11AE = [];
 
   foreach(var_17 in var_15) {
-    level.func_11AE[var_17.classname] = var_17;
+    level.var_11AE[var_17.classname] = var_17;
   }
 }
 
 func_45ED() {
-  self.func_EDAD = level.func_43A3[self.func_EDAD];
+  self.var_EDAD = level.var_43A3[self.var_EDAD];
 }
 
-func_19CE(var_00) {
-  if(isDefined(self.func_EDAD)) {
+func_19CE(var_0) {
+  if(isDefined(self.var_EDAD)) {
     func_45ED();
-    self.func_4BDF = var_00;
-    var_01 = self.func_EDAD;
-    level.func_22E0[func_7CE4()][var_01] = ::scripts\engine\utility::array_add(level.func_22E0[func_7CE4()][var_01], self);
+    self.var_4BDF = var_0;
+    var_1 = self.var_EDAD;
+    level.var_22E0[func_7CE4()][var_1] = ::scripts\engine\utility::array_add(level.var_22E0[func_7CE4()][var_1], self);
     thread _meth_8467();
     return;
   }
 }
 
 _meth_8467() {
-  if(!isDefined(self.func_4BDF)) {
+  if(!isDefined(self.var_4BDF)) {
     return;
   }
-  var_00 = level.func_22DD[func_7CE4()][self.func_4BDF];
+  var_0 = level.var_22DD[func_7CE4()][self.var_4BDF];
   func_AB3A();
 
   if(!isalive(self)) {
@@ -163,20 +163,20 @@ _meth_8467() {
   if(!scripts\sp\utility::func_8B6C()) {
     return;
   }
-  if(!isDefined(var_00)) {
-    var_01 = level.func_22DF[func_7CE4()][self.func_4BDF];
-    func_F21B(var_01, self.func_4BDF);
+  if(!isDefined(var_0)) {
+    var_1 = level.var_22DF[func_7CE4()][self.var_4BDF];
+    func_F21B(var_1, self.var_4BDF);
     return;
   }
 
-  for(var_02 = 0; var_02 < var_0.size; var_2++) {
-    var_03 = var_0[var_02];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = var_0[var_2];
 
-    if(isalive(var_3.func_43A2) && !isplayer(var_3.func_43A2)) {
+    if(isalive(var_3.var_43A2) && !isplayer(var_3.var_43A2)) {
       continue;
     }
-    thread func_19E1(var_03);
-    thread decrementcolorusers(var_03);
+    thread func_19E1(var_3);
+    thread decrementcolorusers(var_3);
     return;
   }
 
@@ -186,7 +186,7 @@ _meth_8467() {
 func_C002() {}
 
 func_78D2() {
-  var_00 = [];
+  var_0 = [];
   var_0[var_0.size] = "r";
   var_0[var_0.size] = "b";
   var_0[var_0.size] = "y";
@@ -194,71 +194,71 @@ func_78D2() {
   var_0[var_0.size] = "g";
   var_0[var_0.size] = "p";
   var_0[var_0.size] = "o";
-  return var_00;
+  return var_0;
 }
 
-func_22AE(var_00) {
-  var_01 = [];
+func_22AE(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in var_00) {
-    var_1[var_03] = 1;
+  foreach(var_3 in var_0) {
+    var_1[var_3] = 1;
   }
 
-  var_05 = [];
+  var_5 = [];
 
-  foreach(var_08, var_07 in var_01) {
-    var_5[var_5.size] = var_08;
+  foreach(var_8, var_7 in var_1) {
+    var_5[var_5.size] = var_8;
   }
 
-  return var_05;
+  return var_5;
 }
 
-func_78D9(var_00, var_01) {
-  return func_78D7(var_00, var_01);
+func_78D9(var_0, var_1) {
+  return func_78D7(var_0, var_1);
 }
 
-func_78D7(var_00, var_01) {
-  var_02 = strtok(var_00, " ");
-  var_02 = func_22AE(var_02);
-  var_03 = [];
-  var_04 = [];
-  var_05 = [];
-  var_06 = func_78D2();
+func_78D7(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  var_2 = func_22AE(var_2);
+  var_3 = [];
+  var_4 = [];
+  var_5 = [];
+  var_6 = func_78D2();
 
-  foreach(var_08 in var_02) {
-    var_09 = undefined;
+  foreach(var_8 in var_2) {
+    var_9 = undefined;
 
-    foreach(var_09 in var_06) {
-      if(issubstr(var_08, var_09)) {
+    foreach(var_9 in var_6) {
+      if(issubstr(var_8, var_9)) {
         break;
       }
     }
 
-    if(!func_43A4(var_01, var_08)) {
+    if(!func_43A4(var_1, var_8)) {
       continue;
     }
-    var_4[var_09] = var_08;
-    var_3[var_3.size] = var_09;
-    var_5[var_5.size] = var_08;
+    var_4[var_9] = var_8;
+    var_3[var_3.size] = var_9;
+    var_5[var_5.size] = var_8;
   }
 
-  var_02 = var_05;
+  var_2 = var_5;
   var_13 = [];
-  var_13["colorCodes"] = var_02;
-  var_13["colorCodesByColorIndex"] = var_04;
-  var_13["colors"] = var_03;
+  var_13["colorCodes"] = var_2;
+  var_13["colorCodesByColorIndex"] = var_4;
+  var_13["colors"] = var_3;
   return var_13;
 }
 
-func_43A4(var_00, var_01) {
-  if(isDefined(level.func_22DD[var_00][var_01])) {
+func_43A4(var_0, var_1) {
+  if(isDefined(level.var_22DD[var_0][var_1])) {
     return 1;
   }
 
-  return isDefined(level.func_22DF[var_00][var_01]);
+  return isDefined(level.var_22DF[var_0][var_1]);
 }
 
-func_12757(var_00, var_01) {
+func_12757(var_0, var_1) {
   self endon("death");
 
   for(;;) {
@@ -269,257 +269,257 @@ func_12757(var_00, var_01) {
       continue;
     }
 
-    func_78D8(var_00, var_01);
+    func_78D8(var_0, var_1);
 
-    if(isDefined(self.func_EE6C) && self.func_EE6C) {
+    if(isDefined(self.var_EE6C) && self.var_EE6C) {
       thread func_12732();
     }
   }
 }
 
 func_12732() {
-  var_00 = [];
+  var_0 = [];
   var_1[0] = self;
 
   while(var_1.size) {
-    var_02 = [];
+    var_2 = [];
 
-    foreach(var_04 in var_01) {
-      var_0[var_0.size] = var_04;
+    foreach(var_4 in var_1) {
+      var_0[var_0.size] = var_4;
 
       if(!isDefined(var_4.targetname)) {
         continue;
       }
-      var_05 = getEntArray(var_4.targetname, "target");
+      var_5 = getEntArray(var_4.targetname, "target");
 
-      foreach(var_07 in var_05) {
-        var_2[var_2.size] = var_07;
+      foreach(var_7 in var_5) {
+        var_2[var_2.size] = var_7;
       }
 
-      var_05 = undefined;
+      var_5 = undefined;
     }
 
-    var_01 = [];
+    var_1 = [];
 
-    foreach(var_11 in var_02) {
-      if(!isDefined(var_11.func_ED33) && !isDefined(var_11.func_ED34)) {
+    foreach(var_11 in var_2) {
+      if(!isDefined(var_11.var_ED33) && !isDefined(var_11.var_ED34)) {
         continue;
       }
       var_1[var_1.size] = var_11;
     }
   }
 
-  scripts\sp\utility::func_228A(var_00);
+  scripts\sp\utility::func_228A(var_0);
 }
 
-func_159B(var_00) {
-  if(var_00 == "allies") {
-    thread func_78D8(self.func_ED33, var_00);
+func_159B(var_0) {
+  if(var_0 == "allies") {
+    thread func_78D8(self.var_ED33, var_0);
   } else {
-    thread func_78D8(self.func_ED34, var_00);
+    thread func_78D8(self.var_ED34, var_0);
   }
 }
 
-func_78D8(var_00, var_01) {
-  var_02 = func_78D9(var_00, var_01);
-  var_03 = var_2["colorCodes"];
-  var_04 = var_2["colorCodesByColorIndex"];
-  var_05 = var_2["colors"];
-  func_159A(var_03, var_05, var_01, var_04);
+func_78D8(var_0, var_1) {
+  var_2 = func_78D9(var_0, var_1);
+  var_3 = var_2["colorCodes"];
+  var_4 = var_2["colorCodesByColorIndex"];
+  var_5 = var_2["colors"];
+  func_159A(var_3, var_5, var_1, var_4);
 }
 
-func_159A(var_00, var_01, var_02, var_03) {
-  for(var_04 = 0; var_04 < var_0.size; var_4++) {
-    if(!isDefined(level.func_22DE[var_02][var_0[var_04]])) {
+func_159A(var_0, var_1, var_2, var_3) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(!isDefined(level.var_22DE[var_2][var_0[var_4]])) {
       continue;
     }
-    level.func_22DE[var_02][var_0[var_04]] = ::scripts\engine\utility::array_removeundefined(level.func_22DE[var_02][var_0[var_04]]);
+    level.var_22DE[var_2][var_0[var_4]] = ::scripts\engine\utility::array_removeundefined(level.var_22DE[var_2][var_0[var_4]]);
 
-    for(var_05 = 0; var_05 < level.func_22DE[var_02][var_0[var_04]].size; var_5++) {
-      level.func_22DE[var_02][var_0[var_04]][var_05].func_4BDF = var_0[var_04];
+    for(var_5 = 0; var_5 < level.var_22DE[var_2][var_0[var_4]].size; var_5++) {
+      level.var_22DE[var_2][var_0[var_4]][var_5].var_4BDF = var_0[var_4];
     }
   }
 
-  foreach(var_07 in var_01) {
-    level.func_22E0[var_02][var_07] = ::scripts\sp\utility::func_22B9(level.func_22E0[var_02][var_07]);
-    level.func_A95D[var_02][var_07] = level.func_4BE0[var_02][var_07];
-    level.func_4BE0[var_02][var_07] = var_3[var_07];
+  foreach(var_7 in var_1) {
+    level.var_22E0[var_2][var_7] = ::scripts\sp\utility::func_22B9(level.var_22E0[var_2][var_7]);
+    level.var_A95D[var_2][var_7] = level.var_4BE0[var_2][var_7];
+    level.var_4BE0[var_2][var_7] = var_3[var_7];
   }
 
   var_11 = [];
 
-  for(var_04 = 0; var_04 < var_0.size; var_4++) {
-    if(func_EB12(var_02, var_1[var_04])) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(func_EB12(var_2, var_1[var_4])) {
       continue;
     }
-    var_12 = var_0[var_04];
+    var_12 = var_0[var_4];
 
-    if(!isDefined(level.func_22DC[var_02][var_12])) {
+    if(!isDefined(level.var_22DC[var_2][var_12])) {
       continue;
     }
-    var_11[var_12] = func_9F85(var_12, var_1[var_04], var_02);
+    var_11[var_12] = func_9F85(var_12, var_1[var_4], var_2);
   }
 
-  for(var_04 = 0; var_04 < var_0.size; var_4++) {
-    var_12 = var_0[var_04];
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    var_12 = var_0[var_4];
 
     if(!isDefined(var_11[var_12])) {
       continue;
     }
-    if(func_EB12(var_02, var_1[var_04])) {
+    if(func_EB12(var_2, var_1[var_4])) {
       continue;
     }
-    if(!isDefined(level.func_22DC[var_02][var_12])) {
+    if(!isDefined(level.var_22DC[var_2][var_12])) {
       continue;
     }
-    func_9F83(var_12, var_1[var_04], var_02, var_11[var_12]);
+    func_9F83(var_12, var_1[var_4], var_2, var_11[var_12]);
   }
 }
 
-func_EB12(var_00, var_01) {
-  if(!isDefined(level.func_A95D[var_00][var_01])) {
+func_EB12(var_0, var_1) {
+  if(!isDefined(level.var_A95D[var_0][var_1])) {
     return 0;
   }
 
-  return level.func_A95D[var_00][var_01] == level.func_4BE0[var_00][var_01];
+  return level.var_A95D[var_0][var_1] == level.var_4BE0[var_0][var_1];
 }
 
-func_D968(var_00, var_01) {
-  if(issubstr(var_0.func_ED33, var_01)) {
-    self.func_4709[self.func_4709.size] = var_00;
+func_D968(var_0, var_1) {
+  if(issubstr(var_0.var_ED33, var_1)) {
+    self.var_4709[self.var_4709.size] = var_0;
   } else {
-    self.func_4708[self.func_4708.size] = var_00;
+    self.var_4708[self.var_4708.size] = var_0;
   }
 }
 
-func_D969(var_00, var_01) {
-  if(issubstr(var_0.func_ED34, var_01)) {
-    self.func_4709[self.func_4709.size] = var_00;
+func_D969(var_0, var_1) {
+  if(issubstr(var_0.var_ED34, var_1)) {
+    self.var_4709[self.var_4709.size] = var_0;
   } else {
-    self.func_4708[self.func_4708.size] = var_00;
+    self.var_4708[self.var_4708.size] = var_0;
   }
 }
 
-func_D967(var_00, var_01) {
-  self.func_4708[self.func_4708.size] = var_00;
+func_D967(var_0, var_1) {
+  self.var_4708[self.var_4708.size] = var_0;
 }
 
-func_D982(var_00, var_01) {
-  self.func_C961[self.func_C961.size] = var_00;
+func_D982(var_0, var_1) {
+  self.var_C961[self.var_C961.size] = var_0;
 }
 
-func_D923(var_00, var_01, var_02) {
-  var_03 = level.func_22DD[var_00][var_01];
-  var_04 = spawnStruct();
-  var_4.func_C961 = [];
-  var_4.func_4708 = [];
-  var_4.func_4709 = [];
-  var_05 = isDefined(level.func_A95D[var_00][var_02]);
+func_D923(var_0, var_1, var_2) {
+  var_3 = level.var_22DD[var_0][var_1];
+  var_4 = spawnStruct();
+  var_4.var_C961 = [];
+  var_4.var_4708 = [];
+  var_4.var_4709 = [];
+  var_5 = isDefined(level.var_A95D[var_0][var_2]);
 
-  for(var_06 = 0; var_06 < var_3.size; var_6++) {
-    var_07 = var_3[var_06];
-    var_04[[level.func_439B[var_7.type][var_05][var_00]]](var_07, level.func_A95D[var_00][var_02]);
+  for(var_6 = 0; var_6 < var_3.size; var_6++) {
+    var_7 = var_3[var_6];
+    var_4[[level.var_439B[var_7.type][var_5][var_0]]](var_7, level.var_A95D[var_0][var_2]);
   }
 
-  var_4.func_4708 = scripts\engine\utility::array_randomize(var_4.func_4708);
-  var_08 = [];
-  var_03 = [];
+  var_4.var_4708 = scripts\engine\utility::array_randomize(var_4.var_4708);
+  var_8 = [];
+  var_3 = [];
 
-  foreach(var_10, var_07 in var_4.func_4708) {
-    if(isDefined(var_7.func_ED38)) {
-      var_8[var_8.size] = var_07;
+  foreach(var_10, var_7 in var_4.var_4708) {
+    if(isDefined(var_7.var_ED38)) {
+      var_8[var_8.size] = var_7;
       var_3[var_10] = undefined;
       continue;
     }
 
-    var_3[var_3.size] = var_07;
+    var_3[var_3.size] = var_7;
   }
 
-  for(var_06 = 0; var_06 < var_4.func_4709.size; var_6++) {
-    var_3[var_3.size] = var_4.func_4709[var_06];
+  for(var_6 = 0; var_6 < var_4.var_4709.size; var_6++) {
+    var_3[var_3.size] = var_4.var_4709[var_6];
   }
 
-  for(var_06 = 0; var_06 < var_4.func_C961.size; var_6++) {
-    var_3[var_3.size] = var_4.func_C961[var_06];
+  for(var_6 = 0; var_6 < var_4.var_C961.size; var_6++) {
+    var_3[var_3.size] = var_4.var_C961[var_6];
   }
 
-  foreach(var_07 in var_08) {
-    var_3[var_3.size] = var_07;
+  foreach(var_7 in var_8) {
+    var_3[var_3.size] = var_7;
   }
 
-  level.func_22DD[var_00][var_01] = var_03;
+  level.var_22DD[var_0][var_1] = var_3;
 }
 
-func_7BDA(var_00, var_01, var_02) {
-  return level.func_22DD[var_00][var_01];
+func_7BDA(var_0, var_1, var_2) {
+  return level.var_22DD[var_0][var_1];
 }
 
-func_78D6(var_00, var_01) {
-  return level.func_22DF[var_00][var_01];
+func_78D6(var_0, var_1) {
+  return level.var_22DF[var_0][var_1];
 }
 
-func_9F85(var_00, var_01, var_02) {
-  level.func_22DC[var_02][var_00] = ::scripts\sp\utility::func_22B9(level.func_22DC[var_02][var_00]);
-  var_03 = level.func_22DC[var_02][var_00];
-  var_03 = scripts\engine\utility::array_combine(var_03, level.func_22E0[var_02][var_01]);
-  var_04 = [];
+func_9F85(var_0, var_1, var_2) {
+  level.var_22DC[var_2][var_0] = ::scripts\sp\utility::func_22B9(level.var_22DC[var_2][var_0]);
+  var_3 = level.var_22DC[var_2][var_0];
+  var_3 = scripts\engine\utility::array_combine(var_3, level.var_22E0[var_2][var_1]);
+  var_4 = [];
 
-  foreach(var_06 in var_03) {
-    if(isDefined(var_6.func_4BDF) && var_6.func_4BDF == var_00) {
+  foreach(var_6 in var_3) {
+    if(isDefined(var_6.var_4BDF) && var_6.var_4BDF == var_0) {
       continue;
     }
-    var_4[var_4.size] = var_06;
+    var_4[var_4.size] = var_6;
   }
 
-  var_03 = var_04;
+  var_3 = var_4;
 
   if(!var_3.size) {
     return;
   }
-  scripts\engine\utility::array_thread(var_03, ::func_AB3A);
-  return var_03;
+  scripts\engine\utility::array_thread(var_3, ::func_AB3A);
+  return var_3;
 }
 
-func_F21B(var_00, var_01) {
+func_F21B(var_0, var_1) {
   self notify("stop_color_move");
-  self.func_4BDF = var_01;
+  self.var_4BDF = var_1;
 
   if(isDefined(var_0.target)) {
-    var_02 = getnode(var_0.target, "targetname");
+    var_2 = getnode(var_0.target, "targetname");
 
-    if(isDefined(var_02)) {
-      self give_more_perk(var_02);
+    if(isDefined(var_2)) {
+      self give_more_perk(var_2);
     }
   }
 
   self.fixednode = 0;
-  self _meth_82F1(var_00);
+  self _meth_82F1(var_0);
 }
 
-func_9F83(var_00, var_01, var_02, var_03) {
-  var_04 = var_03;
-  var_05 = [];
+func_9F83(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
+  var_5 = [];
 
-  if(isDefined(level.func_22DD[var_02][var_00])) {
-    func_D923(var_02, var_00, var_01);
-    var_05 = func_7BDA(var_02, var_00, var_01);
+  if(isDefined(level.var_22DD[var_2][var_0])) {
+    func_D923(var_2, var_0, var_1);
+    var_5 = func_7BDA(var_2, var_0, var_1);
   } else {
-    var_06 = func_78D6(var_02, var_00);
-    scripts\engine\utility::array_thread(var_03, ::func_F21B, var_06, var_00);
+    var_6 = func_78D6(var_2, var_0);
+    scripts\engine\utility::array_thread(var_3, ::func_F21B, var_6, var_0);
   }
 
-  var_07 = 0;
-  var_08 = var_3.size;
+  var_7 = 0;
+  var_8 = var_3.size;
 
-  for(var_09 = 0; var_09 < var_5.size; var_9++) {
-    var_10 = var_5[var_09];
+  for(var_9 = 0; var_9 < var_5.size; var_9++) {
+    var_10 = var_5[var_9];
 
-    if(isalive(var_10.func_43A2)) {
+    if(isalive(var_10.var_43A2)) {
       continue;
     }
-    var_11 = scripts\engine\utility::getclosest(var_10.origin, var_03);
-    var_03 = scripts\engine\utility::array_remove(var_03, var_11);
-    var_11 func_1142E(var_10, var_00, self, var_07);
+    var_11 = scripts\engine\utility::getclosest(var_10.origin, var_3);
+    var_3 = scripts\engine\utility::array_remove(var_3, var_11);
+    var_11 func_1142E(var_10, var_0, self, var_7);
     var_7++;
 
     if(!var_3.size) {
@@ -528,151 +528,151 @@ func_9F83(var_00, var_01, var_02, var_03) {
   }
 }
 
-func_1142E(var_00, var_01, var_02, var_03) {
+func_1142E(var_0, var_1, var_2, var_3) {
   self notify("stop_color_move");
-  self.func_4BDF = var_01;
-  thread func_D966(var_00, var_02, var_03);
+  self.var_4BDF = var_1;
+  thread func_D966(var_0, var_2, var_3);
 }
 
 func_CFD2() {
   for(;;) {
-    var_00 = undefined;
+    var_0 = undefined;
 
     if(!isDefined(level.player.node)) {
       wait 0.05;
       continue;
     }
 
-    var_01 = level.player.node.func_43A2;
-    var_00 = level.player.node;
-    var_0.func_43A2 = level.player;
+    var_1 = level.player.node.var_43A2;
+    var_0 = level.player.node;
+    var_0.var_43A2 = level.player;
 
     for(;;) {
       if(!isDefined(level.player.node)) {
         break;
       }
-      if(level.player.node != var_00) {
+      if(level.player.node != var_0) {
         break;
       }
       wait 0.05;
     }
 
-    var_0.func_43A2 = undefined;
-    var_00 func_4398();
+    var_0.var_43A2 = undefined;
+    var_0 func_4398();
   }
 }
 
 func_4398() {
-  if(isDefined(self.func_ED33)) {
-    func_439A(self.func_ED33, "allies");
+  if(isDefined(self.var_ED33)) {
+    func_439A(self.var_ED33, "allies");
   }
 
-  if(isDefined(self.func_ED34)) {
-    func_439A(self.func_ED34, "axis");
+  if(isDefined(self.var_ED34)) {
+    func_439A(self.var_ED34, "axis");
   }
 }
 
-func_439A(var_00, var_01) {
-  if(isDefined(self.func_43A2)) {
+func_439A(var_0, var_1) {
+  if(isDefined(self.var_43A2)) {
     return;
   }
-  var_02 = strtok(var_00, " ");
-  var_02 = func_22AE(var_02);
-  scripts\engine\utility::array_levelthread(var_02, ::func_4399, var_01);
+  var_2 = strtok(var_0, " ");
+  var_2 = func_22AE(var_2);
+  scripts\engine\utility::array_levelthread(var_2, ::func_4399, var_1);
 }
 
-func_4399(var_00, var_01) {
-  var_02 = var_0[0];
+func_4399(var_0, var_1) {
+  var_2 = var_0[0];
 
-  if(!isDefined(level.func_4BE0[var_01][var_02])) {
+  if(!isDefined(level.var_4BE0[var_1][var_2])) {
     return;
   }
-  if(level.func_4BE0[var_01][var_02] != var_00) {
+  if(level.var_4BE0[var_1][var_2] != var_0) {
     return;
   }
-  var_03 = scripts\sp\utility::func_79C8(var_01, var_02);
+  var_3 = scripts\sp\utility::func_79C8(var_1, var_2);
 
-  for(var_04 = 0; var_04 < var_3.size; var_4++) {
-    var_05 = var_3[var_04];
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    var_5 = var_3[var_4];
 
-    if(var_05 func_C2D2(var_00)) {
+    if(var_5 func_C2D2(var_0)) {
       continue;
     }
-    var_05 func_1142E(self, var_00);
+    var_5 func_1142E(self, var_0);
     return;
   }
 }
 
-func_C2D2(var_00) {
-  if(!isDefined(self.func_4BDF)) {
+func_C2D2(var_0) {
+  if(!isDefined(self.var_4BDF)) {
     return 0;
   }
 
-  return self.func_4BDF == var_00;
+  return self.var_4BDF == var_0;
 }
 
-func_19E1(var_00) {
+func_19E1(var_0) {
   self endon("death");
   self endon("stop_color_move");
   func_BE08();
-  thread func_19E0(var_00);
+  thread func_19E0(var_0);
 }
 
-func_19E0(var_00) {
+func_19E0(var_0) {
   self notify("stop_going_to_node");
-  func_F3D2(var_00);
-  var_01 = level.func_22DF[func_7CE4()][self.func_4BDF];
+  func_F3D2(var_0);
+  var_1 = level.var_22DF[func_7CE4()][self.var_4BDF];
 
-  if(isDefined(self.func_ED27)) {
-    thread func_3A57(var_00, var_01);
+  if(isDefined(self.var_ED27)) {
+    thread func_3A57(var_0, var_1);
   }
 }
 
-func_F3D2(var_00) {
-  if(isDefined(self.func_43A9)) {
-    self thread[[self.func_43A9]](var_00);
+func_F3D2(var_0) {
+  if(isDefined(self.var_43A9)) {
+    self thread[[self.var_43A9]](var_0);
   }
 
-  if(isDefined(self.func_11B0)) {
-    thread scripts\sp\anim::func_1F32(self, self.func_11B0);
-    self.func_11B0 = undefined;
+  if(isDefined(self.var_11B0)) {
+    thread scripts\sp\anim::func_1F32(self, self.var_11B0);
+    self.var_11B0 = undefined;
   }
 
-  if(isDefined(self.func_43AB)) {
-    self thread[[self.func_43AB]](var_00);
+  if(isDefined(self.var_43AB)) {
+    self thread[[self.var_43AB]](var_0);
   } else {
-    self give_more_perk(var_00);
+    self give_more_perk(var_0);
   }
 
-  if(func_9CFA(var_00)) {
-    thread func_72C8(var_00);
+  if(func_9CFA(var_0)) {
+    thread func_72C8(var_0);
   } else if(isDefined(var_0.radius) && var_0.radius > 0) {
     self.goalradius = var_0.radius;
   }
 
-  var_01 = level.func_22DF[func_7CE4()][self.func_4BDF];
+  var_1 = level.var_22DF[func_7CE4()][self.var_4BDF];
 
-  if(isDefined(var_01)) {
-    self give_laststand(var_01);
+  if(isDefined(var_1)) {
+    self give_laststand(var_1);
   } else {
     self getplayerheadmodel();
   }
 
   if(isDefined(var_0.fixednodesaferadius)) {
     self.fixednodesaferadius = var_0.fixednodesaferadius;
-  } else if(isDefined(level.func_6E02)) {
-    self.fixednodesaferadius = level.func_6E02;
+  } else if(isDefined(level.var_6E02)) {
+    self.fixednodesaferadius = level.var_6E02;
   } else {
     self.fixednodesaferadius = 64;
   }
 }
 
-func_9CFA(var_00) {
-  if(!isDefined(self.func_EDB0)) {
+func_9CFA(var_0) {
+  if(!isDefined(self.var_EDB0)) {
     return 0;
   }
 
-  if(!self.func_EDB0) {
+  if(!self.var_EDB0) {
     return 0;
   }
 
@@ -687,7 +687,7 @@ func_9CFA(var_00) {
   }
 }
 
-func_72C8(var_00) {
+func_72C8(var_0) {
   self endon("death");
   self endon("stop_going_to_node");
   self.goalradius = var_0.fixednodesaferadius;
@@ -698,41 +698,41 @@ func_72C8(var_00) {
   }
 }
 
-func_3A57(var_00, var_01) {
+func_3A57(var_0, var_1) {
   self endon("death");
   self endon("stop_being_careful");
   self endon("stop_going_to_node");
-  thread func_DDF9(var_00);
+  thread func_DDF9(var_0);
 
   for(;;) {
-    func_13689(var_00, var_01);
-    func_12FAD(var_00, var_01);
+    func_13689(var_0, var_1);
+    func_12FAD(var_0, var_1);
     self.fixednode = 1;
-    func_F3D2(var_00);
+    func_F3D2(var_0);
   }
 }
 
-func_DDF9(var_00) {
+func_DDF9(var_0) {
   self endon("death");
   self endon("stop_going_to_node");
   self waittill("stop_being_careful");
   self.fixednode = 1;
-  func_F3D2(var_00);
+  func_F3D2(var_0);
 }
 
-func_12FAD(var_00, var_01) {
+func_12FAD(var_0, var_1) {
   self give_mp_super_weapon(self.origin);
   self.goalradius = 1024;
   self.fixednode = 0;
 
-  if(isDefined(var_01)) {
+  if(isDefined(var_1)) {
     for(;;) {
       wait 1;
 
       if(self _meth_81A8(var_0.origin, self.fixednodesaferadius)) {
         continue;
       }
-      if(self getteamfallbackspawnpoints(var_01)) {
+      if(self getteamfallbackspawnpoints(var_1)) {
         continue;
       }
       return;
@@ -747,11 +747,11 @@ func_12FAD(var_00, var_01) {
   }
 }
 
-func_9E6E(var_00, var_01) {
-  var_02 = _getaiarray("axis");
+func_9E6E(var_0, var_1) {
+  var_2 = _getaiarray("axis");
 
-  for(var_03 = 0; var_03 < var_2.size; var_3++) {
-    if(distance2d(var_2[var_03].origin, var_00) < var_01) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(distance2d(var_2[var_3].origin, var_0) < var_1) {
       return 1;
     }
   }
@@ -759,13 +759,13 @@ func_9E6E(var_00, var_01) {
   return 0;
 }
 
-func_13689(var_00, var_01) {
-  if(isDefined(var_01)) {
+func_13689(var_0, var_1) {
+  if(isDefined(var_1)) {
     for(;;) {
       if(self _meth_81A8(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
-      if(self getteamfallbackspawnpoints(var_01)) {
+      if(self getteamfallbackspawnpoints(var_1)) {
         return;
       }
       wait 1;
@@ -785,79 +785,79 @@ func_BE08() {
     return 0;
   }
 
-  if(isDefined(self.func_ED35)) {
-    wait(self.func_ED35);
+  if(isDefined(self.var_ED35)) {
+    wait(self.var_ED35);
     return 1;
   }
 
   return self.node scripts\sp\utility::script_delay();
 }
 
-func_D966(var_00, var_01, var_02) {
-  thread decrementcolorusers(var_00);
+func_D966(var_0, var_1, var_2) {
+  thread decrementcolorusers(var_0);
   self endon("stop_color_move");
   self endon("death");
 
-  if(isDefined(var_01)) {
-    var_01 scripts\sp\utility::script_delay();
+  if(isDefined(var_1)) {
+    var_1 scripts\sp\utility::script_delay();
   }
 
   if(!func_BE08()) {
-    if(isDefined(var_02)) {
-      wait(var_02 * randomfloatrange(0.2, 0.35));
+    if(isDefined(var_2)) {
+      wait(var_2 * randomfloatrange(0.2, 0.35));
     }
   }
 
-  func_19E0(var_00);
-  self.func_439C = var_00;
+  func_19E0(var_0);
+  self.var_439C = var_0;
 
   for(;;) {
-    self waittill("node_taken", var_03);
+    self waittill("node_taken", var_3);
 
-    if(isplayer(var_03)) {
+    if(isplayer(var_3)) {
       wait 0.05;
     }
 
-    var_00 = func_7860();
+    var_0 = func_7860();
 
-    if(isDefined(var_00)) {
-      if(isalive(self.func_4397.func_43A2) && self.func_4397.func_43A2 == self) {
-        self.func_4397.func_43A2 = undefined;
+    if(isDefined(var_0)) {
+      if(isalive(self.var_4397.var_43A2) && self.var_4397.var_43A2 == self) {
+        self.var_4397.var_43A2 = undefined;
       }
 
-      self.func_4397 = var_00;
-      var_0.func_43A2 = self;
-      func_19E0(var_00);
+      self.var_4397 = var_0;
+      var_0.var_43A2 = self;
+      func_19E0(var_0);
     }
   }
 }
 
 func_785F() {
-  var_00 = level.func_4BE0[func_7CE4()][self.func_EDAD];
-  var_01 = func_7BDA(func_7CE4(), var_00, self.func_EDAD);
+  var_0 = level.var_4BE0[func_7CE4()][self.var_EDAD];
+  var_1 = func_7BDA(func_7CE4(), var_0, self.var_EDAD);
 
-  for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    if(!isalive(var_1[var_02].func_43A2)) {
-      return var_1[var_02];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!isalive(var_1[var_2].var_43A2)) {
+      return var_1[var_2];
     }
   }
 }
 
 func_7860() {
-  var_00 = level.func_4BE0[func_7CE4()][self.func_EDAD];
-  var_01 = func_7BDA(func_7CE4(), var_00, self.func_EDAD);
+  var_0 = level.var_4BE0[func_7CE4()][self.var_EDAD];
+  var_1 = func_7BDA(func_7CE4(), var_0, self.var_EDAD);
 
-  for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    if(var_1[var_02] == self.func_4397) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_1[var_2] == self.var_4397) {
       continue;
     }
-    if(!isalive(var_1[var_02].func_43A2)) {
-      return var_1[var_02];
+    if(!isalive(var_1[var_2].var_43A2)) {
+      return var_1[var_2];
     }
   }
 }
 
-func_D987(var_00) {
+func_D987(var_0) {
   self endon("stopScript");
   self endon("death");
 
@@ -865,36 +865,36 @@ func_D987(var_00) {
     return;
   }
   if(distance(var_0.origin, self.origin) < 32) {
-    func_DD19(var_00);
+    func_DD19(var_0);
     return;
   }
 
-  var_01 = gettime();
+  var_1 = gettime();
   func_135E3(1);
-  var_02 = gettime();
+  var_2 = gettime();
 
-  if(var_02 - var_01 >= 1000) {
-    func_DD19(var_00);
+  if(var_2 - var_1 >= 1000) {
+    func_DD19(var_0);
   }
 }
 
-func_135E3(var_00) {
+func_135E3(var_0) {
   self endon("killanimscript");
-  wait(var_00);
+  wait(var_0);
 }
 
-func_DD19(var_00) {
-  var_01 = _getaiarray();
-  var_02 = undefined;
+func_DD19(var_0) {
+  var_1 = _getaiarray();
+  var_2 = undefined;
 
-  for(var_03 = 0; var_03 < var_1.size; var_3++) {
-    if(!isDefined(var_1[var_03].node)) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(!isDefined(var_1[var_3].node)) {
       continue;
     }
-    if(var_1[var_03].node != var_00) {
+    if(var_1[var_3].node != var_0) {
       continue;
     }
-    var_1[var_03] notify("eject_from_my_node");
+    var_1[var_3] notify("eject_from_my_node");
     wait 1;
     self notify("eject_from_my_node");
     return 1;
@@ -903,17 +903,17 @@ func_DD19(var_00) {
   return 0;
 }
 
-decrementcolorusers(var_00) {
-  var_0.func_43A2 = self;
-  self.func_4397 = var_00;
+decrementcolorusers(var_0) {
+  var_0.var_43A2 = self;
+  self.var_4397 = var_0;
   self endon("stop_color_move");
   self waittill("death");
-  self.func_4397.func_43A2 = undefined;
+  self.var_4397.var_43A2 = undefined;
 }
 
-func_43A7(var_00) {
-  for(var_01 = 0; var_01 < level.func_43A8.size; var_1++) {
-    if(var_00 == level.func_43A8[var_01]) {
+func_43A7(var_0) {
+  for(var_1 = 0; var_1 < level.var_43A8.size; var_1++) {
+    if(var_0 == level.var_43A8[var_1]) {
       return 1;
     }
   }
@@ -921,147 +921,147 @@ func_43A7(var_00) {
   return 0;
 }
 
-func_178C(var_00, var_01) {
-  var_02 = strtok(var_00, " ");
-  var_02 = func_22AE(var_02);
+func_178C(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  var_2 = func_22AE(var_2);
 
-  foreach(var_04 in var_02) {
-    level.func_22DF[var_01][var_04] = self;
-    level.func_22DC[var_01][var_04] = [];
-    level.func_22DE[var_01][var_04] = [];
+  foreach(var_4 in var_2) {
+    level.var_22DF[var_1][var_4] = self;
+    level.var_22DC[var_1][var_4] = [];
+    level.var_22DE[var_1][var_4] = [];
   }
 }
 
-func_171E(var_00, var_01) {
-  self.func_43A2 = undefined;
-  var_02 = strtok(var_00, " ");
-  var_02 = func_22AE(var_02);
+func_171E(var_0, var_1) {
+  self.var_43A2 = undefined;
+  var_2 = strtok(var_0, " ");
+  var_2 = func_22AE(var_2);
 
-  foreach(var_04 in var_02) {
-    if(isDefined(level.func_22DD[var_01]) && isDefined(level.func_22DD[var_01][var_04])) {
-      level.func_22DD[var_01][var_04] = ::scripts\engine\utility::array_add(level.func_22DD[var_01][var_04], self);
+  foreach(var_4 in var_2) {
+    if(isDefined(level.var_22DD[var_1]) && isDefined(level.var_22DD[var_1][var_4])) {
+      level.var_22DD[var_1][var_4] = ::scripts\engine\utility::array_add(level.var_22DD[var_1][var_4], self);
       continue;
     }
 
-    level.func_22DD[var_01][var_04][0] = self;
-    level.func_22DC[var_01][var_04] = [];
-    level.func_22DE[var_01][var_04] = [];
+    level.var_22DD[var_1][var_4][0] = self;
+    level.var_22DC[var_1][var_4] = [];
+    level.var_22DE[var_1][var_4] = [];
   }
 }
 
 func_AB3A() {
-  if(!isDefined(self.func_4397)) {
+  if(!isDefined(self.var_4397)) {
     return;
   }
-  if(isDefined(self.func_4397.func_43A2) && self.func_4397.func_43A2 == self) {
-    self.func_4397.func_43A2 = undefined;
+  if(isDefined(self.var_4397.var_43A2) && self.var_4397.var_43A2 == self) {
+    self.var_4397.var_43A2 = undefined;
   }
 
-  self.func_4397 = undefined;
+  self.var_4397 = undefined;
   self notify("stop_color_move");
 }
 
 func_7E3A() {
-  var_00 = [];
+  var_0 = [];
 
   if(issubstr(self.classname, "axis") || issubstr(self.classname, "enemy") || issubstr(self.classname, "team3")) {
     var_0["team"] = "axis";
-    var_0["colorTeam"] = self.func_ED34;
+    var_0["colorTeam"] = self.var_ED34;
   }
 
   if(issubstr(self.classname, "ally") || self.type == "civilian") {
     var_0["team"] = "allies";
-    var_0["colorTeam"] = self.func_ED33;
+    var_0["colorTeam"] = self.var_ED33;
   }
 
   if(!isDefined(var_0["colorTeam"])) {
-    var_00 = undefined;
+    var_0 = undefined;
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_E16F() {
-  var_00 = func_7E3A();
+  var_0 = func_7E3A();
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  var_01 = var_0["team"];
-  var_02 = var_0["colorTeam"];
-  var_03 = strtok(var_02, " ");
-  var_03 = func_22AE(var_03);
+  var_1 = var_0["team"];
+  var_2 = var_0["colorTeam"];
+  var_3 = strtok(var_2, " ");
+  var_3 = func_22AE(var_3);
 
-  for(var_04 = 0; var_04 < var_3.size; var_4++) {
-    level.func_22DE[var_01][var_3[var_04]] = ::scripts\engine\utility::array_remove(level.func_22DE[var_01][var_3[var_04]], self);
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    level.var_22DE[var_1][var_3[var_4]] = ::scripts\engine\utility::array_remove(level.var_22DE[var_1][var_3[var_4]], self);
   }
 }
 
-func_16B5(var_00) {
-  level.func_439B[var_00][1]["allies"] = ::func_D968;
-  level.func_439B[var_00][1]["axis"] = ::func_D969;
-  level.func_439B[var_00][0]["allies"] = ::func_D967;
-  level.func_439B[var_00][0]["axis"] = ::func_D967;
+func_16B5(var_0) {
+  level.var_439B[var_0][1]["allies"] = ::func_D968;
+  level.var_439B[var_0][1]["axis"] = ::func_D969;
+  level.var_439B[var_0][0]["allies"] = ::func_D967;
+  level.var_439B[var_0][0]["axis"] = ::func_D967;
 }
 
-func_1729(var_00) {
-  level.func_439B[var_00][1]["allies"] = ::func_D982;
-  level.func_439B[var_00][0]["allies"] = ::func_D982;
-  level.func_439B[var_00][1]["axis"] = ::func_D982;
-  level.func_439B[var_00][0]["axis"] = ::func_D982;
+func_1729(var_0) {
+  level.var_439B[var_0][1]["allies"] = ::func_D982;
+  level.var_439B[var_0][0]["allies"] = ::func_D982;
+  level.var_439B[var_0][1]["axis"] = ::func_D982;
+  level.var_439B[var_0][0]["axis"] = ::func_D982;
 }
 
-func_43AC(var_00, var_01) {
+func_43AC(var_0, var_1) {
   level endon("kill_color_replacements");
   level endon("kill_hidden_reinforcement_waiting");
-  var_02 = func_10735(var_00, var_01);
+  var_2 = func_10735(var_0, var_1);
 
-  if(isDefined(level.func_73F1)) {
-    var_02 thread[[level.func_73F1]]();
+  if(isDefined(level.var_73F1)) {
+    var_2 thread[[level.var_73F1]]();
   }
 
-  var_02 thread func_43AA();
+  var_2 thread func_43AA();
 }
 
 func_43AA() {
   level endon("kill_color_replacements");
   self endon("_disable_reinforcement");
 
-  if(isDefined(self.func_E198)) {
+  if(isDefined(self.var_E198)) {
     return;
   }
-  self.func_E198 = 1;
-  var_00 = self.classname;
-  var_01 = self.func_EDAD;
+  self.var_E198 = 1;
+  var_0 = self.classname;
+  var_1 = self.var_EDAD;
   waittillframeend;
 
   if(isalive(self)) {
     self waittill("death");
   }
 
-  var_02 = level.func_4B58;
+  var_2 = level.var_4B58;
 
-  if(!isDefined(self.func_EDAD)) {
+  if(!isDefined(self.var_EDAD)) {
     return;
   }
-  thread func_43AC(var_00, self.func_EDAD);
+  thread func_43AC(var_0, self.var_EDAD);
 
-  if(isDefined(self) && isDefined(self.func_EDAD)) {
-    var_01 = self.func_EDAD;
+  if(isDefined(self) && isDefined(self.var_EDAD)) {
+    var_1 = self.var_EDAD;
   }
 
   if(isDefined(self) && isDefined(self.origin)) {
-    var_03 = self.origin;
+    var_3 = self.origin;
   }
 
   for(;;) {
-    if(func_78CE(var_01, var_02) == "none") {
+    if(func_78CE(var_1, var_2) == "none") {
       return;
     }
-    var_04 = scripts\sp\utility::func_79C8("allies", var_2[var_01]);
+    var_4 = scripts\sp\utility::func_79C8("allies", var_2[var_1]);
 
-    if(!isDefined(level.func_4392)) {
-      var_04 = scripts\sp\utility::func_E0AF(var_04, var_00);
+    if(!isDefined(level.var_4392)) {
+      var_4 = scripts\sp\utility::func_E0AF(var_4, var_0);
     }
 
     if(!var_4.size) {
@@ -1069,41 +1069,41 @@ func_43AA() {
       continue;
     }
 
-    var_05 = scripts\engine\utility::getclosest(level.player.origin, var_04);
+    var_5 = scripts\engine\utility::getclosest(level.player.origin, var_4);
     waittillframeend;
 
-    if(!isalive(var_05)) {
+    if(!isalive(var_5)) {
       continue;
     }
-    var_05 scripts\sp\utility::func_F3B5(var_01);
+    var_5 scripts\sp\utility::func_F3B5(var_1);
 
-    if(isDefined(level.func_73DF)) {
-      var_05[[level.func_73DF]](var_01);
+    if(isDefined(level.var_73DF)) {
+      var_5[[level.var_73DF]](var_1);
     }
 
-    var_01 = var_2[var_01];
+    var_1 = var_2[var_1];
   }
 }
 
-func_78CE(var_00, var_01) {
-  if(!isDefined(var_00)) {
+func_78CE(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return "none";
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return "none";
   }
 
-  if(!isDefined(var_1[var_00])) {
+  if(!isDefined(var_1[var_0])) {
     return "none";
   }
 
-  return var_1[var_00];
+  return var_1[var_0];
 }
 
 func_73E7() {
-  level.func_73E1 = 1;
-  var_00 = 0;
+  level.var_73E1 = 1;
+  var_0 = 0;
 
   for(;;) {
     for(;;) {
@@ -1118,70 +1118,70 @@ func_73E7() {
     if(!isDefined(level.respawn_threshold)) {
       continue;
     }
-    var_01 = level.player.origin - level.respawn_threshold;
+    var_1 = level.player.origin - level.respawn_threshold;
 
-    if(length(var_01) < 200) {
+    if(length(var_1) < 200) {
       func_D286();
       continue;
     }
 
-    var_02 = anglesToForward((0, level.player getplayerangles()[1], 0));
-    var_03 = vectornormalize(var_01);
-    var_04 = vectordot(var_02, var_03);
+    var_2 = anglesToForward((0, level.player getplayerangles()[1], 0));
+    var_3 = vectornormalize(var_1);
+    var_4 = vectordot(var_2, var_3);
 
-    if(var_04 < 0.2) {
+    if(var_4 < 0.2) {
       func_D286();
       continue;
     }
 
     var_0++;
 
-    if(var_00 < 3) {
+    if(var_0 < 3) {
       continue;
     }
     scripts\engine\utility::flag_set("player_looks_away_from_spawner");
   }
 }
 
-func_78D4(var_00) {
-  if(isDefined(var_00)) {
-    if(!isDefined(level.func_11AE[var_00])) {
-      var_01 = _getspawnerteamarray("allies");
+func_78D4(var_0) {
+  if(isDefined(var_0)) {
+    if(!isDefined(level.var_11AE[var_0])) {
+      var_1 = _getspawnerteamarray("allies");
 
-      foreach(var_03 in var_01) {
-        if(var_3.classname != var_00) {
+      foreach(var_3 in var_1) {
+        if(var_3.classname != var_0) {
           continue;
         }
-        level.func_11AE[var_00] = var_03;
+        level.var_11AE[var_0] = var_3;
         break;
       }
     }
   }
 
-  if(!isDefined(var_00)) {
-    var_03 = scripts\engine\utility::random(level.func_11AE);
+  if(!isDefined(var_0)) {
+    var_3 = scripts\engine\utility::random(level.var_11AE);
 
-    if(!isDefined(var_03)) {
-      var_01 = [];
+    if(!isDefined(var_3)) {
+      var_1 = [];
 
-      foreach(var_06, var_03 in level.func_11AE) {
-        if(isDefined(var_03)) {
-          var_1[var_06] = var_03;
+      foreach(var_6, var_3 in level.var_11AE) {
+        if(isDefined(var_3)) {
+          var_1[var_6] = var_3;
         }
       }
 
-      level.func_11AE = var_01;
-      return scripts\engine\utility::random(level.func_11AE);
+      level.var_11AE = var_1;
+      return scripts\engine\utility::random(level.var_11AE);
     }
 
-    return var_03;
+    return var_3;
   }
 
-  return level.func_11AE[var_00];
+  return level.var_11AE[var_0];
 }
 
 func_E289() {
-  if(isDefined(level.func_E288)) {
+  if(isDefined(level.var_E288)) {
     return 0;
   }
 
@@ -1202,14 +1202,14 @@ func_13692() {
   }
 }
 
-func_10735(var_00, var_01) {
+func_10735(var_0, var_1) {
   level endon("kill_color_replacements");
   level endon("kill_hidden_reinforcement_waiting");
-  var_02 = undefined;
+  var_2 = undefined;
 
   for(;;) {
     if(!func_E289()) {
-      if(!isDefined(level.func_73E1)) {
+      if(!isDefined(level.var_73E1)) {
         thread func_73E7();
       }
 
@@ -1225,46 +1225,46 @@ func_10735(var_00, var_01) {
       scripts\engine\utility::flag_set("friendly_spawner_locked");
     }
 
-    var_03 = func_78D4(var_00);
+    var_3 = func_78D4(var_0);
     var_3.count = 1;
-    var_04 = var_3.origin;
+    var_4 = var_3.origin;
     var_3.origin = level.respawn_threshold;
-    var_02 = var_03 _meth_8393();
-    var_3.origin = var_04;
+    var_2 = var_3 _meth_8393();
+    var_3.origin = var_4;
 
-    if(scripts\sp\utility::func_106ED(var_02)) {
+    if(scripts\sp\utility::func_106ED(var_2)) {
       thread func_AEE0();
       wait 1;
       continue;
     }
 
-    level notify("reinforcement_spawned", var_02);
+    level notify("reinforcement_spawned", var_2);
     break;
   }
 
   for(;;) {
-    if(!isDefined(var_01)) {
+    if(!isDefined(var_1)) {
       break;
     }
-    if(func_78CE(var_01, level.func_4B58) == "none") {
+    if(func_78CE(var_1, level.var_4B58) == "none") {
       break;
     }
-    var_01 = level.func_4B58[var_01];
+    var_1 = level.var_4B58[var_1];
   }
 
-  if(isDefined(var_01)) {
-    var_02 scripts\sp\utility::func_F3B5(var_01);
+  if(isDefined(var_1)) {
+    var_2 scripts\sp\utility::func_F3B5(var_1);
   }
 
   thread func_AEE0();
-  return var_02;
+  return var_2;
 }
 
 func_AEE0() {
   scripts\engine\utility::flag_set("friendly_spawner_locked");
 
-  if(isDefined(level.func_73E0)) {
-    [[level.func_73E0]]();
+  if(isDefined(level.var_73E0)) {
+    [[level.var_73E0]]();
   } else {
     wait 2;
   }
@@ -1273,25 +1273,25 @@ func_AEE0() {
 }
 
 func_D286() {
-  var_00 = 0;
+  var_0 = 0;
   scripts\engine\utility::flag_clear("player_looks_away_from_spawner");
 }
 
 func_A5C7() {
   scripts\engine\utility::flag_clear("friendly_spawner_locked");
   level notify("kill_color_replacements");
-  var_00 = _getaiarray();
-  scripts\engine\utility::array_thread(var_00, ::func_E07E);
+  var_0 = _getaiarray();
+  scripts\engine\utility::array_thread(var_0, ::func_E07E);
 }
 
 func_E07E() {
-  self.func_E198 = undefined;
+  self.var_E198 = undefined;
 }
 
-func_7CE4(var_00) {
-  if(isDefined(self.team) && !isDefined(var_00)) {
-    var_00 = self.team;
+func_7CE4(var_0) {
+  if(isDefined(self.team) && !isDefined(var_0)) {
+    var_0 = self.team;
   }
 
-  return level.func_43A0[var_00];
+  return level.var_43A0[var_0];
 }

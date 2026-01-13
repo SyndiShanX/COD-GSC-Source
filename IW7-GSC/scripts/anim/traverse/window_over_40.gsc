@@ -14,10 +14,10 @@ main() {
 }
 
 func_A4CC() {
-  var_00 = [];
-  var_00["traverseAnim"] = % traverse_window_m_2_run;
+  var_0 = [];
+  var_0["traverseAnim"] = % traverse_window_m_2_run;
   if(getdvarint("ai_iw7", 0) == 0) {
-    scripts\anim\traverse\shared::func_5AC3(var_00);
+    scripts\anim\traverse\shared::func_5AC3(var_0);
     return;
   }
 

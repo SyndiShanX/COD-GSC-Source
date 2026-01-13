@@ -5,18 +5,18 @@
 **************************************************************/
 
 init() {
-  var_00 = spawnStruct();
-  var_00.id = "deployable_speed_strip";
-  var_00.var_39B = "deployable_speed_strip_marker_mp";
-  var_00.streakname = "deployable_speed_strip";
-  var_00.grenadeusefunc = ::scripts\mp\speedboost::func_109C1;
-  level.boxsettings["deployable_speed_strip"] = var_00;
+  var_0 = spawnStruct();
+  var_0.id = "deployable_speed_strip";
+  var_0.var_39B = "deployable_speed_strip_marker_mp";
+  var_0.streakname = "deployable_speed_strip";
+  var_0.grenadeusefunc = ::scripts\mp\speedboost::func_109C1;
+  level.boxsettings["deployable_speed_strip"] = var_0;
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_speed_strip", ::func_128DD);
 }
 
-func_128DD(param_00, param_01) {
-  var_02 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(param_00, "deployable_speed_strip");
-  if(!isDefined(var_02) || !var_02) {
+func_128DD(var_0, var_1) {
+  var_2 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(var_0, "deployable_speed_strip");
+  if(!isDefined(var_2) || !var_2) {
     return 0;
   }
 

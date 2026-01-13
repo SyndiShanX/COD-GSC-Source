@@ -4,7 +4,7 @@
 ***************************************/
 
 main() {
-  self.func_17DB = "";
+  self.var_17DB = "";
   self.team = "axis";
   self.type = "human";
   self.unittype = "soldier";
@@ -14,9 +14,9 @@ main() {
   self.grenadeweapon = "";
   self.grenadeammo = 0;
   self.secondaryweapon = "";
-  self.func_101B4 = "";
+  self.var_101B4 = "";
   self.behaviortreeasset = "enemy_combatant";
-  self.func_1FA9 = "soldier";
+  self.var_1FA9 = "soldier";
 
   if(isai(self)) {
     self _meth_82DC(256.0, 0.0);

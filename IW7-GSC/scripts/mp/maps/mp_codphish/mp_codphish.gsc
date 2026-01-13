@@ -24,12 +24,12 @@ main() {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_00 = getent("apex_unoutofbounds", "targetname");
-  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_00;
+  var_0 = getent("apex_unoutofbounds", "targetname");
+  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
-  foreach(var_00 in level.outofboundstriggerpatches) {
-    if(isDefined(var_00)) {
-      var_00 delete();
+  foreach(var_0 in level.outofboundstriggerpatches) {
+    if(isDefined(var_0)) {
+      var_0 delete();
     }
   }
 }

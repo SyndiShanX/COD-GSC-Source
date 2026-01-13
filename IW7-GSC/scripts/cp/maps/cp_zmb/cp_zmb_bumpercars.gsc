@@ -5,81 +5,81 @@
 ********************************************************/
 
 init_bumper_cars() {
-  var_00 = getEntArray("bumper_car", "targetname");
-  if(!var_00.size) {
+  var_0 = getEntArray("bumper_car", "targetname");
+  if(!var_0.size) {
     return;
   }
 
-  foreach(var_02 in var_00) {
-    if(var_02.origin == (4113.9, 184.9, 112)) {
-      var_02.fast_mover = 1;
+  foreach(var_2 in var_0) {
+    if(var_2.origin == (4113.9, 184.9, 112)) {
+      var_2.fast_mover = 1;
     } else {
-      var_02.fast_mover = 0;
+      var_2.fast_mover = 0;
     }
 
-    var_02.dmgtrigger = getent(var_02.target, "targetname");
-    var_02.dmgtrigger enablelinkto();
-    var_02.dmgtrigger linkto(var_02);
-    var_02.fwd_spot = scripts\engine\utility::getstruct(var_02.target, "targetname");
-    var_02.rear_spot = scripts\engine\utility::getstruct(var_02.fwd_spot.target, "targetname");
-    var_02.can_damage = 0;
-    var_02.fwd_spot.origin = (var_02.fwd_spot.origin[0], var_02.fwd_spot.origin[1], var_02.origin[2]);
-    var_02.rear_spot.origin = (var_02.rear_spot.origin[0], var_02.rear_spot.origin[1], var_02.origin[2]);
+    var_2.dmgtrigger = getent(var_2.target, "targetname");
+    var_2.dmgtrigger enablelinkto();
+    var_2.dmgtrigger linkto(var_2);
+    var_2.fwd_spot = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_2.rear_spot = scripts\engine\utility::getstruct(var_2.fwd_spot.target, "targetname");
+    var_2.can_damage = 0;
+    var_2.fwd_spot.origin = (var_2.fwd_spot.origin[0], var_2.fwd_spot.origin[1], var_2.origin[2]);
+    var_2.rear_spot.origin = (var_2.rear_spot.origin[0], var_2.rear_spot.origin[1], var_2.origin[2]);
     scripts\engine\utility::waitframe();
   }
 
   level waittill("moon_bumpercars power_on");
-  var_04 = getent("bumpercar_clip", "targetname");
-  var_04 connectpaths();
-  var_04 notsolid();
-  foreach(var_06, var_02 in var_00) {
-    var_02.name = "car_" + var_06;
-    var_02 thread kill_zombies();
+  var_4 = getent("bumpercar_clip", "targetname");
+  var_4 connectpaths();
+  var_4 notsolid();
+  foreach(var_6, var_2 in var_0) {
+    var_2.name = "car_" + var_6;
+    var_2 thread kill_zombies();
     scripts\engine\utility::waitframe();
   }
 
   level.bumper_car_impact_spots = scripts\engine\utility::getstructarray("bumpercar_impact", "targetname");
   for(;;) {
-    var_00 = scripts\engine\utility::array_randomize(var_00);
-    foreach(var_06, var_02 in var_00) {
-      var_02 activate_bumper_car(var_06);
+    var_0 = scripts\engine\utility::array_randomize(var_0);
+    foreach(var_6, var_2 in var_0) {
+      var_2 activate_bumper_car(var_6);
     }
   }
 }
 
-activate_bumper_car(param_00) {
-  var_01 = scripts\common\trace::create_character_contents();
-  var_02 = [self];
+activate_bumper_car(var_0) {
+  var_1 = scripts\common\trace::create_character_contents();
+  var_2 = [self];
   if(!isDefined(self.state)) {
     self.state = "rear";
     self.can_damage = 0;
   }
 
-  var_03 = 1.75;
+  var_3 = 1.75;
   if(self.fast_mover) {
-    var_03 = 1.2;
+    var_3 = 1.2;
   }
 
   wait(randomfloatrange(1, 3));
   if(self.state == "fwd") {
     for(;;) {
-      var_04 = physics_spherecast(self.origin + (0, 0, 60), self.fwd_spot.origin + (0, 0, 60), 32, var_01, var_02, "physicsquery_all");
-      if(var_04.size == 0) {
+      var_4 = physics_spherecast(self.origin + (0, 0, 60), self.fwd_spot.origin + (0, 0, 60), 32, var_1, var_2, "physicsquery_all");
+      if(var_4.size == 0) {
         break;
       }
 
-      var_05 = 0;
-      for(var_06 = 0; var_06 < var_04.size; var_06++) {
-        if(!isDefined(var_04[var_06]["entity"])) {
+      var_5 = 0;
+      for(var_6 = 0; var_6 < var_4.size; var_6++) {
+        if(!isDefined(var_4[var_6]["entity"])) {
           continue;
         }
 
-        if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving)) {
-          var_05 = 1;
+        if(isplayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
+          var_5 = 1;
         }
       }
 
-      if(var_05) {
+      if(var_5) {
         return;
       } else {
         break;
@@ -113,27 +113,27 @@ activate_bumper_car(param_00) {
     wait(0.5);
     self setscriptablepartstate("lights", "lights_on");
     self.can_damage = 1;
-    self moveto(self.fwd_spot.origin, var_03);
+    self moveto(self.fwd_spot.origin, var_3);
     self.state = "rear";
   } else {
     for(;;) {
-      var_04 = physics_spherecast(self.origin + (0, 0, 60), self.rear_spot.origin + (0, 0, 60), 32, var_01, var_02, "physicsquery_all");
-      if(var_04.size == 0) {
+      var_4 = physics_spherecast(self.origin + (0, 0, 60), self.rear_spot.origin + (0, 0, 60), 32, var_1, var_2, "physicsquery_all");
+      if(var_4.size == 0) {
         break;
       }
 
-      var_05 = 0;
-      for(var_06 = 0; var_06 < var_04.size; var_06++) {
-        if(!isDefined(var_04[var_06]["entity"])) {
+      var_5 = 0;
+      for(var_6 = 0; var_6 < var_4.size; var_6++) {
+        if(!isDefined(var_4[var_6]["entity"])) {
           continue;
         }
 
-        if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving)) {
-          var_05 = 1;
+        if(isplayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
+          var_5 = 1;
         }
       }
 
-      if(var_05) {
+      if(var_5) {
         return;
       } else {
         break;
@@ -167,7 +167,7 @@ activate_bumper_car(param_00) {
     wait(0.5);
     self setscriptablepartstate("lights", "lights_on");
     self.can_damage = 1;
-    self moveto(self.rear_spot.origin, var_03);
+    self moveto(self.rear_spot.origin, var_3);
     self.state = "fwd";
   }
 
@@ -179,9 +179,9 @@ activate_bumper_car(param_00) {
   wait(0.1);
   self.can_damage = 0;
   self.nav_obs = createnavobstaclebybounds(self.origin, (56, 32, 32), self.angles);
-  var_07 = scripts\engine\utility::getclosest(self.origin, level.bumper_car_impact_spots, 128);
-  if(isDefined(var_07)) {
-    playFX(level._effect["bumpercar_impact"], var_07.origin, anglesToForward((0, 270, 0)), anglestoup((0, 270, 0)));
+  var_7 = scripts\engine\utility::getclosest(self.origin, level.bumper_car_impact_spots, 128);
+  if(isDefined(var_7)) {
+    playFX(level._effect["bumpercar_impact"], var_7.origin, anglesToForward((0, 270, 0)), anglestoup((0, 270, 0)));
   }
 
   self setscriptablepartstate("bumpercar", "impact");
@@ -192,38 +192,38 @@ activate_bumper_car(param_00) {
 
 kill_zombies() {
   for(;;) {
-    self.dmgtrigger waittill("trigger", var_00);
-    var_01 = getEntArray("placed_transponder", "script_noteworthy");
-    foreach(var_03 in var_01) {
-      if(var_00 == var_03) {
-        if(isDefined(var_03.triggerportableradarping) && var_03.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
-          var_03.triggerportableradarping scripts\cp\cp_weapon::placeequipmentfailed(var_00.weapon_name, 1, var_00.origin);
+    self.dmgtrigger waittill("trigger", var_0);
+    var_1 = getEntArray("placed_transponder", "script_noteworthy");
+    foreach(var_3 in var_1) {
+      if(var_0 == var_3) {
+        if(isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
+          var_3.triggerportableradarping scripts\cp\cp_weapon::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
         }
 
-        var_03 notify("detonateExplosive");
+        var_3 notify("detonateExplosive");
       }
     }
 
-    if(!self.can_damage || isDefined(var_00.flung)) {
+    if(!self.can_damage || isDefined(var_0.flung)) {
       continue;
     }
 
-    if(!isplayer(var_00) && !scripts\cp\utility::should_be_affected_by_trap(var_00)) {
+    if(!isplayer(var_0) && !scripts\cp\utility::should_be_affected_by_trap(var_0)) {
       continue;
     }
 
-    if((isplayer(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00)) || var_00.team == "allies") {
-      var_00 thread push_and_damage_player(self);
+    if((isplayer(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0)) || var_0.team == "allies") {
+      var_0 thread push_and_damage_player(self);
       continue;
     }
 
-    var_00 thread fling_zombie(self);
+    var_0 thread fling_zombie(self);
   }
 }
 
-fling_zombie(param_00) {
+fling_zombie(var_0) {
   self endon("death");
-  var_01 = 250;
+  var_1 = 250;
   self playSound("bumpercars_fling_zombie");
   self.flung = 1;
   self.customdeath = 1;
@@ -233,24 +233,24 @@ fling_zombie(param_00) {
   self playSound("trap_bumper_car_zombie_hit");
   self.disable_armor = 1;
   self.nocorpse = 1;
-  var_02 = scripts\engine\utility::get_array_of_closest(self.origin, level.players, undefined, 4, var_01);
-  foreach(var_04 in var_02) {
-    var_04 thread scripts\cp\cp_vo::try_to_play_vo("trap_kill_rover", "zmb_comment_vo", "medium", 5, 0, 0, 1, 25);
+  var_2 = scripts\engine\utility::get_array_of_closest(self.origin, level.players, undefined, 4, var_1);
+  foreach(var_4 in var_2) {
+    var_4 thread scripts\cp\cp_vo::try_to_play_vo("trap_kill_rover", "zmb_comment_vo", "medium", 5, 0, 0, 1, 25);
   }
 
-  self dodamage(self.health + 1000, param_00.origin);
+  self dodamage(self.health + 1000, var_0.origin);
 }
 
-push_and_damage_player(param_00) {
+push_and_damage_player(var_0) {
   self endon("death");
   self playSound("bumpercars_push_damage_plr");
   self.flung = 1;
-  var_01 = sortbydistance(scripts\engine\utility::getstructarray("bumper_car_throw_spots", "targetname"), self.origin);
-  self setorigin(var_01[0].origin, 0);
-  self setvelocity(vectornormalize(self.origin - param_00.origin) * 300 + (0, 0, 100));
+  var_1 = sortbydistance(scripts\engine\utility::getstructarray("bumper_car_throw_spots", "targetname"), self.origin);
+  self setorigin(var_1[0].origin, 0);
+  self setvelocity(vectornormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
   wait(0.1);
   if(isplayer(self) && !scripts\engine\utility::istrue(self.isrewinding)) {
-    self dodamage(self.health + 100, param_00.origin);
+    self dodamage(self.health + 100, var_0.origin);
   }
 
   wait(0.1);

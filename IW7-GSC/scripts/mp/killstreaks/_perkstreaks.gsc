@@ -51,72 +51,72 @@ init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("regen_faster", ::func_128FB);
 }
 
-func_12904(param_00, param_01) {
+func_12904(var_0, var_1) {
   func_58E3("specialty_juiced", "speed_boost");
   return 1;
 }
 
-func_128FA(param_00, param_01) {
+func_128FA(var_0, var_1) {
   func_58E3("specialty_refill_grenades", "refill_grenades");
   return 1;
 }
 
-func_128F9(param_00, param_01) {
+func_128F9(var_0, var_1) {
   func_58E3("specialty_refill_ammo", "refill_ammo");
   return 1;
 }
 
-func_128FB(param_00, param_01) {
+func_128FB(var_0, var_1) {
   func_58E3("specialty_regenfaster", "regen_faster");
   return 1;
 }
 
-func_128D6(param_00, param_01) {
+func_128D6(var_0, var_1) {
   return 1;
 }
 
-tryuseperkstreak(param_00, param_01) {
-  var_02 = scripts\mp\utility::strip_suffix(param_01, "_ks");
-  func_5A5D(var_02);
+tryuseperkstreak(var_0, var_1) {
+  var_2 = scripts\mp\utility::strip_suffix(var_1, "_ks");
+  func_5A5D(var_2);
   return 1;
 }
 
-func_5A5D(param_00) {
-  scripts\mp\utility::giveperk(param_00);
-  thread func_139E8(param_00);
-  thread func_3E15(param_00);
-  if(param_00 == "specialty_hardline") {
+func_5A5D(var_0) {
+  scripts\mp\utility::giveperk(var_0);
+  thread func_139E8(var_0);
+  thread func_3E15(var_0);
+  if(var_0 == "specialty_hardline") {
     scripts\mp\killstreaks\_killstreaks::func_F866();
   }
 
-  scripts\mp\matchdata::logkillstreakevent(param_00 + "_ks", self.origin);
+  scripts\mp\matchdata::logkillstreakevent(var_0 + "_ks", self.origin);
 }
 
-func_58E3(param_00, param_01) {
-  scripts\mp\utility::giveperk(param_00);
-  if(isDefined(param_01)) {
-    scripts\mp\matchdata::logkillstreakevent(param_01, self.origin);
+func_58E3(var_0, var_1) {
+  scripts\mp\utility::giveperk(var_0);
+  if(isDefined(var_1)) {
+    scripts\mp\matchdata::logkillstreakevent(var_1, self.origin);
   }
 }
 
-func_139E8(param_00) {
+func_139E8(var_0) {
   self endon("disconnect");
   self waittill("death");
-  scripts\mp\utility::removeperk(param_00);
+  scripts\mp\utility::removeperk(var_0);
 }
 
-func_3E15(param_00) {
-  var_01 = scripts\mp\class::canplayerplacesentry(param_00);
-  if(var_01 != "specialty_null") {
-    scripts\mp\utility::giveperk(var_01);
-    thread func_139E8(var_01);
+func_3E15(var_0) {
+  var_1 = scripts\mp\class::canplayerplacesentry(var_0);
+  if(var_1 != "specialty_null") {
+    scripts\mp\utility::giveperk(var_1);
+    thread func_139E8(var_1);
   }
 }
 
-func_9EE0(param_00) {
-  for(var_01 = 1; var_01 < 4; var_01++) {
-    if(isDefined(self.pers["killstreaks"][var_01].streakname) && self.pers["killstreaks"][var_01].streakname == param_00) {
-      if(self.pers["killstreaks"][var_01].var_269A) {
+func_9EE0(var_0) {
+  for(var_1 = 1; var_1 < 4; var_1++) {
+    if(isDefined(self.pers["killstreaks"][var_1].streakname) && self.pers["killstreaks"][var_1].streakname == var_0) {
+      if(self.pers["killstreaks"][var_1].var_269A) {
         return 1;
       }
     }

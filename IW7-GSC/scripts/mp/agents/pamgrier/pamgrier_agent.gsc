@@ -23,7 +23,7 @@ func_FAB0() {
   level.agent_funcs["pamgrier"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("cp_disco_female_boss_pam_grier");
   self attach("weapon_zmb_katana_wm_camo", "tag_weapon_right");
 }
@@ -153,11 +153,11 @@ getenemy() {
 }
 
 lookatenemy() {
-  var_00 = getenemy();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", (0, var_02[1], 0));
+  var_0 = getenemy();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", (0, var_2[1], 0));
     return;
   }
 
@@ -178,4 +178,4 @@ clearpassive() {
   self.bpassive = undefined;
 }
 
-ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {}
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {}

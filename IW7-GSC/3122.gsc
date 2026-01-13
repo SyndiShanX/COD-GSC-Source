@@ -1099,302 +1099,302 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_122DB(param_00, param_01, param_02, param_03) {
+func_122DB(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_122D6(param_00, param_01, param_02, param_03) {
+func_122D6(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_11B72(param_00, param_01, param_02, param_03) {
+func_11B72(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isincombat() && !scripts\asm\asm_bb::bb_isanimscripted();
 }
 
-func_11B78(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_BCE7(param_00, param_01, param_03) && !scripts\asm\asm_bb::bb_isanimscripted();
+func_11B78(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_BCE7(var_0, var_1, var_3) && !scripts\asm\asm_bb::bb_isanimscripted();
 }
 
-func_11B6F(param_00, param_01, param_02, param_03) {
+func_11B6F(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimscripted();
 }
 
-func_125D4(param_00, param_01, param_02, param_03) {
+func_125D4(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iscrawlmelee();
 }
 
-func_12273(param_00, param_01, param_02, param_03) {
+func_12273(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee) && !isDefined(self.melee.target);
 }
 
-func_12270(param_00, param_01, param_02, param_03) {
+func_12270(var_0, var_1, var_2, var_3) {
   return !lib_0F3D::func_B5FC();
 }
 
-func_122B0(param_00, param_01, param_02, param_03) {
+func_122B0(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_123DC(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_232B(param_01, "end") && !isDefined(self.var_1198.dismemberedparts);
+func_123DC(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_232B(var_1, "end") && !isDefined(self._blackboard.dismemberedparts);
 }
 
-func_123D2(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm::func_232B(param_01, "end") && !isDefined(self.var_1198.dismemberedparts);
+func_123D2(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::func_232B(var_1, "end") && !isDefined(self._blackboard.dismemberedparts);
 }
 
-func_12364(param_00, param_01, param_02, param_03) {
+func_12364(var_0, var_1, var_2, var_3) {
   return self.a.pose == "stand" && scripts\asm\asm::func_232B("pain_cover_right", "end");
 }
 
-func_1236E(param_00, param_01, param_02, param_03) {
+func_1236E(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch" && scripts\asm\asm::func_232B("pain_cover_right", "end");
 }
 
-func_1234A(param_00, param_01, param_02, param_03) {
+func_1234A(var_0, var_1, var_2, var_3) {
   return self.a.pose == "stand" && scripts\asm\asm::func_232B("pain_cover_left", "end");
 }
 
-func_12354(param_00, param_01, param_02, param_03) {
+func_12354(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch" && scripts\asm\asm::func_232B("pain_cover_left", "end");
 }
 
-func_12141(param_00, param_01, param_02, param_03) {
+func_12141(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isselfdestruct();
 }
 
-func_12118(param_00, param_01, param_02, param_03) {
+func_12118(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_120E0(param_00, param_01, param_02, param_03) {
+func_120E0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_120CA(param_00, param_01, param_02, param_03) {
+func_120CA(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested() && scripts\asm\asm_bb::bb_movetyperequested("combat");
 }
 
-func_120CB(param_00, param_01, param_02, param_03) {
+func_120CB(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_meleechargerequested();
 }
 
-func_11F96(param_00, param_01, param_02, param_03) {
+func_11F96(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11F7B(param_00, param_01, param_02, param_03) {
+func_11F7B(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291A();
 }
 
-func_11F4D(param_00, param_01, param_02, param_03) {
+func_11F4D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-func_11F59(param_00, param_01, param_02, param_03) {
+func_11F59(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "full exposed";
 }
 
-func_11F6E(param_00, param_01, param_02, param_03) {
+func_11F6E(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-func_11CA3(param_00, param_01, param_02, param_03) {
+func_11CA3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\shared_utility::isatcovernode();
 }
 
-func_11C85(param_00, param_01, param_02, param_03) {
+func_11C85(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291A();
 }
 
-func_11CAB(param_00, param_01, param_02, param_03) {
+func_11CAB(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11C0D(param_00, param_01, param_02, param_03) {
+func_11C0D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-func_11C19(param_00, param_01, param_02, param_03) {
+func_11C19(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11C33(param_00, param_01, param_02, param_03) {
+func_11C33(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11C69(param_00, param_01, param_02, param_03) {
+func_11C69(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11EAD(param_00, param_01, param_02, param_03) {
+func_11EAD(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11EC3(param_00, param_01, param_02, param_03) {
+func_11EC3(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11F30(param_00, param_01, param_02, param_03) {
+func_11F30(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11EE9(param_00, param_01, param_02, param_03) {
+func_11EE9(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291A();
 }
 
-func_11F14(param_00, param_01, param_02, param_03) {
+func_11F14(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "B";
 }
 
-func_11F06(param_00, param_01, param_02, param_03) {
+func_11F06(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "A";
 }
 
-func_11F22(param_00, param_01, param_02, param_03) {
+func_11F22(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "lean";
 }
 
-func_11EDC(param_00, param_01, param_02, param_03) {
+func_11EDC(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-func_11E87(param_00, param_01, param_02, param_03) {
+func_11E87(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11E55(param_00, param_01, param_02, param_03) {
+func_11E55(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "A";
 }
 
-func_11E63(param_00, param_01, param_02, param_03) {
+func_11E63(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "B";
 }
 
-func_11E71(param_00, param_01, param_02, param_03) {
+func_11E71(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "lean";
 }
 
-func_11E0A(param_00, param_01, param_02, param_03) {
+func_11E0A(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11E1E(param_00, param_01, param_02, param_03) {
+func_11E1E(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11E31(param_00, param_01, param_02, param_03) {
+func_11E31(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-func_11DE4(param_00, param_01, param_02, param_03) {
+func_11DE4(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11D9C(param_00, param_01, param_02, param_03) {
+func_11D9C(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291A();
 }
 
-func_11DBA(param_00, param_01, param_02, param_03) {
+func_11DBA(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "A";
 }
 
-func_11DC8(param_00, param_01, param_02, param_03) {
+func_11DC8(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "B";
 }
 
-func_11DD6(param_00, param_01, param_02, param_03) {
+func_11DD6(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "lean";
 }
 
-func_11D6D(param_00, param_01, param_02, param_03) {
+func_11D6D(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11D78(param_00, param_01, param_02, param_03) {
+func_11D78(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11D8E(param_00, param_01, param_02, param_03) {
+func_11D8E(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-func_11D51(param_00, param_01, param_02, param_03) {
+func_11D51(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_11D24(param_00, param_01, param_02, param_03) {
+func_11D24(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "A";
 }
 
-func_11D33(param_00, param_01, param_02, param_03) {
+func_11D33(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "B";
 }
 
-func_11D42(param_00, param_01, param_02, param_03) {
+func_11D42(var_0, var_1, var_2, var_3) {
   return lib_0C5E::func_FFD9() && scripts\asm\asm_bb::func_2929() == "lean";
 }
 
-func_11CD9(param_00, param_01, param_02, param_03) {
+func_11CD9(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11CED(param_00, param_01, param_02, param_03) {
+func_11CED(var_0, var_1, var_2, var_3) {
   return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-func_11D00(param_00, param_01, param_02, param_03) {
+func_11D00(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-func_1257B(param_00, param_01, param_02, param_03) {
+func_1257B(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_125AC(param_00, param_01, param_02, param_03) {
+func_125AC(var_0, var_1, var_2, var_3) {
   return self.livestreamingenable || !scripts\asm\asm_bb::bb_movetyperequested("combat");
 }
 
-func_12597(param_00, param_01, param_02, param_03) {
+func_12597(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12511(param_00, param_01, param_02, param_03) {
+func_12511(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_1209D(param_00, param_01, param_02, param_03) {
+func_1209D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12021(param_00, param_01, param_02, param_03) {
+func_12021(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_1201A(param_00, param_01, param_02, param_03) {
+func_1201A(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12418(param_00, param_01, param_02, param_03) {
+func_12418(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm::asm_iscrawlmelee();
 }
 
-func_1225A(param_00, param_01, param_02, param_03) {
+func_1225A(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm::asm_iscrawlmelee();
 }
 
-func_12024(param_00, param_01, param_02, param_03) {
+func_12024(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iscrawlmelee();
 }
 
-func_1202A(param_00, param_01, param_02, param_03) {
+func_1202A(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_1202E(param_00, param_01, param_02, param_03) {
+func_1202E(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iscrawlmelee();
 }
 
-func_123FC(param_00, param_01, param_02, param_03) {
+func_123FC(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iscrawlmelee();
 }

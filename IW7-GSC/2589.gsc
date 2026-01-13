@@ -4,18 +4,18 @@
  * Script: 2589.gsc
 ************************/
 
-func_234D(param_00) {
+func_234D(var_0) {
   scripts\asm\asm::func_234E();
   self.asm = spawnStruct();
   self.asm.animoverrides = [];
   self.asm.var_7360 = 0;
   self.var_164D = [];
-  self.asmname = param_00;
+  self.asmname = var_0;
   self.var_718F = ::func_230F;
   self.var_7193 = ::func_235A;
   self.var_7192 = ::func_2347;
   self.var_7191 = ::asm_getallanimsforstate;
-  scripts\asm\asm::func_2351(param_00, 1);
+  scripts\asm\asm::func_2351(var_0, 1);
   self.a = spawnStruct();
   self.a.pose = "stand";
   self.a.var_85E2 = "stand";
@@ -56,15 +56,15 @@ func_C878() {
       continue;
     }
 
-    foreach(var_04, var_01 in self.var_164D) {
-      var_02 = var_01.var_4BC0;
-      var_03 = level.asm[var_04].states[var_02];
-      if(!isDefined(var_03.var_C87F)) {
+    foreach(var_4, var_1 in self.var_164D) {
+      var_2 = var_1.var_4BC0;
+      var_3 = level.asm[var_4].states[var_2];
+      if(!isDefined(var_3.var_C87F)) {
         continue;
       }
 
-      scripts\asm\asm::func_2388(var_04, var_02, var_03, var_03.var_116FB);
-      scripts\asm\asm::func_238A(var_04, var_03.var_C87F, 0.2, undefined, undefined, var_03.var_C87C);
+      scripts\asm\asm::func_2388(var_4, var_2, var_3, var_3.var_116FB);
+      scripts\asm\asm::func_238A(var_4, var_3.var_C87F, 0.2, undefined, undefined, var_3.var_C87C);
     }
   }
 }
@@ -73,37 +73,37 @@ traversehandler() {
   self endon("death");
   self endon("terminate_ai_threads");
   for(;;) {
-    self waittill("traverse_begin", var_00, var_01);
-    var_02 = self.asmname;
-    var_03 = level.asm[var_02];
-    var_04 = var_03.states[var_00];
-    if(!isDefined(var_04)) {
-      var_00 = "traverse_external";
+    self waittill("traverse_begin", var_0, var_1);
+    var_2 = self.asmname;
+    var_3 = level.asm[var_2];
+    var_4 = var_3.states[var_0];
+    if(!isDefined(var_4)) {
+      var_0 = "traverse_external";
     }
 
-    var_05 = self.var_164D[var_02].var_4BC0;
-    var_06 = var_03.states[var_05];
-    scripts\asm\asm::func_2388(var_02, var_05, var_06, var_06.var_116FB);
-    scripts\asm\asm::func_238A(var_02, var_00, 0.2, undefined, undefined, undefined);
+    var_5 = self.var_164D[var_2].var_4BC0;
+    var_6 = var_3.states[var_5];
+    scripts\asm\asm::func_2388(var_2, var_5, var_6, var_6.var_116FB);
+    scripts\asm\asm::func_238A(var_2, var_0, 0.2, undefined, undefined, undefined);
   }
 }
 
 func_1004C() {
-  var_00 = 300;
+  var_0 = 300;
   if(isDefined(self.allowpain) && self.allowpain == 0) {
     return 0;
   }
 
   if(!scripts\asm\asm_bb::bb_wantstostrafe()) {
     if(isDefined(self.vehicle_getspawnerarray)) {
-      if(self pathdisttogoal() < var_00) {
+      if(self pathdisttogoal() < var_0) {
         return 0;
       }
 
-      var_01 = self getspectatepoint();
-      if(isDefined(var_01)) {
-        var_02 = distancesquared(self.origin, var_01.origin);
-        if(var_02 < var_00 * var_00) {
+      var_1 = self getspectatepoint();
+      if(isDefined(var_1)) {
+        var_2 = distancesquared(self.origin, var_1.origin);
+        if(var_2 < var_0 * var_0) {
           return 0;
         }
       }
@@ -113,59 +113,59 @@ func_1004C() {
   return 1;
 }
 
-func_235F(param_00, param_01, param_02, param_03, param_04) {
-  self endon(param_01 + "_finished");
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+func_235F(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var_05 = scripts\asm\asm::func_2341(param_00, param_01);
+  var_5 = scripts\asm\asm::func_2341(var_0, var_1);
   for(;;) {
-    var_06 = asm_getanim(param_00, param_01);
-    self setanimstate(param_01, var_06, param_03);
-    scripts\mp\agents\_scriptedagents::func_1384C(param_01, "end", param_01, var_06, var_05);
+    var_6 = asm_getanim(var_0, var_1);
+    self setanimstate(var_1, var_6, var_3);
+    scripts\mp\agents\_scriptedagents::func_1384C(var_1, "end", var_1, var_6, var_5);
   }
 }
 
-func_2345(param_00, param_01, param_02, param_03) {
-  scripts\asm\asm::asm_fireevent(param_01, param_00);
+func_2345(var_0, var_1, var_2, var_3) {
+  scripts\asm\asm::asm_fireevent(var_1, var_0);
 }
 
-func_2365(param_00, param_01, param_02, param_03, param_04) {
-  self endon(param_01 + "_finished");
-  var_05 = scripts\asm\asm::func_2341(param_00, param_01);
-  if(isDefined(param_04)) {
-    scripts\mp\agents\_scriptedagents::func_CED2(param_01, param_03, param_04, param_01, "end", var_05);
+func_2365(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  var_5 = scripts\asm\asm::func_2341(var_0, var_1);
+  if(isDefined(var_4)) {
+    scripts\mp\agents\_scriptedagents::func_CED2(var_1, var_3, var_4, var_1, "end", var_5);
     return;
   }
 
-  scripts\mp\agents\_scriptedagents::func_CED5(param_01, param_03, param_01, "end", var_05);
+  scripts\mp\agents\_scriptedagents::func_CED5(var_1, var_3, var_1, "end", var_5);
 }
 
-func_2366(param_00, param_01, param_02, param_03) {
-  func_2364(param_00, param_01, param_02, param_03);
+func_2366(var_0, var_1, var_2, var_3) {
+  func_2364(var_0, var_1, var_2, var_3);
 }
 
-func_2364(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = asm_getanim(param_00, param_01);
-  var_05 = scripts\asm\asm::func_2341(param_00, param_01);
-  scripts\mp\agents\_scriptedagents::func_CED5(param_01, var_04, param_01, "end", var_05);
+func_2364(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = asm_getanim(var_0, var_1);
+  var_5 = scripts\asm\asm::func_2341(var_0, var_1);
+  scripts\mp\agents\_scriptedagents::func_CED5(var_1, var_4, var_1, "end", var_5);
 }
 
-func_2367(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = asm_getanim(param_00, param_01);
-  var_05 = scripts\asm\asm::func_2341(param_00, param_01);
-  scripts\mp\agents\_scriptedagents::func_CED5(param_01, var_04, param_01, param_03, var_05);
+func_2367(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = asm_getanim(var_0, var_1);
+  var_5 = scripts\asm\asm::func_2341(var_0, var_1);
+  scripts\mp\agents\_scriptedagents::func_CED5(var_1, var_4, var_1, var_3, var_5);
 }
 
-func_2361(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_2361(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
 }
 
-func_2382(param_00, param_01) {
-  if(!isDefined(param_01.var_4E6D)) {
+func_2382(var_0, var_1) {
+  if(!isDefined(var_1.var_4E6D)) {
     return 0;
   }
 
@@ -176,23 +176,23 @@ func_2382(param_00, param_01) {
   return 1;
 }
 
-func_237E(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = "code_move";
+func_237E(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "code_move";
   }
 
-  self ghostlaunched(param_00);
+  self ghostlaunched(var_0);
 }
 
-func_237F(param_00) {
-  switch (param_00) {
+func_237F(var_0) {
+  switch (var_0) {
     case "face goal":
-      var_01 = self _meth_8150();
-      if(isDefined(var_01)) {
-        var_02 = var_01 - self.origin;
-        var_03 = vectornormalize(var_02);
-        var_04 = vectortoangles(var_03);
-        self orientmode("face angle abs", var_04);
+      var_1 = self _meth_8150();
+      if(isDefined(var_1)) {
+        var_2 = var_1 - self.origin;
+        var_3 = vectornormalize(var_2);
+        var_4 = vectortoangles(var_3);
+        self orientmode("face angle abs", var_4);
         break;
       }
 
@@ -204,18 +204,18 @@ func_237F(param_00) {
 
     case "face motion":
     case "face enemy":
-      self orientmode(param_00);
+      self orientmode(var_0);
       break;
 
     case "face node":
-      var_05 = self.angles[1];
-      var_06 = 1024;
-      if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_06) {
-        var_05 = scripts\asm\shared_utility::getnodeforwardyaw(self.target_getindexoftarget);
+      var_5 = self.angles[1];
+      var_6 = 1024;
+      if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_6) {
+        var_5 = scripts\asm\shared_utility::getnodeforwardyaw(self.target_getindexoftarget);
       }
 
-      var_07 = (0, var_05, 0);
-      self orientmode("face angle abs", var_07);
+      var_7 = (0, var_5, 0);
+      self orientmode("face angle abs", var_7);
       break;
 
     default:
@@ -223,60 +223,60 @@ func_237F(param_00) {
   }
 }
 
-func_230F(param_00) {
-  if(isDefined(param_00.var_1FBA)) {
-    func_237E(param_00.var_1FBA);
+func_230F(var_0) {
+  if(isDefined(var_0.var_1FBA)) {
+    func_237E(var_0.var_1FBA);
   }
 
-  if(isDefined(param_00.var_C704)) {
-    func_237F(param_00.var_C704);
+  if(isDefined(var_0.var_C704)) {
+    func_237F(var_0.var_C704);
   }
 }
 
-asm_getanim(param_00, param_01) {
-  var_02 = level.asm[param_00].states[param_01].var_71A5;
-  var_03 = level.asm[param_00].states[param_01].var_7DC8;
-  var_04 = self[[var_02]](param_00, param_01, var_03);
-  return var_04;
+asm_getanim(var_0, var_1) {
+  var_2 = level.asm[var_0].states[var_1].var_71A5;
+  var_3 = level.asm[var_0].states[var_1].var_7DC8;
+  var_4 = self[[var_2]](var_0, var_1, var_3);
+  return var_4;
 }
 
 func_7EA3() {
-  var_00 = undefined;
+  var_0 = undefined;
   if(!isDefined(self.heat)) {
-    var_01 = 400;
+    var_1 = 400;
   } else {
-    var_01 = 4096;
+    var_1 = 4096;
   }
 
-  if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_01) {
-    var_00 = self.target_getindexoftarget;
-  } else if(isDefined(self.weaponmaxdist) && distancesquared(self.origin, self.weaponmaxdist.origin) < var_01) {
-    var_00 = self.weaponmaxdist;
+  if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_1) {
+    var_0 = self.target_getindexoftarget;
+  } else if(isDefined(self.weaponmaxdist) && distancesquared(self.origin, self.weaponmaxdist.origin) < var_1) {
+    var_0 = self.weaponmaxdist;
   }
 
-  if(isDefined(var_00) && isDefined(self.heat) && scripts\engine\utility::absangleclamp180(self.angles[1] - var_00.angles[1]) > 30) {
+  if(isDefined(var_0) && isDefined(self.heat) && scripts\engine\utility::absangleclamp180(self.angles[1] - var_0.angles[1]) > 30) {
     return undefined;
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_235A(param_00, param_01) {
-  param_01 = tolower(param_01);
-  return self getsafecircleradius(param_00, param_01);
+func_235A(var_0, var_1) {
+  var_1 = tolower(var_1);
+  return self getsafecircleradius(var_0, var_1);
 }
 
-func_2347(param_00, param_01) {
-  param_01 = tolower(param_01);
-  if(!self getsantizedhealth(param_00, param_01)) {
+func_2347(var_0, var_1) {
+  var_1 = tolower(var_1);
+  if(!self getsantizedhealth(var_0, var_1)) {
     return 0;
   }
 
   return 1;
 }
 
-asm_getallanimsforstate(param_00, param_01) {
-  var_02 = asm_getanim(param_00, param_01);
-  var_03 = self getsafecircleorigin(param_01, var_02);
-  return var_03;
+asm_getallanimsforstate(var_0, var_1) {
+  var_2 = asm_getanim(var_0, var_1);
+  var_3 = self getsafecircleorigin(var_1, var_2);
+  return var_3;
 }

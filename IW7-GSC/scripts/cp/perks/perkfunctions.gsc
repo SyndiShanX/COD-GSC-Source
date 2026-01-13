@@ -5,8 +5,8 @@
 ************************/
 
 func_96C9() {
-  var_00 = spawnStruct();
-  return var_00;
+  var_0 = spawnStruct();
+  return var_0;
 }
 
 func_F4EC() {}
@@ -14,9 +14,9 @@ func_F4EC() {}
 func_12C30() {}
 
 func_96C2() {
-  var_00 = spawnStruct();
-  var_00.melee_scalar = 1;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.melee_scalar = 1;
+  return var_0;
 }
 
 func_F4DD() {
@@ -73,9 +73,9 @@ func_12C25() {
 }
 
 func_96BF() {
-  var_00 = spawnStruct();
-  var_00.bullet_damage_scalar = 1;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.bullet_damage_scalar = 1;
+  return var_0;
 }
 
 func_F4CE() {
@@ -155,12 +155,12 @@ func_12C16() {
 }
 
 func_96C8() {
-  var_00 = spawnStruct();
-  var_00.revive_time_scalar = 1;
-  var_00.var_76AC = 1;
-  var_00.var_BC6F = 1;
-  var_00.var_E496 = 1;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.revive_time_scalar = 1;
+  var_0.var_76AC = 1;
+  var_0.var_BC6F = 1;
+  var_0.var_E496 = 1;
+  return var_0;
 }
 
 func_F4E7() {
@@ -253,19 +253,19 @@ func_12C2F() {
   self.perk_data["medic"].var_E496 = 1;
 }
 
-func_B526(param_00) {
+func_B526(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("end_medic_health_regen");
-  var_01 = param_00 > 0;
+  var_1 = var_0 > 0;
   for(;;) {
-    foreach(var_03 in level.players) {
-      if(scripts\cp\utility::isreallyalive(var_03) && !isDefined(var_03.var_B528)) {
-        if(var_01 && distancesquared(self.origin, var_03.origin) > param_00) {
+    foreach(var_3 in level.players) {
+      if(scripts\cp\utility::isreallyalive(var_3) && !isDefined(var_3.var_B528)) {
+        if(var_1 && distancesquared(self.origin, var_3.origin) > var_0) {
           continue;
         }
 
-        var_03 thread func_B527();
+        var_3 thread func_B527();
       }
     }
 
@@ -285,15 +285,15 @@ func_B527() {
 }
 
 func_96CB() {
-  var_00 = spawnStruct();
-  var_00.var_5B99 = 1;
-  var_00.var_5BB8 = 1;
-  var_00.var_1269D = 1;
-  var_00.var_1269F = 1;
-  var_00.var_1269E = 1;
-  var_00.var_4B35 = 1;
-  var_00.var_E18F = 1;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.var_5B99 = 1;
+  var_0.var_5BB8 = 1;
+  var_0.var_1269D = 1;
+  var_0.var_1269F = 1;
+  var_0.var_1269E = 1;
+  var_0.var_4B35 = 1;
+  var_0.var_E18F = 1;
+  return var_0;
 }
 
 func_F510() {
@@ -373,10 +373,10 @@ func_12C58() {
 }
 
 func_96CC() {
-  var_00 = spawnStruct();
-  var_00.var_2183 = 0;
-  var_00.var_2182 = 0;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.var_2183 = 0;
+  var_0.var_2182 = 0;
+  return var_0;
 }
 
 func_F515() {
@@ -430,11 +430,11 @@ func_12C5D() {
 }
 
 func_96C0() {
-  var_00 = spawnStruct();
-  var_00.explosive_damage_scalar = 1;
-  var_00.offhand_count = 0;
-  var_00.var_AAAA = 0;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.explosive_damage_scalar = 1;
+  var_0.offhand_count = 0;
+  var_0.var_AAAA = 0;
+  return var_0;
 }
 
 func_F4D3() {
@@ -501,25 +501,25 @@ func_DE49() {
   self endon("death");
   self endon("disconnect");
   self endon("game_ended");
-  var_00 = 5;
+  var_0 = 5;
   for(;;) {
-    var_01 = self getrunningforwardpainanim("aliensemtex_mp");
-    if(var_01 == 0) {
-      for(var_02 = 1; var_02 <= scripts\cp\perks\perk_utility::perk_getoffhandcount(); var_02++) {
+    var_1 = self getrunningforwardpainanim("aliensemtex_mp");
+    if(var_1 == 0) {
+      for(var_2 = 1; var_2 <= scripts\cp\perks\perk_utility::perk_getoffhandcount(); var_2++) {
         self _meth_831C("other");
         scripts\cp\utility::filloffhandweapons("aliensemtex_mp", 1);
-        wait(var_00);
+        wait(var_0);
       }
     }
 
-    wait(var_00);
+    wait(var_0);
   }
 }
 
 func_96C1() {
-  var_00 = spawnStruct();
-  var_00.var_8723 = 1;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.var_8723 = 1;
+  return var_0;
 }
 
 func_F4D8() {
@@ -663,28 +663,28 @@ func_28ED() {
   self endon("sprint_slide_end");
   self endon("battleSlide_unset");
   for(;;) {
-    var_00 = self getvelocity();
-    var_01 = lengthsquared(var_00);
-    var_02 = anglestoup(self.angles);
-    var_03 = anglesToForward(self.angles);
-    var_04 = (0, 0, 0);
-    var_05 = (0, 0, 0);
-    var_06 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
-    if(var_01 > 100) {
-      var_07 = vectortoangles(var_00);
-      var_03 = anglesToForward(var_07);
-      var_02 = anglestoup(var_07);
-      var_04 = var_03 * 40;
-      var_05 = var_02 * 28;
-      var_08 = physics_raycast(self getEye(), self.origin + var_04 + var_05, var_06, undefined, 0, "physicsquery_closest");
-      if(isDefined(var_08) && var_08.size > 0) {
-        var_04 = var_03 * vectordot(var_08[0]["position"] - self.origin, var_03);
-        var_04 = var_04 - var_03 * 3;
+    var_0 = self getvelocity();
+    var_1 = lengthsquared(var_0);
+    var_2 = anglestoup(self.angles);
+    var_3 = anglesToForward(self.angles);
+    var_4 = (0, 0, 0);
+    var_5 = (0, 0, 0);
+    var_6 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
+    if(var_1 > 100) {
+      var_7 = vectortoangles(var_0);
+      var_3 = anglesToForward(var_7);
+      var_2 = anglestoup(var_7);
+      var_4 = var_3 * 40;
+      var_5 = var_2 * 28;
+      var_8 = physics_raycast(self getEye(), self.origin + var_4 + var_5, var_6, undefined, 0, "physicsquery_closest");
+      if(isDefined(var_8) && var_8.size > 0) {
+        var_4 = var_3 * vectordot(var_8[0]["position"] - self.origin, var_3);
+        var_4 = var_4 - var_3 * 3;
       }
     }
 
-    var_09 = level.spawned_enemies;
-    foreach(var_0B in var_09) {
+    var_9 = level.spawned_enemies;
+    foreach(var_0B in var_9) {
       if(!isDefined(var_0B) || var_0B == self || !scripts\cp\utility::isreallyalive(var_0B)) {
         continue;
       }
@@ -697,89 +697,89 @@ func_28ED() {
         continue;
       }
 
-      if(!func_D64A(2304, 56, self.origin + var_04, var_02, var_0B gettagorigin("j_mainroot"))) {
+      if(!func_D64A(2304, 56, self.origin + var_4, var_2, var_0B gettagorigin("j_mainroot"))) {
         continue;
       }
 
-      if(func_28E8(var_0B, var_03)) {
+      if(func_28E8(var_0B, var_3)) {
         continue;
       }
 
-      if(func_28E7(var_0B, self.origin + var_04 + var_05, var_06)) {
+      if(func_28E7(var_0B, self.origin + var_4 + var_5, var_6)) {
         continue;
       }
 
       func_28F5(var_0B);
       func_28E3(var_0B);
-      func_28EB(var_0B, var_03);
+      func_28EB(var_0B, var_3);
     }
 
     scripts\engine\utility::waitframe();
   }
 }
 
-func_28F5(param_00) {
+func_28F5(var_0) {
   if(!isDefined(self.var_28F7)) {
     self.var_28F7 = [];
   }
 
-  if(!func_28EA(param_00)) {
-    self.var_28F7[self.var_28F7.size] = param_00 getentitynumber();
+  if(!func_28EA(var_0)) {
+    self.var_28F7[self.var_28F7.size] = var_0 getentitynumber();
     return 1;
   }
 
   return 0;
 }
 
-func_28E3(param_00) {
-  var_01 = int(min(param_00.maxhealth, 1000));
-  if(var_01 >= self.health) {
+func_28E3(var_0) {
+  var_1 = int(min(var_0.maxhealth, 1000));
+  if(var_1 >= self.health) {
     self.customdeath = 1;
-    thread func_28F0(param_00);
+    thread func_28F0(var_0);
   }
 
-  param_00 dodamage(var_01, self.origin, self, self, "MOD_EXPLOSIVE", "battleslide_mp");
-  thread func_28E4(param_00);
+  var_0 dodamage(var_1, self.origin, self, self, "MOD_EXPLOSIVE", "battleslide_mp");
+  thread func_28E4(var_0);
 }
 
-func_28EB(param_00, param_01) {
-  var_02 = param_00.origin - self.origin;
-  var_03 = length(var_02);
-  if(var_03 != 0) {
-    var_04 = var_02 / var_03;
-    var_05 = param_00 getvelocity();
-    var_05 = var_05 - var_04 * vectordot(var_05, var_04);
-    var_05 = var_05 + var_04 * 800;
-    var_05 = var_05 + (0, 0, 175);
-    param_00 setvelocity(var_05);
-    param_00 shellshock("battleslide_mp", 1.5);
+func_28EB(var_0, var_1) {
+  var_2 = var_0.origin - self.origin;
+  var_3 = length(var_2);
+  if(var_3 != 0) {
+    var_4 = var_2 / var_3;
+    var_5 = var_0 getvelocity();
+    var_5 = var_5 - var_4 * vectordot(var_5, var_4);
+    var_5 = var_5 + var_4 * 800;
+    var_5 = var_5 + (0, 0, 175);
+    var_0 setvelocity(var_5);
+    var_0 shellshock("battleslide_mp", 1.5);
   }
 }
 
-func_28E8(param_00, param_01) {
-  return vectordot(param_01, param_00.origin - self.origin) < 0;
+func_28E8(var_0, var_1) {
+  return vectordot(var_1, var_0.origin - self.origin) < 0;
 }
 
-func_28E7(param_00, param_01, param_02) {
-  var_03 = physics_raycast(param_01, param_00 gettagorigin("j_mainroot"), param_02, undefined, 0, "physicsquery_closest");
-  if(isDefined(var_03) && var_03.size > 0) {
+func_28E7(var_0, var_1, var_2) {
+  var_3 = physics_raycast(var_1, var_0 gettagorigin("j_mainroot"), var_2, undefined, 0, "physicsquery_closest");
+  if(isDefined(var_3) && var_3.size > 0) {
     return 1;
   }
 
   return 0;
 }
 
-func_28E9(param_00, param_01) {
-  if(isDefined(param_00.hasriotshield) && param_00.hasriotshield) {
-    var_02 = param_01 - param_00.origin;
-    var_03 = vectornormalize((var_02[0], var_02[1], 0));
-    var_04 = anglesToForward(param_00.angles);
-    var_05 = vectordot(var_04, var_02);
-    if(param_00.hasriotshieldequipped) {
-      if(var_05 > 0.766) {
+func_28E9(var_0, var_1) {
+  if(isDefined(var_0.hasriotshield) && var_0.hasriotshield) {
+    var_2 = var_1 - var_0.origin;
+    var_3 = vectornormalize((var_2[0], var_2[1], 0));
+    var_4 = anglesToForward(var_0.angles);
+    var_5 = vectordot(var_4, var_2);
+    if(var_0.hasriotshieldequipped) {
+      if(var_5 > 0.766) {
         return 1;
       }
-    } else if(var_05 < -0.766) {
+    } else if(var_5 < -0.766) {
       return 1;
     }
   }
@@ -787,22 +787,22 @@ func_28E9(param_00, param_01) {
   return 0;
 }
 
-func_28EA(param_00) {
+func_28EA(var_0) {
   if(!isDefined(self.var_28F7)) {
     return 0;
   }
 
-  var_01 = param_00 getentitynumber();
-  return scripts\engine\utility::array_contains(self.var_28F7, var_01);
+  var_1 = var_0 getentitynumber();
+  return scripts\engine\utility::array_contains(self.var_28F7, var_1);
 }
 
-func_28E6(param_00) {
-  return isDefined(param_00.var_28E6);
+func_28E6(var_0) {
+  return isDefined(var_0.var_28E6);
 }
 
-func_28E4(param_00) {
+func_28E4(var_0) {
   self playrumbleonentity("artillery_rumble");
-  param_00 playrumbleonentity("artillery_rumble");
+  var_0 playrumbleonentity("artillery_rumble");
   playrumbleonposition("slide_collision", self.origin);
   earthquake(0.5, 0.5, self.origin, 96);
   playsoundatpos(self.origin, "slide_impact");
@@ -816,44 +816,44 @@ func_28F3() {
   self endon("sprint_slide_end");
   self playlocalsound("melee_boost");
   self playsoundonmovingent("melee_boost_npc");
-  var_00 = 0;
-  var_01 = 5;
-  while(var_01 > var_00) {
-    var_02 = spawnfxforclient(level.var_28C9, self getEye(), self);
-    thread func_28F4(var_02, 0.1);
-    triggerfx(var_02);
+  var_0 = 0;
+  var_1 = 5;
+  while(var_1 > var_0) {
+    var_2 = spawnfxforclient(level.var_28C9, self getEye(), self);
+    thread func_28F4(var_2, 0.1);
+    triggerfx(var_2);
     earthquake(0.2, 0.25, self.origin, 96);
     self playrumbleonentity("slide_loop");
-    var_00++;
+    var_0++;
     scripts\engine\utility::waitframe();
   }
 }
 
-func_28F4(param_00, param_01) {
-  wait(param_01);
-  if(isDefined(param_00)) {
-    param_00 delete();
+func_28F4(var_0, var_1) {
+  wait(var_1);
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
-func_28F0(param_00) {
-  param_00 endon("disconnect");
-  var_01 = self.origin;
+func_28F0(var_0) {
+  var_0 endon("disconnect");
+  var_1 = self.origin;
   self waittill("start_instant_ragdoll");
   wait(0.1);
-  physicsexplosionsphere(var_01, 68, 48, 2.5);
+  physicsexplosionsphere(var_1, 68, 48, 2.5);
 }
 
-func_D64A(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_04 - param_02;
-  var_06 = vectordot(var_05, param_03);
-  if(var_06 < 0 || var_06 > param_01) {
+func_D64A(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_4 - var_2;
+  var_6 = vectordot(var_5, var_3);
+  if(var_6 < 0 || var_6 > var_1) {
     return 0;
   }
 
-  var_05 = var_05 - var_06 * param_03;
-  var_07 = lengthsquared(var_05);
-  if(var_07 > param_00) {
+  var_5 = var_5 - var_6 * var_3;
+  var_7 = lengthsquared(var_5);
+  if(var_7 > var_0) {
     return 0;
   }
 
@@ -861,8 +861,8 @@ func_D64A(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_96C3() {
-  var_00 = spawnStruct();
-  return var_00;
+  var_0 = spawnStruct();
+  return var_0;
 }
 
 func_F4E2() {
@@ -923,26 +923,26 @@ func_5AD3() {
 }
 
 func_96CA() {
-  var_00 = spawnStruct();
-  var_00.pistol_overkill = 0;
-  var_00.var_CBDC = 0;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.pistol_overkill = 0;
+  var_0.var_CBDC = 0;
+  return var_0;
 }
 
-func_3D92(param_00, param_01) {
+func_3D92(var_0, var_1) {
   self.lastweapon = self getcurrentweapon();
-  self.var_CBD8 = self getweaponammoclip(param_01, "right");
-  self.var_CBD7 = self getweaponammostock(param_01);
+  self.var_CBD8 = self getweaponammoclip(var_1, "right");
+  self.var_CBD7 = self getweaponammostock(var_1);
 }
 
-_meth_82F0(param_00) {
-  var_01 = param_00;
-  scripts\cp\utility::_giveweapon(var_01);
-  self setweaponammoclip(var_01, self.var_CBD8, "right");
-  self setweaponammostock(var_01, self.var_CBD7);
-  var_02 = self getweaponslistprimaries();
+_meth_82F0(var_0) {
+  var_1 = var_0;
+  scripts\cp\utility::_giveweapon(var_1);
+  self setweaponammoclip(var_1, self.var_CBD8, "right");
+  self setweaponammostock(var_1, self.var_CBD7);
+  var_2 = self getweaponslistprimaries();
   if(!self hasweapon(self.lastweapon) && !scripts\cp\utility::has_special_weapon() && !scripts\cp\utility::is_holding_deployable()) {
-    self switchtoweapon(var_01);
+    self switchtoweapon(var_1);
   }
 }
 
@@ -1072,10 +1072,10 @@ func_12C4E() {
   self.perk_data["pistol"].pistol_overkill = 0;
 }
 
-func_110A1(param_00) {
-  var_01 = func_7907();
-  func_3D92(param_00, var_01);
-  self takeweapon(var_01);
+func_110A1(var_0) {
+  var_1 = func_7907();
+  func_3D92(var_0, var_1);
+  self takeweapon(var_1);
 }
 
 func_F501() {}
@@ -1130,11 +1130,11 @@ watchcombatspeedscaler() {
   self.combatspeedscalar = func_7E3B();
   self[[level.move_speed_scale]]();
   for(;;) {
-    self waittill("weapon_change", var_00);
-    var_01 = self getcurrentweapon();
-    var_02 = scripts\cp\utility::getrawbaseweaponname(var_01);
-    if(isDefined(var_02)) {
-      if(var_02 == "nrg" || var_02 == "zmagnum" || var_02 == "zg18" || var_02 == "emc") {
+    self waittill("weapon_change", var_0);
+    var_1 = self getcurrentweapon();
+    var_2 = scripts\cp\utility::getrawbaseweaponname(var_1);
+    if(isDefined(var_2)) {
+      if(var_2 == "nrg" || var_2 == "zmagnum" || var_2 == "zg18" || var_2 == "emc") {
         self.var_CBE0 = 1.1;
       } else {
         self.var_CBE0 = 1;
@@ -1161,9 +1161,9 @@ func_13A29() {
   self endon("death");
   self endon("disconnect");
   for(;;) {
-    var_00 = self getcurrentweapon();
-    if(isDefined(var_00)) {
-      if(var_00 == "iw5_alienriotshield4_mp_camo05" && self.fireshield == 1) {
+    var_0 = self getcurrentweapon();
+    if(isDefined(var_0)) {
+      if(var_0 == "iw5_alienriotshield4_mp_camo05" && self.fireshield == 1) {
         playFXOnTag(level._effect["riotshield_fire"], self, "tag_origin");
         continue;
       }
@@ -1184,19 +1184,19 @@ has_fragile_relic_and_is_sprinting() {
 }
 
 func_7907() {
-  var_00 = self getweaponslistprimaries();
-  foreach(var_02 in var_00) {
-    var_03 = scripts\cp\utility::coop_getweaponclass(var_02);
-    if(var_03 == "weapon_pistol") {
-      return var_02;
+  var_0 = self getweaponslistprimaries();
+  foreach(var_2 in var_0) {
+    var_3 = scripts\cp\utility::coop_getweaponclass(var_2);
+    if(var_3 == "weapon_pistol") {
+      return var_2;
     }
   }
 }
 
-applystunresistence(param_00) {
+applystunresistence(var_0) {
   if(isDefined(self.var_1119B)) {
-    return self.var_1119B * param_00;
+    return self.var_1119B * var_0;
   }
 
-  return param_00;
+  return var_0;
 }

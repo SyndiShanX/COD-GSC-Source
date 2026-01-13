@@ -9,47 +9,47 @@ func_5223() {
   level._effect["deployableCover_explode_mist"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_mist_hang_mp.vfx");
 }
 
-func_5224(param_00) {
-  param_00 endon("death");
-  param_00 waittill("missile_stuck", var_01);
+func_5224(var_0) {
+  var_0 endon("death");
+  var_0 waittill("missile_stuck", var_1);
   self notify("powers_deployableCover_used", 1);
-  param_00.angles = param_00.angles * (0, 1, 1);
-  func_10842(param_00);
-  param_00 delete();
+  var_0.angles = var_0.angles * (0, 1, 1);
+  func_10842(var_0);
+  var_0 delete();
 }
 
-func_10842(param_00) {
-  var_01 = self.var_4759;
-  if(isDefined(var_01)) {
-    var_01 func_5285();
+func_10842(var_0) {
+  var_1 = self.var_4759;
+  if(isDefined(var_1)) {
+    var_1 func_5285();
   }
 
-  scripts\mp\utility::printgameaction("deployable cover spawned", param_00.triggerportableradarping);
-  var_02 = anglesToForward(param_00.angles);
-  var_02 = rotatepointaroundvector(anglestoup(param_00.angles), var_02, 90);
-  var_03 = anglestoup(param_00.angles);
-  var_04 = vectorcross(var_02, var_03);
-  var_03 = vectorcross(var_04, var_02);
-  var_05 = axistoangles(var_02, var_04, var_03);
-  var_01 = spawncoverwall(param_00.origin + anglestoup(var_05) * 2, var_05);
-  var_01.triggerportableradarping = self;
-  var_01.team = self.team;
-  var_01 setnonstick(1);
-  var_01 give_player_tickets(1);
-  var_01 setCanDamage(1);
-  var_01.health = 9999;
-  playFX(scripts\engine\utility::getfx("deployableCover_explode"), param_00.origin, anglesToForward(var_05), anglestoup(var_05));
-  playFX(scripts\engine\utility::getfx("deployableCover_explode_mist"), param_00.origin, anglesToForward(var_05), anglestoup(var_05));
-  playsoundatpos(param_00.origin, "deployable_cover_expand");
-  var_01 thread func_40EB();
-  var_01 thread func_40ED();
-  var_01 thread func_40EC();
-  var_01 thread func_40EE();
-  var_01 thread func_139DE();
-  var_01 thread func_139DF(self);
-  var_01 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-  var_01 thread createcovernavobstacle();
-  self.var_4759 = var_01;
+  scripts\mp\utility::printgameaction("deployable cover spawned", var_0.triggerportableradarping);
+  var_2 = anglesToForward(var_0.angles);
+  var_2 = rotatepointaroundvector(anglestoup(var_0.angles), var_2, 90);
+  var_3 = anglestoup(var_0.angles);
+  var_4 = vectorcross(var_2, var_3);
+  var_3 = vectorcross(var_4, var_2);
+  var_5 = axistoangles(var_2, var_4, var_3);
+  var_1 = spawncoverwall(var_0.origin + anglestoup(var_5) * 2, var_5);
+  var_1.triggerportableradarping = self;
+  var_1.team = self.team;
+  var_1 setnonstick(1);
+  var_1 give_player_tickets(1);
+  var_1 setCanDamage(1);
+  var_1.health = 9999;
+  playFX(scripts\engine\utility::getfx("deployableCover_explode"), var_0.origin, anglesToForward(var_5), anglestoup(var_5));
+  playFX(scripts\engine\utility::getfx("deployableCover_explode_mist"), var_0.origin, anglesToForward(var_5), anglestoup(var_5));
+  playsoundatpos(var_0.origin, "deployable_cover_expand");
+  var_1 thread func_40EB();
+  var_1 thread func_40ED();
+  var_1 thread func_40EC();
+  var_1 thread func_40EE();
+  var_1 thread func_139DE();
+  var_1 thread func_139DF(self);
+  var_1 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_1 thread createcovernavobstacle();
+  self.var_4759 = var_1;
 }
 
 createcovernavobstacle() {
@@ -60,13 +60,13 @@ createcovernavobstacle() {
   self.var_BE64 = _func_314(self);
 }
 
-func_5285(param_00) {
+func_5285(var_0) {
   self notify("despawnCover");
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!param_00) {
+  if(!var_0) {
     playsoundatpos(self.origin, "deployable_cover_contract");
   }
 
@@ -75,16 +75,16 @@ func_5285(param_00) {
     self.var_BE64 = undefined;
   }
 
-  self _meth_8514(param_00);
+  self _meth_8514(var_0);
   scripts\mp\utility::printgameaction("deployable cover removed", self.triggerportableradarping);
 }
 
-func_139DF(param_00) {
+func_139DF(var_0) {
   self endon("death");
-  param_00 endon("disconnect");
+  var_0 endon("disconnect");
   self waittill("coverwall_expand_finish");
   wait(0.25);
-  thread scripts\mp\weapons::outlineequipmentforowner(self, param_00);
+  thread scripts\mp\weapons::outlineequipmentforowner(self, var_0);
   self waittill("coverwall_contract_start");
   self notify("death");
 }
@@ -93,9 +93,9 @@ func_139DE() {
   self endon("death");
   self endon("despawnCover");
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03);
+    self waittill("damage", var_0, var_1, var_2, var_3);
     self.health = 9999;
-    var_01 scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
+    var_1 scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
   }
 }
 
@@ -127,8 +127,8 @@ func_40EC() {
   thread func_5285(1);
 }
 
-placementfailed(param_00) {
+placementfailed(var_0) {
   self notify("powers_deployableCover_used", 0);
-  scripts\mp\utility::placeequipmentfailed(param_00.weapon_name, 1, param_00.origin);
-  param_00 delete();
+  scripts\mp\utility::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
+  var_0 delete();
 }

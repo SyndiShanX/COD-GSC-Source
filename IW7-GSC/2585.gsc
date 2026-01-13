@@ -4,7 +4,7 @@
  * Script: 2585.gsc
 ************************/
 
-func_12F5C(param_00) {
+func_12F5C(var_0) {
   if(isDefined(level.var_13CD3) && isDefined(self.var_72BA)) {
     scripts\asm\asm_bb::bb_clearweaponrequest();
     self[[level.var_13CD3]]();
@@ -17,39 +17,39 @@ func_12F5C(param_00) {
     return level.success;
   }
 
-  var_01 = 0;
-  var_02 = func_3EBC();
-  if(isDefined(var_02)) {
-    if(var_02 != self.var_394) {
-      var_01 = 1;
+  var_1 = 0;
+  var_2 = func_3EBC();
+  if(isDefined(var_2)) {
+    if(var_2 != self.var_394) {
+      var_1 = 1;
     }
 
-    scripts\asm\asm_bb::bb_requestweapon(var_02);
+    scripts\asm\asm_bb::bb_requestweapon(var_2);
   } else {
     scripts\asm\asm_bb::bb_clearweaponrequest();
   }
 
   if(scripts\anim\utility_common::isasniper()) {
-    if(var_01) {
-      if(isDefined(self.var_394) && !scripts\anim\utility_common::issniperrifle(self.var_394) && isDefined(self.var_3135.shootparams)) {
-        scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
+    if(var_1) {
+      if(isDefined(self.var_394) && !scripts\anim\utility_common::issniperrifle(self.var_394) && isDefined(self.bt.shootparams)) {
+        scripts\aitypes\combat::func_FE5A(self.bt.shootparams);
       }
     }
 
-    if(isDefined(self.var_394) && scripts\anim\utility_common::issniperrifle(self.var_394) && isDefined(self.var_3135.shootparams) && !scripts\asm\shared_utility::isatcovernode()) {
-      var_03 = undefined;
-      if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.pos)) {
-        var_03 = distancesquared(self.origin, self.var_1198.shootparams.pos);
+    if(isDefined(self.var_394) && scripts\anim\utility_common::issniperrifle(self.var_394) && isDefined(self.bt.shootparams) && !scripts\asm\shared_utility::isatcovernode()) {
+      var_3 = undefined;
+      if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
+        var_3 = distancesquared(self.origin, self._blackboard.shootparams.pos);
       } else if(isDefined(self.isnodeoccupied)) {
-        var_03 = distancesquared(self.origin, self.isnodeoccupied.origin);
+        var_3 = distancesquared(self.origin, self.isnodeoccupied.origin);
       }
 
-      if(var_03 < 262144) {
-        scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
+      if(var_3 < 262144) {
+        scripts\aitypes\combat::func_FE5A(self.bt.shootparams);
       }
     }
-  } else if(isDefined(self.var_3135.shootparams) && isDefined(self.var_3135.shootparams.var_29AF) && self.var_3135.shootparams.var_29AF) {
-    scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
+  } else if(isDefined(self.bt.shootparams) && isDefined(self.bt.shootparams.var_29AF) && self.bt.shootparams.var_29AF) {
+    scripts\aitypes\combat::func_FE5A(self.bt.shootparams);
   }
 
   return level.success;
@@ -75,26 +75,26 @@ func_3EBC() {
     return "pistol";
   }
 
-  if(isDefined(self.var_1198.var_5D3B)) {
+  if(isDefined(self._blackboard.var_5D3B)) {
     return "pistol";
   }
 
-  var_00 = 0;
-  var_01 = undefined;
-  foreach(var_03 in self.var_13CC3) {
-    var_04 = weaponclass(var_03);
-    var_05 = func_67D7(var_04, var_03);
-    if(var_05 > var_00) {
-      var_00 = var_05;
-      var_01 = var_04;
+  var_0 = 0;
+  var_1 = undefined;
+  foreach(var_3 in self.var_13CC3) {
+    var_4 = weaponclass(var_3);
+    var_5 = func_67D7(var_4, var_3);
+    if(var_5 > var_0) {
+      var_0 = var_5;
+      var_1 = var_4;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_67D7(param_00, param_01) {
-  if(param_00 == "pistol") {
+func_67D7(var_0, var_1) {
+  if(var_0 == "pistol") {
     if(weaponclass(self.var_394) == "rocketlauncher" && self.a.rockets <= 0) {
       return 1000;
     }
@@ -103,31 +103,31 @@ func_67D7(param_00, param_01) {
       return 0;
     }
 
-    var_02 = scripts\anim\utility_common::isusingsidearm();
-    var_03 = undefined;
-    if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.pos)) {
-      var_03 = distancesquared(self.origin, self.var_1198.shootparams.pos);
-    } else if(var_02 && isDefined(self.isnodeoccupied)) {
-      var_03 = distancesquared(self.origin, self.isnodeoccupied.origin);
+    var_2 = scripts\anim\utility_common::isusingsidearm();
+    var_3 = undefined;
+    if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
+      var_3 = distancesquared(self.origin, self._blackboard.shootparams.pos);
+    } else if(var_2 && isDefined(self.isnodeoccupied)) {
+      var_3 = distancesquared(self.origin, self.isnodeoccupied.origin);
     }
 
-    if(isDefined(var_03)) {
-      var_04 = 409;
-      var_05 = scripts\anim\utility_common::isasniper(0);
-      if(var_05) {
-        var_04 = 512;
+    if(isDefined(var_3)) {
+      var_4 = 409;
+      var_5 = scripts\anim\utility_common::isasniper(0);
+      if(var_5) {
+        var_4 = 512;
       }
 
-      if(var_02) {
-        var_04 = var_04 + 36;
+      if(var_2) {
+        var_4 = var_4 + 36;
       }
 
-      if(var_03 < var_04 * var_04) {
-        if(var_05) {
+      if(var_3 < var_4 * var_4) {
+        if(var_5) {
           return 1000;
         }
 
-        if(scripts\anim\utility_common::usingmg() && var_03 < 16384) {
+        if(scripts\anim\utility_common::usingmg() && var_3 < 16384) {
           return 1000;
         }
 
@@ -140,7 +140,7 @@ func_67D7(param_00, param_01) {
     }
 
     return 0;
-  } else if(var_02 == "rocketlauncher") {
+  } else if(var_2 == "rocketlauncher") {
     if(self.a.rockets <= 0) {
       return 0;
     }
@@ -153,7 +153,7 @@ func_67D7(param_00, param_01) {
   return 100;
 }
 
-func_9F5F(param_00) {
+func_9F5F(var_0) {
   if(scripts\anim\utility_common::isasniper()) {
     return level.success;
   }
@@ -161,7 +161,7 @@ func_9F5F(param_00) {
   return level.failure;
 }
 
-usingturret(param_00) {
+usingturret(var_0) {
   if(self.var_394 == self.var_101B4 && self.var_394 != "none") {
     return level.success;
   }
@@ -169,8 +169,8 @@ usingturret(param_00) {
   return level.failure;
 }
 
-func_100A7(param_00) {
-  if(usingturret(param_00) == level.success) {
+func_100A7(var_0) {
+  if(usingturret(var_0) == level.success) {
     return level.failure;
   }
 
@@ -178,12 +178,12 @@ func_100A7(param_00) {
     return level.success;
   }
 
-  if(func_391A(param_00) != level.success) {
+  if(func_391A(var_0) != level.success) {
     return level.failure;
   }
 }
 
-func_391A(param_00) {
+func_391A(var_0) {
   if(isDefined(self.var_C009)) {
     return level.failure;
   }
@@ -192,8 +192,8 @@ func_391A(param_00) {
     return level.failure;
   }
 
-  var_01 = scripts\asm\asm_bb::bb_getcovernode();
-  if(isDefined(var_01) && distance(self.origin, var_01.origin) < 16) {
+  var_1 = scripts\asm\asm_bb::bb_getcovernode();
+  if(isDefined(var_1) && distance(self.origin, var_1.origin) < 16) {
     return level.failure;
   }
 

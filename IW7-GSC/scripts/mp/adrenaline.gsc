@@ -37,8 +37,8 @@ func_1892() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
   }
 }
 
@@ -58,38 +58,38 @@ onplayerspawned() {
 func_18AB() {
   self endon("disconnect");
   self endon("death");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
     func_1891();
-    var_01 = func_18A9();
-    var_02 = self.var_115B;
-    if(func_1892() && var_01 > 0 && var_01 != var_00) {}
+    var_1 = func_18A9();
+    var_2 = self.var_115B;
+    if(func_1892() && var_1 > 0 && var_1 != var_0) {}
 
-    if(var_00 < var_01 && func_181E() <= var_01) {
+    if(var_0 < var_1 && func_181E() <= var_1) {
       self.var_115B = func_7D9E();
       self notify("adrenaline_update");
     }
 
-    var_00 = var_01;
+    var_0 = var_1;
     wait(0.3);
   }
 }
 
 func_1896() {
-  var_00 = self.var_115B - 5 / func_7D9E() - 5 * 0.5;
-  var_00 = var_00 + 0.5;
-  if(var_00 > 1) {
-    var_00 = 1;
+  var_0 = self.var_115B - 5 / func_7D9E() - 5 * 0.5;
+  var_0 = var_0 + 0.5;
+  if(var_0 > 1) {
+    var_0 = 1;
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_1891() {
-  for(var_00 = 0; var_00 < self.var_115E.size; var_00++) {
-    if(gettime() - self.var_115E[var_00] > func_7D9C() * 60 * 1000) {
-      self.var_115E[var_00] = undefined;
-      self.var_115D[var_00] = undefined;
+  for(var_0 = 0; var_0 < self.var_115E.size; var_0++) {
+    if(gettime() - self.var_115E[var_0] > func_7D9C() * 60 * 1000) {
+      self.var_115E[var_0] = undefined;
+      self.var_115D[var_0] = undefined;
     }
   }
 
@@ -98,48 +98,48 @@ func_1891() {
 }
 
 func_18A9() {
-  var_00 = 0;
-  foreach(var_02 in self.var_115D) {
-    var_00 = var_00 + var_02;
+  var_0 = 0;
+  foreach(var_2 in self.var_115D) {
+    var_0 = var_0 + var_2;
   }
 
-  return var_00 / func_7D9C() * 1;
+  return var_0 / func_7D9C() * 1;
 }
 
 func_181E() {
-  var_00 = scripts\mp\persistence::statget("score");
-  var_01 = scripts\mp\persistence::statgetbuffered("timePlayedTotal");
-  if(var_01 > 0) {
-    var_02 = var_00 / var_01 / 60 + 34;
+  var_0 = scripts\mp\persistence::statget("score");
+  var_1 = scripts\mp\persistence::statgetbuffered("timePlayedTotal");
+  if(var_1 > 0) {
+    var_2 = var_0 / var_1 / 60 + 34;
   } else {
-    var_02 = func_7D9D();
+    var_2 = func_7D9D();
   }
 
-  if(var_02 < func_7D9D()) {
-    var_02 = func_7D9D();
+  if(var_2 < func_7D9D()) {
+    var_2 = func_7D9D();
   }
 
   if(func_1892()) {}
 
-  return var_02;
+  return var_2;
 }
 
-func_1890(param_00) {
+func_1890(var_0) {
   if(func_1892()) {}
 
   if(isDefined(self.var_115A)) {
     self.var_115E[self.var_115E.size] = gettime();
-    self.var_115D[self.var_115D.size] = param_00;
+    self.var_115D[self.var_115D.size] = var_0;
   }
 }
 
 func_1897() {
-  var_00 = 0;
+  var_0 = 0;
   if(isDefined(self.var_115A) && self.var_115A) {
-    var_00 = func_7D9F();
+    var_0 = func_7D9F();
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_FA89() {
@@ -156,26 +156,26 @@ func_18AA() {
 }
 
 func_1893() {
-  var_00 = 0;
+  var_0 = 0;
   if(getdvarint("prototype_adrenaline_enabled") == 1) {
-    var_00 = self.var_115C;
+    var_0 = self.var_115C;
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_1898() {
-  var_00 = 0;
+  var_0 = 0;
   if(getdvarint("prototype_adrenaline_enabled") == 1 && isDefined(self.var_115A)) {
-    var_00 = self.var_115A;
+    var_0 = self.var_115A;
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_18AE(param_00) {
-  if(param_00 func_1898()) {
-    if(param_00 func_1893()) {
+func_18AE(var_0) {
+  if(var_0 func_1898()) {
+    if(var_0 func_1893()) {
       thread scripts\mp\hud_message::showsplash("adrenaline_mood_killer", 0);
       return;
     }
@@ -226,17 +226,17 @@ func_18AC() {
   self endon("death");
   self endon("disconnect");
   while(self.var_115B > 5) {
-    var_00 = func_1896();
+    var_0 = func_1896();
     if(func_1892()) {}
 
     self.var_18A8 fadeovertime(0.3);
-    self.var_18A8.alpha = var_00;
+    self.var_18A8.alpha = var_0;
     wait(0.3);
     self.var_115B = self.var_115B - 0.3;
   }
 
-  var_01 = 40;
-  var_02 = 40;
+  var_1 = 40;
+  var_2 = 40;
   while(self.var_115B > 0) {
     self.var_18A8 fadeovertime(0.1);
     self.var_18A8.alpha = 1;

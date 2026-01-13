@@ -38,21 +38,21 @@ monitordamage() {
   scripts\sp\utility::func_16B7(::func_4D4C);
 }
 
-func_4D4C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+func_4D4C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!getdvarint("scr_damagefeedback", 0)) {
     return;
   }
 
-  if(!isDefined(param_01) || !isplayer(param_01) && !param_01 func_9EF8() || param_01 == self || param_00 <= 0) {
+  if(!isDefined(var_1) || !isplayer(var_1) && !var_1 func_9EF8() || var_1 == self || var_0 <= 0) {
     return;
   }
 
   var_0A = "standard";
   var_0B = "standard";
-  if(isDefined(param_09)) {
-    if(param_00 <= weapongetdamagemin(param_09)) {
+  if(isDefined(var_9)) {
+    if(var_0 <= weapongetdamagemin(var_9)) {
       var_0B = "low_damage";
-    } else if(param_00 >= weapongetdamagemax(param_09)) {
+    } else if(var_0 >= weapongetdamagemax(var_9)) {
       var_0B = "high_damage";
     }
   }
@@ -61,7 +61,7 @@ func_4D4C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0D = 0;
   if(isai(self)) {
     var_0C = !isalive(self);
-    var_0D = isheadshot(param_07);
+    var_0D = isheadshot(var_7);
   }
 
   level.player thread updatedamagefeedback(var_0A, var_0C, var_0D, var_0B, self);
@@ -77,24 +77,24 @@ func_9EF8() {
   return 0;
 }
 
-func_4D4B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  if(!isDefined(level.var_D127) || !isDefined(param_01) || param_01 != level.var_D127) {
+func_4D4B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isDefined(level.var_D127) || !isDefined(var_1) || var_1 != level.var_D127) {
     return;
   }
 
-  func_4D4C(param_00, level.player, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+  func_4D4C(var_0, level.player, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-updatedamagefeedback(param_00, param_01, param_02, param_03, param_04) {
+updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = "standard";
+  if(!isDefined(var_3)) {
+    var_3 = "standard";
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "hithealthshield":
     case "hitlifelink":
     case "hitbulletstorm":
@@ -105,53 +105,53 @@ updatedamagefeedback(param_00, param_01, param_02, param_03, param_04) {
     case "hitlightarmor":
     case "hitblastshield":
     case "thermobaric_debuff":
-      setomnvar("damage_feedback_icon", param_00);
+      setomnvar("damage_feedback_icon", var_0);
       self setclientomnvar("damage_feedback_icon_notify", gettime());
-      updatehitmarker(param_03, param_01, param_02);
+      updatehitmarker(var_3, var_1, var_2);
       break;
 
     case "none":
       break;
 
     default:
-      updatehitmarker(param_03, param_01, param_02, param_04);
+      updatehitmarker(var_3, var_1, var_2, var_4);
       break;
   }
 }
 
-updatehitmarker(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00)) {
+updatehitmarker(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(isDefined(param_03) && param_03.team == "allies") {
+  if(isDefined(var_3) && var_3.team == "allies") {
     return;
   }
 
-  var_04 = gethitmarkerpriority(param_00);
-  if(isDefined(self.var_A99E) && self.var_A99E == gettime() && var_04 <= self.var_A99D && !param_01) {
+  var_4 = gethitmarkerpriority(var_0);
+  if(isDefined(self.var_A99E) && self.var_A99E == gettime() && var_4 <= self.var_A99D && !var_1) {
     return;
   }
 
   self.var_A99E = gettime();
-  self.var_A99D = var_04;
-  setomnvar("damage_feedback", param_00);
+  self.var_A99D = var_4;
+  setomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
-  if(param_01) {
+  if(var_1) {
     setomnvar("damage_feedback_kill", 1);
   } else {
     setomnvar("damage_feedback_kill", 0);
   }
 
-  if(param_02) {
+  if(var_2) {
     setomnvar("damage_feedback_headshot", 1);
     return;
   }
@@ -159,16 +159,16 @@ updatehitmarker(param_00, param_01, param_02, param_03) {
   setomnvar("damage_feedback_headshot", 0);
 }
 
-gethitmarkerpriority(param_00) {
-  if(!isDefined(level.hitmarkerpriorities[param_00])) {
+gethitmarkerpriority(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[param_00];
+  return level.hitmarkerpriorities[var_0];
 }
 
-isheadshot(param_00) {
-  switch (param_00) {
+isheadshot(var_0) {
+  switch (var_0) {
     case "j_head_pv_horizontal":
     case "j_head_pv_z":
     case "j_head":

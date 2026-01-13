@@ -4,8 +4,8 @@
  * Script: scripts\engine\scriptable.gsc
 *****************************************/
 
-func_EF33(param_00) {
-  level.var_EF2E = param_00;
+func_EF33(var_0) {
+  level.var_EF2E = var_0;
 }
 
 func_028A() {

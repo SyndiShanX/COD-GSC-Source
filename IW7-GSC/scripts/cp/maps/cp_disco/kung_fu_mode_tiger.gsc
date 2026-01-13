@@ -13,15 +13,15 @@ tiger_kung_fu_init() {
   scripts\cp\powers\coop_powers::powersetupfunctions("power_black_hole_tiger", ::tiger_black_hole_set, ::tiger_black_hole_unset, ::tiger_black_hole_use, undefined, "power_tiger_black_hole_used", undefined);
 }
 
-tiger_black_hole_set(param_00) {}
+tiger_black_hole_set(var_0) {}
 
-tiger_black_hole_unset(param_00) {}
+tiger_black_hole_unset(var_0) {}
 
-tiger_black_hole_use(param_00) {
+tiger_black_hole_use(var_0) {
   scripts\cp\powers\coop_powers::power_disablepower();
-  var_01 = 2.5;
+  var_1 = 2.5;
   thread run_black_hole_logic();
-  wait(var_01);
+  wait(var_1);
   self.kung_fu_exit_delay = 0;
   scripts\cp\powers\coop_powers::power_enablepower();
   self notify("power_tiger_black_hole_used", 1);
@@ -33,87 +33,87 @@ run_black_hole_logic() {
     return;
   }
 
-  var_00 = sortbydistance(level.spawned_enemies, self.origin);
-  var_01 = undefined;
-  var_02 = 3;
-  var_03 = 2.5;
-  var_04 = 256;
-  var_05 = self getplayerangles();
-  var_06 = anglesToForward(var_05);
-  var_06 = vectornormalize(var_06);
-  var_07 = self getEye();
-  var_08 = var_07 + var_06 * var_04;
-  var_09 = scripts\cp\cp_agent_utils::getaliveagents();
-  var_09 = scripts\engine\utility::array_combine(var_09, level.players);
-  var_0A = scripts\common\trace::ray_trace(var_07, var_08, var_09);
+  var_0 = sortbydistance(level.spawned_enemies, self.origin);
+  var_1 = undefined;
+  var_2 = 3;
+  var_3 = 2.5;
+  var_4 = 256;
+  var_5 = self getplayerangles();
+  var_6 = anglesToForward(var_5);
+  var_6 = vectornormalize(var_6);
+  var_7 = self getEye();
+  var_8 = var_7 + var_6 * var_4;
+  var_9 = scripts\cp\cp_agent_utils::getaliveagents();
+  var_9 = scripts\engine\utility::array_combine(var_9, level.players);
+  var_0A = scripts\common\trace::ray_trace(var_7, var_8, var_9);
   var_0B = var_0A["position"];
-  var_01 = scripts\engine\utility::drop_to_ground(var_0B, 20, -1000);
-  var_01 = getclosestpointonnavmesh(var_01);
+  var_1 = scripts\engine\utility::drop_to_ground(var_0B, 20, -1000);
+  var_1 = getclosestpointonnavmesh(var_1);
   var_0C = 250;
   if(self.chi_meter_amount - var_0C <= 0) {
     self.kung_fu_exit_delay = 1;
   }
 
   thread scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(var_0C);
-  var_0D = scripts\engine\utility::spawn_tag_origin(var_01 + (0, 0, 60));
+  var_0D = scripts\engine\utility::spawn_tag_origin(var_1 + (0, 0, 60));
   var_0D.triggerportableradarping = self;
   var_0D setModel("tag_origin_tiger_black_hole");
   thread scripts\engine\utility::play_sound_in_space("chi_tiger_blackhole", var_0D.origin);
   thread grabclosestzombies(var_0D, 1);
   self playgestureviewmodel("ges_plyr_gesture042", undefined, 1);
-  wait(var_03);
+  wait(var_3);
   var_0D notify("death");
   var_0D delete();
 }
 
-grabclosestzombies(param_00, param_01) {
-  param_00 endon("death");
-  param_00.grabbedents = [];
-  var_02 = anglestoup(param_00.angles);
-  var_03 = spawn("trigger_rotatable_radius", scripts\cp\powers\coop_blackholegrenade::getblackholecenter(param_00) - var_02 * 64 * 0.5, 0, 200, 64);
-  var_03.angles = param_00.angles;
-  var_03 enablelinkto();
-  var_03 linkto(param_00);
-  var_03 thread scripts\cp\powers\coop_blackholegrenade::cleanuponparentdeath(param_00);
-  while(isDefined(var_03)) {
-    var_04 = scripts\engine\utility::get_array_of_closest(param_00.origin, level.spawned_enemies, undefined, undefined, 200);
-    foreach(var_06 in var_04) {
-      if(!scripts\cp\utility::isreallyalive(var_06) || !isDefined(param_00.triggerportableradarping)) {
+grabclosestzombies(var_0, var_1) {
+  var_0 endon("death");
+  var_0.grabbedents = [];
+  var_2 = anglestoup(var_0.angles);
+  var_3 = spawn("trigger_rotatable_radius", scripts\cp\powers\coop_blackholegrenade::getblackholecenter(var_0) - var_2 * 64 * 0.5, 0, 200, 64);
+  var_3.angles = var_0.angles;
+  var_3 enablelinkto();
+  var_3 linkto(var_0);
+  var_3 thread scripts\cp\powers\coop_blackholegrenade::cleanuponparentdeath(var_0);
+  while(isDefined(var_3)) {
+    var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.spawned_enemies, undefined, undefined, 200);
+    foreach(var_6 in var_4) {
+      if(!scripts\cp\utility::isreallyalive(var_6) || !isDefined(var_0.triggerportableradarping)) {
         continue;
       }
 
-      if(isplayer(var_06)) {
+      if(isplayer(var_6)) {
         continue;
       }
 
-      if(isDefined(var_06.team) && var_06.team == "allies") {
+      if(isDefined(var_6.team) && var_6.team == "allies") {
         continue;
       }
 
-      if(param_00.triggerportableradarping == var_06) {
+      if(var_0.triggerportableradarping == var_6) {
         continue;
       }
 
-      if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(param_00, var_06)) {
+      if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(var_0, var_6)) {
         continue;
       }
 
-      if(!scripts\cp\utility::should_be_affected_by_trap(var_06, undefined, 1) || isDefined(var_06.flung)) {
+      if(!scripts\cp\utility::should_be_affected_by_trap(var_6, undefined, 1) || isDefined(var_6.flung)) {
         continue;
       }
 
-      if(!isalive(var_06)) {
+      if(!isalive(var_6)) {
         continue;
       }
 
-      if(isDefined(level.turned_zombies) && isDefined(scripts\engine\utility::array_find(level.turned_zombies, var_06))) {
+      if(isDefined(level.turned_zombies) && isDefined(scripts\engine\utility::array_find(level.turned_zombies, var_6))) {
         continue;
       }
 
-      if(!var_06 scripts\cp\powers\coop_blackholegrenade::isgrabbedent(param_00)) {
-        var_06 thread scripts\cp\powers\coop_blackholegrenade::grabent(param_00);
-        var_06.flung = 1;
-        var_06 thread scripts\cp\powers\coop_blackholegrenade::suck_zombie(var_06, param_00, param_01);
+      if(!var_6 scripts\cp\powers\coop_blackholegrenade::isgrabbedent(var_0)) {
+        var_6 thread scripts\cp\powers\coop_blackholegrenade::grabent(var_0);
+        var_6.flung = 1;
+        var_6 thread scripts\cp\powers\coop_blackholegrenade::suck_zombie(var_6, var_0, var_1);
         wait(0.2);
       }
     }
@@ -122,11 +122,11 @@ grabclosestzombies(param_00, param_01) {
   }
 }
 
-tiger_ground_pound_set(param_00) {}
+tiger_ground_pound_set(var_0) {}
 
-tiger_ground_pound_unset(param_00) {}
+tiger_ground_pound_unset(var_0) {}
 
-tiger_ground_pound_use(param_00) {
+tiger_ground_pound_use(var_0) {
   self.tiger_super_use = 1;
   self.kung_fu_shield = 1;
   self allowcrouch(0);
@@ -147,18 +147,18 @@ tiger_ground_pound_use(param_00) {
 tiger_pound_cowbell() {
   self playgestureviewmodel("ges_tiger_melee_super", undefined, 1);
   thread stay_in_kung_fu_till_gesture_done("ges_tiger_melee_super");
-  var_00 = scripts\engine\utility::drop_to_ground(self.origin, 30, -100);
+  var_0 = scripts\engine\utility::drop_to_ground(self.origin, 30, -100);
 }
 
-stay_in_kung_fu_till_gesture_done(param_00) {
+stay_in_kung_fu_till_gesture_done(var_0) {
   self endon("disconnect");
-  var_01 = 500;
-  if(self.chi_meter_amount - var_01 <= 0) {
+  var_1 = 500;
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
   }
 
-  var_02 = self getgestureanimlength(param_00);
-  wait(var_02);
+  var_2 = self getgestureanimlength(var_0);
+  wait(var_2);
   self.tiger_super_use = 0;
   self.kung_fu_exit_delay = 0;
 }
@@ -170,33 +170,33 @@ play_tiger_hand_fx() {
 }
 
 run_slam_wave() {
-  var_00 = 150;
-  var_01 = 3;
-  var_02 = 0;
-  while(var_02 < var_01) {
-    var_03 = var_02 + 1 * var_00;
-    var_04 = var_03 * var_03;
-    foreach(var_06 in level.spawned_enemies) {
-      if(distancesquared(var_06.origin, self.origin) < var_04) {
-        var_07 = var_06.origin + (0, 0, 100);
-        var_06 thread fling_enemy(var_06.maxhealth, var_07 - var_06.origin, self, 0, "kung_fu_super_zm_tiger");
+  var_0 = 150;
+  var_1 = 3;
+  var_2 = 0;
+  while(var_2 < var_1) {
+    var_3 = var_2 + 1 * var_0;
+    var_4 = var_3 * var_3;
+    foreach(var_6 in level.spawned_enemies) {
+      if(distancesquared(var_6.origin, self.origin) < var_4) {
+        var_7 = var_6.origin + (0, 0, 100);
+        var_6 thread fling_enemy(var_6.maxhealth, var_7 - var_6.origin, self, 0, "kung_fu_super_zm_tiger");
       }
     }
 
-    var_02++;
+    var_2++;
     wait(0.25);
   }
 }
 
-fling_enemy(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = isDefined(self.agent_type) && self.agent_type == "ratking";
-  if(var_05) {
-    if(isDefined(param_02)) {
-      self dodamage(self.health + 1000, self.origin, param_02, param_02, "MOD_UNKNOWN", param_04);
+fling_enemy(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = isDefined(self.agent_type) && self.agent_type == "ratking";
+  if(var_5) {
+    if(isDefined(var_2)) {
+      self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
       return;
     }
 
-    self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", param_04);
+    self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
     return;
   }
 
@@ -204,82 +204,82 @@ fling_enemy(param_00, param_01, param_02, param_03, param_04) {
   self.customdeath = 1;
   self.disable_armor = 1;
   wait(0.05);
-  if(scripts\engine\utility::istrue(param_03)) {
+  if(scripts\engine\utility::istrue(var_3)) {
     self.nocorpse = 1;
     self.full_gib = 1;
-    if(isDefined(param_02)) {
-      self dodamage(self.health + 1000, self.origin, param_02, param_02, "MOD_UNKNOWN", param_04);
+    if(isDefined(var_2)) {
+      self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
       return;
     }
 
-    self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", param_04);
+    self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
     return;
   }
 
-  self setvelocity(vectornormalize(param_01) * 500);
+  self setvelocity(vectornormalize(var_1) * 500);
   wait(0.1);
-  if(isDefined(param_02)) {
-    self dodamage(self.health + 1000, self.origin, param_02, param_02, "MOD_UNKNOWN", param_04);
+  if(isDefined(var_2)) {
+    self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
     return;
   }
 
-  self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", param_04);
+  self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
 }
 
-slam_execute(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    var_03 = lengthsquared(param_00.origin - param_01);
-    if(var_03 < 65536) {
+slam_execute(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_3 = lengthsquared(var_0.origin - var_1);
+    if(var_3 < 65536) {
       return;
     }
 
-    if(var_03 > squared(600)) {
+    if(var_3 > squared(600)) {
       return;
     }
   }
 
-  var_04 = param_00 scripts\engine\utility::spawn_tag_origin();
-  thread scripts\cp\powers\coop_groundpound::slam_delent(param_00, var_04);
-  slam_executeinternal(param_00, param_01, var_04, param_02);
-  param_00 notify("slam_finished");
+  var_4 = var_0 scripts\engine\utility::spawn_tag_origin();
+  thread scripts\cp\powers\coop_groundpound::slam_delent(var_0, var_4);
+  slam_executeinternal(var_0, var_1, var_4, var_2);
+  var_0 notify("slam_finished");
 }
 
-slam_executeinternal(param_00, param_01, param_02, param_03) {
-  var_04 = lengthsquared(param_00.origin - param_01);
-  var_05 = 0;
-  var_06 = 0;
-  var_07 = 0;
-  if(var_04 >= 28224) {
-    var_06 = 20736;
-    var_05 = 1;
-  } else if(var_04 >= 7056) {
-    var_06 = 5184;
-    var_07 = 20736;
+slam_executeinternal(var_0, var_1, var_2, var_3) {
+  var_4 = lengthsquared(var_0.origin - var_1);
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 0;
+  if(var_4 >= 28224) {
+    var_6 = 20736;
+    var_5 = 1;
+  } else if(var_4 >= 7056) {
+    var_6 = 5184;
+    var_7 = 20736;
   } else {
-    var_07 = 11664;
+    var_7 = 11664;
   }
 
-  param_00 playerlinkto(param_02, "tag_origin");
+  var_0 playerlinkto(var_2, "tag_origin");
   wait(0.25);
-  param_00 thread scripts\cp\cp_weapon::grenade_earthquake(0);
-  if(!isDefined(param_03)) {
-    param_00 playSound("detpack_explo_metal");
-    var_08 = scripts\engine\utility::ter_op(var_05, scripts\engine\utility::getfx("slam_lrg"), scripts\engine\utility::getfx("slam_sml"));
-    playFX(var_08, param_01);
-  } else {}
+  var_0 thread scripts\cp\cp_weapon::grenade_earthquake(0);
+  if(!isDefined(var_3)) {
+    var_0 playSound("detpack_explo_metal");
+    var_8 = scripts\engine\utility::ter_op(var_5, scripts\engine\utility::getfx("slam_lrg"), scripts\engine\utility::getfx("slam_sml"));
+    playFX(var_8, var_1);
+  }
 
-  thread scripts\cp\powers\coop_groundpound::slam_physicspulse(param_01);
-  var_09 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  foreach(var_0B in var_09) {
-    if(!isDefined(var_0B) || var_0B == param_00 || !scripts\cp\utility::isreallyalive(var_0B)) {
+  thread scripts\cp\powers\coop_groundpound::slam_physicspulse(var_1);
+  var_9 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  foreach(var_0B in var_9) {
+    if(!isDefined(var_0B) || var_0B == var_0 || !scripts\cp\utility::isreallyalive(var_0B)) {
       continue;
     }
 
     var_0C = undefined;
-    var_0D = distancesquared(param_01, var_0B.origin);
-    if(var_0D <= var_06) {
+    var_0D = distancesquared(var_1, var_0B.origin);
+    if(var_0D <= var_6) {
       var_0C = 1000000;
-    } else if(var_0D <= var_07) {
+    } else if(var_0D <= var_7) {
       var_0C = 1000000;
     } else {
       continue;
@@ -290,10 +290,10 @@ slam_executeinternal(param_00, param_01, param_02, param_03) {
       var_0B.customdeath = 1;
     }
 
-    var_0B dodamage(var_0C, param_01, param_00, param_00, "MOD_CRUSH");
+    var_0B dodamage(var_0C, var_1, var_0, var_0, "MOD_CRUSH");
   }
 
   wait(0.5);
-  param_00 unlink();
-  param_00 setscriptablepartstate("tiger_style_fx", "inactive", 1);
+  var_0 unlink();
+  var_0 setscriptablepartstate("tiger_style_fx", "inactive", 1);
 }

@@ -4,20 +4,20 @@
  * Script: scripts\anim\init.gsc
 *********************************/
 
-func_98E1(param_00) {
-  self.var_39B[param_00] = spawnStruct();
-  self.var_39B[param_00].weaponisauto = "none";
-  self.var_39B[param_00].var_8BDE = 1;
-  if(getweaponclipmodel(param_00) != "") {
-    self.var_39B[param_00].var_13053 = 1;
+func_98E1(var_0) {
+  self.var_39B[var_0] = spawnStruct();
+  self.var_39B[var_0].weaponisauto = "none";
+  self.var_39B[var_0].var_8BDE = 1;
+  if(getweaponclipmodel(var_0) != "") {
+    self.var_39B[var_0].var_13053 = 1;
     return;
   }
 
-  self.var_39B[param_00].var_13053 = 0;
+  self.var_39B[var_0].var_13053 = 0;
 }
 
-func_A000(param_00) {
-  return isDefined(self.var_39B[param_00]);
+func_A000(var_0) {
+  return isDefined(self.var_39B[var_0]);
 }
 
 func_F724() {
@@ -153,9 +153,9 @@ main() {
   self.exception["move"] = 1;
   self.exception["exposed"] = 1;
   self.exception["corner_normal"] = 1;
-  var_00 = getarraykeys(self.exception);
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    scripts\engine\utility::clear_exception(var_00[var_01]);
+  var_0 = getarraykeys(self.exception);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    scripts\engine\utility::clear_exception(var_0[var_1]);
   }
 
   self.var_DD23 = 0;
@@ -178,20 +178,20 @@ main() {
 }
 
 func_1929() {
-  return self.var_1198.var_444A;
+  return self._blackboard.var_444A;
 }
 
-func_100B4(param_00, param_01) {
-  if(!param_00 || self.unittype != "soldier" && self.unittype != "c6") {
+func_100B4(var_0, var_1) {
+  if(!var_0 || self.unittype != "soldier" && self.unittype != "c6") {
     return 1;
   }
 
-  var_02 = int(gettime() / 50) % 2;
-  return param_01 == var_02;
+  var_2 = int(gettime() / 50) % 2;
+  return var_1 == var_2;
 }
 
 func_1001A() {
-  return isDefined(self.var_3135.var_72EB) && self.var_3135.var_72EB;
+  return isDefined(self.bt.var_72EB) && self.bt.var_72EB;
 }
 
 func_19F7() {
@@ -199,22 +199,22 @@ func_19F7() {
   self endon("entitydeleted");
   thread lib_0A1E::func_51B8();
   thread lib_0A1E::traversehandler();
-  var_00 = 1;
-  var_01 = self getentitynumber() % 2;
+  var_0 = 1;
+  var_1 = self getentitynumber() % 2;
   for(;;) {
-    var_02 = 0;
+    var_2 = 0;
     if(func_1001A()) {
       scripts\aitypes\bt_util::opcode::OP_ClearArray();
-      var_02 = 1;
-      self.var_3135.var_72EB = undefined;
-    } else if(var_00) {
+      var_2 = 1;
+      self.bt.var_72EB = undefined;
+    } else if(var_0) {
       if(!func_1929()) {
         scripts\aitypes\bt_util::opcode::OP_ClearArray();
-        var_02 = 1;
+        var_2 = 1;
       }
     }
 
-    if(var_02) {
+    if(var_2) {
       scripts\asm\asm::func_2314();
     }
 
@@ -229,21 +229,21 @@ func_19F7() {
       break;
     }
 
-    var_00 = func_100B4(var_02, var_01);
+    var_0 = func_100B4(var_2, var_1);
   }
 }
 
-func_13CC7(param_00) {
-  var_01[0] = "m4_grenadier";
-  var_01[1] = "m4_grunt";
-  var_01[2] = "m4_silencer";
-  var_01[3] = "m4m203";
-  if(!isDefined(param_00)) {
+func_13CC7(var_0) {
+  var_1[0] = "m4_grenadier";
+  var_1[1] = "m4_grunt";
+  var_1[2] = "m4_silencer";
+  var_1[3] = "m4m203";
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    if(issubstr(param_00, var_01[var_02])) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(issubstr(var_0, var_1[var_2])) {
       return 1;
     }
   }
@@ -264,33 +264,33 @@ func_F7AC() {
 pollallowedstancesthread() {
   for(;;) {
     if(self getteleportlonertargetplayer("stand")) {
-      var_00[0] = "stand allowed";
-      var_01[0] = (0, 1, 0);
+      var_0[0] = "stand allowed";
+      var_1[0] = (0, 1, 0);
     } else {
-      var_00[0] = "stand not allowed";
-      var_01[0] = (1, 0, 0);
+      var_0[0] = "stand not allowed";
+      var_1[0] = (1, 0, 0);
     }
 
     if(self getteleportlonertargetplayer("crouch")) {
-      var_00[1] = "crouch allowed";
-      var_01[1] = (0, 1, 0);
+      var_0[1] = "crouch allowed";
+      var_1[1] = (0, 1, 0);
     } else {
-      var_00[1] = "crouch not allowed";
-      var_01[1] = (1, 0, 0);
+      var_0[1] = "crouch not allowed";
+      var_1[1] = (1, 0, 0);
     }
 
     if(self getteleportlonertargetplayer("prone")) {
-      var_00[2] = "prone allowed";
-      var_01[2] = (0, 1, 0);
+      var_0[2] = "prone allowed";
+      var_1[2] = (0, 1, 0);
     } else {
-      var_00[2] = "prone not allowed";
-      var_01[2] = (1, 0, 0);
+      var_0[2] = "prone not allowed";
+      var_1[2] = (1, 0, 0);
     }
 
-    var_02 = self getshootatpos() + (0, 0, 30);
-    var_03 = (0, 0, -10);
-    for(var_04 = 0; var_04 < var_00.size; var_04++) {
-      var_05 = (var_02[0] + var_03[0] * var_04, var_02[1] + var_03[1] * var_04, var_02[2] + var_03[2] * var_04);
+    var_2 = self getshootatpos() + (0, 0, 30);
+    var_3 = (0, 0, -10);
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
+      var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
     }
 
     wait(0.05);
@@ -310,11 +310,11 @@ func_F2B0() {
   self.var_101BB = 1.35;
 }
 
-func_94AC(param_00, param_01, param_02, param_03) {
+func_94AC(var_0, var_1, var_2, var_3) {
   anim waittill("new exceptions");
 }
 
-empty(param_00, param_01, param_02, param_03) {}
+empty(var_0, var_1, var_2, var_3) {}
 
 func_6568() {
   self endon("death");
@@ -458,22 +458,22 @@ func_97F5() {
 }
 
 func_9811() {
-  for(var_00 = 0; var_00 < level.players.size; var_00++) {
-    var_01 = level.players[var_00];
-    var_01.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["frag"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["frag_main"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["frag_vr"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["emp"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["antigrav"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["seeker"] = randomintrange(1000, 20000);
-    var_01.grenadetimers["c8_grenade"] = randomintrange(1000, 10000);
-    var_01.grenadetimers["double_grenade"] = randomintrange(1000, -5536);
-    var_01.numgrenadesinprogresstowardsplayer = 0;
-    var_01.var_A990 = -1000000;
-    var_01.lastfraggrenadetoplayerstart = -1000000;
-    var_01 thread func_F7B3();
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    var_1 = level.players[var_0];
+    var_1.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag_main"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag_vr"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["emp"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["antigrav"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["seeker"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["c8_grenade"] = randomintrange(1000, 10000);
+    var_1.grenadetimers["double_grenade"] = randomintrange(1000, -5536);
+    var_1.numgrenadesinprogresstowardsplayer = 0;
+    var_1.var_A990 = -1000000;
+    var_1.lastfraggrenadetoplayerstart = -1000000;
+    var_1 thread func_F7B3();
   }
 
   level.grenadetimers["AI_fraggrenade"] = randomintrange(0, 20000);
@@ -527,26 +527,26 @@ func_9897() {
 }
 
 func_1B08() {
-  var_00 = 0;
-  var_01 = 3;
+  var_0 = 0;
+  var_1 = 3;
   for(;;) {
-    var_02 = getaiarray();
-    if(var_02.size == 0) {
+    var_2 = getaiarray();
+    if(var_2.size == 0) {
       wait(0.05);
-      var_00 = 0;
+      var_0 = 0;
       continue;
     }
 
-    for(var_03 = 0; var_03 < var_02.size; var_03++) {
-      if(!isDefined(var_02[var_03])) {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(!isDefined(var_2[var_3])) {
         continue;
       }
 
-      var_02[var_03] notify("do_slow_things");
-      var_00++;
-      if(var_00 == var_01) {
+      var_2[var_3] notify("do_slow_things");
+      var_0++;
+      if(var_0 == var_1) {
         wait(0.05);
-        var_00 = 0;
+        var_0 = 0;
       }
     }
   }
@@ -555,24 +555,24 @@ func_1B08() {
 func_F7B3() {
   waittillframeend;
   if(isDefined(self.gs.var_D397)) {
-    var_00 = int(self.gs.var_D397 * 0.7);
-    if(var_00 < 1) {
-      var_00 = 1;
+    var_0 = int(self.gs.var_D397 * 0.7);
+    if(var_0 < 1) {
+      var_0 = 1;
     }
 
-    self.grenadetimers["frag"] = randomintrange(0, var_00);
-    self.grenadetimers["flash_grenade"] = randomintrange(0, var_00);
-    self.grenadetimers["seeker"] = randomintrange(0, var_00);
+    self.grenadetimers["frag"] = randomintrange(0, var_0);
+    self.grenadetimers["flash_grenade"] = randomintrange(0, var_0);
+    self.grenadetimers["seeker"] = randomintrange(0, var_0);
   }
 
   if(isDefined(self.gs.var_D382)) {
-    var_00 = int(self.gs.var_D382);
-    var_01 = int(var_00 / 2);
-    if(var_00 <= var_01) {
-      var_00 = var_01 + 1;
+    var_0 = int(self.gs.var_D382);
+    var_1 = int(var_0 / 2);
+    if(var_0 <= var_1) {
+      var_0 = var_1 + 1;
     }
 
-    self.grenadetimers["double_grenade"] = randomintrange(var_01, var_00);
+    self.grenadetimers["double_grenade"] = randomintrange(var_1, var_0);
   }
 }
 
@@ -583,34 +583,34 @@ begingrenadetracking() {
 
   self endon("death");
   for(;;) {
-    self waittill("grenade_fire", var_00, var_01);
-    if(isDefined(var_00) && scripts\engine\utility::istrue(var_00._meth_8589)) {
+    self waittill("grenade_fire", var_0, var_1);
+    if(isDefined(var_0) && scripts\engine\utility::istrue(var_0._meth_8589)) {
       continue;
     }
 
     if(isDefined(level.func["ai_grenade_thrown"])) {
-      level thread[[level.func["ai_grenade_thrown"]]](var_00);
+      level thread[[level.func["ai_grenade_thrown"]]](var_0);
     }
 
-    switch (var_01) {
+    switch (var_1) {
       case "frag":
-        thread scripts\sp\detonategrenades::func_734F(var_00);
+        thread scripts\sp\detonategrenades::func_734F(var_0);
         break;
 
       case "emp":
-        thread lib_0E25::func_615B(var_00);
+        thread lib_0E25::func_615B(var_0);
         break;
 
       case "seeker":
-        thread lib_0E26::func_F135(var_00);
+        thread lib_0E26::func_F135(var_0);
         break;
 
       case "antigrav":
-        thread lib_0E21::func_2013(var_00);
+        thread lib_0E21::func_2013(var_0);
         break;
 
       default:
-        var_00 thread scripts\sp\utility::grenade_earthquake();
+        var_0 thread scripts\sp\utility::grenade_earthquake();
         break;
     }
   }
@@ -619,15 +619,15 @@ begingrenadetracking() {
 func_FAE3() {
   anim.var_DCB3 = 60;
   anim.var_DCB2 = [];
-  for(var_00 = 0; var_00 < level.var_DCB3; var_00++) {
-    level.var_DCB2[var_00] = var_00;
+  for(var_0 = 0; var_0 < level.var_DCB3; var_0++) {
+    level.var_DCB2[var_0] = var_0;
   }
 
-  for(var_00 = 0; var_00 < level.var_DCB3; var_00++) {
-    var_01 = randomint(level.var_DCB3);
-    var_02 = level.var_DCB2[var_00];
-    level.var_DCB2[var_00] = level.var_DCB2[var_01];
-    level.var_DCB2[var_01] = var_02;
+  for(var_0 = 0; var_0 < level.var_DCB3; var_0++) {
+    var_1 = randomint(level.var_DCB3);
+    var_2 = level.var_DCB2[var_0];
+    level.var_DCB2[var_0] = level.var_DCB2[var_1];
+    level.var_DCB2[var_1] = var_2;
   }
 }
 
@@ -739,9 +739,9 @@ func_5031() {
   self.a.weaponposdropping["chest"] = "none";
   self.a.weaponposdropping["back"] = "none";
   self.lastweapon = self.var_394;
-  var_00 = scripts\anim\utility_common::usingrocketlauncher();
-  self.a.var_BEF9 = var_00;
-  if(var_00) {
+  var_0 = scripts\anim\utility_common::usingrocketlauncher();
+  self.a.var_BEF9 = var_0;
+  if(var_0) {
     thread scripts\anim\shared::func_E775();
   }
 

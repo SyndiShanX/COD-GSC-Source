@@ -110,7 +110,7 @@ setupagent() {
   thread func_899C();
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_sasquatch_fullbody");
 }
 
@@ -126,20 +126,20 @@ func_899C() {
   self endon("death");
   level waittill("game_ended");
   self clearpath();
-  var_00 = self.var_164D[self.asmname];
-  var_01 = var_00.var_4BC0;
-  var_02 = level.asm[self.asmname].states[var_01];
-  scripts\asm\asm::func_2388(self.asmname, var_01, var_02, var_02.var_116FB);
+  var_0 = self.var_164D[self.asmname];
+  var_1 = var_0.var_4BC0;
+  var_2 = level.asm[self.asmname].states[var_1];
+  scripts\asm\asm::func_2388(self.asmname, var_1, var_2, var_2.var_116FB);
   scripts\asm\asm::func_238A(self.asmname, "idle", 0.2, undefined, undefined, undefined);
 }
 
-onsasquatchkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onsasquatchkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self getrandomhovernodesaroundtargetpos(1, 0);
   self setscriptablepartstate("right_eye", "inactive");
   self setscriptablepartstate("left_eye", "inactive");
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-onsasquatchdamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  scripts\mp\mp_agent::default_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+onsasquatchdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
 }

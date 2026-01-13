@@ -4,9 +4,9 @@
  * Script: scripts\sp\loadout_code.gsc
 ***************************************/
 
-func_EB77(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+func_EB77(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   level.player endon("death");
@@ -14,58 +14,58 @@ func_EB77(param_00, param_01) {
     return;
   }
 
-  var_02 = level.player getcurrentprimaryweapon();
-  if(!isDefined(var_02) || var_02 == "none") {}
+  var_2 = level.player getcurrentprimaryweapon();
+  if(!isDefined(var_2) || var_2 == "none") {}
 
-  game["weaponstates"][param_00]["current"] = var_02;
-  var_03 = level.player getcurrentoffhand();
-  game["weaponstates"][param_00]["offhand"] = var_03;
-  game["weaponstates"][param_00]["list"] = [];
-  var_04 = scripts\engine\utility::array_combine(level.player getweaponslistprimaries(), level.player getweaponslistoffhands());
-  for(var_05 = 0; var_05 < var_04.size; var_05++) {
-    game["weaponstates"][param_00]["list"][var_05]["name"] = var_04[var_05];
-    if(param_01) {
-      game["weaponstates"][param_00]["list"][var_05]["clip"] = level.player getweaponammoclip(var_04[var_05]);
-      game["weaponstates"][param_00]["list"][var_05]["stock"] = level.player getweaponammostock(var_04[var_05]);
+  game["weaponstates"][var_0]["current"] = var_2;
+  var_3 = level.player getcurrentoffhand();
+  game["weaponstates"][var_0]["offhand"] = var_3;
+  game["weaponstates"][var_0]["list"] = [];
+  var_4 = scripts\engine\utility::array_combine(level.player getweaponslistprimaries(), level.player getweaponslistoffhands());
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
+    game["weaponstates"][var_0]["list"][var_5]["name"] = var_4[var_5];
+    if(var_1) {
+      game["weaponstates"][var_0]["list"][var_5]["clip"] = level.player getweaponammoclip(var_4[var_5]);
+      game["weaponstates"][var_0]["list"][var_5]["stock"] = level.player getweaponammostock(var_4[var_5]);
     }
   }
 }
 
-func_E2E3(param_00, param_01, param_02) {
-  var_03 = scripts\engine\utility::ter_op(isDefined(param_02) && param_02, ::switchtoweaponimmediate, ::switchtoweapon);
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+func_E2E3(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::ter_op(isDefined(var_2) && var_2, ::switchtoweaponimmediate, ::switchtoweapon);
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   if(!isDefined(game["weaponstates"])) {
     return 0;
   }
 
-  if(!isDefined(game["weaponstates"][param_00])) {
+  if(!isDefined(game["weaponstates"][var_0])) {
     return 0;
   }
 
   level.player takeallweapons();
-  for(var_04 = 0; var_04 < game["weaponstates"][param_00]["list"].size; var_04++) {
-    var_05 = game["weaponstates"][param_00]["list"][var_04]["name"];
-    if(var_05 == "c4") {
+  for(var_4 = 0; var_4 < game["weaponstates"][var_0]["list"].size; var_4++) {
+    var_5 = game["weaponstates"][var_0]["list"][var_4]["name"];
+    if(var_5 == "c4") {
       continue;
     }
 
-    if(var_05 == "claymore") {
+    if(var_5 == "claymore") {
       continue;
     }
 
-    level.player giveweapon(var_05);
-    level.player givemaxammo(var_05);
-    if(param_01) {
-      level.player setweaponammoclip(var_05, game["weaponstates"][param_00]["list"][var_04]["clip"]);
-      level.player setweaponammostock(var_05, game["weaponstates"][param_00]["list"][var_04]["stock"]);
+    level.player giveweapon(var_5);
+    level.player givemaxammo(var_5);
+    if(var_1) {
+      level.player setweaponammoclip(var_5, game["weaponstates"][var_0]["list"][var_4]["clip"]);
+      level.player setweaponammostock(var_5, game["weaponstates"][var_0]["list"][var_4]["stock"]);
     }
   }
 
-  level.player giveunifiedpoints(game["weaponstates"][param_00]["offhand"]);
-  level.player[[var_03]](game["weaponstates"][param_00]["current"]);
+  level.player giveunifiedpoints(game["weaponstates"][var_0]["offhand"]);
+  level.player[[var_3]](game["weaponstates"][var_0]["current"]);
   return 1;
 }
 
@@ -89,13 +89,13 @@ func_7AA6() {
   return level.script;
 }
 
-func_37E7(param_00) {
-  level.var_1303 = param_00;
+func_37E7(var_0) {
+  level.var_1303 = var_0;
 }
 
-persist(param_00, param_01, param_02) {
-  var_03 = func_7AA6();
-  if(param_00 != var_03) {
+persist(var_0, var_1, var_2) {
+  var_3 = func_7AA6();
+  if(var_0 != var_3) {
     return;
   }
 
@@ -104,66 +104,66 @@ persist(param_00, param_01, param_02) {
   }
 
   level.var_1304 = 1;
-  if(isDefined(param_02)) {
-    level.player give_player_xp(param_02);
+  if(isDefined(var_2)) {
+    level.player give_player_xp(var_2);
   }
 
   func_E2E3(func_7AA6(), 1);
   level.var_8B8E = 1;
 }
 
-func_AE21(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(isDefined(param_00)) {
-    var_08 = func_7AA6();
-    if(param_00 != var_08 || isDefined(level.var_1304)) {
+func_AE21(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(isDefined(var_0)) {
+    var_8 = func_7AA6();
+    if(var_0 != var_8 || isDefined(level.var_1304)) {
       return;
     }
   }
 
-  if(isDefined(param_01)) {
-    if(param_01 == "iw7_ar57") {
-      param_01 = "iw7_ar57+ar57scope";
+  if(isDefined(var_1)) {
+    if(var_1 == "iw7_ar57") {
+      var_1 = "iw7_ar57+ar57scope";
     }
 
-    level.default_weapon = param_01;
-    level.player giveweapon(param_01);
+    level.default_weapon = var_1;
+    level.player giveweapon(var_1);
   }
 
-  if(isDefined(param_06)) {
-    if(param_06 == "iw7_erad") {
-      param_06 = "iw7_erad+eradscope";
+  if(isDefined(var_6)) {
+    if(var_6 == "iw7_erad") {
+      var_6 = "iw7_erad+eradscope";
     }
 
-    level.player give_player_xp(param_06);
+    level.player give_player_xp(var_6);
   }
 
-  if(isDefined(param_02)) {
-    level.player giveweapon(param_02);
+  if(isDefined(var_2)) {
+    level.player giveweapon(var_2);
   }
 
-  if(isDefined(param_03)) {
-    level.player giveweapon(param_03);
+  if(isDefined(var_3)) {
+    level.player giveweapon(var_3);
   }
 
-  if(isDefined(param_04)) {
-    level.player giveweapon(param_04);
+  if(isDefined(var_4)) {
+    level.player giveweapon(var_4);
   }
 
-  level.player switchtoweapon(param_01);
-  if(isDefined(param_05)) {
-    level.player givegoproattachments(param_05);
+  level.player switchtoweapon(var_1);
+  if(isDefined(var_5)) {
+    level.player givegoproattachments(var_5);
   }
 
   level.var_37E7 = level.var_1303;
   level.var_1303 = undefined;
   level.var_8B8E = 1;
-  if(isDefined(param_07)) {
-    func_F551(param_07);
+  if(isDefined(var_7)) {
+    func_F551(var_7);
   }
 }
 
-func_F551(param_00) {
-  level.var_D32B = param_00;
+func_F551(var_0) {
+  level.var_D32B = var_0;
   precachemodel(level.var_D32B);
 }
 

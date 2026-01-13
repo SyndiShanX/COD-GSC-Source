@@ -12,20 +12,20 @@ init() {
   level.hitmarkerpriorities["high_damage"] = 75;
 }
 
-updatedamagefeedback(param_00, param_01, param_02, param_03, param_04) {
+updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
   if(!isplayer(self) && !scripts\mp\utility::func_9EF0(self)) {
     return;
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = "standard";
+  if(!isDefined(var_3)) {
+    var_3 = "standard";
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !param_04) {
+  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !var_4) {
     if(!isDefined(self.var_903F)) {
       self.var_903F = 0;
     }
@@ -34,7 +34,7 @@ updatedamagefeedback(param_00, param_01, param_02, param_03, param_04) {
     self setclientomnvar("ui_hitmarker_audio_events", self.var_903F % 16);
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "none":
       break;
 
@@ -54,43 +54,43 @@ updatedamagefeedback(param_00, param_01, param_02, param_03, param_04) {
     case "hitjuggernaut":
     case "hitlightarmor":
     case "hitequip":
-      self setclientomnvar("damage_feedback_icon", param_00);
+      self setclientomnvar("damage_feedback_icon", var_0);
       self setclientomnvar("damage_feedback_icon_notify", gettime());
-      updatehitmarker(param_03, param_01, param_02);
+      updatehitmarker(var_3, var_1, var_2);
       break;
 
     default:
-      updatehitmarker(param_03, param_01, param_02);
+      updatehitmarker(var_3, var_1, var_2);
       break;
   }
 }
 
-updatehitmarker(param_00, param_01, param_02) {
-  if(!isDefined(param_00)) {
+updatehitmarker(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  param_02 = 0;
-  var_03 = gethitmarkerpriority(param_00);
-  if(isDefined(self.var_A99E) && self.var_A99E == gettime() && var_03 <= self.var_A99D && !param_01) {
+  var_2 = 0;
+  var_3 = gethitmarkerpriority(var_0);
+  if(isDefined(self.var_A99E) && self.var_A99E == gettime() && var_3 <= self.var_A99D && !var_1) {
     return;
   }
 
   self.var_A99E = gettime();
-  self.var_A99D = var_03;
-  self setclientomnvar("damage_feedback", param_00);
+  self.var_A99D = var_3;
+  self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
-  if(param_01) {
+  if(var_1) {
     self setclientomnvar("damage_feedback_kill", 1);
   } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
-  if(param_02) {
+  if(var_2) {
     self setclientomnvar("damage_feedback_headshot", 1);
     return;
   }
@@ -98,63 +98,63 @@ updatehitmarker(param_00, param_01, param_02) {
   self setclientomnvar("damage_feedback_headshot", 0);
 }
 
-gethitmarkerpriority(param_00) {
-  if(!isDefined(level.hitmarkerpriorities[param_00])) {
+gethitmarkerpriority(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[param_00];
+  return level.hitmarkerpriorities[var_0];
 }
 
-hudicontype(param_00) {
-  var_01 = 0;
+hudicontype(var_0) {
+  var_1 = 0;
   if(isDefined(level.damagefeedbacknosound) && level.damagefeedbacknosound) {
-    var_01 = 1;
+    var_1 = 1;
   }
 
   if(!isplayer(self)) {
     return;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "throwingknife":
     case "scavenger":
-      if(!var_01) {
+      if(!var_1) {
         self playlocalsound("scavenger_pack_pickup");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", param_00);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
       break;
 
     case "scavenger_eqp":
-      if(!var_01) {
+      if(!var_1) {
         self playlocalsound("scavenger_pack_pickup");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", param_00);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
       break;
 
     case "boxofguns":
-      if(!var_01) {
+      if(!var_1) {
         self playlocalsound("mp_box_guns_ammo");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", param_00);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
       break;
 
     case "eqp_ping":
-      if(!var_01) {
+      if(!var_1) {
         self playsoundtoplayer("mp_cranked_countdown", self);
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", param_00);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
       break;
   }

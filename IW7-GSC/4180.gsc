@@ -92,8 +92,8 @@ func_1DB7() {
   scripts\engine\utility::exploder("ground_fx");
 }
 
-func_1326B(var_00) {
-  switch (var_00) {
+func_1326B(var_0) {
+  switch (var_0) {
     case 0:
       _setsaveddvar("r_veilFalloffWeight1", (1, 0.95, 0.75));
       _setsaveddvar("r_veilFalloffWeight2", (0.25, 0.0875, 0.02));

@@ -6,23 +6,23 @@
 
 init_teleport_portals() {
   wait(5);
-  var_00 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread trigger_when_player_close_by();
+  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread trigger_when_player_close_by();
     wait(0.1);
   }
 }
 
 trigger_when_player_close_by() {
-  var_00 = getEntArray("chi_door_fast_travel_portal_trigger", "targetname");
-  self.trigger = scripts\engine\utility::getclosest(self.origin, var_00, 500);
+  var_0 = getEntArray("chi_door_fast_travel_portal_trigger", "targetname");
+  self.trigger = scripts\engine\utility::getclosest(self.origin, var_0, 500);
   self.start_point_name = self.script_noteworthy;
   self.end_point_name = self.script_parameters;
   self.end_point = scripts\engine\utility::getstruct(self.script_parameters, "script_noteworthy");
   self.teleport_door = scripts\engine\utility::getclosest(self.origin, getEntArray("chi_door_fast_travel", "targetname"));
-  var_01 = getEntArray("chi_door_fast_travel_symbol", "targetname");
-  if(isDefined(var_01)) {
-    self.teleport_door_symbol = scripts\engine\utility::getclosest(self.origin, var_01);
+  var_1 = getEntArray("chi_door_fast_travel_symbol", "targetname");
+  if(isDefined(var_1)) {
+    self.teleport_door_symbol = scripts\engine\utility::getclosest(self.origin, var_1);
   }
 
   self.recently_used = [];
@@ -34,9 +34,9 @@ trigger_when_player_close_by() {
 
   self.teleport_spots = scripts\engine\utility::getstructarray(self.end_point.target, "targetname");
   script_add_teleport_spots();
-  foreach(var_03 in self.teleport_spots) {
-    if(!isDefined(var_03.angles)) {
-      var_03.angles = (0, 0, 0);
+  foreach(var_3 in self.teleport_spots) {
+    if(!isDefined(var_3.angles)) {
+      var_3.angles = (0, 0, 0);
     }
   }
 
@@ -44,12 +44,12 @@ trigger_when_player_close_by() {
   self.teleport_door setCanRadiusDamage(1);
   self.teleport_door.health = 10000000;
   for(;;) {
-    self.teleport_door waittill("damage", var_05, var_06, var_07, var_08, var_09, var_0A, var_0B, var_0C, var_0D, var_0E);
+    self.teleport_door waittill("damage", var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E);
     if(is_shuriken(var_0E)) {
       break;
     }
 
-    if(isplayer(var_06) && scripts\engine\utility::istrue(var_06.kung_fu_mode)) {
+    if(isplayer(var_6) && scripts\engine\utility::istrue(var_6.kung_fu_mode)) {
       break;
     }
 
@@ -69,7 +69,7 @@ trigger_when_player_close_by() {
   self.portal_scriptable.angles = self.angles;
   playsoundatpos(self.portal_spot.origin, "cp_disco_doorbuy_wood_break");
   self.portal_scriptable setscriptablepartstate("portal", "door_break");
-  var_06 thread scripts\cp\cp_vo::try_to_play_vo("door_wooden_sucess", "disco_comment_vo");
+  var_6 thread scripts\cp\cp_vo::try_to_play_vo("door_wooden_sucess", "disco_comment_vo");
   thread portal_cooldown_monitor();
   wait(1);
   for(;;) {
@@ -118,9 +118,9 @@ trigger_when_player_close_by() {
   }
 }
 
-is_shuriken(param_00) {
-  if(isDefined(param_00)) {
-    if(issubstr(param_00, "shuriken")) {
+is_shuriken(var_0) {
+  if(isDefined(var_0)) {
+    if(issubstr(var_0, "shuriken")) {
       return 1;
     }
   }
@@ -129,24 +129,24 @@ is_shuriken(param_00) {
 }
 
 script_add_teleport_spots() {
-  var_00 = [];
+  var_0 = [];
   if(self.teleport_spots[0].origin == (-758, 1902, 800)) {
-    var_00 = [(-758, 1928, 800), (-730, 1902, 800), (-758, 1878, 800)];
+    var_0 = [(-758, 1928, 800), (-730, 1902, 800), (-758, 1878, 800)];
   } else if(self.teleport_spots[0].origin == (-2332, 3146, 266)) {
-    var_00 = [(-2308, 3146, 266), (-2332, 3122, 266), (-2356, 3146, 266)];
+    var_0 = [(-2308, 3146, 266), (-2332, 3122, 266), (-2356, 3146, 266)];
   } else if(self.teleport_spots[0].origin == (-970, 514, 944)) {
-    var_00 = [(-1004, 514, 944), (-970, 542, 944), (-938, 514, 944)];
+    var_0 = [(-1004, 514, 944), (-970, 542, 944), (-938, 514, 944)];
   } else if(self.teleport_spots[0].origin == (-2288, 4728, 784)) {
-    var_00 = [(-2314, 4728, 784), (-2288, 4700, 784), (-2264, 4728, 784)];
+    var_0 = [(-2314, 4728, 784), (-2288, 4700, 784), (-2264, 4728, 784)];
   }
 
-  var_01 = self.teleport_spots[0].angles;
-  foreach(var_03 in var_00) {
-    var_04 = spawnStruct();
-    var_04.origin = var_03;
-    var_04.angles = var_01;
-    var_04.var_336 = self.teleport_spots[0].var_336;
-    self.teleport_spots[self.teleport_spots.size] = var_04;
+  var_1 = self.teleport_spots[0].angles;
+  foreach(var_3 in var_0) {
+    var_4 = spawnStruct();
+    var_4.origin = var_3;
+    var_4.angles = var_1;
+    var_4.var_336 = self.teleport_spots[0].var_336;
+    self.teleport_spots[self.teleport_spots.size] = var_4;
   }
 }
 
@@ -168,10 +168,10 @@ watch_for_rewind_quest() {
         scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
         thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.05);
         thread scripts\cp\maps\cp_disco\cp_disco_interactions::play_fx_rewind(0.05);
-        var_00 = level.clock[self.quest_num - 1].origin;
-        var_01 = level.clock[self.quest_num - 1].angles;
-        var_02 = getclosestpointonnavmesh(var_00);
-        self setorigin(var_02, 0);
+        var_0 = level.clock[self.quest_num - 1].origin;
+        var_1 = level.clock[self.quest_num - 1].angles;
+        var_2 = getclosestpointonnavmesh(var_0);
+        self setorigin(var_2, 0);
         self setvelocity((0, 0, 0));
         self setstance("stand");
       }
@@ -183,60 +183,60 @@ watch_for_rewind_quest() {
   }
 }
 
-move_player_through_portal_tube(param_00) {
-  param_00 endon("disconnect");
-  param_00 thread watch_for_rewind_quest();
-  param_00 scripts\cp\powers\coop_powers::power_disablepower();
-  param_00.disable_consumables = 1;
-  param_00.isfasttravelling = 1;
-  param_00 getrigindexfromarchetyperef();
-  param_00 notify("delete_equipment");
-  param_00 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
-  var_01 = scripts\cp\maps\cp_disco\cp_disco::move_through_tube(param_00, "fast_travel_tube_start", "fast_travel_tube_end", 1);
+move_player_through_portal_tube(var_0) {
+  var_0 endon("disconnect");
+  var_0 thread watch_for_rewind_quest();
+  var_0 scripts\cp\powers\coop_powers::power_disablepower();
+  var_0.disable_consumables = 1;
+  var_0.isfasttravelling = 1;
+  var_0 getrigindexfromarchetyperef();
+  var_0 notify("delete_equipment");
+  var_0 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
+  var_1 = scripts\cp\maps\cp_disco\cp_disco::move_through_tube(var_0, "fast_travel_tube_start", "fast_travel_tube_end", 1);
   self.cooldown = self.cooldown + 30;
-  teleport_to_portal_safe_spot(param_00);
-  param_00 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
+  teleport_to_portal_safe_spot(var_0);
+  var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
   wait(0.1);
-  var_01 delete();
-  if(scripts\engine\utility::istrue(param_00.travelled_thru_portal)) {
+  var_1 delete();
+  if(scripts\engine\utility::istrue(var_0.travelled_thru_portal)) {
     if(isDefined(level.clock_interaction_q2)) {
       if(!scripts\engine\utility::istrue(level.clock_interaction_q2.clock_active)) {
-        param_00.travelled_thru_portal = undefined;
+        var_0.travelled_thru_portal = undefined;
       }
     }
-  } else if(scripts\engine\utility::istrue(param_00.travelled_thru_portal)) {
+  } else if(scripts\engine\utility::istrue(var_0.travelled_thru_portal)) {
     if(isDefined(level.clock_interaction_q3)) {
       if(!scripts\engine\utility::istrue(level.clock_interaction_q3.clock_active)) {
-        param_00.travelled_thru_portal = undefined;
+        var_0.travelled_thru_portal = undefined;
       }
     }
   }
 
-  if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-    param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
-    param_00.wor_phase_shift = 0;
+  if(scripts\engine\utility::istrue(var_0.wor_phase_shift)) {
+    var_0 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
+    var_0.wor_phase_shift = 0;
   }
 
-  param_00 scripts\cp\utility::removedamagemodifier("papRoom", 0);
-  param_00.is_off_grid = undefined;
-  param_00.kicked_out = undefined;
-  param_00.isfasttravelling = undefined;
-  param_00 notify("fast_travel_complete");
-  param_00.disable_consumables = undefined;
-  param_00 scripts\cp\powers\coop_powers::power_enablepower();
-  param_00 thread update_personal_ents_after_delay();
-  if(param_00.vo_prefix == "p5_") {
-    param_00 thread scripts\cp\cp_vo::try_to_play_vo("fasttravel_exit", "disco_comment_vo");
+  var_0 scripts\cp\utility::removedamagemodifier("papRoom", 0);
+  var_0.is_off_grid = undefined;
+  var_0.kicked_out = undefined;
+  var_0.isfasttravelling = undefined;
+  var_0 notify("fast_travel_complete");
+  var_0.disable_consumables = undefined;
+  var_0 scripts\cp\powers\coop_powers::power_enablepower();
+  var_0 thread update_personal_ents_after_delay();
+  if(var_0.vo_prefix == "p5_") {
+    var_0 thread scripts\cp\cp_vo::try_to_play_vo("fasttravel_exit", "disco_comment_vo");
   }
 }
 
-move_zombie_through_portal_tube(param_00) {
-  param_00.isfasttravelling = 1;
-  var_01 = scripts\cp\maps\cp_disco\cp_disco::move_through_tube(param_00, "fast_travel_tube_start", "fast_travel_tube_end", 1);
-  teleport_to_portal_safe_spot(param_00);
+move_zombie_through_portal_tube(var_0) {
+  var_0.isfasttravelling = 1;
+  var_1 = scripts\cp\maps\cp_disco\cp_disco::move_through_tube(var_0, "fast_travel_tube_start", "fast_travel_tube_end", 1);
+  teleport_to_portal_safe_spot(var_0);
   wait(0.1);
-  var_01 delete();
-  param_00.isfasttravelling = undefined;
+  var_1 delete();
+  var_0.isfasttravelling = undefined;
 }
 
 update_personal_ents_after_delay() {
@@ -254,50 +254,50 @@ unlinkplayerafterduration() {
   self unlink();
 }
 
-teleport_to_portal_safe_spot(param_00) {
-  var_01 = self.teleport_spots;
-  var_02 = undefined;
-  while(!isDefined(var_02)) {
-    foreach(var_04 in var_01) {
-      if(!positionwouldtelefrag(var_04.origin)) {
-        var_02 = var_04;
+teleport_to_portal_safe_spot(var_0) {
+  var_1 = self.teleport_spots;
+  var_2 = undefined;
+  while(!isDefined(var_2)) {
+    foreach(var_4 in var_1) {
+      if(!positionwouldtelefrag(var_4.origin)) {
+        var_2 = var_4;
       }
     }
 
-    if(!isDefined(var_02)) {
-      if(!isDefined(var_01[0].angles)) {
-        var_01[0].angles = (0, 0, 0);
+    if(!isDefined(var_2)) {
+      if(!isDefined(var_1[0].angles)) {
+        var_1[0].angles = (0, 0, 0);
       }
 
-      var_06 = scripts\cp\utility::vec_multiply(anglesToForward(var_01[0].angles), 64);
-      var_02 = spawnStruct();
-      var_02.origin = var_01[0].origin + var_06;
-      var_02.angles = var_01[0].angles;
+      var_6 = scripts\cp\utility::vec_multiply(anglesToForward(var_1[0].angles), 64);
+      var_2 = spawnStruct();
+      var_2.origin = var_1[0].origin + var_6;
+      var_2.angles = var_1[0].angles;
     }
 
     wait(0.1);
   }
 
-  param_00 playershow();
-  if(scripts\engine\utility::istrue(param_00.isrewinding) || isDefined(self.rewindmover)) {
-    param_00 thread unlinkplayerafterduration();
+  var_0 playershow();
+  if(scripts\engine\utility::istrue(var_0.isrewinding) || isDefined(self.rewindmover)) {
+    var_0 thread unlinkplayerafterduration();
   } else {
-    param_00 unlink();
+    var_0 unlink();
   }
 
-  param_00 dontinterpolate();
-  param_00 setorigin(var_02.origin);
-  param_00 setplayerangles(var_02.angles);
-  param_00.disable_consumables = undefined;
-  param_00 scripts\cp\powers\coop_powers::power_enablepower();
-  param_00.portal_end_origin = var_02.origin;
+  var_0 dontinterpolate();
+  var_0 setorigin(var_2.origin);
+  var_0 setplayerangles(var_2.angles);
+  var_0.disable_consumables = undefined;
+  var_0 scripts\cp\powers\coop_powers::power_enablepower();
+  var_0.portal_end_origin = var_2.origin;
 }
 
-delay_portal_trigger_on_player(param_00, param_01) {
-  wait(param_01);
-  param_00.recently_used_portal = undefined;
-  wait(param_01 * 2);
-  self.recently_used = scripts\engine\utility::array_remove(self.recently_used, param_00);
+delay_portal_trigger_on_player(var_0, var_1) {
+  wait(var_1);
+  var_0.recently_used_portal = undefined;
+  wait(var_1 * 2);
+  self.recently_used = scripts\engine\utility::array_remove(self.recently_used, var_0);
 }
 
 portal_cooldown_monitor() {
@@ -306,10 +306,10 @@ portal_cooldown_monitor() {
     wait(0.1);
   }
 
-  var_00 = 0.1;
+  var_0 = 0.1;
   for(;;) {
     if(self.cooldown > 0) {
-      self.cooldown = self.cooldown - var_00;
+      self.cooldown = self.cooldown - var_0;
       if(self.portal_scriptable getscriptablepartstate("portal") != "cooldown") {
         self.portal_scriptable setscriptablepartstate("portal", "cooldown");
       }
@@ -321,6 +321,6 @@ portal_cooldown_monitor() {
       self.cooldown = 0;
     }
 
-    wait(var_00);
+    wait(var_0);
   }
 }

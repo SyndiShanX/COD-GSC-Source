@@ -28,19 +28,19 @@ agent_squadmember_conf_think() {
 
   if(gettime() > self.next_time_check_tags) {
     self.next_time_check_tags = gettime() + 500;
-    var_00 = 0.78;
-    var_01 = self.triggerportableradarping getnearestnode();
-    if(isDefined(var_01)) {
-      var_02 = self.triggerportableradarping scripts\mp\bots\gametype_conf::bot_find_visible_tags(1, var_01, var_00);
-      self.tags_seen_by_owner = scripts\mp\bots\gametype_conf::bot_combine_tag_seen_arrays(var_02, self.tags_seen_by_owner);
+    var_0 = 0.78;
+    var_1 = self.triggerportableradarping getnearestnode();
+    if(isDefined(var_1)) {
+      var_2 = self.triggerportableradarping scripts\mp\bots\gametype_conf::bot_find_visible_tags(1, var_1, var_0);
+      self.tags_seen_by_owner = scripts\mp\bots\gametype_conf::bot_combine_tag_seen_arrays(var_2, self.tags_seen_by_owner);
     }
   }
 
   self.tags_seen_by_owner = scripts\mp\bots\gametype_conf::bot_remove_invalid_tags(self.tags_seen_by_owner);
-  var_03 = scripts\mp\bots\gametype_conf::bot_find_best_tag_from_array(self.tags_seen_by_owner, 0);
-  if(isDefined(var_03)) {
-    if(!isDefined(self.tag_getting) || distancesquared(var_03.curorigin, self.tag_getting.curorigin) > 1) {
-      self.tag_getting = var_03;
+  var_3 = scripts\mp\bots\gametype_conf::bot_find_best_tag_from_array(self.tags_seen_by_owner, 0);
+  if(isDefined(var_3)) {
+    if(!isDefined(self.tag_getting) || distancesquared(var_3.curorigin, self.tag_getting.curorigin) > 1) {
+      self.tag_getting = var_3;
       scripts\mp\bots\_bots_strategy::bot_defend_stop();
       self botsetscriptgoal(self.tag_getting.curorigin, 0, "objective", undefined, level.bot_tag_obj_radius);
     }

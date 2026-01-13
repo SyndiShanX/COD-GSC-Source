@@ -41,42 +41,42 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_124B0(param_00, param_01, param_02, param_03) {
+func_124B0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_124BA(param_00, param_01, param_02, param_03) {
+func_124BA(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch";
 }
 
-func_124A9(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_124A9(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_124A1(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "full";
+func_124A1(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "full";
 }
 
-func_124A5(param_00, param_01, param_02, param_03) {
+func_124A5(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_12047(param_00, param_01, param_02, param_03) {
+func_12047(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_1204C(param_00, param_01, param_02, param_03) {
+func_1204C(var_0, var_1, var_2, var_3) {
   return self.a.pose != "crouch";
 }
 
-func_1203F(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_1203F(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_12037(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "full";
+func_12037(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "full";
 }
 
-func_1203B(param_00, param_01, param_02, param_03) {
+func_1203B(var_0, var_1, var_2, var_3) {
   return 1;
 }

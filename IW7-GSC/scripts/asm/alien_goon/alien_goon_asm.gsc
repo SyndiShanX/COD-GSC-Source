@@ -4,14 +4,14 @@
  * Script: scripts\asm\alien_goon\alien_goon_asm.gsc
 *****************************************************/
 
-asminit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+asminit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
   self.fnactionvalidator = ::isvalidaction;
   scripts\asm\dlc4\dlc4_asm::analyzeanims();
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "stumble":
     case "slide_right":
     case "slide_left":
@@ -27,59 +27,59 @@ isvalidaction(param_00) {
   return 0;
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-playstumble(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+playstumble(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
-    scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 0.2);
+    scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 0.2);
     return;
   }
 
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, self.var_C081);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, self.var_C081);
 }
 
-playpostattackmanuever(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  if(isDefined(var_04)) {
-    thread scripts\asm\zombie\melee::func_6A6A(param_01, var_04);
+playpostattackmanuever(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  if(isDefined(var_4)) {
+    thread scripts\asm\zombie\melee::func_6A6A(var_1, var_4);
   }
 
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
-    scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, 0.2);
+    scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, 0.2);
     return;
   }
 
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, self.var_C081);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, self.var_C081);
 }
 
-wantstododge(param_00, param_01, param_02, param_03) {
-  return isDefined(self.var_1198.requested_dodge_dir);
+wantstododge(var_0, var_1, var_2, var_3) {
+  return isDefined(self._blackboard.requested_dodge_dir);
 }
 
-playdodgeanim(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+playdodgeanim(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
     self scragentsetanimscale(0.2, 0.2);
   } else {
-    self scragentsetanimscale(self.var_1198.requested_dodge_scale, 1);
+    self scragentsetanimscale(self._blackboard.requested_dodge_scale, 1);
   }
 
-  self.var_1198.requested_dodge_dir = undefined;
-  self.var_1198.requested_dodge_scale = undefined;
+  self._blackboard.requested_dodge_dir = undefined;
+  self._blackboard.requested_dodge_scale = undefined;
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
-    scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 0.2);
+    scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 0.2);
     return;
   }
 
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, self.var_C081);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, self.var_C081);
 }
 
-terminate_rundodge(param_00, param_01, param_02) {
+terminate_rundodge(var_0, var_1, var_2) {
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
     self scragentsetanimscale(0.2, 0.2);
     return;
@@ -88,6 +88,6 @@ terminate_rundodge(param_00, param_01, param_02) {
   self scragentsetanimscale(1, 1);
 }
 
-choosedodgeanim(param_00, param_01, param_02) {
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, self.var_1198.requested_dodge_dir);
+choosedodgeanim(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, self._blackboard.requested_dodge_dir);
 }

@@ -56,7 +56,7 @@ setupagent() {
   self.pinched = undefined;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   if(should_be_soldier()) {
     self.is_soldier = 1;
     self.dontmutilate = 1;
@@ -73,8 +73,8 @@ should_be_soldier() {
     return 0;
   }
 
-  var_00 = randomint(100);
-  if(var_00 < 15) {
+  var_0 = randomint(100);
+  if(var_0 < 15) {
     return 1;
   }
 
@@ -82,9 +82,9 @@ should_be_soldier() {
 }
 
 setup_solider_model() {
-  var_00 = randomint(level.soldier_models.size);
-  var_01 = level.soldier_models[var_00];
-  self setModel(var_01);
+  var_0 = randomint(level.soldier_models.size);
+  var_1 = level.soldier_models[var_0];
+  self setModel(var_1);
   thread scripts\mp\agents\zombie\zmb_zombie_agent::func_50EF();
 }
 
@@ -92,14 +92,14 @@ dopiranhatrapdeath() {
   scripts\asm\asm::asm_setstate("piranha_trap");
 }
 
-onzombiedamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
 }
 
-onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-func_C4BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::func_C4BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }

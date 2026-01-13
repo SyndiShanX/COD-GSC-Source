@@ -22,64 +22,64 @@ removetransponder() {
   self notify("remove_transponder");
 }
 
-transponder_place(param_00) {
+transponder_place(var_0) {
   if(checkvalidplacementstate()) {
-    transponder_throw(param_00);
+    transponder_throw(var_0);
     return;
   }
 
-  thread placementfailed(param_00);
+  thread placementfailed(var_0);
 }
 
-transponder_use(param_00) {
+transponder_use(var_0) {
   self.var_9F2F = scripts\mp\powerloot::func_D779("power_transponder", "passive_ripper");
   self.var_9FB0 = scripts\mp\powerloot::func_D779("power_transponder", "passive_spot_enemies");
-  transponder_throw(param_00);
+  transponder_throw(var_0);
 }
 
-transponder_throw(param_00) {
+transponder_throw(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("remove_transponder");
-  var_01 = "power_transponder";
+  var_1 = "power_transponder";
   self setclientomnvar("ui_transponder_range_finder", 0);
   self setclientomnvar("ui_show_transponder_outofrange", 0);
   if(!scripts\mp\utility::isreallyalive(self)) {
-    param_00 delete();
+    var_0 delete();
     return;
   }
 
-  param_00 thread scripts\mp\weapons::ondetonateexplosive();
-  thread watchtransponderdetonation(param_00);
-  param_00 setotherent(self);
-  param_00.activated = 0;
-  scripts\mp\weapons::ontacticalequipmentplanted(param_00, "power_transponder");
-  thread transponderrangefinder(param_00);
-  param_00 thread transponderactivate();
-  param_00 thread scripts\mp\weapons::func_3343();
-  param_00 thread transponderdamage();
-  param_00 thread scripts\mp\weapons::func_66B4(1);
-  param_00 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-  level thread scripts\mp\weapons::monitordisownedequipment(self, param_00);
+  var_0 thread scripts\mp\weapons::ondetonateexplosive();
+  thread watchtransponderdetonation(var_0);
+  var_0 setotherent(self);
+  var_0.activated = 0;
+  scripts\mp\weapons::ontacticalequipmentplanted(var_0, "power_transponder");
+  thread transponderrangefinder(var_0);
+  var_0 thread transponderactivate();
+  var_0 thread scripts\mp\weapons::func_3343();
+  var_0 thread transponderdamage();
+  var_0 thread scripts\mp\weapons::func_66B4(1);
+  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  level thread scripts\mp\weapons::monitordisownedequipment(self, var_0);
 }
 
-watchtransponderdetonation(param_00) {
+watchtransponderdetonation(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("transponder_alt_detonate");
   self endon("transponder_detonated");
-  param_00 waittill("activated");
+  var_0 waittill("activated");
   for(;;) {
     self setclientomnvar("ui_show_transponder_outofrange", 0);
     self waittillmatch("transponder_mp", "detonate");
-    var_01 = scripts\mp\powerloot::func_7FC5("power_transponder", 1801);
-    if(isDefined(param_00) && param_00.activated && length2d(param_00.origin - self.origin) <= var_01) {
-      transponder_teleportplayer(param_00);
+    var_1 = scripts\mp\powerloot::func_7FC5("power_transponder", 1801);
+    if(isDefined(var_0) && var_0.activated && length2d(var_0.origin - self.origin) <= var_1) {
+      transponder_teleportplayer(var_0);
       transponderdetonateallcharges();
       continue;
     }
 
-    if(isDefined(param_00)) {
+    if(isDefined(var_0)) {
       self setclientomnvar("ui_show_transponder_outofrange", 1);
       scripts\engine\utility::waitframe();
     }
@@ -89,16 +89,16 @@ watchtransponderdetonation(param_00) {
 }
 
 transponderdamage() {
-  var_00 = self.triggerportableradarping;
-  var_00 waittill("transponder_update");
-  var_00 setclientomnvar("ui_transponder_range_finder", 0);
+  var_0 = self.triggerportableradarping;
+  var_0 waittill("transponder_update");
+  var_0 setclientomnvar("ui_transponder_range_finder", 0);
 }
 
 transponderdetonateallcharges() {
-  foreach(var_01 in self.plantedtacticalequip) {
-    if(isDefined(var_01) && var_01.weapon_name == "transponder_mp") {
-      var_01 scripts\mp\weapons::deleteexplosive();
-      scripts\engine\utility::array_remove(self.plantedtacticalequip, var_01);
+  foreach(var_1 in self.plantedtacticalequip) {
+    if(isDefined(var_1) && var_1.weapon_name == "transponder_mp") {
+      var_1 scripts\mp\weapons::deleteexplosive();
+      scripts\engine\utility::array_remove(self.plantedtacticalequip, var_1);
     }
   }
 
@@ -107,17 +107,17 @@ transponderdetonateallcharges() {
   self notify("transponder_detonated");
 }
 
-watchtransponderaltdetonation(param_00) {
+watchtransponderaltdetonation(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("transponder_detonated");
-  param_00 waittill("activated");
+  var_0 waittill("activated");
   for(;;) {
     self waittill("transponder_alt_detonate");
-    var_01 = self getcurrentweapon();
-    if(var_01 != "transponder_mp") {
-      if(isDefined(param_00) && param_00.activated) {
-        transponder_teleportplayer(param_00);
+    var_1 = self getcurrentweapon();
+    if(var_1 != "transponder_mp") {
+      if(isDefined(var_0) && var_0.activated) {
+        transponder_teleportplayer(var_0);
         transponderdetonateallcharges();
         continue;
       }
@@ -127,32 +127,32 @@ watchtransponderaltdetonation(param_00) {
   }
 }
 
-watchtransponderaltdetonate(param_00) {
+watchtransponderaltdetonate(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("transponder_detonated");
   level endon("game_ended");
-  param_00 waittill("activated");
-  var_01 = 0;
+  var_0 waittill("activated");
+  var_1 = 0;
   for(;;) {
     if(self usebuttonpressed()) {
-      var_01 = 0;
+      var_1 = 0;
       while(self usebuttonpressed()) {
-        var_01 = var_01 + 0.05;
+        var_1 = var_1 + 0.05;
         wait(0.05);
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
 
-      var_01 = 0;
-      while(!self usebuttonpressed() && var_01 < 0.5) {
-        var_01 = var_01 + 0.05;
+      var_1 = 0;
+      while(!self usebuttonpressed() && var_1 < 0.5) {
+        var_1 = var_1 + 0.05;
         wait(0.05);
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
 
@@ -176,7 +176,7 @@ watchtransponderaltdetonate(param_00) {
 }
 
 transponderactivate() {
-  self waittill("missile_stuck", var_00);
+  self waittill("missile_stuck", var_0);
   wait(0.05);
   if(!checkvalidposition()) {
     self.triggerportableradarping placementfailed(self);
@@ -188,18 +188,18 @@ transponderactivate() {
   self.activated = 1;
   self.triggerportableradarping func_5616(self);
   scripts\mp\weapons::makeexplosiveusable();
-  scripts\mp\weapons::explosivehandlemovers(var_00);
+  scripts\mp\weapons::explosivehandlemovers(var_0);
 }
 
-transponder_teleportplayer(param_00) {
+transponder_teleportplayer(var_0) {
   self notify("transponder_teleportPlayer");
-  var_01 = undefined;
-  var_02 = getclosestpointonnavmesh(param_00.origin);
-  var_01 = getclosestnodeinsight(var_02);
-  if(isDefined(var_01)) {
-    thread activationeffects(self.origin, param_00.origin);
+  var_1 = undefined;
+  var_2 = getclosestpointonnavmesh(var_0.origin);
+  var_1 = getclosestnodeinsight(var_2);
+  if(isDefined(var_1)) {
+    thread activationeffects(self.origin, var_0.origin);
     self playlocalsound("ghost_use_transponder");
-    self setorigin(var_01.origin + (0, 0, 20));
+    self setorigin(var_1.origin + (0, 0, 20));
     if(self.var_9FB0) {
       thread func_12694();
     }
@@ -216,18 +216,18 @@ transponder_teleportplayer(param_00) {
   self.triggerportableradarping transponderdetonateallcharges();
 }
 
-activationeffects(param_00, param_01) {
+activationeffects(var_0, var_1) {
   wait(0.1);
-  var_02 = "direction_indicator_far";
-  var_03 = length2d(param_00 - param_01);
-  if(var_03 < 1024) {
-    var_02 = "direction_indicator_close";
-  } else if(var_03 < 2048) {
-    var_02 = "direction_indicator_mid";
+  var_2 = "direction_indicator_far";
+  var_3 = length2d(var_0 - var_1);
+  if(var_3 < 1024) {
+    var_2 = "direction_indicator_close";
+  } else if(var_3 < 2048) {
+    var_2 = "direction_indicator_mid";
   }
 
-  playFX(scripts\engine\utility::getfx(var_02), param_00, (0, 0, 1), anglesToForward(vectortoangles(param_01 - param_00)));
-  playFX(scripts\engine\utility::getfx("transponder_activate"), param_01);
+  playFX(scripts\engine\utility::getfx(var_2), var_0, (0, 0, 1), anglesToForward(vectortoangles(var_1 - var_0)));
+  playFX(scripts\engine\utility::getfx("transponder_activate"), var_1);
 }
 
 runtranspondersickness() {
@@ -238,50 +238,50 @@ runtranspondersickness() {
   scripts\mp\killstreaks\_emp_common::func_E0F3();
 }
 
-transponderrangefinder(param_00) {
-  param_00 endon("death");
+transponderrangefinder(var_0) {
+  var_0 endon("death");
   self endon("disconnect");
-  thread transponderwatchfordisuse(param_00);
-  while(isDefined(param_00)) {
-    var_01 = distance2d(self.origin, param_00.origin);
-    self setclientomnvar("ui_transponder_range_finder", int(var_01));
+  thread transponderwatchfordisuse(var_0);
+  while(isDefined(var_0)) {
+    var_1 = distance2d(self.origin, var_0.origin);
+    self setclientomnvar("ui_transponder_range_finder", int(var_1));
     wait(0.1);
   }
 }
 
-transponderwatchfordisuse(param_00) {
-  param_00 waittill("deleted_equipment");
+transponderwatchfordisuse(var_0) {
+  var_0 waittill("deleted_equipment");
   self setclientomnvar("ui_transponder_range_finder", 0);
 }
 
 checkvalidposition() {
-  var_00 = getclosestpointonnavmesh(self.origin);
-  var_01 = self.triggerportableradarping scripts\mp\powerloot::func_7FC5("power_transponder", 256);
-  if(distance(self.origin, var_00) > var_01) {
+  var_0 = getclosestpointonnavmesh(self.origin);
+  var_1 = self.triggerportableradarping scripts\mp\powerloot::func_7FC5("power_transponder", 256);
+  if(distance(self.origin, var_0) > var_1) {
     return 0;
   }
 
-  var_02 = getclosestnodeinsight(var_00);
-  return isDefined(var_02);
+  var_2 = getclosestnodeinsight(var_0);
+  return isDefined(var_2);
 }
 
 checkvalidplacementstate() {
   return !self iswallrunning() && !self isonladder() && self isonground();
 }
 
-placementfailed(param_00) {
+placementfailed(var_0) {
   self iprintlnbold("TRANSPONDER LOST COMMUNICATION");
   self notify("powers_transponder_used", 0);
   self.activated = 0;
   transponderdetonateallcharges();
   self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
-  if(isDefined(param_00)) {
-    param_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
-func_897B(param_00) {
-  param_00 endon("death");
+func_897B(var_0) {
+  var_0 endon("death");
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
@@ -290,81 +290,81 @@ func_897B(param_00) {
   self notify("transponder_alt_detonate");
 }
 
-func_5616(param_00) {
+func_5616(var_0) {
   scripts\mp\powers::func_D727("power_transponder");
-  thread func_5617(param_00);
+  thread func_5617(var_0);
 }
 
-func_5617(param_00) {
+func_5617(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("remove_transponder");
-  param_00 waittill("death");
+  var_0 waittill("death");
   scripts\mp\powers::func_D72D("power_transponder");
 }
 
 func_12694() {
   self endon("death");
   self endon("disconnect");
-  var_00 = 0;
-  var_01 = 0.8;
-  var_02 = 0;
-  var_03 = 650;
+  var_0 = 0;
+  var_1 = 0.8;
+  var_2 = 0;
+  var_3 = 650;
   self.var_E561 = 0;
-  foreach(var_05 in level.participants) {
-    if(!scripts\mp\utility::isreallyalive(var_05)) {
+  foreach(var_5 in level.participants) {
+    if(!scripts\mp\utility::isreallyalive(var_5)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isenemy(var_05)) {
+    if(!scripts\mp\utility::isenemy(var_5)) {
       continue;
     }
 
-    if(var_05 scripts\mp\utility::_hasperk("specialty_noplayertarget") || var_05 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
+    if(var_5 scripts\mp\utility::_hasperk("specialty_noplayertarget") || var_5 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
       continue;
     }
 
-    var_06 = var_05.origin - self.origin;
-    if(1 && vectordot(anglesToForward(self.angles), var_06) < 0) {
+    var_6 = var_5.origin - self.origin;
+    if(1 && vectordot(anglesToForward(self.angles), var_6) < 0) {
       continue;
     }
 
-    var_07 = var_03 * var_03;
-    if(length2dsquared(var_06) > var_07) {
+    var_7 = var_3 * var_3;
+    if(length2dsquared(var_6) > var_7) {
       continue;
     }
 
-    var_00++;
-    thread func_12695(var_05, distance2d(self.origin, var_05.origin) / var_03, var_01);
-    var_02 = 1;
+    var_0++;
+    thread func_12695(var_5, distance2d(self.origin, var_5.origin) / var_3, var_1);
+    var_2 = 1;
   }
 }
 
-func_12695(param_00, param_01, param_02) {
-  wait(param_02 * param_01);
-  var_03 = scripts\mp\utility::outlineenableforplayer(param_00, "orange", self, 0, 0, "level_script");
-  param_00 scripts\mp\hud_message::showmiscmessage("spotted");
-  var_04 = 3;
-  func_13AA0(var_03, param_00, var_04);
+func_12695(var_0, var_1, var_2) {
+  wait(var_2 * var_1);
+  var_3 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", self, 0, 0, "level_script");
+  var_0 scripts\mp\hud_message::showmiscmessage("spotted");
+  var_4 = 3;
+  func_13AA0(var_3, var_0, var_4);
 }
 
-func_13AA0(param_00, param_01, param_02) {
+func_13AA0(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02, "leave");
-  if(isDefined(param_01)) {
-    scripts\mp\utility::outlinedisable(param_00, param_01);
+  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave");
+  if(isDefined(var_1)) {
+    scripts\mp\utility::outlinedisable(var_0, var_1);
   }
 }
 
 func_12691() {
   level._effect["reaper_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_reaper_fisheye");
   self.var_12697 = ["specialty_fastermelee", "specialty_extendedmelee", "specialty_stun_resistance", "specialty_detectexplosive"];
-  foreach(var_01 in self.var_12697) {
-    scripts\mp\utility::giveperk(var_01);
+  foreach(var_1 in self.var_12697) {
+    scripts\mp\utility::giveperk(var_1);
   }
 
-  var_03 = self.maxhealth;
+  var_3 = self.maxhealth;
   self setsuit("reaper_mp");
   self.maxhealth = 170;
   self.health = self.maxhealth;
@@ -372,45 +372,45 @@ func_12691() {
   self.var_B62A = spawn("script_model", self.origin);
   self.var_B62A setModel("tag_origin");
   thread func_13ACC();
-  thread func_AD77(var_03);
+  thread func_AD77(var_3);
 }
 
-func_AD77(param_00) {
+func_AD77(var_0) {
   scripts\engine\utility::waittill_any_timeout_1(5, "death");
-  thread func_E164(param_00);
+  thread func_E164(var_0);
 }
 
-func_13ACC(param_00) {
+func_13ACC(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("removeRipper");
   level endon("game_ended");
-  var_01 = (0, 0, 4);
+  var_1 = (0, 0, 4);
   for(;;) {
     self waittill("melee_fired");
-    var_02 = self.origin + var_01;
-    var_03 = anglesToForward(self.angles);
-    var_04 = anglestoright(self.angles);
-    var_05 = func_36DB(param_00);
-    var_05 = var_05 + var_01;
-    var_06 = var_02 + var_04 * 64;
-    var_07 = var_02 - var_04 * 32;
-    var_08 = rotatevector(var_04, (0, 45, 0));
-    var_09 = var_02 + var_08 * 64;
-    var_0A = rotatevector(var_04, (0, 135, 0));
-    var_0B = var_02 + var_0A * 32;
-    self.var_B62A.origin = var_06;
+    var_2 = self.origin + var_1;
+    var_3 = anglesToForward(self.angles);
+    var_4 = anglestoright(self.angles);
+    var_5 = func_36DB(var_0);
+    var_5 = var_5 + var_1;
+    var_6 = var_2 + var_4 * 64;
+    var_7 = var_2 - var_4 * 32;
+    var_8 = rotatevector(var_4, (0, 45, 0));
+    var_9 = var_2 + var_8 * 64;
+    var_0A = rotatevector(var_4, (0, 135, 0));
+    var_0B = var_2 + var_0A * 32;
+    self.var_B62A.origin = var_6;
     wait(0.05);
     playFXOnTag(level._effect["reaper_swipe_trail"], self.var_B62A, "tag_origin");
     wait(0.075);
-    self.var_B62A.origin = var_09;
+    self.var_B62A.origin = var_9;
     wait(0.075);
-    self.var_B62A.origin = var_05;
-    thread func_20D9(var_05);
+    self.var_B62A.origin = var_5;
+    thread func_20D9(var_5);
     wait(0.075);
     self.var_B62A.origin = var_0B;
     wait(0.075);
-    self.var_B62A.origin = var_07;
+    self.var_B62A.origin = var_7;
     wait(0.05);
     stopFXOnTag(level._effect["reaper_swipe_trail"], self.var_B62A, "tag_origin");
   }
@@ -422,67 +422,67 @@ func_40B3() {
   }
 }
 
-func_E164(param_00) {
+func_E164(var_0) {
   self notify("removeRipper");
   self.var_9F2E = 0;
   self.var_9FB0 = 0;
   self.var_E561 = 0;
-  foreach(var_02 in self.var_12697) {
-    scripts\mp\utility::removeperk(var_02);
+  foreach(var_2 in self.var_12697) {
+    scripts\mp\utility::removeperk(var_2);
   }
 
   self.var_12697 = undefined;
   self setsuit("scout_mp");
-  self.maxhealth = param_00;
+  self.maxhealth = var_0;
   self setclientomnvar("ui_odin", -1);
   func_40B3();
 }
 
-func_20D9(param_00) {
+func_20D9(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   self endon("removeRipper");
-  var_01 = distance2d(self.origin, param_00) / 2;
-  self radiusdamage(self.origin + (0, 0, 36), var_01, 250, 135, self, "MOD_MELEE", "iw7_reaperblade_mp");
+  var_1 = distance2d(self.origin, var_0) / 2;
+  self radiusdamage(self.origin + (0, 0, 36), var_1, 250, 135, self, "MOD_MELEE", "iw7_reaperblade_mp");
 }
 
-func_36DB(param_00) {
+func_36DB(var_0) {
   self endon("removeRipper");
-  var_01 = (0, 0, 0);
-  var_02 = self.origin + var_01;
-  var_03 = anglesToForward(self.angles);
-  var_04 = anglestoright(self.angles);
-  var_05 = self getvelocity();
-  var_06 = vectordot(var_05, self.angles);
-  var_07 = length(var_05);
-  if(var_07 < 64) {
-    var_07 = 92;
+  var_1 = (0, 0, 0);
+  var_2 = self.origin + var_1;
+  var_3 = anglesToForward(self.angles);
+  var_4 = anglestoright(self.angles);
+  var_5 = self getvelocity();
+  var_6 = vectordot(var_5, self.angles);
+  var_7 = length(var_5);
+  if(var_7 < 64) {
+    var_7 = 92;
   }
 
-  if(var_07 > 64 && var_07 < 128) {
-    var_07 = 128;
+  if(var_7 > 64 && var_7 < 128) {
+    var_7 = 128;
   }
 
-  if(var_07 > 350) {
-    var_07 = 700;
+  if(var_7 > 350) {
+    var_7 = 700;
   }
 
-  if(var_07 > 200) {
-    var_07 = 328;
+  if(var_7 > 200) {
+    var_7 = 328;
   }
 
-  if(var_07 > 128) {
-    var_07 = 256;
+  if(var_7 > 128) {
+    var_7 = 256;
   }
 
-  if(var_06 < 1) {
-    var_07 = 64;
+  if(var_6 < 1) {
+    var_7 = 64;
   }
 
-  if(isDefined(param_00)) {
-    var_07 = param_00;
+  if(isDefined(var_0)) {
+    var_7 = var_0;
   }
 
-  return var_02 + var_03 * var_07;
+  return var_2 + var_3 * var_7;
 }

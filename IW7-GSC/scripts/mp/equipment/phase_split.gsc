@@ -24,28 +24,28 @@ func_CAC2() {
   return 1;
 }
 
-func_CAC4(param_00) {
+func_CAC4(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("phaseSplit_end");
   self.var_CAB1 = 1;
-  var_01 = anglestoright(self.angles) * cos(90) + anglesToForward(self.angles) * sin(90);
-  var_02 = var_01 * 64;
-  var_03 = self.origin + var_02;
-  var_03 = getclosestpointonnavmesh(var_03);
-  var_04 = getnodesinradius(var_03, 64, 0, 128);
-  var_05 = var_04[0];
-  var_06 = 9999999;
-  foreach(var_08 in var_04) {
-    var_09 = lengthsquared(var_08.origin - var_03);
-    if(var_09 < var_06) {
-      var_05 = var_08;
-      var_06 = var_09;
+  var_1 = anglestoright(self.angles) * cos(90) + anglesToForward(self.angles) * sin(90);
+  var_2 = var_1 * 64;
+  var_3 = self.origin + var_2;
+  var_3 = getclosestpointonnavmesh(var_3);
+  var_4 = getnodesinradius(var_3, 64, 0, 128);
+  var_5 = var_4[0];
+  var_6 = 9999999;
+  foreach(var_8 in var_4) {
+    var_9 = lengthsquared(var_8.origin - var_3);
+    if(var_9 < var_6) {
+      var_5 = var_8;
+      var_6 = var_9;
     }
   }
 
   thread func_CAC8();
-  var_0B = func_CAC0(var_05);
+  var_0B = func_CAC0(var_5);
   var_0B thread func_CAB4();
   var_0B thread func_CAB3();
   var_0B thread func_CAB6();
@@ -64,51 +64,51 @@ func_CAC8() {
   thread func_CABB();
 }
 
-func_CABB(param_00) {
+func_CABB(var_0) {
   if(!isDefined(self.var_CAB1)) {
     return;
   }
 
   self.var_CAB1 = undefined;
   self notify("phaseSplit_end");
-  if(!isDefined(param_00) || !param_00) {
+  if(!isDefined(var_0) || !var_0) {
     self notify("powers_phaseSplit_update", 0);
   }
 }
 
-func_CAC0(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(1, 1);
+func_CAC0(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(1, 1);
   }
 
-  var_01 = scripts\mp\agents\_agents::add_humanoid_agent("phaseSplitAgent", self.team, "callback", param_00.origin, self.angles, self, 0, 0, "veteran", ::func_CAB2);
-  if(!isDefined(var_01)) {
+  var_1 = scripts\mp\agents\_agents::add_humanoid_agent("phaseSplitAgent", self.team, "callback", var_0.origin, self.angles, self, 0, 0, "veteran", ::func_CAB2);
+  if(!isDefined(var_1)) {
     thread func_CABB();
     return;
   }
 
-  if(isDefined(var_01.headmodel)) {
-    var_01 detach(self.headmodel, "");
-    var_01.headmodel = undefined;
+  if(isDefined(var_1.headmodel)) {
+    var_1 detach(self.headmodel, "");
+    var_1.headmodel = undefined;
   }
 
-  var_01 setModel(var_01.triggerportableradarping.model);
-  var_01.health = 25;
-  var_01 botsetflag("disable_attack", 1);
-  var_02 = var_01.origin + anglesToForward(var_01.angles) * 500;
-  var_03 = scripts\common\trace::ray_trace(var_01.origin, var_02, level.players);
-  if(!isDefined(var_03)) {
-    var_03["position"] = var_02;
+  var_1 setModel(var_1.triggerportableradarping.model);
+  var_1.health = 25;
+  var_1 botsetflag("disable_attack", 1);
+  var_2 = var_1.origin + anglesToForward(var_1.angles) * 500;
+  var_3 = scripts\common\trace::ray_trace(var_1.origin, var_2, level.players);
+  if(!isDefined(var_3)) {
+    var_3["position"] = var_2;
   } else {
-    var_03 = var_03["position"];
+    var_3 = var_3["position"];
   }
 
-  var_04 = getclosestpointonnavmesh(var_03);
-  var_04 = getclosestnodeinsight(var_04);
-  var_01 botsetscriptgoalnode(var_04, "objective");
+  var_4 = getclosestpointonnavmesh(var_3);
+  var_4 = getclosestnodeinsight(var_4);
+  var_1 botsetscriptgoalnode(var_4, "objective");
   self playlocalsound("ghost_prism_activate");
-  playFX(level.var_CAA3["spawn"], var_01.origin, anglesToForward(var_01.angles), anglestoup(var_01.angles));
-  return var_01;
+  playFX(level.var_CAA3["spawn"], var_1.origin, anglesToForward(var_1.angles), anglestoup(var_1.angles));
+  return var_1;
 }
 
 func_CAB6() {
@@ -121,9 +121,9 @@ func_CAB6() {
 
 func_CAB4() {
   self waittill("death");
-  var_00 = self _meth_8113();
-  var_00 hide();
-  playFX(level.var_CAA3["death"], var_00.origin, anglesToForward(var_00.angles), anglestoup(var_00.angles));
+  var_0 = self _meth_8113();
+  var_0 hide();
+  playFX(level.var_CAA3["death"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   if(isDefined(self.triggerportableradarping)) {
     self.triggerportableradarping func_CABB();
     if(scripts\mp\utility::isreallyalive(self.triggerportableradarping)) {
@@ -139,8 +139,8 @@ func_CAB3() {
 }
 
 func_CAB5() {
-  var_00 = scripts\mp\agents\agent_utility::getnumownedactiveagents(self);
-  if(var_00 >= 2) {
+  var_0 = scripts\mp\agents\agent_utility::getnumownedactiveagents(self);
+  if(var_0 >= 2) {
     return 0;
   }
 
@@ -155,9 +155,9 @@ func_CAC9() {
   level.agent_funcs["phaseSplitAgent"]["gametype_update"] = ::scripts\mp\killstreaks\_agent_killstreak::no_gametype_update;
 }
 
-func_CACA(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  scripts\mp\agents\_agents::on_humanoid_agent_killed_common(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, 0);
-  if(isplayer(param_01) && isDefined(self.triggerportableradarping) && param_01 != self.triggerportableradarping) {
+func_CACA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  scripts\mp\agents\_agents::on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
+  if(isplayer(var_1) && isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
     self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("squad_killed");
   }
 
@@ -165,42 +165,42 @@ func_CACA(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 func_CAB2() {
-  var_00 = self.triggerportableradarping;
-  var_01 = [];
-  var_02 = var_00 getweaponslistprimaries();
-  var_03 = [];
-  if(var_02.size > 0 && var_02[0] != "none") {
-    for(var_04 = 0; var_04 < var_02.size; var_04++) {
-      if(!scripts\mp\weapons::isaltmodeweapon(var_02[var_04])) {
-        var_03[var_03.size] = var_02[var_04];
+  var_0 = self.triggerportableradarping;
+  var_1 = [];
+  var_2 = var_0 getweaponslistprimaries();
+  var_3 = [];
+  if(var_2.size > 0 && var_2[0] != "none") {
+    for(var_4 = 0; var_4 < var_2.size; var_4++) {
+      if(!scripts\mp\weapons::isaltmodeweapon(var_2[var_4])) {
+        var_3[var_3.size] = var_2[var_4];
       }
     }
   }
 
-  var_02 = var_03;
-  if(var_02.size > 0 && var_02[0] != "none") {
-    var_05 = var_02[0];
-    var_01["loadoutPrimary"] = ::scripts\mp\utility::getweaponrootname(var_05);
-    var_06 = getweaponattachments(var_05);
-    for(var_04 = 0; var_04 < var_06.size; var_04++) {
-      var_07 = scripts\engine\utility::ter_op(var_04 > 0, "loadoutPrimaryAttachment" + var_04 + 1, "loadoutPrimaryAttachment");
-      var_01[var_07] = var_06[var_04];
+  var_2 = var_3;
+  if(var_2.size > 0 && var_2[0] != "none") {
+    var_5 = var_2[0];
+    var_1["loadoutPrimary"] = ::scripts\mp\utility::getweaponrootname(var_5);
+    var_6 = getweaponattachments(var_5);
+    for(var_4 = 0; var_4 < var_6.size; var_4++) {
+      var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutPrimaryAttachment" + var_4 + 1, "loadoutPrimaryAttachment");
+      var_1[var_7] = var_6[var_4];
     }
 
-    var_01["loadoutPrimaryCamo"] = getweaponcamoname(var_05);
+    var_1["loadoutPrimaryCamo"] = getweaponcamoname(var_5);
   }
 
-  if(var_02.size > 0 && var_02[1] != "none") {
-    var_05 = var_02[1];
-    var_01["loadoutSecondary"] = ::scripts\mp\utility::getweaponrootname(var_05);
-    var_06 = getweaponattachments(var_05);
-    for(var_04 = 0; var_04 < var_06.size; var_04++) {
-      var_07 = scripts\engine\utility::ter_op(var_04 > 0, "loadoutSecondaryAttachment1" + var_04, "loadoutSecondaryAttachment");
-      var_01[var_07] = var_06[var_04];
+  if(var_2.size > 0 && var_2[1] != "none") {
+    var_5 = var_2[1];
+    var_1["loadoutSecondary"] = ::scripts\mp\utility::getweaponrootname(var_5);
+    var_6 = getweaponattachments(var_5);
+    for(var_4 = 0; var_4 < var_6.size; var_4++) {
+      var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutSecondaryAttachment1" + var_4, "loadoutSecondaryAttachment");
+      var_1[var_7] = var_6[var_4];
     }
 
-    var_01["loadoutSecondaryCamo"] = getweaponcamoname(var_05);
+    var_1["loadoutSecondaryCamo"] = getweaponcamoname(var_5);
   }
 
-  return var_01;
+  return var_1;
 }

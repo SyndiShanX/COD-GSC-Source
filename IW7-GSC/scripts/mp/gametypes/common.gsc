@@ -19,68 +19,68 @@ updategametypedvars() {
   }
 }
 
-onnormaldeath(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = level.scoremod["death"] * -1;
-  if(var_05 != 0) {
+onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = level.scoremod["death"] * -1;
+  if(var_5 != 0) {
     if(level.teambased) {
-      level scripts\mp\gamescore::giveteamscoreforobjective(param_00.pers["team"], var_05, 0);
+      level scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], var_5, 0);
     } else {
-      param_01 scripts\mp\gamescore::giveplayerscore("kill", var_05);
+      var_1 scripts\mp\gamescore::giveplayerscore("kill", var_5);
     }
   }
 
-  var_06 = level.scoremod["kill"];
-  if(param_03 == "MOD_HEAD_SHOT") {
-    var_06 = var_06 + level.scoremod["headshot"];
+  var_6 = level.scoremod["kill"];
+  if(var_3 == "MOD_HEAD_SHOT") {
+    var_6 = var_6 + level.scoremod["headshot"];
   }
 
   if(scripts\mp\utility::istrue(level.supportcranked)) {
-    if(scripts\mp\utility::matchmakinggame() && isDefined(param_01.cranked)) {
-      var_06 = var_06 + 1;
-      param_01 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_06);
+    if(scripts\mp\utility::matchmakinggame() && isDefined(var_1.cranked)) {
+      var_6 = var_6 + 1;
+      var_1 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_6);
     }
 
-    param_01 scripts\mp\utility::oncranked(param_00, param_01, param_02);
+    var_1 scripts\mp\utility::oncranked(var_0, var_1, var_2);
   }
 
-  if(var_06 != 0) {
+  if(var_6 != 0) {
     if(level.teambased) {
-      level scripts\mp\gamescore::giveteamscoreforobjective(param_01.pers["team"], var_06, 0);
+      level scripts\mp\gamescore::giveteamscoreforobjective(var_1.pers["team"], var_6, 0);
     } else {
-      param_01 scripts\mp\gamescore::giveplayerscore("kill", var_06);
+      var_1 scripts\mp\gamescore::giveplayerscore("kill", var_6);
     }
   }
 
   if(level.dogtagsenabled && scripts\mp\utility::gameflag("prematch_done")) {
-    level thread scripts\mp\gametypes\obj_dogtag::spawndogtags(param_00, param_01, "new_tag_spawned");
+    level thread scripts\mp\gametypes\obj_dogtag::spawndogtags(var_0, var_1, "new_tag_spawned");
   }
 }
 
-onsuicidedeath(param_00) {
+onsuicidedeath(var_0) {
   if(scripts\mp\utility::istrue(level.supportcranked)) {
-    param_00 scripts\mp\utility::cleanupcrankedplayertimer();
+    var_0 scripts\mp\utility::cleanupcrankedplayertimer();
   }
 
   if(isDefined(level.scoremod)) {
-    var_01 = level.scoremod["death"] * -1;
-    if(var_01 != 0) {
+    var_1 = level.scoremod["death"] * -1;
+    if(var_1 != 0) {
       if(level.teambased) {
-        level scripts\mp\gamescore::giveteamscoreforobjective(param_00.pers["team"], var_01, 0);
+        level scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], var_1, 0);
         return;
       }
     }
   }
 }
 
-onteamscore(param_00) {
+onteamscore(var_0) {
   if(scripts\mp\utility::istrue(level.supportcranked)) {
-    param_00 scripts\mp\utility::cleanupcrankedplayertimer();
+    var_0 scripts\mp\utility::cleanupcrankedplayertimer();
   }
 }
 
-dogtagallyonusecb(param_00) {}
+dogtagallyonusecb(var_0) {}
 
-dogtagenemyonusecb(param_00) {}
+dogtagenemyonusecb(var_0) {}
 
 onspawnplayer() {
   if(scripts\mp\utility::istrue(level.spawnprotectiontimer) && !scripts\mp\spawnlogic::shoulduseteamstartspawn()) {

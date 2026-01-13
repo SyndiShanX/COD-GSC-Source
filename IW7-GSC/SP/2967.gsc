@@ -4,31 +4,31 @@
  * Script: SP\2967.gsc
 ************************/
 
-lights_on(param_00, param_01) {
-  var_02 = strtok(param_00, " ");
-  scripts\engine\utility::array_levelthread(var_02, ::func_ACCF, param_01);
+lights_on(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  scripts\engine\utility::array_levelthread(var_2, ::func_ACCF, var_1);
 }
 
-func_8695(param_00, param_01, param_02) {
+func_8695(var_0, var_1, var_2) {
   if(!isDefined(level.vehicle.var_116CE.var_13209)) {
     level.vehicle.var_116CE.var_13209 = [];
   }
 
-  if(!isDefined(level.vehicle.var_116CE.var_13209[param_00])) {
-    level.vehicle.var_116CE.var_13209[param_00] = [];
+  if(!isDefined(level.vehicle.var_116CE.var_13209[var_0])) {
+    level.vehicle.var_116CE.var_13209[var_0] = [];
   }
 
-  if(!isDefined(level.vehicle.var_116CE.var_13209[param_00][param_02])) {
-    level.vehicle.var_116CE.var_13209[param_00][param_02] = [];
+  if(!isDefined(level.vehicle.var_116CE.var_13209[var_0][var_2])) {
+    level.vehicle.var_116CE.var_13209[var_0][var_2] = [];
   }
 
-  foreach(var_04 in level.vehicle.var_116CE.var_13209[param_00][param_02]) {
-    if(param_01 == var_04) {
+  foreach(var_4 in level.vehicle.var_116CE.var_13209[var_0][var_2]) {
+    if(var_1 == var_4) {
       return;
     }
   }
 
-  level.vehicle.var_116CE.var_13209[param_00][param_02][level.vehicle.var_116CE.var_13209[param_00][param_02].size] = param_01;
+  level.vehicle.var_116CE.var_13209[var_0][var_2][level.vehicle.var_116CE.var_13209[var_0][var_2].size] = var_1;
 }
 
 func_ACCA() {
@@ -47,45 +47,45 @@ func_ACCA() {
   level.var_7624 = undefined;
 }
 
-func_A5F2(param_00) {
-  lights_off_internal("all", param_00);
+func_A5F2(var_0) {
+  lights_off_internal("all", var_0);
 }
 
-lights_off_internal(param_00, param_01, param_02) {
-  if(isDefined(param_02)) {
-    param_01 = param_02;
-  } else if(!isDefined(param_01)) {
-    param_01 = self.classname;
+lights_off_internal(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    var_1 = var_2;
+  } else if(!isDefined(var_1)) {
+    var_1 = self.classname;
   }
 
-  if(!isDefined(param_00)) {
-    param_00 = "all";
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
   if(!isDefined(self.lights)) {
     return;
   }
 
-  if(!isDefined(level.vehicle.var_116CE.var_13209[param_01][param_00])) {
+  if(!isDefined(level.vehicle.var_116CE.var_13209[var_1][var_0])) {
     return;
   }
 
-  var_03 = level.vehicle.var_116CE.var_13209[param_01][param_00];
-  var_04 = 0;
-  var_05 = 2;
+  var_3 = level.vehicle.var_116CE.var_13209[var_1][var_0];
+  var_4 = 0;
+  var_5 = 2;
   if(isDefined(self.var_B4AE)) {
-    var_05 = self.var_B4AE;
+    var_5 = self.var_B4AE;
   }
 
-  foreach(var_07 in var_03) {
-    var_08 = level.vehicle.var_116CE.var_13208[param_01][var_07];
-    if(scripts\sp\utility::hastag(self.model, var_08.physics_setgravitydynentscalar)) {
-      stopFXOnTag(var_08.effect, self, var_08.physics_setgravitydynentscalar);
+  foreach(var_7 in var_3) {
+    var_8 = level.vehicle.var_116CE.var_13208[var_1][var_7];
+    if(scripts\sp\utility::hastag(self.model, var_8.physics_setgravitydynentscalar)) {
+      stopFXOnTag(var_8.effect, self, var_8.physics_setgravitydynentscalar);
     }
 
-    var_04++;
-    if(var_04 >= var_05) {
-      var_04 = 0;
+    var_4++;
+    if(var_4 >= var_5) {
+      var_4 = 0;
       wait(0.05);
     }
 
@@ -93,25 +93,25 @@ lights_off_internal(param_00, param_01, param_02) {
       return;
     }
 
-    self.lights[var_07] = undefined;
+    self.lights[var_7] = undefined;
   }
 }
 
-func_ACCF(param_00, param_01) {
+func_ACCF(var_0, var_1) {
   level.var_A9AE = gettime();
-  if(!isDefined(param_00)) {
-    param_00 = "all";
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = self.classname;
+  if(!isDefined(var_1)) {
+    var_1 = self.classname;
   }
 
   if(!isDefined(level.vehicle.var_116CE.var_13209)) {
     return;
   }
 
-  if(!isDefined(level.vehicle.var_116CE.var_13209[param_01]) || !isDefined(level.vehicle.var_116CE.var_13209[param_01][param_00])) {
+  if(!isDefined(level.vehicle.var_116CE.var_13209[var_1]) || !isDefined(level.vehicle.var_116CE.var_13209[var_1][var_0])) {
     return;
   }
 
@@ -120,30 +120,30 @@ func_ACCF(param_00, param_01) {
     self.lights = [];
   }
 
-  var_02 = level.vehicle.var_116CE.var_13209[param_01][param_00];
-  var_03 = 0;
-  var_04 = [];
-  foreach(var_06 in var_02) {
-    if(isDefined(self.lights[var_06])) {
+  var_2 = level.vehicle.var_116CE.var_13209[var_1][var_0];
+  var_3 = 0;
+  var_4 = [];
+  foreach(var_6 in var_2) {
+    if(isDefined(self.lights[var_6])) {
       continue;
     }
 
-    var_07 = level.vehicle.var_116CE.var_13208[param_01][var_06];
-    if(isDefined(var_07.delay)) {
-      var_08 = var_07.delay;
+    var_7 = level.vehicle.var_116CE.var_13208[var_1][var_6];
+    if(isDefined(var_7.delay)) {
+      var_8 = var_7.delay;
     } else {
-      var_08 = 0;
+      var_8 = 0;
     }
 
-    var_08 = var_08 + level.var_7624;
-    while(isDefined(var_04["" + var_08])) {
-      var_08 = var_08 + 0.05;
+    var_8 = var_8 + level.var_7624;
+    while(isDefined(var_4["" + var_8])) {
+      var_8 = var_8 + 0.05;
     }
 
-    var_04["" + var_08] = 1;
+    var_4["" + var_8] = 1;
     self endon("death");
-    childthread scripts\engine\utility::noself_delaycall_proc(::playfxontag, var_08, var_07.effect, self, var_07.physics_setgravitydynentscalar);
-    self.lights[var_06] = 1;
+    childthread scripts\engine\utility::noself_delaycall_proc(::playfxontag, var_8, var_7.effect, self, var_7.physics_setgravitydynentscalar);
+    self.lights[var_6] = 1;
     if(!isDefined(self)) {
       break;
     }
@@ -152,9 +152,9 @@ func_ACCF(param_00, param_01) {
   level.var_7624 = 0;
 }
 
-lights_off(param_00, param_01, param_02) {
-  var_03 = strtok(param_00, " ", param_01);
-  scripts\engine\utility::array_levelthread(var_03, ::lights_off_internal, param_01, param_02);
+lights_off(var_0, var_1, var_2) {
+  var_3 = strtok(var_0, " ", var_1);
+  scripts\engine\utility::array_levelthread(var_3, ::lights_off_internal, var_1, var_2);
 }
 
 func_12BE2() {

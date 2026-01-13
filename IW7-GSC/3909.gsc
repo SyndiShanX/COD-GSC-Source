@@ -274,122 +274,122 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_12253(param_00, param_01, param_02, param_03) {
+func_12253(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1223F(param_00, param_01, param_02, param_03) {
+func_1223F(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_1224F(param_00, param_01, param_02, param_03) {
+func_1224F(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_11BB9(param_00, param_01, param_02, param_03) {
+func_11BB9(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_11BBE(param_00, param_01, param_02, param_03) {
+func_11BBE(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_isincombat();
 }
 
-func_12210(param_00, param_01, param_02, param_03) {
+func_12210(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12207(param_00, param_01, param_02, param_03) {
+func_12207(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_122A2(param_00, param_01, param_02, param_03) {
+func_122A2(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E1();
 }
 
-func_1229E(param_00, param_01, param_02, param_03) {
+func_1229E(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_1227B(param_00, param_01, param_02, param_03) {
+func_1227B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::shouldplayarenaintro();
 }
 
-func_12283(param_00, param_01, param_02, param_03) {
+func_12283(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-func_12276(param_00, param_01, param_02, param_03) {
+func_12276(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_1227D(param_00, param_01, param_02, param_03) {
+func_1227D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-func_11BEF(param_00, param_01, param_02, param_03) {
+func_11BEF(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::shouldplayarenaintro();
 }
 
-func_11BEE(param_00, param_01, param_02, param_03) {
+func_11BEE(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_11BE1(param_00, param_01, param_02, param_03) {
+func_11BE1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-func_11BDA(param_00, param_01, param_02, param_03) {
+func_11BDA(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-func_12437(param_00, param_01, param_02, param_03) {
+func_12437(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-func_1245A(param_00, param_01, param_02, param_03) {
+func_1245A(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1242F(param_00, param_01, param_02, param_03) {
+func_1242F(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_A013();
 }
 
-func_12448(param_00, param_01, param_02, param_03) {
+func_12448(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_124F6(param_00, param_01, param_02, param_03) {
+func_124F6(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-func_1250A(param_00, param_01, param_02, param_03) {
+func_1250A(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-func_12530(param_00, param_01, param_02, param_03) {
+func_12530(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1246B(param_00, param_01, param_02, param_03) {
+func_1246B(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1253D(param_00, param_01, param_02, param_03) {
+func_1253D(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_12480(param_00, param_01, param_02, param_03) {
+func_12480(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_1254F(param_00, param_01, param_02, param_03) {
+func_1254F(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }
 
-func_11BA9(param_00, param_01, param_02, param_03) {
+func_11BA9(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-func_125D1(param_00, param_01, param_02, param_03) {
+func_125D1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\melee::func_138E4();
 }

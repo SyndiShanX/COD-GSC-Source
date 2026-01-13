@@ -13,27 +13,27 @@ init() {
   level.maxdeathlogs = 200;
 }
 
-canlogclient(var_00) {
-  if(isagent(var_00)) {
+canlogclient(var_0) {
+  if(isagent(var_0)) {
     return 0;
   }
 
   return var_0.clientid < level.maxlogclients;
 }
 
-canlogdeath(var_00) {
-  return var_00 < level.maxdeathlogs;
+canlogdeath(var_0) {
+  return var_0 < level.maxdeathlogs;
 }
 
-logplayerdeath(var_00) {
-  var_01 = getclientmatchdata("deathCount");
+logplayerdeath(var_0) {
+  var_1 = getclientmatchdata("deathCount");
 
-  if(!canlogclient(self) || !canlogdeath(var_01)) {
+  if(!canlogclient(self) || !canlogdeath(var_1)) {
     return;
   }
-  if(isplayer(var_00) && canlogclient(var_00)) {
-    self getufolightcolor(var_01, self.clientid, var_00, var_0.clientid);
+  if(isplayer(var_0) && canlogclient(var_0)) {
+    self getufolightcolor(var_1, self.clientid, var_0, var_0.clientid);
   } else {
-    self getufolightcolor(var_01, self.clientid, undefined, undefined);
+    self getufolightcolor(var_1, self.clientid, undefined, undefined);
   }
 }

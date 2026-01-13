@@ -29,7 +29,7 @@ setupagent() {
   scripts\mp\agents\zombie\zmb_zombie_agent::setupagent();
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zombie_lumberjack");
   thread delay_eye_glow();
 }
@@ -40,39 +40,39 @@ delay_eye_glow() {
   self getrandomhovernodesaroundtargetpos(1, 0.1);
 }
 
-onzombiedamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
 }
 
-onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-func_C4BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::func_C4BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
 should_spawn_lumberjack() {
-  var_00 = 0;
+  var_0 = 0;
   if(level.wave_num >= 20) {
-    var_00 = min(level.wave_num - 10, 20);
+    var_0 = min(level.wave_num - 10, 20);
   } else {
-    var_00 = level.lumberjack_spawn_percent;
+    var_0 = level.lumberjack_spawn_percent;
   }
 
-  var_01 = 5;
+  var_1 = 5;
   if(getdvarint("scr_force_lumberjack_spawn", 0) == 1) {
-    var_01 = 0;
-    var_00 = 100;
+    var_1 = 0;
+    var_0 = 100;
   }
 
   if(getdvarint("scr_force_no_lumberjack_spawn", 0) == 1) {
-    var_01 = 500;
-    var_00 = 0;
+    var_1 = 500;
+    var_0 = 0;
   }
 
-  if(level.wave_num > var_01) {
-    if(randomint(100) < var_00) {
+  if(level.wave_num > var_1) {
+    if(randomint(100) < var_0) {
       return "lumberjack";
     }
 

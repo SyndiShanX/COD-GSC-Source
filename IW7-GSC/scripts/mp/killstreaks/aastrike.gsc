@@ -13,9 +13,9 @@ init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("aastrike", ::tryuseaastrike);
 }
 
-tryuseaastrike(param_00, param_01) {
+tryuseaastrike(var_0, var_1) {
   scripts\mp\matchdata::logkillstreakevent("aastrike", self.origin);
-  thread finishaastrike(param_00);
+  thread finishaastrike(var_0);
   thread scripts\mp\utility::teamplayercardsplash("used_aastrike", self, self.team);
   return 1;
 }
@@ -36,50 +36,50 @@ findtargets() {
   self endon("disconnect");
   self endon("owner_gone");
   self endon("game_ended");
-  var_00 = [];
-  var_01 = [];
-  var_02 = [];
+  var_0 = [];
+  var_1 = [];
+  var_2 = [];
   if(isDefined(level.littlebirds) && level.littlebirds.size) {
-    foreach(var_04 in level.littlebirds) {
-      if(isDefined(var_04.team) && var_04.team != self.team) {
-        var_00[var_00.size] = var_04;
+    foreach(var_4 in level.littlebirds) {
+      if(isDefined(var_4.team) && var_4.team != self.team) {
+        var_0[var_0.size] = var_4;
       }
     }
   }
 
   if(isDefined(level.helis) && level.helis.size) {
-    foreach(var_07 in level.helis) {
-      if(var_07.team != self.team) {
-        var_01[var_01.size] = var_07;
+    foreach(var_7 in level.helis) {
+      if(var_7.team != self.team) {
+        var_1[var_1.size] = var_7;
       }
     }
   }
 
-  var_09 = scripts\mp\utility::getotherteam(self.team);
-  if(isDefined(level.activeuavs[var_09])) {
-    foreach(var_0B in level.uavmodels[var_09]) {
-      var_02[var_02.size] = var_0B;
+  var_9 = scripts\mp\utility::getotherteam(self.team);
+  if(isDefined(level.activeuavs[var_9])) {
+    foreach(var_0B in level.uavmodels[var_9]) {
+      var_2[var_2.size] = var_0B;
     }
   }
 
   var_0D = 0;
-  foreach(var_04 in var_00) {
+  foreach(var_4 in var_0) {
     wait(3);
     if(var_0D % 2) {
-      thread fireattarget(var_04, self.team, 1);
+      thread fireattarget(var_4, self.team, 1);
     } else {
-      thread fireattarget(var_04, self.team, 0);
+      thread fireattarget(var_4, self.team, 0);
     }
 
     var_0D++;
   }
 
-  foreach(var_07 in var_01) {
+  foreach(var_7 in var_1) {
     wait(3);
-    thread fireattarget(var_07, self.team, 1);
+    thread fireattarget(var_7, self.team, 1);
   }
 
-  foreach(var_0B in var_02) {
+  foreach(var_0B in var_2) {
     wait(0.5);
     thread fireattarget(var_0B, self.team, 0);
   }
@@ -87,7 +87,7 @@ findtargets() {
 
 earlyabortwatcher() {
   self endon("stopFindingTargets");
-  var_00 = self.team;
+  var_0 = self.team;
   if(scripts\mp\utility::bot_is_fireteam_mode()) {
     self waittill("killstreak_disowned");
   } else {
@@ -95,11 +95,11 @@ earlyabortwatcher() {
   }
 
   self notify("owner_gone");
-  level.teamairdenied[scripts\mp\utility::getotherteam(var_00)] = 0;
+  level.teamairdenied[scripts\mp\utility::getotherteam(var_0)] = 0;
   level.airdeniedplayer = undefined;
 }
 
-finishaastrike(param_00) {
+finishaastrike(var_0) {
   self endon("disconnect");
   self endon("owner_gone");
   self endon("game_ended");
@@ -107,9 +107,9 @@ finishaastrike(param_00) {
   level.airdeniedplayer = self;
   thread earlyabortwatcher();
   thread cycletargets();
-  for(var_01 = 0; var_01 < 4; var_01++) {
+  for(var_1 = 0; var_1 < 4; var_1++) {
     wait(6);
-    if(var_01 == 1 || var_01 == 3) {
+    if(var_1 == 1 || var_1 == 3) {
       thread doflyby(1);
       continue;
     }
@@ -123,28 +123,28 @@ finishaastrike(param_00) {
   level.airdeniedplayer = undefined;
 }
 
-fireattarget(param_00, param_01, param_02) {
-  if(!isDefined(param_00)) {
+fireattarget(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_03 = (0, 0, 14000);
-  var_04 = (0, 0, 1500);
-  var_05 = 15000;
-  var_06 = 20000;
-  var_07 = param_00.origin;
-  var_03 = (0, 0, 1) * var_07 + (0, 0, 1000);
-  var_08 = param_00.angles * (0, 1, 0);
-  var_09 = anglesToForward(var_08);
-  var_0A = param_00.origin + var_04 + var_09 * var_05 * -1;
-  var_0B = param_00.origin + var_04 + var_09 * var_06;
-  var_0C = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_0A + (0, 0, -75), param_00.origin, self);
-  var_0C missile_settargetent(param_00);
+  var_3 = (0, 0, 14000);
+  var_4 = (0, 0, 1500);
+  var_5 = 15000;
+  var_6 = 20000;
+  var_7 = var_0.origin;
+  var_3 = (0, 0, 1) * var_7 + (0, 0, 1000);
+  var_8 = var_0.angles * (0, 1, 0);
+  var_9 = anglesToForward(var_8);
+  var_0A = var_0.origin + var_4 + var_9 * var_5 * -1;
+  var_0B = var_0.origin + var_4 + var_9 * var_6;
+  var_0C = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_0A + (0, 0, -75), var_0.origin, self);
+  var_0C missile_settargetent(var_0);
   var_0C missile_setflightmodedirect();
-  var_0D = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_0A + (randomint(500), randomint(500), -75), param_00.origin, self);
-  var_0D missile_settargetent(param_00);
+  var_0D = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_0A + (randomint(500), randomint(500), -75), var_0.origin, self);
+  var_0D missile_settargetent(var_0);
   var_0D missile_setflightmodedirect();
-  if(param_02) {
+  if(var_2) {
     var_0E = spawnplane(self, "script_model", var_0A, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
   } else {
     var_0E = spawnplane(self, "script_model", var_0B);
@@ -166,30 +166,30 @@ fireattarget(param_00, param_01, param_02) {
   var_0E delete();
 }
 
-aasoundmanager(param_00) {
+aasoundmanager(var_0) {
   self playLoopSound("veh_aastrike_flyover_loop");
-  wait(param_00 / 2 / 2000);
+  wait(var_0 / 2 / 2000);
   self stoploopsound();
   self playLoopSound("veh_aastrike_flyover_outgoing_loop");
 }
 
-doflyby(param_00) {
+doflyby(var_0) {
   self endon("disconnect");
-  var_01 = randomint(level.spawnpoints.size - 1);
-  var_02 = level.spawnpoints[var_01].origin * (1, 1, 0);
-  var_03 = 20000;
-  var_04 = 20000;
-  var_05 = getent("airstrikeheight", "targetname");
-  var_06 = (0, 0, var_05.origin[2] + randomintrange(-100, 600));
-  var_07 = anglesToForward((0, randomint(45), 0));
-  var_08 = var_02 + var_06 + var_07 * var_03 * -1;
-  var_09 = var_02 + var_06 + var_07 * var_04;
-  var_0A = var_08 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
-  var_0B = var_09 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
-  if(param_00) {
-    var_0C = spawnplane(self, "script_model", var_08, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
+  var_1 = randomint(level.spawnpoints.size - 1);
+  var_2 = level.spawnpoints[var_1].origin * (1, 1, 0);
+  var_3 = 20000;
+  var_4 = 20000;
+  var_5 = getent("airstrikeheight", "targetname");
+  var_6 = (0, 0, var_5.origin[2] + randomintrange(-100, 600));
+  var_7 = anglesToForward((0, randomint(45), 0));
+  var_8 = var_2 + var_6 + var_7 * var_3 * -1;
+  var_9 = var_2 + var_6 + var_7 * var_4;
+  var_0A = var_8 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
+  var_0B = var_9 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
+  if(var_0) {
+    var_0C = spawnplane(self, "script_model", var_8, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
   } else {
-    var_0C = spawnplane(self, "script_model", var_09);
+    var_0C = spawnplane(self, "script_model", var_9);
   }
 
   var_0D = spawnplane(self, "script_model", var_0A);
@@ -201,13 +201,13 @@ doflyby(param_00) {
     var_0D setModel("vehicle_av8b_harrier_jet_opfor_mp");
   }
 
-  var_0C.angles = vectortoangles(var_09 - var_08);
+  var_0C.angles = vectortoangles(var_9 - var_8);
   var_0C playLoopSound("veh_aastrike_flyover_loop");
   var_0C thread playplanefx();
-  var_0D.angles = vectortoangles(var_09 - var_0A);
+  var_0D.angles = vectortoangles(var_9 - var_0A);
   var_0D thread playplanefx();
-  var_0E = distance(var_08, var_09);
-  var_0C moveto(var_09 * 2, var_0E / 1800, 0, 0);
+  var_0E = distance(var_8, var_9);
+  var_0C moveto(var_9 * 2, var_0E / 1800, 0, 0);
   wait(randomfloatrange(0.25, 0.5));
   var_0D moveto(var_0B * 2, var_0E / 1800, 0, 0);
   wait(var_0E / 1600);

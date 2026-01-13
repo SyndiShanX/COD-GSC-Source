@@ -4,40 +4,40 @@
  * Script: scripts\mp\global_fx_code.gsc
 *****************************************/
 
-global_fx(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = scripts\engine\utility::getstructarray(param_00, "targetname");
-  if(var_05.size <= 0) {
+global_fx(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  if(var_5.size <= 0) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = randomfloatrange(-20, -15);
+  if(!isDefined(var_2)) {
+    var_2 = randomfloatrange(-20, -15);
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = param_01;
+  if(!isDefined(var_3)) {
+    var_3 = var_1;
   }
 
-  foreach(var_07 in var_05) {
+  foreach(var_7 in var_5) {
     if(!isDefined(level._effect)) {
       level._effect = [];
     }
 
-    if(!isDefined(level._effect[param_03])) {
-      level._effect[param_03] = loadfx(param_01);
+    if(!isDefined(level._effect[var_3])) {
+      level._effect[var_3] = loadfx(var_1);
     }
 
-    if(!isDefined(var_07.angles)) {
-      var_07.angles = (0, 0, 0);
+    if(!isDefined(var_7.angles)) {
+      var_7.angles = (0, 0, 0);
     }
 
-    var_08 = scripts\engine\utility::createoneshoteffect(param_03);
-    var_08.v["origin"] = var_07.origin;
-    var_08.v["angles"] = var_07.angles;
-    var_08.v["fxid"] = param_03;
-    var_08.v["delay"] = param_02;
-    if(isDefined(param_04)) {
-      var_08.v["soundalias"] = param_04;
+    var_8 = scripts\engine\utility::createoneshoteffect(var_3);
+    var_8.v["origin"] = var_7.origin;
+    var_8.v["angles"] = var_7.angles;
+    var_8.v["fxid"] = var_3;
+    var_8.v["delay"] = var_2;
+    if(isDefined(var_4)) {
+      var_8.v["soundalias"] = var_4;
     }
   }
 }

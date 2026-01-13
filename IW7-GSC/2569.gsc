@@ -4,79 +4,79 @@
  * Script: 2569.gsc
 ************************/
 
-func_E477(param_00) {
+func_E477(var_0) {
   return level.success;
 }
 
-func_E470(param_00) {
+func_E470(var_0) {
   return level.failure;
 }
 
-func_E475(param_00) {
+func_E475(var_0) {
   return level.running;
 }
 
-func_E478(param_00, param_01) {
-  if(param_01 == 1) {
+func_E478(var_0, var_1) {
+  if(var_1 == 1) {
     return level.success;
   }
 
   return level.failure;
 }
 
-func_9FEE(param_00, param_01) {
-  if(isDefined(param_01)) {
+func_9FEE(var_0, var_1) {
+  if(isDefined(var_1)) {
     return level.success;
   }
 
   return level.failure;
 }
 
-func_FAF6(param_00) {
-  self.var_3135.instancedata[param_00] = [];
-  self.var_3135.instancedata[param_00]["waitStartTime"] = gettime();
+func_FAF6(var_0) {
+  self.bt.instancedata[var_0] = [];
+  self.bt.instancedata[var_0]["waitStartTime"] = gettime();
 }
 
-func_5AEA(param_00, param_01) {
-  var_02 = self.var_3135.instancedata[param_00]["waitStartTime"];
-  if(gettime() - var_02 < param_01) {
+func_5AEA(var_0, var_1) {
+  var_2 = self.bt.instancedata[var_0]["waitStartTime"];
+  if(gettime() - var_2 < var_1) {
     return level.running;
   }
 
   return level.success;
 }
 
-func_8C0A(param_00, param_01) {
-  var_02 = param_01;
-  if(self getpersstat(var_02)) {
+func_8C0A(var_0, var_1) {
+  var_2 = var_1;
+  if(self getpersstat(var_2)) {
     return level.success;
   }
 
   return level.failure;
 }
 
-func_13157(param_00, param_01) {
-  var_02 = param_01[0];
-  var_03 = param_01[1];
-  var_04 = param_01[2];
-  if(var_03 <= var_02 && var_02 <= var_04) {
+func_13157(var_0, var_1) {
+  var_2 = var_1[0];
+  var_3 = var_1[1];
+  var_4 = var_1[2];
+  if(var_3 <= var_2 && var_2 <= var_4) {
     return level.success;
   }
 
   return level.failure;
 }
 
-func_DC6A(param_00, param_01) {
-  var_02 = param_01[0];
-  var_03 = param_01[1];
-  if(randomint(var_02) < var_03) {
+func_DC6A(var_0, var_1) {
+  var_2 = var_1[0];
+  var_3 = var_1[1];
+  if(randomint(var_2) < var_3) {
     return level.success;
   }
 
   return level.failure;
 }
 
-cointoss(param_00) {
+cointoss(var_0) {
   if(randomint(100) < 50) {
     return level.success;
   }
@@ -84,17 +84,17 @@ cointoss(param_00) {
   return level.failure;
 }
 
-func_9309(param_00, param_01) {
-  if(isDefined(param_01)) {
-    var_02 = param_01;
+func_9309(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   } else {
-    var_02 = self;
+    var_2 = self;
   }
 
-  return isalive(var_02);
+  return isalive(var_2);
 }
 
-func_9307(param_00) {
+func_9307(var_0) {
   if(scripts\asm\asm_bb::bb_isanimscripted()) {
     return level.success;
   }
@@ -102,7 +102,7 @@ func_9307(param_00) {
   return level.failure;
 }
 
-func_930C(param_00) {
+func_930C(var_0) {
   if(scripts\asm\asm_bb::bb_isselfdestruct()) {
     return level.success;
   }

@@ -3,526 +3,526 @@
  * Script: 2626.gsc
 ***************************************/
 
-noself_func(var_00, var_01, var_02, var_03, var_04) {
+noself_func(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level.func)) {
     return;
   }
-  if(!isDefined(level.func[var_00])) {
+  if(!isDefined(level.func[var_0])) {
     return;
   }
-  if(!isDefined(var_01)) {
-    call[[level.func[var_00]]]();
-    return;
-  }
-
-  if(!isDefined(var_02)) {
-    call[[level.func[var_00]]](var_01);
+  if(!isDefined(var_1)) {
+    call[[level.func[var_0]]]();
     return;
   }
 
-  if(!isDefined(var_03)) {
-    call[[level.func[var_00]]](var_01, var_02);
+  if(!isDefined(var_2)) {
+    call[[level.func[var_0]]](var_1);
     return;
   }
 
-  if(!isDefined(var_04)) {
-    call[[level.func[var_00]]](var_01, var_02, var_03);
+  if(!isDefined(var_3)) {
+    call[[level.func[var_0]]](var_1, var_2);
     return;
   }
 
-  call[[level.func[var_00]]](var_01, var_02, var_03, var_04);
+  if(!isDefined(var_4)) {
+    call[[level.func[var_0]]](var_1, var_2, var_3);
+    return;
+  }
+
+  call[[level.func[var_0]]](var_1, var_2, var_3, var_4);
 }
 
-self_func(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(level.func[var_00])) {
+self_func(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(level.func[var_0])) {
     return;
   }
-  if(!isDefined(var_01)) {
-    self call[[level.func[var_00]]]();
-    return;
-  }
-
-  if(!isDefined(var_02)) {
-    self call[[level.func[var_00]]](var_01);
+  if(!isDefined(var_1)) {
+    self call[[level.func[var_0]]]();
     return;
   }
 
-  if(!isDefined(var_03)) {
-    self call[[level.func[var_00]]](var_01, var_02);
+  if(!isDefined(var_2)) {
+    self call[[level.func[var_0]]](var_1);
     return;
   }
 
-  if(!isDefined(var_04)) {
-    self call[[level.func[var_00]]](var_01, var_02, var_03);
+  if(!isDefined(var_3)) {
+    self call[[level.func[var_0]]](var_1, var_2);
     return;
   }
 
-  self call[[level.func[var_00]]](var_01, var_02, var_03, var_04);
+  if(!isDefined(var_4)) {
+    self call[[level.func[var_0]]](var_1, var_2, var_3);
+    return;
+  }
+
+  self call[[level.func[var_0]]](var_1, var_2, var_3, var_4);
 }
 
-anglebetweenvectors(var_00, var_01) {
-  return acos(vectordot(var_00, var_01) / (length(var_00) * length(var_01)));
+anglebetweenvectors(var_0, var_1) {
+  return acos(vectordot(var_0, var_1) / (length(var_0) * length(var_1)));
 }
 
-anglebetweenvectorsunit(var_00, var_01) {
-  return acos(vectordot(var_00, var_01));
+anglebetweenvectorsunit(var_0, var_1) {
+  return acos(vectordot(var_0, var_1));
 }
 
-anglebetweenvectorssigned(var_00, var_01, var_02) {
-  var_03 = vectornormalize(var_00);
-  var_04 = vectornormalize(var_01);
-  var_05 = acos(clamp(vectordot(var_03, var_04), -1, 1));
-  var_06 = vectorcross(var_03, var_04);
+anglebetweenvectorssigned(var_0, var_1, var_2) {
+  var_3 = vectornormalize(var_0);
+  var_4 = vectornormalize(var_1);
+  var_5 = acos(clamp(vectordot(var_3, var_4), -1, 1));
+  var_6 = vectorcross(var_3, var_4);
 
-  if(vectordot(var_06, var_02) < 0) {
-    var_05 = var_05 * -1;
+  if(vectordot(var_6, var_2) < 0) {
+    var_5 = var_5 * -1;
   }
 
-  return var_05;
+  return var_5;
 }
 
-segmentvssphere(var_00, var_01, var_02, var_03) {
-  if(var_00 == var_01) {
+segmentvssphere(var_0, var_1, var_2, var_3) {
+  if(var_0 == var_1) {
     return 0;
   }
 
-  var_04 = var_02 - var_00;
-  var_05 = var_01 - var_00;
-  var_06 = clamp(vectordot(var_04, var_05) / vectordot(var_05, var_05), 0, 1);
-  var_07 = var_00 + var_05 * var_06;
-  return lengthsquared(var_02 - var_07) <= var_03 * var_03;
+  var_4 = var_2 - var_0;
+  var_5 = var_1 - var_0;
+  var_6 = clamp(vectordot(var_4, var_5) / vectordot(var_5, var_5), 0, 1);
+  var_7 = var_0 + var_5 * var_6;
+  return lengthsquared(var_2 - var_7) <= var_3 * var_3;
 }
 
-randomvector(var_00) {
-  return (randomfloat(var_00) - var_00 * 0.5, randomfloat(var_00) - var_00 * 0.5, randomfloat(var_00) - var_00 * 0.5);
+randomvector(var_0) {
+  return (randomfloat(var_0) - var_0 * 0.5, randomfloat(var_0) - var_0 * 0.5, randomfloat(var_0) - var_0 * 0.5);
 }
 
-randomvectorrange(var_00, var_01) {
-  var_02 = randomfloatrange(var_00, var_01);
+randomvectorrange(var_0, var_1) {
+  var_2 = randomfloatrange(var_0, var_1);
 
   if(randomint(2) == 0) {
-    var_02 = var_02 * -1;
+    var_2 = var_2 * -1;
   }
 
-  var_03 = randomfloatrange(var_00, var_01);
+  var_3 = randomfloatrange(var_0, var_1);
 
   if(randomint(2) == 0) {
-    var_03 = var_03 * -1;
+    var_3 = var_3 * -1;
   }
 
-  var_04 = randomfloatrange(var_00, var_01);
+  var_4 = randomfloatrange(var_0, var_1);
 
   if(randomint(2) == 0) {
-    var_04 = var_04 * -1;
+    var_4 = var_4 * -1;
   }
 
-  return (var_02, var_03, var_04);
+  return (var_2, var_3, var_4);
 }
 
-sign(var_00) {
-  if(var_00 >= 0) {
+sign(var_0) {
+  if(var_0 >= 0) {
     return 1;
   }
 
   return -1;
 }
 
-mod(var_00, var_01) {
-  var_02 = int(var_00 / var_01);
+mod(var_0, var_1) {
+  var_2 = int(var_0 / var_1);
 
-  if(var_00 * var_01 < 0) {
-    var_02 = var_02 - 1;
+  if(var_0 * var_1 < 0) {
+    var_2 = var_2 - 1;
   }
 
-  return var_00 - var_02 * var_01;
+  return var_0 - var_2 * var_1;
 }
 
-get_enemy_team(var_00) {
-  var_01 = [];
+get_enemy_team(var_0) {
+  var_1 = [];
   var_1["axis"] = "allies";
   var_1["allies"] = "axis";
-  return var_1[var_00];
+  return var_1[var_0];
 }
 
-clear_exception(var_00) {
-  self.exception[var_00] = anim.defaultexception;
+clear_exception(var_0) {
+  self.exception[var_0] = anim.defaultexception;
 }
 
 cointoss() {
   return randomint(100) >= 50;
 }
 
-choose_from_weighted_array(var_00, var_01) {
-  var_02 = randomint(var_1[var_1.size - 1] + 1);
+choose_from_weighted_array(var_0, var_1) {
+  var_2 = randomint(var_1[var_1.size - 1] + 1);
 
-  for(var_03 = 0; var_03 < var_1.size; var_3++) {
-    if(var_02 <= var_1[var_03]) {
-      return var_0[var_03];
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(var_2 <= var_1[var_3]) {
+      return var_0[var_3];
     }
   }
 }
 
-waittill_string(var_00, var_01) {
-  if(var_00 != "death") {
+waittill_string(var_0, var_1) {
+  if(var_0 != "death") {
     self endon("death");
   }
 
-  var_01 endon("die");
-  self waittill(var_00);
-  var_01 notify("returned", var_00);
+  var_1 endon("die");
+  self waittill(var_0);
+  var_1 notify("returned", var_0);
 }
 
-waittillmatch_string(var_00, var_01, var_02) {
-  if(var_01 != "death") {
+waittillmatch_string(var_0, var_1, var_2) {
+  if(var_1 != "death") {
     self endon("death");
   }
 
-  var_02 endon("die");
-  self waittillmatch(var_00, var_01);
-  var_02 notify("returned", var_01);
+  var_2 endon("die");
+  self waittillmatch(var_0, var_1);
+  var_2 notify("returned", var_1);
 }
 
-waittill_string_no_endon_death(var_00, var_01) {
-  var_01 endon("die");
-  self waittill(var_00);
-  var_01 notify("returned", var_00);
+waittill_string_no_endon_death(var_0, var_1) {
+  var_1 endon("die");
+  self waittill(var_0);
+  var_1 notify("returned", var_0);
 }
 
-waittill_multiple(var_00, var_01, var_02, var_03, var_04) {
+waittill_multiple(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
-  var_05 = spawnStruct();
+  var_5 = spawnStruct();
   var_5.threads = 0;
 
-  if(isDefined(var_00)) {
-    childthread waittill_string(var_00, var_05);
+  if(isDefined(var_0)) {
+    childthread waittill_string(var_0, var_5);
     var_5.threads++;
   }
 
-  if(isDefined(var_01)) {
-    childthread waittill_string(var_01, var_05);
+  if(isDefined(var_1)) {
+    childthread waittill_string(var_1, var_5);
     var_5.threads++;
   }
 
-  if(isDefined(var_02)) {
-    childthread waittill_string(var_02, var_05);
+  if(isDefined(var_2)) {
+    childthread waittill_string(var_2, var_5);
     var_5.threads++;
   }
 
-  if(isDefined(var_03)) {
-    childthread waittill_string(var_03, var_05);
+  if(isDefined(var_3)) {
+    childthread waittill_string(var_3, var_5);
     var_5.threads++;
   }
 
-  if(isDefined(var_04)) {
-    childthread waittill_string(var_04, var_05);
+  if(isDefined(var_4)) {
+    childthread waittill_string(var_4, var_5);
     var_5.threads++;
   }
 
   while(var_5.threads) {
-    var_05 waittill("returned");
+    var_5 waittill("returned");
     var_5.threads--;
   }
 
-  var_05 notify("die");
+  var_5 notify("die");
 }
 
-waittillmatch_notify(var_00, var_01, var_02) {
+waittillmatch_notify(var_0, var_1, var_2) {
   self endon("death");
-  self waittillmatch(var_00, var_01);
-  self notify(var_02);
+  self waittillmatch(var_0, var_1);
+  self notify(var_2);
 }
 
-waittill_any_return(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if((!isDefined(var_00) || var_00 != "death") && (!isDefined(var_01) || var_01 != "death") && (!isDefined(var_02) || var_02 != "death") && (!isDefined(var_03) || var_03 != "death") && (!isDefined(var_04) || var_04 != "death") && (!isDefined(var_05) || var_05 != "death")) {
+waittill_any_return(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death")) {
     self endon("death");
   }
 
-  var_06 = spawnStruct();
+  var_6 = spawnStruct();
 
-  if(isDefined(var_00)) {
-    childthread waittill_string(var_00, var_06);
+  if(isDefined(var_0)) {
+    childthread waittill_string(var_0, var_6);
   }
 
-  if(isDefined(var_01)) {
-    childthread waittill_string(var_01, var_06);
+  if(isDefined(var_1)) {
+    childthread waittill_string(var_1, var_6);
   }
 
-  if(isDefined(var_02)) {
-    childthread waittill_string(var_02, var_06);
+  if(isDefined(var_2)) {
+    childthread waittill_string(var_2, var_6);
   }
 
-  if(isDefined(var_03)) {
-    childthread waittill_string(var_03, var_06);
+  if(isDefined(var_3)) {
+    childthread waittill_string(var_3, var_6);
   }
 
-  if(isDefined(var_04)) {
-    childthread waittill_string(var_04, var_06);
+  if(isDefined(var_4)) {
+    childthread waittill_string(var_4, var_6);
   }
 
-  if(isDefined(var_05)) {
-    childthread waittill_string(var_05, var_06);
+  if(isDefined(var_5)) {
+    childthread waittill_string(var_5, var_6);
   }
 
-  var_06 waittill("returned", var_07);
-  var_06 notify("die");
-  return var_07;
+  var_6 waittill("returned", var_7);
+  var_6 notify("die");
+  return var_7;
 }
 
-waittillmatch_any_return(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if((!isDefined(var_01) || var_01 != "death") && (!isDefined(var_02) || var_02 != "death") && (!isDefined(var_03) || var_03 != "death") && (!isDefined(var_04) || var_04 != "death") && (!isDefined(var_05) || var_05 != "death") && (!isDefined(var_06) || var_06 != "death")) {
+waittillmatch_any_return(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death") && (!isDefined(var_6) || var_6 != "death")) {
     self endon("death");
   }
 
-  var_07 = spawnStruct();
+  var_7 = spawnStruct();
 
-  if(isDefined(var_01)) {
-    childthread waittillmatch_string(var_00, var_01, var_07);
+  if(isDefined(var_1)) {
+    childthread waittillmatch_string(var_0, var_1, var_7);
   }
 
-  if(isDefined(var_02)) {
-    childthread waittillmatch_string(var_00, var_02, var_07);
+  if(isDefined(var_2)) {
+    childthread waittillmatch_string(var_0, var_2, var_7);
   }
 
-  if(isDefined(var_03)) {
-    childthread waittillmatch_string(var_00, var_03, var_07);
+  if(isDefined(var_3)) {
+    childthread waittillmatch_string(var_0, var_3, var_7);
   }
 
-  if(isDefined(var_04)) {
-    childthread waittillmatch_string(var_00, var_04, var_07);
+  if(isDefined(var_4)) {
+    childthread waittillmatch_string(var_0, var_4, var_7);
   }
 
-  if(isDefined(var_05)) {
-    childthread waittillmatch_string(var_00, var_05, var_07);
+  if(isDefined(var_5)) {
+    childthread waittillmatch_string(var_0, var_5, var_7);
   }
 
-  if(isDefined(var_06)) {
-    childthread waittillmatch_string(var_00, var_06, var_07);
+  if(isDefined(var_6)) {
+    childthread waittillmatch_string(var_0, var_6, var_7);
   }
 
-  var_07 waittill("returned", var_08);
-  var_07 notify("die");
-  return var_08;
+  var_7 waittill("returned", var_8);
+  var_7 notify("die");
+  return var_8;
 }
 
-waittill_any_return_no_endon_death(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = spawnStruct();
+waittill_any_return_no_endon_death(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawnStruct();
 
-  if(isDefined(var_00)) {
-    childthread waittill_string_no_endon_death(var_00, var_06);
+  if(isDefined(var_0)) {
+    childthread waittill_string_no_endon_death(var_0, var_6);
   }
 
-  if(isDefined(var_01)) {
-    childthread waittill_string_no_endon_death(var_01, var_06);
+  if(isDefined(var_1)) {
+    childthread waittill_string_no_endon_death(var_1, var_6);
   }
 
-  if(isDefined(var_02)) {
-    childthread waittill_string_no_endon_death(var_02, var_06);
+  if(isDefined(var_2)) {
+    childthread waittill_string_no_endon_death(var_2, var_6);
   }
 
-  if(isDefined(var_03)) {
-    childthread waittill_string_no_endon_death(var_03, var_06);
+  if(isDefined(var_3)) {
+    childthread waittill_string_no_endon_death(var_3, var_6);
   }
 
-  if(isDefined(var_04)) {
-    childthread waittill_string_no_endon_death(var_04, var_06);
+  if(isDefined(var_4)) {
+    childthread waittill_string_no_endon_death(var_4, var_6);
   }
 
-  if(isDefined(var_05)) {
-    childthread waittill_string_no_endon_death(var_05, var_06);
+  if(isDefined(var_5)) {
+    childthread waittill_string_no_endon_death(var_5, var_6);
   }
 
-  var_06 waittill("returned", var_07);
-  var_06 notify("die");
-  return var_07;
+  var_6 waittill("returned", var_7);
+  var_6 notify("die");
+  return var_7;
 }
 
-waittill_any_in_array_return(var_00) {
-  var_01 = spawnStruct();
-  var_02 = 0;
+waittill_any_in_array_return(var_0) {
+  var_1 = spawnStruct();
+  var_2 = 0;
 
-  foreach(var_04 in var_00) {
-    childthread waittill_string(var_04, var_01);
+  foreach(var_4 in var_0) {
+    childthread waittill_string(var_4, var_1);
 
-    if(var_04 == "death") {
-      var_02 = 1;
+    if(var_4 == "death") {
+      var_2 = 1;
     }
   }
 
-  if(!var_02) {
+  if(!var_2) {
     self endon("death");
   }
 
-  var_01 waittill("returned", var_06);
-  var_01 notify("die");
-  return var_06;
+  var_1 waittill("returned", var_6);
+  var_1 notify("die");
+  return var_6;
 }
 
-waittill_any_in_array_return_no_endon_death(var_00) {
-  var_01 = spawnStruct();
+waittill_any_in_array_return_no_endon_death(var_0) {
+  var_1 = spawnStruct();
 
-  foreach(var_03 in var_00) {
-    childthread waittill_string_no_endon_death(var_03, var_01);
+  foreach(var_3 in var_0) {
+    childthread waittill_string_no_endon_death(var_3, var_1);
   }
 
-  var_01 waittill("returned", var_05);
-  var_01 notify("die");
-  return var_05;
+  var_1 waittill("returned", var_5);
+  var_1 notify("die");
+  return var_5;
 }
 
-waittill_any_in_array_or_timeout(var_00, var_01) {
-  var_02 = spawnStruct();
-  var_03 = 0;
+waittill_any_in_array_or_timeout(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_3 = 0;
 
-  foreach(var_05 in var_00) {
-    childthread waittill_string(var_05, var_02);
+  foreach(var_5 in var_0) {
+    childthread waittill_string(var_5, var_2);
 
-    if(var_05 == "death") {
-      var_03 = 1;
+    if(var_5 == "death") {
+      var_3 = 1;
     }
   }
 
-  if(!var_03) {
+  if(!var_3) {
     self endon("death");
   }
 
-  var_02 childthread _timeout(var_01);
-  var_02 waittill("returned", var_07);
-  var_02 notify("die");
-  return var_07;
+  var_2 childthread _timeout(var_1);
+  var_2 waittill("returned", var_7);
+  var_2 notify("die");
+  return var_7;
 }
 
-waittill_any_in_array_or_timeout_no_endon_death(var_00, var_01) {
-  var_02 = spawnStruct();
+waittill_any_in_array_or_timeout_no_endon_death(var_0, var_1) {
+  var_2 = spawnStruct();
 
-  foreach(var_04 in var_00) {
-    childthread waittill_string_no_endon_death(var_04, var_02);
+  foreach(var_4 in var_0) {
+    childthread waittill_string_no_endon_death(var_4, var_2);
   }
 
-  var_02 thread _timeout(var_01);
-  var_02 waittill("returned", var_06);
-  var_02 notify("die");
-  return var_06;
+  var_2 thread _timeout(var_1);
+  var_2 waittill("returned", var_6);
+  var_2 notify("die");
+  return var_6;
 }
 
-waittill_any_timeout(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if((!isDefined(var_01) || var_01 != "death") && (!isDefined(var_02) || var_02 != "death") && (!isDefined(var_03) || var_03 != "death") && (!isDefined(var_04) || var_04 != "death") && (!isDefined(var_05) || var_05 != "death") && (!isDefined(var_06) || var_06 != "death")) {
+waittill_any_timeout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death") && (!isDefined(var_6) || var_6 != "death")) {
     self endon("death");
   }
 
-  var_07 = spawnStruct();
+  var_7 = spawnStruct();
 
-  if(isDefined(var_01)) {
-    childthread waittill_string(var_01, var_07);
+  if(isDefined(var_1)) {
+    childthread waittill_string(var_1, var_7);
   }
 
-  if(isDefined(var_02)) {
-    childthread waittill_string(var_02, var_07);
+  if(isDefined(var_2)) {
+    childthread waittill_string(var_2, var_7);
   }
 
-  if(isDefined(var_03)) {
-    childthread waittill_string(var_03, var_07);
+  if(isDefined(var_3)) {
+    childthread waittill_string(var_3, var_7);
   }
 
-  if(isDefined(var_04)) {
-    childthread waittill_string(var_04, var_07);
+  if(isDefined(var_4)) {
+    childthread waittill_string(var_4, var_7);
   }
 
-  if(isDefined(var_05)) {
-    childthread waittill_string(var_05, var_07);
+  if(isDefined(var_5)) {
+    childthread waittill_string(var_5, var_7);
   }
 
-  if(isDefined(var_06)) {
-    childthread waittill_string(var_06, var_07);
+  if(isDefined(var_6)) {
+    childthread waittill_string(var_6, var_7);
   }
 
-  var_07 childthread _timeout(var_00);
-  var_07 waittill("returned", var_08);
-  var_07 notify("die");
-  return var_08;
+  var_7 childthread _timeout(var_0);
+  var_7 waittill("returned", var_8);
+  var_7 notify("die");
+  return var_8;
 }
 
-_timeout(var_00) {
+_timeout(var_0) {
   self endon("die");
-  wait(var_00);
+  wait(var_0);
   self notify("returned", "timeout");
 }
 
-waittill_any_timeout_no_endon_death(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = spawnStruct();
+waittill_any_timeout_no_endon_death(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawnStruct();
 
-  if(isDefined(var_01)) {
-    childthread waittill_string_no_endon_death(var_01, var_06);
+  if(isDefined(var_1)) {
+    childthread waittill_string_no_endon_death(var_1, var_6);
   }
 
-  if(isDefined(var_02)) {
-    childthread waittill_string_no_endon_death(var_02, var_06);
+  if(isDefined(var_2)) {
+    childthread waittill_string_no_endon_death(var_2, var_6);
   }
 
-  if(isDefined(var_03)) {
-    childthread waittill_string_no_endon_death(var_03, var_06);
+  if(isDefined(var_3)) {
+    childthread waittill_string_no_endon_death(var_3, var_6);
   }
 
-  if(isDefined(var_04)) {
-    childthread waittill_string_no_endon_death(var_04, var_06);
+  if(isDefined(var_4)) {
+    childthread waittill_string_no_endon_death(var_4, var_6);
   }
 
-  if(isDefined(var_05)) {
-    childthread waittill_string_no_endon_death(var_05, var_06);
+  if(isDefined(var_5)) {
+    childthread waittill_string_no_endon_death(var_5, var_6);
   }
 
-  var_06 childthread _timeout(var_00);
-  var_06 waittill("returned", var_07);
-  var_06 notify("die");
-  return var_07;
+  var_6 childthread _timeout(var_0);
+  var_6 waittill("returned", var_7);
+  var_6 notify("die");
+  return var_7;
 }
 
-waittill_any(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  if(isDefined(var_01)) {
-    self endon(var_01);
+waittill_any(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(isDefined(var_1)) {
+    self endon(var_1);
   }
 
-  if(isDefined(var_02)) {
-    self endon(var_02);
+  if(isDefined(var_2)) {
+    self endon(var_2);
   }
 
-  if(isDefined(var_03)) {
-    self endon(var_03);
+  if(isDefined(var_3)) {
+    self endon(var_3);
   }
 
-  if(isDefined(var_04)) {
-    self endon(var_04);
+  if(isDefined(var_4)) {
+    self endon(var_4);
   }
 
-  if(isDefined(var_05)) {
-    self endon(var_05);
+  if(isDefined(var_5)) {
+    self endon(var_5);
   }
 
-  if(isDefined(var_06)) {
-    self endon(var_06);
+  if(isDefined(var_6)) {
+    self endon(var_6);
   }
 
-  if(isDefined(var_07)) {
-    self endon(var_07);
+  if(isDefined(var_7)) {
+    self endon(var_7);
   }
 
-  self waittill(var_00);
+  self waittill(var_0);
 }
 
-waittill_any_ents(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13) {
-  if(isDefined(var_02) && isDefined(var_03)) {
-    var_02 endon(var_03);
+waittill_any_ents(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  if(isDefined(var_2) && isDefined(var_3)) {
+    var_2 endon(var_3);
   }
 
-  if(isDefined(var_04) && isDefined(var_05)) {
-    var_04 endon(var_05);
+  if(isDefined(var_4) && isDefined(var_5)) {
+    var_4 endon(var_5);
   }
 
-  if(isDefined(var_06) && isDefined(var_07)) {
-    var_06 endon(var_07);
+  if(isDefined(var_6) && isDefined(var_7)) {
+    var_6 endon(var_7);
   }
 
-  if(isDefined(var_08) && isDefined(var_09)) {
-    var_08 endon(var_09);
+  if(isDefined(var_8) && isDefined(var_9)) {
+    var_8 endon(var_9);
   }
 
   if(isDefined(var_10) && isDefined(var_11)) {
@@ -533,7 +533,7 @@ waittill_any_ents(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
     var_12 endon(var_13);
   }
 
-  var_00 waittill(var_01);
+  var_0 waittill(var_1);
 }
 
 isflashed() {
@@ -544,320 +544,320 @@ isflashed() {
   return gettime() < self.flashendtime;
 }
 
-flag_exist(var_00) {
+flag_exist(var_0) {
   if(!isDefined(level.flag)) {
     return 0;
   }
 
-  return isDefined(level.flag[var_00]);
+  return isDefined(level.flag[var_0]);
 }
 
-flag(var_00) {
-  return level.flag[var_00];
+flag(var_0) {
+  return level.flag[var_0];
 }
 
-flag_init(var_00) {
+flag_init(var_0) {
   if(!isDefined(level.flag)) {
     scripts\engine\flags::init_flags();
   }
 
-  level.flag[var_00] = 0;
+  level.flag[var_0] = 0;
   init_trigger_flags();
 
-  if(!isDefined(level.trigger_flags[var_00])) {
-    level.trigger_flags[var_00] = [];
+  if(!isDefined(level.trigger_flags[var_0])) {
+    level.trigger_flags[var_0] = [];
   }
 
-  if(getsubstr(var_00, 0, 3) == "aa_") {
-    thread[[level.func["sp_stat_tracking_func"]]](var_00);
+  if(getsubstr(var_0, 0, 3) == "aa_") {
+    thread[[level.func["sp_stat_tracking_func"]]](var_0);
   }
 }
 
-empty_init_func(var_00) {}
+empty_init_func(var_0) {}
 
-flag_set(var_00, var_01) {
-  level.flag[var_00] = 1;
-  set_trigger_flag_permissions(var_00);
+flag_set(var_0, var_1) {
+  level.flag[var_0] = 1;
+  set_trigger_flag_permissions(var_0);
 
-  if(isDefined(var_01)) {
-    level notify(var_00, var_01);
+  if(isDefined(var_1)) {
+    level notify(var_0, var_1);
   } else {
-    level notify(var_00);
+    level notify(var_0);
   }
 }
 
-flag_wait(var_00) {
-  var_01 = undefined;
+flag_wait(var_0) {
+  var_1 = undefined;
 
-  while(!flag(var_00)) {
-    var_01 = undefined;
-    level waittill(var_00, var_01);
+  while(!flag(var_0)) {
+    var_1 = undefined;
+    level waittill(var_0, var_1);
   }
 
-  if(isDefined(var_01)) {
-    return var_01;
+  if(isDefined(var_1)) {
+    return var_1;
   }
 }
 
-flag_clear(var_00) {
-  if(!flag(var_00)) {
+flag_clear(var_0) {
+  if(!flag(var_0)) {
     return;
   }
-  level.flag[var_00] = 0;
-  set_trigger_flag_permissions(var_00);
-  level notify(var_00);
+  level.flag[var_0] = 0;
+  set_trigger_flag_permissions(var_0);
+  level notify(var_0);
 }
 
-flag_waitopen(var_00) {
-  while(flag(var_00)) {
-    level waittill(var_00);
+flag_waitopen(var_0) {
+  while(flag(var_0)) {
+    level waittill(var_0);
   }
 }
 
-waittill_either(var_00, var_01) {
-  self endon(var_00);
-  self waittill(var_01);
-  return var_01;
+waittill_either(var_0, var_1) {
+  self endon(var_0);
+  self waittill(var_1);
+  return var_1;
 }
 
-array_thread_safe(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
-  if(!isDefined(var_03)) {
-    foreach(var_13 in var_00) {
-      var_13 thread[[var_01]]();
-      wait(var_02);
+array_thread_safe(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if(!isDefined(var_3)) {
+    foreach(var_13 in var_0) {
+      var_13 thread[[var_1]]();
+      wait(var_2);
     }
   } else {
-    if(!isDefined(var_04)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03);
-        wait(var_02);
+    if(!isDefined(var_4)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3);
+        wait(var_2);
       }
 
       return;
     }
 
-    if(!isDefined(var_05)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04);
-        wait(var_02);
+    if(!isDefined(var_5)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4);
+        wait(var_2);
       }
 
       return;
     }
 
-    if(!isDefined(var_06)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05);
-        wait(var_02);
+    if(!isDefined(var_6)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5);
+        wait(var_2);
       }
 
       return;
     }
 
-    if(!isDefined(var_07)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05, var_06);
-        wait(var_02);
+    if(!isDefined(var_7)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5, var_6);
+        wait(var_2);
       }
 
       return;
     }
 
-    if(!isDefined(var_08)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05, var_06, var_07);
-        wait(var_02);
+    if(!isDefined(var_8)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5, var_6, var_7);
+        wait(var_2);
       }
 
       return;
     }
 
-    if(!isDefined(var_09)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05, var_06, var_07, var_08);
-        wait(var_02);
+    if(!isDefined(var_9)) {
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5, var_6, var_7, var_8);
+        wait(var_2);
       }
 
       return;
     }
 
     if(!isDefined(var_10)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05, var_06, var_07, var_08, var_09);
-        wait(var_02);
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+        wait(var_2);
       }
 
       return;
     }
 
     if(!isDefined(var_11)) {
-      foreach(var_13 in var_00) {
-        var_13 thread[[var_01]](var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
-        wait(var_02);
+      foreach(var_13 in var_0) {
+        var_13 thread[[var_1]](var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+        wait(var_2);
       }
 
       return;
     }
 
-    foreach(var_13 in var_00) {
-      var_13 thread[[var_01]](var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
-      wait(var_02);
+    foreach(var_13 in var_0) {
+      var_13 thread[[var_1]](var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+      wait(var_2);
     }
   }
 }
 
-array_thread(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
+array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(isDefined(var_10)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     }
 
     return;
   }
 
-  if(isDefined(var_09)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
+  if(isDefined(var_9)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
 
     return;
   }
 
-  if(isDefined(var_08)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+  if(isDefined(var_8)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     }
 
     return;
   }
 
-  if(isDefined(var_07)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07);
+  if(isDefined(var_7)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7);
     }
 
     return;
   }
 
-  if(isDefined(var_06)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05, var_06);
+  if(isDefined(var_6)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6);
     }
 
     return;
   }
 
-  if(isDefined(var_05)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04, var_05);
+  if(isDefined(var_5)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5);
     }
 
     return;
   }
 
-  if(isDefined(var_04)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03, var_04);
+  if(isDefined(var_4)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4);
     }
 
     return;
   }
 
-  if(isDefined(var_03)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02, var_03);
+  if(isDefined(var_3)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3);
     }
 
     return;
   }
 
-  if(isDefined(var_02)) {
-    foreach(var_12 in var_00) {
-      var_12 thread[[var_01]](var_02);
+  if(isDefined(var_2)) {
+    foreach(var_12 in var_0) {
+      var_12 thread[[var_1]](var_2);
     }
 
     return;
   }
 
-  foreach(var_12 in var_00) {
-    var_12 thread[[var_01]]();
+  foreach(var_12 in var_0) {
+    var_12 thread[[var_1]]();
   }
 }
 
-array_call(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
-  if(isDefined(var_09)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
+array_call(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(isDefined(var_9)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
 
     return;
   }
 
-  if(isDefined(var_08)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+  if(isDefined(var_8)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     }
 
     return;
   }
 
-  if(isDefined(var_07)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04, var_05, var_06, var_07);
+  if(isDefined(var_7)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7);
     }
 
     return;
   }
 
-  if(isDefined(var_06)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04, var_05, var_06);
+  if(isDefined(var_6)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4, var_5, var_6);
     }
 
     return;
   }
 
-  if(isDefined(var_05)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04, var_05);
+  if(isDefined(var_5)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4, var_5);
     }
 
     return;
   }
 
-  if(isDefined(var_04)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03, var_04);
+  if(isDefined(var_4)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3, var_4);
     }
 
     return;
   }
 
-  if(isDefined(var_03)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02, var_03);
+  if(isDefined(var_3)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2, var_3);
     }
 
     return;
   }
 
-  if(isDefined(var_02)) {
-    foreach(var_11 in var_00) {
-      var_11 call[[var_01]](var_02);
+  if(isDefined(var_2)) {
+    foreach(var_11 in var_0) {
+      var_11 call[[var_1]](var_2);
     }
 
     return;
   }
 
-  foreach(var_11 in var_00) {
-    var_11 call[[var_01]]();
+  foreach(var_11 in var_0) {
+    var_11 call[[var_1]]();
   }
 }
 
-trigger_on(var_00, var_01) {
-  if(isDefined(var_00) && isDefined(var_01)) {
-    var_02 = getEntArray(var_00, var_01);
-    array_thread(var_02, ::trigger_on_proc);
+trigger_on(var_0, var_1) {
+  if(isDefined(var_0) && isDefined(var_1)) {
+    var_2 = getEntArray(var_0, var_1);
+    array_thread(var_2, ::trigger_on_proc);
   } else
     trigger_on_proc();
 }
@@ -870,10 +870,10 @@ trigger_on_proc() {
   self.trigger_off = undefined;
 }
 
-trigger_off(var_00, var_01) {
-  if(isDefined(var_00) && isDefined(var_01)) {
-    var_02 = getEntArray(var_00, var_01);
-    array_thread(var_02, ::trigger_off_proc);
+trigger_off(var_0, var_1) {
+  if(isDefined(var_0) && isDefined(var_1)) {
+    var_2 = getEntArray(var_0, var_1);
+    array_thread(var_2, ::trigger_off_proc);
   } else
     trigger_off_proc();
 }
@@ -891,55 +891,55 @@ trigger_off_proc() {
   self notify("trigger_off");
 }
 
-set_trigger_flag_permissions(var_00) {
+set_trigger_flag_permissions(var_0) {
   if(!isDefined(level.trigger_flags)) {
     return;
   }
-  level.trigger_flags[var_00] = array_removeundefined(level.trigger_flags[var_00]);
-  array_thread(level.trigger_flags[var_00], ::update_trigger_based_on_flags);
+  level.trigger_flags[var_0] = array_removeundefined(level.trigger_flags[var_0]);
+  array_thread(level.trigger_flags[var_0], ::update_trigger_based_on_flags);
 }
 
 update_trigger_based_on_flags() {
-  var_00 = 1;
+  var_0 = 1;
 
   if(isDefined(self.script_flag_true)) {
-    var_00 = 0;
-    var_01 = create_flags_and_return_tokens(self.script_flag_true);
+    var_0 = 0;
+    var_1 = create_flags_and_return_tokens(self.script_flag_true);
 
-    foreach(var_03 in var_01) {
-      if(flag(var_03)) {
-        var_00 = 1;
+    foreach(var_3 in var_1) {
+      if(flag(var_3)) {
+        var_0 = 1;
         break;
       }
     }
   }
 
-  var_05 = 1;
+  var_5 = 1;
 
   if(isDefined(self.script_flag_false)) {
-    var_01 = create_flags_and_return_tokens(self.script_flag_false);
+    var_1 = create_flags_and_return_tokens(self.script_flag_false);
 
-    foreach(var_03 in var_01) {
-      if(flag(var_03)) {
-        var_05 = 0;
+    foreach(var_3 in var_1) {
+      if(flag(var_3)) {
+        var_5 = 0;
         break;
       }
     }
   }
 
-  [[level.trigger_func[var_00 && var_05]]]();
+  [[level.trigger_func[var_0 && var_5]]]();
 }
 
-create_flags_and_return_tokens(var_00) {
-  var_01 = strtok(var_00, " ");
+create_flags_and_return_tokens(var_0) {
+  var_1 = strtok(var_0, " ");
 
-  for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    if(!isDefined(level.flag[var_1[var_02]])) {
-      flag_init(var_1[var_02]);
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!isDefined(level.flag[var_1[var_2]])) {
+      flag_init(var_1[var_2]);
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 init_trigger_flags() {
@@ -951,10 +951,10 @@ init_trigger_flags() {
   level.trigger_func[0] = ::trigger_off;
 }
 
-getstruct(var_00, var_01) {
-  var_02 = level.struct_class_names[var_01][var_00];
+getstruct(var_0, var_1) {
+  var_2 = level.struct_class_names[var_1][var_0];
 
-  if(!isDefined(var_02)) {
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
@@ -965,14 +965,14 @@ getstruct(var_00, var_01) {
   return var_2[0];
 }
 
-getstructarray(var_00, var_01) {
-  var_02 = level.struct_class_names[var_01][var_00];
+getstructarray(var_0, var_1) {
+  var_2 = level.struct_class_names[var_1][var_0];
 
-  if(!isDefined(var_02)) {
+  if(!isDefined(var_2)) {
     return [];
   }
 
-  return var_02;
+  return var_2;
 }
 
 struct_class_init() {
@@ -985,10 +985,10 @@ struct_class_init() {
   level.struct_class_names["script_noteworthy"] = [];
   level.struct_class_names["script_linkname"] = [];
 
-  foreach(var_03, var_01 in level.struct) {
+  foreach(var_3, var_1 in level.struct) {
     if(isDefined(var_1.targetname)) {
       if(var_1.targetname == "delete_on_load") {
-        level.struct[var_03] = undefined;
+        level.struct[var_3] = undefined;
         continue;
       }
 
@@ -996,8 +996,8 @@ struct_class_init() {
         level.struct_class_names["targetname"][var_1.targetname] = [];
       }
 
-      var_02 = level.struct_class_names["targetname"][var_1.targetname].size;
-      level.struct_class_names["targetname"][var_1.targetname][var_02] = var_01;
+      var_2 = level.struct_class_names["targetname"][var_1.targetname].size;
+      level.struct_class_names["targetname"][var_1.targetname][var_2] = var_1;
     }
 
     if(isDefined(var_1.target)) {
@@ -1005,8 +1005,8 @@ struct_class_init() {
         level.struct_class_names["target"][var_1.target] = [];
       }
 
-      var_02 = level.struct_class_names["target"][var_1.target].size;
-      level.struct_class_names["target"][var_1.target][var_02] = var_01;
+      var_2 = level.struct_class_names["target"][var_1.target].size;
+      level.struct_class_names["target"][var_1.target][var_2] = var_1;
     }
 
     if(isDefined(var_1.script_noteworthy)) {
@@ -1014,8 +1014,8 @@ struct_class_init() {
         level.struct_class_names["script_noteworthy"][var_1.script_noteworthy] = [];
       }
 
-      var_02 = level.struct_class_names["script_noteworthy"][var_1.script_noteworthy].size;
-      level.struct_class_names["script_noteworthy"][var_1.script_noteworthy][var_02] = var_01;
+      var_2 = level.struct_class_names["script_noteworthy"][var_1.script_noteworthy].size;
+      level.struct_class_names["script_noteworthy"][var_1.script_noteworthy][var_2] = var_1;
     }
 
     if(isDefined(var_1.script_linkname)) {
@@ -1023,227 +1023,227 @@ struct_class_init() {
         level.struct_class_names["script_linkname"][var_1.script_linkname] = [];
       }
 
-      var_02 = level.struct_class_names["script_linkname"][var_1.script_linkname].size;
-      level.struct_class_names["script_linkname"][var_1.script_linkname][var_02] = var_01;
+      var_2 = level.struct_class_names["script_linkname"][var_1.script_linkname].size;
+      level.struct_class_names["script_linkname"][var_1.script_linkname][var_2] = var_1;
     }
   }
 }
 
-fileprint_start(var_00) {}
+fileprint_start(var_0) {}
 
 fileprint_map_start() {}
 
-fileprint_map_header(var_00) {
-  if(!isDefined(var_00)) {
-    var_00 = 0;
+fileprint_map_header(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 }
 
-fileprint_map_keypairprint(var_00, var_01) {}
+fileprint_map_keypairprint(var_0, var_1) {}
 
 fileprint_map_entity_start() {}
 
 fileprint_map_entity_end() {}
 
-fileprint_radiant_vec(var_00) {}
+fileprint_radiant_vec(var_0) {}
 
-array_remove(var_00, var_01) {
-  var_02 = [];
+array_remove(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var_04 in var_00) {
-    if(var_04 != var_01) {
-      var_2[var_2.size] = var_04;
+  foreach(var_4 in var_0) {
+    if(var_4 != var_1) {
+      var_2[var_2.size] = var_4;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-array_remove_array(var_00, var_01) {
-  foreach(var_03 in var_01) {
-    var_00 = array_remove(var_00, var_03);
+array_remove_array(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    var_0 = array_remove(var_0, var_3);
   }
 
-  return var_00;
+  return var_0;
 }
 
-array_removeundefined(var_00) {
-  var_01 = [];
+array_removeundefined(var_0) {
+  var_1 = [];
 
-  foreach(var_04, var_03 in var_00) {
-    if(!isDefined(var_03)) {
+  foreach(var_4, var_3 in var_0) {
+    if(!isDefined(var_3)) {
       continue;
     }
-    var_1[var_1.size] = var_03;
+    var_1[var_1.size] = var_3;
   }
 
-  return var_01;
+  return var_1;
 }
 
-array_remove_duplicates(var_00) {
-  var_01 = [];
+array_remove_duplicates(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in var_00) {
-    if(!isDefined(var_03)) {
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_3)) {
       continue;
     }
-    var_04 = 1;
+    var_4 = 1;
 
-    foreach(var_06 in var_01) {
-      if(var_03 == var_06) {
-        var_04 = 0;
+    foreach(var_6 in var_1) {
+      if(var_3 == var_6) {
+        var_4 = 0;
         break;
       }
     }
 
-    if(var_04) {
-      var_1[var_1.size] = var_03;
+    if(var_4) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-array_levelthread(var_00, var_01, var_02, var_03, var_04) {
-  if(isDefined(var_04)) {
-    foreach(var_06 in var_00) {
-      thread[[var_01]](var_06, var_02, var_03, var_04);
+array_levelthread(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(var_4)) {
+    foreach(var_6 in var_0) {
+      thread[[var_1]](var_6, var_2, var_3, var_4);
     }
 
     return;
   }
 
-  if(isDefined(var_03)) {
-    foreach(var_06 in var_00) {
-      thread[[var_01]](var_06, var_02, var_03);
+  if(isDefined(var_3)) {
+    foreach(var_6 in var_0) {
+      thread[[var_1]](var_6, var_2, var_3);
     }
 
     return;
   }
 
-  if(isDefined(var_02)) {
-    foreach(var_06 in var_00) {
-      thread[[var_01]](var_06, var_02);
+  if(isDefined(var_2)) {
+    foreach(var_6 in var_0) {
+      thread[[var_1]](var_6, var_2);
     }
 
     return;
   }
 
-  foreach(var_06 in var_00) {
-    thread[[var_01]](var_06);
-  }
-}
-
-array_levelcall(var_00, var_01, var_02, var_03, var_04) {
-  if(isDefined(var_04)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02, var_03, var_04);
-    }
-
-    return;
-  }
-
-  if(isDefined(var_03)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02, var_03);
-    }
-
-    return;
-  }
-
-  if(isDefined(var_02)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02);
-    }
-
-    return;
-  }
-
-  foreach(var_06 in var_00) {
-    call[[var_01]](var_06);
+  foreach(var_6 in var_0) {
+    thread[[var_1]](var_6);
   }
 }
 
-add_to_array(var_00, var_01) {
-  if(!isDefined(var_01)) {
-    return var_00;
+array_levelcall(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(var_4)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2, var_3, var_4);
+    }
+
+    return;
   }
 
-  if(!isDefined(var_00)) {
-    var_0[0] = var_01;
+  if(isDefined(var_3)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2, var_3);
+    }
+
+    return;
+  }
+
+  if(isDefined(var_2)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2);
+    }
+
+    return;
+  }
+
+  foreach(var_6 in var_0) {
+    call[[var_1]](var_6);
+  }
+}
+
+add_to_array(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    return var_0;
+  }
+
+  if(!isDefined(var_0)) {
+    var_0[0] = var_1;
   } else {
-    var_0[var_0.size] = var_01;
+    var_0[var_0.size] = var_1;
   }
 
-  return var_00;
+  return var_0;
 }
 
-exist_in_array_MAYBE(var_00, var_01) {
-  var_02 = 0;
+exist_in_array_MAYBE(var_0, var_1) {
+  var_2 = 0;
 
   if(var_0.size > 0) {
-    foreach(var_04 in var_00) {
-      if(var_04 == var_01) {
-        var_02 = 1;
+    foreach(var_4 in var_0) {
+      if(var_4 == var_1) {
+        var_2 = 1;
         break;
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-delaycall(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13) {
-  thread delaycall_proc(var_01, var_00, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13);
+delaycall(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  thread delaycall_proc(var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 }
 
-delaycall_proc(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13) {
+delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(issp()) {
     self endon("death");
     self endon("stop_delay_call");
   }
 
-  wait(var_01);
+  wait(var_1);
 
   if(isDefined(var_13)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13);
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
   } else if(isDefined(var_12)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   } else if(isDefined(var_11)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   } else if(isDefined(var_10)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
-  } else if(isDefined(var_09)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
-  } else if(isDefined(var_08)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07, var_08);
-  } else if(isDefined(var_07)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07);
-  } else if(isDefined(var_06)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05, var_06);
-  } else if(isDefined(var_05)) {
-    self call[[var_00]](var_02, var_03, var_04, var_05);
-  } else if(isDefined(var_04)) {
-    self call[[var_00]](var_02, var_03, var_04);
-  } else if(isDefined(var_03)) {
-    self call[[var_00]](var_02, var_03);
-  } else if(isDefined(var_02)) {
-    self call[[var_00]](var_02);
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  } else if(isDefined(var_9)) {
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  } else if(isDefined(var_8)) {
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  } else if(isDefined(var_7)) {
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
+  } else if(isDefined(var_6)) {
+    self call[[var_0]](var_2, var_3, var_4, var_5, var_6);
+  } else if(isDefined(var_5)) {
+    self call[[var_0]](var_2, var_3, var_4, var_5);
+  } else if(isDefined(var_4)) {
+    self call[[var_0]](var_2, var_3, var_4);
+  } else if(isDefined(var_3)) {
+    self call[[var_0]](var_2, var_3);
+  } else if(isDefined(var_2)) {
+    self call[[var_0]](var_2);
   } else {
-    self call[[var_00]]();
+    self call[[var_0]]();
   }
 }
 
 issp() {
   if(!isDefined(level.issp)) {
-    var_00 = getdvar("mapname");
-    var_01 = "";
+    var_0 = getdvar("mapname");
+    var_1 = "";
 
-    for(var_02 = 0; var_02 < min(var_0.size, 3); var_2++) {
-      var_01 = var_01 + var_0[var_02];
+    for(var_2 = 0; var_2 < min(var_0.size, 3); var_2++) {
+      var_1 = var_1 + var_0[var_2];
     }
 
-    level.issp = var_01 != "mp_" && var_01 != "cp_";
+    level.issp = var_1 != "mp_" && var_1 != "cp_";
   }
 
   return level.issp;
@@ -1261,193 +1261,193 @@ issp_towerdefense() {
   return level.issp_towerdefense;
 }
 
-string_starts_with(var_00, var_01) {
+string_starts_with(var_0, var_1) {
   if(var_0.size < var_1.size) {
     return 0;
   }
 
-  var_02 = getsubstr(var_00, 0, var_1.size);
+  var_2 = getsubstr(var_0, 0, var_1.size);
 
-  if(var_02 == var_01) {
+  if(var_2 == var_1) {
     return 1;
   }
 
   return 0;
 }
 
-plot_points(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = var_0[0];
+plot_points(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_0[0];
 
-  if(!isDefined(var_01)) {
-    var_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(!isDefined(var_02)) {
-    var_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(!isDefined(var_03)) {
-    var_03 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(var_04)) {
-    var_04 = 0.05;
+  if(!isDefined(var_4)) {
+    var_4 = 0.05;
   }
 
-  for(var_06 = 1; var_06 < var_0.size; var_6++) {
-    thread draw_line_for_time(var_05, var_0[var_06], var_01, var_02, var_03, var_04);
-    var_05 = var_0[var_06];
+  for(var_6 = 1; var_6 < var_0.size; var_6++) {
+    thread draw_line_for_time(var_5, var_0[var_6], var_1, var_2, var_3, var_4);
+    var_5 = var_0[var_6];
   }
 }
 
-draw_line_for_time(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_05 = gettime() + var_05 * 1000;
+draw_line_for_time(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_5 = gettime() + var_5 * 1000;
 
-  while(gettime() < var_05) {
+  while(gettime() < var_5) {
     wait 0.05;
   }
 }
 
-array_combine(var_00, var_01, var_02, var_03) {
-  var_04 = [];
+array_combine(var_0, var_1, var_2, var_3) {
+  var_4 = [];
 
-  if(isDefined(var_00)) {
-    foreach(var_06 in var_00) {
-      var_4[var_4.size] = var_06;
+  if(isDefined(var_0)) {
+    foreach(var_6 in var_0) {
+      var_4[var_4.size] = var_6;
     }
   }
 
-  if(isDefined(var_01)) {
-    foreach(var_06 in var_01) {
-      var_4[var_4.size] = var_06;
+  if(isDefined(var_1)) {
+    foreach(var_6 in var_1) {
+      var_4[var_4.size] = var_6;
     }
   }
 
-  if(isDefined(var_02)) {
-    foreach(var_06 in var_02) {
-      var_4[var_4.size] = var_06;
+  if(isDefined(var_2)) {
+    foreach(var_6 in var_2) {
+      var_4[var_4.size] = var_6;
     }
   }
 
-  if(isDefined(var_03)) {
-    foreach(var_06 in var_03) {
-      var_4[var_4.size] = var_06;
+  if(isDefined(var_3)) {
+    foreach(var_6 in var_3) {
+      var_4[var_4.size] = var_6;
     }
   }
 
-  return var_04;
+  return var_4;
 }
 
-array_combine_multiple(var_00) {
-  var_01 = [];
+array_combine_multiple(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in var_00) {
-    foreach(var_05 in var_03) {
-      var_1[var_1.size] = var_05;
+  foreach(var_3 in var_0) {
+    foreach(var_5 in var_3) {
+      var_1[var_1.size] = var_5;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-array_combine_unique(var_00, var_01) {
-  var_02 = [];
+array_combine_unique(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var_04 in var_00) {
-    var_2[var_2.size] = var_04;
+  foreach(var_4 in var_0) {
+    var_2[var_2.size] = var_4;
   }
 
-  foreach(var_04 in var_01) {
-    if(array_contains(var_02, var_04)) {
+  foreach(var_4 in var_1) {
+    if(array_contains(var_2, var_4)) {
       continue;
     }
-    var_2[var_2.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  return var_02;
+  return var_2;
 }
 
-array_combine_non_integer_indices(var_00, var_01) {
-  var_02 = [];
+array_combine_non_integer_indices(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var_05, var_04 in var_00) {
-    var_2[var_05] = var_04;
+  foreach(var_5, var_4 in var_0) {
+    var_2[var_5] = var_4;
   }
 
-  foreach(var_05, var_04 in var_01) {
-    var_2[var_05] = var_04;
+  foreach(var_5, var_4 in var_1) {
+    var_2[var_5] = var_4;
   }
 
-  return var_02;
+  return var_2;
 }
 
-array_randomize(var_00) {
-  for(var_01 = 0; var_01 <= var_0.size - 2; var_1++) {
-    var_02 = randomintrange(var_01, var_0.size - 1);
-    var_03 = var_0[var_01];
-    var_0[var_01] = var_0[var_02];
-    var_0[var_02] = var_03;
+array_randomize(var_0) {
+  for(var_1 = 0; var_1 <= var_0.size - 2; var_1++) {
+    var_2 = randomintrange(var_1, var_0.size - 1);
+    var_3 = var_0[var_1];
+    var_0[var_1] = var_0[var_2];
+    var_0[var_2] = var_3;
   }
 
-  return var_00;
+  return var_0;
 }
 
-array_randomize_objects(var_00) {
-  var_01 = [];
+array_randomize_objects(var_0) {
+  var_1 = [];
 
-  for(var_02 = var_00; var_2.size > 0; var_02 = var_04) {
-    var_03 = randomintrange(0, var_2.size);
-    var_04 = [];
-    var_05 = 0;
+  for(var_2 = var_0; var_2.size > 0; var_2 = var_4) {
+    var_3 = randomintrange(0, var_2.size);
+    var_4 = [];
+    var_5 = 0;
 
-    foreach(var_08, var_07 in var_02) {
-      if(var_05 == var_03) {
-        var_1[ter_op(isstring(var_08), var_08, var_1.size)] = var_07;
+    foreach(var_8, var_7 in var_2) {
+      if(var_5 == var_3) {
+        var_1[ter_op(isstring(var_8), var_8, var_1.size)] = var_7;
       } else {
-        var_4[ter_op(isstring(var_08), var_08, var_4.size)] = var_07;
+        var_4[ter_op(isstring(var_8), var_8, var_4.size)] = var_7;
       }
 
       var_5++;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-array_add(var_00, var_01) {
-  var_0[var_0.size] = var_01;
-  return var_00;
+array_add(var_0, var_1) {
+  var_0[var_0.size] = var_1;
+  return var_0;
 }
 
-array_insert(var_00, var_01, var_02) {
-  if(var_02 == var_0.size) {
-    var_03 = var_00;
-    var_3[var_3.size] = var_01;
-    return var_03;
+array_insert(var_0, var_1, var_2) {
+  if(var_2 == var_0.size) {
+    var_3 = var_0;
+    var_3[var_3.size] = var_1;
+    return var_3;
   }
 
-  var_03 = [];
-  var_04 = 0;
+  var_3 = [];
+  var_4 = 0;
 
-  for(var_05 = 0; var_05 < var_0.size; var_5++) {
-    if(var_05 == var_02) {
-      var_3[var_05] = var_01;
-      var_04 = 1;
+  for(var_5 = 0; var_5 < var_0.size; var_5++) {
+    if(var_5 == var_2) {
+      var_3[var_5] = var_1;
+      var_4 = 1;
     }
 
-    var_3[var_05 + var_04] = var_0[var_05];
+    var_3[var_5 + var_4] = var_0[var_5];
   }
 
-  return var_03;
+  return var_3;
 }
 
-array_contains(var_00, var_01) {
+array_contains(var_0, var_1) {
   if(var_0.size <= 0) {
     return 0;
   }
 
-  foreach(var_03 in var_00) {
-    if(var_03 == var_01) {
+  foreach(var_3 in var_0) {
+    if(var_3 == var_1) {
       return 1;
     }
   }
@@ -1455,77 +1455,77 @@ array_contains(var_00, var_01) {
   return 0;
 }
 
-array_find(var_00, var_01) {
-  foreach(var_04, var_03 in var_00) {
-    if(var_03 == var_01) {
-      return var_04;
+array_find(var_0, var_1) {
+  foreach(var_4, var_3 in var_0) {
+    if(var_3 == var_1) {
+      return var_4;
     }
   }
 
   return undefined;
 }
 
-flat_angle(var_00) {
-  var_01 = (0, var_0[1], 0);
-  return var_01;
+flat_angle(var_0) {
+  var_1 = (0, var_0[1], 0);
+  return var_1;
 }
 
-flat_origin(var_00) {
-  var_01 = (var_0[0], var_0[1], 0);
-  return var_01;
+flat_origin(var_0) {
+  var_1 = (var_0[0], var_0[1], 0);
+  return var_1;
 }
 
-flatten_vector(var_00, var_01) {
-  if(!isDefined(var_01)) {
-    var_01 = (0, 0, 1);
+flatten_vector(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 1);
   }
 
-  var_02 = vectornormalize(var_00 - vectordot(var_01, var_00) * var_01);
-  return var_02;
+  var_2 = vectornormalize(var_0 - vectordot(var_1, var_0) * var_1);
+  return var_2;
 }
 
-draw_arrow_time(var_00, var_01, var_02, var_03) {
+draw_arrow_time(var_0, var_1, var_2, var_3) {
   level endon("newpath");
-  var_04 = [];
-  var_05 = vectortoangles(var_00 - var_01);
-  var_06 = anglestoright(var_05);
-  var_07 = anglesToForward(var_05);
-  var_08 = anglestoup(var_05);
-  var_09 = distance(var_00, var_01);
+  var_4 = [];
+  var_5 = vectortoangles(var_0 - var_1);
+  var_6 = anglestoright(var_5);
+  var_7 = anglesToForward(var_5);
+  var_8 = anglestoup(var_5);
+  var_9 = distance(var_0, var_1);
   var_10 = [];
   var_11 = 0.1;
-  var_10[0] = var_00;
-  var_10[1] = var_00 + var_06 * (var_09 * var_11) + var_07 * (var_09 * -0.1);
-  var_10[2] = var_01;
-  var_10[3] = var_00 + var_06 * (var_09 * (-1 * var_11)) + var_07 * (var_09 * -0.1);
-  var_10[4] = var_00;
-  var_10[5] = var_00 + var_08 * (var_09 * var_11) + var_07 * (var_09 * -0.1);
-  var_10[6] = var_01;
-  var_10[7] = var_00 + var_08 * (var_09 * (-1 * var_11)) + var_07 * (var_09 * -0.1);
-  var_10[8] = var_00;
+  var_10[0] = var_0;
+  var_10[1] = var_0 + var_6 * (var_9 * var_11) + var_7 * (var_9 * -0.1);
+  var_10[2] = var_1;
+  var_10[3] = var_0 + var_6 * (var_9 * (-1 * var_11)) + var_7 * (var_9 * -0.1);
+  var_10[4] = var_0;
+  var_10[5] = var_0 + var_8 * (var_9 * var_11) + var_7 * (var_9 * -0.1);
+  var_10[6] = var_1;
+  var_10[7] = var_0 + var_8 * (var_9 * (-1 * var_11)) + var_7 * (var_9 * -0.1);
+  var_10[8] = var_0;
   var_12 = var_2[0];
   var_13 = var_2[1];
   var_14 = var_2[2];
-  plot_points(var_10, var_12, var_13, var_14, var_03);
+  plot_points(var_10, var_12, var_13, var_14, var_3);
 }
 
 get_links() {
   return strtok(self.script_linkto, " ");
 }
 
-draw_arrow(var_00, var_01, var_02) {
+draw_arrow(var_0, var_1, var_2) {
   level endon("newpath");
-  var_03 = [];
-  var_04 = vectortoangles(var_00 - var_01);
-  var_05 = anglestoright(var_04);
-  var_06 = anglesToForward(var_04);
-  var_07 = distance(var_00, var_01);
-  var_08 = [];
-  var_09 = 0.05;
-  var_8[0] = var_00;
-  var_8[1] = var_00 + var_05 * (var_07 * var_09) + var_06 * (var_07 * -0.2);
-  var_8[2] = var_01;
-  var_8[3] = var_00 + var_05 * (var_07 * (-1 * var_09)) + var_06 * (var_07 * -0.2);
+  var_3 = [];
+  var_4 = vectortoangles(var_0 - var_1);
+  var_5 = anglestoright(var_4);
+  var_6 = anglesToForward(var_4);
+  var_7 = distance(var_0, var_1);
+  var_8 = [];
+  var_9 = 0.05;
+  var_8[0] = var_0;
+  var_8[1] = var_0 + var_5 * (var_7 * var_9) + var_6 * (var_7 * -0.2);
+  var_8[2] = var_1;
+  var_8[3] = var_0 + var_5 * (var_7 * (-1 * var_9)) + var_6 * (var_7 * -0.2);
 
   for(var_10 = 0; var_10 < 4; var_10++) {
     var_11 = var_10 + 1;
@@ -1536,130 +1536,130 @@ draw_arrow(var_00, var_01, var_02) {
   }
 }
 
-draw_capsule(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if(!isDefined(var_03)) {
-    var_03 = (0, 0, 0);
+draw_capsule(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_3)) {
+    var_3 = (0, 0, 0);
   }
 
-  if(!isDefined(var_05)) {
-    var_05 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  if(!isDefined(var_06)) {
-    var_06 = 1;
+  if(!isDefined(var_6)) {
+    var_6 = 1;
   }
 
-  var_07 = anglesToForward(var_03);
-  var_08 = anglestoright(var_03);
-  var_09 = anglestoup(var_03);
-  var_10 = var_00 + var_09 * var_01;
-  var_11 = var_00 + var_09 * var_02;
-  var_11 = var_11 - var_09 * var_01;
-  var_12 = var_10 + var_07 * var_01;
-  var_13 = var_11 + var_07 * var_01;
-  var_14 = var_10 - var_07 * var_01;
-  var_15 = var_11 - var_07 * var_01;
-  var_16 = var_10 + var_08 * var_01;
-  var_17 = var_11 + var_08 * var_01;
-  var_18 = var_10 - var_08 * var_01;
-  var_19 = var_11 - var_08 * var_01;
+  var_7 = anglesToForward(var_3);
+  var_8 = anglestoright(var_3);
+  var_9 = anglestoup(var_3);
+  var_10 = var_0 + var_9 * var_1;
+  var_11 = var_0 + var_9 * var_2;
+  var_11 = var_11 - var_9 * var_1;
+  var_12 = var_10 + var_7 * var_1;
+  var_13 = var_11 + var_7 * var_1;
+  var_14 = var_10 - var_7 * var_1;
+  var_15 = var_11 - var_7 * var_1;
+  var_16 = var_10 + var_8 * var_1;
+  var_17 = var_11 + var_8 * var_1;
+  var_18 = var_10 - var_8 * var_1;
+  var_19 = var_11 - var_8 * var_1;
 }
 
-draw_character_capsule(var_00, var_01, var_02) {
-  var_03 = self physics_getcharactercollisioncapsule();
-  draw_capsule(self getorigin(), var_3["radius"], var_3["half_height"] * 2, self.angles, var_00, var_01, var_02);
+draw_character_capsule(var_0, var_1, var_2) {
+  var_3 = self physics_getcharactercollisioncapsule();
+  draw_capsule(self getorigin(), var_3["radius"], var_3["half_height"] * 2, self.angles, var_0, var_1, var_2);
 }
 
-draw_player_capsule(var_00, var_01, var_02) {
-  var_03 = self physics_getcharactercollisioncapsule();
-  draw_capsule(self getorigin(), var_3["radius"], var_3["half_height"] * 2, self getplayerangles(), var_00, var_01, var_02);
+draw_player_capsule(var_0, var_1, var_2) {
+  var_3 = self physics_getcharactercollisioncapsule();
+  draw_capsule(self getorigin(), var_3["radius"], var_3["half_height"] * 2, self getplayerangles(), var_0, var_1, var_2);
 }
 
-draw_ent_bone_forever(var_00, var_01) {
+draw_ent_bone_forever(var_0, var_1) {
   self endon("stop_drawing_axis");
   self endon("death");
 
   for(;;) {
-    var_02 = self gettagorigin(var_00);
-    var_03 = self gettagangles(var_00);
-    draw_angles(var_03, var_02, var_01);
+    var_2 = self gettagorigin(var_0);
+    var_3 = self gettagangles(var_0);
+    draw_angles(var_3, var_2, var_1);
     waitframe();
   }
 }
 
-draw_ent_axis_forever(var_00, var_01) {
+draw_ent_axis_forever(var_0, var_1) {
   self endon("stop_drawing_axis");
   self endon("death");
 
   for(;;) {
-    draw_ent_axis(var_00, undefined, var_01);
+    draw_ent_axis(var_0, undefined, var_1);
     waitframe();
   }
 }
 
-draw_ent_axis(var_00, var_01, var_02) {
+draw_ent_axis(var_0, var_1, var_2) {
   waittillframeend;
 
   if(isDefined(self.angles)) {
-    var_03 = self.angles;
+    var_3 = self.angles;
   } else {
-    var_03 = (0, 0, 0);
+    var_3 = (0, 0, 0);
   }
 
-  draw_angles(var_03, self.origin, var_00, var_01, var_02);
+  draw_angles(var_3, self.origin, var_0, var_1, var_2);
 }
 
-draw_angles(var_00, var_01, var_02, var_03, var_04) {
+draw_angles(var_0, var_1, var_2, var_3, var_4) {
   waittillframeend;
-  var_05 = anglesToForward(var_00);
-  var_06 = anglestoright(var_00);
-  var_07 = anglestoup(var_00);
+  var_5 = anglesToForward(var_0);
+  var_6 = anglestoright(var_0);
+  var_7 = anglestoup(var_0);
 
-  if(!isDefined(var_02)) {
-    var_02 = (1, 0, 1);
+  if(!isDefined(var_2)) {
+    var_2 = (1, 0, 1);
   }
 
-  if(!isDefined(var_03)) {
-    var_03 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(var_04)) {
-    var_04 = 10;
+  if(!isDefined(var_4)) {
+    var_4 = 10;
   }
 }
 
-draw_entity_bounds(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_02)) {
-    var_02 = (0, 1, 0);
+draw_entity_bounds(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2)) {
+    var_2 = (0, 1, 0);
   }
 
-  if(!isDefined(var_03)) {
-    var_03 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  if(!isDefined(var_04)) {
-    var_04 = 0.05;
+  if(!isDefined(var_4)) {
+    var_4 = 0.05;
   }
 
-  if(var_03) {
-    var_05 = int(var_04 / 0.05);
+  if(var_3) {
+    var_5 = int(var_4 / 0.05);
   } else {
-    var_05 = int(var_01 / 0.05);
+    var_5 = int(var_1 / 0.05);
   }
 
-  var_06 = [];
-  var_07 = [];
-  var_08 = gettime();
+  var_6 = [];
+  var_7 = [];
+  var_8 = gettime();
 
-  for(var_09 = var_08 + var_01 * 1000; var_08 < var_09 && isDefined(var_00); var_08 = gettime()) {
-    var_6[0] = var_00 getpointinbounds(1, 1, 1);
-    var_6[1] = var_00 getpointinbounds(1, 1, -1);
-    var_6[2] = var_00 getpointinbounds(-1, 1, -1);
-    var_6[3] = var_00 getpointinbounds(-1, 1, 1);
-    var_7[0] = var_00 getpointinbounds(1, -1, 1);
-    var_7[1] = var_00 getpointinbounds(1, -1, -1);
-    var_7[2] = var_00 getpointinbounds(-1, -1, -1);
-    var_7[3] = var_00 getpointinbounds(-1, -1, 1);
+  for(var_9 = var_8 + var_1 * 1000; var_8 < var_9 && isDefined(var_0); var_8 = gettime()) {
+    var_6[0] = var_0 getpointinbounds(1, 1, 1);
+    var_6[1] = var_0 getpointinbounds(1, 1, -1);
+    var_6[2] = var_0 getpointinbounds(-1, 1, -1);
+    var_6[3] = var_0 getpointinbounds(-1, 1, 1);
+    var_7[0] = var_0 getpointinbounds(1, -1, 1);
+    var_7[1] = var_0 getpointinbounds(1, -1, -1);
+    var_7[2] = var_0 getpointinbounds(-1, -1, -1);
+    var_7[3] = var_0 getpointinbounds(-1, -1, 1);
 
     for(var_10 = 0; var_10 < 4; var_10++) {
       var_11 = var_10 + 1;
@@ -1669,19 +1669,19 @@ draw_entity_bounds(var_00, var_01, var_02, var_03, var_04) {
       }
     }
 
-    if(!var_03) {
+    if(!var_3) {
       return;
     }
-    wait(var_04);
+    wait(var_4);
   }
 }
 
-getfx(var_00) {
-  return level._effect[var_00];
+getfx(var_0) {
+  return level._effect[var_0];
 }
 
-fxexists(var_00) {
-  return isDefined(level._effect[var_00]);
+fxexists(var_0) {
+  return isDefined(level._effect[var_0]);
 }
 
 getlastweapon() {
@@ -1694,8 +1694,8 @@ isusabilityallowed() {
   return !isDefined(self.disabledusability) || !self.disabledusability;
 }
 
-allow_usability(var_00) {
-  if(var_00) {
+allow_usability(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledusability)) {
       self.disabledusability = 0;
     }
@@ -1715,8 +1715,8 @@ allow_usability(var_00) {
   }
 }
 
-allow_weapon(var_00) {
-  if(var_00) {
+allow_weapon(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledweapon)) {
       self.disabledweapon = 0;
     }
@@ -1751,8 +1751,8 @@ isweaponallowed() {
   return !isDefined(self.disabledweapon) || !self.disabledweapon;
 }
 
-allow_weapon_switch(var_00) {
-  if(var_00) {
+allow_weapon_switch(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledweaponswitch)) {
       self.disabledweaponswitch = 0;
     }
@@ -1772,8 +1772,8 @@ allow_weapon_switch(var_00) {
   }
 }
 
-allow_offhand_weapons(var_00) {
-  if(var_00) {
+allow_offhand_weapons(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledoffhandweapons)) {
       self.disabledoffhandweapons = 0;
     }
@@ -1801,8 +1801,8 @@ allow_offhand_weapons(var_00) {
   }
 }
 
-allow_offhand_primary_weapons(var_00) {
-  if(var_00) {
+allow_offhand_primary_weapons(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledoffhandprimaryweapons)) {
       self.disabledoffhandprimaryweapons = 0;
     } else {
@@ -1822,8 +1822,8 @@ allow_offhand_primary_weapons(var_00) {
   }
 }
 
-allow_offhand_secondary_weapons(var_00) {
-  if(var_00) {
+allow_offhand_secondary_weapons(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledoffhandsecondaryweapons)) {
       self.disabledoffhandsecondaryweapons = 0;
     } else {
@@ -1846,8 +1846,8 @@ allow_offhand_secondary_weapons(var_00) {
   }
 }
 
-allow_offhand_shield_weapons(var_00) {
-  if(var_00) {
+allow_offhand_shield_weapons(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledoffhandshieldweapons)) {
       self.disabledoffhandshieldweapons = 0;
     }
@@ -1883,8 +1883,8 @@ isoffhandsecondaryweaponsallowed() {
   return !isDefined(self.disabledoffhandsecondaryweapons) || !self.disabledoffhandsecondaryweapons;
 }
 
-allow_prone(var_00) {
-  if(var_00) {
+allow_prone(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledprone)) {
       self.disabledprone = 0;
     } else {
@@ -1904,8 +1904,8 @@ allow_prone(var_00) {
   }
 }
 
-allow_crouch(var_00) {
-  if(var_00) {
+allow_crouch(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledcrouch)) {
       self.disabledcrouch = 0;
     } else {
@@ -1925,8 +1925,8 @@ allow_crouch(var_00) {
   }
 }
 
-allow_stances(var_00) {
-  if(var_00) {
+allow_stances(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledstances)) {
       self.disabledstances = 0;
     } else {
@@ -1946,8 +1946,8 @@ allow_stances(var_00) {
   }
 }
 
-allow_sprint(var_00) {
-  if(var_00) {
+allow_sprint(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledsprint)) {
       self.disabledsprint = 0;
     } else {
@@ -1967,8 +1967,8 @@ allow_sprint(var_00) {
   }
 }
 
-allow_mantle(var_00) {
-  if(var_00) {
+allow_mantle(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledmantle)) {
       self.disabledmantle = 0;
     } else {
@@ -1988,8 +1988,8 @@ allow_mantle(var_00) {
   }
 }
 
-allow_fire(var_00) {
-  if(var_00) {
+allow_fire(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledfire)) {
       self.disabledfire = 0;
     } else {
@@ -2009,8 +2009,8 @@ allow_fire(var_00) {
   }
 }
 
-allow_ads(var_00) {
-  if(var_00) {
+allow_ads(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledads)) {
       self.disabledads = 0;
     } else {
@@ -2030,8 +2030,8 @@ allow_ads(var_00) {
   }
 }
 
-allow_jump(var_00) {
-  if(var_00) {
+allow_jump(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledjump)) {
       self.disabledjump = 0;
     } else {
@@ -2051,8 +2051,8 @@ allow_jump(var_00) {
   }
 }
 
-allow_wallrun(var_00) {
-  if(var_00) {
+allow_wallrun(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledwallrun)) {
       self.disabledwallrun = 0;
     } else {
@@ -2072,8 +2072,8 @@ allow_wallrun(var_00) {
   }
 }
 
-allow_doublejump(var_00) {
-  if(var_00) {
+allow_doublejump(var_0) {
+  if(var_0) {
     if(!isDefined(self.disableddoublejump)) {
       self.disableddoublejump = 0;
     } else {
@@ -2104,8 +2104,8 @@ allow_doublejump(var_00) {
   }
 }
 
-allow_melee(var_00) {
-  if(var_00) {
+allow_melee(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledmelee)) {
       self.disabledmelee = 0;
     } else {
@@ -2125,8 +2125,8 @@ allow_melee(var_00) {
   }
 }
 
-allow_slide(var_00) {
-  if(var_00) {
+allow_slide(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledslide)) {
       self.disabledslide = 0;
     } else {
@@ -2154,11 +2154,11 @@ get_doublejumpenergy() {
   return self.doublejumpenergy;
 }
 
-set_doublejumpenergy(var_00) {
+set_doublejumpenergy(var_0) {
   if(!isDefined(self.doublejumpenergy)) {
-    self goal_radius(0, var_00);
+    self goal_radius(0, var_0);
   } else {
-    self.doublejumpenergy = var_00;
+    self.doublejumpenergy = var_0;
   }
 }
 
@@ -2170,19 +2170,19 @@ get_doublejumpenergyrestorerate() {
   return self.doublejumpenergyrestorerate;
 }
 
-set_doublejumpenergyrestorerate(var_00) {
+set_doublejumpenergyrestorerate(var_0) {
   if(!isDefined(self.doublejumpenergyrestorerate)) {
-    self goalflag(0, var_00);
+    self goalflag(0, var_0);
   } else {
-    self.doublejumpenergyrestorerate = var_00;
+    self.doublejumpenergyrestorerate = var_0;
   }
 }
 
-random(var_00) {
-  var_01 = [];
+random(var_0) {
+  var_1 = [];
 
-  foreach(var_04, var_03 in var_00) {
-    var_1[var_1.size] = var_03;
+  foreach(var_4, var_3 in var_0) {
+    var_1[var_1.size] = var_3;
   }
 
   if(!var_1.size) {
@@ -2192,63 +2192,63 @@ random(var_00) {
   return var_1[randomint(var_1.size)];
 }
 
-random_weight_sorted(var_00) {
-  var_01 = [];
+random_weight_sorted(var_0) {
+  var_1 = [];
 
-  foreach(var_04, var_03 in var_00) {
-    var_1[var_1.size] = var_03;
+  foreach(var_4, var_3 in var_0) {
+    var_1[var_1.size] = var_3;
   }
 
   if(!var_1.size) {
     return undefined;
   }
 
-  var_05 = randomint(var_1.size * var_1.size);
-  return var_1[var_1.size - 1 - int(sqrt(var_05))];
+  var_5 = randomint(var_1.size * var_1.size);
+  return var_1[var_1.size - 1 - int(sqrt(var_5))];
 }
 
-spawn_tag_origin(var_00, var_01) {
-  if(!isDefined(var_01) && isDefined(self.angles)) {
-    var_01 = self.angles;
+spawn_tag_origin(var_0, var_1) {
+  if(!isDefined(var_1) && isDefined(self.angles)) {
+    var_1 = self.angles;
   }
 
-  if(!isDefined(var_00) && isDefined(self.origin)) {
-    var_00 = self.origin;
-  } else if(!isDefined(var_00)) {
-    var_00 = (0, 0, 0);
+  if(!isDefined(var_0) && isDefined(self.origin)) {
+    var_0 = self.origin;
+  } else if(!isDefined(var_0)) {
+    var_0 = (0, 0, 0);
   }
 
-  var_02 = spawn("script_model", var_00);
-  var_02 setModel("tag_origin");
-  var_02 hide();
+  var_2 = spawn("script_model", var_0);
+  var_2 setModel("tag_origin");
+  var_2 hide();
 
-  if(isDefined(var_01)) {
-    var_2.angles = var_01;
+  if(isDefined(var_1)) {
+    var_2.angles = var_1;
   }
 
-  return var_02;
+  return var_2;
 }
 
-waittill_notify_or_timeout(var_00, var_01) {
-  self endon(var_00);
-  wait(var_01);
+waittill_notify_or_timeout(var_0, var_1) {
+  self endon(var_0);
+  wait(var_1);
 }
 
-waittill_notify_or_timeout_return(var_00, var_01) {
-  self endon(var_00);
-  wait(var_01);
+waittill_notify_or_timeout_return(var_0, var_1) {
+  self endon(var_0);
+  wait(var_1);
   return "timeout";
 }
 
-waittill_notify_and_time(var_00, var_01) {
-  var_02 = gettime();
-  self waittill(var_00);
-  var_03 = var_02 + var_01 * 1000;
-  var_04 = var_03 - var_02;
+waittill_notify_and_time(var_0, var_1) {
+  var_2 = gettime();
+  self waittill(var_0);
+  var_3 = var_2 + var_1 * 1000;
+  var_4 = var_3 - var_2;
 
-  if(var_04 > 0) {
-    var_05 = var_04 / 1000.0;
-    wait(var_05);
+  if(var_4 > 0) {
+    var_5 = var_4 / 1000.0;
+    wait(var_5);
   }
 }
 
@@ -2258,7 +2258,7 @@ fileprint_launcher_start_file() {
   fileprint_launcher("GAMEPRINTSTARTFILE:");
 }
 
-fileprint_launcher(var_00) {
+fileprint_launcher(var_0) {
   level.fileprintlauncher_linecount++;
 
   if(level.fileprintlauncher_linecount > 200) {
@@ -2267,33 +2267,33 @@ fileprint_launcher(var_00) {
   }
 }
 
-fileprint_launcher_end_file(var_00, var_01) {
-  if(!isDefined(var_01)) {
-    var_01 = 0;
+fileprint_launcher_end_file(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(var_01) {
-    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_00);
+  if(var_1) {
+    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
   } else {
-    fileprint_launcher("GAMEPRINTENDFILE:" + var_00);
+    fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
   }
 
-  var_02 = gettime() + 4000;
+  var_2 = gettime() + 4000;
 
-  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_02) {
+  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
     wait 0.05;
   }
 
-  if(!(gettime() < var_02)) {
+  if(!(gettime() < var_2)) {
     iprintlnbold("LAUNCHER_PRINT_FAIL:(TIMEOUT): launcherconflict? restart launcher and try again? ");
     level.fileprint_launcher = undefined;
     return 0;
   }
 
-  var_03 = getdvar("LAUNCHER_PRINT_FAIL");
+  var_3 = getdvar("LAUNCHER_PRINT_FAIL");
 
-  if(var_03 != "0") {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:(" + var_03 + "): launcherconflict? restart launcher and try again? ");
+  if(var_3 != "0") {
+    iprintlnbold("LAUNCHER_PRINT_FAIL:(" + var_3 + "): launcherconflict? restart launcher and try again? ");
     level.fileprint_launcher = undefined;
     return 0;
   }
@@ -2303,9 +2303,9 @@ fileprint_launcher_end_file(var_00, var_01) {
   return 1;
 }
 
-launcher_write_clipboard(var_00) {
+launcher_write_clipboard(var_0) {
   level.fileprintlauncher_linecount = 0;
-  fileprint_launcher("LAUNCHER_CLIP:" + var_00);
+  fileprint_launcher("LAUNCHER_CLIP:" + var_0);
 }
 
 activate_individual_exploder() {
@@ -2316,317 +2316,317 @@ waitframe() {
   wait 0.05;
 }
 
-get_target_ent(var_00) {
-  if(!isDefined(var_00)) {
-    var_00 = self.target;
+get_target_ent(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.target;
   }
 
-  var_01 = getent(var_00, "targetname");
+  var_1 = getent(var_0, "targetname");
 
-  if(isDefined(var_01)) {
-    return var_01;
-  }
-
-  if(issp()) {
-    var_01 = call[[level.getnodefunction]](var_00, "targetname");
-
-    if(isDefined(var_01)) {
-      return var_01;
-    }
-
-    var_01 = call[[level.func["getspawner"]]](var_00, "targetname");
-
-    if(isDefined(var_01)) {
-      return var_01;
-    }
-  }
-
-  var_01 = getstruct(var_00, "targetname");
-
-  if(isDefined(var_01)) {
-    return var_01;
-  }
-
-  var_01 = getvehiclenode(var_00, "targetname");
-
-  if(isDefined(var_01)) {
-    return var_01;
-  }
-}
-
-do_earthquake(var_00, var_01) {
-  var_02 = level.earthquake[var_00];
-  earthquake(var_2["magnitude"], var_2["duration"], var_01, var_2["radius"]);
-}
-
-play_loopsound_in_space(var_00, var_01) {
-  var_02 = spawn("script_origin", (0, 0, 0));
-
-  if(!isDefined(var_01)) {
-    var_01 = self.origin;
-  }
-
-  var_2.origin = var_01;
-  var_02 playLoopSound(var_00);
-  return var_02;
-}
-
-play_sound_in_space_with_angles(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = spawn("script_origin", (0, 0, 1));
-
-  if(!isDefined(var_01)) {
-    var_01 = self.origin;
-  }
-
-  var_5.origin = var_01;
-  var_5.angles = var_02;
-
-  if(isDefined(var_04)) {
-    var_05 linkto(var_04);
+  if(isDefined(var_1)) {
+    return var_1;
   }
 
   if(issp()) {
-    if(isDefined(var_03) && var_03) {
-      var_05 playsoundasmaster(var_00, "sounddone");
+    var_1 = call[[level.getnodefunction]](var_0, "targetname");
+
+    if(isDefined(var_1)) {
+      return var_1;
+    }
+
+    var_1 = call[[level.func["getspawner"]]](var_0, "targetname");
+
+    if(isDefined(var_1)) {
+      return var_1;
+    }
+  }
+
+  var_1 = getstruct(var_0, "targetname");
+
+  if(isDefined(var_1)) {
+    return var_1;
+  }
+
+  var_1 = getvehiclenode(var_0, "targetname");
+
+  if(isDefined(var_1)) {
+    return var_1;
+  }
+}
+
+do_earthquake(var_0, var_1) {
+  var_2 = level.earthquake[var_0];
+  earthquake(var_2["magnitude"], var_2["duration"], var_1, var_2["radius"]);
+}
+
+play_loopsound_in_space(var_0, var_1) {
+  var_2 = spawn("script_origin", (0, 0, 0));
+
+  if(!isDefined(var_1)) {
+    var_1 = self.origin;
+  }
+
+  var_2.origin = var_1;
+  var_2 playLoopSound(var_0);
+  return var_2;
+}
+
+play_sound_in_space_with_angles(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_origin", (0, 0, 1));
+
+  if(!isDefined(var_1)) {
+    var_1 = self.origin;
+  }
+
+  var_5.origin = var_1;
+  var_5.angles = var_2;
+
+  if(isDefined(var_4)) {
+    var_5 linkto(var_4);
+  }
+
+  if(issp()) {
+    if(isDefined(var_3) && var_3) {
+      var_5 playsoundasmaster(var_0, "sounddone");
     } else {
-      var_05 playSound(var_00, "sounddone");
+      var_5 playSound(var_0, "sounddone");
     }
 
-    var_05 waittill("sounddone");
-  } else if(isDefined(var_03) && var_03)
-    var_05 playsoundasmaster(var_00);
+    var_5 waittill("sounddone");
+  } else if(isDefined(var_3) && var_3)
+    var_5 playsoundasmaster(var_0);
   else {
-    var_05 playSound(var_00);
+    var_5 playSound(var_0);
   }
 
-  var_05 delete();
+  var_5 delete();
 }
 
-play_sound_in_space(var_00, var_01, var_02, var_03) {
-  play_sound_in_space_with_angles(var_00, var_01, (0, 0, 0), var_02, var_03);
+play_sound_in_space(var_0, var_1, var_2, var_3) {
+  play_sound_in_space_with_angles(var_0, var_1, (0, 0, 0), var_2, var_3);
 }
 
-loop_fx_sound(var_00, var_01, var_02, var_03, var_04) {
-  loop_fx_sound_with_angles(var_00, var_01, (0, 0, 0), var_02, var_03, var_04);
+loop_fx_sound(var_0, var_1, var_2, var_3, var_4) {
+  loop_fx_sound_with_angles(var_0, var_1, (0, 0, 0), var_2, var_3, var_4);
 }
 
-loop_fx_sound_with_angles(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if(isDefined(var_03) && var_03) {
+loop_fx_sound_with_angles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(isDefined(var_3) && var_3) {
     if(!isDefined(level.first_frame) || level.first_frame == 1) {
-      spawnloopingsound(var_00, var_01, var_02);
+      spawnloopingsound(var_0, var_1, var_2);
     }
   } else {
     if(level.createfx_enabled && isDefined(var_5.loopsound_ent)) {
-      var_07 = var_5.loopsound_ent;
+      var_7 = var_5.loopsound_ent;
     } else {
-      var_07 = spawn("script_origin", (0, 0, 0));
+      var_7 = spawn("script_origin", (0, 0, 0));
     }
 
-    if(isDefined(var_04)) {
-      thread loop_sound_delete(var_04, var_07);
-      self endon(var_04);
+    if(isDefined(var_4)) {
+      thread loop_sound_delete(var_4, var_7);
+      self endon(var_4);
     }
 
-    var_7.origin = var_01;
-    var_7.angles = var_02;
-    var_07 playLoopSound(var_00);
+    var_7.origin = var_1;
+    var_7.angles = var_2;
+    var_7 playLoopSound(var_0);
 
     if(level.createfx_enabled) {
-      var_5.loopsound_ent = var_07;
+      var_5.loopsound_ent = var_7;
     } else {
-      var_07 willneverchange();
+      var_7 willneverchange();
     }
   }
 }
 
-loop_fx_sound_interval(var_00, var_01, var_02, var_03, var_04, var_05) {
-  loop_fx_sound_interval_with_angles(var_00, var_01, (0, 0, 0), var_02, var_03, var_04, var_05);
+loop_fx_sound_interval(var_0, var_1, var_2, var_3, var_4, var_5) {
+  loop_fx_sound_interval_with_angles(var_0, var_1, (0, 0, 0), var_2, var_3, var_4, var_5);
 }
 
-loop_fx_sound_interval_with_angles(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  self.origin = var_01;
-  self.angles = var_02;
+loop_fx_sound_interval_with_angles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self.origin = var_1;
+  self.angles = var_2;
 
-  if(isDefined(var_03)) {
-    self endon(var_03);
+  if(isDefined(var_3)) {
+    self endon(var_3);
   }
 
-  if(var_05 >= var_06) {
+  if(var_5 >= var_6) {
     for(;;) {
       wait 0.05;
     }
   }
 
-  if(!soundexists(var_00)) {
+  if(!soundexists(var_0)) {
     for(;;) {
       wait 0.05;
     }
   }
 
   for(;;) {
-    wait(randomfloatrange(var_05, var_06));
+    wait(randomfloatrange(var_5, var_6));
     lock("createfx_looper");
-    thread play_sound_in_space_with_angles(var_00, self.origin, self.angles, undefined);
+    thread play_sound_in_space_with_angles(var_0, self.origin, self.angles, undefined);
     unlock("createfx_looper");
   }
 }
 
-loop_sound_delete(var_00, var_01) {
-  var_01 endon("death");
-  self waittill(var_00);
-  var_01 delete();
+loop_sound_delete(var_0, var_1) {
+  var_1 endon("death");
+  self waittill(var_0);
+  var_1 delete();
 }
 
-createloopeffect(var_00) {
-  var_01 = scripts\common\createfx::createeffect("loopfx", var_00);
+createloopeffect(var_0) {
+  var_1 = scripts\common\createfx::createeffect("loopfx", var_0);
   var_1.v["delay"] = ::scripts\common\createfx::getloopeffectdelaydefault();
-  return var_01;
+  return var_1;
 }
 
-createoneshoteffect(var_00) {
-  var_01 = scripts\common\createfx::createeffect("oneshotfx", var_00);
+createoneshoteffect(var_0) {
+  var_1 = scripts\common\createfx::createeffect("oneshotfx", var_0);
   var_1.v["delay"] = ::scripts\common\createfx::getoneshoteffectdelaydefault();
-  return var_01;
+  return var_1;
 }
 
-createexploder(var_00) {
-  var_01 = scripts\common\createfx::createeffect("exploder", var_00);
+createexploder(var_0) {
+  var_1 = scripts\common\createfx::createeffect("exploder", var_0);
   var_1.v["delay"] = ::scripts\common\createfx::getexploderdelaydefault();
   var_1.v["exploder_type"] = "normal";
-  return var_01;
+  return var_1;
 }
 
-alphabetize(var_00) {
+alphabetize(var_0) {
   if(var_0.size <= 1) {
-    return var_00;
+    return var_0;
   }
 
-  var_01 = 0;
+  var_1 = 0;
 
-  for(var_02 = var_0.size - 1; var_02 >= 1; var_2--) {
-    var_03 = var_0[var_02];
-    var_04 = var_02;
+  for(var_2 = var_0.size - 1; var_2 >= 1; var_2--) {
+    var_3 = var_0[var_2];
+    var_4 = var_2;
 
-    for(var_05 = 0; var_05 < var_02; var_5++) {
-      var_06 = var_0[var_05];
+    for(var_5 = 0; var_5 < var_2; var_5++) {
+      var_6 = var_0[var_5];
 
-      if(stricmp(var_06, var_03) > 0) {
-        var_03 = var_06;
-        var_04 = var_05;
+      if(stricmp(var_6, var_3) > 0) {
+        var_3 = var_6;
+        var_4 = var_5;
       }
     }
 
-    if(var_04 != var_02) {
-      var_0[var_04] = var_0[var_02];
-      var_0[var_02] = var_03;
+    if(var_4 != var_2) {
+      var_0[var_4] = var_0[var_2];
+      var_0[var_2] = var_3;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-play_loop_sound_on_entity(var_00, var_01) {
-  var_02 = spawn("script_origin", (0, 0, 0));
-  var_02 endon("death");
-  thread delete_on_death(var_02);
+play_loop_sound_on_entity(var_0, var_1) {
+  var_2 = spawn("script_origin", (0, 0, 0));
+  var_2 endon("death");
+  thread delete_on_death(var_2);
 
-  if(isDefined(var_01)) {
-    var_2.origin = self.origin + var_01;
+  if(isDefined(var_1)) {
+    var_2.origin = self.origin + var_1;
     var_2.angles = self.angles;
-    var_02 linkto(self);
+    var_2 linkto(self);
   } else {
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_02 linkto(self);
+    var_2 linkto(self);
   }
 
-  var_02 playLoopSound(var_00);
-  self waittill("stop sound" + var_00);
-  var_02 stoploopsound(var_00);
-  var_02 delete();
+  var_2 playLoopSound(var_0);
+  self waittill("stop sound" + var_0);
+  var_2 stoploopsound(var_0);
+  var_2 delete();
 }
 
-stop_loop_sound_on_entity(var_00) {
-  self notify("stop sound" + var_00);
+stop_loop_sound_on_entity(var_0) {
+  self notify("stop sound" + var_0);
 }
 
-delete_on_death(var_00) {
-  var_00 endon("death");
+delete_on_death(var_0) {
+  var_0 endon("death");
   self waittill("death");
 
-  if(isDefined(var_00)) {
-    var_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
-error(var_00) {
+error(var_0) {
   waitframe();
 }
 
-exploder(var_00, var_01, var_02) {
-  [[level._fx.exploderfunction]](var_00, var_01, var_02);
+exploder(var_0, var_1, var_2) {
+  [[level._fx.exploderfunction]](var_0, var_1, var_2);
 }
 
-ter_op(var_00, var_01, var_02) {
-  if(var_00) {
-    return var_01;
+ter_op(var_0, var_1, var_2) {
+  if(var_0) {
+    return var_1;
   }
 
-  return var_02;
+  return var_2;
 }
 
-create_lock(var_00, var_01) {
-  if(!isDefined(var_01)) {
-    var_01 = 1;
+create_lock(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   if(!isDefined(level.lock)) {
     level.lock = [];
   }
 
-  var_02 = spawnStruct();
-  var_2.max_count = var_01;
+  var_2 = spawnStruct();
+  var_2.max_count = var_1;
   var_2.count = 0;
-  level.lock[var_00] = var_02;
+  level.lock[var_0] = var_2;
 }
 
-lock(var_00) {
-  var_01 = level.lock[var_00];
+lock(var_0) {
+  var_1 = level.lock[var_0];
 
   while(var_1.count >= var_1.max_count) {
-    var_01 waittill("unlocked");
+    var_1 waittill("unlocked");
   }
 
   var_1.count++;
 }
 
-unlock(var_00) {
-  thread unlock_thread(var_00);
+unlock(var_0) {
+  thread unlock_thread(var_0);
 }
 
-unlock_thread(var_00) {
+unlock_thread(var_0) {
   wait 0.05;
-  var_01 = level.lock[var_00];
+  var_1 = level.lock[var_0];
   var_1.count--;
-  var_01 notify("unlocked");
+  var_1 notify("unlocked");
 }
 
 get_template_script_MAYBE() {
-  var_00 = level.script;
+  var_0 = level.script;
 
   if(isDefined(level.template_script)) {
-    var_00 = level.template_script;
+    var_0 = level.template_script;
   }
 
-  return var_00;
+  return var_0;
 }
 
 is_player_gamepad_enabled() {
   if(!level.console) {
-    var_00 = self global_fx();
+    var_0 = self global_fx();
 
-    if(isDefined(var_00)) {
-      return var_00;
+    if(isDefined(var_0)) {
+      return var_0;
     } else {
       return 0;
     }
@@ -2635,57 +2635,57 @@ is_player_gamepad_enabled() {
   return 1;
 }
 
-array_reverse(var_00) {
-  var_01 = [];
+array_reverse(var_0) {
+  var_1 = [];
 
-  for(var_02 = var_0.size - 1; var_02 >= 0; var_2--) {
-    var_1[var_1.size] = var_0[var_02];
+  for(var_2 = var_0.size - 1; var_2 >= 0; var_2--) {
+    var_1[var_1.size] = var_0[var_2];
   }
 
-  return var_01;
+  return var_1;
 }
 
-distance_2d_squared(var_00, var_01) {
-  return length2dsquared(var_00 - var_01);
+distance_2d_squared(var_0, var_1) {
+  return length2dsquared(var_0 - var_1);
 }
 
-get_array_of_farthest(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = get_array_of_closest(var_00, var_01, var_02, var_03, var_04, var_05);
-  var_06 = array_reverse(var_06);
-  return var_06;
+get_array_of_farthest(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = get_array_of_closest(var_0, var_1, var_2, var_3, var_4, var_5);
+  var_6 = array_reverse(var_6);
+  return var_6;
 }
 
-get_array_of_closest(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(var_03)) {
-    var_03 = var_1.size;
+get_array_of_closest(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3)) {
+    var_3 = var_1.size;
   }
 
-  if(!isDefined(var_02)) {
-    var_02 = [];
+  if(!isDefined(var_2)) {
+    var_2 = [];
   }
 
-  var_06 = undefined;
+  var_6 = undefined;
 
-  if(isDefined(var_04)) {
-    var_06 = var_04 * var_04;
+  if(isDefined(var_4)) {
+    var_6 = var_4 * var_4;
   }
 
-  var_07 = 0;
+  var_7 = 0;
 
-  if(isDefined(var_05)) {
-    var_07 = var_05 * var_05;
+  if(isDefined(var_5)) {
+    var_7 = var_5 * var_5;
   }
 
-  if(var_2.size == 0 && var_03 >= var_1.size && var_07 == 0 && !isDefined(var_06)) {
-    return sortbydistance(var_01, var_00);
+  if(var_2.size == 0 && var_3 >= var_1.size && var_7 == 0 && !isDefined(var_6)) {
+    return sortbydistance(var_1, var_0);
   }
 
-  var_08 = [];
+  var_8 = [];
 
-  foreach(var_10 in var_01) {
+  foreach(var_10 in var_1) {
     var_11 = 0;
 
-    foreach(var_13 in var_02) {
+    foreach(var_13 in var_2) {
       if(var_10 == var_13) {
         var_11 = 1;
         break;
@@ -2695,88 +2695,88 @@ get_array_of_closest(var_00, var_01, var_02, var_03, var_04, var_05) {
     if(var_11) {
       continue;
     }
-    var_15 = distancesquared(var_00, var_10.origin);
+    var_15 = distancesquared(var_0, var_10.origin);
 
-    if(isDefined(var_06) && var_15 > var_06) {
+    if(isDefined(var_6) && var_15 > var_6) {
       continue;
     }
-    if(var_15 < var_07) {
+    if(var_15 < var_7) {
       continue;
     }
     var_8[var_8.size] = var_10;
   }
 
-  var_08 = sortbydistance(var_08, var_00);
+  var_8 = sortbydistance(var_8, var_0);
 
-  if(var_03 >= var_8.size) {
-    return var_08;
+  if(var_3 >= var_8.size) {
+    return var_8;
   }
 
   var_17 = [];
 
-  for(var_18 = 0; var_18 < var_03; var_18++) {
+  for(var_18 = 0; var_18 < var_3; var_18++) {
     var_17[var_18] = var_8[var_18];
   }
 
   return var_17;
 }
 
-drop_to_ground(var_00, var_01, var_02) {
-  if(!isDefined(var_01)) {
-    var_01 = 1500;
+drop_to_ground(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = 1500;
   }
 
-  if(!isDefined(var_02)) {
-    var_02 = -12000;
+  if(!isDefined(var_2)) {
+    var_2 = -12000;
   }
 
-  return _physicstrace(var_00 + (0, 0, var_01), var_00 + (0, 0, var_02));
+  return _physicstrace(var_0 + (0, 0, var_1), var_0 + (0, 0, var_2));
 }
 
-within_fov(var_00, var_01, var_02, var_03) {
-  var_04 = vectornormalize(var_02 - var_00);
-  var_05 = anglesToForward(var_01);
-  var_06 = vectordot(var_05, var_04);
-  return var_06 >= var_03;
+within_fov(var_0, var_1, var_2, var_3) {
+  var_4 = vectornormalize(var_2 - var_0);
+  var_5 = anglesToForward(var_1);
+  var_6 = vectordot(var_5, var_4);
+  return var_6 >= var_3;
 }
 
-make_entity_sentient_mp(var_00, var_01) {
+make_entity_sentient_mp(var_0, var_1) {
   if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bots_make_entity_sentient"])) {
-    return self[[level.bot_funcs["bots_make_entity_sentient"]]](var_00, var_01);
+    return self[[level.bot_funcs["bots_make_entity_sentient"]]](var_0, var_1);
   }
 }
 
-ai_3d_sighting_model(var_00) {
+ai_3d_sighting_model(var_0) {
   if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["ai_3d_sighting_model"])) {
-    return self[[level.bot_funcs["ai_3d_sighting_model"]]](var_00);
+    return self[[level.bot_funcs["ai_3d_sighting_model"]]](var_0);
   }
 }
 
-getclosest(var_00, var_01, var_02) {
-  if(!isDefined(var_02)) {
-    var_02 = 500000;
+getclosest(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 500000;
   }
 
-  var_03 = undefined;
+  var_3 = undefined;
 
-  foreach(var_05 in var_01) {
-    var_06 = distance(var_5.origin, var_00);
+  foreach(var_5 in var_1) {
+    var_6 = distance(var_5.origin, var_0);
 
-    if(var_06 >= var_02) {
+    if(var_6 >= var_2) {
       continue;
     }
-    var_02 = var_06;
-    var_03 = var_05;
+    var_2 = var_6;
+    var_3 = var_5;
   }
 
-  return var_03;
+  return var_3;
 }
 
-missile_settargetandflightmode(var_00, var_01, var_02) {
-  var_02 = ter_op(isDefined(var_02), var_02, (0, 0, 0));
-  self missile_settargetent(var_00, var_02);
+missile_settargetandflightmode(var_0, var_1, var_2) {
+  var_2 = ter_op(isDefined(var_2), var_2, (0, 0, 0));
+  self missile_settargetent(var_0, var_2);
 
-  switch (var_01) {
+  switch (var_1) {
     case "direct":
       self missile_setflightmodedirect();
       break;
@@ -2786,57 +2786,57 @@ missile_settargetandflightmode(var_00, var_01, var_02) {
   }
 }
 
-add_fx(var_00, var_01) {
+add_fx(var_0, var_1) {
   if(!isDefined(level._effect)) {
     level._effect = [];
   }
 
-  level._effect[var_00] = loadfx(var_01);
+  level._effect[var_0] = loadfx(var_1);
 }
 
-array_sort_with_func(var_00, var_01) {
-  for(var_02 = 1; var_02 < var_0.size; var_2++) {
-    var_03 = var_0[var_02];
+array_sort_with_func(var_0, var_1) {
+  for(var_2 = 1; var_2 < var_0.size; var_2++) {
+    var_3 = var_0[var_2];
 
-    for(var_04 = var_02 - 1; var_04 >= 0 && ![
-        [var_01]
-      ](var_0[var_04], var_03); var_4--)
-      var_0[var_04 + 1] = var_0[var_04];
+    for(var_4 = var_2 - 1; var_4 >= 0 && ![
+        [var_1]
+      ](var_0[var_4], var_3); var_4--)
+      var_0[var_4 + 1] = var_0[var_4];
 
-    var_0[var_04 + 1] = var_03;
+    var_0[var_4 + 1] = var_3;
   }
 
-  return var_00;
+  return var_0;
 }
 
-add_func_ref_MAYBE(var_00, var_01) {
+add_func_ref_MAYBE(var_0, var_1) {
   if(!isDefined(level.func)) {
     level.func = [];
   }
 
-  level.func[var_00] = var_01;
+  level.func[var_0] = var_1;
 }
 
-init_empty_func_ref_MAYBE(var_00) {
+init_empty_func_ref_MAYBE(var_0) {
   if(!isDefined(level.func)) {
     level.func = [];
   }
 
-  if(!isDefined(level.func[var_00])) {
-    add_func_ref_MAYBE(var_00, ::empty_init_func);
+  if(!isDefined(level.func[var_0])) {
+    add_func_ref_MAYBE(var_0, ::empty_init_func);
   }
 }
 
-add_init_script(var_00, var_01) {
+add_init_script(var_0, var_1) {
   if(!isDefined(level.init_script)) {
     level.init_script = [];
   }
 
-  if(isDefined(level.init_script[var_00])) {
+  if(isDefined(level.init_script[var_0])) {
     return 0;
   }
 
-  level.init_script[var_00] = var_01;
+  level.init_script[var_0] = var_1;
   return 1;
 }
 
@@ -2848,14 +2848,14 @@ func_C953() {
   }
 }
 
-getdamagetype(var_00) {
-  if(!isDefined(var_00)) {
+getdamagetype(var_0) {
+  if(!isDefined(var_0)) {
     return "unknown";
   }
 
-  var_00 = tolower(var_00);
+  var_0 = tolower(var_0);
 
-  switch (var_00) {
+  switch (var_0) {
     case "melee":
     case "mod_crush":
     case "mod_melee":
@@ -2880,19 +2880,19 @@ getdamagetype(var_00) {
   }
 }
 
-add_frame_event(var_00) {
+add_frame_event(var_0) {
   if(!isDefined(self.frame_events)) {
-    self.frame_events = [var_00];
+    self.frame_events = [var_0];
     thread process_frame_events();
   } else
-    self.frame_events[self.frame_events.size] = var_00;
+    self.frame_events[self.frame_events.size] = var_0;
 }
 
 process_frame_events() {
   for(;;) {
     if(isDefined(self)) {
-      foreach(var_01 in self.frame_events) {
-        self thread[[var_01]]();
+      foreach(var_1 in self.frame_events) {
+        self thread[[var_1]]();
       }
     } else
       break;
@@ -2901,82 +2901,82 @@ process_frame_events() {
   }
 }
 
-delaythread(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  thread delaythread_proc(var_01, var_00, var_02, var_03, var_04, var_05, var_06, var_07);
+delaythread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  thread delaythread_proc(var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-delaythread_proc(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
+delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("death");
   self endon("stop_delay_thread");
-  wait(var_01);
+  wait(var_1);
 
-  if(isDefined(var_07)) {
-    thread[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07);
-  } else if(isDefined(var_06)) {
-    thread[[var_00]](var_02, var_03, var_04, var_05, var_06);
-  } else if(isDefined(var_05)) {
-    thread[[var_00]](var_02, var_03, var_04, var_05);
-  } else if(isDefined(var_04)) {
-    thread[[var_00]](var_02, var_03, var_04);
-  } else if(isDefined(var_03)) {
-    thread[[var_00]](var_02, var_03);
-  } else if(isDefined(var_02)) {
-    thread[[var_00]](var_02);
+  if(isDefined(var_7)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
+  } else if(isDefined(var_6)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
+  } else if(isDefined(var_5)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5);
+  } else if(isDefined(var_4)) {
+    thread[[var_0]](var_2, var_3, var_4);
+  } else if(isDefined(var_3)) {
+    thread[[var_0]](var_2, var_3);
+  } else if(isDefined(var_2)) {
+    thread[[var_0]](var_2);
   } else {
-    thread[[var_00]]();
+    thread[[var_0]]();
   }
 }
 
-isprotectedbyriotshield(var_00) {
+isprotectedbyriotshield(var_0) {
   if(isDefined(var_0.hasriotshield) && var_0.hasriotshield) {
-    var_01 = self.origin - var_0.origin;
-    var_02 = vectornormalize((var_1[0], var_1[1], 0));
-    var_03 = anglesToForward(var_0.angles);
-    var_04 = vectordot(var_03, var_01);
+    var_1 = self.origin - var_0.origin;
+    var_2 = vectornormalize((var_1[0], var_1[1], 0));
+    var_3 = anglesToForward(var_0.angles);
+    var_4 = vectordot(var_3, var_1);
 
     if(var_0.hasriotshieldequipped) {
-      if(var_04 > 0.766) {
+      if(var_4 > 0.766) {
         return 1;
       }
-    } else if(var_04 < -0.766)
+    } else if(var_4 < -0.766)
       return 1;
   }
 
   return 0;
 }
 
-isprotectedbyaxeblock(var_00) {
-  var_01 = 0;
-  var_02 = self getcurrentweapon();
-  var_03 = self adsbuttonpressed();
-  var_04 = 0;
-  var_05 = 0;
-  var_06 = 0;
-  var_07 = anglesToForward(self.angles);
-  var_08 = vectornormalize(var_0.origin - self.origin);
-  var_09 = vectordot(var_08, var_07);
+isprotectedbyaxeblock(var_0) {
+  var_1 = 0;
+  var_2 = self getcurrentweapon();
+  var_3 = self adsbuttonpressed();
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = anglesToForward(self.angles);
+  var_8 = vectornormalize(var_0.origin - self.origin);
+  var_9 = vectordot(var_8, var_7);
 
-  if(var_09 > 0.5) {
-    var_04 = 1;
+  if(var_9 > 0.5) {
+    var_4 = 1;
   }
 
-  if(var_02 == "iw6_axe_mp" || var_02 == "iw7_axe_zm") {
-    var_06 = self getcurrentweaponclipammo();
-    var_05 = 1;
+  if(var_2 == "iw6_axe_mp" || var_2 == "iw7_axe_zm") {
+    var_6 = self getcurrentweaponclipammo();
+    var_5 = 1;
   }
 
-  if(var_05 && var_03 && var_04 && var_06 > 0) {
-    self setweaponammoclip(var_02, var_06 - 1);
+  if(var_5 && var_3 && var_4 && var_6 > 0) {
+    self setweaponammoclip(var_2, var_6 - 1);
     self playSound("crate_impact");
     earthquake(0.75, 0.5, self.origin, 100);
-    var_01 = 1;
+    var_1 = 1;
   }
 
-  return var_01;
+  return var_1;
 }
 
-isairdropmarker(var_00) {
-  switch (var_00) {
+isairdropmarker(var_0) {
+  switch (var_0) {
     case "airdrop_escort_marker_mp":
     case "airdrop_tank_marker_mp":
     case "airdrop_juggernaut_maniac_mp":
@@ -2993,12 +2993,12 @@ isairdropmarker(var_00) {
   }
 }
 
-isdestructibleweapon(var_00) {
-  if(!isDefined(var_00)) {
+isdestructibleweapon(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  switch (var_00) {
+  switch (var_0) {
     case "barrel_mp":
     case "destructible_toy":
     case "destructible_car":
@@ -3009,105 +3009,105 @@ isdestructibleweapon(var_00) {
   return 0;
 }
 
-weaponclass(var_00) {
-  if(isDefined(var_00) && var_00 != "" && var_00 != "none") {
-    var_01 = getweaponbasename(var_00);
+weaponclass(var_0) {
+  if(isDefined(var_0) && var_0 != "" && var_0 != "none") {
+    var_1 = getweaponbasename(var_0);
 
-    if(var_01 == "iw7_emc") {
+    if(var_1 == "iw7_emc") {
       return "pistol";
     }
 
-    if(var_01 == "iw7_devastator") {
+    if(var_1 == "iw7_devastator") {
       return "spread";
     }
 
-    if(var_01 == "iw7_steeldragon") {
+    if(var_1 == "iw7_steeldragon") {
       return "beam";
     }
   }
 
-  return weaponclass(var_00);
+  return weaponclass(var_0);
 }
 
-damagelocationisany(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
+damagelocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.damagelocation)) {
-    if(!isDefined(var_00)) {
+    if(!isDefined(var_0)) {
       return 0;
     }
 
-    if(self.damagelocation == var_00) {
+    if(self.damagelocation == var_0) {
       return 1;
     }
 
-    if(!isDefined(var_01)) {
+    if(!isDefined(var_1)) {
       return 0;
     }
 
-    if(self.damagelocation == var_01) {
+    if(self.damagelocation == var_1) {
       return 1;
     }
 
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       return 0;
     }
 
-    if(self.damagelocation == var_02) {
+    if(self.damagelocation == var_2) {
       return 1;
     }
 
-    if(!isDefined(var_03)) {
+    if(!isDefined(var_3)) {
       return 0;
     }
 
-    if(self.damagelocation == var_03) {
+    if(self.damagelocation == var_3) {
       return 1;
     }
 
-    if(!isDefined(var_04)) {
+    if(!isDefined(var_4)) {
       return 0;
     }
 
-    if(self.damagelocation == var_04) {
+    if(self.damagelocation == var_4) {
       return 1;
     }
 
-    if(!isDefined(var_05)) {
+    if(!isDefined(var_5)) {
       return 0;
     }
 
-    if(self.damagelocation == var_05) {
+    if(self.damagelocation == var_5) {
       return 1;
     }
 
-    if(!isDefined(var_06)) {
+    if(!isDefined(var_6)) {
       return 0;
     }
 
-    if(self.damagelocation == var_06) {
+    if(self.damagelocation == var_6) {
       return 1;
     }
 
-    if(!isDefined(var_07)) {
+    if(!isDefined(var_7)) {
       return 0;
     }
 
-    if(self.damagelocation == var_07) {
+    if(self.damagelocation == var_7) {
       return 1;
     }
 
-    if(!isDefined(var_08)) {
+    if(!isDefined(var_8)) {
       return 0;
     }
 
-    if(self.damagelocation == var_08) {
+    if(self.damagelocation == var_8) {
       return 1;
     }
 
-    if(!isDefined(var_09)) {
+    if(!isDefined(var_9)) {
       return 0;
     }
 
-    if(self.damagelocation == var_09) {
+    if(self.damagelocation == var_9) {
       return 1;
     }
 
@@ -3120,91 +3120,91 @@ damagelocationisany(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_
     }
   }
 
-  return damagesubpartlocationisany(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  return damagesubpartlocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-damagesubpartlocationisany(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
+damagesubpartlocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(self.damagedsubpart)) {
     return 0;
   }
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_00) {
+  if(self.damagedsubpart == var_0) {
     return 1;
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_01) {
+  if(self.damagedsubpart == var_1) {
     return 1;
   }
 
-  if(!isDefined(var_02)) {
+  if(!isDefined(var_2)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_02) {
+  if(self.damagedsubpart == var_2) {
     return 1;
   }
 
-  if(!isDefined(var_03)) {
+  if(!isDefined(var_3)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_03) {
+  if(self.damagedsubpart == var_3) {
     return 1;
   }
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_04) {
+  if(self.damagedsubpart == var_4) {
     return 1;
   }
 
-  if(!isDefined(var_05)) {
+  if(!isDefined(var_5)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_05) {
+  if(self.damagedsubpart == var_5) {
     return 1;
   }
 
-  if(!isDefined(var_06)) {
+  if(!isDefined(var_6)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_06) {
+  if(self.damagedsubpart == var_6) {
     return 1;
   }
 
-  if(!isDefined(var_07)) {
+  if(!isDefined(var_7)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_07) {
+  if(self.damagedsubpart == var_7) {
     return 1;
   }
 
-  if(!isDefined(var_08)) {
+  if(!isDefined(var_8)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_08) {
+  if(self.damagedsubpart == var_8) {
     return 1;
   }
 
-  if(!isDefined(var_09)) {
+  if(!isDefined(var_9)) {
     return 0;
   }
 
-  if(self.damagedsubpart == var_09) {
+  if(self.damagedsubpart == var_9) {
     return 1;
   }
 
@@ -3219,113 +3219,113 @@ damagesubpartlocationisany(var_00, var_01, var_02, var_03, var_04, var_05, var_0
   return 0;
 }
 
-isbulletdamage(var_00) {
-  var_01 = "MOD_RIFLE_BULLET MOD_PISTOL_BULLET MOD_HEAD_SHOT";
+isbulletdamage(var_0) {
+  var_1 = "MOD_RIFLE_BULLET MOD_PISTOL_BULLET MOD_HEAD_SHOT";
 
-  if(issubstr(var_01, var_00)) {
+  if(issubstr(var_1, var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-isnodecoverleft(var_00) {
+isnodecoverleft(var_0) {
   return var_0.type == "Cover Left";
 }
 
-isnodecoverright(var_00) {
+isnodecoverright(var_0) {
   return var_0.type == "Cover Right";
 }
 
-isnode3d(var_00) {
-  return isnodecover3d(var_00) || isnodeexposed3d(var_00);
+isnode3d(var_0) {
+  return isnodecover3d(var_0) || isnodeexposed3d(var_0);
 }
 
-isnodecover3d(var_00) {
+isnodecover3d(var_0) {
   return var_0.type == "Cover Stand 3D" || var_0.type == "Cover 3D";
 }
 
-isnodeexposed3d(var_00) {
+isnodeexposed3d(var_0) {
   return var_0.type == "Exposed 3D" || var_0.type == "Path 3D";
 }
 
-isnodecovercrouch(var_00) {
+isnodecovercrouch(var_0) {
   return var_0.type == "Cover Crouch" || var_0.type == "Cover Crouch Window" || var_0.type == "Conceal Crouch";
 }
 
-absangleclamp180(var_00) {
-  return abs(angleclamp180(var_00));
+absangleclamp180(var_0) {
+  return abs(angleclamp180(var_0));
 }
 
-getaimyawtopoint(var_00) {
-  var_01 = getyawtospot(var_00);
-  var_02 = distance(self.origin, var_00);
+getaimyawtopoint(var_0) {
+  var_1 = getyawtospot(var_0);
+  var_2 = distance(self.origin, var_0);
 
-  if(var_02 > 3) {
-    var_03 = atan(-3 / var_02);
-    var_01 = var_01 - var_03;
+  if(var_2 > 3) {
+    var_3 = atan(-3 / var_2);
+    var_1 = var_1 - var_3;
   }
 
-  var_01 = angleclamp180(var_01);
-  return var_01;
+  var_1 = angleclamp180(var_1);
+  return var_1;
 }
 
-getyawtospot(var_00) {
+getyawtospot(var_0) {
   if(actor_is3d()) {
-    var_01 = anglesToForward(self.angles);
-    var_02 = rotatepointaroundvector(var_01, var_00 - self.origin, self.angles[2] * -1);
-    var_00 = var_02 + self.origin;
+    var_1 = anglesToForward(self.angles);
+    var_2 = rotatepointaroundvector(var_1, var_0 - self.origin, self.angles[2] * -1);
+    var_0 = var_2 + self.origin;
   }
 
-  var_03 = getyaw(var_00) - self.angles[1];
-  var_03 = angleclamp180(var_03);
-  return var_03;
+  var_3 = getyaw(var_0) - self.angles[1];
+  var_3 = angleclamp180(var_3);
+  return var_3;
 }
 
-getyaw(var_00) {
-  return vectortoyaw(var_00 - self.origin);
+getyaw(var_0) {
+  return vectortoyaw(var_0 - self.origin);
 }
 
-getaimyawtopoint3d(var_00) {
-  var_01 = getyawtospot3d(var_00);
-  var_02 = distance(self.origin, var_00);
+getaimyawtopoint3d(var_0) {
+  var_1 = getyawtospot3d(var_0);
+  var_2 = distance(self.origin, var_0);
 
-  if(var_02 > 3) {
-    var_03 = atan(-3 / var_02);
-    var_01 = var_01 - var_03;
+  if(var_2 > 3) {
+    var_3 = atan(-3 / var_2);
+    var_1 = var_1 - var_3;
   }
 
-  var_01 = angleclamp180(var_01);
-  return var_01;
+  var_1 = angleclamp180(var_1);
+  return var_1;
 }
 
-getyawtospot3d(var_00) {
-  var_01 = var_00 - self.origin;
-  var_02 = rotatevectorinverted(var_01, self.angles);
-  var_03 = vectortoyaw(var_02);
-  var_04 = angleclamp180(var_03);
-  return var_04;
+getyawtospot3d(var_0) {
+  var_1 = var_0 - self.origin;
+  var_2 = rotatevectorinverted(var_1, self.angles);
+  var_3 = vectortoyaw(var_2);
+  var_4 = angleclamp180(var_3);
+  return var_4;
 }
 
-getaimpitchtopoint3d(var_00) {
-  var_01 = getpitchtospot3d(var_00);
-  var_02 = distance(self.origin, var_00);
+getaimpitchtopoint3d(var_0) {
+  var_1 = getpitchtospot3d(var_0);
+  var_2 = distance(self.origin, var_0);
 
-  if(var_02 > 3) {
-    var_03 = atan(-3 / var_02);
-    var_01 = var_01 - var_03;
+  if(var_2 > 3) {
+    var_3 = atan(-3 / var_2);
+    var_1 = var_1 - var_3;
   }
 
-  var_01 = angleclamp180(var_01);
-  return var_01;
+  var_1 = angleclamp180(var_1);
+  return var_1;
 }
 
-getpitchtospot3d(var_00) {
-  var_01 = var_00 - self.origin;
-  var_02 = rotatevectorinverted(var_01, self.angles);
-  var_03 = _vectortopitch(var_02);
-  var_04 = angleclamp180(var_03);
-  return var_04;
+getpitchtospot3d(var_0) {
+  var_1 = var_0 - self.origin;
+  var_2 = rotatevectorinverted(var_1, self.angles);
+  var_3 = _vectortopitch(var_2);
+  var_4 = angleclamp180(var_3);
+  return var_4;
 }
 
 actor_isspace() {
@@ -3336,73 +3336,73 @@ actor_is3d() {
   return actor_isspace();
 }
 
-getpredictedaimyawtoshootentorpos(var_00, var_01, var_02) {
-  if(!isDefined(var_01)) {
-    if(!isDefined(var_02)) {
+getpredictedaimyawtoshootentorpos(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    if(!isDefined(var_2)) {
       return 0;
     }
 
-    return getaimyawtopoint(var_02);
+    return getaimyawtopoint(var_2);
   }
 
-  var_03 = (0, 0, 0);
+  var_3 = (0, 0, 0);
 
-  if(isplayer(var_01)) {
-    var_03 = var_01 getvelocity();
-  } else if(isai(var_01)) {
-    var_03 = var_1.velocity;
+  if(isplayer(var_1)) {
+    var_3 = var_1 getvelocity();
+  } else if(isai(var_1)) {
+    var_3 = var_1.velocity;
   }
 
-  var_04 = var_1.origin + var_03 * var_00;
-  return getaimyawtopoint(var_04);
+  var_4 = var_1.origin + var_3 * var_0;
+  return getaimyawtopoint(var_4);
 }
 
-getpredictedaimyawtoshootentorpos3d(var_00, var_01, var_02) {
-  if(!isDefined(var_01)) {
-    if(!isDefined(var_02)) {
+getpredictedaimyawtoshootentorpos3d(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    if(!isDefined(var_2)) {
       return 0;
     }
 
-    return getaimyawtopoint3d(var_02);
+    return getaimyawtopoint3d(var_2);
   }
 
-  var_03 = (0, 0, 0);
+  var_3 = (0, 0, 0);
 
-  if(isplayer(var_01)) {
-    var_03 = var_01 getvelocity();
-  } else if(isai(var_01)) {
-    var_03 = var_1.velocity;
+  if(isplayer(var_1)) {
+    var_3 = var_1 getvelocity();
+  } else if(isai(var_1)) {
+    var_3 = var_1.velocity;
   }
 
-  var_04 = var_1.origin + var_03 * var_00;
-  return getaimyawtopoint3d(var_04);
+  var_4 = var_1.origin + var_3 * var_0;
+  return getaimyawtopoint3d(var_4);
 }
 
-getpredictedaimpitchtoshootentorpos3d(var_00, var_01, var_02) {
-  if(!isDefined(var_01)) {
-    if(!isDefined(var_02)) {
+getpredictedaimpitchtoshootentorpos3d(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    if(!isDefined(var_2)) {
       return 0;
     }
 
-    return getaimpitchtopoint3d(var_02);
+    return getaimpitchtopoint3d(var_2);
   }
 
-  var_03 = (0, 0, 0);
+  var_3 = (0, 0, 0);
 
-  if(isplayer(var_01)) {
-    var_03 = var_01 getvelocity();
-  } else if(isai(var_01)) {
-    var_03 = var_1.velocity;
+  if(isplayer(var_1)) {
+    var_3 = var_1 getvelocity();
+  } else if(isai(var_1)) {
+    var_3 = var_1.velocity;
   }
 
-  var_04 = var_1.origin + var_03 * var_00;
-  return getaimpitchtopoint3d(var_04);
+  var_4 = var_1.origin + var_3 * var_0;
+  return getaimpitchtopoint3d(var_4);
 }
 
 meleegrab_ksweapon_used() {
-  var_00 = ["mars_killstreak", "iw7_jackal_support_designator"];
+  var_0 = ["mars_killstreak", "iw7_jackal_support_designator"];
 
-  if(array_contains(var_00, level.player getcurrentweapon())) {
+  if(array_contains(var_0, level.player getcurrentweapon())) {
     return 1;
   }
 
@@ -3411,7 +3411,7 @@ meleegrab_ksweapon_used() {
   }
 
   if(level.player israisingweapon()) {
-    if(array_contains(var_00, level.player getcurrentweapon())) {
+    if(array_contains(var_0, level.player getcurrentweapon())) {
       return 1;
     }
   }
@@ -3431,8 +3431,8 @@ wasdamagedbyoffhandshield() {
   return 1;
 }
 
-is_true(var_00) {
-  if(isDefined(var_00) && var_00) {
+is_true(var_0) {
+  if(isDefined(var_0) && var_0) {
     return 1;
   }
 
@@ -3453,251 +3453,251 @@ set_createfx_enabled() {
   }
 }
 
-flag_set_delayed(var_00, var_01, var_02) {
-  wait(var_01);
-  flag_set(var_00, var_02);
+flag_set_delayed(var_0, var_1, var_2) {
+  wait(var_1);
+  flag_set(var_0, var_2);
 }
 
-noself_array_call(var_00, var_01, var_02, var_03, var_04) {
-  if(isDefined(var_04)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02, var_03, var_04);
+noself_array_call(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(var_4)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2, var_3, var_4);
     }
 
     return;
   }
 
-  if(isDefined(var_03)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02, var_03);
+  if(isDefined(var_3)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2, var_3);
     }
 
     return;
   }
 
-  if(isDefined(var_02)) {
-    foreach(var_06 in var_00) {
-      call[[var_01]](var_06, var_02);
+  if(isDefined(var_2)) {
+    foreach(var_6 in var_0) {
+      call[[var_1]](var_6, var_2);
     }
 
     return;
   }
 
-  foreach(var_06 in var_00) {
-    call[[var_01]](var_06);
+  foreach(var_6 in var_0) {
+    call[[var_1]](var_6);
   }
 }
 
-flag_assert(var_00) {}
+flag_assert(var_0) {}
 
-flag_wait_either(var_00, var_01) {
+flag_wait_either(var_0, var_1) {
   for(;;) {
-    if(flag(var_00)) {
+    if(flag(var_0)) {
       return;
     }
-    if(flag(var_01)) {
+    if(flag(var_1)) {
       return;
     }
-    level waittill_either(var_00, var_01);
+    level waittill_either(var_0, var_1);
   }
 }
 
-flag_wait_either_return(var_00, var_01) {
+flag_wait_either_return(var_0, var_1) {
   for(;;) {
-    if(flag(var_00)) {
-      return var_00;
+    if(flag(var_0)) {
+      return var_0;
     }
 
-    if(flag(var_01)) {
-      return var_01;
+    if(flag(var_1)) {
+      return var_1;
     }
 
-    var_02 = level waittill_any_return(var_00, var_01);
-    return var_02;
+    var_2 = level waittill_any_return(var_0, var_1);
+    return var_2;
   }
 }
 
-flag_wait_any(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = [];
+flag_wait_any(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = [];
 
-  if(isDefined(var_05)) {
-    var_6[var_6.size] = var_00;
-    var_6[var_6.size] = var_01;
-    var_6[var_6.size] = var_02;
-    var_6[var_6.size] = var_03;
-    var_6[var_6.size] = var_04;
-    var_6[var_6.size] = var_05;
-  } else if(isDefined(var_04)) {
-    var_6[var_6.size] = var_00;
-    var_6[var_6.size] = var_01;
-    var_6[var_6.size] = var_02;
-    var_6[var_6.size] = var_03;
-    var_6[var_6.size] = var_04;
-  } else if(isDefined(var_03)) {
-    var_6[var_6.size] = var_00;
-    var_6[var_6.size] = var_01;
-    var_6[var_6.size] = var_02;
-    var_6[var_6.size] = var_03;
-  } else if(isDefined(var_02)) {
-    var_6[var_6.size] = var_00;
-    var_6[var_6.size] = var_01;
-    var_6[var_6.size] = var_02;
-  } else if(isDefined(var_01)) {
-    flag_wait_either(var_00, var_01);
+  if(isDefined(var_5)) {
+    var_6[var_6.size] = var_0;
+    var_6[var_6.size] = var_1;
+    var_6[var_6.size] = var_2;
+    var_6[var_6.size] = var_3;
+    var_6[var_6.size] = var_4;
+    var_6[var_6.size] = var_5;
+  } else if(isDefined(var_4)) {
+    var_6[var_6.size] = var_0;
+    var_6[var_6.size] = var_1;
+    var_6[var_6.size] = var_2;
+    var_6[var_6.size] = var_3;
+    var_6[var_6.size] = var_4;
+  } else if(isDefined(var_3)) {
+    var_6[var_6.size] = var_0;
+    var_6[var_6.size] = var_1;
+    var_6[var_6.size] = var_2;
+    var_6[var_6.size] = var_3;
+  } else if(isDefined(var_2)) {
+    var_6[var_6.size] = var_0;
+    var_6[var_6.size] = var_1;
+    var_6[var_6.size] = var_2;
+  } else if(isDefined(var_1)) {
+    flag_wait_either(var_0, var_1);
     return;
   } else
     return;
 
   for(;;) {
-    for(var_07 = 0; var_07 < var_6.size; var_7++) {
-      if(flag(var_6[var_07])) {
+    for(var_7 = 0; var_7 < var_6.size; var_7++) {
+      if(flag(var_6[var_7])) {
         return;
       }
     }
 
-    level waittill_any(var_00, var_01, var_02, var_03, var_04, var_05);
+    level waittill_any(var_0, var_1, var_2, var_3, var_4, var_5);
   }
 }
 
-flag_wait_any_return(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = [];
+flag_wait_any_return(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
 
-  if(isDefined(var_04)) {
-    var_5[var_5.size] = var_00;
-    var_5[var_5.size] = var_01;
-    var_5[var_5.size] = var_02;
-    var_5[var_5.size] = var_03;
-    var_5[var_5.size] = var_04;
-  } else if(isDefined(var_03)) {
-    var_5[var_5.size] = var_00;
-    var_5[var_5.size] = var_01;
-    var_5[var_5.size] = var_02;
-    var_5[var_5.size] = var_03;
-  } else if(isDefined(var_02)) {
-    var_5[var_5.size] = var_00;
-    var_5[var_5.size] = var_01;
-    var_5[var_5.size] = var_02;
-  } else if(isDefined(var_01)) {
-    var_06 = flag_wait_either_return(var_00, var_01);
-    return var_06;
+  if(isDefined(var_4)) {
+    var_5[var_5.size] = var_0;
+    var_5[var_5.size] = var_1;
+    var_5[var_5.size] = var_2;
+    var_5[var_5.size] = var_3;
+    var_5[var_5.size] = var_4;
+  } else if(isDefined(var_3)) {
+    var_5[var_5.size] = var_0;
+    var_5[var_5.size] = var_1;
+    var_5[var_5.size] = var_2;
+    var_5[var_5.size] = var_3;
+  } else if(isDefined(var_2)) {
+    var_5[var_5.size] = var_0;
+    var_5[var_5.size] = var_1;
+    var_5[var_5.size] = var_2;
+  } else if(isDefined(var_1)) {
+    var_6 = flag_wait_either_return(var_0, var_1);
+    return var_6;
   } else
     return;
 
   for(;;) {
-    for(var_07 = 0; var_07 < var_5.size; var_7++) {
-      if(flag(var_5[var_07])) {
-        return var_5[var_07];
+    for(var_7 = 0; var_7 < var_5.size; var_7++) {
+      if(flag(var_5[var_7])) {
+        return var_5[var_7];
       }
     }
 
-    var_06 = level waittill_any_return(var_00, var_01, var_02, var_03, var_04);
-    return var_06;
+    var_6 = level waittill_any_return(var_0, var_1, var_2, var_3, var_4);
+    return var_6;
   }
 }
 
-flag_wait_all(var_00, var_01, var_02, var_03) {
-  if(isDefined(var_00)) {
-    flag_wait(var_00);
+flag_wait_all(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    flag_wait(var_0);
   }
 
-  if(isDefined(var_01)) {
-    flag_wait(var_01);
+  if(isDefined(var_1)) {
+    flag_wait(var_1);
   }
 
-  if(isDefined(var_02)) {
-    flag_wait(var_02);
+  if(isDefined(var_2)) {
+    flag_wait(var_2);
   }
 
-  if(isDefined(var_03)) {
-    flag_wait(var_03);
+  if(isDefined(var_3)) {
+    flag_wait(var_3);
   }
 }
 
-flag_wait_or_timeout(var_00, var_01) {
-  var_02 = var_01 * 1000;
-  var_03 = gettime();
+flag_wait_or_timeout(var_0, var_1) {
+  var_2 = var_1 * 1000;
+  var_3 = gettime();
 
   for(;;) {
-    if(flag(var_00)) {
+    if(flag(var_0)) {
       break;
     }
-    if(gettime() >= var_03 + var_02) {
+    if(gettime() >= var_3 + var_2) {
       break;
     }
-    var_04 = var_02 - (gettime() - var_03);
-    var_05 = var_04 / 1000;
-    wait_for_flag_or_time_elapses(var_00, var_05);
+    var_4 = var_2 - (gettime() - var_3);
+    var_5 = var_4 / 1000;
+    wait_for_flag_or_time_elapses(var_0, var_5);
   }
 }
 
-flag_waitopen_or_timeout(var_00, var_01) {
-  var_02 = gettime();
+flag_waitopen_or_timeout(var_0, var_1) {
+  var_2 = gettime();
 
   for(;;) {
-    if(!flag(var_00)) {
+    if(!flag(var_0)) {
       break;
     }
-    if(gettime() >= var_02 + var_01 * 1000) {
+    if(gettime() >= var_2 + var_1 * 1000) {
       break;
     }
-    wait_for_flag_or_time_elapses(var_00, var_01);
+    wait_for_flag_or_time_elapses(var_0, var_1);
   }
 }
 
-wait_for_flag_or_time_elapses(var_00, var_01) {
-  level endon(var_00);
-  wait(var_01);
+wait_for_flag_or_time_elapses(var_0, var_1) {
+  level endon(var_0);
+  wait(var_1);
 }
 
-noself_delaycall(var_00, var_01, var_02, var_03, var_04, var_05) {
-  thread noself_delaycall_proc(var_01, var_00, var_02, var_03, var_04, var_05);
+noself_delaycall(var_0, var_1, var_2, var_3, var_4, var_5) {
+  thread noself_delaycall_proc(var_1, var_0, var_2, var_3, var_4, var_5);
 }
 
-noself_delaycall_proc(var_00, var_01, var_02, var_03, var_04, var_05) {
-  wait(var_01);
+noself_delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5) {
+  wait(var_1);
 
-  if(isDefined(var_05)) {
-    call[[var_00]](var_02, var_03, var_04, var_05);
-  } else if(isDefined(var_04)) {
-    call[[var_00]](var_02, var_03, var_04);
-  } else if(isDefined(var_03)) {
-    call[[var_00]](var_02, var_03);
-  } else if(isDefined(var_02)) {
-    call[[var_00]](var_02);
+  if(isDefined(var_5)) {
+    call[[var_0]](var_2, var_3, var_4, var_5);
+  } else if(isDefined(var_4)) {
+    call[[var_0]](var_2, var_3, var_4);
+  } else if(isDefined(var_3)) {
+    call[[var_0]](var_2, var_3);
+  } else if(isDefined(var_2)) {
+    call[[var_0]](var_2);
   } else {
-    call[[var_00]]();
+    call[[var_0]]();
   }
 }
 
-get_target_array(var_00) {
-  if(!isDefined(var_00)) {
-    var_00 = self.target;
+get_target_array(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.target;
   }
 
-  var_01 = getEntArray(var_00, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 
   if(issp()) {
-    var_01 = call[[level.getnodearrayfunction]](var_00, "targetname");
+    var_1 = call[[level.getnodearrayfunction]](var_0, "targetname");
 
     if(var_1.size > 0) {
-      return var_01;
+      return var_1;
     }
   }
 
-  var_01 = getstructarray(var_00, "targetname");
+  var_1 = getstructarray(var_0, "targetname");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 
-  var_01 = getvehiclenodearray(var_00, "targetname");
+  var_1 = getvehiclenodearray(var_0, "targetname");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 }
 
@@ -3705,28 +3705,28 @@ pauseeffect() {
   scripts\common\createfx::stop_fx_looper();
 }
 
-spawn_script_origin(var_00, var_01) {
-  if(!isDefined(var_01) && isDefined(self.angles)) {
-    var_01 = self.angles;
+spawn_script_origin(var_0, var_1) {
+  if(!isDefined(var_1) && isDefined(self.angles)) {
+    var_1 = self.angles;
   }
 
-  if(!isDefined(var_00) && isDefined(self.origin)) {
-    var_00 = self.origin;
-  } else if(!isDefined(var_00)) {
-    var_00 = (0, 0, 0);
+  if(!isDefined(var_0) && isDefined(self.origin)) {
+    var_0 = self.origin;
+  } else if(!isDefined(var_0)) {
+    var_0 = (0, 0, 0);
   }
 
-  var_02 = spawn("script_origin", var_00);
+  var_2 = spawn("script_origin", var_0);
 
-  if(isDefined(var_01)) {
-    var_2.angles = var_01;
+  if(isDefined(var_1)) {
+    var_2.angles = var_1;
   }
 
-  return var_02;
+  return var_2;
 }
 
-allow_lean(var_00) {
-  if(var_00) {
+allow_lean(var_0) {
+  if(var_0) {
     if(!isDefined(self.disabledlean)) {
       self.disabledlean = 0;
     } else {
@@ -3746,8 +3746,8 @@ allow_lean(var_00) {
   }
 }
 
-allow_reload(var_00, var_01) {
-  if(var_00) {
+allow_reload(var_0, var_1) {
+  if(var_0) {
     if(!isDefined(self.disabledreload)) {
       self.disabledreload = 0;
     } else {
@@ -3765,14 +3765,14 @@ allow_reload(var_00, var_01) {
     self.disabledreload++;
     self allowreload(0);
 
-    if(!isDefined(var_01) || !var_01) {
+    if(!isDefined(var_1) || !var_1) {
       self _meth_8545();
     }
   }
 }
 
-allow_autoreload(var_00) {
-  if(var_00) {
+allow_autoreload(var_0) {
+  if(var_0) {
     if(!isDefined(self.disableautoreload)) {
       self.disableautoreload = 0;
     } else {
@@ -3807,44 +3807,44 @@ forceenable_melee_MAYBE() {
   self allowmelee(1);
 }
 
-get_noteworthy_array(var_00) {
-  var_01 = getEntArray(var_00, "script_noteworthy");
+get_noteworthy_array(var_0) {
+  var_1 = getEntArray(var_0, "script_noteworthy");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 
   if(issp()) {
-    var_01 = call[[level.getnodearrayfunction]](var_00, "script_noteworthy");
+    var_1 = call[[level.getnodearrayfunction]](var_0, "script_noteworthy");
 
     if(var_1.size > 0) {
-      return var_01;
+      return var_1;
     }
   }
 
-  var_01 = getstructarray(var_00, "script_noteworthy");
+  var_1 = getstructarray(var_0, "script_noteworthy");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 
-  var_01 = getvehiclenodearray(var_00, "script_noteworthy");
+  var_1 = getvehiclenodearray(var_0, "script_noteworthy");
 
   if(var_1.size > 0) {
-    return var_01;
+    return var_1;
   }
 }
 
-get_cumulative_weights(var_00) {
-  var_01 = [];
-  var_02 = 0;
+get_cumulative_weights(var_0) {
+  var_1 = [];
+  var_2 = 0;
 
-  for(var_03 = 0; var_03 < var_0.size; var_3++) {
-    var_02 = var_02 + var_0[var_03];
-    var_1[var_03] = var_02;
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_2 = var_2 + var_0[var_3];
+    var_1[var_3] = var_2;
   }
 
-  return var_01;
+  return var_1;
 }
 
 void() {}
@@ -3862,15 +3862,15 @@ func_9DA3() {
     return 1;
   }
 
-  var_00 = self lastknowntime(self.enemy);
+  var_0 = self lastknowntime(self.enemy);
 
-  if(var_00 == 0) {
+  if(var_0 == 0) {
     return 0;
   }
 
-  var_01 = gettime() - var_00;
+  var_1 = gettime() - var_0;
 
-  if(var_01 > 10000) {
+  if(var_1 > 10000) {
     return 0;
   }
 
@@ -3881,64 +3881,64 @@ func_9DA3() {
   return 1;
 }
 
-get_notetrack_time(var_00, var_01) {
-  var_02 = getnotetracktimes(var_00, var_01);
-  var_03 = getanimlength(var_00);
-  return var_2[0] * var_03;
+get_notetrack_time(var_0, var_1) {
+  var_2 = getnotetracktimes(var_0, var_1);
+  var_3 = getanimlength(var_0);
+  return var_2[0] * var_3;
 }
 
-mph_to_ips(var_00) {
-  return var_00 * 17.6;
+mph_to_ips(var_0) {
+  return var_0 * 17.6;
 }
 
-ips_to_mph(var_00) {
-  return var_00 * 0.056818;
+ips_to_mph(var_0) {
+  return var_0 * 0.056818;
 }
 
-closestdistancebetweenlines(var_00, var_01, var_02, var_03) {
-  var_04 = var_00 - var_02;
-  var_05 = var_03 - var_02;
+closestdistancebetweenlines(var_0, var_1, var_2, var_3) {
+  var_4 = var_0 - var_2;
+  var_5 = var_3 - var_2;
 
   if(abs(var_5[0]) < 0.000001 && abs(var_5[1]) < 0.000001 && abs(var_5[2]) < 0.000001) {
     return undefined;
   }
 
-  var_06 = var_01 - var_00;
+  var_6 = var_1 - var_0;
 
   if(abs(var_6[0]) < 0.000001 && abs(var_6[1]) < 0.000001 && abs(var_6[2]) < 0.000001) {
     return undefined;
   }
 
-  var_07 = var_4[0] * var_5[0] + var_4[1] * var_5[1] + var_4[2] * var_5[2];
-  var_08 = var_5[0] * var_6[0] + var_5[1] * var_6[1] + var_5[2] * var_6[2];
-  var_09 = var_4[0] * var_6[0] + var_4[1] * var_6[1] + var_4[2] * var_6[2];
+  var_7 = var_4[0] * var_5[0] + var_4[1] * var_5[1] + var_4[2] * var_5[2];
+  var_8 = var_5[0] * var_6[0] + var_5[1] * var_6[1] + var_5[2] * var_6[2];
+  var_9 = var_4[0] * var_6[0] + var_4[1] * var_6[1] + var_4[2] * var_6[2];
   var_10 = var_5[0] * var_5[0] + var_5[1] * var_5[1] + var_5[2] * var_5[2];
   var_11 = var_6[0] * var_6[0] + var_6[1] * var_6[1] + var_6[2] * var_6[2];
-  var_12 = var_11 * var_10 - var_08 * var_08;
+  var_12 = var_11 * var_10 - var_8 * var_8;
 
   if(abs(var_12) < 0.000001) {
     return undefined;
   }
 
-  var_13 = var_07 * var_08 - var_09 * var_10;
+  var_13 = var_7 * var_8 - var_9 * var_10;
   var_14 = var_13 / var_12;
-  var_15 = (var_07 + var_08 * var_14) / var_10;
-  var_16 = var_00 + var_14 * var_06;
-  var_17 = var_02 + var_15 * var_05;
+  var_15 = (var_7 + var_8 * var_14) / var_10;
+  var_16 = var_0 + var_14 * var_6;
+  var_17 = var_2 + var_15 * var_5;
   var_18 = [var_16, var_17, distance(var_16, var_17)];
   return var_18;
 }
 
-closestdistancebetweensegments(var_00, var_01, var_02, var_03) {
-  var_04 = var_01 - var_00;
-  var_05 = var_03 - var_02;
-  var_06 = var_00 - var_02;
-  var_07 = vectordot(var_04, var_04);
-  var_08 = vectordot(var_04, var_05);
-  var_09 = vectordot(var_05, var_05);
-  var_10 = vectordot(var_04, var_06);
-  var_11 = vectordot(var_05, var_06);
-  var_12 = var_07 * var_09 - var_08 * var_08;
+closestdistancebetweensegments(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 - var_0;
+  var_5 = var_3 - var_2;
+  var_6 = var_0 - var_2;
+  var_7 = vectordot(var_4, var_4);
+  var_8 = vectordot(var_4, var_5);
+  var_9 = vectordot(var_5, var_5);
+  var_10 = vectordot(var_4, var_6);
+  var_11 = vectordot(var_5, var_6);
+  var_12 = var_7 * var_9 - var_8 * var_8;
   var_13 = var_12;
   var_14 = var_12;
   var_15 = 0;
@@ -3950,19 +3950,19 @@ closestdistancebetweensegments(var_00, var_01, var_02, var_03) {
     var_16 = 0;
     var_13 = 1;
     var_18 = var_11;
-    var_14 = var_09;
+    var_14 = var_9;
   } else {
-    var_16 = var_08 * var_11 - var_09 * var_10;
-    var_18 = var_07 * var_11 - var_08 * var_10;
+    var_16 = var_8 * var_11 - var_9 * var_10;
+    var_18 = var_7 * var_11 - var_8 * var_10;
 
     if(var_16 < 0.0) {
       var_16 = 0;
       var_18 = var_11;
-      var_14 = var_09;
+      var_14 = var_9;
     } else if(var_16 > var_13) {
       var_16 = var_13;
-      var_18 = var_11 + var_08;
-      var_14 = var_09;
+      var_18 = var_11 + var_8;
+      var_14 = var_9;
     }
   }
 
@@ -3971,22 +3971,22 @@ closestdistancebetweensegments(var_00, var_01, var_02, var_03) {
 
     if(var_10 * -1 < 0.0) {
       var_16 = 0.0;
-    } else if(var_10 * -1 > var_07) {
+    } else if(var_10 * -1 > var_7) {
       var_16 = var_13;
     } else {
       var_16 = var_10 * -1;
-      var_13 = var_07;
+      var_13 = var_7;
     }
   } else if(var_18 > var_14) {
     var_18 = var_14;
 
-    if(var_08 - var_10 < 0.0) {
+    if(var_8 - var_10 < 0.0) {
       var_16 = 0;
-    } else if(var_08 - var_10 > var_07) {
+    } else if(var_8 - var_10 > var_7) {
       var_16 = var_13;
     } else {
-      var_16 = var_08 - var_10;
-      var_13 = var_07;
+      var_16 = var_8 - var_10;
+      var_13 = var_7;
     }
   }
 
@@ -3998,14 +3998,14 @@ closestdistancebetweensegments(var_00, var_01, var_02, var_03) {
     var_17 = var_18 / var_14;
   }
 
-  var_19 = var_00 + var_15 * var_04;
-  var_20 = var_02 + var_17 * var_05;
+  var_19 = var_0 + var_15 * var_4;
+  var_20 = var_2 + var_17 * var_5;
   var_21 = [var_19, var_20, distance(var_19, var_20)];
   return var_21;
 }
 
-getcamotablecolumnindex(var_00) {
-  switch (var_00) {
+getcamotablecolumnindex(var_0) {
+  switch (var_0) {
     case "index":
       return 0;
     case "ref":

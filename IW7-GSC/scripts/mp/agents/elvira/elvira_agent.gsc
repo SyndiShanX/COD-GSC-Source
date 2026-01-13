@@ -27,7 +27,7 @@ func_FAB0() {
   level.agent_definition["elvira"]["setup_model_func"] = ::func_FACE;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("fullbody_zmb_hero_elvira");
 }
 
@@ -96,76 +96,76 @@ func_899D() {
 }
 
 func_11570() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
   if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_00 = self.isnodeoccupied.var_18F4;
-    var_01 = self.isnodeoccupied.var_18F9;
+    var_0 = self.isnodeoccupied.var_18F4;
+    var_1 = self.isnodeoccupied.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.25, 0.35);
-  var_03 = var_01 * 0.5;
-  var_04 = var_03 * -1;
-  var_05 = randomfloatrange(var_04, var_03);
-  var_06 = anglestoright(self.angles);
-  var_07 = (var_06[0] * var_05, var_06[1] * var_05, var_02);
-  var_08 = self.isnodeoccupied.origin + var_07;
-  return var_08;
+  var_2 = var_0 * randomfloatrange(0.25, 0.35);
+  var_3 = var_1 * 0.5;
+  var_4 = var_3 * -1;
+  var_5 = randomfloatrange(var_4, var_3);
+  var_6 = anglestoright(self.angles);
+  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
+  var_8 = self.isnodeoccupied.origin + var_7;
+  return var_8;
 }
 
 func_1157B() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
   if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_00 = self.isnodeoccupied.var_18F4;
-    var_01 = self.isnodeoccupied.var_18F9;
+    var_0 = self.isnodeoccupied.var_18F4;
+    var_1 = self.isnodeoccupied.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * 0.75;
-  var_04 = anglestoright(self.angles);
-  var_05 = (var_04[0] * var_03, var_04[1] * var_03, var_02);
-  var_06 = self.isnodeoccupied.origin + var_05;
-  return var_06;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * 0.75;
+  var_4 = anglestoright(self.angles);
+  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
+  var_6 = self.isnodeoccupied.origin + var_5;
+  return var_6;
 }
 
 func_1156F() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
   if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_00 = self.isnodeoccupied.var_18F4;
-    var_01 = self.isnodeoccupied.var_18F9;
+    var_0 = self.isnodeoccupied.var_18F4;
+    var_1 = self.isnodeoccupied.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * -0.75;
-  var_04 = anglestoright(self.angles);
-  var_05 = (var_04[0] * var_03, var_04[1] * var_03, var_02);
-  var_06 = self.isnodeoccupied.origin + var_05;
-  return var_06;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * -0.75;
+  var_4 = anglestoright(self.angles);
+  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
+  var_6 = self.isnodeoccupied.origin + var_5;
+  return var_6;
 }
 
 func_11559() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
   if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_00 = self.isnodeoccupied.var_18F4;
-    var_01 = self.isnodeoccupied.var_18F9;
+    var_0 = self.isnodeoccupied.var_18F4;
+    var_1 = self.isnodeoccupied.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * 0.5;
-  var_04 = var_03 * -1;
-  var_05 = randomfloatrange(var_04, var_03);
-  var_06 = anglestoright(self.angles);
-  var_07 = (var_06[0] * var_05, var_06[1] * var_05, var_02);
-  var_08 = self.isnodeoccupied.origin + var_07;
-  return var_08;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * 0.5;
+  var_4 = var_3 * -1;
+  var_5 = randomfloatrange(var_4, var_3);
+  var_6 = anglestoright(self.angles);
+  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
+  var_8 = self.isnodeoccupied.origin + var_7;
+  return var_8;
 }
 
 func_11562() {
-  var_00 = self.isnodeoccupied gettagorigin("j_head");
-  return var_00;
+  var_0 = self.isnodeoccupied gettagorigin("j_head");
+  return var_0;
 }
 
 picktargetingfunction() {
@@ -175,23 +175,23 @@ picktargetingfunction() {
     }
   }
 
-  var_00 = 0;
-  var_01 = randomint(100);
-  for(var_02 = 0; var_02 < self.targetingfunctionchances.size; var_02++) {
-    var_03 = self.targetingfunctionchances[var_02];
-    if(var_01 < var_03 + var_00) {
-      return self.targetingfunctions[var_02];
+  var_0 = 0;
+  var_1 = randomint(100);
+  for(var_2 = 0; var_2 < self.targetingfunctionchances.size; var_2++) {
+    var_3 = self.targetingfunctionchances[var_2];
+    if(var_1 < var_3 + var_0) {
+      return self.targetingfunctions[var_2];
     }
 
-    var_00 = var_00 + var_03;
+    var_0 = var_0 + var_3;
   }
 
   return undefined;
 }
 
 func_7E8E() {
-  var_00 = self.isnodeoccupied gettagorigin("j_head");
-  return var_00;
+  var_0 = self.isnodeoccupied gettagorigin("j_head");
+  return var_0;
 }
 
 getdefaultenemychestpos() {
@@ -199,17 +199,17 @@ getdefaultenemychestpos() {
     return func_7E8E();
   }
 
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
   if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_00 = self.isnodeoccupied.var_18F4;
-    var_01 = self.isnodeoccupied.var_18F9;
+    var_0 = self.isnodeoccupied.var_18F4;
+    var_1 = self.isnodeoccupied.var_18F9;
   }
 
-  var_02 = var_00 * 0.75;
-  var_03 = (0, 0, var_02);
-  var_04 = self.isnodeoccupied.origin + var_03;
-  return var_04;
+  var_2 = var_0 * 0.75;
+  var_3 = (0, 0, var_2);
+  var_4 = self.isnodeoccupied.origin + var_3;
+  return var_4;
 }
 
 getenemy() {

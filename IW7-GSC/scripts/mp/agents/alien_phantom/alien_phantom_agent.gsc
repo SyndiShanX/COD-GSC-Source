@@ -36,7 +36,7 @@ func_FAB0() {
   }
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("alien_brute");
 }
 
@@ -49,22 +49,22 @@ setupagent() {
 }
 
 calculatealienphantomhealth() {
-  var_00 = scripts\mp\agents\alien_goon\alien_goon_agent::calculatealiengoonhealth();
-  var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_0 = scripts\mp\agents\alien_goon\alien_goon_agent::calculatealiengoonhealth();
+  var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   if(level.players.size < 2) {
-    var_00 = var_00 / 2;
+    var_0 = var_0 / 2;
   }
 
-  return var_00 * var_01.goon_health_multiplier;
+  return var_0 * var_1.goon_health_multiplier;
 }
 
-onkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isDefined(level.no_loot_drop) || !level.no_loot_drop) {
-    var_09 = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
-    if(isDefined(var_09) && !isDefined(self.var_72AC)) {
+    var_9 = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
+    if(isDefined(var_9) && !isDefined(self.var_72AC)) {
       if(!isDefined(level.brute_loot_check[self.spawn_round_num])) {
         level.brute_loot_check[self.spawn_round_num] = 1;
-        level thread scripts\cp\loot::drop_loot(self.origin, param_01, var_09, undefined, undefined, 1);
+        level thread scripts\cp\loot::drop_loot(self.origin, var_1, var_9, undefined, undefined, 1);
       }
     }
 
@@ -83,5 +83,5 @@ onkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, p
     }
   }
 
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }

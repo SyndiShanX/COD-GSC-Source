@@ -4,40 +4,40 @@
  * Script: 3169.gsc
 ************************/
 
-func_D490(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
+func_D490(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self animmode("zonly_physics");
   if(isDefined(self.objective_position) && distancesquared(self.objective_position.origin, self.origin) > 36) {
     self orientmode("face angle", vectortoyaw(self.objective_position.origin - self.origin));
   }
 
-  self _meth_82EA(param_01, var_04, 1, param_02, 1);
-  var_05 = animhasnotetrack(var_04, "grenade_left");
-  var_06 = animhasnotetrack(var_04, "grenade_right");
-  var_07 = var_05 || var_06;
-  if(var_07) {
+  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  var_5 = animhasnotetrack(var_4, "grenade_left");
+  var_6 = animhasnotetrack(var_4, "grenade_right");
+  var_7 = var_5 || var_6;
+  if(var_7) {
     scripts\anim\shared::placeweaponon(self.var_394, "left");
-    thread lib_0A1E::func_231F(param_00, param_01);
-    if(var_05) {
-      self waittillmatch("grenade_left", param_01);
+    thread lib_0A1E::func_231F(var_0, var_1);
+    if(var_5) {
+      self waittillmatch("grenade_left", var_1);
     } else {
-      self waittillmatch("grenade_right", param_01);
+      self waittillmatch("grenade_right", var_1);
     }
 
     self _meth_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
-    var_08 = self _meth_84F3();
-    if(isDefined(var_08)) {
-      var_09 = vectortoyaw(var_08);
-      self orientmode("face angle", var_09);
+    var_8 = self _meth_84F3();
+    if(isDefined(var_8)) {
+      var_9 = vectortoyaw(var_8);
+      self orientmode("face angle", var_9);
     }
 
-    self waittillmatch("grenade_throw", param_01);
+    self waittillmatch("grenade_throw", var_1);
   } else {
-    thread lib_0A1E::func_231F(param_00, param_01);
-    self waittillmatch("grenade_throw", param_01);
+    thread lib_0A1E::func_231F(var_0, var_1);
+    self waittillmatch("grenade_throw", var_1);
     self _meth_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
   }
@@ -50,7 +50,7 @@ func_D490(param_00, param_01, param_02, param_03) {
   self notify("killanimscript");
 }
 
-func_116F6(param_00, param_01, param_02) {
+func_116F6(var_0, var_1, var_2) {
   scripts\asm\asm::asm_fireephemeralevent("grenade response", "return throw complete");
   scripts\anim\shared::placeweaponon(self.var_394, "right");
   if(isDefined(self.var_C3F2)) {
@@ -60,35 +60,35 @@ func_116F6(param_00, param_01, param_02) {
 }
 
 func_9E8C() {
-  var_00 = (self.origin[0], self.origin[1], self.origin[2] + 20);
-  var_01 = var_00 + anglesToForward(self.angles) * 50;
-  return sighttracepassed(var_00, var_01, 0, undefined);
+  var_0 = (self.origin[0], self.origin[1], self.origin[2] + 20);
+  var_1 = var_0 + anglesToForward(self.angles) * 50;
+  return sighttracepassed(var_0, var_1, 0, undefined);
 }
 
-func_3EDB(param_00, param_01, param_02) {
-  var_03 = undefined;
-  var_04 = 1000;
+func_3EDB(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = 1000;
   if(isDefined(self.isnodeoccupied)) {
-    var_04 = distance(self.origin, self.isnodeoccupied.origin);
+    var_4 = distance(self.origin, self.isnodeoccupied.origin);
   }
 
-  var_05 = [];
-  if(var_04 < 600 && func_9E8C()) {
-    if(var_04 < 300) {
-      return scripts\asm\asm::asm_lookupanimfromalias(param_01, "throw_short");
+  var_5 = [];
+  if(var_4 < 600 && func_9E8C()) {
+    if(var_4 < 300) {
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "throw_short");
     } else {
-      return scripts\asm\asm::asm_lookupanimfromalias(param_01, "throw_long");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "throw_long");
     }
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "throw_default");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "throw_default");
 }
 
-func_D48F(param_00, param_01, param_02, param_03) {
+func_D48F(var_0, var_1, var_2, var_3) {
   self.asm.var_312B = randomint(100) > 50;
 }
 
-func_1001F(param_00, param_01, param_02, param_03) {
+func_1001F(var_0, var_1, var_2, var_3) {
   if(!self.asm.var_312B) {
     return 0;
   }
@@ -101,22 +101,22 @@ func_1001F(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  var_04 = 0;
-  var_04 = angleclamp180(vectortoangles(self.objective_position.origin - self.origin)[1] - self.angles[1]);
-  if(abs(var_04) < 90 && param_03 == "backward") {
+  var_4 = 0;
+  var_4 = angleclamp180(vectortoangles(self.objective_position.origin - self.origin)[1] - self.angles[1]);
+  if(abs(var_4) < 90 && var_3 == "backward") {
     return 0;
   }
 
-  var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_02);
-  var_06 = getmovedelta(var_05, 0, 0.5);
-  var_07 = self gettweakablevalue(var_06);
-  if(!self maymovetopoint(var_07)) {
+  var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_2);
+  var_6 = getmovedelta(var_5, 0, 0.5);
+  var_7 = self gettweakablevalue(var_6);
+  if(!self maymovetopoint(var_7)) {
     return 0;
   }
 
   return 1;
 }
 
-_meth_85B1(param_00, param_01, param_02) {
+_meth_85B1(var_0, var_1, var_2) {
   self.asm.var_312B = undefined;
 }

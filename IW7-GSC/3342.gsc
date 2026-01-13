@@ -21,43 +21,43 @@ func_E85E() {
   playFX(level.kinetic_pulse_fx["blast"], self.origin);
   self playlocalsound("kinetic_pulse");
   self playSound("kinetic_pulse_npc");
-  var_00 = undefined;
+  var_0 = undefined;
   if(level.teambased) {
-    var_00 = scripts\cp\utility::getteamarray(scripts\cp\utility::getotherteam(self.team));
+    var_0 = scripts\cp\utility::getteamarray(scripts\cp\utility::getotherteam(self.team));
   } else {
-    var_00 = level.characters;
+    var_0 = level.characters;
   }
 
-  foreach(var_02 in var_00) {
-    if(!isDefined(var_02) || var_02 == self || !scripts\cp\utility::isreallyalive(var_02)) {
+  foreach(var_2 in var_0) {
+    if(!isDefined(var_2) || var_2 == self || !scripts\cp\utility::isreallyalive(var_2)) {
       continue;
     }
 
-    if(distance2dsquared(self.origin, var_02.origin) < 100000 && isplayer(var_02)) {
-      var_02 thread func_A6D4(self);
+    if(distance2dsquared(self.origin, var_2.origin) < 100000 && isplayer(var_2)) {
+      var_2 thread func_A6D4(self);
     }
   }
 
   self notify("powers_kinetic_pulse_cooldown_start");
 }
 
-func_A6D4(param_00) {
+func_A6D4(var_0) {
   self endon("disconnect");
-  var_01 = level.powers["power_kineticPulse"].var_5FF3;
+  var_1 = level.powers["power_kineticPulse"].var_5FF3;
   self shellshock("concussion_grenade_mp", 1);
   self.stunned = 1;
   if(isDefined(level.scriptablestatefunc)) {
     self thread[[level.scriptablestatefunc]](self);
   }
 
-  scripts\engine\utility::waittill_any_timeout_1(var_01, "death");
+  scripts\engine\utility::waittill_any_timeout_1(var_1, "death");
   self.stunned = undefined;
 }
 
 func_A6D5() {
-  var_00 = gettime() + level.powers["power_kineticPulse"].var_5FF3 * 1000;
+  var_0 = gettime() + level.powers["power_kineticPulse"].var_5FF3 * 1000;
   scripts\cp\powers\coop_powers::power_modifycooldownrate(0);
-  while(gettime() < var_00) {
+  while(gettime() < var_0) {
     wait(0.1);
   }
 

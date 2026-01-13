@@ -20,18 +20,18 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_121A5(param_00, param_01, param_02, param_03) {
+func_121A5(var_0, var_1, var_2, var_3) {
   return !lib_0C4C::func_195F();
 }
 
-func_121A1(param_00, param_01, param_02, param_03) {
+func_121A1(var_0, var_1, var_2, var_3) {
   return lib_0C4C::func_195F();
 }
 
-func_121A3(param_00, param_01, param_02, param_03) {
+func_121A3(var_0, var_1, var_2, var_3) {
   return lib_0C4C::func_19D2();
 }
 
-func_1219F(param_00, param_01, param_02, param_03) {
+func_1219F(var_0, var_1, var_2, var_3) {
   return !lib_0C4C::func_19D2();
 }

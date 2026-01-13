@@ -12,10 +12,10 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
-    var_00 thread initaarawardlist();
-    var_00.awardqueue = [];
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
+    var_0 thread initaarawardlist();
+    var_0.awardqueue = [];
   }
 }
 
@@ -31,108 +31,108 @@ initawards() {
   initmidmatchawards();
 }
 
-initbaseaward(param_00, param_01) {
-  level.awards[param_00] = spawnStruct();
-  level.awards[param_00].type = param_01;
-  var_02 = tablelookup("mp\awardtable.csv", 1, param_00, 10);
-  if(isDefined(var_02) && var_02 != "") {
-    level.awards[param_00].xpscoreevent = var_02;
+initbaseaward(var_0, var_1) {
+  level.awards[var_0] = spawnStruct();
+  level.awards[var_0].type = var_1;
+  var_2 = tablelookup("mp\awardtable.csv", 1, var_0, 10);
+  if(isDefined(var_2) && var_2 != "") {
+    level.awards[var_0].xpscoreevent = var_2;
   }
 
-  var_03 = tablelookup("mp\awardtable.csv", 1, param_00, 11);
-  if(isDefined(var_03) && var_03 != "") {
-    level.awards[param_00].gamescoreevent = var_03;
+  var_3 = tablelookup("mp\awardtable.csv", 1, var_0, 11);
+  if(isDefined(var_3) && var_3 != "") {
+    level.awards[var_0].gamescoreevent = var_3;
   }
 
-  var_04 = tablelookup("mp\awardtable.csv", 1, param_00, 3);
-  if(isDefined(var_04) && var_04 != "") {
-    level.awards[param_00].category = var_04;
+  var_4 = tablelookup("mp\awardtable.csv", 1, var_0, 3);
+  if(isDefined(var_4) && var_4 != "") {
+    level.awards[var_0].category = var_4;
   }
 
-  var_05 = tablelookup("mp\awardtable.csv", 1, param_00, 7);
-  if(isDefined(var_05) && var_05 != "") {
-    var_06 = randomfloat(1);
-    level.awards[param_00].aarpriority = float(var_05) + var_06;
+  var_5 = tablelookup("mp\awardtable.csv", 1, var_0, 7);
+  if(isDefined(var_5) && var_5 != "") {
+    var_6 = randomfloat(1);
+    level.awards[var_0].aarpriority = float(var_5) + var_6;
   }
 }
 
-initbasemidmatchaward(param_00, param_01) {
-  initbaseaward(param_00, param_01);
+initbasemidmatchaward(var_0, var_1) {
+  initbaseaward(var_0, var_1);
 }
 
-initmidmatchaward(param_00) {
-  initbasemidmatchaward(param_00, "midmatch");
+initmidmatchaward(var_0) {
+  initbasemidmatchaward(var_0, "midmatch");
 }
 
 initmidmatchawards() {
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\awardtable.csv", var_00, 1);
-    if(!isDefined(var_01) || var_01 == "") {
+    var_1 = tablelookupbyrow("mp\awardtable.csv", var_0, 1);
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\awardtable.csv", var_00, 9);
-    if(isDefined(var_02) && var_02 != "") {
-      initmidmatchaward(var_01);
+    var_2 = tablelookupbyrow("mp\awardtable.csv", var_0, 9);
+    if(isDefined(var_2) && var_2 != "") {
+      initmidmatchaward(var_1);
     }
 
-    level.awards[var_01].id = var_00;
-    var_00++;
+    level.awards[var_1].id = var_0;
+    var_0++;
   }
 }
 
-incplayerrecord(param_00) {
-  var_01 = self getplayerdata("common", "awards", param_00);
-  self setplayerdata("common", "awards", param_00, var_01 + 1);
+incplayerrecord(var_0) {
+  var_1 = self getplayerdata("common", "awards", var_0);
+  self setplayerdata("common", "awards", var_0, var_1 + 1);
 }
 
-giveaward(param_00, param_01, param_02) {
-  if(!isDefined(level.awards[param_00])) {
+giveaward(var_0, var_1, var_2) {
+  if(!isDefined(level.awards[var_0])) {
     return;
   }
 
-  if(!isenumvaluevalid("mp", "Awards", param_00)) {
+  if(!isenumvaluevalid("mp", "Awards", var_0)) {
     return;
   }
 
-  incplayerrecord(param_00);
-  addawardtoaarlist(param_00);
-  var_03 = level.awards[param_00].xpscoreevent;
-  if(isDefined(var_03)) {
-    if(isDefined(param_02)) {
-      var_04 = param_02;
+  incplayerrecord(var_0);
+  addawardtoaarlist(var_0);
+  var_3 = level.awards[var_0].xpscoreevent;
+  if(isDefined(var_3)) {
+    if(isDefined(var_2)) {
+      var_4 = var_2;
     } else {
-      var_04 = scripts\mp\rank::getscoreinfovalue(var_04);
+      var_4 = scripts\mp\rank::getscoreinfovalue(var_4);
     }
 
-    scripts\mp\rank::giverankxp(var_03, var_04);
+    scripts\mp\rank::giverankxp(var_3, var_4);
   }
 
-  var_05 = level.awards[param_00].gamescoreevent;
-  if(isDefined(var_05)) {
-    scripts\mp\utility::giveunifiedpoints(var_05, undefined, param_01, undefined, undefined, 1);
+  var_5 = level.awards[var_0].gamescoreevent;
+  if(isDefined(var_5)) {
+    scripts\mp\utility::giveunifiedpoints(var_5, undefined, var_1, undefined, undefined, 1);
   }
 
-  scripts\mp\utility::bufferednotify("earned_award_buffered", param_00);
-  if(isDefined(self.awardsthislife[param_00])) {
-    self.awardsthislife[param_00]++;
+  scripts\mp\utility::bufferednotify("earned_award_buffered", var_0);
+  if(isDefined(self.awardsthislife[var_0])) {
+    self.awardsthislife[var_0]++;
   } else {
-    self.awardsthislife[param_00] = 1;
+    self.awardsthislife[var_0] = 1;
   }
 
-  scripts\mp\matchdata::func_AF97(param_00);
-  scripts\mp\missions::func_D98F(param_00);
+  scripts\mp\matchdata::func_AF97(var_0);
+  scripts\mp\missions::func_D98F(var_0);
 }
 
-queuemidmatchaward(param_00) {
-  self.awardqueue[self.awardqueue.size] = param_00;
+queuemidmatchaward(var_0) {
+  self.awardqueue[self.awardqueue.size] = var_0;
   thread flushmidmatchawardqueuewhenable();
 }
 
 flushmidmatchawardqueue() {
-  foreach(var_01 in self.awardqueue) {
-    givemidmatchaward(var_01);
+  foreach(var_1 in self.awardqueue) {
+    givemidmatchaward(var_1);
   }
 
   self.awardqueue = [];
@@ -153,13 +153,13 @@ flushmidmatchawardqueuewhenable() {
   thread flushmidmatchawardqueue();
 }
 
-shouldqueuemidmatchaward(param_00) {
+shouldqueuemidmatchaward(var_0) {
   if(level.gameended) {
     return 0;
   }
 
   if(!scripts\mp\utility::isreallyalive(self)) {
-    if(!scripts\mp\utility::istrue(param_00) || scripts\mp\utility::isinkillcam()) {
+    if(!scripts\mp\utility::istrue(var_0) || scripts\mp\utility::isinkillcam()) {
       if(!scripts\mp\utility::isusingremote()) {
         return 1;
       }
@@ -169,8 +169,8 @@ shouldqueuemidmatchaward(param_00) {
   return 0;
 }
 
-func_B8E6(param_00) {
-  if(!isDefined(param_00) || !isDefined(level.awards) || !isDefined(level.awards[param_00])) {
+func_B8E6(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.awards) || !isDefined(level.awards[var_0])) {
     return;
   }
 
@@ -179,40 +179,40 @@ func_B8E6(param_00) {
     self.var_D8B1 = 0;
   }
 
-  var_01 = level.awards[param_00].id;
-  if(var_01 > 255) {
+  var_1 = level.awards[var_0].id;
+  if(var_1 > 255) {
     scripts\engine\utility::error("awardID can\'t be larger than 255! Must increased bit size for award id stored in ui_spectating_award_event_bitfield");
   }
 
-  var_02 = self.var_D8B1;
-  var_03 = 8 * self.var_1097C % 4;
-  var_04 = ~255 << var_03;
-  var_02 = var_02 &var_04;
-  var_05 = var_01 << var_03;
-  var_02 = var_02 | var_05;
-  self setclientomnvar("ui_spectating_award_event_bitfield", var_02);
+  var_2 = self.var_D8B1;
+  var_3 = 8 * self.var_1097C % 4;
+  var_4 = ~255 << var_3;
+  var_2 = var_2 &var_4;
+  var_5 = var_1 << var_3;
+  var_2 = var_2 | var_5;
+  self setclientomnvar("ui_spectating_award_event_bitfield", var_2);
   self setclientomnvar("ui_spectating_award_event_index", self.var_1097C);
-  self.var_D8B1 = var_02;
+  self.var_D8B1 = var_2;
   self.var_1097C++;
   if(self.var_1097C > 99) {
     self.var_1097C = 0;
   }
 }
 
-givemidmatchaward(param_00, param_01, param_02, param_03) {
+givemidmatchaward(var_0, var_1, var_2, var_3) {
   if(!isplayer(self)) {
     return;
   }
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
-    foreach(var_05 in level.players) {
-      if(var_05 ismlgspectator()) {
-        var_06 = var_05 getspectatingplayer();
-        if(isDefined(var_06)) {
-          var_07 = var_06 getentitynumber();
-          var_08 = self getentitynumber();
-          if(var_07 == var_08) {
-            var_05 func_B8E6(param_00);
+    foreach(var_5 in level.players) {
+      if(var_5 ismlgspectator()) {
+        var_6 = var_5 getspectatingplayer();
+        if(isDefined(var_6)) {
+          var_7 = var_6 getentitynumber();
+          var_8 = self getentitynumber();
+          if(var_7 == var_8) {
+            var_5 func_B8E6(var_0);
           }
         }
       }
@@ -223,68 +223,68 @@ givemidmatchaward(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  if(shouldqueuemidmatchaward(param_03)) {
-    queuemidmatchaward(param_00);
+  if(shouldqueuemidmatchaward(var_3)) {
+    queuemidmatchaward(var_0);
     return;
   }
 
-  scripts\mp\analyticslog::logevent_awardgained(param_00);
-  giveaward(param_00, param_01, param_02);
+  scripts\mp\analyticslog::logevent_awardgained(var_0);
+  giveaward(var_0, var_1, var_2);
 }
 
-addawardtoaarlist(param_00) {
+addawardtoaarlist(var_0) {
   if(!isDefined(self.aarawards)) {
     self.aarawards = [];
     self.aarawardcount = 0;
-    for(var_01 = 0; var_01 < 10; var_01++) {
-      var_02 = spawnStruct();
-      self.aarawards[var_01] = var_02;
-      var_02.ref = "none";
-      var_02.var_C1 = 0;
+    for(var_1 = 0; var_1 < 10; var_1++) {
+      var_2 = spawnStruct();
+      self.aarawards[var_1] = var_2;
+      var_2.ref = "none";
+      var_2.var_C1 = 0;
     }
   }
 
-  foreach(var_01, var_04 in self.aarawards) {
-    if(var_04.ref == param_00) {
-      var_04.var_C1++;
-      self setplayerdata("common", "round", "awards", var_01, "value", var_04.var_C1);
+  foreach(var_1, var_4 in self.aarawards) {
+    if(var_4.ref == var_0) {
+      var_4.var_C1++;
+      self setplayerdata("common", "round", "awards", var_1, "value", var_4.var_C1);
       return;
     }
   }
 
-  var_05 = level.awards[param_00].aarpriority;
-  for(var_06 = 0; var_06 < self.aarawards.size; var_06++) {
-    var_04 = self.aarawards[var_06];
-    if(var_04.ref == "none") {
+  var_5 = level.awards[var_0].aarpriority;
+  for(var_6 = 0; var_6 < self.aarawards.size; var_6++) {
+    var_4 = self.aarawards[var_6];
+    if(var_4.ref == "none") {
       break;
     }
 
-    var_07 = level.awards[var_04.ref].aarpriority;
-    if(var_05 > var_07) {
+    var_7 = level.awards[var_4.ref].aarpriority;
+    if(var_5 > var_7) {
       break;
     }
   }
 
-  if(var_06 >= self.aarawards.size) {
+  if(var_6 >= self.aarawards.size) {
     return;
   }
 
-  for(var_08 = self.aarawards.size - 2; var_08 >= var_06; var_08--) {
-    var_09 = var_08 + 1;
-    self.aarawards[var_09] = self.aarawards[var_08];
-    var_04 = self.aarawards[var_09];
-    if(var_04.ref != "none") {
-      self setplayerdata("common", "round", "awards", var_09, "award", var_04.ref);
-      self setplayerdata("common", "round", "awards", var_09, "value", var_04.var_C1);
+  for(var_8 = self.aarawards.size - 2; var_8 >= var_6; var_8--) {
+    var_9 = var_8 + 1;
+    self.aarawards[var_9] = self.aarawards[var_8];
+    var_4 = self.aarawards[var_9];
+    if(var_4.ref != "none") {
+      self setplayerdata("common", "round", "awards", var_9, "award", var_4.ref);
+      self setplayerdata("common", "round", "awards", var_9, "value", var_4.var_C1);
     }
   }
 
-  var_04 = spawnStruct();
-  self.aarawards[var_06] = var_04;
-  var_04.ref = param_00;
-  var_04.var_C1 = 1;
-  self setplayerdata("common", "round", "awards", var_06, "award", var_04.ref);
-  self setplayerdata("common", "round", "awards", var_06, "value", var_04.var_C1);
+  var_4 = spawnStruct();
+  self.aarawards[var_6] = var_4;
+  var_4.ref = var_0;
+  var_4.var_C1 = 1;
+  self setplayerdata("common", "round", "awards", var_6, "award", var_4.ref);
+  self setplayerdata("common", "round", "awards", var_6, "value", var_4.var_C1);
   if(self.aarawardcount < 10) {
     self.aarawardcount++;
     self setplayerdata("common", "round", "awardCount", self.aarawardcount);
@@ -304,9 +304,9 @@ initaarawardlist() {
   }
 
   self setplayerdata("common", "round", "awardCount", 0);
-  for(var_00 = 0; var_00 < 10; var_00++) {
-    self setplayerdata("common", "round", "awards", var_00, "award", "none");
-    self setplayerdata("common", "round", "awards", var_00, "value", 0);
+  for(var_0 = 0; var_0 < 10; var_0++) {
+    self setplayerdata("common", "round", "awards", var_0, "award", "none");
+    self setplayerdata("common", "round", "awards", var_0, "value", 0);
   }
 }
 

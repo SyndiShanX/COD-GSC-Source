@@ -43,271 +43,271 @@ func_8DF5() {
     return;
   }
 
-  var_00 = [];
-  var_00["oxygen"] = 0;
-  var_00["temperature"] = 0;
-  var_00["pressure"] = 0;
-  level.var_8DF1 = var_00;
+  var_0 = [];
+  var_0["oxygen"] = 0;
+  var_0["temperature"] = 0;
+  var_0["pressure"] = 0;
+  level.var_8DF1 = var_0;
 }
 
-func_8DF9(param_00, param_01) {
-  if(param_00 == "suit") {
-    var_02 = randomfloatrange(93.83, 93.87);
-    var_03 = randomintrange(18, 22);
-    var_04 = randomfloatrange(8.2, 8.4);
+func_8DF9(var_0, var_1) {
+  if(var_0 == "suit") {
+    var_2 = randomfloatrange(93.83, 93.87);
+    var_3 = randomintrange(18, 22);
+    var_4 = randomfloatrange(8.2, 8.4);
   } else {
-    var_02 = randomfloatrange(20.93, 20.97);
-    var_03 = randomintrange(18, 22);
-    var_04 = randomfloatrange(14.5, 14.9);
+    var_2 = randomfloatrange(20.93, 20.97);
+    var_3 = randomintrange(18, 22);
+    var_4 = randomfloatrange(14.5, 14.9);
   }
 
-  if(isDefined(param_01) && param_01) {
-    level.var_8DF1["oxygen"] = var_02;
-    level.var_8DF1["temperature"] = var_03;
-    level.var_8DF1["pressure"] = var_04;
+  if(isDefined(var_1) && var_1) {
+    level.var_8DF1["oxygen"] = var_2;
+    level.var_8DF1["temperature"] = var_3;
+    level.var_8DF1["pressure"] = var_4;
     return;
   }
 
   level.var_8DF1["oxygen"] = 0;
   level.var_8DF1["temperature"] = 0;
   level.var_8DF1["pressure"] = 0;
-  var_05 = randomfloatrange(3, 4);
-  thread func_8DFB("oxygen", var_05, var_02);
-  thread func_8DFB("temperature", var_05, var_03);
-  thread func_8DFB("pressure", var_05, var_04);
+  var_5 = randomfloatrange(3, 4);
+  thread func_8DFB("oxygen", var_5, var_2);
+  thread func_8DFB("temperature", var_5, var_3);
+  thread func_8DFB("pressure", var_5, var_4);
 }
 
-func_8DF8(param_00) {
+func_8DF8(var_0) {
   thread func_8DFA("oxygen", randomfloatrange(3, 4), 0);
   thread func_8DFA("temperature", randomfloatrange(3, 4), 0);
   thread func_8DFA("pressure", randomfloatrange(3, 4), 0);
 }
 
-func_8DF7(param_00, param_01) {
-  var_02 = randomfloatrange(93.83, 93.87);
-  var_03 = randomintrange(18, 22);
-  var_04 = randomfloatrange(8.2, 8.4);
-  level.var_8DF1["oxygen"] = var_02;
-  level.var_8DF1["temperature"] = var_03;
-  level.var_8DF1["pressure"] = var_04;
-  if(isDefined(param_01) && param_01) {
+func_8DF7(var_0, var_1) {
+  var_2 = randomfloatrange(93.83, 93.87);
+  var_3 = randomintrange(18, 22);
+  var_4 = randomfloatrange(8.2, 8.4);
+  level.var_8DF1["oxygen"] = var_2;
+  level.var_8DF1["temperature"] = var_3;
+  level.var_8DF1["pressure"] = var_4;
+  if(isDefined(var_1) && var_1) {
     return;
   }
 
-  if(!isDefined(param_00)) {
-    setomnvar("ui_helmet_meter_oxygen", func_8DFC("oxygen", var_02));
-    setomnvar("ui_helmet_meter_temperature", func_8DFC("temperature", var_03));
-    setomnvar("ui_helmet_meter_pressure", func_8DFC("pressure", var_04));
+  if(!isDefined(var_0)) {
+    setomnvar("ui_helmet_meter_oxygen", func_8DFC("oxygen", var_2));
+    setomnvar("ui_helmet_meter_temperature", func_8DFC("temperature", var_3));
+    setomnvar("ui_helmet_meter_pressure", func_8DFC("pressure", var_4));
     return;
   }
 
-  thread func_8DFB("oxygen", param_00, var_02);
-  thread func_8DFB("temperature", param_00, var_03);
-  thread func_8DFB("pressure", param_00, var_04);
+  thread func_8DFB("oxygen", var_0, var_2);
+  thread func_8DFB("temperature", var_0, var_3);
+  thread func_8DFB("pressure", var_0, var_4);
 }
 
-func_8DF6(param_00, param_01) {
-  var_02 = randomfloatrange(20.93, 20.97);
-  var_03 = randomintrange(18, 22);
-  var_04 = randomfloatrange(14.5, 14.9);
-  level.var_8DF1["oxygen"] = var_02;
-  level.var_8DF1["temperature"] = var_03;
-  level.var_8DF1["pressure"] = var_04;
-  if(isDefined(param_01) && param_01) {
+func_8DF6(var_0, var_1) {
+  var_2 = randomfloatrange(20.93, 20.97);
+  var_3 = randomintrange(18, 22);
+  var_4 = randomfloatrange(14.5, 14.9);
+  level.var_8DF1["oxygen"] = var_2;
+  level.var_8DF1["temperature"] = var_3;
+  level.var_8DF1["pressure"] = var_4;
+  if(isDefined(var_1) && var_1) {
     return;
   }
 
-  if(!isDefined(param_00)) {
-    setomnvar("ui_helmet_meter_oxygen", func_8DFC("oxygen", var_02));
-    setomnvar("ui_helmet_meter_temperature", func_8DFC("temperature", var_03));
-    setomnvar("ui_helmet_meter_pressure", func_8DFC("pressure", var_04));
+  if(!isDefined(var_0)) {
+    setomnvar("ui_helmet_meter_oxygen", func_8DFC("oxygen", var_2));
+    setomnvar("ui_helmet_meter_temperature", func_8DFC("temperature", var_3));
+    setomnvar("ui_helmet_meter_pressure", func_8DFC("pressure", var_4));
     return;
   }
 
-  thread func_8DFB("oxygen", param_00, var_02);
-  thread func_8DFB("temperature", param_00, var_03);
-  thread func_8DFB("pressure", param_00, var_04);
+  thread func_8DFB("oxygen", var_0, var_2);
+  thread func_8DFB("temperature", var_0, var_3);
+  thread func_8DFB("pressure", var_0, var_4);
 }
 
-func_8DFD(param_00, param_01, param_02) {
-  if(isDefined(param_02) && param_02) {
-    level.var_8DF1["oxygen"] = param_00;
+func_8DFD(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_2) {
+    level.var_8DF1["oxygen"] = var_0;
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(3, 4);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(3, 4);
   }
 
-  func_8DFA("oxygen", param_01, param_00);
+  func_8DFA("oxygen", var_1, var_0);
   func_8E00("oxygen");
 }
 
-func_8DFF(param_00, param_01, param_02) {
-  if(isDefined(param_02) && param_02) {
-    level.var_8DF1["temperature"] = param_00;
+func_8DFF(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_2) {
+    level.var_8DF1["temperature"] = var_0;
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(3, 4);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(3, 4);
   }
 
-  func_8DFA("temperature", param_01, param_00);
+  func_8DFA("temperature", var_1, var_0);
   func_8E00("temperature");
 }
 
-func_8DFE(param_00, param_01, param_02) {
-  if(isDefined(param_02) && param_02) {
-    level.var_8DF1["pressure"] = param_00;
+func_8DFE(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_2) {
+    level.var_8DF1["pressure"] = var_0;
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(3, 4);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(3, 4);
   }
 
-  func_8DFA("pressure", param_01, param_00);
+  func_8DFA("pressure", var_1, var_0);
   func_8E00("pressure");
 }
 
-func_8DF2(param_00) {
-  var_01 = randomfloatrange(20.93, 20.97);
-  var_02 = randomintrange(18, 22);
-  var_03 = randomfloatrange(14.5, 14.9);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+func_8DF2(var_0) {
+  var_1 = randomfloatrange(20.93, 20.97);
+  var_2 = randomintrange(18, 22);
+  var_3 = randomfloatrange(14.5, 14.9);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("oxygen", param_00, var_01);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+  thread func_8DFB("oxygen", var_0, var_1);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("temperature", param_00, var_02);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+  thread func_8DFB("temperature", var_0, var_2);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("pressure", param_00, var_03);
+  thread func_8DFB("pressure", var_0, var_3);
 }
 
-func_8DF3(param_00) {
-  var_01 = randomfloatrange(93.83, 93.87);
-  var_02 = randomintrange(18, 22);
-  var_03 = randomfloatrange(8.2, 8.4);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+func_8DF3(var_0) {
+  var_1 = randomfloatrange(93.83, 93.87);
+  var_2 = randomintrange(18, 22);
+  var_3 = randomfloatrange(8.2, 8.4);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("oxygen", param_00, var_01);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+  thread func_8DFB("oxygen", var_0, var_1);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("temperature", param_00, var_02);
-  if(!isDefined(param_00)) {
-    param_00 = randomfloatrange(3, 4);
+  thread func_8DFB("temperature", var_0, var_2);
+  if(!isDefined(var_0)) {
+    var_0 = randomfloatrange(3, 4);
   }
 
-  thread func_8DFB("pressure", param_00, var_03);
+  thread func_8DFB("pressure", var_0, var_3);
 }
 
-func_8DF4(param_00, param_01) {
-  if(param_00 == "interior") {
-    var_02 = randomfloatrange(20.93, 20.97);
-    var_03 = randomintrange(18, 22);
-    var_04 = randomfloatrange(14.5, 14.9);
+func_8DF4(var_0, var_1) {
+  if(var_0 == "interior") {
+    var_2 = randomfloatrange(20.93, 20.97);
+    var_3 = randomintrange(18, 22);
+    var_4 = randomfloatrange(14.5, 14.9);
   } else {
-    var_02 = randomfloatrange(6, 8);
-    var_03 = randomintrange(-60, -50);
-    var_04 = randomfloatrange(4, 6);
+    var_2 = randomfloatrange(6, 8);
+    var_3 = randomintrange(-60, -50);
+    var_4 = randomfloatrange(4, 6);
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(2, 3);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(2, 3);
   }
 
-  thread func_8DFB("oxygen", param_01, var_02);
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(2, 3);
+  thread func_8DFB("oxygen", var_1, var_2);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(2, 3);
   }
 
-  thread func_8DFB("temperature", param_01, var_03);
-  if(!isDefined(param_01)) {
-    param_01 = randomfloatrange(2, 3);
+  thread func_8DFB("temperature", var_1, var_3);
+  if(!isDefined(var_1)) {
+    var_1 = randomfloatrange(2, 3);
   }
 
-  thread func_8DFB("pressure", param_01, var_04);
+  thread func_8DFB("pressure", var_1, var_4);
 }
 
-func_8DFA(param_00, param_01, param_02) {
-  var_03 = 0;
-  var_04 = 0;
-  var_05 = 0;
-  var_06 = abs(param_02 - level.var_8DF1[param_00] / param_01 * 0.05);
-  var_07 = "ui_helmet_meter_" + param_00;
-  if(param_00 == "oxygen") {
-    var_03 = 1;
-    var_04 = 1;
-  } else if(param_00 == "temperature") {
-    var_03 = 2;
-    var_04 = 3;
-  } else if(param_00 == "pressure") {
-    var_03 = 1;
-    var_04 = 1;
+func_8DFA(var_0, var_1, var_2) {
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = abs(var_2 - level.var_8DF1[var_0] / var_1 * 0.05);
+  var_7 = "ui_helmet_meter_" + var_0;
+  if(var_0 == "oxygen") {
+    var_3 = 1;
+    var_4 = 1;
+  } else if(var_0 == "temperature") {
+    var_3 = 2;
+    var_4 = 3;
+  } else if(var_0 == "pressure") {
+    var_3 = 1;
+    var_4 = 1;
   }
 
-  var_08 = var_03 * 0.05;
-  var_09 = var_04 * 0.05;
+  var_8 = var_3 * 0.05;
+  var_9 = var_4 * 0.05;
   var_0A = 1;
-  if(param_02 == level.var_8DF1[param_00]) {
+  if(var_2 == level.var_8DF1[var_0]) {
     return;
-  } else if(param_02 < level.var_8DF1[param_00]) {
+  } else if(var_2 < level.var_8DF1[var_0]) {
     var_0A = 0;
   }
 
   var_0B = 0;
-  while(var_0B < param_01) {
+  while(var_0B < var_1) {
     if(var_0A) {
-      level.var_8DF1[param_00] = level.var_8DF1[param_00] + var_06;
+      level.var_8DF1[var_0] = level.var_8DF1[var_0] + var_6;
     } else {
-      level.var_8DF1[param_00] = level.var_8DF1[param_00] - var_06;
+      level.var_8DF1[var_0] = level.var_8DF1[var_0] - var_6;
     }
 
-    var_0C = func_8DFC(param_00, level.var_8DF1[param_00]);
-    setomnvar(var_07, var_0C);
+    var_0C = func_8DFC(var_0, level.var_8DF1[var_0]);
+    setomnvar(var_7, var_0C);
     wait(0.05);
     var_0B = var_0B + 0.05;
   }
 
-  var_0C = func_8DFC(param_00, level.var_8DF1[param_00]);
-  setomnvar(var_07, var_0C);
+  var_0C = func_8DFC(var_0, level.var_8DF1[var_0]);
+  setomnvar(var_7, var_0C);
 }
 
-func_8E00(param_00) {
-  var_01 = 0;
-  if(param_00 == "oxygen") {
-    var_01 = randomfloatrange(-0.5, 0.5) + level.var_8DF1[param_00];
-  } else if(param_00 == "temperature") {
-    var_01 = randomintrange(-1, 1) + level.var_8DF1[param_00];
-  } else if(param_00 == "pressure") {
-    var_01 = randomfloatrange(-0.5, 0.5) + level.var_8DF1[param_00];
+func_8E00(var_0) {
+  var_1 = 0;
+  if(var_0 == "oxygen") {
+    var_1 = randomfloatrange(-0.5, 0.5) + level.var_8DF1[var_0];
+  } else if(var_0 == "temperature") {
+    var_1 = randomintrange(-1, 1) + level.var_8DF1[var_0];
+  } else if(var_0 == "pressure") {
+    var_1 = randomfloatrange(-0.5, 0.5) + level.var_8DF1[var_0];
   }
 
-  var_02 = level.var_8DF1[param_00];
-  var_03 = randomfloatrange(1, 3);
-  func_8DFA(param_00, var_03, var_01);
-  var_03 = randomfloatrange(1, 2);
-  func_8DFA(param_00, var_03, var_02);
+  var_2 = level.var_8DF1[var_0];
+  var_3 = randomfloatrange(1, 3);
+  func_8DFA(var_0, var_3, var_1);
+  var_3 = randomfloatrange(1, 2);
+  func_8DFA(var_0, var_3, var_2);
 }
 
-func_8DFB(param_00, param_01, param_02) {
-  func_8DFA(param_00, param_01, param_02);
-  func_8E00(param_00);
+func_8DFB(var_0, var_1, var_2) {
+  func_8DFA(var_0, var_1, var_2);
+  func_8E00(var_0);
 }
 
-func_8DFC(param_00, param_01) {
-  var_02 = int(param_01);
-  return var_02;
+func_8DFC(var_0, var_1) {
+  var_2 = int(var_1);
+  return var_2;
 }

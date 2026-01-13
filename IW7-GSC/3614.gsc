@@ -11,10 +11,10 @@ func_5374() {
 
 func_5375() {
   scripts\engine\utility::waitframe();
-  var_00 = getEntArray("scriptable", "code_classname");
-  foreach(var_02 in var_00) {
-    if(issubstr(var_02.model, "veh_")) {
-      var_02 thread func_5376();
+  var_0 = getEntArray("scriptable", "code_classname");
+  foreach(var_2 in var_0) {
+    if(issubstr(var_2.model, "veh_")) {
+      var_2 thread func_5376();
     }
   }
 }
@@ -22,8 +22,8 @@ func_5375() {
 func_5376() {
   self.var_ED = "vehicle";
   for(;;) {
-    self waittill("scriptableNotification", var_00, var_01);
-    switch (var_00) {
+    self waittill("scriptableNotification", var_0, var_1);
+    switch (var_0) {
       case "onfire":
       case "flareup":
         thread func_329E();

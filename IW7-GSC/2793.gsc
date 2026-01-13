@@ -4,7 +4,7 @@
 ***************************************/
 
 init() {
-  level.func_90AE = getserverhostname();
+  level.var_90AE = getserverhostname();
   setfriendlyfire(scripts\mp\tweakables::gettweakablevalue("team", "fftype"));
   constraingametype(getdvar("g_gametype"));
 
@@ -15,69 +15,69 @@ init() {
 }
 
 updateserversettings() {
-  var_00 = scripts\mp\tweakables::gettweakablevalue("team", "fftype");
+  var_0 = scripts\mp\tweakables::gettweakablevalue("team", "fftype");
 
-  if(level.friendlyfire != var_00) {
-    setfriendlyfire(var_00);
+  if(level.friendlyfire != var_0) {
+    setfriendlyfire(var_0);
   }
 }
 
-constraingametype(var_00) {
-  var_01 = getEntArray();
+constraingametype(var_0) {
+  var_1 = getEntArray();
 
-  for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    var_03 = var_1[var_02];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(var_00 == "dm") {
+    if(var_0 == "dm") {
       if(isDefined(var_3.script_gametype_dm) && var_3.script_gametype_dm != "1") {
-        var_03 delete();
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var_00 == "tdm") {
+    if(var_0 == "tdm") {
       if(isDefined(var_3.script_gametype_tdm) && var_3.script_gametype_tdm != "1") {
-        var_03 delete();
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var_00 == "ctf") {
+    if(var_0 == "ctf") {
       if(isDefined(var_3.script_gametype_ctf) && var_3.script_gametype_ctf != "1") {
-        var_03 delete();
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var_00 == "hq") {
+    if(var_0 == "hq") {
       if(isDefined(var_3.script_gametype_hq) && var_3.script_gametype_hq != "1") {
-        var_03 delete();
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var_00 == "sd") {
+    if(var_0 == "sd") {
       if(isDefined(var_3.script_gametype_sd) && var_3.script_gametype_sd != "1") {
-        var_03 delete();
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var_00 == "koth") {
+    if(var_0 == "koth") {
       if(isDefined(var_3.script_gametype_koth) && var_3.script_gametype_koth != "1") {
-        var_03 delete();
+        var_3 delete();
       }
     }
   }
 }
 
-setfriendlyfire(var_00) {
-  level.friendlyfire = var_00;
-  setdvar("ui_friendlyfire", var_00);
-  setdvar("cg_drawFriendlyHUDGrenades", var_00);
+setfriendlyfire(var_0) {
+  level.friendlyfire = var_0;
+  setdvar("ui_friendlyfire", var_0);
+  setdvar("cg_drawFriendlyHUDGrenades", var_0);
 }

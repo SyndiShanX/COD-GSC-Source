@@ -77,14 +77,14 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_12245(param_00, param_01, param_02, param_03) {
+func_12245(var_0, var_1, var_2, var_3) {
   return isDefined(self.vehicle_getspawnerarray);
 }
 
-func_12440(param_00, param_01, param_02, param_03) {
+func_12440(var_0, var_1, var_2, var_3) {
   return !isDefined(self.vehicle_getspawnerarray);
 }
 
-func_12272(param_00, param_01, param_02, param_03) {
+func_12272(var_0, var_1, var_2, var_3) {
   return !lib_0F3D::func_B5FC();
 }

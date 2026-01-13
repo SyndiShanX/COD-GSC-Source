@@ -141,34 +141,34 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_idle_to_choose_movetype1(param_00, param_01, param_02, param_03) {
+trans_idle_to_choose_movetype1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_check_move_to_idle_exit_sprint0(param_00, param_01, param_02, param_03) {
+trans_check_move_to_idle_exit_sprint0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-trans_pass_sprint_in_to_sprint_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_in_to_sprint_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_out_to_move_done2(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_move_done2(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_choose_movetype_to_check_move0(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_check_move0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_in_to_idle_exit_run1(param_00, param_01, param_02, param_03) {
+trans_pass_run_in_to_idle_exit_run1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_out_to_move_done1(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_move_done1(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pain_moving_done_to_choose_movetype0(param_00, param_01, param_02, param_03) {
+trans_pain_moving_done_to_choose_movetype0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }

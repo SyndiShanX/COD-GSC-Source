@@ -4,335 +4,335 @@
  * Script: scripts\sp\math.gsc
 *******************************/
 
-func_AB6F(param_00, param_01, param_02) {
-  return param_00 + param_01 - param_00 * param_02;
+func_AB6F(var_0, var_1, var_2) {
+  return var_0 + var_1 - var_0 * var_2;
 }
 
-func_AB7D(param_00, param_01, param_02) {
-  return param_02 - param_00 / param_01 - param_00;
+func_AB7D(var_0, var_1, var_2) {
+  return var_2 - var_0 / var_1 - var_0;
 }
 
-func_13198(param_00, param_01) {
-  return vectornormalize(param_00 - vectordot(param_01, param_00) * param_01);
+func_13198(var_0, var_1) {
+  return vectornormalize(var_0 - vectordot(var_1, var_0) * var_1);
 }
 
-func_13199(param_00, param_01) {
-  return vectornormalize(2 * func_13198(param_00, param_01) - param_00);
+func_13199(var_0, var_1) {
+  return vectornormalize(2 * func_13198(var_0, var_1) - var_0);
 }
 
-func_7BC5(param_00, param_01, param_02, param_03) {
-  var_04 = param_03 * 2 - 1;
-  var_05 = param_01 - param_00;
-  var_06 = (0, 0, 1);
-  var_07 = param_00 + param_03 * var_05;
-  var_07 = var_07 + var_04 * var_04 * -1 + 1 * param_02 * var_06;
-  return var_07;
+func_7BC5(var_0, var_1, var_2, var_3) {
+  var_4 = var_3 * 2 - 1;
+  var_5 = var_1 - var_0;
+  var_6 = (0, 0, 1);
+  var_7 = var_0 + var_3 * var_5;
+  var_7 = var_7 + var_4 * var_4 * -1 + 1 * var_2 * var_6;
+  return var_7;
 }
 
-func_DF68(param_00, param_01, param_02, param_03, param_04) {
-  return param_03 + param_00 - param_01 * param_04 - param_03 / param_02 - param_01;
+func_DF68(var_0, var_1, var_2, var_3, var_4) {
+  return var_3 + var_0 - var_1 * var_4 - var_3 / var_2 - var_1;
 }
 
-func_C097(param_00, param_01, param_02) {
-  if(param_00 > param_01) {
-    var_03 = param_00;
-    param_00 = param_01;
-    param_01 = var_03;
+func_C097(var_0, var_1, var_2) {
+  if(var_0 > var_1) {
+    var_3 = var_0;
+    var_0 = var_1;
+    var_1 = var_3;
   }
 
-  if(param_02 > param_01) {
+  if(var_2 > var_1) {
     return 1;
-  } else if(param_02 < param_00) {
+  } else if(var_2 < var_0) {
     return 0;
-  } else if(param_00 == param_01) {}
+  } else if(var_0 == var_1) {}
 
-  return param_02 - param_00 / param_01 - param_00;
+  return var_2 - var_0 / var_1 - var_0;
 }
 
-func_6A8E(param_00, param_01, param_02) {
-  return param_01 * param_02 + param_00 * 1 - param_02;
+func_6A8E(var_0, var_1, var_2) {
+  return var_1 * var_2 + var_0 * 1 - var_2;
 }
 
-func_C09C(param_00) {
-  if(param_00 < 0.5) {
-    param_00 = param_00 * 2;
-    param_00 = func_C09A(param_00);
-    param_00 = param_00 * 0.5;
+func_C09C(var_0) {
+  if(var_0 < 0.5) {
+    var_0 = var_0 * 2;
+    var_0 = func_C09A(var_0);
+    var_0 = var_0 * 0.5;
   } else {
-    param_00 = param_00 - 0.5 * 2;
-    param_00 = func_C09B(param_00);
-    param_00 = param_00 * 0.5 + 0.5;
+    var_0 = var_0 - 0.5 * 2;
+    var_0 = func_C09B(var_0);
+    var_0 = var_0 * 0.5 + 0.5;
   }
 
-  return param_00;
+  return var_0;
 }
 
-func_C09A(param_00) {
-  return param_00 * param_00;
+func_C09A(var_0) {
+  return var_0 * var_0;
 }
 
-func_C09B(param_00) {
-  param_00 = 1 - param_00;
-  param_00 = param_00 * param_00;
-  param_00 = 1 - param_00;
-  return param_00;
+func_C09B(var_0) {
+  var_0 = 1 - var_0;
+  var_0 = var_0 * var_0;
+  var_0 = 1 - var_0;
+  return var_0;
 }
 
-func_ACE9(param_00, param_01, param_02, param_03) {
-  var_04 = vectordot(param_03, param_02);
-  var_05 = param_01 - param_00;
-  var_06 = vectordot(param_03, var_05);
-  if(var_06 == 0) {
+func_ACE9(var_0, var_1, var_2, var_3) {
+  var_4 = vectordot(var_3, var_2);
+  var_5 = var_1 - var_0;
+  var_6 = vectordot(var_3, var_5);
+  if(var_6 == 0) {
     return undefined;
   }
 
-  var_07 = var_04 - vectordot(param_03, param_00) / var_06;
-  var_08 = param_00 + var_05 * var_07;
-  return var_08;
+  var_7 = var_4 - vectordot(var_3, var_0) / var_6;
+  var_8 = var_0 + var_5 * var_7;
+  return var_8;
 }
 
-func_13DE5(param_00, param_01, param_02) {
-  while(param_02 > param_01) {
-    param_02 = param_02 - param_01 - param_00 + 1;
+func_13DE5(var_0, var_1, var_2) {
+  while(var_2 > var_1) {
+    var_2 = var_2 - var_1 - var_0 + 1;
   }
 
-  return param_02;
+  return var_2;
 }
 
-func_6B04(param_00, param_01, param_02) {
-  return (func_1E78(param_00[0], param_01[0], param_02), func_1E78(param_00[1], param_01[1], param_02), func_1E78(param_00[2], param_01[2], param_02));
+func_6B04(var_0, var_1, var_2) {
+  return (func_1E78(var_0[0], var_1[0], var_2), func_1E78(var_0[1], var_1[1], var_2), func_1E78(var_0[2], var_1[2], var_2));
 }
 
-func_1E78(param_00, param_01, param_02) {
-  return angleclamp(param_00 + angleclamp180(param_01 - param_00) * param_02);
+func_1E78(var_0, var_1, var_2) {
+  return angleclamp(var_0 + angleclamp180(var_1 - var_0) * var_2);
 }
 
-func_9C85(param_00) {
-  var_01 = 0;
+func_9C85(var_0) {
+  var_1 = 0;
   if(isplayer(self)) {
-    var_02 = param_00 - self getorigin();
-    var_03 = anglesToForward(self getplayerangles(1));
-    var_01 = vectordot(var_02, var_03);
+    var_2 = var_0 - self getorigin();
+    var_3 = anglesToForward(self getplayerangles(1));
+    var_1 = vectordot(var_2, var_3);
   } else {
-    var_02 = var_02 - self.origin;
-    var_03 = anglesToForward(self.angles);
-    var_01 = vectordot(var_02, var_03);
+    var_2 = var_2 - self.origin;
+    var_3 = anglesToForward(self.angles);
+    var_1 = vectordot(var_2, var_3);
   }
 
-  return var_01 > 0;
+  return var_1 > 0;
 }
 
-func_9C86(param_00) {
-  var_01 = 0;
+func_9C86(var_0) {
+  var_1 = 0;
   if(isplayer(self)) {
-    var_02 = param_00 - self getorigin();
-    var_03 = anglestoright(self getplayerangles(1));
-    var_01 = vectordot(var_02, var_03);
+    var_2 = var_0 - self getorigin();
+    var_3 = anglestoright(self getplayerangles(1));
+    var_1 = vectordot(var_2, var_3);
   } else {
-    var_02 = var_02 - self.origin;
-    var_03 = anglestoright(self.angles);
-    var_01 = vectordot(var_02, var_03);
+    var_2 = var_2 - self.origin;
+    var_3 = anglestoright(self.angles);
+    var_1 = vectordot(var_2, var_3);
   }
 
-  return var_01 > 0;
+  return var_1 > 0;
 }
 
-func_7ADE(param_00, param_01) {
-  return (param_00[0] + param_01[0] * 0.5, param_00[1] + param_01[1] * 0.5, param_00[2] + param_01[2] * 0.5);
+func_7ADE(var_0, var_1) {
+  return (var_0[0] + var_1[0] * 0.5, var_0[1] + var_1[1] * 0.5, var_0[2] + var_1[2] * 0.5);
 }
 
-func_F47E(param_00) {
-  var_01 = anglesToForward(self.angles);
-  var_02 = vectorcross(var_01, param_00);
-  var_03 = vectorcross(param_00, var_02);
-  self.angles = axistoangles(var_03, var_02, param_00);
+func_F47E(var_0) {
+  var_1 = anglesToForward(self.angles);
+  var_2 = vectorcross(var_1, var_0);
+  var_3 = vectorcross(var_0, var_2);
+  self.angles = axistoangles(var_3, var_2, var_0);
 }
 
 func_DCA0() {
-  var_00 = randomfloat(360);
-  return (cos(var_00), sin(var_00), 0);
+  var_0 = randomfloat(360);
+  return (cos(var_0), sin(var_0), 0);
 }
 
-func_F47F(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = self.angles;
+func_F47F(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = self.angles;
   }
 
-  self.angles = func_31AB(param_00, param_01);
+  self.angles = func_31AB(var_0, var_1);
 }
 
-func_31AB(param_00, param_01) {
-  var_02 = acos(-1 * vectordot(anglesToForward(param_01), param_00));
-  var_03 = anglestoup(param_01 + (var_02, 0, 0));
-  var_04 = vectorcross(var_03, param_00);
-  var_03 = vectorcross(param_00, var_04);
-  return axistoangles(var_03, var_04, param_00);
+func_31AB(var_0, var_1) {
+  var_2 = acos(-1 * vectordot(anglesToForward(var_1), var_0));
+  var_3 = anglestoup(var_1 + (var_2, 0, 0));
+  var_4 = vectorcross(var_3, var_0);
+  var_3 = vectorcross(var_0, var_4);
+  return axistoangles(var_3, var_4, var_0);
 }
 
-func_4A7B(param_00, param_01, param_02) {
-  thread func_4A7C(param_00, param_01, param_02);
+func_4A7B(var_0, var_1, var_2) {
+  thread func_4A7C(var_0, var_1, var_2);
 }
 
-func_4A7C(param_00, param_01, param_02) {
+func_4A7C(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_spring");
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var_03 = func_10AAE(param_01, self.origin, anglesToForward(self.angles) * param_02);
-  while(distancesquared(self.origin, param_00) > squared(0.1)) {
-    self.origin = func_10AB4(var_03, param_00);
+  var_3 = func_10AAE(var_1, self.origin, anglesToForward(self.angles) * var_2);
+  while(distancesquared(self.origin, var_0) > squared(0.1)) {
+    self.origin = func_10AB4(var_3, var_0);
     wait(0.05);
   }
 
   self notify("movedone");
-  func_10AAA(var_03);
+  func_10AAA(var_3);
 }
 
-func_4A79(param_00, param_01, param_02) {
-  thread func_4A7A(param_00, param_01, param_02);
+func_4A79(var_0, var_1, var_2) {
+  thread func_4A7A(var_0, var_1, var_2);
 }
 
-func_4A7A(param_00, param_01, param_02) {
+func_4A7A(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_spring");
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var_03 = func_10AAE(param_01, self.origin, anglesToForward(self.angles) * param_02);
-  while(distancesquared(self.origin, param_00) > squared(0.1)) {
-    self.origin = func_10AB4(var_03, param_00);
-    self.angles = vectortoangles(func_10AAC(var_03));
+  var_3 = func_10AAE(var_1, self.origin, anglesToForward(self.angles) * var_2);
+  while(distancesquared(self.origin, var_0) > squared(0.1)) {
+    self.origin = func_10AB4(var_3, var_0);
+    self.angles = vectortoangles(func_10AAC(var_3));
     wait(0.05);
   }
 
   self notify("movedone");
-  func_10AAA(var_03);
+  func_10AAA(var_3);
 }
 
-func_C7E2(param_00, param_01, param_02, param_03) {
-  thread func_C7E3(param_00, param_01, param_02, param_03);
+func_C7E2(var_0, var_1, var_2, var_3) {
+  thread func_C7E3(var_0, var_1, var_2, var_3);
 }
 
-func_C7E3(param_00, param_01, param_02, param_03) {
+func_C7E3(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("stop_spring");
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var_04 = func_10AAF(param_01, param_02, self.origin, anglesToForward(self.angles) * param_03);
-  while(distancesquared(self.origin, param_00) > squared(0.1)) {
-    self.origin = func_10AB4(var_04, param_00);
+  var_4 = func_10AAF(var_1, var_2, self.origin, anglesToForward(self.angles) * var_3);
+  while(distancesquared(self.origin, var_0) > squared(0.1)) {
+    self.origin = func_10AB4(var_4, var_0);
     wait(0.05);
   }
 
   self notify("movedone");
-  func_10AAA(var_04);
+  func_10AAA(var_4);
 }
 
-func_12B88(param_00, param_01, param_02, param_03) {
-  thread func_12B89(param_00, param_01, param_02, param_03);
+func_12B88(var_0, var_1, var_2, var_3) {
+  thread func_12B89(var_0, var_1, var_2, var_3);
 }
 
-func_12B89(param_00, param_01, param_02, param_03) {
+func_12B89(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("stop_spring");
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var_04 = func_10AB0(param_01, param_02, self.origin, anglesToForward(self.angles) * param_03);
-  while(distancesquared(self.origin, param_00) > squared(0.1) || length(func_10AAC(var_04)) < squared(0.1)) {
-    self.origin = func_10AB4(var_04, param_00);
+  var_4 = func_10AB0(var_1, var_2, self.origin, anglesToForward(self.angles) * var_3);
+  while(distancesquared(self.origin, var_0) > squared(0.1) || length(func_10AAC(var_4)) < squared(0.1)) {
+    self.origin = func_10AB4(var_4, var_0);
     wait(0.05);
   }
 
   self notify("movedone");
-  func_10AAA(var_04);
+  func_10AAA(var_4);
 }
 
-func_10AAE(param_00, param_01, param_02) {
-  var_03 = func_10AA8(param_01, param_02);
-  var_04 = param_00 * 0.05;
-  var_05 = exp(-1 * var_04);
-  level.var_10AB5[var_03].var_332A = var_04 + 1 * var_05;
-  level.var_10AB5[var_03].var_332B = var_05;
-  level.var_10AB5[var_03].var_332C = -1 * var_04 * var_04 * var_05;
-  level.var_10AB5[var_03].var_332D = 1 - var_04 * var_05;
-  func_10AB2(var_03, param_01);
-  func_10AB3(var_03, param_02);
-  return var_03;
+func_10AAE(var_0, var_1, var_2) {
+  var_3 = func_10AA8(var_1, var_2);
+  var_4 = var_0 * 0.05;
+  var_5 = exp(-1 * var_4);
+  level.var_10AB5[var_3].var_332A = var_4 + 1 * var_5;
+  level.var_10AB5[var_3].var_332B = var_5;
+  level.var_10AB5[var_3].var_332C = -1 * var_4 * var_4 * var_5;
+  level.var_10AB5[var_3].var_332D = 1 - var_4 * var_5;
+  func_10AB2(var_3, var_1);
+  func_10AB3(var_3, var_2);
+  return var_3;
 }
 
-func_10AAF(param_00, param_01, param_02, param_03) {
-  var_04 = func_10AA8(param_02, param_03);
-  var_05 = param_00 * param_00;
-  var_06 = -1 * sqrt(param_01 * param_01 + 4 * var_05);
-  var_07 = 0.5 * var_06 + param_01;
-  var_08 = 0.5 * var_06 - param_01;
-  var_09 = var_08 - var_07;
-  var_0A = 1 / var_09;
-  var_0B = exp(var_07 * 0.05);
-  var_0C = exp(var_08 * 0.05);
+func_10AAF(var_0, var_1, var_2, var_3) {
+  var_4 = func_10AA8(var_2, var_3);
+  var_5 = var_0 * var_0;
+  var_6 = -1 * sqrt(var_1 * var_1 + 4 * var_5);
+  var_7 = 0.5 * var_6 + var_1;
+  var_8 = 0.5 * var_6 - var_1;
+  var_9 = var_8 - var_7;
+  var_0A = 1 / var_9;
+  var_0B = exp(var_7 * 0.05);
+  var_0C = exp(var_8 * 0.05);
   var_0D = var_0C - var_0B;
-  level.var_10AB5[var_04].var_332B = var_0D * var_0A;
-  level.var_10AB5[var_04].var_332A = var_0B - var_07 * level.var_10AB5[var_04].var_332B;
-  level.var_10AB5[var_04].var_332D = var_08 * var_0C - var_07 * var_0B * var_0A;
-  level.var_10AB5[var_04].var_332C = var_07 * var_0B - level.var_10AB5[var_04].var_332D;
-  func_10AB2(var_04, param_02);
-  func_10AB3(var_04, param_03);
-  return var_04;
+  level.var_10AB5[var_4].var_332B = var_0D * var_0A;
+  level.var_10AB5[var_4].var_332A = var_0B - var_7 * level.var_10AB5[var_4].var_332B;
+  level.var_10AB5[var_4].var_332D = var_8 * var_0C - var_7 * var_0B * var_0A;
+  level.var_10AB5[var_4].var_332C = var_7 * var_0B - level.var_10AB5[var_4].var_332D;
+  func_10AB2(var_4, var_2);
+  func_10AB3(var_4, var_3);
+  return var_4;
 }
 
-func_10AB0(param_00, param_01, param_02, param_03) {
-  var_04 = func_10AA8(param_02, param_03);
-  var_05 = -0.5 * param_01;
-  var_06 = param_00;
-  var_07 = exp(var_05 * 0.05) / var_06;
-  var_08 = angleclamp(var_06 * 0.05);
-  var_09 = sin(var_08);
-  var_0A = cos(var_08);
-  var_0B = var_06 * var_0A;
-  var_0C = var_05 * var_09;
-  level.var_10AB5[var_04].var_332A = var_07 * var_0B - var_0C;
-  level.var_10AB5[var_04].var_332B = var_07 * var_09;
-  level.var_10AB5[var_04].var_332C = var_07 * -1 * var_09 * var_05 * var_05 + var_06 * var_06;
-  level.var_10AB5[var_04].var_332D = var_07 * var_0B + var_0C;
-  func_10AB2(var_04, param_02);
-  func_10AB3(var_04, param_03);
-  return var_04;
+func_10AB0(var_0, var_1, var_2, var_3) {
+  var_4 = func_10AA8(var_2, var_3);
+  var_5 = -0.5 * var_1;
+  var_6 = var_0;
+  var_7 = exp(var_5 * 0.05) / var_6;
+  var_8 = angleclamp(var_6 * 0.05);
+  var_9 = sin(var_8);
+  var_0A = cos(var_8);
+  var_0B = var_6 * var_0A;
+  var_0C = var_5 * var_9;
+  level.var_10AB5[var_4].var_332A = var_7 * var_0B - var_0C;
+  level.var_10AB5[var_4].var_332B = var_7 * var_9;
+  level.var_10AB5[var_4].var_332C = var_7 * -1 * var_9 * var_5 * var_5 + var_6 * var_6;
+  level.var_10AB5[var_4].var_332D = var_7 * var_0B + var_0C;
+  func_10AB2(var_4, var_2);
+  func_10AB3(var_4, var_3);
+  return var_4;
 }
 
-func_10AB4(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_02)) {
-    func_10AB2(param_00, param_02);
+func_10AB4(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_2)) {
+    func_10AB2(var_0, var_2);
   }
 
-  if(isDefined(param_03)) {
-    func_10AB3(param_00, param_03);
+  if(isDefined(var_3)) {
+    func_10AB3(var_0, var_3);
   }
 
-  var_04 = level.var_10AB5[param_00].pos - param_01;
-  var_05 = level.var_10AB5[param_00].var_332A * var_04 + level.var_10AB5[param_00].var_332B * level.var_10AB5[param_00].var_1326C;
-  var_06 = level.var_10AB5[param_00].var_332C * var_04 + level.var_10AB5[param_00].var_332D * level.var_10AB5[param_00].var_1326C;
-  level.var_10AB5[param_00].pos = var_05 + param_01;
-  level.var_10AB5[param_00].var_1326C = var_06;
-  return level.var_10AB5[param_00].pos;
+  var_4 = level.var_10AB5[var_0].pos - var_1;
+  var_5 = level.var_10AB5[var_0].var_332A * var_4 + level.var_10AB5[var_0].var_332B * level.var_10AB5[var_0].var_1326C;
+  var_6 = level.var_10AB5[var_0].var_332C * var_4 + level.var_10AB5[var_0].var_332D * level.var_10AB5[var_0].var_1326C;
+  level.var_10AB5[var_0].pos = var_5 + var_1;
+  level.var_10AB5[var_0].var_1326C = var_6;
+  return level.var_10AB5[var_0].pos;
 }
 
-func_10AAA(param_00) {
-  level.var_10AB5[param_00] = undefined;
+func_10AAA(var_0) {
+  level.var_10AB5[var_0] = undefined;
 }
 
-func_10AAB(param_00) {
-  return level.var_10AB5[param_00].pos;
+func_10AAB(var_0) {
+  return level.var_10AB5[var_0].pos;
 }
 
-func_10AAC(param_00) {
-  return level.var_10AB5[param_00].var_1326C;
+func_10AAC(var_0) {
+  return level.var_10AB5[var_0].var_1326C;
 }
 
 func_10AAD() {
@@ -342,32 +342,32 @@ func_10AAD() {
   }
 }
 
-func_10AA8(param_00, param_01) {
+func_10AA8(var_0, var_1) {
   func_10AAD();
-  var_02 = level.var_10AA9;
+  var_2 = level.var_10AA9;
   level.var_10AA9++;
-  level.var_10AB5[var_02] = spawnStruct();
-  level.var_10AB5[var_02].pos = param_00;
-  level.var_10AB5[var_02].var_1326C = param_01;
-  level.var_10AB5[var_02].var_332A = 0;
-  level.var_10AB5[var_02].var_332B = 0;
-  level.var_10AB5[var_02].var_332C = 0;
-  level.var_10AB5[var_02].var_332D = 0;
-  return var_02;
+  level.var_10AB5[var_2] = spawnStruct();
+  level.var_10AB5[var_2].pos = var_0;
+  level.var_10AB5[var_2].var_1326C = var_1;
+  level.var_10AB5[var_2].var_332A = 0;
+  level.var_10AB5[var_2].var_332B = 0;
+  level.var_10AB5[var_2].var_332C = 0;
+  level.var_10AB5[var_2].var_332D = 0;
+  return var_2;
 }
 
-func_10AB2(param_00, param_01) {
-  level.var_10AB5[param_00].pos = param_01;
+func_10AB2(var_0, var_1) {
+  level.var_10AB5[var_0].pos = var_1;
 }
 
-func_10AB3(param_00, param_01) {
-  level.var_10AB5[param_00].var_1326C = param_01;
+func_10AB3(var_0, var_1) {
+  level.var_10AB5[var_0].var_1326C = var_1;
 }
 
-func_D638(param_00, param_01, param_02, param_03) {
-  return squared(param_00[0] - param_01[0]) / squared(param_02) + squared(param_00[1] - param_01[1]) / squared(param_03) <= 1;
+func_D638(var_0, var_1, var_2, var_3) {
+  return squared(var_0[0] - var_1[0]) / squared(var_2) + squared(var_0[1] - var_1[1]) / squared(var_3) <= 1;
 }
 
-func_EB9B(param_00, param_01) {
-  return vectordot(vectornormalize(param_00), param_01);
+func_EB9B(var_0, var_1) {
+  return vectordot(vectornormalize(var_0), var_1);
 }

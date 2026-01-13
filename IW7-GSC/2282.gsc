@@ -7,8 +7,8 @@
 
 main() {
   self setModel("fullbody_hero_eth3n_dustable");
-  self.func_1FEC = "generic_human";
-  self.func_1FA8 = "hero_eth3n";
+  self.var_1FEC = "generic_human";
+  self.var_1FA8 = "hero_eth3n";
   self.voice = "unitednations";
   self give_explosive_touch_on_revived("c6iservo");
 

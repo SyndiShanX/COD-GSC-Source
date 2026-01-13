@@ -178,18 +178,18 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_move_loop_to_move_arrival0(param_00, param_01, param_02, param_03) {
-  return self.var_1198.movereadyforarrival;
+trans_move_loop_to_move_arrival0(var_0, var_1, var_2, var_3) {
+  return self._blackboard.movereadyforarrival;
 }
 
-trans_move_exit_pass_to_move_fireball0(param_00, param_01, param_02, param_03) {
-  return self.var_1198.strafeaction == "fireball";
+trans_move_exit_pass_to_move_fireball0(var_0, var_1, var_2, var_3) {
+  return self._blackboard.strafeaction == "fireball";
 }
 
-trans_move_exit_pass_to_move_clap1(param_00, param_01, param_02, param_03) {
-  return self.var_1198.strafeaction == "clap";
+trans_move_exit_pass_to_move_clap1(var_0, var_1, var_2, var_3) {
+  return self._blackboard.strafeaction == "clap";
 }
 
-trans_move_back_loop_to_move_back_arrival0(param_00, param_01, param_02, param_03) {
-  return self.var_1198.movereadyforarrival;
+trans_move_back_loop_to_move_back_arrival0(var_0, var_1, var_2, var_3) {
+  return self._blackboard.movereadyforarrival;
 }

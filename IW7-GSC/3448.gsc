@@ -5,8 +5,8 @@
 ************************/
 
 _meth_80F1() {
-  foreach(var_01 in self.rewindorigins) {
-    return var_01;
+  foreach(var_1 in self.rewindorigins) {
+    return var_1;
   }
 
   return undefined;
@@ -17,20 +17,20 @@ func_E4D6() {
     return 0;
   }
 
-  var_00 = _meth_80F1();
-  if(!isDefined(var_00)) {
+  var_0 = _meth_80F1();
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  var_01 = distancesquared(self.origin, var_00);
-  if(var_01 < -25536) {
+  var_1 = distancesquared(self.origin, var_0);
+  if(var_1 < -25536) {
     return 0;
   }
 
   return 1;
 }
 
-func_89DC(param_00, param_01) {
+func_89DC(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -49,7 +49,7 @@ func_89DC(param_00, param_01) {
 
     if(scripts\mp\bots\_bots_powers::func_8BEE()) {
       if(self.health < 90) {
-        scripts\mp\bots\_bots_powers::usepowerweapon(param_00, param_01);
+        scripts\mp\bots\_bots_powers::usepowerweapon(var_0, var_1);
         break;
       }
     }

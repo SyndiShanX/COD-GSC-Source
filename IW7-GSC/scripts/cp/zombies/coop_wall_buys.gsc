@@ -12,193 +12,193 @@ init() {
   level.pap = [];
   level.var_138CB = [];
   func_C906();
-  var_00 = spawnStruct();
-  var_00.var_DB01 = "tickets";
-  var_00.model = "zmb_lethal_cryo_grenade_wm";
-  var_00.var_39C = "zfreeze_semtex_mp";
-  level.var_138A1["zfreeze_semtex_mp"] = var_00;
+  var_0 = spawnStruct();
+  var_0.var_DB01 = "tickets";
+  var_0.model = "zmb_lethal_cryo_grenade_wm";
+  var_0.var_39C = "zfreeze_semtex_mp";
+  level.var_138A1["zfreeze_semtex_mp"] = var_0;
   scripts\engine\utility::flag_init("wall_buy_setup_done");
 }
 
-func_48CD(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = spawnStruct();
-  param_00 = int(param_00);
-  var_05.var_394 = param_01;
-  if(param_04 != "") {
-    var_05.var_EC13 = param_04;
+func_48CD(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_0 = int(var_0);
+  var_5.var_394 = var_1;
+  if(var_4 != "") {
+    var_5.var_EC13 = var_4;
   }
 
-  var_05.model = getweaponmodel(param_01);
-  var_05.var_DB01 = param_03;
-  level.var_138A1[param_02] = var_05;
+  var_5.model = getweaponmodel(var_1);
+  var_5.var_DB01 = var_3;
+  level.var_138A1[var_2] = var_5;
 }
 
 func_C906() {
-  var_00 = 0;
+  var_0 = 0;
   if(isDefined(level.coop_weapontable)) {
-    var_01 = level.coop_weapontable;
+    var_1 = level.coop_weapontable;
   } else {
-    var_01 = "cp\cp_weapontable.csv";
+    var_1 = "cp\cp_weapontable.csv";
   }
 
   for(;;) {
-    var_02 = tablelookupbyrow(var_01, var_00, 0);
-    if(var_02 == "") {
+    var_2 = tablelookupbyrow(var_1, var_0, 0);
+    if(var_2 == "") {
       break;
     }
 
-    var_03 = tablelookupbyrow(var_01, var_00, 1);
-    var_04 = tablelookupbyrow(var_01, var_00, 2);
-    var_05 = tablelookupbyrow(var_01, var_00, 4);
-    var_06 = tablelookupbyrow(var_01, var_00, 5);
-    var_07 = scripts\cp\utility::getrawbaseweaponname(var_03);
-    var_08 = strtok(var_04, " ");
-    foreach(var_0A in var_08) {
+    var_3 = tablelookupbyrow(var_1, var_0, 1);
+    var_4 = tablelookupbyrow(var_1, var_0, 2);
+    var_5 = tablelookupbyrow(var_1, var_0, 4);
+    var_6 = tablelookupbyrow(var_1, var_0, 5);
+    var_7 = scripts\cp\utility::getrawbaseweaponname(var_3);
+    var_8 = strtok(var_4, " ");
+    foreach(var_0A in var_8) {
       switch (var_0A) {
         case "craft":
-          level.var_47AD[var_07] = var_03;
+          level.var_47AD[var_7] = var_3;
           break;
 
         case "magic":
-          level.magic_weapons[var_07] = getweaponbasename(var_03);
-          level.all_magic_weapons[var_07] = var_03;
+          level.magic_weapons[var_7] = getweaponbasename(var_3);
+          level.all_magic_weapons[var_7] = var_3;
           break;
 
         case "upgrade":
-          level.pap[var_07] = var_03;
+          level.pap[var_7] = var_3;
           break;
 
         case "wall":
         case "tickets":
-          func_48CD(var_02, var_03, var_07, var_0A, var_06);
+          func_48CD(var_2, var_3, var_7, var_0A, var_6);
           break;
       }
     }
 
-    var_00++;
+    var_0++;
   }
 }
 
-func_FA1D(param_00) {
+func_FA1D(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  var_01 = 0;
-  var_02 = 1;
-  var_03 = 2;
-  var_04 = 3;
-  var_05 = 6;
-  param_00.weapon_build_models = [];
-  param_00.rofweaponslist = [];
-  param_00.var_13C38 = [];
+  var_0 endon("disconnect");
+  var_1 = 0;
+  var_2 = 1;
+  var_3 = 2;
+  var_4 = 3;
+  var_5 = 6;
+  var_0.weapon_build_models = [];
+  var_0.rofweaponslist = [];
+  var_0.var_13C38 = [];
   if(scripts\cp\utility::map_check(2)) {
-    var_06 = "cp\cp_disco_wall_buy_models.csv";
+    var_6 = "cp\cp_disco_wall_buy_models.csv";
   } else if(scripts\cp\utility::map_check(3)) {
-    var_06 = "cp\cp_town_wall_buy_models.csv";
+    var_6 = "cp\cp_town_wall_buy_models.csv";
   } else if(scripts\cp\utility::map_check(4)) {
-    var_06 = "cp\cp_final_wall_buy_models.csv";
+    var_6 = "cp\cp_final_wall_buy_models.csv";
   } else {
-    var_06 = "cp\cp_wall_buy_models.csv";
+    var_6 = "cp\cp_wall_buy_models.csv";
   }
 
-  var_07 = 0;
+  var_7 = 0;
   for(;;) {
-    var_08 = tablelookupbyrow(var_06, var_07, var_02);
-    if(var_08 == "") {
+    var_8 = tablelookupbyrow(var_6, var_7, var_2);
+    if(var_8 == "") {
       break;
     }
 
-    var_09 = "none";
+    var_9 = "none";
     var_0A = "none";
     var_0B = "none";
     var_0C = -1;
-    if(isDefined(var_08)) {
-      var_0D = tablelookup(var_06, var_01, var_07, var_03);
-      var_0E = tablelookup(var_06, var_01, var_07, var_04);
+    if(isDefined(var_8)) {
+      var_0D = tablelookup(var_6, var_1, var_7, var_3);
+      var_0E = tablelookup(var_6, var_1, var_7, var_4);
       var_0F = [];
       if(isDefined(var_0D) && var_0D != "") {
-        var_10 = scripts\cp\cp_relics::func_7D6C(param_00, var_0D);
+        var_10 = scripts\cp\cp_relics::func_7D6C(var_0, var_0D);
         if(var_10.size > 0) {
-          param_00.var_13C38[var_0D] = var_10;
+          var_0.var_13C38[var_0D] = var_10;
         }
 
-        for(var_11 = 0; var_11 < var_05; var_11++) {
-          var_12 = param_00 getplayerdata("cp", "zombiePlayerLoadout", "zombiePlayerWeaponModels", var_0D, "attachment", var_11);
+        for(var_11 = 0; var_11 < var_5; var_11++) {
+          var_12 = var_0 getplayerdata("cp", "zombiePlayerLoadout", "zombiePlayerWeaponModels", var_0D, "attachment", var_11);
           if(isDefined(var_12) && var_12 != "none") {
             var_0F[var_0F.size] = var_12;
           }
         }
 
-        var_09 = scripts\cp\utility::getweaponcamo(var_0D);
+        var_9 = scripts\cp\utility::getweaponcamo(var_0D);
         var_0A = scripts\cp\utility::getweaponcosmeticattachment(var_0D);
         var_0B = scripts\cp\utility::getweaponreticle(var_0D);
         var_0C = scripts\cp\utility::getweaponpaintjobid(var_0D);
       }
 
-      param_00.weapon_build_models[var_08] = ::scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_0E), var_0F, var_09, var_0B, scripts\cp\utility::get_weapon_variant_id(param_00, var_0E), self getentitynumber(), self.clientid, var_0C, var_0A);
-      if(var_08 == "g18") {
-        param_00 loadweaponsforplayer([param_00.weapon_build_models[var_08]], 1);
+      var_0.weapon_build_models[var_8] = ::scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_0E), var_0F, var_9, var_0B, scripts\cp\utility::get_weapon_variant_id(var_0, var_0E), self getentitynumber(), self.clientid, var_0C, var_0A);
+      if(var_8 == "g18") {
+        var_0 loadweaponsforplayer([var_0.weapon_build_models[var_8]], 1);
       }
 
-      var_13 = getweaponattachments(param_00.weapon_build_models[var_08]);
+      var_13 = getweaponattachments(var_0.weapon_build_models[var_8]);
       foreach(var_12 in var_13) {
         if(issubstr(var_12, "rof")) {
-          param_00.rofweaponslist[param_00.rofweaponslist.size] = getweaponbasename(param_00.weapon_build_models[var_08]);
+          var_0.rofweaponslist[var_0.rofweaponslist.size] = getweaponbasename(var_0.weapon_build_models[var_8]);
         }
       }
     }
 
-    var_07++;
+    var_7++;
   }
 
-  param_00.weaponkitinitialized = 1;
-  param_00 notify("player_weapon_build_kit_initialized");
+  var_0.weaponkitinitialized = 1;
+  var_0 notify("player_weapon_build_kit_initialized");
 }
 
 func_23DA() {
   if(scripts\cp\utility::map_check(2)) {
-    var_00 = "cp\cp_disco_wall_buy_models.csv";
+    var_0 = "cp\cp_disco_wall_buy_models.csv";
   } else if(scripts\cp\utility::map_check(3)) {
-    var_00 = "cp\cp_town_wall_buy_models.csv";
+    var_0 = "cp\cp_town_wall_buy_models.csv";
   } else if(scripts\cp\utility::map_check(4)) {
-    var_00 = "cp\cp_final_wall_buy_models.csv";
+    var_0 = "cp\cp_final_wall_buy_models.csv";
   } else {
-    var_00 = "cp\cp_wall_buy_models.csv";
+    var_0 = "cp\cp_wall_buy_models.csv";
   }
 
   if(!scripts\engine\utility::flag_exist("wall_buy_setup_done")) {
     scripts\engine\utility::flag_init("wall_buy_setup_done");
   }
 
-  var_01 = [];
-  var_02 = 0;
+  var_1 = [];
+  var_2 = 0;
   for(;;) {
-    var_03 = tablelookupbyrow(var_00, var_02, 1);
-    if(var_03 == "") {
+    var_3 = tablelookupbyrow(var_0, var_2, 1);
+    if(var_3 == "") {
       break;
     }
 
-    var_01[var_01.size] = var_03;
-    var_02++;
+    var_1[var_1.size] = var_3;
+    var_2++;
   }
 
-  var_04 = [];
-  var_05 = scripts\engine\utility::getstructarray("interaction", "targetname");
-  foreach(var_07 in var_05) {
-    if(isDefined(var_07.name) && var_07.name == "wall_buy") {
-      var_04[var_04.size] = var_07;
-      if(isDefined(var_07.target)) {
-        if(scripts\engine\utility::istrue(var_07.already_used)) {
+  var_4 = [];
+  var_5 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  foreach(var_7 in var_5) {
+    if(isDefined(var_7.name) && var_7.name == "wall_buy") {
+      var_4[var_4.size] = var_7;
+      if(isDefined(var_7.target)) {
+        if(scripts\engine\utility::istrue(var_7.already_used)) {
           continue;
         }
 
-        var_08 = scripts\engine\utility::getstructarray(var_07.target, "target");
-        foreach(var_0A in var_08) {
-          if(var_0A == var_07) {
+        var_8 = scripts\engine\utility::getstructarray(var_7.target, "target");
+        foreach(var_0A in var_8) {
+          if(var_0A == var_7) {
             continue;
           }
 
           var_0A.already_used = 1;
-          var_0A.parent_struct = var_07;
+          var_0A.parent_struct = var_7;
         }
       }
     }
@@ -208,7 +208,7 @@ func_23DA() {
     wait(0.05);
   }
 
-  var_0D = sortbydistance(var_04, level.players[0].origin);
+  var_0D = sortbydistance(var_4, level.players[0].origin);
   foreach(var_0F in var_0D) {
     var_0F.script_noteworthy = strtok(var_0F.script_noteworthy, "+")[0];
     var_10 = var_0F.script_noteworthy;
@@ -229,9 +229,9 @@ func_23DA() {
         var_15 = var_10.angles;
       }
 
-      for(var_02 = 0; var_02 < var_01.size; var_02++) {
-        if(var_01[var_02] == var_11) {
-          var_12 = var_02;
+      for(var_2 = 0; var_2 < var_1.size; var_2++) {
+        if(var_1[var_2] == var_11) {
+          var_12 = var_2;
           break;
         }
       }
@@ -276,184 +276,184 @@ func_23DA() {
   scripts\engine\utility::flag_set("wall_buy_setup_done");
 }
 
-applyparentstructvalues(param_00) {
+applyparentstructvalues(var_0) {
   level endon("game_ended");
-  while(!isDefined(param_00.parent_struct.trigger)) {
+  while(!isDefined(var_0.parent_struct.trigger)) {
     scripts\engine\utility::waitframe();
   }
 
-  param_00.trigger = param_00.parent_struct.trigger;
+  var_0.trigger = var_0.parent_struct.trigger;
 }
 
-func_16F5(param_00, param_01, param_02, param_03) {
+func_16F5(var_0, var_1, var_2, var_3) {
   if(!scripts\engine\utility::flag("init_interaction_done")) {
     scripts\engine\utility::flag_wait("init_interaction_done");
   }
 
-  param_01.cost = level.interactions[param_02].cost;
-  param_01.struct = param_00;
-  if(isDefined(param_03) && issubstr(param_03, "harpoon") || issubstr(param_03, "slasher") || issubstr(param_03, "katana")) {
+  var_1.cost = level.interactions[var_2].cost;
+  var_1.struct = var_0;
+  if(isDefined(var_3) && issubstr(var_3, "harpoon") || issubstr(var_3, "slasher") || issubstr(var_3, "katana")) {
     return;
   }
 
-  if(param_00.script_parameters != "tickets") {
-    level.outline_weapon_watch_list[level.outline_weapon_watch_list.size] = param_01;
+  if(var_0.script_parameters != "tickets") {
+    level.outline_weapon_watch_list[level.outline_weapon_watch_list.size] = var_1;
   }
 }
 
-func_A02D(param_00) {
-  param_00 settenthstimer(self);
+func_A02D(var_0) {
+  var_0 settenthstimer(self);
 }
 
-givevalidweapon(param_00, param_01) {
+givevalidweapon(var_0, var_1) {
   level endon("game_ended");
-  param_00 endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 notify("weapon_purchased");
-  if(scripts\engine\utility::istrue(param_00.isusingsupercard)) {
+  var_0 endon("game_ended");
+  var_0 endon("disconnect");
+  var_0 notify("weapon_purchased");
+  if(scripts\engine\utility::istrue(var_0.isusingsupercard)) {
     wait(0.5);
   }
 
-  var_02 = undefined;
-  if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00)) {
-    var_03 = param_00 scripts\cp\utility::getvalidtakeweapon();
-    var_04 = scripts\cp\utility::getrawbaseweaponname(var_03);
-    param_00 takeweapon(var_03);
-    if(isDefined(param_00.pap[var_04])) {
-      param_00.pap[var_04] = undefined;
-      param_00 notify("weapon_level_changed");
+  var_2 = undefined;
+  if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(var_0)) {
+    var_3 = var_0 scripts\cp\utility::getvalidtakeweapon();
+    var_4 = scripts\cp\utility::getrawbaseweaponname(var_3);
+    var_0 takeweapon(var_3);
+    if(isDefined(var_0.pap[var_4])) {
+      var_0.pap[var_4] = undefined;
+      var_0 notify("weapon_level_changed");
     }
   }
 
-  var_05 = scripts\cp\utility::getrawbaseweaponname(param_01);
-  param_00 scripts\cp\utility::take_fists_weapon(param_00);
-  if(isDefined(param_00.weapon_build_models[var_05])) {
-    param_01 = param_00.weapon_build_models[var_05];
+  var_5 = scripts\cp\utility::getrawbaseweaponname(var_1);
+  var_0 scripts\cp\utility::take_fists_weapon(var_0);
+  if(isDefined(var_0.weapon_build_models[var_5])) {
+    var_1 = var_0.weapon_build_models[var_5];
   }
 
-  var_06 = getweaponattachments(param_01);
-  param_01 = param_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(param_01, undefined, var_06, undefined, undefined);
-  param_01 = param_00 scripts\cp\utility::_giveweapon(param_01, undefined, undefined, 0);
-  var_07 = spawnStruct();
-  var_07.lvl = 1;
-  param_00.pap[var_05] = var_07;
-  param_00 scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
-  param_00 notify("weapon_level_changed");
-  param_00 givemaxammo(param_01);
-  param_00 switchtoweapon(param_01);
+  var_6 = getweaponattachments(var_1);
+  var_1 = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, undefined, var_6, undefined, undefined);
+  var_1 = var_0 scripts\cp\utility::_giveweapon(var_1, undefined, undefined, 0);
+  var_7 = spawnStruct();
+  var_7.lvl = 1;
+  var_0.pap[var_5] = var_7;
+  var_0 scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
+  var_0 notify("weapon_level_changed");
+  var_0 givemaxammo(var_1);
+  var_0 switchtoweapon(var_1);
 }
 
-settenthstimer(param_00) {
-  var_01 = 0;
-  var_02 = undefined;
-  var_03 = param_00.trigger.cost;
-  var_04 = undefined;
-  var_05 = undefined;
-  var_06 = undefined;
-  var_07 = self getweaponslistprimaries();
-  var_08 = self getweaponslistprimaries().size;
-  var_09 = 3;
-  var_0A = scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy);
-  if(param_00.script_noteworthy == "iw7_forgefreeze_zm") {
+settenthstimer(var_0) {
+  var_1 = 0;
+  var_2 = undefined;
+  var_3 = var_0.trigger.cost;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = self getweaponslistprimaries();
+  var_8 = self getweaponslistprimaries().size;
+  var_9 = 3;
+  var_0A = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
+  if(var_0.script_noteworthy == "iw7_forgefreeze_zm") {
     level.magic_weapons["forgefreeze"] = "iw7_forgefreeze_zm+forgefreezealtfire";
-    var_01 = 1;
+    var_1 = 1;
   }
 
-  if(param_00.script_noteworthy == "iw7_venomx_zm") {
+  if(var_0.script_noteworthy == "iw7_venomx_zm") {
     level.magic_weapons["venomx"] = "iw7_venomx_zm";
     if(isDefined(level.venomx_count) && level.venomx_count >= level.players.size) {
-      var_01 = 1;
+      var_1 = 1;
     }
   }
 
-  if(scripts\cp\utility::weapon_is_dlc_melee(param_00.script_noteworthy)) {
-    var_01 = 1;
+  if(scripts\cp\utility::weapon_is_dlc_melee(var_0.script_noteworthy)) {
+    var_1 = 1;
   }
 
-  if(!scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
+  if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
     var_0B = scripts\cp\utility::getvalidtakeweapon();
     self.curr_weap = var_0B;
     if(isDefined(var_0B)) {
-      var_02 = 1;
+      var_2 = 1;
       var_0C = scripts\cp\utility::getrawbaseweaponname(var_0B);
-      if(scripts\cp\utility::has_special_weapon() && var_08 < var_09 + 1) {
-        var_02 = 0;
+      if(scripts\cp\utility::has_special_weapon() && var_8 < var_9 + 1) {
+        var_2 = 0;
       }
 
-      foreach(var_0E in var_07) {
+      foreach(var_0E in var_7) {
         if(scripts\cp\utility::isstrstart(var_0E, "alt_")) {
-          var_09++;
+          var_9++;
         }
       }
 
       if(scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-        var_09++;
+        var_9++;
       }
 
-      if(var_07.size < var_09) {
-        var_02 = 0;
+      if(var_7.size < var_9) {
+        var_2 = 0;
       }
 
-      if(var_02) {
+      if(var_2) {
         if(isDefined(self.pap[var_0C])) {
           self.pap[var_0C] = undefined;
           self notify("weapon_level_changed");
         }
 
-        thread scripts\cp\cp_interaction::play_weapon_purchase_vo(param_00, self);
+        thread scripts\cp\cp_interaction::play_weapon_purchase_vo(var_0, self);
         self takeweapon(var_0B);
       }
     }
 
     if(isDefined(self.weapon_build_models[var_0A])) {
-      var_04 = self.weapon_build_models[var_0A];
+      var_4 = self.weapon_build_models[var_0A];
     } else {
-      var_04 = param_00.var_394;
+      var_4 = var_0.var_394;
     }
 
     if(scripts\cp\utility::is_consumable_active("wall_power")) {
-      var_10 = scripts\engine\utility::array_combine(getweaponattachments(var_04), ["pap1"]);
-      if(issubstr(var_04, "venomx")) {
+      var_10 = scripts\engine\utility::array_combine(getweaponattachments(var_4), ["pap1"]);
+      if(issubstr(var_4, "venomx")) {
         var_10 = undefined;
-        var_06 = undefined;
+        var_6 = undefined;
         if(scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
-          var_04 = "iw7_venomx_zm_pap1";
-          var_06 = level.pap_1_camo;
+          var_4 = "iw7_venomx_zm_pap1";
+          var_6 = level.pap_1_camo;
         }
       } else {
         if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_0A)) {
-          var_06 = undefined;
+          var_6 = undefined;
         } else if(isDefined(level.pap_1_camo)) {
-          var_06 = level.pap_1_camo;
+          var_6 = level.pap_1_camo;
         }
 
         switch (var_0A) {
           case "dischord":
-            var_06 = "camo20";
+            var_6 = "camo20";
             break;
 
           case "facemelter":
-            var_06 = "camo22";
+            var_6 = "camo22";
             break;
 
           case "headcutter":
-            var_06 = "camo21";
+            var_6 = "camo21";
             break;
 
           case "shredder":
-            var_06 = "camo23";
+            var_6 = "camo23";
             break;
         }
       }
 
-      var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_04, undefined, var_10, undefined, var_06);
+      var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_4, undefined, var_10, undefined, var_6);
       var_11 = scripts\cp\utility::_giveweapon(var_11, undefined, undefined, 1);
       var_12 = scripts\cp\utility::getrawbaseweaponname(var_11);
       scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
       var_13 = spawnStruct();
       var_13.lvl = 2;
       self.pap[var_12] = var_13;
-      if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges) && issubstr(var_04, "venomx")) {
+      if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges) && issubstr(var_4, "venomx")) {
         scripts\cp\utility::take_fists_weapon(self);
         self notify("wor_item_pickup", var_11);
         scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
@@ -475,21 +475,21 @@ settenthstimer(param_00) {
       scripts\cp\utility::notify_used_consumable("wall_power");
       scripts\cp\utility::take_fists_weapon(self);
     } else {
-      var_10 = getweaponattachments(var_07);
-      var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_06, undefined, var_13);
+      var_10 = getweaponattachments(var_7);
+      var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_6, undefined, var_13);
       var_13 = scripts\cp\utility::_giveweapon(var_13, undefined, undefined, 1);
       self.itempicked = var_13;
       level.transactionid = randomint(100);
-      scripts\cp\zombies\zombie_analytics::log_purchasingaweapon(1, self, self.itempicked, self.curr_weap, level.wave_num, var_01.name, self.wavesheldwithweapon, self.killsperweaponlog, self.downsperweaponlog);
+      scripts\cp\zombies\zombie_analytics::log_purchasingaweapon(1, self, self.itempicked, self.curr_weap, level.wave_num, var_1.name, self.wavesheldwithweapon, self.killsperweaponlog, self.downsperweaponlog);
       scripts\cp\utility::take_fists_weapon(self);
       var_13 = spawnStruct();
       var_13.lvl = 1;
       self.pap[var_0A] = var_13;
     }
 
-    if(var_01) {
-      param_00.trigger delete();
-      scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
+    if(var_1) {
+      var_0.trigger delete();
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     }
 
     self notify("wor_item_pickup", var_11);
@@ -506,7 +506,7 @@ settenthstimer(param_00) {
     var_0A = undefined;
     var_14 = self getweaponslistall();
     var_15 = self getcurrentweapon();
-    var_16 = scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy);
+    var_16 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
     var_17 = undefined;
     foreach(var_19 in var_14) {
       var_0A = scripts\cp\utility::getrawbaseweaponname(var_19);
@@ -543,7 +543,7 @@ settenthstimer(param_00) {
   scripts\cp\cp_interaction::refresh_interaction();
 }
 
-func_E229(param_00) {
+func_E229(var_0) {
   if(isDefined(self.var_10936)) {
     self.var_10936 = undefined;
   }
@@ -567,27 +567,27 @@ func_E229(param_00) {
 
 setgrenadethrowscale() {
   if(scripts\cp\perks\prestige::prestige_getnodeployables() == 1) {
-    var_00 = self getweaponslistprimaries();
-    foreach(var_02 in var_00) {
-      var_03 = scripts\cp\utility::coop_getweaponclass(var_02);
-      if(var_03 == "weapon_pistol") {
-        var_04 = weaponmaxammo(var_02);
-        var_05 = int(var_04 * 0.25);
-        var_06 = self getrunningforwardpainanim(var_02);
-        if(var_05 > var_06) {
-          self setweaponammostock(var_02, var_05);
+    var_0 = self getweaponslistprimaries();
+    foreach(var_2 in var_0) {
+      var_3 = scripts\cp\utility::coop_getweaponclass(var_2);
+      if(var_3 == "weapon_pistol") {
+        var_4 = weaponmaxammo(var_2);
+        var_5 = int(var_4 * 0.25);
+        var_6 = self getrunningforwardpainanim(var_2);
+        if(var_5 > var_6) {
+          self setweaponammostock(var_2, var_5);
         }
       }
     }
   }
 }
 
-func_7D6F(param_00) {
-  var_01 = self getweaponslistprimaries();
-  foreach(var_03 in var_01) {
-    var_04 = scripts\cp\cp_persistence::get_base_weapon_name(var_03);
-    if(issubstr(param_00, var_04)) {
-      return var_03;
+func_7D6F(var_0) {
+  var_1 = self getweaponslistprimaries();
+  foreach(var_3 in var_1) {
+    var_4 = scripts\cp\cp_persistence::get_base_weapon_name(var_3);
+    if(issubstr(var_0, var_4)) {
+      return var_3;
     }
   }
 
@@ -595,89 +595,89 @@ func_7D6F(param_00) {
 }
 
 func_7C04() {
-  var_00 = self getweaponslistprimaries();
-  var_01 = 3;
-  foreach(var_03 in var_00) {
-    if(scripts\cp\utility::isstrstart(var_03, "alt_")) {
-      var_01++;
+  var_0 = self getweaponslistprimaries();
+  var_1 = 3;
+  foreach(var_3 in var_0) {
+    if(scripts\cp\utility::isstrstart(var_3, "alt_")) {
+      var_1++;
     }
   }
 
   if(scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-    var_01++;
+    var_1++;
   }
 
-  if(var_00.size >= var_01) {
-    var_05 = self getcurrentweapon();
-    var_06 = 0;
-    if(var_05 == "none") {
-      var_06 = 1;
-    } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_05)) {
-      var_06 = 1;
-    } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_05))) {
-      var_06 = 1;
-    } else if(scripts\cp\utility::is_melee_weapon(var_05, 1)) {
-      var_06 = 1;
+  if(var_0.size >= var_1) {
+    var_5 = self getcurrentweapon();
+    var_6 = 0;
+    if(var_5 == "none") {
+      var_6 = 1;
+    } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_5)) {
+      var_6 = 1;
+    } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_5))) {
+      var_6 = 1;
+    } else if(scripts\cp\utility::is_melee_weapon(var_5, 1)) {
+      var_6 = 1;
     }
 
-    if(var_06) {
+    if(var_6) {
       self.copy_fullweaponlist = self getweaponslistall();
-      var_05 = scripts\cp\cp_laststand::choose_last_weapon(level.additional_laststand_weapon_exclusion, 1, 1);
+      var_5 = scripts\cp\cp_laststand::choose_last_weapon(level.additional_laststand_weapon_exclusion, 1, 1);
     }
 
     self.copy_fullweaponlist = undefined;
-    if(weaponinventorytype(var_05) == "altmode") {
-      var_05 = func_7D66(var_05);
+    if(weaponinventorytype(var_5) == "altmode") {
+      var_5 = func_7D66(var_5);
     }
 
-    return var_05;
+    return var_5;
   }
 
   return undefined;
 }
 
-func_7D66(param_00) {
-  if(weaponinventorytype(param_00) != "altmode") {
-    return param_00;
+func_7D66(var_0) {
+  if(weaponinventorytype(var_0) != "altmode") {
+    return var_0;
   }
 
-  return getsubstr(param_00, 4);
+  return getsubstr(var_0, 4);
 }
 
-can_give_weapon(param_00) {
-  var_01 = self getweaponslistprimaries();
-  var_02 = self getcurrentweapon();
-  var_03 = scripts\cp\utility::coop_getweaponclass(var_02);
-  var_04 = scripts\cp\utility::getbaseweaponname(var_02);
-  foreach(param_00 in var_01) {
-    if(scripts\cp\utility::isstrstart(param_00, "alt_")) {
-      var_01 = scripts\engine\utility::array_remove(var_01, param_00);
+can_give_weapon(var_0) {
+  var_1 = self getweaponslistprimaries();
+  var_2 = self getcurrentweapon();
+  var_3 = scripts\cp\utility::coop_getweaponclass(var_2);
+  var_4 = scripts\cp\utility::getbaseweaponname(var_2);
+  foreach(var_0 in var_1) {
+    if(scripts\cp\utility::isstrstart(var_0, "alt_")) {
+      var_1 = scripts\engine\utility::array_remove(var_1, var_0);
     }
   }
 
-  var_07 = 0;
+  var_7 = 0;
   if(!scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-    var_08 = 3;
+    var_8 = 3;
   } else {
-    var_08 = 4;
+    var_8 = 4;
   }
 
   if(isDefined(self.var_C20E)) {
-    var_08 = var_08 + self.var_C20E;
+    var_8 = var_8 + self.var_C20E;
   }
 
   while(self isswitchingweapon()) {
     wait(0.05);
   }
 
-  if(var_02 == "none") {
+  if(var_2 == "none") {
     return 0;
   }
 
   if(isDefined(level.var_4C40)) {
     if(![
         [level.var_4C40]
-      ](var_01, var_02, var_03, var_08)) {
+      ](var_1, var_2, var_3, var_8)) {
       return 0;
     }
   }
@@ -686,27 +686,27 @@ can_give_weapon(param_00) {
     return 0;
   }
 
-  if(var_01.size >= var_08 + 1 && self.hasriotshield) {
+  if(var_1.size >= var_8 + 1 && self.hasriotshield) {
     return 0;
   }
 
-  if(var_01.size >= var_08 + 2 && self.hasriotshield) {
+  if(var_1.size >= var_8 + 2 && self.hasriotshield) {
     return 0;
   }
 
-  if(var_01.size >= var_08 + 1 && !self.hasriotshieldequipped) {
+  if(var_1.size >= var_8 + 1 && !self.hasriotshieldequipped) {
     return 0;
   }
 
-  if(var_01.size >= var_08 + 2 && self.hasriotshieldequipped) {
+  if(var_1.size >= var_8 + 2 && self.hasriotshieldequipped) {
     return 0;
   }
 
-  if(self.hasriotshieldequipped && var_01.size >= var_08 + 1) {
+  if(self.hasriotshieldequipped && var_1.size >= var_8 + 1) {
     return 0;
   }
 
-  if(self.hasriotshieldequipped && var_01.size >= var_08 + 1) {
+  if(self.hasriotshieldequipped && var_1.size >= var_8 + 1) {
     return 0;
   }
 
@@ -719,55 +719,55 @@ can_give_weapon(param_00) {
   return 0;
 }
 
-interaction_purchase_weapon(param_00, param_01) {
+interaction_purchase_weapon(var_0, var_1) {
   if(scripts\cp\utility::is_weapon_purchase_disabled()) {
     return;
   }
 
-  if(issubstr(param_00.script_noteworthy, "venomx")) {
-    var_02 = param_01 getweaponslistall();
-    foreach(var_04 in var_02) {
-      if(issubstr(var_04, "venomx")) {
+  if(issubstr(var_0.script_noteworthy, "venomx")) {
+    var_2 = var_1 getweaponslistall();
+    foreach(var_4 in var_2) {
+      if(issubstr(var_4, "venomx")) {
         return;
       }
     }
 
     if(scripts\engine\utility::flag_exist("completepuzzles_step4") && scripts\engine\utility::flag("completepuzzles_step4")) {
-      var_02 = param_01 getweaponslistall();
-      foreach(var_04 in var_02) {
-        if(issubstr(var_04, "venomx")) {
+      var_2 = var_1 getweaponslistall();
+      foreach(var_4 in var_2) {
+        if(issubstr(var_4, "venomx")) {
           return;
         }
       }
 
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_weapon", "final_comment_vo");
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_weapon", "final_comment_vo");
       if(!isDefined(level.venomx_count)) {
         level.venomx_count = 1;
       }
 
-      param_00 func_A02D(param_01);
-      param_01.last_interaction_point = undefined;
-      param_01 scripts\cp\zombies\achievement::update_achievement("EGG_SLAYER", 1);
-      scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00, param_01);
+      var_0 func_A02D(var_1);
+      var_1.last_interaction_point = undefined;
+      var_1 scripts\cp\zombies\achievement::update_achievement("EGG_SLAYER", 1);
+      scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
       return;
     }
 
     return;
   }
 
-  var_02 func_A02D(var_03);
-  var_03.last_interaction_point = undefined;
+  var_2 func_A02D(var_3);
+  var_3.last_interaction_point = undefined;
 }
 
-get_wall_buy_hint_func(param_00, param_01) {
-  if(issubstr(param_00.script_noteworthy, "venomx")) {
+get_wall_buy_hint_func(var_0, var_1) {
+  if(issubstr(var_0.script_noteworthy, "venomx")) {
     if(!scripts\engine\utility::flag("completepuzzles_step4")) {
       return "";
     }
 
-    var_02 = param_01 getweaponslistall();
-    foreach(var_04 in var_02) {
-      if(issubstr(var_04, "venomx")) {
+    var_2 = var_1 getweaponslistall();
+    foreach(var_4 in var_2) {
+      if(issubstr(var_4, "venomx")) {
         return &"COOP_INTERACTIONS_CANNOT_BUY";
       }
     }
@@ -777,19 +777,19 @@ get_wall_buy_hint_func(param_00, param_01) {
     return &"CP_ZMB_INTERACTIONS_WALL_BUY_DISABLED";
   }
 
-  if(!param_01 can_give_weapon(param_00)) {
+  if(!var_1 can_give_weapon(var_0)) {
     return &"COOP_INTERACTIONS_CANNOT_BUY";
   }
 
-  var_06 = [[level.weapon_hint_func]](param_00, param_01);
-  if(isDefined(var_06)) {
-    return var_06;
+  var_6 = [[level.weapon_hint_func]](var_0, var_1);
+  if(isDefined(var_6)) {
+    return var_6;
   }
 
-  var_07 = getweaponbasename(param_00.script_noteworthy);
-  return level.interaction_hintstrings[var_07];
+  var_7 = getweaponbasename(var_0.script_noteworthy);
+  return level.interaction_hintstrings[var_7];
 }
 
-set_weapon_purchase_disabled(param_00) {
-  level.weapon_purchase_disabled = param_00;
+set_weapon_purchase_disabled(var_0) {
+  level.weapon_purchase_disabled = var_0;
 }

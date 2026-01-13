@@ -44,28 +44,28 @@ func_28ED() {
   self endon("disconnect");
   self endon("battleSlide_end");
   for(;;) {
-    var_00 = self getvelocity();
-    var_01 = lengthsquared(var_00);
-    var_02 = anglestoup(self.angles);
-    var_03 = anglesToForward(self.angles);
-    var_04 = (0, 0, 0);
-    var_05 = (0, 0, 0);
-    var_06 = var_04;
-    var_07 = var_05;
-    var_08 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
-    if(var_01 > 100) {
-      var_09 = vectortoangles(var_00);
-      var_03 = anglesToForward(var_09);
-      var_02 = anglestoup(var_09);
-      var_04 = var_03 * 40;
-      var_05 = var_02 * -20;
-      var_06 = var_04;
-      var_07 = var_05 + var_02 * 38;
-      var_0A = physics_raycast(self getEye(), self.origin + var_04 + var_07, var_08, undefined, 0, "physicsquery_closest");
+    var_0 = self getvelocity();
+    var_1 = lengthsquared(var_0);
+    var_2 = anglestoup(self.angles);
+    var_3 = anglesToForward(self.angles);
+    var_4 = (0, 0, 0);
+    var_5 = (0, 0, 0);
+    var_6 = var_4;
+    var_7 = var_5;
+    var_8 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
+    if(var_1 > 100) {
+      var_9 = vectortoangles(var_0);
+      var_3 = anglesToForward(var_9);
+      var_2 = anglestoup(var_9);
+      var_4 = var_3 * 40;
+      var_5 = var_2 * -20;
+      var_6 = var_4;
+      var_7 = var_5 + var_2 * 38;
+      var_0A = physics_raycast(self getEye(), self.origin + var_4 + var_7, var_8, undefined, 0, "physicsquery_closest");
       if(isDefined(var_0A) && var_0A.size > 0) {
-        var_04 = var_03 * vectordot(var_0A[0]["position"] - self.origin, var_03);
-        var_04 = var_04 - var_03 * 3;
-        var_06 = var_04;
+        var_4 = var_3 * vectordot(var_0A[0]["position"] - self.origin, var_3);
+        var_4 = var_4 - var_3 * 3;
+        var_6 = var_4;
       }
     }
 
@@ -85,26 +85,26 @@ func_28ED() {
         continue;
       }
 
-      if(!scripts\mp\utility::func_D64A(5184, 76, self.origin + var_04 + var_05, var_02, var_0D gettagorigin("j_mainroot"))) {
+      if(!scripts\mp\utility::func_D64A(5184, 76, self.origin + var_4 + var_5, var_2, var_0D gettagorigin("j_mainroot"))) {
         continue;
       }
 
-      if(func_28E8(var_0D, var_03)) {
+      if(func_28E8(var_0D, var_3)) {
         continue;
       }
 
-      if(func_28E9(var_0D, self.origin + var_06)) {
+      if(func_28E9(var_0D, self.origin + var_6)) {
         continue;
       }
 
-      if(func_28E7(var_0D, self.origin + var_06 + var_07, var_08)) {
+      if(func_28E7(var_0D, self.origin + var_6 + var_7, var_8)) {
         continue;
       }
 
       func_28F5(var_0D);
       func_28E3(var_0D);
       if(scripts\mp\utility::isreallyalive(var_0D)) {
-        func_28EB(var_0D, var_03);
+        func_28EB(var_0D, var_3);
       }
     }
 
@@ -112,28 +112,28 @@ func_28ED() {
   }
 }
 
-func_28EE(param_00) {
-  var_01 = param_00 getentitynumber();
+func_28EE(var_0) {
+  var_1 = var_0 getentitynumber();
   self endon("death");
   self endon("disconnect");
-  self endon("battleSlide_monitorKnockbackEnded_" + var_01);
+  self endon("battleSlide_monitorKnockbackEnded_" + var_1);
   scripts\mp\utility::_enablecollisionnotifies(1);
   scripts\engine\utility::allow_doublejump(0);
-  thread func_28EF(param_00);
+  thread func_28EF(var_0);
   for(;;) {
-    self waittill("collided", var_02, var_03, var_04, var_05, var_06);
-    if(var_06 != "hittype_world") {
+    self waittill("collided", var_2, var_3, var_4, var_5, var_6);
+    if(var_6 != "hittype_world") {
       continue;
     }
 
-    var_02 = (var_02[0], var_02[1], max(0, var_02[2]));
-    var_07 = -1 * vectordot(var_02, var_04);
-    if(var_07 < 185) {
+    var_2 = (var_2[0], var_2[1], max(0, var_2[2]));
+    var_7 = -1 * vectordot(var_2, var_4);
+    if(var_7 < 185) {
       continue;
     }
 
-    if(isDefined(param_00)) {
-      self dodamage(35, var_03, param_00, undefined, "MOD_IMPACT", "battleslide_mp");
+    if(isDefined(var_0)) {
+      self dodamage(35, var_3, var_0, undefined, "MOD_IMPACT", "battleslide_mp");
     }
 
     break;
@@ -141,88 +141,88 @@ func_28EE(param_00) {
 
   scripts\engine\utility::allow_doublejump(1);
   scripts\mp\utility::_enablecollisionnotifies(0);
-  self notify("battleSlide_monitorKnockbackEnded_" + param_00 getentitynumber());
+  self notify("battleSlide_monitorKnockbackEnded_" + var_0 getentitynumber());
 }
 
-func_28EF(param_00) {
-  var_01 = param_00 getentitynumber();
+func_28EF(var_0) {
+  var_1 = var_0 getentitynumber();
   self endon("death");
   self endon("disconnect");
-  self endon("battleSlide_monitorKnockbackEnded_" + var_01);
+  self endon("battleSlide_monitorKnockbackEnded_" + var_1);
   wait(0.35);
   scripts\engine\utility::allow_doublejump(1);
   scripts\mp\utility::_enablecollisionnotifies(0);
-  self notify("battleSlide_monitorKnockbackEnded_" + var_01);
+  self notify("battleSlide_monitorKnockbackEnded_" + var_1);
 }
 
-func_28F5(param_00) {
+func_28F5(var_0) {
   if(!isDefined(self.var_28F7)) {
     self.var_28F7 = [];
   }
 
-  if(!func_28EA(param_00)) {
-    self.var_28F7[self.var_28F7.size] = param_00 getentitynumber();
+  if(!func_28EA(var_0)) {
+    self.var_28F7[self.var_28F7.size] = var_0 getentitynumber();
     return 1;
   }
 
   return 0;
 }
 
-func_28E3(param_00) {
-  var_01 = 65;
+func_28E3(var_0) {
+  var_1 = 65;
   if(scripts\mp\utility::_hasperk("specialty_battleslide_offense")) {
-    var_01 = scripts\mp\perks\_perkfunctions::getbattleslideoffensedamage();
+    var_1 = scripts\mp\perks\_perkfunctions::getbattleslideoffensedamage();
   }
 
-  if(var_01 >= self.health) {
+  if(var_1 >= self.health) {
     self.customdeath = 1;
-    thread func_28F0(param_00);
+    thread func_28F0(var_0);
   }
 
-  param_00 dodamage(var_01, self.origin, self, self, "MOD_IMPACT", "battleslide_mp");
-  thread func_28E4(param_00);
+  var_0 dodamage(var_1, self.origin, self, self, "MOD_IMPACT", "battleslide_mp");
+  thread func_28E4(var_0);
 }
 
-func_28EB(param_00, param_01) {
-  var_02 = param_00.origin - self.origin;
-  var_03 = length(var_02);
-  if(var_03 != 0) {
-    var_04 = var_02 / var_03;
-    var_05 = param_00 getvelocity();
-    var_05 = var_05 - var_04 * vectordot(var_05, var_04);
-    var_05 = var_05 + var_04 * 400;
-    var_05 = var_05 + (0, 0, 225);
-    param_00 setvelocity(var_05);
-    param_00 shellshock("battleslide_mp", 1.5);
+func_28EB(var_0, var_1) {
+  var_2 = var_0.origin - self.origin;
+  var_3 = length(var_2);
+  if(var_3 != 0) {
+    var_4 = var_2 / var_3;
+    var_5 = var_0 getvelocity();
+    var_5 = var_5 - var_4 * vectordot(var_5, var_4);
+    var_5 = var_5 + var_4 * 400;
+    var_5 = var_5 + (0, 0, 225);
+    var_0 setvelocity(var_5);
+    var_0 shellshock("battleslide_mp", 1.5);
   }
 
-  param_00 thread func_28EE(self);
+  var_0 thread func_28EE(self);
 }
 
-func_28E8(param_00, param_01) {
-  return vectordot(param_01, param_00.origin - self.origin) < 0;
+func_28E8(var_0, var_1) {
+  return vectordot(var_1, var_0.origin - self.origin) < 0;
 }
 
-func_28E7(param_00, param_01, param_02) {
-  var_03 = physics_raycast(param_01, param_00 gettagorigin("j_mainroot"), param_02, undefined, 0, "physicsquery_closest");
-  if(isDefined(var_03) && var_03.size > 0) {
+func_28E7(var_0, var_1, var_2) {
+  var_3 = physics_raycast(var_1, var_0 gettagorigin("j_mainroot"), var_2, undefined, 0, "physicsquery_closest");
+  if(isDefined(var_3) && var_3.size > 0) {
     return 1;
   }
 
   return 0;
 }
 
-func_28E9(param_00, param_01) {
-  if(isDefined(param_00.hasriotshield) && param_00.hasriotshield) {
-    var_02 = param_01 - param_00.origin;
-    var_03 = vectornormalize((var_02[0], var_02[1], 0));
-    var_04 = anglesToForward(param_00.angles);
-    var_05 = vectordot(var_04, var_02);
-    if(param_00.hasriotshieldequipped) {
-      if(var_05 > 0.766) {
+func_28E9(var_0, var_1) {
+  if(isDefined(var_0.hasriotshield) && var_0.hasriotshield) {
+    var_2 = var_1 - var_0.origin;
+    var_3 = vectornormalize((var_2[0], var_2[1], 0));
+    var_4 = anglesToForward(var_0.angles);
+    var_5 = vectordot(var_4, var_2);
+    if(var_0.hasriotshieldequipped) {
+      if(var_5 > 0.766) {
         return 1;
       }
-    } else if(var_05 < -0.766) {
+    } else if(var_5 < -0.766) {
       return 1;
     }
   }
@@ -230,22 +230,22 @@ func_28E9(param_00, param_01) {
   return 0;
 }
 
-func_28EA(param_00) {
+func_28EA(var_0) {
   if(!isDefined(self.var_28F7)) {
     return 0;
   }
 
-  var_01 = param_00 getentitynumber();
-  return scripts\engine\utility::array_contains(self.var_28F7, var_01);
+  var_1 = var_0 getentitynumber();
+  return scripts\engine\utility::array_contains(self.var_28F7, var_1);
 }
 
-func_28E6(param_00) {
-  return isDefined(param_00.var_28E6);
+func_28E6(var_0) {
+  return isDefined(var_0.var_28E6);
 }
 
-func_28E4(param_00) {
+func_28E4(var_0) {
   self playrumbleonentity("artillery_rumble");
-  param_00 playrumbleonentity("artillery_rumble");
+  var_0 playrumbleonentity("artillery_rumble");
   playrumbleonposition("slide_collision", self.origin);
   earthquake(0.5, 0.5, self.origin, 144);
   playsoundatpos(self.origin, "slide_impact");
@@ -259,32 +259,32 @@ func_28F3() {
   self endon("sprint_slide_end");
   self playlocalsound("melee_boost");
   self playsoundonmovingent("melee_boost_npc");
-  var_00 = 0;
-  var_01 = 5;
-  while(var_01 > var_00) {
+  var_0 = 0;
+  var_1 = 5;
+  while(var_1 > var_0) {
     if(isplayer(self)) {
-      var_02 = spawnfxforclient(level.var_28C9, self getEye(), self);
-      thread func_28F4(var_02, 0.1);
-      triggerfx(var_02);
+      var_2 = spawnfxforclient(level.var_28C9, self getEye(), self);
+      thread func_28F4(var_2, 0.1);
+      triggerfx(var_2);
     }
 
     earthquake(0.2, 0.25, self.origin, 144);
-    var_00++;
+    var_0++;
     scripts\engine\utility::waitframe();
   }
 }
 
-func_28F4(param_00, param_01) {
-  wait(param_01);
-  if(isDefined(param_00)) {
-    param_00 delete();
+func_28F4(var_0, var_1) {
+  wait(var_1);
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
-func_28F0(param_00) {
-  param_00 endon("disconnect");
-  var_01 = self.origin;
+func_28F0(var_0) {
+  var_0 endon("disconnect");
+  var_1 = self.origin;
   self waittill("start_instant_ragdoll");
   wait(0.1);
-  physicsexplosionsphere(var_01, 92, 72, 2.5);
+  physicsexplosionsphere(var_1, 92, 72, 2.5);
 }

@@ -5,45 +5,45 @@
 
 init() {}
 
-func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(var_02)) {
-    var_02 = 0;
+func_1768(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(var_04 == 0) {
-    var_04 = undefined;
+  if(var_4 == 0) {
+    var_4 = undefined;
   }
 
   if(!isDefined(self.lightbarstructs) || self.lightbarstructs.size == 0) {
-    var_06 = [];
+    var_6 = [];
     var_6[0] = spawnStruct();
-    self.lightbarstructs = var_06;
+    self.lightbarstructs = var_6;
   } else {
-    var_07 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
-    self.lightbarstructs = var_07;
+    var_7 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
+    self.lightbarstructs = var_7;
     self.lightbarstructs[self.lightbarstructs.size] = spawnStruct();
   }
 
-  self.lightbarstructs[self.lightbarstructs.size - 1].lbcolor = var_00;
-  self.lightbarstructs[self.lightbarstructs.size - 1].pulsetime = var_01;
-  self.lightbarstructs[self.lightbarstructs.size - 1].priority = var_02;
-  self.lightbarstructs[self.lightbarstructs.size - 1].endondeath = var_03;
+  self.lightbarstructs[self.lightbarstructs.size - 1].lbcolor = var_0;
+  self.lightbarstructs[self.lightbarstructs.size - 1].pulsetime = var_1;
+  self.lightbarstructs[self.lightbarstructs.size - 1].priority = var_2;
+  self.lightbarstructs[self.lightbarstructs.size - 1].endondeath = var_3;
   self.lightbarstructs[self.lightbarstructs.size - 1].timeplacedinstack = gettime();
   self.lightbarstructs[self.lightbarstructs.size - 1].executing = 0;
-  self.lightbarstructs[self.lightbarstructs.size - 1].func_636F = var_05;
+  self.lightbarstructs[self.lightbarstructs.size - 1].var_636F = var_5;
 
-  if(isDefined(var_04)) {
-    self.lightbarstructs[self.lightbarstructs.size - 1].time = var_04 * 1000;
+  if(isDefined(var_4)) {
+    self.lightbarstructs[self.lightbarstructs.size - 1].time = var_4 * 1000;
   } else {
     self.lightbarstructs[self.lightbarstructs.size - 1].time = undefined;
   }
 
-  if(isDefined(var_03) && var_03) {
+  if(isDefined(var_3) && var_3) {
     thread endinactiveinstructionondeath(self.lightbarstructs[self.lightbarstructs.size - 1]);
   }
 
-  if(isDefined(var_05)) {
-    thread endinstructiononnotification(var_05, self.lightbarstructs[self.lightbarstructs.size - 1]);
+  if(isDefined(var_5)) {
+    thread endinstructiononnotification(var_5, self.lightbarstructs[self.lightbarstructs.size - 1]);
   }
 
   thread managelightbarstack();
@@ -58,29 +58,29 @@ managelightbarstack() {
     wait 0.05;
 
     if(self.lightbarstructs.size > 1) {
-      var_00 = removetimedoutinstructions(self.lightbarstructs);
-      var_01 = scripts\engine\utility::array_sort_with_func(var_00, ::is_higher_priority);
+      var_0 = removetimedoutinstructions(self.lightbarstructs);
+      var_1 = scripts\engine\utility::array_sort_with_func(var_0, ::is_higher_priority);
     } else
-      var_01 = self.lightbarstructs;
+      var_1 = self.lightbarstructs;
 
     if(var_1.size == 0) {
       return;
     }
-    self.lightbarstructs = var_01;
-    var_02 = var_1[0];
+    self.lightbarstructs = var_1;
+    var_2 = var_1[0];
 
     if(var_2.executing) {
       continue;
     }
-    var_03 = !isDefined(self.lightbarstructs[self.lightbarstructs.size - 1].time);
-    var_04 = 0;
+    var_3 = !isDefined(self.lightbarstructs[self.lightbarstructs.size - 1].time);
+    var_4 = 0;
 
-    if(!var_03) {
-      var_05 = gettime() - var_2.timeplacedinstack;
-      var_04 = var_2.time - var_05;
-      var_04 = var_04 / 1000;
+    if(!var_3) {
+      var_5 = gettime() - var_2.timeplacedinstack;
+      var_4 = var_2.time - var_5;
+      var_4 = var_4 / 1000;
 
-      if(var_04 <= 0) {
+      if(var_4 <= 0) {
         self.lightbarstructs[0] notify("removed");
         self.lightbarstructs[0] = undefined;
         cleanlbarray();
@@ -88,9 +88,9 @@ managelightbarstack() {
       }
     }
 
-    if(var_03) {
+    if(var_3) {
       if(var_2.endondeath) {
-        var_02 notify("executing");
+        var_2 notify("executing");
         var_2.executing = 1;
         thread set_lightbar_perm_endon_death(var_2.lbcolor, var_2.pulsetime);
       } else
@@ -100,59 +100,59 @@ managelightbarstack() {
     }
 
     if(var_2.endondeath) {
-      var_02 notify("executing");
+      var_2 notify("executing");
       var_2.executing = 1;
-      thread set_lightbar_for_time_endon_death(var_2.lbcolor, var_2.pulsetime, var_04);
+      thread set_lightbar_for_time_endon_death(var_2.lbcolor, var_2.pulsetime, var_4);
       continue;
     }
 
-    thread set_lightbar_for_time(var_2.lbcolor, var_2.pulsetime, var_04);
+    thread set_lightbar_for_time(var_2.lbcolor, var_2.pulsetime, var_4);
   }
 }
 
 cleanlbarray() {
-  var_00 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
-  self.lightbarstructs = var_00;
+  var_0 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
+  self.lightbarstructs = var_0;
 }
 
-removetimedoutinstructions(var_00) {
-  var_01 = [];
+removetimedoutinstructions(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in var_00) {
+  foreach(var_3 in var_0) {
     if(!isDefined(var_3.time)) {
-      var_1[var_1.size] = var_03;
+      var_1[var_1.size] = var_3;
       continue;
     }
 
-    var_04 = gettime() - var_3.timeplacedinstack;
-    var_05 = var_3.time - var_04;
-    var_05 = var_05 / 1000;
+    var_4 = gettime() - var_3.timeplacedinstack;
+    var_5 = var_3.time - var_4;
+    var_5 = var_5 / 1000;
 
-    if(var_05 > 0) {
-      var_1[var_1.size] = var_03;
+    if(var_5 > 0) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-is_higher_priority(var_00, var_01) {
+is_higher_priority(var_0, var_1) {
   return var_0.priority > var_1.priority;
 }
 
-set_lightbar(var_00, var_01) {
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+set_lightbar(var_0, var_1) {
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
 }
 
-set_lightbar_for_time(var_00, var_01, var_02) {
+set_lightbar_for_time(var_0, var_1, var_2) {
   self notify("set_lightbar_for_time");
   self endon("set_lightbar_for_time");
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
-  wait(var_02);
+  wait(var_2);
 
   if(!isDefined(self)) {
     return;
@@ -162,29 +162,29 @@ set_lightbar_for_time(var_00, var_01, var_02) {
   cleanlbarray();
 }
 
-set_lightbar_perm(var_00, var_01) {
+set_lightbar_perm(var_0, var_1) {
   self notify("set_lightbar");
   self endon("set_lightbar");
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
 }
 
-set_lightbar_endon_death(var_00, var_01) {
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+set_lightbar_endon_death(var_0, var_1) {
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
   thread turn_off_light_bar_on_death();
 }
 
-set_lightbar_for_time_endon_death(var_00, var_01, var_02) {
+set_lightbar_for_time_endon_death(var_0, var_1, var_2) {
   self notify("set_lightbar_for_time_endon_death");
   self endon("set_lightbar_for_time_endon_death");
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
   thread turn_off_light_bar_on_death();
-  wait(var_02);
+  wait(var_2);
 
   if(!isDefined(self)) {
     return;
@@ -195,19 +195,19 @@ set_lightbar_for_time_endon_death(var_00, var_01, var_02) {
   cleanlbarray();
 }
 
-set_lightbar_perm_endon_death(var_00, var_01) {
+set_lightbar_perm_endon_death(var_0, var_1) {
   self notify("set_lightbar_endon_death");
   self endon("set_lightbar_endon_death");
-  set_lightbar_pulse_time(var_01);
-  set_lightbar_color(var_00);
+  set_lightbar_pulse_time(var_1);
+  set_lightbar_color(var_0);
   set_lightbar_on();
   thread turn_off_light_bar_on_death();
 }
 
-endinactiveinstructionondeath(var_00) {
+endinactiveinstructionondeath(var_0) {
   self notify("endInactiveInstructionOnDeath");
   self endon("endInactiveInstructionOnDeath");
-  var_00 endon("executing");
+  var_0 endon("executing");
   self waittill("death");
 
   if(!isDefined(self)) {
@@ -221,25 +221,25 @@ endinactiveinstructionondeath(var_00) {
   cleanlbarray();
 }
 
-endinstructiononnotification(var_00, var_01) {
-  var_01 endon("removed");
+endinstructiononnotification(var_0, var_1) {
+  var_1 endon("removed");
 
-  if(isarray(var_00)) {
-    var_02 = scripts\engine\utility::waittill_any_in_array_return(var_00);
+  if(isarray(var_0)) {
+    var_2 = scripts\engine\utility::waittill_any_in_array_return(var_0);
   } else {
-    self waittill(var_00);
+    self waittill(var_0);
   }
 
   if(!isDefined(self)) {
     return;
   }
-  for(var_03 = 0; var_03 < self.lightbarstructs.size; var_3++) {
-    if(var_01 == self.lightbarstructs[var_03]) {
+  for(var_3 = 0; var_3 < self.lightbarstructs.size; var_3++) {
+    if(var_1 == self.lightbarstructs[var_3]) {
       if(var_1.executing) {
         set_lightbar_off();
       }
 
-      self.lightbarstructs[var_03] = undefined;
+      self.lightbarstructs[var_3] = undefined;
       cleanlbarray();
       return;
     }
@@ -263,8 +263,8 @@ turn_off_light_bar_on_death() {
   cleanlbarray();
 }
 
-set_lightbar_color(var_00) {
-  self setclientomnvar("lb_color", var_00);
+set_lightbar_color(var_0) {
+  self setclientomnvar("lb_color", var_0);
 }
 
 set_lightbar_on() {
@@ -275,6 +275,6 @@ set_lightbar_off() {
   self setclientomnvar("lb_gsc_controlled", 0);
 }
 
-set_lightbar_pulse_time(var_00) {
-  self setclientomnvar("lb_pulse_time", var_00);
+set_lightbar_pulse_time(var_0) {
+  self setclientomnvar("lb_pulse_time", var_0);
 }

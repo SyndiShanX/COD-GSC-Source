@@ -6,7 +6,7 @@
 
 func_CBAA() {}
 
-func_CBB5(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("e3")) {
     return;
   }
@@ -15,7 +15,7 @@ func_CBB5(param_00, param_01, param_02, param_03, param_04, param_05) {
     wait(0.5);
   }
 
-  if(!isDefined(param_01)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
@@ -34,24 +34,24 @@ func_CBB5(param_00, param_01, param_02, param_03, param_04, param_05) {
   level.var_CB9C.var_4C = 1;
   level.var_CB9C.origin_offset = (0, 0, 0);
   level.var_CB9C.var_42 = (0, 0, 0);
-  level.var_CB9C.physics_setgravitydynentscalar = param_01;
-  level.var_CB9C.missionsuccess = scripts\engine\utility::ter_op(isDefined(param_02), param_02, 30);
-  if(isDefined(param_03)) {
-    level.var_CB9C.origin_offset = param_03;
+  level.var_CB9C.physics_setgravitydynentscalar = var_1;
+  level.var_CB9C.missionsuccess = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 30);
+  if(isDefined(var_3)) {
+    level.var_CB9C.origin_offset = var_3;
   }
 
-  if(isDefined(param_04)) {
-    level.var_CB9C.var_42 = param_04;
+  if(isDefined(var_4)) {
+    level.var_CB9C.var_42 = var_4;
   }
 
-  level.var_CB9C.issplitscreen = param_00;
+  level.var_CB9C.issplitscreen = var_0;
   level.var_CB9C.isenemyteam = 1;
   level.var_CB9C.nodesvisible = 1;
   setomnvar("ui_pip_static", 0);
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
   setomnvar("ui_pip_message_type", 1);
-  if(!isDefined(param_05)) {
+  if(!isDefined(var_5)) {
     setomnvar("ui_show_pip", 1);
     if(isDefined(level.player _meth_8473())) {
       setomnvar("ui_jackal_hide_follow_pip", 1);
@@ -62,7 +62,7 @@ func_CBB5(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 }
 
-func_2ADF(param_00) {
+func_2ADF(var_0) {
   level.player playSound("ui_pip_on_hud_right");
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
@@ -74,7 +74,7 @@ func_2ADF(param_00) {
   setomnvar("ui_show_pip", 0);
   wait(0.05);
   setomnvar("ui_show_pip", 1);
-  cinematicingame(param_00);
+  cinematicingame(var_0);
   while(!iscinematicplaying()) {
     wait(0.05);
   }
@@ -90,10 +90,10 @@ func_2ADF(param_00) {
   setsaveddvar("bg_cinematicCanPause", "1");
 }
 
-func_CBC3(param_00) {
+func_CBC3(var_0) {
   level.var_CB9C.var_1A = "naked";
   level.var_CB9C.var_1B = 0.5;
-  level.var_CB9C.var_386 = param_00;
+  level.var_CB9C.var_386 = var_0;
 }
 
 func_CBA3() {
@@ -115,24 +115,24 @@ func_CBAC() {
   return isDefined(level.var_CB9C) && isDefined(level.var_CB9C.isenemyteam) && level.var_CB9C.isenemyteam;
 }
 
-func_CBA5(param_00) {
+func_CBA5(var_0) {
   func_6A67();
-  scripts\sp\utility::func_10347(param_00);
+  scripts\sp\utility::func_10347(var_0);
   func_CBA3();
 }
 
-func_6A67(param_00) {
+func_6A67(var_0) {
   switch (tolower(self.unittype)) {
     case "c6i":
-      func_CBB5(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), param_00);
+      func_CBB5(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), var_0);
       break;
 
     case "jackal":
-      func_CBB5(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), param_00);
+      func_CBB5(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), var_0);
       break;
 
     default:
-      func_CBB5(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), param_00);
+      func_CBB5(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), var_0);
       level.var_CB9C.tablelookupistringbyrow = 17;
       break;
   }

@@ -33,30 +33,30 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player32x32x256", "targetname");
-  var_01 = spawn("script_model", (-185, 1153, 213));
-  var_01.angles = (7.59943, 360, 90);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("clip128x128x8", "targetname");
-  var_03 = spawn("script_model", (-1589, -326, 297));
-  var_03.angles = (270, 180, 180);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player128x128x8", "targetname");
-  var_05 = spawn("script_model", (-816, -1600, 256));
-  var_05.angles = (0, 0, 0);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("clip128x128x8", "targetname");
-  var_07 = spawn("script_model", (-1324, 1136, 100));
-  var_07.angles = (0, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player64x64x128", "targetname");
-  var_09 = spawn("script_model", (523, 1943.5, 237));
-  var_09.angles = (0, 0, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
-  var_08 = getent("player256x256x8", "targetname");
-  var_09 = spawn("script_model", (-128, -1948, 440));
-  var_09.angles = (0, 0, -86);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player32x32x256", "targetname");
+  var_1 = spawn("script_model", (-185, 1153, 213));
+  var_1.angles = (7.59943, 360, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("clip128x128x8", "targetname");
+  var_3 = spawn("script_model", (-1589, -326, 297));
+  var_3.angles = (270, 180, 180);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player128x128x8", "targetname");
+  var_5 = spawn("script_model", (-816, -1600, 256));
+  var_5.angles = (0, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("clip128x128x8", "targetname");
+  var_7 = spawn("script_model", (-1324, 1136, 100));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player64x64x128", "targetname");
+  var_9 = spawn("script_model", (523, 1943.5, 237));
+  var_9.angles = (0, 0, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
+  var_8 = getent("player256x256x8", "targetname");
+  var_9 = spawn("script_model", (-128, -1948, 440));
+  var_9.angles = (0, 0, -86);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("clip128x128x128", "targetname");
   var_0B = spawn("script_model", (-392, -3080, 312));
   var_0B.angles = (0, 0, 0);
@@ -68,142 +68,142 @@ fix_collision() {
 }
 
 fix_broshot() {
-  var_00 = getent("character_loc_broshot_a", "targetname");
-  var_01 = getent("character_loc_broshot_b", "targetname");
-  var_02 = getent("character_loc_broshot_c", "targetname");
-  var_03 = getent("character_loc_broshot_d", "targetname");
-  var_04 = getent("character_loc_broshot_e", "targetname");
-  var_05 = getent("character_loc_broshot", "targetname");
-  var_06 = var_00.origin;
-  var_00.origin = (var_06[0], var_06[1], -1);
-  var_06 = var_01.origin;
-  var_01.origin = (var_06[0], var_06[1], -1);
-  var_06 = var_02.origin;
-  var_02.origin = (var_06[0], var_06[1], -7);
-  var_06 = var_03.origin;
-  var_03.origin = (var_06[0], var_06[1], -7);
-  var_06 = var_04.origin;
-  var_04.origin = (var_06[0], var_06[1], -3);
-  var_06 = var_05.origin;
-  var_05.origin = (var_06[0], var_06[1], -1);
+  var_0 = getent("character_loc_broshot_a", "targetname");
+  var_1 = getent("character_loc_broshot_b", "targetname");
+  var_2 = getent("character_loc_broshot_c", "targetname");
+  var_3 = getent("character_loc_broshot_d", "targetname");
+  var_4 = getent("character_loc_broshot_e", "targetname");
+  var_5 = getent("character_loc_broshot", "targetname");
+  var_6 = var_0.origin;
+  var_0.origin = (var_6[0], var_6[1], -1);
+  var_6 = var_1.origin;
+  var_1.origin = (var_6[0], var_6[1], -1);
+  var_6 = var_2.origin;
+  var_2.origin = (var_6[0], var_6[1], -7);
+  var_6 = var_3.origin;
+  var_3.origin = (var_6[0], var_6[1], -7);
+  var_6 = var_4.origin;
+  var_4.origin = (var_6[0], var_6[1], -3);
+  var_6 = var_5.origin;
+  var_5.origin = (var_6[0], var_6[1], -1);
 }
 
 setuptrain() {
   level endon("game_ended");
-  var_00 = 500;
-  var_01 = getent("trainCar_01", "targetname");
-  var_01.var_BE1C = var_00;
-  var_01.var_BE19 = getEntArray(var_01.target, "targetname");
-  foreach(var_03 in var_01.var_BE19) {
-    var_03 linkto(var_01);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_01.fx_loc = var_03;
+  var_0 = 500;
+  var_1 = getent("trainCar_01", "targetname");
+  var_1.var_BE1C = var_0;
+  var_1.var_BE19 = getEntArray(var_1.target, "targetname");
+  foreach(var_3 in var_1.var_BE19) {
+    var_3 linkto(var_1);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_1.fx_loc = var_3;
     }
   }
 
-  var_01.killtrigger = spawn("trigger_radius", (2984, -640, 180), 0, 48, 230);
-  var_01.killtrigger enablelinkto();
-  var_01.killtrigger linkto(var_01);
-  var_01.var_9EAC = 0;
-  var_01.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01", "targetname");
-  var_01 moveto(var_01.initialstruct.origin, 1, 0, 0);
-  var_01 rotateto(var_01.initialstruct.angles, 1, 0, 0);
-  var_01.car02 = getent("trainCar_02", "targetname");
-  var_01.car02.var_BE1C = var_00;
-  var_01.car02.var_BE19 = getEntArray(var_01.car02.target, "targetname");
-  foreach(var_03 in var_01.car02.var_BE19) {
-    var_03 linkto(var_01.car02);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_01.car02.fx_loc = var_03;
+  var_1.killtrigger = spawn("trigger_radius", (2984, -640, 180), 0, 48, 230);
+  var_1.killtrigger enablelinkto();
+  var_1.killtrigger linkto(var_1);
+  var_1.var_9EAC = 0;
+  var_1.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01", "targetname");
+  var_1 moveto(var_1.initialstruct.origin, 1, 0, 0);
+  var_1 rotateto(var_1.initialstruct.angles, 1, 0, 0);
+  var_1.car02 = getent("trainCar_02", "targetname");
+  var_1.car02.var_BE1C = var_0;
+  var_1.car02.var_BE19 = getEntArray(var_1.car02.target, "targetname");
+  foreach(var_3 in var_1.car02.var_BE19) {
+    var_3 linkto(var_1.car02);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_1.car02.fx_loc = var_3;
     }
   }
 
-  var_01.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02", "targetname");
-  var_01.car02 moveto(var_01.car02.initialstruct.origin, 1, 0, 0);
-  var_01.car02 rotateto(var_01.car02.initialstruct.angles, 1, 0, 0);
-  var_01.car02.unresolved_collision_func = ::traincollision;
-  var_01.car03 = getent("trainCar_03", "targetname");
-  var_01.car03.var_BE1C = var_00;
-  var_01.car03.var_BE19 = getEntArray(var_01.car03.target, "targetname");
-  foreach(var_03 in var_01.car03.var_BE19) {
-    var_03 linkto(var_01.car03);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_01.car03.fx_loc = var_03;
+  var_1.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02", "targetname");
+  var_1.car02 moveto(var_1.car02.initialstruct.origin, 1, 0, 0);
+  var_1.car02 rotateto(var_1.car02.initialstruct.angles, 1, 0, 0);
+  var_1.car02.unresolved_collision_func = ::traincollision;
+  var_1.car03 = getent("trainCar_03", "targetname");
+  var_1.car03.var_BE1C = var_0;
+  var_1.car03.var_BE19 = getEntArray(var_1.car03.target, "targetname");
+  foreach(var_3 in var_1.car03.var_BE19) {
+    var_3 linkto(var_1.car03);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_1.car03.fx_loc = var_3;
     }
   }
 
-  var_01.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03", "targetname");
-  var_01.car03 moveto(var_01.car03.initialstruct.origin, 1, 0, 0);
-  var_01.car03 rotateto(var_01.car03.initialstruct.angles, 1, 0, 0);
-  var_09 = getent("trainCar_04", "targetname");
-  var_09.var_BE1C = var_00;
-  var_09.var_BE19 = getEntArray(var_09.target, "targetname");
-  foreach(var_03 in var_09.var_BE19) {
-    var_03 linkto(var_09);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_09.fx_loc = var_03;
+  var_1.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03", "targetname");
+  var_1.car03 moveto(var_1.car03.initialstruct.origin, 1, 0, 0);
+  var_1.car03 rotateto(var_1.car03.initialstruct.angles, 1, 0, 0);
+  var_9 = getent("trainCar_04", "targetname");
+  var_9.var_BE1C = var_0;
+  var_9.var_BE19 = getEntArray(var_9.target, "targetname");
+  foreach(var_3 in var_9.var_BE19) {
+    var_3 linkto(var_9);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_9.fx_loc = var_3;
     }
   }
 
-  var_09.killtrigger = spawn("trigger_radius", (3560, -640, 180), 0, 48, 230);
-  var_09.killtrigger enablelinkto();
-  var_09.killtrigger linkto(var_09);
-  var_09.var_9EAC = 0;
-  var_09.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01", "targetname");
-  var_09 moveto(var_09.initialstruct.origin, 1, 0, 0);
-  var_09 rotateto(var_09.initialstruct.angles, 1, 0, 0);
-  var_09.car02 = getent("trainCar_05", "targetname");
-  var_09.car02.var_BE1C = var_00;
-  var_09.car02.var_BE19 = getEntArray(var_09.car02.target, "targetname");
-  foreach(var_03 in var_09.car02.var_BE19) {
-    var_03 linkto(var_09.car02);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_09.car02.fx_loc = var_03;
+  var_9.killtrigger = spawn("trigger_radius", (3560, -640, 180), 0, 48, 230);
+  var_9.killtrigger enablelinkto();
+  var_9.killtrigger linkto(var_9);
+  var_9.var_9EAC = 0;
+  var_9.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01", "targetname");
+  var_9 moveto(var_9.initialstruct.origin, 1, 0, 0);
+  var_9 rotateto(var_9.initialstruct.angles, 1, 0, 0);
+  var_9.car02 = getent("trainCar_05", "targetname");
+  var_9.car02.var_BE1C = var_0;
+  var_9.car02.var_BE19 = getEntArray(var_9.car02.target, "targetname");
+  foreach(var_3 in var_9.car02.var_BE19) {
+    var_3 linkto(var_9.car02);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_9.car02.fx_loc = var_3;
     }
   }
 
-  var_09.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02", "targetname");
-  var_09.car02 moveto(var_09.car02.initialstruct.origin, 1, 0, 0);
-  var_09.car02 rotateto(var_09.car02.initialstruct.angles, 1, 0, 0);
-  var_09.car02.unresolved_collision_func = ::traincollision;
-  var_09.car03 = getent("trainCar_06", "targetname");
-  var_09.car03.var_BE1C = var_00;
-  var_09.car03.var_BE19 = getEntArray(var_09.car03.target, "targetname");
-  foreach(var_03 in var_09.car03.var_BE19) {
-    var_03 linkto(var_09.car03);
-    if(isDefined(var_03.script_label) && var_03.script_label == "trainFX") {
-      var_09.car03.fx_loc = var_03;
+  var_9.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02", "targetname");
+  var_9.car02 moveto(var_9.car02.initialstruct.origin, 1, 0, 0);
+  var_9.car02 rotateto(var_9.car02.initialstruct.angles, 1, 0, 0);
+  var_9.car02.unresolved_collision_func = ::traincollision;
+  var_9.car03 = getent("trainCar_06", "targetname");
+  var_9.car03.var_BE1C = var_0;
+  var_9.car03.var_BE19 = getEntArray(var_9.car03.target, "targetname");
+  foreach(var_3 in var_9.car03.var_BE19) {
+    var_3 linkto(var_9.car03);
+    if(isDefined(var_3.script_label) && var_3.script_label == "trainFX") {
+      var_9.car03.fx_loc = var_3;
     }
   }
 
-  var_09.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03", "targetname");
-  var_09.car03 moveto(var_09.car03.initialstruct.origin, 1, 0, 0);
-  var_09.car03 rotateto(var_09.car03.initialstruct.angles, 1, 0, 0);
-  thread trackmanger(var_01, var_09);
+  var_9.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03", "targetname");
+  var_9.car03 moveto(var_9.car03.initialstruct.origin, 1, 0, 0);
+  var_9.car03 rotateto(var_9.car03.initialstruct.angles, 1, 0, 0);
+  thread trackmanger(var_1, var_9);
 }
 
-traincollision(param_00) {}
+traincollision(var_0) {}
 
-trainkilltrigger(param_00) {
+trainkilltrigger(var_0) {
   level endon("game_ended");
-  param_00.var_9EAC = 1;
-  while(param_00.var_9EAC) {
-    param_00.killtrigger waittill("trigger", var_01);
-    if(isDefined(var_01) && param_00.var_9EAC) {
-      if(isplayer(var_01)) {
-        var_01 suicide();
+  var_0.var_9EAC = 1;
+  while(var_0.var_9EAC) {
+    var_0.killtrigger waittill("trigger", var_1);
+    if(isDefined(var_1) && var_0.var_9EAC) {
+      if(isplayer(var_1)) {
+        var_1 suicide();
         continue;
       }
 
-      if(isDefined(var_01.classname) && var_01.classname == "script_vehicle") {
-        if(isDefined(var_01.streakname)) {
-          if(var_01.streakname == "minijackal") {
-            var_01 notify("minijackal_end");
+      if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
+        if(isDefined(var_1.streakname)) {
+          if(var_1.streakname == "minijackal") {
+            var_1 notify("minijackal_end");
             continue;
           }
 
-          if(var_01.streakname == "venom") {
-            var_01 notify("venom_end", var_01.origin);
+          if(var_1.streakname == "venom") {
+            var_1 notify("venom_end", var_1.origin);
           }
         }
       }
@@ -211,53 +211,53 @@ trainkilltrigger(param_00) {
   }
 }
 
-trackmanger(param_00, param_01) {
+trackmanger(var_0, var_1) {
   level endon("game_ended");
-  thread trainmovelogic(param_01);
-  thread trainmovelogic(param_01.car02);
-  thread trainmovelogic(param_01.car03);
-  param_01 hide();
-  param_01 notsolid();
-  foreach(var_03 in param_01.var_BE19) {
-    var_03 hide();
-    var_03 notsolid();
+  thread trainmovelogic(var_1);
+  thread trainmovelogic(var_1.car02);
+  thread trainmovelogic(var_1.car03);
+  var_1 hide();
+  var_1 notsolid();
+  foreach(var_3 in var_1.var_BE19) {
+    var_3 hide();
+    var_3 notsolid();
   }
 
-  param_01.car02 hide();
-  param_01.car02 notsolid();
-  foreach(var_03 in param_01.car02.var_BE19) {
-    var_03 hide();
-    var_03 notsolid();
+  var_1.car02 hide();
+  var_1.car02 notsolid();
+  foreach(var_3 in var_1.car02.var_BE19) {
+    var_3 hide();
+    var_3 notsolid();
   }
 
-  param_01.car03 hide();
-  param_01.car03 notsolid();
-  foreach(var_03 in param_01.car03.var_BE19) {
-    var_03 hide();
-    var_03 notsolid();
+  var_1.car03 hide();
+  var_1.car03 notsolid();
+  foreach(var_3 in var_1.car03.var_BE19) {
+    var_3 hide();
+    var_3 notsolid();
   }
 
   for(;;) {
-    param_01 waittill("approaching_station");
-    thread trainkilltrigger(param_01);
+    var_1 waittill("approaching_station");
+    thread trainkilltrigger(var_1);
     scripts\engine\utility::exploder(15);
-    thread trainmovelogic(param_00);
+    thread trainmovelogic(var_0);
     scripts\engine\utility::waitframe();
-    thread trainmovelogic(param_00.car02);
+    thread trainmovelogic(var_0.car02);
     scripts\engine\utility::waitframe();
-    thread trainmovelogic(param_00.car03);
+    thread trainmovelogic(var_0.car03);
     wait(3.5);
     scripts\engine\utility::exploder(10);
     wait(3.25);
     scripts\engine\utility::exploder(5);
-    param_00 waittill("approaching_station");
-    thread trainkilltrigger(param_00);
+    var_0 waittill("approaching_station");
+    thread trainkilltrigger(var_0);
     scripts\engine\utility::exploder(15);
-    thread trainmovelogic(param_01);
+    thread trainmovelogic(var_1);
     scripts\engine\utility::waitframe();
-    thread trainmovelogic(param_01.car02);
+    thread trainmovelogic(var_1.car02);
     scripts\engine\utility::waitframe();
-    thread trainmovelogic(param_01.car03);
+    thread trainmovelogic(var_1.car03);
     wait(3.5);
     scripts\engine\utility::exploder(10);
     wait(3.25);
@@ -265,104 +265,104 @@ trackmanger(param_00, param_01) {
   }
 }
 
-trainmovelogic(param_00) {
+trainmovelogic(var_0) {
   level endon("game_ended");
-  if(isDefined(param_00.fx_loc)) {
-    playFXOnTag(level._effect["train_move_FX"], param_00.fx_loc, "tag_origin");
+  if(isDefined(var_0.fx_loc)) {
+    playFXOnTag(level._effect["train_move_FX"], var_0.fx_loc, "tag_origin");
   }
 
-  param_00.var_4C09 = param_00.initialstruct;
-  param_00.nextstruct = scripts\engine\utility::getstruct(param_00.initialstruct.target, "targetname");
-  var_01 = 2;
-  var_02 = 1.5;
-  if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04") {
-    param_00 playsoundonmovingent("depot_train_car1_depart");
-  } else if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06") {
-    param_00 playsoundonmovingent("depot_train_car3_depart");
+  var_0.var_4C09 = var_0.initialstruct;
+  var_0.nextstruct = scripts\engine\utility::getstruct(var_0.initialstruct.target, "targetname");
+  var_1 = 2;
+  var_2 = 1.5;
+  if(var_0.var_336 == "trainCar_01" || var_0.var_336 == "trainCar_04") {
+    var_0 playsoundonmovingent("depot_train_car1_depart");
+  } else if(var_0.var_336 == "trainCar_03" || var_0.var_336 == "trainCar_06") {
+    var_0 playsoundonmovingent("depot_train_car3_depart");
   }
 
-  param_00 moveto(param_00.nextstruct.origin, var_01, var_02, 0);
-  param_00 rotateto(param_00.nextstruct.angles, var_01, var_02, 0);
-  wait(var_01);
-  param_00.var_4C09 = param_00.nextstruct;
-  param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target, "targetname");
-  while(param_00.nextstruct.var_336 != param_00.initialstruct.var_336) {
-    if(param_00.var_4C09.var_336 == "trainTeleport") {
-      if(isDefined(param_00.fx_loc)) {
-        stopFXOnTag(level._effect["train_move_FX"], param_00.fx_loc, "tag_origin");
+  var_0 moveto(var_0.nextstruct.origin, var_1, var_2, 0);
+  var_0 rotateto(var_0.nextstruct.angles, var_1, var_2, 0);
+  wait(var_1);
+  var_0.var_4C09 = var_0.nextstruct;
+  var_0.nextstruct = scripts\engine\utility::getstruct(var_0.var_4C09.target, "targetname");
+  while(var_0.nextstruct.var_336 != var_0.initialstruct.var_336) {
+    if(var_0.var_4C09.var_336 == "trainTeleport") {
+      if(isDefined(var_0.fx_loc)) {
+        stopFXOnTag(level._effect["train_move_FX"], var_0.fx_loc, "tag_origin");
       }
 
-      param_00 hide();
-      param_00 notsolid();
-      foreach(var_04 in param_00.var_BE19) {
-        var_04 hide();
-        var_04 notsolid();
+      var_0 hide();
+      var_0 notsolid();
+      foreach(var_4 in var_0.var_BE19) {
+        var_4 hide();
+        var_4 notsolid();
       }
 
       wait(1);
-      param_00 moveto(param_00.nextstruct.origin, 1, 0, 0);
-      param_00 rotateto(param_00.nextstruct.angles, 1, 0, 0);
+      var_0 moveto(var_0.nextstruct.origin, 1, 0, 0);
+      var_0 rotateto(var_0.nextstruct.angles, 1, 0, 0);
       wait(1);
-      param_00 show();
-      param_00 solid();
-      foreach(var_04 in param_00.var_BE19) {
-        var_04 show();
-        var_04 solid();
+      var_0 show();
+      var_0 solid();
+      foreach(var_4 in var_0.var_BE19) {
+        var_4 show();
+        var_4 solid();
       }
 
-      if(isDefined(param_00.fx_loc)) {
-        playFXOnTag(level._effect["train_move_FX"], param_00.fx_loc, "tag_origin");
+      if(isDefined(var_0.fx_loc)) {
+        playFXOnTag(level._effect["train_move_FX"], var_0.fx_loc, "tag_origin");
       }
 
-      param_00 thread play_train_arrive_sfx(param_00);
-      param_00.var_4C09 = param_00.nextstruct;
-      param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target, "targetname");
+      var_0 thread play_train_arrive_sfx(var_0);
+      var_0.var_4C09 = var_0.nextstruct;
+      var_0.nextstruct = scripts\engine\utility::getstruct(var_0.var_4C09.target, "targetname");
       continue;
     }
 
-    if(param_00.var_4C09.var_336 == "nearStationStruct") {
-      param_00 notify("approaching_station");
+    if(var_0.var_4C09.var_336 == "nearStationStruct") {
+      var_0 notify("approaching_station");
     }
 
-    param_00.mymovetime = distspeedtotime(param_00.var_4C09, param_00.nextstruct, param_00.var_BE1C);
-    param_00 moveto(param_00.nextstruct.origin, param_00.mymovetime, 0, 0);
-    param_00 rotateto(param_00.nextstruct.angles, param_00.mymovetime, 0, 0);
-    wait(param_00.mymovetime);
-    param_00.var_4C09 = param_00.nextstruct;
-    param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target, "targetname");
+    var_0.mymovetime = distspeedtotime(var_0.var_4C09, var_0.nextstruct, var_0.var_BE1C);
+    var_0 moveto(var_0.nextstruct.origin, var_0.mymovetime, 0, 0);
+    var_0 rotateto(var_0.nextstruct.angles, var_0.mymovetime, 0, 0);
+    wait(var_0.mymovetime);
+    var_0.var_4C09 = var_0.nextstruct;
+    var_0.nextstruct = scripts\engine\utility::getstruct(var_0.var_4C09.target, "targetname");
   }
 
-  param_00 moveto(param_00.nextstruct.origin, var_01, 0, var_02);
-  param_00 rotateto(param_00.nextstruct.angles, var_01, 0, var_02);
-  wait(var_01);
-  if(isDefined(param_00.var_9EAC)) {
-    param_00.var_9EAC = 0;
+  var_0 moveto(var_0.nextstruct.origin, var_1, 0, var_2);
+  var_0 rotateto(var_0.nextstruct.angles, var_1, 0, var_2);
+  wait(var_1);
+  if(isDefined(var_0.var_9EAC)) {
+    var_0.var_9EAC = 0;
   }
 
-  if(isDefined(param_00.fx_loc)) {
-    stopFXOnTag(level._effect["train_move_FX"], param_00.fx_loc, "tag_origin");
+  if(isDefined(var_0.fx_loc)) {
+    stopFXOnTag(level._effect["train_move_FX"], var_0.fx_loc, "tag_origin");
   }
 
-  param_00.var_4C09 = param_00.nextstruct;
-  param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target, "targetname");
+  var_0.var_4C09 = var_0.nextstruct;
+  var_0.nextstruct = scripts\engine\utility::getstruct(var_0.var_4C09.target, "targetname");
 }
 
-play_train_arrive_sfx(param_00) {
-  if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04") {
-    param_00 playLoopSound("depot_train_car1_arrive");
+play_train_arrive_sfx(var_0) {
+  if(var_0.var_336 == "trainCar_01" || var_0.var_336 == "trainCar_04") {
+    var_0 playLoopSound("depot_train_car1_arrive");
     wait(22);
-    param_00 stoploopsound("depot_train_car1_arrive");
+    var_0 stoploopsound("depot_train_car1_arrive");
     return;
   }
 
-  if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06") {
-    param_00 playLoopSound("depot_train_car3_arrive");
+  if(var_0.var_336 == "trainCar_03" || var_0.var_336 == "trainCar_06") {
+    var_0 playLoopSound("depot_train_car3_arrive");
     wait(22);
-    param_00 stoploopsound("depot_train_car3_arrive");
+    var_0 stoploopsound("depot_train_car3_arrive");
   }
 }
 
-distspeedtotime(param_00, param_01, param_02) {
-  param_02 = 1 / param_02;
-  return abs(distance(param_00.origin, param_01.origin) * param_02);
+distspeedtotime(var_0, var_1, var_2) {
+  var_2 = 1 / var_2;
+  return abs(distance(var_0.origin, var_1.origin) * var_2);
 }

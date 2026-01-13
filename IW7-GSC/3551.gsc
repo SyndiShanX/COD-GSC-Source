@@ -6,9 +6,9 @@
 
 set() {}
 
-unset(param_00) {
+unset(var_0) {
   if(func_9FC1()) {
-    end(param_00);
+    end(var_0);
   }
 }
 
@@ -43,16 +43,16 @@ func_13A14() {
   scripts\mp\supers::func_DE3B(9999);
 }
 
-end(param_00, param_01) {
+end(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
 
   self notify("cloak_end");
   self notify("obj_drain_end");
-  param_00 = scripts\engine\utility::istrue(param_00);
-  param_01 = scripts\engine\utility::istrue(param_01);
-  if(param_00) {
+  var_0 = scripts\engine\utility::istrue(var_0);
+  var_1 = scripts\engine\utility::istrue(var_1);
+  if(var_0) {
     self setscriptablepartstate("cloak", "offImmediate", 0);
     self.var_9D8B = undefined;
     self.var_5583 = 0;
@@ -60,7 +60,7 @@ end(param_00, param_01) {
     return;
   }
 
-  if(param_01) {
+  if(var_1) {
     thread endimmediate();
     return;
   }

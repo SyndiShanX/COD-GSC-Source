@@ -23,10 +23,10 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_12244(param_00, param_01, param_02, param_03) {
+func_12244(var_0, var_1, var_2, var_3) {
   return isDefined(self.vehicle_getspawnerarray);
 }
 
-func_1243F(param_00, param_01, param_02, param_03) {
+func_1243F(var_0, var_1, var_2, var_3) {
   return !isDefined(self.vehicle_getspawnerarray);
 }

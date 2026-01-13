@@ -16,31 +16,31 @@ bot_fireteam_connect_monitor() {
   level.bots_fireteam_humans = [];
 
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(!isbot(var_01) && !isDefined(var_1.processed_for_fireteam)) {
+    foreach(var_1 in level.players) {
+      if(!isbot(var_1) && !isDefined(var_1.processed_for_fireteam)) {
         if(isDefined(var_1.team) && (var_1.team == "allies" || var_1.team == "axis")) {
           var_1.processed_for_fireteam = 1;
-          level.bots_fireteam_humans[var_1.team] = var_01;
+          level.bots_fireteam_humans[var_1.team] = var_1;
           level.bots_fireteam_num_classes_loaded[var_1.team] = 0;
-          var_02 = scripts\mp\bots\bots_util::bot_get_team_limit();
+          var_2 = scripts\mp\bots\bots_util::bot_get_team_limit();
 
           if(level.bots_fireteam_humans.size == 2) {
-            scripts\mp\bots\bots::drop_bots(var_02 - 1, var_1.team);
+            scripts\mp\bots\bots::drop_bots(var_2 - 1, var_1.team);
           }
 
-          scripts\mp\bots\bots::spawn_bots(var_02 - 1, var_1.team, ::bot_fireteam_spawn_callback);
+          scripts\mp\bots\bots::spawn_bots(var_2 - 1, var_1.team, ::bot_fireteam_spawn_callback);
 
           if(level.bots_fireteam_humans.size == 1) {
-            var_03 = 0;
+            var_3 = 0;
 
-            foreach(var_05 in level.players) {
-              if(isDefined(var_05) && !isbot(var_05)) {
+            foreach(var_5 in level.players) {
+              if(isDefined(var_5) && !isbot(var_5)) {
                 var_3++;
               }
             }
 
-            if(var_03 == 1) {
-              scripts\mp\bots\bots::spawn_bots(var_02 - 1, scripts\engine\utility::get_enemy_team(var_1.team));
+            if(var_3 == 1) {
+              scripts\mp\bots\bots::spawn_bots(var_2 - 1, scripts\engine\utility::get_enemy_team(var_1.team));
             }
           }
         }
@@ -92,75 +92,75 @@ bot_fireteam_loadout_class_callback() {
   var_0["loadoutStreakType"] = self.fireteam_commander bot_fireteam_cac_getperk(self.class_num, 5);
 
   if(var_0["loadoutStreakType"] != "specialty_null") {
-    var_01 = getsubstr(var_0["loadoutStreakType"], 11) + "Streaks";
-    var_0["loadoutStreak1"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_01, 0);
+    var_1 = getsubstr(var_0["loadoutStreakType"], 11) + "Streaks";
+    var_0["loadoutStreak1"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_1, 0);
 
     if(var_0["loadoutStreak1"] == "none") {
       var_0["loadoutStreak1"] = undefined;
     }
 
-    var_0["loadoutStreak2"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_01, 1);
+    var_0["loadoutStreak2"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_1, 1);
 
     if(var_0["loadoutStreak2"] == "none") {
       var_0["loadoutStreak2"] = undefined;
     }
 
-    var_0["loadoutStreak3"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_01, 2);
+    var_0["loadoutStreak3"] = self.fireteam_commander bot_fireteam_cac_getstreak(self.class_num, var_1, 2);
 
     if(var_0["loadoutStreak3"] == "none") {
       var_0["loadoutStreak3"] = undefined;
     }
   }
 
-  self.botlastloadout = var_00;
-  return var_00;
+  self.botlastloadout = var_0;
+  return var_0;
 }
 
-bot_fireteam_cac_getweapon(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "weaponSetups", var_01, "weapon");
+bot_fireteam_cac_getweapon(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "weaponSetups", var_1, "weapon");
 }
 
-bot_fireteam_cac_getweaponattachment(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "weaponSetups", var_01, "attachment", 0);
+bot_fireteam_cac_getweaponattachment(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "weaponSetups", var_1, "attachment", 0);
 }
 
-bot_fireteam_cac_getweaponattachmenttwo(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "weaponSetups", var_01, "attachment", 1);
+bot_fireteam_cac_getweaponattachmenttwo(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "weaponSetups", var_1, "attachment", 1);
 }
 
-bot_fireteam_cac_getweaponcamo(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "weaponSetups", var_01, "camo");
+bot_fireteam_cac_getweaponcamo(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "weaponSetups", var_1, "camo");
 }
 
-bot_fireteam_cac_getweaponreticle(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "weaponSetups", var_01, "reticle");
+bot_fireteam_cac_getweaponreticle(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "weaponSetups", var_1, "reticle");
 }
 
-bot_fireteam_cac_getprimarygrenade(var_00) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "perks", 0);
+bot_fireteam_cac_getprimarygrenade(var_0) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "perks", 0);
 }
 
-bot_fireteam_cac_getsecondarygrenade(var_00) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "perks", 1);
+bot_fireteam_cac_getsecondarygrenade(var_0) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "perks", 1);
 }
 
-bot_fireteam_cac_getperk(var_00, var_01) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, "perks", var_01);
+bot_fireteam_cac_getperk(var_0, var_1) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, "perks", var_1);
 }
 
-bot_fireteam_cac_getstreak(var_00, var_01, var_02) {
-  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_00, var_01, var_02);
+bot_fireteam_cac_getstreak(var_0, var_1, var_2) {
+  return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", var_0, var_1, var_2);
 }
 
 bot_fireteam_buddy_think() {
-  var_00 = 250;
-  var_01 = var_00 * var_00;
+  var_0 = 250;
+  var_1 = var_0 * var_0;
 
   if(!scripts\mp\bots\bots_util::bot_is_guarding_player(self.owner)) {
-    scripts\mp\bots\bots_strategy::bot_guard_player(self.owner, var_00);
+    scripts\mp\bots\bots_strategy::bot_guard_player(self.owner, var_0);
   }
 
-  if(distancesquared(self.origin, self.owner.origin) > var_01) {
+  if(distancesquared(self.origin, self.owner.origin) > var_1) {
     self botsetflag("force_sprint", 1);
   } else if(self.owner issprinting()) {
     self botsetflag("force_sprint", 1);
@@ -214,21 +214,21 @@ bot_fireteam_buddy_search() {
 
       if(self.sessionstate == "playing") {
         if(!isDefined(self.owner)) {
-          var_00 = [];
+          var_0 = [];
 
-          foreach(var_02 in level.players) {
-            if(var_02 != self && var_2.team == self.team) {
-              if(isalive(var_02) && var_2.sessionstate == "playing" && !isDefined(var_2.bot_fireteam_follower) && !isDefined(var_2.owner)) {
-                var_0[var_0.size] = var_02;
+          foreach(var_2 in level.players) {
+            if(var_2 != self && var_2.team == self.team) {
+              if(isalive(var_2) && var_2.sessionstate == "playing" && !isDefined(var_2.bot_fireteam_follower) && !isDefined(var_2.owner)) {
+                var_0[var_0.size] = var_2;
               }
             }
           }
 
           if(var_0.size > 0) {
-            var_04 = scripts\engine\utility::getclosest(self.origin, var_00);
+            var_4 = scripts\engine\utility::getclosest(self.origin, var_0);
 
-            if(isDefined(var_04)) {
-              self.owner = var_04;
+            if(isDefined(var_4)) {
+              self.owner = var_4;
               self.owner.bot_fireteam_follower = self;
             }
           }
@@ -246,27 +246,27 @@ bot_fireteam_buddy_search() {
   }
 }
 
-fireteam_tdm_set_hunt_leader(var_00) {
-  var_01 = [];
+fireteam_tdm_set_hunt_leader(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in level.players) {
-    if(var_3.team == var_00) {
-      if(var_3.connected && isalive(var_03) && var_3.sessionstate == "playing") {
-        if(!isbot(var_03)) {
-          level.fireteam_hunt_leader[var_00] = var_03;
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_0) {
+      if(var_3.connected && isalive(var_3) && var_3.sessionstate == "playing") {
+        if(!isbot(var_3)) {
+          level.fireteam_hunt_leader[var_0] = var_3;
           return 1;
         } else
-          var_1[var_1.size] = var_03;
+          var_1[var_1.size] = var_3;
       }
     }
   }
 
-  if(!isDefined(level.fireteam_hunt_leader[var_00])) {
+  if(!isDefined(level.fireteam_hunt_leader[var_0])) {
     if(var_1.size > 0) {
       if(var_1.size == 1) {
-        level.fireteam_hunt_leader[var_00] = var_1[0];
+        level.fireteam_hunt_leader[var_0] = var_1[0];
       } else {
-        level.fireteam_hunt_leader[var_00] = var_1[randomint(var_1.size)];
+        level.fireteam_hunt_leader[var_0] = var_1[randomint(var_1.size)];
       }
 
       return 1;
@@ -276,134 +276,134 @@ fireteam_tdm_set_hunt_leader(var_00) {
   return 0;
 }
 
-fireteam_tdm_hunt_end(var_00) {
-  level notify("hunting_party_end_" + var_00);
-  level.fireteam_hunt_leader[var_00] = undefined;
-  level.fireteam_hunt_target_zone[var_00] = undefined;
-  level.bot_random_path_function[var_00] = ::scripts\mp\bots\bots_personality::bot_random_path_default;
+fireteam_tdm_hunt_end(var_0) {
+  level notify("hunting_party_end_" + var_0);
+  level.fireteam_hunt_leader[var_0] = undefined;
+  level.fireteam_hunt_target_zone[var_0] = undefined;
+  level.bot_random_path_function[var_0] = ::scripts\mp\bots\bots_personality::bot_random_path_default;
 }
 
-fireteam_tdm_hunt_most_dangerous_zone(var_00, var_01) {
-  var_02 = 0;
-  var_03 = undefined;
-  var_04 = -1;
+fireteam_tdm_hunt_most_dangerous_zone(var_0, var_1) {
+  var_2 = 0;
+  var_3 = undefined;
+  var_4 = -1;
 
   if(level.zonecount > 0) {
-    for(var_05 = 0; var_05 < level.zonecount; var_5++) {
-      var_06 = botzonegetcount(var_05, var_01, "enemy_predict");
+    for(var_5 = 0; var_5 < level.zonecount; var_5++) {
+      var_6 = botzonegetcount(var_5, var_1, "enemy_predict");
 
-      if(var_06 < var_02) {
+      if(var_6 < var_2) {
         continue;
       }
-      var_07 = undefined;
+      var_7 = undefined;
 
-      if(var_06 == var_02) {
-        var_07 = getzonepath(var_00, var_05);
+      if(var_6 == var_2) {
+        var_7 = getzonepath(var_0, var_5);
 
-        if(!isDefined(var_07)) {
+        if(!isDefined(var_7)) {
           continue;
         }
-        if(var_04 >= 0 && var_7.size > var_04) {
+        if(var_4 >= 0 && var_7.size > var_4) {
           continue;
         }
       }
 
-      var_02 = var_06;
-      var_03 = var_05;
+      var_2 = var_6;
+      var_3 = var_5;
 
-      if(isDefined(var_07)) {
-        var_04 = var_7.size;
+      if(isDefined(var_7)) {
+        var_4 = var_7.size;
         continue;
       }
 
-      var_04 = -1;
+      var_4 = -1;
     }
   }
 
-  return var_03;
+  return var_3;
 }
 
-fireteam_tdm_find_hunt_zone(var_00) {
-  level endon("hunting_party_end_" + var_00);
+fireteam_tdm_find_hunt_zone(var_0) {
+  level endon("hunting_party_end_" + var_0);
   self endon("disconnect");
   level endon("game_ended");
 
   if(level.zonecount <= 0) {
     return;
   }
-  level.bot_random_path_function[var_00] = ::bot_fireteam_hunt_zone_find_node;
+  level.bot_random_path_function[var_0] = ::bot_fireteam_hunt_zone_find_node;
 
   for(;;) {
-    var_01 = 3;
+    var_1 = 3;
 
-    if(!isDefined(level.fireteam_hunt_leader[var_00]) || isbot(level.fireteam_hunt_leader[var_00]) || isDefined(level.fireteam_hunt_leader[var_00].commanding_bot)) {
-      fireteam_tdm_set_hunt_leader(var_00);
+    if(!isDefined(level.fireteam_hunt_leader[var_0]) || isbot(level.fireteam_hunt_leader[var_0]) || isDefined(level.fireteam_hunt_leader[var_0].commanding_bot)) {
+      fireteam_tdm_set_hunt_leader(var_0);
     }
 
-    if(isDefined(level.fireteam_hunt_leader[var_00])) {
-      var_02 = getzonenearest(level.fireteam_hunt_leader[var_00].origin);
+    if(isDefined(level.fireteam_hunt_leader[var_0])) {
+      var_2 = getzonenearest(level.fireteam_hunt_leader[var_0].origin);
 
-      if(!isDefined(var_02)) {
-        wait(var_01);
+      if(!isDefined(var_2)) {
+        wait(var_1);
         continue;
       }
 
-      if(!isbot(level.fireteam_hunt_leader[var_00])) {
-        if(isalive(level.fireteam_hunt_leader[var_00]) && level.fireteam_hunt_leader[var_00].sessionstate == "playing" && (!isDefined(level.fireteam_hunt_leader[var_00].deathtime) || level.fireteam_hunt_leader[var_00].deathtime + 5000 < gettime())) {
-          level.fireteam_hunt_target_zone[var_00] = var_02;
-          level.fireteam_hunt_next_zone_search_time[var_00] = gettime() + 1000;
-          var_01 = 0.5;
+      if(!isbot(level.fireteam_hunt_leader[var_0])) {
+        if(isalive(level.fireteam_hunt_leader[var_0]) && level.fireteam_hunt_leader[var_0].sessionstate == "playing" && (!isDefined(level.fireteam_hunt_leader[var_0].deathtime) || level.fireteam_hunt_leader[var_0].deathtime + 5000 < gettime())) {
+          level.fireteam_hunt_target_zone[var_0] = var_2;
+          level.fireteam_hunt_next_zone_search_time[var_0] = gettime() + 1000;
+          var_1 = 0.5;
         } else
-          var_01 = 1;
+          var_1 = 1;
       } else {
-        var_03 = 0;
-        var_04 = 0;
-        var_05 = undefined;
+        var_3 = 0;
+        var_4 = 0;
+        var_5 = undefined;
 
-        if(isDefined(level.fireteam_hunt_target_zone[var_00])) {
-          var_05 = level.fireteam_hunt_target_zone[var_00];
+        if(isDefined(level.fireteam_hunt_target_zone[var_0])) {
+          var_5 = level.fireteam_hunt_target_zone[var_0];
         } else {
-          var_03 = 1;
-          var_04 = 1;
-          var_05 = var_02;
+          var_3 = 1;
+          var_4 = 1;
+          var_5 = var_2;
         }
 
-        var_06 = undefined;
+        var_6 = undefined;
 
-        if(isDefined(var_05)) {
-          var_06 = fireteam_tdm_hunt_most_dangerous_zone(var_02, var_00);
+        if(isDefined(var_5)) {
+          var_6 = fireteam_tdm_hunt_most_dangerous_zone(var_2, var_0);
 
-          if(!var_03) {
-            if(!isDefined(var_06) || var_06 != var_05) {
-              if(var_05 == var_02) {
-                var_04 = 1;
-              } else if(gettime() > level.fireteam_hunt_next_zone_search_time[var_00]) {
-                var_04 = 1;
+          if(!var_3) {
+            if(!isDefined(var_6) || var_6 != var_5) {
+              if(var_5 == var_2) {
+                var_4 = 1;
+              } else if(gettime() > level.fireteam_hunt_next_zone_search_time[var_0]) {
+                var_4 = 1;
               }
             }
           }
 
-          if(var_04) {
-            if(!isDefined(var_06)) {
-              var_07 = 0;
-              var_08 = -1;
+          if(var_4) {
+            if(!isDefined(var_6)) {
+              var_7 = 0;
+              var_8 = -1;
 
-              for(var_09 = 0; var_09 < level.zonecount; var_9++) {
-                var_10 = distance2d(getzoneorigin(var_09), level.fireteam_hunt_leader[var_00].origin);
+              for(var_9 = 0; var_9 < level.zonecount; var_9++) {
+                var_10 = distance2d(getzoneorigin(var_9), level.fireteam_hunt_leader[var_0].origin);
 
-                if(var_10 > var_07) {
-                  var_07 = var_10;
-                  var_08 = var_09;
+                if(var_10 > var_7) {
+                  var_7 = var_10;
+                  var_8 = var_9;
                 }
               }
 
-              var_06 = var_08;
+              var_6 = var_8;
             }
 
-            if(isDefined(var_06)) {
-              if(!isDefined(level.fireteam_hunt_target_zone[var_00]) || level.fireteam_hunt_target_zone[var_00] != var_06) {
+            if(isDefined(var_6)) {
+              if(!isDefined(level.fireteam_hunt_target_zone[var_0]) || level.fireteam_hunt_target_zone[var_0] != var_6) {
                 foreach(var_12 in level.players) {
-                  if(isbot(var_12) && var_12.team == var_00) {
+                  if(isbot(var_12) && var_12.team == var_0) {
                     var_12 botclearscriptgoal();
                     var_12.fireteam_hunt_goalpos = undefined;
                     var_12 thread bot_fireteam_hunt_zone_find_node();
@@ -411,15 +411,15 @@ fireteam_tdm_find_hunt_zone(var_00) {
                 }
               }
 
-              level.fireteam_hunt_target_zone[var_00] = var_06;
-              level.fireteam_hunt_next_zone_search_time[var_00] = gettime() + 12000;
+              level.fireteam_hunt_target_zone[var_0] = var_6;
+              level.fireteam_hunt_next_zone_search_time[var_0] = gettime() + 12000;
             }
           }
         }
       }
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
@@ -427,13 +427,13 @@ bot_debug_script_goal() {
   self notify("bot_debug_script_goal");
   level endon("hunting_party_end_" + self.team);
   self endon("bot_debug_script_goal");
-  var_00 = 48;
+  var_0 = 48;
 
   for(;;) {
     if(self bothasscriptgoal()) {
-      var_01 = self botgetscriptgoal();
+      var_1 = self botgetscriptgoal();
 
-      if(!isDefined(self.fireteam_hunt_goalpos)) {} else if(self.fireteam_hunt_goalpos != var_01) {} else {}
+      if(!isDefined(self.fireteam_hunt_goalpos)) {} else if(self.fireteam_hunt_goalpos != var_1) {}
     } else if(isDefined(self.fireteam_hunt_goalpos)) {}
 
     wait 0.05;
@@ -441,20 +441,20 @@ bot_debug_script_goal() {
 }
 
 bot_fireteam_hunt_zone_find_node() {
-  var_00 = 0;
-  var_01 = undefined;
+  var_0 = 0;
+  var_1 = undefined;
 
   if(isDefined(level.fireteam_hunt_target_zone[self.team])) {
-    var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 0);
+    var_2 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 0);
 
     if(var_2.size <= 18) {
-      var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 1);
+      var_2 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 1);
 
       if(var_2.size <= 18) {
-        var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 2);
+        var_2 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 2);
 
         if(var_2.size <= 18) {
-          var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 3);
+          var_2 = getzonenodes(level.fireteam_hunt_target_zone[self.team], 3);
         }
       }
     }
@@ -463,38 +463,38 @@ bot_fireteam_hunt_zone_find_node() {
       return scripts\mp\bots\bots_personality::bot_random_path_default();
     }
 
-    var_01 = self botnodepick(var_02, var_2.size, "node_hide");
+    var_1 = self botnodepick(var_2, var_2.size, "node_hide");
 
-    for(var_03 = 0; !isDefined(var_01) || !self botnodeavailable(var_01); var_01 = var_2[randomint(var_2.size)]) {
+    for(var_3 = 0; !isDefined(var_1) || !self botnodeavailable(var_1); var_1 = var_2[randomint(var_2.size)]) {
       var_3++;
 
-      if(var_03 >= 10) {
+      if(var_3 >= 10) {
         return scripts\mp\bots\bots_personality::bot_random_path_default();
       }
     }
 
-    var_04 = var_1.origin;
+    var_4 = var_1.origin;
 
-    if(isDefined(var_04)) {
-      var_05 = "guard";
-      var_06 = getzonenearest(self.origin);
+    if(isDefined(var_4)) {
+      var_5 = "guard";
+      var_6 = getzonenearest(self.origin);
 
-      if(isDefined(var_06) && var_06 == level.fireteam_hunt_target_zone[self.team]) {
+      if(isDefined(var_6) && var_6 == level.fireteam_hunt_target_zone[self.team]) {
         self botsetflag("force_sprint", 0);
       } else {
         self botsetflag("force_sprint", 1);
       }
 
-      var_00 = self botsetscriptgoal(var_04, 128, var_05);
-      self.fireteam_hunt_goalpos = var_04;
+      var_0 = self botsetscriptgoal(var_4, 128, var_5);
+      self.fireteam_hunt_goalpos = var_4;
     }
   }
 
-  if(!var_00) {
+  if(!var_0) {
     return scripts\mp\bots\bots_personality::bot_random_path_default();
   }
 
-  return var_00;
+  return var_0;
 }
 
 bot_fireteam_monitor_killstreak_earned() {
@@ -504,21 +504,21 @@ bot_fireteam_monitor_killstreak_earned() {
   self endon("bot_fireteam_monitor_killstreak_earned");
 
   for(;;) {
-    self waittill("bot_killstreak_earned", var_00, var_01);
+    self waittill("bot_killstreak_earned", var_0, var_1);
 
     if(scripts\mp\utility\game::bot_is_fireteam_mode()) {
       if(isDefined(self) && isbot(self)) {
         if(isDefined(self.fireteam_commander)) {
-          var_02 = undefined;
+          var_2 = undefined;
 
           if(isDefined(self.fireteam_commander.commanding_bot)) {
-            var_02 = self.fireteam_commander.commanding_bot;
+            var_2 = self.fireteam_commander.commanding_bot;
           } else {
-            var_02 = self.fireteam_commander getspectatingplayer();
+            var_2 = self.fireteam_commander getspectatingplayer();
           }
 
-          if(!isDefined(var_02) || var_02 != self) {
-            self.fireteam_commander thread scripts\mp\hud_message::showsplash(var_00, var_01, self);
+          if(!isDefined(var_2) || var_2 != self) {
+            self.fireteam_commander thread scripts\mp\hud_message::showsplash(var_0, var_1, self);
           }
         }
       }

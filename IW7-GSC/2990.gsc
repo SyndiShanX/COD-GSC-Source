@@ -3,15 +3,15 @@
  * Script: 2990.gsc
 ***************************************/
 
-main(var_00, var_01, var_02) {
-  scripts\sp\vehicle_build::func_31C5("capital_ship", var_00, var_01, var_02);
+main(var_0, var_1, var_2) {
+  scripts\sp\vehicle_build::func_31C5("capital_ship", var_0, var_1, var_2);
   scripts\sp\vehicle_build::func_31A6(::init_location);
-  func_0BA9::func_39B3(var_00, "un", var_02);
+  func_0BA9::func_39B3(var_0, "un", var_2);
   precachemodel("veh_mil_air_un_destroyer_rig");
   precachemodel("veh_mil_air_un_destroyer_engines");
   precachemodel("veh_mil_air_un_destroyer_details");
 
-  if(issubstr(var_02, "cheap")) {
+  if(issubstr(var_2, "cheap")) {
     precachemodel("veh_mil_air_un_destroyer_periph");
     precachemodel("ship_exterior_un_cannon_b_rig");
     precacheturret("cap_turret_cannon_large_un");
@@ -34,29 +34,29 @@ main(var_00, var_01, var_02) {
 init_location() {
   thread func_0BA9::func_396E("un");
   scripts\sp\vehicle::playgestureviewmodel();
-  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_s", "un_thruster_down_sml", self.func_5020);
-  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_m", "un_thruster_down_med", self.func_5020);
-  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_l", "un_thruster_down_lrg", self.func_5020);
-  func_0BB8::func_7562("thrust_rear", "fx_engine_s", "un_thruster_rear_sml", self.func_501F);
-  func_0BB8::func_7562("thrust_rear", "fx_engine_m", "un_thruster_rear_med", self.func_501F);
-  func_0BB8::func_7562("thrust_rear", "fx_engine_l", "un_thruster_rear_lrg", self.func_501F);
-  self.func_539B = ["veh_mil_air_un_destroyer_engines", "veh_mil_air_un_destroyer_details"];
-  self.func_24C4 = ["tag_origin", "amb_turret_m_2", "amb_missile_l_1", "amb_turret_l_1", "amb_missile_r_4", "fx_engine_l_2", "fx_thruster_v_l_1", "fx_light_main_a_1"];
+  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_s", "un_thruster_down_sml", self.var_5020);
+  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_m", "un_thruster_down_med", self.var_5020);
+  func_0BB8::func_7562("thrust_vert", "fx_thruster_v_l", "un_thruster_down_lrg", self.var_5020);
+  func_0BB8::func_7562("thrust_rear", "fx_engine_s", "un_thruster_rear_sml", self.var_501F);
+  func_0BB8::func_7562("thrust_rear", "fx_engine_m", "un_thruster_rear_med", self.var_501F);
+  func_0BB8::func_7562("thrust_rear", "fx_engine_l", "un_thruster_rear_lrg", self.var_501F);
+  self.var_539B = ["veh_mil_air_un_destroyer_engines", "veh_mil_air_un_destroyer_details"];
+  self.var_24C4 = ["tag_origin", "amb_turret_m_2", "amb_missile_l_1", "amb_turret_l_1", "amb_missile_r_4", "fx_engine_l_2", "fx_thruster_v_l_1", "fx_light_main_a_1"];
 
   if(issubstr(self.classname, "cheap")) {
     return;
   }
   thread func_1EDC();
-  self.func_7482 = "destroyer_un_warp";
-  self.func_748F = "vfx_ftl_ca_destroyer";
-  self.func_4E09 = "destroyer_death";
+  self.var_7482 = "destroyer_un_warp";
+  self.var_748F = "vfx_ftl_ca_destroyer";
+  self.var_4E09 = "destroyer_death";
 }
 
 #using_animtree("vehicles");
 
 func_1EDC() {
-  level.func_EC87["ftl_model"] = #animtree;
-  level.func_EC8C["ftl_model"] = "vfx_ftl_ca_destroyer";
-  level.func_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_ca_destroyer_in;
-  level.func_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_ca_destroyer_out;
+  level.var_EC87["ftl_model"] = #animtree;
+  level.var_EC8C["ftl_model"] = "vfx_ftl_ca_destroyer";
+  level.var_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_ca_destroyer_in;
+  level.var_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_ca_destroyer_out;
 }

@@ -28,34 +28,34 @@ main() {
   level.var_EC85["generic"]["wall_lean_exit_back"] = % titan_stealth_street_enemy01_walllean_exit_back;
 }
 
-func_5281(param_00) {
-  var_01 = [];
-  var_01["left"] = "lean_react_left";
-  var_01["right"] = "lean_react_right";
-  var_01["forward"] = "lean_react_forward";
-  var_01["default"] = "lean_react_forward";
-  var_02["left"] = "lean_exit_left";
-  var_02["right"] = "lean_exit_right";
-  var_02["forward"] = "lean_exit_forward";
-  var_02["back"] = "lean_exit_back";
-  var_02["default"] = "lean_exit_forward";
+func_5281(var_0) {
+  var_1 = [];
+  var_1["left"] = "lean_react_left";
+  var_1["right"] = "lean_react_right";
+  var_1["forward"] = "lean_react_forward";
+  var_1["default"] = "lean_react_forward";
+  var_2["left"] = "lean_exit_left";
+  var_2["right"] = "lean_exit_right";
+  var_2["forward"] = "lean_exit_forward";
+  var_2["back"] = "lean_exit_back";
+  var_2["default"] = "lean_exit_forward";
   self.var_1FBB = "generic";
-  param_00 lib_0F27::func_92CF(self, "lean_idle", var_01, "lean_death", undefined, 1);
-  lib_0F27::func_F320(var_02);
+  var_0 lib_0F27::func_92CF(self, "lean_idle", var_1, "lean_death", undefined, 1);
+  lib_0F27::func_F320(var_2);
 }
 
-func_138A7(param_00) {
-  var_01 = [];
-  var_01["left"] = "wall_lean_react_left";
-  var_01["right"] = "wall_lean_react_right";
-  var_01["forward"] = "wall_lean_react_forward";
-  var_01["default"] = "wall_lean_react_forward";
-  var_02["left"] = "wall_lean_exit_left";
-  var_02["right"] = "wall_lean_exit_right";
-  var_02["forward"] = "wall_lean_exit_forward";
-  var_02["back"] = "wall_lean_exit_back";
-  var_02["default"] = "wall_lean_exit_forward";
+func_138A7(var_0) {
+  var_1 = [];
+  var_1["left"] = "wall_lean_react_left";
+  var_1["right"] = "wall_lean_react_right";
+  var_1["forward"] = "wall_lean_react_forward";
+  var_1["default"] = "wall_lean_react_forward";
+  var_2["left"] = "wall_lean_exit_left";
+  var_2["right"] = "wall_lean_exit_right";
+  var_2["forward"] = "wall_lean_exit_forward";
+  var_2["back"] = "wall_lean_exit_back";
+  var_2["default"] = "wall_lean_exit_forward";
   self.var_1FBB = "generic";
-  param_00 lib_0F27::func_92CF(self, "wall_lean_idle", var_01, "wall_lean_death");
-  lib_0F27::func_F320(var_02);
+  var_0 lib_0F27::func_92CF(self, "wall_lean_idle", var_1, "wall_lean_death");
+  lib_0F27::func_F320(var_2);
 }

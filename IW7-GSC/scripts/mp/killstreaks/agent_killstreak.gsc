@@ -21,15 +21,15 @@ no_gametype_update() {
   return 0;
 }
 
-tryusesquadmate(param_00, param_01) {
+tryusesquadmate(var_0, var_1) {
   return usesquadmate("agent");
 }
 
-tryusereconsquadmate(param_00, param_01) {
+tryusereconsquadmate(var_0, var_1) {
   return usesquadmate("reconAgent");
 }
 
-usesquadmate(param_00) {
+usesquadmate(var_0) {
   if(scripts\mp\agents\agent_utility::getnumactiveagents("squadmate") >= 5) {
     self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
     return 0;
@@ -40,8 +40,8 @@ usesquadmate(param_00) {
     return 0;
   }
 
-  var_01 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(0, 1);
-  if(!isDefined(var_01)) {
+  var_1 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(0, 1);
+  if(!isDefined(var_1)) {
     return 0;
   }
 
@@ -49,29 +49,29 @@ usesquadmate(param_00) {
     return 0;
   }
 
-  var_02 = var_01.origin;
-  var_03 = vectortoangles(self.origin - var_01.origin);
-  var_04 = scripts\mp\agents\_agents::add_humanoid_agent("squadmate", self.team, undefined, var_02, var_03, self, 0, 0, "veteran");
-  if(!isDefined(var_04)) {
+  var_2 = var_1.origin;
+  var_3 = vectortoangles(self.origin - var_1.origin);
+  var_4 = scripts\mp\agents\_agents::add_humanoid_agent("squadmate", self.team, undefined, var_2, var_3, self, 0, 0, "veteran");
+  if(!isDefined(var_4)) {
     self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
     return 0;
   }
 
-  var_04.killstreaktype = param_00;
-  if(var_04.killstreaktype == "reconAgent") {
-    var_04 thread sendagentweaponnotify("iw6_riotshield_mp");
-    var_04 thread finishreconagentloadout();
-    var_04 thread scripts\mp\class::giveloadout(self.pers["team"], "reconAgent", 0);
-    var_04 scripts\mp\agents\_agent_common::set_agent_health(250);
-    var_04 scripts\mp\perks\_perkfunctions::setlightarmor();
-    var_04 setModel("mp_fullbody_synaptic_1");
-    var_04 detach(var_04.headmodel);
-    var_04.headmodel = undefined;
+  var_4.killstreaktype = var_0;
+  if(var_4.killstreaktype == "reconAgent") {
+    var_4 thread sendagentweaponnotify("iw6_riotshield_mp");
+    var_4 thread finishreconagentloadout();
+    var_4 thread scripts\mp\class::giveloadout(self.pers["team"], "reconAgent", 0);
+    var_4 scripts\mp\agents\_agent_common::set_agent_health(250);
+    var_4 scripts\mp\perks\_perkfunctions::setlightarmor();
+    var_4 setModel("mp_fullbody_synaptic_1");
+    var_4 detach(var_4.headmodel);
+    var_4.headmodel = undefined;
   } else {
-    var_04 scripts\mp\perks\_perkfunctions::setlightarmor();
+    var_4 scripts\mp\perks\_perkfunctions::setlightarmor();
   }
 
-  var_04 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
+  var_4 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
   return 1;
 }
 
@@ -89,16 +89,16 @@ finishreconagentloadout() {
   self getpassivestruct("maxFireTime", 1.25 * self botgetdifficultysetting("maxFireTime"));
 }
 
-sendagentweaponnotify(param_00) {
+sendagentweaponnotify(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("giveLoadout");
-  if(!isDefined(param_00)) {
-    param_00 = "iw6_riotshield_mp";
+  if(!isDefined(var_0)) {
+    var_0 = "iw6_riotshield_mp";
   }
 
-  self notify("weapon_change", param_00);
+  self notify("weapon_change", var_0);
 }
 
 squadmate_agent_think() {
@@ -108,8 +108,8 @@ squadmate_agent_think() {
   level endon("game_ended");
   for(;;) {
     self botsetflag("prefer_shield_out", 1);
-    var_00 = self[[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
-    if(!var_00) {
+    var_0 = self[[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
+    if(!var_0) {
       if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(self.triggerportableradarping)) {
         scripts\mp\bots\_bots_strategy::bot_guard_player(self.triggerportableradarping, 350);
       }
@@ -119,11 +119,11 @@ squadmate_agent_think() {
   }
 }
 
-on_agent_squadmate_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  scripts\mp\agents\_agents::on_humanoid_agent_killed_common(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, 0);
-  if(isplayer(param_01) && isDefined(self.triggerportableradarping) && param_01 != self.triggerportableradarping) {
+on_agent_squadmate_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  scripts\mp\agents\_agents::on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
+  if(isplayer(var_1) && isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
     self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("squad_killed");
-    scripts\mp\damage::onkillstreakkilled("squad_mate", param_01, param_04, param_03, param_02, "destroyed_squad_mate");
+    scripts\mp\damage::onkillstreakkilled("squad_mate", var_1, var_4, var_3, var_2, "destroyed_squad_mate");
   }
 
   scripts\mp\agents\agent_utility::deactivateagent();

@@ -23,30 +23,30 @@ bot_siege_manager_think() {
   scripts\mp\utility::gameflagwait("prematch_done");
   for(;;) {
     level.siege_bot_team_need_flags = [];
-    foreach(var_01 in level.players) {
-      if(!scripts\mp\utility::isreallyalive(var_01) && var_01.hasspawned) {
-        if(var_01.team != "spectator" && var_01.team != "neutral") {
-          level.siege_bot_team_need_flags[var_01.team] = 1;
+    foreach(var_1 in level.players) {
+      if(!scripts\mp\utility::isreallyalive(var_1) && var_1.hasspawned) {
+        if(var_1.team != "spectator" && var_1.team != "neutral") {
+          level.siege_bot_team_need_flags[var_1.team] = 1;
         }
       }
     }
 
-    var_03 = [];
-    foreach(var_05 in level.magicbullet) {
-      var_06 = var_05.useobj scripts\mp\gameobjects::getownerteam();
-      if(var_06 != "neutral") {
-        if(!isDefined(var_03[var_06])) {
-          var_03[var_06] = 1;
+    var_3 = [];
+    foreach(var_5 in level.magicbullet) {
+      var_6 = var_5.useobj scripts\mp\gameobjects::getownerteam();
+      if(var_6 != "neutral") {
+        if(!isDefined(var_3[var_6])) {
+          var_3[var_6] = 1;
           continue;
         }
 
-        var_03[var_06]++;
+        var_3[var_6]++;
       }
     }
 
-    foreach(var_06, var_09 in var_03) {
-      if(var_09 >= 2) {
-        var_0A = scripts\mp\utility::getotherteam(var_06);
+    foreach(var_6, var_9 in var_3) {
+      if(var_9 >= 2) {
+        var_0A = scripts\mp\utility::getotherteam(var_6);
         level.siege_bot_team_need_flags[var_0A] = 1;
       }
     }
@@ -87,23 +87,23 @@ bot_siege_think() {
 }
 
 bot_choose_flag() {
-  var_00 = undefined;
-  var_01 = undefined;
-  foreach(var_03 in level.magicbullet) {
-    var_04 = var_03.useobj scripts\mp\gameobjects::getownerteam();
-    if(var_04 != self.team) {
-      var_05 = distancesquared(self.origin, var_03.origin);
-      if(!isDefined(var_01) || var_05 < var_01) {
-        var_01 = var_05;
-        var_00 = var_03;
+  var_0 = undefined;
+  var_1 = undefined;
+  foreach(var_3 in level.magicbullet) {
+    var_4 = var_3.useobj scripts\mp\gameobjects::getownerteam();
+    if(var_4 != self.team) {
+      var_5 = distancesquared(self.origin, var_3.origin);
+      if(!isDefined(var_1) || var_5 < var_1) {
+        var_1 = var_5;
+        var_0 = var_3;
       }
     }
   }
 
-  if(isDefined(var_00)) {
-    if(!isDefined(self.goalflag) || self.goalflag != var_00) {
-      self.goalflag = var_00;
-      scripts\mp\bots\_bots_strategy::bot_capture_point(var_00.origin, 100);
+  if(isDefined(var_0)) {
+    if(!isDefined(self.goalflag) || self.goalflag != var_0) {
+      self.goalflag = var_0;
+      scripts\mp\bots\_bots_strategy::bot_capture_point(var_0.origin, 100);
     }
   }
 }

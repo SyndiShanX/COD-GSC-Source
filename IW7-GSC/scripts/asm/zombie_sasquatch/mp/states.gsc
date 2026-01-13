@@ -129,18 +129,18 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_start_state_to_spawn_fx0(param_00, param_01, param_02, param_03) {
+trans_start_state_to_spawn_fx0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE96();
 }
 
-trans_start_state_to_spawn1(param_00, param_01, param_02, param_03) {
+trans_start_state_to_spawn1(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE97();
 }
 
-trans_spawn_to_idle0(param_00, param_01, param_02, param_03) {
+trans_spawn_to_idle0(var_0, var_1, var_2, var_3) {
   return self.hasplayedvignetteanim;
 }
 
-trans_spawn_fx_to_spawn0(param_00, param_01, param_02, param_03) {
+trans_spawn_fx_to_spawn0(var_0, var_1, var_2, var_3) {
   return isDefined(self.var_8C12) && self.var_8C12;
 }

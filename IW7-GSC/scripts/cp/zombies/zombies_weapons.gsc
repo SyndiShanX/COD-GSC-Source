@@ -11,34 +11,34 @@ init() {
   level.facemelter_globs = [];
 }
 
-activate_zero_g_on_character(param_00) {
-  param_00 thread agent_float_in_air(param_00);
+activate_zero_g_on_character(var_0) {
+  var_0 thread agent_float_in_air(var_0);
 }
 
-deactivate_zero_g_on_character(param_00) {
-  param_00 unlink();
+deactivate_zero_g_on_character(var_0) {
+  var_0 unlink();
   if(isDefined(level.deactivate_zerog_func)) {
-    [[level.deactivate_zerog_func]](param_00);
+    [[level.deactivate_zerog_func]](var_0);
   }
 }
 
-agent_float_in_air(param_00) {
-  var_01 = 5;
-  var_02 = bulletTrace(param_00.origin, param_00.origin + (0, 0, 170), 0, param_00);
-  var_03 = var_02["position"];
-  var_04 = var_03[2] - param_00.origin[2];
-  var_05 = min(var_04, 170) - 70;
-  var_06 = spawn("script_origin", param_00.origin);
-  var_06.angles = param_00.angles;
-  param_00.do_immediate_ragdoll = 1;
-  param_00 linkto(var_06);
-  var_06 moveto(param_00.origin + (0, 0, var_05), var_01);
-  var_07 = var_06 scripts\cp\utility::waittill_any_ents_return(level, "deactivate zero g", param_00, "death");
-  if(isDefined(param_00)) {
-    param_00.do_immediate_ragdoll = 0;
+agent_float_in_air(var_0) {
+  var_1 = 5;
+  var_2 = bulletTrace(var_0.origin, var_0.origin + (0, 0, 170), 0, var_0);
+  var_3 = var_2["position"];
+  var_4 = var_3[2] - var_0.origin[2];
+  var_5 = min(var_4, 170) - 70;
+  var_6 = spawn("script_origin", var_0.origin);
+  var_6.angles = var_0.angles;
+  var_0.do_immediate_ragdoll = 1;
+  var_0 linkto(var_6);
+  var_6 moveto(var_0.origin + (0, 0, var_5), var_1);
+  var_7 = var_6 scripts\cp\utility::waittill_any_ents_return(level, "deactivate zero g", var_0, "death");
+  if(isDefined(var_0)) {
+    var_0.do_immediate_ragdoll = 0;
   }
 
-  var_06 delete();
+  var_6 delete();
 }
 
 fx_stun_damage() {
@@ -49,14 +49,14 @@ fx_stun_damage() {
   self.stunned = undefined;
 }
 
-special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(isDefined(self.agent_type) && self.agent_type == "zombie_brute" || self.agent_type == "zombie_grey") {
     return;
   }
 
-  var_0C = scripts\engine\utility::istrue(param_01.inlaststand);
+  var_0C = scripts\engine\utility::istrue(var_1.inlaststand);
   var_0D = scripts\engine\utility::istrue(self.is_suicide_bomber);
-  var_0E = getweaponbasename(param_05);
+  var_0E = getweaponbasename(var_5);
   if(!isDefined(var_0E)) {
     return;
   }
@@ -68,42 +68,42 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
       case "iw7_headcutter2_zm":
       case "iw7_headcutter_zm_pap1":
       case "iw7_headcutter_zm":
-        if(param_04 != "MOD_MELEE" && param_02 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
-          self.health = param_02 + 1;
+        if(var_4 != "MOD_MELEE" && var_2 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
+          self.health = var_2 + 1;
           self.allowpain = 1;
-          self.killedby = param_01;
-          thread head_exploder(param_01, param_06, param_08, param_02, param_05);
+          self.killedby = var_1;
+          thread head_exploder(var_1, var_6, var_8, var_2, var_5);
           var_0F = 1;
         }
         break;
 
       case "iw7_dischord_zm_pap1":
       case "iw7_dischord_zm":
-        if(param_04 != "MOD_MELEE" && param_02 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
-          self.health = param_02 + 1;
+        if(var_4 != "MOD_MELEE" && var_2 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
+          self.health = var_2 + 1;
           self.allowpain = 1;
-          self.killedby = param_01;
-          thread dischord_death_logic(param_01, param_06, param_08, param_02, param_05);
+          self.killedby = var_1;
+          thread dischord_death_logic(var_1, var_6, var_8, var_2, var_5);
         }
         break;
 
       case "iw7_facemelter_zm_pap1":
       case "iw7_facemelter_zm":
-        if(param_04 != "MOD_MELEE" && param_02 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
-          self.health = param_02 + 1;
+        if(var_4 != "MOD_MELEE" && var_2 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
+          self.health = var_2 + 1;
           self.allowpain = 1;
-          self.killedby = param_01;
-          thread facemelter_death_logic(param_01, param_06, param_08, param_02, param_05);
+          self.killedby = var_1;
+          thread facemelter_death_logic(var_1, var_6, var_8, var_2, var_5);
         }
         break;
 
       case "iw7_shredder_zm_pap1":
       case "iw7_shredder_zm":
-        if(param_04 != "MOD_MELEE" && param_02 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
-          self.health = param_02 + 1;
+        if(var_4 != "MOD_MELEE" && var_2 >= self.health && !scripts\engine\utility::istrue(self.isfrozen)) {
+          self.health = var_2 + 1;
           self.allowpain = 1;
-          self.killedby = param_01;
-          thread shredder_death_logic(param_01, param_06, param_08, param_02);
+          self.killedby = var_1;
+          thread shredder_death_logic(var_1, var_6, var_8, var_2);
         }
         break;
 
@@ -111,7 +111,7 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
         break;
     }
 
-    if(self.health - param_02 < 1) {
+    if(self.health - var_2 < 1) {
       if(isDefined(level.medusa_check_func)) {
         var_10 = [[level.medusa_check_func]](self);
         if(isDefined(var_10)) {
@@ -123,10 +123,10 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
       }
 
       if(isDefined(level.crystal_check_func)) {
-        if(isplayer(param_01) && isDefined(param_05) && param_05 != "none") {
+        if(isplayer(var_1) && isDefined(var_5) && var_5 != "none") {
           var_11 = [
             [level.crystal_check_func]
-          ](self, param_05);
+          ](self, var_5);
           if(var_11) {
             self.nocorpse = 1;
             self.near_crystal = 1;
@@ -140,21 +140,21 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
     }
   }
 
-  if(self.health - param_02 < 1) {
+  if(self.health - var_2 < 1) {
     if(isDefined(level.lethaldamage_func)) {
       [
         [level.lethaldamage_func]
-      ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
     }
 
     if(!var_0C && !var_0F) {
-      if(param_01 scripts\cp\utility::is_consumable_active("headshot_explosion")) {
-        check_to_use_headshot_explosion(param_01, param_06, param_02, param_04, param_05, param_08, var_0D);
+      if(var_1 scripts\cp\utility::is_consumable_active("headshot_explosion")) {
+        check_to_use_headshot_explosion(var_1, var_6, var_2, var_4, var_5, var_8, var_0D);
         return;
       }
 
-      if(param_01 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
-        [[level.change_chew_explosion_func]](param_01, param_06, param_02, param_04, param_05, param_08);
+      if(var_1 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
+        [[level.change_chew_explosion_func]](var_1, var_6, var_2, var_4, var_5, var_8);
         return;
       }
 
@@ -163,7 +163,7 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
   }
 }
 
-dischord_death_logic(param_00, param_01, param_02, param_03, param_04) {
+dischord_death_logic(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(self.link_ent)) {
     return;
   }
@@ -171,23 +171,23 @@ dischord_death_logic(param_00, param_01, param_02, param_03, param_04) {
   self endon("death");
   if(scripts\engine\utility::istrue(self.is_dancing) || self.scripted_mode) {
     self.do_immediate_ragdoll = 1;
-    self dodamage(self.health + 1000, self.origin, param_00, param_00, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
+    self dodamage(self.health + 1000, self.origin, var_0, var_0, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
   }
 
   self.scripted_mode = 1;
-  var_05 = 0;
-  var_06 = scripts\cp\utility::weaponhasattachment(param_04, "pap1");
-  var_07 = 50;
-  if(var_06) {
-    var_07 = 100;
+  var_5 = 0;
+  var_6 = scripts\cp\utility::weaponhasattachment(var_4, "pap1");
+  var_7 = 50;
+  if(var_6) {
+    var_7 = 100;
     self.upgraded_dischord_spin = 1;
   }
 
   self.dischord_spin = 1;
   if(scripts\engine\utility::istrue(self.is_traversing)) {
-    thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 5);
+    thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 5);
     playFXOnTag(level._effect["dischord_tornado"], self, "tag_origin");
-    var_05 = 1;
+    var_5 = 1;
     while(scripts\engine\utility::istrue(self.is_traversing)) {
       wait(0.1);
     }
@@ -196,34 +196,34 @@ dischord_death_logic(param_00, param_01, param_02, param_03, param_04) {
   }
 
   thread kill_me_after_timeout(5, "ready_to_spin");
-  if(!var_05) {
+  if(!var_5) {
     self setscriptablepartstate("dischord_spin_fx", "active", 1);
   }
 
   self waittill("ready_to_spin");
   self.link_ent = spawn("script_origin", self.origin);
   self.link_ent thread kill_link_ent_on_death(self);
-  if(!var_06) {
+  if(!var_6) {
     self linkto(self.link_ent);
   }
 
-  thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 0.5);
+  thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.5);
   self.link_ent rotateyaw(360, 1);
   wait(0.5);
-  thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 0.5);
+  thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.5);
   self.link_ent rotateyaw(720, 1);
   wait(0.5);
-  thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 1);
+  thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 1);
   self.link_ent rotateyaw(1080, 1);
   wait(1);
-  thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 1);
+  thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 1);
   self.link_ent rotateyaw(1240, 1);
   wait(1);
-  if(var_06) {
-    thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 2);
+  if(var_6) {
+    thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 2);
     wait(2);
   } else {
-    thread dischord_spin_attack(param_00, param_01, param_02, param_03, var_07, 0.1);
+    thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.1);
   }
 
   playsoundatpos(self.origin, "zombie_dischord_zmb_spin_explo");
@@ -231,53 +231,53 @@ dischord_death_logic(param_00, param_01, param_02, param_03, param_04) {
   self.nocorpse = 1;
   self.gib_fx_override = "dischord_explosion";
   self setscriptablepartstate("dischord_spin_fx", "inactive", 1);
-  var_08 = 128;
-  if(var_06) {
-    var_08 = 256;
+  var_8 = 128;
+  if(var_6) {
+    var_8 = 256;
   }
 
-  if(isDefined(param_00)) {
-    param_00 radiusdamage(self.origin, var_08, 2000, 2000, param_00, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
+  if(isDefined(var_0)) {
+    var_0 radiusdamage(self.origin, var_8, 2000, 2000, var_0, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
   } else {
-    level.players[0] radiusdamage(self.origin, var_08, 2000, 2000, level.players[0], "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
+    level.players[0] radiusdamage(self.origin, var_8, 2000, 2000, level.players[0], "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
   }
 
   if(isDefined(self.link_ent)) {
     self.dischord_spin = 0;
     self.deathmethod = "dischord";
-    self dodamage(self.health + 1000, self.origin, param_00, self.link_ent, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
+    self dodamage(self.health + 1000, self.origin, var_0, self.link_ent, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
   }
 }
 
-kill_link_ent_on_death(param_00) {
-  param_00 waittill("death");
+kill_link_ent_on_death(var_0) {
+  var_0 waittill("death");
   wait(0.25);
   self delete();
 }
 
-kill_me_after_timeout(param_00, param_01) {
-  if(isDefined(param_01)) {
-    self endon(param_01);
+kill_me_after_timeout(var_0, var_1) {
+  if(isDefined(var_1)) {
+    self endon(var_1);
   }
 
-  wait(param_00);
+  wait(var_0);
   self suicide();
 }
 
-dischord_spin_attack(param_00, param_01, param_02, param_03, param_04, param_05) {
+dischord_spin_attack(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("death");
   self endon("stop_spin");
-  var_06 = param_05;
-  var_07 = 0.1;
-  var_08 = 2;
-  param_03 = 3000;
-  if(param_04 == 100) {
-    param_03 = 7000;
+  var_6 = var_5;
+  var_7 = 0.1;
+  var_8 = 2;
+  var_3 = 3000;
+  if(var_4 == 100) {
+    var_3 = 7000;
   }
 
-  while(var_06 > 0) {
-    var_09 = 0;
-    var_0A = scripts\engine\utility::get_array_of_closest(self.origin, level.spawned_enemies, [self], 30, param_04);
+  while(var_6 > 0) {
+    var_9 = 0;
+    var_0A = scripts\engine\utility::get_array_of_closest(self.origin, level.spawned_enemies, [self], 30, var_4);
     if(isDefined(var_0A)) {
       foreach(var_0C in var_0A) {
         if(var_0C.agent_type == "zombie_brute" || var_0C.agent_type == "zombie_grey") {
@@ -294,32 +294,32 @@ dischord_spin_attack(param_00, param_01, param_02, param_03, param_04, param_05)
         }
 
         if(!scripts\engine\utility::istrue(var_0C.customdeath)) {
-          var_09++;
-          if(var_09 >= var_08) {
+          var_9++;
+          if(var_9 >= var_8) {
             var_0D = 1;
           }
 
-          var_0C thread fling_zombie(param_03, self.link_ent, param_00, var_0D);
+          var_0C thread fling_zombie(var_3, self.link_ent, var_0, var_0D);
         }
       }
     }
 
-    var_06 = var_06 - var_07;
-    wait(var_07);
+    var_6 = var_6 - var_7;
+    wait(var_7);
   }
 }
 
-fling_zombie(param_00, param_01, param_02, param_03) {
+fling_zombie(var_0, var_1, var_2, var_3) {
   self.do_immediate_ragdoll = 1;
   self.customdeath = 1;
   self.disable_armor = 1;
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));
   wait(0.05);
-  if(scripts\engine\utility::istrue(param_03)) {
+  if(scripts\engine\utility::istrue(var_3)) {
     self.nocorpse = 1;
     self.full_gib = 1;
-    if(isDefined(param_02)) {
-      self dodamage(self.health + 1000, self.origin, param_02, param_02, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
+    if(isDefined(var_2)) {
+      self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
       return;
     }
 
@@ -327,24 +327,24 @@ fling_zombie(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self setvelocity(vectornormalize(self.origin - param_01.origin) * 200 + (0, 0, 800));
+  self setvelocity(vectornormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
   wait(0.1);
-  if(isDefined(param_02)) {
-    self dodamage(self.health + 1000, param_01.origin, param_02, param_01, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
+  if(isDefined(var_2)) {
+    self dodamage(self.health + 1000, var_1.origin, var_2, var_1, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
     return;
   }
 
-  self dodamage(self.health + 1000, param_01.origin, param_01, param_01, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
+  self dodamage(self.health + 1000, var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
 }
 
-should_take_players_current_weapon(param_00) {
-  var_01 = 3;
-  if(param_00 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-    var_01 = 4;
+should_take_players_current_weapon(var_0) {
+  var_1 = 3;
+  if(var_0 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
+    var_1 = 4;
   }
 
-  var_02 = param_00 getweaponslist("primary");
-  return var_02.size >= var_01;
+  var_2 = var_0 getweaponslist("primary");
+  return var_2.size >= var_1;
 }
 
 facemelter_fx_init() {
@@ -357,7 +357,7 @@ facemelter_fx_init() {
   level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\power\vfx_splash_grenade_light_fr.vfx");
 }
 
-facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
+facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   if(isDefined(self.link_ent)) {
     return;
@@ -365,15 +365,15 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
 
   self.scripted_mode = 1;
   self.precacheleaderboards = 1;
-  var_05 = scripts\cp\utility::weaponhasattachment(param_04, "pap1");
+  var_5 = scripts\cp\utility::weaponhasattachment(var_4, "pap1");
   if(isDefined(self.hasplayedvignetteanim) && !self.hasplayedvignetteanim) {
-    level thread facemelter_fire_pool(self, 5, param_00);
+    level thread facemelter_fire_pool(self, 5, var_0);
     self.nocorpse = 1;
-    self dodamage(self.health + 1000, self.origin, param_00, param_00, "MOD_GRENADE_SPLASH", "iw7_facemelterdummy_zm");
+    self dodamage(self.health + 1000, self.origin, var_0, var_0, "MOD_GRENADE_SPLASH", "iw7_facemelterdummy_zm");
     return;
   } else if(isDefined(self.is_traversing)) {
     self.rocket_feet = 1;
-    level thread facemelter_fire_pool(self, 5, param_00, var_05, 1);
+    level thread facemelter_fire_pool(self, 5, var_0, var_5, 1);
     self setscriptablepartstate("burning", "active", 1);
     while(scripts\engine\utility::istrue(self.is_traversing)) {
       wait(0.1);
@@ -386,7 +386,7 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
   }
 
   thread remove_rocket_feet_failsafe();
-  level thread facemelter_fire_pool(self, 5, param_00, var_05);
+  level thread facemelter_fire_pool(self, 5, var_0, var_5);
   if(!scripts\engine\utility::istrue(self.is_cop)) {
     thread turn_on_rocket_feet();
     self waittill("ready_to_launch");
@@ -394,25 +394,25 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
     self.link_ent.angles = self.angles;
     self.link_ent thread kill_link_ent_on_death(self);
     self linkto(self.link_ent);
-    var_06 = self.origin + (0, 0, 200);
-    var_07 = self aiphysicstrace(self.origin, self.origin + (0, 0, 200), 15, 60, 1, 1);
-    var_08 = 1;
-    if(isDefined(var_07) && isDefined(var_07["position"])) {
-      var_06 = var_07["position"] + (0, 0, -40);
-      var_08 = var_06[2] - self.link_ent.origin[2];
-      if(var_08 < 20) {
-        var_08 = 20;
-        var_06 = (var_06[0], var_06[1], self.link_ent.origin[2] + 20);
+    var_6 = self.origin + (0, 0, 200);
+    var_7 = self aiphysicstrace(self.origin, self.origin + (0, 0, 200), 15, 60, 1, 1);
+    var_8 = 1;
+    if(isDefined(var_7) && isDefined(var_7["position"])) {
+      var_6 = var_7["position"] + (0, 0, -40);
+      var_8 = var_6[2] - self.link_ent.origin[2];
+      if(var_8 < 20) {
+        var_8 = 20;
+        var_6 = (var_6[0], var_6[1], self.link_ent.origin[2] + 20);
       }
 
-      var_08 = var_08 / 200;
+      var_8 = var_8 / 200;
     }
 
-    self.link_ent moveto(var_06, var_08);
+    self.link_ent moveto(var_6, var_8);
     wait(0.1);
     self setscriptablepartstate("left_leg", "detached", 1);
     self setscriptablepartstate("right_leg", "detached", 1);
-    wait(0.8 * var_08);
+    wait(0.8 * var_8);
     self playSound("zombie_facemelter_rocket_launch");
   } else {
     wait(0.9);
@@ -422,19 +422,19 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
 
   self setscriptablepartstate("rocket_explosion", "active", 1);
   wait(0.1);
-  var_09 = self.origin;
-  var_0A = param_00;
+  var_9 = self.origin;
+  var_0A = var_0;
   var_0B = var_0A.team;
-  if(var_05) {
+  if(var_5) {
     var_0C = 3;
     for(var_0D = 0; var_0D < var_0C; var_0D++) {
       var_0E = randomintrange(-200, 200);
       var_0F = randomintrange(-200, 200);
       var_10 = randomintrange(200, 400);
-      var_11 = var_09 + (var_0E, var_0F, var_10) - var_09;
-      var_12 = param_00 launchgrenade("zmb_globproj_zm", var_09, var_11, 8);
-      var_12.triggerportableradarping = param_00;
-      var_12.team = param_00.team;
+      var_11 = var_9 + (var_0E, var_0F, var_10) - var_9;
+      var_12 = var_0 launchgrenade("zmb_globproj_zm", var_9, var_11, 8);
+      var_12.triggerportableradarping = var_0;
+      var_12.team = var_0.team;
       var_12.trophy_name = "zmb_globproj_zm";
       if(var_0D == 0) {
         var_12 setscriptablepartstate("explosion", "active");
@@ -444,7 +444,7 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
 
       var_12 setscriptablepartstate("trail", "active");
       level.facemelter_globs = scripts\engine\utility::array_add_safe(level.facemelter_globs, var_12);
-      var_12 thread watchglobstick("iw7_facemelterdummy_zm", var_05);
+      var_12 thread watchglobstick("iw7_facemelterdummy_zm", var_5);
       scripts\engine\utility::waitframe();
     }
   }
@@ -454,11 +454,11 @@ facemelter_death_logic(param_00, param_01, param_02, param_03, param_04) {
     self.rocket_feet = 0;
     self setscriptablepartstate("rocket_feet", "inactive", 1);
     self setscriptablepartstate("rocket_explosion", "inactive", 1);
-    if(!isDefined(param_00)) {
-      param_00 = undefined;
+    if(!isDefined(var_0)) {
+      var_0 = undefined;
     }
 
-    self dodamage(self.health + 1000, self.origin, param_00, self.link_ent, "MOD_GRENADE_SPLASH", "iw7_facemelterdummy_zm");
+    self dodamage(self.health + 1000, self.origin, var_0, self.link_ent, "MOD_GRENADE_SPLASH", "iw7_facemelterdummy_zm");
   }
 
   if(isDefined(var_13)) {
@@ -485,75 +485,75 @@ remove_rocket_feet_failsafe() {
   self.rocket_feet = 0;
 }
 
-facemelter_fire_pool(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = 75;
-  var_06 = 30;
-  if(isDefined(param_04)) {
+facemelter_fire_pool(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 75;
+  var_6 = 30;
+  if(isDefined(var_4)) {
     wait(0.1);
-    self.pooltrigger = spawn("trigger_rotatable_radius", param_00.origin, 0, var_05, var_06);
-    self.pooltrigger thread run_fire_pool(param_00, param_01, param_02, param_03);
-    self.pooltrigger thread fire_pool_timeout(param_01);
-    wait(param_01);
+    self.pooltrigger = spawn("trigger_rotatable_radius", var_0.origin, 0, var_5, var_6);
+    self.pooltrigger thread run_fire_pool(var_0, var_1, var_2, var_3);
+    self.pooltrigger thread fire_pool_timeout(var_1);
+    wait(var_1);
     return;
   }
 
-  var_07 = spawnfx(level._effect["fire_pool_wide"], param_00.origin);
-  var_07 playSound("zombie_facemelter_fire_pool");
+  var_7 = spawnfx(level._effect["fire_pool_wide"], var_0.origin);
+  var_7 playSound("zombie_facemelter_fire_pool");
   wait(0.1);
-  var_08 = spawn("trigger_rotatable_radius", param_00.origin, 0, var_05, var_06);
-  var_08 thread run_fire_pool(param_00, param_01, param_02, param_03);
-  var_08 thread fire_pool_timeout(param_01);
-  var_07 setfxkilldefondelete();
-  triggerfx(var_07);
-  wait(param_01);
-  var_07 delete();
+  var_8 = spawn("trigger_rotatable_radius", var_0.origin, 0, var_5, var_6);
+  var_8 thread run_fire_pool(var_0, var_1, var_2, var_3);
+  var_8 thread fire_pool_timeout(var_1);
+  var_7 setfxkilldefondelete();
+  triggerfx(var_7);
+  wait(var_1);
+  var_7 delete();
 }
 
-run_fire_pool(param_00, param_01, param_02, param_03) {
+run_fire_pool(var_0, var_1, var_2, var_3) {
   self endon("fire_pool_done");
-  var_04 = param_01 * 10;
+  var_4 = var_1 * 10;
   for(;;) {
-    self waittill("trigger", var_05);
-    if(isDefined(var_05.rocket_feet)) {
+    self waittill("trigger", var_5);
+    if(isDefined(var_5.rocket_feet)) {
       wait(0.1);
       continue;
-    } else if(isplayer(var_05)) {
-      if(param_02 == var_05 && !scripts\engine\utility::istrue(param_03) && !isDefined(var_05.burning)) {
-        if(!scripts\engine\utility::istrue(var_05.inlaststand)) {
-          var_05.burning = 1;
-          var_05 thread dodamageandunsetburnstate(var_05, self);
+    } else if(isplayer(var_5)) {
+      if(var_2 == var_5 && !scripts\engine\utility::istrue(var_3) && !isDefined(var_5.burning)) {
+        if(!scripts\engine\utility::istrue(var_5.inlaststand)) {
+          var_5.burning = 1;
+          var_5 thread dodamageandunsetburnstate(var_5, self);
         }
       }
 
       wait(0.1);
       continue;
-    } else if(isalive(var_05)) {
-      level thread scripts\cp\utility::damage_over_time(var_05, param_02, 5, var_05.health + 1000, undefined, "iw7_facemelterdummy_zm", 0, "burning");
+    } else if(isalive(var_5)) {
+      level thread scripts\cp\utility::damage_over_time(var_5, var_2, 5, var_5.health + 1000, undefined, "iw7_facemelterdummy_zm", 0, "burning");
     }
 
     wait(0.1);
   }
 }
 
-dodamageandunsetburnstate(param_00, param_01) {
-  param_00 notify("doDamageAndUnsetBurnState");
-  param_00 endon("doDamageAndUnsetBurnState");
-  param_00 endon("disconnect");
-  if(isalive(param_00)) {
-    param_00 dodamage(int(param_00.maxhealth * 0.15), param_01.origin, param_01, param_01, "MOD_UNKNOWN", "iw7_facemelterdummy_zm");
+dodamageandunsetburnstate(var_0, var_1) {
+  var_0 notify("doDamageAndUnsetBurnState");
+  var_0 endon("doDamageAndUnsetBurnState");
+  var_0 endon("disconnect");
+  if(isalive(var_0)) {
+    var_0 dodamage(int(var_0.maxhealth * 0.15), var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_facemelterdummy_zm");
   }
 
   wait(1);
-  param_00.burning = undefined;
+  var_0.burning = undefined;
 }
 
-fire_pool_timeout(param_00) {
-  wait(param_00);
+fire_pool_timeout(var_0) {
+  wait(var_0);
   self notify("fire_pool_done");
   self delete();
 }
 
-shredder_death_logic(param_00, param_01, param_02, param_03) {
+shredder_death_logic(var_0, var_1, var_2, var_3) {
   self endon("death");
   if(scripts\mp\agents\zombie\zmb_zombie_agent::dying_zapper_death()) {
     return;
@@ -563,18 +563,18 @@ shredder_death_logic(param_00, param_01, param_02, param_03) {
   self.precacheleaderboards = 1;
   self clearpath();
   wait(0.1);
-  var_04 = ["left_arm", "right_arm"];
-  var_04 = scripts\engine\utility::array_randomize(var_04);
+  var_4 = ["left_arm", "right_arm"];
+  var_4 = scripts\engine\utility::array_randomize(var_4);
   if(!scripts\engine\utility::istrue(self.is_cop)) {
-    foreach(var_06 in var_04) {
-      self setscriptablepartstate(var_06, "disintegrate", 1);
+    foreach(var_6 in var_4) {
+      self setscriptablepartstate(var_6, "disintegrate", 1);
       wait(0.25);
     }
 
-    var_04 = ["right_leg", "left_leg"];
-    var_04 = scripts\engine\utility::array_randomize(var_04);
-    foreach(var_06 in var_04) {
-      self setscriptablepartstate(var_06, "disintegrate", 1);
+    var_4 = ["right_leg", "left_leg"];
+    var_4 = scripts\engine\utility::array_randomize(var_4);
+    foreach(var_6 in var_4) {
+      self setscriptablepartstate(var_6, "disintegrate", 1);
       wait(0.25);
     }
 
@@ -582,15 +582,15 @@ shredder_death_logic(param_00, param_01, param_02, param_03) {
     wait(0.25);
     self setscriptablepartstate("head", "detached", 1);
   } else {
-    foreach(var_06 in var_06) {
-      self setscriptablepartstate(var_06, "disintegrate", 1);
+    foreach(var_6 in var_6) {
+      self setscriptablepartstate(var_6, "disintegrate", 1);
       wait(0.1);
     }
 
-    var_04 = ["right_leg", "left_leg"];
-    var_04 = scripts\engine\utility::array_randomize(var_04);
-    foreach(var_06 in var_04) {
-      self setscriptablepartstate(var_06, "disintegrate", 1);
+    var_4 = ["right_leg", "left_leg"];
+    var_4 = scripts\engine\utility::array_randomize(var_4);
+    foreach(var_6 in var_4) {
+      self setscriptablepartstate(var_6, "disintegrate", 1);
       wait(0.1);
     }
 
@@ -601,24 +601,24 @@ shredder_death_logic(param_00, param_01, param_02, param_03) {
   self.nocorpse = 1;
   self.deathmethod = "shredder";
   self.shredder_death = 0;
-  self dodamage(self.health + 1000, self.origin, param_00, undefined, "MOD_UNKNOWN", "iw7_shredderdummy_zm");
+  self dodamage(self.health + 1000, self.origin, var_0, undefined, "MOD_UNKNOWN", "iw7_shredderdummy_zm");
 }
 
-check_to_use_headshot_explosion(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = scripts\engine\utility::isbulletdamage(param_03) || param_03 == "MOD_EXPLOSIVE_BULLET" && param_05 != "none";
-  if(!var_07) {
+check_to_use_headshot_explosion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = scripts\engine\utility::isbulletdamage(var_3) || var_3 == "MOD_EXPLOSIVE_BULLET" && var_5 != "none";
+  if(!var_7) {
     return;
   }
 
-  if(!scripts\cp\utility::isheadshot(param_04, param_05, param_03, param_00)) {
+  if(!scripts\cp\utility::isheadshot(var_4, var_5, var_3, var_0)) {
     return;
   }
 
-  param_00 scripts\cp\utility::notify_used_consumable("headshot_explosion");
-  thread explode_head_with_fx(param_00, param_05, param_02, "bloody_death", undefined, param_06);
+  var_0 scripts\cp\utility::notify_used_consumable("headshot_explosion");
+  thread explode_head_with_fx(var_0, var_5, var_2, "bloody_death", undefined, var_6);
 }
 
-explode_head_with_fx(param_00, param_01, param_02, param_03, param_04, param_05) {
+explode_head_with_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(scripts\mp\agents\zombie\zmb_zombie_agent::dying_zapper_death()) {
     return;
   }
@@ -628,12 +628,12 @@ explode_head_with_fx(param_00, param_01, param_02, param_03, param_04, param_05)
   }
 
   self.head_is_exploding = 1;
-  param_04 = self gettagorigin("J_Spine4");
+  var_4 = self gettagorigin("J_Spine4");
   playsoundatpos(self.origin, "zmb_fnf_headpopper_explo");
-  playFX(level._effect[param_03], param_04);
-  foreach(var_07 in level.players) {
-    if(distance(var_07.origin, param_04) <= 350) {
-      var_07 thread showonscreenbloodeffects();
+  playFX(level._effect[var_3], var_4);
+  foreach(var_7 in level.players) {
+    if(distance(var_7.origin, var_4) <= 350) {
+      var_7 thread showonscreenbloodeffects();
     }
   }
 
@@ -641,7 +641,7 @@ explode_head_with_fx(param_00, param_01, param_02, param_03, param_04, param_05)
     self detach(self.headmodel);
   }
 
-  if(!param_05) {
+  if(!var_5) {
     self setscriptablepartstate("head", "hide");
   }
 }
@@ -660,7 +660,7 @@ head_shard_init() {
   level._effect["head_blood_explosion"] = loadfx("vfx\iw7\_requests\coop\zmb_head_blood_explosion.vfx");
 }
 
-head_exploder(param_00, param_01, param_02, param_03, param_04) {
+head_exploder(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   if(scripts\mp\agents\zombie\zmb_zombie_agent::dying_zapper_death()) {
     return;
@@ -681,49 +681,49 @@ head_exploder(param_00, param_01, param_02, param_03, param_04) {
   wait(0.1);
   self setscriptablepartstate("head", "hide", 1);
   wait(0.1);
-  param_01 = self gettagorigin("J_Spine4");
-  param_00 thread explode_head_shards(param_00, param_01, self, param_04);
+  var_1 = self gettagorigin("J_Spine4");
+  var_0 thread explode_head_shards(var_0, var_1, self, var_4);
   if(scripts\engine\utility::istrue(self.is_cop)) {
     self.full_gib = 1;
     self.nocorpse = 1;
   }
 
-  self dodamage(self.health + 1000, self.origin, param_00, undefined, "MOD_UNKNOWN", "iw7_headcutterdummy_zm");
+  self dodamage(self.health + 1000, self.origin, var_0, undefined, "MOD_UNKNOWN", "iw7_headcutterdummy_zm");
 }
 
-explode_head_shards(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\cp\utility::weaponhasattachment(param_03, "pap1");
-  var_05 = getweaponbasename(param_03);
-  var_06 = "iw7_headcutterdummy_zm";
-  var_07 = 15000;
-  switch (var_05) {
+explode_head_shards(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\cp\utility::weaponhasattachment(var_3, "pap1");
+  var_5 = getweaponbasename(var_3);
+  var_6 = "iw7_headcutterdummy_zm";
+  var_7 = 15000;
+  switch (var_5) {
     case "iw7_headcutter_zm_pap1":
     case "iw7_headcutter_zm":
-      if(var_04) {
-        var_06 = "iw7_headcutter2_zm+hcpap1";
+      if(var_4) {
+        var_6 = "iw7_headcutter2_zm+hcpap1";
       } else {
-        var_06 = "iw7_headcutter2_zm";
+        var_6 = "iw7_headcutter2_zm";
       }
       break;
 
     case "iw7_headcutter2_zm":
-      if(var_04) {
-        var_06 = "iw7_headcutter3_zm+hcpap1";
+      if(var_4) {
+        var_6 = "iw7_headcutter3_zm+hcpap1";
       } else {
-        var_06 = "iw7_headcutterdummy_zm";
+        var_6 = "iw7_headcutterdummy_zm";
       }
       break;
   }
 
-  var_08 = [];
-  var_08 = level.spawned_enemies;
-  var_09 = [param_02];
+  var_8 = [];
+  var_8 = level.spawned_enemies;
+  var_9 = [var_2];
   var_0A = 128;
-  if(var_04) {
+  if(var_4) {
     var_0A = 256;
   }
 
-  var_0B = scripts\engine\utility::get_array_of_closest(param_01, var_08, var_09, undefined, var_0A, 0);
+  var_0B = scripts\engine\utility::get_array_of_closest(var_1, var_8, var_9, undefined, var_0A, 0);
   foreach(var_0D in var_0B) {
     if(isDefined(var_0D.agent_type) && var_0D.agent_type == "zombie_grey" || var_0D.agent_type == "zombie_brute") {
       var_0E = 100;
@@ -731,14 +731,14 @@ explode_head_shards(param_00, param_01, param_02, param_03) {
       var_0E = 100000;
     }
 
-    var_0D dodamage(var_0E, param_01, param_00, param_00, "MOD_EXPLOSIVE", var_06);
+    var_0D dodamage(var_0E, var_1, var_0, var_0, "MOD_EXPLOSIVE", var_6);
   }
 }
 
-delayshardfire(param_00, param_01, param_02, param_03) {
-  param_03 endon("disconnect");
-  wait(param_00);
-  var_04 = magicbullet("iw7_headcuttershards_mp", param_01, param_02, param_03);
+delayshardfire(var_0, var_1, var_2, var_3) {
+  var_3 endon("disconnect");
+  wait(var_0);
+  var_4 = magicbullet("iw7_headcuttershards_mp", var_1, var_2, var_3);
 }
 
 weapon_watch_hint() {
@@ -748,58 +748,58 @@ weapon_watch_hint() {
   self.axe_hint_display = 0;
   self.nx1_hint_display = 0;
   self.forgefreeze_hint_display = 0;
-  var_00 = getweaponbasename(self getcurrentprimaryweapon());
-  var_01 = self getcurrentweapon();
-  var_02 = undefined;
+  var_0 = getweaponbasename(self getcurrentprimaryweapon());
+  var_1 = self getcurrentweapon();
+  var_2 = undefined;
   for(;;) {
-    if(isDefined(var_00) && var_00 == "iw7_axe_zm" && self.axe_hint_display < 3) {
+    if(isDefined(var_0) && var_0 == "iw7_axe_zm" && self.axe_hint_display < 3) {
       scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_AXE_HINT", 4);
       self.axe_hint_display = self.axe_hint_display + 1;
-    } else if(isDefined(var_00) && var_00 == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
+    } else if(isDefined(var_0) && var_0 == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
       scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_FORGEFREEZE_HINT", 4);
       self.forgefreeze_hint_display = self.forgefreeze_hint_display + 1;
     }
 
-    updatecamoscripts(var_01, var_02);
-    var_02 = var_01;
+    updatecamoscripts(var_1, var_2);
+    var_2 = var_1;
     self waittill("weapon_change");
     wait(0.5);
-    var_00 = getweaponbasename(self getcurrentprimaryweapon());
-    var_01 = self getcurrentweapon();
+    var_0 = getweaponbasename(self getcurrentprimaryweapon());
+    var_1 = self getcurrentweapon();
   }
 }
 
-updatecamoscripts(param_00, param_01) {
-  if(isDefined(param_00)) {
-    var_02 = getweaponcamoname(param_00);
+updatecamoscripts(var_0, var_1) {
+  if(isDefined(var_0)) {
+    var_2 = getweaponcamoname(var_0);
   } else {
-    var_02 = undefined;
+    var_2 = undefined;
   }
 
-  if(isDefined(param_01)) {
-    var_03 = getweaponcamoname(param_01);
+  if(isDefined(var_1)) {
+    var_3 = getweaponcamoname(var_1);
   } else {
-    var_03 = undefined;
+    var_3 = undefined;
   }
 
-  if(!isDefined(var_02)) {
-    var_02 = "none";
+  if(!isDefined(var_2)) {
+    var_2 = "none";
   }
 
-  if(!isDefined(var_03)) {
-    var_03 = "none";
+  if(!isDefined(var_3)) {
+    var_3 = "none";
   }
 
-  clearcamoscripts(param_01, var_03);
-  runcamoscripts(param_00, var_02);
+  clearcamoscripts(var_1, var_3);
+  runcamoscripts(var_0, var_2);
 }
 
-runcamoscripts(param_00, param_01) {
-  if(!isDefined(param_01)) {
+runcamoscripts(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case "camo32":
       self setscriptablepartstate("camo_32", "loop");
       break;
@@ -846,12 +846,12 @@ runcamoscripts(param_00, param_01) {
   }
 }
 
-clearcamoscripts(param_00, param_01) {
-  if(!isDefined(param_01)) {
+clearcamoscripts(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case "camo204":
       self setscriptablepartstate("camo_204", "neutral");
       break;
@@ -882,19 +882,19 @@ mw2_camo_31() {
     self.mw2camokillcount = 0;
   }
 
-  var_00 = int(self.mw2camokillcount / 5);
-  self setscriptablepartstate("camo_31", var_00 + "_kills");
+  var_0 = int(self.mw2camokillcount / 5);
+  self setscriptablepartstate("camo_31", var_0 + "_kills");
   for(;;) {
     self waittill("zombie_killed");
     self.mw2camokillcount = self.mw2camokillcount + 1;
     if(self.mw2camokillcount % 5 == 0) {
-      var_00 = int(self.mw2camokillcount / 5);
-      if(var_00 > 7) {
-        var_00 = 0;
+      var_0 = int(self.mw2camokillcount / 5);
+      if(var_0 > 7) {
+        var_0 = 0;
         self.mw2camokillcount = 0;
       }
 
-      self setscriptablepartstate("camo_31", var_00 + "_kills");
+      self setscriptablepartstate("camo_31", var_0 + "_kills");
     }
   }
 }
@@ -907,18 +907,18 @@ blood_camo_84() {
     self.bloodcamokillcount = 0;
   }
 
-  var_00 = 1;
+  var_0 = 1;
   for(;;) {
     self waittill("zombie_killed");
     self.bloodcamokillcount = self.bloodcamokillcount + 1;
-    if(self.bloodcamokillcount / 5 == var_00) {
-      var_01 = int(self.bloodcamokillcount / 5);
-      if(var_01 > 14) {
+    if(self.bloodcamokillcount / 5 == var_0) {
+      var_1 = int(self.bloodcamokillcount / 5);
+      if(var_1 > 14) {
         break;
       }
 
-      self setscriptablepartstate("camo_84", var_01 + "_kills");
-      var_00++;
+      self setscriptablepartstate("camo_84", var_1 + "_kills");
+      var_0++;
     }
   }
 }
@@ -929,18 +929,18 @@ blood_camo_222() {
   self endon("blood_camo_222");
   self.katanacamokillcount = 0;
   self setscriptablepartstate("camo_222", "null_state");
-  var_00 = 1;
+  var_0 = 1;
   for(;;) {
     self waittill("zombie_killed");
     self.katanacamokillcount = self.katanacamokillcount + 1;
-    if(self.katanacamokillcount / 5 == var_00) {
-      var_01 = int(self.katanacamokillcount / 5);
-      if(var_01 > 10) {
+    if(self.katanacamokillcount / 5 == var_0) {
+      var_1 = int(self.katanacamokillcount / 5);
+      if(var_1 > 10) {
         break;
       }
 
-      self setscriptablepartstate("camo_222", var_01 + "_kills");
-      var_00++;
+      self setscriptablepartstate("camo_222", var_1 + "_kills");
+      var_0++;
     }
   }
 }
@@ -950,46 +950,46 @@ axe_damage_cone() {
   level endon("game_ended");
   self endon("death");
   for(;;) {
-    self waittill("axe_melee_hit", var_00, var_01, var_02);
-    var_03 = getweaponbasename(var_00);
-    var_04 = scripts\cp\cp_weapon::get_weapon_level(var_03);
-    var_05 = get_melee_weapon_fov(var_03, var_04);
-    var_06 = get_melee_weapon_hit_distance(var_03, var_04);
-    var_07 = get_melee_weapon_max_enemies(var_03, var_04);
-    var_08 = checkenemiesinfov(var_05, var_06, var_07);
+    self waittill("axe_melee_hit", var_0, var_1, var_2);
+    var_3 = getweaponbasename(var_0);
+    var_4 = scripts\cp\cp_weapon::get_weapon_level(var_3);
+    var_5 = get_melee_weapon_fov(var_3, var_4);
+    var_6 = get_melee_weapon_hit_distance(var_3, var_4);
+    var_7 = get_melee_weapon_max_enemies(var_3, var_4);
+    var_8 = checkenemiesinfov(var_5, var_6, var_7);
     thread setaxescriptablestate(self);
-    foreach(var_0A in var_08) {
-      if(var_0A == var_01) {
+    foreach(var_0A in var_8) {
+      if(var_0A == var_1) {
         continue;
       }
 
-      var_0A thread axe_damage(var_0A, self, var_02, var_0A.origin, self.origin, var_00, 0.5);
+      var_0A thread axe_damage(var_0A, self, var_2, var_0A.origin, self.origin, var_0, 0.5);
     }
   }
 }
 
-setaxeidlescriptablestate(param_00) {
-  param_00 setscriptablepartstate("axe - idle", "neutral");
+setaxeidlescriptablestate(var_0) {
+  var_0 setscriptablepartstate("axe - idle", "neutral");
   wait(0.5);
-  param_00 setscriptablepartstate("axe - idle", "level 1");
+  var_0 setscriptablepartstate("axe - idle", "level 1");
 }
 
-setaxescriptablestate(param_00) {
-  param_00 notify("setaxeblooddrip");
-  param_00 endon("setaxeblooddrip");
-  param_00 setscriptablepartstate("axe", "neutral");
+setaxescriptablestate(var_0) {
+  var_0 notify("setaxeblooddrip");
+  var_0 endon("setaxeblooddrip");
+  var_0 setscriptablepartstate("axe", "neutral");
   wait(0.5);
-  param_00 setscriptablepartstate("axe", "blood on");
+  var_0 setscriptablepartstate("axe", "blood on");
   wait(5);
-  param_00 setscriptablepartstate("axe", "neutral");
+  var_0 setscriptablepartstate("axe", "neutral");
 }
 
-get_melee_weapon_fov(param_00, param_01) {
-  if(!isDefined(param_00) && !isDefined(param_01)) {
+get_melee_weapon_fov(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 45;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case 2:
       return 52;
 
@@ -1001,12 +1001,12 @@ get_melee_weapon_fov(param_00, param_01) {
   }
 }
 
-get_melee_weapon_hit_distance(param_00, param_01) {
-  if(!isDefined(param_00) && !isDefined(param_01)) {
+get_melee_weapon_hit_distance(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 125;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case 2:
       return 150;
 
@@ -1018,12 +1018,12 @@ get_melee_weapon_hit_distance(param_00, param_01) {
   }
 }
 
-get_melee_weapon_max_enemies(param_00, param_01) {
-  if(!isDefined(param_00) && !isDefined(param_01)) {
+get_melee_weapon_max_enemies(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case 2:
       return 8;
 
@@ -1035,12 +1035,12 @@ get_melee_weapon_max_enemies(param_00, param_01) {
   }
 }
 
-get_melee_weapon_melee_damage(param_00, param_01) {
-  if(!isDefined(param_00) && !isDefined(param_01)) {
+get_melee_weapon_melee_damage(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1100;
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case 2:
       return 1500;
 
@@ -1052,41 +1052,41 @@ get_melee_weapon_melee_damage(param_00, param_01) {
   }
 }
 
-create_explosion_sphere(param_00) {
-  var_01 = param_00 / 2;
-  var_02 = vectornormalize(anglesToForward(self.angles));
-  var_03 = var_02 * var_01;
-  var_04 = self.origin + var_03;
-  physicsexplosionsphere(var_04, var_01, 1, 2);
+create_explosion_sphere(var_0) {
+  var_1 = var_0 / 2;
+  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_3 = var_2 * var_1;
+  var_4 = self.origin + var_3;
+  physicsexplosionsphere(var_4, var_1, 1, 2);
 }
 
 playredrepulsorfx() {
-  var_00 = spawnfxforclient(level._effect["repulsor_view_red"], self gettagorigin("tag_eye"), self);
-  triggerfx(var_00);
-  var_00 thread scripts\cp\utility::delayentdelete(1);
+  var_0 = spawnfxforclient(level._effect["repulsor_view_red"], self gettagorigin("tag_eye"), self);
+  triggerfx(var_0);
+  var_0 thread scripts\cp\utility::delayentdelete(1);
   playrumbleonposition("slide_collision", self.origin);
   self earthquakeforplayer(0.5, 0.5, self.origin, 62.5);
 }
 
-checkenemiesinfov(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = 6;
+checkenemiesinfov(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var_03 = cos(param_00);
-  var_04 = [];
-  var_05 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  var_06 = scripts\engine\utility::get_array_of_closest(self.origin, var_05, undefined, 24, param_01, 1);
-  foreach(var_08 in var_06) {
-    var_09 = anglesToForward(self.angles);
-    var_0A = vectornormalize(var_09) * -25;
+  var_3 = cos(var_0);
+  var_4 = [];
+  var_5 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_6 = scripts\engine\utility::get_array_of_closest(self.origin, var_5, undefined, 24, var_1, 1);
+  foreach(var_8 in var_6) {
+    var_9 = anglesToForward(self.angles);
+    var_0A = vectornormalize(var_9) * -25;
     var_0B = 0;
-    var_0C = var_08.origin;
-    var_0D = scripts\engine\utility::within_fov(self getEye() + var_0A, self.angles, var_0C + (0, 0, 30), var_03);
+    var_0C = var_8.origin;
+    var_0D = scripts\engine\utility::within_fov(self getEye() + var_0A, self.angles, var_0C + (0, 0, 30), var_3);
     if(var_0D) {
-      if(isDefined(param_01)) {
+      if(isDefined(var_1)) {
         var_0E = distance2d(self.origin, var_0C);
-        if(var_0E < param_01) {
+        if(var_0E < var_1) {
           var_0B = 1;
         }
       } else {
@@ -1094,24 +1094,24 @@ checkenemiesinfov(param_00, param_01, param_02) {
       }
     }
 
-    if(var_0B && var_04.size < param_02) {
-      var_04[var_04.size] = var_08;
+    if(var_0B && var_4.size < var_2) {
+      var_4[var_4.size] = var_8;
     }
   }
 
-  return var_04;
+  return var_4;
 }
 
-axe_damage(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  param_00 endon("death");
-  if(param_00 scripts\cp\agents\gametype_zombie::is_non_standard_zombie()) {
-    param_00.allowpain = 1;
+axe_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_0 endon("death");
+  if(var_0 scripts\cp\agents\gametype_zombie::is_non_standard_zombie()) {
+    var_0.allowpain = 1;
   }
 
-  param_00 dodamage(param_02, param_03, param_01, param_01, "MOD_MELEE", param_05);
-  wait(param_06);
-  if(scripts\engine\utility::istrue(param_00.allowpain)) {
-    param_00.allowpain = 0;
+  var_0 dodamage(var_2, var_3, var_1, var_1, "MOD_MELEE", var_5);
+  wait(var_6);
+  if(scripts\engine\utility::istrue(var_0.allowpain)) {
+    var_0.allowpain = 0;
   }
 }
 
@@ -1123,29 +1123,29 @@ reload_watcher() {
     self waittill("reload_start");
     self waittill("reload");
     if(scripts\cp\utility::is_escape_gametype()) {
-      var_00 = self getcurrentweapon();
-      var_01 = self getweaponammostock(var_00);
-      var_02 = weaponclipsize(var_00);
-      self setweaponammostock(var_00, var_01 + var_02);
+      var_0 = self getcurrentweapon();
+      var_1 = self getweaponammostock(var_0);
+      var_2 = weaponclipsize(var_0);
+      self setweaponammostock(var_0, var_1 + var_2);
     }
   }
 }
 
-arcane_attachment_watcher(param_00) {
+arcane_attachment_watcher(var_0) {
   scripts\engine\utility::flag_wait("doors_initialized");
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("death");
-  while(!isDefined(param_00.suit)) {
+  var_0 endon("disconnect");
+  var_0 endon("death");
+  while(!isDefined(var_0.suit)) {
     wait(0.1);
   }
 
-  param_00 thread unsetstatewhenadswithsniper(param_00);
+  var_0 thread unsetstatewhenadswithsniper(var_0);
   for(;;) {
-    var_01 = param_00 scripts\engine\utility::waittill_any_3("weapon_change", "weapon_switch_started", "ads_out");
-    param_00 clear_arcane_effects(param_00);
-    param_00 turn_off_zapper_fx();
-    param_00 thread wait_for_weapon_switch_done(param_00);
+    var_1 = var_0 scripts\engine\utility::waittill_any_3("weapon_change", "weapon_switch_started", "ads_out");
+    var_0 clear_arcane_effects(var_0);
+    var_0 turn_off_zapper_fx();
+    var_0 thread wait_for_weapon_switch_done(var_0);
   }
 }
 
@@ -1154,8 +1154,8 @@ scriptable_notify_test() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("scriptableNotification", var_00, var_01, var_02);
-    if(!isDefined(var_00)) {
+    self waittill("scriptableNotification", var_0, var_1, var_2);
+    if(!isDefined(var_0)) {
       continue;
     }
 
@@ -1163,96 +1163,96 @@ scriptable_notify_test() {
   }
 }
 
-unsetstatewhenadswithsniper(param_00) {
-  param_00 endon("disconnect");
-  param_00 notifyonplayercommand("ads_in", "+speed_throw");
-  param_00 notifyonplayercommand("ads_out", "-speed_throw");
+unsetstatewhenadswithsniper(var_0) {
+  var_0 endon("disconnect");
+  var_0 notifyonplayercommand("ads_in", "+speed_throw");
+  var_0 notifyonplayercommand("ads_out", "-speed_throw");
   for(;;) {
-    var_01 = param_00 scripts\engine\utility::waittill_any_return("ads_in", "ads_out");
-    if(param_00 scripts\cp\utility::coop_getweaponclass(param_00 getcurrentweapon()) == "weapon_sniper") {
-      if(var_01 == "ads_in") {
-        param_00 clear_arcane_scriptable_effects(param_00);
-        param_00.pause_arcane_logic = 1;
+    var_1 = var_0 scripts\engine\utility::waittill_any_return("ads_in", "ads_out");
+    if(var_0 scripts\cp\utility::coop_getweaponclass(var_0 getcurrentweapon()) == "weapon_sniper") {
+      if(var_1 == "ads_in") {
+        var_0 clear_arcane_scriptable_effects(var_0);
+        var_0.pause_arcane_logic = 1;
         continue;
       }
 
-      param_00.pause_arcane_logic = undefined;
+      var_0.pause_arcane_logic = undefined;
     }
   }
 }
 
-clear_arcane_scriptable_effects(param_00) {
-  param_00 setscriptablepartstate("arcane", "neutral", 1);
+clear_arcane_scriptable_effects(var_0) {
+  var_0 setscriptablepartstate("arcane", "neutral", 1);
 }
 
-clear_arcane_effects(param_00) {
-  param_00 setclientomnvar("zm_ui_specialammo", 0);
-  param_00.special_ammo_type = undefined;
-  param_00 setscriptablepartstate("arcane", "neutral", 1);
-  if(param_00 scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
-    param_00 scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+clear_arcane_effects(var_0) {
+  var_0 setclientomnvar("zm_ui_specialammo", 0);
+  var_0.special_ammo_type = undefined;
+  var_0 setscriptablepartstate("arcane", "neutral", 1);
+  if(var_0 scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
+    var_0 scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 
-  if(param_00 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
-    param_00 scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  if(var_0 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
+    var_0 scripts\cp\utility::_unsetperk("specialty_armorpiercing");
   }
 
-  if(param_00 scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
-    param_00 scripts\cp\utility::_unsetperk("specialty_bulletdamage");
+  if(var_0 scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
+    var_0 scripts\cp\utility::_unsetperk("specialty_bulletdamage");
   }
 }
 
-wait_for_weapon_switch_done(param_00, param_01) {
+wait_for_weapon_switch_done(var_0, var_1) {
   level endon("game_ended");
-  param_00 notify("wait_for_weapon_switch_done");
-  param_00 endon("wait_for_weapon_switch_done");
-  param_00 endon("disconnect");
-  param_00 endon("weapon_switch_started");
-  while(param_00 isswitchingweapon()) {
+  var_0 notify("wait_for_weapon_switch_done");
+  var_0 endon("wait_for_weapon_switch_done");
+  var_0 endon("disconnect");
+  var_0 endon("weapon_switch_started");
+  while(var_0 isswitchingweapon()) {
     wait(0.05);
   }
 
-  var_02 = param_00 getcurrentweapon();
-  param_00 notify("weapon_switch_done", var_02);
-  param_00 assign_ark_attachment_properties(param_00, undefined, var_02);
-  param_00 handle_zapper_fx(param_00, var_02);
+  var_2 = var_0 getcurrentweapon();
+  var_0 notify("weapon_switch_done", var_2);
+  var_0 assign_ark_attachment_properties(var_0, undefined, var_2);
+  var_0 handle_zapper_fx(var_0, var_2);
 }
 
-assign_ark_attachment_properties(param_00, param_01, param_02) {
-  if(scripts\engine\utility::istrue(param_00.pause_arcane_logic)) {
+assign_ark_attachment_properties(var_0, var_1, var_2) {
+  if(scripts\engine\utility::istrue(var_0.pause_arcane_logic)) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    if(!isDefined(param_02)) {
-      param_02 = self getcurrentweapon();
+  if(!isDefined(var_1)) {
+    if(!isDefined(var_2)) {
+      var_2 = self getcurrentweapon();
     }
 
-    if(!issubstr(param_02, "ark")) {
+    if(!issubstr(var_2, "ark")) {
       return;
     }
 
-    var_03 = strtok(param_02, "+");
-    foreach(var_05 in var_03) {
-      if(issubstr(var_05, "ark")) {
-        param_01 = var_05;
+    var_3 = strtok(var_2, "+");
+    foreach(var_5 in var_3) {
+      if(issubstr(var_5, "ark")) {
+        var_1 = var_5;
         break;
       }
     }
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = "blank";
+  if(!isDefined(var_1)) {
+    var_1 = "blank";
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case "arkblue_sm":
     case "arkblue_akimbo":
     case "blue":
     case "arkblue":
       self setclientomnvar("zm_ui_specialammo", 1);
       self.special_ammo_type = "stun_ammo";
-      self.special_ammo_weapon = param_02;
+      self.special_ammo_weapon = var_2;
       if(!scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
         scripts\cp\utility::giveperk("specialty_bulletdamage");
       }
@@ -1330,15 +1330,15 @@ assign_ark_attachment_properties(param_00, param_01, param_02) {
   }
 }
 
-handle_zapper_fx(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = self getcurrentweapon();
+handle_zapper_fx(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = self getcurrentweapon();
   }
 
-  var_02 = getweaponbasename(param_01);
+  var_2 = getweaponbasename(var_1);
   turn_off_zapper_fx();
-  if(isDefined(var_02)) {
-    switch (var_02) {
+  if(isDefined(var_2)) {
+    switch (var_2) {
       case "iw7_facemelter_zm_pap1":
       case "iw7_facemelter_zm":
         self setscriptablepartstate("facemelter", "active");
@@ -1369,12 +1369,12 @@ turn_off_zapper_fx() {
   self setscriptablepartstate("shredder", "inactive");
 }
 
-get_ark_attachment_type(param_00) {
-  var_01 = strtok(param_00, "+");
-  foreach(var_03 in var_01) {
-    var_04 = getsubstr(var_03, 0, 3);
-    if(var_04 == "ark") {
-      switch (var_03) {
+get_ark_attachment_type(var_0) {
+  var_1 = strtok(var_0, "+");
+  foreach(var_3 in var_1) {
+    var_4 = getsubstr(var_3, 0, 3);
+    if(var_4 == "ark") {
+      switch (var_3) {
         case "arkblueburst":
         case "arkblueshotgun":
         case "arkblueautospread":
@@ -1423,10 +1423,10 @@ get_ark_attachment_type(param_00) {
   return undefined;
 }
 
-weapon_in_inventory(param_00) {
-  var_01 = self getweaponslistprimaries();
-  foreach(var_03 in var_01) {
-    if(var_03 == param_00) {
+weapon_in_inventory(var_0) {
+  var_1 = self getweaponslistprimaries();
+  foreach(var_3 in var_1) {
+    if(var_3 == var_0) {
       return 1;
     }
   }
@@ -1434,10 +1434,10 @@ weapon_in_inventory(param_00) {
   return 0;
 }
 
-watchglobstick(param_00, param_01) {
+watchglobstick(var_0, var_1) {
   self endon("death");
   thread remove_from_glob_array_on_death();
-  self waittill("missile_stuck", var_02);
+  self waittill("missile_stuck", var_2);
   if(!isDefined(self.triggerportableradarping)) {
     return;
   }
@@ -1445,19 +1445,19 @@ watchglobstick(param_00, param_01) {
   self setscriptablepartstate("trail", "neutral");
   self setscriptablepartstate("explosion", "active");
   playsoundatpos(self.origin, "plasma_grenade_impact");
-  radiusdamage(self.origin, 128, 10, 5, self.triggerportableradarping, "MOD_EXPLOSIVE", param_00);
+  radiusdamage(self.origin, 128, 10, 5, self.triggerportableradarping, "MOD_EXPLOSIVE", var_0);
   if(level.facemelter_globs.size > 5) {
     self delete();
     return;
   }
 
-  var_03 = spawn("trigger_rotatable_radius", self.origin, 0, 60, 60);
-  var_03.angles = self.angles;
-  var_03.triggerportableradarping = self.triggerportableradarping;
-  var_03.team = self.triggerportableradarping.team;
-  var_03 thread watchplayerstouchingpool(param_00, param_01);
-  var_03 thread scripts\cp\utility::delayentdelete(8);
-  var_03 thread delayplaySound(0.1, "plasma_grenade_fire_glob");
+  var_3 = spawn("trigger_rotatable_radius", self.origin, 0, 60, 60);
+  var_3.angles = self.angles;
+  var_3.triggerportableradarping = self.triggerportableradarping;
+  var_3.team = self.triggerportableradarping.team;
+  var_3 thread watchplayerstouchingpool(var_0, var_1);
+  var_3 thread scripts\cp\utility::delayentdelete(8);
+  var_3 thread delayplaySound(0.1, "plasma_grenade_fire_glob");
   self.poolscriptablepart = "poolGround";
   self setscriptablepartstate("poolGround", "active");
   wait(8);
@@ -1470,57 +1470,57 @@ remove_from_glob_array_on_death() {
   level.facemelter_globs = scripts\engine\utility::array_remove(level.facemelter_globs, self);
 }
 
-startdamageovertime(param_00, param_01, param_02, param_03, param_04) {
+startdamageovertime(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("disconnect");
-  param_01 endon("disconnect");
+  var_1 endon("disconnect");
   self.startedplasmastand = 1;
   self.startedplasmalinger = undefined;
   self.is_burning = 1;
   thread watchgrenadedotend();
-  thread watchstartlingerdamage(param_00, param_01);
+  thread watchstartlingerdamage(var_0, var_1);
   if(isDefined(level.splash_grenade_victim_scriptable_state_func) && isalive(self) && isDefined(self.species) && self.species == "zombie") {
     self thread[[level.splash_grenade_victim_scriptable_state_func]](self);
-  } else {}
-
-  thread standingdotdamage(param_00, param_01, param_02, param_03, param_04);
-}
-
-play_fx_for_time(param_00, param_01, param_02) {
-  var_03 = undefined;
-  var_03 = spawnfx(scripts\engine\utility::getfx(param_01), param_00);
-  if(isDefined(var_03)) {
-    triggerfx(var_03);
   }
 
-  var_03 thread scripts\cp\utility::delayentdelete(param_02);
-  return var_03;
+  thread standingdotdamage(var_0, var_1, var_2, var_3, var_4);
 }
 
-watchplayerstouchingpool(param_00, param_01) {
+play_fx_for_time(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_3 = spawnfx(scripts\engine\utility::getfx(var_1), var_0);
+  if(isDefined(var_3)) {
+    triggerfx(var_3);
+  }
+
+  var_3 thread scripts\cp\utility::delayentdelete(var_2);
+  return var_3;
+}
+
+watchplayerstouchingpool(var_0, var_1) {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
   for(;;) {
-    self waittill("trigger", var_02);
-    if(scripts\cp\utility::isreallyalive(var_02) && !isDefined(var_02.startedplasmastand) && var_02.team != self.triggerportableradarping.team || var_02 == self.triggerportableradarping) {
-      if(param_01) {
-        if(var_02 == self.triggerportableradarping) {
+    self waittill("trigger", var_2);
+    if(scripts\cp\utility::isreallyalive(var_2) && !isDefined(var_2.startedplasmastand) && var_2.team != self.triggerportableradarping.team || var_2 == self.triggerportableradarping) {
+      if(var_1) {
+        if(var_2 == self.triggerportableradarping) {
           continue;
         }
       }
 
-      var_02 notify("start_plasma_stand");
-      var_02 thread startdamageovertime(param_00, self.triggerportableradarping, 33, 0.5, self);
-      var_02 thread watchistouchingtrigger(self);
+      var_2 notify("start_plasma_stand");
+      var_2 thread startdamageovertime(var_0, self.triggerportableradarping, 33, 0.5, self);
+      var_2 thread watchistouchingtrigger(self);
     }
   }
 }
 
-watchistouchingtrigger(param_00) {
+watchistouchingtrigger(var_0) {
   self endon("death");
   self endon("disconnect");
   for(;;) {
-    if(!isDefined(param_00) || !self istouching(param_00)) {
+    if(!isDefined(var_0) || !self istouching(var_0)) {
       self notify("plasma_dot_end");
       break;
     }
@@ -1542,129 +1542,129 @@ watchgrenadedotend() {
   stopFXOnTag(scripts\engine\utility::getfx("player_plasma_friendly"), self, "j_mainroot");
 }
 
-watchstartlingerdamage(param_00, param_01) {
+watchstartlingerdamage(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("plasma_dot_end");
-  param_01 endon("disconnect");
+  var_1 endon("disconnect");
   self waittill("start_plasma_linger");
-  var_02 = 1;
-  var_03 = 25;
-  var_04 = 1;
+  var_2 = 1;
+  var_3 = 25;
+  var_4 = 1;
   self.startedplasmastand = undefined;
   self.startedplasmalinger = 1;
-  var_05 = spawnfxforclient(scripts\engine\utility::getfx("player_plasma_screen_linger"), self getEye(), self);
-  triggerfx(var_05);
-  var_05 thread scripts\cp\utility::delayentdelete(1);
-  var_05 thread scripts\cp\utility::deleteonplayerdeathdisconnect(self);
-  var_05 thread deletepentsondisconnect(self);
-  thread damageplayerovertime(param_00, param_01, var_03, var_04, var_02, "start_plasma_stand", "plasma_dot_end");
+  var_5 = spawnfxforclient(scripts\engine\utility::getfx("player_plasma_screen_linger"), self getEye(), self);
+  triggerfx(var_5);
+  var_5 thread scripts\cp\utility::delayentdelete(1);
+  var_5 thread scripts\cp\utility::deleteonplayerdeathdisconnect(self);
+  var_5 thread deletepentsondisconnect(self);
+  thread damageplayerovertime(var_0, var_1, var_3, var_4, var_2, "start_plasma_stand", "plasma_dot_end");
 }
 
-deleteonlingerstart(param_00) {
+deleteonlingerstart(var_0) {
   self endon("death");
-  param_00 endon("death");
-  param_00 endon("disconnect");
-  param_00 waittill("plasma_dot_end");
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  var_0 waittill("plasma_dot_end");
   if(isDefined(self)) {
     self delete();
   }
 }
 
-delayplayfxontagforclients(param_00, param_01, param_02, param_03) {
-  param_02 endon("death");
-  wait(param_00);
-  if(isDefined(param_02) && isDefined(self)) {
-    playfxontagforclients(scripts\engine\utility::getfx(param_01), param_02, param_03, self);
+delayplayfxontagforclients(var_0, var_1, var_2, var_3) {
+  var_2 endon("death");
+  wait(var_0);
+  if(isDefined(var_2) && isDefined(self)) {
+    playfxontagforclients(scripts\engine\utility::getfx(var_1), var_2, var_3, self);
   }
 }
 
-standingdotdamage(param_00, param_01, param_02, param_03, param_04) {
+standingdotdamage(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("disconnect");
-  param_01 endon("disconnect");
-  if(isDefined(param_04)) {
-    param_04 endon("death");
+  var_1 endon("disconnect");
+  if(isDefined(var_4)) {
+    var_4 endon("death");
   }
 
-  var_05 = int(param_02 / 4);
-  var_06 = param_03;
-  childthread damageplayerovertime(param_00, param_01, var_05, var_06, undefined, "start_stage2_plasma");
+  var_5 = int(var_2 / 4);
+  var_6 = var_3;
+  childthread damageplayerovertime(var_0, var_1, var_5, var_6, undefined, "start_stage2_plasma");
   wait(1);
   self notify("start_stage2_plasma");
-  var_05 = int(param_02 / 2);
-  var_06 = param_03 / 2;
-  childthread damageplayerovertime(param_00, param_01, var_05, var_06, undefined, "start_stage3_plasma");
+  var_5 = int(var_2 / 2);
+  var_6 = var_3 / 2;
+  childthread damageplayerovertime(var_0, var_1, var_5, var_6, undefined, "start_stage3_plasma");
   wait(0.5);
   self notify("start_stage3_plasma");
-  var_05 = param_02;
-  var_06 = param_03 / 4;
-  childthread damageplayerovertime(param_00, param_01, var_05, var_06);
+  var_5 = var_2;
+  var_6 = var_3 / 4;
+  childthread damageplayerovertime(var_0, var_1, var_5, var_6);
 }
 
-damageplayerovertime(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+damageplayerovertime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("disconnect");
-  if(isDefined(param_05)) {
-    self endon(param_05);
+  if(isDefined(var_5)) {
+    self endon(var_5);
   }
 
-  param_01 endon("disconnect");
-  if(!isDefined(param_04)) {
+  var_1 endon("disconnect");
+  if(!isDefined(var_4)) {
     for(;;) {
-      self dodamage(param_02, self.origin, param_01, undefined, "MOD_EXPLOSIVE", param_00);
+      self dodamage(var_2, self.origin, var_1, undefined, "MOD_EXPLOSIVE", var_0);
       self.flame_damage_time = gettime() + 500;
-      wait(param_03);
+      wait(var_3);
     }
 
     return;
   }
 
-  if(param_03 > param_04) {
+  if(var_3 > var_4) {
     return;
   }
 
-  var_07 = param_02;
-  if(self.health <= var_07) {
-    self dodamage(param_02, self.origin, param_01, undefined, "MOD_EXPLOSIVE", param_00);
+  var_7 = var_2;
+  if(self.health <= var_7) {
+    self dodamage(var_2, self.origin, var_1, undefined, "MOD_EXPLOSIVE", var_0);
     self.flame_damage_time = gettime() + 500;
   }
 
-  while(param_04 > 0) {
-    if(self.health > 15 && self.health - param_02 < 15) {
-      param_02 = param_02 - 15 - self.health - param_02;
+  while(var_4 > 0) {
+    if(self.health > 15 && self.health - var_2 < 15) {
+      var_2 = var_2 - 15 - self.health - var_2;
     }
 
-    if(self.health > var_07 && self.health <= 15) {
-      param_02 = 1;
+    if(self.health > var_7 && self.health <= 15) {
+      var_2 = 1;
     }
 
-    if(param_02 > 0) {
-      self dodamage(param_02, self.origin, param_01, undefined, "MOD_EXPLOSIVE", param_00);
+    if(var_2 > 0) {
+      self dodamage(var_2, self.origin, var_1, undefined, "MOD_EXPLOSIVE", var_0);
       self.flame_damage_time = gettime() + 500;
     }
 
-    param_04 = param_04 - param_03;
-    wait(param_03);
+    var_4 = var_4 - var_3;
+    wait(var_3);
   }
 
-  if(isDefined(param_06)) {
-    self notify(param_06);
+  if(isDefined(var_6)) {
+    self notify(var_6);
   }
 }
 
-deletepentsondisconnect(param_00) {
+deletepentsondisconnect(var_0) {
   self endon("death");
-  param_00 endon("death");
-  param_00 endon("disconnect");
-  param_00 waittill("start_plasma_stand");
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  var_0 waittill("start_plasma_stand");
   if(isDefined(self)) {
     self delete();
   }
 }
 
-delayplaySound(param_00, param_01) {
+delayplaySound(var_0, var_1) {
   self endon("death");
-  wait(param_00);
-  self playSound(param_01);
+  wait(var_0);
+  self playSound(var_1);
 }

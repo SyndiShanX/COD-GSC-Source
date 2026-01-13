@@ -3,29 +3,29 @@
  * Script: 2745.gsc
 ***************************************/
 
-addheavyarmor(var_00) {
-  var_01 = self.heavyarmor;
+addheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
 
   if(!isDefined(self.struct)) {
-    var_01 = spawnStruct(self.heavyarmor);
+    var_1 = spawnStruct(self.heavyarmor);
     var_1.player = self;
     var_1.hp = 0;
-    self.heavyarmor = var_01;
-    var_1.hp = var_1.hp + var_00;
+    self.heavyarmor = var_1;
+    var_1.hp = var_1.hp + var_0;
     self notify("heavyArmor_added");
   } else
-    var_1.hp = var_1.hp + var_00;
+    var_1.hp = var_1.hp + var_0;
 }
 
-subtractheavyarmor(var_00) {
-  var_01 = self.heavyarmor;
+subtractheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
 
-  if(scripts\mp\utility\game::istrue(var_1.func_9344)) {
+  if(scripts\mp\utility\game::istrue(var_1.var_9344)) {
     return;
   }
   if(var_1.hp > 0) {
-    var_1.hp = max(0, var_1.hp - var_00);
-    scripts\mp\missions::func_D991("ch_heavy_armor_absorb", var_00);
+    var_1.hp = max(0, var_1.hp - var_0);
+    scripts\mp\missions::func_D991("ch_heavy_armor_absorb", var_0);
 
     if(var_1.hp <= 0) {
       thread heavyarmor_break();
@@ -38,46 +38,46 @@ removeheavyarmor() {
   self.heavyarmor = undefined;
 }
 
-heavyarmormodifydamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
-  if(var_02 <= 0 && var_03 <= 0) {
-    return [0, var_02, var_03];
+heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  if(var_2 <= 0 && var_3 <= 0) {
+    return [0, var_2, var_3];
   }
 
-  if(var_04 == "MOD_SUICIDE") {
-    return [0, var_02, var_03];
+  if(var_4 == "MOD_SUICIDE") {
+    return [0, var_2, var_3];
   }
 
-  if(isDefined(var_01) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn")) {
-    return [0, var_02, var_03];
+  if(isDefined(var_1) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn")) {
+    return [0, var_2, var_3];
   }
 
-  if(!var_00 hasheavyarmor()) {
-    return [0, var_02, var_03];
+  if(!var_0 hasheavyarmor()) {
+    return [0, var_2, var_3];
   }
 
-  if(scripts\mp\utility\game::isbombsiteweapon(var_05)) {
-    return [0, var_02, var_03];
+  if(scripts\mp\utility\game::isbombsiteweapon(var_5)) {
+    return [0, var_2, var_3];
   }
 
-  if(var_00 hasheavyarmorinvulnerability()) {
+  if(var_0 hasheavyarmorinvulnerability()) {
     return [1, 1, 0];
   }
 
-  var_11 = var_00 getheavyarmor();
-  var_12 = heavyarmor_getdamagemodifier(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
-  var_13 = var_02 * var_12;
-  var_14 = var_03 * var_12;
+  var_11 = var_0 getheavyarmor();
+  var_12 = heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  var_13 = var_2 * var_12;
+  var_14 = var_3 * var_12;
   var_15 = var_13 + var_14;
 
   if(!var_10) {
-    var_00 subtractheavyarmor(var_15);
+    var_0 subtractheavyarmor(var_15);
   }
 
-  if(var_00 hasheavyarmorinvulnerability()) {
+  if(var_0 hasheavyarmorinvulnerability()) {
     return [var_11, 1, 0];
   }
 
-  return [var_02 + var_03, 1, 0];
+  return [var_2 + var_3, 1, 0];
 }
 
 getheavyarmor() {
@@ -109,22 +109,22 @@ heavyarmor_break() {
   thread removeheavyarmor();
 }
 
-heavyarmor_getdamagemodifier(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
+heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   var_11 = [];
 
-  if(scripts\mp\utility\game::issuperweapon(var_04)) {
+  if(scripts\mp\utility\game::issuperweapon(var_4)) {
     var_11[var_11.size] = 1.33;
   }
 
-  if(isexplosivedamagemod(var_04)) {
+  if(isexplosivedamagemod(var_4)) {
     var_11[var_11.size] = 1.5;
   }
 
-  if(var_04 == "MOD_MELEE") {
+  if(var_4 == "MOD_MELEE") {
     var_11[var_11.size] = 1.5;
   }
 
-  if(scripts\mp\utility\game::isheadshot(var_05, var_08, var_04, var_01)) {
+  if(scripts\mp\utility\game::isheadshot(var_5, var_8, var_4, var_1)) {
     var_11[var_11.size] = 1.5;
   }
 

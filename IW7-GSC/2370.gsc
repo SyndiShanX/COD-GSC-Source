@@ -5,7 +5,7 @@
 ************************/
 
 main() {
-  var_00[0] = "body_un_moon_guards_loadout_a";
-  var_00[1] = "body_un_moon_guards_loadout_b";
-  return var_00;
+  var_0[0] = "body_un_moon_guards_loadout_a";
+  var_0[1] = "body_un_moon_guards_loadout_b";
+  return var_0;
 }

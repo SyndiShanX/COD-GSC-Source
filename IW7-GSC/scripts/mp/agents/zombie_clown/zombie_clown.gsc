@@ -54,44 +54,44 @@ func_899C() {
   self endon("death");
   level waittill("game_ended");
   self clearpath();
-  foreach(var_04, var_01 in self.var_164D) {
-    var_02 = var_01.var_4BC0;
-    var_03 = level.asm[var_04].states[var_02];
-    scripts\asm\asm::func_2388(var_04, var_02, var_03, var_03.var_116FB);
-    scripts\asm\asm::func_238A(var_04, "idle", 0.2, undefined, undefined, undefined);
+  foreach(var_4, var_1 in self.var_164D) {
+    var_2 = var_1.var_4BC0;
+    var_3 = level.asm[var_4].states[var_2];
+    scripts\asm\asm::func_2388(var_4, var_2, var_3, var_3.var_116FB);
+    scripts\asm\asm::func_238A(var_4, "idle", 0.2, undefined, undefined, undefined);
   }
 }
 
-func_FACE(param_00) {
-  var_01 = ["park_clown_zombie", "park_clown_zombie_blue", "park_clown_zombie_green", "park_clown_zombie_orange", "park_clown_zombie_yellow"];
-  self setModel(scripts\engine\utility::random(var_01));
+func_FACE(var_0) {
+  var_1 = ["park_clown_zombie", "park_clown_zombie_blue", "park_clown_zombie_green", "park_clown_zombie_orange", "park_clown_zombie_yellow"];
+  self setModel(scripts\engine\utility::random(var_1));
 }
 
 func_AEB0() {}
 
 func_3725() {
-  var_00 = 200;
+  var_0 = 200;
   switch (level.specialroundcounter) {
     case 0:
-      var_00 = 100;
+      var_0 = 100;
       break;
 
     case 1:
-      var_00 = 400;
+      var_0 = 400;
       break;
 
     case 2:
-      var_00 = 900;
+      var_0 = 900;
       break;
 
     case 3:
-      var_00 = 1300;
+      var_0 = 1300;
       break;
 
     default:
-      var_00 = 1600;
+      var_0 = 1600;
       break;
   }
 
-  return var_00;
+  return var_0;
 }

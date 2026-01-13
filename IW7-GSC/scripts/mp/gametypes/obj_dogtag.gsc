@@ -12,137 +12,137 @@ init() {
   level.numlifelimited = scripts\mp\utility::getgametypenumlives();
 }
 
-shouldspawntags(param_00) {
+shouldspawntags(var_0) {
   if(isDefined(self.switching_teams)) {
     return 0;
   }
 
-  if(isDefined(param_00) && param_00 == self) {
+  if(isDefined(var_0) && var_0 == self) {
     return 0;
   }
 
-  if(level.teambased && isDefined(param_00) && isDefined(param_00.team) && param_00.team == self.team) {
+  if(level.teambased && isDefined(var_0) && isDefined(var_0.team) && var_0.team == self.team) {
     return 0;
   }
 
-  if(isDefined(param_00) && !isDefined(param_00.team) && param_00.classname == "trigger_hurt" || param_00.classname == "worldspawn") {
+  if(isDefined(var_0) && !isDefined(var_0.team) && var_0.classname == "trigger_hurt" || var_0.classname == "worldspawn") {
     return 0;
   }
 
   return 1;
 }
 
-spawndogtags(param_00, param_01, param_02) {
-  var_03 = 1;
+spawndogtags(var_0, var_1, var_2) {
+  var_3 = 1;
   if(scripts\mp\utility::istrue(level.numlifelimited)) {
-    var_03 = param_00 shouldspawntags(param_01);
-    if(var_03) {
-      var_03 = var_03 && !scripts\mp\utility::isreallyalive(param_00);
+    var_3 = var_0 shouldspawntags(var_1);
+    if(var_3) {
+      var_3 = var_3 && !scripts\mp\utility::isreallyalive(var_0);
     }
 
-    if(var_03) {
-      var_03 = var_03 && !param_00 scripts\mp\playerlogic::mayspawn();
+    if(var_3) {
+      var_3 = var_3 && !var_0 scripts\mp\playerlogic::mayspawn();
     }
   }
 
-  if(!var_03) {
+  if(!var_3) {
     return;
   }
 
-  if(isagent(param_00)) {
+  if(isagent(var_0)) {
     return;
   }
 
-  if(isagent(param_01)) {
-    param_01 = param_01.triggerportableradarping;
+  if(isagent(var_1)) {
+    var_1 = var_1.triggerportableradarping;
   }
 
-  var_04 = 14;
-  var_05 = (0, 0, 0);
-  var_06 = param_00.angles;
-  if(param_00 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
-    var_06 = param_00 getworldupreferenceangles();
-    var_05 = anglestoup(var_06);
-    if(var_05[2] < 0) {
-      var_04 = -14;
+  var_4 = 14;
+  var_5 = (0, 0, 0);
+  var_6 = var_0.angles;
+  if(var_0 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
+    var_6 = var_0 getworldupreferenceangles();
+    var_5 = anglestoup(var_6);
+    if(var_5[2] < 0) {
+      var_4 = -14;
     }
   }
 
-  if(isDefined(level.dogtags[param_00.guid])) {
-    playFX(level.conf_fx["vanish"], level.dogtags[param_00.guid].curorigin);
-    level.dogtags[param_00.guid] resettags();
-    level.dogtags[param_00.guid].visuals[0].angles = (0, 0, 0);
-    level.dogtags[param_00.guid].visuals[1].angles = (0, 0, 0);
+  if(isDefined(level.dogtags[var_0.guid])) {
+    playFX(level.conf_fx["vanish"], level.dogtags[var_0.guid].curorigin);
+    level.dogtags[var_0.guid] resettags();
+    level.dogtags[var_0.guid].visuals[0].angles = (0, 0, 0);
+    level.dogtags[var_0.guid].visuals[1].angles = (0, 0, 0);
   } else {
-    var_07[0] = spawn("script_model", (0, 0, 0));
-    var_07[0] setModel("dogtags_iw7_foe");
-    var_07[1] = spawn("script_model", (0, 0, 0));
-    var_07[1] setModel("dogtags_iw7_friend");
+    var_7[0] = spawn("script_model", (0, 0, 0));
+    var_7[0] setModel("dogtags_iw7_foe");
+    var_7[1] = spawn("script_model", (0, 0, 0));
+    var_7[1] setModel("dogtags_iw7_friend");
     if(level.numlifelimited) {
-      var_07[0] setclientowner(param_00);
-      var_07[1] setclientowner(param_00);
+      var_7[0] setclientowner(var_0);
+      var_7[1] setclientowner(var_0);
     }
 
-    var_07[0] setasgametypeobjective();
-    var_07[1] setasgametypeobjective();
-    var_08 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
-    if(param_00 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
-      if(var_05[2] < 0) {
-        var_07[0].angles = var_06;
-        var_07[1].angles = var_06;
+    var_7[0] setasgametypeobjective();
+    var_7[1] setasgametypeobjective();
+    var_8 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
+    if(var_0 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
+      if(var_5[2] < 0) {
+        var_7[0].angles = var_6;
+        var_7[1].angles = var_6;
       }
     }
 
-    level.dogtags[param_00.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_08, var_07, (0, 0, 16));
-    level.dogtags[param_00.guid] scripts\mp\gameobjects::setusetime(0);
-    level.dogtags[param_00.guid].onuse = ::onuse;
-    level.dogtags[param_00.guid].victim = param_00;
-    level.dogtags[param_00.guid].victimteam = param_00.team;
-    level thread clearonvictimdisconnect(param_00);
-    param_00 thread tagteamupdater(level.dogtags[param_00.guid]);
+    level.dogtags[var_0.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
+    level.dogtags[var_0.guid] scripts\mp\gameobjects::setusetime(0);
+    level.dogtags[var_0.guid].onuse = ::onuse;
+    level.dogtags[var_0.guid].victim = var_0;
+    level.dogtags[var_0.guid].victimteam = var_0.team;
+    level thread clearonvictimdisconnect(var_0);
+    var_0 thread tagteamupdater(level.dogtags[var_0.guid]);
   }
 
-  var_09 = param_00.origin + (0, 0, var_04);
-  level.dogtags[param_00.guid].curorigin = var_09;
-  level.dogtags[param_00.guid].trigger.origin = var_09;
-  level.dogtags[param_00.guid].visuals[0].origin = var_09;
-  level.dogtags[param_00.guid].visuals[1].origin = var_09;
-  level.dogtags[param_00.guid] scripts\mp\gameobjects::initializetagpathvariables();
-  level.dogtags[param_00.guid] scripts\mp\gameobjects::allowuse("any");
+  var_9 = var_0.origin + (0, 0, var_4);
+  level.dogtags[var_0.guid].curorigin = var_9;
+  level.dogtags[var_0.guid].trigger.origin = var_9;
+  level.dogtags[var_0.guid].visuals[0].origin = var_9;
+  level.dogtags[var_0.guid].visuals[1].origin = var_9;
+  level.dogtags[var_0.guid] scripts\mp\gameobjects::initializetagpathvariables();
+  level.dogtags[var_0.guid] scripts\mp\gameobjects::allowuse("any");
   if(level.teambased) {
-    level.dogtags[param_00.guid].visuals[0] thread showtoteam(level.dogtags[param_00.guid], param_01.team);
-    level.dogtags[param_00.guid].visuals[1] thread showtoteam(level.dogtags[param_00.guid], param_00.team);
+    level.dogtags[var_0.guid].visuals[0] thread showtoteam(level.dogtags[var_0.guid], var_1.team);
+    level.dogtags[var_0.guid].visuals[1] thread showtoteam(level.dogtags[var_0.guid], var_0.team);
   } else {
-    level.dogtags[param_00.guid] thread showtoffaattacker(level.dogtags[param_00.guid], param_01, param_00);
+    level.dogtags[var_0.guid] thread showtoffaattacker(level.dogtags[var_0.guid], var_1, var_0);
   }
 
-  level.dogtags[param_00.guid].var_4F = param_01;
-  level.dogtags[param_00.guid].attackerteam = param_01.team;
-  if(level.dogtags[param_00.guid].teamobjids[param_00.team] != -1) {
-    scripts\mp\objidpoolmanager::minimap_objective_add(level.dogtags[param_00.guid].teamobjids[param_00.team], "active", var_09, "waypoint_dogtags_friendlys");
+  level.dogtags[var_0.guid].var_4F = var_1;
+  level.dogtags[var_0.guid].attackerteam = var_1.team;
+  if(level.dogtags[var_0.guid].teamobjids[var_0.team] != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(level.dogtags[var_0.guid].teamobjids[var_0.team], "active", var_9, "waypoint_dogtags_friendlys");
     if(level.numlifelimited) {
-      scripts\mp\objidpoolmanager::minimap_objective_team(level.dogtags[param_00.guid].teamobjids[param_00.team], param_00.team);
+      scripts\mp\objidpoolmanager::minimap_objective_team(level.dogtags[var_0.guid].teamobjids[var_0.team], var_0.team);
     } else {
-      scripts\mp\objidpoolmanager::minimap_objective_player(level.dogtags[param_00.guid].teamobjids[param_00.team], param_00 getentitynumber());
+      scripts\mp\objidpoolmanager::minimap_objective_player(level.dogtags[var_0.guid].teamobjids[var_0.team], var_0 getentitynumber());
     }
   }
 
-  if(level.dogtags[param_00.guid].teamobjids[param_01.team] != -1) {
-    scripts\mp\objidpoolmanager::minimap_objective_add(level.dogtags[param_00.guid].teamobjids[param_01.team], "active", var_09, "waypoint_dogtags");
+  if(level.dogtags[var_0.guid].teamobjids[var_1.team] != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(level.dogtags[var_0.guid].teamobjids[var_1.team], "active", var_9, "waypoint_dogtags");
     if(level.teambased) {
-      scripts\mp\objidpoolmanager::minimap_objective_team(level.dogtags[param_00.guid].teamobjids[param_01.team], param_01.team);
+      scripts\mp\objidpoolmanager::minimap_objective_team(level.dogtags[var_0.guid].teamobjids[var_1.team], var_1.team);
     } else {
-      scripts\mp\objidpoolmanager::minimap_objective_player(level.dogtags[param_00.guid].teamobjids[param_01.team], param_01 getentitynumber());
+      scripts\mp\objidpoolmanager::minimap_objective_player(level.dogtags[var_0.guid].teamobjids[var_1.team], var_1 getentitynumber());
     }
   }
 
-  playsoundatpos(var_09, "mp_killconfirm_tags_drop");
-  level notify(param_02, level.dogtags[param_00.guid]);
-  param_00.tagavailable = 1;
-  level.dogtags[param_00.guid].visuals[0] scriptmodelplayanim("mp_dogtag_spin");
-  level.dogtags[param_00.guid].visuals[1] scriptmodelplayanim("mp_dogtag_spin");
+  playsoundatpos(var_9, "mp_killconfirm_tags_drop");
+  level notify(var_2, level.dogtags[var_0.guid]);
+  var_0.tagavailable = 1;
+  level.dogtags[var_0.guid].visuals[0] scriptmodelplayanim("mp_dogtag_spin");
+  level.dogtags[var_0.guid].visuals[1] scriptmodelplayanim("mp_dogtag_spin");
   if(level.numlifelimited) {
-    param_00.getgrenadefusetime = "hud_status_dogtag";
+    var_0.getgrenadefusetime = "hud_status_dogtag";
   }
 }
 
@@ -167,143 +167,143 @@ resettags() {
   }
 }
 
-removetags(param_00, param_01) {
-  if(isDefined(level.dogtags[param_00])) {
-    level.dogtags[param_00] scripts\mp\gameobjects::allowuse("none");
-    if(scripts\mp\utility::istrue(param_01) && isDefined(level.dogtags[param_00].var_4F)) {
-      level.dogtags[param_00].var_4F thread scripts\mp\rank::scoreeventpopup("kill_denied");
+removetags(var_0, var_1) {
+  if(isDefined(level.dogtags[var_0])) {
+    level.dogtags[var_0] scripts\mp\gameobjects::allowuse("none");
+    if(scripts\mp\utility::istrue(var_1) && isDefined(level.dogtags[var_0].var_4F)) {
+      level.dogtags[var_0].var_4F thread scripts\mp\rank::scoreeventpopup("kill_denied");
     }
 
-    playFX(level.conf_fx["vanish"], level.dogtags[param_00].curorigin);
-    level.dogtags[param_00] notify("reset");
+    playFX(level.conf_fx["vanish"], level.dogtags[var_0].curorigin);
+    level.dogtags[var_0] notify("reset");
     wait(0.05);
-    if(isDefined(level.dogtags[param_00])) {
-      level.dogtags[param_00] notify("death");
-      for(var_02 = 0; var_02 < level.dogtags[param_00].visuals.size; var_02++) {
-        level.dogtags[param_00].visuals[var_02] delete();
+    if(isDefined(level.dogtags[var_0])) {
+      level.dogtags[var_0] notify("death");
+      for(var_2 = 0; var_2 < level.dogtags[var_0].visuals.size; var_2++) {
+        level.dogtags[var_0].visuals[var_2] delete();
       }
 
-      level.dogtags[param_00] thread scripts\mp\gameobjects::deleteuseobject();
-      level.dogtags[param_00] = undefined;
+      level.dogtags[var_0] thread scripts\mp\gameobjects::deleteuseobject();
+      level.dogtags[var_0] = undefined;
     }
   }
 }
 
-showtoteam(param_00, param_01) {
-  param_00 endon("death");
-  param_00 endon("reset");
+showtoteam(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("reset");
   self hide();
-  foreach(var_03 in level.players) {
-    if(var_03.team == param_01) {
-      self showtoplayer(var_03);
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_1) {
+      self showtoplayer(var_3);
     }
 
-    if(var_03.team == "spectator" && param_01 == "allies") {
-      self showtoplayer(var_03);
+    if(var_3.team == "spectator" && var_1 == "allies") {
+      self showtoplayer(var_3);
     }
   }
 
   for(;;) {
-    level waittill("joined_team", var_03);
-    if(var_03.team == param_01) {
-      self showtoplayer(var_03);
+    level waittill("joined_team", var_3);
+    if(var_3.team == var_1) {
+      self showtoplayer(var_3);
     }
 
-    if(var_03.team == "spectator" && param_01 == "allies") {
-      self showtoplayer(var_03);
+    if(var_3.team == "spectator" && var_1 == "allies") {
+      self showtoplayer(var_3);
     }
   }
 }
 
-showtoffaattacker(param_00, param_01, param_02) {
-  param_00 endon("death");
-  param_00 endon("reset");
-  param_00.visuals[0] hide();
-  param_00.visuals[1] hide();
-  foreach(var_04 in level.players) {
-    if(var_04 != param_02) {
-      param_00.visuals[0] showtoplayer(var_04);
+showtoffaattacker(var_0, var_1, var_2) {
+  var_0 endon("death");
+  var_0 endon("reset");
+  var_0.visuals[0] hide();
+  var_0.visuals[1] hide();
+  foreach(var_4 in level.players) {
+    if(var_4 != var_2) {
+      var_0.visuals[0] showtoplayer(var_4);
     } else {
-      param_00.visuals[1] showtoplayer(var_04);
+      var_0.visuals[1] showtoplayer(var_4);
     }
 
-    if(var_04.team == "spectator") {
-      param_00.visuals[0] showtoplayer(var_04);
+    if(var_4.team == "spectator") {
+      var_0.visuals[0] showtoplayer(var_4);
     }
   }
 
   for(;;) {
-    level waittill("joined_team", var_04);
-    param_00.visuals[0] showtoplayer(var_04);
+    level waittill("joined_team", var_4);
+    var_0.visuals[0] showtoplayer(var_4);
   }
 }
 
-playercanusetags(param_00) {
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+playercanusetags(var_0) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-onuse(param_00) {
-  if(!playercanusetags(param_00)) {
+onuse(var_0) {
+  if(!playercanusetags(var_0)) {
     return;
   }
 
-  if(isDefined(param_00.triggerportableradarping)) {
-    param_00 = param_00.triggerportableradarping;
+  if(isDefined(var_0.triggerportableradarping)) {
+    var_0 = var_0.triggerportableradarping;
   }
 
   if(level.gametype == "conf") {
-    param_00 thread watchrapidtagpickup();
+    var_0 thread watchrapidtagpickup();
   }
 
   if(level.teambased) {
-    if(param_00.pers["team"] == self.victimteam) {
+    if(var_0.pers["team"] == self.victimteam) {
       self.trigger playSound("mp_killconfirm_tags_deny");
-      param_00 scripts\mp\utility::incperstat("denied", 1);
-      param_00 scripts\mp\persistence::statsetchild("round", "denied", param_00.pers["denied"]);
+      var_0 scripts\mp\utility::incperstat("denied", 1);
+      var_0 scripts\mp\persistence::statsetchild("round", "denied", var_0.pers["denied"]);
       if(level.numlifelimited) {
-        lifelimitedallyonuse(param_00);
+        lifelimitedallyonuse(var_0);
       } else {
-        allyonuse(param_00);
+        allyonuse(var_0);
       }
 
       if(isDefined(level.dogtagallyonusecb) && !level.gameended) {
-        self thread[[level.dogtagallyonusecb]](param_00);
+        self thread[[level.dogtagallyonusecb]](var_0);
       }
     } else {
       self.trigger playSound("mp_killconfirm_tags_pickup");
       if(level.gametype != "grind") {
-        param_00 scripts\mp\utility::incperstat("confirmed", 1);
-        param_00 scripts\mp\persistence::statsetchild("round", "confirmed", param_00.pers["confirmed"]);
+        var_0 scripts\mp\utility::incperstat("confirmed", 1);
+        var_0 scripts\mp\persistence::statsetchild("round", "confirmed", var_0.pers["confirmed"]);
       }
 
       if(level.numlifelimited) {
-        lifelimitedenemyonuse(param_00);
+        lifelimitedenemyonuse(var_0);
       } else {
-        enemyonuse(param_00);
+        enemyonuse(var_0);
       }
 
       if(isDefined(level.dogtagenemyonusecb) && !level.gameended) {
-        self thread[[level.dogtagenemyonusecb]](param_00);
+        self thread[[level.dogtagenemyonusecb]](var_0);
       }
     }
   } else {
-    runffatagpickup(param_00);
+    runffatagpickup(var_0);
   }
 
   self.victim notify("tag_removed");
   thread removetags(self.victim.guid);
 }
 
-runffatagpickup(param_00) {
-  if(param_00 == self.victim) {
+runffatagpickup(var_0) {
+  if(var_0 == self.victim) {
     self.trigger playSound("mp_killconfirm_tags_deny");
-    allyonuse(param_00);
+    allyonuse(var_0);
     if(isDefined(level.dogtagallyonusecb) && !level.gameended) {
-      self thread[[level.dogtagallyonusecb]](param_00);
+      self thread[[level.dogtagallyonusecb]](var_0);
       return;
     }
 
@@ -311,9 +311,9 @@ runffatagpickup(param_00) {
   }
 
   self.trigger playSound("mp_killconfirm_tags_pickup");
-  enemyonuse(param_00);
+  enemyonuse(var_0);
   if(isDefined(level.dogtagenemyonusecb) && !level.gameended) {
-    self thread[[level.dogtagenemyonusecb]](param_00);
+    self thread[[level.dogtagenemyonusecb]](var_0);
   }
 }
 
@@ -336,61 +336,61 @@ watchrapidtagpickup() {
   self.recenttagcount = 0;
 }
 
-tagteamupdater(param_00) {
+tagteamupdater(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  param_00 endon("death");
+  var_0 endon("death");
   for(;;) {
     self waittill("joined_team");
     thread removetags(self.guid, 1);
   }
 }
 
-clearonvictimdisconnect(param_00) {
-  param_00 notify("clearOnVictimDisconnect");
-  param_00 endon("clearOnVictimDisconnect");
-  param_00 endon("tag_removed");
+clearonvictimdisconnect(var_0) {
+  var_0 notify("clearOnVictimDisconnect");
+  var_0 endon("clearOnVictimDisconnect");
+  var_0 endon("tag_removed");
   level endon("game_ended");
-  var_01 = param_00.guid;
-  param_00 waittill("disconnect");
-  thread removetags(var_01, 1);
+  var_1 = var_0.guid;
+  var_0 waittill("disconnect");
+  thread removetags(var_1, 1);
 }
 
-notifyteam(param_00, param_01, param_02) {
-  var_03 = param_02.team;
-  var_04 = scripts\mp\utility::getotherteam(var_03);
-  foreach(var_06 in level.players) {
-    if(var_06.team == var_03) {
-      if(var_06 != param_02) {
-        var_06 func_C16D(param_00);
+notifyteam(var_0, var_1, var_2) {
+  var_3 = var_2.team;
+  var_4 = scripts\mp\utility::getotherteam(var_3);
+  foreach(var_6 in level.players) {
+    if(var_6.team == var_3) {
+      if(var_6 != var_2) {
+        var_6 func_C16D(var_0);
       }
 
       continue;
     }
 
-    if(var_06.team == var_04) {
-      var_06 func_C16D(param_01);
+    if(var_6.team == var_4) {
+      var_6 func_C16D(var_1);
     }
   }
 }
 
-func_C16D(param_00) {
-  thread scripts\mp\hud_message::showsplash(param_00);
+func_C16D(var_0) {
+  thread scripts\mp\hud_message::showsplash(var_0);
 }
 
-ontagpickupevent(param_00) {
+ontagpickupevent(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   while(!isDefined(self.pers)) {
     wait(0.05);
   }
 
-  thread scripts\mp\utility::giveunifiedpoints(param_00);
+  thread scripts\mp\utility::giveunifiedpoints(var_0);
 }
 
-lifelimitedallyonuse(param_00) {
-  param_00.pers["rescues"]++;
-  param_00 scripts\mp\persistence::statsetchild("round", "rescues", param_00.pers["rescues"]);
+lifelimitedallyonuse(var_0) {
+  var_0.pers["rescues"]++;
+  var_0 scripts\mp\persistence::statsetchild("round", "rescues", var_0.pers["rescues"]);
   notifyteam("sr_ally_respawned", "sr_enemy_respawned", self.victim);
   if(isDefined(self.victim)) {
     self.victim thread scripts\mp\hud_message::showsplash("sr_respawned");
@@ -408,19 +408,19 @@ lifelimitedallyonuse(param_00) {
     self.var_4F thread scripts\mp\rank::scoreeventpopup("kill_denied");
   }
 
-  param_00 thread ontagpickupevent("kill_denied");
-  param_00 scripts\mp\missions::processchallenge("ch_rescuer");
-  if(!isDefined(param_00.rescuedplayers)) {
-    param_00.rescuedplayers = [];
+  var_0 thread ontagpickupevent("kill_denied");
+  var_0 scripts\mp\missions::processchallenge("ch_rescuer");
+  if(!isDefined(var_0.rescuedplayers)) {
+    var_0.rescuedplayers = [];
   }
 
-  param_00.rescuedplayers[self.victim.guid] = 1;
-  if(param_00.rescuedplayers.size == 4) {
-    param_00 scripts\mp\missions::processchallenge("ch_helpme");
+  var_0.rescuedplayers[self.victim.guid] = 1;
+  if(var_0.rescuedplayers.size == 4) {
+    var_0 scripts\mp\missions::processchallenge("ch_helpme");
   }
 }
 
-lifelimitedenemyonuse(param_00) {
+lifelimitedenemyonuse(var_0) {
   if(isDefined(self.victim)) {
     self.victim thread scripts\mp\hud_message::showsplash("sr_eliminated");
     level notify("sr_player_eliminated", self.victim);
@@ -437,13 +437,13 @@ lifelimitedenemyonuse(param_00) {
     self.victim.getgrenadefusetime = "hud_status_dead";
   }
 
-  if(self.var_4F != param_00) {
+  if(self.var_4F != var_0) {
     self.var_4F thread ontagpickupevent("kill_confirmed");
   }
 
-  param_00 thread ontagpickupevent("kill_confirmed");
-  param_00 scripts\mp\utility::leaderdialogonplayer("kill_confirmed");
-  param_00 scripts\mp\missions::processchallenge("ch_hideandseek");
+  var_0 thread ontagpickupevent("kill_confirmed");
+  var_0 scripts\mp\utility::leaderdialogonplayer("kill_confirmed");
+  var_0 scripts\mp\missions::processchallenge("ch_hideandseek");
 }
 
 respawn() {
@@ -474,57 +474,57 @@ func_12E58() {
   }
 }
 
-allyonuse(param_00) {
-  if(self.victim == param_00) {
-    param_00 thread scripts\mp\awards::givemidmatchaward("mode_kc_own_tags");
+allyonuse(var_0) {
+  if(self.victim == var_0) {
+    var_0 thread scripts\mp\awards::givemidmatchaward("mode_kc_own_tags");
   } else if(level.gametype == "conf") {
-    param_00 ontagpickupevent("kill_denied");
+    var_0 ontagpickupevent("kill_denied");
   } else {
-    param_00 ontagpickupevent("tag_denied");
+    var_0 ontagpickupevent("tag_denied");
   }
 
   if(isDefined(self.var_4F)) {
     self.var_4F thread scripts\mp\rank::scoreeventpopup("tag_denied");
   }
 
-  param_00 scripts\mp\missions::processchallenge("ch_denier");
+  var_0 scripts\mp\missions::processchallenge("ch_denier");
 }
 
-enemyonuse(param_00) {
+enemyonuse(var_0) {
   if(level.gametype == "conf") {
-    param_00 ontagpickupevent("kill_confirmed");
+    var_0 ontagpickupevent("kill_confirmed");
   } else {
-    param_00 ontagpickupevent("tag_collected");
+    var_0 ontagpickupevent("tag_collected");
   }
 
   if(level.gametype == "grind") {
-    param_00 playersettagcount(param_00.tagscarried + 1);
+    var_0 playersettagcount(var_0.tagscarried + 1);
   }
 
-  if(self.var_4F != param_00) {
+  if(self.var_4F != var_0) {
     if(level.teambased) {
       self.var_4F thread ontagpickupevent("kc_friendly_pickup");
       if(isDefined(level.supportcranked) && level.supportcranked) {
         if(isDefined(self.var_4F.cranked) && self.var_4F.cranked) {
-          param_00 scripts\mp\utility::setcrankedplayerbombtimer("kill");
+          var_0 scripts\mp\utility::setcrankedplayerbombtimer("kill");
         } else {
           self.var_4F scripts\mp\utility::oncranked(undefined, self.var_4F);
         }
       }
     } else {
-      param_00 ontagpickupevent("kill_denied");
+      var_0 ontagpickupevent("kill_denied");
     }
   }
 
-  param_00 scripts\mp\missions::processchallenge("ch_collector");
+  var_0 scripts\mp\missions::processchallenge("ch_collector");
 }
 
-playersettagcount(param_00) {
-  self.tagscarried = param_00;
-  self.objective_additionalentity = param_00;
-  if(param_00 > 999) {
-    param_00 = 999;
+playersettagcount(var_0) {
+  self.tagscarried = var_0;
+  self.objective_additionalentity = var_0;
+  if(var_0 > 999) {
+    var_0 = 999;
   }
 
-  self setclientomnvar("ui_grind_tags", param_00);
+  self setclientomnvar("ui_grind_tags", var_0);
 }

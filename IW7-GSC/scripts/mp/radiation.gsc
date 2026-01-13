@@ -6,19 +6,19 @@
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00.numareas = 0;
+    level waittill("connected", var_0);
+    var_0.numareas = 0;
   }
 }
 
-playerenterarea(param_00) {
+playerenterarea(var_0) {
   self.numareas++;
   if(self.numareas == 1) {
     radiationeffect();
   }
 }
 
-playerleavearea(param_00) {
+playerleavearea(var_0) {
   self.numareas--;
   if(self.numareas != 0) {
     return;
@@ -31,7 +31,7 @@ playerleavearea(param_00) {
   }
 }
 
-soundwatcher(param_00) {
+soundwatcher(var_0) {
   scripts\engine\utility::waittill_any_3("death", "leftTrigger");
   self stoploopsound();
 }
@@ -113,39 +113,39 @@ func_2B48() {
     self.radiationoverlay.alpha = 0;
   }
 
-  var_00 = 1;
-  var_01 = 2;
-  var_02 = 0.25;
-  var_03 = 1;
-  var_04 = 5;
-  var_05 = 100;
-  var_06 = 0;
+  var_0 = 1;
+  var_1 = 2;
+  var_2 = 0.25;
+  var_3 = 1;
+  var_4 = 5;
+  var_5 = 100;
+  var_6 = 0;
   for(;;) {
     while(self.poison > 1) {
-      var_07 = var_05 - var_04;
-      var_06 = self.poison - var_04 / var_07;
-      if(var_06 < 0) {
-        var_06 = 0;
-      } else if(var_06 > 1) {
-        var_06 = 1;
+      var_7 = var_5 - var_4;
+      var_6 = self.poison - var_4 / var_7;
+      if(var_6 < 0) {
+        var_6 = 0;
+      } else if(var_6 > 1) {
+        var_6 = 1;
       }
 
-      var_08 = var_01 - var_00;
-      var_09 = var_00 + var_08 * 1 - var_06;
-      var_0A = var_03 - var_02;
-      var_0B = var_02 + var_0A * var_06;
-      var_0C = var_06 * 0.5;
-      if(var_06 == 1) {
+      var_8 = var_1 - var_0;
+      var_9 = var_0 + var_8 * 1 - var_6;
+      var_0A = var_3 - var_2;
+      var_0B = var_2 + var_0A * var_6;
+      var_0C = var_6 * 0.5;
+      if(var_6 == 1) {
         break;
       }
 
-      var_0D = var_09 / 2;
+      var_0D = var_9 / 2;
       self.radiationoverlay func_6AB7(var_0D, var_0B);
       self.radiationoverlay fadeoutblackout(var_0D, var_0C);
-      wait(var_06 * 0.5);
+      wait(var_6 * 0.5);
     }
 
-    if(var_06 == 1) {
+    if(var_6 == 1) {
       break;
     }
 
@@ -159,18 +159,18 @@ func_2B48() {
   self.radiationoverlay func_6AB7(2, 0);
 }
 
-doradiationdamage(param_00) {
-  self thread[[level.callbackplayerdamage]](self, self, param_00, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
+doradiationdamage(var_0) {
+  self thread[[level.callbackplayerdamage]](self, self, var_0, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
 }
 
-func_6AB7(param_00, param_01) {
-  self fadeovertime(param_00);
-  self.alpha = param_01;
-  wait(param_00);
+func_6AB7(var_0, var_1) {
+  self fadeovertime(var_0);
+  self.alpha = var_1;
+  wait(var_0);
 }
 
-fadeoutblackout(param_00, param_01) {
-  self fadeovertime(param_00);
-  self.alpha = param_01;
-  wait(param_00);
+fadeoutblackout(var_0, var_1) {
+  self fadeovertime(var_0);
+  self.alpha = var_1;
+  wait(var_0);
 }

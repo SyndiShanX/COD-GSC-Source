@@ -4,37 +4,37 @@
  * Script: 2559.gsc
 ************************/
 
-func_006E(param_00, param_01, param_02, param_03) {
-  var_04 = level.invalid;
-  var_05 = undefined;
-  var_06 = level.var_119E[param_00];
-  var_07 = var_06.var_1581[param_01];
-  var_04 = [[var_07]](param_02);
-  if(!isDefined(var_04)) {
-    var_04 = 3;
+func_006E(var_0, var_1, var_2, var_3) {
+  var_4 = level.invalid;
+  var_5 = undefined;
+  var_6 = level.var_119E[var_0];
+  var_7 = var_6.var_1581[var_1];
+  var_4 = [[var_7]](var_2);
+  if(!isDefined(var_4)) {
+    var_4 = 3;
   }
 
-  return var_04;
+  return var_4;
 }
 
-bt_nativesetregistrar(param_00) {
-  _func_2BA(param_00);
+bt_nativesetregistrar(var_0) {
+  _func_2BA(var_0);
 }
 
-bt_nativeregistertree(param_00, param_01, param_02, param_03) {
-  _func_2B8(param_00, param_01, param_02, param_03);
+bt_nativeregistertree(var_0, var_1, var_2, var_3) {
+  _func_2B8(var_0, var_1, var_2, var_3);
 }
 
-bt_nativeistreeregistered(param_00) {
-  return _func_2BC(param_00);
+bt_nativeistreeregistered(var_0) {
+  return _func_2BC(var_0);
 }
 
-bt_nativeregisterbehavior(param_00, param_01, param_02, param_03, param_04) {
-  _func_2B9(param_00, param_01, param_02, param_03, param_04);
+bt_nativeregisterbehavior(var_0, var_1, var_2, var_3, var_4) {
+  _func_2B9(var_0, var_1, var_2, var_3, var_4);
 }
 
-bt_nativeregisterbehaviortotree(param_00, param_01, param_02, param_03, param_04) {
-  _func_2B9(param_00, param_01, param_02, param_03, param_04);
+bt_nativeregisterbehaviortotree(var_0, var_1, var_2, var_3, var_4) {
+  _func_2B9(var_0, var_1, var_2, var_3, var_4);
 }
 
 bt_nativefinalizeregistrar() {
@@ -45,39 +45,39 @@ bt_nativetick() {
   self _meth_84B3();
 }
 
-bt_nativeregisteraction(param_00, param_01, param_02, param_03, param_04, param_05) {
-  _func_2BD(param_00, param_01, param_02, param_03, param_04, param_05);
+bt_nativeregisteraction(var_0, var_1, var_2, var_3, var_4, var_5) {
+  _func_2BD(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-bt_nativeexecaction(param_00, param_01, param_02, param_03) {
-  var_04 = level.invalid;
-  var_05 = gettime();
-  if(isDefined(param_03)) {
-    var_06 = [[param_03]]();
-    var_04 = [[param_01]](param_02, var_06);
+bt_nativeexecaction(var_0, var_1, var_2, var_3) {
+  var_4 = level.invalid;
+  var_5 = gettime();
+  if(isDefined(var_3)) {
+    var_6 = [[var_3]]();
+    var_4 = [[var_1]](var_2, var_6);
   } else {
-    var_04 = [[param_01]](param_02);
+    var_4 = [[var_1]](var_2);
   }
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return 3;
   }
 
-  if(var_04 == level.failure) {
+  if(var_4 == level.failure) {
     return 0;
   }
 
-  if(var_04 == level.success) {
+  if(var_4 == level.success) {
     return 1;
   }
 
-  if(var_04 == level.running) {
+  if(var_4 == level.running) {
     return 2;
   }
 
   return 3;
 }
 
-bt_nativecopyaction(param_00) {}
+bt_nativecopyaction(var_0) {}
 
-bt_nativecopybehavior(param_00) {}
+bt_nativecopybehavior(var_0) {}

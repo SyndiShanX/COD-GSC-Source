@@ -9,129 +9,129 @@ init_buffer_trap() {
 }
 
 power_on_buffer() {
-  var_00 = getent(self.target, "targetname");
-  var_00 setnonstick(1);
+  var_0 = getent(self.target, "targetname");
+  var_0 setnonstick(1);
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    var_01 = undefined;
+    var_1 = undefined;
     if(isDefined(self.script_area)) {
-      var_01 = self.script_area;
+      var_1 = self.script_area;
     } else {
-      var_01 = scripts\cp\cp_interaction::get_area_for_power(self);
+      var_1 = scripts\cp\cp_interaction::get_area_for_power(self);
     }
 
-    if(isDefined(var_01)) {
-      level scripts\engine\utility::waittill_any_3("power_on", var_01 + " power_on");
+    if(isDefined(var_1)) {
+      level scripts\engine\utility::waittill_any_3("power_on", var_1 + " power_on");
     }
   }
 
   self.powered_on = 1;
 }
 
-use_buffer_trap(param_00, param_01) {
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
-  var_02 = getent(param_00.target, "targetname");
-  if(!isDefined(var_02.var_127C9)) {
-    var_03 = [];
-    foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target, "targetname")) {
-      var_03[var_03.size] = spawn("trigger_radius", var_05.origin, 0, var_05.fgetarg, var_05.height);
+use_buffer_trap(var_0, var_1) {
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_2 = getent(var_0.target, "targetname");
+  if(!isDefined(var_2.var_127C9)) {
+    var_3 = [];
+    foreach(var_5 in scripts\engine\utility::getstructarray(var_0.target, "targetname")) {
+      var_3[var_3.size] = spawn("trigger_radius", var_5.origin, 0, var_5.fgetarg, var_5.height);
     }
 
-    foreach(var_08 in var_03) {
-      var_08 enablelinkto();
-      var_08 linkto(var_02);
+    foreach(var_8 in var_3) {
+      var_8 enablelinkto();
+      var_8 linkto(var_2);
     }
 
-    var_02.var_127C9 = var_03;
+    var_2.var_127C9 = var_3;
   }
 
-  playFXOnTag(level._effect["buffer_smoke"], var_02, "tag_origin");
-  param_01 playlocalsound("purchase_generic");
-  var_02 buffer_trap_sfx();
-  param_00.trap_kills = 0;
-  if(!isDefined(param_00.offset_vector)) {
-    param_00.offset_forward = distance2d(var_02.origin, param_00.origin) * -1;
+  playFXOnTag(level._effect["buffer_smoke"], var_2, "tag_origin");
+  var_1 playlocalsound("purchase_generic");
+  var_2 buffer_trap_sfx();
+  var_0.trap_kills = 0;
+  if(!isDefined(var_0.offset_vector)) {
+    var_0.offset_forward = distance2d(var_2.origin, var_0.origin) * -1;
   }
 
-  param_00.offset_up = distance2d(var_02.origin, param_00.origin);
-  var_0A = var_02.origin;
+  var_0.offset_up = distance2d(var_2.origin, var_0.origin);
+  var_0A = var_2.origin;
   var_0B = 0;
   while(var_0B < 2) {
-    var_02 moveto(var_02.origin + (0, 0, 5), 0.1);
-    foreach(param_01 in level.players) {
-      var_0D = param_01.origin[2] - var_02.origin[2];
-      if(distance(var_02.origin, param_01.origin) < 72 && param_01.origin[2] > var_02.origin[2] && var_0D < 72) {
-        param_01 setvelocity((randomintrange(220, 250), randomintrange(220, 250), 0));
+    var_2 moveto(var_2.origin + (0, 0, 5), 0.1);
+    foreach(var_1 in level.players) {
+      var_0D = var_1.origin[2] - var_2.origin[2];
+      if(distance(var_2.origin, var_1.origin) < 72 && var_1.origin[2] > var_2.origin[2] && var_0D < 72) {
+        var_1 setvelocity((randomintrange(220, 250), randomintrange(220, 250), 0));
       }
     }
 
     wait(0.1);
-    var_02 moveto(var_0A, 0.1);
+    var_2 moveto(var_0A, 0.1);
     wait(0.2);
     var_0B = var_0B + 0.3;
   }
 
-  foreach(var_08 in var_02.var_127C9) {
-    var_02 thread kill_zombies(var_08, param_01, param_00);
+  foreach(var_8 in var_2.var_127C9) {
+    var_2 thread kill_zombies(var_8, var_1, var_0);
   }
 
-  var_02 thread buffer_move();
+  var_2 thread buffer_move();
   wait(16);
-  var_02 notify("stop_buffer");
-  var_02 rotateyaw(30, 1, 0, 0);
-  var_02 rotateyaw(-30, 1, 0, 1);
-  stopFXOnTag(level._effect["buffer_smoke"], var_02, "tag_origin");
-  var_02 moveto(var_02.origin + anglesToForward(var_02.last_spot.angles) * 2, 0.25, 0, 0.25);
-  var_02 playsoundonmovingent("trap_buffer_stop");
+  var_2 notify("stop_buffer");
+  var_2 rotateyaw(30, 1, 0, 0);
+  var_2 rotateyaw(-30, 1, 0, 1);
+  stopFXOnTag(level._effect["buffer_smoke"], var_2, "tag_origin");
+  var_2 moveto(var_2.origin + anglesToForward(var_2.last_spot.angles) * 2, 0.25, 0, 0.25);
+  var_2 playsoundonmovingent("trap_buffer_stop");
   wait(1);
-  var_02 stoploopsound("trap_buffer_spin_lp");
+  var_2 stoploopsound("trap_buffer_spin_lp");
   wait(1);
-  var_02 stopsounds();
-  var_02.last_spot = undefined;
-  var_02.last_yaw = undefined;
-  level notify("buffer_trap_kills", param_00.trap_kills);
-  param_00.origin = var_02.origin + anglesToForward(var_02.angles) * param_00.offset_forward + (0, 0, param_00.offset_up);
-  scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-  scripts\cp\cp_interaction::interaction_cooldown(param_00, 90);
+  var_2 stopsounds();
+  var_2.last_spot = undefined;
+  var_2.last_yaw = undefined;
+  level notify("buffer_trap_kills", var_0.trap_kills);
+  var_0.origin = var_2.origin + anglesToForward(var_2.angles) * var_0.offset_forward + (0, 0, var_0.offset_up);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
+  scripts\cp\cp_interaction::interaction_cooldown(var_0, 90);
 }
 
 buffer_move() {
   self endon("stop_buffer");
-  var_00 = 1;
-  var_01 = scripts\engine\utility::getstructarray(self.target, "targetname");
-  var_02 = squared(192);
+  var_0 = 1;
+  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_2 = squared(192);
   for(;;) {
-    var_03 = [];
-    var_04 = [];
-    foreach(var_06 in var_01) {
-      var_07 = distance2dsquared(var_06.origin, self.origin);
-      if(var_07 > var_02) {
-        if(isDefined(self.last_spot) && var_06.angles == self.last_spot.angles) {
+    var_3 = [];
+    var_4 = [];
+    foreach(var_6 in var_1) {
+      var_7 = distance2dsquared(var_6.origin, self.origin);
+      if(var_7 > var_2) {
+        if(isDefined(self.last_spot) && var_6.angles == self.last_spot.angles) {
           continue;
         }
 
-        var_04[var_03.size] = var_07;
-        var_03[var_03.size] = var_06;
+        var_4[var_3.size] = var_7;
+        var_3[var_3.size] = var_6;
       }
     }
 
-    var_09 = randomintrange(0, var_03.size - 1);
-    if(!isDefined(var_09)) {
+    var_9 = randomintrange(0, var_3.size - 1);
+    if(!isDefined(var_9)) {
       break;
     }
 
     var_0A = undefined;
     if(!isDefined(self.last_spot)) {
-      var_0B = var_03[var_09];
-      var_0A = sqrt(var_04[var_09]) / 180;
+      var_0B = var_3[var_9];
+      var_0A = sqrt(var_4[var_9]) / 180;
       self moveto(var_0B.origin, var_0A, 1, 0);
     } else {
-      var_0B = var_03[var_09];
-      var_0A = sqrt(var_04[var_09]) / 180;
+      var_0B = var_3[var_9];
+      var_0A = sqrt(var_4[var_9]) / 180;
       self playsoundonmovingent("trap_buffer_bump_edge");
       self moveto(var_0B.origin, var_0A, 0, 0);
-      self rotateyaw(randomintrange(500, 1080) * var_00, var_0A, randomfloatrange(0, var_0A * 0.5), 0);
-      var_00 = var_00 * -1;
+      self rotateyaw(randomintrange(500, 1080) * var_0, var_0A, randomfloatrange(0, var_0A * 0.5), 0);
+      var_0 = var_0 * -1;
     }
 
     wait(var_0A);
@@ -146,31 +146,31 @@ buffer_trap_sfx() {
   self playLoopSound("trap_buffer_spin_lp");
 }
 
-kill_zombies(param_00, param_01, param_02) {
+kill_zombies(var_0, var_1, var_2) {
   self endon("stop_buffer");
   for(;;) {
-    param_00 waittill("trigger", var_03);
-    if(isplayer(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03)) {
-      if(scripts\engine\utility::istrue(var_03.flung)) {
+    var_0 waittill("trigger", var_3);
+    if(isplayer(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
+      if(scripts\engine\utility::istrue(var_3.flung)) {
         continue;
       }
 
-      var_03.flung = 1;
-      var_03 thread throwandkillplayer();
+      var_3.flung = 1;
+      var_3 thread throwandkillplayer();
       continue;
     }
 
-    if(isDefined(var_03.flung)) {
+    if(isDefined(var_3.flung)) {
       continue;
     }
 
-    if(isDefined(var_03.agent_type) && var_03.agent_type == "slasher") {
+    if(isDefined(var_3.agent_type) && var_3.agent_type == "slasher") {
       continue;
     }
 
-    var_03.flung = 1;
-    param_02.trap_kills++;
-    level thread fling_zombie(var_03, self, param_01);
+    var_3.flung = 1;
+    var_2.trap_kills++;
+    level thread fling_zombie(var_3, self, var_1);
   }
 }
 
@@ -183,22 +183,22 @@ throwandkillplayer() {
   self.flung = undefined;
 }
 
-fling_zombie(param_00, param_01, param_02) {
-  param_00 endon("death");
-  param_00.do_immediate_ragdoll = 1;
-  param_00.customdeath = 1;
-  param_00.disable_armor = 1;
-  param_00.nocorpse = 1;
-  param_00.full_gib = 1;
-  var_03 = ["kill_trap_generic", "trap_kill_buffer"];
-  if(param_02 scripts\cp\utility::is_valid_player()) {
-    var_04 = param_02;
-    var_04 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_03), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);
+fling_zombie(var_0, var_1, var_2) {
+  var_0 endon("death");
+  var_0.do_immediate_ragdoll = 1;
+  var_0.customdeath = 1;
+  var_0.disable_armor = 1;
+  var_0.nocorpse = 1;
+  var_0.full_gib = 1;
+  var_3 = ["kill_trap_generic", "trap_kill_buffer"];
+  if(var_2 scripts\cp\utility::is_valid_player()) {
+    var_4 = var_2;
+    var_4 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_3), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);
   } else {
-    var_04 = undefined;
+    var_4 = undefined;
   }
 
-  param_00 dodamage(param_00.health + 1000, param_00.origin, var_04, var_04, "MOD_UNKNOWN", "iw7_buffertrap_zm");
+  var_0 dodamage(var_0.health + 1000, var_0.origin, var_4, var_4, "MOD_UNKNOWN", "iw7_buffertrap_zm");
 }
 
 init_hydrant_trap() {
@@ -207,46 +207,46 @@ init_hydrant_trap() {
   level._effect["trap_hydrant_pool"] = loadfx("vfx\iw7\levels\cp_disco\vfx_trap_hydrant_pool.vfx");
 }
 
-use_hydrant_trap(param_00, param_01) {
-  var_02 = getent(param_00.target, "targetname");
-  var_03 = [];
-  foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target, "targetname")) {
-    var_05.pool_spot = scripts\engine\utility::getstruct(var_05.target, "targetname");
-    foreach(var_07 in getEntArray(var_05.target, "targetname")) {
-      if(issubstr(var_07.classname, "phys")) {
-        var_05.physvolume = var_07;
+use_hydrant_trap(var_0, var_1) {
+  var_2 = getent(var_0.target, "targetname");
+  var_3 = [];
+  foreach(var_5 in scripts\engine\utility::getstructarray(var_0.target, "targetname")) {
+    var_5.pool_spot = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    foreach(var_7 in getEntArray(var_5.target, "targetname")) {
+      if(issubstr(var_7.classname, "phys")) {
+        var_5.physvolume = var_7;
         continue;
       }
 
-      if(issubstr(var_07.classname, "trigger")) {
-        var_05.trigger = var_07;
+      if(issubstr(var_7.classname, "trigger")) {
+        var_5.trigger = var_7;
       }
     }
 
-    var_05.player = param_01;
-    var_05.interaction = param_00;
-    var_05.valve = var_02;
-    var_03[var_03.size] = var_05;
+    var_5.player = var_1;
+    var_5.interaction = var_0;
+    var_5.valve = var_2;
+    var_3[var_3.size] = var_5;
   }
 
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
-  param_00.trap_kills = 0;
-  param_01 playlocalsound("purchase_generic");
-  scripts\cp\cp_interaction::disable_linked_interactions(param_00);
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_0.trap_kills = 0;
+  var_1 playlocalsound("purchase_generic");
+  scripts\cp\cp_interaction::disable_linked_interactions(var_0);
   wait(0.5);
-  var_02 rotateyaw(360, 1);
-  playsoundatpos(var_02.origin, "trap_hydrant_valve");
+  var_2 rotateyaw(360, 1);
+  playsoundatpos(var_2.origin, "trap_hydrant_valve");
   wait(0.5);
-  playrumbleonposition("light_3s", var_02.origin);
-  earthquake(0.2, 2, var_02.origin, 500);
+  playrumbleonposition("light_3s", var_2.origin);
+  earthquake(0.2, 2, var_2.origin, 500);
   wait(0.5);
-  scripts\engine\utility::array_thread(var_03, ::shoot_water);
+  scripts\engine\utility::array_thread(var_3, ::shoot_water);
   wait(15);
-  level notify("hydrant_trap_kills", param_00.trap_kills);
-  var_02 notify("stop_hydrant_trap");
-  playsoundatpos(var_02.origin, "trap_hydrant_valve");
-  scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-  scripts\cp\cp_interaction::interaction_cooldown(param_00, 90);
+  level notify("hydrant_trap_kills", var_0.trap_kills);
+  var_2 notify("stop_hydrant_trap");
+  playsoundatpos(var_2.origin, "trap_hydrant_valve");
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
+  scripts\cp\cp_interaction::interaction_cooldown(var_0, 90);
 }
 
 shoot_water() {
@@ -257,36 +257,36 @@ shoot_water() {
   }
 
   playsoundatpos(self.origin, "trap_hydrant_spray");
-  var_00 = anglesToForward(self.angles);
-  self.physvolume physics_volumesetasdirectionalforce(1, var_00, 5000);
+  var_0 = anglesToForward(self.angles);
+  self.physvolume physics_volumesetasdirectionalforce(1, var_0, 5000);
   self.physvolume physics_volumesetactivator(1);
   self.physvolume physics_volumeenable(1);
-  thread kill_zombies_hydrant(var_00);
+  thread kill_zombies_hydrant(var_0);
   self.valve waittill("stop_hydrant_trap");
   self.physvolume physics_volumeenable(0);
   self.physvolume physics_volumesetactivator(0);
 }
 
-kill_zombies_hydrant(param_00) {
+kill_zombies_hydrant(var_0) {
   self.valve endon("stop_hydrant_trap");
   for(;;) {
-    self.trigger waittill("trigger", var_01);
-    if(isplayer(var_01)) {
-      var_02 = var_01 getvelocity();
-      var_01 setvelocity(var_02 + param_00 * 35);
+    self.trigger waittill("trigger", var_1);
+    if(isplayer(var_1)) {
+      var_2 = var_1 getvelocity();
+      var_1 setvelocity(var_2 + var_0 * 35);
       continue;
     }
 
-    if(!scripts\cp\utility::should_be_affected_by_trap(var_01, undefined, 1)) {
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_1, undefined, 1)) {
       continue;
     }
 
     self.interaction.trap_kills++;
-    var_01 thread fling_zombie_hydrant(self.interaction, self.player);
+    var_1 thread fling_zombie_hydrant(self.interaction, self.player);
   }
 }
 
-fling_zombie_hydrant(param_00, param_01) {
+fling_zombie_hydrant(var_0, var_1) {
   self endon("death");
   self.flung = 1;
   self.marked_for_death = 1;
@@ -294,15 +294,15 @@ fling_zombie_hydrant(param_00, param_01) {
   self.customdeath = 1;
   self.disable_armor = 1;
   wait(randomfloatrange(0.5, 1.5));
-  if(param_01 scripts\cp\utility::is_valid_player()) {
-    var_02 = param_01;
-    var_03 = ["kill_trap_generic", "trap_kill_firehydrant"];
-    var_02 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_03), "zmb_comment_vo", "high", 10, 0, 0, 1, 25);
+  if(var_1 scripts\cp\utility::is_valid_player()) {
+    var_2 = var_1;
+    var_3 = ["kill_trap_generic", "trap_kill_firehydrant"];
+    var_2 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_3), "zmb_comment_vo", "high", 10, 0, 0, 1, 25);
   } else {
-    var_02 = undefined;
+    var_2 = undefined;
   }
 
-  self dodamage(self.health + 100, self.origin, var_02, var_02, "MOD_UNKNOWN", "iw7_hydranttrap_zm");
+  self dodamage(self.health + 100, self.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_hydranttrap_zm");
 }
 
 init_mosh_trap() {
@@ -314,19 +314,19 @@ power_on_mosh() {
   level.punk_rockspots = [];
   level.punk_speakers = [];
   self.aoe = undefined;
-  foreach(var_01 in scripts\engine\utility::getstructarray(self.target, "targetname")) {
-    if(var_01.script_area == "rockout") {
-      level.punk_rockspots[level.punk_rockspots.size] = var_01;
+  foreach(var_1 in scripts\engine\utility::getstructarray(self.target, "targetname")) {
+    if(var_1.script_area == "rockout") {
+      level.punk_rockspots[level.punk_rockspots.size] = var_1;
       continue;
     }
 
-    if(var_01.script_area == "radius") {
-      self.aoe = var_01;
+    if(var_1.script_area == "radius") {
+      self.aoe = var_1;
       continue;
     }
 
-    if(var_01.script_area == "speaker") {
-      level.punk_speakers[level.punk_speakers.size] = var_01;
+    if(var_1.script_area == "speaker") {
+      level.punk_speakers[level.punk_speakers.size] = var_1;
     }
   }
 
@@ -334,68 +334,68 @@ power_on_mosh() {
   self.powered_on = 1;
 }
 
-use_mosh_trap(param_00, param_01) {
+use_mosh_trap(var_0, var_1) {
   scripts\engine\utility::flag_clear("flag_moshing_allowed");
-  param_00.trap_kills = 0;
-  param_01 playlocalsound("purchase_generic");
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_0.trap_kills = 0;
+  var_1 playlocalsound("purchase_generic");
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   level.punk_rockers = [];
   level.punk_moshers = [];
   wait(0.5);
   level thread scripts\cp\maps\cp_disco\cp_disco::start_mosh_trap_music();
-  level thread mosh_trap_trigger(param_00, param_01);
+  level thread mosh_trap_trigger(var_0, var_1);
   wait(1.1);
   scripts\engine\utility::exploder(50);
   wait(28);
   level notify("stop_mosh_trap");
-  level notify("mosh_trap_kills", param_00.trap_kills);
-  kill_mosh_stragglers(param_01);
-  scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-  scripts\cp\cp_interaction::interaction_cooldown(param_00, 90);
+  level notify("mosh_trap_kills", var_0.trap_kills);
+  kill_mosh_stragglers(var_1);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
+  scripts\cp\cp_interaction::interaction_cooldown(var_0, 90);
 }
 
-mosh_trap_trigger(param_00, param_01) {
+mosh_trap_trigger(var_0, var_1) {
   level endon("stop_mosh_trap");
   for(;;) {
-    param_00.aoe_trigger waittill("trigger", var_02);
-    if(var_02 scripts\cp\utility::is_valid_player()) {
+    var_0.aoe_trigger waittill("trigger", var_2);
+    if(var_2 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_02.is_turned) || scripts\engine\utility::istrue(var_02.mosh_trap) || scripts\engine\utility::istrue(var_02.is_traversing)) {
+    if(scripts\engine\utility::istrue(var_2.is_turned) || scripts\engine\utility::istrue(var_2.mosh_trap) || scripts\engine\utility::istrue(var_2.is_traversing)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_02.is_skeleton)) {
+    if(scripts\engine\utility::istrue(var_2.is_skeleton)) {
       continue;
     }
 
-    if(!scripts\cp\utility::should_be_affected_by_trap(var_02) || var_02.about_to_dance || var_02.scripted_mode) {
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_2) || var_2.about_to_dance || var_2.scripted_mode) {
       continue;
     }
 
-    if(var_02.agent_type == "ratking" || var_02.agent_type == "karatemaster" || var_02.agent_type == "cop_dlc2" || var_02.agent_type == "skater") {
+    if(var_2.agent_type == "ratking" || var_2.agent_type == "karatemaster" || var_2.agent_type == "cop_dlc2" || var_2.agent_type == "skater") {
       continue;
     }
 
-    var_02 thread release_zombie_on_trap_done(param_01);
-    var_02 thread rockmode(param_00, param_01);
+    var_2 thread release_zombie_on_trap_done(var_1);
+    var_2 thread rockmode(var_0, var_1);
   }
 }
 
-clean_array(param_00) {
-  var_01 = [];
-  foreach(var_03 in param_00) {
-    if(isDefined(var_03) && isalive(var_03)) {
-      var_01[var_01.size] = var_03;
+clean_array(var_0) {
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-rockmode(param_00, param_01) {
+rockmode(var_0, var_1) {
   level endon("stop_mosh_trap");
   self endon("death");
   self.mosh_trap = 1;
@@ -406,11 +406,11 @@ rockmode(param_00, param_01) {
   self.about_to_dance = 1;
   self.scripted_mode = 1;
   self ghostskulls_total_waves(32);
-  var_02 = get_rock_spot(param_00);
+  var_2 = get_rock_spot(var_0);
   thread release_rockspot_on_death();
-  self.desired_dance_angles = (0, var_02.angles[1], 0);
+  self.desired_dance_angles = (0, var_2.angles[1], 0);
   self.precacheleaderboards = 1;
-  self ghostskulls_complete_status(var_02.origin);
+  self ghostskulls_complete_status(var_2.origin);
   scripts\engine\utility::waittill_any_3("goal", "goal_reached");
   self notify("rockmode");
   self.do_immediate_ragdoll = 1;
@@ -418,19 +418,19 @@ rockmode(param_00, param_01) {
   level.punk_rockers[level.punk_rockers.size] = self;
 }
 
-moshdeath(param_00, param_01) {
-  if(scripts\engine\utility::istrue(param_01)) {
+moshdeath(var_0, var_1) {
+  if(scripts\engine\utility::istrue(var_1)) {
     self.electrocuted = 1;
     self.dontmutilate = 1;
     self playSound("trap_electric_shock");
   }
 
-  var_02 = ["kill_trap_generic", "trap_kill_moshpit"];
-  if(param_00 scripts\cp\utility::is_valid_player()) {
-    var_03 = param_00;
-    var_03 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_02), "zmb_comment_vo", "high", 10, 0, 0, 1, 25);
+  var_2 = ["kill_trap_generic", "trap_kill_moshpit"];
+  if(var_0 scripts\cp\utility::is_valid_player()) {
+    var_3 = var_0;
+    var_3 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_2), "zmb_comment_vo", "high", 10, 0, 0, 1, 25);
   } else {
-    var_03 = undefined;
+    var_3 = undefined;
   }
 
   if(scripts\engine\utility::istrue(self.is_moshing)) {
@@ -438,47 +438,47 @@ moshdeath(param_00, param_01) {
   }
 
   self setscriptablepartstate("eyes", "yellow_eyes");
-  self dodamage(self.health + 1000, self.origin, var_03, var_03, "MOD_UNKNOWN", "iw7_moshtrap_zm");
+  self dodamage(self.health + 1000, self.origin, var_3, var_3, "MOD_UNKNOWN", "iw7_moshtrap_zm");
 }
 
-get_rock_spot(param_00) {
+get_rock_spot(var_0) {
   if(isDefined(self.rockspot)) {
     self.rockspot.triggerportableradarping = undefined;
     self.rockspot = undefined;
   }
 
-  var_01 = sortbydistance(level.punk_rockspots, param_00.origin);
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_03.triggerportableradarping)) {
-      var_03.triggerportableradarping = self;
-      self.rockspot = var_03;
-      return var_03;
+  var_1 = sortbydistance(level.punk_rockspots, var_0.origin);
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.triggerportableradarping)) {
+      var_3.triggerportableradarping = self;
+      self.rockspot = var_3;
+      return var_3;
     }
   }
 
-  return scripts\engine\utility::random(var_01);
+  return scripts\engine\utility::random(var_1);
 }
 
-get_mosh_spot(param_00) {
-  var_01 = sortbydistance(level.punk_rockspots, param_00.origin);
-  return var_01[0];
+get_mosh_spot(var_0) {
+  var_1 = sortbydistance(level.punk_rockspots, var_0.origin);
+  return var_1[0];
 }
 
-kill_mosh_stragglers(param_00) {
-  foreach(var_02 in level.punk_rockers) {
-    if(!isDefined(var_02) || !isalive(var_02)) {
+kill_mosh_stragglers(var_0) {
+  foreach(var_2 in level.punk_rockers) {
+    if(!isDefined(var_2) || !isalive(var_2)) {
       continue;
     }
 
-    var_03 = scripts\engine\utility::random(level.punk_speakers);
-    var_04 = var_02 gettagorigin("J_HEAD");
-    playfxbetweenpoints(level._effect["blue_ark_beam"], var_03.origin, vectortoangles(var_03.origin - var_04), var_04);
-    var_02 moshdeath(param_00, 1);
+    var_3 = scripts\engine\utility::random(level.punk_speakers);
+    var_4 = var_2 gettagorigin("J_HEAD");
+    playfxbetweenpoints(level._effect["blue_ark_beam"], var_3.origin, vectortoangles(var_3.origin - var_4), var_4);
+    var_2 moshdeath(var_0, 1);
     wait(randomfloatrange(0.1, 0.2));
   }
 }
 
-release_zombie_on_trap_done(param_00) {
+release_zombie_on_trap_done(var_0) {
   self endon("death");
   self endon("moshmode");
   self endon("rockmode");

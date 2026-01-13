@@ -4,268 +4,268 @@
  * Script: scripts\mp\door.gsc
 *******************************/
 
-door_system_init(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  foreach(var_03 in var_01) {
-    if(isDefined(var_03.script_parameters)) {
-      var_03 button_parse_parameters(var_03.script_parameters);
+door_system_init(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.script_parameters)) {
+      var_3 button_parse_parameters(var_3.script_parameters);
     }
 
-    var_03 door_setup();
+    var_3 door_setup();
   }
 
-  foreach(var_03 in var_01) {
-    var_03 thread door_think();
+  foreach(var_3 in var_1) {
+    var_3 thread door_think();
   }
 }
 
 door_setup() {
-  var_00 = self;
-  var_00.doors = [];
-  if(isDefined(var_00.script_index)) {
-    var_00.var_5A17 = max(0.1, float(var_00.script_index) / 1000);
+  var_0 = self;
+  var_0.doors = [];
+  if(isDefined(var_0.script_index)) {
+    var_0.var_5A17 = max(0.1, float(var_0.script_index) / 1000);
   }
 
-  var_01 = getEntArray(var_00.target, "targetname");
-  foreach(var_03 in var_01) {
-    if(issubstr(var_03.classname, "trigger")) {
-      if(!isDefined(var_00.var_12720)) {
-        var_00.var_12720 = [];
+  var_1 = getEntArray(var_0.target, "targetname");
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3.classname, "trigger")) {
+      if(!isDefined(var_0.var_12720)) {
+        var_0.var_12720 = [];
       }
 
-      if(isDefined(var_03.script_parameters)) {
-        var_03 trigger_parse_parameters(var_03.script_parameters);
+      if(isDefined(var_3.script_parameters)) {
+        var_3 trigger_parse_parameters(var_3.script_parameters);
       }
 
-      if(isDefined(var_03.script_linkto)) {
-        var_04 = getent(var_03.script_linkto, "script_linkname");
-        var_03 enablelinkto();
-        var_03 linkto(var_04);
+      if(isDefined(var_3.script_linkto)) {
+        var_4 = getent(var_3.script_linkto, "script_linkname");
+        var_3 enablelinkto();
+        var_3 linkto(var_4);
       }
 
-      var_00.var_12720[var_00.var_12720.size] = var_03;
+      var_0.var_12720[var_0.var_12720.size] = var_3;
       continue;
     }
 
-    if(var_03.classname == "script_brushmodel" || var_03.classname == "script_model") {
-      if(isDefined(var_03.script_noteworthy) && issubstr(var_03.script_noteworthy, "light")) {
-        if(issubstr(var_03.script_noteworthy, "light_on")) {
-          if(!isDefined(var_00.lights_on)) {
-            var_00.lights_on = [];
+    if(var_3.classname == "script_brushmodel" || var_3.classname == "script_model") {
+      if(isDefined(var_3.script_noteworthy) && issubstr(var_3.script_noteworthy, "light")) {
+        if(issubstr(var_3.script_noteworthy, "light_on")) {
+          if(!isDefined(var_0.lights_on)) {
+            var_0.lights_on = [];
           }
 
-          var_03 hide();
-          var_00.lights_on[var_00.lights_on.size] = var_03;
-        } else if(issubstr(var_03.script_noteworthy, "light_off")) {
-          if(!isDefined(var_00.lights_off)) {
-            var_00.lights_off = [];
+          var_3 hide();
+          var_0.lights_on[var_0.lights_on.size] = var_3;
+        } else if(issubstr(var_3.script_noteworthy, "light_off")) {
+          if(!isDefined(var_0.lights_off)) {
+            var_0.lights_off = [];
           }
 
-          var_03 hide();
-          var_00.lights_off[var_00.lights_off.size] = var_03;
-        } else {}
-      } else if(var_03.spawnimpulsefield & 2) {
-        if(!isDefined(var_00.var_19E5)) {
-          var_00.var_19E5 = [];
+          var_3 hide();
+          var_0.lights_off[var_0.lights_off.size] = var_3;
+        }
+      } else if(var_3.spawnimpulsefield & 2) {
+        if(!isDefined(var_0.var_19E5)) {
+          var_0.var_19E5 = [];
         }
 
-        var_03 notsolid();
-        var_03 hide();
-        var_03 _meth_829D(0);
-        var_00.var_19E5[var_00.var_19E5.size] = var_03;
+        var_3 notsolid();
+        var_3 hide();
+        var_3 _meth_829D(0);
+        var_0.var_19E5[var_0.var_19E5.size] = var_3;
       } else {
-        var_00.doors[var_00.doors.size] = var_03;
+        var_0.doors[var_0.doors.size] = var_3;
       }
 
       continue;
     }
 
-    if(var_03.classname == "script_origin") {
-      var_00.entsound = var_03;
+    if(var_3.classname == "script_origin") {
+      var_0.entsound = var_3;
     }
   }
 
-  if(!isDefined(var_00.entsound) && var_00.doors.size) {
-    var_00.entsound = sortbydistance(var_00.doors, var_00.origin)[0];
+  if(!isDefined(var_0.entsound) && var_0.doors.size) {
+    var_0.entsound = sortbydistance(var_0.doors, var_0.origin)[0];
   }
 
-  foreach(var_07 in var_00.doors) {
-    var_07.var_D6A4 = var_07.origin;
-    var_07.var_D6AE = scripts\engine\utility::getstruct(var_07.target, "targetname").origin;
-    var_07.var_5717 = distance(var_07.var_D6AE, var_07.var_D6A4);
-    var_07.origin = var_07.var_D6AE;
-    var_07.var_C001 = 0;
-    if(isDefined(var_07.script_parameters)) {
-      var_07 func_59BD(var_07.script_parameters);
+  foreach(var_7 in var_0.doors) {
+    var_7.var_D6A4 = var_7.origin;
+    var_7.var_D6AE = scripts\engine\utility::getstruct(var_7.target, "targetname").origin;
+    var_7.var_5717 = distance(var_7.var_D6AE, var_7.var_D6A4);
+    var_7.origin = var_7.var_D6AE;
+    var_7.var_C001 = 0;
+    if(isDefined(var_7.script_parameters)) {
+      var_7 func_59BD(var_7.script_parameters);
     }
   }
 }
 
 door_think() {
-  var_00 = self;
-  var_00 door_state_change(2, 1);
+  var_0 = self;
+  var_0 door_state_change(2, 1);
   for(;;) {
-    var_00.var_10E27 = undefined;
-    var_00.var_10E29 = undefined;
-    var_00 scripts\engine\utility::waittill_any_3("door_state_done", "door_state_interrupted");
-    if(isDefined(var_00.var_10E27) && var_00.var_10E27) {
-      var_01 = var_00 door_state_next(var_00.statecurr);
-      var_00 door_state_change(var_01, 0);
+    var_0.var_10E27 = undefined;
+    var_0.var_10E29 = undefined;
+    var_0 scripts\engine\utility::waittill_any_3("door_state_done", "door_state_interrupted");
+    if(isDefined(var_0.var_10E27) && var_0.var_10E27) {
+      var_1 = var_0 door_state_next(var_0.statecurr);
+      var_0 door_state_change(var_1, 0);
       continue;
     }
 
-    if(isDefined(var_00.var_10E29) && var_00.var_10E29) {
-      var_00 door_state_change(4, 0);
+    if(isDefined(var_0.var_10E29) && var_0.var_10E29) {
+      var_0 door_state_change(4, 0);
       continue;
     }
   }
 }
 
-door_state_next(param_00) {
-  var_01 = self;
-  var_02 = undefined;
-  if(param_00 == 0) {
-    var_02 = 3;
-  } else if(param_00 == 2) {
-    var_02 = 1;
-  } else if(param_00 == 1) {
-    var_02 = 0;
-  } else if(param_00 == 3) {
-    var_02 = 2;
-  } else if(param_00 == 4) {
-    var_02 = var_01.stateprev;
-  } else {}
+door_state_next(var_0) {
+  var_1 = self;
+  var_2 = undefined;
+  if(var_0 == 0) {
+    var_2 = 3;
+  } else if(var_0 == 2) {
+    var_2 = 1;
+  } else if(var_0 == 1) {
+    var_2 = 0;
+  } else if(var_0 == 3) {
+    var_2 = 2;
+  } else if(var_0 == 4) {
+    var_2 = var_1.stateprev;
+  }
 
-  return var_02;
+  return var_2;
 }
 
-door_state_update(param_00) {
-  var_01 = self;
-  var_01 endon("door_state_interrupted");
-  var_01.var_10E27 = undefined;
-  if(var_01.statecurr == 0 || var_01.statecurr == 2) {
-    if(!param_00) {
-      foreach(var_03 in var_01.doors) {
-        if(isDefined(var_03.var_11041)) {
-          var_03 stoploopsound();
-          var_03 playsoundonmovingent(var_03.var_11041);
+door_state_update(var_0) {
+  var_1 = self;
+  var_1 endon("door_state_interrupted");
+  var_1.var_10E27 = undefined;
+  if(var_1.statecurr == 0 || var_1.statecurr == 2) {
+    if(!var_0) {
+      foreach(var_3 in var_1.doors) {
+        if(isDefined(var_3.var_11041)) {
+          var_3 stoploopsound();
+          var_3 playsoundonmovingent(var_3.var_11041);
         }
       }
     }
 
-    if(isDefined(var_01.lights_on)) {
-      foreach(var_06 in var_01.lights_on) {
-        var_06 show();
+    if(isDefined(var_1.lights_on)) {
+      foreach(var_6 in var_1.lights_on) {
+        var_6 show();
       }
     }
 
-    foreach(var_03 in var_01.doors) {
-      if(var_01.statecurr == 0) {
-        if(isDefined(var_01.var_19E5)) {
-          foreach(var_0A in var_01.var_19E5) {
+    foreach(var_3 in var_1.doors) {
+      if(var_1.statecurr == 0) {
+        if(isDefined(var_1.var_19E5)) {
+          foreach(var_0A in var_1.var_19E5) {
             var_0A show();
             var_0A _meth_829D(1);
           }
         }
 
-        if(var_03.spawnimpulsefield & 1) {
-          var_03 disconnectpaths();
+        if(var_3.spawnimpulsefield & 1) {
+          var_3 disconnectpaths();
         }
       } else {
-        if(isDefined(var_01.var_19E5)) {
-          foreach(var_0A in var_01.var_19E5) {
+        if(isDefined(var_1.var_19E5)) {
+          foreach(var_0A in var_1.var_19E5) {
             var_0A hide();
             var_0A _meth_829D(0);
           }
         }
 
-        if(var_03.spawnimpulsefield & 1) {
-          if(isDefined(var_03.script_noteworthy) && var_03.script_noteworthy == "always_disconnect") {
-            var_03 disconnectpaths();
+        if(var_3.spawnimpulsefield & 1) {
+          if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "always_disconnect") {
+            var_3 disconnectpaths();
           } else {
-            var_03 connectpaths();
+            var_3 connectpaths();
           }
         }
       }
 
-      if(isDefined(var_03.script_noteworthy)) {
-        if(var_03.script_noteworthy == "clockwise_wheel" || var_03.script_noteworthy == "counterclockwise_wheel") {
-          var_03 rotatevelocity((0, 0, 0), 0.1);
+      if(isDefined(var_3.script_noteworthy)) {
+        if(var_3.script_noteworthy == "clockwise_wheel" || var_3.script_noteworthy == "counterclockwise_wheel") {
+          var_3 rotatevelocity((0, 0, 0), 0.1);
         }
       }
 
-      if(var_03.var_C001) {
-        var_03.unresolved_collision_func = undefined;
+      if(var_3.var_C001) {
+        var_3.unresolved_collision_func = undefined;
       }
     }
 
-    var_0F = scripts\engine\utility::ter_op(var_01.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
-    var_01 sethintstring(var_0F);
-    var_01 makeusable();
-    var_01 waittill("trigger");
-    if(isDefined(var_01.button_smash_count)) {
-      var_01 playSound(var_01.button_smash_count);
+    var_0F = scripts\engine\utility::ter_op(var_1.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
+    var_1 sethintstring(var_0F);
+    var_1 makeusable();
+    var_1 waittill("trigger");
+    if(isDefined(var_1.button_smash_count)) {
+      var_1 playSound(var_1.button_smash_count);
     }
-  } else if(var_01.statecurr == 1 || var_01.statecurr == 3) {
-    if(isDefined(var_01.lights_off)) {
-      foreach(var_06 in var_01.lights_off) {
-        var_06 show();
+  } else if(var_1.statecurr == 1 || var_1.statecurr == 3) {
+    if(isDefined(var_1.lights_off)) {
+      foreach(var_6 in var_1.lights_off) {
+        var_6 show();
       }
     }
 
-    var_01 makeunusable();
-    if(var_01.statecurr == 1) {
-      var_01 thread door_state_on_interrupt();
-      foreach(var_03 in var_01.doors) {
-        if(isDefined(var_03.script_noteworthy)) {
-          var_13 = scripts\engine\utility::ter_op(isDefined(var_01.var_5A17), var_01.var_5A17, 3);
-          var_14 = scripts\engine\utility::ter_op(var_01.statecurr == 1, var_03.var_D6A4, var_03.var_D6AE);
-          var_15 = distance(var_03.origin, var_14);
-          var_16 = max(0.1, var_15 / var_03.var_5717 * var_13);
+    var_1 makeunusable();
+    if(var_1.statecurr == 1) {
+      var_1 thread door_state_on_interrupt();
+      foreach(var_3 in var_1.doors) {
+        if(isDefined(var_3.script_noteworthy)) {
+          var_13 = scripts\engine\utility::ter_op(isDefined(var_1.var_5A17), var_1.var_5A17, 3);
+          var_14 = scripts\engine\utility::ter_op(var_1.statecurr == 1, var_3.var_D6A4, var_3.var_D6AE);
+          var_15 = distance(var_3.origin, var_14);
+          var_16 = max(0.1, var_15 / var_3.var_5717 * var_13);
           var_17 = max(var_16 * 0.25, 0.05);
           var_18 = 360 * var_15 / 94.2;
-          if(var_03.script_noteworthy == "clockwise_wheel") {
-            var_03 rotatevelocity((0, 0, -1 * var_18 / var_16), var_16, var_17, var_17);
-          } else if(var_03.script_noteworthy == "counterclockwise_wheel") {
-            var_03 rotatevelocity((0, 0, var_18 / var_16), var_16, var_17, var_17);
+          if(var_3.script_noteworthy == "clockwise_wheel") {
+            var_3 rotatevelocity((0, 0, -1 * var_18 / var_16), var_16, var_17, var_17);
+          } else if(var_3.script_noteworthy == "counterclockwise_wheel") {
+            var_3 rotatevelocity((0, 0, var_18 / var_16), var_16, var_17, var_17);
           }
         }
       }
-    } else if(var_01.statecurr == 3) {
-      if(isDefined(var_01.var_C607) && var_01.var_C607) {
-        var_01 thread door_state_on_interrupt();
+    } else if(var_1.statecurr == 3) {
+      if(isDefined(var_1.var_C607) && var_1.var_C607) {
+        var_1 thread door_state_on_interrupt();
       }
 
-      foreach(var_03 in var_01.doors) {
-        if(isDefined(var_03.script_noteworthy)) {
-          var_13 = scripts\engine\utility::ter_op(isDefined(var_01.var_5A17), var_01.var_5A17, 3);
-          var_14 = scripts\engine\utility::ter_op(var_01.statecurr == 1, var_03.var_D6A4, var_03.var_D6AE);
-          var_15 = distance(var_03.origin, var_14);
-          var_16 = max(0.1, var_15 / var_03.var_5717 * var_13);
+      foreach(var_3 in var_1.doors) {
+        if(isDefined(var_3.script_noteworthy)) {
+          var_13 = scripts\engine\utility::ter_op(isDefined(var_1.var_5A17), var_1.var_5A17, 3);
+          var_14 = scripts\engine\utility::ter_op(var_1.statecurr == 1, var_3.var_D6A4, var_3.var_D6AE);
+          var_15 = distance(var_3.origin, var_14);
+          var_16 = max(0.1, var_15 / var_3.var_5717 * var_13);
           var_17 = max(var_16 * 0.25, 0.05);
           var_18 = 360 * var_15 / 94.2;
-          if(var_03.script_noteworthy == "clockwise_wheel") {
-            var_03 rotatevelocity((0, 0, var_18 / var_16), var_16, var_17, var_17);
-          } else if(var_03.script_noteworthy == "counterclockwise_wheel") {
-            var_03 rotatevelocity((0, 0, -1 * var_18 / var_16), var_16, var_17, var_17);
+          if(var_3.script_noteworthy == "clockwise_wheel") {
+            var_3 rotatevelocity((0, 0, var_18 / var_16), var_16, var_17, var_17);
+          } else if(var_3.script_noteworthy == "counterclockwise_wheel") {
+            var_3 rotatevelocity((0, 0, -1 * var_18 / var_16), var_16, var_17, var_17);
           }
         }
       }
     }
 
     wait(0.1);
-    var_01 childthread func_59F1("garage_door_start", "garage_door_loop");
-    var_13 = scripts\engine\utility::ter_op(isDefined(var_01.var_5A17), var_01.var_5A17, 3);
+    var_1 childthread func_59F1("garage_door_start", "garage_door_loop");
+    var_13 = scripts\engine\utility::ter_op(isDefined(var_1.var_5A17), var_1.var_5A17, 3);
     var_1C = undefined;
-    foreach(var_03 in var_01.doors) {
-      var_14 = scripts\engine\utility::ter_op(var_01.statecurr == 1, var_03.var_D6A4, var_03.var_D6AE);
-      if(var_03.origin != var_14) {
-        var_16 = max(0.1, distance(var_03.origin, var_14) / var_03.var_5717 * var_13);
+    foreach(var_3 in var_1.doors) {
+      var_14 = scripts\engine\utility::ter_op(var_1.statecurr == 1, var_3.var_D6A4, var_3.var_D6AE);
+      if(var_3.origin != var_14) {
+        var_16 = max(0.1, distance(var_3.origin, var_14) / var_3.var_5717 * var_13);
         var_17 = max(var_16 * 0.25, 0.05);
-        var_03 moveto(var_14, var_16, var_17, var_17);
-        var_03 scripts\mp\movers::notify_moving_platform_invalid();
-        if(var_03.var_C001) {
-          var_03.unresolved_collision_func = ::scripts\mp\movers::func_12BEE;
+        var_3 moveto(var_14, var_16, var_17, var_17);
+        var_3 scripts\mp\movers::notify_moving_platform_invalid();
+        if(var_3.var_C001) {
+          var_3.unresolved_collision_func = ::scripts\mp\movers::func_12BEE;
         }
 
         if(!isDefined(var_1C) || var_16 > var_1C) {
@@ -277,100 +277,100 @@ door_state_update(param_00) {
     if(isDefined(var_1C)) {
       wait(var_1C);
     }
-  } else if(var_01.statecurr == 4) {
-    foreach(var_03 in var_01.doors) {
-      var_03 moveto(var_03.origin, 0.05, 0, 0);
-      var_03 scripts\mp\movers::notify_moving_platform_invalid();
-      if(var_03.var_C001) {
-        var_03.unresolved_collision_func = undefined;
+  } else if(var_1.statecurr == 4) {
+    foreach(var_3 in var_1.doors) {
+      var_3 moveto(var_3.origin, 0.05, 0, 0);
+      var_3 scripts\mp\movers::notify_moving_platform_invalid();
+      if(var_3.var_C001) {
+        var_3.unresolved_collision_func = undefined;
       }
 
-      if(isDefined(var_03.script_noteworthy)) {
-        if(var_03.script_noteworthy == "clockwise_wheel" || var_03.script_noteworthy == "counterclockwise_wheel") {
-          var_03 rotatevelocity((0, 0, 0), 0.05);
+      if(isDefined(var_3.script_noteworthy)) {
+        if(var_3.script_noteworthy == "clockwise_wheel" || var_3.script_noteworthy == "counterclockwise_wheel") {
+          var_3 rotatevelocity((0, 0, 0), 0.05);
         }
       }
     }
 
-    if(isDefined(var_01.lights_off)) {
-      foreach(var_06 in var_01.lights_off) {
-        var_06 show();
+    if(isDefined(var_1.lights_off)) {
+      foreach(var_6 in var_1.lights_off) {
+        var_6 show();
       }
     }
 
-    var_01.entsound stoploopsound();
-    foreach(var_03 in var_01.doors) {
-      if(isDefined(var_03.var_9A88)) {
-        var_03 playSound(var_03.var_9A88);
+    var_1.entsound stoploopsound();
+    foreach(var_3 in var_1.doors) {
+      if(isDefined(var_3.var_9A88)) {
+        var_3 playSound(var_3.var_9A88);
       }
     }
 
     wait(1);
-  } else {}
-
-  var_01.var_10E27 = 1;
-  foreach(var_03 in var_01.doors) {
-    var_03.var_10E27 = 1;
   }
 
-  var_01 notify("door_state_done");
+  var_1.var_10E27 = 1;
+  foreach(var_3 in var_1.doors) {
+    var_3.var_10E27 = 1;
+  }
+
+  var_1 notify("door_state_done");
 }
 
-func_59F1(param_00, param_01) {
-  var_02 = self;
-  var_03 = 1;
-  var_04 = 1;
-  var_05 = 0;
-  if(var_02.statecurr == 3 || var_02.statecurr == 1) {
-    foreach(var_07 in var_02.doors) {
-      if(isDefined(var_07.var_10D2A)) {
-        var_07 playsoundonmovingent(var_07.var_10D2A);
-        var_05 = lookupsoundlength(var_07.var_10D2A) / 1000;
-        var_03 = 0;
+func_59F1(var_0, var_1) {
+  var_2 = self;
+  var_3 = 1;
+  var_4 = 1;
+  var_5 = 0;
+  if(var_2.statecurr == 3 || var_2.statecurr == 1) {
+    foreach(var_7 in var_2.doors) {
+      if(isDefined(var_7.var_10D2A)) {
+        var_7 playsoundonmovingent(var_7.var_10D2A);
+        var_5 = lookupsoundlength(var_7.var_10D2A) / 1000;
+        var_3 = 0;
       }
     }
 
-    if(var_03) {
-      var_05 = lookupsoundlength(param_00) / 1000;
-      playsoundatpos(var_02.entsound.origin, param_00);
+    if(var_3) {
+      var_5 = lookupsoundlength(var_0) / 1000;
+      playsoundatpos(var_2.entsound.origin, var_0);
     }
   }
 
-  wait(var_05 * 0.3);
-  if(var_02.statecurr == 3 || var_02.statecurr == 1) {
-    foreach(var_07 in var_02.doors) {
-      if(isDefined(var_07.loop_sound)) {
-        if(var_07.loop_sound != "none") {
-          var_07 playLoopSound(var_07.loop_sound);
+  wait(var_5 * 0.3);
+  if(var_2.statecurr == 3 || var_2.statecurr == 1) {
+    foreach(var_7 in var_2.doors) {
+      if(isDefined(var_7.loop_sound)) {
+        if(var_7.loop_sound != "none") {
+          var_7 playLoopSound(var_7.loop_sound);
         }
 
-        var_04 = 0;
+        var_4 = 0;
       }
     }
 
-    if(var_04) {
-      var_02.entsound playLoopSound(param_01);
+    if(var_4) {
+      var_2.entsound playLoopSound(var_1);
     }
   }
 }
 
-door_state_change(param_00, param_01) {
-  var_02 = self;
-  if(isDefined(var_02.statecurr)) {
-    door_state_exit(var_02.statecurr);
-    var_02.stateprev = var_02.statecurr;
+door_state_change(var_0, var_1) {
+  var_2 = self;
+  if(isDefined(var_2.statecurr)) {
+    door_state_exit(var_2.statecurr);
+    var_2.stateprev = var_2.statecurr;
   }
 
-  var_02.statecurr = param_00;
-  var_02 thread door_state_update(param_01);
+  var_2.statecurr = var_0;
+  var_2 thread door_state_update(var_1);
 }
 
-door_state_exit(param_00) {
-  var_01 = self;
-  if(param_00 == 0 || param_00 == 2) {
-    if(isDefined(var_01.lights_on)) {
-      foreach(var_03 in var_01.lights_on) {
-        var_03 hide();
+door_state_exit(var_0) {
+  var_1 = self;
+  if(var_0 == 0 || var_0 == 2) {
+    if(isDefined(var_1.lights_on)) {
+      foreach(var_3 in var_1.lights_on) {
+        var_3 hide();
       }
 
       return;
@@ -379,81 +379,81 @@ door_state_exit(param_00) {
     return;
   }
 
-  if(var_03 == 1 || var_03 == 3) {
-    if(isDefined(var_04.lights_off)) {
-      foreach(var_05 in var_04.lights_off) {
-        var_05 hide();
+  if(var_3 == 1 || var_3 == 3) {
+    if(isDefined(var_4.lights_off)) {
+      foreach(var_5 in var_4.lights_off) {
+        var_5 hide();
       }
     }
 
-    var_03.entsound stoploopsound();
-    foreach(var_08 in var_03.doors) {
-      if(isDefined(var_08.loop_sound)) {
-        var_08 stoploopsound();
+    var_3.entsound stoploopsound();
+    foreach(var_8 in var_3.doors) {
+      if(isDefined(var_8.loop_sound)) {
+        var_8 stoploopsound();
       }
     }
 
     return;
   }
 
-  if(var_02 == 4) {
+  if(var_2 == 4) {
     return;
   }
 }
 
 door_state_on_interrupt() {
-  var_00 = self;
-  var_00 endon("door_state_done");
-  var_01 = [];
-  foreach(var_03 in var_00.var_12720) {
-    if(var_00.statecurr == 1) {
-      if(isDefined(var_03.not_closing) && var_03.not_closing == 1) {
+  var_0 = self;
+  var_0 endon("door_state_done");
+  var_1 = [];
+  foreach(var_3 in var_0.var_12720) {
+    if(var_0.statecurr == 1) {
+      if(isDefined(var_3.not_closing) && var_3.not_closing == 1) {
         continue;
       }
-    } else if(var_00.statecurr == 3) {
-      if(isDefined(var_03.not_opening) && var_03.not_opening == 1) {
+    } else if(var_0.statecurr == 3) {
+      if(isDefined(var_3.not_opening) && var_3.not_opening == 1) {
         continue;
       }
     }
 
-    var_01[var_01.size] = var_03;
+    var_1[var_1.size] = var_3;
   }
 
-  if(var_01.size > 0) {
-    var_05 = var_00 waittill_any_triggered_return_triggerer(var_01);
-    if(!isDefined(var_05.fauxdeath) || var_05.fauxdeath == 0) {
-      var_00.var_10E29 = 1;
-      var_00 notify("door_state_interrupted");
+  if(var_1.size > 0) {
+    var_5 = var_0 waittill_any_triggered_return_triggerer(var_1);
+    if(!isDefined(var_5.fauxdeath) || var_5.fauxdeath == 0) {
+      var_0.var_10E29 = 1;
+      var_0 notify("door_state_interrupted");
     }
   }
 }
 
-waittill_any_triggered_return_triggerer(param_00) {
-  var_01 = self;
-  foreach(var_03 in param_00) {
-    var_01 thread return_triggerer(var_03);
+waittill_any_triggered_return_triggerer(var_0) {
+  var_1 = self;
+  foreach(var_3 in var_0) {
+    var_1 thread return_triggerer(var_3);
   }
 
-  var_01 waittill("interrupted");
-  return var_01.interrupter;
+  var_1 waittill("interrupted");
+  return var_1.interrupter;
 }
 
-return_triggerer(param_00) {
-  var_01 = self;
-  var_01 endon("door_state_done");
-  var_01 endon("interrupted");
+return_triggerer(var_0) {
+  var_1 = self;
+  var_1 endon("door_state_done");
+  var_1 endon("interrupted");
   for(;;) {
-    param_00 waittill("trigger", var_02);
-    if(isDefined(param_00.prone_only) && param_00.prone_only == 1) {
-      if(isplayer(var_02)) {
-        var_03 = var_02 getstance();
-        if(var_03 != "prone") {
+    var_0 waittill("trigger", var_2);
+    if(isDefined(var_0.prone_only) && var_0.prone_only == 1) {
+      if(isplayer(var_2)) {
+        var_3 = var_2 getstance();
+        if(var_3 != "prone") {
           continue;
         } else {
-          var_04 = vectornormalize(anglesToForward(var_02.angles));
-          var_05 = vectornormalize(param_00.origin - var_02.origin);
-          var_06 = vectordot(var_04, var_05);
-          if(var_06 > 0) {
+          var_4 = vectornormalize(anglesToForward(var_2.angles));
+          var_5 = vectornormalize(var_0.origin - var_2.origin);
+          var_6 = vectordot(var_4, var_5);
+          if(var_6 > 0) {
             continue;
           }
         }
@@ -463,36 +463,36 @@ return_triggerer(param_00) {
     break;
   }
 
-  var_01.interrupter = var_02;
-  var_01 notify("interrupted");
+  var_1.interrupter = var_2;
+  var_1 notify("interrupted");
 }
 
-button_parse_parameters(param_00) {
-  var_01 = self;
-  var_01.button_smash_count = undefined;
-  if(!isDefined(param_00)) {
-    param_00 = "";
+button_parse_parameters(var_0) {
+  var_1 = self;
+  var_1.button_smash_count = undefined;
+  if(!isDefined(var_0)) {
+    var_0 = "";
   }
 
-  var_02 = strtok(param_00, ";");
-  foreach(var_04 in var_02) {
-    var_05 = strtok(var_04, "=");
-    if(var_05.size != 2) {
+  var_2 = strtok(var_0, ";");
+  foreach(var_4 in var_2) {
+    var_5 = strtok(var_4, "=");
+    if(var_5.size != 2) {
       continue;
     }
 
-    if(var_05[1] == "undefined" || var_05[1] == "default") {
-      var_01.params[var_05[0]] = undefined;
+    if(var_5[1] == "undefined" || var_5[1] == "default") {
+      var_1.params[var_5[0]] = undefined;
       continue;
     }
 
-    switch (var_05[0]) {
+    switch (var_5[0]) {
       case "open_interrupt":
-        var_01.var_C607 = string_to_bool(var_05[1]);
+        var_1.var_C607 = string_to_bool(var_5[1]);
         break;
 
       case "button_sound":
-        var_01.button_smash_count = var_05[1];
+        var_1.button_smash_count = var_5[1];
         break;
 
       default:
@@ -501,55 +501,55 @@ button_parse_parameters(param_00) {
   }
 }
 
-func_59BD(param_00) {
-  var_01 = self;
-  var_01.var_10D2A = undefined;
-  var_01.var_11041 = undefined;
-  var_01.loop_sound = undefined;
-  var_01.var_9A88 = undefined;
-  if(!isDefined(param_00)) {
-    param_00 = "";
+func_59BD(var_0) {
+  var_1 = self;
+  var_1.var_10D2A = undefined;
+  var_1.var_11041 = undefined;
+  var_1.loop_sound = undefined;
+  var_1.var_9A88 = undefined;
+  if(!isDefined(var_0)) {
+    var_0 = "";
   }
 
-  var_02 = strtok(param_00, ";");
-  foreach(var_04 in var_02) {
-    var_05 = strtok(var_04, "=");
-    if(var_05.size != 2) {
+  var_2 = strtok(var_0, ";");
+  foreach(var_4 in var_2) {
+    var_5 = strtok(var_4, "=");
+    if(var_5.size != 2) {
       continue;
     }
 
-    if(var_05[1] == "undefined" || var_05[1] == "default") {
-      var_01.params[var_05[0]] = undefined;
+    if(var_5[1] == "undefined" || var_5[1] == "default") {
+      var_1.params[var_5[0]] = undefined;
       continue;
     }
 
-    switch (var_05[0]) {
+    switch (var_5[0]) {
       case "stop_sound":
-        var_01.var_11041 = var_05[1];
+        var_1.var_11041 = var_5[1];
         break;
 
       case "interrupt_sound":
-        var_01.var_9A88 = var_05[1];
+        var_1.var_9A88 = var_5[1];
         break;
 
       case "loop_sound":
-        var_01.loop_sound = var_05[1];
+        var_1.loop_sound = var_5[1];
         break;
 
       case "open_interrupt":
-        var_01.var_C607 = string_to_bool(var_05[1]);
+        var_1.var_C607 = string_to_bool(var_5[1]);
         break;
 
       case "start_sound":
-        var_01.var_10D2A = var_05[1];
+        var_1.var_10D2A = var_5[1];
         break;
 
       case "unresolved_collision_nodes":
-        var_01.unresolved_collision_nodes = getnodearray(var_05[1], "targetname");
+        var_1.unresolved_collision_nodes = getnodearray(var_5[1], "targetname");
         break;
 
       case "no_moving_unresolved_collisions":
-        var_01.var_C001 = string_to_bool(var_05[1]);
+        var_1.var_C001 = string_to_bool(var_5[1]);
         break;
 
       default:
@@ -558,35 +558,35 @@ func_59BD(param_00) {
   }
 }
 
-trigger_parse_parameters(param_00) {
-  var_01 = self;
-  if(!isDefined(param_00)) {
-    param_00 = "";
+trigger_parse_parameters(var_0) {
+  var_1 = self;
+  if(!isDefined(var_0)) {
+    var_0 = "";
   }
 
-  var_02 = strtok(param_00, ";");
-  foreach(var_04 in var_02) {
-    var_05 = strtok(var_04, "=");
-    if(var_05.size != 2) {
+  var_2 = strtok(var_0, ";");
+  foreach(var_4 in var_2) {
+    var_5 = strtok(var_4, "=");
+    if(var_5.size != 2) {
       continue;
     }
 
-    if(var_05[1] == "undefined" || var_05[1] == "default") {
-      var_01.params[var_05[0]] = undefined;
+    if(var_5[1] == "undefined" || var_5[1] == "default") {
+      var_1.params[var_5[0]] = undefined;
       continue;
     }
 
-    switch (var_05[0]) {
+    switch (var_5[0]) {
       case "not_opening":
-        var_01.not_opening = string_to_bool(var_05[1]);
+        var_1.not_opening = string_to_bool(var_5[1]);
         break;
 
       case "not_closing":
-        var_01.not_closing = string_to_bool(var_05[1]);
+        var_1.not_closing = string_to_bool(var_5[1]);
         break;
 
       case "prone_only":
-        var_01.prone_only = string_to_bool(var_05[1]);
+        var_1.prone_only = string_to_bool(var_5[1]);
         break;
 
       default:
@@ -595,22 +595,22 @@ trigger_parse_parameters(param_00) {
   }
 }
 
-string_to_bool(param_00) {
-  var_01 = undefined;
-  switch (param_00) {
+string_to_bool(var_0) {
+  var_1 = undefined;
+  switch (var_0) {
     case "true":
     case "1":
-      var_01 = 1;
+      var_1 = 1;
       break;
 
     case "false":
     case "0":
-      var_01 = 0;
+      var_1 = 0;
       break;
 
     default:
       break;
   }
 
-  return var_01;
+  return var_1;
 }

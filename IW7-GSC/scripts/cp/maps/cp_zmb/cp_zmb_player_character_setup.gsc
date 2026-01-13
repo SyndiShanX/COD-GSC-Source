@@ -13,8 +13,8 @@ init_player_characters() {
   scripts\cp\zombies\zombies_loadout::register_player_character(6, "no", "body_zmb_projectionist", "zmb_projectionist_viewmodel_arms", "head_zmb_projectionist", undefined, "p6_", "_p6", "iw7_pap_zm_wyler", "ges_zombies_revive_wyler", 5, "iw7_wylercard_zm", "mus_zombies_jock", "iw7_loadoutwyler_zm", "iw7_knife_zm_wyler", ::post_ww_player_setup_func);
 }
 
-post_hoff_setup_func(param_00) {
-  param_00 scripts\cp\zombies\achievement::update_achievement("HOFF_THE_CHARTS", 1);
+post_hoff_setup_func(var_0) {
+  var_0 scripts\cp\zombies\achievement::update_achievement("HOFF_THE_CHARTS", 1);
   if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
     return;
@@ -23,7 +23,7 @@ post_hoff_setup_func(param_00) {
   level.special_character_count++;
 }
 
-post_ww_player_setup_func(param_00) {
+post_ww_player_setup_func(var_0) {
   if(!isDefined(level.special_character_count_ww)) {
     level.special_character_count_ww = 1;
     return;

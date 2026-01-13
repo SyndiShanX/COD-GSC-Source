@@ -11,7 +11,7 @@ func_12F9B() {
   return 1;
 }
 
-end(param_00) {
+end(var_0) {
   self notify("amplify_end");
   self.var_1E57 = undefined;
   if(self.loadoutarchetype == "archetype_assault") {
@@ -24,8 +24,8 @@ unset() {
 }
 
 func_9D41() {
-  var_00 = scripts\mp\supers::getcurrentsuperref();
-  if(!isDefined(var_00) || var_00 != "super_amplify") {
+  var_0 = scripts\mp\supers::getcurrentsuperref();
+  if(!isDefined(var_0) || var_0 != "super_amplify") {
     return 0;
   }
 
@@ -36,24 +36,24 @@ func_9D41() {
   return 1;
 }
 
-func_1E58(param_00) {
+func_1E58(var_0) {
   if(!func_9D41()) {
     return 0;
   }
 
-  var_01 = int(min(self.var_1E57, param_00 * 1));
-  self.var_1E57 = self.var_1E57 - var_01;
-  var_02 = 100;
+  var_1 = int(min(self.var_1E57, var_0 * 1));
+  self.var_1E57 = self.var_1E57 - var_1;
+  var_2 = 100;
   if(self.var_1E57 > 0) {
-    var_02 = int(min(floor(var_01 / 10), 1));
+    var_2 = int(min(floor(var_1 / 10), 1));
   }
 
-  for(var_03 = 0; var_03 <= var_02; var_03++) {
+  for(var_3 = 0; var_3 <= var_2; var_3++) {
     scripts\mp\supers::func_1613();
     if(!scripts\mp\supers::issuperinuse()) {
       break;
     }
   }
 
-  return var_01;
+  return var_1;
 }

@@ -4,120 +4,120 @@
  * Script: scripts\anim\saw\common.gsc
 ***************************************/
 
-main(param_00) {
+main(var_0) {
   self endon("killanimscript");
-  if(!isDefined(param_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   self.a.var_10930 = "saw";
-  if(isDefined(param_00.script_delay_min)) {
-    var_01 = param_00.script_delay_min;
+  if(isDefined(var_0.script_delay_min)) {
+    var_1 = var_0.script_delay_min;
   } else {
-    var_01 = scripts\sp\mgturret::func_32B6("delay");
+    var_1 = scripts\sp\mgturret::func_32B6("delay");
   }
 
-  if(isDefined(param_00.script_delay_max)) {
-    var_02 = param_00.script_delay_max - var_01;
+  if(isDefined(var_0.script_delay_max)) {
+    var_2 = var_0.script_delay_max - var_1;
   } else {
-    var_02 = scripts\sp\mgturret::func_32B6("delay_range");
+    var_2 = scripts\sp\mgturret::func_32B6("delay_range");
   }
 
-  if(isDefined(param_00.var_ED26)) {
-    var_03 = param_00.var_ED26;
+  if(isDefined(var_0.var_ED26)) {
+    var_3 = var_0.var_ED26;
   } else {
-    var_03 = scripts\sp\mgturret::func_32B6("burst");
+    var_3 = scripts\sp\mgturret::func_32B6("burst");
   }
 
-  if(isDefined(param_00.var_ED25)) {
-    var_04 = param_00.var_ED25 - var_03;
+  if(isDefined(var_0.var_ED25)) {
+    var_4 = var_0.var_ED25 - var_3;
   } else {
-    var_04 = scripts\sp\mgturret::func_32B6("burst_range");
+    var_4 = scripts\sp\mgturret::func_32B6("burst_range");
   }
 
-  var_05 = gettime();
-  var_06 = "start";
+  var_5 = gettime();
+  var_6 = "start";
   scripts\anim\shared::placeweaponon(self.var_394, "none");
-  param_00 show();
-  if(isDefined(param_00.var_1A56)) {
+  var_0 show();
+  if(isDefined(var_0.var_1A56)) {
     self.a.var_D707 = ::func_D707;
-    self.a.usingworldspacehitmarkers = param_00;
-    param_00 notify("being_used");
+    self.a.usingworldspacehitmarkers = var_0;
+    var_0 notify("being_used");
     thread func_1109E();
   } else {
     self.a.var_D707 = ::func_D860;
   }
 
-  param_00.var_5855 = 0;
-  thread func_6D63(param_00);
+  var_0.var_5855 = 0;
+  thread func_6D63(var_0);
   self setturretanim(self.primaryturretanim);
   self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
   self _meth_82AA(self.var_17E3);
   self _meth_82AA(self.var_17E2);
-  param_00 _meth_82AA(param_00.var_17E3);
-  param_00 _meth_82AA(param_00.var_17E2);
-  param_00 endon("death");
+  var_0 _meth_82AA(var_0.var_17E3);
+  var_0 _meth_82AA(var_0.var_17E2);
+  var_0 endon("death");
   for(;;) {
-    if(param_00.var_5855) {
-      thread func_5AAA(param_00);
-      func_13848(randomfloatrange(var_03, var_03 + var_04), param_00);
-      param_00 notify("turretstatechange");
-      if(param_00.var_5855) {
-        thread func_57DB(param_00);
-        wait(randomfloatrange(var_01, var_01 + var_02));
+    if(var_0.var_5855) {
+      thread func_5AAA(var_0);
+      func_13848(randomfloatrange(var_3, var_3 + var_4), var_0);
+      var_0 notify("turretstatechange");
+      if(var_0.var_5855) {
+        thread func_57DB(var_0);
+        wait(randomfloatrange(var_1, var_1 + var_2));
       }
 
       continue;
     }
 
-    thread func_57DB(param_00);
-    param_00 waittill("turretstatechange");
+    thread func_57DB(var_0);
+    var_0 waittill("turretstatechange");
   }
 }
 
-func_13848(param_00, param_01) {
-  param_01 endon("turretstatechange");
-  wait(param_00);
+func_13848(var_0, var_1) {
+  var_1 endon("turretstatechange");
+  wait(var_0);
 }
 
-func_6D63(param_00) {
+func_6D63(var_0) {
   self endon("killanimscript");
-  var_01 = cos(15);
+  var_1 = cos(15);
   for(;;) {
     while(isDefined(self.isnodeoccupied)) {
-      var_02 = self.isnodeoccupied.origin;
-      var_03 = param_00 gettagangles("tag_aim");
-      if(scripts\engine\utility::within_fov(param_00.origin, var_03, var_02, var_01) || distancesquared(param_00.origin, var_02) < -25536) {
-        if(!param_00.var_5855) {
-          param_00.var_5855 = 1;
-          param_00 notify("turretstatechange");
+      var_2 = self.isnodeoccupied.origin;
+      var_3 = var_0 gettagangles("tag_aim");
+      if(scripts\engine\utility::within_fov(var_0.origin, var_3, var_2, var_1) || distancesquared(var_0.origin, var_2) < -25536) {
+        if(!var_0.var_5855) {
+          var_0.var_5855 = 1;
+          var_0 notify("turretstatechange");
         }
-      } else if(param_00.var_5855) {
-        param_00.var_5855 = 0;
-        param_00 notify("turretstatechange");
+      } else if(var_0.var_5855) {
+        var_0.var_5855 = 0;
+        var_0 notify("turretstatechange");
       }
 
       wait(0.05);
     }
 
-    if(param_00.var_5855) {
-      param_00.var_5855 = 0;
-      param_00 notify("turretstatechange");
+    if(var_0.var_5855) {
+      var_0.var_5855 = 0;
+      var_0 notify("turretstatechange");
     }
 
     wait(0.05);
   }
 }
 
-func_12A99(param_00, param_01) {
-  if(param_00 <= 0) {
+func_12A99(var_0, var_1) {
+  if(var_0 <= 0) {
     return;
   }
 
   self endon("killanimscript");
-  param_01 endon("turretstatechange");
-  wait(param_00);
-  param_01 notify("turretstatechange");
+  var_1 endon("turretstatechange");
+  wait(var_0);
+  var_1 notify("turretstatechange");
 }
 
 func_1109E() {
@@ -131,8 +131,8 @@ func_1109E() {
   }
 }
 
-func_D707(param_00) {
-  if(param_00 == "pain") {
+func_D707(var_0) {
+  if(var_0 == "pain") {
     if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 4096) {
       self.a.usingworldspacehitmarkers hide();
       scripts\anim\shared::placeweaponon(self.var_394, "right");
@@ -143,8 +143,8 @@ func_D707(param_00) {
     }
   }
 
-  if(param_00 == "saw") {
-    var_01 = self _meth_8164();
+  if(var_0 == "saw") {
+    var_1 = self _meth_8164();
     return;
   }
 
@@ -153,7 +153,7 @@ func_D707(param_00) {
   scripts\anim\shared::placeweaponon(self.var_394, "right");
 }
 
-func_D705(param_00) {
+func_D705(var_0) {
   if(!isDefined(self.target_getindexoftarget) || distancesquared(self.origin, self.target_getindexoftarget.origin) > 4096) {
     self _meth_83AF();
     self.a.usingworldspacehitmarkers delete();
@@ -166,20 +166,20 @@ func_D705(param_00) {
     return;
   }
 
-  if(param_00 != "saw") {
+  if(var_0 != "saw") {
     self.a.usingworldspacehitmarkers delete();
   }
 }
 
-func_D860(param_00) {
+func_D860(var_0) {
   scripts\anim\shared::placeweaponon(self.var_394, "right");
 }
 
-func_5AAA(param_00) {}
+func_5AAA(var_0) {}
 
-func_57DB(param_00) {}
+func_57DB(var_0) {}
 
-func_12A63(param_00) {}
+func_12A63(var_0) {}
 
 func_12A64() {}
 

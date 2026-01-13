@@ -11,8 +11,8 @@ callback_hostmigration() {
   }
 
   level thread hostmigrationconnectwatcher();
-  foreach(var_01 in level.characters) {
-    var_01.hostmigrationcontrolsfrozen = 0;
+  foreach(var_1 in level.characters) {
+    var_1.hostmigrationcontrolsfrozen = 0;
   }
 
   level.hostmigrationtimer = 1;
@@ -20,14 +20,14 @@ callback_hostmigration() {
   level.hostmigration = 1;
   level notify("host_migration_begin");
   scripts\mp\gamelogic::func_12F45();
-  foreach(var_01 in level.characters) {
-    if(!isDefined(var_01)) {
+  foreach(var_1 in level.characters) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    var_01 thread hostmigrationtimerthink();
-    if(isplayer(var_01)) {
-      var_01 setclientomnvar("ui_session_state", var_01.sessionstate);
+    var_1 thread hostmigrationtimerthink();
+    if(isplayer(var_1)) {
+      var_1 setclientomnvar("ui_session_state", var_1.sessionstate);
     }
   }
 
@@ -46,10 +46,10 @@ callback_hostmigration() {
 hostmigrationconnectwatcher() {
   level endon("host_migration_end");
   level endon("host_migration_begin");
-  level waittill("connected", var_00);
-  var_00 thread hostmigrationtimerthink();
-  if(isplayer(var_00)) {
-    var_00 setclientomnvar("ui_session_state", var_00.sessionstate);
+  level waittill("connected", var_0);
+  var_0 thread hostmigrationtimerthink();
+  if(isplayer(var_0)) {
+    var_0 setclientomnvar("ui_session_state", var_0.sessionstate);
   }
 }
 
@@ -72,34 +72,34 @@ hostmigrationwaitforplayers() {
   wait(15);
 }
 
-hostmigrationname(param_00) {
-  if(!isDefined(param_00)) {
+hostmigrationname(var_0) {
+  if(!isDefined(var_0)) {
     return "<removed_ent>";
   }
 
-  var_01 = -1;
-  var_02 = "?";
-  if(isDefined(param_00.entity_number)) {
-    var_01 = param_00.entity_number;
+  var_1 = -1;
+  var_2 = "?";
+  if(isDefined(var_0.entity_number)) {
+    var_1 = var_0.entity_number;
   }
 
-  if(isplayer(param_00) && isDefined(param_00.name)) {
-    var_02 = param_00.name;
+  if(isplayer(var_0) && isDefined(var_0.name)) {
+    var_2 = var_0.name;
   }
 
-  if(isplayer(param_00)) {
-    return "player <" + var_02 + ">";
+  if(isplayer(var_0)) {
+    return "player <" + var_2 + ">";
   }
 
-  if(isagent(param_00) && scripts\mp\utility::isgameparticipant(param_00)) {
-    return "participant agent <" + var_01 + ">";
+  if(isagent(var_0) && scripts\mp\utility::isgameparticipant(var_0)) {
+    return "participant agent <" + var_1 + ">";
   }
 
-  if(isagent(param_00)) {
-    return "non-participant agent <" + var_01 + ">";
+  if(isagent(var_0)) {
+    return "non-participant agent <" + var_1 + ">";
   }
 
-  return "unknown entity <" + var_01 + ">";
+  return "unknown entity <" + var_1 + ">";
 }
 
 hostmigrationtimerthink_internal() {
@@ -128,80 +128,80 @@ waittillhostmigrationdone() {
     return 0;
   }
 
-  var_00 = gettime();
+  var_0 = gettime();
   level waittill("host_migration_end");
-  return gettime() - var_00;
+  return gettime() - var_0;
 }
 
-waittillhostmigrationstarts(param_00) {
+waittillhostmigrationstarts(var_0) {
   if(isDefined(level.hostmigrationtimer)) {
     return;
   }
 
   level endon("host_migration_begin");
-  wait(param_00);
+  wait(var_0);
 }
 
-waitlongdurationwithhostmigrationpause(param_00) {
-  if(param_00 == 0) {
+waitlongdurationwithhostmigrationpause(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
-  var_01 = gettime();
-  var_02 = gettime() + param_00 * 1000;
-  while(gettime() < var_02) {
-    waittillhostmigrationstarts(var_02 - gettime() / 1000);
+  var_1 = gettime();
+  var_2 = gettime() + var_0 * 1000;
+  while(gettime() < var_2) {
+    waittillhostmigrationstarts(var_2 - gettime() / 1000);
     if(isDefined(level.hostmigrationtimer)) {
-      var_03 = waittillhostmigrationdone();
-      var_02 = var_02 + var_03;
+      var_3 = waittillhostmigrationdone();
+      var_2 = var_2 + var_3;
     }
   }
 
   waittillhostmigrationdone();
-  return gettime() - var_01;
+  return gettime() - var_1;
 }
 
-waittill_notify_or_timeout_hostmigration_pause(param_00, param_01) {
-  self endon(param_00);
-  if(param_01 == 0) {
+waittill_notify_or_timeout_hostmigration_pause(var_0, var_1) {
+  self endon(var_0);
+  if(var_1 == 0) {
     return;
   }
 
-  var_02 = gettime();
-  var_03 = gettime() + param_01 * 1000;
-  while(gettime() < var_03) {
-    waittillhostmigrationstarts(var_03 - gettime() / 1000);
+  var_2 = gettime();
+  var_3 = gettime() + var_1 * 1000;
+  while(gettime() < var_3) {
+    waittillhostmigrationstarts(var_3 - gettime() / 1000);
     if(isDefined(level.hostmigrationtimer)) {
-      var_04 = waittillhostmigrationdone();
-      var_03 = var_03 + var_04;
+      var_4 = waittillhostmigrationdone();
+      var_3 = var_3 + var_4;
     }
   }
 
   waittillhostmigrationdone();
-  return gettime() - var_02;
+  return gettime() - var_2;
 }
 
-waitlongdurationwithgameendtimeupdate(param_00) {
-  if(param_00 == 0) {
+waitlongdurationwithgameendtimeupdate(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
-  var_01 = gettime();
-  var_02 = gettime() + param_00 * 1000;
-  while(gettime() < var_02) {
-    waittillhostmigrationstarts(var_02 - gettime() / 1000);
+  var_1 = gettime();
+  var_2 = gettime() + var_0 * 1000;
+  while(gettime() < var_2) {
+    waittillhostmigrationstarts(var_2 - gettime() / 1000);
     while(isDefined(level.hostmigrationtimer)) {
-      var_02 = var_02 + 1000;
-      setgameendtime(int(var_02));
+      var_2 = var_2 + 1000;
+      setgameendtime(int(var_2));
       wait(1);
     }
   }
 
   while(isDefined(level.hostmigrationtimer)) {
-    var_02 = var_02 + 1000;
-    setgameendtime(int(var_02));
+    var_2 = var_2 + 1000;
+    setgameendtime(int(var_2));
     wait(1);
   }
 
-  return gettime() - var_01;
+  return gettime() - var_1;
 }

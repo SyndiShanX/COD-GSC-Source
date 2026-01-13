@@ -16,81 +16,81 @@ func_10CEF() {
     return;
   }
 
-  foreach(var_02, var_01 in level.var_13F4D) {
-    level thread start_quest_line(var_02);
+  foreach(var_2, var_1 in level.var_13F4D) {
+    level thread start_quest_line(var_2);
   }
 }
 
-start_quest_line(param_00) {
-  var_01 = level.var_13F4D[param_00];
-  level.var_13F4C[param_00] = -1;
-  foreach(var_04, var_03 in var_01) {
-    level.var_13F1B[param_00] = var_04;
-    [[var_03.init_func]]();
-    if(func_FF37(param_00, var_04)) {
+start_quest_line(var_0) {
+  var_1 = level.var_13F4D[var_0];
+  level.var_13F4C[var_0] = -1;
+  foreach(var_4, var_3 in var_1) {
+    level.var_13F1B[var_0] = var_4;
+    [[var_3.init_func]]();
+    if(func_FF37(var_0, var_4)) {
       [
-        [var_03.var_DB5D]
+        [var_3.var_DB5D]
       ]();
     }
 
-    [[var_03.var_446D]]();
+    [[var_3.var_446D]]();
   }
 }
 
-register_quest_step(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(!isDefined(level.var_13F4D[param_00])) {
-    level.var_13F4D[param_00] = [];
+register_quest_step(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(level.var_13F4D[var_0])) {
+    level.var_13F4D[var_0] = [];
   }
 
-  if(!isDefined(level.var_13F4C[param_00])) {
-    level.var_13F4C[param_00] = -1;
+  if(!isDefined(level.var_13F4C[var_0])) {
+    level.var_13F4C[var_0] = -1;
   }
 
-  var_08 = spawnStruct();
-  var_08.init_func = param_02;
-  var_08.var_DB5D = param_03;
-  var_08.var_446D = param_04;
-  var_08.var_4EB1 = param_05;
-  level.var_13F4D[param_00][param_01] = var_08;
-  level thread add_devgui_entries(param_00, param_01, param_06, param_07);
+  var_8 = spawnStruct();
+  var_8.init_func = var_2;
+  var_8.var_DB5D = var_3;
+  var_8.var_446D = var_4;
+  var_8.var_4EB1 = var_5;
+  level.var_13F4D[var_0][var_1] = var_8;
+  level thread add_devgui_entries(var_0, var_1, var_6, var_7);
 }
 
-add_devgui_entries(param_00, param_01, param_02, param_03) {
+add_devgui_entries(var_0, var_1, var_2, var_3) {
   wait(3);
-  if(!isDefined(param_02)) {
-    param_02 = "";
+  if(!isDefined(var_2)) {
+    var_2 = "";
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = "";
+  if(!isDefined(var_3)) {
+    var_3 = "";
   }
 
   if(level.script == "cp_town") {
-    if(param_01 == 0) {
-      var_04 = "devgui_cmd \"Town:5\Quests\" + param_02 + " - " + param_00 + "\
-      Step " + param_01 + 1 + " - " + param_03 + "\
-      0 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
-      addentrytodevgui(var_04);
+    if(var_1 == 0) {
+      var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\
+      Step " + var_1 + 1 + " - " + var_3 + "\
+      0 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
+      addentrytodevgui(var_4);
       return;
     }
 
-    var_04 = "devgui_cmd \"Town:5\Quests\" + param_03 + " - " + param_01 + "\
-    Step " + param_02 + 1 + " - " + var_04 + "\
-    0 - Jump To This Step\" \"set scr_complete_quest_step " + param_01 + "_" + param_02 - 1 + "\" \n";
-    addentrytodevgui(var_04);
-    var_04 = "devgui_cmd \"Town:5\Quests\" + param_02 + " - " + param_00 + "\
-    Step " + param_01 + 1 + " - " + param_03 + "\
-    1 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
-    addentrytodevgui(var_04);
+    var_4 = "devgui_cmd \"Town:5\Quests\" + var_3 + " - " + var_1 + "\
+    Step " + var_2 + 1 + " - " + var_4 + "\
+    0 - Jump To This Step\" \"set scr_complete_quest_step " + var_1 + "_" + var_2 - 1 + "\" \n";
+    addentrytodevgui(var_4);
+    var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\
+    Step " + var_1 + 1 + " - " + var_3 + "\
+    1 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
+    addentrytodevgui(var_4);
   }
 }
 
-func_FF37(param_00, param_01) {
-  return param_01 > level.var_13F4C[param_00];
+func_FF37(var_0, var_1) {
+  return var_1 > level.var_13F4C[var_0];
 }
 
-quest_line_exist(param_00) {
-  return isDefined(level.var_13F4D[param_00]);
+quest_line_exist(var_0) {
+  return isDefined(level.var_13F4D[var_0]);
 }
 
-addentrytodevgui(param_00) {}
+addentrytodevgui(var_0) {}

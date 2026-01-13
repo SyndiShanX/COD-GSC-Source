@@ -98,17 +98,17 @@ func_899C() {
   self endon("death");
   level waittill("game_ended");
   self clearpath();
-  foreach(var_04, var_01 in self.var_164D) {
-    var_02 = var_01.var_4BC0;
-    var_03 = level.asm[var_04].states[var_02];
-    scripts\asm\asm::func_2388(var_04, var_02, var_03, var_03.var_116FB);
-    scripts\asm\asm::func_238A(var_04, "idle", 0.2, undefined, undefined, undefined);
+  foreach(var_4, var_1 in self.var_164D) {
+    var_2 = var_1.var_4BC0;
+    var_3 = level.asm[var_4].states[var_2];
+    scripts\asm\asm::func_2388(var_4, var_2, var_3, var_3.var_116FB);
+    scripts\asm\asm::func_238A(var_4, "idle", 0.2, undefined, undefined, undefined);
   }
 }
 
-func_FACE(param_00) {
-  var_01 = get_ghost_info();
-  self.color = var_01.color;
+func_FACE(var_0) {
+  var_1 = get_ghost_info();
+  self.color = var_1.color;
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
     self setModel("dlc4_boss_soul");
     return;
@@ -118,50 +118,50 @@ func_FACE(param_00) {
 }
 
 get_ghost_info() {
-  var_00 = spawnStruct();
+  var_0 = spawnStruct();
   switch (level.zombie_ghost_model) {
     case "zombie_ghost_cube_red":
     case "zombie_ghost_red":
-      var_00.color = "red";
+      var_0.color = "red";
       break;
 
     case "zombie_ghost_cube_green":
     case "zombie_ghost_green":
-      var_00.color = "green";
+      var_0.color = "green";
       break;
 
     case "zombie_ghost_cube_yellow":
     case "zombie_ghost_yellow":
-      var_00.color = "yellow";
+      var_0.color = "yellow";
       break;
 
     case "zombie_ghost_cube_blue":
     case "zombie_ghost_blue":
-      var_00.color = "blue";
+      var_0.color = "blue";
       break;
 
     case "zombie_ghost_bomb_red":
-      var_00.color = "red_bomb";
+      var_0.color = "red_bomb";
       break;
 
     case "zombie_ghost_bomb_green":
-      var_00.color = "green_bomb";
+      var_0.color = "green_bomb";
       break;
 
     case "zombie_ghost_bomb_yellow":
-      var_00.color = "yellow_bomb";
+      var_0.color = "yellow_bomb";
       break;
 
     case "zombie_ghost_bomb_blue":
-      var_00.color = "blue_bomb";
+      var_0.color = "blue_bomb";
       break;
 
     case "zombie_ghost_cube_white":
-      var_00.color = "white";
+      var_0.color = "white";
       break;
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_50EF() {
@@ -178,69 +178,69 @@ func_AEB0() {
   level._effect["ghost_explosion_death_green"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_imp.vfx");
 }
 
-func_C536(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   var_0C = gettime();
-  if(isplayer(param_01)) {
-    if(isDefined(param_05) && param_05 == "iw7_entangler_zm") {
+  if(isplayer(var_1)) {
+    if(isDefined(var_5) && var_5 == "iw7_entangler_zm") {
       if(!isDefined(self.var_65FC)) {
-        func_D974(param_01, self);
-      } else if(param_01 == self.var_65FC) {
-        func_D974(param_01, self);
+        func_D974(var_1, self);
+      } else if(var_1 == self.var_65FC) {
+        func_D974(var_1, self);
       } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
-        _meth_8263(param_01, var_0C);
+        _meth_8263(var_1, var_0C);
       }
     } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
-      param_01 iprintlnbold("This weapon is not effective againt the ghost");
+      var_1 iprintlnbold("This weapon is not effective againt the ghost");
     }
   }
 
-  if(isDefined(param_02)) {
-    self.health = self.health + param_02;
+  if(isDefined(var_2)) {
+    self.health = self.health + var_2;
   }
 }
 
-_meth_8263(param_00, param_01) {
-  if(!isDefined(param_00.var_D8A1) || param_01 - param_00.var_D8A1 / 1000 > 3) {
+_meth_8263(var_0, var_1) {
+  if(!isDefined(var_0.var_D8A1) || var_1 - var_0.var_D8A1 / 1000 > 3) {
     if(isDefined(level.grab_same_ghost_string)) {
-      param_00 iprintlnbold(level.grab_same_ghost_string);
+      var_0 iprintlnbold(level.grab_same_ghost_string);
     } else {
-      param_00 iprintlnbold(&"CP_ZMB_GHOST_TRACK_SAME_GHOST");
+      var_0 iprintlnbold(&"CP_ZMB_GHOST_TRACK_SAME_GHOST");
     }
 
-    param_00.var_D8A1 = param_01;
+    var_0.var_D8A1 = var_1;
   }
 }
 
-func_D974(param_00, param_01) {
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_entangler_progress(param_00, param_01);
-  param_01 thread func_158F(param_01);
-  param_01 thread func_65FD(param_00, param_01);
+func_D974(var_0, var_1) {
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_entangler_progress(var_0, var_1);
+  var_1 thread func_158F(var_1);
+  var_1 thread func_65FD(var_0, var_1);
 }
 
-func_158F(param_00) {
-  param_00 endon("death");
-  param_00 notify("activate_being_tracked_scriptable");
-  param_00 endon("activate_being_tracked_scriptable");
-  param_00 setscriptablepartstate("being_tracked", "on");
+func_158F(var_0) {
+  var_0 endon("death");
+  var_0 notify("activate_being_tracked_scriptable");
+  var_0 endon("activate_being_tracked_scriptable");
+  var_0 setscriptablepartstate("being_tracked", "on");
   wait(0.2);
-  param_00 setscriptablepartstate("being_tracked", "off");
+  var_0 setscriptablepartstate("being_tracked", "off");
 }
 
-func_65FD(param_00, param_01) {
-  param_01 endon("death");
-  param_01 notify("entangled_by_player_monitor");
-  param_01 endon("entangled_by_player_monitor");
-  param_01.var_65FC = param_00;
+func_65FD(var_0, var_1) {
+  var_1 endon("death");
+  var_1 notify("entangled_by_player_monitor");
+  var_1 endon("entangled_by_player_monitor");
+  var_1.var_65FC = var_0;
   scripts\engine\utility::waitframe();
-  param_01.var_65FC = undefined;
+  var_1.var_65FC = undefined;
 }
 
-func_C535(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  func_108D0(self.var_1657, param_03, param_04);
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+func_C535(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  func_108D0(self.var_1657, var_3, var_4);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   if(isDefined(level.ghost_killed_update_func)) {
-    [[level.ghost_killed_update_func]](param_01, param_04);
+    [[level.ghost_killed_update_func]](var_1, var_4);
   }
 }
 
-func_108D0(param_00, param_01, param_02) {}
+func_108D0(var_0, var_1, var_2) {}

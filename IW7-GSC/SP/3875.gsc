@@ -47,15 +47,15 @@ func_FA55() {
 }
 
 func_F342() {
-  var_00 = [];
-  var_00["prone"] = 400;
-  var_00["crouch"] = 800;
-  var_00["stand"] = 1500;
-  var_01 = [];
-  var_01["prone"] = 800;
-  var_01["crouch"] = 1500;
-  var_01["stand"] = 3000;
-  lib_0F27::func_F353(var_00, var_01);
+  var_0 = [];
+  var_0["prone"] = 400;
+  var_0["crouch"] = 800;
+  var_0["stand"] = 1500;
+  var_1 = [];
+  var_1["prone"] = 800;
+  var_1["crouch"] = 1500;
+  var_1["stand"] = 3000;
+  lib_0F27::func_F353(var_0, var_1);
   lib_0F19::func_F30F();
   func_95D1();
   lib_0F27::func_F357(0);
@@ -63,50 +63,50 @@ func_F342() {
 }
 
 func_95D1() {
-  var_00["ai_eventDistDeath"]["spotted"] = getdvarint("ai_eventDistDeath");
-  var_00["ai_eventDistDeath"]["hidden"] = 512;
-  var_00["ai_eventDistPain"]["spotted"] = getdvarint("ai_eventDistPain");
-  var_00["ai_eventDistPain"]["hidden"] = 256;
-  var_00["ai_eventDistExplosion"]["spotted"] = getdvarint("ai_eventDistExplosion");
-  var_00["ai_eventDistExplosion"]["hidden"] = 2048;
-  var_00["ai_eventDistBullet"]["spotted"] = getdvarint("ai_eventDistBullet");
-  var_00["ai_eventDistBullet"]["hidden"] = 64;
-  var_00["ai_eventDistFootstepWalk"]["spotted"] = getdvarint("ai_eventDistFootstepWalk");
-  var_00["ai_eventDistFootstepWalk"]["hidden"] = 50;
-  var_00["ai_eventDistFootstep"]["spotted"] = getdvarint("ai_eventDistFootstep");
-  var_00["ai_eventDistFootstep"]["hidden"] = 100;
-  var_00["ai_eventDistFootstepSprint"]["spotted"] = getdvarint("ai_eventDistFootstepSprint");
-  var_00["ai_eventDistFootstepSprint"]["hidden"] = 400;
-  var_00["ai_eventDistGunShot"]["spotted"] = getdvarint("ai_eventDistGunShot");
-  var_00["ai_eventDistGunShot"]["hidden"] = 2048;
-  var_00["ai_eventDistSilencedShot"]["spotted"] = getdvarint("ai_eventDistSilencedShot");
-  var_00["ai_eventDistSilencedShot"]["hidden"] = 128;
-  var_00["ai_eventDistGunShotTeam"]["spotted"] = getdvarint("ai_eventDistGunShotTeam");
-  var_00["ai_eventDistGunShotTeam"]["hidden"] = 750;
-  var_00["ai_eventDistNewEnemy"]["spotted"] = getdvarint("ai_eventDistNewEnemy");
-  var_00["ai_eventDistNewEnemy"]["hidden"] = 128;
-  func_F395(var_00);
+  var_0["ai_eventDistDeath"]["spotted"] = getdvarint("ai_eventDistDeath");
+  var_0["ai_eventDistDeath"]["hidden"] = 512;
+  var_0["ai_eventDistPain"]["spotted"] = getdvarint("ai_eventDistPain");
+  var_0["ai_eventDistPain"]["hidden"] = 256;
+  var_0["ai_eventDistExplosion"]["spotted"] = getdvarint("ai_eventDistExplosion");
+  var_0["ai_eventDistExplosion"]["hidden"] = 2048;
+  var_0["ai_eventDistBullet"]["spotted"] = getdvarint("ai_eventDistBullet");
+  var_0["ai_eventDistBullet"]["hidden"] = 64;
+  var_0["ai_eventDistFootstepWalk"]["spotted"] = getdvarint("ai_eventDistFootstepWalk");
+  var_0["ai_eventDistFootstepWalk"]["hidden"] = 50;
+  var_0["ai_eventDistFootstep"]["spotted"] = getdvarint("ai_eventDistFootstep");
+  var_0["ai_eventDistFootstep"]["hidden"] = 100;
+  var_0["ai_eventDistFootstepSprint"]["spotted"] = getdvarint("ai_eventDistFootstepSprint");
+  var_0["ai_eventDistFootstepSprint"]["hidden"] = 400;
+  var_0["ai_eventDistGunShot"]["spotted"] = getdvarint("ai_eventDistGunShot");
+  var_0["ai_eventDistGunShot"]["hidden"] = 2048;
+  var_0["ai_eventDistSilencedShot"]["spotted"] = getdvarint("ai_eventDistSilencedShot");
+  var_0["ai_eventDistSilencedShot"]["hidden"] = 128;
+  var_0["ai_eventDistGunShotTeam"]["spotted"] = getdvarint("ai_eventDistGunShotTeam");
+  var_0["ai_eventDistGunShotTeam"]["hidden"] = 750;
+  var_0["ai_eventDistNewEnemy"]["spotted"] = getdvarint("ai_eventDistNewEnemy");
+  var_0["ai_eventDistNewEnemy"]["hidden"] = 128;
+  func_F395(var_0);
 }
 
-func_F395(param_00) {
-  foreach(var_06, var_02 in param_00) {
-    foreach(var_05, var_04 in var_02) {
-      level.var_10E6D.var_21[var_06][var_05] = var_04;
+func_F395(var_0) {
+  foreach(var_6, var_2 in var_0) {
+    foreach(var_5, var_4 in var_2) {
+      level.var_10E6D.var_21[var_6][var_5] = var_4;
     }
   }
 }
 
-func_F354(param_00, param_01) {
-  if(isDefined(param_00)) {
-    level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"] = param_00["prone"];
-    level.var_10E6D.var_53A0.var_DCCA["hidden"]["crouch"] = param_00["crouch"];
-    level.var_10E6D.var_53A0.var_DCCA["hidden"]["stand"] = param_00["stand"];
+func_F354(var_0, var_1) {
+  if(isDefined(var_0)) {
+    level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"] = var_0["prone"];
+    level.var_10E6D.var_53A0.var_DCCA["hidden"]["crouch"] = var_0["crouch"];
+    level.var_10E6D.var_53A0.var_DCCA["hidden"]["stand"] = var_0["stand"];
   }
 
-  if(isDefined(param_01)) {
-    level.var_10E6D.var_53A0.var_DCCA["spotted"]["prone"] = param_01["prone"];
-    level.var_10E6D.var_53A0.var_DCCA["spotted"]["crouch"] = param_01["crouch"];
-    level.var_10E6D.var_53A0.var_DCCA["spotted"]["stand"] = param_01["stand"];
+  if(isDefined(var_1)) {
+    level.var_10E6D.var_53A0.var_DCCA["spotted"]["prone"] = var_1["prone"];
+    level.var_10E6D.var_53A0.var_DCCA["spotted"]["crouch"] = var_1["crouch"];
+    level.var_10E6D.var_53A0.var_DCCA["spotted"]["stand"] = var_1["stand"];
   }
 }
 
@@ -119,8 +119,8 @@ func_B2F1() {
     lib_0F26::func_117D1(0);
     setsaveddvar("ai_corpseSynch", 0);
     if(getdvarint("ai_threatsightDisplay", 1)) {
-      foreach(var_01 in level.players) {
-        var_01 thread scripts\sp\utility::play_sound_on_entity("ui_stealth_busted");
+      foreach(var_1 in level.players) {
+        var_1 thread scripts\sp\utility::play_sound_on_entity("ui_stealth_busted");
       }
     }
 
@@ -151,84 +151,84 @@ func_115E8() {
   }
 }
 
-func_6806(param_00) {
-  level.var_10E6D.var_53A0.state = param_00;
-  foreach(var_04, var_02 in level.var_10E6D.var_21) {
-    setsaveddvar(var_04, var_02[param_00]);
-    var_03 = "ai_busyEvent" + getsubstr(var_04, 8);
-    setsaveddvar(var_03, var_02[param_00]);
+func_6806(var_0) {
+  level.var_10E6D.var_53A0.state = var_0;
+  foreach(var_4, var_2 in level.var_10E6D.var_21) {
+    setsaveddvar(var_4, var_2[var_0]);
+    var_3 = "ai_busyEvent" + getsubstr(var_4, 8);
+    setsaveddvar(var_3, var_2[var_0]);
   }
 }
 
 func_10E20() {
   while(scripts\engine\utility::flag("stealth_spotted")) {
     scripts\engine\utility::flag_wait("stealth_enabled");
-    var_00 = level.var_10E6D.group.groups;
-    foreach(var_04, var_02 in var_00) {
-      var_03 = lib_0F27::func_79F6("stealth_spotted", var_04);
-      if(!scripts\engine\utility::flag(var_03)) {
+    var_0 = level.var_10E6D.group.groups;
+    foreach(var_4, var_2 in var_0) {
+      var_3 = lib_0F27::func_79F6("stealth_spotted", var_4);
+      if(!scripts\engine\utility::flag(var_3)) {
         continue;
       }
 
-      var_02 = scripts\engine\utility::array_removeundefined(var_02);
-      if(var_02.size > 0) {
-        if(var_02[0].team == "allies") {
+      var_2 = scripts\engine\utility::array_removeundefined(var_2);
+      if(var_2.size > 0) {
+        if(var_2[0].team == "allies") {
           continue;
         }
       }
 
-      thread func_1284D(var_04);
+      thread func_1284D(var_4);
     }
 
     scripts\engine\utility::flag_waitopen_or_timeout("stealth_spotted", level.var_10E6D.var_53A0.timeout * 1.25);
   }
 
-  var_00 = level.var_10E6D.group.groups;
-  foreach(var_04, var_02 in var_00) {
-    lib_0F27::func_868A("stealth_spotted", var_04);
+  var_0 = level.var_10E6D.group.groups;
+  foreach(var_4, var_2 in var_0) {
+    lib_0F27::func_868A("stealth_spotted", var_4);
   }
 }
 
-func_1284D(param_00) {
-  var_01 = lib_0F27::func_79F5(param_00);
-  scripts\engine\utility::array_thread(var_01, ::func_C13A, param_00);
-  level endon("enemy_" + param_00);
-  if(var_01.size > 0) {
-    var_02 = func_3DB9(param_00);
-    if(!var_02) {
+func_1284D(var_0) {
+  var_1 = lib_0F27::func_79F5(var_0);
+  scripts\engine\utility::array_thread(var_1, ::func_C13A, var_0);
+  level endon("enemy_" + var_0);
+  if(var_1.size > 0) {
+    var_2 = func_3DB9(var_0);
+    if(!var_2) {
       return;
     }
 
     wait(level.var_10E6D.var_53A0.timeout);
-    var_02 = func_3DB9(param_00);
-    if(!var_02) {
+    var_2 = func_3DB9(var_0);
+    if(!var_2) {
       return;
     }
   }
 
-  level notify("enemy_" + param_00 + "_stop");
-  lib_0F27::func_868A("stealth_spotted", param_00);
+  level notify("enemy_" + var_0 + "_stop");
+  lib_0F27::func_868A("stealth_spotted", var_0);
 }
 
-func_C13A(param_00) {
+func_C13A(var_0) {
   self notify("notify_level_on_enemy");
   self endon("notify_level_on_enemy");
-  var_01 = "enemy_" + param_00;
+  var_1 = "enemy_" + var_0;
   self endon("death");
-  level endon(var_01);
-  level endon(var_01 + "_stop");
+  level endon(var_1);
+  level endon(var_1 + "_stop");
   self waittill("enemy");
-  level notify(var_01);
+  level notify(var_1);
 }
 
-func_3DB9(param_00) {
+func_3DB9(var_0) {
   if(scripts\engine\utility::istrue(level.player.var_9BFA)) {
     return 0;
   }
 
-  var_01 = lib_0F27::func_79F5(param_00);
-  foreach(var_03 in var_01) {
-    if(isalive(var_03.isnodeoccupied)) {
+  var_1 = lib_0F27::func_79F5(var_0);
+  foreach(var_3 in var_1) {
+    if(isalive(var_3.isnodeoccupied)) {
       return 0;
     }
   }
@@ -246,14 +246,14 @@ func_D0B1() {
   for(;;) {
     self waittill("grenade_pullback");
     scripts\engine\utility::flag_set("stealth_player_nade");
-    self waittill("grenade_fire", var_00);
-    thread func_D0B2(var_00);
+    self waittill("grenade_fire", var_0);
+    thread func_D0B2(var_0);
   }
 }
 
-func_D0B2(param_00) {
+func_D0B2(var_0) {
   level.var_10E6D.save.var_D202++;
-  param_00 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
+  var_0 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
   level.var_10E6D.save.var_D202--;
   waittillframeend;
   if(!level.var_10E6D.save.var_D202) {

@@ -83,42 +83,42 @@ main() {
 }
 
 escape_weapon_progression() {
-  var_00 = 1;
-  var_01 = level.weapon_progression[0];
+  var_0 = 1;
+  var_1 = level.weapon_progression[0];
   for(;;) {
-    level waittill("objective_complete", var_02);
-    var_03 = level.weapon_progression[var_00];
-    thread spawn_next_weapon(var_03, var_02, var_01);
-    level.default_weapon = var_03;
-    if(var_00 < level.weapon_progression.size) {
-      var_00++;
+    level waittill("objective_complete", var_2);
+    var_3 = level.weapon_progression[var_0];
+    thread spawn_next_weapon(var_3, var_2, var_1);
+    level.default_weapon = var_3;
+    if(var_0 < level.weapon_progression.size) {
+      var_0++;
     }
 
-    var_01 = var_03;
+    var_1 = var_3;
   }
 }
 
-spawn_next_weapon(param_00, param_01, param_02) {
-  var_03 = undefined;
-  var_04 = scripts\engine\utility::getstructarray(param_01.target, "targetname");
-  foreach(var_06 in var_04) {
-    if(var_06.script_noteworthy == "waypoint_spot") {
-      var_03 = var_06;
+spawn_next_weapon(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  foreach(var_6 in var_4) {
+    if(var_6.script_noteworthy == "waypoint_spot") {
+      var_3 = var_6;
       break;
     }
   }
 
-  var_08 = bulletTrace(var_03.origin, var_03.origin + (0, 0, -100), 0);
-  var_03 = var_08["position"];
-  var_09 = spawn("script_model", var_03 + (0, 0, 40));
-  var_09 setModel(getweaponmodel(param_00));
-  var_09.var_39C = param_00;
-  var_09.oldweapon = param_02;
-  var_09 thread wait_for_player_pickup();
-  var_09 thread rotate_weapon_model();
-  var_09.fx = spawnfx(level._effect["weapon_glow"], var_09.origin);
+  var_8 = bulletTrace(var_3.origin, var_3.origin + (0, 0, -100), 0);
+  var_3 = var_8["position"];
+  var_9 = spawn("script_model", var_3 + (0, 0, 40));
+  var_9 setModel(getweaponmodel(var_0));
+  var_9.var_39C = var_0;
+  var_9.oldweapon = var_2;
+  var_9 thread wait_for_player_pickup();
+  var_9 thread rotate_weapon_model();
+  var_9.fx = spawnfx(level._effect["weapon_glow"], var_9.origin);
   wait(0.5);
-  triggerfx(var_09.fx);
+  triggerfx(var_9.fx);
 }
 
 rotate_weapon_model() {
@@ -130,22 +130,22 @@ rotate_weapon_model() {
 }
 
 wait_for_player_pickup() {
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    foreach(var_02 in level.players) {
-      if(var_02 hasweapon(self.var_39C)) {
+    foreach(var_2 in level.players) {
+      if(var_2 hasweapon(self.var_39C)) {
         continue;
       }
 
-      if(distancesquared(var_02.origin, self.origin) > 22500) {
+      if(distancesquared(var_2.origin, self.origin) > 22500) {
         continue;
       } else {
-        var_02 playlocalsound("zmb_powerup_activate");
+        var_2 playlocalsound("zmb_powerup_activate");
         scripts\engine\utility::waitframe();
-        var_02 thread give_player_next_weapon(var_02, self.var_39C, self.oldweapon);
-        playFX(level._effect["weapon_pickup"], var_02.origin + (0, 0, 30));
-        var_00++;
-        if(level.players.size - var_00 == 0) {
+        var_2 thread give_player_next_weapon(var_2, self.var_39C, self.oldweapon);
+        playFX(level._effect["weapon_pickup"], var_2.origin + (0, 0, 30));
+        var_0++;
+        if(level.players.size - var_0 == 0) {
           self.fx delete();
           self delete();
           return;
@@ -159,21 +159,21 @@ wait_for_player_pickup() {
   }
 }
 
-give_player_next_weapon(param_00, param_01, param_02) {
-  while(param_00 ismeleeing()) {
+give_player_next_weapon(var_0, var_1, var_2) {
+  while(var_0 ismeleeing()) {
     wait(0.2);
   }
 
-  param_00 allowmelee(0);
-  param_00 takeweapon(param_02);
-  param_00 scripts\cp\utility::_giveweapon(param_01, undefined, undefined, 1);
-  param_00 switchtoweapon(param_01);
-  while(param_00 isswitchingweapon()) {
+  var_0 allowmelee(0);
+  var_0 takeweapon(var_2);
+  var_0 scripts\cp\utility::_giveweapon(var_1, undefined, undefined, 1);
+  var_0 switchtoweapon(var_1);
+  while(var_0 isswitchingweapon()) {
     wait(0.1);
   }
 
-  param_00 givemaxammo(param_01);
-  param_00 allowmelee(1);
+  var_0 givemaxammo(var_1);
+  var_0 allowmelee(1);
 }
 
 waitforplayers() {
@@ -199,17 +199,17 @@ init_zombie_fx() {
 
 parse_weapon_table() {
   level.weapon_progression = [];
-  var_00 = "cp\escape_weapon_progression.csv";
-  var_01 = 0;
+  var_0 = "cp\escape_weapon_progression.csv";
+  var_1 = 0;
   for(;;) {
-    var_02 = randomintrange(1, 3);
-    var_03 = tablelookupbyrow(var_00, var_01, var_02);
-    if(var_03 == "") {
+    var_2 = randomintrange(1, 3);
+    var_3 = tablelookupbyrow(var_0, var_1, var_2);
+    if(var_3 == "") {
       break;
     }
 
-    level.weapon_progression[var_01] = var_03;
-    var_01++;
+    level.weapon_progression[var_1] = var_3;
+    var_1++;
   }
 
   level.default_weapon = level.weapon_progression[0];
@@ -255,19 +255,19 @@ zombie_onstartgametype() {
 
 escape_game_logic() {
   escape_game_init();
-  var_00 = 0;
-  var_01 = 1;
-  var_02 = 2;
-  var_03 = 3;
-  var_04 = 3;
+  var_0 = 0;
+  var_1 = 1;
+  var_2 = 2;
+  var_3 = 3;
+  var_4 = 3;
   level thread escape_timer();
-  var_05 = level.initial_active_volumes[0];
-  var_06 = 0;
+  var_5 = level.initial_active_volumes[0];
+  var_6 = 0;
   for(;;) {
     scripts\engine\utility::flag_clear("score goal reached");
-    var_07 = strtok(tablelookup(level.escape_table, var_00, var_06, var_01), " ");
-    level.escape_score_goal = int(var_07[level.players.size - 1]);
-    var_08 = tablelookup(level.escape_table, var_00, var_06, var_02);
+    var_7 = strtok(tablelookup(level.escape_table, var_0, var_6, var_1), " ");
+    level.escape_score_goal = int(var_7[level.players.size - 1]);
+    var_8 = tablelookup(level.escape_table, var_0, var_6, var_2);
     level.current_score_earned = 0;
     setomnvar("zom_escape_gate_score", level.escape_score_goal);
     if(level.escape_score_goal == 0) {
@@ -276,40 +276,40 @@ escape_game_logic() {
 
     update_players_escape_hud();
     if(!isDefined(level.all_interaction_structs)) {
-      wait(var_04);
+      wait(var_4);
     }
 
-    var_09 = getent(var_08, "script_noteworthy");
-    var_0A = make_waypoint_to_door(var_09);
+    var_9 = getent(var_8, "script_noteworthy");
+    var_0A = make_waypoint_to_door(var_9);
     scripts\engine\utility::flag_wait("score goal reached");
-    var_05 = var_08;
+    var_5 = var_8;
     var_0A destroy();
-    open_current_door(var_09);
-    level notify("next_area_opened", var_08);
-    var_06++;
+    open_current_door(var_9);
+    level notify("next_area_opened", var_8);
+    var_6++;
   }
 
   enable_escape_exit_interaction();
 }
 
 enable_escape_exit_interaction() {
-  var_00 = [[level.get_escape_exit_interactions]]();
-  var_01 = scripts\engine\utility::random(var_00);
-  make_waypoint_on_escape_exit(var_01);
-  var_02 = spawn("script_origin", var_01.origin);
-  var_02 makeusable();
-  var_02 sethintstring(&"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
-  var_02 thread wait_for_escape_exit(var_01);
+  var_0 = [[level.get_escape_exit_interactions]]();
+  var_1 = scripts\engine\utility::random(var_0);
+  make_waypoint_on_escape_exit(var_1);
+  var_2 = spawn("script_origin", var_1.origin);
+  var_2 makeusable();
+  var_2 sethintstring(&"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
+  var_2 thread wait_for_escape_exit(var_1);
 }
 
-wait_for_escape_exit(param_00) {
+wait_for_escape_exit(var_0) {
   for(;;) {
-    self waittill("trigger", var_01);
-    if(isDefined(var_01.successfully_escaped)) {
+    self waittill("trigger", var_1);
+    if(isDefined(var_1.successfully_escaped)) {
       continue;
     }
 
-    player_escape(param_00, var_01);
+    player_escape(var_0, var_1);
   }
 }
 
@@ -318,99 +318,99 @@ escape_game_init() {
 }
 
 update_players_escape_hud() {
-  var_00 = level.current_score_earned / level.escape_score_goal;
-  setomnvar("zom_escape_gate_percent", var_00);
+  var_0 = level.current_score_earned / level.escape_score_goal;
+  setomnvar("zom_escape_gate_percent", var_0);
   setomnvar("zom_escape_gate_score", level.escape_score_goal);
 }
 
-get_door_connecting_areas(param_00, param_01) {
-  var_02 = -25536;
-  var_03 = [];
-  var_04 = [];
-  var_05 = [];
-  foreach(var_07 in level.all_interaction_structs) {
-    if(isDefined(var_07.script_area) && isDefined(var_07.script_noteworthy) && var_07.script_noteworthy != "fast_travel") {
-      if(var_07.script_area == param_00) {
-        var_03[var_03.size] = var_07;
+get_door_connecting_areas(var_0, var_1) {
+  var_2 = -25536;
+  var_3 = [];
+  var_4 = [];
+  var_5 = [];
+  foreach(var_7 in level.all_interaction_structs) {
+    if(isDefined(var_7.script_area) && isDefined(var_7.script_noteworthy) && var_7.script_noteworthy != "fast_travel") {
+      if(var_7.script_area == var_0) {
+        var_3[var_3.size] = var_7;
       }
 
-      if(var_07.script_area == param_01) {
-        var_04[var_04.size] = var_07;
+      if(var_7.script_area == var_1) {
+        var_4[var_4.size] = var_7;
       }
     }
   }
 
-  foreach(var_0A in var_03) {
-    foreach(var_0C in var_04) {
-      if(distancesquared(var_0A.origin, var_0C.origin) > var_02) {
+  foreach(var_0A in var_3) {
+    foreach(var_0C in var_4) {
+      if(distancesquared(var_0A.origin, var_0C.origin) > var_2) {
         continue;
       }
 
       if(isDefined(var_0A.script_noteworthy) && isDefined(var_0C.script_noteworthy) && var_0A.script_noteworthy == var_0C.script_noteworthy) {
-        var_05[var_05.size] = var_0C;
+        var_5[var_5.size] = var_0C;
       }
     }
   }
 
-  return scripts\engine\utility::random(var_05);
+  return scripts\engine\utility::random(var_5);
 }
 
-make_waypoint_to_door(param_00) {
-  var_01 = newhudelem();
-  var_01 setshader("waypoint_blitz_goal", 8, 8);
-  var_01 setwaypoint(1, 1);
-  var_02 = scripts\engine\utility::getstructarray(param_00.target, "targetname");
-  foreach(var_04 in var_02) {
-    if(var_04.script_noteworthy == "waypoint_spot") {
-      var_05 = spawn("script_origin", var_04.origin);
+make_waypoint_to_door(var_0) {
+  var_1 = newhudelem();
+  var_1 setshader("waypoint_blitz_goal", 8, 8);
+  var_1 setwaypoint(1, 1);
+  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  foreach(var_4 in var_2) {
+    if(var_4.script_noteworthy == "waypoint_spot") {
+      var_5 = spawn("script_origin", var_4.origin);
       scripts\engine\utility::waitframe();
-      var_01 settargetent(var_05);
-      return var_01;
+      var_1 settargetent(var_5);
+      return var_1;
     }
   }
 }
 
-make_waypoint_on_escape_exit(param_00) {
-  var_01 = (0, 0, 45);
-  var_02 = newhudelem();
-  var_02 setshader("waypoint_blitz_goal", 8, 8);
-  var_02 setwaypoint(1, 1);
-  var_03 = spawn("script_origin", param_00.origin + var_01);
-  var_02 settargetent(var_03);
+make_waypoint_on_escape_exit(var_0) {
+  var_1 = (0, 0, 45);
+  var_2 = newhudelem();
+  var_2 setshader("waypoint_blitz_goal", 8, 8);
+  var_2 setwaypoint(1, 1);
+  var_3 = spawn("script_origin", var_0.origin + var_1);
+  var_2 settargetent(var_3);
 }
 
-open_current_door(param_00) {
-  level notify("objective_complete", param_00);
+open_current_door(var_0) {
+  level notify("objective_complete", var_0);
   if(isDefined(level.current_exit_path)) {
     level.current_exit_path hide();
   }
 
-  param_00 playSound("zmb_clear_barricade");
-  var_01 = getEntArray(param_00.target, "targetname");
-  playFX(level._effect["debris_buy"], param_00.origin);
-  foreach(var_04, var_03 in param_00.panels) {
-    var_03 thread move_up_and_delete(var_04);
+  var_0 playSound("zmb_clear_barricade");
+  var_1 = getEntArray(var_0.target, "targetname");
+  playFX(level._effect["debris_buy"], var_0.origin);
+  foreach(var_4, var_3 in var_0.panels) {
+    var_3 thread move_up_and_delete(var_4);
   }
 
   level.var_76EC = level.var_76EC + 1;
-  foreach(var_06 in level.players) {
-    var_06 setclientomnvar("zombie_wave_number", level.var_76EC);
+  foreach(var_6 in level.players) {
+    var_6 setclientomnvar("zombie_wave_number", level.var_76EC);
   }
 
-  level.current_exit_path = getent(param_00.script_noteworthy + "_exit_path", "script_noteworthy");
+  level.current_exit_path = getent(var_0.script_noteworthy + "_exit_path", "script_noteworthy");
   if(isDefined(level.current_exit_path)) {
     level.current_exit_path show();
     level.current_exit_path notsolid();
   }
 
   wait(1);
-  param_00 connectpaths();
-  param_00 delete();
+  var_0 connectpaths();
+  var_0 delete();
 }
 
-move_up_and_delete(param_00) {
+move_up_and_delete(var_0) {
   self endon("death");
-  wait(param_00 * 0.2);
+  wait(var_0 * 0.2);
   self movez(10, 0.5);
   self rotateto(self.angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), 0.5);
   wait(0.5);
@@ -441,9 +441,9 @@ escape_timer() {
   }
 
   level.escape_timer_time = int(level.escape_timer_time);
-  var_00 = gettime() + level.escape_time * 1000;
-  setomnvar("zm_ui_timer", int(var_00));
-  while(gettime() < var_00) {
+  var_0 = gettime() + level.escape_time * 1000;
+  setomnvar("zm_ui_timer", int(var_0));
+  while(gettime() < var_0) {
     wait(1);
     level.escape_timer_time--;
   }
@@ -465,65 +465,65 @@ handle_nondeterministic_entities() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    if(!isai(var_00)) {
-      var_00 scripts\cp\cp_analytics::on_player_connect();
-      if(isDefined(var_00.connecttime)) {
-        var_00.connect_time = var_00.connecttime;
+    level waittill("connected", var_0);
+    if(!isai(var_0)) {
+      var_0 scripts\cp\cp_analytics::on_player_connect();
+      if(isDefined(var_0.connecttime)) {
+        var_0.connect_time = var_0.connecttime;
       } else {
-        var_00.connect_time = gettime();
+        var_0.connect_time = gettime();
       }
 
-      var_00 thread scripts\cp\cp_outline::outline_monitor_think();
-      var_00 thread scripts\cp\cp_globallogic::player_init_health_regen();
-      var_00 scripts\cp\cp_gamescore::init_player_score();
-      var_00 scripts\cp\cp_persistence::session_stats_init();
-      if(!isDefined(var_00.pap)) {
-        var_00.pap = [];
+      var_0 thread scripts\cp\cp_outline::outline_monitor_think();
+      var_0 thread scripts\cp\cp_globallogic::player_init_health_regen();
+      var_0 scripts\cp\cp_gamescore::init_player_score();
+      var_0 scripts\cp\cp_persistence::session_stats_init();
+      if(!isDefined(var_0.pap)) {
+        var_0.pap = [];
       }
 
-      if(!isDefined(var_00.powerupicons)) {
-        var_00.powerupicons = [];
+      if(!isDefined(var_0.powerupicons)) {
+        var_0.powerupicons = [];
       }
 
-      if(!isDefined(var_00.powers)) {
-        var_00.powers = [];
+      if(!isDefined(var_0.powers)) {
+        var_0.powers = [];
       }
 
-      if(!isDefined(var_00.powers_active)) {
-        var_00.powers_active = [];
+      if(!isDefined(var_0.powers_active)) {
+        var_0.powers_active = [];
       }
 
-      var_00 scripts\cp\zombies\zombies_consumables::init_player_consumables();
-      var_00 thread zombie_player_connect_black_screen();
-      var_00.disabledteleportation = 0;
-      var_00.disabledinteractions = 0;
-      var_00 scripts\cp\utility::allow_player_teleport(0);
-      var_00.power_cooldowns = 0;
-      var_00.tickets_earned = 0;
-      var_00.self_revives_purchased = 0;
-      var_00.ignorme_count = 0;
+      var_0 scripts\cp\zombies\zombies_consumables::init_player_consumables();
+      var_0 thread zombie_player_connect_black_screen();
+      var_0.disabledteleportation = 0;
+      var_0.disabledinteractions = 0;
+      var_0 scripts\cp\utility::allow_player_teleport(0);
+      var_0.power_cooldowns = 0;
+      var_0.tickets_earned = 0;
+      var_0.self_revives_purchased = 0;
+      var_0.ignorme_count = 0;
       if(scripts\engine\utility::flag("introscreen_over")) {
         if(isDefined(level.custom_player_hotjoin_func)) {
-          var_00 thread[[level.custom_player_hotjoin_func]]();
+          var_0 thread[[level.custom_player_hotjoin_func]]();
         } else {
-          var_00 thread player_hotjoin();
+          var_0 thread player_hotjoin();
         }
 
         if(scripts\cp\cp_challenge::current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge")) {
           if(isDefined(level.challenge_hotjoin_func)) {
-            var_00 thread[[level.challenge_hotjoin_func]]();
+            var_0 thread[[level.challenge_hotjoin_func]]();
           }
         }
       }
 
-      var_00 scripts\cp\zombies\zombie_afterlife_arcade::player_init_afterlife(var_00);
-      var_00 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
+      var_0 scripts\cp\zombies\zombie_afterlife_arcade::player_init_afterlife(var_0);
+      var_0 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
       if(isDefined(level.custom_onplayerconnect_func)) {
-        [[level.custom_onplayerconnect_func]](var_00);
+        [[level.custom_onplayerconnect_func]](var_0);
       }
 
-      var_00 thread scripts\cp\zombies\escape_multiplier_combos::score_multiplier_init(var_00);
+      var_0 thread scripts\cp\zombies\escape_multiplier_combos::score_multiplier_init(var_0);
     }
   }
 }
@@ -574,8 +574,8 @@ onspawnplayer() {
 
   scripts\cp\cp_globallogic::player_init_invulnerability();
   scripts\cp\cp_globallogic::player_init_damageshield();
-  var_00 = get_starting_currency(self);
-  thread scripts\cp\cp_persistence::wait_to_set_player_currency(var_00);
+  var_0 = get_starting_currency(self);
+  thread scripts\cp\cp_persistence::wait_to_set_player_currency(var_0);
   set_player_max_currency(999999);
   thread melee_strength_timer();
   thread watchglproxy();
@@ -587,41 +587,41 @@ onspawnplayer() {
   thread scripts\cp\zombies\zombies_weapons::reload_watcher();
 }
 
-get_starting_currency(param_00) {
-  var_01 = param_00.starting_currency_after_revived_from_spectator;
-  if(isDefined(var_01)) {
-    param_00.starting_currency_after_revived_from_spectator = undefined;
-    return var_01;
+get_starting_currency(var_0) {
+  var_1 = var_0.starting_currency_after_revived_from_spectator;
+  if(isDefined(var_1)) {
+    var_0.starting_currency_after_revived_from_spectator = undefined;
+    return var_1;
   }
 
   return scripts\cp\cp_persistence::get_starting_currency();
 }
 
-set_player_max_currency(param_00) {
-  param_00 = int(param_00);
-  self.maxcurrency = param_00;
+set_player_max_currency(var_0) {
+  var_0 = int(var_0);
+  self.maxcurrency = var_0;
 }
 
 replace_grenades_between_waves() {
   level endon("game_ended");
-  foreach(var_01 in level.players) {
-    replace_grenades_on_player(var_01);
+  foreach(var_1 in level.players) {
+    replace_grenades_on_player(var_1);
   }
 }
 
-replace_grenades_on_player(param_00) {
-  var_01 = getarraykeys(param_00.powers);
-  foreach(var_03 in var_01) {
-    if(param_00.powers[var_03].slot == "secondary") {
+replace_grenades_on_player(var_0) {
+  var_1 = getarraykeys(var_0.powers);
+  foreach(var_3 in var_1) {
+    if(var_0.powers[var_3].slot == "secondary") {
       continue;
     }
 
-    if(scripts\cp\cp_laststand::player_in_laststand(param_00)) {
-      param_00 thread wait_for_last_stand();
+    if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
+      var_0 thread wait_for_last_stand();
       continue;
     }
 
-    param_00 thread recharge_power(var_03);
+    var_0 thread recharge_power(var_3);
   }
 }
 
@@ -630,35 +630,35 @@ wait_for_last_stand() {
   level endon("game_ended");
   self waittill("spawned_player");
   wait(1);
-  var_00 = getarraykeys(self.powers);
-  if(var_00.size < 1) {
+  var_0 = getarraykeys(self.powers);
+  if(var_0.size < 1) {
     return;
   }
 
-  foreach(var_02 in var_00) {
-    if(self.powers[var_02].slot == "secondary") {
+  foreach(var_2 in var_0) {
+    if(self.powers[var_2].slot == "secondary") {
       continue;
     }
 
-    thread recharge_power(var_02);
+    thread recharge_power(var_2);
   }
 }
 
-recharge_power(param_00) {
-  var_01 = self.powers[param_00].slot;
-  if(scripts\engine\utility::istrue(self.powers[param_00].var_19)) {
-    while(scripts\engine\utility::istrue(self.powers[param_00].var_19)) {
+recharge_power(var_0) {
+  var_1 = self.powers[var_0].slot;
+  if(scripts\engine\utility::istrue(self.powers[var_0].var_19)) {
+    while(scripts\engine\utility::istrue(self.powers[var_0].var_19)) {
       wait(0.05);
     }
   }
 
-  if(scripts\engine\utility::istrue(self.powers[param_00].updating)) {
-    while(scripts\engine\utility::istrue(self.powers[param_00].updating)) {
+  if(scripts\engine\utility::istrue(self.powers[var_0].updating)) {
+    while(scripts\engine\utility::istrue(self.powers[var_0].updating)) {
       wait(0.05);
     }
   }
 
-  thread scripts\cp\powers\coop_powers::givepower(param_00, var_01, undefined, undefined, undefined, undefined, 1);
+  thread scripts\cp\powers\coop_powers::givepower(var_0, var_1, undefined, undefined, undefined, undefined, 1);
   if(scripts\engine\utility::istrue(level.secondary_power)) {
     scripts\cp\powers\coop_powers::power_modifycooldownrate(10, "secondary");
   }
@@ -672,9 +672,9 @@ revive_players_between_waves_monitor() {
   level endon("game_ended");
   for(;;) {
     level waittill("spawn_wave_done");
-    foreach(var_01 in level.players) {
-      if(scripts\cp\cp_laststand::player_in_laststand(var_01)) {
-        scripts\cp\cp_laststand::instant_revive(var_01);
+    foreach(var_1 in level.players) {
+      if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
+        scripts\cp\cp_laststand::instant_revive(var_1);
       }
     }
 
@@ -682,97 +682,97 @@ revive_players_between_waves_monitor() {
   }
 }
 
-zombie_prespawnfromspectatorfunc(param_00) {
-  param_00.starting_currency_after_revived_from_spectator = param_00 scripts\cp\cp_persistence::get_player_currency();
-  scripts\cp\zombies\zombie_lost_and_found::save_items_to_lost_and_found(param_00);
-  param_00 scripts\cp\zombies\zombies_perk_machines::remove_perks_from_player();
-  revive_from_spectator_weapon_setup(param_00);
-  set_spawn_loc(param_00);
-  take_away_special_ammo(param_00);
-  scripts\cp\zombies\zombie_afterlife_arcade::try_exit_afterlife_arcade(param_00);
+zombie_prespawnfromspectatorfunc(var_0) {
+  var_0.starting_currency_after_revived_from_spectator = var_0 scripts\cp\cp_persistence::get_player_currency();
+  scripts\cp\zombies\zombie_lost_and_found::save_items_to_lost_and_found(var_0);
+  var_0 scripts\cp\zombies\zombies_perk_machines::remove_perks_from_player();
+  revive_from_spectator_weapon_setup(var_0);
+  set_spawn_loc(var_0);
+  take_away_special_ammo(var_0);
+  scripts\cp\zombies\zombie_afterlife_arcade::try_exit_afterlife_arcade(var_0);
 }
 
-revive_from_spectator_weapon_setup(param_00) {
-  param_00 scripts\cp\utility::clear_weapons_status();
-  var_01 = param_00.default_starting_pistol;
-  var_02 = weaponclipsize(var_01);
-  var_03 = weaponmaxammo(var_01);
-  var_04 = [];
-  var_05 = [];
-  var_06 = [];
-  var_04[var_04.size] = var_01;
-  var_05[var_01] = var_02;
-  var_06[var_01] = var_03;
-  param_00 scripts\cp\utility::add_to_weapons_status(var_04, var_05, var_06, var_01);
-  param_00.pre_laststand_weapon = var_01;
-  param_00.pre_laststand_weapon_stock = var_03;
-  param_00.pre_laststand_weapon_ammo_clip = var_02;
-  param_00.lastweapon = var_01;
+revive_from_spectator_weapon_setup(var_0) {
+  var_0 scripts\cp\utility::clear_weapons_status();
+  var_1 = var_0.default_starting_pistol;
+  var_2 = weaponclipsize(var_1);
+  var_3 = weaponmaxammo(var_1);
+  var_4 = [];
+  var_5 = [];
+  var_6 = [];
+  var_4[var_4.size] = var_1;
+  var_5[var_1] = var_2;
+  var_6[var_1] = var_3;
+  var_0 scripts\cp\utility::add_to_weapons_status(var_4, var_5, var_6, var_1);
+  var_0.pre_laststand_weapon = var_1;
+  var_0.pre_laststand_weapon_stock = var_3;
+  var_0.pre_laststand_weapon_ammo_clip = var_2;
+  var_0.lastweapon = var_1;
 }
 
-set_spawn_loc(param_00) {
-  var_01 = zombie_get_player_respawn_loc(param_00);
-  param_00.forcespawnorigin = var_01.origin;
-  param_00.forcespawnangles = var_01.angles;
+set_spawn_loc(var_0) {
+  var_1 = zombie_get_player_respawn_loc(var_0);
+  var_0.forcespawnorigin = var_1.origin;
+  var_0.forcespawnangles = var_1.angles;
 }
 
-zombie_get_player_respawn_loc(param_00) {
+zombie_get_player_respawn_loc(var_0) {
   if(!isDefined(level.active_player_respawn_locs) || level.active_player_respawn_locs.size == 0 || level.players.size == 0) {
     return [[level.getspawnpoint]]();
   }
 
-  var_01 = 0;
-  var_02 = 0;
-  var_03 = 0;
-  var_04 = 0;
-  foreach(var_06 in level.players) {
-    if(var_06 == param_00) {
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
+  foreach(var_6 in level.players) {
+    if(var_6 == var_0) {
       continue;
     }
 
-    if(scripts\cp\cp_laststand::player_in_laststand(var_06)) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_6)) {
       continue;
     }
 
-    var_01 = var_01 + var_06.origin[0];
-    var_02 = var_02 + var_06.origin[1];
-    var_03 = var_03 + var_06.origin[2];
-    var_04++;
+    var_1 = var_1 + var_6.origin[0];
+    var_2 = var_2 + var_6.origin[1];
+    var_3 = var_3 + var_6.origin[2];
+    var_4++;
   }
 
-  var_08 = (var_01 / var_04, var_02 / var_04, var_03 / var_04);
-  var_09 = sortbydistance(level.active_player_respawn_locs, var_08);
-  foreach(var_0B in var_09) {
+  var_8 = (var_1 / var_4, var_2 / var_4, var_3 / var_4);
+  var_9 = sortbydistance(level.active_player_respawn_locs, var_8);
+  foreach(var_0B in var_9) {
     if(canspawn(var_0B.origin) && !positionwouldtelefrag(var_0B.origin)) {
       return var_0B;
     }
   }
 
-  return var_09[0];
+  return var_9[0];
 }
 
-take_away_special_ammo(param_00) {
-  param_00.special_ammo_type = undefined;
+take_away_special_ammo(var_0) {
+  var_0.special_ammo_type = undefined;
 }
 
 default_zombie_prematch_func() {
-  var_00 = 0;
+  var_0 = 0;
   if(!scripts\engine\utility::istrue(level.introscreen_done)) {
-    var_00 = 10;
+    var_0 = 10;
   }
 
   if(scripts\engine\utility::istrue(game["gamestarted"])) {
-    var_00 = 0;
+    var_0 = 0;
   }
 
-  if(var_00 > 0) {
-    var_01 = level wait_for_first_player_connect();
+  if(var_0 > 0) {
+    var_1 = level wait_for_first_player_connect();
     level thread show_introscreen_text();
     if(isDefined(level.intro_dialogue_func)) {
       level thread[[level.intro_dialogue_func]]();
     }
 
-    wait(var_00 - 3);
+    wait(var_0 - 3);
     if(isDefined(level.postintroscreenfunc)) {
       [
         [level.postintroscreenfunc]
@@ -791,10 +791,10 @@ default_zombie_prematch_func() {
     return;
   }
 
-  for(var_02 = 0; var_02 < level.players.size; var_02++) {
-    level.players[var_02] scripts\cp\utility::freezecontrolswrapper(0);
-    level.players[var_02] enableweapons();
-    if(!isDefined(level.players[var_02].pers["team"])) {
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
+    level.players[var_2] scripts\cp\utility::freezecontrolswrapper(0);
+    level.players[var_2] enableweapons();
+    if(!isDefined(level.players[var_2].pers["team"])) {
       continue;
     }
   }
@@ -807,14 +807,14 @@ show_introscreen_text() {
 }
 
 wait_for_first_player_connect() {
-  var_00 = undefined;
+  var_0 = undefined;
   if(level.players.size == 0) {
-    level waittill("connected", var_00);
+    level waittill("connected", var_0);
   } else {
-    var_00 = level.players[0];
+    var_0 = level.players[0];
   }
 
-  return var_00;
+  return var_0;
 }
 
 zombie_player_connect_black_screen() {
@@ -855,26 +855,26 @@ melee_strength_timer() {
   level endon("game_ended");
   self waittill("shock_melee_upgrade activated");
   self.meleestrength = 1;
-  var_00 = 1;
+  var_0 = 1;
   self.meleestrength = 0;
-  var_01 = gettime();
+  var_1 = gettime();
   for(;;) {
-    var_02 = gettime();
-    if(var_02 - var_01 >= level.playermeleestunregentime) {
+    var_2 = gettime();
+    if(var_2 - var_1 >= level.playermeleestunregentime) {
       self.meleestrength = 1;
     } else {
       self.meleestrength = 0;
     }
 
     if(self meleebuttonpressed() && !self getteamsize() && !self usebuttonpressed()) {
-      var_01 = gettime();
-      if(var_00 == 1) {
-        var_00 = 0;
+      var_1 = gettime();
+      if(var_0 == 1) {
+        var_0 = 0;
       }
     } else if(!self meleebuttonpressed()) {
-      var_00 = 1;
+      var_0 = 1;
     } else {
-      var_00 = 0;
+      var_0 = 0;
     }
 
     wait(0.05);
@@ -882,27 +882,27 @@ melee_strength_timer() {
 }
 
 hasgl3weapon() {
-  var_00 = 0;
-  var_01 = self getweaponslist("primary");
-  if(var_01.size > 0) {
-    foreach(var_03 in var_01) {
-      if(isgl3weapon(var_03)) {
-        var_00 = 1;
+  var_0 = 0;
+  var_1 = self getweaponslist("primary");
+  if(var_1.size > 0) {
+    foreach(var_3 in var_1) {
+      if(isgl3weapon(var_3)) {
+        var_0 = 1;
         break;
       }
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-isgl3weapon(param_00) {
-  var_01 = getweaponbasename(param_00);
-  if(!isDefined(var_01)) {
+isgl3weapon(var_0) {
+  var_1 = getweaponbasename(var_0);
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return param_00 == "iw7_glprox_zm";
+  return var_0 == "iw7_glprox_zm";
 }
 
 watchglproxy() {
@@ -910,52 +910,52 @@ watchglproxy() {
   self endon("disconnect");
   self endon("endExpJump");
   level endon("game_ended");
-  var_00 = undefined;
+  var_0 = undefined;
   self notifyonplayercommand("fired", "+attack");
   for(;;) {
     scripts\engine\utility::waittill_any_3("weapon_switch_started", "weapon_change", "weaponchange");
     self notify("stop_regen_on_weapons");
     wait(0.1);
-    var_01 = self getweaponslistall();
-    foreach(var_03 in var_01) {
-      if(isgl3weapon(var_03)) {
-        thread regen_ammo_for_weapon(var_03);
-        var_00 = 1;
+    var_1 = self getweaponslistall();
+    foreach(var_3 in var_1) {
+      if(isgl3weapon(var_3)) {
+        thread regen_ammo_for_weapon(var_3);
+        var_0 = 1;
         continue;
       }
 
-      var_00 = 0;
+      var_0 = 0;
     }
   }
 }
 
-regen_ammo_for_weapon(param_00) {
+regen_ammo_for_weapon(var_0) {
   self endon("stop_regen_on_weapons");
   self endon("disconnect");
   level endon("game_ended");
-  var_01 = 3;
-  var_02 = 4;
+  var_1 = 3;
+  var_2 = 4;
   for(;;) {
-    var_03 = self getweaponammoclip(param_00);
-    while(var_03 <= var_01) {
-      var_03 = self getweaponammoclip(param_00);
-      self setweaponammoclip(param_00, var_03 + 1);
-      wait(var_02);
+    var_3 = self getweaponammoclip(var_0);
+    while(var_3 <= var_1) {
+      var_3 = self getweaponammoclip(var_0);
+      self setweaponammoclip(var_0, var_3 + 1);
+      wait(var_2);
     }
 
-    wait(var_02);
+    wait(var_2);
   }
 }
 
-zombie_laststand_currency_penalth_amount(param_00) {
-  var_01 = param_00 scripts\cp\cp_persistence::get_player_currency();
-  var_01 = var_01 * 0.05;
-  var_01 = int(var_01 / 10) * 10;
-  return var_01;
+zombie_laststand_currency_penalth_amount(var_0) {
+  var_1 = var_0 scripts\cp\cp_persistence::get_player_currency();
+  var_1 = var_1 * 0.05;
+  var_1 = int(var_1 / 10) * 10;
+  return var_1;
 }
 
-zombie_callbackplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  [[level.callbackplayerlaststand]](param_00, param_01, param_02, param_04, param_05, param_07, param_08, param_09);
+zombie_callbackplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  [[level.callbackplayerlaststand]](var_0, var_1, var_2, var_4, var_5, var_7, var_8, var_9);
   scripts\cp\zombies\zombies_clientmatchdata::logplayerdeath();
 }
 
@@ -969,70 +969,70 @@ dev_damage_show_damage_numbers() {
 }
 
 precachelb() {
-  var_00 = " LB_" + getdvar("ui_mapname");
+  var_0 = " LB_" + getdvar("ui_mapname");
   if(scripts\cp\utility::isplayingsolo()) {
-    var_00 = var_00 + "_SOLO";
+    var_0 = var_0 + "_SOLO";
   } else {
-    var_00 = var_00 + "_COOP";
+    var_0 = var_0 + "_COOP";
   }
 
-  precacheleaderboards(var_00);
+  precacheleaderboards(var_0);
 }
 
 getescapespawnpoint() {
   return scripts\cp\cp_globallogic::getassignedspawnpoint(scripts\engine\utility::getstructarray("escape_player_start", "targetname"));
 }
 
-setup_escape_hud(param_00) {
-  var_01 = 40;
-  var_02 = 200;
-  var_03 = 10;
-  var_04 = 15;
-  param_00.score_progress_bar = scripts\cp\utility::createprimaryprogressbar(0, 0, var_02, var_03);
-  param_00.score_progress_bar scripts\cp\utility::setpoint("center", "center", 0, var_01);
-  param_00.current_score = scripts\cp\utility::createfontstring("objective", 1);
-  param_00.current_score scripts\cp\utility::setpoint("center", "center", var_02 / 2 * -1, var_01 + var_04);
-  param_00.score_goal = scripts\cp\utility::createfontstring("objective", 1);
-  param_00.score_goal scripts\cp\utility::setpoint("center", "center", var_02 / 2, var_01 + var_04);
-  set_current_score_value(param_00, 0);
-  set_score_goal_value(param_00, level.escape_score_goal);
+setup_escape_hud(var_0) {
+  var_1 = 40;
+  var_2 = 200;
+  var_3 = 10;
+  var_4 = 15;
+  var_0.score_progress_bar = scripts\cp\utility::createprimaryprogressbar(0, 0, var_2, var_3);
+  var_0.score_progress_bar scripts\cp\utility::setpoint("center", "center", 0, var_1);
+  var_0.current_score = scripts\cp\utility::createfontstring("objective", 1);
+  var_0.current_score scripts\cp\utility::setpoint("center", "center", var_2 / 2 * -1, var_1 + var_4);
+  var_0.score_goal = scripts\cp\utility::createfontstring("objective", 1);
+  var_0.score_goal scripts\cp\utility::setpoint("center", "center", var_2 / 2, var_1 + var_4);
+  set_current_score_value(var_0, 0);
+  set_score_goal_value(var_0, level.escape_score_goal);
 }
 
-set_current_score_value(param_00, param_01) {
-  param_00.current_score setvalue(param_01);
+set_current_score_value(var_0, var_1) {
+  var_0.current_score setvalue(var_1);
 }
 
-set_score_goal_value(param_00, param_01) {
-  param_00.score_goal setvalue(param_01);
+set_score_goal_value(var_0, var_1) {
+  var_0.score_goal setvalue(var_1);
 }
 
-set_score_progress_bar_scale(param_00, param_01) {
-  param_00.score_progress_bar scripts\cp\utility::updatebarscale(param_01);
+set_score_progress_bar_scale(var_0, var_1) {
+  var_0.score_progress_bar scripts\cp\utility::updatebarscale(var_1);
 }
 
-update_current_score(param_00, param_01) {
+update_current_score(var_0, var_1) {
   if(level.escape_score_goal == 0) {
-    var_02 = 0;
+    var_2 = 0;
   } else {
-    var_02 = var_02 / level.escape_score_goal;
+    var_2 = var_2 / level.escape_score_goal;
   }
 
-  setomnvar("zom_escape_gate_percent", var_02);
+  setomnvar("zom_escape_gate_percent", var_2);
 }
 
-escape_update_money_performance(param_00, param_01) {
-  param_00 thread update_current_money_earned(param_00, param_01);
+escape_update_money_performance(var_0, var_1) {
+  var_0 thread update_current_money_earned(var_0, var_1);
 }
 
-update_current_money_earned(param_00, param_01) {
+update_current_money_earned(var_0, var_1) {
   wait(0.1);
-  level.current_score_earned = int(min(level.current_score_earned + param_01 * level.combo_multiplier, level.escape_score_goal));
-  update_current_score(param_00, level.current_score_earned);
+  level.current_score_earned = int(min(level.current_score_earned + var_1 * level.combo_multiplier, level.escape_score_goal));
+  update_current_score(var_0, level.current_score_earned);
   if(level.current_score_earned >= level.escape_score_goal) {
     scripts\engine\utility::flag_set("score goal reached");
   }
 
-  scripts\cp\zombies\zombies_gamescore::update_money_earned_performance(param_00, param_01);
+  scripts\cp\zombies\zombies_gamescore::update_money_earned_performance(var_0, var_1);
 }
 
 wave_num_loop() {
@@ -1050,18 +1050,18 @@ wave_num_timer_loop() {
   }
 }
 
-player_escape(param_00, param_01) {
-  var_02 = "player_after_escape_pos";
-  param_01 iprintlnbold("You successfully escaped from the park!");
-  var_03 = scripts\engine\utility::getstructarray(var_02, "targetname")[0];
-  param_01 setorigin(var_03.origin);
-  param_01.successfully_escaped = 1;
-  test_win_condition(param_01);
+player_escape(var_0, var_1) {
+  var_2 = "player_after_escape_pos";
+  var_1 iprintlnbold("You successfully escaped from the park!");
+  var_3 = scripts\engine\utility::getstructarray(var_2, "targetname")[0];
+  var_1 setorigin(var_3.origin);
+  var_1.successfully_escaped = 1;
+  test_win_condition(var_1);
 }
 
-test_win_condition(param_00) {
-  foreach(param_00 in level.players) {
-    if(!scripts\engine\utility::istrue(param_00.successfully_escaped)) {
+test_win_condition(var_0) {
+  foreach(var_0 in level.players) {
+    if(!scripts\engine\utility::istrue(var_0.successfully_escaped)) {
       return;
     }
   }

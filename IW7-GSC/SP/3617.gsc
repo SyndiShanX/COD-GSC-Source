@@ -30,56 +30,56 @@ func_9527() {
   level.var_2006.var_522B = [];
 }
 
-func_2013(param_00) {
-  var_01 = self;
-  var_02 = scripts\engine\utility::spawn_tag_origin();
-  var_02.origin = param_00.origin;
-  var_02.objective_position = param_00;
-  var_02 linkto(var_02.objective_position);
-  level.var_2006.var_522B[level.var_2006.var_522B.size] = var_02;
-  var_03 = var_02.objective_position func_201A();
-  if(!isDefined(var_02.objective_position)) {
-    var_02 thread func_DFC5();
+func_2013(var_0) {
+  var_1 = self;
+  var_2 = scripts\engine\utility::spawn_tag_origin();
+  var_2.origin = var_0.origin;
+  var_2.objective_position = var_0;
+  var_2 linkto(var_2.objective_position);
+  level.var_2006.var_522B[level.var_2006.var_522B.size] = var_2;
+  var_3 = var_2.objective_position func_201A();
+  if(!isDefined(var_2.objective_position)) {
+    var_2 thread func_DFC5();
     return;
   }
 
-  var_02 func_E057();
-  var_02.var_85D2 = var_01 func_1294();
-  var_02.var_5F36 = var_01 func_1293();
-  var_02.var_112DF = var_03;
-  if(isDefined(var_01) && isDefined(var_01.var_202A) && var_01.var_202A == 1) {
-    var_02.var_5F37 = 1;
+  var_2 func_E057();
+  var_2.var_85D2 = var_1 func_1294();
+  var_2.var_5F36 = var_1 func_1293();
+  var_2.var_112DF = var_3;
+  if(isDefined(var_1) && isDefined(var_1.var_202A) && var_1.var_202A == 1) {
+    var_2.var_5F37 = 1;
   } else {
-    var_02.var_5F37 = 0;
+    var_2.var_5F37 = 0;
   }
 
-  if(isDefined(var_01) && isDefined(level.player) && var_01 == level.player) {
-    var_02.var_D43A = 1;
+  if(isDefined(var_1) && isDefined(level.player) && var_1 == level.player) {
+    var_2.var_D43A = 1;
   } else {
-    var_02.var_D43A = 0;
+    var_2.var_D43A = 0;
   }
 
-  var_02 thread func_200F();
+  var_2 thread func_200F();
 }
 
 func_201A() {
   self endon("entitydeleted");
   self endon("death");
-  self waittill("missile_stuck", var_00, var_01, var_02);
-  return var_02;
+  self waittill("missile_stuck", var_0, var_1, var_2);
+  return var_2;
 }
 
-func_FF4F(param_00, param_01) {
-  if(param_00 scripts\sp\utility::isactorwallrunning()) {
+func_FF4F(var_0, var_1) {
+  if(var_0 scripts\sp\utility::isactorwallrunning()) {
     return 0;
   }
 
-  if(func_3CB0(param_00, param_01)) {
-    if(isDefined(param_00.var_1C78)) {
-      return param_00.var_1C78;
+  if(func_3CB0(var_0, var_1)) {
+    if(isDefined(var_0.var_1C78)) {
+      return var_0.var_1C78;
     }
 
-    if(param_00 _meth_81A6()) {
+    if(var_0 _meth_81A6()) {
       return 0;
     }
 
@@ -90,12 +90,12 @@ func_FF4F(param_00, param_01) {
 }
 
 func_200B() {
-  var_00 = scripts\engine\utility::spawn_tag_origin();
-  var_00.origin = self.origin;
-  level.var_2006.var_522B[level.var_2006.var_522B.size] = var_00;
-  var_00.var_85D2 = 156;
-  var_00.var_5F36 = 7;
-  var_00 thread func_200F();
+  var_0 = scripts\engine\utility::spawn_tag_origin();
+  var_0.origin = self.origin;
+  level.var_2006.var_522B[level.var_2006.var_522B.size] = var_0;
+  var_0.var_85D2 = 156;
+  var_0.var_5F36 = 7;
+  var_0 thread func_200F();
 }
 
 func_2017() {
@@ -116,55 +116,55 @@ func_200F() {
   thread func_2017();
   if(!self.var_5F37) {
     if(level.var_2006.var_522B.size > 1) {
-      var_00 = "antigrav_detonate_cheap";
+      var_0 = "antigrav_detonate_cheap";
     } else {
-      var_00 = "antigrav_detonate";
+      var_0 = "antigrav_detonate";
     }
   } else if(level.var_2006.var_522B.size > 1) {
-    var_00 = "antigrav_detonate_up_cheap";
+    var_0 = "antigrav_detonate_up_cheap";
   } else {
-    var_00 = "antigrav_detonate_up";
+    var_0 = "antigrav_detonate_up";
   }
 
   if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-    var_01 = spawnfx(level._effect[var_00], self.origin, (1, 0, 0), (0, 0, 1));
-    triggerfx(var_01);
-    self.var_132AA[self.var_132AA.size] = var_01;
+    var_1 = spawnfx(level._effect[var_0], self.origin, (1, 0, 0), (0, 0, 1));
+    triggerfx(var_1);
+    self.var_132AA[self.var_132AA.size] = var_1;
   } else {
-    playFX(level._effect[var_00], self.origin, (1, 0, 0), (0, 0, 1));
+    playFX(level._effect[var_0], self.origin, (1, 0, 0), (0, 0, 1));
   }
 
   func_36E1();
   func_1066C();
   lib_0F18::func_10E8A("broadcast", "attack", self.origin, 1000);
   level scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", 0.55);
-  var_02 = [];
-  foreach(var_04 in getaiarray()) {
-    if(func_FF4F(var_04, self)) {
-      var_02[var_02.size] = var_04;
+  var_2 = [];
+  foreach(var_4 in getaiarray()) {
+    if(func_FF4F(var_4, self)) {
+      var_2[var_2.size] = var_4;
     }
   }
 
   thread scripts\engine\utility::play_loop_sound_on_entity("gravity_field_lp");
   self.var_CB13 = func_4933();
-  var_06 = 0;
-  var_07 = 0;
-  foreach(var_09 in self.var_378E) {
-    if(var_09.var_5F15 == 1) {
+  var_6 = 0;
+  var_7 = 0;
+  foreach(var_9 in self.var_378E) {
+    if(var_9.var_5F15 == 1) {
       continue;
     }
 
-    if(self.origin[2] - var_09.origin[2] > var_06) {
-      var_06 = self.origin[2] - var_09.origin[2];
+    if(self.origin[2] - var_9.origin[2] > var_6) {
+      var_6 = self.origin[2] - var_9.origin[2];
     }
 
-    if(var_09.origin[2] - self.origin[2] > var_07) {
-      var_07 = var_09.origin[2] - self.origin[2];
+    if(var_9.origin[2] - self.origin[2] > var_7) {
+      var_7 = var_9.origin[2] - self.origin[2];
     }
   }
 
-  var_0B = self.origin[2] - var_06 - 24;
-  var_0C = self.origin[2] + var_07 + 72;
+  var_0B = self.origin[2] - var_6 - 24;
+  var_0C = self.origin[2] + var_7 + 72;
   var_0D = var_0C + var_0B * 0.5;
   if(var_0D < self.origin[2]) {
     var_0E = self.origin;
@@ -175,18 +175,18 @@ func_200F() {
   }
 
   func_4926(var_0E, var_0F);
-  scripts\engine\utility::array_thread(var_02, ::func_197D, self);
+  scripts\engine\utility::array_thread(var_2, ::func_197D, self);
   func_CF45();
   thread func_FB3E();
   level scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", self.var_5F36);
   thread func_DFC5();
 }
 
-func_4926(param_00, param_01) {
-  var_02 = ["axis", "allies", "team3", "neutral", "bad_guys"];
+func_4926(var_0, var_1) {
+  var_2 = ["axis", "allies", "team3", "neutral", "bad_guys"];
   if(!isDefined(level.var_2006.var_5602) || level.var_2006.var_5602.size == 0) {
-    self.var_C2CA = _func_315(param_00, (self.var_85D2, self.var_85D2, param_01), (0, 0, 0));
-    createnavrepulsor("antigrav" + self getentitynumber(), -1, param_00, self.var_85D2, 1);
+    self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0));
+    createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 1);
     return;
   }
 
@@ -196,20 +196,20 @@ func_4926(param_00, param_01) {
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "allies") && scripts\engine\utility::array_contains(level.var_2006.var_5602, "axis")) {
-      self.var_C2CA = _func_315(param_00, (self.var_85D2, self.var_85D2, param_01), (0, 0, 0), "team3", "neutral", "bad_guys");
-      createnavrepulsor("antigrav" + self getentitynumber(), -1, param_00, self.var_85D2, 0, "team3", "neutral", "bad_guys");
+      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "team3", "neutral", "bad_guys");
+      createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "allies")) {
-      self.var_C2CA = _func_315(param_00, (self.var_85D2, self.var_85D2, param_01), (0, 0, 0), "axis", "team3", "neutral", "bad_guys");
-      createnavrepulsor("antigrav" + self getentitynumber(), -1, param_00, self.var_85D2, 0, "team3", "neutral", "bad_guys");
+      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "axis", "team3", "neutral", "bad_guys");
+      createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "axis")) {
-      self.var_C2CA = _func_315(param_00, (self.var_85D2, self.var_85D2, param_01), (0, 0, 0), "allies", "team3", "neutral", "bad_guys");
-      createnavrepulsor("antigrav" + self getentitynumber(), -1, param_00, self.var_85D2, 0, "team3", "neutral", "bad_guys");
+      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "allies", "team3", "neutral", "bad_guys");
+      createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }
 
@@ -256,15 +256,15 @@ func_DFC5() {
   }
 
   if(isDefined(self.var_132AA)) {
-    foreach(var_01 in self.var_132AA) {
-      var_01 delete();
+    foreach(var_1 in self.var_132AA) {
+      var_1 delete();
     }
   }
 
   if(isDefined(self.var_378D)) {
-    var_03 = self.var_378D;
-    foreach(var_05 in var_03) {
-      func_DFC4(var_05);
+    var_3 = self.var_378D;
+    foreach(var_5 in var_3) {
+      func_DFC4(var_5);
     }
   }
 
@@ -280,24 +280,24 @@ func_E057() {
   }
 }
 
-func_DFC4(param_00) {
-  if(isDefined(param_00.var_132AA)) {
-    foreach(var_02 in param_00.var_132AA) {
-      var_02 delete();
+func_DFC4(var_0) {
+  if(isDefined(var_0.var_132AA)) {
+    foreach(var_2 in var_0.var_132AA) {
+      var_2 delete();
     }
   }
 
-  killfxontag(level._effect["antigrav_caltrop_trail"], param_00, "tag_origin");
-  self.var_378D = scripts\engine\utility::array_remove(self.var_378D, param_00);
-  param_00 delete();
+  killfxontag(level._effect["antigrav_caltrop_trail"], var_0, "tag_origin");
+  self.var_378D = scripts\engine\utility::array_remove(self.var_378D, var_0);
+  var_0 delete();
 }
 
 func_DFBA() {
   level notify("removing_all_antigravs_instantly");
   level endon("removing_all_antigravs_instantly");
   scripts\engine\utility::flag_set("antigrav_force_delete");
-  foreach(var_01 in level.var_2006.var_522B) {
-    var_01 thread func_E057();
+  foreach(var_1 in level.var_2006.var_522B) {
+    var_1 thread func_E057();
   }
 
   for(;;) {
@@ -312,7 +312,7 @@ func_DFBA() {
   scripts\engine\utility::flag_clear("antigrav_force_delete");
 }
 
-func_197D(param_00) {
+func_197D(var_0) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
@@ -331,29 +331,29 @@ func_197D(param_00) {
   }
 
   if(!isDefined(self.var_2023)) {
-    func_1978(param_00);
+    func_1978(var_0);
     scripts\asm\asm::asm_setstate("antigrav_rise");
     return;
   }
 
   if(self.var_2023 == "rise" || self.var_2023 == "float_idle") {
-    self.var_201D = gettime() + param_00.var_5F36 + randomfloat(0.25) * 1000;
+    self.var_201D = gettime() + var_0.var_5F36 + randomfloat(0.25) * 1000;
     return;
   }
 
   if(self.var_2023 == "fall") {
-    self.var_201D = gettime() + param_00.var_5F36 + randomfloat(0.25) * 1000;
+    self.var_201D = gettime() + var_0.var_5F36 + randomfloat(0.25) * 1000;
     self.var_2020 = 1;
     return;
   }
 
-  func_1978(param_00);
+  func_1978(var_0);
   self.var_2020 = 1;
 }
 
-func_1978(param_00) {
+func_1978(var_0) {
   self.var_2022 = gettime();
-  self.var_201D = self.var_2022 + param_00.var_5F36 + randomfloat(0.25) * 1000;
+  self.var_201D = self.var_2022 + var_0.var_5F36 + randomfloat(0.25) * 1000;
 }
 
 func_CF45() {
@@ -377,38 +377,38 @@ func_365A() {
   for(;;) {
     waittillframeend;
     level.player.var_D363 = scripts\engine\utility::array_removeundefined(level.player.var_D363);
-    var_00 = getaiunittypearray("all", "C12");
-    foreach(var_02 in var_00) {
-      if(!isalive(var_02)) {
+    var_0 = getaiunittypearray("all", "C12");
+    foreach(var_2 in var_0) {
+      if(!isalive(var_2)) {
         continue;
       }
 
-      if(!isDefined(var_02.var_93B5)) {
-        var_02.var_93B5 = 0;
+      if(!isDefined(var_2.var_93B5)) {
+        var_2.var_93B5 = 0;
       }
 
-      var_03 = 0;
-      foreach(var_05 in level.player.var_D363) {
-        if(func_3CB0(var_02, var_05)) {
-          var_03 = 1;
+      var_3 = 0;
+      foreach(var_5 in level.player.var_D363) {
+        if(func_3CB0(var_2, var_5)) {
+          var_3 = 1;
           break;
         }
       }
 
-      if(var_03) {
-        if(!var_02.var_93B5) {
-          var_02.var_2015 = var_02.moveplaybackrate;
-          var_02.moveplaybackrate = 0.2;
-          var_02.var_93B5 = 1;
+      if(var_3) {
+        if(!var_2.var_93B5) {
+          var_2.var_2015 = var_2.moveplaybackrate;
+          var_2.moveplaybackrate = 0.2;
+          var_2.var_93B5 = 1;
         }
 
         continue;
       }
 
-      if(var_02.var_93B5) {
-        var_02.moveplaybackrate = var_02.var_2015;
-        var_02.var_2015 = undefined;
-        var_02.var_93B5 = 0;
+      if(var_2.var_93B5) {
+        var_2.moveplaybackrate = var_2.var_2015;
+        var_2.var_2015 = undefined;
+        var_2.var_93B5 = 0;
       }
     }
 
@@ -431,25 +431,25 @@ func_D0EB() {
       self waittill("new_antigrav_gren_active");
     }
 
-    var_00 = 0;
-    var_01 = 0;
+    var_0 = 0;
+    var_1 = 0;
     self.var_4B16 = undefined;
     if(!level.player scripts\sp\utility::func_65DF("disable_antigrav_float") || !level.player scripts\sp\utility::func_65DB("disable_antigrav_float")) {
-      foreach(var_03 in self.var_D363) {
-        if(func_3CB0(self, var_03)) {
-          var_00 = 1;
-          self.var_4B16 = var_03;
-          if(var_03.new == 1) {
-            var_01 = 1;
+      foreach(var_3 in self.var_D363) {
+        if(func_3CB0(self, var_3)) {
+          var_0 = 1;
+          self.var_4B16 = var_3;
+          if(var_3.new == 1) {
+            var_1 = 1;
           }
         }
       }
     }
 
-    if(!self.var_93B5 && var_00) {
+    if(!self.var_93B5 && var_0) {
       thread func_6228();
       self.var_93B5 = 1;
-    } else if(self.var_93B5 && !var_00) {
+    } else if(self.var_93B5 && !var_0) {
       thread func_5567();
       self.var_93B5 = 0;
     }
@@ -557,13 +557,13 @@ func_CF64() {
       level.player playgestureviewmodel("ges_antigrav_idle");
     }
 
-    var_00 = level.player.origin[2] - self.var_4B16.origin[2];
-    var_01 = clamp(100 - var_00 / 100, 0, 1);
-    var_02 = 50 * var_01;
-    var_03 = self getvelocity();
-    var_04 = (0, 0, 1);
-    var_05 = var_03 + var_04 * var_02;
-    self setvelocity(var_05);
+    var_0 = level.player.origin[2] - self.var_4B16.origin[2];
+    var_1 = clamp(100 - var_0 / 100, 0, 1);
+    var_2 = 50 * var_1;
+    var_3 = self getvelocity();
+    var_4 = (0, 0, 1);
+    var_5 = var_3 + var_4 * var_2;
+    self setvelocity(var_5);
     wait(0.05);
   }
 
@@ -582,8 +582,8 @@ func_CF65() {
   self endon("antigrav_reaction_think_timeout");
   self endon("death");
   for(;;) {
-    level.player waittill("gesture_stopped", var_00);
-    if(var_00 == "ges_antigrav_reaction") {
+    level.player waittill("gesture_stopped", var_0);
+    if(var_0 == "ges_antigrav_reaction") {
       break;
     }
   }
@@ -606,10 +606,10 @@ func_CF67() {
   level.player endon("death");
   level.player endon("disable_player_antigrav_gren");
   for(;;) {
-    level waittill("ai_killed", var_00, var_01);
+    level waittill("ai_killed", var_0, var_1);
     if(isDefined(level.player.var_4B16) && isDefined(level.player.var_4B16.var_D43A) && level.player.var_4B16.var_D43A == 1) {
-      if(isDefined(var_00) && isDefined(var_00.team) && var_00.team == "axis") {
-        if(isDefined(var_01) && var_01 == level.player) {
+      if(isDefined(var_0) && isDefined(var_0.team) && var_0.team == "axis") {
+        if(isDefined(var_1) && var_1 == level.player) {
           break;
         }
       }
@@ -620,69 +620,69 @@ func_CF67() {
 }
 
 func_36E1() {
-  var_00 = self.origin;
+  var_0 = self.origin;
   self.var_378E = [];
-  for(var_01 = 0; var_01 < 12; var_01++) {
-    var_02 = 30 * var_01;
-    var_03 = self.var_85D2;
-    var_04 = func_378C(var_00, var_02, var_03);
-    if(isDefined(var_04)) {
-      var_05 = spawnStruct();
-      var_05.origin = var_04;
-      var_05.var_5F15 = 0;
-      if(var_04[2] + 256 < var_00[2]) {
-        var_05.var_5F15 = 1;
+  for(var_1 = 0; var_1 < 12; var_1++) {
+    var_2 = 30 * var_1;
+    var_3 = self.var_85D2;
+    var_4 = func_378C(var_0, var_2, var_3);
+    if(isDefined(var_4)) {
+      var_5 = spawnStruct();
+      var_5.origin = var_4;
+      var_5.var_5F15 = 0;
+      if(var_4[2] + 256 < var_0[2]) {
+        var_5.var_5F15 = 1;
       }
 
-      self.var_378E[self.var_378E.size] = var_05;
+      self.var_378E[self.var_378E.size] = var_5;
     }
   }
 
   return self.var_378E;
 }
 
-func_1066C(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_1066C(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var_01 = self.origin;
-  var_02 = [];
+  var_1 = self.origin;
+  var_2 = [];
   self.var_378D = [];
-  for(var_03 = 0; var_03 < self.var_378E.size; var_03++) {
-    var_04 = 0;
-    var_05 = 0;
-    if(var_03 > 0) {
-      var_05 = var_03 - 1;
+  for(var_3 = 0; var_3 < self.var_378E.size; var_3++) {
+    var_4 = 0;
+    var_5 = 0;
+    if(var_3 > 0) {
+      var_5 = var_3 - 1;
     } else {
-      var_05 = self.var_378E.size - 1;
+      var_5 = self.var_378E.size - 1;
     }
 
-    if(var_03 < self.var_378E.size - 1) {
-      var_04 = var_03 + 1;
+    if(var_3 < self.var_378E.size - 1) {
+      var_4 = var_3 + 1;
     } else {
-      var_04 = 0;
+      var_4 = 0;
     }
 
-    var_06 = self.var_378E[var_04].origin;
-    var_07 = self.var_378E[var_05].origin;
-    var_08 = scripts\engine\utility::flatten_vector(vectornormalize(var_07 - var_06));
-    var_09 = rotatevector(var_08, (0, -90, 0));
-    if(length(var_09) == 0) {
-      var_09 = vectornormalize(var_01 - self.var_378E[var_03].origin);
-      if(length(var_09) == 0) {
-        var_09 = (0, 0, 1);
+    var_6 = self.var_378E[var_4].origin;
+    var_7 = self.var_378E[var_5].origin;
+    var_8 = scripts\engine\utility::flatten_vector(vectornormalize(var_7 - var_6));
+    var_9 = rotatevector(var_8, (0, -90, 0));
+    if(length(var_9) == 0) {
+      var_9 = vectornormalize(var_1 - self.var_378E[var_3].origin);
+      if(length(var_9) == 0) {
+        var_9 = (0, 0, 1);
       }
     }
 
-    if(param_00) {
-      self.var_378E[var_03].var_5F15 = 1;
+    if(var_0) {
+      self.var_378E[var_3].var_5F15 = 1;
     }
 
-    self.var_378D[self.var_378D.size] = func_1066B(var_01, self.var_378E[var_03].origin, var_09, self.var_378E[var_03].var_5F15);
+    self.var_378D[self.var_378D.size] = func_1066B(var_1, self.var_378E[var_3].origin, var_9, self.var_378E[var_3].var_5F15);
   }
 
-  if(!param_00) {
+  if(!var_0) {
     if(!self.var_5F37) {
       if(level.var_2006.var_522B.size > 1) {
         var_0A = "antigrav_area_small_cheap";
@@ -696,23 +696,23 @@ func_1066C(param_00) {
     }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-      var_0B = spawnfx(level._effect[var_0A], var_01, (1, 0, 0), (0, 0, 1));
+      var_0B = spawnfx(level._effect[var_0A], var_1, (1, 0, 0), (0, 0, 1));
       func_C0A7(0.55, ::triggerfx, var_0B);
       self.var_132AA[self.var_132AA.size] = var_0B;
     } else {
-      func_C0A7(0.55, ::playfx, level._effect[var_0A], var_01, (1, 0, 0), (0, 0, 1));
+      func_C0A7(0.55, ::playfx, level._effect[var_0A], var_1, (1, 0, 0), (0, 0, 1));
     }
 
     var_0C = self.var_85D2 * 0.4;
     var_0D = 0;
-    for(var_03 = 0; var_03 < self.var_378E.size; var_03++) {
-      if(self.var_378E[var_03].var_5F15) {
+    for(var_3 = 0; var_3 < self.var_378E.size; var_3++) {
+      if(self.var_378E[var_3].var_5F15) {
         continue;
       }
 
-      var_0E = distance(self.var_378E[var_03].origin, var_01);
-      var_0F = vectornormalize(self.var_378E[var_03].origin - var_01);
-      if(self.var_378E[var_03].origin[2] < var_01[2]) {
+      var_0E = distance(self.var_378E[var_3].origin, var_1);
+      var_0F = vectornormalize(self.var_378E[var_3].origin - var_1);
+      if(self.var_378E[var_3].origin[2] < var_1[2]) {
         var_0F = scripts\engine\utility::flatten_vector(var_0F);
       }
 
@@ -723,10 +723,10 @@ func_1066C(param_00) {
       while(var_11 < var_0E) {
         if(var_13 == 0 && !var_0D) {
           var_14 = 0;
-          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
         } else if(var_13 == 1) {
           var_14 = 0;
-          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
         }
 
         var_13++;
@@ -753,150 +753,150 @@ func_1066C(param_00) {
   }
 }
 
-func_378A(param_00, param_01, param_02) {
-  var_03 = anglesToForward((0, param_01, 0));
-  var_04 = scripts\common\trace::ray_trace_passed(param_00 + (0, 0, 48), param_00 + (0, 0, 48) + var_03 * param_02, undefined, scripts\common\trace::create_world_contents());
-  return var_04;
+func_378A(var_0, var_1, var_2) {
+  var_3 = anglesToForward((0, var_1, 0));
+  var_4 = scripts\common\trace::ray_trace_passed(var_0 + (0, 0, 48), var_0 + (0, 0, 48) + var_3 * var_2, undefined, scripts\common\trace::create_world_contents());
+  return var_4;
 }
 
-func_378C(param_00, param_01, param_02) {
-  var_03 = anglesToForward((0, param_01, 0));
-  var_04 = scripts\common\trace::ray_trace(param_00 + (0, 0, 48), param_00 + (0, 0, 48) + var_03 * param_02, undefined, scripts\common\trace::create_world_contents());
-  if(var_04["fraction"] > 0.5) {
-    var_05 = param_02 * var_04["fraction"] - 12;
-    var_06 = param_00 + var_03 * var_05;
-    var_07 = scripts\engine\utility::drop_to_ground(var_06, 50, -1000);
-    return var_07;
+func_378C(var_0, var_1, var_2) {
+  var_3 = anglesToForward((0, var_1, 0));
+  var_4 = scripts\common\trace::ray_trace(var_0 + (0, 0, 48), var_0 + (0, 0, 48) + var_3 * var_2, undefined, scripts\common\trace::create_world_contents());
+  if(var_4["fraction"] > 0.5) {
+    var_5 = var_2 * var_4["fraction"] - 12;
+    var_6 = var_0 + var_3 * var_5;
+    var_7 = scripts\engine\utility::drop_to_ground(var_6, 50, -1000);
+    return var_7;
   }
 
   return undefined;
 }
 
-func_1066B(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_03)) {
-    param_03 = 0;
+func_1066B(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var_04 = vectornormalize(param_01 - param_00);
-  var_05 = param_01;
-  var_06 = param_00 + (0, 0, 2);
-  var_07 = spawn("script_model", var_06);
-  var_07.angles = (0, 0, 0);
-  var_07.var_132AA = [];
-  var_07 setModel("anti_grav_border_wm");
-  var_07 glinton(#animtree);
-  playFXOnTag(level._effect["antigrav_caltrop_trail"], var_07, "tag_origin");
-  var_08 = randomfloatrange(0.3, 0.65);
-  thread func_3789(var_07, var_06, var_05, var_08);
-  if(!param_03) {
+  var_4 = vectornormalize(var_1 - var_0);
+  var_5 = var_1;
+  var_6 = var_0 + (0, 0, 2);
+  var_7 = spawn("script_model", var_6);
+  var_7.angles = (0, 0, 0);
+  var_7.var_132AA = [];
+  var_7 setModel("anti_grav_border_wm");
+  var_7 glinton(#animtree);
+  playFXOnTag(level._effect["antigrav_caltrop_trail"], var_7, "tag_origin");
+  var_8 = randomfloatrange(0.3, 0.65);
+  thread func_3789(var_7, var_6, var_5, var_8);
+  if(!var_3) {
     if(!self.var_5F37) {
       if(level.var_2006.var_522B.size > 1) {
-        var_09 = "antigrav_caltrop_barrier_cheap";
+        var_9 = "antigrav_caltrop_barrier_cheap";
       } else {
-        var_09 = "antigrav_caltrop_barrier";
+        var_9 = "antigrav_caltrop_barrier";
       }
     } else if(level.var_2006.var_522B.size > 1) {
-      var_09 = "antigrav_caltrop_barrier_up_cheap";
+      var_9 = "antigrav_caltrop_barrier_up_cheap";
     } else {
-      var_09 = "antigrav_caltrop_barrier_up";
+      var_9 = "antigrav_caltrop_barrier_up";
     }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-      var_0A = spawnfx(level._effect[var_09], param_01, param_02, (0, 0, 1));
-      func_C0A7(var_08, ::triggerfx, var_0A);
-      var_07.var_132AA[var_07.var_132AA.size] = var_0A;
+      var_0A = spawnfx(level._effect[var_9], var_1, var_2, (0, 0, 1));
+      func_C0A7(var_8, ::triggerfx, var_0A);
+      var_7.var_132AA[var_7.var_132AA.size] = var_0A;
     } else {
-      func_C0A7(var_08, ::playfx, level._effect[var_09], param_01, param_02, (0, 0, 1));
+      func_C0A7(var_8, ::playfx, level._effect[var_9], var_1, var_2, (0, 0, 1));
     }
   } else {
-    level func_5128(var_08, ::func_378B, var_07, param_01, param_02);
+    level func_5128(var_8, ::func_378B, var_7, var_1, var_2);
   }
 
-  return var_07;
+  return var_7;
 }
 
-func_378B(param_00, param_01, param_02) {
-  if(!isDefined(param_00)) {
+func_378B(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-    var_03 = spawnfx(scripts\engine\utility::getfx("antigrav_detonate_dud"), param_01, param_02, (0, 0, 1));
-    triggerfx(var_03);
-    param_00.var_132AA[param_00.var_132AA.size] = var_03;
+    var_3 = spawnfx(scripts\engine\utility::getfx("antigrav_detonate_dud"), var_1, var_2, (0, 0, 1));
+    triggerfx(var_3);
+    var_0.var_132AA[var_0.var_132AA.size] = var_3;
     return;
   }
 
-  playFX(scripts\engine\utility::getfx("antigrav_detonate_dud"), param_01, param_02, (0, 0, 1));
+  playFX(scripts\engine\utility::getfx("antigrav_detonate_dud"), var_1, var_2, (0, 0, 1));
 }
 
-func_3789(param_00, param_01, param_02, param_03) {
-  param_00 endon("death");
-  var_04 = vectornormalize(param_02 - param_01);
-  var_05 = distance(param_02, param_01);
-  var_06 = param_01 + var_04 * var_05;
-  var_07 = randomfloatrange(30, 70);
-  var_08 = param_01 + var_04 * var_05 * 0.15 + (0, 0, var_07 * 0.75);
-  var_09 = param_01 + var_04 * var_05 * 0.5 + (0, 0, var_07);
-  var_0A = param_01 + var_04 * var_05 * 0.85 + (0, 0, var_07 * 0.75);
-  var_0B = param_02;
+func_3789(var_0, var_1, var_2, var_3) {
+  var_0 endon("death");
+  var_4 = vectornormalize(var_2 - var_1);
+  var_5 = distance(var_2, var_1);
+  var_6 = var_1 + var_4 * var_5;
+  var_7 = randomfloatrange(30, 70);
+  var_8 = var_1 + var_4 * var_5 * 0.15 + (0, 0, var_7 * 0.75);
+  var_9 = var_1 + var_4 * var_5 * 0.5 + (0, 0, var_7);
+  var_0A = var_1 + var_4 * var_5 * 0.85 + (0, 0, var_7 * 0.75);
+  var_0B = var_2;
   var_0C = 0;
-  if(param_02[2] < param_01[2] - 50) {
+  if(var_2[2] < var_1[2] - 50) {
     var_0C = 1;
   }
 
-  param_00 ghost_killed_update_func((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), param_03 - 0.05);
-  param_00 moveto(var_08, param_03 / 4, 0, 0);
-  wait(param_03 / 4);
-  param_00 moveto(var_09, param_03 / 4, 0, 0);
-  wait(param_03 / 4);
-  param_00 moveto(var_0A, param_03 / 4, 0, 0);
-  wait(param_03 / 4);
-  param_00 moveto(var_0B, param_03 / 4, 0, 0);
-  wait(param_03 / 4);
+  var_0 ghost_killed_update_func((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), var_3 - 0.05);
+  var_0 moveto(var_8, var_3 / 4, 0, 0);
+  wait(var_3 / 4);
+  var_0 moveto(var_9, var_3 / 4, 0, 0);
+  wait(var_3 / 4);
+  var_0 moveto(var_0A, var_3 / 4, 0, 0);
+  wait(var_3 / 4);
+  var_0 moveto(var_0B, var_3 / 4, 0, 0);
+  wait(var_3 / 4);
   var_0D = 0.2;
   var_0E = randomfloat(5);
-  param_00 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_0D - 0.05);
-  param_00 moveto(var_0B + var_04 * var_0E / 2 + (0, 0, var_0E), var_0D / 2, 0, var_0D / 2);
+  var_0 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_0D - 0.05);
+  var_0 moveto(var_0B + var_4 * var_0E / 2 + (0, 0, var_0E), var_0D / 2, 0, var_0D / 2);
   wait(var_0D / 2);
-  param_00 moveto(var_0B + var_04 * var_0E, var_0D / 2, var_0D / 2, 0);
+  var_0 moveto(var_0B + var_4 * var_0E, var_0D / 2, var_0D / 2, 0);
   wait(var_0D / 2);
-  func_DFC4(param_00);
+  func_DFC4(var_0);
 }
 
-func_3CB0(param_00, param_01) {
-  if(distance2d(param_00.origin, param_01.origin) <= param_01.var_85D2) {
-    if(param_00.origin[2] + 256 > param_01.origin[2] && param_00.origin[2] - param_01.origin[2] <= 180) {
-      var_02 = 48;
-      var_03 = 24;
-      var_04 = scripts\common\trace::ray_trace_passed(param_01.origin + (0, 0, var_02), param_00.origin + (0, 0, var_02), undefined, scripts\common\trace::create_world_contents());
-      if(var_04) {
+func_3CB0(var_0, var_1) {
+  if(distance2d(var_0.origin, var_1.origin) <= var_1.var_85D2) {
+    if(var_0.origin[2] + 256 > var_1.origin[2] && var_0.origin[2] - var_1.origin[2] <= 180) {
+      var_2 = 48;
+      var_3 = 24;
+      var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_2), var_0.origin + (0, 0, var_2), undefined, scripts\common\trace::create_world_contents());
+      if(var_4) {
         return 1;
       }
 
-      var_04 = scripts\common\trace::ray_trace_passed(param_01.origin + (0, 0, var_03), param_00.origin + (0, 0, var_03), undefined, scripts\common\trace::create_world_contents());
-      if(var_04) {
+      var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_3), var_0.origin + (0, 0, var_3), undefined, scripts\common\trace::create_world_contents());
+      if(var_4) {
         return 1;
       }
 
-      var_05 = param_00.origin - param_01.origin;
-      var_05 = (var_05[0], var_05[1], 0);
-      var_06 = param_01.origin + (0, 0, var_02) + var_05;
-      var_04 = scripts\common\trace::ray_trace_passed(param_01.origin + (0, 0, var_02), var_06, undefined, scripts\common\trace::create_world_contents());
-      if(var_04) {
-        var_04 = scripts\common\trace::ray_trace_passed(var_06, param_00.origin + (0, 0, var_02), undefined, scripts\common\trace::create_world_contents());
-        if(var_04) {
+      var_5 = var_0.origin - var_1.origin;
+      var_5 = (var_5[0], var_5[1], 0);
+      var_6 = var_1.origin + (0, 0, var_2) + var_5;
+      var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_2), var_6, undefined, scripts\common\trace::create_world_contents());
+      if(var_4) {
+        var_4 = scripts\common\trace::ray_trace_passed(var_6, var_0.origin + (0, 0, var_2), undefined, scripts\common\trace::create_world_contents());
+        if(var_4) {
           return 1;
         }
       }
 
-      var_05 = param_00.origin - param_01.origin;
-      var_05 = (var_05[0], var_05[1], 0);
-      var_06 = param_01.origin + (0, 0, var_03) + var_05;
-      var_04 = scripts\common\trace::ray_trace_passed(param_01.origin + (0, 0, var_03), var_06, undefined, scripts\common\trace::create_world_contents());
-      if(var_04) {
-        var_04 = scripts\common\trace::ray_trace_passed(var_06, param_00.origin + (0, 0, var_03), undefined, scripts\common\trace::create_world_contents());
-        if(var_04) {
+      var_5 = var_0.origin - var_1.origin;
+      var_5 = (var_5[0], var_5[1], 0);
+      var_6 = var_1.origin + (0, 0, var_3) + var_5;
+      var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_3), var_6, undefined, scripts\common\trace::create_world_contents());
+      if(var_4) {
+        var_4 = scripts\common\trace::ray_trace_passed(var_6, var_0.origin + (0, 0, var_3), undefined, scripts\common\trace::create_world_contents());
+        if(var_4) {
           return 1;
         }
       }
@@ -907,25 +907,25 @@ func_3CB0(param_00, param_01) {
 }
 
 func_4933() {
-  var_00 = physics_volumecreate(self.origin, self.var_85D2, 180);
-  var_00 _meth_8527(0);
-  var_00 physics_volumesetactivator(1);
-  var_00 physics_volumeenable(1);
-  thread func_CB0A(var_00);
-  return var_00;
+  var_0 = physics_volumecreate(self.origin, self.var_85D2, 180);
+  var_0 _meth_8527(0);
+  var_0 physics_volumesetactivator(1);
+  var_0 physics_volumeenable(1);
+  thread func_CB0A(var_0);
+  return var_0;
 }
 
-func_CB0A(param_00) {
-  param_00 endon("destroy_volume");
-  var_01 = -0.15;
-  param_00 _meth_852A(1, var_01);
+func_CB0A(var_0) {
+  var_0 endon("destroy_volume");
+  var_1 = -0.15;
+  var_0 _meth_852A(1, var_1);
   wait(0.2);
-  param_00 _meth_852A(1, 0);
+  var_0 _meth_852A(1, 0);
 }
 
-func_52B3(param_00) {
-  param_00 notify("destroy_volume");
-  param_00 delete();
+func_52B3(var_0) {
+  var_0 notify("destroy_volume");
+  var_0 delete();
 }
 
 func_1293() {
@@ -944,86 +944,86 @@ func_1294() {
   return 148;
 }
 
-func_C0A7(param_00, param_01, param_02, param_03, param_04, param_05) {
-  thread func_C0A8(param_01, param_00, param_02, param_03, param_04, param_05);
+func_C0A7(var_0, var_1, var_2, var_3, var_4, var_5) {
+  thread func_C0A8(var_1, var_0, var_2, var_3, var_4, var_5);
 }
 
-func_C0A8(param_00, param_01, param_02, param_03, param_04, param_05) {
-  scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", param_01);
-  if(isDefined(param_05)) {
-    [[param_00]](param_02, param_03, param_04, param_05);
+func_C0A8(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", var_1);
+  if(isDefined(var_5)) {
+    [[var_0]](var_2, var_3, var_4, var_5);
     return;
   }
 
-  if(isDefined(param_04)) {
-    [[param_00]](param_02, param_03, param_04);
+  if(isDefined(var_4)) {
+    [[var_0]](var_2, var_3, var_4);
     return;
   }
 
-  if(isDefined(param_03)) {
-    [[param_00]](param_02, param_03);
+  if(isDefined(var_3)) {
+    [[var_0]](var_2, var_3);
     return;
   }
 
-  if(isDefined(param_02)) {
-    [[param_00]](param_02);
+  if(isDefined(var_2)) {
+    [[var_0]](var_2);
     return;
   }
 
-  [[param_00]]();
+  [[var_0]]();
 }
 
-func_5128(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  thread scripts\engine\utility::delaythread_proc(param_01, param_00, param_02, param_03, param_04, param_05, param_06, param_07);
+func_5128(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  thread scripts\engine\utility::delaythread_proc(var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-func_5129(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+func_5129(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("death");
   self endon("stop_delay_thread");
-  scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", param_01);
-  if(isDefined(param_07)) {
-    thread[[param_00]](param_02, param_03, param_04, param_05, param_06, param_07);
+  scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", var_1);
+  if(isDefined(var_7)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
     return;
   }
 
-  if(isDefined(param_06)) {
-    thread[[param_00]](param_02, param_03, param_04, param_05, param_06);
+  if(isDefined(var_6)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
     return;
   }
 
-  if(isDefined(param_05)) {
-    thread[[param_00]](param_02, param_03, param_04, param_05);
+  if(isDefined(var_5)) {
+    thread[[var_0]](var_2, var_3, var_4, var_5);
     return;
   }
 
-  if(isDefined(param_04)) {
-    thread[[param_00]](param_02, param_03, param_04);
+  if(isDefined(var_4)) {
+    thread[[var_0]](var_2, var_3, var_4);
     return;
   }
 
-  if(isDefined(param_03)) {
-    thread[[param_00]](param_02, param_03);
+  if(isDefined(var_3)) {
+    thread[[var_0]](var_2, var_3);
     return;
   }
 
-  if(isDefined(param_02)) {
-    thread[[param_00]](param_02);
+  if(isDefined(var_2)) {
+    thread[[var_0]](var_2);
     return;
   }
 
-  thread[[param_00]]();
+  thread[[var_0]]();
 }
 
-func_CE2E(param_00) {
+func_CE2E(var_0) {
   if(scripts\sp\utility::func_9BB2()) {
     return;
   }
 
-  var_01 = spawn("script_origin", self.origin);
-  var_01.origin = self.origin;
-  var_01.angles = self.angles;
-  var_01 linkto(self);
-  var_01 playSound(param_00, "sounddone");
-  var_01 scripts\engine\utility::waittill_any_3("sounddone", "antigrav_force_delete");
-  var_01 delete();
+  var_1 = spawn("script_origin", self.origin);
+  var_1.origin = self.origin;
+  var_1.angles = self.angles;
+  var_1 linkto(self);
+  var_1 playSound(var_0, "sounddone");
+  var_1 scripts\engine\utility::waittill_any_3("sounddone", "antigrav_force_delete");
+  var_1 delete();
 }

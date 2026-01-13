@@ -178,12 +178,12 @@ init() {
   level.scriptperks["ammo_box_mp"] = 1;
   level.scriptperks["blackhat_mp"] = 1;
   level.scriptperks["flare_mp"] = 1;
-  var_00 = scripts\mp\passives::_meth_8239();
-  foreach(var_02 in var_00) {
-    level.scriptperks[var_02] = 1;
-    var_03 = scripts\mp\passives::getpassivemessage(var_02);
-    if(isDefined(var_03)) {
-      level.extraperkmap[var_02] = [var_03];
+  var_0 = scripts\mp\passives::_meth_8239();
+  foreach(var_2 in var_0) {
+    level.scriptperks[var_2] = 1;
+    var_3 = scripts\mp\passives::getpassivemessage(var_2);
+    if(isDefined(var_3)) {
+      level.extraperkmap[var_2] = [var_3];
     }
   }
 
@@ -519,24 +519,24 @@ menurigperkparsetable() {
     level.menurigperks = [];
   }
 
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 0);
-    if(var_01 == "") {
+    var_1 = tablelookupbyrow("mp\menuRigPerks.csv", var_0, 0);
+    if(var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 1);
-    var_03 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 2);
-    var_04 = spawnStruct();
-    var_04.id = var_01;
-    var_04.ref = var_03;
-    var_04.archetype = var_02;
-    if(!isDefined(level.menurigperks[var_03])) {
-      level.menurigperks[var_03] = var_04;
+    var_2 = tablelookupbyrow("mp\menuRigPerks.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp\menuRigPerks.csv", var_0, 2);
+    var_4 = spawnStruct();
+    var_4.id = var_1;
+    var_4.ref = var_3;
+    var_4.archetype = var_2;
+    if(!isDefined(level.menurigperks[var_3])) {
+      level.menurigperks[var_3] = var_4;
     }
 
-    var_00++;
+    var_0++;
   }
 }
 
@@ -545,24 +545,24 @@ menuperkparsetable() {
     level.menuperks = [];
   }
 
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\menuPerks.csv", var_00, 0);
-    if(var_01 == "") {
+    var_1 = tablelookupbyrow("mp\menuPerks.csv", var_0, 0);
+    if(var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\menuPerks.csv", var_00, 1);
-    var_03 = tablelookupbyrow("mp\menuPerks.csv", var_00, 2);
-    var_04 = spawnStruct();
-    var_04.name = var_03;
-    var_04.ref = var_03;
-    var_04.slot = var_02;
-    if(!isDefined(level.menuperks[var_03])) {
-      level.menuperks[var_03] = var_04;
+    var_2 = tablelookupbyrow("mp\menuPerks.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp\menuPerks.csv", var_0, 2);
+    var_4 = spawnStruct();
+    var_4.name = var_3;
+    var_4.ref = var_3;
+    var_4.slot = var_2;
+    if(!isDefined(level.menuperks[var_3])) {
+      level.menuperks[var_3] = var_4;
     }
 
-    var_00++;
+    var_0++;
   }
 }
 
@@ -572,53 +572,53 @@ func_98B2() {
   }
 
   level.var_CA5E = [];
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\perkTable.csv", var_00, 0);
-    if(var_01 == "") {
+    var_1 = tablelookupbyrow("mp\perkTable.csv", var_0, 0);
+    if(var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\perkTable.csv", var_00, 1);
-    var_03 = spawnStruct();
-    var_03.ref = var_02;
-    var_03.id = int(var_01);
-    if(!isDefined(level.perksuseslot[var_02])) {
-      level.perksuseslot[var_02] = var_03;
+    var_2 = tablelookupbyrow("mp\perkTable.csv", var_0, 1);
+    var_3 = spawnStruct();
+    var_3.ref = var_2;
+    var_3.id = int(var_1);
+    if(!isDefined(level.perksuseslot[var_2])) {
+      level.perksuseslot[var_2] = var_3;
     }
 
-    level.var_CA5E[var_03.id] = var_03.ref;
-    var_00++;
+    level.var_CA5E[var_3.id] = var_3.ref;
+    var_0++;
   }
 }
 
 func_7DE8() {
-  var_00 = [];
-  foreach(var_02 in level.menuperks) {
-    if(scripts\mp\utility::_hasperk(var_02.name)) {
+  var_0 = [];
+  foreach(var_2 in level.menuperks) {
+    if(scripts\mp\utility::_hasperk(var_2.name)) {
       continue;
     }
 
-    var_00[var_00.size] = var_02.name;
+    var_0[var_0.size] = var_2.name;
   }
 
-  return var_00;
+  return var_0;
 }
 
-_meth_805C(param_00) {
-  var_01 = level.menuperks[param_00];
-  if(!isDefined(var_01)) {
+_meth_805C(var_0) {
+  var_1 = level.menuperks[var_0];
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  return int(var_01.slot);
+  return int(var_1.slot);
 }
 
-func_13144(param_00) {
+func_13144(var_0) {
   if(!scripts\mp\utility::perksenabled()) {
-    param_00 = "specialty_null";
+    var_0 = "specialty_null";
   } else {
-    switch (param_00) {
+    switch (var_0) {
       case "specialty_deadeye":
       case "specialty_scavenger":
       case "specialty_bulletaccuracy":
@@ -666,18 +666,18 @@ func_13144(param_00) {
         break;
 
       default:
-        param_00 = "specialty_null";
+        var_0 = "specialty_null";
         break;
     }
   }
 
-  return param_00;
+  return var_0;
 }
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
   }
 }
 
@@ -728,43 +728,43 @@ func_98B0() {
   }
 }
 
-giveperks(param_00, param_01) {
-  param_01 = scripts\engine\utility::ter_op(isDefined(param_01), param_01, 1);
-  foreach(var_03 in param_00) {
-    if(param_01) {
-      var_03 = func_13144(var_03);
+giveperks(var_0, var_1) {
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 1);
+  foreach(var_3 in var_0) {
+    if(var_1) {
+      var_3 = func_13144(var_3);
     }
 
-    scripts\mp\utility::giveperk(var_03);
+    scripts\mp\utility::giveperk(var_3);
   }
 }
 
-_setperk(param_00) {
-  if(!isDefined(self.perks[param_00])) {
-    self.perks[param_00] = 1;
+_setperk(var_0) {
+  if(!isDefined(self.perks[var_0])) {
+    self.perks[var_0] = 1;
   } else {
-    self.perks[param_00]++;
+    self.perks[var_0]++;
   }
 
-  if(self.perks[param_00] == 1 && !isDefined(self.perksblocked[param_00])) {
-    func_13D2(param_00);
+  if(self.perks[var_0] == 1 && !isDefined(self.perksblocked[var_0])) {
+    func_13D2(var_0);
   }
 }
 
-func_13D2(param_00) {
-  var_01 = level.perksetfuncs[param_00];
-  if(isDefined(var_01)) {
-    self thread[[var_01]]();
+func_13D2(var_0) {
+  var_1 = level.perksetfuncs[var_0];
+  if(isDefined(var_1)) {
+    self thread[[var_1]]();
   }
 
-  self setperk(param_00, !isDefined(level.scriptperks[param_00]));
+  self setperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
 
-_setextraperks(param_00) {
-  foreach(var_06, var_02 in level.extraperkmap) {
-    if(param_00 == var_06) {
-      foreach(var_04 in var_02) {
-        _setperk(var_04);
+_setextraperks(var_0) {
+  foreach(var_6, var_2 in level.extraperkmap) {
+    if(var_0 == var_6) {
+      foreach(var_4 in var_2) {
+        _setperk(var_4);
       }
 
       break;
@@ -772,11 +772,11 @@ _setextraperks(param_00) {
   }
 }
 
-func_142F(param_00) {
-  foreach(var_06, var_02 in level.extraperkmap) {
-    if(param_00 == var_06) {
-      foreach(var_04 in var_02) {
-        _unsetperk(var_04);
+func_142F(var_0) {
+  foreach(var_6, var_2 in level.extraperkmap) {
+    if(var_0 == var_6) {
+      foreach(var_4 in var_2) {
+        _unsetperk(var_4);
       }
 
       break;
@@ -784,33 +784,33 @@ func_142F(param_00) {
   }
 }
 
-_unsetperk(param_00) {
-  if(!isDefined(self.perks[param_00])) {
+_unsetperk(var_0) {
+  if(!isDefined(self.perks[var_0])) {
     return;
   }
 
-  self.perks[param_00]--;
-  if(self.perks[param_00] == 0) {
-    if(!isDefined(self.perksblocked[param_00])) {
-      func_1431(param_00);
+  self.perks[var_0]--;
+  if(self.perks[var_0] == 0) {
+    if(!isDefined(self.perksblocked[var_0])) {
+      func_1431(var_0);
     }
 
-    self.perks[param_00] = undefined;
+    self.perks[var_0] = undefined;
   }
 }
 
-func_1431(param_00) {
-  if(isDefined(level.perkunsetfuncs[param_00])) {
-    self thread[[level.perkunsetfuncs[param_00]]]();
+func_1431(var_0) {
+  if(isDefined(level.perkunsetfuncs[var_0])) {
+    self thread[[level.perkunsetfuncs[var_0]]]();
   }
 
-  self unsetperk(param_00, !isDefined(level.scriptperks[param_00]));
+  self unsetperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
 
 _clearperks() {
-  foreach(var_02, var_01 in self.perks) {
-    if(isDefined(level.perkunsetfuncs[var_02])) {
-      self[[level.perkunsetfuncs[var_02]]]();
+  foreach(var_2, var_1 in self.perks) {
+    if(isDefined(level.perkunsetfuncs[var_2])) {
+      self[[level.perkunsetfuncs[var_2]]]();
     }
   }
 
@@ -819,15 +819,15 @@ _clearperks() {
   self getplayerlookattarget();
 }
 
-func_E130(param_00) {
-  var_01 = [];
-  foreach(var_03 in param_00) {
-    if(func_13144(var_03) != "specialty_null") {
-      var_01[var_01.size] = var_03;
+func_E130(var_0) {
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    if(func_13144(var_3) != "specialty_null") {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 giveperksafterspawn() {
@@ -852,81 +852,81 @@ giveperksafterspawn() {
   self notify("removed_spawn_perks");
 }
 
-updateactiveperks(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  var_08 = isDefined(param_00) && isplayer(param_00);
-  var_09 = scripts\mp\utility::getweaponrootname(param_05);
-  var_0A = isDefined(var_09) && var_09 == "iw7_axe";
-  var_0B = isDefined(var_09) && var_09 == "iw7_tacburst" && param_01 _meth_8519(param_05);
-  var_0C = var_0A && isDefined(param_00) && isDefined(param_00.classname) && param_00.classname == "grenade";
-  var_0D = isDefined(param_01) && isplayer(param_01) && param_01 != param_02;
-  if(var_0D && var_08 || var_0C || var_0B) {
-    thread scripts\mp\perks\_weaponpassives::func_12F61(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07);
-    if(param_01 scripts\mp\utility::_hasperk("specialty_triggerhappy")) {
-      param_01 thread scripts\mp\perks\_perkfunctions::settriggerhappyinternal();
+updateactiveperks(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = isDefined(var_0) && isplayer(var_0);
+  var_9 = scripts\mp\utility::getweaponrootname(var_5);
+  var_0A = isDefined(var_9) && var_9 == "iw7_axe";
+  var_0B = isDefined(var_9) && var_9 == "iw7_tacburst" && var_1 _meth_8519(var_5);
+  var_0C = var_0A && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "grenade";
+  var_0D = isDefined(var_1) && isplayer(var_1) && var_1 != var_2;
+  if(var_0D && var_8 || var_0C || var_0B) {
+    thread scripts\mp\perks\_weaponpassives::func_12F61(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
+    if(var_1 scripts\mp\utility::_hasperk("specialty_triggerhappy")) {
+      var_1 thread scripts\mp\perks\_perkfunctions::settriggerhappyinternal();
     }
 
-    if(param_01 scripts\mp\utility::_hasperk("specialty_boom")) {
-      param_02 thread scripts\mp\perks\_perkfunctions::setboominternal(param_01);
+    if(var_1 scripts\mp\utility::_hasperk("specialty_boom")) {
+      var_2 thread scripts\mp\perks\_perkfunctions::setboominternal(var_1);
     }
 
-    if(param_01 scripts\mp\utility::_hasperk("specialty_deadeye")) {
-      param_01.var_4DF0++;
+    if(var_1 scripts\mp\utility::_hasperk("specialty_deadeye")) {
+      var_1.var_4DF0++;
     }
 
-    var_0E = param_01.pers["abilityRecharging"];
+    var_0E = var_1.pers["abilityRecharging"];
     if(isDefined(var_0E) && var_0E) {
-      param_01 notify("abilityFastRecharge");
+      var_1 notify("abilityFastRecharge");
     }
 
-    var_0F = param_01.pers["abilityOn"];
+    var_0F = var_1.pers["abilityOn"];
     if(isDefined(var_0F) && var_0F) {
-      param_01 notify("abilityExtraTime");
+      var_1 notify("abilityExtraTime");
     }
   }
 }
 
-func_F7C5(param_00, param_01) {
-  var_02 = [];
-  foreach(var_04 in param_01) {
-    if(!isDefined(level.perksuseslot[var_04])) {
+func_F7C5(var_0, var_1) {
+  var_2 = [];
+  foreach(var_4 in var_1) {
+    if(!isDefined(level.perksuseslot[var_4])) {
       continue;
     }
 
-    var_05 = _meth_805C(var_04);
-    if(!isDefined(var_05)) {
+    var_5 = _meth_805C(var_4);
+    if(!isDefined(var_5)) {
       continue;
     }
 
-    if(!isDefined(var_02[var_05])) {
-      var_02[var_05] = [];
+    if(!isDefined(var_2[var_5])) {
+      var_2[var_5] = [];
     }
 
-    var_02[var_05][var_02[var_05].size] = level.perksuseslot[var_04].id;
+    var_2[var_5][var_2[var_5].size] = level.perksuseslot[var_4].id;
   }
 
-  var_07 = [];
-  for(var_05 = 1; var_05 < 4; var_05++) {
-    if(isDefined(var_02[var_05])) {
-      foreach(var_04 in var_02[var_05]) {
-        var_07[var_07.size] = var_04;
+  var_7 = [];
+  for(var_5 = 1; var_5 < 4; var_5++) {
+    if(isDefined(var_2[var_5])) {
+      foreach(var_4 in var_2[var_5]) {
+        var_7[var_7.size] = var_4;
       }
     }
   }
 
   for(var_0A = 0; var_0A < 6; var_0A++) {
-    var_0B = var_07[var_0A];
+    var_0B = var_7[var_0A];
     if(!isDefined(var_0B)) {
       var_0B = -1;
     }
 
-    self setclientomnvar(param_00 + var_0A, var_0B);
+    self setclientomnvar(var_0 + var_0A, var_0B);
   }
 }
 
-func_9EDF(param_00) {
-  var_01 = self.pers["loadoutPerks"];
-  foreach(var_03 in var_01) {
-    if(var_03 == param_00) {
+func_9EDF(var_0) {
+  var_1 = self.pers["loadoutPerks"];
+  foreach(var_3 in var_1) {
+    if(var_3 == var_0) {
       return 1;
     }
   }
@@ -934,10 +934,10 @@ func_9EDF(param_00) {
   return 0;
 }
 
-getequipmenttableinfo(param_00) {
-  if(!isDefined(param_00) || !isDefined(level.perksuseslot[param_00])) {
+getequipmenttableinfo(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.perksuseslot[var_0])) {
     return 0;
   }
 
-  return level.perksuseslot[param_00].id;
+  return level.perksuseslot[var_0].id;
 }

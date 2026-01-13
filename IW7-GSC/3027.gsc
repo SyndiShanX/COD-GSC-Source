@@ -4,12 +4,12 @@
  * Script: 3027.gsc
 ************************/
 
-main(param_00, param_01, param_02) {
-  var_03 = spawnStruct();
-  var_03.var_B8F9 = "mp";
-  var_03.dvarfuncs = ::dvarfuncs;
-  var_03.init = ::func_963C;
-  lib_0BCE::main(var_03);
+main(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.var_B8F9 = "mp";
+  var_3.dvarfuncs = ::dvarfuncs;
+  var_3.init = ::func_963C;
+  lib_0BCE::main(var_3);
 }
 
 func_963C() {
@@ -19,19 +19,19 @@ func_963C() {
 
 init_location() {}
 
-dvarfuncs(param_00, param_01) {
-  setdvar(param_00, param_01);
+dvarfuncs(var_0, var_1) {
+  setdvar(var_0, var_1);
 }
 
-func_D31A(param_00, param_01, param_02) {
+func_D31A(var_0, var_1, var_2) {
   self getweaponrankxpmultiplier();
-  if(isDefined(param_02) && param_02) {
-    var_03 = "hover";
+  if(isDefined(var_2) && var_2) {
+    var_3 = "hover";
   } else {
-    var_03 = "fly";
+    var_3 = "fly";
   }
 
-  lib_0BCE::func_A2B2(param_00, param_01, var_03);
+  lib_0BCE::func_A2B2(var_0, var_1, var_3);
 }
 
 func_D05B() {

@@ -23,8 +23,8 @@ init_crab_boss_quest() {
   wait(5);
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::set_up_death_ray_cannons();
   hide_lost_n_found_sign();
-  var_00 = scripts\engine\utility::drop_to_ground((6491, 11387, -439), 100, -2000);
-  level.crab_boss = scripts\mp\mp_agent::spawnnewagent("crab_boss", "axis", var_00, (0, 40, 0), "iw7_zombie_laser_mp");
+  var_0 = scripts\engine\utility::drop_to_ground((6491, 11387, -439), 100, -2000);
+  level.crab_boss = scripts\mp\mp_agent::spawnnewagent("crab_boss", "axis", var_0, (0, 40, 0), "iw7_zombie_laser_mp");
   level.crab_boss thread crab_boss_pre_combat_sequence(level.crab_boss);
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
   scripts\engine\utility::flag_init("boss_fight_active");
@@ -32,21 +32,21 @@ init_crab_boss_quest() {
 }
 
 hide_lost_n_found_sign() {
-  var_00 = getent("crab_boss_lnf_sign", "targetname");
-  if(isDefined(var_00)) {
-    var_00 hide();
+  var_0 = getent("crab_boss_lnf_sign", "targetname");
+  if(isDefined(var_0)) {
+    var_0 hide();
   }
 }
 
-crab_boss_pre_combat_sequence(param_00) {
-  param_00 endon("death");
+crab_boss_pre_combat_sequence(var_0) {
+  var_0 endon("death");
   scripts\engine\utility::flag_init("crab_boss_pre_combat_stage_1");
   scripts\engine\utility::flag_init("crab_boss_pre_combat_stage_2");
   scripts\engine\utility::flag_init("crab_boss_combat_ready");
   level thread wait_door_open_to_beach();
   set_tanker_anim("search");
   scripts\engine\utility::flag_wait("crab_boss_pre_combat_stage_1");
-  move_to_taunt_loc(param_00);
+  move_to_taunt_loc(var_0);
   gets_to_combat_pos();
 }
 
@@ -61,26 +61,26 @@ advance_pre_combat_stage() {
   }
 }
 
-set_tanker_anim(param_00) {
-  var_01 = getent("town_tanker", "targetname");
-  var_01 setscriptablepartstate("boat", param_00);
+set_tanker_anim(var_0) {
+  var_1 = getent("town_tanker", "targetname");
+  var_1 setscriptablepartstate("boat", var_0);
 }
 
 wait_door_open_to_beach() {
   for(;;) {
-    level waittill("volume_activated", var_00);
-    if(var_00 == "bridge_beach") {
+    level waittill("volume_activated", var_0);
+    if(var_0 == "bridge_beach") {
       advance_pre_combat_stage();
       break;
     }
   }
 }
 
-move_to_taunt_loc(param_00) {
-  param_00.shouldabortentranceanim = 1;
+move_to_taunt_loc(var_0) {
+  var_0.shouldabortentranceanim = 1;
   for(;;) {
-    var_01 = param_00 scripts\asm\asm::asm_getcurrentstate("crab_boss");
-    if(var_01 == "idle") {
+    var_1 = var_0 scripts\asm\asm::asm_getcurrentstate("crab_boss");
+    if(var_1 == "idle") {
       break;
     }
 
@@ -89,11 +89,11 @@ move_to_taunt_loc(param_00) {
 
   set_tanker_anim("idle");
   level.crab_boss thread crab_boss_sfx_water_slosh_loop_start();
-  var_02 = scripts\engine\utility::drop_to_ground((4095, 6788, -200), 50, -1000);
-  param_00 scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_move_to(var_02);
-  param_00 scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_face_point((3018, 2278, -42));
+  var_2 = scripts\engine\utility::drop_to_ground((4095, 6788, -200), 50, -1000);
+  var_0 scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_move_to(var_2);
+  var_0 scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_face_point((3018, 2278, -42));
   for(;;) {
-    param_00 scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall::do_taunt();
+    var_0 scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall::do_taunt();
     if(scripts\engine\utility::flag("crab_boss_pre_combat_stage_2")) {
       return;
     }
@@ -101,9 +101,9 @@ move_to_taunt_loc(param_00) {
 }
 
 play_vo_at_start_of_boss_fight() {
-  var_00 = scripts\engine\utility::random(level.players);
-  if(isDefined(var_00.vo_prefix)) {
-    switch (var_00.vo_prefix) {
+  var_0 = scripts\engine\utility::random(level.players);
+  if(isDefined(var_0.vo_prefix)) {
+    switch (var_0.vo_prefix) {
       case "p1_":
         level thread scripts\cp\cp_vo::try_to_play_vo("sally_boss_final_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
         break;
@@ -125,9 +125,9 @@ play_vo_at_start_of_boss_fight() {
     }
   }
 
-  foreach(var_02 in level.players) {
-    if(var_02.vo_prefix == "p5_") {
-      var_02 thread scripts\cp\cp_vo::try_to_play_vo("encounter_radthing", "town_comment_vo", "low", 10, 0, 0, 0, 10);
+  foreach(var_2 in level.players) {
+    if(var_2.vo_prefix == "p5_") {
+      var_2 thread scripts\cp\cp_vo::try_to_play_vo("encounter_radthing", "town_comment_vo", "low", 10, 0, 0, 0, 10);
     }
   }
 }
@@ -145,10 +145,10 @@ end_crab_boss_quest() {}
 debug_beat_crab_boss_quest() {}
 
 gets_to_combat_pos() {
-  var_00 = 10;
+  var_0 = 10;
   for(;;) {
-    var_01 = level.crab_boss scripts\asm\asm::asm_getcurrentstate("crab_boss");
-    if(var_01 == "idle") {
+    var_1 = level.crab_boss scripts\asm\asm::asm_getcurrentstate("crab_boss");
+    if(var_1 == "idle") {
       break;
     }
 
@@ -157,36 +157,36 @@ gets_to_combat_pos() {
 
   level.crab_boss scripts\aitypes\crab_boss\behaviors::dosubmerge();
   level.crab_boss waittill("submerge_done");
-  var_02 = spawn("script_model", level.crab_boss.origin);
-  var_02.angles = level.crab_boss.angles;
-  var_02 setModel("tag_origin");
-  level.crab_boss linkto(var_02, "tag_origin");
-  var_03 = scripts\engine\utility::drop_to_ground((3621, 4536, -231), 200, -1000);
-  var_02 moveto(var_03, var_00, 2, 5);
-  level.crab_boss thread do_water_vfx(level.crab_boss, var_00, var_03);
-  var_02 waittill("movedone");
+  var_2 = spawn("script_model", level.crab_boss.origin);
+  var_2.angles = level.crab_boss.angles;
+  var_2 setModel("tag_origin");
+  level.crab_boss linkto(var_2, "tag_origin");
+  var_3 = scripts\engine\utility::drop_to_ground((3621, 4536, -231), 200, -1000);
+  var_2 moveto(var_3, var_0, 2, 5);
+  level.crab_boss thread do_water_vfx(level.crab_boss, var_0, var_3);
+  var_2 waittill("movedone");
   level.crab_boss unlink();
-  var_02 delete();
+  var_2 delete();
   level.crab_boss_random_taunt_anim = 1;
   scripts\engine\utility::flag_set("crab_boss_combat_ready");
 }
 
-do_water_vfx(param_00, param_01, param_02) {
-  var_03 = 0.5;
-  var_04 = 600;
-  var_05 = (param_02[0] - 300, param_02[1], param_00.origin[2]);
-  var_06 = vectornormalize(var_05 - param_00.origin);
-  var_07 = param_00.origin + var_06 * var_04;
-  var_08 = spawn("script_model", var_07);
-  var_08 setModel("tag_origin");
-  var_08 linkto(param_00);
-  for(var_09 = 0; var_09 < param_01 / var_03 - 2; var_09++) {
-    playFXOnTag(level._effect["crog_submerge_idle"], var_08, "tag_origin");
-    playFXOnTag(level._effect["crog_submerge_idle"], param_00, "tag_origin");
-    wait(var_03);
+do_water_vfx(var_0, var_1, var_2) {
+  var_3 = 0.5;
+  var_4 = 600;
+  var_5 = (var_2[0] - 300, var_2[1], var_0.origin[2]);
+  var_6 = vectornormalize(var_5 - var_0.origin);
+  var_7 = var_0.origin + var_6 * var_4;
+  var_8 = spawn("script_model", var_7);
+  var_8 setModel("tag_origin");
+  var_8 linkto(var_0);
+  for(var_9 = 0; var_9 < var_1 / var_3 - 2; var_9++) {
+    playFXOnTag(level._effect["crog_submerge_idle"], var_8, "tag_origin");
+    playFXOnTag(level._effect["crog_submerge_idle"], var_0, "tag_origin");
+    wait(var_3);
   }
 
-  var_08 delete();
+  var_8 delete();
 }
 
 init_escort_bomb() {
@@ -195,7 +195,7 @@ init_escort_bomb() {
   level thread max_ammo_manager();
   move_lost_and_found("beach");
   level.force_respawn_location = ::respawn_on_beach;
-  var_00 = scripts\engine\utility::drop_to_ground((3621, 4536, -231), 0, -1000);
+  var_0 = scripts\engine\utility::drop_to_ground((3621, 4536, -231), 0, -1000);
   activate_crab_boss_fight_blocker();
   scripts\cp\maps\cp_town\cp_town_interactions::applyvisionsettoallplayers("cp_town_color");
   scripts\engine\utility::flag_set("boss_fight_active");
@@ -204,16 +204,16 @@ init_escort_bomb() {
 crab_boss_disable_teleport_monitor() {
   level endon("crab_boss_fight_complete");
   level endon("game_ended");
-  foreach(var_01 in level.players) {
-    if(var_01 scripts\cp\utility::isteleportenabled()) {
-      var_01 scripts\cp\utility::allow_player_teleport(0);
+  foreach(var_1 in level.players) {
+    if(var_1 scripts\cp\utility::isteleportenabled()) {
+      var_1 scripts\cp\utility::allow_player_teleport(0);
     }
   }
 
   for(;;) {
-    level waittill("connected", var_01);
-    if(var_01 scripts\cp\utility::isteleportenabled()) {
-      var_01 scripts\cp\utility::allow_player_teleport(0);
+    level waittill("connected", var_1);
+    if(var_1 scripts\cp\utility::isteleportenabled()) {
+      var_1 scripts\cp\utility::allow_player_teleport(0);
     }
   }
 }
@@ -239,18 +239,18 @@ unlimited_max_ammo() {
   level endon("game_ended");
   level endon("crab_boss_fight_complete");
   scripts\engine\utility::flag_init("max_ammo_active");
-  var_00 = 180;
+  var_0 = 180;
   for(;;) {
-    wait(var_00);
+    wait(var_0);
     try_drop_max_ammo();
   }
 }
 
 try_drop_max_ammo() {
-  var_00 = (2933, 1994, -31);
+  var_0 = (2933, 1994, -31);
   if(!scripts\engine\utility::flag("max_ammo_active")) {
     scripts\engine\utility::flag_set("max_ammo_active");
-    level thread[[level.drop_max_ammo_func]](var_00, undefined, "ammo_max");
+    level thread[[level.drop_max_ammo_func]](var_0, undefined, "ammo_max");
   }
 }
 
@@ -263,51 +263,51 @@ max_ammo_pick_up_listener() {
   }
 }
 
-move_lost_and_found(param_00) {
-  var_01 = (2956, 772, 11.8);
-  var_02 = "com_cardboardbox02";
+move_lost_and_found(var_0) {
+  var_1 = (2956, 772, 11.8);
+  var_2 = "com_cardboardbox02";
   if(!isDefined(level.lnf_struct)) {
     level.lnf_struct = scripts\engine\utility::getstruct("lost_and_found", "script_noteworthy");
     level.lnf_struct.og_origin = level.lnf_struct.origin;
   }
 
-  if(param_00 == "beach") {
-    level.lnf_struct.origin = var_01;
-    var_03 = getent("crab_boss_lnf_sign", "targetname");
-    if(isDefined(var_03)) {
-      var_03 show();
+  if(var_0 == "beach") {
+    level.lnf_struct.origin = var_1;
+    var_3 = getent("crab_boss_lnf_sign", "targetname");
+    if(isDefined(var_3)) {
+      var_3 show();
     }
   } else {
     level.lnf_struct.origin = level.lnf_struct.og_origin;
-    var_03 = getent("crab_boss_lnf_sign", "targetname");
-    if(isDefined(var_03)) {
-      var_03 hide();
+    var_3 = getent("crab_boss_lnf_sign", "targetname");
+    if(isDefined(var_3)) {
+      var_3 hide();
     }
   }
 
-  foreach(var_05 in level.players) {
-    if(!isDefined(var_05.lost_and_found_ent)) {
+  foreach(var_5 in level.players) {
+    if(!isDefined(var_5.lost_and_found_ent)) {
       continue;
     }
 
-    var_05.lost_and_found_ent.origin = level.lnf_struct.origin + (0, 0, 45);
+    var_5.lost_and_found_ent.origin = level.lnf_struct.origin + (0, 0, 45);
   }
 }
 
-respawn_on_beach(param_00) {
-  var_01 = [(2887, 753, 54), (2771, 769, 27), (2710, 723, 33), (2617, 770, 44)];
-  var_02 = spawnStruct();
-  foreach(var_04 in var_01) {
-    if(canspawn(var_04) && !positionwouldtelefrag(var_04)) {
-      var_02.origin = var_04;
-      var_02.angles = (0, 90, 0);
-      return var_02;
+respawn_on_beach(var_0) {
+  var_1 = [(2887, 753, 54), (2771, 769, 27), (2710, 723, 33), (2617, 770, 44)];
+  var_2 = spawnStruct();
+  foreach(var_4 in var_1) {
+    if(canspawn(var_4) && !positionwouldtelefrag(var_4)) {
+      var_2.origin = var_4;
+      var_2.angles = (0, 90, 0);
+      return var_2;
     }
   }
 
-  var_02.origin = var_01[0];
-  var_02.angles = (0, 90, 0);
-  return var_02;
+  var_2.origin = var_1[0];
+  var_2.angles = (0, 90, 0);
+  return var_2;
 }
 
 crab_boss_zombie_spawn_manager() {
@@ -318,22 +318,22 @@ crab_boss_zombie_spawn_manager() {
   stop_spawn_wave();
   clear_remaining_enemies();
   scripts\engine\utility::flag_wait("crab_boss_zombie_spawn");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
     if(can_spawn_zombie()) {
-      var_01 = get_zombie_spawner();
-      var_02 = var_01 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1, var_01);
-      if(isDefined(var_02)) {
-        var_00++;
-        var_02.dont_cleanup = 1;
-        var_02.synctransients = "sprint";
+      var_1 = get_zombie_spawner();
+      var_2 = var_1 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1, var_1);
+      if(isDefined(var_2)) {
+        var_0++;
+        var_2.dont_cleanup = 1;
+        var_2.synctransients = "sprint";
         if(isDefined(level.cb_zmb_spawn_func)) {
           [
             [level.cb_zmb_spawn_func]
-          ](var_02);
+          ](var_2);
         }
 
-        var_02 thread play_intro(var_02);
+        var_2 thread play_intro(var_2);
       }
     }
 
@@ -344,8 +344,8 @@ crab_boss_zombie_spawn_manager() {
     }
 
     if(should_do_wave_spawn()) {
-      if(should_do_wait_between_wave(var_00)) {
-        var_00 = 0;
+      if(should_do_wait_between_wave(var_0)) {
+        var_0 = 0;
         wait_between_wave();
       }
     }
@@ -353,17 +353,17 @@ crab_boss_zombie_spawn_manager() {
 }
 
 wait_between_wave() {
-  var_00 = 10;
+  var_0 = 10;
   if(isDefined(level.wait_time_between_wave)) {
     wait(level.wait_time_between_wave);
     return;
   }
 
-  wait(var_00);
+  wait(var_0);
 }
 
-should_do_wait_between_wave(param_00) {
-  return param_00 >= level.max_wave_spawn_num;
+should_do_wait_between_wave(var_0) {
+  return var_0 >= level.max_wave_spawn_num;
 }
 
 should_do_wave_spawn() {
@@ -385,111 +385,111 @@ stop_spawn_wave() {
 }
 
 clear_remaining_enemies() {
-  foreach(var_01 in level.spawned_enemies) {
-    if(var_01.agent_type == "crab_boss") {
+  foreach(var_1 in level.spawned_enemies) {
+    if(var_1.agent_type == "crab_boss") {
       continue;
     }
 
-    var_01.died_poorly = 1;
-    var_01.nocorpse = 1;
-    var_01 suicide();
+    var_1.died_poorly = 1;
+    var_1.nocorpse = 1;
+    var_1 suicide();
   }
 
   scripts\engine\utility::waitframe();
 }
 
-play_intro(param_00) {
-  param_00 endon("death");
-  param_00 waittill("intro_vignette_done");
-  param_00.synctransients = "sprint";
+play_intro(var_0) {
+  var_0 endon("death");
+  var_0 waittill("intro_vignette_done");
+  var_0.synctransients = "sprint";
 }
 
-assign_enemy(param_00) {
-  var_01 = get_zmb_target_player();
-  param_00.enemyoverride = var_01;
+assign_enemy(var_0) {
+  var_1 = get_zmb_target_player();
+  var_0.enemyoverride = var_1;
 }
 
 get_zmb_target_player() {
-  var_00 = undefined;
-  var_01 = [];
-  foreach(var_03 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_03)) {
+  var_0 = undefined;
+  var_1 = [];
+  foreach(var_3 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       continue;
     }
 
-    var_01[var_01.size] = var_03;
+    var_1[var_1.size] = var_3;
   }
 
-  var_05 = gettime();
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_03.last_attacked_by_crab_boss_zombie_time)) {
-      var_03.last_attacked_by_crab_boss_zombie_time = var_05;
+  var_5 = gettime();
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.last_attacked_by_crab_boss_zombie_time)) {
+      var_3.last_attacked_by_crab_boss_zombie_time = var_5;
     }
   }
 
-  var_08 = undefined;
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_08)) {
-      var_08 = var_03.last_attacked_by_crab_boss_zombie_time;
-      var_00 = var_03;
+  var_8 = undefined;
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_8)) {
+      var_8 = var_3.last_attacked_by_crab_boss_zombie_time;
+      var_0 = var_3;
       continue;
     }
 
-    if(var_03.last_attacked_by_crab_boss_zombie_time < var_08) {
-      var_08 = var_03.last_attacked_by_crab_boss_zombie_time;
-      var_00 = var_03;
+    if(var_3.last_attacked_by_crab_boss_zombie_time < var_8) {
+      var_8 = var_3.last_attacked_by_crab_boss_zombie_time;
+      var_0 = var_3;
     }
   }
 
-  if(isDefined(var_00)) {
-    var_00.last_attacked_by_crab_boss_zombie_time = var_05;
+  if(isDefined(var_0)) {
+    var_0.last_attacked_by_crab_boss_zombie_time = var_5;
   }
 
-  return var_00;
+  return var_0;
 }
 
 get_zombie_spawner() {
-  var_00 = 20;
-  var_01 = undefined;
-  var_02 = [(2736, 3630, -179), (2781, 3459, -179), (2867, 3334, -182), (2987, 3214, -181), (3196, 3094, -179), (3376, 3070, -179), (3518, 3093, -180), (3669, 3162, -183)];
+  var_0 = 20;
+  var_1 = undefined;
+  var_2 = [(2736, 3630, -179), (2781, 3459, -179), (2867, 3334, -182), (2987, 3214, -181), (3196, 3094, -179), (3376, 3070, -179), (3518, 3093, -180), (3669, 3162, -183)];
   if(isDefined(level.crab_boss_zombie_spawn_pos_list)) {
-    var_01 = scripts\engine\utility::random(level.crab_boss_zombie_spawn_pos_list);
+    var_1 = scripts\engine\utility::random(level.crab_boss_zombie_spawn_pos_list);
   } else {
-    var_01 = scripts\engine\utility::random(var_02);
+    var_1 = scripts\engine\utility::random(var_2);
   }
 
-  var_03 = randomfloatrange(var_00 * -1, var_00);
-  var_04 = randomfloatrange(var_00 * -1, var_00);
-  var_01 = (var_01[0] + var_03, var_01[1] + var_04, var_01[2]);
-  var_01 = getclosestpointonnavmesh(var_01);
-  var_05 = spawnStruct();
-  var_05.origin = var_01;
-  var_05.angles = vectortoangles((-26, -110, 18));
-  var_05.script_parameters = "ground_spawn_no_boards";
-  var_05.script_animation = "spawn_ground";
-  return var_05;
+  var_3 = randomfloatrange(var_0 * -1, var_0);
+  var_4 = randomfloatrange(var_0 * -1, var_0);
+  var_1 = (var_1[0] + var_3, var_1[1] + var_4, var_1[2]);
+  var_1 = getclosestpointonnavmesh(var_1);
+  var_5 = spawnStruct();
+  var_5.origin = var_1;
+  var_5.angles = vectortoangles((-26, -110, 18));
+  var_5.script_parameters = "ground_spawn_no_boards";
+  var_5.script_animation = "spawn_ground";
+  return var_5;
 }
 
 can_spawn_zombie() {
-  var_00 = 15;
+  var_0 = 15;
   if(isDefined(level.crab_boss_max_zombie_spawn)) {
-    var_01 = level.crab_boss_max_zombie_spawn;
+    var_1 = level.crab_boss_max_zombie_spawn;
   } else {
-    var_01 = var_01;
+    var_1 = var_1;
   }
 
-  return get_num_alive_agent_of_type("generic_zombie") < var_01;
+  return get_num_alive_agent_of_type("generic_zombie") < var_1;
 }
 
-get_num_alive_agent_of_type(param_00) {
-  var_01 = 0;
-  foreach(var_03 in level.spawned_enemies) {
-    if(isDefined(var_03.agent_type) && var_03.agent_type == param_00) {
-      var_01++;
+get_num_alive_agent_of_type(var_0) {
+  var_1 = 0;
+  foreach(var_3 in level.spawned_enemies) {
+    if(isDefined(var_3.agent_type) && var_3.agent_type == var_0) {
+      var_1++;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 get_zombie_spawn_delay() {
@@ -502,30 +502,30 @@ get_zombie_spawn_delay() {
 
 death_ray_cannon() {
   level.cb_zmb_spawn_func = ::assign_enemy;
-  var_00 = getdvar("scrAgent_ragdollImpulseZ");
+  var_0 = getdvar("scrAgent_ragdollImpulseZ");
   setdvar("scrAgent_ragdollImpulseZ", 10000);
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::set_up_weak_spot();
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::hit_weak_spot_with_death_ray_cannon();
-  for(var_01 = 0; var_01 < 1; var_01++) {
+  for(var_1 = 0; var_1 < 1; var_1++) {
     level waittill("crab_boss_weak_spot_initial_hit");
     scripts\cp\cp_vo::try_to_play_vo_on_all_players("boss_phase_2_success_cannon");
   }
 
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::activate_weak_spot();
-  var_02 = level.players.size * 30000;
-  var_03 = 0;
+  var_2 = level.players.size * 30000;
+  var_3 = 0;
   for(;;) {
-    level waittill("crab_boss_weak_spot_hit", var_04);
-    var_03 = var_03 + var_04;
-    adjust_zombie_spawning(var_03, var_02);
-    if(var_03 >= var_02) {
+    level waittill("crab_boss_weak_spot_hit", var_4);
+    var_3 = var_3 + var_4;
+    adjust_zombie_spawning(var_3, var_2);
+    if(var_3 >= var_2) {
       break;
     }
   }
 
   delete_weak_spot();
   level.crab_boss notify("stop_death_ray_attack_logic");
-  setdvar("scrAgent_ragdollImpulseZ", var_00);
+  setdvar("scrAgent_ragdollImpulseZ", var_0);
   scripts\cp\cp_vo::try_to_play_vo_on_all_players("boss_phase_2_success_cannon_final");
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_pain_and_heal();
 }
@@ -540,9 +540,9 @@ delete_weak_spot() {
   }
 }
 
-adjust_zombie_spawning(param_00, param_01) {
-  var_02 = param_00 / param_01;
-  if(var_02 >= 1) {
+adjust_zombie_spawning(var_0, var_1) {
+  var_2 = var_0 / var_1;
+  if(var_2 >= 1) {
     set_crab_boss_max_zombie_spawn(4, 4, 4, 4);
     set_crab_boss_zombie_spawn_delay(3, 3, 3, 3);
     level.max_wave_spawn_num = 4;
@@ -550,7 +550,7 @@ adjust_zombie_spawning(param_00, param_01) {
     return;
   }
 
-  if(var_02 >= 0.8) {
+  if(var_2 >= 0.8) {
     set_crab_boss_max_zombie_spawn(15, 15, 15, 15);
     set_crab_boss_zombie_spawn_delay(0.3, 0.3, 0.4, 0.5);
     level.max_wave_spawn_num = 20;
@@ -558,7 +558,7 @@ adjust_zombie_spawning(param_00, param_01) {
     return;
   }
 
-  if(var_02 >= 0.6) {
+  if(var_2 >= 0.6) {
     set_crab_boss_max_zombie_spawn(15, 15, 14, 14);
     set_crab_boss_zombie_spawn_delay(0.5, 0.5, 0.6, 0.7);
     level.max_wave_spawn_num = 18;
@@ -566,7 +566,7 @@ adjust_zombie_spawning(param_00, param_01) {
     return;
   }
 
-  if(var_02 >= 0.4) {
+  if(var_2 >= 0.4) {
     set_crab_boss_max_zombie_spawn(14, 14, 13, 13);
     set_crab_boss_zombie_spawn_delay(0.7, 0.7, 0.8, 0.9);
     level.max_wave_spawn_num = 16;
@@ -574,7 +574,7 @@ adjust_zombie_spawning(param_00, param_01) {
     return;
   }
 
-  if(var_02 >= 0.2) {
+  if(var_2 >= 0.2) {
     set_crab_boss_max_zombie_spawn(14, 14, 13, 12);
     set_crab_boss_zombie_spawn_delay(0.9, 0.9, 1, 1.1);
     level.max_wave_spawn_num = 14;
@@ -583,22 +583,22 @@ adjust_zombie_spawning(param_00, param_01) {
   }
 }
 
-set_crab_boss_max_zombie_spawn(param_00, param_01, param_02, param_03) {
+set_crab_boss_max_zombie_spawn(var_0, var_1, var_2, var_3) {
   switch (level.players.size) {
     case 4:
-      level.crab_boss_max_zombie_spawn = param_00;
+      level.crab_boss_max_zombie_spawn = var_0;
       break;
 
     case 3:
-      level.crab_boss_max_zombie_spawn = param_01;
+      level.crab_boss_max_zombie_spawn = var_1;
       break;
 
     case 2:
-      level.crab_boss_max_zombie_spawn = param_02;
+      level.crab_boss_max_zombie_spawn = var_2;
       break;
 
     case 1:
-      level.crab_boss_max_zombie_spawn = param_03;
+      level.crab_boss_max_zombie_spawn = var_3;
       break;
 
     default:
@@ -606,22 +606,22 @@ set_crab_boss_max_zombie_spawn(param_00, param_01, param_02, param_03) {
   }
 }
 
-set_crab_boss_zombie_spawn_delay(param_00, param_01, param_02, param_03) {
+set_crab_boss_zombie_spawn_delay(var_0, var_1, var_2, var_3) {
   switch (level.players.size) {
     case 4:
-      level.crab_boss_zombie_spawn_delay = param_00;
+      level.crab_boss_zombie_spawn_delay = var_0;
       break;
 
     case 3:
-      level.crab_boss_zombie_spawn_delay = param_01;
+      level.crab_boss_zombie_spawn_delay = var_1;
       break;
 
     case 2:
-      level.crab_boss_zombie_spawn_delay = param_02;
+      level.crab_boss_zombie_spawn_delay = var_2;
       break;
 
     case 1:
-      level.crab_boss_zombie_spawn_delay = param_03;
+      level.crab_boss_zombie_spawn_delay = var_3;
       break;
 
     default:
@@ -666,85 +666,85 @@ replay_final_sequence() {
 
 activate_crab_boss_fight_blocker() {
   level.crab_boss_fight_blocker_models = [];
-  var_00 = scripts\engine\utility::getstructarray("crab_boss_fight_door_model", "targetname");
-  foreach(var_02 in var_00) {
-    var_03 = spawn("script_model", var_02.origin);
-    var_03 setModel("cp_disco_street_barricade");
-    var_03.angles = var_02.angles;
-    level.crab_boss_fight_blocker_models[level.crab_boss_fight_blocker_models.size] = var_03;
+  var_0 = scripts\engine\utility::getstructarray("crab_boss_fight_door_model", "targetname");
+  foreach(var_2 in var_0) {
+    var_3 = spawn("script_model", var_2.origin);
+    var_3 setModel("cp_disco_street_barricade");
+    var_3.angles = var_2.angles;
+    level.crab_boss_fight_blocker_models[level.crab_boss_fight_blocker_models.size] = var_3;
   }
 
-  var_05 = getent("crab_boss_fight_door_clip", "targetname");
-  var_05 dontinterpolate();
-  var_05.origin = var_05.origin + (0, 0, 1024);
+  var_5 = getent("crab_boss_fight_door_clip", "targetname");
+  var_5 dontinterpolate();
+  var_5.origin = var_5.origin + (0, 0, 1024);
 }
 
 deactivate_crab_boss_fight_blocker() {
   if(isDefined(level.crab_boss_fight_blocker_models)) {
-    foreach(var_01 in level.crab_boss_fight_blocker_models) {
-      if(isDefined(var_01)) {
-        var_01 delete();
+    foreach(var_1 in level.crab_boss_fight_blocker_models) {
+      if(isDefined(var_1)) {
+        var_1 delete();
       }
     }
   }
 
-  var_03 = getent("crab_boss_fight_door_clip", "targetname");
-  if(isDefined(var_03)) {
-    var_03 delete();
+  var_3 = getent("crab_boss_fight_door_clip", "targetname");
+  if(isDefined(var_3)) {
+    var_3 delete();
   }
 }
 
 show_icon_on_escort_vehicle() {
-  foreach(var_01 in level.players) {
-    var_02 = newclienthudelem(var_01);
-    var_02 setshader("apache_target_lock", 36, 36);
-    var_02 setwaypoint(1, 1);
-    var_02 settargetent(level.escort_vehicle);
-    var_02.alpha = 1;
-    var_02.color = (1, 0, 0);
-    var_01.escort_vehicle_icon = var_02;
+  foreach(var_1 in level.players) {
+    var_2 = newclienthudelem(var_1);
+    var_2 setshader("apache_target_lock", 36, 36);
+    var_2 setwaypoint(1, 1);
+    var_2 settargetent(level.escort_vehicle);
+    var_2.alpha = 1;
+    var_2.color = (1, 0, 0);
+    var_1.escort_vehicle_icon = var_2;
   }
 }
 
 remove_icon_on_escort_vehicle() {
-  foreach(var_01 in level.players) {
-    if(isDefined(var_01.escort_vehicle_icon)) {
-      var_01.escort_vehicle_icon destroy();
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1.escort_vehicle_icon)) {
+      var_1.escort_vehicle_icon destroy();
     }
   }
 }
 
-usecrabbossdebug(param_00, param_01) {}
+usecrabbossdebug(var_0, var_1) {}
 
 setupplayerloadouts() {
-  var_00 = ["iw7_ar57_zm", "iw7_m4_zm", "iw7_erad_zm"];
-  var_01 = ["iw7_crb_zml", "iw7_lmg03_zm", "iw7_mauler_zm"];
-  var_02 = ["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"];
-  foreach(var_04 in level.players) {
-    foreach(var_06 in var_02) {
-      var_04 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_06, 1);
+  var_0 = ["iw7_ar57_zm", "iw7_m4_zm", "iw7_erad_zm"];
+  var_1 = ["iw7_crb_zml", "iw7_lmg03_zm", "iw7_mauler_zm"];
+  var_2 = ["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"];
+  foreach(var_4 in level.players) {
+    foreach(var_6 in var_2) {
+      var_4 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_6, 1);
     }
 
-    var_08 = randomint(var_01.size);
-    var_09 = randomint(var_00.size);
-    var_04 takeweapon(var_04 scripts\cp\utility::getvalidtakeweapon());
-    var_0A = scripts\cp\utility::getrawbaseweaponname(var_01[var_08]);
-    if(isDefined(var_04.weapon_build_models[var_0A])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04, var_04.weapon_build_models[var_0A]);
+    var_8 = randomint(var_1.size);
+    var_9 = randomint(var_0.size);
+    var_4 takeweapon(var_4 scripts\cp\utility::getvalidtakeweapon());
+    var_0A = scripts\cp\utility::getrawbaseweaponname(var_1[var_8]);
+    if(isDefined(var_4.weapon_build_models[var_0A])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_0A]);
     } else {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04, var_01[var_08]);
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
     }
 
-    var_0B = scripts\cp\utility::getrawbaseweaponname(var_00[var_09]);
-    if(isDefined(var_04.weapon_build_models[var_0B])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04, var_04.weapon_build_models[var_0B]);
+    var_0B = scripts\cp\utility::getrawbaseweaponname(var_0[var_9]);
+    if(isDefined(var_4.weapon_build_models[var_0B])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_0B]);
     } else {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04, var_01[var_08]);
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
     }
 
-    var_04.total_currency_earned = min(10000, var_04 scripts\cp\cp_persistence::get_player_max_currency());
-    var_04 scripts\cp\cp_persistence::set_player_currency(10000);
-    var_04 scripts\cp\cp_interaction::refresh_interaction();
+    var_4.total_currency_earned = min(10000, var_4 scripts\cp\cp_persistence::get_player_max_currency());
+    var_4 scripts\cp\cp_persistence::set_player_currency(10000);
+    var_4 scripts\cp\cp_interaction::refresh_interaction();
   }
 
   if(isDefined(level.pap_max) && level.pap_max < 3) {
@@ -755,8 +755,8 @@ setupplayerloadouts() {
   level thread[[level.upgrade_weapons_func]]();
 }
 
-open_sesame(param_00) {
-  if(scripts\engine\utility::istrue(param_00)) {
+open_sesame(var_0) {
+  if(scripts\engine\utility::istrue(var_0)) {
     level.open_sesame = undefined;
   } else if(scripts\engine\utility::istrue(level.open_sesame)) {
     level.open_sesame = undefined;
@@ -765,26 +765,26 @@ open_sesame(param_00) {
     level.open_sesame = 1;
   }
 
-  foreach(var_02 in level.generators) {
-    thread scripts\cp\zombies\zombie_power::generic_generator(var_02);
+  foreach(var_2 in level.generators) {
+    thread scripts\cp\zombies\zombie_power::generic_generator(var_2);
     wait(0.1);
   }
 
   if(isDefined(level.fast_travel_spots)) {
-    foreach(var_05 in level.fast_travel_spots) {
-      var_05.used_once = 1;
+    foreach(var_5 in level.fast_travel_spots) {
+      var_5.used_once = 1;
     }
   }
 
-  var_07 = getEntArray("door_buy", "targetname");
-  foreach(var_09 in var_07) {
-    var_09 notify("trigger", "open_sesame");
+  var_7 = getEntArray("door_buy", "targetname");
+  foreach(var_9 in var_7) {
+    var_9 notify("trigger", "open_sesame");
     wait(0.1);
   }
 
   var_0B = getEntArray("chi_door", "targetname");
-  foreach(var_09 in var_0B) {
-    var_09.physics_capsulecast notify("damage", undefined, "open_sesame");
+  foreach(var_9 in var_0B) {
+    var_9.physics_capsulecast notify("damage", undefined, "open_sesame");
     wait(0.1);
   }
 
@@ -823,11 +823,11 @@ open_sesame(param_00) {
 }
 
 teleportplayertobeach() {
-  var_00 = [(1654, -1472, 304), (1812, -1366, 239), (1914, -1174, 187), (2185, -1170, 185)];
-  var_01 = (3426, 3850, -348);
-  foreach(var_05, var_03 in level.players) {
-    var_04 = scripts\engine\utility::drop_to_ground(var_00[var_05], 200, -500);
-    var_03 setorigin(var_04, 1);
-    var_03 setplayerangles(vectortoangles(var_01 - var_00[var_05]));
+  var_0 = [(1654, -1472, 304), (1812, -1366, 239), (1914, -1174, 187), (2185, -1170, 185)];
+  var_1 = (3426, 3850, -348);
+  foreach(var_5, var_3 in level.players) {
+    var_4 = scripts\engine\utility::drop_to_ground(var_0[var_5], 200, -500);
+    var_3 setorigin(var_4, 1);
+    var_3 setplayerangles(vectortoangles(var_1 - var_0[var_5]));
   }
 }

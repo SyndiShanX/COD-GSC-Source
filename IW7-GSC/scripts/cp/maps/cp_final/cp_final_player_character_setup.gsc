@@ -11,22 +11,22 @@ init_player_characters() {
   register_player_character(4, "yes", "body_zmb_hero_aj_dlc4", "viewmodel_zmb_hero_aj_dlc4", "head_zmb_hero_aj_dlc4", undefined, "p4_", "_p4", "iw7_dlc4pap_zm", "ges_zombies_revive_nerd", 3, "iw7_dlc4card_zm", "mus_zombies_generic_char", "iw7_dlc4loadin_zm", "iw7_knife_zm_rapper");
 }
 
-register_player_character(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D, param_0E, param_0F) {
+register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F) {
   var_10 = spawnStruct();
-  var_10.body_model = param_02;
-  var_10.view_model = param_03;
-  var_10.head_model = param_04;
-  var_10.hair_model = param_05;
-  var_10.vo_prefix = param_06;
-  var_10.vo_suffix = param_07;
-  var_10.pap_gesture = param_08;
-  var_10.revive_gesture = param_09;
-  var_10.photo_index = param_0A;
-  var_10.fate_card_weapon = param_0B;
-  var_10.intro_music = param_0C;
-  var_10.intro_gesture = param_0D;
-  var_10.melee_weapon = param_0E;
-  var_10.post_setup_func = param_0F;
+  var_10.body_model = var_2;
+  var_10.view_model = var_3;
+  var_10.head_model = var_4;
+  var_10.hair_model = var_5;
+  var_10.vo_prefix = var_6;
+  var_10.vo_suffix = var_7;
+  var_10.pap_gesture = var_8;
+  var_10.revive_gesture = var_9;
+  var_10.photo_index = var_0A;
+  var_10.fate_card_weapon = var_0B;
+  var_10.intro_music = var_0C;
+  var_10.intro_gesture = var_0D;
+  var_10.melee_weapon = var_0E;
+  var_10.post_setup_func = var_0F;
   if(!isDefined(level.player_character_info)) {
     level.player_character_info = [];
   }
@@ -35,8 +35,8 @@ register_player_character(param_00, param_01, param_02, param_03, param_04, para
     level.available_player_characters = [];
   }
 
-  level.player_character_info[param_00] = var_10;
-  if(param_01 == "yes") {
-    level.available_player_characters[level.available_player_characters.size] = param_00;
+  level.player_character_info[var_0] = var_10;
+  if(var_1 == "yes") {
+    level.available_player_characters[level.available_player_characters.size] = var_0;
   }
 }

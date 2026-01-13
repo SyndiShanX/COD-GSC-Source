@@ -4,36 +4,36 @@
  * Script: scripts\aitypes\dlc4\behavior_utils.gsc
 ***************************************************/
 
-pickbetterenemy(param_00, param_01) {
-  var_02 = self getpersstat(param_00);
-  var_03 = self getpersstat(param_01);
-  if(var_02 != var_03) {
-    if(var_02) {
-      return param_00;
+pickbetterenemy(var_0, var_1) {
+  var_2 = self getpersstat(var_0);
+  var_3 = self getpersstat(var_1);
+  if(var_2 != var_3) {
+    if(var_2) {
+      return var_0;
     }
 
-    return param_01;
+    return var_1;
   }
 
-  var_04 = distancesquared(self.origin, param_00.origin);
-  var_05 = distancesquared(self.origin, param_01.origin);
-  if(var_04 < var_05) {
-    return param_00;
+  var_4 = distancesquared(self.origin, var_0.origin);
+  var_5 = distancesquared(self.origin, var_1.origin);
+  if(var_4 < var_5) {
+    return var_0;
   }
 
-  return param_01;
+  return var_1;
 }
 
-shouldignoreenemy(param_00) {
-  if(!isalive(param_00)) {
+shouldignoreenemy(var_0) {
+  if(!isalive(var_0)) {
     return 1;
   }
 
-  if(param_00.ignoreme || isDefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
     return 1;
   }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(param_00)) {
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
   }
 
@@ -47,49 +47,49 @@ updateenemy() {
     }
   }
 
-  var_00 = undefined;
-  foreach(var_02 in level.players) {
-    if(shouldignoreenemy(var_02)) {
+  var_0 = undefined;
+  foreach(var_2 in level.players) {
+    if(shouldignoreenemy(var_2)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
+    if(scripts\engine\utility::istrue(var_2.isfasttravelling)) {
       continue;
     }
 
-    if(!isDefined(var_00)) {
-      var_00 = var_02;
+    if(!isDefined(var_0)) {
+      var_0 = var_2;
       continue;
     }
 
-    var_00 = pickbetterenemy(var_00, var_02);
+    var_0 = pickbetterenemy(var_0, var_2);
   }
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     self.myenemy = undefined;
     return undefined;
   }
 
-  if(!isDefined(self.myenemy) || var_00 != self.myenemy) {
-    self.myenemy = var_00;
+  if(!isDefined(self.myenemy) || var_0 != self.myenemy) {
+    self.myenemy = var_0;
     self.myenemystarttime = gettime();
   }
 }
 
-getpredictedenemypos(param_00, param_01) {
-  var_02 = param_00 getvelocity();
-  var_03 = length2d(var_02);
-  var_04 = param_00.origin + var_02 * param_01;
-  return var_04;
+getpredictedenemypos(var_0, var_1) {
+  var_2 = var_0 getvelocity();
+  var_3 = length2d(var_2);
+  var_4 = var_0.origin + var_2 * var_1;
+  return var_4;
 }
 
-facepoint(param_00) {
-  var_01 = scripts\engine\utility::getyawtospot(param_00);
-  if(abs(var_01) < 8) {
-    var_02 = (self.angles[0], self.angles[1] + var_01, self.angles[2]);
-    self orientmode("face angle abs", var_02);
+facepoint(var_0) {
+  var_1 = scripts\engine\utility::getyawtospot(var_0);
+  if(abs(var_1) < 8) {
+    var_2 = (self.angles[0], self.angles[1] + var_1, self.angles[2]);
+    self orientmode("face angle abs", var_2);
     return;
   }
 
-  self.desiredyaw = var_02;
+  self.desiredyaw = var_2;
 }

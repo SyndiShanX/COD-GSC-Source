@@ -13,8 +13,8 @@ init() {
   level.heliheight["littlebird_support"].streakname = "littlebird_support";
   level.heliheight["littlebird_support"].vehicleinfo = "attack_littlebird_mp";
   level.heliheight["littlebird_support"].weaponinfo = "littlebird_guard_minigun_mp";
-  level.heliheight["littlebird_support"].func_13CA9 = "vehicle_little_bird_minigun_left";
-  level.heliheight["littlebird_support"].func_13CAA = "vehicle_little_bird_minigun_right";
+  level.heliheight["littlebird_support"].var_13CA9 = "vehicle_little_bird_minigun_left";
+  level.heliheight["littlebird_support"].var_13CAA = "vehicle_little_bird_minigun_right";
   level.heliheight["littlebird_support"].weaponswitchendedsupportbox = "tag_flash";
   level.heliheight["littlebird_support"].weaponswitchendedtomastrike = "tag_flash_2";
   level.heliheight["littlebird_support"].sentrymode = "auto_nonai";
@@ -24,129 +24,129 @@ init() {
   func_AAD8();
 }
 
-func_128EE(var_00, var_01) {
-  var_02 = "littlebird_support";
-  var_03 = 1;
+func_128EE(var_0, var_1) {
+  var_2 = "littlebird_support";
+  var_3 = 1;
 
-  if(isDefined(level.func_AD89) || scripts\mp\killstreaks\helicopter::exceededmaxlittlebirds(var_02)) {
+  if(isDefined(level.var_AD89) || scripts\mp\killstreaks\helicopter::exceededmaxlittlebirds(var_2)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
-  } else if(!level.func_1A66.size) {
+  } else if(!level.var_1A66.size) {
     self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
-  } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility\game::maxvehiclesallowed()) {
+  } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_3 >= scripts\mp\utility\game::maxvehiclesallowed()) {
     self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
   scripts\mp\utility\game::incrementfauxvehiclecount();
-  var_04 = func_49E1(var_02);
+  var_4 = func_49E1(var_2);
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
-  thread func_10DBE(var_04);
-  level thread scripts\mp\utility\game::teamplayercardsplash(level.heliheight[var_02].teamsplash, self, self.team);
+  thread func_10DBE(var_4);
+  level thread scripts\mp\utility\game::teamplayercardsplash(level.heliheight[var_2].teamsplash, self, self.team);
   return 1;
 }
 
-func_49E1(var_00) {
-  var_01 = func_AAD2(self.origin);
+func_49E1(var_0) {
+  var_1 = func_AAD2(self.origin);
 
   if(isDefined(var_1.angles)) {
-    var_02 = var_1.angles;
+    var_2 = var_1.angles;
   } else {
-    var_02 = (0, 0, 0);
+    var_2 = (0, 0, 0);
   }
 
-  var_03 = scripts\mp\killstreaks\airdrop::getflyheightoffset(self.origin);
-  var_04 = func_AAD1(self.origin);
-  var_05 = anglesToForward(self.angles);
-  var_06 = var_4.origin * (1, 1, 0) + (0, 0, 1) * var_03 + var_05 * -100;
-  var_07 = var_1.origin;
-  var_08 = spawnhelicopter(self, var_07, var_02, level.heliheight[var_00].vehicleinfo, level.heliheight[var_00].modelbase);
+  var_3 = scripts\mp\killstreaks\airdrop::getflyheightoffset(self.origin);
+  var_4 = func_AAD1(self.origin);
+  var_5 = anglesToForward(self.angles);
+  var_6 = var_4.origin * (1, 1, 0) + (0, 0, 1) * var_3 + var_5 * -100;
+  var_7 = var_1.origin;
+  var_8 = spawnhelicopter(self, var_7, var_2, level.heliheight[var_0].vehicleinfo, level.heliheight[var_0].modelbase);
 
-  if(!isDefined(var_08)) {
+  if(!isDefined(var_8)) {
     return;
   }
-  var_08 scripts\mp\killstreaks\helicopter::addtolittlebirdlist();
-  var_08 thread scripts\mp\killstreaks\helicopter::func_E111();
-  var_8.health = level.heliheight[var_00].health;
-  var_8.maxhealth = level.heliheight[var_00].maxhealth;
+  var_8 scripts\mp\killstreaks\helicopter::addtolittlebirdlist();
+  var_8 thread scripts\mp\killstreaks\helicopter::func_E111();
+  var_8.health = level.heliheight[var_0].health;
+  var_8.maxhealth = level.heliheight[var_0].maxhealth;
   var_8.damagetaken = 0;
   var_8.speed = 100;
   var_8.followspeed = 40;
   var_8.owner = self;
-  var_08 setotherent(self);
+  var_8 setotherent(self);
   var_8.team = self.team;
-  var_08 setmaxpitchroll(45, 45);
-  var_08 vehicle_setspeed(var_8.speed, 100, 40);
-  var_08 setyawspeed(120, 60);
-  var_08 setneargoalnotifydist(512);
-  var_8.func_A644 = 0;
+  var_8 setmaxpitchroll(45, 45);
+  var_8 vehicle_setspeed(var_8.speed, 100, 40);
+  var_8 setyawspeed(120, 60);
+  var_8 setneargoalnotifydist(512);
+  var_8.var_A644 = 0;
   var_8.helitype = "littlebird";
   var_8.heliheightoffset = "littlebird_support";
-  var_8.func_11587 = 2000;
-  var_08 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self);
-  var_8.targetpos = var_06;
-  var_8.func_4BF7 = var_04;
-  var_09 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_00].weaponinfo);
-  var_09 linkto(var_08, level.heliheight[var_00].weaponswitchendedsupportbox, (0, 0, 0), (0, 0, 0));
-  var_09 setModel(level.heliheight[var_00].func_13CA9);
+  var_8.var_11587 = 2000;
+  var_8 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self);
+  var_8.targetpos = var_6;
+  var_8.var_4BF7 = var_4;
+  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
+  var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedsupportbox, (0, 0, 0), (0, 0, 0));
+  var_9 setModel(level.heliheight[var_0].var_13CA9);
   var_9.angles = var_8.angles;
   var_9.owner = var_8.owner;
   var_9.team = self.team;
-  var_09 maketurretinoperable();
-  var_9.vehicle = var_08;
-  var_8.mgturretleft = var_09;
+  var_9 maketurretinoperable();
+  var_9.vehicle = var_8;
+  var_8.mgturretleft = var_9;
   var_8.mgturretleft setdefaultdroppitch(0);
   var_10 = var_8.origin + (anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * -100) + (0, 0, 50);
   var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
-  var_9.killcament linkto(var_08, "tag_origin");
-  var_09 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_00].weaponinfo);
-  var_09 linkto(var_08, level.heliheight[var_00].weaponswitchendedtomastrike, (0, 0, 0), (0, 0, 0));
-  var_09 setModel(level.heliheight[var_00].func_13CAA);
+  var_9.killcament linkto(var_8, "tag_origin");
+  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
+  var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedtomastrike, (0, 0, 0), (0, 0, 0));
+  var_9 setModel(level.heliheight[var_0].var_13CAA);
   var_9.angles = var_8.angles;
   var_9.owner = var_8.owner;
   var_9.team = self.team;
-  var_09 maketurretinoperable();
-  var_9.vehicle = var_08;
-  var_8.mgturretright = var_09;
+  var_9 maketurretinoperable();
+  var_9.vehicle = var_8;
+  var_8.mgturretright = var_9;
   var_8.mgturretright setdefaultdroppitch(0);
   var_10 = var_8.origin + (anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * 100) + (0, 0, 50);
   var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
-  var_9.killcament linkto(var_08, "tag_origin");
+  var_9.killcament linkto(var_8, "tag_origin");
 
   if(level.teambased) {
     var_8.mgturretleft setturretteam(self.team);
     var_8.mgturretright setturretteam(self.team);
   }
 
-  var_8.mgturretleft give_player_session_tokens(level.heliheight[var_00].sentrymode);
-  var_8.mgturretright give_player_session_tokens(level.heliheight[var_00].sentrymode);
+  var_8.mgturretleft give_player_session_tokens(level.heliheight[var_0].sentrymode);
+  var_8.mgturretright give_player_session_tokens(level.heliheight[var_0].sentrymode);
   var_8.mgturretleft setsentryowner(self);
   var_8.mgturretright setsentryowner(self);
   var_8.mgturretleft thread func_AACB();
   var_8.mgturretright thread func_AACB();
   var_8.attract_strength = 10000;
   var_8.attract_range = 150;
-  var_8.attractor = missile_createattractorent(var_08, var_8.attract_strength, var_8.attract_range);
+  var_8.attractor = missile_createattractorent(var_8, var_8.attract_strength, var_8.attract_range);
   var_8.hasdodged = 0;
   var_8.empgrenaded = 0;
-  var_08 thread func_AAD4();
-  var_08 thread func_AADB();
-  var_08 thread func_AAE1();
-  var_08 thread func_AADD();
-  var_08 thread func_AADC();
-  var_08 thread func_AADE();
-  var_08 thread func_AAD6();
-  level.func_AD89 = var_08;
+  var_8 thread func_AAD4();
+  var_8 thread func_AADB();
+  var_8 thread func_AAE1();
+  var_8 thread func_AADD();
+  var_8 thread func_AADC();
+  var_8 thread func_AADE();
+  var_8 thread func_AAD6();
+  level.var_AD89 = var_8;
   var_8.owner scripts\mp\matchdata::logkillstreakevent(level.heliheight[var_8.heliheightoffset].streakname, var_8.targetpos);
-  return var_08;
+  return var_8;
 }
 
 func_AAD6() {
@@ -159,19 +159,19 @@ func_AAD6() {
   playFXOnTag(level.chopper_fx["light"]["tail"], self, "tag_light_tail2");
 }
 
-func_10DBE(var_00) {
+func_10DBE(var_0) {
   level endon("game_ended");
-  var_00 endon("death");
-  var_00 setlookatent(self);
-  var_00 setvehgoalpos(var_0.targetpos);
-  var_00 waittill("near_goal");
-  var_00 vehicle_setspeed(var_0.speed, 60, 30);
-  var_00 waittill("goal");
-  var_00 setvehgoalpos(var_0.func_4BF7.origin, 1);
-  var_00 waittill("goal");
-  var_00 thread func_AACF();
-  var_00 thread scripts\mp\killstreaks\flares::func_6EAA(::func_AADF);
-  var_00 thread scripts\mp\killstreaks\flares::func_6EAB(::func_AAE0);
+  var_0 endon("death");
+  var_0 setlookatent(self);
+  var_0 setvehgoalpos(var_0.targetpos);
+  var_0 waittill("near_goal");
+  var_0 vehicle_setspeed(var_0.speed, 60, 30);
+  var_0 waittill("goal");
+  var_0 setvehgoalpos(var_0.var_4BF7.origin, 1);
+  var_0 waittill("goal");
+  var_0 thread func_AACF();
+  var_0 thread scripts\mp\killstreaks\flares::func_6EAA(::func_AADF);
+  var_0 thread scripts\mp\killstreaks\flares::func_6EAB(::func_AAE0);
 }
 
 func_AACF() {
@@ -190,10 +190,10 @@ func_AACF() {
 
   for(;;) {
     if(isDefined(self.owner) && isalive(self.owner)) {
-      var_00 = func_AAD0(self.owner.origin);
+      var_0 = func_AAD0(self.owner.origin);
 
-      if(isDefined(var_00) && var_00 != self.func_4BF7) {
-        self.func_4BF7 = var_00;
+      if(isDefined(var_0) && var_0 != self.var_4BF7) {
+        self.var_4BF7 = var_0;
         func_AAD7();
         continue;
       }
@@ -213,7 +213,7 @@ func_AAD7() {
   self notify("lbSupport_moveToPlayer");
   self endon("lbSupport_moveToPlayer");
   self.intransit = 1;
-  self setvehgoalpos(self.func_4BF7.origin + (0, 0, 100), 1);
+  self setvehgoalpos(self.var_4BF7.origin + (0, 0, 100), 1);
   self waittill("goal");
   self.intransit = 0;
   self notify("hit_goal");
@@ -231,8 +231,8 @@ func_AAE1() {
   self endon("death");
   self.owner endon("disconnect");
   self endon("owner_gone");
-  var_00 = level.heliheight[self.heliheightoffset].timeout;
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+  var_0 = level.heliheight[self.heliheightoffset].timeout;
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
   thread func_AAD5();
 }
 
@@ -253,19 +253,19 @@ func_AADC() {
   self endon("owner_gone");
 
   for(;;) {
-    self.owner waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13);
-    var_09 = scripts\mp\utility\game::func_13CA1(var_09, var_13);
+    self.owner waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility\game::func_13CA1(var_9, var_13);
 
-    if(isplayer(var_01)) {
-      if(var_01 != self.owner && distance2d(var_1.origin, self.origin) <= self.func_11587 && !var_01 scripts\mp\utility\game::_hasperk("specialty_blindeye") && !(level.hardcoremode && level.teambased && var_1.team == self.team)) {
-        self setlookatent(var_01);
+    if(isplayer(var_1)) {
+      if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility\game::_hasperk("specialty_blindeye") && !(level.hardcoremode && level.teambased && var_1.team == self.team)) {
+        self setlookatent(var_1);
 
         if(isDefined(self.mgturretleft)) {
-          self.mgturretleft settargetentity(var_01);
+          self.mgturretleft settargetentity(var_1);
         }
 
         if(isDefined(self.mgturretright)) {
-          self.mgturretright settargetentity(var_01);
+          self.mgturretright settargetentity(var_1);
         }
       }
     }
@@ -284,32 +284,32 @@ func_AADE() {
 func_AAD5() {
   self endon("death");
   self notify("leaving");
-  level.func_AD89 = undefined;
+  level.var_AD89 = undefined;
   self getplayerkillstreakcombatmode();
-  var_00 = scripts\mp\killstreaks\airdrop::getflyheightoffset(self.origin);
-  var_01 = self.origin + (0, 0, var_00);
+  var_0 = scripts\mp\killstreaks\airdrop::getflyheightoffset(self.origin);
+  var_1 = self.origin + (0, 0, var_0);
   self vehicle_setspeed(self.speed, 60);
   self setmaxpitchroll(45, 180);
-  self setvehgoalpos(var_01);
+  self setvehgoalpos(var_1);
   self waittill("goal");
-  var_01 = var_01 + anglesToForward(self.angles) * 15000;
-  var_02 = spawn("script_origin", var_01);
+  var_1 = var_1 + anglesToForward(self.angles) * 15000;
+  var_2 = spawn("script_origin", var_1);
 
-  if(isDefined(var_02)) {
-    self setlookatent(var_02);
-    var_02 thread wait_and_delete(3.0);
+  if(isDefined(var_2)) {
+    self setlookatent(var_2);
+    var_2 thread wait_and_delete(3.0);
   }
 
-  self setvehgoalpos(var_01);
+  self setvehgoalpos(var_1);
   self waittill("goal");
   self notify("gone");
   scripts\mp\killstreaks\helicopter::removelittlebird();
 }
 
-wait_and_delete(var_00) {
+wait_and_delete(var_0) {
   self endon("death");
   level endon("game_ended");
-  wait(var_00);
+  wait(var_0);
   self delete();
 }
 
@@ -319,44 +319,44 @@ func_AAD4() {
   self setCanDamage(1);
 
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13);
-    var_09 = scripts\mp\utility\game::func_13CA1(var_09, var_13);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility\game::func_13CA1(var_9, var_13);
 
-    if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_01)) {
+    if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_1)) {
       continue;
     }
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
+    if(isDefined(var_8) && var_8 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection) {
+    if(isDefined(var_8) && var_8 &level.idflags_no_team_protection) {
       self.wasdamagedfrombulletricochet = 1;
     }
 
     self.wasdamaged = 1;
-    var_14 = var_00;
+    var_14 = var_0;
 
-    if(isplayer(var_01)) {
-      if(var_01 != self.owner && distance2d(var_1.origin, self.origin) <= self.func_11587 && !var_01 scripts\mp\utility\game::_hasperk("specialty_blindeye") && !(level.hardcoremode && level.teambased && var_1.team == self.team)) {
-        self setlookatent(var_01);
+    if(isplayer(var_1)) {
+      if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility\game::_hasperk("specialty_blindeye") && !(level.hardcoremode && level.teambased && var_1.team == self.team)) {
+        self setlookatent(var_1);
 
         if(isDefined(self.mgturretleft)) {
-          self.mgturretleft settargetentity(var_01);
+          self.mgturretleft settargetentity(var_1);
         }
 
         if(isDefined(self.mgturretright)) {
-          self.mgturretright settargetentity(var_01);
+          self.mgturretright settargetentity(var_1);
         }
       }
 
-      var_01 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
+      var_1 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 
-      if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-        if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
-          var_14 = var_14 + var_00 * level.armorpiercingmod;
+      if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
+        if(var_1 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
+          var_14 = var_14 + var_0 * level.armorpiercingmod;
         }
       }
     }
@@ -365,8 +365,8 @@ func_AAD4() {
       var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
     }
 
-    if(isDefined(var_09)) {
-      switch (var_09) {
+    if(isDefined(var_9)) {
+      switch (var_9) {
         case "remotemissile_projectile_mp":
         case "javelin_mp":
         case "remote_mortar_missile_mp":
@@ -390,18 +390,18 @@ func_AAD4() {
           break;
       }
 
-      scripts\mp\killstreaks\killstreaks::killstreakhit(var_01, var_09, self);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, self);
     }
 
     self.damagetaken = self.damagetaken + var_14;
 
     if(self.damagetaken >= self.maxhealth) {
-      if(isplayer(var_01) && (!isDefined(self.owner) || var_01 != self.owner)) {
-        var_01 notify("destroyed_helicopter");
-        var_01 notify("destroyed_killstreak", var_09);
-        thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_little_bird", var_01);
-        var_01 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_09, 300);
-        var_01 thread scripts\mp\rank::scoreeventpopup("destroyed_little_bird");
+      if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+        var_1 notify("destroyed_helicopter");
+        var_1 notify("destroyed_killstreak", var_9);
+        thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_little_bird", var_1);
+        var_1 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_9, 300);
+        var_1 thread scripts\mp\rank::scoreeventpopup("destroyed_little_bird");
       }
 
       if(isDefined(self.owner)) {
@@ -452,109 +452,109 @@ func_AACE() {
   }
 }
 
-func_AADF(var_00, var_01, var_02, var_03) {
+func_AADF(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  var_02 endon("death");
+  var_2 endon("death");
 
-  for(var_04 = 0; var_04 < var_3.size; var_4++) {
-    if(isDefined(var_3[var_04]) && !var_2.hasdodged) {
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    if(isDefined(var_3[var_4]) && !var_2.hasdodged) {
       var_2.hasdodged = 1;
-      var_05 = spawn("script_origin", var_2.origin);
+      var_5 = spawn("script_origin", var_2.origin);
       var_5.angles = var_2.angles;
-      var_05 movegravity(anglestoright(var_3[var_04].angles) * -1000, 0.05);
-      var_05 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
+      var_5 movegravity(anglestoright(var_3[var_4].angles) * -1000, 0.05);
+      var_5 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
 
-      for(var_06 = 0; var_06 < var_3.size; var_6++) {
-        if(isDefined(var_3[var_06])) {
-          var_3[var_06] missile_settargetent(var_05);
+      for(var_6 = 0; var_6 < var_3.size; var_6++) {
+        if(isDefined(var_3[var_6])) {
+          var_3[var_6] missile_settargetent(var_5);
         }
       }
 
-      var_07 = var_2.origin + anglestoright(var_3[var_04].angles) * 200;
-      var_02 vehicle_setspeed(var_2.speed, 100, 40);
-      var_02 setvehgoalpos(var_07, 1);
+      var_7 = var_2.origin + anglestoright(var_3[var_4].angles) * 200;
+      var_2 vehicle_setspeed(var_2.speed, 100, 40);
+      var_2 setvehgoalpos(var_7, 1);
       wait 2.0;
-      var_02 vehicle_setspeed(var_2.followspeed, 20, 20);
+      var_2 vehicle_setspeed(var_2.followspeed, 20, 20);
       break;
     }
   }
 }
 
-func_AAE0(var_00, var_01, var_02) {
+func_AAE0(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_02 endon("death");
+  var_2 endon("death");
 
   if(isDefined(self) && !var_2.hasdodged) {
     var_2.hasdodged = 1;
-    var_03 = spawn("script_origin", var_2.origin);
+    var_3 = spawn("script_origin", var_2.origin);
     var_3.angles = var_2.angles;
-    var_03 movegravity(anglestoright(self.angles) * -1000, 0.05);
-    var_03 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
-    self missile_settargetent(var_03);
-    var_04 = var_2.origin + anglestoright(self.angles) * 200;
-    var_02 vehicle_setspeed(var_2.speed, 100, 40);
-    var_02 setvehgoalpos(var_04, 1);
+    var_3 movegravity(anglestoright(self.angles) * -1000, 0.05);
+    var_3 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
+    self missile_settargetent(var_3);
+    var_4 = var_2.origin + anglestoright(self.angles) * 200;
+    var_2 vehicle_setspeed(var_2.speed, 100, 40);
+    var_2 setvehgoalpos(var_4, 1);
     wait 2.0;
-    var_02 vehicle_setspeed(var_2.followspeed, 20, 20);
+    var_2 vehicle_setspeed(var_2.followspeed, 20, 20);
   }
 }
 
-func_AAD2(var_00) {
-  var_01 = undefined;
-  var_02 = 999999;
+func_AAD2(var_0) {
+  var_1 = undefined;
+  var_2 = 999999;
 
-  foreach(var_04 in level.air_start_nodes) {
-    var_05 = distance(var_4.origin, var_00);
+  foreach(var_4 in level.air_start_nodes) {
+    var_5 = distance(var_4.origin, var_0);
 
-    if(var_05 < var_02) {
-      var_01 = var_04;
-      var_02 = var_05;
+    if(var_5 < var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_AAD1(var_00) {
-  var_01 = undefined;
-  var_02 = 999999;
+func_AAD1(var_0) {
+  var_1 = undefined;
+  var_2 = 999999;
 
-  foreach(var_04 in level.func_1A66) {
-    var_05 = distance(var_4.origin, var_00);
+  foreach(var_4 in level.var_1A66) {
+    var_5 = distance(var_4.origin, var_0);
 
-    if(var_05 < var_02) {
-      var_01 = var_04;
-      var_02 = var_05;
+    if(var_5 < var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_AAD0(var_00) {
-  var_01 = undefined;
-  var_02 = distance2d(self.func_4BF7.origin, var_00);
-  var_03 = var_02;
+func_AAD0(var_0) {
+  var_1 = undefined;
+  var_2 = distance2d(self.var_4BF7.origin, var_0);
+  var_3 = var_2;
 
-  foreach(var_05 in self.func_4BF7.neighbors) {
-    var_06 = distance2d(var_5.origin, var_00);
+  foreach(var_5 in self.var_4BF7.neighbors) {
+    var_6 = distance2d(var_5.origin, var_0);
 
-    if(var_06 < var_02 && var_06 < var_03) {
-      var_01 = var_05;
-      var_03 = var_06;
+    if(var_6 < var_2 && var_6 < var_3) {
+      var_1 = var_5;
+      var_3 = var_6;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_AACA(var_00, var_01) {
+func_AACA(var_0, var_1) {
   if(var_0.size <= 0) {
     return 0;
   }
 
-  foreach(var_03 in var_00) {
-    if(var_03 == var_01) {
+  foreach(var_3 in var_0) {
+    if(var_3 == var_1) {
       return 1;
     }
   }
@@ -563,51 +563,51 @@ func_AACA(var_00, var_01) {
 }
 
 func_AAD3() {
-  var_00 = [];
+  var_0 = [];
 
   if(isDefined(self.script_linkto)) {
-    var_01 = scripts\engine\utility::get_links();
+    var_1 = scripts\engine\utility::get_links();
 
-    for(var_02 = 0; var_02 < var_1.size; var_2++) {
-      var_03 = scripts\engine\utility::getstruct(var_1[var_02], "script_linkname");
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      var_3 = scripts\engine\utility::getstruct(var_1[var_2], "script_linkname");
 
-      if(isDefined(var_03)) {
-        var_0[var_0.size] = var_03;
+      if(isDefined(var_3)) {
+        var_0[var_0.size] = var_3;
       }
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_AADA() {
   level.air_start_nodes = scripts\engine\utility::getstructarray("chopper_boss_path_start", "targetname");
 
-  foreach(var_01 in level.air_start_nodes) {
-    var_1.neighbors = var_01 func_AAD3();
+  foreach(var_1 in level.air_start_nodes) {
+    var_1.neighbors = var_1 func_AAD3();
   }
 }
 
 func_AAD9() {
-  level.func_1A67 = scripts\engine\utility::getstructarray("chopper_boss_path", "targetname");
+  level.var_1A67 = scripts\engine\utility::getstructarray("chopper_boss_path", "targetname");
 
-  foreach(var_01 in level.func_1A67) {
-    var_1.neighbors = var_01 func_AAD3();
+  foreach(var_1 in level.var_1A67) {
+    var_1.neighbors = var_1 func_AAD3();
   }
 }
 
 func_AAD8() {
-  level.func_1A66 = scripts\engine\utility::getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+  level.var_1A66 = scripts\engine\utility::getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
 
-  foreach(var_01 in level.func_1A66) {
-    var_1.neighbors = var_01 func_AAD3();
+  foreach(var_1 in level.var_1A66) {
+    var_1.neighbors = var_1 func_AAD3();
 
-    foreach(var_03 in level.func_1A66) {
-      if(var_01 == var_03) {
+    foreach(var_3 in level.var_1A66) {
+      if(var_1 == var_3) {
         continue;
       }
-      if(!func_AACA(var_1.neighbors, var_03) && func_AACA(var_03 func_AAD3(), var_01)) {
-        var_1.neighbors[var_1.neighbors.size] = var_03;
+      if(!func_AACA(var_1.neighbors, var_3) && func_AACA(var_3 func_AAD3(), var_1)) {
+        var_1.neighbors[var_1.neighbors.size] = var_3;
       }
     }
   }
@@ -634,27 +634,27 @@ func_AACC() {
   self.vehicle endon("leaving");
   self endon("stop_shooting");
   level endon("game_ended");
-  var_00 = 0.1;
-  var_01 = 40;
-  var_02 = 80;
-  var_03 = 1.0;
-  var_04 = 2.0;
+  var_0 = 0.1;
+  var_1 = 40;
+  var_2 = 80;
+  var_3 = 1.0;
+  var_4 = 2.0;
 
   for(;;) {
-    var_05 = randomintrange(var_01, var_02 + 1);
+    var_5 = randomintrange(var_1, var_2 + 1);
 
-    for(var_06 = 0; var_06 < var_05; var_6++) {
-      var_07 = self getturrettarget(0);
+    for(var_6 = 0; var_6 < var_5; var_6++) {
+      var_7 = self getturrettarget(0);
 
-      if(isDefined(var_07) && (!isDefined(var_7.spawntime) || (gettime() - var_7.spawntime) / 1000 > 5) && (isDefined(var_7.team) && var_7.team != "spectator") && scripts\mp\utility\game::isreallyalive(var_07)) {
-        self.vehicle setlookatent(var_07);
+      if(isDefined(var_7) && (!isDefined(var_7.spawntime) || (gettime() - var_7.spawntime) / 1000 > 5) && (isDefined(var_7.team) && var_7.team != "spectator") && scripts\mp\utility\game::isreallyalive(var_7)) {
+        self.vehicle setlookatent(var_7);
         self shootturret();
       }
 
-      wait(var_00);
+      wait(var_0);
     }
 
-    wait(randomfloatrange(var_03, var_04));
+    wait(randomfloatrange(var_3, var_4));
   }
 }
 

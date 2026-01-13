@@ -4,7 +4,7 @@
  * Script: scripts\cp\maps\cp_zmb\cp_zmb_environment_scriptable.gsc
 ********************************************************************/
 
-front_gate(param_00) {
+front_gate(var_0) {
   playsoundatpos((632, 2357, 334), "entrance_sign_power_on_build");
   wait(3);
   turn_on_global_light();
@@ -20,25 +20,25 @@ front_gate(param_00) {
   scripts\cp\cp_vo::add_to_nag_vo("dj_quest_ufo_partsrecovery_start", "zmb_dj_vo", 180, 50, 1, 1);
   level thread scripts\cp\maps\cp_zmb\cp_zmb_dj::dj_quest_dialogue_vo();
   level notify("jukebox_start");
-  level thread main_power_turned_on(param_00);
+  level thread main_power_turned_on(var_0);
   level thread signs_mainst();
   set_nonstick();
 }
 
 set_nonstick() {
-  var_00 = getEntArray("coaster_ice_monster", "targetname");
-  var_01 = getEntArray("octonian", "targetname");
-  var_02 = scripts\engine\utility::array_combine(var_00, var_01);
-  foreach(var_04 in var_02) {
-    var_04 setnonstick(1);
+  var_0 = getEntArray("coaster_ice_monster", "targetname");
+  var_1 = getEntArray("octonian", "targetname");
+  var_2 = scripts\engine\utility::array_combine(var_0, var_1);
+  foreach(var_4 in var_2) {
+    var_4 setnonstick(1);
     scripts\engine\utility::waitframe();
   }
 }
 
 turn_on_global_light() {
-  var_00 = getEntArray("global_light", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 setscriptablepartstate("root", "on");
+  var_0 = getEntArray("global_light", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("root", "on");
   }
 }
 
@@ -47,14 +47,14 @@ zmb_main_entrance_gate() {
 }
 
 turn_on_main_gate() {
-  var_00 = getEntArray("main_gate", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 setscriptablepartstate("main_gate", "gate_on");
+  var_0 = getEntArray("main_gate", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("main_gate", "gate_on");
   }
 
-  for(var_04 = 1; var_04 <= 5; var_04++) {
-    var_05 = getent("gate_light_0" + var_04, "targetname");
-    var_05 setscriptablepartstate("main_gate_light", "turning_on");
+  for(var_4 = 1; var_4 <= 5; var_4++) {
+    var_5 = getent("gate_light_0" + var_4, "targetname");
+    var_5 setscriptablepartstate("main_gate_light", "turning_on");
   }
 }
 
@@ -112,15 +112,15 @@ arcade() {
   level thread power_on_arcade_machines("arcade_robottank");
 }
 
-power_on_arcade_machines(param_00) {
-  var_01 = scripts\engine\utility::getstructarray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
+power_on_arcade_machines(var_0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
     scripts\engine\utility::waitframe();
-    var_03.powered_on = 1;
-    if(isDefined(var_03.script_index)) {
-      var_04 = getent(var_03.name, "targetname");
-      var_05 = var_03.script_index;
-      var_04 setscriptablepartstate("cab" + var_05, "idle");
+    var_3.powered_on = 1;
+    if(isDefined(var_3.script_index)) {
+      var_4 = getent(var_3.name, "targetname");
+      var_5 = var_3.script_index;
+      var_4 setscriptablepartstate("cab" + var_5, "idle");
     }
   }
 }
@@ -169,8 +169,8 @@ init() {
 }
 
 is_all_power_on() {
-  foreach(var_01 in level.generators) {
-    if(!scripts\engine\utility::istrue(var_01.powered_on)) {
+  foreach(var_1 in level.generators) {
+    if(!scripts\engine\utility::istrue(var_1.powered_on)) {
       return 0;
     }
   }
@@ -178,24 +178,24 @@ is_all_power_on() {
   return 1;
 }
 
-all_power_vo(param_00) {
-  if(isDefined(param_00)) {
-    if(param_00.vo_prefix == "p1_") {
+all_power_vo(var_0) {
+  if(isDefined(var_0)) {
+    if(var_0.vo_prefix == "p1_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_valleygirl_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
       return;
     }
 
-    if(param_00.vo_prefix == "p2_") {
+    if(var_0.vo_prefix == "p2_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_nerd_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
       return;
     }
 
-    if(param_00.vo_prefix == "p3_") {
+    if(var_0.vo_prefix == "p3_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_rapper_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
       return;
     }
 
-    if(param_00.vo_prefix == "p4_") {
+    if(var_0.vo_prefix == "p4_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_jock_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
       return;
     }
@@ -206,20 +206,20 @@ all_power_vo(param_00) {
 
 power_on_monitor() {
   level endon("game_ended");
-  var_00 = getent("main_portal_sun", "targetname");
-  var_00 setModel("zmb_center_portal_sun_off");
+  var_0 = getent("main_portal_sun", "targetname");
+  var_0 setModel("zmb_center_portal_sun_off");
   for(;;) {
-    level waittill("power_on_scriptable_and_light", var_01, var_02);
-    var_03 = is_all_power_on();
-    if(var_03) {
-      level thread all_power_vo(var_02);
+    level waittill("power_on_scriptable_and_light", var_1, var_2);
+    var_3 = is_all_power_on();
+    if(var_3) {
+      level thread all_power_vo(var_2);
     }
 
-    var_04 = strtok(var_01, ",");
-    foreach(var_06 in var_04) {
-      switch (var_06) {
+    var_4 = strtok(var_1, ",");
+    foreach(var_6 in var_4) {
+      switch (var_6) {
         case "front_gate":
-          level thread front_gate(var_02);
+          level thread front_gate(var_2);
           break;
 
         case "hidden_room":
@@ -286,14 +286,14 @@ power_on_monitor() {
   }
 }
 
-main_power_turned_on(param_00) {
-  if(param_00.vo_prefix == "p1_") {
+main_power_turned_on(var_0) {
+  if(var_0.vo_prefix == "p1_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_valleygirl_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  } else if(param_00.vo_prefix == "p2_") {
+  } else if(var_0.vo_prefix == "p2_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_nerd_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  } else if(param_00.vo_prefix == "p3_") {
+  } else if(var_0.vo_prefix == "p3_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_rapper_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  } else if(param_00.vo_prefix == "p4_") {
+  } else if(var_0.vo_prefix == "p4_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_jock_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   }
 
@@ -304,25 +304,25 @@ main_power_turned_on(param_00) {
   level scripts\cp\cp_vo::add_to_nag_vo("dj_polarpeaks_use_nag", "zmb_dj_vo", 180, 90, 20, 1);
 }
 
-turn_on_light(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  foreach(var_03 in var_01) {
-    if(isDefined(var_03.script_intensity_01)) {
-      var_04 = var_03.script_intensity_01;
-      var_03 setlightintensity(var_04);
+turn_on_light(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.script_intensity_01)) {
+      var_4 = var_3.script_intensity_01;
+      var_3 setlightintensity(var_4);
     }
   }
 }
 
 signs_mainst() {
-  var_00 = getent("main_portal_sun", "targetname");
-  var_00.angles = (0, 0, 0);
-  var_01 = getent("triton_skull_light", "targetname");
-  var_02 = getent("triton_sign_light", "targetname");
+  var_0 = getent("main_portal_sun", "targetname");
+  var_0.angles = (0, 0, 0);
+  var_1 = getent("triton_skull_light", "targetname");
+  var_2 = getent("triton_sign_light", "targetname");
   level thread rotate_center_portal_sun();
   wait(3);
-  var_01 setscriptablepartstate("light", "on");
-  var_02 setscriptablepartstate("light", "on");
+  var_1 setscriptablepartstate("light", "on");
+  var_2 setscriptablepartstate("light", "on");
   turn_on_scriptable("main_street_ball_lights");
   turn_on_scriptable("space_depot_main_sign");
   turn_on_scriptable("spacedepot_neon_upper");
@@ -335,32 +335,32 @@ signs_mainst() {
   turn_on_scriptable("crater_cakes_main_sign");
   turn_on_scriptable("crater_cakes_neon_upper");
   level thread scripts\cp\maps\cp_zmb\cp_zmb_coaster::turn_on_coaster_anims();
-  var_03 = getent("main_street_monster", "targetname");
-  var_03 setscriptablepartstate("main", "idle2");
+  var_3 = getent("main_street_monster", "targetname");
+  var_3 setscriptablepartstate("main", "idle2");
 }
 
 rotate_center_portal_sun() {
-  var_00 = getent("main_portal_sun", "targetname");
-  var_00 setModel("zmb_center_portal_sun");
+  var_0 = getent("main_portal_sun", "targetname");
+  var_0 setModel("zmb_center_portal_sun");
   for(;;) {
-    var_00 rotateyaw(360, 10);
+    var_0 rotateyaw(360, 10);
     wait(9.95);
   }
 }
 
-turn_on_sign(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  foreach(var_03 in var_01) {
+turn_on_sign(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  foreach(var_3 in var_1) {
     wait(randomfloatrange(0.15, 0.25));
-    var_03 setscriptablepartstate("sign", "powered_on");
+    var_3 setscriptablepartstate("sign", "powered_on");
   }
 }
 
-turn_on_scriptable(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  foreach(var_03 in var_01) {
+turn_on_scriptable(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  foreach(var_3 in var_1) {
     wait(randomfloatrange(0.25, 0.5));
-    var_03 setscriptablepartstate("neon_tube", "on");
+    var_3 setscriptablepartstate("neon_tube", "on");
   }
 }
 
@@ -376,8 +376,8 @@ signs_kepler() {
   turn_on_sign("shooting_gallery_sign");
   turn_on_sign("sign_spaceshipsplash");
   getent("chromosphere_mike", "targetname") setscriptablepartstate("main", "on");
-  var_00 = getEntArray("octonian", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 setscriptablepartstate("body", "on");
+  var_0 = getEntArray("octonian", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("body", "on");
   }
 }

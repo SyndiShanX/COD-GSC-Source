@@ -3,13 +3,13 @@
  * Script: 2625.gsc
 ***************************************/
 
-func_EF33(var_00) {
-  level.func_EF2E = var_00;
+func_EF33(var_0) {
+  level.var_EF2E = var_0;
 }
 
 func_028A() {
-  if(isDefined(level.func_EF2E)) {
-    [[level.func_EF2E]]();
+  if(isDefined(level.var_EF2E)) {
+    [[level.var_EF2E]]();
   }
 
   if(scripts\engine\utility::issp()) {

@@ -4,112 +4,112 @@
  * Script: 3896.gsc
 ************************/
 
-func_B063(param_00, param_01, param_02, param_03) {
+func_B063(var_0, var_1, var_2, var_3) {
   self setscriptablepartstate("run", "active", 0);
   self gib_fx_override("gravity");
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, 1.3);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, 1.3);
 }
 
-func_F173(param_00, param_01, param_02, param_03) {
+func_F173(var_0, var_1, var_2, var_3) {
   self setscriptablepartstate("run", "activeEnd", 0);
 }
 
-func_F178(param_00, param_01, param_02, param_03) {
+func_F178(var_0, var_1, var_2, var_3) {
   self.var_9FB2 = 0;
   self setscriptablepartstate("jump", "activeEnd", 0);
 }
 
-func_D560(param_00, param_01, param_02, param_03) {
+func_D560(var_0, var_1, var_2, var_3) {
   self endon("death");
   self.var_9FB2 = 1;
   self setscriptablepartstate("jump", "active", 0);
-  var_04 = self getspectatepoint();
-  var_05 = self _meth_8145();
+  var_4 = self getspectatepoint();
+  var_5 = self _meth_8145();
   self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_04.angles);
+  self orientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
   self scragentsetanimscale(1, 1);
-  var_06 = var_05.origin - var_04.origin;
-  var_07 = self getsafecircleorigin(param_01, 0);
-  var_08 = getanimlength(var_07);
-  var_09 = getmovedelta(var_07);
-  self ghostexplode(self.origin, var_05.origin, var_08);
-  self setanimstate(param_01, 0);
-  wait(var_08);
+  var_6 = var_5.origin - var_4.origin;
+  var_7 = self getsafecircleorigin(var_1, 0);
+  var_8 = getanimlength(var_7);
+  var_9 = getmovedelta(var_7);
+  self ghostexplode(self.origin, var_5.origin, var_8);
+  self setanimstate(var_1, 0);
+  wait(var_8);
   self gib_fx_override("gravity");
   self notify("traverse_end");
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_D562(param_00, param_01, param_02, param_03) {
+func_D562(var_0, var_1, var_2, var_3) {
   self endon("death");
-  var_04 = self getspectatepoint();
-  var_05 = self _meth_8145();
+  var_4 = self getspectatepoint();
+  var_5 = self _meth_8145();
   self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_04.angles);
+  self orientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
   self scragentsetanimscale(1, 1);
-  var_06 = var_05.origin - var_04.origin;
-  var_07 = self getsafecircleorigin(param_01, 0);
-  var_08 = getanimlength(var_07);
-  self setanimstate(param_01, 0);
-  var_09 = undefined;
-  var_0A = var_04.origin[2] - var_05.origin[2];
+  var_6 = var_5.origin - var_4.origin;
+  var_7 = self getsafecircleorigin(var_1, 0);
+  var_8 = getanimlength(var_7);
+  self setanimstate(var_1, 0);
+  var_9 = undefined;
+  var_0A = var_4.origin[2] - var_5.origin[2];
   if(var_0A < -16) {
-    var_09 = var_05.origin + (0, 0, 32);
-    self ghostexplode(self.origin, var_09, var_08);
-    wait(var_08);
-    self setanimstate(param_01, 1);
+    var_9 = var_5.origin + (0, 0, 32);
+    self ghostexplode(self.origin, var_9, var_8);
+    wait(var_8);
+    self setanimstate(var_1, 1);
   } else if(var_0A > 16) {
-    var_09 = (var_05.origin[0], var_05.origin[1], var_04.origin[2]);
-    self ghostexplode(self.origin, var_09, var_08 * 0.5);
-    wait(var_08 * 0.5);
+    var_9 = (var_5.origin[0], var_5.origin[1], var_4.origin[2]);
+    self ghostexplode(self.origin, var_9, var_8 * 0.5);
+    wait(var_8 * 0.5);
   } else {
-    self ghostexplode(self.origin, var_05.origin, var_08);
-    wait(var_08);
+    self ghostexplode(self.origin, var_5.origin, var_8);
+    wait(var_8);
   }
 
   self gib_fx_override("gravity");
   self notify("traverse_end");
-  func_11701(param_00, param_01);
+  func_11701(var_0, var_1);
 }
 
-func_BBC2(param_00) {
+func_BBC2(var_0) {
   self endon("stop_motion_hack");
   for(;;) {
-    self setorigin(param_00.origin, 1);
-    self.angles = param_00.angles;
+    self setorigin(var_0.origin, 1);
+    self.angles = var_0.angles;
     wait(0.05);
   }
 }
 
-func_11701(param_00, param_01) {
-  var_02 = level.asm[param_00].states[param_01];
-  var_03 = undefined;
-  if(isarray(var_02.var_116FB)) {
-    var_03 = var_02.var_116FB[0];
+func_11701(var_0, var_1) {
+  var_2 = level.asm[var_0].states[var_1];
+  var_3 = undefined;
+  if(isarray(var_2.var_116FB)) {
+    var_3 = var_2.var_116FB[0];
   } else {
-    var_03 = var_02.var_116FB;
+    var_3 = var_2.var_116FB;
   }
 
-  scripts\asm\asm::func_2388(param_00, param_01, var_02, var_02.var_116FB);
-  scripts\asm\asm::func_238A(param_00, var_03, 0, undefined, undefined, undefined);
+  scripts\asm\asm::func_2388(var_0, var_1, var_2, var_2.var_116FB);
+  scripts\asm\asm::func_238A(var_0, var_3, 0, undefined, undefined, undefined);
   self notify("killanimscript");
 }
 
-func_F16E(param_00, param_01, param_02, param_03) {
+func_F16E(var_0, var_1, var_2, var_3) {
   self notify("terminate_ai_threads");
   self notify("killanimscript");
 }
 
-isfactorinuse(param_00, param_01, param_02, param_03) {
+isfactorinuse(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.vehicle_getspawnerarray)) {
     return 0;
   }
 
-  var_04 = anglesToForward(self.angles);
-  var_05 = vectortoangles(var_04);
-  var_06 = vectordot(vectornormalize((var_04[0], var_04[1], 0)), anglesToForward(self.angles));
-  var_07 = 0.966;
-  return var_06 > var_07;
+  var_4 = anglesToForward(self.angles);
+  var_5 = vectortoangles(var_4);
+  var_6 = vectordot(vectornormalize((var_4[0], var_4[1], 0)), anglesToForward(self.angles));
+  var_7 = 0.966;
+  return var_6 > var_7;
 }

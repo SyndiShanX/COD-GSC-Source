@@ -20,9 +20,9 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
-    var_00 thread onplayerkilled();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
+    var_0 thread onplayerkilled();
   }
 }
 
@@ -57,19 +57,19 @@ showfriendicon() {
 }
 
 updatefriendiconsettings() {
-  var_00 = scripts\mp\utility\game::getintproperty("scr_drawfriend", level.drawfriend);
+  var_0 = scripts\mp\utility\game::getintproperty("scr_drawfriend", level.drawfriend);
 
-  if(level.drawfriend != var_00) {
-    level.drawfriend = var_00;
+  if(level.drawfriend != var_0) {
+    level.drawfriend = var_0;
     updatefriendicons();
   }
 }
 
 updatefriendicons() {
-  var_00 = level.players;
+  var_0 = level.players;
 
-  for(var_01 = 0; var_01 < var_0.size; var_1++) {
-    var_02 = var_0[var_01];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
 
     if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
       if(level.drawfriend) {
@@ -84,10 +84,10 @@ updatefriendicons() {
         continue;
       }
 
-      var_00 = level.players;
+      var_0 = level.players;
 
-      for(var_01 = 0; var_01 < var_0.size; var_1++) {
-        var_02 = var_0[var_01];
+      for(var_1 = 0; var_1 < var_0.size; var_1++) {
+        var_2 = var_0[var_1];
 
         if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
           var_2.headicon = "";

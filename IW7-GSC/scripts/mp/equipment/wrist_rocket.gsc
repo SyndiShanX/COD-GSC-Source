@@ -17,28 +17,28 @@ wristrocket_unset() {
   self notify("wristRocket_unset");
 }
 
-wristrocketused(param_00) {
-  if(param_00.tickpercent == 1) {
+wristrocketused(var_0) {
+  if(var_0.tickpercent == 1) {
     return;
   }
 
-  var_01 = wristrocket_createrocket(param_00);
-  var_01.objective_position = param_00;
-  param_00 = scripts\mp\utility::_launchgrenade("wristrocket_mp", self.origin, (0, 0, 0), 100, 1, param_00);
-  param_00 forcehidegrenadehudwarning(1);
-  param_00 linkto(var_01);
-  param_00 thread wristrocket_cleanuponparentdeath(var_01);
-  var_01 setscriptablepartstate("launch", "active", 0);
-  var_01 thread wristrocket_watchfuse(2);
-  var_01 thread wristrocket_watchstuck();
+  var_1 = wristrocket_createrocket(var_0);
+  var_1.objective_position = var_0;
+  var_0 = scripts\mp\utility::_launchgrenade("wristrocket_mp", self.origin, (0, 0, 0), 100, 1, var_0);
+  var_0 forcehidegrenadehudwarning(1);
+  var_0 linkto(var_1);
+  var_0 thread wristrocket_cleanuponparentdeath(var_1);
+  var_1 setscriptablepartstate("launch", "active", 0);
+  var_1 thread wristrocket_watchfuse(2);
+  var_1 thread wristrocket_watchstuck();
 }
 
-wristrocket_watchfuse(param_00) {
+wristrocket_watchfuse(var_0) {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
   self notify("wristRocket_watchFuse");
   self endon("wristRocket_watchFuse");
-  wait(param_00);
+  wait(var_0);
   thread wristrocket_explode();
 }
 
@@ -46,9 +46,9 @@ wristrocket_watchstuck() {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
   self playLoopSound("wrist_rocket_fire_tail");
-  self waittill("missile_stuck", var_00);
-  if(isplayer(var_00)) {
-    self.triggerportableradarping scripts\mp\weapons::grenadestuckto(self, var_00);
+  self waittill("missile_stuck", var_0);
+  if(isplayer(var_0)) {
+    self.triggerportableradarping scripts\mp\weapons::grenadestuckto(self, var_0);
   }
 
   self stoploopsound();
@@ -70,122 +70,122 @@ wristrocket_delete() {
   self delete();
 }
 
-wristrocket_createrocket(param_00) {
-  var_01 = scripts\mp\utility::_magicbullet("wristrocket_proj_mp", param_00.origin, param_00.origin + anglesToForward(self getgunangles()), self);
-  var_01.triggerportableradarping = self;
-  var_01.team = self.team;
-  var_01.weapon_name = "wristrocket_proj_mp";
-  var_01.power = "power_wristrocket";
-  var_01 setotherent(self);
-  var_01 setentityowner(self);
-  var_01 thread wristrocket_cleanuponownerdisconnect(self);
-  return var_01;
+wristrocket_createrocket(var_0) {
+  var_1 = scripts\mp\utility::_magicbullet("wristrocket_proj_mp", var_0.origin, var_0.origin + anglesToForward(self getgunangles()), self);
+  var_1.triggerportableradarping = self;
+  var_1.team = self.team;
+  var_1.weapon_name = "wristrocket_proj_mp";
+  var_1.power = "power_wristrocket";
+  var_1 setotherent(self);
+  var_1 setentityowner(self);
+  var_1 thread wristrocket_cleanuponownerdisconnect(self);
+  return var_1;
 }
 
 wristrocket_watcheffects() {
   self endon("disconnect");
   self notify("wristRocket_watchEffects");
   self endon("wristRocket_watchEffects");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = spawnStruct();
-    if(var_00) {
-      childthread wristrocket_watcheffectsraceheldoffhandbreak(var_01);
+    var_1 = spawnStruct();
+    if(var_0) {
+      childthread wristrocket_watcheffectsraceheldoffhandbreak(var_1);
     } else {
-      childthread wristrocket_watcheffectsracegrenadepullback(var_01);
+      childthread wristrocket_watcheffectsracegrenadepullback(var_1);
     }
 
-    childthread wristrocket_watcheffectsracegrenadefired(var_01);
-    childthread wristrocket_watcheffectsracesuperstarted(var_01);
-    childthread wristrocket_watcheffectsracedeath(var_01);
-    childthread wristrocket_watcheffectsraceunset(var_01);
-    var_00 = 0;
+    childthread wristrocket_watcheffectsracegrenadefired(var_1);
+    childthread wristrocket_watcheffectsracesuperstarted(var_1);
+    childthread wristrocket_watcheffectsracedeath(var_1);
+    childthread wristrocket_watcheffectsraceunset(var_1);
+    var_0 = 0;
     self waittill("wristRocket_watchEffectsRaceStart");
     waittillframeend;
-    var_02 = scripts\mp\utility::istrue(var_01.grenadepullback);
-    var_03 = scripts\mp\utility::istrue(var_01.grenadefire);
-    var_04 = scripts\mp\utility::istrue(var_01.superstarted);
-    var_05 = scripts\mp\utility::istrue(var_01.var_E6);
-    var_06 = scripts\mp\utility::istrue(var_01.unset);
-    var_07 = scripts\mp\utility::istrue(var_01.heldoffhandbreak);
-    if(var_05) {
+    var_2 = scripts\mp\utility::istrue(var_1.grenadepullback);
+    var_3 = scripts\mp\utility::istrue(var_1.grenadefire);
+    var_4 = scripts\mp\utility::istrue(var_1.superstarted);
+    var_5 = scripts\mp\utility::istrue(var_1.var_E6);
+    var_6 = scripts\mp\utility::istrue(var_1.unset);
+    var_7 = scripts\mp\utility::istrue(var_1.heldoffhandbreak);
+    if(var_5) {
       self notify("wristRocket_watchEffectsRaceEnd");
       thread wristrocket_endeffects();
       return;
-    } else if(var_06) {
+    } else if(var_6) {
       self notify("wristRocket_watchEffectsRaceEnd");
       thread wristrocket_endeffects();
       return;
-    } else if(var_04) {
+    } else if(var_4) {
       thread wristrocket_endeffects();
-    } else if(var_07) {
+    } else if(var_7) {
       thread wristrocket_endeffects();
-    } else if(var_03) {
+    } else if(var_3) {
       thread wristrocket_endeffects();
-    } else if(var_02) {
+    } else if(var_2) {
       thread wristrocket_begineffects();
-      var_00 = 1;
+      var_0 = 1;
     }
 
     self notify("wristRocket_watchEffectsRaceEnd");
   }
 }
 
-wristrocket_watcheffectsracegrenadepullback(param_00) {
+wristrocket_watcheffectsracegrenadepullback(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   for(;;) {
-    self waittill("grenade_pullback", var_01);
-    if(var_01 == "wristrocket_mp") {
+    self waittill("grenade_pullback", var_1);
+    if(var_1 == "wristrocket_mp") {
       break;
     }
   }
 
-  param_00.grenadepullback = 1;
+  var_0.grenadepullback = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
-wristrocket_watcheffectsracegrenadefired(param_00) {
+wristrocket_watcheffectsracegrenadefired(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   for(;;) {
-    self waittill("grenade_fire", var_01, var_02);
-    if(var_02 == "wristrocket_mp") {
+    self waittill("grenade_fire", var_1, var_2);
+    if(var_2 == "wristrocket_mp") {
       break;
     }
   }
 
-  param_00.grenadefire = 1;
+  var_0.grenadefire = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
-wristrocket_watcheffectsracesuperstarted(param_00) {
+wristrocket_watcheffectsracesuperstarted(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   self waittill("super_started");
-  param_00.superstarted = 1;
+  var_0.superstarted = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
-wristrocket_watcheffectsracedeath(param_00) {
+wristrocket_watcheffectsracedeath(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   self waittill("death");
-  param_00.var_E6 = 1;
+  var_0.var_E6 = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
-wristrocket_watcheffectsraceunset(param_00) {
+wristrocket_watcheffectsraceunset(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   self waittill("wristRocket_unset");
-  param_00.unset = 1;
+  var_0.unset = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
-wristrocket_watcheffectsraceheldoffhandbreak(param_00) {
+wristrocket_watcheffectsraceheldoffhandbreak(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   scripts\engine\utility::waitframe();
   while(self _meth_854D() == "wristrocket_mp") {
     scripts\engine\utility::waitframe();
   }
 
-  param_00.heldoffhandbreak = 1;
+  var_0.heldoffhandbreak = 1;
   self notify("wristRocket_watchEffectsRaceStart");
 }
 
@@ -203,48 +203,48 @@ wristrocket_endeffects() {
   self setscriptablepartstate("wristRocketWorld", "neutral", 0);
 }
 
-wristrocketcooksuicideexplodecheck(param_00, param_01, param_02, param_03, param_04) {
-  if(param_01 != param_02) {
+wristrocketcooksuicideexplodecheck(var_0, var_1, var_2, var_3, var_4) {
+  if(var_1 != var_2) {
     return;
   }
 
-  if(param_03 != "MOD_SUICIDE") {
+  if(var_3 != "MOD_SUICIDE") {
     return;
   }
 
-  if(!isDefined(param_00) || param_00 != param_01) {
+  if(!isDefined(var_0) || var_0 != var_1) {
     return;
   }
 
-  if(!isDefined(param_04) || param_04 != "wristrocket_mp") {
+  if(!isDefined(var_4) || var_4 != "wristrocket_mp") {
     return;
   }
 
-  var_05 = param_02 gettagorigin("tag_weapon_left");
-  radiusdamage(var_05, 175, 200, 70, param_01, "MOD_EXPLOSIVE", "wristrocket_mp");
-  scripts\mp\shellshock::grenade_earthquakeatposition(var_05, 0.6);
-  playsoundatpos(var_05, "wrist_rocket_explode");
-  playFX(scripts\engine\utility::getfx("wristrocket_explode"), var_05);
+  var_5 = var_2 gettagorigin("tag_weapon_left");
+  radiusdamage(var_5, 175, 200, 70, var_1, "MOD_EXPLOSIVE", "wristrocket_mp");
+  scripts\mp\shellshock::grenade_earthquakeatposition(var_5, 0.6);
+  playsoundatpos(var_5, "wrist_rocket_explode");
+  playFX(scripts\engine\utility::getfx("wristrocket_explode"), var_5);
 }
 
-wristrocket_cleanuponparentdeath(param_00, param_01) {
+wristrocket_cleanuponparentdeath(var_0, var_1) {
   self endon("death");
   self notify("cleanupOnParentDeath");
   self endon("cleanupOnParentDeath");
-  if(isDefined(param_00)) {
-    param_00 waittill("death");
+  if(isDefined(var_0)) {
+    var_0 waittill("death");
   }
 
-  if(isDefined(param_01)) {
-    wait(param_01);
+  if(isDefined(var_1)) {
+    wait(var_1);
   }
 
   self delete();
 }
 
-wristrocket_cleanuponownerdisconnect(param_00) {
+wristrocket_cleanuponownerdisconnect(var_0) {
   self endon("death");
-  param_00 waittill("disconnect");
+  var_0 waittill("disconnect");
   if(isDefined(self)) {
     self delete();
   }

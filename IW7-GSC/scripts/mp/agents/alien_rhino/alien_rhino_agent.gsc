@@ -35,7 +35,7 @@ func_FAB0() {
   }
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   if(should_spawn_mammoth()) {
     self setModel("alien_queen_blue");
     return;
@@ -170,7 +170,7 @@ calculatealienrhinohealth() {
   return -15536 * level.players.size;
 }
 
-accumulatedamage(param_00, param_01) {
+accumulatedamage(var_0, var_1) {
   if(!isDefined(self.damageaccumulator)) {
     self.damageaccumulator = spawnStruct();
     self.damageaccumulator.accumulateddamage = 0;
@@ -180,32 +180,32 @@ accumulatedamage(param_00, param_01) {
   }
 
   self.damageaccumulator.lastdamagetime = gettime();
-  if(!isDefined(param_01)) {
-    param_01 = (1, 1, 1);
+  if(!isDefined(var_1)) {
+    var_1 = (1, 1, 1);
   }
 
-  self.damageaccumulator.lastdir = param_01;
+  self.damageaccumulator.lastdir = var_1;
   if(isDefined(self.fake_damage)) {
     self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
     self.fake_damage = undefined;
     return;
   }
 
-  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
+  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
-func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(isDefined(self.is_mammoth) && self.is_mammoth) {
-    param_02 = param_02 / 4;
+    var_2 = var_2 / 4;
   }
 
-  var_0C = weaponclass(param_05);
+  var_0C = weaponclass(var_5);
   if(var_0C == "smg" || var_0C == "spread") {
-    param_02 = param_02 / 2;
+    var_2 = var_2 / 2;
   }
 
-  accumulatedamage(param_02, param_07);
-  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  accumulatedamage(var_2, var_7);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
 }
 
 should_spawn_mammoth() {
@@ -216,18 +216,18 @@ should_spawn_mammoth() {
   return 0;
 }
 
-onrhinokilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onrhinokilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(scripts\engine\utility::istrue(self.is_mammoth)) {
-    var_09 = 4000;
+    var_9 = 4000;
   } else {
-    var_09 = 1000;
+    var_9 = 1000;
   }
 
   foreach(var_0B in level.players) {
     if(var_0B scripts\cp\utility::is_valid_player()) {
-      var_0B scripts\cp\cp_persistence::give_player_currency(var_09);
+      var_0B scripts\cp\cp_persistence::give_player_currency(var_9);
     }
   }
 
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }

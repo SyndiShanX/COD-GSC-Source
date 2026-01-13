@@ -4,38 +4,38 @@
 ***************************************/
 
 func_9887() {
-  self.func_A444 = undefined;
-  self.func_A443 = undefined;
-  self.func_A442 = undefined;
-  self.func_A43E = undefined;
-  self.func_A447 = undefined;
-  self.func_A446 = undefined;
-  self.func_A43F = undefined;
+  self.var_A444 = undefined;
+  self.var_A443 = undefined;
+  self.var_A442 = undefined;
+  self.var_A43E = undefined;
+  self.var_A447 = undefined;
+  self.var_A446 = undefined;
+  self.var_A43F = undefined;
 }
 
 func_E254() {
-  if(!isDefined(self.func_A449)) {
+  if(!isDefined(self.var_A449)) {
     return;
   }
-  self.func_A449 = undefined;
+  self.var_A449 = undefined;
   self notify("stop_lockon_sound");
   self _meth_8403();
   self _meth_8406(0);
   self _meth_8404(0);
-  self.func_4BF3 = 0;
-  self.func_4BF2 = 0;
-  self.func_A445 = undefined;
+  self.var_4BF3 = 0;
+  self.var_4BF2 = 0;
+  self.var_A445 = undefined;
   self stopolcalsound("javelin_clu_lock");
   self stopolcalsound("javelin_clu_aquiring_lock");
   func_9887();
 }
 
 func_6A61() {
-  var_00 = self getEye();
-  var_01 = self getplayerangles();
-  var_02 = anglesToForward(var_01);
-  var_03 = var_00 + var_02 * 15000;
-  var_04 = bulletTrace(var_00, var_03, 0, undefined);
+  var_0 = self getEye();
+  var_1 = self getplayerangles();
+  var_2 = anglesToForward(var_1);
+  var_3 = var_0 + var_2 * 15000;
+  var_4 = bulletTrace(var_0, var_3, 0, undefined);
 
   if(var_4["surfacetype"] == "none") {
     return undefined;
@@ -45,70 +45,70 @@ func_6A61() {
     return undefined;
   }
 
-  var_05 = var_4["entity"];
+  var_5 = var_4["entity"];
 
-  if(isDefined(var_05)) {
-    if(var_05 == level.ac130.planemodel) {
+  if(isDefined(var_5)) {
+    if(var_5 == level.ac130.planemodel) {
       return undefined;
     }
   }
 
-  var_06 = [];
+  var_6 = [];
   var_6[0] = var_4["position"];
   var_6[1] = var_4["normal"];
-  return var_06;
+  return var_6;
 }
 
 func_AF27() {
-  self.func_A43E = undefined;
+  self.var_A43E = undefined;
 }
 
 func_AF25() {
-  if(!isDefined(self.func_A43E)) {
-    self.func_A43E = 1;
+  if(!isDefined(self.var_A43E)) {
+    self.var_A43E = 1;
   } else {
-    self.func_A43E++;
+    self.var_A43E++;
   }
 }
 
 func_AF26() {
-  var_00 = 4;
+  var_0 = 4;
 
-  if(isDefined(self.func_A43E) && self.func_A43E >= var_00) {
+  if(isDefined(self.var_A43E) && self.var_A43E >= var_0) {
     return 1;
   }
 
   return 0;
 }
 
-func_11579(var_00) {
-  var_01 = 1100;
-  var_02 = distance(self.origin, var_00);
+func_11579(var_0) {
+  var_1 = 1100;
+  var_2 = distance(self.origin, var_0);
 
-  if(var_02 < var_01) {
+  if(var_2 < var_1) {
     return 1;
   }
 
   return 0;
 }
 
-func_B061(var_00, var_01) {
+func_B061(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("stop_lockon_sound");
 
   for(;;) {
-    self playlocalsound(var_00);
-    wait(var_01);
+    self playlocalsound(var_0);
+    wait(var_1);
   }
 }
 
-func_11A03(var_00, var_01) {
-  var_02 = var_00 + var_01 * 10.0;
-  var_03 = var_02 + (0, 0, 2000);
-  var_04 = bulletTrace(var_02, var_03, 0, undefined);
+func_11A03(var_0, var_1) {
+  var_2 = var_0 + var_1 * 10.0;
+  var_3 = var_2 + (0, 0, 2000);
+  var_4 = bulletTrace(var_2, var_3, 0, undefined);
 
-  if(sighttracepassed(var_02, var_03, 0, undefined)) {
+  if(sighttracepassed(var_2, var_3, 0, undefined)) {
     return 1;
   }
 
@@ -119,22 +119,22 @@ func_A448() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  var_00 = 1150;
-  var_01 = 25;
-  var_02 = 100;
-  var_03 = 400;
-  var_04 = 12;
-  var_05 = 0;
-  var_06 = 0;
-  self.func_A445 = undefined;
+  var_0 = 1150;
+  var_1 = 25;
+  var_2 = 100;
+  var_3 = 400;
+  var_4 = 12;
+  var_5 = 0;
+  var_6 = 0;
+  self.var_A445 = undefined;
   func_9887();
 
   for(;;) {
     wait 0.05;
-    var_07 = self getcurrentweapon();
+    var_7 = self getcurrentweapon();
 
-    if(isbot(self) && var_07 != "javelin_mp" || !issubstr(var_07, "javelin") || scripts\mp\killstreaks\emp_common::isemped()) {
-      if(isDefined(self.func_A449)) {
+    if(isbot(self) && var_7 != "javelin_mp" || !issubstr(var_7, "javelin") || scripts\mp\killstreaks\emp_common::isemped()) {
+      if(isDefined(self.var_A449)) {
         func_E254();
       }
 
@@ -142,30 +142,30 @@ func_A448() {
     }
 
     if(self playerads() < 0.95) {
-      var_06 = gettime();
+      var_6 = gettime();
       func_E254();
       continue;
     }
 
-    var_08 = 0;
+    var_8 = 0;
 
     if(getdvar("missileDebugDraw") == "1") {
-      var_08 = 1;
+      var_8 = 1;
     }
 
-    var_09 = 0;
+    var_9 = 0;
 
     if(getdvar("missileDebugText") == "1") {
-      var_09 = 1;
+      var_9 = 1;
     }
 
-    self.func_A449 = 1;
+    self.var_A449 = 1;
 
-    if(!isDefined(self.func_A444)) {
-      self.func_A444 = 1;
+    if(!isDefined(self.var_A444)) {
+      self.var_A444 = 1;
     }
 
-    if(self.func_A444 == 1) {
+    if(self.var_A444 == 1) {
       var_10 = scripts\mp\weapons::func_AF2B();
 
       if(var_10.size != 0) {
@@ -185,18 +185,18 @@ func_A448() {
           if(!func_13263(var_16[0])) {
             continue;
           }
-          if(var_09) {}
+          if(var_9) {}
 
-          self.func_A445 = var_16[0];
+          self.var_A445 = var_16[0];
 
-          if(!isDefined(self.func_A43F)) {
-            self.func_A43F = gettime();
+          if(!isDefined(self.var_A43F)) {
+            self.var_A43F = gettime();
           }
 
-          self.func_A444 = 2;
-          self.func_A441 = 0;
-          func_A440(var_00);
-          self.func_A444 = 1;
+          self.var_A444 = 2;
+          self.var_A441 = 0;
+          func_A440(var_0);
+          self.var_A444 = 1;
           continue;
         }
       }
@@ -206,17 +206,17 @@ func_A448() {
         continue;
       }
 
-      var_17 = gettime() - var_06;
+      var_17 = gettime() - var_6;
 
-      if(var_17 < var_02) {
+      if(var_17 < var_2) {
         continue;
       }
-      var_17 = gettime() - var_05;
+      var_17 = gettime() - var_5;
 
-      if(var_17 < var_01) {
+      if(var_17 < var_1) {
         continue;
       }
-      var_05 = gettime();
+      var_5 = gettime();
       var_21 = func_6A61();
 
       if(!isDefined(var_21)) {
@@ -230,71 +230,71 @@ func_A448() {
       } else
         self _meth_8406(0);
 
-      if(isDefined(self.func_A443)) {
-        var_22 = averagepoint(self.func_A443);
+      if(isDefined(self.var_A443)) {
+        var_22 = averagepoint(self.var_A443);
         var_23 = distance(var_22, var_21[0]);
 
-        if(var_23 > var_03) {
+        if(var_23 > var_3) {
           func_AF25();
           continue;
         }
       } else {
-        self.func_A443 = [];
-        self.func_A442 = [];
+        self.var_A443 = [];
+        self.var_A442 = [];
       }
 
-      self.func_A443[self.func_A443.size] = var_21[0];
-      self.func_A442[self.func_A442.size] = var_21[1];
+      self.var_A443[self.var_A443.size] = var_21[0];
+      self.var_A442[self.var_A442.size] = var_21[1];
       func_AF27();
 
-      if(self.func_A443.size < var_04) {
+      if(self.var_A443.size < var_4) {
         continue;
       }
-      self.func_A447 = averagepoint(self.func_A443);
-      self.func_A446 = averagenormal(self.func_A442);
-      self.func_A43E = undefined;
-      self.func_A443 = undefined;
-      self.func_A442 = undefined;
-      self.func_A43F = gettime();
-      self _meth_8405(self.func_A447);
+      self.var_A447 = averagepoint(self.var_A443);
+      self.var_A446 = averagenormal(self.var_A442);
+      self.var_A43E = undefined;
+      self.var_A443 = undefined;
+      self.var_A442 = undefined;
+      self.var_A43F = gettime();
+      self _meth_8405(self.var_A447);
       thread func_B061("javelin_clu_aquiring_lock", 0.6);
-      self.func_A444 = 2;
+      self.var_A444 = 2;
     }
 
-    if(self.func_A444 == 2) {
-      var_14 = self worldpointinreticle_circle(self.func_A447, 65, 45);
+    if(self.var_A444 == 2) {
+      var_14 = self worldpointinreticle_circle(self.var_A447, 65, 45);
 
       if(!var_14) {
         func_E254();
         continue;
       }
 
-      if(func_11579(self.func_A447)) {
+      if(func_11579(self.var_A447)) {
         self _meth_8406(1);
       } else {
         self _meth_8406(0);
       }
 
-      var_17 = gettime() - self.func_A43F;
+      var_17 = gettime() - self.var_A43F;
 
-      if(var_17 < var_00) {
+      if(var_17 < var_0) {
         continue;
       }
-      self _meth_8402(self.func_A447, (0, 0, 0), 1);
+      self _meth_8402(self.var_A447, (0, 0, 0), 1);
       self notify("stop_lockon_sound");
       self playlocalsound("javelin_clu_lock");
-      self.func_A444 = 3;
+      self.var_A444 = 3;
     }
 
-    if(self.func_A444 == 3) {
-      var_14 = self worldpointinreticle_circle(self.func_A447, 65, 45);
+    if(self.var_A444 == 3) {
+      var_14 = self worldpointinreticle_circle(self.var_A447, 65, 45);
 
       if(!var_14) {
         func_E254();
         continue;
       }
 
-      if(func_11579(self.func_A447)) {
+      if(func_11579(self.var_A447)) {
         self _meth_8406(1);
       } else {
         self _meth_8406(0);
@@ -305,99 +305,99 @@ func_A448() {
   }
 }
 
-func_4F53(var_00, var_01, var_02) {}
+func_4F53(var_0, var_1, var_2) {}
 
-func_13263(var_00) {
-  var_01 = self getEye();
-  var_02 = var_00 getpointinbounds(0, 0, 0);
-  var_03 = sighttracepassed(var_01, var_02, 0, var_00);
-  func_4F53(var_01, var_02, var_03);
+func_13263(var_0) {
+  var_1 = self getEye();
+  var_2 = var_0 getpointinbounds(0, 0, 0);
+  var_3 = sighttracepassed(var_1, var_2, 0, var_0);
+  func_4F53(var_1, var_2, var_3);
 
-  if(var_03) {
+  if(var_3) {
     return 1;
   }
 
-  var_04 = var_00 getpointinbounds(1, 0, 0);
-  var_03 = sighttracepassed(var_01, var_04, 0, var_00);
-  func_4F53(var_01, var_04, var_03);
+  var_4 = var_0 getpointinbounds(1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_4, 0, var_0);
+  func_4F53(var_1, var_4, var_3);
 
-  if(var_03) {
+  if(var_3) {
     return 1;
   }
 
-  var_05 = var_00 getpointinbounds(-1, 0, 0);
-  var_03 = sighttracepassed(var_01, var_05, 0, var_00);
-  func_4F53(var_01, var_05, var_03);
+  var_5 = var_0 getpointinbounds(-1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_5, 0, var_0);
+  func_4F53(var_1, var_5, var_3);
 
-  if(var_03) {
+  if(var_3) {
     return 1;
   }
 
   return 0;
 }
 
-func_A440(var_00) {
-  if(self.func_A444 == 2) {
-    self _meth_8405(self.func_A445);
+func_A440(var_0) {
+  if(self.var_A444 == 2) {
+    self _meth_8405(self.var_A445);
 
-    if(!func_10F9B(self.func_A445)) {
+    if(!func_10F9B(self.var_A445)) {
       func_E254();
-      self.func_A43F = undefined;
+      self.var_A43F = undefined;
       return;
     }
 
-    var_01 = softsighttest();
+    var_1 = softsighttest();
 
-    if(!var_01) {
-      self.func_A43F = undefined;
+    if(!var_1) {
+      self.var_A43F = undefined;
       return;
     }
 
-    if(!isDefined(self.func_4BF3) || !self.func_4BF3) {
+    if(!isDefined(self.var_4BF3) || !self.var_4BF3) {
       thread func_B061("javelin_clu_aquiring_lock", 0.6);
-      self.func_4BF3 = 1;
+      self.var_4BF3 = 1;
     }
 
-    var_02 = gettime() - self.func_A43F;
+    var_2 = gettime() - self.var_A43F;
 
     if(scripts\mp\utility\game::_hasperk("specialty_fasterlockon")) {
-      if(var_02 < var_00 * 0.5) {
+      if(var_2 < var_0 * 0.5) {
         return;
       }
-    } else if(var_02 < var_00) {
+    } else if(var_2 < var_0) {
       return;
     }
-    if(isplayer(self.func_A445)) {
-      self _meth_8402(self.func_A445, (0, 0, 64), 0);
+    if(isplayer(self.var_A445)) {
+      self _meth_8402(self.var_A445, (0, 0, 64), 0);
     } else {
-      self _meth_8402(self.func_A445, (0, 0, 0), 0);
+      self _meth_8402(self.var_A445, (0, 0, 0), 0);
     }
 
     self notify("stop_lockon_sound");
 
-    if(!isDefined(self.func_4BF2) || !self.func_4BF2) {
+    if(!isDefined(self.var_4BF2) || !self.var_4BF2) {
       self playlocalsound("javelin_clu_lock");
-      self.func_4BF2 = 1;
+      self.var_4BF2 = 1;
     }
 
-    self.func_A444 = 3;
+    self.var_A444 = 3;
   }
 
-  if(self.func_A444 == 3) {
-    var_01 = softsighttest();
+  if(self.var_A444 == 3) {
+    var_1 = softsighttest();
 
-    if(!var_01) {
+    if(!var_1) {
       return;
     }
-    if(!func_10F9B(self.func_A445)) {
+    if(!func_10F9B(self.var_A445)) {
       func_E254();
       return;
     }
   }
 }
 
-func_10F9B(var_00) {
-  if(!isDefined(var_00)) {
+func_10F9B(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
@@ -409,20 +409,20 @@ func_10F9B(var_00) {
 }
 
 softsighttest() {
-  var_00 = 500;
+  var_0 = 500;
 
-  if(func_13263(self.func_A445)) {
-    self.func_A441 = 0;
+  if(func_13263(self.var_A445)) {
+    self.var_A441 = 0;
     return 1;
   }
 
-  if(self.func_A441 == 0) {
-    self.func_A441 = gettime();
+  if(self.var_A441 == 0) {
+    self.var_A441 = gettime();
   }
 
-  var_01 = gettime() - self.func_A441;
+  var_1 = gettime() - self.var_A441;
 
-  if(var_01 >= var_00) {
+  if(var_1 >= var_0) {
     func_E254();
     return 0;
   }

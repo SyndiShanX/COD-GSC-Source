@@ -63,10 +63,10 @@ onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var_00 = game["attackers"];
-    var_01 = game["defenders"];
-    game["attackers"] = var_01;
-    game["defenders"] = var_00;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_CONF");
@@ -84,8 +84,8 @@ onstartgametype() {
   initspawns();
   level.dogtagallyonusecb = ::dogtagallyonusecb;
   level.dogtagenemyonusecb = ::dogtagenemyonusecb;
-  var_02[0] = level.gametype;
-  scripts\mp\gameobjects::main(var_02);
+  var_2[0] = level.gametype;
+  scripts\mp\gameobjects::main(var_2);
 }
 
 initspawns() {
@@ -109,43 +109,43 @@ updategametypedvars() {
 }
 
 getspawnpoint() {
-  var_00 = self.pers["team"];
+  var_0 = self.pers["team"];
   if(game["switchedsides"]) {
-    var_00 = scripts\mp\utility::getotherteam(var_00);
+    var_0 = scripts\mp\utility::getotherteam(var_0);
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
-    var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
-    var_03 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_01);
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01, var_03);
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_2);
+    var_3 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_1);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1, var_3);
   }
 
-  return var_02;
+  return var_2;
 }
 
-onnormaldeath(param_00, param_01, param_02, param_03, param_04) {
-  scripts\mp\gametypes\common::onnormaldeath(param_00, param_01, param_02, param_03, param_04);
+onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::onnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 onspawnplayer() {
   scripts\mp\utility::func_98D4();
 }
 
-dogtagallyonusecb(param_00) {
-  if(isplayer(param_00)) {
-    param_00 scripts\mp\utility::setextrascore1(param_00.pers["denied"]);
-    param_00 scripts\mp\gamescore::giveteamscoreforobjective(param_00.pers["team"], level.scoredeny, 0);
+dogtagallyonusecb(var_0) {
+  if(isplayer(var_0)) {
+    var_0 scripts\mp\utility::setextrascore1(var_0.pers["denied"]);
+    var_0 scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], level.scoredeny, 0);
   }
 }
 
-dogtagenemyonusecb(param_00) {
-  if(isplayer(param_00)) {
-    param_00 scripts\mp\utility::leaderdialogonplayer("kill_confirmed", undefined, undefined, undefined, 4);
-    param_00 scripts\mp\utility::setextrascore0(param_00.pers["confirmed"]);
+dogtagenemyonusecb(var_0) {
+  if(isplayer(var_0)) {
+    var_0 scripts\mp\utility::leaderdialogonplayer("kill_confirmed", undefined, undefined, undefined, 4);
+    var_0 scripts\mp\utility::setextrascore0(var_0.pers["confirmed"]);
   }
 
-  param_00 scripts\mp\gamescore::giveteamscoreforobjective(param_00.pers["team"], level.scoreconfirm, 0);
+  var_0 scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], level.scoreconfirm, 0);
 }

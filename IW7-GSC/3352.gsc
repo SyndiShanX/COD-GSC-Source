@@ -28,12 +28,12 @@ func_10DEB() {
   self notify("cancel_ims");
   self notify("cancel_gascan");
   scripts\engine\utility::waitframe();
-  foreach(var_01 in level.players) {
-    if(var_01 == self) {
+  foreach(var_1 in level.players) {
+    if(var_1 == self) {
       continue;
     }
 
-    self hidefromplayer(var_01);
+    self hidefromplayer(var_1);
   }
 
   self.isrewinding = 1;
@@ -83,12 +83,12 @@ func_E163() {
   }
 
   self playanimscriptevent("power_exit", "rewind");
-  foreach(var_01 in level.players) {
-    if(var_01 == self) {
+  foreach(var_1 in level.players) {
+    if(var_1 == self) {
       continue;
     }
 
-    self showtoplayer(var_01);
+    self showtoplayer(var_1);
   }
 
   self motionblurhqdisable();
@@ -101,20 +101,20 @@ func_13A62() {
   self notify("watchForRewind");
   self endon("watchForRewind");
   for(;;) {
-    var_00 = spawnStruct();
-    childthread func_13A66(var_00);
-    childthread func_13A64(var_00);
-    childthread func_13A63(var_00);
-    childthread func_13A65(var_00);
+    var_0 = spawnStruct();
+    childthread func_13A66(var_0);
+    childthread func_13A64(var_0);
+    childthread func_13A63(var_0);
+    childthread func_13A65(var_0);
     self waittill("rewindBeginRace");
     waittillframeend;
-    if(isDefined(var_00.var_6ACF)) {
+    if(isDefined(var_0.var_6ACF)) {
       scripts\cp\powers\coop_powers::power_adjustcharges(1, "secondary");
-    } else if(isDefined(var_00.var_10DE6) && isDefined(var_00.var_4E59)) {
+    } else if(isDefined(var_0.var_10DE6) && isDefined(var_0.var_4E59)) {
       scripts\cp\powers\coop_powers::power_adjustcharges(1, "secondary");
-    } else if(isDefined(var_00.var_637B)) {
+    } else if(isDefined(var_0.var_637B)) {
       func_637E();
-    } else if(isDefined(var_00.var_10DE6)) {
+    } else if(isDefined(var_0.var_10DE6)) {
       func_10DEB();
     }
 
@@ -122,55 +122,55 @@ func_13A62() {
   }
 }
 
-func_13A66(param_00) {
+func_13A66(var_0) {
   self endon("rewindEndRace");
   self waittill("rewindStart");
-  param_00.var_10DE6 = 1;
+  var_0.var_10DE6 = 1;
   self notify("rewindBeginRace");
 }
 
-func_13A64(param_00) {
+func_13A64(var_0) {
   self endon("rewindEndRace");
   self waittill("rewindEnd");
-  param_00.var_637B = 1;
+  var_0.var_637B = 1;
   self notify("rewindBeginRace");
   self notify("powers_rewind_used", 1);
 }
 
-func_13A63(param_00) {
+func_13A63(var_0) {
   self endon("rewindEndRace");
   self waittill("death");
-  param_00.var_4E59 = 1;
+  var_0.var_4E59 = 1;
   self notify("rewindBeginRace");
 }
 
-func_13A65(param_00) {
+func_13A65(var_0) {
   self endon("rewindEndRace");
   self waittill("rewindFailed");
-  param_00.var_6ACF = 1;
+  var_0.var_6ACF = 1;
   self notify("rewindBeginRace");
   self notify("powers_rewind_used", 0);
 }
 
 func_E4D5() {
-  var_00 = self.maxhealth - self.health;
+  var_0 = self.maxhealth - self.health;
   self.health = self.maxhealth;
 }
 
 func_E4C7() {
-  var_00 = self getweaponslistprimaries();
-  foreach(var_02 in var_00) {
-    if(scripts\cp\utility::is_melee_weapon(var_02)) {
+  var_0 = self getweaponslistprimaries();
+  foreach(var_2 in var_0) {
+    if(scripts\cp\utility::is_melee_weapon(var_2)) {
       continue;
     }
 
-    var_03 = weaponstartammo(var_02);
-    var_04 = self getweaponammoclip(var_02) + self getweaponammostock(var_02);
-    var_05 = scripts\engine\utility::ter_op(var_03 > var_04, var_03, var_04);
-    var_06 = int(min(weaponclipsize(var_02), var_05));
-    var_07 = var_05 - var_06;
-    self setweaponammoclip(var_02, var_06);
-    self setweaponammostock(var_02, var_07);
+    var_3 = weaponstartammo(var_2);
+    var_4 = self getweaponammoclip(var_2) + self getweaponammostock(var_2);
+    var_5 = scripts\engine\utility::ter_op(var_3 > var_4, var_3, var_4);
+    var_6 = int(min(weaponclipsize(var_2), var_5));
+    var_7 = var_5 - var_6;
+    self setweaponammoclip(var_2, var_6);
+    self setweaponammostock(var_2, var_7);
   }
 }
 

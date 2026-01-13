@@ -6,16 +6,16 @@
 
 init() {
   level.healthoverlaycutoff = 0.55;
-  var_00 = scripts\mp\tweakables::gettweakablevalue("player", "healthregentime");
-  level.healthregendisabled = var_00 <= 0;
-  level.playerhealth_regularregendelay = var_00;
+  var_0 = scripts\mp\tweakables::gettweakablevalue("player", "healthregentime");
+  level.healthregendisabled = var_0 <= 0;
+  level.playerhealth_regularregendelay = var_0;
   level thread onplayerconnect();
 }
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
   }
 }
 
@@ -39,8 +39,8 @@ playerhealthregen() {
     return;
   }
 
-  var_00 = 0;
-  var_01 = 0;
+  var_0 = 0;
+  var_1 = 0;
   thread func_D368(self.maxhealth * 0.55);
   for(;;) {
     scripts\engine\utility::waittill_any_3("damage", "force_regen", "force_regeneration");
@@ -52,18 +52,18 @@ playerhealthregen() {
       continue;
     }
 
-    var_01 = gettime();
-    var_02 = self.health / self.maxhealth;
+    var_1 = gettime();
+    var_2 = self.health / self.maxhealth;
     self.regenspeed = level.playerhealth_regularregendelay;
     if(scripts\mp\utility::_hasperk("specialty_regenfaster")) {
       self.regenspeed = self.regenspeed * level.var_DE8A;
     }
 
-    if(var_02 <= level.healthoverlaycutoff) {
+    if(var_2 <= level.healthoverlaycutoff) {
       self.var_2410 = 1;
     }
 
-    thread healthregeneration(var_01, var_02);
+    thread healthregeneration(var_1, var_2);
   }
 }
 
@@ -100,7 +100,7 @@ func_D367() {
   self playlocalsound("breathing_better");
 }
 
-healthregeneration(param_00, param_01) {
+healthregeneration(var_0, var_1) {
   self notify("healthRegeneration");
   self endon("healthRegeneration");
   self endon("death");
@@ -122,46 +122,46 @@ healthregeneration(param_00, param_01) {
     scripts\mp\utility::wait_endon(self.regenspeed, "force_regeneration");
   }
 
-  if(param_01 < 0.55) {
-    var_02 = 1;
+  if(var_1 < 0.55) {
+    var_2 = 1;
   } else {
-    var_02 = 0;
+    var_2 = 0;
   }
 
   if(scripts\mp\utility::_hasperk("specialty_adrenaline") || scripts\mp\utility::_hasperk("specialty_regenfaster")) {
     self setclientomnvar("ui_health_regen_hud", 1);
   }
 
-  var_03 = self.maxhealth / 50;
-  var_04 = 0;
-  var_05 = gettime();
+  var_3 = self.maxhealth / 50;
+  var_4 = 0;
+  var_5 = gettime();
   for(;;) {
     if(scripts\mp\utility::istrue(self.healthregendisabled) && !scripts\mp\utility::_hasperk("specialty_adrenaline")) {
       return;
     }
 
     wait(0.05);
-    var_06 = 0;
+    var_6 = 0;
     if(scripts\mp\utility::_hasperk("specialty_adrenaline") || scripts\mp\utility::_hasperk("specialty_adrenaline_lite")) {
-      var_06 = scripts\mp\equipment\adrenaline::func_7EF5();
+      var_6 = scripts\mp\equipment\adrenaline::func_7EF5();
     } else if(scripts\mp\utility::_hasperk("specialty_regenfaster")) {
-      var_06 = var_03 * level.var_DE89;
+      var_6 = var_3 * level.var_DE89;
     } else {
-      var_06 = var_03;
+      var_6 = var_3;
     }
 
-    var_07 = 0;
+    var_7 = 0;
     if(self.health < self.maxhealth) {
-      var_07 = 1;
-      var_08 = self.health + var_06 + var_04;
-      var_09 = int(min(self.maxhealth, var_08));
-      self.health = var_09;
-      var_04 = var_08 - var_09;
+      var_7 = 1;
+      var_8 = self.health + var_6 + var_4;
+      var_9 = int(min(self.maxhealth, var_8));
+      self.health = var_9;
+      var_4 = var_8 - var_9;
     }
 
     if(self.health >= self.maxhealth) {
       self.health = self.maxhealth;
-      if(var_07 && scripts\mp\utility::_hasperk("specialty_regenfaster")) {
+      if(var_7 && scripts\mp\utility::_hasperk("specialty_regenfaster")) {
         scripts\mp\missions::func_D991("ch_trait_icu");
       }
 
@@ -184,7 +184,7 @@ func_135F0() {
   scripts\mp\utility::restorebasevisionset(0);
 }
 
-func_D368(param_00) {
+func_D368(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -202,11 +202,11 @@ func_D368(param_00) {
       return;
     }
 
-    if(self.health >= param_00) {
+    if(self.health >= var_0) {
       continue;
     }
 
-    var_01 = level.healthregendisabled || isDefined(self.healthregendisabled) && self.healthregendisabled;
+    var_1 = level.healthregendisabled || isDefined(self.healthregendisabled) && self.healthregendisabled;
     if(scripts\mp\utility::isusingremote()) {
       continue;
     }

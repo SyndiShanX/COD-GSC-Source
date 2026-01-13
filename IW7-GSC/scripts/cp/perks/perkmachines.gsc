@@ -162,73 +162,73 @@ init_zombie_perks_callback() {
 
 blank() {}
 
-register_perk_callback(param_00, param_01, param_02) {
-  var_03 = spawnStruct();
-  var_03.set = param_01;
-  var_03.unset = param_02;
-  level.coop_perk_callbacks[param_00] = var_03;
+register_perk_callback(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.set = var_1;
+  var_3.unset = var_2;
+  level.coop_perk_callbacks[var_0] = var_3;
 }
 
-func_12E03(param_00, param_01) {
-  level.alien_perks[param_01] = [];
-  for(var_02 = param_00; var_02 <= param_00 + 100; var_02++) {
-    var_03 = func_7B7A(var_02);
-    if(var_03 == "") {
+func_12E03(var_0, var_1) {
+  level.alien_perks[var_1] = [];
+  for(var_2 = var_0; var_2 <= var_0 + 100; var_2++) {
+    var_3 = func_7B7A(var_2);
+    if(var_3 == "") {
       break;
     }
 
-    if(!isDefined(level.alien_perks[var_03])) {
-      var_04 = spawnStruct();
-      var_04.var_12F7A = [];
-      var_04.unlock = func_7D30(var_03);
-      var_04.name = func_7B06(var_03);
-      var_04.icon = func_7A26(var_03);
-      var_04.ref = var_03;
-      var_04.type = param_01;
-      var_04.callbacks = level.coop_perk_callbacks[var_03];
-      var_04.var_28A3 = var_02;
-      level.alien_perks[param_01][var_03] = var_04;
+    if(!isDefined(level.alien_perks[var_3])) {
+      var_4 = spawnStruct();
+      var_4.var_12F7A = [];
+      var_4.unlock = func_7D30(var_3);
+      var_4.name = func_7B06(var_3);
+      var_4.icon = func_7A26(var_3);
+      var_4.ref = var_3;
+      var_4.type = var_1;
+      var_4.callbacks = level.coop_perk_callbacks[var_3];
+      var_4.var_28A3 = var_2;
+      level.alien_perks[var_1][var_3] = var_4;
     }
 
-    for(var_05 = var_02; var_05 <= param_00 + 100; var_05++) {
-      var_06 = func_7B7A(var_05);
-      if(var_06 == "") {
+    for(var_5 = var_2; var_5 <= var_0 + 100; var_5++) {
+      var_6 = func_7B7A(var_5);
+      if(var_6 == "") {
         break;
       }
 
-      if(var_06 == var_03 || func_9C63(var_03, var_06)) {
-        var_07 = spawnStruct();
-        var_07.ref = var_06;
-        var_07.var_525F = func_7936(var_06);
-        var_07.var_D634 = func_7BC4(var_06);
-        level.alien_perks[param_01][var_03].var_12F7A[var_05 - var_02] = var_07;
+      if(var_6 == var_3 || func_9C63(var_3, var_6)) {
+        var_7 = spawnStruct();
+        var_7.ref = var_6;
+        var_7.var_525F = func_7936(var_6);
+        var_7.var_D634 = func_7BC4(var_6);
+        level.alien_perks[var_1][var_3].var_12F7A[var_5 - var_2] = var_7;
         continue;
       }
 
       break;
     }
 
-    var_02 = var_05 - 1;
+    var_2 = var_5 - 1;
   }
 }
 
-func_9C63(param_00, param_01) {
-  if(param_00 == param_01) {
+func_9C63(var_0, var_1) {
+  if(var_0 == var_1) {
     return 0;
   }
 
-  if(!issubstr(param_01, param_00)) {
+  if(!issubstr(var_1, var_0)) {
     return 0;
   }
 
-  var_02 = strtok(param_00, "_");
-  var_03 = strtok(param_01, "_");
-  if(var_03.size - var_02.size != 1) {
+  var_2 = strtok(var_0, "_");
+  var_3 = strtok(var_1, "_");
+  if(var_3.size - var_2.size != 1) {
     return 0;
   }
 
-  for(var_04 = 0; var_04 < var_03.size - 1; var_04++) {
-    if(var_03[var_04] != var_02[var_04]) {
+  for(var_4 = 0; var_4 < var_3.size - 1; var_4++) {
+    if(var_3[var_4] != var_2[var_4]) {
       return 0;
     }
   }
@@ -236,32 +236,32 @@ func_9C63(param_00, param_01) {
   return 1;
 }
 
-func_7B7A(param_00) {
-  return tablelookup(level.var_1B8F, 0, param_00, 1);
+func_7B7A(var_0) {
+  return tablelookup(level.var_1B8F, 0, var_0, 1);
 }
 
-func_7B06(param_00) {
-  return tablelookup(level.var_1B8F, 1, param_00, 4);
+func_7B06(var_0) {
+  return tablelookup(level.var_1B8F, 1, var_0, 4);
 }
 
-func_7A26(param_00) {
-  return tablelookup(level.var_1B8F, 1, param_00, 6);
+func_7A26(var_0) {
+  return tablelookup(level.var_1B8F, 1, var_0, 6);
 }
 
-func_7936(param_00) {
-  return tablelookup(level.var_1B8F, 1, param_00, 5);
+func_7936(var_0) {
+  return tablelookup(level.var_1B8F, 1, var_0, 5);
 }
 
-func_7BC4(param_00) {
-  return int(tablelookup(level.var_1B8F, 1, param_00, 3));
+func_7BC4(var_0) {
+  return int(tablelookup(level.var_1B8F, 1, var_0, 3));
 }
 
-func_7D30(param_00) {
-  return int(tablelookup(level.var_1B8F, 1, param_00, 2));
+func_7D30(var_0) {
+  return int(tablelookup(level.var_1B8F, 1, var_0, 2));
 }
 
-func_7A50(param_00) {
-  return int(tablelookup(level.var_1B8F, 1, param_00, 7));
+func_7A50(var_0) {
+  return int(tablelookup(level.var_1B8F, 1, var_0, 7));
 }
 
 func_958F() {
@@ -311,15 +311,15 @@ _meth_848B() {
   self endon("momentum_unset");
   thread func_B944();
   thread func_B943();
-  var_00 = 0;
-  while(var_00 < 0.08) {
+  var_0 = 0;
+  while(var_0 < 0.08) {
     self.movespeedscaler = self.movespeedscaler + 0.01;
     if(isDefined(level.move_speed_scale)) {
       self[[level.move_speed_scale]]();
     }
 
     wait(0.4375);
-    var_00 = var_00 + 0.01;
+    var_0 = var_0 + 0.01;
   }
 
   self playlocalsound("ftl_phase_in");

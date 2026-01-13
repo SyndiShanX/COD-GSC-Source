@@ -20,7 +20,7 @@ func_12D44() {
   scripts\mp\utility\game::removedamagemodifier("teleport", 0);
 }
 
-func_10DFA(var_00, var_01) {
+func_10DFA(var_0, var_1) {
   self playanimscriptevent("power_active", "teleport");
   self setscriptablepartstate("teleporttrail", "active", 0);
   self motionblurhqenable();
@@ -42,68 +42,68 @@ func_13A73() {
   self endon("watchForTeleport");
 
   for(;;) {
-    var_00 = spawnStruct();
-    childthread func_13A77(var_00);
-    childthread func_13A75(var_00);
-    childthread func_13A74(var_00);
-    childthread func_13A76(var_00);
+    var_0 = spawnStruct();
+    childthread func_13A77(var_0);
+    childthread func_13A75(var_0);
+    childthread func_13A74(var_0);
+    childthread func_13A76(var_0);
     self waittill("teleportBeginRace");
     waittillframeend;
 
-    if(isDefined(var_0.func_6ACF)) {
+    if(isDefined(var_0.var_6ACF)) {
       if(isplayer(self)) {
         scripts\mp\hud_message::showerrormessage("MP_TELEPORT_FAILED");
       }
 
       scripts\mp\supers::refundsuper();
-    } else if(isDefined(var_0.func_10DE6) && isDefined(var_0.func_4E59))
+    } else if(isDefined(var_0.var_10DE6) && isDefined(var_0.var_4E59))
       scripts\mp\supers::refundsuper();
-    else if(isDefined(var_0.func_637B)) {
+    else if(isDefined(var_0.var_637B)) {
       self notify("teleport_success");
       func_6391();
-    } else if(isDefined(var_0.func_10DE6)) {
+    } else if(isDefined(var_0.var_10DE6)) {
       self notify("teleport_success");
-      func_10DFA(var_0.startpos, var_0.func_6378);
+      func_10DFA(var_0.startpos, var_0.var_6378);
     }
 
     self notify("teleportEndRace");
   }
 }
 
-func_13A77(var_00) {
+func_13A77(var_0) {
   self endon("teleportEndRace");
-  self waittill("teleportStart", var_01, var_02);
-  var_0.func_10DE6 = 1;
-  var_0.startpos = var_01;
-  var_0.func_6378 = var_02;
+  self waittill("teleportStart", var_1, var_2);
+  var_0.var_10DE6 = 1;
+  var_0.startpos = var_1;
+  var_0.var_6378 = var_2;
   self notify("teleportBeginRace");
 }
 
-func_13A75(var_00) {
+func_13A75(var_0) {
   self endon("teleportEndRace");
   self waittill("teleportEnd");
-  var_0.func_637B = 1;
+  var_0.var_637B = 1;
   self notify("teleportBeginRace");
 }
 
-func_13A74(var_00) {
+func_13A74(var_0) {
   self endon("teleportEndRace");
   self waittill("death");
-  var_0.func_4E59 = 1;
+  var_0.var_4E59 = 1;
   self notify("teleportBeginRace");
 }
 
-func_13A76(var_00) {
+func_13A76(var_0) {
   self endon("teleportEndRace");
   self waittill("teleportFailed");
-  var_0.func_6ACF = 1;
+  var_0.var_6ACF = 1;
   self notify("teleportBeginRace");
 }
 
-func_4524(var_00) {
+func_4524(var_0) {
   self endon("death");
   self endon("disconnect");
   scripts\mp\utility\game::giveperk("specialty_no_target");
-  wait(var_00);
+  wait(var_0);
   scripts\mp\utility\game::removeperk("specialty_no_target");
 }

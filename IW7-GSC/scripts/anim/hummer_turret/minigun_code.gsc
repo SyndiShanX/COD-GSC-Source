@@ -4,103 +4,103 @@
  * Script: scripts\anim\hummer_turret\minigun_code.gsc
 *******************************************************/
 
-main(param_00) {
-  param_00.var_6D6F = 0.1;
-  param_00.var_4292 = 45;
-  param_00.var_6D65 = ::func_6D64;
-  param_00.var_10953 = ::func_B79D;
-  param_00.var_4FEA = 20;
-  scripts\anim\hummer_turret\common::func_91E0(param_00, "minigun");
+main(var_0) {
+  var_0.var_6D6F = 0.1;
+  var_0.var_4292 = 45;
+  var_0.var_6D65 = ::func_6D64;
+  var_0.var_10953 = ::func_B79D;
+  var_0.var_4FEA = 20;
+  scripts\anim\hummer_turret\common::func_91E0(var_0, "minigun");
   wait(0.05);
-  param_00 notify("turret_ready");
+  var_0 notify("turret_ready");
 }
 
-func_B79D(param_00, param_01) {
-  if(param_01 _meth_810A() > 0) {
-    param_01 _meth_83A2();
+func_B79D(var_0, var_1) {
+  if(var_1 _meth_810A() > 0) {
+    var_1 _meth_83A2();
   }
 }
 
-func_6D64(param_00) {
+func_6D64(var_0) {
   self endon("death");
   self endon("dismount");
-  param_00 endon("kill_fireController");
-  param_00 endon("death");
-  param_00.var_6A4F = 600;
-  param_00.var_6A4E = 900;
-  var_01 = -1;
-  var_02 = undefined;
-  var_03 = undefined;
-  param_00.var_6A52 = 250;
-  param_00.var_6A51 = 2250;
-  var_04 = -1;
-  var_05 = undefined;
-  var_06 = 0;
-  var_07 = 0;
-  param_00.var_F0C7 = 15;
-  if(isDefined(param_00.var_F0C8)) {
-    param_00.var_F0C7 = param_00.var_F0C8;
+  var_0 endon("kill_fireController");
+  var_0 endon("death");
+  var_0.var_6A4F = 600;
+  var_0.var_6A4E = 900;
+  var_1 = -1;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_0.var_6A52 = 250;
+  var_0.var_6A51 = 2250;
+  var_4 = -1;
+  var_5 = undefined;
+  var_6 = 0;
+  var_7 = 0;
+  var_0.var_F0C7 = 15;
+  if(isDefined(var_0.var_F0C8)) {
+    var_0.var_F0C7 = var_0.var_F0C8;
   }
 
-  param_00.var_6D96 = 0;
-  scripts\anim\hummer_turret\common::func_57DB(param_00);
+  var_0.var_6D96 = 0;
+  scripts\anim\hummer_turret\common::func_57DB(var_0);
   for(;;) {
-    if(param_00.var_5855 && !var_06 && !self.var_9DA6) {
-      var_06 = 1;
-      if(!var_07) {
-        param_00 func_B7A2();
-        var_07 = 1;
+    if(var_0.var_5855 && !var_6 && !self.var_9DA6) {
+      var_6 = 1;
+      if(!var_7) {
+        var_0 func_B7A2();
+        var_7 = 1;
       }
 
-      param_00 notify("startfiring");
-      var_01 = gettime();
-      scripts\anim\hummer_turret\common::func_5AAA(param_00);
+      var_0 notify("startfiring");
+      var_1 = gettime();
+      scripts\anim\hummer_turret\common::func_5AAA(var_0);
       wait(0.05);
-    } else if(!param_00.var_5855 && var_06) {
-      if(!isDefined(var_02)) {
-        var_02 = gettime();
+    } else if(!var_0.var_5855 && var_6) {
+      if(!isDefined(var_2)) {
+        var_2 = gettime();
       }
 
-      if(!isDefined(var_03)) {
-        var_03 = randomfloatrange(param_00.var_6A4F, param_00.var_6A4E);
+      if(!isDefined(var_3)) {
+        var_3 = randomfloatrange(var_0.var_6A4F, var_0.var_6A4E);
       }
 
-      if(gettime() - var_02 >= var_03) {
-        var_06 = 0;
-        scripts\anim\hummer_turret\common::func_57DB(param_00);
-        var_04 = gettime();
-        var_02 = undefined;
-        var_03 = undefined;
+      if(gettime() - var_2 >= var_3) {
+        var_6 = 0;
+        scripts\anim\hummer_turret\common::func_57DB(var_0);
+        var_4 = gettime();
+        var_2 = undefined;
+        var_3 = undefined;
       }
-    } else if(!param_00.var_5855 && !var_06 && var_07) {
-      if(!isDefined(var_05)) {
-        var_05 = randomfloatrange(param_00.var_6A52, param_00.var_6A51);
+    } else if(!var_0.var_5855 && !var_6 && var_7) {
+      if(!isDefined(var_5)) {
+        var_5 = randomfloatrange(var_0.var_6A52, var_0.var_6A51);
       }
 
-      if(self.var_9DA6 || gettime() - var_04 >= var_05) {
-        param_00 _meth_83A2();
-        var_07 = 0;
-        var_05 = undefined;
+      if(self.var_9DA6 || gettime() - var_4 >= var_5) {
+        var_0 _meth_83A2();
+        var_7 = 0;
+        var_5 = undefined;
       }
     }
 
-    if(param_00.var_12A94 == "fire") {
-      param_00.var_6D96 = param_00.var_6D96 + 0.05;
+    if(var_0.var_12A94 == "fire") {
+      var_0.var_6D96 = var_0.var_6D96 + 0.05;
     }
 
-    if(param_00.var_6D96 > param_00.var_F0C7) {
-      param_00.var_5855 = 0;
-      var_06 = 0;
-      scripts\anim\hummer_turret\common::func_57DB(param_00);
-      var_04 = -1;
-      var_02 = undefined;
-      var_03 = undefined;
-      thread scripts\anim\hummer_turret\common::func_5A65(param_00);
-      param_00.var_6D96 = 0;
+    if(var_0.var_6D96 > var_0.var_F0C7) {
+      var_0.var_5855 = 0;
+      var_6 = 0;
+      scripts\anim\hummer_turret\common::func_57DB(var_0);
+      var_4 = -1;
+      var_2 = undefined;
+      var_3 = undefined;
+      thread scripts\anim\hummer_turret\common::func_5A65(var_0);
+      var_0.var_6D96 = 0;
     }
 
     wait(0.05);
-    if(!isDefined(param_00)) {
+    if(!isDefined(var_0)) {
       break;
     }
   }

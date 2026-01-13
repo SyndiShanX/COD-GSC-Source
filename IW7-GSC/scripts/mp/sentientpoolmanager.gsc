@@ -21,23 +21,23 @@ init() {
   level.sentientpools[level.sentientpools.size] = "Killstreak_Air";
   level.sentientpools[level.sentientpools.size] = "Killstreak_Ground";
   level.activesentients = [];
-  for(var_00 = 0; var_00 < level.sentientpools.size; var_00++) {
-    level.activesentients[level.sentientpools[var_00]] = [];
+  for(var_0 = 0; var_0 < level.sentientpools.size; var_0++) {
+    level.activesentients[level.sentientpools[var_0]] = [];
   }
 
   level.activesentientcount = 0;
 }
 
-registersentient(param_00, param_01, param_02, param_03) {
-  var_04 = -1;
-  for(var_05 = 0; var_05 < level.sentientpools.size; var_05++) {
-    if(level.sentientpools[var_05] == param_00) {
-      var_04 = var_05;
+registersentient(var_0, var_1, var_2, var_3) {
+  var_4 = -1;
+  for(var_5 = 0; var_5 < level.sentientpools.size; var_5++) {
+    if(level.sentientpools[var_5] == var_0) {
+      var_4 = var_5;
       break;
     }
   }
 
-  if(var_04 == -1) {
+  if(var_4 == -1) {
     return;
   }
 
@@ -46,78 +46,78 @@ registersentient(param_00, param_01, param_02, param_03) {
   }
 
   if(level.activesentientcount == 24) {
-    var_06 = level removebestsentient(var_04 + 1);
-    if(!var_06) {
+    var_6 = level removebestsentient(var_4 + 1);
+    if(!var_6) {
       return;
     }
   }
 
-  self.sentientpool = param_00;
+  self.sentientpool = var_0;
   self.sentientaddedtime = gettime();
   self.sentientpoolindex = self getentitynumber();
   if(!isagent(self)) {
-    self makeentitysentient(param_01.team);
+    self makeentitysentient(var_1.team);
   }
 
-  self give_zombies_perk(param_00);
-  if(scripts\mp\utility::istrue(param_02)) {
+  self give_zombies_perk(var_0);
+  if(scripts\mp\utility::istrue(var_2)) {
     self makeentitynomeleetarget();
   }
 
-  level.activesentients[param_00][self.sentientpoolindex] = self;
+  level.activesentients[var_0][self.sentientpoolindex] = self;
   level.activesentientcount++;
-  thread monitorsentient(param_03);
+  thread monitorsentient(var_3);
 }
 
-monitorsentient(param_00) {
+monitorsentient(var_0) {
   level endon("game_ended");
-  var_01 = self.sentientpool;
-  var_02 = self.sentientpoolindex;
-  if(isDefined(param_00)) {
-    scripts\engine\utility::waittill_any_3("death", "remove_sentient", param_00);
+  var_1 = self.sentientpool;
+  var_2 = self.sentientpoolindex;
+  if(isDefined(var_0)) {
+    scripts\engine\utility::waittill_any_3("death", "remove_sentient", var_0);
   } else {
     scripts\engine\utility::waittill_either("death", "remove_sentient");
   }
 
-  unregistersentient(var_01, var_02);
+  unregistersentient(var_1, var_2);
 }
 
-removebestsentient(param_00) {
-  var_01 = undefined;
-  for(var_02 = 0; var_02 < param_00; var_02++) {
-    var_01 = getbestsentientfrompool(level.sentientpools[var_02]);
-    if(isDefined(var_01)) {
+removebestsentient(var_0) {
+  var_1 = undefined;
+  for(var_2 = 0; var_2 < var_0; var_2++) {
+    var_1 = getbestsentientfrompool(level.sentientpools[var_2]);
+    if(isDefined(var_1)) {
       break;
     }
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var_01 unregistersentient(var_01.sentientpool, var_01.sentientpoolindex);
+  var_1 unregistersentient(var_1.sentientpool, var_1.sentientpoolindex);
   return 1;
 }
 
-getbestsentientfrompool(param_00) {
-  var_01 = undefined;
-  var_02 = undefined;
-  foreach(var_04 in level.activesentients[param_00]) {
-    if(var_02 == undefined || var_04.sentientaddedtime < var_02) {
-      var_02 = var_04.sentientaddedtime;
-      var_01 = var_04;
+getbestsentientfrompool(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  foreach(var_4 in level.activesentients[var_0]) {
+    if(var_2 == undefined || var_4.sentientaddedtime < var_2) {
+      var_2 = var_4.sentientaddedtime;
+      var_1 = var_4;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-unregistersentient(param_00, param_01) {
-  if(!isDefined(param_00) || !isDefined(param_01)) {
+unregistersentient(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  level.activesentients[param_00][param_01] = undefined;
+  level.activesentients[var_0][var_1] = undefined;
   level.activesentientcount--;
   if(isDefined(self)) {
     self.sentientpool = undefined;

@@ -131,17 +131,17 @@ setupagent() {
   thread func_899C();
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("fullbody_zmb_superslasher");
 }
 
 func_899C() {
   self endon("death");
   level waittill("game_ended");
-  self.var_1198.bgameended = 1;
+  self._blackboard.bgameended = 1;
 }
 
-onsuperslasherkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onsuperslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self.death_anim_no_ragdoll = 1;
   self.nocorpse = 1;
   if(isDefined(self.attackents)) {
@@ -162,56 +162,56 @@ onsuperslasherkilled(param_00, param_01, param_02, param_03, param_04, param_05,
   var_10 = self.var_164D[var_0F].var_4BC0;
   var_11 = level.asm[var_0F].states[var_10];
   scripts\asm\asm::func_2388(var_0F, var_10, var_11, undefined);
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-superslasherdeathscriptmodelsequence(param_00) {
-  level.soul_key_drop_pos = scripts\engine\utility::drop_to_ground(param_00.origin, 200, -5000) + (0, 0, 50);
-  var_01 = param_00.origin;
-  var_02 = spawn("script_model", var_01);
-  var_02 setModel("fullbody_zmb_superslasher");
-  var_02 scriptmodelplayanim("IW7_cp_super_death_01");
-  playsoundatpos(var_02.origin, "zmb_superslasher_death_lr");
-  var_02 thread super_slasher_death_vfx_sequence(var_02);
+superslasherdeathscriptmodelsequence(var_0) {
+  level.soul_key_drop_pos = scripts\engine\utility::drop_to_ground(var_0.origin, 200, -5000) + (0, 0, 50);
+  var_1 = var_0.origin;
+  var_2 = spawn("script_model", var_1);
+  var_2 setModel("fullbody_zmb_superslasher");
+  var_2 scriptmodelplayanim("IW7_cp_super_death_01");
+  playsoundatpos(var_2.origin, "zmb_superslasher_death_lr");
+  var_2 thread super_slasher_death_vfx_sequence(var_2);
   wait(3.5);
-  var_02 moveto(var_01 + (0, 0, -300), 11.5);
-  var_02 waittill("movedone");
-  var_02 delete();
+  var_2 moveto(var_1 + (0, 0, -300), 11.5);
+  var_2 waittill("movedone");
+  var_2 delete();
   level notify("super_slasher_death");
 }
 
-super_slasher_death_vfx_sequence(param_00) {
-  var_01 = spawnfx(level._effect["super_slasher_death_base"], param_00.origin);
-  triggerfx(var_01);
+super_slasher_death_vfx_sequence(var_0) {
+  var_1 = spawnfx(level._effect["super_slasher_death_base"], var_0.origin);
+  triggerfx(var_1);
   wait(0.6);
-  playFXOnTag(level._effect["super_slasher_death_hand"], param_00, "j_wrist_ri");
-  playFXOnTag(level._effect["super_slasher_death_limb"], param_00, "j_hip_ri");
+  playFXOnTag(level._effect["super_slasher_death_hand"], var_0, "j_wrist_ri");
+  playFXOnTag(level._effect["super_slasher_death_limb"], var_0, "j_hip_ri");
   wait(0.5);
-  playFXOnTag(level._effect["super_slasher_death_hand"], param_00, "j_wrist_le");
+  playFXOnTag(level._effect["super_slasher_death_hand"], var_0, "j_wrist_le");
   wait(0.2);
-  playFXOnTag(level._effect["super_slasher_death_limb"], param_00, "j_hip_le");
+  playFXOnTag(level._effect["super_slasher_death_limb"], var_0, "j_hip_le");
   wait(1.3);
-  playFXOnTag(level._effect["super_slasher_death_limb"], param_00, "j_elbow_le");
+  playFXOnTag(level._effect["super_slasher_death_limb"], var_0, "j_elbow_le");
   wait(1);
-  playFXOnTag(level._effect["super_slasher_death_limb"], param_00, "j_clavicle_ri");
+  playFXOnTag(level._effect["super_slasher_death_limb"], var_0, "j_clavicle_ri");
   wait(0.7);
-  playFXOnTag(level._effect["super_slasher_death_limb"], param_00, "j_clavicle_le");
-  param_00 waittill("movedone");
-  var_01 delete();
+  playFXOnTag(level._effect["super_slasher_death_limb"], var_0, "j_clavicle_le");
+  var_0 waittill("movedone");
+  var_1 delete();
 }
 
-onsuperslasherdamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  if(isDefined(param_01) && param_01 == self) {
+onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+  if(isDefined(var_1) && var_1 == self) {
     return;
   }
 
-  if(scripts\engine\utility::istrue(self.var_E0) && isDefined(param_06) && isDefined(param_07)) {
-    playFX(level._effect["super_slasher_shield_hit"], param_06, param_07 * -150);
+  if(scripts\engine\utility::istrue(self.var_E0) && isDefined(var_6) && isDefined(var_7)) {
+    playFX(level._effect["super_slasher_shield_hit"], var_6, var_7 * -150);
   }
 
   if(isDefined(self.btrophysystem)) {
-    if(isDefined(param_01) && isplayer(param_01)) {
-      self.lastdamagedir[self.lastdamagedir.size] = vectornormalize(param_01.origin - self.origin);
+    if(isDefined(var_1) && isplayer(var_1)) {
+      self.lastdamagedir[self.lastdamagedir.size] = vectornormalize(var_1.origin - self.origin);
       self.lastdamagetime = gettime();
     }
 
@@ -222,38 +222,38 @@ onsuperslasherdamaged(param_00, param_01, param_02, param_03, param_04, param_05
     return;
   }
 
-  if(isDefined(self.var_1198.binair)) {
-    param_02 = int(min(param_02, self.health - 1));
-    if(param_02 == 0) {
+  if(isDefined(self._blackboard.binair)) {
+    var_2 = int(min(var_2, self.health - 1));
+    if(var_2 == 0) {
       return;
     }
   }
 
-  if(param_05 == "iw7_harpoon_zm") {
-    param_02 = min(0.1 * self.maxhealth, 2000);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon1")) {
-    param_02 = min(0.01 * self.maxhealth, 75);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon2")) {
-    param_02 = min(0.1 * self.maxhealth, 1500);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon3")) {
-    param_02 = min(0.1 * self.maxhealth, 2000);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon4")) {
-    param_02 = min(0.01 * self.maxhealth, 1000);
-    param_02 = int(param_02);
+  if(var_5 == "iw7_harpoon_zm") {
+    var_2 = min(0.1 * self.maxhealth, 2000);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon1")) {
+    var_2 = min(0.01 * self.maxhealth, 75);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon2")) {
+    var_2 = min(0.1 * self.maxhealth, 1500);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon3")) {
+    var_2 = min(0.1 * self.maxhealth, 2000);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon4")) {
+    var_2 = min(0.01 * self.maxhealth, 1000);
+    var_2 = int(var_2);
   }
 
-  param_03 = param_03 | level.idflags_no_knockback;
+  var_3 = var_3 | level.idflags_no_knockback;
   if(isDefined(level.players) && level.players.size >= 1) {
-    param_02 = param_02 / level.players.size;
+    var_2 = var_2 / level.players.size;
   }
 
-  scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
 }
 
-onsuperslasherdamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  scripts\mp\mp_agent::default_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+onsuperslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
 }

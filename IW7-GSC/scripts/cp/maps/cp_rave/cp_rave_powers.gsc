@@ -26,34 +26,34 @@ listen_for_bait_throw() {
   self endon("disconnect");
   self endon("stop_bait_listen");
   for(;;) {
-    self waittill("grenade_fire", var_00, var_01);
-    if(isDefined(var_00) && isDefined(var_01)) {
-      var_00 thread wait_for_impact(var_01, self);
+    self waittill("grenade_fire", var_0, var_1);
+    if(isDefined(var_0) && isDefined(var_1)) {
+      var_0 thread wait_for_impact(var_1, self);
     }
   }
 }
 
-wait_for_impact(param_00, param_01) {
+wait_for_impact(var_0, var_1) {
   self endon("disconnect");
   self endon("stop_bait_listen");
   if(!isDefined(self.weapon_name) || self.weapon_name != "iw7_bait_zm") {
     return;
   }
 
-  self waittill("explode", var_02);
-  var_03 = getEntArray("bait_head", "targetname");
-  var_04 = scripts\engine\utility::getclosest(var_02, var_03, 500);
-  if(isDefined(var_04)) {
-    if(isDefined(var_04.bait)) {
-      var_04.bait delete();
+  self waittill("explode", var_2);
+  var_3 = getEntArray("bait_head", "targetname");
+  var_4 = scripts\engine\utility::getclosest(var_2, var_3, 500);
+  if(isDefined(var_4)) {
+    if(isDefined(var_4.bait)) {
+      var_4.bait delete();
     }
 
-    var_04.bait = spawn("script_origin", var_02);
-    var_04.bait_time = gettime();
+    var_4.bait = spawn("script_origin", var_2);
+    var_4.bait_time = gettime();
   }
 }
 
-setbait(param_00) {
+setbait(var_0) {
   self notify("stop_bait_listen");
   thread listen_for_bait_throw();
 }

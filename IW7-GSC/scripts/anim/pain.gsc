@@ -35,10 +35,10 @@ func_1390C() {
   }
 
   if(gettime() - level.var_A955 <= 50) {
-    var_00 = level.var_A954 * level.var_A954 * 1.2 * 1.2;
-    if(distancesquared(self.origin, level.var_A952) < var_00) {
-      var_01 = var_00 * 0.5 * 0.5;
-      self.var_B4DF = distancesquared(self.origin, level.var_A953) < var_01;
+    var_0 = level.var_A954 * level.var_A954 * 1.2 * 1.2;
+    if(distancesquared(self.origin, level.var_A952) < var_0) {
+      var_1 = var_0 * 0.5 * 0.5;
+      self.var_B4DF = distancesquared(self.origin, level.var_A953) < var_1;
       return 1;
     }
   }
@@ -84,15 +84,15 @@ func_7E5D() {
     return scripts\anim\utility::func_B027("pain", "damage_shield_crouch");
   }
 
-  var_00 = scripts\anim\utility::func_B027("pain", "damage_shield_pain_array");
-  return var_00[randomint(var_00.size)];
+  var_0 = scripts\anim\utility::func_B027("pain", "damage_shield_pain_array");
+  return var_0[randomint(var_0.size)];
 }
 
 botmemoryselectpos() {
   if(self.var_E0 && !isDefined(self.var_55BF)) {
-    var_00 = func_7E5D();
-    if(isDefined(var_00)) {
-      return var_00;
+    var_0 = func_7E5D();
+    if(isDefined(var_0)) {
+      return var_0;
     }
   }
 
@@ -105,8 +105,8 @@ botmemoryselectpos() {
   }
 
   if(self.a.pose == "stand") {
-    var_01 = isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 4096;
-    if(!var_01 && self.a.movement == "run" && abs(self getspawnpoint_searchandrescue()) < 60) {
+    var_1 = isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 4096;
+    if(!var_1 && self.a.movement == "run" && abs(self getspawnpoint_searchandrescue()) < 60) {
       return getsafecircleorigin();
     }
 
@@ -126,69 +126,69 @@ botmemoryselectpos() {
 }
 
 getsafecircleorigin() {
-  var_00 = [];
-  var_01 = 0;
-  var_02 = 0;
-  var_03 = 0;
+  var_0 = [];
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
   if(self maymovetopoint(self gettweakablevalue((300, 0, 0)))) {
-    var_02 = 1;
-    var_01 = 1;
+    var_2 = 1;
+    var_1 = 1;
   } else if(self maymovetopoint(self gettweakablevalue((200, 0, 0)))) {
-    var_01 = 1;
+    var_1 = 1;
   }
 
   if(isDefined(self.a.var_55FD)) {
-    var_02 = 0;
-    var_01 = 0;
+    var_2 = 0;
+    var_1 = 0;
   }
 
-  if(var_02) {
-    var_00 = scripts\anim\utility::func_B027("pain", "run_long");
-  } else if(var_01) {
-    var_00 = scripts\anim\utility::func_B027("pain", "run_medium");
+  if(var_2) {
+    var_0 = scripts\anim\utility::func_B027("pain", "run_long");
+  } else if(var_1) {
+    var_0 = scripts\anim\utility::func_B027("pain", "run_medium");
   } else if(self maymovetopoint(self gettweakablevalue((120, 0, 0)))) {
-    var_00 = scripts\anim\utility::func_B027("pain", "run_short");
+    var_0 = scripts\anim\utility::func_B027("pain", "run_short");
   }
 
-  if(!var_00.size) {
+  if(!var_0.size) {
     self.a.movement = "stop";
     return getstance();
   }
 
-  return var_00[randomint(var_00.size)];
+  return var_0[randomint(var_0.size)];
 }
 
 gettagorigin() {
-  var_00 = [];
+  var_0 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_torso_upper");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_torso_upper");
   } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_torso_lower");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_torso_lower");
   } else if(scripts\engine\utility::damagelocationisany("neck")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_neck");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_neck");
   } else if(scripts\engine\utility::damagelocationisany("head")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_head");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_head");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_leg");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_leg");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_left_arm_upper");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_left_arm_upper");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_left_arm_lower");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_left_arm_lower");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_right_arm_upper");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_right_arm_upper");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "pistol_right_arm_lower");
+    var_0 = scripts\anim\utility::func_B027("pain", "pistol_right_arm_lower");
   }
 
-  if(var_00.size < 2) {
-    var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "pistol_default1"));
+  if(var_0.size < 2) {
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "pistol_default1"));
   }
 
-  if(var_00.size < 2) {
-    var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "pistol_default2"));
+  if(var_0.size < 2) {
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "pistol_default2"));
   }
 
-  return var_00[randomint(var_00.size)];
+  return var_0[randomint(var_0.size)];
 }
 
 getstance() {
@@ -196,100 +196,100 @@ getstance() {
     return gettagorigin();
   }
 
-  var_00 = [];
-  var_01 = [];
+  var_0 = [];
+  var_1 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "torso_upper");
-    var_01 = scripts\anim\utility::func_B027("pain", "torso_upper_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "torso_upper");
+    var_1 = scripts\anim\utility::func_B027("pain", "torso_upper_extended");
   } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "torso_lower");
-    var_01 = scripts\anim\utility::func_B027("pain", "torso_lower_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "torso_lower");
+    var_1 = scripts\anim\utility::func_B027("pain", "torso_lower_extended");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "head");
-    var_01 = scripts\anim\utility::func_B027("pain", "head_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "head");
+    var_1 = scripts\anim\utility::func_B027("pain", "head_extended");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "right_arm");
-    var_01 = scripts\anim\utility::func_B027("pain", "right_arm_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "right_arm");
+    var_1 = scripts\anim\utility::func_B027("pain", "right_arm_extended");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "left_arm");
-    var_01 = scripts\anim\utility::func_B027("pain", "left_arm_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "left_arm");
+    var_1 = scripts\anim\utility::func_B027("pain", "left_arm_extended");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "leg");
-    var_01 = scripts\anim\utility::func_B027("pain", "leg_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "leg");
+    var_1 = scripts\anim\utility::func_B027("pain", "leg_extended");
   } else if(scripts\engine\utility::damagelocationisany("left_foot", "right_foot", "left_leg_lower", "right_leg_lower")) {
-    var_00 = scripts\anim\utility::func_B027("pain", "foot");
-    var_01 = scripts\anim\utility::func_B027("pain", "foot_extended");
+    var_0 = scripts\anim\utility::func_B027("pain", "foot");
+    var_1 = scripts\anim\utility::func_B027("pain", "foot_extended");
   }
 
-  if(var_00.size < 2) {
+  if(var_0.size < 2) {
     if(!self.a.disablelongdeath) {
-      var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "default_long"));
+      var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "default_long"));
     } else {
-      var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "default_short"));
+      var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "default_short"));
     }
   }
 
-  if(var_01.size < 2) {
-    var_01 = scripts\engine\utility::array_combine(var_01, scripts\anim\utility::func_B027("pain", "default_extended"));
+  if(var_1.size < 2) {
+    var_1 = scripts\engine\utility::array_combine(var_1, scripts\anim\utility::func_B027("pain", "default_extended"));
   }
 
   if(!self.var_E0 && !self.a.disablelongdeath) {
-    var_02 = randomint(var_00.size + var_01.size);
-    if(var_02 < var_00.size) {
-      return var_00[var_02];
+    var_2 = randomint(var_0.size + var_1.size);
+    if(var_2 < var_0.size) {
+      return var_0[var_2];
     } else {
-      return var_01[var_02 - var_00.size];
+      return var_1[var_2 - var_0.size];
     }
   }
 
-  return var_00[randomint(var_00.size)];
+  return var_0[randomint(var_0.size)];
 }
 
 func_7E46() {
-  var_00 = [];
+  var_0 = [];
   if(!self.var_E0 && !self.a.disablelongdeath) {
-    var_00 = scripts\anim\utility::func_B027("pain", "crouch_longdeath");
+    var_0 = scripts\anim\utility::func_B027("pain", "crouch_longdeath");
   }
 
-  var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "crouch_default"));
+  var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "crouch_default"));
   if(scripts\engine\utility::damagelocationisany("left_hand", "left_arm_lower", "left_arm_upper")) {
-    var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "crouch_left_arm"));
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "crouch_left_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_hand", "right_arm_lower", "right_arm_upper")) {
-    var_00 = scripts\engine\utility::array_combine(var_00, scripts\anim\utility::func_B027("pain", "crouch_right_arm"));
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::func_B027("pain", "crouch_right_arm"));
   }
 
-  return var_00[randomint(var_00.size)];
+  return var_0[randomint(var_0.size)];
 }
 
 _meth_80A0() {
-  var_00 = scripts\anim\utility::func_B027("pain", "prone");
-  return var_00[randomint(var_00.size)];
+  var_0 = scripts\anim\utility::func_B027("pain", "prone");
+  return var_0[randomint(var_0.size)];
 }
 
-func_D4EE(param_00) {
-  var_01 = 1;
-  func_C86D("painanim", param_00, % body, 1, 0.1, var_01);
+func_D4EE(var_0) {
+  var_1 = 1;
+  func_C86D("painanim", var_0, % body, 1, 0.1, var_1);
   if(self.a.pose == "prone") {
     self _meth_83CF( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
   }
 
-  if(animhasnotetrack(param_00, "start_aim")) {
+  if(animhasnotetrack(var_0, "start_aim")) {
     thread func_C172("painanim");
     self endon("start_aim");
   }
 
-  if(animhasnotetrack(param_00, "code_move")) {
+  if(animhasnotetrack(var_0, "code_move")) {
     scripts\anim\shared::donotetracks("painanim");
   }
 
   scripts\anim\shared::donotetracks("painanim");
 }
 
-func_C172(param_00) {
+func_C172(var_0) {
   self endon("killanimscript");
-  self waittillmatch("start_aim", param_00);
+  self waittillmatch("start_aim", var_0);
   self notify("start_aim");
 }
 
@@ -302,125 +302,125 @@ func_10969() {
   self.allowpain = 1;
 }
 
-func_10968(param_00) {
-  if(param_00 == "none") {
+func_10968(var_0) {
+  if(var_0 == "none") {
     return 0;
   }
 
   self.a.var_10930 = "none";
   thread func_10969();
-  switch (param_00) {
+  switch (var_0) {
     case "cover_left":
       if(self.a.pose == "stand") {
-        var_01 = scripts\anim\utility::func_B027("pain", "cover_left_stand");
-        func_5A5B(var_01);
-        var_02 = 1;
+        var_1 = scripts\anim\utility::func_B027("pain", "cover_left_stand");
+        func_5A5B(var_1);
+        var_2 = 1;
       } else if(self.a.pose == "crouch") {
-        var_01 = scripts\anim\utility::func_B027("pain", "cover_left_crouch");
-        func_5A5B(var_01);
-        var_02 = 1;
+        var_1 = scripts\anim\utility::func_B027("pain", "cover_left_crouch");
+        func_5A5B(var_1);
+        var_2 = 1;
       } else {
-        var_02 = 0;
+        var_2 = 0;
       }
       break;
 
     case "cover_right":
       if(self.a.pose == "stand") {
-        var_01 = scripts\anim\utility::func_B027("pain", "cover_right_stand");
-        func_5A5B(var_01);
-        var_02 = 1;
+        var_1 = scripts\anim\utility::func_B027("pain", "cover_right_stand");
+        func_5A5B(var_1);
+        var_2 = 1;
       } else if(self.a.pose == "crouch") {
-        var_01 = scripts\anim\utility::func_B027("pain", "cover_right_crouch");
-        func_5A5B(var_01);
-        var_02 = 1;
+        var_1 = scripts\anim\utility::func_B027("pain", "cover_right_crouch");
+        func_5A5B(var_1);
+        var_2 = 1;
       } else {
-        var_02 = 0;
+        var_2 = 0;
       }
       break;
 
     case "cover_right_stand_A":
-      var_02 = 0;
+      var_2 = 0;
       break;
 
     case "cover_right_stand_B":
       dopain(scripts\anim\utility::func_B027("pain", "cover_right_stand_B"));
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "cover_left_stand_A":
       dopain(scripts\anim\utility::func_B027("pain", "cover_left_stand_A"));
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "cover_left_stand_B":
       dopain(scripts\anim\utility::func_B027("pain", "cover_left_stand_B"));
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "cover_crouch":
-      var_01 = scripts\anim\utility::func_B027("pain", "cover_crouch");
-      func_5A5B(var_01);
-      var_02 = 1;
+      var_1 = scripts\anim\utility::func_B027("pain", "cover_crouch");
+      func_5A5B(var_1);
+      var_2 = 1;
       break;
 
     case "cover_stand":
-      var_01 = scripts\anim\utility::func_B027("pain", "cover_stand");
-      func_5A5B(var_01);
-      var_02 = 1;
+      var_1 = scripts\anim\utility::func_B027("pain", "cover_stand");
+      func_5A5B(var_1);
+      var_2 = 1;
       break;
 
     case "cover_stand_aim":
-      var_01 = scripts\anim\utility::func_B027("pain", "cover_stand_aim");
-      func_5A5B(var_01);
-      var_02 = 1;
+      var_1 = scripts\anim\utility::func_B027("pain", "cover_stand_aim");
+      func_5A5B(var_1);
+      var_2 = 1;
       break;
 
     case "cover_crouch_aim":
-      var_01 = scripts\anim\utility::func_B027("pain", "cover_crouch_aim");
-      func_5A5B(var_01);
-      var_02 = 1;
+      var_1 = scripts\anim\utility::func_B027("pain", "cover_crouch_aim");
+      func_5A5B(var_1);
+      var_2 = 1;
       break;
 
     case "saw":
       if(self.a.pose == "stand") {
-        var_03 = scripts\anim\utility::func_B027("pain", "saw_stand");
+        var_3 = scripts\anim\utility::func_B027("pain", "saw_stand");
       } else if(self.a.pose == "crouch") {
-        var_03 = scripts\anim\utility::func_B027("pain", "saw_crouch");
+        var_3 = scripts\anim\utility::func_B027("pain", "saw_crouch");
       } else {
-        var_03 = scripts\anim\utility::func_B027("pain", "saw_prone");
+        var_3 = scripts\anim\utility::func_B027("pain", "saw_prone");
       }
 
-      func_C86C("painanim", var_03, 1, 0.3, 1);
+      func_C86C("painanim", var_3, 1, 0.3, 1);
       scripts\anim\shared::donotetracks("painanim");
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "mg42":
       func_B6AE(self.a.pose);
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "minigun":
-      var_02 = 0;
+      var_2 = 0;
       break;
 
     case "corner_right_martyrdom":
-      var_02 = func_12893();
+      var_2 = func_12893();
       break;
 
     case "dying_crawl":
     case "rambo_right":
     case "rambo_left":
     case "rambo":
-      var_02 = 0;
+      var_2 = 0;
       break;
 
     default:
-      var_02 = 0;
+      var_2 = 0;
       break;
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_C874() {
@@ -429,30 +429,30 @@ func_C874() {
   self notify("pain_death");
 }
 
-func_5A5B(param_00) {
-  var_01 = param_00[randomint(param_00.size)];
-  func_C86C("painanim", var_01, 1, 0.3, 1);
+func_5A5B(var_0) {
+  var_1 = var_0[randomint(var_0.size)];
+  func_C86C("painanim", var_1, 1, 0.3, 1);
   scripts\anim\shared::donotetracks("painanim");
 }
 
-dopain(param_00) {
-  func_C86C("painanim", param_00, 1, 0.3, 1);
+dopain(var_0) {
+  func_C86C("painanim", var_0, 1, 0.3, 1);
   scripts\anim\shared::donotetracks("painanim");
 }
 
-func_B6AE(param_00) {
-  func_C86C("painanim", level.var_B6B0["pain_" + param_00], 1, 0.1, 1);
+func_B6AE(var_0) {
+  func_C86C("painanim", level.var_B6B0["pain_" + var_0], 1, 0.1, 1);
   scripts\anim\shared::donotetracks("painanim");
 }
 
-func_13713(param_00, param_01) {
+func_13713(var_0, var_1) {
   self endon("killanimscript");
   self endon("death");
-  if(isDefined(param_01)) {
-    self endon(param_01);
+  if(isDefined(var_1)) {
+    self endon(var_1);
   }
 
-  wait(param_00);
+  wait(var_0);
   self.a.movement = "stop";
 }
 
@@ -469,9 +469,9 @@ func_4874() {
     return 0;
   }
 
-  var_00 = scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot");
+  var_0 = scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot");
   if(isDefined(self.var_72CC)) {
-    func_F6AD(var_00);
+    func_F6AD(var_0);
     self.health = 10;
     thread func_4877();
     self waittill("killanimscript");
@@ -482,7 +482,7 @@ func_4874() {
     return 0;
   }
 
-  if(var_00 && self.health < self.maxhealth * 0.4) {
+  if(var_0 && self.health < self.maxhealth * 0.4) {
     if(gettime() < level.var_BF78) {
       return 0;
     }
@@ -500,8 +500,8 @@ func_4874() {
     return 0;
   }
 
-  foreach(var_02 in level.players) {
-    if(distancesquared(self.origin, var_02.origin) < 30625) {
+  foreach(var_2 in level.players) {
+    if(distancesquared(self.origin, var_2.origin) < 30625) {
       return 0;
     }
   }
@@ -514,7 +514,7 @@ func_4874() {
     return 0;
   }
 
-  func_F6AD(var_00);
+  func_F6AD(var_0);
   if(!isDefined(self.a.var_11188) && !func_9D9D(self.a.var_4876)) {
     return 0;
   }
@@ -526,34 +526,34 @@ func_4874() {
   return 1;
 }
 
-func_F6AD(param_00) {
-  var_01 = [];
-  var_02 = undefined;
+func_F6AD(var_0) {
+  var_1 = [];
+  var_2 = undefined;
   if(self.a.pose == "stand") {
-    var_02 = func_FFC3(param_00);
-    if(isDefined(var_02)) {
-      var_01 = [var_02[0]];
+    var_2 = func_FFC3(var_0);
+    if(isDefined(var_2)) {
+      var_1 = [var_2[0]];
     } else {
-      var_01 = scripts\anim\utility::func_B027("crawl_death", "stand_transition");
+      var_1 = scripts\anim\utility::func_B027("crawl_death", "stand_transition");
     }
   } else if(self.a.pose == "crouch") {
-    var_01 = scripts\anim\utility::func_B027("crawl_death", "crouch_transition");
+    var_1 = scripts\anim\utility::func_B027("crawl_death", "crouch_transition");
   } else {
-    var_01 = scripts\anim\utility::func_B027("crawl_death", "prone_transition");
+    var_1 = scripts\anim\utility::func_B027("crawl_death", "prone_transition");
   }
 
-  self.a.var_4876 = var_01[randomint(var_01.size)];
-  self.a.var_11188 = var_02;
+  self.a.var_4876 = var_1[randomint(var_1.size)];
+  self.a.var_11188 = var_2;
 }
 
-func_9D9D(param_00) {
+func_9D9D(var_0) {
   if(isDefined(self.a.var_7280)) {
     return 1;
   }
 
-  var_01 = getmovedelta(param_00, 0, 1);
-  var_02 = self gettweakablevalue(var_01);
-  return self maymovetopoint(var_02);
+  var_1 = getmovedelta(var_0, 0, 1);
+  var_2 = self gettweakablevalue(var_1);
+  return self maymovetopoint(var_2);
 }
 
 func_4877() {
@@ -586,122 +586,122 @@ func_4877() {
 
   func_4F64();
   while(func_10031()) {
-    var_00 = scripts\anim\utility::func_B027("crawl_death", "back_crawl");
-    if(!func_9D9D(var_00)) {
+    var_0 = scripts\anim\utility::func_B027("crawl_death", "back_crawl");
+    if(!func_9D9D(var_0)) {
       break;
     }
 
-    func_C86E("back_crawl", var_00, 1, 0.1, 1);
+    func_C86E("back_crawl", var_0, 1, 0.1, 1);
     scripts\anim\notetracks::donotetracksintercept("back_crawl", ::func_8977);
   }
 
   self.var_527E = gettime() + randomintrange(4000, 20000);
   while(func_10099()) {
     if(scripts\anim\utility_common::canseeenemy() && func_1A3C()) {
-      var_01 = scripts\anim\utility::func_B027("crawl_death", "back_fire");
-      func_C86E("back_idle_or_fire", var_01, 1, 0.2, 1);
+      var_1 = scripts\anim\utility::func_B027("crawl_death", "back_fire");
+      func_C86E("back_idle_or_fire", var_1, 1, 0.2, 1);
       scripts\anim\shared::donotetracks("back_idle_or_fire");
       continue;
     }
 
-    var_01 = scripts\anim\utility::func_B027("crawl_death", "back_idle");
+    var_1 = scripts\anim\utility::func_B027("crawl_death", "back_idle");
     if(randomfloat(1) < 0.4) {
-      var_02 = scripts\anim\utility::func_B027("crawl_death", "back_idle_twitch");
-      var_01 = var_02[randomint(var_02.size)];
+      var_2 = scripts\anim\utility::func_B027("crawl_death", "back_idle_twitch");
+      var_1 = var_2[randomint(var_2.size)];
     }
 
-    func_C86E("back_idle_or_fire", var_01, 1, 0.1, 1);
-    var_03 = getanimlength(var_01);
-    while(var_03 > 0) {
+    func_C86E("back_idle_or_fire", var_1, 1, 0.1, 1);
+    var_3 = getanimlength(var_1);
+    while(var_3 > 0) {
       if(scripts\anim\utility_common::canseeenemy() && func_1A3C()) {
         break;
       }
 
-      var_04 = 0.5;
-      if(var_04 > var_03) {
-        var_04 = var_03;
-        var_03 = 0;
+      var_4 = 0.5;
+      if(var_4 > var_3) {
+        var_4 = var_3;
+        var_3 = 0;
         continue;
       }
 
-      var_03 = var_03 - var_04;
-      scripts\anim\notetracks::donotetracksfortime(var_04, "back_idle_or_fire");
+      var_3 = var_3 - var_4;
+      scripts\anim\notetracks::donotetracksfortime(var_4, "back_idle_or_fire");
     }
   }
 
   self notify("end_dying_crawl_back_aim");
   self clearanim( % dying_back_aim_4_wrapper, 0.3);
   self clearanim( % dying_back_aim_6_wrapper, 0.3);
-  var_05 = scripts\anim\utility::func_B027("crawl_death", "back_death");
-  self.var_4E2A = var_05[randomint(var_05.size)];
+  var_5 = scripts\anim\utility::func_B027("crawl_death", "back_death");
+  self.var_4E2A = var_5[randomint(var_5.size)];
   func_A6CE();
   self.a.var_10930 = "none";
   self.var_10957 = undefined;
 }
 
-func_FFC3(param_00) {
+func_FFC3(var_0) {
   if(self.a.pose != "stand") {
     return;
   }
 
-  var_01 = 2;
-  if(randomint(10) > var_01) {
+  var_1 = 2;
+  if(randomint(10) > var_1) {
     return;
   }
 
-  var_02 = 0;
-  if(!param_00) {
-    var_02 = scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
-    if(!var_02) {
+  var_2 = 0;
+  if(!var_0) {
+    var_2 = scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
+    if(!var_2) {
       return;
     }
   }
 
-  var_03 = 0;
-  var_04 = "leg";
-  var_05 = "b";
-  if(param_00) {
-    var_03 = 200;
+  var_3 = 0;
+  var_4 = "leg";
+  var_5 = "b";
+  if(var_0) {
+    var_3 = 200;
   } else {
-    var_04 = "gut";
-    var_03 = 128;
+    var_4 = "gut";
+    var_3 = 128;
     if(45 < self.var_E3 && self.var_E3 < 135) {
-      var_05 = "l";
+      var_5 = "l";
     } else if(-135 < self.var_E3 && self.var_E3 < -45) {
-      var_05 = "r";
+      var_5 = "r";
     } else if(-45 < self.var_E3 && self.var_E3 < 45) {
       return;
     }
   }
 
-  switch (var_05) {
+  switch (var_5) {
     case "b":
-      var_06 = anglesToForward(self.angles);
-      var_07 = self.origin - var_06 * var_03;
+      var_6 = anglesToForward(self.angles);
+      var_7 = self.origin - var_6 * var_3;
       break;
 
     case "l":
-      var_08 = anglestoright(self.angles);
-      var_07 = self.origin - var_08 * var_03;
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin - var_8 * var_3;
       break;
 
     case "r":
-      var_08 = anglestoright(self.angles);
-      var_07 = self.origin + var_08 * var_03;
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin + var_8 * var_3;
       break;
 
     default:
       break;
   }
 
-  if(!self maymovetopoint(var_07)) {
+  if(!self maymovetopoint(var_7)) {
     return;
   }
 
-  var_09 = scripts\anim\utility::func_B027("crawl_death", "longdeath");
-  var_0A = var_04 + "_" + var_05;
-  var_0B = randomint(var_09[var_0A].size);
-  var_0C = var_09[var_0A][var_0B];
+  var_9 = scripts\anim\utility::func_B027("crawl_death", "longdeath");
+  var_0A = var_4 + "_" + var_5;
+  var_0B = randomint(var_9[var_0A].size);
+  var_0C = var_9[var_0A][var_0B];
   return var_0C;
 }
 
@@ -709,12 +709,12 @@ func_11185() {
   func_C86E("stumblingPainInto", self.a.var_11188[0]);
   scripts\anim\shared::donotetracks("stumblingPainInto");
   self.a.var_10930 = "stumbling_pain";
-  var_00 = getmovedelta(self.a.var_11188[2]);
-  var_01 = getanimlength(self.a.var_11188[2]) * 1000;
-  for(var_02 = randomint(2) + 1; var_02 > 0; var_02--) {
-    var_03 = anglesToForward(self.angles);
-    var_04 = self.origin + var_03 * var_00;
-    if(!self maymovetopoint(var_04)) {
+  var_0 = getmovedelta(self.a.var_11188[2]);
+  var_1 = getanimlength(self.a.var_11188[2]) * 1000;
+  for(var_2 = randomint(2) + 1; var_2 > 0; var_2--) {
+    var_3 = anglesToForward(self.angles);
+    var_4 = self.origin + var_3 * var_0;
+    if(!self maymovetopoint(var_4)) {
       break;
     }
 
@@ -730,9 +730,9 @@ func_11185() {
   func_A6CE();
 }
 
-func_11189(param_00) {
-  if(param_00 == "start_ragdoll") {
-    scripts\anim\notetracks::handlenotetrack(param_00, "stumblingPainCollapse");
+func_11189(var_0) {
+  if(var_0 == "start_ragdoll") {
+    scripts\anim\notetracks::handlenotetrack(var_0, "stumblingPainCollapse");
     return 1;
   }
 }
@@ -765,14 +765,14 @@ func_5F71() {
   }
 
   if(self.a.pose != "prone") {
-    var_00 = scripts\anim\utility::func_B027("crawl_death", self.a.pose + "_2_crawl");
-    var_01 = var_00[randomint(var_00.size)];
-    if(!func_9D9D(var_01)) {
+    var_0 = scripts\anim\utility::func_B027("crawl_death", self.a.pose + "_2_crawl");
+    var_1 = var_0[randomint(var_0.size)];
+    if(!func_9D9D(var_1)) {
       return 1;
     }
 
     thread func_5F74();
-    func_C86C("falling", var_01, 1, 0.5, 1);
+    func_C86C("falling", var_1, 1, 0.5, 1);
     scripts\anim\shared::donotetracks("falling");
   } else {
     thread func_5F74();
@@ -781,9 +781,9 @@ func_5F71() {
   self.a.var_4876 = scripts\anim\utility::func_B027("crawl_death", "default_transition");
   self.a.var_10930 = "dying_crawl";
   func_4F64();
-  var_02 = scripts\anim\utility::func_B027("crawl_death", "crawl");
+  var_2 = scripts\anim\utility::func_B027("crawl_death", "crawl");
   while(func_10031()) {
-    if(!func_9D9D(var_02)) {
+    if(!func_9D9D(var_2)) {
       return 1;
     }
 
@@ -791,7 +791,7 @@ func_5F71() {
       self playSound(self.var_4C41);
     }
 
-    func_C86E("crawling", var_02, 1, 0.1, 1);
+    func_C86E("crawling", var_2, 1, 0.1, 1);
     scripts\anim\shared::donotetracks("crawling");
   }
 
@@ -800,9 +800,9 @@ func_5F71() {
     return 1;
   }
 
-  var_03 = scripts\anim\utility::func_B027("crawl_death", "death");
-  var_04 = var_03[randomint(var_03.size)];
-  scripts\anim\death::func_CF0E(var_04);
+  var_3 = scripts\anim\utility::func_B027("crawl_death", "death");
+  var_4 = var_3[randomint(var_3.size)];
+  scripts\anim\death::func_CF0E(var_4);
   func_A6CE();
   self.a.var_10930 = "none";
   self.var_10957 = undefined;
@@ -813,32 +813,32 @@ func_5F74() {
   self endon("death");
   if(self.a.pose != "prone") {
     for(;;) {
-      self waittill("falling", var_00);
-      if(issubstr(var_00, "bodyfall")) {
+      self waittill("falling", var_0);
+      if(issubstr(var_0, "bodyfall")) {
         break;
       }
     }
   }
 
-  var_01 = "J_SpineLower";
-  var_02 = "tag_origin";
-  var_03 = 0.25;
-  var_04 = level._effect["crawling_death_blood_smear"];
+  var_1 = "J_SpineLower";
+  var_2 = "tag_origin";
+  var_3 = 0.25;
+  var_4 = level._effect["crawling_death_blood_smear"];
   if(isDefined(self.a.var_486A)) {
-    var_03 = self.a.var_486A;
+    var_3 = self.a.var_486A;
   }
 
   if(isDefined(self.a.var_4869)) {
-    var_04 = level._effect[self.a.var_4869];
+    var_4 = level._effect[self.a.var_4869];
   }
 
-  while(var_03) {
-    var_05 = self gettagorigin(var_01);
-    var_06 = self gettagangles(var_02);
-    var_07 = anglestoright(var_06);
-    var_08 = anglesToForward((270, 0, 0));
-    playFX(var_04, var_05, var_08, var_07);
-    wait(var_03);
+  while(var_3) {
+    var_5 = self gettagorigin(var_1);
+    var_6 = self gettagangles(var_2);
+    var_7 = anglestoright(var_6);
+    var_8 = anglesToForward((270, 0, 0));
+    playFX(var_4, var_5, var_8, var_7);
+    wait(var_3);
   }
 }
 
@@ -853,34 +853,34 @@ func_5F73() {
   self.var_5F72 = 1;
   self _meth_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_4"), 1, 0);
   self _meth_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_6"), 1, 0);
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = scripts\anim\utility_common::getyawtoenemy();
-    var_02 = angleclamp180(var_01 - var_00);
-    if(abs(var_02) > 3) {
-      var_02 = scripts\engine\utility::sign(var_02) * 3;
+    var_1 = scripts\anim\utility_common::getyawtoenemy();
+    var_2 = angleclamp180(var_1 - var_0);
+    if(abs(var_2) > 3) {
+      var_2 = scripts\engine\utility::sign(var_2) * 3;
     }
 
-    var_01 = angleclamp180(var_00 + var_02);
-    if(var_01 < 0) {
-      if(var_01 < -45) {
-        var_01 = -45;
+    var_1 = angleclamp180(var_0 + var_2);
+    if(var_1 < 0) {
+      if(var_1 < -45) {
+        var_1 = -45;
       }
 
-      var_03 = var_01 / -45;
-      self give_attacker_kill_rewards( % dying_back_aim_4_wrapper, var_03, 0.05);
+      var_3 = var_1 / -45;
+      self give_attacker_kill_rewards( % dying_back_aim_4_wrapper, var_3, 0.05);
       self give_attacker_kill_rewards( % dying_back_aim_6_wrapper, 0, 0.05);
     } else {
-      if(var_01 > 45) {
-        var_01 = 45;
+      if(var_1 > 45) {
+        var_1 = 45;
       }
 
-      var_03 = var_01 / 45;
-      self give_attacker_kill_rewards( % dying_back_aim_6_wrapper, var_03, 0.05);
+      var_3 = var_1 / 45;
+      self give_attacker_kill_rewards( % dying_back_aim_6_wrapper, var_3, 0.05);
       self give_attacker_kill_rewards( % dying_back_aim_4_wrapper, 0, 0.05);
     }
 
-    var_00 = var_01;
+    var_0 = var_1;
     wait(0.05);
   }
 }
@@ -892,8 +892,8 @@ func_10D8E() {
   thread func_5F73();
 }
 
-func_8977(param_00) {
-  if(param_00 == "fire_spray") {
+func_8977(var_0) {
+  if(var_0 == "fire_spray") {
     if(!scripts\anim\utility_common::canseeenemy()) {
       return 1;
     }
@@ -904,7 +904,7 @@ func_8977(param_00) {
 
     scripts\anim\utility_common::shootenemywrapper();
     return 1;
-  } else if(param_00 == "pistol_pickup") {
+  } else if(var_0 == "pistol_pickup") {
     thread func_10D8E();
     return 0;
   }
@@ -913,29 +913,29 @@ func_8977(param_00) {
 }
 
 func_1A3C() {
-  var_00 = self.isnodeoccupied getshootatpos();
-  var_01 = self getspawnpointdist();
-  var_02 = vectortoangles(var_00 - self getmuzzlepos());
-  var_03 = scripts\engine\utility::absangleclamp180(var_01[1] - var_02[1]);
-  if(var_03 > level.var_C88B) {
-    if(distancesquared(self getEye(), var_00) > level.var_C889 || var_03 > level.var_C88A) {
+  var_0 = self.isnodeoccupied getshootatpos();
+  var_1 = self getspawnpointdist();
+  var_2 = vectortoangles(var_0 - self getmuzzlepos());
+  var_3 = scripts\engine\utility::absangleclamp180(var_1[1] - var_2[1]);
+  if(var_3 > level.var_C88B) {
+    if(distancesquared(self getEye(), var_0) > level.var_C889 || var_3 > level.var_C88A) {
       return 0;
     }
   }
 
-  return scripts\engine\utility::absangleclamp180(var_01[0] - var_02[0]) <= level.var_C87D;
+  return scripts\engine\utility::absangleclamp180(var_1[0] - var_2[0]) <= level.var_C87D;
 }
 
-enemyisingeneraldirection(param_00) {
+enemyisingeneraldirection(var_0) {
   if(!isDefined(self.isnodeoccupied)) {
     return 0;
   }
 
-  var_01 = vectornormalize(self.isnodeoccupied getshootatpos() - self getEye());
-  return vectordot(var_01, param_00) > 0.5;
+  var_1 = vectornormalize(self.isnodeoccupied getshootatpos() - self getEye());
+  return vectordot(var_1, var_0) > 0.5;
 }
 
-func_D899(param_00) {
+func_D899(var_0) {
   self endon("kill_long_death");
   self endon("death");
   self.var_6EC4 = 1;
@@ -952,7 +952,7 @@ func_D899(param_00) {
   wait(0.05);
   self.var_AFE7 = undefined;
   self.a.var_B4E7 = 1;
-  if(param_00 == "crawling") {
+  if(var_0 == "crawling") {
     wait(1);
     if(isDefined(level.player) && distancesquared(self.origin, level.player.origin) < 1048576) {
       anim.var_C222 = randomintrange(10, 30);
@@ -966,7 +966,7 @@ func_D899(param_00) {
     return;
   }
 
-  if(param_00 == "corner_grenade") {
+  if(var_0 == "corner_grenade") {
     wait(1);
     if(isDefined(level.player) && distancesquared(self.origin, level.player.origin) < 490000) {
       anim.var_C221 = randomintrange(10, 30);
@@ -1038,42 +1038,42 @@ func_4669() {
     scripts\anim\shared::func_5D1A();
     self waittillmatch("anim_pose = \"back\","
       corner_grenade_pain ");
-      scripts\anim\notetracks::notetrackposeback(); self waittillmatch("grenade_left", "corner_grenade_pain"); var_00 = getweaponmodel("fraggrenade"); self attach(var_00, "tag_inhand"); self.var_4E46 = ::func_D850; self waittillmatch("end", "corner_grenade_pain"); var_01 = gettime() + randomintrange(25000, -5536); func_C86D("corner_grenade_idle", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), % body, 1, 0.2); thread func_13A17();
+      scripts\anim\notetracks::notetrackposeback(); self waittillmatch("grenade_left", "corner_grenade_pain"); var_0 = getweaponmodel("fraggrenade"); self attach(var_0, "tag_inhand"); self.var_4E46 = ::func_D850; self waittillmatch("end", "corner_grenade_pain"); var_1 = gettime() + randomintrange(25000, -5536); func_C86D("corner_grenade_idle", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), % body, 1, 0.2); thread func_13A17();
       while(!func_6560()) {
-        if(gettime() >= var_01) {
+        if(gettime() >= var_1) {
           break;
         }
 
         scripts\anim\notetracks::donotetracksfortime(0.1, "corner_grenade_idle");
       }
 
-      var_02 = scripts\anim\utility::func_B027("corner_grenade_death", "release"); func_C86D("corner_grenade_release", var_02, % body, 1, 0.2); var_03 = getnotetracktimes(var_02, "grenade_drop"); var_04 = var_03[0] * getanimlength(var_02); wait(var_04 - 1); scripts\anim\death::playdeathsound(); wait(0.7); self.var_4E46 = ::waittillhelisdead; var_05 = (0, 0, 30) - anglestoright(self.angles) * 70; func_4663(var_05, randomfloatrange(2, 3)); wait(0.05); self detach(var_00, "tag_inhand"); thread func_A678();
+      var_2 = scripts\anim\utility::func_B027("corner_grenade_death", "release"); func_C86D("corner_grenade_release", var_2, % body, 1, 0.2); var_3 = getnotetracktimes(var_2, "grenade_drop"); var_4 = var_3[0] * getanimlength(var_2); wait(var_4 - 1); scripts\anim\death::playdeathsound(); wait(0.7); self.var_4E46 = ::waittillhelisdead; var_5 = (0, 0, 30) - anglestoright(self.angles) * 70; func_4663(var_5, randomfloatrange(2, 3)); wait(0.05); self detach(var_0, "tag_inhand"); thread func_A678();
     }
 
-    func_4663(param_00, param_01) {
-      var_02 = self gettagorigin("tag_inhand");
-      var_03 = var_02 + (0, 0, 20);
-      var_04 = var_02 - (0, 0, 20);
-      var_05 = bulletTrace(var_03, var_04, 0, undefined);
-      if(var_05["fraction"] < 0.5) {
-        var_02 = var_05["position"];
+    func_4663(var_0, var_1) {
+      var_2 = self gettagorigin("tag_inhand");
+      var_3 = var_2 + (0, 0, 20);
+      var_4 = var_2 - (0, 0, 20);
+      var_5 = bulletTrace(var_3, var_4, 0, undefined);
+      if(var_5["fraction"] < 0.5) {
+        var_2 = var_5["position"];
       }
 
-      var_06 = "default";
-      if(var_05["surfacetype"] != "none") {
-        var_06 = var_05["surfacetype"];
+      var_6 = "default";
+      if(var_5["surfacetype"] != "none") {
+        var_6 = var_5["surfacetype"];
       }
 
-      thread func_D527("grenade_bounce", var_02);
+      thread func_D527("grenade_bounce", var_2);
       self.objective_team = "fraggrenade";
-      self getuniqueobjectid(var_02, param_00, param_01);
+      self getuniqueobjectid(var_2, var_0, var_1);
     }
 
-    func_D527(param_00, param_01) {
-      var_02 = spawn("script_origin", param_01);
-      var_02 playSound(param_00, "sounddone");
-      var_02 waittill("sounddone");
-      var_02 delete();
+    func_D527(var_0, var_1) {
+      var_2 = spawn("script_origin", var_1);
+      var_2 playSound(var_0, "sounddone");
+      var_2 waittill("sounddone");
+      var_2 delete();
     }
 
     func_A678() {
@@ -1106,13 +1106,13 @@ func_4669() {
         return 1;
       }
 
-      var_00 = self.isnodeoccupied.origin + self.var_6579 * 3;
-      var_01 = self.isnodeoccupied.origin;
-      if(self.isnodeoccupied.origin != var_00) {
-        var_01 = pointonsegmentnearesttopoint(self.isnodeoccupied.origin, var_00, self.origin);
+      var_0 = self.isnodeoccupied.origin + self.var_6579 * 3;
+      var_1 = self.isnodeoccupied.origin;
+      if(self.isnodeoccupied.origin != var_0) {
+        var_1 = pointonsegmentnearesttopoint(self.isnodeoccupied.origin, var_0, self.origin);
       }
 
-      if(distancesquared(self.origin, var_01) < 16384) {
+      if(distancesquared(self.origin, var_1) < 16384) {
         return 1;
       }
 
@@ -1120,14 +1120,14 @@ func_4669() {
     }
 
     func_D850() {
-      var_00 = scripts\anim\utility::func_B027("corner_grenade_death", "premature_death");
-      var_01 = var_00[randomint(var_00.size)];
+      var_0 = scripts\anim\utility::func_B027("corner_grenade_death", "premature_death");
+      var_1 = var_0[randomint(var_0.size)];
       scripts\anim\death::playdeathsound();
-      func_C86D("corner_grenade_die", var_01, % body, 1, 0.2);
-      var_02 = scripts\anim\combat_utility::func_7EE3();
-      func_4663(var_02, 3);
-      var_03 = getweaponmodel("fraggrenade");
-      self detach(var_03, "tag_inhand");
+      func_C86D("corner_grenade_die", var_1, % body, 1, 0.2);
+      var_2 = scripts\anim\combat_utility::func_7EE3();
+      func_4663(var_2, 3);
+      var_3 = getweaponmodel("fraggrenade");
+      self detach(var_3, "tag_inhand");
       wait(0.05);
       self giverankxp();
       self waittillmatch("end", "corner_grenade_die");
@@ -1141,30 +1141,30 @@ func_4669() {
       self endon("kill_long_death");
       self endon("death");
       self.var_6579 = (0, 0, 0);
-      var_00 = undefined;
-      var_01 = self.origin;
-      var_02 = 0.15;
+      var_0 = undefined;
+      var_1 = self.origin;
+      var_2 = 0.15;
       for(;;) {
-        if(isDefined(self.isnodeoccupied) && isDefined(var_00) && self.isnodeoccupied == var_00) {
-          var_03 = self.isnodeoccupied.origin;
-          self.var_6579 = var_03 - var_01 * 1 / var_02;
-          var_01 = var_03;
+        if(isDefined(self.isnodeoccupied) && isDefined(var_0) && self.isnodeoccupied == var_0) {
+          var_3 = self.isnodeoccupied.origin;
+          self.var_6579 = var_3 - var_1 * 1 / var_2;
+          var_1 = var_3;
         } else {
           if(isDefined(self.isnodeoccupied)) {
-            var_01 = self.isnodeoccupied.origin;
+            var_1 = self.isnodeoccupied.origin;
           } else {
-            var_01 = self.origin;
+            var_1 = self.origin;
           }
 
-          var_00 = self.isnodeoccupied;
+          var_0 = self.isnodeoccupied;
           self.var_FE9F = (0, 0, 0);
         }
 
-        wait(var_02);
+        wait(var_2);
       }
     }
 
-    func_17DD(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+    func_17DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       self endon("death");
       if(!isDefined(self)) {
         return;
@@ -1174,82 +1174,82 @@ func_4669() {
         return;
       }
 
-      if(param_00 < self.soundexists) {
+      if(var_0 < self.soundexists) {
         return;
       }
 
       self.var_58D6 = 1;
-      var_07 = undefined;
+      var_7 = undefined;
       if(scripts\engine\utility::damagelocationisany("left_arm_lower", "left_arm_upper", "left_hand")) {
-        var_07 = scripts\anim\utility::func_B027("additive_pain", "left_arm");
+        var_7 = scripts\anim\utility::func_B027("additive_pain", "left_arm");
       }
 
       if(scripts\engine\utility::damagelocationisany("right_arm_lower", "right_arm_upper", "right_hand")) {
-        var_07 = scripts\anim\utility::func_B027("additive_pain", "right_arm");
+        var_7 = scripts\anim\utility::func_B027("additive_pain", "right_arm");
       } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-        var_07 = scripts\anim\utility::func_B027("additive_pain", "left_leg");
+        var_7 = scripts\anim\utility::func_B027("additive_pain", "left_leg");
       } else if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-        var_07 = scripts\anim\utility::func_B027("additive_pain", "right_leg");
+        var_7 = scripts\anim\utility::func_B027("additive_pain", "right_leg");
       } else {
-        var_08 = scripts\anim\utility::func_B027("additive_pain", "default");
-        var_07 = var_08[randomint(var_08.size)];
+        var_8 = scripts\anim\utility::func_B027("additive_pain", "default");
+        var_7 = var_8[randomint(var_8.size)];
       }
 
       self _meth_82AC( % add_pain, 1, 0.1, 1);
-      self _meth_82AC(var_07, 1, 0, 1);
+      self _meth_82AC(var_7, 1, 0, 1);
       wait(0.4);
-      self clearanim(var_07, 0.2);
+      self clearanim(var_7, 0.2);
       self clearanim( % add_pain, 0.2);
       self.var_58D6 = undefined;
     }
 
-    func_C86C(param_00, param_01, param_02, param_03, param_04) {
-      if(!isDefined(param_02)) {
-        param_02 = 1;
+    func_C86C(var_0, var_1, var_2, var_3, var_4) {
+      if(!isDefined(var_2)) {
+        var_2 = 1;
       }
 
-      if(!isDefined(param_03)) {
-        param_03 = 0.2;
+      if(!isDefined(var_3)) {
+        var_3 = 0.2;
       }
 
-      if(!isDefined(param_04)) {
-        param_04 = 1;
+      if(!isDefined(var_4)) {
+        var_4 = 1;
       }
 
-      self give_left_powers(param_00, param_01, param_02, param_03, param_04);
-      self.facialanimidx = scripts\anim\face::playfacialanim(param_01, "pain", self.facialanimidx);
+      self give_left_powers(var_0, var_1, var_2, var_3, var_4);
+      self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
     }
 
-    func_C86E(param_00, param_01, param_02, param_03, param_04) {
-      if(!isDefined(param_02)) {
-        param_02 = 1;
+    func_C86E(var_0, var_1, var_2, var_3, var_4) {
+      if(!isDefined(var_2)) {
+        var_2 = 1;
       }
 
-      if(!isDefined(param_03)) {
-        param_03 = 0.2;
+      if(!isDefined(var_3)) {
+        var_3 = 0.2;
       }
 
-      if(!isDefined(param_04)) {
-        param_04 = 1;
+      if(!isDefined(var_4)) {
+        var_4 = 1;
       }
 
-      self _meth_82E7(param_00, param_01, param_02, param_03, param_04);
-      self.facialanimidx = scripts\anim\face::playfacialanim(param_01, "pain", self.facialanimidx);
+      self _meth_82E7(var_0, var_1, var_2, var_3, var_4);
+      self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
     }
 
-    func_C86D(param_00, param_01, param_02, param_03, param_04, param_05) {
-      if(!isDefined(param_03)) {
-        param_03 = 1;
+    func_C86D(var_0, var_1, var_2, var_3, var_4, var_5) {
+      if(!isDefined(var_3)) {
+        var_3 = 1;
       }
 
-      if(!isDefined(param_04)) {
-        param_04 = 0.2;
+      if(!isDefined(var_4)) {
+        var_4 = 0.2;
       }
 
-      if(!isDefined(param_05)) {
-        param_05 = 1;
+      if(!isDefined(var_5)) {
+        var_5 = 1;
       }
 
-      self _meth_82E4(param_00, param_01, param_02, param_03, param_04, param_05);
-      self.facialanimidx = scripts\anim\face::playfacialanim(param_01, "pain", self.facialanimidx);
+      self _meth_82E4(var_0, var_1, var_2, var_3, var_4, var_5);
+      self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
     }

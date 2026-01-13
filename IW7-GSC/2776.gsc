@@ -18,69 +18,69 @@ init() {
   level.objpointscale = 1.0;
 }
 
-func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_06 = getobjpointbyname(var_00);
+func_4A23(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = getobjpointbyname(var_0);
 
-  if(isDefined(var_06)) {
-    deleteobjpoint(var_06);
+  if(isDefined(var_6)) {
+    deleteobjpoint(var_6);
   }
 
-  if(!isDefined(var_03)) {
-    var_03 = "objpoint_default";
+  if(!isDefined(var_3)) {
+    var_3 = "objpoint_default";
   }
 
-  if(!isDefined(var_05)) {
-    var_05 = 1.0;
+  if(!isDefined(var_5)) {
+    var_5 = 1.0;
   }
 
-  if(var_02 != "all") {
-    var_06 = newteamhudelem(var_02);
+  if(var_2 != "all") {
+    var_6 = newteamhudelem(var_2);
   } else {
-    var_06 = newhudelem();
+    var_6 = newhudelem();
   }
 
-  var_6.name = var_00;
+  var_6.name = var_0;
   var_6.x = var_1[0];
   var_6.y = var_1[1];
   var_6.z = var_1[2];
-  var_6.team = var_02;
+  var_6.team = var_2;
   var_6.isflashing = 0;
-  var_6.func_9F51 = 1;
-  var_06 setshader(var_03, level.objpointsize, level.objpointsize);
-  var_06 setwaypoint(1, 0);
+  var_6.var_9F51 = 1;
+  var_6 setshader(var_3, level.objpointsize, level.objpointsize);
+  var_6 setwaypoint(1, 0);
 
-  if(isDefined(var_04)) {
-    var_6.alpha = var_04;
+  if(isDefined(var_4)) {
+    var_6.alpha = var_4;
   } else {
     var_6.alpha = level.objpoint_alpha_default;
   }
 
   var_6.basealpha = var_6.alpha;
   var_6.index = level.objpointnames.size;
-  level.objpoints[var_00] = var_06;
-  level.objpointnames[level.objpointnames.size] = var_00;
-  return var_06;
+  level.objpoints[var_0] = var_6;
+  level.objpointnames[level.objpointnames.size] = var_0;
+  return var_6;
 }
 
-deleteobjpoint(var_00) {
+deleteobjpoint(var_0) {
   if(level.objpoints.size == 1) {
     level.objpoints = [];
     level.objpointnames = [];
-    var_00 destroy();
+    var_0 destroy();
     return;
   }
 
-  var_01 = var_0.index;
-  var_02 = level.objpointnames.size - 1;
-  var_03 = getobjpointbyindex(var_02);
-  level.objpointnames[var_01] = var_3.name;
-  var_3.index = var_01;
-  level.objpointnames[var_02] = undefined;
+  var_1 = var_0.index;
+  var_2 = level.objpointnames.size - 1;
+  var_3 = getobjpointbyindex(var_2);
+  level.objpointnames[var_1] = var_3.name;
+  var_3.index = var_1;
+  level.objpointnames[var_2] = undefined;
   level.objpoints[var_0.name] = undefined;
-  var_00 destroy();
+  var_0 destroy();
 }
 
-updateorigin(var_00) {
+updateorigin(var_0) {
   if(self.x != var_0[0]) {
     self.x = var_0[0];
   }
@@ -94,22 +94,22 @@ updateorigin(var_00) {
   }
 }
 
-setoriginbyname(var_00, var_01) {
-  var_02 = getobjpointbyname(var_00);
-  var_02 updateorigin(var_01);
+setoriginbyname(var_0, var_1) {
+  var_2 = getobjpointbyname(var_0);
+  var_2 updateorigin(var_1);
 }
 
-getobjpointbyname(var_00) {
-  if(isDefined(level.objpoints[var_00])) {
-    return level.objpoints[var_00];
+getobjpointbyname(var_0) {
+  if(isDefined(level.objpoints[var_0])) {
+    return level.objpoints[var_0];
   } else {
     return undefined;
   }
 }
 
-getobjpointbyindex(var_00) {
-  if(isDefined(level.objpointnames[var_00])) {
-    return level.objpoints[level.objpointnames[var_00]];
+getobjpointbyindex(var_0) {
+  if(isDefined(level.objpointnames[var_0])) {
+    return level.objpoints[level.objpointnames[var_0]];
   } else {
     return undefined;
   }

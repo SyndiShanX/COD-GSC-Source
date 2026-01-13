@@ -102,61 +102,61 @@ func_BE5C() {
 }
 
 func_7180() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "fly";
-  return var_00;
+  return var_0;
 }
 
 func_7181() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "hover";
-  return var_00;
+  return var_0;
 }
 
 func_7182() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "shoot_at_will";
-  return var_00;
+  return var_0;
 }
 
 func_7183() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "face enemy";
-  return var_00;
+  return var_0;
 }
 
 func_7184() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = 1500;
-  return var_00;
+  return var_0;
 }
 
 func_7185() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "spline";
-  return var_00;
+  return var_0;
 }
 
 func_7186() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = 5000;
-  return var_00;
+  return var_0;
 }
 
 func_7187() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "attack";
-  return var_00;
+  return var_0;
 }
 
 func_7188() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = "face motion";
-  return var_00;
+  return var_0;
 }
 
 func_7189() {
-  var_00 = [];
+  var_0 = [];
   var_0[0] = 2048;
-  return var_00;
+  return var_0;
 }

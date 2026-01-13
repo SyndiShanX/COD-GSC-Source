@@ -29,48 +29,48 @@ func_139F9() {
     }
 
     thread func_139FB();
-    var_00 = self getnormalizedmovement();
+    var_0 = self getnormalizedmovement();
     for(;;) {
-      if(var_00[0] > 0) {
-        if(var_00[1] <= 0.7 && var_00[1] >= -0.7) {
+      if(var_0[0] > 0) {
+        if(var_0[1] <= 0.7 && var_0[1] >= -0.7) {
           self setscriptablepartstate("dodge", "dodge_forward");
           break;
         }
 
-        if(var_00[0] > 0.5 && var_00[1] > 0.7) {
+        if(var_0[0] > 0.5 && var_0[1] > 0.7) {
           self setscriptablepartstate("dodge", "dodge_forward_right");
           break;
         }
 
-        if(var_00[0] > 0.5 && var_00[1] < -0.7) {
+        if(var_0[0] > 0.5 && var_0[1] < -0.7) {
           self setscriptablepartstate("dodge", "dodge_forward_left");
           break;
         }
       }
 
-      if(var_00[0] < 0) {
-        if(var_00[1] < 0.4 && var_00[1] > -0.4) {
+      if(var_0[0] < 0) {
+        if(var_0[1] < 0.4 && var_0[1] > -0.4) {
           self setscriptablepartstate("dodge", "dodge_back");
           break;
         }
 
-        if(var_00[0] < -0.5 && var_00[1] > 0.5) {
+        if(var_0[0] < -0.5 && var_0[1] > 0.5) {
           self setscriptablepartstate("dodge", "dodge_back_right");
           break;
         }
 
-        if(var_00[0] < -0.5 && var_00[1] < -0.5) {
+        if(var_0[0] < -0.5 && var_0[1] < -0.5) {
           self setscriptablepartstate("dodge", "dodge_back_left");
           break;
         }
       }
 
-      if(var_00[1] > 0.4) {
+      if(var_0[1] > 0.4) {
         self setscriptablepartstate("dodge", "dodge_right");
         break;
       }
 
-      if(var_00[1] < -0.4) {
+      if(var_0[1] < -0.4) {
         self setscriptablepartstate("dodge", "dodge_left");
         break;
       } else {
@@ -82,9 +82,9 @@ func_139F9() {
       triggerfx(self.var_5809);
     }
 
-    foreach(var_02 in level.players) {
-      if(isDefined(var_02) && var_02 != self) {
-        playfxontagforclients(level._effect["dash_trail"], self, "tag_shield_back", var_02);
+    foreach(var_2 in level.players) {
+      if(isDefined(var_2) && var_2 != self) {
+        playfxontagforclients(level._effect["dash_trail"], self, "tag_shield_back", var_2);
       }
     }
 
@@ -103,9 +103,9 @@ func_5802() {
   self endon("removeArchetype");
   self endon("setDodge");
   for(;;) {
-    var_00 = self goal_position(1);
-    var_01 = self energy_getmax(1);
-    if(var_00 >= var_01) {
+    var_0 = self goal_position(1);
+    var_1 = self energy_getmax(1);
+    if(var_0 >= var_1) {
       self setclientomnvar("ui_dodge_charges", 1);
     } else {
       self setclientomnvar("ui_dodge_charges", 0);

@@ -26,15 +26,15 @@ main() {
 
   self animmode("zonly_physics");
   self orientmode("face angle", self.angles[1]);
-  var_00 = 0;
+  var_0 = 0;
   if(isDefined(self.objective_position)) {
-    var_00 = angleclamp180(vectortoangles(self.objective_position.origin - self.origin)[1] - self.angles[1]);
+    var_0 = angleclamp180(vectortoangles(self.objective_position.origin - self.origin)[1] - self.angles[1]);
   } else {
-    var_00 = self.angles[1];
+    var_0 = self.angles[1];
   }
 
   if(self.a.pose == "stand") {
-    if(isDefined(self.objective_position) && func_12895(var_00)) {
+    if(isDefined(self.objective_position) && func_12895(var_0)) {
       return;
     }
 
@@ -53,7 +53,7 @@ end_script() {
   self.navtrace = 1;
 }
 
-func_12895(param_00) {
+func_12895(var_0) {
   if(randomint(2) == 0) {
     return 0;
   }
@@ -62,21 +62,21 @@ func_12895(param_00) {
     return 0;
   }
 
-  var_01 = undefined;
-  if(abs(param_00) > 90) {
-    var_01 = scripts\anim\utility::func_B027("grenade", "cower_dive_back");
+  var_1 = undefined;
+  if(abs(var_0) > 90) {
+    var_1 = scripts\anim\utility::func_B027("grenade", "cower_dive_back");
   } else {
-    var_01 = scripts\anim\utility::func_B027("grenade", "cower_dive_front");
+    var_1 = scripts\anim\utility::func_B027("grenade", "cower_dive_front");
   }
 
-  var_02 = getmovedelta(var_01, 0, 0.5);
-  var_03 = self gettweakablevalue(var_02);
-  if(!self maymovetopoint(var_03)) {
+  var_2 = getmovedelta(var_1, 0, 0.5);
+  var_3 = self gettweakablevalue(var_2);
+  if(!self maymovetopoint(var_3)) {
     return 0;
   }
 
   self.navtrace = 0;
-  self _meth_82E4("cowerstart", var_01, % body, 1, 0.2);
+  self _meth_82E4("cowerstart", var_1, % body, 1, 0.2);
   scripts\anim\shared::donotetracks("cowerstart");
   self.navtrace = 1;
   return 1;

@@ -4,88 +4,88 @@
  * Script: 3580.gsc
 ************************/
 
-func_DAF5(param_00) {
-  thread func_13A55(param_00);
-  thread func_13A6E(param_00);
+func_DAF5(var_0) {
+  thread func_13A55(var_0);
+  thread func_13A6E(var_0);
 }
 
-func_13A55(param_00) {
-  param_00 endon("death");
+func_13A55(var_0) {
+  var_0 endon("death");
   self waittill("disconnect");
-  param_00 delete();
+  var_0 delete();
 }
 
-func_13A6E(param_00) {
+func_13A6E(var_0) {
   self endon("disconnect");
-  param_00 endon("death");
-  param_00 waittill("missile_stuck");
-  var_01 = anglestoup(param_00.angles);
-  var_02 = func_10856(param_00);
-  var_02 scripts\mp\equipment\blackhat::func_2B2A();
-  var_02 thread func_13A3B();
-  thread func_13B19(var_02);
+  var_0 endon("death");
+  var_0 waittill("missile_stuck");
+  var_1 = anglestoup(var_0.angles);
+  var_2 = func_10856(var_0);
+  var_2 scripts\mp\equipment\blackhat::func_2B2A();
+  var_2 thread func_13A3B();
+  thread func_13B19(var_2);
 }
 
-func_13B19(param_00) {
+func_13B19(var_0) {
   self endon("disconnect");
-  param_00 endon("death");
-  var_01 = param_00.objective_position;
-  var_01 endon("death");
-  param_00 setscriptablepartstate("effects", "warmUp", 0);
+  var_0 endon("death");
+  var_1 = var_0.objective_position;
+  var_1 endon("death");
+  var_0 setscriptablepartstate("effects", "warmUp", 0);
   wait(1);
-  param_00 setscriptablepartstate("effects", "explode_01", 0);
-  var_01 thread scripts\mp\shellshock::func_DAF3();
-  param_00 radiusdamage(var_01.origin, 256, 100, 50, var_01.triggerportableradarping, "MOD_EXPLOSIVE", var_01.weapon_name);
-  var_02 = var_01.ticks;
-  for(var_03 = 0; var_03 < var_02; var_03++) {
+  var_0 setscriptablepartstate("effects", "explode_01", 0);
+  var_1 thread scripts\mp\shellshock::func_DAF3();
+  var_0 radiusdamage(var_1.origin, 256, 100, 50, var_1.triggerportableradarping, "MOD_EXPLOSIVE", var_1.weapon_name);
+  var_2 = var_1.ticks;
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     wait(0.5);
-    switch (var_03) {
+    switch (var_3) {
       case 0:
-        param_00 setscriptablepartstate("effects", "explode_02", 0);
+        var_0 setscriptablepartstate("effects", "explode_02", 0);
         break;
 
       case 1:
-        param_00 setscriptablepartstate("effects", "explode_03", 0);
+        var_0 setscriptablepartstate("effects", "explode_03", 0);
         break;
 
       case 2:
-        param_00 setscriptablepartstate("effects", "explode_04", 0);
+        var_0 setscriptablepartstate("effects", "explode_04", 0);
         break;
 
       case 3:
-        param_00 setscriptablepartstate("effects", "explode_05", 0);
+        var_0 setscriptablepartstate("effects", "explode_05", 0);
         break;
     }
 
-    var_01 thread scripts\mp\shellshock::func_DAF3();
-    param_00 radiusdamage(var_01.origin, 256, 40, 20, var_01.triggerportableradarping, "MOD_EXPLOSIVE", var_01.weapon_name);
+    var_1 thread scripts\mp\shellshock::func_DAF3();
+    var_0 radiusdamage(var_1.origin, 256, 40, 20, var_1.triggerportableradarping, "MOD_EXPLOSIVE", var_1.weapon_name);
   }
 
   wait(1);
-  var_01 delete();
+  var_1 delete();
 }
 
-func_10856(param_00) {
-  var_01 = spawn("script_model", param_00.origin);
-  var_01 setModel("prop_mp_pulse_grenade_temp");
-  var_01.angles = param_00.angles;
-  var_01 linkto(param_00);
-  var_01.objective_position = param_00;
-  var_01.triggerportableradarping = param_00.triggerportableradarping;
-  var_01 setotherent(param_00.triggerportableradarping);
-  var_01 thread func_40F3(param_00);
-  param_00 hide();
-  return var_01;
+func_10856(var_0) {
+  var_1 = spawn("script_model", var_0.origin);
+  var_1 setModel("prop_mp_pulse_grenade_temp");
+  var_1.angles = var_0.angles;
+  var_1 linkto(var_0);
+  var_1.objective_position = var_0;
+  var_1.triggerportableradarping = var_0.triggerportableradarping;
+  var_1 setotherent(var_0.triggerportableradarping);
+  var_1 thread func_40F3(var_0);
+  var_0 hide();
+  return var_1;
 }
 
 func_13A3B() {
   scripts\mp\damage::monitordamage(50, "pulseGrenade", ::func_612B, ::func_612C, 0);
 }
 
-func_612B(param_00, param_01, param_02, param_03) {
-  if(isDefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping) {
-    param_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
-    param_00 notify("destroyed_equipment");
+func_612B(var_0, var_1, var_2, var_3) {
+  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+    var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+    var_0 notify("destroyed_equipment");
   }
 
   scripts\mp\equipment\blackhat::func_2B2C();
@@ -93,16 +93,16 @@ func_612B(param_00, param_01, param_02, param_03) {
   self notify("detonateExplosive");
 }
 
-func_612C(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_03;
-  var_05 = scripts\mp\damage::handlemeleedamage(param_01, param_02, var_05);
-  var_05 = scripts\mp\damage::handleempdamage(param_01, param_02, var_05);
-  var_05 = scripts\mp\damage::handleapdamage(param_01, param_02, var_05);
-  return var_05;
+func_612C(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  var_5 = scripts\mp\damage::handlemeleedamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleempdamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
+  return var_5;
 }
 
-func_40F3(param_00) {
-  param_00 waittill("death");
+func_40F3(var_0) {
+  var_0 waittill("death");
   self delete();
 }
 

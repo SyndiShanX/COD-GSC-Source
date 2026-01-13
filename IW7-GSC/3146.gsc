@@ -83,18 +83,18 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_125C4(param_00, param_01, param_02, param_03) {
+func_125C4(var_0, var_1, var_2, var_3) {
   return isDefined(self.vehicle_getspawnerarray);
 }
 
-func_11B75(param_00, param_01, param_02, param_03) {
+func_11B75(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimscripted();
 }
 
-func_122AA(param_00, param_01, param_02, param_03) {
+func_122AA(var_0, var_1, var_2, var_3) {
   return isDefined(self.var_55ED) && self.var_55ED;
 }
 
-func_11BF6(param_00, param_01, param_02, param_03) {
+func_11BF6(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_iswhizbyrequested();
 }

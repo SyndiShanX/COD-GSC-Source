@@ -4,6 +4,6 @@
  * Script: 2556.gsc
 ************************/
 
-func_57DF(param_00) {
+func_57DF(var_0) {
   return level.failure;
 }

@@ -35,92 +35,92 @@ coming_from_rig_select() {
   return level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick" || level.var_4C01 == "rig_trait_select" || level.var_4C01 == "rig_head_select" || level.var_4C01 == "rig_taunt_select";
 }
 
-ishost(param_00) {
-  var_01 = undefined;
-  switch (param_00) {
+ishost(var_0) {
+  var_1 = undefined;
+  switch (var_0) {
     case 0:
-      var_01 = level.var_37AA;
+      var_1 = level.var_37AA;
       break;
 
     case 1:
-      var_01 = level.var_37AC;
+      var_1 = level.var_37AC;
       break;
 
     case 2:
-      var_01 = level.var_37AE;
+      var_1 = level.var_37AE;
       break;
 
     case 3:
-      var_01 = level.var_37AD;
+      var_1 = level.var_37AD;
       break;
 
     case 4:
-      var_01 = level.var_37AF;
+      var_1 = level.var_37AF;
       break;
 
     default:
-      var_01 = level.var_37B5;
+      var_1 = level.var_37B5;
       break;
   }
 
-  return var_01;
+  return var_1;
 }
 
-get_camera_data_by_rig_scene(param_00) {
-  var_01 = undefined;
-  switch (param_00) {
+get_camera_data_by_rig_scene(var_0) {
+  var_1 = undefined;
+  switch (var_0) {
     case "rig_select":
-      var_01 = level.var_37B7;
+      var_1 = level.var_37B7;
       break;
 
     case "rig_pick":
-      var_01 = level.var_37B8;
+      var_1 = level.var_37B8;
       break;
 
     case "rig_trait_select":
-      var_01 = level.var_37B9;
+      var_1 = level.var_37B9;
       break;
 
     case "rig_head_select":
-      var_01 = level.camera_rig_head;
+      var_1 = level.camera_rig_head;
       break;
 
     case "rig_taunt_select":
-      var_01 = level.camera_rig_taunt;
+      var_1 = level.camera_rig_taunt;
       break;
 
     default:
-      var_01 = level.var_37B7;
+      var_1 = level.var_37B7;
       break;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_788A(param_00, param_01) {
-  switch (param_01) {
+func_788A(var_0, var_1) {
+  switch (var_1) {
     case "create_a_class":
-      return param_00.var_369A;
+      return var_0.var_369A;
 
     case "weapon_select":
-      return param_00.var_13C7B;
+      return var_0.var_13C7B;
 
     case "loadout_select":
-      return param_00.var_AE63;
+      return var_0.var_AE63;
 
     case "rig_select":
-      return param_00.var_E510;
+      return var_0.var_E510;
 
     case "barracks":
-      return param_00.var_282B;
+      return var_0.var_282B;
 
     default:
-      return param_00.basecam;
+      return var_0.basecam;
   }
 }
 
-func_BD64(param_00, param_01, param_02) {
-  scripts\cp_mp\frontendutils::frontend_camera_move(param_00, param_01, 0, 1, param_02);
+func_BD64(var_0, var_1, var_2) {
+  scripts\cp_mp\frontendutils::frontend_camera_move(var_0, var_1, 0, 1, var_2);
 }
 
 func_12DA1() {
@@ -130,15 +130,15 @@ func_12DA1() {
   }
 }
 
-func_12DEB(param_00) {
+func_12DEB(var_0) {
   func_12DA1();
   func_12E4A();
   func_12D9B();
 }
 
 func_12D9B() {
-  var_00 = level.active_camera.var_525D;
-  self setdepthoffield(var_00[0], var_00[1], var_00[2], var_00[3], var_00[4], var_00[5]);
+  var_0 = level.active_camera.var_525D;
+  self setdepthoffield(var_0[0], var_0[1], var_0[2], var_0[3], var_0[4], var_0[5]);
 }
 
 func_12DBB() {
@@ -148,68 +148,68 @@ func_12DBB() {
 }
 
 func_12E4A() {
-  var_00 = undefined;
+  var_0 = undefined;
   if(isDefined(level.var_1641.var_13C27)) {
-    var_00 = level.var_1641.var_13C27;
+    var_0 = level.var_1641.var_13C27;
   } else {
-    var_01 = ishost(level.var_4BF6);
-    var_00 = var_01.var_13C27;
+    var_1 = ishost(level.var_4BF6);
+    var_0 = var_1.var_13C27;
   }
 
-  level.var_394.origin = var_00.origin;
-  level.var_394.angles = var_00.angles;
-  level.var_13BF9.origin = var_00.origin;
-  level.var_13BF9.angles = var_00.angles;
-  level.var_13BFA.origin = var_00.origin;
-  level.var_13BFA.angles = var_00.angles;
+  level.var_394.origin = var_0.origin;
+  level.var_394.angles = var_0.angles;
+  level.var_13BF9.origin = var_0.origin;
+  level.var_13BF9.angles = var_0.angles;
+  level.var_13BFA.origin = var_0.origin;
+  level.var_13BFA.angles = var_0.angles;
 }
 
-func_37BB(param_00) {
-  var_01 = undefined;
-  var_02 = undefined;
-  if(param_00.name == "mlg.tv") {
+func_37BB(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  if(var_0.name == "mlg.tv") {
     return;
   }
 
-  if(param_00.name == "mp_main") {
+  if(var_0.name == "mp_main") {
     frontendscenecameracharacters(3);
-    var_01 = level.var_37B0;
-    var_02 = level.var_37B0.basecam;
-  } else if(param_00.name == "rig_select" || param_00.name == "rig_pick" || param_00.name == "rig_trait_select" || param_00.name == "rig_taunt_select" || param_00.name == "rig_head_select") {
+    var_1 = level.var_37B0;
+    var_2 = level.var_37B0.basecam;
+  } else if(var_0.name == "rig_select" || var_0.name == "rig_pick" || var_0.name == "rig_trait_select" || var_0.name == "rig_taunt_select" || var_0.name == "rig_head_select") {
     frontendscenecameracharacters(0);
-    var_01 = get_camera_data_by_rig_scene(param_00.name);
-    var_02 = var_01.basecam;
-  } else if(param_00.name == "armory") {
+    var_1 = get_camera_data_by_rig_scene(var_0.name);
+    var_2 = var_1.basecam;
+  } else if(var_0.name == "armory") {
     frontendscenecameracharacters(0);
-    var_01 = level.var_37A7;
-    var_02 = level.var_37A7.basecam;
-  } else if(param_00.name == "lobby_members") {
+    var_1 = level.var_37A7;
+    var_2 = level.var_37A7.basecam;
+  } else if(var_0.name == "lobby_members") {
     frontendscenecameracharacters(2);
-    var_01 = level.camera_lobby_members;
-    var_02 = level.camera_lobby_members.basecam;
+    var_1 = level.camera_lobby_members;
+    var_2 = level.camera_lobby_members.basecam;
   } else {
     frontendscenecameracharacters(0);
-    var_01 = ishost(param_00.index);
-    var_02 = func_788A(var_01, param_00.name);
+    var_1 = ishost(var_0.index);
+    var_2 = func_788A(var_1, var_0.name);
   }
 
-  func_F289(var_01, var_02);
-  level.var_4BF6 = param_00.index;
-  level.var_4C01 = param_00.name;
-  thread scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, var_01.myfov, var_01.var_3F70, 0, 0.2, ::func_12DBB);
+  func_F289(var_1, var_2);
+  level.var_4BF6 = var_0.index;
+  level.var_4C01 = var_0.name;
+  thread scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, var_1.myfov, var_1.var_3F70, 0, 0.2, ::func_12DBB);
 }
 
-func_37BA(param_00) {
-  if(param_00.name == "") {
+func_37BA(var_0) {
+  if(var_0.name == "") {
     return;
   }
 
   if(!isDefined(level.var_1641) || level.transition_interrupted) {
-    func_37BB(param_00);
+    func_37BB(var_0);
     return;
   }
 
-  switch (param_00.name) {
+  switch (var_0.name) {
     case "mp_main":
       frontendscenecameracharacters(3);
       if(level.var_4C01 != "mlg.tv") {
@@ -246,26 +246,26 @@ func_37BA(param_00) {
 
     case "create_a_class":
       if(coming_from_rig_select() || level.var_4C01 == "armory") {
-        var_01 = ishost(param_00.index);
-        func_F289(var_01, var_01.var_369A);
-        level.var_4BF6 = param_00.index;
+        var_1 = ishost(var_0.index);
+        func_F289(var_1, var_1.var_369A);
+        level.var_4BF6 = var_0.index;
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
-        var_02 = 5000;
+        var_2 = 5000;
         if(level.var_4C01 == "mission_team_lobby") {
-          var_02 = 600;
+          var_2 = 600;
         }
 
         func_F289(level.var_1641, level.var_1641.var_369A);
-        thread func_BD64(level.var_1641.var_369A, var_02, ::func_12DBB);
+        thread func_BD64(level.var_1641.var_369A, var_2, ::func_12DBB);
       }
       break;
 
     case "weapon_select":
       if(level.var_4C01 == "armory") {
-        var_01 = ishost(param_00.index);
-        func_F289(var_01, var_01.var_13C7B);
-        level.var_4BF6 = param_00.index;
+        var_1 = ishost(var_0.index);
+        func_F289(var_1, var_1.var_13C7B);
+        level.var_4BF6 = var_0.index;
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
         func_F289(level.var_1641, level.var_1641.var_13C7B);
@@ -275,9 +275,9 @@ func_37BA(param_00) {
 
     case "loadout_select":
       if(level.var_4C01 == "armory") {
-        var_01 = ishost(param_00.index);
-        func_F289(var_01, var_01.var_AE63);
-        level.var_4BF6 = param_00.index;
+        var_1 = ishost(var_0.index);
+        func_F289(var_1, var_1.var_AE63);
+        level.var_4BF6 = var_0.index;
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
         func_F289(level.var_1641, level.var_1641.var_AE63);
@@ -339,25 +339,25 @@ func_37BA(param_00) {
       break;
 
     case "barracks":
-      var_01 = ishost(param_00.index);
-      func_F289(var_01, var_01.var_282B);
-      level.var_4BF6 = param_00.index;
+      var_1 = ishost(var_0.index);
+      func_F289(var_1, var_1.var_282B);
+      level.var_4BF6 = var_0.index;
       if(level.var_4C01 == "armory") {
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       } else {
         if(level.var_4C01 == "loadout_select" || level.var_4C01 == "weapon_select") {
-          var_02 = 5000;
+          var_2 = 5000;
         } else {
-          var_02 = 100;
+          var_2 = 100;
         }
 
-        thread func_BD64(level.var_1641.var_282B, var_02, ::func_12D9B);
+        thread func_BD64(level.var_1641.var_282B, var_2, ::func_12D9B);
       }
       break;
 
     case "mission_team_lobby":
       frontendscenecameracharacters(0);
-      if(isDefined(level.var_4BF6) && level.var_4BF6 == param_00.index) {
+      if(isDefined(level.var_4BF6) && level.var_4BF6 == var_0.index) {
         func_F289(level.var_1641, level.var_1641.basecam);
         if(level.var_4C01 == "barracks") {
           thread func_BD64(level.var_1641.basecam, 100, ::func_12D9B);
@@ -365,9 +365,9 @@ func_37BA(param_00) {
           thread func_BD64(level.var_1641.basecam, 600, ::func_12D9B);
         }
       } else {
-        var_01 = ishost(param_00.index);
-        func_F289(var_01, var_01.basecam);
-        level.var_4BF6 = param_00.index;
+        var_1 = ishost(var_0.index);
+        func_F289(var_1, var_1.basecam);
+        level.var_4BF6 = var_0.index;
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       }
       break;
@@ -410,7 +410,7 @@ func_37BA(param_00) {
       break;
   }
 
-  level.var_4C01 = param_00.name;
+  level.var_4C01 = var_0.name;
 }
 
 func_48AE() {
@@ -636,36 +636,36 @@ func_48AE() {
   level.camera_weapon_painter.shows_my_character = 0;
 }
 
-func_F289(param_00, param_01) {
-  level.var_1641 = param_00;
-  level.active_camera = param_01;
+func_F289(var_0, var_1) {
+  level.var_1641 = var_0;
+  level.active_camera = var_1;
 }
 
 setup_initial_entities() {
-  var_00 = getent("character_loc_hq2", "targetname");
-  level.var_3CAD = spawn("script_character", var_00.origin, 0, 0, 0);
-  level.var_3CAD.angles = var_00.angles;
-  var_01 = level.var_37B7.char_loc;
-  level.charactercac = spawn("script_character", var_01.origin, 0, 0, 1);
-  level.charactercac.angles = var_01.angles;
-  var_02 = level.camera_lobby_members.char_loc;
-  level.characterlobbymember = spawn("script_character", var_02.origin, 0, 0, 2);
-  level.characterlobbymember.angles = var_02.angles;
+  var_0 = getent("character_loc_hq2", "targetname");
+  level.var_3CAD = spawn("script_character", var_0.origin, 0, 0, 0);
+  level.var_3CAD.angles = var_0.angles;
+  var_1 = level.var_37B7.char_loc;
+  level.charactercac = spawn("script_character", var_1.origin, 0, 0, 1);
+  level.charactercac.angles = var_1.angles;
+  var_2 = level.camera_lobby_members.char_loc;
+  level.characterlobbymember = spawn("script_character", var_2.origin, 0, 0, 2);
+  level.characterlobbymember.angles = var_2.angles;
   level.var_3CB4 = spawn("script_character", level.var_37B0.char_loc.origin, 0, 0, 3);
   level.var_3CB4.angles = level.var_37B0.char_loc.angles;
   level.quartermaster = spawn("script_character", level.var_37A7.char_loc.origin, 0, 0, 4);
   level.quartermaster.angles = level.var_37A7.char_loc.angles;
   level.loot_box = spawn("script_character", level.var_37A7.box_loc.origin, 0, 0, 5);
   level.loot_box.angles = level.var_37A7.box_loc.angles;
-  var_03 = getent("weapon_loc_hq1", "targetname");
-  level.var_394 = spawn("script_weapon", var_03.origin, 0, 0, 0);
-  level.var_394.angles = var_03.angles;
+  var_3 = getent("weapon_loc_hq1", "targetname");
+  level.var_394 = spawn("script_weapon", var_3.origin, 0, 0, 0);
+  level.var_394.angles = var_3.angles;
   level.var_394 setotherent(level.var_3CAD);
-  level.var_13BF9 = spawn("script_weapon", var_03.origin, 0, 0, 1);
-  level.var_13BF9.angles = var_03.angles;
+  level.var_13BF9 = spawn("script_weapon", var_3.origin, 0, 0, 1);
+  level.var_13BF9.angles = var_3.angles;
   level.var_13BF9 setotherent(level.var_3CAD);
-  level.var_13BFA = spawn("script_weapon", var_03.origin, 0, 0, 2);
-  level.var_13BFA.angles = var_03.angles;
+  level.var_13BFA = spawn("script_weapon", var_3.origin, 0, 0, 2);
+  level.var_13BFA.angles = var_3.angles;
   level.var_13BFA setotherent(level.var_3CAD);
   scripts\cp_mp\frontendutils::frontend_camera_setup(level.var_37B0.basecam.origin, level.var_37B0.basecam.angles);
 }
@@ -673,15 +673,15 @@ setup_initial_entities() {
 epictauntlistener() {
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "taunt_started") {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "taunt_started") {
       scripts\mp\broshot_utilities::respawnclientcharacter();
-      var_02 = tablelookup("mp\cac\taunts.csv", 0, var_01, 9);
-      scripts\mp\broshot_utilities::processepictaunt(var_02, -1, 0);
+      var_2 = tablelookup("mp\cac\taunts.csv", 0, var_1, 9);
+      scripts\mp\broshot_utilities::processepictaunt(var_2, -1, 0);
       continue;
     }
 
-    if(var_00 == "taunt_reset") {
+    if(var_0 == "taunt_reset") {
       scripts\mp\broshot_utilities::respawnclientcharacter();
     }
   }

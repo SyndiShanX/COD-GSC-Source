@@ -37,69 +37,69 @@ main() {
 }
 
 fixcollision() {
-  var_00 = getent("clip64x64x128", "targetname");
-  var_01 = spawn("script_model", (818, 1916, 56));
-  var_01.angles = (0, 333, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = spawn("script_model", (160, 784, 96));
-  var_02.angles = (0, 330, -180);
-  var_02 setModel("mp_desert_uplink_col_01");
-  var_03 = spawn("script_model", (1148, -52, 64));
-  var_03.angles = (0, 205, 0);
-  var_03 setModel("mp_desert_uplink_col_01");
+  var_0 = getent("clip64x64x128", "targetname");
+  var_1 = spawn("script_model", (818, 1916, 56));
+  var_1.angles = (0, 333, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = spawn("script_model", (160, 784, 96));
+  var_2.angles = (0, 330, -180);
+  var_2 setModel("mp_desert_uplink_col_01");
+  var_3 = spawn("script_model", (1148, -52, 64));
+  var_3.angles = (0, 205, 0);
+  var_3 setModel("mp_desert_uplink_col_01");
 }
 
-wiggletheballoon(param_00) {
+wiggletheballoon(var_0) {
   level endon("game_ended");
-  var_01 = getent(param_00, "targetname");
+  var_1 = getent(var_0, "targetname");
   for(;;) {
-    var_01 rotateto((0, 0, 3), 5, 1, 1);
+    var_1 rotateto((0, 0, 3), 5, 1, 1);
     wait(5);
-    var_01 rotateto((0, 0, 0), 5, 1, 1);
+    var_1 rotateto((0, 0, 0), 5, 1, 1);
     wait(5);
   }
 }
 
 setupspinningblades() {
   level endon("game_ended");
-  var_00 = getEntArray("spinning_blades", "targetname");
-  foreach(var_02 in var_00) {
-    thread spinthisblade(var_02);
+  var_0 = getEntArray("spinning_blades", "targetname");
+  foreach(var_2 in var_0) {
+    thread spinthisblade(var_2);
   }
 
-  var_04 = getent("decapitator_kill_trigger", "targetname");
+  var_4 = getent("decapitator_kill_trigger", "targetname");
   for(;;) {
-    var_04 waittill("trigger", var_05);
-    if(isDefined(var_05)) {
-      if(isDefined(var_05.streakname) && var_05.streakname == "remote_c8") {
-        var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_05.triggerportableradarping, var_04, var_05.triggerportableradarping.team, var_04.origin, "MOD_MELEE", "bombproj_mp");
+    var_4 waittill("trigger", var_5);
+    if(isDefined(var_5)) {
+      if(isDefined(var_5.streakname) && var_5.streakname == "remote_c8") {
+        var_5 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_5.triggerportableradarping, var_4, var_5.triggerportableradarping.team, var_4.origin, "MOD_MELEE", "bombproj_mp");
         continue;
       }
 
-      if(isplayer(var_05)) {
-        if(var_05 isinphase()) {
+      if(isplayer(var_5)) {
+        if(var_5 isinphase()) {
           continue;
         }
 
-        var_05 suicide();
-        if(var_05.loadoutarchetype == "archetype_scout") {
-          playFX(level._effect["reaper_kill_robot"], var_05.origin + (0, 0, 0));
+        var_5 suicide();
+        if(var_5.loadoutarchetype == "archetype_scout") {
+          playFX(level._effect["reaper_kill_robot"], var_5.origin + (0, 0, 0));
         } else {
-          playFX(level._effect["blade_kill"], var_05.origin + (0, 0, 0));
+          playFX(level._effect["blade_kill"], var_5.origin + (0, 0, 0));
         }
 
         continue;
       }
 
-      if(isDefined(var_05.classname) && var_05.classname == "script_vehicle") {
-        if(isDefined(var_05.streakname)) {
-          if(var_05.streakname == "minijackal") {
-            var_05 notify("minijackal_end");
+      if(isDefined(var_5.classname) && var_5.classname == "script_vehicle") {
+        if(isDefined(var_5.streakname)) {
+          if(var_5.streakname == "minijackal") {
+            var_5 notify("minijackal_end");
             continue;
           }
 
-          if(var_05.streakname == "venom") {
-            var_05 notify("venom_end", var_05.origin);
+          if(var_5.streakname == "venom") {
+            var_5 notify("venom_end", var_5.origin);
           }
         }
       }
@@ -107,39 +107,39 @@ setupspinningblades() {
   }
 }
 
-spinthisblade(param_00) {
+spinthisblade(var_0) {
   level endon("game_ended");
   for(;;) {
-    param_00 rotateyaw(360, 0.25, 0, 0);
+    var_0 rotateyaw(360, 0.25, 0, 0);
     wait(0.25);
   }
 }
 
 setuppowerlines() {
   level endon("game_ended");
-  var_00 = getent("power_line_death", "targetname");
+  var_0 = getent("power_line_death", "targetname");
   for(;;) {
-    var_00 waittill("trigger", var_01);
-    if(isDefined(var_01)) {
-      if(isplayer(var_01)) {
-        if(var_01 isinphase()) {
+    var_0 waittill("trigger", var_1);
+    if(isDefined(var_1)) {
+      if(isplayer(var_1)) {
+        if(var_1 isinphase()) {
           continue;
         }
 
-        var_01 suicide();
-        playFX(level._effect["shock_kill"], var_01.origin + (0, 0, 0));
+        var_1 suicide();
+        playFX(level._effect["shock_kill"], var_1.origin + (0, 0, 0));
         continue;
       }
 
-      if(isDefined(var_01.classname) && var_01.classname == "script_vehicle") {
-        if(isDefined(var_01.streakname)) {
-          if(var_01.streakname == "minijackal") {
-            var_01 notify("minijackal_end");
+      if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
+        if(isDefined(var_1.streakname)) {
+          if(var_1.streakname == "minijackal") {
+            var_1 notify("minijackal_end");
             continue;
           }
 
-          if(var_01.streakname == "venom") {
-            var_01 notify("venom_end", var_01.origin);
+          if(var_1.streakname == "venom") {
+            var_1 notify("venom_end", var_1.origin);
           }
         }
       }
@@ -147,71 +147,71 @@ setuppowerlines() {
   }
 }
 
-barreldroppersetup(param_00, param_01, param_02, param_03) {
-  var_04 = getent(param_00, "targetname");
-  var_04 makeusable();
-  var_04 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
-  var_04 _meth_84A4(64);
-  var_04 _meth_84A6(60);
-  var_04 setuserange(64);
-  var_04 setusefov(60);
-  var_05 = getent(param_03, "targetname");
-  var_05.killcament = spawn("script_model", (-544, -1312, 352));
-  var_05.killcament setModel("tag_origin");
-  var_05.israllytrap = 1;
-  var_06 = scripts\engine\utility::getstruct("gas_barrel_explosion_loc", "targetname");
-  var_05.explosionloc = var_06.origin;
-  var_05 scripts\engine\utility::trigger_off(var_05.var_336, "targetname");
-  var_07 = getent(param_01, "targetname");
-  var_07.initialpos = var_07.origin;
-  var_07.activepos = var_07.origin + (0, 0, -16);
-  var_08 = getent(param_02, "targetname");
-  var_08.initialpos = var_08.origin;
-  var_08.activepos = var_08.origin + (0, 0, -16);
-  thread barreldropperloop(var_04, var_07, var_08, var_05);
-  thread barrelhandelwobbel(var_07);
+barreldroppersetup(var_0, var_1, var_2, var_3) {
+  var_4 = getent(var_0, "targetname");
+  var_4 makeusable();
+  var_4 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
+  var_4 _meth_84A4(64);
+  var_4 _meth_84A6(60);
+  var_4 setuserange(64);
+  var_4 setusefov(60);
+  var_5 = getent(var_3, "targetname");
+  var_5.killcament = spawn("script_model", (-544, -1312, 352));
+  var_5.killcament setModel("tag_origin");
+  var_5.israllytrap = 1;
+  var_6 = scripts\engine\utility::getstruct("gas_barrel_explosion_loc", "targetname");
+  var_5.explosionloc = var_6.origin;
+  var_5 scripts\engine\utility::trigger_off(var_5.var_336, "targetname");
+  var_7 = getent(var_1, "targetname");
+  var_7.initialpos = var_7.origin;
+  var_7.activepos = var_7.origin + (0, 0, -16);
+  var_8 = getent(var_2, "targetname");
+  var_8.initialpos = var_8.origin;
+  var_8.activepos = var_8.origin + (0, 0, -16);
+  thread barreldropperloop(var_4, var_7, var_8, var_5);
+  thread barrelhandelwobbel(var_7);
 }
 
-barrelhandelwobbel(param_00) {
+barrelhandelwobbel(var_0) {
   level endon("game_ended");
   for(;;) {
-    var_01 = randomfloatrange(-0.1, 0.1);
-    var_02 = randomfloatrange(-5, 5);
-    var_03 = randomfloatrange(-0.1, 0.1);
-    param_00 rotateto((var_01, var_02, var_03), 2, 0.25, 0.25);
+    var_1 = randomfloatrange(-0.1, 0.1);
+    var_2 = randomfloatrange(-5, 5);
+    var_3 = randomfloatrange(-0.1, 0.1);
+    var_0 rotateto((var_1, var_2, var_3), 2, 0.25, 0.25);
     wait(2);
   }
 }
 
-barreldropperloop(param_00, param_01, param_02, param_03) {
+barreldropperloop(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   for(;;) {
-    param_00 waittill("trigger", var_04);
-    param_00 makeunusable();
-    var_05 = var_04.team;
-    var_04 playlocalsound("barrel_lever");
+    var_0 waittill("trigger", var_4);
+    var_0 makeunusable();
+    var_5 = var_4.team;
+    var_4 playlocalsound("barrel_lever");
     scripts\engine\utility::exploder(30);
-    param_01 moveto(param_01.activepos, 1, 0.5, 0.5);
-    param_02 moveto(param_02.activepos, 1, 0.5, 0.5);
+    var_1 moveto(var_1.activepos, 1, 0.5, 0.5);
+    var_2 moveto(var_2.activepos, 1, 0.5, 0.5);
     playsoundatpos((-803, -1234, 526), "barrel_tumble");
     wait(1);
-    param_01 moveto(param_01.initialpos, 1, 0.5, 0.5);
-    param_02 moveto(param_02.initialpos, 1, 0.5, 0.5);
+    var_1 moveto(var_1.initialpos, 1, 0.5, 0.5);
+    var_2 moveto(var_2.initialpos, 1, 0.5, 0.5);
     wait(1);
-    var_06 = level.players;
-    var_07 = level.var_1655;
-    param_03 scripts\engine\utility::trigger_on(param_03.var_336, "targetname");
-    var_08 = scripts\engine\utility::array_combine(var_06, var_07);
-    foreach(var_0A in var_06) {
+    var_6 = level.players;
+    var_7 = level.var_1655;
+    var_3 scripts\engine\utility::trigger_on(var_3.var_336, "targetname");
+    var_8 = scripts\engine\utility::array_combine(var_6, var_7);
+    foreach(var_0A in var_6) {
       if(!var_0A isinphase() && !isDefined(var_0A.isrewinding) && var_0A.isrewinding == 1) {
-        if(var_0A.team == var_05 && var_0A istouching(param_03)) {
+        if(var_0A.team == var_5 && var_0A istouching(var_3)) {
           var_0A suicide();
           continue;
         }
 
-        if(var_0A istouching(param_03)) {
-          if(isDefined(var_04)) {
-            var_0A dodamage(1000, param_03.explosionloc, var_04, param_03);
+        if(var_0A istouching(var_3)) {
+          if(isDefined(var_4)) {
+            var_0A dodamage(1000, var_3.explosionloc, var_4, var_3);
             continue;
           }
 
@@ -220,33 +220,33 @@ barreldropperloop(param_00, param_01, param_02, param_03) {
       }
     }
 
-    if(isDefined(var_07)) {
-      foreach(var_0D in var_07) {
-        if(var_0D istouching(param_03)) {
+    if(isDefined(var_7)) {
+      foreach(var_0D in var_7) {
+        if(var_0D istouching(var_3)) {
           if(var_0D.streakname == "minijackal") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
             continue;
           }
 
           if(var_0D.streakname == "venom") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
             continue;
           }
 
           if(var_0D.streakname == "sentry_shock") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_04, param_03, var_0D.team, param_03.origin, "MOD_MELEE", "bombproj_mp");
+            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
           }
         }
       }
@@ -255,122 +255,122 @@ barreldropperloop(param_00, param_01, param_02, param_03) {
     var_0F = scripts\mp\perks\_perkfunctions::func_7D96();
     if(isDefined(var_0F)) {
       foreach(var_11 in var_0F) {
-        if(var_11 istouching(param_03)) {
-          var_11 scripts\mp\killstreaks\_utility::dodamagetokillstreak(1000, var_04, param_03, var_11.team, param_03.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+        if(var_11 istouching(var_3)) {
+          var_11 scripts\mp\killstreaks\_utility::dodamagetokillstreak(1000, var_4, var_3, var_11.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
         }
       }
     }
 
-    playsoundatpos(param_03.explosionloc, "barrel_impact");
-    physicsexplosionsphere(param_03.explosionloc, 160, 80, 150);
+    playsoundatpos(var_3.explosionloc, "barrel_impact");
+    physicsexplosionsphere(var_3.explosionloc, 160, 80, 150);
     scripts\engine\utility::waitframe();
     var_13 = 1;
-    thread lingeringgascloudwatch(var_13, param_03, var_04, var_05);
+    thread lingeringgascloudwatch(var_13, var_3, var_4, var_5);
     wait(10);
     var_13 = 0;
-    param_03 scripts\engine\utility::trigger_off(param_03.var_336, "targetname");
-    param_00 makeusable();
+    var_3 scripts\engine\utility::trigger_off(var_3.var_336, "targetname");
+    var_0 makeusable();
   }
 }
 
-lingeringgascloudwatch(param_00, param_01, param_02, param_03) {
-  while(param_00) {
-    param_01 waittill("trigger", var_04);
-    if(isplayer(var_04)) {
-      if(isDefined(var_04.isrewinding) && var_04.isrewinding == 1) {
+lingeringgascloudwatch(var_0, var_1, var_2, var_3) {
+  while(var_0) {
+    var_1 waittill("trigger", var_4);
+    if(isplayer(var_4)) {
+      if(isDefined(var_4.isrewinding) && var_4.isrewinding == 1) {
         continue;
       }
 
-      if(!isDefined(var_04.isindoomjuice)) {
-        thread playeringaswatcher(var_04, param_00, param_01, param_02, param_03);
+      if(!isDefined(var_4.isindoomjuice)) {
+        thread playeringaswatcher(var_4, var_0, var_1, var_2, var_3);
         continue;
       }
 
-      if(!var_04.isindoomjuice) {
-        thread playeringaswatcher(var_04, param_00, param_01, param_02, param_03);
+      if(!var_4.isindoomjuice) {
+        thread playeringaswatcher(var_4, var_0, var_1, var_2, var_3);
       }
     }
   }
 }
 
-playeringaswatcher(param_00, param_01, param_02, param_03, param_04) {
-  param_00.isindoomjuice = 1;
-  while(param_01 && param_00.isindoomjuice) {
-    if(scripts\mp\utility::func_9EF0(param_00)) {
+playeringaswatcher(var_0, var_1, var_2, var_3, var_4) {
+  var_0.isindoomjuice = 1;
+  while(var_1 && var_0.isindoomjuice) {
+    if(scripts\mp\utility::func_9EF0(var_0)) {
       break;
     }
 
-    if(param_00 istouching(param_02)) {
-      if(param_00.team == param_04) {
-        if(param_00.health > 20) {
-          param_00 dodamage(20, param_02.explosionloc, param_02);
+    if(var_0 istouching(var_2)) {
+      if(var_0.team == var_4) {
+        if(var_0.health > 20) {
+          var_0 dodamage(20, var_2.explosionloc, var_2);
         } else {
-          param_00 suicide();
+          var_0 suicide();
         }
-      } else if(isDefined(param_03)) {
-        param_00 dodamage(20, param_02.explosionloc, param_03);
-      } else if(param_00.health > 20) {
-        param_00 dodamage(20, param_02.explosionloc, param_02);
+      } else if(isDefined(var_3)) {
+        var_0 dodamage(20, var_2.explosionloc, var_3);
+      } else if(var_0.health > 20) {
+        var_0 dodamage(20, var_2.explosionloc, var_2);
       } else {
-        param_00 suicide();
+        var_0 suicide();
       }
 
       continue;
     }
 
-    param_00.isindoomjuice = 0;
+    var_0.isindoomjuice = 0;
     wait(1);
   }
 }
 
-burninatorsetup(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
-  var_02.bigredbutton = getent(param_01, "targetname");
-  var_02.bigredbutton makeusable();
-  var_02.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
-  var_02.bigredbutton _meth_84A4(64);
-  var_02.bigredbutton _meth_84A6(60);
-  var_02.bigredbutton setuserange(64);
-  var_02.bigredbutton setusefov(60);
-  var_02.killcament = spawn("script_model", (956, 996, 268));
-  var_02.killcament setModel("tag_origin");
-  var_02.israllytrap = 1;
-  thread burninatortriggerwatch(var_02);
-  var_02.flameon = 0;
+burninatorsetup(var_0, var_1) {
+  var_2 = getent(var_0, "targetname");
+  var_2.bigredbutton = getent(var_1, "targetname");
+  var_2.bigredbutton makeusable();
+  var_2.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
+  var_2.bigredbutton _meth_84A4(64);
+  var_2.bigredbutton _meth_84A6(60);
+  var_2.bigredbutton setuserange(64);
+  var_2.bigredbutton setusefov(60);
+  var_2.killcament = spawn("script_model", (956, 996, 268));
+  var_2.killcament setModel("tag_origin");
+  var_2.israllytrap = 1;
+  thread burninatortriggerwatch(var_2);
+  var_2.flameon = 0;
 }
 
-burninatortriggerwatch(param_00) {
+burninatortriggerwatch(var_0) {
   level endon("game_ended");
   for(;;) {
-    param_00.bigredbutton waittill("trigger", var_01);
-    param_00.bigredbutton makeunusable();
+    var_0.bigredbutton waittill("trigger", var_1);
+    var_0.bigredbutton makeunusable();
     scripts\engine\utility::exploder(22);
     wait(2);
-    param_00.flameon = 1;
-    thread watchforvictims(param_00, var_01);
-    thread burninantordestroyequipment(param_00, var_01);
+    var_0.flameon = 1;
+    thread watchforvictims(var_0, var_1);
+    thread burninantordestroyequipment(var_0, var_1);
     wait(10);
-    param_00.flameon = 0;
-    param_00.bigredbutton makeusable();
+    var_0.flameon = 0;
+    var_0.bigredbutton makeusable();
   }
 }
 
-burninantordestroyequipment(param_00, param_01) {
-  while(param_00.flameon) {
-    var_02 = level.var_1655;
-    var_03 = scripts\mp\perks\_perkfunctions::func_7D96();
-    if(isDefined(var_03)) {
-      foreach(var_05 in var_03) {
-        if(var_05 istouching(param_00)) {
-          var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, param_01, param_00, var_05.team, param_00.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+burninantordestroyequipment(var_0, var_1) {
+  while(var_0.flameon) {
+    var_2 = level.var_1655;
+    var_3 = scripts\mp\perks\_perkfunctions::func_7D96();
+    if(isDefined(var_3)) {
+      foreach(var_5 in var_3) {
+        if(var_5 istouching(var_0)) {
+          var_5 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, var_1, var_0, var_5.team, var_0.origin, "MOD_EXPLOSIVE", "bombproj_mp");
         }
       }
     }
 
-    if(isDefined(var_02)) {
-      foreach(var_05 in var_02) {
-        if(var_05.streakname == "sentry_shock" && var_05 istouching(param_00)) {
-          var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, param_01, param_00, var_05.team, param_00.origin, "MOD_MELEE", "bombproj_mp");
+    if(isDefined(var_2)) {
+      foreach(var_5 in var_2) {
+        if(var_5.streakname == "sentry_shock" && var_5 istouching(var_0)) {
+          var_5 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_1, var_0, var_5.team, var_0.origin, "MOD_MELEE", "bombproj_mp");
         }
       }
     }
@@ -379,39 +379,39 @@ burninantordestroyequipment(param_00, param_01) {
   }
 }
 
-watchforvictims(param_00, param_01) {
+watchforvictims(var_0, var_1) {
   level endon("game_ended");
-  while(param_00.flameon) {
-    param_00 waittill("trigger", var_02);
-    if(!param_00.flameon) {
+  while(var_0.flameon) {
+    var_0 waittill("trigger", var_2);
+    if(!var_0.flameon) {
       break;
     }
 
-    if(isDefined(var_02)) {
-      if(isplayer(var_02)) {
-        if(var_02 isinphase()) {
+    if(isDefined(var_2)) {
+      if(isplayer(var_2)) {
+        if(var_2 isinphase()) {
           continue;
         }
 
-        if(isDefined(var_02.isrewinding) && var_02.isrewinding == 1) {
+        if(isDefined(var_2.isrewinding) && var_2.isrewinding == 1) {
           continue;
         }
 
-        burninatorplaydeathfx(param_00, var_02, param_01);
+        burninatorplaydeathfx(var_0, var_2, var_1);
         scripts\engine\utility::waitframe();
         scripts\engine\utility::waitframe();
         continue;
       }
 
-      if(isDefined(var_02.classname) && var_02.classname == "script_vehicle") {
-        if(isDefined(var_02.streakname)) {
-          if(var_02.streakname == "minijackal") {
-            var_02 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, param_01, param_00, var_02.team, param_00.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+      if(isDefined(var_2.classname) && var_2.classname == "script_vehicle") {
+        if(isDefined(var_2.streakname)) {
+          if(var_2.streakname == "minijackal") {
+            var_2 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, var_1, var_0, var_2.team, var_0.origin, "MOD_EXPLOSIVE", "bombproj_mp");
             continue;
           }
 
-          if(var_02.streakname == "venom") {
-            var_02 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, param_01, param_00, var_02.team, param_00.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+          if(var_2.streakname == "venom") {
+            var_2 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000, var_1, var_0, var_2.team, var_0.origin, "MOD_EXPLOSIVE", "bombproj_mp");
           }
         }
       }
@@ -419,35 +419,35 @@ watchforvictims(param_00, param_01) {
   }
 }
 
-burninatorplaydeathfx(param_00, param_01, param_02) {
-  if(isDefined(param_02) && param_01.team != param_02.team) {
-    param_01 dodamage(10000, param_00.origin, param_02, param_00);
+burninatorplaydeathfx(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_1.team != var_2.team) {
+    var_1 dodamage(10000, var_0.origin, var_2, var_0);
   } else {
-    param_01 suicide();
+    var_1 suicide();
   }
 
   scripts\engine\utility::waitframe();
   scripts\engine\utility::waitframe();
-  var_03 = anglesToForward(param_01.angles);
-  var_04 = param_01 _meth_8113();
-  if(isDefined(var_04)) {
-    var_04 hide(1);
-    var_04.permanentcustommovetransition = 1;
-    if(param_01.loadoutarchetype == "archetype_scout") {
-      playFX(level._effect["reaper_kill_robot"], param_01.origin + (0, 0, 0));
+  var_3 = anglesToForward(var_1.angles);
+  var_4 = var_1 _meth_8113();
+  if(isDefined(var_4)) {
+    var_4 hide(1);
+    var_4.permanentcustommovetransition = 1;
+    if(var_1.loadoutarchetype == "archetype_scout") {
+      playFX(level._effect["reaper_kill_robot"], var_1.origin + (0, 0, 0));
       return;
     }
 
-    playFX(level._effect["burn_kill"], param_01.origin + (0, 0, 0), var_03);
+    playFX(level._effect["burn_kill"], var_1.origin + (0, 0, 0), var_3);
   }
 }
 
 setupintroexploders() {
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread fireintroexploders();
-    var_00 thread watchforkillstreakuse();
+    level waittill("connected", var_0);
+    var_0 thread fireintroexploders();
+    var_0 thread watchforkillstreakuse();
   }
 }
 
@@ -462,12 +462,12 @@ fireintroexploders() {
 watchforkillstreakuse() {
   self endon("disconnect");
   for(;;) {
-    self waittill("killstreak_use_finished", var_00, var_01);
-    if(!scripts\engine\utility::istrue(var_01)) {
+    self waittill("killstreak_use_finished", var_0, var_1);
+    if(!scripts\engine\utility::istrue(var_1)) {
       continue;
     }
 
-    if(!killstreakactivateflares(var_00)) {
+    if(!killstreakactivateflares(var_0)) {
       continue;
     }
 
@@ -475,9 +475,9 @@ watchforkillstreakuse() {
   }
 }
 
-killstreakactivateflares(param_00) {
-  var_01 = 0;
-  switch (param_00) {
+killstreakactivateflares(var_0) {
+  var_1 = 0;
+  switch (var_0) {
     case "thor":
     case "nuke":
     case "precision_airstrike":
@@ -486,11 +486,11 @@ killstreakactivateflares(param_00) {
     case "sentry_shock":
     case "minijackal":
     case "remote_c8":
-      var_01 = 1;
+      var_1 = 1;
       break;
   }
 
-  return var_01;
+  return var_1;
 }
 
 firebroshotexploders() {
@@ -501,12 +501,12 @@ firebroshotexploders() {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_00 = getent("apex_unoutofbounds", "targetname");
-  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_00;
+  var_0 = getent("apex_unoutofbounds", "targetname");
+  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
-  foreach(var_00 in level.outofboundstriggerpatches) {
-    if(isDefined(var_00)) {
-      var_00 delete();
+  foreach(var_0 in level.outofboundstriggerpatches) {
+    if(isDefined(var_0)) {
+      var_0 delete();
     }
   }
 }

@@ -72,7 +72,7 @@ func_F334() {
 
 func_D0D0() {
   self endon("death");
-  var_00 = 0.85;
+  var_0 = 0.85;
   wait(0.2);
   for(;;) {
     if(scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
@@ -81,11 +81,11 @@ func_D0D0() {
       break;
     }
 
-    wait(var_00);
+    wait(var_0);
   }
 
   self playlocalsound("breathing_heartbeat_fade1");
-  wait(var_00 + 0.1);
+  wait(var_0 + 0.1);
   self playlocalsound("breathing_heartbeat_fade2");
 }
 
@@ -98,146 +98,146 @@ func_ABD5() {
   levelsoundfade(1, level.var_1188.var_ABD4);
 }
 
-func_257D(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  if(!isDefined(param_00)) {
+func_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 2;
+  if(!isDefined(var_2)) {
+    var_2 = 2;
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 2;
+  if(!isDefined(var_4)) {
+    var_4 = 2;
   }
 
-  if(!isDefined(param_06)) {
-    param_06 = 2;
+  if(!isDefined(var_6)) {
+    var_6 = 2;
   }
 
-  if(isDefined(param_05)) {
-    thread func_2AE8(param_00, param_05, param_06);
+  if(isDefined(var_5)) {
+    thread func_2AE8(var_0, var_5, var_6);
   }
 
-  var_07 = param_04 + 0.05;
-  var_08 = 1;
-  if(isDefined(param_01)) {
-    level.player _meth_82C0(param_01);
+  var_7 = var_4 + 0.05;
+  var_8 = 1;
+  if(isDefined(var_1)) {
+    level.player _meth_82C0(var_1);
   }
 
   while(!iscinematicplaying()) {
     wait(0.05);
   }
 
-  level.player _meth_82C0("fade_to_black_minus_music", param_02);
+  level.player _meth_82C0("fade_to_black_minus_music", var_2);
   while(1 && iscinematicplaying()) {
-    var_09 = cinematicgettimeinmsec() / 1000;
-    var_0A = param_00 - var_09;
-    if(var_0A <= var_07) {
-      var_08 = 0;
+    var_9 = cinematicgettimeinmsec() / 1000;
+    var_0A = var_0 - var_9;
+    if(var_0A <= var_7) {
+      var_8 = 0;
       break;
     }
 
     wait(0.05);
   }
 
-  if(var_08 == 0) {
-    if(isDefined(param_03)) {
-      level.player _meth_82C0(param_03, param_04);
+  if(var_8 == 0) {
+    if(isDefined(var_3)) {
+      level.player _meth_82C0(var_3, var_4);
       wait(2);
       level.player clearclienttriggeraudiozone(2);
       return;
     }
 
-    level.player clearclienttriggeraudiozone(param_04);
+    level.player clearclienttriggeraudiozone(var_4);
     return;
   }
 
   level.player clearclienttriggeraudiozone();
 }
 
-func_2AE8(param_00, param_01, param_02) {
-  var_03 = 1;
-  var_04 = param_02 + 0.05;
+func_2AE8(var_0, var_1, var_2) {
+  var_3 = 1;
+  var_4 = var_2 + 0.05;
   while(!iscinematicplaying()) {
     wait(0.05);
   }
 
   while(1 && iscinematicplaying()) {
-    var_05 = cinematicgettimeinmsec() / 1000;
-    var_06 = param_00 - var_05;
-    if(var_06 <= var_04) {
-      var_03 = 0;
+    var_5 = cinematicgettimeinmsec() / 1000;
+    var_6 = var_0 - var_5;
+    if(var_6 <= var_4) {
+      var_3 = 0;
       break;
     }
 
     wait(0.05);
   }
 
-  if(var_03 == 0) {
-    setmusicstate(param_01);
+  if(var_3 == 0) {
+    setmusicstate(var_1);
   }
 }
 
-func_257C(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 2;
+func_257C(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 2;
   }
 
-  if(isDefined(param_00)) {
-    level.player _meth_82C0(param_00);
+  if(isDefined(var_0)) {
+    level.player _meth_82C0(var_0);
   }
 
   while(!iscinematicplaying()) {
     wait(0.05);
   }
 
-  level.player _meth_82C0("fade_to_black_minus_music", param_01);
+  level.player _meth_82C0("fade_to_black_minus_music", var_1);
 }
 
-func_257B(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_00)) {
+func_257B(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 2;
+  if(!isDefined(var_2)) {
+    var_2 = 2;
   }
 
-  var_05 = param_02 + 0.05;
-  if(!isDefined(param_04)) {
-    param_04 = 2;
+  var_5 = var_2 + 0.05;
+  if(!isDefined(var_4)) {
+    var_4 = 2;
   }
 
-  if(isDefined(param_03)) {
-    thread func_2AE8(param_00, param_03, param_04);
+  if(isDefined(var_3)) {
+    thread func_2AE8(var_0, var_3, var_4);
   }
 
-  var_06 = 1;
+  var_6 = 1;
   while(!iscinematicplaying()) {
     wait(0.05);
   }
 
   while(1 && iscinematicplaying()) {
-    var_07 = cinematicgettimeinmsec() / 1000;
-    var_08 = param_00 - var_07;
-    if(var_08 <= var_05) {
-      var_06 = 0;
+    var_7 = cinematicgettimeinmsec() / 1000;
+    var_8 = var_0 - var_7;
+    if(var_8 <= var_5) {
+      var_6 = 0;
       break;
     }
 
     wait(0.05);
   }
 
-  if(var_06 == 0) {
-    if(isDefined(param_01)) {
-      level.player _meth_82C0(param_01, param_02);
+  if(var_6 == 0) {
+    if(isDefined(var_1)) {
+      level.player _meth_82C0(var_1, var_2);
       wait(2);
       level.player clearclienttriggeraudiozone(2);
       return;
     }
 
-    level.player clearclienttriggeraudiozone(param_02);
+    level.player clearclienttriggeraudiozone(var_2);
     return;
   }
 
@@ -285,68 +285,68 @@ func_F59F() {
   soundsettimescalefactor("voice_bchatter_1_3d", 1);
 }
 
-func_25C0(param_00, param_01, param_02) {
-  if(!isDefined(param_00)) {
-    param_00 = 2.5;
+func_25C0(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 2.5;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = "normal";
+  if(!isDefined(var_1)) {
+    var_1 = "normal";
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = "clear_all";
+  if(!isDefined(var_2)) {
+    var_2 = "clear_all";
   }
 
   level.player playSound("plr_helmet_on_visor_down_lr");
-  if(param_00 != 0) {
+  if(var_0 != 0) {
     level.player scripts\engine\utility::delaycall(0.5, ::setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
-    wait(param_00);
-    if(param_01 == "normal") {
+    wait(var_0);
+    if(var_1 == "normal") {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
     } else {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
     }
 
-    if(param_02 == "clear_all") {
+    if(var_2 == "clear_all") {
       level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
       return;
     }
 
-    level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, param_02, 0.2);
+    level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
   }
 }
 
 func_25C1() {}
 
-func_25C2(param_00, param_01, param_02) {
-  if(!isDefined(param_00)) {
-    param_00 = 2.5;
+func_25C2(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 2.5;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = "normal";
+  if(!isDefined(var_1)) {
+    var_1 = "normal";
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = "clear_all";
+  if(!isDefined(var_2)) {
+    var_2 = "clear_all";
   }
 
   level.player playSound("plr_helmet_visor_pull_down_w_air_lr");
   level.player scripts\engine\utility::delaycall(0.5, ::setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
-  wait(param_00);
-  if(param_01 == "normal") {
+  wait(var_0);
+  if(var_1 == "normal") {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
   } else {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
   }
 
-  if(param_02 == "clear_all") {
+  if(var_2 == "clear_all") {
     level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
     return;
   }
 
-  level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, param_02, 0.2);
+  level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
 }
 
 func_25C3() {
@@ -363,16 +363,16 @@ func_25BE() {
   level.player playSound("plr_helmet_off_lr");
 }
 
-func_F5CE(param_00) {
-  if(level.var_1188.var_11926.var_C8 == param_00) {
+func_F5CE(var_0) {
+  if(level.var_1188.var_11926.var_C8 == var_0) {
     return;
   }
 
-  level.var_1188.var_11926.var_C8 = param_00;
-  level.player giveaward(param_00);
+  level.var_1188.var_11926.var_C8 = var_0;
+  level.player giveaward(var_0);
 }
 
-func_4F0F(param_00, param_01) {}
+func_4F0F(var_0, var_1) {}
 
 func_4ED0() {
   return 0;

@@ -100,10 +100,10 @@ onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var_00 = game["attackers"];
-    var_01 = game["defenders"];
-    game["attackers"] = var_01;
-    game["defenders"] = var_00;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_TDEF");
@@ -126,10 +126,10 @@ onstartgametype() {
   thread scripts\mp\gametypes\obj_ball::hideballsongameended();
   thread baseeffectwatchgameended();
   initspawns();
-  var_02[0] = level.gametype;
-  var_02[1] = "tdm";
-  var_02[2] = "ball";
-  scripts\mp\gameobjects::main(var_02);
+  var_2[0] = level.gametype;
+  var_2[1] = "tdm";
+  var_2[2] = "ball";
+  scripts\mp\gameobjects::main(var_2);
   tdef();
   if(level.possessionresetcondition != 0) {
     scripts\mp\gametypes\obj_ball::initballtimer();
@@ -166,48 +166,48 @@ initspawns() {
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_tdm_spawn_secondary", 1, 1);
   level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
-  foreach(var_01 in level.spawnpoints) {
-    calculatespawndisttoballstart(var_01);
+  foreach(var_1 in level.spawnpoints) {
+    calculatespawndisttoballstart(var_1);
   }
 }
 
-calculatespawndisttoballstart(param_00) {
-  param_00.distsqtoballstart = undefined;
-  var_01 = getpathdist(param_00.origin, level.ball_starts[0].ground_origin, 1000);
-  if(var_01 < 0) {
-    var_01 = scripts\engine\utility::distance_2d_squared(param_00.origin, level.ball_starts[0].ground_origin);
+calculatespawndisttoballstart(var_0) {
+  var_0.distsqtoballstart = undefined;
+  var_1 = getpathdist(var_0.origin, level.ball_starts[0].ground_origin, 1000);
+  if(var_1 < 0) {
+    var_1 = scripts\engine\utility::distance_2d_squared(var_0.origin, level.ball_starts[0].ground_origin);
   } else {
-    var_01 = var_01 * var_01;
+    var_1 = var_1 * var_1;
   }
 
-  param_00.distsqtoballstart = var_01;
+  var_0.distsqtoballstart = var_1;
 }
 
 getspawnpoint() {
-  var_00 = self.pers["team"];
+  var_0 = self.pers["team"];
   if(game["switchedsides"]) {
-    var_00 = scripts\mp\utility::getotherteam(var_00);
+    var_0 = scripts\mp\utility::getotherteam(var_0);
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_ball_spawn_" + var_00 + "_start");
-    var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_ball_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var_01 = level.spawnpoints;
-    var_03 = var_02;
-    var_04 = [];
-    var_04["ballPosition"] = level.balls[0].visuals[0].origin;
+    var_1 = level.spawnpoints;
+    var_3 = var_2;
+    var_4 = [];
+    var_4["ballPosition"] = level.balls[0].visuals[0].origin;
     if(isDefined(level.balls[0].carrier)) {
-      var_04["activeCarrierPosition"] = level.balls[0].carrier.origin;
+      var_4["activeCarrierPosition"] = level.balls[0].carrier.origin;
     } else {
-      var_04["activeCarrierPosition"] = var_04["ballPosition"];
+      var_4["activeCarrierPosition"] = var_4["ballPosition"];
     }
 
-    var_04["avoidBallDeadZoneDistSq"] = 1000000;
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01, var_03, var_04);
+    var_4["avoidBallDeadZoneDistSq"] = 1000000;
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1, var_3, var_4);
   }
 
-  return var_02;
+  return var_2;
 }
 
 createfx() {
@@ -230,13 +230,13 @@ tdef() {
   level.ball = level.balls[0];
 }
 
-onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_0A = self;
-  var_0B = param_01.origin;
+  var_0B = var_1.origin;
   var_0C = 0;
-  if(isDefined(param_00)) {
-    var_0B = param_00.origin;
-    var_0C = param_00 == param_01;
+  if(isDefined(var_0)) {
+    var_0B = var_0.origin;
+    var_0C = var_0 == var_1;
   }
 
   if(isDefined(self.carryobject) && isDefined(self.carryobject.passtargetoutlineid) && isDefined(self.carryobject.passtargetent)) {
@@ -252,23 +252,23 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
   }
 
   if(isDefined(level.ball.carrier)) {
-    if(isDefined(param_01) && isplayer(param_01) && param_01.pers["team"] != var_0A.pers["team"]) {
-      if(isDefined(param_01.ball_carried) && var_0C) {
-        param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
+    if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_0A.pers["team"]) {
+      if(isDefined(var_1.ball_carried) && var_0C) {
+        var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
       } else if(isDefined(var_0A.ball_carried)) {
-        param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
-        thread scripts\mp\matchdata::loginitialstats(param_09, "carrying");
+        var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
+        thread scripts\mp\matchdata::loginitialstats(var_9, "carrying");
         scripts\mp\gametypes\obj_ball::updatetimers("neutral", 1, 0);
       }
 
-      if(param_01.pers["team"] == level.ball.ownerteam && param_01 != level.ball.carrier) {
+      if(var_1.pers["team"] == level.ball.ownerteam && var_1 != level.ball.carrier) {
         var_0D = distancesquared(level.ball.carrier.origin, var_0B);
         if(var_0D < 90000) {
-          param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
-          param_01 scripts\mp\utility::incperstat("defends", 1);
-          param_01 scripts\mp\persistence::statsetchild("round", "defends", param_01.pers["defends"]);
-          param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
-          thread scripts\mp\matchdata::loginitialstats(param_09, "defending");
+          var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+          var_1 scripts\mp\utility::incperstat("defends", 1);
+          var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
+          var_1 scripts\mp\utility::setextrascore1(var_1.pers["defends"]);
+          thread scripts\mp\matchdata::loginitialstats(var_9, "defending");
           return;
         }
 
@@ -278,7 +278,7 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
   }
 }
 
-awardcapturepoints(param_00) {
+awardcapturepoints(var_0) {
   level endon("game_ended");
   level.ball endon("dropped");
   level.ball endon("reset");
@@ -288,13 +288,13 @@ awardcapturepoints(param_00) {
     level.ball.carrier thread carriergivescore();
   }
 
-  var_01 = level.scoringtime;
-  var_02 = level.scorepertick;
+  var_1 = level.scoringtime;
+  var_2 = level.scorepertick;
   while(!level.gameended) {
-    wait(var_01);
+    wait(var_1);
     scripts\mp\hostmigration::waittillhostmigrationdone();
     if(!level.gameended) {
-      scripts\mp\gamescore::giveteamscoreforobjective(param_00, var_02, 0);
+      scripts\mp\gamescore::giveteamscoreforobjective(var_0, var_2, 0);
       level.ball.carrier scripts\mp\utility::incperstat("objTime", 1);
       level.ball.carrier scripts\mp\persistence::statsetchild("round", "objTime", level.ball.carrier.pers["objTime"]);
       level.ball.carrier scripts\mp\utility::setextrascore0(level.ball.carrier.pers["objTime"]);
@@ -320,23 +320,23 @@ watchforendgame() {
   level waittill("game_ended");
   if(isDefined(self)) {
     if(isDefined(self.tdef_flagtime)) {
-      var_00 = int(gettime() - self.tdef_flagtime);
-      if(var_00 / 100 / 60 < 1) {
-        var_01 = 0;
+      var_0 = int(gettime() - self.tdef_flagtime);
+      if(var_0 / 100 / 60 < 1) {
+        var_1 = 0;
       } else {
-        var_01 = int(var_01 / 100 / 60);
+        var_1 = int(var_1 / 100 / 60);
       }
 
-      scripts\mp\utility::incperstat("destructions", var_01);
+      scripts\mp\utility::incperstat("destructions", var_1);
       scripts\mp\persistence::statsetchild("round", "destructions", self.pers["destructions"]);
     }
   }
 }
 
 getrespawndelay() {
-  var_00 = level.ball scripts\mp\gameobjects::getownerteam();
-  if(isDefined(var_00)) {
-    if(self.pers["team"] == var_00) {
+  var_0 = level.ball scripts\mp\gameobjects::getownerteam();
+  if(isDefined(var_0)) {
+    if(self.pers["team"] == var_0) {
       if(!level.spawndelay) {
         return undefined;
       }
@@ -350,28 +350,28 @@ getrespawndelay() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00._baseeffect = [];
-    thread onplayerspawned(var_00);
+    level waittill("connected", var_0);
+    var_0._baseeffect = [];
+    thread onplayerspawned(var_0);
   }
 }
 
-onplayerspawned(param_00) {
+onplayerspawned(var_0) {
   for(;;) {
-    param_00 waittill("spawned");
-    level.ballbases[0] scripts\mp\gametypes\obj_ball::showballbaseeffecttoplayer(param_00);
+    var_0 waittill("spawned");
+    level.ballbases[0] scripts\mp\gametypes\obj_ball::showballbaseeffecttoplayer(var_0);
     if(level.possessionresetcondition != 0) {
-      param_00 setclientomnvar("ui_uplink_timer_hud", 0);
+      var_0 setclientomnvar("ui_uplink_timer_hud", 0);
     }
 
-    param_00 scripts\mp\utility::setextrascore0(0);
-    if(isDefined(param_00.pers["objTime"])) {
-      param_00 scripts\mp\utility::setextrascore0(param_00.pers["objTime"]);
+    var_0 scripts\mp\utility::setextrascore0(0);
+    if(isDefined(var_0.pers["objTime"])) {
+      var_0 scripts\mp\utility::setextrascore0(var_0.pers["objTime"]);
     }
 
-    param_00 scripts\mp\utility::setextrascore1(0);
-    if(isDefined(param_00.pers["defends"])) {
-      param_00 scripts\mp\utility::setextrascore1(param_00.pers["defends"]);
+    var_0 scripts\mp\utility::setextrascore1(0);
+    if(isDefined(var_0.pers["defends"])) {
+      var_0 scripts\mp\utility::setextrascore1(var_0.pers["defends"]);
     }
   }
 }
@@ -403,9 +403,9 @@ getsettdefsuit() {
 
 baseeffectwatchgameended() {
   level waittill("bro_shot_start");
-  foreach(var_01 in level.players) {
-    if(isDefined(var_01._baseeffect) && isDefined(var_01._baseeffect[0])) {
-      var_01._baseeffect[0] delete();
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1._baseeffect) && isDefined(var_1._baseeffect[0])) {
+      var_1._baseeffect[0] delete();
     }
   }
 }

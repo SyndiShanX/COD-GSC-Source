@@ -4,14 +4,14 @@
  * Script: scripts\cp\cp_analytics.gsc
 ***************************************/
 
-start_game_type(param_00, param_01, param_02) {
-  init(param_02);
-  init_matchdata(param_00, param_01);
+start_game_type(var_0, var_1, var_2) {
+  init(var_2);
+  init_matchdata(var_0, var_1);
 }
 
-init_matchdata(param_00, param_01) {
-  setmatchdatadef(param_00);
-  setclientmatchdatadef(param_01);
+init_matchdata(var_0, var_1) {
+  setmatchdatadef(var_0);
+  setclientmatchdatadef(var_1);
   setmatchdata("commonMatchData", "map", level.script);
   setmatchdata("commonMatchData", "gametype", getdvar("ui_gametype"));
   setmatchdata("commonMatchData", "buildVersion", getbuildversion());
@@ -23,14 +23,14 @@ init_matchdata(param_00, param_01) {
   level thread wait_set_initial_player_count();
 }
 
-init(param_00) {
-  var_01 = spawnStruct();
-  var_02 = [];
-  var_01.single_value_stats = var_02;
-  var_03 = [];
-  var_01.challenge_results = var_03;
-  level.var_13F0B = var_01;
-  init_analytics(param_00);
+init(var_0) {
+  var_1 = spawnStruct();
+  var_2 = [];
+  var_1.single_value_stats = var_2;
+  var_3 = [];
+  var_1.challenge_results = var_3;
+  level.var_13F0B = var_1;
+  init_analytics(var_0);
   level.player_count = 0;
   level.player_count_left = 0;
 }
@@ -53,26 +53,26 @@ on_player_connect() {
   level.player_count = level.player_count + 1;
 }
 
-on_player_disconnect(param_00) {
-  setmatchdata("players", self.clientid, "disconnectReason", param_00);
-  setmatchdata("players", self.clientid, "quit", param_00 == "EXE_DISCONNECTED");
+on_player_disconnect(var_0) {
+  setmatchdata("players", self.clientid, "disconnectReason", var_0);
+  setmatchdata("players", self.clientid, "quit", var_0 == "EXE_DISCONNECTED");
   set_custom_stats();
   level.player_count_left = level.player_count_left + 1;
 }
 
 player_init() {
-  var_00 = spawnStruct();
-  var_01 = [];
-  var_01["cashSpentOnWeapon"] = get_single_value_struct(0, "int");
-  var_01["cashSpentOnAbility"] = get_single_value_struct(0, "int");
-  var_01["cashSpentOnTrap"] = get_single_value_struct(0, "int");
-  var_00.single_value_stats = var_01;
-  var_02 = [];
-  var_02["timesDowned"] = [];
-  var_02["timesRevived"] = [];
-  var_02["timesBledOut"] = [];
-  var_00.laststand_record = var_02;
-  self.var_13F0B = var_00;
+  var_0 = spawnStruct();
+  var_1 = [];
+  var_1["cashSpentOnWeapon"] = get_single_value_struct(0, "int");
+  var_1["cashSpentOnAbility"] = get_single_value_struct(0, "int");
+  var_1["cashSpentOnTrap"] = get_single_value_struct(0, "int");
+  var_0.single_value_stats = var_1;
+  var_2 = [];
+  var_2["timesDowned"] = [];
+  var_2["timesRevived"] = [];
+  var_2["timesBledOut"] = [];
+  var_0.laststand_record = var_2;
+  self.var_13F0B = var_0;
 }
 
 set_player_count() {
@@ -103,15 +103,15 @@ prematch_over() {
   return 0;
 }
 
-update_challenges_status(param_00, param_01) {
+update_challenges_status(var_0, var_1) {
   if(level.var_13F0B.challenge_results.size > 25) {
     return;
   }
 
-  var_02 = spawnStruct();
-  var_02.challenge_name = param_00;
-  var_02.println = param_01;
-  level.var_13F0B.challenge_results[level.var_13F0B.challenge_results.size] = var_02;
+  var_2 = spawnStruct();
+  var_2.challenge_name = var_0;
+  var_2.println = var_1;
+  level.var_13F0B.challenge_results[level.var_13F0B.challenge_results.size] = var_2;
 }
 
 inc_downed_counts() {
@@ -126,26 +126,26 @@ inc_bleedout_counts() {
   inc_laststand_record("timesBledOut");
 }
 
-inc_laststand_record(param_00) {
-  if(!isDefined(self.var_13F0B.laststand_record[param_00][level.wave_num])) {
-    self.var_13F0B.laststand_record[param_00][level.wave_num] = 0;
+inc_laststand_record(var_0) {
+  if(!isDefined(self.var_13F0B.laststand_record[var_0][level.wave_num])) {
+    self.var_13F0B.laststand_record[var_0][level.wave_num] = 0;
   }
 
-  self.var_13F0B.laststand_record[param_00][level.wave_num]++;
+  self.var_13F0B.laststand_record[var_0][level.wave_num]++;
 }
 
-update_spending_type(param_00, param_01) {
-  switch (param_01) {
+update_spending_type(var_0, var_1) {
+  switch (var_1) {
     case "weapon":
-      self.var_13F0B.single_value_stats["cashSpentOnWeapon"].value = self.var_13F0B.single_value_stats["cashSpentOnWeapon"].value + param_00;
+      self.var_13F0B.single_value_stats["cashSpentOnWeapon"].value = self.var_13F0B.single_value_stats["cashSpentOnWeapon"].value + var_0;
       break;
 
     case "ability":
-      self.var_13F0B.single_value_stats["cashSpentOnAbility"].value = self.var_13F0B.single_value_stats["cashSpentOnAbility"].value + param_00;
+      self.var_13F0B.single_value_stats["cashSpentOnAbility"].value = self.var_13F0B.single_value_stats["cashSpentOnAbility"].value + var_0;
       break;
 
     case "trap":
-      self.var_13F0B.single_value_stats["cashSpentOnTrap"].value = self.var_13F0B.single_value_stats["cashSpentOnTrap"].value + param_00;
+      self.var_13F0B.single_value_stats["cashSpentOnTrap"].value = self.var_13F0B.single_value_stats["cashSpentOnTrap"].value + var_0;
       break;
 
     default:
@@ -153,16 +153,16 @@ update_spending_type(param_00, param_01) {
   }
 }
 
-endgame(param_00, param_01) {
-  set_game_data(param_00, param_01);
+endgame(var_0, var_1) {
+  set_game_data(var_0, var_1);
   write_global_clientmatchdata();
   log_matchdata_at_game_end();
-  foreach(var_04, var_03 in level.players) {
-    scripts\cp\cp_persistence::increment_player_career_total_waves(var_03);
-    scripts\cp\cp_persistence::increment_player_career_total_score(var_03);
-    var_03 set_player_data(param_01);
-    var_03 set_player_game_data();
-    var_03 write_clientmatchdata_for_player(var_03, var_04);
+  foreach(var_4, var_3 in level.players) {
+    scripts\cp\cp_persistence::increment_player_career_total_waves(var_3);
+    scripts\cp\cp_persistence::increment_player_career_total_score(var_3);
+    var_3 set_player_data(var_1);
+    var_3 set_player_game_data();
+    var_3 write_clientmatchdata_for_player(var_3, var_4);
   }
 
   if(isDefined(level.analyticsendgame)) {
@@ -173,31 +173,31 @@ endgame(param_00, param_01) {
   sendclientmatchdata();
 }
 
-set_player_data(param_00) {
-  var_01 = self getplayerdata("cp", "coopCareerStats", "totalGameplayTime");
-  var_02 = self getplayerdata("cp", "coopCareerStats", "gamesPlayed");
-  if(!isDefined(var_01)) {
-    var_01 = 0;
+set_player_data(var_0) {
+  var_1 = self getplayerdata("cp", "coopCareerStats", "totalGameplayTime");
+  var_2 = self getplayerdata("cp", "coopCareerStats", "gamesPlayed");
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var_02)) {
-    var_02 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var_01 = var_01 + param_00 / 1000;
-  var_02 = var_02 + 1;
-  self setplayerdata("cp", "coopCareerStats", "totalGameplayTime", int(var_01));
-  self setplayerdata("cp", "coopCareerStats", "gamesPlayed", int(var_02));
+  var_1 = var_1 + var_0 / 1000;
+  var_2 = var_2 + 1;
+  self setplayerdata("cp", "coopCareerStats", "totalGameplayTime", int(var_1));
+  self setplayerdata("cp", "coopCareerStats", "gamesPlayed", int(var_2));
 }
 
-set_game_data(param_00, param_01) {
-  var_02 = "challengesCompleted";
-  var_03 = level.var_13F0B;
-  foreach(var_05 in var_03.single_value_stats) {
-    var_06 = validate_value(var_05.value, var_05.value_type);
+set_game_data(var_0, var_1) {
+  var_2 = "challengesCompleted";
+  var_3 = level.var_13F0B;
+  foreach(var_5 in var_3.single_value_stats) {
+    var_6 = validate_value(var_5.value, var_5.value_type);
   }
 
-  foreach(var_09 in var_03.challenge_results) {}
+  foreach(var_9 in var_3.challenge_results) {}
 
   setmatchdata("commonMatchData", "playerCountEnd", level.players.size);
   setmatchdata("commonMatchData", "utcEndTimeSeconds", getsystemtime());
@@ -213,19 +213,19 @@ set_player_game_data() {
   set_custom_stats();
 }
 
-get_player_matchdata(param_00, param_01) {
-  if(isDefined(level.matchdata["player"][self.clientid]) && isDefined(level.matchdata["player"][self.clientid][param_00])) {
-    return level.matchdata["player"][self.clientid][param_00];
+get_player_matchdata(var_0, var_1) {
+  if(isDefined(level.matchdata["player"][self.clientid]) && isDefined(level.matchdata["player"][self.clientid][var_0])) {
+    return level.matchdata["player"][self.clientid][var_0];
   }
 
-  return param_01;
+  return var_1;
 }
 
 set_custom_stats() {
-  var_00 = self getplayerdata("cp", "coopCareerStats", "totalGameplayTime");
-  var_01 = self getplayerdata("cp", "coopCareerStats", "gamesPlayed");
-  var_02 = self getplayerdata("cp", "progression", "playerLevel", "rank");
-  var_03 = self getplayerdata("cp", "progression", "playerLevel", "prestige");
+  var_0 = self getplayerdata("cp", "coopCareerStats", "totalGameplayTime");
+  var_1 = self getplayerdata("cp", "coopCareerStats", "gamesPlayed");
+  var_2 = self getplayerdata("cp", "progression", "playerLevel", "rank");
+  var_3 = self getplayerdata("cp", "progression", "playerLevel", "prestige");
   if(isDefined(self.wave_num_when_joined)) {
     setmatchdata("players", self.clientid, "waveEnd", level.wave_num - self.wave_num_when_joined);
   } else {
@@ -240,10 +240,10 @@ set_custom_stats() {
   setmatchdata("players", self.clientid, "headShots", self.total_match_headshots);
   setmatchdata("players", self.clientid, "shots", self.accuracy_shots_fired);
   setmatchdata("players", self.clientid, "hits", self.accuracy_shots_on_target);
-  setmatchdata("players", self.clientid, "rank", validate_byte(var_02));
-  setmatchdata("players", self.clientid, "prestige", validate_byte(var_03));
-  setmatchdata("players", self.clientid, "totalGameplayTime", validate_int(var_00));
-  setmatchdata("players", self.clientid, "gamesPlayed", validate_int(var_01));
+  setmatchdata("players", self.clientid, "rank", validate_byte(var_2));
+  setmatchdata("players", self.clientid, "prestige", validate_byte(var_3));
+  setmatchdata("players", self.clientid, "totalGameplayTime", validate_int(var_0));
+  setmatchdata("players", self.clientid, "gamesPlayed", validate_int(var_1));
 }
 
 copy_from_playerdata() {}
@@ -252,51 +252,51 @@ set_laststand_stats() {}
 
 set_single_value_stats() {}
 
-validate_value(param_00, param_01) {
-  switch (param_01) {
+validate_value(var_0, var_1) {
+  switch (var_1) {
     case "byte":
-      return validate_byte(param_00);
+      return validate_byte(var_0);
 
     case "short":
-      return validate_short(param_00);
+      return validate_short(var_0);
 
     case "int":
-      return validate_int(param_00);
+      return validate_int(var_0);
 
     default:
       break;
   }
 }
 
-validate_byte(param_00) {
-  return int(min(param_00, 127));
+validate_byte(var_0) {
+  return int(min(var_0, 127));
 }
 
-validate_short(param_00) {
-  return int(min(param_00, 32767));
+validate_short(var_0) {
+  return int(min(var_0, 32767));
 }
 
-validate_int(param_00) {
-  return int(min(param_00, 2147483647));
+validate_int(var_0) {
+  return int(min(var_0, 2147483647));
 }
 
-get_single_value_struct(param_00, param_01) {
-  var_02 = spawnStruct();
-  var_02.value = param_00;
-  var_02.value_type = param_01;
-  return var_02;
+get_single_value_struct(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.value = var_0;
+  var_2.value_type = var_1;
+  return var_2;
 }
 
-init_analytics(param_00) {
-  var_01 = 0;
-  var_02 = 1;
-  var_03 = 2;
-  var_04 = 1;
-  var_05 = 2;
-  var_06 = 3;
-  var_07 = 4;
-  var_08 = 5;
-  var_09 = 6;
+init_analytics(var_0) {
+  var_1 = 0;
+  var_2 = 1;
+  var_3 = 2;
+  var_4 = 1;
+  var_5 = 2;
+  var_6 = 3;
+  var_7 = 4;
+  var_8 = 5;
+  var_9 = 6;
   var_0A = 1;
   var_0B = 100;
   var_0C = 101;
@@ -309,33 +309,33 @@ init_analytics(param_00) {
   level.clientmatchdata_data_type = [];
   level.clientmatchdata = [];
   for(var_0E = var_0C; var_0E <= var_0D; var_0E++) {
-    var_0F = tablelookup(param_00, var_01, var_0E, var_04);
+    var_0F = tablelookup(var_0, var_1, var_0E, var_4);
     if(var_0F == "") {
       continue;
     }
 
-    var_10 = tablelookup(param_00, var_01, var_0E, var_05);
+    var_10 = tablelookup(var_0, var_1, var_0E, var_5);
     if(var_10 != "") {
       level.blackbox_data_type[var_0F] = var_10;
     }
 
-    var_11 = tablelookup(param_00, var_01, var_0E, var_06);
+    var_11 = tablelookup(var_0, var_1, var_0E, var_6);
     if(var_11 != "") {
       level.matchdata_data_type[var_0F] = var_11;
     }
 
-    var_12 = tablelookup(param_00, var_01, var_0E, var_07);
+    var_12 = tablelookup(var_0, var_1, var_0E, var_7);
     if(var_12 != "") {
       level.matchdata_struct[var_0F] = [];
       level.matchdata[var_0F] = [];
     }
 
-    var_13 = tablelookup(param_00, var_01, var_0E, var_08);
+    var_13 = tablelookup(var_0, var_1, var_0E, var_8);
     if(var_13 != "") {
       level.clientmatchdata_data_type[var_0F] = var_13;
     }
 
-    var_14 = tablelookup(param_00, var_01, var_0E, var_09);
+    var_14 = tablelookup(var_0, var_1, var_0E, var_9);
     if(var_14 != "") {
       level.clientmatchdata_struct[var_0F] = [];
       level.clientmatchdata[var_0F] = [];
@@ -344,12 +344,12 @@ init_analytics(param_00) {
 
   level.analytics_event = [];
   for(var_0E = var_0A; var_0E <= var_0B; var_0E++) {
-    var_15 = tablelookup(param_00, var_01, var_0E, var_02);
+    var_15 = tablelookup(var_0, var_1, var_0E, var_2);
     if(var_15 == "") {
       break;
     }
 
-    var_16 = tablelookup(param_00, var_01, var_0E, var_03);
+    var_16 = tablelookup(var_0, var_1, var_0E, var_3);
     level.analytics_event[var_15] = var_16;
     var_17 = strtok(var_16, " ");
     foreach(var_19 in var_17) {
@@ -364,136 +364,136 @@ init_analytics(param_00) {
   }
 }
 
-func_AF6A(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = get_data_to_update(param_00);
-  log_matchdata(param_00, var_05, param_01, param_03);
-  func_AF65(param_00, var_05, param_01, param_04);
+func_AF6A(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = get_data_to_update(var_0);
+  log_matchdata(var_0, var_5, var_1, var_3);
+  func_AF65(var_0, var_5, var_1, var_4);
 }
 
 log_matchdata_at_game_end() {
-  foreach(var_08, var_01 in level.matchdata) {
-    foreach(var_07, var_03 in var_01) {
-      foreach(var_06, var_05 in var_03) {
-        if(var_08 == "match") {
-          setmatchdata("matchData", var_06, int(var_05));
+  foreach(var_8, var_1 in level.matchdata) {
+    foreach(var_7, var_3 in var_1) {
+      foreach(var_6, var_5 in var_3) {
+        if(var_8 == "match") {
+          setmatchdata("matchData", var_6, int(var_5));
           continue;
         }
 
-        setmatchdata("players", int(var_07), var_06, int(var_05));
+        setmatchdata("players", int(var_7), var_6, int(var_5));
       }
     }
   }
 }
 
-func_AF60(param_00, param_01, param_02) {
-  var_03 = get_bb_string(param_01);
-  var_04 = "analytics_cp_";
-  switch (param_02.size) {
+func_AF60(var_0, var_1, var_2) {
+  var_3 = get_bb_string(var_1);
+  var_4 = "analytics_cp_";
+  switch (var_2.size) {
     case 1:
-      bbprint(var_04 + param_00, var_03, param_02[0]);
+      bbprint(var_4 + var_0, var_3, var_2[0]);
       break;
 
     case 2:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1]);
       break;
 
     case 3:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2]);
       break;
 
     case 4:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3]);
       break;
 
     case 5:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4]);
       break;
 
     case 6:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4], param_02[5]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5]);
       break;
 
     case 7:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4], param_02[5], param_02[6]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6]);
       break;
 
     case 8:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4], param_02[5], param_02[6], param_02[7]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7]);
       break;
 
     case 9:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4], param_02[5], param_02[6], param_02[7], param_02[8]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8]);
       break;
 
     case 10:
-      bbprint(var_04 + param_00, var_03, param_02[0], param_02[1], param_02[2], param_02[3], param_02[4], param_02[5], param_02[6], param_02[7], param_02[8], param_02[9]);
+      bbprint(var_4 + var_0, var_3, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8], var_2[9]);
       break;
   }
 }
 
-get_bb_string(param_00) {
-  var_01 = "";
-  foreach(var_04, var_03 in param_00) {
-    var_01 = var_01 + var_03 + " " + level.blackbox_data_type[var_03];
-    if(var_04 != param_00.size - 1) {
-      var_01 = var_01 + " ";
+get_bb_string(var_0) {
+  var_1 = "";
+  foreach(var_4, var_3 in var_0) {
+    var_1 = var_1 + var_3 + " " + level.blackbox_data_type[var_3];
+    if(var_4 != var_0.size - 1) {
+      var_1 = var_1 + " ";
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-get_data_to_update(param_00) {
-  var_01 = level.analytics_event[param_00];
-  return strtok(var_01, " ");
+get_data_to_update(var_0) {
+  var_1 = level.analytics_event[var_0];
+  return strtok(var_1, " ");
 }
 
-log_matchdata(param_00, param_01, param_02, param_03) {
-  var_04 = 0;
-  foreach(var_06 in param_01) {
-    if(is_matchdata_struct(var_06)) {
-      var_07 = param_03[var_04];
-      if(!isDefined(level.matchdata[var_06][var_07])) {
-        level.matchdata[var_06][var_07] = level.matchdata_struct[var_06];
+log_matchdata(var_0, var_1, var_2, var_3) {
+  var_4 = 0;
+  foreach(var_6 in var_1) {
+    if(is_matchdata_struct(var_6)) {
+      var_7 = var_3[var_4];
+      if(!isDefined(level.matchdata[var_6][var_7])) {
+        level.matchdata[var_6][var_7] = level.matchdata_struct[var_6];
       }
 
-      level.matchdata[var_06][var_07][param_00] = level.matchdata[var_06][var_07][param_00] + param_02;
-      var_04++;
+      level.matchdata[var_6][var_7][var_0] = level.matchdata[var_6][var_7][var_0] + var_2;
+      var_4++;
     }
   }
 }
 
-func_AF65(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_03)) {
+func_AF65(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var_04 = 0;
-  if(is_clientmatchdata_data(param_00)) {
-    foreach(var_06 in param_01) {
-      if(is_clientmatchdata_struct(var_06)) {
-        var_07 = param_03[var_04];
-        if(!isDefined(level.clientmatchdata[var_06][var_07])) {
-          level.clientmatchdata[var_06][var_07] = level.clientmatchdata_struct[var_06];
+  var_4 = 0;
+  if(is_clientmatchdata_data(var_0)) {
+    foreach(var_6 in var_1) {
+      if(is_clientmatchdata_struct(var_6)) {
+        var_7 = var_3[var_4];
+        if(!isDefined(level.clientmatchdata[var_6][var_7])) {
+          level.clientmatchdata[var_6][var_7] = level.clientmatchdata_struct[var_6];
         }
 
-        level.clientmatchdata[var_06][var_07][param_00] = level.clientmatchdata[var_06][var_07][param_00] + param_02;
-        var_04++;
+        level.clientmatchdata[var_6][var_7][var_0] = level.clientmatchdata[var_6][var_7][var_0] + var_2;
+        var_4++;
       }
     }
   }
 }
 
-is_matchdata_struct(param_00) {
-  return isDefined(level.matchdata_struct[param_00]);
+is_matchdata_struct(var_0) {
+  return isDefined(level.matchdata_struct[var_0]);
 }
 
-is_clientmatchdata_struct(param_00) {
-  return isDefined(level.clientmatchdata_struct[param_00]);
+is_clientmatchdata_struct(var_0) {
+  return isDefined(level.clientmatchdata_struct[var_0]);
 }
 
-is_clientmatchdata_data(param_00) {
-  return isDefined(level.clientmatchdata_data_type[param_00]);
+is_clientmatchdata_data(var_0) {
+  return isDefined(level.clientmatchdata_data_type[var_0]);
 }
 
 write_global_clientmatchdata() {
@@ -506,22 +506,22 @@ write_global_clientmatchdata() {
   }
 }
 
-write_clientmatchdata_for_player(param_00, param_01) {
-  setclientmatchdata("player", param_01, "username", param_00.name);
-  setclientmatchdata("player", param_01, "rank", param_00 scripts\cp\cp_persistence::get_player_rank());
-  if(!isDefined(param_00.player_character_index)) {
+write_clientmatchdata_for_player(var_0, var_1) {
+  setclientmatchdata("player", var_1, "username", var_0.name);
+  setclientmatchdata("player", var_1, "rank", var_0 scripts\cp\cp_persistence::get_player_rank());
+  if(!isDefined(var_0.player_character_index)) {
     return;
   }
 
-  setclientmatchdata("player", param_01, "characterIndex", param_00.player_character_index);
-  var_02 = level.clientmatchdata["player"][param_00.clientid];
-  if(isDefined(var_02)) {
-    foreach(var_05, var_04 in var_02) {
-      setclientmatchdata("player", param_01, var_05, int(var_04));
+  setclientmatchdata("player", var_1, "characterIndex", var_0.player_character_index);
+  var_2 = level.clientmatchdata["player"][var_0.clientid];
+  if(isDefined(var_2)) {
+    foreach(var_5, var_4 in var_2) {
+      setclientmatchdata("player", var_1, var_5, int(var_4));
     }
   }
 
   if(isDefined(level.endgame_write_clientmatchdata_for_player_func)) {
-    [[level.endgame_write_clientmatchdata_for_player_func]](param_00, param_01);
+    [[level.endgame_write_clientmatchdata_for_player_func]](var_0, var_1);
   }
 }

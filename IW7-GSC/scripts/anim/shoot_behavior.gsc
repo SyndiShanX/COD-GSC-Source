@@ -4,13 +4,13 @@
  * Script: scripts\anim\shoot_behavior.gsc
 *******************************************/
 
-func_4F69(param_00) {
+func_4F69(var_0) {
   self endon("killanimscript");
   self notify("stop_deciding_how_to_shoot");
   self endon("stop_deciding_how_to_shoot");
   self endon("death");
   scripts\sp\gameskill::resetmisstime_code();
-  self.var_FECA = param_00;
+  self.var_FECA = var_0;
   self.var_FE9E = undefined;
   self.var_FECF = undefined;
   self.var_FED7 = "none";
@@ -20,14 +20,14 @@ func_4F69(param_00) {
     self.var_3C60 = 0;
   }
 
-  var_01 = isDefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
-  if(var_01) {
+  var_1 = isDefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
+  if(var_1) {
     wait(0.05);
   }
 
-  var_02 = self.var_FE9E;
-  var_03 = self.var_FECF;
-  var_04 = self.var_FED7;
+  var_2 = self.var_FE9E;
+  var_3 = self.var_FECF;
+  var_4 = self.var_FED7;
   if(!isDefined(self.var_8B95)) {
     self.a.laseron = 1;
     scripts\anim\shared::updatelaserstatus();
@@ -37,7 +37,7 @@ func_4F69(param_00) {
     func_E26D();
   }
 
-  if(var_01 && !self.a.var_2411 || !scripts\anim\utility_common::canseeenemy()) {
+  if(var_1 && !self.a.var_2411 || !scripts\anim\utility_common::canseeenemy()) {
     thread func_13A46();
   }
 
@@ -54,15 +54,15 @@ func_4F69(param_00) {
       }
     }
 
-    var_05 = undefined;
+    var_5 = undefined;
     if(self.var_394 == "none") {
       func_C064();
     } else if(scripts\anim\utility_common::usingrocketlauncher()) {
-      var_05 = func_E778();
+      var_5 = func_E778();
     } else if(scripts\anim\utility_common::isusingsidearm()) {
-      var_05 = func_CBE2();
+      var_5 = func_CBE2();
     } else {
-      var_05 = func_E501();
+      var_5 = func_E501();
     }
 
     if(isDefined(self.a.var_1096D)) {
@@ -71,14 +71,14 @@ func_4F69(param_00) {
       ]();
     }
 
-    if(func_3DFB(var_02, self.var_FE9E) || !isDefined(self.var_FE9E) && func_3DFB(var_03, self.var_FECF) || func_3DFB(var_04, self.var_FED7)) {
+    if(func_3DFB(var_2, self.var_FE9E) || !isDefined(self.var_FE9E) && func_3DFB(var_3, self.var_FECF) || func_3DFB(var_4, self.var_FED7)) {
       self notify("shoot_behavior_change");
     }
 
-    var_02 = self.var_FE9E;
-    var_03 = self.var_FECF;
-    var_04 = self.var_FED7;
-    if(!isDefined(var_05)) {
+    var_2 = self.var_FE9E;
+    var_3 = self.var_FECF;
+    var_4 = self.var_FED7;
+    if(!isDefined(var_5)) {
       func_13696();
     }
   }
@@ -145,8 +145,8 @@ func_E503() {
   func_F842();
 }
 
-func_E504(param_00) {
-  if(!param_00) {
+func_E504(var_0) {
+  if(!var_0) {
     func_8C4D();
     return;
   }
@@ -156,10 +156,10 @@ func_E504(param_00) {
   func_F841();
 }
 
-func_E502(param_00) {
+func_E502(var_0) {
   self.var_FED7 = "none";
   self.var_FE9E = undefined;
-  if(!param_00) {
+  if(!var_0) {
     func_7DB9();
     if(func_1009A()) {
       self.var_1E2B = undefined;
@@ -193,27 +193,27 @@ func_7DB9() {
     return;
   }
 
-  var_00 = self getsafeanimmovedeltapercentage();
-  if(!isDefined(var_00)) {
+  var_0 = self getsafeanimmovedeltapercentage();
+  if(!isDefined(var_0)) {
     if(isDefined(self.covernode)) {
-      var_00 = self.covernode.angles;
+      var_0 = self.covernode.angles;
     } else if(isDefined(self.var_1E2C)) {
-      var_00 = self.var_1E2C.angles;
+      var_0 = self.var_1E2C.angles;
     } else if(isDefined(self.isnodeoccupied)) {
-      var_00 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
+      var_0 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
     } else {
-      var_00 = self.angles;
+      var_0 = self.angles;
     }
   }
 
-  var_01 = 1024;
+  var_1 = 1024;
   if(isDefined(self.isnodeoccupied)) {
-    var_01 = distance(self.origin, self.isnodeoccupied.origin);
+    var_1 = distance(self.origin, self.isnodeoccupied.origin);
   }
 
-  var_02 = self getEye() + anglesToForward(var_00) * var_01;
-  if(!isDefined(self.var_FECF) || distancesquared(var_02, self.var_FECF) > 25) {
-    self.var_FECF = var_02;
+  var_2 = self getEye() + anglesToForward(var_0) * var_1;
+  if(!isDefined(self.var_FECF) || distancesquared(var_2, self.var_FECF) > 25) {
+    self.var_FECF = var_2;
   }
 }
 
@@ -232,11 +232,11 @@ func_E501() {
       func_E26D();
     }
 
-    var_00 = scripts\anim\utility_common::cansuppressenemy();
-    if(self.var_FECA == "suppress" || self.team == "allies" && !isDefined(self.isnodeoccupied) && !var_00) {
-      func_E504(var_00);
+    var_0 = scripts\anim\utility_common::cansuppressenemy();
+    if(self.var_FECA == "suppress" || self.team == "allies" && !isDefined(self.isnodeoccupied) && !var_0) {
+      func_E504(var_0);
     } else {
-      func_E502(var_00);
+      func_E502(var_0);
     }
   }
 }
@@ -262,8 +262,8 @@ func_E778() {
 
   func_F83F();
   func_F840("single", 0);
-  var_00 = lengthsquared(self.origin - self.var_FECF);
-  if(var_00 < squared(512)) {
+  var_0 = lengthsquared(self.origin - self.var_FECF);
+  if(var_0 < squared(512)) {
     self notify("return_to_cover");
     self.var_1006D = 1;
   }
@@ -363,16 +363,16 @@ func_E883() {
   scripts\anim\shared::updatelaserstatus();
 }
 
-func_3DFB(param_00, param_01) {
-  if(isDefined(param_00) != isDefined(param_01)) {
+func_3DFB(var_0, var_1) {
+  if(isDefined(var_0) != isDefined(var_1)) {
     return 1;
   }
 
-  if(!isDefined(param_01)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return param_00 != param_01;
+  return var_0 != var_1;
 }
 
 func_F83F() {
@@ -427,25 +427,25 @@ func_F842() {
     return func_F840("full", 1);
   }
 
-  var_00 = distancesquared(self getshootatpos(), self.var_FECF);
-  var_01 = weaponclass(self.var_394) == "mg";
-  if(self.assertmsg && var_01) {
+  var_0 = distancesquared(self getshootatpos(), self.var_FECF);
+  var_1 = weaponclass(self.var_394) == "mg";
+  if(self.assertmsg && var_1) {
     return func_F840("full", 0);
   }
 
-  if(var_00 < -3036) {
+  if(var_0 < -3036) {
     if(isDefined(self.var_FE9E) && isDefined(self.var_FE9E.var_B14F)) {
       return func_F840("single", 0);
     } else {
       return func_F840("full", 0);
     }
-  } else if(var_00 < 810000 || func_FFC6()) {
+  } else if(var_0 < 810000 || func_FFC6()) {
     if(weaponissemiauto(self.var_394) || func_FFF6()) {
       return func_F840("semi", 1);
     } else {
       return func_F840("burst", 1);
     }
-  } else if(self.assertmsg || var_01 || var_00 < 2560000) {
+  } else if(self.assertmsg || var_1 || var_0 < 2560000) {
     if(func_FFF6()) {
       return func_F840("semi", 0);
     } else {
@@ -457,9 +457,9 @@ func_F842() {
 }
 
 func_F841() {
-  var_00 = distancesquared(self getshootatpos(), self.var_FECF);
+  var_0 = distancesquared(self getshootatpos(), self.var_FECF);
   if(weaponissemiauto(self.var_394)) {
-    if(var_00 < 2560000) {
+    if(var_0 < 2560000) {
       return func_F840("semi", 0);
     }
 
@@ -470,7 +470,7 @@ func_F841() {
     return func_F840("full", 0);
   }
 
-  if(self.assertmsg || var_00 < 2560000) {
+  if(self.assertmsg || var_0 < 2560000) {
     if(func_FFF6()) {
       return func_F840("semi", 0);
     } else {
@@ -481,9 +481,9 @@ func_F841() {
   return func_F840("single", 0);
 }
 
-func_F840(param_00, param_01) {
-  self.var_FED7 = param_00;
-  self.var_6B92 = param_01;
+func_F840(var_0, var_1) {
+  self.var_FED7 = var_0;
+  self.var_6B92 = var_1;
 }
 
 func_FFF6() {
@@ -495,9 +495,9 @@ func_FFF6() {
     return 0;
   }
 
-  var_00 = scripts\anim\utility_common::safemod(int(self.origin[1]), 10000) + 2000;
-  var_01 = int(self.origin[0]) + gettime();
-  return var_01 % 2 * var_00 > var_00;
+  var_0 = scripts\anim\utility_common::safemod(int(self.origin[1]), 10000) + 2000;
+  var_1 = int(self.origin[0]) + gettime();
+  return var_1 % 2 * var_0 > var_0;
 }
 
 func_E26D() {
@@ -524,16 +524,16 @@ func_103A7() {
     return;
   }
 
-  var_00 = scripts\engine\utility::getfx("sniper_glint");
+  var_0 = scripts\engine\utility::getfx("sniper_glint");
   wait(0.2);
   for(;;) {
     if(self.var_394 == self.primaryweapon && scripts\anim\combat_utility::func_D285()) {
       if(distancesquared(self.origin, self.isnodeoccupied.origin) > 65536) {
-        playFXOnTag(var_00, self, "tag_flash");
+        playFXOnTag(var_0, self, "tag_flash");
       }
 
-      var_01 = randomfloatrange(3, 5);
-      wait(var_01);
+      var_1 = randomfloatrange(3, 5);
+      wait(var_1);
     }
 
     wait(0.2);

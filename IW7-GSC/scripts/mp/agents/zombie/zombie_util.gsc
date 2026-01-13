@@ -4,15 +4,15 @@
  * Script: scripts\mp\agents\zombie\zombie_util.gsc
 ****************************************************/
 
-func_38C2(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = 6;
+func_38C2(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var_03 = (0, 0, 1) * param_02;
-  var_04 = param_00 + var_03;
-  var_05 = param_01 + var_03;
-  return capsuletracepassed(var_04, self.fgetarg, self.height - param_02, self, 1, 0, 0, var_05);
+  var_3 = (0, 0, 1) * var_2;
+  var_4 = var_0 + var_3;
+  var_5 = var_1 + var_3;
+  return capsuletracepassed(var_4, self.fgetarg, self.height - var_2, self, 1, 0, 0, var_5);
 }
 
 allowmelee() {
@@ -23,66 +23,66 @@ func_7FA8() {
   return 360 / allowmelee();
 }
 
-func_B63F(param_00, param_01, param_02) {
-  var_03 = param_01 * func_7FA8() - 180;
-  var_04 = param_00 + anglesToForward((0, var_03, 0)) * param_02;
-  return var_04;
+func_B63F(var_0, var_1, var_2) {
+  var_3 = var_1 * func_7FA8() - 180;
+  var_4 = var_0 + anglesToForward((0, var_3, 0)) * var_2;
+  return var_4;
 }
 
-func_7FB0(param_00) {
-  return self.var_B63E[param_00];
+func_7FB0(var_0) {
+  return self.var_B63E[var_0];
 }
 
-func_13141(param_00) {
+func_13141(var_0) {
   if(!isDefined(self.var_B63E)) {
     self.var_B63E = [];
   }
 
-  if(!isDefined(self.var_B63E[param_00])) {
-    self.var_B63E[param_00] = [];
-    for(var_01 = 0; var_01 < allowmelee(); var_01++) {
-      self.var_B63E[param_00][var_01] = spawnStruct();
-      self.var_B63E[param_00][var_01].var_11931 = 0;
-      self.var_B63E[param_00][var_01].var_3FF6 = undefined;
-      self.var_B63E[param_00][var_01].origin = undefined;
-      self.var_B63E[param_00][var_01].var_C1D5 = var_01;
+  if(!isDefined(self.var_B63E[var_0])) {
+    self.var_B63E[var_0] = [];
+    for(var_1 = 0; var_1 < allowmelee(); var_1++) {
+      self.var_B63E[var_0][var_1] = spawnStruct();
+      self.var_B63E[var_0][var_1].var_11931 = 0;
+      self.var_B63E[var_0][var_1].var_3FF6 = undefined;
+      self.var_B63E[var_0][var_1].origin = undefined;
+      self.var_B63E[var_0][var_1].var_C1D5 = var_1;
     }
   }
 }
 
-blendlinktoplayerviewmotion(param_00) {
-  var_01 = param_00.origin;
-  if(isDefined(param_00.var_864C)) {
-    var_01 = param_00.var_864C;
-    if(isDefined(self.var_5719) && param_00 == self.var_5719 && func_8BDA()) {
-      var_02 = func_7FDE();
-      if(isDefined(var_02)) {
-        var_01 = var_02.origin;
+blendlinktoplayerviewmotion(var_0) {
+  var_1 = var_0.origin;
+  if(isDefined(var_0.var_864C)) {
+    var_1 = var_0.var_864C;
+    if(isDefined(self.var_5719) && var_0 == self.var_5719 && func_8BDA()) {
+      var_2 = func_7FDE();
+      if(isDefined(var_2)) {
+        var_1 = var_2.origin;
       }
     }
-  } else if(isplayer(param_00) && param_00 isjumping() || param_00 ishighjumping()) {
-    if(!isDefined(param_00.var_D399)) {
-      param_00.var_D399 = 0;
+  } else if(isplayer(var_0) && var_0 isjumping() || var_0 ishighjumping()) {
+    if(!isDefined(var_0.var_D399)) {
+      var_0.var_D399 = 0;
     }
 
-    if(gettime() > param_00.var_D399) {
-      param_00.var_D398 = getgroundposition(param_00.origin, 15);
-      param_00.var_D399 = gettime();
+    if(gettime() > var_0.var_D399) {
+      var_0.var_D398 = getgroundposition(var_0.origin, 15);
+      var_0.var_D399 = gettime();
     }
 
-    if(isDefined(param_00.var_D398)) {
-      var_01 = param_00.var_D398;
+    if(isDefined(var_0.var_D398)) {
+      var_1 = var_0.var_D398;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_8C39(param_00, param_01) {
-  for(var_02 = 0; var_02 < allowmelee(); var_02++) {
-    var_03 = param_00 func_7FB0(param_01);
-    var_04 = var_03[var_02];
-    if(isDefined(var_04.origin)) {
+func_8C39(var_0, var_1) {
+  for(var_2 = 0; var_2 < allowmelee(); var_2++) {
+    var_3 = var_0 func_7FB0(var_1);
+    var_4 = var_3[var_2];
+    if(isDefined(var_4.origin)) {
       return 1;
     }
   }
@@ -91,14 +91,14 @@ func_8C39(param_00, param_01) {
 }
 
 func_3717() {
-  var_00 = self getnearestnode();
+  var_0 = self getnearestnode();
 }
 
 func_8BDA() {
-  var_00 = self getnearestnode();
-  if(isDefined(var_00) && isDefined(self.var_5719.var_BE81)) {
-    var_01 = self.var_5719.var_BE81["0"];
-    if(isDefined(var_01)) {
+  var_0 = self getnearestnode();
+  if(isDefined(var_0) && isDefined(self.var_5719.var_BE81)) {
+    var_1 = self.var_5719.var_BE81["0"];
+    if(isDefined(var_1)) {
       return 1;
     }
   }
@@ -107,10 +107,10 @@ func_8BDA() {
 }
 
 func_7FDE() {
-  var_00 = self getnearestnode();
-  var_01 = self.var_5719.var_BE81["0"];
-  if(!isnumber(var_01)) {
-    return var_01;
+  var_0 = self getnearestnode();
+  var_1 = self.var_5719.var_BE81["0"];
+  if(!isnumber(var_1)) {
+    return var_1;
   }
 
   return undefined;
@@ -118,8 +118,8 @@ func_7FDE() {
 
 func_100AB() {
   if(func_8BDA()) {
-    var_00 = func_7FDE();
-    if(!isDefined(var_00)) {
+    var_0 = func_7FDE();
+    if(!isDefined(var_0)) {
       return 0;
     }
   }
@@ -127,8 +127,8 @@ func_100AB() {
   return 1;
 }
 
-func_9DE1(param_00) {
-  if(isDefined(self.var_5719) && param_00 == self.var_5719) {
+func_9DE1(var_0) {
+  if(isDefined(self.var_5719) && var_0 == self.var_5719) {
     if(self.var_571A > 5) {
       return 1;
     }
@@ -137,37 +137,37 @@ func_9DE1(param_00) {
   return 0;
 }
 
-func_7FB1(param_00, param_01) {
-  param_00 func_13141(self.var_B640);
-  var_02 = param_00 func_7FB0(self.var_B640);
-  var_03 = param_01;
-  var_04 = self.origin - var_03;
-  var_05 = lengthsquared(var_04);
-  if(var_05 < 256) {
-    var_06 = -1;
-    for(var_07 = 0; var_07 < allowmelee(); var_07++) {
-      var_08 = var_02[var_07];
-      if(isDefined(var_08.var_3FF6) && var_08.var_3FF6 == self) {
-        var_06 = var_08.var_C1D5;
+func_7FB1(var_0, var_1) {
+  var_0 func_13141(self.var_B640);
+  var_2 = var_0 func_7FB0(self.var_B640);
+  var_3 = var_1;
+  var_4 = self.origin - var_3;
+  var_5 = lengthsquared(var_4);
+  if(var_5 < 256) {
+    var_6 = -1;
+    for(var_7 = 0; var_7 < allowmelee(); var_7++) {
+      var_8 = var_2[var_7];
+      if(isDefined(var_8.var_3FF6) && var_8.var_3FF6 == self) {
+        var_6 = var_8.var_C1D5;
       }
     }
 
-    if(var_06 < 0) {
-      var_06 = self getentitynumber() % allowmelee();
+    if(var_6 < 0) {
+      var_6 = self getentitynumber() % allowmelee();
     }
 
-    var_09 = var_06;
+    var_9 = var_6;
   } else {
-    var_0A = angleclamp180(vectortoyaw(var_06)) + 180;
-    var_09 = var_0A / func_7FA8();
-    var_06 = int(var_09 + 0.5);
+    var_0A = angleclamp180(vectortoyaw(var_6)) + 180;
+    var_9 = var_0A / func_7FA8();
+    var_6 = int(var_9 + 0.5);
   }
 
   var_0B = undefined;
   var_0C = -1;
   var_0D = 3;
   var_0E = 2;
-  if(var_09 > var_06) {
+  if(var_9 > var_6) {
     var_0C = var_0C * -1;
     var_0D = var_0D * -1;
     var_0E = var_0E * -1;
@@ -176,51 +176,51 @@ func_7FB1(param_00, param_01) {
   var_0F = allowmelee();
   for(var_10 = 0; var_10 < var_0F / 2 + 1; var_10++) {
     for(var_11 = var_0C; var_11 != var_0D; var_11 = var_11 + var_0E) {
-      var_12 = var_06 + var_10 * var_11;
+      var_12 = var_6 + var_10 * var_11;
       if(var_12 >= var_0F) {
         var_12 = var_12 - var_0F;
       } else if(var_12 < 0) {
         var_12 = var_12 + var_0F;
       }
 
-      var_08 = var_02[var_12];
-      if(!isDefined(var_0B) && gettime() - var_08.var_11931 >= self.var_B641) {
+      var_8 = var_2[var_12];
+      if(!isDefined(var_0B) && gettime() - var_8.var_11931 >= self.var_B641) {
         if(isDefined(level.var_12892) && isDefined(level.var_12892[self.agent_type])) {
           [
             [level.var_12892[self.agent_type]]
-          ](var_08, var_03, self.var_252B, self.fgetarg);
+          ](var_8, var_3, self.var_252B, self.fgetarg);
         } else {
-          func_12892(var_08, var_03, self.var_252B, self.fgetarg);
+          func_12892(var_8, var_3, self.var_252B, self.fgetarg);
         }
       }
 
-      if(!isDefined(var_0B) && isDefined(var_08.origin)) {
-        var_13 = getclosestpointonnavmesh(param_00.origin, self);
-        var_14 = navtrace(var_08.origin, var_13, self, 1);
+      if(!isDefined(var_0B) && isDefined(var_8.origin)) {
+        var_13 = getclosestpointonnavmesh(var_0.origin, self);
+        var_14 = navtrace(var_8.origin, var_13, self, 1);
         if(var_14["fraction"] < 0.95) {
           continue;
         }
 
         var_15 = 0;
-        if(isDefined(var_08.var_3FF6) && var_08.var_3FF6 != self) {
-          var_16 = vectornormalize(var_03 - var_08.var_3FF6.origin) * self.fgetarg * 2;
-          var_15 = distancesquared(var_08.var_3FF6.origin + var_16, var_03);
+        if(isDefined(var_8.var_3FF6) && var_8.var_3FF6 != self) {
+          var_16 = vectornormalize(var_3 - var_8.var_3FF6.origin) * self.fgetarg * 2;
+          var_15 = distancesquared(var_8.var_3FF6.origin + var_16, var_3);
         }
 
-        if(!isalive(var_08.var_3FF6) || !isDefined(var_08.var_3FF6.curmeleetarget) || var_08.var_3FF6.curmeleetarget != param_00 || var_08.var_3FF6 == self || var_05 < var_15) {
-          if(isalive(var_08.var_3FF6) && var_08.var_3FF6 != self) {
-            var_08.var_3FF6 notify("lostSectorClaim");
-            var_08.var_3FF6.var_F0D4 = undefined;
+        if(!isalive(var_8.var_3FF6) || !isDefined(var_8.var_3FF6.curmeleetarget) || var_8.var_3FF6.curmeleetarget != var_0 || var_8.var_3FF6 == self || var_5 < var_15) {
+          if(isalive(var_8.var_3FF6) && var_8.var_3FF6 != self) {
+            var_8.var_3FF6 notify("lostSectorClaim");
+            var_8.var_3FF6.var_F0D4 = undefined;
           }
 
-          if(isDefined(self.var_F0D4) && self.var_F0D4 != var_08) {
+          if(isDefined(self.var_F0D4) && self.var_F0D4 != var_8) {
             self.var_F0D4.var_3FF6 = undefined;
           }
 
-          self.var_F0D4 = var_08;
-          var_08.var_3FF6 = self;
-          var_0B = var_08.origin;
-          thread func_BA13(var_08);
+          self.var_F0D4 = var_8;
+          var_8.var_3FF6 = self;
+          var_0B = var_8.origin;
+          thread func_BA13(var_8);
         }
       }
 
@@ -233,40 +233,40 @@ func_7FB1(param_00, param_01) {
   return var_0B;
 }
 
-func_BA13(param_00) {
+func_BA13(var_0) {
   level endon("game_ended");
   self notify("monitorSectorClaim");
   self endon("monitorSectorClaim");
   self endon("lostSectorClaim");
   scripts\engine\utility::waittill_any_3("death", "disconnect");
-  param_00.var_3FF6 = undefined;
+  var_0.var_3FF6 = undefined;
 }
 
-func_12892(param_00, param_01, param_02, param_03) {
-  if(gettime() - param_00.var_11931 >= 50) {
-    param_00.origin = func_B63F(param_01, param_00.var_C1D5, param_02);
-    param_00.origin = func_5D54(param_00.origin, param_03, 55);
-    param_00.var_11931 = gettime();
+func_12892(var_0, var_1, var_2, var_3) {
+  if(gettime() - var_0.var_11931 >= 50) {
+    var_0.origin = func_B63F(var_1, var_0.var_C1D5, var_2);
+    var_0.origin = func_5D54(var_0.origin, var_3, 55);
+    var_0.var_11931 = gettime();
   }
 }
 
-func_5D54(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_03)) {
-    param_03 = 18;
+func_5D54(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 18;
   }
 
-  var_04 = param_00 + (0, 0, param_03);
-  var_05 = param_00 + (0, 0, param_03 * -1);
-  var_06 = self aiphysicstrace(var_04, var_05, param_01, param_02, 1);
-  if(abs(var_06[2] - var_04[2]) < 0.1) {
+  var_4 = var_0 + (0, 0, var_3);
+  var_5 = var_0 + (0, 0, var_3 * -1);
+  var_6 = self aiphysicstrace(var_4, var_5, var_1, var_2, 1);
+  if(abs(var_6[2] - var_4[2]) < 0.1) {
     return undefined;
   }
 
-  if(abs(var_06[2] - var_05[2]) < 0.1) {
+  if(abs(var_6[2] - var_5[2]) < 0.1) {
     return undefined;
   }
 
-  return var_06;
+  return var_6;
 }
 
 iscrawling() {
@@ -289,14 +289,14 @@ func_7FAF() {
   return self.meleeradiusbasesq;
 }
 
-func_B106(param_00, param_01, param_02, param_03, param_04, param_05) {
-  self.var_B0FE = param_00 * 1000;
-  self.var_B0FF = param_03;
-  self.var_B0FC = isDefined(param_04) && param_04;
-  self.var_B101 = param_05;
-  self.var_B107 = param_02;
+func_B106(var_0, var_1, var_2, var_3, var_4, var_5) {
+  self.var_B0FE = var_0 * 1000;
+  self.var_B0FF = var_3;
+  self.var_B0FC = isDefined(var_4) && var_4;
+  self.var_B101 = var_5;
+  self.var_B107 = var_2;
   self.var_B108 = squared(self.var_B107);
-  func_F794(param_01);
+  func_F794(var_1);
 }
 
 func_B103() {
@@ -319,14 +319,14 @@ func_B102() {
   self.var_B104 = 0;
 }
 
-func_5811(param_00, param_01, param_02, param_03) {
-  self.var_5803 = param_00 * 1000;
-  self.var_5801 = param_01;
-  self.var_5800 = param_02;
+func_5811(var_0, var_1, var_2, var_3) {
+  self.var_5803 = var_0 * 1000;
+  self.var_5801 = var_1;
+  self.var_5800 = var_2;
   self.var_57FE = ["back", "right", "left"];
   self.var_57FF = [];
-  foreach(var_06, var_05 in self.var_57FE) {
-    self.var_57FF[var_06] = level._effect[param_03 + var_05];
+  foreach(var_6, var_5 in self.var_57FE) {
+    self.var_57FF[var_6] = level._effect[var_3 + var_5];
   }
 }
 
@@ -350,16 +350,16 @@ func_5806() {
   self.var_5808 = 0;
 }
 
-func_AB05(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  self.var_AAF8 = param_00 * 1000;
-  self.var_AAF7 = param_01 * 1000;
-  self.var_AAF6 = param_02;
-  self.var_AB01 = param_03;
+func_AB05(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self.var_AAF8 = var_0 * 1000;
+  self.var_AAF7 = var_1 * 1000;
+  self.var_AAF6 = var_2;
+  self.var_AB01 = var_3;
   self.var_AB02 = squared(self.var_AB01);
-  self.var_AB03 = param_04;
+  self.var_AB03 = var_4;
   self.var_AB04 = squared(self.var_AB03);
-  self.var_AAFE = param_06;
-  self.var_AAF5 = param_05;
+  self.var_AAFE = var_6;
+  self.var_AAF5 = var_5;
   self.var_AAFF = 0;
   self.var_AB00 = 0;
 }
@@ -384,7 +384,7 @@ func_AAF9() {
   self.var_AAFB = 0;
 }
 
-func_3C52(param_00, param_01) {
+func_3C52(var_0, var_1) {
   self endon("death");
   self scragentsetscripted(1);
   scripts\mp\agents\_scriptedagents::setstatelocked(1, "ChangeAnimClass");
@@ -392,111 +392,111 @@ func_3C52(param_00, param_01) {
   self orientmode("face angle abs", (0, self.angles[1], 0));
   self ghostlaunched("anim deltas");
   self scragentsetanimscale(1, 1);
-  scripts\mp\agents\_scriptedagents::func_CED6(param_01, randomint(self getanimentrycount(param_01)), "change_anim_class");
-  self _meth_82A3(param_00);
+  scripts\mp\agents\_scriptedagents::func_CED6(var_1, randomint(self getanimentrycount(var_1)), "change_anim_class");
+  self _meth_82A3(var_0);
   scripts\mp\agents\_scriptedagents::setstatelocked(0, "ChangeAnimClass");
   self.inplayerportableradar = 0;
   self scragentsetscripted(0);
 }
 
-missile_setflightmodetop(param_00) {
-  var_01 = 50;
-  var_02 = 32;
-  var_03 = 72;
-  var_04 = getmovedelta(param_00);
-  var_04 = rotatevector(var_04, self.angles);
-  var_05 = self.origin + var_04;
-  var_06 = (0, 0, var_01);
-  var_07 = self aiphysicstrace(var_05 + var_06, var_05 - var_06, var_02, var_03);
-  var_08 = var_07 - var_05;
-  return var_08[2];
+missile_setflightmodetop(var_0) {
+  var_1 = 50;
+  var_2 = 32;
+  var_3 = 72;
+  var_4 = getmovedelta(var_0);
+  var_4 = rotatevector(var_4, self.angles);
+  var_5 = self.origin + var_4;
+  var_6 = (0, 0, var_1);
+  var_7 = self aiphysicstrace(var_5 + var_6, var_5 - var_6, var_2, var_3);
+  var_8 = var_7 - var_5;
+  return var_8[2];
 }
 
-_meth_8088(param_00, param_01, param_02, param_03) {
-  var_04 = getanimlength(param_00);
-  var_05 = getmovedelta(param_00, 0, param_03 / var_04);
-  var_06 = rotatevector(var_05, param_02);
-  return param_01 + var_06;
+_meth_8088(var_0, var_1, var_2, var_3) {
+  var_4 = getanimlength(var_0);
+  var_5 = getmovedelta(var_0, 0, var_3 / var_4);
+  var_6 = rotatevector(var_5, var_2);
+  return var_1 + var_6;
 }
 
-func_7F66(param_00) {
-  var_01 = 0.2;
-  var_02 = getanimlength(param_00);
-  return min(var_01, var_02);
+func_7F66(var_0) {
+  var_1 = 0.2;
+  var_2 = getanimlength(var_0);
+  return min(var_1, var_2);
 }
 
-func_CA1D(param_00, param_01) {
+func_CA1D(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
-  self ghostexplode(self.origin, param_00, param_01);
-  wait(param_01);
+  self ghostexplode(self.origin, var_0, var_1);
+  wait(var_1);
   self ghostlaunched("anim deltas");
 }
 
-botmemoryevent(param_00, param_01) {
-  var_02 = 0;
-  if(param_01 > 1) {
-    var_03 = int(param_01 * 0.5);
-    var_04 = var_03 + param_01 % 2;
-    if(param_00 < 0) {
-      var_02 = randomint(var_04);
+botmemoryevent(var_0, var_1) {
+  var_2 = 0;
+  if(var_1 > 1) {
+    var_3 = int(var_1 * 0.5);
+    var_4 = var_3 + var_1 % 2;
+    if(var_0 < 0) {
+      var_2 = randomint(var_4);
     } else {
-      var_02 = var_03 + randomint(var_04);
+      var_2 = var_3 + randomint(var_4);
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_9DE0(param_00) {
-  var_01 = self.origin[2] + self.height;
-  if(param_00.origin[2] < var_01) {
+func_9DE0(var_0) {
+  var_1 = self.origin[2] + self.height;
+  if(var_0.origin[2] < var_1) {
     return 0;
   }
 
-  var_02 = self.origin[2] + self.height + 2 * self.fgetarg;
-  if(param_00.origin[2] > var_02) {
+  var_2 = self.origin[2] + self.height + 2 * self.fgetarg;
+  if(var_0.origin[2] > var_2) {
     return 0;
   }
 
-  if(isplayer(param_00)) {
-    var_03 = param_00 getvelocity()[2];
-    if(abs(var_03) > 12) {
+  if(isplayer(var_0)) {
+    var_3 = var_0 getvelocity()[2];
+    if(abs(var_3) > 12) {
       return 0;
     }
   }
 
-  var_04 = 15;
-  if(isDefined(param_00.fgetarg)) {
-    var_04 = param_00.fgetarg;
+  var_4 = 15;
+  if(isDefined(var_0.fgetarg)) {
+    var_4 = var_0.fgetarg;
   }
 
-  var_05 = self.fgetarg + var_04;
-  var_05 = var_05 * var_05;
-  if(distance2dsquared(self.origin, param_00.origin) > var_05) {
+  var_5 = self.fgetarg + var_4;
+  var_5 = var_5 * var_5;
+  if(distance2dsquared(self.origin, var_0.origin) > var_5) {
     return 0;
   }
 
   return 1;
 }
 
-func_F702(param_00) {
-  self.loadstartpointtransients = param_00;
+func_F702(var_0) {
+  self.loadstartpointtransients = var_0;
 }
 
-func_4D52(param_00, param_01) {
-  var_02 = 0;
-  if(isDefined(param_00)) {
-    var_03 = param_00 - self gettagorigin("J_SpineLower");
-    var_03 = (var_03[0], var_03[1], 0);
-    var_04 = vectortoangles(vectornormalize(var_03));
-    var_02 = var_04[1];
-  } else if(isDefined(param_01)) {
-    var_04 = vectortoangles(param_01);
-    var_02 = var_04[1] - 180;
+func_4D52(var_0, var_1) {
+  var_2 = 0;
+  if(isDefined(var_0)) {
+    var_3 = var_0 - self gettagorigin("J_SpineLower");
+    var_3 = (var_3[0], var_3[1], 0);
+    var_4 = vectortoangles(vectornormalize(var_3));
+    var_2 = var_4[1];
+  } else if(isDefined(var_1)) {
+    var_4 = vectortoangles(var_1);
+    var_2 = var_4[1] - 180;
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_5539() {
@@ -536,12 +536,12 @@ func_6204() {}
 func_553B() {}
 
 func_F9A2() {
-  var_00 = clamp(level.var_13BDC / 20, 0, 1);
-  var_01 = func_AB6F(var_00, 0.35, 0.55);
-  var_02 = func_AB6F(var_00, 0.06, 0.12);
+  var_0 = clamp(level.var_13BDC / 20, 0, 1);
+  var_1 = func_AB6F(var_0, 0.35, 0.55);
+  var_2 = func_AB6F(var_0, 0.06, 0.12);
   func_B106(5, self.var_B62E * 2, self.var_B62E * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
-  func_5811(5, var_01, "dodge_boost", "boost_dodge_");
-  func_AB05(10, 2, var_02, 550, 350, "leap_boost", level._effect["boost_jump"]);
+  func_5811(5, var_1, "dodge_boost", "boost_dodge_");
+  func_AB05(10, 2, var_2, 550, 350, "leap_boost", level._effect["boost_jump"]);
 }
 
 func_6203() {
@@ -550,11 +550,11 @@ func_6203() {
   func_AAFA();
 }
 
-func_AB6F(param_00, param_01, param_02) {
-  var_03 = param_02 - param_01;
-  var_04 = param_00 * var_03;
-  var_05 = param_01 + var_04;
-  return var_05;
+func_AB6F(var_0, var_1, var_2) {
+  var_3 = var_2 - var_1;
+  var_4 = var_0 * var_3;
+  var_5 = var_1 + var_4;
+  return var_5;
 }
 
 func_553A() {
@@ -563,55 +563,55 @@ func_553A() {
   func_AAF9();
 }
 
-func_CCAB(param_00) {
+func_CCAB(var_0) {
   if(!isDefined(self.var_2CCC)) {
     return;
   }
 
   if(self.var_2CCC != "no_boost_fx") {
-    playFXOnTag(param_00, self, self.var_2CCC);
+    playFXOnTag(var_0, self, self.var_2CCC);
   }
 }
 
-player_in_laststand(param_00) {
-  return param_00.inlaststand;
+player_in_laststand(var_0) {
+  return var_0.inlaststand;
 }
 
-func_6CA8(param_00) {
-  var_01 = [];
-  foreach(var_03 in level.players) {
-    if(player_in_laststand(var_03)) {
-      var_01[var_01.size] = var_03;
+func_6CA8(var_0) {
+  var_1 = [];
+  foreach(var_3 in level.players) {
+    if(player_in_laststand(var_3)) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  var_05 = [];
-  foreach(var_07 in param_00) {
-    if(func_C04C(var_07)) {
+  var_5 = [];
+  foreach(var_7 in var_0) {
+    if(func_C04C(var_7)) {
       continue;
     }
 
-    var_08 = 0;
-    foreach(var_03 in var_01) {
-      if(distancesquared(var_07.origin, var_03.origin) < 65536) {
-        var_08 = 1;
+    var_8 = 0;
+    foreach(var_3 in var_1) {
+      if(distancesquared(var_7.origin, var_3.origin) < 65536) {
+        var_8 = 1;
         break;
       }
     }
 
-    if(var_08) {
+    if(var_8) {
       continue;
     }
 
-    var_05[var_05.size] = var_07;
+    var_5[var_5.size] = var_7;
   }
 
-  return var_05;
+  return var_5;
 }
 
 func_13D9C() {
-  var_00 = self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh;
-  return distancesquared(self.origin, self.curmeleetarget.origin) <= var_00;
+  var_0 = self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh;
+  return distancesquared(self.origin, self.curmeleetarget.origin) <= var_0;
 }
 
 func_13D9A() {
@@ -619,36 +619,36 @@ func_13D9A() {
     return func_13D9B();
   }
 
-  var_00 = distancesquared(self.origin, self.curmeleetarget.origin) <= func_7FAF();
-  return var_00;
+  var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= func_7FAF();
+  return var_0;
 }
 
 func_13D9B() {
-  var_00 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq;
-  if(!var_00 && isplayer(self.curmeleetarget) || isagent(self.curmeleetarget)) {
-    var_01 = undefined;
-    var_01 = self.curmeleetarget _meth_845B();
-    if(isDefined(var_01) && isDefined(var_01.var_336) && var_01.var_336 == "care_package") {
-      var_00 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
+  var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq;
+  if(!var_0 && isplayer(self.curmeleetarget) || isagent(self.curmeleetarget)) {
+    var_1 = undefined;
+    var_1 = self.curmeleetarget _meth_845B();
+    if(isDefined(var_1) && isDefined(var_1.var_336) && var_1.var_336 == "care_package") {
+      var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 
-  if(!var_00 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
+  if(!var_0 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
     if(length(self getvelocity()) < 5) {
-      var_00 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
+      var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_F794(param_00) {
-  self.var_B62D = param_00;
-  self.var_B630 = param_00 * param_00;
+func_F794(var_0) {
+  self.var_B62D = var_0;
+  self.var_B630 = var_0 * var_0;
 }
 
-func_C04C(param_00) {
-  return !isDefined(param_00.var_13FAA);
+func_C04C(var_0) {
+  return !isDefined(var_0.var_13FAA);
 }
 
 _meth_8252() {
@@ -687,17 +687,17 @@ func_54BE() {
   return 0;
 }
 
-func_A00D(param_00) {
-  var_01 = 0;
-  var_02 = param_00[2] - self.origin[2];
-  var_01 = var_02 <= self.var_2539 && var_02 >= self.var_253A;
-  if(!var_01 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
+func_A00D(var_0) {
+  var_1 = 0;
+  var_2 = var_0[2] - self.origin[2];
+  var_1 = var_2 <= self.var_2539 && var_2 >= self.var_253A;
+  if(!var_1 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
     if(length(self getvelocity()) < 5) {
-      var_01 = var_02 <= self.var_2539 * 2 && var_02 >= self.var_253A;
+      var_1 = var_2 <= self.var_2539 * 2 && var_2 >= self.var_253A;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_138E7() {
@@ -717,8 +717,8 @@ func_9E97() {
 }
 
 ismeleeblocked_default() {
-  var_00 = self.origin + (0, 0, self.var_B5F9);
-  var_01 = self.curmeleetarget.origin + (0, 0, self.var_B5F9);
+  var_0 = self.origin + (0, 0, self.var_B5F9);
+  var_1 = self.curmeleetarget.origin + (0, 0, self.var_B5F9);
   if(!isplayer(self.curmeleetarget) && !isai(self.curmeleetarget)) {
     return 0;
   }
@@ -729,25 +729,25 @@ ismeleeblocked_default() {
     }
   }
 
-  var_02 = scripts\common\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
-  if(scripts\common\trace::ray_trace_passed(var_00, var_01, self.curmeleetarget, var_02)) {
+  var_2 = scripts\common\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
+  if(scripts\common\trace::ray_trace_passed(var_0, var_1, self.curmeleetarget, var_2)) {
     return 0;
   }
 
   return 1;
 }
 
-isreallyalive(param_00) {
-  if(isalive(param_00) && !isDefined(param_00.fauxdeath)) {
+isreallyalive(var_0) {
+  if(isalive(var_0) && !isDefined(var_0.fauxdeath)) {
     return 1;
   }
 
   return 0;
 }
 
-func_DD7C(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+func_DD7C(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   if(!isDefined(self.curmeleetarget)) {
@@ -767,58 +767,58 @@ func_DD7C(param_00, param_01) {
       return 0;
     }
 
-    if(param_00 == "offmesh" && !func_13D9C()) {
+    if(var_0 == "offmesh" && !func_13D9C()) {
       return 0;
     }
 
-    if(param_00 == "normal" && !func_13D9A()) {
+    if(var_0 == "normal" && !func_13D9A()) {
       return 0;
-    } else if(param_00 == "base" && !func_13D9B()) {
+    } else if(var_0 == "base" && !func_13D9B()) {
       return 0;
     }
   }
 
-  if(param_01 && func_9E97()) {
+  if(var_1 && func_9E97()) {
     return 0;
   }
 
   return 1;
 }
 
-func_7FAA(param_00) {
+func_7FAA(var_0) {
   if(!isDefined(self.var_B5E0)) {
     self.var_B5E0 = spawnStruct();
   }
 
-  if(func_9DE1(param_00) && !func_8BDA()) {
+  if(func_9DE1(var_0) && !func_8BDA()) {
     func_3717();
   }
 
-  var_01 = blendlinktoplayerviewmotion(param_00);
-  self.var_B5E0.var_656D = var_01;
-  var_02 = func_7FB1(param_00, var_01);
-  if(isDefined(var_02)) {
+  var_1 = blendlinktoplayerviewmotion(var_0);
+  self.var_B5E0.var_656D = var_1;
+  var_2 = func_7FB1(var_0, var_1);
+  if(isDefined(var_2)) {
     self.var_B5E0.var_1312B = 1;
-    self.var_B5E0.origin = var_02;
+    self.var_B5E0.origin = var_2;
   } else {
     self.var_B5E0.var_1312B = 0;
-    self.var_B5E0.origin = var_01;
+    self.var_B5E0.origin = var_1;
     if(isDefined(self.var_5719)) {
       if(!isDefined(func_5D54(self.var_B5E0.origin, 15, 55))) {
         if(!isDefined(self.var_DC9A)) {
           self.var_DC9A = [];
-          for(var_03 = 0; var_03 < allowmelee(); var_03++) {
-            self.var_DC9A[self.var_DC9A.size] = var_03;
+          for(var_3 = 0; var_3 < allowmelee(); var_3++) {
+            self.var_DC9A[self.var_DC9A.size] = var_3;
           }
 
           self.var_DC9A = scripts\engine\utility::array_randomize(self.var_DC9A);
         }
 
-        foreach(var_05 in self.var_DC9A) {
-          var_06 = param_00 func_7FB0(self.var_B640);
-          var_07 = var_06[var_05];
-          if(isDefined(var_07.origin)) {
-            self.var_B5E0.origin = var_07.origin;
+        foreach(var_5 in self.var_DC9A) {
+          var_6 = var_0 func_7FB0(self.var_B640);
+          var_7 = var_6[var_5];
+          if(isDefined(var_7.origin)) {
+            self.var_B5E0.origin = var_7.origin;
             break;
           }
         }
@@ -829,35 +829,35 @@ func_7FAA(param_00) {
   return self.var_B5E0;
 }
 
-shouldignoreent(param_00) {
-  if(scripts\engine\utility::istrue(player_in_laststand(param_00))) {
+shouldignoreent(var_0) {
+  if(scripts\engine\utility::istrue(player_in_laststand(var_0))) {
     return 1;
   }
 
-  if(isDefined(param_00.team) && isDefined(self.team) && self.team == param_00.team) {
+  if(isDefined(var_0.team) && isDefined(self.team) && self.team == var_0.team) {
     return 1;
   }
 
-  if(isplayerteleporting(param_00)) {
+  if(isplayerteleporting(var_0)) {
     return 1;
   }
 
   if(isDefined(level.killingtimevalidationcheck)) {
     if(![
         [level.killingtimevalidationcheck]
-      ](self, param_00)) {
+      ](self, var_0)) {
       return 0;
     }
   }
 
-  if(isDefined(param_00.killing_time)) {
+  if(isDefined(var_0.killing_time)) {
     return 1;
   }
 
   if(isDefined(level.var_1002D)) {
     if([
         [level.var_1002D]
-      ](param_00)) {
+      ](var_0)) {
       return 1;
     }
   }
@@ -865,19 +865,19 @@ shouldignoreent(param_00) {
   return 0;
 }
 
-isplayerteleporting(param_00) {
-  return isDefined(param_00.var_9987) && param_00.var_9987;
+isplayerteleporting(var_0) {
+  return isDefined(var_0.var_9987) && var_0.var_9987;
 }
 
-func_38D1(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = 6;
+func_38D1(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var_03 = (0, 0, 1) * param_02;
-  var_04 = param_00 + var_03;
-  var_05 = param_01 + var_03;
-  return capsuletracepassed(var_04, self.fgetarg, self.height - param_02, self, 1, 0, 0, var_05);
+  var_3 = (0, 0, 1) * var_2;
+  var_4 = var_0 + var_3;
+  var_5 = var_1 + var_3;
+  return capsuletracepassed(var_4, self.fgetarg, self.height - var_2, self, 1, 0, 0, var_5);
 }
 
 func_7E79() {
@@ -888,31 +888,31 @@ func_7E79() {
   return "dismemberSound";
 }
 
-func_7E59(param_00, param_01) {
-  var_02 = self.agent_type;
-  var_03 = level.var_1BA4[var_02].var_2552["heavy_damage_threshold"];
-  if(param_00 < var_03 && !param_01) {
+func_7E59(var_0, var_1) {
+  var_2 = self.agent_type;
+  var_3 = level.var_1BA4[var_2].var_2552["heavy_damage_threshold"];
+  if(var_0 < var_3 && !var_1) {
     return "light";
   }
 
   return "heavy";
 }
 
-func_4E0C(param_00) {
-  return level.var_1BBA.var_4E2D["hitLoc"][param_00];
+func_4E0C(var_0) {
+  return level.var_1BBA.var_4E2D["hitLoc"][var_0];
 }
 
-func_4E0D(param_00) {
-  var_01 = scripts\mp\agents\_scriptedagents::func_7DBD(param_00);
-  return level.var_1BBA.var_4E2D["hitDirection"][var_01];
+func_4E0D(var_0) {
+  var_1 = scripts\mp\agents\_scriptedagents::func_7DBD(var_0);
+  return level.var_1BBA.var_4E2D["hitDirection"][var_1];
 }
 
-botnodepickmultiple(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_02)) {
-    var_04 = param_03[param_00][param_01][param_02];
+botnodepickmultiple(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_2)) {
+    var_4 = var_3[var_0][var_1][var_2];
   } else {
-    var_04 = var_04[param_01][param_02];
+    var_4 = var_4[var_1][var_2];
   }
 
-  return var_04[randomint(var_04.size)];
+  return var_4[randomint(var_4.size)];
 }

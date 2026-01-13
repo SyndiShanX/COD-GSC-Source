@@ -33,8 +33,8 @@ func_325D() {
   }
 
   for(;;) {
-    self waittill("bulletwhizby", var_00);
-    if(!isDefined(var_00.team) || self.team == var_00.team) {
+    self waittill("bulletwhizby", var_0);
+    if(!isDefined(var_0.team) || self.team == var_0.team) {
       continue;
     }
 
@@ -50,7 +50,7 @@ func_325D() {
       continue;
     }
 
-    self.var_13D13 = var_00;
+    self.var_13D13 = var_0;
     self animcustom(::func_325E);
   }
 }
@@ -73,9 +73,9 @@ func_BF20() {
   if(isDefined(self._stealth) && self.opcode::OP_inequality != "combat") {
     func_10F51();
   } else {
-    var_00 = func_7FE1();
+    var_0 = func_7FE1();
     self clearanim( % root, 0.2);
-    self _meth_82E7("reactanim", var_00, 1, 0.2, 1);
+    self _meth_82E7("reactanim", var_0, 1, 0.2, 1);
     scripts\anim\shared::donotetracks("reactanim");
   }
 

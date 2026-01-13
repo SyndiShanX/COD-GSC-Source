@@ -24,82 +24,82 @@ func_C799() {
     return;
   }
 
-  foreach(var_01 in level.participants) {
-    if(!isDefined(var_01.team)) {
+  foreach(var_1 in level.participants) {
+    if(!isDefined(var_1.team)) {
       continue;
     }
 
-    if(var_01.team == self.team) {
-      var_02 = scripts\mp\utility::outlineenableforplayer(var_01, "cyan", self, 0, 0, "killstreak");
-      thread func_5604(var_02, var_01);
+    if(var_1.team == self.team) {
+      var_2 = scripts\mp\utility::outlineenableforplayer(var_1, "cyan", self, 0, 0, "killstreak");
+      thread func_5604(var_2, var_1);
     }
   }
 }
 
-func_5604(param_00, param_01) {
+func_5604(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   scripts\engine\utility::waittill_any_timeout_no_endon_death_2(10, "death", "joined_team");
-  scripts\mp\utility::outlinedisable(param_00, param_01);
+  scripts\mp\utility::outlinedisable(var_0, var_1);
 }
 
 func_2652() {
   self endon("endComLink");
-  var_00 = 3;
-  var_01 = 3;
-  var_02 = 0.5;
-  var_03 = 0;
+  var_0 = 3;
+  var_1 = 3;
+  var_2 = 0.5;
+  var_3 = 0;
   for(;;) {
-    var_04 = sortbydistance(level.participants, self.origin);
-    foreach(var_06 in var_04) {
-      if(!isDefined(var_06)) {
+    var_4 = sortbydistance(level.participants, self.origin);
+    foreach(var_6 in var_4) {
+      if(!isDefined(var_6)) {
         continue;
       }
 
-      if(var_06 == self) {
+      if(var_6 == self) {
         continue;
       }
 
-      if(level.teambased && var_06.team == self.team) {
+      if(level.teambased && var_6.team == self.team) {
         continue;
       }
 
-      if(var_06 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
+      if(var_6 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
         continue;
       }
 
-      if(!scripts\mp\utility::isreallyalive(var_06)) {
-        if(isDefined(var_06.var_2A3B)) {
-          var_06.var_2A3B delete();
+      if(!scripts\mp\utility::isreallyalive(var_6)) {
+        if(isDefined(var_6.var_2A3B)) {
+          var_6.var_2A3B delete();
         }
 
         continue;
       }
 
-      if(isDefined(var_06.var_12AF1)) {
-        if(isDefined(var_06.var_2A3B)) {
-          var_06.var_2A3B delete();
+      if(isDefined(var_6.var_12AF1)) {
+        if(isDefined(var_6.var_2A3B)) {
+          var_6.var_2A3B delete();
         }
 
-        var_06.var_12AF1.origin = var_06.origin;
-        var_06.var_12AF2.origin = var_06.origin;
-        var_06.var_12AF2.alpha = 0.95;
-        var_06.var_12AF2 thread func_6AB8(var_01, var_03);
+        var_6.var_12AF1.origin = var_6.origin;
+        var_6.var_12AF2.origin = var_6.origin;
+        var_6.var_12AF2.alpha = 0.95;
+        var_6.var_12AF2 thread func_6AB8(var_1, var_3);
       } else {
-        var_07 = spawn("script_model", var_06.origin);
-        var_07 setModel("tag_origin");
-        var_07.triggerportableradarping = var_06;
-        var_06.var_12AF1 = var_07;
-        var_06.var_12AF2 = var_07 scripts\mp\entityheadicons::setheadicon(self, "headicon_enemy", (0, 0, 48), 2, 2, 1, 0.01, 0, 1, 1, 0);
-        var_06.var_12AF2 setwaypointedgestyle_rotatingicon();
-        var_06.var_12AF2.alpha = 0.95;
-        var_06.var_12AF2 thread func_6AB8(var_01, var_03);
+        var_7 = spawn("script_model", var_6.origin);
+        var_7 setModel("tag_origin");
+        var_7.triggerportableradarping = var_6;
+        var_6.var_12AF1 = var_7;
+        var_6.var_12AF2 = var_7 scripts\mp\entityheadicons::setheadicon(self, "headicon_enemy", (0, 0, 48), 2, 2, 1, 0.01, 0, 1, 1, 0);
+        var_6.var_12AF2 setwaypointedgestyle_rotatingicon();
+        var_6.var_12AF2.alpha = 0.95;
+        var_6.var_12AF2 thread func_6AB8(var_1, var_3);
       }
 
-      wait(var_02);
+      wait(var_2);
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
@@ -108,9 +108,9 @@ func_B37E() {
   self endon("disconnect");
   self endon("endComLink");
   level endon("game_ended");
-  var_00 = 3;
-  var_01 = 3;
-  var_02 = 0.5;
+  var_0 = 3;
+  var_1 = 3;
+  var_2 = 0.5;
   if(!isDefined(self)) {
     return;
   }
@@ -123,38 +123,38 @@ func_B37E() {
     self.var_12AF1.origin = self.origin;
     self.var_12AF2.origin = self.origin;
     self.var_12AF2.alpha = 0.95;
-    self.var_12AF2 thread func_6AB8(var_01, var_02);
+    self.var_12AF2 thread func_6AB8(var_1, var_2);
   } else {
-    var_03 = spawn("script_model", self.origin);
-    var_03 setModel("tag_origin");
-    var_03.triggerportableradarping = self;
-    self.var_12AF1 = var_03;
-    self.var_12AF2 = var_03 scripts\mp\entityheadicons::setheadicon(scripts\mp\utility::getotherteam(self.team), "headicon_enemy", (0, 0, 48), 14, 14, 1, 0.01, 0, 1, 1, 0);
+    var_3 = spawn("script_model", self.origin);
+    var_3 setModel("tag_origin");
+    var_3.triggerportableradarping = self;
+    self.var_12AF1 = var_3;
+    self.var_12AF2 = var_3 scripts\mp\entityheadicons::setheadicon(scripts\mp\utility::getotherteam(self.team), "headicon_enemy", (0, 0, 48), 14, 14, 1, 0.01, 0, 1, 1, 0);
     self.var_12AF2.alpha = 0.95;
-    self.var_12AF2 thread func_6AB8(var_01, var_02);
+    self.var_12AF2 thread func_6AB8(var_1, var_2);
     self.var_12AF2 setwaypointedgestyle_rotatingicon();
   }
 
-  wait(var_01);
+  wait(var_1);
   if(isDefined(self.var_2A3B)) {
     self.var_2A3B delete();
   }
 }
 
-func_6AB8(param_00, param_01) {
+func_6AB8(var_0, var_1) {
   self notify("fadeOut");
   self endon("fadeOut");
-  var_02 = param_00 - param_01;
+  var_2 = var_0 - var_1;
   wait(0.05);
   if(!isDefined(self)) {
     return;
   }
 
-  self fadeovertime(var_02);
+  self fadeovertime(var_2);
   self.alpha = 0;
 }
 
-func_13B7F(param_00) {
+func_13B7F(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
@@ -167,7 +167,7 @@ watchempdamage() {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
-    self waittill("emp_damage", var_00, var_01);
+    self waittill("emp_damage", var_0, var_1);
     scripts\engine\utility::waitframe();
     self notify("endComLink");
   }

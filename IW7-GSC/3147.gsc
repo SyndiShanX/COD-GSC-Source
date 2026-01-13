@@ -78,78 +78,78 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_11D85(param_00, param_01, param_02, param_03) {
+func_11D85(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_11ED3(param_00, param_01, param_02, param_03) {
+func_11ED3(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_124B8(param_00, param_01, param_02, param_03) {
+func_124B8(var_0, var_1, var_2, var_3) {
   return isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Left";
 }
 
-func_11D87(param_00, param_01, param_02, param_03) {
+func_11D87(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch";
 }
 
-func_11CFC(param_00, param_01, param_02, param_03) {
+func_11CFC(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_11ED5(param_00, param_01, param_02, param_03) {
+func_11ED5(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch";
 }
 
-func_11E2D(param_00, param_01, param_02, param_03) {
+func_11E2D(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_11D8B(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_11D8B(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_11D89(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "full" || self.var_1198.shootparams.var_1119D == "burst";
+func_11D89(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-func_11D8A(param_00, param_01, param_02, param_03) {
+func_11D8A(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_11ED9(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_11ED9(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_11ED7(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "fire" || self.var_1198.shootparams.var_1119D == "burst";
+func_11ED7(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "fire" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-func_11ED8(param_00, param_01, param_02, param_03) {
+func_11ED8(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_11E3E(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_11E3E(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_11E3C(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "full" || self.var_1198.shootparams.var_1119D == "burst";
+func_11E3C(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-func_11E3D(param_00, param_01, param_02, param_03) {
+func_11E3D(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-func_11D0C(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_11D0C(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_11D0A(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_1119D == "full" || self.var_1198.shootparams.var_1119D == "burst";
+func_11D0A(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-func_11D0B(param_00, param_01, param_02, param_03) {
+func_11D0B(var_0, var_1, var_2, var_3) {
   return 1;
 }

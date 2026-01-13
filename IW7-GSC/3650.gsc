@@ -104,153 +104,153 @@ init() {
 
 func_98B0() {}
 
-giveperks(param_00) {
-  foreach(var_02 in param_00) {
-    giveperk(var_02);
+giveperks(var_0) {
+  foreach(var_2 in var_0) {
+    giveperk(var_2);
   }
 }
 
-giveperk(param_00) {
-  _setperk(param_00);
+giveperk(var_0) {
+  _setperk(var_0);
 }
 
-removeperk(param_00) {
-  _unsetperk(param_00);
+removeperk(var_0) {
+  _unsetperk(var_0);
 }
 
-takeallweapons(param_00) {
-  foreach(var_02 in param_00) {
-    switchtoweaponimmediate(var_02);
+takeallweapons(var_0) {
+  foreach(var_2 in var_0) {
+    switchtoweaponimmediate(var_2);
   }
 }
 
-switchtoweaponimmediate(param_00) {
-  if(isDefined(level.var_12F75[param_00])) {
-    var_01 = level.var_12F75[param_00];
-    while(_hasperk(var_01)) {
-      _unsetperk(var_01);
+switchtoweaponimmediate(var_0) {
+  if(isDefined(level.var_12F75[var_0])) {
+    var_1 = level.var_12F75[var_0];
+    while(_hasperk(var_1)) {
+      _unsetperk(var_1);
     }
   }
 
-  _setperk(param_00);
+  _setperk(var_0);
 }
 
-func_E187(param_00) {
-  _unsetperk(param_00);
+func_E187(var_0) {
+  _unsetperk(var_0);
 }
 
-_setperk(param_00) {
-  if(!isDefined(self.perks[param_00])) {
-    self.perks[param_00] = 1;
+_setperk(var_0) {
+  if(!isDefined(self.perks[var_0])) {
+    self.perks[var_0] = 1;
   } else {
-    self.perks[param_00]++;
+    self.perks[var_0]++;
   }
 
-  if(self.perks[param_00] == 1 && !isDefined(self.perksblocked[param_00])) {
-    func_13D2(param_00);
+  if(self.perks[var_0] == 1 && !isDefined(self.perksblocked[var_0])) {
+    func_13D2(var_0);
   }
 }
 
-func_13D2(param_00) {
-  var_01 = level.perksetfuncs[param_00];
-  if(isDefined(var_01)) {
-    self thread[[var_01]]();
+func_13D2(var_0) {
+  var_1 = level.perksetfuncs[var_0];
+  if(isDefined(var_1)) {
+    self thread[[var_1]]();
   }
 
-  self setperk(param_00, !isDefined(level.scriptperks[param_00]));
+  self setperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
 
-_unsetperk(param_00) {
-  if(!isDefined(self.perks[param_00])) {
+_unsetperk(var_0) {
+  if(!isDefined(self.perks[var_0])) {
     return;
   }
 
-  self.perks[param_00]--;
-  if(self.perks[param_00] == 0) {
-    if(!isDefined(self.perksblocked[param_00])) {
-      func_1431(param_00);
+  self.perks[var_0]--;
+  if(self.perks[var_0] == 0) {
+    if(!isDefined(self.perksblocked[var_0])) {
+      func_1431(var_0);
     }
 
-    self.perks[param_00] = undefined;
+    self.perks[var_0] = undefined;
   }
 }
 
-func_1431(param_00) {
-  if(isDefined(level.perkunsetfuncs[param_00])) {
-    self thread[[level.perkunsetfuncs[param_00]]]();
+func_1431(var_0) {
+  if(isDefined(level.perkunsetfuncs[var_0])) {
+    self thread[[level.perkunsetfuncs[var_0]]]();
   }
 }
 
-_hasperk(param_00) {
-  return isDefined(self.perks) && isDefined(self.perks[param_00]);
+_hasperk(var_0) {
+  return isDefined(self.perks) && isDefined(self.perks[var_0]);
 }
 
 _clearperks() {
-  foreach(var_02, var_01 in self.perks) {
-    if(func_12F9(var_02)) {
+  foreach(var_2, var_1 in self.perks) {
+    if(func_12F9(var_2)) {
       continue;
     }
 
-    if(isDefined(level.perkunsetfuncs[var_02])) {
-      self[[level.perkunsetfuncs[var_02]]]();
+    if(isDefined(level.perkunsetfuncs[var_2])) {
+      self[[level.perkunsetfuncs[var_2]]]();
     }
 
-    self.perks[var_02] = undefined;
+    self.perks[var_2] = undefined;
   }
 
   self.perksblocked = [];
 }
 
 func_11AB() {
-  foreach(var_02, var_01 in self.perks) {
-    if(!func_12F9(var_02)) {
+  foreach(var_2, var_1 in self.perks) {
+    if(!func_12F9(var_2)) {
       continue;
     }
 
-    if(isDefined(level.perkunsetfuncs[var_02])) {
-      self[[level.perkunsetfuncs[var_02]]]();
+    if(isDefined(level.perkunsetfuncs[var_2])) {
+      self[[level.perkunsetfuncs[var_2]]]();
     }
 
-    self.perks[var_02] = undefined;
+    self.perks[var_2] = undefined;
   }
 
   self.perksblocked = [];
 }
 
-func_12F9(param_00) {
-  if(scripts\engine\utility::array_contains(level.var_12F79, param_00)) {
+func_12F9(var_0) {
+  if(scripts\engine\utility::array_contains(level.var_12F79, var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-cameraunlink(param_00) {
-  return tablelookup("sp\perkTable.csv", 1, param_00, 3);
+cameraunlink(var_0) {
+  return tablelookup("sp\perkTable.csv", 1, var_0, 3);
 }
 
-cancelmantle(param_00) {
-  return tablelookupistring("sp\perkTable.csv", 1, param_00, 2);
+cancelmantle(var_0) {
+  return tablelookupistring("sp\perkTable.csv", 1, var_0, 2);
 }
 
-blockperkfunction(param_00) {
-  if(!isDefined(self.perksblocked[param_00])) {
-    self.perksblocked[param_00] = 1;
+blockperkfunction(var_0) {
+  if(!isDefined(self.perksblocked[var_0])) {
+    self.perksblocked[var_0] = 1;
   } else {
-    self.perksblocked[param_00]++;
+    self.perksblocked[var_0]++;
   }
 
-  if(self.perksblocked[param_00] == 1 && _hasperk(param_00)) {
-    func_1431(param_00);
+  if(self.perksblocked[var_0] == 1 && _hasperk(var_0)) {
+    func_1431(var_0);
   }
 }
 
-unblockperkfunction(param_00) {
-  self.perksblocked[param_00]--;
-  if(self.perksblocked[param_00] == 0) {
-    self.perksblocked[param_00] = undefined;
-    if(_hasperk(param_00)) {
-      func_13D2(param_00);
+unblockperkfunction(var_0) {
+  self.perksblocked[var_0]--;
+  if(self.perksblocked[var_0] == 0) {
+    self.perksblocked[var_0] = undefined;
+    if(_hasperk(var_0)) {
+      func_13D2(var_0);
     }
   }
 }

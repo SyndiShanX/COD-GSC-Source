@@ -10,8 +10,8 @@ func_14FB() {
 
 func_14FD() {
   for(;;) {
-    level waittill("player_spawned", var_00);
-    if(isai(var_00)) {
+    level waittill("player_spawned", var_0);
+    if(isai(var_0)) {
       continue;
     }
   }
@@ -36,32 +36,32 @@ func_14F9() {
 func_2B64() {
   self endon("death");
   self endon("disconnect");
-  var_00 = 262144;
-  var_01 = 0;
-  foreach(var_03 in level.participants) {
-    if(!scripts\mp\utility::isreallyalive(var_03)) {
+  var_0 = 262144;
+  var_1 = 0;
+  foreach(var_3 in level.participants) {
+    if(!scripts\mp\utility::isreallyalive(var_3)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isenemy(var_03)) {
+    if(!scripts\mp\utility::isenemy(var_3)) {
       continue;
     }
 
-    if(var_03.origin[2] > self.origin[2]) {
+    if(var_3.origin[2] > self.origin[2]) {
       continue;
     }
 
-    var_04 = var_03.origin - self.origin;
-    var_05 = length2dsquared(var_04);
-    if(var_05 > var_00) {
+    var_4 = var_3.origin - self.origin;
+    var_5 = length2dsquared(var_4);
+    if(var_5 > var_0) {
       continue;
     }
 
-    thread func_2B63(var_03, distance2d(var_03.origin, self.origin));
-    var_01 = 1;
+    thread func_2B63(var_3, distance2d(var_3.origin, self.origin));
+    var_1 = 1;
   }
 
-  if(!var_01) {
+  if(!var_1) {
     wait(0.5);
     self iprintlnbold(".No Targets.");
   }
@@ -70,63 +70,63 @@ func_2B64() {
 func_2B62() {
   self endon("death");
   self endon("disconnect");
-  var_00 = 262144;
-  var_01 = 0;
-  foreach(var_03 in level.participants) {
-    if(!scripts\mp\utility::isreallyalive(var_03)) {
+  var_0 = 262144;
+  var_1 = 0;
+  foreach(var_3 in level.participants) {
+    if(!scripts\mp\utility::isreallyalive(var_3)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isenemy(var_03)) {
+    if(!scripts\mp\utility::isenemy(var_3)) {
       continue;
     }
 
-    if(!var_03 isjumping() && !var_03 iswallrunning()) {
+    if(!var_3 isjumping() && !var_3 iswallrunning()) {
       continue;
     }
 
-    if(var_03.origin[2] < self.origin[2]) {
+    if(var_3.origin[2] < self.origin[2]) {
       continue;
     }
 
-    var_04 = var_03.origin - self.origin;
-    var_05 = length2dsquared(var_04);
-    if(var_05 > var_00) {
+    var_4 = var_3.origin - self.origin;
+    var_5 = length2dsquared(var_4);
+    if(var_5 > var_0) {
       continue;
     }
 
-    thread func_2B63(var_03, distance2d(var_03.origin, self.origin));
-    var_01 = 1;
+    thread func_2B63(var_3, distance2d(var_3.origin, self.origin));
+    var_1 = 1;
   }
 
-  if(!var_01) {
+  if(!var_1) {
     wait(0.5);
     self iprintlnbold(".No Targets.");
   }
 }
 
-func_2B63(param_00, param_01) {
+func_2B63(var_0, var_1) {
   self endon("death");
-  var_02 = scripts\mp\utility::outlineenableforplayer(param_00, "orange", self, 0, 1, "level_script");
-  var_03 = param_01 * 0.0001;
-  wait(0.1 * var_03);
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+  var_2 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", self, 0, 1, "level_script");
+  var_3 = var_1 * 0.0001;
+  wait(0.1 * var_3);
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return;
   }
 
   self earthquakeforplayer(0.2, 0.5, self.origin, 64);
-  var_04 = param_00 gettagorigin("j_mainroot");
-  var_05 = self gettagorigin("j_shouldertwist_le");
-  var_06 = scripts\mp\utility::_magicbullet("iw7_chargeshot_mp", var_05, var_04, self);
-  if(isDefined(param_00)) {
-    scripts\mp\utility::outlinedisable(var_02, param_00);
+  var_4 = var_0 gettagorigin("j_mainroot");
+  var_5 = self gettagorigin("j_shouldertwist_le");
+  var_6 = scripts\mp\utility::_magicbullet("iw7_chargeshot_mp", var_5, var_4, self);
+  if(isDefined(var_0)) {
+    scripts\mp\utility::outlinedisable(var_2, var_0);
   }
 }
 
 getcenterfrac() {
-  var_00 = ["physicscontents_solid", "physicscontents_glass", "physicscontents_item", "physicscontents_clipshot", "physicscontents_actor", "physicscontents_playerclip", "physicscontents_fakeactor", "physicscontents_vehicle", "physicscontents_structural"];
-  var_01 = physics_createcontents(var_00);
-  return var_01;
+  var_0 = ["physicscontents_solid", "physicscontents_glass", "physicscontents_item", "physicscontents_clipshot", "physicscontents_actor", "physicscontents_playerclip", "physicscontents_fakeactor", "physicscontents_vehicle", "physicscontents_structural"];
+  var_1 = physics_createcontents(var_0);
+  return var_1;
 }
 
 func_14F7() {

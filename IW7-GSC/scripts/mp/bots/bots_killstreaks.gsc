@@ -39,52 +39,52 @@ bot_killstreak_setup() {
   thread scripts\mp\bots\_bots_killstreaks_remote_vehicle::remote_vehicle_setup();
 }
 
-bot_register_killstreak_func(param_00, param_01, param_02, param_03) {
-  level.killstreak_botfunc[param_00] = param_01;
-  level.killstreak_botcanuse[param_00] = param_02;
-  level.killstreak_botparm[param_00] = param_03;
-  level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = param_00;
+bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
+  level.killstreak_botfunc[var_0] = var_1;
+  level.killstreak_botcanuse[var_0] = var_2;
+  level.killstreak_botparm[var_0] = var_3;
+  level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = var_0;
 }
 
-bot_killstreak_valid_for_specific_streaktype(param_00, param_01, param_02) {
+bot_killstreak_valid_for_specific_streaktype(var_0, var_1, var_2) {
   if(scripts\mp\utility::bot_is_fireteam_mode()) {
     return 1;
   }
 
-  if(bot_killstreak_is_valid_internal(param_00, "bots", undefined, param_01)) {
+  if(bot_killstreak_is_valid_internal(var_0, "bots", undefined, var_1)) {
     return 1;
-  } else if(param_02) {}
+  } else if(var_2) {}
 
   return 0;
 }
 
-bot_killstreak_is_valid_internal(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  if(param_00 == "specialist") {
+bot_killstreak_is_valid_internal(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  if(var_0 == "specialist") {
     return 1;
   }
 
-  if(!bot_killstreak_is_valid_single(param_00, param_01)) {
+  if(!bot_killstreak_is_valid_single(var_0, var_1)) {
     return 0;
   }
 
-  if(isDefined(param_03)) {
-    var_04 = getsubstr(param_03, 11);
-    switch (var_04) {
+  if(isDefined(var_3)) {
+    var_4 = getsubstr(var_3, 11);
+    switch (var_4) {
       case "assault":
-        if(!scripts\mp\utility::isassaultkillstreak(param_00)) {
+        if(!scripts\mp\utility::isassaultkillstreak(var_0)) {
           return 0;
         }
         break;
 
       case "support":
-        if(!scripts\mp\utility::issupportkillstreak(param_00)) {
+        if(!scripts\mp\utility::issupportkillstreak(var_0)) {
           return 0;
         }
         break;
 
       case "specialist":
-        if(!scripts\mp\utility::isspecialistkillstreak(param_00)) {
+        if(!scripts\mp\utility::isspecialistkillstreak(var_0)) {
           return 0;
         }
         break;
@@ -94,11 +94,11 @@ bot_killstreak_is_valid_internal(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-bot_killstreak_is_valid_single(param_00, param_01) {
-  if(param_01 == "humans") {
-    return isDefined(level.killstreaksetups[param_00]) && scripts\mp\utility::getkillstreakindex(param_00) != -1;
-  } else if(param_01 == "bots") {
-    return isDefined(level.killstreak_botfunc[param_00]);
+bot_killstreak_is_valid_single(var_0, var_1) {
+  if(var_1 == "humans") {
+    return isDefined(level.killstreaksetups[var_0]) && scripts\mp\utility::getkillstreakindex(var_0) != -1;
+  } else if(var_1 == "bots") {
+    return isDefined(level.killstreak_botfunc[var_0]);
   }
 }
 
@@ -114,25 +114,25 @@ bot_watch_for_killstreak_use() {
   }
 }
 
-bot_is_killstreak_supported(param_00) {
-  if(!isDefined(param_00)) {
+bot_is_killstreak_supported(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!isDefined(level.killstreak_botfunc[param_00])) {
+  if(!isDefined(level.killstreak_botfunc[var_0])) {
     return 0;
   }
 
   return 1;
 }
 
-func_2D29(param_00) {
-  var_01 = level.killstreak_botcanuse[param_00];
-  if(!isDefined(var_01)) {
+func_2D29(var_0) {
+  var_1 = level.killstreak_botcanuse[var_0];
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  if(isDefined(var_01) && !self[[var_01]]()) {
+  if(isDefined(var_1) && !self[[var_1]]()) {
     return 0;
   }
 
@@ -153,55 +153,55 @@ bot_think_killstreak() {
   childthread bot_watch_for_killstreak_use();
   for(;;) {
     if(scripts\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
-      var_00 = self.pers["killstreaks"];
-      if(isDefined(var_00)) {
-        foreach(var_02 in var_00) {
-          if(!isDefined(var_02)) {
+      var_0 = self.pers["killstreaks"];
+      if(isDefined(var_0)) {
+        foreach(var_2 in var_0) {
+          if(!isDefined(var_2)) {
             continue;
           }
 
-          if(isDefined(var_02.streakname) && isDefined(self.bot_killstreak_wait) && isDefined(self.bot_killstreak_wait[var_02.streakname]) && gettime() < self.bot_killstreak_wait[var_02.streakname]) {
+          if(isDefined(var_2.streakname) && isDefined(self.bot_killstreak_wait) && isDefined(self.bot_killstreak_wait[var_2.streakname]) && gettime() < self.bot_killstreak_wait[var_2.streakname]) {
             continue;
           }
 
-          if(var_02.var_269A) {
-            var_03 = var_02.streakname;
-            if(var_02.streakname == "all_perks_bonus") {
+          if(var_2.var_269A) {
+            var_3 = var_2.streakname;
+            if(var_2.streakname == "all_perks_bonus") {
               continue;
             }
 
-            if(scripts\mp\utility::isspecialistkillstreak(var_02.streakname)) {
-              if(!var_02.var_9E0B) {
-                var_03 = "specialist";
+            if(scripts\mp\utility::isspecialistkillstreak(var_2.streakname)) {
+              if(!var_2.var_9E0B) {
+                var_3 = "specialist";
               } else {
                 continue;
               }
             }
 
-            var_02.var_394 = scripts\mp\utility::getkillstreakweapon(var_02.streakname);
-            var_04 = level.killstreak_botcanuse[var_03];
-            if(isDefined(var_04) && !self[[var_04]]()) {
+            var_2.var_394 = scripts\mp\utility::getkillstreakweapon(var_2.streakname);
+            var_4 = level.killstreak_botcanuse[var_3];
+            if(isDefined(var_4) && !self[[var_4]]()) {
               continue;
             }
 
-            if(!scripts\mp\utility::validateusestreak(var_02.streakname, 1)) {
+            if(!scripts\mp\utility::validateusestreak(var_2.streakname, 1)) {
               continue;
             }
 
-            var_05 = level.killstreak_botfunc[var_03];
-            if(isDefined(var_05)) {
-              var_06 = self[[var_05]](var_02, var_00, var_04, level.killstreak_botparm[var_02.streakname]);
-              if(!isDefined(var_06) || var_06 == 0) {
+            var_5 = level.killstreak_botfunc[var_3];
+            if(isDefined(var_5)) {
+              var_6 = self[[var_5]](var_2, var_0, var_4, level.killstreak_botparm[var_2.streakname]);
+              if(!isDefined(var_6) || var_6 == 0) {
                 if(!isDefined(self.bot_killstreak_wait)) {
                   self.bot_killstreak_wait = [];
                 }
 
-                self.bot_killstreak_wait[var_02.streakname] = gettime() + 5000;
+                self.bot_killstreak_wait[var_2.streakname] = gettime() + 5000;
               }
             } else {
               if(level.gametype != "grnd") {}
 
-              var_02.var_269A = 0;
+              var_2.var_269A = 0;
             }
 
             break;
@@ -219,13 +219,13 @@ bot_can_use_aa_launcher() {
 }
 
 bot_start_aa_launcher_tracking() {
-  var_00 = scripts\mp\killstreaks\_aalauncher::getaalaunchername();
+  var_0 = scripts\mp\killstreaks\_aalauncher::getaalaunchername();
   for(;;) {
     self waittill("aa_launcher_fire");
-    var_01 = self getrunningforwardpainanim(var_00);
-    if(var_01 == 0) {
-      scripts\mp\utility::_switchtoweapon(var_00);
-      var_02 = scripts\engine\utility::waittill_any_return("LGM_player_allMissilesDestroyed", "enemy");
+    var_1 = self getrunningforwardpainanim(var_0);
+    if(var_1 == 0) {
+      scripts\mp\utility::_switchtoweapon(var_0);
+      var_2 = scripts\engine\utility::waittill_any_return("LGM_player_allMissilesDestroyed", "enemy");
       wait(0.5);
       scripts\mp\utility::_switchtoweapon("none");
     }
@@ -239,10 +239,10 @@ bot_can_use_air_superiority() {
     return 0;
   }
 
-  var_00 = scripts\mp\killstreaks\_air_superiority::func_6CAA(self, self.team);
-  var_01 = gettime();
-  foreach(var_03 in var_00) {
-    if(var_01 - var_03.var_64 > 5000) {
+  var_0 = scripts\mp\killstreaks\_air_superiority::func_6CAA(self, self.team);
+  var_1 = gettime();
+  foreach(var_3 in var_0) {
+    if(var_1 - var_3.var_64 > 5000) {
       return 1;
     }
   }
@@ -271,8 +271,8 @@ func_2D28() {
     return 0;
   }
 
-  var_00 = level.otherteam[self.team];
-  if(isDefined(level.teamemped) && isDefined(level.teamemped[var_00]) && level.teamemped[var_00]) {
+  var_0 = level.otherteam[self.team];
+  if(isDefined(level.teamemped) && isDefined(level.teamemped[var_0]) && level.teamemped[var_0]) {
     return 0;
   }
 
@@ -299,7 +299,7 @@ bot_can_use_ball_drone() {
   return 1;
 }
 
-bot_killstreak_simple_use(param_00, param_01, param_02, param_03) {
+bot_killstreak_simple_use(var_0, var_1, var_2, var_3) {
   self endon("commander_took_over");
   self endon("death");
   self endon("disconnect");
@@ -309,54 +309,54 @@ bot_killstreak_simple_use(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(isDefined(param_02) && !self[[param_02]]()) {
+  if(isDefined(var_2) && !self[[var_2]]()) {
     return 0;
   }
 
-  bot_switch_to_killstreak_weapon(param_00, param_01, param_00.var_394);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.var_394);
   return 1;
 }
 
-bot_killstreak_drop_anywhere(param_00, param_01, param_02, param_03) {
-  bot_killstreak_drop(param_00, param_01, param_02, param_03, "anywhere");
+bot_killstreak_drop_anywhere(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "anywhere");
 }
 
-bot_killstreak_drop_outside(param_00, param_01, param_02, param_03) {
-  bot_killstreak_drop(param_00, param_01, param_02, param_03, "outside");
+bot_killstreak_drop_outside(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "outside");
 }
 
-bot_killstreak_drop_hidden(param_00, param_01, param_02, param_03) {
-  bot_killstreak_drop(param_00, param_01, param_02, param_03, "hidden");
+bot_killstreak_drop_hidden(var_0, var_1, var_2, var_3) {
+  bot_killstreak_drop(var_0, var_1, var_2, var_3, "hidden");
 }
 
-bot_killstreak_drop(param_00, param_01, param_02, param_03, param_04) {
+bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
   self endon("commander_took_over");
   wait(randomintrange(2, 4));
-  if(!isDefined(param_04)) {
-    param_04 = "anywhere";
+  if(!isDefined(var_4)) {
+    var_4 = "anywhere";
   }
 
   if(!scripts\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return 1;
   }
 
-  if(isDefined(param_02) && !self[[param_02]]()) {
+  if(isDefined(var_2) && !self[[var_2]]()) {
     return 0;
   }
 
-  var_05 = self getweaponammoclip(param_00.var_394) + self getweaponammostock(param_00.var_394);
-  if(var_05 == 0) {
-    foreach(var_07 in param_01) {
-      if(isDefined(var_07.streakname) && var_07.streakname == param_00.streakname) {
-        var_07.var_269A = 0;
+  var_5 = self getweaponammoclip(var_0.var_394) + self getweaponammostock(var_0.var_394);
+  if(var_5 == 0) {
+    foreach(var_7 in var_1) {
+      if(isDefined(var_7.streakname) && var_7.streakname == var_0.streakname) {
+        var_7.var_269A = 0;
       }
     }
 
     return 1;
   }
 
-  var_09 = undefined;
-  if(var_07 == "outside") {
+  var_9 = undefined;
+  if(var_7 == "outside") {
     var_0A = [];
     var_0B = scripts\mp\bots\_bots_util::bot_get_nodes_in_cone(750, 0.6, 1);
     foreach(var_0D in var_0B) {
@@ -368,12 +368,12 @@ bot_killstreak_drop(param_00, param_01, param_02, param_03, param_04) {
     if(var_0B.size > 5 && var_0A.size > var_0B.size * 0.6) {
       var_0F = scripts\engine\utility::get_array_of_closest(self.origin, var_0A, undefined, undefined, undefined, 150);
       if(var_0F.size > 0) {
-        var_09 = scripts\engine\utility::random(var_0F);
+        var_9 = scripts\engine\utility::random(var_0F);
       } else {
-        var_09 = scripts\engine\utility::random(var_0A);
+        var_9 = scripts\engine\utility::random(var_0A);
       }
     }
-  } else if(var_07 == "hidden") {
+  } else if(var_7 == "hidden") {
     var_10 = getnodesinradius(self.origin, 256, 0, 40);
     var_11 = self getnearestnode();
     if(isDefined(var_11)) {
@@ -384,17 +384,17 @@ bot_killstreak_drop(param_00, param_01, param_02, param_03, param_04) {
         }
       }
 
-      var_09 = self botnodepick(var_12, 1, "node_hide");
+      var_9 = self botnodepick(var_12, 1, "node_hide");
     }
   }
 
-  if(isDefined(var_09) || var_07 == "anywhere") {
+  if(isDefined(var_9) || var_7 == "anywhere") {
     self botsetflag("disable_movement", 1);
-    if(isDefined(var_09)) {
-      self botlookatpoint(var_09.origin, 2.45, "script_forced");
+    if(isDefined(var_9)) {
+      self botlookatpoint(var_9.origin, 2.45, "script_forced");
     }
 
-    bot_switch_to_killstreak_weapon(param_03, param_04, param_03.var_394);
+    bot_switch_to_killstreak_weapon(var_3, var_4, var_3.var_394);
     wait(2);
     self botpressbutton("attack");
     wait(1.5);
@@ -405,74 +405,74 @@ bot_killstreak_drop(param_00, param_01, param_02, param_03, param_04) {
   return 1;
 }
 
-bot_switch_to_killstreak_weapon(param_00, param_01, param_02) {
-  func_2E29(param_00, param_01);
+bot_switch_to_killstreak_weapon(var_0, var_1, var_2) {
+  func_2E29(var_0, var_1);
 }
 
-func_2E29(param_00, param_01) {
-  if(isDefined(param_00.isgimme) && param_00.isgimme) {
+func_2E29(var_0, var_1) {
+  if(isDefined(var_0.isgimme) && var_0.isgimme) {
     self notify("ks_action_6");
     return;
   }
 
-  var_02 = 1;
-  while(var_02 < 4) {
-    if(isDefined(param_01[var_02])) {
-      if(isDefined(param_01[var_02].streakname)) {
-        if(param_01[var_02].streakname == param_00.streakname) {
-          var_03 = var_02 + 2;
-          self notify("ks_action_" + var_03);
+  var_2 = 1;
+  while(var_2 < 4) {
+    if(isDefined(var_1[var_2])) {
+      if(isDefined(var_1[var_2].streakname)) {
+        if(var_1[var_2].streakname == var_0.streakname) {
+          var_3 = var_2 + 2;
+          self notify("ks_action_" + var_3);
           return;
         }
       }
     }
 
-    var_03++;
+    var_3++;
   }
 }
 
-bot_killstreak_choose_loc_enemies(param_00, param_01, param_02, param_03) {
+bot_killstreak_choose_loc_enemies(var_0, var_1, var_2, var_3) {
   self endon("commander_took_over");
   wait(randomintrange(3, 5));
   if(!scripts\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return;
   }
 
-  var_04 = getzonenearest(self.origin);
-  if(!isDefined(var_04)) {
+  var_4 = getzonenearest(self.origin);
+  if(!isDefined(var_4)) {
     return;
   }
 
   self botsetflag("disable_movement", 1);
-  bot_switch_to_killstreak_weapon(param_00, param_01, param_00.var_394);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.var_394);
   wait(2);
-  var_05 = level.zonecount;
-  var_06 = -1;
-  var_07 = 0;
-  var_08 = [];
-  var_09 = randomfloat(100) > 50;
-  for(var_0A = 0; var_0A < var_05; var_0A++) {
-    if(var_09) {
-      var_0B = var_05 - 1 - var_0A;
+  var_5 = level.zonecount;
+  var_6 = -1;
+  var_7 = 0;
+  var_8 = [];
+  var_9 = randomfloat(100) > 50;
+  for(var_0A = 0; var_0A < var_5; var_0A++) {
+    if(var_9) {
+      var_0B = var_5 - 1 - var_0A;
     } else {
       var_0B = var_0A;
     }
 
-    if(var_0B != var_04 && botzonegetindoorpercent(var_0B) < 0.25) {
+    if(var_0B != var_4 && botzonegetindoorpercent(var_0B) < 0.25) {
       var_0C = botzonegetcount(var_0B, self.team, "enemy_predict");
-      if(var_0C > var_07) {
-        var_06 = var_0B;
-        var_07 = var_0C;
+      if(var_0C > var_7) {
+        var_6 = var_0B;
+        var_7 = var_0C;
       }
 
-      var_08 = scripts\engine\utility::array_add(var_08, var_0B);
+      var_8 = scripts\engine\utility::array_add(var_8, var_0B);
     }
   }
 
-  if(var_06 >= 0) {
-    var_0D = getzoneorigin(var_06);
-  } else if(var_09.size > 0) {
-    var_0D = getzoneorigin(scripts\engine\utility::random(var_09));
+  if(var_6 >= 0) {
+    var_0D = getzoneorigin(var_6);
+  } else if(var_9.size > 0) {
+    var_0D = getzoneorigin(scripts\engine\utility::random(var_9));
   } else {
     var_0D = getzoneorigin(randomint(level.zonecount));
   }
@@ -495,11 +495,11 @@ bot_think_watch_aerial_killstreak() {
 
   level.killstreak_global_bp_exists_for["allies"] = [];
   level.killstreak_global_bp_exists_for["axis"] = [];
-  var_00 = 0;
-  var_01 = randomfloatrange(0.05, 4);
+  var_0 = 0;
+  var_1 = randomfloatrange(0.05, 4);
   for(;;) {
-    wait(var_01);
-    var_01 = randomfloatrange(0.05, 4);
+    wait(var_1);
+    var_1 = randomfloatrange(0.05, 4);
     if(scripts\mp\bots\_bots_util::bot_is_remote_or_linked()) {
       continue;
     }
@@ -508,84 +508,84 @@ bot_think_watch_aerial_killstreak() {
       continue;
     }
 
-    var_02 = 0;
+    var_2 = 0;
     if(isDefined(level.chopper) && level.chopper.team != self.team) {
-      var_02 = 1;
+      var_2 = 1;
     }
 
     if(isDefined(level.lbsniper) && level.lbsniper.team != self.team) {
-      var_02 = 1;
+      var_2 = 1;
     }
 
     if(isDefined(level.heli_pilot[scripts\engine\utility::get_enemy_team(self.team)])) {
-      var_02 = 1;
+      var_2 = 1;
     }
 
     if(enemy_mortar_strike_exists(self.team)) {
-      var_02 = 1;
+      var_2 = 1;
       try_place_global_badplace("mortar_strike", ::enemy_mortar_strike_exists);
     }
 
     if(enemy_switchblade_exists(self.team)) {
-      var_02 = 1;
+      var_2 = 1;
       try_place_global_badplace("switchblade", ::enemy_switchblade_exists);
     }
 
     if(enemy_odin_assault_exists(self.team)) {
-      var_02 = 1;
+      var_2 = 1;
       try_place_global_badplace("odin_assault", ::enemy_odin_assault_exists);
     }
 
-    var_03 = get_enemy_vanguard();
-    if(isDefined(var_03)) {
-      var_04 = self getEye();
-      if(scripts\engine\utility::within_fov(var_04, self getplayerangles(), var_03.attackarrow.origin, self botgetfovdot())) {
-        if(sighttracepassed(var_04, var_03.attackarrow.origin, 0, self, var_03.attackarrow)) {
-          badplace_cylinder("vanguard_" + var_03 getentitynumber(), var_01 + 0.5, var_03.attackarrow.origin, 200, 100, self.team);
+    var_3 = get_enemy_vanguard();
+    if(isDefined(var_3)) {
+      var_4 = self getEye();
+      if(scripts\engine\utility::within_fov(var_4, self getplayerangles(), var_3.attackarrow.origin, self botgetfovdot())) {
+        if(sighttracepassed(var_4, var_3.attackarrow.origin, 0, self, var_3.attackarrow)) {
+          badplace_cylinder("vanguard_" + var_3 getentitynumber(), var_1 + 0.5, var_3.attackarrow.origin, 200, 100, self.team);
         }
       }
     }
 
-    if(!var_00 && var_02) {
-      var_00 = 1;
+    if(!var_0 && var_2) {
+      var_0 = 1;
       self botsetflag("hide_indoors", 1);
     }
 
-    if(var_00 && !var_02) {
-      var_00 = 0;
+    if(var_0 && !var_2) {
+      var_0 = 0;
       self botsetflag("hide_indoors", 0);
     }
   }
 }
 
-try_place_global_badplace(param_00, param_01) {
-  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][param_00])) {
-    level.killstreak_global_bp_exists_for[self.team][param_00] = 0;
+try_place_global_badplace(var_0, var_1) {
+  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][var_0])) {
+    level.killstreak_global_bp_exists_for[self.team][var_0] = 0;
   }
 
-  if(!level.killstreak_global_bp_exists_for[self.team][param_00]) {
-    level.killstreak_global_bp_exists_for[self.team][param_00] = 1;
-    level thread monitor_enemy_dangerous_killstreak(self.team, param_00, param_01);
+  if(!level.killstreak_global_bp_exists_for[self.team][var_0]) {
+    level.killstreak_global_bp_exists_for[self.team][var_0] = 1;
+    level thread monitor_enemy_dangerous_killstreak(self.team, var_0, var_1);
   }
 }
 
-monitor_enemy_dangerous_killstreak(param_00, param_01, param_02) {
-  var_03 = 0.5;
-  while([[param_02]](param_00)) {
+monitor_enemy_dangerous_killstreak(var_0, var_1, var_2) {
+  var_3 = 0.5;
+  while([[var_2]](var_0)) {
     if(gettime() > level.last_global_badplace_time + 4000) {
-      badplace_global("", 5, param_00, "only_sky");
+      badplace_global("", 5, var_0, "only_sky");
       level.last_global_badplace_time = gettime();
     }
 
-    wait(var_03);
+    wait(var_3);
   }
 
-  level.killstreak_global_bp_exists_for[param_00][param_01] = 0;
+  level.killstreak_global_bp_exists_for[var_0][var_1] = 0;
 }
 
-enemy_mortar_strike_exists(param_00) {
+enemy_mortar_strike_exists(var_0) {
   if(isDefined(level.air_raid_active) && level.air_raid_active) {
-    if(param_00 != level.air_raid_team_called) {
+    if(var_0 != level.air_raid_team_called) {
       return 1;
     }
   }
@@ -593,10 +593,10 @@ enemy_mortar_strike_exists(param_00) {
   return 0;
 }
 
-enemy_switchblade_exists(param_00) {
+enemy_switchblade_exists(var_0) {
   if(isDefined(level.remotemissileinprogress)) {
-    foreach(var_02 in level.rockets) {
-      if(isDefined(var_02.type) && var_02.type == "remote" && var_02.team != param_00) {
+    foreach(var_2 in level.rockets) {
+      if(isDefined(var_2.type) && var_2.type == "remote" && var_2.team != var_0) {
         return 1;
       }
     }
@@ -605,10 +605,10 @@ enemy_switchblade_exists(param_00) {
   return 0;
 }
 
-enemy_odin_assault_exists(param_00) {
-  foreach(var_02 in level.players) {
-    if(!level.teambased || isDefined(var_02.team) && param_00 != var_02.team) {
-      if(isDefined(var_02.odin) && var_02.odin.odintype == "odin_assault" && gettime() - var_02.odin.var_64 > 3000) {
+enemy_odin_assault_exists(var_0) {
+  foreach(var_2 in level.players) {
+    if(!level.teambased || isDefined(var_2.team) && var_0 != var_2.team) {
+      if(isDefined(var_2.odin) && var_2.odin.odintype == "odin_assault" && gettime() - var_2.odin.var_64 > 3000) {
         return 1;
       }
     }
@@ -618,10 +618,10 @@ enemy_odin_assault_exists(param_00) {
 }
 
 get_enemy_vanguard() {
-  foreach(var_01 in level.players) {
-    if(!level.teambased || isDefined(var_01.team) && self.team != var_01.team) {
-      if(isDefined(var_01.remoteuav) && var_01.remoteuav.helitype == "remote_uav") {
-        return var_01.remoteuav;
+  foreach(var_1 in level.players) {
+    if(!level.teambased || isDefined(var_1.team) && self.team != var_1.team) {
+      if(isDefined(var_1.remoteuav) && var_1.remoteuav.helitype == "remote_uav") {
+        return var_1.remoteuav;
       }
     }
   }
@@ -629,10 +629,10 @@ get_enemy_vanguard() {
   return undefined;
 }
 
-iskillstreakblockedforbots(param_00) {
-  return isDefined(level.botblockedkillstreaks) && isDefined(level.botblockedkillstreaks[param_00]) && level.botblockedkillstreaks[param_00];
+iskillstreakblockedforbots(var_0) {
+  return isDefined(level.botblockedkillstreaks) && isDefined(level.botblockedkillstreaks[var_0]) && level.botblockedkillstreaks[var_0];
 }
 
-blockkillstreakforbots(param_00) {
-  level.botblockedkillstreaks[param_00] = 1;
+blockkillstreakforbots(var_0) {
+  level.botblockedkillstreaks[var_0] = 1;
 }

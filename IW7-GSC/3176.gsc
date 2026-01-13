@@ -4,7 +4,7 @@
  * Script: 3176.gsc
 ************************/
 
-func_51E8(param_00, param_01, param_02, param_03) {
+func_51E8(var_0, var_1, var_2, var_3) {
   if(isDefined(self.asm.var_51E8)) {
     return;
   }
@@ -18,169 +18,169 @@ func_51E8(param_00, param_01, param_02, param_03) {
   self.var_22EE = 1;
   self.asm.var_77C1 = spawnStruct();
   thread lib_0A1E::func_234F();
-  func_98A7(param_00);
+  func_98A7(var_0);
   func_9810();
-  func_97C3(param_00);
+  func_97C3(var_0);
   if(weaponclass(self.var_394) == "mg") {
     self.var_BC = "cover_lmg";
   }
 }
 
-func_98A7(param_00) {
+func_98A7(var_0) {
   if(!isDefined(level.var_C05A)) {
     anim.var_C05A = [];
   }
 
-  if(isDefined(level.var_C05A[param_00])) {
+  if(isDefined(level.var_C05A[var_0])) {
     return;
   }
 
-  var_01 = [];
-  var_01["Cover Left"] = 0;
-  var_01["Cover Right"] = -90;
-  var_01["Cover Crouch"] = -90;
-  var_01["Cover Stand"] = -90;
-  var_01["Cover Stand 3D"] = -90;
-  level.var_C05A[param_00] = var_01;
-  var_01 = [];
-  var_01["Cover Left"] = 180;
-  var_01["Cover Left Crouch"] = 0;
-  var_01["Cover Right"] = 180;
-  var_01["Cover Crouch"] = 180;
-  var_01["Cover Stand"] = 180;
-  var_01["Cover Stand 3D"] = 180;
-  level.var_7365[param_00] = var_01;
-  var_02 = [];
-  level.var_C046[param_00] = var_02;
-  var_01 = [];
-  var_01["Cover Left Crouch"] = 0;
-  var_01["Cover Right"] = 0;
-  var_01["Cover Right Crouch"] = 90;
-  level.var_C04E[param_00] = var_01;
-  var_02 = [];
-  var_02["Cover Crouch"] = 45;
-  level.var_C04D[param_00] = var_02;
-  var_01 = [];
-  var_01["Cover Left Crouch"] = 0;
-  var_01["Cover Right"] = 180;
-  var_01["Cover Right Crouch"] = 180;
-  level.var_7364[param_00] = var_01;
-  var_01 = [];
-  var_01["Cover Crouch"] = 0;
-  var_01["Cover Left Crouch"] = 0;
-  level.var_7363[param_00] = var_01;
+  var_1 = [];
+  var_1["Cover Left"] = 0;
+  var_1["Cover Right"] = -90;
+  var_1["Cover Crouch"] = -90;
+  var_1["Cover Stand"] = -90;
+  var_1["Cover Stand 3D"] = -90;
+  level.var_C05A[var_0] = var_1;
+  var_1 = [];
+  var_1["Cover Left"] = 180;
+  var_1["Cover Left Crouch"] = 0;
+  var_1["Cover Right"] = 180;
+  var_1["Cover Crouch"] = 180;
+  var_1["Cover Stand"] = 180;
+  var_1["Cover Stand 3D"] = 180;
+  level.var_7365[var_0] = var_1;
+  var_2 = [];
+  level.var_C046[var_0] = var_2;
+  var_1 = [];
+  var_1["Cover Left Crouch"] = 0;
+  var_1["Cover Right"] = 0;
+  var_1["Cover Right Crouch"] = 90;
+  level.var_C04E[var_0] = var_1;
+  var_2 = [];
+  var_2["Cover Crouch"] = 45;
+  level.var_C04D[var_0] = var_2;
+  var_1 = [];
+  var_1["Cover Left Crouch"] = 0;
+  var_1["Cover Right"] = 180;
+  var_1["Cover Right Crouch"] = 180;
+  level.var_7364[var_0] = var_1;
+  var_1 = [];
+  var_1["Cover Crouch"] = 0;
+  var_1["Cover Left Crouch"] = 0;
+  level.var_7363[var_0] = var_1;
 }
 
-func_97C3(param_00) {
-  var_01 = [];
-  var_02 = [];
-  var_03 = [];
-  var_01["exposed_idle"] = var_03;
-  var_03 = [];
-  var_02["exposed_idle"] = var_03;
-  var_03 = [];
-  var_03["down"] = 15;
-  var_01["cover_crouch_lean"] = var_03;
-  var_03 = [];
-  var_03["down"] = 15;
-  var_02["cover_crouch_lean"] = var_03;
-  var_03 = [];
-  var_02["cover_crouch_aim"] = var_03;
-  var_03 = [];
-  var_03["right"] = -15;
-  var_01["cover_left_lean"] = var_03;
-  var_03 = [];
-  var_03["right"] = -15;
-  var_02["cover_left_lean"] = var_03;
-  var_03 = [];
-  var_03["right"] = -15;
-  var_01["cover_left_crouch_lean"] = var_03;
-  var_03 = [];
-  var_03["right"] = -15;
-  var_02["cover_left_crouch_lean"] = var_03;
-  var_03 = [];
-  var_03["left"] = 15;
-  var_01["cover_right_lean"] = var_03;
-  var_03 = [];
-  var_03["down"] = 37;
-  var_03["left"] = 24;
-  var_02["cover_right_lean"] = var_03;
-  var_03 = [];
-  var_03["left"] = 25;
-  var_01["cover_right_crouch_lean"] = var_03;
-  var_03 = [];
-  var_03["left"] = 15;
-  var_02["cover_right_crouch_lean"] = var_03;
+func_97C3(var_0) {
+  var_1 = [];
+  var_2 = [];
+  var_3 = [];
+  var_1["exposed_idle"] = var_3;
+  var_3 = [];
+  var_2["exposed_idle"] = var_3;
+  var_3 = [];
+  var_3["down"] = 15;
+  var_1["cover_crouch_lean"] = var_3;
+  var_3 = [];
+  var_3["down"] = 15;
+  var_2["cover_crouch_lean"] = var_3;
+  var_3 = [];
+  var_2["cover_crouch_aim"] = var_3;
+  var_3 = [];
+  var_3["right"] = -15;
+  var_1["cover_left_lean"] = var_3;
+  var_3 = [];
+  var_3["right"] = -15;
+  var_2["cover_left_lean"] = var_3;
+  var_3 = [];
+  var_3["right"] = -15;
+  var_1["cover_left_crouch_lean"] = var_3;
+  var_3 = [];
+  var_3["right"] = -15;
+  var_2["cover_left_crouch_lean"] = var_3;
+  var_3 = [];
+  var_3["left"] = 15;
+  var_1["cover_right_lean"] = var_3;
+  var_3 = [];
+  var_3["down"] = 37;
+  var_3["left"] = 24;
+  var_2["cover_right_lean"] = var_3;
+  var_3 = [];
+  var_3["left"] = 25;
+  var_1["cover_right_crouch_lean"] = var_3;
+  var_3 = [];
+  var_3["left"] = 15;
+  var_2["cover_right_crouch_lean"] = var_3;
   if(!isDefined(level.var_43FE)) {
     level.var_43FE = [];
     level.var_7361 = [];
     level.var_1A43 = [];
   }
 
-  level.var_43FE[param_00] = var_01;
-  level.var_7361[param_00] = var_02;
-  var_04 = [];
-  var_04["cover_stand_exposed"] = "cover_stand_exposed";
-  var_04["cover_stand_hide_to_exposed"] = "cover_stand_exposed";
-  var_04["cover_stand_full_exposed"] = "exposed_idle";
-  var_04["cover_stand_hide_to_full_exposed"] = "exposed_idle";
-  var_04["cover_stand_to_exposed_idle"] = "exposed_idle";
-  var_04["wall_run_exit"] = "exposed_idle";
-  var_04["wall_run_continue"] = "exposed_idle";
-  var_04["wall_run_left_shoot"] = "exposed_idle";
-  var_04["wall_run_right_shoot"] = "exposed_idle";
-  var_04["wall_run_attach_left_shoot"] = "exposed_idle";
-  var_04["wall_run_attach_right_shoot"] = "exposed_idle";
-  var_04["cover_crouch_hide_to_stand"] = "exposed_idle";
-  var_04["cover_crouch_hide_to_aim"] = "cover_crouch_aim";
-  var_04["cover_crouch_hide_to_right"] = "cover_crouch_aim";
-  var_04["cover_crouch_hide_to_left"] = "cover_crouch_aim";
-  var_04["cover_crouch_hide_to_lean"] = "cover_crouch_lean";
-  var_04["cover_crouch_aim"] = "cover_crouch_aim";
-  var_04["cover_crouch_lean"] = "cover_crouch_lean";
-  var_04["cover_crouch_exposed_left"] = "cover_crouch_aim";
-  var_04["cover_crouch_exposed_right"] = "cover_crouch_aim";
-  var_04["cover_crouch_stand"] = "exposed_idle";
-  var_04["cover_crouch_to_exposed_idle"] = "exposed_idle";
-  var_04["cover_right_exposed_A"] = "exposed_idle";
-  var_04["cover_right_hide_to_A"] = "exposed_idle";
-  var_04["cover_right_exposed_B"] = "exposed_idle";
-  var_04["cover_right_hide_to_B"] = "exposed_idle";
-  var_04["cover_right_A_to_B"] = "exposed_idle";
-  var_04["cover_right_B_to_A"] = "exposed_idle";
-  var_04["cover_right_crouch_exposed_A"] = "exposed_idle";
-  var_04["cover_right_crouch_exposed_B"] = "exposed_idle";
-  var_04["cover_right_crouch_hide_to_A"] = "exposed_idle";
-  var_04["cover_right_crouch_hide_to_B"] = "exposed_idle";
-  var_04["cover_right_crouch_A_to_B"] = "exposed_idle";
-  var_04["cover_right_crouch_B_to_A"] = "exposed_idle";
-  var_04["cover_right_lean"] = "cover_right_lean";
-  var_04["cover_right_hide_to_lean"] = "cover_right_lean";
-  var_04["cover_right_crouch_hide_to_lean"] = "cover_right_crouch_lean";
-  var_04["cover_right_crouch_lean"] = "cover_right_crouch_lean";
-  var_04["cover_right_to_exposed_idle"] = "exposed_idle";
-  var_04["cover_left_exposed_A"] = "exposed_idle";
-  var_04["cover_left_exposed_B"] = "exposed_idle";
-  var_04["cover_left_hide_to_A"] = "exposed_idle";
-  var_04["cover_left_hide_to_B"] = "exposed_idle";
-  var_04["cover_left_A_to_B"] = "exposed_idle";
-  var_04["cover_left_B_to_A"] = "exposed_idle";
-  var_04["cover_left_hide_to_lean"] = "cover_left_lean";
-  var_04["cover_left_lean"] = "cover_left_lean";
-  var_04["cover_left_crouch_hide_to_lean"] = "cover_left_crouch_lean";
-  var_04["cover_left_crouch_lean"] = "cover_left_crouch_lean";
-  var_04["cover_left_to_exposed_idle"] = "exposed_idle";
-  var_04["cqb_idle"] = "exposed_idle";
-  var_04["cqb_stand_loop"] = "exposed_idle";
-  var_04["cqb_stand_strafe_loop"] = "exposed_idle";
-  var_04["stand_run_strafe_loop"] = "exposed_idle";
-  var_04["Exposed_Reload"] = "exposed_idle";
-  var_04["Exposed_WeaponSwitch"] = "exposed_idle";
-  var_04["exposed_stand_turn"] = "exposed_idle";
-  var_04["exposed_idle"] = "exposed_idle";
-  var_04["exposed_prone"] = "exposed_idle";
-  var_04["exposed_stand_infantry_reaction"] = "exposed_idle";
-  level.var_1A43[param_00] = var_04;
+  level.var_43FE[var_0] = var_1;
+  level.var_7361[var_0] = var_2;
+  var_4 = [];
+  var_4["cover_stand_exposed"] = "cover_stand_exposed";
+  var_4["cover_stand_hide_to_exposed"] = "cover_stand_exposed";
+  var_4["cover_stand_full_exposed"] = "exposed_idle";
+  var_4["cover_stand_hide_to_full_exposed"] = "exposed_idle";
+  var_4["cover_stand_to_exposed_idle"] = "exposed_idle";
+  var_4["wall_run_exit"] = "exposed_idle";
+  var_4["wall_run_continue"] = "exposed_idle";
+  var_4["wall_run_left_shoot"] = "exposed_idle";
+  var_4["wall_run_right_shoot"] = "exposed_idle";
+  var_4["wall_run_attach_left_shoot"] = "exposed_idle";
+  var_4["wall_run_attach_right_shoot"] = "exposed_idle";
+  var_4["cover_crouch_hide_to_stand"] = "exposed_idle";
+  var_4["cover_crouch_hide_to_aim"] = "cover_crouch_aim";
+  var_4["cover_crouch_hide_to_right"] = "cover_crouch_aim";
+  var_4["cover_crouch_hide_to_left"] = "cover_crouch_aim";
+  var_4["cover_crouch_hide_to_lean"] = "cover_crouch_lean";
+  var_4["cover_crouch_aim"] = "cover_crouch_aim";
+  var_4["cover_crouch_lean"] = "cover_crouch_lean";
+  var_4["cover_crouch_exposed_left"] = "cover_crouch_aim";
+  var_4["cover_crouch_exposed_right"] = "cover_crouch_aim";
+  var_4["cover_crouch_stand"] = "exposed_idle";
+  var_4["cover_crouch_to_exposed_idle"] = "exposed_idle";
+  var_4["cover_right_exposed_A"] = "exposed_idle";
+  var_4["cover_right_hide_to_A"] = "exposed_idle";
+  var_4["cover_right_exposed_B"] = "exposed_idle";
+  var_4["cover_right_hide_to_B"] = "exposed_idle";
+  var_4["cover_right_A_to_B"] = "exposed_idle";
+  var_4["cover_right_B_to_A"] = "exposed_idle";
+  var_4["cover_right_crouch_exposed_A"] = "exposed_idle";
+  var_4["cover_right_crouch_exposed_B"] = "exposed_idle";
+  var_4["cover_right_crouch_hide_to_A"] = "exposed_idle";
+  var_4["cover_right_crouch_hide_to_B"] = "exposed_idle";
+  var_4["cover_right_crouch_A_to_B"] = "exposed_idle";
+  var_4["cover_right_crouch_B_to_A"] = "exposed_idle";
+  var_4["cover_right_lean"] = "cover_right_lean";
+  var_4["cover_right_hide_to_lean"] = "cover_right_lean";
+  var_4["cover_right_crouch_hide_to_lean"] = "cover_right_crouch_lean";
+  var_4["cover_right_crouch_lean"] = "cover_right_crouch_lean";
+  var_4["cover_right_to_exposed_idle"] = "exposed_idle";
+  var_4["cover_left_exposed_A"] = "exposed_idle";
+  var_4["cover_left_exposed_B"] = "exposed_idle";
+  var_4["cover_left_hide_to_A"] = "exposed_idle";
+  var_4["cover_left_hide_to_B"] = "exposed_idle";
+  var_4["cover_left_A_to_B"] = "exposed_idle";
+  var_4["cover_left_B_to_A"] = "exposed_idle";
+  var_4["cover_left_hide_to_lean"] = "cover_left_lean";
+  var_4["cover_left_lean"] = "cover_left_lean";
+  var_4["cover_left_crouch_hide_to_lean"] = "cover_left_crouch_lean";
+  var_4["cover_left_crouch_lean"] = "cover_left_crouch_lean";
+  var_4["cover_left_to_exposed_idle"] = "exposed_idle";
+  var_4["cqb_idle"] = "exposed_idle";
+  var_4["cqb_stand_loop"] = "exposed_idle";
+  var_4["cqb_stand_strafe_loop"] = "exposed_idle";
+  var_4["stand_run_strafe_loop"] = "exposed_idle";
+  var_4["Exposed_Reload"] = "exposed_idle";
+  var_4["Exposed_WeaponSwitch"] = "exposed_idle";
+  var_4["exposed_stand_turn"] = "exposed_idle";
+  var_4["exposed_idle"] = "exposed_idle";
+  var_4["exposed_prone"] = "exposed_idle";
+  var_4["exposed_stand_infantry_reaction"] = "exposed_idle";
+  level.var_1A43[var_0] = var_4;
 }
 
 func_9810() {
@@ -271,65 +271,65 @@ func_9810() {
   level.var_85E1["soldier"]["exposed_throw_seeker"]["exposed_seeker_throw"][0] = (23.6411, -21.534, 59.3983);
 }
 
-func_100A9(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm_bb::bb_getrequestedweapon();
-  if(!isDefined(var_04)) {
+func_100A9(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm_bb::bb_getrequestedweapon();
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  if(weaponclass(self.var_394) == var_04) {
+  if(weaponclass(self.var_394) == var_4) {
     return 0;
   }
 
   return 1;
 }
 
-func_BEA0(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
+func_BEA0(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
   if(scripts\asm\asm_bb::func_2985()) {
-    if(isDefined(self.var_1198.shootparams.pos)) {
-      var_04 = self.var_1198.shootparams.pos;
-    } else if(isDefined(self.var_1198.shootparams.ent)) {
-      var_04 = self.var_1198.shootparams.ent.origin;
+    if(isDefined(self._blackboard.shootparams.pos)) {
+      var_4 = self._blackboard.shootparams.pos;
+    } else if(isDefined(self._blackboard.shootparams.ent)) {
+      var_4 = self._blackboard.shootparams.ent.origin;
     }
   }
 
-  if(!isDefined(var_04) && scripts\engine\utility::func_9DA3()) {
-    var_04 = self.isnodeoccupied.origin;
+  if(!isDefined(var_4) && scripts\engine\utility::func_9DA3()) {
+    var_4 = self.isnodeoccupied.origin;
   }
 
-  if(!isDefined(var_04) && isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Exposed" && distancesquared(self.target_getindexoftarget.origin, self.origin) < 36) {
-    var_04 = self.target_getindexoftarget.origin + anglesToForward(self.target_getindexoftarget.angles) * 384;
+  if(!isDefined(var_4) && isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Exposed" && distancesquared(self.target_getindexoftarget.origin, self.origin) < 36) {
+    var_4 = self.target_getindexoftarget.origin + anglesToForward(self.target_getindexoftarget.angles) * 384;
   }
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_05 = self.angles[1] - vectortoyaw(var_04 - self.origin);
-  var_06 = distancesquared(self.origin, var_04);
-  if(var_06 < 65536) {
-    var_07 = sqrt(var_06);
-    if(var_07 > 3) {
-      var_05 = var_05 + asin(-3 / var_07);
+  var_5 = self.angles[1] - vectortoyaw(var_4 - self.origin);
+  var_6 = distancesquared(self.origin, var_4);
+  if(var_6 < 65536) {
+    var_7 = sqrt(var_6);
+    if(var_7 > 3) {
+      var_5 = var_5 + asin(-3 / var_7);
     }
   }
 
-  return abs(angleclamp180(var_05)) > self.var_129AF;
+  return abs(angleclamp180(var_5)) > self.var_129AF;
 }
 
-func_BE9F(param_00, param_01, param_02, param_03) {
+func_BE9F(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.var_B3E9) && isDefined(self.target_getindexoftarget)) {
     return 0;
   }
 
-  var_04 = _meth_81DD();
-  if(abs(var_04) > self.var_129AF) {
+  var_4 = _meth_81DD();
+  if(abs(var_4) > self.var_129AF) {
     return 1;
   }
 
-  var_05 = laststandrevive();
-  if(abs(var_05) > self.var_CBF8) {
+  var_5 = laststandrevive();
+  if(abs(var_5) > self.var_CBF8) {
     return 1;
   }
 
@@ -337,197 +337,197 @@ func_BE9F(param_00, param_01, param_02, param_03) {
 }
 
 _meth_81DE() {
-  var_00 = 0.25;
-  var_01 = undefined;
-  var_02 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
   if(scripts\asm\asm_bb::func_2985()) {
-    if(isDefined(self.var_1198.shootparams.ent)) {
-      var_01 = self.var_1198.shootparams.ent;
-    } else if(isDefined(self.var_1198.shootparams.pos)) {
-      var_02 = self.var_1198.shootparams.pos;
+    if(isDefined(self._blackboard.shootparams.ent)) {
+      var_1 = self._blackboard.shootparams.ent;
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
+      var_2 = self._blackboard.shootparams.pos;
     }
   } else if(isDefined(self.isnodeoccupied) && scripts\engine\utility::func_9DA3()) {
-    var_01 = self.isnodeoccupied;
+    var_1 = self.isnodeoccupied;
   }
 
-  if(isDefined(var_01) && !issentient(var_01)) {
-    var_00 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var_03 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_00, var_01, var_02);
-  return var_03;
+  var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
+  return var_3;
 }
 
 _meth_81DD() {
-  var_00 = 0.25;
-  var_01 = undefined;
-  var_02 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
   if(scripts\asm\asm_bb::func_2985()) {
-    if(isDefined(self.var_1198.shootparams.ent)) {
-      var_01 = self.var_1198.shootparams.ent;
-    } else if(isDefined(self.var_1198.shootparams.pos)) {
-      var_02 = self.var_1198.shootparams.pos;
+    if(isDefined(self._blackboard.shootparams.ent)) {
+      var_1 = self._blackboard.shootparams.ent;
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
+      var_2 = self._blackboard.shootparams.pos;
     }
   } else if(isDefined(self.isnodeoccupied)) {
-    var_01 = self.isnodeoccupied;
+    var_1 = self.isnodeoccupied;
   }
 
-  if(isDefined(var_01) && !issentient(var_01)) {
-    var_00 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var_03 = scripts\engine\utility::getpredictedaimyawtoshootentorpos3d(var_00, var_01, var_02);
-  return var_03;
+  var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos3d(var_0, var_1, var_2);
+  return var_3;
 }
 
 laststandrevive() {
-  var_00 = 0.25;
-  var_01 = undefined;
-  var_02 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
   if(scripts\asm\asm_bb::func_2985()) {
-    if(isDefined(self.var_1198.shootparams.ent)) {
-      var_01 = self.var_1198.shootparams.ent;
-    } else if(isDefined(self.var_1198.shootparams.pos)) {
-      var_02 = self.var_1198.shootparams.pos;
+    if(isDefined(self._blackboard.shootparams.ent)) {
+      var_1 = self._blackboard.shootparams.ent;
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
+      var_2 = self._blackboard.shootparams.pos;
     }
   } else if(isDefined(self.isnodeoccupied)) {
-    var_01 = self.isnodeoccupied;
+    var_1 = self.isnodeoccupied;
   }
 
-  if(isDefined(var_01) && !issentient(var_01)) {
-    var_00 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var_03 = scripts\engine\utility::getpredictedaimpitchtoshootentorpos3d(var_00, var_01, var_02);
-  return var_03;
+  var_3 = scripts\engine\utility::getpredictedaimpitchtoshootentorpos3d(var_0, var_1, var_2);
+  return var_3;
 }
 
-func_3F0A(param_00, param_01, param_02) {
-  var_03 = _meth_81DE();
-  if(var_03 < 0) {
-    var_04 = "right";
+func_3F0A(var_0, var_1, var_2) {
+  var_3 = _meth_81DE();
+  if(var_3 < 0) {
+    var_4 = "right";
   } else {
-    var_04 = "left";
+    var_4 = "left";
   }
 
-  var_03 = abs(var_03);
-  var_05 = 0;
-  if(var_03 > 157.5) {
-    var_05 = 180;
-  } else if(var_03 > 112.5) {
-    var_05 = 135;
-  } else if(var_03 > 67.5) {
-    var_05 = 90;
+  var_3 = abs(var_3);
+  var_5 = 0;
+  if(var_3 > 157.5) {
+    var_5 = 180;
+  } else if(var_3 > 112.5) {
+    var_5 = 135;
+  } else if(var_3 > 67.5) {
+    var_5 = 90;
   } else {
-    var_05 = 45;
+    var_5 = 45;
   }
 
-  var_06 = var_04 + "_" + var_05;
-  var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_06);
-  return var_07;
+  var_6 = var_4 + "_" + var_5;
+  var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
+  return var_7;
 }
 
-func_3F09(param_00, param_01, param_02) {
-  var_03 = _meth_81DD();
-  var_04 = laststandrevive();
-  if(abs(var_03) > self.var_129AF && abs(var_03) > abs(var_04)) {
-    if(var_03 < 0) {
-      var_05 = "right";
+func_3F09(var_0, var_1, var_2) {
+  var_3 = _meth_81DD();
+  var_4 = laststandrevive();
+  if(abs(var_3) > self.var_129AF && abs(var_3) > abs(var_4)) {
+    if(var_3 < 0) {
+      var_5 = "right";
     } else {
-      var_05 = "left";
+      var_5 = "left";
     }
 
-    var_03 = abs(var_03);
-    var_06 = 0;
-    if(var_03 > 157.5) {
-      var_06 = 180;
-    } else if(var_03 > 112.5) {
-      var_06 = 135;
-    } else if(var_03 > 67.5) {
-      var_06 = 90;
+    var_3 = abs(var_3);
+    var_6 = 0;
+    if(var_3 > 157.5) {
+      var_6 = 180;
+    } else if(var_3 > 112.5) {
+      var_6 = 135;
+    } else if(var_3 > 67.5) {
+      var_6 = 90;
     } else {
-      var_06 = 45;
+      var_6 = 45;
     }
 
-    var_07 = var_05 + "_" + var_06;
-    var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_07);
-    return var_08;
+    var_7 = var_5 + "_" + var_6;
+    var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_7);
+    return var_8;
   }
 
-  if(var_08 < 0) {
-    var_05 = "up";
+  if(var_8 < 0) {
+    var_5 = "up";
   } else {
-    var_05 = "down";
+    var_5 = "down";
   }
 
-  var_07 = abs(var_07);
-  var_06 = 0;
-  if(var_06 > 157.5) {
-    var_08 = 180;
-  } else if(var_06 > 112.5) {
-    var_08 = 135;
-  } else if(var_06 > 67.5) {
-    var_08 = 90;
+  var_7 = abs(var_7);
+  var_6 = 0;
+  if(var_6 > 157.5) {
+    var_8 = 180;
+  } else if(var_6 > 112.5) {
+    var_8 = 135;
+  } else if(var_6 > 67.5) {
+    var_8 = 90;
   } else {
-    var_08 = 45;
+    var_8 = 45;
   }
 
-  var_07 = var_07 + "_" + var_08;
-  var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_02, var_08);
-  return var_08;
+  var_7 = var_7 + "_" + var_8;
+  var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_8);
+  return var_8;
 }
 
-func_DF5B(param_00, param_01, param_02, param_03) {
+func_DF5B(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-func_2B9A(param_00, param_01, param_02, param_03) {
+func_2B9A(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291A();
 }
 
-func_3ECC(param_00, param_01, param_02) {
-  var_03 = _meth_81DE();
-  if(var_03 < -135) {
-    var_04 = "2r";
-  } else if(var_04 > 135) {
-    var_04 = "2l";
-  } else if(var_04 < 0) {
-    var_04 = "6";
+func_3ECC(var_0, var_1, var_2) {
+  var_3 = _meth_81DE();
+  if(var_3 < -135) {
+    var_4 = "2r";
+  } else if(var_4 > 135) {
+    var_4 = "2l";
+  } else if(var_4 < 0) {
+    var_4 = "6";
   } else {
-    var_04 = "4";
+    var_4 = "4";
   }
 
-  var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_04);
-  return var_05;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
+  return var_5;
 }
 
-func_DF4F(param_00, param_01, param_02) {
+func_DF4F(var_0, var_1, var_2) {
   if(!isDefined(self.var_39B) || !isDefined(self.var_39B[self.var_394])) {
     return;
   }
 
-  if(!scripts\asm\asm::func_232B(param_01, "drop clip")) {
+  if(!scripts\asm\asm::func_232B(var_1, "drop clip")) {
     return;
   }
 
   if(self.var_39B[self.var_394].var_13053) {
-    var_03 = getweaponclipmodel(self.var_394);
-    if(isDefined(var_03)) {
-      var_04 = scripts\asm\asm::func_232B(param_01, "attach clip left") || scripts\asm\asm::func_232B(param_01, "attach clip right");
-      var_05 = scripts\asm\asm::func_232B(param_01, "detach clip left") || scripts\asm\asm::func_232B(param_01, "detach clip right") || scripts\asm\asm::func_232B(param_01, "detach clip nohand");
-      if(!var_04) {
+    var_3 = getweaponclipmodel(self.var_394);
+    if(isDefined(var_3)) {
+      var_4 = scripts\asm\asm::func_232B(var_1, "attach clip left") || scripts\asm\asm::func_232B(var_1, "attach clip right");
+      var_5 = scripts\asm\asm::func_232B(var_1, "detach clip left") || scripts\asm\asm::func_232B(var_1, "detach clip right") || scripts\asm\asm::func_232B(var_1, "detach clip nohand");
+      if(!var_4) {
         self notify("abort_reload");
         return;
       }
 
-      if(var_04 && !var_05) {
-        if(scripts\asm\asm::func_232B(param_01, "attach clip left")) {
-          var_06 = "tag_accessory_left";
+      if(var_4 && !var_5) {
+        if(scripts\asm\asm::func_232B(var_1, "attach clip left")) {
+          var_6 = "tag_accessory_left";
         } else {
-          var_06 = "tag_accessory_right";
+          var_6 = "tag_accessory_right";
         }
 
-        self detach(var_03, var_06);
+        self detach(var_3, var_6);
         self giveperk("tag_clip");
         self notify("clip_detached");
         self.var_39B[self.var_394].var_8BDE = 1;

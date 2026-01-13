@@ -18,18 +18,18 @@ agent_player_dom_think() {
 }
 
 agent_squadmember_dom_think() {
-  var_00 = undefined;
-  foreach(var_02 in self.triggerportableradarping.touchtriggers) {
-    if(var_02.useobj.id == "domFlag") {
-      var_00 = var_02;
+  var_0 = undefined;
+  foreach(var_2 in self.triggerportableradarping.touchtriggers) {
+    if(var_2.useobj.id == "domFlag") {
+      var_0 = var_2;
     }
   }
 
-  if(isDefined(var_00)) {
-    var_04 = var_00 scripts\mp\gametypes\dom::getflagteam();
-    if(var_04 != self.team) {
-      if(!scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_00)) {
-        scripts\mp\bots\gametype_dom::capture_flag(var_00, "critical", 1);
+  if(isDefined(var_0)) {
+    var_4 = var_0 scripts\mp\gametypes\dom::getflagteam();
+    if(var_4 != self.team) {
+      if(!scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_0)) {
+        scripts\mp\bots\gametype_dom::capture_flag(var_0, "critical", 1);
       }
 
       return 1;

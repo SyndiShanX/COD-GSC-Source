@@ -4,61 +4,61 @@
  * Script: scripts\mp\perks\_perk_equipmentping.gsc
 ****************************************************/
 
-runequipmentping(param_00, param_01) {
+runequipmentping(var_0, var_1) {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
-  var_02 = self.triggerportableradarping;
-  var_03 = level.uavsettings["uav_3dping"];
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  var_2 = self.triggerportableradarping;
+  var_3 = level.uavsettings["uav_3dping"];
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  self.equipping_lastpingtime = param_01;
-  if(var_02 scripts\mp\utility::_hasperk("specialty_equipment_ping")) {
+  self.equipping_lastpingtime = var_1;
+  if(var_2 scripts\mp\utility::_hasperk("specialty_equipment_ping")) {
     for(;;) {
-      var_04 = 0;
+      var_4 = 0;
       if(gettime() >= self.equipping_lastpingtime + 3000) {
-        foreach(var_06 in level.players) {
-          if(!scripts\mp\utility::isreallyalive(var_06)) {
+        foreach(var_6 in level.players) {
+          if(!scripts\mp\utility::isreallyalive(var_6)) {
             continue;
           }
 
-          if(!var_02 scripts\mp\utility::isenemy(var_06)) {
+          if(!var_2 scripts\mp\utility::isenemy(var_6)) {
             continue;
           }
 
-          if(var_06 scripts\mp\utility::_hasperk("specialty_engineer")) {
+          if(var_6 scripts\mp\utility::_hasperk("specialty_engineer")) {
             continue;
           }
 
-          if(isDefined(var_06.var_C78B)) {
+          if(isDefined(var_6.var_C78B)) {
             continue;
           }
 
-          var_07 = scripts\engine\utility::array_add(level.players, self);
-          if(isDefined(param_00)) {
-            var_07 = scripts\engine\utility::array_add(var_07, param_00);
+          var_7 = scripts\engine\utility::array_add(level.players, self);
+          if(isDefined(var_0)) {
+            var_7 = scripts\engine\utility::array_add(var_7, var_0);
           }
 
-          var_08 = self.origin + anglestoup(self.angles) * 10;
-          if(distance2d(var_06.origin, self.origin) < 300 && scripts\common\trace::ray_trace_passed(var_08, var_06 gettagorigin("j_head"), var_07)) {
-            if(!var_06 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
-              var_02 thread markasrelaysource(var_06);
+          var_8 = self.origin + anglestoup(self.angles) * 10;
+          if(distance2d(var_6.origin, self.origin) < 300 && scripts\common\trace::ray_trace_passed(var_8, var_6 gettagorigin("j_head"), var_7)) {
+            if(!var_6 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
+              var_2 thread markasrelaysource(var_6);
             }
 
-            var_04 = 1;
+            var_4 = 1;
           }
         }
 
-        if(var_04) {
+        if(var_4) {
           if(!scripts\mp\utility::istrue(self.eyespyalerted)) {
-            var_02 scripts\mp\missions::func_D991("ch_trait_eye_spy");
+            var_2 scripts\mp\missions::func_D991("ch_trait_eye_spy");
             self.eyespyalerted = 1;
           }
 
-          playfxontagforclients(var_03.var_7636, self, "tag_origin", var_02);
-          self playsoundtoplayer("ghost_senses_ping", var_02);
-          triggerportableradarping(self.origin, var_02, 400, 800);
+          playfxontagforclients(var_3.var_7636, self, "tag_origin", var_2);
+          self playsoundtoplayer("ghost_senses_ping", var_2);
+          triggerportableradarping(self.origin, var_2, 400, 800);
           wait(3);
         }
       }
@@ -68,43 +68,43 @@ runequipmentping(param_00, param_01) {
   }
 }
 
-markdangerzoneonminimap(param_00, param_01) {
-  param_00 endon("death");
-  param_00 endon("disconnect");
-  if(!isDefined(param_00) || !scripts\mp\utility::isreallyalive(param_00)) {
+markdangerzoneonminimap(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0)) {
     return;
   }
 
-  thread markasrelaysource(param_00);
-  var_02 = scripts\mp\objidpoolmanager::requestminimapid(10);
-  if(var_02 == -1) {
+  thread markasrelaysource(var_0);
+  var_2 = scripts\mp\objidpoolmanager::requestminimapid(10);
+  if(var_2 == -1) {
     return;
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "active", param_01.origin, "cb_compassping_eqp_ping", "icon_large");
-  scripts\mp\objidpoolmanager::minimap_objective_player(var_02, self getentitynumber());
-  param_00 thread watchfordeath(var_02);
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "active", var_1.origin, "cb_compassping_eqp_ping", "icon_large");
+  scripts\mp\objidpoolmanager::minimap_objective_player(var_2, self getentitynumber());
+  var_0 thread watchfordeath(var_2);
   wait(3);
-  scripts\mp\objidpoolmanager::returnminimapid(var_02);
+  scripts\mp\objidpoolmanager::returnminimapid(var_2);
 }
 
-watchfordeath(param_00) {
+watchfordeath(var_0) {
   scripts\engine\utility::waittill_any_3("death", "disconnect");
-  scripts\mp\objidpoolmanager::returnminimapid(param_00);
+  scripts\mp\objidpoolmanager::returnminimapid(var_0);
 }
 
-markasrelaysource(param_00) {
+markasrelaysource(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  var_01 = param_00 getentitynumber();
+  var_1 = var_0 getentitynumber();
   if(!isDefined(self.relaysource)) {
     self.relaysource = [];
-  } else if(isDefined(self.relaysource[var_01])) {
+  } else if(isDefined(self.relaysource[var_1])) {
     self notify("markAsRelaySource");
     self endon("markAsRelaySource");
   }
 
-  self.relaysource[var_01] = 1;
-  param_00 scripts\engine\utility::waittill_any_timeout_1(10, "death", "disconnect");
-  self.relaysource[var_01] = 0;
+  self.relaysource[var_1] = 1;
+  var_0 scripts\engine\utility::waittill_any_timeout_1(10, "death", "disconnect");
+  self.relaysource[var_1] = 0;
 }

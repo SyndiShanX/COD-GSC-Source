@@ -15,62 +15,62 @@ removetransponder() {
   self notify("remove_transponder");
 }
 
-transponder_place(param_00) {
-  if(checkvalidplacementstate(param_00)) {
-    transponder_throw(param_00);
+transponder_place(var_0) {
+  if(checkvalidplacementstate(var_0)) {
+    transponder_throw(var_0);
     return;
   }
 
-  thread placementfailed(param_00);
+  thread placementfailed(var_0);
 }
 
-transponder_use(param_00) {
+transponder_use(var_0) {
   scripts\cp\powers\coop_powers::activatepower("power_transponder");
-  transponder_place(param_00);
+  transponder_place(var_0);
 }
 
-transponder_throw(param_00) {
+transponder_throw(var_0) {
   self endon("clear_previous_tombstone");
   self endon("lost_and_found_time_out");
   self endon("disconnect");
   self endon("remove_transponder");
-  var_01 = "power_transponder";
+  var_1 = "power_transponder";
   if(!scripts\cp\utility::isreallyalive(self)) {
-    param_00 delete();
+    var_0 delete();
     return;
   }
 
-  param_00 thread scripts\cp\cp_weapon::ondetonateexplosive("powers_transponder_used");
-  param_00 thread waitfordetonateexplosive(self);
-  thread watchtransponderdetonation(param_00);
-  param_00 setotherent(self);
-  param_00.activated = 0;
-  param_00.script_noteworthy = "placed_transponder";
-  ontacticalequipmentplanted(param_00);
-  param_00 thread watchforpowerremoved(self);
-  param_00 thread transponderactivate();
-  level thread scripts\cp\cp_weapon::monitordisownedequipment(self, param_00);
+  var_0 thread scripts\cp\cp_weapon::ondetonateexplosive("powers_transponder_used");
+  var_0 thread waitfordetonateexplosive(self);
+  thread watchtransponderdetonation(var_0);
+  var_0 setotherent(self);
+  var_0.activated = 0;
+  var_0.script_noteworthy = "placed_transponder";
+  ontacticalequipmentplanted(var_0);
+  var_0 thread watchforpowerremoved(self);
+  var_0 thread transponderactivate();
+  level thread scripts\cp\cp_weapon::monitordisownedequipment(self, var_0);
 }
 
-waitfordetonateexplosive(param_00) {
+waitfordetonateexplosive(var_0) {
   self endon("alt_detonate");
   self endon("detonated");
   self waittill("detonateExplosive");
-  param_00 transponderdetonateallcharges();
+  var_0 transponderdetonateallcharges();
 }
 
-watchforpowerremoved(param_00) {
-  param_00 endon("clear_previous_tombstone");
-  param_00 endon("lost_and_found_time_out");
-  param_00 endon("disconnect");
+watchforpowerremoved(var_0) {
+  var_0 endon("clear_previous_tombstone");
+  var_0 endon("lost_and_found_time_out");
+  var_0 endon("disconnect");
   self endon("alt_detonate");
   self endon("detonated");
-  param_00 waittill("detonate_transponder");
+  var_0 waittill("detonate_transponder");
   self notify("detonate");
-  param_00 transponderdetonateallcharges();
+  var_0 transponderdetonateallcharges();
 }
 
-ontacticalequipmentplanted(param_00) {
+ontacticalequipmentplanted(var_0) {
   if(self.plantedtacticalequip.size) {
     self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
     if(self.plantedtacticalequip.size >= level.maxperplayerexplosives) {
@@ -78,24 +78,24 @@ ontacticalequipmentplanted(param_00) {
     }
   }
 
-  self.plantedtacticalequip[self.plantedtacticalequip.size] = param_00;
-  var_01 = param_00 getentitynumber();
-  level.mines[var_01] = param_00;
+  self.plantedtacticalequip[self.plantedtacticalequip.size] = var_0;
+  var_1 = var_0 getentitynumber();
+  level.mines[var_1] = var_0;
   level notify("mine_planted");
 }
 
-watchtransponderdetonation(param_00) {
+watchtransponderdetonation(var_0) {
   self endon("clear_previous_tombstone");
   self endon("lost_and_found_time_out");
   self endon("disconnect");
   self endon("alt_detonate");
   self endon("detonated");
-  param_00 waittill("activated");
+  var_0 waittill("activated");
   for(;;) {
     self waittillmatch("ztransponder_mp", "detonate");
     if(scripts\cp\utility::isteleportenabled()) {
-      if(isDefined(param_00) && param_00.activated) {
-        transponder_teleportplayer(param_00);
+      if(isDefined(var_0) && var_0.activated) {
+        transponder_teleportplayer(var_0);
         transponderdetonateallcharges();
       }
 
@@ -107,58 +107,58 @@ watchtransponderdetonation(param_00) {
 }
 
 killenemiesinfov() {
-  var_00 = cos(75);
-  var_01 = 2000;
-  var_02 = 300;
-  var_03 = var_02 / 2;
-  var_04 = vectornormalize(anglesToForward(self.angles));
-  var_05 = var_04 * var_03;
-  var_06 = self.origin + var_05;
-  physicsexplosionsphere(var_06, var_03, 1, 2.5);
-  var_07 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  var_08 = scripts\engine\utility::get_array_of_closest(self.origin, var_07, undefined, var_02);
-  foreach(var_0A in var_08) {
+  var_0 = cos(75);
+  var_1 = 2000;
+  var_2 = 300;
+  var_3 = var_2 / 2;
+  var_4 = vectornormalize(anglesToForward(self.angles));
+  var_5 = var_4 * var_3;
+  var_6 = self.origin + var_5;
+  physicsexplosionsphere(var_6, var_3, 1, 2.5);
+  var_7 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_8 = scripts\engine\utility::get_array_of_closest(self.origin, var_7, undefined, var_2);
+  foreach(var_0A in var_8) {
     var_0B = 0;
     var_0C = var_0A.origin;
-    var_0D = scripts\engine\utility::within_fov(self getEye(), self.angles, var_0C + (0, 0, 30), var_00);
+    var_0D = scripts\engine\utility::within_fov(self getEye(), self.angles, var_0C + (0, 0, 30), var_0);
     if(var_0D) {
       var_0E = distance2d(self.origin, var_0C);
-      if(var_0E < var_02) {
+      if(var_0E < var_2) {
         var_0B = 1;
       }
     }
 
     if(var_0B) {
-      var_04 = anglesToForward(self.angles);
-      var_0F = vectornormalize(var_04) * -100;
+      var_4 = anglesToForward(self.angles);
+      var_0F = vectornormalize(var_4) * -100;
       var_0A setvelocity(vectornormalize(var_0A.origin - self.origin + var_0F) * 800 + (0, 0, 300));
-      var_01 = var_0A.maxhealth;
-      var_0A killtranspondervictim(self, var_01, var_0C, self.origin);
+      var_1 = var_0A.maxhealth;
+      var_0A killtranspondervictim(self, var_1, var_0C, self.origin);
     }
   }
 }
 
-killtranspondervictim(param_00, param_01, param_02, param_03) {
+killtranspondervictim(var_0, var_1, var_2, var_3) {
   self.do_immediate_ragdoll = 1;
-  if(param_01 >= self.health) {
+  if(var_1 >= self.health) {
     self.customdeath = 1;
   }
 
-  self dodamage(param_01, param_02, param_00, param_00, "MOD_IMPACT", "ztransponder_mp");
+  self dodamage(var_1, var_2, var_0, var_0, "MOD_IMPACT", "ztransponder_mp");
 }
 
 transponderdamage() {
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_00 waittill("transponder_update");
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_0 waittill("transponder_update");
 }
 
 transponderdetonateallcharges() {
-  foreach(var_01 in self.plantedtacticalequip) {
-    if(isDefined(var_01)) {
-      if(isDefined(var_01.weapon_name) && var_01.weapon_name == "ztransponder_mp") {
-        var_01 scripts\cp\cp_weapon::deleteexplosive(0);
-        scripts\engine\utility::array_remove(self.plantedtacticalequip, var_01);
+  foreach(var_1 in self.plantedtacticalequip) {
+    if(isDefined(var_1)) {
+      if(isDefined(var_1.weapon_name) && var_1.weapon_name == "ztransponder_mp") {
+        var_1 scripts\cp\cp_weapon::deleteexplosive(0);
+        scripts\engine\utility::array_remove(self.plantedtacticalequip, var_1);
       }
     }
   }
@@ -170,18 +170,18 @@ transponderdetonateallcharges() {
   self notify("alt_detonate");
 }
 
-watchtransponderaltdetonation(param_00) {
+watchtransponderaltdetonation(var_0) {
   self endon("clear_previous_tombstone");
   self endon("lost_and_found_time_out");
   self endon("disconnect");
   self endon("detonated");
-  param_00 waittill("activated");
+  var_0 waittill("activated");
   for(;;) {
     self waittill("alt_detonate");
-    var_01 = self getcurrentweapon();
-    if(var_01 != "ztransponder_mp") {
-      if(isDefined(param_00) && param_00.activated) {
-        transponder_teleportplayer(param_00);
+    var_1 = self getcurrentweapon();
+    if(var_1 != "ztransponder_mp") {
+      if(isDefined(var_0) && var_0.activated) {
+        transponder_teleportplayer(var_0);
         transponderdetonateallcharges();
         continue;
       }
@@ -191,33 +191,33 @@ watchtransponderaltdetonation(param_00) {
   }
 }
 
-watchtransponderaltdetonate(param_00) {
+watchtransponderaltdetonate(var_0) {
   self endon("clear_previous_tombstone");
   self endon("lost_and_found_time_out");
   self endon("disconnect");
   self endon("detonated");
   level endon("game_ended");
-  param_00 waittill("activated");
-  var_01 = 0;
+  var_0 waittill("activated");
+  var_1 = 0;
   for(;;) {
     if(self usebuttonpressed()) {
-      var_01 = 0;
+      var_1 = 0;
       while(self usebuttonpressed()) {
-        var_01 = var_01 + 0.05;
+        var_1 = var_1 + 0.05;
         wait(0.05);
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
 
-      var_01 = 0;
-      while(!self usebuttonpressed() && var_01 < 0.5) {
-        var_01 = var_01 + 0.05;
+      var_1 = 0;
+      while(!self usebuttonpressed() && var_1 < 0.5) {
+        var_1 = var_1 + 0.05;
         wait(0.05);
       }
 
-      if(var_01 >= 0.5) {
+      if(var_1 >= 0.5) {
         continue;
       }
 
@@ -238,45 +238,45 @@ watchtransponderaltdetonate(param_00) {
 
 transponderactivate() {
   self.triggerportableradarping thread timeouttransponder(self);
-  var_00 = self.triggerportableradarping;
-  var_01 = undefined;
-  var_02 = undefined;
-  self waittill("missile_stuck", var_03);
+  var_0 = self.triggerportableradarping;
+  var_1 = undefined;
+  var_2 = undefined;
+  self waittill("missile_stuck", var_3);
   if(isDefined(self.weapon_name)) {
-    var_01 = self.weapon_name;
+    var_1 = self.weapon_name;
   }
 
   if(isDefined(self.origin)) {
-    var_02 = self.origin;
+    var_2 = self.origin;
   }
 
   wait(0.05);
-  if(!checkvalidposition(var_00, var_03)) {
-    var_00 placementfailed(self, var_02, var_01);
+  if(!checkvalidposition(var_0, var_3)) {
+    var_0 placementfailed(self, var_2, var_1);
     return;
   }
 
   self.triggerportableradarping notify("powers_transponder_used", 1);
   self notify("activated");
   self.activated = 1;
-  scripts\cp\cp_weapon::explosivehandlemovers(var_03);
+  scripts\cp\cp_weapon::explosivehandlemovers(var_3);
 }
 
-timeouttransponder(param_00) {
-  param_00 endon("missile_stuck");
-  param_00 scripts\engine\utility::waittill_any_timeout_1(5, "death");
+timeouttransponder(var_0) {
+  var_0 endon("missile_stuck");
+  var_0 scripts\engine\utility::waittill_any_timeout_1(5, "death");
   self notify("powers_transponder_used", 0);
-  placementfailed(param_00);
+  placementfailed(var_0);
 }
 
-transponder_teleportplayer(param_00) {
-  var_01 = undefined;
-  var_02 = getclosestpointonnavmesh(param_00.origin);
+transponder_teleportplayer(var_0) {
+  var_1 = undefined;
+  var_2 = getclosestpointonnavmesh(var_0.origin);
   self notify("left_hidden_room_early");
-  if(isDefined(var_02)) {
-    thread activationeffects(self.origin, param_00.origin);
+  if(isDefined(var_2)) {
+    thread activationeffects(self.origin, var_0.origin);
     self playlocalsound("ghost_use_transponder");
-    self setorigin(var_02 + (0, 0, 20));
+    self setorigin(var_2 + (0, 0, 20));
     return;
   }
 
@@ -284,20 +284,20 @@ transponder_teleportplayer(param_00) {
   self.triggerportableradarping transponderdetonateallcharges();
 }
 
-activationeffects(param_00, param_01) {
-  var_02 = spawnfx(scripts\engine\utility::getfx("transponder_activate"), param_01);
+activationeffects(var_0, var_1) {
+  var_2 = spawnfx(scripts\engine\utility::getfx("transponder_activate"), var_1);
   wait(0.1);
-  triggerfx(var_02);
-  var_02 thread scripts\cp\utility::delayentdelete(0.75);
-  var_03 = "direction_indicator_far";
-  var_04 = length2d(param_00 - param_01);
-  if(var_04 < 1024) {
-    var_03 = "direction_indicator_close";
-  } else if(var_04 < 2048) {
-    var_03 = "direction_indicator_mid";
+  triggerfx(var_2);
+  var_2 thread scripts\cp\utility::delayentdelete(0.75);
+  var_3 = "direction_indicator_far";
+  var_4 = length2d(var_0 - var_1);
+  if(var_4 < 1024) {
+    var_3 = "direction_indicator_close";
+  } else if(var_4 < 2048) {
+    var_3 = "direction_indicator_mid";
   }
 
-  playFX(scripts\engine\utility::getfx(var_03), param_00, (0, 0, 1), anglesToForward(vectortoangles(param_01 - param_00)));
+  playFX(scripts\engine\utility::getfx(var_3), var_0, (0, 0, 1), anglesToForward(vectortoangles(var_1 - var_0)));
 }
 
 runtranspondersickness() {
@@ -305,57 +305,57 @@ runtranspondersickness() {
   wait(1.2);
 }
 
-transponderrangefinder(param_00) {
-  param_00 endon("death");
+transponderrangefinder(var_0) {
+  var_0 endon("death");
   self endon("disconnect");
-  thread transponderwatchfordisuse(param_00);
-  while(isDefined(param_00)) {
-    var_01 = distance2d(self.origin, param_00.origin);
+  thread transponderwatchfordisuse(var_0);
+  while(isDefined(var_0)) {
+    var_1 = distance2d(self.origin, var_0.origin);
     wait(0.1);
   }
 }
 
-transponderwatchfordisuse(param_00) {
-  param_00 waittill("deleted_equipment");
+transponderwatchfordisuse(var_0) {
+  var_0 waittill("deleted_equipment");
 }
 
-checkvalidposition(param_00, param_01) {
+checkvalidposition(var_0, var_1) {
   if(!isDefined(self)) {
     return 0;
   }
 
-  var_02 = param_00 findpath(param_00.origin, self.origin);
-  if(var_02.size < 1) {
+  var_2 = var_0 findpath(var_0.origin, self.origin);
+  if(var_2.size < 1) {
     return 0;
-  } else if(distance2d(var_02[var_02.size - 1], self.origin) >= 12) {
-    return 0;
-  }
-
-  var_03 = getclosestpointonnavmesh(self.origin);
-  if(!isDefined(var_03)) {
+  } else if(distance2d(var_2[var_2.size - 1], self.origin) >= 12) {
     return 0;
   }
 
-  if(distance2d(self.origin, var_03) > 18) {
+  var_3 = getclosestpointonnavmesh(self.origin);
+  if(!isDefined(var_3)) {
+    return 0;
+  }
+
+  if(distance2d(self.origin, var_3) > 18) {
     return 0;
   }
 
   if(isDefined(level.active_volume_check)) {
-    if(!self[[level.active_volume_check]](var_03)) {
+    if(!self[[level.active_volume_check]](var_3)) {
       return 0;
     }
   }
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, param_00, undefined, 1, param_01)) {
+  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, var_0, undefined, 1, var_1)) {
     return 0;
   }
 
   if(isDefined(level.invalidtranspondervolumes)) {
     if(isDefined(level.is_in_box_func)) {
-      foreach(var_05 in level.invalidtranspondervolumes) {
+      foreach(var_5 in level.invalidtranspondervolumes) {
         if([
             [level.is_in_box_func]
-          ](var_05[0], var_05[1], var_05[2], var_05[3], self.origin)) {
+          ](var_5[0], var_5[1], var_5[2], var_5[3], self.origin)) {
           return 0;
         }
       }
@@ -369,40 +369,40 @@ checkvalidposition(param_00, param_01) {
   return 1;
 }
 
-checkvalidplacementstate(param_00) {
+checkvalidplacementstate(var_0) {
   return !self iswallrunning() && !self isonladder() && self isonground();
 }
 
-placementfailed(param_00, param_01, param_02) {
+placementfailed(var_0, var_1, var_2) {
   self notify("powers_transponder_used", 0);
   self.activated = 0;
   transponderdetonateallcharges();
   self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
-  var_03 = undefined;
-  var_04 = undefined;
-  if(isDefined(param_01)) {
-    var_03 = param_01;
+  var_3 = undefined;
+  var_4 = undefined;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   }
 
-  if(isDefined(param_02)) {
-    var_04 = param_02;
+  if(isDefined(var_2)) {
+    var_4 = var_2;
   }
 
-  if(isDefined(param_00)) {
-    if(isDefined(param_00.origin)) {
-      var_03 = param_00.origin;
+  if(isDefined(var_0)) {
+    if(isDefined(var_0.origin)) {
+      var_3 = var_0.origin;
     }
 
-    if(isDefined(param_00.weapon_name)) {
-      var_04 = param_00.weapon_name;
+    if(isDefined(var_0.weapon_name)) {
+      var_4 = var_0.weapon_name;
     }
   }
 
-  if(isDefined(var_03) && isDefined(var_04)) {
-    scripts\cp\cp_weapon::placeequipmentfailed(var_04, 1, var_03);
+  if(isDefined(var_3) && isDefined(var_4)) {
+    scripts\cp\cp_weapon::placeequipmentfailed(var_4, 1, var_3);
   }
 
-  if(isDefined(param_00)) {
-    param_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }

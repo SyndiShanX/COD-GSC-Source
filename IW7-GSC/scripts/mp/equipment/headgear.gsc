@@ -20,8 +20,8 @@ func_E855() {
   self endon("disconnect");
   self endon("remove_headgear");
   for(;;) {
-    self waittill("headgear_save", var_00, var_01, var_02);
-    if(weaponclass(var_02) == "sniper") {
+    self waittill("headgear_save", var_0, var_1, var_2);
+    if(weaponclass(var_2) == "sniper") {
       thread func_E856();
     }
   }
@@ -31,89 +31,89 @@ func_E856() {
   self shellshock("concussion_grenade_mp", 2.5, 0, 1);
 }
 
-func_8C6F(param_00, param_01) {
+func_8C6F(var_0, var_1) {
   self.var_8BF8 = 1;
-  var_02 = level.powers["power_headgear"].var_5FF3;
-  scripts\mp\gamescore::trackbuffassist(param_00, self, "power_headgear");
+  var_2 = level.powers["power_headgear"].var_5FF3;
+  scripts\mp\gamescore::trackbuffassist(var_0, self, "power_headgear");
   thread scripts\mp\killstreaks\_emp_common::func_5AA9();
-  var_03 = "j_spinelower";
-  if(param_01) {
+  var_3 = "j_spinelower";
+  if(var_1) {
     self iprintlnbold("HEADGEAR APPLIED");
-    var_03 = "j_head";
+    var_3 = "j_head";
   } else {
     self iprintlnbold("BARRIER APPLIED");
   }
 
-  var_04 = playFXOnTag(level.var_8C71["halo"], self, var_03);
-  thread func_8C73(param_00, var_02, var_03);
-  wait(var_02);
-  thread func_8C72(param_00, var_03);
+  var_4 = playFXOnTag(level.var_8C71["halo"], self, var_3);
+  thread func_8C73(var_0, var_2, var_3);
+  wait(var_2);
+  thread func_8C72(var_0, var_3);
 }
 
-func_8C72(param_00, param_01) {
+func_8C72(var_0, var_1) {
   self endon("disconnect");
   self endon("removeArchetype");
-  stopFXOnTag(level.var_8C71["halo"], self, param_01);
+  stopFXOnTag(level.var_8C71["halo"], self, var_1);
   self.var_8BF8 = undefined;
-  scripts\mp\gamescore::untrackbuffassist(param_00, self, "power_headgear");
+  scripts\mp\gamescore::untrackbuffassist(var_0, self, "power_headgear");
 }
 
-func_8C73(param_00, param_01, param_02) {
+func_8C73(var_0, var_1, var_2) {
   self endon("disconnect");
   self waittill("death");
-  thread func_8C72(param_00, param_01, param_02);
+  thread func_8C72(var_0, var_1, var_2);
 }
 
-func_8C70(param_00) {
-  var_01 = [];
-  var_02 = [];
-  for(var_03 = 0; var_03 < 5; var_03++) {
-    var_01[var_03] = ::scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
-    var_02[var_03] = spawn("script_model", var_01[var_03].origin);
-    var_02[var_03] linkto(var_01[var_03]);
+func_8C70(var_0) {
+  var_1 = [];
+  var_2 = [];
+  for(var_3 = 0; var_3 < 5; var_3++) {
+    var_1[var_3] = ::scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
+    var_2[var_3] = spawn("script_model", var_1[var_3].origin);
+    var_2[var_3] linkto(var_1[var_3]);
   }
 
   scripts\engine\utility::waitframe();
-  playFX(level.var_8C71["wedge"], var_01[2].origin, anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()));
-  var_04 = [16, 8, 0, -8, -16];
-  for(var_03 = 0; var_03 < 5; var_03++) {
-    thread func_68D8(var_01[var_03], var_04[var_03]);
+  playFX(level.var_8C71["wedge"], var_1[2].origin, anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()));
+  var_4 = [16, 8, 0, -8, -16];
+  for(var_3 = 0; var_3 < 5; var_3++) {
+    thread func_68D8(var_1[var_3], var_4[var_3]);
   }
 
-  foreach(var_06 in param_00) {
-    if(distance2dsquared(self.origin, var_06.origin) < 100000 && isDefined(self _meth_840B(var_06.origin, 65))) {
-      var_07 = var_06 damageconetrace(var_01[2].origin);
-      if(var_07 > 0.2) {
-        var_08 = self worldpointinreticle_circle(var_06 gettagorigin("tag_eye"), 65, 50);
-        var_06 thread func_8C6F(self, var_08);
+  foreach(var_6 in var_0) {
+    if(distance2dsquared(self.origin, var_6.origin) < 100000 && isDefined(self _meth_840B(var_6.origin, 65))) {
+      var_7 = var_6 damageconetrace(var_1[2].origin);
+      if(var_7 > 0.2) {
+        var_8 = self worldpointinreticle_circle(var_6 gettagorigin("tag_eye"), 65, 50);
+        var_6 thread func_8C6F(self, var_8);
       }
     }
   }
 
   wait(3);
-  foreach(var_0B in var_02) {
+  foreach(var_0B in var_2) {
     var_0B delete();
   }
 
-  foreach(var_0E in var_01) {
+  foreach(var_0E in var_1) {
     var_0E delete();
   }
 }
 
-func_68D8(param_00, param_01) {
-  playFXOnTag(level.var_8C71["wave"], param_00, "tag_origin");
-  var_02 = rotatepointaroundvector(anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()), param_01);
-  var_03 = self.origin + var_02 * 100000;
-  var_04 = scripts\common\trace::ray_trace(self.origin + (0, 0, 96), var_03);
-  if(!isDefined(var_04)) {
-    var_05 = 3;
-    var_04["position"] = var_03;
+func_68D8(var_0, var_1) {
+  playFXOnTag(level.var_8C71["wave"], var_0, "tag_origin");
+  var_2 = rotatepointaroundvector(anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()), var_1);
+  var_3 = self.origin + var_2 * 100000;
+  var_4 = scripts\common\trace::ray_trace(self.origin + (0, 0, 96), var_3);
+  if(!isDefined(var_4)) {
+    var_5 = 3;
+    var_4["position"] = var_3;
   } else {
-    var_05 = 3 * var_05["fraction"];
-    if(var_05 <= 0) {
-      var_05 = 0.05;
+    var_5 = 3 * var_5["fraction"];
+    if(var_5 <= 0) {
+      var_5 = 0.05;
     }
   }
 
-  param_00 moveto(var_04["position"], var_05);
+  var_0 moveto(var_4["position"], var_5);
 }

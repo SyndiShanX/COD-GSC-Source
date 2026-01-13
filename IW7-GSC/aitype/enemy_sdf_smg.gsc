@@ -24,9 +24,9 @@ main() {
   }
 
   self.var_394 = lib_0A2F::func_7BEC("smg");
-  var_00 = undefined;
-  var_01 = ["character_sdf_army_ftl_1", "character_sdf_army_light_1", "character_sdf_army_heavy_4"];
-  switch (scripts\code\character::get_random_character(3, var_00, var_01)) {
+  var_0 = undefined;
+  var_1 = ["character_sdf_army_ftl_1", "character_sdf_army_light_1", "character_sdf_army_heavy_4"];
+  switch (scripts\code\character::get_random_character(3, var_0, var_1)) {
     case 0:
       lib_04D6::main();
       break;

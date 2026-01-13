@@ -8,128 +8,128 @@ func_6636() {}
 
 func_6639() {}
 
-func_7D0D(param_00) {}
+func_7D0D(var_0) {}
 
 func_1876() {}
 
-func_F390(param_00, param_01, param_02) {}
+func_F390(var_0, var_1, var_2) {}
 
-func_6638(param_00, param_01) {}
+func_6638(var_0, var_1) {}
 
-func_1877(param_00) {}
+func_1877(var_0) {}
 
-func_7997(param_00, param_01) {
-  var_02 = getEntArray();
-  var_03 = [];
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_7997(var_0, var_1) {
+  var_2 = getEntArray();
+  var_3 = [];
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  foreach(var_05 in var_02) {
-    if(!isDefined(var_05.classname)) {
-      var_06 = "UNKNOWN?";
+  foreach(var_5 in var_2) {
+    if(!isDefined(var_5.classname)) {
+      var_6 = "UNKNOWN?";
     } else {
-      var_06 = var_05.classname;
+      var_6 = var_5.classname;
     }
 
-    if(param_00) {
-      if(isai(var_05)) {
-        var_06 = "actors";
-      } else if(isspawner(var_05)) {
-        var_07 = getsubstr(var_06, 0, 5);
-        if(var_07 == "actor") {
-          var_06 = "AI_spawners";
+    if(var_0) {
+      if(isai(var_5)) {
+        var_6 = "actors";
+      } else if(isspawner(var_5)) {
+        var_7 = getsubstr(var_6, 0, 5);
+        if(var_7 == "actor") {
+          var_6 = "AI_spawners";
         } else {
-          var_06 = "vehicle_spawners";
+          var_6 = "vehicle_spawners";
         }
-      } else if(isDefined(var_05.var_49BD)) {
-        var_06 = var_05.classname + " CREATEFX";
-      } else if(!isDefined(var_05.var_9F)) {} else if(var_05.var_9F == "script_model") {
-        if(var_05.model == "tag_origin") {
-          var_06 = "script_model TAG_ORIGIN";
+      } else if(isDefined(var_5.var_49BD)) {
+        var_6 = var_5.classname + " CREATEFX";
+      } else if(!isDefined(var_5.var_9F)) {} else if(var_5.var_9F == "script_model") {
+        if(var_5.model == "tag_origin") {
+          var_6 = "script_model TAG_ORIGIN";
         }
-      } else if(var_05.var_9F == "trigger_multiple") {
-        var_07 = getsubstr(var_06, 0, 22);
-        if(var_07 == "trigger_multiple_bcs_") {
-          var_06 = "trigger_multiple_bcs";
+      } else if(var_5.var_9F == "trigger_multiple") {
+        var_7 = getsubstr(var_6, 0, 22);
+        if(var_7 == "trigger_multiple_bcs_") {
+          var_6 = "trigger_multiple_bcs";
         } else {
-          var_06 = "trigger_multiple";
+          var_6 = "trigger_multiple";
         }
       } else {
-        var_07 = getsubstr(var_06.var_9F, 0, 10);
-        if(var_07 == "weapon_iw7") {
-          var_06 = "weapons";
+        var_7 = getsubstr(var_6.var_9F, 0, 10);
+        if(var_7 == "weapon_iw7") {
+          var_6 = "weapons";
         }
 
-        var_07 = getsubstr(var_05.var_9F, 0, 5);
-        if(var_07 == "actor") {
-          var_06 = "drones";
+        var_7 = getsubstr(var_5.var_9F, 0, 5);
+        if(var_7 == "actor") {
+          var_6 = "drones";
         }
       }
     } else {
-      if(isDefined(var_05.var_49BD)) {
-        var_06 = "CREATEFX " + var_05.classname;
+      if(isDefined(var_5.var_49BD)) {
+        var_6 = "CREATEFX " + var_5.classname;
       }
 
-      if(var_06 == "script_model") {
-        var_06 = var_06 + " " + var_05.model;
+      if(var_6 == "script_model") {
+        var_6 = var_6 + " " + var_5.model;
       }
     }
 
-    if(!isDefined(var_03[var_06])) {
-      var_03[var_06] = 0;
+    if(!isDefined(var_3[var_6])) {
+      var_3[var_6] = 0;
     }
 
-    var_03[var_06]++;
+    var_3[var_6]++;
   }
 
-  if(!isDefined(param_01) || !param_01) {
-    var_03 = func_10418(var_03);
+  if(!isDefined(var_1) || !var_1) {
+    var_3 = func_10418(var_3);
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_10418(param_00) {
-  var_01 = getarraykeys(param_00);
-  for(var_02 = 0; var_02 < var_01.size - 1; var_02++) {
-    for(var_03 = var_02 + 1; var_03 < var_01.size; var_03++) {
-      if(stricmp(var_01[var_02], var_01[var_03]) > 0) {
-        var_04 = var_01[var_03];
-        var_01[var_03] = var_01[var_02];
-        var_01[var_02] = var_04;
+func_10418(var_0) {
+  var_1 = getarraykeys(var_0);
+  for(var_2 = 0; var_2 < var_1.size - 1; var_2++) {
+    for(var_3 = var_2 + 1; var_3 < var_1.size; var_3++) {
+      if(stricmp(var_1[var_2], var_1[var_3]) > 0) {
+        var_4 = var_1[var_3];
+        var_1[var_3] = var_1[var_2];
+        var_1[var_2] = var_4;
       }
     }
   }
 
-  var_05 = [];
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    var_05[var_01[var_02]] = param_00[var_01[var_02]];
+  var_5 = [];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_5[var_1[var_2]] = var_0[var_1[var_2]];
   }
 
-  return var_05;
+  return var_5;
 }
 
-func_4ED2(param_00) {
-  var_01 = getaiarray();
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    if(var_01[var_02] getentitynumber() != param_00) {
+func_4ED2(var_0) {
+  var_1 = getaiarray();
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_1[var_2] getentitynumber() != var_0) {
       continue;
     }
 
-    var_01[var_02] thread func_4ED3();
+    var_1[var_2] thread func_4ED3();
     break;
   }
 }
 
-func_4F22(param_00) {
-  var_01 = getaiarray();
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    if(var_01[var_02] getentitynumber() != param_00) {
+func_4F22(var_0) {
+  var_1 = getaiarray();
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_1[var_2] getentitynumber() != var_0) {
       continue;
     }
 
-    var_01[var_02] notify("stop_drawing_enemy_pos");
+    var_1[var_2] notify("stop_drawing_enemy_pos");
     break;
   }
 }
@@ -145,46 +145,46 @@ func_4ED3() {
       continue;
     }
 
-    var_00 = scripts\anim\utility::func_7E90();
+    var_0 = scripts\anim\utility::func_7E90();
   }
 }
 
 func_4ED4() {
-  var_00 = getaiarray();
-  var_01 = undefined;
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    var_01 = var_00[var_02];
-    if(!isalive(var_01)) {
+  var_0 = getaiarray();
+  var_1 = undefined;
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_1 = var_0[var_2];
+    if(!isalive(var_1)) {
       continue;
     }
 
-    if(isDefined(var_01.setignoremegroup)) {}
+    if(isDefined(var_1.setignoremegroup)) {}
 
-    if(isDefined(var_01.goodshootpos)) {
-      if(var_01 gettargetchargepos()) {
-        var_03 = (1, 0, 0);
+    if(isDefined(var_1.goodshootpos)) {
+      if(var_1 gettargetchargepos()) {
+        var_3 = (1, 0, 0);
       } else {
-        var_03 = (0, 0, 1);
+        var_3 = (0, 0, 1);
       }
 
-      var_04 = var_01.origin + (0, 0, 54);
-      if(isDefined(var_01.target_getindexoftarget)) {
-        if(var_01.target_getindexoftarget.type == "Cover Left") {
-          var_05 = 1;
-          var_04 = anglestoright(var_01.target_getindexoftarget.angles);
-          var_04 = var_04 * -32;
-          var_04 = (var_04[0], var_04[1], 64);
-          var_04 = var_01.target_getindexoftarget.origin + var_04;
-        } else if(var_01.target_getindexoftarget.type == "Cover Right") {
-          var_05 = 1;
-          var_04 = anglestoright(var_01.target_getindexoftarget.angles);
-          var_04 = var_04 * 32;
-          var_04 = (var_04[0], var_04[1], 64);
-          var_04 = var_01.target_getindexoftarget.origin + var_04;
+      var_4 = var_1.origin + (0, 0, 54);
+      if(isDefined(var_1.target_getindexoftarget)) {
+        if(var_1.target_getindexoftarget.type == "Cover Left") {
+          var_5 = 1;
+          var_4 = anglestoright(var_1.target_getindexoftarget.angles);
+          var_4 = var_4 * -32;
+          var_4 = (var_4[0], var_4[1], 64);
+          var_4 = var_1.target_getindexoftarget.origin + var_4;
+        } else if(var_1.target_getindexoftarget.type == "Cover Right") {
+          var_5 = 1;
+          var_4 = anglestoright(var_1.target_getindexoftarget.angles);
+          var_4 = var_4 * 32;
+          var_4 = (var_4[0], var_4[1], 64);
+          var_4 = var_1.target_getindexoftarget.origin + var_4;
         }
       }
 
-      scripts\engine\utility::draw_arrow(var_04, var_01.goodshootpos, var_03);
+      scripts\engine\utility::draw_arrow(var_4, var_1.goodshootpos, var_3);
     }
   }
 
@@ -192,71 +192,71 @@ func_4ED4() {
     return;
   }
 
-  if(!isalive(var_01)) {
+  if(!isalive(var_1)) {
     return;
   }
 
-  if(isalive(var_01.isnodeoccupied)) {}
+  if(isalive(var_1.isnodeoccupied)) {}
 
-  if(isDefined(var_01.setignoremegroup)) {}
+  if(isDefined(var_1.setignoremegroup)) {}
 
-  if(isalive(var_01._meth_8450)) {}
+  if(isalive(var_1._meth_8450)) {}
 
-  if(!var_01 scripts\anim\utility::func_8BED()) {
+  if(!var_1 scripts\anim\utility::func_8BED()) {
     return;
   }
 
-  var_06 = var_01 scripts\anim\utility::func_7E90();
-  if(isDefined(var_01.goodshootpos)) {}
+  var_6 = var_1 scripts\anim\utility::func_7E90();
+  if(isDefined(var_1.goodshootpos)) {}
 }
 
-func_5B76(param_00) {}
+func_5B76(var_0) {}
 
-func_5B88(param_00, param_01, param_02) {
-  if(isDefined(self.model) && scripts\sp\utility::hastag(self.model, param_00)) {
-    var_03 = self gettagorigin(param_00);
-    var_04 = self gettagangles(param_00);
-    func_5B6D(var_03, var_04, param_01, param_02);
+func_5B88(var_0, var_1, var_2) {
+  if(isDefined(self.model) && scripts\sp\utility::hastag(self.model, var_0)) {
+    var_3 = self gettagorigin(var_0);
+    var_4 = self gettagangles(var_0);
+    func_5B6D(var_3, var_4, var_1, var_2);
   }
 }
 
-func_5B6D(param_00, param_01, param_02, param_03) {
-  var_04 = 10;
-  var_05 = anglesToForward(param_01);
-  var_06 = var_05 * var_04;
-  var_07 = var_05 * var_04 * 0.8;
-  var_08 = anglestoright(param_01);
-  var_09 = var_08 * var_04 * -0.2;
-  var_0A = var_08 * var_04 * 0.2;
-  var_0B = anglestoup(param_01);
-  var_08 = var_08 * var_04;
-  var_0B = var_0B * var_04;
+func_5B6D(var_0, var_1, var_2, var_3) {
+  var_4 = 10;
+  var_5 = anglesToForward(var_1);
+  var_6 = var_5 * var_4;
+  var_7 = var_5 * var_4 * 0.8;
+  var_8 = anglestoright(var_1);
+  var_9 = var_8 * var_4 * -0.2;
+  var_0A = var_8 * var_4 * 0.2;
+  var_0B = anglestoup(var_1);
+  var_8 = var_8 * var_4;
+  var_0B = var_0B * var_4;
   var_0C = (0.9, 0.2, 0.2);
   var_0D = (0.2, 0.9, 0.2);
   var_0E = (0.2, 0.2, 0.9);
-  if(isDefined(param_02)) {
-    var_0C = param_02;
-    var_0D = param_02;
-    var_0E = param_02;
+  if(isDefined(var_2)) {
+    var_0C = var_2;
+    var_0D = var_2;
+    var_0E = var_2;
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 }
 
-func_5B89(param_00, param_01) {
+func_5B89(var_0, var_1) {
   for(;;) {
     if(!isDefined(self)) {
       return;
     }
 
-    func_5B88(param_00, param_01);
+    func_5B88(var_0, var_1);
     wait(0.05);
   }
 }
 
-func_5B1D(param_00, param_01) {
+func_5B1D(var_0, var_1) {
   self endon("death");
   for(;;) {
     if(!isDefined(self)) {
@@ -267,68 +267,68 @@ func_5B1D(param_00, param_01) {
       break;
     }
 
-    func_5B88(param_00, param_01);
+    func_5B88(var_0, var_1);
     wait(0.05);
   }
 }
 
-func_133A3(param_00, param_01) {
-  if(param_00 == "ai") {
-    var_02 = getaiarray();
-    for(var_03 = 0; var_03 < var_02.size; var_03++) {
-      var_02[var_03] func_5B88(param_01);
+func_133A3(var_0, var_1) {
+  if(var_0 == "ai") {
+    var_2 = getaiarray();
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      var_2[var_3] func_5B88(var_1);
     }
   }
 }
 
 func_4EC1() {
   level.player.ignoreme = 1;
-  var_00 = getallnodes();
-  var_01 = [];
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    if(var_00[var_02].type == "Cover Left") {
-      var_01[var_01.size] = var_00[var_02];
+  var_0 = getallnodes();
+  var_1 = [];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(var_0[var_2].type == "Cover Left") {
+      var_1[var_1.size] = var_0[var_2];
     }
 
-    if(var_00[var_02].type == "Cover Right") {
-      var_01[var_01.size] = var_00[var_02];
+    if(var_0[var_2].type == "Cover Right") {
+      var_1[var_1.size] = var_0[var_2];
     }
   }
 
-  var_03 = getaiarray();
-  for(var_02 = 0; var_02 < var_03.size; var_02++) {
-    var_03[var_02] delete();
+  var_3 = getaiarray();
+  for(var_2 = 0; var_2 < var_3.size; var_2++) {
+    var_3[var_2] delete();
   }
 
   level.var_4F54 = getspawnerarray();
   level.var_1658 = [];
   level.var_4484 = [];
-  for(var_02 = 0; var_02 < level.var_4F54.size; var_02++) {
-    level.var_4F54[var_02].var_336 = "blah";
+  for(var_2 = 0; var_2 < level.var_4F54.size; var_2++) {
+    level.var_4F54[var_2].var_336 = "blah";
   }
 
-  var_04 = 0;
-  for(var_02 = 0; var_02 < 30; var_02++) {
-    if(var_02 >= var_01.size) {
+  var_4 = 0;
+  for(var_2 = 0; var_2 < 30; var_2++) {
+    if(var_2 >= var_1.size) {
       break;
     }
 
-    var_01[var_02] thread func_474E();
-    var_04++;
+    var_1[var_2] thread func_474E();
+    var_4++;
   }
 
-  if(var_01.size <= 30) {
+  if(var_1.size <= 30) {
     return;
   }
 
   for(;;) {
     level waittill("debug_next_corner");
-    if(var_04 >= var_01.size) {
-      var_04 = 0;
+    if(var_4 >= var_1.size) {
+      var_4 = 0;
     }
 
-    var_01[var_04] thread func_474E();
-    var_04++;
+    var_1[var_4] thread func_474E();
+    var_4++;
   }
 }
 
@@ -337,46 +337,46 @@ func_474E() {
 }
 
 func_4747() {
-  var_00 = undefined;
-  var_01 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   for(;;) {
-    for(var_02 = 0; var_02 < level.var_4F54.size; var_02++) {
+    for(var_2 = 0; var_2 < level.var_4F54.size; var_2++) {
       wait(0.05);
-      var_01 = level.var_4F54[var_02];
-      var_03 = 0;
-      for(var_04 = 0; var_04 < level.var_1658.size; var_04++) {
-        if(distance(level.var_1658[var_04].origin, self.origin) > 250) {
+      var_1 = level.var_4F54[var_2];
+      var_3 = 0;
+      for(var_4 = 0; var_4 < level.var_1658.size; var_4++) {
+        if(distance(level.var_1658[var_4].origin, self.origin) > 250) {
           continue;
         }
 
-        var_03 = 1;
+        var_3 = 1;
         break;
       }
 
-      if(var_03) {
+      if(var_3) {
         continue;
       }
 
-      var_05 = 0;
-      for(var_04 = 0; var_04 < level.var_4484.size; var_04++) {
-        if(level.var_4484[var_04] != self) {
+      var_5 = 0;
+      for(var_4 = 0; var_4 < level.var_4484.size; var_4++) {
+        if(level.var_4484[var_4] != self) {
           continue;
         }
 
-        var_05 = 1;
+        var_5 = 1;
         break;
       }
 
-      if(var_05) {
+      if(var_5) {
         continue;
       }
 
       level.var_1658[level.var_1658.size] = self;
-      var_01.origin = self.origin;
-      var_01.angles = self.angles;
-      var_01.var_C1 = 1;
-      var_00 = var_01 _meth_8393();
-      if(scripts\sp\utility::func_106ED(var_00)) {
+      var_1.origin = self.origin;
+      var_1.angles = self.angles;
+      var_1.var_C1 = 1;
+      var_0 = var_1 _meth_8393();
+      if(scripts\sp\utility::func_106ED(var_0)) {
         func_E0C0(self);
         continue;
       }
@@ -384,47 +384,47 @@ func_4747() {
       break;
     }
 
-    if(isalive(var_00)) {
+    if(isalive(var_0)) {
       break;
     }
   }
 
   wait(1);
-  if(isalive(var_00)) {
-    var_00.ignoreme = 1;
-    var_00.team = "neutral";
-    var_00 give_mp_super_weapon(var_00.origin);
+  if(isalive(var_0)) {
+    var_0.ignoreme = 1;
+    var_0.team = "neutral";
+    var_0 give_mp_super_weapon(var_0.origin);
     thread func_49E3(self.origin);
-    var_00 thread scripts\sp\utility::func_4F4B();
-    thread func_49E4(var_00);
-    var_00 waittill("death");
+    var_0 thread scripts\sp\utility::func_4F4B();
+    thread func_49E4(var_0);
+    var_0 waittill("death");
   }
 
   func_E0C0(self);
   level.var_4484[level.var_4484.size] = self;
 }
 
-func_E0C0(param_00) {
-  var_01 = [];
-  for(var_02 = 0; var_02 < level.var_1658.size; var_02++) {
-    if(level.var_1658[var_02] == param_00) {
+func_E0C0(var_0) {
+  var_1 = [];
+  for(var_2 = 0; var_2 < level.var_1658.size; var_2++) {
+    if(level.var_1658[var_2] == var_0) {
       continue;
     }
 
-    var_01[var_01.size] = level.var_1658[var_02];
+    var_1[var_1.size] = level.var_1658[var_2];
   }
 
-  level.var_1658 = var_01;
+  level.var_1658 = var_1;
 }
 
-func_49E3(param_00) {
+func_49E3(var_0) {
   wait(0.05);
 }
 
-func_49E4(param_00) {
-  var_01 = undefined;
-  while(isalive(param_00)) {
-    var_01 = param_00.origin;
+func_49E4(var_0) {
+  var_1 = undefined;
+  while(isalive(var_0)) {
+    var_1 = var_0.origin;
     wait(0.05);
   }
 
@@ -436,7 +436,7 @@ func_4F49() {
   self endon("stopdebugmisstime");
   self endon("death");
   for(;;) {
-    if(self.a.var_B8D6 <= 0) {} else {}
+    if(self.a.var_B8D6 <= 0) {}
 
     wait(0.05);
   }
@@ -446,7 +446,7 @@ func_4F4A() {
   self notify("stopdebugmisstime");
 }
 
-func_4F46(param_00) {}
+func_4F46(var_0) {}
 
 func_4F41() {}
 
@@ -461,94 +461,94 @@ func_4EDC() {}
 func_4EDD() {}
 
 func_1011D() {
-  var_00 = undefined;
-  var_01 = undefined;
-  var_00 = (15.1859, -12.2822, 4.071);
-  var_01 = (947.2, -10918, 64.9514);
+  var_0 = undefined;
+  var_1 = undefined;
+  var_0 = (15.1859, -12.2822, 4.071);
+  var_1 = (947.2, -10918, 64.9514);
   for(;;) {
     wait(0.05);
-    var_02 = var_00;
-    var_03 = var_01;
-    if(!isDefined(var_00)) {
-      var_02 = level.var_11A8E;
+    var_2 = var_0;
+    var_3 = var_1;
+    if(!isDefined(var_0)) {
+      var_2 = level.var_11A8E;
     }
 
-    if(!isDefined(var_01)) {
-      var_03 = level.player getEye();
+    if(!isDefined(var_1)) {
+      var_3 = level.player getEye();
     }
 
-    var_04 = bulletTrace(var_02, var_03, 0, undefined);
+    var_4 = bulletTrace(var_2, var_3, 0, undefined);
   }
 }
 
 func_4EBB() {
-  var_00 = newhudelem();
-  var_00.alignx = "left";
-  var_00.aligny = "middle";
-  var_00.x = 10;
-  var_00.y = 100;
-  var_00.label = &"DEBUG_DRONES";
-  var_00.alpha = 0;
-  var_01 = newhudelem();
-  var_01.alignx = "left";
-  var_01.aligny = "middle";
-  var_01.x = 10;
-  var_01.y = 115;
-  var_01.label = &"DEBUG_ALLIES";
-  var_01.alpha = 0;
-  var_02 = newhudelem();
-  var_02.alignx = "left";
-  var_02.aligny = "middle";
-  var_02.x = 10;
-  var_02.y = 130;
-  var_02.label = &"DEBUG_AXIS";
-  var_02.alpha = 0;
-  var_03 = newhudelem();
-  var_03.alignx = "left";
-  var_03.aligny = "middle";
-  var_03.x = 10;
-  var_03.y = 145;
-  var_03.label = &"DEBUG_VEHICLES";
-  var_03.alpha = 0;
-  var_04 = newhudelem();
-  var_04.alignx = "left";
-  var_04.aligny = "middle";
-  var_04.x = 10;
-  var_04.y = 160;
-  var_04.label = &"DEBUG_TOTAL";
-  var_04.alpha = 0;
-  var_05 = "off";
+  var_0 = newhudelem();
+  var_0.alignx = "left";
+  var_0.aligny = "middle";
+  var_0.x = 10;
+  var_0.y = 100;
+  var_0.label = &"DEBUG_DRONES";
+  var_0.alpha = 0;
+  var_1 = newhudelem();
+  var_1.alignx = "left";
+  var_1.aligny = "middle";
+  var_1.x = 10;
+  var_1.y = 115;
+  var_1.label = &"DEBUG_ALLIES";
+  var_1.alpha = 0;
+  var_2 = newhudelem();
+  var_2.alignx = "left";
+  var_2.aligny = "middle";
+  var_2.x = 10;
+  var_2.y = 130;
+  var_2.label = &"DEBUG_AXIS";
+  var_2.alpha = 0;
+  var_3 = newhudelem();
+  var_3.alignx = "left";
+  var_3.aligny = "middle";
+  var_3.x = 10;
+  var_3.y = 145;
+  var_3.label = &"DEBUG_VEHICLES";
+  var_3.alpha = 0;
+  var_4 = newhudelem();
+  var_4.alignx = "left";
+  var_4.aligny = "middle";
+  var_4.x = 10;
+  var_4.y = 160;
+  var_4.label = &"DEBUG_TOTAL";
+  var_4.alpha = 0;
+  var_5 = "off";
   for(;;) {
-    var_06 = getdvar("debug_character_count");
-    if(var_06 == "off") {
-      if(var_06 != var_05) {
-        var_00.alpha = 0;
-        var_01.alpha = 0;
-        var_02.alpha = 0;
-        var_03.alpha = 0;
-        var_04.alpha = 0;
-        var_05 = var_06;
+    var_6 = getdvar("debug_character_count");
+    if(var_6 == "off") {
+      if(var_6 != var_5) {
+        var_0.alpha = 0;
+        var_1.alpha = 0;
+        var_2.alpha = 0;
+        var_3.alpha = 0;
+        var_4.alpha = 0;
+        var_5 = var_6;
       }
 
       wait(0.25);
       continue;
-    } else if(var_06 != var_05) {
-      var_00.alpha = 1;
-      var_01.alpha = 1;
-      var_02.alpha = 1;
-      var_03.alpha = 1;
-      var_04.alpha = 1;
-      var_05 = var_06;
+    } else if(var_6 != var_5) {
+      var_0.alpha = 1;
+      var_1.alpha = 1;
+      var_2.alpha = 1;
+      var_3.alpha = 1;
+      var_4.alpha = 1;
+      var_5 = var_6;
     }
 
-    var_07 = getEntArray("drone", "targetname").size;
-    var_00 setvalue(var_07);
-    var_08 = getaiarray("allies").size;
-    var_01 setvalue(var_08);
-    var_09 = getaiarray("bad_guys").size;
-    var_02 setvalue(var_09);
-    var_03 setvalue(getEntArray("script_vehicle", "classname").size);
-    var_04 setvalue(var_07 + var_08 + var_09);
+    var_7 = getEntArray("drone", "targetname").size;
+    var_0 setvalue(var_7);
+    var_8 = getaiarray("allies").size;
+    var_1 setvalue(var_8);
+    var_9 = getaiarray("bad_guys").size;
+    var_2 setvalue(var_9);
+    var_3 setvalue(getEntArray("script_vehicle", "classname").size);
+    var_4 setvalue(var_7 + var_8 + var_9);
     wait(0.25);
   }
 }
@@ -568,71 +568,71 @@ func_4EFD() {}
 
 func_37A5() {
   wait(0.05);
-  var_00 = getEntArray("camera", "targetname");
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_02 = getent(var_00[var_01].target, "targetname");
-    var_00[var_01].var_C712 = var_02.origin;
-    var_00[var_01].angles = vectortoangles(var_02.origin - var_00[var_01].origin);
+  var_0 = getEntArray("camera", "targetname");
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = getent(var_0[var_1].target, "targetname");
+    var_0[var_1].var_C712 = var_2.origin;
+    var_0[var_1].angles = vectortoangles(var_2.origin - var_0[var_1].origin);
   }
 
   for(;;) {
-    var_03 = getaiarray("axis");
-    if(!var_03.size) {
+    var_3 = getaiarray("axis");
+    if(!var_3.size) {
       func_7370();
       wait(0.5);
       continue;
     }
 
-    var_04 = [];
-    for(var_01 = 0; var_01 < var_00.size; var_01++) {
-      for(var_05 = 0; var_05 < var_03.size; var_05++) {
-        if(distance(var_00[var_01].origin, var_03[var_05].origin) > 256) {
+    var_4 = [];
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      for(var_5 = 0; var_5 < var_3.size; var_5++) {
+        if(distance(var_0[var_1].origin, var_3[var_5].origin) > 256) {
           continue;
         }
 
-        var_04[var_04.size] = var_00[var_01];
+        var_4[var_4.size] = var_0[var_1];
         break;
       }
     }
 
-    if(!var_04.size) {
+    if(!var_4.size) {
       func_7370();
       wait(0.5);
       continue;
     }
 
-    var_06 = [];
-    for(var_01 = 0; var_01 < var_04.size; var_01++) {
-      var_07 = var_04[var_01];
-      var_08 = var_07.var_C712;
-      var_09 = var_07.origin;
-      var_0A = vectortoangles((var_09[0], var_09[1], var_09[2]) - (var_08[0], var_08[1], var_08[2]));
+    var_6 = [];
+    for(var_1 = 0; var_1 < var_4.size; var_1++) {
+      var_7 = var_4[var_1];
+      var_8 = var_7.var_C712;
+      var_9 = var_7.origin;
+      var_0A = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
       var_0B = (0, var_0A[1], 0);
       var_0C = anglesToForward(var_0B);
-      var_0A = vectornormalize(var_09 - level.player.origin);
+      var_0A = vectornormalize(var_9 - level.player.origin);
       var_0D = vectordot(var_0C, var_0A);
       if(var_0D < 0.85) {
         continue;
       }
 
-      var_06[var_06.size] = var_07;
+      var_6[var_6.size] = var_7;
     }
 
-    if(!var_06.size) {
+    if(!var_6.size) {
       func_7370();
       wait(0.5);
       continue;
     }
 
-    var_0E = distance(level.player.origin, var_06[0].origin);
-    var_0F = var_06[0];
-    for(var_01 = 1; var_01 < var_06.size; var_01++) {
-      var_10 = distance(level.player.origin, var_06[var_01].origin);
+    var_0E = distance(level.player.origin, var_6[0].origin);
+    var_0F = var_6[0];
+    for(var_1 = 1; var_1 < var_6.size; var_1++) {
+      var_10 = distance(level.player.origin, var_6[var_1].origin);
       if(var_10 > var_0E) {
         continue;
       }
 
-      var_0F = var_06[var_01];
+      var_0F = var_6[var_1];
       var_0E = var_10;
     }
 
@@ -645,21 +645,21 @@ func_7370() {
   setdvar("cl_freemove", "0");
 }
 
-func_F7FD(param_00) {
+func_F7FD(var_0) {
   setdvar("cl_freemove", "2");
 }
 
 func_4E6B() {
   waittillframeend;
-  for(var_00 = 0; var_00 < 50; var_00++) {
-    if(!isDefined(level.var_4E6A[var_00])) {
+  for(var_0 = 0; var_0 < 50; var_0++) {
+    if(!isDefined(level.var_4E6A[var_0])) {
       continue;
     }
 
-    var_01 = level.var_4E6A[var_00];
-    for(var_02 = 0; var_02 < var_01.size; var_02++) {
-      var_03 = var_01[var_02];
-      if(isDefined(var_03.var_12844)) {
+    var_1 = level.var_4E6A[var_0];
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      var_3 = var_1[var_2];
+      if(isDefined(var_3.var_12844)) {
         continue;
       }
     }
@@ -676,7 +676,7 @@ func_13ACF() {
 }
 
 func_12ED1() {
-  var_00 = getdvarfloat("scr_requiredMapAspectRatio", 1);
+  var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
   if(!isDefined(level.var_B7AF)) {
     setdvar("scr_minimap_corner_targetname", "minimap_corner");
     level.var_B7AF = "minimap_corner";
@@ -687,77 +687,77 @@ func_12ED1() {
     level.var_B7B1 = 0;
   }
 
-  var_01 = getdvarfloat("scr_minimap_height");
-  var_02 = getdvar("scr_minimap_corner_targetname");
-  if(var_01 != level.var_B7B1 || var_02 != level.var_B7AF) {
+  var_1 = getdvarfloat("scr_minimap_height");
+  var_2 = getdvar("scr_minimap_corner_targetname");
+  if(var_1 != level.var_B7B1 || var_2 != level.var_B7AF) {
     if(isDefined(level.var_B7B2)) {
       level.var_B7B3 unlink();
       level.var_B7B2 delete();
       level notify("end_draw_map_bounds");
     }
 
-    if(var_01 > 0) {
-      level.var_B7B1 = var_01;
-      level.var_B7AF = var_02;
-      var_03 = level.player;
-      var_04 = getEntArray(var_02, "targetname");
-      if(var_04.size == 2) {
-        var_05 = var_04[0].origin + var_04[1].origin;
-        var_05 = (var_05[0] * 0.5, var_05[1] * 0.5, var_05[2] * 0.5);
-        var_06 = (var_04[0].origin[0], var_04[0].origin[1], var_05[2]);
-        var_07 = (var_04[0].origin[0], var_04[0].origin[1], var_05[2]);
-        if(var_04[1].origin[0] > var_04[0].origin[0]) {
-          var_06 = (var_04[1].origin[0], var_06[1], var_06[2]);
+    if(var_1 > 0) {
+      level.var_B7B1 = var_1;
+      level.var_B7AF = var_2;
+      var_3 = level.player;
+      var_4 = getEntArray(var_2, "targetname");
+      if(var_4.size == 2) {
+        var_5 = var_4[0].origin + var_4[1].origin;
+        var_5 = (var_5[0] * 0.5, var_5[1] * 0.5, var_5[2] * 0.5);
+        var_6 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
+        var_7 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
+        if(var_4[1].origin[0] > var_4[0].origin[0]) {
+          var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
         } else {
-          var_07 = (var_04[1].origin[0], var_07[1], var_07[2]);
+          var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
         }
 
-        if(var_04[1].origin[1] > var_04[0].origin[1]) {
-          var_06 = (var_06[0], var_04[1].origin[1], var_06[2]);
+        if(var_4[1].origin[1] > var_4[0].origin[1]) {
+          var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
         } else {
-          var_07 = (var_07[0], var_04[1].origin[1], var_07[2]);
+          var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
         }
 
-        var_08 = var_06 - var_05;
-        var_05 = (var_05[0], var_05[1], var_05[2] + var_01);
-        var_09 = spawn("script_origin", var_03.origin);
+        var_8 = var_6 - var_5;
+        var_5 = (var_5[0], var_5[1], var_5[2] + var_1);
+        var_9 = spawn("script_origin", var_3.origin);
         var_0A = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
         var_0B = (var_0A[1], 0 - var_0A[0], 0);
-        var_0C = vectordot(var_0A, var_08);
+        var_0C = vectordot(var_0A, var_8);
         if(var_0C < 0) {
           var_0C = 0 - var_0C;
         }
 
-        var_0D = vectordot(var_0B, var_08);
+        var_0D = vectordot(var_0B, var_8);
         if(var_0D < 0) {
           var_0D = 0 - var_0D;
         }
 
-        if(var_00 > 0) {
+        if(var_0 > 0) {
           var_0E = var_0D / var_0C;
-          if(var_0E < var_00) {
-            var_0F = var_00 / var_0E;
+          if(var_0E < var_0) {
+            var_0F = var_0 / var_0E;
             var_0D = var_0D * var_0F;
-            var_10 = vecscale(var_0B, vectordot(var_0B, var_06 - var_05) * var_0F - 1);
-            var_07 = var_07 - var_10;
-            var_06 = var_06 + var_10;
+            var_10 = vecscale(var_0B, vectordot(var_0B, var_6 - var_5) * var_0F - 1);
+            var_7 = var_7 - var_10;
+            var_6 = var_6 + var_10;
           } else {
-            var_0F = var_10 / var_02;
+            var_0F = var_10 / var_2;
             var_0D = var_0D * var_10;
-            var_10 = vecscale(var_0B, vectordot(var_0B, var_07 - var_06) * var_10 - 1);
-            var_07 = var_07 - var_10;
-            var_06 = var_06 + var_10;
+            var_10 = vecscale(var_0B, vectordot(var_0B, var_7 - var_6) * var_10 - 1);
+            var_7 = var_7 - var_10;
+            var_6 = var_6 + var_10;
           }
         }
 
         if(level.console) {
           var_11 = 1.777778;
-          var_12 = 2 * atan(var_0D * 0.8 / var_01);
-          var_13 = 2 * atan(var_0C * var_11 * 0.8 / var_01);
+          var_12 = 2 * atan(var_0D * 0.8 / var_1);
+          var_13 = 2 * atan(var_0C * var_11 * 0.8 / var_1);
         } else {
           var_11 = 1.333333;
-          var_12 = 2 * atan(var_12 * 1.05 / var_03);
-          var_13 = 2 * atan(var_0D * var_12 * 1.05 / var_02);
+          var_12 = 2 * atan(var_12 * 1.05 / var_3);
+          var_13 = 2 * atan(var_0D * var_12 * 1.05 / var_2);
         }
 
         if(var_12 > var_13) {
@@ -766,7 +766,7 @@ func_12ED1() {
           var_14 = var_14;
         }
 
-        var_15 = var_01 - 1000;
+        var_15 = var_1 - 1000;
         if(var_15 < 16) {
           var_15 = 16;
         }
@@ -775,14 +775,14 @@ func_12ED1() {
           var_15 = 10000;
         }
 
-        var_03 playerlinktoabsolute(var_09);
-        var_09.origin = var_05 + (0, 0, -62);
-        var_09.angles = (90, getnorthyaw(), 0);
-        var_03 giveweapon("defaultweapon");
+        var_3 playerlinktoabsolute(var_9);
+        var_9.origin = var_5 + (0, 0, -62);
+        var_9.angles = (90, getnorthyaw(), 0);
+        var_3 giveweapon("defaultweapon");
         setsaveddvar("cg_fov", var_14);
-        level.var_B7B3 = var_03;
-        level.var_B7B2 = var_09;
-        thread func_5B7E(var_05, var_07, var_06);
+        level.var_B7B3 = var_3;
+        level.var_B7B2 = var_9;
+        thread func_5B7E(var_5, var_7, var_6);
         return;
       }
 
@@ -792,65 +792,65 @@ func_12ED1() {
 }
 
 func_7E1F() {
-  var_00 = [];
-  var_00 = getEntArray("minimap_line", "script_noteworthy");
-  var_01 = [];
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    var_01[var_02] = var_00[var_02] func_7E1E();
+  var_0 = [];
+  var_0 = getEntArray("minimap_line", "script_noteworthy");
+  var_1 = [];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_1[var_2] = var_0[var_2] func_7E1E();
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_7E1E() {
-  var_00 = [];
-  var_01 = self;
-  while(isDefined(var_01)) {
-    var_00[var_00.size] = var_01;
-    if(!isDefined(var_01) || !isDefined(var_01.target)) {
+  var_0 = [];
+  var_1 = self;
+  while(isDefined(var_1)) {
+    var_0[var_0.size] = var_1;
+    if(!isDefined(var_1) || !isDefined(var_1.target)) {
       break;
     }
 
-    var_01 = getent(var_01.target, "targetname");
-    if(isDefined(var_01) && var_01 == var_00[0]) {
-      var_00[var_00.size] = var_01;
+    var_1 = getent(var_1.target, "targetname");
+    if(isDefined(var_1) && var_1 == var_0[0]) {
+      var_0[var_0.size] = var_1;
       break;
     }
   }
 
-  var_02 = [];
-  for(var_03 = 0; var_03 < var_00.size; var_03++) {
-    var_02[var_03] = var_00[var_03].origin;
+  var_2 = [];
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_2[var_3] = var_0[var_3].origin;
   }
 
-  return var_02;
+  return var_2;
 }
 
-vecscale(param_00, param_01) {
-  return (param_00[0] * param_01, param_00[1] * param_01, param_00[2] * param_01);
+vecscale(var_0, var_1) {
+  return (var_0[0] * var_1, var_0[1] * var_1, var_0[2] * var_1);
 }
 
-func_5B7E(param_00, param_01, param_02) {
+func_5B7E(var_0, var_1, var_2) {
   level notify("end_draw_map_bounds");
   level endon("end_draw_map_bounds");
-  var_03 = param_00[2] - param_02[2];
-  var_04 = length(param_01 - param_02);
-  var_05 = param_01 - param_00;
-  var_05 = vectornormalize((var_05[0], var_05[1], 0));
-  param_01 = param_01 + vecscale(var_05, var_04 * 1 / 800 * 0);
-  var_06 = param_02 - param_00;
-  var_06 = vectornormalize((var_06[0], var_06[1], 0));
-  param_02 = param_02 + vecscale(var_06, var_04 * 1 / 800 * 0);
-  var_07 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-  var_08 = param_02 - param_01;
-  var_09 = vecscale(var_07, vectordot(var_08, var_07));
-  var_0A = vecscale(var_07, abs(vectordot(var_08, var_07)));
-  var_0B = param_01;
-  var_0C = param_01 + var_09;
-  var_0D = param_02;
-  var_0E = param_02 - var_09;
-  var_0F = vecscale(param_01 + param_02, 0.5) + vecscale(var_0A, 0.51);
-  var_10 = var_04 * 0.003;
+  var_3 = var_0[2] - var_2[2];
+  var_4 = length(var_1 - var_2);
+  var_5 = var_1 - var_0;
+  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_1 = var_1 + vecscale(var_5, var_4 * 1 / 800 * 0);
+  var_6 = var_2 - var_0;
+  var_6 = vectornormalize((var_6[0], var_6[1], 0));
+  var_2 = var_2 + vecscale(var_6, var_4 * 1 / 800 * 0);
+  var_7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
+  var_8 = var_2 - var_1;
+  var_9 = vecscale(var_7, vectordot(var_8, var_7));
+  var_0A = vecscale(var_7, abs(vectordot(var_8, var_7)));
+  var_0B = var_1;
+  var_0C = var_1 + var_9;
+  var_0D = var_2;
+  var_0E = var_2 - var_9;
+  var_0F = vecscale(var_1 + var_2, 0.5) + vecscale(var_0A, 0.51);
+  var_10 = var_4 * 0.003;
   var_11 = func_7E1F();
   for(;;) {
     scripts\engine\utility::array_levelthread(var_11, ::scripts\engine\utility::plot_points);
@@ -860,42 +860,42 @@ func_5B7E(param_00, param_01, param_02) {
 
 func_4EC0() {
   wait(0.05);
-  var_00 = getaiarray();
-  var_01 = [];
-  var_01["axis"] = [];
-  var_01["allies"] = [];
-  var_01["neutral"] = [];
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    var_03 = var_00[var_02];
-    if(!isDefined(var_03.var_4BDF)) {
+  var_0 = getaiarray();
+  var_1 = [];
+  var_1["axis"] = [];
+  var_1["allies"] = [];
+  var_1["neutral"] = [];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = var_0[var_2];
+    if(!isDefined(var_3.var_4BDF)) {
       continue;
     }
 
-    var_01[var_03.team][var_03.var_4BDF] = 1;
-    var_04 = (1, 1, 1);
-    if(isDefined(var_03.var_EDAD)) {
-      var_04 = level.var_4391[var_03.var_EDAD];
+    var_1[var_3.team][var_3.var_4BDF] = 1;
+    var_4 = (1, 1, 1);
+    if(isDefined(var_3.var_EDAD)) {
+      var_4 = level.var_4391[var_3.var_EDAD];
     }
 
-    if(var_03.team == "axis") {
+    if(var_3.team == "axis") {
       continue;
     }
 
-    var_03 func_12879();
+    var_3 func_12879();
   }
 
-  draw_colornodes(var_01, "allies");
-  draw_colornodes(var_01, "axis");
+  draw_colornodes(var_1, "allies");
+  draw_colornodes(var_1, "axis");
 }
 
-draw_colornodes(param_00, param_01) {
-  var_02 = getarraykeys(param_00[param_01]);
-  for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    var_04 = (1, 1, 1);
-    var_04 = level.var_4391[getsubstr(var_02[var_03], 0, 1)];
-    if(isDefined(level.var_43AD[param_01][var_02[var_03]])) {
-      var_05 = level.var_43AD[param_01][var_02[var_03]];
-      for(var_06 = 0; var_06 < var_05.size; var_06++) {}
+draw_colornodes(var_0, var_1) {
+  var_2 = getarraykeys(var_0[var_1]);
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_4 = (1, 1, 1);
+    var_4 = level.var_4391[getsubstr(var_2[var_3], 0, 1)];
+    if(isDefined(level.var_43AD[var_1][var_2[var_3]])) {
+      var_5 = level.var_43AD[var_1][var_2[var_3]];
+      for(var_6 = 0; var_6 < var_5.size; var_6++) {}
     }
   }
 }
@@ -927,12 +927,12 @@ func_12879() {
     return;
   }
 
-  var_00 = func_7CE8();
-  if(!isDefined(var_00)) {
+  var_0 = func_7CE8();
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!issubstr(var_00, self.var_EDAD)) {}
+  if(!issubstr(var_0, self.var_EDAD)) {}
 }
 
 func_4F55() {
@@ -942,42 +942,42 @@ func_4F55() {
 
 func_4F56() {}
 
-func_56E2(param_00, param_01) {
-  if(self.team == param_00.team) {
+func_56E2(var_0, var_1) {
+  if(self.team == var_0.team) {
     return;
   }
 
-  var_02 = 0;
-  var_02 = var_02 + self.var_33F;
-  var_03 = 0;
-  var_03 = var_03 + param_00.var_33F;
-  var_04 = undefined;
-  if(isDefined(param_01)) {
-    var_04 = self getthreatbiasgroup();
-    if(isDefined(var_04)) {
-      var_03 = var_03 + getthreatbias(param_01, var_04);
-      var_02 = var_02 + getthreatbias(var_04, param_01);
+  var_2 = 0;
+  var_2 = var_2 + self.var_33F;
+  var_3 = 0;
+  var_3 = var_3 + var_0.var_33F;
+  var_4 = undefined;
+  if(isDefined(var_1)) {
+    var_4 = self getthreatbiasgroup();
+    if(isDefined(var_4)) {
+      var_3 = var_3 + getthreatbias(var_1, var_4);
+      var_2 = var_2 + getthreatbias(var_4, var_1);
     }
   }
 
-  if(param_00.ignoreme || var_03 < -900000) {
-    var_03 = "Ignore";
+  if(var_0.ignoreme || var_3 < -900000) {
+    var_3 = "Ignore";
   }
 
-  if(self.ignoreme || var_02 < -900000) {
-    var_02 = "Ignore";
+  if(self.ignoreme || var_2 < -900000) {
+    var_2 = "Ignore";
   }
 
-  var_05 = 20;
-  var_06 = (1, 0.5, 0.2);
-  var_07 = (0.2, 0.5, 1);
-  var_08 = !isplayer(self) && self.triggeroneoffradarsweep;
-  for(var_09 = 0; var_09 <= var_05; var_09++) {
-    if(isDefined(param_01)) {}
+  var_5 = 20;
+  var_6 = (1, 0.5, 0.2);
+  var_7 = (0.2, 0.5, 1);
+  var_8 = !isplayer(self) && self.triggeroneoffradarsweep;
+  for(var_9 = 0; var_9 <= var_5; var_9++) {
+    if(isDefined(var_1)) {}
 
-    if(isDefined(var_04)) {}
+    if(isDefined(var_4)) {}
 
-    if(var_08) {}
+    if(var_8) {}
 
     wait(0.05);
   }
@@ -993,127 +993,127 @@ func_4F3B() {
 }
 
 func_7C31() {
-  var_00 = [];
-  var_00["r"] = (1, 0, 0);
-  var_00["o"] = (1, 0.5, 0);
-  var_00["y"] = (1, 1, 0);
-  var_00["g"] = (0, 1, 0);
-  var_00["c"] = (0, 1, 1);
-  var_00["b"] = (0, 0, 1);
-  var_00["p"] = (1, 0, 1);
-  return var_00;
+  var_0 = [];
+  var_0["r"] = (1, 0, 0);
+  var_0["o"] = (1, 0.5, 0);
+  var_0["y"] = (1, 1, 0);
+  var_0["g"] = (0, 1, 0);
+  var_0["c"] = (0, 1, 1);
+  var_0["b"] = (0, 0, 1);
+  var_0["p"] = (1, 0, 1);
+  return var_0;
 }
 
 draw_closest_wall_points() {
   level endon("updated_color_friendlies");
-  var_00 = getarraykeys(level.var_4EBE);
-  var_01 = [];
-  var_02 = [];
-  var_02[var_02.size] = "r";
-  var_02[var_02.size] = "o";
-  var_02[var_02.size] = "y";
-  var_02[var_02.size] = "g";
-  var_02[var_02.size] = "c";
-  var_02[var_02.size] = "b";
-  var_02[var_02.size] = "p";
-  var_03 = func_7C31();
-  for(var_04 = 0; var_04 < var_02.size; var_04++) {
-    var_01[var_02[var_04]] = 0;
+  var_0 = getarraykeys(level.var_4EBE);
+  var_1 = [];
+  var_2 = [];
+  var_2[var_2.size] = "r";
+  var_2[var_2.size] = "o";
+  var_2[var_2.size] = "y";
+  var_2[var_2.size] = "g";
+  var_2[var_2.size] = "c";
+  var_2[var_2.size] = "b";
+  var_2[var_2.size] = "p";
+  var_3 = func_7C31();
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
+    var_1[var_2[var_4]] = 0;
   }
 
-  for(var_04 = 0; var_04 < var_00.size; var_04++) {
-    var_05 = level.var_4EBE[var_00[var_04]];
-    var_01[var_05]++;
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    var_5 = level.var_4EBE[var_0[var_4]];
+    var_1[var_5]++;
   }
 
-  for(var_04 = 0; var_04 < level.var_4EBF.size; var_04++) {
-    level.var_4EBF[var_04] destroy();
+  for(var_4 = 0; var_4 < level.var_4EBF.size; var_4++) {
+    level.var_4EBF[var_4] destroy();
   }
 
   level.var_4EBF = [];
-  var_06 = 15;
-  var_07 = 365;
-  var_08 = 25;
-  var_09 = 25;
-  for(var_04 = 0; var_04 < var_02.size; var_04++) {
-    if(var_01[var_02[var_04]] <= 0) {
+  var_6 = 15;
+  var_7 = 365;
+  var_8 = 25;
+  var_9 = 25;
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
+    if(var_1[var_2[var_4]] <= 0) {
       continue;
     }
 
-    for(var_0A = 0; var_0A < var_01[var_02[var_04]]; var_0A++) {
+    for(var_0A = 0; var_0A < var_1[var_2[var_4]]; var_0A++) {
       var_0B = newhudelem();
-      var_0B.x = var_06 + 25 * var_0A;
-      var_0B.y = var_07;
+      var_0B.x = var_6 + 25 * var_0A;
+      var_0B.y = var_7;
       var_0B setshader("white", 16, 16);
       var_0B.alignx = "left";
       var_0B.aligny = "bottom";
       var_0B.alpha = 1;
-      var_0B.color = var_03[var_02[var_04]];
+      var_0B.color = var_3[var_2[var_4]];
       level.var_4EBF[level.var_4EBF.size] = var_0B;
     }
 
-    var_07 = var_07 + var_09;
+    var_7 = var_7 + var_9;
   }
 }
 
-func_77F0(param_00) {
-  if(!isDefined(level.var_1FD4[param_00.var_1FBB])) {
+func_77F0(var_0) {
+  if(!isDefined(level.var_1FD4[var_0.var_1FBB])) {
     return;
   }
 
-  if(!isDefined(level.var_1FD4[param_00.var_1FBB][param_00.var_1FAF])) {
+  if(!isDefined(level.var_1FD4[var_0.var_1FBB][var_0.var_1FAF])) {
     return;
   }
 
-  if(!isDefined(level.var_1FD4[param_00.var_1FBB][param_00.var_1FAF][param_00.var_C0C2])) {
+  if(!isDefined(level.var_1FD4[var_0.var_1FBB][var_0.var_1FAF][var_0.var_C0C2])) {
     return;
   }
 
-  return level.var_1FD4[param_00.var_1FBB][param_00.var_1FAF][param_00.var_C0C2]["soundalias"];
+  return level.var_1FD4[var_0.var_1FBB][var_0.var_1FAF][var_0.var_C0C2]["soundalias"];
 }
 
-func_9BEC(param_00, param_01, param_02) {
-  return isDefined(level.var_1FD4[param_00][param_01][param_02]["created_by_animSound"]);
+func_9BEC(var_0, var_1, var_2) {
+  return isDefined(level.var_1FD4[var_0][var_1][var_2]["created_by_animSound"]);
 }
 
-func_4EA9(param_00) {}
+func_4EA9(var_0) {}
 
 func_4EAA() {}
 
-func_113E6(param_00, param_01) {
+func_113E6(var_0, var_1) {
   if(!isDefined(level.var_1FDA)) {
     return;
   }
 
-  if(!isDefined(level.var_1FDA.var_1FDC[param_01])) {
+  if(!isDefined(level.var_1FDA.var_1FDC[var_1])) {
     return;
   }
 
-  var_02 = level.var_1FDA.var_1FDC[param_01];
-  var_03 = func_77F0(var_02);
-  if(!isDefined(var_03) || func_9BEC(var_02.var_1FBB, var_02.var_1FAF, var_02.var_C0C2)) {
-    level.var_1FD4[var_02.var_1FBB][var_02.var_1FAF][var_02.var_C0C2]["soundalias"] = param_00;
-    level.var_1FD4[var_02.var_1FBB][var_02.var_1FAF][var_02.var_C0C2]["created_by_animSound"] = 1;
+  var_2 = level.var_1FDA.var_1FDC[var_1];
+  var_3 = func_77F0(var_2);
+  if(!isDefined(var_3) || func_9BEC(var_2.var_1FBB, var_2.var_1FAF, var_2.var_C0C2)) {
+    level.var_1FD4[var_2.var_1FBB][var_2.var_1FAF][var_2.var_C0C2]["soundalias"] = var_0;
+    level.var_1FD4[var_2.var_1FBB][var_2.var_1FAF][var_2.var_C0C2]["created_by_animSound"] = 1;
   }
 }
 
-func_6C96(param_00) {}
+func_6C96(var_0) {}
 
-func_3D44(param_00) {
+func_3D44(var_0) {
   if(!isDefined(level.var_3D30)) {
     level.var_3D30 = -1;
   }
 
-  if(level.var_3D30 == param_00) {
+  if(level.var_3D30 == var_0) {
     return;
   }
 
-  func_6C96(param_00);
+  func_6C96(var_0);
   if(!isDefined(level.var_3D31)) {
     return;
   }
 
-  level.var_3D30 = param_00;
+  level.var_3D30 = var_0;
   if(!isDefined(level.var_3D2F)) {
     level.var_3D2F = level.var_3D31 scripts\engine\utility::spawn_tag_origin();
   }
@@ -1121,10 +1121,10 @@ func_3D44(param_00) {
   thread func_3D45(level.var_3D31);
 }
 
-func_3D45(param_00) {
+func_3D45(var_0) {
   level notify("new_chasecam");
   level endon("new_chasecam");
-  param_00 endon("death");
+  var_0 endon("death");
   level.player unlink();
   level.player playerlinktoblend(level.var_3D2F, "tag_origin", 2, 0.5, 0.5);
   wait(2);
@@ -1135,33 +1135,33 @@ func_3D45(param_00) {
       return;
     }
 
-    var_01 = level.var_3D31.origin;
-    var_02 = level.var_3D31.angles;
-    var_03 = anglesToForward(var_02);
-    var_03 = var_03 * 200;
-    var_01 = var_01 + var_03;
-    var_02 = level.player getplayerangles();
-    var_03 = anglesToForward(var_02);
-    var_03 = var_03 * -200;
-    level.var_3D2F moveto(var_01 + var_03, 0.2);
+    var_1 = level.var_3D31.origin;
+    var_2 = level.var_3D31.angles;
+    var_3 = anglesToForward(var_2);
+    var_3 = var_3 * 200;
+    var_1 = var_1 + var_3;
+    var_2 = level.player getplayerangles();
+    var_3 = anglesToForward(var_2);
+    var_3 = var_3 * -200;
+    level.var_3D2F moveto(var_1 + var_3, 0.2);
   }
 }
 
 func_13399() {
-  foreach(var_01 in level.createfxent) {
-    if(isDefined(var_01.looper)) {}
+  foreach(var_1 in level.createfxent) {
+    if(isDefined(var_1.looper)) {}
   }
 }
 
-func_1705(param_00, param_01) {}
+func_1705(var_0, var_1) {}
 
-func_D908(param_00) {
+func_D908(var_0) {
   if(!isDefined(level.var_134AD)) {
     level.var_134AD = 9500;
   }
 
   level.var_134AD++;
-  var_01 = "bridge_helpers";
+  var_1 = "bridge_helpers";
   func_1705("origin", self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
   func_1705("angles", self.angles[0] + " " + self.angles[1] + " " + self.angles[2]);
   func_1705("targetname", "helper_model");
@@ -1169,21 +1169,21 @@ func_D908(param_00) {
   func_1705("classname", "script_model");
   func_1705("spawnflags", "4");
   func_1705("_color", "0.443137 0.443137 1.000000");
-  if(isDefined(param_00)) {
-    func_1705("script_noteworthy", param_00);
+  if(isDefined(var_0)) {
+    func_1705("script_noteworthy", var_0);
   }
 }
 
-draw_dot_for_ent(param_00) {}
+draw_dot_for_ent(var_0) {}
 
 draw_dot_for_guy() {
-  var_00 = level.player getplayerangles();
-  var_01 = anglesToForward(var_00);
-  var_02 = level.player getEye();
-  var_03 = self getEye();
-  var_04 = vectortoangles(var_03 - var_02);
-  var_05 = anglesToForward(var_04);
-  var_06 = vectordot(var_05, var_01);
+  var_0 = level.player getplayerangles();
+  var_1 = anglesToForward(var_0);
+  var_2 = level.player getEye();
+  var_3 = self getEye();
+  var_4 = vectortoangles(var_3 - var_2);
+  var_5 = anglesToForward(var_4);
+  var_6 = vectordot(var_5, var_1);
 }
 
 func_13C26() {
@@ -1192,69 +1192,69 @@ func_13C26() {
     return;
   }
 
-  var_00 = getEntArray();
-  var_01 = [];
-  foreach(var_03 in var_00) {
-    if(!isDefined(var_03.var_9F)) {
+  var_0 = getEntArray();
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_3.var_9F)) {
       continue;
     }
 
-    if(issubstr(var_03.var_9F, "weapon")) {
-      var_01[var_03.classname] = 1;
+    if(issubstr(var_3.var_9F, "weapon")) {
+      var_1[var_3.classname] = 1;
     }
   }
 
-  foreach(var_06 in var_01) {}
+  foreach(var_6 in var_1) {}
 
-  var_08 = getspawnerarray();
-  var_09 = [];
-  foreach(var_0B in var_08) {
-    var_09[var_0B.var_9F] = 1;
+  var_8 = getspawnerarray();
+  var_9 = [];
+  foreach(var_0B in var_8) {
+    var_9[var_0B.var_9F] = 1;
   }
 
-  foreach(var_06 in var_09) {}
+  foreach(var_6 in var_9) {}
 }
 
 func_B514() {
   thread func_4EC2();
   setdvar("debug_measure", 2);
-  var_00 = [];
-  var_01 = 0;
+  var_0 = [];
+  var_1 = 0;
   while(getdvarint("debug_measure")) {
-    if(level.player usebuttonpressed() && gettime() > var_01) {
-      if(var_00.size == 2) {
-        var_00 = [];
+    if(level.player usebuttonpressed() && gettime() > var_1) {
+      if(var_0.size == 2) {
+        var_0 = [];
       } else {
-        var_02 = level.var_4EA1.var_4C23;
-        var_00[var_00.size] = var_02;
+        var_2 = level.var_4EA1.var_4C23;
+        var_0[var_0.size] = var_2;
       }
 
-      var_01 = gettime() + 500;
+      var_1 = gettime() + 500;
     }
 
-    foreach(var_07, var_02 in var_00) {
-      func_5B38(var_02);
-      if(var_07 > 0) {
-        var_04 = distance(var_02, var_00[var_07 - 1]);
-        var_05 = vectornormalize(var_00[var_07 - 1] - var_02);
-        var_06 = var_02 + var_05 * var_04 * 0.5;
+    foreach(var_7, var_2 in var_0) {
+      func_5B38(var_2);
+      if(var_7 > 0) {
+        var_4 = distance(var_2, var_0[var_7 - 1]);
+        var_5 = vectornormalize(var_0[var_7 - 1] - var_2);
+        var_6 = var_2 + var_5 * var_4 * 0.5;
       }
     }
 
-    if(var_00.size == 2) {
-      var_08 = (1, 0, 0);
-      var_08 = (0, 1, 0);
-      var_08 = (0.2, 0.2, 1);
-      var_09 = var_00;
-      if(var_00[1][2] > var_09[0][2]) {
-        var_09 = [var_00[1], var_00[0]];
+    if(var_0.size == 2) {
+      var_8 = (1, 0, 0);
+      var_8 = (0, 1, 0);
+      var_8 = (0.2, 0.2, 1);
+      var_9 = var_0;
+      if(var_0[1][2] > var_9[0][2]) {
+        var_9 = [var_0[1], var_0[0]];
       }
 
-      var_0A = var_09[0];
-      var_0B = (var_0A[0], var_0A[1], var_09[1][2]);
-      var_04 = distance(var_0A, var_0B);
-      var_05 = vectornormalize(var_0B - var_0A);
-      var_0C = var_0A + var_05 * var_04 * 0.6;
+      var_0A = var_9[0];
+      var_0B = (var_0A[0], var_0A[1], var_9[1][2]);
+      var_4 = distance(var_0A, var_0B);
+      var_5 = vectornormalize(var_0B - var_0A);
+      var_0C = var_0A + var_5 * var_4 * 0.6;
     }
 
     wait(0.05);
@@ -1268,97 +1268,97 @@ func_4EC2() {
   level notify("stop_debug_cursor");
   level endon("stop_debug_cursor");
   for(;;) {
-    var_00 = level.player getEye();
-    var_01 = anglesToForward(level.player getplayerangles());
-    var_02 = var_00 + var_01 * 10000;
-    var_03 = bulletTrace(var_00, var_02, 0);
-    level.var_4EA1.var_4C23 = var_03["position"];
+    var_0 = level.player getEye();
+    var_1 = anglesToForward(level.player getplayerangles());
+    var_2 = var_0 + var_1 * 10000;
+    var_3 = bulletTrace(var_0, var_2, 0);
+    level.var_4EA1.var_4C23 = var_3["position"];
     func_5B38(level.var_4EA1.var_4C23);
     wait(0.05);
   }
 }
 
-func_5B38(param_00) {
+func_5B38(var_0) {
   level endon("stop_debug_cursor");
-  var_01 = 4;
-  var_02 = (1, 1, 1);
-  var_03 = 1;
-  var_04 = 1;
+  var_1 = 4;
+  var_2 = (1, 1, 1);
+  var_3 = 1;
+  var_4 = 1;
 }
 
-func_5B54(param_00, param_01, param_02, param_03, param_04, param_05) {
-  if(!isDefined(param_01)) {
-    param_01 = (0, 0, 0);
+func_5B54(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(param_03)) {
-    param_03 = 32;
+  if(!isDefined(var_3)) {
+    var_3 = 32;
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(!isDefined(param_05)) {
-    param_05 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  var_06 = anglestoup(param_01);
-  var_07 = anglesToForward(param_01);
-  var_08 = param_00 + var_06 * param_03 * 0.5;
-  var_09 = var_08 + var_07 * param_03;
-  func_5B5D(var_08, var_09, param_02, param_04, param_05);
-  func_5B24(param_00, param_02, param_01, param_03, param_04, param_05);
+  var_6 = anglestoup(var_1);
+  var_7 = anglesToForward(var_1);
+  var_8 = var_0 + var_6 * var_3 * 0.5;
+  var_9 = var_8 + var_7 * var_3;
+  func_5B5D(var_8, var_9, var_2, var_4, var_5);
+  func_5B24(var_0, var_2, var_1, var_3, var_4, var_5);
 }
 
-func_5B5D(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+func_5B5D(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var_05 = vectortoangles(param_01 - param_00);
-  var_06 = length(param_01 - param_00);
-  var_07 = anglesToForward(var_05);
-  var_08 = var_07 * var_06;
-  var_09 = 5;
-  var_0A = var_07 * var_06 - var_09;
-  var_0B = anglestoright(var_05);
-  var_0C = var_0B * var_09 * -1;
-  var_0D = var_0B * var_09;
+  var_5 = vectortoangles(var_1 - var_0);
+  var_6 = length(var_1 - var_0);
+  var_7 = anglesToForward(var_5);
+  var_8 = var_7 * var_6;
+  var_9 = 5;
+  var_0A = var_7 * var_6 - var_9;
+  var_0B = anglestoright(var_5);
+  var_0C = var_0B * var_9 * -1;
+  var_0D = var_0B * var_9;
 }
 
-func_5B24(param_00, param_01, param_02, param_03, param_04, param_05) {
-  if(!isDefined(param_03)) {
-    param_03 = 32;
+func_5B24(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3)) {
+    var_3 = 32;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = (0, 0, 0);
+  if(!isDefined(var_2)) {
+    var_2 = (0, 0, 0);
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(!isDefined(param_05)) {
-    param_05 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  var_06 = anglesToForward(param_02);
-  var_07 = anglestoright(param_02);
-  var_08 = anglestoup(param_02);
-  var_09 = param_00 + var_06 * param_03 * 0.5;
-  var_09 = var_09 + var_07 * param_03 * 0.5;
+  var_6 = anglesToForward(var_2);
+  var_7 = anglestoright(var_2);
+  var_8 = anglestoup(var_2);
+  var_9 = var_0 + var_6 * var_3 * 0.5;
+  var_9 = var_9 + var_7 * var_3 * 0.5;
   var_0A = [];
-  var_0A[var_0A.size] = var_09;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_06 * param_03 * -1;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_07 * param_03 * -1;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_06 * param_03;
-  var_0B = param_03 * var_08;
+  var_0A[var_0A.size] = var_9;
+  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_6 * var_3 * -1;
+  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_7 * var_3 * -1;
+  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_6 * var_3;
+  var_0B = var_3 * var_8;
   for(var_0C = 0; var_0C < var_0A.size; var_0C++) {
     if(var_0C == var_0A.size - 1) {
       continue;

@@ -4,80 +4,80 @@
 ***************************************/
 
 domeshield_init() {
-  level.func_590F = [];
+  level.var_590F = [];
 }
 
-func_5910(var_00) {
-  var_00 endon("death");
-  var_00 thread domeshield_deleteondisowned(self);
-  var_00 waittill("missile_stuck", var_01);
-  var_00 missilethermal();
-  var_00 missileoutline();
-  scripts\mp\utility\game::_launchgrenade("domeshield_plant_mp", var_0.origin, (0, 0, 0), 100, 1, var_00);
+func_5910(var_0) {
+  var_0 endon("death");
+  var_0 thread domeshield_deleteondisowned(self);
+  var_0 waittill("missile_stuck", var_1);
+  var_0 missilethermal();
+  var_0 missileoutline();
+  scripts\mp\utility\game::_launchgrenade("domeshield_plant_mp", var_0.origin, (0, 0, 0), 100, 1, var_0);
 
-  if(isDefined(var_01)) {
-    var_00 linkto(var_01);
+  if(isDefined(var_1)) {
+    var_0 linkto(var_1);
   }
 
-  var_02 = domeshield_getplacementinfo(self, var_0.origin);
+  var_2 = domeshield_getplacementinfo(self, var_0.origin);
 
-  if(var_2.func_38EE) {
-    thread func_590C(var_00, var_01, var_02);
+  if(var_2.var_38EE) {
+    thread func_590C(var_0, var_1, var_2);
   } else {
     scripts\mp\hud_message::showerrormessage("MP_CANNOT_PLACE_DOMESHIELD");
     scripts\mp\powers::func_D74C("power_domeshield");
-    var_00 delete();
+    var_0 delete();
   }
 }
 
-func_590C(var_00, var_01, var_02) {
-  foreach(var_04 in var_2.func_C7FC) {
-    var_04 domeshield_awardpoints(self);
-    var_04 domeshield_givedamagefeedback(self);
-    var_04 thread domeshield_destroy(1);
+func_590C(var_0, var_1, var_2) {
+  foreach(var_4 in var_2.var_C7FC) {
+    var_4 domeshield_awardpoints(self);
+    var_4 domeshield_givedamagefeedback(self);
+    var_4 thread domeshield_destroy(1);
   }
 
-  if(!isDefined(self.func_590F)) {
-    self.func_590F = [];
+  if(!isDefined(self.var_590F)) {
+    self.var_590F = [];
   }
 
-  if(self.func_590F.size + 1 > domeshield_getmax()) {
-    self.func_590F[0] thread domeshield_destroy(0);
+  if(self.var_590F.size + 1 > domeshield_getmax()) {
+    self.var_590F[0] thread domeshield_destroy(0);
   }
 
-  var_00 setotherent(self);
-  var_00 give_player_tickets(1);
-  var_06 = spawn("script_model", var_0.origin);
+  var_0 setotherent(self);
+  var_0 give_player_tickets(1);
+  var_6 = spawn("script_model", var_0.origin);
   var_6.angles = var_0.angles;
-  var_06 setotherent(self);
-  var_06 setModel("prop_mp_domeshield_col");
-  var_06 setnonstick(1);
-  var_06 give_player_tickets(1);
-  var_06 linkto(var_00);
-  var_6.func_2B0E = 1;
+  var_6 setotherent(self);
+  var_6 setModel("prop_mp_domeshield_col");
+  var_6 setnonstick(1);
+  var_6 give_player_tickets(1);
+  var_6 linkto(var_0);
+  var_6.var_2B0E = 1;
   var_6.owner = self;
-  var_6.func_7734 = var_00;
-  var_06 thread domeshield_cleanuponparentdeath(var_00);
-  var_0.func_58EF = var_06;
-  var_07 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
+  var_6.var_7734 = var_0;
+  var_6 thread domeshield_cleanuponparentdeath(var_0);
+  var_0.var_58EF = var_6;
+  var_7 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
 
-  if(var_07) {
+  if(var_7) {
     var_0.hasruggedeqp = 1;
     var_6.hasruggedeqp = 1;
   }
 
-  var_08 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_07), "hitequip", "");
-  var_09 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_07), 150, 100);
-  var_00 thread scripts\mp\damage::monitordamage(var_09, var_08, ::domeshield_handledamagefatal, ::domeshield_handledamage, 0);
-  var_09 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_07), 600, 450);
-  var_06 thread scripts\mp\damage::monitordamage(var_09, var_08, ::domeshield_domehandledamagefatal, ::domeshield_domehandledamage, 0);
-  var_00 thread domeshield_destroyonemp();
-  var_00 thread domeshield_destroyontimeout();
-  var_00 thread domeshield_destroyongameend();
-  var_00 thread domeshield_deploysequence();
-  var_00 thread scripts\mp\perks\perk_equipmentping::runequipmentping(var_06);
-  thread scripts\mp\weapons::outlineequipmentforowner(var_00, self);
-  domeshield_addtoarrays(var_00, self);
+  var_8 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_7), "hitequip", "");
+  var_9 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_7), 150, 100);
+  var_0 thread scripts\mp\damage::monitordamage(var_9, var_8, ::domeshield_handledamagefatal, ::domeshield_handledamage, 0);
+  var_9 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_7), 600, 450);
+  var_6 thread scripts\mp\damage::monitordamage(var_9, var_8, ::domeshield_domehandledamagefatal, ::domeshield_domehandledamage, 0);
+  var_0 thread domeshield_destroyonemp();
+  var_0 thread domeshield_destroyontimeout();
+  var_0 thread domeshield_destroyongameend();
+  var_0 thread domeshield_deploysequence();
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping(var_6);
+  thread scripts\mp\weapons::outlineequipmentforowner(var_0, self);
+  domeshield_addtoarrays(var_0, self);
 }
 
 domeshield_deploysequence() {
@@ -87,10 +87,10 @@ domeshield_deploysequence() {
   domeshield_setstate(2);
 }
 
-domeshield_destroy(var_00) {
+domeshield_destroy(var_0) {
   thread domeshield_delete(1.6);
 
-  if(var_00) {
+  if(var_0) {
     domeshield_setstate(3);
   } else {
     domeshield_setstate(4);
@@ -100,99 +100,99 @@ domeshield_destroy(var_00) {
   domeshield_setstate(5);
 }
 
-domeshield_delete(var_00) {
+domeshield_delete(var_0) {
   self notify("death");
   self setCanDamage(0);
   self.exploding = 1;
   thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
 
-  if(isDefined(self.func_58EF)) {
-    self.func_58EF delete();
+  if(isDefined(self.var_58EF)) {
+    self.var_58EF delete();
   }
 
-  if(isDefined(var_00)) {
-    wait(var_00);
+  if(isDefined(var_0)) {
+    wait(var_0);
   }
 
   self delete();
 }
 
-domeshield_handledamage(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = var_03;
-  var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
-  var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
-  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
-  return var_05;
+domeshield_handledamage(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  var_5 = scripts\mp\damage::handlemeleedamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
+  return var_5;
 }
 
-domeshield_handledamagefatal(var_00, var_01, var_02, var_03, var_04) {
-  domeshield_awardpoints(var_00);
+domeshield_handledamagefatal(var_0, var_1, var_2, var_3, var_4) {
+  domeshield_awardpoints(var_0);
 
-  if(isDefined(var_00) && isplayer(var_00) && isDefined(var_02) && scripts\engine\utility::isbulletdamage(var_02) && var_00 != self.owner) {
-    var_00 scripts\mp\missions::func_D991("ch_dome_kill");
+  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_2) && scripts\engine\utility::isbulletdamage(var_2) && var_0 != self.owner) {
+    var_0 scripts\mp\missions::func_D991("ch_dome_kill");
   }
 
   thread domeshield_destroy(1);
 }
 
-domeshield_domehandledamage(var_00, var_01, var_02, var_03, var_04) {
-  if(var_02 == "MOD_MELEE") {
-    var_03 = 0;
+domeshield_domehandledamage(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "MOD_MELEE") {
+    var_3 = 0;
   } else {
-    var_03 = scripts\mp\damage::handleshotgundamage(var_01, var_02, var_03);
-    var_03 = scripts\mp\damage::handleapdamage(var_01, var_02, var_03);
-    var_03 = domeshield_domehandlesuperdamage(var_01, var_02, var_03);
+    var_3 = scripts\mp\damage::handleshotgundamage(var_1, var_2, var_3);
+    var_3 = scripts\mp\damage::handleapdamage(var_1, var_2, var_3);
+    var_3 = domeshield_domehandlesuperdamage(var_1, var_2, var_3);
   }
 
-  if(var_03 > 0) {
-    self.owner scripts\mp\missions::func_D991("ch_tactical_domeshield", var_03);
+  if(var_3 > 0) {
+    self.owner scripts\mp\missions::func_D991("ch_tactical_domeshield", var_3);
   }
 
-  self.owner scripts\mp\missions::func_D998(var_00, var_01, self);
-  self.owner scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_03);
-  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
-  return var_03;
+  self.owner scripts\mp\missions::func_D998(var_0, var_1, self);
+  self.owner scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_3);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
+  return var_3;
 }
 
-domeshield_domehandledamagefatal(var_00, var_01, var_02, var_03, var_04) {
-  self.func_7734 thread domeshield_handledamagefatal(var_00, var_01, var_02, var_03, var_04);
+domeshield_domehandledamagefatal(var_0, var_1, var_2, var_3, var_4) {
+  self.var_7734 thread domeshield_handledamagefatal(var_0, var_1, var_2, var_3, var_4);
 }
 
-domeshield_domehandlesuperdamage(var_00, var_01, var_02) {
-  var_03 = 1;
-  var_04 = getweaponbasename(var_00);
+domeshield_domehandlesuperdamage(var_0, var_1, var_2) {
+  var_3 = 1;
+  var_4 = getweaponbasename(var_0);
 
-  if(isDefined(var_04)) {
-    var_00 = var_04;
+  if(isDefined(var_4)) {
+    var_0 = var_4;
   }
 
-  switch (var_00) {
+  switch (var_0) {
     case "micro_turret_gun_mp":
-      var_03 = 3.75;
+      var_3 = 3.75;
       break;
     case "iw7_penetrationrail_mp":
-      var_03 = 1.75;
+      var_3 = 1.75;
       break;
     case "iw7_atomizer_mp":
-      var_03 = 1.75;
+      var_3 = 1.75;
       break;
   }
 
-  return int(ceil(var_03 * var_02));
+  return int(ceil(var_3 * var_2));
 }
 
 domeshield_destroyonemp() {
   self endon("death");
-  self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
+  self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
 
-  if(isDefined(var_03) && var_03 == "emp_grenade_mp") {
-    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
-      var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+  if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
+    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_0))) {
+      var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
 
-  domeshield_awardpoints(var_00);
-  domeshield_givedamagefeedback(var_00);
+  domeshield_awardpoints(var_0);
+  domeshield_givedamagefeedback(var_0);
   thread domeshield_destroy(1);
 }
 
@@ -208,53 +208,53 @@ domeshield_destroyongameend() {
   thread domeshield_destroy(0);
 }
 
-domeshield_deleteondisowned(var_00) {
+domeshield_deleteondisowned(var_0) {
   self endon("death");
-  var_00 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
 
-  if(isDefined(self.func_58EF)) {
-    self.func_58EF delete();
+  if(isDefined(self.var_58EF)) {
+    self.var_58EF delete();
   }
 
   self delete();
 }
 
-domeshield_getplacementinfo(var_00, var_01) {
-  var_02 = spawnStruct();
-  var_2.func_38EE = 1;
-  var_2.func_C7FC = [];
-  var_03 = var_0.team;
-  var_04 = _pow(175, 2);
+domeshield_getplacementinfo(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.var_38EE = 1;
+  var_2.var_C7FC = [];
+  var_3 = var_0.team;
+  var_4 = _pow(175, 2);
 
-  foreach(var_06 in level.func_590F) {
-    if(!isDefined(var_06)) {
+  foreach(var_6 in level.var_590F) {
+    if(!isDefined(var_6)) {
       continue;
     }
-    var_07 = length2dsquared(var_01 - var_6.origin);
+    var_7 = length2dsquared(var_1 - var_6.origin);
 
-    if(var_07 < var_04) {
-      if(isDefined(var_6.owner) && var_6.owner != var_00 && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(var_6.owner, var_00))) {
-        var_2.func_38EE = 0;
+    if(var_7 < var_4) {
+      if(isDefined(var_6.owner) && var_6.owner != var_0 && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(var_6.owner, var_0))) {
+        var_2.var_38EE = 0;
         break;
       }
 
-      var_2.func_C7FC[var_2.func_C7FC.size] = var_06;
+      var_2.var_C7FC[var_2.var_C7FC.size] = var_6;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-domeshield_setstate(var_00) {
+domeshield_setstate(var_0) {
   if(!isDefined(self.state)) {
     self.state = -1;
   }
 
-  if(self.state == var_00) {
+  if(self.state == var_0) {
     return;
   }
-  switch (var_00) {
+  switch (var_0) {
     case 1:
       self.state = 1;
       self setscriptablepartstate("plant", "active", 0);
@@ -284,45 +284,45 @@ domeshield_setstate(var_00) {
   }
 }
 
-domeshield_givedamagefeedback(var_00) {
-  var_01 = "";
+domeshield_givedamagefeedback(var_0) {
+  var_1 = "";
 
   if(scripts\mp\utility\game::istrue(self.hasruggedeqp)) {
-    var_01 = "hitequip";
+    var_1 = "hitequip";
   }
 
-  if(isplayer(var_00)) {
-    var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
+  if(isplayer(var_0)) {
+    var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_1);
   }
 }
 
-domeshield_awardpoints(var_00) {
-  if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
-    var_00 notify("destroyed_equipment");
-    var_00 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
+domeshield_awardpoints(var_0) {
+  if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_0))) {
+    var_0 notify("destroyed_equipment");
+    var_0 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
   }
 }
 
 domeshield_getmax() {
-  var_00 = 1;
+  var_0 = 1;
 
   if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp")) {
     var_0++;
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_7E80(var_00) {
-  if(isDefined(level.func_590F)) {
-    var_01 = 14400;
+func_7E80(var_0) {
+  if(isDefined(level.var_590F)) {
+    var_1 = 14400;
 
-    foreach(var_03 in level.func_590F) {
-      if(!isDefined(var_03)) {
+    foreach(var_3 in level.var_590F) {
+      if(!isDefined(var_3)) {
         continue;
       }
-      if(distancesquared(var_0.origin, var_3.origin) < var_01) {
-        return var_03;
+      if(distancesquared(var_0.origin, var_3.origin) < var_1) {
+        return var_3;
       }
     }
   }
@@ -331,55 +331,55 @@ func_7E80(var_00) {
 }
 
 isdomeshield() {
-  return isDefined(level.func_590F[self getentitynumber()]);
+  return isDefined(level.var_590F[self getentitynumber()]);
 }
 
-domeshield_addtoarrays(var_00, var_01) {
-  if(!isDefined(var_1.func_590F)) {
-    var_1.func_590F = [];
+domeshield_addtoarrays(var_0, var_1) {
+  if(!isDefined(var_1.var_590F)) {
+    var_1.var_590F = [];
   }
 
-  var_02 = [];
+  var_2 = [];
 
-  foreach(var_04 in var_1.func_590F) {
-    if(!isDefined(var_04)) {
+  foreach(var_4 in var_1.var_590F) {
+    if(!isDefined(var_4)) {
       continue;
     }
-    if(var_04 == var_00) {
+    if(var_4 == var_0) {
       continue;
     }
-    var_2[var_2.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  var_2[var_2.size] = var_00;
-  var_1.func_590F = var_02;
-  var_06 = var_00 getentitynumber();
-  level.func_590F[var_06] = var_00;
-  thread domeshield_removefromarraysondeath(var_00);
+  var_2[var_2.size] = var_0;
+  var_1.var_590F = var_2;
+  var_6 = var_0 getentitynumber();
+  level.var_590F[var_6] = var_0;
+  thread domeshield_removefromarraysondeath(var_0);
 }
 
-domeshield_removefromarrays(var_00, var_01, var_02) {
-  var_00 notify("domeShield_removeFromArrays");
+domeshield_removefromarrays(var_0, var_1, var_2) {
+  var_0 notify("domeShield_removeFromArrays");
 
-  if(isDefined(var_01) && isDefined(var_1.func_590F) && isDefined(var_00)) {
-    var_1.func_590F = scripts\engine\utility::array_remove(var_1.func_590F, var_00);
+  if(isDefined(var_1) && isDefined(var_1.var_590F) && isDefined(var_0)) {
+    var_1.var_590F = scripts\engine\utility::array_remove(var_1.var_590F, var_0);
   }
 
-  level.func_590F[var_02] = undefined;
+  level.var_590F[var_2] = undefined;
 }
 
-domeshield_removefromarraysondeath(var_00) {
-  var_00 notify("domeShield_removeFromArraysOnDeath");
-  var_00 endon("domeShield_removeFromArraysOnDeath");
-  var_00 endon("domeShield_removeFromArrays");
-  var_01 = var_0.owner;
-  var_02 = var_00 getentitynumber();
-  var_00 waittill("death");
-  thread domeshield_removefromarrays(var_00, var_01, var_02);
+domeshield_removefromarraysondeath(var_0) {
+  var_0 notify("domeShield_removeFromArraysOnDeath");
+  var_0 endon("domeShield_removeFromArraysOnDeath");
+  var_0 endon("domeShield_removeFromArrays");
+  var_1 = var_0.owner;
+  var_2 = var_0 getentitynumber();
+  var_0 waittill("death");
+  thread domeshield_removefromarrays(var_0, var_1, var_2);
 }
 
-domeshield_cleanuponparentdeath(var_00) {
+domeshield_cleanuponparentdeath(var_0) {
   self endon("death");
-  var_00 waittill("death");
+  var_0 waittill("death");
   self delete();
 }

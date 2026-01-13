@@ -48,24 +48,24 @@ func_E13D() {
   self notify("remove_microTurret");
 }
 
-microturret_use(param_00) {
+microturret_use(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("remove_microTurret");
-  var_01 = "power_microTurret";
+  var_1 = "power_microTurret";
   if(!scripts\cp\utility::isreallyalive(self)) {
-    param_00 delete();
+    var_0 delete();
     return;
   }
 
-  param_00 waittill("missile_stuck", var_02);
-  if(isDefined(var_02) && isDefined(var_02.triggerportableradarping)) {
-    thread placementfailed(param_00);
+  var_0 waittill("missile_stuck", var_2);
+  if(isDefined(var_2) && isDefined(var_2.triggerportableradarping)) {
+    thread placementfailed(var_0);
     return;
   }
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(param_00.origin, level.invalid_spawn_volume_array, self, undefined, 0)) {
-    thread placementfailed(param_00);
+  if(!scripts\cp\cp_weapon::isinvalidzone(var_0.origin, level.invalid_spawn_volume_array, self, undefined, 0)) {
+    thread placementfailed(var_0);
     return;
   }
 
@@ -73,46 +73,46 @@ microturret_use(param_00) {
   self playlocalsound("trophy_turret_plant_plr");
   self playsoundtoteam("trophy_turret_plant_npc", "allies", self);
   self playsoundtoteam("trophy_turret_plant_npc", "axis", self);
-  var_03 = spawnturret("misc_turret", param_00.origin, "micro_turret_gun_zm");
-  var_03 setModel("micro_turret_wm");
-  var_03.angles = param_00.angles;
-  var_03.triggerportableradarping = self;
-  var_03.team = self.team;
-  var_03.weapon_name = "micro_turret_zm";
-  var_03 getvalidattachments();
-  var_03 makeunusable();
-  self.vehicle = var_03;
-  var_03.var_1E2D = 100;
+  var_3 = spawnturret("misc_turret", var_0.origin, "micro_turret_gun_zm");
+  var_3 setModel("micro_turret_wm");
+  var_3.angles = var_0.angles;
+  var_3.triggerportableradarping = self;
+  var_3.team = self.team;
+  var_3.weapon_name = "micro_turret_zm";
+  var_3 getvalidattachments();
+  var_3 makeunusable();
+  self.vehicle = var_3;
+  var_3.var_1E2D = 100;
   if(level.teambased) {
-    var_03 setturretteam(self.team);
+    var_3 setturretteam(self.team);
   }
 
-  var_03.sentrytype = "sentry_microturret";
-  var_03 give_player_session_tokens("sentry_offline");
-  var_03 setsentryowner(self);
-  var_03 setleftarc(180);
-  var_03 setrightarc(180);
-  var_03 give_crafted_gascan(90);
-  var_03 settoparc(45);
-  var_03 _meth_82C9(0.3, "pitch");
-  var_03 _meth_82C9(0.3, "yaw");
-  var_03 _meth_82C8(0.65);
-  var_03 thread func_B6EA();
-  var_03 setotherent(self);
-  if(isDefined(var_02)) {
-    var_03 scripts\cp\cp_weapon::explosivehandlemovers(var_02);
+  var_3.sentrytype = "sentry_microturret";
+  var_3 give_player_session_tokens("sentry_offline");
+  var_3 setsentryowner(self);
+  var_3 setleftarc(180);
+  var_3 setrightarc(180);
+  var_3 give_crafted_gascan(90);
+  var_3 settoparc(45);
+  var_3 _meth_82C9(0.3, "pitch");
+  var_3 _meth_82C9(0.3, "yaw");
+  var_3 _meth_82C8(0.65);
+  var_3 thread func_B6EA();
+  var_3 setotherent(self);
+  if(isDefined(var_2)) {
+    var_3 scripts\cp\cp_weapon::explosivehandlemovers(var_2);
   }
 
-  var_03.var_1A4A = scripts\engine\utility::spawn_tag_origin(var_03.origin, var_03.angles);
-  var_03.var_1A4A linkto(var_03, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_03 thread sentry_handledamage();
-  var_03 thread sentry_handledeath();
-  var_03 thread func_13A7A(self);
-  var_03 setCanDamage(0);
-  var_03.stunned = 0;
-  var_03 thread func_139C8();
-  thread watchforplayerdeath(var_03);
-  param_00 delete();
+  var_3.var_1A4A = scripts\engine\utility::spawn_tag_origin(var_3.origin, var_3.angles);
+  var_3.var_1A4A linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3 thread sentry_handledamage();
+  var_3 thread sentry_handledeath();
+  var_3 thread func_13A7A(self);
+  var_3 setCanDamage(0);
+  var_3.stunned = 0;
+  var_3 thread func_139C8();
+  thread watchforplayerdeath(var_3);
+  var_0 delete();
 }
 
 sentry_handledamage() {
@@ -122,35 +122,35 @@ sentry_handledamage() {
   self.maxhealth = level.sentrysettings[self.sentrytype].maxhealth;
   self.var_E1 = 0;
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
-    if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping, var_01, 0)) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping, var_1, 0)) {
       continue;
     }
 
-    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
+    if(isDefined(var_8) && var_8 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(var_04 == "MOD_MELEE") {
+    if(var_4 == "MOD_MELEE") {
       self.var_E1 = self.var_E1 + self.maxhealth;
     }
 
-    var_0A = var_00;
-    if(isplayer(var_01)) {
-      var_01 scripts\cp\cp_damage::updatedamagefeedback("sentry");
-      if(var_01 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0A = var_00 * level.armorpiercingmod;
+    var_0A = var_0;
+    if(isplayer(var_1)) {
+      var_1 scripts\cp\cp_damage::updatedamagefeedback("sentry");
+      if(var_1 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
+        var_0A = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_01.triggerportableradarping) && isplayer(var_01.triggerportableradarping)) {
-      var_01.triggerportableradarping scripts\cp\cp_damage::updatedamagefeedback("sentry");
+    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
+      var_1.triggerportableradarping scripts\cp\cp_damage::updatedamagefeedback("sentry");
     }
 
     self.var_E1 = self.var_E1 + var_0A;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_01) && !isDefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping) {
-        var_01 notify("destroyed_killstreak");
+      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+        var_1 notify("destroyed_killstreak");
       }
 
       if(isDefined(self.triggerportableradarping)) {
@@ -203,13 +203,13 @@ sentry_handledeath() {
 sentry_setinactive() {
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
   self makeunusable();
-  var_00 = self getentitynumber();
+  var_0 = self getentitynumber();
   switch (self.sentrytype) {
     case "gl_turret":
       break;
 
     default:
-      func_E11F(var_00);
+      func_E11F(var_0);
       break;
   }
 
@@ -223,8 +223,8 @@ sentry_setinactive() {
   }
 }
 
-func_E11F(param_00) {
-  level.turrets[param_00] = undefined;
+func_E11F(var_0) {
+  level.turrets[var_0] = undefined;
 }
 
 func_F23F() {
@@ -266,26 +266,26 @@ restoreweapons() {
   }
 }
 
-watchforplayerdeath(param_00) {
+watchforplayerdeath(var_0) {
   self notify("turret_deleted");
   self endon("turret_deleted");
-  param_00 endon("death");
+  var_0 endon("death");
   scripts\engine\utility::waittill_any_3("death", "disconnect");
-  param_00 delete();
+  var_0 delete();
   self notify("microTurret_update", -1);
 }
 
-func_13A7A(param_00) {
+func_13A7A(var_0) {
   self waittill("death");
-  param_00 notify("microTurret_update", -1);
+  var_0 notify("microTurret_update", -1);
 }
 
 func_139C8() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("emp_damage", var_00, var_01);
-    func_B713(var_01);
+    self waittill("emp_damage", var_0, var_1);
+    func_B713(var_1);
   }
 }
 
@@ -334,36 +334,36 @@ func_B717() {
   }
 
   for(;;) {
-    var_00 = anglesToForward(self gettagangles("tag_flash"));
-    var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-    var_02 = [];
-    var_03 = [];
-    foreach(var_05 in var_01) {
-      if(!func_B71A(var_05)) {
+    var_0 = anglesToForward(self gettagangles("tag_flash"));
+    var_1 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+    var_2 = [];
+    var_3 = [];
+    foreach(var_5 in var_1) {
+      if(!func_B71A(var_5)) {
         continue;
       }
 
-      var_06 = var_05.origin - self gettagorigin("tag_dummy");
-      var_07 = vectornormalize(var_06);
-      var_08 = vectordot(var_06, var_07);
-      var_09 = scripts\engine\utility::anglebetweenvectorsunit(var_00, var_07);
-      var_0A = 1 - var_08 / 800;
-      var_0B = 1 - var_09 / 180;
+      var_6 = var_5.origin - self gettagorigin("tag_dummy");
+      var_7 = vectornormalize(var_6);
+      var_8 = vectordot(var_6, var_7);
+      var_9 = scripts\engine\utility::anglebetweenvectorsunit(var_0, var_7);
+      var_0A = 1 - var_8 / 800;
+      var_0B = 1 - var_9 / 180;
       var_0C = var_0A * 0.5 + var_0B * 0.8;
-      var_02[var_02.size] = var_05;
-      var_03[var_03.size] = var_0C;
+      var_2[var_2.size] = var_5;
+      var_3[var_3.size] = var_0C;
     }
 
     for(;;) {
       var_0E = 0;
-      for(var_0F = 0; var_0F < var_02.size - 1; var_0F++) {
-        var_10 = var_02[var_0F];
-        var_11 = var_03[var_0F];
-        if(var_11 < var_03[var_0F]) {
-          var_02[var_0F] = var_02[var_0F + 1];
-          var_03[var_0F] = var_03[var_0F + 1];
-          var_02[var_0F + 1] = var_10;
-          var_03[var_0F + 1] = var_11;
+      for(var_0F = 0; var_0F < var_2.size - 1; var_0F++) {
+        var_10 = var_2[var_0F];
+        var_11 = var_3[var_0F];
+        if(var_11 < var_3[var_0F]) {
+          var_2[var_0F] = var_2[var_0F + 1];
+          var_3[var_0F] = var_3[var_0F + 1];
+          var_2[var_0F + 1] = var_10;
+          var_3[var_0F + 1] = var_11;
           var_0E = 1;
         }
       }
@@ -373,8 +373,8 @@ func_B717() {
       }
     }
 
-    for(var_0F = 0; var_0F < var_02.size; var_0F++) {
-      var_12 = var_02[var_0F];
+    for(var_0F = 0; var_0F < var_2.size; var_0F++) {
+      var_12 = var_2[var_0F];
       var_13 = func_B714(var_12);
       if(isDefined(var_13)) {
         func_B70D(var_12, var_13);
@@ -386,67 +386,67 @@ func_B717() {
   }
 }
 
-func_B70D(param_00, param_01) {
+func_B70D(var_0, var_1) {
   if(!isDefined(self.var_1A4A)) {
     return 0;
   }
 
-  self.var_1A4A.var_23EA = param_00;
-  self.var_1A4A.var_23EB = param_01;
-  self.var_1A4A linkto(param_00, param_01, (0, 0, 0), (0, 0, 0));
+  self.var_1A4A.var_23EA = var_0;
+  self.var_1A4A.var_23EB = var_1;
+  self.var_1A4A linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
   self settargetentity(self.var_1A4A);
 }
 
-func_B714(param_00) {
-  var_01 = undefined;
-  var_02 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_ainosight", "physicscontents_sky"]);
-  var_03 = self gettagorigin("tag_dummy");
-  if(isDefined(param_00.agent_type) && param_00.agent_type == "zombie_brute") {
+func_B714(var_0) {
+  var_1 = undefined;
+  var_2 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_ainosight", "physicscontents_sky"]);
+  var_3 = self gettagorigin("tag_dummy");
+  if(isDefined(var_0.agent_type) && var_0.agent_type == "zombie_brute") {
     return undefined;
   }
 
-  if(isplayer(param_00) || isagent(param_00)) {
-    var_04 = "j_spine4";
-    var_05 = param_00 gettagorigin(var_04);
-    if(!isDefined(var_01)) {
-      var_06 = physics_raycast(var_03, var_05, var_02, self, 0, "physicsquery_closest");
-      var_07 = !isDefined(var_06) || var_06.size == 0;
-      var_01 = scripts\engine\utility::ter_op(var_07, var_04, var_01);
+  if(isplayer(var_0) || isagent(var_0)) {
+    var_4 = "j_spine4";
+    var_5 = var_0 gettagorigin(var_4);
+    if(!isDefined(var_1)) {
+      var_6 = physics_raycast(var_3, var_5, var_2, self, 0, "physicsquery_closest");
+      var_7 = !isDefined(var_6) || var_6.size == 0;
+      var_1 = scripts\engine\utility::ter_op(var_7, var_4, var_1);
     }
 
-    if(!isDefined(var_01)) {
-      if(!scripts\cp\utility::has_tag(param_00.model, "tag_eye")) {
+    if(!isDefined(var_1)) {
+      if(!scripts\cp\utility::has_tag(var_0.model, "tag_eye")) {
         return undefined;
       }
 
-      var_04 = "tag_eye";
-      var_05 = param_00 gettagorigin(var_04);
-      if(!isDefined(var_01)) {
-        var_06 = physics_raycast(var_03, var_05, var_02, self, 0, "physicsquery_closest");
-        var_07 = !isDefined(var_06) || var_06.size == 0;
-        var_01 = scripts\engine\utility::ter_op(var_07, var_04, var_01);
+      var_4 = "tag_eye";
+      var_5 = var_0 gettagorigin(var_4);
+      if(!isDefined(var_1)) {
+        var_6 = physics_raycast(var_3, var_5, var_2, self, 0, "physicsquery_closest");
+        var_7 = !isDefined(var_6) || var_6.size == 0;
+        var_1 = scripts\engine\utility::ter_op(var_7, var_4, var_1);
       }
     }
 
-    if(!isDefined(var_01)) {
-      var_05 = param_00.origin;
-      if(!isDefined(var_01)) {
-        var_06 = physics_raycast(var_03, var_05, var_02, self, 0, "physicsquery_closest");
-        var_07 = !isDefined(var_06) || var_06.size == 0;
-        var_01 = scripts\engine\utility::ter_op(var_07, var_04, var_01);
+    if(!isDefined(var_1)) {
+      var_5 = var_0.origin;
+      if(!isDefined(var_1)) {
+        var_6 = physics_raycast(var_3, var_5, var_2, self, 0, "physicsquery_closest");
+        var_7 = !isDefined(var_6) || var_6.size == 0;
+        var_1 = scripts\engine\utility::ter_op(var_7, var_4, var_1);
       }
     }
   } else {
-    var_04 = "tag_origin";
-    var_05 = var_01 gettagorigin(var_05);
-    if(!isDefined(var_01)) {
-      var_06 = physics_raycast(var_03, var_05, var_02, self, 0, "physicsquery_closest");
-      var_07 = !isDefined(var_06) || var_06.size == 0;
-      var_01 = scripts\engine\utility::ter_op(var_07, var_04, var_01);
+    var_4 = "tag_origin";
+    var_5 = var_1 gettagorigin(var_5);
+    if(!isDefined(var_1)) {
+      var_6 = physics_raycast(var_3, var_5, var_2, self, 0, "physicsquery_closest");
+      var_7 = !isDefined(var_6) || var_6.size == 0;
+      var_1 = scripts\engine\utility::ter_op(var_7, var_4, var_1);
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_B6F1() {
@@ -459,18 +459,18 @@ func_B6F1() {
   self cleartargetentity();
 }
 
-func_B71A(param_00) {
-  if(isplayer(param_00) || isagent(param_00)) {
-    if(!isalive(param_00)) {
+func_B71A(var_0) {
+  if(isplayer(var_0) || isagent(var_0)) {
+    if(!isalive(var_0)) {
       return 0;
     }
   }
 
-  if(self.team == param_00.team) {
+  if(self.team == var_0.team) {
     return 0;
   }
 
-  if(distancesquared(param_00.origin, self.origin) > 640000) {
+  if(distancesquared(var_0.origin, self.origin) > 640000) {
     return 0;
   }
 
@@ -488,10 +488,10 @@ func_B6EB() {
 }
 
 func_B6EC() {
-  var_00 = weaponfiretime("micro_turret_gun_zm");
+  var_0 = weaponfiretime("micro_turret_gun_zm");
   for(;;) {
     if(func_B701()) {
-      var_01 = self _meth_8161(0);
+      var_1 = self _meth_8161(0);
       if(!isDefined(self.var_1A4A)) {
         self settargetentity(self.var_1A4A);
       }
@@ -504,7 +504,7 @@ func_B6EC() {
         }
       }
 
-      wait(var_00);
+      wait(var_0);
       continue;
     }
 
@@ -516,15 +516,15 @@ func_B715() {
   return isDefined(self.var_1A4A) && isDefined(self.var_1A4A.var_23EB);
 }
 
-func_B6F4(param_00) {
-  param_00 notify("death");
+func_B6F4(var_0) {
+  var_0 notify("death");
 }
 
 func_B6F5() {
   self notify("microTurret_destroyAll");
   if(isDefined(self.microturrets)) {
-    foreach(var_01 in self.microturrets) {
-      func_B6F4(var_01);
+    foreach(var_1 in self.microturrets) {
+      func_B6F4(var_1);
     }
   }
 
@@ -542,28 +542,28 @@ func_B721() {
 
 func_B704() {
   playFXOnTag(scripts\engine\utility::getfx("microturret_lockon"), self, "tag_flash");
-  var_00 = func_B6FD();
-  if(isplayer(var_00) || isagent(var_00)) {
-    thread func_B705(var_00);
+  var_0 = func_B6FD();
+  if(isplayer(var_0) || isagent(var_0)) {
+    thread func_B705(var_0);
   }
 
   wait(0.6);
   self notify("lockOnEnded");
 }
 
-func_B705(param_00) {
+func_B705(var_0) {
   self endon("lockOnEnded");
-  param_00 endon("death");
-  param_00 endon("disconnect");
-  var_01 = 0;
-  var_02 = 0.2;
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  var_1 = 0;
+  var_2 = 0.2;
   for(;;) {
-    param_00 playlocalsound("ball_drone_targeting");
-    wait(var_02);
-    var_01 = var_01 + var_02;
+    var_0 playlocalsound("ball_drone_targeting");
+    wait(var_2);
+    var_1 = var_1 + var_2;
   }
 
-  param_00 playlocalsound("ball_drone_lockon");
+  var_0 playlocalsound("ball_drone_lockon");
 }
 
 func_B6FD() {
@@ -575,74 +575,74 @@ func_B6FD() {
 }
 
 func_B722() {
-  var_00 = func_B6FD();
-  var_00 endon("death");
-  var_00 endon("disconnect");
-  var_01 = undefined;
-  var_02 = func_B6FD();
-  while(isDefined(var_02) && var_02 == var_00) {
-    var_02 = func_B6FD();
-    if(!isDefined(var_02) || var_02 != var_00) {
+  var_0 = func_B6FD();
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  var_1 = undefined;
+  var_2 = func_B6FD();
+  while(isDefined(var_2) && var_2 == var_0) {
+    var_2 = func_B6FD();
+    if(!isDefined(var_2) || var_2 != var_0) {
       break;
     }
 
-    if(var_02 scripts\cp\utility::_hasperk("specialty_blindeye")) {
+    if(var_2 scripts\cp\utility::_hasperk("specialty_blindeye")) {
       break;
     }
 
-    if(isDefined(var_01) && gettime() > var_01) {
+    if(isDefined(var_1) && gettime() > var_1) {
       break;
     }
 
-    var_03 = func_B714(var_02);
-    if(!isDefined(var_03)) {
-      if(!isDefined(var_01)) {
-        var_01 = gettime() + 1000;
+    var_3 = func_B714(var_2);
+    if(!isDefined(var_3)) {
+      if(!isDefined(var_1)) {
+        var_1 = gettime() + 1000;
       }
 
       wait(0.1);
       continue;
     }
 
-    func_B70D(var_02, var_03);
-    var_01 = undefined;
+    func_B70D(var_2, var_3);
+    var_1 = undefined;
     wait(0.1);
   }
 }
 
-func_B6EE(param_00) {
+func_B6EE(var_0) {
   self endon("turret_toggle");
   self endon("death");
   self endon("stop_shooting");
   level endon("game_ended");
-  var_01 = self;
-  var_02 = level._effect["shoulder_cannon_charge"];
-  var_03 = weaponfiretime("micro_turret_gun_zm");
-  var_04 = 0.01;
+  var_1 = self;
+  var_2 = level._effect["shoulder_cannon_charge"];
+  var_3 = weaponfiretime("micro_turret_gun_zm");
+  var_4 = 0.01;
   while(self.var_1E2D > 0) {
     if(self.var_1E2D <= 20) {
-      var_05 = self.var_1E2D;
+      var_5 = self.var_1E2D;
     } else {
-      var_05 = randomintrange(10, 20);
+      var_5 = randomintrange(10, 20);
     }
 
-    for(var_06 = 0; var_06 < var_05; var_06++) {
-      if(isDefined(var_01.inactive) && var_01.inactive) {
+    for(var_6 = 0; var_6 < var_5; var_6++) {
+      if(isDefined(var_1.inactive) && var_1.inactive) {
         break;
       }
 
-      var_07 = self getturrettarget(1);
-      if(isDefined(var_07) && canbetargeted(var_07)) {
+      var_7 = self getturrettarget(1);
+      if(isDefined(var_7) && canbetargeted(var_7)) {
         self shootturret();
-        wait(var_03);
+        wait(var_3);
         self.var_1E2D--;
         if(self.var_1E2D < 0) {
           self.var_1E2D = 0;
         }
 
-        param_00 notify("microTurret_update", self.var_1E2D * var_04);
-        if(isDefined(param_00.var_38D8)) {
-          param_00.var_38D8 delete();
+        var_0 notify("microTurret_update", self.var_1E2D * var_4);
+        if(isDefined(var_0.var_38D8)) {
+          var_0.var_38D8 delete();
         }
       }
     }
@@ -652,22 +652,22 @@ func_B6EE(param_00) {
 
   if(self.var_1E2D <= 0) {
     waittillframeend;
-    param_00 notify("turret_deleted");
+    var_0 notify("turret_deleted");
     self delete();
   }
 }
 
-balldrone_burstfirestop(param_00, param_01) {
-  var_02 = level._effect["shoulder_cannon_charge"];
-  playFXOnTag(var_02, self, "tag_flash");
-  var_03 = self getturrettarget(0);
-  while(param_00 > 0) {
-    param_01 playlocalsound("ball_drone_targeting");
+balldrone_burstfirestop(var_0, var_1) {
+  var_2 = level._effect["shoulder_cannon_charge"];
+  playFXOnTag(var_2, self, "tag_flash");
+  var_3 = self getturrettarget(0);
+  while(var_0 > 0) {
+    var_1 playlocalsound("ball_drone_targeting");
     wait(0.2);
-    param_00 = param_00 - 0.2;
+    var_0 = var_0 - 0.2;
   }
 
-  param_01 playlocalsound("ball_drone_lockon");
+  var_1 playlocalsound("ball_drone_lockon");
 }
 
 func_B6EF() {
@@ -677,47 +677,47 @@ func_B6EF() {
   }
 }
 
-canbetargeted(param_00) {
-  var_01 = 1;
-  if(isplayer(param_00)) {
-    if(!scripts\cp\utility::isreallyalive(param_00) || param_00.sessionstate != "playing") {
+canbetargeted(var_0) {
+  var_1 = 1;
+  if(isplayer(var_0)) {
+    if(!scripts\cp\utility::isreallyalive(var_0) || var_0.sessionstate != "playing") {
       return 0;
     }
   }
 
-  if(level.teambased && isDefined(param_00.team) && param_00.team == self.team) {
+  if(level.teambased && isDefined(var_0.team) && var_0.team == self.team) {
     return 0;
   }
 
-  if(isDefined(param_00.team) && param_00.team == "spectator") {
+  if(isDefined(var_0.team) && var_0.team == "spectator") {
     return 0;
   }
 
-  if(isplayer(param_00) && param_00 == self.triggerportableradarping) {
+  if(isplayer(var_0) && var_0 == self.triggerportableradarping) {
     return 0;
   }
 
-  if(isplayer(param_00) && isDefined(param_00.spawntime) && gettime() - param_00.spawntime / 1000 <= 5) {
+  if(isplayer(var_0) && isDefined(var_0.spawntime) && gettime() - var_0.spawntime / 1000 <= 5) {
     return 0;
   }
 
-  if(isplayer(param_00) && param_00 scripts\cp\utility::_hasperk("specialty_blindeye")) {
+  if(isplayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_blindeye")) {
     return 0;
   }
 
-  if(distancesquared(param_00.origin, self.origin) > 4000000) {
+  if(distancesquared(var_0.origin, self.origin) > 4000000) {
     return 0;
   }
 
-  if(isDefined(param_00.var_9EE2) && param_00.var_9EE2) {
+  if(isDefined(var_0.var_9EE2) && var_0.var_9EE2) {
     return 0;
   }
 
-  return var_01;
+  return var_1;
 }
 
-placementfailed(param_00) {
+placementfailed(var_0) {
   self notify("powers_microTurret_used", 0);
-  scripts\cp\cp_weapon::placeequipmentfailed(param_00.weapon_name, 1, param_00.origin);
-  param_00 delete();
+  scripts\cp\cp_weapon::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
+  var_0 delete();
 }

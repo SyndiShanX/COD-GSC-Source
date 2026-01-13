@@ -25,7 +25,7 @@ func_FAB0() {
   level.agent_funcs["dlc4_boss"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_mephistopheles");
 }
 
@@ -137,33 +137,33 @@ setupagent() {
   self gib_fx_override("noclip");
 }
 
-func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   var_0C = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  if(param_05 == var_0C.entangler_weapon_name) {
-    param_02 = 0;
+  if(var_5 == var_0C.entangler_weapon_name) {
+    var_2 = 0;
   }
 
-  if(!isDefined(param_01) || !isplayer(param_01)) {
-    param_02 = 0;
+  if(!isDefined(var_1) || !isplayer(var_1)) {
+    var_2 = 0;
   }
 
-  [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0A, param_0B);
+  [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
 }
 
-ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  if(param_02 == 0) {
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  if(var_2 == 0) {
     return;
   }
 
   self.health = 999999;
   var_0D = 0;
   if(self.showblood || var_0D) {
-    self getrespawndelay(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+    self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
   }
 
   if(self.var_FCA5 && !var_0D) {
-    if(isDefined(param_06) && isDefined(param_07)) {
-      playFX(level._effect["boss_shield_hit"], param_06, param_07 * -150);
+    if(isDefined(var_6) && isDefined(var_7)) {
+      playFX(level._effect["boss_shield_hit"], var_6, var_7 * -150);
     }
   }
 
@@ -171,14 +171,14 @@ ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, par
     return;
   }
 
-  if(isplayer(param_01)) {
-    param_01 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
+  if(isplayer(var_1)) {
+    var_1 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
   }
 
   var_0E = scripts\asm\dlc4\dlc4_asm::gettunedata();
   if(level.fbd.bossstate == "FRENZIED") {
-    self.frenziedhealth = self.frenziedhealth - min(param_02, self.damagecap);
-    self.damagecap = max(self.damagecap - param_02, 0);
+    self.frenziedhealth = self.frenziedhealth - min(var_2, self.damagecap);
+    self.damagecap = max(self.damagecap - var_2, 0);
     if(self.frenziedhealth <= 0) {
       if(!self.interruptable) {
         self.frenziedhealth = 1;
@@ -192,7 +192,7 @@ ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, par
   }
 
   if(level.fbd.bossstate == "LAST_STAND") {
-    self.laststandhealth = self.laststandhealth - min(param_02, self.damagecap);
-    self.damagecap = max(self.damagecap - param_02, 0);
+    self.laststandhealth = self.laststandhealth - min(var_2, self.damagecap);
+    self.damagecap = max(self.damagecap - var_2, 0);
   }
 }

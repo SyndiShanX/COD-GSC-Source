@@ -21,27 +21,27 @@ auraquickswap_run() {
   self setclientomnvar("ui_aura_quickswap", 0);
   for(;;) {
     self waittill("got_a_kill");
-    foreach(var_01 in level.players) {
-      if(var_01.team != self.team) {
+    foreach(var_1 in level.players) {
+      if(var_1.team != self.team) {
         continue;
       }
 
-      if(distance2dsquared(var_01.origin, self.origin) > 147456) {
+      if(distance2dsquared(var_1.origin, self.origin) > 147456) {
         continue;
       }
 
-      var_01 thread auraquickswap_bestowaura(self);
+      var_1 thread auraquickswap_bestowaura(self);
     }
   }
 }
 
-auraquickswap_bestowaura(param_00) {
+auraquickswap_bestowaura(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("giveLoadout_start");
   level endon("game_ended");
-  if(self != param_00) {
-    param_00 thread scripts\mp\utility::giveunifiedpoints("buff_teammate");
+  if(self != var_0) {
+    var_0 thread scripts\mp\utility::giveunifiedpoints("buff_teammate");
   }
 
   self setclientomnvar("ui_aura_quickswap", 1);

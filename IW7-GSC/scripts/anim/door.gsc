@@ -11,24 +11,24 @@ func_5A09() {
   }
 
   for(;;) {
-    var_00 = self _meth_811E();
-    if(isDefined(var_00)) {
+    var_0 = self _meth_811E();
+    if(isDefined(var_0)) {
       break;
     }
 
     wait(0.2);
   }
 
-  var_01 = var_00.type == "Door Interior" || self getpotentiallivingplayers(var_00);
-  if(var_01) {
-    func_5A06(var_00);
+  var_1 = var_0.type == "Door Interior" || self getpotentiallivingplayers(var_0);
+  if(var_1) {
+    func_5A06(var_0);
   } else {
-    func_5A0A(var_00);
+    func_5A0A(var_0);
   }
 
   for(;;) {
-    var_02 = self _meth_811E();
-    if(!isDefined(var_02) || var_02 != var_00) {
+    var_2 = self _meth_811E();
+    if(!isDefined(var_2) || var_2 != var_0) {
       break;
     }
 
@@ -45,14 +45,14 @@ func_115CD() {
   self.var_115CE = undefined;
 }
 
-func_5817(param_00) {
+func_5817(var_0) {
   thread func_115CD();
   if(self.objective_team == "flash_grenade") {
     self notify("flashbang_thrown");
   }
 
   self orientmode("face current");
-  param_00.var_BF7D = gettime() + 5000;
+  var_0.var_BF7D = gettime() + 5000;
   self.var_B7B5 = gettime() + 100000;
   self notify("move_interrupt");
   self.var_12DEF = undefined;
@@ -68,20 +68,20 @@ func_5817(param_00) {
   thread scripts\anim\move::func_E2B4(1);
 }
 
-func_5A08(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = 0;
-  var_06 = 3;
-  var_07 = undefined;
-  var_08 = anglesToForward(param_00.angles);
-  if(param_00.type == "Door Interior" && !self getpotentiallivingplayers(param_00)) {
-    var_08 = -1 * var_08;
+func_5A08(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 0;
+  var_6 = 3;
+  var_7 = undefined;
+  var_8 = anglesToForward(var_0.angles);
+  if(var_0.type == "Door Interior" && !self getpotentiallivingplayers(var_0)) {
+    var_8 = -1 * var_8;
   }
 
-  var_09 = (param_00.origin[0], param_00.origin[1], param_00.origin[2] + 64);
-  var_0A = var_09;
-  if(param_02) {
-    var_0B = anglestoright(param_00.angles);
-    var_0C = param_00.origin - self.origin;
+  var_9 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] + 64);
+  var_0A = var_9;
+  if(var_2) {
+    var_0B = anglestoright(var_0.angles);
+    var_0C = var_0.origin - self.origin;
     var_0D = vectordot(var_0B, var_0C);
     if(var_0D > 20) {
       var_0D = 20;
@@ -89,20 +89,20 @@ func_5A08(param_00, param_01, param_02, param_03, param_04) {
       var_0D = -20;
     }
 
-    var_0A = var_09 + var_0D * var_0B;
+    var_0A = var_9 + var_0D * var_0B;
   }
 
-  while(var_06 > 0) {
+  while(var_6 > 0) {
     if(isDefined(self.objective_position) || !isDefined(self.isnodeoccupied)) {
       return;
     }
 
-    if(func_C586(param_00, var_08)) {
+    if(func_C586(var_0, var_8)) {
       return;
     }
 
-    if(!self seerecently(self.isnodeoccupied, 0.2) && self.a.pose == "stand" && func_56F2(self.isnodeoccupied.origin - param_00.origin, 360000, 16384)) {
-      if(isDefined(param_00.var_BF7D) && param_00.var_BF7D > gettime()) {
+    if(!self seerecently(self.isnodeoccupied, 0.2) && self.a.pose == "stand" && func_56F2(self.isnodeoccupied.origin - var_0.origin, 360000, 16384)) {
+      if(isDefined(var_0.var_BF7D) && var_0.var_BF7D > gettime()) {
         return;
       }
 
@@ -110,36 +110,36 @@ func_5A08(param_00, param_01, param_02, param_03, param_04) {
         return;
       }
 
-      var_0C = param_00.origin - self.origin;
-      if(lengthsquared(var_0C) < param_03) {
+      var_0C = var_0.origin - self.origin;
+      if(lengthsquared(var_0C) < var_3) {
         return;
       }
 
-      if(vectordot(var_0C, var_08) < 0) {
+      if(vectordot(var_0C, var_8) < 0) {
         return;
       }
 
       self.var_C3F2 = self.objective_team;
-      self.objective_team = param_01;
+      self.objective_team = var_1;
       scripts\anim\combat_utility::func_F62B(self.isnodeoccupied);
-      if(!var_05) {
-        var_0E = var_09 + var_08 * 100;
+      if(!var_5) {
+        var_0E = var_9 + var_8 * 100;
         if(!self _meth_81A2(self.isnodeoccupied, var_0E, 128)) {
           return;
         }
       }
 
-      var_05 = 1;
-      if(scripts\anim\combat_utility::trygrenadethrow(self.isnodeoccupied, var_0A, var_07, scripts\anim\combat_utility::func_7EE8(var_07), 1, 0, 1)) {
-        func_5817(param_00);
+      var_5 = 1;
+      if(scripts\anim\combat_utility::trygrenadethrow(self.isnodeoccupied, var_0A, var_7, scripts\anim\combat_utility::func_7EE8(var_7), 1, 0, 1)) {
+        func_5817(var_0);
         return;
       }
     }
 
-    var_06--;
-    wait(param_04);
+    var_6--;
+    wait(var_4);
     var_0F = self _meth_811E();
-    if(!isDefined(var_0F) || var_0F != param_00) {
+    if(!isDefined(var_0F) || var_0F != var_0) {
       return;
     }
   }
@@ -182,26 +182,26 @@ func_5A0B() {
   }
 }
 
-func_56F2(param_00, param_01, param_02) {
-  return param_00[0] * param_00[0] + param_00[1] * param_00[1] < param_01 && param_00[2] * param_00[2] < param_02;
+func_56F2(var_0, var_1, var_2) {
+  return var_0[0] * var_0[0] + var_0[1] * var_0[1] < var_1 && var_0[2] * var_0[2] < var_2;
 }
 
-func_C586(param_00, param_01) {
-  var_02 = param_00.origin - self.origin;
-  var_03 = param_00.origin - self.isnodeoccupied.origin;
-  return vectordot(var_02, param_01) * vectordot(var_03, param_01) > 0;
+func_C586(var_0, var_1) {
+  var_2 = var_0.origin - self.origin;
+  var_3 = var_0.origin - self.isnodeoccupied.origin;
+  return vectordot(var_2, var_1) * vectordot(var_3, var_1) > 0;
 }
 
-func_5A06(param_00) {
+func_5A06(var_0) {
   for(;;) {
     if(isDefined(self.var_5A0F) && self.var_5A0F == 0 || self.var_5A0F < randomfloat(1)) {
       break;
     }
 
-    if(func_56F2(self.origin - param_00.origin, 562500, 25600)) {
-      func_5A08(param_00, "fraggrenade", 0, 302500, 0.3);
-      param_00 = self _meth_811E();
-      if(!isDefined(param_00)) {
+    if(func_56F2(self.origin - var_0.origin, 562500, 25600)) {
+      func_5A08(var_0, "fraggrenade", 0, 302500, 0.3);
+      var_0 = self _meth_811E();
+      if(!isDefined(var_0)) {
         return;
       }
 
@@ -212,14 +212,14 @@ func_5A06(param_00) {
   }
 
   for(;;) {
-    if(func_56F2(self.origin - param_00.origin, -28672, 6400)) {
+    if(func_56F2(self.origin - var_0.origin, -28672, 6400)) {
       func_5A07();
       self.var_B7B5 = gettime() + 6000;
       if(isDefined(self.var_5A0E) && self.var_5A0E == 0 || self.var_5A0E < randomfloat(1)) {
         return;
       }
 
-      func_5A08(param_00, "flash_grenade", 1, 4096, 0.2);
+      func_5A08(var_0, "flash_grenade", 1, 4096, 0.2);
       return;
     }
 
@@ -227,9 +227,9 @@ func_5A06(param_00) {
   }
 }
 
-func_5A0A(param_00) {
+func_5A0A(var_0) {
   for(;;) {
-    if(!self.var_9E45 || distancesquared(self.origin, param_00.origin) < 1024) {
+    if(!self.var_9E45 || distancesquared(self.origin, var_0.origin) < 1024) {
       return;
     }
 

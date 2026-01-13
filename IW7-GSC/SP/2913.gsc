@@ -15,28 +15,28 @@ func_95A4() {
   level.player.var_ACDE = 0;
 }
 
-func_F324(param_00, param_01, param_02) {
-  if(isDefined(param_00)) {
-    level.var_D1D4["pitch"]["min"] = param_00["min"];
-    level.var_D1D4["pitch"]["max"] = param_00["max"];
+func_F324(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.var_D1D4["pitch"]["min"] = var_0["min"];
+    level.var_D1D4["pitch"]["max"] = var_0["max"];
   }
 
-  if(isDefined(param_01)) {
-    level.var_D1D4["yaw"]["min"] = param_01["min"];
-    level.var_D1D4["yaw"]["max"] = param_01["max"];
+  if(isDefined(var_1)) {
+    level.var_D1D4["yaw"]["min"] = var_1["min"];
+    level.var_D1D4["yaw"]["max"] = var_1["max"];
   }
 
-  if(isDefined(param_02)) {
-    level.var_D1D4["roll"]["min"] = param_02["min"];
-    level.var_D1D4["roll"]["max"] = param_02["max"];
+  if(isDefined(var_2)) {
+    level.var_D1D4["roll"]["min"] = var_2["min"];
+    level.var_D1D4["roll"]["max"] = var_2["max"];
   }
 }
 
 func_554E() {
   level.player notify("stop_limp");
   if(isDefined(level.player.var_8632)) {
-    var_00 = level.player func_186F((0, 0, 0));
-    level.player.var_8632 rotateto(var_00, 0.05, 0, 0.05);
+    var_0 = level.player func_186F((0, 0, 0));
+    level.player.var_8632 rotateto(var_0, 0.05, 0, 0.05);
     level.player.var_8632 waittill("rotatedone");
     level.player getwholescenedurationmin(undefined);
     level.player.var_8632 delete();
@@ -45,40 +45,40 @@ func_554E() {
   level.player.var_ACDE = 0;
 }
 
-func_ACDE(param_00, param_01, param_02, param_03) {
+func_ACDE(var_0, var_1, var_2, var_3) {
   self endon("stop_limp");
   self.var_ACDE = 1;
   func_48F7();
-  thread func_3DB3(param_00, param_01);
+  thread func_3DB3(var_0, var_1);
   for(;;) {
     if(level.player getstance() == "prone") {
       wait(0.05);
       continue;
     }
 
-    func_36DC(param_00, param_02, param_01, param_03);
-    if(param_01) {
-      if(param_00 == "leg_left") {
-        param_00 = "leg_right";
+    func_36DC(var_0, var_2, var_1, var_3);
+    if(var_1) {
+      if(var_0 == "leg_left") {
+        var_0 = "leg_right";
       } else {
-        param_00 = "leg_left";
+        var_0 = "leg_left";
       }
     }
 
-    param_03 = 0;
-    param_02 = 0;
+    var_3 = 0;
+    var_2 = 0;
     wait(0.05);
   }
 }
 
-func_3DB3(param_00, param_01) {
+func_3DB3(var_0, var_1) {
   self endon("stop_limp");
-  var_02 = 1;
-  var_03 = level.player getvelocity();
-  var_04 = func_7B8E();
+  var_2 = 1;
+  var_3 = level.player getvelocity();
+  var_4 = func_7B8E();
   for(;;) {
-    if(var_02) {
-      var_02 = 0;
+    if(var_2) {
+      var_2 = 0;
       wait(0.05);
       continue;
     }
@@ -88,24 +88,24 @@ func_3DB3(param_00, param_01) {
       continue;
     }
 
-    if(func_9BBB(var_04)) {
-      thread func_E2AC(param_00, param_01, 1.5, 0);
+    if(func_9BBB(var_4)) {
+      thread func_E2AC(var_0, var_1, 1.5, 0);
       break;
     }
 
-    if(func_9D0D(var_03)) {
-      thread func_E2AC(param_00, param_01, 1, 0);
+    if(func_9D0D(var_3)) {
+      thread func_E2AC(var_0, var_1, 1, 0);
       break;
     }
 
-    var_03 = level.player getvelocity();
-    var_04 = func_7B8E();
+    var_3 = level.player getvelocity();
+    var_4 = func_7B8E();
     wait(0.05);
   }
 }
 
-func_9BBB(param_00) {
-  if(func_7B8E() != param_00) {
+func_9BBB(var_0) {
+  if(func_7B8E() != var_0) {
     return 1;
   }
 
@@ -113,94 +113,94 @@ func_9BBB(param_00) {
 }
 
 func_7B8E() {
-  var_00 = vectortoangles(level.player getnormalizedmovement())[1];
-  if(var_00 >= 315 || var_00 <= 45) {
-    var_01 = "forward";
-  } else if(var_01 > 45 && var_01 < 135) {
-    var_01 = "right";
-  } else if(var_01 > 225 && var_01 < 315) {
-    var_01 = "left";
+  var_0 = vectortoangles(level.player getnormalizedmovement())[1];
+  if(var_0 >= 315 || var_0 <= 45) {
+    var_1 = "forward";
+  } else if(var_1 > 45 && var_1 < 135) {
+    var_1 = "right";
+  } else if(var_1 > 225 && var_1 < 315) {
+    var_1 = "left";
   } else {
-    var_01 = "backward";
+    var_1 = "backward";
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_9D0D(param_00) {
-  var_01 = length(param_00);
-  param_00 = length(level.player getvelocity());
-  return param_00 - var_01 >= 20;
+func_9D0D(var_0) {
+  var_1 = length(var_0);
+  var_0 = length(level.player getvelocity());
+  return var_0 - var_1 >= 20;
 }
 
-func_E2AC(param_00, param_01, param_02, param_03) {
+func_E2AC(var_0, var_1, var_2, var_3) {
   self notify("stop_limp");
-  var_04 = [];
+  var_4 = [];
   self.var_ACDE = 0;
-  var_05 = func_7B8E();
-  if(var_05 == "forward") {
-    var_04["pitch"]["min"] = 1;
-    var_04["pitch"]["max"] = 1.5;
-    var_04["yaw"]["min"] = -1.5;
-    var_04["yaw"]["max"] = -1;
-    var_04["roll"]["min"] = 2.25;
-    var_04["roll"]["max"] = 3;
-  } else if(var_05 == "right") {
-    var_04["pitch"]["min"] = 1.7;
-    var_04["pitch"]["max"] = 2;
-    var_04["yaw"]["min"] = 2;
-    var_04["yaw"]["max"] = 4;
-    var_04["roll"]["min"] = -4;
-    var_04["roll"]["max"] = -3;
-  } else if(var_05 == "left") {
-    var_04["pitch"]["min"] = 1.7;
-    var_04["pitch"]["max"] = 2;
-    var_04["yaw"]["min"] = 2;
-    var_04["yaw"]["max"] = 4;
-    var_04["roll"]["min"] = -4;
-    var_04["roll"]["max"] = -3;
-  } else if(var_05 == "backward") {
-    var_04["pitch"]["min"] = 2;
-    var_04["pitch"]["max"] = 4;
-    var_04["yaw"]["min"] = 4;
-    var_04["yaw"]["max"] = 5;
-    var_04["roll"]["min"] = -5;
-    var_04["roll"]["max"] = -3;
+  var_5 = func_7B8E();
+  if(var_5 == "forward") {
+    var_4["pitch"]["min"] = 1;
+    var_4["pitch"]["max"] = 1.5;
+    var_4["yaw"]["min"] = -1.5;
+    var_4["yaw"]["max"] = -1;
+    var_4["roll"]["min"] = 2.25;
+    var_4["roll"]["max"] = 3;
+  } else if(var_5 == "right") {
+    var_4["pitch"]["min"] = 1.7;
+    var_4["pitch"]["max"] = 2;
+    var_4["yaw"]["min"] = 2;
+    var_4["yaw"]["max"] = 4;
+    var_4["roll"]["min"] = -4;
+    var_4["roll"]["max"] = -3;
+  } else if(var_5 == "left") {
+    var_4["pitch"]["min"] = 1.7;
+    var_4["pitch"]["max"] = 2;
+    var_4["yaw"]["min"] = 2;
+    var_4["yaw"]["max"] = 4;
+    var_4["roll"]["min"] = -4;
+    var_4["roll"]["max"] = -3;
+  } else if(var_5 == "backward") {
+    var_4["pitch"]["min"] = 2;
+    var_4["pitch"]["max"] = 4;
+    var_4["yaw"]["min"] = 4;
+    var_4["yaw"]["max"] = 5;
+    var_4["roll"]["min"] = -5;
+    var_4["roll"]["max"] = -3;
   }
 
   scripts\engine\utility::waitframe();
-  func_F324(var_04["pitch"], var_04["yaw"], var_04["roll"]);
-  func_ACDE(param_00, param_01, param_02, param_03);
+  func_F324(var_4["pitch"], var_4["yaw"], var_4["roll"]);
+  func_ACDE(var_0, var_1, var_2, var_3);
 }
 
-func_36DC(param_00, param_01, param_02, param_03) {
+func_36DC(var_0, var_1, var_2, var_3) {
   self endon("stop_limp");
-  var_04 = level.player getstance();
-  var_05 = func_D2CC();
-  if(length(level.player getnormalizedmovement()) <= 0.1 && !param_03) {
+  var_4 = level.player getstance();
+  var_5 = func_D2CC();
+  if(length(level.player getnormalizedmovement()) <= 0.1 && !var_3) {
     return;
   }
 
-  var_06 = randomfloatrange(level.var_D1D4["pitch"]["min"], level.var_D1D4["pitch"]["max"]);
-  var_07 = randomfloatrange(level.var_D1D4["roll"]["min"], level.var_D1D4["roll"]["max"]);
-  var_08 = randomfloatrange(level.var_D1D4["yaw"]["min"], level.var_D1D4["yaw"]["max"]);
-  if(randomint(100) < 20 && !param_01) {
-    var_06 = var_06 * 1.25;
-    var_07 = var_07 * 1.25;
-    var_08 = var_08 * 1.25;
+  var_6 = randomfloatrange(level.var_D1D4["pitch"]["min"], level.var_D1D4["pitch"]["max"]);
+  var_7 = randomfloatrange(level.var_D1D4["roll"]["min"], level.var_D1D4["roll"]["max"]);
+  var_8 = randomfloatrange(level.var_D1D4["yaw"]["min"], level.var_D1D4["yaw"]["max"]);
+  if(randomint(100) < 20 && !var_1) {
+    var_6 = var_6 * 1.25;
+    var_7 = var_7 * 1.25;
+    var_8 = var_8 * 1.25;
   }
 
-  var_09 = (var_06, var_08, var_07);
-  if(param_00 == "leg_left") {
-    var_09 = (var_09[0] * -1.5, var_09[1] * -1.5, var_09[2]);
+  var_9 = (var_6, var_8, var_7);
+  if(var_0 == "leg_left") {
+    var_9 = (var_9[0] * -1.5, var_9[1] * -1.5, var_9[2]);
   }
 
-  if((param_01 && !level.player getweaponrankinfominxp()) || param_03) {
-    var_05 = param_01;
+  if((var_1 && !level.player getweaponrankinfominxp()) || var_3) {
+    var_5 = var_1;
     var_0A = 0.75;
     var_0B = var_0A / 2.5;
   } else {
-    var_0B = var_07 * 0.5;
+    var_0B = var_7 * 0.5;
     var_0B = 1 - clamp(var_0B, 0, 0.7);
     var_0A = var_0B * 1.5;
     if(func_7B8E() == "backwards") {
@@ -209,50 +209,50 @@ func_36DC(param_00, param_01, param_02, param_03) {
     }
   }
 
-  var_09 = var_09 * var_05;
+  var_9 = var_9 * var_5;
   if(level.player getweaponrankinfominxp()) {
-    var_09 = var_09 * 0.65;
+    var_9 = var_9 * 0.65;
     var_0A = var_0A * 1.35;
   }
 
-  if(param_02) {
+  if(var_2) {
     var_0A = var_0A * 0.5;
   }
 
-  func_11182(var_09, var_0B, var_0A, var_05);
+  func_11182(var_9, var_0B, var_0A, var_5);
 }
 
-func_11182(param_00, param_01, param_02, param_03) {
+func_11182(var_0, var_1, var_2, var_3) {
   self endon("stop_stumble");
   self endon("stop_limp");
-  param_00 = func_186F(param_00);
-  self.var_8632 rotateto(param_00, param_01, param_01 / 4 * 3, param_01 / 4);
+  var_0 = func_186F(var_0);
+  self.var_8632 rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self.var_8632 waittill("rotatedone");
   if(isDefined(self.var_883D) && self.var_883D != "none") {
-    thread func_D0E5(param_03);
+    thread func_D0E5(var_3);
   } else {
-    thread func_D0E6(param_03);
+    thread func_D0E6(var_3);
   }
 
-  var_04 = (randomfloat(4) - 4, randomfloat(5), 0);
-  var_04 = func_186F(var_04);
-  self.var_8632 rotateto(var_04, param_02, 0, param_02 / 2);
+  var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
+  var_4 = func_186F(var_4);
+  self.var_8632 rotateto(var_4, var_2, 0, var_2 / 2);
   self.var_8632 waittill("rotatedone");
 }
 
 func_D2CC() {
-  var_00 = length(level.player getvelocity());
-  return var_00 / 100;
+  var_0 = length(level.player getvelocity());
+  return var_0 / 100;
 }
 
-func_D0E5(param_00) {
+func_D0E5(var_0) {
   if(isDefined(self.var_883B) && soundexists(self.var_883B)) {
     self playSound(self.var_883B);
   }
 }
 
-func_D0E6(param_00) {
-  if(param_00 > randomfloatrange(0.7, 1)) {
+func_D0E6(var_0) {
+  if(var_0 > randomfloatrange(0.7, 1)) {
     level.player playrumbleonentity("damage_light");
     thread scripts\engine\utility::play_sound_in_space("breathing_limp");
     scripts\engine\utility::play_sound_in_space("breathing_heartbeat");
@@ -269,16 +269,16 @@ func_D221() {
   level.player stopsounds();
 }
 
-func_186F(param_00) {
-  var_01 = param_00[0];
-  var_02 = param_00[2];
-  var_03 = anglestoright(self.angles);
-  var_04 = anglesToForward(self.angles);
-  var_05 = (var_03[0], 0, var_03[1] * -1);
-  var_06 = (var_04[0], 0, var_04[1] * -1);
-  var_07 = var_05 * var_01;
-  var_07 = var_07 + var_06 * var_02;
-  return var_07 + (0, param_00[1], 0);
+func_186F(var_0) {
+  var_1 = var_0[0];
+  var_2 = var_0[2];
+  var_3 = anglestoright(self.angles);
+  var_4 = anglesToForward(self.angles);
+  var_5 = (var_3[0], 0, var_3[1] * -1);
+  var_6 = (var_4[0], 0, var_4[1] * -1);
+  var_7 = var_5 * var_1;
+  var_7 = var_7 + var_6 * var_2;
+  return var_7 + (0, var_0[1], 0);
 }
 
 func_48F7() {

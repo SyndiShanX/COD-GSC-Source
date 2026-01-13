@@ -18,12 +18,12 @@ func_96D7() {
   lib_0B60::func_96DC();
   scripts\sp\slowmo_init::func_1032A();
   setsaveddvar("cg_useplayerbreathsys", 1);
-  foreach(var_01 in level.players) {
-    var_01.maxhealth = level.player.health;
-    var_01.var_9B34 = 0;
-    var_01 func_16BC(::func_FE41);
-    var_01 thread scripts\sp\gameskill::playerhealthregen();
-    var_01 thread func_D37B();
+  foreach(var_1 in level.players) {
+    var_1.maxhealth = level.player.health;
+    var_1.var_9B34 = 0;
+    var_1 func_16BC(::func_FE41);
+    var_1 thread scripts\sp\gameskill::playerhealthregen();
+    var_1 thread func_D37B();
     level.player thread lib_0B2A::func_B9D3();
     lib_0E42::init();
   }
@@ -104,16 +104,16 @@ func_FE41() {
 
 func_D37B() {
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_03, var_03, var_03, var_03, var_05);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_3, var_3, var_3, var_3, var_5);
     if(isDefined(self.var_10954)) {
       continue;
     }
 
-    if(scripts\engine\utility::getdamagetype(var_04) != "bullet") {
-      var_06 = -32 * var_02 + self.origin;
+    if(scripts\engine\utility::getdamagetype(var_4) != "bullet") {
+      var_6 = -32 * var_2 + self.origin;
     }
 
-    if(isDefined(var_05) && getweaponbasename(var_05) == "iw7_sonic") {
+    if(isDefined(var_5) && getweaponbasename(var_5) == "iw7_sonic") {
       func_20B3();
     }
   }
@@ -131,8 +131,8 @@ func_965A() {
   level.var_B8D0 = 0;
   scripts\engine\utility::flag_init("missionfailed");
   level.players = getEntArray("player", "classname");
-  for(var_00 = 0; var_00 < level.players.size; var_00++) {
-    level.players[var_00].unique_id = "player" + var_00;
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    level.players[var_0].unique_id = "player" + var_0;
   }
 
   level.player = level.players[0];
@@ -143,10 +143,10 @@ func_965A() {
 
 func_D023() {
   for(;;) {
-    var_00 = getdvarint("player_died_recently", 0);
-    if(var_00 > 0) {
-      var_00 = var_00 - 5;
-      setdvar("player_died_recently", var_00);
+    var_0 = getdvarint("player_died_recently", 0);
+    if(var_0 > 0) {
+      var_0 = var_0 - 5;
+      setdvar("player_died_recently", var_0);
     }
 
     wait(5);
@@ -159,26 +159,26 @@ func_CFF8() {
   level scripts\sp\utility::func_178D(::scripts\engine\utility::flag_wait, "missionfailed");
   level.player scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
   scripts\sp\utility::func_57D6();
-  var_00 = [];
-  var_00[0] = 70;
-  var_00[1] = 30;
-  var_00[2] = 0;
-  var_00[3] = 0;
-  setdvar("player_died_recently", var_00[level.var_7683]);
+  var_0 = [];
+  var_0[0] = 70;
+  var_0[1] = 30;
+  var_0[2] = 0;
+  var_0[3] = 0;
+  setdvar("player_died_recently", var_0[level.var_7683]);
 }
 
-func_16BC(param_00) {
+func_16BC(var_0) {
   if(!isDefined(self.var_4E0E)) {
     self.var_4E0E = [];
     thread func_4E0E();
   }
 
-  self.var_4E0E = param_00;
+  self.var_4E0E = var_0;
 }
 
 func_4E0E() {
-  foreach(var_01 in self.var_4E0E) {
-    thread[[var_01]]();
+  foreach(var_1 in self.var_4E0E) {
+    thread[[var_1]]();
   }
 }
 
@@ -191,7 +191,7 @@ handle_fov_viewmodel() {
     return;
   }
 
-  var_00 = 1.4;
+  var_0 = 1.4;
   level.player scripts\sp\utility::func_65E1("script_allow_showviewmodel");
   for(;;) {
     if(!level.player scripts\sp\utility::func_65DB("script_allow_showviewmodel")) {
@@ -200,8 +200,8 @@ handle_fov_viewmodel() {
       level.player scripts\sp\utility::func_65E3("script_allow_showviewmodel");
     }
 
-    var_01 = getdvarfloat("com_fovUserScale");
-    if(var_01 >= var_00 && level.player getcurrentweapon() == "iw7_gunless") {
+    var_1 = getdvarfloat("com_fovUserScale");
+    if(var_1 >= var_0 && level.player getcurrentweapon() == "iw7_gunless") {
       if(!level.player scripts\sp\utility::func_65DB("fov_vm_hide")) {
         level.player _meth_818A();
         level.player scripts\sp\utility::func_65E1("fov_vm_hide");

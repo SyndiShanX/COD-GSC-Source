@@ -6,13 +6,13 @@
 
 func_566E() {}
 
-func_F6C8(param_00, param_01) {
+func_F6C8(var_0, var_1) {
   if(!isDefined(self.var_566C)) {
     self.var_566C = spawnStruct();
   }
 
-  self.var_566C.var_2C19 = param_00;
-  self.var_566C.var_8EE5 = param_01;
+  self.var_566C.var_2C19 = var_0;
+  self.var_566C.var_8EE5 = var_1;
   scripts\asm\asm::asm_setstate("dismember");
 }
 
@@ -76,29 +76,29 @@ func_9E2E() {
   return self.var_566C.var_8EE5;
 }
 
-func_9EDD(param_00) {
+func_9EDD(var_0) {
   if(!scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
   }
 
-  return scripts\asm\asm_bb::bb_movetyperequested(param_00);
+  return scripts\asm\asm_bb::bb_movetyperequested(var_0);
 }
 
-func_CF1B(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_CF1B(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   self endon("death");
   self endon("terminate_ai_threads");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  func_5815(param_01, var_04);
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  func_5815(var_1, var_4);
   func_41A7();
 }
 
-func_5815(param_00, param_01) {
-  self endon(param_00 + "_finished");
+func_5815(var_0, var_1) {
+  self endon(var_0 + "_finished");
   self endon("death");
   self endon("terminate_ai_threads");
   self scragentsetanimscale(1, 1);
-  scripts\mp\agents\_scriptedagents::func_CED3(param_00, param_01, self.var_C081, "end");
+  scripts\mp\agents\_scriptedagents::func_CED3(var_0, var_1, self.var_C081, "end");
 }
 
 func_9EA5() {
@@ -106,8 +106,8 @@ func_9EA5() {
     return 0;
   }
 
-  var_00 = self.var_B8BA & 1;
-  return var_00 != 0;
+  var_0 = self.var_B8BA & 1;
+  return var_0 != 0;
 }
 
 func_9EA4() {
@@ -115,6 +115,6 @@ func_9EA4() {
     return 0;
   }
 
-  var_00 = self.var_B8BA & 2;
-  return var_00 != 0;
+  var_0 = self.var_B8BA & 2;
+  return var_0 != 0;
 }

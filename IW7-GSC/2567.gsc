@@ -4,94 +4,94 @@
  * Script: 2567.gsc
 ************************/
 
-func_B29B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D) {
+func_B29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D) {
   var_0E = [];
-  if(isDefined(param_00)) {
-    var_0E[0] = param_00;
+  if(isDefined(var_0)) {
+    var_0E[0] = var_0;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_01)) {
-    var_0E[1] = param_01;
+  if(isDefined(var_1)) {
+    var_0E[1] = var_1;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_02)) {
-    var_0E[2] = param_02;
+  if(isDefined(var_2)) {
+    var_0E[2] = var_2;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_03)) {
-    var_0E[3] = param_03;
+  if(isDefined(var_3)) {
+    var_0E[3] = var_3;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_04)) {
-    var_0E[4] = param_04;
+  if(isDefined(var_4)) {
+    var_0E[4] = var_4;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_05)) {
-    var_0E[5] = param_05;
+  if(isDefined(var_5)) {
+    var_0E[5] = var_5;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_06)) {
-    var_0E[6] = param_06;
+  if(isDefined(var_6)) {
+    var_0E[6] = var_6;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_07)) {
-    var_0E[7] = param_07;
+  if(isDefined(var_7)) {
+    var_0E[7] = var_7;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_08)) {
-    var_0E[8] = param_08;
+  if(isDefined(var_8)) {
+    var_0E[8] = var_8;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_09)) {
-    var_0E[9] = param_09;
+  if(isDefined(var_9)) {
+    var_0E[9] = var_9;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_0A)) {
-    var_0E[10] = param_0A;
+  if(isDefined(var_0A)) {
+    var_0E[10] = var_0A;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_0B)) {
-    var_0E[11] = param_0B;
+  if(isDefined(var_0B)) {
+    var_0E[11] = var_0B;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_0C)) {
-    var_0E[12] = param_0C;
+  if(isDefined(var_0C)) {
+    var_0E[12] = var_0C;
   } else {
     return var_0E;
   }
 
-  if(isDefined(param_0D)) {
-    var_0E[13] = param_0D;
+  if(isDefined(var_0D)) {
+    var_0E[13] = var_0D;
   }
 
   return var_0E;
 }
 
-func_97ED(param_00) {
+func_97ED(var_0) {
   self.var_71A8 = ::func_7FD3;
   self.var_71AE = ::lib_0F3C::isaimedataimtarget;
   self.var_71A0 = ::func_4F66;
@@ -178,40 +178,40 @@ func_7FD3() {
 }
 
 func_4F66() {
-  var_00 = self.bulletsinclip;
+  var_0 = self.bulletsinclip;
   if(weaponclass(self.var_394) == "mg") {
-    var_01 = randomfloat(10);
-    if(var_01 < 3) {
-      var_00 = randomintrange(2, 6);
-    } else if(var_01 < 8) {
-      var_00 = randomintrange(6, 12);
+    var_1 = randomfloat(10);
+    if(var_1 < 3) {
+      var_0 = randomintrange(2, 6);
+    } else if(var_1 < 8) {
+      var_0 = randomintrange(6, 12);
     } else {
-      var_00 = randomintrange(12, 20);
+      var_0 = randomintrange(12, 20);
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_FE9D(param_00) {
+func_FE9D(var_0) {
   self.var_A9ED = gettime();
-  var_01 = lib_0F3C::_meth_811C();
-  var_02 = lib_0F3C::_meth_811E(var_01);
-  func_FED2(var_02, param_00);
+  var_1 = lib_0F3C::_meth_811C();
+  var_2 = lib_0F3C::_meth_811E(var_1);
+  func_FED2(var_2, var_0);
 }
 
-func_FED2(param_00, param_01) {
-  self shoot(1, param_00, 1, 0, 1);
+func_FED2(var_0, var_1) {
+  self shoot(1, var_0, 1, 0, 1);
 }
 
 func_7EFC() {
   if(isDefined(self.target_getindexoftarget)) {
-    var_00 = self.target_getindexoftarget gethighestnodestance();
-    if(var_00 == "prone" && self.unittype == "c6") {
-      var_00 = "crouch";
+    var_0 = self.target_getindexoftarget gethighestnodestance();
+    if(var_0 == "prone" && self.unittype == "c6") {
+      var_0 = "crouch";
     }
 
-    return var_00;
+    return var_0;
   }
 
   return undefined;

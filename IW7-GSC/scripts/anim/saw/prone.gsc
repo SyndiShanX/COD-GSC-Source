@@ -8,6 +8,6 @@ main() {
   if(getdvarint("ai_iw7", 0) == 1) {}
 }
 
-func_12A73(param_00) {
+func_12A73(var_0) {
   self _meth_83AE();
 }

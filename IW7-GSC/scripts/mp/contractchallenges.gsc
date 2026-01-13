@@ -50,270 +50,270 @@ registercontractchallenges() {
   registercontractchallenge("con_kills_streak", ::contractempty);
 }
 
-registercontractchallenge(param_00, param_01) {
-  level.contractchallenges[param_00] = param_01;
+registercontractchallenge(var_0, var_1) {
+  level.contractchallenges[var_0] = var_1;
 }
 
-contractempty(param_00) {}
+contractempty(var_0) {}
 
-contracttestchallenge(param_00) {
+contracttestchallenge(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
     wait(1);
-    scripts\mp\contracts::updatecontractprogress(param_00);
+    scripts\mp\contracts::updatecontractprogress(var_0);
   }
 }
 
-contractkillsimmediate(param_00, param_01, param_02, param_03, param_04) {
+contractkillsimmediate(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(self.contracts)) {
     return;
   }
 
-  foreach(var_06 in self.contracts) {
-    var_07 = 0;
-    switch (var_06.ref) {
+  foreach(var_6 in self.contracts) {
+    var_7 = 0;
+    switch (var_6.ref) {
       case "con_kills_streak":
-        var_08 = self.pers["cur_kill_streak"];
-        if(isDefined(var_08)) {
-          if(var_08 % 5 == 0) {
-            var_07 = 1;
+        var_8 = self.pers["cur_kill_streak"];
+        if(isDefined(var_8)) {
+          if(var_8 % 5 == 0) {
+            var_7 = 1;
           }
         }
         break;
 
       case "con_kills_gesture":
         if(isDefined(self.var_A960)) {
-          var_09 = gettime();
-          if(abs(self.var_A960 - var_09) < 3000) {
-            var_0A = param_00 getentitynumber();
+          var_9 = gettime();
+          if(abs(self.var_A960 - var_9) < 3000) {
+            var_0A = var_0 getentitynumber();
             thread stampkillgesture(var_0A);
-            var_07 = 1;
+            var_7 = 1;
           }
         }
         break;
     }
 
-    if(var_07) {
-      scripts\mp\contracts::updatecontractprogress(var_06);
+    if(var_7) {
+      scripts\mp\contracts::updatecontractprogress(var_6);
     }
   }
 }
 
-contractkills(param_00) {
+contractkills(var_0) {
   self endon("disconnect");
   self endon("game_ended");
-  if(param_00.ref == "con_battle_buddy") {
-    thread contractassists(param_00);
+  if(var_0.ref == "con_battle_buddy") {
+    thread contractassists(var_0);
   }
 
   for(;;) {
-    self waittill("kill_event_buffered", var_01, var_02, var_03, var_04);
-    var_05 = 0;
-    switch (param_00.ref) {
+    self waittill("kill_event_buffered", var_1, var_2, var_3, var_4);
+    var_5 = 0;
+    switch (var_0.ref) {
       case "con_kills":
-        var_05 = 1;
+        var_5 = 1;
         break;
 
       case "con_kills_ads":
-        if(scripts\mp\utility::istrue(var_04["ads"])) {
-          var_05 = 1;
+        if(scripts\mp\utility::istrue(var_4["ads"])) {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_modified":
-        if(scripts\mp\utility::istrue(var_04["sliding"]) || scripts\mp\utility::istrue(var_04["hipfire"]) || scripts\mp\utility::istrue(var_04["airborne"]) || scripts\mp\utility::istrue(var_04["wallkill"])) {
-          var_05 = 1;
+        if(scripts\mp\utility::istrue(var_4["sliding"]) || scripts\mp\utility::istrue(var_4["hipfire"]) || scripts\mp\utility::istrue(var_4["airborne"]) || scripts\mp\utility::istrue(var_4["wallkill"])) {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_headshot":
-        if(scripts\mp\utility::istrue(var_04["headshot"])) {
-          var_05 = 1;
+        if(scripts\mp\utility::istrue(var_4["headshot"])) {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_AR":
-        var_02 = scripts\mp\utility::func_13CA1(var_02);
-        if(var_03 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_02) && scripts\mp\utility::getweapongroup(var_02) == "weapon_assault") {
-          var_05 = 1;
+        var_2 = scripts\mp\utility::func_13CA1(var_2);
+        if(var_3 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_2) && scripts\mp\utility::getweapongroup(var_2) == "weapon_assault") {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_LMG":
-        var_02 = scripts\mp\utility::func_13CA1(var_02);
-        if(var_03 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_02) && scripts\mp\utility::getweapongroup(var_02) == "weapon_lmg") {
-          var_05 = 1;
+        var_2 = scripts\mp\utility::func_13CA1(var_2);
+        if(var_3 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_2) && scripts\mp\utility::getweapongroup(var_2) == "weapon_lmg") {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_SG":
-        var_02 = scripts\mp\utility::func_13CA1(var_02);
-        if(var_03 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_02) && scripts\mp\utility::getweapongroup(var_02) == "weapon_shotgun") {
-          var_05 = 1;
+        var_2 = scripts\mp\utility::func_13CA1(var_2);
+        if(var_3 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_2) && scripts\mp\utility::getweapongroup(var_2) == "weapon_shotgun") {
+          var_5 = 1;
         }
 
-        if(self _meth_8519(var_02)) {
-          var_06 = scripts\mp\utility::getweaponrootname(var_02);
-          var_07 = getweaponvariantindex(var_02);
-          if(var_06 == "iw7_longshot") {
-            var_05 = 1;
+        if(self _meth_8519(var_2)) {
+          var_6 = scripts\mp\utility::getweaponrootname(var_2);
+          var_7 = getweaponvariantindex(var_2);
+          if(var_6 == "iw7_longshot") {
+            var_5 = 1;
           }
 
-          if(var_06 == "iw7_erad" && isDefined(var_07) && var_07 == 3 || var_07 == 35) {
-            var_05 = 1;
+          if(var_6 == "iw7_erad" && isDefined(var_7) && var_7 == 3 || var_7 == 35) {
+            var_5 = 1;
           }
         }
         break;
 
       case "con_kills_Sniper":
-        var_02 = scripts\mp\utility::func_13CA1(var_02);
-        if(var_03 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_02) && scripts\mp\utility::getweapongroup(var_02) == "weapon_sniper") {
-          var_05 = 1;
+        var_2 = scripts\mp\utility::func_13CA1(var_2);
+        if(var_3 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_2) && scripts\mp\utility::getweapongroup(var_2) == "weapon_sniper") {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_SMG":
-        var_02 = scripts\mp\utility::func_13CA1(var_02);
-        if(var_03 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_02) && scripts\mp\utility::getweapongroup(var_02) == "weapon_smg") {
-          var_05 = 1;
+        var_2 = scripts\mp\utility::func_13CA1(var_2);
+        if(var_3 != "MOD_MELEE" && !scripts\mp\utility::iskillstreakweapon(var_2) && scripts\mp\utility::getweapongroup(var_2) == "weapon_smg") {
+          var_5 = 1;
         }
         break;
 
       case "con_battle_buddy":
-        if(scripts\mp\utility::istrue(var_04["buddy_kill"])) {
-          var_05 = 1;
+        if(scripts\mp\utility::istrue(var_4["buddy_kill"])) {
+          var_5 = 1;
         }
         break;
 
       case "con_kills_rig_jtf":
-        var_08 = ["archetype_assault", "archetype_heavy", "archetype_scout"];
-        var_05 = archtypecheck(var_08);
+        var_8 = ["archetype_assault", "archetype_heavy", "archetype_scout"];
+        var_5 = archtypecheck(var_8);
         break;
 
       case "con_kills_rig_orion":
-        var_08 = ["archetype_assault", "archetype_heavy", "archetype_engineer"];
-        var_05 = archtypecheck(var_08);
+        var_8 = ["archetype_assault", "archetype_heavy", "archetype_engineer"];
+        var_5 = archtypecheck(var_8);
         break;
 
       case "con_kills_rig_sabre7":
-        var_08 = ["archetype_engineer", "archetype_assassin"];
-        var_05 = archtypecheck(var_08);
+        var_8 = ["archetype_engineer", "archetype_assassin"];
+        var_5 = archtypecheck(var_8);
         break;
 
       case "con_kills_rig_wraith":
-        var_08 = ["archetype_sniper", "archetype_scout"];
-        var_05 = archtypecheck(var_08);
+        var_8 = ["archetype_sniper", "archetype_scout"];
+        var_5 = archtypecheck(var_8);
         break;
 
       case "con_kills_rig_bloodanvil":
-        var_08 = ["archetype_heavy", "archetype_assassin"];
-        var_05 = archtypecheck(var_08);
+        var_8 = ["archetype_heavy", "archetype_assassin"];
+        var_5 = archtypecheck(var_8);
         break;
 
       case "con_kills_variant":
-        var_05 = isDefined(getweaponvariantindex(var_02));
+        var_5 = isDefined(getweaponvariantindex(var_2));
         break;
 
       case "con_kills_oneshot":
-        if(scripts\mp\utility::istrue(var_04["oneshotkill"]) || scripts\mp\utility::istrue(var_04["oneshotkill_shotgun"])) {
-          var_05 = 1;
+        if(scripts\mp\utility::istrue(var_4["oneshotkill"]) || scripts\mp\utility::istrue(var_4["oneshotkill_shotgun"])) {
+          var_5 = 1;
         }
         break;
     }
 
-    if(var_05) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    if(var_5) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractassists(param_00) {
+contractassists(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("assist_buffered", var_01);
-    var_02 = 0;
-    switch (param_00.ref) {
+    self waittill("assist_buffered", var_1);
+    var_2 = 0;
+    switch (var_0.ref) {
       case "con_battle_buddy":
-        if(isDefined(var_01) && scripts\mp\utility::istrue(var_01["buddy_kill"])) {
-          var_02 = 1;
+        if(isDefined(var_1) && scripts\mp\utility::istrue(var_1["buddy_kill"])) {
+          var_2 = 1;
         }
         break;
     }
 
-    if(var_02) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    if(var_2) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractkillsrapid(param_00) {
+contractkillsrapid(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("update_rapid_kill_buffered", var_01);
-    var_02 = 0;
-    switch (param_00.ref) {
+    self waittill("update_rapid_kill_buffered", var_1);
+    var_2 = 0;
+    switch (var_0.ref) {
       case "con_kills_double":
-        if(var_01 % 2 == 0) {
-          var_02 = 1;
+        if(var_1 % 2 == 0) {
+          var_2 = 1;
         }
         break;
     }
 
-    if(var_02) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    if(var_2) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractkillspayload(param_00) {
+contractkillspayload(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
     self waittill("super_kill_buffered");
-    var_01 = 0;
-    switch (param_00.ref) {
+    var_1 = 0;
+    switch (var_0.ref) {
       case "con_kills_payload":
-        var_01 = 1;
+        var_1 = 1;
         break;
 
       case "con_kills_rig_jtf_payload":
-        var_02 = ["archetype_assault", "archetype_heavy", "archetype_scout"];
-        var_01 = archtypecheck(var_02);
+        var_2 = ["archetype_assault", "archetype_heavy", "archetype_scout"];
+        var_1 = archtypecheck(var_2);
         break;
 
       case "con_kills_rig_orion_payload":
-        var_02 = ["archetype_assault", "archetype_heavy", "archetype_engineer"];
-        var_01 = archtypecheck(var_02);
+        var_2 = ["archetype_assault", "archetype_heavy", "archetype_engineer"];
+        var_1 = archtypecheck(var_2);
         break;
 
       case "con_kills_rig_sabre7_payload":
-        var_02 = ["archetype_engineer", "archetype_assassin"];
-        var_01 = archtypecheck(var_02);
+        var_2 = ["archetype_engineer", "archetype_assassin"];
+        var_1 = archtypecheck(var_2);
         break;
 
       case "con_kills_rig_wraith_payload":
-        var_02 = ["archetype_sniper", "archetype_scout"];
-        var_01 = archtypecheck(var_02);
+        var_2 = ["archetype_sniper", "archetype_scout"];
+        var_1 = archtypecheck(var_2);
         break;
 
       case "con_kills_rig_bloodanvil_payload":
-        var_02 = ["archetype_heavy", "archetype_assassin"];
-        var_01 = archtypecheck(var_02);
+        var_2 = ["archetype_heavy", "archetype_assassin"];
+        var_1 = archtypecheck(var_2);
         break;
     }
 
-    if(var_01) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    if(var_1) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-archtypecheck(param_00) {
-  foreach(var_02 in param_00) {
-    if(scripts\mp\utility::func_9D48(var_02)) {
+archtypecheck(var_0) {
+  foreach(var_2 in var_0) {
+    if(scripts\mp\utility::func_9D48(var_2)) {
       return 1;
     }
   }
@@ -321,93 +321,93 @@ archtypecheck(param_00) {
   return 0;
 }
 
-contractscorestreaksupport(param_00) {
+contractscorestreaksupport(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("killstreak_used", var_01);
-    var_02 = 0;
-    switch (var_01) {
+    self waittill("killstreak_used", var_1);
+    var_2 = 0;
+    switch (var_1) {
       case "dronedrop":
       case "directional_uav":
       case "counter_uav":
       case "uav":
-        var_02 = 1;
+        var_2 = 1;
         break;
     }
 
-    if(var_02) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    if(var_2) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractscorestreakair(param_00) {
+contractscorestreakair(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("kill_event_buffered", var_01, var_02);
-    var_03 = 0;
-    if(scripts\mp\utility::iskillstreakweapon(var_02)) {
-      var_04 = scripts\mp\missions::func_7F48(var_02);
-      switch (var_04) {
+    self waittill("kill_event_buffered", var_1, var_2);
+    var_3 = 0;
+    if(scripts\mp\utility::iskillstreakweapon(var_2)) {
+      var_4 = scripts\mp\missions::func_7F48(var_2);
+      switch (var_4) {
         case "jackal":
         case "bombardment":
         case "precision_airstrike":
         case "thor":
         case "minijackal":
         case "drone_hive":
-          var_03 = 1;
+          var_3 = 1;
           break;
       }
 
-      if(var_03) {
-        scripts\mp\contracts::updatecontractprogress(param_00);
+      if(var_3) {
+        scripts\mp\contracts::updatecontractprogress(var_0);
       }
     }
   }
 }
 
-contractscorestreakground(param_00) {
+contractscorestreakground(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("kill_event_buffered", var_01, var_02);
-    var_03 = 0;
-    if(scripts\mp\utility::iskillstreakweapon(var_02)) {
-      var_04 = scripts\mp\missions::func_7F48(var_02);
-      switch (var_04) {
+    self waittill("kill_event_buffered", var_1, var_2);
+    var_3 = 0;
+    if(scripts\mp\utility::iskillstreakweapon(var_2)) {
+      var_4 = scripts\mp\missions::func_7F48(var_2);
+      switch (var_4) {
         case "ball_drone_backup":
         case "remote_c8":
         case "venom":
         case "sentry_shock":
-          var_03 = 1;
+          var_3 = 1;
           break;
       }
 
-      if(var_03) {
-        scripts\mp\contracts::updatecontractprogress(param_00);
+      if(var_3) {
+        scripts\mp\contracts::updatecontractprogress(var_0);
       }
     }
   }
 }
 
-contractscorestreakdestroy(param_00) {
+contractscorestreakdestroy(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("earned_award_buffered", var_01);
-    if(issubstr(var_01, "kill_ss_")) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+    self waittill("earned_award_buffered", var_1);
+    if(issubstr(var_1, "kill_ss_")) {
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractscorestreakcount(param_00) {
+contractscorestreakcount(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
-    self waittill("killstreak_used", var_01);
+    self waittill("killstreak_used", var_1);
     if(!isDefined(self.pers["con_scorestreak_count"])) {
       self.pers["con_scorestreak_count"] = 1;
     } else {
@@ -415,39 +415,39 @@ contractscorestreakcount(param_00) {
     }
 
     if(self.pers["con_scorestreak_count"] % 2 == 0) {
-      scripts\mp\contracts::updatecontractprogress(param_00);
+      scripts\mp\contracts::updatecontractprogress(var_0);
     }
   }
 }
 
-contractmatchend(param_00) {
+contractmatchend(var_0) {
   if(!isDefined(self.contracts)) {
     return;
   }
 
-  foreach(var_02 in self.contracts) {
-    var_03 = 0;
-    switch (var_02.ref) {
+  foreach(var_2 in self.contracts) {
+    var_3 = 0;
+    switch (var_2.ref) {
       case "con_wins":
-        if(param_00.var_13D8A) {
-          var_03 = 1;
+        if(var_0.var_13D8A) {
+          var_3 = 1;
         }
         break;
 
       case "con_wins_top3":
-        if(param_00.var_13D8A && param_00.var_CBFC < 3) {
-          var_03 = 1;
+        if(var_0.var_13D8A && var_0.var_CBFC < 3) {
+          var_3 = 1;
         }
         break;
 
       case "con_kdr":
         if(self.pers["kdratio"] >= 2) {
-          var_03 = 1;
+          var_3 = 1;
         }
         break;
 
       case "con_wins_objective":
-        if(param_00.var_13D8A) {
+        if(var_0.var_13D8A) {
           switch (level.gametype) {
             case "tdef":
             case "koth":
@@ -460,146 +460,146 @@ contractmatchend(param_00) {
             case "siege":
             case "sd":
             case "sr":
-              var_03 = 1;
+              var_3 = 1;
               break;
           }
         }
         break;
 
       case "con_wins_slayer":
-        if(param_00.var_13D8A) {
+        if(var_0.var_13D8A) {
           switch (level.gametype) {
             case "conf":
             case "front":
             case "dm":
             case "war":
-              var_03 = 1;
+              var_3 = 1;
               break;
           }
         }
         break;
 
       case "con_wins_hardcore":
-        if(param_00.var_13D8A && level.hardcoremode) {
-          var_03 = 1;
+        if(var_0.var_13D8A && level.hardcoremode) {
+          var_3 = 1;
         }
         break;
     }
 
-    if(var_03) {
-      scripts\mp\contracts::updatecontractprogress(var_02);
+    if(var_3) {
+      scripts\mp\contracts::updatecontractprogress(var_2);
     }
   }
 }
 
-contractmedalsobjective(param_00) {
+contractmedalsobjective(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   for(;;) {
     thread contractnotifylistener("earned_award_buffered", "update_objective_medal");
     thread contractnotifylistener("bomb_planted", "update_objective_medal");
-    self waittill("update_objective_medal", var_01);
-    if(isDefined(var_01)) {
-      if(var_01 == "mode_x_assault" || var_01 == "mode_sd_defuse_save" || var_01 == "mode_uplink_kill_with_ball" || var_01 == "mode_ctf_kill_with_flag" || var_01 == "mode_x_defend" || var_01 == "mode_sd_plant_save" || var_01 == "mode_uplink_kill_carrier" || var_01 == "mode_ctf_kill_carrier" || var_01 == "mode_dom_secure_b" || var_01 == "mode_dom_secure_neutral" || var_01 == "mode_dom_secure" || var_01 == "mode_hp_secure" || var_01 == "mode_sd_last_defuse" || var_01 == "mode_sd_defuse" || var_01 == "mode_uplink_dunk" || var_01 == "mode_uplink_fieldgoal" || var_01 == "mode_ctf_cap" || var_01 == "mode_siege_secure") {
-        scripts\mp\contracts::updatecontractprogress(param_00);
+    self waittill("update_objective_medal", var_1);
+    if(isDefined(var_1)) {
+      if(var_1 == "mode_x_assault" || var_1 == "mode_sd_defuse_save" || var_1 == "mode_uplink_kill_with_ball" || var_1 == "mode_ctf_kill_with_flag" || var_1 == "mode_x_defend" || var_1 == "mode_sd_plant_save" || var_1 == "mode_uplink_kill_carrier" || var_1 == "mode_ctf_kill_carrier" || var_1 == "mode_dom_secure_b" || var_1 == "mode_dom_secure_neutral" || var_1 == "mode_dom_secure" || var_1 == "mode_hp_secure" || var_1 == "mode_sd_last_defuse" || var_1 == "mode_sd_defuse" || var_1 == "mode_uplink_dunk" || var_1 == "mode_uplink_fieldgoal" || var_1 == "mode_ctf_cap" || var_1 == "mode_siege_secure") {
+        scripts\mp\contracts::updatecontractprogress(var_0);
       }
 
       continue;
     }
 
-    scripts\mp\contracts::updatecontractprogress(param_00);
+    scripts\mp\contracts::updatecontractprogress(var_0);
   }
 }
 
-contractnotifylistener(param_00, param_01) {
-  self waittill(param_00, var_02);
-  self notify(param_01, var_02);
+contractnotifylistener(var_0, var_1) {
+  self waittill(var_0, var_2);
+  self notify(var_1, var_2);
 }
 
-contractplayerdamaged(param_00) {
+contractplayerdamaged(var_0) {
   if(!isDefined(self.contracts)) {
     return;
   }
 
-  foreach(var_02 in self.contracts) {
-    if(var_02.ref == "con_damage") {
-      scripts\mp\contracts::updatecontractprogress(var_02, param_00);
+  foreach(var_2 in self.contracts) {
+    if(var_2.ref == "con_damage") {
+      scripts\mp\contracts::updatecontractprogress(var_2, var_0);
     }
   }
 }
 
-contractshotslanded(param_00) {
+contractshotslanded(var_0) {
   if(!isDefined(self.contracts)) {
     return;
   }
 
-  foreach(var_02 in self.contracts) {
-    if(var_02.ref == "con_shots_landed") {
-      scripts\mp\contracts::updatecontractprogress(var_02);
+  foreach(var_2 in self.contracts) {
+    if(var_2.ref == "con_shots_landed") {
+      scripts\mp\contracts::updatecontractprogress(var_2);
     }
   }
 }
 
-contractkillsgesture(param_00) {
+contractkillsgesture(var_0) {
   self endon("disconnect");
   self endon("game_ended");
   self.contractkillgesture = [];
   for(;;) {
     self waittill("used_cosmetic_gesture");
-    var_01 = gettime();
-    foreach(var_03 in self.killsthislife) {
-      if(abs(var_03.time - var_01) < 3000) {
-        if(!isDefined(self.contractkillgesture[var_03.victimid])) {
-          thread stampkillgesture(var_03.victimid);
-          scripts\mp\contracts::updatecontractprogress(param_00);
+    var_1 = gettime();
+    foreach(var_3 in self.killsthislife) {
+      if(abs(var_3.time - var_1) < 3000) {
+        if(!isDefined(self.contractkillgesture[var_3.victimid])) {
+          thread stampkillgesture(var_3.victimid);
+          scripts\mp\contracts::updatecontractprogress(var_0);
         }
       }
     }
   }
 }
 
-stampkillgesture(param_00) {
+stampkillgesture(var_0) {
   self endon("disconnect");
   self endon("game_ended");
-  self.contractkillgesture[param_00] = 1;
+  self.contractkillgesture[var_0] = 1;
   wait(3);
-  self.contractkillgesture[param_00] = undefined;
+  self.contractkillgesture[var_0] = undefined;
 }
 
-contractequipmentdamagedplayer(param_00, param_01, param_02) {
+contractequipmentdamagedplayer(var_0, var_1, var_2) {
   if(!isDefined(self.contracts)) {
     return;
   }
 
-  foreach(var_04 in self.contracts) {
-    if(var_04.ref == "con_equipment_hits") {
+  foreach(var_4 in self.contracts) {
+    if(var_4.ref == "con_equipment_hits") {
       if(!isDefined(self.equipmentdamageinflictors)) {
         self.equipmentdamageinflictors = [];
       }
 
-      if(!isDefined(self.equipmentdamageinflictors[param_00.guid])) {
-        self.equipmentdamageinflictors[param_00.guid] = [];
+      if(!isDefined(self.equipmentdamageinflictors[var_0.guid])) {
+        self.equipmentdamageinflictors[var_0.guid] = [];
       }
 
-      if(isDefined(param_02.parentinflictor)) {
-        var_05 = param_02.parentinflictor;
+      if(isDefined(var_2.parentinflictor)) {
+        var_5 = var_2.parentinflictor;
       } else {
-        var_05 = var_03 getentitynumber();
+        var_5 = var_3 getentitynumber();
       }
 
-      var_06 = var_05 + "_" + scripts\mp\utility::func_13CA1(param_01);
-      if(param_00 != self && !isDefined(self.equipmentdamageinflictors[param_00.guid][var_06])) {
-        thread stampinflictordamage(param_00.guid, var_06);
-        scripts\mp\contracts::updatecontractprogress(var_04);
+      var_6 = var_5 + "_" + scripts\mp\utility::func_13CA1(var_1);
+      if(var_0 != self && !isDefined(self.equipmentdamageinflictors[var_0.guid][var_6])) {
+        thread stampinflictordamage(var_0.guid, var_6);
+        scripts\mp\contracts::updatecontractprogress(var_4);
       }
     }
   }
 }
 
-stampinflictordamage(param_00, param_01) {
+stampinflictordamage(var_0, var_1) {
   self endon("disconnect");
   self endon("game_ended");
-  self.equipmentdamageinflictors[param_00][param_01] = 1;
+  self.equipmentdamageinflictors[var_0][var_1] = 1;
   wait(5);
-  self.equipmentdamageinflictors[param_00][param_01] = undefined;
+  self.equipmentdamageinflictors[var_0][var_1] = undefined;
 }

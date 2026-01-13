@@ -16,15 +16,15 @@ func_FFE6() {
   return 1;
 }
 
-func_C186(param_00, param_01, param_02, param_03) {
-  return !func_1008A(param_00, param_01, param_03);
+func_C186(var_0, var_1, var_2, var_3) {
+  return !func_1008A(var_0, var_1, var_3);
 }
 
-func_7F95(param_00) {
+func_7F95(var_0) {
   return 256;
 }
 
-func_1008A(param_00, param_01, param_02, param_03) {
+func_1008A(var_0, var_1, var_2, var_3) {
   if(!func_FFE6()) {
     return 0;
   }
@@ -37,7 +37,7 @@ func_1008A(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  if(!scripts\asm\asm::func_232B(param_01, "cover_approach")) {
+  if(!scripts\asm\asm::func_232B(var_1, "cover_approach")) {
     return 0;
   }
 
@@ -45,29 +45,29 @@ func_1008A(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  if(isDefined(param_03)) {
-    if(!isarray(param_03)) {
-      var_04 = param_03;
-    } else if(var_04.size < 1) {
-      var_04 = "Exposed";
+  if(isDefined(var_3)) {
+    if(!isarray(var_3)) {
+      var_4 = var_3;
+    } else if(var_4.size < 1) {
+      var_4 = "Exposed";
     } else {
-      var_04 = var_04[0];
+      var_4 = var_4[0];
     }
   } else {
-    var_04 = "Exposed";
+    var_4 = "Exposed";
   }
 
-  if(!func_9D4C(param_00, param_01, param_02, var_04)) {
+  if(!func_9D4C(var_0, var_1, var_2, var_4)) {
     return 0;
   }
 
-  var_05 = 0;
-  if(isDefined(param_03) && isarray(param_03) && param_03.size >= 2 && param_03[1]) {
-    var_05 = 1;
+  var_5 = 0;
+  if(isDefined(var_3) && isarray(var_3) && var_3.size >= 2 && var_3[1]) {
+    var_5 = 1;
   }
 
   self.asm.var_7360 = scripts\asm\asm_bb::bb_isfrantic();
-  self.asm.var_11068 = func_3721(param_00, param_02, var_04, var_05);
+  self.asm.var_11068 = func_3721(var_0, var_2, var_4, var_5);
   if(!isDefined(self.asm.var_11068)) {
     return 0;
   }
@@ -75,7 +75,7 @@ func_1008A(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-func_FFD4(param_00, param_01, param_02, param_03) {
+func_FFD4(var_0, var_1, var_2, var_3) {
   if(!func_FFE6()) {
     return 0;
   }
@@ -88,40 +88,40 @@ func_FFD4(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  if(!scripts\asm\asm::func_232B(param_01, "cover_approach")) {
+  if(!scripts\asm\asm::func_232B(var_1, "cover_approach")) {
     return 0;
   }
 
   return 1;
 }
 
-func_10093(param_00, param_01, param_02, param_03) {
-  return func_1008A(param_00, param_01, param_02, param_03);
+func_10093(var_0, var_1, var_2, var_3) {
+  return func_1008A(var_0, var_1, var_2, var_3);
 }
 
-func_10095(param_00, param_01, param_02, param_03) {
-  return func_1008A(param_00, param_01, param_02, param_03);
+func_10095(var_0, var_1, var_2, var_3) {
+  return func_1008A(var_0, var_1, var_2, var_3);
 }
 
-func_10091(param_00, param_01, param_02, param_03) {
+func_10091(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_isincombat()) {
     return 0;
   }
 
-  return func_1008A(param_00, param_01, param_02, param_03);
+  return func_1008A(var_0, var_1, var_2, var_3);
 }
 
-func_9D4C(param_00, param_01, param_02, param_03) {
-  var_04 = param_03;
+func_9D4C(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
   if(isDefined(self.asm.var_4C86.var_22F1)) {
-    return var_04 == "Custom";
+    return var_4 == "Custom";
   }
 
   if(!isDefined(self.target_getindexoftarget)) {
-    return var_04 == "Exposed";
+    return var_4 == "Exposed";
   }
 
-  switch (var_04) {
+  switch (var_4) {
     case "Exposed":
       return (self.target_getindexoftarget.type == "Path" || self.target_getindexoftarget.type == "Exposed") && self.target_getindexoftarget getrandomattachments("stand");
 
@@ -153,45 +153,45 @@ func_9D4C(param_00, param_01, param_02, param_03) {
       return self.target_getindexoftarget.type == "Cover Right" && self.target_getindexoftarget getrandomattachments("crouch");
   }
 
-  return var_04 == self.target_getindexoftarget.type;
+  return var_4 == self.target_getindexoftarget.type;
 }
 
-func_3E97(param_00, param_01, param_02) {
+func_3E97(var_0, var_1, var_2) {
   return self.asm.var_11068;
 }
 
-func_3721(param_00, param_01, param_02, param_03) {
-  var_04 = func_7DD6();
-  if(isDefined(var_04)) {
-    var_05 = var_04.origin;
+func_3721(var_0, var_1, var_2, var_3) {
+  var_4 = func_7DD6();
+  if(isDefined(var_4)) {
+    var_5 = var_4.origin;
   } else {
-    var_05 = self.vehicle_getspawnerarray;
+    var_5 = self.vehicle_getspawnerarray;
   }
 
-  var_06 = func_7E54();
-  var_07 = self.var_20EE;
-  var_08 = vectortoangles(var_07);
-  if(isDefined(var_06)) {
-    var_09 = angleclamp180(var_06[1] - var_08[1]);
-  } else if(isDefined(var_05) && var_05.type != "Path") {
-    var_09 = angleclamp180(var_05.angles[1] - var_09[1]);
+  var_6 = func_7E54();
+  var_7 = self.var_20EE;
+  var_8 = vectortoangles(var_7);
+  if(isDefined(var_6)) {
+    var_9 = angleclamp180(var_6[1] - var_8[1]);
+  } else if(isDefined(var_5) && var_5.type != "Path") {
+    var_9 = angleclamp180(var_5.angles[1] - var_9[1]);
   } else {
-    var_0A = var_06 - self.origin;
+    var_0A = var_6 - self.origin;
     var_0B = vectortoangles(var_0A);
-    var_09 = angleclamp180(var_0B[1] - var_08[1]);
+    var_9 = angleclamp180(var_0B[1] - var_8[1]);
   }
 
-  var_0C = getangleindex(var_09, 22.5);
-  var_0D = param_01;
-  if(param_02 == "Custom") {
+  var_0C = getangleindex(var_9, 22.5);
+  var_0D = var_1;
+  if(var_2 == "Custom") {
     var_0E = _meth_8174(self.asm.var_4C86.var_22F1, undefined, self.asm.var_4C86.var_22F6);
     var_0D = self.asm.var_4C86.var_22F1;
   } else {
-    var_0E = _meth_8174(param_02, undefined, var_04);
+    var_0E = _meth_8174(var_2, undefined, var_4);
   }
 
   var_0F = getweaponslistprimaries();
-  var_10 = var_05 - self.origin;
+  var_10 = var_5 - self.origin;
   var_11 = lengthsquared(var_10);
   var_12 = var_0E[var_0C];
   if(!isDefined(var_12)) {
@@ -217,7 +217,7 @@ func_3721(param_00, param_01, param_02, param_03) {
   var_1B = getclosestpointonnavmesh(var_0F.pos, self);
   var_1C = func_36D9(var_1B, var_0F.log[1], var_14, var_15);
   var_1D = self _meth_84AC();
-  var_1E = param_02 == "Cover Left" || param_02 == "Cover Right" || param_02 == "Cover Left Crouch" || param_02 == "Cover Right Crouch";
+  var_1E = var_2 == "Cover Left" || var_2 == "Cover Right" || var_2 == "Cover Left Crouch" || var_2 == "Cover Right Crouch";
   if(var_1E && var_0C == 0 || var_0C == 8 || var_0C == 7 || var_0C == 1) {
     var_1F = undefined;
     var_20 = undefined;
@@ -228,14 +228,14 @@ func_3721(param_00, param_01, param_02, param_03) {
     } else {
       var_22 = undefined;
       var_23 = undefined;
-      if(param_02 == "Cover Left" || param_02 == "Cover Left Crouch") {
+      if(var_2 == "Cover Left" || var_2 == "Cover Left Crouch") {
         var_22 = "left";
         if(var_0C == 7) {
           var_23 = "7";
         } else if(var_0C == 0 || var_0C == 8) {
           var_23 = "8";
         }
-      } else if(param_02 == "Cover Right" || param_02 == "Cover Right Crouch") {
+      } else if(var_2 == "Cover Right" || var_2 == "Cover Right Crouch") {
         var_22 = "right";
         if(var_0C == 0 || var_0C == 8) {
           var_23 = "8";
@@ -245,8 +245,8 @@ func_3721(param_00, param_01, param_02, param_03) {
       }
 
       if(isDefined(var_22) && isDefined(var_23)) {
-        var_1F = lerpviewangleclamp(param_00, param_01, var_23, param_03);
-        var_20 = getnormalizedmovement(param_00, param_01, var_23, param_03);
+        var_1F = lerpviewangleclamp(var_0, var_1, var_23, var_3);
+        var_20 = getnormalizedmovement(var_0, var_1, var_23, var_3);
       }
     }
 
@@ -285,7 +285,7 @@ func_3721(param_00, param_01, param_02, param_03) {
       var_25.angles = var_10.angles;
       var_25.log = var_10.log;
       var_25.var_11069 = var_15;
-      var_25.var_22ED = var_06;
+      var_25.var_22ED = var_6;
       return var_25;
     }
   }
@@ -293,30 +293,30 @@ func_3721(param_00, param_01, param_02, param_03) {
   return undefined;
 }
 
-func_CECA(param_00, param_01) {
+func_CECA(var_0, var_1) {
   self endon("runto_arrived");
-  self endon(param_01 + "_finished");
-  var_02 = self.objective_playermask_hidefromall;
+  self endon(var_1 + "_finished");
+  var_2 = self.objective_playermask_hidefromall;
   for(;;) {
     self waittill("path_set");
-    var_03 = self.objective_playermask_hidefromall;
+    var_3 = self.objective_playermask_hidefromall;
     if(!self.objective_playermask_showtoall) {
       break;
     }
 
-    if(distancesquared(var_02, var_03) > 1) {
+    if(distancesquared(var_2, var_3) > 1) {
       break;
     }
 
-    var_02 = var_03;
+    var_2 = var_3;
   }
 
-  scripts\asm\asm::asm_fireevent(param_01, "abort");
+  scripts\asm\asm::asm_fireevent(var_1, "abort");
 }
 
-func_CEC9(param_00, param_01) {
+func_CEC9(var_0, var_1) {
   self endon("runto_arrived");
-  self endon(param_01 + "_finished");
+  self endon(var_1 + "_finished");
   for(;;) {
     if(!isDefined(self.vehicle_getspawnerarray)) {
       break;
@@ -325,38 +325,38 @@ func_CEC9(param_00, param_01) {
     wait(0.05);
   }
 
-  scripts\asm\asm::asm_fireevent(param_01, "abort");
+  scripts\asm\asm::asm_fireevent(var_1, "abort");
 }
 
-func_136F5(param_00) {
-  self endon(param_00 + "_finished");
+func_136F5(var_0) {
+  self endon(var_0 + "_finished");
   self endon("waypoint_reached");
   self endon("waypoint_aborted");
   wait(2);
 }
 
-func_CEAA(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = func_7DD6();
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  if(!isDefined(var_05)) {
-    scripts\asm\asm::asm_fireevent(param_01, "abort", undefined);
+func_CEAA(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = func_7DD6();
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  if(!isDefined(var_5)) {
+    scripts\asm\asm::asm_fireevent(var_1, "abort", undefined);
     return;
   }
 
-  var_06 = scripts\asm\asm::asm_getmoveplaybackrate();
-  if(!isDefined(var_06)) {
-    var_06 = 1;
+  var_6 = scripts\asm\asm::asm_getmoveplaybackrate();
+  if(!isDefined(var_6)) {
+    var_6 = 1;
   }
 
-  var_07 = var_05.log;
-  var_08 = var_05.var_3F;
-  var_09 = (0, var_07[1] - var_05.var_3E, 0);
-  var_0A = self getsafecircleorigin(param_01, var_05.var_11060);
+  var_7 = var_5.log;
+  var_8 = var_5.var_3F;
+  var_9 = (0, var_7[1] - var_5.var_3E, 0);
+  var_0A = self getsafecircleorigin(var_1, var_5.var_11060);
   var_0B = getanimlength(var_0A);
-  var_0B = var_0B * 1 / var_06;
-  self _meth_8396(var_05.areanynavvolumesloaded, var_09[1], var_0B);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05.var_11060, var_06);
+  var_0B = var_0B * 1 / var_6;
+  self _meth_8396(var_5.areanynavvolumesloaded, var_9[1], var_0B);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5.var_11060, var_6);
 }
 
 func_22EA() {
@@ -389,115 +389,115 @@ func_7E54() {
 }
 
 getweaponslistprimaries() {
-  var_00 = spawnStruct();
-  var_01 = func_7DD6();
-  if(isDefined(var_01) && var_01.type != "Path") {
-    var_00.pos = var_01.origin;
-    var_00.angles = var_01.angles;
-    var_00.log = (0, scripts\asm\shared_utility::getnodeforwardyaw(var_01), 0);
+  var_0 = spawnStruct();
+  var_1 = func_7DD6();
+  if(isDefined(var_1) && var_1.type != "Path") {
+    var_0.pos = var_1.origin;
+    var_0.angles = var_1.angles;
+    var_0.log = (0, scripts\asm\shared_utility::getnodeforwardyaw(var_1), 0);
   } else {
-    var_00.pos = self.vehicle_getspawnerarray;
-    var_02 = self getvelocity();
-    var_03 = self _meth_813A();
-    if(lengthsquared(var_02) > 1) {
-      var_00.angles = vectortoangles(var_00.pos - self.origin);
+    var_0.pos = self.vehicle_getspawnerarray;
+    var_2 = self getvelocity();
+    var_3 = self _meth_813A();
+    if(lengthsquared(var_2) > 1) {
+      var_0.angles = vectortoangles(var_0.pos - self.origin);
     } else {
-      var_00.angles = vectortoangles(var_03);
+      var_0.angles = vectortoangles(var_3);
     }
 
-    var_00.log = var_00.angles;
+    var_0.log = var_0.angles;
   }
 
-  var_04 = func_7E54();
-  if(isDefined(var_04)) {
-    var_00.angles = var_04;
-    var_00.log = var_00.angles;
+  var_4 = func_7E54();
+  if(isDefined(var_4)) {
+    var_0.angles = var_4;
+    var_0.log = var_0.angles;
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_36D9(param_00, param_01, param_02, param_03) {
-  var_04 = param_01 - param_03;
-  var_05 = (0, var_04, 0);
-  var_06 = rotatevector(param_02, var_05);
-  return param_00 - var_06;
+func_36D9(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 - var_3;
+  var_5 = (0, var_4, 0);
+  var_6 = rotatevector(var_2, var_5);
+  return var_0 - var_6;
 }
 
-_meth_8174(param_00, param_01, param_02) {
-  var_03 = [];
-  var_03[5] = ::scripts\asm\asm::func_235C(1, param_00, param_02);
-  var_03[4] = ::scripts\asm\asm::func_235C(2, param_00, param_02);
-  var_03[3] = ::scripts\asm\asm::func_235C(3, param_00, param_02);
-  var_03[6] = ::scripts\asm\asm::func_235C(4, param_00, param_02);
-  var_03[2] = ::scripts\asm\asm::func_235C(6, param_00, param_02);
-  var_03[7] = ::scripts\asm\asm::func_235C(7, param_00, param_02);
-  var_03[0] = ::scripts\asm\asm::func_235C(8, param_00, param_02);
-  var_03[1] = ::scripts\asm\asm::func_235C(9, param_00, param_02);
-  var_03[8] = var_03[0];
-  return var_03;
+_meth_8174(var_0, var_1, var_2) {
+  var_3 = [];
+  var_3[5] = ::scripts\asm\asm::func_235C(1, var_0, var_2);
+  var_3[4] = ::scripts\asm\asm::func_235C(2, var_0, var_2);
+  var_3[3] = ::scripts\asm\asm::func_235C(3, var_0, var_2);
+  var_3[6] = ::scripts\asm\asm::func_235C(4, var_0, var_2);
+  var_3[2] = ::scripts\asm\asm::func_235C(6, var_0, var_2);
+  var_3[7] = ::scripts\asm\asm::func_235C(7, var_0, var_2);
+  var_3[0] = ::scripts\asm\asm::func_235C(8, var_0, var_2);
+  var_3[1] = ::scripts\asm\asm::func_235C(9, var_0, var_2);
+  var_3[8] = var_3[0];
+  return var_3;
 }
 
-getnormalizedmovement(param_00, param_01, param_02, param_03) {
-  var_04 = [];
-  var_04["cover_left_arrival"]["7"] = 0.369369;
-  var_04["cover_left_crouch_arrival"]["7"] = 0.321321;
-  var_04["cqb_cover_left_crouch_arrival"]["7"] = 0.2002;
-  var_04["cqb_cover_left_arrival"]["7"] = 0.275275;
-  var_04["cover_left_arrival"]["8"] = 0.525526;
-  var_04["cover_left_crouch_arrival"]["8"] = 0.448448;
-  var_04["cqb_cover_left_crouch_arrival"]["8"] = 0.251251;
-  var_04["cqb_cover_left_arrival"]["8"] = 0.335335;
-  var_04["cover_right_arrival"]["8"] = 0.472472;
-  var_04["cover_right_crouch_arrival"]["8"] = 0.248248;
-  var_04["cqb_cover_right_arrival"]["8"] = 0.345345;
-  var_04["cqb_cover_right_crouch_arrival"]["8"] = 0.428428;
-  var_04["cover_right_arrival"]["9"] = 0.551552;
-  var_04["cover_right_crouch_arrival"]["9"] = 0.2002;
-  var_04["cqb_cover_right_arrival"]["9"] = 0.3003;
-  var_04["cqb_cover_right_crouch_arrival"]["9"] = 0.224224;
-  return var_04[param_01][param_02];
+getnormalizedmovement(var_0, var_1, var_2, var_3) {
+  var_4 = [];
+  var_4["cover_left_arrival"]["7"] = 0.369369;
+  var_4["cover_left_crouch_arrival"]["7"] = 0.321321;
+  var_4["cqb_cover_left_crouch_arrival"]["7"] = 0.2002;
+  var_4["cqb_cover_left_arrival"]["7"] = 0.275275;
+  var_4["cover_left_arrival"]["8"] = 0.525526;
+  var_4["cover_left_crouch_arrival"]["8"] = 0.448448;
+  var_4["cqb_cover_left_crouch_arrival"]["8"] = 0.251251;
+  var_4["cqb_cover_left_arrival"]["8"] = 0.335335;
+  var_4["cover_right_arrival"]["8"] = 0.472472;
+  var_4["cover_right_crouch_arrival"]["8"] = 0.248248;
+  var_4["cqb_cover_right_arrival"]["8"] = 0.345345;
+  var_4["cqb_cover_right_crouch_arrival"]["8"] = 0.428428;
+  var_4["cover_right_arrival"]["9"] = 0.551552;
+  var_4["cover_right_crouch_arrival"]["9"] = 0.2002;
+  var_4["cqb_cover_right_arrival"]["9"] = 0.3003;
+  var_4["cqb_cover_right_crouch_arrival"]["9"] = 0.224224;
+  return var_4[var_1][var_2];
 }
 
-lerpviewangleclamp(param_00, param_01, param_02, param_03) {
+lerpviewangleclamp(var_0, var_1, var_2, var_3) {
   return undefined;
 }
 
-func_1008F(param_00, param_01, param_02, param_03) {
+func_1008F(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_20EE)) {
     return 0;
   }
 
-  var_04 = undefined;
-  if(isDefined(param_03)) {
-    if(!isarray(param_03)) {
-      var_04 = param_03;
-    } else if(param_03.size < 1) {
-      var_04 = "Exposed";
+  var_4 = undefined;
+  if(isDefined(var_3)) {
+    if(!isarray(var_3)) {
+      var_4 = var_3;
+    } else if(var_3.size < 1) {
+      var_4 = "Exposed";
     } else {
-      var_04 = param_03[0];
+      var_4 = var_3[0];
     }
   } else {
-    var_04 = "Exposed";
+    var_4 = "Exposed";
   }
 
-  if(!func_9D4C(param_00, param_01, param_02, var_04)) {
+  if(!func_9D4C(var_0, var_1, var_2, var_4)) {
     return 0;
   }
 
-  var_05 = distance(self.origin, self.vehicle_getspawnerarray);
-  var_06 = func_7F95(var_04);
-  if(var_05 > var_06) {
+  var_5 = distance(self.origin, self.vehicle_getspawnerarray);
+  var_6 = func_7F95(var_4);
+  if(var_5 > var_6) {
     return 0;
   }
 
-  var_07 = 0;
-  if(isDefined(param_03) && param_03.size >= 2) {
-    var_07 = 1;
+  var_7 = 0;
+  if(isDefined(var_3) && var_3.size >= 2) {
+    var_7 = 1;
   }
 
   self.asm.var_7360 = scripts\asm\asm_bb::bb_isfrantic();
-  self.asm.var_11068 = func_3721(param_00, param_02, var_04, var_07);
+  self.asm.var_11068 = func_3721(var_0, var_2, var_4, var_7);
   if(!isDefined(self.asm.var_11068)) {
     return 0;
   }

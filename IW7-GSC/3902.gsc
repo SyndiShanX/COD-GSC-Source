@@ -4,49 +4,49 @@
  * Script: 3902.gsc
 ************************/
 
-func_98CC(param_00, param_01, param_02, param_03) {
-  self.var_1198.shootstate = scripts\asm\asm::asm_getcurrentstate(self.asmname);
+func_98CC(var_0, var_1, var_2, var_3) {
+  self._blackboard.shootstate = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 }
 
-func_FE75(param_00, param_01, param_02, param_03) {
-  scripts\asm\asm_mp::func_2361(param_00, param_01, param_02, param_03);
+func_FE75(var_0, var_1, var_2, var_3) {
+  scripts\asm\asm_mp::func_2361(var_0, var_1, var_2, var_3);
 }
 
-func_FE61(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_FE61(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   func_FE89();
-  var_04 = func_FE64();
+  var_4 = func_FE64();
   self _meth_83CE();
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  shootblankorrpg(param_01, 0.2, 2);
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  shootblankorrpg(var_1, 0.2, 2);
   self.asm.shootparams.var_C21C--;
   func_32BE();
-  scripts\asm\asm::asm_fireevent(param_01, "shoot_finished");
+  scripts\asm\asm::asm_fireevent(var_1, "shoot_finished");
 }
 
-func_FE7D(param_00) {
-  var_01 = param_00 + "_shotgun_sound";
-  var_02 = param_00 + "kill_shotgun_sound";
-  thread func_FE84(var_01, var_02, 2);
-  self endon(var_01);
-  self waittillmatch("rechamber", param_00);
+func_FE7D(var_0) {
+  var_1 = var_0 + "_shotgun_sound";
+  var_2 = var_0 + "kill_shotgun_sound";
+  thread func_FE84(var_1, var_2, 2);
+  self endon(var_1);
+  self waittillmatch("rechamber", var_0);
   self playSound("ai_shotgun_pump");
-  self notify(var_02);
+  self notify(var_2);
 }
 
-shootblankorrpg(param_00, param_01, param_02) {
-  var_03 = param_00 + "_timeout";
-  var_04 = param_00 + "_timeout_end";
-  thread func_FE84(var_03, var_04, param_02);
-  self endon(var_03);
-  self endon(param_00 + "_finished");
-  var_05 = 0;
-  var_06 = self.asm.shootparams.var_FF0B;
-  var_07 = var_06 == 1;
-  var_08 = 0;
-  var_09 = scripts\anim\utility_common::weapon_pump_action_shotgun();
-  while(var_05 < var_06 && var_06 > 0) {
-    if(!isDefined(self.var_1198.shootparams)) {
+shootblankorrpg(var_0, var_1, var_2) {
+  var_3 = var_0 + "_timeout";
+  var_4 = var_0 + "_timeout_end";
+  thread func_FE84(var_3, var_4, var_2);
+  self endon(var_3);
+  self endon(var_0 + "_finished");
+  var_5 = 0;
+  var_6 = self.asm.shootparams.var_FF0B;
+  var_7 = var_6 == 1;
+  var_8 = 0;
+  var_9 = scripts\anim\utility_common::weapon_pump_action_shotgun();
+  while(var_5 < var_6 && var_6 > 0) {
+    if(!isDefined(self._blackboard.shootparams)) {
       break;
     }
 
@@ -56,9 +56,9 @@ shootblankorrpg(param_00, param_01, param_02) {
       }
     }
 
-    scripts\anim\utility_common::shootenemywrapper(var_07);
+    scripts\anim\utility_common::shootenemywrapper(var_7);
     if(self.bulletsinclip > 0) {
-      if(var_08) {
+      if(var_8) {
         if(randomint(3) == 0) {
           self.bulletsinclip--;
         }
@@ -67,37 +67,37 @@ shootblankorrpg(param_00, param_01, param_02) {
       }
     }
 
-    var_05++;
-    if(var_09) {
-      childthread func_FE7D(param_00);
+    var_5++;
+    if(var_9) {
+      childthread func_FE7D(var_0);
     }
 
-    if(self.asm.shootparams.var_6B92 && var_05 == var_06) {
+    if(self.asm.shootparams.var_6B92 && var_5 == var_6) {
       break;
     }
 
-    wait(param_01);
+    wait(var_1);
   }
 
-  self notify(var_04);
+  self notify(var_4);
 }
 
-func_FE5C(param_00, param_01, param_02, param_03) {
-  var_04 = param_01 + "_timeout";
-  var_05 = param_01 + "_timeout_end";
-  thread func_FE84(var_04, var_05, param_03);
-  self endon(var_04);
-  var_06 = self getsafecircleorigin(param_01, param_02);
-  var_07 = animhasnotetrack(var_06, "fire");
-  var_08 = weaponclass(self.var_394) == "rocketlauncher";
-  var_09 = 0;
+func_FE5C(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 + "_timeout";
+  var_5 = var_1 + "_timeout_end";
+  thread func_FE84(var_4, var_5, var_3);
+  self endon(var_4);
+  var_6 = self getsafecircleorigin(var_1, var_2);
+  var_7 = animhasnotetrack(var_6, "fire");
+  var_8 = weaponclass(self.var_394) == "rocketlauncher";
+  var_9 = 0;
   var_0A = self.asm.shootparams.var_FF0B;
   var_0B = var_0A == 1;
   var_0C = 0;
   var_0D = scripts\anim\utility_common::weapon_pump_action_shotgun();
-  while(var_09 < var_0A && var_0A > 0) {
-    if(var_07) {
-      self waittillmatch("fire", param_01);
+  while(var_9 < var_0A && var_0A > 0) {
+    if(var_7) {
+      self waittillmatch("fire", var_1);
     }
 
     if(!self.bulletsinclip) {
@@ -113,33 +113,33 @@ func_FE5C(param_00, param_01, param_02, param_03) {
       self.bulletsinclip--;
     }
 
-    if(var_08) {
+    if(var_8) {
       if(issubstr(tolower(self.var_394), "rpg") || issubstr(tolower(self.var_394), "panzerfaust")) {
         self hidepart("tag_rocket");
       }
     }
 
-    var_09++;
+    var_9++;
     if(var_0D) {
-      childthread func_FE7D(param_01);
+      childthread func_FE7D(var_1);
     }
 
-    if(self.asm.shootparams.var_6B92 && var_09 == var_0A) {
+    if(self.asm.shootparams.var_6B92 && var_9 == var_0A) {
       break;
     }
 
-    if(!var_07 || var_0A == 1 && self.asm.shootparams.var_1119D == "single") {
-      self waittillmatch("end", param_01);
+    if(!var_7 || var_0A == 1 && self.asm.shootparams.var_1119D == "single") {
+      self waittillmatch("end", var_1);
     }
   }
 
-  self notify(var_05);
+  self notify(var_5);
 }
 
-func_FE84(param_00, param_01, param_02) {
-  self endon(param_01);
-  wait(param_02);
-  self notify(param_00);
+func_FE84(var_0, var_1, var_2) {
+  self endon(var_1);
+  wait(var_2);
+  self notify(var_0);
 }
 
 func_FEFE() {
@@ -155,35 +155,35 @@ func_FEFE() {
 }
 
 func_FE64() {
-  var_00 = self.asm.shootparams.var_1119D;
-  var_01 = 1;
+  var_0 = self.asm.shootparams.var_1119D;
+  var_1 = 1;
   if(isDefined(self.var_FED4)) {
-    var_01 = self.var_FED4;
-  } else if(var_00 == "full") {
-    var_01 = scripts\anim\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1);
-  } else if(var_00 == "burst") {
-    var_01 = scripts\anim\weaponlist::burstshootanimrate();
+    var_1 = self.var_FED4;
+  } else if(var_0 == "full") {
+    var_1 = scripts\anim\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1);
+  } else if(var_0 == "burst") {
+    var_1 = scripts\anim\weaponlist::burstshootanimrate();
   } else if(scripts\anim\utility_common::isusingsidearm()) {
-    var_01 = 3;
+    var_1 = 3;
   } else if(scripts\anim\utility_common::isusingshotgun()) {
-    var_01 = func_FEFE();
+    var_1 = func_FEFE();
   }
 
-  return var_01;
+  return var_1;
 }
 
 func_FE89() {
-  var_00 = self.var_1198.shootparams;
+  var_0 = self._blackboard.shootparams;
   if(!isDefined(self.asm.shootparams)) {
     self.asm.shootparams = spawnStruct();
-    self.asm.shootparams.var_C21C = var_00.var_32BD;
+    self.asm.shootparams.var_C21C = var_0.var_32BD;
   }
 
-  self.asm.shootparams.var_1119D = var_00.var_1119D;
-  self.asm.shootparams.var_6B92 = var_00.var_6B92;
-  self.asm.shootparams.var_FF0B = var_00.var_FF0B;
-  self.asm.shootparams.pos = var_00.pos;
-  self.asm.shootparams.ent = var_00.ent;
+  self.asm.shootparams.var_1119D = var_0.var_1119D;
+  self.asm.shootparams.var_6B92 = var_0.var_6B92;
+  self.asm.shootparams.var_FF0B = var_0.var_FF0B;
+  self.asm.shootparams.pos = var_0.pos;
+  self.asm.shootparams.ent = var_0.ent;
 }
 
 func_32BE() {
@@ -195,17 +195,17 @@ func_32BE() {
     return;
   }
 
-  var_00 = _meth_80E7();
-  if(var_00) {
-    wait(var_00);
+  var_0 = _meth_80E7();
+  if(var_0) {
+    wait(var_0);
   }
 }
 
 _meth_80E7() {
-  var_00 = gettime() - self.var_A9ED / 1000;
-  var_01 = func_7E12();
-  if(var_01 > var_00) {
-    return var_01 - var_00;
+  var_0 = gettime() - self.var_A9ED / 1000;
+  var_1 = func_7E12();
+  if(var_1 > var_0) {
+    return var_1 - var_0;
   }
 
   return 0;

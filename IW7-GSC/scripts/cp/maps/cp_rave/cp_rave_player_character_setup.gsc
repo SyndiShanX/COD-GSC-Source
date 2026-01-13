@@ -12,8 +12,8 @@ init_player_characters() {
   scripts\cp\zombies\zombies_loadout::register_player_character(5, "no", "zmb_hero_k_smith", "viewmodel_zmb_hero_k_smith", undefined, undefined, "p5_", "_p5", "iw7_pap_zm_survivor", "ges_zombies_revive_survivor", 4, "iw7_survivorcard_zm", "mus_zombies_kevinsmith", "iw7_loadout_zm_survivor", "iw7_knife_zm_survivor", ::post_hoff_setup_func, "iw7_gunless_zm");
 }
 
-post_hoff_setup_func(param_00) {
-  param_00 scripts\cp\zombies\achievement::update_achievement("SUPER_SLACKER", 1);
+post_hoff_setup_func(var_0) {
+  var_0 scripts\cp\zombies\achievement::update_achievement("SUPER_SLACKER", 1);
   if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
     return;

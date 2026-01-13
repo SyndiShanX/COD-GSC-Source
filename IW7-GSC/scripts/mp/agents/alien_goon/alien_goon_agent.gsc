@@ -37,7 +37,7 @@ func_FAB0() {
   }
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("alien_goon");
 }
 
@@ -171,45 +171,45 @@ monitorwhizbys() {
   self endon("death");
   self.lastwhizbytime = undefined;
   for(;;) {
-    self waittill("bulletwhizby", var_00, var_01);
+    self waittill("bulletwhizby", var_0, var_1);
     self.lastwhizbytime = gettime();
-    self.lastwhizbyshooter = var_00;
-    self.lastwhizbydist = var_01;
+    self.lastwhizbyshooter = var_0;
+    self.lastwhizbydist = var_1;
   }
 }
 
 calculatealiengoonhealth() {
-  var_00 = 200;
+  var_0 = 200;
   switch (level.specialroundcounter) {
     case 0:
-      var_00 = 400;
+      var_0 = 400;
       break;
 
     case 1:
-      var_00 = 900;
+      var_0 = 900;
       break;
 
     case 2:
-      var_00 = 1300;
+      var_0 = 1300;
       break;
 
     case 3:
-      var_00 = 1600;
+      var_0 = 1600;
       break;
 
     case 4:
-      var_00 = 2000;
+      var_0 = 2000;
       break;
 
     default:
-      var_00 = 2000;
+      var_0 = 2000;
       break;
   }
 
-  return var_00;
+  return var_0;
 }
 
-accumulatedamage(param_00, param_01) {
+accumulatedamage(var_0, var_1) {
   if(!isDefined(self.damageaccumulator)) {
     self.damageaccumulator = spawnStruct();
     self.damageaccumulator.accumulateddamage = 0;
@@ -219,21 +219,21 @@ accumulatedamage(param_00, param_01) {
   }
 
   self.damageaccumulator.lastdamagetime = gettime();
-  if(!isDefined(param_01)) {
-    param_01 = (1, 1, 1);
+  if(!isDefined(var_1)) {
+    var_1 = (1, 1, 1);
   }
 
-  self.damageaccumulator.lastdir = param_01;
+  self.damageaccumulator.lastdir = var_1;
   if(isDefined(self.fake_damage)) {
     self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
     self.fake_damage = undefined;
     return;
   }
 
-  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
+  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
-func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  accumulatedamage(param_02, param_07);
-  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+  accumulatedamage(var_2, var_7);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
 }

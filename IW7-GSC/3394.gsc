@@ -4,147 +4,147 @@
  * Script: 3394.gsc
 ************************/
 
-func_DDAE(param_00, param_01) {
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-  var_02 = 0;
-  var_03 = scripts\cp\utility::get_closest_entrance(param_01.origin);
-  var_04 = 5184;
-  var_05 = anglesToForward(var_03.angles);
-  var_05 = scripts\cp\utility::vec_multiply(var_05, -200);
-  var_06 = var_03.origin + var_05;
-  param_01.var_DDB0 = param_00;
-  while(!level.gameended && isDefined(param_01) && scripts\cp\utility::isreallyalive(param_01) && param_01 usebuttonpressed() && !isDefined(param_01.setlasermaterial) || !param_01.setlasermaterial) {
-    if(distancesquared(param_01.origin, param_00.origin) > var_04) {
+func_DDAE(var_0, var_1) {
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  var_2 = 0;
+  var_3 = scripts\cp\utility::get_closest_entrance(var_1.origin);
+  var_4 = 5184;
+  var_5 = anglesToForward(var_3.angles);
+  var_5 = scripts\cp\utility::vec_multiply(var_5, -200);
+  var_6 = var_3.origin + var_5;
+  var_1.var_DDB0 = var_0;
+  while(!level.gameended && isDefined(var_1) && scripts\cp\utility::isreallyalive(var_1) && var_1 usebuttonpressed() && !isDefined(var_1.setlasermaterial) || !var_1.setlasermaterial) {
+    if(distancesquared(var_1.origin, var_0.origin) > var_4) {
       break;
     }
 
-    var_07 = 10;
-    var_08 = var_07;
-    var_09 = var_03.barrier.var_C1DE < 6;
+    var_7 = 10;
+    var_8 = var_7;
+    var_9 = var_3.barrier.var_C1DE < 6;
     if(isDefined(level.cash_scalar)) {
-      var_07 = 10 * level.cash_scalar;
+      var_7 = 10 * level.cash_scalar;
       if(level.cash_scalar > 1) {
-        var_08 = int(var_08 / 2);
+        var_8 = int(var_8 / 2);
       }
     }
 
-    var_0A = scripts\cp\zombies\zombie_entrances::func_7B13(var_03);
+    var_0A = scripts\cp\zombies\zombie_entrances::func_7B13(var_3);
     if(!isDefined(var_0A)) {
       wait(0.5);
       break;
     }
 
-    if(param_01 scripts\cp\utility::is_consumable_active("faster_window_reboard")) {
-      var_07 = 50 * var_0A * level.cash_scalar;
-      var_08 = var_08 * var_0A;
-      level func_DDB8(var_03);
-      level notify("reboard", 1, param_01);
+    if(var_1 scripts\cp\utility::is_consumable_active("faster_window_reboard")) {
+      var_7 = 50 * var_0A * level.cash_scalar;
+      var_8 = var_8 * var_0A;
+      level func_DDB8(var_3);
+      level notify("reboard", 1, var_1);
       for(var_0B = 0; var_0B < var_0A; var_0B++) {
-        param_01 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
+        var_1 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
       }
 
-      param_01 notify("window_reboard_notify");
-      param_01 scripts\cp\utility::notify_used_consumable("faster_window_reboard");
+      var_1 notify("window_reboard_notify");
+      var_1 scripts\cp\utility::notify_used_consumable("faster_window_reboard");
     } else {
-      scripts\cp\zombies\zombie_entrances::func_F2E3(var_03, var_0A - 1, "repairing");
-      func_DDB6(var_03, var_0A, var_06, param_00, param_01);
-      level notify("reboard", 1, param_01);
-      param_01 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
-      param_01 notify("window_reboard_notify");
-      scripts\cp\zombies\zombie_entrances::func_F2E3(var_03, var_0A - 1, "boarded");
+      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_0A - 1, "repairing");
+      func_DDB6(var_3, var_0A, var_6, var_0, var_1);
+      level notify("reboard", 1, var_1);
+      var_1 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
+      var_1 notify("window_reboard_notify");
+      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_0A - 1, "boarded");
     }
 
-    param_01.reboarding_points = param_01.reboarding_points + var_08;
-    if(isDefined(param_01.reboarding_points) && param_01.reboarding_points <= level.var_B41F && var_09) {
-      param_01 playlocalsound("purchase_generic");
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("reinforce_window", "zmb_comment_vo", "low", 10, 0, 0, 0, 10);
-      var_02 = 1;
-      param_01 scripts\cp\cp_persistence::give_player_currency(var_07);
+    var_1.reboarding_points = var_1.reboarding_points + var_8;
+    if(isDefined(var_1.reboarding_points) && var_1.reboarding_points <= level.var_B41F && var_9) {
+      var_1 playlocalsound("purchase_generic");
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("reinforce_window", "zmb_comment_vo", "low", 10, 0, 0, 0, 10);
+      var_2 = 1;
+      var_1 scripts\cp\cp_persistence::give_player_currency(var_7);
     }
 
-    var_03.barrier.var_C1DE++;
-    if(var_03.barrier.var_C1DE > 6) {
-      var_03.barrier.var_C1DE = 6;
+    var_3.barrier.var_C1DE++;
+    if(var_3.barrier.var_C1DE > 6) {
+      var_3.barrier.var_C1DE = 6;
     }
 
-    if(!isDefined(scripts\cp\zombies\zombie_entrances::func_7B13(var_03))) {
+    if(!isDefined(scripts\cp\zombies\zombie_entrances::func_7B13(var_3))) {
       break;
     }
   }
 
-  param_01.var_DDB0 = undefined;
-  if(var_03.barrier.var_C1DE == 6) {
-    param_01 thread scripts\cp\cp_vo::try_to_play_vo("reinforce_window", "zmb_comment_vo", "low", 10, 0, 0, 1, 25);
+  var_1.var_DDB0 = undefined;
+  if(var_3.barrier.var_C1DE == 6) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("reinforce_window", "zmb_comment_vo", "low", 10, 0, 0, 1, 25);
   }
 
-  scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
 
-func_DDB4(param_00) {
-  var_01 = sortbydistance(level.window_entrances, param_00.origin);
-  foreach(var_03 in var_01) {
-    if(scripts\cp\utility::entrance_is_fully_repaired(var_03)) {
+func_DDB4(var_0) {
+  var_1 = sortbydistance(level.window_entrances, var_0.origin);
+  foreach(var_3 in var_1) {
+    if(scripts\cp\utility::entrance_is_fully_repaired(var_3)) {
       continue;
     }
 
-    level thread func_DDB8(var_03);
+    level thread func_DDB8(var_3);
     wait(0.5);
   }
 
-  var_05 = 200;
+  var_5 = 200;
   if(isDefined(level.cash_scalar)) {
-    var_05 = 200 * level.cash_scalar;
+    var_5 = 200 * level.cash_scalar;
   }
 
-  foreach(var_07 in level.players) {
-    if(scripts\engine\utility::istrue(var_07.inlaststand)) {
+  foreach(var_7 in level.players) {
+    if(scripts\engine\utility::istrue(var_7.inlaststand)) {
       continue;
     }
 
-    var_07 scripts\cp\cp_persistence::give_player_currency(var_05, undefined, undefined, 1, "carpenter");
+    var_7 scripts\cp\cp_persistence::give_player_currency(var_5, undefined, undefined, 1, "carpenter");
   }
 }
 
-func_DDB8(param_00) {
-  var_01 = anglesToForward(param_00.angles);
-  var_01 = scripts\cp\utility::vec_multiply(var_01, -200);
-  var_02 = param_00.origin + var_01;
-  var_03 = scripts\engine\utility::getclosest(param_00.origin, level.current_interaction_structs);
-  var_04 = 0;
-  while(!scripts\cp\utility::entrance_is_fully_repaired(param_00)) {
-    if(scripts\cp\utility::entrance_is_fully_repaired(param_00)) {
+func_DDB8(var_0) {
+  var_1 = anglesToForward(var_0.angles);
+  var_1 = scripts\cp\utility::vec_multiply(var_1, -200);
+  var_2 = var_0.origin + var_1;
+  var_3 = scripts\engine\utility::getclosest(var_0.origin, level.current_interaction_structs);
+  var_4 = 0;
+  while(!scripts\cp\utility::entrance_is_fully_repaired(var_0)) {
+    if(scripts\cp\utility::entrance_is_fully_repaired(var_0)) {
       return;
     }
 
-    var_05 = scripts\cp\zombies\zombie_entrances::func_7B13(param_00);
-    if(!isDefined(var_05)) {
+    var_5 = scripts\cp\zombies\zombie_entrances::func_7B13(var_0);
+    if(!isDefined(var_5)) {
       return;
     }
 
-    func_DDB7(param_00, var_05, var_02, var_03);
+    func_DDB7(var_0, var_5, var_2, var_3);
   }
 }
 
-func_DDB7(param_00, param_01, param_02, param_03) {
-  scripts\cp\zombies\zombie_entrances::func_F2E3(param_00, param_01 - 1, "boarded");
-  param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01, "instant_repair");
+func_DDB7(var_0, var_1, var_2, var_3) {
+  scripts\cp\zombies\zombie_entrances::func_F2E3(var_0, var_1 - 1, "boarded");
+  var_0.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + var_1, "instant_repair");
   wait(0.25);
-  param_00.barrier.var_C1DE++;
-  if(param_00.barrier.var_C1DE > 6) {
-    param_00.barrier.var_C1DE = 6;
+  var_0.barrier.var_C1DE++;
+  if(var_0.barrier.var_C1DE > 6) {
+    var_0.barrier.var_C1DE = 6;
   }
 }
 
-func_DDB6(param_00, param_01, param_02, param_03, param_04) {
-  if(param_04 scripts\cp\utility::has_zombie_perk("perk_machine_flash")) {
-    var_05 = 0.5;
-    param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01, "fast_repair");
+func_DDB6(var_0, var_1, var_2, var_3, var_4) {
+  if(var_4 scripts\cp\utility::has_zombie_perk("perk_machine_flash")) {
+    var_5 = 0.5;
+    var_0.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + var_1, "fast_repair");
   } else {
-    var_05 = 1;
-    param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01, "repair");
+    var_5 = 1;
+    var_0.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + var_1, "repair");
   }
 
-  wait(var_05);
+  wait(var_5);
 }
 
 register_interactions() {

@@ -45,50 +45,50 @@ commander_aggregate_score_on_game_end() {
   level waittill("game_ended");
 
   if(isDefined(level.fireteam_commander["axis"])) {
-    var_00 = 0;
+    var_0 = 0;
 
-    foreach(var_02 in level.players) {
-      if(isbot(var_02) && var_2.team == "axis") {
-        var_00 = var_00 + var_2.pers["score"];
+    foreach(var_2 in level.players) {
+      if(isbot(var_2) && var_2.team == "axis") {
+        var_0 = var_0 + var_2.pers["score"];
       }
     }
 
-    level.fireteam_commander["axis"].pers["score"] = var_00;
-    level.fireteam_commander["axis"].score = var_00;
-    level.fireteam_commander["axis"] scripts\mp\persistence::statadd("score", var_00);
-    level.fireteam_commander["axis"] scripts\mp\persistence::statsetchild("round", "score", var_00);
+    level.fireteam_commander["axis"].pers["score"] = var_0;
+    level.fireteam_commander["axis"].score = var_0;
+    level.fireteam_commander["axis"] scripts\mp\persistence::statadd("score", var_0);
+    level.fireteam_commander["axis"] scripts\mp\persistence::statsetchild("round", "score", var_0);
   }
 
   if(isDefined(level.fireteam_commander["allies"])) {
-    var_00 = 0;
+    var_0 = 0;
 
-    foreach(var_02 in level.players) {
-      if(isbot(var_02) && var_2.team == "allies") {
-        var_00 = var_00 + var_2.pers["score"];
+    foreach(var_2 in level.players) {
+      if(isbot(var_2) && var_2.team == "allies") {
+        var_0 = var_0 + var_2.pers["score"];
       }
     }
 
-    level.fireteam_commander["allies"].pers["score"] = var_00;
-    level.fireteam_commander["allies"].score = var_00;
-    level.fireteam_commander["allies"] scripts\mp\persistence::statadd("score", var_00);
-    level.fireteam_commander["allies"] scripts\mp\persistence::statsetchild("round", "score", var_00);
+    level.fireteam_commander["allies"].pers["score"] = var_0;
+    level.fireteam_commander["allies"].score = var_0;
+    level.fireteam_commander["allies"] scripts\mp\persistence::statadd("score", var_0);
+    level.fireteam_commander["allies"] scripts\mp\persistence::statsetchild("round", "score", var_0);
   }
 }
 
-commander_create_dom_obj(var_00) {
-  if(!isDefined(self.fireteam_dom_point_obj[var_00])) {
-    self.fireteam_dom_point_obj[var_00] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
-    var_01 = (0, 0, 0);
+commander_create_dom_obj(var_0) {
+  if(!isDefined(self.fireteam_dom_point_obj[var_0])) {
+    self.fireteam_dom_point_obj[var_0] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
+    var_1 = (0, 0, 0);
 
-    foreach(var_03 in level.domflags) {
-      if(var_3.label == "_" + var_00) {
-        var_01 = var_3.curorigin;
+    foreach(var_3 in level.domflags) {
+      if(var_3.label == "_" + var_0) {
+        var_1 = var_3.curorigin;
         break;
       }
     }
 
-    scripts\mp\objidpoolmanager::minimap_objective_add(self.fireteam_dom_point_obj[var_00], "invisible", var_01, "compass_obj_fireteam");
-    scripts\mp\objidpoolmanager::minimap_objective_playerteam(self.fireteam_dom_point_obj[var_00], self getentitynumber());
+    scripts\mp\objidpoolmanager::minimap_objective_add(self.fireteam_dom_point_obj[var_0], "invisible", var_1, "compass_obj_fireteam");
+    scripts\mp\objidpoolmanager::minimap_objective_playerteam(self.fireteam_dom_point_obj[var_0], self getentitynumber());
   }
 }
 
@@ -117,19 +117,19 @@ commander_monitor_tactics() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var_00 != "tactic_select") {
-      if(var_00 == "bot_select") {
-        if(var_01 > 0) {
+    if(var_0 != "tactic_select") {
+      if(var_0 == "bot_select") {
+        if(var_1 > 0) {
           commander_handle_notify_quick("bot_next");
-        } else if(var_01 < 0) {
+        } else if(var_1 < 0) {
           commander_handle_notify_quick("bot_prev");
         }
-      } else if(var_00 == "tactics_menu") {
-        if(var_01 > 0) {
+      } else if(var_0 == "tactics_menu") {
+        if(var_1 > 0) {
           commander_handle_notify_quick("tactics_menu");
-        } else if(var_01 <= 0) {
+        } else if(var_1 <= 0) {
           commander_handle_notify_quick("tactics_close");
         }
       }
@@ -137,19 +137,19 @@ commander_monitor_tactics() {
       continue;
     }
 
-    if(var_01 >= level.tactic_notifies.size) {
+    if(var_1 >= level.tactic_notifies.size) {
       continue;
     }
-    var_02 = level.tactic_notifies[var_01];
-    commander_handle_notify_quick(var_02);
+    var_2 = level.tactic_notifies[var_1];
+    commander_handle_notify_quick(var_2);
   }
 }
 
-commander_handle_notify_quick(var_00, var_01) {
-  if(!isDefined(var_00)) {
+commander_handle_notify_quick(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return;
   }
-  switch (var_00) {
+  switch (var_0) {
     case "bot_prev":
       commander_spectate_next_bot(1);
       break;
@@ -225,15 +225,15 @@ commander_handle_notify_quick(var_00, var_01) {
       break;
   }
 
-  if(scripts\engine\utility::string_starts_with(var_00, "tactic_")) {
+  if(scripts\engine\utility::string_starts_with(var_0, "tactic_")) {
     self playlocalsound("earn_superbonus");
 
-    if(self.commander_last_tactic_applied != var_00) {
-      self.commander_last_tactic_applied = var_00;
+    if(self.commander_last_tactic_applied != var_0) {
+      self.commander_last_tactic_applied = var_0;
       thread commander_order_ack();
 
       if(isDefined(level.bot_funcs["commander_gametype_tactics"])) {
-        self[[level.bot_funcs["commander_gametype_tactics"]]](var_00);
+        self[[level.bot_funcs["commander_gametype_tactics"]]](var_0);
       }
     }
   }
@@ -243,61 +243,61 @@ commander_order_ack() {
   self notify("commander_order_ack");
   self endon("commander_order_ack");
   self endon("disconnect");
-  var_00 = 360000;
-  var_01 = var_00;
-  var_02 = undefined;
+  var_0 = 360000;
+  var_1 = var_0;
+  var_2 = undefined;
 
   for(;;) {
     wait 0.5;
-    var_01 = var_00;
-    var_02 = undefined;
-    var_03 = self.origin;
-    var_04 = self getspectatingplayer();
+    var_1 = var_0;
+    var_2 = undefined;
+    var_3 = self.origin;
+    var_4 = self getspectatingplayer();
 
-    if(isDefined(var_04)) {
-      var_03 = var_4.origin;
+    if(isDefined(var_4)) {
+      var_3 = var_4.origin;
     }
 
-    foreach(var_06 in level.players) {
-      if(isDefined(var_06) && isalive(var_06) && isbot(var_06) && isDefined(var_6.team) && var_6.team == self.team) {
-        var_07 = distancesquared(var_03, var_6.origin);
+    foreach(var_6 in level.players) {
+      if(isDefined(var_6) && isalive(var_6) && isbot(var_6) && isDefined(var_6.team) && var_6.team == self.team) {
+        var_7 = distancesquared(var_3, var_6.origin);
 
-        if(var_07 < var_01) {
-          var_02 = var_06;
+        if(var_7 < var_1) {
+          var_2 = var_6;
         }
       }
     }
 
-    if(isDefined(var_02)) {
-      var_09 = var_2.pers["voicePrefix"];
-      var_10 = var_09 + level.bcsounds["callout_response_generic"];
-      var_02 thread scripts\mp\battlechatter_mp::dosound(var_10, 1, 1);
+    if(isDefined(var_2)) {
+      var_9 = var_2.pers["voicePrefix"];
+      var_10 = var_9 + level.bcsounds["callout_response_generic"];
+      var_2 thread scripts\mp\battlechatter_mp::dosound(var_10, 1, 1);
       return;
     }
   }
 }
 
-commander_hint_fade(var_00) {
+commander_hint_fade(var_0) {
   if(!isDefined(self)) {
     return;
   }
   self notify("commander_hint_fade_out");
 
   if(isDefined(self.commanderhintelem)) {
-    var_01 = self.commanderhintelem;
+    var_1 = self.commanderhintelem;
 
-    if(var_00 > 0) {
-      var_01 changefontscaleovertime(var_00);
+    if(var_0 > 0) {
+      var_1 changefontscaleovertime(var_0);
       var_1.fontscale = var_1.fontscale * 1.5;
       var_1.glowcolor = (0.3, 0.6, 0.3);
       var_1.glowalpha = 1;
-      var_01 fadeovertime(var_00);
+      var_1 fadeovertime(var_0);
       var_1.color = (0, 0, 0);
       var_1.alpha = 0;
-      wait(var_00);
+      wait(var_0);
     }
 
-    var_01 scripts\mp\hud_util::destroyelem();
+    var_1 scripts\mp\hud_util::destroyelem();
   }
 }
 
@@ -340,62 +340,62 @@ hud_monitorplayerownership() {
   self endon("disconnect");
   self.ownershipstring = [];
 
-  for(var_00 = 0; var_00 < 16; var_0++) {
-    self.ownershipstring[var_00] = ::scripts\mp\hud_util::createfontstring("default", 1);
-    self.ownershipstring[var_00].color = (1, 1, 1);
-    self.ownershipstring[var_00].x = 0;
-    self.ownershipstring[var_00].y = 30 + var_00 * 12;
-    self.ownershipstring[var_00].alignx = "center";
-    self.ownershipstring[var_00].aligny = "top";
-    self.ownershipstring[var_00].horzalign = "center";
-    self.ownershipstring[var_00].vertalign = "top";
-    self.ownershipstring[var_00].foreground = 1;
-    self.ownershipstring[var_00].alpha = 1;
-    self.ownershipstring[var_00].sort = -1;
-    self.ownershipstring[var_00].archived = 0;
+  for(var_0 = 0; var_0 < 16; var_0++) {
+    self.ownershipstring[var_0] = ::scripts\mp\hud_util::createfontstring("default", 1);
+    self.ownershipstring[var_0].color = (1, 1, 1);
+    self.ownershipstring[var_0].x = 0;
+    self.ownershipstring[var_0].y = 30 + var_0 * 12;
+    self.ownershipstring[var_0].alignx = "center";
+    self.ownershipstring[var_0].aligny = "top";
+    self.ownershipstring[var_0].horzalign = "center";
+    self.ownershipstring[var_0].vertalign = "top";
+    self.ownershipstring[var_0].foreground = 1;
+    self.ownershipstring[var_0].alpha = 1;
+    self.ownershipstring[var_0].sort = -1;
+    self.ownershipstring[var_0].archived = 0;
   }
 
   for(;;) {
-    var_01 = 0;
-    var_02 = [];
+    var_1 = 0;
+    var_2 = [];
 
-    foreach(var_04 in self.ownershipstring) {}
+    foreach(var_4 in self.ownershipstring) {}
 
-    foreach(var_07 in level.players) {
-      var_08 = 0;
+    foreach(var_7 in level.players) {
+      var_8 = 0;
 
-      if(isDefined(var_07) && var_7.team == self.team) {
+      if(isDefined(var_7) && var_7.team == self.team) {
         if(isDefined(var_7.owner)) {
-          if(scripts\engine\utility::array_contains(var_02, var_07)) {
-            self.ownershipstring[var_01].color = (1, 0, 0);
+          if(scripts\engine\utility::array_contains(var_2, var_7)) {
+            self.ownershipstring[var_1].color = (1, 0, 0);
           } else {
-            var_02 = scripts\engine\utility::array_add(var_02, var_07);
+            var_2 = scripts\engine\utility::array_add(var_2, var_7);
           }
 
-          if(var_07 != var_7.owner && scripts\engine\utility::array_contains(var_02, var_7.owner)) {
-            self.ownershipstring[var_01].color = (1, 0, 0);
+          if(var_7 != var_7.owner && scripts\engine\utility::array_contains(var_2, var_7.owner)) {
+            self.ownershipstring[var_1].color = (1, 0, 0);
           } else {
-            var_02 = scripts\engine\utility::array_add(var_02, var_7.owner);
+            var_2 = scripts\engine\utility::array_add(var_2, var_7.owner);
           }
 
-          if(var_07 == self) {
-            self.ownershipstring[var_01].color = (1, 0, 0);
-          } else if(var_7.owner == var_07) {
-            self.ownershipstring[var_01].color = (1, 0, 0);
+          if(var_7 == self) {
+            self.ownershipstring[var_1].color = (1, 0, 0);
+          } else if(var_7.owner == var_7) {
+            self.ownershipstring[var_1].color = (1, 0, 0);
           } else if(var_7.owner == self) {
-            self.ownershipstring[var_01].color = (0, 1, 0);
+            self.ownershipstring[var_1].color = (0, 1, 0);
           } else {
-            self.ownershipstring[var_01].color = (1, 1, 1);
+            self.ownershipstring[var_1].color = (1, 1, 1);
           }
         } else if(isDefined(var_7.bot_fireteam_follower))
-          var_08 = 1;
+          var_8 = 1;
         else {
-          self.ownershipstring[var_01].color = (1, 1, 0);
+          self.ownershipstring[var_1].color = (1, 1, 0);
         }
       } else
-        var_08 = 1;
+        var_8 = 1;
 
-      if(!var_08) {
+      if(!var_8) {
         var_1++;
       }
     }
@@ -406,28 +406,28 @@ hud_monitorplayerownership() {
 
 commander_wait_connect() {
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(!isai(var_01) && !isDefined(var_1.fireteam_connected)) {
+    foreach(var_1 in level.players) {
+      if(!isai(var_1) && !isDefined(var_1.fireteam_connected)) {
         var_1.fireteam_connected = 1;
-        var_01 setclientomnvar("ui_options_menu", 0);
+        var_1 setclientomnvar("ui_options_menu", 0);
         var_1.classcallback = ::commander_loadout_class_callback;
-        var_02 = "allies";
+        var_2 = "allies";
 
         if(!isDefined(var_1.team)) {
           if(level.teamcount["axis"] < level.teamcount["allies"]) {
-            var_02 = "axis";
+            var_2 = "axis";
           } else if(level.teamcount["allies"] < level.teamcount["axis"]) {
-            var_02 = "allies";
+            var_2 = "allies";
           }
         }
 
-        var_01 scripts\mp\menus::addtoteam(var_02);
-        level.fireteam_commander[var_1.team] = var_01;
-        var_01 scripts\mp\menus::bypassclasschoice();
+        var_1 scripts\mp\menus::addtoteam(var_2);
+        level.fireteam_commander[var_1.team] = var_1;
+        var_1 scripts\mp\menus::bypassclasschoice();
         var_1.class_num = 0;
         var_1.waitingtoselectclass = 0;
-        var_01 thread onfirstspawnedplayer();
-        var_01 thread commander_monitor_tactics();
+        var_1 thread onfirstspawnedplayer();
+        var_1 thread commander_monitor_tactics();
       }
     }
 
@@ -456,10 +456,10 @@ commander_spectate_first_available_bot() {
   self endon("spectating_cycle");
 
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(isbot(var_01) && var_1.team == self.team) {
-        thread commander_spectate_bot(var_01);
-        var_01 thread commander_hint();
+    foreach(var_1 in level.players) {
+      if(isbot(var_1) && var_1.team == self.team) {
+        thread commander_spectate_bot(var_1);
+        var_1 thread commander_hint();
         return;
       }
     }
@@ -474,9 +474,9 @@ monitor_enter_commander_mode() {
 
   for(;;) {
     self waittill("commander_mode");
-    var_00 = scripts\mp\killstreaks\deployablebox::isholdingdeployablebox();
+    var_0 = scripts\mp\killstreaks\deployablebox::isholdingdeployablebox();
 
-    if(!isalive(self) || var_00) {
+    if(!isalive(self) || var_0) {
       continue;
     }
     break;
@@ -487,31 +487,31 @@ monitor_enter_commander_mode() {
   }
   thread wait_commander_takeover_bot();
   self playlocalsound("mp_card_slide");
-  var_01 = 0;
+  var_1 = 0;
 
-  foreach(var_03 in level.players) {
-    if(isDefined(var_03) && var_03 != self && isbot(var_03) && isDefined(var_3.team) && var_3.team == self.team && isDefined(var_3.sidelinedbycommander) && var_3.sidelinedbycommander == 1) {
-      var_03 thread spectator_takeover_other(self);
-      var_01 = 1;
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3) && var_3 != self && isbot(var_3) && isDefined(var_3.team) && var_3.team == self.team && isDefined(var_3.sidelinedbycommander) && var_3.sidelinedbycommander == 1) {
+      var_3 thread spectator_takeover_other(self);
+      var_1 = 1;
       break;
     }
   }
 
-  if(!var_01) {
+  if(!var_1) {
     thread scripts\mp\playerlogic::spawnspectator();
   }
 }
 
-commander_can_takeover_bot(var_00) {
-  if(!isDefined(var_00)) {
+commander_can_takeover_bot(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!isbot(var_00)) {
+  if(!isbot(var_0)) {
     return 0;
   }
 
-  if(!isalive(var_00)) {
+  if(!isalive(var_0)) {
     return 0;
   }
 
@@ -523,9 +523,9 @@ commander_can_takeover_bot(var_00) {
     return 0;
   }
 
-  var_01 = scripts\mp\killstreaks\deployablebox::isholdingdeployablebox();
+  var_1 = scripts\mp\killstreaks\deployablebox::isholdingdeployablebox();
 
-  if(var_01) {
+  if(var_1) {
     return 0;
   }
 
@@ -533,81 +533,81 @@ commander_can_takeover_bot(var_00) {
 }
 
 player_get_player_index() {
-  for(var_00 = 0; var_00 < level.players.size; var_0++) {
-    if(level.players[var_00] == self) {
-      return var_00;
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    if(level.players[var_0] == self) {
+      return var_0;
     }
   }
 
   return -1;
 }
 
-commander_spectate_next_bot(var_00) {
-  var_01 = self getspectatingplayer();
-  var_02 = undefined;
-  var_03 = 0;
-  var_04 = 1;
+commander_spectate_next_bot(var_0) {
+  var_1 = self getspectatingplayer();
+  var_2 = undefined;
+  var_3 = 0;
+  var_4 = 1;
 
-  if(isDefined(var_00) && var_00 == 1) {
-    var_04 = -1;
+  if(isDefined(var_0) && var_0 == 1) {
+    var_4 = -1;
   }
 
-  if(isDefined(var_01)) {
-    var_03 = var_01 player_get_player_index();
+  if(isDefined(var_1)) {
+    var_3 = var_1 player_get_player_index();
   }
 
-  var_05 = 1;
+  var_5 = 1;
 
-  for(var_06 = var_03 + var_04; var_05 < level.players.size; var_06 = var_06 + var_04) {
+  for(var_6 = var_3 + var_4; var_5 < level.players.size; var_6 = var_6 + var_4) {
     var_5++;
 
-    if(var_06 < 0) {
-      var_06 = level.players.size - 1;
-    } else if(var_06 >= level.players.size) {
-      var_06 = 0;
+    if(var_6 < 0) {
+      var_6 = level.players.size - 1;
+    } else if(var_6 >= level.players.size) {
+      var_6 = 0;
     }
 
-    if(!isDefined(level.players[var_06])) {
+    if(!isDefined(level.players[var_6])) {
       continue;
     }
-    if(isDefined(var_01) && level.players[var_06] == var_01) {
+    if(isDefined(var_1) && level.players[var_6] == var_1) {
       break;
     }
-    var_07 = commander_can_takeover_bot(level.players[var_06]);
+    var_7 = commander_can_takeover_bot(level.players[var_6]);
 
-    if(var_07) {
-      var_02 = level.players[var_06];
+    if(var_7) {
+      var_2 = level.players[var_6];
       break;
     }
   }
 
-  if(isDefined(var_02) && (!isDefined(var_01) || var_02 != var_01)) {
-    thread commander_spectate_bot(var_02);
+  if(isDefined(var_2) && (!isDefined(var_1) || var_2 != var_1)) {
+    thread commander_spectate_bot(var_2);
     self playlocalsound("oldschool_return");
-    var_02 thread takeover_flash();
+    var_2 thread takeover_flash();
 
-    if(isDefined(var_01)) {
-      var_01 bot_free_to_move();
+    if(isDefined(var_1)) {
+      var_1 bot_free_to_move();
     }
   } else
     self playlocalsound("counter_uav_deactivate");
 }
 
-commander_spectate_bot(var_00) {
+commander_spectate_bot(var_0) {
   self notify("commander_spectate_bot");
   self endon("commander_spectate_bot");
   self endon("commander_spectate_stop");
   self endon("disconnect");
 
-  while(isDefined(var_00)) {
+  while(isDefined(var_0)) {
     if(!self.spectatekillcam && var_0.sessionstate == "playing") {
-      var_01 = var_00 getentitynumber();
+      var_1 = var_0 getentitynumber();
 
-      if(self.forcespectatorclient != var_01) {
+      if(self.forcespectatorclient != var_1) {
         self allowspectateteam("none", 0);
         self allowspectateteam("freelook", 0);
-        self.forcespectatorclient = var_01;
-        self.forcespectatorent = var_00;
+        self.forcespectatorclient = var_1;
+        self.forcespectatorent = var_0;
       }
     }
 
@@ -616,15 +616,15 @@ commander_spectate_bot(var_00) {
 }
 
 get_spectated_player() {
-  var_00 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.forcespectatorent)) {
-    var_00 = self.forcespectatorent;
+    var_0 = self.forcespectatorent;
   } else {
-    var_00 = self getspectatingplayer();
+    var_0 = self getspectatingplayer();
   }
 
-  return var_00;
+  return var_0;
 }
 
 commander_takeover_first_available_bot() {
@@ -633,9 +633,9 @@ commander_takeover_first_available_bot() {
   self endon("spectating_cycle");
 
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(isbot(var_01) && var_1.team == self.team) {
-        spectator_takeover_other(var_01);
+    foreach(var_1 in level.players) {
+      if(isbot(var_1) && var_1.team == self.team) {
+        spectator_takeover_other(var_1);
         return;
       }
     }
@@ -644,38 +644,38 @@ commander_takeover_first_available_bot() {
   }
 }
 
-spectator_takeover_other(var_00) {
+spectator_takeover_other(var_0) {
   self.forcespawnorigin = var_0.origin;
-  var_01 = var_00 getplayerangles();
-  var_01 = (var_1[0], var_1[1], 0.0);
+  var_1 = var_0 getplayerangles();
+  var_1 = (var_1[0], var_1[1], 0.0);
   self.forcespawnangles = (0, var_0.angles[1], 0);
-  self setstance(var_00 getstance());
+  self setstance(var_0 getstance());
   self.botlastloadout = var_0.botlastloadout;
   self.bot_class = var_0.bot_class;
   commander_or_bot_change_class(self.bot_class);
   self.health = var_0.health;
   self.velocity = var_0.velocity;
-  store_weapons_status(var_00);
-  var_00 thread scripts\mp\playerlogic::spawnspectator();
+  store_weapons_status(var_0);
+  var_0 thread scripts\mp\playerlogic::spawnspectator();
 
-  if(isbot(var_00)) {
+  if(isbot(var_0)) {
     var_0.sidelinedbycommander = 1;
-    var_00 bot_free_to_move();
-    self playlocalsound(var_00);
+    var_0 bot_free_to_move();
+    self playlocalsound(var_0);
     self notify("commander_spectate_stop");
-    var_00 notify("commander_took_over");
-  } else {}
+    var_0 notify("commander_took_over");
+  }
 
   thread scripts\mp\playerlogic::spawnclient();
-  self setplayerangles(var_01);
+  self setplayerangles(var_1);
   apply_weapons_status();
-  botsentientswap(self, var_00);
+  botsentientswap(self, var_0);
 
   if(isbot(self)) {
-    var_00 thread commander_spectate_bot(self);
-    var_00 playlocalsound(undefined);
+    var_0 thread commander_spectate_bot(self);
+    var_0 playlocalsound(undefined);
     self.sidelinedbycommander = 0;
-    var_00 playlocalsound("counter_uav_activate");
+    var_0 playlocalsound("counter_uav_activate");
     thread takeover_flash();
     var_0.commanding_bot = undefined;
     var_0.last_commanded_bot = self;
@@ -684,7 +684,7 @@ spectator_takeover_other(var_00) {
     thread monitor_enter_commander_mode();
     self playSound("copycat_steal_class");
     thread takeover_flash();
-    self.commanding_bot = var_00;
+    self.commanding_bot = var_0;
     self.last_commanded_bot = undefined;
 
     if(!isDefined(self.commander_gave_hint)) {
@@ -723,17 +723,17 @@ wait_commander_takeover_bot() {
 
   for(;;) {
     self waittill("takeover_bot");
-    var_00 = get_spectated_player();
-    var_01 = commander_can_takeover_bot(var_00);
+    var_0 = get_spectated_player();
+    var_1 = commander_can_takeover_bot(var_0);
 
-    if(!var_01) {
+    if(!var_1) {
       commander_spectate_next_bot(0);
-      var_00 = get_spectated_player();
-      var_01 = commander_can_takeover_bot(var_00);
+      var_0 = get_spectated_player();
+      var_1 = commander_can_takeover_bot(var_0);
     }
 
-    if(var_01) {
-      thread spectator_takeover_other(var_00);
+    if(var_1) {
+      thread spectator_takeover_other(var_0);
       break;
     }
 
@@ -753,7 +753,7 @@ bot_wait_here() {
   thread bot_wait_free_to_move();
 }
 
-bot_delete_badplace_on_death(var_00) {
+bot_delete_badplace_on_death(var_0) {
   self endon("freed_to_move");
   self endon("disconnect");
   self waittill("death");
@@ -779,47 +779,47 @@ bot_free_to_move() {
   self notify("freed_to_move");
 }
 
-commander_loadout_class_callback(var_00) {
+commander_loadout_class_callback(var_0) {
   return self.botlastloadout;
 }
 
-commander_or_bot_change_class(var_00) {
-  self.pers["class"] = var_00;
-  self.class = var_00;
-  scripts\mp\class::setclass(var_00);
+commander_or_bot_change_class(var_0) {
+  self.pers["class"] = var_0;
+  self.class = var_0;
+  scripts\mp\class::setclass(var_0);
   self.tag_stowed_back = undefined;
   self.tag_stowed_hip = undefined;
 }
 
-store_weapons_status(var_00) {
-  self.copy_fullweaponlist = var_00 getweaponslistall();
-  self.copy_weapon_current = var_00 getcurrentweapon();
+store_weapons_status(var_0) {
+  self.copy_fullweaponlist = var_0 getweaponslistall();
+  self.copy_weapon_current = var_0 getcurrentweapon();
 
-  foreach(var_02 in self.copy_fullweaponlist) {
-    self.copy_weapon_ammo_clip[var_02] = var_00 getweaponammoclip(var_02);
-    self.copy_weapon_ammo_stock[var_02] = var_00 getweaponammostock(var_02);
+  foreach(var_2 in self.copy_fullweaponlist) {
+    self.copy_weapon_ammo_clip[var_2] = var_0 getweaponammoclip(var_2);
+    self.copy_weapon_ammo_stock[var_2] = var_0 getweaponammostock(var_2);
   }
 }
 
 apply_weapons_status() {
-  foreach(var_01 in self.copy_fullweaponlist) {
-    if(!self hasweapon(var_01)) {
-      self giveweapon(var_01);
+  foreach(var_1 in self.copy_fullweaponlist) {
+    if(!self hasweapon(var_1)) {
+      self giveweapon(var_1);
     }
   }
 
-  var_03 = self getweaponslistall();
+  var_3 = self getweaponslistall();
 
-  foreach(var_01 in var_03) {
-    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, var_01)) {
-      scripts\mp\utility\game::_takeweapon(var_01);
+  foreach(var_1 in var_3) {
+    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, var_1)) {
+      scripts\mp\utility\game::_takeweapon(var_1);
     }
   }
 
-  foreach(var_01 in self.copy_fullweaponlist) {
-    if(self hasweapon(var_01)) {
-      self setweaponammoclip(var_01, self.copy_weapon_ammo_clip[var_01]);
-      self setweaponammostock(var_01, self.copy_weapon_ammo_stock[var_01]);
+  foreach(var_1 in self.copy_fullweaponlist) {
+    if(self hasweapon(var_1)) {
+      self setweaponammoclip(var_1, self.copy_weapon_ammo_clip[var_1]);
+      self setweaponammostock(var_1, self.copy_weapon_ammo_stock[var_1]);
       continue;
     }
   }

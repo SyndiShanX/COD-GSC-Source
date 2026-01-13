@@ -4,17 +4,17 @@
  * Script: scripts\mp\agents\agent_utility.gsc
 ***********************************************/
 
-agentfunc(param_00) {
-  return level.agent_funcs[self.agent_type][param_00];
+agentfunc(var_0) {
+  return level.agent_funcs[self.agent_type][var_0];
 }
 
-set_agent_team(param_00, param_01) {
-  self.team = param_00;
-  self.var_20 = param_00;
-  self.pers["team"] = param_00;
-  self.triggerportableradarping = param_01;
-  self setotherent(param_01);
-  self setentityowner(param_01);
+set_agent_team(var_0, var_1) {
+  self.team = var_0;
+  self.var_20 = var_0;
+  self.pers["team"] = var_0;
+  self.triggerportableradarping = var_1;
+  self setotherent(var_1);
+  self setentityowner(var_1);
 }
 
 initagentscriptvariables() {
@@ -33,8 +33,8 @@ initagentscriptvariables() {
   initplayerscriptvariables(0);
 }
 
-initplayerscriptvariables(param_00) {
-  if(!param_00) {
+initplayerscriptvariables(var_0) {
+  if(!var_0) {
     self.class = undefined;
     self.lastclass = undefined;
     self.movespeedscaler = undefined;
@@ -87,19 +87,19 @@ initplayerscriptvariables(param_00) {
   self.disabledusability = 1;
 }
 
-getfreeagent(param_00) {
-  var_01 = undefined;
+getfreeagent(var_0) {
+  var_1 = undefined;
   if(isDefined(level.agentarray)) {
-    foreach(var_03 in level.agentarray) {
-      if(!isDefined(var_03.isactive) || !var_03.isactive) {
-        if(isDefined(var_03.waitingtodeactivate) && var_03.waitingtodeactivate) {
+    foreach(var_3 in level.agentarray) {
+      if(!isDefined(var_3.isactive) || !var_3.isactive) {
+        if(isDefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
           continue;
         }
 
-        var_01 = var_03;
-        var_01 initagentscriptvariables();
-        if(isDefined(param_00)) {
-          var_01.agent_type = param_00;
+        var_1 = var_3;
+        var_1 initagentscriptvariables();
+        if(isDefined(var_0)) {
+          var_1.agent_type = var_0;
         }
 
         break;
@@ -107,7 +107,7 @@ getfreeagent(param_00) {
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 activateagent() {
@@ -132,11 +132,11 @@ deactivateagentdelayed() {
   self.triggerportableradarping = undefined;
   self.connecttime = undefined;
   self.waitingtodeactivate = undefined;
-  foreach(var_01 in level.characters) {
-    if(isDefined(var_01.attackers)) {
-      foreach(var_04, var_03 in var_01.attackers) {
-        if(var_03 == self) {
-          var_01.attackers[var_04] = undefined;
+  foreach(var_1 in level.characters) {
+    if(isDefined(var_1.attackers)) {
+      foreach(var_4, var_3 in var_1.attackers) {
+        if(var_3 == self) {
+          var_1.attackers[var_4] = undefined;
         }
       }
     }
@@ -150,111 +150,111 @@ deactivateagentdelayed() {
   self notify("disconnect");
 }
 
-getnumactiveagents(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = "all";
+getnumactiveagents(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  var_01 = getactiveagentsoftype(param_00);
-  return var_01.size;
+  var_1 = getactiveagentsoftype(var_0);
+  return var_1.size;
 }
 
-getactiveagentsoftype(param_00) {
-  var_01 = [];
+getactiveagentsoftype(var_0) {
+  var_1 = [];
   if(!isDefined(level.agentarray)) {
-    return var_01;
+    return var_1;
   }
 
-  foreach(var_03 in level.agentarray) {
-    if(isDefined(var_03.isactive) && var_03.isactive) {
-      if(param_00 == "all" || var_03.agent_type == param_00) {
-        var_01[var_01.size] = var_03;
+  foreach(var_3 in level.agentarray) {
+    if(isDefined(var_3.isactive) && var_3.isactive) {
+      if(var_0 == "all" || var_3.agent_type == var_0) {
+        var_1[var_1.size] = var_3;
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-getnumownedactiveagents(param_00) {
-  return getnumownedactiveagentsbytype(param_00, "all");
+getnumownedactiveagents(var_0) {
+  return getnumownedactiveagentsbytype(var_0, "all");
 }
 
-getnumownedactiveagentsbytype(param_00, param_01) {
-  var_02 = 0;
+getnumownedactiveagentsbytype(var_0, var_1) {
+  var_2 = 0;
   if(!isDefined(level.agentarray)) {
-    return var_02;
+    return var_2;
   }
 
-  foreach(var_04 in level.agentarray) {
-    if(isDefined(var_04.isactive) && var_04.isactive) {
-      if(isDefined(var_04.triggerportableradarping) && var_04.triggerportableradarping == param_00) {
-        if((param_01 == "all" && var_04.agent_type != "alien") || var_04.agent_type == param_01) {
-          var_02++;
+  foreach(var_4 in level.agentarray) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
+      if(isDefined(var_4.triggerportableradarping) && var_4.triggerportableradarping == var_0) {
+        if((var_1 == "all" && var_4.agent_type != "alien") || var_4.agent_type == var_1) {
+          var_2++;
         }
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-getnumownedagentsonteambytype(param_00, param_01) {
-  var_02 = 0;
+getnumownedagentsonteambytype(var_0, var_1) {
+  var_2 = 0;
   if(!isDefined(level.agentarray)) {
-    return var_02;
+    return var_2;
   }
 
-  foreach(var_04 in level.agentarray) {
-    if(isDefined(var_04.isactive) && var_04.isactive) {
-      if(isDefined(var_04.team) && var_04.team == param_00) {
-        if((param_01 == "all" && var_04.agent_type != "alien") || var_04.agent_type == param_01) {
-          var_02++;
+  foreach(var_4 in level.agentarray) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
+      if(isDefined(var_4.team) && var_4.team == var_0) {
+        if((var_1 == "all" && var_4.agent_type != "alien") || var_4.agent_type == var_1) {
+          var_2++;
         }
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-getvalidspawnpathnodenearplayer(param_00, param_01) {
-  var_02 = getnodesinradius(self.origin, 350, 64, 128, "Path");
-  if(!isDefined(var_02) || var_02.size == 0) {
+getvalidspawnpathnodenearplayer(var_0, var_1) {
+  var_2 = getnodesinradius(self.origin, 350, 64, 128, "Path");
+  if(!isDefined(var_2) || var_2.size == 0) {
     return undefined;
   }
 
   if(isDefined(level.waterdeletez) && isDefined(level.trigunderwater)) {
-    var_03 = var_02;
-    var_02 = [];
-    foreach(var_05 in var_03) {
-      if(var_05.origin[2] > level.waterdeletez || !ispointinvolume(var_05.origin, level.trigunderwater)) {
-        var_02[var_02.size] = var_05;
+    var_3 = var_2;
+    var_2 = [];
+    foreach(var_5 in var_3) {
+      if(var_5.origin[2] > level.waterdeletez || !ispointinvolume(var_5.origin, level.trigunderwater)) {
+        var_2[var_2.size] = var_5;
       }
     }
   }
 
-  var_07 = anglesToForward(self.angles);
-  var_08 = -10;
-  var_09 = scripts\mp\spawnlogic::getplayertraceheight(self);
-  var_0A = (0, 0, var_09);
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+  var_7 = anglesToForward(self.angles);
+  var_8 = -10;
+  var_9 = scripts\mp\spawnlogic::getplayertraceheight(self);
+  var_0A = (0, 0, var_9);
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   var_0B = [];
   var_0C = [];
-  foreach(var_0E in var_02) {
+  foreach(var_0E in var_2) {
     if(!var_0E getrandomattachments("stand") || isDefined(var_0E.no_agent_spawn)) {
       continue;
     }
 
     var_0F = vectornormalize(var_0E.origin - self.origin);
-    var_10 = vectordot(var_07, var_0F);
+    var_10 = vectordot(var_7, var_0F);
     for(var_11 = 0; var_11 < var_0C.size; var_11++) {
       if(var_10 > var_0C[var_11]) {
         for(var_12 = var_0C.size; var_12 > var_11; var_12--) {
@@ -282,7 +282,7 @@ getvalidspawnpathnodenearplayer(param_00, param_01) {
       continue;
     }
 
-    if(param_01) {
+    if(var_1) {
       if(var_11 > 0) {
         wait(0.05);
       }
@@ -293,7 +293,7 @@ getvalidspawnpathnodenearplayer(param_00, param_01) {
       }
     }
 
-    if(param_00) {
+    if(var_0) {
       if(var_11 > 0) {
         wait(0.05);
       }
@@ -308,8 +308,8 @@ getvalidspawnpathnodenearplayer(param_00, param_01) {
   }
 }
 
-killagent(param_00) {
-  param_00 dodamage(param_00.health + 500000, param_00.origin);
+killagent(var_0) {
+  var_0 dodamage(var_0.health + 500000, var_0.origin);
 }
 
 killdog() {

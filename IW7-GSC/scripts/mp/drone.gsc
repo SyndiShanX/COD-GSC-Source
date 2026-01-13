@@ -19,8 +19,8 @@ init() {
 
 func_13962() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread func_D2FA();
+    level waittill("connected", var_0);
+    var_0 thread func_D2FA();
   }
 }
 
@@ -29,11 +29,11 @@ func_D2FA() {
   for(;;) {
     if(getdvarint("scr_drone_pet_debug_spawn") != 0) {
       self waittill("spawned_player");
-      var_00 = getdvarint("scr_drone_pet_debug_spawn");
-      var_01 = "select_ability";
+      var_0 = getdvarint("scr_drone_pet_debug_spawn");
+      var_1 = "select_ability";
     } else {
-      self waittill("luinotifyserver", var_01, var_00);
-      if(var_01 != "select_ability") {
+      self waittill("luinotifyserver", var_1, var_0);
+      if(var_1 != "select_ability") {
         continue;
       }
     }
@@ -42,10 +42,10 @@ func_D2FA() {
       continue;
     }
 
-    self.balldrone.var_151C = var_00;
-    var_02 = "ability_pet_" + var_00 + 1;
-    var_03 = level.var_5CC0[var_02];
-    self[[var_03.var_1088C]]();
+    self.balldrone.var_151C = var_0;
+    var_2 = "ability_pet_" + var_0 + 1;
+    var_3 = level.var_5CC0[var_2];
+    self[[var_3.var_1088C]]();
   }
 }
 
@@ -62,32 +62,32 @@ func_10611() {
 }
 
 func_10612() {
-  var_00 = self getcurrentprimaryweapon();
-  if(var_00 == "none") {
-    var_00 = scripts\engine\utility::getlastweapon();
+  var_0 = self getcurrentprimaryweapon();
+  if(var_0 == "none") {
+    var_0 = scripts\engine\utility::getlastweapon();
   }
 
-  if(!self hasweapon(var_00)) {
-    var_00 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
+  if(!self hasweapon(var_0)) {
+    var_0 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
   }
 
-  scripts\mp\utility::_takeweapon(var_00);
+  scripts\mp\utility::_takeweapon(var_0);
   scripts\mp\utility::_giveweapon("iw7_knife_mp", 0);
   scripts\mp\utility::_switchtoweapon("iw7_knife_mp");
   thread func_94A9();
 }
 
 func_10613() {
-  var_00 = self getcurrentprimaryweapon();
-  if(var_00 == "none") {
-    var_00 = scripts\engine\utility::getlastweapon();
+  var_0 = self getcurrentprimaryweapon();
+  if(var_0 == "none") {
+    var_0 = scripts\engine\utility::getlastweapon();
   }
 
-  if(!self hasweapon(var_00)) {
-    var_00 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
+  if(!self hasweapon(var_0)) {
+    var_0 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
   }
 
-  scripts\mp\utility::_takeweapon(var_00);
+  scripts\mp\utility::_takeweapon(var_0);
   scripts\mp\utility::_giveweapon("iw7_knife_mp", 0);
   scripts\mp\utility::_switchtoweapon("iw7_knife_mp");
   self.movespeedscaler = 1.5;
@@ -97,8 +97,8 @@ func_94A9() {
   self endon("disconnect");
   self endon("death");
   for(;;) {
-    var_00 = self getcurrentoffhand();
-    self givemaxammo(var_00);
+    var_0 = self getcurrentoffhand();
+    self givemaxammo(var_0);
     wait(2);
   }
 }

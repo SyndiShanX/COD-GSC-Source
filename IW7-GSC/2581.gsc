@@ -13,15 +13,15 @@ setupdestructibledoors() {
 func_4D5F() {
   self endon("terminate_ai_threads");
   while(isalive(self)) {
-    self waittill("damage_part_died", var_00);
+    self waittill("damage_part_died", var_0);
     scripts\anim\utility_common::repeater_headshot_ammo_passive(self.var_E2, self.sethalfresparticles, self);
     if(self _meth_81B7()) {
       return;
     }
 
     if(isDefined(self.var_71A1)) {
-      foreach(var_02 in var_00) {
-        self[[self.var_71A1]](var_02);
+      foreach(var_2 in var_0) {
+        self[[self.var_71A1]](var_2);
       }
     }
   }
@@ -30,14 +30,14 @@ func_4D5F() {
 func_4D60() {
   self endon("terminate_ai_threads");
   while(isalive(self)) {
-    self waittill("damage_subpart_died", var_00);
+    self waittill("damage_subpart_died", var_0);
     if(self _meth_81B7()) {
       return;
     }
 
     if(isDefined(self.var_719D)) {
-      foreach(var_02 in var_00) {
-        self[[self.var_719D]](var_02);
+      foreach(var_2 in var_0) {
+        self[[self.var_719D]](var_2);
       }
     }
   }
@@ -50,7 +50,7 @@ func_4D5E() {
   thread func_4D5F();
 }
 
-func_9F3E(param_00) {
+func_9F3E(var_0) {
   if(scripts\asm\asm_bb::bb_isselfdestruct()) {
     return level.success;
   }
@@ -58,7 +58,7 @@ func_9F3E(param_00) {
   return level.failure;
 }
 
-isheadless(param_00) {
+isheadless(var_0) {
   if(scripts\asm\asm_bb::bb_isheadless()) {
     return level.success;
   }

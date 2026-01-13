@@ -14,9 +14,9 @@ func_DE0F() {
   level._effect["barrel_explosion"] = loadfx("vfx\iw7\core\expl\vfx_red_barrel_oxygen_01.vfx");
   level._effect["barrel_explosion_zerog"] = loadfx("vfx\iw7\prop\vfx_misc_exterior_oxygenbarrel_large_zerog.vfx");
   level._effect["barrel_fire"] = loadfx("vfx\iw7\prop\vfx_dest_barrel_fire.vfx");
-  var_00 = getEntArray("phys_barrel_destructible", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread func_DE0C();
+  var_0 = getEntArray("phys_barrel_destructible", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread func_DE0C();
   }
 }
 
@@ -25,77 +25,77 @@ func_DE0C() {
   self endon("barrel_delete");
   lib_0E1D::func_2840("red", 120, 350, 9100, 15000, 80, 28);
   thread func_DE0D();
-  var_00 = 3;
-  var_01 = 0;
-  var_02 = 120;
+  var_0 = 3;
+  var_1 = 0;
+  var_2 = 120;
   for(;;) {
-    self waittill("damage", var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B, var_0C);
-    if(isDefined(var_04) && isai(var_04)) {
+    self waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    if(isDefined(var_4) && isai(var_4)) {
       continue;
     }
 
-    if(isDefined(var_04) && isDefined(var_04.var_9D62)) {
+    if(isDefined(var_4) && isDefined(var_4.var_9D62)) {
       continue;
     }
 
     if(isDefined(var_0C) && scripts\engine\utility::weaponclass(var_0C) == "sniper") {
-      var_03 = 999999;
-      var_00 = 0;
+      var_3 = 999999;
+      var_0 = 0;
     }
 
-    var_02 = int(var_02 - var_03);
-    if(var_02 <= 0 && !isDefined(self.var_C528)) {
-      var_02 = 50;
+    var_2 = int(var_2 - var_3);
+    if(var_2 <= 0 && !isDefined(self.var_C528)) {
+      var_2 = 50;
     }
 
-    if(var_02 <= 0) {
+    if(var_2 <= 0) {
       break;
     }
 
-    self.var_2836 = var_02;
-    if(var_02 <= 50) {
-      if(!var_01) {
+    self.var_2836 = var_2;
+    if(var_2 <= 50) {
+      if(!var_1) {
         if(soundexists("o2_barrel_fire")) {
           thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_fire");
         }
 
         playFXOnTag(scripts\engine\utility::getfx("barrel_fire"), self, "misc_exterior_oxygen_barrel_large");
         playFXOnTag(scripts\engine\utility::getfx("barrel_flame_top"), self, "tag_valve");
-        var_01 = 1;
+        var_1 = 1;
         self.var_C528 = 1;
       }
 
-      var_0D = var_02 / 50;
-      var_00 = var_00 * var_0D;
-      thread lib_0E1D::func_2835(var_00);
+      var_0D = var_2 / 50;
+      var_0 = var_0 * var_0D;
+      thread lib_0E1D::func_2835(var_0);
     }
 
-    if(isDefined(var_05)) {
-      var_0E = length(var_05);
+    if(isDefined(var_5)) {
+      var_0E = length(var_5);
       if(var_0E > 20) {
-        var_0F = vectornormalize(var_05);
+        var_0F = vectornormalize(var_5);
         var_10 = 20;
-        if(isDefined(var_07) && var_07 == "MOD_IMPACT") {
+        if(isDefined(var_7) && var_7 == "MOD_IMPACT") {
           var_10 = 3;
         }
 
-        var_05 = var_0F * var_10;
+        var_5 = var_0F * var_10;
       }
 
-      self physicslaunchserver(var_06, var_05 * 1000);
+      self physicslaunchserver(var_6, var_5 * 1000);
     }
 
-    if(!isDefined(var_07)) {
+    if(!isDefined(var_7)) {
       continue;
     }
 
-    var_11 = strtok(var_07, "_");
+    var_11 = strtok(var_7, "_");
     if(!scripts\engine\utility::array_contains(var_11, "BULLET")) {
       continue;
     }
 
-    var_12 = scripts\engine\utility::spawn_tag_origin(var_06);
-    var_13 = vectornormalize(self.origin - var_06);
+    var_12 = scripts\engine\utility::spawn_tag_origin(var_6);
+    var_13 = vectornormalize(self.origin - var_6);
     var_14 = vectortoangles(var_13 * -1);
     var_12.angles = scripts\engine\utility::flat_angle(var_14);
     var_12 linkto(self);
@@ -122,32 +122,32 @@ func_DE0D() {
   earthquake(0.5, 0.8, self.origin, 700);
   thread scripts\sp\utility::func_54EF(self.origin);
   thread lib_0E1D::func_2831(350, self.origin);
-  var_00 = 0.3;
-  var_01 = sortbydistance(level.var_CAF7, self.origin);
-  foreach(var_03 in var_01) {
-    if(var_03 == self) {
+  var_0 = 0.3;
+  var_1 = sortbydistance(level.var_CAF7, self.origin);
+  foreach(var_3 in var_1) {
+    if(var_3 == self) {
       continue;
     }
 
-    var_04 = distance(self.origin, var_03.origin);
-    if(var_04 > self.var_CAF6) {
+    var_4 = distance(self.origin, var_3.origin);
+    if(var_4 > self.var_CAF6) {
       continue;
     }
 
-    var_05 = self.var_CAF6 - var_04;
-    var_06 = var_05 / self.var_CAF6;
-    var_07 = var_00 * var_06;
-    if(var_04 <= self.var_CAF6) {
-      var_03 thread lib_0E1D::func_2837(self.origin, var_04, var_07);
+    var_5 = self.var_CAF6 - var_4;
+    var_6 = var_5 / self.var_CAF6;
+    var_7 = var_0 * var_6;
+    if(var_4 <= self.var_CAF6) {
+      var_3 thread lib_0E1D::func_2837(self.origin, var_4, var_7);
     }
 
-    if(var_04 <= 340) {
-      var_03 thread func_DE0E(self.origin, var_04, var_07);
+    if(var_4 <= 340) {
+      var_3 thread func_DE0E(self.origin, var_4, var_7);
     }
   }
 
-  var_09 = scripts\sp\utility::maymovefrompointtopoint();
-  foreach(var_0B in var_09) {
+  var_9 = scripts\sp\utility::maymovefrompointtopoint();
+  foreach(var_0B in var_9) {
     var_0C = 400;
     var_0D = 370;
     if(isDefined(var_0B.script_team) && var_0B.script_team == "allies") {
@@ -157,8 +157,8 @@ func_DE0D() {
     var_0E = distance(self.origin, var_0B.origin);
     var_0E = 0;
     if(var_0E <= 25000) {
-      var_06 = var_0E / 250 * 100;
-      var_0C = var_0C - var_06 * var_0D;
+      var_6 = var_0E / 250 * 100;
+      var_0C = var_0C - var_6 * var_0D;
       if(getdvarint("barrel_debug")) {
         iprintln("BARREL DID " + var_0C + " TO VEH");
       }
@@ -181,8 +181,8 @@ func_DE0D() {
 
     var_13 = distance(self.origin, var_12.origin);
     if(var_13 <= 250) {
-      var_06 = var_13 / 250;
-      var_0C = var_0C - var_06 * var_0D;
+      var_6 = var_13 / 250;
+      var_0C = var_0C - var_6 * var_0D;
       if(getdvarint("barrel_debug")) {
         iprintln("BARREL DID " + var_0C + " TO AI");
       }
@@ -193,9 +193,9 @@ func_DE0D() {
 
   var_15 = distance(self.origin, level.player.origin);
   if(var_15 <= 350) {
-    var_06 = var_15 / 350;
+    var_6 = var_15 / 350;
     var_0D = 420;
-    var_0C = 420 - var_06 * var_0D;
+    var_0C = 420 - var_6 * var_0D;
     if(getdvarint("barrel_debug")) {
       iprintln("BARREL DID " + var_0C + " TO PLAYER");
     }
@@ -234,17 +234,17 @@ func_DE0D() {
   }
 }
 
-func_50B2(param_00) {
-  wait(param_00);
+func_50B2(var_0) {
+  wait(var_0);
   if(isDefined(self)) {
     self delete();
   }
 }
 
-func_DE0E(param_00, param_01, param_02) {
+func_DE0E(var_0, var_1, var_2) {
   self endon("barrel_death");
   self endon("barrel_delete");
-  wait(param_02);
+  wait(var_2);
   if(!isDefined(self)) {
     return;
   }
@@ -253,16 +253,16 @@ func_DE0E(param_00, param_01, param_02) {
     return;
   }
 
-  var_03 = 95;
-  var_04 = 340;
-  if(param_01 <= 90) {
-    var_05 = 20;
-    var_06 = 90 - param_01 / var_04;
-    var_07 = 70 + var_06 * var_05;
+  var_3 = 95;
+  var_4 = 340;
+  if(var_1 <= 90) {
+    var_5 = 20;
+    var_6 = 90 - var_1 / var_4;
+    var_7 = 70 + var_6 * var_5;
   } else {
-    var_06 = var_07 - var_03 / var_07;
-    var_07 = var_07 * var_04;
+    var_6 = var_7 - var_3 / var_7;
+    var_7 = var_7 * var_4;
   }
 
-  self notify("damage", var_07);
+  self notify("damage", var_7);
 }

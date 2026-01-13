@@ -8,9 +8,9 @@ func_200A() {
   level._effect["impact_shock"] = loadfx("vfx\iw7\core\impact\custom\vfx_imp_cstm_antigrav_barrel.vfx");
   level._effect["fuse_shock"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_barrel_buildup.vfx");
   level._effect["antigrav_explosion"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_barrel_blow.vfx");
-  var_00 = getEntArray("phys_antigrav_destructible", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread func_2007();
+  var_0 = getEntArray("phys_antigrav_destructible", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread func_2007();
   }
 }
 
@@ -19,86 +19,86 @@ func_2007() {
   self endon("barrel_delete");
   lib_0E1D::func_2840("antigrav", 120, 350, 9100, 15000, 80, 28);
   thread func_2008();
-  var_00 = 3;
-  var_01 = 0;
-  var_02 = 120;
-  var_03 = 0;
-  var_04 = 0;
+  var_0 = 3;
+  var_1 = 0;
+  var_2 = 120;
+  var_3 = 0;
+  var_4 = 0;
   for(;;) {
-    self waittill("damage", var_05, var_06, var_07, var_08, var_09, var_0A, var_0B, var_0C, var_0D, var_0E);
-    if(isDefined(var_06) && isai(var_06)) {
+    self waittill("damage", var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E);
+    if(isDefined(var_6) && isai(var_6)) {
       continue;
     }
 
-    if(isDefined(var_06) && isDefined(var_06.var_9D62)) {
+    if(isDefined(var_6) && isDefined(var_6.var_9D62)) {
       continue;
     }
 
     if(isDefined(var_0E) && scripts\engine\utility::weaponclass(var_0E) == "sniper") {
-      var_05 = 999999;
-      var_00 = 0;
+      var_5 = 999999;
+      var_0 = 0;
     }
 
-    var_02 = int(var_02 - var_05);
-    if(var_02 <= 0 && !isDefined(self.var_C528)) {
-      var_02 = 50;
+    var_2 = int(var_2 - var_5);
+    if(var_2 <= 0 && !isDefined(self.var_C528)) {
+      var_2 = 50;
     }
 
-    if(var_02 <= 0) {
+    if(var_2 <= 0) {
       break;
     }
 
-    self.var_2836 = var_02;
-    if(var_02 <= 50) {
-      if(!var_01) {
-        if(!var_04) {
-          var_04 = 1;
+    self.var_2836 = var_2;
+    if(var_2 <= 50) {
+      if(!var_1) {
+        if(!var_4) {
+          var_4 = 1;
           if(soundexists("antigrav_battery_damaged_warning_lp")) {
             thread scripts\sp\utility::play_loop_sound_on_tag("antigrav_battery_damaged_warning_lp", "tag_origin", 1, 1);
           }
         }
 
         playFXOnTag(scripts\engine\utility::getfx("fuse_shock"), self, "tag_origin");
-        var_01 = 1;
+        var_1 = 1;
         self.var_C528 = 1;
       }
 
-      var_0F = var_02 / 50;
-      var_00 = var_00 * var_0F;
-      thread lib_0E1D::func_2835(var_00);
+      var_0F = var_2 / 50;
+      var_0 = var_0 * var_0F;
+      thread lib_0E1D::func_2835(var_0);
     }
 
-    if(isDefined(var_07)) {
-      var_10 = length(var_07);
+    if(isDefined(var_7)) {
+      var_10 = length(var_7);
       if(var_10 > 20) {
-        var_11 = vectornormalize(var_07);
+        var_11 = vectornormalize(var_7);
         var_12 = 20;
-        if(isDefined(var_09) && var_09 == "MOD_IMPACT") {
+        if(isDefined(var_9) && var_9 == "MOD_IMPACT") {
           var_12 = 3;
         }
 
-        var_07 = var_11 * var_12;
+        var_7 = var_11 * var_12;
       }
 
-      self physicslaunchserver(var_08, var_07 * 1000);
+      self physicslaunchserver(var_8, var_7 * 1000);
     }
 
-    if(!isDefined(var_09)) {
+    if(!isDefined(var_9)) {
       continue;
     }
 
-    var_13 = strtok(var_09, "_");
+    var_13 = strtok(var_9, "_");
     if(!scripts\engine\utility::array_contains(var_13, "BULLET")) {
       continue;
     }
 
-    var_14 = scripts\engine\utility::spawn_tag_origin(var_08);
-    var_15 = vectornormalize(self.origin - var_08);
+    var_14 = scripts\engine\utility::spawn_tag_origin(var_8);
+    var_15 = vectornormalize(self.origin - var_8);
     var_16 = vectortoangles(var_15 * -1);
     var_14.angles = scripts\engine\utility::flat_angle(var_16);
     var_14 linkto(self);
-    if(!var_03) {
-      var_03 = 1;
+    if(!var_3) {
+      var_3 = 1;
       if(soundexists("antigrav_battery_damaged_lp")) {
         var_14 thread scripts\sp\utility::play_loop_sound_on_tag("antigrav_battery_damaged_lp", "tag_origin", 1, 1);
       }
@@ -123,27 +123,27 @@ func_2008() {
   thread lib_0E1D::func_2831(350, self.origin);
   thread lib_0E21::func_200B();
   thread scripts\sp\detonategrenades::func_DBDB(self.origin);
-  var_00 = 0.3;
-  var_01 = sortbydistance(level.var_CAF7, self.origin);
-  foreach(var_03 in var_01) {
-    if(var_03 == self) {
+  var_0 = 0.3;
+  var_1 = sortbydistance(level.var_CAF7, self.origin);
+  foreach(var_3 in var_1) {
+    if(var_3 == self) {
       continue;
     }
 
-    var_04 = distance(self.origin, var_03.origin);
-    if(var_04 > self.var_CAF6) {
+    var_4 = distance(self.origin, var_3.origin);
+    if(var_4 > self.var_CAF6) {
       continue;
     }
 
-    var_05 = self.var_CAF6 - var_04;
-    var_06 = var_05 / self.var_CAF6;
-    var_07 = var_00 * var_06;
-    if(var_04 <= self.var_CAF6) {
-      var_03 thread lib_0E1D::func_2837(self.origin, var_04, var_07);
+    var_5 = self.var_CAF6 - var_4;
+    var_6 = var_5 / self.var_CAF6;
+    var_7 = var_0 * var_6;
+    if(var_4 <= self.var_CAF6) {
+      var_3 thread lib_0E1D::func_2837(self.origin, var_4, var_7);
     }
 
-    if(var_04 <= 340) {
-      var_03 thread func_2009(self.origin, var_04, var_07);
+    if(var_4 <= 340) {
+      var_3 thread func_2009(self.origin, var_4, var_7);
     }
   }
 
@@ -169,10 +169,10 @@ func_2008() {
   }
 }
 
-func_2009(param_00, param_01, param_02) {
+func_2009(var_0, var_1, var_2) {
   self endon("barrel_death");
   self endon("barrel_delete");
-  wait(param_02);
+  wait(var_2);
   if(!isDefined(self)) {
     return;
   }
@@ -181,16 +181,16 @@ func_2009(param_00, param_01, param_02) {
     return;
   }
 
-  var_03 = 95;
-  var_04 = 340;
-  if(param_01 <= 90) {
-    var_05 = 20;
-    var_06 = 90 - param_01 / var_04;
-    var_07 = 70 + var_06 * var_05;
+  var_3 = 95;
+  var_4 = 340;
+  if(var_1 <= 90) {
+    var_5 = 20;
+    var_6 = 90 - var_1 / var_4;
+    var_7 = 70 + var_6 * var_5;
   } else {
-    var_06 = var_07 - var_03 / var_07;
-    var_07 = var_07 * var_04;
+    var_6 = var_7 - var_3 / var_7;
+    var_7 = var_7 * var_4;
   }
 
-  self notify("damage", var_07);
+  self notify("damage", var_7);
 }

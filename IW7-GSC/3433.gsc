@@ -12,63 +12,63 @@ init() {
   scripts\mp\archetypes\archheavy::func_97D0();
   level.archetypes = [];
   level.archetypeids = [];
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\battleRigTable.csv", var_00, 0);
-    if(!isDefined(var_01) || var_01 == "") {
+    var_1 = tablelookupbyrow("mp\battleRigTable.csv", var_0, 0);
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var_01 = int(var_01);
-    var_02 = tablelookupbyrow("mp\battleRigTable.csv", var_00, 1);
-    level.archetypes[var_01] = var_02;
-    level.archetypeids[var_02] = var_01;
-    var_00++;
+    var_1 = int(var_1);
+    var_2 = tablelookupbyrow("mp\battleRigTable.csv", var_0, 1);
+    level.archetypes[var_1] = var_2;
+    level.archetypeids[var_2] = var_1;
+    var_0++;
   }
 }
 
-removearchetype(param_00) {
-  if(!isDefined(param_00)) {
+removearchetype(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = undefined;
-  switch (param_00) {
+  var_1 = undefined;
+  switch (var_0) {
     case "archetype_assault":
-      var_01 = ::scripts\mp\archetypes\archassault::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archassault::removearchetype;
       break;
 
     case "archetype_heavy":
-      var_01 = ::scripts\mp\archetypes\archheavy::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archheavy::removearchetype;
       break;
 
     case "archetype_scout":
-      var_01 = ::scripts\mp\archetypes\archscout::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archscout::removearchetype;
       break;
 
     case "archetype_assassin":
-      var_01 = ::scripts\mp\archetypes\archassassin::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archassassin::removearchetype;
       break;
 
     case "archetype_engineer":
-      var_01 = ::scripts\mp\archetypes\archengineer::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archengineer::removearchetype;
       break;
 
     case "archetype_sniper":
-      var_01 = ::scripts\mp\archetypes\archsniper::removearchetype;
+      var_1 = ::scripts\mp\archetypes\archsniper::removearchetype;
       break;
 
     default:
       break;
   }
 
-  if(isDefined(var_01)) {
-    self[[var_01]]();
+  if(isDefined(var_1)) {
+    self[[var_1]]();
   }
 }
 
-_allowbattleslide(param_00) {
-  if(param_00) {
+_allowbattleslide(var_0) {
+  if(var_0) {
     scripts\mp\utility::giveperk("specialty_battleslide");
     return;
   }
@@ -76,8 +76,8 @@ _allowbattleslide(param_00) {
   self notify("battleslide_unset");
 }
 
-func_1170(param_00) {
-  if(param_00) {
+func_1170(var_0) {
+  if(var_0) {
     scripts\mp\equipment\ground_pound::func_8659();
     return;
   }
@@ -139,14 +139,14 @@ func_139CF() {
   self setscriptablepartstate("teamColorPins", "off", 0);
 }
 
-getrigindexfromarchetyperef(param_00) {
-  if(!isDefined(param_00) || param_00 == "none") {
+getrigindexfromarchetyperef(var_0) {
+  if(!isDefined(var_0) || var_0 == "none") {
     return 0;
   }
 
-  for(var_01 = 0; var_01 < level.archetypes.size; var_01++) {
-    if(level.archetypes[var_01] == param_00) {
-      return var_01;
+  for(var_1 = 0; var_1 < level.archetypes.size; var_1++) {
+    if(level.archetypes[var_1] == var_0) {
+      return var_1;
     }
   }
 

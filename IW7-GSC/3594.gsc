@@ -10,40 +10,40 @@ func_13430() {
   level endon("game_ended");
   self endon("end_explode");
   self.triggerportableradarping endon("disconnect");
-  self waittill("explode", var_00);
-  func_10E0B(var_00, self.triggerportableradarping);
+  self waittill("explode", var_0);
+  func_10E0B(var_0, self.triggerportableradarping);
 }
 
-func_10E0B(param_00, param_01) {
-  var_02 = [];
-  var_03 = scripts\mp\utility::getotherteam(param_01.team);
-  var_02 = scripts\mp\utility::clearscrambler(param_00, 256);
-  if(var_02.size > 0) {
-    foreach(var_05 in var_02) {
-      if(!isagent(var_05)) {
-        if(var_05.team == var_03 || var_05 == param_01) {
-          var_06 = func_13431(var_02, var_05, self, param_00);
-          if(!var_06) {
+func_10E0B(var_0, var_1) {
+  var_2 = [];
+  var_3 = scripts\mp\utility::getotherteam(var_1.team);
+  var_2 = scripts\mp\utility::clearscrambler(var_0, 256);
+  if(var_2.size > 0) {
+    foreach(var_5 in var_2) {
+      if(!isagent(var_5)) {
+        if(var_5.team == var_3 || var_5 == var_1) {
+          var_6 = func_13431(var_2, var_5, self, var_0);
+          if(!var_6) {
             continue;
           }
 
-          var_05 thread func_5AE9(param_01, var_03);
+          var_5 thread func_5AE9(var_1, var_3);
         }
       }
     }
   }
 }
 
-func_13431(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\engine\utility::array_add_safe(param_00, param_02);
-  if(!scripts\common\trace::ray_trace_passed(param_03, param_01.origin + (0, 0, 32), var_04)) {
+func_13431(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::array_add_safe(var_0, var_2);
+  if(!scripts\common\trace::ray_trace_passed(var_3, var_1.origin + (0, 0, 32), var_4)) {
     return 0;
   }
 
   return 1;
 }
 
-func_5AE9(param_00, param_01) {
+func_5AE9(var_0, var_1) {
   thread func_13BA1();
   if(isDefined(self.var_8C3B) && self.var_8C3B) {
     scripts\mp\utility::removeperk("specialty_block_health_regen");
@@ -55,21 +55,21 @@ func_5AE9(param_00, param_01) {
   self endon("disconnect");
   self endon("virus_complete");
   self.var_8C3B = 1;
-  var_02 = 10;
-  var_03 = 3;
+  var_2 = 10;
+  var_3 = 3;
   scripts\mp\utility::giveperk("specialty_block_health_regen");
   self iprintlnbold("Systems infected by Virus!");
   thread func_D572();
   thread func_D573();
-  self dodamage(50, self.origin, param_00, undefined, "MOD_EXPLOSIVE", "virus_grenade_mp");
-  while(var_03 > 0) {
+  self dodamage(50, self.origin, var_0, undefined, "MOD_EXPLOSIVE", "virus_grenade_mp");
+  while(var_3 > 0) {
     playFX(scripts\engine\utility::getfx("vfx_virus_active_3rd_person"), self.origin + (0, 0, 32));
     wait(0.5);
-    var_03 = var_03 - 0.5;
-    func_10AA5(param_00, param_01);
+    var_3 = var_3 - 0.5;
+    func_10AA5(var_0, var_1);
   }
 
-  wait(var_02);
+  wait(var_2);
   self iprintlnbold("Virus purged, rebooting systems...");
   self.var_8C3B = 0;
   scripts\mp\utility::removeperk("specialty_block_health_regen");
@@ -81,10 +81,10 @@ func_D572() {
   self endon("death");
   self endon("disconnect");
   self endon("virus_complete");
-  var_00 = anglesToForward(self.angles);
-  var_01 = anglestoup(self.angles);
+  var_0 = anglesToForward(self.angles);
+  var_1 = anglestoup(self.angles);
   for(;;) {
-    playFX(scripts\engine\utility::getfx("vfx_virus_particles"), self.origin + (0, 0, 32), var_00, var_01);
+    playFX(scripts\engine\utility::getfx("vfx_virus_particles"), self.origin + (0, 0, 32), var_0, var_1);
     wait(0.1);
   }
 }
@@ -94,28 +94,28 @@ func_D573() {
   self endon("disconnect");
   self endon("virus_complete");
   for(;;) {
-    var_00 = spawnfxforclient(scripts\engine\utility::getfx("vfx_virus_particles_screen"), self getEye(), self);
-    triggerfx(var_00);
-    var_00 thread scripts\mp\utility::deleteonplayerdeathdisconnect(self);
+    var_0 = spawnfxforclient(scripts\engine\utility::getfx("vfx_virus_particles_screen"), self getEye(), self);
+    triggerfx(var_0);
+    var_0 thread scripts\mp\utility::deleteonplayerdeathdisconnect(self);
     wait(0.2);
-    var_00 delete();
+    var_0 delete();
   }
 }
 
-func_10AA5(param_00, param_01) {
-  var_02 = self.origin + (0, 0, 32);
-  var_03 = scripts\mp\utility::clearscrambler(var_02, 256);
-  if(var_03.size > 0) {
-    foreach(var_05 in var_03) {
-      if(!isagent(var_05)) {
-        if(var_05.team == param_01) {
-          if((isDefined(var_05.var_8C3B) && !var_05.var_8C3B) || !isDefined(var_05.var_8C3B)) {
-            var_06 = func_13431(var_03, var_05, self, var_02);
-            if(!var_06) {
+func_10AA5(var_0, var_1) {
+  var_2 = self.origin + (0, 0, 32);
+  var_3 = scripts\mp\utility::clearscrambler(var_2, 256);
+  if(var_3.size > 0) {
+    foreach(var_5 in var_3) {
+      if(!isagent(var_5)) {
+        if(var_5.team == var_1) {
+          if((isDefined(var_5.var_8C3B) && !var_5.var_8C3B) || !isDefined(var_5.var_8C3B)) {
+            var_6 = func_13431(var_3, var_5, self, var_2);
+            if(!var_6) {
               continue;
             }
 
-            var_05 thread func_5AE9(param_00, param_01);
+            var_5 thread func_5AE9(var_0, var_1);
           }
         }
       }

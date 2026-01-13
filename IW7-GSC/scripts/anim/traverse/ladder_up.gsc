@@ -13,26 +13,26 @@ main() {
   scripts\anim\utility::func_12E5F();
   self endon("killanimscript");
   self _meth_83C4("noclip");
-  var_00 = % ladder_climbup;
-  var_01 = % ladder_climboff;
-  var_02 = self getspectatepoint();
-  self orientmode("face angle", var_02.angles[1]);
-  var_03 = 1;
+  var_0 = % ladder_climbup;
+  var_1 = % ladder_climboff;
+  var_2 = self getspectatepoint();
+  self orientmode("face angle", var_2.angles[1]);
+  var_3 = 1;
   if(isDefined(self.moveplaybackrate)) {
-    var_03 = self.moveplaybackrate;
+    var_3 = self.moveplaybackrate;
   }
 
-  self _meth_82E4("climbanim", var_00, % body, 1, 0.1, var_03);
-  var_04 = getmovedelta(var_01, 0, 1);
-  var_05 = self _meth_8145();
-  var_06 = var_05.origin - var_04 + (0, 0, 1);
-  var_07 = getmovedelta(var_00, 0, 1);
-  var_08 = var_07[2] * var_03 / getanimlength(var_00);
-  var_09 = var_06[2] - self.origin[2] / var_08;
-  if(var_09 > 0) {
+  self _meth_82E4("climbanim", var_0, % body, 1, 0.1, var_3);
+  var_4 = getmovedelta(var_1, 0, 1);
+  var_5 = self _meth_8145();
+  var_6 = var_5.origin - var_4 + (0, 0, 1);
+  var_7 = getmovedelta(var_0, 0, 1);
+  var_8 = var_7[2] * var_3 / getanimlength(var_0);
+  var_9 = var_6[2] - self.origin[2] / var_8;
+  if(var_9 > 0) {
     self.allowpain = 1;
-    scripts\anim\notetracks::donotetracksfortime(var_09, "climbanim");
-    self _meth_82E4("climbanim", var_01, % body, 1, 0.1, var_03);
+    scripts\anim\notetracks::donotetracksfortime(var_9, "climbanim");
+    self _meth_82E4("climbanim", var_1, % body, 1, 0.1, var_3);
     scripts\anim\shared::donotetracks("climbanim");
   }
 

@@ -19,14 +19,14 @@ watchweaponchange() {
   }
 
   self endon("death");
-  var_00 = self getcurrentweapon();
-  if(func_13BF6(var_00)) {
+  var_0 = self getcurrentweapon();
+  if(func_13BF6(var_0)) {
     thread func_11776();
   }
 
   for(;;) {
-    self waittill("weapon_change", var_01);
-    if(func_13BF6(var_01)) {
+    self waittill("weapon_change", var_1);
+    if(func_13BF6(var_1)) {
       thread func_11776();
       continue;
     }
@@ -39,13 +39,13 @@ func_11776() {
   self endon("death");
   self notify("acogThermalTracker");
   self endon("acogThermalTracker");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = var_00;
-    var_00 = self getweaponrankinfominxp();
-    if(func_12998(var_00, var_01)) {
+    var_1 = var_0;
+    var_0 = self getweaponrankinfominxp();
+    if(func_12998(var_0, var_1)) {
       func_11775();
-    } else if(func_12997(var_00, var_01)) {
+    } else if(func_12997(var_0, var_1)) {
       func_11774();
     }
 
@@ -53,24 +53,24 @@ func_11776() {
   }
 }
 
-func_12998(param_00, param_01) {
-  if(param_00 <= param_01) {
+func_12998(var_0, var_1) {
+  if(var_0 <= var_1) {
     return 0;
   }
 
-  if(param_00 <= 0.65) {
+  if(var_0 <= 0.65) {
     return 0;
   }
 
   return !isDefined(self.var_9C1F);
 }
 
-func_12997(param_00, param_01) {
-  if(param_00 >= param_01) {
+func_12997(var_0, var_1) {
+  if(var_0 >= var_1) {
     return 0;
   }
 
-  if(param_00 >= 0.8) {
+  if(var_0 >= 0.8) {
     return 0;
   }
 
@@ -79,52 +79,52 @@ func_12997(param_00, param_01) {
 
 func_11775() {
   self.var_9C1F = 1;
-  var_00 = getaiarray("allies");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.var_8BB5)) {
+  var_0 = getaiarray("allies");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.var_8BB5)) {
       continue;
     }
 
-    var_02.var_8BB5 = 1;
-    var_02 thread func_B03E(self.unique_id);
+    var_2.var_8BB5 = 1;
+    var_2 thread func_B03E(self.unique_id);
   }
 }
 
 func_11774() {
   self.var_9C1F = undefined;
   level notify("thermal_fx_off" + self.unique_id);
-  var_00 = getaiarray("allies");
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_00[var_01].var_8BB5 = undefined;
+  var_0 = getaiarray("allies");
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_0[var_1].var_8BB5 = undefined;
   }
 }
 
-func_13BF6(param_00) {
-  if(!isDefined(param_00)) {
+func_13BF6(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(param_00 == "none") {
+  if(var_0 == "none") {
     return 0;
   }
 
-  if(weaponhasthermalscope(param_00)) {
+  if(weaponhasthermalscope(var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-func_B03E(param_00, param_01) {
+func_B03E(var_0, var_1) {
   if(isDefined(self.var_8B95)) {
     return;
   }
 
-  level endon("thermal_fx_off" + param_00);
+  level endon("thermal_fx_off" + var_0);
   self endon("death");
   for(;;) {
-    if(isDefined(param_01)) {
-      playfxontagforclients(level.var_73F8, self, "J_Spine4", param_01);
+    if(isDefined(var_1)) {
+      playfxontagforclients(level.var_73F8, self, "J_Spine4", var_1);
     } else {
       playFXOnTag(level.var_73F8, self, "J_Spine4");
     }

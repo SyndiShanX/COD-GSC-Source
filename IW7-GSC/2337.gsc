@@ -9,8 +9,8 @@ main() {
   self setModel("parts_flightsuit");
   self attach("head_sdf_hvt", "", 1);
   self.headmodel = "head_sdf_hvt";
-  self.func_1FEC = "generic_human";
-  self.func_1FA8 = "soldier";
+  self.var_1FEC = "generic_human";
+  self.var_1FA8 = "soldier";
   self.voice = "unitednations";
   self give_explosive_touch_on_revived("vestlight");
 

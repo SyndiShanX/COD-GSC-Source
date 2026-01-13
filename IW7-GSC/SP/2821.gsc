@@ -23,9 +23,9 @@ func_1E6C() {
   }
 }
 
-func_B8CE(param_00) {
-  var_01 = func_12F49();
-  func_F230(param_00, var_01);
+func_B8CE(var_0) {
+  var_1 = func_12F49();
+  func_F230(var_0, var_1);
 }
 
 func_D37D() {
@@ -33,34 +33,34 @@ func_D37D() {
   setdvar("scr_analytics_playerJustDied", 1);
 }
 
-func_F230(param_00, param_01) {
+func_F230(var_0, var_1) {
   if(!isDefined(level.analytics)) {
     return;
   }
 
-  var_02 = param_01 - level.analytics.var_B8D3;
-  var_03 = func_7E73();
-  self _meth_84C9(param_00, int(var_02), level.analytics.var_10DB5, var_03);
+  var_2 = var_1 - level.analytics.var_B8D3;
+  var_3 = func_7E73();
+  self _meth_84C9(var_0, int(var_2), level.analytics.var_10DB5, var_3);
 }
 
 func_12F49() {
-  var_00 = level.player _meth_84C6("totalGameplayTime");
-  var_01 = int(gettime() - getdvarint("scr_analytics_playerStartTime") / 1000);
-  if(var_01 > 0) {
-    var_00 = var_00 + var_01;
-    level.player _meth_84C7("totalGameplayTime", var_00);
+  var_0 = level.player _meth_84C6("totalGameplayTime");
+  var_1 = int(gettime() - getdvarint("scr_analytics_playerStartTime") / 1000);
+  if(var_1 > 0) {
+    var_0 = var_0 + var_1;
+    level.player _meth_84C7("totalGameplayTime", var_0);
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_7E73() {
-  var_00 = getdvarint("g_gameskill") + 1;
+  var_0 = getdvarint("g_gameskill") + 1;
   if(scripts\sp\utility::func_93A6()) {
-    var_00 = 5;
+    var_0 = 5;
   } else if(scripts\sp\utility::func_93AB()) {
-    var_00 = 6;
+    var_0 = 6;
   }
 
-  return var_00;
+  return var_0;
 }

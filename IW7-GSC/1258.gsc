@@ -23,16 +23,16 @@ main() {
   self.var_8E1A = level.var_7649["iw7\core\human\helmet_sdf_army_broken"];
   if(issentient(self)) {
     self _meth_849A();
-    var_00 = [];
-    var_00["helmet"] = spawnStruct();
-    var_00["helmet"].var_B4B8 = 9999;
-    var_00["helmet"].partnerheli = [];
-    var_00["helmet"].partnerheli["helmet"] = spawnStruct();
-    var_00["helmet"].partnerheli["helmet"].maxhealth = 50;
-    var_00["helmet"].partnerheli["helmet"].hitloc = "helmet";
-    var_00["helmet"].partnerheli["helmet"].var_4D6F = "j_helmet";
+    var_0 = [];
+    var_0["helmet"] = spawnStruct();
+    var_0["helmet"].var_B4B8 = 9999;
+    var_0["helmet"].partnerheli = [];
+    var_0["helmet"].partnerheli["helmet"] = spawnStruct();
+    var_0["helmet"].partnerheli["helmet"].maxhealth = 50;
+    var_0["helmet"].partnerheli["helmet"].hitloc = "helmet";
+    var_0["helmet"].partnerheli["helmet"].var_4D6F = "j_helmet";
     self _meth_849B("helmet", 9999, "helmet", 50, "helmet", "j_helmet");
-    self.var_4D5D = var_00;
+    self.var_4D5D = var_0;
   }
 
   self glinton(#animtree);

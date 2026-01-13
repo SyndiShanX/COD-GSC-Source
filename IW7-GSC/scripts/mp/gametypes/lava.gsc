@@ -71,10 +71,10 @@ onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var_00 = game["attackers"];
-    var_01 = game["defenders"];
-    game["attackers"] = var_01;
-    game["defenders"] = var_00;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_LAVA");
@@ -90,8 +90,8 @@ onstartgametype() {
   scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_LAVA_HINT");
   scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_LAVA_HINT");
   initspawns();
-  var_02[0] = level.gametype;
-  scripts\mp\gameobjects::main(var_02);
+  var_2[0] = level.gametype;
+  scripts\mp\gameobjects::main(var_2);
 }
 
 initspawns() {
@@ -107,49 +107,49 @@ initspawns() {
 }
 
 getspawnpoint() {
-  var_00 = self.pers["team"];
+  var_0 = self.pers["team"];
   if(game["switchedsides"]) {
-    var_00 = scripts\mp\utility::getotherteam(var_00);
+    var_0 = scripts\mp\utility::getotherteam(var_0);
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
-    var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_02);
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_2);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_2);
   }
 
-  return var_02;
+  return var_2;
 }
 
-onsuicidedeath(param_00) {
-  var_01 = scripts\mp\rank::getscoreinfovalue("score_increment");
-  level scripts\mp\gamescore::giveteamscoreforobjective(scripts\mp\utility::getotherteam(param_00.pers["team"]), var_01, 0);
+onsuicidedeath(var_0) {
+  var_1 = scripts\mp\rank::getscoreinfovalue("score_increment");
+  level scripts\mp\gamescore::giveteamscoreforobjective(scripts\mp\utility::getotherteam(var_0.pers["team"]), var_1, 0);
 }
 
-onnormaldeath(param_00, param_01, param_02, param_03, param_04) {
-  scripts\mp\gametypes\common::onnormaldeath(param_00, param_01, param_02, param_03, param_04);
+onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::onnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 ontimelimit() {
   if(game["status"] == "overtime") {
-    var_00 = "forfeit";
+    var_0 = "forfeit";
   } else if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
-    var_00 = "overtime";
+    var_0 = "overtime";
   } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
-    var_00 = "axis";
+    var_0 = "axis";
   } else {
-    var_00 = "allies";
+    var_0 = "allies";
   }
 
-  thread scripts\mp\gamelogic::endgame(var_00, game["end_reason"]["time_limit_reached"]);
+  thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["time_limit_reached"]);
 }
 
 watchplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 watchplayeronground();
+    level waittill("connected", var_0);
+    var_0 watchplayeronground();
   }
 }
 

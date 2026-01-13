@@ -4,8 +4,8 @@
  * Script: scripts\asm\crab_brute\crab_brute_asm.gsc
 *****************************************************/
 
-asminit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+asminit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
   self.var_71D0 = ::shouldbruteplaypainanim;
 }
 
@@ -17,8 +17,8 @@ shouldbruteplaypainanim() {
   return scripts\asm\zombie\zombie::func_1004F();
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "flash":
     case "summon":
     case "tired":
@@ -32,8 +32,8 @@ isvalidaction(param_00) {
   return 0;
 }
 
-setaction(param_00) {
-  self.requested_action = param_00;
+setaction(var_0) {
+  self.requested_action = var_0;
   self.current_action = undefined;
 }
 
@@ -42,52 +42,52 @@ clearaction() {
   self.current_action = undefined;
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-playanimandlookatenemy(param_00, param_01, param_02, param_03) {
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, scripts\mp\agents\crab_brute\crab_brute_agent::getenemy());
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 1);
+playanimandlookatenemy(var_0, var_1, var_2, var_3) {
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, scripts\mp\agents\crab_brute\crab_brute_agent::getenemy());
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 1);
 }
 
-isanimdone(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "end")) {
+isanimdone(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "early_end")) {
+  if(scripts\asm\asm::func_232B(var_1, "early_end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "finish_early")) {
+  if(scripts\asm\asm::func_232B(var_1, "finish_early")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "code_move")) {
+  if(scripts\asm\asm::func_232B(var_1, "code_move")) {
     return 1;
   }
 
   return 0;
 }
 
-summonnotehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+summonnotehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "flash":
       dosummon();
       break;
   }
 }
 
-crabbrutenotehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+crabbrutenotehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "flash":
       doflash();
       break;
 
     case "fx_playfxontag, vfx\iw7\levels\cp_town\crog\vfx_brute_burrow_down.vfx, tag_origin":
-      thread starting_burrow_sfx(param_01);
+      thread starting_burrow_sfx(var_1);
       break;
 
     case "fx_playfxontag, vfx\iw7\levels\cp_town\crog\vfx_brute_flash_build.vfx, j_lure_5":
@@ -96,10 +96,10 @@ crabbrutenotehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-starting_burrow_sfx(param_00) {
-  if(param_00 == "burrow_intro") {
+starting_burrow_sfx(var_0) {
+  if(var_0 == "burrow_intro") {
     thread scripts\engine\utility::play_sound_in_space("brute_burrow_in_ground", self.origin + (0, 0, 30));
-    var_01 = 1;
+    var_1 = 1;
   }
 }
 
@@ -107,8 +107,8 @@ starting_flash_sfx() {
   thread scripts\engine\utility::play_sound_in_space("brute_crog_build_up_to_flash", self.origin + (0, 0, 80));
 }
 
-dosummonfromfakecrabboss(param_00) {
-  self.spawnposarray = param_00;
+dosummonfromfakecrabboss(var_0) {
+  self.spawnposarray = var_0;
   self.numofspawnrequested = self.spawnposarray.size;
   thread scripts\asm\crab_boss\crab_boss_asm::dospawnsovertime("none", 0);
 }
@@ -121,43 +121,43 @@ dosummon() {
 }
 
 doflash() {
-  var_00 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
-  foreach(var_02 in level.players) {
-    if(scripts\mp\agents\crab_brute\crab_brute_agent::shouldignoreenemy(var_02)) {
+  var_0 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
+  foreach(var_2 in level.players) {
+    if(scripts\mp\agents\crab_brute\crab_brute_agent::shouldignoreenemy(var_2)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
+    if(scripts\engine\utility::istrue(var_2.isfasttravelling)) {
       continue;
     }
 
-    var_03 = distance2dsquared(self.origin, var_02.origin);
-    if(var_03 > var_00.flash_radius_sq) {
+    var_3 = distance2dsquared(self.origin, var_2.origin);
+    if(var_3 > var_0.flash_radius_sq) {
       continue;
     }
 
-    var_04 = var_02 getplayerangles();
-    var_05 = anglesToForward(var_04);
-    var_06 = vectornormalize(self.origin - var_02.origin * (1, 1, 0));
-    var_07 = vectordot(var_05, var_06);
-    if(var_07 < var_00.flash_dot) {
+    var_4 = var_2 getplayerangles();
+    var_5 = anglesToForward(var_4);
+    var_6 = vectornormalize(self.origin - var_2.origin * (1, 1, 0));
+    var_7 = vectordot(var_5, var_6);
+    if(var_7 < var_0.flash_dot) {
       continue;
     }
 
-    var_08 = scripts\common\trace::create_default_contents(1);
-    if(scripts\common\trace::ray_trace_passed(self getEye(), var_02 getEye(), var_02, var_08)) {
-      var_02 func_20CA(var_00.flash_duration, var_00.flash_rumble_duration);
+    var_8 = scripts\common\trace::create_default_contents(1);
+    if(scripts\common\trace::ray_trace_passed(self getEye(), var_2 getEye(), var_2, var_8)) {
+      var_2 func_20CA(var_0.flash_duration, var_0.flash_rumble_duration);
     }
   }
 }
 
-func_20CA(param_00, param_01) {
-  if(!isDefined(self.var_6EC8) || param_00 > self.var_6EC8) {
-    self.var_6EC8 = param_00;
+func_20CA(var_0, var_1) {
+  if(!isDefined(self.var_6EC8) || var_0 > self.var_6EC8) {
+    self.var_6EC8 = var_0;
   }
 
-  if(!isDefined(self.var_6EDB) || param_01 > self.var_6EDB) {
-    self.var_6EDB = param_01;
+  if(!isDefined(self.var_6EDB) || var_1 > self.var_6EDB) {
+    self.var_6EDB = var_1;
   }
 
   wait(0.05);
@@ -174,26 +174,26 @@ func_20CA(param_00, param_01) {
   self.var_6EDB = undefined;
 }
 
-func_6EDC(param_00) {
+func_6EDC(var_0) {
   self endon("stop_monitoring_flash");
   self endon("flash_rumble_loop");
   self notify("flash_rumble_loop");
-  var_01 = gettime() + param_00 * 1000;
-  while(gettime() < var_01) {
+  var_1 = gettime() + var_0 * 1000;
+  while(gettime() < var_1) {
     self playrumbleonentity("damage_heavy");
     wait(0.05);
   }
 }
 
-meleenotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "hit") {
-    var_04 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
-    if(isDefined(var_04)) {
-      if(distancesquared(var_04.origin, self.origin) < -25536) {
-        self notify("attack_hit", var_04);
-        scripts\asm\zombie\melee::domeleedamage(var_04, self.var_B601, "MOD_IMPACT");
+meleenotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "hit") {
+    var_4 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
+    if(isDefined(var_4)) {
+      if(distancesquared(var_4.origin, self.origin) < -25536) {
+        self notify("attack_hit", var_4);
+        scripts\asm\zombie\melee::domeleedamage(var_4, self.var_B601, "MOD_IMPACT");
       } else {
-        self notify("attack_miss", var_04);
+        self notify("attack_miss", var_4);
       }
     }
 
@@ -203,7 +203,7 @@ meleenotehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-shouldabortaction(param_00, param_01, param_02, param_03) {
+shouldabortaction(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.btraversalteleport)) {
     return 0;
   }
@@ -212,8 +212,8 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(isDefined(param_03)) {
-    if(self.requested_action != param_03) {
+  if(isDefined(var_3)) {
+    if(self.requested_action != var_3) {
       return 1;
     }
   }
@@ -221,32 +221,32 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-shoulddoaction(param_00, param_01, param_02, param_03) {
+shoulddoaction(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.requested_action)) {
     return 0;
   }
 
-  if(self.requested_action == param_02) {
-    if(isDefined(self.current_action) && self.current_action == param_02) {
+  if(self.requested_action == var_2) {
+    if(isDefined(self.current_action) && self.current_action == var_2) {
       return 0;
     }
 
-    self.current_action = param_02;
+    self.current_action = var_2;
     return 1;
   }
 
   return 0;
 }
 
-playanimwithplaybackrate(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  if(param_01 == "burrow_loop") {
+playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  if(var_1 == "burrow_loop") {
     thread play_burrow_loop_sfx();
   }
 
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
 play_burrow_loop_sfx() {
@@ -254,68 +254,68 @@ play_burrow_loop_sfx() {
     return;
   }
 
-  var_00 = self gettagorigin("j_lure_5", 1);
-  if(isDefined(var_00)) {
-    self.burrow_loop_obj = spawn("script_origin", var_00);
+  var_0 = self gettagorigin("j_lure_5", 1);
+  if(isDefined(var_0)) {
+    self.burrow_loop_obj = spawn("script_origin", var_0);
     self.burrow_loop_obj linkto(self, "j_lure_5");
     self.burrow_loop_obj playLoopSound("brute_crog_move_underground_lp");
   }
 }
 
-playmeleeattack(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, self.curmeleetarget);
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04);
+playmeleeattack(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
 }
 
-choosemeleeattack(param_00, param_01, param_02) {
-  var_03 = self.curmeleetarget;
-  if(!isDefined(var_03)) {
-    var_03 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
+choosemeleeattack(var_0, var_1, var_2) {
+  var_3 = self.curmeleetarget;
+  if(!isDefined(var_3)) {
+    var_3 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
   }
 
-  var_04 = 0;
-  if(isDefined(var_03)) {
-    var_04 = length(var_03 getvelocity());
+  var_4 = 0;
+  if(isDefined(var_3)) {
+    var_4 = length(var_3 getvelocity());
   }
 
-  if(scripts\asm\asm_bb::bb_moverequested() || var_04 > 0) {
-    var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01, "attack_moving");
+  if(scripts\asm\asm_bb::bb_moverequested() || var_4 > 0) {
+    var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_moving");
   } else {
-    var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_02, "attack");
+    var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_2, "attack");
   }
 
-  return var_05;
+  return var_5;
 }
 
-func_3EE4(param_00, param_01, param_02) {
-  return lib_0F3C::func_3EF4(param_00, param_01, param_02);
+func_3EE4(var_0, var_1, var_2) {
+  return lib_0F3C::func_3EF4(var_0, var_1, var_2);
 }
 
-playmovingpainanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playmovingpainanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(!isDefined(self.vehicle_getspawnerarray) || self pathdisttogoal() < scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata().min_moving_pain_dist) {
-    var_04 = func_3EE4(param_00, "pain_generic", param_03);
+    var_4 = func_3EE4(var_0, "pain_generic", var_3);
     self orientmode("face angle abs", self.angles);
-    scripts\asm\asm_mp::func_2365(param_00, "pain_generic", param_02, var_04, 1);
+    scripts\asm\asm_mp::func_2365(var_0, "pain_generic", var_2, var_4, 1);
     return;
   }
 
-  scripts\asm\asm_mp::func_2364(param_01, param_02, param_03, var_04);
+  scripts\asm\asm_mp::func_2364(var_1, var_2, var_3, var_4);
 }
 
-doteleporthack(param_00, param_01, param_02, param_03) {
-  var_06 = self _meth_8146();
-  self setorigin(var_06, 0);
-  var_06 = getgroundposition(var_06, 15);
+doteleporthack(var_0, var_1, var_2, var_3) {
+  var_6 = self _meth_8146();
+  self setorigin(var_6, 0);
+  var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;
   self notify("traverse_end");
-  scripts\asm\asm::asm_setstate("decide_idle", param_03);
+  scripts\asm\asm::asm_setstate("decide_idle", var_3);
 }
 
-shouldstopshield(param_00, param_01, param_02, param_03) {
-  if(shoulddoshield(param_00, param_01, param_02, param_03)) {
+shouldstopshield(var_0, var_1, var_2, var_3) {
+  if(shoulddoshield(var_0, var_1, var_2, var_3)) {
     return 0;
   }
 
@@ -326,73 +326,73 @@ shouldstopshield(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-shoulddoshield(param_00, param_01, param_02, param_03) {
+shoulddoshield(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-ismyenemyinfrontofme(param_00, param_01) {
-  var_02 = vectornormalize(param_00.origin - self.origin * (1, 1, 0));
-  var_03 = anglesToForward(self.angles);
-  var_04 = vectordot(var_02, var_03);
-  if(var_04 > param_01) {
+ismyenemyinfrontofme(var_0, var_1) {
+  var_2 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_3 = anglesToForward(self.angles);
+  var_4 = vectordot(var_2, var_3);
+  if(var_4 > var_1) {
     return 1;
   }
 
   return 0;
 }
 
-shouldmeleeattackhit(param_00, param_01, param_02) {
-  if(scripts\mp\agents\zombie\zombie_util::func_9DE0(param_00)) {
+shouldmeleeattackhit(var_0, var_1, var_2) {
+  if(scripts\mp\agents\zombie\zombie_util::func_9DE0(var_0)) {
     return 1;
   }
 
-  var_03 = distance2dsquared(param_00.origin, self.origin);
-  if(var_03 > param_01) {
+  var_3 = distance2dsquared(var_0.origin, self.origin);
+  if(var_3 > var_1) {
     return 0;
   }
 
-  if(!ismyenemyinfrontofme(param_00, param_02)) {
+  if(!ismyenemyinfrontofme(var_0, var_2)) {
     return 0;
   }
 
   return 1;
 }
 
-domeleedamageoncontact(param_00, param_01) {
-  self endon(param_00 + "_finished");
+domeleedamageoncontact(var_0, var_1) {
+  self endon(var_0 + "_finished");
   self endon("DoMeleeDamageOnContact_stop");
-  var_02 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
-  var_03 = 0;
-  while(!var_03) {
-    foreach(var_05 in level.players) {
-      if(scripts\mp\agents\crab_brute\crab_brute_agent::shouldignoreenemy(var_05)) {
+  var_2 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
+  var_3 = 0;
+  while(!var_3) {
+    foreach(var_5 in level.players) {
+      if(scripts\mp\agents\crab_brute\crab_brute_agent::shouldignoreenemy(var_5)) {
         continue;
       }
 
-      var_06 = distancesquared(self.origin, var_05.origin);
-      if(var_06 < var_02.charge_attack_stop_facing_enemy_dist_sq) {
+      var_6 = distancesquared(self.origin, var_5.origin);
+      if(var_6 < var_2.charge_attack_stop_facing_enemy_dist_sq) {
         scripts\asm\zombie\melee::func_1106E();
         self ghostlaunched("code_move");
         self orientmode("face angle abs", self.angles);
       }
 
-      if(shouldmeleeattackhit(var_05, var_02.charge_attack_damage_radius_sq, var_02.charge_attack_damage_dot)) {
+      if(shouldmeleeattackhit(var_5, var_2.charge_attack_damage_radius_sq, var_2.charge_attack_damage_dot)) {
         scripts\asm\zombie\melee::func_1106E();
         self ghostlaunched("code_move");
         self orientmode("face angle abs", self.angles);
-        scripts\asm\zombie\melee::domeleedamage(var_05, var_02.charge_attack_damage_amt, "MOD_IMPACT");
+        scripts\asm\zombie\melee::domeleedamage(var_5, var_2.charge_attack_damage_amt, "MOD_IMPACT");
         clearaction();
         self.bchargehit = 1;
-        var_03 = 1;
+        var_3 = 1;
         break;
       } else {
-        var_07 = vectornormalize(var_05.origin - self.origin * (1, 1, 0));
-        var_08 = anglesToForward(self.angles);
-        var_09 = vectordot(var_07, var_08);
-        if(var_09 < var_02.charge_abort_dot) {
+        var_7 = vectornormalize(var_5.origin - self.origin * (1, 1, 0));
+        var_8 = anglesToForward(self.angles);
+        var_9 = vectordot(var_7, var_8);
+        if(var_9 < var_2.charge_abort_dot) {
           self.bchargehit = 0;
           clearaction();
-          var_03 = 1;
+          var_3 = 1;
           break;
         }
       }
@@ -402,53 +402,53 @@ domeleedamageoncontact(param_00, param_01) {
   }
 }
 
-playchargeloop(param_00, param_01, param_02, param_03) {
+playchargeloop(var_0, var_1, var_2, var_3) {
   self.bchargehit = undefined;
   if(isDefined(self.curmeleetarget)) {
-    thread domeleedamageoncontact(param_01, self.curmeleetarget);
-    thread scripts\asm\zombie\melee::func_6A6A(param_01, self.curmeleetarget);
+    thread domeleedamageoncontact(var_1, self.curmeleetarget);
+    thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-choosechargeoutroanim(param_00, param_01, param_02) {
-  var_03 = "charge_miss";
+choosechargeoutroanim(var_0, var_1, var_2) {
+  var_3 = "charge_miss";
   if(scripts\engine\utility::istrue(self.bchargehit)) {
-    var_03 = "charge_hit";
+    var_3 = "charge_hit";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-choosecrabbruteturnanim(param_00, param_01, param_02) {
-  var_03 = undefined;
-  var_04 = abs(self.desiredyaw);
+choosecrabbruteturnanim(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = abs(self.desiredyaw);
   if(self.desiredyaw < 0) {
-    if(var_04 < 67.5) {
-      var_03 = 9;
-    } else if(var_04 < 112.5) {
-      var_03 = 6;
-    } else if(var_04 < 157.5) {
-      var_03 = 3;
+    if(var_4 < 67.5) {
+      var_3 = 9;
+    } else if(var_4 < 112.5) {
+      var_3 = 6;
+    } else if(var_4 < 157.5) {
+      var_3 = 3;
     } else {
-      var_03 = "2r";
+      var_3 = "2r";
     }
   } else if(self.desiredyaw < 67.5) {
-    var_03 = 7;
+    var_3 = 7;
   } else if(self.desiredyaw < 112.5) {
-    var_03 = 4;
+    var_3 = 4;
   } else if(self.desiredyaw < 157.5) {
-    var_03 = 1;
+    var_3 = 1;
   } else {
-    var_03 = "2l";
+    var_3 = "2l";
   }
 
   self.desiredyaw = undefined;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-shouldturn(param_00, param_01, param_02, param_03) {
+shouldturn(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.desiredyaw)) {
     return 0;
   }
@@ -456,44 +456,44 @@ shouldturn(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-shouldcrabbrutestartarrival(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
-  if(!isDefined(var_04)) {
-    return scripts\asm\zombie\zombie::func_10092(param_00, param_01, param_02, param_03);
+shouldcrabbrutestartarrival(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
+  if(!isDefined(var_4)) {
+    return scripts\asm\zombie\zombie::func_10092(var_0, var_1, var_2, var_3);
   }
 
-  var_05 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
-  var_06 = distancesquared(self.origin, var_04.origin);
-  if(var_06 < var_05.min_dist_to_enemy_to_do_arrival_sq) {
+  var_5 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
+  var_6 = distancesquared(self.origin, var_4.origin);
+  if(var_6 < var_5.min_dist_to_enemy_to_do_arrival_sq) {
     return 0;
   }
 
-  return scripts\asm\zombie\zombie::func_10092(param_00, param_01, param_02, param_03);
+  return scripts\asm\zombie\zombie::func_10092(var_0, var_1, var_2, var_3);
 }
 
-playchargeintro(param_00, param_01, param_02, param_03) {
+playchargeintro(var_0, var_1, var_2, var_3) {
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_04 = self getposonpath(50);
-    if(isDefined(var_04)) {
-      var_05 = vectornormalize(var_04 - self.origin) * (1, 1, 0);
-      var_06 = vectortoangles(var_05);
-      self orientmode("face angle abs", var_06);
+    var_4 = self getposonpath(50);
+    if(isDefined(var_4)) {
+      var_5 = vectornormalize(var_4 - self.origin) * (1, 1, 0);
+      var_6 = vectortoangles(var_5);
+      self orientmode("face angle abs", var_6);
     }
   } else if(isDefined(self.curmeleetarget)) {
-    var_05 = vectornormalize(self.curmeleetarget.origin - self.origin) * (1, 1, 0);
-    var_06 = vectortoangles(var_05);
-    self orientmode("face angle abs", var_06);
+    var_5 = vectornormalize(self.curmeleetarget.origin - self.origin) * (1, 1, 0);
+    var_6 = vectortoangles(var_5);
+    self orientmode("face angle abs", var_6);
   }
 
-  return scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  return scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-doburrowoutrodamage(param_00) {
-  self endon(param_00 + "_finished");
+doburrowoutrodamage(var_0) {
+  self endon(var_0 + "_finished");
   thread play_burrow_outro_sfx();
-  var_01 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
-  wait(var_01.burrow_outro_damage_wait_time);
-  radiusdamage(self.origin, var_01.burrow_outro_damage_radius, var_01.burrow_outro_max_damage_amt, var_01.burrow_outro_min_damage_amt, self, "MOD_IMPACT");
+  var_1 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
+  wait(var_1.burrow_outro_damage_wait_time);
+  radiusdamage(self.origin, var_1.burrow_outro_damage_radius, var_1.burrow_outro_max_damage_amt, var_1.burrow_outro_min_damage_amt, self, "MOD_IMPACT");
 }
 
 play_burrow_outro_sfx() {
@@ -512,7 +512,7 @@ stop_burrow_loop() {
   }
 }
 
-playburrowoutro(param_00, param_01, param_02, param_03) {
-  thread doburrowoutrodamage(param_01);
-  return playanimandlookatenemy(param_00, param_01, param_02, param_03);
+playburrowoutro(var_0, var_1, var_2, var_3) {
+  thread doburrowoutrodamage(var_1);
+  return playanimandlookatenemy(var_0, var_1, var_2, var_3);
 }

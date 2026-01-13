@@ -5,21 +5,21 @@
 ************************/
 
 func_1127D() {
-  var_00 = spawnStruct();
-  var_00.trophies = [];
-  var_00.var_1141B = [];
-  var_00.var_1141B[0] = "fx_01_jnt";
-  var_00.var_1141B[1] = "fx_02_jnt";
-  var_00.var_1141B[2] = "fx_03_jnt";
-  var_00.var_1141B[3] = "fx_04_jnt";
-  level.supertrophy = var_00;
+  var_0 = spawnStruct();
+  var_0.trophies = [];
+  var_0.var_1141B = [];
+  var_0.var_1141B[0] = "fx_01_jnt";
+  var_0.var_1141B[1] = "fx_02_jnt";
+  var_0.var_1141B[2] = "fx_03_jnt";
+  var_0.var_1141B[3] = "fx_04_jnt";
+  level.supertrophy = var_0;
 }
 
-func_11296(param_00) {
-  var_01 = self.supertrophies;
-  if(isDefined(var_01)) {
-    foreach(var_03 in var_01) {
-      var_03 thread func_11274();
+func_11296(var_0) {
+  var_1 = self.supertrophies;
+  if(isDefined(var_1)) {
+    foreach(var_3 in var_1) {
+      var_3 thread func_11274();
     }
 
     self.supertrophies = undefined;
@@ -27,7 +27,7 @@ func_11296(param_00) {
 
   if(isDefined(self.var_11293)) {
     self.var_11293 = undefined;
-    func_11276(param_00);
+    func_11276(var_0);
   }
 }
 
@@ -43,17 +43,17 @@ func_11297() {
   return 1;
 }
 
-func_11276(param_00) {
+func_11276(var_0) {
   self notify("superTrophy_end");
-  if(!scripts\mp\utility::istrue(param_00)) {
+  if(!scripts\mp\utility::istrue(var_0)) {
     scripts\mp\utility::func_11DB();
   }
 
   self setscriptablepartstate("killstreak", "neutral", 0);
-  func_11273(param_00);
-  var_01 = self.var_11293;
+  func_11273(var_0);
+  var_1 = self.var_11293;
   self.var_11293 = undefined;
-  return scripts\mp\utility::istrue(var_01);
+  return scripts\mp\utility::istrue(var_1);
 }
 
 func_11274() {
@@ -91,62 +91,62 @@ func_11299() {
   thread func_1129E();
 }
 
-func_11278(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_03;
-  if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, param_00)) {
+func_11278(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_0)) {
     return 0;
   }
 
-  var_05 = scripts\mp\damage::handleapdamage(param_01, param_02, var_05);
-  var_05 = func_1127B(param_01, param_02, var_05);
-  var_05 = supertrophy_handlesuperdamage(param_01, param_02, var_05);
-  var_05 = scripts\mp\supers::modifysuperequipmentdamage(param_00, param_01, param_02, var_05, param_04);
-  return var_05;
+  var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
+  var_5 = func_1127B(var_1, var_2, var_5);
+  var_5 = supertrophy_handlesuperdamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\supers::modifysuperequipmentdamage(var_0, var_1, var_2, var_5, var_4);
+  return var_5;
 }
 
-func_11279(param_00, param_01, param_02, param_03, param_04) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, param_00))) {
-    param_00 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
-    param_00 notify("destroyed_equipment");
+func_11279(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+    var_0 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
+    var_0 notify("destroyed_equipment");
   }
 
-  if(isDefined(param_00) && isplayer(param_00) && param_00 != self.triggerportableradarping) {
-    param_00 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
+  if(isDefined(var_0) && isplayer(var_0) && var_0 != self.triggerportableradarping) {
+    var_0 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
   }
 
   thread func_11274();
 }
 
-func_1127B(param_00, param_01, param_02) {
-  if(param_01 == "MOD_MELEE") {
+func_1127B(var_0, var_1, var_2) {
+  if(var_1 == "MOD_MELEE") {
     return int(ceil(self.maxhealth / 2));
   }
 
-  return param_02;
+  return var_2;
 }
 
-supertrophy_handlesuperdamage(param_00, param_01, param_02) {
-  var_03 = 1;
-  var_04 = getweaponbasename(param_00);
-  if(isDefined(var_04)) {
-    param_00 = var_04;
+supertrophy_handlesuperdamage(var_0, var_1, var_2) {
+  var_3 = 1;
+  var_4 = getweaponbasename(var_0);
+  if(isDefined(var_4)) {
+    var_0 = var_4;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "micro_turret_gun_mp":
-      var_03 = 4;
+      var_3 = 4;
       break;
 
     case "iw7_penetrationrail_mp":
-      var_03 = 2.3;
+      var_3 = 2.3;
       break;
 
     case "iw7_atomizer_mp":
-      var_03 = 1.5;
+      var_3 = 1.5;
       break;
   }
 
-  return int(ceil(var_03 * param_02));
+  return int(ceil(var_3 * var_2));
 }
 
 func_1129D() {
@@ -154,9 +154,9 @@ func_1129D() {
   self endon("superTrophy_createTrophy");
   self endon("superTrophy_end");
   for(;;) {
-    self waittill("equip_deploy_succeeded", var_00, var_01, var_02, var_03);
-    if(var_00 == "deploy_supertrophy_mp") {
-      thread func_11271(var_01, var_02, var_03);
+    self waittill("equip_deploy_succeeded", var_0, var_1, var_2, var_3);
+    if(var_0 == "deploy_supertrophy_mp") {
+      thread func_11271(var_1, var_2, var_3);
       break;
     }
   }
@@ -167,8 +167,8 @@ func_1129B() {
   self endon("superTrophy_createTrophy");
   self endon("superTrophy_end");
   for(;;) {
-    self waittill("equip_deploy_failed", var_00, var_01, var_02, var_03);
-    if(var_00 == "deploy_supertrophy_mp") {
+    self waittill("equip_deploy_failed", var_0, var_1, var_2, var_3);
+    if(var_0 == "deploy_supertrophy_mp") {
       self setweaponammoclip("deploy_supertrophy_mp", 100);
       break;
     }
@@ -203,8 +203,8 @@ func_11272() {
   scripts\mp\utility::func_1C47(0);
 }
 
-func_11273(param_00) {
-  if(!scripts\mp\utility::istrue(param_00)) {
+func_11273(var_0) {
+  if(!scripts\mp\utility::istrue(var_0)) {
     if(scripts\mp\utility::istrue(self.var_11277)) {
       scripts\engine\utility::allow_usability(1);
       scripts\mp\powers::func_D72F();
@@ -215,7 +215,7 @@ func_11273(param_00) {
   self.var_11277 = undefined;
 }
 
-func_11271(param_00, param_01, param_02) {
+func_11271(var_0, var_1, var_2) {
   if(isDefined(self.supertrophy)) {
     self.supertrophy thread func_11274();
   }
@@ -229,78 +229,78 @@ func_11271(param_00, param_01, param_02) {
     self.supertrophies[0] thread func_11274();
   }
 
-  var_03 = spawn("script_model", param_00);
-  var_03.angles = param_01;
-  var_03 setotherent(self);
-  var_03 setModel("super_trophy_mp_wm");
-  var_03 give_player_tickets(1);
-  var_03 _meth_8549();
-  var_03 _meth_8594();
-  var_03.triggerportableradarping = self;
-  var_03.team = var_03.triggerportableradarping.team;
-  var_03.super = "super_supertrophy";
-  var_03.weapon_name = "super_trophy_mp";
-  var_03.planted = 1;
-  var_03.markeduioff = [];
-  var_03.markeduion = [];
-  var_03.var_1E2D = 10;
-  supertrophy_addtoarrays(var_03, self);
-  var_03 thread func_1126D();
-  var_03 thread func_1126E();
-  var_03.killcament = func_1126F(var_03);
-  var_03.var_69DA = supertrophy_createexplosion(var_03);
-  var_04 = scripts\mp\utility::_hasperk("specialty_rugged_eqp");
-  var_05 = scripts\engine\utility::ter_op(var_04, 475, 399);
-  var_06 = scripts\engine\utility::ter_op(var_04, "hitequip", "");
-  var_03 thread scripts\mp\damage::monitordamage(var_05, var_06, ::func_11279, ::func_11278, 0);
-  if(isDefined(param_02)) {
-    var_03 scripts\mp\weapons::explosivehandlemovers(param_02);
+  var_3 = spawn("script_model", var_0);
+  var_3.angles = var_1;
+  var_3 setotherent(self);
+  var_3 setModel("super_trophy_mp_wm");
+  var_3 give_player_tickets(1);
+  var_3 _meth_8549();
+  var_3 _meth_8594();
+  var_3.triggerportableradarping = self;
+  var_3.team = var_3.triggerportableradarping.team;
+  var_3.super = "super_supertrophy";
+  var_3.weapon_name = "super_trophy_mp";
+  var_3.planted = 1;
+  var_3.markeduioff = [];
+  var_3.markeduion = [];
+  var_3.var_1E2D = 10;
+  supertrophy_addtoarrays(var_3, self);
+  var_3 thread func_1126D();
+  var_3 thread func_1126E();
+  var_3.killcament = func_1126F(var_3);
+  var_3.var_69DA = supertrophy_createexplosion(var_3);
+  var_4 = scripts\mp\utility::_hasperk("specialty_rugged_eqp");
+  var_5 = scripts\engine\utility::ter_op(var_4, 475, 399);
+  var_6 = scripts\engine\utility::ter_op(var_4, "hitequip", "");
+  var_3 thread scripts\mp\damage::monitordamage(var_5, var_6, ::func_11279, ::func_11278, 0);
+  if(isDefined(var_2)) {
+    var_3 scripts\mp\weapons::explosivehandlemovers(var_2);
   }
 
-  var_03 thread func_11299();
+  var_3 thread func_11299();
   self.var_11293 = undefined;
   scripts\mp\supers::func_DE3B(9999000);
   level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_trophy", undefined, 0.75);
   scripts\mp\utility::printgameaction("supertrophy placed", self);
 }
 
-func_1126F(param_00) {
-  var_01 = spawn("script_model", param_00.origin + anglestoup(param_00.angles) * 65);
-  var_01.angles = param_00.angles;
-  var_01 setModel("tag_origin");
-  var_01 setscriptmoverkillcam("explosive");
-  var_01 linkto(param_00);
-  var_01 thread supertrophy_cleanuponparentdeath(param_00, 5);
-  return var_01;
+func_1126F(var_0) {
+  var_1 = spawn("script_model", var_0.origin + anglestoup(var_0.angles) * 65);
+  var_1.angles = var_0.angles;
+  var_1 setModel("tag_origin");
+  var_1 setscriptmoverkillcam("explosive");
+  var_1 linkto(var_0);
+  var_1 thread supertrophy_cleanuponparentdeath(var_0, 5);
+  return var_1;
 }
 
-supertrophy_createexplosion(param_00) {
-  var_01 = spawn("script_model", param_00.origin);
-  var_01.killcament = param_00.killcament;
-  var_01.triggerportableradarping = param_00.triggerportableradarping;
-  var_01.team = param_00.team;
-  var_01.super = param_00.super;
-  var_01.weapon_name = param_00.weapon_name;
-  var_01 setotherent(var_01.triggerportableradarping);
-  var_01 setentityowner(var_01.triggerportableradarping);
-  var_01 setModel("super_trophy_mp_explode");
-  var_01.timebypart = [];
-  for(var_02 = 0; var_02 < 4; var_02++) {
-    var_01.timebypart[var_02] = 0;
+supertrophy_createexplosion(var_0) {
+  var_1 = spawn("script_model", var_0.origin);
+  var_1.killcament = var_0.killcament;
+  var_1.triggerportableradarping = var_0.triggerportableradarping;
+  var_1.team = var_0.team;
+  var_1.super = var_0.super;
+  var_1.weapon_name = var_0.weapon_name;
+  var_1 setotherent(var_1.triggerportableradarping);
+  var_1 setentityowner(var_1.triggerportableradarping);
+  var_1 setModel("super_trophy_mp_explode");
+  var_1.timebypart = [];
+  for(var_2 = 0; var_2 < 4; var_2++) {
+    var_1.timebypart[var_2] = 0;
   }
 
-  var_01 thread supertrophy_cleanuponparentdeath(param_00, 0.1);
-  return var_01;
+  var_1 thread supertrophy_cleanuponparentdeath(var_0, 0.1);
+  return var_1;
 }
 
-supertrophy_explode(param_00, param_01) {
-  foreach(var_04, var_03 in self.timebypart) {
-    if(gettime() - var_03 / 1000 > 0.1) {
+supertrophy_explode(var_0, var_1) {
+  foreach(var_4, var_3 in self.timebypart) {
+    if(gettime() - var_3 / 1000 > 0.1) {
       self dontinterpolate();
-      self.origin = param_00;
-      self.angles = param_01;
-      self setscriptablepartstate("explode" + var_04 + 1, "active", 0);
-      self.timebypart[var_04] = gettime();
+      self.origin = var_0;
+      self.angles = var_1;
+      self setscriptablepartstate("explode" + var_4 + 1, "active", 0);
+      self.timebypart[var_4] = gettime();
       return;
     }
   }
@@ -321,42 +321,42 @@ func_1129F() {
     level.mines = [];
   }
 
-  var_00 = scripts\mp\trophy_system::func_12804();
+  var_0 = scripts\mp\trophy_system::func_12804();
   for(;;) {
-    var_01 = [];
-    var_01[0] = level.grenades;
-    var_01[1] = level.missiles;
-    var_01[2] = level.mines;
-    var_02 = scripts\engine\utility::array_combine_multiple(var_01);
-    var_03 = func_1128F();
-    foreach(var_05 in var_02) {
-      if(!isDefined(var_05)) {
+    var_1 = [];
+    var_1[0] = level.grenades;
+    var_1[1] = level.missiles;
+    var_1[2] = level.mines;
+    var_2 = scripts\engine\utility::array_combine_multiple(var_1);
+    var_3 = func_1128F();
+    foreach(var_5 in var_2) {
+      if(!isDefined(var_5)) {
         continue;
       }
 
-      if(scripts\mp\utility::istrue(var_05.exploding)) {
+      if(scripts\mp\utility::istrue(var_5.exploding)) {
         continue;
       }
 
-      if(supertrophy_checkignorelist(var_05)) {
+      if(supertrophy_checkignorelist(var_5)) {
         continue;
       }
 
-      var_06 = var_05.triggerportableradarping;
-      if(!isDefined(var_06) && isDefined(var_05.weapon_name) && weaponclass(var_05.weapon_name) == "grenade") {
-        var_06 = getmissileowner(var_05);
+      var_6 = var_5.triggerportableradarping;
+      if(!isDefined(var_6) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
+        var_6 = getmissileowner(var_5);
       }
 
-      if(isDefined(var_06) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_06))) {
+      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_6))) {
         continue;
       }
 
-      if(distancesquared(var_05.origin, self.origin) > scripts\mp\trophy_system::trophy_modifiedprotectiondistsqr(var_05, 65536)) {
+      if(distancesquared(var_5.origin, self.origin) > scripts\mp\trophy_system::trophy_modifiedprotectiondistsqr(var_5, 65536)) {
         continue;
       }
 
-      var_07 = physics_raycast(var_03, var_05.origin, var_00, [self, var_05], 0, "physicsquery_closest");
-      if(isDefined(var_07) && var_07.size > 0) {
+      var_7 = physics_raycast(var_3, var_5.origin, var_0, [self, var_5], 0, "physicsquery_closest");
+      if(isDefined(var_7) && var_7.size > 0) {
         continue;
       }
 
@@ -364,7 +364,7 @@ func_1129F() {
         self.objstruct thread supertrophy_setobjectivefiring();
       }
 
-      thread func_1128E(var_05);
+      thread func_1128E(var_5);
       self.var_1E2D--;
       if(self.var_1E2D <= 0) {
         thread func_11274();
@@ -376,95 +376,95 @@ func_1129F() {
   }
 }
 
-func_1128E(param_00) {
+func_1128E(var_0) {
   level thread scripts\mp\battlechatter_mp::saytoself(self.triggerportableradarping, "plr_perk_trophy_block", undefined, 0.75);
   self.triggerportableradarping scripts\mp\killstreaks\_killstreaks::givescorefortrophyblocks();
   self.triggerportableradarping thread scripts\mp\events::superkill("super_supertrophy");
   self.triggerportableradarping scripts\mp\supers::combatrecordsuperkill("super_supertrophy");
-  param_00 setCanDamage(0);
-  param_00.exploding = 1;
-  param_00 stopsounds();
-  scripts\mp\trophy_system::func_12821(param_00);
-  scripts\mp\trophy_system::func_12817(param_00, "super_trophy_mp", self.triggerportableradarping);
-  var_01 = param_00.origin;
-  var_02 = param_00.angles;
-  if(scripts\mp\weapons::isplantedequipment(param_00)) {
-    param_00 scripts\mp\weapons::deleteexplosive();
-  } else if(param_00 scripts\mp\domeshield::isdomeshield()) {
-    param_00 thread scripts\mp\domeshield::domeshield_delete();
+  var_0 setCanDamage(0);
+  var_0.exploding = 1;
+  var_0 stopsounds();
+  scripts\mp\trophy_system::func_12821(var_0);
+  scripts\mp\trophy_system::func_12817(var_0, "super_trophy_mp", self.triggerportableradarping);
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  if(scripts\mp\weapons::isplantedequipment(var_0)) {
+    var_0 scripts\mp\weapons::deleteexplosive();
+  } else if(var_0 scripts\mp\domeshield::isdomeshield()) {
+    var_0 thread scripts\mp\domeshield::domeshield_delete();
   } else {
-    param_00 delete();
+    var_0 delete();
   }
 
-  var_03 = supertrophy_getbesttag(var_01);
-  var_04 = supertrophy_getpartbytag(var_03);
-  self setscriptablepartstate(var_04, "active", 0);
-  self.var_69DA thread supertrophy_explode(var_01, var_02);
+  var_3 = supertrophy_getbesttag(var_1);
+  var_4 = supertrophy_getpartbytag(var_3);
+  self setscriptablepartstate(var_4, "active", 0);
+  self.var_69DA thread supertrophy_explode(var_1, var_2);
 }
 
 func_1129E() {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
-  var_00 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_missileclip"]);
+  var_0 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_missileclip"]);
   for(;;) {
-    var_01 = scripts\mp\utility::clearscrambler(self.origin, 256, undefined);
-    foreach(var_03 in self.markeduioff) {
-      if(!func_1127E(var_03)) {
+    var_1 = scripts\mp\utility::clearscrambler(self.origin, 256, undefined);
+    foreach(var_3 in self.markeduioff) {
+      if(!func_1127E(var_3)) {
         continue;
       }
 
-      if(scripts\engine\utility::array_contains(var_01, var_03)) {
+      if(scripts\engine\utility::array_contains(var_1, var_3)) {
         continue;
       }
 
-      func_11292(var_03);
+      func_11292(var_3);
     }
 
-    var_05 = func_1128F();
-    foreach(var_07 in var_01) {
-      if(!func_1127E(var_07)) {
+    var_5 = func_1128F();
+    foreach(var_7 in var_1) {
+      if(!func_1127E(var_7)) {
         continue;
       }
 
-      var_08 = func_11295(var_07);
-      var_09 = func_11288(var_07, var_05, var_00);
-      if(!var_08 && var_09) {
-        thread func_11284(var_07);
+      var_8 = func_11295(var_7);
+      var_9 = func_11288(var_7, var_5, var_0);
+      if(!var_8 && var_9) {
+        thread func_11284(var_7);
         continue;
       }
 
-      if(var_08 && !var_09) {
-        func_11292(var_07);
+      if(var_8 && !var_9) {
+        func_11292(var_7);
       }
     }
 
-    var_01 = scripts\mp\weapons::getempdamageents(self.origin, 256);
-    foreach(var_03 in self.markeduioff) {
-      if(func_1127E(var_03)) {
+    var_1 = scripts\mp\weapons::getempdamageents(self.origin, 256);
+    foreach(var_3 in self.markeduioff) {
+      if(func_1127E(var_3)) {
         continue;
       }
 
-      if(scripts\engine\utility::array_contains(var_01, var_03)) {
+      if(scripts\engine\utility::array_contains(var_1, var_3)) {
         continue;
       }
 
-      func_11292(var_03);
+      func_11292(var_3);
     }
 
-    foreach(var_07 in var_01) {
-      if(func_1127E(var_07)) {
+    foreach(var_7 in var_1) {
+      if(func_1127E(var_7)) {
         continue;
       }
 
-      var_08 = func_11295(var_07);
-      var_09 = func_11287(var_07);
-      if(!var_08 && var_09) {
-        thread func_11282(var_07);
+      var_8 = func_11295(var_7);
+      var_9 = func_11287(var_7);
+      if(!var_8 && var_9) {
+        thread func_11282(var_7);
         continue;
       }
 
-      if(var_08 && !var_09) {
-        func_11292(var_07);
+      if(var_8 && !var_9) {
+        func_11292(var_7);
       }
     }
 
@@ -472,90 +472,90 @@ func_1129E() {
   }
 }
 
-func_11284(param_00) {
-  func_11269(param_00);
-  var_01 = param_00 getentitynumber();
-  var_02 = spawnStruct();
-  var_02.empd = 0;
-  func_11285(param_00, var_02);
+func_11284(var_0) {
+  func_11269(var_0);
+  var_1 = var_0 getentitynumber();
+  var_2 = spawnStruct();
+  var_2.empd = 0;
+  func_11285(var_0, var_2);
   if(isDefined(self)) {
-    func_11292(param_00, var_01);
+    func_11292(var_0, var_1);
   }
 
-  if(isDefined(param_00)) {
+  if(isDefined(var_0)) {
     if(isDefined(self) && isDefined(self.triggerportableradarping)) {
-      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, param_00, "super_trophy_mp");
+      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, var_0, "super_trophy_mp");
     }
 
-    if(var_02.empd) {
-      param_00 scripts\mp\killstreaks\_emp_common::func_E0F3();
+    if(var_2.empd) {
+      var_0 scripts\mp\killstreaks\_emp_common::func_E0F3();
     }
   }
 }
 
-func_11285(param_00, param_01) {
+func_11285(var_0, var_1) {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
-  param_00 endon("death");
-  param_00 endon("disconnect");
+  var_0 endon("death");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var_02 = gettime();
-  while(func_11295(param_00)) {
-    if(!param_01.empd) {
-      if(!param_00 scripts\mp\utility::_hasperk("specialty_empimmune")) {
-        param_00 scripts\mp\killstreaks\_emp_common::func_20C3();
-        scripts\mp\gamescore::func_11ACE(self.triggerportableradarping, param_00, "super_trophy_mp");
-        param_01.empd = 1;
+  var_2 = gettime();
+  while(func_11295(var_0)) {
+    if(!var_1.empd) {
+      if(!var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
+        var_0 scripts\mp\killstreaks\_emp_common::func_20C3();
+        scripts\mp\gamescore::func_11ACE(self.triggerportableradarping, var_0, "super_trophy_mp");
+        var_1.empd = 1;
       }
-    } else if(param_00 scripts\mp\utility::_hasperk("specialty_empimmune")) {
-      param_00 scripts\mp\killstreaks\_emp_common::func_E0F3();
-      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, param_00, "super_trophy_mp");
-      param_01.empd = 0;
+    } else if(var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
+      var_0 scripts\mp\killstreaks\_emp_common::func_E0F3();
+      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, var_0, "super_trophy_mp");
+      var_1.empd = 0;
     }
 
-    if(gettime() >= var_02) {
-      if(param_00 scripts\mp\utility::_hasperk("specialty_empimmune")) {
+    if(gettime() >= var_2) {
+      if(var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
         self.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
       }
 
-      var_03 = scripts\mp\perks\_perkfunctions::applystunresistence(self.triggerportableradarping, param_00, 0.7);
-      param_00 dodamage(1, self.origin, self.triggerportableradarping, self, "MOD_EXPLOSIVE", "super_trophy_mp");
-      param_00 shellshock("super_trophy_mp", var_03);
-      thread supertrophy_persempplayereffectsstun(param_00, var_03);
-      var_02 = gettime() + 1000;
+      var_3 = scripts\mp\perks\_perkfunctions::applystunresistence(self.triggerportableradarping, var_0, 0.7);
+      var_0 dodamage(1, self.origin, self.triggerportableradarping, self, "MOD_EXPLOSIVE", "super_trophy_mp");
+      var_0 shellshock("super_trophy_mp", var_3);
+      thread supertrophy_persempplayereffectsstun(var_0, var_3);
+      var_2 = gettime() + 1000;
     }
 
     scripts\engine\utility::waitframe();
   }
 }
 
-supertrophy_persempplayereffectsstun(param_00, param_01) {
-  param_00 endon("death");
-  param_00 endon("disconnect");
-  param_00 scripts\mp\weapons::func_F7FC();
-  wait(param_01);
-  param_00 scripts\mp\weapons::func_F800();
+supertrophy_persempplayereffectsstun(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("disconnect");
+  var_0 scripts\mp\weapons::func_F7FC();
+  wait(var_1);
+  var_0 scripts\mp\weapons::func_F800();
 }
 
-func_11282(param_00) {
-  func_11269(param_00);
-  var_01 = param_00 getentitynumber();
-  func_11283(param_00);
+func_11282(var_0) {
+  func_11269(var_0);
+  var_1 = var_0 getentitynumber();
+  func_11283(var_0);
   if(isDefined(self)) {
-    func_11292(param_00, var_01);
+    func_11292(var_0, var_1);
   }
 }
 
-func_11283(param_00) {
+func_11283(var_0) {
   self endon("death");
   self.triggerportableradarping endon("disconnect");
-  param_00 endon("death");
+  var_0 endon("death");
   level endon("game_ended");
-  var_01 = gettime();
-  while(func_11295(param_00)) {
-    if(gettime() >= var_01) {
-      param_00 notify("emp_damage", self.triggerportableradarping, 2.25, self.origin, "super_trophy_mp", "MOD_EXPLOSIVE");
-      var_01 = gettime() + 1000;
+  var_1 = gettime();
+  while(func_11295(var_0)) {
+    if(gettime() >= var_1) {
+      var_0 notify("emp_damage", self.triggerportableradarping, 2.25, self.origin, "super_trophy_mp", "MOD_EXPLOSIVE");
+      var_1 = gettime() + 1000;
     }
 
     scripts\engine\utility::waitframe();
@@ -563,18 +563,18 @@ func_11283(param_00) {
 }
 
 func_11270() {
-  var_00 = spawnStruct();
-  var_00.triggerportableradarping = self.triggerportableradarping;
-  var_00.var_12802 = self;
-  var_00.id = scripts\mp\objidpoolmanager::requestminimapid(1);
-  if(var_00.id == -1) {
+  var_0 = spawnStruct();
+  var_0.triggerportableradarping = self.triggerportableradarping;
+  var_0.var_12802 = self;
+  var_0.id = scripts\mp\objidpoolmanager::requestminimapid(1);
+  if(var_0.id == -1) {
     return undefined;
   }
 
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_00.id, "active", self.origin, "icon_minimap_super_trophy_friendly");
-  scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_00.id, self);
-  var_00 thread supertrophy_monitorobjective();
-  return var_00;
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_0.id, "active", self.origin, "icon_minimap_super_trophy_friendly");
+  scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_0.id, self);
+  var_0 thread supertrophy_monitorobjective();
+  return var_0;
 }
 
 func_11275() {
@@ -605,14 +605,14 @@ supertrophy_monitorobjective() {
     scripts\mp\objidpoolmanager::minimap_objective_playermask_hidefromall(self.id);
     scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, self.triggerportableradarping getentitynumber());
     scripts\mp\objidpoolmanager::minimap_objective_icon(self.id, "icon_minimap_super_trophy_friendly");
-    foreach(var_01 in level.players) {
-      if(var_01 scripts\mp\utility::_hasperk("specialty_engineer")) {
-        scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, var_01 getentitynumber());
+    foreach(var_1 in level.players) {
+      if(var_1 scripts\mp\utility::_hasperk("specialty_engineer")) {
+        scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, var_1 getentitynumber());
         continue;
       }
 
-      if(level.teambased && var_01.team == self.triggerportableradarping.team) {
-        scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, var_01 getentitynumber());
+      if(level.teambased && var_1.team == self.triggerportableradarping.team) {
+        scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, var_1 getentitynumber());
       }
     }
 
@@ -631,23 +631,23 @@ supertrophy_setobjectivefiring() {
   self.firingstate = undefined;
 }
 
-func_11288(param_00, param_01, param_02) {
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+func_11288(var_0, var_1, var_2) {
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, param_00))) {
+  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
     return 0;
   }
 
-  var_03 = physics_raycast(param_01, param_00.origin, param_02, [self, param_00], 0, "physicsquery_closest");
-  if(isDefined(var_03) && var_03.size > 0) {
-    var_03 = physics_raycast(param_01, param_00 getEye(), param_02, [self, param_00], 0, "physicsquery_closest");
-    if(isDefined(var_03) && var_03.size > 0) {
+  var_3 = physics_raycast(var_1, var_0.origin, var_2, [self, var_0], 0, "physicsquery_closest");
+  if(isDefined(var_3) && var_3.size > 0) {
+    var_3 = physics_raycast(var_1, var_0 getEye(), var_2, [self, var_0], 0, "physicsquery_closest");
+    if(isDefined(var_3) && var_3.size > 0) {
       return 0;
     }
   }
@@ -655,67 +655,67 @@ func_11288(param_00, param_01, param_02) {
   return 1;
 }
 
-func_11287(param_00) {
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+func_11287(var_0) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, param_00.triggerportableradarping))) {
+  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0.triggerportableradarping))) {
     return 0;
   }
 
   return 1;
 }
 
-func_11280(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_02) || param_02 != "super_trophy_mp") {
-    return param_03;
+func_11280(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2) || var_2 != "super_trophy_mp") {
+    return var_3;
   }
 
-  if(!isDefined(param_00) || !isDefined(param_01)) {
-    return param_03;
+  if(!isDefined(var_0) || !isDefined(var_1)) {
+    return var_3;
   }
 
-  if(param_00 != param_01) {
-    return param_03;
+  if(var_0 != var_1) {
+    return var_3;
   }
 
   return 0;
 }
 
-func_11286(param_00, param_01, param_02, param_03, param_04) {
-  if(param_04 == 1) {
+func_11286(var_0, var_1, var_2, var_3, var_4) {
+  if(var_4 == 1) {
     return 1;
   }
 
   return 0;
 }
 
-func_11269(param_00) {
-  var_01 = param_00 getentitynumber();
-  self.markeduioff[var_01] = param_00;
+func_11269(var_0) {
+  var_1 = var_0 getentitynumber();
+  self.markeduioff[var_1] = var_0;
 }
 
-func_11292(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = param_00 getentitynumber();
+func_11292(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = var_0 getentitynumber();
   }
 
-  self.markeduioff[param_01] = undefined;
+  self.markeduioff[var_1] = undefined;
 }
 
-func_11295(param_00) {
-  var_01 = param_00 getentitynumber();
-  return isDefined(self.markeduioff[var_01]);
+func_11295(var_0) {
+  var_1 = var_0 getentitynumber();
+  return isDefined(self.markeduioff[var_1]);
 }
 
-supertrophy_checkignorelist(param_00) {
-  return !supertrophy_ignorelistoverrides(param_00) && scripts\mp\trophy_system::trophy_checkignorelist(param_00);
+supertrophy_checkignorelist(var_0) {
+  return !supertrophy_ignorelistoverrides(var_0) && scripts\mp\trophy_system::trophy_checkignorelist(var_0);
 }
 
-supertrophy_ignorelistoverrides(param_00) {
-  if(isDefined(param_00.weapon_name)) {
-    switch (param_00.weapon_name) {
+supertrophy_ignorelistoverrides(var_0) {
+  if(isDefined(var_0.weapon_name)) {
+    switch (var_0.weapon_name) {
       case "jackal_cannon_mp":
       case "shockproj_mp":
       case "switch_blade_child_mp":
@@ -726,7 +726,7 @@ supertrophy_ignorelistoverrides(param_00) {
 
       case "trophy_mp":
       case "domeshield_mp":
-        if(scripts\mp\weapons::isplantedequipment(param_00)) {
+        if(scripts\mp\weapons::isplantedequipment(var_0)) {
           return 1;
         }
 
@@ -741,45 +741,45 @@ func_1128F() {
   return self.origin + anglestoup(self.angles) * 35;
 }
 
-func_1127E(param_00) {
-  if(!isplayer(param_00) && !isagent(param_00)) {
+func_1127E(var_0) {
+  if(!isplayer(var_0) && !isagent(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\utility::func_9F22(param_00)) {
+  if(scripts\mp\utility::func_9F22(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\utility::func_9F72(param_00)) {
+  if(scripts\mp\utility::func_9F72(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-supertrophy_getbesttag(param_00) {
-  var_01 = level.supertrophy.var_1141B;
-  var_02 = undefined;
-  var_03 = undefined;
-  foreach(var_0A, var_05 in var_01) {
-    var_06 = self gettagorigin(var_05);
-    var_07 = self gettagangles(var_05);
-    var_08 = anglesToForward(var_07);
-    var_09 = vectordot(vectornormalize(param_00 - var_06), var_08);
-    if(var_0A == 0 || var_09 > var_02) {
-      var_02 = var_09;
-      var_03 = var_05;
+supertrophy_getbesttag(var_0) {
+  var_1 = level.supertrophy.var_1141B;
+  var_2 = undefined;
+  var_3 = undefined;
+  foreach(var_0A, var_5 in var_1) {
+    var_6 = self gettagorigin(var_5);
+    var_7 = self gettagangles(var_5);
+    var_8 = anglesToForward(var_7);
+    var_9 = vectordot(vectornormalize(var_0 - var_6), var_8);
+    if(var_0A == 0 || var_9 > var_2) {
+      var_2 = var_9;
+      var_3 = var_5;
     }
   }
 
-  return var_03;
+  return var_3;
 }
 
-supertrophy_getpartbytag(param_00) {
-  var_01 = level.supertrophy.var_1141B;
-  foreach(var_04, var_03 in var_01) {
-    if(var_03 == param_00) {
-      return "protect" + var_04 + 1;
+supertrophy_getpartbytag(var_0) {
+  var_1 = level.supertrophy.var_1141B;
+  foreach(var_4, var_3 in var_1) {
+    if(var_3 == var_0) {
+      return "protect" + var_4 + 1;
     }
   }
 
@@ -787,12 +787,12 @@ supertrophy_getpartbytag(param_00) {
 }
 
 supertrophy_getmaxnum() {
-  var_00 = 1;
+  var_0 = 1;
   if(scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
-    var_00++;
+    var_0++;
   }
 
-  return var_00;
+  return var_0;
 }
 
 supertrophy_onruggedequipmentunset() {
@@ -808,24 +808,24 @@ supertrophy_onruggedequipmentunset() {
     }
   }
 
-  var_00 = supertrophy_getmaxnum();
-  var_01 = max(0, self.supertrophies.size - var_00);
-  for(var_02 = 0; var_02 < var_01; var_02++) {
+  var_0 = supertrophy_getmaxnum();
+  var_1 = max(0, self.supertrophies.size - var_0);
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     self.supertrophies[0] thread func_11274();
   }
 }
 
-supertrophy_addtoarrays(param_00, param_01) {
-  param_01.supertrophies[param_01.supertrophies.size] = param_00;
-  level.supertrophy.trophies[param_00 getentitynumber()] = param_00;
+supertrophy_addtoarrays(var_0, var_1) {
+  var_1.supertrophies[var_1.supertrophies.size] = var_0;
+  level.supertrophy.trophies[var_0 getentitynumber()] = var_0;
 }
 
-supertrophy_removefromarrays(param_00, param_01) {
-  if(isDefined(param_01) && isDefined(param_01.supertrophies)) {
-    param_01.supertrophies = scripts\engine\utility::array_remove(param_01.supertrophies, param_00);
+supertrophy_removefromarrays(var_0, var_1) {
+  if(isDefined(var_1) && isDefined(var_1.supertrophies)) {
+    var_1.supertrophies = scripts\engine\utility::array_remove(var_1.supertrophies, var_0);
   }
 
-  level.supertrophy.trophies[param_00 getentitynumber()] = undefined;
+  level.supertrophy.trophies[var_0 getentitynumber()] = undefined;
 }
 
 func_1126D() {
@@ -840,9 +840,9 @@ func_1126E() {
   thread func_11274();
 }
 
-supertrophy_cleanuponparentdeath(param_00, param_01) {
+supertrophy_cleanuponparentdeath(var_0, var_1) {
   self endon("death");
-  param_00 waittill("death");
-  wait(param_01);
+  var_0 waittill("death");
+  wait(var_1);
   self delete();
 }

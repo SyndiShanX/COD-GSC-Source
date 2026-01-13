@@ -40,7 +40,7 @@ func_FAB0() {
   level.special_zombie_damage_func["crab_brute"] = ::crab_brute_special_damage_func;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_brutecrab");
 }
 
@@ -180,50 +180,50 @@ getenemy() {
 }
 
 lookatenemy() {
-  var_00 = getenemy();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", var_02);
+  var_0 = getenemy();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", var_2);
     return;
   }
 
   self orientmode("face angle abs", self.angles);
 }
 
-crab_brute_special_damage_func(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+crab_brute_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(scripts\asm\asm::asm_isinstate("burrow_loop")) {
     return 0;
   }
 
-  if(param_05 == "gas_grenade_mp") {
+  if(var_5 == "gas_grenade_mp") {
     return 0;
   }
 
   self.lastdamagetime = gettime();
-  if(isDefined(param_07)) {
+  if(isDefined(var_7)) {
     var_0C = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
     var_0D = anglesToForward(self.angles) * -1;
-    var_0E = vectordot(var_0D, param_07);
+    var_0E = vectordot(var_0D, var_7);
     if(var_0E > var_0C.reduce_damage_dot) {
-      param_02 = param_02 * var_0C.reduce_damage_pct;
+      var_2 = var_2 * var_0C.reduce_damage_pct;
       self.armor_hit = 1;
     }
   }
 
-  return param_02;
+  return var_2;
 }
 
-func_C4D1(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+func_C4D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(isDefined(self.agent_type) && self.agent_type == "crab_brute") {
-    param_01 scripts\cp\cp_merits::processmerit("mt_dlc3_crab_brute");
+    var_1 scripts\cp\cp_merits::processmerit("mt_dlc3_crab_brute");
   }
 
   var_0C = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
   if(isDefined(var_0C) && !isDefined(self.var_72AC)) {
     if(!isDefined(level.brute_loot_check[self.spawn_round_num])) {
       level.brute_loot_check[self.spawn_round_num] = 1;
-      level thread scripts\cp\loot::drop_loot(self.origin, param_01, var_0C);
+      level thread scripts\cp\loot::drop_loot(self.origin, var_1, var_0C);
     }
   }
 
@@ -248,22 +248,22 @@ calculatecrabbruteihealth() {
   return 5000 * level.players.size;
 }
 
-shouldignoreenemy(param_00) {
-  if(!isalive(param_00)) {
+shouldignoreenemy(var_0) {
+  if(!isalive(var_0)) {
     return 1;
   }
 
-  if(param_00.ignoreme || isDefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
     return 1;
   }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(param_00)) {
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-create_brute_death_fx(param_00) {
+create_brute_death_fx(var_0) {
   self.var_CE65 = 1;
 }

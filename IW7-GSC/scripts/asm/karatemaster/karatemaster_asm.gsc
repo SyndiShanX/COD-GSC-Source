@@ -4,97 +4,97 @@
  * Script: scripts\asm\karatemaster\karatemaster_asm.gsc
 *********************************************************/
 
-setupmeleeanimdistances(param_00) {
+setupmeleeanimdistances(var_0) {
   if(isDefined(level.karatemastermeleedist)) {
     return;
   }
 
   level.karatemastermeleedist = [];
-  setupmeleedistances(param_00, "slow_walk_melee");
-  setupmeleedistances(param_00, "walk_melee");
-  setupmeleedistances(param_00, "run_melee");
-  setupmeleedistances(param_00, "sprint_melee");
-  setupmeleedistances(param_00, "stand_melee");
+  setupmeleedistances(var_0, "slow_walk_melee");
+  setupmeleedistances(var_0, "walk_melee");
+  setupmeleedistances(var_0, "run_melee");
+  setupmeleedistances(var_0, "sprint_melee");
+  setupmeleedistances(var_0, "stand_melee");
 }
 
-getfirstattacknotetracktime(param_00) {
-  var_01 = 99999;
-  var_02 = getnotetracktimes(param_00, "r_kick");
-  if(var_02.size > 0) {
-    var_01 = var_02[var_02.size - 1];
+getfirstattacknotetracktime(var_0) {
+  var_1 = 99999;
+  var_2 = getnotetracktimes(var_0, "r_kick");
+  if(var_2.size > 0) {
+    var_1 = var_2[var_2.size - 1];
   }
 
-  var_02 = getnotetracktimes(param_00, "l_kick");
-  if(var_02.size > 0 && var_02[0] < var_01) {
-    var_01 = var_02[var_02.size - 1];
+  var_2 = getnotetracktimes(var_0, "l_kick");
+  if(var_2.size > 0 && var_2[0] < var_1) {
+    var_1 = var_2[var_2.size - 1];
   }
 
-  var_02 = getnotetracktimes(param_00, "r_punch");
-  if(var_02.size > 0 && var_02[0] < var_01) {
-    var_01 = var_02[0];
+  var_2 = getnotetracktimes(var_0, "r_punch");
+  if(var_2.size > 0 && var_2[0] < var_1) {
+    var_1 = var_2[0];
   }
 
-  var_02 = getnotetracktimes(param_00, "l_punch");
-  if(var_02.size > 0 && var_02[0] < var_01) {
-    var_01 = var_02[0];
+  var_2 = getnotetracktimes(var_0, "l_punch");
+  if(var_2.size > 0 && var_2[0] < var_1) {
+    var_1 = var_2[0];
   }
 
-  if(var_01 > 999) {
+  if(var_1 > 999) {
     return undefined;
   }
 
-  return var_01;
+  return var_1;
 }
 
-distcompare(param_00, param_01) {
-  return param_00 < param_01;
+distcompare(var_0, var_1) {
+  return var_0 < var_1;
 }
 
-setupmeleedistances(param_00, param_01) {
-  var_02 = self getanimentrycount(param_01);
-  for(var_03 = 0; var_03 < var_02; var_03++) {
-    var_04 = self getsafecircleorigin(param_01, var_03);
-    var_05 = getfirstattacknotetracktime(var_04);
-    var_06 = getmovedelta(var_04, 0, var_05);
-    var_07 = length(var_06);
-    level.karatemastermeleedist[param_01][var_03] = var_07;
-    var_08 = getanimlength(var_04);
-    var_09 = var_05 * var_08;
-    level.karatemastermeleetimetoimpact[param_01][var_03] = var_09;
+setupmeleedistances(var_0, var_1) {
+  var_2 = self getanimentrycount(var_1);
+  for(var_3 = 0; var_3 < var_2; var_3++) {
+    var_4 = self getsafecircleorigin(var_1, var_3);
+    var_5 = getfirstattacknotetracktime(var_4);
+    var_6 = getmovedelta(var_4, 0, var_5);
+    var_7 = length(var_6);
+    level.karatemastermeleedist[var_1][var_3] = var_7;
+    var_8 = getanimlength(var_4);
+    var_9 = var_5 * var_8;
+    level.karatemastermeleetimetoimpact[var_1][var_3] = var_9;
   }
 
-  level.karatemastermeleedist[param_01] = ::scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[param_01], ::distcompare);
+  level.karatemastermeleedist[var_1] = ::scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
 }
 
-karatemasterinit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+karatemasterinit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
   scripts\asm\asm_bb::bb_requestmovetype("run");
   self.disablearrivals = 1;
-  setupmeleeanimdistances(param_00);
+  setupmeleeanimdistances(var_0);
   self.desiredmovemeleeindex = [];
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-playanimandlookatenemy(param_00, param_01, param_02, param_03) {
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, scripts\mp\agents\karatemaster\karatemaster_agent::getenemy());
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 1);
+playanimandlookatenemy(var_0, var_1, var_2, var_3) {
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, scripts\mp\agents\karatemaster\karatemaster_agent::getenemy());
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 1);
 }
 
-faceenemyhelper(param_00, param_01, param_02) {
-  if(isDefined(param_02)) {
-    self endon(param_02 + "_finished");
+faceenemyhelper(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    self endon(var_2 + "_finished");
   }
 
-  var_03 = gettime() + param_01;
-  while(gettime() <= var_03 && isDefined(param_00) && isalive(param_00)) {
-    var_04 = param_00.origin - self.origin;
-    if(length2dsquared(var_04) > 1024) {
-      var_05 = vectortoyaw(var_04);
-      self orientmode("face angle abs", (0, var_05, 0));
+  var_3 = gettime() + var_1;
+  while(gettime() <= var_3 && isDefined(var_0) && isalive(var_0)) {
+    var_4 = var_0.origin - self.origin;
+    if(length2dsquared(var_4) > 1024) {
+      var_5 = vectortoyaw(var_4);
+      self orientmode("face angle abs", (0, var_5, 0));
     }
 
     wait(0.05);
@@ -103,58 +103,58 @@ faceenemyhelper(param_00, param_01, param_02) {
   self orientmode("face angle abs", self.angles);
 }
 
-isanimdone(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "end")) {
+isanimdone(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "early_end")) {
+  if(scripts\asm\asm::func_232B(var_1, "early_end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "finish_early")) {
+  if(scripts\asm\asm::func_232B(var_1, "finish_early")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "code_move")) {
+  if(scripts\asm\asm::func_232B(var_1, "code_move")) {
     return 1;
   }
 
   return 0;
 }
 
-playanimwithplaybackrate(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-func_BEA0(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  var_05 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.ent)) {
-    var_04 = self.var_1198.shootparams.ent.origin;
-  } else if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.pos)) {
-    var_04 = self.var_1198.shootparams.pos;
-  } else if(isDefined(var_05)) {
-    var_04 = var_05.origin;
+func_BEA0(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  var_5 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
+    var_4 = self._blackboard.shootparams.ent.origin;
+  } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
+    var_4 = self._blackboard.shootparams.pos;
+  } else if(isDefined(var_5)) {
+    var_4 = var_5.origin;
   }
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_06 = self.angles[1] - vectortoyaw(var_04 - self.origin);
-  var_07 = distancesquared(self.origin, var_04);
-  if(var_07 < 65536) {
-    var_08 = sqrt(var_07);
-    if(var_08 > 3) {
-      var_06 = var_06 + asin(-3 / var_08);
+  var_6 = self.angles[1] - vectortoyaw(var_4 - self.origin);
+  var_7 = distancesquared(self.origin, var_4);
+  if(var_7 < 65536) {
+    var_8 = sqrt(var_7);
+    if(var_8 > 3) {
+      var_6 = var_6 + asin(-3 / var_8);
     }
   }
 
-  if(abs(angleclamp180(var_06)) > self.var_129AF) {
+  if(abs(angleclamp180(var_6)) > self.var_129AF) {
     return 1;
   }
 
@@ -162,66 +162,66 @@ func_BEA0(param_00, param_01, param_02, param_03) {
 }
 
 _meth_81DE() {
-  var_00 = 0.25;
-  var_01 = undefined;
-  var_02 = undefined;
-  if(isDefined(self.var_1198.shootparams)) {
-    if(isDefined(self.var_1198.shootparams.ent)) {
-      var_01 = self.var_1198.shootparams.ent;
-    } else if(isDefined(self.var_1198.shootparams.pos)) {
-      var_02 = self.var_1198.shootparams.pos;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
+  if(isDefined(self._blackboard.shootparams)) {
+    if(isDefined(self._blackboard.shootparams.ent)) {
+      var_1 = self._blackboard.shootparams.ent;
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
+      var_2 = self._blackboard.shootparams.pos;
     }
   }
 
-  var_03 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  if(isDefined(var_03)) {
-    if(!isDefined(var_01) && !isDefined(var_02)) {
-      var_01 = var_03;
+  var_3 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  if(isDefined(var_3)) {
+    if(!isDefined(var_1) && !isDefined(var_2)) {
+      var_1 = var_3;
     }
   }
 
-  if(isDefined(var_01) && !issentient(var_01)) {
-    var_00 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var_04 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_00, var_01, var_02);
-  return var_04;
+  var_4 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
+  return var_4;
 }
 
-func_3F0A(param_00, param_01, param_02) {
-  var_03 = _meth_81DE();
-  if(var_03 < 0) {
-    var_04 = "right";
+func_3F0A(var_0, var_1, var_2) {
+  var_3 = _meth_81DE();
+  if(var_3 < 0) {
+    var_4 = "right";
   } else {
-    var_04 = "left";
+    var_4 = "left";
   }
 
-  var_03 = abs(var_03);
-  var_05 = 0;
-  if(var_03 > 157.5) {
-    var_05 = 180;
-  } else if(var_03 > 112.5) {
-    var_05 = 135;
-  } else if(var_03 > 67.5) {
-    var_05 = 90;
+  var_3 = abs(var_3);
+  var_5 = 0;
+  if(var_3 > 157.5) {
+    var_5 = 180;
+  } else if(var_3 > 112.5) {
+    var_5 = 135;
+  } else if(var_3 > 67.5) {
+    var_5 = 90;
   } else {
-    var_05 = 45;
+    var_5 = 45;
   }
 
-  var_06 = var_04 + "_" + var_05;
-  var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_06);
-  var_08 = self _meth_8101(param_01, var_07);
-  return var_07;
+  var_6 = var_4 + "_" + var_5;
+  var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
+  var_8 = self _meth_8101(var_1, var_7);
+  return var_7;
 }
 
-func_D56A(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self.vehicle_getspawnerarray;
+func_D56A(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self.vehicle_getspawnerarray;
   self orientmode("face angle abs", self.angles);
   self ghostlaunched("anim deltas");
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04);
-  if(!isDefined(var_05) && isDefined(self.vehicle_getspawnerarray)) {
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
+  if(!isDefined(var_5) && isDefined(self.vehicle_getspawnerarray)) {
     self clearpath();
   }
 
@@ -229,126 +229,126 @@ func_D56A(param_00, param_01, param_02, param_03) {
   scripts\asm\asm_mp::func_237E("code_move");
 }
 
-func_3EE4(param_00, param_01, param_02) {
-  return lib_0F3C::func_3EF4(param_00, param_01, param_02);
+func_3EE4(var_0, var_1, var_2) {
+  return lib_0F3C::func_3EF4(var_0, var_1, var_2);
 }
 
-playmovingpainanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playmovingpainanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(!isDefined(self.vehicle_getspawnerarray)) {
-    var_04 = func_3EE4(param_00, "pain_generic", param_03);
+    var_4 = func_3EE4(var_0, "pain_generic", var_3);
     self orientmode("face angle abs", self.angles);
-    scripts\asm\asm_mp::func_2365(param_00, "pain_generic", param_02, var_04, 1);
+    scripts\asm\asm_mp::func_2365(var_0, "pain_generic", var_2, var_4, 1);
     return;
   }
 
-  scripts\asm\asm_mp::func_2364(param_01, param_02, param_03, var_04);
+  scripts\asm\asm_mp::func_2364(var_1, var_2, var_3, var_4);
 }
 
-shoulddomelee(param_00, param_01, param_02, param_03) {
-  if(!scripts\engine\utility::istrue(self.var_1198.bmeleerequested)) {
+shoulddomelee(var_0, var_1, var_2, var_3) {
+  if(!scripts\engine\utility::istrue(self._blackboard.bmeleerequested)) {
     return 0;
   }
 
-  if(!isDefined(self.var_1198.meleetype)) {
+  if(!isDefined(self._blackboard.meleetype)) {
     return 0;
   }
 
-  if(self.var_1198.meleetype == param_02) {
+  if(self._blackboard.meleetype == var_2) {
     return 1;
   }
 
   return 0;
 }
 
-playanim_melee(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, self.var_1198.meleetarget);
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
+playanim_melee(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, self._blackboard.meleetarget);
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   self _meth_85C9(16);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
 }
 
-terminate_melee(param_00, param_01, param_02) {
+terminate_melee(var_0, var_1, var_2) {
   self _meth_85C9(0);
 }
 
-choosestandmeleeanim(param_00, param_01, param_02) {
-  return choosemovingmeleeanim(param_00, param_01, param_02);
+choosestandmeleeanim(var_0, var_1, var_2) {
+  return choosemovingmeleeanim(var_0, var_1, var_2);
 }
 
-choosemovingmeleeanim(param_00, param_01, param_02) {
-  var_03 = self getanimentrycount(param_01);
-  var_04 = self getsafecircleorigin(param_01, self.desiredmovemeleeindex[param_01]);
-  return self.desiredmovemeleeindex[param_01];
+choosemovingmeleeanim(var_0, var_1, var_2) {
+  var_3 = self getanimentrycount(var_1);
+  var_4 = self getsafecircleorigin(var_1, self.desiredmovemeleeindex[var_1]);
+  return self.desiredmovemeleeindex[var_1];
 }
 
-choosemeleeanim(param_00, param_01, param_02) {
+choosemeleeanim(var_0, var_1, var_2) {
   if(self.asm.footsteps.foot == "left") {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "left");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "right");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
 }
 
-teleportrequested(param_00, param_01, param_02, param_03) {
-  return isDefined(self.var_1198.bteleportrequested);
+teleportrequested(var_0, var_1, var_2, var_3) {
+  return isDefined(self._blackboard.bteleportrequested);
 }
 
-playanim_teleportin(param_00, param_01, param_02, param_03) {
-  var_04 = 1;
-  if(scripts\engine\utility::istrue(self.var_1198.bfastteleport)) {
-    var_04 = 3;
+playanim_teleportin(var_0, var_1, var_2, var_3) {
+  var_4 = 1;
+  if(scripts\engine\utility::istrue(self._blackboard.bfastteleport)) {
+    var_4 = 3;
   }
 
-  playanimwithplaybackrate(param_00, param_01, param_02, var_04);
+  playanimwithplaybackrate(var_0, var_1, var_2, var_4);
 }
 
-playanim_teleportout(param_00, param_01, param_02, param_03) {
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, scripts\mp\agents\karatemaster\karatemaster_agent::getenemy());
-  var_04 = 1;
-  if(scripts\engine\utility::istrue(self.var_1198.bfastteleport)) {
-    var_04 = 1.5;
+playanim_teleportout(var_0, var_1, var_2, var_3) {
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, scripts\mp\agents\karatemaster\karatemaster_agent::getenemy());
+  var_4 = 1;
+  if(scripts\engine\utility::istrue(self._blackboard.bfastteleport)) {
+    var_4 = 1.5;
   }
 
-  playanimwithplaybackrate(param_00, param_01, param_02, var_04);
+  playanimwithplaybackrate(var_0, var_1, var_2, var_4);
   if(scripts\engine\utility::istrue(self.btraversalteleport)) {
     self.is_traversing = undefined;
     self.btraversalteleport = undefined;
     self notify("traverse_end");
-    scripts\asm\asm::asm_setstate("decide_idle", param_03);
+    scripts\asm\asm::asm_setstate("decide_idle", var_3);
   }
 }
 
-terminate_teleport(param_00, param_01, param_02) {
-  if(!isanimdone(param_00, param_01, undefined, param_02)) {
+terminate_teleport(var_0, var_1, var_2) {
+  if(!isanimdone(var_0, var_1, undefined, var_2)) {
     self show();
     self.ishidden = undefined;
   }
 }
 
-teleportnotehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+teleportnotehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "teleport_in":
-      thread doteleportin(param_01);
+      thread doteleportin(var_1);
       break;
 
     case "teleport_out":
-      thread doteleportout(param_01);
+      thread doteleportout(var_1);
       break;
   }
 }
 
-playspawnin(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playspawnin(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   self setscriptablepartstate("teleport", "tele_out");
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
   wait(0.1);
   self setscriptablepartstate("teleport", "neutral");
 }
 
-doteleportin(param_00) {
-  self endon(param_00 + "_finished");
+doteleportin(var_0) {
+  self endon(var_0 + "_finished");
   self setscriptablepartstate("teleport", "tele_in");
   wait(0.1);
   self hide();
@@ -356,14 +356,14 @@ doteleportin(param_00) {
   self setscriptablepartstate("teleport", "neutral");
 }
 
-doteleportout(param_00) {
-  self endon(param_00 + "_finished");
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  var_02 = self.var_1198.teleportspot;
+doteleportout(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  var_2 = self._blackboard.teleportspot;
   self dontinterpolate();
-  self setorigin(var_02);
-  if(isDefined(var_01)) {
-    self.angles = (0, vectortoyaw(var_01.origin - self.origin), 0);
+  self setorigin(var_2);
+  if(isDefined(var_1)) {
+    self.angles = (0, vectortoyaw(var_1.origin - self.origin), 0);
   }
 
   wait(0.1);
@@ -374,44 +374,44 @@ doteleportout(param_00) {
   self setscriptablepartstate("teleport", "neutral");
 }
 
-meleenotehandler(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  var_05 = undefined;
-  var_06 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
-  if(param_00 == "r_kick") {
-    var_04 = var_06.ckickmeleedamage;
-    var_05 = self gettagorigin("j_ankle_ri");
+meleenotehandler(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  if(var_0 == "r_kick") {
+    var_4 = var_6.ckickmeleedamage;
+    var_5 = self gettagorigin("j_ankle_ri");
     self scragentsetanimscale(1, 1);
-  } else if(param_00 == "l_kick") {
-    var_04 = var_06.ckickmeleedamage;
-    var_05 = self gettagorigin("j_ankle_le");
+  } else if(var_0 == "l_kick") {
+    var_4 = var_6.ckickmeleedamage;
+    var_5 = self gettagorigin("j_ankle_le");
     self scragentsetanimscale(1, 1);
-  } else if(param_00 == "r_punch") {
-    var_04 = var_06.cpunchmeleedamage;
-    var_05 = self gettagorigin("j_wrist_ri");
+  } else if(var_0 == "r_punch") {
+    var_4 = var_6.cpunchmeleedamage;
+    var_5 = self gettagorigin("j_wrist_ri");
     self scragentsetanimscale(1, 1);
-  } else if(param_00 == "l_punch") {
-    var_04 = var_06.cpunchmeleedamage;
-    var_05 = self gettagorigin("j_wrist_le");
+  } else if(var_0 == "l_punch") {
+    var_4 = var_6.cpunchmeleedamage;
+    var_5 = self gettagorigin("j_wrist_le");
     self scragentsetanimscale(1, 1);
-  } else if(param_00 == "flex_start") {
-    var_07 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-    if(isDefined(var_07)) {
-      var_08 = self getsafecircleorigin(param_01, param_02);
-      var_09 = getfirstattacknotetracktime(var_08);
-      if(var_09 > param_03) {
-        var_0A = getmovedelta(var_08, param_03, var_09);
+  } else if(var_0 == "flex_start") {
+    var_7 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+    if(isDefined(var_7)) {
+      var_8 = self getsafecircleorigin(var_1, var_2);
+      var_9 = getfirstattacknotetracktime(var_8);
+      if(var_9 > var_3) {
+        var_0A = getmovedelta(var_8, var_3, var_9);
         var_0B = length2d(var_0A);
-        var_0C = getanimlength(var_08);
-        var_0D = var_09 * var_0C - param_03 * var_0C;
-        var_0E = var_07 getvelocity();
-        var_0F = var_07.origin + var_0E * var_0D;
+        var_0C = getanimlength(var_8);
+        var_0D = var_9 * var_0C - var_3 * var_0C;
+        var_0E = var_7 getvelocity();
+        var_0F = var_7.origin + var_0E * var_0D;
         var_10 = distance(var_0F, self.origin);
         var_11 = 1;
         if(var_10 > var_0B && var_0B > 0) {
           var_11 = var_10 / var_0B;
-          if(var_11 > var_06.cmaxmeleeflexscale) {
-            var_11 = var_06.cmaxmeleeflexscale;
+          if(var_11 > var_6.cmaxmeleeflexscale) {
+            var_11 = var_6.cmaxmeleeflexscale;
           }
         }
 
@@ -420,25 +420,25 @@ meleenotehandler(param_00, param_01, param_02, param_03) {
     }
   }
 
-  if(isDefined(var_04)) {
-    var_07 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-    if(isDefined(var_07)) {
-      var_12 = distance2dsquared(var_07.origin, self.origin);
-      var_13 = distance2dsquared(var_05, var_07.origin);
-      if(var_13 < var_06.cpunchandkickmeleeradiussq || var_12 < var_06.cpunchandkickmeleeradiussq) {
-        self notify("attack_hit", var_07);
-        scripts\asm\zombie\melee::domeleedamage(var_07, var_04, "MOD_IMPACT");
+  if(isDefined(var_4)) {
+    var_7 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+    if(isDefined(var_7)) {
+      var_12 = distance2dsquared(var_7.origin, self.origin);
+      var_13 = distance2dsquared(var_5, var_7.origin);
+      if(var_13 < var_6.cpunchandkickmeleeradiussq || var_12 < var_6.cpunchandkickmeleeradiussq) {
+        self notify("attack_hit", var_7);
+        scripts\asm\zombie\melee::domeleedamage(var_7, var_4, "MOD_IMPACT");
         return;
       }
 
-      self notify("attack_miss", var_07);
+      self notify("attack_miss", var_7);
       return;
     }
   }
 }
 
-ontraversalteleport(param_00, param_01, param_02, param_03) {
-  self.var_1198.teleportspot = self _meth_8146();
+ontraversalteleport(var_0, var_1, var_2, var_3) {
+  self._blackboard.teleportspot = self _meth_8146();
   self.btraversalteleport = 1;
   return 1;
 }

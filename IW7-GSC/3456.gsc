@@ -13,119 +13,119 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("aamissile", ::tryuseaamissile);
 }
 
-tryuseaamissile(var_00, var_01) {
+tryuseaamissile(var_0, var_1) {
   scripts\mp\utility\game::setusingremote("aamissile");
-  var_02 = scripts\mp\killstreaks\killstreaks::initridekillstreak();
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak();
 
-  if(var_02 != "success") {
-    if(var_02 != "disconnect") {
+  if(var_2 != "success") {
+    if(var_2 != "disconnect") {
       scripts\mp\utility\game::clearusingremote();
     }
 
     return 0;
   }
 
-  level thread aa_missile_fire(var_00, self);
+  level thread aa_missile_fire(var_0, self);
   return 1;
 }
 
 gettargets() {
-  var_00 = [];
-  var_01 = [];
+  var_0 = [];
+  var_1 = [];
 
   if(isDefined(level.littlebirds) && level.littlebirds.size) {
-    foreach(var_03 in level.littlebirds) {
+    foreach(var_3 in level.littlebirds) {
       if(var_3.team != self.team) {
-        var_0[var_0.size] = var_03;
+        var_0[var_0.size] = var_3;
       }
     }
   }
 
   if(isDefined(level.helis) && level.helis.size) {
-    foreach(var_06 in level.helis) {
+    foreach(var_6 in level.helis) {
       if(var_6.team != self.team) {
-        var_1[var_1.size] = var_06;
+        var_1[var_1.size] = var_6;
       }
     }
   }
 
-  if(isDefined(var_01) && var_1.size) {
+  if(isDefined(var_1) && var_1.size) {
     return var_1[0];
-  } else if(isDefined(var_00) && var_0.size) {
+  } else if(isDefined(var_0) && var_0.size) {
     return var_0[0];
   }
 }
 
-aa_missile_fire(var_00, var_01) {
-  var_02 = undefined;
-  var_03 = (0, 0, level.aamissilelaunchvert);
-  var_04 = level.aamissilelaunchhorz;
-  var_05 = level.aammissilelaunchtargetdist;
-  var_06 = var_01 gettargets();
+aa_missile_fire(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = (0, 0, level.aamissilelaunchvert);
+  var_4 = level.aamissilelaunchhorz;
+  var_5 = level.aammissilelaunchtargetdist;
+  var_6 = var_1 gettargets();
 
-  if(!isDefined(var_06)) {
-    var_07 = (0, 0, 0);
+  if(!isDefined(var_6)) {
+    var_7 = (0, 0, 0);
   } else {
-    var_07 = var_6.origin;
-    var_03 = (0, 0, 1) * var_07 + (0, 0, 1000);
+    var_7 = var_6.origin;
+    var_3 = (0, 0, 1) * var_7 + (0, 0, 1000);
   }
 
-  var_08 = anglesToForward(var_1.angles);
-  var_09 = var_1.origin + var_03 + var_08 * var_04 * -1;
-  var_10 = scripts\mp\utility\game::_magicbullet("aamissile_projectile_mp", var_09, var_07, var_01);
+  var_8 = anglesToForward(var_1.angles);
+  var_9 = var_1.origin + var_3 + var_8 * var_4 * -1;
+  var_10 = scripts\mp\utility\game::_magicbullet("aamissile_projectile_mp", var_9, var_7, var_1);
 
   if(!isDefined(var_10)) {
-    var_01 scripts\mp\utility\game::clearusingremote();
+    var_1 scripts\mp\utility\game::clearusingremote();
     return;
   }
 
-  var_10.lifeid = var_00;
+  var_10.lifeid = var_0;
   var_10.type = "remote";
-  missileeyes(var_01, var_10);
+  missileeyes(var_1, var_10);
 }
 
-missileeyes(var_00, var_01) {
-  var_00 endon("joined_team");
-  var_00 endon("joined_spectators");
-  var_01 thread rocket_cleanupondeath();
-  var_00 thread player_cleanupongameended(var_01);
-  var_00 thread player_cleanuponteamchange(var_01);
-  var_00 visionsetmissilecamforplayer("black_bw", 0);
-  var_00 endon("disconnect");
+missileeyes(var_0, var_1) {
+  var_0 endon("joined_team");
+  var_0 endon("joined_spectators");
+  var_1 thread rocket_cleanupondeath();
+  var_0 thread player_cleanupongameended(var_1);
+  var_0 thread player_cleanuponteamchange(var_1);
+  var_0 visionsetmissilecamforplayer("black_bw", 0);
+  var_0 endon("disconnect");
 
-  if(isDefined(var_01)) {
-    var_00 visionsetmissilecamforplayer(game["thermal_vision"], 1.0);
-    var_00 thread delayedfofoverlay();
-    var_00 cameralinkto(var_01, "tag_origin");
-    var_00 controlslinkto(var_01);
+  if(isDefined(var_1)) {
+    var_0 visionsetmissilecamforplayer(game["thermal_vision"], 1.0);
+    var_0 thread delayedfofoverlay();
+    var_0 cameralinkto(var_1, "tag_origin");
+    var_0 controlslinkto(var_1);
 
     if(getdvarint("camera_thirdPerson")) {
-      var_00 scripts\mp\utility\game::setthirdpersondof(0);
+      var_0 scripts\mp\utility\game::setthirdpersondof(0);
     }
 
-    var_01 waittill("death");
+    var_1 waittill("death");
 
-    if(isDefined(var_01)) {
-      var_00 scripts\mp\matchdata::logkillstreakevent("predator_missile", var_1.origin);
+    if(isDefined(var_1)) {
+      var_0 scripts\mp\matchdata::logkillstreakevent("predator_missile", var_1.origin);
     }
 
-    var_00 controlsunlink();
-    var_00 scripts\mp\utility\game::freezecontrolswrapper(1);
+    var_0 controlsunlink();
+    var_0 scripts\mp\utility\game::freezecontrolswrapper(1);
 
     if(!level.gameended) {
-      var_00 thread staticeffect(0.5);
+      var_0 thread staticeffect(0.5);
     }
 
     wait 0.5;
-    var_00 thermalvisionfofoverlayoff();
-    var_00 cameraunlink();
+    var_0 thermalvisionfofoverlayoff();
+    var_0 cameraunlink();
 
     if(getdvarint("camera_thirdPerson")) {
-      var_00 scripts\mp\utility\game::setthirdpersondof(1);
+      var_0 scripts\mp\utility\game::setthirdpersondof(1);
     }
   }
 
-  var_00 scripts\mp\utility\game::clearusingremote();
+  var_0 scripts\mp\utility\game::clearusingremote();
 }
 
 delayedfofoverlay() {
@@ -136,27 +136,27 @@ delayedfofoverlay() {
   self thermalvisionfofoverlayon();
 }
 
-staticeffect(var_00) {
+staticeffect(var_0) {
   self endon("disconnect");
-  var_01 = newclienthudelem(self);
+  var_1 = newclienthudelem(self);
   var_1.horzalign = "fullscreen";
   var_1.vertalign = "fullscreen";
-  var_01 setshader("white", 640, 480);
+  var_1 setshader("white", 640, 480);
   var_1.archive = 1;
   var_1.sort = 10;
-  var_02 = newclienthudelem(self);
+  var_2 = newclienthudelem(self);
   var_2.horzalign = "fullscreen";
   var_2.vertalign = "fullscreen";
-  var_02 setshader("ac130_overlay_grain", 640, 480);
+  var_2 setshader("ac130_overlay_grain", 640, 480);
   var_2.archive = 1;
   var_2.sort = 20;
-  wait(var_00);
-  var_02 destroy();
-  var_01 destroy();
+  wait(var_0);
+  var_2 destroy();
+  var_1 destroy();
 }
 
-player_cleanuponteamchange(var_00) {
-  var_00 endon("death");
+player_cleanuponteamchange(var_0) {
+  var_0 endon("death");
   self endon("disconnect");
   scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
 
@@ -175,14 +175,14 @@ player_cleanuponteamchange(var_00) {
 }
 
 rocket_cleanupondeath() {
-  var_00 = self getentitynumber();
-  level.rockets[var_00] = self;
+  var_0 = self getentitynumber();
+  level.rockets[var_0] = self;
   self waittill("death");
-  level.rockets[var_00] = undefined;
+  level.rockets[var_0] = undefined;
 }
 
-player_cleanupongameended(var_00) {
-  var_00 endon("death");
+player_cleanupongameended(var_0) {
+  var_0 endon("death");
   self endon("death");
   level waittill("game_ended");
   self thermalvisionfofoverlayoff();

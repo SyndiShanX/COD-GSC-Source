@@ -4,31 +4,31 @@
  * Script: scripts\mp\heavyarmor.gsc
 *************************************/
 
-addheavyarmor(param_00) {
-  var_01 = self.heavyarmor;
+addheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
   if(!isDefined(self.struct)) {
-    var_01 = spawnStruct(self.heavyarmor);
-    var_01.player = self;
-    var_01.hp = 0;
-    self.heavyarmor = var_01;
-    var_01.hp = var_01.hp + param_00;
+    var_1 = spawnStruct(self.heavyarmor);
+    var_1.player = self;
+    var_1.hp = 0;
+    self.heavyarmor = var_1;
+    var_1.hp = var_1.hp + var_0;
     self notify("heavyArmor_added");
     return;
   }
 
-  var_01.hp = var_01.hp + param_00;
+  var_1.hp = var_1.hp + var_0;
 }
 
-subtractheavyarmor(param_00) {
-  var_01 = self.heavyarmor;
-  if(scripts\mp\utility::istrue(var_01.var_9344)) {
+subtractheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
+  if(scripts\mp\utility::istrue(var_1.var_9344)) {
     return;
   }
 
-  if(var_01.hp > 0) {
-    var_01.hp = max(0, var_01.hp - param_00);
-    scripts\mp\missions::func_D991("ch_heavy_armor_absorb", param_00);
-    if(var_01.hp <= 0) {
+  if(var_1.hp > 0) {
+    var_1.hp = max(0, var_1.hp - var_0);
+    scripts\mp\missions::func_D991("ch_heavy_armor_absorb", var_0);
+    if(var_1.hp <= 0) {
       thread heavyarmor_break();
     }
   }
@@ -39,45 +39,45 @@ removeheavyarmor() {
   self.heavyarmor = undefined;
 }
 
-heavyarmormodifydamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
-  if(param_02 <= 0 && param_03 <= 0) {
-    return [0, param_02, param_03];
+heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+  if(var_2 <= 0 && var_3 <= 0) {
+    return [0, var_2, var_3];
   }
 
-  if(param_04 == "MOD_SUICIDE") {
-    return [0, param_02, param_03];
+  if(var_4 == "MOD_SUICIDE") {
+    return [0, var_2, var_3];
   }
 
-  if(isDefined(param_01) && param_01.classname == "trigger_hurt" || param_01.classname == "worldspawn") {
-    return [0, param_02, param_03];
+  if(isDefined(var_1) && var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn") {
+    return [0, var_2, var_3];
   }
 
-  if(!param_00 hasheavyarmor()) {
-    return [0, param_02, param_03];
+  if(!var_0 hasheavyarmor()) {
+    return [0, var_2, var_3];
   }
 
-  if(scripts\mp\utility::isbombsiteweapon(param_05)) {
-    return [0, param_02, param_03];
+  if(scripts\mp\utility::isbombsiteweapon(var_5)) {
+    return [0, var_2, var_3];
   }
 
-  if(param_00 hasheavyarmorinvulnerability()) {
+  if(var_0 hasheavyarmorinvulnerability()) {
     return [1, 1, 0];
   }
 
-  var_0B = param_00 getheavyarmor();
-  var_0C = heavyarmor_getdamagemodifier(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A);
-  var_0D = param_02 * var_0C;
-  var_0E = param_03 * var_0C;
+  var_0B = var_0 getheavyarmor();
+  var_0C = heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+  var_0D = var_2 * var_0C;
+  var_0E = var_3 * var_0C;
   var_0F = var_0D + var_0E;
-  if(!param_0A) {
-    param_00 subtractheavyarmor(var_0F);
+  if(!var_0A) {
+    var_0 subtractheavyarmor(var_0F);
   }
 
-  if(param_00 hasheavyarmorinvulnerability()) {
+  if(var_0 hasheavyarmorinvulnerability()) {
     return [var_0B, 1, 0];
   }
 
-  return [param_02 + param_03, 1, 0];
+  return [var_2 + var_3, 1, 0];
 }
 
 getheavyarmor() {
@@ -108,21 +108,21 @@ heavyarmor_break() {
   thread removeheavyarmor();
 }
 
-heavyarmor_getdamagemodifier(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
+heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
   var_0B = [];
-  if(scripts\mp\utility::issuperweapon(param_04)) {
+  if(scripts\mp\utility::issuperweapon(var_4)) {
     var_0B[var_0B.size] = 1.33;
   }
 
-  if(isexplosivedamagemod(param_04)) {
+  if(isexplosivedamagemod(var_4)) {
     var_0B[var_0B.size] = 1.5;
   }
 
-  if(param_04 == "MOD_MELEE") {
+  if(var_4 == "MOD_MELEE") {
     var_0B[var_0B.size] = 1.5;
   }
 
-  if(scripts\mp\utility::isheadshot(param_05, param_08, param_04, param_01)) {
+  if(scripts\mp\utility::isheadshot(var_5, var_8, var_4, var_1)) {
     var_0B[var_0B.size] = 1.5;
   }
 

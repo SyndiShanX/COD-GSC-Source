@@ -17,68 +17,68 @@ func_11407() {
   self notify("tagging_think");
 }
 
-func_1140B(param_00, param_01) {
+func_1140B(var_0, var_1) {
   if(!isDefined(self.var_11400)) {
     func_11406();
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 4;
+  if(!isDefined(var_1)) {
+    var_1 = 4;
   }
 
-  self.var_11400["enabled"] = param_00;
-  self.var_11400["action_slot"] = param_01;
-  func_1140C(param_00);
+  self.var_11400["enabled"] = var_0;
+  self.var_11400["action_slot"] = var_1;
+  func_1140C(var_0);
 }
 
-func_1140C(param_00) {
+func_1140C(var_0) {
   if(!isDefined(self.var_11400)) {
     func_11406();
   }
 
-  self.var_11400["marking_enabled"] = param_00;
-  var_01 = func_11401();
+  self.var_11400["marking_enabled"] = var_0;
+  var_1 = func_11401();
   if(!self.var_11400["marking_enabled"]) {
-    foreach(var_03 in var_01) {
-      if(!isDefined(var_03)) {
+    foreach(var_3 in var_1) {
+      if(!isDefined(var_3)) {
         continue;
       }
 
-      if(issentient(var_03) && !isalive(var_03)) {
+      if(issentient(var_3) && !isalive(var_3)) {
         continue;
       }
 
-      var_03 func_113EB("none", self);
-      var_03 notify("tagged_entity_death_cleanup");
-      var_03 func_113FA();
+      var_3 func_113EB("none", self);
+      var_3 notify("tagged_entity_death_cleanup");
+      var_3 func_113FA();
     }
 
     return;
   }
 
-  foreach(var_03 in var_03) {
-    if(!isDefined(var_03)) {
+  foreach(var_3 in var_3) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(issentient(var_03) && !isalive(var_03)) {
+    if(issentient(var_3) && !isalive(var_3)) {
       continue;
     }
 
-    if(isDefined(var_03.var_113F3) && isDefined(var_03.var_113F3[self getentitynumber()])) {
-      var_03 func_113D9(self);
+    if(isDefined(var_3.var_113F3) && isDefined(var_3.var_113F3[self getentitynumber()])) {
+      var_3 func_113D9(self);
     }
   }
 }
 
-func_113D9(param_00, param_01) {
+func_113D9(var_0, var_1) {
   if(!isDefined(level.var_11414)) {
     level func_11AE9();
     level.var_11414 = 1;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   if(!isDefined(self) || issentient(self) && !isalive(self)) {
@@ -89,11 +89,11 @@ func_113D9(param_00, param_01) {
     return;
   }
 
-  if(param_01 && !isDefined(self.var_113F3) || !isDefined(self.var_113F3[param_00 getentitynumber()]) || !self.var_113F3[param_00 getentitynumber()]) {
-    param_00 thread scripts\sp\utility::play_sound_on_entity("drone_tag_success");
+  if(var_1 && !isDefined(self.var_113F3) || !isDefined(self.var_113F3[var_0 getentitynumber()]) || !self.var_113F3[var_0 getentitynumber()]) {
+    var_0 thread scripts\sp\utility::play_sound_on_entity("drone_tag_success");
   }
 
-  self.var_113F3[param_00 getentitynumber()] = 1;
+  self.var_113F3[var_0 getentitynumber()] = 1;
   func_113E2(1);
   self.var_113E9 = undefined;
   self.var_113E8 = undefined;
@@ -101,17 +101,17 @@ func_113D9(param_00, param_01) {
   func_113FB();
 }
 
-func_113DA(param_00, param_01) {
-  if(isDefined(self.var_113DB) && self.var_113DB == param_01) {
+func_113DA(var_0, var_1) {
+  if(isDefined(self.var_113DB) && self.var_113DB == var_1) {
     return;
   }
 
-  self.var_113DB = param_01;
+  self.var_113DB = var_1;
   self notify("tag_flash_entity");
   self endon("tag_flash_entity");
   self endon("death");
-  param_00 endon("death");
-  param_00 endon("disconnect");
+  var_0 endon("death");
+  var_0 endon("disconnect");
   if(!isDefined(self) || issentient(self) && !isalive(self)) {
     if(isDefined(self)) {
       func_113E2(0);
@@ -120,32 +120,32 @@ func_113DA(param_00, param_01) {
     return;
   }
 
-  var_02 = param_00 getentitynumber();
-  if(!isDefined(param_00.var_113E1)) {
-    param_00.var_113E1 = 0;
+  var_2 = var_0 getentitynumber();
+  if(!isDefined(var_0.var_113E1)) {
+    var_0.var_113E1 = 0;
   }
 
-  var_03 = isDefined(self.var_113F3) && scripts\engine\utility::istrue(self.var_113F3[var_02]);
-  var_04 = 1;
-  while(param_01 && getdvarint("ai_threatsight", 1)) {
+  var_3 = isDefined(self.var_113F3) && scripts\engine\utility::istrue(self.var_113F3[var_2]);
+  var_4 = 1;
+  while(var_1 && getdvarint("ai_threatsight", 1)) {
     self.var_113F9 = 1;
-    if(var_04) {
+    if(var_4) {
       func_113E2(1, "dead");
     } else {
-      func_113E2(var_03);
+      func_113E2(var_3);
     }
 
-    var_05 = param_00.var_113E1 - gettime();
-    if(var_05 > 0) {
-      wait(float(var_05) / 1000);
+    var_5 = var_0.var_113E1 - gettime();
+    if(var_5 > 0) {
+      wait(float(var_5) / 1000);
     }
 
-    var_04 = !var_04;
-    param_00.var_113E1 = gettime() + 200;
-    var_03 = isDefined(self.var_113F3) && scripts\engine\utility::istrue(self.var_113F3[var_02]);
+    var_4 = !var_4;
+    var_0.var_113E1 = gettime() + 200;
+    var_3 = isDefined(self.var_113F3) && scripts\engine\utility::istrue(self.var_113F3[var_2]);
   }
 
-  func_113E2(var_03);
+  func_113E2(var_3);
 }
 
 func_11406() {
@@ -181,14 +181,14 @@ func_11AE9() {
 }
 
 func_11405() {
-  var_00 = [];
-  var_00["r_hudoutlineFillColor0"] = "0.5 0.5 0.5 0";
-  var_00["r_hudoutlineFillColor1"] = "0.5 0.5 0.5 0";
-  var_00["r_hudoutlineOccludedOutlineColor"] = "0.5 0.5 0.5 1";
-  var_00["r_hudoutlineOccludedInlineColor"] = "0.5 0.5 0.5 0.5";
-  var_00["r_hudoutlineOccludedInteriorColor"] = "0.5 0.5 0.5 0.5";
-  var_00["r_hudOutlineOccludedColorFromFill"] = 1;
-  return var_00;
+  var_0 = [];
+  var_0["r_hudoutlineFillColor0"] = "0.5 0.5 0.5 0";
+  var_0["r_hudoutlineFillColor1"] = "0.5 0.5 0.5 0";
+  var_0["r_hudoutlineOccludedOutlineColor"] = "0.5 0.5 0.5 1";
+  var_0["r_hudoutlineOccludedInlineColor"] = "0.5 0.5 0.5 0.5";
+  var_0["r_hudoutlineOccludedInteriorColor"] = "0.5 0.5 0.5 0.5";
+  var_0["r_hudOutlineOccludedColorFromFill"] = 1;
+  return var_0;
 }
 
 func_1140E() {
@@ -202,12 +202,12 @@ func_1140E() {
 }
 
 func_11401() {
-  var_00 = level.var_10E6D.enemies[self.team];
-  var_01 = getEntArray("rss_static_robot", "script_noteworthy");
-  var_02 = getaiarray(self.team);
-  var_03 = scripts\engine\utility::array_combine(var_00, var_01);
-  var_04 = scripts\engine\utility::array_combine(var_03, var_02);
-  return var_04;
+  var_0 = level.var_10E6D.enemies[self.team];
+  var_1 = getEntArray("rss_static_robot", "script_noteworthy");
+  var_2 = getaiarray(self.team);
+  var_3 = scripts\engine\utility::array_combine(var_0, var_1);
+  var_4 = scripts\engine\utility::array_combine(var_3, var_2);
+  return var_4;
 }
 
 func_1140D() {
@@ -228,8 +228,8 @@ func_11412() {
       return;
     }
 
-    var_00 = self.var_11400["enabled"] && self.var_11400["outline_enabled"];
-    if(var_00 && scripts\sp\utility::func_9D27() || func_1140D()) {
+    var_0 = self.var_11400["enabled"] && self.var_11400["outline_enabled"];
+    if(var_0 && scripts\sp\utility::func_9D27() || func_1140D()) {
       func_113EC();
     }
 
@@ -238,59 +238,59 @@ func_11412() {
 }
 
 func_113EC() {
-  var_00 = func_11401();
-  var_01 = self getEye();
-  var_02 = anglesToForward(self getplayerangles());
-  var_03 = undefined;
-  var_04 = max(0.01, getdvarfloat("tagging_ads_cone_range"));
-  var_05 = cos(getdvarfloat("tagging_ads_cone_angle"));
-  var_06 = [0, 0.5, 1];
+  var_0 = func_11401();
+  var_1 = self getEye();
+  var_2 = anglesToForward(self getplayerangles());
+  var_3 = undefined;
+  var_4 = max(0.01, getdvarfloat("tagging_ads_cone_range"));
+  var_5 = cos(getdvarfloat("tagging_ads_cone_angle"));
+  var_6 = [0, 0.5, 1];
   if(func_1140D()) {
-    var_04 = level.player.var_11400["tagging_fade_max"];
-    var_05 = cos(getdvarfloat("cg_fov"));
+    var_4 = level.player.var_11400["tagging_fade_max"];
+    var_5 = cos(getdvarfloat("cg_fov"));
   }
 
-  var_07 = bulletTrace(var_01, var_01 + var_02 * 32000, 1, self);
-  var_03 = var_07["entity"];
-  foreach(var_09 in var_00) {
-    if(!isDefined(var_09)) {
+  var_7 = bulletTrace(var_1, var_1 + var_2 * 32000, 1, self);
+  var_3 = var_7["entity"];
+  foreach(var_9 in var_0) {
+    if(!isDefined(var_9)) {
       continue;
     }
 
-    if(issentient(var_09) && !isalive(var_09)) {
+    if(issentient(var_9) && !isalive(var_9)) {
       continue;
     }
 
-    if(isDefined(var_09.var_113F3) && isDefined(var_09.var_113F3[self getentitynumber()])) {
+    if(isDefined(var_9.var_113F3) && isDefined(var_9.var_113F3[self getentitynumber()])) {
       continue;
     }
 
-    if(!getdvarint("tagging_vehicle_ride") && isDefined(var_09.var_13223) && var_09.var_13223.var_37A > 0) {
+    if(!getdvarint("tagging_vehicle_ride") && isDefined(var_9.var_13223) && var_9.var_13223.var_37A > 0) {
       continue;
     }
 
-    var_0A = isDefined(var_03) && var_03 == var_09;
+    var_0A = isDefined(var_3) && var_3 == var_9;
     if(!var_0A) {
-      var_0B = var_09 gettagorigin("tag_origin");
-      if(isai(var_09)) {
-        var_0B = var_09 getEye();
+      var_0B = var_9 gettagorigin("tag_origin");
+      if(isai(var_9)) {
+        var_0B = var_9 getEye();
       }
 
-      var_0C = distance(var_0B, var_01);
-      if(var_0C <= var_04) {
-        var_0D = min(1, var_05 + 1 - var_05 * var_0C / var_04);
-        foreach(var_0F in var_06) {
-          var_10 = vectorlerp(var_09.origin, var_0B, var_0F);
-          var_11 = var_10 - var_01;
+      var_0C = distance(var_0B, var_1);
+      if(var_0C <= var_4) {
+        var_0D = min(1, var_5 + 1 - var_5 * var_0C / var_4);
+        foreach(var_0F in var_6) {
+          var_10 = vectorlerp(var_9.origin, var_0B, var_0F);
+          var_11 = var_10 - var_1;
           var_12 = vectornormalize(var_11);
-          var_13 = vectordot(var_12, var_02);
+          var_13 = vectordot(var_12, var_2);
           if(var_13 > var_0D) {
             if(func_1140D()) {
               var_0A = 1;
               break;
             }
 
-            if(func_650A(var_09)) {
+            if(func_650A(var_9)) {
               var_0A = 1;
               break;
             }
@@ -300,11 +300,11 @@ func_113EC() {
     }
 
     if(var_0A) {
-      var_09 func_113EB("tracking", self, 1);
+      var_9 func_113EB("tracking", self, 1);
       continue;
     }
 
-    var_09 func_113EB("none", self, 0);
+    var_9 func_113EB("none", self, 0);
   }
 }
 
@@ -329,70 +329,70 @@ func_650C() {
 func_650B() {
   self notify("enemy_sight_trace_process");
   self endon("enemy_sight_trace_process");
-  var_00 = 3;
+  var_0 = 3;
   for(;;) {
     level.var_11410 = scripts\engine\utility::array_removeundefined(level.var_11410);
-    for(var_01 = 0; var_01 < min(var_00, level.var_11410.size); var_01++) {
-      var_02 = level.var_11410[0];
-      level.var_11410 = scripts\engine\utility::array_remove(level.var_11410, var_02);
-      var_02.var_1140F = func_6509(var_02);
-      var_02.var_11411 = undefined;
+    for(var_1 = 0; var_1 < min(var_0, level.var_11410.size); var_1++) {
+      var_2 = level.var_11410[0];
+      level.var_11410 = scripts\engine\utility::array_remove(level.var_11410, var_2);
+      var_2.var_1140F = func_6509(var_2);
+      var_2.var_11411 = undefined;
     }
 
     wait(0.05);
   }
 }
 
-func_650A(param_00) {
-  param_00 func_650C();
-  return param_00.var_1140F;
+func_650A(var_0) {
+  var_0 func_650C();
+  return var_0.var_1140F;
 }
 
-func_6509(param_00) {
-  var_01 = 0;
-  var_02 = level.player getEye();
-  if(!var_01 && param_00 scripts\sp\utility::hastag(param_00.model, "j_head")) {
-    if(sighttracepassed(var_02, param_00 gettagorigin("j_head"), 0, param_00.var_101E1, param_00, 0)) {
-      var_01 = 1;
+func_6509(var_0) {
+  var_1 = 0;
+  var_2 = level.player getEye();
+  if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "j_head")) {
+    if(sighttracepassed(var_2, var_0 gettagorigin("j_head"), 0, var_0.var_101E1, var_0, 0)) {
+      var_1 = 1;
     }
   }
 
-  if(!var_01 && param_00 scripts\sp\utility::hastag(param_00.model, "j_spinelower")) {
-    if(sighttracepassed(var_02, param_00 gettagorigin("j_spinelower"), 0, param_00.var_101E1, param_00, 0)) {
-      var_01 = 1;
+  if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "j_spinelower")) {
+    if(sighttracepassed(var_2, var_0 gettagorigin("j_spinelower"), 0, var_0.var_101E1, var_0, 0)) {
+      var_1 = 1;
     }
   }
 
-  if(!var_01 && param_00 scripts\sp\utility::hastag(param_00.model, "tag_attach")) {
-    if(sighttracepassed(var_02, param_00 gettagorigin("tag_attach"), 0, param_00.var_101E1, param_00, 0)) {
-      var_01 = 1;
+  if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "tag_attach")) {
+    if(sighttracepassed(var_2, var_0 gettagorigin("tag_attach"), 0, var_0.var_101E1, var_0, 0)) {
+      var_1 = 1;
     }
   }
 
-  if(!var_01 && sighttracepassed(var_02, param_00.origin, 0, param_00.var_101E1, param_00, 0)) {
-    var_01 = 1;
+  if(!var_1 && sighttracepassed(var_2, var_0.origin, 0, var_0.var_101E1, var_0, 0)) {
+    var_1 = 1;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_113EB(param_00, param_01, param_02) {
-  var_03 = gettime();
-  if(!isDefined(param_02)) {
-    param_02 = 0;
+func_113EB(var_0, var_1, var_2) {
+  var_3 = gettime();
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var_04 = getdvarint("tagging_normal_pulse_rate");
-  var_05 = getdvarint("tagging_normal_prep_time");
-  var_06 = getdvarint("tagging_normal_track_time");
-  var_07 = 0;
-  if(!param_01.var_11400["marking_enabled"]) {
-    param_00 = "range";
+  var_4 = getdvarint("tagging_normal_pulse_rate");
+  var_5 = getdvarint("tagging_normal_prep_time");
+  var_6 = getdvarint("tagging_normal_track_time");
+  var_7 = 0;
+  if(!var_1.var_11400["marking_enabled"]) {
+    var_0 = "range";
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "view":
-      var_07 = 1;
+      var_7 = 1;
       self.var_113E9 = 0;
       self.var_113EA = undefined;
       break;
@@ -403,19 +403,19 @@ func_113EB(param_00, param_01, param_02) {
       break;
 
     case "tracking_slow":
-      var_04 = getdvarint("tagging_slow_pulse_rate");
-      var_05 = getdvarint("tagging_slow_prep_time");
-      var_06 = getdvarint("tagging_slow_track_time");
+      var_4 = getdvarint("tagging_slow_pulse_rate");
+      var_5 = getdvarint("tagging_slow_prep_time");
+      var_6 = getdvarint("tagging_slow_track_time");
       break;
 
     case "tracking":
       if(!isDefined(self.var_113EA)) {
-        if(gettime() - param_01.var_11400["last_tag_start"] / 1000 <= 0.25) {
+        if(gettime() - var_1.var_11400["last_tag_start"] / 1000 <= 0.25) {
           return;
         }
 
-        self.var_113EA = var_03;
-        param_01.var_11400["last_tag_start"] = var_03;
+        self.var_113EA = var_3;
+        var_1.var_11400["last_tag_start"] = var_3;
       }
       break;
 
@@ -427,28 +427,28 @@ func_113EB(param_00, param_01, param_02) {
       break;
   }
 
-  var_08 = var_06 + var_05;
-  var_09 = 0;
+  var_8 = var_6 + var_5;
+  var_9 = 0;
   if(isDefined(self.var_113EA)) {
-    var_09 = var_03 - self.var_113EA;
+    var_9 = var_3 - self.var_113EA;
   }
 
-  if(var_09 >= var_08) {
-    if(param_02) {
-      param_01.var_113F4 = 1;
+  if(var_9 >= var_8) {
+    if(var_2) {
+      var_1.var_113F4 = 1;
     }
 
-    func_113D9(param_01);
+    func_113D9(var_1);
   }
 }
 
-func_113E2(param_00, param_01) {
+func_113E2(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
 
-  if(param_00) {
-    func_113FB(param_01);
+  if(var_0) {
+    func_113FB(var_1);
     thread func_113F7();
     thread func_113F8();
     return;
@@ -475,14 +475,14 @@ func_113F8() {
         self.var_113FD = gettime();
       }
 
-      var_00 = int(gettime() - self.var_113FD / 100);
-      if(var_00 % 2) {
+      var_0 = int(gettime() - self.var_113FD / 100);
+      if(var_0 % 2) {
         func_113FA();
       } else {
         func_113FB();
       }
 
-      if(var_00 > 3) {
+      if(var_0 > 3) {
         func_113FB();
         self.var_113F9 = 1;
       }
@@ -505,26 +505,26 @@ func_113FE() {
 }
 
 func_113F5() {
-  var_00["allies"] = 3;
-  var_00["axis"] = 1;
-  var_00["team3"] = 0;
-  var_00["dead"] = 0;
-  var_01 = "dead";
+  var_0["allies"] = 3;
+  var_0["axis"] = 1;
+  var_0["team3"] = 0;
+  var_0["dead"] = 0;
+  var_1 = "dead";
   if(isDefined(self.team)) {
-    var_01 = self.team;
+    var_1 = self.team;
   }
 
-  return var_00[var_01];
+  return var_0[var_1];
 }
 
-func_113FB(param_00) {
+func_113FB(var_0) {
   if(!isDefined(self)) {
     return;
   }
 
   func_113FA();
-  var_01 = func_113F5();
-  scripts\sp\utility::func_9196(var_01, 0, 1, "tagging");
+  var_1 = func_113F5();
+  scripts\sp\utility::func_9196(var_1, 0, 1, "tagging");
   thread func_113FC();
   self.var_11413 = 1;
 }
@@ -544,10 +544,10 @@ func_113FC() {
   self endon("tagged_status_update");
   self endon("death");
   while(isDefined(self) && !issentient(self) || isalive(self)) {
-    var_00 = level.player.var_11400["tagging_fade_max"];
-    var_01 = var_00 * var_00;
-    var_02 = lengthsquared(level.player.origin - self.origin);
-    if(var_02 > var_01) {
+    var_0 = level.player.var_11400["tagging_fade_max"];
+    var_1 = var_0 * var_0;
+    var_2 = lengthsquared(level.player.origin - self.origin);
+    if(var_2 > var_1) {
       func_113FA();
       continue;
     }
@@ -565,22 +565,22 @@ func_113F7() {
   self notify("tagged_entity_death_cleanup");
   self endon("tagged_entity_death_cleanup");
   self.var_113F7 = 1;
-  self waittill("death", var_00, var_01);
-  if(isplayer(var_00)) {
+  self waittill("death", var_0, var_1);
+  if(isplayer(var_0)) {
     wait(0.1);
     if(isDefined(self) && distancesquared(self.origin, level.player.origin) > 90000) {
-      var_02 = gettime();
-      var_03 = 1;
-      while(isDefined(self) && gettime() - var_02 < 1000) {
-        if(var_03 == 0 && randomint(100) < 30) {
+      var_2 = gettime();
+      var_3 = 1;
+      while(isDefined(self) && gettime() - var_2 < 1000) {
+        if(var_3 == 0 && randomint(100) < 30) {
           func_113E2(1);
-          var_03 = 1;
+          var_3 = 1;
           continue;
         }
 
-        if(var_03 == 1) {
+        if(var_3 == 1) {
           func_113E2(0);
-          var_03 = 0;
+          var_3 = 0;
         }
 
         wait(0.05);

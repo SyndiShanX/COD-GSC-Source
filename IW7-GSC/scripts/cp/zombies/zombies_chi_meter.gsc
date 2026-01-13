@@ -4,63 +4,63 @@
  * Script: scripts\cp\zombies\zombies_chi_meter.gsc
 ****************************************************/
 
-init_chi_meter(param_00) {
-  param_00.chi_meter_adustment = 0;
+init_chi_meter(var_0) {
+  var_0.chi_meter_adustment = 0;
 }
 
-chi_meter_on(param_00, param_01) {
-  var_02 = 1;
-  switch (param_01) {
+chi_meter_on(var_0, var_1) {
+  var_2 = 1;
+  switch (var_1) {
     case "snake":
-      var_02 = 1;
+      var_2 = 1;
       break;
 
     case "tiger":
-      var_02 = 2;
+      var_2 = 2;
       break;
 
     case "crane":
-      var_02 = 3;
+      var_2 = 3;
       break;
 
     case "dragon":
-      var_02 = 4;
+      var_2 = 4;
       break;
   }
 
-  param_00 setclientomnvar("zm_ui_show_general", var_02);
-  param_00 thread clean_up_chi_meter_on_last_stand(param_00);
-  param_00 chi_drain_time(600);
+  var_0 setclientomnvar("zm_ui_show_general", var_2);
+  var_0 thread clean_up_chi_meter_on_last_stand(var_0);
+  var_0 chi_drain_time(600);
 }
 
-chi_meter_off(param_00) {
-  param_00 setclientomnvar("zm_ui_show_general", 0);
-  param_00 setclientomnvar("zom_general_fill_percent", 0);
-  param_00 notify("chi_mode_exited");
+chi_meter_off(var_0) {
+  var_0 setclientomnvar("zm_ui_show_general", 0);
+  var_0 setclientomnvar("zom_general_fill_percent", 0);
+  var_0 notify("chi_mode_exited");
 }
 
-clean_up_chi_meter_on_last_stand(param_00) {
+clean_up_chi_meter_on_last_stand(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("chi_mode_exited");
+  var_0 endon("disconnect");
+  var_0 endon("chi_mode_exited");
   for(;;) {
-    param_00 waittill("last_stand");
-    if(scripts\engine\utility::istrue(param_00.unlimited_chi)) {
+    var_0 waittill("last_stand");
+    if(scripts\engine\utility::istrue(var_0.unlimited_chi)) {
       continue;
     } else {
-      param_00 chi_meter_off(param_00);
+      var_0 chi_meter_off(var_0);
     }
   }
 }
 
-chi_drain_time(param_00) {
+chi_drain_time(var_0) {
   self endon("disconnect");
   self endon("chi_mode_exited");
   level endon("game_ended");
-  var_01 = 1000;
-  var_02 = var_01 / 1000;
-  var_03 = var_01 / param_00;
-  self.chi_meter_amount = var_01;
+  var_1 = 1000;
+  var_2 = var_1 / 1000;
+  var_3 = var_1 / var_0;
+  self.chi_meter_amount = var_1;
   for(;;) {
     if(!scripts\engine\utility::istrue(self.spectating) && !scripts\engine\utility::istrue(self.inlaststand)) {
       if(scripts\engine\utility::istrue(self.chi_mode_od)) {
@@ -68,24 +68,24 @@ chi_drain_time(param_00) {
       }
 
       if(!scripts\engine\utility::istrue(self.unlimited_chi)) {
-        var_01 = var_01 + self.chi_meter_adustment;
+        var_1 = var_1 + self.chi_meter_adustment;
       }
 
-      if(var_01 > 1000) {
-        var_01 = 1000;
-      } else if(var_01 <= 0) {
-        var_01 = 0;
+      if(var_1 > 1000) {
+        var_1 = 1000;
+      } else if(var_1 <= 0) {
+        var_1 = 0;
       }
 
       self.chi_meter_adustment = 0;
-      var_02 = var_01 / 1000;
-      if(var_02 > 1) {
-        var_02 = 1;
+      var_2 = var_1 / 1000;
+      if(var_2 > 1) {
+        var_2 = 1;
       }
 
-      var_04 = var_02;
-      self setclientomnvar("zom_general_fill_percent", var_04);
-      if(var_02 <= 0) {
+      var_4 = var_2;
+      self setclientomnvar("zom_general_fill_percent", var_4);
+      if(var_2 <= 0) {
         while(scripts\engine\utility::istrue(self.kung_fu_exit_delay)) {
           wait(0.1);
         }
@@ -97,7 +97,7 @@ chi_drain_time(param_00) {
       }
     }
 
-    self.chi_meter_amount = var_01;
+    self.chi_meter_amount = var_1;
     wait(0.1);
   }
 }
@@ -110,8 +110,8 @@ chi_meter_large_bump() {
   self.chi_meter_adustment = self.chi_meter_adustment + 500;
 }
 
-chi_meter_kill_decrement(param_00) {
-  self.chi_meter_adustment = self.chi_meter_adustment - param_00;
+chi_meter_kill_decrement(var_0) {
+  self.chi_meter_adustment = self.chi_meter_adustment - var_0;
 }
 
 flash_chi_meter_glow() {

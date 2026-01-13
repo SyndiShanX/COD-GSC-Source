@@ -13,70 +13,70 @@ parse_music_genre_table() {
   level.songs_played = 0;
 
   if(isDefined(level.jukebox_table)) {
-    var_00 = level.jukebox_table;
+    var_0 = level.jukebox_table;
   } else {
-    var_00 = "cp\zombies\cp_zmb_music_genre.csv";
+    var_0 = "cp\zombies\cp_zmb_music_genre.csv";
   }
 
-  var_01 = 0;
+  var_1 = 0;
 
   for(;;) {
-    var_02 = tablelookupbyrow(var_00, var_01, 1);
+    var_2 = tablelookupbyrow(var_0, var_1, 1);
 
-    if(var_02 == "") {
+    if(var_2 == "") {
       break;
     }
-    if(scripts\engine\utility::array_contains(level.event_songs, var_02)) {
+    if(scripts\engine\utility::array_contains(level.event_songs, var_2)) {
       var_1++;
       continue;
     }
 
-    var_03 = tablelookupbyrow(var_00, var_01, 2);
-    var_04 = tablelookupbyrow(var_00, var_01, 3);
-    var_05 = tablelookupbyrow(var_00, var_01, 4);
-    var_06 = tablelookupbyrow(var_00, var_01, 5);
-    var_07 = spawnStruct();
-    var_7.songname = var_02;
-    var_7.djintro = var_04;
-    var_7.djoutro = var_05;
-    var_7.djgenreintro = var_06;
-    var_7.genre = var_03;
-    level.jukebox_songs[level.jukebox_songs.size] = var_07;
+    var_3 = tablelookupbyrow(var_0, var_1, 2);
+    var_4 = tablelookupbyrow(var_0, var_1, 3);
+    var_5 = tablelookupbyrow(var_0, var_1, 4);
+    var_6 = tablelookupbyrow(var_0, var_1, 5);
+    var_7 = spawnStruct();
+    var_7.songname = var_2;
+    var_7.djintro = var_4;
+    var_7.djoutro = var_5;
+    var_7.djgenreintro = var_6;
+    var_7.genre = var_3;
+    level.jukebox_songs[level.jukebox_songs.size] = var_7;
     var_1++;
   }
 }
 
-jukebox_start(var_00, var_01, var_02) {
+jukebox_start(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("add_hidden_song_to_playlist");
   level endon("add_hidden_song_2_to_playlist");
   level endon("force_new_song");
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     level waittill("jukebox_start");
 
     if(scripts\cp\utility::map_check(0)) {
-      var_03 = lookupsoundlength("dj_jingle_intro") / 1000;
+      var_3 = lookupsoundlength("dj_jingle_intro") / 1000;
     } else {
-      var_03 = 0.005;
+      var_3 = 0.005;
     }
 
-    wait(var_03);
+    wait(var_3);
   }
 
   if(isDefined(level.jukebox_table)) {
-    var_04 = level.jukebox_table;
+    var_4 = level.jukebox_table;
   } else {
-    var_04 = "cp\zombies\cp_zmb_music_genre.csv";
+    var_4 = "cp\zombies\cp_zmb_music_genre.csv";
   }
 
-  if(!scripts\engine\utility::is_true(var_02)) {
-    var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
+  if(!scripts\engine\utility::is_true(var_2)) {
+    var_5 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
 
     if(isDefined(level.current_dj_song)) {
       for(;;) {
         if(var_5[0].songname == level.current_dj_song) {
-          var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
+          var_5 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
         } else {
           break;
         }
@@ -85,29 +85,29 @@ jukebox_start(var_00, var_01, var_02) {
       }
     }
   } else
-    var_05 = level.jukebox_songs;
+    var_5 = level.jukebox_songs;
 
-  var_06 = spawn("script_origin", var_00);
-  level.jukebox_org_struct = var_06;
-  var_07 = get_song_struct(var_05, 1, var_06);
+  var_6 = spawn("script_origin", var_0);
+  level.jukebox_org_struct = var_6;
+  var_7 = get_song_struct(var_5, 1, var_6);
 
   for(;;) {
     if(scripts\engine\utility::flag("jukebox_paused")) {
       scripts\engine\utility::flag_waitopen("jukebox_paused");
     }
 
-    var_08 = var_7.songname;
-    level.current_dj_song = var_08;
-    var_05 = scripts\engine\utility::array_remove(var_05, var_07);
-    var_09 = var_7.djoutro;
+    var_8 = var_7.songname;
+    level.current_dj_song = var_8;
+    var_5 = scripts\engine\utility::array_remove(var_5, var_7);
+    var_9 = var_7.djoutro;
 
-    if(var_5.size < 1 && !scripts\engine\utility::is_true(var_02)) {
-      var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
+    if(var_5.size < 1 && !scripts\engine\utility::is_true(var_2)) {
+      var_5 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
 
       if(isDefined(level.current_dj_song)) {
         for(;;) {
           if(var_5[0].songname == level.current_dj_song) {
-            var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
+            var_5 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
           } else {
             break;
           }
@@ -117,80 +117,80 @@ jukebox_start(var_00, var_01, var_02) {
       }
     }
 
-    var_10 = int(tablelookup(var_04, 1, var_08, 0));
-    var_06 playLoopSound(var_08);
+    var_10 = int(tablelookup(var_4, 1, var_8, 0));
+    var_6 playLoopSound(var_8);
     level.songs_played++;
-    var_11 = lookupsoundlength(var_08) / 1000;
+    var_11 = lookupsoundlength(var_8) / 1000;
     setomnvar("song_playing", var_10);
     level.song_last_played = var_10;
-    var_06 thread earlyendon(var_06);
+    var_6 thread earlyendon(var_6);
     level scripts\engine\utility::waittill_any_timeout(var_11, "skip_song");
-    var_06 stoploopsound();
+    var_6 stoploopsound();
 
     if(level.songs_played % 4 == 0) {
-      if(var_09 != "") {
-        var_06 playSound(var_09);
-        var_12 = lookupsoundlength(var_09) / 1000;
+      if(var_9 != "") {
+        var_6 playSound(var_9);
+        var_12 = lookupsoundlength(var_9) / 1000;
         level scripts\engine\utility::waittill_any_timeout(var_12);
       }
     }
 
-    var_07 = get_song_struct(var_05, 0, var_06);
+    var_7 = get_song_struct(var_5, 0, var_6);
     wait 1.0;
   }
 }
 
-earlyendon(var_00) {
+earlyendon(var_0) {
   level endon("game_ended");
   level scripts\engine\utility::waittill_any("add_hidden_song_to_playlist", "add_hidden_song_2_to_playlist", "force_new_song");
-  var_00 stoploopsound();
+  var_0 stoploopsound();
   wait 2.0;
 
-  if(isDefined(var_00)) {
-    var_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
-force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
+force_song(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level endon("game_ended");
   level endon("add_hidden_song_to_playlist");
   level endon("add_hidden_song_2_to_playlist");
   level notify("force_new_song");
   level endon("force_new_song");
 
-  if(isDefined(var_05)) {
-    level.forced_songs[var_05] = var_05;
+  if(isDefined(var_5)) {
+    level.forced_songs[var_5] = var_5;
   }
 
-  var_07 = spawnStruct();
-  var_7.songname = var_01;
+  var_7 = spawnStruct();
+  var_7.songname = var_1;
   var_7.djintro = "";
   var_7.djoutro = "";
   var_7.djgenreintro = "";
   var_7.genre = "music";
-  level.jukebox_songs[level.jukebox_songs.size] = var_07;
+  level.jukebox_songs[level.jukebox_songs.size] = var_7;
 
-  if(!isDefined(var_00)) {
-    var_00 = (649, 683, 254);
+  if(!isDefined(var_0)) {
+    var_0 = (649, 683, 254);
   }
 
   wait 2.5;
 
-  if(isDefined(var_03)) {}
+  if(isDefined(var_3)) {}
 
-  if(isDefined(var_02)) {
-    scripts\engine\utility::play_sound_in_space(var_02, var_00);
+  if(isDefined(var_2)) {
+    scripts\engine\utility::play_sound_in_space(var_2, var_0);
   } else {
-    scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", var_00);
+    scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", var_0);
   }
 
-  var_08 = spawn("script_origin", var_00);
-  var_08 playLoopSound(var_01);
-  level.current_dj_song = var_01;
-  var_08 thread earlyendon(var_08);
-  var_09 = lookupsoundlength(var_01) / 1000;
-  scripts\engine\utility::waittill_any_timeout(var_09, "skip_song");
-  var_08 stoploopsound();
+  var_8 = spawn("script_origin", var_0);
+  var_8 playLoopSound(var_1);
+  level.current_dj_song = var_1;
+  var_8 thread earlyendon(var_8);
+  var_9 = lookupsoundlength(var_1) / 1000;
+  scripts\engine\utility::waittill_any_timeout(var_9, "skip_song");
+  var_8 stoploopsound();
 
   if(getdvar("ui_mapname") != "cp_disco") {
     level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "high", 20, 1, 0, 1);
@@ -198,117 +198,117 @@ force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
     wait(var_10);
   }
 
-  if(scripts\engine\utility::is_true(var_06)) {
+  if(scripts\engine\utility::is_true(var_6)) {
     parse_music_genre_table();
   }
 
   level thread jukebox_start((649, 683, 254), 1);
 }
 
-get_song_struct(var_00, var_01, var_02) {
-  if(!isDefined(var_01)) {
-    var_01 = 0;
+get_song_struct(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  foreach(var_09, var_04 in var_00) {
-    var_05 = var_0[var_09].djintro;
+  foreach(var_9, var_4 in var_0) {
+    var_5 = var_0[var_9].djintro;
 
-    if(var_0[var_09].genre == "perk") {
-      if(var_01) {
+    if(var_0[var_9].genre == "perk") {
+      if(var_1) {
         continue;
       }
-      var_06 = gettime();
+      var_6 = gettime();
 
-      if(var_06 < level.next_perk_jingle_time && var_09 + 1 < var_0.size) {
+      if(var_6 < level.next_perk_jingle_time && var_9 + 1 < var_0.size) {
         continue;
       } else {
-        if(isDefined(var_05) && var_05 != "") {
-          level thread scripts\cp\cp_vo::try_to_play_vo(var_05, "zmb_dj_vo");
-          var_07 = lookupsoundlength(var_05) / 1000;
-          wait(var_07);
+        if(isDefined(var_5) && var_5 != "") {
+          level thread scripts\cp\cp_vo::try_to_play_vo(var_5, "zmb_dj_vo");
+          var_7 = lookupsoundlength(var_5) / 1000;
+          wait(var_7);
         }
 
         level.next_perk_jingle_time = gettime() + 180000;
-        return var_0[var_09];
+        return var_0[var_9];
       }
     } else {
-      if(isDefined(var_05) && var_05 != "") {
+      if(isDefined(var_5) && var_5 != "") {
         if(getdvar("ui_mapname") == "cp_disco") {
-          var_05 = cp_disco_pam_radio_vo();
+          var_5 = cp_disco_pam_radio_vo();
 
-          if(var_05 != "nil") {
+          if(var_5 != "nil") {
             while(scripts\engine\utility::is_true(level.pam_playing) || scripts\engine\utility::is_true(level.announcer_vo_playing)) {
               wait 0.1;
             }
 
-            var_02 playLoopSound(var_05);
+            var_2 playLoopSound(var_5);
 
             if(!isDefined(level.jukebox_playing)) {
               level.jukebox_playing = [];
             }
 
             if(!isDefined(level.jukebox_playing)) {
-              level.jukebox_playing[var_05] = [];
+              level.jukebox_playing[var_5] = [];
             }
 
-            level.jukebox_playing[var_05] = 1;
-            var_02 thread earlyendon(var_02);
-            var_08 = lookupsoundlength(var_05) / 1000;
-            scripts\engine\utility::waittill_any_timeout(var_08, "skip_song");
-            level.jukebox_playing[var_05] = 0;
-            var_02 stoploopsound();
+            level.jukebox_playing[var_5] = 1;
+            var_2 thread earlyendon(var_2);
+            var_8 = lookupsoundlength(var_5) / 1000;
+            scripts\engine\utility::waittill_any_timeout(var_8, "skip_song");
+            level.jukebox_playing[var_5] = 0;
+            var_2 stoploopsound();
           }
         } else {
-          level thread scripts\cp\cp_vo::try_to_play_vo(var_05, "zmb_dj_vo", "high", 20, 1, 0, 1);
-          var_07 = lookupsoundlength(var_05) / 1000;
-          wait(var_07);
+          level thread scripts\cp\cp_vo::try_to_play_vo(var_5, "zmb_dj_vo", "high", 20, 1, 0, 1);
+          var_7 = lookupsoundlength(var_5) / 1000;
+          wait(var_7);
         }
       }
 
-      return var_0[var_09];
+      return var_0[var_9];
     }
   }
 }
 
 cp_disco_pam_radio_vo() {
-  var_00 = "nil";
+  var_0 = "nil";
 
   switch (level.pam_radio_counter) {
     case 1:
-      var_00 = "pam_radio_dojo_intro";
+      var_0 = "pam_radio_dojo_intro";
       break;
     case 2:
-      var_00 = "pam_radio_power";
+      var_0 = "pam_radio_power";
       break;
     case 3:
-      var_00 = "pam_radio_perks";
+      var_0 = "pam_radio_perks";
       break;
     case 4:
-      var_00 = "pam_radio_generic";
+      var_0 = "pam_radio_generic";
       break;
     case 5:
-      var_00 = "pam_radio_dojo";
+      var_0 = "pam_radio_dojo";
       break;
     case 6:
-      var_00 = "pam_radio_pap";
+      var_0 = "pam_radio_pap";
       break;
     case 7:
-      var_00 = "pam_radio_defeat_ratking_1";
+      var_0 = "pam_radio_defeat_ratking_1";
       break;
     case 8:
-      var_00 = "pam_radio_defeat_ratking_2";
+      var_0 = "pam_radio_defeat_ratking_2";
       break;
     case 11:
-      var_00 = "pam_radio_defeat_ratking_3";
+      var_0 = "pam_radio_defeat_ratking_3";
       break;
     case 13:
-      var_00 = "pam_radio_final_right_ratking";
+      var_0 = "pam_radio_final_right_ratking";
       break;
     default:
-      var_00 = "nil";
+      var_0 = "nil";
       break;
   }
 
   level.pam_radio_counter = level.pam_radio_counter + 1;
-  return var_00;
+  return var_0;
 }

@@ -10,68 +10,68 @@ func_918F() {
   setsaveddvar("r_hudoutlineEnable", 1);
 }
 
-func_9197(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_04)) {
-    param_04 = 0;
+func_9197(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(!isDefined(param_00)) {
-    param_00 = "default";
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
   if(!isDefined(level.var_91AA)) {
     func_918F();
   }
 
-  if(func_919F(param_00, self)) {
-    func_91A7(param_00, self, param_01, param_02, param_03, param_04);
+  if(func_919F(var_0, self)) {
+    func_91A7(var_0, self, var_1, var_2, var_3, var_4);
   } else {
-    var_05 = level.var_91AA[param_00].var_6631.size;
-    level.var_91AA[param_00].var_6631[var_05] = func_9190(self, param_01, param_02, param_03, param_04);
-    thread func_9195(param_00);
+    var_5 = level.var_91AA[var_0].var_6631.size;
+    level.var_91AA[var_0].var_6631[var_5] = func_9190(self, var_1, var_2, var_3, var_4);
+    thread func_9195(var_0);
   }
 
-  if(!isDefined(level.var_91AA[param_00].var_C8F5)) {
+  if(!isDefined(level.var_91AA[var_0].var_C8F5)) {
     if(!isDefined(level.var_91AB)) {
-      func_9186(param_00);
+      func_9186(var_0);
     }
 
-    var_06 = level.var_91AA[level.var_91AB].priority;
-    var_07 = level.var_91AA[param_00].priority;
-    if(level.var_91AB != param_00 && var_06 < var_07) {
-      func_9186(param_00);
+    var_6 = level.var_91AA[level.var_91AB].priority;
+    var_7 = level.var_91AA[var_0].priority;
+    if(level.var_91AB != var_0 && var_6 < var_7) {
+      func_9186(var_0);
       return;
     }
 
-    if(level.var_91AB == param_00) {
-      func_1251(self, param_01, param_02, param_03, param_04, param_00);
+    if(level.var_91AB == var_0) {
+      func_1251(self, var_1, var_2, var_3, var_4, var_0);
       return;
     }
 
     return;
   }
 
-  var_08 = level.var_91AA[param_01].var_C8F5;
+  var_8 = level.var_91AA[var_1].var_C8F5;
   if(!isDefined(level.var_91AB)) {
-    func_9186(var_08);
+    func_9186(var_8);
   }
 
-  var_06 = level.var_91AA[level.var_91AB].priority;
-  var_09 = level.var_91AA[var_08].priority;
-  if(level.var_91AB != var_08 && var_06 < var_09) {
-    func_9186(var_08);
+  var_6 = level.var_91AA[level.var_91AB].priority;
+  var_9 = level.var_91AA[var_8].priority;
+  if(level.var_91AB != var_8 && var_6 < var_9) {
+    func_9186(var_8);
     return;
   }
 
-  if(level.var_91AB == var_08) {
-    func_1251(self, param_01, param_02, param_03, param_04, var_08);
+  if(level.var_91AB == var_8) {
+    func_1251(self, var_1, var_2, var_3, var_4, var_8);
     return;
   }
 }
 
-func_9194(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = "default";
+func_9194(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
   if(!isDefined(level.var_91AA)) {
@@ -79,54 +79,54 @@ func_9194(param_00) {
   }
 
   if(isDefined(self)) {
-    self notify(param_00 + "hudoutline_disable");
+    self notify(var_0 + "hudoutline_disable");
   }
 
-  var_01 = undefined;
-  foreach(var_04, var_03 in level.var_91AA[param_00].var_6631) {
-    if(!isDefined(var_03.ent)) {
-      level.var_91AA[param_00].var_6631[var_04] = undefined;
+  var_1 = undefined;
+  foreach(var_4, var_3 in level.var_91AA[var_0].var_6631) {
+    if(!isDefined(var_3.ent)) {
+      level.var_91AA[var_0].var_6631[var_4] = undefined;
       continue;
     }
 
-    if(var_03.ent == self) {
-      var_01 = var_04;
-      level.var_91AA[param_00].var_6631[var_01] = undefined;
+    if(var_3.ent == self) {
+      var_1 = var_4;
+      level.var_91AA[var_0].var_6631[var_1] = undefined;
       break;
     }
   }
 
-  var_05 = [];
-  foreach(var_07 in level.var_91AA[param_00].var_6631) {
-    if(!isDefined(var_07)) {
+  var_5 = [];
+  foreach(var_7 in level.var_91AA[var_0].var_6631) {
+    if(!isDefined(var_7)) {
       continue;
     }
 
-    var_05[var_05.size] = var_07;
+    var_5[var_5.size] = var_7;
   }
 
-  level.var_91AA[param_00].var_6631 = var_05;
+  level.var_91AA[var_0].var_6631 = var_5;
   if(!isDefined(level.var_91AB)) {
     return;
   }
 
-  if(level.var_91AB == param_00) {
-    if(isDefined(var_01)) {
-      func_11DA(self, param_00);
+  if(level.var_91AB == var_0) {
+    if(isDefined(var_1)) {
+      func_11DA(self, var_0);
     }
 
-    if(level.var_91AA[param_00].var_6631.size == 0) {
-      var_08 = 0;
-      if(isDefined(level.var_91AA[param_00].var_3E65) && level.var_91AA[param_00].var_3E65.size > 0) {
-        foreach(var_0A in level.var_91AA[param_00].var_3E65) {
+    if(level.var_91AA[var_0].var_6631.size == 0) {
+      var_8 = 0;
+      if(isDefined(level.var_91AA[var_0].var_3E65) && level.var_91AA[var_0].var_3E65.size > 0) {
+        foreach(var_0A in level.var_91AA[var_0].var_3E65) {
           if(level.var_91AA[var_0A].var_6631.size > 0) {
-            var_08 = 1;
+            var_8 = 1;
             break;
           }
         }
       }
 
-      if(!var_08) {
+      if(!var_8) {
         func_9185();
         return;
       }
@@ -137,13 +137,13 @@ func_9194(param_00) {
     return;
   }
 
-  if(isDefined(level.var_91AA[var_01].var_C8F5) && level.var_91AB == level.var_91AA[var_01].var_C8F5) {
-    var_0C = level.var_91AA[var_01].var_C8F5;
-    if(isDefined(var_02)) {
+  if(isDefined(level.var_91AA[var_1].var_C8F5) && level.var_91AB == level.var_91AA[var_1].var_C8F5) {
+    var_0C = level.var_91AA[var_1].var_C8F5;
+    if(isDefined(var_2)) {
       func_11DA(self, var_0C);
     }
 
-    if(level.var_91AA[var_01].var_6631.size == 0) {
+    if(level.var_91AA[var_1].var_6631.size == 0) {
       func_9185();
       return;
     }
@@ -151,224 +151,224 @@ func_9194(param_00) {
 }
 
 func_9185() {
-  var_00 = undefined;
-  var_01 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   if(isDefined(level.var_91AC) && level.var_91AC.size > 0) {
-    foreach(var_03 in level.var_91AC) {
-      if(!isDefined(var_00) || level.var_91AA[var_03].priority > var_00) {
-        var_00 = level.var_91AA[var_03].priority;
-        var_01 = var_03;
+    foreach(var_3 in level.var_91AC) {
+      if(!isDefined(var_0) || level.var_91AA[var_3].priority > var_0) {
+        var_0 = level.var_91AA[var_3].priority;
+        var_1 = var_3;
       }
     }
   } else {
-    foreach(var_03 in level.var_91AA) {
-      if(isDefined(var_03.var_C8F5)) {
+    foreach(var_3 in level.var_91AA) {
+      if(isDefined(var_3.var_C8F5)) {
         continue;
       }
 
-      if(!isDefined(var_03.var_3E65) || var_03.var_3E65.size == 0) {
-        if(var_03.var_6631.size == 0) {
+      if(!isDefined(var_3.var_3E65) || var_3.var_3E65.size == 0) {
+        if(var_3.var_6631.size == 0) {
           continue;
         }
       } else {
-        var_06 = 0;
-        if(var_03.var_6631.size > 0) {
-          var_06 = 1;
+        var_6 = 0;
+        if(var_3.var_6631.size > 0) {
+          var_6 = 1;
         }
 
-        foreach(var_08 in var_03.var_3E65) {
-          if(level.var_91AA[var_08].var_6631.size > 0) {
-            var_06 = 1;
+        foreach(var_8 in var_3.var_3E65) {
+          if(level.var_91AA[var_8].var_6631.size > 0) {
+            var_6 = 1;
           }
         }
 
-        if(!var_06) {
+        if(!var_6) {
           continue;
         }
       }
 
-      if(!isDefined(var_00) || var_03.priority > var_00) {
-        var_00 = var_03.priority;
-        var_01 = var_03.var_3C65;
+      if(!isDefined(var_0) || var_3.priority > var_0) {
+        var_0 = var_3.priority;
+        var_1 = var_3.var_3C65;
       }
     }
   }
 
-  if(isDefined(var_01)) {
-    func_9186(var_01);
+  if(isDefined(var_1)) {
+    func_9186(var_1);
     return;
   }
 
   level.var_91AB = undefined;
 }
 
-func_9190(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = spawnStruct();
-  var_05.ent = param_00;
-  var_05.var_4395 = param_01;
-  var_05.var_5259 = param_02;
-  var_05.var_6C0F = param_03;
-  var_05.var_10F87 = param_04;
-  return var_05;
+func_9190(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.ent = var_0;
+  var_5.var_4395 = var_1;
+  var_5.var_5259 = var_2;
+  var_5.var_6C0F = var_3;
+  var_5.var_10F87 = var_4;
+  return var_5;
 }
 
-func_91A7(param_00, param_01, param_02, param_03, param_04, param_05) {
-  foreach(var_07 in level.var_91AA[param_00].var_6631) {
-    if(var_07.ent == param_01) {
-      var_07.var_4395 = param_02;
-      var_07.var_5259 = param_03;
-      var_07.var_6C0F = param_04;
-      var_07.var_10F87 = param_05;
+func_91A7(var_0, var_1, var_2, var_3, var_4, var_5) {
+  foreach(var_7 in level.var_91AA[var_0].var_6631) {
+    if(var_7.ent == var_1) {
+      var_7.var_4395 = var_2;
+      var_7.var_5259 = var_3;
+      var_7.var_6C0F = var_4;
+      var_7.var_10F87 = var_5;
     }
   }
 }
 
-func_9186(param_00) {
-  if(isDefined(level.var_91AB) && level.var_91AB != param_00) {
+func_9186(var_0) {
+  if(isDefined(level.var_91AB) && level.var_91AB != var_0) {
     func_9191(level.var_91AB);
     if(isDefined(level.var_91AA[level.var_91AB].var_3E65) && level.var_91AA[level.var_91AB].var_3E65.size > 0) {
-      foreach(var_02 in level.var_91AA[level.var_91AB].var_3E65) {
-        func_9191(var_02);
+      foreach(var_2 in level.var_91AA[level.var_91AB].var_3E65) {
+        func_9191(var_2);
       }
     }
   }
 
-  level.var_91AB = param_00;
-  thread func_91A5(param_00);
-  func_1250(param_00);
+  level.var_91AB = var_0;
+  thread func_91A5(var_0);
+  func_1250(var_0);
 }
 
-func_1250(param_00) {
-  var_01 = func_12AA(param_00);
-  for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    foreach(var_04 in level.var_91AA[var_01[var_02]].var_6631) {
-      var_05 = var_04.ent;
-      var_05 hudoutlineenable(var_04.var_4395, var_04.var_5259, var_04.var_6C0F, var_04.var_10F87);
+func_1250(var_0) {
+  var_1 = func_12AA(var_0);
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    foreach(var_4 in level.var_91AA[var_1[var_2]].var_6631) {
+      var_5 = var_4.ent;
+      var_5 hudoutlineenable(var_4.var_4395, var_4.var_5259, var_4.var_6C0F, var_4.var_10F87);
     }
   }
 }
 
-func_1251(param_00, param_01, param_02, param_03, param_04, param_05) {
-  if(!isDefined(level.var_91AA[param_05].var_3E65) || level.var_91AA[param_05].var_3E65.size == 0) {
-    param_00 hudoutlineenable(param_01, param_02, param_03, param_04);
+func_1251(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(level.var_91AA[var_5].var_3E65) || level.var_91AA[var_5].var_3E65.size == 0) {
+    var_0 hudoutlineenable(var_1, var_2, var_3, var_4);
     return;
   }
 
-  var_06 = func_12AA(param_05, 1);
-  var_07 = 0;
-  for(var_08 = 0; var_08 < var_06.size; var_08++) {
-    foreach(var_0A in level.var_91AA[var_06[var_08]].var_6631) {
-      if(var_0A.ent == param_00) {
-        param_00 hudoutlineenable(var_0A.var_4395, var_0A.var_5259, var_0A.var_6C0F, var_0A.var_10F87);
-        var_07 = 1;
+  var_6 = func_12AA(var_5, 1);
+  var_7 = 0;
+  for(var_8 = 0; var_8 < var_6.size; var_8++) {
+    foreach(var_0A in level.var_91AA[var_6[var_8]].var_6631) {
+      if(var_0A.ent == var_0) {
+        var_0 hudoutlineenable(var_0A.var_4395, var_0A.var_5259, var_0A.var_6C0F, var_0A.var_10F87);
+        var_7 = 1;
         break;
       }
     }
 
-    if(var_07) {
+    if(var_7) {
       break;
     }
   }
 }
 
-func_11DA(param_00, param_01) {
-  if(!isDefined(level.var_91AA[param_01].var_3E65) || level.var_91AA[param_01].var_3E65.size == 0) {
+func_11DA(var_0, var_1) {
+  if(!isDefined(level.var_91AA[var_1].var_3E65) || level.var_91AA[var_1].var_3E65.size == 0) {
     self hudoutlinedisable();
     return;
   }
 
-  var_02 = func_12AA(param_01, 1);
-  var_03 = 0;
-  for(var_04 = 0; var_04 < var_02.size; var_04++) {
-    foreach(var_06 in level.var_91AA[var_02[var_04]].var_6631) {
-      if(var_06.ent == param_00) {
-        param_00 hudoutlineenable(var_06.var_4395, var_06.var_5259, var_06.var_6C0F, var_06.var_10F87);
-        var_03 = 1;
+  var_2 = func_12AA(var_1, 1);
+  var_3 = 0;
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
+    foreach(var_6 in level.var_91AA[var_2[var_4]].var_6631) {
+      if(var_6.ent == var_0) {
+        var_0 hudoutlineenable(var_6.var_4395, var_6.var_5259, var_6.var_6C0F, var_6.var_10F87);
+        var_3 = 1;
         break;
       }
     }
 
-    if(var_03) {
+    if(var_3) {
       break;
     }
   }
 
-  if(!var_03) {
+  if(!var_3) {
     self hudoutlinedisable();
   }
 }
 
-func_91A5(param_00) {
+func_91A5(var_0) {
   level notify("hudoutline_new_channel_settings");
   level endon("hudoutline_new_channel_settings");
   wait(0.05);
-  var_01 = func_9192();
-  var_02 = [[level.var_91AA[param_00].var_F88E]]();
-  foreach(var_05, var_04 in var_01) {
-    if(isDefined(var_02[var_05])) {
-      setsaveddvar(var_05, var_02[var_05]);
+  var_1 = func_9192();
+  var_2 = [[level.var_91AA[var_0].var_F88E]]();
+  foreach(var_5, var_4 in var_1) {
+    if(isDefined(var_2[var_5])) {
+      setsaveddvar(var_5, var_2[var_5]);
       continue;
     }
 
-    setsaveddvar(var_05, var_04);
+    setsaveddvar(var_5, var_4);
   }
 
-  if(isDefined(level.var_91AA[param_00].var_B05E)) {
-    func_CC8D(param_00, level.var_91AA[param_00].var_B05E);
-  }
-}
-
-func_9191(param_00) {
-  foreach(var_02 in level.var_91AA[param_00].var_6631) {
-    var_03 = var_02.ent;
-    var_03 hudoutlinedisable();
+  if(isDefined(level.var_91AA[var_0].var_B05E)) {
+    func_CC8D(var_0, level.var_91AA[var_0].var_B05E);
   }
 }
 
-func_9188(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    param_02 = ::func_9192;
+func_9191(var_0) {
+  foreach(var_2 in level.var_91AA[var_0].var_6631) {
+    var_3 = var_2.ent;
+    var_3 hudoutlinedisable();
+  }
+}
+
+func_9188(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = ::func_9192;
   }
 
   if(!isDefined(level.var_91AA)) {
     func_918F();
   }
 
-  if(!isDefined(level.var_91AA[param_00])) {
-    level.var_91AA[param_00] = spawnStruct();
-    level.var_91AA[param_00].var_3C65 = param_00;
-    level.var_91AA[param_00].priority = param_01;
-    level.var_91AA[param_00].var_F88E = param_02;
-    level.var_91AA[param_00].var_6631 = [];
+  if(!isDefined(level.var_91AA[var_0])) {
+    level.var_91AA[var_0] = spawnStruct();
+    level.var_91AA[var_0].var_3C65 = var_0;
+    level.var_91AA[var_0].priority = var_1;
+    level.var_91AA[var_0].var_F88E = var_2;
+    level.var_91AA[var_0].var_6631 = [];
   }
 }
 
-func_918A(param_00, param_01, param_02) {
-  if(!isDefined(level.var_91AA[param_00])) {
-    level.var_91AA[param_00] = spawnStruct();
-    level.var_91AA[param_00].var_3C65 = param_00;
-    level.var_91AA[param_00].priority = param_01;
-    level.var_91AA[param_00].var_6631 = [];
-    level.var_91AA[param_00].var_C8F5 = param_02;
+func_918A(var_0, var_1, var_2) {
+  if(!isDefined(level.var_91AA[var_0])) {
+    level.var_91AA[var_0] = spawnStruct();
+    level.var_91AA[var_0].var_3C65 = var_0;
+    level.var_91AA[var_0].priority = var_1;
+    level.var_91AA[var_0].var_6631 = [];
+    level.var_91AA[var_0].var_C8F5 = var_2;
   }
 
-  if(!isDefined(level.var_91AA[param_02].var_3E65)) {
-    level.var_91AA[param_02].var_3E65 = [];
+  if(!isDefined(level.var_91AA[var_2].var_3E65)) {
+    level.var_91AA[var_2].var_3E65 = [];
   }
 
-  level.var_91AA[param_02].var_3E65[level.var_91AA[param_02].var_3E65.size] = param_00;
+  level.var_91AA[var_2].var_3E65[level.var_91AA[var_2].var_3E65.size] = var_0;
 }
 
-func_91A1(param_00, param_01) {
-  level.var_91AA[param_00].var_F88E = param_01;
-  if(isDefined(level.var_91AB) && level.var_91AB == param_00) {
-    thread func_91A5(param_00);
+func_91A1(var_0, var_1) {
+  level.var_91AA[var_0].var_F88E = var_1;
+  if(isDefined(level.var_91AB) && level.var_91AB == var_0) {
+    thread func_91A5(var_0);
   }
 }
 
-func_919F(param_00, param_01) {
-  foreach(var_03 in level.var_91AA[param_00].var_6631) {
-    if(var_03.ent == param_01) {
+func_919F(var_0, var_1) {
+  foreach(var_3 in level.var_91AA[var_0].var_6631) {
+    if(var_3.ent == var_1) {
       return 1;
     }
   }
@@ -376,121 +376,121 @@ func_919F(param_00, param_01) {
   return 0;
 }
 
-func_919A(param_00, param_01) {
+func_919A(var_0, var_1) {
   if(!isDefined(level.var_91AC)) {
     level.var_91AC = [];
   }
 
-  if(param_01) {
-    foreach(var_03 in level.var_91AC) {
-      if(var_03 == param_00) {
+  if(var_1) {
+    foreach(var_3 in level.var_91AC) {
+      if(var_3 == var_0) {
         return;
       }
     }
 
-    level.var_91AC[level.var_91AC.size] = param_00;
+    level.var_91AC[level.var_91AC.size] = var_0;
     func_9185();
     return;
   }
 
-  var_05 = [];
-  foreach(var_03 in level.var_91AC) {
-    if(var_03 != param_00) {
-      var_05[var_05.size] = var_03;
+  var_5 = [];
+  foreach(var_3 in level.var_91AC) {
+    if(var_3 != var_0) {
+      var_5[var_5.size] = var_3;
     }
   }
 
-  level.var_91AC = var_05;
+  level.var_91AC = var_5;
   func_9185();
 }
 
-func_9195(param_00, param_01) {
-  if(isDefined(param_01)) {
+func_9195(var_0, var_1) {
+  if(isDefined(var_1)) {
     self endon("endonMsg");
   }
 
-  self endon(param_00 + "hudoutline_disable");
+  self endon(var_0 + "hudoutline_disable");
   scripts\engine\utility::waittill_any_3("death", "entitydeleted");
-  thread func_9194(param_00);
+  thread func_9194(var_0);
 }
 
-func_CC8D(param_00, param_01) {
-  if(!isDefined(level.var_91AB) || level.var_91AB != param_00) {
+func_CC8D(var_0, var_1) {
+  if(!isDefined(level.var_91AB) || level.var_91AB != var_0) {
     return;
   }
 
-  level notify("hudoutline_new_anim_on_channel_" + param_00);
+  level notify("hudoutline_new_anim_on_channel_" + var_0);
   level endon("hudoutline_new_channel_settings");
-  level endon("hudoutline_new_anim_on_channel_" + param_00);
-  level[[param_01]]();
-  thread func_91A5(param_00);
+  level endon("hudoutline_new_anim_on_channel_" + var_0);
+  level[[var_1]]();
+  thread func_91A5(var_0);
 }
 
-func_CC8E(param_00, param_01) {
-  level.var_91AA[param_00].var_B05E = param_01;
-  if(!isDefined(level.var_91AB) || level.var_91AB != param_00) {
+func_CC8E(var_0, var_1) {
+  level.var_91AA[var_0].var_B05E = var_1;
+  if(!isDefined(level.var_91AB) || level.var_91AB != var_0) {
     return;
   }
 
-  func_CC8D(param_00, param_01);
+  func_CC8D(var_0, var_1);
 }
 
 func_9192() {
-  var_00 = [];
+  var_0 = [];
   if(isDefined(level.player.var_20F8)) {
-    var_01 = length2d(level.player.origin - level.player.var_20F8.origin);
-    var_02 = clamp(var_01 / 1000, 1, 2);
-    var_00["r_hudoutlineWidth"] = var_02;
+    var_1 = length2d(level.player.origin - level.player.var_20F8.origin);
+    var_2 = clamp(var_1 / 1000, 1, 2);
+    var_0["r_hudoutlineWidth"] = var_2;
   } else {
-    var_00["r_hudoutlineWidth"] = 1;
+    var_0["r_hudoutlineWidth"] = 1;
   }
 
-  var_00["r_hudoutlineFillColor0"] = "0.9 0.9 0.9 0.5";
-  var_00["r_hudoutlineFillColor1"] = "0.3 0.3 0.3 0.5";
-  var_00["r_hudoutlineOccludedOutlineColor"] = "1 1 1 1";
-  var_00["r_hudoutlineOccludedInlineColor"] = "1 1 1 0.45";
-  var_00["r_hudoutlineOccludedInteriorColor"] = ".7 .7 .7 0.25";
-  var_00["r_hudOutlineOccludedColorFromFill"] = 1;
-  var_00["r_drawTransEIDListBeforeOpaques"] = 0;
-  var_00["cg_hud_outline_colors_0"] = "0.000 0.000 0.000 0.000";
-  var_00["cg_hud_outline_colors_1"] = "0.882 0.882 0.882 1.000";
-  var_00["cg_hud_outline_colors_2"] = "0.945 0.384 0.247 1.000";
-  var_00["cg_hud_outline_colors_3"] = "0.431 0.745 0.235 1.000";
-  var_00["cg_hud_outline_colors_4"] = "0.157 0.784 0.784 1.000";
-  var_00["cg_hud_outline_colors_5"] = "0.886 0.600 0.000 1.000";
-  var_00["cg_hud_outline_colors_6"] = "0.000 0.000 0.000 0.000";
-  var_00["cg_hud_outline_colors_7"] = "0.76 0.89 0.89 1.0";
-  return var_00;
+  var_0["r_hudoutlineFillColor0"] = "0.9 0.9 0.9 0.5";
+  var_0["r_hudoutlineFillColor1"] = "0.3 0.3 0.3 0.5";
+  var_0["r_hudoutlineOccludedOutlineColor"] = "1 1 1 1";
+  var_0["r_hudoutlineOccludedInlineColor"] = "1 1 1 0.45";
+  var_0["r_hudoutlineOccludedInteriorColor"] = ".7 .7 .7 0.25";
+  var_0["r_hudOutlineOccludedColorFromFill"] = 1;
+  var_0["r_drawTransEIDListBeforeOpaques"] = 0;
+  var_0["cg_hud_outline_colors_0"] = "0.000 0.000 0.000 0.000";
+  var_0["cg_hud_outline_colors_1"] = "0.882 0.882 0.882 1.000";
+  var_0["cg_hud_outline_colors_2"] = "0.945 0.384 0.247 1.000";
+  var_0["cg_hud_outline_colors_3"] = "0.431 0.745 0.235 1.000";
+  var_0["cg_hud_outline_colors_4"] = "0.157 0.784 0.784 1.000";
+  var_0["cg_hud_outline_colors_5"] = "0.886 0.600 0.000 1.000";
+  var_0["cg_hud_outline_colors_6"] = "0.000 0.000 0.000 0.000";
+  var_0["cg_hud_outline_colors_7"] = "0.76 0.89 0.89 1.0";
+  return var_0;
 }
 
-func_12AA(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+func_12AA(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var_02 = [];
-  var_02[0] = param_00;
-  if(isDefined(level.var_91AA[param_00].var_3E65) && level.var_91AA[param_00].var_3E65.size > 0) {
-    foreach(var_04 in level.var_91AA[param_00].var_3E65) {
-      if(level.var_91AA[var_04].var_6631.size > 0) {
-        for(var_05 = 0; var_05 < var_02.size; var_05++) {
-          if(!param_01) {
-            if(level.var_91AA[var_02[var_05]].priority >= level.var_91AA[var_04].priority) {
-              var_02 = func_C76D(var_02, var_04, var_05);
+  var_2 = [];
+  var_2[0] = var_0;
+  if(isDefined(level.var_91AA[var_0].var_3E65) && level.var_91AA[var_0].var_3E65.size > 0) {
+    foreach(var_4 in level.var_91AA[var_0].var_3E65) {
+      if(level.var_91AA[var_4].var_6631.size > 0) {
+        for(var_5 = 0; var_5 < var_2.size; var_5++) {
+          if(!var_1) {
+            if(level.var_91AA[var_2[var_5]].priority >= level.var_91AA[var_4].priority) {
+              var_2 = func_C76D(var_2, var_4, var_5);
               break;
-            } else if(var_05 + 1 == var_02.size) {
-              var_02[var_05 + 1] = var_04;
+            } else if(var_5 + 1 == var_2.size) {
+              var_2[var_5 + 1] = var_4;
               break;
             }
 
             continue;
           }
 
-          if(level.var_91AA[var_02[var_05]].priority < level.var_91AA[var_04].priority) {
-            var_02 = func_C76D(var_02, var_04, var_05);
+          if(level.var_91AA[var_2[var_5]].priority < level.var_91AA[var_4].priority) {
+            var_2 = func_C76D(var_2, var_4, var_5);
             break;
-          } else if(var_05 + 1 == var_02.size) {
-            var_02[var_05 + 1] = var_04;
+          } else if(var_5 + 1 == var_2.size) {
+            var_2[var_5 + 1] = var_4;
             break;
           }
         }
@@ -498,26 +498,26 @@ func_12AA(param_00, param_01) {
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_C76D(param_00, param_01, param_02) {
-  if(param_02 == param_00.size) {
-    var_03 = param_00;
-    var_03[var_03.size] = param_01;
-    return var_03;
+func_C76D(var_0, var_1, var_2) {
+  if(var_2 == var_0.size) {
+    var_3 = var_0;
+    var_3[var_3.size] = var_1;
+    return var_3;
   }
 
-  var_03 = [];
-  var_04 = 0;
-  for(var_05 = 0; var_05 < param_00.size; var_05++) {
-    if(var_05 == param_02) {
-      var_03[var_05] = param_01;
-      var_04 = 1;
+  var_3 = [];
+  var_4 = 0;
+  for(var_5 = 0; var_5 < var_0.size; var_5++) {
+    if(var_5 == var_2) {
+      var_3[var_5] = var_1;
+      var_4 = 1;
     }
 
-    var_03[var_05 + var_04] = param_00[var_05];
+    var_3[var_5 + var_4] = var_0[var_5];
   }
 
-  return var_03;
+  return var_3;
 }

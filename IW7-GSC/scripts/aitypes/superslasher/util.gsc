@@ -8,40 +8,40 @@ isonroof() {
   return scripts\aitypes\superslasher\behaviors::superslasher_isonroof();
 }
 
-forcestagger(param_00) {
-  if(!isDefined(self.var_1198.bstaggerrequested)) {
-    self.var_1198.bstaggerrequested = 1;
+forcestagger(var_0) {
+  if(!isDefined(self._blackboard.bstaggerrequested)) {
+    self._blackboard.bstaggerrequested = 1;
     if(scripts\aitypes\superslasher\behaviors::superslasher_isonground()) {
       thread queueinterruptible("ground_stagger");
     } else if(isonroof()) {
       thread queueinterruptible("roof_stagger");
     }
 
-    if(param_00) {
+    if(var_0) {
       drop_max_ammo();
     }
   }
 }
 
-forcetrapped(param_00) {
-  if(!isDefined(self.var_1198.btraprequested)) {
-    self.var_1198.btraprequested = 1;
-    self.var_1198.trapduration = param_00;
+forcetrapped(var_0) {
+  if(!isDefined(self._blackboard.btraprequested)) {
+    self._blackboard.btraprequested = 1;
+    self._blackboard.trapduration = var_0;
     thread queueinterruptible("ground_trapped");
     self.btrophysystem = undefined;
     scripts\aitypes\superslasher\behaviors::shieldcleanup();
   }
 }
 
-queueinterruptible(param_00) {
+queueinterruptible(var_0) {
   self notify("queue_interruptible");
   self endon("death");
   self endon("queue_interruptible");
-  while(isDefined(self.var_1198.buninterruptibleanim)) {
+  while(isDefined(self._blackboard.buninterruptibleanim)) {
     wait(0.05);
   }
 
-  scripts\asm\asm::asm_setstate(param_00);
+  scripts\asm\asm::asm_setstate(var_0);
 }
 
 dosawsharks() {
@@ -56,13 +56,13 @@ requestshockwave() {
 
 requestgotoroof() {
   if(scripts\aitypes\superslasher\behaviors::superslasher_isonground() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoground()) {
-    self.var_1198.bgotoroofrequested = 1;
+    self._blackboard.bgotoroofrequested = 1;
   }
 }
 
 requestgotoground() {
   if(scripts\aitypes\superslasher\behaviors::superslasher_isonroof() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoroof()) {
-    self.var_1198.bgotogroundrequested = 1;
+    self._blackboard.bgotogroundrequested = 1;
   }
 }
 

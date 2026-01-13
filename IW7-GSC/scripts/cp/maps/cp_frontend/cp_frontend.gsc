@@ -4,94 +4,94 @@
  * Script: scripts\cp\maps\cp_frontend\cp_frontend.gsc
 *******************************************************/
 
-func_CDA4(param_00) {
-  wait(param_00);
+func_CDA4(var_0) {
+  wait(var_0);
   frontendscenecameracinematic("zombies_lobby_candy_comp");
 }
 
-func_1067E(param_00, param_01, param_02) {
-  var_03 = randomint(100) > 50;
-  if(isDefined(param_02) && param_02 == "male") {
-    var_03 = 1;
-  } else if(isDefined(param_02) && param_02 == "female") {
-    var_03 = 0;
+func_1067E(var_0, var_1, var_2) {
+  var_3 = randomint(100) > 50;
+  if(isDefined(var_2) && var_2 == "male") {
+    var_3 = 1;
+  } else if(isDefined(var_2) && var_2 == "female") {
+    var_3 = 0;
   }
 
-  if(var_03) {
-    var_04 = scripts\engine\utility::random(level.var_3FA3);
-    var_05 = scripts\engine\utility::random(level.var_3FA4);
+  if(var_3) {
+    var_4 = scripts\engine\utility::random(level.var_3FA3);
+    var_5 = scripts\engine\utility::random(level.var_3FA4);
   } else {
-    var_04 = scripts\engine\utility::random(level.var_3F9A);
-    var_05 = scripts\engine\utility::random(level.var_3F9B);
+    var_4 = scripts\engine\utility::random(level.var_3F9A);
+    var_5 = scripts\engine\utility::random(level.var_3F9B);
   }
 
-  var_06 = spawn("script_model", (0, 0, 0));
-  var_06.angles = param_00.angles;
-  var_06 setModel(var_04);
-  var_06.head = spawn("script_model", var_06 gettagorigin("j_spine4"));
-  var_06.head.angles = var_06 gettagangles("j_spine4");
-  var_06.head setModel(var_05);
-  var_06.head linkto(var_06, "j_spine4");
-  if(isDefined(param_01)) {
-    var_06.gun = spawn("script_model", var_06 gettagorigin("tag_weapon_left"));
-    var_06.gun.angles = var_06 gettagangles("tag_weapon_left");
-    var_06.gun setModel("weapon_revolver_wm");
-    var_06.gun linkto(var_06, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_6 = spawn("script_model", (0, 0, 0));
+  var_6.angles = var_0.angles;
+  var_6 setModel(var_4);
+  var_6.head = spawn("script_model", var_6 gettagorigin("j_spine4"));
+  var_6.head.angles = var_6 gettagangles("j_spine4");
+  var_6.head setModel(var_5);
+  var_6.head linkto(var_6, "j_spine4");
+  if(isDefined(var_1)) {
+    var_6.gun = spawn("script_model", var_6 gettagorigin("tag_weapon_left"));
+    var_6.gun.angles = var_6 gettagangles("tag_weapon_left");
+    var_6.gun setModel("weapon_revolver_wm");
+    var_6.gun linkto(var_6, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   }
 
-  return var_06;
+  return var_6;
 }
 
-func_10823(param_00, param_01) {
-  var_02 = randomint(100) > 50;
-  if(isDefined(param_01) && param_01 == "male") {
-    var_02 = 1;
-  } else if(isDefined(param_01) && param_01 == "female") {
-    var_02 = 0;
+func_10823(var_0, var_1) {
+  var_2 = randomint(100) > 50;
+  if(isDefined(var_1) && var_1 == "male") {
+    var_2 = 1;
+  } else if(isDefined(var_1) && var_1 == "female") {
+    var_2 = 0;
   }
 
-  if(var_02) {
-    var_03 = scripts\engine\utility::random(level.var_13F3B);
-    var_04 = scripts\engine\utility::random(level.var_13F3D);
+  if(var_2) {
+    var_3 = scripts\engine\utility::random(level.var_13F3B);
+    var_4 = scripts\engine\utility::random(level.var_13F3D);
     if(randomint(100) > 70) {
-      var_05 = undefined;
+      var_5 = undefined;
     } else {
-      var_05 = scripts\engine\utility::random(level.var_13F3C);
+      var_5 = scripts\engine\utility::random(level.var_13F3C);
     }
   } else {
-    var_03 = scripts\engine\utility::random(level.var_13F21);
-    var_04 = scripts\engine\utility::random(level.var_13F23);
+    var_3 = scripts\engine\utility::random(level.var_13F21);
+    var_4 = scripts\engine\utility::random(level.var_13F23);
     if(randomint(100) > 70) {
-      var_05 = undefined;
+      var_5 = undefined;
     } else {
-      var_05 = scripts\engine\utility::random(level.var_13F22);
+      var_5 = scripts\engine\utility::random(level.var_13F22);
     }
   }
 
-  var_06 = spawn("script_model", (0, 0, 0));
-  var_06.angles = param_00.angles;
-  var_06 setModel(var_03);
-  var_06.head = spawn("script_model", var_06 gettagorigin("j_spine4"));
-  var_06.head.angles = var_06 gettagangles("j_spine4");
-  var_06.head setModel(var_04);
-  if(isDefined(var_05)) {
-    if(var_02) {
-      var_07 = "j_spine4";
+  var_6 = spawn("script_model", (0, 0, 0));
+  var_6.angles = var_0.angles;
+  var_6 setModel(var_3);
+  var_6.head = spawn("script_model", var_6 gettagorigin("j_spine4"));
+  var_6.head.angles = var_6 gettagangles("j_spine4");
+  var_6.head setModel(var_4);
+  if(isDefined(var_5)) {
+    if(var_2) {
+      var_7 = "j_spine4";
     } else {
-      var_07 = "j_neck";
+      var_7 = "j_neck";
     }
 
-    var_06.var_8861 = spawn("script_model", var_06.head gettagorigin(var_07));
-    var_06.var_8861.angles = var_06.head gettagangles(var_07);
-    var_06.var_8861 setModel(var_05);
-    var_06.var_8861 linkto(var_06.head, var_07);
+    var_6.var_8861 = spawn("script_model", var_6.head gettagorigin(var_7));
+    var_6.var_8861.angles = var_6.head gettagangles(var_7);
+    var_6.var_8861 setModel(var_5);
+    var_6.var_8861 linkto(var_6.head, var_7);
   }
 
-  var_06.head linkto(var_06, "j_spine4");
+  var_6.head linkto(var_6, "j_spine4");
   wait(1);
-  playFXOnTag(level._effect["yellow_eye_glow"], var_06.head, "j_eyeball_ri");
-  playFXOnTag(level._effect["yellow_eye_glow"], var_06.head, "j_eyeball_le");
-  return var_06;
+  playFXOnTag(level._effect["yellow_eye_glow"], var_6.head, "j_eyeball_ri");
+  playFXOnTag(level._effect["yellow_eye_glow"], var_6.head, "j_eyeball_le");
+  return var_6;
 }
 
 setup_interact() {
@@ -107,13 +107,13 @@ setup_interact() {
   wait(0.05);
   level thread func_1067F();
   wait(1);
-  var_00 = getent("pap_machine", "targetname");
-  var_00 setscriptablepartstate("machine", "upgraded");
-  var_00 setscriptablepartstate("reels", "on_frontend");
+  var_0 = getent("pap_machine", "targetname");
+  var_0 setscriptablepartstate("machine", "upgraded");
+  var_0 setscriptablepartstate("reels", "on_frontend");
   wait(1);
-  var_00 setscriptablepartstate("door", "close");
+  var_0 setscriptablepartstate("door", "close");
   wait(1);
-  var_00 setscriptablepartstate("door", "open_idle");
+  var_0 setscriptablepartstate("door", "open_idle");
   playFX(level._effect["vfx_zb_sj_smk"], (-26, -330, 225), anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
 }
 
@@ -178,14 +178,14 @@ func_71A4() {
 
   wait(0.1);
   triggerfx(level.var_71A3);
-  var_00 = getent("fnf_jaw", "targetname");
-  var_00.origin = (1881, 173.5, -882.2);
+  var_0 = getent("fnf_jaw", "targetname");
+  var_0.origin = (1881, 173.5, -882.2);
   for(;;) {
     wait(randomintrange(1, 3));
-    var_00 movez(-1, 0.2);
-    var_00 waittill("movedone");
-    var_00 movez(1, 0.2);
-    var_00 waittill("movedone");
+    var_0 movez(-1, 0.2);
+    var_0 waittill("movedone");
+    var_0 movez(1, 0.2);
+    var_0 waittill("movedone");
   }
 }
 
@@ -197,26 +197,26 @@ should_use_alt_machine() {
   return 0;
 }
 
-func_F47A(param_00) {
-  if(!isDefined(param_00)) {
-    var_01 = "map_select_0";
+func_F47A(var_0) {
+  if(!isDefined(var_0)) {
+    var_1 = "map_select_0";
   } else {
-    var_01 = "map_select_" + var_01;
+    var_1 = "map_select_" + var_1;
   }
 
-  var_02 = getent(var_01, "targetname").origin;
-  var_03 = getent(var_01, "targetname").angles;
-  var_04 = scripts\engine\utility::istrue(level.var_B329);
-  if(var_04) {
+  var_2 = getent(var_1, "targetname").origin;
+  var_3 = getent(var_1, "targetname").angles;
+  var_4 = scripts\engine\utility::istrue(level.var_B329);
+  if(var_4) {
     frontendscenecamerafade(0, 0.2);
     wait(0.25);
   }
 
   level.camera_anchor dontinterpolate();
-  level.camera_anchor.origin = var_02;
-  level.camera_anchor.angles = var_03;
+  level.camera_anchor.origin = var_2;
+  level.camera_anchor.angles = var_3;
   frontendscenecamerafov(65, 0.05);
-  if(var_04) {
+  if(var_4) {
     wait(0.1);
     frontendscenecamerafade(1, 0.2);
   }
@@ -267,8 +267,8 @@ func_F61A() {
 }
 
 func_F619() {
-  var_00 = getent("gun_light", "targetname");
-  var_00 setlightintensity(10);
+  var_0 = getent("gun_light", "targetname");
+  var_0 setlightintensity(10);
   frontendscenecamerafov(65);
   self setdepthoffield(0, 15, 50, 80, 10, 8);
 }
@@ -323,13 +323,13 @@ play_lobby_music() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "music_changed") {
-      var_02 = get_zombies_music(var_01);
-      if(var_02 != "shuffle") {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "music_changed") {
+      var_2 = get_zombies_music(var_1);
+      if(var_2 != "shuffle") {
         level notify("shuffle_changed");
         level.shuffle_playing = 0;
-        setmusicstate(var_02);
+        setmusicstate(var_2);
       } else {
         thread run_shuffle_music();
       }
@@ -355,8 +355,8 @@ watch_shuffle_check_1() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_1" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_1" && var_1 > 0) {
       level.shuffle_songs[1] = 1;
     }
   }
@@ -366,8 +366,8 @@ watch_shuffle_check_2() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_2" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_2" && var_1 > 0) {
       level.shuffle_songs[2] = 1;
     }
   }
@@ -377,8 +377,8 @@ watch_shuffle_check_3() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_3" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_3" && var_1 > 0) {
       level.shuffle_songs[3] = 1;
     }
   }
@@ -388,8 +388,8 @@ watch_shuffle_check_4() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_4" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_4" && var_1 > 0) {
       level.shuffle_songs[4] = 1;
     }
   }
@@ -399,8 +399,8 @@ watch_shuffle_check_5() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_5" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_5" && var_1 > 0) {
       level.shuffle_songs[5] = 1;
     }
   }
@@ -410,8 +410,8 @@ watch_shuffle_check_6() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_6" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_6" && var_1 > 0) {
       level.shuffle_songs[6] = 1;
     }
   }
@@ -421,8 +421,8 @@ watch_shuffle_check_7() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_7" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_7" && var_1 > 0) {
       level.shuffle_songs[7] = 1;
     }
   }
@@ -432,8 +432,8 @@ watch_shuffle_check_8() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_8" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_8" && var_1 > 0) {
       level.shuffle_songs[8] = 1;
     }
   }
@@ -443,8 +443,8 @@ watch_shuffle_check_9() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_9" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_9" && var_1 > 0) {
       level.shuffle_songs[9] = 1;
     }
   }
@@ -454,8 +454,8 @@ watch_shuffle_check_10() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_10" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_10" && var_1 > 0) {
       level.shuffle_songs[10] = 1;
     }
   }
@@ -465,8 +465,8 @@ watch_shuffle_check_11() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "songcheck_11" && var_01 > 0) {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "songcheck_11" && var_1 > 0) {
       level.shuffle_songs[11] = 1;
     }
   }
@@ -482,141 +482,141 @@ run_shuffle_music() {
   self endon("disconnect");
   level endon("shuffle_changed");
   wait(1);
-  var_00 = 22;
-  var_01 = -1;
+  var_0 = 22;
+  var_1 = -1;
   for(;;) {
-    var_02 = randomintrange(1, var_00 + 1);
-    if(var_02 != var_01) {
-      var_01 = var_02;
-      var_03 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_02, 2));
-      if(var_03 != 0) {
-        var_04 = scripts\engine\utility::istrue(level.shuffle_songs[var_03]);
+    var_2 = randomintrange(1, var_0 + 1);
+    if(var_2 != var_1) {
+      var_1 = var_2;
+      var_3 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_2, 2));
+      if(var_3 != 0) {
+        var_4 = scripts\engine\utility::istrue(level.shuffle_songs[var_3]);
       } else {
-        var_04 = 1;
+        var_4 = 1;
       }
 
-      if(var_04) {
-        var_05 = tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_02, 1);
-        var_06 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_02, 3));
-        var_06 = var_06 / 1000;
-        setmusicstate(var_05);
-        wait(var_06);
+      if(var_4) {
+        var_5 = tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_2, 1);
+        var_6 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv", 0, var_2, 3));
+        var_6 = var_6 / 1000;
+        setmusicstate(var_5);
+        wait(var_6);
         setmusicstate("");
       }
     }
   }
 }
 
-get_zombies_music(param_00) {
-  switch (param_00) {
+get_zombies_music(var_0) {
+  switch (var_0) {
     case 0:
-      var_01 = "music_mainmenu_cp_main";
+      var_1 = "music_mainmenu_cp_main";
       break;
 
     case 1:
-      var_01 = "music_mainmenu_cp_mw2";
+      var_1 = "music_mainmenu_cp_mw2";
       break;
 
     case 2:
-      var_01 = "music_mainmenu_cp_mw1";
+      var_1 = "music_mainmenu_cp_mw1";
       break;
 
     case 3:
-      var_01 = "music_mainmenu_cp_rave_hidden";
+      var_1 = "music_mainmenu_cp_rave_hidden";
       break;
 
     case 4:
-      var_01 = "music_mainmenu_cp_disco_hidden";
+      var_1 = "music_mainmenu_cp_disco_hidden";
       break;
 
     case 5:
-      var_01 = "music_mainmenu_cp_town_hidden";
+      var_1 = "music_mainmenu_cp_town_hidden";
       break;
 
     case 6:
-      var_01 = "music_mainmenu_cp_final_hidden";
+      var_1 = "music_mainmenu_cp_final_hidden";
       break;
 
     case 7:
-      var_01 = "music_mainmenu_cp_perk_01_upnatoms";
+      var_1 = "music_mainmenu_cp_perk_01_upnatoms";
       break;
 
     case 8:
-      var_01 = "music_mainmenu_cp_perk_02_racinstripes";
+      var_1 = "music_mainmenu_cp_perk_02_racinstripes";
       break;
 
     case 9:
-      var_01 = "music_mainmenu_cp_perk_03_slappytaffy";
+      var_1 = "music_mainmenu_cp_perk_03_slappytaffy";
       break;
 
     case 10:
-      var_01 = "music_mainmenu_cp_perk_04_bombstoppers";
+      var_1 = "music_mainmenu_cp_perk_04_bombstoppers";
       break;
 
     case 11:
-      var_01 = "music_mainmenu_cp_perk_05_tuffnuff";
+      var_1 = "music_mainmenu_cp_perk_05_tuffnuff";
       break;
 
     case 12:
-      var_01 = "music_mainmenu_cp_perk_06_bangbangs";
+      var_1 = "music_mainmenu_cp_perk_06_bangbangs";
       break;
 
     case 13:
-      var_01 = "music_mainmenu_cp_perk_11_deadeyedewdrops";
+      var_1 = "music_mainmenu_cp_perk_11_deadeyedewdrops";
       break;
 
     case 14:
-      var_01 = "music_mainmenu_cp_perk_08_quickies";
+      var_1 = "music_mainmenu_cp_perk_08_quickies";
       break;
 
     case 15:
-      var_01 = "music_mainmenu_cp_perk_09_mulemunchies";
+      var_1 = "music_mainmenu_cp_perk_09_mulemunchies";
       break;
 
     case 16:
-      var_01 = "music_mainmenu_cp_perk_10_trailblazers";
+      var_1 = "music_mainmenu_cp_perk_10_trailblazers";
       break;
 
     case 17:
-      var_01 = "music_mainmenu_cp_perk_07_bluebolts";
+      var_1 = "music_mainmenu_cp_perk_07_bluebolts";
       break;
 
     case 18:
-      var_01 = "music_mainmenu_cp_perk_12_changechews";
+      var_1 = "music_mainmenu_cp_perk_12_changechews";
       break;
 
     case 19:
-      var_01 = "music_mainmenu_cp_dlc4_boss_battle";
+      var_1 = "music_mainmenu_cp_dlc4_boss_battle";
       break;
 
     case 20:
-      var_01 = "music_mainmenu_cp_afterlifearcade";
+      var_1 = "music_mainmenu_cp_afterlifearcade";
       break;
 
     case 21:
-      var_01 = "music_mainmenu_cp_ext_lobby";
+      var_1 = "music_mainmenu_cp_ext_lobby";
       break;
 
     case 22:
-      var_01 = "shuffle";
+      var_1 = "shuffle";
       break;
 
     default:
-      var_01 = "music_mainmenu_cp_main";
+      var_1 = "music_mainmenu_cp_main";
       break;
   }
 
-  return var_01;
+  return var_1;
 }
 
 watch_boss_battle() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "boss_set") {
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "boss_set") {
       reset_all_boss_dvars();
-      switch (var_01) {
+      switch (var_1) {
         case 0:
           setdvar("scr_direct_to_grey", 1);
           break;
@@ -658,8 +658,8 @@ watch_reset_boss_battle() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    self waittill("luinotifyserver", var_00);
-    if(var_00 == "boss_reset") {
+    self waittill("luinotifyserver", var_0);
+    if(var_0 == "boss_reset") {
       setdvar("scr_direct_to_grey", 0);
       setdvar("scr_direct_to_super_slasher", 0);
       setdvar("scr_direct_to_rat_king", 0);
@@ -675,187 +675,187 @@ func_F41D() {
   frontendscenecamerafov(85, 0.5);
 }
 
-func_6F0C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = getent(param_00, "targetname");
-  if(var_07 != undefined) {
+func_6F0C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = getent(var_0, "targetname");
+  if(var_7 != undefined) {
     for(;;) {
-      var_07 setlightintensity(param_01);
-      wait(randomfloatrange(param_05, param_06));
-      var_07 setlightintensity(param_02);
-      wait(randomfloatrange(param_03, param_04));
+      var_7 setlightintensity(var_1);
+      wait(randomfloatrange(var_5, var_6));
+      var_7 setlightintensity(var_2);
+      wait(randomfloatrange(var_3, var_4));
     }
   }
 }
 
 func_10672() {
-  var_00 = getent("cashier_zombie_spawn", "targetname");
-  var_01 = func_10823(var_00);
-  var_01.angles = var_00.angles;
-  var_01.origin = var_00.origin;
-  var_01.head scriptmodelplayanim("shipcrib_standing_console_idle_17");
-  var_01 scriptmodelplayanim("shipcrib_standing_console_idle_17");
+  var_0 = getent("cashier_zombie_spawn", "targetname");
+  var_1 = func_10823(var_0);
+  var_1.angles = var_0.angles;
+  var_1.origin = var_0.origin;
+  var_1.head scriptmodelplayanim("shipcrib_standing_console_idle_17");
+  var_1 scriptmodelplayanim("shipcrib_standing_console_idle_17");
 }
 
 func_107F1() {
-  var_00 = ["body_un_crew_flight_deck_b_director", "body_un_crew_flight_deck_b"];
-  var_01 = ["shipcrib_bridge_sitting_officer_idle_01", "shipcrib_bridge_sitting_officer_idle_01"];
-  var_02 = getEntArray("sitting_guys", "targetname");
-  foreach(var_06, var_04 in var_02) {
-    var_05 = func_1067E(var_04);
-    var_05.angles = var_04.angles;
-    var_05.origin = var_04.origin;
-    var_05 thread func_11771(var_06, scripts\engine\utility::random(var_01));
+  var_0 = ["body_un_crew_flight_deck_b_director", "body_un_crew_flight_deck_b"];
+  var_1 = ["shipcrib_bridge_sitting_officer_idle_01", "shipcrib_bridge_sitting_officer_idle_01"];
+  var_2 = getEntArray("sitting_guys", "targetname");
+  foreach(var_6, var_4 in var_2) {
+    var_5 = func_1067E(var_4);
+    var_5.angles = var_4.angles;
+    var_5.origin = var_4.origin;
+    var_5 thread func_11771(var_6, scripts\engine\utility::random(var_1));
   }
 }
 
-func_11771(param_00, param_01) {
-  self.head scriptmodelplayanim(param_01);
-  self scriptmodelplayanim(param_01);
+func_11771(var_0, var_1) {
+  self.head scriptmodelplayanim(var_1);
+  self scriptmodelplayanim(var_1);
 }
 
-func_51A3(param_00) {
-  param_00.head delete();
-  if(isDefined(param_00.var_8861)) {
-    param_00.var_8861 delete();
+func_51A3(var_0) {
+  var_0.head delete();
+  if(isDefined(var_0.var_8861)) {
+    var_0.var_8861 delete();
   }
 
-  param_00 delete();
+  var_0 delete();
 }
 
-func_5143(param_00) {
-  param_00.head delete();
-  if(isDefined(param_00.gun)) {
-    param_00.gun delete();
+func_5143(var_0) {
+  var_0.head delete();
+  if(isDefined(var_0.gun)) {
+    var_0.gun delete();
   }
 
-  param_00 delete();
+  var_0 delete();
 }
 
-func_BDA9(param_00) {
-  var_01 = undefined;
-  switch (param_00) {
+func_BDA9(var_0) {
+  var_1 = undefined;
+  switch (var_0) {
     case 1:
-      var_01 = level.var_13F40;
+      var_1 = level.var_13F40;
       break;
 
     case 2:
-      var_01 = level.var_13F41;
+      var_1 = level.var_13F41;
       break;
 
     case 3:
-      var_01 = level.var_13F42;
+      var_1 = level.var_13F42;
       break;
   }
 
-  var_01.origin = (-550, -2010, -5);
-  var_01.angles = (0, 0, 0);
-  var_02 = func_10823(var_01);
-  var_02 scriptmodelclearanim();
-  var_02.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_01.var_336, var_01.origin, var_01.angles, 1);
-  if(isDefined(var_02.var_8861)) {
-    var_02.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_01.var_336, var_01.origin, var_01.angles, 1);
+  var_1.origin = (-550, -2010, -5);
+  var_1.angles = (0, 0, 0);
+  var_2 = func_10823(var_1);
+  var_2 scriptmodelclearanim();
+  var_2.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.var_336, var_1.origin, var_1.angles, 1);
+  if(isDefined(var_2.var_8861)) {
+    var_2.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.var_336, var_1.origin, var_1.angles, 1);
   }
 
-  var_02 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_01.var_336, var_01.origin, var_01.angles, 1);
+  var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.var_336, var_1.origin, var_1.angles, 1);
   wait(30);
-  func_51A3(var_02);
+  func_51A3(var_2);
 }
 
 func_FEC4() {
-  var_00 = "zmb_male_fullbody_outfit_01";
-  var_01 = "zmb_male_fullbody_outfit_01";
-  var_02 = getent("shooting_01", "targetname");
-  var_02.origin = (-550, -2010, -5);
-  var_02.angles = (0, 0, 0);
-  var_03 = func_10823(var_02);
-  var_04 = func_1067E(var_02, 1, "male");
-  var_03 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_02.origin, var_02.angles);
-  var_04 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_02.origin, var_02.angles);
-  var_03.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_02.origin, var_02.angles);
-  if(isDefined(var_03.var_8861)) {
-    var_03.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_02.origin, var_02.angles);
+  var_0 = "zmb_male_fullbody_outfit_01";
+  var_1 = "zmb_male_fullbody_outfit_01";
+  var_2 = getent("shooting_01", "targetname");
+  var_2.origin = (-550, -2010, -5);
+  var_2.angles = (0, 0, 0);
+  var_3 = func_10823(var_2);
+  var_4 = func_1067E(var_2, 1, "male");
+  var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_2.origin, var_2.angles);
+  var_4 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_2.origin, var_2.angles);
+  var_3.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_2.origin, var_2.angles);
+  if(isDefined(var_3.var_8861)) {
+    var_3.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_2.origin, var_2.angles);
   }
 
-  var_04.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_02.origin, var_02.angles);
+  var_4.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_2.origin, var_2.angles);
   wait(3.5);
-  playFXOnTag(level._effect["muzzleflash"], var_04.gun, "tag_flash");
-  playFXOnTag(level._effect["shot_impact"], var_03, "j_chest");
+  playFXOnTag(level._effect["muzzleflash"], var_4.gun, "tag_flash");
+  playFXOnTag(level._effect["shot_impact"], var_3, "j_chest");
   wait(2.5);
-  playFXOnTag(level._effect["muzzleflash"], var_04.gun, "tag_flash");
-  playFXOnTag(level._effect["shot_impact"], var_03, "j_chest");
+  playFXOnTag(level._effect["muzzleflash"], var_4.gun, "tag_flash");
+  playFXOnTag(level._effect["shot_impact"], var_3, "j_chest");
   wait(10);
-  level thread func_5133(var_03, var_04, 10);
+  level thread func_5133(var_3, var_4, 10);
 }
 
-func_5133(param_00, param_01, param_02) {
-  wait(param_02);
-  func_51A3(param_00);
-  func_5143(param_01);
+func_5133(var_0, var_1, var_2) {
+  wait(var_2);
+  func_51A3(var_0);
+  func_5143(var_1);
 }
 
 func_5B17() {
-  var_00 = getent("dragging_02", "targetname");
-  var_00.origin = (-550, -2010, -5);
-  var_00.angles = (0, 0, 0);
-  var_01 = func_10823(var_00, "male");
-  var_02 = func_1067E(var_00, undefined, "male");
-  var_01 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_00.origin, var_00.angles, 1);
-  var_02 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_00.origin, var_00.angles, 1);
-  var_01.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_00.origin, var_00.angles, 1);
-  if(isDefined(var_01.var_8861)) {
-    var_01.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_00.origin, var_00.angles);
+  var_0 = getent("dragging_02", "targetname");
+  var_0.origin = (-550, -2010, -5);
+  var_0.angles = (0, 0, 0);
+  var_1 = func_10823(var_0, "male");
+  var_2 = func_1067E(var_0, undefined, "male");
+  var_1 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_0.origin, var_0.angles, 1);
+  var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_0.origin, var_0.angles, 1);
+  var_1.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_0.origin, var_0.angles, 1);
+  if(isDefined(var_1.var_8861)) {
+    var_1.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_0.origin, var_0.angles);
   }
 
-  var_02.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_00.origin, var_00.angles, 1);
+  var_2.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_0.origin, var_0.angles, 1);
   wait(10);
-  level thread func_5133(var_01, var_02, 10);
+  level thread func_5133(var_1, var_2, 10);
 }
 
 func_5B18() {
-  var_00 = getent("dragging_01", "targetname");
-  var_00.origin = (-550, -2010, -5);
-  var_00.angles = (0, 0, 0);
-  var_01 = func_10823(var_00, "male");
-  var_02 = func_1067E(var_00, undefined, "male");
-  var_01 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_00.origin, var_00.angles, 1);
-  if(isDefined(var_01.var_8861)) {
-    var_01.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_00.origin, var_00.angles);
+  var_0 = getent("dragging_01", "targetname");
+  var_0.origin = (-550, -2010, -5);
+  var_0.angles = (0, 0, 0);
+  var_1 = func_10823(var_0, "male");
+  var_2 = func_1067E(var_0, undefined, "male");
+  var_1 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_0.origin, var_0.angles, 1);
+  if(isDefined(var_1.var_8861)) {
+    var_1.var_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_0.origin, var_0.angles);
   }
 
-  var_02 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_02", var_00.origin, var_00.angles, 1);
+  var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_02", var_0.origin, var_0.angles, 1);
   wait(10.5);
-  playFX(level._effect["zombie_attack"], var_02 gettagorigin("j_chest"));
+  playFX(level._effect["zombie_attack"], var_2 gettagorigin("j_chest"));
   wait(2);
-  playFX(level._effect["zombie_attack"], var_02 gettagorigin("j_chest"));
+  playFX(level._effect["zombie_attack"], var_2 gettagorigin("j_chest"));
   wait(5);
-  level thread func_5133(var_01, var_02, 12);
+  level thread func_5133(var_1, var_2, 12);
 }
 
 func_1067F() {
   level endon("nuke_runners");
-  var_00 = ["shooting", "mugging1", "mugging2", "mugging3", "dragging1", "dragging2"];
-  var_01 = ["IW7_cp_frontend_feeding_walk_off_civ", "IW7_cp_frontend_feeding_walk_off_zom", "IW7_cp_frontend_mugging_high_cam_z1_01", "IW7_cp_frontend_mugging_high_cam_z1_02", "IW7_cp_frontend_mugging_high_cam_z2_01"];
-  var_02 = randomint(4);
-  var_03 = getEntArray("zombie_street_spawners", "targetname");
+  var_0 = ["shooting", "mugging1", "mugging2", "mugging3", "dragging1", "dragging2"];
+  var_1 = ["IW7_cp_frontend_feeding_walk_off_civ", "IW7_cp_frontend_feeding_walk_off_zom", "IW7_cp_frontend_mugging_high_cam_z1_01", "IW7_cp_frontend_mugging_high_cam_z1_02", "IW7_cp_frontend_mugging_high_cam_z2_01"];
+  var_2 = randomint(4);
+  var_3 = getEntArray("zombie_street_spawners", "targetname");
   for(;;) {
-    var_03 = scripts\engine\utility::array_randomize(var_03);
-    foreach(var_05 in var_03) {
-      var_06 = func_10823(var_05);
-      var_06.angles = var_05.angles;
-      var_06.origin = var_05.origin;
-      var_07 = scripts\engine\utility::random(var_01);
-      var_06 thread func_13F52(var_07);
-      var_06.var_336 = "zombie";
+    var_3 = scripts\engine\utility::array_randomize(var_3);
+    foreach(var_5 in var_3) {
+      var_6 = func_10823(var_5);
+      var_6.angles = var_5.angles;
+      var_6.origin = var_5.origin;
+      var_7 = scripts\engine\utility::random(var_1);
+      var_6 thread func_13F52(var_7);
+      var_6.var_336 = "zombie";
       wait(randomfloatrange(0.2, 2));
     }
 
-    var_09 = scripts\engine\utility::random(var_00);
-    var_00 = scripts\engine\utility::array_remove(var_00, var_09);
-    if(var_00.size < 1) {
-      var_00 = ["shooting", "mugging1", "mugging2", "mugging3", "dragging1", "dragging2"];
+    var_9 = scripts\engine\utility::random(var_0);
+    var_0 = scripts\engine\utility::array_remove(var_0, var_9);
+    if(var_0.size < 1) {
+      var_0 = ["shooting", "mugging1", "mugging2", "mugging3", "dragging1", "dragging2"];
     }
 
-    switch (var_09) {
+    switch (var_9) {
       case "shooting":
         wait(30);
         func_FEC4();
@@ -889,28 +889,28 @@ func_1067F() {
   }
 }
 
-func_13F52(param_00) {
+func_13F52(var_0) {
   wait(randomfloatrange(1, 2));
-  self.head scriptmodelplayanimdeltamotion(param_00, 1);
+  self.head scriptmodelplayanimdeltamotion(var_0, 1);
   if(isDefined(self.var_8861)) {
-    self.var_8861 scriptmodelplayanimdeltamotion(param_00, 1);
+    self.var_8861 scriptmodelplayanimdeltamotion(var_0, 1);
   }
 
-  self scriptmodelplayanimdeltamotion(param_00, 1);
+  self scriptmodelplayanimdeltamotion(var_0, 1);
   wait(45);
   func_51A3(self);
 }
 
-func_37BA(param_00) {
+func_37BA(var_0) {
   level notify("camera_position_requested");
-  if(param_00.name != "zm_consumable_selection") {
+  if(var_0.name != "zm_consumable_selection") {
     level notify("stop_fnf_machine");
     if(isDefined(level.var_71A3)) {
       level.var_71A3 delete();
     }
   }
 
-  switch (param_00.name) {
+  switch (var_0.name) {
     case "zm_buildkit_selection":
       if(func_A8E7("weapon_select")) {
         thread func_13EFF("weapon_to_buildkit", 250, ::func_F46C);
@@ -1052,7 +1052,7 @@ func_37BA(param_00) {
       break;
   }
 
-  self.var_A8E6 = param_00.name;
+  self.var_A8E6 = var_0.name;
 }
 
 fadeinfrontendcameraendontransition() {
@@ -1075,117 +1075,117 @@ fadeoutfrontendcamera() {
 zm_map_select_watcher() {
   level endon("game_ended");
   self endon("disconnect");
-  var_00 = getent("map_select_poster", "targetname");
+  var_0 = getent("map_select_poster", "targetname");
   for(;;) {
-    self waittill("luinotifyserver", var_01, var_02);
-    if(var_01 == "soulKey" && var_02 > 0) {
-      level thread show_soul_key(var_02);
+    self waittill("luinotifyserver", var_1, var_2);
+    if(var_1 == "soulKey" && var_2 > 0) {
+      level thread show_soul_key(var_2);
       continue;
     }
 
-    if(var_01 == "cp_zmb" || var_01 == "cp_rave" || var_01 == "cp_disco" || var_01 == "cp_town" || var_01 == "cp_final") {
-      switch (var_01) {
+    if(var_1 == "cp_zmb" || var_1 == "cp_rave" || var_1 == "cp_disco" || var_1 == "cp_town" || var_1 == "cp_final") {
+      switch (var_1) {
         case "cp_zmb":
-          var_00 setModel("zmb_poster_spaceland");
+          var_0 setModel("zmb_poster_spaceland");
           break;
 
         case "cp_rave":
-          var_00 setModel("zmb_poster_dlc1");
+          var_0 setModel("zmb_poster_dlc1");
           break;
 
         case "cp_disco":
-          var_00 setModel("zmb_poster_dlc2");
+          var_0 setModel("zmb_poster_dlc2");
           break;
 
         case "cp_town":
-          var_00 setModel("zmb_poster_dlc3");
+          var_0 setModel("zmb_poster_dlc3");
           break;
 
         case "cp_final":
-          var_00 setModel("zmb_poster_dlc4");
+          var_0 setModel("zmb_poster_dlc4");
           break;
       }
     }
 
-    if(var_01 == "map_select") {
-      switch (var_02) {
+    if(var_1 == "map_select") {
+      switch (var_2) {
         case 0:
-          var_00 setModel("zmb_poster_spaceland");
+          var_0 setModel("zmb_poster_spaceland");
           break;
 
         case 1:
-          var_00 setModel("zmb_poster_dlc1");
+          var_0 setModel("zmb_poster_dlc1");
           break;
 
         case 2:
-          var_00 setModel("zmb_poster_dlc2");
+          var_0 setModel("zmb_poster_dlc2");
           break;
 
         case 3:
-          var_00 setModel("zmb_poster_dlc3");
+          var_0 setModel("zmb_poster_dlc3");
           break;
 
         case 4:
-          var_00 setModel("zmb_poster_dlc4");
+          var_0 setModel("zmb_poster_dlc4");
           break;
 
         case 5:
-          var_00 setModel("zmb_poster_spaceland");
+          var_0 setModel("zmb_poster_spaceland");
           break;
 
         case 6:
-          var_00 setModel("zmb_poster_dlc1");
+          var_0 setModel("zmb_poster_dlc1");
           break;
 
         case 7:
-          var_00 setModel("zmb_poster_dlc2");
+          var_0 setModel("zmb_poster_dlc2");
           break;
 
         case 8:
-          var_00 setModel("zmb_poster_dlc3");
+          var_0 setModel("zmb_poster_dlc3");
           break;
 
         case 10:
         case 9:
-          var_00 setModel("zmb_poster_dlc4");
+          var_0 setModel("zmb_poster_dlc4");
           break;
       }
     }
   }
 }
 
-show_soul_key(param_00) {
-  var_01 = int(param_00 / 16);
-  var_02 = param_00 - var_01 * 16;
-  var_03 = int(var_02 / 8);
-  var_02 = var_02 - var_03 * 8;
-  var_04 = int(var_02 / 4);
-  var_02 = var_02 - var_04 * 4;
-  var_05 = int(var_02 / 2);
-  var_02 = var_02 - var_05 * 2;
-  var_06 = int(var_02 / 1);
-  var_02 = var_02 - var_06 * 1;
-  if(var_06 == 1 && !level.has_soul_key_1) {
+show_soul_key(var_0) {
+  var_1 = int(var_0 / 16);
+  var_2 = var_0 - var_1 * 16;
+  var_3 = int(var_2 / 8);
+  var_2 = var_2 - var_3 * 8;
+  var_4 = int(var_2 / 4);
+  var_2 = var_2 - var_4 * 4;
+  var_5 = int(var_2 / 2);
+  var_2 = var_2 - var_5 * 2;
+  var_6 = int(var_2 / 1);
+  var_2 = var_2 - var_6 * 1;
+  if(var_6 == 1 && !level.has_soul_key_1) {
     level.has_soul_key_1 = 1;
     triggerfx(level.soul_key_1_fx);
   }
 
-  if(var_05 == 1 && !level.has_soul_key_2) {
+  if(var_5 == 1 && !level.has_soul_key_2) {
     level.has_soul_key_2 = 1;
     triggerfx(level.soul_key_2_fx);
   }
 
-  if(var_04 == 1 && !level.has_soul_key_3) {
+  if(var_4 == 1 && !level.has_soul_key_3) {
     level.has_soul_key_3 = 1;
     triggerfx(level.soul_key_3_fx);
   }
 
-  if(var_03 == 1 && !level.has_soul_key_4) {
+  if(var_3 == 1 && !level.has_soul_key_4) {
     level.has_soul_key_4 = 1;
     triggerfx(level.soul_key_4_fx);
   }
 
-  if(var_01 == 1 && !level.has_soul_key_5) {
+  if(var_1 == 1 && !level.has_soul_key_5) {
     level.has_soul_key_5 = 1;
     triggerfx(level.soul_key_5_fx);
   }
@@ -1200,21 +1200,21 @@ func_13EFE() {
   func_37BA(level.active_section);
   scripts\engine\utility::waitframe();
   for(;;) {
-    var_00 = frontendscenegetactivesection();
-    if(var_00.name == level.active_section.name && var_00.index == level.active_section.index) {
+    var_0 = frontendscenegetactivesection();
+    if(var_0.name == level.active_section.name && var_0.index == level.active_section.index) {
       scripts\engine\utility::waitframe();
       continue;
     }
 
-    level.active_section = var_00;
-    func_37BA(var_00);
+    level.active_section = var_0;
+    func_37BA(var_0);
   }
 }
 
-func_13EFF(param_00, param_01, param_02, param_03) {
+func_13EFF(var_0, var_1, var_2, var_3) {
   level endon("camera_position_requested");
-  var_04 = getent(param_00, "targetname");
-  scripts\cp_mp\frontendutils::frontend_camera_move(var_04, param_01, 1, 0, param_02);
+  var_4 = getent(var_0, "targetname");
+  scripts\cp_mp\frontendutils::frontend_camera_move(var_4, var_1, 1, 0, var_2);
 }
 
 main() {
@@ -1235,35 +1235,35 @@ main() {
 }
 
 update_theater_signs() {
-  var_00 = getent("front_marquee_sign", "targetname");
-  var_00 setModel("cp_final_fe_theater_beast_from_beyond");
-  var_01 = getEntArray("frontend_poster", "targetname");
-  foreach(var_03 in var_01) {
-    var_03 setModel("zmb_poster_dlc4");
+  var_0 = getent("front_marquee_sign", "targetname");
+  var_0 setModel("cp_final_fe_theater_beast_from_beyond");
+  var_1 = getEntArray("frontend_poster", "targetname");
+  foreach(var_3 in var_1) {
+    var_3 setModel("zmb_poster_dlc4");
   }
 }
 
 setup_fnf_machine() {
-  var_00 = getent("fnf_jaw", "targetname");
-  var_01 = getent("fnf_machine", "targetname");
+  var_0 = getent("fnf_jaw", "targetname");
+  var_1 = getent("fnf_machine", "targetname");
   if(should_use_alt_machine()) {
-    var_01 setscriptablepartstate("teller", "default_on");
-    var_00 setModel("zmb_fortune_teller_machine_jaw_02");
+    var_1 setscriptablepartstate("teller", "default_on");
+    var_0 setModel("zmb_fortune_teller_machine_jaw_02");
     return;
   }
 
-  var_00 setModel("zmb_fortune_teller_machine_jaw_01");
-  var_01 setscriptablepartstate("teller", "safe_on");
+  var_0 setModel("zmb_fortune_teller_machine_jaw_01");
+  var_1 setscriptablepartstate("teller", "safe_on");
 }
 
-func_F522(param_00) {
+func_F522(var_0) {
   level.camera_anchor dontinterpolate();
-  level.camera_anchor.origin = getent(param_00, "targetname").origin;
-  level.camera_anchor.angles = getent(param_00, "targetname").angles;
+  level.camera_anchor.origin = getent(var_0, "targetname").origin;
+  level.camera_anchor.angles = getent(var_0, "targetname").angles;
 }
 
-func_A8E7(param_00) {
-  return !isDefined(self.var_A8E6) || self.var_A8E6 == "" || self.var_A8E6 == param_00;
+func_A8E7(var_0) {
+  return !isDefined(self.var_A8E6) || self.var_A8E6 == "" || self.var_A8E6 == var_0;
 }
 
 blank() {}

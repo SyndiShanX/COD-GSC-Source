@@ -61,6 +61,6 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_125C3(var_00, var_01, var_02, var_03) {
+func_125C3(var_0, var_1, var_2, var_3) {
   return 1;
 }

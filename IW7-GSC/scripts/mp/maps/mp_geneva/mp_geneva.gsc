@@ -27,107 +27,107 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player128x128x256", "targetname");
-  var_01 = spawn("script_model", (-560, -2752, 384));
-  var_01.angles = (0, 0, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player32x32x256", "targetname");
-  var_03 = spawn("script_model", (-512, -1536, 464));
-  var_03.angles = (0, 45, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = spawn("script_model", (-512, -1536, 720));
-  var_04.angles = (0, 45, 0);
-  var_04 clonebrushmodeltoscriptmodel(var_02);
-  var_05 = spawn("script_model", (-1088, -510, 0));
-  var_05.angles = (0, 0, 0);
-  var_05 setModel("mp_geneva_wallrun_clip_brick_01");
-  var_06 = getent("player32x32x8", "targetname");
-  var_07 = spawn("script_model", (-512, -2416, 284));
-  var_07.angles = (75, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = spawn("script_model", (-512, -3080, 284));
-  var_08.angles = (75, 0, 0);
-  var_08 clonebrushmodeltoscriptmodel(var_06);
-  var_09 = spawn("script_model", (122, 1740, 0));
-  var_09.angles = (0, 0, 0);
-  var_09 setModel("mp_skyway_nosight_v1");
+  var_0 = getent("player128x128x256", "targetname");
+  var_1 = spawn("script_model", (-560, -2752, 384));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player32x32x256", "targetname");
+  var_3 = spawn("script_model", (-512, -1536, 464));
+  var_3.angles = (0, 45, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = spawn("script_model", (-512, -1536, 720));
+  var_4.angles = (0, 45, 0);
+  var_4 clonebrushmodeltoscriptmodel(var_2);
+  var_5 = spawn("script_model", (-1088, -510, 0));
+  var_5.angles = (0, 0, 0);
+  var_5 setModel("mp_geneva_wallrun_clip_brick_01");
+  var_6 = getent("player32x32x8", "targetname");
+  var_7 = spawn("script_model", (-512, -2416, 284));
+  var_7.angles = (75, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = spawn("script_model", (-512, -3080, 284));
+  var_8.angles = (75, 0, 0);
+  var_8 clonebrushmodeltoscriptmodel(var_6);
+  var_9 = spawn("script_model", (122, 1740, 0));
+  var_9.angles = (0, 0, 0);
+  var_9 setModel("mp_skyway_nosight_v1");
 }
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_00 = getent("apex_unoutofbounds", "targetname");
-  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_00;
+  var_0 = getent("apex_unoutofbounds", "targetname");
+  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
-  foreach(var_00 in level.outofboundstriggerpatches) {
-    if(isDefined(var_00)) {
-      var_00 delete();
+  foreach(var_0 in level.outofboundstriggerpatches) {
+    if(isDefined(var_0)) {
+      var_0 delete();
     }
   }
 }
 
 oceaninmotion() {
-  var_00 = getEntArray("bobbing_boat", "targetname");
-  foreach(var_02 in var_00) {
-    thread bobbingboat(var_02);
+  var_0 = getEntArray("bobbing_boat", "targetname");
+  foreach(var_2 in var_0) {
+    thread bobbingboat(var_2);
   }
 }
 
-bobbingboat(param_00) {
-  param_00.areanynavvolumesloaded = param_00.origin;
-  param_00.var_10D6C = param_00.angles;
-  if(isDefined(param_00.target)) {
-    param_00.var_BE10 = getEntArray(param_00.target, "targetname");
-    foreach(var_02 in param_00.var_BE10) {
-      var_02.deltapos = var_02.origin - param_00.origin;
+bobbingboat(var_0) {
+  var_0.areanynavvolumesloaded = var_0.origin;
+  var_0.var_10D6C = var_0.angles;
+  if(isDefined(var_0.target)) {
+    var_0.var_BE10 = getEntArray(var_0.target, "targetname");
+    foreach(var_2 in var_0.var_BE10) {
+      var_2.deltapos = var_2.origin - var_0.origin;
     }
   }
 
-  thread boatbob(param_00);
+  thread boatbob(var_0);
 }
 
-boatbob(param_00) {
+boatbob(var_0) {
   level endon("game_ended");
   for(;;) {
-    var_01 = randomfloatrange(4, 7);
-    param_00.objective_playermask_hidefromall = param_00.areanynavvolumesloaded + (randomintrange(-2, 2), randomintrange(-2, 2), randomintrange(-3, 3));
-    param_00 moveto(param_00.objective_playermask_hidefromall, var_01, var_01 * 0.25, var_01 * 0.25);
-    if(isDefined(param_00.target)) {
-      foreach(var_03 in param_00.var_BE10) {
-        var_03.objective_playermask_hidefromall = param_00.objective_playermask_hidefromall + var_03.deltapos;
-        var_03 moveto(var_03.objective_playermask_hidefromall, var_01, var_01 * 0.25, var_01 * 0.25);
+    var_1 = randomfloatrange(4, 7);
+    var_0.objective_playermask_hidefromall = var_0.areanynavvolumesloaded + (randomintrange(-2, 2), randomintrange(-2, 2), randomintrange(-3, 3));
+    var_0 moveto(var_0.objective_playermask_hidefromall, var_1, var_1 * 0.25, var_1 * 0.25);
+    if(isDefined(var_0.target)) {
+      foreach(var_3 in var_0.var_BE10) {
+        var_3.objective_playermask_hidefromall = var_0.objective_playermask_hidefromall + var_3.deltapos;
+        var_3 moveto(var_3.objective_playermask_hidefromall, var_1, var_1 * 0.25, var_1 * 0.25);
       }
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
 setup_vista_driving_boats() {
-  var_00 = getEntArray("boat_vista", "targetname");
-  var_01 = 0.01;
-  var_02 = 0.01666667;
+  var_0 = getEntArray("boat_vista", "targetname");
+  var_1 = 0.01;
+  var_2 = 0.01666667;
   wait(5);
-  foreach(var_04 in var_00) {
-    if(isDefined(var_04.script_label)) {
-      thread vista_boat_drive(var_04, var_02);
-      playFXOnTag(scripts\engine\utility::getfx("vfx_gn_bg_sail_boat_wake"), var_04, "tag_origin");
+  foreach(var_4 in var_0) {
+    if(isDefined(var_4.script_label)) {
+      thread vista_boat_drive(var_4, var_2);
+      playFXOnTag(scripts\engine\utility::getfx("vfx_gn_bg_sail_boat_wake"), var_4, "tag_origin");
       continue;
     }
 
-    thread vista_boat_drive(var_04, var_01);
-    playFXOnTag(scripts\engine\utility::getfx("vfx_gn_bg_boat_wake_rear"), var_04, "tag_origin");
+    thread vista_boat_drive(var_4, var_1);
+    playFXOnTag(scripts\engine\utility::getfx("vfx_gn_bg_boat_wake_rear"), var_4, "tag_origin");
   }
 }
 
-vista_boat_drive(param_00, param_01) {
+vista_boat_drive(var_0, var_1) {
   level endon("game_ended");
-  var_02 = scripts\engine\utility::getstruct(param_00.target, "targetname");
+  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
   for(;;) {
-    var_03 = abs(distance(param_00.origin, var_02.origin) * param_01);
-    param_00 moveto(var_02.origin, var_03, 0, 0);
-    param_00 rotateto(var_02.angles, var_03, 0, 0);
-    var_02 = scripts\engine\utility::getstruct(var_02.target, "targetname");
-    wait(var_03);
+    var_3 = abs(distance(var_0.origin, var_2.origin) * var_1);
+    var_0 moveto(var_2.origin, var_3, 0, 0);
+    var_0 rotateto(var_2.angles, var_3, 0, 0);
+    var_2 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    wait(var_3);
   }
 }
 
@@ -135,17 +135,17 @@ func_F9BA() {
   level.var_A582 = 600;
   level.var_A583 = 1200;
   level.var_BF47 = -1;
-  var_00 = getEntArray("wine_keg", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread func_13957();
+  var_0 = getEntArray("wine_keg", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread func_13957();
   }
 }
 
 func_13957() {
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04);
-    if(!issubstr(var_04, "BULLET")) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4);
+    if(!issubstr(var_4, "BULLET")) {
       continue;
     }
 
@@ -153,24 +153,24 @@ func_13957() {
       continue;
     }
 
-    var_05 = func_7A63(var_01, var_02, var_03);
-    if(!isDefined(var_05)) {
+    var_5 = func_7A63(var_1, var_2, var_3);
+    if(!isDefined(var_5)) {
       continue;
     }
 
     func_B27C();
-    var_05 = vectortoangles(var_05);
-    playFX(level._effect["vfx_gn_imp_wine_cask"], var_03, anglesToForward(var_05), anglestoup(var_05));
-    playFX(level._effect["vfx_gn_wine_barrel_stream"], var_03, anglesToForward(var_05), anglestoup(var_05));
+    var_5 = vectortoangles(var_5);
+    playFX(level._effect["vfx_gn_imp_wine_cask"], var_3, anglesToForward(var_5), anglestoup(var_5));
+    playFX(level._effect["vfx_gn_wine_barrel_stream"], var_3, anglesToForward(var_5), anglestoup(var_5));
   }
 }
 
-func_7A63(param_00, param_01, param_02) {
-  var_03 = param_00.origin;
-  var_04 = param_02 - var_03;
-  var_05 = bulletTrace(var_03, var_03 + 1.5 * var_04, 0, param_00, 0);
-  if(isDefined(var_05["normal"]) && isDefined(var_05["entity"]) && var_05["entity"] == self) {
-    return var_05["normal"];
+func_7A63(var_0, var_1, var_2) {
+  var_3 = var_0.origin;
+  var_4 = var_2 - var_3;
+  var_5 = bulletTrace(var_3, var_3 + 1.5 * var_4, 0, var_0, 0);
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
+    return var_5["normal"];
   }
 
   return undefined;

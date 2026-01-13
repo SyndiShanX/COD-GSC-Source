@@ -90,8 +90,8 @@ onstartgametype() {
   scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_INFECT_HINT");
   scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_INFECT_HINT");
   initspawns();
-  var_00[0] = level.gametype;
-  scripts\mp\gameobjects::main(var_00);
+  var_0[0] = level.gametype;
+  scripts\mp\gameobjects::main(var_0);
   level.quickmessagetoall = 1;
   level.blockweapondrops = 1;
   level.infect_allowsuicide = 0;
@@ -143,55 +143,55 @@ updategametypedvars() {
   level.initialsecondaryweapon = stripweapsuffix(level.initialsecondaryweapon);
 }
 
-stripweapsuffix(param_00) {
-  if(issubstr(param_00, "mpr")) {
-    param_00 = scripts\mp\utility::strip_suffix(param_00, "_mpr");
-  } else if(issubstr(param_00, "mpl")) {
-    param_00 = scripts\mp\utility::strip_suffix(param_00, "_mpl");
+stripweapsuffix(var_0) {
+  if(issubstr(var_0, "mpr")) {
+    var_0 = scripts\mp\utility::strip_suffix(var_0, "_mpr");
+  } else if(issubstr(var_0, "mpl")) {
+    var_0 = scripts\mp\utility::strip_suffix(var_0, "_mpl");
   } else {
-    param_00 = scripts\mp\utility::strip_suffix(param_00, "_mp");
+    var_0 = scripts\mp\utility::strip_suffix(var_0, "_mp");
   }
 
-  return param_00;
+  return var_0;
 }
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00.gamemodefirstspawn = 1;
-    var_00.gamemodejoinedatstart = 1;
-    var_00.infectedrejoined = 0;
-    var_00.waitedtospawn = 0;
+    level waittill("connected", var_0);
+    var_0.gamemodefirstspawn = 1;
+    var_0.gamemodejoinedatstart = 1;
+    var_0.infectedrejoined = 0;
+    var_0.waitedtospawn = 0;
     if(!scripts\mp\utility::gameflag("prematch_done") || level.infect_countdowninprogress) {
-      var_00.waitedtospawn = 1;
+      var_0.waitedtospawn = 1;
     }
 
-    var_00.pers["class"] = "gamemode";
-    var_00.pers["lastClass"] = "";
-    var_00.class = var_00.pers["class"];
-    var_00.lastclass = var_00.pers["lastClass"];
-    var_00 loadweaponsforplayer(level.allweapons);
+    var_0.pers["class"] = "gamemode";
+    var_0.pers["lastClass"] = "";
+    var_0.class = var_0.pers["class"];
+    var_0.lastclass = var_0.pers["lastClass"];
+    var_0 loadweaponsforplayer(level.allweapons);
     if(scripts\mp\utility::gameflag("prematch_done")) {
-      var_00.gamemodejoinedatstart = 0;
+      var_0.gamemodejoinedatstart = 0;
       if(isDefined(level.infect_chosefirstinfected) && level.infect_chosefirstinfected) {
-        var_00.survivalstarttime = gettime();
+        var_0.survivalstarttime = gettime();
       }
     }
 
-    if(isDefined(level.infect_players[var_00.name])) {
-      var_00.infectedrejoined = 1;
+    if(isDefined(level.infect_players[var_0.name])) {
+      var_0.infectedrejoined = 1;
     }
 
-    if(isDefined(var_00.isinitialinfected)) {
-      var_00.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
-    } else if(var_00.infectedrejoined) {
-      var_00.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
+    if(isDefined(var_0.isinitialinfected)) {
+      var_0.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
+    } else if(var_0.infectedrejoined) {
+      var_0.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
     } else {
-      var_00.pers["gamemodeLoadout"] = level.infect_loadouts["allies"];
-      var_00 setrandomrigifscout();
+      var_0.pers["gamemodeLoadout"] = level.infect_loadouts["allies"];
+      var_0 setrandomrigifscout();
     }
 
-    var_00 thread monitorsurvivaltime();
+    var_0 thread monitorsurvivaltime();
   }
 }
 
@@ -199,9 +199,9 @@ givesurvivortimescore() {
   level endon("game_ended");
   for(;;) {
     wait(level.survivorscoretime);
-    foreach(var_01 in level.players) {
-      if(var_01.team == "allies") {
-        var_01 thread scripts\mp\utility::giveunifiedpoints("survivor", undefined, level.survivorscorepertick);
+    foreach(var_1 in level.players) {
+      if(var_1.team == "allies") {
+        var_1 thread scripts\mp\utility::giveunifiedpoints("survivor", undefined, level.survivorscorepertick);
       }
     }
   }
@@ -230,25 +230,25 @@ getspawnpoint() {
     self.pers["lastClass"] = "";
     self.class = self.pers["class"];
     self.lastclass = self.pers["lastClass"];
-    var_00 = "allies";
+    var_0 = "allies";
     if(self.infectedrejoined) {
-      var_00 = "axis";
+      var_0 = "axis";
     }
 
-    scripts\mp\menus::addtoteam(var_00, 1);
+    scripts\mp\menus::addtoteam(var_0, 1);
     thread monitordisconnect();
   }
 
   if(level.ingraceperiod) {
-    var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn");
-    var_02 = scripts\mp\spawnlogic::getspawnpoint_random(var_01);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_random(var_1);
   } else {
-    var_01 = scripts\mp\spawnlogic::getteamspawnpoints(self.pers["team"]);
-    var_03 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(self.pers["team"]);
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01, var_03);
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(self.pers["team"]);
+    var_3 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(self.pers["team"]);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1, var_3);
   }
 
-  return var_02;
+  return var_2;
 }
 
 onspawnplayer() {
@@ -270,16 +270,16 @@ onspawnplayer() {
       level notify("infect_stopCountdown");
       level.infect_chosefirstinfected = 1;
       level.infect_allowsuicide = 1;
-      foreach(var_01 in level.players) {
-        if(isDefined(var_01.infect_isbeingchosen)) {
-          var_01.infect_isbeingchosen = undefined;
+      foreach(var_1 in level.players) {
+        if(isDefined(var_1.infect_isbeingchosen)) {
+          var_1.infect_isbeingchosen = undefined;
         }
       }
     }
 
-    foreach(var_01 in level.players) {
-      if(isDefined(var_01.isinitialinfected)) {
-        var_01 thread setinitialtonormalinfected();
+    foreach(var_1 in level.players) {
+      if(isDefined(var_1.isinitialinfected)) {
+        var_1 thread setinitialtonormalinfected();
       }
     }
 
@@ -295,30 +295,30 @@ onspawnplayer() {
 }
 
 spawnwithplayersecondary() {
-  var_00 = self getweaponslistprimaries();
-  var_01 = self getcurrentprimaryweapon();
-  if(var_00.size > 1) {
-    if(scripts\mp\weapons::isknifeonly(var_01)) {
-      foreach(var_03 in var_00) {
-        if(var_03 != var_01) {
-          self setspawnweapon(var_03);
+  var_0 = self getweaponslistprimaries();
+  var_1 = self getcurrentprimaryweapon();
+  if(var_0.size > 1) {
+    if(scripts\mp\weapons::isknifeonly(var_1)) {
+      foreach(var_3 in var_0) {
+        if(var_3 != var_1) {
+          self setspawnweapon(var_3);
         }
       }
     }
   }
 }
 
-setdefaultammoclip(param_00) {
-  var_01 = 1;
+setdefaultammoclip(var_0) {
+  var_1 = 1;
   if(isDefined(self.isinitialinfected)) {
-    if(scripts\mp\utility::isusingdefaultclass(param_00, 1)) {
-      var_01 = 0;
+    if(scripts\mp\utility::isusingdefaultclass(var_0, 1)) {
+      var_1 = 0;
     }
-  } else if(scripts\mp\utility::isusingdefaultclass(param_00, 0)) {
-    var_01 = 0;
+  } else if(scripts\mp\utility::isusingdefaultclass(var_0, 0)) {
+    var_1 = 0;
   }
 
-  return var_01;
+  return var_1;
 }
 
 onspawnfinished() {
@@ -340,20 +340,20 @@ onspawnfinished() {
     }
 
     spawnwithplayersecondary();
-    var_00 = "primary";
-    var_01 = scripts\mp\powers::getcurrentequipment(var_00);
-    if(isDefined(var_01)) {
-      scripts\mp\powers::removepower(var_01);
+    var_0 = "primary";
+    var_1 = scripts\mp\powers::getcurrentequipment(var_0);
+    if(isDefined(var_1)) {
+      scripts\mp\powers::removepower(var_1);
     }
 
-    scripts\mp\powers::givepower(level.survivorlethal, var_00, 0);
-    var_00 = "secondary";
-    var_01 = scripts\mp\powers::getcurrentequipment(var_00);
-    if(isDefined(var_01)) {
-      scripts\mp\powers::removepower(var_01);
+    scripts\mp\powers::givepower(level.survivorlethal, var_0, 0);
+    var_0 = "secondary";
+    var_1 = scripts\mp\powers::getcurrentequipment(var_0);
+    if(isDefined(var_1)) {
+      scripts\mp\powers::removepower(var_1);
     }
 
-    scripts\mp\powers::givepower(level.survivortactical, var_00, 0);
+    scripts\mp\powers::givepower(level.survivortactical, var_0, 0);
     managefists(level.survivorprimaryweapon, level.survivorsecondaryweapon);
   } else if(self.pers["team"] == "axis") {
     if(level.enableping) {
@@ -363,31 +363,31 @@ onspawnfinished() {
     refundinfectedsuper();
     thread setinfectedmsg();
     if(!level.supportdoublejump_MAYBE) {
-      var_02 = 1.1;
+      var_2 = 1.1;
     } else {
-      var_02 = 1.05;
+      var_2 = 1.05;
     }
 
-    var_03 = int(floor(level.infect_teamscores["axis"] / 3));
-    var_03 = var_03 * 0.012;
-    var_02 = var_02 - var_03;
-    self.overrideweaponspeed_speedscale = var_02;
+    var_3 = int(floor(level.infect_teamscores["axis"] / 3));
+    var_3 = var_3 * 0.012;
+    var_2 = var_2 - var_3;
+    self.overrideweaponspeed_speedscale = var_2;
     scripts\mp\weapons::updatemovespeedscale();
-    var_00 = "primary";
-    var_01 = scripts\mp\powers::getcurrentequipment(var_00);
-    if(isDefined(var_01)) {
-      scripts\mp\powers::removepower(var_01);
+    var_0 = "primary";
+    var_1 = scripts\mp\powers::getcurrentequipment(var_0);
+    if(isDefined(var_1)) {
+      scripts\mp\powers::removepower(var_1);
     }
 
-    scripts\mp\powers::givepower(level.infectedlethal, var_00, 0);
+    scripts\mp\powers::givepower(level.infectedlethal, var_0, 0);
     if(level.infectedtactical != "power_tacInsert") {
-      var_00 = "secondary";
-      var_01 = scripts\mp\powers::getcurrentequipment(var_00);
-      if(isDefined(var_01)) {
-        scripts\mp\powers::removepower(var_01);
+      var_0 = "secondary";
+      var_1 = scripts\mp\powers::getcurrentequipment(var_0);
+      if(isDefined(var_1)) {
+        scripts\mp\powers::removepower(var_1);
       }
 
-      scripts\mp\powers::givepower(level.infectedtactical, var_00, 0);
+      scripts\mp\powers::givepower(level.infectedtactical, var_0, 0);
     } else {
       scripts\mp\utility::giveperk("specialty_tacticalinsertion");
     }
@@ -402,8 +402,8 @@ onspawnfinished() {
   }
 
   giveextrainfectedperks();
-  var_04 = scripts\mp\utility::getweaponrootname(self.loadoutprimary);
-  if(var_04 != "iw7_knife") {
+  var_4 = scripts\mp\utility::getweaponrootname(self.loadoutprimary);
+  if(var_4 != "iw7_knife") {
     self giveweapon("iw7_knife_mp_infect");
     self assignweaponmeleeslot("iw7_knife_mp_infect");
     if(self.loadoutsecondary == "iw7_knife") {
@@ -415,9 +415,9 @@ onspawnfinished() {
   self.faux_spawn_infected = undefined;
 }
 
-managefists(param_00, param_01) {
-  if(param_00 != "iw7_fists" || param_01 != "iw7_fists") {
-    if(param_00 == "none" && param_01 == "none") {
+managefists(var_0, var_1) {
+  if(var_0 != "iw7_fists" || var_1 != "iw7_fists") {
+    if(var_0 == "none" && var_1 == "none") {
       return;
     }
 
@@ -427,15 +427,15 @@ managefists(param_00, param_01) {
 
 giveextrainfectedperks() {
   if(self.pers["team"] == "allies") {
-    var_00 = ["specialty_fastreload", "passive_gore", "passive_nuke", "passive_refresh"];
+    var_0 = ["specialty_fastreload", "passive_gore", "passive_nuke", "passive_refresh"];
   } else if(scripts\mp\utility::istrue(self.isinitialinfected)) {
-    var_00 = ["specialty_longersprint", "specialty_quickdraw", "specialty_falldamage", "specialty_bulletaccuracy", "specialty_quickswap"];
+    var_0 = ["specialty_longersprint", "specialty_quickdraw", "specialty_falldamage", "specialty_bulletaccuracy", "specialty_quickswap"];
   } else {
-    var_00 = ["specialty_longersprint", "specialty_quickdraw", "specialty_falldamage"];
+    var_0 = ["specialty_longersprint", "specialty_quickdraw", "specialty_falldamage"];
   }
 
-  foreach(var_02 in var_00) {
-    scripts\mp\utility::giveperk(var_02);
+  foreach(var_2 in var_0) {
+    scripts\mp\utility::giveperk(var_2);
   }
 }
 
@@ -479,57 +479,57 @@ choosefirstinfected() {
   level.infect_countdowninprogress = 1;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
   setomnvar("ui_match_start_text", "first_infected_in");
-  var_00 = 15;
-  while(var_00 > 0 && !level.gameended) {
-    setomnvar("ui_match_start_countdown", var_00);
-    var_00--;
+  var_0 = 15;
+  while(var_0 > 0 && !level.gameended) {
+    setomnvar("ui_match_start_countdown", var_0);
+    var_0--;
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
   }
 
   setomnvar("ui_match_start_countdown", 0);
   level.infect_countdowninprogress = 0;
-  var_01 = [];
-  foreach(var_03 in level.players) {
-    if(scripts\mp\utility::matchmakinggame() && level.players.size > 1 && var_03 ishost()) {
+  var_1 = [];
+  foreach(var_3 in level.players) {
+    if(scripts\mp\utility::matchmakinggame() && level.players.size > 1 && var_3 ishost()) {
       continue;
     }
 
-    if(var_03.team == "spectator") {
+    if(var_3.team == "spectator") {
       continue;
     }
 
-    if(!var_03.hasspawned) {
+    if(!var_3.hasspawned) {
       continue;
     }
 
-    var_01[var_01.size] = var_03;
+    var_1[var_1.size] = var_3;
   }
 
-  var_05 = undefined;
-  if(var_01.size <= level.numinitialinfected && var_01.size > 1) {
-    level.numinitialinfected = var_01.size - 1;
+  var_5 = undefined;
+  if(var_1.size <= level.numinitialinfected && var_1.size > 1) {
+    level.numinitialinfected = var_1.size - 1;
   }
 
-  for(var_06 = 0; var_06 < level.numinitialinfected; var_06++) {
-    var_05 = var_01[randomint(var_01.size)];
-    var_05 setfirstinfected(1);
-    var_01 = scripts\engine\utility::array_remove(var_01, var_05);
+  for(var_6 = 0; var_6 < level.numinitialinfected; var_6++) {
+    var_5 = var_1[randomint(var_1.size)];
+    var_5 setfirstinfected(1);
+    var_1 = scripts\engine\utility::array_remove(var_1, var_5);
   }
 
   level.infect_allowsuicide = 1;
-  foreach(var_03 in level.players) {
-    if(var_03 == var_05) {
+  foreach(var_3 in level.players) {
+    if(var_3 == var_5) {
       continue;
     }
 
-    var_03.survivalstarttime = gettime();
+    var_3.survivalstarttime = gettime();
   }
 }
 
-setfirstinfected(param_00) {
+setfirstinfected(var_0) {
   self endon("disconnect");
   self endon("death");
-  if(param_00) {
+  if(var_0) {
     self.infect_isbeingchosen = 1;
   }
 
@@ -555,7 +555,7 @@ setfirstinfected(param_00) {
     scripts\engine\utility::waitframe();
   }
 
-  if(param_00) {
+  if(var_0) {
     scripts\mp\menus::addtoteam("axis", undefined, 1);
     thread monitordisconnect();
     level.infect_chosefirstinfected = 1;
@@ -570,22 +570,22 @@ setfirstinfected(param_00) {
     scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
   }
 
-  var_01 = spawn("script_model", self.origin);
-  var_01.angles = self.angles;
-  var_01.playerspawnpos = self.origin;
-  var_01.notti = 1;
-  self.setspawnpoint = var_01;
+  var_1 = spawn("script_model", self.origin);
+  var_1.angles = self.angles;
+  var_1.playerspawnpos = self.origin;
+  var_1.notti = 1;
+  self.setspawnpoint = var_1;
   self notify("faux_spawn");
   self.faux_spawn_stance = self getstance();
   self.faux_spawn_infected = 1;
   waittillframeend;
   thread scripts\mp\playerlogic::spawnplayer(1);
-  if(param_00) {
+  if(var_0) {
     level.infect_players[self.name] = 1;
   }
 
-  foreach(var_03 in level.players) {
-    var_03 thread scripts\mp\hud_message::showsplash("first_infected");
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\mp\hud_message::showsplash("first_infected");
   }
 
   level thread scripts\mp\utility::teamplayercardsplash("callout_first_infected", self);
@@ -598,12 +598,12 @@ setfirstinfected(param_00) {
   initsurvivaltime(1);
 }
 
-setinitialtonormalinfected(param_00, param_01) {
+setinitialtonormalinfected(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self.isinitialinfected = undefined;
   self.changingtoregularinfected = 1;
-  if(isDefined(param_00)) {
+  if(isDefined(var_0)) {
     self.changingtoregularinfectedbykill = 1;
   }
 
@@ -638,11 +638,11 @@ setinitialtonormalinfected(param_00, param_01) {
     scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
   }
 
-  var_02 = spawn("script_model", self.origin);
-  var_02.angles = self.angles;
-  var_02.playerspawnpos = self.origin;
-  var_02.notti = 1;
-  self.setspawnpoint = var_02;
+  var_2 = spawn("script_model", self.origin);
+  var_2.angles = self.angles;
+  var_2.playerspawnpos = self.origin;
+  var_2.notti = 1;
+  self.setspawnpoint = var_2;
   self notify("faux_spawn");
   self.faux_spawn_stance = self getstance();
   self.faux_spawn_infected = 1;
@@ -650,7 +650,7 @@ setinitialtonormalinfected(param_00, param_01) {
   thread scripts\mp\playerlogic::spawnplayer(1);
 }
 
-onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(level.gameended) {
     return;
   }
@@ -661,51 +661,51 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
     self setscriptablepartstate("infected", "neutral", 0);
   }
 
-  if(self.team == "allies" && isDefined(param_01)) {
-    if(isplayer(param_01) && param_01 != self) {
+  if(self.team == "allies" && isDefined(var_1)) {
+    if(isplayer(var_1) && var_1 != self) {
       var_0A = 1;
-    } else if(level.infect_allowsuicide && param_01 == self || !isplayer(param_01)) {
+    } else if(level.infect_allowsuicide && var_1 == self || !isplayer(var_1)) {
       var_0A = 1;
       var_0B = 1;
     }
   }
 
-  if(isplayer(param_01) && param_01.team == "allies" && param_01 != self) {
-    param_01 thread scripts\mp\perks\_weaponpassives::func_8974(param_01, self);
-    param_01 scripts\mp\utility::incperstat("killsAsSurvivor", 1);
-    param_01 scripts\mp\persistence::statsetchild("round", "killsAsSurvivor", param_01.pers["killsAsSurvivor"]);
-  } else if(isplayer(param_01) && param_01.team == "axis" && param_01 != self) {
-    param_01 scripts\mp\utility::incperstat("killsAsInfected", 1);
-    param_01 scripts\mp\persistence::statsetchild("round", "killsAsInfected", param_01.pers["killsAsInfected"]);
-    if(isplayer(param_01)) {
-      param_01 scripts\mp\utility::setextrascore1(param_01.pers["killsAsInfected"]);
+  if(isplayer(var_1) && var_1.team == "allies" && var_1 != self) {
+    var_1 thread scripts\mp\perks\_weaponpassives::func_8974(var_1, self);
+    var_1 scripts\mp\utility::incperstat("killsAsSurvivor", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "killsAsSurvivor", var_1.pers["killsAsSurvivor"]);
+  } else if(isplayer(var_1) && var_1.team == "axis" && var_1 != self) {
+    var_1 scripts\mp\utility::incperstat("killsAsInfected", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "killsAsInfected", var_1.pers["killsAsInfected"]);
+    if(isplayer(var_1)) {
+      var_1 scripts\mp\utility::setextrascore1(var_1.pers["killsAsInfected"]);
     }
   }
 
   if(var_0A) {
-    thread delayedprocesskill(param_01, var_0B);
+    thread delayedprocesskill(var_1, var_0B);
     if(var_0B) {
       foreach(var_0D in level.players) {
         if(isDefined(var_0D.isinitialinfected)) {
           var_0D thread setinitialtonormalinfected();
         }
       }
-    } else if(isDefined(param_01.isinitialinfected)) {
+    } else if(isDefined(var_1.isinitialinfected)) {
       foreach(var_0D in level.players) {
         if(isDefined(var_0D.isinitialinfected)) {
           var_0D thread setinitialtonormalinfected(1);
         }
       }
     } else if(level.infectstreakbonus > 0) {
-      if(!isDefined(param_01.infectedkillsthislife)) {
-        param_01.infectedkillsthislife = 1;
+      if(!isDefined(var_1.infectedkillsthislife)) {
+        var_1.infectedkillsthislife = 1;
       } else {
-        param_01.infectedkillsthislife++;
+        var_1.infectedkillsthislife++;
       }
 
-      param_01 thread scripts\mp\utility::giveunifiedpoints("infected_survivor", undefined, level.infectstreakbonus * param_01.infectedkillsthislife);
+      var_1 thread scripts\mp\utility::giveunifiedpoints("infected_survivor", undefined, level.infectstreakbonus * var_1.infectedkillsthislife);
     } else {
-      param_01 thread scripts\mp\utility::giveunifiedpoints("infected_survivor");
+      var_1 thread scripts\mp\utility::giveunifiedpoints("infected_survivor");
     }
 
     if(scripts\mp\utility::getwatcheddvar("timelimit") != 0) {
@@ -737,7 +737,7 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
   }
 }
 
-delayedprocesskill(param_00, param_01) {
+delayedprocesskill(var_0, var_1) {
   wait(0.15);
   self.teamchangedthisframe = 1;
   scripts\mp\menus::addtoteam("axis");
@@ -748,25 +748,25 @@ delayedprocesskill(param_00, param_01) {
     scripts\mp\utility::playsoundonplayers("mp_enemy_obj_captured", "allies");
     scripts\mp\utility::playsoundonplayers("mp_war_objective_taken", "axis");
     thread scripts\mp\utility::teamplayercardsplash("callout_got_infected", self, "allies");
-    if(!param_01) {
-      thread scripts\mp\utility::teamplayercardsplash("callout_infected", param_00, "axis");
+    if(!var_1) {
+      thread scripts\mp\utility::teamplayercardsplash("callout_infected", var_0, "axis");
       if(!isDefined(level.survivorscoreevent)) {
         level.survivorscoreevent = scripts\mp\rank::getscoreinfovalue("survivor");
       } else {
         level.survivorscoreevent = level.survivorscoreevent + level.survivoralivescore;
       }
 
-      foreach(var_03 in level.players) {
-        if(!scripts\mp\utility::isreallyalive(var_03) || self.sessionstate == "spectator") {
+      foreach(var_3 in level.players) {
+        if(!scripts\mp\utility::isreallyalive(var_3) || self.sessionstate == "spectator") {
           continue;
         }
 
-        if(var_03.team == "allies" && var_03 != self && distance(var_03.infect_spawnpos, var_03.origin) > 32) {
-          var_03 thread scripts\mp\utility::giveunifiedpoints("survivor", undefined, level.survivorscoreevent);
+        if(var_3.team == "allies" && var_3 != self && distance(var_3.infect_spawnpos, var_3.origin) > 32) {
+          var_3 thread scripts\mp\utility::giveunifiedpoints("survivor", undefined, level.survivorscoreevent);
         }
 
-        if(var_03.team == "axis" && var_03 != param_00 && var_03 != self) {
-          var_03 thread scripts\mp\utility::giveunifiedpoints("assist", undefined, 50);
+        if(var_3.team == "axis" && var_3 != var_0 && var_3 != self) {
+          var_3 thread scripts\mp\utility::giveunifiedpoints("assist", undefined, 50);
         }
       }
     }
@@ -792,24 +792,24 @@ delayedprocesskill(param_00, param_01) {
 
 onfinalsurvivor() {
   scripts\mp\utility::playsoundonplayers("mp_obj_captured");
-  foreach(var_01 in level.players) {
-    if(!isDefined(var_01)) {
+  foreach(var_1 in level.players) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(var_01.team == "allies") {
-      var_01 thread scripts\mp\rank::scoreeventpopup("final_survivor");
+    if(var_1.team == "allies") {
+      var_1 thread scripts\mp\rank::scoreeventpopup("final_survivor");
       if(!level.infect_awardedfinalsurvivor) {
-        if(var_01.gamemodejoinedatstart && isDefined(var_01.infect_spawnpos) && distance(var_01.infect_spawnpos, var_01.origin) > 32) {
-          var_01 thread scripts\mp\utility::giveunifiedpoints("final_survivor");
+        if(var_1.gamemodejoinedatstart && isDefined(var_1.infect_spawnpos) && distance(var_1.infect_spawnpos, var_1.origin) > 32) {
+          var_1 thread scripts\mp\utility::giveunifiedpoints("final_survivor");
         }
 
         level.infect_awardedfinalsurvivor = 1;
       }
 
-      thread scripts\mp\utility::teamplayercardsplash("callout_final_survivor", var_01);
-      if(!var_01 scripts\mp\utility::isjuggernaut()) {
-        level thread finalsurvivoruav(var_01);
+      thread scripts\mp\utility::teamplayercardsplash("callout_final_survivor", var_1);
+      if(!var_1 scripts\mp\utility::isjuggernaut()) {
+        level thread finalsurvivoruav(var_1);
       }
 
       break;
@@ -817,45 +817,45 @@ onfinalsurvivor() {
   }
 }
 
-finalsurvivoruav(param_00) {
+finalsurvivoruav(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("eliminated");
+  var_0 endon("disconnect");
+  var_0 endon("eliminated");
   level endon("infect_lateJoiner");
-  level thread enduavonlatejoiner(param_00);
-  var_01 = 0;
+  level thread enduavonlatejoiner(var_0);
+  var_1 = 0;
   level.createprintchannel["axis"] = "normal_radar";
-  foreach(var_03 in level.players) {
-    if(var_03.team == "axis") {
-      var_03.createprintchannel = "normal_radar";
+  foreach(var_3 in level.players) {
+    if(var_3.team == "axis") {
+      var_3.createprintchannel = "normal_radar";
     }
   }
 
-  var_05 = getuavstrengthlevelneutral();
-  scripts\mp\killstreaks\_uav::_setteamradarstrength("axis", var_05 + 1);
+  var_5 = getuavstrengthlevelneutral();
+  scripts\mp\killstreaks\_uav::_setteamradarstrength("axis", var_5 + 1);
   for(;;) {
-    var_06 = param_00.origin;
+    var_6 = var_0.origin;
     wait(4);
-    if(var_01) {
+    if(var_1) {
       setteamradar("axis", 0);
-      var_01 = 0;
+      var_1 = 0;
     }
 
     wait(6);
-    if(distance(var_06, param_00.origin) < 200) {
+    if(distance(var_6, var_0.origin) < 200) {
       setteamradar("axis", 1);
-      var_01 = 1;
-      foreach(var_03 in level.players) {
-        var_03 playlocalsound("recondrone_tag");
+      var_1 = 1;
+      foreach(var_3 in level.players) {
+        var_3 playlocalsound("recondrone_tag");
       }
     }
   }
 }
 
-enduavonlatejoiner(param_00) {
+enduavonlatejoiner(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("eliminated");
+  var_0 endon("disconnect");
+  var_0 endon("eliminated");
   for(;;) {
     if(level.infect_teamscores["allies"] > 1) {
       level notify("infect_lateJoiner");
@@ -873,21 +873,21 @@ monitordisconnect() {
   self endon("eliminated");
   self notify("infect_monitor_disconnect");
   self endon("infect_monitor_disconnect");
-  var_00 = self.team;
-  if(!isDefined(var_00) && isDefined(self.bot_team)) {
-    var_00 = self.bot_team;
+  var_0 = self.team;
+  if(!isDefined(var_0) && isDefined(self.bot_team)) {
+    var_0 = self.bot_team;
   }
 
   self waittill("disconnect");
   updateteamscores();
   if(isDefined(self.infect_isbeingchosen) || level.infect_chosefirstinfected) {
     if(level.infect_teamscores["axis"] && level.infect_teamscores["allies"]) {
-      if(var_00 == "allies" && level.infect_teamscores["allies"] == 1) {
+      if(var_0 == "allies" && level.infect_teamscores["allies"] == 1) {
         onfinalsurvivor();
-      } else if(var_00 == "axis" && level.infect_teamscores["axis"] == 1) {
-        foreach(var_02 in level.players) {
-          if(var_02 != self && var_02.team == "axis") {
-            var_02 setfirstinfected(0);
+      } else if(var_0 == "axis" && level.infect_teamscores["axis"] == 1) {
+        foreach(var_2 in level.players) {
+          if(var_2 != self && var_2.team == "axis") {
+            var_2 setfirstinfected(0);
           }
         }
       }
@@ -914,7 +914,7 @@ monitordisconnect() {
   self.isinitialinfected = undefined;
 }
 
-ondeadevent(param_00) {}
+ondeadevent(var_0) {}
 
 ontimelimit() {
   level thread scripts\mp\gamelogic::endgame("allies", game["end_reason"]["time_limit_reached"]);
@@ -924,19 +924,19 @@ onsurvivorseliminated() {
   level thread scripts\mp\gamelogic::endgame("axis", game["end_reason"]["allies_eliminated"]);
 }
 
-getteamsize(param_00) {
-  var_01 = 0;
-  foreach(var_03 in level.players) {
-    if(var_03.sessionstate == "spectator" && !var_03.clearstartpointtransients) {
+getteamsize(var_0) {
+  var_1 = 0;
+  foreach(var_3 in level.players) {
+    if(var_3.sessionstate == "spectator" && !var_3.clearstartpointtransients) {
       continue;
     }
 
-    if(var_03.team == param_00) {
-      var_01++;
+    if(var_3.team == var_0) {
+      var_1++;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 updateteamscores() {
@@ -1106,58 +1106,58 @@ setspecialloadouts() {
   }
 }
 
-addsurvivorattachmentsprimary(param_00) {
+addsurvivorattachmentsprimary(var_0) {
   level.attachmentsurvivorprimary = "none";
-  var_01 = scripts\mp\utility::getweapongroup(param_00);
-  if(var_01 == "weapon_shotgun") {
+  var_1 = scripts\mp\utility::getweapongroup(var_0);
+  if(var_1 == "weapon_shotgun") {
     level.attachmentsurvivorprimary = "barrelrange";
     return;
   }
 
-  if(var_01 == "weapon_assault" || var_01 == "weapon_smg" || var_01 == "weapon_lmg" || var_01 == "weapon_pistol" || param_00 == "iw7_m1c") {
+  if(var_1 == "weapon_assault" || var_1 == "weapon_smg" || var_1 == "weapon_lmg" || var_1 == "weapon_pistol" || var_0 == "iw7_m1c") {
     level.attachmentsurvivorprimary = "highcal";
   }
 }
 
-addinitialattachmentsprimary(param_00) {
+addinitialattachmentsprimary(var_0) {
   level.attachmentinitialprimary = "none";
-  var_01 = scripts\mp\utility::getweapongroup(param_00);
-  if(var_01 == "weapon_shotgun") {
+  var_1 = scripts\mp\utility::getweapongroup(var_0);
+  if(var_1 == "weapon_shotgun") {
     level.attachmentinitialprimary = "barrelrange";
     return;
   }
 
-  if(var_01 == "weapon_assault" || var_01 == "weapon_smg" || var_01 == "weapon_lmg" || var_01 == "weapon_pistol" || param_00 == "iw7_m1c") {
+  if(var_1 == "weapon_assault" || var_1 == "weapon_smg" || var_1 == "weapon_lmg" || var_1 == "weapon_pistol" || var_0 == "iw7_m1c") {
     level.attachmentinitialprimary = "highcal";
   }
 }
 
-addsurvivorattachmentssecondary(param_00) {
+addsurvivorattachmentssecondary(var_0) {
   level.attachmentsurvivorsecondary = "none";
   level.attachmentsurvivorsecondarytwo = "none";
-  var_01 = scripts\mp\utility::getweapongroup(param_00);
-  if(var_01 == "weapon_pistol") {
+  var_1 = scripts\mp\utility::getweapongroup(var_0);
+  if(var_1 == "weapon_pistol") {
     level.attachmentsurvivorsecondary = "highcal";
   }
 
   if(scripts\mp\utility::matchmakinggame()) {
-    if(param_00 == "iw7_g18c") {
+    if(var_0 == "iw7_g18c") {
       level.attachmentsurvivorsecondary = "akimbo";
       level.attachmentsurvivorsecondarytwo = "highcal";
     }
   }
 }
 
-addinitialattachmentssecondary(param_00) {
+addinitialattachmentssecondary(var_0) {
   level.attachmentinitialsecondary = "none";
   level.attachmentinitialsecondarytwo = "none";
-  var_01 = scripts\mp\utility::getweapongroup(param_00);
-  if(var_01 == "weapon_pistol") {
+  var_1 = scripts\mp\utility::getweapongroup(var_0);
+  if(var_1 == "weapon_pistol") {
     level.attachmentinitialsecondary = "highcal";
   }
 
   if(scripts\mp\utility::matchmakinggame()) {
-    if(param_00 == "iw7_g18c") {
+    if(var_0 == "iw7_g18c") {
       level.attachmentinitialsecondary = "akimbo";
       level.attachmentinitialsecondarytwo = "highcal";
     }
@@ -1180,34 +1180,34 @@ monitorsurvivaltime() {
   }
 }
 
-initsurvivaltime(param_00) {
+initsurvivaltime(var_0) {
   scripts\mp\utility::setextrascore0(0);
-  if(isDefined(param_00) && param_00) {
+  if(isDefined(var_0) && var_0) {
     self notify("infected");
   }
 }
 
-setsurvivaltime(param_00) {
+setsurvivaltime(var_0) {
   if(!isDefined(self.survivalstarttime)) {
     self.survivalstarttime = self.spawntime;
   }
 
-  var_01 = int(gettime() - self.survivalstarttime / 1000);
-  if(var_01 > 999) {
-    var_01 = 999;
+  var_1 = int(gettime() - self.survivalstarttime / 1000);
+  if(var_1 > 999) {
+    var_1 = 999;
   }
 
-  scripts\mp\utility::setextrascore0(var_01);
-  if(isDefined(param_00) && param_00) {
+  scripts\mp\utility::setextrascore0(var_1);
+  if(isDefined(var_0) && var_0) {
     self notify("infected");
   }
 }
 
 refundinfectedsuper() {
-  var_00 = self.super;
-  if(isDefined(var_00)) {
-    var_01 = scripts\mp\supers::getsupermaxcooldownmsec() / 10;
-    scripts\mp\supers::func_DE3A(var_01);
+  var_0 = self.super;
+  if(isDefined(var_0)) {
+    var_1 = scripts\mp\supers::getsupermaxcooldownmsec() / 10;
+    scripts\mp\supers::func_DE3A(var_1);
   }
 }
 

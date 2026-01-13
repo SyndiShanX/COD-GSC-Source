@@ -42,29 +42,29 @@ main() {
 }
 
 fix_collision() {
-  var_00 = spawn("script_model", (1856, -736, -112));
-  var_00.angles = (0, 0, 180);
-  var_00 setModel("mp_desert_uplink_col_01");
-  var_01 = getent("clip32x32x256", "targetname");
-  var_02 = spawn("script_model", (256, -60, -32));
-  var_02.angles = (0, 0, 90);
-  var_02 clonebrushmodeltoscriptmodel(var_01);
-  var_03 = getent("clip32x32x256", "targetname");
-  var_04 = spawn("script_model", (368, -60, -32));
-  var_04.angles = (0, 0, 90);
-  var_04 clonebrushmodeltoscriptmodel(var_03);
-  var_05 = getent("player256x256x8", "targetname");
-  var_06 = spawn("script_model", (384, -192, 80));
-  var_06.angles = (0, 60, 90);
-  var_06 clonebrushmodeltoscriptmodel(var_05);
-  var_07 = getent("player256x256x8", "targetname");
-  var_08 = spawn("script_model", (256, -192, 80));
-  var_08.angles = (0, -60, 90);
-  var_08 clonebrushmodeltoscriptmodel(var_07);
-  var_09 = getent("clip64x64x256", "targetname");
+  var_0 = spawn("script_model", (1856, -736, -112));
+  var_0.angles = (0, 0, 180);
+  var_0 setModel("mp_desert_uplink_col_01");
+  var_1 = getent("clip32x32x256", "targetname");
+  var_2 = spawn("script_model", (256, -60, -32));
+  var_2.angles = (0, 0, 90);
+  var_2 clonebrushmodeltoscriptmodel(var_1);
+  var_3 = getent("clip32x32x256", "targetname");
+  var_4 = spawn("script_model", (368, -60, -32));
+  var_4.angles = (0, 0, 90);
+  var_4 clonebrushmodeltoscriptmodel(var_3);
+  var_5 = getent("player256x256x8", "targetname");
+  var_6 = spawn("script_model", (384, -192, 80));
+  var_6.angles = (0, 60, 90);
+  var_6 clonebrushmodeltoscriptmodel(var_5);
+  var_7 = getent("player256x256x8", "targetname");
+  var_8 = spawn("script_model", (256, -192, 80));
+  var_8.angles = (0, -60, 90);
+  var_8 clonebrushmodeltoscriptmodel(var_7);
+  var_9 = getent("clip64x64x256", "targetname");
   var_0A = spawn("script_model", (284, 1216, -40));
   var_0A.angles = (0, 0, 90);
-  var_0A clonebrushmodeltoscriptmodel(var_09);
+  var_0A clonebrushmodeltoscriptmodel(var_9);
   var_0B = getent("clip64x64x256", "targetname");
   var_0C = spawn("script_model", (348, 1216, -40));
   var_0C.angles = (0, 0, 90);
@@ -90,26 +90,26 @@ fix_collision() {
   var_15 clonebrushmodeltoscriptmodel(var_14);
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
 func_5364() {
   wait(5);
-  var_00 = getEntArray("destructible_screens", "targetname");
-  scripts\engine\utility::array_thread(var_00, ::func_5365);
+  var_0 = getEntArray("destructible_screens", "targetname");
+  scripts\engine\utility::array_thread(var_0, ::func_5365);
 }
 
 func_5365() {
   self endon("death");
-  var_00 = getglass(self.target);
-  if(!isDefined(var_00)) {
+  var_0 = getglass(self.target);
+  if(!isDefined(var_0)) {
     iprintlnbold("GLASS ID AT " + self.origin + "IS UNDEFINED");
     return;
   }
 
-  while(!isglassdestroyed(var_00)) {
+  while(!isglassdestroyed(var_0)) {
     wait(0.05);
   }
 
@@ -122,11 +122,11 @@ func_5365() {
 
 securitymetaldetectors() {
   level endon("game_ended");
-  var_00 = getent("audio_metal_detector", "targetname");
-  if(isDefined(var_00)) {
+  var_0 = getent("audio_metal_detector", "targetname");
+  if(isDefined(var_0)) {
     for(;;) {
-      var_00 waittill("trigger", var_01);
-      playsoundatpos(var_01.origin + (0, 0, 80), "skyway_metal_detector_beep");
+      var_0 waittill("trigger", var_1);
+      playsoundatpos(var_1.origin + (0, 0, 80), "skyway_metal_detector_beep");
     }
   }
 }

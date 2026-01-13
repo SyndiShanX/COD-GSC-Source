@@ -19,9 +19,9 @@ func_F44F() {
   level.endgameencounterscorefunc = ::func_13FA1;
 }
 
-func_95CA(param_00) {
-  foreach(var_02 in param_00) {
-    switch (var_02) {
+func_95CA(var_0) {
+  foreach(var_2 in var_0) {
+    switch (var_2) {
       case "damage":
         scripts\cp\cp_gamescore::register_eog_score_component("damage", 29);
         break;
@@ -44,10 +44,10 @@ func_95CA(param_00) {
   }
 }
 
-func_95C7(param_00) {
+func_95C7(var_0) {
   level.encounter_score_components = [];
-  foreach(var_02 in param_00) {
-    switch (var_02) {
+  foreach(var_2 in var_0) {
+    switch (var_2) {
       case "damage":
         func_95A0();
         break;
@@ -86,100 +86,100 @@ func_958B() {
   scripts\cp\cp_gamescore::register_encounter_score_component("consumables_earned", ::func_958A, ::func_E22C, ::func_E213, ::func_36E3, 32, "consumables_earned");
 }
 
-func_958A(param_00) {
-  return param_00;
+func_958A(var_0) {
+  return var_0;
 }
 
-func_E22C(param_00) {
-  return param_00;
+func_E22C(var_0) {
+  return var_0;
 }
 
-func_E213(param_00) {
-  param_00.encounter_performance["total_consumables_earned"] = 0;
+func_E213(var_0) {
+  var_0.encounter_performance["total_consumables_earned"] = 0;
 }
 
-func_36E3(param_00, param_01) {
-  var_02 = scripts\cp\cp_gamescore::get_player_encounter_performance(param_00, "total_consumables_earned");
-  var_03 = min(-15536, var_02 * 10000);
-  return int(var_03);
+func_36E3(var_0, var_1) {
+  var_2 = scripts\cp\cp_gamescore::get_player_encounter_performance(var_0, "total_consumables_earned");
+  var_3 = min(-15536, var_2 * 10000);
+  return int(var_3);
 }
 
-func_9783(param_00) {
-  return param_00;
+func_9783(var_0) {
+  return var_0;
 }
 
-func_E233(param_00) {
-  return param_00;
+func_E233(var_0) {
+  return var_0;
 }
 
-func_E220(param_00) {
-  param_00.encounter_performance["total_tickets_earned"] = 0;
+func_E220(var_0) {
+  var_0.encounter_performance["total_tickets_earned"] = 0;
 }
 
-func_3707(param_00, param_01) {
-  var_02 = scripts\cp\cp_gamescore::get_player_encounter_performance(param_00, "total_tickets_earned");
-  var_03 = min(999999, var_02 * 1);
-  return int(var_03);
+func_3707(var_0, var_1) {
+  var_2 = scripts\cp\cp_gamescore::get_player_encounter_performance(var_0, "total_tickets_earned");
+  var_3 = min(999999, var_2 * 1);
+  return int(var_3);
 }
 
-func_9682(param_00) {
-  return param_00;
+func_9682(var_0) {
+  return var_0;
 }
 
-func_E230(param_00) {
-  return param_00;
+func_E230(var_0) {
+  return var_0;
 }
 
-func_E218(param_00) {
-  param_00.encounter_performance["total_money_earned"] = 0;
+func_E218(var_0) {
+  var_0.encounter_performance["total_money_earned"] = 0;
 }
 
-func_36F8(param_00, param_01) {
-  var_02 = scripts\cp\cp_gamescore::get_player_encounter_performance(param_00, "total_money_earned");
-  var_03 = min(999999, var_02 * 1);
-  return int(var_03);
+func_36F8(var_0, var_1) {
+  var_2 = scripts\cp\cp_gamescore::get_player_encounter_performance(var_0, "total_money_earned");
+  var_3 = min(999999, var_2 * 1);
+  return int(var_3);
 }
 
-func_959F(param_00) {
-  return param_00;
+func_959F(var_0) {
+  return var_0;
 }
 
-func_E22D(param_00) {
-  return param_00;
+func_E22D(var_0) {
+  return var_0;
 }
 
-func_E214(param_00) {
-  param_00.encounter_performance["damage_done_on_agent"] = 0;
+func_E214(var_0) {
+  var_0.encounter_performance["damage_done_on_agent"] = 0;
 }
 
-func_36E5(param_00, param_01) {
-  var_02 = scripts\cp\cp_gamescore::get_player_encounter_performance(param_00, "damage_done_on_agent");
-  var_03 = min(999999, var_02 * 0.2);
-  return int(var_03);
+func_36E5(var_0, var_1) {
+  var_2 = scripts\cp\cp_gamescore::get_player_encounter_performance(var_0, "damage_done_on_agent");
+  var_3 = min(999999, var_2 * 0.2);
+  return int(var_3);
 }
 
-update_agent_damage_performance(param_00, param_01, param_02) {
-  if(param_02 == "MOD_TRIGGER_HURT") {
+update_agent_damage_performance(var_0, var_1, var_2) {
+  if(var_2 == "MOD_TRIGGER_HURT") {
     return;
   }
 
-  var_03 = scripts\cp\utility::get_attacker_as_player(param_00);
-  if(!isDefined(var_03)) {
+  var_3 = scripts\cp\utility::get_attacker_as_player(var_0);
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var_03 scripts\cp\cp_gamescore::update_personal_encounter_performance("damage", "damage_done_on_agent", param_01);
+  var_3 scripts\cp\cp_gamescore::update_personal_encounter_performance("damage", "damage_done_on_agent", var_1);
 }
 
-update_money_earned_performance(param_00, param_01) {
-  param_00 scripts\cp\cp_gamescore::update_personal_encounter_performance("money_earned", "total_money_earned", param_01);
-  scripts\cp\zombies\zombie_analytics::func_AF67(param_00, param_01);
+update_money_earned_performance(var_0, var_1) {
+  var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance("money_earned", "total_money_earned", var_1);
+  scripts\cp\zombies\zombie_analytics::func_AF67(var_0, var_1);
 }
 
-update_tickets_earned_performance(param_00, param_01) {
-  param_00 scripts\cp\cp_gamescore::update_personal_encounter_performance("tickets_earned", "total_tickets_earned", param_01);
+update_tickets_earned_performance(var_0, var_1) {
+  var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance("tickets_earned", "total_tickets_earned", var_1);
 }
 
-func_13FA1(param_00) {
-  scripts\cp\cp_gamescore::calculate_encounter_scores(level.players, ["money_earned"], param_00);
+func_13FA1(var_0) {
+  scripts\cp\cp_gamescore::calculate_encounter_scores(level.players, ["money_earned"], var_0);
 }

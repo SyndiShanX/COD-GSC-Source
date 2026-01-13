@@ -4,7 +4,7 @@
  * Script: 2583.gsc
 ************************/
 
-func_9308(param_00) {
+func_9308(var_0) {
   if(!isDefined(self.var_10E6D)) {
     return level.failure;
   }
@@ -20,7 +20,7 @@ func_9308(param_00) {
   return level.failure;
 }
 
-func_12F2D(param_00) {
+func_12F2D(var_0) {
   if(!isDefined(self.var_10E6D.var_C9A8)) {
     lib_0F18::func_10E8A("set_patrol_style", "unaware");
   }

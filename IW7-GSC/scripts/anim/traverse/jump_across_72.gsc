@@ -15,8 +15,8 @@ main() {
   self endon("killanimscript");
   self _meth_83C4("nogravity");
   self _meth_83C4("noclip");
-  var_00 = self getspectatepoint();
-  self orientmode("face angle", var_00.angles[1]);
+  var_0 = self getspectatepoint();
+  self orientmode("face angle", var_0.angles[1]);
   self _meth_82E4("jumpanim", % jump_across_72, % body, 1, 0.1, 1);
   self waittillmatch("gravity on", "jumpanim");
   self _meth_83C4("gravity");

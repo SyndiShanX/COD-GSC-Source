@@ -9,9 +9,9 @@ main() {
 }
 
 func_138D1() {
-  var_00 = [];
-  var_00["traverseAnim"] = func_7814();
-  scripts\anim\traverse\shared::func_5AC3(var_00);
+  var_0 = [];
+  var_0["traverseAnim"] = func_7814();
+  scripts\anim\traverse\shared::func_5AC3(var_0);
 }
 
 func_7814() {

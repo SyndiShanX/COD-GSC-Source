@@ -4,7 +4,7 @@
  * Script: 2575.gsc
 ************************/
 
-func_9898(param_00) {
+func_9898(var_0) {
   self.acceptablemeleefraction = 0.95;
   self.var_B627 = 36;
   self.fnismeleevalid = ::ismeleevalid;
@@ -16,53 +16,53 @@ func_9898(param_00) {
   return level.success;
 }
 
-canmovefrompointtopoint(param_00, param_01) {
-  var_02 = navtrace(param_00, param_01, self, 1);
-  var_03 = var_02["fraction"];
-  if(var_03 >= self.acceptablemeleefraction) {
-    var_04 = 0;
+canmovefrompointtopoint(var_0, var_1) {
+  var_2 = navtrace(var_0, var_1, self, 1);
+  var_3 = var_2["fraction"];
+  if(var_3 >= self.acceptablemeleefraction) {
+    var_4 = 0;
   } else {
-    var_04 = 1;
+    var_4 = 1;
   }
 
-  return !var_04;
+  return !var_4;
 }
 
-ismeleevalid(param_00, param_01) {
+ismeleevalid(var_0, var_1) {
   if(scripts\asm\asm_bb::bb_ismissingaleg()) {
     return 0;
   }
 
-  if(!scripts\aitypes\melee::ismeleevalid_common(param_00, param_01)) {
+  if(!scripts\aitypes\melee::ismeleevalid_common(var_0, var_1)) {
     return 0;
   }
 
-  var_02 = scripts\aitypes\melee::gettargetchargepos(param_00);
-  if(!isDefined(var_02)) {
+  var_2 = scripts\aitypes\melee::gettargetchargepos(var_0);
+  if(!isDefined(var_2)) {
     return 0;
   }
 
-  if(!canmovefrompointtopoint(self.origin, var_02)) {
+  if(!canmovefrompointtopoint(self.origin, var_2)) {
     return 0;
   }
 
   return 1;
 }
 
-meleecharge_init_mp(param_00) {
+meleecharge_init_mp(var_0) {
   self scragentsetscripted(1);
 }
 
-meleecharge_terminate_mp(param_00) {
+meleecharge_terminate_mp(var_0) {
   self scragentsetscripted(0);
   self _meth_8484();
 }
 
-meleevsplayer_init_mp(param_00) {
+meleevsplayer_init_mp(var_0) {
   self scragentsetscripted(1);
 }
 
-meleevsplayer_terminate_mp(param_00) {
+meleevsplayer_terminate_mp(var_0) {
   self scragentsetscripted(0);
   self _meth_8484();
 }

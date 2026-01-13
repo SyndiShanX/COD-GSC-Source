@@ -143,14 +143,14 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_check_move_to_idle_exit_walk0(param_00, param_01, param_02, param_03) {
+trans_check_move_to_idle_exit_walk0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_in_to_walk_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_walk_in_to_walk_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_out_to_move_done3(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_move_done3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }

@@ -4,19 +4,19 @@
  * Script: 2584.gsc
 ************************/
 
-func_1180F(param_00) {
+func_1180F(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(1, self.isnodeoccupied);
-  self.var_3135.instancedata[param_00] = gettime() + 4000;
+  self.bt.instancedata[var_0] = gettime() + 4000;
 }
 
-func_11811(param_00) {
+func_11811(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(0);
-  self.var_3135.instancedata[param_00] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-func_11812(param_00) {
-  var_01 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
-  if(!isDefined(var_01)) {
+func_11812(var_0) {
+  var_1 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
@@ -25,21 +25,21 @@ func_11812(param_00) {
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start", 0)) {
-    self.var_3135.instancedata[param_00] = self.var_3135.instancedata[param_00] + 10000;
+    self.bt.instancedata[var_0] = self.bt.instancedata[var_0] + 10000;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end")) {
     return level.success;
   }
 
-  if(gettime() > self.var_3135.instancedata[param_00]) {
+  if(gettime() > self.bt.instancedata[var_0]) {
     return level.failure;
   }
 
   return level.running;
 }
 
-func_8BF7(param_00) {
+func_8BF7(var_0) {
   if(func_BE18() && gettime() >= 10000 || isDefined(level.var_932B) && level.var_932B) {
     self.a.nextgrenadetrytime = gettime() + 500;
     return level.success;
@@ -48,7 +48,7 @@ func_8BF7(param_00) {
   return level.failure;
 }
 
-func_3928(param_00) {
+func_3928(var_0) {
   if(isDefined(self.vehicle_getspawnerarray) || isDefined(self.script) && self.script == "cover_arrival") {
     return level.failure;
   }
@@ -86,19 +86,19 @@ func_3928(param_00) {
   return level.failure;
 }
 
-func_85E3(param_00, param_01) {
-  var_02 = param_00.origin;
-  if(!self getpersstat(param_00)) {
-    if(isDefined(self.isnodeoccupied) && param_00 == self.isnodeoccupied && isDefined(self.var_FECF)) {
-      var_02 = self.var_FECF;
+func_85E3(var_0, var_1) {
+  var_2 = var_0.origin;
+  if(!self getpersstat(var_0)) {
+    if(isDefined(self.isnodeoccupied) && var_0 == self.isnodeoccupied && isDefined(self.var_FECF)) {
+      var_2 = self.var_FECF;
     }
 
-    param_01 = 100;
-  } else if(!isDefined(param_01)) {
-    param_01 = 100;
+    var_1 = 100;
+  } else if(!isDefined(var_1)) {
+    var_1 = 100;
   }
 
-  if(distancesquared(self.origin, var_02) < param_01 * param_01) {
+  if(distancesquared(self.origin, var_2) < var_1 * var_1) {
     return 0;
   }
 
@@ -106,13 +106,13 @@ func_85E3(param_00, param_01) {
     return 0;
   }
 
-  func_F62B(param_00);
-  if(!_meth_85B5(param_00)) {
+  func_F62B(var_0);
+  if(!_meth_85B5(var_0)) {
     return 0;
   }
 
-  var_03 = scripts\engine\utility::getyawtospot(var_02);
-  if(abs(var_03) > 60) {
+  var_3 = scripts\engine\utility::getyawtospot(var_2);
+  if(abs(var_3) > 60) {
     return 0;
   }
 
@@ -120,13 +120,13 @@ func_85E3(param_00, param_01) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied) && param_00 == self.isnodeoccupied) {
+  if(isDefined(self.isnodeoccupied) && var_0 == self.isnodeoccupied) {
     if(!func_3E1C()) {
       return 0;
     }
 
     if(scripts\anim\utility_common::canseeenemyfromexposed()) {
-      if(!self _meth_81A2(param_00, param_00.origin)) {
+      if(!self _meth_81A2(var_0, var_0.origin)) {
         return 0;
       }
 
@@ -137,7 +137,7 @@ func_85E3(param_00, param_01) {
       return 1;
     }
 
-    if(!self _meth_81A2(param_00, param_00.origin)) {
+    if(!self _meth_81A2(var_0, var_0.origin)) {
       return 0;
     }
   }
@@ -150,13 +150,13 @@ func_BE18() {
 }
 
 func_3E1C() {
-  var_00 = self.isnodeoccupied.origin - self.origin;
-  var_01 = lengthsquared((var_00[0], var_00[1], 0));
+  var_0 = self.isnodeoccupied.origin - self.origin;
+  var_1 = lengthsquared((var_0[0], var_0[1], 0));
   if(self.objective_team == "flash_grenade") {
-    return var_01 < 589824;
+    return var_1 < 589824;
   }
 
-  return var_01 >= -25536 && var_01 <= 1562500;
+  return var_1 >= -25536 && var_1 <= 1562500;
 }
 
 func_D022() {
@@ -167,7 +167,7 @@ func_D022() {
   return 0;
 }
 
-_meth_85B5(param_00) {
+_meth_85B5(var_0) {
   if(func_D022()) {
     return 0;
   }
@@ -181,17 +181,17 @@ _meth_85B5(param_00) {
   }
 
   if(self.var_1652.isplayertimer && self.var_1652.timername == "fraggrenade") {
-    return func_B4EF(param_00);
+    return func_B4EF(var_0);
   }
 
   return 0;
 }
 
-func_F62B(param_00) {
+func_F62B(var_0) {
   self.var_1652 = spawnStruct();
-  if(isplayer(param_00) && isDefined(param_00.grenadetimers)) {
+  if(isplayer(var_0) && isDefined(var_0.grenadetimers)) {
     self.var_1652.isplayertimer = 1;
-    self.var_1652.player = param_00;
+    self.var_1652.player = var_0;
     self.var_1652.timername = self.objective_team;
     return;
   }
@@ -200,71 +200,71 @@ func_F62B(param_00) {
   self.var_1652.timername = "AI_" + self.objective_team;
 }
 
-func_B4EF(param_00) {
+func_B4EF(var_0) {
   if(func_D022()) {
     return 0;
   }
 
-  if(!param_00.gs.double_grenades_allowed) {
+  if(!var_0.gs.double_grenades_allowed) {
     return 0;
   }
 
-  var_01 = gettime();
-  if(var_01 < param_00.grenadetimers["double_grenade"]) {
+  var_1 = gettime();
+  if(var_1 < var_0.grenadetimers["double_grenade"]) {
     return 0;
   }
 
-  if(var_01 > param_00.lastfraggrenadetoplayerstart + 3000) {
+  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000) {
     return 0;
   }
 
-  if(var_01 < param_00.lastfraggrenadetoplayerstart + 500) {
+  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500) {
     return 0;
   }
 
-  return param_00.numgrenadesinprogresstowardsplayer < 2;
+  return var_0.numgrenadesinprogresstowardsplayer < 2;
 }
 
-func_7EE9(param_00) {
-  if(param_00.isplayertimer) {
-    return param_00.player.grenadetimers[param_00.timername];
+func_7EE9(var_0) {
+  if(var_0.isplayertimer) {
+    return var_0.player.grenadetimers[var_0.timername];
   }
 
-  return level.grenadetimers[param_00.timername];
+  return level.grenadetimers[var_0.timername];
 }
 
-func_1182C(param_00) {
+func_1182C(var_0) {
   scripts\asm\asm_bb::bb_requestfire(1, self.isnodeoccupied);
-  self.var_3135.instancedata[param_00] = gettime() + 4000;
+  self.bt.instancedata[var_0] = gettime() + 4000;
 }
 
-func_1182D(param_00) {
+func_1182D(var_0) {
   scripts\asm\asm_bb::bb_requestfire(0);
-  self.var_3135.instancedata[param_00] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-func_1182E(param_00) {
-  var_01 = scripts\asm\asm_bb::func_2931();
-  if(!isDefined(var_01)) {
+func_1182E(var_0) {
+  var_1 = scripts\asm\asm_bb::func_2931();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "start", 0)) {
-    self.var_3135.instancedata[param_00] = self.var_3135.instancedata[param_00] + 10000;
+    self.bt.instancedata[var_0] = self.bt.instancedata[var_0] + 10000;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "end")) {
     return level.success;
   }
 
-  if(gettime() > self.var_3135.instancedata[param_00]) {
+  if(gettime() > self.bt.instancedata[var_0]) {
     return level.failure;
   }
 
   return level.running;
 }
 
-func_3929(param_00) {
+func_3929(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     return level.failure;
   }

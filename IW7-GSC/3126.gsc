@@ -4,7 +4,7 @@
  * Script: 3126.gsc
 ************************/
 
-func_98C6(param_00, param_01, param_02, param_03) {
+func_98C6(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.var_E873)) {
     self notify("stop_move_anim_update");
     self.var_12DEF = undefined;
@@ -13,13 +13,13 @@ func_98C6(param_00, param_01, param_02, param_03) {
   }
 }
 
-func_11088(param_00, param_01, param_02) {
+func_11088(var_0, var_1, var_2) {
   return 0;
 }
 
-func_D50D(param_00, param_01, param_02, param_03) {
-  func_98C6(param_00, param_01, param_02, param_03);
-  func_E877(param_00, param_01, param_02, param_03);
+func_D50D(var_0, var_1, var_2, var_3) {
+  func_98C6(var_0, var_1, var_2, var_3);
+  func_E877(var_0, var_1, var_2, var_3);
 }
 
 func_E875() {
@@ -49,28 +49,28 @@ func_1006E() {
     return 0;
   }
 
-  var_00 = func_E875();
-  if(!isDefined(var_00)) {
+  var_0 = func_E875();
+  if(!isDefined(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-func_10070(param_00, param_01, param_02, param_03) {
+func_10070(var_0, var_1, var_2, var_3) {
   return func_1006E() && canshoottargetfrompos();
 }
 
-func_1006F(param_00, param_01, param_02, param_03) {
+func_1006F(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-func_1009F(param_00, param_01, param_02, param_03) {
-  return !func_10070(param_00, param_01, param_03);
+func_1009F(var_0, var_1, var_2, var_3) {
+  return !func_10070(var_0, var_1, var_3);
 }
 
-func_1009E(param_00, param_01, param_02, param_03) {
-  return !func_1006F(param_00, param_01, param_03);
+func_1009E(var_0, var_1, var_2, var_3) {
+  return !func_1006F(var_0, var_1, var_3);
 }
 
 canshoottargetfrompos() {
@@ -90,7 +90,7 @@ func_B4EC() {
     return 0;
   }
 
-  var_00 = weaponclass(self.var_394);
+  var_0 = weaponclass(self.var_394);
   if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
   }
@@ -110,31 +110,31 @@ canshootinvehicle() {
   return 0;
 }
 
-detach(param_00) {
-  var_01 = self.origin;
-  var_02 = self.angles[1] + self getspawnpoint_searchandrescue();
-  var_01 = var_01 + (cos(var_02), sin(var_02), 0) * length(self getvelocity()) * param_00;
-  var_03 = self.angles[1] - vectortoyaw(self.isnodeoccupied.origin - var_01);
-  var_03 = angleclamp180(var_03);
-  return var_03;
+detach(var_0) {
+  var_1 = self.origin;
+  var_2 = self.angles[1] + self getspawnpoint_searchandrescue();
+  var_1 = var_1 + (cos(var_2), sin(var_2), 0) * length(self getvelocity()) * var_0;
+  var_3 = self.angles[1] - vectortoyaw(self.isnodeoccupied.origin - var_1);
+  var_3 = angleclamp180(var_3);
+  return var_3;
 }
 
-func_E877(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread lib_0F3C::func_136B4(param_00, param_01, param_03);
-  thread lib_0F3C::func_136E7(param_00, param_01, param_03);
-  thread lib_0F3C::func_136CC(param_00, param_01, param_03);
-  var_04 = self.var_B4C3;
-  var_05 = self.var_E878;
-  var_06 = self.var_E876;
-  var_07 = 0;
-  var_08 = 1;
-  var_09 = 2;
+func_E877(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread lib_0F3C::func_136B4(var_0, var_1, var_3);
+  thread lib_0F3C::func_136E7(var_0, var_1, var_3);
+  thread lib_0F3C::func_136CC(var_0, var_1, var_3);
+  var_4 = self.var_B4C3;
+  var_5 = self.var_E878;
+  var_6 = self.var_E876;
+  var_7 = 0;
+  var_8 = 1;
+  var_9 = 2;
   var_0A = 3;
   var_0B = 4;
-  var_04 = self.var_B4C3;
-  var_05 = self.var_E878;
-  var_06 = self.var_E876;
+  var_4 = self.var_B4C3;
+  var_5 = self.var_E878;
+  var_6 = self.var_E876;
   self orientmode("face motion");
   for(;;) {
     var_0C = func_E875();
@@ -146,7 +146,7 @@ func_E877(param_00, param_01, param_02, param_03) {
       var_0E = self.var_E879 < 0;
     }
 
-    var_0F = var_07;
+    var_0F = var_7;
     var_10 = "f_anim;";
     var_11 = abs(var_0D);
     if(var_11 < 130) {
@@ -160,16 +160,16 @@ func_E877(param_00, param_01, param_02, param_03) {
         }
       } else if(var_11 > 45) {
         if(var_0E == 1) {
-          var_0F = var_08;
+          var_0F = var_8;
           var_10 = "l_anim;";
         } else {
-          var_0F = var_09;
+          var_0F = var_9;
           var_10 = "r_anim;";
         }
       }
     }
 
-    self setanimstate(param_01, var_0F);
+    self setanimstate(var_1, var_0F);
     if(isDefined(var_0C) && isplayer(var_0C)) {
       self _meth_83CE();
     }
@@ -178,35 +178,35 @@ func_E877(param_00, param_01, param_02, param_03) {
   }
 }
 
-func_D50E(param_00, param_01, param_02, param_03) {
-  func_98C6(param_00, param_01, param_02, param_03);
-  func_E874(param_00, param_01, param_02, param_03);
+func_D50E(var_0, var_1, var_2, var_3) {
+  func_98C6(var_0, var_1, var_2, var_3);
+  func_E874(var_0, var_1, var_2, var_3);
 }
 
-func_E874(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_E874(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   for(;;) {
     if(isplayer(self.isnodeoccupied)) {
       self _meth_83CE();
     }
 
-    var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-    self setanimstate(param_01, var_04);
+    var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+    self setanimstate(var_1, var_4);
     wait(0.2);
   }
 }
 
-func_3EFF(param_00, param_01, param_02) {
+func_3EFF(var_0, var_1, var_2) {
   return 0;
 }
 
-func_FFF5(param_00, param_01, param_02, param_03) {
+func_FFF5(var_0, var_1, var_2, var_3) {
   if(isDefined(self.disablebulletwhizbyreaction)) {
     return 0;
   }
 
-  var_04 = scripts\asm\asm_bb::bb_getrequestedwhizby();
-  if(!isDefined(var_04)) {
+  var_4 = scripts\asm\asm_bb::bb_getrequestedwhizby();
+  if(!isDefined(var_4)) {
     return 0;
   }
 
@@ -217,9 +217,9 @@ func_FFF5(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-func_D477(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  self setanimstate(param_01, var_04, self.fastcrawlanimscale);
-  scripts\mp\agents\_scriptedagents::func_1384C(param_01, "end", param_01, var_04);
+func_D477(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  self setanimstate(var_1, var_4, self.fastcrawlanimscale);
+  scripts\mp\agents\_scriptedagents::func_1384C(var_1, "end", var_1, var_4);
 }

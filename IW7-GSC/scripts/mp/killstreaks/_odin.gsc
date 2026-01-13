@@ -130,199 +130,199 @@ init() {
   level.var_1639 = [];
 }
 
-func_128F1(param_00, param_01) {
+func_128F1(var_0, var_1) {
   if(isDefined(self.underwater) && self.underwater) {
     return 0;
   }
 
-  var_02 = param_01;
-  var_03 = 1;
-  if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility::maxvehiclesallowed()) {
+  var_2 = var_1;
+  var_3 = 1;
+  if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_3 >= scripts\mp\utility::maxvehiclesallowed()) {
     self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
-  if(isDefined(level.var_1639[var_02])) {
-    self iprintlnbold(level.var_C321[var_02].var_12B80);
+  if(isDefined(level.var_1639[var_2])) {
+    self iprintlnbold(level.var_C321[var_2].var_12B80);
     return 0;
   }
 
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_04 = func_49F9(var_02);
-  if(!isDefined(var_04)) {
+  var_4 = func_49F9(var_2);
+  if(!isDefined(var_4)) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
-  var_05 = func_10DD2(var_04);
-  if(!isDefined(var_05)) {
-    var_05 = 0;
+  var_5 = func_10DD2(var_4);
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  return var_05;
+  return var_5;
 }
 
-watchhostmigrationfinishedinit(param_00) {
-  param_00 endon("disconnect");
-  param_00 endon("joined_team");
-  param_00 endon("joined_spectators");
-  param_00 endon("killstreak_disowned");
+watchhostmigrationfinishedinit(var_0) {
+  var_0 endon("disconnect");
+  var_0 endon("joined_team");
+  var_0 endon("joined_spectators");
+  var_0 endon("killstreak_disowned");
   level endon("game_ended");
   self endon("death");
   for(;;) {
     level waittill("host_migration_end");
-    param_00 setclientomnvar("ui_odin", level.var_C321[self.odintype].var_12B20);
-    param_00 thermalvisionfofoverlayon();
+    var_0 setclientomnvar("ui_odin", level.var_C321[self.odintype].var_12B20);
+    var_0 thermalvisionfofoverlayon();
     playFXOnTag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
-    self.targeting_marker showtoplayer(param_00);
+    self.targeting_marker showtoplayer(var_0);
   }
 }
 
-func_49F9(param_00) {
-  var_01 = self.origin * (1, 1, 0) + level.heli_pilot_mesh.origin - scripts\mp\utility::gethelipilotmeshoffset() * (0, 0, 1);
-  var_02 = (0, 0, 0);
-  var_03 = spawnhelicopter(self, var_01, var_02, level.var_C321[param_00].vehicleinfo, level.var_C321[param_00].modelbase);
-  if(!isDefined(var_03)) {
+func_49F9(var_0) {
+  var_1 = self.origin * (1, 1, 0) + level.heli_pilot_mesh.origin - scripts\mp\utility::gethelipilotmeshoffset() * (0, 0, 1);
+  var_2 = (0, 0, 0);
+  var_3 = spawnhelicopter(self, var_1, var_2, level.var_C321[var_0].vehicleinfo, level.var_C321[var_0].modelbase);
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var_03.getclosestpointonnavmesh3d = 40;
-  var_03.triggerportableradarping = self;
-  var_03.team = self.team;
-  var_03.odintype = param_00;
-  level.var_1639[param_00] = 1;
-  self.odin = var_03;
-  var_03 thread func_C318();
-  var_03 thread func_C31F();
-  var_03 thread func_C31B();
-  var_03 thread func_C31D();
-  var_03 thread func_C31E();
-  var_03 thread func_C319();
-  var_03 thread func_C31A();
-  var_03 thread func_C31C();
-  var_03 thread func_C2DD();
-  var_03 thread odin_onplayerconnect();
-  var_03.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.var_C321[param_00].streakname, var_01);
-  return var_03;
+  var_3.getclosestpointonnavmesh3d = 40;
+  var_3.triggerportableradarping = self;
+  var_3.team = self.team;
+  var_3.odintype = var_0;
+  level.var_1639[var_0] = 1;
+  self.odin = var_3;
+  var_3 thread func_C318();
+  var_3 thread func_C31F();
+  var_3 thread func_C31B();
+  var_3 thread func_C31D();
+  var_3 thread func_C31E();
+  var_3 thread func_C319();
+  var_3 thread func_C31A();
+  var_3 thread func_C31C();
+  var_3 thread func_C2DD();
+  var_3 thread odin_onplayerconnect();
+  var_3.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.var_C321[var_0].streakname, var_1);
+  return var_3;
 }
 
-func_10DD2(param_00) {
+func_10DD2(var_0) {
   level endon("game_ended");
-  param_00 endon("death");
+  var_0 endon("death");
   self.restoreangles = vectortoangles(anglesToForward(self.angles));
-  func_C30E(param_00);
+  func_C30E(var_0);
   if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility::setthirdpersondof(0);
   }
 
-  thread watchintrocleared(param_00);
+  thread watchintrocleared(var_0);
   scripts\mp\utility::freezecontrolswrapper(1);
-  func_C320(param_00);
+  func_C320(var_0);
   thread scripts\mp\killstreaks\_juggernaut::func_55F4();
-  var_01 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(param_00.odintype);
-  if(var_01 != "success") {
+  var_1 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_0.odintype);
+  if(var_1 != "success") {
     if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
     }
 
-    param_00 notify("death");
+    var_0 notify("death");
     return 0;
   }
 
   scripts\mp\utility::freezecontrolswrapper(0);
-  self remotecontrolvehicle(param_00);
-  param_00 thread watchhostmigrationfinishedinit(self);
-  param_00.odin_overlay_ent = spawnfxforclient(level._effect["odin_fisheye"], self getEye(), self);
-  triggerfx(param_00.odin_overlay_ent);
-  param_00.odin_overlay_ent setfxkilldefondelete();
-  level thread scripts\mp\utility::teamplayercardsplash(level.var_C321[param_00.odintype].teamsplash, self);
+  self remotecontrolvehicle(var_0);
+  var_0 thread watchhostmigrationfinishedinit(self);
+  var_0.odin_overlay_ent = spawnfxforclient(level._effect["odin_fisheye"], self getEye(), self);
+  triggerfx(var_0.odin_overlay_ent);
+  var_0.odin_overlay_ent setfxkilldefondelete();
+  level thread scripts\mp\utility::teamplayercardsplash(level.var_C321[var_0.odintype].teamsplash, self);
   self thermalvisionfofoverlayon();
-  thread func_1369B(param_00);
+  thread func_1369B(var_0);
   return 1;
 }
 
-func_1369B(param_00) {
+func_1369B(var_0) {
   self endon("disconnect");
-  param_00 endon("death");
+  var_0 endon("death");
   wait(1);
-  var_01 = scripts\mp\utility::outlineenableforplayer(self, "cyan", self, 0, 0, "killstreak");
-  param_00 thread removeoutline(var_01, self);
+  var_1 = scripts\mp\utility::outlineenableforplayer(self, "cyan", self, 0, 0, "killstreak");
+  var_0 thread removeoutline(var_1, self);
 }
 
-func_C320(param_00) {
-  var_01 = spawn("script_model", param_00.origin + (0, 0, 3000));
-  var_01.angles = vectortoangles((0, 0, 1));
-  var_01 setModel("tag_origin");
-  var_01 thread waitanddelete(5);
-  var_02 = "odin_zoom_up";
-  var_03 = var_01 getentitynumber();
-  var_04 = self getentitynumber();
-  var_05 = bulletTrace(self.origin, param_00.origin, 0, self);
-  if(var_05["surfacetype"] != "none") {
-    var_02 = "odin_zoom_down";
-    var_03 = param_00 getentitynumber();
-    var_04 = var_01 getentitynumber();
+func_C320(var_0) {
+  var_1 = spawn("script_model", var_0.origin + (0, 0, 3000));
+  var_1.angles = vectortoangles((0, 0, 1));
+  var_1 setModel("tag_origin");
+  var_1 thread waitanddelete(5);
+  var_2 = "odin_zoom_up";
+  var_3 = var_1 getentitynumber();
+  var_4 = self getentitynumber();
+  var_5 = bulletTrace(self.origin, var_0.origin, 0, self);
+  if(var_5["surfacetype"] != "none") {
+    var_2 = "odin_zoom_down";
+    var_3 = var_0 getentitynumber();
+    var_4 = var_1 getentitynumber();
   }
 
-  var_06 = scripts\engine\utility::array_add(scripts\mp\utility::get_players_watching(), self);
-  foreach(var_08 in var_06) {
-    var_08 setclientomnvar("cam_scene_name", var_02);
-    var_08 setclientomnvar("cam_scene_lead", var_03);
-    var_08 setclientomnvar("cam_scene_support", var_04);
-    var_08 thread clouds();
+  var_6 = scripts\engine\utility::array_add(scripts\mp\utility::get_players_watching(), self);
+  foreach(var_8 in var_6) {
+    var_8 setclientomnvar("cam_scene_name", var_2);
+    var_8 setclientomnvar("cam_scene_lead", var_3);
+    var_8 setclientomnvar("cam_scene_support", var_4);
+    var_8 thread clouds();
   }
 }
 
-waitanddelete(param_00) {
+waitanddelete(var_0) {
   self endon("death");
   level endon("game_ended");
-  wait(param_00);
+  wait(var_0);
   self delete();
 }
 
 clouds() {
   level endon("game_ended");
-  var_00 = spawn("script_model", self.origin + (0, 0, 250));
-  var_00.angles = vectortoangles((0, 0, 1));
-  var_00 setModel("tag_origin");
-  var_00 thread waitanddelete(2);
+  var_0 = spawn("script_model", self.origin + (0, 0, 250));
+  var_0.angles = vectortoangles((0, 0, 1));
+  var_0 setModel("tag_origin");
+  var_0 thread waitanddelete(2);
   wait(0.1);
-  playfxontagforclients(level._effect["odin_clouds"], var_00, "tag_origin", self);
+  playfxontagforclients(level._effect["odin_clouds"], var_0, "tag_origin", self);
 }
 
-func_C30E(param_00) {
-  scripts\mp\utility::setusingremote(param_00.odintype);
-  self.odin = param_00;
+func_C30E(var_0) {
+  scripts\mp\utility::setusingremote(var_0.odintype);
+  self.odin = var_0;
 }
 
-func_C2DA(param_00) {
-  param_00.odin_juggernautusetime = undefined;
-  param_00.odin_markingusetime = undefined;
-  param_00.odin_smokeusetime = undefined;
-  param_00.odin_airdropusetime = undefined;
-  param_00.odin_largerodusetime = undefined;
-  param_00.odin_smallrodusetime = undefined;
+func_C2DA(var_0) {
+  var_0.odin_juggernautusetime = undefined;
+  var_0.odin_markingusetime = undefined;
+  var_0.odin_smokeusetime = undefined;
+  var_0.odin_airdropusetime = undefined;
+  var_0.odin_largerodusetime = undefined;
+  var_0.odin_smallrodusetime = undefined;
   if(isDefined(self)) {
     scripts\mp\utility::clearusingremote();
     self.odin = undefined;
   }
 }
 
-watchintrocleared(param_00) {
+watchintrocleared(var_0) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
   level endon("game_ended");
-  param_00 endon("death");
+  var_0 endon("death");
   self waittill("intro_cleared");
-  self setclientomnvar("ui_odin", level.var_C321[param_00.odintype].var_12B20);
-  watchearlyexit(param_00);
+  self setclientomnvar("ui_odin", level.var_C321[var_0.odintype].var_12B20);
+  watchearlyexit(var_0);
 }
 
-func_C317(param_00) {
-  while(isDefined(self.var_9BE2) && param_00 > 0) {
+func_C317(var_0) {
+  while(isDefined(self.var_9BE2) && var_0 > 0) {
     wait(0.05);
-    param_00 = param_00 - 0.05;
+    var_0 = var_0 - 0.05;
   }
 }
 
@@ -347,9 +347,9 @@ func_C31F() {
   self.triggerportableradarping endon("disconnect");
   self.triggerportableradarping endon("joined_team");
   self.triggerportableradarping endon("joined_spectators");
-  var_00 = level.var_C321[self.odintype];
-  var_01 = var_00.timeout;
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
+  var_0 = level.var_C321[self.odintype];
+  var_1 = var_0.timeout;
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
   thread odin_leave();
 }
 
@@ -385,8 +385,8 @@ func_C31D() {
 odin_leave() {
   self endon("death");
   self notify("leaving");
-  var_00 = level.var_C321[self.odintype];
-  scripts\mp\utility::leaderdialog(var_00.votimedout);
+  var_0 = level.var_C321[self.odintype];
+  scripts\mp\utility::leaderdialog(var_0.votimedout);
   if(isDefined(self.triggerportableradarping)) {
     self.triggerportableradarping func_C2E3(self);
   }
@@ -399,34 +399,34 @@ odin_leave() {
   self delete();
 }
 
-func_C2E3(param_00) {
-  if(isDefined(param_00)) {
+func_C2E3(var_0) {
+  if(isDefined(var_0)) {
     self setclientomnvar("ui_odin", -1);
-    param_00 notify("end_remote");
+    var_0 notify("end_remote");
     self notify("odin_ride_ended");
-    func_C2DA(param_00);
+    func_C2DA(var_0);
     if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility::setthirdpersondof(1);
     }
 
     self thermalvisionfofoverlayoff();
-    self remotecontrolvehicleoff(param_00);
+    self remotecontrolvehicleoff(var_0);
     self setplayerangles(self.restoreangles);
     thread func_C2EB();
     self stoplocalsound("odin_negative_action");
     self stoplocalsound("odin_positive_action");
-    foreach(var_02 in level.var_C321[param_00.odintype].var_394) {
-      if(isDefined(var_02.var_D5E4)) {
-        self stoplocalsound(var_02.var_D5E4);
+    foreach(var_2 in level.var_C321[var_0.odintype].var_394) {
+      if(isDefined(var_2.var_D5E4)) {
+        self stoplocalsound(var_2.var_D5E4);
       }
 
-      if(isDefined(var_02.var_D5DD)) {
-        self stoplocalsound(var_02.var_D5DD);
+      if(isDefined(var_2.var_D5DD)) {
+        self stoplocalsound(var_2.var_D5DD);
       }
     }
 
-    if(isDefined(param_00.var_A4A3)) {
-      param_00.var_A4A3 scripts\mp\bots\_bots_strategy::bot_guard_player(self, 350);
+    if(isDefined(var_0.var_A4A3)) {
+      var_0.var_A4A3 scripts\mp\bots\_bots_strategy::bot_guard_player(self, 350);
     }
   }
 }
@@ -443,21 +443,21 @@ func_C2EB() {
 func_C31E() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = var_00 getvieworigin();
-  var_02 = var_01 + anglesToForward(self gettagangles("tag_player")) * 10000;
-  var_03 = bulletTrace(var_01, var_02, 0, self);
-  var_04 = spawn("script_model", var_03["position"]);
-  var_04.angles = vectortoangles((0, 0, 1));
-  var_04 setModel("tag_origin");
-  self.targeting_marker = var_04;
-  var_04 endon("death");
-  var_05 = bulletTrace(var_04.origin + (0, 0, 50), var_04.origin + (0, 0, -100), 0, var_04);
-  var_04.origin = var_05["position"] + (0, 0, 50);
-  var_04 hide();
-  var_04 showtoplayer(var_00);
-  var_04 childthread func_B9F2(var_00);
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = var_0 getvieworigin();
+  var_2 = var_1 + anglesToForward(self gettagangles("tag_player")) * 10000;
+  var_3 = bulletTrace(var_1, var_2, 0, self);
+  var_4 = spawn("script_model", var_3["position"]);
+  var_4.angles = vectortoangles((0, 0, 1));
+  var_4 setModel("tag_origin");
+  self.targeting_marker = var_4;
+  var_4 endon("death");
+  var_5 = bulletTrace(var_4.origin + (0, 0, 50), var_4.origin + (0, 0, -100), 0, var_4);
+  var_4.origin = var_5["position"] + (0, 0, 50);
+  var_4 hide();
+  var_4 showtoplayer(var_0);
+  var_4 childthread func_B9F2(var_0);
   thread func_10129();
   thread func_1399C();
   thread func_13AAF();
@@ -473,26 +473,26 @@ func_C31E() {
       break;
   }
 
-  self setotherent(var_04);
+  self setotherent(var_4);
 }
 
-func_B9F2(param_00) {
+func_B9F2(var_0) {
   wait(1.5);
-  var_01 = [];
+  var_1 = [];
   for(;;) {
-    var_02 = param_00 scripts\mp\utility::get_players_watching();
-    foreach(var_04 in var_01) {
-      if(!scripts\engine\utility::array_contains(var_02, var_04)) {
-        var_01 = scripts\engine\utility::array_remove(var_01, var_04);
+    var_2 = var_0 scripts\mp\utility::get_players_watching();
+    foreach(var_4 in var_1) {
+      if(!scripts\engine\utility::array_contains(var_2, var_4)) {
+        var_1 = scripts\engine\utility::array_remove(var_1, var_4);
         self hide();
-        self showtoplayer(param_00);
+        self showtoplayer(var_0);
       }
     }
 
-    foreach(var_04 in var_02) {
-      self showtoplayer(var_04);
-      if(!scripts\engine\utility::array_contains(var_01, var_04)) {
-        var_01 = scripts\engine\utility::array_add(var_01, var_04);
+    foreach(var_4 in var_2) {
+      self showtoplayer(var_4);
+      if(!scripts\engine\utility::array_contains(var_1, var_4)) {
+        var_1 = scripts\engine\utility::array_add(var_1, var_4);
         stopFXOnTag(level._effect["odin_targeting"], self, "tag_origin");
         wait(0.05);
         playFXOnTag(level._effect["odin_targeting"], self, "tag_origin");
@@ -506,37 +506,37 @@ func_B9F2(param_00) {
 func_1399C() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = level.var_C321[self.odintype].var_394["airdrop"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = level.var_C321[self.odintype].var_394["airdrop"];
   self.odin_airdropusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("airdrop_action", "+smoke");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("airdrop_action", "+smoke");
   }
 
   for(;;) {
-    var_00 waittill("airdrop_action");
+    var_0 waittill("airdrop_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
     if(gettime() >= self.odin_airdropusetime) {
       if(level.teambased) {
-        scripts\mp\utility::leaderdialog(var_01.var_13521, self.team);
+        scripts\mp\utility::leaderdialog(var_1.var_13521, self.team);
       } else {
-        var_00 scripts\mp\utility::leaderdialogonplayer(var_01.var_13521);
+        var_0 scripts\mp\utility::leaderdialogonplayer(var_1.var_13521);
       }
 
       self.odin_airdropusetime = func_C2E6("airdrop");
-      var_01 = level.var_C321[self.odintype].var_394["airdrop"];
-      level thread scripts\mp\killstreaks\_airdrop::doflyby(var_00, self.targeting_marker.origin, randomfloat(360), var_01.var_1AA0);
+      var_1 = level.var_C321[self.odintype].var_394["airdrop"];
+      level thread scripts\mp\killstreaks\_airdrop::doflyby(var_0, self.targeting_marker.origin, randomfloat(360), var_1.var_1AA0);
     } else {
-      var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+      var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
     }
 
     wait(1);
@@ -546,39 +546,39 @@ func_1399C() {
 func_13B49() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = level.var_C321[self.odintype].var_394["smoke"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = level.var_C321[self.odintype].var_394["smoke"];
   self.odin_smokeusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("smoke_action", "+speed_throw");
-    var_00 notifyonplayercommand("smoke_action", "+ads_akimbo_accessible");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("smoke_action", "+speed_throw");
+    var_0 notifyonplayercommand("smoke_action", "+ads_akimbo_accessible");
     if(!level.console) {
-      var_00 notifyonplayercommand("smoke_action", "+toggleads_throw");
+      var_0 notifyonplayercommand("smoke_action", "+toggleads_throw");
     }
   }
 
   for(;;) {
-    var_00 waittill("smoke_action");
+    var_0 waittill("smoke_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
     if(gettime() >= self.odin_smokeusetime) {
       if(level.teambased) {
-        scripts\mp\utility::leaderdialog(var_01.var_13551, self.team);
+        scripts\mp\utility::leaderdialog(var_1.var_13551, self.team);
       } else {
-        var_00 scripts\mp\utility::leaderdialogonplayer(var_01.var_13551);
+        var_0 scripts\mp\utility::leaderdialogonplayer(var_1.var_13551);
       }
 
       self.odin_smokeusetime = func_C2E6("smoke");
     } else {
-      var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+      var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
     }
 
     wait(1);
@@ -588,23 +588,23 @@ func_13B49() {
 func_13ACA() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = level.var_C321[self.odintype].var_394["marking"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = level.var_C321[self.odintype].var_394["marking"];
   self.odin_markingusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("marking_action", "+attack");
-    var_00 notifyonplayercommand("marking_action", "+attack_akimbo_accessible");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("marking_action", "+attack");
+    var_0 notifyonplayercommand("marking_action", "+attack_akimbo_accessible");
   }
 
   for(;;) {
-    var_00 waittill("marking_action");
+    var_0 waittill("marking_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
@@ -612,7 +612,7 @@ func_13ACA() {
       self.odin_markingusetime = func_C2E6("marking");
       thread func_58EE(self.targeting_marker.origin + (0, 0, 10));
     } else {
-      var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+      var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
     }
 
     wait(1);
@@ -622,50 +622,50 @@ func_13ACA() {
 func_13AAF() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_00 endon("juggernaut_dead");
-  var_01 = level.var_C321[self.odintype].var_394["juggernaut"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_0 endon("juggernaut_dead");
+  var_1 = level.var_C321[self.odintype].var_394["juggernaut"];
   self.odin_juggernautusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("juggernaut_action", "+frag");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("juggernaut_action", "+frag");
   }
 
   for(;;) {
-    var_00 waittill("juggernaut_action");
+    var_0 waittill("juggernaut_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
     if(gettime() >= self.odin_juggernautusetime) {
-      var_02 = func_7F26(self.targeting_marker.origin);
-      if(isDefined(var_02)) {
+      var_2 = func_7F26(self.targeting_marker.origin);
+      if(isDefined(var_2)) {
         self.odin_juggernautusetime = func_C2E6("juggernaut");
-        thread func_1369E(var_02);
+        thread func_1369E(var_2);
       } else {
-        var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+        var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
       }
     } else if(isDefined(self.var_A4A3)) {
-      var_02 = func_7F25(self.targeting_marker.origin);
-      if(isDefined(var_02)) {
-        var_00 scripts\mp\utility::leaderdialogonplayer(var_01.var_1352B);
-        var_00 scripts\mp\utility::_playlocalsound("odin_positive_action");
-        var_00 playrumbleonentity("pistol_fire");
-        self.var_A4A3 scripts\mp\bots\_bots_strategy::bot_protect_point(var_02.origin, 128);
-        var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
+      var_2 = func_7F25(self.targeting_marker.origin);
+      if(isDefined(var_2)) {
+        var_0 scripts\mp\utility::leaderdialogonplayer(var_1.var_1352B);
+        var_0 scripts\mp\utility::_playlocalsound("odin_positive_action");
+        var_0 playrumbleonentity("pistol_fire");
+        self.var_A4A3 scripts\mp\bots\_bots_strategy::bot_protect_point(var_2.origin, 128);
+        var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
       } else {
-        var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+        var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
       }
     }
 
     wait(1.1);
     if(isDefined(self.var_A4A3)) {
-      var_00 setclientomnvar(var_01.var_1E44, var_01.var_12B23);
+      var_0 setclientomnvar(var_1.var_1E44, var_1.var_12B23);
     }
   }
 }
@@ -673,30 +673,30 @@ func_13AAF() {
 func_13AB1() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = level.var_C321[self.odintype].var_394["large_rod"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = level.var_C321[self.odintype].var_394["large_rod"];
   self.odin_largerodusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("large_rod_action", "+attack");
-    var_00 notifyonplayercommand("large_rod_action", "+attack_akimbo_accessible");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("large_rod_action", "+attack");
+    var_0 notifyonplayercommand("large_rod_action", "+attack_akimbo_accessible");
   }
 
   for(;;) {
-    var_00 waittill("large_rod_action");
+    var_0 waittill("large_rod_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
     if(gettime() >= self.odin_largerodusetime) {
       self.odin_largerodusetime = func_C2E6("large_rod");
     } else {
-      var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+      var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
     }
 
     wait(1);
@@ -706,149 +706,149 @@ func_13AB1() {
 func_13B47() {
   self endon("death");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
-  var_00 endon("disconnect");
-  var_01 = level.var_C321[self.odintype].var_394["small_rod"];
+  var_0 = self.triggerportableradarping;
+  var_0 endon("disconnect");
+  var_1 = level.var_C321[self.odintype].var_394["small_rod"];
   self.odin_smallrodusetime = 0;
-  var_00 setclientomnvar(var_01.var_1E44, level.var_C321[self.odintype].var_12B20);
-  if(!isai(var_00)) {
-    var_00 notifyonplayercommand("small_rod_action", "+speed_throw");
-    var_00 notifyonplayercommand("small_rod_action", "+ads_akimbo_accessible");
+  var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("small_rod_action", "+speed_throw");
+    var_0 notifyonplayercommand("small_rod_action", "+ads_akimbo_accessible");
     if(!level.console) {
-      var_00 notifyonplayercommand("small_rod_action", "+toggleads_throw");
+      var_0 notifyonplayercommand("small_rod_action", "+toggleads_throw");
     }
   }
 
   for(;;) {
-    var_00 waittill("small_rod_action");
+    var_0 waittill("small_rod_action");
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
 
-    if(!isDefined(var_00.odin)) {
+    if(!isDefined(var_0.odin)) {
       return;
     }
 
     if(gettime() >= self.odin_smallrodusetime) {
       self.odin_smallrodusetime = func_C2E6("small_rod");
     } else {
-      var_00 scripts\mp\utility::_playlocalsound("odin_negative_action");
+      var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
     }
 
     wait(1);
   }
 }
 
-func_C2E6(param_00) {
+func_C2E6(var_0) {
   self.var_9BE2 = 1;
-  var_01 = self.triggerportableradarping;
-  var_02 = level.var_C321[self.odintype].var_394[param_00];
-  var_03 = anglesToForward(var_01 getplayerangles());
-  var_04 = self.origin + var_03 * 100;
-  var_01 setclientomnvar(var_02.var_1E44, var_02.var_12B22);
-  thread func_13B21(var_02);
-  var_05 = self.targeting_marker.origin;
-  var_06 = gettime() + var_02.var_DF5D * 1000;
-  if(param_00 == "large_rod") {
+  var_1 = self.triggerportableradarping;
+  var_2 = level.var_C321[self.odintype].var_394[var_0];
+  var_3 = anglesToForward(var_1 getplayerangles());
+  var_4 = self.origin + var_3 * 100;
+  var_1 setclientomnvar(var_2.var_1E44, var_2.var_12B22);
+  thread func_13B21(var_2);
+  var_5 = self.targeting_marker.origin;
+  var_6 = gettime() + var_2.var_DF5D * 1000;
+  if(var_0 == "large_rod") {
     wait(0.5);
-    var_01 playrumbleonentity(var_02.var_E7BA);
+    var_1 playrumbleonentity(var_2.var_E7BA);
     earthquake(0.3, 1.5, self.origin, 1000);
-    var_01 playsoundtoplayer(var_02.var_D5DD, var_01);
-    playsoundatpos(self.origin, var_02.var_C195);
+    var_1 playsoundtoplayer(var_2.var_D5DD, var_1);
+    playsoundatpos(self.origin, var_2.var_C195);
     wait(1.5);
-  } else if(param_00 == "small_rod") {
+  } else if(var_0 == "small_rod") {
     wait(0.5);
-    var_01 playrumbleonentity(var_02.var_E7BA);
+    var_1 playrumbleonentity(var_2.var_E7BA);
     earthquake(0.2, 1, self.origin, 1000);
-    var_01 playsoundtoplayer(var_02.var_D5DD, var_01);
-    playsoundatpos(self.origin, var_02.var_C195);
+    var_1 playsoundtoplayer(var_2.var_D5DD, var_1);
+    playsoundatpos(self.origin, var_2.var_C195);
     wait(0.3);
   } else {
-    if(isDefined(var_02.var_D5DD)) {
-      var_01 playsoundtoplayer(var_02.var_D5DD, var_01);
+    if(isDefined(var_2.var_D5DD)) {
+      var_1 playsoundtoplayer(var_2.var_D5DD, var_1);
     }
 
-    if(isDefined(var_02.var_C195)) {
-      playsoundatpos(self.origin, var_02.var_C195);
+    if(isDefined(var_2.var_C195)) {
+      playsoundatpos(self.origin, var_2.var_C195);
     }
 
-    var_01 playrumbleonentity(var_02.var_E7BA);
+    var_1 playrumbleonentity(var_2.var_E7BA);
   }
 
-  var_07 = scripts\mp\utility::_magicbullet(var_02.projectile, var_04, var_05, var_01);
-  var_07.type = "odin";
-  var_07 thread func_13A22(param_00);
-  if(param_00 == "smoke" || param_00 == "juggernaut" || param_00 == "large_rod") {
-    level notify("smoke", var_07, var_02.projectile);
+  var_7 = scripts\mp\utility::_magicbullet(var_2.projectile, var_4, var_5, var_1);
+  var_7.type = "odin";
+  var_7 thread func_13A22(var_0);
+  if(var_0 == "smoke" || var_0 == "juggernaut" || var_0 == "large_rod") {
+    level notify("smoke", var_7, var_2.projectile);
   }
 
   self.var_9BE2 = undefined;
-  return var_06;
+  return var_6;
 }
 
-func_13A22(param_00) {
-  self waittill("explode", var_01);
-  if(param_00 == "small_rod") {
-    playrumbleonposition("grenade_rumble", var_01);
-    earthquake(0.7, 1, var_01, 1000);
+func_13A22(var_0) {
+  self waittill("explode", var_1);
+  if(var_0 == "small_rod") {
+    playrumbleonposition("grenade_rumble", var_1);
+    earthquake(0.7, 1, var_1, 1000);
     return;
   }
 
-  if(param_00 == "large_rod") {
-    playrumbleonposition("artillery_rumble", var_01);
-    earthquake(1, 1, var_01, 2000);
+  if(var_0 == "large_rod") {
+    playrumbleonposition("artillery_rumble", var_1);
+    earthquake(1, 1, var_1, 2000);
   }
 }
 
-func_7F26(param_00) {
-  if(!isDefined(param_00)) {
+func_7F26(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = getnodesinradiussorted(param_00, 256, 0, 128, "Path");
-  if(!isDefined(var_01[0])) {
+  var_1 = getnodesinradiussorted(var_0, 256, 0, 128, "Path");
+  if(!isDefined(var_1[0])) {
     return;
   }
 
-  return var_01[0];
+  return var_1[0];
 }
 
-func_7F25(param_00) {
-  if(!isDefined(param_00)) {
+func_7F25(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = getnodesinradiussorted(param_00, 128, 0, 64, "Path");
-  if(!isDefined(var_01[0])) {
+  var_1 = getnodesinradiussorted(var_0, 128, 0, 64, "Path");
+  if(!isDefined(var_1[0])) {
     return;
   }
 
-  return var_01[0];
+  return var_1[0];
 }
 
-func_1369E(param_00) {
+func_1369E(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_01 = self.triggerportableradarping;
-  var_01 endon("disconnect");
-  var_02 = self.targeting_marker.origin;
+  var_1 = self.triggerportableradarping;
+  var_1 endon("disconnect");
+  var_2 = self.targeting_marker.origin;
   wait(3);
-  var_03 = scripts\mp\agents\_agents::add_humanoid_agent("odin_juggernaut", var_01.team, "class1", param_00.origin, vectortoangles(var_02 - param_00.origin), var_01, 0, 0, "veteran");
-  if(isDefined(var_03)) {
-    var_04 = level.var_C321[self.odintype].var_394["juggernaut"];
-    var_03 thread scripts\mp\killstreaks\_juggernaut::givejuggernaut(var_04.var_A4AF);
-    var_03 thread scripts\mp\killstreaks\_agent_killstreak::sendagentweaponnotify();
-    var_03 scripts\mp\bots\_bots_strategy::bot_protect_point(param_00.origin, 128);
-    self.var_A4A3 = var_03;
+  var_3 = scripts\mp\agents\_agents::add_humanoid_agent("odin_juggernaut", var_1.team, "class1", var_0.origin, vectortoangles(var_2 - var_0.origin), var_1, 0, 0, "veteran");
+  if(isDefined(var_3)) {
+    var_4 = level.var_C321[self.odintype].var_394["juggernaut"];
+    var_3 thread scripts\mp\killstreaks\_juggernaut::givejuggernaut(var_4.var_A4AF);
+    var_3 thread scripts\mp\killstreaks\_agent_killstreak::sendagentweaponnotify();
+    var_3 scripts\mp\bots\_bots_strategy::bot_protect_point(var_0.origin, 128);
+    self.var_A4A3 = var_3;
     thread func_13AAE();
-    var_01 setclientomnvar(var_04.var_1E44, var_04.var_12B23);
-    var_05 = scripts\mp\utility::outlineenableforplayer(var_03, "cyan", self.triggerportableradarping, 0, 0, "killstreak");
-    thread removeoutline(var_05, var_03);
-    var_03 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
+    var_1 setclientomnvar(var_4.var_1E44, var_4.var_12B23);
+    var_5 = scripts\mp\utility::outlineenableforplayer(var_3, "cyan", self.triggerportableradarping, 0, 0, "killstreak");
+    thread removeoutline(var_5, var_3);
+    var_3 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
     return;
   }
 
-  var_01 iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
+  var_1 iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
 }
 
 func_13AAE() {
@@ -856,8 +856,8 @@ func_13AAE() {
   level endon("game_ended");
   self.var_A4A3 waittill("death");
   self.triggerportableradarping notify("juggernaut_dead");
-  var_00 = level.var_C321[self.odintype].var_394["juggernaut"];
-  self.triggerportableradarping setclientomnvar(var_00.var_1E44, var_00.var_12B21);
+  var_0 = level.var_C321[self.odintype].var_394["juggernaut"];
+  self.triggerportableradarping setclientomnvar(var_0.var_1E44, var_0.var_12B21);
   self.var_A4A3 = undefined;
 }
 
@@ -867,111 +867,111 @@ func_10129() {
   playFXOnTag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
 }
 
-func_13B21(param_00) {
+func_13B21(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_01 = self.triggerportableradarping;
-  var_01 endon("disconnect");
-  var_01 endon("odin_ride_ended");
-  var_02 = param_00.var_1E44;
-  var_03 = param_00.var_DF5D;
-  var_04 = param_00.var_D5E4;
-  var_05 = level.var_C321[self.odintype].var_12B20;
-  wait(var_03);
-  if(!isDefined(var_01.odin)) {
+  var_1 = self.triggerportableradarping;
+  var_1 endon("disconnect");
+  var_1 endon("odin_ride_ended");
+  var_2 = var_0.var_1E44;
+  var_3 = var_0.var_DF5D;
+  var_4 = var_0.var_D5E4;
+  var_5 = level.var_C321[self.odintype].var_12B20;
+  wait(var_3);
+  if(!isDefined(var_1.odin)) {
     return;
   }
 
-  if(isDefined(var_04)) {
-    var_01 scripts\mp\utility::_playlocalsound(var_04);
+  if(isDefined(var_4)) {
+    var_1 scripts\mp\utility::_playlocalsound(var_4);
   }
 
-  var_01 setclientomnvar(var_02, var_05);
+  var_1 setclientomnvar(var_2, var_5);
 }
 
-func_58EE(param_00) {
+func_58EE(var_0) {
   level endon("game_ended");
-  var_01 = self.triggerportableradarping;
-  var_02 = level.odin_marking_flash_radius_max * level.odin_marking_flash_radius_max;
-  var_03 = level.odin_marking_flash_radius_min * level.odin_marking_flash_radius_min;
-  var_04 = 60;
-  var_05 = 40;
-  var_06 = 11;
-  var_07 = 0;
-  foreach(var_09 in level.participants) {
-    if(!scripts\mp\utility::isreallyalive(var_09) || var_09.sessionstate != "playing") {
+  var_1 = self.triggerportableradarping;
+  var_2 = level.odin_marking_flash_radius_max * level.odin_marking_flash_radius_max;
+  var_3 = level.odin_marking_flash_radius_min * level.odin_marking_flash_radius_min;
+  var_4 = 60;
+  var_5 = 40;
+  var_6 = 11;
+  var_7 = 0;
+  foreach(var_9 in level.participants) {
+    if(!scripts\mp\utility::isreallyalive(var_9) || var_9.sessionstate != "playing") {
       continue;
     }
 
-    if(level.teambased && var_09.team == self.team) {
+    if(level.teambased && var_9.team == self.team) {
       continue;
     }
 
-    var_0A = distancesquared(param_00, var_09.origin);
-    if(var_0A > var_02) {
+    var_0A = distancesquared(var_0, var_9.origin);
+    if(var_0A > var_2) {
       continue;
     }
 
-    var_0B = var_09 getstance();
-    var_0C = var_09.origin;
+    var_0B = var_9 getstance();
+    var_0C = var_9.origin;
     switch (var_0B) {
       case "stand":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_04);
+        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_4);
         break;
 
       case "crouch":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_05);
+        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_5);
         break;
 
       case "prone":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_06);
+        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_6);
         break;
     }
 
-    if(!bullettracepassed(param_00, var_0C, 0, var_09)) {
+    if(!bullettracepassed(var_0, var_0C, 0, var_9)) {
       continue;
     }
 
-    if(var_0A <= var_03) {
+    if(var_0A <= var_3) {
       var_0D = 1;
     } else {
-      var_0D = 1 - var_0A - var_03 / var_02 - var_03;
+      var_0D = 1 - var_0A - var_3 / var_2 - var_3;
     }
 
-    var_0E = anglesToForward(var_09 getplayerangles());
-    var_0F = param_00 - var_0C;
+    var_0E = anglesToForward(var_9 getplayerangles());
+    var_0F = var_0 - var_0C;
     var_0F = vectornormalize(var_0F);
     var_10 = 0.5 * 1 + vectordot(var_0E, var_0F);
     var_11 = 1;
-    var_09 notify("flashbang", param_00, var_0D, var_10, var_01, var_11);
-    var_07++;
-    if(!func_6565(var_09)) {
+    var_9 notify("flashbang", var_0, var_0D, var_10, var_1, var_11);
+    var_7++;
+    if(!func_6565(var_9)) {
       if(level.teambased) {
-        var_12 = scripts\mp\utility::outlineenableforteam(var_09, "orange", self.team, 0, 0, "killstreak");
+        var_12 = scripts\mp\utility::outlineenableforteam(var_9, "orange", self.team, 0, 0, "killstreak");
       } else {
         var_12 = scripts\mp\utility::outlineenableforplayer(var_0A, "orange", self.triggerportableradarping, 0, 0, "killstreak");
       }
 
-      thread removeoutline(var_12, var_09, 3);
+      thread removeoutline(var_12, var_9, 3);
     }
   }
 
   var_14 = level.var_C321[self.odintype].var_394["marking"];
-  if(var_07 == 1) {
+  if(var_7 == 1) {
     if(level.teambased) {
       scripts\mp\utility::leaderdialog(var_14.var_1354B, self.team);
     } else {
-      var_01 scripts\mp\utility::leaderdialogonplayer(var_14.var_1354B);
+      var_1 scripts\mp\utility::leaderdialogonplayer(var_14.var_1354B);
     }
-  } else if(var_07 > 1) {
+  } else if(var_7 > 1) {
     if(level.teambased) {
       scripts\mp\utility::leaderdialog(var_14.var_1354A, self.team);
     } else {
-      var_01 scripts\mp\utility::leaderdialogonplayer(var_14.var_1354A);
+      var_1 scripts\mp\utility::leaderdialogonplayer(var_14.var_1354A);
     }
   }
 
-  var_15 = scripts\mp\weapons::getempdamageents(param_00, 512, 0);
+  var_15 = scripts\mp\weapons::getempdamageents(var_0, 512, 0);
   foreach(var_17 in var_15) {
     if(isDefined(var_17.triggerportableradarping) && !scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_17.triggerportableradarping)) {
       continue;
@@ -981,48 +981,48 @@ func_58EE(param_00) {
   }
 }
 
-func_20D2(param_00) {
-  if(level.teambased && param_00.team == self.team) {
+func_20D2(var_0) {
+  if(level.teambased && var_0.team == self.team) {
     return;
-  } else if(!level.teambased && param_00 == self.triggerportableradarping) {
-    return;
-  }
-
-  if(func_6565(param_00)) {
+  } else if(!level.teambased && var_0 == self.triggerportableradarping) {
     return;
   }
 
-  var_01 = scripts\mp\utility::outlineenableforplayer(param_00, "orange", self.triggerportableradarping, 1, 0, "killstreak");
-  thread removeoutline(var_01, param_00);
+  if(func_6565(var_0)) {
+    return;
+  }
+
+  var_1 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", self.triggerportableradarping, 1, 0, "killstreak");
+  thread removeoutline(var_1, var_0);
 }
 
-func_6565(param_00) {
-  return param_00 scripts\mp\utility::_hasperk("specialty_noplayertarget");
+func_6565(var_0) {
+  return var_0 scripts\mp\utility::_hasperk("specialty_noplayertarget");
 }
 
-removeoutline(param_00, param_01, param_02) {
-  if(isDefined(param_01)) {
-    param_01 endon("disconnect");
+removeoutline(var_0, var_1, var_2) {
+  if(isDefined(var_1)) {
+    var_1 endon("disconnect");
   }
 
   level endon("game_ended");
-  var_03 = ["leave", "death"];
-  if(isDefined(param_02)) {
-    scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, param_02);
+  var_3 = ["leave", "death"];
+  if(isDefined(var_2)) {
+    scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_3, var_2);
   } else {
-    scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
+    scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_3);
   }
 
-  if(isDefined(param_01)) {
-    scripts\mp\utility::outlinedisable(param_00, param_01);
+  if(isDefined(var_1)) {
+    scripts\mp\utility::outlinedisable(var_0, var_1);
   }
 }
 
 func_C31A() {
   self endon("death");
   level endon("game_ended");
-  foreach(var_01 in level.participants) {
-    func_20D2(var_01);
+  foreach(var_1 in level.participants) {
+    func_20D2(var_1);
   }
 }
 
@@ -1031,24 +1031,24 @@ func_C31C() {
   level endon("game_ended");
   self.enemieskilledintimewindow = 0;
   for(;;) {
-    level waittill("odin_killed_player", var_00);
+    level waittill("odin_killed_player", var_0);
     self.enemieskilledintimewindow++;
     self notify("odin_enemy_killed");
   }
 }
 
-func_C2DD(param_00) {
+func_C2DD(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_01 = level.var_C321[self.odintype];
-  var_02 = 1;
+  var_1 = level.var_C321[self.odintype];
+  var_2 = 1;
   for(;;) {
     self waittill("odin_enemy_killed");
-    wait(var_02);
+    wait(var_2);
     if(self.enemieskilledintimewindow > 1) {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_01.var_1352C);
+      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352C);
     } else {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_01.var_1352D);
+      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352D);
     }
 
     self.enemieskilledintimewindow = 0;
@@ -1059,15 +1059,15 @@ odin_onplayerconnect() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread odin_onplayerspawned(self);
+    level waittill("connected", var_0);
+    var_0 thread odin_onplayerspawned(self);
   }
 }
 
-odin_onplayerspawned(param_00) {
+odin_onplayerspawned(var_0) {
   self endon("disconnect");
   self waittill("spawned_player");
-  param_00 func_20D2(self);
+  var_0 func_20D2(self);
 }
 
 func_4074() {
@@ -1080,12 +1080,12 @@ func_4074() {
   }
 }
 
-watchearlyexit(param_00) {
+watchearlyexit(var_0) {
   level endon("game_ended");
-  param_00 endon("death");
-  param_00 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
-  param_00 waittill("killstreakExit");
-  var_01 = level.var_C321[param_00.odintype];
-  scripts\mp\utility::leaderdialog(var_01.votimedout);
-  param_00 notify("death");
+  var_0 endon("death");
+  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 waittill("killstreakExit");
+  var_1 = level.var_C321[var_0.odintype];
+  scripts\mp\utility::leaderdialog(var_1.votimedout);
+  var_0 notify("death");
 }

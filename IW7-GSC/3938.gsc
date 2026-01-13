@@ -59,16 +59,16 @@ setupagent() {
   self.footstepdetectdist = 600;
   self.footstepdetectdistwalk = 600;
   self.footstepdetectdistsprint = 600;
-  self.func_1A44 = 50;
+  self.var_1A44 = 50;
   func_FAFE();
   thread scriptedgoalwaitforarrival();
   thread func_899D();
 }
 
 func_FAFE() {
-  self.func_3402 = ::func_11562;
-  self.func_3404 = [::func_11562, ::func_11559, ::func_1156F, ::func_1157B, ::func_11570];
-  self.func_3403 = [15, 40, 17, 17, 11];
+  self.var_3402 = ::func_11562;
+  self.var_3404 = [::func_11562, ::func_11559, ::func_1156F, ::func_1157B, ::func_11570];
+  self.var_3403 = [15, 40, 17, 17, 11];
 }
 
 func_899D() {
@@ -79,10 +79,10 @@ func_899D() {
 
     for(;;) {
       if(isDefined(self.enemy)) {
-        self.func_6571 = gettime() + 1000;
-      } else if(isDefined(self.func_6571)) {
-        if(gettime() > self.func_6571) {
-          self.func_6571 = undefined;
+        self.var_6571 = gettime() + 1000;
+      } else if(isDefined(self.var_6571)) {
+        if(gettime() > self.var_6571) {
+          self.var_6571 = undefined;
           break;
         }
       }
@@ -93,90 +93,90 @@ func_899D() {
 }
 
 func_11570() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
 
-  if(isDefined(self.enemy.func_18F4)) {
-    var_00 = self.enemy.func_18F4;
-    var_01 = self.enemy.func_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.25, 0.35);
-  var_03 = var_01 * 0.5;
-  var_04 = var_03 * -1;
-  var_05 = randomfloatrange(var_04, var_03);
-  var_06 = anglestoright(self.angles);
-  var_07 = (var_6[0] * var_05, var_6[1] * var_05, var_02);
-  var_08 = self.enemy.origin + var_07;
-  return var_08;
+  var_2 = var_0 * randomfloatrange(0.25, 0.35);
+  var_3 = var_1 * 0.5;
+  var_4 = var_3 * -1;
+  var_5 = randomfloatrange(var_4, var_3);
+  var_6 = anglestoright(self.angles);
+  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
+  var_8 = self.enemy.origin + var_7;
+  return var_8;
 }
 
 func_1157B() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
 
-  if(isDefined(self.enemy.func_18F4)) {
-    var_00 = self.enemy.func_18F4;
-    var_01 = self.enemy.func_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * 0.75;
-  var_04 = anglestoright(self.angles);
-  var_05 = (var_4[0] * var_03, var_4[1] * var_03, var_02);
-  var_06 = self.enemy.origin + var_05;
-  return var_06;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * 0.75;
+  var_4 = anglestoright(self.angles);
+  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
+  var_6 = self.enemy.origin + var_5;
+  return var_6;
 }
 
 func_1156F() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
 
-  if(isDefined(self.enemy.func_18F4)) {
-    var_00 = self.enemy.func_18F4;
-    var_01 = self.enemy.func_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * -0.75;
-  var_04 = anglestoright(self.angles);
-  var_05 = (var_4[0] * var_03, var_4[1] * var_03, var_02);
-  var_06 = self.enemy.origin + var_05;
-  return var_06;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * -0.75;
+  var_4 = anglestoright(self.angles);
+  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
+  var_6 = self.enemy.origin + var_5;
+  return var_6;
 }
 
 func_11559() {
-  var_00 = 70;
-  var_01 = 15;
+  var_0 = 70;
+  var_1 = 15;
 
-  if(isDefined(self.enemy.func_18F4)) {
-    var_00 = self.enemy.func_18F4;
-    var_01 = self.enemy.func_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
-  var_02 = var_00 * randomfloatrange(0.65, 0.75);
-  var_03 = var_01 * 0.5;
-  var_04 = var_03 * -1;
-  var_05 = randomfloatrange(var_04, var_03);
-  var_06 = anglestoright(self.angles);
-  var_07 = (var_6[0] * var_05, var_6[1] * var_05, var_02);
-  var_08 = self.enemy.origin + var_07;
-  return var_08;
+  var_2 = var_0 * randomfloatrange(0.65, 0.75);
+  var_3 = var_1 * 0.5;
+  var_4 = var_3 * -1;
+  var_5 = randomfloatrange(var_4, var_3);
+  var_6 = anglestoright(self.angles);
+  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
+  var_8 = self.enemy.origin + var_7;
+  return var_8;
 }
 
 func_11562() {
-  var_00 = self.enemy gettagorigin("j_head");
-  return var_00;
+  var_0 = self.enemy gettagorigin("j_head");
+  return var_0;
 }
 
 func_2475() {
-  if(isDefined(self.func_2AB4) && self.func_2AB4 == 0) {
+  if(isDefined(self.var_2AB4) && self.var_2AB4 == 0) {
     return;
   }
   self.voice = "american";
   self give_explosive_touch_on_revived("cloth");
   self attach("robot_c6_armor");
-  var_00 = [];
+  var_0 = [];
   var_0["tag_armor_head_ri"] = 165;
   var_0["tag_armor_head_le"] = 165;
   var_0["tag_armor_head_front"] = 165;
@@ -199,22 +199,22 @@ func_2475() {
   var_0["tag_armor_kneepad_behind_ri"] = 50;
   var_0["tag_armor_kneepad_down_ri"] = 50;
   var_0["tag_armor_kneepad_upper_ri"] = 50;
-  self.func_2AB4 = 1;
+  self.var_2AB4 = 1;
 }
 
 setupdestructibleparts() {
-  self.func_2AB5 = 1;
+  self.var_2AB5 = 1;
 }
 
-func_17CC(var_00, var_01) {
-  if(!isDefined(anim.func_85DF)) {
-    anim.func_85DF = [];
-    anim.func_85E1 = [];
+func_17CC(var_0, var_1) {
+  if(!isDefined(anim.var_85DF)) {
+    anim.var_85DF = [];
+    anim.var_85E1 = [];
   }
 
-  var_02 = anim.func_85DF.size;
-  anim.func_85DF[var_02] = var_00;
-  anim.func_85E1[var_02] = var_01;
+  var_2 = anim.var_85DF.size;
+  anim.var_85DF[var_2] = var_0;
+  anim.var_85E1[var_2] = var_1;
 }
 
 func_9812() {
@@ -228,28 +228,28 @@ scriptedgoalwaitforarrival() {
   for(;;) {
     self waittill("goal_reached");
 
-    if(isDefined(self.func_EF7D)) {
-      var_00 = self.func_EF7D;
-    } else if(isDefined(self.func_EF7A)) {
-      var_00 = self.func_EF7A.origin;
-    } else if(isDefined(self.func_EF7C)) {
-      var_00 = self.func_EF7C.origin;
+    if(isDefined(self.var_EF7D)) {
+      var_0 = self.var_EF7D;
+    } else if(isDefined(self.var_EF7A)) {
+      var_0 = self.var_EF7A.origin;
+    } else if(isDefined(self.var_EF7C)) {
+      var_0 = self.var_EF7C.origin;
     } else {
       continue;
     }
 
-    var_01 = 16;
+    var_1 = 16;
 
-    if(isDefined(self.func_EF7E)) {
-      var_01 = self.func_EF7E * self.func_EF7E;
+    if(isDefined(self.var_EF7E)) {
+      var_1 = self.var_EF7E * self.var_EF7E;
     }
 
-    if(distance2dsquared(self.origin, var_00) <= var_01) {
-      self.func_EF7D = undefined;
-      self.func_EF7C = undefined;
+    if(distance2dsquared(self.origin, var_0) <= var_1) {
+      self.var_EF7D = undefined;
+      self.var_EF7C = undefined;
 
-      if(!isDefined(self.func_EF7B)) {
-        self.func_EF7A = undefined;
+      if(!isDefined(self.var_EF7B)) {
+        self.var_EF7A = undefined;
       }
 
       self notify("scriptedGoal_reached");
@@ -257,50 +257,50 @@ scriptedgoalwaitforarrival() {
   }
 }
 
-func_F834(var_00, var_01) {
-  if(!isDefined(var_01)) {
-    var_01 = 0;
+func_F834(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  self.func_EF79 = var_01;
-  self.func_EF73 = var_00;
+  self.var_EF79 = var_1;
+  self.var_EF73 = var_0;
 }
 
-func_F835(var_00, var_01) {
-  self.func_EF7A = undefined;
-  self.func_EF7B = undefined;
-  self.func_EF7C = undefined;
-  self.func_EF7D = var_00;
-  self.func_EF7E = var_01;
+func_F835(var_0, var_1) {
+  self.var_EF7A = undefined;
+  self.var_EF7B = undefined;
+  self.var_EF7C = undefined;
+  self.var_EF7D = var_0;
+  self.var_EF7E = var_1;
 }
 
-func_F833(var_00, var_01) {
-  self.func_EF7D = undefined;
-  self.func_EF7A = undefined;
-  self.func_EF7B = undefined;
-  self.func_EF7C = var_00;
-  self.func_EF7E = var_01;
+func_F833(var_0, var_1) {
+  self.var_EF7D = undefined;
+  self.var_EF7A = undefined;
+  self.var_EF7B = undefined;
+  self.var_EF7C = var_0;
+  self.var_EF7E = var_1;
 }
 
-func_F832(var_00, var_01, var_02) {
-  self.func_EF7D = undefined;
-  self.func_EF7C = undefined;
-  self.func_EF7A = var_00;
-  self.func_EF7E = var_01;
+func_F832(var_0, var_1, var_2) {
+  self.var_EF7D = undefined;
+  self.var_EF7C = undefined;
+  self.var_EF7A = var_0;
+  self.var_EF7E = var_1;
 
-  if(isDefined(var_02) && var_02) {
-    self.func_EF7B = var_02;
+  if(isDefined(var_2) && var_2) {
+    self.var_EF7B = var_2;
   } else {
-    self.func_EF7B = undefined;
+    self.var_EF7B = undefined;
   }
 }
 
 func_41D9() {
-  if(isDefined(self.func_EF7D) || isDefined(self.func_EF7A) || isDefined(self.func_EF7C)) {
-    self.func_EF7D = undefined;
-    self.func_EF7A = undefined;
-    self.func_EF7B = undefined;
-    self.func_EF7C = undefined;
+  if(isDefined(self.var_EF7D) || isDefined(self.var_EF7A) || isDefined(self.var_EF7C)) {
+    self.var_EF7D = undefined;
+    self.var_EF7A = undefined;
+    self.var_EF7B = undefined;
+    self.var_EF7C = undefined;
     self clearpath();
   }
 }

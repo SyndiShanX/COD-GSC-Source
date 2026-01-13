@@ -14,21 +14,21 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00.var_F1E9 = [];
+    level waittill("connected", var_0);
+    var_0.var_F1E9 = [];
   }
 }
 
 func_12E86() {}
 
-func_17C1(param_00, param_01, param_02, param_03) {
+func_17C1(var_0, var_1, var_2, var_3) {
   if(!level.teambased) {
     return;
   }
 
-  var_04 = param_00.origin;
-  param_01 endon("spawned_player");
-  param_01 endon("disconnect");
+  var_4 = var_0.origin;
+  var_1 endon("spawned_player");
+  var_1 endon("disconnect");
   wait(0.05);
   scripts\mp\utility::func_13842();
   if(getdvar("ui_hud_showdeathicons") == "0") {
@@ -43,27 +43,27 @@ func_17C1(param_00, param_01, param_02, param_03) {
     self.lastdeathicon destroy();
   }
 
-  var_05 = newteamhudelem(param_02);
-  var_05.x = var_04[0];
-  var_05.y = var_04[1];
-  var_05.var_3A6 = var_04[2] + 54;
-  var_05.alpha = 0.61;
-  var_05.archived = 0;
-  var_05.showinkillcam = 0;
+  var_5 = newteamhudelem(var_2);
+  var_5.x = var_4[0];
+  var_5.y = var_4[1];
+  var_5.var_3A6 = var_4[2] + 54;
+  var_5.alpha = 0.61;
+  var_5.archived = 0;
+  var_5.showinkillcam = 0;
   if(level.splitscreen) {
-    var_05 setshader("hud_icon_death", 14, 14);
+    var_5 setshader("hud_icon_death", 14, 14);
   } else {
-    var_05 setshader("hud_icon_death", 7, 7);
+    var_5 setshader("hud_icon_death", 7, 7);
   }
 
-  var_05 setwaypoint(0);
-  self.lastdeathicon = var_05;
-  var_05 thread func_5323(param_03);
+  var_5 setwaypoint(0);
+  self.lastdeathicon = var_5;
+  var_5 thread func_5323(var_3);
 }
 
-func_5323(param_00) {
+func_5323(var_0) {
   self endon("death");
-  wait(param_00);
+  wait(var_0);
   self fadeovertime(1);
   self.alpha = 0;
   wait(1);

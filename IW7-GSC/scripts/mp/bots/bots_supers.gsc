@@ -21,12 +21,12 @@ func_2EA3() {
   level.var_2D1D["super_visionpulse"] = ::func_89EE;
 }
 
-func_9F8B(param_00) {
+func_9F8B(var_0) {
   if(!isDefined(level.var_2D1D)) {
     return 0;
   }
 
-  if(!isDefined(level.var_2D1D[param_00])) {
+  if(!isDefined(level.var_2D1D[var_0])) {
     return 0;
   }
 
@@ -34,13 +34,13 @@ func_9F8B(param_00) {
 }
 
 func_2EE9() {
-  var_00 = self.botarchetype;
-  var_01 = randomint(level.var_2EFC[var_00].size);
-  return level.var_2EFC[var_00][var_01];
+  var_0 = self.botarchetype;
+  var_1 = randomint(level.var_2EFC[var_0].size);
+  return level.var_2EFC[var_0][var_1];
 }
 
 botpicktrait() {
-  var_00 = self.botarchetype;
+  var_0 = self.botarchetype;
   if(!isDefined(level.botsupportedarchetypetraits)) {
     level.botsupportedarchetypetraits = [];
     level.botsupportedarchetypetraits["archetype_assault"] = [];
@@ -61,8 +61,8 @@ botpicktrait() {
     level.botsupportedarchetypetraits["archetype_sniper"][level.botsupportedarchetypetraits["archetype_sniper"].size] = "specialty_mark_targets";
   }
 
-  var_01 = randomint(level.botsupportedarchetypetraits[var_00].size);
-  return level.botsupportedarchetypetraits[var_00][var_01];
+  var_1 = randomint(level.botsupportedarchetypetraits[var_0].size);
+  return level.botsupportedarchetypetraits[var_0][var_1];
 }
 
 bot_think_supers() {
@@ -83,7 +83,7 @@ bot_think_supers() {
 
     if(isDefined(level.var_2D1D[self.loadoutsuper])) {
       self[[level.var_2D1D[self.loadoutsuper]]]();
-    } else {}
+    }
 
     self botsetflag("super_ready", 0);
     self waittill("super_finished");
@@ -94,8 +94,8 @@ func_89EF() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    var_00 = randomfloatrange(3, 6);
-    wait(var_00);
+    var_0 = randomfloatrange(3, 6);
+    wait(var_0);
     if(!isalive(self)) {
       continue;
     }
@@ -112,9 +112,9 @@ func_89EF() {
       continue;
     }
 
-    var_01 = distance(self.isnodeoccupied.origin, self.origin);
-    if(var_01 < 800 && scripts\mp\bots\_bots_powers::func_8BEE()) {
-      if(var_01 < 550) {
+    var_1 = distance(self.isnodeoccupied.origin, self.origin);
+    if(var_1 < 800 && scripts\mp\bots\_bots_powers::func_8BEE()) {
+      if(var_1 < 550) {
         continue;
       }
     }
@@ -145,8 +145,8 @@ func_89EE() {
     }
 
     if(scripts\mp\bots\_bots_powers::func_8BEE()) {
-      var_00 = distance(self.isnodeoccupied.origin, self.origin);
-      if(var_00 < 600) {
+      var_0 = distance(self.isnodeoccupied.origin, self.origin);
+      if(var_0 < 600) {
         continue;
       }
     }

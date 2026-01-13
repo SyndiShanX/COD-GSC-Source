@@ -9,143 +9,143 @@ func_97AF() {
   func_DEE1("space_helmet", 200, "head", "ref_space_helmet_02_zombie", "tag_eye", (-4, 0, -1), (0, 90, 12));
 }
 
-func_DEE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = spawnStruct();
-  var_07.health = param_01;
-  var_07.model = param_03;
-  var_07.hitloc = param_02;
-  var_07.physics_setgravitydynentscalar = param_04;
-  var_07.var_AEBA = param_05;
-  var_07.var_1E79 = param_06;
-  level.var_13F0F[param_00] = var_07;
+func_DEE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = spawnStruct();
+  var_7.health = var_1;
+  var_7.model = var_3;
+  var_7.hitloc = var_2;
+  var_7.physics_setgravitydynentscalar = var_4;
+  var_7.var_AEBA = var_5;
+  var_7.var_1E79 = var_6;
+  level.var_13F0F[var_0] = var_7;
 }
 
-func_668D(param_00) {
-  if(!func_381A(param_00)) {
+func_668D(var_0) {
+  if(!func_381A(var_0)) {
     return;
   }
 
-  foreach(var_02 in func_782B()) {
-    func_668C(param_00, var_02);
+  foreach(var_2 in func_782B()) {
+    func_668C(var_0, var_2);
   }
 }
 
-func_668C(param_00, param_01) {
-  if(!isDefined(param_00.var_6691)) {
-    param_00.var_6691 = [];
+func_668C(var_0, var_1) {
+  if(!isDefined(var_0.var_6691)) {
+    var_0.var_6691 = [];
   }
 
-  var_02 = level.var_13F0F[param_01];
-  var_03 = param_00 gettagorigin(var_02.physics_setgravitydynentscalar);
-  var_04 = spawn("script_model", var_03);
-  var_04 setModel(var_02.model);
-  var_04.angles = param_00.angles;
-  var_04.fake_health = var_02.health;
-  var_04 linkto(param_00, var_02.physics_setgravitydynentscalar, var_02.var_AEBA, var_02.var_1E79);
-  var_04 thread func_217F(var_04, param_00);
-  param_00.var_6691[var_02.hitloc] = var_04;
+  var_2 = level.var_13F0F[var_1];
+  var_3 = var_0 gettagorigin(var_2.physics_setgravitydynentscalar);
+  var_4 = spawn("script_model", var_3);
+  var_4 setModel(var_2.model);
+  var_4.angles = var_0.angles;
+  var_4.fake_health = var_2.health;
+  var_4 linkto(var_0, var_2.physics_setgravitydynentscalar, var_2.var_AEBA, var_2.var_1E79);
+  var_4 thread func_217F(var_4, var_0);
+  var_0.var_6691[var_2.hitloc] = var_4;
 }
 
-process_damage_to_armor(param_00, param_01, param_02, param_03, param_04) {
-  if(scripts\engine\utility::istrue(param_00.disable_armor)) {
-    return param_02;
+process_damage_to_armor(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\engine\utility::istrue(var_0.disable_armor)) {
+    return var_2;
   }
 
-  if(!isDefined(param_00.var_6691)) {
-    return param_02;
+  if(!isDefined(var_0.var_6691)) {
+    return var_2;
   }
 
-  var_05 = param_00.var_6691[param_03];
-  if(!isDefined(var_05)) {
-    return param_02;
+  var_5 = var_0.var_6691[var_3];
+  if(!isDefined(var_5)) {
+    return var_2;
   }
 
-  if(var_05.fake_health <= 0) {
-    return param_02;
+  if(var_5.fake_health <= 0) {
+    return var_2;
   }
 
-  var_05 notify("damage", param_02, param_01, param_04);
+  var_5 notify("damage", var_2, var_1, var_4);
   return 0;
 }
 
-clean_up_zombie_armor(param_00) {
-  if(!isDefined(param_00.var_6691)) {
+clean_up_zombie_armor(var_0) {
+  if(!isDefined(var_0.var_6691)) {
     return;
   }
 
-  foreach(var_02 in param_00.var_6691) {
-    if(isDefined(var_02)) {
-      var_02 notify("damage", var_02.fake_health);
+  foreach(var_2 in var_0.var_6691) {
+    if(isDefined(var_2)) {
+      var_2 notify("damage", var_2.fake_health);
     }
   }
 }
 
-func_217F(param_00, param_01) {
-  param_00 setCanDamage(1);
-  param_00.health = 999999;
-  var_02 = gettime();
-  var_03 = undefined;
+func_217F(var_0, var_1) {
+  var_0 setCanDamage(1);
+  var_0.health = 999999;
+  var_2 = gettime();
+  var_3 = undefined;
   for(;;) {
-    param_00 waittill("damage", var_04, var_05, var_06);
+    var_0 waittill("damage", var_4, var_5, var_6);
     if(scripts\engine\utility::istrue(level.insta_kill)) {
-      var_04 = param_00.fake_health;
-      if(isDefined(param_01)) {
-        param_01 dodamage(param_01.health, param_00.origin);
+      var_4 = var_0.fake_health;
+      if(isDefined(var_1)) {
+        var_1 dodamage(var_1.health, var_0.origin);
       }
     }
 
-    var_07 = gettime();
-    if(var_07 != var_02) {
-      if(isplayer(var_05)) {
-        var_05 scripts\cp\cp_damage::updatedamagefeedback("hitalienarmor");
+    var_7 = gettime();
+    if(var_7 != var_2) {
+      if(isplayer(var_5)) {
+        var_5 scripts\cp\cp_damage::updatedamagefeedback("hitalienarmor");
       }
 
-      var_02 = var_07;
-      var_03 = var_06;
-      param_00.fake_health = param_00.fake_health - var_04;
-      if(param_00.fake_health <= 0) {
+      var_2 = var_7;
+      var_3 = var_6;
+      var_0.fake_health = var_0.fake_health - var_4;
+      if(var_0.fake_health <= 0) {
         break;
       }
     }
   }
 
-  param_00 thread func_5386(param_00, var_03);
+  var_0 thread func_5386(var_0, var_3);
 }
 
-func_5386(param_00, param_01) {
-  param_01 = modify_apache_lifetime(param_01);
-  if(isDefined(param_01)) {
-    var_02 = spawn("script_model", param_00.origin);
-    var_02 setModel(param_00.model);
-    var_02.angles = param_00.angles;
+func_5386(var_0, var_1) {
+  var_1 = modify_apache_lifetime(var_1);
+  if(isDefined(var_1)) {
+    var_2 = spawn("script_model", var_0.origin);
+    var_2 setModel(var_0.model);
+    var_2.angles = var_0.angles;
     wait(0.1);
-    param_00 delete();
-    var_02 physicslaunchclient(var_02.origin, param_01);
-    var_02 thread func_50AF(var_02);
+    var_0 delete();
+    var_2 physicslaunchclient(var_2.origin, var_1);
+    var_2 thread func_50AF(var_2);
     return;
   }
 
-  param_00 thread func_50AF(param_00);
+  var_0 thread func_50AF(var_0);
 }
 
-modify_apache_lifetime(param_00) {
-  if(!isDefined(param_00)) {
+modify_apache_lifetime(var_0) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  param_00 = vectornormalize((param_00[0], param_00[1], 0));
-  param_00 = param_00 + (0, 0, 1);
-  return vectornormalize(param_00) * 1250;
+  var_0 = vectornormalize((var_0[0], var_0[1], 0));
+  var_0 = var_0 + (0, 0, 1);
+  return vectornormalize(var_0) * 1250;
 }
 
-func_50AF(param_00) {
+func_50AF(var_0) {
   wait(5);
-  param_00 delete();
+  var_0 delete();
 }
 
 func_782B() {
-  var_00 = 6000;
-  if(level.wave_num >= var_00) {
+  var_0 = 6000;
+  if(level.wave_num >= var_0) {
     if(randomint(100) <= level.wave_num) {
       return ["space_helmet"];
     }
@@ -154,8 +154,8 @@ func_782B() {
   return [];
 }
 
-func_381A(param_00) {
-  if(param_00 scripts\asm\zombie\zombie::func_9E0F()) {
+func_381A(var_0) {
+  if(var_0 scripts\asm\zombie\zombie::func_9E0F()) {
     return 0;
   }
 

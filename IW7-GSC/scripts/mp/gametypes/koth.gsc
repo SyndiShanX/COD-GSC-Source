@@ -95,9 +95,9 @@ onstartgametype() {
   scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_KOTH_HINT");
   scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_KOTH_HINT");
   setclientnamemode("auto_change");
-  var_00[0] = "hardpoint";
-  var_00[1] = "tdm";
-  scripts\mp\gameobjects::main(var_00);
+  var_0[0] = "hardpoint";
+  var_0[1] = "tdm";
+  scripts\mp\gameobjects::main(var_0);
   level thread setupzones();
   level thread setupzoneareabrushes();
   initspawns();
@@ -164,7 +164,7 @@ hardpointmainloop() {
     hqactivatenextzone();
     scripts\mp\spawnlogic::clearlastteamspawns();
     hpcaptureloop();
-    var_00 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
+    var_0 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
     if(level.timerstoppedforgamemode && level.pausemodetimer) {
       level scripts\mp\gamelogic::resumetimer();
     }
@@ -173,8 +173,8 @@ hardpointmainloop() {
     level.zone.gameobject killhardpointvfx();
     level.zone.gameobject.var_19 = 0;
     if(level.usehpzonebrushes) {
-      foreach(var_02 in level.players) {
-        level.zone.gameobject scripts\mp\gametypes\obj_zonecapture::hideplayerspecificbrushes(var_02);
+      foreach(var_2 in level.players) {
+        level.zone.gameobject scripts\mp\gametypes\obj_zonecapture::hideplayerspecificbrushes(var_2);
       }
     }
 
@@ -198,18 +198,18 @@ hardpointmainloop() {
 }
 
 killhardpointvfx() {
-  foreach(var_01 in level.players) {
-    foreach(var_03 in var_01._hardpointeffect) {
-      var_01._hardpointeffect = scripts\engine\utility::array_remove(var_01._hardpointeffect, var_03);
-      if(isDefined(var_03)) {
-        var_03 delete();
+  foreach(var_1 in level.players) {
+    foreach(var_3 in var_1._hardpointeffect) {
+      var_1._hardpointeffect = scripts\engine\utility::array_remove(var_1._hardpointeffect, var_3);
+      if(isDefined(var_3)) {
+        var_3 delete();
       }
     }
   }
 
   if(isDefined(self.neutralhardpointfx) && self.neutralhardpointfx.size > 0) {
-    foreach(var_03 in self.neutralhardpointfx) {
-      var_03 delete();
+    foreach(var_3 in self.neutralhardpointfx) {
+      var_3 delete();
     }
   }
 
@@ -217,30 +217,30 @@ killhardpointvfx() {
 }
 
 getfirstzone() {
-  var_00 = level.zones[0];
+  var_0 = level.zones[0];
   level.prevzoneindex = 0;
-  return var_00;
+  return var_0;
 }
 
 getnextzone() {
   if(level.zonerandomlocationorder) {
     var_13["allies"] = (0, 0, 0);
     var_13["axis"] = (0, 0, 0);
-    var_01 = scripts\mp\utility::getpotentiallivingplayers();
-    foreach(var_03 in var_01) {
-      if(var_03.team == "spectator") {
+    var_1 = scripts\mp\utility::getpotentiallivingplayers();
+    foreach(var_3 in var_1) {
+      if(var_3.team == "spectator") {
         continue;
       }
 
-      var_13[var_03.team] = var_13[var_03.team] + var_03.origin;
+      var_13[var_3.team] = var_13[var_3.team] + var_3.origin;
     }
 
-    var_05 = scripts\mp\utility::getteamarray("allies");
-    var_06 = max(var_05.size, 1);
-    var_07 = scripts\mp\utility::getteamarray("axis");
-    var_08 = max(var_07.size, 1);
-    var_09["allies"] = var_13["allies"] / var_06;
-    var_09["axis"] = var_13["axis"] / var_08;
+    var_5 = scripts\mp\utility::getteamarray("allies");
+    var_6 = max(var_5.size, 1);
+    var_7 = scripts\mp\utility::getteamarray("axis");
+    var_8 = max(var_7.size, 1);
+    var_9["allies"] = var_13["allies"] / var_6;
+    var_9["axis"] = var_13["axis"] / var_8;
     if(!isDefined(level.prevzonelist) || isDefined(level.prevzonelist) && level.prevzonelist.size == level.zones.size - 1) {
       level.prevzonelist = [];
     }
@@ -264,8 +264,8 @@ getnextzone() {
       }
 
       var_13 = level.zones[var_0E];
-      var_14 = distance2dsquared(var_13.gameobject.curorigin, var_09["allies"]);
-      var_15 = distance2dsquared(var_13.gameobject.curorigin, var_09["axis"]);
+      var_14 = distance2dsquared(var_13.gameobject.curorigin, var_9["allies"]);
+      var_15 = distance2dsquared(var_13.gameobject.curorigin, var_9["axis"]);
       var_16 = distance2dsquared(var_13.gameobject.curorigin, level.zone.gameobject.curorigin);
       var_17 = var_14 + var_15 * var_0A + var_16 * var_0B;
       if(!isDefined(var_0D) || var_17 > var_0D) {
@@ -295,11 +295,11 @@ spawn_next_zone() {
   level.favorclosespawnent = level.zone;
   level.zone.gameobject.var_19 = 1;
   level.zone.gameobject.lastactivatetime = gettime();
-  var_00 = int(level.zone.script_label);
-  level.zone.gameobject.neutralbrush = level.neutralzonebrushes[var_00 - 1];
-  level.zone.gameobject.friendlybrush = level.friendlyzonebrushes[var_00 - 1];
-  level.zone.gameobject.enemybrush = level.enemyzonebrushes[var_00 - 1];
-  level.zone.gameobject.contestedbrush = level.contestedzonebrushes[var_00 - 1];
+  var_0 = int(level.zone.script_label);
+  level.zone.gameobject.neutralbrush = level.neutralzonebrushes[var_0 - 1];
+  level.zone.gameobject.friendlybrush = level.friendlyzonebrushes[var_0 - 1];
+  level.zone.gameobject.enemybrush = level.enemyzonebrushes[var_0 - 1];
+  level.zone.gameobject.contestedbrush = level.contestedzonebrushes[var_0 - 1];
   if(level.zoneactivationdelay > 0) {
     level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.icontarget);
   } else {
@@ -367,21 +367,21 @@ hpcaptureloop() {
       level thread scripts\mp\gametypes\grnd::randomdrops();
     }
 
-    var_00 = level scripts\engine\utility::waittill_any_return("zone_captured", "zone_destroyed");
-    if(var_00 == "zone_destroyed") {
+    var_0 = level scripts\engine\utility::waittill_any_return("zone_captured", "zone_destroyed");
+    if(var_0 == "zone_destroyed") {
       continue;
     }
 
-    var_01 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
+    var_1 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
     thread func_12F03();
     if(level.usehqrules && level.zoneduration > 0) {
       thread movezoneaftertime(level.zoneduration);
     }
 
-    level waittill("zone_destroyed", var_02);
+    level waittill("zone_destroyed", var_2);
     level.spawndelay = undefined;
-    if(isDefined(var_02)) {
-      level.zone.gameobject scripts\mp\gameobjects::setownerteam(var_02);
+    if(isDefined(var_2)) {
+      level.zone.gameobject scripts\mp\gameobjects::setownerteam(var_2);
     } else {
       level.zone.gameobject scripts\mp\gameobjects::setownerteam("none");
     }
@@ -396,17 +396,17 @@ func_12F03() {
   level endon("game_ended");
   level endon("zone_moved");
   level endon("zone_destroyed");
-  var_00 = gettime();
+  var_0 = gettime();
   if(level.zoneduration > 0) {
-    var_01 = var_00 + level.zoneduration * 1000;
+    var_1 = var_0 + level.zoneduration * 1000;
   } else {
-    var_01 = var_01 + scripts\mp\utility::gettimelimit() * 60 * 1000 - scripts\mp\utility::gettimepassed();
+    var_1 = var_1 + scripts\mp\utility::gettimelimit() * 60 * 1000 - scripts\mp\utility::gettimepassed();
   }
 
-  var_02 = var_00;
-  while(var_02 < var_01) {
-    var_02 = gettime();
-    level.spawndelay = var_01 - var_02 / 1000;
+  var_2 = var_0;
+  while(var_2 < var_1) {
+    var_2 = gettime();
+    level.spawndelay = var_1 - var_2 / 1000;
     wait(0.05);
   }
 }
@@ -430,146 +430,146 @@ initspawns() {
 
   level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
-  var_00 = [];
-  foreach(var_02 in level.zones) {
-    var_02.furthestspawndistsq = 0;
-    var_02.spawnpoints = [];
-    var_02.fallbackspawnpoints = [];
-    var_00[var_02.script_label] = var_02;
+  var_0 = [];
+  foreach(var_2 in level.zones) {
+    var_2.furthestspawndistsq = 0;
+    var_2.spawnpoints = [];
+    var_2.fallbackspawnpoints = [];
+    var_0[var_2.script_label] = var_2;
   }
 
-  foreach(var_05 in level.spawnpoints) {
-    calculatespawndisttozones(var_05);
-    var_06 = scripts\mp\spawnlogic::getoriginidentifierstring(var_05);
-    if(isDefined(level.kothextraprimaryspawnpoints) && isDefined(level.kothextraprimaryspawnpoints[var_06])) {
-      foreach(var_08 in level.kothextraprimaryspawnpoints[var_06]) {
-        var_02 = var_00[var_08];
-        var_02.spawnpoints[var_02.spawnpoints.size] = var_05;
+  foreach(var_5 in level.spawnpoints) {
+    calculatespawndisttozones(var_5);
+    var_6 = scripts\mp\spawnlogic::getoriginidentifierstring(var_5);
+    if(isDefined(level.kothextraprimaryspawnpoints) && isDefined(level.kothextraprimaryspawnpoints[var_6])) {
+      foreach(var_8 in level.kothextraprimaryspawnpoints[var_6]) {
+        var_2 = var_0[var_8];
+        var_2.spawnpoints[var_2.spawnpoints.size] = var_5;
       }
     }
 
     var_0A = 0;
-    var_0B = var_05.classname == "mp_koth_spawn";
-    var_0C = var_05.classname == "mp_koth_spawn_secondary";
+    var_0B = var_5.classname == "mp_koth_spawn";
+    var_0C = var_5.classname == "mp_koth_spawn_secondary";
     if(var_0B || var_0C) {
-      if(isDefined(var_05.script_noteworthy) && var_05.script_noteworthy != "") {
+      if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy != "") {
         var_0A = 1;
-        var_0D = strtok(var_05.script_noteworthy, " ");
-        foreach(var_08 in var_0D) {
-          if(!postshipmodifiedzones(var_08)) {
-            var_02 = var_00[var_08];
+        var_0D = strtok(var_5.script_noteworthy, " ");
+        foreach(var_8 in var_0D) {
+          if(!postshipmodifiedzones(var_8)) {
+            var_2 = var_0[var_8];
             if(var_0B) {
-              var_02.spawnpoints[var_02.spawnpoints.size] = var_05;
+              var_2.spawnpoints[var_2.spawnpoints.size] = var_5;
               continue;
             }
 
-            var_02.fallbackspawnpoints[var_02.fallbackspawnpoints.size] = var_05;
+            var_2.fallbackspawnpoints[var_2.fallbackspawnpoints.size] = var_5;
           }
         }
       }
     }
 
     if(!var_0A) {
-      foreach(var_02 in level.zones) {
+      foreach(var_2 in level.zones) {
         if(var_0B) {
-          var_02.spawnpoints[var_02.spawnpoints.size] = var_05;
+          var_2.spawnpoints[var_2.spawnpoints.size] = var_5;
           continue;
         }
 
-        var_02.fallbackspawnpoints[var_02.fallbackspawnpoints.size] = var_05;
+        var_2.fallbackspawnpoints[var_2.fallbackspawnpoints.size] = var_5;
       }
     }
   }
 }
 
-calculatespawndisttozones(param_00) {
-  param_00.distsqtokothzones = [];
-  foreach(var_02 in level.zones) {
-    var_03 = getpathdist(param_00.origin, var_02.baseorigin, 5000);
-    if(var_03 < 0) {
-      var_03 = scripts\engine\utility::distance_2d_squared(param_00.origin, var_02.baseorigin);
+calculatespawndisttozones(var_0) {
+  var_0.distsqtokothzones = [];
+  foreach(var_2 in level.zones) {
+    var_3 = getpathdist(var_0.origin, var_2.baseorigin, 5000);
+    if(var_3 < 0) {
+      var_3 = scripts\engine\utility::distance_2d_squared(var_0.origin, var_2.baseorigin);
     } else {
-      var_03 = var_03 * var_03;
+      var_3 = var_3 * var_3;
     }
 
-    param_00.distsqtokothzones[var_02 getentitynumber()] = var_03;
-    if(var_03 > var_02.furthestspawndistsq) {
-      var_02.furthestspawndistsq = var_03;
+    var_0.distsqtokothzones[var_2 getentitynumber()] = var_3;
+    if(var_3 > var_2.furthestspawndistsq) {
+      var_2.furthestspawndistsq = var_3;
     }
   }
 }
 
-comparezoneindexes(param_00, param_01) {
-  var_02 = int(param_00.script_label);
-  var_03 = int(param_01.script_label);
-  if(!isDefined(var_02) && !isDefined(var_03)) {
+comparezoneindexes(var_0, var_1) {
+  var_2 = int(var_0.script_label);
+  var_3 = int(var_1.script_label);
+  if(!isDefined(var_2) && !isDefined(var_3)) {
     return 0;
   }
 
-  if(!isDefined(var_02) && isDefined(var_03)) {
+  if(!isDefined(var_2) && isDefined(var_3)) {
     return 1;
   }
 
-  if(isDefined(var_02) && !isDefined(var_03)) {
+  if(isDefined(var_2) && !isDefined(var_3)) {
     return 0;
   }
 
-  if(var_02 > var_03) {
+  if(var_2 > var_3) {
     return 1;
   }
 
   return 0;
 }
 
-getzonearray(param_00) {
-  var_01 = getEntArray(param_00, "targetname");
-  if(!isDefined(var_01) || var_01.size == 0) {
+getzonearray(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
+  if(!isDefined(var_1) || var_1.size == 0) {
     return undefined;
   }
 
-  var_02 = 1;
-  for(var_03 = var_01.size; var_02; var_03--) {
-    var_02 = 0;
-    for(var_04 = 0; var_04 < var_03 - 1; var_04++) {
-      if(comparezoneindexes(var_01[var_04], var_01[var_04 + 1])) {
-        var_05 = var_01[var_04];
-        var_01[var_04] = var_01[var_04 + 1];
-        var_01[var_04 + 1] = var_05;
-        var_02 = 1;
+  var_2 = 1;
+  for(var_3 = var_1.size; var_2; var_3--) {
+    var_2 = 0;
+    for(var_4 = 0; var_4 < var_3 - 1; var_4++) {
+      if(comparezoneindexes(var_1[var_4], var_1[var_4 + 1])) {
+        var_5 = var_1[var_4];
+        var_1[var_4] = var_1[var_4 + 1];
+        var_1[var_4 + 1] = var_5;
+        var_2 = 1;
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 setupzones() {
   scripts\mp\utility::func_98D3();
   level.zones = [];
   level.var_13FC6 = [];
-  var_00 = getzonearray("hardpoint_zone");
+  var_0 = getzonearray("hardpoint_zone");
   if(level.mapname == "mp_fallen") {
-    var_00 = scripts\engine\utility::array_remove(var_00, var_00[var_00.size - 1]);
+    var_0 = scripts\engine\utility::array_remove(var_0, var_0[var_0.size - 1]);
   }
 
   level.zones = [];
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    level.zones[level.zones.size] = var_00[var_01];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    level.zones[level.zones.size] = var_0[var_1];
   }
 
   level.objectives = level.zones;
-  for(var_01 = 0; var_01 < level.zones.size; var_01++) {
-    var_02 = scripts\mp\gametypes\obj_zonecapture::func_8B4A(var_01);
-    level.zones[var_01].useobj = var_02;
-    var_02.levelflag = level.zones[var_01];
-    level.var_13FC6[level.var_13FC6.size] = var_02;
+  for(var_1 = 0; var_1 < level.zones.size; var_1++) {
+    var_2 = scripts\mp\gametypes\obj_zonecapture::func_8B4A(var_1);
+    level.zones[var_1].useobj = var_2;
+    var_2.levelflag = level.zones[var_1];
+    level.var_13FC6[level.var_13FC6.size] = var_2;
   }
 
   level.var_1BEB = level.zones;
-  var_03 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_axis_start");
-  var_04 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_allies_start");
-  level.areanynavvolumesloaded["allies"] = var_04[0].origin;
-  level.areanynavvolumesloaded["axis"] = var_03[0].origin;
+  var_3 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_axis_start");
+  var_4 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_allies_start");
+  level.areanynavvolumesloaded["allies"] = var_4[0].origin;
+  level.areanynavvolumesloaded["axis"] = var_3[0].origin;
   return 1;
 }
 
@@ -578,35 +578,35 @@ setupzoneareabrushes() {
   level.friendlyzonebrushes = [];
   level.enemyzonebrushes = [];
   level.contestedzonebrushes = [];
-  var_00 = getzonearray("hardpoint_zone_visual");
-  var_01 = getzonearray("hardpoint_zone_visual_contest");
-  var_02 = getzonearray("hardpoint_zone_visual_friend");
-  var_03 = getzonearray("hardpoint_zone_visual_enemy");
-  if(!isDefined(var_00)) {
+  var_0 = getzonearray("hardpoint_zone_visual");
+  var_1 = getzonearray("hardpoint_zone_visual_contest");
+  var_2 = getzonearray("hardpoint_zone_visual_friend");
+  var_3 = getzonearray("hardpoint_zone_visual_enemy");
+  if(!isDefined(var_0)) {
     level.usehpzonebrushes = 0;
   } else {
     level.usehpzonebrushes = 1;
   }
 
   if(level.usehpzonebrushes) {
-    for(var_04 = 0; var_04 < var_00.size; var_04++) {
-      level.neutralzonebrushes[level.neutralzonebrushes.size] = var_00[var_04];
-      level.neutralzonebrushes[var_04] hide();
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
+      level.neutralzonebrushes[level.neutralzonebrushes.size] = var_0[var_4];
+      level.neutralzonebrushes[var_4] hide();
     }
 
-    for(var_04 = 0; var_04 < var_01.size; var_04++) {
-      level.contestedzonebrushes[level.contestedzonebrushes.size] = var_01[var_04];
-      level.contestedzonebrushes[var_04] hide();
+    for(var_4 = 0; var_4 < var_1.size; var_4++) {
+      level.contestedzonebrushes[level.contestedzonebrushes.size] = var_1[var_4];
+      level.contestedzonebrushes[var_4] hide();
     }
 
-    for(var_04 = 0; var_04 < var_02.size; var_04++) {
-      level.friendlyzonebrushes[level.friendlyzonebrushes.size] = var_02[var_04];
-      level.friendlyzonebrushes[var_04] hide();
+    for(var_4 = 0; var_4 < var_2.size; var_4++) {
+      level.friendlyzonebrushes[level.friendlyzonebrushes.size] = var_2[var_4];
+      level.friendlyzonebrushes[var_4] hide();
     }
 
-    for(var_04 = 0; var_04 < var_03.size; var_04++) {
-      level.enemyzonebrushes[level.enemyzonebrushes.size] = var_03[var_04];
-      level.enemyzonebrushes[var_04] hide();
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
+      level.enemyzonebrushes[level.enemyzonebrushes.size] = var_3[var_4];
+      level.enemyzonebrushes[var_4] hide();
     }
 
     postshipmodifiedzonebrushes();
@@ -616,80 +616,80 @@ setupzoneareabrushes() {
 
 postshipmodifiedzonebrushes() {
   if(level.mapname == "mp_parkour") {
-    for(var_00 = 0; var_00 < level.neutralzonebrushes.size; var_00++) {
-      if(level.neutralzonebrushes[var_00].script_label == "1") {
-        level.neutralzonebrushes[var_00] hide();
-        var_01 = spawn("script_model", (0, 0, 0));
-        var_01 setModel("mp_parkour_hardpoint_floor_01");
-        var_01.angles = (0, 0, 0);
-        var_01.script_label = "1";
-        level.neutralzonebrushes[var_00] = var_01;
+    for(var_0 = 0; var_0 < level.neutralzonebrushes.size; var_0++) {
+      if(level.neutralzonebrushes[var_0].script_label == "1") {
+        level.neutralzonebrushes[var_0] hide();
+        var_1 = spawn("script_model", (0, 0, 0));
+        var_1 setModel("mp_parkour_hardpoint_floor_01");
+        var_1.angles = (0, 0, 0);
+        var_1.script_label = "1";
+        level.neutralzonebrushes[var_0] = var_1;
       }
     }
 
-    for(var_00 = 0; var_00 < level.contestedzonebrushes.size; var_00++) {
-      if(level.contestedzonebrushes[var_00].script_label == "1") {
-        level.contestedzonebrushes[var_00] hide();
-        var_02 = spawn("script_model", (0, 0, 0));
-        var_02 setModel("mp_parkour_hardpoint_floor_01_contest");
-        var_02.angles = (0, 0, 0);
-        var_02.script_label = "1";
-        level.contestedzonebrushes[var_00] = var_02;
+    for(var_0 = 0; var_0 < level.contestedzonebrushes.size; var_0++) {
+      if(level.contestedzonebrushes[var_0].script_label == "1") {
+        level.contestedzonebrushes[var_0] hide();
+        var_2 = spawn("script_model", (0, 0, 0));
+        var_2 setModel("mp_parkour_hardpoint_floor_01_contest");
+        var_2.angles = (0, 0, 0);
+        var_2.script_label = "1";
+        level.contestedzonebrushes[var_0] = var_2;
       }
     }
 
-    for(var_00 = 0; var_00 < level.friendlyzonebrushes.size; var_00++) {
-      if(level.friendlyzonebrushes[var_00].script_label == "1") {
-        level.friendlyzonebrushes[var_00] hide();
-        var_03 = spawn("script_model", (0, 0, 0));
-        var_03 setModel("mp_parkour_hardpoint_floor_01_friend");
-        var_03.angles = (0, 0, 0);
-        var_03.script_label = "1";
-        level.friendlyzonebrushes[var_00] = var_03;
+    for(var_0 = 0; var_0 < level.friendlyzonebrushes.size; var_0++) {
+      if(level.friendlyzonebrushes[var_0].script_label == "1") {
+        level.friendlyzonebrushes[var_0] hide();
+        var_3 = spawn("script_model", (0, 0, 0));
+        var_3 setModel("mp_parkour_hardpoint_floor_01_friend");
+        var_3.angles = (0, 0, 0);
+        var_3.script_label = "1";
+        level.friendlyzonebrushes[var_0] = var_3;
       }
     }
 
-    for(var_00 = 0; var_00 < level.enemyzonebrushes.size; var_00++) {
-      if(level.enemyzonebrushes[var_00].script_label == "1") {
-        level.enemyzonebrushes[var_00] hide();
-        var_04 = spawn("script_model", (0, 0, 0));
-        var_04 setModel("mp_parkour_hardpoint_floor_01_enemy");
-        var_04.angles = (0, 0, 0);
-        var_04.script_label = "1";
-        level.enemyzonebrushes[var_00] = var_04;
+    for(var_0 = 0; var_0 < level.enemyzonebrushes.size; var_0++) {
+      if(level.enemyzonebrushes[var_0].script_label == "1") {
+        level.enemyzonebrushes[var_0] hide();
+        var_4 = spawn("script_model", (0, 0, 0));
+        var_4 setModel("mp_parkour_hardpoint_floor_01_enemy");
+        var_4.angles = (0, 0, 0);
+        var_4.script_label = "1";
+        level.enemyzonebrushes[var_0] = var_4;
       }
     }
   }
 }
 
 matchbrushestozones() {
-  for(var_00 = 0; var_00 < level.zones.size; var_00++) {
-    var_01 = level.zones[var_00];
-    var_01.gameobject.neutralbrush = level.neutralzonebrushes[var_00];
-    var_01.gameobject.enemybrush = level.enemyzonebrushes[var_00];
-    var_01.gameobject.contestedbrush = level.contestedzonebrushes[var_00];
-    var_01.gameobject.friendlybrush = level.friendlyzonebrushes[var_00];
+  for(var_0 = 0; var_0 < level.zones.size; var_0++) {
+    var_1 = level.zones[var_0];
+    var_1.gameobject.neutralbrush = level.neutralzonebrushes[var_0];
+    var_1.gameobject.enemybrush = level.enemyzonebrushes[var_0];
+    var_1.gameobject.contestedbrush = level.contestedzonebrushes[var_0];
+    var_1.gameobject.friendlybrush = level.friendlyzonebrushes[var_0];
   }
 }
 
 setupzonecallouts() {
-  var_00 = undefined;
-  var_01 = undefined;
-  var_02 = level.zone.gameobject.visuals[0];
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = level.zone.gameobject.visuals[0];
   if(level.mapname == "mp_afghan") {
-    if(var_02.script_label == "1") {
-      var_02.script_noteworthy = "crash_middle";
+    if(var_2.script_label == "1") {
+      var_2.script_noteworthy = "crash_middle";
     }
   }
 
-  foreach(var_04 in level.calloutglobals.areatriggers) {
-    var_00 = ispointinvolume(var_02.baseorigin, var_04);
-    var_01 = isDefined(var_02.script_noteworthy) && isDefined(var_04.script_noteworthy) && var_02.script_noteworthy == var_04.script_noteworthy;
-    if(var_00 || var_01) {
-      var_05 = level.calloutglobals.areaidmap[var_04.script_noteworthy];
-      foreach(var_07 in level.players) {
-        if(isDefined(var_05)) {
-          var_07 setclientomnvar("ui_hp_callout_id", var_05);
+  foreach(var_4 in level.calloutglobals.areatriggers) {
+    var_0 = ispointinvolume(var_2.baseorigin, var_4);
+    var_1 = isDefined(var_2.script_noteworthy) && isDefined(var_4.script_noteworthy) && var_2.script_noteworthy == var_4.script_noteworthy;
+    if(var_0 || var_1) {
+      var_5 = level.calloutglobals.areaidmap[var_4.script_noteworthy];
+      foreach(var_7 in level.players) {
+        if(isDefined(var_5)) {
+          var_7 setclientomnvar("ui_hp_callout_id", var_5);
         }
       }
 
@@ -699,53 +699,53 @@ setupzonecallouts() {
 }
 
 forcespawnplayers() {
-  var_00 = level.players;
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    var_02 = var_00[var_01];
-    if(!isDefined(var_02) || isalive(var_02)) {
+  var_0 = level.players;
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
+    if(!isDefined(var_2) || isalive(var_2)) {
       continue;
     }
 
-    var_02 notify("force_spawn");
+    var_2 notify("force_spawn");
     wait(0.1);
   }
 }
 
 getspawnpoint() {
-  var_00 = self.pers["team"];
+  var_0 = self.pers["team"];
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_" + var_00 + "_start");
-    var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var_01 = func_E172(level.zone.spawnpoints);
-    var_03 = func_E172(level.zone.fallbackspawnpoints);
-    var_04 = getkothzonedeadzonedist();
-    var_05 = [];
-    var_05["activeKOTHZoneNumber"] = level.zone getentitynumber();
-    var_05["maxSquaredDistToObjective"] = level.zone.furthestspawndistsq;
-    var_05["kothZoneDeadzoneDistSq"] = var_04 * var_04;
-    var_05["closestEnemyInfluenceDistSq"] = 12250000;
-    var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01, var_03, var_05);
+    var_1 = func_E172(level.zone.spawnpoints);
+    var_3 = func_E172(level.zone.fallbackspawnpoints);
+    var_4 = getkothzonedeadzonedist();
+    var_5 = [];
+    var_5["activeKOTHZoneNumber"] = level.zone getentitynumber();
+    var_5["maxSquaredDistToObjective"] = level.zone.furthestspawndistsq;
+    var_5["kothZoneDeadzoneDistSq"] = var_4 * var_4;
+    var_5["closestEnemyInfluenceDistSq"] = 12250000;
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(var_1, var_3, var_5);
   }
 
-  return var_02;
+  return var_2;
 }
 
 getkothzonedeadzonedist() {
   return 1000;
 }
 
-func_E172(param_00) {
-  var_01 = [];
-  if(isDefined(param_00)) {
-    foreach(var_03 in param_00) {
-      if(!ispointinvolume(var_03.origin, level.zone)) {
-        var_01[var_01.size] = var_03;
+func_E172(var_0) {
+  var_1 = [];
+  if(isDefined(var_0)) {
+    foreach(var_3 in var_0) {
+      if(!ispointinvolume(var_3.origin, level.zone)) {
+        var_1[var_1.size] = var_3;
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 onspawnplayer() {
@@ -753,11 +753,11 @@ onspawnplayer() {
   self.forcespawnnearteammates = undefined;
 }
 
-movezoneaftertime(param_00) {
+movezoneaftertime(var_0) {
   level endon("game_ended");
   level endon("zone_reset");
   level endon("dev_force_zone");
-  level.zonemovetime = param_00;
+  level.zonemovetime = var_0;
   level.zonedestroyedbytimer = 0;
   scripts\mp\gametypes\obj_zonecapture::zonetimerwait();
   level.zonedestroyedbytimer = 1;
@@ -765,12 +765,12 @@ movezoneaftertime(param_00) {
   level notify("zone_destroyed");
 }
 
-onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  if(!isplayer(param_01) || param_01.team == self.team) {
+onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isplayer(var_1) || var_1.team == self.team) {
     return;
   }
 
-  if(param_01 == self) {
+  if(var_1 == self) {
     return;
   }
 
@@ -783,14 +783,14 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
     return;
   }
 
-  if(isDefined(param_04) && scripts\mp\utility::iskillstreakweapon(param_04)) {
+  if(isDefined(var_4) && scripts\mp\utility::iskillstreakweapon(var_4)) {
     return;
   }
 
   var_0B = self;
   var_0C = 0;
-  var_0D = param_01.team;
-  if(level.zonecapturetime > 0 && param_01 istouching(level.zone.gameobject.trigger)) {
+  var_0D = var_1.team;
+  if(level.zonecapturetime > 0 && var_1 istouching(level.zone.gameobject.trigger)) {
     if(var_0A != var_0D) {
       var_0C = 1;
     }
@@ -798,61 +798,61 @@ onplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param
 
   if(var_0D != var_0A) {
     if(var_0B istouching(level.zone.gameobject.trigger)) {
-      param_01.lastkilltime = gettime();
+      var_1.lastkilltime = gettime();
       if(var_0C) {
-        param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
+        var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
       }
 
-      param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-      thread scripts\mp\matchdata::loginitialstats(param_09, "defending");
+      var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
+      thread scripts\mp\matchdata::loginitialstats(var_9, "defending");
       return;
     }
 
     return;
   }
 
-  if(param_01 istouching(level.zone.gameobject.trigger)) {
+  if(var_1 istouching(level.zone.gameobject.trigger)) {
     if(var_0C) {
-      param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
+      var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
     }
 
-    param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
-    param_01 scripts\mp\utility::incperstat("defends", 1);
-    param_01 scripts\mp\persistence::statsetchild("round", "defends", param_01.pers["defends"]);
-    param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
+    var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+    var_1 scripts\mp\utility::incperstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
+    var_1 scripts\mp\utility::setextrascore1(var_1.pers["defends"]);
   }
 }
 
-give_capture_credit(param_00, param_01, param_02, param_03) {
+give_capture_credit(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level.lastcaptime = gettime();
-  var_04 = level.zone.gameobject scripts\mp\gameobjects::getearliestclaimplayer();
-  if(isDefined(var_04.triggerportableradarping)) {
-    var_04 = var_04.triggerportableradarping;
+  var_4 = level.zone.gameobject scripts\mp\gameobjects::getearliestclaimplayer();
+  if(isDefined(var_4.triggerportableradarping)) {
+    var_4 = var_4.triggerportableradarping;
   }
 
-  if(isplayer(var_04)) {
-    if(!isscoreboosting(var_04)) {
-      var_04 thread scripts\mp\matchdata::loggameevent("capture", var_04.origin);
-      var_04 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
+  if(isplayer(var_4)) {
+    if(!isscoreboosting(var_4)) {
+      var_4 thread scripts\mp\matchdata::loggameevent("capture", var_4.origin);
+      var_4 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
       if(isDefined(level.zone.gameobject.lastactivatetime) && gettime() - level.zone.gameobject.lastactivatetime <= 2100) {
-        var_04 thread scripts\mp\awards::givemidmatchaward("mode_hp_quick_cap");
+        var_4 thread scripts\mp\awards::givemidmatchaward("mode_hp_quick_cap");
       }
 
-      if(var_04.lastkilltime + 500 > gettime()) {} else {
-        var_04 scripts\mp\gametypes\obj_zonecapture::setcrankedtimerzonecap(var_04);
+      if(var_4.lastkilltime + 500 > gettime()) {} else {
+        var_4 scripts\mp\gametypes\obj_zonecapture::setcrankedtimerzonecap(var_4);
       }
     }
   }
 
-  var_05 = getarraykeys(param_00);
-  for(var_06 = 0; var_06 < var_05.size; var_06++) {
-    var_07 = param_00[var_05[var_06]].player;
-    var_07 updatecapsperminute(param_03);
-    if(!isscoreboosting(var_07)) {
-      var_07 scripts\mp\utility::incperstat("captures", 1);
-      var_07 scripts\mp\persistence::statsetchild("round", "captures", var_07.pers["captures"]);
-    } else {}
+  var_5 = getarraykeys(var_0);
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    var_7 = var_0[var_5[var_6]].player;
+    var_7 updatecapsperminute(var_3);
+    if(!isscoreboosting(var_7)) {
+      var_7 scripts\mp\utility::incperstat("captures", 1);
+      var_7 scripts\mp\persistence::statsetchild("round", "captures", var_7.pers["captures"]);
+    }
 
     wait(0.05);
   }
@@ -864,83 +864,83 @@ awardcapturepoints() {
   level endon("zone_moved");
   level notify("awardCapturePointsRunning");
   level endon("awardCapturePointsRunning");
-  var_00 = 1;
-  var_01 = 1;
+  var_0 = 1;
+  var_1 = 1;
   while(!level.gameended) {
-    var_02 = 0;
-    while(var_02 < var_00) {
+    var_2 = 0;
+    while(var_2 < var_0) {
       wait(0.05);
       scripts\mp\hostmigration::waittillhostmigrationdone();
-      var_02 = var_02 + 0.05;
+      var_2 = var_2 + 0.05;
       if(level.zone.gameobject.stalemate) {
-        var_02 = 0;
+        var_2 = 0;
       }
     }
 
-    var_03 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
-    if(var_03 == "neutral") {
+    var_3 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
+    if(var_3 == "neutral") {
       continue;
     }
 
     if(level.usehqrules) {
       if(level.zoneadditivescoring) {
-        var_01 = level.zone.gameobject.touchlist[var_03].size;
+        var_1 = level.zone.gameobject.touchlist[var_3].size;
       }
 
-      scripts\mp\gamescore::giveteamscoreforobjective(var_03, var_01, 0);
+      scripts\mp\gamescore::giveteamscoreforobjective(var_3, var_1, 0);
       continue;
     }
 
     if(!level.zone.gameobject.stalemate && !level.gameended) {
       if(level.zoneadditivescoring) {
-        var_01 = level.zone.gameobject.touchlist[var_03].size;
+        var_1 = level.zone.gameobject.touchlist[var_3].size;
       }
 
-      scripts\mp\gamescore::giveteamscoreforobjective(var_03, var_01, 0);
-      foreach(var_05 in level.zone.gameobject.touchlist[var_03]) {
-        var_05.player scripts\mp\utility::incperstat("objTime", 1);
-        if(isDefined(var_05.player.timebyrotation[level.kothhillrotation])) {
-          var_05.player.timebyrotation[level.kothhillrotation]++;
+      scripts\mp\gamescore::giveteamscoreforobjective(var_3, var_1, 0);
+      foreach(var_5 in level.zone.gameobject.touchlist[var_3]) {
+        var_5.player scripts\mp\utility::incperstat("objTime", 1);
+        if(isDefined(var_5.player.timebyrotation[level.kothhillrotation])) {
+          var_5.player.timebyrotation[level.kothhillrotation]++;
         } else {
-          var_05.player.timebyrotation[level.kothhillrotation] = 1;
+          var_5.player.timebyrotation[level.kothhillrotation] = 1;
         }
 
-        var_05.player scripts\mp\persistence::statsetchild("round", "objTime", var_05.player.pers["objTime"]);
-        var_05.player scripts\mp\utility::setextrascore0(var_05.player.pers["objTime"]);
-        var_05.player scripts\mp\gamescore::giveplayerscore("koth_in_obj", 10);
+        var_5.player scripts\mp\persistence::statsetchild("round", "objTime", var_5.player.pers["objTime"]);
+        var_5.player scripts\mp\utility::setextrascore0(var_5.player.pers["objTime"]);
+        var_5.player scripts\mp\gamescore::giveplayerscore("koth_in_obj", 10);
       }
     }
   }
 }
 
-updatecapsperminute(param_00) {
+updatecapsperminute(var_0) {
   if(!isDefined(self.capsperminute)) {
     self.numcaps = 0;
     self.capsperminute = 0;
   }
 
-  if(!isDefined(param_00) || param_00 == "neutral") {
+  if(!isDefined(var_0) || var_0 == "neutral") {
     return;
   }
 
   self.numcaps++;
-  var_01 = scripts\mp\utility::gettimepassed() / -5536;
+  var_1 = scripts\mp\utility::gettimepassed() / -5536;
   if(isplayer(self) && isDefined(self.timeplayed["total"])) {
-    var_01 = self.timeplayed["total"] / 60;
+    var_1 = self.timeplayed["total"] / 60;
   }
 
-  self.capsperminute = self.numcaps / var_01;
+  self.capsperminute = self.numcaps / var_1;
   if(self.capsperminute > self.numcaps) {
     self.capsperminute = self.numcaps;
   }
 }
 
-isscoreboosting(param_00) {
+isscoreboosting(var_0) {
   if(!level.rankedmatch) {
     return 0;
   }
 
-  if(param_00.capsperminute > 6) {
+  if(var_0.capsperminute > 6) {
     return 1;
   }
 
@@ -949,64 +949,64 @@ isscoreboosting(param_00) {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00._hardpointeffect = [];
-    var_00.numcaps = 0;
-    var_00.capsperminute = 0;
-    var_00.timebyrotation = [];
-    var_00 scripts\mp\utility::setextrascore0(0);
-    if(isDefined(var_00.pers["objTime"])) {
-      var_00 scripts\mp\utility::setextrascore0(var_00.pers["objTime"]);
+    level waittill("connected", var_0);
+    var_0._hardpointeffect = [];
+    var_0.numcaps = 0;
+    var_0.capsperminute = 0;
+    var_0.timebyrotation = [];
+    var_0 scripts\mp\utility::setextrascore0(0);
+    if(isDefined(var_0.pers["objTime"])) {
+      var_0 scripts\mp\utility::setextrascore0(var_0.pers["objTime"]);
     }
 
-    var_00 scripts\mp\utility::setextrascore1(0);
-    if(isDefined(var_00.pers["defends"])) {
-      var_00 scripts\mp\utility::setextrascore1(var_00.pers["defends"]);
+    var_0 scripts\mp\utility::setextrascore1(0);
+    if(isDefined(var_0.pers["defends"])) {
+      var_0 scripts\mp\utility::setextrascore1(var_0.pers["defends"]);
     }
 
-    thread onplayerspawned(var_00);
-    foreach(var_02 in level.zones) {
+    thread onplayerspawned(var_0);
+    foreach(var_2 in level.zones) {
       if(level.usehpzonebrushes) {
-        var_02.gameobject scripts\mp\gametypes\obj_zonecapture::hideplayerspecificbrushes(var_00);
+        var_2.gameobject scripts\mp\gametypes\obj_zonecapture::hideplayerspecificbrushes(var_0);
       }
     }
 
-    var_00 thread refreshfreecamhardpointfx();
+    var_0 thread refreshfreecamhardpointfx();
   }
 }
 
-onplayerspawned(param_00) {
+onplayerspawned(var_0) {
   for(;;) {
-    param_00 waittill("spawned");
-    foreach(var_02 in level.zones) {
-      if(isDefined(var_02.gameobject.var_19) && var_02.gameobject.var_19) {
-        if(var_02.gameobject.ownerteam == "neutral") {
-          var_02.gameobject scripts\mp\gametypes\obj_zonecapture::playhardpointneutralfx();
+    var_0 waittill("spawned");
+    foreach(var_2 in level.zones) {
+      if(isDefined(var_2.gameobject.var_19) && var_2.gameobject.var_19) {
+        if(var_2.gameobject.ownerteam == "neutral") {
+          var_2.gameobject scripts\mp\gametypes\obj_zonecapture::playhardpointneutralfx();
           continue;
         }
 
-        var_02.gameobject scripts\mp\gametypes\obj_zonecapture::showcapturedhardpointeffecttoplayer(var_02.gameobject.ownerteam, param_00);
+        var_2.gameobject scripts\mp\gametypes\obj_zonecapture::showcapturedhardpointeffecttoplayer(var_2.gameobject.ownerteam, var_0);
       }
     }
   }
 }
 
-updateservericons(param_00, param_01) {
-  var_02 = -1;
-  if(param_01) {
-    var_02 = -2;
+updateservericons(var_0, var_1) {
+  var_2 = -1;
+  if(var_1) {
+    var_2 = -2;
   } else {
-    switch (param_00) {
+    switch (var_0) {
       case "allies":
       case "axis":
-        var_03 = thread getownerteamplayer(param_00);
-        if(isDefined(var_03)) {
-          var_02 = var_03 getentitynumber();
+        var_3 = thread getownerteamplayer(var_0);
+        if(isDefined(var_3)) {
+          var_2 = var_3 getentitynumber();
         }
         break;
 
       case "zone_activation_delay":
-        var_02 = -3;
+        var_2 = -3;
         break;
 
       case "zone_shift":
@@ -1015,30 +1015,30 @@ updateservericons(param_00, param_01) {
     }
   }
 
-  setomnvar("ui_hardpoint", var_02);
+  setomnvar("ui_hardpoint", var_2);
 }
 
-getownerteamplayer(param_00) {
-  var_01 = undefined;
-  foreach(var_03 in level.players) {
-    if(var_03.team == param_00) {
-      var_01 = var_03;
+getownerteamplayer(var_0) {
+  var_1 = undefined;
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_0) {
+      var_1 = var_3;
       break;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 refreshfreecamhardpointfx() {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
-    self waittill("luinotifyserver", var_00, var_01);
-    if(var_00 == "mlg_view_change") {
-      foreach(var_03 in level.zones) {
-        if(var_03.gameobject.ownerteam != "neutral") {
-          var_03.gameobject scripts\mp\gametypes\obj_zonecapture::showcapturedhardpointeffecttoplayer(var_03.gameobject.ownerteam, self);
+    self waittill("luinotifyserver", var_0, var_1);
+    if(var_0 == "mlg_view_change") {
+      foreach(var_3 in level.zones) {
+        if(var_3.gameobject.ownerteam != "neutral") {
+          var_3.gameobject scripts\mp\gametypes\obj_zonecapture::showcapturedhardpointeffecttoplayer(var_3.gameobject.ownerteam, self);
         }
       }
     }
@@ -1050,9 +1050,9 @@ getrespawndelay() {
     return undefined;
   }
 
-  var_00 = level.zone.gameobject.ownerteam;
-  if(isDefined(var_00)) {
-    if(self.pers["team"] == var_00) {
+  var_0 = level.zone.gameobject.ownerteam;
+  if(isDefined(var_0)) {
+    if(self.pers["team"] == var_0) {
       if(!level.spawndelay) {
         return undefined;
       }
@@ -1062,8 +1062,8 @@ getrespawndelay() {
   }
 }
 
-postshipmodifiedzones(param_00) {
-  if(level.mapname == "mp_fallen" && param_00 == "5") {
+postshipmodifiedzones(var_0) {
+  if(level.mapname == "mp_fallen" && var_0 == "5") {
     return 1;
   }
 
@@ -1072,15 +1072,15 @@ postshipmodifiedzones(param_00) {
 
 writeplayerrotationscoretomatchdataongameend() {
   level waittill("game_ended");
-  foreach(var_01 in level.players) {
-    if(isDefined(var_01)) {
-      foreach(var_04, var_03 in var_01.timebyrotation) {
-        if(var_04 < 14) {
-          if(var_03 > 255) {
-            var_03 = 255;
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1)) {
+      foreach(var_4, var_3 in var_1.timebyrotation) {
+        if(var_4 < 14) {
+          if(var_3 > 255) {
+            var_3 = 255;
           }
 
-          setmatchdata("players", var_01.clientid, "kothRotationScores", var_04, var_03);
+          setmatchdata("players", var_1.clientid, "kothRotationScores", var_4, var_3);
         }
       }
     }

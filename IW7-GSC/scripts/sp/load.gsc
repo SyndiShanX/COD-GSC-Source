@@ -102,11 +102,11 @@ main() {
 
   scripts\sp\load_code::func_E810();
   setsettletime(scripts\sp\utility::func_7F6E(level.script));
-  var_00 = scripts\sp\utility::func_7E2C(level.script);
-  setomnvar("ui_client_settle_time", var_00);
-  var_01 = scripts\sp\utility::func_7F70(level.script);
-  if(isDefined(var_01) && var_01 != "") {
-    setomnvar("ui_transition_movie", var_01);
+  var_0 = scripts\sp\utility::func_7E2C(level.script);
+  setomnvar("ui_client_settle_time", var_0);
+  var_1 = scripts\sp\utility::func_7F70(level.script);
+  if(isDefined(var_1) && var_1 != "") {
+    setomnvar("ui_transition_movie", var_1);
   } else {
     setomnvar("ui_transition_movie", "none");
   }

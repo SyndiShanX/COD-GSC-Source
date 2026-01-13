@@ -108,30 +108,30 @@ func_12D2A() {
   scripts\sp\utility::func_1143E();
 }
 
-func_11314(param_00, param_01, param_02) {
+func_11314(var_0, var_1, var_2) {
   level.player endon("death");
-  level.player endon(param_02);
-  var_03 = level.player getweaponslistoffhands();
-  if(scripts\engine\utility::array_contains(var_03, param_00)) {
-    level.player takeweapon(param_00);
-    level.player giveweapon(param_01);
+  level.player endon(var_2);
+  var_3 = level.player getweaponslistoffhands();
+  if(scripts\engine\utility::array_contains(var_3, var_0)) {
+    level.player takeweapon(var_0);
+    level.player giveweapon(var_1);
   }
 
   for(;;) {
     level.player waittill("equipment_change");
-    var_03 = level.player getweaponslistoffhands();
-    if(scripts\engine\utility::array_contains(var_03, param_00)) {
-      level.player takeweapon(param_00);
-      level.player giveweapon(param_01);
+    var_3 = level.player getweaponslistoffhands();
+    if(scripts\engine\utility::array_contains(var_3, var_0)) {
+      level.player takeweapon(var_0);
+      level.player giveweapon(var_1);
     }
   }
 }
 
-func_E0A3(param_00, param_01) {
-  var_02 = level.player getweaponslistoffhands();
-  if(scripts\engine\utility::array_contains(var_02, param_01)) {
-    level.player takeweapon(param_01);
-    level.player giveweapon(param_00);
+func_E0A3(var_0, var_1) {
+  var_2 = level.player getweaponslistoffhands();
+  if(scripts\engine\utility::array_contains(var_2, var_1)) {
+    level.player takeweapon(var_1);
+    level.player giveweapon(var_0);
   }
 }
 

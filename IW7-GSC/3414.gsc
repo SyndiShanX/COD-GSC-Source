@@ -14,19 +14,19 @@ init() {
   level.maxdeathlogs = 50;
 }
 
-canlogclient(param_00) {
-  if(isagent(param_00)) {
+canlogclient(var_0) {
+  if(isagent(var_0)) {
     return 0;
   }
 
-  return param_00.clientid < level.maxlogclients;
+  return var_0.clientid < level.maxlogclients;
 }
 
-canlogdeath(param_00) {
-  return param_00 < level.maxdeathlogs;
+canlogdeath(var_0) {
+  return var_0 < level.maxdeathlogs;
 }
 
 logplayerdeath() {
-  var_00 = getclientmatchdata("deathCount");
-  if(!canlogclient(self) || !canlogdeath(var_00)) {}
+  var_0 = getclientmatchdata("deathCount");
+  if(!canlogclient(self) || !canlogdeath(var_0)) {}
 }

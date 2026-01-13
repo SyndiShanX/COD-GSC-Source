@@ -26,26 +26,26 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player128x128x128", "targetname");
-  var_01 = spawn("script_model", (1320, 2152, 736));
-  var_01.angles = (330, 55, 2.5);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player128x128x128", "targetname");
-  var_03 = spawn("script_model", (64, 876, 812));
-  var_03.angles = (0, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player512x512x8", "targetname");
-  var_05 = spawn("script_model", (-1217, -1721, 176));
-  var_05.angles = (82.1, 186.7, -3.5);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("player64x64x128", "targetname");
-  var_07 = spawn("script_model", (1800, 288, 984));
-  var_07.angles = (0, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player64x64x256", "targetname");
-  var_09 = spawn("script_model", (-396, -2598, 658));
-  var_09.angles = (20, 50, -1.3);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player128x128x128", "targetname");
+  var_1 = spawn("script_model", (1320, 2152, 736));
+  var_1.angles = (330, 55, 2.5);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player128x128x128", "targetname");
+  var_3 = spawn("script_model", (64, 876, 812));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player512x512x8", "targetname");
+  var_5 = spawn("script_model", (-1217, -1721, 176));
+  var_5.angles = (82.1, 186.7, -3.5);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("player64x64x128", "targetname");
+  var_7 = spawn("script_model", (1800, 288, 984));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player64x64x256", "targetname");
+  var_9 = spawn("script_model", (-396, -2598, 658));
+  var_9.angles = (20, 50, -1.3);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player128x128x256", "targetname");
   var_0B = spawn("script_model", (-364, -1934, 674));
   var_0B.angles = (2.1, 40, -24);
@@ -84,7 +84,7 @@ fix_collision() {
   var_19 clonebrushmodeltoscriptmodel(var_18);
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }

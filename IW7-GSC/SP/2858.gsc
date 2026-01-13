@@ -16,15 +16,15 @@ func_B9D3() {
   thread func_61F4();
 }
 
-func_6240(param_00) {
-  level.player.var_110C0 = param_00;
+func_6240(var_0) {
+  level.player.var_110C0 = var_0;
 }
 
 func_B998() {
   self endon("death");
   for(;;) {
-    self waittill("primary_equipment_change", var_00);
-    switch (var_00) {
+    self waittill("primary_equipment_change", var_0);
+    switch (var_0) {
       case "emp":
         level.player thread lib_0E25::func_618D();
         break;
@@ -42,8 +42,8 @@ func_B998() {
 func_B9A1() {
   self endon("death");
   for(;;) {
-    self waittill("secondary_equipment_change", var_00);
-    switch (var_00) {
+    self waittill("secondary_equipment_change", var_0);
+    switch (var_0) {
       case "offhandshield_up1":
       case "offhandshield":
         thread lib_0E2B::func_C334();
@@ -66,27 +66,27 @@ func_B9A1() {
 
 func_6697() {
   self endon("death");
-  var_00 = 0;
-  var_01 = 0;
+  var_0 = 0;
+  var_1 = 0;
   for(;;) {
-    if(self fragbuttonpressed() && !var_00) {
+    if(self fragbuttonpressed() && !var_0) {
       scripts\engine\utility::flag_set("primary_equipment_input_down");
       level.player notify("primary_equipment_pressed");
-      var_00 = 1;
-    } else if(!self fragbuttonpressed() && var_00) {
+      var_0 = 1;
+    } else if(!self fragbuttonpressed() && var_0) {
       scripts\engine\utility::flag_clear("primary_equipment_input_down");
       level.player notify("primary_equipment_released");
-      var_00 = 0;
+      var_0 = 0;
     }
 
-    if(self secondaryoffhandbuttonpressed() && !var_01) {
+    if(self secondaryoffhandbuttonpressed() && !var_1) {
       scripts\engine\utility::flag_set("secondary_equipment_input_down");
       level.player notify("secondary_equipment_pressed");
-      var_01 = 1;
-    } else if(!self secondaryoffhandbuttonpressed() && var_01) {
+      var_1 = 1;
+    } else if(!self secondaryoffhandbuttonpressed() && var_1) {
       scripts\engine\utility::flag_clear("secondary_equipment_input_down");
       level.player notify("secondary_equipment_released");
-      var_01 = 0;
+      var_1 = 0;
     }
 
     wait(0.05);
@@ -111,19 +111,19 @@ func_D8CF() {
 
   thread func_D8CE();
   for(;;) {
-    var_00 = scripts\sp\utility::func_7BD6();
-    if(!isDefined(var_00)) {
+    var_0 = scripts\sp\utility::func_7BD6();
+    if(!isDefined(var_0)) {
       level.player waittill("primary_equipment_change");
       continue;
     }
 
-    var_01 = scripts\sp\utility::func_7BD7();
+    var_1 = scripts\sp\utility::func_7BD7();
     self waittill("offhand_fired");
-    if(!isDefined(scripts\sp\utility::func_7BD6()) || var_00 != scripts\sp\utility::func_7BD6()) {
+    if(!isDefined(scripts\sp\utility::func_7BD6()) || var_0 != scripts\sp\utility::func_7BD6()) {
       continue;
     }
 
-    if(var_01 == scripts\sp\utility::func_7BD7()) {
+    if(var_1 == scripts\sp\utility::func_7BD7()) {
       continue;
     }
 
@@ -139,20 +139,20 @@ func_D8CE() {
   self endon("death");
   self endon("disable_equipment_autoswitch");
   for(;;) {
-    var_00 = scripts\sp\utility::func_7BD6();
-    if(!isDefined(var_00)) {
+    var_0 = scripts\sp\utility::func_7BD6();
+    if(!isDefined(var_0)) {
       level.player waittill("primary_equipment_change");
       continue;
     }
 
-    var_01 = scripts\sp\utility::func_7BD7();
-    if(var_01 != 0) {
+    var_1 = scripts\sp\utility::func_7BD7();
+    if(var_1 != 0) {
       level.player scripts\engine\utility::waittill_any_3("primary_equipment_change", "offhand_fired");
       continue;
     }
 
     scripts\sp\utility::func_13656();
-    if(!isDefined(scripts\sp\utility::func_7BD6()) || var_00 != scripts\sp\utility::func_7BD6()) {
+    if(!isDefined(scripts\sp\utility::func_7BD6()) || var_0 != scripts\sp\utility::func_7BD6()) {
       continue;
     }
 
@@ -164,7 +164,7 @@ func_D8CE() {
       scripts\engine\utility::flag_waitopen("primary_equipment_in_use");
     }
 
-    if(var_00 != scripts\sp\utility::func_7BD6()) {
+    if(var_0 != scripts\sp\utility::func_7BD6()) {
       continue;
     }
 
@@ -183,23 +183,23 @@ func_F0B5() {
 
   thread func_F0B4();
   for(;;) {
-    var_00 = scripts\sp\utility::func_7C3D();
-    if(!isDefined(var_00)) {
+    var_0 = scripts\sp\utility::func_7C3D();
+    if(!isDefined(var_0)) {
       level.player waittill("secondary_equipment_change");
       continue;
     }
 
-    var_01 = scripts\sp\utility::func_7C3E();
-    var_02 = scripts\engine\utility::waittill_any_return("offhand_fired", "secondary_equipment_change");
-    if(var_02 == "secondary_equipment_change") {
+    var_1 = scripts\sp\utility::func_7C3E();
+    var_2 = scripts\engine\utility::waittill_any_return("offhand_fired", "secondary_equipment_change");
+    if(var_2 == "secondary_equipment_change") {
       continue;
     }
 
-    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_00 != scripts\sp\utility::func_7C3D()) {
+    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_0 != scripts\sp\utility::func_7C3D()) {
       continue;
     }
 
-    if(var_01 == scripts\sp\utility::func_7C3E()) {
+    if(var_1 == scripts\sp\utility::func_7C3E()) {
       continue;
     }
 
@@ -211,7 +211,7 @@ func_F0B5() {
       wait(0.05);
     }
 
-    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_00 != scripts\sp\utility::func_7C3D()) {
+    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_0 != scripts\sp\utility::func_7C3D()) {
       continue;
     }
 
@@ -227,20 +227,20 @@ func_F0B4() {
   self endon("death");
   self endon("disable_equipment_autoswitch");
   for(;;) {
-    var_00 = scripts\sp\utility::func_7C3D();
-    if(!isDefined(var_00)) {
+    var_0 = scripts\sp\utility::func_7C3D();
+    if(!isDefined(var_0)) {
       level.player waittill("secondary_equipment_change");
       continue;
     }
 
-    var_01 = scripts\sp\utility::func_7C3E();
-    if(var_01 != 0) {
+    var_1 = scripts\sp\utility::func_7C3E();
+    if(var_1 != 0) {
       level.player scripts\engine\utility::waittill_any_3("secondary_equipment_change", "offhand_fired");
       continue;
     }
 
     scripts\sp\utility::func_13661();
-    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_00 != scripts\sp\utility::func_7C3D()) {
+    if(!isDefined(scripts\sp\utility::func_7C3D()) || var_0 != scripts\sp\utility::func_7C3D()) {
       continue;
     }
 
@@ -252,7 +252,7 @@ func_F0B4() {
       scripts\engine\utility::flag_waitopen("secondary_equipment_in_use");
     }
 
-    if(var_00 != scripts\sp\utility::func_7C3D()) {
+    if(var_0 != scripts\sp\utility::func_7C3D()) {
       continue;
     }
 
@@ -271,33 +271,33 @@ func_66A1() {
 func_66A2() {
   self endon("death");
   for(;;) {
-    var_00 = scripts\engine\utility::waittill_any_return("secondary_equipment_switch_input", "primary_equipment_switch_input");
-    if(var_00 == "primary_equipment_switch_input" && level.player.var_110BD != "" && !scripts\sp\utility::func_9C8E() && !scripts\sp\utility::func_9CB6()) {
+    var_0 = scripts\engine\utility::waittill_any_return("secondary_equipment_switch_input", "primary_equipment_switch_input");
+    if(var_0 == "primary_equipment_switch_input" && level.player.var_110BD != "" && !scripts\sp\utility::func_9C8E() && !scripts\sp\utility::func_9CB6()) {
       func_1418();
       continue;
     }
 
-    if(var_00 == "secondary_equipment_switch_input" && level.player.var_110BA != "" && !scripts\sp\utility::func_9C8E() && !scripts\sp\utility::func_9CB6()) {
+    if(var_0 == "secondary_equipment_switch_input" && level.player.var_110BA != "" && !scripts\sp\utility::func_9C8E() && !scripts\sp\utility::func_9CB6()) {
       func_1419();
     }
   }
 }
 
 func_1418() {
-  var_00 = level.player.var_110BD;
-  self giveweapon(var_00);
-  self setweaponammoclip(var_00, level.player.var_110BE);
+  var_0 = level.player.var_110BD;
+  self giveweapon(var_0);
+  self setweaponammoclip(var_0, level.player.var_110BE);
   self playSound("plr_switch_equipment");
   level.player notify("primary_equipment_switch");
 }
 
 func_1419() {
-  var_00 = level.player.var_110BA;
-  self giveweapon(var_00);
-  self setweaponammoclip(var_00, level.player.var_110BB);
+  var_0 = level.player.var_110BA;
+  self giveweapon(var_0);
+  self setweaponammoclip(var_0, level.player.var_110BB);
   self playSound("plr_switch_equipment");
   level.player notify("secondary_equipment_switch");
-  if(var_00 == "offhandshield" && scripts\sp\utility::func_9CB5()) {
+  if(var_0 == "offhandshield" && scripts\sp\utility::func_9CB5()) {
     scripts\engine\utility::allow_offhand_secondary_weapons(0);
     scripts\sp\utility::func_13662();
     scripts\engine\utility::allow_offhand_secondary_weapons(1);
@@ -331,35 +331,35 @@ func_11429() {
     }
   }
 
-  var_00 = level.player getweaponslistoffhands();
-  var_01 = undefined;
-  var_02 = undefined;
-  for(var_03 = 0; var_03 < var_00.size; var_03++) {
+  var_0 = level.player getweaponslistoffhands();
+  var_1 = undefined;
+  var_2 = undefined;
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(scripts\sp\utility::func_93A6() && scripts\sp\utility::func_93AC()) {
-      if(var_00[var_03] == "nanoshot" || var_00[var_03] == "helmet") {
+      if(var_0[var_3] == "nanoshot" || var_0[var_3] == "helmet") {
         continue;
       }
     }
 
-    if(lib_0B29::func_12F5(var_00[var_03])) {
-      var_01 = var_00[var_03];
+    if(lib_0B29::func_12F5(var_0[var_3])) {
+      var_1 = var_0[var_3];
     }
 
-    if(lib_0B29::func_12F1(var_00[var_03])) {
-      var_02 = var_00[var_03];
+    if(lib_0B29::func_12F1(var_0[var_3])) {
+      var_2 = var_0[var_3];
     }
   }
 
-  if(isDefined(var_01)) {
-    level.player.var_C38D = var_01;
-    level.player.var_C38E = level.player getrunningforwardpainanim(var_01);
-    level.player takeweapon(var_01);
+  if(isDefined(var_1)) {
+    level.player.var_C38D = var_1;
+    level.player.var_C38E = level.player getrunningforwardpainanim(var_1);
+    level.player takeweapon(var_1);
   }
 
-  if(isDefined(var_02)) {
-    level.player.var_C386 = var_02;
-    level.player.var_C387 = level.player getrunningforwardpainanim(var_02);
-    level.player takeweapon(var_02);
+  if(isDefined(var_2)) {
+    level.player.var_C386 = var_2;
+    level.player.var_C387 = level.player getrunningforwardpainanim(var_2);
+    level.player takeweapon(var_2);
   }
 }
 

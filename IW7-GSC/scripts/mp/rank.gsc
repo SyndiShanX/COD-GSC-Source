@@ -6,186 +6,186 @@
 
 init() {
   level.scoreinfo = [];
-  var_00 = getdvarint("online_mp_xpscale");
-  if(var_00 > 4 || var_00 < 0) {
+  var_0 = getdvarint("online_mp_xpscale");
+  if(var_0 > 4 || var_0 < 0) {
     exitlevel(0);
   }
 
-  addglobalrankxpmultiplier(var_00, "online_mp_xpscale");
+  addglobalrankxpmultiplier(var_0, "online_mp_xpscale");
   level.ranktable = [];
   level.weaponranktable = [];
   level.maxrank = int(tablelookup("mp\rankTable.csv", 0, "maxrank", 1));
-  for(var_01 = 0; var_01 <= level.maxrank; var_01++) {
-    level.ranktable[var_01]["minXP"] = tablelookup("mp\rankTable.csv", 0, var_01, 2);
-    level.ranktable[var_01]["xpToNext"] = tablelookup("mp\rankTable.csv", 0, var_01, 3);
-    level.ranktable[var_01]["maxXP"] = tablelookup("mp\rankTable.csv", 0, var_01, 7);
-    level.ranktable[var_01]["splash"] = tablelookup("mp\rankTable.csv", 0, var_01, 15);
+  for(var_1 = 0; var_1 <= level.maxrank; var_1++) {
+    level.ranktable[var_1]["minXP"] = tablelookup("mp\rankTable.csv", 0, var_1, 2);
+    level.ranktable[var_1]["xpToNext"] = tablelookup("mp\rankTable.csv", 0, var_1, 3);
+    level.ranktable[var_1]["maxXP"] = tablelookup("mp\rankTable.csv", 0, var_1, 7);
+    level.ranktable[var_1]["splash"] = tablelookup("mp\rankTable.csv", 0, var_1, 15);
   }
 
   scripts\mp\weaponrank::init();
   scripts\mp\missions::func_31D7();
   level.prestigeextras = [];
-  var_02 = 0;
+  var_2 = 0;
   for(;;) {
-    var_03 = tablelookupbyrow("mp\unlocks\prestigeExtrasUnlocks.csv", var_02, 0);
-    if(!isDefined(var_03) || var_03 == "") {
+    var_3 = tablelookupbyrow("mp\unlocks\prestigeExtrasUnlocks.csv", var_2, 0);
+    if(!isDefined(var_3) || var_3 == "") {
       break;
     }
 
-    level.prestigeextras[var_03] = 1;
-    var_02++;
+    level.prestigeextras[var_3] = 1;
+    var_2++;
   }
 
   level thread onplayerconnect();
 }
 
-isregisteredevent(param_00) {
-  if(isDefined(level.scoreinfo[param_00])) {
+isregisteredevent(var_0) {
+  if(isDefined(level.scoreinfo[var_0])) {
     return 1;
   }
 
   return 0;
 }
 
-registerscoreinfo(param_00, param_01, param_02) {
-  level.scoreinfo[param_00][param_01] = param_02;
-  if(param_00 == "kill" && param_01 == "value") {
-    setomnvar("ui_game_type_kill_value", int(param_02));
+registerscoreinfo(var_0, var_1, var_2) {
+  level.scoreinfo[var_0][var_1] = var_2;
+  if(var_0 == "kill" && var_1 == "value") {
+    setomnvar("ui_game_type_kill_value", int(var_2));
   }
 }
 
-getscoreinfovalue(param_00) {
-  var_01 = "scr_" + level.gametype + "_score_" + param_00;
-  if(getdvar(var_01) != "") {
-    return getdvarint(var_01);
+getscoreinfovalue(var_0) {
+  var_1 = "scr_" + level.gametype + "_score_" + var_0;
+  if(getdvar(var_1) != "") {
+    return getdvarint(var_1);
   }
 
-  return level.scoreinfo[param_00]["value"];
+  return level.scoreinfo[var_0]["value"];
 }
 
-getscoreinfocategory(param_00, param_01) {
-  switch (param_01) {
+getscoreinfocategory(var_0, var_1) {
+  switch (var_1) {
     case "value":
-      var_02 = "scr_" + level.gametype + "_score_" + param_00;
-      if(getdvar(var_02) != "") {
-        return getdvarint(var_02);
+      var_2 = "scr_" + level.gametype + "_score_" + var_0;
+      if(getdvar(var_2) != "") {
+        return getdvarint(var_2);
       } else {
-        return level.scoreinfo[param_00]["value"];
+        return level.scoreinfo[var_0]["value"];
       }
 
       break;
 
     default:
-      return level.scoreinfo[param_00][param_01];
+      return level.scoreinfo[var_0][var_1];
   }
 }
 
-getrankinfominxp(param_00) {
-  return int(level.ranktable[param_00]["minXP"]);
+getrankinfominxp(var_0) {
+  return int(level.ranktable[var_0]["minXP"]);
 }
 
-getrankinfoxpamt(param_00) {
-  return int(level.ranktable[param_00]["xpToNext"]);
+getrankinfoxpamt(var_0) {
+  return int(level.ranktable[var_0]["xpToNext"]);
 }
 
-getrankinfomaxxp(param_00) {
-  return int(level.ranktable[param_00]["maxXP"]);
+getrankinfomaxxp(var_0) {
+  return int(level.ranktable[var_0]["maxXP"]);
 }
 
-_meth_80D0(param_00) {
-  var_01 = getdvarint("scr_beta_max_level", 0);
-  if(var_01 > 0 && param_00 + 1 >= var_01) {
+_meth_80D0(var_0) {
+  var_1 = getdvarint("scr_beta_max_level", 0);
+  if(var_1 > 0 && var_0 + 1 >= var_1) {
     return "ranked_up_beta_max";
   }
 
-  return level.ranktable[param_00]["splash"];
+  return level.ranktable[var_0]["splash"];
 }
 
-getrankinfofull(param_00) {
-  return tablelookupistring("mp\rankTable.csv", 0, param_00, 16);
+getrankinfofull(var_0) {
+  return tablelookupistring("mp\rankTable.csv", 0, var_0, 16);
 }
 
-getrankinfoicon(param_00, param_01) {
-  return tablelookup("mp\rankIconTable.csv", 0, param_00, param_01 + 1);
+getrankinfoicon(var_0, var_1) {
+  return tablelookup("mp\rankIconTable.csv", 0, var_0, var_1 + 1);
 }
 
-getrankinfolevel(param_00) {
-  return int(tablelookup("mp\rankTable.csv", 0, param_00, 13));
+getrankinfolevel(var_0) {
+  return int(tablelookup("mp\rankTable.csv", 0, var_0, 13));
 }
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    if(!isai(var_00)) {
-      if(var_00 scripts\mp\utility::rankingenabled()) {
-        var_00.pers["rankxp"] = var_00 getplayerdata("mp", "progression", "playerLevel", "xp");
-        var_01 = var_00 getplayerdata("mp", "progression", "playerLevel", "prestige");
-        if(!isDefined(var_00.pers["xpEarnedThisMatch"])) {
-          var_00.pers["xpEarnedThisMatch"] = 0;
+    level waittill("connected", var_0);
+    if(!isai(var_0)) {
+      if(var_0 scripts\mp\utility::rankingenabled()) {
+        var_0.pers["rankxp"] = var_0 getplayerdata("mp", "progression", "playerLevel", "xp");
+        var_1 = var_0 getplayerdata("mp", "progression", "playerLevel", "prestige");
+        if(!isDefined(var_0.pers["xpEarnedThisMatch"])) {
+          var_0.pers["xpEarnedThisMatch"] = 0;
         }
       } else {
-        var_01 = 0;
-        var_00.pers["rankxp"] = 0;
+        var_1 = 0;
+        var_0.pers["rankxp"] = 0;
       }
     } else {
-      var_01 = 0;
-      var_00.pers["rankxp"] = 0;
+      var_1 = 0;
+      var_0.pers["rankxp"] = 0;
     }
 
-    var_00.pers["prestige"] = var_01;
-    if(var_00.pers["rankxp"] < 0) {
-      var_00.pers["rankxp"] = 0;
+    var_0.pers["prestige"] = var_1;
+    if(var_0.pers["rankxp"] < 0) {
+      var_0.pers["rankxp"] = 0;
     }
 
-    var_02 = var_00 getrankforxp(var_00 getrankxp());
-    var_00.pers["rank"] = var_02;
-    var_00 setrank(var_02, var_01);
-    if(var_00.clientid < level.maxlogclients) {
-      setmatchdata("players", var_00.clientid, "rank", var_02);
-      setmatchdata("players", var_00.clientid, "Prestige", var_01);
-      if(!isai(var_00) && scripts\mp\utility::func_D957() || scripts\mp\utility::matchmakinggame()) {
-        setmatchdata("players", var_00.clientid, "isSplitscreen", var_00 issplitscreenplayer());
+    var_2 = var_0 getrankforxp(var_0 getrankxp());
+    var_0.pers["rank"] = var_2;
+    var_0 setrank(var_2, var_1);
+    if(var_0.clientid < level.maxlogclients) {
+      setmatchdata("players", var_0.clientid, "rank", var_2);
+      setmatchdata("players", var_0.clientid, "Prestige", var_1);
+      if(!isai(var_0) && scripts\mp\utility::func_D957() || scripts\mp\utility::matchmakinggame()) {
+        setmatchdata("players", var_0.clientid, "isSplitscreen", var_0 issplitscreenplayer());
       }
     }
 
-    var_00.pers["participation"] = 0;
-    var_00.var_EC53 = 0;
-    var_00.scorepointsqueue = 0;
-    var_00.scoreeventqueue = [];
-    var_00.var_D702 = 0;
-    var_00 setclientdvar("ui_promotion", 0);
-    if(!isDefined(var_00.pers["summary"])) {
-      var_00.pers["summary"] = [];
-      var_00.pers["summary"]["xp"] = 0;
-      var_00.pers["summary"]["score"] = 0;
-      var_00.pers["summary"]["challenge"] = 0;
-      var_00.pers["summary"]["match"] = 0;
-      var_00.pers["summary"]["misc"] = 0;
-      var_00.pers["summary"]["medal"] = 0;
-      var_00.pers["summary"]["bonusXP"] = 0;
+    var_0.pers["participation"] = 0;
+    var_0.var_EC53 = 0;
+    var_0.scorepointsqueue = 0;
+    var_0.scoreeventqueue = [];
+    var_0.var_D702 = 0;
+    var_0 setclientdvar("ui_promotion", 0);
+    if(!isDefined(var_0.pers["summary"])) {
+      var_0.pers["summary"] = [];
+      var_0.pers["summary"]["xp"] = 0;
+      var_0.pers["summary"]["score"] = 0;
+      var_0.pers["summary"]["challenge"] = 0;
+      var_0.pers["summary"]["match"] = 0;
+      var_0.pers["summary"]["misc"] = 0;
+      var_0.pers["summary"]["medal"] = 0;
+      var_0.pers["summary"]["bonusXP"] = 0;
     }
 
-    var_00 setclientdvar("ui_opensummary", 0);
-    var_00 thread scripts\mp\missions::func_12E71();
-    var_00 thread onplayerspawned();
-    var_00 thread func_C575();
-    if(var_00 scripts\mp\utility::rankingenabled()) {
-      var_03 = getdvarint("online_mp_party_xpscale");
-      var_04 = var_00 _meth_85BE() > 1;
-      if(var_04) {
-        var_00 addrankxpmultiplier(var_03, "online_mp_party_xpscale");
+    var_0 setclientdvar("ui_opensummary", 0);
+    var_0 thread scripts\mp\missions::func_12E71();
+    var_0 thread onplayerspawned();
+    var_0 thread func_C575();
+    if(var_0 scripts\mp\utility::rankingenabled()) {
+      var_3 = getdvarint("online_mp_party_xpscale");
+      var_4 = var_0 _meth_85BE() > 1;
+      if(var_4) {
+        var_0 addrankxpmultiplier(var_3, "online_mp_party_xpscale");
       }
 
-      if(var_00 getplayerdata("mp", "prestigeDoubleWeaponXp")) {
-        var_00.var_D882 = 1;
+      if(var_0 getplayerdata("mp", "prestigeDoubleWeaponXp")) {
+        var_0.var_D882 = 1;
       } else {
-        var_00.var_D882 = 0;
+        var_0.var_D882 = 0;
       }
     }
 
-    var_00.scoreeventcount = 0;
-    var_00.scoreeventlistindex = 0;
-    var_00 setclientomnvar("ui_score_event_control", -1);
+    var_0.scoreeventcount = 0;
+    var_0.scoreeventlistindex = 0;
+    var_0 setclientomnvar("ui_score_event_control", -1);
   }
 }
 
@@ -197,7 +197,7 @@ onplayerspawned() {
       self.pers["rankxp"] = ::scripts\mp\utility::get_rank_xp_for_bot();
     } else if(!level.rankedmatch) {
       self.pers["rankxp"] = 0;
-    } else {}
+    }
 
     playerupdaterank();
   }
@@ -208,21 +208,21 @@ playerupdaterank() {
     self.pers["rankxp"] = 0;
   }
 
-  var_00 = getrankforxp(getrankxp());
-  self.pers["rank"] = var_00;
+  var_0 = getrankforxp(getrankxp());
+  self.pers["rank"] = var_0;
   if(isai(self) || !isDefined(self.pers["prestige"])) {
     if(level.rankedmatch && isDefined(self.bufferedstats)) {
-      var_01 = detachshieldmodel();
+      var_1 = detachshieldmodel();
     } else {
-      var_01 = 0;
+      var_1 = 0;
     }
 
-    self setrank(var_00, var_01);
-    self.pers["prestige"] = var_01;
+    self setrank(var_0, var_1);
+    self.pers["prestige"] = var_1;
   }
 
   if(isDefined(self.clientid) && self.clientid < level.maxlogclients) {
-    setmatchdata("players", self.clientid, "rank", var_00);
+    setmatchdata("players", self.clientid, "rank", var_0);
     setmatchdata("players", self.clientid, "Prestige", self.pers["prestige"]);
   }
 }
@@ -245,10 +245,10 @@ func_C575() {
   }
 }
 
-giverankxp(param_00, param_01, param_02) {
+giverankxp(var_0, var_1, var_2) {
   self endon("disconnect");
   if(isDefined(self.triggerportableradarping) && !isbot(self)) {
-    self.triggerportableradarping giverankxp(param_00, param_01, param_02);
+    self.triggerportableradarping giverankxp(var_0, var_1, var_2);
     return;
   }
 
@@ -260,14 +260,14 @@ giverankxp(param_00, param_01, param_02) {
     return;
   }
 
-  if(!isDefined(param_01) || param_01 == 0) {
+  if(!isDefined(var_1) || var_1 == 0) {
     return;
   }
 
-  var_03 = getscoreinfocategory(param_00, "group");
-  if(!isDefined(param_02)) {
-    if(var_03 == "medal" || var_03 == "kill_killstreak") {
-      param_02 = self getcurrentweapon();
+  var_3 = getscoreinfocategory(var_0, "group");
+  if(!isDefined(var_2)) {
+    if(var_3 == "medal" || var_3 == "kill_killstreak") {
+      var_2 = self getcurrentweapon();
     }
   }
 
@@ -279,79 +279,79 @@ giverankxp(param_00, param_01, param_02) {
     }
   }
 
-  var_04 = getscoreinfocategory(param_00, "allowBonus");
-  var_05 = 1;
-  var_06 = param_01;
-  var_07 = 0;
-  if(scripts\mp\utility::istrue(var_04)) {
-    var_05 = _meth_80D4();
-    var_06 = int(param_01 * var_05);
-    var_07 = int(max(var_06 - param_01, 0));
+  var_4 = getscoreinfocategory(var_0, "allowBonus");
+  var_5 = 1;
+  var_6 = var_1;
+  var_7 = 0;
+  if(scripts\mp\utility::istrue(var_4)) {
+    var_5 = _meth_80D4();
+    var_6 = int(var_1 * var_5);
+    var_7 = int(max(var_6 - var_1, 0));
   }
 
-  var_08 = getrankxp();
-  func_93E3(var_06);
-  if(func_12EFA(var_08)) {
+  var_8 = getrankxp();
+  func_93E3(var_6);
+  if(func_12EFA(var_8)) {
     thread func_12EFB();
   }
 
   func_11390();
-  if(isDefined(param_02) && scripts\mp\weaponrank::func_13CCA(param_02)) {
-    thread scripts\mp\weaponrank::_meth_8394(param_02, param_00, param_01);
+  if(isDefined(var_2) && scripts\mp\weaponrank::func_13CCA(var_2)) {
+    thread scripts\mp\weaponrank::_meth_8394(var_2, var_0, var_1);
   }
 
-  func_DDF7(param_00, param_01, var_07);
-  var_09 = detachshieldmodel();
+  func_DDF7(var_0, var_1, var_7);
+  var_9 = detachshieldmodel();
   var_0A = getrank();
-  thread scripts\mp\analyticslog::logevent_giveplayerxp(var_09, var_0A, param_01, param_00);
+  thread scripts\mp\analyticslog::logevent_giveplayerxp(var_9, var_0A, var_1, var_0);
 }
 
-func_DDF7(param_00, param_01, param_02) {
-  var_03 = param_01 + param_02;
-  var_04 = getscoreinfocategory(param_00, "group");
-  if(!isDefined(var_04) || var_04 == "") {
-    self.pers["summary"]["misc"] = self.pers["summary"]["misc"] + param_01;
-    self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + param_02;
-    self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_03;
+func_DDF7(var_0, var_1, var_2) {
+  var_3 = var_1 + var_2;
+  var_4 = getscoreinfocategory(var_0, "group");
+  if(!isDefined(var_4) || var_4 == "") {
+    self.pers["summary"]["misc"] = self.pers["summary"]["misc"] + var_1;
+    self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + var_2;
+    self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_3;
     return;
   }
 
-  switch (var_04) {
+  switch (var_4) {
     case "match_bonus":
-      self.pers["summary"]["match"] = self.pers["summary"]["match"] + param_01;
-      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + param_02;
-      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_03;
+      self.pers["summary"]["match"] = self.pers["summary"]["match"] + var_1;
+      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + var_2;
+      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_3;
       break;
 
     case "challenge":
-      self.pers["summary"]["challenge"] = self.pers["summary"]["challenge"] + param_01;
-      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + param_02;
-      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_03;
+      self.pers["summary"]["challenge"] = self.pers["summary"]["challenge"] + var_1;
+      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + var_2;
+      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_3;
       break;
 
     case "medal":
-      self.pers["summary"]["medal"] = self.pers["summary"]["medal"] + param_01;
-      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + param_02;
-      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_03;
+      self.pers["summary"]["medal"] = self.pers["summary"]["medal"] + var_1;
+      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + var_2;
+      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_3;
       break;
 
     default:
-      self.pers["summary"]["score"] = self.pers["summary"]["score"] + param_01;
-      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + param_02;
-      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_03;
+      self.pers["summary"]["score"] = self.pers["summary"]["score"] + var_1;
+      self.pers["summary"]["bonusXP"] = self.pers["summary"]["bonusXP"] + var_2;
+      self.pers["summary"]["xp"] = self.pers["summary"]["xp"] + var_3;
       break;
   }
 }
 
-func_12EFA(param_00) {
-  var_01 = getrank();
-  if(var_01 == self.pers["rank"] || self.pers["rank"] == level.maxrank) {
+func_12EFA(var_0) {
+  var_1 = getrank();
+  if(var_1 == self.pers["rank"] || self.pers["rank"] == level.maxrank) {
     return 0;
   }
 
-  var_02 = self.pers["rank"];
-  self.pers["rank"] = var_01;
-  self setrank(var_01);
+  var_2 = self.pers["rank"];
+  self.pers["rank"] = var_1;
+  self setrank(var_1);
   return 1;
 }
 
@@ -359,8 +359,8 @@ func_12EFB() {
   self endon("disconnect");
   self notify("update_rank");
   self endon("update_rank");
-  var_00 = self.pers["team"];
-  if(!isDefined(var_00)) {
+  var_0 = self.pers["team"];
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -368,23 +368,23 @@ func_12EFB() {
     level scripts\engine\utility::waittill_notify_or_timeout("game_over", 0.25);
   }
 
-  var_01 = self.pers["rank"];
-  var_02 = _meth_80D0(var_01);
-  if(isDefined(var_02) && var_02 != "") {
-    thread scripts\mp\hud_message::showsplash(var_02, var_01 + 1);
+  var_1 = self.pers["rank"];
+  var_2 = _meth_80D0(var_1);
+  if(isDefined(var_2) && var_2 != "") {
+    thread scripts\mp\hud_message::showsplash(var_2, var_1 + 1);
   }
 
-  for(var_03 = 0; var_03 < level.players.size; var_03++) {
-    var_04 = level.players[var_03];
-    var_05 = var_04.pers["team"];
-    if(isDefined(var_05) && var_05 == var_00) {
-      var_04 iprintln(&"RANK_PLAYER_WAS_PROMOTED", self, var_01 + 1);
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
+    var_4 = level.players[var_3];
+    var_5 = var_4.pers["team"];
+    if(isDefined(var_5) && var_5 == var_0) {
+      var_4 iprintln(&"RANK_PLAYER_WAS_PROMOTED", self, var_1 + 1);
     }
   }
 }
 
-queuescorepointspopup(param_00) {
-  self.scorepointsqueue = self.scorepointsqueue + param_00;
+queuescorepointspopup(var_0) {
+  self.scorepointsqueue = self.scorepointsqueue + var_0;
 }
 
 flushscorepointspopupqueue() {
@@ -403,17 +403,17 @@ func_6F79() {
   flushscorepointspopupqueue();
 }
 
-scorepointspopup(param_00, param_01) {
+scorepointspopup(var_0, var_1) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  if(param_00 == 0) {
+  if(var_0 == 0) {
     return;
   }
 
   if(!scripts\mp\utility::isreallyalive(self) && !self ismlgspectator()) {
-    if(!scripts\mp\utility::istrue(param_01) || scripts\mp\utility::isinkillcam()) {
-      queuescorepointspopup(param_00);
+    if(!scripts\mp\utility::istrue(var_1) || scripts\mp\utility::isinkillcam()) {
+      queuescorepointspopup(var_0);
       thread func_6F79();
       return;
     }
@@ -421,7 +421,7 @@ scorepointspopup(param_00, param_01) {
 
   self notify("scorePointsPopup");
   self endon("scorePointsPopup");
-  self.var_EC53 = self.var_EC53 + param_00;
+  self.var_EC53 = self.var_EC53 + var_0;
   self setclientomnvar("ui_points_popup", self.var_EC53);
   self setclientomnvar("ui_points_popup_notify", gettime());
   wait(1);
@@ -433,13 +433,13 @@ func_C16F() {
   level notify("update_player_score", self, self.var_EC53);
 }
 
-queuescoreeventpopup(param_00) {
-  self.scoreeventqueue[self.scoreeventqueue.size] = param_00;
+queuescoreeventpopup(var_0) {
+  self.scoreeventqueue[self.scoreeventqueue.size] = var_0;
 }
 
 flushscoreeventpopupqueue() {
-  foreach(var_01 in self.scoreeventqueue) {
-    scoreeventpopup(var_01);
+  foreach(var_1 in self.scoreeventqueue) {
+    scoreeventpopup(var_1);
   }
 
   self.scoreeventqueue = [];
@@ -456,23 +456,23 @@ flushscoreeventpopupqueueonspawn() {
   flushscoreeventpopupqueue();
 }
 
-scoreeventpopup(param_00) {
+scoreeventpopup(var_0) {
   if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping scoreeventpopup(param_00);
+    self.triggerportableradarping scoreeventpopup(var_0);
   }
 
   if(!isplayer(self)) {
     return;
   }
 
-  var_01 = getscoreinfocategory(param_00, "eventID");
-  var_02 = getscoreinfocategory(param_00, "text");
-  if(!isDefined(var_01) || var_01 < 0 || !isDefined(var_02) || var_02 == "") {
+  var_1 = getscoreinfocategory(var_0, "eventID");
+  var_2 = getscoreinfocategory(var_0, "text");
+  if(!isDefined(var_1) || var_1 < 0 || !isDefined(var_2) || var_2 == "") {
     return;
   }
 
   if(!scripts\mp\utility::isreallyalive(self) && !self ismlgspectator()) {
-    queuescoreeventpopup(param_00);
+    queuescoreeventpopup(var_0);
     thread flushscoreeventpopupqueueonspawn();
     return;
   }
@@ -488,7 +488,7 @@ scoreeventpopup(param_00) {
     }
   }
 
-  self setclientomnvar("ui_score_event_list_" + self.scoreeventlistindex, var_01);
+  self setclientomnvar("ui_score_event_list_" + self.scoreeventlistindex, var_1);
   self setclientomnvar("ui_score_event_control", self.scoreeventcount % 16);
   self.scoreeventlistindex++;
   self.scoreeventlistindex = self.scoreeventlistindex % 8;
@@ -504,28 +504,28 @@ clearscoreeventlistafterwait() {
 }
 
 getrank() {
-  var_00 = self.pers["rankxp"];
-  var_01 = self.pers["rank"];
-  if(var_00 < getrankinfominxp(var_01) + getrankinfoxpamt(var_01)) {
-    return var_01;
+  var_0 = self.pers["rankxp"];
+  var_1 = self.pers["rank"];
+  if(var_0 < getrankinfominxp(var_1) + getrankinfoxpamt(var_1)) {
+    return var_1;
   }
 
-  return getrankforxp(var_00);
+  return getrankforxp(var_0);
 }
 
-getrankforxp(param_00) {
-  for(var_01 = level.maxrank; var_01 > 0; var_01--) {
-    if(param_00 >= getrankinfominxp(var_01) && param_00 < getrankinfominxp(var_01) + getrankinfoxpamt(var_01)) {
-      return var_01;
+getrankforxp(var_0) {
+  for(var_1 = level.maxrank; var_1 > 0; var_1--) {
+    if(var_0 >= getrankinfominxp(var_1) && var_0 < getrankinfominxp(var_1) + getrankinfoxpamt(var_1)) {
+      return var_1;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
 getmatchbonusspm() {
-  var_00 = getrank() + 1;
-  return 3 + var_00 * 0.5 * 10;
+  var_0 = getrank() + 1;
+  return 3 + var_0 * 0.5 * 10;
 }
 
 detachshieldmodel() {
@@ -540,7 +540,7 @@ getrankxp() {
   return self.pers["rankxp"];
 }
 
-func_93E3(param_00) {
+func_93E3(var_0) {
   if(!scripts\mp\utility::rankingenabled()) {
     return;
   }
@@ -549,55 +549,55 @@ func_93E3(param_00) {
     return;
   }
 
-  var_01 = getdvarint("scr_beta_max_level", 0);
-  if(var_01 > 0 && getrank() + 1 >= var_01) {
-    param_00 = 0;
+  var_1 = getdvarint("scr_beta_max_level", 0);
+  if(var_1 > 0 && getrank() + 1 >= var_1) {
+    var_0 = 0;
   }
 
-  var_02 = getrankxp();
-  var_03 = int(min(var_02 + param_00, getrankinfomaxxp(level.maxrank) - 1));
-  if(self.pers["rank"] == level.maxrank && var_03 >= getrankinfomaxxp(level.maxrank)) {
-    var_03 = getrankinfomaxxp(level.maxrank);
+  var_2 = getrankxp();
+  var_3 = int(min(var_2 + var_0, getrankinfomaxxp(level.maxrank) - 1));
+  if(self.pers["rank"] == level.maxrank && var_3 >= getrankinfomaxxp(level.maxrank)) {
+    var_3 = getrankinfomaxxp(level.maxrank);
   }
 
-  self.pers["xpEarnedThisMatch"] = self.pers["xpEarnedThisMatch"] + param_00;
-  self.pers["rankxp"] = var_03;
+  self.pers["xpEarnedThisMatch"] = self.pers["xpEarnedThisMatch"] + var_0;
+  self.pers["rankxp"] = var_3;
 }
 
 func_11390() {
-  var_00 = getrankxp();
-  self setplayerdata("mp", "progression", "playerLevel", "xp", var_00);
+  var_0 = getrankxp();
+  self setplayerdata("mp", "progression", "playerLevel", "xp", var_0);
 }
 
-delayplayerscorepopup(param_00, param_01, param_02) {
-  wait(param_00);
-  thread scripts\mp\utility::giveunifiedpoints(param_01);
+delayplayerscorepopup(var_0, var_1, var_2) {
+  wait(var_0);
+  thread scripts\mp\utility::giveunifiedpoints(var_1);
 }
 
-addglobalrankxpmultiplier(param_00, param_01) {
-  level addrankxpmultiplier(param_00, param_01);
+addglobalrankxpmultiplier(var_0, var_1) {
+  level addrankxpmultiplier(var_0, var_1);
 }
 
 func_7ED9() {
-  var_00 = level getrankxpmultiplier();
-  if(var_00 > 4 || var_00 < 0) {
+  var_0 = level getrankxpmultiplier();
+  if(var_0 > 4 || var_0 < 0) {
     exitlevel(0);
   }
 
-  return var_00;
+  return var_0;
 }
 
-addrankxpmultiplier(param_00, param_01) {
+addrankxpmultiplier(var_0, var_1) {
   if(!isDefined(self.rankxpmultipliers)) {
     self.rankxpmultipliers = [];
   }
 
-  if(isDefined(self.rankxpmultipliers[param_01])) {
-    self.rankxpmultipliers[param_01] = max(self.rankxpmultipliers[param_01], param_00);
+  if(isDefined(self.rankxpmultipliers[var_1])) {
+    self.rankxpmultipliers[var_1] = max(self.rankxpmultipliers[var_1], var_0);
     return;
   }
 
-  self.rankxpmultipliers[param_01] = param_00;
+  self.rankxpmultipliers[var_1] = var_0;
 }
 
 getrankxpmultiplier() {
@@ -605,99 +605,99 @@ getrankxpmultiplier() {
     return 1;
   }
 
-  var_00 = 1;
-  foreach(var_02 in self.rankxpmultipliers) {
-    if(!isDefined(var_02)) {
+  var_0 = 1;
+  foreach(var_2 in self.rankxpmultipliers) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var_00 = var_00 * var_02;
+    var_0 = var_0 * var_2;
   }
 
-  return var_00;
+  return var_0;
 }
 
-removeglobalrankxpmultiplier(param_00) {
-  level removerankxpmultiplier(param_00);
+removeglobalrankxpmultiplier(var_0) {
+  level removerankxpmultiplier(var_0);
 }
 
-removerankxpmultiplier(param_00) {
+removerankxpmultiplier(var_0) {
   if(!isDefined(self.rankxpmultipliers)) {
     return;
   }
 
-  if(!isDefined(self.rankxpmultipliers[param_00])) {
+  if(!isDefined(self.rankxpmultipliers[var_0])) {
     return;
   }
 
-  self.rankxpmultipliers[param_00] = undefined;
+  self.rankxpmultipliers[var_0] = undefined;
 }
 
-addteamrankxpmultiplier(param_00, param_01, param_02) {
+addteamrankxpmultiplier(var_0, var_1, var_2) {
   if(!level.teambased) {
-    param_01 = "all";
+    var_1 = "all";
   }
 
   if(!isDefined(self.teamrankxpmultipliers)) {
     level.teamrankxpmultipliers = [];
   }
 
-  if(!isDefined(level.teamrankxpmultipliers[param_01])) {
-    level.teamrankxpmultipliers[param_01] = [];
+  if(!isDefined(level.teamrankxpmultipliers[var_1])) {
+    level.teamrankxpmultipliers[var_1] = [];
   }
 
-  if(isDefined(level.teamrankxpmultipliers[param_01][param_02])) {
-    level.teamrankxpmultipliers[param_01][param_02] = max(self.teamrankxpmultipliers[param_01][param_02], param_00);
+  if(isDefined(level.teamrankxpmultipliers[var_1][var_2])) {
+    level.teamrankxpmultipliers[var_1][var_2] = max(self.teamrankxpmultipliers[var_1][var_2], var_0);
     return;
   }
 
-  level.teamrankxpmultipliers[param_01][param_02] = param_00;
+  level.teamrankxpmultipliers[var_1][var_2] = var_0;
 }
 
-removeteamrankxpmultiplier(param_00, param_01) {
+removeteamrankxpmultiplier(var_0, var_1) {
   if(!level.teambased) {
-    param_00 = "all";
+    var_0 = "all";
   }
 
   if(!isDefined(level.teamrankxpmultipliers)) {
     return;
   }
 
-  if(!isDefined(level.teamrankxpmultipliers[param_00])) {
+  if(!isDefined(level.teamrankxpmultipliers[var_0])) {
     return;
   }
 
-  if(!isDefined(level.teamrankxpmultipliers[param_00][param_01])) {
+  if(!isDefined(level.teamrankxpmultipliers[var_0][var_1])) {
     return;
   }
 
-  level.teamrankxpmultipliers[param_00][param_01] = undefined;
+  level.teamrankxpmultipliers[var_0][var_1] = undefined;
 }
 
-_meth_81B6(param_00) {
+_meth_81B6(var_0) {
   if(!level.teambased) {
-    param_00 = "all";
+    var_0 = "all";
   }
 
-  if(!isDefined(level.teamrankxpmultipliers) || !isDefined(level.teamrankxpmultipliers[param_00])) {
+  if(!isDefined(level.teamrankxpmultipliers) || !isDefined(level.teamrankxpmultipliers[var_0])) {
     return 1;
   }
 
-  var_01 = 1;
-  foreach(var_03 in level.teamrankxpmultipliers[param_00]) {
-    if(!isDefined(var_03)) {
+  var_1 = 1;
+  foreach(var_3 in level.teamrankxpmultipliers[var_0]) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    var_01 = var_01 * var_03;
+    var_1 = var_1 * var_3;
   }
 
-  return var_01;
+  return var_1;
 }
 
 _meth_80D4() {
-  var_00 = getrankxpmultiplier();
-  var_01 = func_7ED9();
-  var_02 = _meth_81B6(self.team);
-  return var_00 * var_01 * var_02;
+  var_0 = getrankxpmultiplier();
+  var_1 = func_7ED9();
+  var_2 = _meth_81B6(self.team);
+  return var_0 * var_1 * var_2;
 }

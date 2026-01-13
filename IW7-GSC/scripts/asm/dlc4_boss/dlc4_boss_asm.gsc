@@ -4,51 +4,51 @@
  * Script: scripts\asm\dlc4_boss\dlc4_boss_asm.gsc
 ***************************************************/
 
-asminit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+asminit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
   self.fnactionvalidator = ::isvalidaction;
   if(!isDefined(level.dlc4_boss_arrival_data)) {
     analyzemovementanims();
   }
 
-  var_04 = self getsafecircleorigin("move_arrival", 4);
-  self.var_1198.movearrivaldist = length(getmovedelta(var_04, 0, 1));
-  var_04 = self getsafecircleorigin("move_back_arrival", 0);
-  self.var_1198.movebackarrivaldist = length(getmovedelta(var_04, 0, 1));
-  var_04 = self getsafecircleorigin("drop_move_arrival", 0);
-  self.var_1198.dropmovearrivaldist = length(getmovedelta(var_04, 0, 1));
+  var_4 = self getsafecircleorigin("move_arrival", 4);
+  self._blackboard.movearrivaldist = length(getmovedelta(var_4, 0, 1));
+  var_4 = self getsafecircleorigin("move_back_arrival", 0);
+  self._blackboard.movebackarrivaldist = length(getmovedelta(var_4, 0, 1));
+  var_4 = self getsafecircleorigin("drop_move_arrival", 0);
+  self._blackboard.dropmovearrivaldist = length(getmovedelta(var_4, 0, 1));
 }
 
 analyzemovementanims() {
   level.dlc4_boss_arrival_data = [];
   level.dlc4_boss_move_data = [];
-  for(var_00 = 1; var_00 <= 9; var_00++) {
-    if(var_00 == 5) {
+  for(var_0 = 1; var_0 <= 9; var_0++) {
+    if(var_0 == 5) {
       continue;
     }
 
-    var_01 = var_00;
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_arrival", var_01);
-    var_03 = self getsafecircleorigin("move_arrival", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.dlc4_boss_arrival_data[var_00] = var_04;
-    level.dlc4_boss_arrival_time[var_00] = getanimlength(var_03);
-    var_01 = var_00;
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_loop", var_01);
-    var_03 = self getsafecircleorigin("move_loop", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.dlc4_boss_move_data[var_00] = var_04;
-    level.dlc4_boss_move_time[var_00] = getanimlength(var_03);
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_exit", var_01);
-    var_03 = self getsafecircleorigin("move_exit", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.dlc4_boss_exit_data[var_00] = var_04;
-    level.dlc4_boss_exit_time[var_00] = getanimlength(var_03);
+    var_1 = var_0;
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_arrival", var_1);
+    var_3 = self getsafecircleorigin("move_arrival", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.dlc4_boss_arrival_data[var_0] = var_4;
+    level.dlc4_boss_arrival_time[var_0] = getanimlength(var_3);
+    var_1 = var_0;
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_loop", var_1);
+    var_3 = self getsafecircleorigin("move_loop", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.dlc4_boss_move_data[var_0] = var_4;
+    level.dlc4_boss_move_time[var_0] = getanimlength(var_3);
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_exit", var_1);
+    var_3 = self getsafecircleorigin("move_exit", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.dlc4_boss_exit_data[var_0] = var_4;
+    level.dlc4_boss_exit_time[var_0] = getanimlength(var_3);
   }
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "drop_move":
     case "black_hole":
     case "ground_vul":
@@ -73,21 +73,21 @@ isvalidaction(param_00) {
   return 0;
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   thread introfx();
   return 1;
 }
 
 introfx() {
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   self.vo_ent = spawn("script_origin", self gettagorigin("tag_origin"));
   self.vo_ent linkto(self);
-  playFX(var_00.air_pound_rise_fx, self.arenacenter);
+  playFX(var_0.air_pound_rise_fx, self.arenacenter);
   wait(0.1);
   playsoundatpos(self.arenacenter, "zmb_ground_spawn_dirt");
   self.vo_ent playSound("final_meph_intro");
-  var_01 = gettime() + 4400;
-  while(gettime() < var_01) {
+  var_1 = gettime() + 4400;
+  while(gettime() < var_1) {
     earthquake(0.35, 3, self.arenacenter, 750);
     scripts\engine\utility::waitframe();
     playrumbleonposition("artillery_rumble", self.arenacenter);
@@ -104,243 +104,243 @@ introfx() {
   playrumbleonposition("artillery_rumble", self.arenacenter);
 }
 
-playmoveexit(param_00, param_01, param_02, param_03) {
+playmoveexit(var_0, var_1, var_2, var_3) {
   self orientmode("face angle abs", self.angles);
-  var_04 = self.var_1198;
-  var_04.desireddir = vectornormalize(var_04.nodes[var_04.desirednode].origin - self.origin);
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_06 = self getsafecircleorigin(param_01, var_05);
-  if(self.var_1198.smoothmotion) {
-    thread adjustlookahead(param_01);
+  var_4 = self._blackboard;
+  var_4.desireddir = vectornormalize(var_4.nodes[var_4.desirednode].origin - self.origin);
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_6 = self getsafecircleorigin(var_1, var_5);
+  if(self._blackboard.smoothmotion) {
+    thread adjustlookahead(var_1);
   }
 
-  thread applyallmotiontowardsdesireddir(param_01, var_06, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
-  if(self.var_1198.facecenter) {
-    thread staylookingatcenter(param_01);
+  thread applyallmotiontowardsdesireddir(var_1, var_6, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
+  if(self._blackboard.facecenter) {
+    thread staylookingatcenter(var_1);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-loopbossmoveanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self getsafecircleorigin(param_01, var_04);
-  if(self.var_1198.smoothmotion) {
-    thread adjustlookahead(param_01);
+loopbossmoveanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self getsafecircleorigin(var_1, var_4);
+  if(self._blackboard.smoothmotion) {
+    thread adjustlookahead(var_1);
   }
 
-  thread applyallmotiontowardsdesireddir(param_01, var_05, 1, 1);
-  if(self.var_1198.facecenter) {
-    thread staylookingatcenter(param_01);
+  thread applyallmotiontowardsdesireddir(var_1, var_5, 1, 1);
+  if(self._blackboard.facecenter) {
+    thread staylookingatcenter(var_1);
   }
 
-  lib_0F3C::func_B050(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_B050(var_0, var_1, var_2, var_3);
 }
 
-playmovearrival(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self getsafecircleorigin(param_01, var_04);
-  if(self.var_1198.smoothmotion) {
-    thread adjustlookahead(param_01);
+playmovearrival(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self getsafecircleorigin(var_1, var_4);
+  if(self._blackboard.smoothmotion) {
+    thread adjustlookahead(var_1);
   }
 
-  thread applyallmotiontowardsdesireddir(param_01, var_05, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
-  if(self.var_1198.facecenter) {
-    thread staylookingatcenter(param_01);
+  thread applyallmotiontowardsdesireddir(var_1, var_5, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
+  if(self._blackboard.facecenter) {
+    thread staylookingatcenter(var_1);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-choosebossmoveanim(param_00, param_01, param_02) {
-  var_03 = self.var_1198.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosebossmoveanim(var_0, var_1, var_2) {
+  var_3 = self._blackboard.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-choosebossarrivalanim(param_00, param_01, param_02) {
-  var_03 = self.var_1198.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosebossarrivalanim(var_0, var_1, var_2) {
+  var_3 = self._blackboard.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-applyallmotiontowardsdesireddir(param_00, param_01, param_02, param_03) {
-  self endon(param_00 + "_finished");
-  param_02 = param_02 * getdvarfloat("dlc4_boss_strafe_speed", 1);
-  var_04 = 0;
-  var_05 = getanimlength(param_01);
-  while(var_04 < var_05) {
-    var_06 = self.var_1198;
-    var_07 = var_06.nodes[var_06.desirednode].origin;
-    var_08 = var_04 / var_05;
-    var_09 = var_04 + 0.05 / var_05;
+applyallmotiontowardsdesireddir(var_0, var_1, var_2, var_3) {
+  self endon(var_0 + "_finished");
+  var_2 = var_2 * getdvarfloat("dlc4_boss_strafe_speed", 1);
+  var_4 = 0;
+  var_5 = getanimlength(var_1);
+  while(var_4 < var_5) {
+    var_6 = self._blackboard;
+    var_7 = var_6.nodes[var_6.desirednode].origin;
+    var_8 = var_4 / var_5;
+    var_9 = var_4 + 0.05 / var_5;
     var_0A = 0;
-    if(var_09 > 1) {
-      if(param_03) {
-        var_0A = length2d(getmovedelta(param_01, var_08, 1)) * param_02;
-        var_04 = 0;
-        var_08 = 0;
-        var_09 = var_09 - 1;
+    if(var_9 > 1) {
+      if(var_3) {
+        var_0A = length2d(getmovedelta(var_1, var_8, 1)) * var_2;
+        var_4 = 0;
+        var_8 = 0;
+        var_9 = var_9 - 1;
       } else {
-        var_09 = 1;
+        var_9 = 1;
       }
     }
 
-    var_0B = getmovedelta(param_01, var_08, var_09);
-    var_0A = var_0A + length2d(var_0B) * param_02;
-    var_0C = self.origin + self.var_1198.desireddir * var_0A;
+    var_0B = getmovedelta(var_1, var_8, var_9);
+    var_0A = var_0A + length2d(var_0B) * var_2;
+    var_0C = self.origin + self._blackboard.desireddir * var_0A;
     self setorigin(var_0C - (0, 0, 1), 0);
     wait(0.05);
-    var_04 = var_04 + 0.05;
+    var_4 = var_4 + 0.05;
   }
 }
 
-adjustlookahead(param_00) {
-  self endon(param_00 + "_finished");
-  var_01 = self.var_1198;
-  var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_radius;
-  var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_speed;
-  var_04 = var_01.nodes.size;
-  var_05 = var_01.lookaheadnextnode - var_01.lookaheadcurrnode;
+adjustlookahead(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = self._blackboard;
+  var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_radius;
+  var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_speed;
+  var_4 = var_1.nodes.size;
+  var_5 = var_1.lookaheadnextnode - var_1.lookaheadcurrnode;
   for(;;) {
-    var_06 = distance2dsquared(self.origin, var_01.lookaheadorigin);
-    if(var_06 < var_02 * var_02) {
-      for(var_07 = var_03; var_07 > 0; var_07 = 0) {
-        var_08 = distance2d(var_01.lookaheadorigin, var_01.nodes[var_01.lookaheadnextnode].origin);
-        if(var_08 < var_07) {
-          var_07 = var_07 - var_08;
-          var_01.lookaheadorigin = var_01.nodes[var_01.lookaheadnextnode].origin;
-          var_01.lookaheadcurrnode = var_01.lookaheadnextnode;
-          var_01.lookaheadnextnode = var_01.lookaheadcurrnode + var_05 + var_04 % var_04;
+    var_6 = distance2dsquared(self.origin, var_1.lookaheadorigin);
+    if(var_6 < var_2 * var_2) {
+      for(var_7 = var_3; var_7 > 0; var_7 = 0) {
+        var_8 = distance2d(var_1.lookaheadorigin, var_1.nodes[var_1.lookaheadnextnode].origin);
+        if(var_8 < var_7) {
+          var_7 = var_7 - var_8;
+          var_1.lookaheadorigin = var_1.nodes[var_1.lookaheadnextnode].origin;
+          var_1.lookaheadcurrnode = var_1.lookaheadnextnode;
+          var_1.lookaheadnextnode = var_1.lookaheadcurrnode + var_5 + var_4 % var_4;
           continue;
         }
 
-        var_09 = vectornormalize(var_01.nodes[var_01.lookaheadnextnode].origin - var_01.nodes[var_01.lookaheadcurrnode].origin);
-        var_01.lookaheadorigin = var_01.lookaheadorigin + var_09 * var_07;
+        var_9 = vectornormalize(var_1.nodes[var_1.lookaheadnextnode].origin - var_1.nodes[var_1.lookaheadcurrnode].origin);
+        var_1.lookaheadorigin = var_1.lookaheadorigin + var_9 * var_7;
       }
     }
 
-    self.var_1198.desireddir = vectornormalize(var_01.lookaheadorigin - self.origin * (1, 1, 0));
+    self._blackboard.desireddir = vectornormalize(var_1.lookaheadorigin - self.origin * (1, 1, 0));
     wait(0.05);
   }
 }
 
-staylookingatcenter(param_00) {
-  self endon(param_00 + "_finished");
+staylookingatcenter(var_0) {
+  self endon(var_0 + "_finished");
   for(;;) {
     facearenacenter();
     wait(0.05);
   }
 }
 
-playstrafefireball(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self getsafecircleorigin(param_01, var_04);
-  if(self.var_1198.smoothmotion) {
-    thread adjustlookahead(param_01);
+playstrafefireball(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self getsafecircleorigin(var_1, var_4);
+  if(self._blackboard.smoothmotion) {
+    thread adjustlookahead(var_1);
   }
 
-  thread applyallmotiontowardsdesireddir(param_01, var_05, 1, 0);
-  if(self.var_1198.facecenter) {
-    thread staylookingatcenter(param_01);
+  thread applyallmotiontowardsdesireddir(var_1, var_5, 1, 0);
+  if(self._blackboard.facecenter) {
+    thread staylookingatcenter(var_1);
   }
 
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-choosestrafefireballanim(param_00, param_01, param_02) {
-  var_03 = self.var_1198.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosestrafefireballanim(var_0, var_1, var_2) {
+  var_3 = self._blackboard.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-strafefireballnotehandler(param_00, param_01, param_02, param_03) {
-  var_04 = getspecialenemy();
-  var_05 = self.arenacenter;
-  if(isDefined(var_04)) {
-    var_05 = var_04.origin;
+strafefireballnotehandler(var_0, var_1, var_2, var_3) {
+  var_4 = getspecialenemy();
+  var_5 = self.arenacenter;
+  if(isDefined(var_4)) {
+    var_5 = var_4.origin;
   }
 
-  if(param_00 == "fireleft") {
-    thread strafefireballburst("j_mid_le_3", var_05, param_01);
+  if(var_0 == "fireleft") {
+    thread strafefireballburst("j_mid_le_3", var_5, var_1);
     return;
   }
 
-  if(param_00 == "fireright") {
-    thread strafefireballburst("j_mid_ri_3", var_05, param_01);
+  if(var_0 == "fireright") {
+    thread strafefireballburst("j_mid_ri_3", var_5, var_1);
     return;
   }
 
-  if(param_00 == "fireboth") {
-    thread strafefireballburst("j_thumb_ri_3", var_05, param_01);
+  if(var_0 == "fireboth") {
+    thread strafefireballburst("j_thumb_ri_3", var_5, var_1);
     return;
   }
 }
 
-strafefireballburst(param_00, param_01, param_02) {
-  self endon(param_02 + "_finished");
-  var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_04 = randomintrange(var_03.min_burst_count, var_03.max_burst_count);
-  for(var_05 = 0; var_05 < var_04; var_05++) {
-    var_06 = self gettagorigin(param_00);
-    var_07 = (randomfloatrange(var_03.sawblade_min_offset, var_03.sawblade_max_offset), randomfloatrange(var_03.sawblade_min_offset, var_03.sawblade_max_offset), 0);
-    var_08 = magicbullet(var_03.sawblade_weapon, var_06, param_01 + var_07, self);
-    var_08 thread fireballimpactfx();
-    wait(var_03.sawblade_burst_interval);
+strafefireballburst(var_0, var_1, var_2) {
+  self endon(var_2 + "_finished");
+  var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_4 = randomintrange(var_3.min_burst_count, var_3.max_burst_count);
+  for(var_5 = 0; var_5 < var_4; var_5++) {
+    var_6 = self gettagorigin(var_0);
+    var_7 = (randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), 0);
+    var_8 = magicbullet(var_3.sawblade_weapon, var_6, var_1 + var_7, self);
+    var_8 thread fireballimpactfx();
+    wait(var_3.sawblade_burst_interval);
   }
 }
 
-playfireball(param_00, param_01, param_02, param_03) {
+playfireball(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.fireballtargetpos)) {
     self.fireballtargetpos = self.arenacenter;
   }
 
   faceposition(self.fireballtargetpos);
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-choosefireballanim(param_00, param_01, param_02) {
-  var_03 = randomfloat(1);
-  if(var_03 < 0.33) {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "left");
+choosefireballanim(var_0, var_1, var_2) {
+  var_3 = randomfloat(1);
+  if(var_3 < 0.33) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
   }
 
-  if(var_03 < 0.66) {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "right");
+  if(var_3 < 0.66) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "both");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "both");
 }
 
-fireball_note_handler(param_00, param_01, param_02, param_03) {
-  var_04 = self.fireballtargetpos;
-  if(param_00 == "fireleft") {
-    var_05 = self gettagorigin("j_mid_le_3");
-    fireballburst(param_01, var_05, var_04);
+fireball_note_handler(var_0, var_1, var_2, var_3) {
+  var_4 = self.fireballtargetpos;
+  if(var_0 == "fireleft") {
+    var_5 = self gettagorigin("j_mid_le_3");
+    fireballburst(var_1, var_5, var_4);
     return;
   }
 
-  if(param_00 == "fireright") {
-    var_05 = self gettagorigin("j_mid_ri_3");
-    fireballburst(param_01, var_05, var_04);
+  if(var_0 == "fireright") {
+    var_5 = self gettagorigin("j_mid_ri_3");
+    fireballburst(var_1, var_5, var_4);
     return;
   }
 
-  if(param_00 == "fireboth") {
-    var_05 = self gettagorigin("j_thumb_ri_3");
-    fireballburst(param_01, var_05, var_04);
+  if(var_0 == "fireboth") {
+    var_5 = self gettagorigin("j_thumb_ri_3");
+    fireballburst(var_1, var_5, var_4);
     return;
   }
 }
 
-fireballburst(param_00, param_01, param_02) {
-  self endon(param_00 + "_finished");
-  var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_04 = randomintrange(var_03.min_burst_count, var_03.max_burst_count);
-  for(var_05 = 0; var_05 < var_04; var_05++) {
-    var_06 = (randomfloatrange(var_03.sawblade_min_offset, var_03.sawblade_max_offset), randomfloatrange(var_03.sawblade_min_offset, var_03.sawblade_max_offset), 0);
-    var_07 = magicbullet(var_03.sawblade_weapon, param_01, param_02 + var_06, self);
-    var_07 thread fireballimpactfx();
-    wait(var_03.sawblade_burst_interval);
+fireballburst(var_0, var_1, var_2) {
+  self endon(var_0 + "_finished");
+  var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_4 = randomintrange(var_3.min_burst_count, var_3.max_burst_count);
+  for(var_5 = 0; var_5 < var_4; var_5++) {
+    var_6 = (randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), 0);
+    var_7 = magicbullet(var_3.sawblade_weapon, var_1, var_2 + var_6, self);
+    var_7 thread fireballimpactfx();
+    wait(var_3.sawblade_burst_interval);
   }
 }
 
@@ -354,26 +354,26 @@ fireballimpactfx() {
   playrumbleonposition("grenade_rumble", self.origin);
 }
 
-clap_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "fire") {
+clap_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "fire") {
     thread handleclapprojectile();
   }
 }
 
 doclapdamage() {
   level endon("rockwall_end");
-  var_00 = getent("rockwall_trig", "targetname");
+  var_0 = getent("rockwall_trig", "targetname");
   for(;;) {
-    var_00 waittill("trigger", var_01);
-    if(!var_01 scripts\cp\utility::is_valid_player()) {
+    var_0 waittill("trigger", var_1);
+    if(!var_1 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(!isDefined(var_01.padding_damage)) {
-      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_01, "tag_eye", var_01);
-      var_01.padding_damage = 1;
-      var_01 dodamage(15, var_00.origin, level.dlc4_boss, level.dlc4_boss, "MOD_UNKNOWN", "iw7_electrictrap_zm");
-      var_01 thread scripts\cp\maps\cp_final\cp_final_final_boss::remove_padding_damage();
+    if(!isDefined(var_1.padding_damage)) {
+      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_1, "tag_eye", var_1);
+      var_1.padding_damage = 1;
+      var_1 dodamage(15, var_0.origin, level.dlc4_boss, level.dlc4_boss, "MOD_UNKNOWN", "iw7_electrictrap_zm");
+      var_1 thread scripts\cp\maps\cp_final\cp_final_final_boss::remove_padding_damage();
       continue;
     }
   }
@@ -381,74 +381,74 @@ doclapdamage() {
 
 handleclapprojectile() {
   self.claponarena = 1;
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_01 = anglesToForward(self.angles);
-  var_02 = var_00.staff_projectile_range / var_00.staff_projectile_speed;
-  var_03 = var_00.staff_projectile_speed * var_00.staff_projectile_interval;
-  var_04 = var_03 / 2;
-  var_05 = self.origin + var_01 * var_04;
-  var_06 = gettime() + var_02 * 1650;
-  var_07 = spawn("script_model", var_05);
-  var_07 setModel(var_00.ratking_staff_projectile_model);
-  var_07 show();
-  var_07.angles = var_01 + (0, 90, 0);
-  var_08 = getent("rockwall_clip", "targetname");
-  var_08.angles = var_01 + (0, 90, 0);
-  var_08.origin = var_05;
-  var_08 linkto(var_07);
-  var_08 thread doclapdamage();
-  var_07 playsoundonmovingent("cp_final_meph_rock_spires");
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_1 = anglesToForward(self.angles);
+  var_2 = var_0.staff_projectile_range / var_0.staff_projectile_speed;
+  var_3 = var_0.staff_projectile_speed * var_0.staff_projectile_interval;
+  var_4 = var_3 / 2;
+  var_5 = self.origin + var_1 * var_4;
+  var_6 = gettime() + var_2 * 1650;
+  var_7 = spawn("script_model", var_5);
+  var_7 setModel(var_0.ratking_staff_projectile_model);
+  var_7 show();
+  var_7.angles = var_1 + (0, 90, 0);
+  var_8 = getent("rockwall_clip", "targetname");
+  var_8.angles = var_1 + (0, 90, 0);
+  var_8.origin = var_5;
+  var_8 linkto(var_7);
+  var_8 thread doclapdamage();
+  var_7 playsoundonmovingent("cp_final_meph_rock_spires");
   level.rockwall_forming = 1;
-  while(gettime() < var_06) {
-    doclaplethaldamage(var_05, var_04, var_00.staff_projectile_z_delta, var_00.staff_projectile_damage);
-    var_07 moveto(var_05, var_00.staff_projectile_interval);
-    earthquake(0.35, 1, var_05, 256);
-    wait(var_00.staff_projectile_interval);
-    var_05 = var_05 + var_01 * var_03;
-    var_07.angles = vectortoangles(var_05 - var_07.origin);
-    var_09 = anglesToForward(var_07.angles);
-    playFX(level._effect["vfx_clap_wall_raise"], var_05, anglesToForward(var_07.angles), anglestoup(var_07.angles));
-    playrumbleonposition("grenade_rumble", var_05);
+  while(gettime() < var_6) {
+    doclaplethaldamage(var_5, var_4, var_0.staff_projectile_z_delta, var_0.staff_projectile_damage);
+    var_7 moveto(var_5, var_0.staff_projectile_interval);
+    earthquake(0.35, 1, var_5, 256);
+    wait(var_0.staff_projectile_interval);
+    var_5 = var_5 + var_1 * var_3;
+    var_7.angles = vectortoangles(var_5 - var_7.origin);
+    var_9 = anglesToForward(var_7.angles);
+    playFX(level._effect["vfx_clap_wall_raise"], var_5, anglesToForward(var_7.angles), anglestoup(var_7.angles));
+    playrumbleonposition("grenade_rumble", var_5);
   }
 
   level.rockwall_forming = undefined;
-  var_0A = createnavobstaclebybounds(var_08.origin, (2000, 64, 200), var_07.angles);
+  var_0A = createnavobstaclebybounds(var_8.origin, (2000, 64, 200), var_7.angles);
   wait(0.15);
-  var_07 delete();
+  var_7 delete();
   wait(10);
   destroynavobstacle(var_0A);
-  var_08 unlink();
-  var_08.origin = var_08.origin + (0, 0, -200);
+  var_8 unlink();
+  var_8.origin = var_8.origin + (0, 0, -200);
   self.claponarena = 0;
   level notify("rockwall_end");
 }
 
-doclaplethaldamage(param_00, param_01, param_02, param_03) {
-  param_01 = param_01 + 64;
-  var_04 = param_01 * param_01;
-  var_05 = scripts\common\trace::create_default_contents(1);
-  var_06 = scripts\common\trace::ray_trace(param_00 + (0, 0, param_02), param_00 - (0, 0, param_02), self, var_05);
-  param_00 = getgroundposition(param_00, 8);
-  foreach(var_08 in level.players) {
-    if(!isalive(var_08)) {
+doclaplethaldamage(var_0, var_1, var_2, var_3) {
+  var_1 = var_1 + 64;
+  var_4 = var_1 * var_1;
+  var_5 = scripts\common\trace::create_default_contents(1);
+  var_6 = scripts\common\trace::ray_trace(var_0 + (0, 0, var_2), var_0 - (0, 0, var_2), self, var_5);
+  var_0 = getgroundposition(var_0, 8);
+  foreach(var_8 in level.players) {
+    if(!isalive(var_8)) {
       continue;
     }
 
-    var_09 = distance2dsquared(param_00, var_08.origin);
-    if(var_09 > var_04) {
+    var_9 = distance2dsquared(var_0, var_8.origin);
+    if(var_9 > var_4) {
       continue;
     }
 
-    if(abs(param_00[2] - var_08.origin[2]) > param_02) {
+    if(abs(var_0[2] - var_8.origin[2]) > var_2) {
       continue;
     }
 
-    if(!scripts\cp\cp_laststand::player_in_laststand(var_08) && scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_08)) {
+    if(!scripts\cp\cp_laststand::player_in_laststand(var_8) && scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_8)) {
       continue;
     }
 
-    var_08 thread warp_to_closest();
-    var_08 dodamage(param_03, param_00, self, self, "MOD_IMPACT");
+    var_8 thread warp_to_closest();
+    var_8 dodamage(var_3, var_0, self, self, "MOD_IMPACT");
   }
 }
 
@@ -466,308 +466,308 @@ unlink_from_anchor() {
   self unlink(1);
 }
 
-playsummonanim(param_00, param_01, param_02, param_03) {
+playsummonanim(var_0, var_1, var_2, var_3) {
   self playSound("final_meph_eclipse");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, self.var_C081);
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, self.var_C081);
 }
 
-summon_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "hit") {
+summon_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "hit") {
     summonskeletons();
   }
 }
 
 summonskeletons() {
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  foreach(var_02 in var_00.spawnpoints) {
-    spawnzombie(var_00.summon_agent_type, var_02);
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  foreach(var_2 in var_0.spawnpoints) {
+    spawnzombie(var_0.summon_agent_type, var_2);
   }
 }
 
-setup_summoned_zombie(param_00) {
+setup_summoned_zombie(var_0) {
   self endon("death");
   wait(2);
   if(!isalive(self)) {
     return;
   }
 
-  if(param_00 == "skeleton") {
+  if(var_0 == "skeleton") {
     self setscriptablepartstate("eyes", "red_eyes");
     self setscriptablepartstate("burning", "active");
     return;
   }
 
-  if(param_00 == "generic_zombie") {
+  if(var_0 == "generic_zombie") {
     self setscriptablepartstate("eyes", "yellow_eyes");
   }
 }
 
-tornado_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "tornado_start") {
+tornado_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "tornado_start") {
     level thread firetornado(self);
   }
 }
 
-firetornado(param_00) {
-  var_01 = spawnfx(level._effect["vfx_fire_tornado_lg"], param_00.arenacenter + (0, 0, 5));
+firetornado(var_0) {
+  var_1 = spawnfx(level._effect["vfx_fire_tornado_lg"], var_0.arenacenter + (0, 0, 5));
   wait(0.2);
-  param_00 playSound("final_meph_throw_big");
-  triggerfx(var_01);
+  var_0 playSound("final_meph_throw_big");
+  triggerfx(var_1);
   wait(0.05);
-  var_02 = spawn("trigger_radius", param_00.arenacenter, 0, 156, 96);
-  var_02 thread firetornadodamage();
-  playsoundatpos(param_00.arenacenter + (0, 0, 5), "cp_final_meph_tornado_big_spawn");
+  var_2 = spawn("trigger_radius", var_0.arenacenter, 0, 156, 96);
+  var_2 thread firetornadodamage();
+  playsoundatpos(var_0.arenacenter + (0, 0, 5), "cp_final_meph_tornado_big_spawn");
   wait(3);
-  var_03 = scripts\engine\utility::getstructarray("tornado_start", "targetname");
-  foreach(var_05 in var_03) {
-    level thread createfiretornado(var_05);
+  var_3 = scripts\engine\utility::getstructarray("tornado_start", "targetname");
+  foreach(var_5 in var_3) {
+    level thread createfiretornado(var_5);
     wait(0.05);
   }
 
-  var_07 = scripts\engine\utility::random(var_03);
-  var_08 = scripts\engine\utility::random(var_03);
+  var_7 = scripts\engine\utility::random(var_3);
+  var_8 = scripts\engine\utility::random(var_3);
   wait(1);
-  level thread createfiretornado(var_07);
-  level thread createfiretornado(var_08);
+  level thread createfiretornado(var_7);
+  level thread createfiretornado(var_8);
   wait(2);
-  var_02 delete();
+  var_2 delete();
   wait(1);
-  var_01 delete();
+  var_1 delete();
 }
 
-createfiretornado(param_00) {
-  var_01 = spawn("trigger_radius", param_00.origin, 0, 96, 96);
-  var_02 = spawn("script_model", param_00.origin);
+createfiretornado(var_0) {
+  var_1 = spawn("trigger_radius", var_0.origin, 0, 96, 96);
+  var_2 = spawn("script_model", var_0.origin);
   wait(0.05);
-  var_02 setModel("tag_origin_fire_tornado");
-  var_01 enablelinkto();
-  var_01 linkto(var_02);
-  var_01 thread firetornadodamage();
+  var_2 setModel("tag_origin_fire_tornado");
+  var_1 enablelinkto();
+  var_1 linkto(var_2);
+  var_1 thread firetornadodamage();
   wait(0.05);
-  var_02 playLoopSound("cp_final_meph_tornado_small_lp");
-  var_02 moveto(scripts\engine\utility::random(scripts\engine\utility::getstructarray(param_00.target, "targetname")).origin, 3);
-  var_02 waittill("movedone");
-  var_02 stoploopsound();
-  playsoundatpos(var_02.origin, "cp_final_meph_tornado_small_end");
-  var_01 delete();
+  var_2 playLoopSound("cp_final_meph_tornado_small_lp");
+  var_2 moveto(scripts\engine\utility::random(scripts\engine\utility::getstructarray(var_0.target, "targetname")).origin, 3);
+  var_2 waittill("movedone");
+  var_2 stoploopsound();
+  playsoundatpos(var_2.origin, "cp_final_meph_tornado_small_end");
+  var_1 delete();
   wait(1);
-  var_02 delete();
+  var_2 delete();
 }
 
 firetornadodamage() {
   self endon("death");
   for(;;) {
-    self waittill("trigger", var_00);
-    if(!var_00 scripts\cp\utility::is_valid_player()) {
+    self waittill("trigger", var_0);
+    if(!var_0 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(!isDefined(var_00.padding_damage)) {
-      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_00, "tag_eye", var_00);
-      var_00.padding_damage = 1;
-      var_00 dodamage(40, self.origin, self, self, "MOD_UNKNOWN", "iw7_electrictrap_zm");
-      var_00 thread scripts\cp\maps\cp_final\cp_final_final_boss::remove_padding_damage();
+    if(!isDefined(var_0.padding_damage)) {
+      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_0, "tag_eye", var_0);
+      var_0.padding_damage = 1;
+      var_0 dodamage(40, self.origin, self, self, "MOD_UNKNOWN", "iw7_electrictrap_zm");
+      var_0 thread scripts\cp\maps\cp_final\cp_final_final_boss::remove_padding_damage();
       continue;
     }
   }
 }
 
-ground_pound_start_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "fire") {
-    thread doteleporttocenter(param_01);
+ground_pound_start_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "fire") {
+    thread doteleporttocenter(var_1);
   }
 }
 
-ground_pound_pound_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "fire") {
-    var_04 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-    self radiusdamage(self.origin, var_04.ss_groundpound_radius, var_04.ss_groundpound_max_damage, var_04.ss_groundpound_min_damage, self, "MOD_IMPACT");
+ground_pound_pound_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "fire") {
+    var_4 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+    self radiusdamage(self.origin, var_4.ss_groundpound_radius, var_4.ss_groundpound_max_damage, var_4.ss_groundpound_min_damage, self, "MOD_IMPACT");
   }
 }
 
-groundpoundexit(param_00, param_01, param_02, param_03) {
-  thread doteleporttodesirednode(param_01);
+groundpoundexit(var_0, var_1, var_2, var_3) {
+  thread doteleporttodesirednode(var_1);
 }
 
-throw_note_handler(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  var_05 = undefined;
-  var_06 = getspecialenemy();
-  var_05 = self.arenacenter;
-  if(isDefined(var_06)) {
-    var_05 = var_06.origin;
+throw_note_handler(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = getspecialenemy();
+  var_5 = self.arenacenter;
+  if(isDefined(var_6)) {
+    var_5 = var_6.origin;
   }
 
-  if(param_00 == "fireleft") {
-    var_04 = self gettagorigin("j_mid_le_3");
-    throwmeteor(param_01, "LEFT", var_05);
+  if(var_0 == "fireleft") {
+    var_4 = self gettagorigin("j_mid_le_3");
+    throwmeteor(var_1, "LEFT", var_5);
     return;
   }
 
-  if(param_00 == "fireright") {
-    var_04 = self gettagorigin("j_mid_ri_3");
-    throwmeteor(param_01, "RIGHT", var_05);
+  if(var_0 == "fireright") {
+    var_4 = self gettagorigin("j_mid_ri_3");
+    throwmeteor(var_1, "RIGHT", var_5);
     return;
   }
 
-  if(param_00 == "fireboth") {
-    var_04 = self gettagorigin("j_thumb_ri_3");
-    throwmeteor(param_01, "CENTER", var_05);
+  if(var_0 == "fireboth") {
+    var_4 = self gettagorigin("j_thumb_ri_3");
+    throwmeteor(var_1, "CENTER", var_5);
     return;
   }
 }
 
-throwmeteor(param_00, param_01, param_02) {
+throwmeteor(var_0, var_1, var_2) {
   self playSound("final_meph_throw_quick");
-  self endon(param_00 + "_finished");
-  var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  if(distance2dsquared(self.origin, param_02) < distance2dsquared(self.origin, self.arenacenter)) {
-    param_02 = self.arenacenter;
+  self endon(var_0 + "_finished");
+  var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  if(distance2dsquared(self.origin, var_2) < distance2dsquared(self.origin, self.arenacenter)) {
+    var_2 = self.arenacenter;
   }
 
-  var_04 = vectortoangles(self.origin - param_02 * (1, 1, 0));
-  var_05 = undefined;
-  var_04 = (0 - var_03.throw_starting_pitch, var_04[1], var_04[2]);
-  if(param_01 == "LEFT") {
-    var_04 = (var_04[0], var_04[1] - var_03.throw_side_yaw, var_04[2]);
-  } else if(param_01 == "RIGHT") {
-    var_04 = (var_04[0], var_04[1] + var_03.throw_side_yaw, var_04[2]);
+  var_4 = vectortoangles(self.origin - var_2 * (1, 1, 0));
+  var_5 = undefined;
+  var_4 = (0 - var_3.throw_starting_pitch, var_4[1], var_4[2]);
+  if(var_1 == "LEFT") {
+    var_4 = (var_4[0], var_4[1] - var_3.throw_side_yaw, var_4[2]);
+  } else if(var_1 == "RIGHT") {
+    var_4 = (var_4[0], var_4[1] + var_3.throw_side_yaw, var_4[2]);
   }
 
-  var_06 = scripts\common\trace::create_contents(1, 0, 0, 0, 1, 0, 0);
-  var_07 = [];
-  foreach(var_09 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
-    if(var_09.agent_type != "dlc4_boss") {
-      var_07[var_07.size] = var_09;
+  var_6 = scripts\common\trace::create_contents(1, 0, 0, 0, 1, 0, 0);
+  var_7 = [];
+  foreach(var_9 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
+    if(var_9.agent_type != "dlc4_boss") {
+      var_7[var_7.size] = var_9;
     }
   }
 
   foreach(var_0C in level.players) {
-    var_07[var_07.size] = var_0C;
+    var_7[var_7.size] = var_0C;
   }
 
-  while(var_04[0] > -40) {
-    var_04 = (var_04[0] - var_03.throw_fidelity, var_04[1], var_04[2]);
-    var_05 = anglesToForward(var_04) * var_03.throw_distance;
-    if(scripts\common\trace::sphere_trace_passed(param_02 + var_05, param_02, var_03.throw_meteor_radius, var_07, var_06)) {
+  while(var_4[0] > -40) {
+    var_4 = (var_4[0] - var_3.throw_fidelity, var_4[1], var_4[2]);
+    var_5 = anglesToForward(var_4) * var_3.throw_distance;
+    if(scripts\common\trace::sphere_trace_passed(var_2 + var_5, var_2, var_3.throw_meteor_radius, var_7, var_6)) {
       break;
     }
   }
 
-  var_0E = magicbullet(var_03.throw_weapon, param_02 + var_05, param_02, self);
+  var_0E = magicbullet(var_3.throw_weapon, var_2 + var_5, var_2, self);
   var_0E playLoopSound("cp_final_meph_asteroid_lp_01");
-  level thread play_asteroid_tellsfx(param_02);
+  level thread play_asteroid_tellsfx(var_2);
   var_0E waittill("death");
   playsoundatpos(var_0E.origin, "cp_final_meph_asteroid_explo");
   earthquake(0.55, 1, var_0E.origin, 1200);
   playrumbleonposition("artillery_rumble", var_0E.origin);
 }
 
-play_asteroid_tellsfx(param_00) {
+play_asteroid_tellsfx(var_0) {
   wait(2);
-  playsoundatpos(param_00, "cp_final_meph_asteroid_incoming");
+  playsoundatpos(var_0, "cp_final_meph_asteroid_incoming");
 }
 
-choosethrowanim(param_00, param_01, param_02) {
-  var_03 = randomfloat(1);
-  if(var_03 < 0.33) {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "left");
+choosethrowanim(var_0, var_1, var_2) {
+  var_3 = randomfloat(1);
+  if(var_3 < 0.33) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
   }
 
-  if(var_03 < 0.66) {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "right");
+  if(var_3 < 0.66) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "both");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "both");
 }
 
-air_pound_rise_play(param_00, param_01, param_02, param_03) {
+air_pound_rise_play(var_0, var_1, var_2, var_3) {
   createnavrepulsor("dlc4_boss_repulsor", -1, self.arenacenter, 150, 1);
   self.var_BE6F = createnavobstaclebybounds(self.arenacenter, (100, 100, 100), (0, 0, 0));
   self playSound("final_meph_intro");
   thread airpoundrisefx();
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-air_pound_attack_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "hit") {
-    var_04 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-    playFX(var_04.air_pound_pound_fx, self.arenacenter);
-    earthquake(var_04.air_pound_pound_rumble_scale, var_04.air_pound_pound_rumble_duration, self.arenacenter, var_04.air_pound_pound_rumble_radius);
+air_pound_attack_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "hit") {
+    var_4 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+    playFX(var_4.air_pound_pound_fx, self.arenacenter);
+    earthquake(var_4.air_pound_pound_rumble_scale, var_4.air_pound_pound_rumble_duration, self.arenacenter, var_4.air_pound_pound_rumble_radius);
     playrumbleonposition("artillery_rumble", self.arenacenter);
-    playsoundatpos(self.arenacenter, var_04.air_pound_pound_sfx);
-    self radiusdamage(self.arenacenter, var_04.ss_groundpound_radius, var_04.ss_groundpound_max_damage, var_04.ss_groundpound_min_damage, self, "MOD_IMPACT");
+    playsoundatpos(self.arenacenter, var_4.air_pound_pound_sfx);
+    self radiusdamage(self.arenacenter, var_4.ss_groundpound_radius, var_4.ss_groundpound_max_damage, var_4.ss_groundpound_min_damage, self, "MOD_IMPACT");
   }
 }
 
 airpoundrisefx() {
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  playFX(var_00.air_pound_rise_fx, self.arenacenter);
-  var_01 = gettime() + 4000;
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  playFX(var_0.air_pound_rise_fx, self.arenacenter);
+  var_1 = gettime() + 4000;
   playsoundatpos(self.arenacenter, "zmb_ground_spawn_dirt");
-  while(gettime() < var_01) {
-    earthquake(var_00.air_pound_rise_rumble_scale, var_00.air_pound_rise_rumble_duration, self.arenacenter, var_00.air_pound_rise_rumble_radius);
+  while(gettime() < var_1) {
+    earthquake(var_0.air_pound_rise_rumble_scale, var_0.air_pound_rise_rumble_duration, self.arenacenter, var_0.air_pound_rise_rumble_radius);
     scripts\engine\utility::waitframe();
     playrumbleonposition("artillery_rumble", self.arenacenter);
     wait(0.2);
   }
 }
 
-playgroundvulidle(param_00, param_01, param_02, param_03) {
+playgroundvulidle(var_0, var_1, var_2, var_3) {
   self.groundvultimer = scripts\asm\dlc4\dlc4_asm::gettunedata().ground_vul_time;
-  thread playgroundvulidlehelper(param_01);
-  lib_0F3C::func_B050(param_00, param_01, param_02, param_03);
+  thread playgroundvulidlehelper(var_1);
+  lib_0F3C::func_B050(var_0, var_1, var_2, var_3);
 }
 
-playgroundvulidlehelper(param_00) {
-  self endon(param_00 + "_finished");
+playgroundvulidlehelper(var_0) {
+  self endon(var_0 + "_finished");
   while(self.groundvultimer > 0) {
     self.groundvultimer = self.groundvultimer - 50;
     wait(0.05);
   }
 }
 
-groundvulteleportintransition(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "teleport_finished")) {
+groundvulteleportintransition(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "teleport_finished")) {
     self.teleportedin = 1;
   }
 
   return self.teleportedin && !self.claponarena;
 }
 
-playgroundvulland(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+playgroundvulland(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   createnavrepulsor("dlc4_boss_repulsor", -1, self.arenacenter, 150, 1);
   self.var_BE6F = createnavobstaclebybounds(self.arenacenter, (100, 100, 100), (0, 0, 0));
   if(level.fbd.bossstate == "LAST_STAND") {
-    lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+    lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
     self.cantakedamage = 1;
     return;
   }
 
-  var_05 = scripts\mp\mp_agent::getactiveagentsoftype(var_04.summon_agent_type);
-  var_06 = var_04.summon_max_total["" + level.players.size];
-  var_07 = min(level.players.size * var_04.zombies_per_person, var_06 - var_05.size);
-  for(var_08 = 0; var_08 < var_07; var_08++) {
-    var_09 = 1 * var_08 * 360 / var_07;
-    var_0A = self.arenacenter[0] + cos(var_09) * var_04.zombies_summon_radius;
-    var_0B = self.arenacenter[1] + sin(var_09) * var_04.zombies_summon_radius;
+  var_5 = scripts\mp\mp_agent::getactiveagentsoftype(var_4.summon_agent_type);
+  var_6 = var_4.summon_max_total["" + level.players.size];
+  var_7 = min(level.players.size * var_4.zombies_per_person, var_6 - var_5.size);
+  for(var_8 = 0; var_8 < var_7; var_8++) {
+    var_9 = 1 * var_8 * 360 / var_7;
+    var_0A = self.arenacenter[0] + cos(var_9) * var_4.zombies_summon_radius;
+    var_0B = self.arenacenter[1] + sin(var_9) * var_4.zombies_summon_radius;
     var_0C = (var_0A, var_0B, self.arenacenter[2]);
     spawnzombie("skeleton", var_0C);
   }
 
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-playgroundvullaunch(param_00, param_01, param_02, param_03) {
+playgroundvullaunch(var_0, var_1, var_2, var_3) {
   self.groundvultimer = undefined;
   scripts\cp\maps\cp_final\cp_final_final_boss::cleanupweakspot(level.fbd.activecircle);
   level notify("FINAL_BOSS_STAGE_FAILED");
-  playanimandteleport(param_00, param_01, param_02, param_03);
+  playanimandteleport(var_0, var_1, var_2, var_3);
 }
 
-groundvulidletransition(param_00, param_01, param_02, param_03) {
+groundvulidletransition(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.groundvultimer) || self.groundvultimer > 0) {
     return 0;
   }
@@ -775,73 +775,73 @@ groundvulidletransition(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-groundvulidleterminate(param_00, param_01, param_02) {
+groundvulidleterminate(var_0, var_1, var_2) {
   self.vulnerable = 0;
 }
 
-groundvulhurttransition(param_00, param_01, param_02, param_03) {
+groundvulhurttransition(var_0, var_1, var_2, var_3) {
   return isDefined(level.fbd.sectioncomplete) && level.fbd.sectioncomplete;
 }
 
-groundvuldeathtransition(param_00, param_01, param_02, param_03) {
+groundvuldeathtransition(var_0, var_1, var_2, var_3) {
   return isDefined(level.fbd.sectioncomplete) && level.fbd.sectioncomplete && level.fbd.victory;
 }
 
-choosegroundvulhurtanim(param_00, param_01, param_02) {
+choosegroundvulhurtanim(var_0, var_1, var_2) {
   if(level.fbd.bossstate == "FRENZIED") {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "frenzied_hurt");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "frenzied_hurt");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "ground_vul_hurt");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "ground_vul_hurt");
 }
 
-groundvullaunchnotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "flames_on") {
+groundvullaunchnotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "flames_on") {
     self setscriptablepartstate("flames", "on");
     self setscriptablepartstate("circle_" + level.fbd.activecircle.index, "off");
   }
 
-  teleportnotehandler(param_00, param_01, param_02, param_03);
+  teleportnotehandler(var_0, var_1, var_2, var_3);
 }
 
-groundvulhurtnotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "hit") {
-    var_04 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-    playFX(var_04.air_pound_pound_fx, self.arenacenter);
-    earthquake(var_04.air_pound_pound_rumble_scale, var_04.air_pound_pound_rumble_duration, self.arenacenter, var_04.air_pound_pound_rumble_radius);
+groundvulhurtnotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "hit") {
+    var_4 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+    playFX(var_4.air_pound_pound_fx, self.arenacenter);
+    earthquake(var_4.air_pound_pound_rumble_scale, var_4.air_pound_pound_rumble_duration, self.arenacenter, var_4.air_pound_pound_rumble_radius);
     playrumbleonposition("artillery_rumble", self.arenacenter);
-    playsoundatpos(self.arenacenter, var_04.air_pound_pound_sfx);
-    self radiusdamage(self.origin, var_04.ground_pound_radius, var_04.ground_pound_max_damage, var_04.ground_pound_min_damage, self, "MOD_IMPACT");
-    var_05 = scripts\mp\mp_agent::getactiveagentsofspecies("zombie");
-    foreach(var_07 in var_05) {
-      if(var_07.agent_type != "dlc4_boss") {
-        var_07 dodamage(var_07.health * 10, self.arenacenter);
+    playsoundatpos(self.arenacenter, var_4.air_pound_pound_sfx);
+    self radiusdamage(self.origin, var_4.ground_pound_radius, var_4.ground_pound_max_damage, var_4.ground_pound_min_damage, self, "MOD_IMPACT");
+    var_5 = scripts\mp\mp_agent::getactiveagentsofspecies("zombie");
+    foreach(var_7 in var_5) {
+      if(var_7.agent_type != "dlc4_boss") {
+        var_7 dodamage(var_7.health * 10, self.arenacenter);
       }
     }
-  } else if(param_00 == "flames_on") {
+  } else if(var_0 == "flames_on") {
     self setscriptablepartstate("flames", "on");
   }
 
-  teleportnotehandler(param_00, param_01, param_02, param_03);
+  teleportnotehandler(var_0, var_1, var_2, var_3);
 }
 
-loopdropmovedown(param_00, param_01, param_02, param_03) {
+loopdropmovedown(var_0, var_1, var_2, var_3) {
   self.dropdowntimer = scripts\asm\dlc4\dlc4_asm::gettunedata().drop_down_time;
-  thread playdropmovedownhelper(param_01);
-  lib_0F3C::func_B050(param_00, param_01, param_02, param_03);
+  thread playdropmovedownhelper(var_1);
+  lib_0F3C::func_B050(var_0, var_1, var_2, var_3);
 }
 
-playdropmovedownhelper(param_00) {
-  self endon(param_00 + "_finished");
+playdropmovedownhelper(var_0) {
+  self endon(var_0 + "_finished");
   while(self.dropdowntimer > 0) {
     self.dropdowntimer = self.dropdowntimer - 50;
     wait(0.05);
   }
 
-  thread doteleporttodesirednode(param_00, 1);
+  thread doteleporttodesirednode(var_0, 1);
 }
 
-dropmovedowntransition(param_00, param_01, param_02, param_03) {
+dropmovedowntransition(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.dropdowntimer) || self.dropdowntimer > 0) {
     return 0;
   }
@@ -852,57 +852,57 @@ dropmovedowntransition(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-dropmoveuptransition(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_1198.nodes[self.var_1198.var_4BF7].origin;
-  var_05 = self.var_1198.dropmovearrivaldist * self.var_1198.dropmovearrivaldist;
-  return distancesquared(self.origin, var_04) <= var_05;
+dropmoveuptransition(var_0, var_1, var_2, var_3) {
+  var_4 = self._blackboard.nodes[self._blackboard.var_4BF7].origin;
+  var_5 = self._blackboard.dropmovearrivaldist * self._blackboard.dropmovearrivaldist;
+  return distancesquared(self.origin, var_4) <= var_5;
 }
 
-playflyoverexit(param_00, param_01, param_02, param_03) {
+playflyoverexit(var_0, var_1, var_2, var_3) {
   self scragentsetanimscale(scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_speed, 1);
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-flyoverlooptransition(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_1198;
-  var_05 = var_04.nodes[var_04.desirednode].origin;
-  var_06 = distance2dsquared(var_05, self.origin);
-  var_07 = var_04.flyoverarrivaldist * var_04.flyoverarrivaldist;
-  if(var_06 <= var_07) {
-    self.var_1198.flyoverarrivaldist = undefined;
+flyoverlooptransition(var_0, var_1, var_2, var_3) {
+  var_4 = self._blackboard;
+  var_5 = var_4.nodes[var_4.desirednode].origin;
+  var_6 = distance2dsquared(var_5, self.origin);
+  var_7 = var_4.flyoverarrivaldist * var_4.flyoverarrivaldist;
+  if(var_6 <= var_7) {
+    self._blackboard.flyoverarrivaldist = undefined;
     return 1;
   }
 
   return 0;
 }
 
-terminateflyoverarrival(param_00, param_01, param_02) {
+terminateflyoverarrival(var_0, var_1, var_2) {
   self scragentsetanimscale(1, 1);
 }
 
-flyoverloopnotehandler(param_00, param_01, param_02, param_03) {}
+flyoverloopnotehandler(var_0, var_1, var_2, var_3) {}
 
-black_hole_start_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "start_blackhole") {
+black_hole_start_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "start_blackhole") {
     thread createmephblackhole();
   }
 }
 
-playblackholeloop(param_00, param_01, param_02, param_03) {
+playblackholeloop(var_0, var_1, var_2, var_3) {
   self.blackholetimer = scripts\asm\dlc4\dlc4_asm::gettunedata().black_hole_duration;
-  thread playblackholeloophelper(param_01);
-  lib_0F3C::func_B050(param_00, param_01, param_02, param_03);
+  thread playblackholeloophelper(var_1);
+  lib_0F3C::func_B050(var_0, var_1, var_2, var_3);
 }
 
-playblackholeloophelper(param_00) {
-  self endon(param_00 + "_finished");
+playblackholeloophelper(var_0) {
+  self endon(var_0 + "_finished");
   while(self.blackholetimer > 0) {
     self.blackholetimer = self.blackholetimer - 50;
     wait(0.05);
   }
 }
 
-blackholelooptransition(param_00, param_01, param_02, param_03) {
+blackholelooptransition(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.blackholetimer) || self.blackholetimer > 0) {
     return 0;
   }
@@ -910,19 +910,19 @@ blackholelooptransition(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-black_hole_end_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "blackhole_end") {
+black_hole_end_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "blackhole_end") {
     self notify("stop_blackhole");
   }
 }
 
-eclipse_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "start_eclipse") {
+eclipse_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "start_eclipse") {
     thread create_eclipse();
     return;
   }
 
-  if(param_00 == "start_wave") {
+  if(var_0 == "start_wave") {
     thread doeclipsespecialwave();
     thread eclipsespecialwavetimer();
   }
@@ -931,51 +931,51 @@ eclipse_note_handler(param_00, param_01, param_02, param_03) {
 doeclipsespecialwave() {
   self endon("death");
   level endon("ECLIPSE_SPAWN_COMPLETE");
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   self.eclipseactive = 1;
-  var_01 = self.unlockedactions.size;
-  var_02 = var_00.base_spawn_interval;
-  var_03 = var_00.specialwavesdata["BASIC_" + var_01];
-  var_04 = var_00.specialwavesdata["PHANTOM_" + var_01];
-  var_05 = var_03 + var_04;
-  var_06 = [];
-  for(var_07 = 0; var_07 < var_03; var_07++) {
+  var_1 = self.unlockedactions.size;
+  var_2 = var_0.base_spawn_interval;
+  var_3 = var_0.specialwavesdata["BASIC_" + var_1];
+  var_4 = var_0.specialwavesdata["PHANTOM_" + var_1];
+  var_5 = var_3 + var_4;
+  var_6 = [];
+  for(var_7 = 0; var_7 < var_3; var_7++) {
     if(randomfloat(1) > 0.5) {
-      var_06[var_06.size] = "generic_zombie";
+      var_6[var_6.size] = "generic_zombie";
       continue;
     }
 
-    var_06[var_06.size] = "alien_goon";
+    var_6[var_6.size] = "alien_goon";
   }
 
-  for(var_07 = 0; var_07 < var_04; var_07++) {
-    var_06[var_06.size] = "alien_phantom";
+  for(var_7 = 0; var_7 < var_4; var_7++) {
+    var_6[var_6.size] = "alien_phantom";
   }
 
-  var_06 = scripts\engine\utility::array_randomize(var_06);
-  for(var_07 = 0; var_07 < var_05; var_07++) {
+  var_6 = scripts\engine\utility::array_randomize(var_6);
+  for(var_7 = 0; var_7 < var_5; var_7++) {
     while(scripts\mp\mp_agent::getactiveagentsoftype("all").size >= 24) {
       scripts\engine\utility::waitframe();
     }
 
     scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(1, scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
-    if(isDefined(var_00.spawnpoints[0])) {
-      spawnzombie(var_06[var_07], var_00.spawnpoints[0]);
+    if(isDefined(var_0.spawnpoints[0])) {
+      spawnzombie(var_6[var_7], var_0.spawnpoints[0]);
     }
 
-    wait(var_02);
-    var_02 = var_02 * var_00.spawn_interval_decay;
+    wait(var_2);
+    var_2 = var_2 * var_0.spawn_interval_decay;
   }
 
-  var_08 = var_00.specialwavesdata["SPECIAL_" + var_01];
-  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size + var_08.size > 24) {
+  var_8 = var_0.specialwavesdata["SPECIAL_" + var_1];
+  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size + var_8.size > 24) {
     wait(1);
   }
 
-  scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(var_08.size, scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
-  for(var_07 = 0; var_07 < var_08.size; var_07++) {
-    if(isDefined(var_00.spawnpoints[var_07])) {
-      spawnzombie(var_08[var_07], var_00.spawnpoints[var_07]);
+  scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(var_8.size, scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
+  for(var_7 = 0; var_7 < var_8.size; var_7++) {
+    if(isDefined(var_0.spawnpoints[var_7])) {
+      spawnzombie(var_8[var_7], var_0.spawnpoints[var_7]);
     }
   }
 
@@ -989,9 +989,9 @@ doeclipsespecialwave() {
 
 eclipsespecialwavetimer() {
   level endon("ECLIPSE_SPAWN_COMPLETE");
-  var_00 = gettime();
-  var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata().eclipse_duration;
-  while(gettime() < var_00 + var_01) {
+  var_0 = gettime();
+  var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata().eclipse_duration;
+  while(gettime() < var_0 + var_1) {
     wait(1);
   }
 
@@ -999,50 +999,50 @@ eclipsespecialwavetimer() {
 }
 
 create_eclipse() {
-  var_00 = getent("eclipse_blocker", "targetname");
-  if(!isDefined(var_00.og_origin)) {
-    var_00.og_origin = var_00.origin;
+  var_0 = getent("eclipse_blocker", "targetname");
+  if(!isDefined(var_0.og_origin)) {
+    var_0.og_origin = var_0.origin;
   }
 
-  var_01 = spawnfx(level._effect["vfx_boss_sun_blocker"], (-17910.3, 966.038, 5116), anglesToForward((43.4021, 347.643, -7.50797)), anglestoup((43.4021, 347.643, -7.50797)));
-  triggerfx(var_01);
+  var_1 = spawnfx(level._effect["vfx_boss_sun_blocker"], (-17910.3, 966.038, 5116), anglesToForward((43.4021, 347.643, -7.50797)), anglestoup((43.4021, 347.643, -7.50797)));
+  triggerfx(var_1);
   playsoundatpos((-17910.3, 966.038, 5116), "cp_final_meph_eclipse_rock_forming");
   wait(1);
-  var_00 moveto((-17391.3, 400, 3900), 1.25);
+  var_0 moveto((-17391.3, 400, 3900), 1.25);
   level.current_vision_set = "cp_final_meph_eclipse";
   visionsetnaked("cp_final_meph_eclipse", 1);
   level waittill("ECLIPSE_SPAWN_COMPLETE");
-  var_02 = spawnfx(level._effect["vfx_sun_blocker_end"], (-17910.3, 966.038, 5116), anglesToForward((43.4021, 347.643, -7.50797)), anglestoup((43.4021, 347.643, -7.50797)));
-  triggerfx(var_02);
-  var_01 delete();
+  var_2 = spawnfx(level._effect["vfx_sun_blocker_end"], (-17910.3, 966.038, 5116), anglesToForward((43.4021, 347.643, -7.50797)), anglestoup((43.4021, 347.643, -7.50797)));
+  triggerfx(var_2);
+  var_1 delete();
   visionsetnaked("cp_final_meph", 1);
   level.current_vision_set = "cp_final_meph";
-  var_00 moveto(var_00.og_origin, 1.25);
+  var_0 moveto(var_0.og_origin, 1.25);
   thread createarmageddon();
 }
 
 createarmageddon() {
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_01 = var_00.safe_zone_radius * var_00.safe_zone_radius;
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_1 = var_0.safe_zone_radius * var_0.safe_zone_radius;
   wait(0.5);
-  var_02 = gettime() + var_00.armageddon_duration;
-  var_03 = self.unlockedactions.size;
-  var_04 = pow(var_00.meteor_period_stage_decay, var_03);
-  var_05 = var_00.meteor_min_period * var_04;
-  var_06 = var_00.meteor_max_period * var_04;
-  while(gettime() < var_02) {
-    var_07 = sqrt(randomfloat(1)) * var_00.meteor_target_radius;
-    var_08 = randomfloat(360);
-    var_09 = self.arenacenter[0] + var_07 * cos(var_08);
-    var_0A = self.arenacenter[1] + var_07 * sin(var_08);
-    var_0B = (var_09, var_0A, self.arenacenter[2]);
+  var_2 = gettime() + var_0.armageddon_duration;
+  var_3 = self.unlockedactions.size;
+  var_4 = pow(var_0.meteor_period_stage_decay, var_3);
+  var_5 = var_0.meteor_min_period * var_4;
+  var_6 = var_0.meteor_max_period * var_4;
+  while(gettime() < var_2) {
+    var_7 = sqrt(randomfloat(1)) * var_0.meteor_target_radius;
+    var_8 = randomfloat(360);
+    var_9 = self.arenacenter[0] + var_7 * cos(var_8);
+    var_0A = self.arenacenter[1] + var_7 * sin(var_8);
+    var_0B = (var_9, var_0A, self.arenacenter[2]);
     var_0C = distance2dsquared(var_0B, (-13165, 74, -46));
     var_0D = distance2dsquared(var_0B, (-13263, -767, -46));
-    if(var_0C > var_01 && var_0D > var_01) {
+    if(var_0C > var_1 && var_0D > var_1) {
       magicbullet("iw7_dlc4eclipse_mp", (-17910.3, 966.038, 5116), var_0B);
     }
 
-    wait(randomfloatrange(var_05, var_06));
+    wait(randomfloatrange(var_5, var_6));
   }
 
   foreach(var_0F in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
@@ -1055,22 +1055,22 @@ createarmageddon() {
   self.eclipseactive = 0;
 }
 
-shouldgointolaststand(param_00, param_01, param_02, param_03) {
-  return level.fbd.bossstate == "LAST_STAND" && scripts\asm\dlc4\dlc4_asm::isanimdone(param_00, param_01, param_02, param_03);
+shouldgointolaststand(var_0, var_1, var_2, var_3) {
+  return level.fbd.bossstate == "LAST_STAND" && scripts\asm\dlc4\dlc4_asm::isanimdone(var_0, var_1, var_2, var_3);
 }
 
-shouldplaydeath(param_00, param_01, param_02, param_03) {
-  return level.fbd.victory && scripts\asm\dlc4\dlc4_asm::isanimdone(param_00, param_01, param_02, param_03);
+shouldplaydeath(var_0, var_1, var_2, var_3) {
+  return level.fbd.victory && scripts\asm\dlc4\dlc4_asm::isanimdone(var_0, var_1, var_2, var_3);
 }
 
-death_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "fadeout") {
+death_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "fadeout") {
     level thread meph_victory();
   }
 }
 
-death_ground_idle_note_handler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "idle_pain") {
+death_ground_idle_note_handler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "idle_pain") {
     self playSound("final_meph_pain_teleport");
   }
 }
@@ -1078,33 +1078,33 @@ death_ground_idle_note_handler(param_00, param_01, param_02, param_03) {
 meph_victory() {
   scripts\cp\maps\cp_final\cp_final::disablepas();
   scripts\cp\cp_vo::set_vo_system_busy(1);
-  foreach(var_01 in level.players) {
-    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_01);
-    var_01 _meth_82C0("bink_fadeout_amb", 0.66);
+  foreach(var_1 in level.players) {
+    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_1);
+    var_1 _meth_82C0("bink_fadeout_amb", 0.66);
   }
 
   level notify("FINAL_BOSS_VICTORY");
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    foreach(var_01 in level.players) {
-      var_01 thread scripts\cp\utility::player_black_screen(0.25, 20, 0.25, 0, 1);
+    foreach(var_1 in level.players) {
+      var_1 thread scripts\cp\utility::player_black_screen(0.25, 20, 0.25, 0, 1);
     }
 
     level thread scripts\cp\zombies\direct_boss_fight::success_sequence(undefined, 6);
     return;
   }
 
-  foreach(var_03 in level.players) {
-    var_03 thread scripts\cp\utility::player_black_screen(0.25, 1, 0.25, 0, 1);
-    var_03 scripts\cp\cp_merits::processmerit("mt_dlc4_troll2");
-    var_03 setplayerdata("cp", "meritState", "mt_dc_camo", 1);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\utility::player_black_screen(0.25, 1, 0.25, 0, 1);
+    var_3 scripts\cp\cp_merits::processmerit("mt_dlc4_troll2");
+    var_3 setplayerdata("cp", "meritState", "mt_dc_camo", 1);
   }
 
   setomnvar("zm_boss_splash", 7);
   wait(0.55);
   scripts\cp\utility::play_bink_video("sysload_o3", 32, 0);
   wait(33);
-  foreach(var_03 in level.players) {
-    var_03 clearclienttriggeraudiozone(0.3);
+  foreach(var_3 in level.players) {
+    var_3 clearclienttriggeraudiozone(0.3);
   }
 
   level thread[[level.endgame]]("axis", level.end_game_string_index["win"]);
@@ -1116,7 +1116,7 @@ smallpain() {
     self.soulhealth = 999;
     if(self.interruptable) {
       self notify("pain");
-      self.var_1198.painnotifytime = 100;
+      self._blackboard.painnotifytime = 100;
       scripts\aitypes\dlc4_boss\behaviors::setnextaction("ground_vul");
       level notify(scripts\asm\dlc4\dlc4_asm::gettunedata().soul_health_depleted_notify);
       self notify("stop_blackhole");
@@ -1137,32 +1137,32 @@ shouldterminateaction() {
   return 0;
 }
 
-choosepainmovinganim(param_00, param_01, param_02) {
-  var_03 = self.var_1198.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosepainmovinganim(var_0, var_1, var_2) {
+  var_3 = self._blackboard.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-painterminate(param_00, param_01, param_02) {}
+painterminate(var_0, var_1, var_2) {}
 
-playpain(param_00, param_01, param_02, param_03) {
+playpain(var_0, var_1, var_2, var_3) {
   self.terminateaction = 1;
   self.vulnerable = 1;
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-playmovingpain(param_00, param_01, param_02, param_03) {
+playmovingpain(var_0, var_1, var_2, var_3) {
   self.terminateaction = 1;
   self.vulnerable = 1;
-  playmoveexit(param_00, param_01, param_02, param_03);
+  playmoveexit(var_0, var_1, var_2, var_3);
 }
 
-playlaststandloop(param_00, param_01, param_02, param_03) {
+playlaststandloop(var_0, var_1, var_2, var_3) {
   level.laststandfx = spawnfx(level._effect["soul_bomb"], self.arenacenter + (0, 0, 450));
   triggerfx(level.laststandfx);
   playsoundatpos(self.arenacenter + (0, 0, 450), "cp_final_meph_final_soul_bomb_start");
   level.dlc4_boss playLoopSound("cp_final_meph_final_soul_bomb_lp");
   thread laststandmonitor();
-  lib_0F3C::func_B050(param_00, param_01, param_02, param_03);
+  lib_0F3C::func_B050(var_0, var_1, var_2, var_3);
 }
 
 laststandmonitor() {
@@ -1173,17 +1173,17 @@ laststandmonitor() {
     level thread scripts\cp\maps\cp_final\cp_final_final_boss::play_meph_vo(level.dlc4_boss scripts\cp\utility::get_closest_living_player(), "nag_meph_damage", 1);
   }
 
-  var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_time;
-  for(var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_victory_min_time; var_00 > 0; var_01 = var_01 - 50) {
+  var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_time;
+  for(var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_victory_min_time; var_0 > 0; var_1 = var_1 - 50) {
     scripts\engine\utility::waitframe();
-    if(var_01 <= 0) {
+    if(var_1 <= 0) {
       if(self.laststandhealth <= 0 && !level.fbd.victory) {
         scripts\cp\maps\cp_final\cp_final_final_boss::victory();
         return;
       }
     }
 
-    var_00 = var_00 - 50;
+    var_0 = var_0 - 50;
   }
 
   self stoploopsound();
@@ -1196,22 +1196,22 @@ laststandmonitor() {
   level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
 }
 
-fightending(param_00, param_01, param_02) {}
+fightending(var_0, var_1, var_2) {}
 
-playanimandteleport(param_00, param_01, param_02, param_03) {
-  thread teleportwhenanimdone(param_01, param_03);
-  lib_0F3C::func_CEA8(param_00, param_01, param_02, param_03);
+playanimandteleport(var_0, var_1, var_2, var_3) {
+  thread teleportwhenanimdone(var_1, var_3);
+  lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
-teleportnotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "teleport_start") {
+teleportnotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "teleport_start") {
     self playSound("cp_final_teleport_build_and_out_lr");
-    var_04 = self gettagorigin("tag_origin");
-    var_05 = self gettagangles("tag_origin");
-    playFX(level._effect["boss_teleport_start"], var_04, anglesToForward(var_05), (0, 0, 1));
-    var_04 = self gettagorigin("tag_fx_clavicle_4_ri");
-    var_05 = self gettagangles("tag_fx_clavicle_4_ri");
-    playFX(level._effect["boss_teleport_start_left"], var_04, anglesToForward(var_05), (0, 0, 1));
+    var_4 = self gettagorigin("tag_origin");
+    var_5 = self gettagangles("tag_origin");
+    playFX(level._effect["boss_teleport_start"], var_4, anglesToForward(var_5), (0, 0, 1));
+    var_4 = self gettagorigin("tag_fx_clavicle_4_ri");
+    var_5 = self gettagangles("tag_fx_clavicle_4_ri");
+    playFX(level._effect["boss_teleport_start_left"], var_4, anglesToForward(var_5), (0, 0, 1));
     destroynavrepulsor("dlc4_boss_repulsor");
     if(isDefined(self.var_BE6F)) {
       destroynavobstacle(self.var_BE6F);
@@ -1219,26 +1219,26 @@ teleportnotehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-teleportendnotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "teleport_end") {
+teleportendnotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "teleport_end") {
     self playSound("cp_final_teleport_in_lr");
-    var_04 = self gettagorigin("tag_origin");
-    var_05 = self gettagangles("tag_origin");
-    playFX(level._effect["boss_teleport_end"], var_04, anglesToForward(var_05), (0, 0, 1));
-    var_04 = self gettagorigin("tag_fx_clavicle_4_ri");
-    var_05 = self gettagangles("tag_fx_clavicle_4_ri");
-    playFX(level._effect["boss_teleport_end_left"], var_04, anglesToForward(var_05), (0, 0, 1));
+    var_4 = self gettagorigin("tag_origin");
+    var_5 = self gettagangles("tag_origin");
+    playFX(level._effect["boss_teleport_end"], var_4, anglesToForward(var_5), (0, 0, 1));
+    var_4 = self gettagorigin("tag_fx_clavicle_4_ri");
+    var_5 = self gettagangles("tag_fx_clavicle_4_ri");
+    playFX(level._effect["boss_teleport_end_left"], var_4, anglesToForward(var_5), (0, 0, 1));
   }
 }
 
-teleportwhenanimdone(param_00, param_01) {
-  self endon(param_00 + "_finished");
+teleportwhenanimdone(var_0, var_1) {
+  self endon(var_0 + "_finished");
   for(;;) {
-    if(scripts\asm\asm::func_232B(param_00, "end")) {
-      if(param_01 == "center") {
-        thread doteleporttocenter(param_00);
+    if(scripts\asm\asm::func_232B(var_0, "end")) {
+      if(var_1 == "center") {
+        thread doteleporttocenter(var_0);
       } else {
-        thread doteleporttodesirednode(param_00);
+        thread doteleporttodesirednode(var_0);
       }
 
       return;
@@ -1248,12 +1248,12 @@ teleportwhenanimdone(param_00, param_01) {
   }
 }
 
-checkteleportdone(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm::func_232B(param_01, "teleport_finished");
-  return var_04;
+checkteleportdone(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm::func_232B(var_1, "teleport_finished");
+  return var_4;
 }
 
-doteleporttocenter(param_00) {
+doteleporttocenter(var_0) {
   self setethereal(1);
   wait(0.5);
   while(isDefined(self.doinggroundvul) && self.doinggroundvul && isDefined(self.claponarena) && self.claponarena) {
@@ -1262,39 +1262,39 @@ doteleporttocenter(param_00) {
 
   func_11663(self.arenacenter);
   thread showlater();
-  scripts\asm\asm::asm_fireevent(param_00, "teleport_finished");
+  scripts\asm\asm::asm_fireevent(var_0, "teleport_finished");
 }
 
-doteleporttodesirednode(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+doteleporttodesirednode(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   self setethereal(1);
   wait(0.5);
-  teleporttodesirednode(param_01);
+  teleporttodesirednode(var_1);
   facearenacenter();
   thread showlater();
-  scripts\asm\asm::asm_fireevent(param_00, "teleport_finished");
+  scripts\asm\asm::asm_fireevent(var_0, "teleport_finished");
 }
 
-teleporttodesirednode(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+teleporttodesirednode(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var_01 = self.var_1198.nodes[self.var_1198.desirednode].origin;
-  if(param_00) {
-    var_01 = (var_01[0], var_01[1], self.origin[2]);
+  var_1 = self._blackboard.nodes[self._blackboard.desirednode].origin;
+  if(var_0) {
+    var_1 = (var_1[0], var_1[1], self.origin[2]);
   }
 
-  func_11663(var_01);
-  self.var_1198.var_4BF7 = self.var_1198.desirednode;
+  func_11663(var_1);
+  self._blackboard.var_4BF7 = self._blackboard.desirednode;
 }
 
-func_11663(param_00) {
-  self setorigin(param_00 - (0, 0, 1), 0);
-  self.var_1198.var_4BF7 = self.var_1198.desirednode;
+func_11663(var_0) {
+  self setorigin(var_0 - (0, 0, 1), 0);
+  self._blackboard.var_4BF7 = self._blackboard.desirednode;
 }
 
 facearenacenter() {
@@ -1302,13 +1302,13 @@ facearenacenter() {
 }
 
 facedesirednode() {
-  faceposition(self.var_1198.nodes[self.var_1198.desirednode].origin);
+  faceposition(self._blackboard.nodes[self._blackboard.desirednode].origin);
 }
 
-faceposition(param_00) {
-  var_01 = param_00 - self.origin * (1, 1, 0);
-  var_02 = vectortoangles(var_01);
-  self orientmode("face angle abs", var_02);
+faceposition(var_0) {
+  var_1 = var_0 - self.origin * (1, 1, 0);
+  var_2 = vectortoangles(var_1);
+  self orientmode("face angle abs", var_2);
 }
 
 showlater() {
@@ -1320,22 +1320,22 @@ showlater() {
 }
 
 createmephblackhole() {
-  var_00 = self.arenacenter + (0, 0, 85);
+  var_0 = self.arenacenter + (0, 0, 85);
   if(!isDefined(level.blackhole_scriptable)) {
-    level.blackhole_physics_vol = physics_volumecreate(var_00, 500);
-    level.blackhole_physics_vol physics_volumesetasfocalforce(1, var_00, 500);
-    level.blackhole_scriptable = spawn("script_model", var_00);
+    level.blackhole_physics_vol = physics_volumecreate(var_0, 500);
+    level.blackhole_physics_vol physics_volumesetasfocalforce(1, var_0, 500);
+    level.blackhole_scriptable = spawn("script_model", var_0);
     level.blackhole_scriptable setModel("tag_origin_demon_blackhole");
   }
 
-  var_01 = spawnimpulsefield(self, "demon_blackhole_zm", var_00);
+  var_1 = spawnimpulsefield(self, "demon_blackhole_zm", var_0);
   level.blackhole_physics_vol physics_volumeenable(1);
   level.blackhole_physics_vol physics_volumesetactivator(1);
   level.blackhole_scriptable setscriptablepartstate("vortexEnd", "neutral");
   level.blackhole_scriptable setscriptablepartstate("vortexUpdate", "active_cp", 0);
-  level thread mephbhquake(var_00, self);
+  level thread mephbhquake(var_0, self);
   self waittill("stop_blackhole");
-  var_01 delete();
+  var_1 delete();
   level.blackhole_scriptable setscriptablepartstate("vortexStart", "neutral", 0);
   level.blackhole_scriptable setscriptablepartstate("vortexUpdate", "neutral", 0);
   level.blackhole_scriptable setscriptablepartstate("vortexEnd", "active", 0);
@@ -1345,85 +1345,85 @@ createmephblackhole() {
   level.blackhole_scriptable setscriptablepartstate("vortexEnd", "neutral", 0);
 }
 
-mephbhquake(param_00, param_01) {
-  param_01 endon("stop_blackhole");
+mephbhquake(var_0, var_1) {
+  var_1 endon("stop_blackhole");
   for(;;) {
-    earthquake(0.3, 2, param_00, 500);
-    playrumbleonposition("grenade_rumble", param_00);
+    earthquake(0.3, 2, var_0, 500);
+    playrumbleonposition("grenade_rumble", var_0);
     wait(0.25);
-    foreach(var_03 in level.players) {
-      if(!var_03 scripts\cp\utility::is_valid_player()) {
+    foreach(var_3 in level.players) {
+      if(!var_3 scripts\cp\utility::is_valid_player()) {
         continue;
       }
 
-      if(distance2d(var_03.origin, param_00) <= 100) {
-        var_03 dodamage(var_03.health + 100, param_00, param_01, param_01, "MOD_EXPLOSIVE");
+      if(distance2d(var_3.origin, var_0) <= 100) {
+        var_3 dodamage(var_3.health + 100, var_0, var_1, var_1, "MOD_EXPLOSIVE");
         continue;
       }
 
-      if(distance2d(var_03.origin, param_00) < 250) {
-        var_03 shellshock("default_nosound", 0.5);
+      if(distance2d(var_3.origin, var_0) < 250) {
+        var_3 shellshock("default_nosound", 0.5);
       }
     }
   }
 }
 
-spawnzombie(param_00, param_01) {
-  var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_03 = spawnStruct();
-  var_03.origin = param_01;
-  var_03.angles = vectortoangles(self.arenacenter - var_03.origin);
-  if(param_00 == "skeleton" || param_00 == "generic_zombie") {
-    var_03.script_parameters = "ground_spawn_no_boards";
-    var_03.script_animation = "spawn_ground";
-    var_03.script_fxid = "dirt";
-  } else if(param_00 == "alien_goon") {
-    scripts\cp\zombies\cp_final_spawning::func_1B99(var_03);
-  } else if(param_00 == "alien_phantom") {
-    scripts\cp\zombies\cp_final_spawning::func_3115(var_03);
-  } else if(param_00 == "alien_rhino" || param_00 == "zombie_clown" || param_00 == "karatemaster" || param_00 == "slasher") {
-    scripts\cp\zombies\cp_final_spawning::func_3115(var_03);
+spawnzombie(var_0, var_1) {
+  var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_3 = spawnStruct();
+  var_3.origin = var_1;
+  var_3.angles = vectortoangles(self.arenacenter - var_3.origin);
+  if(var_0 == "skeleton" || var_0 == "generic_zombie") {
+    var_3.script_parameters = "ground_spawn_no_boards";
+    var_3.script_animation = "spawn_ground";
+    var_3.script_fxid = "dirt";
+  } else if(var_0 == "alien_goon") {
+    scripts\cp\zombies\cp_final_spawning::func_1B99(var_3);
+  } else if(var_0 == "alien_phantom") {
+    scripts\cp\zombies\cp_final_spawning::func_3115(var_3);
+  } else if(var_0 == "alien_rhino" || var_0 == "zombie_clown" || var_0 == "karatemaster" || var_0 == "slasher") {
+    scripts\cp\zombies\cp_final_spawning::func_3115(var_3);
   }
 
-  var_04 = var_03 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy(param_00, 1);
-  if(!isDefined(var_04)) {
+  var_4 = var_3 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy(var_0, 1);
+  if(!isDefined(var_4)) {
     return;
   }
 
-  var_04.entered_playspace = 1;
-  var_04.dont_cleanup = 1;
-  var_04.dont_scriptkill = 1;
-  if(param_00 == "skeleton" || param_00 == "generic_zombie") {
-    var_04.maxhealth = var_02.skeleton_health;
-    var_04.health = var_02.skeleton_health;
-    var_04 thread setup_summoned_zombie(param_00);
+  var_4.entered_playspace = 1;
+  var_4.dont_cleanup = 1;
+  var_4.dont_scriptkill = 1;
+  if(var_0 == "skeleton" || var_0 == "generic_zombie") {
+    var_4.maxhealth = var_2.skeleton_health;
+    var_4.health = var_2.skeleton_health;
+    var_4 thread setup_summoned_zombie(var_0);
   }
 
-  if(param_00 == "alien_goon" || param_00 == "alien_phantom" || param_00 == "alien_rhino") {
-    var_04 getrandomhovernodesaroundtargetpos(1, 1);
-    if(param_00 == "alien_goon") {
-      var_04.maxhealth = int(var_02.skeleton_health / 2);
-      var_04.health = int(var_02.skeleton_health / 2);
+  if(var_0 == "alien_goon" || var_0 == "alien_phantom" || var_0 == "alien_rhino") {
+    var_4 getrandomhovernodesaroundtargetpos(1, 1);
+    if(var_0 == "alien_goon") {
+      var_4.maxhealth = int(var_2.skeleton_health / 2);
+      var_4.health = int(var_2.skeleton_health / 2);
     }
   }
 
-  if(param_00 == "slasher") {
+  if(var_0 == "slasher") {
     level.slasher_level = 0;
-    var_04.allowpain = 0;
+    var_4.allowpain = 0;
   }
 
-  if(param_00 == "zombie_clown" || param_00 == "karatemaster") {
-    var_04.maxhealth = 3200;
-    var_04.health = 3200;
+  if(var_0 == "zombie_clown" || var_0 == "karatemaster") {
+    var_4.maxhealth = 3200;
+    var_4.health = 3200;
   }
 }
 
 getspecialenemy() {
   if(randomfloat(1) > scripts\asm\dlc4\dlc4_asm::gettunedata().chance_to_target_charger) {
-    var_00 = level.fbd.playerschargingcircle.size;
-    if(var_00 > 0) {
-      var_01 = level.fbd.playerschargingcircle[randomint(var_00)];
-      self.myenemy = var_01;
+    var_0 = level.fbd.playerschargingcircle.size;
+    if(var_0 > 0) {
+      var_1 = level.fbd.playerschargingcircle[randomint(var_0)];
+      self.myenemy = var_1;
     }
   }
 

@@ -17,7 +17,7 @@ func_97C5() {
   level.var_1B73 = 900;
 }
 
-func_97C8(param_00) {
+func_97C8(var_0) {
   level.var_1BBA.var_A4E2 = 907.0294;
   level.var_1BBA.var_A4E6 = 16.8476;
   level.var_1BBA.var_A4E7 = 0.111111;

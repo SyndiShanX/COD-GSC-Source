@@ -24,9 +24,9 @@ func_FAB0() {
   level.agent_funcs["slasher"]["on_killed"] = ::onslasherkilled;
 }
 
-func_FACE(param_00) {
-  var_01 = getdvar("ui_mapname");
-  if(var_01 == "cp_final") {
+func_FACE(var_0) {
+  var_1 = getdvar("ui_mapname");
+  if(var_1 == "cp_final") {
     self setModel("body_final_slasher");
   } else {
     self setModel("body_zmb_slasher");
@@ -149,8 +149,8 @@ setupagent() {
   self.footstepdetectdistsprint = 2500;
   self.var_71D0 = ::shouldslasherplaypainanim;
   self.precacheleaderboards = 1;
-  var_00 = getdvar("ui_mapname");
-  if(var_00 != "cp_final") {
+  var_0 = getdvar("ui_mapname");
+  if(var_0 != "cp_final") {
     self setethereal(1);
   }
 
@@ -166,12 +166,12 @@ setupagent() {
   thread listen_for_fake_death();
 }
 
-turn_on_saw_blade_after_time(param_00) {
+turn_on_saw_blade_after_time(var_0) {
   self endon("death");
-  wait(param_00);
+  wait(var_0);
   self setscriptablepartstate("slasher_saw", "active");
-  var_01 = getdvar("ui_mapname");
-  if(var_01 == "cp_final") {
+  var_1 = getdvar("ui_mapname");
+  if(var_1 == "cp_final") {
     return;
   }
 
@@ -195,7 +195,7 @@ turn_on_saw_blade_after_time(param_00) {
   }
 }
 
-accumulatedamage(param_00, param_01) {
+accumulatedamage(var_0, var_1) {
   if(!isDefined(self.damageaccumulator)) {
     self.damageaccumulator = spawnStruct();
     self.damageaccumulator.accumulateddamage = 0;
@@ -205,12 +205,12 @@ accumulatedamage(param_00, param_01) {
   }
 
   self.damageaccumulator.lastdamagetime = gettime();
-  if(!isDefined(param_01)) {
-    param_01 = (1, 1, 1);
+  if(!isDefined(var_1)) {
+    var_1 = (1, 1, 1);
   }
 
-  self.damageaccumulator.lastdir = param_01;
-  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
+  self.damageaccumulator.lastdir = var_1;
+  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
 isinravemode() {
@@ -221,84 +221,84 @@ isinravemode() {
   return 0;
 }
 
-onslasherdamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  var_0D = param_02;
-  if(param_05 == "iw7_harpoon_zm") {
-    param_02 = min(0.1 * self.maxhealth, 2000);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon1")) {
-    param_02 = min(0.01 * self.maxhealth, 100);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon2")) {
-    param_02 = min(0.1 * self.maxhealth, 1500);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon3")) {
-    param_02 = min(0.1 * self.maxhealth, 1500);
-    param_02 = int(param_02);
-  } else if(issubstr(param_05, "harpoon4")) {
-    param_02 = min(0.01 * self.maxhealth, 1000);
-    param_02 = int(param_02);
+onslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  var_0D = var_2;
+  if(var_5 == "iw7_harpoon_zm") {
+    var_2 = min(0.1 * self.maxhealth, 2000);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon1")) {
+    var_2 = min(0.01 * self.maxhealth, 100);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon2")) {
+    var_2 = min(0.1 * self.maxhealth, 1500);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon3")) {
+    var_2 = min(0.1 * self.maxhealth, 1500);
+    var_2 = int(var_2);
+  } else if(issubstr(var_5, "harpoon4")) {
+    var_2 = min(0.01 * self.maxhealth, 1000);
+    var_2 = int(var_2);
   }
 
-  if(isDefined(param_05) && param_05 == "iw7_slasher_zm") {
-    param_02 = param_02 * 0.1;
-    param_02 = int(param_02);
+  if(isDefined(var_5) && var_5 == "iw7_slasher_zm") {
+    var_2 = var_2 * 0.1;
+    var_2 = int(var_2);
   } else {
-    if(isinravemode() || scripts\engine\utility::istrue(param_01.rave_mode)) {
-      param_02 = 0;
+    if(isinravemode() || scripts\engine\utility::istrue(var_1.rave_mode)) {
+      var_2 = 0;
     }
 
     if(scripts\asm\asm::asm_isinstate("block")) {
-      param_02 = param_02 * 0.1;
-      param_02 = int(param_02);
+      var_2 = var_2 * 0.1;
+      var_2 = int(var_2);
     }
   }
 
   if(isDefined(level.players) && level.players.size > 1) {
-    if(param_02 != 0) {
-      var_0E = int(param_02 / level.players.size + 1);
-      param_02 = int(max(var_0E, 1));
+    if(var_2 != 0) {
+      var_0E = int(var_2 / level.players.size + 1);
+      var_2 = int(max(var_0E, 1));
     }
   }
 
-  if(param_02 > 0) {
-    accumulatedamage(param_02, param_07);
+  if(var_2 > 0) {
+    accumulatedamage(var_2, var_7);
   }
 
   if(isDefined(self.nodamagescale)) {
-    param_02 = var_0D;
+    var_2 = var_0D;
   }
 
-  slasher_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0B, param_0C);
+  slasher_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C);
 }
 
-slasher_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
+slasher_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
   var_0D = self.health;
-  if(isDefined(param_07)) {
-    var_0E = vectortoyaw(param_07);
+  if(isDefined(var_7)) {
+    var_0E = vectortoyaw(var_7);
     var_0F = self.angles[1];
     self.var_E3 = angleclamp180(var_0E - var_0F);
   } else {
     self.var_E3 = 0;
   }
 
-  self.var_DD = param_08;
-  self.var_DE = param_04;
-  self.damagedby = param_01;
-  self.var_DC = param_07;
-  self.var_E1 = param_02;
-  self.var_E2 = param_05;
-  self.var_4D62 = param_06;
-  if(param_02 >= self.health) {
-    param_02 = 0;
-    if(isDefined(param_05) && param_05 == "iw7_slasher_zm") {
-      param_01 notify("slasher_killed_by_own_weapon", param_01, param_05);
+  self.var_DD = var_8;
+  self.var_DE = var_4;
+  self.damagedby = var_1;
+  self.var_DC = var_7;
+  self.var_E1 = var_2;
+  self.var_E2 = var_5;
+  self.var_4D62 = var_6;
+  if(var_2 >= self.health) {
+    var_2 = 0;
+    if(isDefined(var_5) && var_5 == "iw7_slasher_zm") {
+      var_1 notify("slasher_killed_by_own_weapon", var_1, var_5);
     }
 
     self notify("fake_death");
   }
 
-  self getrespawndelay(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0B, param_0C, 0, 1);
+  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C, 0, 1);
   if(self.health > 0 && self.health < var_0D) {
     self notify("pain");
   }
@@ -308,15 +308,15 @@ slasher_on_damage_finished(param_00, param_01, param_02, param_03, param_04, par
     if(isDefined(var_10)) {
       [
         [var_10]
-      ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
     }
   }
 }
 
-onslasherkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self detach("weapon_zmb_slasher_vm", "tag_weapon_right");
   self.nocorpse = 1;
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
 getslashergrenadehandoffset() {
@@ -340,11 +340,11 @@ getenemy() {
 }
 
 lookatslasherenemy() {
-  var_00 = getenemy();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", var_02);
+  var_0 = getenemy();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", var_2);
     return;
   }
 

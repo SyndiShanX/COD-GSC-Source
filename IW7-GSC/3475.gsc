@@ -4,14 +4,14 @@
 ***************************************/
 
 init() {
-  var_00 = spawnStruct();
+  var_0 = spawnStruct();
   var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "afr_mortar_ammo_01";
   var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
-  var_0.func_3A41 = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
-  var_0.func_67E5 = "deployable_juicebox_taken";
+  var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
+  var_0.var_67E5 = "deployable_juicebox_taken";
   var_0.streakname = "deployable_juicebox";
-  var_0.func_10A38 = "used_deployable_juicebox";
+  var_0.var_10A38 = "used_deployable_juicebox";
   var_0.shadername = "compass_objpoint_deploy_juiced_friendly";
   var_0.headiconoffset = 25;
   var_0.lifespan = 90.0;
@@ -30,15 +30,15 @@ init() {
   var_0.allowmeleedamage = 1;
   var_0.allowhvtspawn = 0;
   var_0.maxuses = 4;
-  level.boxsettings["deployable_juicebox"] = var_00;
+  level.boxsettings["deployable_juicebox"] = var_0;
   scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_juicebox", ::func_128E0);
   level.deployable_box["deployable_juicebox"] = [];
 }
 
-func_128E0(var_00, var_01) {
-  var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_juicebox");
+func_128E0(var_0, var_1) {
+  var_2 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_0, "deployable_juicebox");
 
-  if(!isDefined(var_02) || !var_02) {
+  if(!isDefined(var_2) || !var_2) {
     return 0;
   }
 
@@ -46,10 +46,10 @@ func_128E0(var_00, var_01) {
   return 1;
 }
 
-onusedeployable(var_00) {
+onusedeployable(var_0) {
   thread scripts\mp\perks\perkfunctions::setjuiced(15);
 }
 
-func_3937(var_00) {
+func_3937(var_0) {
   return !scripts\mp\utility\game::isjuggernaut() && !scripts\mp\perks\perkfunctions::hasjuiced();
 }

@@ -40,16 +40,16 @@ func_139A4() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_00 = self.origin;
-  var_01 = anglesToForward(self.angles);
-  var_02 = 1000;
-  var_03 = gettime();
-  var_04 = var_03 + var_02;
-  while(gettime() <= var_04) {
-    var_05 = 1 - var_04 - gettime() / var_02 * 4096;
-    foreach(var_07 in level.characters) {
-      if(func_13151(var_07, var_05, var_00, var_01)) {
-        var_07 thread func_13B9F(self);
+  var_0 = self.origin;
+  var_1 = anglesToForward(self.angles);
+  var_2 = 1000;
+  var_3 = gettime();
+  var_4 = var_3 + var_2;
+  while(gettime() <= var_4) {
+    var_5 = 1 - var_4 - gettime() / var_2 * 4096;
+    foreach(var_7 in level.characters) {
+      if(func_13151(var_7, var_5, var_0, var_1)) {
+        var_7 thread func_13B9F(self);
       }
     }
 
@@ -57,38 +57,38 @@ func_139A4() {
   }
 }
 
-func_13B9F(param_00) {
-  var_01 = self getentitynumber();
-  param_00.var_13455[var_01] = self;
+func_13B9F(var_0) {
+  var_1 = self getentitynumber();
+  var_0.var_13455[var_1] = self;
   if(!isai(self)) {
     scripts\mp\utility::_hudoutlineviewmodelenable(5);
   }
 
-  var_02 = scripts\mp\utility::outlineenableforplayer(self, "orange", param_00, 0, 1, "killstreak_personal");
-  func_13BA0(param_00, 5);
+  var_2 = scripts\mp\utility::outlineenableforplayer(self, "orange", var_0, 0, 1, "killstreak_personal");
+  func_13BA0(var_0, 5);
   if(isDefined(self)) {
     if(!isai(self)) {
       scripts\mp\utility::_hudoutlineviewmodeldisable();
     }
   }
 
-  if(isDefined(param_00)) {
-    if(isDefined(param_00.var_13455)) {
-      param_00.var_13455[var_01] = undefined;
+  if(isDefined(var_0)) {
+    if(isDefined(var_0.var_13455)) {
+      var_0.var_13455[var_1] = undefined;
     }
   }
 
-  scripts\mp\utility::outlinedisable(var_02, self);
+  scripts\mp\utility::outlinedisable(var_2, self);
 }
 
-func_13BA0(param_00, param_01) {
-  param_00 endon("death");
-  param_00 endon("disconnect");
+func_13BA0(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("disconnect");
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_02 = gettime() + param_01 * 1000;
-  while(gettime() <= var_02) {
+  var_2 = gettime() + var_1 * 1000;
+  while(gettime() <= var_2) {
     if(scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
       break;
     }
@@ -101,61 +101,61 @@ func_13BA0(param_00, param_01) {
   }
 }
 
-func_13151(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00)) {
+func_13151(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(param_00 == self) {
+  if(var_0 == self) {
     return 0;
   }
 
-  if(scripts\mp\utility::func_9E05(self.team, param_00)) {
+  if(scripts\mp\utility::func_9E05(self.team, var_0)) {
     return 0;
   }
 
-  if(func_9EF9(param_00)) {
+  if(func_9EF9(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return 0;
   }
 
-  if(param_00 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
+  if(var_0 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
     return 0;
   }
 
-  var_04 = param_00.origin - param_02 * (1, 1, 0);
-  if(length2dsquared(var_04) > param_01 * param_01) {
+  var_4 = var_0.origin - var_2 * (1, 1, 0);
+  if(length2dsquared(var_4) > var_1 * var_1) {
     return 0;
   }
 
   return 1;
 }
 
-func_9EF9(param_00) {
+func_9EF9(var_0) {
   if(isDefined(self.var_13455)) {
-    return isDefined(self.var_13455[param_00 getentitynumber()]);
+    return isDefined(self.var_13455[var_0 getentitynumber()]);
   }
 
   return 0;
 }
 
 func_13450() {
-  var_00 = self getEye();
-  var_01 = anglesToForward(self.angles);
-  var_02 = var_00 + var_01 * 4096;
-  var_03 = spawn("script_model", var_00);
-  var_03.angles = self.angles;
-  var_03 setModel("tag_origin");
+  var_0 = self getEye();
+  var_1 = anglesToForward(self.angles);
+  var_2 = var_0 + var_1 * 4096;
+  var_3 = spawn("script_model", var_0);
+  var_3.angles = self.angles;
+  var_3 setModel("tag_origin");
   wait(0.1);
-  playfxontagforclients(scripts\engine\utility::getfx("visionPulse_ping"), var_03, "tag_origin", self);
-  var_03 moveto(var_02, 1);
+  playfxontagforclients(scripts\engine\utility::getfx("visionPulse_ping"), var_3, "tag_origin", self);
+  var_3 moveto(var_2, 1);
   wait(1);
-  var_03 delete();
+  var_3 delete();
 }

@@ -28,12 +28,12 @@ func_E83A() {
   thread func_284F();
 }
 
-func_284E(param_00, param_01) {
+func_284E(var_0, var_1) {
   self endon("disconnect");
-  scripts\mp\gamescore::trackbuffassist(param_00, self, "power_barrier");
-  var_02 = "j_spinelower";
-  var_03 = "body";
-  if(param_01) {
+  scripts\mp\gamescore::trackbuffassist(var_0, self, "power_barrier");
+  var_2 = "j_spinelower";
+  var_3 = "body";
+  if(var_1) {
     self.var_8BF8 = 1;
     self iprintlnbold("BARRIER AND HEADGEAR APPLIED");
     playFXOnTag(level.var_2850["halo"], self, "j_head");
@@ -42,79 +42,79 @@ func_284E(param_00, param_01) {
   self.var_8BD3 = 1;
   self iprintlnbold("BARRIER APPLIED");
   scripts\mp\lightarmor::setlightarmorvalue(self, 35);
-  playFXOnTag(level.var_2850[var_03], self, var_02);
-  thread func_2852(param_00, param_01);
+  playFXOnTag(level.var_2850[var_3], self, var_2);
+  thread func_2852(var_0, var_1);
   while(isDefined(self.lightarmorhp)) {
     wait(0.05);
   }
 
-  thread func_2851(param_00, param_01);
+  thread func_2851(var_0, var_1);
 }
 
-func_2851(param_00, param_01) {
+func_2851(var_0, var_1) {
   stopFXOnTag(level.var_2850["halo"], self, "j_head");
   stopFXOnTag(level.var_2850["body"], self, "j_spinelower");
-  if(param_01) {
+  if(var_1) {
     self.var_8BF8 = undefined;
   }
 
   self.var_8BD3 = undefined;
-  scripts\mp\gamescore::untrackbuffassist(param_00, self, "power_barrier");
+  scripts\mp\gamescore::untrackbuffassist(var_0, self, "power_barrier");
 }
 
-func_2852(param_00, param_01) {
+func_2852(var_0, var_1) {
   self endon("disconnect");
   scripts\engine\utility::waittill_any_3("death");
   if(scripts\mp\utility::isreallyalive()) {
-    thread func_2851(param_00, param_01);
+    thread func_2851(var_0, var_1);
   }
 }
 
 func_284F() {
-  var_00 = 0.2;
-  var_01 = undefined;
-  var_02 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 64));
-  var_03 = spawn("script_model", var_02.origin);
-  var_03 linkto(var_02);
+  var_0 = 0.2;
+  var_1 = undefined;
+  var_2 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 64));
+  var_3 = spawn("script_model", var_2.origin);
+  var_3 linkto(var_2);
   scripts\engine\utility::waitframe();
-  var_04 = func_68D8(var_02);
-  playFXOnTag(level.var_2850["shot"], var_02, "tag_origin");
-  var_02 moveto(var_04["position"], var_00);
-  wait(var_00);
-  if(isDefined(var_04["entity"]) && isplayer(var_04["entity"]) && !isDefined(var_04["entity"].var_8BD3) && var_04["entity"].team == self.team) {
-    var_05 = self worldpointinreticle_circle(var_04["entity"] gettagorigin("tag_eye"), 65, 25);
-    var_04["entity"] thread func_284E(self, var_05);
-    playFX(level.var_2850["activate"], var_04["position"] + (0, 0, 20));
+  var_4 = func_68D8(var_2);
+  playFXOnTag(level.var_2850["shot"], var_2, "tag_origin");
+  var_2 moveto(var_4["position"], var_0);
+  wait(var_0);
+  if(isDefined(var_4["entity"]) && isplayer(var_4["entity"]) && !isDefined(var_4["entity"].var_8BD3) && var_4["entity"].team == self.team) {
+    var_5 = self worldpointinreticle_circle(var_4["entity"] gettagorigin("tag_eye"), 65, 25);
+    var_4["entity"] thread func_284E(self, var_5);
+    playFX(level.var_2850["activate"], var_4["position"] + (0, 0, 20));
     self notify("powers_barrier_used", 1);
   } else {
     self notify("powers_barrier_used", 0);
   }
 
-  var_03 delete();
-  var_02 delete();
+  var_3 delete();
+  var_2 delete();
 }
 
-func_68D8(param_00) {
-  var_01 = rotatepointaroundvector(anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()), 0);
-  var_02 = self.origin + var_01 * 768;
-  var_03 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
-  var_04 = scripts\engine\utility::array_combine(var_03, func_7E0D());
-  var_05 = scripts\engine\utility::array_add(var_04, self);
-  var_06 = scripts\common\trace::sphere_trace(self.origin + (0, 0, 64), var_02, 12, var_05);
-  if(!isDefined(var_06) || var_06["hittype"] != "hittype_entity") {
-    var_06["position"] = var_02;
+func_68D8(var_0) {
+  var_1 = rotatepointaroundvector(anglestoup(self getplayerangles()), anglesToForward(self getplayerangles()), 0);
+  var_2 = self.origin + var_1 * 768;
+  var_3 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
+  var_4 = scripts\engine\utility::array_combine(var_3, func_7E0D());
+  var_5 = scripts\engine\utility::array_add(var_4, self);
+  var_6 = scripts\common\trace::sphere_trace(self.origin + (0, 0, 64), var_2, 12, var_5);
+  if(!isDefined(var_6) || var_6["hittype"] != "hittype_entity") {
+    var_6["position"] = var_2;
   }
 
-  return var_06;
+  return var_6;
 }
 
 func_7E0D() {
-  var_00 = [];
-  foreach(var_02 in level.participants) {
-    if(!isplayer(var_02)) {
-      var_00 = scripts\engine\utility::array_add(var_00, var_02);
+  var_0 = [];
+  foreach(var_2 in level.participants) {
+    if(!isplayer(var_2)) {
+      var_0 = scripts\engine\utility::array_add(var_0, var_2);
     }
   }
 
-  return var_00;
+  return var_0;
 }

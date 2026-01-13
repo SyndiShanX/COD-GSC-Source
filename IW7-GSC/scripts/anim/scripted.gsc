@@ -30,20 +30,20 @@ main() {
   self waittill("killanimscript");
 }
 
-init(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  self.var_433C["notifyName"] = param_00;
-  self.var_433C["origin"] = param_01;
-  self.var_433C["angles"] = param_02;
-  self.var_433C["anim"] = param_03;
-  if(isDefined(param_04)) {
-    self.var_433C["animMode"] = param_04;
+init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  self.var_433C["notifyName"] = var_0;
+  self.var_433C["origin"] = var_1;
+  self.var_433C["angles"] = var_2;
+  self.var_433C["anim"] = var_3;
+  if(isDefined(var_4)) {
+    self.var_433C["animMode"] = var_4;
   } else {
     self.var_433C["animMode"] = "normal";
   }
 
-  self.var_433C["goalTime"] = param_06;
-  self.var_433C["animRate"] = param_07;
-  self.var_433C["root"] = param_05;
+  self.var_433C["goalTime"] = var_6;
+  self.var_433C["animRate"] = var_7;
+  self.var_433C["root"] = var_5;
   switch (self.subclass) {
     case "C6":
       func_9563();

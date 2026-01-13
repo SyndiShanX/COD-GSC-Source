@@ -41,14 +41,14 @@ init() {
 }
 
 getarkqueststruct() {
-  var_00 = scripts\engine\utility::getstructarray("interaction", "targetname");
-  foreach(var_02 in var_00) {
-    if(!isDefined(var_02.script_noteworthy)) {
+  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  foreach(var_2 in var_0) {
+    if(!isDefined(var_2.script_noteworthy)) {
       continue;
     }
 
-    if(var_02.script_noteworthy == "ark_quest_station") {
-      level.arkqueststation = var_02;
+    if(var_2.script_noteworthy == "ark_quest_station") {
+      level.arkqueststation = var_2;
       break;
     }
   }
@@ -109,136 +109,136 @@ init_wor_items() {
   level.wor_items_placed["iw7_dischord_zm"]["weapon"] = 0;
 }
 
-init_standee_slots(param_00, param_01) {
+init_standee_slots(var_0, var_1) {
   self.gun_slot = spawnStruct();
   self.gun_slot.standee = self.standee;
   self.gun_slot.finished = 0;
-  self.gun_slot.gun = param_01;
-  self.gun_slot setup_standee_data(param_01);
-  var_02 = [1, 2, 3];
-  foreach(var_04 in var_02) {
-    level thread[[param_00]](self.gun_slot, var_04);
+  self.gun_slot.gun = var_1;
+  self.gun_slot setup_standee_data(var_1);
+  var_2 = [1, 2, 3];
+  foreach(var_4 in var_2) {
+    level thread[[var_0]](self.gun_slot, var_4);
   }
 }
 
-put_gun_back_on_standee(param_00, param_01, param_02, param_03) {
-  level notify("gun_replaced " + param_01);
-  if(isDefined(param_02)) {
-    var_04 = isDefined(param_03) && isDefined(param_03.ephemeralweapon) && issubstr(param_03.ephemeralweapon, param_01);
-    if(issubstr(param_02, "pap1") && !var_04) {
-      param_00.standee.upgraded = 1;
+put_gun_back_on_standee(var_0, var_1, var_2, var_3) {
+  level notify("gun_replaced " + var_1);
+  if(isDefined(var_2)) {
+    var_4 = isDefined(var_3) && isDefined(var_3.ephemeralweapon) && issubstr(var_3.ephemeralweapon, var_1);
+    if(issubstr(var_2, "pap1") && !var_4) {
+      var_0.standee.upgraded = 1;
     } else {
-      param_00.standee.upgraded = 0;
+      var_0.standee.upgraded = 0;
     }
   } else {
-    param_00.standee.upgraded = 0;
+    var_0.standee.upgraded = 0;
   }
 
-  param_00.standee.gun_on_standee = 1;
-  param_00.standee setscriptablepartstate("zapper", "craft_zapper", 1);
+  var_0.standee.gun_on_standee = 1;
+  var_0.standee setscriptablepartstate("zapper", "craft_zapper", 1);
 }
 
-standee_hint_logic(param_00, param_01) {
-  var_02 = param_00.standee;
-  if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-    if(var_02.gun_on_standee) {
-      return level.ww_hintstrings[var_02.script_noteworthy];
+standee_hint_logic(var_0, var_1) {
+  var_2 = var_0.standee;
+  if(level.wor_items_placed[var_2.script_noteworthy]["toy"] && level.wor_items_placed[var_2.script_noteworthy]["battery"] && level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+    if(var_2.gun_on_standee) {
+      return level.ww_hintstrings[var_2.script_noteworthy];
     } else {
-      var_03 = param_01 getcurrentweapon();
-      var_04 = getweaponbasename(var_03);
-      if(issubstr(var_04, param_00.gun_slot.gun)) {
-        return param_00.gun_slot.place_on_standee_string;
+      var_3 = var_1 getcurrentweapon();
+      var_4 = getweaponbasename(var_3);
+      if(issubstr(var_4, var_0.gun_slot.gun)) {
+        return var_0.gun_slot.place_on_standee_string;
       } else {
         return "";
       }
     }
   }
 
-  if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"]) {
+  if(level.wor_items_picked_up[var_2.script_noteworthy]["toy"] && !level.wor_items_placed[var_2.script_noteworthy]["toy"]) {
     return &"CP_QUEST_WOR_PLACE_PART";
-  } else if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"]) {
+  } else if(level.wor_items_picked_up[var_2.script_noteworthy]["battery"] && !level.wor_items_placed[var_2.script_noteworthy]["battery"]) {
     return &"CP_QUEST_WOR_PLACE_PART";
-  } else if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
+  } else if(level.wor_items_picked_up[var_2.script_noteworthy]["crystal"] && !level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
     return &"CP_QUEST_WOR_PLACE_PART";
   }
 
   return &"CP_QUEST_WOR_ASSEMBLY";
 }
 
-standee_activate_logic(param_00, param_01) {
-  var_02 = param_00.standee;
-  if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-    if(var_02.gun_on_standee) {
-      var_02.gun_on_standee = 0;
-      var_02 setscriptablepartstate("zapper", "hide_zapper", 1);
-      param_01 notify("weapon_purchased");
-      wor_give_weapon(param_01, var_02.script_noteworthy, param_00.gun_slot);
-      param_01 thread watchforweaponremoved(param_01, var_02.script_noteworthy, param_00.gun_slot);
-      param_01 thread watchforplayerdeath(param_01, var_02.script_noteworthy, param_00.gun_slot);
-      param_01 thread trackplayersworammo(param_01, var_02.script_noteworthy, param_00.gun_slot);
+standee_activate_logic(var_0, var_1) {
+  var_2 = var_0.standee;
+  if(level.wor_items_placed[var_2.script_noteworthy]["toy"] && level.wor_items_placed[var_2.script_noteworthy]["battery"] && level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+    if(var_2.gun_on_standee) {
+      var_2.gun_on_standee = 0;
+      var_2 setscriptablepartstate("zapper", "hide_zapper", 1);
+      var_1 notify("weapon_purchased");
+      wor_give_weapon(var_1, var_2.script_noteworthy, var_0.gun_slot);
+      var_1 thread watchforweaponremoved(var_1, var_2.script_noteworthy, var_0.gun_slot);
+      var_1 thread watchforplayerdeath(var_1, var_2.script_noteworthy, var_0.gun_slot);
+      var_1 thread trackplayersworammo(var_1, var_2.script_noteworthy, var_0.gun_slot);
     } else {
-      var_03 = param_01 getcurrentweapon();
-      var_04 = getweaponbasename(var_03);
-      if(issubstr(var_04, param_00.gun_slot.gun)) {
-        var_05 = param_01 scripts\cp\utility::getvalidtakeweapon();
-        param_01 takeweapon(var_05);
-        var_06 = param_01 getweaponslistprimaries();
-        var_07 = 0;
-        for(var_08 = 0; var_08 < var_06.size; var_08++) {
-          if(var_06[var_08] == "none") {
+      var_3 = var_1 getcurrentweapon();
+      var_4 = getweaponbasename(var_3);
+      if(issubstr(var_4, var_0.gun_slot.gun)) {
+        var_5 = var_1 scripts\cp\utility::getvalidtakeweapon();
+        var_1 takeweapon(var_5);
+        var_6 = var_1 getweaponslistprimaries();
+        var_7 = 0;
+        for(var_8 = 0; var_8 < var_6.size; var_8++) {
+          if(var_6[var_8] == "none") {
             continue;
-          } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_06[var_08])) {
+          } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_6[var_8])) {
             continue;
-          } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_06[var_08]))) {
+          } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_6[var_8]))) {
             continue;
-          } else if(scripts\cp\utility::is_melee_weapon(var_06[var_08], 1)) {
+          } else if(scripts\cp\utility::is_melee_weapon(var_6[var_8], 1)) {
             continue;
           }
 
-          var_07 = 1;
-          param_01 switchtoweapon(var_06[var_08]);
+          var_7 = 1;
+          var_1 switchtoweapon(var_6[var_8]);
           break;
         }
 
-        if(!var_07) {
-          var_09 = "iw7_fists_zm";
-          param_01 scripts\cp\utility::_giveweapon(var_09, undefined, undefined, 1);
-          param_01 switchtoweaponimmediate(var_09);
+        if(!var_7) {
+          var_9 = "iw7_fists_zm";
+          var_1 scripts\cp\utility::_giveweapon(var_9, undefined, undefined, 1);
+          var_1 switchtoweaponimmediate(var_9);
         }
 
-        thread put_gun_back_on_standee(param_00.gun_slot, param_00.gun_slot.gun, var_03, param_01);
-        param_01 scripts\cp\utility::updatelaststandpistol();
+        thread put_gun_back_on_standee(var_0.gun_slot, var_0.gun_slot.gun, var_3, var_1);
+        var_1 scripts\cp\utility::updatelaststandpistol();
       }
     }
   }
 
-  if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"]) {
-    level.wor_items_placed[var_02.script_noteworthy]["toy"] = 1;
-    var_02 place_part("toy");
-    if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-      var_02 setscriptablepartstate("zapper", "craft_zapper", 1);
+  if(level.wor_items_picked_up[var_2.script_noteworthy]["toy"] && !level.wor_items_placed[var_2.script_noteworthy]["toy"]) {
+    level.wor_items_placed[var_2.script_noteworthy]["toy"] = 1;
+    var_2 place_part("toy");
+    if(level.wor_items_placed[var_2.script_noteworthy]["toy"] && level.wor_items_placed[var_2.script_noteworthy]["battery"] && level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+      var_2 setscriptablepartstate("zapper", "craft_zapper", 1);
       return;
     }
 
     return;
   }
 
-  if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"]) {
-    level.wor_items_placed[var_02.script_noteworthy]["battery"] = 1;
-    var_02 place_part("battery");
-    if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-      var_02 setscriptablepartstate("zapper", "craft_zapper", 1);
+  if(level.wor_items_picked_up[var_2.script_noteworthy]["battery"] && !level.wor_items_placed[var_2.script_noteworthy]["battery"]) {
+    level.wor_items_placed[var_2.script_noteworthy]["battery"] = 1;
+    var_2 place_part("battery");
+    if(level.wor_items_placed[var_2.script_noteworthy]["toy"] && level.wor_items_placed[var_2.script_noteworthy]["battery"] && level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+      var_2 setscriptablepartstate("zapper", "craft_zapper", 1);
       return;
     }
 
     return;
   }
 
-  if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-    level.wor_items_placed[var_02.script_noteworthy]["crystal"] = 1;
-    var_02 place_part("crystal");
-    if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-      var_02 setscriptablepartstate("zapper", "craft_zapper", 1);
+  if(level.wor_items_picked_up[var_2.script_noteworthy]["crystal"] && !level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+    level.wor_items_placed[var_2.script_noteworthy]["crystal"] = 1;
+    var_2 place_part("crystal");
+    if(level.wor_items_placed[var_2.script_noteworthy]["toy"] && level.wor_items_placed[var_2.script_noteworthy]["battery"] && level.wor_items_placed[var_2.script_noteworthy]["crystal"]) {
+      var_2 setscriptablepartstate("zapper", "craft_zapper", 1);
       return;
     }
 
@@ -246,143 +246,143 @@ standee_activate_logic(param_00, param_01) {
   }
 }
 
-place_part(param_00) {
-  self setscriptablepartstate(param_00, "part_placed");
+place_part(var_0) {
+  self setscriptablepartstate(var_0, "part_placed");
   wait(1);
-  self setscriptablepartstate(param_00, "part_placed_no_fx");
+  self setscriptablepartstate(var_0, "part_placed_no_fx");
 }
 
-returnclosestcrystal(param_00) {
-  return scripts\engine\utility::getclosest(param_00.origin, level.miniufos);
+returnclosestcrystal(var_0) {
+  return scripts\engine\utility::getclosest(var_0.origin, level.miniufos);
 }
 
-ent_near_crystal(param_00, param_01) {
+ent_near_crystal(var_0, var_1) {
   if(level.miniufos.size < 1) {
     return 0;
   }
 
-  if(!scripts\cp\utility::weaponhasattachment(param_01, "arcane_base")) {
+  if(!scripts\cp\utility::weaponhasattachment(var_1, "arcane_base")) {
     return 0;
   }
 
-  var_02 = 0;
-  foreach(var_04 in level.miniufos) {
-    var_05 = 562500;
-    if(!isDefined(var_04) || scripts\engine\utility::istrue(var_04.fully_charged)) {
+  var_2 = 0;
+  foreach(var_4 in level.miniufos) {
+    var_5 = 562500;
+    if(!isDefined(var_4) || scripts\engine\utility::istrue(var_4.fully_charged)) {
       continue;
     }
 
-    if(distancesquared(var_04.origin, param_00.origin) < var_05) {
-      var_02 = 1;
+    if(distancesquared(var_4.origin, var_0.origin) < var_5) {
+      var_2 = 1;
     }
 
-    if(var_02) {
+    if(var_2) {
       break;
     }
   }
 
-  if(var_02) {
+  if(var_2) {
     return 1;
   }
 
   return 0;
 }
 
-fake_crystal_logic(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = get_part_model(param_01, param_03);
-  param_00 setModel(var_05);
+fake_crystal_logic(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = get_part_model(var_1, var_3);
+  var_0 setModel(var_5);
   wait(0.25);
-  var_06 = param_01.placement_fx;
-  param_00 makeusable();
-  param_00 setuserange(64);
-  param_00 setusefov(120);
-  var_07 = playFXOnTag(var_06, param_00, "tag_origin");
-  param_00 sethintstring(&"CP_QUEST_WOR_PART");
-  param_00 waittill("trigger", var_08);
-  stopFXOnTag(var_06, param_00, "tag_origin");
-  level.wor_items_picked_up[param_01.gun][param_04] = 1;
+  var_6 = var_1.placement_fx;
+  var_0 makeusable();
+  var_0 setuserange(64);
+  var_0 setusefov(120);
+  var_7 = playFXOnTag(var_6, var_0, "tag_origin");
+  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 waittill("trigger", var_8);
+  stopFXOnTag(var_6, var_0, "tag_origin");
+  level.wor_items_picked_up[var_1.gun][var_4] = 1;
 }
 
-update_ufo_angles(param_00, param_01, param_02, param_03, param_04, param_05) {
-  param_00 endon("fully_charged");
+update_ufo_angles(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_0 endon("fully_charged");
   for(;;) {
-    param_00 waittill("next_position_found", var_06, var_07);
-    var_08 = vectortoangles(var_07.origin - var_06.origin) + (180, 0, 0);
-    param_00 rotateto(var_08, 0.5, 0.05, 0.05);
+    var_0 waittill("next_position_found", var_6, var_7);
+    var_8 = vectortoangles(var_7.origin - var_6.origin) + (180, 0, 0);
+    var_0 rotateto(var_8, 0.5, 0.05, 0.05);
   }
 }
 
-start_crystal_path(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = scripts\engine\utility::getclosest(param_06.origin, scripts\engine\utility::getstructarray("essence_ufo_path", "script_noteworthy"));
-  var_08 = 0;
-  var_09 = var_07;
+start_crystal_path(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = scripts\engine\utility::getclosest(var_6.origin, scripts\engine\utility::getstructarray("essence_ufo_path", "script_noteworthy"));
+  var_8 = 0;
+  var_9 = var_7;
   var_0A = 1;
   var_0B = undefined;
-  for(var_0C = get_next_valid_struct(param_06, var_09); var_0A; var_0C = var_0F) {
-    if(isDefined(var_09.script_speed)) {
-      var_0D = var_09.script_speed;
+  for(var_0C = get_next_valid_struct(var_6, var_9); var_0A; var_0C = var_0F) {
+    if(isDefined(var_9.script_speed)) {
+      var_0D = var_9.script_speed;
     } else {
       var_0D = undefined;
     }
 
-    var_0E = get_move_rate(param_06, var_09.origin, var_0C.origin, var_0D);
+    var_0E = get_move_rate(var_6, var_9.origin, var_0C.origin, var_0D);
     var_0F = var_0C;
-    var_0F = get_next_valid_struct(param_06, var_0F);
-    thread changeangledelay(param_06, var_0E, var_0F, var_09, var_0C);
-    param_06 moveto(var_0C.origin, var_0E);
-    var_10 = param_06 scripts\engine\utility::waittill_any_return("movedone", "fully_charged");
-    if(scripts\engine\utility::istrue(param_06.fully_charged)) {
+    var_0F = get_next_valid_struct(var_6, var_0F);
+    thread changeangledelay(var_6, var_0E, var_0F, var_9, var_0C);
+    var_6 moveto(var_0C.origin, var_0E);
+    var_10 = var_6 scripts\engine\utility::waittill_any_return("movedone", "fully_charged");
+    if(scripts\engine\utility::istrue(var_6.fully_charged)) {
       for(;;) {
-        var_0E = get_move_rate(param_06, param_06.origin, var_0C.origin, 2000);
-        param_06 moveto(var_0C.origin, var_0E);
-        if(can_use_struct_for_final_pos(param_00, var_0C)) {
+        var_0E = get_move_rate(var_6, var_6.origin, var_0C.origin, 2000);
+        var_6 moveto(var_0C.origin, var_0E);
+        if(can_use_struct_for_final_pos(var_0, var_0C)) {
           var_11 = scripts\engine\utility::drop_to_ground(var_0C.origin, 0, -400) + (0, 0, 40);
-          var_12 = magicbullet("bolasprayprojhome_mp", param_06.origin, var_11);
-          scripts\engine\utility::play_sound_in_space("miniufo_fire", param_06.origin, 0, param_06);
-          param_00 dontinterpolate();
-          param_00.origin = var_11;
-          param_06.fully_charged = undefined;
-          param_06 thread movetotraploop(param_06, param_06.origin, param_01);
+          var_12 = magicbullet("bolasprayprojhome_mp", var_6.origin, var_11);
+          scripts\engine\utility::play_sound_in_space("miniufo_fire", var_6.origin, 0, var_6);
+          var_0 dontinterpolate();
+          var_0.origin = var_11;
+          var_6.fully_charged = undefined;
+          var_6 thread movetotraploop(var_6, var_6.origin, var_1);
           var_12 scripts\engine\utility::waittill_any_timeout_1(1.25, "death");
           if(isDefined(var_12)) {
             var_12 delete();
           }
 
-          param_00.at_end_loc = 1;
+          var_0.at_end_loc = 1;
           var_0A = 0;
           break;
         } else {
-          param_06 waittill("movedone");
-          var_09 = var_0C;
-          var_0C = get_next_valid_struct(param_06, var_09);
-          param_06 notify("next_position_found", var_09, var_0C);
+          var_6 waittill("movedone");
+          var_9 = var_0C;
+          var_0C = get_next_valid_struct(var_6, var_9);
+          var_6 notify("next_position_found", var_9, var_0C);
         }
       }
 
       continue;
     }
 
-    var_09 = var_0C;
+    var_9 = var_0C;
   }
 }
 
-changeangledelay(param_00, param_01, param_02, param_03, param_04) {
-  wait(max(0.05, param_01 - 0.35));
-  param_00 notify("next_position_found", param_04, param_02);
+changeangledelay(var_0, var_1, var_2, var_3, var_4) {
+  wait(max(0.05, var_1 - 0.35));
+  var_0 notify("next_position_found", var_4, var_2);
 }
 
-movetotraploop(param_00, param_01, param_02) {
-  param_00 waittill("movedone");
-  param_00 setscriptablepartstate("miniufo", "mini_ufo");
-  var_03 = scripts\engine\utility::random(param_02.starting_move_structs);
-  param_00 setModel("tag_origin");
-  param_00.origin = var_03.origin;
-  param_00.angles = var_03.angles;
+movetotraploop(var_0, var_1, var_2) {
+  var_0 waittill("movedone");
+  var_0 setscriptablepartstate("miniufo", "mini_ufo");
+  var_3 = scripts\engine\utility::random(var_2.starting_move_structs);
+  var_0 setModel("tag_origin");
+  var_0.origin = var_3.origin;
+  var_0.angles = var_3.angles;
 }
 
-can_use_struct_for_final_pos(param_00, param_01) {
-  if(isDefined(param_01.name)) {
-    if(isDefined(param_01.name == "cant_stop_wont_stop")) {
+can_use_struct_for_final_pos(var_0, var_1) {
+  if(isDefined(var_1.name)) {
+    if(isDefined(var_1.name == "cant_stop_wont_stop")) {
       return 0;
     }
   }
@@ -390,71 +390,71 @@ can_use_struct_for_final_pos(param_00, param_01) {
   return 1;
 }
 
-get_next_valid_struct(param_00, param_01) {
-  var_02 = scripts\engine\utility::getstructarray(param_01.target, "targetname");
-  var_03 = [];
-  var_04 = undefined;
-  var_04 = scripts\engine\utility::random(var_02);
-  return var_04;
+get_next_valid_struct(var_0, var_1) {
+  var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_3 = [];
+  var_4 = undefined;
+  var_4 = scripts\engine\utility::random(var_2);
+  return var_4;
 }
 
-get_move_rate(param_00, param_01, param_02, param_03) {
-  var_04 = distance(param_01, param_02);
-  if(!isDefined(param_03)) {
-    param_03 = int(clamp(level.wave_num * 15, 75, 150));
+get_move_rate(var_0, var_1, var_2, var_3) {
+  var_4 = distance(var_1, var_2);
+  if(!isDefined(var_3)) {
+    var_3 = int(clamp(level.wave_num * 15, 75, 150));
   }
 
-  var_05 = var_04 / param_03;
-  if(var_05 < 0.05) {
-    var_05 = 0.05;
+  var_5 = var_4 / var_3;
+  if(var_5 < 0.05) {
+    var_5 = 0.05;
   }
 
-  return var_05;
+  return var_5;
 }
 
-move_crystal_to_end_pos(param_00) {
-  var_01 = scripts\engine\utility::drop_to_ground(param_00.origin, 0, -400) + (0, 0, 40);
-  var_02 = distance(param_00.origin, var_01);
-  var_03 = 2000;
-  var_04 = var_02 / var_03;
-  if(var_04 < 0.05) {
-    var_04 = 0.05;
+move_crystal_to_end_pos(var_0) {
+  var_1 = scripts\engine\utility::drop_to_ground(var_0.origin, 0, -400) + (0, 0, 40);
+  var_2 = distance(var_0.origin, var_1);
+  var_3 = 2000;
+  var_4 = var_2 / var_3;
+  if(var_4 < 0.05) {
+    var_4 = 0.05;
   }
 
   wait(2);
-  param_00 moveto(var_01, var_04);
-  param_00.at_end_loc = 1;
+  var_0 moveto(var_1, var_4);
+  var_0.at_end_loc = 1;
 }
 
-getminiufostartingstruct(param_00) {
-  if(param_00.crystal_model == "zmb_weapon_crystal_green" && isDefined(level.dichordtraptrigger)) {
+getminiufostartingstruct(var_0) {
+  if(var_0.crystal_model == "zmb_weapon_crystal_green" && isDefined(level.dichordtraptrigger)) {
     return level.dichordtraptrigger;
   }
 
-  if(param_00.crystal_model == "zmb_weapon_crystal_blue" && isDefined(level.fmtraptrigger)) {
+  if(var_0.crystal_model == "zmb_weapon_crystal_blue" && isDefined(level.fmtraptrigger)) {
     return level.fmtraptrigger;
   }
 
-  if(param_00.crystal_model == "zmb_weapon_crystal_yellow" && isDefined(level.hctraptrigger)) {
+  if(var_0.crystal_model == "zmb_weapon_crystal_yellow" && isDefined(level.hctraptrigger)) {
     return level.hctraptrigger;
   }
 
-  return scripts\engine\utility::random(param_00.starting_move_structs);
+  return scripts\engine\utility::random(var_0.starting_move_structs);
 }
 
-getminoufofromorbeffect(param_00, param_01) {
-  switch (param_00) {
+getminoufofromorbeffect(var_0, var_1) {
+  switch (var_0) {
     case "blue":
       if(!isDefined(level.rocket_mini_ufo)) {
-        var_02 = spawn("script_model", param_01.origin);
-        var_02 setModel("tag_origin_mini_ufo");
+        var_2 = spawn("script_model", var_1.origin);
+        var_2 setModel("tag_origin_mini_ufo");
         scripts\engine\utility::waitframe();
       } else {
-        var_02 = level.rocket_mini_ufo;
-        if(var_02.model != "tag_origin_mini_ufo") {
-          var_02 setModel("tag_origin_mini_ufo");
-          var_02 dontinterpolate();
-          var_02.origin = param_01.origin;
+        var_2 = level.rocket_mini_ufo;
+        if(var_2.model != "tag_origin_mini_ufo") {
+          var_2 setModel("tag_origin_mini_ufo");
+          var_2 dontinterpolate();
+          var_2.origin = var_1.origin;
           scripts\engine\utility::waitframe();
         }
       }
@@ -462,15 +462,15 @@ getminoufofromorbeffect(param_00, param_01) {
 
     case "green":
       if(!isDefined(level.disco_mini_ufo)) {
-        var_02 = spawn("script_model", var_02.origin);
-        var_02 setModel("tag_origin_mini_ufo");
+        var_2 = spawn("script_model", var_2.origin);
+        var_2 setModel("tag_origin_mini_ufo");
         scripts\engine\utility::waitframe();
       } else {
-        var_02 = level.disco_mini_ufo;
-        if(var_02.model != "tag_origin_mini_ufo") {
-          var_02 setModel("tag_origin_mini_ufo");
-          var_02 dontinterpolate();
-          var_02.origin = param_01.origin;
+        var_2 = level.disco_mini_ufo;
+        if(var_2.model != "tag_origin_mini_ufo") {
+          var_2 setModel("tag_origin_mini_ufo");
+          var_2 dontinterpolate();
+          var_2.origin = var_1.origin;
           scripts\engine\utility::waitframe();
         }
       }
@@ -478,15 +478,15 @@ getminoufofromorbeffect(param_00, param_01) {
 
     case "yellow":
       if(!isDefined(level.steel_dragon_mini_ufo)) {
-        var_02 = spawn("script_model", var_02.origin);
-        var_02 setModel("tag_origin_mini_ufo");
+        var_2 = spawn("script_model", var_2.origin);
+        var_2 setModel("tag_origin_mini_ufo");
         scripts\engine\utility::waitframe();
       } else {
-        var_02 = level.steel_dragon_mini_ufo;
-        if(var_02.model != "tag_origin_mini_ufo") {
-          var_02 setModel("tag_origin_mini_ufo");
-          var_02 dontinterpolate();
-          var_02.origin = param_01.origin;
+        var_2 = level.steel_dragon_mini_ufo;
+        if(var_2.model != "tag_origin_mini_ufo") {
+          var_2 setModel("tag_origin_mini_ufo");
+          var_2 dontinterpolate();
+          var_2.origin = var_1.origin;
           scripts\engine\utility::waitframe();
         }
       }
@@ -494,183 +494,183 @@ getminoufofromorbeffect(param_00, param_01) {
 
     case "red":
       if(!isDefined(level.chromosphere_mini_ufo)) {
-        var_02 = spawn("script_model", var_02.origin);
-        var_02 setModel("tag_origin_mini_ufo");
+        var_2 = spawn("script_model", var_2.origin);
+        var_2 setModel("tag_origin_mini_ufo");
         scripts\engine\utility::waitframe();
       } else {
-        var_02 = level.chromosphere_mini_ufo;
-        if(var_02.model != "tag_origin_mini_ufo") {
-          var_02 setModel("tag_origin_mini_ufo");
-          var_02 dontinterpolate();
-          var_02.origin = param_01.origin;
+        var_2 = level.chromosphere_mini_ufo;
+        if(var_2.model != "tag_origin_mini_ufo") {
+          var_2 setModel("tag_origin_mini_ufo");
+          var_2 dontinterpolate();
+          var_2.origin = var_1.origin;
           scripts\engine\utility::waitframe();
         }
       }
       break;
 
     default:
-      var_02 = spawn("script_model", var_02.origin);
-      var_02 setModel("tag_origin_mini_ufo");
-      var_02 dontinterpolate();
-      var_02.origin = param_01.origin;
+      var_2 = spawn("script_model", var_2.origin);
+      var_2 setModel("tag_origin_mini_ufo");
+      var_2 dontinterpolate();
+      var_2.origin = var_1.origin;
       scripts\engine\utility::waitframe();
       break;
   }
 
-  return var_02;
+  return var_2;
 }
 
-collect_arcane_essense(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = getminiufostartingstruct(param_01);
-  var_07 = param_01.largeessencefx;
-  var_08 = getminoufofromorbeffect(var_07, var_06);
-  var_08 setscriptablepartstate("miniufo", var_07);
-  scripts\engine\utility::flag_set("mini_ufo_" + param_01.color + "_collecting");
-  var_08 thread start_crystal_path(param_00, param_01, param_02, param_03, param_04, param_05, var_08);
-  var_08 thread update_ufo_angles(var_08, param_01, param_02, param_03, param_04, param_05);
-  level.miniufos[level.miniufos.size] = var_08;
-  wait_for_crystal_to_charge(param_00, param_01, var_08, var_07);
-  param_00 makeusable();
-  param_00 setuserange(64);
-  param_00 setusefov(120);
-  param_00.gun_slot = param_01;
-  if(scripts\engine\utility::istrue(param_05)) {
-    param_00 thread timeout_crystal(param_00, param_01, param_03, var_08);
+collect_arcane_essense(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = getminiufostartingstruct(var_1);
+  var_7 = var_1.largeessencefx;
+  var_8 = getminoufofromorbeffect(var_7, var_6);
+  var_8 setscriptablepartstate("miniufo", var_7);
+  scripts\engine\utility::flag_set("mini_ufo_" + var_1.color + "_collecting");
+  var_8 thread start_crystal_path(var_0, var_1, var_2, var_3, var_4, var_5, var_8);
+  var_8 thread update_ufo_angles(var_8, var_1, var_2, var_3, var_4, var_5);
+  level.miniufos[level.miniufos.size] = var_8;
+  wait_for_crystal_to_charge(var_0, var_1, var_8, var_7);
+  var_0 makeusable();
+  var_0 setuserange(64);
+  var_0 setusefov(120);
+  var_0.gun_slot = var_1;
+  if(scripts\engine\utility::istrue(var_5)) {
+    var_0 thread timeout_crystal(var_0, var_1, var_3, var_8);
   }
 
-  param_00 endon("death");
-  create_essence_interaction(param_00);
+  var_0 endon("death");
+  create_essence_interaction(var_0);
   for(;;) {
-    param_00 waittill("mini_ufo_completed", var_09);
-    param_00 setscriptablepartstate("miniufo", "neutral");
-    param_00 notify("picked_up");
-    switch (param_01.color) {
+    var_0 waittill("mini_ufo_completed", var_9);
+    var_0 setscriptablepartstate("miniufo", "neutral");
+    var_0 notify("picked_up");
+    switch (var_1.color) {
       case "blue":
-        var_09 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_blue_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_9 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_blue_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "red":
-        var_09 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_red_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_9 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_red_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "green":
-        var_09 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_green_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_9 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_green_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "yellow":
-        var_09 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_yellow_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_9 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_yellow_essence", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       default:
-        var_09 thread scripts\cp\cp_vo::try_to_play_vo("arcane_core_success", "zmb_comment_vo", "highest", 10, 0, 0, 0, 50);
+        var_9 thread scripts\cp\cp_vo::try_to_play_vo("arcane_core_success", "zmb_comment_vo", "highest", 10, 0, 0, 0, 50);
         break;
     }
 
-    level thread waittillnextwave(var_08, param_01);
-    reset_trap_kill_count(param_00, param_01, param_03);
-    param_00 makeunusable();
-    if(scripts\engine\utility::istrue(param_05)) {
-      param_00 delete();
+    level thread waittillnextwave(var_8, var_1);
+    reset_trap_kill_count(var_0, var_1, var_3);
+    var_0 makeunusable();
+    if(scripts\engine\utility::istrue(var_5)) {
+      var_0 delete();
     } else {
-      param_00 setModel("tag_origin");
+      var_0 setModel("tag_origin");
     }
 
     break;
   }
 }
 
-waittillnextwave(param_00, param_01) {
+waittillnextwave(var_0, var_1) {
   level waittill("regular_wave_starting");
-  if(param_00.model != "tag_origin_mini_ufo") {
-    param_00 setModel("tag_origin_mini_ufo");
+  if(var_0.model != "tag_origin_mini_ufo") {
+    var_0 setModel("tag_origin_mini_ufo");
   }
 
-  scripts\engine\utility::flag_clear("mini_ufo_" + param_01.color + "_collecting");
+  scripts\engine\utility::flag_clear("mini_ufo_" + var_1.color + "_collecting");
 }
 
-essence_pickup_func(param_00, param_01) {
-  if(!isDefined(param_00.at_end_loc)) {
+essence_pickup_func(var_0, var_1) {
+  if(!isDefined(var_0.at_end_loc)) {
     return;
   }
 
-  if(!scripts\cp\utility::weaponhasattachment(param_01 getcurrentweapon(), "arcane_base")) {
+  if(!scripts\cp\utility::weaponhasattachment(var_1 getcurrentweapon(), "arcane_base")) {
     return;
   }
 
-  param_00 notify("mini_ufo_completed", param_01);
-  param_01 playlocalsound("part_pickup");
-  remove_essence_interaction(param_00);
-  param_01 thread charge_players_arcane_base_attachment(param_01, param_00.gun_slot);
+  var_0 notify("mini_ufo_completed", var_1);
+  var_1 playlocalsound("part_pickup");
+  remove_essence_interaction(var_0);
+  var_1 thread charge_players_arcane_base_attachment(var_1, var_0.gun_slot);
 }
 
-create_essence_interaction(param_00) {
-  param_00.script_noteworthy = "spawned_essence";
-  param_00.requires_power = 0;
-  param_00.powered_on = 1;
-  param_00.script_parameters = "default";
-  param_00.custom_search_dist = 96;
-  scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
+create_essence_interaction(var_0) {
+  var_0.script_noteworthy = "spawned_essence";
+  var_0.requires_power = 0;
+  var_0.powered_on = 1;
+  var_0.script_parameters = "default";
+  var_0.custom_search_dist = 96;
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
 
-remove_essence_interaction(param_00) {
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-  param_00.script_noteworthy = undefined;
-  param_00.requires_power = undefined;
-  param_00.powered_on = undefined;
-  param_00.script_parameters = undefined;
-  param_00.custom_search_dist = undefined;
+remove_essence_interaction(var_0) {
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  var_0.script_noteworthy = undefined;
+  var_0.requires_power = undefined;
+  var_0.powered_on = undefined;
+  var_0.script_parameters = undefined;
+  var_0.custom_search_dist = undefined;
 }
 
-playufoeffectonplayerconnect(param_00, param_01) {
+playufoeffectonplayerconnect(var_0, var_1) {
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_02);
-    thread playeffectwhenspawned(param_00, param_01, var_02);
+    level waittill("connected", var_2);
+    thread playeffectwhenspawned(var_0, var_1, var_2);
   }
 }
 
-playeffectwhenspawned(param_00, param_01, param_02) {
+playeffectwhenspawned(var_0, var_1, var_2) {
   level endon("game_ended");
-  param_02 endon("disconnect");
-  param_02 waittill("spawned_player");
-  playFXOnTag(param_00, param_01, "tag_origin");
+  var_2 endon("disconnect");
+  var_2 waittill("spawned_player");
+  playFXOnTag(var_0, var_1, "tag_origin");
 }
 
-disablepickuppromptfortime(param_00, param_01) {
-  param_00 disableplayeruse(param_01);
+disablepickuppromptfortime(var_0, var_1) {
+  var_0 disableplayeruse(var_1);
   wait(1);
-  param_00 enableplayeruse(param_01);
+  var_0 enableplayeruse(var_1);
 }
 
-run_mini_ufo_logic(param_00, param_01, param_02, param_03, param_04) {
-  param_00 endon("timed_out");
-  var_05 = scripts\engine\utility::get_array_of_closest(param_00.origin, level.players, undefined, 4, 512);
-  foreach(var_07 in var_05) {
-    var_07 thread scripts\cp\cp_vo::try_to_play_vo("arcane_core_event", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+run_mini_ufo_logic(var_0, var_1, var_2, var_3, var_4) {
+  var_0 endon("timed_out");
+  var_5 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.players, undefined, 4, 512);
+  foreach(var_7 in var_5) {
+    var_7 thread scripts\cp\cp_vo::try_to_play_vo("arcane_core_event", "zmb_comment_vo", "highest", 10, 0, 0, 1);
   }
 
-  param_00 collect_arcane_essense(param_00, param_01, param_02, param_03, param_04);
-  var_09 = param_01.crystal_slot;
-  struct_wait_for_damage(var_09, param_01.crystal_model, param_00, param_01, param_02, param_03, param_04);
+  var_0 collect_arcane_essense(var_0, var_1, var_2, var_3, var_4);
+  var_9 = var_1.crystal_slot;
+  struct_wait_for_damage(var_9, var_1.crystal_model, var_0, var_1, var_2, var_3, var_4);
 }
 
-timeout_crystal(param_00, param_01, param_02, param_03) {
-  param_00 endon("picked_up");
+timeout_crystal(var_0, var_1, var_2, var_3) {
+  var_0 endon("picked_up");
   wait(30);
-  level thread waittillnextwave(param_03, param_01);
-  playsoundatpos(param_00.origin, "zmb_coin_disappear");
-  playFX(level._effect["souvenir_pickup"], param_00.origin);
-  remove_essence_interaction(param_00);
-  reset_trap_kill_count(param_00, param_01, param_02);
-  param_00 setscriptablepartstate("miniufo", "neutral");
-  param_00 makeunusable();
-  param_00 setModel("tag_origin");
-  param_00 delete();
+  level thread waittillnextwave(var_3, var_1);
+  playsoundatpos(var_0.origin, "zmb_coin_disappear");
+  playFX(level._effect["souvenir_pickup"], var_0.origin);
+  remove_essence_interaction(var_0);
+  reset_trap_kill_count(var_0, var_1, var_2);
+  var_0 setscriptablepartstate("miniufo", "neutral");
+  var_0 makeunusable();
+  var_0 setModel("tag_origin");
+  var_0 delete();
 }
 
-reset_trap_kill_count(param_00, param_01, param_02) {
-  var_03 = param_01.crystal_model;
-  switch (var_03) {
+reset_trap_kill_count(var_0, var_1, var_2) {
+  var_3 = var_1.crystal_model;
+  switch (var_3) {
     case "zmb_weapon_crystal_red":
       level.angry_mike_trap_kills = 0;
       scripts\engine\utility::flag_clear("mini_ufo_red_ready");
@@ -695,34 +695,34 @@ reset_trap_kill_count(param_00, param_01, param_02) {
       break;
   }
 
-  thread crystal_listener(param_01, param_02);
+  thread crystal_listener(var_1, var_2);
 }
 
-crystal_listener(param_00, param_01) {
-  var_02 = get_part_name(param_01);
-  var_03 = undefined;
-  level waittill("ww_" + param_00.gun + "_" + var_02 + "_dropped", var_04);
-  var_05 = spawn("script_model", var_04 + (0, 0, 30));
-  var_06 = get_part_model(param_00, param_01);
+crystal_listener(var_0, var_1) {
+  var_2 = get_part_name(var_1);
+  var_3 = undefined;
+  level waittill("ww_" + var_0.gun + "_" + var_2 + "_dropped", var_4);
+  var_5 = spawn("script_model", var_4 + (0, 0, 30));
+  var_6 = get_part_model(var_0, var_1);
   if(scripts\engine\utility::istrue(level.skip_crystal_logic)) {
     level.skip_crystal_logic = 0;
-    fake_crystal_logic(var_05, param_00, var_04, param_01, var_02);
+    fake_crystal_logic(var_5, var_0, var_4, var_1, var_2);
     return;
   }
 
-  var_05 collect_arcane_essense(var_05, param_00, var_04, param_01, var_02, 1);
+  var_5 collect_arcane_essense(var_5, var_0, var_4, var_1, var_2, 1);
 }
 
-struct_wait_for_damage(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   scripts\engine\utility::flag_wait("gator_tooth_broken");
-  var_07 = strtok(param_01, "_");
-  var_08 = var_07[3];
-  var_09 = level.arkqueststation;
-  var_0A = scripts\engine\utility::getstruct("slot_" + param_00, "script_noteworthy");
-  param_02.origin = var_0A.origin;
-  param_02.angles = anglestoup(var_0A.angles);
-  param_02 setModel(param_01);
-  var_0B = getent("crystal_damage_trigger_" + param_00, "targetname");
+  var_7 = strtok(var_1, "_");
+  var_8 = var_7[3];
+  var_9 = level.arkqueststation;
+  var_0A = scripts\engine\utility::getstruct("slot_" + var_0, "script_noteworthy");
+  var_2.origin = var_0A.origin;
+  var_2.angles = anglestoup(var_0A.angles);
+  var_2 setModel(var_1);
+  var_0B = getent("crystal_damage_trigger_" + var_0, "targetname");
   var_0B.origin = var_0B.origin + (0, 0.25, 0);
   var_0B setCanDamage(1);
   var_0B.team = "axis";
@@ -740,25 +740,25 @@ struct_wait_for_damage(param_00, param_01, param_02, param_03, param_04, param_0
       var_15 = var_0D getcurrentweapon();
     }
 
-    if(!scripts\cp\utility::weaponhasattachment(var_15, "ark" + var_08)) {
+    if(!scripts\cp\utility::weaponhasattachment(var_15, "ark" + var_8)) {
       continue;
     }
 
-    playsoundatpos(param_02.origin, "arc_machine_door_shoot_off");
+    playsoundatpos(var_2.origin, "arc_machine_door_shoot_off");
     var_0B setCanDamage(0);
     var_0B hide();
-    if(!isDefined(var_09.crystals)) {
-      var_09.crystals = [];
+    if(!isDefined(var_9.crystals)) {
+      var_9.crystals = [];
     }
 
-    var_09.crystals[var_09.crystals.size] = param_02;
-    scripts\engine\utility::flag_wait(var_08 + "_crystal_placed");
+    var_9.crystals[var_9.crystals.size] = var_2;
+    scripts\engine\utility::flag_wait(var_8 + "_crystal_placed");
     break;
   }
 
-  level.wor_items_picked_up[param_03.gun][param_06] = 1;
+  level.wor_items_picked_up[var_3.gun][var_6] = 1;
   if(isplayer(var_0D)) {
-    switch (param_03.gun) {
+    switch (var_3.gun) {
       case "iw7_headcutter_zm":
         var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_crystal_yellow", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
@@ -782,42 +782,42 @@ struct_wait_for_damage(param_00, param_01, param_02, param_03, param_04, param_0
   }
 }
 
-run_battery_logic(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = get_part_model(param_01, param_03);
-  param_00 setModel(var_05);
-  if(param_01.gun == "iw7_dischord_zm") {
-    var_06 = "dischord";
+run_battery_logic(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = get_part_model(var_1, var_3);
+  var_0 setModel(var_5);
+  if(var_1.gun == "iw7_dischord_zm") {
+    var_6 = "dischord";
     if(scripts\engine\utility::istrue(level.skip_battery_logic)) {
       level.skip_battery_logic = 0;
       wait(0.25);
     } else {
-      param_00 dischord_battery_move();
+      var_0 dischord_battery_move();
     }
-  } else if(param_02.gun == "iw7_facemelter_zm") {
-    var_06 = "melter";
-    level.facemelter_battery = param_00;
+  } else if(var_2.gun == "iw7_facemelter_zm") {
+    var_6 = "melter";
+    level.facemelter_battery = var_0;
     wait(0.25);
-  } else if(param_02.gun == "iw7_shredder_zm") {
-    var_06 = "shredder";
-    level.shredder_battery = param_00;
+  } else if(var_2.gun == "iw7_shredder_zm") {
+    var_6 = "shredder";
+    level.shredder_battery = var_0;
     wait(0.25);
   } else {
-    var_06 = "cutter";
+    var_6 = "cutter";
     wait(0.25);
   }
 
-  param_00 setscriptablepartstate("model", param_01.toy_model_state);
-  param_00 thread rotate_wor_piece();
-  param_00 makeusable();
-  param_00 setuserange(64);
-  param_00 setusefov(120);
-  param_00 sethintstring(&"CP_QUEST_WOR_PART");
-  param_00 waittill("trigger", var_07);
-  var_07 thread scripts\cp\cp_vo::try_to_play_vo("quest_" + var_06 + "_battery", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
-  param_00 setscriptablepartstate("pickup_piece", "pickup_piece");
-  level.wor_items_picked_up[param_01.gun][param_04] = 1;
+  var_0 setscriptablepartstate("model", var_1.toy_model_state);
+  var_0 thread rotate_wor_piece();
+  var_0 makeusable();
+  var_0 setuserange(64);
+  var_0 setusefov(120);
+  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 waittill("trigger", var_7);
+  var_7 thread scripts\cp\cp_vo::try_to_play_vo("quest_" + var_6 + "_battery", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  var_0 setscriptablepartstate("pickup_piece", "pickup_piece");
+  level.wor_items_picked_up[var_1.gun][var_4] = 1;
   wait(0.25);
-  param_00 setscriptablepartstate("model", "neutral");
+  var_0 setscriptablepartstate("model", "neutral");
 }
 
 rotate_wor_piece() {
@@ -832,58 +832,58 @@ rotate_wor_piece() {
   }
 }
 
-run_toy_logic(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = (0, 0, 0);
-  var_06 = (0, 0, 0);
-  switch (param_01.gun) {
+run_toy_logic(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = (0, 0, 0);
+  var_6 = (0, 0, 0);
+  switch (var_1.gun) {
     case "iw7_shredder_zm":
-      var_07 = getent("toy_angry_mike", "targetname");
-      var_05 = var_07.origin;
-      var_06 = var_07.angles;
-      var_07 hide();
+      var_7 = getent("toy_angry_mike", "targetname");
+      var_5 = var_7.origin;
+      var_6 = var_7.angles;
+      var_7 hide();
       break;
 
     case "iw7_facemelter_zm":
-      var_07 = getent("toy_shuttle", "targetname");
-      var_05 = var_07.origin;
-      var_06 = var_07.angles;
-      var_07 hide();
+      var_7 = getent("toy_shuttle", "targetname");
+      var_5 = var_7.origin;
+      var_6 = var_7.angles;
+      var_7 hide();
       break;
 
     case "iw7_dischord_zm":
-      var_07 = getent("toy_disco_ball", "targetname");
-      var_05 = var_07.origin;
-      var_06 = var_07.angles;
-      var_07 hide();
+      var_7 = getent("toy_disco_ball", "targetname");
+      var_5 = var_7.origin;
+      var_6 = var_7.angles;
+      var_7 hide();
       break;
 
     case "iw7_headcutter_zm":
-      var_07 = getent("toy_yeti", "targetname");
-      var_05 = var_07.origin;
-      var_06 = var_07.angles;
-      var_07 hide();
+      var_7 = getent("toy_yeti", "targetname");
+      var_5 = var_7.origin;
+      var_6 = var_7.angles;
+      var_7 hide();
       break;
   }
 
-  param_00 setModel(param_01.toy_model);
-  param_00.origin = var_05;
-  param_00.angles = var_06;
+  var_0 setModel(var_1.toy_model);
+  var_0.origin = var_5;
+  var_0.angles = var_6;
   wait(0.1);
-  param_00 setscriptablepartstate("model", param_01.toy_model_state);
-  var_08 = scripts\engine\utility::getstructarray("interaction", "targetname");
-  var_09 = scripts\engine\utility::getclosest(param_00.origin, var_08);
-  if(!isDefined(var_09.angles)) {
-    var_09.angles = (0, 0, 0);
+  var_0 setscriptablepartstate("model", var_1.toy_model_state);
+  var_8 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_9 = scripts\engine\utility::getclosest(var_0.origin, var_8);
+  if(!isDefined(var_9.angles)) {
+    var_9.angles = (0, 0, 0);
   }
 
-  param_00 follow_struct_trail(var_09, var_05, var_06);
-  param_00 makeusable();
-  param_00 setuserange(64);
-  param_00 setusefov(120);
-  param_00 sethintstring(&"CP_QUEST_WOR_PART");
-  param_00 thread spin_toy();
-  param_00 waittill("trigger", var_0A);
-  switch (param_00.model) {
+  var_0 follow_struct_trail(var_9, var_5, var_6);
+  var_0 makeusable();
+  var_0 setuserange(64);
+  var_0 setusefov(120);
+  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 thread spin_toy();
+  var_0 waittill("trigger", var_0A);
+  switch (var_0.model) {
     case "zmb_ice_monster_toy":
       var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_icemonster", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
       break;
@@ -905,169 +905,169 @@ run_toy_logic(param_00, param_01, param_02, param_03, param_04) {
       break;
   }
 
-  param_00 setscriptablepartstate("pickup_piece", "pickup_piece");
-  level.wor_items_picked_up[param_01.gun][param_04] = 1;
+  var_0 setscriptablepartstate("pickup_piece", "pickup_piece");
+  level.wor_items_picked_up[var_1.gun][var_4] = 1;
   wait(0.25);
-  param_00 setscriptablepartstate("model", "neutral");
-  param_00 setModel("tag_origin");
+  var_0 setscriptablepartstate("model", "neutral");
+  var_0 setModel("tag_origin");
 }
 
-part_listener(param_00, param_01) {
-  var_02 = get_part_name(param_01);
-  var_03 = undefined;
-  level waittill("ww_" + param_00.gun + "_" + var_02 + "_dropped", var_04);
-  var_05 = param_00.gun;
-  var_06 = (0, 0, 30);
-  if(param_00.gun == "iw7_headcutter_zm" && var_02 == "battery") {
-    var_06 = (0, 0, 0);
+part_listener(var_0, var_1) {
+  var_2 = get_part_name(var_1);
+  var_3 = undefined;
+  level waittill("ww_" + var_0.gun + "_" + var_2 + "_dropped", var_4);
+  var_5 = var_0.gun;
+  var_6 = (0, 0, 30);
+  if(var_0.gun == "iw7_headcutter_zm" && var_2 == "battery") {
+    var_6 = (0, 0, 0);
   }
 
-  var_07 = spawn("script_model", var_04 + var_06);
-  var_08 = get_part_model(param_00, param_01);
-  switch (var_02) {
+  var_7 = spawn("script_model", var_4 + var_6);
+  var_8 = get_part_model(var_0, var_1);
+  switch (var_2) {
     case "crystal":
       if(level.skip_crystal_logic) {
         level.skip_crystal_logic = 0;
-        fake_crystal_logic(var_07, param_00, var_04, param_01, var_02);
+        fake_crystal_logic(var_7, var_0, var_4, var_1, var_2);
       } else {
-        run_mini_ufo_logic(var_07, param_00, var_04, param_01, var_02);
+        run_mini_ufo_logic(var_7, var_0, var_4, var_1, var_2);
       }
       break;
 
     case "toy":
-      run_toy_logic(var_07, param_00, var_04, param_01, var_02);
+      run_toy_logic(var_7, var_0, var_4, var_1, var_2);
       break;
 
     case "battery":
-      run_battery_logic(var_07, param_00, var_04, param_01, var_02);
+      run_battery_logic(var_7, var_0, var_4, var_1, var_2);
       break;
   }
 
-  var_07 delete();
+  var_7 delete();
   level thread scripts\cp\cp_vo::add_to_nag_vo("dj_wor_use_nag", "zmb_dj_vo", 60, 30, 2, 1);
-  var_09 = get_omnvar_bit(param_00.gun, param_01);
-  level notify("ww_" + param_00.gun + "_" + var_02 + "_picked_up");
-  level scripts\cp\utility::set_quest_icon(var_09);
+  var_9 = get_omnvar_bit(var_0.gun, var_1);
+  level notify("ww_" + var_0.gun + "_" + var_2 + "_picked_up");
+  level scripts\cp\utility::set_quest_icon(var_9);
 }
 
-wait_for_crystal_to_charge(param_00, param_01, param_02, param_03) {
-  var_04 = 0;
-  param_02.runner_count = 0;
-  param_02.expected_souls = 0;
-  var_05 = 25;
-  while(var_04 < var_05) {
-    level waittill("kill_near_crystal", var_06, var_07, var_08);
-    param_02.expected_souls--;
-    if(param_02 != var_08) {
+wait_for_crystal_to_charge(var_0, var_1, var_2, var_3) {
+  var_4 = 0;
+  var_2.runner_count = 0;
+  var_2.expected_souls = 0;
+  var_5 = 25;
+  while(var_4 < var_5) {
+    level waittill("kill_near_crystal", var_6, var_7, var_8);
+    var_2.expected_souls--;
+    if(var_2 != var_8) {
       continue;
     }
 
-    if(!scripts\cp\utility::weaponhasattachment(var_07, "arcane_base")) {
+    if(!scripts\cp\utility::weaponhasattachment(var_7, "arcane_base")) {
       continue;
     }
 
-    thread crytsal_capture_killed_essense(var_06, param_02);
-    param_02.runner_count++;
-    var_04++;
+    thread crytsal_capture_killed_essense(var_6, var_2);
+    var_2.runner_count++;
+    var_4++;
   }
 
-  while(param_02.runner_count >= 1) {
+  while(var_2.runner_count >= 1) {
     wait(0.05);
   }
 
-  param_02.fully_charged = 1;
-  param_02 notify("fully_charged");
-  while(!isDefined(param_00.at_end_loc)) {
+  var_2.fully_charged = 1;
+  var_2 notify("fully_charged");
+  while(!isDefined(var_0.at_end_loc)) {
     wait(0.1);
   }
 
-  param_00 setModel("tag_origin_ground_essence", param_03);
+  var_0 setModel("tag_origin_ground_essence", var_3);
   scripts\cp\cp_vo::try_to_play_vo_on_all_players("quest_arcane_ufo_start");
   scripts\engine\utility::waitframe();
-  param_00 setscriptablepartstate("miniufo", param_03);
-  if(isDefined(param_02) && scripts\engine\utility::array_contains(level.miniufos, param_02)) {
-    level.miniufos = scripts\engine\utility::array_remove(level.miniufos, param_02);
+  var_0 setscriptablepartstate("miniufo", var_3);
+  if(isDefined(var_2) && scripts\engine\utility::array_contains(level.miniufos, var_2)) {
+    level.miniufos = scripts\engine\utility::array_remove(level.miniufos, var_2);
   }
 }
 
-crytsal_capture_killed_essense(param_00, param_01) {
-  var_02 = spawn("script_model", param_00);
-  var_02 setModel("tag_origin_soultrail");
-  var_03 = param_01.origin;
-  var_04 = param_00 + (0, 0, 40);
+crytsal_capture_killed_essense(var_0, var_1) {
+  var_2 = spawn("script_model", var_0);
+  var_2 setModel("tag_origin_soultrail");
+  var_3 = var_1.origin;
+  var_4 = var_0 + (0, 0, 40);
   for(;;) {
-    var_05 = distance(var_04, var_03);
-    var_06 = 1500;
-    var_07 = var_05 / var_06;
-    if(var_07 < 0.05) {
-      var_07 = 0.05;
+    var_5 = distance(var_4, var_3);
+    var_6 = 1500;
+    var_7 = var_5 / var_6;
+    if(var_7 < 0.05) {
+      var_7 = 0.05;
     }
 
-    var_02 moveto(var_03, var_07);
-    var_02 waittill("movedone");
-    if(distance(var_02.origin, param_01.origin) > 16) {
-      var_03 = param_01.origin;
-      var_04 = var_02.origin;
+    var_2 moveto(var_3, var_7);
+    var_2 waittill("movedone");
+    if(distance(var_2.origin, var_1.origin) > 16) {
+      var_3 = var_1.origin;
+      var_4 = var_2.origin;
       continue;
     }
 
     break;
   }
 
-  param_01 setscriptablepartstate("sparks", "sparks");
+  var_1 setscriptablepartstate("sparks", "sparks");
   wait(0.25);
-  param_01 setscriptablepartstate("sparks", "neutral");
-  param_01.runner_count--;
-  var_02 delete();
+  var_1 setscriptablepartstate("sparks", "neutral");
+  var_1.runner_count--;
+  var_2 delete();
 }
 
-charge_players_arcane_base_attachment(param_00, param_01) {
-  var_02 = strtok(param_01.crystal_model, "_");
-  var_03 = var_02[3];
-  var_04 = "ark" + var_03;
-  param_00 setscriptablepartstate("arcane", "arcane_absorb", 0);
+charge_players_arcane_base_attachment(var_0, var_1) {
+  var_2 = strtok(var_1.crystal_model, "_");
+  var_3 = var_2[3];
+  var_4 = "ark" + var_3;
+  var_0 setscriptablepartstate("arcane", "arcane_absorb", 0);
   wait(0.25);
-  param_00 scripts\engine\utility::allow_weapon_switch(0);
-  var_05 = param_00 getcurrentweapon();
-  param_00 scripts\cp\cp_weapon::add_attachment_to_weapon(var_04, var_05, 1);
-  while(param_00 isswitchingweapon()) {
+  var_0 scripts\engine\utility::allow_weapon_switch(0);
+  var_5 = var_0 getcurrentweapon();
+  var_0 scripts\cp\cp_weapon::add_attachment_to_weapon(var_4, var_5, 1);
+  while(var_0 isswitchingweapon()) {
     wait(0.05);
   }
 
-  param_00 scripts\engine\utility::allow_weapon_switch(1);
-  level thread play_arcane_vo(param_00);
-  param_00 scripts\cp\cp_persistence::give_player_xp(500, 1);
+  var_0 scripts\engine\utility::allow_weapon_switch(1);
+  level thread play_arcane_vo(var_0);
+  var_0 scripts\cp\cp_persistence::give_player_xp(500, 1);
 }
 
-play_arcane_vo(param_00) {
+play_arcane_vo(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("last_stand");
+  var_0 endon("disconnect");
+  var_0 endon("last_stand");
   wait(10);
-  param_00 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_ufo_success", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  var_0 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_ufo_success", "zmb_comment_vo", "highest", 10, 0, 0, 1);
   wait(7);
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_arcane_corecharged_complete", "zmb_ww_vo", "highest", 60, 0, 0, 1);
 }
 
-set_gun_slot_from_part_num(param_00, param_01) {
-  switch (param_01) {
+set_gun_slot_from_part_num(var_0, var_1) {
+  switch (var_1) {
     case 1:
-      param_00.part_1 = 1;
+      var_0.part_1 = 1;
       break;
 
     case 2:
-      param_00.part_2 = 1;
+      var_0.part_2 = 1;
       break;
 
     case 3:
-      param_00.part_3 = 1;
+      var_0.part_3 = 1;
       break;
   }
 }
 
-setup_standee_data(param_00) {
-  var_01 = getweaponbasename(param_00);
-  switch (var_01) {
+setup_standee_data(var_0) {
+  var_1 = getweaponbasename(var_0);
+  switch (var_1) {
     case "iw7_headcutter_zm":
       init_headcutter_data();
       break;
@@ -1154,8 +1154,8 @@ init_shredder_data() {
   self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_SHREDDER";
 }
 
-get_part_name(param_00) {
-  switch (param_00) {
+get_part_name(var_0) {
+  switch (var_0) {
     case 1:
       return "toy";
 
@@ -1169,11 +1169,11 @@ get_part_name(param_00) {
   return undefined;
 }
 
-get_omnvar_bit(param_00, param_01) {
-  var_02 = getweaponbasename(param_00);
-  switch (var_02) {
+get_omnvar_bit(var_0, var_1) {
+  var_2 = getweaponbasename(var_0);
+  switch (var_2) {
     case "iw7_headcutter_zm":
-      switch (param_01) {
+      switch (var_1) {
         case 1:
           return 10;
 
@@ -1186,7 +1186,7 @@ get_omnvar_bit(param_00, param_01) {
       break;
 
     case "iw7_facemelter_zm":
-      switch (param_01) {
+      switch (var_1) {
         case 1:
           return 13;
 
@@ -1199,7 +1199,7 @@ get_omnvar_bit(param_00, param_01) {
       break;
 
     case "iw7_dischord_zm":
-      switch (param_01) {
+      switch (var_1) {
         case 1:
           return 16;
 
@@ -1212,7 +1212,7 @@ get_omnvar_bit(param_00, param_01) {
       break;
 
     case "iw7_shredder_zm":
-      switch (param_01) {
+      switch (var_1) {
         case 1:
           return 19;
 
@@ -1228,24 +1228,24 @@ get_omnvar_bit(param_00, param_01) {
   return undefined;
 }
 
-get_part_model(param_00, param_01) {
-  switch (param_01) {
+get_part_model(var_0, var_1) {
+  switch (var_1) {
     case 1:
-      return param_00.toy_model;
+      return var_0.toy_model;
 
     case 2:
-      return param_00.battery_model;
+      return var_0.battery_model;
 
     case 3:
-      return param_00.crystal_model;
+      return var_0.crystal_model;
   }
 
   return undefined;
 }
 
-get_toy_angle_offset(param_00) {
-  var_01 = getweaponbasename(param_00.gun);
-  switch (var_01) {
+get_toy_angle_offset(var_0) {
+  var_1 = getweaponbasename(var_0.gun);
+  switch (var_1) {
     case "iw7_headcutter_zm":
       return (0, -90, 0);
 
@@ -1262,9 +1262,9 @@ get_toy_angle_offset(param_00) {
   return undefined;
 }
 
-get_toy_pos_offset(param_00) {
-  var_01 = getweaponbasename(param_00.gun);
-  switch (var_01) {
+get_toy_pos_offset(var_0) {
+  var_1 = getweaponbasename(var_0.gun);
+  switch (var_1) {
     case "iw7_headcutter_zm":
       return (-4, 1, 3);
 
@@ -1281,21 +1281,21 @@ get_toy_pos_offset(param_00) {
   return undefined;
 }
 
-wor_quest_death_update_func(param_00, param_01) {
+wor_quest_death_update_func(var_0, var_1) {
   if(scripts\engine\utility::flag("mini_ufo_yellow_ready") && level.head_cutter_trap_kills >= 15) {
-    level notify("ww_iw7_headcutter_zm_crystal_dropped", param_00.origin);
+    level notify("ww_iw7_headcutter_zm_crystal_dropped", var_0.origin);
   }
 
   if(scripts\engine\utility::flag("mini_ufo_red_ready") && level.angry_mike_trap_kills >= 15) {
-    level notify("ww_iw7_shredder_zm_crystal_dropped", param_00.origin);
+    level notify("ww_iw7_shredder_zm_crystal_dropped", var_0.origin);
   }
 
   if(scripts\engine\utility::flag("mini_ufo_green_ready") && level.disco_trap_kills >= 15) {
-    level notify("ww_iw7_dischord_zm_crystal_dropped", param_00.origin);
+    level notify("ww_iw7_dischord_zm_crystal_dropped", var_0.origin);
   }
 
   if(scripts\engine\utility::flag("mini_ufo_blue_ready") && level.rocket_trap_kills >= 15) {
-    level notify("ww_iw7_facemelter_zm_crystal_dropped", param_00.origin);
+    level notify("ww_iw7_facemelter_zm_crystal_dropped", var_0.origin);
   }
 }
 
@@ -1304,111 +1304,111 @@ wor_quest_crafting_func() {
   level.shredder_crafting_list = ["zmb_coin_alien", "zmb_coin_alien", "zmb_coin_alien"];
   level.dischord_crafting_list = ["zmb_coin_alien", "zmb_coin_space", "zmb_coin_ice"];
   level.facemelter_crafting_list = ["zmb_coin_space", "zmb_coin_space", "zmb_coin_space"];
-  var_00 = "europa_tunnel";
-  var_01 = "moon_outside_begin";
-  var_02 = "mars_3";
-  var_03 = "moon_bumpercars";
-  var_04 = [];
-  while(var_04.size < 4) {
-    level waittill("quest_crafting_check", var_05);
+  var_0 = "europa_tunnel";
+  var_1 = "moon_outside_begin";
+  var_2 = "mars_3";
+  var_3 = "moon_bumpercars";
+  var_4 = [];
+  while(var_4.size < 4) {
+    level waittill("quest_crafting_check", var_5);
     if(scripts\cp\utility::is_codxp()) {
       continue;
     }
 
-    if(!isDefined(var_04["iw7_headcutter_zm"]) && ingredient_list_check(var_05.ingredient_list, level.headcutter_crafting_list)) {
-      if(isDefined(var_05.power_area) && var_05.power_area == var_00) {
-        level notify("ww_iw7_headcutter_zm_toy_dropped", var_05.origin);
-        var_04["iw7_headcutter_zm"] = 1;
+    if(!isDefined(var_4["iw7_headcutter_zm"]) && ingredient_list_check(var_5.ingredient_list, level.headcutter_crafting_list)) {
+      if(isDefined(var_5.power_area) && var_5.power_area == var_0) {
+        level notify("ww_iw7_headcutter_zm_toy_dropped", var_5.origin);
+        var_4["iw7_headcutter_zm"] = 1;
       }
     }
 
-    if(!isDefined(var_04["iw7_shredder_zm"]) && ingredient_list_check(var_05.ingredient_list, level.shredder_crafting_list)) {
-      if(isDefined(var_05.power_area) && var_05.power_area == var_02) {
-        level notify("ww_iw7_shredder_zm_toy_dropped", var_05.origin);
-        var_04["iw7_shredder_zm"] = 1;
+    if(!isDefined(var_4["iw7_shredder_zm"]) && ingredient_list_check(var_5.ingredient_list, level.shredder_crafting_list)) {
+      if(isDefined(var_5.power_area) && var_5.power_area == var_2) {
+        level notify("ww_iw7_shredder_zm_toy_dropped", var_5.origin);
+        var_4["iw7_shredder_zm"] = 1;
       }
     }
 
-    if(!isDefined(var_04["iw7_dischord_zm"]) && ingredient_list_check(var_05.ingredient_list, level.dischord_crafting_list)) {
-      if(isDefined(var_05.power_area) && var_05.power_area == var_03) {
-        level notify("ww_iw7_dischord_zm_toy_dropped", var_05.origin);
-        var_04["iw7_dischord_zm"] = 1;
+    if(!isDefined(var_4["iw7_dischord_zm"]) && ingredient_list_check(var_5.ingredient_list, level.dischord_crafting_list)) {
+      if(isDefined(var_5.power_area) && var_5.power_area == var_3) {
+        level notify("ww_iw7_dischord_zm_toy_dropped", var_5.origin);
+        var_4["iw7_dischord_zm"] = 1;
       }
     }
 
-    if(!isDefined(var_04["iw7_facemelter_zm"]) && ingredient_list_check(var_05.ingredient_list, level.facemelter_crafting_list)) {
-      if(isDefined(var_05.power_area) && var_05.power_area == var_01) {
-        level notify("ww_iw7_facemelter_zm_toy_dropped", var_05.origin);
-        var_04["iw7_facemelter_zm"] = 1;
+    if(!isDefined(var_4["iw7_facemelter_zm"]) && ingredient_list_check(var_5.ingredient_list, level.facemelter_crafting_list)) {
+      if(isDefined(var_5.power_area) && var_5.power_area == var_1) {
+        level notify("ww_iw7_facemelter_zm_toy_dropped", var_5.origin);
+        var_4["iw7_facemelter_zm"] = 1;
       }
     }
   }
 }
 
-ingredient_list_check(param_00, param_01) {
-  if(param_01.size == 0) {
+ingredient_list_check(var_0, var_1) {
+  if(var_1.size == 0) {
     return 0;
   }
 
-  foreach(var_03 in param_00) {
-    var_04 = undefined;
-    foreach(var_06 in param_01) {
-      if(var_03 == var_06) {
-        var_04 = var_06;
+  foreach(var_3 in var_0) {
+    var_4 = undefined;
+    foreach(var_6 in var_1) {
+      if(var_3 == var_6) {
+        var_4 = var_6;
         break;
       }
     }
 
-    if(!isDefined(var_04)) {
+    if(!isDefined(var_4)) {
       return 0;
     } else {
-      param_01 = array_remove_single(param_01, var_04);
+      var_1 = array_remove_single(var_1, var_4);
     }
   }
 
   return 1;
 }
 
-array_remove_single(param_00, param_01) {
-  var_02 = 0;
-  var_03 = [];
-  foreach(var_05 in param_00) {
-    if(var_02) {
-      var_03[var_03.size] = var_05;
+array_remove_single(var_0, var_1) {
+  var_2 = 0;
+  var_3 = [];
+  foreach(var_5 in var_0) {
+    if(var_2) {
+      var_3[var_3.size] = var_5;
       continue;
     }
 
-    if(var_05 != param_01) {
-      var_03[var_03.size] = var_05;
+    if(var_5 != var_1) {
+      var_3[var_3.size] = var_5;
       continue;
     }
 
-    var_02 = 1;
+    var_2 = 1;
   }
 
-  return var_03;
+  return var_3;
 }
 
-follow_struct_trail(param_00, param_01, param_02) {
-  var_03 = scripts\engine\utility::getstructarray("toy_trail_start", "targetname");
-  var_04 = scripts\engine\utility::getclosest(self.origin, var_03);
+follow_struct_trail(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::getstructarray("toy_trail_start", "targetname");
+  var_4 = scripts\engine\utility::getclosest(self.origin, var_3);
   wait(0.5);
-  self moveto(var_04.origin, 0.5);
+  self moveto(var_4.origin, 0.5);
   self waittill("movedone");
-  var_05 = scripts\engine\utility::getstruct(var_04.target, "targetname");
-  self moveto(var_05.origin, 0.5);
+  var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+  self moveto(var_5.origin, 0.5);
   self waittill("movedone");
-  while(isDefined(var_05.target)) {
-    var_05 = scripts\engine\utility::getstruct(var_05.target, "targetname");
-    if(!isDefined(var_05.target)) {
-      var_06 = var_05.origin - var_04.origin;
-      var_06 = vectornormalize(var_06);
-      var_06 = var_06 * 40;
-      var_06 = (var_06[0], var_06[1], 0);
-      var_05.origin = var_05.origin + var_06;
+  while(isDefined(var_5.target)) {
+    var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    if(!isDefined(var_5.target)) {
+      var_6 = var_5.origin - var_4.origin;
+      var_6 = vectornormalize(var_6);
+      var_6 = var_6 * 40;
+      var_6 = (var_6[0], var_6[1], 0);
+      var_5.origin = var_5.origin + var_6;
     }
 
-    self moveto(var_05.origin, 0.75);
+    self moveto(var_5.origin, 0.75);
     self waittill("movedone");
   }
 
@@ -1445,16 +1445,16 @@ listen_for_grenade_in_volume() {
   }
 
   scripts\engine\utility::flag_wait("fast_travel_init_done");
-  var_00 = getEntArray("portal_grenade_volume", "targetname");
+  var_0 = getEntArray("portal_grenade_volume", "targetname");
   for(;;) {
-    self waittill("grenade_fire", var_01, var_02);
-    if(isDefined(var_01) && isDefined(var_02)) {
-      var_01 thread wait_for_impact(var_00[0], var_02, self);
+    self waittill("grenade_fire", var_1, var_2);
+    if(isDefined(var_1) && isDefined(var_2)) {
+      var_1 thread wait_for_impact(var_0[0], var_2, self);
     }
   }
 }
 
-check_for_grenade_in_volume(param_00, param_01, param_02) {
+check_for_grenade_in_volume(var_0, var_1, var_2) {
   self endon("death");
   scripts\engine\utility::waitframe();
   if(!isDefined(level.hot_potato_stage)) {
@@ -1468,22 +1468,22 @@ check_for_grenade_in_volume(param_00, param_01, param_02) {
         continue;
       }
 
-      if(self istouching(param_00)) {
+      if(self istouching(var_0)) {
         level.hot_potato_stage = 1;
-        level thread start_hot_potato(self, param_00, param_01, param_02);
+        level thread start_hot_potato(self, var_0, var_1, var_2);
       }
-    } else if(isDefined(level.hot_potato_carrier) && param_02 == level.hot_potato_carrier && is_thrown_back_grenade(param_02)) {
+    } else if(isDefined(level.hot_potato_carrier) && var_2 == level.hot_potato_carrier && is_thrown_back_grenade(var_2)) {
       self.potato = 1;
       level.hot_potato_carrier = undefined;
-      level.last_potato_carrier = param_02;
-      if(self istouching(param_00)) {
-        level thread throw_battery_out_of_portal(self, param_02);
+      level.last_potato_carrier = var_2;
+      if(self istouching(var_0)) {
+        level thread throw_battery_out_of_portal(self, var_2);
       }
     }
 
     if(scripts\engine\utility::istrue(self.potato)) {
-      if(self istouching(param_00)) {
-        level thread throw_battery_out_of_portal(self, param_02);
+      if(self istouching(var_0)) {
+        level thread throw_battery_out_of_portal(self, var_2);
       }
     }
 
@@ -1491,15 +1491,15 @@ check_for_grenade_in_volume(param_00, param_01, param_02) {
   }
 }
 
-start_hot_potato(param_00, param_01, param_02, param_03) {
+start_hot_potato(var_0, var_1, var_2, var_3) {
   level endon("end_hot_potato_stage_1");
   level.potatoes_needed = 1;
-  var_04 = param_00 throw_grenade_back(param_01, param_02, param_03, 5);
-  param_00 delete();
-  var_04 thread notify_on_explode();
-  var_04 thread listen_for_pickup();
-  var_05 = level scripts\engine\utility::waittill_any_return("hot_potato_timed_out");
-  if(var_05 == "hot_potato_timed_out") {
+  var_4 = var_0 throw_grenade_back(var_1, var_2, var_3, 5);
+  var_0 delete();
+  var_4 thread notify_on_explode();
+  var_4 thread listen_for_pickup();
+  var_5 = level scripts\engine\utility::waittill_any_return("hot_potato_timed_out");
+  if(var_5 == "hot_potato_timed_out") {
     if(isDefined(level.last_potato_carrier)) {
       level thread play_fail_sound(level.last_potato_carrier, 2);
     }
@@ -1510,22 +1510,22 @@ start_hot_potato(param_00, param_01, param_02, param_03) {
   }
 }
 
-play_fail_sound(param_00, param_01) {
-  param_00 endon("death");
-  wait(param_01);
-  param_00 playlocalsound("zapper_grenade_toss_fail");
+play_fail_sound(var_0, var_1) {
+  var_0 endon("death");
+  wait(var_1);
+  var_0 playlocalsound("zapper_grenade_toss_fail");
 }
 
 listen_for_pickup() {
   level endon("hot_potato_timed_out");
-  self waittill("trigger", var_00);
-  level.hot_potato_carrier = var_00;
+  self waittill("trigger", var_0);
+  level.hot_potato_carrier = var_0;
 }
 
-throw_battery_out_of_portal(param_00, param_01) {
+throw_battery_out_of_portal(var_0, var_1) {
   level.hot_potato_stage = 2;
-  level notify("ww_iw7_facemelter_zm_battery_dropped", param_01.origin);
-  param_00 delete();
+  level notify("ww_iw7_facemelter_zm_battery_dropped", var_1.origin);
+  var_0 delete();
 }
 
 notify_on_explode() {
@@ -1534,64 +1534,64 @@ notify_on_explode() {
   level notify("hot_potato_timed_out");
 }
 
-throw_grenade_back(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_03)) {
-    param_03 = 5;
+throw_grenade_back(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 5;
   }
 
-  var_04 = (3756, 1379, 115);
-  var_05 = (-200, 0, 0);
-  var_05 = var_05 + (randomintrange(-100, 100), randomintrange(-10, 10), 0);
-  var_06 = param_00 launchgrenade("frag_grenade_zm", var_04, var_05, param_03);
-  var_06 hudoutlineenable(1, 1, 1);
-  var_06.potato = 1;
-  return var_06;
+  var_4 = (3756, 1379, 115);
+  var_5 = (-200, 0, 0);
+  var_5 = var_5 + (randomintrange(-100, 100), randomintrange(-10, 10), 0);
+  var_6 = var_0 launchgrenade("frag_grenade_zm", var_4, var_5, var_3);
+  var_6 hudoutlineenable(1, 1, 1);
+  var_6.potato = 1;
+  return var_6;
 }
 
-is_thrown_back_grenade(param_00) {
-  if(!isDefined(param_00.throwinggrenade)) {
+is_thrown_back_grenade(var_0) {
+  if(!isDefined(var_0.throwinggrenade)) {
     return 1;
   }
 
   return 0;
 }
 
-notify_test(param_00) {
-  self waittill(param_00, var_01, var_02, var_03, var_04, var_05);
-  var_06 = 0;
+notify_test(var_0) {
+  self waittill(var_0, var_1, var_2, var_3, var_4, var_5);
+  var_6 = 0;
 }
 
-wait_for_impact(param_00, param_01, param_02) {
+wait_for_impact(var_0, var_1, var_2) {
   self endon("death");
-  var_03 = 20;
-  var_04 = var_03 * var_03;
-  var_05 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
-  var_05 = scripts\engine\utility::get_array_of_closest(self.origin, var_05);
-  var_06 = var_05[0];
+  var_3 = 20;
+  var_4 = var_3 * var_3;
+  var_5 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
+  var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_5);
+  var_6 = var_5[0];
   if(!isDefined(level.facemelter_portal)) {
-    level.facemelter_portal = scripts\engine\utility::getclosest(param_00.origin, level.fast_travel_spots);
+    level.facemelter_portal = scripts\engine\utility::getclosest(var_0.origin, level.fast_travel_spots);
   }
 
-  if(facemelter_grenade_check(param_01)) {
+  if(facemelter_grenade_check(var_1)) {
     if(!isDefined(level.hot_potato_stage) || level.hot_potato_stage < 1) {
-      thread check_for_grenade_in_volume(param_00, param_01, param_02);
+      thread check_for_grenade_in_volume(var_0, var_1, var_2);
     } else if(level.hot_potato_stage < 2) {
-      if(isDefined(level.hot_potato_carrier) && level.hot_potato_carrier == param_02) {
+      if(isDefined(level.hot_potato_carrier) && level.hot_potato_carrier == var_2) {
         self.potato = 1;
         level.hot_potato_carrier = undefined;
         thread notify_on_explode();
         thread listen_for_pickup();
-        param_00 = getent("center_portal_grenade_volume", "targetname");
-        thread check_for_grenade_in_volume(param_00, param_01, param_02);
+        var_0 = getent("center_portal_grenade_volume", "targetname");
+        thread check_for_grenade_in_volume(var_0, var_1, var_2);
       }
     }
   }
 
-  thread listen_for_mouth_explosion(var_04, var_06, param_02);
+  thread listen_for_mouth_explosion(var_4, var_6, var_2);
 }
 
-facemelter_grenade_check(param_00) {
-  switch (param_00) {
+facemelter_grenade_check(var_0) {
+  switch (var_0) {
     case "cluster_grenade_zm":
     case "semtex_zm":
     case "frag_grenade_zm":
@@ -1601,17 +1601,17 @@ facemelter_grenade_check(param_00) {
   return 0;
 }
 
-listen_for_mouth_explosion(param_00, param_01, param_02) {
+listen_for_mouth_explosion(var_0, var_1, var_2) {
   if(!isDefined(self.weapon_name) || self.weapon_name != "zfreeze_semtex_mp") {
     return;
   }
 
-  self waittill("explode", var_03);
-  var_04 = getent("headcutter_grenade_vol", "targetname");
-  if(ispointinvolume(var_03, var_04)) {
-    param_01 notify("cryo_hit");
-    if(isDefined(param_02)) {
-      param_02 thread scripts\cp\cp_vo::try_to_play_vo("quest_icemonster_grenade", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  self waittill("explode", var_3);
+  var_4 = getent("headcutter_grenade_vol", "targetname");
+  if(ispointinvolume(var_3, var_4)) {
+    var_1 notify("cryo_hit");
+    if(isDefined(var_2)) {
+      var_2 thread scripts\cp\cp_vo::try_to_play_vo("quest_icemonster_grenade", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
     }
   }
 }
@@ -1622,7 +1622,7 @@ listen_for_triton_power() {
   scripts\engine\utility::flag_set("listen_for_cryo_hit");
 }
 
-wor_change_portal(param_00) {
+wor_change_portal(var_0) {
   if(!isDefined(level.wor_portal_change_time) || level.wor_portal_change_time < 5) {
     level.wor_portal_change_time = 5;
   }
@@ -1634,9 +1634,9 @@ wor_change_portal(param_00) {
 }
 
 wait_to_spawn_facemelter_battery() {
-  level waittill("player_entering_wor_changed_portal", var_00);
-  var_01 = scripts\engine\utility::getstruct("facemelter_battery_org", "targetname");
-  level notify("ww_iw7_facemelter_zm_battery_dropped", var_01.origin);
+  level waittill("player_entering_wor_changed_portal", var_0);
+  var_1 = scripts\engine\utility::getstruct("facemelter_battery_org", "targetname");
+  level notify("ww_iw7_facemelter_zm_battery_dropped", var_1.origin);
   while(!isDefined(level.facemelter_battery)) {
     wait(0.1);
   }
@@ -1647,15 +1647,15 @@ wait_to_spawn_facemelter_battery() {
 facemelter_battery_phase_listener() {
   level endon("ww_iw7_facemelter_zm_battery_picked_up");
   for(;;) {
-    foreach(var_01 in level.players) {
-      if(!var_01 is_in_fake_phase_shift()) {
-        level.facemelter_battery hidefromplayer(var_01);
-        level.facemelter_battery disableplayeruse(var_01);
+    foreach(var_1 in level.players) {
+      if(!var_1 is_in_fake_phase_shift()) {
+        level.facemelter_battery hidefromplayer(var_1);
+        level.facemelter_battery disableplayeruse(var_1);
         continue;
       }
 
-      level.facemelter_battery showtoplayer(var_01);
-      level.facemelter_battery enableplayeruse(var_01);
+      level.facemelter_battery showtoplayer(var_1);
+      level.facemelter_battery enableplayeruse(var_1);
     }
 
     wait(0.1);
@@ -1669,57 +1669,57 @@ is_in_fake_phase_shift() {
 dischord_glasses_listener() {
   level.wor_glasses = 0;
   level.dischord_targets_hit = 0;
-  var_00 = getEntArray("dischord_target", "targetname");
-  var_00 = scripts\engine\utility::array_randomize(var_00);
-  var_01 = 0;
-  var_02 = scripts\engine\utility::getclosest((3504, -1297, 172), var_00, 500);
-  var_03 = scripts\engine\utility::getclosest((1865, -2068, 1046), var_00, 500);
+  var_0 = getEntArray("dischord_target", "targetname");
+  var_0 = scripts\engine\utility::array_randomize(var_0);
+  var_1 = 0;
+  var_2 = scripts\engine\utility::getclosest((3504, -1297, 172), var_0, 500);
+  var_3 = scripts\engine\utility::getclosest((1865, -2068, 1046), var_0, 500);
   level.dischord_targets = [5];
-  foreach(var_05 in var_00) {
-    if(var_01 < 5) {
-      level.dischord_targets[var_01] = var_05;
-      level thread dischord_target_listener(var_05);
+  foreach(var_5 in var_0) {
+    if(var_1 < 5) {
+      level.dischord_targets[var_1] = var_5;
+      level thread dischord_target_listener(var_5);
     }
 
-    if(var_05 == var_02) {
-      var_05.origin = var_05.origin + (0, -25, 5);
+    if(var_5 == var_2) {
+      var_5.origin = var_5.origin + (0, -25, 5);
     }
 
-    if(var_05 == var_03) {
-      var_05.origin = (1866, -2107, 835);
-      var_05.angles = (74, 117, 0);
+    if(var_5 == var_3) {
+      var_5.origin = (1866, -2107, 835);
+      var_5.angles = (74, 117, 0);
     }
 
-    var_05 hide();
-    var_01++;
+    var_5 hide();
+    var_1++;
   }
 
   level thread dischord_visibility_listener();
   level waittill("ww_iw7_dischord_zm_battery_dropped");
 }
 
-dischord_target_listener(param_00) {
-  param_00 hudoutlineenable(1, 1, 0);
-  param_00 setCanDamage(1);
-  var_01 = 0;
-  while(!var_01) {
-    param_00 waittill("damage", var_02, var_03);
-    if(isplayer(var_03) && scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets) {
+dischord_target_listener(var_0) {
+  var_0 hudoutlineenable(1, 1, 0);
+  var_0 setCanDamage(1);
+  var_1 = 0;
+  while(!var_1) {
+    var_0 waittill("damage", var_2, var_3);
+    if(isplayer(var_3) && scripts\engine\utility::istrue(var_3.wearing_dischord_glasses) || level.debug_dischord_targets) {
       level.dischord_targets_hit++;
-      var_01 = 1;
+      var_1 = 1;
       if(level.dischord_targets_hit >= 5) {
-        level notify("ww_iw7_dischord_zm_battery_dropped", param_00.origin - (0, 0, 50));
+        level notify("ww_iw7_dischord_zm_battery_dropped", var_0.origin - (0, 0, 50));
       }
     }
   }
 
-  playFX(level._effect["pickup"], param_00.origin);
-  param_00 notify("stop_visibility_listener");
-  if(scripts\engine\utility::array_contains(level.dischord_targets, param_00)) {
-    level.dischord_targets = scripts\engine\utility::array_remove(level.dischord_targets, param_00);
+  playFX(level._effect["pickup"], var_0.origin);
+  var_0 notify("stop_visibility_listener");
+  if(scripts\engine\utility::array_contains(level.dischord_targets, var_0)) {
+    level.dischord_targets = scripts\engine\utility::array_remove(level.dischord_targets, var_0);
   }
 
-  param_00 delete();
+  var_0 delete();
 }
 
 dischord_visibility_listener() {
@@ -1729,15 +1729,15 @@ dischord_visibility_listener() {
   }
 
   for(;;) {
-    foreach(var_01 in level.dischord_targets) {
-      foreach(var_03 in level.players) {
-        if(scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets) {
-          var_01 showtoplayer(var_03);
-          var_01 hudoutlineenable(1, 1, 0);
+    foreach(var_1 in level.dischord_targets) {
+      foreach(var_3 in level.players) {
+        if(scripts\engine\utility::istrue(var_3.wearing_dischord_glasses) || level.debug_dischord_targets) {
+          var_1 showtoplayer(var_3);
+          var_1 hudoutlineenable(1, 1, 0);
           continue;
         }
 
-        var_01 hidefromplayer(var_03);
+        var_1 hidefromplayer(var_3);
       }
     }
 
@@ -1751,8 +1751,8 @@ debug_show_dischord_targets() {
   }
 
   for(;;) {
-    var_00 = getdvarint("scr_show_dischord_targets", 0);
-    if(var_00 != 0) {
+    var_0 = getdvarint("scr_show_dischord_targets", 0);
+    if(var_0 != 0) {
       if(level.debug_dischord_targets) {
         level.debug_dischord_targets = 0;
         debug_make_dischord_targets_invisible();
@@ -1769,24 +1769,24 @@ debug_show_dischord_targets() {
 }
 
 debug_make_dischord_targets_visible() {
-  var_00 = getEntArray("dischord_target", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 show();
-    var_02 hudoutlineenable(1, 0, 0);
+  var_0 = getEntArray("dischord_target", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 show();
+    var_2 hudoutlineenable(1, 0, 0);
   }
 }
 
 debug_make_dischord_targets_invisible() {
-  var_00 = getEntArray("dischord_target", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 hudoutlineenable(1, 1, 0);
-    var_02 hide();
+  var_0 = getEntArray("dischord_target", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 hudoutlineenable(1, 1, 0);
+    var_2 hide();
   }
 }
 
 dischord_battery_move() {
-  var_00 = scripts\engine\utility::getstruct("dischord_battery_end_loc", "targetname");
-  self moveto(var_00.origin, 5, 0.1, 0.1);
+  var_0 = scripts\engine\utility::getstruct("dischord_battery_end_loc", "targetname");
+  self moveto(var_0.origin, 5, 0.1, 0.1);
   self waittill("movedone");
 }
 
@@ -1795,9 +1795,9 @@ wor_quest_pillage_func() {
     level.glasses_drop_change_increase = 0;
   }
 
-  var_00 = randomint(100);
-  var_01 = 10 + level.glasses_drop_change_increase;
-  if(var_00 < var_01 && !level.wor_glasses) {
+  var_0 = randomint(100);
+  var_1 = 10 + level.glasses_drop_change_increase;
+  if(var_0 < var_1 && !level.wor_glasses) {
     level.glasses_drop_change_increase = 0;
     return "quest";
   } else {
@@ -1807,36 +1807,36 @@ wor_quest_pillage_func() {
   return undefined;
 }
 
-wor_quest_specific_pillage_show_func(param_00, param_01, param_02) {
-  playFX(level._effect["souvenir_pickup"], param_02.origin + (0, 0, 30));
-  param_00 give_glasses_power();
-  param_00 scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_QUEST_WOR_GLASSES_TOGGLE", 4);
-  param_02 notify("all_players_searched");
+wor_quest_specific_pillage_show_func(var_0, var_1, var_2) {
+  playFX(level._effect["souvenir_pickup"], var_2.origin + (0, 0, 30));
+  var_0 give_glasses_power();
+  var_0 scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_QUEST_WOR_GLASSES_TOGGLE", 4);
+  var_2 notify("all_players_searched");
 }
 
 give_glasses_power() {
-  var_00 = spawnStruct();
-  var_00.power_name = "power_glasses";
-  scripts\cp\powers\coop_powers::give_player_wall_bought_power(var_00, self);
-  var_00 = undefined;
+  var_0 = spawnStruct();
+  var_0.power_name = "power_glasses";
+  scripts\cp\powers\coop_powers::give_player_wall_bought_power(var_0, self);
+  var_0 = undefined;
 }
 
-wor_quest_create_pillage_interaction(param_00, param_01) {
-  param_00.type = "quest";
-  param_00.randomintrange = "quest";
-  param_01.effect = spawnfx(level._effect["quest_glasses_drop"], param_01.origin);
+wor_quest_create_pillage_interaction(var_0, var_1) {
+  var_0.type = "quest";
+  var_0.randomintrange = "quest";
+  var_1.effect = spawnfx(level._effect["quest_glasses_drop"], var_1.origin);
   level.wor_glasses = 1;
-  param_00 thread unset_flag_if_not_picked_up(param_01.effect);
+  var_0 thread unset_flag_if_not_picked_up(var_1.effect);
   scripts\engine\utility::waitframe();
-  triggerfx(param_01.effect);
+  triggerfx(var_1.effect);
 }
 
-unset_flag_if_not_picked_up(param_00) {
+unset_flag_if_not_picked_up(var_0) {
   self endon("picked_up");
   self waittill("stop_pillage_spot_think");
   level.wor_glasses = 0;
-  if(isDefined(param_00)) {
-    param_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 }
 
@@ -1848,10 +1848,10 @@ give_glasses_to_player() {
   scripts\engine\utility::flag_set("dischord_glasses_pickedup");
 }
 
-put_glasses_on_player(param_00) {
-  var_01 = "ges_visor_up";
+put_glasses_on_player(var_0) {
+  var_1 = "ges_visor_up";
   if(!self isgestureplaying()) {
-    var_02 = 0;
+    var_2 = 0;
     self setweaponammostock("iw7_sunglasses_zm_on", 1);
     self giveandfireoffhand("iw7_sunglasses_zm_on");
   }
@@ -1889,8 +1889,8 @@ reapply_visionset_after_host_migration() {
   }
 }
 
-take_glasses_off(param_00) {
-  if(param_00) {
+take_glasses_off(var_0) {
+  if(var_0) {
     thread launch_glasses();
     return;
   }
@@ -1902,9 +1902,9 @@ take_glasses_off(param_00) {
     self visionsetnakedforplayer("", 0.1);
   }
 
-  var_01 = "ges_visor_down";
+  var_1 = "ges_visor_down";
   if(!self isgestureplaying()) {
-    var_02 = 0;
+    var_2 = 0;
     self setweaponammostock("iw7_sunglasses_zm_off", 1);
     self giveandfireoffhand("iw7_sunglasses_zm_off");
   }
@@ -1913,24 +1913,24 @@ take_glasses_off(param_00) {
 launch_glasses() {
   self endon("deleting_glasses");
   scripts\cp\powers\coop_powers::removepower("power_glasses");
-  var_00 = 400;
-  var_01 = self gettagorigin("tag_eye");
-  var_02 = self gettagangles("tag_eye");
-  var_02 = anglesToForward(var_02);
-  var_03 = vectornormalize(var_02) + (0, 0, 0.25);
-  var_03 = var_03 * var_00;
-  var_04 = self getvelocity();
-  var_03 = var_03 + var_04;
-  var_05 = spawn("script_model", var_01);
-  var_05 setModel("zmb_sunglass_01_wm");
-  var_05 physicslaunchserver(var_01, var_03);
+  var_0 = 400;
+  var_1 = self gettagorigin("tag_eye");
+  var_2 = self gettagangles("tag_eye");
+  var_2 = anglesToForward(var_2);
+  var_3 = vectornormalize(var_2) + (0, 0, 0.25);
+  var_3 = var_3 * var_0;
+  var_4 = self getvelocity();
+  var_3 = var_3 + var_4;
+  var_5 = spawn("script_model", var_1);
+  var_5 setModel("zmb_sunglass_01_wm");
+  var_5 physicslaunchserver(var_1, var_3);
   wait(0.1);
-  var_05 thread pick_up_knocked_off_glasses();
-  var_05 thread delete_glasses_after_time(10);
-  var_05 waittill("trigger", var_06);
-  var_06 give_glasses_power();
-  var_05 notify("glasses_picked_up");
-  var_05 delete();
+  var_5 thread pick_up_knocked_off_glasses();
+  var_5 thread delete_glasses_after_time(10);
+  var_5 waittill("trigger", var_6);
+  var_6 give_glasses_power();
+  var_5 notify("glasses_picked_up");
+  var_5 delete();
 }
 
 wait_to_knock_off_glasses() {
@@ -1938,8 +1938,8 @@ wait_to_knock_off_glasses() {
   self notify("waiting_for_knock_off");
   self endon("waiting_for_knock_off");
   while(self.has_dischord_glasses) {
-    self waittill("damage", var_00, var_01);
-    if(isDefined(var_01.team) && var_01.team != self.team) {
+    self waittill("damage", var_0, var_1);
+    if(isDefined(var_1.team) && var_1.team != self.team) {
       if(scripts\engine\utility::istrue(self.wearing_dischord_glasses)) {
         take_glasses_off(1);
         wait(0.1);
@@ -1971,9 +1971,9 @@ reset_flags_on_death() {
   self.dont_use_charges = undefined;
 }
 
-delete_glasses_after_time(param_00) {
+delete_glasses_after_time(var_0) {
   self endon("glasses_picked_up");
-  wait(param_00);
+  wait(var_0);
   self notify("deleting_glasses");
   level.wor_glasses = 0;
   self delete();
@@ -1982,8 +1982,8 @@ delete_glasses_after_time(param_00) {
 pick_up_knocked_off_glasses() {
   self hudoutlineenable(2, 1, 0);
   self makeusable();
-  var_00 = &"CP_QUEST_WOR_PART";
-  self sethintstring(var_00);
+  var_0 = &"CP_QUEST_WOR_PART";
+  self sethintstring(var_0);
 }
 
 init_dischord_glasses_power() {
@@ -1998,7 +1998,7 @@ init_dischord_glasses_power() {
   scripts\cp\powers\coop_powers::powersetupfunctions("power_glasses", ::setdischordglasses, ::unsetdischordglasses, ::usedischordglasses, "powers_glasses_update", undefined, undefined);
 }
 
-setdischordglasses(param_00) {
+setdischordglasses(var_0) {
   give_glasses_to_player();
 }
 
@@ -2018,12 +2018,12 @@ headcutter_freeze_test() {
   }
 
   level thread wait_to_drop_headcutter_battery();
-  var_00 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
-  foreach(var_02 in var_00) {
-    if(var_02.target == "freeze_volume_1") {
-      var_02 thread headcutter_freeze_loop();
-      var_02 thread freeze_check_loop();
-      var_02 thread listen_for_cryo_kills();
+  var_0 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
+  foreach(var_2 in var_0) {
+    if(var_2.target == "freeze_volume_1") {
+      var_2 thread headcutter_freeze_loop();
+      var_2 thread freeze_check_loop();
+      var_2 thread listen_for_cryo_kills();
     }
   }
 }
@@ -2036,29 +2036,29 @@ headcutter_freeze_loop() {
 freeze_check_loop() {
   self endon("stop_feeze_loop");
   self.freeze_volume = getent(self.target, "targetname");
-  var_00 = getent("main_street_monster", "targetname");
-  var_01 = 10;
+  var_0 = getent("main_street_monster", "targetname");
+  var_1 = 10;
   for(;;) {
     self waittill("cryo_hit");
     if(self.freeze_active) {
-      var_00 setscriptablepartstate("main", "breath_attack_in");
-      thread freeze_breath(var_01);
-      activate_freeze_volume(var_01);
-      var_00 setscriptablepartstate("main", "idle2");
+      var_0 setscriptablepartstate("main", "breath_attack_in");
+      thread freeze_breath(var_1);
+      activate_freeze_volume(var_1);
+      var_0 setscriptablepartstate("main", "idle2");
     }
 
     wait(0.1);
   }
 }
 
-activate_freeze_volume(param_00) {
-  var_01 = gettime() + param_00 * 1000;
-  while(gettime() < var_01) {
-    foreach(var_03 in level.spawned_enemies) {
-      if(isDefined(var_03.agent_type) && var_03.agent_type == "generic_zombie" || var_03.agent_type == "zombie_cop") {
-        if(var_03 istouching(self.freeze_volume)) {
-          var_03.freeze_struct = self;
-          var_03 dodamage(1, var_03.origin, level.players[0], level.players[0], "MOD_GRENADE_SPLASH", "zfreeze_semtex_mp");
+activate_freeze_volume(var_0) {
+  var_1 = gettime() + var_0 * 1000;
+  while(gettime() < var_1) {
+    foreach(var_3 in level.spawned_enemies) {
+      if(isDefined(var_3.agent_type) && var_3.agent_type == "generic_zombie" || var_3.agent_type == "zombie_cop") {
+        if(var_3 istouching(self.freeze_volume)) {
+          var_3.freeze_struct = self;
+          var_3 dodamage(1, var_3.origin, level.players[0], level.players[0], "MOD_GRENADE_SPLASH", "zfreeze_semtex_mp");
         }
       }
     }
@@ -2067,27 +2067,27 @@ activate_freeze_volume(param_00) {
   }
 }
 
-freeze_breath(param_00) {
-  var_01 = getent("main_street_monster", "targetname");
-  var_02 = spawnfx(level._effect["coaster_ice_frost"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+freeze_breath(var_0) {
+  var_1 = getent("main_street_monster", "targetname");
+  var_2 = spawnfx(level._effect["coaster_ice_frost"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   wait(2);
-  var_01 playSound("yeti_frost_breath");
-  triggerfx(var_02);
-  wait(param_00 - 1);
-  var_02 delete();
+  var_1 playSound("yeti_frost_breath");
+  triggerfx(var_2);
+  wait(var_0 - 1);
+  var_2 delete();
 }
 
 listen_for_cryo_kills() {
-  var_00 = 0;
-  var_01 = 10;
-  while(var_00 < var_01) {
-    self waittill("headcutter_cryo_kill", var_02, var_03);
-    var_00++;
+  var_0 = 0;
+  var_1 = 10;
+  while(var_0 < var_1) {
+    self waittill("headcutter_cryo_kill", var_2, var_3);
+    var_0++;
     level.total_cryo_kills++;
   }
 
-  var_04 = getent("main_street_monster", "targetname");
-  var_04 playSound("yeti_growl");
+  var_4 = getent("main_street_monster", "targetname");
+  var_4 playSound("yeti_growl");
 }
 
 wait_to_drop_headcutter_battery() {
@@ -2105,118 +2105,118 @@ dj_quest_vo_init_timer() {
   level thread scripts\cp\cp_vo::add_to_nag_vo("dj_quest_ufo_partsrecovery_hint", "zmb_dj_vo", 60, 15, 2, 1);
 }
 
-wor_give_weapon(param_00, param_01, param_02) {
+wor_give_weapon(var_0, var_1, var_2) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00)) {
-    var_03 = param_00 scripts\cp\utility::getvalidtakeweapon();
-    var_04 = scripts\cp\utility::getrawbaseweaponname(var_03);
-    param_00 takeweapon(var_03);
-    if(isDefined(param_00.pap[var_04])) {
-      param_00.pap[var_04] = undefined;
-      param_00 notify("weapon_level_changed");
+  var_0 endon("disconnect");
+  if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(var_0)) {
+    var_3 = var_0 scripts\cp\utility::getvalidtakeweapon();
+    var_4 = scripts\cp\utility::getrawbaseweaponname(var_3);
+    var_0 takeweapon(var_3);
+    if(isDefined(var_0.pap[var_4])) {
+      var_0.pap[var_4] = undefined;
+      var_0 notify("weapon_level_changed");
     }
   }
 
-  var_05 = scripts\cp\utility::getrawbaseweaponname(param_01);
-  if(param_00 hasweapon("iw7_fists_zm")) {
-    param_00 takeweapon("iw7_fists_zm");
+  var_5 = scripts\cp\utility::getrawbaseweaponname(var_1);
+  if(var_0 hasweapon("iw7_fists_zm")) {
+    var_0 takeweapon("iw7_fists_zm");
   }
 
-  if(scripts\engine\utility::istrue(param_02.standee.upgraded)) {
-    switch (param_01) {
+  if(scripts\engine\utility::istrue(var_2.standee.upgraded)) {
+    switch (var_1) {
       case "iw7_facemelter_zm":
-        param_01 = "iw7_facemelter_zm_pap1+fmpap1+camo22";
+        var_1 = "iw7_facemelter_zm_pap1+fmpap1+camo22";
         break;
 
       case "iw7_shredder_zm":
-        param_01 = "iw7_shredder_zm_pap1+shredderpap1+camo23";
+        var_1 = "iw7_shredder_zm_pap1+shredderpap1+camo23";
         break;
 
       case "iw7_headcutter_zm":
-        param_01 = "iw7_headcutter_zm_pap1+hcpap1+camo21";
+        var_1 = "iw7_headcutter_zm_pap1+hcpap1+camo21";
         break;
 
       case "iw7_dischord_zm":
-        param_01 = "iw7_dischord_zm_pap1+dischordpap1+camo20";
+        var_1 = "iw7_dischord_zm_pap1+dischordpap1+camo20";
         break;
     }
   }
 
-  param_01 = param_00 scripts\cp\utility::_giveweapon(param_01, undefined, undefined, 0);
-  if(issubstr(param_01, "emc")) {
-    param_00.has_replaced_starting_pistol = 1;
+  var_1 = var_0 scripts\cp\utility::_giveweapon(var_1, undefined, undefined, 0);
+  if(issubstr(var_1, "emc")) {
+    var_0.has_replaced_starting_pistol = 1;
   }
 
-  param_00 notify("wor_item_pickup", param_01);
-  var_06 = 1;
-  if(isDefined(param_02.clip)) {
-    var_06 = 0;
-    param_00 setweaponammoclip(param_01, param_02.clip);
+  var_0 notify("wor_item_pickup", var_1);
+  var_6 = 1;
+  if(isDefined(var_2.clip)) {
+    var_6 = 0;
+    var_0 setweaponammoclip(var_1, var_2.clip);
   }
 
-  if(isDefined(param_02.stock)) {
-    var_06 = 0;
-    param_00 setweaponammostock(param_01, param_02.stock);
+  if(isDefined(var_2.stock)) {
+    var_6 = 0;
+    var_0 setweaponammostock(var_1, var_2.stock);
   }
 
-  param_00 switchtoweapon(param_01);
-  if(var_06) {
-    param_00 givemaxammo(param_01);
+  var_0 switchtoweapon(var_1);
+  if(var_6) {
+    var_0 givemaxammo(var_1);
   }
 
-  var_07 = scripts\cp\utility::getrawbaseweaponname(param_01);
-  if(issubstr(param_01, "dischord")) {
-    if(param_00.vo_prefix == "p3_") {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  var_7 = scripts\cp\utility::getrawbaseweaponname(var_1);
+  if(issubstr(var_1, "dischord")) {
+    if(var_0.vo_prefix == "p3_") {
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     } else {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     }
 
     scripts\cp\zombies\zombie_analytics::log_crafted_wor_dischord(level.wave_num);
-  } else if(issubstr(param_01, "facemelter")) {
-    if(param_00.vo_prefix == "p2_") {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  } else if(issubstr(var_1, "facemelter")) {
+    if(var_0.vo_prefix == "p2_") {
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     } else {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     }
 
     scripts\cp\zombies\zombie_analytics::log_crafted_wor_facemelter(level.wave_num);
-  } else if(issubstr(param_01, "shredder")) {
-    if(param_00.vo_prefix == "p4_") {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  } else if(issubstr(var_1, "shredder")) {
+    if(var_0.vo_prefix == "p4_") {
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     } else {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     }
 
     scripts\cp\zombies\zombie_analytics::log_crafted_wor_shredder(level.wave_num);
-  } else if(issubstr(param_01, "headcutter")) {
-    if(param_00.vo_prefix == "p1_") {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  } else if(issubstr(var_1, "headcutter")) {
+    if(var_0.vo_prefix == "p1_") {
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     } else {
-      param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+      var_0 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor", "zmb_comment_vo", "highest", 10, 0, 0, 1);
     }
 
     scripts\cp\zombies\zombie_analytics::log_crafted_wor_headcutter(level.wave_num);
   }
 
-  param_00 scripts\cp\zombies\achievement::update_achievement("ROCK_ON", 1);
+  var_0 scripts\cp\zombies\achievement::update_achievement("ROCK_ON", 1);
   level thread scripts\cp\cp_vo::remove_from_nag_vo("dj_wor_use_nag");
-  var_08 = spawnStruct();
-  var_08.lvl = 1;
-  param_00.pap[var_05] = var_08;
-  param_00 notify("weapon_level_changed");
+  var_8 = spawnStruct();
+  var_8.lvl = 1;
+  var_0.pap[var_5] = var_8;
+  var_0 notify("weapon_level_changed");
 }
 
-trackplayersworammo(param_00, param_01, param_02) {
-  param_00 endon("disconnect");
+trackplayersworammo(var_0, var_1, var_2) {
+  var_0 endon("disconnect");
   level endon("game_ended");
-  level endon("gun_replaced " + param_01);
-  param_02.stock = param_00 getweaponammostock(param_01);
-  param_02.clip = param_00 getweaponammoclip(param_01);
+  level endon("gun_replaced " + var_1);
+  var_2.stock = var_0 getweaponammostock(var_1);
+  var_2.clip = var_0 getweaponammoclip(var_1);
   for(;;) {
-    param_00 scripts\engine\utility::waittill_any_3("weapon_fired", "reload");
-    if(scripts\engine\utility::istrue(param_00.inlaststand)) {
+    var_0 scripts\engine\utility::waittill_any_3("weapon_fired", "reload");
+    if(scripts\engine\utility::istrue(var_0.inlaststand)) {
       continue;
     }
 
@@ -2224,99 +2224,99 @@ trackplayersworammo(param_00, param_01, param_02) {
       continue;
     }
 
-    var_03 = param_00 getcurrentweapon();
-    var_04 = getweaponbasename(var_03);
-    if(var_04 == param_01 || var_04 == param_01 + "_pap1") {
-      param_02.stock = param_00 getweaponammostock(var_03);
-      param_02.clip = param_00 getweaponammoclip(var_03);
+    var_3 = var_0 getcurrentweapon();
+    var_4 = getweaponbasename(var_3);
+    if(var_4 == var_1 || var_4 == var_1 + "_pap1") {
+      var_2.stock = var_0 getweaponammostock(var_3);
+      var_2.clip = var_0 getweaponammoclip(var_3);
     }
   }
 }
 
-watchforplayerdeath(param_00, param_01, param_02) {
-  level thread watchforplayerdisconnect(param_00, param_01, param_02);
-  level endon("gun_replaced " + param_01);
+watchforplayerdeath(var_0, var_1, var_2) {
+  level thread watchforplayerdisconnect(var_0, var_1, var_2);
+  level endon("gun_replaced " + var_1);
   level endon("game_ended");
-  param_00 endon("disconnect");
-  var_03 = getweaponbasename(param_01);
-  var_04 = 1;
+  var_0 endon("disconnect");
+  var_3 = getweaponbasename(var_1);
+  var_4 = 1;
   for(;;) {
-    if(!var_04) {
+    if(!var_4) {
       break;
     }
 
-    var_05 = undefined;
-    param_00 waittill("last_stand");
-    var_04 = 0;
-    var_06 = param_00 scripts\engine\utility::waittill_any_return_no_endon_death_3("player_entered_ala", "revive", "death");
-    if(var_06 != "revive") {
-      var_05 = param_00 scripts\engine\utility::waittill_any_return("lost_and_found_collected", "lost_and_found_time_out");
-      if(isDefined(var_05) && var_05 == "lost_and_found_time_out") {
+    var_5 = undefined;
+    var_0 waittill("last_stand");
+    var_4 = 0;
+    var_6 = var_0 scripts\engine\utility::waittill_any_return_no_endon_death_3("player_entered_ala", "revive", "death");
+    if(var_6 != "revive") {
+      var_5 = var_0 scripts\engine\utility::waittill_any_return("lost_and_found_collected", "lost_and_found_time_out");
+      if(isDefined(var_5) && var_5 == "lost_and_found_time_out") {
         continue;
       }
     }
 
-    var_07 = param_00 getweaponslistall();
-    foreach(var_09 in var_07) {
-      var_0A = getweaponbasename(var_09);
-      if(var_0A == var_03) {
-        param_00 thread watchforweaponremoved(param_00, param_01, param_02);
-        var_04 = 1;
+    var_7 = var_0 getweaponslistall();
+    foreach(var_9 in var_7) {
+      var_0A = getweaponbasename(var_9);
+      if(var_0A == var_3) {
+        var_0 thread watchforweaponremoved(var_0, var_1, var_2);
+        var_4 = 1;
         break;
       }
     }
   }
 
-  thread put_gun_back_on_standee(param_02, var_03, undefined, param_00);
-  param_00 scripts\cp\utility::updatelaststandpistol();
+  thread put_gun_back_on_standee(var_2, var_3, undefined, var_0);
+  var_0 scripts\cp\utility::updatelaststandpistol();
 }
 
 init_standee_interaction() {
-  var_00 = scripts\engine\utility::getstructarray("wor_standee", "script_noteworthy");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.target)) {
-      var_03 = getscriptablearray(var_02.target, "targetname");
-      if(var_03.size > 0) {
-        var_02.standee = var_03[0];
-        var_02.standee.gun_on_standee = 1;
-        var_02 thread init_standee_slots(::part_listener, var_02.standee.script_noteworthy);
+  var_0 = scripts\engine\utility::getstructarray("wor_standee", "script_noteworthy");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.target)) {
+      var_3 = getscriptablearray(var_2.target, "targetname");
+      if(var_3.size > 0) {
+        var_2.standee = var_3[0];
+        var_2.standee.gun_on_standee = 1;
+        var_2 thread init_standee_slots(::part_listener, var_2.standee.script_noteworthy);
       }
     }
   }
 }
 
-watchforweaponremoved(param_00, param_01, param_02) {
-  level thread watchforplayerdisconnect(param_00, param_01, param_02);
-  level endon("gun_replaced " + param_01);
+watchforweaponremoved(var_0, var_1, var_2) {
+  level thread watchforplayerdisconnect(var_0, var_1, var_2);
+  level endon("gun_replaced " + var_1);
   level endon("game_ended");
-  param_00 endon("last_stand");
-  param_00 endon("disconnect");
-  var_03 = getweaponbasename(param_01);
-  var_04 = 1;
+  var_0 endon("last_stand");
+  var_0 endon("disconnect");
+  var_3 = getweaponbasename(var_1);
+  var_4 = 1;
   for(;;) {
-    if(!var_04) {
+    if(!var_4) {
       break;
     }
 
-    param_00 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
-    var_04 = 0;
-    var_05 = param_00 getweaponslistall();
-    foreach(var_07 in var_05) {
-      var_08 = getweaponbasename(var_07);
-      if(issubstr(var_08, var_03)) {
-        var_04 = 1;
+    var_0 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_4 = 0;
+    var_5 = var_0 getweaponslistall();
+    foreach(var_7 in var_5) {
+      var_8 = getweaponbasename(var_7);
+      if(issubstr(var_8, var_3)) {
+        var_4 = 1;
         break;
       }
     }
   }
 
-  thread put_gun_back_on_standee(param_02, var_03, undefined, param_00);
-  param_00 scripts\cp\utility::updatelaststandpistol();
+  thread put_gun_back_on_standee(var_2, var_3, undefined, var_0);
+  var_0 scripts\cp\utility::updatelaststandpistol();
 }
 
-watchforplayerdisconnect(param_00, param_01, param_02) {
-  level endon("gun_replaced " + param_01);
-  param_00 waittill("disconnect");
-  thread put_gun_back_on_standee(param_02, param_01, undefined, param_00);
-  param_00 scripts\cp\utility::updatelaststandpistol();
+watchforplayerdisconnect(var_0, var_1, var_2) {
+  level endon("gun_replaced " + var_1);
+  var_0 waittill("disconnect");
+  thread put_gun_back_on_standee(var_2, var_1, undefined, var_0);
+  var_0 scripts\cp\utility::updatelaststandpistol();
 }

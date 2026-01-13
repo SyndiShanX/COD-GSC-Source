@@ -9,19 +9,19 @@ init() {
     return;
   }
 
-  var_00 = spawnStruct();
-  level.contractglobals = var_00;
+  var_0 = spawnStruct();
+  level.contractglobals = var_0;
   scripts\mp\contractchallenges::registercontractchallenges();
-  var_00.numchallenges = 0;
-  var_01 = 0;
+  var_0.numchallenges = 0;
+  var_1 = 0;
   for(;;) {
-    var_02 = tablelookupbyrow("mp\contractChallenges.csv", var_01, 0);
-    if(!isDefined(var_02) || var_02 == "") {
+    var_2 = tablelookupbyrow("mp\contractChallenges.csv", var_1, 0);
+    if(!isDefined(var_2) || var_2 == "") {
       break;
     }
 
-    var_00.numchallenges++;
-    var_01++;
+    var_0.numchallenges++;
+    var_1++;
   }
 
   level thread onplayerconnect();
@@ -49,93 +49,93 @@ contractsenabled() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    if(!var_00 contractsenabled()) {
+    level waittill("connected", var_0);
+    if(!var_0 contractsenabled()) {
       continue;
     }
 
-    var_00.contracts = [];
-    var_01 = var_00 getchallengeids();
-    foreach(var_04, var_03 in var_01) {
-      var_00 givecontractchallenge(var_03, var_04);
+    var_0.contracts = [];
+    var_1 = var_0 getchallengeids();
+    foreach(var_4, var_3 in var_1) {
+      var_0 givecontractchallenge(var_3, var_4);
     }
   }
 }
 
 getchallengeids() {
-  var_00 = self getplayerdata("mp", "contracts", "challenges", 0, "challengeID");
-  var_01 = self getplayerdata("mp", "contracts", "challenges", 1, "challengeID");
-  return [var_00, var_01];
+  var_0 = self getplayerdata("mp", "contracts", "challenges", 0, "challengeID");
+  var_1 = self getplayerdata("mp", "contracts", "challenges", 1, "challengeID");
+  return [var_0, var_1];
 }
 
-givecontractchallenge(param_00, param_01) {
-  var_02 = lookupcontractchallengeref(param_00);
-  if(!isDefined(var_02)) {
+givecontractchallenge(var_0, var_1) {
+  var_2 = lookupcontractchallengeref(var_0);
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
-  var_03 = spawnStruct();
-  var_03.slot = param_01;
-  var_03.ref = var_02;
-  var_03.target = lookupcontractchallengetarget(param_00);
-  var_03.team = lookupcontractchallengeteam(param_00);
-  var_03.id = param_00;
-  var_03.progress = self getplayerdata("mp", "contracts", "challenges", var_03.slot, "progress");
-  var_04 = self getplayerdata("mp", "activeMissionTeam");
-  var_05 = var_03.team == var_04 || var_03.team == -1;
-  var_03.completed = var_03.progress >= var_03.target;
-  if(!var_03.completed && var_05) {
-    self thread[[level.contractchallenges[var_03.ref]]](var_03);
-    self.contracts[param_01] = var_03;
+  var_3 = spawnStruct();
+  var_3.slot = var_1;
+  var_3.ref = var_2;
+  var_3.target = lookupcontractchallengetarget(var_0);
+  var_3.team = lookupcontractchallengeteam(var_0);
+  var_3.id = var_0;
+  var_3.progress = self getplayerdata("mp", "contracts", "challenges", var_3.slot, "progress");
+  var_4 = self getplayerdata("mp", "activeMissionTeam");
+  var_5 = var_3.team == var_4 || var_3.team == -1;
+  var_3.completed = var_3.progress >= var_3.target;
+  if(!var_3.completed && var_5) {
+    self thread[[level.contractchallenges[var_3.ref]]](var_3);
+    self.contracts[var_1] = var_3;
   }
 }
 
-lookupcontractchallengeref(param_00) {
-  var_01 = tablelookup("mp\contractChallenges.csv", 0, param_00, 1);
-  if(!isDefined(var_01) || var_01 == "") {
+lookupcontractchallengeref(var_0) {
+  var_1 = tablelookup("mp\contractChallenges.csv", 0, var_0, 1);
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
   }
 
-  return var_01;
+  return var_1;
 }
 
-lookupcontractchallengetarget(param_00) {
-  var_01 = tablelookup("mp\contractChallenges.csv", 0, param_00, 3);
-  if(!isDefined(var_01) || var_01 == "") {
+lookupcontractchallengetarget(var_0) {
+  var_1 = tablelookup("mp\contractChallenges.csv", 0, var_0, 3);
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
   }
 
-  return int(var_01);
+  return int(var_1);
 }
 
-lookupcontractchallengeteam(param_00) {
-  var_01 = tablelookup("mp\contractChallenges.csv", 0, param_00, 2);
-  if(!isDefined(var_01) || var_01 == "") {
+lookupcontractchallengeteam(var_0) {
+  var_1 = tablelookup("mp\contractChallenges.csv", 0, var_0, 2);
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
   }
 
-  return int(var_01);
+  return int(var_1);
 }
 
-updatecontractprogress(param_00, param_01) {
+updatecontractprogress(var_0, var_1) {
   if(!level.onlinegame) {
     return;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  param_00.progress = param_00.progress + param_01;
-  param_00.progress = int(min(param_00.progress, param_00.target));
-  if(!param_00.completed) {
-    param_00.completed = param_00.progress >= param_00.target;
-    if(param_00.completed) {
-      var_02 = scripts\engine\utility::ter_op(param_00.team == -1, "contract_complete_joint_ops", "contract_complete_team_" + param_00.team);
-      thread scripts\mp\hud_message::showsplash(var_02);
-      self setplayerdata("mp", "contracts", "challenges", param_00.slot, "completed", 1);
+  var_0.progress = var_0.progress + var_1;
+  var_0.progress = int(min(var_0.progress, var_0.target));
+  if(!var_0.completed) {
+    var_0.completed = var_0.progress >= var_0.target;
+    if(var_0.completed) {
+      var_2 = scripts\engine\utility::ter_op(var_0.team == -1, "contract_complete_joint_ops", "contract_complete_team_" + var_0.team);
+      thread scripts\mp\hud_message::showsplash(var_2);
+      self setplayerdata("mp", "contracts", "challenges", var_0.slot, "completed", 1);
     }
   }
 
-  self setplayerdata("mp", "contracts", "challenges", param_00.slot, "progress", param_00.progress);
+  self setplayerdata("mp", "contracts", "challenges", var_0.slot, "progress", var_0.progress);
 }

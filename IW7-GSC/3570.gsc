@@ -29,12 +29,12 @@ func_130A7() {
   self endon("removeMultiVisor");
   level endon("game_ended");
   thread func_E27E();
-  var_00 = self.powers["power_multiVisor"];
-  var_01 = self.powers["power_multiVisor"].var_1348E;
-  var_02 = 4;
-  func_E27F(var_01, var_02);
+  var_0 = self.powers["power_multiVisor"];
+  var_1 = self.powers["power_multiVisor"].var_1348E;
+  var_2 = 4;
+  func_E27F(var_1, var_2);
   scripts\engine\utility::waitframe();
-  self.powers["power_multiVisor"].var_1348E = var_02;
+  self.powers["power_multiVisor"].var_1348E = var_2;
   func_20D0();
   self notify("power_multi_visor_update", 0);
   self playlocalsound("mp_overcharge_on");
@@ -46,20 +46,20 @@ func_BDCD() {
   self endon("death");
   self endon("disconnect");
   self endon("removemultivisor");
-  var_00 = gettime() + 10000;
-  while(var_00 > gettime()) {
+  var_0 = gettime() + 10000;
+  while(var_0 > gettime()) {
     wait(0.05);
   }
 
   func_E27F(0, 4);
 }
 
-func_C5A5(param_00) {
+func_C5A5(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("removeMultiVisor");
   level endon("game_ended");
-  switch (param_00) {
+  switch (var_0) {
     case 0:
       self iprintlnbold("DEFAULT");
       break;
@@ -85,7 +85,7 @@ func_C5A5(param_00) {
   }
 }
 
-func_20C1(param_00) {
+func_20C1(var_0) {
   self endon("multivisor_reset");
   self endon("death");
   self endon("disconnect");
@@ -109,7 +109,7 @@ func_20D0() {
   thread func_E88F();
 }
 
-func_20E1(param_00) {
+func_20E1(var_0) {
   self endon("multivisor_reset");
   self endon("death");
   self endon("disconnect");
@@ -119,7 +119,7 @@ func_20E1(param_00) {
   self.var_8BD7 = 0;
 }
 
-func_20DB(param_00) {
+func_20DB(var_0) {
   self endon("multivisor_reset");
   self endon("death");
   self endon("disconnect");
@@ -131,7 +131,7 @@ func_20DB(param_00) {
   self.var_8BD7 = 1;
 }
 
-func_20D7(param_00) {
+func_20D7(var_0) {
   self endon("multivisor_reset");
   self endon("death");
   self endon("disconnect");
@@ -149,24 +149,24 @@ func_E88F() {
   }
 
   while(self.powers["power_multiVisor"].var_1348E == 4) {
-    foreach(var_01 in level.players) {
-      if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
-        var_01 showtoplayer(self);
+    foreach(var_1 in level.players) {
+      if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_1)) {
+        var_1 showtoplayer(self);
       }
     }
 
     wait(0.05);
   }
 
-  foreach(var_01 in level.players) {
-    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
-      var_01 hidefromplayer(self);
+  foreach(var_1 in level.players) {
+    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_1)) {
+      var_1 hidefromplayer(self);
     }
   }
 }
 
-func_E27F(param_00, param_01) {
-  if(param_00 != param_01) {
+func_E27F(var_0, var_1) {
+  if(var_0 != var_1) {
     self thermalvisionoff();
     self visionsetnakedforplayer("", 0);
     if(self.var_8BD7) {

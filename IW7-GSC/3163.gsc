@@ -109,50 +109,50 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-func_124AF(param_00, param_01, param_02, param_03) {
+func_124AF(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_124B7(param_00, param_01, param_02, param_03) {
+func_124B7(var_0, var_1, var_2, var_3) {
   return isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Right";
 }
 
-func_12045(param_00, param_01, param_02, param_03) {
+func_12045(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_12046(param_00, param_01, param_02, param_03) {
+func_12046(var_0, var_1, var_2, var_3) {
   return self.a.pose != "crouch";
 }
 
-func_124AE(param_00, param_01, param_02, param_03) {
+func_124AE(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_12044(param_00, param_01, param_02, param_03) {
+func_12044(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::func_291C();
 }
 
-func_124A0(param_00, param_01, param_02, param_03) {
+func_124A0(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch";
 }
 
-func_1249F(param_00, param_01, param_02, param_03) {
+func_1249F(var_0, var_1, var_2, var_3) {
   return self.a.pose == "crouch";
 }
 
-func_12052(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_12052(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_12051(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_12051(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_124B5(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_124B5(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-func_124B6(param_00, param_01, param_02, param_03) {
-  return self.var_1198.shootparams.var_FF0B == 1;
+func_124B6(var_0, var_1, var_2, var_3) {
+  return self._blackboard.shootparams.var_FF0B == 1;
 }

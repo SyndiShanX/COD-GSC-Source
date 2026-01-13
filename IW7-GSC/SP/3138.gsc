@@ -4,7 +4,7 @@
  * Script: SP\3138.gsc
 ************************/
 
-func_35A6(param_00, param_01, param_02, param_03) {
+func_35A6(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.var_362A)) {
     lib_0C41::func_3629();
   }
@@ -21,17 +21,17 @@ func_35A6(param_00, param_01, param_02, param_03) {
   self.nodetoentitysighttest = 164;
   scripts\asm\asm::func_237B(1);
   self.var_1A48 = 1;
-  self.var_1198.movetype = "combat";
-  self.var_1198.var_A983 = 0;
-  self.var_1198.timeoff = -99999;
+  self._blackboard.movetype = "combat";
+  self._blackboard.var_A983 = 0;
+  self._blackboard.timeoff = -99999;
   self.var_358 = 0.1;
   self.iscinematicplaying = 0;
   self.var_27F7 = 1;
   if(isDefined(self.var_13CC3)) {
     self.var_13C83 = [];
-    foreach(var_06, var_05 in self.var_13CC3) {
-      self.var_13C83[var_06] = 1;
-      self.var_3135.var_13C83[var_06] = 1;
+    foreach(var_6, var_5 in self.var_13CC3) {
+      self.var_13C83[var_6] = 1;
+      self.bt.var_13C83[var_6] = 1;
     }
   }
 
@@ -49,9 +49,9 @@ func_352E() {
     }
 
     if(isDefined(level.player.var_4759.var_19) && level.player.var_4759.var_19.size) {
-      foreach(var_01 in level.player.var_4759.var_19) {
-        if(distance2dsquared(self.origin, var_01.origin) <= squared(180)) {
-          scripts\sp\coverwall::func_475C(var_01, 1);
+      foreach(var_1 in level.player.var_4759.var_19) {
+        if(distance2dsquared(self.origin, var_1.origin) <= squared(180)) {
+          scripts\sp\coverwall::func_475C(var_1, 1);
           wait(0.05);
         }
       }
@@ -65,137 +65,137 @@ func_352E() {
 
 func_6C00() {}
 
-draw_axis(param_00, param_01) {
-  var_02 = 25;
-  var_03 = anglesToForward(param_01) * var_02;
-  var_04 = anglestoright(param_01) * var_02;
-  var_05 = anglestoup(param_01) * var_02;
-  func_1215(param_00, param_00 + var_03, (1, 0, 0));
-  func_1215(param_00, param_00 + var_05, (0, 1, 0));
-  func_1215(param_00, param_00 + var_04, (0, 0, 1));
+draw_axis(var_0, var_1) {
+  var_2 = 25;
+  var_3 = anglesToForward(var_1) * var_2;
+  var_4 = anglestoright(var_1) * var_2;
+  var_5 = anglestoup(var_1) * var_2;
+  func_1215(var_0, var_0 + var_3, (1, 0, 0));
+  func_1215(var_0, var_0 + var_5, (0, 1, 0));
+  func_1215(var_0, var_0 + var_4, (0, 0, 1));
 }
 
-func_1215(param_00, param_01, param_02) {
-  var_03 = vectortoangles(param_01 - param_00);
-  var_04 = length(param_01 - param_00);
-  var_05 = anglesToForward(var_03);
-  var_06 = var_05 * var_04;
-  var_07 = 5;
-  var_08 = var_05 * var_04 - var_07;
-  var_09 = anglestoright(var_03);
-  var_0A = var_09 * var_07 * -1;
-  var_0B = var_09 * var_07;
+func_1215(var_0, var_1, var_2) {
+  var_3 = vectortoangles(var_1 - var_0);
+  var_4 = length(var_1 - var_0);
+  var_5 = anglesToForward(var_3);
+  var_6 = var_5 * var_4;
+  var_7 = 5;
+  var_8 = var_5 * var_4 - var_7;
+  var_9 = anglestoright(var_3);
+  var_0A = var_9 * var_7 * -1;
+  var_0B = var_9 * var_7;
 }
 
-func_E75A(param_00, param_01) {
-  return (func_E756(param_00[0], param_01), func_E756(param_00[1], param_01), func_E756(param_00[2], param_01));
+func_E75A(var_0, var_1) {
+  return (func_E756(var_0[0], var_1), func_E756(var_0[1], var_1), func_E756(var_0[2], var_1));
 }
 
-func_E756(param_00, param_01) {
-  return int(param_00 * param_01) / param_01;
+func_E756(var_0, var_1) {
+  return int(var_0 * var_1) / var_1;
 }
 
-func_35E3(param_00, param_01, param_02, param_03) {
-  if(issubstr(param_00, "_left")) {
-    self.var_164D[param_00].slot = "left";
+func_35E3(var_0, var_1, var_2, var_3) {
+  if(issubstr(var_0, "_left")) {
+    self.var_164D[var_0].slot = "left";
     return;
   }
 
-  if(issubstr(param_00, "_right")) {
-    self.var_164D[param_00].slot = "right";
+  if(issubstr(var_0, "_right")) {
+    self.var_164D[var_0].slot = "right";
     return;
   }
 }
 
-func_3514(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_164D[param_00].slot;
-  if(!isDefined(var_04)) {
+func_3514(var_0, var_1, var_2, var_3) {
+  var_4 = self.var_164D[var_0].slot;
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  if(!isDefined(self.var_13CC3[var_04])) {
+  if(!isDefined(self.var_13CC3[var_4])) {
     return 0;
   }
 
-  return self.var_13CC3[var_04] == param_03;
+  return self.var_13CC3[var_4] == var_3;
 }
 
-func_3518(param_00) {
-  var_01 = self.var_1198.shootparams;
-  if(!isDefined(var_01)) {
+func_3518(var_0) {
+  var_1 = self._blackboard.shootparams;
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  foreach(var_04, var_03 in self.var_13CC3) {
-    if(var_04 == param_00) {
-      return isDefined(var_01.var_13CC3[var_04]);
+  foreach(var_4, var_3 in self.var_13CC3) {
+    if(var_4 == var_0) {
+      return isDefined(var_1.var_13CC3[var_4]);
     }
   }
 
   return 0;
 }
 
-func_3519(param_00, param_01, param_02, param_03) {
-  return !func_351A(param_00, param_01, param_02, param_03);
+func_3519(var_0, var_1, var_2, var_3) {
+  return !func_351A(var_0, var_1, var_2, var_3);
 }
 
-func_351A(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_1198.shootparams;
-  if(!isDefined(var_04)) {
+func_351A(var_0, var_1, var_2, var_3) {
+  var_4 = self._blackboard.shootparams;
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_05 = self.var_164D[param_00].slot;
-  if(var_05 == "left") {
-    var_06 = "left_arm";
+  var_5 = self.var_164D[var_0].slot;
+  if(var_5 == "left") {
+    var_6 = "left_arm";
   } else {
-    var_06 = "right_arm";
+    var_6 = "right_arm";
   }
 
-  if(scripts\asm\asm_bb::ispartdismembered(var_06)) {
+  if(scripts\asm\asm_bb::ispartdismembered(var_6)) {
     return 0;
   }
 
-  if(!isDefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03) {
+  if(!isDefined(self.var_13CC3[var_5]) || self.var_13CC3[var_5] != var_3) {
     return 0;
   }
 
-  return lib_0C08::func_10079(var_05);
+  return lib_0C08::func_10079(var_5);
 }
 
-func_3515(param_00, param_01, param_02, param_03) {
-  return !func_3516(param_00, param_01, param_02, param_03);
+func_3515(var_0, var_1, var_2, var_3) {
+  return !func_3516(var_0, var_1, var_2, var_3);
 }
 
-func_3516(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_1198.shootparams;
-  if(!isDefined(var_04)) {
+func_3516(var_0, var_1, var_2, var_3) {
+  var_4 = self._blackboard.shootparams;
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  var_05 = self.var_164D[param_00].slot;
-  if(var_05 == "left") {
-    var_06 = "left_arm";
+  var_5 = self.var_164D[var_0].slot;
+  if(var_5 == "left") {
+    var_6 = "left_arm";
   } else {
-    var_06 = "right_arm";
+    var_6 = "right_arm";
   }
 
-  if(scripts\asm\asm_bb::ispartdismembered(var_06)) {
+  if(scripts\asm\asm_bb::ispartdismembered(var_6)) {
     return 0;
   }
 
-  if(!isDefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03) {
+  if(!isDefined(self.var_13CC3[var_5]) || self.var_13CC3[var_5] != var_3) {
     return 0;
   }
 
-  return lib_0C08::func_A004(var_05);
+  return lib_0C08::func_A004(var_5);
 }
 
-func_3517(param_00, param_01, param_02, param_03) {
-  var_04 = self.var_164D[param_00].var_4C1A;
-  return !isDefined(var_04) || isDefined(var_04.var_2720);
+func_3517(var_0, var_1, var_2, var_3) {
+  var_4 = self.var_164D[var_0].var_4C1A;
+  return !isDefined(var_4) || isDefined(var_4.var_2720);
 }
 
-func_35AE(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm_bb::ispartdismembered(param_03);
+func_35AE(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::ispartdismembered(var_3);
 }

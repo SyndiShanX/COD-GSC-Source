@@ -92,7 +92,7 @@ init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("mobile_mortar", ::func_128EF);
 }
 
-func_128EF(param_00, param_01) {
+func_128EF(var_0, var_1) {
   if(!isDefined(level.var_8638[level.script])) {
     self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
@@ -108,53 +108,53 @@ func_128EF(param_00, param_01) {
     return 0;
   }
 
-  var_02 = func_F1C4();
-  if(!isDefined(var_02)) {
+  var_2 = func_F1C4();
+  if(!isDefined(var_2)) {
     return 0;
   } else {
     thread scripts\mp\utility::stoplocationselection(0);
   }
 
-  var_03 = func_49F1(self, var_02);
-  if(!isDefined(var_03)) {
+  var_3 = func_49F1(self, var_2);
+  if(!isDefined(var_3)) {
     return 0;
   }
 
-  var_03 thread func_BD1E("entrance");
+  var_3 thread func_BD1E("entrance");
   return 1;
 }
 
 func_F1C4() {
-  var_00 = undefined;
+  var_0 = undefined;
   for(;;) {
     thread func_1012E();
     scripts\mp\utility::_beginlocationselection("mobile_mortar", "map_artillery_selector", 0, 500);
     self endon("stop_location_selection");
-    self waittill("confirm_location", var_01);
-    for(var_02 = 0; var_02 < 3; var_02++) {
-      var_03 = level.var_8638[level.script][var_02]["origin"] * (1, 1, 0);
-      var_04 = distancesquared(var_01, var_03);
-      if(var_04 < -5536) {
-        var_00 = var_02;
+    self waittill("confirm_location", var_1);
+    for(var_2 = 0; var_2 < 3; var_2++) {
+      var_3 = level.var_8638[level.script][var_2]["origin"] * (1, 1, 0);
+      var_4 = distancesquared(var_1, var_3);
+      if(var_4 < -5536) {
+        var_0 = var_2;
         break;
       }
     }
 
-    if(isDefined(var_00)) {
-      for(var_02 = 0; var_02 < 3; var_02++) {
-        if(self.locationobjectives[var_02] != -1) {
-          if(var_02 == var_00) {
-            scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_02], "compass_objpoint_mortar_target");
+    if(isDefined(var_0)) {
+      for(var_2 = 0; var_2 < 3; var_2++) {
+        if(self.locationobjectives[var_2] != -1) {
+          if(var_2 == var_0) {
+            scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_2], "compass_objpoint_mortar_target");
             continue;
           }
 
-          scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_02], "invisible");
+          scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_2], "invisible");
         }
       }
     } else {
-      for(var_02 = 0; var_02 < 3; var_02++) {
-        if(self.locationobjectives[var_02] != -1) {
-          scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_02], "compass_objpoint_tank_enemy");
+      for(var_2 = 0; var_2 < 3; var_2++) {
+        if(self.locationobjectives[var_2] != -1) {
+          scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_2], "compass_objpoint_tank_enemy");
         }
       }
     }
@@ -162,133 +162,133 @@ func_F1C4() {
     wait(0.5);
     self notify("picked_location");
     wait(0.05);
-    if(isDefined(var_00)) {
+    if(isDefined(var_0)) {
       break;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_1012E() {
-  var_00 = scripts\mp\hud_util::createfontstring("bigfixed", 0.5);
-  var_00 scripts\mp\hud_util::setpoint("CENTER", "CENTER", 0, -150);
-  var_00 settext(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
+  var_0 = scripts\mp\hud_util::createfontstring("bigfixed", 0.5);
+  var_0 scripts\mp\hud_util::setpoint("CENTER", "CENTER", 0, -150);
+  var_0 settext(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   self.locationobjectives = [];
-  for(var_01 = 0; var_01 < 3; var_01++) {
-    self.locationobjectives[var_01] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
-    if(self.locationobjectives[var_01] != -1) {
-      scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_01], "invisible", (0, 0, 0));
-      scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_01], level.var_8638[level.script][var_01]["origin"]);
-      scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_01], "active");
-      scripts\mp\objidpoolmanager::minimap_objective_team(self.locationobjectives[var_01], self.team);
-      scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_01], "compass_objpoint_tank_friendly");
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    self.locationobjectives[var_1] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
+    if(self.locationobjectives[var_1] != -1) {
+      scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_1], "invisible", (0, 0, 0));
+      scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_1], level.var_8638[level.script][var_1]["origin"]);
+      scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_1], "active");
+      scripts\mp\objidpoolmanager::minimap_objective_team(self.locationobjectives[var_1], self.team);
+      scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_1], "compass_objpoint_tank_friendly");
     }
   }
 
   scripts\engine\utility::waittill_any_3("cancel_location", "picked_location", "stop_location_selection");
-  var_00 scripts\mp\hud_util::destroyelem();
-  for(var_01 = 0; var_01 < 3; var_01++) {
-    scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_01]);
+  var_0 scripts\mp\hud_util::destroyelem();
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_1]);
   }
 }
 
-func_49F1(param_00, param_01) {
-  var_02 = scripts\mp\killstreaks\_airdrop::getflyheightoffset(level.var_8638[level.script][param_01]["origin"]);
-  var_03 = bulletTrace(level.var_8638[level.script][param_01]["origin"] + (0, 0, var_02), level.var_8638[level.script][param_01]["origin"] - (0, 0, var_02), 0);
-  var_04 = var_03["position"] + anglesToForward(level.var_8638[level.script][param_01]["angles"]) * -1000;
-  var_05 = spawn("script_model", var_04);
-  if(!isDefined(var_05)) {
+func_49F1(var_0, var_1) {
+  var_2 = scripts\mp\killstreaks\_airdrop::getflyheightoffset(level.var_8638[level.script][var_1]["origin"]);
+  var_3 = bulletTrace(level.var_8638[level.script][var_1]["origin"] + (0, 0, var_2), level.var_8638[level.script][var_1]["origin"] - (0, 0, var_2), 0);
+  var_4 = var_3["position"] + anglesToForward(level.var_8638[level.script][var_1]["angles"]) * -1000;
+  var_5 = spawn("script_model", var_4);
+  if(!isDefined(var_5)) {
     return undefined;
   }
 
-  var_05.angles = level.var_8638[level.script][param_01]["angles"];
-  var_05 setModel("vehicle_bradley");
-  var_05 setCanDamage(1);
-  var_05.maxhealth = level.var_8D73 * 2;
-  var_05.health = var_05.maxhealth;
-  var_05.triggerportableradarping = param_00;
-  var_05.var_D40F = [];
-  var_05.var_AA24 = var_05.origin;
+  var_5.angles = level.var_8638[level.script][var_1]["angles"];
+  var_5 setModel("vehicle_bradley");
+  var_5 setCanDamage(1);
+  var_5.maxhealth = level.var_8D73 * 2;
+  var_5.health = var_5.maxhealth;
+  var_5.triggerportableradarping = var_0;
+  var_5.var_D40F = [];
+  var_5.var_AA24 = var_5.origin;
   if(level.teambased) {
-    var_05.team = param_00.team;
+    var_5.team = var_0.team;
   }
 
-  var_05.var_B0ED = level.spawnpoints[0].origin[0];
-  var_05.var_8EF9 = level.spawnpoints[0].origin[0];
-  var_05.var_B0EE = level.spawnpoints[0].origin[1];
-  var_05.var_8EFA = level.spawnpoints[0].origin[1];
-  var_06 = 200;
+  var_5.var_B0ED = level.spawnpoints[0].origin[0];
+  var_5.var_8EF9 = level.spawnpoints[0].origin[0];
+  var_5.var_B0EE = level.spawnpoints[0].origin[1];
+  var_5.var_8EFA = level.spawnpoints[0].origin[1];
+  var_6 = 200;
   if(level.spawnpoints.size > 1) {
-    for(var_07 = 1; var_07 < level.spawnpoints.size; var_07++) {
-      if(level.spawnpoints[var_07].origin[0] < var_05.var_B0ED) {
-        var_05.var_B0ED = level.spawnpoints[var_07].origin[0];
-      } else if(level.spawnpoints[var_07].origin[0] > var_05.var_8EF9) {
-        var_05.var_8EF9 = level.spawnpoints[var_07].origin[0];
+    for(var_7 = 1; var_7 < level.spawnpoints.size; var_7++) {
+      if(level.spawnpoints[var_7].origin[0] < var_5.var_B0ED) {
+        var_5.var_B0ED = level.spawnpoints[var_7].origin[0];
+      } else if(level.spawnpoints[var_7].origin[0] > var_5.var_8EF9) {
+        var_5.var_8EF9 = level.spawnpoints[var_7].origin[0];
       }
 
-      if(level.spawnpoints[var_07].origin[1] < var_05.var_B0EE) {
-        var_05.var_B0EE = level.spawnpoints[var_07].origin[1];
+      if(level.spawnpoints[var_7].origin[1] < var_5.var_B0EE) {
+        var_5.var_B0EE = level.spawnpoints[var_7].origin[1];
         continue;
       }
 
-      if(level.spawnpoints[var_07].origin[1] > var_05.var_8EFA) {
-        var_05.var_8EFA = level.spawnpoints[var_07].origin[1];
+      if(level.spawnpoints[var_7].origin[1] > var_5.var_8EFA) {
+        var_5.var_8EFA = level.spawnpoints[var_7].origin[1];
       }
     }
   } else {
-    var_06 = -2000;
+    var_6 = -2000;
   }
 
-  var_05.var_B0ED = var_05.var_B0ED + var_06;
-  var_05.var_8EF9 = var_05.var_8EF9 - var_06;
-  var_05.var_B0EE = var_05.var_B0EE + var_06;
-  var_05.var_8EFA = var_05.var_8EFA - var_06;
+  var_5.var_B0ED = var_5.var_B0ED + var_6;
+  var_5.var_8EF9 = var_5.var_8EF9 - var_6;
+  var_5.var_B0EE = var_5.var_B0EE + var_6;
+  var_5.var_8EFA = var_5.var_8EFA - var_6;
   if(level.teambased) {
-    var_08 = scripts\mp\objidpoolmanager::requestminimapid(1);
-    if(var_08 != -1) {
-      scripts\mp\objidpoolmanager::minimap_objective_add(var_08, "invisible", (0, 0, 0));
-      scripts\mp\objidpoolmanager::minimap_objective_position(var_08, var_03["position"]);
-      scripts\mp\objidpoolmanager::minimap_objective_state(var_08, "active");
-      scripts\mp\objidpoolmanager::minimap_objective_team(var_08, var_05.team);
-      scripts\mp\objidpoolmanager::minimap_objective_icon(var_08, "compass_objpoint_tank_friendly");
+    var_8 = scripts\mp\objidpoolmanager::requestminimapid(1);
+    if(var_8 != -1) {
+      scripts\mp\objidpoolmanager::minimap_objective_add(var_8, "invisible", (0, 0, 0));
+      scripts\mp\objidpoolmanager::minimap_objective_position(var_8, var_3["position"]);
+      scripts\mp\objidpoolmanager::minimap_objective_state(var_8, "active");
+      scripts\mp\objidpoolmanager::minimap_objective_team(var_8, var_5.team);
+      scripts\mp\objidpoolmanager::minimap_objective_icon(var_8, "compass_objpoint_tank_friendly");
     }
 
-    var_05.objidfriendly = var_08;
-    var_08 = scripts\mp\objidpoolmanager::requestminimapid(1);
-    if(var_08 != -1) {
-      scripts\mp\objidpoolmanager::minimap_objective_add(var_08, "invisible", (0, 0, 0));
-      scripts\mp\objidpoolmanager::minimap_objective_position(var_08, var_03["position"]);
-      scripts\mp\objidpoolmanager::minimap_objective_state(var_08, "active");
-      scripts\mp\objidpoolmanager::minimap_objective_team(var_08, level.otherteam[var_05.team]);
-      scripts\mp\objidpoolmanager::minimap_objective_icon(var_08, "compass_objpoint_tank_enemy");
+    var_5.objidfriendly = var_8;
+    var_8 = scripts\mp\objidpoolmanager::requestminimapid(1);
+    if(var_8 != -1) {
+      scripts\mp\objidpoolmanager::minimap_objective_add(var_8, "invisible", (0, 0, 0));
+      scripts\mp\objidpoolmanager::minimap_objective_position(var_8, var_3["position"]);
+      scripts\mp\objidpoolmanager::minimap_objective_state(var_8, "active");
+      scripts\mp\objidpoolmanager::minimap_objective_team(var_8, level.otherteam[var_5.team]);
+      scripts\mp\objidpoolmanager::minimap_objective_icon(var_8, "compass_objpoint_tank_enemy");
     }
 
-    var_05.var_C2BA = var_08;
+    var_5.var_C2BA = var_8;
   }
 
-  var_05 thread watchtimeout();
-  var_05 thread scripts\mp\killstreaks\_helicopter::heli_damage_monitor();
-  var_05 thread func_139E8();
-  var_05 thread func_13B18();
-  level.var_B8F4 = var_05;
-  return var_05;
+  var_5 thread watchtimeout();
+  var_5 thread scripts\mp\killstreaks\_helicopter::heli_damage_monitor();
+  var_5 thread func_139E8();
+  var_5 thread func_13B18();
+  level.var_B8F4 = var_5;
+  return var_5;
 }
 
-func_BD1E(param_00) {
+func_BD1E(var_0) {
   level endon("game_ended");
   self endon("death");
-  if(param_00 == "entrance") {
-    var_01 = self.origin + anglesToForward(self.angles) * 1000;
+  if(var_0 == "entrance") {
+    var_1 = self.origin + anglesToForward(self.angles) * 1000;
   } else {
     self notify("leaving");
-    var_01 = self.origin + anglesToForward(self.angles) * -1000;
+    var_1 = self.origin + anglesToForward(self.angles) * -1000;
   }
 
-  var_02 = 3;
-  self moveto(var_01, var_02, var_02 * 0.6, var_02 * 0.4);
-  wait(var_02);
-  if(param_00 == "entrance") {
+  var_2 = 3;
+  self moveto(var_1, var_2, var_2 * 0.6, var_2 * 0.4);
+  wait(var_2);
+  if(var_0 == "entrance") {
     thread func_BB64();
     return;
   }
@@ -303,72 +303,72 @@ func_BD1E(param_00) {
 }
 
 func_6CC6() {
-  var_00 = undefined;
-  foreach(var_02 in level.players) {
-    if(var_02 == self.triggerportableradarping) {
+  var_0 = undefined;
+  foreach(var_2 in level.players) {
+    if(var_2 == self.triggerportableradarping) {
       continue;
     }
 
-    if(var_02 scripts\mp\utility::_hasperk("specialty_blindeye")) {
+    if(var_2 scripts\mp\utility::_hasperk("specialty_blindeye")) {
       continue;
     }
 
-    if(level.teambased && var_02.team == self.triggerportableradarping.team) {
+    if(level.teambased && var_2.team == self.triggerportableradarping.team) {
       continue;
     }
 
-    if(distancesquared(self.origin, var_02.origin) < 1000000) {
+    if(distancesquared(self.origin, var_2.origin) < 1000000) {
       continue;
     }
 
-    for(var_03 = 0; var_03 < self.var_D40F.size; var_03++) {
-      if(var_02 == self.var_D40F[var_03]) {
+    for(var_3 = 0; var_3 < self.var_D40F.size; var_3++) {
+      if(var_2 == self.var_D40F[var_3]) {
         continue;
       }
     }
 
-    if(distancesquared(var_02.origin, self.var_AA24) < 500000) {
+    if(distancesquared(var_2.origin, self.var_AA24) < 500000) {
       continue;
     }
 
     if(level.teambased) {
-      var_04 = 0;
-      for(var_03 = 0; var_03 < level.players.size; var_03++) {
-        if(level.players[var_03].team != var_02.team && distancesquared(var_02.origin, level.players[var_03].origin) < 250000) {
-          var_04 = 1;
+      var_4 = 0;
+      for(var_3 = 0; var_3 < level.players.size; var_3++) {
+        if(level.players[var_3].team != var_2.team && distancesquared(var_2.origin, level.players[var_3].origin) < 250000) {
+          var_4 = 1;
           break;
         }
       }
 
-      if(var_04 == 1) {
+      if(var_4 == 1) {
         continue;
       }
     }
 
     wait(0.05);
-    var_05 = bulletTrace(var_02.origin + (0, 0, var_02 scripts\mp\killstreaks\_airdrop::getflyheightoffset(var_02.origin)), var_02.origin + (0, 0, 100), 0);
-    if(var_05["surfacetype"] != "none") {
+    var_5 = bulletTrace(var_2.origin + (0, 0, var_2 scripts\mp\killstreaks\_airdrop::getflyheightoffset(var_2.origin)), var_2.origin + (0, 0, 100), 0);
+    if(var_5["surfacetype"] != "none") {
       continue;
     }
 
-    var_00 = var_02.origin;
-    self.var_AA24 = var_02.origin;
-    self.var_D40F[self.var_D40F.size] = var_02;
+    var_0 = var_2.origin;
+    self.var_AA24 = var_2.origin;
+    self.var_D40F[self.var_D40F.size] = var_2;
     break;
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_6CC2() {
-  var_00 = undefined;
-  for(var_01 = 0; var_01 < 20; var_01++) {
-    var_02 = (randomfloatrange(self.var_B0ED, self.var_8EF9), randomfloatrange(self.var_B0EE, self.var_8EFA), 0);
-    if(distancesquared(self.origin * (1, 1, 0), var_02) < 1000000) {
+  var_0 = undefined;
+  for(var_1 = 0; var_1 < 20; var_1++) {
+    var_2 = (randomfloatrange(self.var_B0ED, self.var_8EF9), randomfloatrange(self.var_B0EE, self.var_8EFA), 0);
+    if(distancesquared(self.origin * (1, 1, 0), var_2) < 1000000) {
       continue;
     }
 
-    if(distancesquared(self.triggerportableradarping.origin * (1, 1, 0), var_02) < 250000) {
+    if(distancesquared(self.triggerportableradarping.origin * (1, 1, 0), var_2) < 250000) {
       continue;
     }
 
@@ -376,121 +376,121 @@ func_6CC2() {
       continue;
     }
 
-    var_03 = 0;
+    var_3 = 0;
     if(level.teambased) {
-      foreach(var_05 in level.players) {
-        if(var_05.team == self.triggerportableradarping.team && distancesquared(var_05.origin * (1, 1, 0), var_02) < 250000) {
-          var_03 = 1;
+      foreach(var_5 in level.players) {
+        if(var_5.team == self.triggerportableradarping.team && distancesquared(var_5.origin * (1, 1, 0), var_2) < 250000) {
+          var_3 = 1;
           break;
         }
       }
     }
 
-    if(var_03 == 0) {
-      var_00 = var_02;
-      self.var_AA24 = var_02;
+    if(var_3 == 0) {
+      var_0 = var_2;
+      self.var_AA24 = var_2;
       break;
     }
   }
 
-  if(!isDefined(var_00)) {
-    var_00 = (randomfloatrange(self.var_B0ED, self.var_8EF9), randomfloatrange(self.var_B0EE, self.var_8EFA), 0);
+  if(!isDefined(var_0)) {
+    var_0 = (randomfloatrange(self.var_B0ED, self.var_8EF9), randomfloatrange(self.var_B0EE, self.var_8EFA), 0);
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_BB64() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  var_00 = 0;
+  var_0 = 0;
   self.fxent = spawn("script_model", self.origin);
   self.fxent setModel("tag_origin");
   self.fxent.angles = self.angles;
   self.fxent getnodeyawtoenemy(-90);
   for(;;) {
-    var_01 = func_6CC6();
-    if(!isDefined(var_01)) {
-      var_01 = func_6CC2();
+    var_1 = func_6CC6();
+    if(!isDefined(var_1)) {
+      var_1 = func_6CC2();
     }
 
-    var_02 = self.origin[2] + 3500;
-    var_03 = bulletTrace(var_01 + (0, 0, var_02), var_01 - (0, 0, var_02), 0);
-    var_04 = var_01 + (0, 0, var_02);
-    var_05 = var_01 + (0, 0, var_03["position"][2]);
+    var_2 = self.origin[2] + 3500;
+    var_3 = bulletTrace(var_1 + (0, 0, var_2), var_1 - (0, 0, var_2), 0);
+    var_4 = var_1 + (0, 0, var_2);
+    var_5 = var_1 + (0, 0, var_3["position"][2]);
     self playSound("bmp_fire");
     playFX(level.var_114DE, self.origin + anglesToForward(self.angles) * 50);
-    if(var_00 < 3) {
+    if(var_0 < 3) {
       playFXOnTag(level.var_114DA, self.fxent, "tag_origin");
       playFXOnTag(level.var_114DB, self.fxent, "tag_origin");
-      var_00++;
+      var_0++;
     }
 
     thread func_BB98();
-    level thread firemortar(self, var_04, var_05);
+    level thread firemortar(self, var_4, var_5);
     self waittill("mortar_fire_done");
     wait(2.5);
   }
 }
 
-firemortar(param_00, param_01, param_02) {
+firemortar(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_03 = param_00.triggerportableradarping;
-  var_04 = scripts\mp\utility::_magicbullet("javelin_mp", param_00.origin + (0, 0, 150), param_01, var_03);
-  var_05 = scripts\mp\objidpoolmanager::requestminimapid(1);
-  if(var_05 != -1) {
-    scripts\mp\objidpoolmanager::minimap_objective_add(var_05, "invisible", (0, 0, 0));
-    scripts\mp\objidpoolmanager::minimap_objective_position(var_05, param_02);
-    scripts\mp\objidpoolmanager::minimap_objective_state(var_05, "active");
-    scripts\mp\objidpoolmanager::minimap_objective_team(var_05, param_00.team);
-    scripts\mp\objidpoolmanager::minimap_objective_icon(var_05, "compass_objpoint_mortar_target");
+  var_3 = var_0.triggerportableradarping;
+  var_4 = scripts\mp\utility::_magicbullet("javelin_mp", var_0.origin + (0, 0, 150), var_1, var_3);
+  var_5 = scripts\mp\objidpoolmanager::requestminimapid(1);
+  if(var_5 != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(var_5, "invisible", (0, 0, 0));
+    scripts\mp\objidpoolmanager::minimap_objective_position(var_5, var_2);
+    scripts\mp\objidpoolmanager::minimap_objective_state(var_5, "active");
+    scripts\mp\objidpoolmanager::minimap_objective_team(var_5, var_0.team);
+    scripts\mp\objidpoolmanager::minimap_objective_icon(var_5, "compass_objpoint_mortar_target");
   }
 
-  var_04.objidfriendly = var_05;
-  var_06 = scripts\mp\objidpoolmanager::requestminimapid(1);
-  if(var_06 != -1) {
-    scripts\mp\objidpoolmanager::minimap_objective_add(var_06, "invisible", (0, 0, 0));
-    scripts\mp\objidpoolmanager::minimap_objective_position(var_06, param_02);
-    scripts\mp\objidpoolmanager::minimap_objective_state(var_06, "active");
-    scripts\mp\objidpoolmanager::minimap_objective_team(var_06, level.otherteam[param_00.team]);
-    scripts\mp\objidpoolmanager::minimap_objective_icon(var_06, "compass_objpoint_mortar_target");
+  var_4.objidfriendly = var_5;
+  var_6 = scripts\mp\objidpoolmanager::requestminimapid(1);
+  if(var_6 != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(var_6, "invisible", (0, 0, 0));
+    scripts\mp\objidpoolmanager::minimap_objective_position(var_6, var_2);
+    scripts\mp\objidpoolmanager::minimap_objective_state(var_6, "active");
+    scripts\mp\objidpoolmanager::minimap_objective_team(var_6, level.otherteam[var_0.team]);
+    scripts\mp\objidpoolmanager::minimap_objective_icon(var_6, "compass_objpoint_mortar_target");
   }
 
-  var_04.var_C2BA = var_06;
-  var_07 = 0;
+  var_4.var_C2BA = var_6;
+  var_7 = 0;
   for(;;) {
-    if(!isDefined(var_04) || var_07 > 115 || distancesquared(var_04.origin, param_01) < 500) {
+    if(!isDefined(var_4) || var_7 > 115 || distancesquared(var_4.origin, var_1) < 500) {
       break;
     } else {
       wait(0.05);
     }
 
-    var_07++;
+    var_7++;
   }
 
-  if(isDefined(var_04)) {
-    var_04 delete();
+  if(isDefined(var_4)) {
+    var_4 delete();
   }
 
-  if(isDefined(var_03)) {
-    var_08 = scripts\mp\utility::_magicbullet("javelin_mp", param_01 + (0, 0, 200), param_02, var_03);
+  if(isDefined(var_3)) {
+    var_8 = scripts\mp\utility::_magicbullet("javelin_mp", var_1 + (0, 0, 200), var_2, var_3);
   } else {
-    var_08 = scripts\mp\utility::_magicbullet("javelin_mp", param_02 + (0, 0, 200), var_03);
+    var_8 = scripts\mp\utility::_magicbullet("javelin_mp", var_2 + (0, 0, 200), var_3);
   }
 
-  var_08.objidfriendly = var_05;
-  var_08.var_C2BA = var_06;
-  var_08 thread func_13B16(param_00);
+  var_8.objidfriendly = var_5;
+  var_8.var_C2BA = var_6;
+  var_8 thread func_13B16(var_0);
 }
 
-func_13B16(param_00) {
+func_13B16(var_0) {
   level endon("game_ended");
   self waittill("death");
   scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
   scripts\mp\objidpoolmanager::returnminimapid(self.var_C2BA);
-  if(isDefined(param_00)) {
-    param_00 notify("mortar_fire_done");
+  if(isDefined(var_0)) {
+    var_0 notify("mortar_fire_done");
   }
 }
 
@@ -498,14 +498,14 @@ func_BB98() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  var_00 = self.origin + anglesToForward(self.angles) * -20;
-  var_01 = self.origin;
-  var_02 = self.angles;
-  self moveto(var_00, 0.1);
+  var_0 = self.origin + anglesToForward(self.angles) * -20;
+  var_1 = self.origin;
+  var_2 = self.angles;
+  self moveto(var_0, 0.1);
   self rotatepitch(-3, 0.1);
   wait(0.1);
-  self moveto(var_01, 0.15);
-  self rotateto(var_02, 0.15);
+  self moveto(var_1, 0.15);
+  self rotateto(var_2, 0.15);
   wait(0.15);
 }
 
@@ -533,9 +533,9 @@ func_139E8() {
   self waittill("death");
   playFX(level.var_114DD, self.origin);
   playFX(level.var_114DC, self.origin);
-  var_00 = spawn("script_model", self.origin);
-  var_00 setModel("vehicle_bradley_destroyed");
-  var_00.angles = self.angles;
+  var_0 = spawn("script_model", self.origin);
+  var_0 setModel("vehicle_bradley_destroyed");
+  var_0.angles = self.angles;
   stopFXOnTag(level.var_114DA, self.fxent, "tag_origin");
   stopFXOnTag(level.var_114DB, self.fxent, "tag_origin");
   scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
@@ -543,7 +543,7 @@ func_139E8() {
   self.fxent delete();
   self delete();
   wait(3.5);
-  var_00 delete();
+  var_0 delete();
   level.var_B8F4 = undefined;
 }
 
@@ -551,7 +551,7 @@ func_139E5() {
   level endon("game_ended");
   self endon("death");
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4);
     if(self.health < 0) {
       break;
     }

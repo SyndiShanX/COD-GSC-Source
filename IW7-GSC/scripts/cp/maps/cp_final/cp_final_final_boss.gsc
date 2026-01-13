@@ -7,56 +7,56 @@
 init() {
   scripts\engine\utility::flag_init("meph_fight");
   level.fbd = spawnStruct();
-  var_00 = level.fbd;
-  var_00.soulprojectilemonitorfunc = ::soulprojectilemonitor;
-  var_00.soulprojectiledeathfunc = ::soulprojectiledeathmonitor;
+  var_0 = level.fbd;
+  var_0.soulprojectilemonitorfunc = ::soulprojectilemonitor;
+  var_0.soulprojectiledeathfunc = ::soulprojectiledeathmonitor;
   initfx();
-  var_00.circles = scripts\engine\utility::getstructarray("capture_points", "targetname");
-  var_00.activatedcircles = [];
-  foreach(var_03, var_02 in var_00.circles) {
-    var_02.var_3CB7 = 0;
-    var_02.buffer = 0;
-    var_02.state = "DORMANT";
-    var_02.model = spawn("script_model", var_02.origin + (0, 0, 3));
-    var_02.model setModel("tag_origin_ritual_circle_0" + var_03 + 1);
-    var_02.previouscharge = 0;
-    var_02.var_D8B2 = "DORMANT";
-    var_02.index = var_03;
-    var_02.blinkable = 1;
+  var_0.circles = scripts\engine\utility::getstructarray("capture_points", "targetname");
+  var_0.activatedcircles = [];
+  foreach(var_3, var_2 in var_0.circles) {
+    var_2.var_3CB7 = 0;
+    var_2.buffer = 0;
+    var_2.state = "DORMANT";
+    var_2.model = spawn("script_model", var_2.origin + (0, 0, 3));
+    var_2.model setModel("tag_origin_ritual_circle_0" + var_3 + 1);
+    var_2.previouscharge = 0;
+    var_2.var_D8B2 = "DORMANT";
+    var_2.index = var_3;
+    var_2.blinkable = 1;
   }
 
-  var_00.activecircle = undefined;
-  var_00.numplayerschargingcircle = 0;
+  var_0.activecircle = undefined;
+  var_0.numplayerschargingcircle = 0;
   registeractionstocircles();
-  var_00.souls = [];
-  var_00.numsoulsalive = 0;
-  var_00.numsoulsactive = 0;
-  var_00.var_10B41 = 0;
-  var_00.victory = 0;
-  var_00.bossstate = "MAIN";
-  var_00.fightstarted = 0;
-  var_00.sectioncomplete = 0;
-  var_00.playerschargingcircle = [];
+  var_0.souls = [];
+  var_0.numsoulsalive = 0;
+  var_0.numsoulsactive = 0;
+  var_0.var_10B41 = 0;
+  var_0.victory = 0;
+  var_0.bossstate = "MAIN";
+  var_0.fightstarted = 0;
+  var_0.sectioncomplete = 0;
+  var_0.playerschargingcircle = [];
   level.debugdlc4boss = ::start_boss_fight;
   level.debugdlc4bossstart = ::start;
-  var_04 = getent("rockwall_clip", "targetname");
-  var_05 = getent("rockwall_trig", "targetname");
-  var_05 enablelinkto();
-  var_05 linkto(var_04);
+  var_4 = getent("rockwall_clip", "targetname");
+  var_5 = getent("rockwall_trig", "targetname");
+  var_5 enablelinkto();
+  var_5 linkto(var_4);
 }
 
 bossfight_loadout() {
-  foreach(var_01 in level.players) {
-    var_01 scripts\cp\utility::allow_player_teleport(0);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::allow_player_teleport(0);
   }
 
-  foreach(var_01 in level.players) {
-    var_01 thread scripts\cp\maps\cp_final\cp_final::delay_set_audio_zone(var_01);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\maps\cp_final\cp_final::delay_set_audio_zone(var_1);
   }
 
   level.magic_weapons["venomx"] = "iw7_venomx_zm_pap2";
-  foreach(var_06 in level.var_B163) {
-    var_06.var_13C25 = scripts\cp\zombies\interaction_magicwheel::func_7ABF();
+  foreach(var_6 in level.var_B163) {
+    var_6.var_13C25 = scripts\cp\zombies\interaction_magicwheel::func_7ABF();
   }
 
   level.consumable_active_override = ::meph_consumable_check;
@@ -67,10 +67,10 @@ bossfight_loadout() {
   enable_bossfight_fnf();
   enable_bossfight_magicwheel();
   thread spawn_perk_pickup();
-  var_08 = 300;
-  level thread auto_start_boss_fight(var_08);
-  var_09 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door", "script_noteworthy");
-  foreach(var_0B in var_09) {
+  var_8 = 300;
+  level thread auto_start_boss_fight(var_8);
+  var_9 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door", "script_noteworthy");
+  foreach(var_0B in var_9) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0B);
   }
 
@@ -79,37 +79,37 @@ bossfight_loadout() {
   var_0D solid();
   var_0E = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
   var_0E = scripts\engine\utility::array_randomize(var_0E);
-  foreach(var_10, var_01 in level.players) {
-    var_01.ability_invulnerable = 1;
-    var_01 setorigin(var_0E[var_10].origin);
-    var_01 setplayerangles(var_0E[var_10].angles);
+  foreach(var_10, var_1 in level.players) {
+    var_1.ability_invulnerable = 1;
+    var_1 setorigin(var_0E[var_10].origin);
+    var_1 setplayerangles(var_0E[var_10].angles);
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("meph_perks", "script_noteworthy"));
   scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle", "script_noteworthy"));
 }
 
-auto_start_boss_fight(param_00) {
+auto_start_boss_fight(var_0) {
   level endon("fight_started");
-  setomnvar("zm_ui_timer", gettime() + param_00 * 1000);
-  wait(param_00 - 5);
-  var_01 = spawn("script_origin", (2000, -4814, 446));
-  var_01 playLoopSound("quest_rewind_clock_tick_long");
+  setomnvar("zm_ui_timer", gettime() + var_0 * 1000);
+  wait(var_0 - 5);
+  var_1 = spawn("script_origin", (2000, -4814, 446));
+  var_1 playLoopSound("quest_rewind_clock_tick_long");
   wait(5);
-  var_01 delete();
+  var_1 delete();
   playsoundatpos((2000, -4814, 446), "mpq_fail_buzzer");
   arcade_game_cleanup();
   wait(2);
   scripts\cp\cp_vo::set_vo_system_busy(1);
-  foreach(var_03 in level.players) {
-    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_03);
-    var_03 _meth_82C0("bink_fadeout_amb", 0.66);
+  foreach(var_3 in level.players) {
+    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_3);
+    var_3 _meth_82C0("bink_fadeout_amb", 0.66);
   }
 
   scripts\cp\utility::play_bink_video("sysload_o2", 86, 0);
   wait(86.5);
-  foreach(var_03 in level.players) {
-    var_03 clearclienttriggeraudiozone(0.3);
+  foreach(var_3 in level.players) {
+    var_3 clearclienttriggeraudiozone(0.3);
   }
 
   spawn_meph();
@@ -118,51 +118,51 @@ auto_start_boss_fight(param_00) {
 }
 
 arcade_game_cleanup() {
-  foreach(var_01 in level.players) {
-    var_01 notify("arcade_special_interrupt");
-    var_01 disableusability();
+  foreach(var_1 in level.players) {
+    var_1 notify("arcade_special_interrupt");
+    var_1 disableusability();
   }
 
   wait(0.1);
   level notify("force_exit_arcade");
-  foreach(var_01 in level.players) {
-    var_01 unlink();
-    if(isDefined(var_01.anchor)) {
-      var_01.anchor delete();
+  foreach(var_1 in level.players) {
+    var_1 unlink();
+    if(isDefined(var_1.anchor)) {
+      var_1.anchor delete();
     }
 
-    if(!var_01 scripts\cp\utility::areinteractionsenabled()) {
-      var_01 scripts\cp\utility::allow_player_interactions(1);
+    if(!var_1 scripts\cp\utility::areinteractionsenabled()) {
+      var_1 scripts\cp\utility::allow_player_interactions(1);
     }
   }
 }
 
 spawn_perk_pickup() {
-  var_00 = scripts\engine\utility::getstruct("meph_perks", "script_noteworthy");
-  var_01 = scripts\engine\utility::getstruct(var_00.target, "targetname");
-  level.perk_pickup = spawnfx(level._effect["vfx_mep_perk_buy"], var_01.origin);
+  var_0 = scripts\engine\utility::getstruct("meph_perks", "script_noteworthy");
+  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  level.perk_pickup = spawnfx(level._effect["vfx_mep_perk_buy"], var_1.origin);
   wait(0.1);
   triggerfx(level.perk_pickup);
 }
 
-try_to_leave_bossfight(param_00, param_01) {
-  if(!all_players_near_exit(param_00)) {
+try_to_leave_bossfight(var_0, var_1) {
+  if(!all_players_near_exit(var_0)) {
     iprintlnbold("All players must be near the exit");
     return;
   }
 
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   level notify("fight_started");
   scripts\cp\cp_vo::set_vo_system_busy(1);
-  foreach(param_01 in level.players) {
-    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(param_01);
-    param_01 _meth_82C0("bink_fadeout_amb", 0.66);
+  foreach(var_1 in level.players) {
+    scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_1);
+    var_1 _meth_82C0("bink_fadeout_amb", 0.66);
   }
 
   scripts\cp\utility::play_bink_video("sysload_o2", 86, 0);
   wait(86.5);
-  foreach(param_01 in level.players) {
-    param_01 clearclienttriggeraudiozone(0.3);
+  foreach(var_1 in level.players) {
+    var_1 clearclienttriggeraudiozone(0.3);
   }
 
   spawn_meph();
@@ -170,14 +170,14 @@ try_to_leave_bossfight(param_00, param_01) {
   level.dlc4_boss playSound("cp_final_meph_intro_ground");
 }
 
-all_players_near_exit(param_00) {
-  var_01 = 128;
-  foreach(var_03 in level.players) {
-    if(!var_03 scripts\cp\utility::is_valid_player()) {
+all_players_near_exit(var_0) {
+  var_1 = 128;
+  foreach(var_3 in level.players) {
+    if(!var_3 scripts\cp\utility::is_valid_player()) {
       return 0;
     }
 
-    if(distance2d(var_03.origin, param_00.origin) > var_01) {
+    if(distance2d(var_3.origin, var_0.origin) > var_1) {
       return 0;
     }
   }
@@ -190,8 +190,8 @@ pre_bossfight_init() {
   init_bossfight_magicwheel();
   disable_bossfight_fnf();
   disable_bossfight_magicwheel();
-  var_00 = getent("bossfight_ala_clip", "targetname");
-  var_00 notsolid();
+  var_0 = getent("bossfight_ala_clip", "targetname");
+  var_0 notsolid();
   scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("meph_perks", "script_noteworthy"));
   scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle", "script_noteworthy"));
 }
@@ -203,8 +203,8 @@ disable_bossfight_fnf() {
   level.boss_fnf_interaction.machine setscriptablepartstate("teller", "off_nomodel");
   level.boss_fnf_interaction.machine_top setscriptablepartstate("machine", "off_nomodel");
   level.boss_fnf_interaction.machine.hidden = 1;
-  foreach(var_01 in level.boss_fnf_interaction.lights) {
-    var_01 setlightintensity(0);
+  foreach(var_1 in level.boss_fnf_interaction.lights) {
+    var_1 setlightintensity(0);
   }
 }
 
@@ -215,8 +215,8 @@ enable_bossfight_fnf() {
   wait(0.1);
   level.boss_fnf_interaction.machine_top setscriptablepartstate("machine", "on");
   level.boss_fnf_interaction.machine.hidden = undefined;
-  foreach(var_01 in level.boss_fnf_interaction.lights) {
-    var_01 setlightintensity(0.65);
+  foreach(var_1 in level.boss_fnf_interaction.lights) {
+    var_1 setlightintensity(0.65);
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(level.boss_fnf_interaction);
@@ -224,34 +224,34 @@ enable_bossfight_fnf() {
 }
 
 init_bossfight_fnf() {
-  var_00 = scripts\engine\utility::getstruct("jaroslav_machine_meph", "script_noteworthy");
-  var_01 = getEntArray(var_00.target, "targetname");
-  foreach(var_03 in var_01) {
-    if(var_03.script_noteworthy == "fnf_machine") {
-      var_00.machine = var_03;
+  var_0 = scripts\engine\utility::getstruct("jaroslav_machine_meph", "script_noteworthy");
+  var_1 = getEntArray(var_0.target, "targetname");
+  foreach(var_3 in var_1) {
+    if(var_3.script_noteworthy == "fnf_machine") {
+      var_0.machine = var_3;
       continue;
     }
 
-    if(var_03.script_noteworthy == "fnf_machine_top") {
-      var_00.machine_top = var_03;
+    if(var_3.script_noteworthy == "fnf_machine_top") {
+      var_0.machine_top = var_3;
       continue;
     }
 
-    if(var_03.script_noteworthy == "fnf_jaw") {
-      var_00.jaw = var_03;
+    if(var_3.script_noteworthy == "fnf_jaw") {
+      var_0.jaw = var_3;
       continue;
     }
 
-    if(var_03.script_noteworthy == "fnf_light") {
-      if(!isDefined(var_00.lights)) {
-        var_00.lights = [];
+    if(var_3.script_noteworthy == "fnf_light") {
+      if(!isDefined(var_0.lights)) {
+        var_0.lights = [];
       }
 
-      var_00.lights[var_00.lights.size] = var_03;
+      var_0.lights[var_0.lights.size] = var_3;
     }
   }
 
-  level.boss_fnf_interaction = var_00;
+  level.boss_fnf_interaction = var_0;
   scripts\cp\cp_interaction::remove_from_current_interaction_list(level.boss_fnf_interaction);
 }
 
@@ -268,9 +268,9 @@ disable_bossfight_magicwheel() {
   level.bossfight_magicwheel setscriptablepartstate("base", "off_nomodel");
   level.bossfight_magicwheel setscriptablepartstate("fx", "off");
   level.bossfight_magicwheel setscriptablepartstate("spin_light", "off");
-  var_00 = getEntArray("out_of_order", "script_noteworthy");
-  var_01 = scripts\engine\utility::getclosest(level.bossfight_magicwheel.origin, var_00);
-  var_01 hide();
+  var_0 = getEntArray("out_of_order", "script_noteworthy");
+  var_1 = scripts\engine\utility::getclosest(level.bossfight_magicwheel.origin, var_0);
+  var_1 hide();
   level.bossfight_magicwheel.var_10A03 hide();
   level.bossfight_magicwheel makeunusable();
 }
@@ -310,19 +310,19 @@ boss_fight_intro_clear_audio_zone() {
   self clearclienttriggeraudiozone(10);
 }
 
-play_meph_song(param_00, param_01) {
-  if(soundexists(param_01)) {
+play_meph_song(var_0, var_1) {
+  if(soundexists(var_1)) {
     wait(2.5);
-    var_02 = spawn("script_origin", param_00);
-    var_02 playLoopSound(param_01);
+    var_2 = spawn("script_origin", var_0);
+    var_2 playLoopSound(var_1);
     level scripts\engine\utility::waittill_any_3("game_ended", "FINAL_BOSS_VICTORY");
-    var_02 stoploopsound();
+    var_2 stoploopsound();
     wait(0.1);
-    var_02 delete();
+    var_2 delete();
   }
 }
 
-disable_laststand_weapon(param_00) {
+disable_laststand_weapon(var_0) {
   return 0;
 }
 
@@ -337,9 +337,9 @@ spawn_meph() {
   level notify("add_hidden_song_to_playlist");
   scripts\cp\cp_vo::set_vo_system_busy(1);
   level.can_use_pistol_during_laststand_func = ::disable_laststand_weapon;
-  foreach(var_01 in level.players) {
-    var_01 _meth_82C0("final_boss_battle_space_intro", 0.02);
-    var_01 thread boss_fight_intro_clear_audio_zone();
+  foreach(var_1 in level.players) {
+    var_1 _meth_82C0("final_boss_battle_space_intro", 0.02);
+    var_1 thread boss_fight_intro_clear_audio_zone();
   }
 
   level thread play_meph_song((1785, -2077, 211), "mus_zombies_boss_battle");
@@ -354,37 +354,37 @@ spawn_meph() {
   if(isDefined(level.dlc4_boss) && isalive(level.dlc4_boss)) {
     level.dlc4_boss suicide();
     level.dlc4_boss = undefined;
-    var_03 = undefined;
+    var_3 = undefined;
   } else {
-    var_04 = "axis";
-    var_05 = vectortoangles((688, -11, 0));
-    var_03 = scripts\cp\zombies\zombies_spawning::func_13F53("dlc4_boss", (-13314, -337, -109), var_05, var_04);
-    level.dlc4_boss = var_03;
+    var_4 = "axis";
+    var_5 = vectortoangles((688, -11, 0));
+    var_3 = scripts\cp\zombies\zombies_spawning::func_13F53("dlc4_boss", (-13314, -337, -109), var_5, var_4);
+    level.dlc4_boss = var_3;
     level.dlc4_boss thread clearvaluesondeath();
-    foreach(var_08, var_01 in level.players) {
-      var_07 = (0, 0, 0);
-      switch (var_08) {
+    foreach(var_8, var_1 in level.players) {
+      var_7 = (0, 0, 0);
+      switch (var_8) {
         case 0:
-          var_07 = (-12819, -327, -106);
+          var_7 = (-12819, -327, -106);
           break;
 
         case 1:
-          var_07 = (-12822, -397, -106);
+          var_7 = (-12822, -397, -106);
           break;
 
         case 2:
-          var_07 = (-12769, -287, -106);
+          var_7 = (-12769, -287, -106);
           break;
 
         case 3:
-          var_07 = (-12776, -361, -106);
+          var_7 = (-12776, -361, -106);
           break;
       }
 
-      var_01.ability_invulnerable = undefined;
-      var_01 setorigin(var_07);
-      var_01 enableusability();
-      var_01 setplayerangles(vectortoangles((-13314, -337, -48) - var_01.origin));
+      var_1.ability_invulnerable = undefined;
+      var_1 setorigin(var_7);
+      var_1 enableusability();
+      var_1 setplayerangles(vectortoangles((-13314, -337, -48) - var_1.origin));
     }
 
     level.dlc4_boss thread persistent_flame_damage();
@@ -392,22 +392,22 @@ spawn_meph() {
 
   scripts\engine\utility::exploder(124);
   setomnvar("zm_meph_battle", 1);
-  return var_03;
+  return var_3;
 }
 
-respawn_in_meph_fight(param_00) {
-  var_01 = scripts\engine\utility::getstructarray("boss_player_starts", "targetname");
-  if(isDefined(param_00) && isplayer(param_00)) {
-    foreach(var_03 in var_01) {
-      if(positionwouldtelefrag(var_03.origin, param_00)) {
+respawn_in_meph_fight(var_0) {
+  var_1 = scripts\engine\utility::getstructarray("boss_player_starts", "targetname");
+  if(isDefined(var_0) && isplayer(var_0)) {
+    foreach(var_3 in var_1) {
+      if(positionwouldtelefrag(var_3.origin, var_0)) {
         continue;
       }
 
-      return var_03;
+      return var_3;
     }
   }
 
-  return var_01[0];
+  return var_1[0];
 }
 
 clearvaluesondeath() {
@@ -419,21 +419,21 @@ clearvaluesondeath() {
 
 persistent_flame_damage() {
   level endon("game_ended");
-  var_00 = getbosstunedata();
-  var_01 = spawn("trigger_radius", self.origin, 0, 128, 128);
-  var_01 enablelinkto();
-  var_01 linkto(self, "tag_origin");
+  var_0 = getbosstunedata();
+  var_1 = spawn("trigger_radius", self.origin, 0, 128, 128);
+  var_1 enablelinkto();
+  var_1 linkto(self, "tag_origin");
   for(;;) {
-    var_01 waittill("trigger", var_02);
-    if(!var_02 scripts\cp\utility::is_valid_player()) {
+    var_1 waittill("trigger", var_2);
+    if(!var_2 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(!isDefined(var_02.padding_damage)) {
-      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_02, "tag_eye", var_02);
-      var_02.padding_damage = 1;
-      var_02 dodamage(getbosstunedata().persistent_fire_damage, var_01.origin, var_01, var_01, "MOD_UNKNOWN", "iw7_electrictrap_zm");
-      var_02 thread remove_padding_damage();
+    if(!isDefined(var_2.padding_damage)) {
+      playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"], var_2, "tag_eye", var_2);
+      var_2.padding_damage = 1;
+      var_2 dodamage(getbosstunedata().persistent_fire_damage, var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_electrictrap_zm");
+      var_2 thread remove_padding_damage();
       continue;
     }
   }
@@ -459,29 +459,29 @@ initfx() {
   level._effect["talisman_flash"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_talisman_flash.vfx");
 }
 
-initinteraction(param_00) {
-  var_01 = spawnStruct();
-  var_01.name = "capture_points";
-  var_01.script_noteworthy = "capture_points";
-  var_01.var_336 = "interaction";
-  var_01.origin = param_00.origin;
-  var_01.custom_search_dist = 130;
-  var_01.cost = 0;
-  var_01.powered_on = 1;
-  var_01.spend_type = undefined;
-  var_01.script_parameters = "";
-  var_01.requires_power = 0;
-  var_01.hint_func = ::ritualcirclehintfunc;
-  var_01.activation_func = ::activatecircle;
-  var_01.enabled = 1;
-  var_01.circle = param_00;
-  level.interactions["capture_points"] = var_01;
-  param_00.interaction = var_01;
+initinteraction(var_0) {
+  var_1 = spawnStruct();
+  var_1.name = "capture_points";
+  var_1.script_noteworthy = "capture_points";
+  var_1.var_336 = "interaction";
+  var_1.origin = var_0.origin;
+  var_1.custom_search_dist = 130;
+  var_1.cost = 0;
+  var_1.powered_on = 1;
+  var_1.spend_type = undefined;
+  var_1.script_parameters = "";
+  var_1.requires_power = 0;
+  var_1.hint_func = ::ritualcirclehintfunc;
+  var_1.activation_func = ::activatecircle;
+  var_1.enabled = 1;
+  var_1.circle = var_0;
+  level.interactions["capture_points"] = var_1;
+  var_0.interaction = var_1;
 }
 
-ritualcirclehintfunc(param_00, param_01) {
-  var_02 = param_00.circle;
-  if(var_02.state == "ACTIVE") {
+ritualcirclehintfunc(var_0, var_1) {
+  var_2 = var_0.circle;
+  if(var_2.state == "ACTIVE") {
     if(level.fbd.bossstate == "FRENZIED") {
       return &"CP_FINAL_ACTIVATE_TALISMAN";
     }
@@ -493,34 +493,34 @@ ritualcirclehintfunc(param_00, param_01) {
 }
 
 registeractionstocircles() {
-  var_00 = level.fbd;
-  var_00.circles[0].actionname = "clap";
-  var_00.circles[1].actionname = "throw";
-  var_00.circles[2].actionname = "tornado";
-  var_00.circles[3].actionname = "air_pound";
-  var_00.circles[4].actionname = "fly_over";
+  var_0 = level.fbd;
+  var_0.circles[0].actionname = "clap";
+  var_0.circles[1].actionname = "throw";
+  var_0.circles[2].actionname = "tornado";
+  var_0.circles[3].actionname = "air_pound";
+  var_0.circles[4].actionname = "fly_over";
 }
 
-start(param_00) {
-  var_01 = level.fbd;
-  var_01.boss = param_00;
-  var_02 = getbosstunedata();
+start(var_0) {
+  var_1 = level.fbd;
+  var_1.boss = var_0;
+  var_2 = getbosstunedata();
   level.no_loot_drop = 1;
   scripts\engine\utility::flag_clear("zombie_drop_powerups");
   scripts\cp\cp_vo::func_C9CB(level.players);
   level.vo_system_busy = 1;
   registerweakspots();
-  foreach(var_05, var_04 in var_01.circles) {
-    initinteraction(var_04);
-    scripts\cp\cp_interaction::add_to_current_interaction_list(var_04.interaction);
-    var_04.weakspot = var_01.weakspots[var_05];
+  foreach(var_5, var_4 in var_1.circles) {
+    initinteraction(var_4);
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_4.interaction);
+    var_4.weakspot = var_1.weakspots[var_5];
   }
 
-  level.zombie_ghost_model = var_02.stolen_ghost_model;
-  var_01.soultobossmindistsqr = pow(var_02.boss_mid_height + var_02.soul_mid_height, 2);
+  level.zombie_ghost_model = var_2.stolen_ghost_model;
+  var_1.soultobossmindistsqr = pow(var_2.boss_mid_height + var_2.soul_mid_height, 2);
   level.get_fake_ghost_model_func = ::returnfakesoulmodel;
-  foreach(var_07 in level.players) {
-    var_07 freezecontrols(1);
+  foreach(var_7 in level.players) {
+    var_7 freezecontrols(1);
   }
 
   thread pre_fight_cleanup();
@@ -531,26 +531,26 @@ start(param_00) {
   level.originalmovemodefunc = level.movemodefunc["generic_zombie"];
   level.movemodefunc["generic_zombie"] = ::makezombiessprint;
   level thread max_ammo_manager();
-  var_01.fightstarted = 1;
-  var_01.boss.health = 9999999;
+  var_1.fightstarted = 1;
+  var_1.boss.health = 9999999;
 }
 
 pre_fight_cleanup() {
-  var_00 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.trigger)) {
-      var_02.trigger delete();
+  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.trigger)) {
+      var_2.trigger delete();
     }
 
-    if(isDefined(var_02.portal_scriptable)) {
-      var_02.portal_scriptable delete();
+    if(isDefined(var_2.portal_scriptable)) {
+      var_2.portal_scriptable delete();
     }
 
     wait(0.05);
   }
 }
 
-makezombiessprint(param_00) {
+makezombiessprint(var_0) {
   return "sprint";
 }
 
@@ -565,25 +565,25 @@ unlimited_max_ammo() {
   level endon("game_ended");
   level endon("restart_ammo_timer");
   scripts\engine\utility::flag_init("max_ammo_active");
-  var_00 = 180;
-  var_01 = 60;
+  var_0 = 180;
+  var_1 = 60;
   for(;;) {
     try_drop_max_ammo();
-    var_02 = isDefined(level.fbd.bossstate) && level.fbd.bossstate == "FRENZIED";
-    if(!var_02) {
-      wait(var_00);
+    var_2 = isDefined(level.fbd.bossstate) && level.fbd.bossstate == "FRENZIED";
+    if(!var_2) {
+      wait(var_0);
       continue;
     }
 
-    wait(var_01);
+    wait(var_1);
   }
 }
 
 try_drop_max_ammo() {
-  var_00 = level.dlc4_boss.arenacenter;
+  var_0 = level.dlc4_boss.arenacenter;
   if(!scripts\engine\utility::flag("max_ammo_active")) {
     scripts\engine\utility::flag_set("max_ammo_active");
-    level thread[[level.drop_max_ammo_func]](var_00, undefined, "ammo_max", undefined, undefined, 1);
+    level thread[[level.drop_max_ammo_func]](var_0, undefined, "ammo_max", undefined, undefined, 1);
   }
 }
 
@@ -595,68 +595,68 @@ max_ammo_pick_up_listener() {
   }
 }
 
-returnfakesoulmodel(param_00) {
+returnfakesoulmodel(var_0) {
   return getbosstunedata().fake_ghost_model;
 }
 
 waittillintrofinished() {
   level endon("game_ended");
   wait(12);
-  foreach(var_01 in level.players) {
-    var_01 playlocalsound(var_01.vo_prefix + "meph_encounter");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound(var_1.vo_prefix + "meph_encounter");
   }
 
   while(!isDefined(level.fbd.boss.introfinished) || !level.fbd.boss.introfinished) {
     wait(0.2);
   }
 
-  foreach(var_01 in level.players) {
-    var_01 freezecontrols(0);
+  foreach(var_1 in level.players) {
+    var_1 freezecontrols(0);
   }
 
   if(getdvarint("skip_bossfight_loadout") == 1 || scripts\engine\utility::istrue(level.debug_boss_fight_loadouts)) {
     setupdebugplayerloadouts();
   }
 
-  foreach(var_01 in level.players) {
-    giveentangler(var_01);
+  foreach(var_1 in level.players) {
+    giveentangler(var_1);
   }
 
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
-    foreach(var_01 in level.players) {
-      if(var_01 scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
-        scripts\cp\cp_laststand::enable_self_revive(var_01);
+    foreach(var_1 in level.players) {
+      if(var_1 scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
+        scripts\cp\cp_laststand::enable_self_revive(var_1);
       }
     }
   }
 }
 
 setupdebugplayerloadouts() {
-  var_00 = ["iw7_mauler_zm"];
-  var_01 = ["iw7_fhr_zm"];
-  foreach(var_03 in level.players) {
-    var_04 = randomint(var_01.size);
-    var_05 = randomint(var_00.size);
-    var_03 takeweapon(var_03 scripts\cp\utility::getvalidtakeweapon());
-    var_06 = scripts\cp\utility::getrawbaseweaponname(var_01[var_04]);
-    if(isDefined(var_03.weapon_build_models[var_06])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03, var_03.weapon_build_models[var_06]);
+  var_0 = ["iw7_mauler_zm"];
+  var_1 = ["iw7_fhr_zm"];
+  foreach(var_3 in level.players) {
+    var_4 = randomint(var_1.size);
+    var_5 = randomint(var_0.size);
+    var_3 takeweapon(var_3 scripts\cp\utility::getvalidtakeweapon());
+    var_6 = scripts\cp\utility::getrawbaseweaponname(var_1[var_4]);
+    if(isDefined(var_3.weapon_build_models[var_6])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_3, var_3.weapon_build_models[var_6]);
     } else {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03, var_01[var_04]);
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_3, var_1[var_4]);
     }
 
-    var_07 = scripts\cp\utility::getrawbaseweaponname(var_00[var_05]);
-    if(isDefined(var_03.weapon_build_models[var_07])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03, var_03.weapon_build_models[var_07]);
+    var_7 = scripts\cp\utility::getrawbaseweaponname(var_0[var_5]);
+    if(isDefined(var_3.weapon_build_models[var_7])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_3, var_3.weapon_build_models[var_7]);
     } else {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03, var_01[var_04]);
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_3, var_1[var_4]);
     }
 
-    var_03.total_currency_earned = min(10000, var_03 scripts\cp\cp_persistence::get_player_max_currency());
-    var_03 scripts\cp\cp_persistence::set_player_currency(10000);
-    var_03.have_permanent_perks = 1;
-    level thread scripts\cp\gametypes\zombie::give_permanent_perks(var_03);
-    scripts\cp\cp_laststand::enable_self_revive(var_03);
+    var_3.total_currency_earned = min(10000, var_3 scripts\cp\cp_persistence::get_player_max_currency());
+    var_3 scripts\cp\cp_persistence::set_player_currency(10000);
+    var_3.have_permanent_perks = 1;
+    level thread scripts\cp\gametypes\zombie::give_permanent_perks(var_3);
+    scripts\cp\cp_laststand::enable_self_revive(var_3);
   }
 
   if(isDefined(level.pap_max) && level.pap_max < 3) {
@@ -668,98 +668,98 @@ setupdebugplayerloadouts() {
 }
 
 perframeupdate() {
-  var_00 = level.fbd;
-  var_01 = getbosstunedata();
-  var_00.boss endon("death");
+  var_0 = level.fbd;
+  var_1 = getbosstunedata();
+  var_0.boss endon("death");
   for(;;) {
-    var_00.numplayerschargingcircle = 0;
-    var_00.playerschargingcircle = [];
-    if(isDefined(var_00.activecircle)) {
-      var_02 = var_00.activecircle;
-      if(var_02.state == "CHARGING") {
-        foreach(var_04 in level.players) {
-          if(canchargecircle(var_04, var_02)) {
-            var_00.numplayerschargingcircle = var_00.numplayerschargingcircle + 1;
-            var_00.playerschargingcircle[var_00.playerschargingcircle.size] = var_04;
-            var_05 = var_01.var_3CCC * level.players.size * pow(0.9, level.players.size);
-            var_06 = 1 / var_05;
-            var_07 = var_06 * 50;
-            var_02.var_3CB7 = min(var_02.var_3CB7 + var_07, 1);
+    var_0.numplayerschargingcircle = 0;
+    var_0.playerschargingcircle = [];
+    if(isDefined(var_0.activecircle)) {
+      var_2 = var_0.activecircle;
+      if(var_2.state == "CHARGING") {
+        foreach(var_4 in level.players) {
+          if(canchargecircle(var_4, var_2)) {
+            var_0.numplayerschargingcircle = var_0.numplayerschargingcircle + 1;
+            var_0.playerschargingcircle[var_0.playerschargingcircle.size] = var_4;
+            var_5 = var_1.var_3CCC * level.players.size * pow(0.9, level.players.size);
+            var_6 = 1 / var_5;
+            var_7 = var_6 * 50;
+            var_2.var_3CB7 = min(var_2.var_3CB7 + var_7, 1);
             if(level.players.size > 2) {
-              var_02.buffer = var_01.buffer_time_coop;
+              var_2.buffer = var_1.buffer_time_coop;
             } else {
-              var_02.buffer = var_01.buffer_time_solo;
+              var_2.buffer = var_1.buffer_time_solo;
             }
 
-            var_02.state = "CHARGING";
+            var_2.state = "CHARGING";
           }
         }
 
-        var_02.buffer = max(var_02.buffer - 50, 0);
-        if(var_02.buffer == 0) {
-          var_09 = var_01.decharge_rate * 50;
-          var_02.var_3CB7 = max(var_02.var_3CB7 - var_09, 0);
-          if(var_02.var_3CB7 == 0) {
-            if(isDefined(var_02.talisman)) {
-              var_02.talisman delete();
-              var_02.talisman = undefined;
+        var_2.buffer = max(var_2.buffer - 50, 0);
+        if(var_2.buffer == 0) {
+          var_9 = var_1.decharge_rate * 50;
+          var_2.var_3CB7 = max(var_2.var_3CB7 - var_9, 0);
+          if(var_2.var_3CB7 == 0) {
+            if(isDefined(var_2.talisman)) {
+              var_2.talisman delete();
+              var_2.talisman = undefined;
             }
 
-            foreach(var_0B in var_00.circles) {
+            foreach(var_0B in var_0.circles) {
               if(var_0B.state != "ACTIVE") {
                 var_0B.state = "DORMANT";
                 scripts\cp\cp_interaction::add_to_current_interaction_list(var_0B.interaction);
               }
             }
 
-            foreach(var_04 in level.players) {
-              var_04 scripts\cp\cp_interaction::refresh_interaction();
+            foreach(var_4 in level.players) {
+              var_4 scripts\cp\cp_interaction::refresh_interaction();
             }
           }
         }
       }
 
-      if(var_02.state == "CHARGING" && var_02.var_D8B2 != "CHARGING") {
-        var_02.model setscriptablepartstate("symbol", "on");
-      } else if(var_02.state == "DORMANT" && var_02.var_D8B2 != "DORMANT") {
-        var_02.model setscriptablepartstate("symbol", "off");
-      } else if(var_02.state == "ACTIVE" && var_02.var_D8B2 != "ACTIVE") {
-        var_02.model setscriptablepartstate("symbol", "active");
+      if(var_2.state == "CHARGING" && var_2.var_D8B2 != "CHARGING") {
+        var_2.model setscriptablepartstate("symbol", "on");
+      } else if(var_2.state == "DORMANT" && var_2.var_D8B2 != "DORMANT") {
+        var_2.model setscriptablepartstate("symbol", "off");
+      } else if(var_2.state == "ACTIVE" && var_2.var_D8B2 != "ACTIVE") {
+        var_2.model setscriptablepartstate("symbol", "active");
       }
 
-      if(var_02.state == "CHARGING") {
-        var_0F = int(floor(var_02.var_3CB7 * 10));
+      if(var_2.state == "CHARGING") {
+        var_0F = int(floor(var_2.var_3CB7 * 10));
       } else {
         var_0F = int(ceil(var_0F.var_3CB7 * 10));
       }
 
-      if(var_02.state == "CHARGING") {
-        var_10 = int(floor(var_02.previouscharge * 10));
+      if(var_2.state == "CHARGING") {
+        var_10 = int(floor(var_2.previouscharge * 10));
       } else {
         var_10 = int(ceil(var_0F.previouscharge * 10));
       }
 
       if(var_0F != var_10) {
-        var_02.model setscriptablepartstate("meter", "" + var_0F);
+        var_2.model setscriptablepartstate("meter", "" + var_0F);
         if(var_0F > var_10) {
-          playsoundatpos(var_02.model.origin + (0, 0, 20), "cp_final_talisman_count_up");
+          playsoundatpos(var_2.model.origin + (0, 0, 20), "cp_final_talisman_count_up");
         } else {
-          playsoundatpos(var_02.model.origin + (0, 0, 20), "cp_final_talisman_count_down");
+          playsoundatpos(var_2.model.origin + (0, 0, 20), "cp_final_talisman_count_down");
         }
       }
 
-      if(var_02.state == "CHARGING") {
-        if(var_02.var_3CB7 == 1) {
-          var_02.var_3CB7 = 1;
-          var_02.state = "ACTIVE";
-          releasesouls(var_02);
+      if(var_2.state == "CHARGING") {
+        if(var_2.var_3CB7 == 1) {
+          var_2.var_3CB7 = 1;
+          var_2.state = "ACTIVE";
+          releasesouls(var_2);
           thread manageactivecircle();
-          var_02.talisman setscriptablepartstate("effects", "charge_complete");
+          var_2.talisman setscriptablepartstate("effects", "charge_complete");
         }
       }
 
-      var_02.var_D8B2 = var_02.state;
-      var_02.previouscharge = var_02.var_3CB7;
+      var_2.var_D8B2 = var_2.state;
+      var_2.previouscharge = var_2.var_3CB7;
     }
 
     wait(0.05);
@@ -767,31 +767,31 @@ perframeupdate() {
 }
 
 manageactivecircle() {
-  var_00 = level.fbd;
-  var_01 = getbosstunedata();
-  var_00.boss endon(var_01.section_complete_notify);
-  var_02 = gettime();
-  var_03 = gettime();
-  var_04 = var_00.activecircle.origin;
-  var_05 = (0, 0, 0);
+  var_0 = level.fbd;
+  var_1 = getbosstunedata();
+  var_0.boss endon(var_1.section_complete_notify);
+  var_2 = gettime();
+  var_3 = gettime();
+  var_4 = var_0.activecircle.origin;
+  var_5 = (0, 0, 0);
   for(;;) {
-    var_06 = gettime();
-    var_00.activecircle.var_3CB7 = 1 - var_06 - var_02 / var_01.active_time;
-    if(var_06 > var_02 + var_01.active_time) {
-      var_00.summonsouls = 0;
+    var_6 = gettime();
+    var_0.activecircle.var_3CB7 = 1 - var_6 - var_2 / var_1.active_time;
+    if(var_6 > var_2 + var_1.active_time) {
+      var_0.summonsouls = 0;
       thread attempttofailstage();
       break;
     }
 
-    if(var_00.summonsouls && var_06 > var_03 + var_01.soul_respawn_time) {
-      if(var_00.numsoulsalive < var_01.num_souls_released) {
-        thread spawnsoul(var_00.activecircle);
+    if(var_0.summonsouls && var_6 > var_3 + var_1.soul_respawn_time) {
+      if(var_0.numsoulsalive < var_1.num_souls_released) {
+        thread spawnsoul(var_0.activecircle);
       }
 
-      var_03 = var_06;
+      var_3 = var_6;
     }
 
-    if(!var_00.summonsouls && var_00.numsoulsalive == 0) {
+    if(!var_0.summonsouls && var_0.numsoulsalive == 0) {
       break;
     }
 
@@ -800,166 +800,166 @@ manageactivecircle() {
 }
 
 attempttofailstage() {
-  var_00 = level.fbd;
-  var_00.boss endon(getbosstunedata().section_complete_notify);
+  var_0 = level.fbd;
+  var_0.boss endon(getbosstunedata().section_complete_notify);
   clearsouls();
   wait(2);
-  if(!var_00.boss.vulnerable) {
+  if(!var_0.boss.vulnerable) {
     deactivatecircle();
-    var_00.boss.soulhealth = 999;
+    var_0.boss.soulhealth = 999;
     wait(2);
-    var_00.boss scripts\aitypes\dlc4_boss\behaviors::resetsoulhealth();
+    var_0.boss scripts\aitypes\dlc4_boss\behaviors::resetsoulhealth();
     return;
   }
 
   level waittill("FINAL_BOSS_STAGE_FAILED");
   deactivatecircle();
-  var_00.boss.soulhealth = 999;
+  var_0.boss.soulhealth = 999;
   wait(2);
-  var_00.boss scripts\aitypes\dlc4_boss\behaviors::resetsoulhealth();
+  var_0.boss scripts\aitypes\dlc4_boss\behaviors::resetsoulhealth();
 }
 
 invulresetsoulhealth() {}
 
-activatecircle(param_00, param_01) {
-  var_02 = level.fbd;
+activatecircle(var_0, var_1) {
+  var_2 = level.fbd;
   if(!isDefined(level.fbd.circlesactivated)) {
     level.fbd.circlesactivated = 0;
   }
 
-  if(var_02.bossstate == "FRENZIED" && param_00.circle.state == "ACTIVE") {
+  if(var_2.bossstate == "FRENZIED" && var_0.circle.state == "ACTIVE") {
     level.fbd.circlesactivated = level.fbd.circlesactivated + 1;
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-    var_03 = param_00.circle;
-    var_03.model setscriptablepartstate("symbol", "complete");
-    var_02.boss setscriptablepartstate("circle_" + var_03.index, "completed");
-    var_03.talisman setscriptablepartstate("effects", "circle_complete");
-    playsoundatpos(var_03.talisman.origin + (0, 0, 30), "cp_final_frenzy_activate_talisman");
-  } else if(var_02.bossstate == "MAIN" && param_00.circle.state == "DORMANT") {
-    foreach(var_03 in var_02.circles) {
-      if(var_03.state != "ACTIVE") {
-        var_03.var_3CB7 = 0;
-        var_03.state = "LOCKED";
-        playsoundatpos(var_03.interaction.origin + (0, 0, 20), "cp_final_talisman_place_on_sign");
-        scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03.interaction);
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+    var_3 = var_0.circle;
+    var_3.model setscriptablepartstate("symbol", "complete");
+    var_2.boss setscriptablepartstate("circle_" + var_3.index, "completed");
+    var_3.talisman setscriptablepartstate("effects", "circle_complete");
+    playsoundatpos(var_3.talisman.origin + (0, 0, 30), "cp_final_frenzy_activate_talisman");
+  } else if(var_2.bossstate == "MAIN" && var_0.circle.state == "DORMANT") {
+    foreach(var_3 in var_2.circles) {
+      if(var_3.state != "ACTIVE") {
+        var_3.var_3CB7 = 0;
+        var_3.state = "LOCKED";
+        playsoundatpos(var_3.interaction.origin + (0, 0, 20), "cp_final_talisman_place_on_sign");
+        scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3.interaction);
       }
     }
 
-    param_00.circle.state = "CHARGING";
-    param_00.circle.talisman = spawn("script_model", param_00.origin + (0, 0, 4));
-    param_00.circle.talisman.angles = (-90, 0, 0);
-    param_00.circle.talisman setModel("cp_final_talisman_ritual");
-    var_02.activecircle = param_00.circle;
+    var_0.circle.state = "CHARGING";
+    var_0.circle.talisman = spawn("script_model", var_0.origin + (0, 0, 4));
+    var_0.circle.talisman.angles = (-90, 0, 0);
+    var_0.circle.talisman setModel("cp_final_talisman_ritual");
+    var_2.activecircle = var_0.circle;
   }
 
-  foreach(param_01 in level.players) {
-    param_01 scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\cp_interaction::refresh_interaction();
   }
 }
 
 deactivatecircle() {
-  var_00 = level.fbd;
-  var_00.activecircle.var_3CB7 = 0;
-  var_00.activecircle.state = "DORMANT";
-  var_00.activecircle.model setscriptablepartstate("symbol", "off");
-  var_00.activecircle.model setscriptablepartstate("meter", "0");
-  if(isDefined(var_00.activecircle.talisman)) {
-    var_00.activecircle.talisman delete();
-    var_00.activecircle.talisman = undefined;
+  var_0 = level.fbd;
+  var_0.activecircle.var_3CB7 = 0;
+  var_0.activecircle.state = "DORMANT";
+  var_0.activecircle.model setscriptablepartstate("symbol", "off");
+  var_0.activecircle.model setscriptablepartstate("meter", "0");
+  if(isDefined(var_0.activecircle.talisman)) {
+    var_0.activecircle.talisman delete();
+    var_0.activecircle.talisman = undefined;
   }
 
-  if(!isDefined(var_00.boss.doinggroundvul) || !var_00.boss.doinggroundvul) {
-    var_00.boss setscriptablepartstate("circle_" + var_00.activecircle.index, "off");
+  if(!isDefined(var_0.boss.doinggroundvul) || !var_0.boss.doinggroundvul) {
+    var_0.boss setscriptablepartstate("circle_" + var_0.activecircle.index, "off");
   }
 
-  foreach(var_02 in var_00.circles) {
-    if(var_02.state != "ACTIVE") {
-      scripts\cp\cp_interaction::add_to_current_interaction_list(var_02.interaction);
-      var_02.state = "DORMANT";
+  foreach(var_2 in var_0.circles) {
+    if(var_2.state != "ACTIVE") {
+      scripts\cp\cp_interaction::add_to_current_interaction_list(var_2.interaction);
+      var_2.state = "DORMANT";
     }
   }
 
-  var_00.activecircle.weakspot.health = var_00.activecircle.weakspot.maxhealth;
-  foreach(var_05 in level.players) {
-    var_05 scripts\cp\cp_interaction::refresh_interaction();
+  var_0.activecircle.weakspot.health = var_0.activecircle.weakspot.maxhealth;
+  foreach(var_5 in level.players) {
+    var_5 scripts\cp\cp_interaction::refresh_interaction();
   }
 }
 
-canchargecircle(param_00, param_01) {
-  if(param_01.state != "CHARGING") {
+canchargecircle(var_0, var_1) {
+  if(var_1.state != "CHARGING") {
     return 0;
   }
 
-  if(!param_00 scripts\cp\utility::is_valid_player()) {
+  if(!var_0 scripts\cp\utility::is_valid_player()) {
     return 0;
   }
 
-  var_02 = distance2dsquared(param_00.origin, param_01.origin);
-  if(var_02 > param_01.fgetarg * param_01.fgetarg) {
+  var_2 = distance2dsquared(var_0.origin, var_1.origin);
+  if(var_2 > var_1.fgetarg * var_1.fgetarg) {
     return 0;
   }
 
   return 1;
 }
 
-spawnsoul(param_00) {
-  var_01 = param_00.origin;
-  var_02 = (0, 0, 0);
-  var_03 = level.fbd;
-  var_04 = getbosstunedata();
-  var_03.numsoulsalive = var_03.numsoulsalive + 1;
-  var_03.numsoulsactive = var_03.numsoulsactive + 1;
-  var_05 = scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::spawn_zombie_ghost(var_01, var_02);
-  var_03.souls[var_03.souls.size] = var_05;
-  param_00.model playSound("cp_final_talisman_soul_release");
-  playFX(level._effect["flying_soul_birth"], param_00.origin, (1, 0, 0), (0, 0, 1));
-  thread souldeathmonitor(var_05);
+spawnsoul(var_0) {
+  var_1 = var_0.origin;
+  var_2 = (0, 0, 0);
+  var_3 = level.fbd;
+  var_4 = getbosstunedata();
+  var_3.numsoulsalive = var_3.numsoulsalive + 1;
+  var_3.numsoulsactive = var_3.numsoulsactive + 1;
+  var_5 = scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::spawn_zombie_ghost(var_1, var_2);
+  var_3.souls[var_3.souls.size] = var_5;
+  var_0.model playSound("cp_final_talisman_soul_release");
+  playFX(level._effect["flying_soul_birth"], var_0.origin, (1, 0, 0), (0, 0, 1));
+  thread souldeathmonitor(var_5);
 }
 
-releasesouls(param_00) {
-  var_01 = level.fbd;
-  var_02 = getbosstunedata();
-  var_01.summonsouls = 0;
-  var_01.souls = [];
-  var_03 = param_00.origin;
-  var_04 = (0, 0, 0);
+releasesouls(var_0) {
+  var_1 = level.fbd;
+  var_2 = getbosstunedata();
+  var_1.summonsouls = 0;
+  var_1.souls = [];
+  var_3 = var_0.origin;
+  var_4 = (0, 0, 0);
   wait(0.75);
-  for(var_05 = 0; var_05 < var_02.num_souls_released; var_05++) {
-    spawnsoul(var_01.activecircle);
+  for(var_5 = 0; var_5 < var_2.num_souls_released; var_5++) {
+    spawnsoul(var_1.activecircle);
     wait(0.25);
   }
 
-  var_01.summonsouls = 1;
+  var_1.summonsouls = 1;
 }
 
-soulprojectilemonitor(param_00, param_01) {
-  var_02 = level.fbd;
-  var_03 = getbosstunedata();
-  var_02.boss endon("death");
-  param_00 endon("death");
-  var_04 = gettime();
+soulprojectilemonitor(var_0, var_1) {
+  var_2 = level.fbd;
+  var_3 = getbosstunedata();
+  var_2.boss endon("death");
+  var_0 endon("death");
+  var_4 = gettime();
   for(;;) {
-    var_05 = param_00 gettagorigin("j_spine4");
-    if(gettime() - var_04 > var_03.soul_lifetime) {
-      var_06 = param_00 gettagorigin("j_spine4");
-      playFX(level._effect["flying_soul_hit_fail"], var_06, anglesToForward(param_00.angles), anglestoup(param_00.angles));
-      scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(param_00, param_01, var_03.soul_explosion_radius);
+    var_5 = var_0 gettagorigin("j_spine4");
+    if(gettime() - var_4 > var_3.soul_lifetime) {
+      var_6 = var_0 gettagorigin("j_spine4");
+      playFX(level._effect["flying_soul_hit_fail"], var_6, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+      scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(var_0, var_1, var_3.soul_explosion_radius);
     }
 
-    var_07 = var_02.boss gettagorigin("j_mainroot");
-    var_08 = distancesquared(var_05, var_07);
-    if(var_08 < var_02.soultobossmindistsqr) {
+    var_7 = var_2.boss gettagorigin("j_mainroot");
+    var_8 = distancesquared(var_5, var_7);
+    if(var_8 < var_2.soultobossmindistsqr) {
       if(!isDefined(level.soul_vo_played)) {
         level.soul_vo_played = 1;
-        level thread play_meph_vo(param_01, "meph_damage_souls", 1);
+        level thread play_meph_vo(var_1, "meph_damage_souls", 1);
       }
 
-      param_01 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
-      var_02.boss scripts\asm\dlc4_boss\dlc4_boss_asm::smallpain();
-      var_06 = param_00 gettagorigin("j_spine4");
-      playFX(level._effect["flying_soul_death"], var_06, anglesToForward(param_00.angles), anglestoup(param_00.angles));
-      playsoundatpos(param_00.origin, "weap_soul_projectile_impact_lg");
-      scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(param_00, param_01, var_03.soul_explosion_radius);
+      var_1 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
+      var_2.boss scripts\asm\dlc4_boss\dlc4_boss_asm::smallpain();
+      var_6 = var_0 gettagorigin("j_spine4");
+      playFX(level._effect["flying_soul_death"], var_6, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+      playsoundatpos(var_0.origin, "weap_soul_projectile_impact_lg");
+      scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(var_0, var_1, var_3.soul_explosion_radius);
       break;
     }
 
@@ -967,41 +967,41 @@ soulprojectilemonitor(param_00, param_01) {
   }
 }
 
-play_meph_vo(param_00, param_01, param_02) {
-  wait(param_02);
-  foreach(var_04 in level.players) {
-    if(var_04 == param_00) {
-      param_00 playlocalsound(param_00.vo_prefix + "plr_" + param_01);
+play_meph_vo(var_0, var_1, var_2) {
+  wait(var_2);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_0 playlocalsound(var_0.vo_prefix + "plr_" + var_1);
       continue;
     }
 
-    var_04 playlocalsound(param_00.vo_prefix + param_01);
+    var_4 playlocalsound(var_0.vo_prefix + var_1);
   }
 }
 
-souldeathmonitor(param_00) {
+souldeathmonitor(var_0) {
   level.fbd.boss endon("death");
-  param_00 waittill("death");
+  var_0 waittill("death");
   level.fbd.numsoulsalive = level.fbd.numsoulsalive - 1;
 }
 
-soulprojectiledeathmonitor(param_00) {
-  var_01 = level.fbd;
-  var_01.boss endon("death");
-  param_00 waittill("death");
-  var_01.numsoulsactive = var_01.numsoulsactive - 1;
+soulprojectiledeathmonitor(var_0) {
+  var_1 = level.fbd;
+  var_1.boss endon("death");
+  var_0 waittill("death");
+  var_1.numsoulsactive = var_1.numsoulsactive - 1;
 }
 
 clearsouls() {
-  var_00 = level.fbd;
-  foreach(var_02 in var_00.souls) {
-    if(isalive(var_02)) {
-      if(scripts\engine\utility::istrue(var_02.is_entangled) && isDefined(var_02.player_entangled_by)) {
-        var_02.player_entangled_by.ghost_in_entanglement = undefined;
+  var_0 = level.fbd;
+  foreach(var_2 in var_0.souls) {
+    if(isalive(var_2)) {
+      if(scripts\engine\utility::istrue(var_2.is_entangled) && isDefined(var_2.player_entangled_by)) {
+        var_2.player_entangled_by.ghost_in_entanglement = undefined;
       }
 
-      var_02.nocorpse = 1;
-      var_02 suicide();
+      var_2.nocorpse = 1;
+      var_2 suicide();
       level.fbd.numsoulsactive = level.fbd.numsoulsactive - 1;
     }
   }
@@ -1010,46 +1010,46 @@ clearsouls() {
 }
 
 setupfornextwave() {
-  var_00 = level.fbd;
-  var_01 = getbosstunedata();
-  foreach(var_03 in var_00.circles) {
-    if(var_03.state != "ACTIVE") {
-      var_03.state = "DORMANT";
-      var_03.var_3CB7 = 0;
-      scripts\cp\cp_interaction::add_to_current_interaction_list(var_03.interaction);
+  var_0 = level.fbd;
+  var_1 = getbosstunedata();
+  foreach(var_3 in var_0.circles) {
+    if(var_3.state != "ACTIVE") {
+      var_3.state = "DORMANT";
+      var_3.var_3CB7 = 0;
+      scripts\cp\cp_interaction::add_to_current_interaction_list(var_3.interaction);
     }
   }
 
-  foreach(var_06 in level.players) {
-    var_06 scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_6 in level.players) {
+    var_6 scripts\cp\cp_interaction::refresh_interaction();
   }
 
   scripts\aitypes\dlc4_boss\behaviors::updateweights();
 }
 
-giveentangler(param_00) {
-  var_01 = getbosstunedata();
-  param_00 thread entanglerhitmonitor(param_00);
-  param_00 thread entanglerrechargemonitor(param_00);
-  param_00 thread scripts\cp\crafted_entangler::watch_dpad();
-  param_00 setclientomnvar("zom_crafted_weapon", 19);
-  scripts\cp\utility::set_crafted_inventory_item("crafted_entangler", ::scripts\cp\crafted_entangler::give_crafted_entangler, param_00);
+giveentangler(var_0) {
+  var_1 = getbosstunedata();
+  var_0 thread entanglerhitmonitor(var_0);
+  var_0 thread entanglerrechargemonitor(var_0);
+  var_0 thread scripts\cp\crafted_entangler::watch_dpad();
+  var_0 setclientomnvar("zom_crafted_weapon", 19);
+  scripts\cp\utility::set_crafted_inventory_item("crafted_entangler", ::scripts\cp\crafted_entangler::give_crafted_entangler, var_0);
 }
 
-entanglerhitmonitor(param_00) {
-  var_01 = getbosstunedata();
+entanglerhitmonitor(var_0) {
+  var_1 = getbosstunedata();
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon(var_01.entangler_stop_notify);
+  var_0 endon("disconnect");
+  var_0 endon(var_1.entangler_stop_notify);
   for(;;) {
-    var_02 = 0;
+    var_2 = 0;
     for(;;) {
-      var_03 = param_00 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_01.entangler_track_update_frequency, var_01.entangler_hit_same_target_notify);
-      if(var_03 == var_01.entangler_hit_same_target_notify) {
-        var_02 = var_02 + var_01.entangler_track_update_frequency;
-        var_04 = min(var_02 / var_01.entangler_track_time, 1);
-        if(var_04 == 1 && isalive(param_00.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(param_00.current_entangler_target) && !isDefined(param_00.ghost_in_entanglement)) {
-          param_00.current_entangler_target scripts\aitypes\zombie_ghost\behaviors::entangleghost(param_00.current_entangler_target, param_00);
+      var_3 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_1.entangler_track_update_frequency, var_1.entangler_hit_same_target_notify);
+      if(var_3 == var_1.entangler_hit_same_target_notify) {
+        var_2 = var_2 + var_1.entangler_track_update_frequency;
+        var_4 = min(var_2 / var_1.entangler_track_time, 1);
+        if(var_4 == 1 && isalive(var_0.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(var_0.current_entangler_target) && !isDefined(var_0.ghost_in_entanglement)) {
+          var_0.current_entangler_target scripts\aitypes\zombie_ghost\behaviors::entangleghost(var_0.current_entangler_target, var_0);
         }
 
         continue;
@@ -1060,116 +1060,116 @@ entanglerhitmonitor(param_00) {
   }
 }
 
-entanglerrechargemonitor(param_00) {
-  var_01 = getbosstunedata();
+entanglerrechargemonitor(var_0) {
+  var_1 = getbosstunedata();
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon(var_01.entangler_stop_notify);
+  var_0 endon("disconnect");
+  var_0 endon(var_1.entangler_stop_notify);
   for(;;) {
-    wait(var_01.entangler_recharge_rate);
-    param_00 setweaponammoclip(var_01.entangler_weapon_name, weaponclipsize(var_01.entangler_weapon_name));
+    wait(var_1.entangler_recharge_rate);
+    var_0 setweaponammoclip(var_1.entangler_weapon_name, weaponclipsize(var_1.entangler_weapon_name));
   }
 }
 
 registerweakspots() {
-  var_00 = level.fbd;
-  var_00.weakspots = [];
-  registerweakspot("j_shoulder_ri", (0, 0, -12), (0, 0, -10), (-10, 180, 180), var_00.circles[0]);
-  registerweakspot("j_chest", (34, -15, -19), (34, -15, -19), (120, 0, 53), var_00.circles[1]);
-  registerweakspot("j_shoulder_le", (3, 0, 14), (3, 0, 14), (0, 0, 180), var_00.circles[2]);
-  registerweakspot("j_chest", (42, -16, 0), (42, -16, 0), (90, -30, 15), var_00.circles[3]);
-  registerweakspot("j_chest", (34, -17, 19), (34, -17, 19), (80, 0, 53), var_00.circles[4]);
+  var_0 = level.fbd;
+  var_0.weakspots = [];
+  registerweakspot("j_shoulder_ri", (0, 0, -12), (0, 0, -10), (-10, 180, 180), var_0.circles[0]);
+  registerweakspot("j_chest", (34, -15, -19), (34, -15, -19), (120, 0, 53), var_0.circles[1]);
+  registerweakspot("j_shoulder_le", (3, 0, 14), (3, 0, 14), (0, 0, 180), var_0.circles[2]);
+  registerweakspot("j_chest", (42, -16, 0), (42, -16, 0), (90, -30, 15), var_0.circles[3]);
+  registerweakspot("j_chest", (34, -17, 19), (34, -17, 19), (80, 0, 53), var_0.circles[4]);
 }
 
-registerweakspot(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = level.fbd;
-  var_06 = spawnStruct();
-  var_06.var_332 = param_00;
-  var_06.modeloffset = param_01;
-  var_06.vfxoffset = param_02;
-  var_06.angleoffset = param_03;
-  var_06.circle = param_04;
-  var_06.maxhealth = int(getbosstunedata().weak_spot_health * level.players.size * pow(0.9, level.players.size - 1));
-  var_06.health = var_06.maxhealth;
-  var_05.weakspots[var_05.weakspots.size] = var_06;
+registerweakspot(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = level.fbd;
+  var_6 = spawnStruct();
+  var_6.var_332 = var_0;
+  var_6.modeloffset = var_1;
+  var_6.vfxoffset = var_2;
+  var_6.angleoffset = var_3;
+  var_6.circle = var_4;
+  var_6.maxhealth = int(getbosstunedata().weak_spot_health * level.players.size * pow(0.9, level.players.size - 1));
+  var_6.health = var_6.maxhealth;
+  var_5.weakspots[var_5.weakspots.size] = var_6;
 }
 
-setupweakspot(param_00) {
-  if(!isDefined(param_00)) {
+setupweakspot(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = level.fbd;
-  var_02 = getbosstunedata();
-  var_03 = param_00.weakspot;
-  var_04 = var_01.boss gettagorigin(var_03.var_332);
-  var_01.boss setscriptablepartstate("circle_" + param_00.index, "on");
-  var_05 = spawn("script_model", var_04);
-  var_05 setModel(var_02.weak_spot_model);
-  var_05 linkto(var_01.boss, var_03.var_332, var_03.modeloffset, var_03.angleoffset);
-  var_05 getrandomweaponfromcategory();
-  var_05.health = var_03.health;
-  var_03.model = var_05;
-  thread weakspotmonitor(param_00);
+  var_1 = level.fbd;
+  var_2 = getbosstunedata();
+  var_3 = var_0.weakspot;
+  var_4 = var_1.boss gettagorigin(var_3.var_332);
+  var_1.boss setscriptablepartstate("circle_" + var_0.index, "on");
+  var_5 = spawn("script_model", var_4);
+  var_5 setModel(var_2.weak_spot_model);
+  var_5 linkto(var_1.boss, var_3.var_332, var_3.modeloffset, var_3.angleoffset);
+  var_5 getrandomweaponfromcategory();
+  var_5.health = var_3.health;
+  var_3.model = var_5;
+  thread weakspotmonitor(var_0);
   level thread play_meph_vo(level.dlc4_boss scripts\cp\utility::get_closest_living_player(), "meph_damage_weak", 5);
 }
 
-cleanupweakspot(param_00) {
-  var_01 = level.fbd;
-  if(!isDefined(param_00)) {
+cleanupweakspot(var_0) {
+  var_1 = level.fbd;
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_02 = getbosstunedata().min_health_percent * param_00.weakspot.maxhealth;
-  param_00.weakspot.health = int(max(param_00.weakspot.model.health, var_02));
-  if(isDefined(param_00.weakspot.model)) {
-    param_00.weakspot.model delete();
+  var_2 = getbosstunedata().min_health_percent * var_0.weakspot.maxhealth;
+  var_0.weakspot.health = int(max(var_0.weakspot.model.health, var_2));
+  if(isDefined(var_0.weakspot.model)) {
+    var_0.weakspot.model delete();
   }
 
-  if(isDefined(param_00.weakspot.vfxent)) {
-    var_03 = param_00.weakspot.vfxent;
-    param_00.weakspot.vfxent delete();
+  if(isDefined(var_0.weakspot.vfxent)) {
+    var_3 = var_0.weakspot.vfxent;
+    var_0.weakspot.vfxent delete();
   }
 }
 
-weakspotmonitor(param_00) {
-  var_01 = level.fbd;
-  var_02 = getbosstunedata();
-  var_03 = param_00.weakspot;
-  var_03 endon("death");
-  var_03.model setCanDamage(1);
+weakspotmonitor(var_0) {
+  var_1 = level.fbd;
+  var_2 = getbosstunedata();
+  var_3 = var_0.weakspot;
+  var_3 endon("death");
+  var_3.model setCanDamage(1);
   for(;;) {
-    var_03.model waittill("damage", var_04, var_05, var_06, var_07);
-    if(!isDefined(var_05) || var_05 == var_01.boss || !isplayer(var_05)) {
+    var_3.model waittill("damage", var_4, var_5, var_6, var_7);
+    if(!isDefined(var_5) || var_5 == var_1.boss || !isplayer(var_5)) {
       continue;
     }
 
-    var_08 = var_06 * -1;
-    playFX(level._effect["weak_spot_hit"], var_07, var_08);
-    if(var_03.model.health <= 0 && !var_01.sectioncomplete) {
+    var_8 = var_6 * -1;
+    playFX(level._effect["weak_spot_hit"], var_7, var_8);
+    if(var_3.model.health <= 0 && !var_1.sectioncomplete) {
       clearsouls();
-      param_00.var_3CB7 = 1;
-      param_00.model setscriptablepartstate("symbol", "complete");
-      param_00.model setscriptablepartstate("meter", "10");
-      var_01.activatedcircles[var_01.activatedcircles.size] = param_00;
-      var_01.boss.var_1198.desirednode = 0;
+      var_0.var_3CB7 = 1;
+      var_0.model setscriptablepartstate("symbol", "complete");
+      var_0.model setscriptablepartstate("meter", "10");
+      var_1.activatedcircles[var_1.activatedcircles.size] = var_0;
+      var_1.boss._blackboard.desirednode = 0;
       self.automaticspawn = 0;
-      var_09 = var_01.boss.unlockedactions.size;
-      if(var_09 == 4) {
-        var_01.bossstate = "FRENZIED";
-        var_01.boss.showblood = 1;
+      var_9 = var_1.boss.unlockedactions.size;
+      if(var_9 == 4) {
+        var_1.bossstate = "FRENZIED";
+        var_1.boss.showblood = 1;
         level notify("restart_ammo_timer");
         level thread unlimited_max_ammo();
-        var_01.boss thread blinkweakspots();
+        var_1.boss thread blinkweakspots();
       } else {
-        var_01.boss.unlockedactions[var_09] = var_01.boss.specialactionnames[var_09];
+        var_1.boss.unlockedactions[var_9] = var_1.boss.specialactionnames[var_9];
       }
 
-      var_01.boss notify(var_02.section_complete_notify);
-      var_01.sectioncomplete = 1;
-      cleanupweakspot(var_01.activecircle);
-      var_01.boss setscriptablepartstate("circle_" + param_00.index, "destroyed");
-      playsoundatpos(var_07, "cp_final_meph_destroy_sign_explo");
+      var_1.boss notify(var_2.section_complete_notify);
+      var_1.sectioncomplete = 1;
+      cleanupweakspot(var_1.activecircle);
+      var_1.boss setscriptablepartstate("circle_" + var_0.index, "destroyed");
+      playsoundatpos(var_7, "cp_final_meph_destroy_sign_explo");
       break;
     }
   }
@@ -1178,24 +1178,24 @@ weakspotmonitor(param_00) {
 blinkweakspots() {
   self endon("last_stand");
   self endon("death");
-  var_00 = getbosstunedata();
-  var_01 = level.fbd;
-  var_02 = ["completed", "off", "on", "active"];
-  var_03 = [0, 0, 0, 0, 0];
+  var_0 = getbosstunedata();
+  var_1 = level.fbd;
+  var_2 = ["completed", "off", "on", "active"];
+  var_3 = [0, 0, 0, 0, 0];
   wait(1);
   for(;;) {
-    foreach(var_05 in var_01.circles) {
-      if(var_05.blinkable && randomfloat(1) < var_00.frenzied_blink_chance) {
-        var_06 = var_03[var_05.index] + randomint(var_02.size - 1) + 1 % var_02.size;
-        var_01.boss setscriptablepartstate("circle_" + var_05.index, var_02[var_06]);
-        if(var_02[var_06] != "completed") {
-          var_05.model setscriptablepartstate("symbol", var_02[var_06]);
+    foreach(var_5 in var_1.circles) {
+      if(var_5.blinkable && randomfloat(1) < var_0.frenzied_blink_chance) {
+        var_6 = var_3[var_5.index] + randomint(var_2.size - 1) + 1 % var_2.size;
+        var_1.boss setscriptablepartstate("circle_" + var_5.index, var_2[var_6]);
+        if(var_2[var_6] != "completed") {
+          var_5.model setscriptablepartstate("symbol", var_2[var_6]);
         } else {
-          var_05.model setscriptablepartstate("symbol", "complete");
+          var_5.model setscriptablepartstate("symbol", "complete");
         }
 
-        var_05.model setscriptablepartstate("meter", randomint(11));
-        var_03[var_05.index] = var_06;
+        var_5.model setscriptablepartstate("meter", randomint(11));
+        var_3[var_5.index] = var_6;
       }
     }
 
@@ -1204,60 +1204,60 @@ blinkweakspots() {
 }
 
 gointolaststand() {
-  var_00 = level.fbd;
-  var_01 = getbosstunedata();
+  var_0 = level.fbd;
+  var_1 = getbosstunedata();
   self.cantakedamage = 0;
-  var_00.bossstate = "LAST_STAND";
-  var_00.boss.laststandhealth = var_01.last_stand_health;
-  var_00.boss scripts\aitypes\dlc4_boss\behaviors::setnextaction("ground_vul");
+  var_0.bossstate = "LAST_STAND";
+  var_0.boss.laststandhealth = var_1.last_stand_health;
+  var_0.boss scripts\aitypes\dlc4_boss\behaviors::setnextaction("ground_vul");
   self notify("stop_blackhole");
   self.blackholetimer = undefined;
   self notify("pain");
   self notify("last_stand");
-  self.var_1198.painnotifytime = 100;
+  self._blackboard.painnotifytime = 100;
 }
 
 frenzyprogressmonitor() {
-  var_00 = level.fbd;
-  var_00.boss endon("death");
-  var_01 = getbosstunedata();
-  var_02 = var_01.frenzied_health;
-  for(var_03 = 0; var_03 < 5; var_03++) {
-    var_04 = int(1 * 4 - var_03 / 5 * var_02);
-    while(var_00.boss.frenziedhealth > var_04) {
+  var_0 = level.fbd;
+  var_0.boss endon("death");
+  var_1 = getbosstunedata();
+  var_2 = var_1.frenzied_health;
+  for(var_3 = 0; var_3 < 5; var_3++) {
+    var_4 = int(1 * 4 - var_3 / 5 * var_2);
+    while(var_0.boss.frenziedhealth > var_4) {
       wait(0.2);
     }
 
-    var_05 = var_00.activatedcircles[var_03];
-    var_05.blinkable = 0;
-    var_05.model setscriptablepartstate("symbol", "off");
-    var_05.model setscriptablepartstate("meter", "0");
-    var_00.boss setscriptablepartstate("circle_" + var_05.index, "active");
-    var_05.talisman setscriptablepartstate("effects", "charge_complete_raised");
-    var_06 = vectortoangles(var_00.boss.arenacenter - var_05.talisman.origin);
-    var_05.talisman movez(60, 1, 0.25, 0.25);
-    var_05.talisman rotateto((0, 0, 0) + var_06, 0.8);
-    thread talismanmovementmonitor(var_05.talisman);
+    var_5 = var_0.activatedcircles[var_3];
+    var_5.blinkable = 0;
+    var_5.model setscriptablepartstate("symbol", "off");
+    var_5.model setscriptablepartstate("meter", "0");
+    var_0.boss setscriptablepartstate("circle_" + var_5.index, "active");
+    var_5.talisman setscriptablepartstate("effects", "charge_complete_raised");
+    var_6 = vectortoangles(var_0.boss.arenacenter - var_5.talisman.origin);
+    var_5.talisman movez(60, 1, 0.25, 0.25);
+    var_5.talisman rotateto((0, 0, 0) + var_6, 0.8);
+    thread talismanmovementmonitor(var_5.talisman);
   }
 
   wait(2);
-  foreach(var_05 in var_00.circles) {
-    var_05.talisman setscriptablepartstate("effects", "charge_complete_pulsing");
-    var_05.model setscriptablepartstate("symbol", "on");
-    var_05.model setscriptablepartstate("meter", "10");
-    var_00.boss setscriptablepartstate("circle_" + var_05.index, "on");
-    scripts\cp\cp_interaction::add_to_current_interaction_list(var_05.interaction);
+  foreach(var_5 in var_0.circles) {
+    var_5.talisman setscriptablepartstate("effects", "charge_complete_pulsing");
+    var_5.model setscriptablepartstate("symbol", "on");
+    var_5.model setscriptablepartstate("meter", "10");
+    var_0.boss setscriptablepartstate("circle_" + var_5.index, "on");
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_5.interaction);
   }
 
-  var_00.circlesactivated = 0;
-  while(var_00.circlesactivated < 5) {
+  var_0.circlesactivated = 0;
+  while(var_0.circlesactivated < 5) {
     wait(0.1);
   }
 
-  var_09 = spawn("script_origin", var_00.boss.arenacenter + (0, 0, 300));
+  var_9 = spawn("script_origin", var_0.boss.arenacenter + (0, 0, 300));
   wait(0.5);
-  foreach(var_05 in var_00.circles) {
-    playFX(level._effect["talisman_flash"], var_05.talisman.origin);
+  foreach(var_5 in var_0.circles) {
+    playFX(level._effect["talisman_flash"], var_5.talisman.origin);
   }
 
   level notify("STOP_FRENZY_SPAWN");
@@ -1269,50 +1269,50 @@ frenzyprogressmonitor() {
 
     if(isalive(var_0D) && isDefined(var_0D.isactive) && var_0D.isactive) {
       var_0D.nodamagescale = 1;
-      var_0D dodamage(var_0D.health + 1000, var_00.boss.arenacenter);
+      var_0D dodamage(var_0D.health + 1000, var_0.boss.arenacenter);
     }
   }
 
-  var_09 playSound("cp_final_frenzy_laser_build_up");
+  var_9 playSound("cp_final_frenzy_laser_build_up");
   wait(3);
-  foreach(var_05 in var_00.circles) {
-    var_10 = self.origin + (0, 0, 250) - var_05.talisman.origin;
-    var_05.talisman rotateto(vectortoangles(var_10), 0.25, 0.08, 0.08);
+  foreach(var_5 in var_0.circles) {
+    var_10 = self.origin + (0, 0, 250) - var_5.talisman.origin;
+    var_5.talisman rotateto(vectortoangles(var_10), 0.25, 0.08, 0.08);
   }
 
   wait(0.3);
   level notify("KILL_TALISMAN_MOVEMENT");
-  playsoundatpos(var_00.boss.arenacenter + (0, 0, 300), "cp_final_frenzy_laser_beam_fire_npc_start");
-  var_09 playLoopSound("cp_final_frenzy_laser_beam_fire_npc_loop");
-  foreach(var_05 in var_00.circles) {
-    var_05.talisman thread activatetalismanbeam();
+  playsoundatpos(var_0.boss.arenacenter + (0, 0, 300), "cp_final_frenzy_laser_beam_fire_npc_start");
+  var_9 playLoopSound("cp_final_frenzy_laser_beam_fire_npc_loop");
+  foreach(var_5 in var_0.circles) {
+    var_5.talisman thread activatetalismanbeam();
   }
 
   gointolaststand();
   wait(2.5);
-  playsoundatpos(var_09.origin, "cp_final_frenzy_laser_beam_fire_npc_end");
-  var_09 delete();
-  foreach(var_05 in var_00.circles) {
-    playFX(level._effect["flying_soul_death"], var_05.talisman.origin);
-    var_00.boss setscriptablepartstate("circle_" + var_05.index, "destroyed");
-    var_05.talisman delete();
-    var_05.model setscriptablepartstate("symbol", "off");
-    var_05.model setscriptablepartstate("meter", "0");
+  playsoundatpos(var_9.origin, "cp_final_frenzy_laser_beam_fire_npc_end");
+  var_9 delete();
+  foreach(var_5 in var_0.circles) {
+    playFX(level._effect["flying_soul_death"], var_5.talisman.origin);
+    var_0.boss setscriptablepartstate("circle_" + var_5.index, "destroyed");
+    var_5.talisman delete();
+    var_5.model setscriptablepartstate("symbol", "off");
+    var_5.model setscriptablepartstate("meter", "0");
   }
 }
 
-talismanmovementmonitor(param_00) {
+talismanmovementmonitor(var_0) {
   level.fbd.boss endon("death");
   level endon("KILL_TALISMAN_MOVEMENT");
-  var_01 = 1.5;
-  var_02 = 4;
-  var_03 = 3;
+  var_1 = 1.5;
+  var_2 = 4;
+  var_3 = 3;
   wait(1);
   for(;;) {
-    param_00 movez(var_02, var_01, var_01 / var_03, var_01 / var_03);
-    wait(var_01);
-    param_00 movez(0 - var_02, var_01, var_01 / var_03, var_01 / var_03);
-    wait(var_01);
+    var_0 movez(var_2, var_1, var_1 / var_3, var_1 / var_3);
+    wait(var_1);
+    var_0 movez(0 - var_2, var_1, var_1 / var_3, var_1 / var_3);
+    wait(var_1);
   }
 }
 
@@ -1323,7 +1323,7 @@ activatetalismanbeam() {
 }
 
 victory() {
-  var_00 = level.fbd;
+  var_0 = level.fbd;
   level.dlc4_boss stoploopsound();
   thread killbomb();
   level.fbd.victory = 1;
@@ -1339,13 +1339,13 @@ killbomb() {
   wait(0.1);
   playsoundatpos(level.fbd.boss.arenacenter + (0, 0, 450), "cp_final_meph_final_soul_bomb_diffuse");
   playFX(level._effect["soul_bomb_die"], level.fbd.boss.arenacenter + (0, 0, 450));
-  var_00 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
-  foreach(var_02 in var_00) {
-    if(var_02 == level.dlc4_boss) {
+  var_0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+  foreach(var_2 in var_0) {
+    if(var_2 == level.dlc4_boss) {
       continue;
     }
 
-    var_02 dodamage(var_02.health + 1000, var_02.origin);
+    var_2 dodamage(var_2.health + 1000, var_2.origin);
   }
 
   level.meph_battle_over = 1;
@@ -1355,22 +1355,22 @@ getbosstunedata() {
   return level.agenttunedata["dlc4_boss"];
 }
 
-meph_consumable_check(param_00) {
-  if(param_00 == "secret_service" || param_00 == "anywhere_but_here") {
+meph_consumable_check(var_0) {
+  if(var_0 == "secret_service" || var_0 == "anywhere_but_here") {
     return 0;
   }
 
-  if(isDefined(self.consumables) && isDefined(self.consumables[param_00]) && isDefined(self.consumables[param_00].on) && self.consumables[param_00].on == 1) {
+  if(isDefined(self.consumables) && isDefined(self.consumables[var_0]) && isDefined(self.consumables[var_0].on) && self.consumables[var_0].on == 1) {
     return 1;
   }
 
   return 0;
 }
 
-meph_intermission_func(param_00) {
+meph_intermission_func(var_0) {
   self.forcespawnorigin = level.dlc4_boss.arenacenter + (-250, 0, 500);
   self.forcespawnangles = (60, 0, 0);
-  var_01 = self.forcespawnangles;
+  var_1 = self.forcespawnangles;
   scripts\cp\cp_globallogic::spawnplayer();
   self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);

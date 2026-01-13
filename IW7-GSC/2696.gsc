@@ -5,17 +5,17 @@
 
 init() {
   level.softlandingtriggers = getEntArray("trigger_multiple_softlanding", "classname");
-  var_00 = getEntArray("destructible_vehicle", "targetname");
+  var_0 = getEntArray("destructible_vehicle", "targetname");
 
-  foreach(var_02 in level.softlandingtriggers) {
+  foreach(var_2 in level.softlandingtriggers) {
     if(var_2.script_type != "car") {
       continue;
     }
-    foreach(var_04 in var_00) {
+    foreach(var_4 in var_0) {
       if(distance(var_2.origin, var_4.origin) > 64.0) {
         continue;
       }
-      var_2.destructible = var_04;
+      var_2.destructible = var_4;
     }
   }
 
@@ -24,17 +24,17 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
+    level waittill("connected", var_0);
     var_0.softlanding = undefined;
-    var_00 thread softlandingwaiter();
+    var_0 thread softlandingwaiter();
   }
 }
 
-playerentersoftlanding(var_00) {
-  self.softlanding = var_00;
+playerentersoftlanding(var_0) {
+  self.softlanding = var_0;
 }
 
-playerleavesoftlanding(var_00) {
+playerleavesoftlanding(var_0) {
   self.softlanding = undefined;
 }
 
@@ -42,7 +42,7 @@ softlandingwaiter() {
   self endon("disconnect");
 
   for(;;) {
-    self waittill("soft_landing", var_00, var_01);
+    self waittill("soft_landing", var_0, var_1);
 
     if(!isDefined(var_0.destructible)) {
       continue;

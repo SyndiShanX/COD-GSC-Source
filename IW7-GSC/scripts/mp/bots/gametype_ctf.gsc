@@ -18,26 +18,26 @@ setup_bot_ctf() {
   scripts\mp\bots\_bots_util::bot_waittill_bots_enabled();
   level.teamflags["allies"].label = "allies";
   level.teamflags["axis"].label = "axis";
-  var_00[0] = level.teamflags["allies"].curorigin;
-  var_01[0] = "flag_" + level.teamflags["allies"].label;
-  var_00[1] = level.teamflags["axis"].curorigin;
-  var_01[1] = "flag_" + level.teamflags["axis"].label;
-  scripts\mp\bots\_bots_util::func_2D18(var_00, var_01);
-  var_02 = getzonenearest(level.teamflags["allies"].curorigin);
-  if(isDefined(var_02)) {
-    botzonesetteam(var_02, "allies");
+  var_0[0] = level.teamflags["allies"].curorigin;
+  var_1[0] = "flag_" + level.teamflags["allies"].label;
+  var_0[1] = level.teamflags["axis"].curorigin;
+  var_1[1] = "flag_" + level.teamflags["axis"].label;
+  scripts\mp\bots\_bots_util::func_2D18(var_0, var_1);
+  var_2 = getzonenearest(level.teamflags["allies"].curorigin);
+  if(isDefined(var_2)) {
+    botzonesetteam(var_2, "allies");
   }
 
-  var_02 = getzonenearest(level.teamflags["axis"].curorigin);
-  if(isDefined(var_02)) {
-    botzonesetteam(var_02, "axis");
+  var_2 = getzonenearest(level.teamflags["axis"].curorigin);
+  if(isDefined(var_2)) {
+    botzonesetteam(var_2, "axis");
   }
 
   level.bot_gametype_precaching_done = 1;
 }
 
-crate_can_use(param_00) {
-  if(isagent(self) && !isDefined(param_00.boxtype)) {
+crate_can_use(var_0) {
+  if(isagent(self) && !isDefined(var_0.boxtype)) {
     return 0;
   }
 
@@ -53,22 +53,22 @@ crate_can_use(param_00) {
 }
 
 func_46BE() {
-  var_00 = 0;
-  foreach(var_02 in level.participants) {
-    if(!isDefined(var_02.team)) {
+  var_0 = 0;
+  foreach(var_2 in level.participants) {
+    if(!isDefined(var_2.team)) {
       continue;
     }
 
-    if(var_02 == self) {
+    if(var_2 == self) {
       continue;
     }
 
-    if(scripts\mp\utility::isteamparticipant(var_02) && var_02.team == self.team) {
-      var_00++;
+    if(scripts\mp\utility::isteamparticipant(var_2) && var_2.team == self.team) {
+      var_0++;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 bot_ctf_think() {
@@ -112,10 +112,10 @@ bot_ctf_think() {
         self botclearscriptgoal();
         self botsetscriptgoal(level.var_6E28[level.otherteam[self.team]].origin, 256, "guard");
       } else if(gettime() > self.var_BF3E) {
-        var_00 = getnodesinradius(level.capzones[self.team].curorigin, 900, 0, 300);
-        var_01 = self botnodepick(var_00, var_00.size * 0.15, "node_hide");
-        if(isDefined(var_01)) {
-          self botsetscriptgoalnode(var_01, "critical");
+        var_0 = getnodesinradius(level.capzones[self.team].curorigin, 900, 0, 300);
+        var_1 = self botnodepick(var_0, var_0.size * 0.15, "node_hide");
+        if(isDefined(var_1)) {
+          self botsetscriptgoalnode(var_1, "critical");
         }
 
         self.var_BF3E = gettime() + 10000;
@@ -142,10 +142,10 @@ bot_ctf_think() {
         clear_defend();
         self botsetscriptgoal(level.teamflags[self.team].curorigin, 16, "critical");
       } else {
-        var_02 = level.var_6E28[level.otherteam[self.team]];
-        if(gettime() > self.var_BF69 || self botcanseeentity(var_02)) {
+        var_2 = level.var_6E28[level.otherteam[self.team]];
+        if(gettime() > self.var_BF69 || self botcanseeentity(var_2)) {
           clear_defend();
-          self botsetscriptgoal(var_02.origin, 16, "critical");
+          self botsetscriptgoal(var_2.origin, 16, "critical");
           self.var_BF69 = gettime() + randomintrange(4500, 5500);
         }
       }
@@ -155,8 +155,8 @@ bot_ctf_think() {
 
     if(!is_protecting_flag()) {
       self botclearscriptgoal();
-      var_03["entrance_points_index"] = "flag_" + level.teamflags[self.team].label;
-      scripts\mp\bots\_bots_strategy::bot_protect_point(level.teamflags[self.team].curorigin, 600, var_03);
+      var_3["entrance_points_index"] = "flag_" + level.teamflags[self.team].label;
+      scripts\mp\bots\_bots_strategy::bot_protect_point(level.teamflags[self.team].curorigin, 600, var_3);
     }
   }
 }
@@ -197,53 +197,53 @@ init_bot_game_ctf() {
 func_12DC1() {
   level.var_6E28["allies"] = undefined;
   level.var_6E28["axis"] = undefined;
-  foreach(var_01 in level.participants) {
-    if(isalive(var_01) && isDefined(var_01.carryflag)) {
-      level.var_6E28[var_01.team] = var_01;
+  foreach(var_1 in level.participants) {
+    if(isalive(var_1) && isDefined(var_1.carryflag)) {
+      level.var_6E28[var_1.team] = var_1;
     }
   }
 
-  var_03 = [];
-  var_04 = [];
-  var_05 = [];
-  var_06 = [];
-  foreach(var_01 in level.participants) {
-    if(isDefined(var_01.role)) {
-      if(var_01.team == "allies") {
-        if(var_01.role == "attacker") {
-          var_03[var_03.size] = var_01;
-        } else if(var_01.role == "defender") {
-          var_04[var_04.size] = var_01;
+  var_3 = [];
+  var_4 = [];
+  var_5 = [];
+  var_6 = [];
+  foreach(var_1 in level.participants) {
+    if(isDefined(var_1.role)) {
+      if(var_1.team == "allies") {
+        if(var_1.role == "attacker") {
+          var_3[var_3.size] = var_1;
+        } else if(var_1.role == "defender") {
+          var_4[var_4.size] = var_1;
         }
 
         continue;
       }
 
-      if(var_01.team == "axis") {
-        if(var_01.role == "attacker") {
-          var_05[var_05.size] = var_01;
+      if(var_1.team == "axis") {
+        if(var_1.role == "attacker") {
+          var_5[var_5.size] = var_1;
           continue;
         }
 
-        if(var_01.role == "defender") {
-          var_06[var_06.size] = var_01;
+        if(var_1.role == "defender") {
+          var_6[var_6.size] = var_1;
         }
       }
     }
   }
 
-  if(var_04.size > var_03.size) {
-    scripts\engine\utility::random(var_04).role = undefined;
-  } else if(var_03.size > var_04.size + 1) {
-    scripts\engine\utility::random(var_03).role = undefined;
+  if(var_4.size > var_3.size) {
+    scripts\engine\utility::random(var_4).role = undefined;
+  } else if(var_3.size > var_4.size + 1) {
+    scripts\engine\utility::random(var_3).role = undefined;
   }
 
-  if(var_06.size > var_05.size) {
-    scripts\engine\utility::random(var_06).role = undefined;
+  if(var_6.size > var_5.size) {
+    scripts\engine\utility::random(var_6).role = undefined;
     return;
   }
 
-  if(var_05.size > var_06.size + 1) {
-    scripts\engine\utility::random(var_05).role = undefined;
+  if(var_5.size > var_6.size + 1) {
+    scripts\engine\utility::random(var_5).role = undefined;
   }
 }

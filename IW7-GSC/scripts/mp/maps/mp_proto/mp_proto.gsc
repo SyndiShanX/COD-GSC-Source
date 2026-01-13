@@ -28,28 +28,28 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("clip128x128x128", "targetname");
-  var_01 = spawn("script_model", (-820, -112, 508));
-  var_01.angles = (0, 0, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player128x128x256", "targetname");
-  var_03 = spawn("script_model", (-820, -112, 636));
-  var_03.angles = (0, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player32x32x8", "targetname");
-  var_05 = spawn("script_model", (-540, 1062, 748));
-  var_05.angles = (75, 0, 0);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = spawn("script_model", (-335.5, 508.5, 538));
-  var_06.angles = (351, 135, 161);
-  var_06 setModel("mp_proto_snow_chunk_01_patch");
-  var_07 = spawn("script_model", (-372.5, 553.5, 538));
-  var_07.angles = (351, 209, 161);
-  var_07 setModel("mp_proto_snow_chunk_01_patch");
-  var_08 = getent("player128x128x256", "targetname");
-  var_09 = spawn("script_model", (-2019.5, -160.5, 1024));
-  var_09.angles = (0, 56, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("clip128x128x128", "targetname");
+  var_1 = spawn("script_model", (-820, -112, 508));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player128x128x256", "targetname");
+  var_3 = spawn("script_model", (-820, -112, 636));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player32x32x8", "targetname");
+  var_5 = spawn("script_model", (-540, 1062, 748));
+  var_5.angles = (75, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = spawn("script_model", (-335.5, 508.5, 538));
+  var_6.angles = (351, 135, 161);
+  var_6 setModel("mp_proto_snow_chunk_01_patch");
+  var_7 = spawn("script_model", (-372.5, 553.5, 538));
+  var_7.angles = (351, 209, 161);
+  var_7 setModel("mp_proto_snow_chunk_01_patch");
+  var_8 = getent("player128x128x256", "targetname");
+  var_9 = spawn("script_model", (-2019.5, -160.5, 1024));
+  var_9.angles = (0, 56, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player64x64x128", "targetname");
   var_0B = spawn("script_model", (1528, 940, 1040));
   var_0B.angles = (285, 270, 90);
@@ -82,18 +82,18 @@ fix_collision() {
   var_16 clonebrushmodeltoscriptmodel(var_15);
 }
 
-kill_trigger_loop(param_00) {
+kill_trigger_loop(var_0) {
   for(;;) {
-    self waittill("trigger", var_01);
-    if(isDefined(var_01) && isDefined(var_01.classname) && var_01.classname == param_00) {
-      if(isDefined(var_01.streakname)) {
-        if(var_01.streakname == "minijackal") {
-          var_01 notify("minijackal_end");
+    self waittill("trigger", var_1);
+    if(isDefined(var_1) && isDefined(var_1.classname) && var_1.classname == var_0) {
+      if(isDefined(var_1.streakname)) {
+        if(var_1.streakname == "minijackal") {
+          var_1 notify("minijackal_end");
           continue;
         }
 
-        if(var_01.streakname == "venom") {
-          var_01 notify("venom_end", var_01.origin);
+        if(var_1.streakname == "venom") {
+          var_1 notify("venom_end", var_1.origin);
         }
       }
     }
@@ -101,34 +101,34 @@ kill_trigger_loop(param_00) {
 }
 
 func_9284() {
-  var_00 = 17;
+  var_0 = 17;
   level.var_9285 = getEntArray("ice_drill", "targetname");
-  foreach(var_03, var_02 in level.var_9285) {
-    var_02 thread func_E6FD(var_00 * level.var_9285.size - var_03);
+  foreach(var_3, var_2 in level.var_9285) {
+    var_2 thread func_E6FD(var_0 * level.var_9285.size - var_3);
   }
 }
 
-func_E6FD(param_00) {
+func_E6FD(var_0) {
   level endon("stop drill");
   for(;;) {
-    self rotatepitch(360, param_00, 0, 0);
-    wait(param_00);
+    self rotatepitch(360, var_0, 0, 0);
+    wait(var_0);
   }
 }
 
 spawn_oob_trigger() {
   wait(1);
-  var_00 = spawn("trigger_radius", (0, -760, -1000), 0, 700, 400);
-  var_00 hide();
-  level.var_C7B3[level.var_C7B3.size] = var_00;
+  var_0 = spawn("trigger_radius", (0, -760, -1000), 0, 700, 400);
+  var_0 hide();
+  level.var_C7B3[level.var_C7B3.size] = var_0;
 }
 
 runmodespecifictriggers() {
   if(level.gametype == "ball" || level.gametype == "tdef") {
     wait(1);
-    var_00 = spawn("trigger_radius", (2497, 734, 465), 0, 80, 20);
-    var_00.var_336 = "uplink_nozone";
-    var_00 hide();
-    level.nozonetriggers[level.nozonetriggers.size] = var_00;
+    var_0 = spawn("trigger_radius", (2497, 734, 465), 0, 80, 20);
+    var_0.var_336 = "uplink_nozone";
+    var_0 hide();
+    level.nozonetriggers[level.nozonetriggers.size] = var_0;
   }
 }

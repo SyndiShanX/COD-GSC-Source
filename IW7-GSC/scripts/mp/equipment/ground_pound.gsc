@@ -8,7 +8,7 @@ init() {
   groundpound_initimpactstructs();
 }
 
-func_8659(param_00) {
+func_8659(var_0) {
   self allowgroundpound(1);
   thread func_8654();
   thread groundpound_monitoractivation();
@@ -28,8 +28,8 @@ func_8654() {
   self endon("disconnect");
   self endon("groundPound_unset");
   for(;;) {
-    self waittill("groundPoundLand", var_00);
-    thread groundpound_impact(self, var_00);
+    self waittill("groundPoundLand", var_0);
+    thread groundpound_impact(self, var_0);
     scripts\mp\utility::printgameaction("ground pound land", self);
   }
 }
@@ -44,153 +44,153 @@ groundpound_monitoractivation() {
   }
 }
 
-groundpound_activate(param_00) {
-  param_00 setscriptablepartstate("groundPound", "activated");
+groundpound_activate(var_0) {
+  var_0 setscriptablepartstate("groundPound", "activated");
 }
 
-groundpound_impact(param_00, param_01) {
-  param_00 setclientomnvar("ui_hud_shake", 1);
-  param_00 setscriptablepartstate("groundPound", "impact");
-  var_02 = groundpound_getbestimpactstruct(param_01);
-  if(!isDefined(var_02)) {
+groundpound_impact(var_0, var_1) {
+  var_0 setclientomnvar("ui_hud_shake", 1);
+  var_0 setscriptablepartstate("groundPound", "impact");
+  var_2 = groundpound_getbestimpactstruct(var_1);
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var_03 = param_00.origin + (0, 0, 2);
-  thread groundpound_impactphysics(var_03, var_02.physicsradmin, var_02.physicsradmax, var_02.physicsscale);
-  if(isDefined(var_02.stopfxontag)) {
-    var_04 = spawn("script_model", var_03);
-    var_04.angles = param_00.angles;
-    var_04.triggerportableradarping = param_00;
-    var_04.weapon_name = "groundpound_mp";
-    var_04.impactstruct = var_02;
-    var_04.killcament = param_00;
-    var_04 setentityowner(param_00);
-    var_04 setotherent(param_00);
-    var_04 setModel(var_02.stopfxontag);
-    if(isDefined(var_02.updategamerprofileall) && isDefined(var_02.var_10E2C)) {
-      var_04 setscriptablepartstate(var_02.updategamerprofileall, var_02.var_10E2C);
+  var_3 = var_0.origin + (0, 0, 2);
+  thread groundpound_impactphysics(var_3, var_2.physicsradmin, var_2.physicsradmax, var_2.physicsscale);
+  if(isDefined(var_2.stopfxontag)) {
+    var_4 = spawn("script_model", var_3);
+    var_4.angles = var_0.angles;
+    var_4.triggerportableradarping = var_0;
+    var_4.weapon_name = "groundpound_mp";
+    var_4.impactstruct = var_2;
+    var_4.killcament = var_0;
+    var_4 setentityowner(var_0);
+    var_4 setotherent(var_0);
+    var_4 setModel(var_2.stopfxontag);
+    if(isDefined(var_2.updategamerprofileall) && isDefined(var_2.var_10E2C)) {
+      var_4 setscriptablepartstate(var_2.updategamerprofileall, var_2.var_10E2C);
     }
 
-    if(isDefined(var_02.deletiondelay)) {
-      wait(var_02.deletiondelay);
+    if(isDefined(var_2.deletiondelay)) {
+      wait(var_2.deletiondelay);
     } else {
       scripts\engine\utility::waitframe();
     }
 
-    var_04 delete();
+    var_4 delete();
   }
 }
 
-groundpound_impactphysics(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_01) || param_01 == 0) {
+groundpound_impactphysics(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1) || var_1 == 0) {
     return;
   }
 
-  if(!isDefined(param_02) || param_02 == 0) {
+  if(!isDefined(var_2) || var_2 == 0) {
     return;
   }
 
-  if(!isDefined(param_03) || param_03 == 0) {
+  if(!isDefined(var_3) || var_3 == 0) {
     return;
   }
 
   wait(0.1);
-  physicsexplosionsphere(param_00, param_02, param_01, param_03);
+  physicsexplosionsphere(var_0, var_2, var_1, var_3);
 }
 
-groundpound_victimimpacteffects(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00)) {
+groundpound_victimimpacteffects(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(param_00 == param_01) {
+  if(var_0 == var_1) {
     return;
   }
 
-  if(param_01 scripts\mp\utility::isusingremote()) {
+  if(var_1 scripts\mp\utility::isusingremote()) {
     return;
   }
 
-  if(!isDefined(param_03)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var_04 = param_03.impactstruct;
-  if(!isDefined(var_04)) {
+  var_4 = var_3.impactstruct;
+  if(!isDefined(var_4)) {
     return;
   }
 
-  if(!isDefined(var_04.shock) || var_04.shock == "") {
+  if(!isDefined(var_4.shock) || var_4.shock == "") {
     return;
   }
 
-  if(!isDefined(var_04.shockduration) || var_04.shockduration == 0) {
+  if(!isDefined(var_4.shockduration) || var_4.shockduration == 0) {
     return;
   }
 
-  param_01 shellshock(var_04.shock, var_04.shockduration);
+  var_1 shellshock(var_4.shock, var_4.shockduration);
 }
 
-func_8653(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_02) || param_02 != "groundpound_mp") {
-    return param_04;
+func_8653(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2) || var_2 != "groundpound_mp") {
+    return var_4;
   }
 
-  if(!isplayer(param_01)) {
-    return param_04;
+  if(!isplayer(var_1)) {
+    return var_4;
   }
 
-  if(!isDefined(param_00)) {
-    return param_04;
+  if(!isDefined(var_0)) {
+    return var_4;
   }
 
-  if(param_00 == param_01) {
+  if(var_0 == var_1) {
     return 0;
   }
 
-  if(!isDefined(param_03)) {
-    return param_04;
+  if(!isDefined(var_3)) {
+    return var_4;
   }
 
-  var_05 = param_03.impactstruct;
-  if(!isDefined(var_05)) {
-    return param_04;
+  var_5 = var_3.impactstruct;
+  if(!isDefined(var_5)) {
+    return var_4;
   }
 
-  var_06 = scripts\engine\utility::ter_op(level.hardcoremode, var_05.innerradsqrhc, var_05.innerradsqr);
-  var_07 = scripts\engine\utility::ter_op(level.hardcoremode, var_05.innerdamagehc, var_05.innerdamage);
-  var_08 = scripts\engine\utility::ter_op(level.hardcoremode, var_05.outerdamagehc, var_05.outerdamage);
-  var_09 = param_01 scripts\mp\utility::isinarbitraryup();
-  var_0A = scripts\engine\utility::ter_op(var_09, self gettagorigin("TAG_EYE", 1, 1), self gettagorigin("TAG_EYE"));
-  var_0B = abs(vectordot(var_0A - param_03.origin, (0, 0, 1)));
-  var_0C = scripts\engine\utility::ter_op(var_09, self gettagorigin("TAG_ORIGIN", 1, 1), self gettagorigin("TAG_ORIGIN"));
-  var_0D = abs(vectordot(var_0C - param_03.origin, (0, 0, 1)));
-  if(var_0B > var_05.maxzdelta && var_0D > var_05.maxzdelta) {
+  var_6 = scripts\engine\utility::ter_op(level.hardcoremode, var_5.innerradsqrhc, var_5.innerradsqr);
+  var_7 = scripts\engine\utility::ter_op(level.hardcoremode, var_5.innerdamagehc, var_5.innerdamage);
+  var_8 = scripts\engine\utility::ter_op(level.hardcoremode, var_5.outerdamagehc, var_5.outerdamage);
+  var_9 = var_1 scripts\mp\utility::isinarbitraryup();
+  var_0A = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_EYE", 1, 1), self gettagorigin("TAG_EYE"));
+  var_0B = abs(vectordot(var_0A - var_3.origin, (0, 0, 1)));
+  var_0C = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_ORIGIN", 1, 1), self gettagorigin("TAG_ORIGIN"));
+  var_0D = abs(vectordot(var_0C - var_3.origin, (0, 0, 1)));
+  if(var_0B > var_5.maxzdelta && var_0D > var_5.maxzdelta) {
     return 0;
   }
 
-  var_0E = var_06 != 0;
+  var_0E = var_6 != 0;
   if(var_0E) {
-    var_0E = var_06 < 0;
+    var_0E = var_6 < 0;
     if(!var_0E) {
       if(!var_0E) {
-        var_0F = distancesquared(param_03.origin, param_01.origin);
-        if(var_0F <= var_06) {
+        var_0F = distancesquared(var_3.origin, var_1.origin);
+        if(var_0F <= var_6) {
           var_0E = 1;
         }
       }
 
       if(!var_0E) {
-        var_0F = distancesquared(param_03.origin, param_01 gettagorigin("j_mainroot"));
-        if(var_0F <= var_06) {
+        var_0F = distancesquared(var_3.origin, var_1 gettagorigin("j_mainroot"));
+        if(var_0F <= var_6) {
           var_0E = 1;
         }
       }
 
       if(!var_0E) {
-        var_0F = distancesquared(param_03.origin, param_01 getEye());
-        if(var_0F <= var_06) {
+        var_0F = distancesquared(var_3.origin, var_1 getEye());
+        if(var_0F <= var_6) {
           var_0E = 1;
         }
       }
@@ -198,115 +198,115 @@ func_8653(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(var_0E) {
-    param_04 = scripts\engine\utility::ter_op(var_07 > 0, var_07, param_04);
-    if(!param_01 isonground()) {
-      param_04 = param_04 * 1;
+    var_4 = scripts\engine\utility::ter_op(var_7 > 0, var_7, var_4);
+    if(!var_1 isonground()) {
+      var_4 = var_4 * 1;
     }
 
-    return param_04;
+    return var_4;
   }
 
-  param_04 = scripts\engine\utility::ter_op(var_08 > 0, var_08, param_04);
-  if(!param_01 isonground()) {
-    param_04 = param_04 * 1;
+  var_4 = scripts\engine\utility::ter_op(var_8 > 0, var_8, var_4);
+  if(!var_1 isonground()) {
+    var_4 = var_4 * 1;
   }
 
-  return param_04;
+  return var_4;
 }
 
-groundpound_modifiedblastshieldconst(param_00, param_01) {
+groundpound_modifiedblastshieldconst(var_0, var_1) {
   if(level.hardcoremode) {
-    if(scripts\mp\utility::getweaponbasedsmokegrenadecount(param_01) == "groundpound_mp") {
-      param_00 = 0.65;
+    if(scripts\mp\utility::getweaponbasedsmokegrenadecount(var_1) == "groundpound_mp") {
+      var_0 = 0.65;
     }
   }
 
-  return param_00;
+  return var_0;
 }
 
-func_8651(param_00) {
-  return param_00 _meth_8499();
+func_8651(var_0) {
+  return var_0 _meth_8499();
 }
 
 groundpound_initimpactstructs() {
-  var_00 = spawnStruct();
-  var_00.impactstructs = [];
-  var_01 = groundpound_createimpactstruct();
-  var_00.impactstructs[var_00.impactstructs.size] = var_01;
-  var_01 = groundpound_createimpactstruct();
-  var_01.var_B783 = 150;
-  var_01.innerradsqr = 5625;
-  var_01.innerradsqr = 5625;
-  var_01.var_10E2C = "impact2";
-  var_01.physicsradmax = 150;
-  var_01.physicsscale = 2.5;
-  var_00.impactstructs[var_00.impactstructs.size] = var_01;
-  var_01 = groundpound_createimpactstruct();
-  var_01.var_B783 = 225;
-  var_01.innerradsqr = -1;
-  var_01.innerradsqrhc = -1;
-  var_01.var_10E2C = "impact3";
-  var_01.physicsradmax = 225;
-  var_01.physicsscale = 3;
-  var_00.impactstructs[var_00.impactstructs.size] = var_01;
-  var_01 = groundpound_createimpactstruct();
-  var_01.var_B783 = 325;
-  var_01.innerradsqr = -1;
-  var_01.innerradsqrhc = -1;
-  var_01.var_10E2C = "impact4";
-  var_01.physicsradmax = 275;
-  var_01.physicsscale = 3.5;
-  var_00.impactstructs[var_00.impactstructs.size] = var_01;
-  var_01 = groundpound_createimpactstruct();
-  var_01.var_B783 = 425;
-  var_01.innerradsqr = -1;
-  var_01.innerradsqrhc = -1;
-  var_01.var_10E2C = "impact5";
-  var_01.physicsradmax = 325;
-  var_01.physicsscale = 4;
-  var_00.impactstructs[var_00.impactstructs.size] = var_01;
-  var_00.impactstructs = scripts\engine\utility::array_sort_with_func(var_00.impactstructs, ::groundpound_compareimpactstruct);
-  level.groundpound = var_00;
+  var_0 = spawnStruct();
+  var_0.impactstructs = [];
+  var_1 = groundpound_createimpactstruct();
+  var_0.impactstructs[var_0.impactstructs.size] = var_1;
+  var_1 = groundpound_createimpactstruct();
+  var_1.var_B783 = 150;
+  var_1.innerradsqr = 5625;
+  var_1.innerradsqr = 5625;
+  var_1.var_10E2C = "impact2";
+  var_1.physicsradmax = 150;
+  var_1.physicsscale = 2.5;
+  var_0.impactstructs[var_0.impactstructs.size] = var_1;
+  var_1 = groundpound_createimpactstruct();
+  var_1.var_B783 = 225;
+  var_1.innerradsqr = -1;
+  var_1.innerradsqrhc = -1;
+  var_1.var_10E2C = "impact3";
+  var_1.physicsradmax = 225;
+  var_1.physicsscale = 3;
+  var_0.impactstructs[var_0.impactstructs.size] = var_1;
+  var_1 = groundpound_createimpactstruct();
+  var_1.var_B783 = 325;
+  var_1.innerradsqr = -1;
+  var_1.innerradsqrhc = -1;
+  var_1.var_10E2C = "impact4";
+  var_1.physicsradmax = 275;
+  var_1.physicsscale = 3.5;
+  var_0.impactstructs[var_0.impactstructs.size] = var_1;
+  var_1 = groundpound_createimpactstruct();
+  var_1.var_B783 = 425;
+  var_1.innerradsqr = -1;
+  var_1.innerradsqrhc = -1;
+  var_1.var_10E2C = "impact5";
+  var_1.physicsradmax = 325;
+  var_1.physicsscale = 4;
+  var_0.impactstructs[var_0.impactstructs.size] = var_1;
+  var_0.impactstructs = scripts\engine\utility::array_sort_with_func(var_0.impactstructs, ::groundpound_compareimpactstruct);
+  level.groundpound = var_0;
 }
 
 groundpound_createimpactstruct() {
-  var_00 = spawnStruct();
-  var_00.var_B783 = 48;
-  var_00.maxzdelta = 125;
-  var_00.innerradsqr = 0;
-  var_00.innerradsqrhc = 0;
-  var_00.innerdamage = 105;
-  var_00.outerdamage = 55;
-  var_00.innerdamagehc = 35;
-  var_00.outerdamagehc = 20;
-  var_00.stopfxontag = "perk_mp_groundPound_scr";
-  var_00.updategamerprofileall = "effects";
-  var_00.var_10E2C = "impact1";
-  var_00.deletiondelay = 2;
-  var_00.physicsradmin = 75;
-  var_00.physicsradmax = 100;
-  var_00.physicsscale = 2;
-  var_00.shock = "concussion_grenade_mp";
-  var_00.shockduration = 0.7;
-  return var_00;
+  var_0 = spawnStruct();
+  var_0.var_B783 = 48;
+  var_0.maxzdelta = 125;
+  var_0.innerradsqr = 0;
+  var_0.innerradsqrhc = 0;
+  var_0.innerdamage = 105;
+  var_0.outerdamage = 55;
+  var_0.innerdamagehc = 35;
+  var_0.outerdamagehc = 20;
+  var_0.stopfxontag = "perk_mp_groundPound_scr";
+  var_0.updategamerprofileall = "effects";
+  var_0.var_10E2C = "impact1";
+  var_0.deletiondelay = 2;
+  var_0.physicsradmin = 75;
+  var_0.physicsradmax = 100;
+  var_0.physicsscale = 2;
+  var_0.shock = "concussion_grenade_mp";
+  var_0.shockduration = 0.7;
+  return var_0;
 }
 
-groundpound_compareimpactstruct(param_00, param_01) {
-  return param_00.var_B783 > param_01.var_B783;
+groundpound_compareimpactstruct(var_0, var_1) {
+  return var_0.var_B783 > var_1.var_B783;
 }
 
-groundpound_getbestimpactstruct(param_00) {
-  var_01 = undefined;
-  foreach(var_03 in level.groundpound.impactstructs) {
-    if(param_00 < var_03.var_B783) {
+groundpound_getbestimpactstruct(var_0) {
+  var_1 = undefined;
+  foreach(var_3 in level.groundpound.impactstructs) {
+    if(var_0 < var_3.var_B783) {
       continue;
     }
 
-    var_01 = var_03;
+    var_1 = var_3;
     break;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_8655(param_00, param_01, param_02, param_03) {}
+func_8655(var_0, var_1, var_2, var_3) {}

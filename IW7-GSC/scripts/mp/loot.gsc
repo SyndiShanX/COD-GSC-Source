@@ -7,133 +7,133 @@
 init() {
   level.lootweaponcache = [];
   level.lootweaponrefs = [];
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_00, 0);
-    if(!isDefined(var_01) || var_01 == "") {
+    var_1 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_0, 0);
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var_01 = int(var_01);
-    var_02 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_00, 1);
-    level.lootweaponrefs[var_01] = var_02;
-    var_00++;
+    var_1 = int(var_1);
+    var_2 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_0, 1);
+    level.lootweaponrefs[var_1] = var_2;
+    var_0++;
   }
 }
 
-getpassivesforweapon(param_00) {
-  if(isplayer(self) && weaponhasprestigenuke(param_00)) {
+getpassivesforweapon(var_0) {
+  if(isplayer(self) && weaponhasprestigenuke(var_0)) {
     return ["passive_nuke"];
   }
 
-  var_01 = getlootinfoforweapon(param_00);
-  if(isDefined(var_01)) {
-    return var_01.passives;
+  var_1 = getlootinfoforweapon(var_0);
+  if(isDefined(var_1)) {
+    return var_1.passives;
   }
 
   return undefined;
 }
 
-getlootinfoforweapon(param_00) {
-  var_01 = getweaponvariantindex(param_00);
-  if(!isDefined(var_01)) {
+getlootinfoforweapon(var_0) {
+  var_1 = getweaponvariantindex(var_0);
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  var_02 = scripts\mp\utility::getweaponrootname(param_00);
-  if(isDefined(level.lootweaponcache[var_02]) && isDefined(level.lootweaponcache[var_02][var_01])) {
-    var_03 = level.lootweaponcache[var_02][var_01];
-    return var_03;
+  var_2 = scripts\mp\utility::getweaponrootname(var_0);
+  if(isDefined(level.lootweaponcache[var_2]) && isDefined(level.lootweaponcache[var_2][var_1])) {
+    var_3 = level.lootweaponcache[var_2][var_1];
+    return var_3;
   }
 
-  var_03 = cachelootweaponweaponinfo(var_01, var_03, var_02);
-  if(isDefined(var_03)) {
-    return var_03;
+  var_3 = cachelootweaponweaponinfo(var_1, var_3, var_2);
+  if(isDefined(var_3)) {
+    return var_3;
   }
 
   return undefined;
 }
 
-getweaponassetfromrootweapon(param_00, param_01) {
-  var_02 = "mp\loot\weapon\" + param_00 + ".csv ";
-  var_03 = tablelookup(var_02, 0, param_01, 3);
-  return var_03;
+getweaponassetfromrootweapon(var_0, var_1) {
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_3 = tablelookup(var_2, 0, var_1, 3);
+  return var_3;
 }
 
-lookupvariantref(param_00, param_01) {
-  var_02 = "mp\loot\weapon\" + param_00 + ".csv ";
-  var_03 = tablelookup(var_02, 0, param_01, 1);
-  return var_03;
+lookupvariantref(var_0, var_1) {
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_3 = tablelookup(var_2, 0, var_1, 1);
+  return var_3;
 }
 
-isweaponitem(param_00) {
-  return param_00 >= 1 && param_00 <= 9999;
+isweaponitem(var_0) {
+  return var_0 >= 1 && var_0 <= 9999;
 }
 
-iskillstreakitem(param_00) {
-  return param_00 >= 10000 && param_00 <= 19999;
+iskillstreakitem(var_0) {
+  return var_0 >= 10000 && var_0 <= 19999;
 }
 
-ispoweritem(param_00) {
-  return param_00 >= 20000 && param_00 <= 29999;
+ispoweritem(var_0) {
+  return var_0 >= 20000 && var_0 <= 29999;
 }
 
-isconsumableitem(param_00) {
-  return param_00 >= 30000 && param_00 <= -25537;
+isconsumableitem(var_0) {
+  return var_0 >= 30000 && var_0 <= -25537;
 }
 
-iscosmeticitem(param_00) {
-  return param_00 >= -25536 && param_00 <= -15537;
+iscosmeticitem(var_0) {
+  return var_0 >= -25536 && var_0 <= -15537;
 }
 
-cachelootweaponweaponinfo(param_00, param_01, param_02) {
-  if(!isDefined(level.lootweaponcache[param_01])) {
-    level.lootweaponcache[param_01] = [];
+cachelootweaponweaponinfo(var_0, var_1, var_2) {
+  if(!isDefined(level.lootweaponcache[var_1])) {
+    level.lootweaponcache[var_1] = [];
   }
 
-  var_03 = getweaponloottable(param_00);
-  var_04 = readweaponinfofromtable(var_03, param_02);
-  level.lootweaponcache[param_01][param_02] = var_04;
-  return var_04;
+  var_3 = getweaponloottable(var_0);
+  var_4 = readweaponinfofromtable(var_3, var_2);
+  level.lootweaponcache[var_1][var_2] = var_4;
+  return var_4;
 }
 
-readweaponinfofromtable(param_00, param_01) {
-  var_02 = tablelookuprownum(param_00, 0, param_01);
-  var_03 = spawnStruct();
-  var_03.ref = tablelookupbyrow(param_00, var_02, 1);
-  var_03.weaponasset = tablelookupbyrow(param_00, var_02, 1);
-  var_03.passives = [];
-  for(var_04 = 0; var_04 < 3; var_04++) {
-    var_05 = tablelookupbyrow(param_00, var_02, 5 + var_04);
-    if(isDefined(var_05) && var_05 != "") {
-      var_03.passives[var_03.passives.size] = var_05;
+readweaponinfofromtable(var_0, var_1) {
+  var_2 = tablelookuprownum(var_0, 0, var_1);
+  var_3 = spawnStruct();
+  var_3.ref = tablelookupbyrow(var_0, var_2, 1);
+  var_3.weaponasset = tablelookupbyrow(var_0, var_2, 1);
+  var_3.passives = [];
+  for(var_4 = 0; var_4 < 3; var_4++) {
+    var_5 = tablelookupbyrow(var_0, var_2, 5 + var_4);
+    if(isDefined(var_5) && var_5 != "") {
+      var_3.passives[var_3.passives.size] = var_5;
     }
   }
 
-  var_03.quality = int(tablelookupbyrow(param_00, var_02, 4));
-  var_03.variantid = param_01;
-  return var_03;
+  var_3.quality = int(tablelookupbyrow(var_0, var_2, 4));
+  var_3.variantid = var_1;
+  return var_3;
 }
 
-getweaponqualitybyid(param_00, param_01) {
-  if(!isDefined(param_01) || param_01 < 0) {
+getweaponqualitybyid(var_0, var_1) {
+  if(!isDefined(var_1) || var_1 < 0) {
     return 0;
   }
 
-  var_02 = getweaponloottable(param_00);
-  var_03 = int(tablelookup(var_02, 0, param_01, 4));
-  return var_03;
+  var_2 = getweaponloottable(var_0);
+  var_3 = int(tablelookup(var_2, 0, var_1, 4));
+  return var_3;
 }
 
-getlootweaponref(param_00) {
-  return level.lootweaponrefs[param_00];
+getlootweaponref(var_0) {
+  return level.lootweaponrefs[var_0];
 }
 
-weaponhasprestigenuke(param_00) {
-  var_01 = scripts\mp\utility::getweaponrootname(param_00);
-  var_02 = var_01 + "_nuke";
-  if(isDefined(level.prestigeextras[var_02])) {
-    return self isitemunlocked(var_02, "prestigeExtras", 1);
+weaponhasprestigenuke(var_0) {
+  var_1 = scripts\mp\utility::getweaponrootname(var_0);
+  var_2 = var_1 + "_nuke";
+  if(isDefined(level.prestigeextras[var_2])) {
+    return self isitemunlocked(var_2, "prestigeExtras", 1);
   }
 
   return 0;

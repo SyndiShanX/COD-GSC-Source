@@ -33,30 +33,30 @@ func_E254() {
 }
 
 func_6A61() {
-  var_00 = self getEye();
-  var_01 = self getplayerangles();
-  var_02 = anglesToForward(var_01);
-  var_03 = var_00 + var_02 * 15000;
-  var_04 = bulletTrace(var_00, var_03, 0, undefined);
-  if(var_04["surfacetype"] == "none") {
+  var_0 = self getEye();
+  var_1 = self getplayerangles();
+  var_2 = anglesToForward(var_1);
+  var_3 = var_0 + var_2 * 15000;
+  var_4 = bulletTrace(var_0, var_3, 0, undefined);
+  if(var_4["surfacetype"] == "none") {
     return undefined;
   }
 
-  if(var_04["surfacetype"] == "default") {
+  if(var_4["surfacetype"] == "default") {
     return undefined;
   }
 
-  var_05 = var_04["entity"];
-  if(isDefined(var_05)) {
-    if(var_05 == level.ac130.planemodel) {
+  var_5 = var_4["entity"];
+  if(isDefined(var_5)) {
+    if(var_5 == level.ac130.planemodel) {
       return undefined;
     }
   }
 
-  var_06 = [];
-  var_06[0] = var_04["position"];
-  var_06[1] = var_04["normal"];
-  return var_06;
+  var_6 = [];
+  var_6[0] = var_4["position"];
+  var_6[1] = var_4["normal"];
+  return var_6;
 }
 
 func_AF27() {
@@ -73,39 +73,39 @@ func_AF25() {
 }
 
 func_AF26() {
-  var_00 = 4;
-  if(isDefined(self.var_A43E) && self.var_A43E >= var_00) {
+  var_0 = 4;
+  if(isDefined(self.var_A43E) && self.var_A43E >= var_0) {
     return 1;
   }
 
   return 0;
 }
 
-func_11579(param_00) {
-  var_01 = 1100;
-  var_02 = distance(self.origin, param_00);
-  if(var_02 < var_01) {
+func_11579(var_0) {
+  var_1 = 1100;
+  var_2 = distance(self.origin, var_0);
+  if(var_2 < var_1) {
     return 1;
   }
 
   return 0;
 }
 
-func_B061(param_00, param_01) {
+func_B061(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("stop_lockon_sound");
   for(;;) {
-    self playlocalsound(param_00);
-    wait(param_01);
+    self playlocalsound(var_0);
+    wait(var_1);
   }
 }
 
-func_11A03(param_00, param_01) {
-  var_02 = param_00 + param_01 * 10;
-  var_03 = var_02 + (0, 0, 2000);
-  var_04 = bulletTrace(var_02, var_03, 0, undefined);
-  if(sighttracepassed(var_02, var_03, 0, undefined)) {
+func_11A03(var_0, var_1) {
+  var_2 = var_0 + var_1 * 10;
+  var_3 = var_2 + (0, 0, 2000);
+  var_4 = bulletTrace(var_2, var_3, 0, undefined);
+  if(sighttracepassed(var_2, var_3, 0, undefined)) {
     return 1;
   }
 
@@ -116,19 +116,19 @@ func_A448() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  var_00 = 1150;
-  var_01 = 25;
-  var_02 = 100;
-  var_03 = 400;
-  var_04 = 12;
-  var_05 = 0;
-  var_06 = 0;
+  var_0 = 1150;
+  var_1 = 25;
+  var_2 = 100;
+  var_3 = 400;
+  var_4 = 12;
+  var_5 = 0;
+  var_6 = 0;
   self.var_A445 = undefined;
   func_9887();
   for(;;) {
     wait(0.05);
-    var_07 = self getcurrentweapon();
-    if((isbot(self) && var_07 != "javelin_mp") || !issubstr(var_07, "javelin") || scripts\mp\killstreaks\_emp_common::isemped()) {
+    var_7 = self getcurrentweapon();
+    if((isbot(self) && var_7 != "javelin_mp") || !issubstr(var_7, "javelin") || scripts\mp\killstreaks\_emp_common::isemped()) {
       if(isDefined(self.var_A449)) {
         func_E254();
       }
@@ -137,19 +137,19 @@ func_A448() {
     }
 
     if(self getweaponrankinfominxp() < 0.95) {
-      var_06 = gettime();
+      var_6 = gettime();
       func_E254();
       continue;
     }
 
-    var_08 = 0;
+    var_8 = 0;
     if(getdvar("missileDebugDraw") == "1") {
-      var_08 = 1;
+      var_8 = 1;
     }
 
-    var_09 = 0;
+    var_9 = 0;
     if(getdvar("missileDebugText") == "1") {
-      var_09 = 1;
+      var_9 = 1;
     }
 
     self.var_A449 = 1;
@@ -174,7 +174,7 @@ func_A448() {
             continue;
           }
 
-          if(var_09) {}
+          if(var_9) {}
 
           self.var_A445 = var_10[0];
           if(!isDefined(self.var_A43F)) {
@@ -183,7 +183,7 @@ func_A448() {
 
           self.var_A444 = 2;
           self.var_A441 = 0;
-          func_A440(var_00);
+          func_A440(var_0);
           self.var_A444 = 1;
           continue;
         }
@@ -194,17 +194,17 @@ func_A448() {
         continue;
       }
 
-      var_11 = gettime() - var_06;
-      if(var_11 < var_02) {
+      var_11 = gettime() - var_6;
+      if(var_11 < var_2) {
         continue;
       }
 
-      var_11 = gettime() - var_05;
-      if(var_11 < var_01) {
+      var_11 = gettime() - var_5;
+      if(var_11 < var_1) {
         continue;
       }
 
-      var_05 = gettime();
+      var_5 = gettime();
       var_15 = func_6A61();
       if(!isDefined(var_15)) {
         func_AF25();
@@ -221,7 +221,7 @@ func_A448() {
       if(isDefined(self.var_A443)) {
         var_16 = averagepoint(self.var_A443);
         var_17 = distance(var_16, var_15[0]);
-        if(var_17 > var_03) {
+        if(var_17 > var_3) {
           func_AF25();
           continue;
         }
@@ -233,7 +233,7 @@ func_A448() {
       self.var_A443[self.var_A443.size] = var_15[0];
       self.var_A442[self.var_A442.size] = var_15[1];
       func_AF27();
-      if(self.var_A443.size < var_04) {
+      if(self.var_A443.size < var_4) {
         continue;
       }
 
@@ -262,7 +262,7 @@ func_A448() {
       }
 
       var_11 = gettime() - self.var_A43F;
-      if(var_11 < var_00) {
+      if(var_11 < var_0) {
         continue;
       }
 
@@ -290,35 +290,35 @@ func_A448() {
   }
 }
 
-func_4F53(param_00, param_01, param_02) {}
+func_4F53(var_0, var_1, var_2) {}
 
-func_13263(param_00) {
-  var_01 = self getEye();
-  var_02 = param_00 getpointinbounds(0, 0, 0);
-  var_03 = sighttracepassed(var_01, var_02, 0, param_00);
-  func_4F53(var_01, var_02, var_03);
-  if(var_03) {
+func_13263(var_0) {
+  var_1 = self getEye();
+  var_2 = var_0 getpointinbounds(0, 0, 0);
+  var_3 = sighttracepassed(var_1, var_2, 0, var_0);
+  func_4F53(var_1, var_2, var_3);
+  if(var_3) {
     return 1;
   }
 
-  var_04 = param_00 getpointinbounds(1, 0, 0);
-  var_03 = sighttracepassed(var_01, var_04, 0, param_00);
-  func_4F53(var_01, var_04, var_03);
-  if(var_03) {
+  var_4 = var_0 getpointinbounds(1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_4, 0, var_0);
+  func_4F53(var_1, var_4, var_3);
+  if(var_3) {
     return 1;
   }
 
-  var_05 = param_00 getpointinbounds(-1, 0, 0);
-  var_03 = sighttracepassed(var_01, var_05, 0, param_00);
-  func_4F53(var_01, var_05, var_03);
-  if(var_03) {
+  var_5 = var_0 getpointinbounds(-1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_5, 0, var_0);
+  func_4F53(var_1, var_5, var_3);
+  if(var_3) {
     return 1;
   }
 
   return 0;
 }
 
-func_A440(param_00) {
+func_A440(var_0) {
   if(self.var_A444 == 2) {
     self weaponlockstart(self.var_A445);
     if(!func_10F9B(self.var_A445)) {
@@ -327,8 +327,8 @@ func_A440(param_00) {
       return;
     }
 
-    var_01 = softsighttest();
-    if(!var_01) {
+    var_1 = softsighttest();
+    if(!var_1) {
       self.var_A43F = undefined;
       return;
     }
@@ -338,12 +338,12 @@ func_A440(param_00) {
       self.var_4BF3 = 1;
     }
 
-    var_02 = gettime() - self.var_A43F;
+    var_2 = gettime() - self.var_A43F;
     if(scripts\mp\utility::_hasperk("specialty_fasterlockon")) {
-      if(var_02 < param_00 * 0.5) {
+      if(var_2 < var_0 * 0.5) {
         return;
       }
-    } else if(var_02 < param_00) {
+    } else if(var_2 < var_0) {
       return;
     }
 
@@ -363,8 +363,8 @@ func_A440(param_00) {
   }
 
   if(self.var_A444 == 3) {
-    var_01 = softsighttest();
-    if(!var_01) {
+    var_1 = softsighttest();
+    if(!var_1) {
       return;
     }
 
@@ -375,12 +375,12 @@ func_A440(param_00) {
   }
 }
 
-func_10F9B(param_00) {
-  if(!isDefined(param_00)) {
+func_10F9B(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!self worldpointinreticle_circle(param_00.origin, 65, 85)) {
+  if(!self worldpointinreticle_circle(var_0.origin, 65, 85)) {
     return 0;
   }
 
@@ -388,7 +388,7 @@ func_10F9B(param_00) {
 }
 
 softsighttest() {
-  var_00 = 500;
+  var_0 = 500;
   if(func_13263(self.var_A445)) {
     self.var_A441 = 0;
     return 1;
@@ -398,8 +398,8 @@ softsighttest() {
     self.var_A441 = gettime();
   }
 
-  var_01 = gettime() - self.var_A441;
-  if(var_01 >= var_00) {
+  var_1 = gettime() - self.var_A441;
+  if(var_1 >= var_0) {
     func_E254();
     return 0;
   }

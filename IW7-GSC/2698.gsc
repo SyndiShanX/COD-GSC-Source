@@ -20,22 +20,22 @@ init_reverb() {
   add_reverb("default", "generic", 0.15, 0.9, 2);
 }
 
-add_reverb(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = [];
-  is_roomtype_valid(var_01);
-  var_5["roomtype"] = var_01;
-  var_5["wetlevel"] = var_02;
-  var_5["drylevel"] = var_03;
-  var_5["fadetime"] = var_04;
-  level.audio.reverb_settings[var_00] = var_05;
+add_reverb(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
+  is_roomtype_valid(var_1);
+  var_5["roomtype"] = var_1;
+  var_5["wetlevel"] = var_2;
+  var_5["drylevel"] = var_3;
+  var_5["fadetime"] = var_4;
+  level.audio.reverb_settings[var_0] = var_5;
 }
 
-is_roomtype_valid(var_00) {}
+is_roomtype_valid(var_0) {}
 
-apply_reverb(var_00) {
-  if(!isDefined(level.audio.reverb_settings[var_00])) {
-    var_01 = level.audio.reverb_settings["default"];
+apply_reverb(var_0) {
+  if(!isDefined(level.audio.reverb_settings[var_0])) {
+    var_1 = level.audio.reverb_settings["default"];
   } else {
-    var_01 = level.audio.reverb_settings[var_00];
+    var_1 = level.audio.reverb_settings[var_0];
   }
 }

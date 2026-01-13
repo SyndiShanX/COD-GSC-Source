@@ -10,9 +10,9 @@ init() {
   level._effect["vfx_screen_flash"] = loadfx("vfx\core\mp\core\vfx_screen_flash");
 }
 
-func_E154(param_00) {
+func_E154(var_0) {
   if(scripts\mp\utility::istrue(self.phaseshift_active)) {
-    if(!scripts\mp\utility::istrue(param_00)) {
+    if(!scripts\mp\utility::istrue(var_0)) {
       if(scripts\mp\utility::_hasperk("specialty_ftlslide")) {
         if(scripts\mp\utility::isanymlgmatch() && level.tactical) {
           self setsuit("assassin_mlgslide_mp_tactical");
@@ -63,9 +63,9 @@ func_E88D() {
   return 0;
 }
 
-func_6626(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 4;
+func_6626(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 4;
   }
 
   self setsuit("assassin_mp_phase");
@@ -76,7 +76,7 @@ func_6626(param_00, param_01) {
   self visionsetnakedforplayer("phase_shift_mp", 0.1);
   self playlocalsound("ftl_phase_out");
   self playSound("ftl_phase_out_npc");
-  func_2A71(self, param_01);
+  func_2A71(self, var_1);
   self _meth_82C0("phaseshift_mp_shock", 0.1);
   scripts\engine\utility::allow_offhand_weapons(0);
   scripts\mp\equipment\peripheral_vision::func_CA2A();
@@ -100,92 +100,92 @@ restartweaponvfx() {
   self endon("disconnect");
   self notify("startWeaponVFX");
   self endon("restartWeaponVFX");
-  var_00 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::clearweaponscriptvfx(var_00, scripts\mp\utility::istrue(self _meth_8519(var_00)));
+  var_0 = self getcurrentprimaryweapon();
+  scripts\mp\weapons::clearweaponscriptvfx(var_0, scripts\mp\utility::istrue(self _meth_8519(var_0)));
   scripts\engine\utility::waitframe();
-  var_00 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::runweaponscriptvfx(var_00, scripts\mp\utility::istrue(self _meth_8519(var_00)));
+  var_0 = self getcurrentprimaryweapon();
+  scripts\mp\weapons::runweaponscriptvfx(var_0, scripts\mp\utility::istrue(self _meth_8519(var_0)));
 }
 
-exitphaseshift(param_00) {}
+exitphaseshift(var_0) {}
 
-func_10918(param_00) {
-  var_01 = spawn("script_model", self.origin);
-  var_01 setModel("tag_origin");
+func_10918(var_0) {
+  var_1 = spawn("script_model", self.origin);
+  var_1 setModel("tag_origin");
   if(getdvarint("bg_thirdPerson") == 0) {
-    var_01 hidefromplayer(self);
+    var_1 hidefromplayer(self);
   }
 
   wait(0.1);
-  playfxontagforteam(scripts\engine\utility::getfx(param_00 + "_friendly"), var_01, "tag_origin", self.team);
-  playfxontagforteam(scripts\engine\utility::getfx(param_00), var_01, "tag_origin", scripts\mp\utility::getotherteam(self.team));
+  playfxontagforteam(scripts\engine\utility::getfx(var_0 + "_friendly"), var_1, "tag_origin", self.team);
+  playfxontagforteam(scripts\engine\utility::getfx(var_0), var_1, "tag_origin", scripts\mp\utility::getotherteam(self.team));
   wait(0.15);
-  var_01 delete();
+  var_1 delete();
 }
 
-func_108EE(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = spawn("script_model", param_01.origin);
-  var_05.angles = param_01.angles;
-  var_05 setModel("tag_origin");
-  var_05.triggerportableradarping = param_01;
-  var_05.var_CACB = param_02;
-  var_05.var_762C = param_00;
+func_108EE(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", var_1.origin);
+  var_5.angles = var_1.angles;
+  var_5 setModel("tag_origin");
+  var_5.triggerportableradarping = var_1;
+  var_5.var_CACB = var_2;
+  var_5.var_762C = var_0;
   wait(0.1);
-  if(param_01 == param_02) {
-    playfxontagforteam(param_00, var_05, "tag_origin", param_03);
-    var_05 hidefromplayer(param_02);
+  if(var_1 == var_2) {
+    playfxontagforteam(var_0, var_5, "tag_origin", var_3);
+    var_5 hidefromplayer(var_2);
   } else {
-    playfxontagforclients(param_00, var_05, "tag_origin", param_02);
+    playfxontagforclients(var_0, var_5, "tag_origin", var_2);
   }
 
-  var_05 thread func_12EEA(param_04);
+  var_5 thread func_12EEA(var_4);
 }
 
-func_2A71(param_00, param_01) {
-  var_02 = undefined;
-  if(param_00.team == "allies") {
-    var_02 = "axis";
-  } else if(param_00.team == "axis") {
-    var_02 = "allies";
-  } else {}
+func_2A71(var_0, var_1) {
+  var_2 = undefined;
+  if(var_0.team == "allies") {
+    var_2 = "axis";
+  } else if(var_0.team == "axis") {
+    var_2 = "allies";
+  }
 
-  thread func_108EE(scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"), param_00, param_00, var_02, param_01);
-  var_03 = scripts\engine\utility::ter_op(level.teambased, scripts\engine\utility::getfx("vfx_phase_shift_trail_friendly"), scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"));
-  thread func_108EE(var_03, param_00, param_00, param_00.team, param_01);
-  foreach(var_05 in level.players) {
-    if(var_05 == param_00) {
+  thread func_108EE(scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"), var_0, var_0, var_2, var_1);
+  var_3 = scripts\engine\utility::ter_op(level.teambased, scripts\engine\utility::getfx("vfx_phase_shift_trail_friendly"), scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"));
+  thread func_108EE(var_3, var_0, var_0, var_0.team, var_1);
+  foreach(var_5 in level.players) {
+    if(var_5 == var_0) {
       continue;
     }
 
-    var_06 = scripts\engine\utility::ter_op(level.teambased && var_05.team == param_00.team, scripts\engine\utility::getfx("vfx_phase_shift_trail_friendly"), scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"));
-    thread func_108EE(var_06, var_05, param_00, param_00.team, param_01);
+    var_6 = scripts\engine\utility::ter_op(level.teambased && var_5.team == var_0.team, scripts\engine\utility::getfx("vfx_phase_shift_trail_friendly"), scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"));
+    thread func_108EE(var_6, var_5, var_0, var_0.team, var_1);
   }
 }
 
-func_12EEA(param_00) {
-  var_01 = 0;
-  var_02 = 0.15;
+func_12EEA(var_0) {
+  var_1 = 0;
+  var_2 = 0.15;
   for(;;) {
-    if(!isDefined(self) || !isDefined(self.triggerportableradarping) || !scripts\mp\utility::isreallyalive(self.triggerportableradarping) || !isDefined(self.var_CACB) || !scripts\mp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_01 > param_00) {
+    if(!isDefined(self) || !isDefined(self.triggerportableradarping) || !scripts\mp\utility::isreallyalive(self.triggerportableradarping) || !isDefined(self.var_CACB) || !scripts\mp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_1 > var_0) {
       self.origin = self.origin + (0, 0, 10000);
       wait(0.2);
       self delete();
       return;
     }
 
-    var_01 = var_01 + var_02;
+    var_1 = var_1 + var_2;
     if(self.var_CACB == self.triggerportableradarping) {
-      foreach(var_04 in level.players) {
-        if(!areentitiesinphase(var_04, self.triggerportableradarping)) {
-          self showtoplayer(var_04);
+      foreach(var_4 in level.players) {
+        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
+          self showtoplayer(var_4);
           continue;
         }
 
-        self hidefromplayer(var_04);
+        self hidefromplayer(var_4);
       }
     } else {
-      foreach(var_04 in level.players) {
-        if(!areentitiesinphase(var_04, self.triggerportableradarping)) {
+      foreach(var_4 in level.players) {
+        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
           self showtoplayer(self.triggerportableradarping);
           continue;
         }
@@ -194,37 +194,37 @@ func_12EEA(param_00) {
       }
     }
 
-    self moveto(self.triggerportableradarping.origin, var_02);
-    wait(var_02);
+    self moveto(self.triggerportableradarping.origin, var_2);
+    wait(var_2);
   }
 }
 
-isentityphaseshifted(param_00) {
-  if(!isDefined(param_00)) {
+isentityphaseshifted(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = (isplayer(param_00) || isagent(param_00)) && param_00 isinphase();
-  var_02 = isDefined(param_00.var_FF03) && param_00.var_FF03 == 1;
-  return var_01 || var_02;
+  var_1 = (isplayer(var_0) || isagent(var_0)) && var_0 isinphase();
+  var_2 = isDefined(var_0.var_FF03) && var_0.var_FF03 == 1;
+  return var_1 || var_2;
 }
 
-areentitiesinphase(param_00, param_01) {
-  var_02 = isentityphaseshifted(param_00);
-  var_03 = isentityphaseshifted(param_01);
-  return (var_02 && var_03) || !var_03 && !var_02;
+areentitiesinphase(var_0, var_1) {
+  var_2 = isentityphaseshifted(var_0);
+  var_3 = isentityphaseshifted(var_1);
+  return (var_2 && var_3) || !var_3 && !var_2;
 }
 
-func_F7E3(param_00) {
-  return self setphasestatus(param_00);
+func_F7E3(var_0) {
+  return self setphasestatus(var_0);
 }
 
-func_4524(param_00) {
+func_4524(var_0) {
   self endon("death");
   self endon("disconnect");
   self notify("confuseBotsOnTeleport");
   self endon("confuseBotsOnTeleport");
   scripts\mp\utility::_enableignoreme();
-  wait(param_00);
+  wait(var_0);
   scripts\mp\utility::_disableignoreme();
 }

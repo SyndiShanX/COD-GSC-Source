@@ -35,41 +35,41 @@ init() {
   level._effect["antenna_light_mp"] = loadfx("vfx\core\lights\light_detonator_blink");
 }
 
-func_128FC(param_00, param_01) {
-  var_02 = func_128FF(param_00, "mg_turret");
-  if(var_02) {
+func_128FC(var_0, var_1) {
+  var_2 = func_128FF(var_0, "mg_turret");
+  if(var_2) {
     scripts\mp\matchdata::logkillstreakevent(level.var_12A8D["mg_turret"].streakname, self.origin);
   }
 
   self.iscarrying = 0;
-  return var_02;
+  return var_2;
 }
 
-func_1146D(param_00) {
-  scripts\mp\utility::_takeweapon(level.var_12A8D[param_00].var_A84D);
-  scripts\mp\utility::_takeweapon(level.var_12A8D[param_00].remotedetonatethink);
+func_1146D(var_0) {
+  scripts\mp\utility::_takeweapon(level.var_12A8D[var_0].var_A84D);
+  scripts\mp\utility::_takeweapon(level.var_12A8D[var_0].remotedetonatethink);
 }
 
-func_128FF(param_00, param_01) {
+func_128FF(var_0, var_1) {
   if(scripts\mp\utility::isusingremote()) {
     return 0;
   }
 
-  var_02 = func_4A2C(param_01, self);
+  var_2 = func_4A2C(var_1, self);
   removeperks();
-  func_F68B(var_02, 1);
+  func_F68B(var_2, 1);
   thread restoreperks();
-  if(isDefined(var_02)) {
+  if(isDefined(var_2)) {
     return 1;
   }
 
   return 0;
 }
 
-func_F68B(param_00, param_01) {
+func_F68B(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
-  param_00 func_12A2C(self);
+  var_0 func_12A2C(self);
   scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_turret", "+attack");
   self notifyonplayercommand("place_turret", "+attack_akimbo_accessible");
@@ -81,30 +81,30 @@ func_F68B(param_00, param_01) {
   }
 
   for(;;) {
-    var_02 = scripts\engine\utility::waittill_any_return("place_turret", "cancel_turret", "force_cancel_placement");
-    if(var_02 == "cancel_turret" || var_02 == "force_cancel_placement") {
-      if(var_02 == "cancel_turret" && !param_01) {
+    var_2 = scripts\engine\utility::waittill_any_return("place_turret", "cancel_turret", "force_cancel_placement");
+    if(var_2 == "cancel_turret" || var_2 == "force_cancel_placement") {
+      if(var_2 == "cancel_turret" && !var_1) {
         continue;
       }
 
       if(level.console) {
-        var_03 = scripts\mp\utility::getkillstreakweapon(level.var_12A8D[param_00.var_12A9A].streakname);
-        if(isDefined(self.var_A6A1) && var_03 == scripts\mp\utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
-          scripts\mp\utility::_giveweapon(var_03, 0);
-          scripts\mp\utility::_setactionslot(4, "weapon", var_03);
+        var_3 = scripts\mp\utility::getkillstreakweapon(level.var_12A8D[var_0.var_12A9A].streakname);
+        if(isDefined(self.var_A6A1) && var_3 == scripts\mp\utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
+          scripts\mp\utility::_giveweapon(var_3, 0);
+          scripts\mp\utility::_setactionslot(4, "weapon", var_3);
         }
       }
 
-      param_00 func_12A2B();
+      var_0 func_12A2B();
       scripts\engine\utility::allow_weapon(1);
       return 0;
     }
 
-    if(!param_00.canbeplaced) {
+    if(!var_0.canbeplaced) {
       continue;
     }
 
-    param_00 func_12A2E();
+    var_0 func_12A2E();
     scripts\engine\utility::allow_weapon(1);
     return 1;
   }
@@ -133,27 +133,27 @@ waitrestoreperks() {
 }
 
 removeweapons() {
-  foreach(var_01 in self.weaponlist) {
-    var_02 = strtok(var_01, "_");
-    if(var_02[0] == "alt") {
-      self.restoreweaponclipammo[var_01] = self getweaponammoclip(var_01);
-      self.var_E2E9[var_01] = self getweaponammostock(var_01);
+  foreach(var_1 in self.weaponlist) {
+    var_2 = strtok(var_1, "_");
+    if(var_2[0] == "alt") {
+      self.restoreweaponclipammo[var_1] = self getweaponammoclip(var_1);
+      self.var_E2E9[var_1] = self getweaponammostock(var_1);
       continue;
     }
 
-    self.restoreweaponclipammo[var_01] = self getweaponammoclip(var_01);
-    self.var_E2E9[var_01] = self getweaponammostock(var_01);
+    self.restoreweaponclipammo[var_1] = self getweaponammoclip(var_1);
+    self.var_E2E9[var_1] = self getweaponammostock(var_1);
   }
 
   self.var_13CD2 = [];
-  foreach(var_01 in self.weaponlist) {
-    var_02 = strtok(var_01, "_");
-    if(var_02[0] == "alt") {
+  foreach(var_1 in self.weaponlist) {
+    var_2 = strtok(var_1, "_");
+    if(var_2[0] == "alt") {
       continue;
     }
 
-    self.var_13CD2[self.var_13CD2.size] = var_01;
-    scripts\mp\utility::_takeweapon(var_01);
+    self.var_13CD2[self.var_13CD2.size] = var_1;
+    scripts\mp\utility::_takeweapon(var_1);
   }
 }
 
@@ -162,31 +162,31 @@ restoreweapons() {
     return;
   }
 
-  var_00 = [];
-  foreach(var_02 in self.var_13CD2) {
-    var_03 = strtok(var_02, "_");
-    if(var_03[0] == "alt") {
-      var_00[var_00.size] = var_02;
+  var_0 = [];
+  foreach(var_2 in self.var_13CD2) {
+    var_3 = strtok(var_2, "_");
+    if(var_3[0] == "alt") {
+      var_0[var_0.size] = var_2;
       continue;
     }
 
-    scripts\mp\utility::_giveweapon(var_02);
-    if(isDefined(self.restoreweaponclipammo[var_02])) {
-      self setweaponammoclip(var_02, self.restoreweaponclipammo[var_02]);
+    scripts\mp\utility::_giveweapon(var_2);
+    if(isDefined(self.restoreweaponclipammo[var_2])) {
+      self setweaponammoclip(var_2, self.restoreweaponclipammo[var_2]);
     }
 
-    if(isDefined(self.var_E2E9[var_02])) {
-      self setweaponammostock(var_02, self.var_E2E9[var_02]);
+    if(isDefined(self.var_E2E9[var_2])) {
+      self setweaponammostock(var_2, self.var_E2E9[var_2]);
     }
   }
 
-  foreach(var_06 in var_00) {
-    if(isDefined(self.restoreweaponclipammo[var_06])) {
-      self setweaponammoclip(var_06, self.restoreweaponclipammo[var_06]);
+  foreach(var_6 in var_0) {
+    if(isDefined(self.restoreweaponclipammo[var_6])) {
+      self setweaponammoclip(var_6, self.restoreweaponclipammo[var_6]);
     }
 
-    if(isDefined(self.var_E2E9[var_06])) {
-      self setweaponammostock(var_06, self.var_E2E9[var_06]);
+    if(isDefined(self.var_E2E9[var_6])) {
+      self setweaponammostock(var_6, self.var_E2E9[var_6]);
     }
   }
 
@@ -227,55 +227,55 @@ func_12A2B() {
   self delete();
 }
 
-func_12A2C(param_00) {
+func_12A2C(var_0) {
   self setModel(level.var_12A8D[self.var_12A9A].modelplacement);
   self setCanDamage(0);
-  self setsentrycarrier(param_00);
+  self setsentrycarrier(var_0);
   self setcontents(0);
-  self.carriedby = param_00;
-  param_00.iscarrying = 1;
-  param_00 thread func_12F4F(self);
-  thread func_12A16(param_00);
-  thread func_12A17(param_00);
-  thread func_12A15(param_00);
+  self.carriedby = var_0;
+  var_0.iscarrying = 1;
+  var_0 thread func_12F4F(self);
+  thread func_12A16(var_0);
+  thread func_12A17(var_0);
+  thread func_12A15(var_0);
   thread func_12A18();
   self setdefaultdroppitch(-89);
   func_12A2D();
   self notify("carried");
 }
 
-func_12F4F(param_00) {
+func_12F4F(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  param_00 endon("placed");
-  param_00 endon("death");
-  param_00.canbeplaced = 1;
-  var_01 = -1;
+  var_0 endon("placed");
+  var_0 endon("death");
+  var_0.canbeplaced = 1;
+  var_1 = -1;
   for(;;) {
-    var_02 = self canplayerplacesentry();
-    param_00.origin = var_02["origin"];
-    param_00.angles = var_02["angles"];
-    param_00.canbeplaced = self isonground() && var_02["result"] && abs(param_00.origin[2] - self.origin[2]) < 10;
-    if(param_00.canbeplaced != var_01) {
-      if(param_00.canbeplaced) {
-        param_00 setModel(level.var_12A8D[param_00.var_12A9A].modelplacement);
-        self forceusehinton(level.var_12A8D[param_00.var_12A9A].placestring);
+    var_2 = self canplayerplacesentry();
+    var_0.origin = var_2["origin"];
+    var_0.angles = var_2["angles"];
+    var_0.canbeplaced = self isonground() && var_2["result"] && abs(var_0.origin[2] - self.origin[2]) < 10;
+    if(var_0.canbeplaced != var_1) {
+      if(var_0.canbeplaced) {
+        var_0 setModel(level.var_12A8D[var_0.var_12A9A].modelplacement);
+        self forceusehinton(level.var_12A8D[var_0.var_12A9A].placestring);
       } else {
-        param_00 setModel(level.var_12A8D[param_00.var_12A9A].modelplacementfailed);
-        self forceusehinton(level.var_12A8D[param_00.var_12A9A].cannotplacestring);
+        var_0 setModel(level.var_12A8D[var_0.var_12A9A].modelplacementfailed);
+        self forceusehinton(level.var_12A8D[var_0.var_12A9A].cannotplacestring);
       }
     }
 
-    var_01 = param_00.canbeplaced;
+    var_1 = var_0.canbeplaced;
     wait(0.05);
   }
 }
 
-func_12A16(param_00) {
+func_12A16(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 waittill("death");
+  var_0 waittill("death");
   if(self.canbeplaced) {
     func_12A2E();
     return;
@@ -284,48 +284,48 @@ func_12A16(param_00) {
   self delete();
 }
 
-func_12A17(param_00) {
+func_12A17(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 waittill("disconnect");
+  var_0 waittill("disconnect");
   self delete();
 }
 
-func_12A15(param_00) {
+func_12A15(var_0) {
   self endon("placed");
   self endon("death");
-  param_00 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
   self delete();
 }
 
-func_12A18(param_00) {
+func_12A18(var_0) {
   self endon("placed");
   self endon("death");
   level waittill("game_ended");
   self delete();
 }
 
-func_4A2C(param_00, param_01) {
-  var_02 = spawnturret("misc_turret", param_01.origin, level.var_12A8D[param_00].var_39B);
-  var_02.angles = param_01.angles;
-  var_02 setModel(level.var_12A8D[param_00].modelbase);
-  var_02.triggerportableradarping = param_01;
-  var_02.health = level.var_12A8D[param_00].health;
-  var_02.maxhealth = level.var_12A8D[param_00].maxhealth;
-  var_02.var_E1 = 0;
-  var_02.var_12A9A = param_00;
-  var_02.stunned = 0;
-  var_02.var_11199 = 5;
-  var_02 setturretmodechangewait(1);
-  var_02 func_12A2D();
-  var_02 setsentryowner(param_01);
-  var_02 setturretminimapvisible(1, param_00);
-  var_02 setdefaultdroppitch(-89);
-  var_02 thread func_129FC();
-  var_02.var_4D49 = 1;
-  var_02 thread func_12A03();
-  var_02 thread func_12A50();
-  return var_02;
+func_4A2C(var_0, var_1) {
+  var_2 = spawnturret("misc_turret", var_1.origin, level.var_12A8D[var_0].var_39B);
+  var_2.angles = var_1.angles;
+  var_2 setModel(level.var_12A8D[var_0].modelbase);
+  var_2.triggerportableradarping = var_1;
+  var_2.health = level.var_12A8D[var_0].health;
+  var_2.maxhealth = level.var_12A8D[var_0].maxhealth;
+  var_2.var_E1 = 0;
+  var_2.var_12A9A = var_0;
+  var_2.stunned = 0;
+  var_2.var_11199 = 5;
+  var_2 setturretmodechangewait(1);
+  var_2 func_12A2D();
+  var_2 setsentryowner(var_1);
+  var_2 setturretminimapvisible(1, var_0);
+  var_2 setdefaultdroppitch(-89);
+  var_2 thread func_129FC();
+  var_2.var_4D49 = 1;
+  var_2 thread func_12A03();
+  var_2 thread func_12A50();
+  return var_2;
 }
 
 func_12A2A() {
@@ -338,26 +338,26 @@ func_12A2A() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
-  if(isDefined(var_00.var_DF89)) {
-    foreach(var_02 in var_00.var_DF89) {
-      var_02 notify("death");
+  var_0 = self.triggerportableradarping;
+  if(isDefined(var_0.var_DF89)) {
+    foreach(var_2 in var_0.var_DF89) {
+      var_2 notify("death");
     }
   }
 
-  var_00.var_DF89 = [];
-  var_00.var_DF89[0] = self;
-  var_00.using_remote_turret = 0;
-  var_00.var_CB39 = 0;
-  var_00.var_6617 = 1;
-  if(isalive(var_00)) {
-    var_00 scripts\mp\utility::setlowermessage("pickup_remote_turret", level.var_12A8D[self.var_12A9A].var_901F, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  var_0.var_DF89 = [];
+  var_0.var_DF89[0] = self;
+  var_0.using_remote_turret = 0;
+  var_0.var_CB39 = 0;
+  var_0.var_6617 = 1;
+  if(isalive(var_0)) {
+    var_0 scripts\mp\utility::setlowermessage("pickup_remote_turret", level.var_12A8D[self.var_12A9A].var_901F, undefined, undefined, undefined, undefined, undefined, undefined, 1);
   }
 
-  var_00 thread func_13AE5(self);
+  var_0 thread func_13AE5(self);
   if(level.teambased) {
-    self.team = var_00.team;
-    self setturretteam(var_00.team);
+    self.team = var_0.team;
+    self setturretteam(var_0.team);
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 65));
   } else {
     scripts\mp\entityheadicons::setplayerheadicon(self.triggerportableradarping, (0, 0, 65));
@@ -366,7 +366,7 @@ func_12A2A() {
   self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 32, 64);
   self.ownertrigger enablelinkto();
   self.ownertrigger linkto(self);
-  var_00 thread turret_handlepickup(self);
+  var_0 thread turret_handlepickup(self);
   thread func_13A1D();
   thread func_129FB();
   thread func_129FA();
@@ -375,81 +375,81 @@ func_12A2A() {
 }
 
 func_10E08() {
-  var_00 = self.triggerportableradarping;
-  var_00 scripts\mp\utility::setusingremote(self.var_12A9A);
-  var_00 scripts\mp\utility::freezecontrolswrapper(1);
-  var_01 = var_00 scripts\mp\killstreaks\_killstreaks::initridekillstreak();
-  if(var_01 != "success") {
-    if(var_01 != "disconnect") {
-      var_00 scripts\mp\utility::clearusingremote();
+  var_0 = self.triggerportableradarping;
+  var_0 scripts\mp\utility::setusingremote(self.var_12A9A);
+  var_0 scripts\mp\utility::freezecontrolswrapper(1);
+  var_1 = var_0 scripts\mp\killstreaks\_killstreaks::initridekillstreak();
+  if(var_1 != "success") {
+    if(var_1 != "disconnect") {
+      var_0 scripts\mp\utility::clearusingremote();
     }
 
     return 0;
   }
 
-  var_00 scripts\mp\utility::_giveweapon(level.var_12A8D[self.var_12A9A].remotedetonatethink);
-  var_00 scripts\mp\utility::_switchtoweaponimmediate(level.var_12A8D[self.var_12A9A].remotedetonatethink);
-  var_00 scripts\mp\utility::freezecontrolswrapper(0);
-  var_00 thread waitsetthermal(1, self);
+  var_0 scripts\mp\utility::_giveweapon(level.var_12A8D[self.var_12A9A].remotedetonatethink);
+  var_0 scripts\mp\utility::_switchtoweaponimmediate(level.var_12A8D[self.var_12A9A].remotedetonatethink);
+  var_0 scripts\mp\utility::freezecontrolswrapper(0);
+  var_0 thread waitsetthermal(1, self);
   if(isDefined(level.var_9181["thermal_mode"])) {
     level.var_9181["thermal_mode"] settext("");
   }
 
   if(getdvarint("camera_thirdPerson")) {
-    var_00 scripts\mp\utility::setthirdpersondof(0);
+    var_0 scripts\mp\utility::setthirdpersondof(0);
   }
 
-  var_00 playerlinkweaponviewtodelta(self, "tag_player", 0, 180, 180, 50, 25, 0);
-  var_00 _meth_8236(0);
-  var_00 _meth_8235(1);
-  var_00 remotecontrolturret(self);
-  var_00 scripts\mp\utility::clearlowermessage("enter_remote_turret");
-  var_00 scripts\mp\utility::clearlowermessage("pickup_remote_turret");
-  var_00 scripts\mp\utility::setlowermessage("early_exit", level.var_12A8D[self.var_12A9A].var_901B, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  var_0 playerlinkweaponviewtodelta(self, "tag_player", 0, 180, 180, 50, 25, 0);
+  var_0 _meth_8236(0);
+  var_0 _meth_8235(1);
+  var_0 remotecontrolturret(self);
+  var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+  var_0 scripts\mp\utility::clearlowermessage("pickup_remote_turret");
+  var_0 scripts\mp\utility::setlowermessage("early_exit", level.var_12A8D[self.var_12A9A].var_901B, undefined, undefined, undefined, undefined, undefined, undefined, 1);
 }
 
-waitsetthermal(param_00, param_01) {
+waitsetthermal(var_0, var_1) {
   self endon("disconnect");
-  param_01 endon("death");
-  wait(param_00);
+  var_1 endon("death");
+  wait(var_0);
   self visionsetthermalforplayer(game["thermal_vision"], 1.5);
   self thermalvisionon();
   self thermalvisionfofoverlayon();
 }
 
 func_1109C() {
-  var_00 = self.triggerportableradarping;
-  if(var_00 scripts\mp\utility::isusingremote()) {
-    var_00 thermalvisionoff();
-    var_00 thermalvisionfofoverlayoff();
-    var_00 geysers_and_boatride(self);
-    var_00 unlink();
-    var_00 scripts\mp\utility::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
-    var_00 scripts\mp\utility::clearusingremote();
+  var_0 = self.triggerportableradarping;
+  if(var_0 scripts\mp\utility::isusingremote()) {
+    var_0 thermalvisionoff();
+    var_0 thermalvisionfofoverlayoff();
+    var_0 geysers_and_boatride(self);
+    var_0 unlink();
+    var_0 scripts\mp\utility::_switchtoweapon(var_0 scripts\engine\utility::getlastweapon());
+    var_0 scripts\mp\utility::clearusingremote();
     if(getdvarint("camera_thirdPerson")) {
-      var_00 scripts\mp\utility::setthirdpersondof(1);
+      var_0 scripts\mp\utility::setthirdpersondof(1);
     }
 
-    var_00 visionsetthermalforplayer(game["thermal_vision"], 0);
-    var_01 = scripts\mp\utility::getkillstreakweapon(level.var_12A8D[self.var_12A9A].streakname);
-    var_00 scripts\mp\killstreaks\_killstreaks::func_1146C(var_01);
+    var_0 visionsetthermalforplayer(game["thermal_vision"], 0);
+    var_1 = scripts\mp\utility::getkillstreakweapon(level.var_12A8D[self.var_12A9A].streakname);
+    var_0 scripts\mp\killstreaks\_killstreaks::func_1146C(var_1);
   }
 
   if(self.stunned) {
-    var_00 stopshellshock();
+    var_0 stopshellshock();
   }
 
-  var_00 scripts\mp\utility::clearlowermessage("early_exit");
-  if(!isDefined(var_00.var_13108) || !var_00.var_13108) {
-    var_00 scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[self.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
+  var_0 scripts\mp\utility::clearlowermessage("early_exit");
+  if(!isDefined(var_0.var_13108) || !var_0.var_13108) {
+    var_0 scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[self.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
   }
 
   self notify("exit");
 }
 
-func_13AE5(param_00) {
+func_13AE5(var_0) {
   self endon("disconnect");
-  param_00 endon("death");
+  var_0 endon("death");
   self.var_13108 = 0;
   for(;;) {
     if(isalive(self)) {
@@ -466,11 +466,11 @@ func_13AE5(param_00) {
 
     self waittill("spawned_player");
     if(!self.var_13108) {
-      scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[param_00.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
+      scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[var_0.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
       continue;
     }
 
-    param_00 notify("death");
+    var_0 notify("death");
   }
 }
 
@@ -478,88 +478,88 @@ func_13A1D() {
   self endon("death");
   self endon("carried");
   level endon("game_ended");
-  var_00 = self.triggerportableradarping;
+  var_0 = self.triggerportableradarping;
   for(;;) {
-    var_01 = var_00 getcurrentweapon();
-    if(scripts\mp\utility::iskillstreakweapon(var_01) && var_01 != level.var_12A8D[self.var_12A9A].var_39B && var_01 != level.var_12A8D[self.var_12A9A].var_A84D && var_01 != level.var_12A8D[self.var_12A9A].remotedetonatethink && var_01 != "none" && !var_00 scripts\mp\utility::isjuggernaut() || var_00 scripts\mp\utility::isusingremote()) {
-      if(!isDefined(var_00.var_6617) || !var_00.var_6617) {
-        var_00.var_6617 = 1;
-        var_00 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+    var_1 = var_0 getcurrentweapon();
+    if(scripts\mp\utility::iskillstreakweapon(var_1) && var_1 != level.var_12A8D[self.var_12A9A].var_39B && var_1 != level.var_12A8D[self.var_12A9A].var_A84D && var_1 != level.var_12A8D[self.var_12A9A].remotedetonatethink && var_1 != "none" && !var_0 scripts\mp\utility::isjuggernaut() || var_0 scripts\mp\utility::isusingremote()) {
+      if(!isDefined(var_0.var_6617) || !var_0.var_6617) {
+        var_0.var_6617 = 1;
+        var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
       }
 
       wait(0.05);
       continue;
     }
 
-    if(var_00 istouching(self.ownertrigger)) {
-      if(!isDefined(var_00.var_6617) || !var_00.var_6617) {
-        var_00.var_6617 = 1;
-        var_00 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+    if(var_0 istouching(self.ownertrigger)) {
+      if(!isDefined(var_0.var_6617) || !var_0.var_6617) {
+        var_0.var_6617 = 1;
+        var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
       }
 
       wait(0.05);
       continue;
     }
 
-    if(isDefined(var_00.empgrenaded) && var_00.empgrenaded) {
-      if(!isDefined(var_00.var_6617) || !var_00.var_6617) {
-        var_00.var_6617 = 1;
-        var_00 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+    if(isDefined(var_0.empgrenaded) && var_0.empgrenaded) {
+      if(!isDefined(var_0.var_6617) || !var_0.var_6617) {
+        var_0.var_6617 = 1;
+        var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
       }
 
       wait(0.05);
       continue;
     }
 
-    if(var_00 islinked() && !var_00.using_remote_turret) {
-      if(!isDefined(var_00.var_6617) || !var_00.var_6617) {
-        var_00.var_6617 = 1;
-        var_00 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+    if(var_0 islinked() && !var_0.using_remote_turret) {
+      if(!isDefined(var_0.var_6617) || !var_0.var_6617) {
+        var_0.var_6617 = 1;
+        var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
       }
 
       wait(0.05);
       continue;
     }
 
-    if(isDefined(var_00.var_6617) && var_00.var_6617 && var_01 != "none") {
-      var_00 scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[self.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
-      var_00.var_6617 = 0;
+    if(isDefined(var_0.var_6617) && var_0.var_6617 && var_1 != "none") {
+      var_0 scripts\mp\utility::setlowermessage("enter_remote_turret", level.var_12A8D[self.var_12A9A].var_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
+      var_0.var_6617 = 0;
     }
 
-    var_02 = 0;
-    while(var_00 usebuttonpressed() && !var_00 fragbuttonpressed() && !var_00 scripts\mp\utility::_meth_85C7() && !var_00 secondaryoffhandbuttonpressed() && !var_00 isusingturret() && var_00 isonground() && !var_00 istouching(self.ownertrigger) && !isDefined(var_00.empgrenaded) || !var_00.empgrenaded) {
-      if(isDefined(var_00.iscarrying) && var_00.iscarrying) {
+    var_2 = 0;
+    while(var_0 usebuttonpressed() && !var_0 fragbuttonpressed() && !var_0 scripts\mp\utility::_meth_85C7() && !var_0 secondaryoffhandbuttonpressed() && !var_0 isusingturret() && var_0 isonground() && !var_0 istouching(self.ownertrigger) && !isDefined(var_0.empgrenaded) || !var_0.empgrenaded) {
+      if(isDefined(var_0.iscarrying) && var_0.iscarrying) {
         break;
       }
 
-      if(isDefined(var_00.iscapturingcrate) && var_00.iscapturingcrate) {
+      if(isDefined(var_0.iscapturingcrate) && var_0.iscapturingcrate) {
         break;
       }
 
-      if(!isalive(var_00)) {
+      if(!isalive(var_0)) {
         break;
       }
 
-      if(!var_00.using_remote_turret && var_00 scripts\mp\utility::isusingremote()) {
+      if(!var_0.using_remote_turret && var_0 scripts\mp\utility::isusingremote()) {
         break;
       }
 
-      if(var_00 islinked() && !var_00.using_remote_turret) {
+      if(var_0 islinked() && !var_0.using_remote_turret) {
         break;
       }
 
-      var_02 = var_02 + 0.05;
-      if(var_02 > 0.75) {
-        var_00.using_remote_turret = !var_00.using_remote_turret;
-        if(var_00.using_remote_turret) {
-          var_00 removeweapons();
-          var_00 func_1146D(self.var_12A9A);
-          var_00 scripts\mp\utility::_giveweapon(level.var_12A8D[self.var_12A9A].var_A84D);
-          var_00 scripts\mp\utility::_switchtoweaponimmediate(level.var_12A8D[self.var_12A9A].var_A84D);
+      var_2 = var_2 + 0.05;
+      if(var_2 > 0.75) {
+        var_0.using_remote_turret = !var_0.using_remote_turret;
+        if(var_0.using_remote_turret) {
+          var_0 removeweapons();
+          var_0 func_1146D(self.var_12A9A);
+          var_0 scripts\mp\utility::_giveweapon(level.var_12A8D[self.var_12A9A].var_A84D);
+          var_0 scripts\mp\utility::_switchtoweaponimmediate(level.var_12A8D[self.var_12A9A].var_A84D);
           func_10E08();
-          var_00 restoreweapons();
+          var_0 restoreweapons();
         } else {
-          var_00 func_1146D(self.var_12A9A);
+          var_0 func_1146D(self.var_12A9A);
           func_1109C();
         }
 
@@ -574,11 +574,11 @@ func_13A1D() {
   }
 }
 
-turret_handlepickup(param_00) {
+turret_handlepickup(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  param_00 endon("death");
-  if(!isDefined(param_00.ownertrigger)) {
+  var_0 endon("death");
+  if(!isDefined(var_0.ownertrigger)) {
     return;
   }
 
@@ -586,10 +586,10 @@ turret_handlepickup(param_00) {
     return;
   }
 
-  var_01 = 0;
+  var_1 = 0;
   for(;;) {
-    var_02 = self getcurrentweapon();
-    if(scripts\mp\utility::iskillstreakweapon(var_02) && var_02 != "killstreak_remote_turret_mp" && var_02 != level.var_12A8D[param_00.var_12A9A].var_39B && var_02 != level.var_12A8D[param_00.var_12A9A].var_A84D && var_02 != level.var_12A8D[param_00.var_12A9A].remotedetonatethink && var_02 != "none" && !scripts\mp\utility::isjuggernaut() || scripts\mp\utility::isusingremote()) {
+    var_2 = self getcurrentweapon();
+    if(scripts\mp\utility::iskillstreakweapon(var_2) && var_2 != "killstreak_remote_turret_mp" && var_2 != level.var_12A8D[var_0.var_12A9A].var_39B && var_2 != level.var_12A8D[var_0.var_12A9A].var_A84D && var_2 != level.var_12A8D[var_0.var_12A9A].remotedetonatethink && var_2 != "none" && !scripts\mp\utility::isjuggernaut() || scripts\mp\utility::isusingremote()) {
       if(!isDefined(self.var_CB39) || !self.var_CB39) {
         self.var_CB39 = 1;
         scripts\mp\utility::clearlowermessage("pickup_remote_turret");
@@ -599,7 +599,7 @@ turret_handlepickup(param_00) {
       continue;
     }
 
-    if(!self istouching(param_00.ownertrigger)) {
+    if(!self istouching(var_0.ownertrigger)) {
       if(!isDefined(self.var_CB39) || !self.var_CB39) {
         self.var_CB39 = 1;
         scripts\mp\utility::clearlowermessage("pickup_remote_turret");
@@ -609,9 +609,9 @@ turret_handlepickup(param_00) {
       continue;
     }
 
-    if(scripts\mp\utility::isreallyalive(self) && self istouching(param_00.ownertrigger) && !isDefined(param_00.carriedby) && self isonground()) {
-      if(isDefined(self.var_CB39) && self.var_CB39 && var_02 != "none") {
-        scripts\mp\utility::setlowermessage("pickup_remote_turret", level.var_12A8D[param_00.var_12A9A].var_901F, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+    if(scripts\mp\utility::isreallyalive(self) && self istouching(var_0.ownertrigger) && !isDefined(var_0.carriedby) && self isonground()) {
+      if(isDefined(self.var_CB39) && self.var_CB39 && var_2 != "none") {
+        scripts\mp\utility::setlowermessage("pickup_remote_turret", level.var_12A8D[var_0.var_12A9A].var_901F, undefined, undefined, undefined, undefined, undefined, undefined, 1);
         self.var_CB39 = 0;
       }
 
@@ -620,23 +620,23 @@ turret_handlepickup(param_00) {
           continue;
         }
 
-        var_01 = 0;
+        var_1 = 0;
         while(self usebuttonpressed()) {
-          var_01 = var_01 + 0.05;
+          var_1 = var_1 + 0.05;
           wait(0.05);
         }
 
-        if(var_01 >= 0.5) {
+        if(var_1 >= 0.5) {
           continue;
         }
 
-        var_01 = 0;
-        while(!self usebuttonpressed() && var_01 < 0.5) {
-          var_01 = var_01 + 0.05;
+        var_1 = 0;
+        while(!self usebuttonpressed() && var_1 < 0.5) {
+          var_1 = var_1 + 0.05;
           wait(0.05);
         }
 
-        if(var_01 >= 0.5) {
+        if(var_1 >= 0.5) {
           continue;
         }
 
@@ -648,9 +648,9 @@ turret_handlepickup(param_00) {
           continue;
         }
 
-        param_00 give_player_session_tokens(level.var_12A8D[param_00.var_12A9A].sentrymodeoff);
-        thread func_F68B(param_00, 0);
-        param_00.ownertrigger delete();
+        var_0 give_player_session_tokens(level.var_12A8D[var_0.var_12A9A].sentrymodeoff);
+        thread func_F68B(var_0, 0);
+        var_0.ownertrigger delete();
         self.var_DF89 = undefined;
         scripts\mp\utility::clearlowermessage("pickup_remote_turret");
         return;
@@ -683,25 +683,25 @@ func_12A2D() {
     return;
   }
 
-  var_00 = self.triggerportableradarping;
-  if(isDefined(var_00.using_remote_turret) && var_00.using_remote_turret) {
-    var_00 thermalvisionoff();
-    var_00 thermalvisionfofoverlayoff();
-    var_00 geysers_and_boatride(self);
-    var_00 unlink();
-    var_00 scripts\mp\utility::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
-    var_00 scripts\mp\utility::clearusingremote();
+  var_0 = self.triggerportableradarping;
+  if(isDefined(var_0.using_remote_turret) && var_0.using_remote_turret) {
+    var_0 thermalvisionoff();
+    var_0 thermalvisionfofoverlayoff();
+    var_0 geysers_and_boatride(self);
+    var_0 unlink();
+    var_0 scripts\mp\utility::_switchtoweapon(var_0 scripts\engine\utility::getlastweapon());
+    var_0 scripts\mp\utility::clearusingremote();
     if(getdvarint("camera_thirdPerson")) {
-      var_00 scripts\mp\utility::setthirdpersondof(1);
+      var_0 scripts\mp\utility::setthirdpersondof(1);
     }
 
-    var_00 scripts\mp\killstreaks\_killstreaks::clearrideintro();
-    var_00 visionsetthermalforplayer(game["thermal_vision"], 0);
-    if(isDefined(var_00.disabledusability) && var_00.disabledusability) {
-      var_00 scripts\engine\utility::allow_usability(1);
+    var_0 scripts\mp\killstreaks\_killstreaks::clearrideintro();
+    var_0 visionsetthermalforplayer(game["thermal_vision"], 0);
+    if(isDefined(var_0.disabledusability) && var_0.disabledusability) {
+      var_0 scripts\engine\utility::allow_usability(1);
     }
 
-    var_00 func_1146D(self.var_12A9A);
+    var_0 func_1146D(self.var_12A9A);
   }
 }
 
@@ -717,12 +717,12 @@ func_129FC() {
 func_12A44() {
   self endon("death");
   level endon("game_ended");
-  var_00 = level.var_12A8D[self.var_12A9A].timeout;
-  while(var_00) {
+  var_0 = level.var_12A8D[self.var_12A9A].timeout;
+  while(var_0) {
     wait(1);
     scripts\mp\hostmigration::waittillhostmigrationdone();
     if(!isDefined(self.carriedby)) {
-      var_00 = max(0, var_00 - 1);
+      var_0 = max(0, var_0 - 1);
     }
   }
 
@@ -735,7 +735,7 @@ func_12A44() {
 
 func_129FB() {
   self endon("carried");
-  var_00 = self getentitynumber();
+  var_0 = self getentitynumber();
   self waittill("death");
   if(!isDefined(self)) {
     return;
@@ -750,20 +750,20 @@ func_129FB() {
     self.ownertrigger delete();
   }
 
-  var_01 = self.triggerportableradarping;
-  if(isDefined(var_01)) {
-    var_01.using_remote_turret = 0;
-    var_01 scripts\mp\utility::clearlowermessage("enter_remote_turret");
-    var_01 scripts\mp\utility::clearlowermessage("early_exit");
-    var_01 scripts\mp\utility::clearlowermessage("pickup_remote_turret");
-    var_01 restoreperks();
-    var_01 restoreweapons();
-    if(var_01 getcurrentweapon() == "none") {
-      var_01 scripts\mp\utility::_switchtoweapon(var_01 scripts\engine\utility::getlastweapon());
+  var_1 = self.triggerportableradarping;
+  if(isDefined(var_1)) {
+    var_1.using_remote_turret = 0;
+    var_1 scripts\mp\utility::clearlowermessage("enter_remote_turret");
+    var_1 scripts\mp\utility::clearlowermessage("early_exit");
+    var_1 scripts\mp\utility::clearlowermessage("pickup_remote_turret");
+    var_1 restoreperks();
+    var_1 restoreweapons();
+    if(var_1 getcurrentweapon() == "none") {
+      var_1 scripts\mp\utility::_switchtoweapon(var_1 scripts\engine\utility::getlastweapon());
     }
 
     if(self.stunned) {
-      var_01 stopshellshock();
+      var_1 stopshellshock();
     }
   }
 
@@ -771,11 +771,11 @@ func_129FB() {
   playFXOnTag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_aim");
   wait(1.5);
   self playSound("sentry_explode_smoke");
-  var_02 = 8;
-  while(var_02 > 0) {
+  var_2 = 8;
+  while(var_2 > 0) {
     playFXOnTag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
     wait(0.4);
-    var_02 = var_02 - 0.4;
+    var_2 = var_2 - 0.4;
   }
 
   self notify("deleting");
@@ -791,17 +791,17 @@ func_129FA() {
   self endon("carried");
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
-    if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_01)) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_1)) {
       continue;
     }
 
-    if(isDefined(var_09)) {
-      switch (var_09) {
+    if(isDefined(var_9)) {
+      switch (var_9) {
         case "sensor_grenade_mp":
         case "flash_grenade_mp":
         case "concussion_grenade_mp":
-          if(var_04 == "MOD_GRENADE_SPLASH" && self.triggerportableradarping.using_remote_turret) {
+          if(var_4 == "MOD_GRENADE_SPLASH" && self.triggerportableradarping.using_remote_turret) {
             self.stunned = 1;
             thread func_12A35();
           }
@@ -818,34 +818,34 @@ func_129FA() {
       return;
     }
 
-    if(var_04 == "MOD_MELEE") {
+    if(var_4 == "MOD_MELEE") {
       self.var_E1 = self.var_E1 + self.maxhealth;
     }
 
-    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
+    if(isDefined(var_8) && var_8 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(isDefined(var_08) && var_08 &level.idflags_ricochet) {
+    if(isDefined(var_8) && var_8 &level.idflags_ricochet) {
       self.wasdamagedfrombulletricochet = 1;
     }
 
     self.wasdamaged = 1;
     self.var_4D49 = 0;
-    var_0A = var_00;
-    if(isplayer(var_01)) {
-      var_01 scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
-      if(var_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0A = var_00 * level.armorpiercingmod;
+    var_0A = var_0;
+    if(isplayer(var_1)) {
+      var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
+      if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
+        var_0A = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_01.triggerportableradarping) && isplayer(var_01.triggerportableradarping)) {
-      var_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
+    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
+      var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
     }
 
-    if(isDefined(var_09)) {
-      switch (var_09) {
+    if(isDefined(var_9)) {
+      switch (var_9) {
         case "remotemissile_projectile_mp":
         case "javelin_mp":
         case "remote_mortar_missile_mp":
@@ -859,7 +859,7 @@ func_129FA() {
         case "stealth_bomb_mp":
         case "artillery_mp":
           self.largeprojectiledamage = 0;
-          var_0A = var_0A + var_00 * 4;
+          var_0A = var_0A + var_0 * 4;
           break;
 
         case "emp_grenade_mp":
@@ -869,14 +869,14 @@ func_129FA() {
           break;
       }
 
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_01, var_09, self, var_04);
+      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, self, var_4);
     }
 
     self.var_E1 = self.var_E1 + var_0A;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_01) && !isDefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping) {
-        var_01 thread scripts\mp\utility::giveunifiedpoints("kill", var_09, 100);
-        var_01 notify("destroyed_killstreak");
+      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+        var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_9, 100);
+        var_1 notify("destroyed_killstreak");
       }
 
       if(isDefined(self.triggerportableradarping)) {
@@ -892,14 +892,14 @@ func_129FA() {
 func_12A03() {
   self endon("death");
   level endon("game_ended");
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
     if(self.var_4D49 < 1) {
       self.var_4D49 = self.var_4D49 + 0.1;
-      var_00 = 1;
-    } else if(var_00) {
+      var_0 = 1;
+    } else if(var_0) {
       self.var_4D49 = 1;
-      var_00 = 0;
+      var_0 = 0;
     }
 
     wait(0.1);
@@ -909,17 +909,17 @@ func_12A03() {
 func_12A50() {
   self endon("death");
   level endon("game_ended");
-  var_00 = 0.1;
-  var_01 = 1;
-  var_02 = 1;
+  var_0 = 0.1;
+  var_1 = 1;
+  var_2 = 1;
   for(;;) {
-    if(var_02) {
+    if(var_2) {
       if(self.var_E1 > 0) {
-        var_02 = 0;
-        var_01++;
+        var_2 = 0;
+        var_1++;
       }
-    } else if(self.var_E1 >= self.maxhealth * var_00 * var_01) {
-      var_01++;
+    } else if(self.var_E1 >= self.maxhealth * var_0 * var_1) {
+      var_1++;
     }
 
     wait(0.05);
@@ -933,9 +933,9 @@ func_12A35() {
   while(self.stunned) {
     self.triggerportableradarping shellshock("concussion_grenade_mp", self.var_11199);
     playFXOnTag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
-    var_00 = 0;
-    while(var_00 < self.var_11199) {
-      var_00 = var_00 + 0.05;
+    var_0 = 0;
+    while(var_0 < self.var_11199) {
+      var_0 = var_0 + 0.05;
       wait(0.05);
     }
 

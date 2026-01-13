@@ -18,30 +18,30 @@ func_6B3D() {
   switch (self.var_ED8B) {
     case "traverse":
       if(isDefined(self.target)) {
-        var_00 = getnodearray(self.target, "targetname");
-        if(!var_00.size) {
+        var_0 = getnodearray(self.target, "targetname");
+        if(!var_0.size) {
           if(isDefined(self.script_linkto)) {
-            var_00 = getnodearray(self.script_linkto, "script_linkname");
+            var_0 = getnodearray(self.script_linkto, "script_linkname");
           }
         }
 
-        if(var_00.size > 0) {
-          foreach(var_02 in var_00) {
-            if(var_02.type == "Begin") {
-              self.var_126CD = var_02.var_48;
+        if(var_0.size > 0) {
+          foreach(var_2 in var_0) {
+            if(var_2.type == "Begin") {
+              self.var_126CD = var_2.var_48;
             }
           }
         }
 
-        var_04 = scripts\engine\utility::getstructarray(self.target, "targetname");
+        var_4 = scripts\engine\utility::getstructarray(self.target, "targetname");
         if(isDefined(self.script_linkto)) {
-          var_04 = scripts\engine\utility::array_combine(var_04, scripts\engine\utility::getstructarray(self.script_linkto, "script_linkname"));
+          var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getstructarray(self.script_linkto, "script_linkname"));
         }
 
-        foreach(var_06 in var_04) {
-          if(isDefined(var_06.animation)) {
-            self.origin = var_06.origin;
-            self.angles = var_06.angles;
+        foreach(var_6 in var_4) {
+          if(isDefined(var_6.animation)) {
+            self.origin = var_6.origin;
+            self.angles = var_6.angles;
           }
         }
       }
@@ -60,10 +60,10 @@ func_6B3D() {
       self.var_1EEF = spawnStruct();
       self.var_1EEF.origin = self.origin;
       self.var_1EEF.angles = self.angles;
-      var_08 = scripts\sp\utility::func_7DC3(self.animation);
-      var_09 = getstartorigin(self.origin, self.angles, var_08);
-      var_0A = getstartangles(self.origin, self.angles, var_08);
-      self.origin = var_09;
+      var_8 = scripts\sp\utility::func_7DC3(self.animation);
+      var_9 = getstartorigin(self.origin, self.angles, var_8);
+      var_0A = getstartangles(self.origin, self.angles, var_8);
+      self.origin = var_9;
       self.angles = var_0A;
       break;
   }
@@ -94,13 +94,13 @@ func_6B28() {
     return;
   }
 
-  var_00 = strtok(self.script_parameters, " ");
-  foreach(var_02 in var_00) {
-    if(!isDefined(level.var_6B23[var_02])) {
-      level.var_6B23[var_02] = [];
+  var_0 = strtok(self.script_parameters, " ");
+  foreach(var_2 in var_0) {
+    if(!isDefined(level.var_6B23[var_2])) {
+      level.var_6B23[var_2] = [];
     }
 
-    level.var_6B23[var_02] = ::scripts\engine\utility::array_add(level.var_6B23[var_02], self);
+    level.var_6B23[var_2] = ::scripts\engine\utility::array_add(level.var_6B23[var_2], self);
   }
 }
 
@@ -110,15 +110,15 @@ func_6B27() {
   }
 
   if(!self.spawnimpulsefield & 64) {
-    var_00 = 32 * anglestoup(self.angles);
-    var_01 = -20000 * anglestoup(self.angles);
-    var_02 = scripts\common\trace::ray_trace(self.origin + var_00, self.origin + var_01, undefined, scripts\common\trace::create_solid_ai_contents());
-    if(var_02["hittype"] == "hittype_none") {}
+    var_0 = 32 * anglestoup(self.angles);
+    var_1 = -20000 * anglestoup(self.angles);
+    var_2 = scripts\common\trace::ray_trace(self.origin + var_0, self.origin + var_1, undefined, scripts\common\trace::create_solid_ai_contents());
+    if(var_2["hittype"] == "hittype_none") {}
 
-    self.origin = var_02["position"];
+    self.origin = var_2["position"];
     if(self.spawnimpulsefield & 32) {
-      if(isDefined(var_02["entity"])) {
-        self.var_8625 = var_02["entity"];
+      if(isDefined(var_2["entity"])) {
+        self.var_8625 = var_2["entity"];
         self.var_862A = self.var_8625 scripts\sp\utility::func_13DCC(self.origin);
         if(!isDefined(self.angles)) {
           self.angles = (0, 0, 0);
@@ -142,9 +142,9 @@ func_6B27() {
 
 func_F97C() {
   level.var_6B23 = [];
-  foreach(var_01 in level.struct) {
-    if(isDefined(var_01.var_ED8B)) {
-      var_01 thread func_6B3D();
+  foreach(var_1 in level.struct) {
+    if(isDefined(var_1.var_ED8B)) {
+      var_1 thread func_6B3D();
     }
   }
 }
@@ -159,49 +159,49 @@ func_6B3E() {
   }
 
   self.origin = self.var_8625 gettweakablevalue(self.var_862A);
-  var_00 = spawn("script_origin", (0, 0, 0));
-  var_00.angles = self.var_8625.angles;
-  var_00 getnodeyawtoenemy(self.var_8627[0]);
-  var_00 addyaw(self.var_8627[1]);
-  var_00 getnodeyawtoorigin(self.var_8627[2]);
-  self.angles = var_00.angles;
-  var_00 delete();
+  var_0 = spawn("script_origin", (0, 0, 0));
+  var_0.angles = self.var_8625.angles;
+  var_0 getnodeyawtoenemy(self.var_8627[0]);
+  var_0 addyaw(self.var_8627[1]);
+  var_0 getnodeyawtoorigin(self.var_8627[2]);
+  self.angles = var_0.angles;
+  var_0 delete();
 }
 
 func_6B1F() {
-  var_00 = [];
-  var_01 = 0;
+  var_0 = [];
+  var_1 = 0;
   if(isDefined(self.spawnimpulsefield)) {
-    var_01 = self.spawnimpulsefield;
+    var_1 = self.spawnimpulsefield;
   }
 
   if(self.var_ED8B == "cover_left") {
-    if(!var_01 & 1) {
-      var_00 = scripts\engine\utility::array_add(var_00, "cover_left");
+    if(!var_1 & 1) {
+      var_0 = scripts\engine\utility::array_add(var_0, "cover_left");
     }
 
-    if(!var_01 & 2) {
-      var_00 = scripts\engine\utility::array_add(var_00, "cover_left_crouch");
+    if(!var_1 & 2) {
+      var_0 = scripts\engine\utility::array_add(var_0, "cover_left_crouch");
     }
   } else if(self.var_ED8B == "cover_right") {
-    if(!var_01 & 1) {
-      var_00 = scripts\engine\utility::array_add(var_00, "cover_right");
+    if(!var_1 & 1) {
+      var_0 = scripts\engine\utility::array_add(var_0, "cover_right");
     }
 
-    if(!var_01 & 2) {
-      var_00 = scripts\engine\utility::array_add(var_00, "cover_right_crouch");
+    if(!var_1 & 2) {
+      var_0 = scripts\engine\utility::array_add(var_0, "cover_right_crouch");
     }
   } else if(self.var_ED8B == "cover_stand") {
-    var_00 = scripts\engine\utility::array_add(var_00, "cover_stand");
+    var_0 = scripts\engine\utility::array_add(var_0, "cover_stand");
   } else if(self.var_ED8B == "cover_crouch") {
-    var_00 = scripts\engine\utility::array_add(var_00, "cover_crouch");
+    var_0 = scripts\engine\utility::array_add(var_0, "cover_crouch");
   } else {
-    var_00 = scripts\engine\utility::array_add(var_00, "exposed");
+    var_0 = scripts\engine\utility::array_add(var_0, "exposed");
   }
 
-  if(var_00.size == 0) {}
+  if(var_0.size == 0) {}
 
-  return var_00;
+  return var_0;
 }
 
 func_6B20() {
@@ -209,34 +209,34 @@ func_6B20() {
     return undefined;
   }
 
-  var_00 = func_6B1D();
-  if(var_00.size) {
-    return scripts\engine\utility::random(var_00);
+  var_0 = func_6B1D();
+  if(var_0.size) {
+    return scripts\engine\utility::random(var_0);
   }
 
   return undefined;
 }
 
 func_6B1D() {
-  var_00 = [];
+  var_0 = [];
   if(!isDefined(self.target)) {
-    return var_00;
+    return var_0;
   }
 
-  var_01 = scripts\engine\utility::getstructarray(self.target, "targetname");
-  foreach(var_03 in var_01) {
-    if(!var_03 func_9BE0()) {
+  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  foreach(var_3 in var_1) {
+    if(!var_3 func_9BE0()) {
       continue;
     }
 
-    if(!var_03 func_6B34()) {
+    if(!var_3 func_6B34()) {
       continue;
     }
 
-    var_00 = scripts\engine\utility::array_add(var_00, var_03);
+    var_0 = scripts\engine\utility::array_add(var_0, var_3);
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_6B22() {
@@ -244,117 +244,117 @@ func_6B22() {
     return 0;
   }
 
-  var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
-  var_01 = 0;
-  foreach(var_03 in var_00) {
-    if(!var_03 func_9BE0()) {
+  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = 0;
+  foreach(var_3 in var_0) {
+    if(!var_3 func_9BE0()) {
       continue;
     }
 
-    if(!var_03 func_6B34()) {
+    if(!var_3 func_6B34()) {
       continue;
     }
 
-    var_01++;
+    var_1++;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_6B1E(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_6B1E(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var_01 = spawn("script_origin", (0, 0, 0));
+  var_1 = spawn("script_origin", (0, 0, 0));
   if(isDefined(self.angles)) {
-    var_01.angles = self.angles;
+    var_1.angles = self.angles;
   }
 
   if(isDefined(self.type)) {
-    if(param_00 && isDefined(level.var_6A63)) {
+    if(var_0 && isDefined(level.var_6A63)) {
       if(isDefined(level.var_6A63[self.type])) {
-        var_01 addyaw(level.var_6A63[self.type]);
+        var_1 addyaw(level.var_6A63[self.type]);
       }
     } else if(isDefined(level.var_6A64)) {
       if(isDefined(level.var_6A64[self.type])) {
-        var_01 addyaw(level.var_6A64[self.type]);
+        var_1 addyaw(level.var_6A64[self.type]);
       }
     }
   }
 
-  var_02 = var_01.angles;
-  var_01 delete();
-  return var_02;
+  var_2 = var_1.angles;
+  var_1 delete();
+  return var_2;
 }
 
-func_6B21(param_00, param_01, param_02, param_03) {
-  var_04 = [];
-  var_04[0]["origin"] = param_01;
-  var_04[0]["dist"] = 0;
-  var_04[0]["radius"] = 0;
-  var_04[0]["node"] = undefined;
-  var_04[0]["total_dist"] = 0;
-  var_05 = 1;
-  var_06 = 200;
+func_6B21(var_0, var_1, var_2, var_3) {
+  var_4 = [];
+  var_4[0]["origin"] = var_1;
+  var_4[0]["dist"] = 0;
+  var_4[0]["radius"] = 0;
+  var_4[0]["node"] = undefined;
+  var_4[0]["total_dist"] = 0;
+  var_5 = 1;
+  var_6 = 200;
   for(;;) {
-    var_07 = var_04.size;
-    var_08 = undefined;
-    if(var_05) {
-      var_08 = param_00;
-      var_05 = 0;
+    var_7 = var_4.size;
+    var_8 = undefined;
+    if(var_5) {
+      var_8 = var_0;
+      var_5 = 0;
     } else {
-      var_08 = var_04[var_07 - 1]["node"] func_6B20();
+      var_8 = var_4[var_7 - 1]["node"] func_6B20();
     }
 
-    if(!isDefined(var_08)) {
+    if(!isDefined(var_8)) {
       break;
     }
 
-    var_04[var_07]["node"] = var_08;
-    var_09 = var_08.origin;
-    if(isDefined(var_08.fgetarg)) {
+    var_4[var_7]["node"] = var_8;
+    var_9 = var_8.origin;
+    if(isDefined(var_8.fgetarg)) {
       if(!isDefined(self.var_5CC2)) {
         self.var_5CC2 = -1 + randomfloat(2);
       }
 
-      if(!isDefined(var_08.angles)) {
-        var_08.angles = (0, 0, 0);
+      if(!isDefined(var_8.angles)) {
+        var_8.angles = (0, 0, 0);
       }
 
-      var_0A = anglesToForward(var_08.angles);
-      var_0B = anglestoright(var_08.angles);
-      var_0C = anglestoup(var_08.angles);
-      var_0D = (0, self.var_5CC2 * var_08.fgetarg, 0);
-      var_09 = var_09 + var_0A * var_0D[0];
-      var_09 = var_09 + var_0B * var_0D[1];
-      var_09 = var_09 + var_0C * var_0D[2];
+      var_0A = anglesToForward(var_8.angles);
+      var_0B = anglestoright(var_8.angles);
+      var_0C = anglestoup(var_8.angles);
+      var_0D = (0, self.var_5CC2 * var_8.fgetarg, 0);
+      var_9 = var_9 + var_0A * var_0D[0];
+      var_9 = var_9 + var_0B * var_0D[1];
+      var_9 = var_9 + var_0C * var_0D[2];
     }
 
-    var_04[var_07]["origin"] = var_09;
-    var_04[var_07]["angles"] = var_08 func_6B1E(param_02);
-    if(var_07 > 0) {
-      var_0E = var_09 - var_04[var_07 - 1]["origin"];
-      var_04[var_07 - 1]["dist"] = length(var_0E);
-      var_04[0]["total_dist"] = var_04[0]["total_dist"] + var_04[var_07 - 1]["dist"];
-      var_04[var_07 - 1]["to_next_node"] = vectornormalize(var_0E);
-      if(isDefined(var_08.fgetarg)) {
-        var_04[var_07 - 1]["radius"] = var_08.fgetarg;
+    var_4[var_7]["origin"] = var_9;
+    var_4[var_7]["angles"] = var_8 func_6B1E(var_2);
+    if(var_7 > 0) {
+      var_0E = var_9 - var_4[var_7 - 1]["origin"];
+      var_4[var_7 - 1]["dist"] = length(var_0E);
+      var_4[0]["total_dist"] = var_4[0]["total_dist"] + var_4[var_7 - 1]["dist"];
+      var_4[var_7 - 1]["to_next_node"] = vectornormalize(var_0E);
+      if(isDefined(var_8.fgetarg)) {
+        var_4[var_7 - 1]["radius"] = var_8.fgetarg;
       } else {
-        var_04[var_07 - 1]["radius"] = var_06;
+        var_4[var_7 - 1]["radius"] = var_6;
       }
     }
 
-    var_0F = param_03 && var_07 == 1;
-    if(var_08 func_6B2D(var_0F)) {
+    var_0F = var_3 && var_7 == 1;
+    if(var_8 func_6B2D(var_0F)) {
       break;
     }
   }
 
-  var_04[var_07]["dist"] = 0;
-  var_04[var_07]["radius"] = 0;
-  var_04[var_07]["to_next_node"] = var_04[var_07 - 1]["to_next_node"];
-  return var_04;
+  var_4[var_7]["dist"] = 0;
+  var_4[var_7]["radius"] = 0;
+  var_4[var_7]["to_next_node"] = var_4[var_7 - 1]["to_next_node"];
+  return var_4;
 }
 
 func_6B34() {
@@ -365,16 +365,16 @@ func_6B34() {
   return 1;
 }
 
-func_6B2D(param_00) {
-  if(func_6B2A() && !param_00) {
+func_6B2D(var_0) {
+  if(func_6B2A() && !var_0) {
     return 1;
   }
 
-  if(func_6B32() && !param_00) {
+  if(func_6B32() && !var_0) {
     return 1;
   }
 
-  if(func_6B33() && !param_00) {
+  if(func_6B33() && !var_0) {
     return 1;
   }
 
@@ -386,15 +386,15 @@ func_6B2D(param_00) {
     return 0;
   }
 
-  if(func_6B35() && param_00) {
+  if(func_6B35() && var_0) {
     return 0;
   }
 
   return 1;
 }
 
-func_6B38(param_00) {
-  if(param_00) {
+func_6B38(var_0) {
+  if(var_0) {
     self.disabled = 1;
     return;
   }
@@ -402,33 +402,33 @@ func_6B38(param_00) {
   self.disabled = undefined;
 }
 
-func_6B24(param_00, param_01) {
-  if(isDefined(level.var_6B23[param_00])) {
-    foreach(var_03 in level.var_6B23[param_00]) {
-      var_03 func_6B38(param_01);
+func_6B24(var_0, var_1) {
+  if(isDefined(level.var_6B23[var_0])) {
+    foreach(var_3 in level.var_6B23[var_0]) {
+      var_3 func_6B38(var_1);
     }
   }
 }
 
-func_6B3B(param_00) {
-  self.var_C951 = param_00;
+func_6B3B(var_0) {
+  self.var_C951 = var_0;
 }
 
 func_6B1B() {
   self.var_C951 = undefined;
 }
 
-func_6B37(param_00) {
-  self.var_C02F[self.var_C02F.size] = param_00;
+func_6B37(var_0) {
+  self.var_C02F[self.var_C02F.size] = var_0;
 }
 
-func_6B2B(param_00) {
+func_6B2B(var_0) {
   if(self.var_C02F.size <= 0) {
     return 0;
   }
 
-  foreach(var_02 in self.var_C02F) {
-    if(var_02 == param_00) {
+  foreach(var_2 in self.var_C02F) {
+    if(var_2 == var_0) {
       return 1;
     }
   }
@@ -436,15 +436,15 @@ func_6B2B(param_00) {
   return 0;
 }
 
-func_6B36(param_00) {
-  var_01 = [];
-  foreach(var_03 in self.var_C02F) {
-    if(var_03 != param_00) {
-      var_01[var_01.size] = var_03;
+func_6B36(var_0) {
+  var_1 = [];
+  foreach(var_3 in self.var_C02F) {
+    if(var_3 != var_0) {
+      var_1[var_1.size] = var_3;
     }
   }
 
-  self.var_C02F = var_01;
+  self.var_C02F = var_1;
 }
 
 func_6B1A() {

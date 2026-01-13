@@ -11,144 +11,144 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
+    level waittill("connected", var_0);
     if(!level.rankedmatch) {
       return;
     }
 
-    if(!var_00 scripts\mp\utility::rankingenabled()) {
+    if(!var_0 scripts\mp\utility::rankingenabled()) {
       return;
     }
 
-    if(isai(var_00)) {
+    if(isai(var_0)) {
       continue;
     }
 
-    var_01 = var_00 getplayerdata("mp", "activeMissionTeam");
-    var_02 = var_00 getplayerdata("mp", "missionTeams", var_01, "activeSlot");
-    var_03 = var_00 getplayerdata("mp", "missionTeams", var_01, "currentMission", var_02);
-    setmatchdata("players", var_00.clientid, "activeMissionTeam", var_01);
-    setmatchdata("players", var_00.clientid, "missionTeamData_activeSlot", var_02);
-    setmatchdata("players", var_00.clientid, "missionTeamData_currentMission", var_03);
-    for(var_04 = 0; var_04 < 5; var_04++) {
-      var_05 = var_00 getplayerdata("mp", "missionTeams", var_01, "currentMission", var_04);
-      setmatchdata("players", var_00.clientid, "missionTeamData_availableMissions", var_04, var_05);
+    var_1 = var_0 getplayerdata("mp", "activeMissionTeam");
+    var_2 = var_0 getplayerdata("mp", "missionTeams", var_1, "activeSlot");
+    var_3 = var_0 getplayerdata("mp", "missionTeams", var_1, "currentMission", var_2);
+    setmatchdata("players", var_0.clientid, "activeMissionTeam", var_1);
+    setmatchdata("players", var_0.clientid, "missionTeamData_activeSlot", var_2);
+    setmatchdata("players", var_0.clientid, "missionTeamData_currentMission", var_3);
+    for(var_4 = 0; var_4 < 5; var_4++) {
+      var_5 = var_0 getplayerdata("mp", "missionTeams", var_1, "currentMission", var_4);
+      setmatchdata("players", var_0.clientid, "missionTeamData_availableMissions", var_4, var_5);
     }
 
-    var_06 = var_00 getplayerdata("mp", "missionTeams", var_01, "level");
-    var_07 = var_00 getplayerdata("mp", "missionTeams", var_01, "missionXP");
-    setmatchdata("players", var_00.clientid, "missionTeamData_startLevel", var_06);
-    setmatchdata("players", var_00.clientid, "missionTeamData_startMissionXP", var_07);
-    setmatchdata("players", var_00.clientid, "tierComplete", -1);
-    var_00.var_B8D4 = var_01;
-    var_00 setwaypoint(var_03, var_01);
+    var_6 = var_0 getplayerdata("mp", "missionTeams", var_1, "level");
+    var_7 = var_0 getplayerdata("mp", "missionTeams", var_1, "missionXP");
+    setmatchdata("players", var_0.clientid, "missionTeamData_startLevel", var_6);
+    setmatchdata("players", var_0.clientid, "missionTeamData_startMissionXP", var_7);
+    setmatchdata("players", var_0.clientid, "tierComplete", -1);
+    var_0.var_B8D4 = var_1;
+    var_0 setwaypoint(var_3, var_1);
   }
 }
 
 updatemissionteamperformancestats() {
-  foreach(var_01 in level.players) {
-    if(!isDefined(var_01) || !var_01 scripts\mp\utility::rankingenabled()) {
+  foreach(var_1 in level.players) {
+    if(!isDefined(var_1) || !var_1 scripts\mp\utility::rankingenabled()) {
       continue;
     }
 
-    if(isai(var_01)) {
+    if(isai(var_1)) {
       continue;
     }
 
-    var_02 = var_01.var_B8D4;
-    var_03 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "matchesPlayed");
-    var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "matchesPlayed", var_03 + 1);
-    if(isDefined(var_01.var_9978) && isDefined(var_01.var_9978.var_4C0D)) {
-      if(var_01.var_9978.var_4C0D > 0) {
-        switch (var_01.var_9978.var_4C0D) {
+    var_2 = var_1.var_B8D4;
+    var_3 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "matchesPlayed");
+    var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "matchesPlayed", var_3 + 1);
+    if(isDefined(var_1.var_9978) && isDefined(var_1.var_9978.var_4C0D)) {
+      if(var_1.var_9978.var_4C0D > 0) {
+        switch (var_1.var_9978.var_4C0D) {
           case 1:
-            var_04 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "completed");
-            var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "completed", var_04 + 1);
+            var_4 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "completed");
+            var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "completed", var_4 + 1);
             break;
 
           case 2:
-            var_05 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "bronze");
-            var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "bronze", var_05 + 1);
+            var_5 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "bronze");
+            var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "bronze", var_5 + 1);
             break;
 
           case 3:
-            var_06 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "silver");
-            var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "silver", var_06 + 1);
+            var_6 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "silver");
+            var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "silver", var_6 + 1);
             break;
 
           case 4:
-            var_07 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "gold");
-            var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "gold", var_07 + 1);
+            var_7 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "gold");
+            var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "gold", var_7 + 1);
             break;
         }
 
         continue;
       }
 
-      var_08 = var_01 getplayerdata("mp", "missionTeamPerformanceData", var_02, "failed");
-      var_01 setplayerdata("mp", "missionTeamPerformanceData", var_02, "failed", var_08 + 1);
+      var_8 = var_1 getplayerdata("mp", "missionTeamPerformanceData", var_2, "failed");
+      var_1 setplayerdata("mp", "missionTeamPerformanceData", var_2, "failed", var_8 + 1);
     }
   }
 }
 
-func_AE1D(param_00) {
-  var_01 = func_B02D(param_00);
-  if(!isDefined(var_01)) {
+func_AE1D(var_0) {
+  var_1 = func_B02D(var_0);
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  var_02 = spawnStruct();
-  var_02.ref = var_01;
-  var_02.var_118A7 = [];
-  for(var_03 = 0; var_03 < 4; var_03++) {
-    var_04 = func_B02E(param_00, var_03);
-    if(!isDefined(var_04)) {
+  var_2 = spawnStruct();
+  var_2.ref = var_1;
+  var_2.var_118A7 = [];
+  for(var_3 = 0; var_3 < 4; var_3++) {
+    var_4 = func_B02E(var_0, var_3);
+    if(!isDefined(var_4)) {
       break;
     }
 
-    var_02.var_118A7[var_03]["target"] = var_04;
+    var_2.var_118A7[var_3]["target"] = var_4;
   }
 
-  var_02.var_4C0D = 0;
-  var_02.progress = 0;
-  return var_02;
+  var_2.var_4C0D = 0;
+  var_2.progress = 0;
+  return var_2;
 }
 
-func_B02D(param_00) {
-  var_01 = tablelookup("mp\intelChallenges.csv", 0, param_00, 1);
-  if(!isDefined(var_01) || var_01 == "") {
+func_B02D(var_0) {
+  var_1 = tablelookup("mp\intelChallenges.csv", 0, var_0, 1);
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_B02E(param_00, param_01) {
-  var_02 = tablelookup("mp\intelChallenges.csv", 0, param_00, 5 + param_01 * 2);
-  if(!isDefined(var_02) || var_02 == "") {
+func_B02E(var_0, var_1) {
+  var_2 = tablelookup("mp\intelChallenges.csv", 0, var_0, 5 + var_1 * 2);
+  if(!isDefined(var_2) || var_2 == "") {
     return undefined;
   }
 
-  return int(var_02);
+  return int(var_2);
 }
 
-setwaypoint(param_00, param_01) {
-  var_02 = self.pers["intelChallengeInfo"];
-  if(isDefined(var_02)) {
-    var_03 = var_02;
+setwaypoint(var_0, var_1) {
+  var_2 = self.pers["intelChallengeInfo"];
+  if(isDefined(var_2)) {
+    var_3 = var_2;
   } else {
-    var_03 = func_AE1D(param_01);
+    var_3 = func_AE1D(var_1);
     self setplayerdata("mp", "activeMissionComplete", -1);
-    var_03.var_B8D4 = param_01;
+    var_3.var_B8D4 = var_1;
   }
 
-  if(!isDefined(var_03)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  self.var_9978 = var_03;
-  self thread[[level.var_9979[var_03.ref]]](param_00);
-  switch (var_03.ref) {
+  self.var_9978 = var_3;
+  self thread[[level.var_9979[var_3.ref]]](var_0);
+  switch (var_3.ref) {
     case "ch_intel_multiple_weapon_one_life":
     case "ch_intel_kills_this_life":
       thread scripts\mp\intelchallenges::func_99B9();
@@ -156,29 +156,29 @@ setwaypoint(param_00, param_01) {
   }
 
   thread func_BA09();
-  func_9884(param_00);
+  func_9884(var_0);
 }
 
 func_F75C() {
-  var_00 = self.var_9978;
-  if(!isDefined(var_00)) {
+  var_0 = self.var_9978;
+  if(!isDefined(var_0)) {
     return;
   }
 
-  self setplayerdata("mp", "activeMissionComplete", var_00.var_4C0D);
-  setmatchdata("players", self.clientid, "tierComplete", var_00.var_4C0D);
-  if(var_00.var_4C0D == 0) {
-    var_01 = self getplayerdata("mp", "missionsCompleted");
-    self setplayerdata("mp", "missionsCompleted", var_01 + 1);
+  self setplayerdata("mp", "activeMissionComplete", var_0.var_4C0D);
+  setmatchdata("players", self.clientid, "tierComplete", var_0.var_4C0D);
+  if(var_0.var_4C0D == 0) {
+    var_1 = self getplayerdata("mp", "missionsCompleted");
+    self setplayerdata("mp", "missionsCompleted", var_1 + 1);
   }
 
-  if(var_00.var_4C0D == var_00.var_118A7.size - 1) {
+  if(var_0.var_4C0D == var_0.var_118A7.size - 1) {
     self notify("intel_max_tier_complete");
   }
 
-  thread scripts\mp\hud_message::showsplash("intel_completed_" + var_00.var_4C0D + 1 + "_team_" + var_00.var_B8D4);
-  var_00.var_4C0D++;
-  func_12EB8(var_00.var_4C0D);
+  thread scripts\mp\hud_message::showsplash("intel_completed_" + var_0.var_4C0D + 1 + "_team_" + var_0.var_B8D4);
+  var_0.var_4C0D++;
+  func_12EB8(var_0.var_4C0D);
 }
 
 func_9E94() {
@@ -200,16 +200,16 @@ func_BA09() {
   }
 }
 
-func_9884(param_00) {
+func_9884(var_0) {
   if(!func_9E94()) {
-    self setclientomnvar("ui_intel_active_index", param_00);
+    self setclientomnvar("ui_intel_active_index", var_0);
     self setclientomnvar("ui_intel_current_tier", self.var_9978.var_4C0D);
   } else {
-    var_01 = self.var_9978.var_118A7.size;
-    var_02 = self.var_9978.var_118A7[self.var_9978.var_118A7.size - 1]["target"];
-    self setclientomnvar("ui_intel_active_index", param_00);
-    self setclientomnvar("ui_intel_progress_current", int(var_02));
-    self setclientomnvar("ui_intel_current_tier", var_01);
+    var_1 = self.var_9978.var_118A7.size;
+    var_2 = self.var_9978.var_118A7[self.var_9978.var_118A7.size - 1]["target"];
+    self setclientomnvar("ui_intel_active_index", var_0);
+    self setclientomnvar("ui_intel_progress_current", int(var_2));
+    self setclientomnvar("ui_intel_current_tier", var_1);
   }
 
   self setclientomnvar("ui_intel_progress_current", int(self.var_9978.progress));
@@ -219,24 +219,24 @@ func_3934() {
   return scripts\mp\utility::isreallyalive(self);
 }
 
-func_12EB7(param_00) {
+func_12EB7(var_0) {
   if(!func_3934()) {
-    self.var_9978.var_DB8F = param_00;
+    self.var_9978.var_DB8F = var_0;
     thread func_12EF9();
     return;
   }
 
-  self setclientomnvar("ui_intel_progress_current", int(param_00));
+  self setclientomnvar("ui_intel_progress_current", int(var_0));
 }
 
-func_12EB8(param_00) {
+func_12EB8(var_0) {
   if(!func_3934()) {
-    self.var_9978.var_DB90 = param_00;
+    self.var_9978.var_DB90 = var_0;
     thread func_12EF9();
     return;
   }
 
-  self setclientomnvar("ui_intel_current_tier", param_00);
+  self setclientomnvar("ui_intel_current_tier", var_0);
 }
 
 func_12EF9() {

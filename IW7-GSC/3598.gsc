@@ -21,10 +21,10 @@ func_2197() {
   return 1;
 }
 
-func_218E(param_00) {
+func_218E(var_0) {
   self notify("armorUp_end");
   self notify("obj_drain_end");
-  if(scripts\mp\utility::istrue(param_00)) {
+  if(scripts\mp\utility::istrue(var_0)) {
     self setscriptablepartstate("armorUpMaterial", "offImmediate", 0);
   } else {
     self setscriptablepartstate("armorUpMaterial", "off", 0);
@@ -58,16 +58,16 @@ func_2196() {
   self endon("armorUp_end");
   self.var_219F = [];
   for(;;) {
-    self waittill("damage", var_00, var_01);
-    if(isDefined(var_01)) {
-      self.var_219F[self.var_219F.size] = var_01;
+    self waittill("damage", var_0, var_1);
+    if(isDefined(var_1)) {
+      self.var_219F[self.var_219F.size] = var_1;
     }
   }
 }
 
 func_9FC0() {
-  var_00 = scripts\mp\supers::getcurrentsuperref();
-  if(!isDefined(var_00) || var_00 != "super_armorup") {
+  var_0 = scripts\mp\supers::getcurrentsuperref();
+  if(!isDefined(var_0) || var_0 != "super_armorup") {
     return 0;
   }
 
@@ -75,6 +75,6 @@ func_9FC0() {
 }
 
 getheavyarmorvalue() {
-  var_00 = scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 100, 114);
-  return scripts\engine\utility::ter_op(scripts\mp\utility::istrue(level.hardcoremode), 76, var_00);
+  var_0 = scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 100, 114);
+  return scripts\engine\utility::ter_op(scripts\mp\utility::istrue(level.hardcoremode), 76, var_0);
 }

@@ -4,7 +4,7 @@
  * Script: scripts\common\debug_reflection.gsc
 ***********************************************/
 
-func_9707(param_00) {
+func_9707(var_0) {
   precachemodel("test_sphere_silver");
   precachemodel("test_sphere_redchrome");
   level.var_4F12 = 0;

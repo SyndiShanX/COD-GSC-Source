@@ -51,15 +51,15 @@ func_92FF() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
   for(;;) {
-    var_00 = scripts\anim\utility::func_1F67("prone_idle");
-    self _meth_82E8("idle", var_00);
+    var_0 = scripts\anim\utility::func_1F67("prone_idle");
+    self _meth_82E8("idle", var_0);
     self waittillmatch("end", "idle");
-    self clearanim(var_00, 0.2);
+    self clearanim(var_0, 0.2);
   }
 }
 
-func_12EF6(param_00) {
-  self _meth_83CF(scripts\anim\utility::func_B027("cover_prone", "legs_up"), scripts\anim\utility::func_B027("cover_prone", "legs_down"), 1, param_00, 1);
+func_12EF6(var_0) {
+  self _meth_83CF(scripts\anim\utility::func_B027("cover_prone", "legs_up"), scripts\anim\utility::func_B027("cover_prone", "legs_down"), 1, var_0, 1);
   self give_attacker_kill_rewards( % exposed_aiming, 1, 0.2);
 }
 
@@ -67,13 +67,13 @@ func_DA7E() {
   self endon("killanimscript");
   thread scripts\anim\track::func_11B07();
   thread scripts\anim\shoot_behavior::func_4F69("normal");
-  var_00 = gettime() > 2500;
+  var_0 = gettime() > 2500;
   for(;;) {
     scripts\anim\utility::func_12EB9();
     func_12EF6(0.05);
-    if(!var_00) {
+    if(!var_0) {
       wait(0.05 + randomfloat(1.5));
-      var_00 = 1;
+      var_0 = 1;
       continue;
     }
 
@@ -86,9 +86,9 @@ func_DA7E() {
       continue;
     }
 
-    var_01 = lengthsquared(self.origin - self.var_FECF);
-    if(self.a.pose != "crouch" && self getteleportlonertargetplayer("crouch") && var_01 < squared(400)) {
-      if(var_01 < squared(285)) {
+    var_1 = lengthsquared(self.origin - self.var_FECF);
+    if(self.a.pose != "crouch" && self getteleportlonertargetplayer("crouch") && var_1 < squared(400)) {
+      if(var_1 < squared(285)) {
         prone_transitionto("crouch");
         thread scripts\anim\combat::main();
         return;
@@ -113,8 +113,8 @@ func_DA7E() {
   }
 }
 
-func_DA83(param_00) {
-  return scripts\anim\combat_utility::openfile(param_00, scripts\anim\utility::func_1F64("reload"));
+func_DA83(var_0) {
+  return scripts\anim\combat_utility::openfile(var_0, scripts\anim\utility::func_1F64("reload"));
 }
 
 func_F924() {
@@ -122,20 +122,20 @@ func_F924() {
   self.a.var_2274 = scripts\anim\utility::func_B028("cover_prone");
 }
 
-func_128AF(param_00, param_01) {
-  var_02 = undefined;
-  if(isDefined(param_01) && param_01) {
-    var_02 = scripts\anim\utility::func_1F67("grenade_safe");
+func_128AF(var_0, var_1) {
+  var_2 = undefined;
+  if(isDefined(var_1) && var_1) {
+    var_2 = scripts\anim\utility::func_1F67("grenade_safe");
   } else {
-    var_02 = scripts\anim\utility::func_1F67("grenade_exposed");
+    var_2 = scripts\anim\utility::func_1F67("grenade_exposed");
   }
 
   self animmode("zonly_physics");
   self.sendmatchdata = 1;
-  var_03 = (32, 20, 64);
-  var_04 = scripts\anim\combat_utility::func_128A0(param_00, var_02);
+  var_3 = (32, 20, 64);
+  var_4 = scripts\anim\combat_utility::func_128A0(var_0, var_2);
   self.sendmatchdata = 0;
-  return var_04;
+  return var_4;
 }
 
 func_453F() {
@@ -168,57 +168,57 @@ func_10012() {
   return 0;
 }
 
-prone_transitionto(param_00) {
-  if(param_00 == self.a.pose) {
+prone_transitionto(var_0) {
+  if(var_0 == self.a.pose) {
     return;
   }
 
   self clearanim( % root, 0.3);
   scripts\anim\combat_utility::func_631A();
   if(func_10012()) {
-    var_01 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + param_00 + "_firing");
+    var_1 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + var_0 + "_firing");
   } else {
-    var_01 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + var_01);
+    var_1 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + var_1);
   }
 
-  if(param_00 == "prone") {}
+  if(var_0 == "prone") {}
 
-  self _meth_82E4("trans", var_01, % body, 1, 0.2, 1);
+  self _meth_82E4("trans", var_1, % body, 1, 0.2, 1);
   scripts\anim\shared::donotetracks("trans");
   self give_boombox(scripts\anim\utility::func_1F64("straight_level"), % body, 1, 0.25);
   func_FADE(0.25);
 }
 
-func_6CDE(param_00) {
+func_6CDE(var_0) {
   self endon("killanimscript");
-  scripts\anim\shared::donotetracks(param_00);
+  scripts\anim\shared::donotetracks(var_0);
 }
 
-func_FADE(param_00) {
-  self _meth_82A5( % prone_aim_5, % body, 1, param_00);
-  self _meth_82AC( % prone_aim_2_add, 1, param_00);
-  self _meth_82AC( % prone_aim_4_add, 1, param_00);
-  self _meth_82AC( % prone_aim_6_add, 1, param_00);
-  self _meth_82AC( % prone_aim_8_add, 1, param_00);
+func_FADE(var_0) {
+  self _meth_82A5( % prone_aim_5, % body, 1, var_0);
+  self _meth_82AC( % prone_aim_2_add, 1, var_0);
+  self _meth_82AC( % prone_aim_4_add, 1, var_0);
+  self _meth_82AC( % prone_aim_6_add, 1, var_0);
+  self _meth_82AC( % prone_aim_8_add, 1, var_0);
 }
 
-func_DA87(param_00, param_01) {
+func_DA87(var_0, var_1) {
   self clearanim( % root, 0.3);
-  var_02 = undefined;
+  var_2 = undefined;
   if(isDefined(self.var_DA78)) {
-    var_02 = self.var_DA78;
+    var_2 = self.var_DA78;
   }
 
   if(isDefined(self.prone_rate_override)) {
-    param_01 = self.prone_rate_override;
+    var_1 = self.prone_rate_override;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  scripts\anim\utility::exitpronewrapper(getanimlength(var_02) / 2);
-  self _meth_82E4("trans", var_02, % body, 1, 0.2, param_01);
+  scripts\anim\utility::exitpronewrapper(getanimlength(var_2) / 2);
+  self _meth_82E4("trans", var_2, % body, 1, 0.2, var_1);
   scripts\anim\shared::donotetracks("trans");
-  self clearanim(var_02, 0.1);
+  self clearanim(var_2, 0.1);
 }

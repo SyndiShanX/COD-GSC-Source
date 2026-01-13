@@ -4,76 +4,76 @@
  * Script: scripts\aitypes\karatemaster\behaviors.gsc
 ******************************************************/
 
-init(param_00) {
-  var_01 = gettime();
-  self.var_3135.nextteleporttime = var_01 + 1000;
-  self.var_3135.lastflyingkicktime = 0;
-  self.var_3135.lastthrowtime = var_01;
+init(var_0) {
+  var_1 = gettime();
+  self.bt.nextteleporttime = var_1 + 1000;
+  self.bt.lastflyingkicktime = 0;
+  self.bt.lastthrowtime = var_1;
   return level.success;
 }
 
-pickdesiredmeleeanimindex(param_00) {
-  var_01 = param_00 + "_melee";
-  if(isDefined(level.karatemastermeleedist[var_01])) {
-    var_02 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-    if(isDefined(var_02)) {
-      var_03 = [];
-      var_04 = distance2dsquared(self.origin, var_02.origin);
-      for(var_05 = 0; var_05 < level.karatemastermeleedist[var_01].size; var_05++) {
-        var_06 = level.karatemastermeleedist[var_01][var_05];
-        if(var_06 * var_06 < var_04) {
-          var_03[var_03.size] = var_05;
+pickdesiredmeleeanimindex(var_0) {
+  var_1 = var_0 + "_melee";
+  if(isDefined(level.karatemastermeleedist[var_1])) {
+    var_2 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+    if(isDefined(var_2)) {
+      var_3 = [];
+      var_4 = distance2dsquared(self.origin, var_2.origin);
+      for(var_5 = 0; var_5 < level.karatemastermeleedist[var_1].size; var_5++) {
+        var_6 = level.karatemastermeleedist[var_1][var_5];
+        if(var_6 * var_6 < var_4) {
+          var_3[var_3.size] = var_5;
           continue;
         }
 
         break;
       }
 
-      var_05 = 0;
-      if(var_03.size > 0) {
-        var_07 = randomint(var_03.size);
-        var_05 = var_03[var_07];
-        self.desiredmovemeleeindex[var_01] = var_05;
+      var_5 = 0;
+      if(var_3.size > 0) {
+        var_7 = randomint(var_3.size);
+        var_5 = var_3[var_7];
+        self.desiredmovemeleeindex[var_1] = var_5;
       }
 
-      self.desiredmovemeleedist = level.karatemastermeleedist[var_01][var_05] + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cwiggleroom;
-      self.desiredmovemeleetimetoimpact = level.karatemastermeleetimetoimpact[var_01][var_05];
+      self.desiredmovemeleedist = level.karatemastermeleedist[var_1][var_5] + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cwiggleroom;
+      self.desiredmovemeleetimetoimpact = level.karatemastermeleetimetoimpact[var_1][var_5];
     }
 
     self.lastdesiredmovemeleetime = gettime();
   }
 }
 
-pickbetterenemy(param_00, param_01) {
-  var_02 = self getpersstat(param_00);
-  var_03 = self getpersstat(param_01);
-  if(var_02 != var_03) {
-    if(var_02) {
-      return param_00;
+pickbetterenemy(var_0, var_1) {
+  var_2 = self getpersstat(var_0);
+  var_3 = self getpersstat(var_1);
+  if(var_2 != var_3) {
+    if(var_2) {
+      return var_0;
     }
 
-    return param_01;
+    return var_1;
   }
 
-  var_04 = distancesquared(self.origin, param_00.origin);
-  var_05 = distancesquared(self.origin, param_01.origin);
-  if(var_04 < var_05) {
-    return param_00;
+  var_4 = distancesquared(self.origin, var_0.origin);
+  var_5 = distancesquared(self.origin, var_1.origin);
+  if(var_4 < var_5) {
+    return var_0;
   }
 
-  return param_01;
+  return var_1;
 }
 
-shouldignoreenemy(param_00) {
-  if(!isalive(param_00)) {
+shouldignoreenemy(var_0) {
+  if(!isalive(var_0)) {
     return 1;
   }
 
-  if(param_00.ignoreme || isDefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
     return 1;
   }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(param_00)) {
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
   }
 
@@ -87,36 +87,36 @@ updateenemy() {
     }
   }
 
-  var_00 = undefined;
-  foreach(var_02 in level.players) {
-    if(shouldignoreenemy(var_02)) {
+  var_0 = undefined;
+  foreach(var_2 in level.players) {
+    if(shouldignoreenemy(var_2)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
+    if(scripts\engine\utility::istrue(var_2.isfasttravelling)) {
       continue;
     }
 
-    if(!isDefined(var_00)) {
-      var_00 = var_02;
+    if(!isDefined(var_0)) {
+      var_0 = var_2;
       continue;
     }
 
-    var_00 = pickbetterenemy(var_00, var_02);
+    var_0 = pickbetterenemy(var_0, var_2);
   }
 
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     self.myenemy = undefined;
     return undefined;
   }
 
-  if(!isDefined(self.myenemy) || var_00 != self.myenemy) {
-    self.myenemy = var_00;
+  if(!isDefined(self.myenemy) || var_0 != self.myenemy) {
+    self.myenemy = var_0;
     self.myenemystarttime = gettime();
   }
 }
 
-updateeveryframe(param_00) {
+updateeveryframe(var_0) {
   scripts\asm\asm_bb::bb_requestmovetype(self.desiredmovemode);
   updateenemy();
   if(!isDefined(self.desiredmovemeleeindex[self.desiredmovemode])) {
@@ -143,105 +143,105 @@ getmovemeleedistsq() {
 }
 
 getpredictedenemypos() {
-  var_00 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  var_01 = var_00 getvelocity();
-  var_02 = length2d(var_01);
-  var_03 = self.desiredmovemeleetimetoimpact;
-  var_04 = var_00.origin + var_01 * var_03;
-  return var_04;
+  var_0 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  var_1 = var_0 getvelocity();
+  var_2 = length2d(var_1);
+  var_3 = self.desiredmovemeleetimetoimpact;
+  var_4 = var_0.origin + var_1 * var_3;
+  return var_4;
 }
 
-getstandmeleeattackswithinrange(param_00, param_01) {
-  var_02 = [];
-  var_03 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
-  for(var_04 = level.karatemastermeleedist["stand_melee"].size - 1; var_04 >= 0; var_04--) {
-    var_05 = param_00 + param_01 * level.karatemastermeleetimetoimpact["stand_melee"][var_04];
-    var_06 = distance2d(var_05, self.origin);
-    if(var_06 > level.karatemastermeleedist["stand_melee"][var_04] + var_03.cstandattackwiggleroom) {
+getstandmeleeattackswithinrange(var_0, var_1) {
+  var_2 = [];
+  var_3 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  for(var_4 = level.karatemastermeleedist["stand_melee"].size - 1; var_4 >= 0; var_4--) {
+    var_5 = var_0 + var_1 * level.karatemastermeleetimetoimpact["stand_melee"][var_4];
+    var_6 = distance2d(var_5, self.origin);
+    if(var_6 > level.karatemastermeleedist["stand_melee"][var_4] + var_3.cstandattackwiggleroom) {
       break;
     }
 
-    var_02[var_02.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  if(var_02.size == 0) {
+  if(var_2.size == 0) {
     return undefined;
   }
 
-  return var_02;
+  return var_2;
 }
 
-pickstandmeleeattack(param_00) {
-  var_01 = getstandmeleeattackswithinrange(param_00.origin, param_00 getvelocity());
-  if(!isDefined(var_01)) {
+pickstandmeleeattack(var_0) {
+  var_1 = getstandmeleeattackswithinrange(var_0.origin, var_0 getvelocity());
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var_02 = randomint(var_01.size);
-  var_03 = var_01[var_02];
-  self.desiredmovemeleeindex["stand_melee"] = var_03;
-  self.desiredmovemeleedist = level.karatemastermeleedist["stand_melee"][var_03] + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cwiggleroom;
-  self.desiredmovemeleetimetoimpact = level.karatemastermeleetimetoimpact["stand_melee"][var_03];
-  self.var_1198.meleetype = "stand_melee";
+  var_2 = randomint(var_1.size);
+  var_3 = var_1[var_2];
+  self.desiredmovemeleeindex["stand_melee"] = var_3;
+  self.desiredmovemeleedist = level.karatemastermeleedist["stand_melee"][var_3] + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cwiggleroom;
+  self.desiredmovemeleetimetoimpact = level.karatemastermeleetimetoimpact["stand_melee"][var_3];
+  self._blackboard.meleetype = "stand_melee";
   return 1;
 }
 
-shouldmelee(param_00) {
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  if(!isDefined(var_01)) {
+shouldmelee(var_0) {
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  if(abs(var_01.origin[2] - self.origin[2]) > scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cmeleemaxzdiff) {
+  if(abs(var_1.origin[2] - self.origin[2]) > scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cmeleemaxzdiff) {
     return level.failure;
   }
 
   if(candostandmelee()) {
-    if(!pickstandmeleeattack(var_01)) {
+    if(!pickstandmeleeattack(var_1)) {
       return level.failure;
     }
 
     return level.success;
   }
 
-  var_02 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
-  var_03 = var_01.origin;
+  var_2 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  var_3 = var_1.origin;
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_03 = getpredictedenemypos();
+    var_3 = getpredictedenemypos();
   }
 
-  if(gettime() > self.lastdesiredmovemeleetime + var_02.crethinkmovemeleetime) {
+  if(gettime() > self.lastdesiredmovemeleetime + var_2.crethinkmovemeleetime) {
     pickdesiredmeleeanimindex(self.desiredmovemode);
   }
 
-  var_04 = distance2dsquared(var_03, self.origin);
-  if(var_04 > getmovemeleedistsq()) {
+  var_4 = distance2dsquared(var_3, self.origin);
+  if(var_4 > getmovemeleedistsq()) {
     return level.failure;
   }
 
-  var_05 = self _meth_84AC();
-  var_06 = getclosestpointonnavmesh(var_01.origin, self);
-  if(!navisstraightlinereachable(var_05, var_06, self)) {
+  var_5 = self _meth_84AC();
+  var_6 = getclosestpointonnavmesh(var_1.origin, self);
+  if(!navisstraightlinereachable(var_5, var_6, self)) {
     return level.failure;
   }
 
-  self.var_1198.meleetype = self.desiredmovemode + "_melee";
+  self._blackboard.meleetype = self.desiredmovemode + "_melee";
   return level.success;
 }
 
-melee_init(param_00) {
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].meleetarget = var_01;
-  self.var_3135.instancedata[param_00].starttime = gettime();
-  self.var_1198.bmeleerequested = 1;
-  self.var_1198.meleetarget = var_01;
-  self.curmeleetarget = var_01;
+melee_init(var_0) {
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].meleetarget = var_1;
+  self.bt.instancedata[var_0].starttime = gettime();
+  self._blackboard.bmeleerequested = 1;
+  self._blackboard.meleetarget = var_1;
+  self.curmeleetarget = var_1;
 }
 
-domelee(param_00) {
-  var_01 = 5000;
-  if(gettime() > self.var_3135.instancedata[param_00].starttime + var_01) {
+domelee(var_0) {
+  var_1 = 5000;
+  if(gettime() > self.bt.instancedata[var_0].starttime + var_1) {
     return level.failure;
   }
 
@@ -254,29 +254,29 @@ domelee(param_00) {
   return level.running;
 }
 
-melee_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_1198.bmeleerequested = undefined;
-  self.var_1198.meleetarget = undefined;
-  self.var_1198.meleetype = undefined;
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
-  var_02 = gettime() + var_01.cminteleportwaittimeaftermelee;
-  if(!isDefined(self.var_3135.nextteleporttime) || self.var_3135.nextteleporttime <= var_02) {
-    self.var_3135.nextteleporttime = var_02;
+melee_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self._blackboard.bmeleerequested = undefined;
+  self._blackboard.meleetarget = undefined;
+  self._blackboard.meleetype = undefined;
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  var_2 = gettime() + var_1.cminteleportwaittimeaftermelee;
+  if(!isDefined(self.bt.nextteleporttime) || self.bt.nextteleporttime <= var_2) {
+    self.bt.nextteleporttime = var_2;
   }
 
   pickdesiredmeleeanimindex(self.desiredmovemode);
 }
 
-ispositiontooclosetoaplayer(param_00) {
-  foreach(var_02 in level.players) {
-    var_03 = abs(var_02.origin[2] - param_00[2]);
-    if(var_03 > 128) {
+ispositiontooclosetoaplayer(var_0) {
+  foreach(var_2 in level.players) {
+    var_3 = abs(var_2.origin[2] - var_0[2]);
+    if(var_3 > 128) {
       continue;
     }
 
-    var_04 = distancesquared(param_00, var_02.origin);
-    if(var_04 < 10000) {
+    var_4 = distancesquared(var_0, var_2.origin);
+    if(var_4 < 10000) {
       return 1;
     }
   }
@@ -284,133 +284,133 @@ ispositiontooclosetoaplayer(param_00) {
   return 0;
 }
 
-findteleportspotinfrontofsprinter(param_00, param_01) {
-  var_02 = param_00.angles[1];
-  var_03 = param_00.angles;
-  var_04 = undefined;
-  for(var_05 = 0; var_05 < 5; var_05++) {
-    var_06 = randomintrange(param_01.csprinterteleportminangledelta, param_01.csprinterteleportmaxangledelta);
+findteleportspotinfrontofsprinter(var_0, var_1) {
+  var_2 = var_0.angles[1];
+  var_3 = var_0.angles;
+  var_4 = undefined;
+  for(var_5 = 0; var_5 < 5; var_5++) {
+    var_6 = randomintrange(var_1.csprinterteleportminangledelta, var_1.csprinterteleportmaxangledelta);
     if(randomint(100) < 50) {
-      var_06 = var_06 * -1;
+      var_6 = var_6 * -1;
     }
 
-    var_07 = randomfloatrange(param_01.csprinterteleportmindist, param_01.csprinterteleportmaxdist);
-    var_08 = angleclamp180(var_03[1] + var_06);
-    var_09 = anglesToForward((0, var_08, 0));
-    var_0A = param_00.origin + var_09 * var_07;
-    var_04 = getclosestpointonnavmesh(var_0A, self);
-    if(ispositiontooclosetoaplayer(var_04)) {
-      var_04 = undefined;
+    var_7 = randomfloatrange(var_1.csprinterteleportmindist, var_1.csprinterteleportmaxdist);
+    var_8 = angleclamp180(var_3[1] + var_6);
+    var_9 = anglesToForward((0, var_8, 0));
+    var_0A = var_0.origin + var_9 * var_7;
+    var_4 = getclosestpointonnavmesh(var_0A, self);
+    if(ispositiontooclosetoaplayer(var_4)) {
+      var_4 = undefined;
       continue;
     }
 
-    if(navisstraightlinereachable(var_04, param_00.origin)) {
+    if(navisstraightlinereachable(var_4, var_0.origin)) {
       break;
     }
 
-    var_04 = undefined;
+    var_4 = undefined;
   }
 
-  if(!isDefined(var_04)) {
+  if(!isDefined(var_4)) {
     return undefined;
   }
 
-  var_0B = self findpath(var_04, param_00.origin, 0, 0, "seeker");
+  var_0B = self findpath(var_4, var_0.origin, 0, 0, "seeker");
   if(!isDefined(var_0B) || var_0B.size < 2) {
-    self.var_3135.nextteleporttime = gettime() + 150;
+    self.bt.nextteleporttime = gettime() + 150;
     return undefined;
   }
 
-  var_0C = getgroundposition(var_04, 8);
-  if(abs(var_0C[2] - var_04[2]) > 60) {
+  var_0C = getgroundposition(var_4, 8);
+  if(abs(var_0C[2] - var_4[2]) > 60) {
     return undefined;
   }
 
   return var_0C;
 }
 
-findteleportspotinenemyview(param_00, param_01) {
-  var_02 = param_00.angles[1];
-  var_03 = param_00.angles;
-  var_04 = param_00.origin + param_00 getvelocity() * 0.5;
-  var_05 = distance(self.origin, var_04);
-  var_06 = undefined;
-  for(var_07 = 0; var_07 < 4; var_07++) {
-    var_08 = randomintrange(param_01.cfastteleportminangledelta, param_01.cfastteleportmaxangledelta);
+findteleportspotinenemyview(var_0, var_1) {
+  var_2 = var_0.angles[1];
+  var_3 = var_0.angles;
+  var_4 = var_0.origin + var_0 getvelocity() * 0.5;
+  var_5 = distance(self.origin, var_4);
+  var_6 = undefined;
+  for(var_7 = 0; var_7 < 4; var_7++) {
+    var_8 = randomintrange(var_1.cfastteleportminangledelta, var_1.cfastteleportmaxangledelta);
     if(randomint(100) < 50) {
-      var_08 = var_08 * -1;
+      var_8 = var_8 * -1;
     }
 
-    var_09 = randomfloatrange(param_01.cfastteleportcloseindistpctmin, param_01.cfastteleportcloseindistpctmax);
-    var_0A = var_05 * var_09;
-    if(var_0A < param_01.cfastteleportmindisttoenemytoteleport) {
-      var_0A = param_01.cfastteleportmindisttoenemytoteleport;
+    var_9 = randomfloatrange(var_1.cfastteleportcloseindistpctmin, var_1.cfastteleportcloseindistpctmax);
+    var_0A = var_5 * var_9;
+    if(var_0A < var_1.cfastteleportmindisttoenemytoteleport) {
+      var_0A = var_1.cfastteleportmindisttoenemytoteleport;
     }
 
-    var_0B = angleclamp180(var_03[1] + var_08);
+    var_0B = angleclamp180(var_3[1] + var_8);
     var_0C = anglesToForward((0, var_0B, 0));
-    var_0D = var_04 + var_0C * var_0A;
-    var_06 = getclosestpointonnavmesh(var_0D, self);
-    if(!isDefined(var_06)) {
+    var_0D = var_4 + var_0C * var_0A;
+    var_6 = getclosestpointonnavmesh(var_0D, self);
+    if(!isDefined(var_6)) {
       continue;
     }
 
-    if(ispositiontooclosetoaplayer(var_06)) {
-      var_06 = undefined;
+    if(ispositiontooclosetoaplayer(var_6)) {
+      var_6 = undefined;
       continue;
     }
 
     break;
   }
 
-  if(!isDefined(var_06)) {
+  if(!isDefined(var_6)) {
     return undefined;
   }
 
-  var_0E = self findpath(var_06, param_00.origin, 0, 0);
+  var_0E = self findpath(var_6, var_0.origin, 0, 0);
   if(!isDefined(var_0E) || var_0E.size < 2) {
     return undefined;
   }
 
-  var_0F = getgroundposition(var_06, 8);
-  if(abs(var_0F[2] - var_06[2]) > 60) {
+  var_0F = getgroundposition(var_6, 8);
+  if(abs(var_0F[2] - var_6[2]) > 60) {
     return undefined;
   }
 
   return var_0F;
 }
 
-findbunchedupteleportspot(param_00, param_01) {
-  return findteleportspotinenemyview(param_00, param_01.bunchedupteleportparams);
+findbunchedupteleportspot(var_0, var_1) {
+  return findteleportspotinenemyview(var_0, var_1.bunchedupteleportparams);
 }
 
-iscrowded(param_00, param_01) {
-  var_02 = scripts\mp\mp_agent::getactiveagentsoftype(self.agent_type);
-  var_03 = [];
-  var_04 = 0;
-  foreach(var_06 in var_02) {
-    var_07 = distancesquared(var_06.origin, self.origin);
-    if(var_07 > param_01.ccrowdedradiussq) {
+iscrowded(var_0, var_1) {
+  var_2 = scripts\mp\mp_agent::getactiveagentsoftype(self.agent_type);
+  var_3 = [];
+  var_4 = 0;
+  foreach(var_6 in var_2) {
+    var_7 = distancesquared(var_6.origin, self.origin);
+    if(var_7 > var_1.ccrowdedradiussq) {
       continue;
     }
 
-    if(!var_06 scripts\asm\asm::asm_isinstate("run_loop") && !var_06 scripts\asm\asm::asm_isinstate("sprint_loop") && !var_06 scripts\asm\asm::asm_isinstate("walk_loop") && !var_06 scripts\asm\asm::asm_isinstate("slow_walk_loop")) {
+    if(!var_6 scripts\asm\asm::asm_isinstate("run_loop") && !var_6 scripts\asm\asm::asm_isinstate("sprint_loop") && !var_6 scripts\asm\asm::asm_isinstate("walk_loop") && !var_6 scripts\asm\asm::asm_isinstate("slow_walk_loop")) {
       continue;
     }
 
-    if(isDefined(var_06.isnodeoccupied) && var_06.isnodeoccupied == param_00) {
-      var_04++;
+    if(isDefined(var_6.isnodeoccupied) && var_6.isnodeoccupied == var_0) {
+      var_4++;
     }
   }
 
-  if(var_04 >= param_01.ccrowdedcount) {
+  if(var_4 >= var_1.ccrowdedcount) {
     return 1;
   }
 
   return 0;
 }
 
-getfastteleportdest(param_00, param_01) {
+getfastteleportdest(var_0, var_1) {
   if(scripts\asm\asm::asm_isinstate("teleport_in")) {
     return undefined;
   }
@@ -419,109 +419,109 @@ getfastteleportdest(param_00, param_01) {
     return undefined;
   }
 
-  var_02 = distance(param_00.origin, self.origin);
-  if(!isDefined(self.vehicle_getspawnerarray) || var_02 > param_01.cminenemydistforlongpathteleport) {
-    if(!isDefined(self.vehicle_getspawnerarray) || self pathdisttogoal() > var_02 * param_01.cfastteleportduetolongpathmultiplier) {
-      var_03 = findteleportspotinenemyview(param_00, param_01.fastteleportparams);
-      if(isDefined(var_03)) {
-        return var_03;
+  var_2 = distance(var_0.origin, self.origin);
+  if(!isDefined(self.vehicle_getspawnerarray) || var_2 > var_1.cminenemydistforlongpathteleport) {
+    if(!isDefined(self.vehicle_getspawnerarray) || self pathdisttogoal() > var_2 * var_1.cfastteleportduetolongpathmultiplier) {
+      var_3 = findteleportspotinenemyview(var_0, var_1.fastteleportparams);
+      if(isDefined(var_3)) {
+        return var_3;
       }
     }
   }
 
-  var_04 = scripts\mp\agents\karatemaster\karatemaster_agent::getdamageaccumulator();
-  if(isDefined(var_04)) {
-    if(param_01.cfastteleportduetodamagechance > 0 && var_04.accumulateddamage > 0) {
-      var_05 = var_04.accumulateddamage / self.maxhealth;
-      if(var_05 >= param_01.cfastteleportdamagepct) {
+  var_4 = scripts\mp\agents\karatemaster\karatemaster_agent::getdamageaccumulator();
+  if(isDefined(var_4)) {
+    if(var_1.cfastteleportduetodamagechance > 0 && var_4.accumulateddamage > 0) {
+      var_5 = var_4.accumulateddamage / self.maxhealth;
+      if(var_5 >= var_1.cfastteleportdamagepct) {
         scripts\mp\agents\karatemaster\karatemaster_agent::cleardamageaccumulator();
-        var_06 = randomint(100);
-        if(var_06 < param_01.cfastteleportduetodamagechance) {
-          self.var_1198.bfastteleport = 1;
-          return findteleportspotinenemyview(param_00, param_01.fastteleportparams);
+        var_6 = randomint(100);
+        if(var_6 < var_1.cfastteleportduetodamagechance) {
+          self._blackboard.bfastteleport = 1;
+          return findteleportspotinenemyview(var_0, var_1.fastteleportparams);
         }
       }
     }
   }
 
-  if(param_01.ballowteleportinfrontofsprinter && param_00 issprinting()) {
-    var_07 = param_00.origin - self.origin;
-    var_08 = anglesToForward(param_00.angles);
-    var_09 = vectordot(var_07, var_08);
-    if(var_09 > 0) {
-      var_0A = findteleportspotinfrontofsprinter(param_00, param_01.sprinterteleportparams);
+  if(var_1.ballowteleportinfrontofsprinter && var_0 issprinting()) {
+    var_7 = var_0.origin - self.origin;
+    var_8 = anglesToForward(var_0.angles);
+    var_9 = vectordot(var_7, var_8);
+    if(var_9 > 0) {
+      var_0A = findteleportspotinfrontofsprinter(var_0, var_1.sprinterteleportparams);
       if(isDefined(var_0A)) {
-        self.var_1198.bfastteleport = 1;
+        self._blackboard.bfastteleport = 1;
         return var_0A;
       }
     }
   }
 
-  if(iscrowded(param_00, param_01)) {
-    self.var_1198.bfastteleport = 1;
-    if(!param_00 issprinting()) {
-      var_0B = param_00 getvelocity();
+  if(iscrowded(var_0, var_1)) {
+    self._blackboard.bfastteleport = 1;
+    if(!var_0 issprinting()) {
+      var_0B = var_0 getvelocity();
       var_0C = length2dsquared(var_0B);
       if(var_0C > 16129) {
-        var_07 = vectornormalize(param_00.origin - self.origin);
-        var_08 = anglesToForward(param_00.angles);
-        var_0D = vectordot(var_07, var_08);
+        var_7 = vectornormalize(var_0.origin - self.origin);
+        var_8 = anglesToForward(var_0.angles);
+        var_0D = vectordot(var_7, var_8);
         var_0E = vectornormalize(var_0B);
-        var_0F = vectordot(var_08, var_0E);
-        if(var_0D > param_01.cplayerfacingawayfrommedot && var_0F > 0.9) {
-          var_0A = findteleportspotinfrontofsprinter(param_00, param_01.runnerteleportparams);
+        var_0F = vectordot(var_8, var_0E);
+        if(var_0D > var_1.cplayerfacingawayfrommedot && var_0F > 0.9) {
+          var_0A = findteleportspotinfrontofsprinter(var_0, var_1.runnerteleportparams);
           if(isDefined(var_0A)) {
-            self.var_1198.bfastteleport = 1;
+            self._blackboard.bfastteleport = 1;
             return var_0A;
           }
         }
       }
     }
 
-    return findbunchedupteleportspot(param_00, param_01);
+    return findbunchedupteleportspot(var_0, var_1);
   }
 
   return undefined;
 }
 
-shouldteleport(param_00) {
+shouldteleport(var_0) {
   if(scripts\engine\utility::istrue(self.bdisableteleport)) {
     return level.failure;
   }
 
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  if(!isDefined(var_01)) {
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  if(gettime() < self.var_3135.nextteleporttime) {
+  if(gettime() < self.bt.nextteleporttime) {
     return level.failure;
   }
 
-  var_02 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
+  var_2 = scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata();
   if(!isDefined(level.last_karatemaster_teleport_time)) {
     level.last_karatemaster_teleport_time = gettime();
-  } else if(gettime() - level.last_karatemaster_teleport_time < var_02.cteleportmintimebetween_global) {
+  } else if(gettime() - level.last_karatemaster_teleport_time < var_2.cteleportmintimebetween_global) {
     return level.failure;
   }
 
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_03 = self pathdisttogoal();
-    var_04 = self _meth_84F9(var_03);
-    if(isDefined(var_04)) {
-      var_05 = var_04["node"];
-      var_06 = var_04["position"];
-      var_07 = var_05.opcode::OP_ScriptMethodCallPointer;
-      if(isDefined(var_07)) {
-        var_08 = self.asmname;
-        var_09 = level.asm[var_08];
-        var_0A = var_09.states[var_07];
+    var_3 = self pathdisttogoal();
+    var_4 = self _meth_84F9(var_3);
+    if(isDefined(var_4)) {
+      var_5 = var_4["node"];
+      var_6 = var_4["position"];
+      var_7 = var_5.opcode::OP_ScriptMethodCallPointer;
+      if(isDefined(var_7)) {
+        var_8 = self.asmname;
+        var_9 = level.asm[var_8];
+        var_0A = var_9.states[var_7];
         if(!isDefined(var_0A)) {
-          var_07 = "traverse_external";
+          var_7 = "traverse_external";
         }
 
-        if(var_07 == "traverse_external") {
-          self.initialteleportpos = var_06;
+        if(var_7 == "traverse_external") {
+          self.initialteleportpos = var_6;
           self.btraversalteleport = 1;
           level.last_karatemaster_teleport_time = gettime();
           return level.success;
@@ -534,7 +534,7 @@ shouldteleport(param_00) {
     return level.failure;
   }
 
-  self.initialteleportpos = getfastteleportdest(var_01, var_02);
+  self.initialteleportpos = getfastteleportdest(var_1, var_2);
   if(isDefined(self.initialteleportpos)) {
     level.last_karatemaster_teleport_time = gettime();
     return level.success;
@@ -543,102 +543,102 @@ shouldteleport(param_00) {
   return level.failure;
 }
 
-teleport_init(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
-  self.var_3135.instancedata[param_00].starttime = gettime();
-  if(scripts\engine\utility::istrue(self.var_1198.bfastteleport) || scripts\engine\utility::istrue(self.btraversalteleport)) {
-    var_01 = self.initialteleportpos;
+teleport_init(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].starttime = gettime();
+  if(scripts\engine\utility::istrue(self._blackboard.bfastteleport) || scripts\engine\utility::istrue(self.btraversalteleport)) {
+    var_1 = self.initialteleportpos;
   } else {
-    var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::findgoodteleportcloserspot();
+    var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::findgoodteleportcloserspot();
   }
 
-  self.var_3135.instancedata[param_00].teleportspot = var_01;
-  if(isDefined(var_01)) {
-    self.var_1198.bteleportrequested = 1;
-    self.var_1198.teleportspot = var_01;
+  self.bt.instancedata[var_0].teleportspot = var_1;
+  if(isDefined(var_1)) {
+    self._blackboard.bteleportrequested = 1;
+    self._blackboard.teleportspot = var_1;
   }
 
   self clearpath();
 }
 
-doteleport(param_00) {
-  if(!isDefined(self.var_3135.instancedata[param_00].teleportspot)) {
+doteleport(var_0) {
+  if(!isDefined(self.bt.instancedata[var_0].teleportspot)) {
     return level.failure;
   }
 
-  var_01 = 10000;
-  if(gettime() > self.var_3135.instancedata[param_00].starttime + var_01) {
+  var_1 = 10000;
+  if(gettime() > self.bt.instancedata[var_0].starttime + var_1) {
     return level.failure;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("teleport_anim", "end")) {
-    self.var_3135.nextteleporttime = gettime() + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cteleportmintimebetween;
+    self.bt.nextteleporttime = gettime() + scripts\mp\agents\karatemaster\karatemaster_tunedata::gettunedata().cteleportmintimebetween;
     return level.success;
   }
 
   return level.running;
 }
 
-teleport_cleanup(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
-  self.var_1198.bteleportrequested = undefined;
-  self.var_1198.teleportspot = undefined;
+teleport_cleanup(var_0) {
+  self.bt.instancedata[var_0] = undefined;
+  self._blackboard.bteleportrequested = undefined;
+  self._blackboard.teleportspot = undefined;
 }
 
-followenemy_begin(param_00) {
-  self.var_3135.instancedata[param_00] = gettime();
+followenemy_begin(var_0) {
+  self.bt.instancedata[var_0] = gettime();
 }
 
 findclosestenemy() {
-  var_00 = 99999999;
-  var_01 = undefined;
-  foreach(var_03 in level.players) {
-    if(!isalive(var_03)) {
+  var_0 = 99999999;
+  var_1 = undefined;
+  foreach(var_3 in level.players) {
+    if(!isalive(var_3)) {
       continue;
     }
 
-    if(var_03.ignoreme || isDefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
+    if(var_3.ignoreme || isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping.ignoreme) {
       continue;
     }
 
-    if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_03)) {
+    if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_3)) {
       continue;
     }
 
-    var_04 = distancesquared(self.origin, var_03.origin);
-    if(!isDefined(var_01) || var_04 < var_00) {
-      var_01 = var_03;
-      var_00 = var_04;
+    var_4 = distancesquared(self.origin, var_3.origin);
+    if(!isDefined(var_1) || var_4 < var_0) {
+      var_1 = var_3;
+      var_0 = var_4;
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-followenemy_tick(param_00) {
-  var_01 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
-  if(!isDefined(var_01)) {
-    var_01 = findclosestenemy();
+followenemy_tick(var_0) {
+  var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
+  if(!isDefined(var_1)) {
+    var_1 = findclosestenemy();
   }
 
-  if(!isDefined(var_01)) {
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  var_02 = gettime();
-  if(var_02 >= self.var_3135.instancedata[param_00] || distancesquared(self.origin, var_01.origin) < 10000) {
-    var_03 = getclosestpointonnavmesh(var_01.origin, self);
-    self ghostskulls_complete_status(var_03);
-    self.var_3135.instancedata[param_00] = var_02 + 200;
+  var_2 = gettime();
+  if(var_2 >= self.bt.instancedata[var_0] || distancesquared(self.origin, var_1.origin) < 10000) {
+    var_3 = getclosestpointonnavmesh(var_1.origin, self);
+    self ghostskulls_complete_status(var_3);
+    self.bt.instancedata[var_0] = var_2 + 200;
   }
 
   return level.running;
 }
 
-followenemy_end(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
+followenemy_end(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }
 
-spawnkaratemaster(param_00) {
-  param_00 endon("death");
+spawnkaratemaster(var_0) {
+  var_0 endon("death");
 }

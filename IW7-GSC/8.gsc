@@ -5,47 +5,47 @@
 
 codecallback_agentadded() {
   self[[level.initagentscriptvariables]]();
-  var_00 = "axis";
+  var_0 = "axis";
 
   if(level.numagents % 2 == 0) {
-    var_00 = "allies";
+    var_0 = "allies";
   }
 
   level.numagents++;
   self sethitlocdamagetable("locdmgtable\mp_lochit_dmgtable");
-  self[[level.setagentteam]](var_00);
+  self[[level.setagentteam]](var_0);
   level.agentarray[level.agentarray.size] = self;
 }
 
-codecallback_agentdamaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
-  var_01 = [[level.agentvalidateattacker]](var_01);
+codecallback_agentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_1 = [[level.agentvalidateattacker]](var_1);
   var_12 = self[[level.agentfunc]]("on_damaged");
 
   if(isDefined(var_12)) {
-    self[[var_12]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+    self[[var_12]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
 
-codecallback_agentimpaled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
+codecallback_agentimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(level.callbackplayerimpaled)) {
-    [[level.callbackplayerimpaled]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
+    [[level.callbackplayerimpaled]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
   }
 }
 
-codecallback_agentkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
-  var_01 = [[level.agentvalidateattacker]](var_01);
+codecallback_agentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  var_1 = [[level.agentvalidateattacker]](var_1);
   var_10 = self[[level.agentfunc]]("on_killed");
 
   if(isDefined(var_10)) {
-    self thread[[var_10]](var_00, var_01, var_02, var_04, var_05, var_06, var_07, var_08, var_09);
+    self thread[[var_10]](var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 }
 
-func_00A7(var_00, var_01, var_02, var_03) {}
+func_00A7(var_0, var_1, var_2, var_3) {}
 
-func_00A8(var_00, var_01) {}
+func_00A8(var_0, var_1) {}
 
-func_00A9(var_00, var_01, var_02, var_03) {}
+func_00A9(var_0, var_1, var_2, var_3) {}
 
 init() {
   initagentlevelvariables();
@@ -53,30 +53,30 @@ init() {
   level thread add_agents_to_game();
 }
 
-connectnewagent(var_00, var_01, var_02) {
-  var_03 = [[level.getfreeagent]](var_00);
+connectnewagent(var_0, var_1, var_2) {
+  var_3 = [[level.getfreeagent]](var_0);
 
-  if(isDefined(var_03)) {
+  if(isDefined(var_3)) {
     var_3.connecttime = gettime();
 
-    if(isDefined(var_01)) {
-      var_03[[level.setagentteam]](var_01);
+    if(isDefined(var_1)) {
+      var_3[[level.setagentteam]](var_1);
     } else {
-      var_03[[level.setagentteam]](var_3.team);
+      var_3[[level.setagentteam]](var_3.team);
     }
 
-    if(isDefined(var_02)) {
-      var_3.class_override = var_02;
+    if(isDefined(var_2)) {
+      var_3.class_override = var_2;
     }
 
-    if(isDefined(level.agent_funcs[var_00]["onAIConnect"])) {
-      var_03[[var_03[[level.agentfunc]]("onAIConnect")]]();
+    if(isDefined(level.agent_funcs[var_0]["onAIConnect"])) {
+      var_3[[var_3[[level.agentfunc]]("onAIConnect")]]();
     }
 
-    var_03[[level.addtocharactersarray]]();
+    var_3[[level.addtocharactersarray]]();
   }
 
-  return var_03;
+  return var_3;
 }
 
 initagentlevelvariables() {
@@ -86,21 +86,21 @@ initagentlevelvariables() {
 
 add_agents_to_game() {
   level endon("game_ended");
-  level waittill("connected", var_00);
-  var_01 = getmaxagents();
+  level waittill("connected", var_0);
+  var_1 = getmaxagents();
 
-  while(level.agentarray.size < var_01) {
-    var_02 = addagent();
+  while(level.agentarray.size < var_1) {
+    var_2 = addagent();
 
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       scripts\engine\utility::waitframe();
       continue;
     }
   }
 }
 
-set_agent_health(var_00) {
-  self.agenthealth = var_00;
-  self.health = var_00;
-  self.maxhealth = var_00;
+set_agent_health(var_0) {
+  self.agenthealth = var_0;
+  self.health = var_0;
+  self.maxhealth = var_0;
 }

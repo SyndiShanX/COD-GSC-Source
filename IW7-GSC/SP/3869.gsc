@@ -89,21 +89,21 @@ func_13437() {
 }
 
 func_7938() {
-  var_00 = self.a.pose;
-  if(var_00 == "back") {
-    var_00 = "prone";
+  var_0 = self.a.pose;
+  if(var_0 == "back") {
+    var_0 = "prone";
   }
 
   if(lib_0F27::func_869D()) {
-    var_01 = "spotted";
+    var_1 = "spotted";
   } else {
-    var_01 = "hidden";
+    var_1 = "hidden";
   }
 
-  var_02 = level.var_10E6D.var_53A0.var_DCCA[var_01][var_00];
+  var_2 = level.var_10E6D.var_53A0.var_DCCA[var_1][var_0];
   if(scripts\sp\utility::func_65DB("stealth_in_shadow")) {
-    var_02 = max(level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"], var_02 * 0.5);
+    var_2 = max(level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"], var_2 * 0.5);
   }
 
-  return var_02;
+  return var_2;
 }

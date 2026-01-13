@@ -45,65 +45,65 @@ initmpqsystems() {
   deactivateinteractionsbynoteworthy("entangler_spawner");
   deactivateinteractionsbynoteworthy("neil_head_final_pos");
   deactivateinteractionsbynoteworthy("portal_gun_button");
-  var_00 = spawnStruct();
-  var_00.origin = (5516, -5725.15, 140.268);
-  var_00.angles = (0, 180, 0);
-  level.struct_class_names["targetname"]["dlc4_poster"][level.struct_class_names["targetname"]["dlc4_poster"].size] = var_00;
+  var_0 = spawnStruct();
+  var_0.origin = (5516, -5725.15, 140.268);
+  var_0.angles = (0, 180, 0);
+  level.struct_class_names["targetname"]["dlc4_poster"][level.struct_class_names["targetname"]["dlc4_poster"].size] = var_0;
 }
 
 initneilconsolehead() {
-  var_00 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
-  var_00.entanglerangleupdate = ::updateneilheadangles;
-  var_00.nextneilvotime = 0;
+  var_0 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  var_0.entanglerangleupdate = ::updateneilheadangles;
+  var_0.nextneilvotime = 0;
 }
 
-updateneilheadangles(param_00, param_01, param_02) {
-  param_00 endon("disconnect");
-  var_03 = gettime();
-  if(var_03 >= param_01.nextneilvotime) {
+updateneilheadangles(var_0, var_1, var_2) {
+  var_0 endon("disconnect");
+  var_3 = gettime();
+  if(var_3 >= var_1.nextneilvotime) {
     if(scripts\engine\utility::cointoss()) {
       if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap")) {
-        param_01.nextneilvotime = var_03 + -5536;
+        var_1.nextneilvotime = var_3 + -5536;
       }
     } else if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap_b")) {
-      param_01.nextneilvotime = var_03 + -5536;
+      var_1.nextneilvotime = var_3 + -5536;
     }
   }
 
-  var_04 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
-  if(isDefined(param_02.pathtogoal)) {
-    if(scripts\engine\utility::istrue(param_00.isfasttravelling)) {
-      param_02.fasttravelling = 1;
-      var_05 = param_00.origin;
+  var_4 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
+  if(isDefined(var_2.pathtogoal)) {
+    if(scripts\engine\utility::istrue(var_0.isfasttravelling)) {
+      var_2.fasttravelling = 1;
+      var_5 = var_0.origin;
     } else {
-      var_06 = var_05.origin;
-      var_07 = undefined;
-      var_08 = param_02.pathtogoal;
-      if(var_08.size > 1) {
-        var_06 = var_08[1];
-        var_07 = 1;
+      var_6 = var_5.origin;
+      var_7 = undefined;
+      var_8 = var_2.pathtogoal;
+      if(var_8.size > 1) {
+        var_6 = var_8[1];
+        var_7 = 1;
       }
 
-      var_09 = param_00 findpath(param_02.origin, var_06, 1, 1);
-      if(var_09.size > 1) {
-        var_05 = var_09[1];
+      var_9 = var_0 findpath(var_2.origin, var_6, 1, 1);
+      if(var_9.size > 1) {
+        var_5 = var_9[1];
       } else {
-        var_05 = var_06;
+        var_5 = var_6;
       }
 
-      if(param_02.pathtogoal.size >= 1) {
-        if(isDefined(var_07) && distance2dsquared(var_06, param_02.origin) <= 9216) {
-          param_02.pathtogoal = scripts\cp\utility::array_remove_index(param_02.pathtogoal, var_07, 0);
+      if(var_2.pathtogoal.size >= 1) {
+        if(isDefined(var_7) && distance2dsquared(var_6, var_2.origin) <= 9216) {
+          var_2.pathtogoal = scripts\cp\utility::array_remove_index(var_2.pathtogoal, var_7, 0);
         }
       }
 
-      var_0A = scripts\engine\utility::getclosest(param_02.origin, level.allslidingdoors, 96);
+      var_0A = scripts\engine\utility::getclosest(var_2.origin, level.allslidingdoors, 96);
       if(isDefined(var_0A)) {
         if(scripts\engine\utility::istrue(var_0A.var_4284)) {
-          var_0B = anglesToForward(param_00.angles);
+          var_0B = anglesToForward(var_0.angles);
           var_0C = 0;
-          if(!var_0C && vectordot(vectornormalize(var_06 - param_00.origin), var_0B) > 0.75 && vectordot(vectornormalize(var_0A.origin - param_00.origin), var_0B) > 0.75) {
-            if(distance(param_00.origin, var_06) > distance(param_00.origin, param_02.origin)) {
+          if(!var_0C && vectordot(vectornormalize(var_6 - var_0.origin), var_0B) > 0.75 && vectordot(vectornormalize(var_0A.origin - var_0.origin), var_0B) > 0.75) {
+            if(distance(var_0.origin, var_6) > distance(var_0.origin, var_2.origin)) {
               if(scripts\engine\utility::istrue(var_0A.var_4284)) {
                 var_0D = scripts\engine\utility::getstructarray(var_0A.script_noteworthy, "script_noteworthy");
                 foreach(var_0F in var_0D) {
@@ -120,49 +120,49 @@ updateneilheadangles(param_00, param_01, param_02) {
       }
     }
 
-    if(isDefined(var_05)) {
-      return var_05;
+    if(isDefined(var_5)) {
+      return var_5;
     }
 
-    return vectortoangles(param_00.origin - param_02.origin);
+    return vectortoangles(var_0.origin - var_2.origin);
   }
 
-  return vectortoangles(param_00.origin - param_02.origin);
+  return vectortoangles(var_0.origin - var_2.origin);
 }
 
 initmedbaybutton() {
-  var_00 = scripts\engine\utility::getstruct("button_entangle_target", "targetname");
-  if(isDefined(var_00.model)) {
-    var_00.model scripts\cp\cp_weapon::placeequipmentfailed("pillage", 1, var_00.model.origin);
-    var_00.model delete();
+  var_0 = scripts\engine\utility::getstruct("button_entangle_target", "targetname");
+  if(isDefined(var_0.model)) {
+    var_0.model scripts\cp\cp_weapon::placeequipmentfailed("pillage", 1, var_0.model.origin);
+    var_0.model delete();
   }
 
-  var_01 = spawn("script_model", var_00.origin);
-  var_01.angles = var_00.angles;
-  var_01 setModel("electrical_airlock_cycle_button_dlc4");
-  var_00.model = var_01;
+  var_1 = spawn("script_model", var_0.origin);
+  var_1.angles = var_0.angles;
+  var_1 setModel("electrical_airlock_cycle_button_dlc4");
+  var_0.model = var_1;
   scripts\engine\utility::flag_wait("fuse_puzzle_completed");
-  thread scripts\cp\crafted_entangler::outlineitemforplayers(var_00, var_01);
-  thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_00, var_01);
-  var_01.collisionfunc = ::checkbuttoncollision;
+  thread scripts\cp\crafted_entangler::outlineitemforplayers(var_0, var_1);
+  thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_0, var_1);
+  var_1.collisionfunc = ::checkbuttoncollision;
 }
 
-checkbuttoncollision(param_00, param_01, param_02) {
+checkbuttoncollision(var_0, var_1, var_2) {
   level endon("game_ended");
-  param_00 waittill("collision");
-  var_03 = param_00.origin;
-  var_04 = scripts\engine\utility::getstructarray("dlc4_poster", "targetname");
-  param_00 notify("end_entangler_funcs");
-  var_05 = scripts\engine\utility::getclosest(var_03, var_04);
-  if(distance(var_03, var_05.origin) <= 36) {
-    if(isDefined(param_02)) {
-      playFX(level._effect["energy_door_impact"], var_05.origin, vectortoangles(var_05.origin - param_02.origin) * 6, anglestoup(var_05.angles));
+  var_0 waittill("collision");
+  var_3 = var_0.origin;
+  var_4 = scripts\engine\utility::getstructarray("dlc4_poster", "targetname");
+  var_0 notify("end_entangler_funcs");
+  var_5 = scripts\engine\utility::getclosest(var_3, var_4);
+  if(distance(var_3, var_5.origin) <= 36) {
+    if(isDefined(var_2)) {
+      playFX(level._effect["energy_door_impact"], var_5.origin, vectortoangles(var_5.origin - var_2.origin) * 6, anglestoup(var_5.angles));
     } else {
-      playFX(level._effect["energy_door_impact"], var_05.origin, anglesToForward(var_05.angles) * 6, anglestoup(var_05.angles));
+      playFX(level._effect["energy_door_impact"], var_5.origin, anglesToForward(var_5.angles) * 6, anglestoup(var_5.angles));
     }
 
     scripts\engine\utility::flag_set("button_entered_poster");
-    param_00 delete();
+    var_0 delete();
     return;
   }
 
@@ -221,9 +221,9 @@ enterbossfight() {
 }
 
 completeenterbossfight() {
-  foreach(var_01 in level.players) {
-    var_01 scripts\cp\utility::allow_player_interactions(1);
-    var_01.kicked_out = undefined;
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::allow_player_interactions(1);
+    var_1.kicked_out = undefined;
   }
 
   level notify("add_hidden_song_to_playlist");
@@ -236,26 +236,26 @@ debugcompleteenterbossfight() {
   scripts\engine\utility::flag_set("players_triggered_bossfight");
 }
 
-finalqueststepregistration(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(!isDefined(level.var_13F4D[param_00])) {
-    level.var_13F4D[param_00] = [];
+finalqueststepregistration(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(level.var_13F4D[var_0])) {
+    level.var_13F4D[var_0] = [];
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = level.var_13F4D[param_00].size;
+  if(!isDefined(var_1)) {
+    var_1 = level.var_13F4D[var_0].size;
   }
 
-  if(!isDefined(level.var_13F4C[param_00])) {
-    level.var_13F4C[param_00] = -1;
+  if(!isDefined(level.var_13F4C[var_0])) {
+    level.var_13F4C[var_0] = -1;
   }
 
-  var_08 = spawnStruct();
-  var_08.init_func = param_02;
-  var_08.var_DB5D = param_03;
-  var_08.var_446D = param_04;
-  var_08.var_4EB1 = param_05;
-  var_08.step_description = param_07;
-  level.var_13F4D[param_00][param_01] = var_08;
+  var_8 = spawnStruct();
+  var_8.init_func = var_2;
+  var_8.var_DB5D = var_3;
+  var_8.var_446D = var_4;
+  var_8.var_4EB1 = var_5;
+  var_8.step_description = var_7;
+  level.var_13F4D[var_0][var_1] = var_8;
 }
 
 registermpqinteractions() {
@@ -273,37 +273,37 @@ registermpqinteractions() {
 }
 
 initneilfinalpos() {
-  var_00 = scripts\engine\utility::getstructarray("neil_head_final_pos", "script_noteworthy");
-  foreach(var_02 in var_00) {
-    var_02.custom_search_dist = 96;
+  var_0 = scripts\engine\utility::getstructarray("neil_head_final_pos", "script_noteworthy");
+  foreach(var_2 in var_0) {
+    var_2.custom_search_dist = 96;
   }
 }
 
-neilheadfinalusefunc(param_00, param_01) {
-  if(!isDefined(param_00.var_127C9)) {
-    param_00.var_127C9 = [];
+neilheadfinalusefunc(var_0, var_1) {
+  if(!isDefined(var_0.var_127C9)) {
+    var_0.var_127C9 = [];
   }
 
-  scripts\cp\utility::playsoundatpos_safe(param_00.origin, "item_placed");
-  param_01 thread playeractivatedbossfight(param_00, param_01);
+  scripts\cp\utility::playsoundatpos_safe(var_0.origin, "item_placed");
+  var_1 thread playeractivatedbossfight(var_0, var_1);
 }
 
-playeractivatedbossfight(param_00, param_01) {
+playeractivatedbossfight(var_0, var_1) {
   level endon("game_ended");
-  param_01 notify("playerActivatedBossFight");
-  param_01 endon("playerActivatedBossFight");
-  param_01 endon("disconnect");
-  if(!scripts\engine\utility::array_contains(param_00.var_127C9, param_01)) {
-    param_00.var_127C9 = scripts\engine\utility::array_add(param_00.var_127C9, param_01);
+  var_1 notify("playerActivatedBossFight");
+  var_1 endon("playerActivatedBossFight");
+  var_1 endon("disconnect");
+  if(!scripts\engine\utility::array_contains(var_0.var_127C9, var_1)) {
+    var_0.var_127C9 = scripts\engine\utility::array_add(var_0.var_127C9, var_1);
   }
 
-  param_00.var_127C9 = scripts\engine\utility::array_remove_duplicates(param_00.var_127C9);
-  if(param_00.var_127C9.size >= level.players.size) {
-    deactivateinteractionsbynoteworthy(param_00.script_noteworthy);
-    foreach(var_03 in level.players) {
-      var_03 notify("left_hidden_room_early");
-      var_03.kicked_out = 1;
-      var_03 scripts\cp\utility::allow_player_interactions(0);
+  var_0.var_127C9 = scripts\engine\utility::array_remove_duplicates(var_0.var_127C9);
+  if(var_0.var_127C9.size >= level.players.size) {
+    deactivateinteractionsbynoteworthy(var_0.script_noteworthy);
+    foreach(var_3 in level.players) {
+      var_3 notify("left_hidden_room_early");
+      var_3.kicked_out = 1;
+      var_3 scripts\cp\utility::allow_player_interactions(0);
     }
 
     wait(2);
@@ -311,13 +311,13 @@ playeractivatedbossfight(param_00, param_01) {
     return;
   }
 
-  param_01 scripts\engine\utility::waittill_any_timeout_1(2, "left_hidden_room_early", "kicked_out", "last_stand");
-  if(scripts\engine\utility::array_contains(param_00.var_127C9, param_01)) {
-    param_00.var_127C9 = scripts\engine\utility::array_remove(param_00.var_127C9, param_01);
+  var_1 scripts\engine\utility::waittill_any_timeout_1(2, "left_hidden_room_early", "kicked_out", "last_stand");
+  if(scripts\engine\utility::array_contains(var_0.var_127C9, var_1)) {
+    var_0.var_127C9 = scripts\engine\utility::array_remove(var_0.var_127C9, var_1);
   }
 
-  if(param_00.var_127C9.size <= 0) {
-    param_00.var_127C9 = [];
+  if(var_0.var_127C9.size <= 0) {
+    var_0.var_127C9 = [];
   }
 }
 
@@ -326,55 +326,55 @@ completeneilfinalspot() {
   deactivateinteractionsbynoteworthy("neil_head_final_pos");
 }
 
-usepuzzlebutton(param_00, param_01) {
-  if(scripts\engine\utility::flag("fuse_puzzle_completed") && scripts\engine\utility::flag("button_entered_poster") && !param_01 isjumping() && param_01 getstance() != "stand") {
-    scripts\cp\utility::playsoundatpos_safe(param_00.origin, "zmb_mpq_puzzle_turn");
+usepuzzlebutton(var_0, var_1) {
+  if(scripts\engine\utility::flag("fuse_puzzle_completed") && scripts\engine\utility::flag("button_entered_poster") && !var_1 isjumping() && var_1 getstance() != "stand") {
+    scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_mpq_puzzle_turn");
     scripts\engine\utility::flag_set("toggle_puzzle_button_pressed");
     deactivateinteractionsbynoteworthy("puzzle_door_button");
-    var_02 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
-    scripts\cp\utility::playsoundatpos_safe(var_02.origin, "zmb_rhino_door_explo");
+    var_2 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+    scripts\cp\utility::playsoundatpos_safe(var_2.origin, "zmb_rhino_door_explo");
   }
 }
 
 startairventfx() {
-  var_00 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
-  foreach(var_02 in var_00) {
-    thread playventfx(var_02);
+  var_0 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
+  foreach(var_2 in var_0) {
+    thread playventfx(var_2);
   }
 }
 
-playventfx(param_00) {
+playventfx(var_0) {
   level endon("end_vent_fx");
   level endon("game_ended");
-  var_01 = level._effect["air_vent_in"];
+  var_1 = level._effect["air_vent_in"];
   for(;;) {
-    var_02 = 5;
-    playFX(var_01, param_00.origin, anglesToForward(param_00.angles), anglestoup(param_00.angles));
+    var_2 = 5;
+    playFX(var_1, var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
     wait(0.5);
-    thread checkfornearbydisk(param_00);
-    level scripts\engine\utility::waittill_any_timeout_1(var_02 - 0.5, "vent_fx");
+    thread checkfornearbydisk(var_0);
+    level scripts\engine\utility::waittill_any_timeout_1(var_2 - 0.5, "vent_fx");
   }
 }
 
-checkfornearbydisk(param_00) {
+checkfornearbydisk(var_0) {
   level endon("game_ended");
   level notify("checkForNearbyDisk");
   level endon("checkForNearbyDisk");
   level endon("end_vent_fx");
   for(;;) {
     if(isDefined(level.undergratepuzzlepiece)) {
-      var_01 = distance(param_00.origin, level.undergratepuzzlepiece.origin);
-      if(scripts\engine\utility::istrue(level.undergratepuzzlepiece.hasbeenthrown) && var_01 <= 96) {
-        param_00 notify("stop_watching_for_entangler_damage");
-        var_02 = 750;
-        var_03 = var_01 / var_02;
-        if(var_03 < 0.25) {
-          var_03 = 0.25;
+      var_1 = distance(var_0.origin, level.undergratepuzzlepiece.origin);
+      if(scripts\engine\utility::istrue(level.undergratepuzzlepiece.hasbeenthrown) && var_1 <= 96) {
+        var_0 notify("stop_watching_for_entangler_damage");
+        var_2 = 750;
+        var_3 = var_1 / var_2;
+        if(var_3 < 0.25) {
+          var_3 = 0.25;
         }
 
-        level.undergratepuzzlepiece moveto(param_00.origin, var_03, var_03 - 0.15, 0);
-        wait(var_03);
-        param_00 notify("vent_grabbed_puzzle_piece");
+        level.undergratepuzzlepiece moveto(var_0.origin, var_3, var_3 - 0.15, 0);
+        wait(var_3);
+        var_0 notify("vent_grabbed_puzzle_piece");
         level notify("vent_grabbed_puzzle_piece", level.undergratepuzzlepiece);
         break;
       }
@@ -386,68 +386,68 @@ checkfornearbydisk(param_00) {
 
 initneilmonitors() {
   level.currentneilstate = "neutral";
-  var_00 = scripts\engine\utility::getstructarray("neil_monitors", "script_noteworthy");
+  var_0 = scripts\engine\utility::getstructarray("neil_monitors", "script_noteworthy");
   level.special_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
   level.normal_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
-  foreach(var_02 in var_00) {
-    scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_02);
+  foreach(var_2 in var_0) {
+    scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_2);
   }
 }
 
-setneilstatepent(param_00, param_01, param_02, param_03) {
-  var_04 = undefined;
-  var_05 = getmodelfromstruct(param_01);
+setneilstatepent(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  var_5 = getmodelfromstruct(var_1);
   switch (level.currentneilstate) {
     case "happy":
-      param_00 setModel(var_05 + "_happy");
+      var_0 setModel(var_5 + "_happy");
       break;
 
     case "straight":
-      param_00 setModel(var_05 + "_o_face");
-      param_00 playLoopSound("neil_alarm", 1);
-      param_00.playingsound = "neil_alarm";
-      param_00 thread cleanupsoundsonrelease(param_00, param_03);
+      var_0 setModel(var_5 + "_o_face");
+      var_0 playLoopSound("neil_alarm", 1);
+      var_0.playingsound = "neil_alarm";
+      var_0 thread cleanupsoundsonrelease(var_0, var_3);
       break;
 
     case "angry":
-      param_00 setModel(var_05 + "_angry");
+      var_0 setModel(var_5 + "_angry");
       break;
 
     case "large_happy":
-      param_00 setModel(var_05 + "_happy");
+      var_0 setModel(var_5 + "_happy");
       break;
 
     case "large_angry":
-      param_00 setModel(var_05 + "_angry");
+      var_0 setModel(var_5 + "_angry");
       break;
 
     case "large_blank":
-      param_00 setModel("cp_final_monitor_large_screen");
+      var_0 setModel("cp_final_monitor_large_screen");
       break;
 
     default:
-      param_00 setModel("cp_final_monitor_small");
+      var_0 setModel("cp_final_monitor_small");
       break;
   }
 }
 
-getmodelfromstruct(param_00) {
-  if(isDefined(param_00.script_label)) {
-    return param_00.script_label;
+getmodelfromstruct(var_0) {
+  if(isDefined(var_0.script_label)) {
+    return var_0.script_label;
   }
 
   return "cp_final_monitor_small";
 }
 
-cleanupsoundsonrelease(param_00, param_01) {
-  param_00 notify("cleanUpSoundsOnRelease");
-  param_00 endon("cleanUpSoundsOnRelease");
-  var_02 = scripts\engine\utility::waittill_any_ents(param_01, "disconnect", param_00, "p_ent_reset", param_01, "zone_change", param_01, "rave_status_changed", param_01, "rave_interactions_updated", level, "game_ended");
-  if(isDefined(param_00.playingsound)) {
-    param_00 stoploopsound();
+cleanupsoundsonrelease(var_0, var_1) {
+  var_0 notify("cleanUpSoundsOnRelease");
+  var_0 endon("cleanUpSoundsOnRelease");
+  var_2 = scripts\engine\utility::waittill_any_ents(var_1, "disconnect", var_0, "p_ent_reset", var_1, "zone_change", var_1, "rave_status_changed", var_1, "rave_interactions_updated", level, "game_ended");
+  if(isDefined(var_0.playingsound)) {
+    var_0 stoploopsound();
   }
 
-  param_00.playingsound = undefined;
+  var_0.playingsound = undefined;
 }
 
 initpuzzlebutton() {
@@ -457,43 +457,43 @@ initpuzzlebutton() {
 initpuzzlebuttoninternal() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("button_entered_poster");
-  var_00 = scripts\engine\utility::getstructarray("puzzle_door_button", "script_noteworthy");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.target)) {
-      var_03 = scripts\engine\utility::getstructarray(var_02.target, "targetname")[0];
+  var_0 = scripts\engine\utility::getstructarray("puzzle_door_button", "script_noteworthy");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.target)) {
+      var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname")[0];
     } else {
-      var_03 = var_02;
+      var_3 = var_2;
     }
 
-    var_04 = spawn("script_model", var_03.origin);
-    if(isDefined(var_03.angles)) {
-      var_04.angles = var_03.angles;
+    var_4 = spawn("script_model", var_3.origin);
+    if(isDefined(var_3.angles)) {
+      var_4.angles = var_3.angles;
     }
 
-    var_04 setModel("electrical_airlock_cycle_button_dlc4");
+    var_4 setModel("electrical_airlock_cycle_button_dlc4");
   }
 }
 
 initentanglerspawner() {
-  var_00 = scripts\engine\utility::getstruct("entangler_spawner", "script_noteworthy");
-  var_00.groupname = "locOverride";
+  var_0 = scripts\engine\utility::getstruct("entangler_spawner", "script_noteworthy");
+  var_0.groupname = "locOverride";
 }
 
-useentanglerweaponhint(param_00, param_01) {
+useentanglerweaponhint(var_0, var_1) {
   return "";
 }
 
-useentanglerweapon(param_00, param_01) {
-  if(!scripts\engine\utility::istrue(param_01.hascollectedentangler)) {
-    param_01 playlocalsound("zmb_item_pickup");
-    scripts\cp\crafted_entangler::give_crafted_entangler(param_00, param_01);
+useentanglerweapon(var_0, var_1) {
+  if(!scripts\engine\utility::istrue(var_1.hascollectedentangler)) {
+    var_1 playlocalsound("zmb_item_pickup");
+    scripts\cp\crafted_entangler::give_crafted_entangler(var_0, var_1);
   }
 }
 
-entanglerbuttonhint(param_00, param_01) {
+entanglerbuttonhint(var_0, var_1) {
   if(scripts\engine\utility::flag("toggle_puzzle_doors_opened")) {
-    thread watchforplayerlookat(param_01);
-    if(isDefined(param_01.current_button)) {
+    thread watchforplayerlookat(var_1);
+    if(isDefined(var_1.current_button)) {
       return "";
     }
 
@@ -503,37 +503,37 @@ entanglerbuttonhint(param_00, param_01) {
   return "";
 }
 
-entanglerbuttonuse(param_00, param_01) {
+entanglerbuttonuse(var_0, var_1) {
   if(scripts\engine\utility::flag("toggle_puzzle_doors_opened")) {
-    if(isDefined(param_01.current_button)) {
-      var_02 = gettime();
-      if(var_02 >= param_00.nextneilvotime) {
-        if(playneilvo("final_n31l_evil_hacked", param_01.vo_prefix)) {
-          param_00.nextneilvotime = var_02 + 10000;
+    if(isDefined(var_1.current_button)) {
+      var_2 = gettime();
+      if(var_2 >= var_0.nextneilvotime) {
+        if(playneilvo("final_n31l_evil_hacked", var_1.vo_prefix)) {
+          var_0.nextneilvotime = var_2 + 10000;
         }
       }
 
-      param_01 notify("stop_interaction_logic");
-      param_01.last_interaction_point = undefined;
-      var_03 = param_01.current_button;
-      param_01.current_button hudoutlinedisableforclient(param_01);
-      scripts\cp\utility::playsoundatpos_safe(param_00.origin, "zmb_mpq_killswitch_placement");
-      runbuttonrules(param_00, var_03);
-      runtogglepuzzlevalidation(param_00, param_01);
+      var_1 notify("stop_interaction_logic");
+      var_1.last_interaction_point = undefined;
+      var_3 = var_1.current_button;
+      var_1.current_button hudoutlinedisableforclient(var_1);
+      scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_mpq_killswitch_placement");
+      runbuttonrules(var_0, var_3);
+      runtogglepuzzlevalidation(var_0, var_1);
       return;
     }
 
-    param_01 scripts\cp\cp_interaction::refresh_interaction();
+    var_1 scripts\cp\cp_interaction::refresh_interaction();
   }
 }
 
-setneilstate(param_00) {
-  level.currentneilstate = param_00;
-  foreach(var_02 in level.players) {
-    var_02 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_02);
+setneilstate(var_0) {
+  level.currentneilstate = var_0;
+  foreach(var_2 in level.players) {
+    var_2 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_2);
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "happy":
       if(isDefined(level.var_BEC5)) {
         level.var_BEC5 setscriptablepartstate("happy", "show", 1);
@@ -596,45 +596,45 @@ setneilstate(param_00) {
   }
 }
 
-disabledoorswhenentangled(param_00, param_01) {
+disabledoorswhenentangled(var_0, var_1) {
   level endon("game_ended");
   level endon("inFinalPosition");
-  param_01 endon("end_entangler_funcs");
-  param_01 notify("disableDoorsWhenEntangled");
-  param_01 endon("disableDoorsWhenEntangled");
-  param_00 endon("entangler_removed");
-  param_00 endon("disconnect");
-  param_01 endon("released");
-  param_01 endon("launched");
-  param_01 waittill("item_entangled");
+  var_1 endon("end_entangler_funcs");
+  var_1 notify("disableDoorsWhenEntangled");
+  var_1 endon("disableDoorsWhenEntangled");
+  var_0 endon("entangler_removed");
+  var_0 endon("disconnect");
+  var_1 endon("released");
+  var_1 endon("launched");
+  var_1 waittill("item_entangled");
   thread neilclosedoors();
   disableslidingdoorinteractions();
 }
 
-watchforitemdeleted(param_00, param_01) {
-  param_01 endon("death");
-  param_01 endon("reset");
-  param_01 endon("inFinalPosition");
+watchforitemdeleted(var_0, var_1) {
+  var_1 endon("death");
+  var_1 endon("reset");
+  var_1 endon("inFinalPosition");
   level endon("inFinalPosition");
-  param_01 waittill("cancel_entangler");
-  thread resetneilhead(param_00, param_01);
+  var_1 waittill("cancel_entangler");
+  thread resetneilhead(var_0, var_1);
 }
 
-resetneilhead(param_00, param_01) {
-  param_01 notify("end_entangler_funcs");
-  param_01 notify("reset");
-  param_01 endon("inFinalPosition");
+resetneilhead(var_0, var_1) {
+  var_1 notify("end_entangler_funcs");
+  var_1 notify("reset");
+  var_1 endon("inFinalPosition");
   level endon("inFinalPosition");
-  param_01 notify("end_entangler_funcs");
-  param_01.carriedby = undefined;
-  param_01.entangled = undefined;
-  param_01.entangled = undefined;
-  param_01 setCanDamage(0);
-  param_01.origin = param_01.ogorigin;
-  param_01.angles = param_01.var_C3A0;
-  param_01.launched = undefined;
-  param_01.reachedfirstdoor = undefined;
-  param_01.reachedseconddoor = undefined;
+  var_1 notify("end_entangler_funcs");
+  var_1.carriedby = undefined;
+  var_1.entangled = undefined;
+  var_1.entangled = undefined;
+  var_1 setCanDamage(0);
+  var_1.origin = var_1.ogorigin;
+  var_1.angles = var_1.var_C3A0;
+  var_1.launched = undefined;
+  var_1.reachedfirstdoor = undefined;
+  var_1.reachedseconddoor = undefined;
   level.var_BEC5 stopsounds();
   unsetwavenumoverride();
   unsetzombiemovespeed();
@@ -643,72 +643,72 @@ resetneilhead(param_00, param_01) {
   unpausenormalwavespawning();
   resetslidingdoorstonormalstate();
   resume_spawn_wave();
-  getneilheadpath(param_00, param_01);
-  thread reenableneilheadentangleitem(param_00, param_01);
+  getneilheadpath(var_0, var_1);
+  thread reenableneilheadentangleitem(var_0, var_1);
 }
 
-disableslidingdoorinteractions(param_00) {
-  foreach(var_02 in level.allslidingdoors) {
-    if(scripts\engine\utility::istrue(param_00) && !scripts\engine\utility::istrue(var_02.player_opened)) {
+disableslidingdoorinteractions(var_0) {
+  foreach(var_2 in level.allslidingdoors) {
+    if(scripts\engine\utility::istrue(var_0) && !scripts\engine\utility::istrue(var_2.player_opened)) {
       continue;
     }
 
-    var_02.nointeraction = 1;
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_02);
+    var_2.nointeraction = 1;
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }
 }
 
 resetslidingdoorstonormalstate() {
-  foreach(var_01 in level.allslidingdoors) {
-    var_01.nointeraction = undefined;
-    if(scripts\engine\utility::istrue(var_01.var_4284)) {
-      scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
+  foreach(var_1 in level.allslidingdoors) {
+    var_1.nointeraction = undefined;
+    if(scripts\engine\utility::istrue(var_1.var_4284)) {
+      scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
     }
   }
 }
 
-watchforitementangled(param_00, param_01) {
+watchforitementangled(var_0, var_1) {
   level endon("game_ended");
-  param_01 notify("watchForItemEntangled");
-  param_01 endon("watchForItemEntangled");
-  param_01 endon("reset");
-  param_01 endon("inFinalPosition");
+  var_1 notify("watchForItemEntangled");
+  var_1 endon("watchForItemEntangled");
+  var_1 endon("reset");
+  var_1 endon("inFinalPosition");
   level endon("inFinalPosition");
   scripts\engine\utility::flag_waitopen("disable_evil_neil");
-  if(scripts\engine\utility::istrue(param_01.entangled)) {
-    param_01 notify("end_entangle_move_to_logic");
-    param_01 notify("released");
-    param_01.sendbacktospawn = 1;
-    thread resetneilhead(param_00, param_01);
+  if(scripts\engine\utility::istrue(var_1.entangled)) {
+    var_1 notify("end_entangle_move_to_logic");
+    var_1 notify("released");
+    var_1.sendbacktospawn = 1;
+    thread resetneilhead(var_0, var_1);
   }
 }
 
-neilheadlaunchfunc(param_00, param_01, param_02) {
-  param_01 notify("launched");
-  param_01 endon("reset");
-  param_01 endon("inFinalPosition");
+neilheadlaunchfunc(var_0, var_1, var_2) {
+  var_1 notify("launched");
+  var_1 endon("reset");
+  var_1 endon("inFinalPosition");
   level endon("inFinalPosition");
-  param_01 endon("released");
-  if(scripts\engine\utility::istrue(param_01.sendbacktospawn)) {
-    param_00.entangledmodel = undefined;
-    thread resetneilhead(param_00, param_01);
+  var_1 endon("released");
+  if(scripts\engine\utility::istrue(var_1.sendbacktospawn)) {
+    var_0.entangledmodel = undefined;
+    thread resetneilhead(var_0, var_1);
     return;
   }
 
-  scripts\cp\crafted_entangler::launchitem(param_00, param_01, param_02);
+  scripts\cp\crafted_entangler::launchitem(var_0, var_1, var_2);
 }
 
-reenableneilheadentangleitem(param_00, param_01) {
+reenableneilheadentangleitem(var_0, var_1) {
   level endon("game_ended");
-  param_01 notify("reenableNeilHeadEntangleItem");
-  param_01 endon("reenableNeilHeadEntangleItem");
-  param_01 endon("inFinalPosition");
+  var_1 notify("reenableNeilHeadEntangleItem");
+  var_1 endon("reenableNeilHeadEntangleItem");
+  var_1 endon("inFinalPosition");
   level endon("inFinalPosition");
-  param_01 hide();
+  var_1 hide();
   level.var_BEC5 setscriptablepartstate("angry", "show", 1);
-  param_01.sendbacktospawn = undefined;
+  var_1.sendbacktospawn = undefined;
   wait(0.1);
-  param_01 show();
+  var_1 show();
   level waittill("wave_starting");
   if(scripts\engine\utility::flag("disable_evil_neil") && level.currentneilstate != "straight") {
     level.var_BEC5 setscriptablepartstate("happy", "show", 1);
@@ -716,42 +716,42 @@ reenableneilheadentangleitem(param_00, param_01) {
     scripts\engine\utility::flag_wait("disable_evil_neil");
   }
 
-  var_02 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
-  itemallowentangle(var_02, param_01);
-  thread disabledoorswhenentangled(param_00, param_01);
-  thread watchforitementangled(param_00, param_01);
-  thread watchforitemdeleted(param_00, param_01);
+  var_2 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  itemallowentangle(var_2, var_1);
+  thread disabledoorswhenentangled(var_0, var_1);
+  thread watchforitementangled(var_0, var_1);
+  thread watchforitemdeleted(var_0, var_1);
 }
 
-itemallowentangle(param_00, param_01) {
-  thread scripts\cp\crafted_entangler::outlineitemforplayers(param_00, param_01);
-  thread scripts\cp\crafted_entangler::watchforentanglerdamage(param_00, param_01);
+itemallowentangle(var_0, var_1) {
+  thread scripts\cp\crafted_entangler::outlineitemforplayers(var_0, var_1);
+  thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_0, var_1);
 }
 
-checkneilheadcollision(param_00, param_01, param_02) {
+checkneilheadcollision(var_0, var_1, var_2) {
   level endon("game_ended");
-  param_00 waittill("collision");
-  var_03 = param_00.origin;
-  var_04 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
-  var_05 = scripts\engine\utility::getstruct(var_04.target, "targetname");
-  param_00 notify("end_entangler_funcs");
-  if(distance(var_03, var_05.origin) <= 48) {
+  var_0 waittill("collision");
+  var_3 = var_0.origin;
+  var_4 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
+  var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+  var_0 notify("end_entangler_funcs");
+  if(distance(var_3, var_5.origin) <= 48) {
     deactivateinteractionsbynoteworthy("entangler_button");
-    playsoundatpos(var_03, "zmb_neil_head_placement_mpq");
+    playsoundatpos(var_3, "zmb_neil_head_placement_mpq");
     level notify("neil_doing_something_evil");
     level notify("inFinalPosition");
-    param_00 notify("inFinalPosition");
+    var_0 notify("inFinalPosition");
     scripts\engine\utility::flag_set("disable_evil_neil");
-    if(isDefined(param_02)) {
-      playFX(level._effect["energy_door_impact"], var_05.origin, vectortoangles(var_05.origin - param_02.origin) * 8, anglestoup(var_05.angles));
+    if(isDefined(var_2)) {
+      playFX(level._effect["energy_door_impact"], var_5.origin, vectortoangles(var_5.origin - var_2.origin) * 8, anglestoup(var_5.angles));
     } else {
-      playFX(level._effect["energy_door_impact"], var_05.origin, anglesToForward(var_05.angles) * 8, anglestoup(var_05.angles));
+      playFX(level._effect["energy_door_impact"], var_5.origin, anglesToForward(var_5.angles) * 8, anglestoup(var_5.angles));
     }
 
     scripts\engine\utility::flag_set("neils_head_placed_in_pap");
-    param_00 physicsstopserver();
-    param_00.origin = var_05.origin;
-    param_00.angles = var_05.angles;
+    var_0 physicsstopserver();
+    var_0.origin = var_5.origin;
+    var_0.angles = var_5.angles;
     resetslidingdoorstonormalstate();
     unsetwavenumoverride();
     unsetzombiemovespeed();
@@ -762,24 +762,24 @@ checkneilheadcollision(param_00, param_01, param_02) {
     return;
   }
 
-  playneilvo("final_n31l_evil_activate_walls", param_02.vo_prefix);
-  param_00 scripts\cp\cp_weapon::placeequipmentfailed("pillage", 1, param_00.origin);
-  playsoundatpos(var_03, "zmb_neil_head_explode");
-  param_00 physicsstopserver();
-  thread resetplaceneilshead(param_00, param_01, param_02);
+  playneilvo("final_n31l_evil_activate_walls", var_2.vo_prefix);
+  var_0 scripts\cp\cp_weapon::placeequipmentfailed("pillage", 1, var_0.origin);
+  playsoundatpos(var_3, "zmb_neil_head_explode");
+  var_0 physicsstopserver();
+  thread resetplaceneilshead(var_0, var_1, var_2);
   setneilstate("angry");
-  var_06 = spawn("script_model", level.players[0].origin);
-  var_06 setModel("tag_origin");
-  var_06.team = "allies";
+  var_6 = spawn("script_model", level.players[0].origin);
+  var_6 setModel("tag_origin");
+  var_6.team = "allies";
   level.forced_nuke = 1;
-  scripts\cp\loot::process_loot_content(level.players[0], "kill_50", var_06, 0);
+  scripts\cp\loot::process_loot_content(level.players[0], "kill_50", var_6, 0);
 }
 
-resetplaceneilshead(param_00, param_01, param_02) {
-  param_00 endon("reset");
-  param_00 endon("inFinalPosition");
+resetplaceneilshead(var_0, var_1, var_2) {
+  var_0 endon("reset");
+  var_0 endon("inFinalPosition");
   level endon("inFinalPosition");
-  thread resetneilhead(param_02, param_00);
+  thread resetneilhead(var_2, var_0);
 }
 
 deactivateneil() {
@@ -791,14 +791,14 @@ deactivateneil() {
   resetslidingdoorstonormalstate();
   deactivateinteractionsbynoteworthy("entangler_button");
   scripts\engine\utility::flag_set("disable_evil_neil");
-  foreach(var_01 in level.players) {
-    var_01 scripts\cp\cp_merits::processmerit("mt_dlc4_hack_neil");
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\cp_merits::processmerit("mt_dlc4_hack_neil");
   }
 
-  var_03 = scripts\engine\utility::ter_op(level.players[0] scripts\cp\utility::isplayingsolo() || level.only_one_player, int(240), int(180));
-  var_04 = level scripts\engine\utility::waittill_any_timeout_1(var_03 - 5, "makeNeilEvil");
+  var_3 = scripts\engine\utility::ter_op(level.players[0] scripts\cp\utility::isplayingsolo() || level.only_one_player, int(240), int(180));
+  var_4 = level scripts\engine\utility::waittill_any_timeout_1(var_3 - 5, "makeNeilEvil");
   setneilstate("straight");
-  if(isDefined(var_04) && var_04 != "makeNeilEvil") {
+  if(isDefined(var_4) && var_4 != "makeNeilEvil") {
     level scripts\engine\utility::waittill_any_timeout_1(5, "makeNeilEvil");
   }
 
@@ -813,203 +813,203 @@ deactivateneil() {
   thread neildoevilstuff();
 }
 
-runtogglepuzzlevalidation(param_00, param_01) {
-  if(validatepuzzle(param_00)) {
+runtogglepuzzlevalidation(var_0, var_1) {
+  if(validatepuzzle(var_0)) {
     scripts\engine\utility::flag_set("completed_toggle_puzzle_once");
     thread deactivateneil();
-    var_02 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
-    thread scripts\cp\crafted_entangler::outlineitemforplayers(var_02, var_02.headmodel);
-    thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_02, var_02.headmodel);
-    getneilheadpath(param_01, var_02.headmodel);
-    thread disabledoorswhenentangled(param_01, var_02.headmodel);
-    thread watchforitementangled(param_01, var_02.headmodel);
-    thread watchforitemdeleted(param_01, var_02.headmodel);
+    var_2 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+    thread scripts\cp\crafted_entangler::outlineitemforplayers(var_2, var_2.headmodel);
+    thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_2, var_2.headmodel);
+    getneilheadpath(var_1, var_2.headmodel);
+    thread disabledoorswhenentangled(var_1, var_2.headmodel);
+    thread watchforitementangled(var_1, var_2.headmodel);
+    thread watchforitemdeleted(var_1, var_2.headmodel);
     scripts\cp\utility::playsoundatpos_safe(level.neil_console.origin, "zmb_mpq_puzzle_success");
   }
 }
 
-validatepuzzle(param_00) {
-  var_01 = param_00.var_32F7[0].color;
-  foreach(var_04, var_03 in param_00.var_32F7) {
-    if(var_04 < 1) {
+validatepuzzle(var_0) {
+  var_1 = var_0.var_32F7[0].color;
+  foreach(var_4, var_3 in var_0.var_32F7) {
+    if(var_4 < 1) {
       continue;
     }
 
-    if(var_03.color != var_01) {
+    if(var_3.color != var_1) {
       return 0;
     }
   }
 
-  param_00.currentcolorstate = var_01;
+  var_0.currentcolorstate = var_1;
   return 1;
 }
 
-togglebutton(param_00) {
-  switch (param_00.color) {
+togglebutton(var_0) {
+  switch (var_0.color) {
     case "horizontal":
-      param_00.color = "vertical";
-      param_00 rotateto((0, 90, 90), 0.1);
+      var_0.color = "vertical";
+      var_0 rotateto((0, 90, 90), 0.1);
       break;
 
     case "vertical":
-      param_00.color = "horizontal";
-      param_00 rotateto((0, 90, 0), 0.1);
+      var_0.color = "horizontal";
+      var_0 rotateto((0, 90, 0), 0.1);
       break;
   }
 }
 
 initentanglerbutton() {
-  var_00 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
-  var_00.nextneilvotime = 0;
-  var_00.dontdelaytrigger = 1;
-  var_01 = scripts\engine\utility::getstructarray(var_00.target, "targetname");
-  assignbuttonindex(var_01, var_00);
-  var_00.var_32F7 = [];
-  var_01 = scripts\engine\utility::array_randomize_objects(var_01);
-  var_00.currentcolorstate = undefined;
-  foreach(var_06, var_03 in var_01) {
-    var_04 = undefined;
-    if(!isDefined(var_03.var_32D9)) {
-      var_04 = spawn("script_model", var_03.origin);
-      if(isDefined(var_03.angles)) {
-        var_04.angles = var_03.angles;
+  var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_0.nextneilvotime = 0;
+  var_0.dontdelaytrigger = 1;
+  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  assignbuttonindex(var_1, var_0);
+  var_0.var_32F7 = [];
+  var_1 = scripts\engine\utility::array_randomize_objects(var_1);
+  var_0.currentcolorstate = undefined;
+  foreach(var_6, var_3 in var_1) {
+    var_4 = undefined;
+    if(!isDefined(var_3.var_32D9)) {
+      var_4 = spawn("script_model", var_3.origin);
+      if(isDefined(var_3.angles)) {
+        var_4.angles = var_3.angles;
       }
     } else {
-      var_04 = var_03.var_32D9;
+      var_4 = var_3.var_32D9;
     }
 
-    var_05 = "cp_final_pod_wall_handle";
-    if(var_06 < 8) {
-      var_04.color = "horizontal";
-      var_04 rotateto((0, 90, 0), 0.1);
+    var_5 = "cp_final_pod_wall_handle";
+    if(var_6 < 8) {
+      var_4.color = "horizontal";
+      var_4 rotateto((0, 90, 0), 0.1);
     } else {
-      var_04.color = "vertical";
-      var_04 rotateto((0, 90, 90), 0.1);
+      var_4.color = "vertical";
+      var_4 rotateto((0, 90, 90), 0.1);
     }
 
-    var_04 setModel(var_05);
-    var_03.var_32D9 = var_04;
-    var_00.var_32F7[var_00.var_32F7.size] = var_04;
-    var_04.rulegroup = var_03.rulegroup;
-    var_04.ruletouse = var_03.ruletouse;
+    var_4 setModel(var_5);
+    var_3.var_32D9 = var_4;
+    var_0.var_32F7[var_0.var_32F7.size] = var_4;
+    var_4.rulegroup = var_3.rulegroup;
+    var_4.ruletouse = var_3.ruletouse;
   }
 }
 
 solvetogglepuzzle() {
   level endon("game_ended");
-  var_00 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
-  var_01 = scripts\engine\utility::getstructarray(var_00.target, "targetname");
-  foreach(var_03 in var_01) {
-    var_03.var_32D9.color = "horizontal";
-    var_03.var_32D9 rotateto((0, 90, 0), 0.1);
+  var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  foreach(var_3 in var_1) {
+    var_3.var_32D9.color = "horizontal";
+    var_3.var_32D9 rotateto((0, 90, 0), 0.1);
   }
 
   wait(0.25);
-  runtogglepuzzlevalidation(var_00, level.players[0]);
+  runtogglepuzzlevalidation(var_0, level.players[0]);
 }
 
-choosedoordecoys(param_00) {
-  param_00.reachedfirstdoor = undefined;
-  param_00.reachedseconddoor = undefined;
-  var_01 = level.allslidingdoors;
-  var_01 = scripts\engine\utility::get_array_of_closest(param_00.origin, var_01, undefined, undefined, undefined, 512);
-  var_02 = scripts\engine\utility::random(var_01);
-  var_01 = scripts\engine\utility::array_remove(var_01, var_02);
-  var_03 = scripts\engine\utility::random(var_01);
-  var_01 = scripts\engine\utility::array_remove(var_01, var_03);
-  var_04 = scripts\engine\utility::random(var_01);
-  var_05 = sortbydistance([var_02, var_03, var_04], param_00.origin);
-  param_00.firstdoorpath = var_05[0];
-  param_00.seconddoorpath = var_05[1];
-  param_00.thirddoorpath = var_05[2];
+choosedoordecoys(var_0) {
+  var_0.reachedfirstdoor = undefined;
+  var_0.reachedseconddoor = undefined;
+  var_1 = level.allslidingdoors;
+  var_1 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, undefined, undefined, 512);
+  var_2 = scripts\engine\utility::random(var_1);
+  var_1 = scripts\engine\utility::array_remove(var_1, var_2);
+  var_3 = scripts\engine\utility::random(var_1);
+  var_1 = scripts\engine\utility::array_remove(var_1, var_3);
+  var_4 = scripts\engine\utility::random(var_1);
+  var_5 = sortbydistance([var_2, var_3, var_4], var_0.origin);
+  var_0.firstdoorpath = var_5[0];
+  var_0.seconddoorpath = var_5[1];
+  var_0.thirddoorpath = var_5[2];
 }
 
-getneilheadpath(param_00, param_01) {
-  choosedoordecoys(param_01);
-  var_02 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
-  var_03 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
-  var_04 = buildpath(level.players[0], param_01.origin, param_01.firstdoorpath.origin);
-  var_05 = buildpath(level.players[0], var_04[var_04.size - 1], param_01.seconddoorpath.origin);
-  var_06 = buildpath(level.players[0], var_05[var_05.size - 1], param_01.thirddoorpath.origin);
-  var_07 = buildpath(level.players[0], var_06[var_06.size - 1], var_02.origin);
-  var_08 = scripts\engine\utility::array_combine(var_04, var_05, var_06, var_07);
-  var_08 = scripts\engine\utility::array_add(var_08, var_03.origin);
-  param_01.pathtogoal = var_08;
+getneilheadpath(var_0, var_1) {
+  choosedoordecoys(var_1);
+  var_2 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
+  var_3 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
+  var_4 = buildpath(level.players[0], var_1.origin, var_1.firstdoorpath.origin);
+  var_5 = buildpath(level.players[0], var_4[var_4.size - 1], var_1.seconddoorpath.origin);
+  var_6 = buildpath(level.players[0], var_5[var_5.size - 1], var_1.thirddoorpath.origin);
+  var_7 = buildpath(level.players[0], var_6[var_6.size - 1], var_2.origin);
+  var_8 = scripts\engine\utility::array_combine(var_4, var_5, var_6, var_7);
+  var_8 = scripts\engine\utility::array_add(var_8, var_3.origin);
+  var_1.pathtogoal = var_8;
 }
 
-buildpath(param_00, param_01, param_02) {
-  var_03 = [];
-  var_04 = level.allslidingdoors;
-  var_05 = 0;
-  var_06 = undefined;
+buildpath(var_0, var_1, var_2) {
+  var_3 = [];
+  var_4 = level.allslidingdoors;
+  var_5 = 0;
+  var_6 = undefined;
   for(;;) {
-    if(!isDefined(param_00)) {
-      param_00 = level.players[0];
+    if(!isDefined(var_0)) {
+      var_0 = level.players[0];
     }
 
-    if(var_03.size == 0) {
-      var_03 = param_00 findpath(param_01, param_02, 1, 1);
+    if(var_3.size == 0) {
+      var_3 = var_0 findpath(var_1, var_2, 1, 1);
     } else {
-      var_07 = param_00 findpath(var_03[var_03.size - 1], param_02, 1, 1);
-      var_03 = scripts\engine\utility::array_combine(var_03, var_07);
+      var_7 = var_0 findpath(var_3[var_3.size - 1], var_2, 1, 1);
+      var_3 = scripts\engine\utility::array_combine(var_3, var_7);
     }
 
-    if(distance2dsquared(param_02, var_03[var_03.size - 1]) <= 4096) {
-      return var_03;
+    if(distance2dsquared(var_2, var_3[var_3.size - 1]) <= 4096) {
+      return var_3;
     }
 
-    var_04 = sortbydistance(var_04, var_03[var_03.size - 1]);
-    var_08 = [];
-    var_09 = undefined;
-    foreach(var_0B in var_04) {
-      if(var_05 && var_0B == var_04[0] || var_0B == var_06) {
+    var_4 = sortbydistance(var_4, var_3[var_3.size - 1]);
+    var_8 = [];
+    var_9 = undefined;
+    foreach(var_0B in var_4) {
+      if(var_5 && var_0B == var_4[0] || var_0B == var_6) {
         continue;
       }
 
-      var_08 = param_00 findpath(var_03[var_03.size - 1], var_0B.origin, 1, 1);
-      if(distance2dsquared(var_0B.origin, var_08[var_08.size - 1]) <= 4096) {
-        var_09 = var_0B;
+      var_8 = var_0 findpath(var_3[var_3.size - 1], var_0B.origin, 1, 1);
+      if(distance2dsquared(var_0B.origin, var_8[var_8.size - 1]) <= 4096) {
+        var_9 = var_0B;
         break;
       }
     }
 
-    if(!var_05) {
-      var_05 = 1;
+    if(!var_5) {
+      var_5 = 1;
     }
 
-    if(!isDefined(var_09)) {
-      return var_03;
+    if(!isDefined(var_9)) {
+      return var_3;
     } else {
-      var_06 = var_09;
+      var_6 = var_9;
     }
 
-    if(isDefined(var_09.target)) {
-      var_08 = [];
-      var_08[var_08.size] = var_09.origin;
-      var_0D = scripts\engine\utility::getstruct(var_09.target, "targetname");
+    if(isDefined(var_9.target)) {
+      var_8 = [];
+      var_8[var_8.size] = var_9.origin;
+      var_0D = scripts\engine\utility::getstruct(var_9.target, "targetname");
       if(isstruct(var_0D)) {
-        var_08[var_08.size] = var_0D.origin;
-        var_03 = scripts\engine\utility::array_combine(var_03, var_08);
+        var_8[var_8.size] = var_0D.origin;
+        var_3 = scripts\engine\utility::array_combine(var_3, var_8);
       } else {
-        return var_03;
+        return var_3;
       }
 
       continue;
     }
 
-    return var_03;
+    return var_3;
   }
 }
 
-assignbuttonindex(param_00, param_01) {
-  var_02 = [-472.8, -486.8, -500.8, -514.8];
-  var_03 = [128.8, 114.8, 100.8, 86.8];
-  var_04 = [];
-  var_05 = [];
-  var_06 = [];
-  var_07 = [];
-  var_08 = [];
-  var_09 = [];
+assignbuttonindex(var_0, var_1) {
+  var_2 = [-472.8, -486.8, -500.8, -514.8];
+  var_3 = [128.8, 114.8, 100.8, 86.8];
+  var_4 = [];
+  var_5 = [];
+  var_6 = [];
+  var_7 = [];
+  var_8 = [];
+  var_9 = [];
   var_0A = [];
   var_0B = [];
   var_0C = [];
@@ -1028,7 +1028,7 @@ assignbuttonindex(param_00, param_01) {
   var_19 = [];
   var_1A = [];
   var_1B = [];
-  foreach(var_1D in param_00) {
+  foreach(var_1D in var_0) {
     var_1E = var_1D.origin[0];
     var_1F = var_1D.origin[2];
     var_1D.id = 1;
@@ -1039,9 +1039,9 @@ assignbuttonindex(param_00, param_01) {
 
     switch (var_1D.id) {
       case 1:
-        var_05[var_05.size] = var_1D;
-        var_06[var_06.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1054,9 +1054,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 2:
-        var_04[var_04.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
@@ -1069,9 +1069,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 3:
-        var_06[var_06.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1084,9 +1084,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 4:
-        var_04[var_04.size] = var_1D;
-        var_05[var_05.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1099,9 +1099,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 5:
-        var_06[var_06.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1114,9 +1114,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 6:
-        var_04[var_04.size] = var_1D;
-        var_05[var_05.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1129,9 +1129,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 7:
-        var_05[var_05.size] = var_1D;
-        var_06[var_06.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1144,9 +1144,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 8:
-        var_04[var_04.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1159,9 +1159,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 9:
-        var_06[var_06.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1174,9 +1174,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 10:
-        var_04[var_04.size] = var_1D;
-        var_05[var_05.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1189,9 +1189,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 11:
-        var_05[var_05.size] = var_1D;
-        var_06[var_06.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1204,9 +1204,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 12:
-        var_04[var_04.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0A[var_0A.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
         var_0F[var_0F.size] = var_1D;
@@ -1219,9 +1219,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 13:
-        var_05[var_05.size] = var_1D;
-        var_06[var_06.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1234,9 +1234,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 14:
-        var_04[var_04.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0D[var_0D.size] = var_1D;
@@ -1249,9 +1249,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 15:
-        var_06[var_06.size] = var_1D;
-        var_07[var_07.size] = var_1D;
-        var_09[var_09.size] = var_1D;
+        var_6[var_6.size] = var_1D;
+        var_7[var_7.size] = var_1D;
+        var_9[var_9.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1264,9 +1264,9 @@ assignbuttonindex(param_00, param_01) {
         break;
 
       case 16:
-        var_04[var_04.size] = var_1D;
-        var_05[var_05.size] = var_1D;
-        var_08[var_08.size] = var_1D;
+        var_4[var_4.size] = var_1D;
+        var_5[var_5.size] = var_1D;
+        var_8[var_8.size] = var_1D;
         var_0B[var_0B.size] = var_1D;
         var_0C[var_0C.size] = var_1D;
         var_0E[var_0E.size] = var_1D;
@@ -1280,302 +1280,302 @@ assignbuttonindex(param_00, param_01) {
     }
   }
 
-  param_01.group1 = var_04;
-  param_01.group2 = var_05;
-  param_01.group3 = var_06;
-  param_01.group4 = var_07;
-  param_01.group5 = var_08;
-  param_01.group6 = var_09;
-  param_01.group7 = var_0A;
-  param_01.group8 = var_0B;
-  param_01.group9 = var_0C;
-  param_01.group10 = var_0D;
-  param_01.group11 = var_0E;
-  param_01.group12 = var_0F;
-  param_01.group13 = var_10;
-  param_01.group14 = var_11;
-  param_01.group15 = var_12;
-  param_01.group16 = var_13;
-  param_01.group17 = var_14;
-  param_01.group18 = var_15;
-  param_01.group19 = var_16;
-  param_01.group20 = var_17;
-  param_01.group21 = var_18;
-  param_01.group22 = var_19;
-  param_01.group23 = var_1A;
-  param_01.group24 = var_1B;
-  thread assignbuttonrules(param_00, param_01);
+  var_1.group1 = var_4;
+  var_1.group2 = var_5;
+  var_1.group3 = var_6;
+  var_1.group4 = var_7;
+  var_1.group5 = var_8;
+  var_1.group6 = var_9;
+  var_1.group7 = var_0A;
+  var_1.group8 = var_0B;
+  var_1.group9 = var_0C;
+  var_1.group10 = var_0D;
+  var_1.group11 = var_0E;
+  var_1.group12 = var_0F;
+  var_1.group13 = var_10;
+  var_1.group14 = var_11;
+  var_1.group15 = var_12;
+  var_1.group16 = var_13;
+  var_1.group17 = var_14;
+  var_1.group18 = var_15;
+  var_1.group19 = var_16;
+  var_1.group20 = var_17;
+  var_1.group21 = var_18;
+  var_1.group22 = var_19;
+  var_1.group23 = var_1A;
+  var_1.group24 = var_1B;
+  thread assignbuttonrules(var_0, var_1);
 }
 
-assignbuttonrules(param_00, param_01) {
-  var_02 = randomint(6);
-  foreach(var_04 in param_00) {
-    switch (var_04.id) {
+assignbuttonrules(var_0, var_1) {
+  var_2 = randomint(6);
+  foreach(var_4 in var_0) {
+    switch (var_4.id) {
       case 1:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group1;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group8;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group10;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group13;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group17;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group23;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group1;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group8;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group10;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group13;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group17;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group23;
         break;
 
       case 2:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group2;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group8;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group12;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group16;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group20;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group22;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group2;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group8;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group12;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group16;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group20;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group22;
         break;
 
       case 3:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group2;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group8;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group9;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group16;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group19;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group21;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group2;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group8;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group9;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group16;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group19;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group21;
         break;
 
       case 4:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group3;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group8;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group9;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group14;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group18;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group23;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group3;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group8;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group9;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group14;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group18;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group23;
         break;
 
       case 5:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group1;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group5;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group12;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group15;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group20;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group21;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group1;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group5;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group12;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group15;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group20;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group21;
         break;
 
       case 6:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group4;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group6;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group12;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group13;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group17;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group24;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group4;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group6;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group12;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group13;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group17;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group24;
         break;
 
       case 7:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group4;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group5;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group12;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group14;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group18;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group24;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group4;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group5;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group12;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group14;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group18;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group24;
         break;
 
       case 8:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group3;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group6;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group9;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group15;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group19;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group22;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group3;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group6;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group9;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group15;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group19;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group22;
         break;
 
       case 9:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group1;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group6;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group11;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group15;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group20;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group22;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group1;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group6;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group11;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group15;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group20;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group22;
         break;
 
       case 10:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group4;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group5;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group11;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group14;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group17;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group23;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group4;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group5;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group11;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group14;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group17;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group23;
         break;
 
       case 11:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group4;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group6;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group11;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group13;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group18;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group23;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group4;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group6;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group11;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group13;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group18;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group23;
         break;
 
       case 12:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group3;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group5;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group10;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group15;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group19;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group21;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group3;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group5;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group10;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group15;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group19;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group21;
         break;
 
       case 13:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group1;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group7;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group9;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group14;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group17;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group24;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group1;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group7;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group9;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group14;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group17;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group24;
         break;
 
       case 14:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group2;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group7;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group11;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group16;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group20;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group21;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group2;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group7;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group11;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group16;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group20;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group21;
         break;
 
       case 15:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group2;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group7;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group10;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group16;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group19;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group22;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group2;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group7;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group10;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group16;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group19;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group22;
         break;
 
       case 16:
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group3;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group7;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group10;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group13;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group18;
-        var_04.rulegroup[var_04.rulegroup.size] = param_01.group24;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group3;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group7;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group10;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group13;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group18;
+        var_4.rulegroup[var_4.rulegroup.size] = var_1.group24;
         break;
     }
 
     if(scripts\engine\utility::flag("completed_toggle_puzzle_once")) {
-      var_04.ruletouse = var_04.rulegroup[var_02];
+      var_4.ruletouse = var_4.rulegroup[var_2];
       continue;
     }
 
-    var_04.ruletouse = var_04.rulegroup[0];
+    var_4.ruletouse = var_4.rulegroup[0];
   }
 }
 
-runbuttonrules(param_00, param_01) {
-  togglebutton(param_01);
-  var_02 = param_01.ruletouse;
-  foreach(var_04 in var_02) {
-    var_05 = var_04.var_32D9;
-    if(var_05 == param_01) {
+runbuttonrules(var_0, var_1) {
+  togglebutton(var_1);
+  var_2 = var_1.ruletouse;
+  foreach(var_4 in var_2) {
+    var_5 = var_4.var_32D9;
+    if(var_5 == var_1) {
       continue;
     }
 
-    togglebutton(var_05);
+    togglebutton(var_5);
   }
 }
 
-buttonrule2(param_00, param_01) {
-  togglebutton(param_01);
-  foreach(var_03 in param_00.group2) {
-    var_04 = var_03.var_32D9;
-    if(var_04 == param_01) {
+buttonrule2(var_0, var_1) {
+  togglebutton(var_1);
+  foreach(var_3 in var_0.group2) {
+    var_4 = var_3.var_32D9;
+    if(var_4 == var_1) {
       continue;
     }
 
-    togglebutton(var_04);
+    togglebutton(var_4);
   }
 }
 
-buttonrule3(param_00, param_01) {
-  togglebutton(param_01);
-  foreach(var_03 in param_00.group3) {
-    var_04 = var_03.var_32D9;
-    if(var_04 == param_01) {
+buttonrule3(var_0, var_1) {
+  togglebutton(var_1);
+  foreach(var_3 in var_0.group3) {
+    var_4 = var_3.var_32D9;
+    if(var_4 == var_1) {
       continue;
     }
 
-    togglebutton(var_04);
+    togglebutton(var_4);
   }
 }
 
-buttonrule4(param_00, param_01) {
-  togglebutton(param_01);
-  foreach(var_03 in param_00.group4) {
-    var_04 = var_03.var_32D9;
-    if(var_04 == param_01) {
+buttonrule4(var_0, var_1) {
+  togglebutton(var_1);
+  foreach(var_3 in var_0.group4) {
+    var_4 = var_3.var_32D9;
+    if(var_4 == var_1) {
       continue;
     }
 
-    togglebutton(var_04);
+    togglebutton(var_4);
   }
 }
 
-watchforplayerlookat(param_00) {
+watchforplayerlookat(var_0) {
   level endon("game_ended");
-  param_00 endon("disconnect");
-  param_00 endon("watchForPlayerLookat");
-  param_00 endon("stop_interaction_logic");
-  param_00 thread unsetplayerlookat(param_00);
-  var_01 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
-  var_02 = var_01.var_32F7;
-  var_03 = undefined;
-  var_04 = undefined;
+  var_0 endon("disconnect");
+  var_0 endon("watchForPlayerLookat");
+  var_0 endon("stop_interaction_logic");
+  var_0 thread unsetplayerlookat(var_0);
+  var_1 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_2 = var_1.var_32F7;
+  var_3 = undefined;
+  var_4 = undefined;
   for(;;) {
-    var_05 = 0;
-    foreach(var_07 in var_02) {
-      if(param_00 worldpointinreticle_circle(var_07.origin, 65, 20)) {
-        var_05 = 1;
-        param_00.current_button = var_07;
-        var_04 = 2;
-        if(isDefined(var_03)) {
-          if(var_03 != var_07) {
-            var_03 hudoutlinedisableforclient(param_00);
-            var_07 hudoutlineenableforclient(param_00, var_04, 0, 0);
+    var_5 = 0;
+    foreach(var_7 in var_2) {
+      if(var_0 worldpointinreticle_circle(var_7.origin, 65, 20)) {
+        var_5 = 1;
+        var_0.current_button = var_7;
+        var_4 = 2;
+        if(isDefined(var_3)) {
+          if(var_3 != var_7) {
+            var_3 hudoutlinedisableforclient(var_0);
+            var_7 hudoutlineenableforclient(var_0, var_4, 0, 0);
           }
         } else {
-          var_07 hudoutlineenableforclient(param_00, var_04, 0, 0);
+          var_7 hudoutlineenableforclient(var_0, var_4, 0, 0);
         }
 
-        var_03 = var_07;
+        var_3 = var_7;
       }
     }
 
-    if(!scripts\engine\utility::istrue(var_05)) {
-      if(isDefined(var_03)) {
-        var_03 hudoutlinedisableforclient(param_00);
+    if(!scripts\engine\utility::istrue(var_5)) {
+      if(isDefined(var_3)) {
+        var_3 hudoutlinedisableforclient(var_0);
       }
 
-      param_00.current_button = undefined;
-      var_03 = undefined;
+      var_0.current_button = undefined;
+      var_3 = undefined;
     }
 
     wait(0.05);
   }
 }
 
-unsetplayerlookat(param_00) {
-  param_00 endon("disconnect");
-  param_00 endon("watchForPlayerLookat");
-  param_00 waittill("stop_interaction_logic");
-  if(isDefined(param_00.current_button)) {
-    param_00.current_button hudoutlinedisableforclient(param_00);
-    param_00.current_button = undefined;
+unsetplayerlookat(var_0) {
+  var_0 endon("disconnect");
+  var_0 endon("watchForPlayerLookat");
+  var_0 waittill("stop_interaction_logic");
+  if(isDefined(var_0.current_button)) {
+    var_0.current_button hudoutlinedisableforclient(var_0);
+    var_0.current_button = undefined;
   }
 }
 
-watchforentanglerdamage(param_00) {
+watchforentanglerdamage(var_0) {
   level endon("game_ended");
   level endon("endMonitorDamageLoop");
   scripts\engine\utility::flag_wait("restorepower_step1");
   for(;;) {
-    level waittill("entangler_item_collision", var_01);
-    if(distance(var_01, sortbydistance(param_00, var_01)[0].origin) <= 56) {
-      foreach(var_03 in param_00) {
-        var_03 setModel("cp_final_monitor_large_screen_cracked");
+    level waittill("entangler_item_collision", var_1);
+    if(distance(var_1, sortbydistance(var_0, var_1)[0].origin) <= 56) {
+      foreach(var_3 in var_0) {
+        var_3 setModel("cp_final_monitor_large_screen_cracked");
       }
 
       break;
@@ -1587,8 +1587,8 @@ watchforentanglerdamage(param_00) {
 }
 
 initneilconsole() {
-  foreach(var_01 in scripts\engine\utility::getstructarray("neil_console", "script_noteworthy")) {
-    var_01.nextneilvotime = 0;
+  foreach(var_1 in scripts\engine\utility::getstructarray("neil_console", "script_noteworthy")) {
+    var_1.nextneilvotime = 0;
   }
 
   deactivateinteractionsbynoteworthy("neil_console");
@@ -1599,251 +1599,251 @@ initfusepuzzleinteraction() {
   deactivateinteractionsbynoteworthy("puzzle_pieces");
 }
 
-deactivateinteractionsbynoteworthy(param_00) {
-  var_01 = scripts\engine\utility::getstructarray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
+deactivateinteractionsbynoteworthy(var_0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
   }
 }
 
-deletemodelsbynoteworthy(param_00) {
-  var_01 = scripts\engine\utility::getstructarray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
-    if(isDefined(var_03.model)) {
-      var_03.model delete();
+deletemodelsbynoteworthy(var_0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.model)) {
+      var_3.model delete();
     }
   }
 }
 
-activateinteractionsbynoteworthy(param_00) {
-  var_01 = scripts\engine\utility::getstructarray(param_00, "script_noteworthy");
-  foreach(var_03 in var_01) {
-    scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
+activateinteractionsbynoteworthy(var_0) {
+  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  foreach(var_3 in var_1) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
   }
 }
 
 initpuzzlecombinations() {
-  var_00 = "cp\zombies\cp_final_puzzle_combos.csv";
+  var_0 = "cp\zombies\cp_final_puzzle_combos.csv";
   level.puzzle_combinations = [];
   level.insertedpieces = [];
-  var_01 = 0;
+  var_1 = 0;
   for(;;) {
-    var_02 = tablelookupbyrow(var_00, var_01, 0);
-    if(var_02 == "") {
+    var_2 = tablelookupbyrow(var_0, var_1, 0);
+    if(var_2 == "") {
       break;
     }
 
-    level.puzzle_combinations[level.puzzle_combinations.size] = var_02;
-    var_01++;
+    level.puzzle_combinations[level.puzzle_combinations.size] = var_2;
+    var_1++;
   }
 }
 
-spawnmodelatstruct(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = "tag_origin";
+spawnmodelatstruct(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "tag_origin";
   }
 
-  var_02 = spawn("script_model", param_00.origin);
-  if(isDefined(param_00.angles)) {
-    var_02.angles = param_00.angles;
+  var_2 = spawn("script_model", var_0.origin);
+  if(isDefined(var_0.angles)) {
+    var_2.angles = var_0.angles;
   } else {
-    var_02.angles = (0, 0, 0);
+    var_2.angles = (0, 0, 0);
   }
 
-  var_02 setModel(param_01);
-  return var_02;
+  var_2 setModel(var_1);
+  return var_2;
 }
 
 initmedbaymonitors() {
-  var_00 = scripts\engine\utility::getstructarray("med_bay_monitors", "targetname");
-  var_01 = [];
-  foreach(var_03 in var_00) {
-    var_04 = spawn("script_model", var_03.origin);
-    if(isDefined(var_03.angles)) {
-      var_04.angles = var_03.angles;
+  var_0 = scripts\engine\utility::getstructarray("med_bay_monitors", "targetname");
+  var_1 = [];
+  foreach(var_3 in var_0) {
+    var_4 = spawn("script_model", var_3.origin);
+    if(isDefined(var_3.angles)) {
+      var_4.angles = var_3.angles;
     }
 
-    if(isDefined(var_03.script_modelname)) {
-      var_04 setModel(var_03.script_modelname);
+    if(isDefined(var_3.script_modelname)) {
+      var_4 setModel(var_3.script_modelname);
     }
 
-    var_01[var_01.size] = var_04;
+    var_1[var_1.size] = var_4;
   }
 
-  level thread watchforentanglerdamage(var_01);
+  level thread watchforentanglerdamage(var_1);
 }
 
 spawnpuzzlepieces() {
-  var_00 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  var_0 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
   level.puzzlestates = getvalidpuzzlestates();
   level.phantomdisk = level.puzzlestates[level.puzzlestates.size - 1];
-  foreach(var_03, var_02 in var_00) {
-    spawnpuzzlepiece(var_03, var_02);
+  foreach(var_3, var_2 in var_0) {
+    spawnpuzzlepiece(var_3, var_2);
   }
 }
 
-spawnpuzzlepiece(param_00, param_01) {
-  if(isDefined(param_01.model)) {
-    param_01.model delete();
+spawnpuzzlepiece(var_0, var_1) {
+  if(isDefined(var_1.model)) {
+    var_1.model delete();
   }
 
-  if(isDefined(param_01.screenmodel)) {
-    param_01.screenmodel delete();
+  if(isDefined(var_1.screenmodel)) {
+    var_1.screenmodel delete();
   }
 
-  if(isDefined(param_01.target)) {
-    var_02 = scripts\engine\utility::getstruct(param_01.target, "targetname");
+  if(isDefined(var_1.target)) {
+    var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   } else {
-    var_02 = var_02;
+    var_2 = var_2;
   }
 
-  var_03 = spawn("script_model", var_02.origin);
-  var_04 = level.puzzlestates[param_00];
-  switch (int(var_04)) {
+  var_3 = spawn("script_model", var_2.origin);
+  var_4 = level.puzzlestates[var_0];
+  switch (int(var_4)) {
     case 1:
-      var_03 setModel("cp_final_floppydisk_01");
+      var_3 setModel("cp_final_floppydisk_01");
       break;
 
     case 2:
-      var_03 setModel("cp_final_floppydisk_02");
+      var_3 setModel("cp_final_floppydisk_02");
       break;
 
     case 3:
-      var_03 setModel("cp_final_floppydisk_03");
+      var_3 setModel("cp_final_floppydisk_03");
       break;
 
     case 4:
-      var_03 setModel("cp_final_floppydisk_04");
+      var_3 setModel("cp_final_floppydisk_04");
       break;
 
     case 5:
-      var_03 setModel("cp_final_floppydisk_05");
+      var_3 setModel("cp_final_floppydisk_05");
       break;
 
     case 6:
-      var_03 setModel("cp_final_floppydisk_06");
+      var_3 setModel("cp_final_floppydisk_06");
       break;
 
     case 7:
-      var_03 setModel("cp_final_floppydisk_07");
+      var_3 setModel("cp_final_floppydisk_07");
       break;
 
     case 8:
-      var_03 setModel("cp_final_floppydisk_08");
+      var_3 setModel("cp_final_floppydisk_08");
       break;
 
     case 9:
-      var_03 setModel("cp_final_floppydisk_09");
+      var_3 setModel("cp_final_floppydisk_09");
       break;
 
     case 10:
-      var_03 setModel("cp_final_floppydisk_10");
+      var_3 setModel("cp_final_floppydisk_10");
       break;
 
     case 11:
-      var_03 setModel("cp_final_floppydisk_11");
+      var_3 setModel("cp_final_floppydisk_11");
       break;
 
     case 12:
-      var_03 setModel("cp_final_floppydisk_12");
+      var_3 setModel("cp_final_floppydisk_12");
       break;
   }
 
-  if(isDefined(var_02.angles)) {
-    var_03.angles = var_02.angles;
+  if(isDefined(var_2.angles)) {
+    var_3.angles = var_2.angles;
   }
 
-  param_01.id = param_00;
-  param_01.model = var_03;
-  param_01.state = level.puzzlestates[param_00];
-  if(isDefined(param_01.groupname)) {
-    var_03.hasbeenthrown = undefined;
-    param_01 notify("new_model_created");
-    param_01.entanglemodel = var_03;
-    var_03.parent_struct = param_01;
-    thread scripts\cp\crafted_entangler::outlineitemforplayers(param_01, param_01.model);
-    thread scripts\cp\crafted_entangler::watchforentanglerdamage(param_01, param_01.model);
-    param_01.var_1088C = ::spawnpuzzlepiece;
-    param_01.entanglemovetofunc = ::entanglemovetocheckforcollision;
-    var_03.collisionfunc = ::diskcustomcollisionfunc;
-    param_01 thread disableaftermovethroughvent(param_01);
+  var_1.id = var_0;
+  var_1.model = var_3;
+  var_1.state = level.puzzlestates[var_0];
+  if(isDefined(var_1.groupname)) {
+    var_3.hasbeenthrown = undefined;
+    var_1 notify("new_model_created");
+    var_1.entanglemodel = var_3;
+    var_3.parent_struct = var_1;
+    thread scripts\cp\crafted_entangler::outlineitemforplayers(var_1, var_1.model);
+    thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_1, var_1.model);
+    var_1.var_1088C = ::spawnpuzzlepiece;
+    var_1.entanglemovetofunc = ::entanglemovetocheckforcollision;
+    var_3.collisionfunc = ::diskcustomcollisionfunc;
+    var_1 thread disableaftermovethroughvent(var_1);
   }
 }
 
-disableaftermovethroughvent(param_00) {
-  param_00 endon("new_model_created");
-  level waittill("vent_grabbed_puzzle_piece", var_01);
+disableaftermovethroughvent(var_0) {
+  var_0 endon("new_model_created");
+  level waittill("vent_grabbed_puzzle_piece", var_1);
   level.undergratepuzzlepiece = undefined;
-  var_02 = level.struct_class_names["targetname"]["interaction"];
-  var_03 = level.struct_class_names["script_noteworthy"]["puzzle_pieces"];
-  var_02 = scripts\engine\utility::array_remove(var_02, param_00);
-  var_03 = scripts\engine\utility::array_remove(var_03, param_00);
-  level.struct_class_names["targetname"]["interaction"] = var_02;
-  level.struct_class_names["script_noteworthy"]["puzzle_pieces"] = var_03;
-  var_04 = level._effect["air_vent_out"];
-  var_05 = scripts\engine\utility::getstructarray("puzzle_piece_landing", "targetname");
-  var_06 = scripts\engine\utility::random(var_05);
-  playFX(var_04, var_06.origin, anglesToForward(var_06.angles), anglestoup(var_06.angles));
-  var_01 notify("end_entangler_funcs");
-  var_01 setCanDamage(0);
-  var_01 dontinterpolate();
-  var_01.origin = var_06.origin;
-  var_01.angles = var_06.angles;
-  var_07 = scripts\engine\utility::getstruct(var_06.target, "targetname");
-  var_01 moveto(var_07.origin, 0.5, 0.1, 0);
-  var_01 rotateto(var_07.angles, 0.5);
-  var_07.model = var_01;
-  var_07.script_noteworthy = "puzzle_pieces";
-  var_07.var_336 = "interaction";
-  var_07.requires_power = 0;
-  var_07.powered_on = 1;
-  var_07.script_parameters = "default";
-  var_07.state = param_00.state;
-  level.struct_class_names["targetname"]["interaction"][level.struct_class_names["targetname"]["interaction"].size] = var_07;
-  level.struct_class_names["script_noteworthy"]["puzzle_pieces"][level.struct_class_names["script_noteworthy"]["puzzle_pieces"].size] = var_07;
+  var_2 = level.struct_class_names["targetname"]["interaction"];
+  var_3 = level.struct_class_names["script_noteworthy"]["puzzle_pieces"];
+  var_2 = scripts\engine\utility::array_remove(var_2, var_0);
+  var_3 = scripts\engine\utility::array_remove(var_3, var_0);
+  level.struct_class_names["targetname"]["interaction"] = var_2;
+  level.struct_class_names["script_noteworthy"]["puzzle_pieces"] = var_3;
+  var_4 = level._effect["air_vent_out"];
+  var_5 = scripts\engine\utility::getstructarray("puzzle_piece_landing", "targetname");
+  var_6 = scripts\engine\utility::random(var_5);
+  playFX(var_4, var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
+  var_1 notify("end_entangler_funcs");
+  var_1 setCanDamage(0);
+  var_1 dontinterpolate();
+  var_1.origin = var_6.origin;
+  var_1.angles = var_6.angles;
+  var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+  var_1 moveto(var_7.origin, 0.5, 0.1, 0);
+  var_1 rotateto(var_7.angles, 0.5);
+  var_7.model = var_1;
+  var_7.script_noteworthy = "puzzle_pieces";
+  var_7.var_336 = "interaction";
+  var_7.requires_power = 0;
+  var_7.powered_on = 1;
+  var_7.script_parameters = "default";
+  var_7.state = var_0.state;
+  level.struct_class_names["targetname"]["interaction"][level.struct_class_names["targetname"]["interaction"].size] = var_7;
+  level.struct_class_names["script_noteworthy"]["puzzle_pieces"][level.struct_class_names["script_noteworthy"]["puzzle_pieces"].size] = var_7;
   if(scripts\engine\utility::flag("neil_head_placed")) {
-    scripts\cp\cp_interaction::add_to_current_interaction_list(var_07);
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_7);
   }
 
   wait(0.5);
   level notify("end_vent_fx");
 }
 
-diskcustomcollisionfunc(param_00, param_01, param_02) {
+diskcustomcollisionfunc(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_03 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
-  for(var_04 = 0; var_04 <= 100; var_04++) {
-    var_05 = param_00.origin;
-    var_06 = param_00.angles;
-    param_00 scripts\engine\utility::waittill_any_timeout_1(0.1, "collision");
-    level notify("entangler_item_collision", param_00.origin);
-    if(distance(var_05, param_00.origin) < 1 && var_06 == param_00.angles) {
+  var_3 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
+  for(var_4 = 0; var_4 <= 100; var_4++) {
+    var_5 = var_0.origin;
+    var_6 = var_0.angles;
+    var_0 scripts\engine\utility::waittill_any_timeout_1(0.1, "collision");
+    level notify("entangler_item_collision", var_0.origin);
+    if(distance(var_5, var_0.origin) < 1 && var_6 == var_0.angles) {
       break;
     }
   }
 
-  if(var_04 >= 100) {
-    param_00.forcedrespawn = 1;
+  if(var_4 >= 100) {
+    var_0.forcedrespawn = 1;
   }
 
-  param_00.hasbeenthrown = 1;
-  param_00.launched = undefined;
-  foreach(var_08 in var_03) {
-    if(distance(var_08.origin, param_00.origin) <= 96) {
-      param_00 notify("released", undefined, 1, 36);
+  var_0.hasbeenthrown = 1;
+  var_0.launched = undefined;
+  foreach(var_8 in var_3) {
+    if(distance(var_8.origin, var_0.origin) <= 96) {
+      var_0 notify("released", undefined, 1, 36);
       return;
     }
   }
 
-  param_00 notify("released", 1);
+  var_0 notify("released", 1);
 }
 
-entanglemovetocheckforcollision(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\engine\utility::array_combine(level.players, [param_02]);
-  var_05 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 0, 1);
-  var_06 = scripts\common\trace::capsule_trace((param_00.origin[0], param_00.origin[1], param_03.origin[2]), param_03.origin, 16, 32, undefined, var_04, var_05, 24);
-  var_07 = var_06["hittype"];
-  if(isDefined(var_07) && var_07 != "hittype_none") {
+entanglemovetocheckforcollision(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::array_combine(level.players, [var_2]);
+  var_5 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 0, 1);
+  var_6 = scripts\common\trace::capsule_trace((var_0.origin[0], var_0.origin[1], var_3.origin[2]), var_3.origin, 16, 32, undefined, var_4, var_5, 24);
+  var_7 = var_6["hittype"];
+  if(isDefined(var_7) && var_7 != "hittype_none") {
     return 0;
   }
 
@@ -1851,41 +1851,41 @@ entanglemovetocheckforcollision(param_00, param_01, param_02, param_03) {
 }
 
 getvalidpuzzlestates() {
-  var_00 = randomint(level.puzzle_combinations.size);
-  var_01 = strtok(level.puzzle_combinations[var_00], ",");
-  level.correctneilpuzzleanswer = var_01;
-  return scripts\engine\utility::array_randomize_objects(var_01);
+  var_0 = randomint(level.puzzle_combinations.size);
+  var_1 = strtok(level.puzzle_combinations[var_0], ",");
+  level.correctneilpuzzleanswer = var_1;
+  return scripts\engine\utility::array_randomize_objects(var_1);
 }
 
 spawnn31lhead() {
-  var_00 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
-  var_00 = scripts\engine\utility::array_randomize_objects(var_00);
-  var_01 = var_00[0];
-  if(isDefined(var_01.target)) {
-    var_02 = scripts\engine\utility::getstruct(var_01.target, "targetname");
+  var_0 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
+  var_0 = scripts\engine\utility::array_randomize_objects(var_0);
+  var_1 = var_0[0];
+  if(isDefined(var_1.target)) {
+    var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   } else {
-    var_02 = var_02;
+    var_2 = var_2;
   }
 
-  var_03 = spawnmodelatstruct(var_02, "final_kevin_head_blank");
-  var_01.headmodel = var_03;
-  var_01.nextneilvotime = 0;
-  level.var_BEC5 = var_03;
-  foreach(var_05 in var_00) {
-    if(var_05 == var_01) {
+  var_3 = spawnmodelatstruct(var_2, "final_kevin_head_blank");
+  var_1.headmodel = var_3;
+  var_1.nextneilvotime = 0;
+  level.var_BEC5 = var_3;
+  foreach(var_5 in var_0) {
+    if(var_5 == var_1) {
       continue;
     }
 
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_05);
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
   }
 }
 
-consolehintfunc(param_00, param_01) {
+consolehintfunc(var_0, var_1) {
   if(scripts\engine\utility::flag("neil_head_placed") && !scripts\engine\utility::flag("fuse_puzzle_completed")) {
-    var_02 = gettime();
-    if(var_02 >= param_00.nextneilvotime) {
+    var_2 = gettime();
+    if(var_2 >= var_0.nextneilvotime) {
       if(playneilvofromconsoleorhead("final_n31l_misc_reaction", 1)) {
-        param_00.nextneilvotime = param_00.nextneilvotime + 10000;
+        var_0.nextneilvotime = var_0.nextneilvotime + 10000;
       }
     }
   }
@@ -1893,20 +1893,20 @@ consolehintfunc(param_00, param_01) {
   return "";
 }
 
-headhintfunc(param_00, param_01) {
-  var_02 = gettime();
-  if(var_02 >= param_00.nextneilvotime) {
+headhintfunc(var_0, var_1) {
+  var_2 = gettime();
+  if(var_2 >= var_0.nextneilvotime) {
     if(playneilvofromconsoleorhead("final_n31l_found")) {
-      param_00.nextneilvotime = var_02 + 10000;
+      var_0.nextneilvotime = var_2 + 10000;
     }
   }
 
   return &"CP_FINAL_PICKUP_ITEM";
 }
 
-puzzlepiecehintfunc(param_00, param_01) {
-  if(!isDefined(param_01.haspuzzlepiece) || isDefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state) {
-    if(isDefined(level.phantomdisk) && param_00.state == level.phantomdisk) {
+puzzlepiecehintfunc(var_0, var_1) {
+  if(!isDefined(var_1.haspuzzlepiece) || isDefined(var_1.haspuzzlepiece) && var_1.haspuzzlepiece != var_0.state) {
+    if(isDefined(level.phantomdisk) && var_0.state == level.phantomdisk) {
       return &"CP_FINAL_PICKUP_ITEM";
     }
 
@@ -1916,33 +1916,33 @@ puzzlepiecehintfunc(param_00, param_01) {
   return "";
 }
 
-puzzlepieceusefunc(param_00, param_01) {
-  if(!isDefined(param_01.haspuzzlepiece) || isDefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state) {
-    if(isDefined(param_00.target)) {
-      var_02 = scripts\engine\utility::getstruct(param_00.target, "targetname");
+puzzlepieceusefunc(var_0, var_1) {
+  if(!isDefined(var_1.haspuzzlepiece) || isDefined(var_1.haspuzzlepiece) && var_1.haspuzzlepiece != var_0.state) {
+    if(isDefined(var_0.target)) {
+      var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
     } else {
-      var_02 = param_01;
+      var_2 = var_1;
     }
 
-    param_01.haspuzzlepiece = param_00.state;
-    param_01 playlocalsound("zmb_item_pickup");
-    playFX(level._effect["generic_pickup"], var_02.origin);
-    param_01 setclientomnvar("zm_hud_inventory_1", int(param_00.state));
+    var_1.haspuzzlepiece = var_0.state;
+    var_1 playlocalsound("zmb_item_pickup");
+    playFX(level._effect["generic_pickup"], var_2.origin);
+    var_1 setclientomnvar("zm_hud_inventory_1", int(var_0.state));
   }
 }
 
-consoleusefunc(param_00, param_01) {
+consoleusefunc(var_0, var_1) {
   if(!scripts\engine\utility::flag("neil_head_placed")) {
     scripts\engine\utility::flag_set("neil_head_placed");
-    scripts\cp\utility::playsoundatpos_safe(param_00.origin, "zmb_neil_head_placement");
+    scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_neil_head_placement");
     if(level.players.size >= 4) {
       if(scripts\engine\utility::cointoss()) {
-        level thread foundpowervo(param_01);
+        level thread foundpowervo(var_1);
         return;
       }
 
       if(scripts\engine\utility::cointoss()) {
-        param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place", "zmb_comment_vo");
+        var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place", "zmb_comment_vo");
         return;
       }
 
@@ -1951,7 +1951,7 @@ consoleusefunc(param_00, param_01) {
     }
 
     if(scripts\engine\utility::cointoss()) {
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place", "zmb_comment_vo");
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place", "zmb_comment_vo");
       return;
     }
 
@@ -1960,9 +1960,9 @@ consoleusefunc(param_00, param_01) {
   }
 }
 
-foundpowervo(param_00) {
-  if(isDefined(param_00.vo_prefix)) {
-    switch (param_00.vo_prefix) {
+foundpowervo(var_0) {
+  if(isDefined(var_0.vo_prefix)) {
+    switch (var_0.vo_prefix) {
       case "p1_":
         if(!isDefined(level.completed_dialogues["conv_poweron_sally_1_1"])) {
           level thread scripts\cp\cp_vo::try_to_play_vo("conv_poweron_sally_1_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
@@ -1994,9 +1994,9 @@ foundpowervo(param_00) {
   }
 }
 
-validatepuzzleslot(param_00, param_01) {
-  for(var_02 = 0; var_02 < level.correctneilpuzzleanswer.size; var_02++) {
-    if(level.correctneilpuzzleanswer[var_02] != level.insertedpieces[var_02]) {
+validatepuzzleslot(var_0, var_1) {
+  for(var_2 = 0; var_2 < level.correctneilpuzzleanswer.size; var_2++) {
+    if(level.correctneilpuzzleanswer[var_2] != level.insertedpieces[var_2]) {
       return 0;
     }
   }
@@ -2004,90 +2004,90 @@ validatepuzzleslot(param_00, param_01) {
   return 1;
 }
 
-headusefunc(param_00, param_01) {
+headusefunc(var_0, var_1) {
   scripts\engine\utility::flag_set("neil_head_found");
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_find", "zmb_comment_vo");
-  scripts\cp\maps\cp_final\cp_final_interactions::generic_pickup_gesture_and_fx(param_01, param_00.headmodel.origin);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_find", "zmb_comment_vo");
+  scripts\cp\maps\cp_final\cp_final_interactions::generic_pickup_gesture_and_fx(var_1, var_0.headmodel.origin);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 }
 
-fusepuzzlehintfunc(param_00, param_01) {
-  if(isDefined(param_01.haspuzzlepiece)) {
-    param_01.interaction_trigger sethintstringparams(int(param_00.name));
+fusepuzzlehintfunc(var_0, var_1) {
+  if(isDefined(var_1.haspuzzlepiece)) {
+    var_1.interaction_trigger sethintstringparams(int(var_0.name));
     return &"CP_FINAL_INSERT_DISK";
   }
 
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
   return "";
 }
 
-fusepuzzleusefunc(param_00, param_01) {
-  if(isDefined(param_01.haspuzzlepiece)) {
+fusepuzzleusefunc(var_0, var_1) {
+  if(isDefined(var_1.haspuzzlepiece)) {
     scripts\cp\utility::set_quest_icon(11);
-    param_01 setclientomnvar("zm_hud_inventory_1", 0);
-    var_02 = param_01.haspuzzlepiece;
-    var_03 = "disk_slot_" + param_00.name;
-    switch (int(var_02)) {
+    var_1 setclientomnvar("zm_hud_inventory_1", 0);
+    var_2 = var_1.haspuzzlepiece;
+    var_3 = "disk_slot_" + var_0.name;
+    switch (int(var_2)) {
       case 1:
-        level.neil_console setscriptablepartstate(var_03, "disk01");
+        level.neil_console setscriptablepartstate(var_3, "disk01");
         break;
 
       case 2:
-        level.neil_console setscriptablepartstate(var_03, "disk02");
+        level.neil_console setscriptablepartstate(var_3, "disk02");
         break;
 
       case 3:
-        level.neil_console setscriptablepartstate(var_03, "disk03");
+        level.neil_console setscriptablepartstate(var_3, "disk03");
         break;
 
       case 4:
-        level.neil_console setscriptablepartstate(var_03, "disk04");
+        level.neil_console setscriptablepartstate(var_3, "disk04");
         break;
 
       case 5:
-        level.neil_console setscriptablepartstate(var_03, "disk05");
+        level.neil_console setscriptablepartstate(var_3, "disk05");
         break;
 
       case 6:
-        level.neil_console setscriptablepartstate(var_03, "disk06");
+        level.neil_console setscriptablepartstate(var_3, "disk06");
         break;
 
       case 7:
-        level.neil_console setscriptablepartstate(var_03, "disk07");
+        level.neil_console setscriptablepartstate(var_3, "disk07");
         break;
 
       case 8:
-        level.neil_console setscriptablepartstate(var_03, "disk08");
+        level.neil_console setscriptablepartstate(var_3, "disk08");
         break;
 
       case 9:
-        level.neil_console setscriptablepartstate(var_03, "disk09");
+        level.neil_console setscriptablepartstate(var_3, "disk09");
         break;
 
       case 10:
-        level.neil_console setscriptablepartstate(var_03, "disk10");
+        level.neil_console setscriptablepartstate(var_3, "disk10");
         break;
 
       case 11:
-        level.neil_console setscriptablepartstate(var_03, "disk11");
+        level.neil_console setscriptablepartstate(var_3, "disk11");
         break;
 
       case 12:
-        level.neil_console setscriptablepartstate(var_03, "disk12");
+        level.neil_console setscriptablepartstate(var_3, "disk12");
         break;
     }
 
-    scripts\cp\utility::playsoundatpos_safe(param_00.origin, "zmb_floppy_disc_insert");
-    var_04 = int(param_00.name) - 1;
-    removeinvalidpuzzlepieces(var_02);
-    param_01.haspuzzlepiece = undefined;
-    level.insertedpieces[var_04] = var_02;
-    param_01 setclientomnvar("zm_special_item", 0);
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
+    scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_floppy_disc_insert");
+    var_4 = int(var_0.name) - 1;
+    removeinvalidpuzzlepieces(var_2);
+    var_1.haspuzzlepiece = undefined;
+    level.insertedpieces[var_4] = var_2;
+    var_1 setclientomnvar("zm_special_item", 0);
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     setomnvar("zm_floppy_count", level.insertedpieces.size);
     if(level.insertedpieces.size == 4) {
-      if(!validatepuzzleslot(param_00, param_01)) {
-        playsoundatpos(param_00.origin, "mpq_fail_buzzer");
+      if(!validatepuzzleslot(var_0, var_1)) {
+        playsoundatpos(var_0.origin, "mpq_fail_buzzer");
         wait(1);
         setomnvar("zm_floppy_count", 0);
         scripts\cp\utility::unset_zm_quest_icon(11);
@@ -2105,19 +2105,19 @@ fusepuzzleusefunc(param_00, param_01) {
       }
 
       wait(1);
-      scripts\cp\utility::playsoundatpos_safe(param_00.origin, "zmb_floppy_quest_complete");
+      scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_floppy_quest_complete");
       deactivateinteractionsbynoteworthy("puzzle_pieces");
       scripts\engine\utility::flag_set("fuse_puzzle_completed");
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_part_" + level.insertedpieces.size, "zmb_comment_vo");
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_part_" + level.insertedpieces.size, "zmb_comment_vo");
       playneilvofromconsoleorhead("final_n31l_return_part_4", 1);
       return;
     }
 
-    param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_part_" + level.insertedpieces.size, "zmb_comment_vo");
-    var_05 = gettime();
-    if(var_05 >= level.neil_console.nextneilvotime) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_part_" + level.insertedpieces.size, "zmb_comment_vo");
+    var_5 = gettime();
+    if(var_5 >= level.neil_console.nextneilvotime) {
       if(playneilvofromconsoleorhead(scripts\engine\utility::random(["final_n31l_return_part_1", "final_n31l_return_part_2", "final_n31l_return_part_3"]), 1)) {
-        level.neil_console.nextneilvotime = var_05 + 15000;
+        level.neil_console.nextneilvotime = var_5 + 15000;
         return;
       }
 
@@ -2126,23 +2126,23 @@ fusepuzzleusefunc(param_00, param_01) {
   }
 }
 
-removeinvalidpuzzlepieces(param_00) {
-  var_01 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
-  foreach(var_03 in var_01) {
-    if(param_00 == var_03.state) {
-      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
+removeinvalidpuzzlepieces(var_0) {
+  var_1 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  foreach(var_3 in var_1) {
+    if(var_0 == var_3.state) {
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
     }
   }
 
-  foreach(var_06 in level.players) {
-    if(isDefined(var_06.haspuzzlepiece) && var_06.haspuzzlepiece == param_00) {
-      var_06 setclientomnvar("zm_hud_inventory_1", 0);
-      var_06.haspuzzlepiece = undefined;
+  foreach(var_6 in level.players) {
+    if(isDefined(var_6.haspuzzlepiece) && var_6.haspuzzlepiece == var_0) {
+      var_6 setclientomnvar("zm_hud_inventory_1", 0);
+      var_6.haspuzzlepiece = undefined;
     }
   }
 }
 
-blank(param_00, param_01) {}
+blank(var_0, var_1) {}
 
 retrieveneilshead() {
   scripts\engine\utility::flag_wait("neil_head_found");
@@ -2151,11 +2151,11 @@ retrieveneilshead() {
 completeretrieveneilshead() {
   scripts\cp\utility::set_quest_icon(6);
   activateinteractionsbynoteworthy("neil_console");
-  var_00 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
+  var_0 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
   deactivateinteractionsbynoteworthy("neil_head");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.headmodel)) {
-      var_02.headmodel delete();
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.headmodel)) {
+      var_2.headmodel delete();
     }
   }
 }
@@ -2174,22 +2174,22 @@ completeplaceneilshead() {
   activateinteractionsbynoteworthy("fuse_puzzle");
   activateinteractionsbynoteworthy("puzzle_pieces");
   activateinteractionsbynoteworthy("portal_gun_button");
-  var_00 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
-  var_01 = spawn("script_model", var_00.origin);
-  var_01.angles = var_00.angles;
-  var_01 setModel("final_kevin_head_dynamic");
-  var_01.ogorigin = var_00.origin;
-  var_01.var_C3A0 = var_00.angles;
-  var_01.customlaunchfunc = ::neilheadlaunchfunc;
-  var_01.collisionfunc = ::checkneilheadcollision;
-  var_00.headmodel = var_01;
-  var_01.parent_struct = var_00;
-  level.var_BEC5 = var_01;
+  var_0 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  var_1 = spawn("script_model", var_0.origin);
+  var_1.angles = var_0.angles;
+  var_1 setModel("final_kevin_head_dynamic");
+  var_1.ogorigin = var_0.origin;
+  var_1.var_C3A0 = var_0.angles;
+  var_1.customlaunchfunc = ::neilheadlaunchfunc;
+  var_1.collisionfunc = ::checkneilheadcollision;
+  var_0.headmodel = var_1;
+  var_1.parent_struct = var_0;
+  level.var_BEC5 = var_1;
   scripts\cp\maps\cp_final\cp_final::enablepa("pa_facility");
   wait(0.5);
   setneilstate("happy");
-  foreach(var_03 in level.players) {
-    var_03 scripts\cp\cp_merits::processmerit("mt_dlc4_neil_upgrade");
+  foreach(var_3 in level.players) {
+    var_3 scripts\cp\cp_merits::processmerit("mt_dlc4_neil_upgrade");
   }
 
   thread playneilnag(["final_n31l_nag_missing_pieces", "final_n31l_request_pieces"], "fuse_puzzle_completed");
@@ -2199,54 +2199,54 @@ debugplaceneilshead() {
   scripts\engine\utility::flag_set("neil_head_placed");
 }
 
-playneilnag(param_00, param_01) {
+playneilnag(var_0, var_1) {
   level endon("game_ended");
   level notify("playNeilNag");
   level endon("playNeilNag");
-  while(isDefined(param_01) && !scripts\engine\utility::flag(param_01)) {
+  while(isDefined(var_1) && !scripts\engine\utility::flag(var_1)) {
     wait(randomintrange(30, 60));
-    var_02 = scripts\engine\utility::random(param_00);
-    var_03 = gettime();
-    if(var_03 >= level.neilvotime) {
-      foreach(var_05 in level.players) {
-        if(isDefined(var_05.currentlocation) && var_05.currentlocation == "facility") {
-          var_05 scripts\cp\utility::playlocalsound_safe(var_02);
+    var_2 = scripts\engine\utility::random(var_0);
+    var_3 = gettime();
+    if(var_3 >= level.neilvotime) {
+      foreach(var_5 in level.players) {
+        if(isDefined(var_5.currentlocation) && var_5.currentlocation == "facility") {
+          var_5 scripts\cp\utility::playlocalsound_safe(var_2);
         }
       }
 
-      var_07 = lookupsoundlength(var_02);
-      setnextneilvotime(var_07);
+      var_7 = lookupsoundlength(var_2);
+      setnextneilvotime(var_7);
     }
   }
 }
 
-playneilvo(param_00, param_01) {
-  var_02 = gettime();
-  if(var_02 >= level.neilvotime) {
-    foreach(var_04 in level.players) {
-      if(isDefined(var_04.currentlocation) && var_04.currentlocation == "facility") {
-        var_04 scripts\cp\utility::playlocalsound_safe(param_00);
+playneilvo(var_0, var_1) {
+  var_2 = gettime();
+  if(var_2 >= level.neilvotime) {
+    foreach(var_4 in level.players) {
+      if(isDefined(var_4.currentlocation) && var_4.currentlocation == "facility") {
+        var_4 scripts\cp\utility::playlocalsound_safe(var_0);
       }
     }
 
-    var_06 = lookupsoundlength(param_00);
-    if(isDefined(param_01)) {
-      var_07 = getsoundaliasfromvoprefix(param_01, 1);
-      thread playplayernameaftertime(var_06, var_07);
-      var_06 = var_06 + lookupsoundlength(var_07);
+    var_6 = lookupsoundlength(var_0);
+    if(isDefined(var_1)) {
+      var_7 = getsoundaliasfromvoprefix(var_1, 1);
+      thread playplayernameaftertime(var_6, var_7);
+      var_6 = var_6 + lookupsoundlength(var_7);
     }
 
-    setnextneilvotime(var_06);
+    setnextneilvotime(var_6);
     return 1;
   }
 
   return 0;
 }
 
-getsoundaliasfromvoprefix(param_00, param_01) {
-  switch (param_00) {
+getsoundaliasfromvoprefix(var_0, var_1) {
+  switch (var_0) {
     case "p1_":
-      if(scripts\engine\utility::istrue(param_01)) {
+      if(scripts\engine\utility::istrue(var_1)) {
         return "final_n31l_name_sally_pa";
       } else {
         return "final_n31l_name_sally";
@@ -2255,7 +2255,7 @@ getsoundaliasfromvoprefix(param_00, param_01) {
       break;
 
     case "p2_":
-      if(scripts\engine\utility::istrue(param_01)) {
+      if(scripts\engine\utility::istrue(var_1)) {
         return "final_n31l_name_poindexter_pa";
       } else {
         return "final_n31l_name_poindexter";
@@ -2264,7 +2264,7 @@ getsoundaliasfromvoprefix(param_00, param_01) {
       break;
 
     case "p3_":
-      if(scripts\engine\utility::istrue(param_01)) {
+      if(scripts\engine\utility::istrue(var_1)) {
         return "final_n31l_name_andre_pa";
       } else {
         return "final_n31l_name_andre";
@@ -2273,38 +2273,38 @@ getsoundaliasfromvoprefix(param_00, param_01) {
       break;
 
     case "p4_":
-      if(scripts\engine\utility::istrue(param_01)) {
+      if(scripts\engine\utility::istrue(var_1)) {
         return "final_n31l_name_aj_pa";
       }
       return "final_n31l_name_aj";
   }
 }
 
-playplayernameaftertime(param_00, param_01) {
+playplayernameaftertime(var_0, var_1) {
   level endon("game_ended");
-  wait(param_00 / 1000);
-  foreach(var_03 in level.players) {
-    if(isDefined(var_03.currentlocation) && var_03.currentlocation == "facility") {
-      var_03 scripts\cp\utility::playlocalsound_safe(param_01);
+  wait(var_0 / 1000);
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3.currentlocation) && var_3.currentlocation == "facility") {
+      var_3 scripts\cp\utility::playlocalsound_safe(var_1);
     }
   }
 }
 
-playneilvofromconsoleorhead(param_00, param_01, param_02) {
-  var_03 = gettime();
-  if(var_03 >= level.neilvotime) {
-    if(scripts\engine\utility::istrue(param_01)) {
+playneilvofromconsoleorhead(var_0, var_1, var_2) {
+  var_3 = gettime();
+  if(var_3 >= level.neilvotime) {
+    if(scripts\engine\utility::istrue(var_1)) {
       if(isDefined(level.neil_console)) {
         level.neil_console stopsounds();
-        level.neil_console playSound(param_00);
-        var_04 = lookupsoundlength(param_00);
-        if(isDefined(param_02)) {
-          var_05 = getsoundaliasfromvoprefix(param_02);
-          thread playplayernameaftertime(var_04, var_05);
-          var_04 = var_04 + lookupsoundlength(var_05);
+        level.neil_console playSound(var_0);
+        var_4 = lookupsoundlength(var_0);
+        if(isDefined(var_2)) {
+          var_5 = getsoundaliasfromvoprefix(var_2);
+          thread playplayernameaftertime(var_4, var_5);
+          var_4 = var_4 + lookupsoundlength(var_5);
         }
 
-        setnextneilvotime(var_04);
+        setnextneilvotime(var_4);
         return 1;
       }
 
@@ -2313,15 +2313,15 @@ playneilvofromconsoleorhead(param_00, param_01, param_02) {
 
     if(isDefined(level.var_BEC5)) {
       level.var_BEC5 stopsounds();
-      level.var_BEC5 playSound(param_01);
-      var_04 = lookupsoundlength(param_01);
-      if(isDefined(param_02)) {
-        var_05 = getsoundaliasfromvoprefix(param_02);
-        thread playplayernameaftertime(var_04, var_05);
-        var_04 = var_04 + lookupsoundlength(var_05);
+      level.var_BEC5 playSound(var_1);
+      var_4 = lookupsoundlength(var_1);
+      if(isDefined(var_2)) {
+        var_5 = getsoundaliasfromvoprefix(var_2);
+        thread playplayernameaftertime(var_4, var_5);
+        var_4 = var_4 + lookupsoundlength(var_5);
       }
 
-      setnextneilvotime(var_04);
+      setnextneilvotime(var_4);
       return 1;
     }
 
@@ -2331,8 +2331,8 @@ playneilvofromconsoleorhead(param_00, param_01, param_02) {
   return 0;
 }
 
-setnextneilvotime(param_00) {
-  level.neilvotime = gettime() + param_00;
+setnextneilvotime(var_0) {
+  level.neilvotime = gettime() + var_0;
 }
 
 turnonfacilitypower() {
@@ -2340,28 +2340,28 @@ turnonfacilitypower() {
   scripts\engine\utility::flag_set("restorepower_step1");
   scripts\engine\utility::flag_set("power_on");
   level.var_D746 = 1;
-  var_00 = getEntArray("spawn_volume", "targetname");
-  foreach(var_02 in var_00) {
-    if(isDefined(var_02.basename)) {
-      var_03 = var_02.basename;
+  var_0 = getEntArray("spawn_volume", "targetname");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.basename)) {
+      var_3 = var_2.basename;
     } else {
       continue;
     }
 
-    level notify(var_03 + " power_on");
-    if(scripts\engine\utility::flag_exist(var_03 + " power_on")) {
-      scripts\engine\utility::flag_set(var_03 + " power_on");
+    level notify(var_3 + " power_on");
+    if(scripts\engine\utility::flag_exist(var_3 + " power_on")) {
+      scripts\engine\utility::flag_set(var_3 + " power_on");
     }
   }
 }
 
 initpuzzledoors() {
-  var_00 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
-  foreach(var_02 in var_00) {
-    var_03 = spawn("script_model", var_02.origin);
-    var_03.angles = var_02.angles;
-    var_03 setModel("building_pod_wall_panel_01_thin");
-    var_02.doormodel = var_03;
+  var_0 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
+  foreach(var_2 in var_0) {
+    var_3 = spawn("script_model", var_2.origin);
+    var_3.angles = var_2.angles;
+    var_3 setModel("building_pod_wall_panel_01_thin");
+    var_2.doormodel = var_3;
   }
 }
 
@@ -2371,21 +2371,21 @@ waitforsecuritydoorsdestroyed() {
 
 securitydoorsdestroyed() {
   level notify("kill_energy_doors");
-  foreach(var_01 in level.all_quest_doors) {
-    playsoundatpos(var_01.origin, "zmb_forcefield_destroyed");
-    var_01 delete();
+  foreach(var_1 in level.all_quest_doors) {
+    playsoundatpos(var_1.origin, "zmb_forcefield_destroyed");
+    var_1 delete();
   }
 
-  var_03 = getent("med_bay_door_clip", "targetname");
-  var_03 notsolid();
+  var_3 = getent("med_bay_door_clip", "targetname");
+  var_3 notsolid();
   activateinteractionsbynoteworthy("entangler_button");
 }
 
 openpuzzledoors() {
   level endon("game_ended");
-  var_00 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
-  foreach(var_02 in var_00) {
-    var_02.doormodel delete();
+  var_0 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
+  foreach(var_2 in var_0) {
+    var_2.doormodel delete();
   }
 
   scripts\engine\utility::flag_set("toggle_puzzle_doors_opened");
@@ -2400,24 +2400,24 @@ fusepuzzle() {
 }
 
 completefusepuzzle() {
-  foreach(var_01 in level.players) {
-    var_01 scripts\cp\utility::stoplocalsound_safe("final_n31l_nag_missing_pieces");
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::stoplocalsound_safe("final_n31l_nag_missing_pieces");
   }
 
   scripts\engine\utility::flag_set("fuse_puzzle_completed");
   thread neildoevilstuff();
   scripts\cp\utility::set_quest_icon(10);
   setneilstate("straight");
-  foreach(var_01 in level.players) {
-    var_01 scripts\cp\zombies\achievement::update_achievement("FRIENDS_FOREVER", 1);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\zombies\achievement::update_achievement("FRIENDS_FOREVER", 1);
   }
 
   deactivateinteractionsbynoteworthy("fuse_puzzle");
   deactivateinteractionsbynoteworthy("puzzle_pieces");
-  var_05 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
-  foreach(var_07 in var_05) {
-    if(isDefined(var_07.model)) {
-      var_07.model delete();
+  var_5 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  foreach(var_7 in var_5) {
+    if(isDefined(var_7.model)) {
+      var_7.model delete();
     }
   }
 
@@ -2482,13 +2482,13 @@ debugfusepuzzle() {
 }
 
 initbridgepieces() {
-  var_00 = scripts\engine\utility::getstructarray("pap_bridge", "script_noteworthy");
-  foreach(var_02 in var_00) {
-    var_02.name = "pap_quest";
-    var_03 = spawn("script_model", var_02.origin);
-    var_03 setModel("debris_exterior_damaged_metal_panels_08_scl50");
-    var_03.angles = var_02.angles;
-    var_03.var_336 = "pap_bridge_model";
+  var_0 = scripts\engine\utility::getstructarray("pap_bridge", "script_noteworthy");
+  foreach(var_2 in var_0) {
+    var_2.name = "pap_quest";
+    var_3 = spawn("script_model", var_2.origin);
+    var_3 setModel("debris_exterior_damaged_metal_panels_08_scl50");
+    var_3.angles = var_2.angles;
+    var_3.var_336 = "pap_bridge_model";
   }
 
   scripts\engine\utility::flag_init("bridge_pieces_collected");
@@ -2496,29 +2496,29 @@ initbridgepieces() {
 
 spawnastronauts() {
   level.astronautsshot = 0;
-  var_00 = scripts\engine\utility::getstructarray("hidden_song_nick", "script_noteworthy");
-  var_00 = sortbydistance(var_00, (5715, -4040, 131));
+  var_0 = scripts\engine\utility::getstructarray("hidden_song_nick", "script_noteworthy");
+  var_0 = sortbydistance(var_0, (5715, -4040, 131));
   level.astronaut_structs = [];
-  foreach(var_04, var_02 in var_00) {
-    if(var_04 == 0) {
+  foreach(var_4, var_2 in var_0) {
+    if(var_4 == 0) {
       continue;
     }
 
-    level.astronaut_structs[level.astronaut_structs.size] = var_02;
-    var_03 = spawn("script_model", var_02.origin);
-    var_03 setModel("zmb_arcade_toy_astronaut_white");
-    var_03.angles = var_02.angles;
-    var_03.script_noteworthy = "astronaut_model";
-    if(isDefined(var_02.var_336)) {
-      var_03.var_336 = var_02.var_336 + "_model";
+    level.astronaut_structs[level.astronaut_structs.size] = var_2;
+    var_3 = spawn("script_model", var_2.origin);
+    var_3 setModel("zmb_arcade_toy_astronaut_white");
+    var_3.angles = var_2.angles;
+    var_3.script_noteworthy = "astronaut_model";
+    if(isDefined(var_2.var_336)) {
+      var_3.var_336 = var_2.var_336 + "_model";
     }
 
-    var_03 thread astronautwatchfordamage();
+    var_3 thread astronautwatchfordamage();
   }
 
-  var_05 = getent("astronaut_aide_trigger", "script_noteworthy");
-  if(isDefined(var_05)) {
-    var_05 thread astronautaidetriggerwatch(var_05);
+  var_5 = getent("astronaut_aide_trigger", "script_noteworthy");
+  if(isDefined(var_5)) {
+    var_5 thread astronautaidetriggerwatch(var_5);
   }
 }
 
@@ -2529,41 +2529,41 @@ astronautwatchfordamage() {
   self.maxhealth = 9999999;
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_00, var_00, var_00, var_00, var_05);
-    tryreleaseastronaut(var_01, var_05);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_0, var_0, var_0, var_0, var_5);
+    tryreleaseastronaut(var_1, var_5);
   }
 }
 
-astronautaidetriggerwatch(param_00) {
-  param_00 = getent(self.target + "_model", "targetname");
-  param_00 endon("released");
+astronautaidetriggerwatch(var_0) {
+  var_0 = getent(self.target + "_model", "targetname");
+  var_0 endon("released");
   for(;;) {
-    self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_01, var_01, var_01, var_01, var_06);
-    if(isDefined(param_00)) {
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_1, var_1, var_1, var_1, var_6);
+    if(isDefined(var_0)) {
       thread scripts\cp\utility::debugprintline("release");
-      param_00 tryreleaseastronaut(var_02, var_06);
+      var_0 tryreleaseastronaut(var_2, var_6);
     }
   }
 }
 
-tryreleaseastronaut(param_00, param_01) {
-  if(isplayer(param_00)) {
+tryreleaseastronaut(var_0, var_1) {
+  if(isplayer(var_0)) {
     wait(0.2);
     level.astronautsshot++;
-    if(isDefined(param_00)) {
-      thread generic_interaction_no_gesture(param_00, self);
+    if(isDefined(var_0)) {
+      thread generic_interaction_no_gesture(var_0, self);
     }
 
     self.released = 1;
     self hide();
     if(level.astronautsshot >= level.astronaut_structs.size) {
-      foreach(var_03 in level.players) {
-        var_03 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success", "final_comment_vo");
-        var_03 scripts\cp\zombies\achievement::update_achievement("BROKEN_RECORD", 1);
+      foreach(var_3 in level.players) {
+        var_3 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success", "final_comment_vo");
+        var_3 scripts\cp\zombies\achievement::update_achievement("BROKEN_RECORD", 1);
       }
 
-      if(isDefined(param_00)) {
-        built_bridge_feedback(param_00);
+      if(isDefined(var_0)) {
+        built_bridge_feedback(var_0);
       }
 
       level notify("add_hidden_song_to_playlist");
@@ -2576,149 +2576,149 @@ tryreleaseastronaut(param_00, param_01) {
   }
 }
 
-play_hidden_song(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
+play_hidden_song(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
     level endon("game_ended");
   }
 
-  if(param_01 == "mus_pa_final_hidden_track") {
+  if(var_1 == "mus_pa_final_hidden_track") {
     level endon("add_hidden_song_to_playlist");
   }
 
-  if(soundexists(param_01)) {
+  if(soundexists(var_1)) {
     wait(2.5);
-    if(param_01 == "mus_pa_final_hidden_track") {
-      foreach(var_04 in level.players) {
-        var_04 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_start", "final_comment_vo");
+    if(var_1 == "mus_pa_final_hidden_track") {
+      foreach(var_4 in level.players) {
+        var_4 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_start", "final_comment_vo");
         if(scripts\engine\utility::istrue(level.onlinegame)) {
-          var_04 setplayerdata("cp", "hasSongsUnlocked", "any_song", 1);
-          if(param_01 == "mus_pa_final_hidden_track") {
-            var_04 setplayerdata("cp", "hasSongsUnlocked", "song_6", 1);
+          var_4 setplayerdata("cp", "hasSongsUnlocked", "any_song", 1);
+          if(var_1 == "mus_pa_final_hidden_track") {
+            var_4 setplayerdata("cp", "hasSongsUnlocked", "song_6", 1);
           }
         }
       }
     }
 
-    var_06 = undefined;
-    if(isDefined(var_06)) {
-      level thread scripts\cp\cp_vo::try_to_play_vo(var_06, "zmb_dj_vo", "high", 60, 1, 0, 1);
-      var_07 = lookupsoundlength(var_06) / 1000;
-      wait(var_07);
+    var_6 = undefined;
+    if(isDefined(var_6)) {
+      level thread scripts\cp\cp_vo::try_to_play_vo(var_6, "zmb_dj_vo", "high", 60, 1, 0, 1);
+      var_7 = lookupsoundlength(var_6) / 1000;
+      wait(var_7);
     }
 
-    scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", param_00);
-    var_08 = spawn("script_origin", param_00);
-    var_09 = "ee";
+    scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", var_0);
+    var_8 = spawn("script_origin", var_0);
+    var_9 = "ee";
     var_0A = 1;
-    foreach(var_04 in level.players) {
-      var_04 scripts\cp\cp_persistence::give_player_xp(2000, 1);
+    foreach(var_4 in level.players) {
+      var_4 scripts\cp\cp_persistence::give_player_xp(2000, 1);
     }
 
-    var_08 playLoopSound(param_01);
-    var_08 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_08);
-    var_0D = lookupsoundlength(param_01) / 1000;
-    if(!isDefined(param_02)) {
+    var_8 playLoopSound(var_1);
+    var_8 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_8);
+    var_0D = lookupsoundlength(var_1) / 1000;
+    if(!isDefined(var_2)) {
       level scripts\engine\utility::waittill_any_timeout_1(var_0D, "skip_song");
     } else {
       level waittill("game_ended");
-      var_08 stoploopsound();
-      var_08 delete();
+      var_8 stoploopsound();
+      var_8 delete();
       return;
     }
 
-    var_08 stoploopsound();
-    var_08 delete();
+    var_8 stoploopsound();
+    var_8 delete();
   } else {
     wait(2);
   }
 
   scripts\cp\maps\cp_final\cp_final::disablepas();
   scripts\cp\maps\cp_final\cp_final::enablepa("pa_facility");
-  level thread scripts\cp\zombies\zombie_jukebox::jukebox_start(param_00, 1);
+  level thread scripts\cp\zombies\zombie_jukebox::jukebox_start(var_0, 1);
 }
 
-generic_interaction_no_gesture(param_00, param_01) {
-  param_00 endon("disconnect");
-  if(isent(param_01) || !isvector(param_01)) {
-    param_01 = param_01.origin;
+generic_interaction_no_gesture(var_0, var_1) {
+  var_0 endon("disconnect");
+  if(isent(var_1) || !isvector(var_1)) {
+    var_1 = var_1.origin;
   }
 
-  playFX(level._effect["generic_pickup"], param_01);
-  param_00 playlocalsound("part_pickup");
+  playFX(level._effect["generic_pickup"], var_1);
+  var_0 playlocalsound("part_pickup");
 }
 
-trigger_goon_event(param_00) {
-  foreach(var_02 in level.players) {
-    if(distancesquared(var_02.origin, param_00) > 6000) {
+trigger_goon_event(var_0) {
+  foreach(var_2 in level.players) {
+    if(distancesquared(var_2.origin, var_0) > 6000) {
       continue;
     }
 
-    thread trigger_goon_event_single(param_00);
+    thread trigger_goon_event_single(var_0);
   }
 }
 
-trigger_goon_event_single(param_00, param_01) {
+trigger_goon_event_single(var_0, var_1) {
   level endon("game_ended");
-  if(!isDefined(param_01)) {
-    param_01 = 3;
+  if(!isDefined(var_1)) {
+    var_1 = 3;
   }
 
-  var_02 = 0;
-  while(var_02 < param_01) {
-    var_03 = scripts\cp\zombies\cp_final_spawning::get_scored_goon_spawn_location();
-    var_04 = var_03 scripts\cp\zombies\cp_final_spawning::spawn_brute_wave_enemy("alien_goon");
-    if(isDefined(var_04)) {
-      var_02++;
+  var_2 = 0;
+  while(var_2 < var_1) {
+    var_3 = scripts\cp\zombies\cp_final_spawning::get_scored_goon_spawn_location();
+    var_4 = var_3 scripts\cp\zombies\cp_final_spawning::spawn_brute_wave_enemy("alien_goon");
+    if(isDefined(var_4)) {
+      var_2++;
     }
 
     wait(0.3);
   }
 }
 
-pickupbridgepiece(param_00, param_01) {
-  param_00 scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-  var_02 = getEntArray("pap_bridge_model", "targetname");
-  var_03 = scripts\engine\utility::get_array_of_closest(param_00.origin, var_02, undefined, 2);
-  scripts\cp\maps\cp_final\cp_final_interactions::generic_pickup_gesture_and_fx(param_01, var_03[0].origin);
-  incrementbridgequest(var_03, param_01);
-  trigger_goon_event(param_00.origin);
+pickupbridgepiece(var_0, var_1) {
+  var_0 scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  var_2 = getEntArray("pap_bridge_model", "targetname");
+  var_3 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2, undefined, 2);
+  scripts\cp\maps\cp_final\cp_final_interactions::generic_pickup_gesture_and_fx(var_1, var_3[0].origin);
+  incrementbridgequest(var_3, var_1);
+  trigger_goon_event(var_0.origin);
 }
 
-incrementbridgequest(param_00, param_01) {
+incrementbridgequest(var_0, var_1) {
   if(!isDefined(level.bridgepiecesfound)) {
     level.bridgepiecesfound = [];
   }
 
-  if(!isDefined(param_00)) {
-    var_02 = "debugPiece";
+  if(!isDefined(var_0)) {
+    var_2 = "debugPiece";
   } else {
-    var_02 = param_01[0].model;
-    param_00[0] hide();
-    param_00[0] hide();
-    param_00[0] hide();
+    var_2 = var_1[0].model;
+    var_0[0] hide();
+    var_0[0] hide();
+    var_0[0] hide();
   }
 
-  level.bridgepiecesfound = scripts\engine\utility::array_add_safe(level.bridgepiecesfound, var_02);
-  var_03 = level.bridgepiecesfound.size;
-  scripts\cp\utility::set_quest_icon(6 + var_03);
-  setomnvar("zm_scrap_count", var_03);
-  if(isDefined(param_01) && isplayer(param_01)) {
-    switch (int(var_03)) {
+  level.bridgepiecesfound = scripts\engine\utility::array_add_safe(level.bridgepiecesfound, var_2);
+  var_3 = level.bridgepiecesfound.size;
+  scripts\cp\utility::set_quest_icon(6 + var_3);
+  setomnvar("zm_scrap_count", var_3);
+  if(isDefined(var_1) && isplayer(var_1)) {
+    switch (int(var_3)) {
       case 1:
-        param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_1", "zmb_comment_vo");
+        var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_1", "zmb_comment_vo");
         break;
 
       case 2:
-        param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_2", "zmb_comment_vo");
+        var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_2", "zmb_comment_vo");
         break;
 
       case 3:
-        param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_3", "zmb_comment_vo");
+        var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_3", "zmb_comment_vo");
         break;
     }
   }
 
-  if(var_03 >= 3) {
+  if(var_3 >= 3) {
     scripts\engine\utility::flag_set("bridge_pieces_collected");
   }
 }
@@ -2735,11 +2735,11 @@ givehelmetdebug() {
   scripts\engine\utility::flag_set("pulled_out_helmet");
   scripts\engine\utility::flag_set("obtained_brute_helmet");
   scripts\cp\utility::set_quest_icon(1);
-  var_00 = spawn("script_model", (0, 0, 0));
-  var_00 setModel("cp_final_brute_mascot_mask");
-  var_00.script_parameters = "heavy_helmet";
-  var_00 hide();
-  level.helmet_on_brute = var_00;
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 setModel("cp_final_brute_mascot_mask");
+  var_0.script_parameters = "heavy_helmet";
+  var_0 hide();
+  level.helmet_on_brute = var_0;
 }
 
 movieswapdebug() {
@@ -2753,7 +2753,7 @@ constructbridgeinit() {
   scripts\engine\utility::getstruct("construct_bridge", "script_noteworthy").name = "construct_bridge";
 }
 
-constructbridgehint(param_00, param_01) {
+constructbridgehint(var_0, var_1) {
   if(!isDefined(level.bridgepiecesfound)) {
     level.bridgepiecesfound = [];
   }
@@ -2766,51 +2766,51 @@ constructbridgehint(param_00, param_01) {
     return &"CP_FINAL_INTERACTIONS_ADD_BRIDGE_PIECE";
   }
 
-  param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
+  var_1 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
   return &"CP_FINAL_INTERACTIONS_NEED_PIECES";
 }
 
-bridgeconstructionfeedback(param_00, param_01) {
-  var_02 = scripts\engine\utility::getstruct("construction_point_" + param_00, "targetname");
-  playFX(level._effect["bridge_place"], var_02.origin, anglesToForward(var_02.angles));
+bridgeconstructionfeedback(var_0, var_1) {
+  var_2 = scripts\engine\utility::getstruct("construction_point_" + var_0, "targetname");
+  playFX(level._effect["bridge_place"], var_2.origin, anglesToForward(var_2.angles));
   wait(1.2);
-  var_03 = spawn("script_model", var_02.origin);
-  var_03 setModel("debris_exterior_damaged_metal_panels_08_scl50");
-  var_03.angles = var_02.angles;
-  var_04 = (60, 60, 0);
-  var_05 = getent("bridge_blocker", "targetname");
-  var_05.origin = var_05.origin + var_04;
-  param_01.origin = param_01.origin + var_04 + (8, 4, 0);
-  playsoundatpos(param_01.origin, "zmb_bridge_build_01");
-  var_05 connectpaths();
+  var_3 = spawn("script_model", var_2.origin);
+  var_3 setModel("debris_exterior_damaged_metal_panels_08_scl50");
+  var_3.angles = var_2.angles;
+  var_4 = (60, 60, 0);
+  var_5 = getent("bridge_blocker", "targetname");
+  var_5.origin = var_5.origin + var_4;
+  var_1.origin = var_1.origin + var_4 + (8, 4, 0);
+  playsoundatpos(var_1.origin, "zmb_bridge_build_01");
+  var_5 connectpaths();
   level.bridgepiecesplaced++;
 }
 
-constructbridgeuse(param_00, param_01) {
-  param_01 endon("disconnect");
-  var_02 = level.bridgepiecesfound.size - level.bridgepiecesplaced;
-  if(var_02 > 0) {
-    scripts\cp\maps\cp_final\cp_final_interactions::generic_place_gesture_and_fx(param_01, param_00.origin + (30, 45, 0));
-    for(var_03 = level.bridgepiecesplaced; var_03 < level.bridgepiecesplaced + var_02; var_03++) {
-      thread bridgeconstructionfeedback(var_03 + 1, param_00);
+constructbridgeuse(var_0, var_1) {
+  var_1 endon("disconnect");
+  var_2 = level.bridgepiecesfound.size - level.bridgepiecesplaced;
+  if(var_2 > 0) {
+    scripts\cp\maps\cp_final\cp_final_interactions::generic_place_gesture_and_fx(var_1, var_0.origin + (30, 45, 0));
+    for(var_3 = level.bridgepiecesplaced; var_3 < level.bridgepiecesplaced + var_2; var_3++) {
+      thread bridgeconstructionfeedback(var_3 + 1, var_0);
     }
 
     wait(1.205);
     if(scripts\engine\utility::flag("bridge_pieces_collected")) {
       openbridge();
-      built_bridge_feedback(param_01);
-      scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_build", "zmb_comment_vo");
-      wait(lookupsoundlength(param_01.vo_prefix + "quest_pap_bridge_build"));
-      param_01 thread scripts\cp\cp_vo::try_to_play_vo("pap_quest_success", "zmb_comment_vo");
+      built_bridge_feedback(var_1);
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_build", "zmb_comment_vo");
+      wait(lookupsoundlength(var_1.vo_prefix + "quest_pap_bridge_build"));
+      var_1 thread scripts\cp\cp_vo::try_to_play_vo("pap_quest_success", "zmb_comment_vo");
     }
   }
 }
 
 openbridge() {
-  var_00 = getent("bridge_blocker", "targetname");
-  var_00 notsolid();
-  var_00 connectpaths();
+  var_0 = getent("bridge_blocker", "targetname");
+  var_0 notsolid();
+  var_0 connectpaths();
   scripts\engine\utility::flag_set("bridge_constructed");
   level thread bridgeconstructedvo();
   scripts\cp\zombies\zombies_spawning::activate_volume_by_name("pap_island");
@@ -2819,9 +2819,9 @@ openbridge() {
 }
 
 bridgeconstructedvo() {
-  var_00 = scripts\engine\utility::random(level.players);
-  if(isDefined(var_00.vo_prefix)) {
-    switch (var_00.vo_prefix) {
+  var_0 = scripts\engine\utility::random(level.players);
+  if(isDefined(var_0.vo_prefix)) {
+    switch (var_0.vo_prefix) {
       case "p1_":
         if(!isDefined(level.completed_dialogues["conv_pap_ee_sally_1_1"])) {
           level thread scripts\cp\cp_vo::try_to_play_vo("conv_pap_ee_sally_1_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
@@ -2855,49 +2855,49 @@ bridgeconstructedvo() {
 
 givefuses() {
   scripts\engine\utility::flag_set("picked_up_uncharged_fuses");
-  foreach(var_01 in level.players) {
-    var_01 setclientomnvar("zm_special_item", 5);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 5);
   }
 }
 
-built_bridge_feedback(param_00) {
-  if(isDefined(param_00) && isplayer(param_00)) {
-    var_01 = ["fistpump", "fingercrossed", "kissfist"];
-    var_02 = scripts\engine\utility::random(var_01);
-    var_03 = "iw7_" + var_02 + "_zm";
-    param_00 thread scripts\cp\utility::usegrenadegesture(param_00, var_03);
+built_bridge_feedback(var_0) {
+  if(isDefined(var_0) && isplayer(var_0)) {
+    var_1 = ["fistpump", "fingercrossed", "kissfist"];
+    var_2 = scripts\engine\utility::random(var_1);
+    var_3 = "iw7_" + var_2 + "_zm";
+    var_0 thread scripts\cp\utility::usegrenadegesture(var_0, var_3);
   }
 }
 
 spawnenergydoor() {
-  var_00 = [(16, 5583, 115), (144, 6168, 115)];
-  var_01 = [(0, 0, 0), (0, 90, 0)];
+  var_0 = [(16, 5583, 115), (144, 6168, 115)];
+  var_1 = [(0, 0, 0), (0, 90, 0)];
   level.all_quest_doors = [];
-  for(var_02 = 0; var_02 < var_00.size; var_02++) {
-    var_03 = scripts\engine\utility::drop_to_ground(var_00[var_02], 12, -400);
-    var_04 = spawn("script_model", var_03);
-    var_04.angles = var_01[var_02];
-    var_04 setModel("door_sized_collision");
-    var_04 setscriptablepartstate("door_effect", "active");
-    level.all_quest_doors[level.all_quest_doors.size] = var_04;
-    thread watchfordamageondoor(var_04);
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = scripts\engine\utility::drop_to_ground(var_0[var_2], 12, -400);
+    var_4 = spawn("script_model", var_3);
+    var_4.angles = var_1[var_2];
+    var_4 setModel("door_sized_collision");
+    var_4 setscriptablepartstate("door_effect", "active");
+    level.all_quest_doors[level.all_quest_doors.size] = var_4;
+    thread watchfordamageondoor(var_4);
   }
 }
 
-watchfordamageondoor(param_00) {
+watchfordamageondoor(var_0) {
   level endon("game_ended");
   level endon("kill_energy_doors");
-  var_01 = getent("med_bay_door_clip", "targetname");
-  var_01.health = 9999999;
-  var_01.maxhealth = 9999999;
-  var_01 setCanDamage(1);
-  var_01.next_block_fx_time = 0;
+  var_1 = getent("med_bay_door_clip", "targetname");
+  var_1.health = 9999999;
+  var_1.maxhealth = 9999999;
+  var_1 setCanDamage(1);
+  var_1.next_block_fx_time = 0;
   for(;;) {
-    var_01 waittill("damage", var_02, var_03, var_04, var_05, var_02, var_02, var_02, var_02, var_02, var_06);
-    var_07 = gettime();
-    if(isDefined(var_01.next_block_fx_time) && isDefined(var_05) && isDefined(var_04) && var_07 >= var_01.next_block_fx_time) {
-      var_01.next_block_fx_time = var_07 + 250;
-      playFX(level._effect["energy_door_impact"], var_05 + var_04 * -5, var_04 * -150);
+    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_2, var_2, var_2, var_2, var_2, var_6);
+    var_7 = gettime();
+    if(isDefined(var_1.next_block_fx_time) && isDefined(var_5) && isDefined(var_4) && var_7 >= var_1.next_block_fx_time) {
+      var_1.next_block_fx_time = var_7 + 250;
+      playFX(level._effect["energy_door_impact"], var_5 + var_4 * -5, var_4 * -150);
     }
   }
 }
@@ -2928,19 +2928,19 @@ neilclosedoors() {
   pausenormalwavespawning(0);
 }
 
-watchfornearbyzombies(param_00) {
-  param_00 notify("watchForNearbyZombies");
-  param_00 endon("watchForNearbyZombies");
+watchfornearbyzombies(var_0) {
+  var_0 notify("watchForNearbyZombies");
+  var_0 endon("watchForNearbyZombies");
   level endon("game_ended");
   level endon("deactivateNeil");
   level endon("neilIsEvil");
   level endon("inFinalPosition");
   level endon("neil_doing_something_evil");
   for(;;) {
-    var_01 = sortbydistance(scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"), param_00.origin);
-    if(var_01.size > 0 && distance(var_01[0].origin, param_00.origin) <= 72) {
-      if(scripts\engine\utility::istrue(param_00.var_4284)) {
-        thread[[level.interactions[param_00.script_noteworthy].activation_func]](param_00, undefined);
+    var_1 = sortbydistance(scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"), var_0.origin);
+    if(var_1.size > 0 && distance(var_1[0].origin, var_0.origin) <= 72) {
+      if(scripts\engine\utility::istrue(var_0.var_4284)) {
+        thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, undefined);
         break;
       }
     }
@@ -2949,9 +2949,9 @@ watchfornearbyzombies(param_00) {
   }
 }
 
-pausenormalwavespawning(param_00) {
+pausenormalwavespawning(var_0) {
   scripts\engine\utility::flag_set("pause_wave_progression");
-  if(scripts\engine\utility::istrue(param_00)) {
+  if(scripts\engine\utility::istrue(var_0)) {
     level.zombies_paused = 1;
     return;
   }
@@ -2966,22 +2966,22 @@ resume_spawn_wave() {
 }
 
 storewavespawningcounters() {
-  var_00 = spawnStruct();
-  var_00.cop_spawn_percent = level.cop_spawn_percent;
-  var_00.current_enemy_deaths = level.current_enemy_deaths;
-  var_00.max_static_spawned_enemies = level.max_static_spawned_enemies;
-  var_00.desired_enemy_deaths_this_wave = level.desired_enemy_deaths_this_wave;
-  var_00.wave_num = level.wave_num;
-  level.storedspawncounters = var_00;
+  var_0 = spawnStruct();
+  var_0.cop_spawn_percent = level.cop_spawn_percent;
+  var_0.current_enemy_deaths = level.current_enemy_deaths;
+  var_0.max_static_spawned_enemies = level.max_static_spawned_enemies;
+  var_0.desired_enemy_deaths_this_wave = level.desired_enemy_deaths_this_wave;
+  var_0.wave_num = level.wave_num;
+  level.storedspawncounters = var_0;
 }
 
 restorewavespawningcounters() {
   if(isDefined(level.storedspawncounters)) {
-    var_00 = level.storedspawncounters;
-    if(level.wave_num == var_00.wave_num) {
-      level.current_enemy_deaths = var_00.current_enemy_deaths;
-      level.max_static_spawned_enemies = var_00.max_static_spawned_enemies;
-      level.desired_enemy_deaths_this_wave = var_00.desired_enemy_deaths_this_wave;
+    var_0 = level.storedspawncounters;
+    if(level.wave_num == var_0.wave_num) {
+      level.current_enemy_deaths = var_0.current_enemy_deaths;
+      level.max_static_spawned_enemies = var_0.max_static_spawned_enemies;
+      level.desired_enemy_deaths_this_wave = var_0.desired_enemy_deaths_this_wave;
     } else {
       level.current_enemy_deaths = 0;
       level.max_static_spawned_enemies = get_max_static_enemies(level.wave_num);
@@ -3011,71 +3011,71 @@ waitforvalidwavepause() {
 }
 
 clearexistingenemies() {
-  var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  foreach(var_02 in var_00) {
-    var_02.died_poorly = 1;
-    var_02.nocorpse = 1;
-    var_02 suicide();
+  var_0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  foreach(var_2 in var_0) {
+    var_2.died_poorly = 1;
+    var_2.nocorpse = 1;
+    var_2 suicide();
   }
 }
 
-get_max_static_enemies(param_00) {
-  if(scripts\cp\utility::is_escape_gametype() && param_00 < 5) {
-    var_01 = level.players.size * 6;
-    var_02 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
-    var_03 = 1;
-    var_04 = 1;
-    var_03 = var_02[param_00];
-    var_05 = level.players.size - 1;
-    if(var_05 < 1) {
-      var_05 = 0.5;
+get_max_static_enemies(var_0) {
+  if(scripts\cp\utility::is_escape_gametype() && var_0 < 5) {
+    var_1 = level.players.size * 6;
+    var_2 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
+    var_3 = 1;
+    var_4 = 1;
+    var_3 = var_2[var_0];
+    var_5 = level.players.size - 1;
+    if(var_5 < 1) {
+      var_5 = 0.5;
     }
 
-    var_06 = 24 + var_05 * 6 * var_04 * var_03;
-    return int(min(var_01, var_06));
+    var_6 = 24 + var_5 * 6 * var_4 * var_3;
+    return int(min(var_1, var_6));
   }
 
   return 24;
 }
 
-get_total_spawned_enemies(param_00) {
+get_total_spawned_enemies(var_0) {
   if(scripts\cp\utility::is_escape_gametype()) {
     return 9000;
   }
 
-  var_01 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
-  var_02 = 1;
-  var_03 = 1;
-  if(param_00 < 6) {
-    var_02 = var_01[param_00];
-  } else if(param_00 < 10) {
-    var_03 = param_00 / 5;
+  var_1 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
+  var_2 = 1;
+  var_3 = 1;
+  if(var_0 < 6) {
+    var_2 = var_1[var_0];
+  } else if(var_0 < 10) {
+    var_3 = var_0 / 5;
   } else {
-    var_03 = squared(param_00) * 0.03;
+    var_3 = squared(var_0) * 0.03;
   }
 
-  var_04 = level.players.size - 1;
-  if(var_04 < 1) {
-    var_04 = 0.5;
+  var_4 = level.players.size - 1;
+  if(var_4 < 1) {
+    var_4 = 0.5;
   }
 
-  var_05 = 24 + var_04 * 6 * var_03 * var_02;
-  return int(var_05);
+  var_5 = 24 + var_4 * 6 * var_3 * var_2;
+  return int(var_5);
 }
 
-setwavenumoverride(param_00) {
-  level.wave_num_override = param_00;
+setwavenumoverride(var_0) {
+  level.wave_num_override = var_0;
 }
 
-unsetwavenumoverride(param_00) {
+unsetwavenumoverride(var_0) {
   level.wave_num_override = undefined;
 }
 
-setspawndelayoverride(param_00) {
-  level.spawndelayoverride = param_00;
+setspawndelayoverride(var_0) {
+  level.spawndelayoverride = var_0;
 }
 
-unsetspawndelayoverride(param_00) {
+unsetspawndelayoverride(var_0) {
   level.spawndelayoverride = undefined;
 }
 
@@ -3083,48 +3083,48 @@ unsetzombiemovespeed() {
   level notify("unsetZombieMoveSpeed");
 }
 
-setzombiemovespeed(param_00) {
+setzombiemovespeed(var_0) {
   level endon("game_ended");
   level notify("unsetZombieMoveSpeed");
   level endon("unsetZombieMoveSpeed");
-  foreach(var_02 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
-    if(isDefined(var_02.agent_type) && var_02.agent_type != "ratking") {
-      var_03 = scripts\engine\utility::random(param_00);
-      var_02 thread adjustmovespeed(var_02, 0, var_03);
+  foreach(var_2 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+    if(isDefined(var_2.agent_type) && var_2.agent_type != "ratking") {
+      var_3 = scripts\engine\utility::random(var_0);
+      var_2 thread adjustmovespeed(var_2, 0, var_3);
     }
   }
 
   for(;;) {
-    level waittill("agent_spawned", var_05);
-    var_03 = scripts\engine\utility::random(param_00);
-    var_05 thread adjustmovespeed(var_05, 1, var_03);
+    level waittill("agent_spawned", var_5);
+    var_3 = scripts\engine\utility::random(var_0);
+    var_5 thread adjustmovespeed(var_5, 1, var_3);
   }
 }
 
-adjustmovespeed(param_00, param_01, param_02) {
-  param_00 endon("death");
-  if(isDefined(param_00.agent_type) && param_00.agent_type == "ratking") {
+adjustmovespeed(var_0, var_1, var_2) {
+  var_0 endon("death");
+  if(isDefined(var_0.agent_type) && var_0.agent_type == "ratking") {
     return;
   }
 
-  if(scripts\engine\utility::istrue(param_00.is_suicide_bomber)) {
+  if(scripts\engine\utility::istrue(var_0.is_suicide_bomber)) {
     return;
   }
 
-  if(scripts\engine\utility::istrue(param_01)) {
+  if(scripts\engine\utility::istrue(var_1)) {
     wait(0.5);
   }
 
-  param_00 scripts\asm\asm_bb::bb_requestmovetype(param_02);
+  var_0 scripts\asm\asm_bb::bb_requestmovetype(var_2);
 }
 
 neiltriggertrap() {
-  var_00 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
-  var_01 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
-  var_02 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
-  level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_00[0], undefined);
-  level thread scripts\cp\maps\cp_final\cp_final_traps::electric_trap_use(var_01[0], undefined);
-  level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_02[0], undefined);
+  var_0 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
+  var_1 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
+  var_2 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_0[0], undefined);
+  level thread scripts\cp\maps\cp_final\cp_final_traps::electric_trap_use(var_1[0], undefined);
+  level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_2[0], undefined);
 }
 
 neildoevilstuff() {
@@ -3133,11 +3133,11 @@ neildoevilstuff() {
   level endon("game_ended");
   level endon("deactivateNeil");
   level endon("inFinalPosition");
-  var_00 = ["laser_trap", "electric_trap", "acid_rain_trap"];
-  var_01 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
-  var_02 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
-  var_03 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
-  var_04 = scripts\engine\utility::array_combine(var_01, var_02, var_03);
+  var_0 = ["laser_trap", "electric_trap", "acid_rain_trap"];
+  var_1 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
+  var_2 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
+  var_3 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  var_4 = scripts\engine\utility::array_combine(var_1, var_2, var_3);
   wait(5);
   for(;;) {
     level notify("neil_doing_something_evil");
@@ -3153,31 +3153,31 @@ neildoevilstuff() {
         level thread play_bad_neil_dialogues();
       }
     } else {
-      var_05 = 2000;
-      var_06 = undefined;
-      foreach(var_08 in level.players) {
-        var_09 = scripts\engine\utility::getclosest(var_08.origin, var_04, 1000);
-        if(isDefined(var_09) && distance(var_08.origin, var_09.origin) < var_05) {
-          if(scripts\engine\utility::array_contains(level.current_interaction_structs, var_09)) {
-            var_06 = var_09;
+      var_5 = 2000;
+      var_6 = undefined;
+      foreach(var_8 in level.players) {
+        var_9 = scripts\engine\utility::getclosest(var_8.origin, var_4, 1000);
+        if(isDefined(var_9) && distance(var_8.origin, var_9.origin) < var_5) {
+          if(scripts\engine\utility::array_contains(level.current_interaction_structs, var_9)) {
+            var_6 = var_9;
           }
         }
       }
 
-      if(isDefined(var_06)) {
+      if(isDefined(var_6)) {
         resetslidingdoorstonormalstate();
         playneilvo("final_n31l_evil_manipulate_cost");
-        switch (var_06.script_noteworthy) {
+        switch (var_6.script_noteworthy) {
           case "laser_trap":
-            level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_01[0], undefined);
+            level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_1[0], undefined);
             break;
 
           case "electric_trap":
-            level thread scripts\cp\maps\cp_final\cp_final_traps::electric_trap_use(var_02[0], undefined);
+            level thread scripts\cp\maps\cp_final\cp_final_traps::electric_trap_use(var_2[0], undefined);
             break;
 
           case "acid_rain_trap":
-            level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_03[0], undefined);
+            level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_3[0], undefined);
             break;
         }
 
@@ -3203,9 +3203,9 @@ play_bad_neil_dialogues() {
   wait(7);
   if(!scripts\engine\utility::istrue(level.played_bad_neil_vo)) {
     level.played_bad_neil_vo = 1;
-    var_00 = scripts\engine\utility::random(level.players);
-    if(isDefined(var_00.vo_prefix)) {
-      switch (var_00.vo_prefix) {
+    var_0 = scripts\engine\utility::random(level.players);
+    if(isDefined(var_0.vo_prefix)) {
+      switch (var_0.vo_prefix) {
         case "p1_":
           if(!isDefined(level.completed_dialogues["conv_bad_n31l_sally_1_1"])) {
             level thread scripts\cp\cp_vo::try_to_play_vo("conv_bad_n31l_sally_1_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
@@ -3242,8 +3242,8 @@ waittoreactivate() {
   level endon("game_ended");
   level endon("makeNeilEvil");
   level endon("deactivateNeil");
-  var_00 = randomintrange(45, 60);
-  level scripts\engine\utility::waittill_any_timeout_1(var_00 - 5, "makeNeilEvil");
+  var_0 = randomintrange(45, 60);
+  level scripts\engine\utility::waittill_any_timeout_1(var_0 - 5, "makeNeilEvil");
   setneilstate("straight");
   level scripts\engine\utility::waittill_any_timeout_1(5, "makeNeilEvil");
 }
@@ -3258,21 +3258,21 @@ activatedoorsastraps() {
 }
 
 openalldoors() {
-  foreach(var_01 in level.allslidingdoors) {
-    if(scripts\engine\utility::istrue(var_01.player_opened) && scripts\engine\utility::istrue(var_01.var_4284)) {
-      thread[[level.interactions[var_01.script_noteworthy].activation_func]](var_01, undefined);
+  foreach(var_1 in level.allslidingdoors) {
+    if(scripts\engine\utility::istrue(var_1.player_opened) && scripts\engine\utility::istrue(var_1.var_4284)) {
+      thread[[level.interactions[var_1.script_noteworthy].activation_func]](var_1, undefined);
     }
   }
 }
 
-closealldoors(param_00) {
-  foreach(var_02 in level.allslidingdoors) {
-    if(scripts\engine\utility::istrue(var_02.player_opened) && scripts\engine\utility::istrue(var_02.opened)) {
-      if(scripts\engine\utility::istrue(param_00)) {
-        thread watchfornearbyzombies(var_02);
+closealldoors(var_0) {
+  foreach(var_2 in level.allslidingdoors) {
+    if(scripts\engine\utility::istrue(var_2.player_opened) && scripts\engine\utility::istrue(var_2.opened)) {
+      if(scripts\engine\utility::istrue(var_0)) {
+        thread watchfornearbyzombies(var_2);
       }
 
-      thread scripts\cp\maps\cp_final\cp_final_interactions::closeslidingdoor(var_02, undefined);
+      thread scripts\cp\maps\cp_final\cp_final_interactions::closeslidingdoor(var_2, undefined);
     }
   }
 }
@@ -3296,4 +3296,4 @@ initmpqdebug() {
   scripts\engine\utility::flag_wait("interactions_initialized");
 }
 
-questdevguientries(param_00, param_01, param_02, param_03) {}
+questdevguientries(var_0, var_1, var_2, var_3) {}

@@ -27,30 +27,30 @@ main() {
 }
 
 fix_collision() {
-  var_00 = spawn("script_model", (0, 0, 1024));
-  var_00.angles = (0, 0, 0);
-  var_00 setModel("mp_rivet_clip_patch_clip_all_01");
-  var_01 = getent("player512x512x8", "targetname");
-  var_02 = spawn("script_model", (-1192, -944, 1500));
-  var_02.angles = (26, 0, 0);
-  var_02 clonebrushmodeltoscriptmodel(var_01);
-  var_03 = getent("player512x512x8", "targetname");
-  var_04 = spawn("script_model", (462, 2064, 1536));
-  var_04.angles = (0, 0, 90);
-  var_04 clonebrushmodeltoscriptmodel(var_03);
-  var_05 = getent("player512x512x8", "targetname");
-  var_06 = spawn("script_model", (-400, 360, 1360));
-  var_06.angles = (0, 0, 90);
-  var_06 clonebrushmodeltoscriptmodel(var_05);
-  var_07 = spawn("script_model", (110, 1969, 823.5));
-  var_07.angles = (0, 315, -90);
-  var_07 setModel("sdf_rivet_runwall_01");
-  var_08 = spawn("script_model", (196, -1972, 823));
-  var_08.angles = (0, 315, -90);
-  var_08 setModel("ship_wall_panel_a_32_clean");
-  var_09 = spawn("script_model", (173, -1950, 823));
-  var_09.angles = (0, 315, -90);
-  var_09 setModel("ship_wall_panel_a_32_clean");
+  var_0 = spawn("script_model", (0, 0, 1024));
+  var_0.angles = (0, 0, 0);
+  var_0 setModel("mp_rivet_clip_patch_clip_all_01");
+  var_1 = getent("player512x512x8", "targetname");
+  var_2 = spawn("script_model", (-1192, -944, 1500));
+  var_2.angles = (26, 0, 0);
+  var_2 clonebrushmodeltoscriptmodel(var_1);
+  var_3 = getent("player512x512x8", "targetname");
+  var_4 = spawn("script_model", (462, 2064, 1536));
+  var_4.angles = (0, 0, 90);
+  var_4 clonebrushmodeltoscriptmodel(var_3);
+  var_5 = getent("player512x512x8", "targetname");
+  var_6 = spawn("script_model", (-400, 360, 1360));
+  var_6.angles = (0, 0, 90);
+  var_6 clonebrushmodeltoscriptmodel(var_5);
+  var_7 = spawn("script_model", (110, 1969, 823.5));
+  var_7.angles = (0, 315, -90);
+  var_7 setModel("sdf_rivet_runwall_01");
+  var_8 = spawn("script_model", (196, -1972, 823));
+  var_8.angles = (0, 315, -90);
+  var_8 setModel("ship_wall_panel_a_32_clean");
+  var_9 = spawn("script_model", (173, -1950, 823));
+  var_9.angles = (0, 315, -90);
+  var_9 setModel("ship_wall_panel_a_32_clean");
   var_0A = spawn("script_model", (151, -1927, 823));
   var_0A.angles = (0, 315, -90);
   var_0A setModel("ship_wall_panel_a_32_clean");
@@ -165,16 +165,16 @@ fix_collision() {
 
 patchoutofboundstrigger() {
   level.outofboundstriggerpatches = [];
-  var_00 = [(-334, -1727, 825), (1131, -994, 825), (1137, 1003, 825), (291, -1858, 825)];
-  foreach(var_02 in var_00) {
-    var_03 = spawn("trigger_radius", var_02, 0, 300, 15);
-    level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_03;
+  var_0 = [(-334, -1727, 825), (1131, -994, 825), (1137, 1003, 825), (291, -1858, 825)];
+  foreach(var_2 in var_0) {
+    var_3 = spawn("trigger_radius", var_2, 0, 300, 15);
+    level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_3;
   }
 
   level waittill("game_ended");
-  foreach(var_03 in level.outofboundstriggerpatches) {
-    if(isDefined(var_03)) {
-      var_03 delete();
+  foreach(var_3 in level.outofboundstriggerpatches) {
+    if(isDefined(var_3)) {
+      var_3 delete();
     }
   }
 }
@@ -185,8 +185,8 @@ func_D80C() {
   precachemodel("shipyard_drone_01");
   precachemodel("shipyard_drone_01_paths");
   level.var_1D93 = ["ship_wall_panel", "ship_wall_panel_a_32", "ship_wall_panel_a_32_clean", "ship_wall_panel_a_64", "ship_wall_panel_a_64_clean"];
-  foreach(var_01 in level.var_1D93) {
-    precachemodel(var_01);
+  foreach(var_1 in level.var_1D93) {
+    precachemodel(var_1);
   }
 
   precachempanim("mp_rivet_drone_path_01");
@@ -214,45 +214,45 @@ func_E563() {
   }
 
   waittillframeend;
-  var_00 = getscriptablearray("rivet_scriptable_light", "script_noteworthy");
-  foreach(var_02 in var_00) {
-    var_02 setscriptablepartstate("onoff", "off");
+  var_0 = getscriptablearray("rivet_scriptable_light", "script_noteworthy");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("onoff", "off");
   }
 }
 
 func_FA3A() {
   waittillframeend;
-  var_00 = getscriptablearray("mp_rivet_hanging_turret", "targetname");
-  if(var_00.size != 0) {
-    foreach(var_02 in var_00) {
-      var_03 = spawn("script_model", var_02.origin);
-      var_03.angles = var_02.angles;
-      var_03 setModel("crane_hangar_04");
-      var_03 linkto(var_02, "j_prop_1");
-      var_03 show();
+  var_0 = getscriptablearray("mp_rivet_hanging_turret", "targetname");
+  if(var_0.size != 0) {
+    foreach(var_2 in var_0) {
+      var_3 = spawn("script_model", var_2.origin);
+      var_3.angles = var_2.angles;
+      var_3 setModel("crane_hangar_04");
+      var_3 linkto(var_2, "j_prop_1");
+      var_3 show();
     }
   }
 
-  var_05 = getscriptablearray("mp_rivet_hanging_wall", "targetname");
-  if(var_05.size != 0) {
-    foreach(var_07 in var_05) {
-      var_03 = spawn("script_model", var_07 gettagorigin("j_prop_1") + (0, 0, 112));
-      var_03.angles = var_07 gettagangles("j_prop_1");
-      var_03 setModel("sdf_rivet_runwall_01");
-      var_03 linkto(var_07, "j_prop_1");
-      var_03 show();
-      var_03 = spawn("script_model", var_07 gettagorigin("j_prop_2") + (0, 0, 112));
-      var_03.angles = var_07 gettagangles("j_prop_2");
-      var_03 setModel("shipyard_drone_01");
-      var_03 linkto(var_07, "j_prop_2");
-      var_03 show();
-      var_03 setscriptablepartstate("anims", "drone1");
-      var_03 = spawn("script_model", var_07 gettagorigin("j_prop_3") + (0, 0, 112));
-      var_03.angles = var_07 gettagangles("j_prop_3");
-      var_03 setModel("shipyard_drone_01");
-      var_03 linkto(var_07, "j_prop_3");
-      var_03 show();
-      var_03 setscriptablepartstate("anims", "drone2");
+  var_5 = getscriptablearray("mp_rivet_hanging_wall", "targetname");
+  if(var_5.size != 0) {
+    foreach(var_7 in var_5) {
+      var_3 = spawn("script_model", var_7 gettagorigin("j_prop_1") + (0, 0, 112));
+      var_3.angles = var_7 gettagangles("j_prop_1");
+      var_3 setModel("sdf_rivet_runwall_01");
+      var_3 linkto(var_7, "j_prop_1");
+      var_3 show();
+      var_3 = spawn("script_model", var_7 gettagorigin("j_prop_2") + (0, 0, 112));
+      var_3.angles = var_7 gettagangles("j_prop_2");
+      var_3 setModel("shipyard_drone_01");
+      var_3 linkto(var_7, "j_prop_2");
+      var_3 show();
+      var_3 setscriptablepartstate("anims", "drone1");
+      var_3 = spawn("script_model", var_7 gettagorigin("j_prop_3") + (0, 0, 112));
+      var_3.angles = var_7 gettagangles("j_prop_3");
+      var_3 setModel("shipyard_drone_01");
+      var_3 linkto(var_7, "j_prop_3");
+      var_3 show();
+      var_3 setscriptablepartstate("anims", "drone2");
     }
   }
 }
@@ -266,42 +266,42 @@ func_1DA5() {
 
 func_1D9F() {
   level endon("game_ended");
-  var_00 = [];
-  var_01 = scripts\engine\utility::getstructarray("ambient_drone_start_loc", "script_noteworthy");
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_03.script_parameters)) {
+  var_0 = [];
+  var_1 = scripts\engine\utility::getstructarray("ambient_drone_start_loc", "script_noteworthy");
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.script_parameters)) {
       continue;
     }
 
-    var_04 = spawn("script_model", (0, 0, 0));
-    var_04.angles = (0, 0, 0);
-    var_04 setModel("shipyard_drone_01_paths");
-    var_04.var_10DC1 = var_03.origin;
-    var_04.var_10D6D = var_03.angles;
-    var_04.running = 0;
-    var_04.script_parameters = func_1D92(var_03.script_parameters);
-    if(isDefined(var_04.script_parameters)) {
-      var_04.var_1FB8 = getanimlength(var_04.script_parameters);
-      var_04.var_C891 = var_04 func_1D9B();
-      var_04.var_C891 linkto(var_04, "tag_ship_wall_panel");
-      var_04 func_1D94();
-      var_04 hide();
-      var_04.origin = var_04.var_10DC1;
-      var_04.angles = var_04.var_10D6D;
-      var_04 scriptmodelplayanimdeltamotion(var_04.script_parameters);
-      var_00[var_00.size] = var_04;
+    var_4 = spawn("script_model", (0, 0, 0));
+    var_4.angles = (0, 0, 0);
+    var_4 setModel("shipyard_drone_01_paths");
+    var_4.var_10DC1 = var_3.origin;
+    var_4.var_10D6D = var_3.angles;
+    var_4.running = 0;
+    var_4.script_parameters = func_1D92(var_3.script_parameters);
+    if(isDefined(var_4.script_parameters)) {
+      var_4.var_1FB8 = getanimlength(var_4.script_parameters);
+      var_4.var_C891 = var_4 func_1D9B();
+      var_4.var_C891 linkto(var_4, "tag_ship_wall_panel");
+      var_4 func_1D94();
+      var_4 hide();
+      var_4.origin = var_4.var_10DC1;
+      var_4.angles = var_4.var_10D6D;
+      var_4 scriptmodelplayanimdeltamotion(var_4.script_parameters);
+      var_0[var_0.size] = var_4;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-func_1D92(param_00) {
-  if(!isDefined(param_00)) {
+func_1D92(var_0) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "mp_rivet_drone_path_01":
       return % mp_rivet_drone_path_01;
 
@@ -354,13 +354,13 @@ func_1D92(param_00) {
 func_1DA2() {
   level endon("game_ended");
   for(;;) {
-    foreach(var_01 in level.var_1D99) {
-      if(!isDefined(var_01.running)) {
-        var_01.running = 0;
+    foreach(var_1 in level.var_1D99) {
+      if(!isDefined(var_1.running)) {
+        var_1.running = 0;
       }
 
-      if(var_01.running == 0) {
-        var_01 thread func_1DA3();
+      if(var_1.running == 0) {
+        var_1 thread func_1DA3();
       }
     }
 
@@ -399,10 +399,10 @@ func_1DA3() {
 }
 
 func_1D9B() {
-  var_00 = spawn("script_model", self.origin + (-64, 1, 0));
-  var_00 setModel("tag_origin");
-  var_00.angles = self.angles + (90, 0, 0);
-  return var_00;
+  var_0 = spawn("script_model", self.origin + (-64, 1, 0));
+  var_0 setModel("tag_origin");
+  var_0.angles = self.angles + (90, 0, 0);
+  return var_0;
 }
 
 func_1D94() {
@@ -418,15 +418,15 @@ func_1D95() {
 
 func_F03C() {
   waittillframeend;
-  var_00 = getscriptablearray("mp_rivet_rocket", "targetname")[0];
+  var_0 = getscriptablearray("mp_rivet_rocket", "targetname")[0];
   if(!isDefined(level.var_E5E1)) {
     level.var_E5E1 = 0;
   }
 
-  if(isDefined(var_00)) {
-    var_00.var_4D29 = getent("mp_rivet_rocket_damage_vol", "targetname");
-    var_00 thread scripts\mp\maps\mp_rivet\mp_rivet_fx::func_F03D();
-    var_00 thread func_F03F();
+  if(isDefined(var_0)) {
+    var_0.var_4D29 = getent("mp_rivet_rocket_damage_vol", "targetname");
+    var_0 thread scripts\mp\maps\mp_rivet\mp_rivet_fx::func_F03D();
+    var_0 thread func_F03F();
   }
 }
 
@@ -445,13 +445,13 @@ fire_rocket() {
     level.var_E5E1 = 1;
     level notify("rivet_rocket_firing");
     self setscriptablepartstate("base", "fire");
-    foreach(var_01 in self.var_75A4) {
-      var_01 setscriptablepartstate("onoff", "on");
+    foreach(var_1 in self.var_75A4) {
+      var_1 setscriptablepartstate("onoff", "on");
     }
 
     wait(14.8);
-    foreach(var_01 in self.var_75A4) {
-      var_01 setscriptablepartstate("onoff", "off");
+    foreach(var_1 in self.var_75A4) {
+      var_1 setscriptablepartstate("onoff", "off");
     }
 
     wait(0.2);
@@ -468,15 +468,15 @@ func_6D22() {
   for(;;) {
     level waittill("rivet_rocket_firing");
     while(level.var_E5E1 == 1) {
-      self.var_4D29 waittill("trigger", var_00);
+      self.var_4D29 waittill("trigger", var_0);
       if(level.var_E5E1 != 1) {
         break;
       }
 
-      if(scripts\mp\utility::isreallyalive(var_00)) {
-        var_00 dodamage(var_00.maxhealth, self.origin, var_00, undefined, "MOD_EXPLOSIVE");
-        if(isplayer(var_00) || isagent(var_00)) {
-          thread func_57D4(var_00 _meth_8113());
+      if(scripts\mp\utility::isreallyalive(var_0)) {
+        var_0 dodamage(var_0.maxhealth, self.origin, var_0, undefined, "MOD_EXPLOSIVE");
+        if(isplayer(var_0) || isagent(var_0)) {
+          thread func_57D4(var_0 _meth_8113());
         }
       }
     }
@@ -501,10 +501,10 @@ func_6D26() {
   for(;;) {
     level waittill("rivet_rocket_firing");
     while(level.var_E5E1 == 1) {
-      var_00 = scripts\engine\utility::array_combine(self getistouchingentities(level.grenades), self getistouchingentities(level.missiles));
-      var_00 = scripts\engine\utility::array_combine(self getistouchingentities(level.mines), var_00);
-      foreach(var_02 in var_00) {
-        var_02 scripts\mp\weapons::deleteexplosive();
+      var_0 = scripts\engine\utility::array_combine(self getistouchingentities(level.grenades), self getistouchingentities(level.missiles));
+      var_0 = scripts\engine\utility::array_combine(self getistouchingentities(level.mines), var_0);
+      foreach(var_2 in var_0) {
+        var_2 scripts\mp\weapons::deleteexplosive();
       }
 
       scripts\engine\utility::waitframe();
@@ -512,10 +512,10 @@ func_6D26() {
   }
 }
 
-func_57D4(param_00) {
+func_57D4(var_0) {
   waittillframeend;
-  if(isDefined(param_00)) {
-    param_00 hide();
+  if(isDefined(var_0)) {
+    var_0 hide();
   }
 }
 

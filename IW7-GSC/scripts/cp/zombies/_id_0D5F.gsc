@@ -10,33 +10,33 @@ func_9758() {
   }
 }
 
-func_EC19(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_03)) {
-    var_04 = [[param_01]](param_02, param_03);
+func_EC19(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_3)) {
+    var_4 = [[var_1]](var_2, var_3);
   } else {
-    var_04 = [[param_02]](param_03);
+    var_4 = [[var_2]](var_3);
   }
 
-  var_04 = clamp(var_04, 0, 100);
-  var_04 = var_04 * param_00;
-  param_02.var_11A3A = param_02.var_11A3A + 100 * param_00;
-  param_02.var_A9E9[self.team] = param_02.var_A9E9[self.team] + var_04;
-  return var_04;
+  var_4 = clamp(var_4, 0, 100);
+  var_4 = var_4 * var_0;
+  var_2.var_11A3A = var_2.var_11A3A + 100 * var_0;
+  var_2.var_A9E9[self.team] = var_2.var_A9E9[self.team] + var_4;
+  return var_4;
 }
 
-critical_factor(param_00, param_01) {
-  var_02 = [[param_00]](param_01);
-  var_02 = clamp(var_02, 0, 100);
-  return var_02;
+critical_factor(var_0, var_1) {
+  var_2 = [[var_0]](var_1);
+  var_2 = clamp(var_2, 0, 100);
+  return var_2;
 }
 
-avoidcarepackages(param_00) {
-  foreach(var_02 in level.carepackages) {
-    if(!isDefined(var_02)) {
+avoidcarepackages(var_0) {
+  foreach(var_2 in level.carepackages) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_02.origin) < 22500) {
+    if(distancesquared(var_0.origin, var_2.origin) < 22500) {
       return 0;
     }
   }
@@ -44,13 +44,13 @@ avoidcarepackages(param_00) {
   return 100;
 }
 
-func_26B8(param_00) {
-  foreach(var_02 in level.grenades) {
-    if(!isDefined(var_02) || !var_02 isexplosivedangeroustoplayer(self)) {
+func_26B8(var_0) {
+  foreach(var_2 in level.grenades) {
+    if(!isDefined(var_2) || !var_2 isexplosivedangeroustoplayer(self)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_02.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_2.origin) < 122500) {
       return 0;
     }
   }
@@ -58,18 +58,18 @@ func_26B8(param_00) {
   return 100;
 }
 
-func_26BC(param_00) {
-  var_01 = level.mines;
+func_26BC(var_0) {
+  var_1 = level.mines;
   if(isDefined(level.placed_crafted_traps)) {
-    var_01 = scripts\engine\utility::array_combine(level.mines, level.placed_crafted_traps);
+    var_1 = scripts\engine\utility::array_combine(level.mines, level.placed_crafted_traps);
   }
 
-  foreach(var_03 in var_01) {
-    if(!isDefined(var_03) || !var_03 isexplosivedangeroustoplayer(self)) {
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3) || !var_3 isexplosivedangeroustoplayer(self)) {
       continue;
     }
 
-    if(distancesquared(param_00.origin, var_03.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_3.origin) < 122500) {
       return 0;
     }
   }
@@ -77,55 +77,55 @@ func_26BC(param_00) {
   return 100;
 }
 
-isexplosivedangeroustoplayer(param_00) {
-  if(!level.teambased || level.friendlyfire || !isDefined(param_00.team)) {
+isexplosivedangeroustoplayer(var_0) {
+  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team)) {
     return 1;
   }
 
-  var_01 = undefined;
+  var_1 = undefined;
   if(isDefined(self.triggerportableradarping)) {
-    if(param_00 == self.triggerportableradarping) {
+    if(var_0 == self.triggerportableradarping) {
       return 1;
     }
 
-    var_01 = self.triggerportableradarping.team;
+    var_1 = self.triggerportableradarping.team;
   }
 
-  if(isDefined(var_01)) {
-    return var_01 != param_00.team;
+  if(isDefined(var_1)) {
+    return var_1 != var_0.team;
   }
 
   return 1;
 }
 
-func_26C4(param_00) {
+func_26C4(var_0) {
   if(isDefined(self.var_1CAE)) {
     return 100;
   }
 
-  if(isDefined(param_00.var_1CAE)) {
+  if(isDefined(var_0.var_1CAE)) {
     return 100;
   }
 
-  if(positionwouldtelefrag(param_00.origin)) {
+  if(positionwouldtelefrag(var_0.origin)) {
     return 0;
   }
 
   return 100;
 }
 
-avoidsamespawn(param_00) {
-  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == param_00) {
+avoidsamespawn(var_0) {
+  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_0) {
     return 0;
   }
 
   return 100;
 }
 
-randomspawnscore(param_00) {
+randomspawnscore(var_0) {
   return randomintrange(0, 99);
 }
 
-maxplayerspawninfluencedistsquared(param_00) {
+maxplayerspawninfluencedistsquared(var_0) {
   return 3240000;
 }

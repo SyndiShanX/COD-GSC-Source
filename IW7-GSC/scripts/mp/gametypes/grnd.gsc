@@ -92,10 +92,10 @@ onstartgametype() {
 
   scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
   scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
-  var_00[0] = level.gametype;
-  var_00[1] = "tdm";
-  var_00[2] = "hardpoint";
-  scripts\mp\gameobjects::main(var_00);
+  var_0[0] = level.gametype;
+  var_0[1] = "tdm";
+  var_0[2] = "hardpoint";
+  scripts\mp\gameobjects::main(var_0);
   level thread scripts\mp\gametypes\koth::setupzones();
   level thread scripts\mp\gametypes\koth::setupzoneareabrushes();
   scripts\mp\gametypes\koth::initspawns();
@@ -124,23 +124,23 @@ randomdrops() {
   scripts\mp\utility::gameflagwait("prematch_done");
   level.grnd_previouscratetypes = [];
   for(;;) {
-    var_00 = getbestplayer();
-    var_01 = 1;
-    if(isDefined(var_00) && scripts\mp\utility::currentactivevehiclecount() < scripts\mp\utility::maxvehiclesallowed() && level.fauxvehiclecount + var_01 < scripts\mp\utility::maxvehiclesallowed() && level.numdropcrates < 8) {
-      scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_taken", var_00.team);
-      scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_lost", level.otherteam[var_00.team]);
-      var_02 = getnodesintrigger(level.zone.gameobject.trigger);
-      var_03 = randomintrange(0, var_02.size);
-      var_04 = var_02[var_03];
-      var_05 = getclosestpointonnavmesh3d(var_04.origin);
-      var_06 = var_04.origin;
-      var_07 = var_05;
-      var_08 = scripts\common\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
-      var_09 = [];
-      var_0A = scripts\common\trace::ray_trace(var_06, var_07, var_09, var_08);
-      var_04.droporigin = var_0A["position"];
+    var_0 = getbestplayer();
+    var_1 = 1;
+    if(isDefined(var_0) && scripts\mp\utility::currentactivevehiclecount() < scripts\mp\utility::maxvehiclesallowed() && level.fauxvehiclecount + var_1 < scripts\mp\utility::maxvehiclesallowed() && level.numdropcrates < 8) {
+      scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_taken", var_0.team);
+      scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_lost", level.otherteam[var_0.team]);
+      var_2 = getnodesintrigger(level.zone.gameobject.trigger);
+      var_3 = randomintrange(0, var_2.size);
+      var_4 = var_2[var_3];
+      var_5 = getclosestpointonnavmesh3d(var_4.origin);
+      var_6 = var_4.origin;
+      var_7 = var_5;
+      var_8 = scripts\common\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
+      var_9 = [];
+      var_0A = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
+      var_4.droporigin = var_0A["position"];
       var_0B = getdropzonecratetype();
-      level scripts\mp\killstreaks\_airdrop::func_581F(var_00, var_04, randomfloat(360), "dronedrop_grnd");
+      level scripts\mp\killstreaks\_airdrop::func_581F(var_0, var_4, randomfloat(360), "dronedrop_grnd");
       var_0C = level.droptime;
     } else {
       var_0C = 0.5;
@@ -151,33 +151,33 @@ randomdrops() {
 }
 
 getbestplayer() {
-  var_00 = undefined;
-  var_01 = 0;
-  var_02 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
-  if(var_02 == "neutral") {
-    return var_00;
+  var_0 = undefined;
+  var_1 = 0;
+  var_2 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
+  if(var_2 == "neutral") {
+    return var_0;
   }
 
-  foreach(var_04 in level.zone.gameobject.touchlist[var_02]) {
-    if(var_01 == 0 || var_01 > var_04.starttime) {
-      var_01 = var_04.starttime;
-      var_00 = var_04.player;
+  foreach(var_4 in level.zone.gameobject.touchlist[var_2]) {
+    if(var_1 == 0 || var_1 > var_4.starttime) {
+      var_1 = var_4.starttime;
+      var_0 = var_4.player;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 getdropzonecratetype() {
-  var_00 = undefined;
+  var_0 = undefined;
   if(!isDefined(level.grnd_previouscratetypes["mega"]) && level.numdropcrates == 0 && randomintrange(0, 100) < 5) {
-    var_00 = "mega";
+    var_0 = "mega";
   } else {
     if(level.grnd_previouscratetypes.size) {
-      for(var_01 = 200; var_01; var_01--) {
-        var_00 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
-        if(isDefined(level.grnd_previouscratetypes[var_00])) {
-          var_00 = undefined;
+      for(var_1 = 200; var_1; var_1--) {
+        var_0 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
+        if(isDefined(level.grnd_previouscratetypes[var_0])) {
+          var_0 = undefined;
           continue;
         }
 
@@ -185,15 +185,15 @@ getdropzonecratetype() {
       }
     }
 
-    if(!isDefined(var_00)) {
-      var_00 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
+    if(!isDefined(var_0)) {
+      var_0 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
     }
   }
 
-  level.grnd_previouscratetypes[var_00] = 1;
+  level.grnd_previouscratetypes[var_0] = 1;
   if(level.grnd_previouscratetypes.size == 15) {
     level.grnd_previouscratetypes = [];
   }
 
-  return var_00;
+  return var_0;
 }

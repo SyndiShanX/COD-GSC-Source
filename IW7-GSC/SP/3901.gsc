@@ -4,175 +4,175 @@
  * Script: SP\3901.gsc
 ************************/
 
-func_3E96(param_00, param_01, param_02) {
-  if(!isDefined(param_02)) {
-    var_03 = lib_0A1E::func_235D(param_01);
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+func_3E96(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_3 = lib_0A1E::func_235D(var_1);
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
-  var_04 = undefined;
-  var_05 = scripts\asm\asm_bb::func_2928(var_03);
-  if(isDefined(var_05)) {
-    var_03 = lib_0A1E::func_235D(param_02, var_05);
-    var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_05);
+  var_4 = undefined;
+  var_5 = scripts\asm\asm_bb::func_2928(var_3);
+  if(isDefined(var_5)) {
+    var_3 = lib_0A1E::func_235D(var_2, var_5);
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_5);
   } else {
-    var_04 = scripts\asm\asm::asm_lookupanimfromalias(param_02, var_03);
+    var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_3);
   }
 
-  return var_04;
+  return var_4;
 }
 
-func_3EB6(param_00, param_01, param_02) {
-  var_03 = scripts\asm\asm::asm_getdemeanor();
-  if(!scripts\asm\asm::asm_hasalias(param_01, var_03)) {
-    return func_3E96(param_00, param_01, param_02);
+func_3EB6(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
+    return func_3E96(var_0, var_1, var_2);
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-func_3EB3(param_00, param_01, param_02) {
-  var_03 = scripts\asm\asm::asm_getdemeanor();
-  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03, "idle")) {
-    var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03, "idle");
-    if(isarray(var_04)) {
-      return var_04[randomint(var_04.size)];
+func_3EB3(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
+  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, "idle")) {
+    var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, "idle");
+    if(isarray(var_4)) {
+      return var_4[randomint(var_4.size)];
     }
 
-    return var_04;
+    return var_4;
   }
 
   if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_05 = self.target_getindexoftarget _meth_8169();
-    var_06 = 1;
-    for(var_07 = 0; var_07 < var_05.size; var_07++) {
-      if(var_05[var_07] == "over") {
-        var_06 = 0;
+    var_5 = self.target_getindexoftarget _meth_8169();
+    var_6 = 1;
+    for(var_7 = 0; var_7 < var_5.size; var_7++) {
+      if(var_5[var_7] == "over") {
+        var_6 = 0;
       }
     }
 
-    if(var_06) {
-      var_03 = var_03 + "_high";
+    if(var_6) {
+      var_3 = var_3 + "_high";
     }
   }
 
-  return func_3EAB(param_01, param_02, var_03);
+  return func_3EAB(var_1, var_2, var_3);
 }
 
-func_3EA1(param_00, param_01, param_02) {
-  param_02 = "";
+func_3EA1(var_0, var_1, var_2) {
+  var_2 = "";
   if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_03 = self.target_getindexoftarget _meth_8169();
-    var_04 = 1;
-    for(var_05 = 0; var_05 < var_03.size; var_05++) {
-      if(var_03[var_05] == "over") {
-        var_04 = 0;
+    var_3 = self.target_getindexoftarget _meth_8169();
+    var_4 = 1;
+    for(var_5 = 0; var_5 < var_3.size; var_5++) {
+      if(var_3[var_5] == "over") {
+        var_4 = 0;
       }
     }
 
-    if(var_04) {
-      param_02 = param_02 + "_high";
+    if(var_4) {
+      var_2 = var_2 + "_high";
     }
   }
 
-  return func_3EAB(param_00, param_01, param_02);
+  return func_3EAB(var_0, var_1, var_2);
 }
 
-func_3EAB(param_00, param_01, param_02) {
-  var_03 = weaponclass(self.var_394);
-  var_04 = undefined;
-  if(!isDefined(param_02)) {
-    var_04 = lib_0A1E::func_235D(param_01);
+func_3EAB(var_0, var_1, var_2) {
+  var_3 = weaponclass(self.var_394);
+  var_4 = undefined;
+  if(!isDefined(var_2)) {
+    var_4 = lib_0A1E::func_235D(var_1);
   } else {
-    var_04 = param_02;
+    var_4 = var_2;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(param_01, var_03 + var_04)) {
-    var_03 = "rifle";
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3 + var_4)) {
+    var_3 = "rifle";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03 + var_04);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3 + var_4);
 }
 
-func_B050(param_00, param_01, param_02, param_03) {
-  lib_0A1E::func_235F(param_00, param_01, param_02, 1);
+func_B050(var_0, var_1, var_2, var_3) {
+  lib_0A1E::func_235F(var_0, var_1, var_2, 1);
 }
 
-func_CEA8(param_00, param_01, param_02, param_03) {
-  lib_0A1E::func_2364(param_00, param_01, param_02);
+func_CEA8(var_0, var_1, var_2, var_3) {
+  lib_0A1E::func_2364(var_0, var_1, var_2);
 }
 
-func_CEDA(param_00, param_01, param_02, param_03) {
-  self playSound(param_03);
-  lib_0A1E::func_2364(param_00, param_01, param_02);
+func_CEDA(var_0, var_1, var_2, var_3) {
+  self playSound(var_3);
+  lib_0A1E::func_2364(var_0, var_1, var_2);
 }
 
-func_CEA1(param_00, param_01, param_02, param_03) {
-  lib_0A1E::func_2361(param_00, param_01, param_02);
+func_CEA1(var_0, var_1, var_2, var_3) {
+  lib_0A1E::func_2361(var_0, var_1, var_2);
 }
 
-func_CEA0(param_00, param_01, param_02, param_03) {
-  lib_0A1E::func_2363(param_00, param_01, param_02);
+func_CEA0(var_0, var_1, var_2, var_3) {
+  lib_0A1E::func_2363(var_0, var_1, var_2);
 }
 
-func_CECD(param_00, param_01, param_02, param_03) {
-  childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01, param_02);
-  lib_0A1E::func_2364(param_00, param_01, param_02);
+func_CECD(var_0, var_1, var_2, var_3) {
+  childthread scripts\asm\shared_utility::setuseanimgoalweight(var_1, var_2);
+  lib_0A1E::func_2364(var_0, var_1, var_2);
 }
 
-func_D4DD(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread func_136B4(param_00, param_01, param_03);
-  thread func_136E7(param_00, param_01, param_03);
-  var_04 = 1;
+func_D4DD(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread func_136B4(var_0, var_1, var_3);
+  thread func_136E7(var_0, var_1, var_3);
+  var_4 = 1;
   scripts\asm\asm::asm_updatefrantic();
-  lib_0A1E::func_235F(param_00, param_01, param_02, var_04, 1);
+  lib_0A1E::func_235F(var_0, var_1, var_2, var_4, 1);
   scripts\asm\asm::asm_updatefrantic();
 }
 
-func_D4E0(param_00, param_01, param_02, param_03) {
+func_D4E0(var_0, var_1, var_2, var_3) {
   if(self pathdisttogoal() > 64) {
     self.var_36C = 1;
   }
 
-  func_D4DD(param_00, param_01, param_02, param_03);
+  func_D4DD(var_0, var_1, var_2, var_3);
 }
 
-func_D4E1(param_00, param_01, param_02) {
+func_D4E1(var_0, var_1, var_2) {
   self.var_36C = 0;
 }
 
-func_D4E2(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread func_136B4(param_00, param_01, param_03);
-  thread func_136E7(param_00, param_01, param_03);
-  var_04 = 1;
+func_D4E2(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread func_136B4(var_0, var_1, var_3);
+  thread func_136E7(var_0, var_1, var_3);
+  var_4 = 1;
   scripts\asm\asm::asm_updatefrantic();
-  func_2360(param_00, param_01, param_02, var_04, 1);
+  func_2360(var_0, var_1, var_2, var_4, 1);
   scripts\asm\asm::asm_updatefrantic();
 }
 
-func_2360(param_00, param_01, param_02, param_03, param_04) {
-  self endon(param_01 + "_finished");
-  var_05 = lib_0A1E::asm_getbodyknob();
-  self clearanim(var_05, param_02);
-  if(isDefined(param_04) && param_04) {
+func_2360(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  var_5 = lib_0A1E::asm_getbodyknob();
+  self clearanim(var_5, var_2);
+  if(isDefined(var_4) && var_4) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
-      var_06 = lib_0A1E::func_2356("Knobs", "move");
-      self _meth_84F2(var_06);
+      var_6 = lib_0A1E::func_2356("Knobs", "move");
+      self _meth_84F2(var_6);
     }
   }
 
-  var_07 = var_05;
-  var_08 = param_03;
-  var_09 = lib_0A1E::func_2355();
-  var_0A = scripts\asm\asm::asm_lookupanimfromalias(param_01, "one_hand_run");
+  var_7 = var_5;
+  var_8 = var_3;
+  var_9 = lib_0A1E::func_2355();
+  var_0A = scripts\asm\asm::asm_lookupanimfromalias(var_1, "one_hand_run");
   for(;;) {
     var_0B = 3;
-    var_0C = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
+    var_0C = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
     var_0D = var_0C;
     if(isarray(var_0D) && var_0D.size == 4) {
-      if((isDefined(self.asm.movementgunposeoverride) && self.asm.movementgunposeoverride == "run_gun_down") || isDefined(var_09) && var_09) {
+      if((isDefined(self.asm.movementgunposeoverride) && self.asm.movementgunposeoverride == "run_gun_down") || isDefined(var_9) && var_9) {
         var_0D = var_0C[3];
         self.asm.var_13CAF = 1;
         self.asm.movementgunposeoverride = undefined;
@@ -195,75 +195,75 @@ func_2360(param_00, param_01, param_02, param_03, param_04) {
       }
     }
 
-    if(isDefined(param_04) && param_04) {
-      param_03 = scripts\asm\asm::asm_getmoveplaybackrate();
-      self _meth_84F1(param_03);
+    if(isDefined(var_4) && var_4) {
+      var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
+      self _meth_84F1(var_3);
     }
 
-    if(var_0D != var_07 || param_03 != var_08) {
-      self give_left_powers(param_01, var_0D, 1, param_02, param_03);
-      var_08 = param_03;
+    if(var_0D != var_7 || var_3 != var_8) {
+      self give_left_powers(var_1, var_0D, 1, var_2, var_3);
+      var_8 = var_3;
     }
 
-    lib_0A1E::func_2369(param_00, param_01, var_0D);
-    var_07 = var_0D;
+    lib_0A1E::func_2369(var_0, var_1, var_0D);
+    var_7 = var_0D;
     var_0A = var_0D;
     for(var_0E = 0; var_0E < var_0B; var_0E++) {
       wait(0.05);
-      lib_0A1E::func_231F(param_00, param_01, undefined, scripts\asm\asm::func_2341(param_00, param_01));
+      lib_0A1E::func_231F(var_0, var_1, undefined, scripts\asm\asm::func_2341(var_0, var_1));
     }
   }
 }
 
-func_4EA8(param_00) {
+func_4EA8(var_0) {
   self notify("debug_anim_time");
   self endon("debug_anim_time");
   for(;;) {
-    var_01 = self getscoreinfocategory(param_00);
+    var_1 = self getscoreinfocategory(var_0);
     wait(0.05);
   }
 }
 
-func_13D08(param_00, param_01) {
-  var_02 = [];
-  var_03 = undefined;
-  var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  var_05 = self getscoreinfocategory(var_04);
-  var_06 = getnotetracktimes(var_04, "footstep_left_small");
-  var_07 = getnotetracktimes(var_04, "footstep_right_small");
-  var_08 = getnotetracktimes(var_04, "footstep_left_large");
-  var_09 = getnotetracktimes(var_04, "footstep_left_large");
+func_13D08(var_0, var_1) {
+  var_2 = [];
+  var_3 = undefined;
+  var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_5 = self getscoreinfocategory(var_4);
+  var_6 = getnotetracktimes(var_4, "footstep_left_small");
+  var_7 = getnotetracktimes(var_4, "footstep_right_small");
+  var_8 = getnotetracktimes(var_4, "footstep_left_large");
+  var_9 = getnotetracktimes(var_4, "footstep_left_large");
   var_0A = self.asm.footsteps.foot;
   if(var_0A == "right") {
-    if(var_07.size > 0) {
-      var_02 = func_3711(var_07, var_06, var_05);
-    } else if(var_09.size > 0) {
-      var_02 = func_3711(var_09, var_08, var_05);
+    if(var_7.size > 0) {
+      var_2 = func_3711(var_7, var_6, var_5);
+    } else if(var_9.size > 0) {
+      var_2 = func_3711(var_9, var_8, var_5);
     }
-  } else if(var_06.size > 0) {
-    var_02 = func_3711(var_06, var_07, var_05);
-  } else if(var_08.size > 0) {
-    var_02 = func_3711(var_08, var_09, var_05);
+  } else if(var_6.size > 0) {
+    var_2 = func_3711(var_6, var_7, var_5);
+  } else if(var_8.size > 0) {
+    var_2 = func_3711(var_8, var_9, var_5);
   }
 
-  if(var_02.size == 0) {
-    var_0B = var_04 + " is missing footstep notetracks!Footmatching failed.";
+  if(var_2.size == 0) {
+    var_0B = var_4 + " is missing footstep notetracks!Footmatching failed.";
     return;
   }
 
-  if(var_02[0] == 0) {
-    var_03 = 0;
+  if(var_2[0] == 0) {
+    var_3 = 0;
   }
 
-  if(var_02[1] == 1) {
-    var_03 = 1;
+  if(var_2[1] == 1) {
+    var_3 = 1;
   }
 
-  if(var_02[0] != 0 && var_02[1] != 1) {
-    var_03 = var_02[0] + var_02[1] / 2;
+  if(var_2[0] != 0 && var_2[1] != 1) {
+    var_3 = var_2[0] + var_2[1] / 2;
   }
 
-  if(var_03 < var_05) {
+  if(var_3 < var_5) {
     if(var_0A == "right") {
       self.asm.footsteps.foot = "left";
       return;
@@ -274,85 +274,85 @@ func_13D08(param_00, param_01) {
   }
 }
 
-func_3711(param_00, param_01, param_02) {
-  var_03 = [];
-  for(var_04 = 0; var_04 < param_00.size; var_04++) {
-    if(param_00[var_04] <= param_02) {
-      var_03[0] = param_00[var_04];
+func_3711(var_0, var_1, var_2) {
+  var_3 = [];
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(var_0[var_4] <= var_2) {
+      var_3[0] = var_0[var_4];
     }
   }
 
-  if(var_03.size < 1) {
-    var_03[0] = 0;
+  if(var_3.size < 1) {
+    var_3[0] = 0;
   }
 
-  for(var_04 = 0; var_04 < param_01.size; var_04++) {
-    if(param_01[var_04] >= var_03[0]) {
-      var_03[1] = param_01[var_04];
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
+    if(var_1[var_4] >= var_3[0]) {
+      var_3[1] = var_1[var_4];
       break;
     }
   }
 
-  if(var_03.size < 2) {
-    var_03[1] = 1;
+  if(var_3.size < 2) {
+    var_3[1] = 1;
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_136B4(param_00, param_01, param_02) {
-  self endon(param_01 + "_finished");
+func_136B4(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.print3d = 1;
-  self waittill("cover_approach", var_03);
-  scripts\asm\asm::asm_fireevent(param_01, "cover_approach", var_03);
-  self.a.var_20EE = var_03;
+  self waittill("cover_approach", var_3);
+  scripts\asm\asm::asm_fireevent(var_1, "cover_approach", var_3);
+  self.a.var_20EE = var_3;
 }
 
-func_136E7(param_00, param_01, param_02) {
-  self endon(param_01 + "_finished");
-  self waittill("path_changed", var_03, var_04, var_05, var_06);
-  var_07 = [var_03, var_04, var_05, var_06];
-  scripts\asm\asm::asm_fireevent(param_01, "sharp_turn", var_07);
-  thread func_136E7(param_00, param_01, param_02);
-  thread scripts\asm\asm::func_2310(param_00, param_01, 0);
+func_136E7(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  self waittill("path_changed", var_3, var_4, var_5, var_6);
+  var_7 = [var_3, var_4, var_5, var_6];
+  scripts\asm\asm::asm_fireevent(var_1, "sharp_turn", var_7);
+  thread func_136E7(var_0, var_1, var_2);
+  thread scripts\asm\asm::func_2310(var_0, var_1, 0);
 }
 
-func_444B(param_00) {
+func_444B(var_0) {
   self notify("StopCommitToAction");
-  self.var_1198.var_444A = 1;
-  thread func_444C(param_00);
+  self._blackboard.var_444A = 1;
+  thread func_444C(var_0);
 }
 
-func_444C(param_00) {
+func_444C(var_0) {
   self endon("death");
   self endon("StopCommitToAction");
-  self waittill(param_00 + "_finished");
-  self.var_1198.var_444A = 0;
+  self waittill(var_0 + "_finished");
+  self._blackboard.var_444A = 0;
 }
 
 func_11065() {
   self notify("StopCommitToAction");
-  self.var_1198.var_444A = 0;
+  self._blackboard.var_444A = 0;
 }
 
-handlenotetrack(param_00, param_01) {
-  switch (param_00) {
+handlenotetrack(var_0, var_1) {
+  switch (var_0) {
     case "start_aim":
-      lib_0A1E::func_2380(undefined, param_01, 0.3);
+      lib_0A1E::func_2380(undefined, var_1, 0.3);
       break;
   }
 }
 
-func_6D6D(param_00, param_01, param_02) {
-  scripts\asm\asm::asm_fireevent(param_01, param_02);
+func_6D6D(var_0, var_1, var_2) {
+  scripts\asm\asm::asm_fireevent(var_1, var_2);
 }
 
-func_10033(param_00, param_01, param_02, param_03) {
+func_10033(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_isanimscripted()) {
     return 0;
   }
 
-  if(param_03[0]) {
+  if(var_3[0]) {
     if(self.a.movement == "stop") {
       return 0;
     }
@@ -364,15 +364,15 @@ func_10033(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  if(param_03[1] != self.var_1198.movetype) {
+  if(var_3[1] != self._blackboard.movetype) {
     return 0;
   }
 
   return 1;
 }
 
-func_FFB6(param_00, param_01, param_02, param_03) {
-  if(!func_100A3(param_00, param_01, param_02, param_03)) {
+func_FFB6(var_0, var_1, var_2, var_3) {
+  if(!func_100A3(var_0, var_1, var_2, var_3)) {
     return 1;
   }
 
@@ -380,29 +380,29 @@ func_FFB6(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(scripts\asm\asm_bb::bb_meleechargerequested(param_00, param_01, param_02, param_03)) {
+  if(scripts\asm\asm_bb::bb_meleechargerequested(var_0, var_1, var_2, var_3)) {
     return 1;
   }
 
   return 0;
 }
 
-func_6A7B(param_00, param_01, param_02, param_03) {
-  var_04 = abs(angleclamp180(vectortoyaw(self.setocclusionpreset) - self.angles[1]));
-  return self.livestreamingenable && var_04 <= self.var_129AF;
+func_6A7B(var_0, var_1, var_2, var_3) {
+  var_4 = abs(angleclamp180(vectortoyaw(self.setocclusionpreset) - self.angles[1]));
+  return self.livestreamingenable && var_4 <= self.var_129AF;
 }
 
-func_100A3(param_00, param_01, param_02, param_03) {
-  return scripts\asm\asm_bb::bb_moverequested() && !self.livestreamingenable && !self.var_1198.alwaysrunforward;
+func_100A3(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested() && !self.livestreamingenable && !self._blackboard.alwaysrunforward;
 }
 
-func_1FCB(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+func_1FCB(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   self.a.movement = "run";
-  lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
+  lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
 
-func_1FCC(param_00, param_01, param_02) {
+func_1FCC(var_0, var_1, var_2) {
   self orientmode("face angle 3d", self.angles);
 }
 
@@ -442,41 +442,41 @@ func_7DD6() {
   return self.var_A905;
 }
 
-func_3ECB(param_00, param_01) {
-  return int(param_01.origin[0] + param_01.origin[1] + param_01.origin[2] + param_00 getentitynumber()) % 2;
+func_3ECB(var_0, var_1) {
+  return int(var_1.origin[0] + var_1.origin[1] + var_1.origin[2] + var_0 getentitynumber()) % 2;
 }
 
-func_9D4C(param_00, param_01, param_02, param_03) {
-  var_04 = param_03;
+func_9D4C(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
   if(isDefined(self.asm.var_4C86.var_22F1)) {
-    return var_04 == "Custom";
+    return var_4 == "Custom";
   }
 
-  var_05 = func_7DD6();
-  if(!isDefined(var_05) || !isDefined(var_05.type) || var_05.type == "struct") {
+  var_5 = func_7DD6();
+  if(!isDefined(var_5) || !isDefined(var_5.type) || var_5.type == "struct") {
     if(scripts\engine\utility::actor_is3d()) {
-      return var_04 == "Exposed 3D";
+      return var_4 == "Exposed 3D";
     } else {
-      return var_04 == "Exposed";
+      return var_4 == "Exposed";
     }
   }
 
-  var_06 = scripts\asm\asm::asm_getdemeanor();
-  var_07 = (!isnode(var_05) || var_05 getrandomattachments("stand")) && self getteleportlonertargetplayer("stand");
-  var_08 = (!isnode(var_05) || var_05 getrandomattachments("crouch")) && self getteleportlonertargetplayer("crouch") && var_06 != "casual" && var_06 != "casual_gun";
-  if(param_00 == "zero_gravity_space") {
-    switch (var_04) {
+  var_6 = scripts\asm\asm::asm_getdemeanor();
+  var_7 = (!isnode(var_5) || var_5 getrandomattachments("stand")) && self getteleportlonertargetplayer("stand");
+  var_8 = (!isnode(var_5) || var_5 getrandomattachments("crouch")) && self getteleportlonertargetplayer("crouch") && var_6 != "casual" && var_6 != "casual_gun";
+  if(var_0 == "zero_gravity_space") {
+    switch (var_4) {
       case "Exposed 3D":
-        return scripts\engine\utility::isnodeexposed3d(var_05) && var_07;
+        return scripts\engine\utility::isnodeexposed3d(var_5) && var_7;
 
       case "Cover 3D":
-        return var_05.type == "Cover 3D";
+        return var_5.type == "Cover 3D";
 
       case "Cover Stand 3D":
-        return scripts\asm\shared_utility::func_C04B(var_05);
+        return scripts\asm\shared_utility::func_C04B(var_5);
 
       case "Cover Exposed 3D":
-        return scripts\asm\shared_utility::func_C04A(var_05);
+        return scripts\asm\shared_utility::func_C04A(var_5);
 
       case "Exposed Crouch":
       case "Cover Right Crouch":
@@ -489,19 +489,19 @@ func_9D4C(param_00, param_01, param_02, param_03) {
       case "Cover Left":
         break;
     }
-  } else if(param_00 == "zero_gravity") {
-    switch (var_04) {
+  } else if(var_0 == "zero_gravity") {
+    switch (var_4) {
       case "Exposed":
-        return (var_05.type == "Path" || var_05.type == "Exposed") && var_07;
+        return (var_5.type == "Path" || var_5.type == "Exposed") && var_7;
 
       case "Exposed Crouch":
-        return (var_05.type == "Path" || var_05.type == "Exposed") && var_08;
+        return (var_5.type == "Path" || var_5.type == "Exposed") && var_8;
 
       case "Cover Crouch":
-        return var_05.type == "Cover Crouch" || var_05.type == "Conceal Crouch";
+        return var_5.type == "Cover Crouch" || var_5.type == "Conceal Crouch";
 
       case "Cover Stand":
-        return var_05.type == "Cover Stand" || var_05.type == "Conceal Stand";
+        return var_5.type == "Cover Stand" || var_5.type == "Conceal Stand";
 
       case "Cover Right Crouch":
       case "Cover Left Crouch":
@@ -511,184 +511,184 @@ func_9D4C(param_00, param_01, param_02, param_03) {
         break;
     }
   } else {
-    switch (var_04) {
+    switch (var_4) {
       case "Exposed":
-        if(var_05.type != "Path" && var_05.type != "Exposed") {
+        if(var_5.type != "Path" && var_5.type != "Exposed") {
           return 0;
         }
 
-        if(var_08 && func_3ECB(self, var_05)) {
+        if(var_8 && func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_07;
+        return var_7;
 
       case "Exposed Crouch":
-        if(var_05.type != "Path" && var_05.type != "Exposed") {
+        if(var_5.type != "Path" && var_5.type != "Exposed") {
           return 0;
         }
 
-        if(var_07 && !func_3ECB(self, var_05)) {
+        if(var_7 && !func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_08;
+        return var_8;
 
       case "Cover Crouch":
-        return var_05.type == "Cover Crouch" || var_05.type == "Conceal Crouch" || var_05.type == "Cover Crouch Window";
+        return var_5.type == "Cover Crouch" || var_5.type == "Conceal Crouch" || var_5.type == "Cover Crouch Window";
 
       case "Cover Stand":
-        return var_05.type == "Cover Stand" || var_05.type == "Conceal Stand";
+        return var_5.type == "Cover Stand" || var_5.type == "Conceal Stand";
 
       case "Cover Prone":
-        return var_05.type == "Cover Prone" || var_05.type == "Conceal Prone";
+        return var_5.type == "Cover Prone" || var_5.type == "Conceal Prone";
 
       case "Cover Left":
-        if(var_05.type != "Cover Left") {
+        if(var_5.type != "Cover Left") {
           return 0;
         }
 
-        if(var_08 && func_3ECB(self, var_05)) {
+        if(var_8 && func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_07;
+        return var_7;
 
       case "Cover Left Crouch":
-        if(var_05.type != "Cover Left") {
+        if(var_5.type != "Cover Left") {
           return 0;
         }
 
-        if(var_07 && !func_3ECB(self, var_05)) {
+        if(var_7 && !func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_08;
+        return var_8;
 
       case "Cover Right":
-        if(var_05.type != "Cover Right") {
+        if(var_5.type != "Cover Right") {
           return 0;
         }
 
-        if(var_08 && func_3ECB(self, var_05)) {
+        if(var_8 && func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_07;
+        return var_7;
 
       case "Cover Right Crouch":
-        if(var_05.type != "Cover Right") {
+        if(var_5.type != "Cover Right") {
           return 0;
         }
 
-        if(var_07 && !func_3ECB(self, var_05)) {
+        if(var_7 && !func_3ECB(self, var_5)) {
           return 0;
         }
-        return var_08;
+        return var_8;
 
       case "Cover Crouch LMG":
-        return (var_05.type == "Cover Crouch" || var_05.type == "Cover Prone") && scripts\asm\shared_utility::func_1C9C();
+        return (var_5.type == "Cover Crouch" || var_5.type == "Cover Prone") && scripts\asm\shared_utility::func_1C9C();
 
       case "Cover Stand LMG":
-        return var_05.type == "Cover Stand" && scripts\asm\shared_utility::func_1C9C();
+        return var_5.type == "Cover Stand" && scripts\asm\shared_utility::func_1C9C();
     }
   }
 
-  return var_04 == var_05.type;
+  return var_4 == var_5.type;
 }
 
-func_C057(param_00) {
-  if(!isDefined(param_00)) {
+func_C057(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(scripts\engine\utility::istrue(param_00.var_ED88) && isDefined(param_00.angles)) {
+  if(scripts\engine\utility::istrue(var_0.var_ED88) && isDefined(var_0.angles)) {
     return 1;
   }
 
-  if(isstruct(param_00)) {
+  if(isstruct(var_0)) {
     return 0;
   }
 
-  return isDefined(param_00.type) && param_00.type != "Path" && !scripts\engine\utility::isnodeexposed3d(param_00);
+  return isDefined(var_0.type) && var_0.type != "Path" && !scripts\engine\utility::isnodeexposed3d(var_0);
 }
 
-func_CEC0(param_00, param_01, param_02) {
-  var_03 = lib_0A1E::func_2356(param_01, "add_fire");
-  self clearanim(var_03, 0.2);
+func_CEC0(var_0, var_1, var_2) {
+  var_3 = lib_0A1E::func_2356(var_1, "add_fire");
+  self clearanim(var_3, 0.2);
   self shootstopsound();
 }
 
-func_CEC1(param_00, param_01, param_02) {
-  var_03 = lib_0A1E::func_2356(param_01, "add_idle");
-  self clearanim(var_03, 0.2);
+func_CEC1(var_0, var_1, var_2) {
+  var_3 = lib_0A1E::func_2356(var_1, "add_idle");
+  self clearanim(var_3, 0.2);
   self shootstopsound();
 }
 
-func_FE7E(param_00, param_01, param_02, param_03) {
+func_FE7E(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm::func_231B(self.asm.var_11AC7, "notetrackAim")) {
-    var_04 = scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7);
-    return !scripts\asm\asm::func_232B(var_04, "start_aim");
+    var_4 = scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7);
+    return !scripts\asm\asm::func_232B(var_4, "start_aim");
   }
 
   return 0;
 }
 
-func_FE6B(param_00, param_01, param_02, param_03) {
+func_FE6B(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm::func_231B(self.asm.var_11AC7, "notetrackAim")) {
     return 1;
   }
 
-  var_04 = scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7);
-  return scripts\asm\asm::func_232B(var_04, "start_aim");
+  var_4 = scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7);
+  return scripts\asm\asm::func_232B(var_4, "start_aim");
 }
 
-func_5122(param_00, param_01, param_02, param_03) {
+func_5122(var_0, var_1, var_2, var_3) {
   level.player endon("meleegrab_interupt");
   level.player endon("crawlmeleegrab_interrupt");
-  wait(param_00);
-  setslowmotion(param_01, param_02, param_03);
+  wait(var_0);
+  setslowmotion(var_1, var_2, var_3);
 }
 
-func_510F(param_00, param_01, param_02) {
+func_510F(var_0, var_1, var_2) {
   level.player endon("meleegrab_interupt");
   level.player endon("crawlmeleegrab_interrupt");
-  wait(param_00);
-  level.player _meth_81DE(param_01, param_02);
+  wait(var_0);
+  level.player _meth_81DE(var_1, var_2);
 }
 
-func_5103(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+func_5103(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level.player endon("meleegrab_interupt");
   level.player endon("crawlmeleegrab_interrupt");
-  wait(param_00);
-  scripts\sp\art::func_583F(param_01, param_02, param_03, param_04, param_05, param_06, param_07);
+  wait(var_0);
+  scripts\sp\art::func_583F(var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-func_50E8(param_00) {
+func_50E8(var_0) {
   level.player endon("meleegrab_interupt");
   level.player endon("crawlmeleegrab_interrupt");
-  wait(param_00);
+  wait(var_0);
   scripts\sp\art::func_583D(0.5);
 }
 
 func_108F6() {
-  var_00 = spawn("script_model", level.player.origin);
-  var_00.var_E6E5 = % root;
-  var_00 setModel("viewmodel_base_viewhands_iw7");
-  var_00 glinton(#animtree);
-  var_00 hide();
-  return var_00;
+  var_0 = spawn("script_model", level.player.origin);
+  var_0.var_E6E5 = % root;
+  var_0 setModel("viewmodel_base_viewhands_iw7");
+  var_0 glinton(#animtree);
+  var_0 hide();
+  return var_0;
 }
 
-func_D394(param_00) {
+func_D394(var_0) {
   level.player scripts\sp\utility::func_1C34(0);
-  if(!isDefined(param_00)) {
+  if(!isDefined(var_0)) {
     level.player getradiuspathsighttestnodes();
     level.player disableusability();
     level.player allowstand(1);
     level.player allowcrouch(0);
     level.player allowprone(0);
-  } else if(param_00 == "seeker") {
+  } else if(var_0 == "seeker") {
     level.player getradiuspathsighttestnodes();
     level.player allowstand(1);
     level.player allowcrouch(0);
     level.player allowprone(0);
-  } else if(param_00 == "crawlmelee") {
+  } else if(var_0 == "crawlmelee") {
     level.player disableusability();
     level.player allowstand(0);
     level.player allowcrouch(1);
@@ -713,12 +713,12 @@ func_D3D2() {
 func_D3A3() {
   self endon("death");
   wait(0.2);
-  var_00 = 3;
-  var_01 = gettime() + var_00 * 1000;
+  var_0 = 3;
+  var_1 = gettime() + var_0 * 1000;
   self.var_8CAE.alpha = self.var_8CAE.alpha + 1 - level.player.var_8CAE.alpha * 0.8;
   self.var_8CAE fadeovertime(3);
   self.var_8CAE.alpha = 0;
-  while(gettime() < var_01) {
+  while(gettime() < var_1) {
     if(self.health <= 0 || getdvarint("cg_useplayerbreathsys")) {
       return;
     }
@@ -735,41 +735,41 @@ func_D3A3() {
       self playlocalsound("breathing_hurt");
     }
 
-    var_02 = 0.1;
-    wait(var_02 + randomfloat(0.8));
+    var_2 = 0.1;
+    wait(var_2 + randomfloat(0.8));
   }
 }
 
-func_B575(param_00, param_01) {
+func_B575(var_0, var_1) {
   if(isDefined(self.var_B623) && self.var_B623) {
     return 1;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(param_01) {
+  if(var_1) {
     if(!isDefined(level.var_B5F7)) {
       return 1;
     }
 
-    if(!isDefined(level.var_B5F7[param_00])) {
+    if(!isDefined(level.var_B5F7[var_0])) {
       return 1;
     }
 
-    return gettime() > level.var_B5F7[param_00];
+    return gettime() > level.var_B5F7[var_0];
   }
 
   if(!isDefined(level.var_B5F8)) {
     return 1;
   }
 
-  if(!isDefined(level.var_B5F8[param_00])) {
+  if(!isDefined(level.var_B5F8[var_0])) {
     return 1;
   }
 
-  return gettime() > level.var_B5F8[param_00];
+  return gettime() > level.var_B5F8[var_0];
 }
 
 func_B60F() {
@@ -785,29 +785,29 @@ func_B60F() {
   }
 }
 
-func_B611(param_00) {
+func_B611(var_0) {
   level.player endon("meleegrab_interupt");
   level.player endon("bt_stop_meleegrab");
-  var_01 = 0.5;
-  var_02 = gettime();
-  var_03 = param_00 - var_01;
-  var_04 = var_02 + var_03 * 1000;
-  var_05 = param_00;
-  var_06 = var_02 + var_05 * 1000;
-  thread func_B618(var_03, var_05);
-  thread func_B610(var_03, var_01);
+  var_1 = 0.5;
+  var_2 = gettime();
+  var_3 = var_0 - var_1;
+  var_4 = var_2 + var_3 * 1000;
+  var_5 = var_0;
+  var_6 = var_2 + var_5 * 1000;
+  thread func_B618(var_3, var_5);
+  thread func_B610(var_3, var_1);
   while(func_D377()) {
     wait(0.05);
   }
 
   for(;;) {
-    var_02 = gettime();
-    if(var_02 >= var_06) {
+    var_2 = gettime();
+    if(var_2 >= var_6) {
       break;
     }
 
     if(func_D377()) {
-      if(var_02 > var_04 && var_02 < var_06) {
+      if(var_2 > var_4 && var_2 < var_6) {
         if(isDefined(self.melee.var_B5FE)) {
           level.player thread func_46B5(0.1);
         }
@@ -824,9 +824,9 @@ func_B611(param_00) {
   level.player notify("bt_meleegrab_slowmo");
 }
 
-func_B618(param_00, param_01) {
+func_B618(var_0, var_1) {
   level.player endon("meleegrab_interupt");
-  wait(param_00);
+  wait(var_0);
   setslowmotion(1, 0.3, 0.1);
   if(!isDefined(self.melee.var_46B6)) {
     level.player waittill("bt_meleegrab_slowmo");
@@ -841,11 +841,11 @@ func_D377() {
   return isalive(level.player) && level.player meleebuttonpressed();
 }
 
-func_B610(param_00, param_01) {
+func_B610(var_0, var_1) {
   level.player endon("meleegrab_interupt");
-  var_02 = 0.2;
-  var_03 = 0.3;
-  wait(param_00 - var_02 - 0.05);
+  var_2 = 0.2;
+  var_3 = 0.3;
+  wait(var_0 - var_2 - 0.05);
   if(isDefined(self.melee.var_B5FE)) {
     self.melee.var_B5FE destroy();
   }
@@ -865,39 +865,39 @@ func_B610(param_00, param_01) {
   self.melee.var_B5FE.playrumblelooponposition = 1;
   self.melee.var_B5FE.sort = -1;
   self.melee.var_B5FE endon("death");
-  self.melee.var_B5FE fadeovertime(var_02);
-  self.melee.var_B5FE changefontscaleovertime(var_02);
+  self.melee.var_B5FE fadeovertime(var_2);
+  self.melee.var_B5FE changefontscaleovertime(var_2);
   self.melee.var_B5FE.fontscale = 1.3;
   self.melee.var_B5FE.alpha = 1;
-  wait(var_02);
+  wait(var_2);
   if(!isDefined(self.melee.var_B5FE)) {
     return;
   }
 
-  self.melee.var_B5FE fadeovertime(var_03);
-  self.melee.var_B5FE changefontscaleovertime(var_03);
+  self.melee.var_B5FE fadeovertime(var_3);
+  self.melee.var_B5FE changefontscaleovertime(var_3);
   self.melee.var_B5FE.fontscale = 1.2;
 }
 
-func_B642(param_00, param_01, param_02, param_03) {
+func_B642(var_0, var_1, var_2, var_3) {
   return isDefined(level.player.melee.var_46B6);
 }
 
-func_B5FC(param_00, param_01, param_02, param_03) {
+func_B5FC(var_0, var_1, var_2, var_3) {
   return isDefined(level.player.melee.var_46B6) && level.player.melee.var_46B6;
 }
 
-func_B5FD(param_00, param_01, param_02, param_03) {
+func_B5FD(var_0, var_1, var_2, var_3) {
   return isDefined(level.player.melee.var_46B6) && !level.player.melee.var_46B6;
 }
 
-func_46B5(param_00) {
-  if(isDefined(param_00)) {
-    level.player.melee.var_B5FE fadeovertime(param_00);
-    level.player.melee.var_B5FE changefontscaleovertime(param_00);
+func_46B5(var_0) {
+  if(isDefined(var_0)) {
+    level.player.melee.var_B5FE fadeovertime(var_0);
+    level.player.melee.var_B5FE changefontscaleovertime(var_0);
     level.player.melee.var_B5FE.fontscale = 2;
     level.player.melee.var_B5FE.alpha = 0;
-    wait(param_00);
+    wait(var_0);
   }
 
   if(isDefined(level.player.melee) && isDefined(level.player.melee.var_B5FE)) {

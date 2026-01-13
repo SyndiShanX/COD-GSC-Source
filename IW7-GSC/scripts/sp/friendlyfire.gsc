@@ -21,21 +21,21 @@ main() {
 
 func_4EDB() {}
 
-func_20A7(param_00) {
-  level.var_740B = param_00;
+func_20A7(var_0) {
+  level.var_740B = var_0;
 }
 
-func_E013(param_00) {
+func_E013(var_0) {
   level.var_740B = undefined;
 }
 
-func_73B1(param_00) {
-  if(!isDefined(param_00)) {
+func_73B1(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_00.team)) {
-    param_00.team = "allies";
+  if(!isDefined(var_0.team)) {
+    var_0.team = "allies";
   }
 
   if(isDefined(level.var_BFED)) {
@@ -43,94 +43,94 @@ func_73B1(param_00) {
   }
 
   level endon("mission failed");
-  level thread func_C15E(param_00);
-  level thread func_C160(param_00);
-  level thread func_C161(param_00);
+  level thread func_C15E(var_0);
+  level thread func_C160(var_0);
+  level thread func_C161(var_0);
   for(;;) {
-    if(!isDefined(param_00)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    if(param_00.health <= 0) {
+    if(var_0.health <= 0) {
       return;
     }
 
-    var_01 = undefined;
-    var_02 = undefined;
-    var_03 = undefined;
-    var_04 = undefined;
-    var_05 = undefined;
-    var_06 = undefined;
-    var_07 = undefined;
-    param_00 waittill("friendlyfire_notify", var_01, var_02, var_03, var_04, var_05, var_06);
-    if(!isDefined(param_00)) {
+    var_1 = undefined;
+    var_2 = undefined;
+    var_3 = undefined;
+    var_4 = undefined;
+    var_5 = undefined;
+    var_6 = undefined;
+    var_7 = undefined;
+    var_0 waittill("friendlyfire_notify", var_1, var_2, var_3, var_4, var_5, var_6);
+    if(!isDefined(var_0)) {
       return;
     }
 
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
     if(isDefined(level.var_740B)) {
-      var_01 = var_01 * level.var_740B;
-      var_01 = int(var_01);
+      var_1 = var_1 * level.var_740B;
+      var_1 = int(var_1);
     }
 
-    var_08 = 0;
-    if(!isDefined(var_06)) {
-      var_06 = param_00.var_E2;
+    var_8 = 0;
+    if(!isDefined(var_6)) {
+      var_6 = var_0.var_E2;
     }
 
     if(isDefined(level.var_740C)) {
-      if(isDefined(var_02.damageowner)) {
-        var_07 = 1;
-        var_02 = var_02.damageowner;
+      if(isDefined(var_2.damageowner)) {
+        var_7 = 1;
+        var_2 = var_2.damageowner;
       }
     }
 
     if(isDefined(level.var_740D)) {
-      if(isDefined(var_02) && isDefined(var_02.triggerportableradarping) && var_02.triggerportableradarping == level.player) {
-        var_08 = 1;
+      if(isDefined(var_2) && isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping == level.player) {
+        var_8 = 1;
       }
     }
 
-    if(isplayer(var_02)) {
-      var_08 = 1;
-      if(isDefined(var_06) && var_06 == "none") {
-        var_08 = 0;
+    if(isplayer(var_2)) {
+      var_8 = 1;
+      if(isDefined(var_6) && var_6 == "none") {
+        var_8 = 0;
       }
 
-      if(var_02 isusingturret()) {
-        var_08 = 1;
+      if(var_2 isusingturret()) {
+        var_8 = 1;
       }
 
-      if(isDefined(var_07)) {
-        var_08 = 1;
+      if(isDefined(var_7)) {
+        var_8 = 1;
       }
-    } else if(isDefined(var_02.var_9F) && var_02.var_9F == "script_vehicle") {
-      var_09 = var_02 _meth_816A();
-      if(isDefined(var_09) && isplayer(var_09)) {
-        var_08 = 1;
+    } else if(isDefined(var_2.var_9F) && var_2.var_9F == "script_vehicle") {
+      var_9 = var_2 _meth_816A();
+      if(isDefined(var_9) && isplayer(var_9)) {
+        var_8 = 1;
       }
     }
 
-    if(!var_08) {
+    if(!var_8) {
       continue;
     }
 
-    if(!isDefined(param_00.team)) {
+    if(!isDefined(var_0.team)) {
       continue;
     }
 
-    var_0A = param_00.team == level.player.team;
+    var_0A = var_0.team == level.player.team;
     var_0B = undefined;
-    if(isDefined(param_00.type) && param_00.type == "civilian") {
+    if(isDefined(var_0.type) && var_0.type == "civilian") {
       var_0B = 1;
     } else {
-      var_0B = issubstr(param_00.classname, "civilian");
+      var_0B = issubstr(var_0.classname, "civilian");
     }
 
-    var_0C = var_01 == -1;
+    var_0C = var_1 == -1;
     if(!var_0A && !var_0B) {
       if(var_0C) {
         level.player.var_C929 = level.player.var_C929 + level.friendlyfire["enemy_kill_points"];
@@ -141,30 +141,30 @@ func_73B1(param_00) {
       continue;
     }
 
-    if(isDefined(param_00.var_BFED)) {
+    if(isDefined(var_0.var_BFED)) {
       continue;
     }
 
-    if(var_05 == "MOD_PROJECTILE_SPLASH" && isDefined(level.var_BFEE)) {
+    if(var_5 == "MOD_PROJECTILE_SPLASH" && isDefined(level.var_BFEE)) {
       continue;
     }
 
-    if(isDefined(var_06) && var_06 == "claymore") {
+    if(isDefined(var_6) && var_6 == "claymore") {
       continue;
     }
 
     if(var_0C) {
-      if(isDefined(param_00.var_738F)) {
-        level.player.var_C929 = level.player.var_C929 + param_00.var_738F;
+      if(isDefined(var_0.var_738F)) {
+        level.player.var_C929 = level.player.var_C929 + var_0.var_738F;
       } else {
         level.player.var_C929 = level.player.var_C929 + level.friendlyfire["friend_kill_points"];
       }
     } else {
-      level.player.var_C929 = level.player.var_C929 - var_01;
+      level.player.var_C929 = level.player.var_C929 - var_1;
     }
 
     func_C92A();
-    if(func_3DA1(param_00, var_05) && func_EB68()) {
+    if(func_3DA1(var_0, var_5) && func_EB68()) {
       if(var_0C) {
         return;
       } else {
@@ -175,7 +175,7 @@ func_73B1(param_00) {
     if(isDefined(level.var_73B0)) {
       [
         [level.var_73B0]
-      ](param_00, var_01, var_02, var_03, var_04, var_05, var_06);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
       continue;
     }
 
@@ -183,18 +183,18 @@ func_73B1(param_00) {
   }
 }
 
-func_73AE(param_00) {
+func_73AE(var_0) {
   if(isDefined(level.var_6AD2) && level.var_6AD2) {
-    level thread func_B8CF(param_00);
+    level thread func_B8CF(var_0);
     return;
   }
 
-  var_01 = level.var_7417;
-  if(isDefined(level.var_740C) && param_00) {
-    var_01 = 0;
+  var_1 = level.var_7417;
+  if(isDefined(level.var_740C) && var_0) {
+    var_1 = 0;
   }
 
-  if(var_01) {
+  if(var_1) {
     return;
   }
 
@@ -203,32 +203,32 @@ func_73AE(param_00) {
   }
 
   if(level.player.var_C929 <= level.friendlyfire["min_participation"]) {
-    level thread func_B8CF(param_00);
+    level thread func_B8CF(var_0);
   }
 }
 
-func_3DA1(param_00, param_01) {
-  if(!isDefined(param_00)) {
+func_3DA1(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  var_02 = 0;
-  if(isDefined(param_00.var_E2) && param_00.var_E2 == "none") {
-    var_02 = 1;
+  var_2 = 0;
+  if(isDefined(var_0.var_E2) && var_0.var_E2 == "none") {
+    var_2 = 1;
   }
 
-  if(isDefined(param_01) && param_01 == "MOD_GRENADE_SPLASH") {
-    var_02 = 1;
+  if(isDefined(var_1) && var_1 == "MOD_GRENADE_SPLASH") {
+    var_2 = 1;
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_EB68() {
-  var_00 = gettime();
-  if(var_00 < 4500) {
+  var_0 = gettime();
+  if(var_0 < 4500) {
     return 1;
-  } else if(var_00 - level.var_2668.var_A943 < 4500) {
+  } else if(var_0 - level.var_2668.var_A943 < 4500) {
     return 1;
   }
 
@@ -266,9 +266,9 @@ func_129A9() {
   level.var_7416 = 1;
 }
 
-func_B8CF(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 0;
+func_B8CF(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   if(getdvar("friendlyfire_dev_disabled") == "1") {
@@ -296,7 +296,7 @@ func_B8CF(param_00) {
     return;
   }
 
-  if(param_00) {
+  if(var_0) {
     setomnvar("ui_death_hint", 9);
   } else if(isDefined(level.var_4C51)) {
     lib_0B60::func_F32D(level.var_4C51);
@@ -325,22 +325,22 @@ func_1D2B() {
   }
 }
 
-func_C15E(param_00) {
-  param_00 endon("death");
+func_C15E(var_0) {
+  var_0 endon("death");
   for(;;) {
-    param_00 waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_06, var_06, var_06, var_07);
-    param_00 notify("friendlyfire_notify", var_01, var_02, var_03, var_04, var_05, var_07);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_6, var_6, var_6, var_7);
+    var_0 notify("friendlyfire_notify", var_1, var_2, var_3, var_4, var_5, var_7);
   }
 }
 
-func_C160(param_00) {
-  param_00 waittill("damage_notdone", var_01, var_02, var_03, var_03, var_04);
-  param_00 notify("friendlyfire_notify", -1, var_02, undefined, undefined, var_04);
+func_C160(var_0) {
+  var_0 waittill("damage_notdone", var_1, var_2, var_3, var_3, var_4);
+  var_0 notify("friendlyfire_notify", -1, var_2, undefined, undefined, var_4);
 }
 
-func_C161(param_00) {
-  param_00 waittill("death", var_01, var_02, var_03);
-  param_00 notify("friendlyfire_notify", -1, var_01, undefined, undefined, var_02, var_03);
+func_C161(var_0) {
+  var_0 waittill("death", var_1, var_2, var_3);
+  var_0 notify("friendlyfire_notify", -1, var_1, undefined, undefined, var_2, var_3);
 }
 
-func_53AE(param_00) {}
+func_53AE(var_0) {}

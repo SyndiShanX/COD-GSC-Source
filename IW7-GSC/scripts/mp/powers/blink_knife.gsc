@@ -8,302 +8,302 @@ blinkknifeinit() {
   scripts\mp\utility::initarbitraryuptriggers();
 }
 
-blinkknifedetonate(param_00, param_01, param_02) {
-  var_03 = param_01.origin;
-  var_04 = param_01.angles;
-  var_05 = param_01 getplayerangles();
-  var_06 = param_01 getstance();
-  if(!blinkknife_validatestuckto(param_01)) {
-    blinkknife_detonatefailed(param_02);
+blinkknifedetonate(var_0, var_1, var_2) {
+  var_3 = var_1.origin;
+  var_4 = var_1.angles;
+  var_5 = var_1 getplayerangles();
+  var_6 = var_1 getstance();
+  if(!blinkknife_validatestuckto(var_1)) {
+    blinkknife_detonatefailed(var_2);
     return 0;
   }
 
-  if(!blinkknife_validateplayer(param_02)) {
-    blinkknife_detonatefailed(param_02);
+  if(!blinkknife_validateplayer(var_2)) {
+    blinkknife_detonatefailed(var_2);
     return 0;
   }
 
-  var_07 = param_02 scripts\mp\utility::isinarbitraryup();
-  var_08 = param_01 scripts\mp\utility::isinarbitraryup();
-  if(var_07 && var_08) {
-    blinkknife_detonatefailed(param_02);
+  var_7 = var_2 scripts\mp\utility::isinarbitraryup();
+  var_8 = var_1 scripts\mp\utility::isinarbitraryup();
+  if(var_7 && var_8) {
+    blinkknife_detonatefailed(var_2);
     return 0;
   }
 
-  if(var_08) {
-    var_09 = param_01 scripts\mp\utility::getarbitraryuptriggerblinkloc();
-    if(!isDefined(var_09)) {
-      blinkknife_detonatefailed(param_02);
+  if(var_8) {
+    var_9 = var_1 scripts\mp\utility::getarbitraryuptriggerblinkloc();
+    if(!isDefined(var_9)) {
+      blinkknife_detonatefailed(var_2);
       return 0;
     }
 
     var_0A = spawnStruct();
-    var_0A.origin = var_09;
+    var_0A.origin = var_9;
     var_0A.var_10B53 = "stand";
     var_0A.cleararbup = 0;
-    var_0B = anglesToForward(param_02 getplayerangles());
+    var_0B = anglesToForward(var_2 getplayerangles());
     var_0B = var_0B * (1, 1, 0);
     var_0C = vectortoangles(var_0B);
     var_0A.playerangles = var_0C;
     var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(param_02, var_0A)) {
-      thread blinkknife_detonatesuccess(param_02, param_01, var_0A, param_00);
+    if(blinkknife_validatedestination(var_2, var_0A)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
       return 1;
     }
   } else if(var_0B) {
     var_0A = spawnStruct();
-    var_0C.origin = var_05;
+    var_0C.origin = var_5;
     var_0C.var_10B53 = "stand";
     var_0C.cleararbup = 1;
-    var_0B = anglesToForward(var_04 getplayerangles());
+    var_0B = anglesToForward(var_4 getplayerangles());
     var_0C = var_0C * (1, 1, 0);
     var_0C = vectortoangles(var_0C);
     var_0A.playerangles = var_0C;
     var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(param_02, var_0A)) {
-      thread blinkknife_detonatesuccess(param_02, param_01, var_0A, param_00);
+    if(blinkknife_validatedestination(var_2, var_0A)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
       return 1;
     }
 
     var_0A.var_10B53 = "crouch";
-    if(blinkknife_validatedestination(param_02, var_0A)) {
-      thread blinkknife_detonatesuccess(param_02, param_01, var_0A, param_00);
+    if(blinkknife_validatedestination(var_2, var_0A)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
       return 1;
     }
 
-    var_0A.var_10B53 = var_06;
-    var_0B = anglesToForward(var_05);
+    var_0A.var_10B53 = var_6;
+    var_0B = anglesToForward(var_5);
     var_0B = var_0B * (1, 1, 0);
     var_0C = vectortoangles(var_0B);
     var_0A.playerangles = var_0C;
     var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(param_02, var_0A)) {
-      thread blinkknife_detonatesuccess(param_02, param_01, var_0A, param_00);
+    if(blinkknife_validatedestination(var_2, var_0A)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
       return 1;
     }
   } else {
     var_0A = spawnStruct();
-    var_0C.origin = var_05;
-    var_0C.angles = var_04.angles;
-    var_0C.playerangles = var_04 getplayerangles();
+    var_0C.origin = var_5;
+    var_0C.angles = var_4.angles;
+    var_0C.playerangles = var_4 getplayerangles();
     var_0C.var_10B53 = "stand";
     var_0C.cleararbup = 0;
-    if(blinkknife_validatedestination(var_04, var_0C)) {
-      thread blinkknife_detonatesuccess(var_04, var_03, var_0C, param_02);
+    if(blinkknife_validatedestination(var_4, var_0C)) {
+      thread blinkknife_detonatesuccess(var_4, var_3, var_0C, var_2);
       return 1;
     }
 
     var_0C.var_10B53 = "crouch";
-    if(blinkknife_validatedestination(var_04, var_0C)) {
-      thread blinkknife_detonatesuccess(var_04, var_03, var_0C, param_02);
+    if(blinkknife_validatedestination(var_4, var_0C)) {
+      thread blinkknife_detonatesuccess(var_4, var_3, var_0C, var_2);
       return 1;
     }
 
-    var_0C.var_10B53 = var_08;
-    var_0B = anglesToForward(var_07);
+    var_0C.var_10B53 = var_8;
+    var_0B = anglesToForward(var_7);
     var_0C = var_0C * (1, 1, 0);
     var_0C = vectortoangles(var_0C);
     var_0A.playerangles = var_0C;
     var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(param_02, var_0A)) {
-      thread blinkknife_detonatesuccess(param_02, param_01, var_0A, param_00);
+    if(blinkknife_validatedestination(var_2, var_0A)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
       return 1;
     }
   }
 
-  blinkknife_detonatefailed(param_02);
+  blinkknife_detonatefailed(var_2);
   return 0;
 }
 
-blinkknife_detonatesuccess(param_00, param_01, param_02, param_03) {
-  blinkknife_dropball(param_00);
-  blinkknife_dropflag(param_00);
-  thread blinkknife_watchteleport(param_00);
-  thread blinkknife_victimfx(param_00, param_01);
-  thread blinkknife_startfx(param_00, param_02);
-  if(param_02.cleararbup) {
-    param_00 setworldupreferenceangles((0, 0, 0), 0);
+blinkknife_detonatesuccess(var_0, var_1, var_2, var_3) {
+  blinkknife_dropball(var_0);
+  blinkknife_dropflag(var_0);
+  thread blinkknife_watchteleport(var_0);
+  thread blinkknife_victimfx(var_0, var_1);
+  thread blinkknife_startfx(var_0, var_2);
+  if(var_2.cleararbup) {
+    var_0 setworldupreferenceangles((0, 0, 0), 0);
   }
 
-  param_00 setorigin(param_02.origin, 1, 1);
-  param_00 setplayerangles(param_02.playerangles);
-  param_00 setstance(param_02.var_10B53);
-  thread blinkknife_endfx(param_00);
-  if(isDefined(param_03)) {
-    param_03 endon("death");
-    param_00 endon("death");
-    param_00 endon("disconnect");
+  var_0 setorigin(var_2.origin, 1, 1);
+  var_0 setplayerangles(var_2.playerangles);
+  var_0 setstance(var_2.var_10B53);
+  thread blinkknife_endfx(var_0);
+  if(isDefined(var_3)) {
+    var_3 endon("death");
+    var_0 endon("death");
+    var_0 endon("disconnect");
     waittillframeend;
-    if(scripts\mp\weapons::throwingknifeused_trygiveknife(param_00, "power_blinkKnife")) {
-      param_03 delete();
+    if(scripts\mp\weapons::throwingknifeused_trygiveknife(var_0, "power_blinkKnife")) {
+      var_3 delete();
     }
   }
 }
 
-blinkknife_detonatefailed(param_00) {
+blinkknife_detonatefailed(var_0) {
   if(level.gameended) {
     return;
   }
 
-  if(!isDefined(param_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return;
   }
 
-  param_00 scripts\mp\hud_message::showerrormessage("MP_BLINK_KNIFE_FAILED");
+  var_0 scripts\mp\hud_message::showerrormessage("MP_BLINK_KNIFE_FAILED");
 }
 
-blinkknife_watchteleport(param_00) {
-  param_00 endon("disconnect");
-  param_00.blinkknife_teleporting = 1;
-  param_00 scripts\engine\utility::waittill_any_timeout_1(0.05, "death");
-  param_00.blinkknife_teleporting = undefined;
+blinkknife_watchteleport(var_0) {
+  var_0 endon("disconnect");
+  var_0.blinkknife_teleporting = 1;
+  var_0 scripts\engine\utility::waittill_any_timeout_1(0.05, "death");
+  var_0.blinkknife_teleporting = undefined;
 }
 
-blinkknife_validatestuckto(param_00) {
-  if(!isDefined(param_00)) {
+blinkknife_validatestuckto(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!isplayer(param_00)) {
+  if(!isplayer(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\utility::isreallyalive(param_00)) {
+  if(scripts\mp\utility::isreallyalive(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
-  if(param_00 _meth_8568()) {
+  if(var_0 _meth_8568()) {
     return 0;
   }
 
-  if(param_00 _meth_8569()) {
+  if(var_0 _meth_8569()) {
     return 0;
   }
 
-  if(scripts\mp\utility::istrue(param_00.blinkknife_teleporting)) {
+  if(scripts\mp\utility::istrue(var_0.blinkknife_teleporting)) {
     return 0;
   }
 
   return 1;
 }
 
-blinkknife_validateplayer(param_00) {
-  if(!isDefined(param_00)) {
+blinkknife_validateplayer(var_0) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\utility::isreallyalive(param_00)) {
+  if(!scripts\mp\utility::isreallyalive(var_0)) {
     return 0;
   }
 
-  if(param_00 _meth_84CA()) {
+  if(var_0 _meth_84CA()) {
     return 0;
   }
 
-  if(param_00 scripts\mp\supers\super_reaper::isusingreaper()) {
+  if(var_0 scripts\mp\supers\super_reaper::isusingreaper()) {
     return 0;
   }
 
-  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     return 0;
   }
 
-  if(param_00 _meth_8568()) {
+  if(var_0 _meth_8568()) {
     return 0;
   }
 
-  if(param_00 _meth_8569()) {
+  if(var_0 _meth_8569()) {
     return 0;
   }
 
-  if(scripts\mp\utility::istrue(param_00.blinkknife_teleporting)) {
-    return 0;
-  }
-
-  return 1;
-}
-
-blinkknife_validatedestination(param_00, param_01) {
-  var_02 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_vehicle", "physicscontents_sky", "physicscontents_playerclip"]);
-  var_03 = physics_getclosestpointtocharacter(param_01.origin, param_00, 0, param_01.angles, 0, var_02, [param_00], "physicsquery_closest", param_01.var_10B53);
-  if(isDefined(var_03) && var_03.size > 0) {
+  if(scripts\mp\utility::istrue(var_0.blinkknife_teleporting)) {
     return 0;
   }
 
   return 1;
 }
 
-blinkknife_dropball(param_00) {
-  if(param_00 scripts\mp\utility::_hasperk("specialty_ballcarrier")) {
-    param_00 scripts\mp\gametypes\obj_ball::ball_drop_on_ability();
+blinkknife_validatedestination(var_0, var_1) {
+  var_2 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_vehicle", "physicscontents_sky", "physicscontents_playerclip"]);
+  var_3 = physics_getclosestpointtocharacter(var_1.origin, var_0, 0, var_1.angles, 0, var_2, [var_0], "physicsquery_closest", var_1.var_10B53);
+  if(isDefined(var_3) && var_3.size > 0) {
+    return 0;
+  }
+
+  return 1;
+}
+
+blinkknife_dropball(var_0) {
+  if(var_0 scripts\mp\utility::_hasperk("specialty_ballcarrier")) {
+    var_0 scripts\mp\gametypes\obj_ball::ball_drop_on_ability();
   }
 }
 
-blinkknife_dropflag(param_00) {
-  if(isDefined(param_00.carryflag)) {
-    var_01 = level.teamflags[scripts\mp\utility::getotherteam(param_00.team)];
-    var_01 thread scripts\mp\gameobjects::setdropped();
+blinkknife_dropflag(var_0) {
+  if(isDefined(var_0.carryflag)) {
+    var_1 = level.teamflags[scripts\mp\utility::getotherteam(var_0.team)];
+    var_1 thread scripts\mp\gameobjects::setdropped();
   }
 }
 
-blinkknife_startfx(param_00, param_01) {
-  if(!isDefined(param_00.blinkknife_startstateid)) {
-    param_00.blinkknife_startstateid = 1;
+blinkknife_startfx(var_0, var_1) {
+  if(!isDefined(var_0.blinkknife_startstateid)) {
+    var_0.blinkknife_startstateid = 1;
   } else {
-    param_00.blinkknife_startstateid = scripts\engine\utility::ter_op(param_00.blinkknife_startstateid == 1, 2, 1);
+    var_0.blinkknife_startstateid = scripts\engine\utility::ter_op(var_0.blinkknife_startstateid == 1, 2, 1);
   }
 
-  param_00 setscriptablepartstate("blinkKnifeStart", "active" + param_00.blinkknife_startstateid);
-  var_02 = param_00 gettagorigin("j_spineupper");
-  var_03 = vectortoangles(param_01.origin - param_00.origin);
-  var_04 = spawn("script_model", var_02);
-  var_04.angles = var_03;
-  var_04 setModel("power_mp_blinkKnife_scr");
-  var_04 setscriptablepartstate("effects", "activeBlinkStart");
+  var_0 setscriptablepartstate("blinkKnifeStart", "active" + var_0.blinkknife_startstateid);
+  var_2 = var_0 gettagorigin("j_spineupper");
+  var_3 = vectortoangles(var_1.origin - var_0.origin);
+  var_4 = spawn("script_model", var_2);
+  var_4.angles = var_3;
+  var_4 setModel("power_mp_blinkKnife_scr");
+  var_4 setscriptablepartstate("effects", "activeBlinkStart");
   wait(0.2);
-  var_04 delete();
+  var_4 delete();
 }
 
-blinkknife_endfx(param_00) {
+blinkknife_endfx(var_0) {
   scripts\engine\utility::waitframe();
-  if(!isDefined(param_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(param_00.blinkknife_endstateid)) {
-    param_00.blinkknife_endstateid = 1;
+  if(!isDefined(var_0.blinkknife_endstateid)) {
+    var_0.blinkknife_endstateid = 1;
   } else {
-    param_00.blinkknife_endstateid = scripts\engine\utility::ter_op(param_00.blinkknife_endstateid == 1, 2, 1);
+    var_0.blinkknife_endstateid = scripts\engine\utility::ter_op(var_0.blinkknife_endstateid == 1, 2, 1);
   }
 
-  param_00 setscriptablepartstate("blinkKnifeEnd", "active" + param_00.blinkknife_endstateid);
+  var_0 setscriptablepartstate("blinkKnifeEnd", "active" + var_0.blinkknife_endstateid);
 }
 
-blinkknife_victimfx(param_00, param_01) {
-  var_02 = param_01 _meth_8113();
-  if(isDefined(var_02)) {
-    var_02 hide();
+blinkknife_victimfx(var_0, var_1) {
+  var_2 = var_1 _meth_8113();
+  if(isDefined(var_2)) {
+    var_2 hide();
   }
 
-  var_03 = param_01 gettagorigin("j_spineupper");
-  var_04 = param_01.angles;
-  var_05 = spawn("script_model", var_03);
-  var_05.angles = var_04;
-  var_05 setModel("power_mp_blinkKnife_scr");
-  if(param_01.loadoutarchetype == "archetype_scout") {
-    var_05 setscriptablepartstate("effects", "activeVictimDeathRobot");
+  var_3 = var_1 gettagorigin("j_spineupper");
+  var_4 = var_1.angles;
+  var_5 = spawn("script_model", var_3);
+  var_5.angles = var_4;
+  var_5 setModel("power_mp_blinkKnife_scr");
+  if(var_1.loadoutarchetype == "archetype_scout") {
+    var_5 setscriptablepartstate("effects", "activeVictimDeathRobot");
   } else {
-    var_05 setscriptablepartstate("effects", "activeVictimDeath");
+    var_5 setscriptablepartstate("effects", "activeVictimDeath");
   }
 
   wait(1);
-  var_05 delete();
+  var_5 delete();
 }

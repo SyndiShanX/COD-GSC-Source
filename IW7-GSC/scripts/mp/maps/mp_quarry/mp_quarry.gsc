@@ -26,36 +26,36 @@ main() {
   level thread func_CDA4("mp_quarry_kotch");
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
 fix_collision() {
-  var_00 = spawn("script_model", (0, -512, 224));
-  var_00.angles = (0, 0, 0);
-  var_00 setModel("mp_quarry_uplink_01");
-  var_01 = spawn("script_model", (0, -512, 480));
-  var_01.angles = (0, 0, 0);
-  var_01 setModel("mp_quarry_uplink_01");
-  var_02 = getent("player512x512x8", "targetname");
-  var_03 = spawn("script_model", (-1664, 624, 816));
-  var_03.angles = (90, 0, 0);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = spawn("script_model", (1280, 514, 516));
-  var_04.angles = (0, 0, 0);
-  var_04 setModel("mp_quarry_uplink_02");
-  var_05 = spawn("script_model", (-2560, 0, 256));
-  var_05.angles = (0, 0, 0);
-  var_05 setModel("mp_quarry_vehicle_patch_01");
-  var_06 = getent("player32x32x128", "targetname");
-  var_07 = spawn("script_model", (713.5, 360, 504));
-  var_07.angles = (-2, 0, 90);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("player128x128x128", "targetname");
-  var_09 = spawn("script_model", (2304, 184, 760));
-  var_09.angles = (0, 0, 15);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = spawn("script_model", (0, -512, 224));
+  var_0.angles = (0, 0, 0);
+  var_0 setModel("mp_quarry_uplink_01");
+  var_1 = spawn("script_model", (0, -512, 480));
+  var_1.angles = (0, 0, 0);
+  var_1 setModel("mp_quarry_uplink_01");
+  var_2 = getent("player512x512x8", "targetname");
+  var_3 = spawn("script_model", (-1664, 624, 816));
+  var_3.angles = (90, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = spawn("script_model", (1280, 514, 516));
+  var_4.angles = (0, 0, 0);
+  var_4 setModel("mp_quarry_uplink_02");
+  var_5 = spawn("script_model", (-2560, 0, 256));
+  var_5.angles = (0, 0, 0);
+  var_5 setModel("mp_quarry_vehicle_patch_01");
+  var_6 = getent("player32x32x128", "targetname");
+  var_7 = spawn("script_model", (713.5, 360, 504));
+  var_7.angles = (-2, 0, 90);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("player128x128x128", "targetname");
+  var_9 = spawn("script_model", (2304, 184, 760));
+  var_9.angles = (0, 0, 15);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player128x128x128", "targetname");
   var_0B = spawn("script_model", (-888, 528, 712));
   var_0B.angles = (15, 45, 0);
@@ -115,23 +115,23 @@ fix_collision() {
 
 patchoutofboundstrigger() {
   level.outofboundstriggerpatches = [];
-  var_00 = [(-632, -1813, 320), (630, -1912, 320)];
-  foreach(var_02 in var_00) {
-    var_03 = spawn("trigger_radius", var_02, 0, 400, 200);
-    level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_03;
+  var_0 = [(-632, -1813, 320), (630, -1912, 320)];
+  foreach(var_2 in var_0) {
+    var_3 = spawn("trigger_radius", var_2, 0, 400, 200);
+    level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_3;
   }
 
   level waittill("game_ended");
-  foreach(var_03 in level.outofboundstriggerpatches) {
-    if(isDefined(var_03)) {
-      var_03 delete();
+  foreach(var_3 in level.outofboundstriggerpatches) {
+    if(isDefined(var_3)) {
+      var_3 delete();
     }
   }
 }
 
 spawn_oob_trigger() {
   wait(1);
-  var_00 = spawn("trigger_radius", (36, -844, 0), 0, 500, 200);
-  var_00 hide();
-  level.var_C7B3[level.var_C7B3.size] = var_00;
+  var_0 = spawn("trigger_radius", (36, -844, 0), 0, 500, 200);
+  var_0 hide();
+  level.var_C7B3[level.var_C7B3.size] = var_0;
 }

@@ -4,13 +4,13 @@
  * Script: scripts\asm\pamgrier\pamgrier_asm.gsc
 *************************************************/
 
-pamgrierinit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
-  var_04 = self getsafecircleradius("teleport_out", "revive_player");
+pamgrierinit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
+  var_4 = self getsafecircleradius("teleport_out", "revive_player");
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "teleport":
     case "melee_attack":
     case "revive_player":
@@ -20,53 +20,53 @@ isvalidaction(param_00) {
   return 0;
 }
 
-setaction(param_00) {
-  self.requested_action = param_00;
+setaction(var_0) {
+  self.requested_action = var_0;
 }
 
 clearaction() {
   self.requested_action = undefined;
 }
 
-ispamchillin(param_00, param_01, param_02, param_03) {
+ispamchillin(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::istrue(self.bchillin);
 }
 
-ispamdonechillin(param_00, param_01, param_02, param_03) {
-  return !ispamchillin(param_00, param_01, param_02, param_03);
+ispamdonechillin(var_0, var_1, var_2, var_3) {
+  return !ispamchillin(var_0, var_1, var_2, var_3);
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-playanimandlookatenemy(param_00, param_01, param_02, param_03) {
-  thread scripts\asm\zombie\melee::func_6A6A(param_01, scripts\mp\agents\pamgrier\pamgrier_agent::getenemy());
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 1);
+playanimandlookatenemy(var_0, var_1, var_2, var_3) {
+  thread scripts\asm\zombie\melee::func_6A6A(var_1, scripts\mp\agents\pamgrier\pamgrier_agent::getenemy());
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 1);
 }
 
-isanimdone(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "end")) {
+isanimdone(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "early_end")) {
+  if(scripts\asm\asm::func_232B(var_1, "early_end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "finish_early")) {
+  if(scripts\asm\asm::func_232B(var_1, "finish_early")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "code_move")) {
+  if(scripts\asm\asm::func_232B(var_1, "code_move")) {
     return 1;
   }
 
   return 0;
 }
 
-isrevivedone(param_00, param_01, param_02, param_03) {
+isrevivedone(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.reviveplayer)) {
     return 1;
   }
@@ -78,41 +78,41 @@ isrevivedone(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-dorevive(param_00, param_01) {
-  self endon(param_00 + "_finished");
-  param_01 endon("disconnect");
-  var_02 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-  wait(var_02.revive_wait_time);
-  if(!isDefined(param_01.reviveent)) {
+dorevive(var_0, var_1) {
+  self endon(var_0 + "_finished");
+  var_1 endon("disconnect");
+  var_2 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+  wait(var_2.revive_wait_time);
+  if(!isDefined(var_1.reviveent)) {
     return;
   }
 
-  param_01.reviveent notify("pg_trigger", self);
+  var_1.reviveent notify("pg_trigger", self);
 }
 
-playreviveanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playreviveanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(isDefined(self.reviveplayer)) {
-    thread scripts\asm\zombie\melee::func_6A6A(param_01, self.reviveplayer);
-    thread dorevive(param_01, self.reviveplayer);
+    thread scripts\asm\zombie\melee::func_6A6A(var_1, self.reviveplayer);
+    thread dorevive(var_1, self.reviveplayer);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-meleenotehandler(param_00, param_01, param_02, param_03) {
-  if(param_00 == "hit") {
-    var_04 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
-    if(isDefined(var_04)) {
-      if(distancesquared(var_04.origin, self.origin) < -25536) {
-        self notify("attack_hit", var_04);
-        if(isDefined(var_04.maxhealth)) {
-          scripts\asm\zombie\melee::domeleedamage(var_04, var_04.maxhealth, "MOD_IMPACT");
+meleenotehandler(var_0, var_1, var_2, var_3) {
+  if(var_0 == "hit") {
+    var_4 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
+    if(isDefined(var_4)) {
+      if(distancesquared(var_4.origin, self.origin) < -25536) {
+        self notify("attack_hit", var_4);
+        if(isDefined(var_4.maxhealth)) {
+          scripts\asm\zombie\melee::domeleedamage(var_4, var_4.maxhealth, "MOD_IMPACT");
         } else {
-          scripts\asm\zombie\melee::domeleedamage(var_04, self.var_B601, "MOD_IMPACT");
+          scripts\asm\zombie\melee::domeleedamage(var_4, self.var_B601, "MOD_IMPACT");
         }
       } else {
-        self notify("attack_miss", var_04);
+        self notify("attack_miss", var_4);
       }
     }
 
@@ -122,7 +122,7 @@ meleenotehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-shouldabortaction(param_00, param_01, param_02, param_03) {
+shouldabortaction(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.btraversalteleport)) {
     return 0;
   }
@@ -131,8 +131,8 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(isDefined(param_03)) {
-    if(self.requested_action != param_03) {
+  if(isDefined(var_3)) {
+    if(self.requested_action != var_3) {
       return 1;
     }
   }
@@ -140,91 +140,91 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-shoulddoaction(param_00, param_01, param_02, param_03) {
+shoulddoaction(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.requested_action)) {
     return 0;
   }
 
-  if(isDefined(param_03) && param_03 != "") {
-    if(self.requested_action == param_03) {
+  if(isDefined(var_3) && var_3 != "") {
+    if(self.requested_action == var_3) {
       return 1;
     }
 
     return 0;
   }
 
-  if(self.requested_action == param_02) {
+  if(self.requested_action == var_2) {
     return 1;
   }
 
   return 0;
 }
 
-playanimwithplaybackrate(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-func_BEA0(param_00, param_01, param_02, param_03) {
-  var_04 = _meth_81DE();
-  if(abs(angleclamp180(var_04)) > self.var_129AF) {
+func_BEA0(var_0, var_1, var_2, var_3) {
+  var_4 = _meth_81DE();
+  if(abs(angleclamp180(var_4)) > self.var_129AF) {
     return 1;
   }
 
   return 0;
 }
 
-_meth_81DE(param_00) {
-  var_01 = undefined;
-  var_02 = undefined;
-  var_03 = 0;
+_meth_81DE(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = 0;
   if(isDefined(self.desiredyaw)) {
-    var_03 = angleclamp180(self.desiredyaw - self.angles[1]);
+    var_3 = angleclamp180(self.desiredyaw - self.angles[1]);
   }
 
-  if(isDefined(param_00)) {
-    var_03 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(0.5, param_00);
+  if(isDefined(var_0)) {
+    var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(0.5, var_0);
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_3F0A(param_00, param_01, param_02) {
-  var_03 = _meth_81DE();
-  if(var_03 < 0) {
-    var_04 = "right";
+func_3F0A(var_0, var_1, var_2) {
+  var_3 = _meth_81DE();
+  if(var_3 < 0) {
+    var_4 = "right";
   } else {
-    var_04 = "left";
+    var_4 = "left";
   }
 
-  var_03 = abs(var_03);
-  var_05 = 0;
-  if(var_03 > 157.5) {
-    var_05 = 180;
-  } else if(var_03 > 112.5) {
-    var_05 = 135;
-  } else if(var_03 > 67.5) {
-    var_05 = 90;
+  var_3 = abs(var_3);
+  var_5 = 0;
+  if(var_3 > 157.5) {
+    var_5 = 180;
+  } else if(var_3 > 112.5) {
+    var_5 = 135;
+  } else if(var_3 > 67.5) {
+    var_5 = 90;
   } else {
-    var_05 = 45;
+    var_5 = 45;
   }
 
-  var_06 = var_04 + "_" + var_05;
-  var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_06);
-  var_08 = self _meth_8101(param_01, var_07);
-  return var_07;
+  var_6 = var_4 + "_" + var_5;
+  var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
+  var_8 = self _meth_8101(var_1, var_7);
+  return var_7;
 }
 
-func_D56A(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self.vehicle_getspawnerarray;
+func_D56A(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self.vehicle_getspawnerarray;
   self orientmode("face angle abs", self.angles);
   self ghostlaunched("anim deltas");
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04);
-  if(!isDefined(var_05) && isDefined(self.vehicle_getspawnerarray)) {
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
+  if(!isDefined(var_5) && isDefined(self.vehicle_getspawnerarray)) {
     self clearpath();
   }
 
@@ -232,71 +232,71 @@ func_D56A(param_00, param_01, param_02, param_03) {
   scripts\asm\asm_mp::func_237E("code_move");
 }
 
-playmeleeattack(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, param_03);
+playmeleeattack(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, var_3);
 }
 
-choosemeleeattack(param_00, param_01, param_02) {
-  var_03 = "attack_moving_";
-  var_04 = _meth_81DE(scripts\mp\agents\pamgrier\pamgrier_agent::getenemy());
-  if(var_04 < 0) {
-    var_05 = "right";
+choosemeleeattack(var_0, var_1, var_2) {
+  var_3 = "attack_moving_";
+  var_4 = _meth_81DE(scripts\mp\agents\pamgrier\pamgrier_agent::getenemy());
+  if(var_4 < 0) {
+    var_5 = "right";
   } else {
-    var_05 = "left";
+    var_5 = "left";
   }
 
-  var_04 = abs(var_04);
-  var_06 = 0;
-  if(var_04 > 157.5) {
-    var_06 = 180;
-  } else if(var_04 > 112.5) {
-    var_06 = 135;
-  } else if(var_04 > 67.5) {
-    var_06 = 90;
-  } else if(var_04 > 30) {
-    var_06 = 45;
+  var_4 = abs(var_4);
+  var_6 = 0;
+  if(var_4 > 157.5) {
+    var_6 = 180;
+  } else if(var_4 > 112.5) {
+    var_6 = 135;
+  } else if(var_4 > 67.5) {
+    var_6 = 90;
+  } else if(var_4 > 30) {
+    var_6 = 45;
   } else {
-    var_06 = undefined;
+    var_6 = undefined;
   }
 
-  if(isDefined(var_06)) {
-    var_07 = "attack_moving_" + var_05 + "_" + var_06;
+  if(isDefined(var_6)) {
+    var_7 = "attack_moving_" + var_5 + "_" + var_6;
   } else {
-    var_07 = "attack_moving";
+    var_7 = "attack_moving";
   }
 
-  var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_07);
-  return var_08;
+  var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_7);
+  return var_8;
 }
 
-func_3EE4(param_00, param_01, param_02) {
-  return lib_0F3C::func_3EF4(param_00, param_01, param_02);
+func_3EE4(var_0, var_1, var_2) {
+  return lib_0F3C::func_3EF4(var_0, var_1, var_2);
 }
 
-playmovingpainanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+playmovingpainanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(!isDefined(self.vehicle_getspawnerarray) || self pathdisttogoal() < scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata().min_moving_pain_dist) {
-    var_04 = func_3EE4(param_00, "pain_generic", param_03);
+    var_4 = func_3EE4(var_0, "pain_generic", var_3);
     self orientmode("face angle abs", self.angles);
-    scripts\asm\asm_mp::func_2365(param_00, "pain_generic", param_02, var_04, 1);
+    scripts\asm\asm_mp::func_2365(var_0, "pain_generic", var_2, var_4, 1);
     return;
   }
 
-  scripts\asm\asm_mp::func_2364(param_01, param_02, param_03, var_04);
+  scripts\asm\asm_mp::func_2364(var_1, var_2, var_3, var_4);
 }
 
-chooseteleportoutanim(param_00, param_01, param_02) {
-  var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01, self.teleporttype);
+chooseteleportoutanim(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, self.teleporttype);
   if(self.teleporttype == "revive_player") {
-    self.reviveanimindex = var_03 - 5;
+    self.reviveanimindex = var_3 - 5;
   }
 
-  return var_03;
+  return var_3;
 }
 
-needschilltransition(param_00, param_01, param_02, param_03) {
+needschilltransition(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.bneedschilltransition)) {
     return 1;
   }
@@ -304,28 +304,28 @@ needschilltransition(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-playchillpassivetransition(param_00, param_01, param_02, param_03) {
+playchillpassivetransition(var_0, var_1, var_2, var_3) {
   self.bneedschilltransition = undefined;
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-choosechillinidle(param_00, param_01, param_02) {
+choosechillinidle(var_0, var_1, var_2) {
   if(scripts\engine\utility::istrue(self.bpassive)) {
-    var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01, "passive");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "passive");
   } else {
-    var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_02, "ready");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_2, "ready");
   }
 
-  return var_03;
+  return var_3;
 }
 
-gopassivesoon(param_00, param_01) {
-  self endon(param_00 + "_finished");
-  wait(param_01);
+gopassivesoon(var_0, var_1) {
+  self endon(var_0 + "_finished");
+  wait(var_1);
   scripts\mp\agents\pamgrier\pamgrier_agent::setpassive();
 }
 
-shouldplaychilltwitch(param_00, param_01, param_02, param_03) {
+shouldplaychilltwitch(var_0, var_1, var_2, var_3) {
   if(!scripts\engine\utility::istrue(self.bpassive)) {
     return 0;
   }
@@ -338,65 +338,65 @@ shouldplaychilltwitch(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-handletwitch(param_00) {
-  self endon(param_00 + "_finished");
-  var_01 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-  wait(randomfloatrange(var_01.min_wait_for_twitch_time, var_01.max_wait_for_twitch_time));
+handletwitch(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+  wait(randomfloatrange(var_1.min_wait_for_twitch_time, var_1.max_wait_for_twitch_time));
   self.btimefortwitch = 1;
 }
 
-playchillinanim(param_00, param_01, param_02, param_03) {
+playchillinanim(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::istrue(self.bpassive)) {
-    thread handletwitch(param_01);
+    thread handletwitch(var_1);
   } else {
-    thread gopassivesoon(param_01, scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata().chill_time_before_going_passive);
+    thread gopassivesoon(var_1, scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata().chill_time_before_going_passive);
   }
 
   if(isDefined(self.teleportangles)) {
     self orientmode("face angle abs", (0, self.teleportangles[1], 0));
   }
 
-  scripts\asm\asm_mp::func_235F(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_235F(var_0, var_1, var_2, var_3);
 }
 
-choosereviveanim(param_00, param_01, param_02) {
+choosereviveanim(var_0, var_1, var_2) {
   if(!isDefined(self.reviveanimindex)) {
-    self.reviveanimindex = lib_0F3C::func_3EF4(param_00, param_01, param_02);
+    self.reviveanimindex = lib_0F3C::func_3EF4(var_0, var_1, var_2);
   }
 
   return self.reviveanimindex;
 }
 
-chooseteleportinanim(param_00, param_01, param_02) {
+chooseteleportinanim(var_0, var_1, var_2) {
   if(scripts\engine\utility::istrue(self.bpassive)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(param_01, "passive_teleport");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "passive_teleport");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "teleport");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "teleport");
 }
 
-playteleportin(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = self.teleportpos - self.origin;
-  var_04 = (var_04[0], var_04[1], 0);
-  var_05 = vectornormalize(var_04);
-  var_06 = vectortoangles(var_05);
-  playanimwithplaybackrate(param_00, param_01, param_02, param_03);
+playteleportin(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self.teleportpos - self.origin;
+  var_4 = (var_4[0], var_4[1], 0);
+  var_5 = vectornormalize(var_4);
+  var_6 = vectortoangles(var_5);
+  playanimwithplaybackrate(var_0, var_1, var_2, var_3);
 }
 
-isplayerintheway(param_00) {
-  var_01 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-  foreach(var_03 in level.players) {
-    if(!isalive(var_03)) {
+isplayerintheway(var_0) {
+  var_1 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+  foreach(var_3 in level.players) {
+    if(!isalive(var_3)) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_03.inlaststand)) {
+    if(scripts\engine\utility::istrue(var_3.inlaststand)) {
       continue;
     }
 
-    var_04 = distance2dsquared(param_00, var_03.origin);
-    if(var_04 < var_01.player_too_close_teleport_dist_sq) {
+    var_4 = distance2dsquared(var_0, var_3.origin);
+    if(var_4 < var_1.player_too_close_teleport_dist_sq) {
       return 1;
     }
   }
@@ -404,11 +404,11 @@ isplayerintheway(param_00) {
   return 0;
 }
 
-isvalidteleportpos(param_00) {
-  var_01 = self.teleportpos;
+isvalidteleportpos(var_0) {
+  var_1 = self.teleportpos;
   self.teleportpos = getclosestpointonnavmesh(self.teleportpos);
-  var_02 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-  if(distance2dsquared(var_01, self.teleportpos) > var_02.navmesh_correction_dist_sq) {
+  var_2 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+  if(distance2dsquared(var_1, self.teleportpos) > var_2.navmesh_correction_dist_sq) {
     return 0;
   }
 
@@ -416,9 +416,9 @@ isvalidteleportpos(param_00) {
     return 0;
   }
 
-  if(isDefined(param_00)) {
-    var_03 = scripts\common\trace::create_default_contents(1);
-    if(!scripts\common\trace::ray_trace_passed(self.teleportpos + (0, 0, 24), param_00 + (0, 0, 24), self, var_03)) {
+  if(isDefined(var_0)) {
+    var_3 = scripts\common\trace::create_default_contents(1);
+    if(!scripts\common\trace::ray_trace_passed(self.teleportpos + (0, 0, 24), var_0 + (0, 0, 24), self, var_3)) {
       return 0;
     }
   }
@@ -426,11 +426,11 @@ isvalidteleportpos(param_00) {
   return 1;
 }
 
-faceplayer(param_00, param_01) {
-  self endon(param_00 + "_finished");
+faceplayer(var_0, var_1) {
+  self endon(var_0 + "_finished");
   for(;;) {
-    if(isDefined(param_01)) {
-      self orientmode("face angle abs", (0, vectortoyaw(param_01.origin - self.origin), 0));
+    if(isDefined(var_1)) {
+      self orientmode("face angle abs", (0, vectortoyaw(var_1.origin - self.origin), 0));
     } else {
       break;
     }
@@ -439,40 +439,40 @@ faceplayer(param_00, param_01) {
   }
 }
 
-playteleportout(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  if(!isDefined(var_04)) {
-    var_04 = 1;
+playteleportout(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_06 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_6 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
   self setscriptablepartstate("movement", "teleport");
   self.ishidden = 1;
   wait(0.1);
   self setscriptablepartstate("movement", "neutral");
   self hide();
-  if(isDefined(var_06) && self.teleporttype == "teleport_attack") {
-    var_07 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-    var_08 = var_06 getvelocity();
-    var_09 = length2d(var_08);
-    var_0A = vectornormalize(var_06.origin - self.origin);
-    self.teleportpos = var_06.origin - var_0A * var_07.teleport_attack_dist_to_target;
-    if(!isvalidteleportpos(var_06.origin)) {
-      if(var_09 == 0) {
-        var_0B = anglesToForward(var_06.angles);
+  if(isDefined(var_6) && self.teleporttype == "teleport_attack") {
+    var_7 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+    var_8 = var_6 getvelocity();
+    var_9 = length2d(var_8);
+    var_0A = vectornormalize(var_6.origin - self.origin);
+    self.teleportpos = var_6.origin - var_0A * var_7.teleport_attack_dist_to_target;
+    if(!isvalidteleportpos(var_6.origin)) {
+      if(var_9 == 0) {
+        var_0B = anglesToForward(var_6.angles);
       } else {
-        var_0B = vectornormalize(var_09) * -1;
+        var_0B = vectornormalize(var_9) * -1;
       }
 
-      self.teleportpos = var_06.origin + var_0B * var_07.teleport_behind_target_dist;
-      if(!isvalidteleportpos(var_06.origin)) {
-        self.teleportpos = getclosestpointonnavmesh(var_06.origin);
+      self.teleportpos = var_6.origin + var_0B * var_7.teleport_behind_target_dist;
+      if(!isvalidteleportpos(var_6.origin)) {
+        self.teleportpos = getclosestpointonnavmesh(var_6.origin);
       }
     }
 
-    self.teleportangles = vectortoangles(var_06.origin - self.teleportpos);
+    self.teleportangles = vectortoangles(var_6.origin - self.teleportpos);
     self.teleportangles = (0, self.teleportangles[1], 0);
   }
 
@@ -483,10 +483,10 @@ playteleportout(param_00, param_01, param_02, param_03) {
   }
 
   if(isDefined(self.teleporttype)) {
-    if(self.teleporttype == "teleport_attack" && isDefined(var_06)) {
-      thread scripts\asm\zombie\melee::func_6A6A(param_01, var_06);
+    if(self.teleporttype == "teleport_attack" && isDefined(var_6)) {
+      thread scripts\asm\zombie\melee::func_6A6A(var_1, var_6);
     } else if(self.teleporttype == "revive_player" && isDefined(self.reviveplayer)) {
-      thread faceplayer(param_01, self.reviveplayer);
+      thread faceplayer(var_1, self.reviveplayer);
     } else {
       self orientmode("face angle abs", (0, self.teleportangles[1], 0));
     }
@@ -499,12 +499,12 @@ playteleportout(param_00, param_01, param_02, param_03) {
   self clearpath();
   thread showmelater();
   thread gibnearbyenemies(0.1);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
   if(scripts\engine\utility::istrue(self.btraversalteleport)) {
     self.is_traversing = undefined;
     self.btraversalteleport = undefined;
     self notify("traverse_end");
-    scripts\asm\asm::asm_setstate("decide_idle", param_03);
+    scripts\asm\asm::asm_setstate("decide_idle", var_3);
   }
 }
 
@@ -518,37 +518,37 @@ showmelater() {
   self setscriptablepartstate("movement", "neutral");
 }
 
-gibnearbyenemies(param_00) {
-  if(isDefined(param_00)) {
-    wait(param_00);
+gibnearbyenemies(var_0) {
+  if(isDefined(var_0)) {
+    wait(var_0);
   }
 
-  var_01 = scripts\mp\mp_agent::getaliveagents();
-  var_02 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
-  var_03 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
-  foreach(var_05 in var_01) {
-    if(var_05 == self) {
+  var_1 = scripts\mp\mp_agent::getaliveagents();
+  var_2 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
+  var_3 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
+  foreach(var_5 in var_1) {
+    if(var_5 == self) {
       continue;
     }
 
-    if(var_05.team == "allies") {
+    if(var_5.team == "allies") {
       continue;
     }
 
-    if(isDefined(var_02) && var_05 == var_02) {
+    if(isDefined(var_2) && var_5 == var_2) {
       continue;
     }
 
-    if(var_05.agent_type == "ratking") {
+    if(var_5.agent_type == "ratking") {
       continue;
     }
 
-    var_06 = distancesquared(self.origin, var_05.origin);
-    if(var_06 > var_03.telefrag_dist_sq) {
+    var_6 = distancesquared(self.origin, var_5.origin);
+    if(var_6 > var_3.telefrag_dist_sq) {
       continue;
     }
 
-    var_05 gibthyself();
+    var_5 gibthyself();
   }
 }
 

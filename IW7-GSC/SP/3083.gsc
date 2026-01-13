@@ -23,20 +23,20 @@ func_98DD() {
 func_324E() {
   self endon("death");
   self endon("can_damage_rocket");
-  var_00 = "none";
-  var_01 = 0.25;
-  var_02 = 1;
+  var_0 = "none";
+  var_1 = 0.25;
+  var_2 = 1;
   for(;;) {
-    var_03 = 0;
-    while(var_03 < var_02) {
-      self waittill("bullethit", var_04);
-      if(var_04 == level.player) {
-        var_05 = getweaponbasename(var_04 getcurrentweapon());
-        if(!lib_0A2F::func_DA40(var_05)) {
-          var_03++;
-          if(var_05 != var_00) {
-            var_00 = var_05;
-            var_02 = weaponclipsize(var_00) * var_01;
+    var_3 = 0;
+    while(var_3 < var_2) {
+      self waittill("bullethit", var_4);
+      if(var_4 == level.player) {
+        var_5 = getweaponbasename(var_4 getcurrentweapon());
+        if(!lib_0A2F::func_DA40(var_5)) {
+          var_3++;
+          if(var_5 != var_0) {
+            var_0 = var_5;
+            var_2 = weaponclipsize(var_0) * var_1;
           }
         }
       }
@@ -48,8 +48,8 @@ func_324E() {
 
 func_E5EE() {
   level.player endon("death");
-  var_00 = scripts\engine\utility::waittill_any_return("left_arm_dismembered", "right_arm_dismembered", "death");
-  if(var_00 == "death") {
+  var_0 = scripts\engine\utility::waittill_any_return("left_arm_dismembered", "right_arm_dismembered", "death");
+  if(var_0 == "death") {
     return;
   }
 
@@ -61,7 +61,7 @@ func_E5EE() {
     return;
   }
 
-  var_01 = strtok(var_00, "_")[0];
+  var_1 = strtok(var_0, "_")[0];
   while(!self.asm.var_11B08.var_30E6 && !scripts\asm\asm_bb::bb_isselfdestruct()) {
     while(isDefined(self.var_30E7) && self.var_30E7) {
       wait(0.05);
@@ -70,77 +70,77 @@ func_E5EE() {
       }
     }
 
-    var_02 = spawn("script_model", self.origin);
-    if(var_01 == "left") {
-      var_02 setModel("robot_c12_prop_rail_l");
-      var_02 linkto(self, "j_clavicle_inner_le", (0, 0, 0), (0, 0, 0));
+    var_2 = spawn("script_model", self.origin);
+    if(var_1 == "left") {
+      var_2 setModel("robot_c12_prop_rail_l");
+      var_2 linkto(self, "j_clavicle_inner_le", (0, 0, 0), (0, 0, 0));
     } else {
-      var_02 setModel("robot_c12_prop_rail_r");
-      var_02 linkto(self, "j_clavicle_inner_ri", (0, 0, 0), (0, 0, 0));
+      var_2 setModel("robot_c12_prop_rail_r");
+      var_2 linkto(self, "j_clavicle_inner_ri", (0, 0, 0), (0, 0, 0));
     }
 
-    var_02 scripts\sp\utility::func_9196(3, 1, 1);
-    var_02 thread scripts\sp\utility::func_918B("ar_callouts_c12_rodeo", 1, (0, 0, 0));
-    thread kill_rodeo_hint_on_player_death(var_02);
-    var_03 = gettime();
-    var_00 = scripts\engine\utility::waittill_any_return("begin_rodeo", "self_destruct", "death", "rodeo_disabled");
+    var_2 scripts\sp\utility::func_9196(3, 1, 1);
+    var_2 thread scripts\sp\utility::func_918B("ar_callouts_c12_rodeo", 1, (0, 0, 0));
+    thread kill_rodeo_hint_on_player_death(var_2);
+    var_3 = gettime();
+    var_0 = scripts\engine\utility::waittill_any_return("begin_rodeo", "self_destruct", "death", "rodeo_disabled");
     self notify("stop_kill_rodeo_hint_on_player_death");
-    var_04 = gettime() - var_03 / 1000;
-    if(var_04 < 0.15) {
-      wait(0.15 - var_04);
+    var_4 = gettime() - var_3 / 1000;
+    if(var_4 < 0.15) {
+      wait(0.15 - var_4);
     }
 
-    var_02 thread scripts\sp\utility::func_918C();
-    var_02 delete();
-    if(var_00 == "rodeo_disabled") {
+    var_2 thread scripts\sp\utility::func_918C();
+    var_2 delete();
+    if(var_0 == "rodeo_disabled") {
       continue;
     }
 
-    if(var_00 == "self_destruct" || var_00 == "death") {
+    if(var_0 == "self_destruct" || var_0 == "death") {
       return;
     }
 
-    var_00 = scripts\engine\utility::waittill_any_return("end_rodeo", "death");
-    if(var_00 == "death") {
+    var_0 = scripts\engine\utility::waittill_any_return("end_rodeo", "death");
+    if(var_0 == "death") {
       return;
     }
   }
 }
 
-kill_rodeo_hint_on_player_death(param_00) {
+kill_rodeo_hint_on_player_death(var_0) {
   self endon("stop_kill_rodeo_hint_on_player_death");
   level.player waittill("death");
-  if(isDefined(param_00)) {
-    param_00 thread scripts\sp\utility::func_918C();
-    param_00 delete();
+  if(isDefined(var_0)) {
+    var_0 thread scripts\sp\utility::func_918C();
+    var_0 delete();
   }
 }
 
 func_B2E2() {
   self.var_C925 = [];
-  var_00 = scripts\engine\utility::spawn_tag_origin();
-  var_00.var_3508 = self;
-  var_00.name = "script_c12_right_arm";
-  var_00 linkto(self, "j_clavicle_ri", (15, 0, 0), (0, 0, 0));
-  self.var_C925["right_arm"] = var_00;
-  var_01 = scripts\engine\utility::spawn_tag_origin();
-  var_01.var_3508 = self;
-  var_01.name = "script_c12_left_arm";
-  var_01 linkto(self, "j_clavicle_le", (15, 0, 0), (0, 0, 0));
-  self.var_C925["left_arm"] = var_01;
-  var_02 = scripts\engine\utility::spawn_tag_origin();
-  var_02.var_3508 = self;
-  var_02.name = "script_c12_right_leg";
-  var_02 linkto(self, "j_mainroot2", (0, 0, 25), (0, 0, 0));
-  self.var_C925["right_leg"] = var_02;
-  var_03 = scripts\engine\utility::spawn_tag_origin();
-  var_03.var_3508 = self;
-  var_03.name = "script_c12_left_leg";
-  var_03 linkto(self, "j_mainroot2", (0, 0, -25), (0, 0, 0));
-  self.var_C925["left_leg"] = var_03;
+  var_0 = scripts\engine\utility::spawn_tag_origin();
+  var_0.var_3508 = self;
+  var_0.name = "script_c12_right_arm";
+  var_0 linkto(self, "j_clavicle_ri", (15, 0, 0), (0, 0, 0));
+  self.var_C925["right_arm"] = var_0;
+  var_1 = scripts\engine\utility::spawn_tag_origin();
+  var_1.var_3508 = self;
+  var_1.name = "script_c12_left_arm";
+  var_1 linkto(self, "j_clavicle_le", (15, 0, 0), (0, 0, 0));
+  self.var_C925["left_arm"] = var_1;
+  var_2 = scripts\engine\utility::spawn_tag_origin();
+  var_2.var_3508 = self;
+  var_2.name = "script_c12_right_leg";
+  var_2 linkto(self, "j_mainroot2", (0, 0, 25), (0, 0, 0));
+  self.var_C925["right_leg"] = var_2;
+  var_3 = scripts\engine\utility::spawn_tag_origin();
+  var_3.var_3508 = self;
+  var_3.name = "script_c12_left_leg";
+  var_3 linkto(self, "j_mainroot2", (0, 0, -25), (0, 0, 0));
+  self.var_C925["left_leg"] = var_3;
   self waittill("death");
-  foreach(var_05 in self.var_C925) {
-    var_05 delete();
+  foreach(var_5 in self.var_C925) {
+    var_5 delete();
   }
 
   self.var_C925 = undefined;
@@ -149,66 +149,66 @@ func_B2E2() {
 monitor_pain() {
   self endon("death");
   scripts\engine\utility::waitframe();
-  foreach(var_02, var_01 in self.var_C925) {
-    var_01.var_B43D = self _meth_850C(var_02);
-    var_01.var_B440 = self _meth_850C(var_02, "upper");
-    var_01.var_B43E = self _meth_850C(var_02, "lower");
-    var_01.var_8CB0 = 100;
+  foreach(var_2, var_1 in self.var_C925) {
+    var_1.var_B43D = self _meth_850C(var_2);
+    var_1.var_B440 = self _meth_850C(var_2, "upper");
+    var_1.var_B43E = self _meth_850C(var_2, "lower");
+    var_1.var_8CB0 = 100;
   }
 
   for(;;) {
     scripts\engine\utility::waitframe();
-    foreach(var_02, var_01 in self.var_C925) {
-      func_36F9(var_02, var_01);
+    foreach(var_2, var_1 in self.var_C925) {
+      func_36F9(var_2, var_1);
     }
   }
 }
 
-func_36F9(param_00, param_01) {
-  var_02 = self _meth_850C(param_00);
-  var_03 = self _meth_850C(param_00, "upper");
-  var_04 = self _meth_850C(param_00, "lower");
-  if(strtok(param_00, "_")[1] == "leg") {
-    var_05 = var_02 + var_03 + var_04;
-    var_06 = param_01.var_B43D + param_01.var_B440 + param_01.var_B43E;
-    param_01.var_8CB0 = int(var_05 / var_06 * 100);
+func_36F9(var_0, var_1) {
+  var_2 = self _meth_850C(var_0);
+  var_3 = self _meth_850C(var_0, "upper");
+  var_4 = self _meth_850C(var_0, "lower");
+  if(strtok(var_0, "_")[1] == "leg") {
+    var_5 = var_2 + var_3 + var_4;
+    var_6 = var_1.var_B43D + var_1.var_B440 + var_1.var_B43E;
+    var_1.var_8CB0 = int(var_5 / var_6 * 100);
     return;
   }
 
-  if(var_05 > 0 && var_06 > 0) {
-    var_07 = var_05 / var_03.var_B440;
-    var_08 = var_06 / var_03.var_B43E;
-    var_03.var_8CB0 = int(var_07 + var_08 / 2 * 50) + 50;
+  if(var_5 > 0 && var_6 > 0) {
+    var_7 = var_5 / var_3.var_B440;
+    var_8 = var_6 / var_3.var_B43E;
+    var_3.var_8CB0 = int(var_7 + var_8 / 2 * 50) + 50;
     return;
   }
 
-  if(var_05 > 0) {
-    var_07 = var_05 / var_03.var_B440;
-    var_09 = var_04 / var_03.var_B43D;
-    if(var_07 < var_09) {
-      var_0A = var_07;
+  if(var_5 > 0) {
+    var_7 = var_5 / var_3.var_B440;
+    var_9 = var_4 / var_3.var_B43D;
+    if(var_7 < var_9) {
+      var_0A = var_7;
     } else {
       var_0A = var_0A;
     }
 
-    var_03.var_8CB0 = int(var_0A * 50);
+    var_3.var_8CB0 = int(var_0A * 50);
     return;
   }
 
-  if(var_06 > 0) {
-    var_08 = var_06 / var_03.var_B43E;
-    var_09 = var_04 / var_03.var_B43D;
-    if(var_08 < var_09) {
-      var_0A = var_08;
+  if(var_6 > 0) {
+    var_8 = var_6 / var_3.var_B43E;
+    var_9 = var_4 / var_3.var_B43D;
+    if(var_8 < var_9) {
+      var_0A = var_8;
     } else {
       var_0A = var_0A;
     }
 
-    var_03.var_8CB0 = int(var_0A * 50);
+    var_3.var_8CB0 = int(var_0A * 50);
     return;
   }
 
-  var_03.var_8CB0 = int(var_04 / var_03.var_B43D * 50);
+  var_3.var_8CB0 = int(var_4 / var_3.var_B43D * 50);
 }
 
 func_10F6C() {
@@ -221,45 +221,45 @@ func_10F6C() {
 
     setomnvar("ui_lockon_ads", 1);
     while(func_10F6E()) {
-      self waittill("damage_any", var_00);
-      if(!isDefined(var_00.var_4F) || var_00.var_4F != level.player) {
+      self waittill("damage_any", var_0);
+      if(!isDefined(var_0.var_4F) || var_0.var_4F != level.player) {
         continue;
       }
 
-      if(!isDefined(var_00.var_394) || getweaponbasename(var_00.var_394) != "iw7_steeldragon") {
+      if(!isDefined(var_0.var_394) || getweaponbasename(var_0.var_394) != "iw7_steeldragon") {
         continue;
       }
 
-      var_01 = var_00.updategamerprofileall;
-      if(var_01 == "torso") {
-        var_02 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
-        var_03 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
-        if(var_03 > 0 && var_03 < var_02 || var_02 == 0) {
-          var_01 = "left_arm";
-        } else if(var_02 > 0) {
-          var_01 = "right_arm";
+      var_1 = var_0.updategamerprofileall;
+      if(var_1 == "torso") {
+        var_2 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
+        var_3 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
+        if(var_3 > 0 && var_3 < var_2 || var_2 == 0) {
+          var_1 = "left_arm";
+        } else if(var_2 > 0) {
+          var_1 = "right_arm";
         }
       }
 
-      var_04 = self.var_C925[var_01];
-      if(!isDefined(var_04)) {
+      var_4 = self.var_C925[var_1];
+      if(!isDefined(var_4)) {
         continue;
       }
 
-      if(!isDefined(self.var_10F6B) || var_04 != self.var_10F6B) {
-        setomnvar("ui_lockon_target_ent_0", var_04);
+      if(!isDefined(self.var_10F6B) || var_4 != self.var_10F6B) {
+        setomnvar("ui_lockon_target_ent_0", var_4);
         setomnvar("ui_lockon_target_state_0", 3);
-        setomnvar("ui_lockon_target_name_0", var_04.name);
-        self.var_10F6B = var_04;
+        setomnvar("ui_lockon_target_name_0", var_4.name);
+        self.var_10F6B = var_4;
       }
 
-      var_05 = gettime();
-      self.var_10F6A = var_05 + 250;
+      var_5 = gettime();
+      self.var_10F6A = var_5 + 250;
       if(!isDefined(self.var_10F68)) {
         thread func_10F69();
       }
 
-      setomnvar("ui_lockon_target_health_0", var_04.var_8CB0);
+      setomnvar("ui_lockon_target_health_0", var_4.var_8CB0);
     }
 
     setomnvar("ui_lockon_ads", 0);
@@ -297,13 +297,13 @@ func_10100() {
 }
 
 func_10F6E() {
-  var_00 = level.player getcurrentweapon();
-  var_01 = getweaponbasename(var_00);
-  if(!isDefined(var_01) || var_01 != "iw7_steeldragon") {
+  var_0 = level.player getcurrentweapon();
+  var_1 = getweaponbasename(var_0);
+  if(!isDefined(var_1) || var_1 != "iw7_steeldragon") {
     return 0;
   }
 
-  if(level.player getweaponammoclip(var_00) == 0) {
+  if(level.player getweaponammoclip(var_0) == 0) {
     return 0;
   }
 
@@ -312,76 +312,76 @@ func_10F6E() {
 
 func_11A0D() {
   self endon("death");
-  var_00 = self _meth_850C("torso", "upper");
-  var_01 = self _meth_850C("torso", "lower");
+  var_0 = self _meth_850C("torso", "upper");
+  var_1 = self _meth_850C("torso", "lower");
   for(;;) {
     scripts\engine\utility::waitframe();
-    var_02 = self _meth_850C("torso", "upper");
-    var_03 = self _meth_850C("torso", "lower");
-    var_04 = var_00 - var_02 + var_01 - var_03;
-    if(var_04 > 0) {
-      self _meth_8550("torso", "upper", var_00);
-      self _meth_8550("torso", "lower", var_01);
-      var_05 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
-      var_06 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
-      if(var_05 == 0 && var_06 == 0) {
+    var_2 = self _meth_850C("torso", "upper");
+    var_3 = self _meth_850C("torso", "lower");
+    var_4 = var_0 - var_2 + var_1 - var_3;
+    if(var_4 > 0) {
+      self _meth_8550("torso", "upper", var_0);
+      self _meth_8550("torso", "lower", var_1);
+      var_5 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
+      var_6 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
+      if(var_5 == 0 && var_6 == 0) {
         return;
       }
 
-      var_07 = "right_arm";
-      if((var_06 < var_05 && var_06 != 0) || var_05 == 0) {
-        var_07 = "left_arm";
+      var_7 = "right_arm";
+      if((var_6 < var_5 && var_6 != 0) || var_5 == 0) {
+        var_7 = "left_arm";
       }
 
-      self _meth_850B(var_04, var_07, "upper");
+      self _meth_850B(var_4, var_7, "upper");
     }
   }
 }
 
 func_4D1A() {
   self endon("death");
-  var_00 = self.health;
+  var_0 = self.health;
   self.var_7212 = 0;
   for(;;) {
     self waittill("damage_any");
-    if(self.health < var_00) {
-      self.health = var_00;
+    if(self.health < var_0) {
+      self.health = var_0;
     }
 
     self.var_7212 = gettime() + 10000;
   }
 }
 
-func_C12B(param_00) {
+func_C12B(var_0) {
   self endon("death");
   for(;;) {
-    var_01 = spawnStruct();
-    switch (param_00) {
+    var_1 = spawnStruct();
+    switch (var_0) {
       case "damage":
-        self waittill("damage", var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B);
-        switch (var_09) {
+        self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+        switch (var_9) {
           case "j_weaponshoulder_ri":
-            var_09 = "right_arm";
+            var_9 = "right_arm";
             break;
 
           case "j_weaponshoulder_le":
-            var_09 = "left_arm";
+            var_9 = "left_arm";
             break;
 
           case "j_hipinner_ri":
           case "j_ankle_ri":
-            var_09 = "right_leg";
+            var_9 = "right_leg";
             break;
 
           case "j_hipinner_le":
           case "j_ankle_le":
-            var_09 = "left_leg";
+            var_9 = "left_leg";
             break;
         }
 
-        var_01.var_4F = var_03;
-        var_01.updategamerprofileall = var_09;
-        var_01.var_394 = var_0B;
+        var_1.var_4F = var_3;
+        var_1.updategamerprofileall = var_9;
+        var_1.var_394 = var_0B;
         break;
 
       case "damage_subpart":
@@ -391,15 +391,15 @@ func_C12B(param_00) {
           scripts\sp\damagefeedback::func_4D4C(var_0D.var_3C, var_0D.var_4F, var_0D.var_F2, var_0D.point, undefined, var_0D.stopfxontag, undefined, var_0D.updategamerprofileall, undefined, var_0D.var_394);
         }
 
-        var_01.var_4F = var_0D.var_4F;
-        var_01.updategamerprofileall = var_0D.updategamerprofileall;
-        var_01.var_394 = var_0D.var_394;
+        var_1.var_4F = var_0D.var_4F;
+        var_1.updategamerprofileall = var_0D.updategamerprofileall;
+        var_1.var_394 = var_0D.var_394;
         break;
 
       default:
         break;
     }
 
-    self notify("damage_any", var_01);
+    self notify("damage_any", var_1);
   }
 }

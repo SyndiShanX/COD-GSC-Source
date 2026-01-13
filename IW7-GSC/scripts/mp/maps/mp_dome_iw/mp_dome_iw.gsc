@@ -25,33 +25,33 @@ main() {
 }
 
 patchablecollision() {
-  var_00 = spawn("script_model", (1760, -368, -128));
-  var_00.angles = (0, 0, 180);
-  var_00 setModel("mp_desert_uplink_col_01");
-  var_01 = spawn("script_model", (1776, -832, -128));
-  var_01.angles = (0, 0, 180);
-  var_01 setModel("mp_desert_uplink_col_01");
-  var_02 = getent("player32x32x8", "targetname");
-  var_03 = spawn("script_model", (1184, 124, 324));
-  var_03.angles = (0, 0, -70);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = spawn("script_model", (896, 124, 324));
-  var_04.angles = (0, 0, -70);
-  var_04 clonebrushmodeltoscriptmodel(var_02);
-  var_05 = getent("player256x256x256", "targetname");
-  var_06 = spawn("script_model", (1120, -1872, 600));
-  var_06.angles = (15, 0, 0);
-  var_06 clonebrushmodeltoscriptmodel(var_05);
-  var_07 = getent("clip512x512x8", "targetname");
-  var_08 = spawn("script_model", (32, -2448, 480));
-  var_08.angles = (0, 117, 90);
-  var_08 clonebrushmodeltoscriptmodel(var_07);
-  var_09 = spawn("script_model", (275, -2448, 480));
-  var_09.angles = (0, -117, 90);
-  var_09 clonebrushmodeltoscriptmodel(var_07);
+  var_0 = spawn("script_model", (1760, -368, -128));
+  var_0.angles = (0, 0, 180);
+  var_0 setModel("mp_desert_uplink_col_01");
+  var_1 = spawn("script_model", (1776, -832, -128));
+  var_1.angles = (0, 0, 180);
+  var_1 setModel("mp_desert_uplink_col_01");
+  var_2 = getent("player32x32x8", "targetname");
+  var_3 = spawn("script_model", (1184, 124, 324));
+  var_3.angles = (0, 0, -70);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = spawn("script_model", (896, 124, 324));
+  var_4.angles = (0, 0, -70);
+  var_4 clonebrushmodeltoscriptmodel(var_2);
+  var_5 = getent("player256x256x256", "targetname");
+  var_6 = spawn("script_model", (1120, -1872, 600));
+  var_6.angles = (15, 0, 0);
+  var_6 clonebrushmodeltoscriptmodel(var_5);
+  var_7 = getent("clip512x512x8", "targetname");
+  var_8 = spawn("script_model", (32, -2448, 480));
+  var_8.angles = (0, 117, 90);
+  var_8 clonebrushmodeltoscriptmodel(var_7);
+  var_9 = spawn("script_model", (275, -2448, 480));
+  var_9.angles = (0, -117, 90);
+  var_9 clonebrushmodeltoscriptmodel(var_7);
   var_0A = spawn("script_model", (-200, -1992, 480));
   var_0A.angles = (0, 117, 90);
-  var_0A clonebrushmodeltoscriptmodel(var_07);
+  var_0A clonebrushmodeltoscriptmodel(var_7);
   var_0B = getent("player512x512x8", "targetname");
   var_0C = spawn("script_model", (-200, -1992, 992));
   var_0C.angles = (0, 117, 90);
@@ -118,25 +118,25 @@ patchablecollision() {
   var_27 clonebrushmodeltoscriptmodel(var_26);
 }
 
-killtriggerloop(param_00) {
+killtriggerloop(var_0) {
   level endon("game_ended");
   for(;;) {
-    param_00 waittill("trigger", var_01);
-    if(isDefined(var_01)) {
-      if(isplayer(var_01)) {
-        var_01 suicide();
+    var_0 waittill("trigger", var_1);
+    if(isDefined(var_1)) {
+      if(isplayer(var_1)) {
+        var_1 suicide();
         continue;
       }
 
-      if(isDefined(var_01.classname) && var_01.classname == "script_vehicle") {
-        if(isDefined(var_01.streakname)) {
-          if(var_01.streakname == "minijackal") {
-            var_01 notify("minijackal_end");
+      if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
+        if(isDefined(var_1.streakname)) {
+          if(var_1.streakname == "minijackal") {
+            var_1 notify("minijackal_end");
             continue;
           }
 
-          if(var_01.streakname == "venom") {
-            var_01 notify("venom_end", var_01.origin);
+          if(var_1.streakname == "venom") {
+            var_1 notify("venom_end", var_1.origin);
           }
         }
       }
@@ -145,21 +145,21 @@ killtriggerloop(param_00) {
 }
 
 setup_vista_driving_cars() {
-  var_00 = getEntArray("vista_car", "targetname");
-  foreach(var_02 in var_00) {
-    thread vista_car_drive(var_02);
+  var_0 = getEntArray("vista_car", "targetname");
+  foreach(var_2 in var_0) {
+    thread vista_car_drive(var_2);
   }
 }
 
-vista_car_drive(param_00) {
+vista_car_drive(var_0) {
   level endon("game_ended");
-  var_01 = scripts\engine\utility::getstruct(param_00.target, "targetname");
-  var_02 = 0.002;
+  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = 0.002;
   for(;;) {
-    var_03 = abs(distance(param_00.origin, var_01.origin) * var_02);
-    param_00 moveto(var_01.origin, var_03, 0, 0);
-    param_00 rotateto(var_01.angles, var_03, 0, 0);
-    var_01 = scripts\engine\utility::getstruct(var_01.target, "targetname");
-    wait(var_03);
+    var_3 = abs(distance(var_0.origin, var_1.origin) * var_2);
+    var_0 moveto(var_1.origin, var_3, 0, 0);
+    var_0 rotateto(var_1.angles, var_3, 0, 0);
+    var_1 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+    wait(var_3);
   }
 }

@@ -4,39 +4,39 @@
  * Script: scripts\cp\zombies\achievement.gsc
 **********************************************/
 
-init_player_achievement(param_00) {
+init_player_achievement(var_0) {
   level.include_default_achievements = 1;
   level.cp_zmb_number_of_quest_pieces = 24;
   if(isDefined(level.script)) {
     switch (level.script) {
       case "cp_zmb":
-        param_00.achievement_list = ["STICKER_COLLECTOR", "SOUL_KEY", "THE_BIGGER_THEY_ARE", "HOFF_THE_CHARTS", "ROCK_ON", "GET_PACKED", "BATTERIES_NOT_INCLUDED", "I_LOVE_THE_80_S", "INSERT_COIN", "BRAIN_DEAD"];
+        var_0.achievement_list = ["STICKER_COLLECTOR", "SOUL_KEY", "THE_BIGGER_THEY_ARE", "HOFF_THE_CHARTS", "ROCK_ON", "GET_PACKED", "BATTERIES_NOT_INCLUDED", "I_LOVE_THE_80_S", "INSERT_COIN", "BRAIN_DEAD"];
         break;
 
       case "cp_rave":
-        param_00.achievement_list = ["LOCKSMITH", "SUPER_SLACKER", "STICK_EM", "HALLUCINATION_NATION", "TABLES_TURNED", "RAVE_ON", "RIDE_FOR_YOUR_LIFE", "SCRAPBOOKING", "PUMP_IT_UP", "TOP_CAMPER"];
+        var_0.achievement_list = ["LOCKSMITH", "SUPER_SLACKER", "STICK_EM", "HALLUCINATION_NATION", "TABLES_TURNED", "RAVE_ON", "RIDE_FOR_YOUR_LIFE", "SCRAPBOOKING", "PUMP_IT_UP", "TOP_CAMPER"];
         break;
 
       case "cp_disco":
-        param_00.achievement_list = ["BOOK_WORM", "COIN_OP", "BEAT_OF_THE_DRUM", "SLICED_AND_DICED", "PEST_CONTROL", "EXTERMINATOR", "SHAOLIN_SKILLS", "MESSAGE_RECEIVED", "SOUL_BROTHER", "SOME_ASSEMBLY_REQUIRED"];
+        var_0.achievement_list = ["BOOK_WORM", "COIN_OP", "BEAT_OF_THE_DRUM", "SLICED_AND_DICED", "PEST_CONTROL", "EXTERMINATOR", "SHAOLIN_SKILLS", "MESSAGE_RECEIVED", "SOUL_BROTHER", "SOME_ASSEMBLY_REQUIRED"];
         break;
 
       case "cp_town":
-        param_00.achievement_list = ["SOUL_LESS", "UNPLEASANT_DREAMS", "MISTRESS_OF_DARK", "QUARTER_MUNCHER", "BAIT_AND_SWITCH", "BELLY_OF_BEAST", "MAD_PROTO", "DEAR_DIARY"];
+        var_0.achievement_list = ["SOUL_LESS", "UNPLEASANT_DREAMS", "MISTRESS_OF_DARK", "QUARTER_MUNCHER", "BAIT_AND_SWITCH", "BELLY_OF_BEAST", "MAD_PROTO", "DEAR_DIARY"];
         break;
 
       case "cp_final":
-        param_00.achievement_list = ["BROKEN_RECORD", "CRACKING_SKULLS", "DOUBLE_FEATURE", "EGG_SLAYER", "ENCRYPT_DECRYPT", "FAILED_MAINTENANCE", "FRIENDS_FOREVER", "MESSAGE_SENT", "SUPER_DUPER_COMBO", "THE_END"];
+        var_0.achievement_list = ["BROKEN_RECORD", "CRACKING_SKULLS", "DOUBLE_FEATURE", "EGG_SLAYER", "ENCRYPT_DECRYPT", "FAILED_MAINTENANCE", "FRIENDS_FOREVER", "MESSAGE_SENT", "SUPER_DUPER_COMBO", "THE_END"];
         break;
 
       default:
-        param_00.achievement_list = ["STICKER_COLLECTOR", "SOUL_KEY", "THE_BIGGER_THEY_ARE", "HOFF_THE_CHARTS", "ROCK_ON", "GET_PACKED", "BATTERIES_NOT_INCLUDED", "I_LOVE_THE_80_S", "INSERT_COIN", "BRAIN_DEAD", "LOCKSMITH", "SUPER_SLACKER", "STICK_EM", "HALLUCINATION_NATION", "TABLES_TURNED", "RAVE_ON", "RIDE_FOR_YOUR_LIFE", "SCRAPBOOKING", "PUMP_IT_UP", "TOP_CAMPER", "BOOK_WORM", "COIN_OP", "BEAT_OF_THE_DRUM", "SLICED_AND_DICED", "PEST_CONTROL", "EXTERMINATOR", "SHAOLIN_SKILLS", "MESSAGE_RECEIVED", "SOUL_BROTHER", "SOME_ASSEMBLY_REQUIRED", "SOUL_LESS", "UNPLEASANT_DREAMS", "MISTRESS_OF_DARK", "QUARTER_MUNCHER", "BAIT_AND_SWITCH", "BELLY_OF_BEAST", "MAD_PROTO", "DEAR_DIARY", "BROKEN_RECORD", "CRACKING_SKULLS", "DOUBLE_FEATURE", "EGG_SLAYER", "ENCRYPT_DECRYPT", "FAILED_MAINTENANCE", "FRIENDS_FOREVER", "MESSAGE_SENT", "SUPER_DUPER_COMBO", "THE_END"];
+        var_0.achievement_list = ["STICKER_COLLECTOR", "SOUL_KEY", "THE_BIGGER_THEY_ARE", "HOFF_THE_CHARTS", "ROCK_ON", "GET_PACKED", "BATTERIES_NOT_INCLUDED", "I_LOVE_THE_80_S", "INSERT_COIN", "BRAIN_DEAD", "LOCKSMITH", "SUPER_SLACKER", "STICK_EM", "HALLUCINATION_NATION", "TABLES_TURNED", "RAVE_ON", "RIDE_FOR_YOUR_LIFE", "SCRAPBOOKING", "PUMP_IT_UP", "TOP_CAMPER", "BOOK_WORM", "COIN_OP", "BEAT_OF_THE_DRUM", "SLICED_AND_DICED", "PEST_CONTROL", "EXTERMINATOR", "SHAOLIN_SKILLS", "MESSAGE_RECEIVED", "SOUL_BROTHER", "SOME_ASSEMBLY_REQUIRED", "SOUL_LESS", "UNPLEASANT_DREAMS", "MISTRESS_OF_DARK", "QUARTER_MUNCHER", "BAIT_AND_SWITCH", "BELLY_OF_BEAST", "MAD_PROTO", "DEAR_DIARY", "BROKEN_RECORD", "CRACKING_SKULLS", "DOUBLE_FEATURE", "EGG_SLAYER", "ENCRYPT_DECRYPT", "FAILED_MAINTENANCE", "FRIENDS_FOREVER", "MESSAGE_SENT", "SUPER_DUPER_COMBO", "THE_END"];
         break;
     }
   }
 
-  if(isDefined(param_00.achievement_registration_func)) {
-    [[param_00.achievement_registration_func]]();
+  if(isDefined(var_0.achievement_registration_func)) {
+    [[var_0.achievement_registration_func]]();
   }
 }
 
@@ -91,52 +91,52 @@ register_default_achievements() {
   register_achievement("THE_END", 1, ::default_init, ::default_should_update, ::equal_to_goal);
 }
 
-register_achievement(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = spawnStruct();
-  var_05[[param_02]](param_01, param_03, param_04);
-  self.achievement_list[param_00] = var_05;
+register_achievement(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5[[var_2]](var_1, var_3, var_4);
+  self.achievement_list[var_0] = var_5;
 }
 
-default_init(param_00, param_01, param_02) {
+default_init(var_0, var_1, var_2) {
   self.progress = 0;
-  self.objective_icon = param_00;
-  self.should_update_func = param_01;
-  self.is_goal_reached_func = param_02;
+  self.objective_icon = var_0;
+  self.should_update_func = var_1;
+  self.is_goal_reached_func = var_2;
   self.achievement_completed = 0;
 }
 
-update_achievement_arcade(param_00, param_01, param_02) {
-  if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress, param_01)) {
-    param_00 update_achievement_braindead(param_00, 1, param_02);
+update_achievement_arcade(var_0, var_1, var_2) {
+  if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress, var_1)) {
+    var_0 update_achievement_braindead(var_0, 1, var_2);
     return;
   }
 
-  level.arcade_games_progress = scripts\engine\utility::array_remove(level.arcade_games_progress, param_01);
-  foreach(param_00 in level.players) {
-    param_00 update_achievement("INSERT_COIN", 1);
+  level.arcade_games_progress = scripts\engine\utility::array_remove(level.arcade_games_progress, var_1);
+  foreach(var_0 in level.players) {
+    var_0 update_achievement("INSERT_COIN", 1);
   }
 
-  param_00 update_achievement_braindead(param_00, 1, param_02);
+  var_0 update_achievement_braindead(var_0, 1, var_2);
 }
 
-update_achievement_braindead(param_00, param_01, param_02) {
-  if(!isDefined(param_00.number_of_games_played)) {
-    param_00.number_of_games_played = 1;
+update_achievement_braindead(var_0, var_1, var_2) {
+  if(!isDefined(var_0.number_of_games_played)) {
+    var_0.number_of_games_played = 1;
   } else {
-    param_00.number_of_games_played++;
+    var_0.number_of_games_played++;
   }
 
-  if(param_00.number_of_games_played >= 30 && param_02 >= 10) {
-    param_00 update_achievement("BRAIN_DEAD", 30);
+  if(var_0.number_of_games_played >= 30 && var_2 >= 10) {
+    var_0 update_achievement("BRAIN_DEAD", 30);
   }
 }
 
-default_should_update(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+default_should_update(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   return 1;
 }
 
-update_progress(param_00) {
-  self.progress = self.progress + param_00;
+update_progress(var_0) {
+  self.progress = self.progress + var_0;
 }
 
 at_least_goal() {
@@ -155,11 +155,11 @@ mark_completed() {
   self.achievement_completed = 1;
 }
 
-is_valid_achievement(param_00) {
-  return isDefined(param_00);
+is_valid_achievement(var_0) {
+  return isDefined(var_0);
 }
 
-update_achievement(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
+update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
   if(scripts\cp\utility::is_codxp()) {
     return;
   }
@@ -168,7 +168,7 @@ update_achievement(param_00, param_01, param_02, param_03, param_04, param_05, p
     return;
   }
 
-  var_0C = self.achievement_list[param_00];
+  var_0C = self.achievement_list[var_0];
   if(!is_valid_achievement(var_0C)) {
     return;
   }
@@ -181,17 +181,17 @@ update_achievement(param_00, param_01, param_02, param_03, param_04, param_05, p
     return;
   }
 
-  if(var_0C[[var_0C.should_update_func]](param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B)) {
-    var_0C update_progress(param_01);
+  if(var_0C[[var_0C.should_update_func]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B)) {
+    var_0C update_progress(var_1);
     if(var_0C[[var_0C.is_goal_reached_func]]()) {
-      self giveachievement(param_00);
+      self giveachievement(var_0);
       var_0C mark_completed();
     }
   }
 }
 
-update_achievement_all_players(param_00, param_01) {
-  foreach(var_03 in level.players) {
-    var_03 update_achievement(param_00, param_01);
+update_achievement_all_players(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    var_3 update_achievement(var_0, var_1);
   }
 }

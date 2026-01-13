@@ -56,49 +56,49 @@ init() {
   thread scripts\mp\powers\blink_knife::blinkknifeinit();
 }
 
-func_D724(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  var_09 = spawnStruct();
-  var_09.var_130F3 = param_01;
-  var_09.weaponuse = param_02;
-  var_09.cooldowntime = param_04;
-  var_09.id = param_03;
-  var_09.maxcharges = param_05;
-  var_09.var_4E5A = param_06;
-  var_09.var_13058 = param_07;
-  var_09.var_12B2B = param_08;
-  if(var_09.var_12B2B == "interact") {
-    var_09.var_12B2B = "charges";
+func_D724(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = spawnStruct();
+  var_9.var_130F3 = var_1;
+  var_9.weaponuse = var_2;
+  var_9.cooldowntime = var_4;
+  var_9.id = var_3;
+  var_9.maxcharges = var_5;
+  var_9.var_4E5A = var_6;
+  var_9.var_13058 = var_7;
+  var_9.var_12B2B = var_8;
+  if(var_9.var_12B2B == "interact") {
+    var_9.var_12B2B = "charges";
   }
 
-  level.powers[param_00] = var_09;
+  level.powers[var_0] = var_9;
 }
 
 func_D77D() {
-  var_00 = 1;
+  var_0 = 1;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\powertable.csv", var_00, 0);
-    if(var_01 == "") {
+    var_1 = tablelookupbyrow("mp\powertable.csv", var_0, 0);
+    if(var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\powertable.csv", var_00, 1);
-    var_03 = tablelookupbyrow("mp\powertable.csv", var_00, 6);
-    var_04 = tablelookupbyrow("mp\powertable.csv", var_00, 7);
-    var_05 = tablelookupbyrow("mp\powertable.csv", var_00, 8);
-    var_06 = tablelookupbyrow("mp\powertable.csv", var_00, 9);
-    var_07 = tablelookupbyrow("mp\powertable.csv", var_00, 10);
-    var_08 = tablelookupbyrow("mp\powertable.csv", var_00, 11);
-    var_09 = tablelookupbyrow("mp\powertable.csv", var_00, 15);
-    func_D724(var_02, var_03, var_04, int(var_01), float(var_05), int(var_06), int(var_07), int(var_08), var_09);
-    if(isDefined(level.var_D7A4[var_04]) && var_04 != "<power_script_generic_weapon>") {
-      switch (var_04) {
+    var_2 = tablelookupbyrow("mp\powertable.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp\powertable.csv", var_0, 6);
+    var_4 = tablelookupbyrow("mp\powertable.csv", var_0, 7);
+    var_5 = tablelookupbyrow("mp\powertable.csv", var_0, 8);
+    var_6 = tablelookupbyrow("mp\powertable.csv", var_0, 9);
+    var_7 = tablelookupbyrow("mp\powertable.csv", var_0, 10);
+    var_8 = tablelookupbyrow("mp\powertable.csv", var_0, 11);
+    var_9 = tablelookupbyrow("mp\powertable.csv", var_0, 15);
+    func_D724(var_2, var_3, var_4, int(var_1), float(var_5), int(var_6), int(var_7), int(var_8), var_9);
+    if(isDefined(level.var_D7A4[var_4]) && var_4 != "<power_script_generic_weapon>") {
+      switch (var_4) {
         default:
           break;
       }
     }
 
-    level.var_D7A4[var_04] = var_02;
-    var_00++;
+    level.var_D7A4[var_4] = var_2;
+    var_0++;
   }
 }
 
@@ -107,279 +107,279 @@ func_D780() {
     level.var_D77F = [];
   }
 
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_01 = tablelookupbyrow("mp\powerpassivetable.csv", var_00, 0);
-    if(var_01 == "") {
+    var_1 = tablelookupbyrow("mp\powerpassivetable.csv", var_0, 0);
+    if(var_1 == "") {
       break;
     }
 
-    var_02 = tablelookupbyrow("mp\powerpassivetable.csv", var_00, 1);
-    var_03 = tablelookupbyrow("mp\powerpassivetable.csv", var_00, 2);
-    var_04 = tablelookupbyrow("mp\powerpassivetable.csv", var_00, 3);
-    var_05 = spawnStruct();
-    if(var_04 != "") {
-      var_05.var_23B1 = var_04;
-      level.var_D7A4[var_04] = var_02;
+    var_2 = tablelookupbyrow("mp\powerpassivetable.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp\powerpassivetable.csv", var_0, 2);
+    var_4 = tablelookupbyrow("mp\powerpassivetable.csv", var_0, 3);
+    var_5 = spawnStruct();
+    if(var_4 != "") {
+      var_5.var_23B1 = var_4;
+      level.var_D7A4[var_4] = var_2;
     }
 
-    if(!isDefined(level.var_D77F[var_02])) {
-      level.var_D77F[var_02] = [];
+    if(!isDefined(level.var_D77F[var_2])) {
+      level.var_D77F[var_2] = [];
     }
 
-    var_06 = level.var_D77F[var_02];
-    if(!isDefined(var_06[var_03])) {
-      var_06[var_03] = var_05;
-      level.var_D77F[var_02] = var_06;
+    var_6 = level.var_D77F[var_2];
+    if(!isDefined(var_6[var_3])) {
+      var_6[var_3] = var_5;
+      level.var_D77F[var_2] = var_6;
     }
 
-    var_00++;
+    var_0++;
   }
 }
 
-_meth_8091(param_00, param_01) {
-  if(!isDefined(level.var_D77F[param_00])) {
+_meth_8091(var_0, var_1) {
+  if(!isDefined(level.var_D77F[var_0])) {
     return undefined;
   }
 
-  var_02 = level.var_D77F[param_00];
-  if(!isDefined(var_02[param_01])) {
+  var_2 = level.var_D77F[var_0];
+  if(!isDefined(var_2[var_1])) {
     return undefined;
   }
 
-  return var_02[param_01];
+  return var_2[var_1];
 }
 
-_meth_8090(param_00) {
-  if(!isDefined(self.powers[param_00])) {
+_meth_8090(var_0) {
+  if(!isDefined(self.powers[var_0])) {
     return undefined;
   }
 
-  var_01 = self.powers[param_00];
-  var_02 = getdvar("scr_debug_power_passive");
-  if(isDefined(var_02)) {
-    var_03 = _meth_8091(param_00, var_02);
-    if(isDefined(var_03)) {
-      if(isDefined(var_03.var_23B1)) {
-        return var_03.var_23B1;
+  var_1 = self.powers[var_0];
+  var_2 = getdvar("scr_debug_power_passive");
+  if(isDefined(var_2)) {
+    var_3 = _meth_8091(var_0, var_2);
+    if(isDefined(var_3)) {
+      if(isDefined(var_3.var_23B1)) {
+        return var_3.var_23B1;
       }
     }
   }
 
-  foreach(var_05 in var_01.passives) {
-    var_03 = _meth_8091(param_00, var_05);
-    if(!isDefined(var_03)) {
+  foreach(var_5 in var_1.passives) {
+    var_3 = _meth_8091(var_0, var_5);
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(isDefined(var_03.var_23B1)) {
-      return var_03.var_23B1;
+    if(isDefined(var_3.var_23B1)) {
+      return var_3.var_23B1;
     }
   }
 
   return undefined;
 }
 
-powersetupfunctions(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  var_07 = level.powers[param_00];
-  if(!isDefined(var_07)) {
-    scripts\engine\utility::error("No configuration data for " + param_00 + " found! Is it in powertable.csv? Or make sure powerSetupFunctions is called after the table is initialized.");
+powersetupfunctions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = level.powers[var_0];
+  if(!isDefined(var_7)) {
+    scripts\engine\utility::error("No configuration data for " + var_0 + " found! Is it in powertable.csv? Or make sure powerSetupFunctions is called after the table is initialized.");
   }
 
-  level.var_D786[param_00] = param_01;
-  level.var_D79B[param_00] = param_02;
-  if(isDefined(param_03)) {
-    var_07.usefunc = param_03;
+  level.var_D786[var_0] = var_1;
+  level.var_D79B[var_0] = var_2;
+  if(isDefined(var_3)) {
+    var_7.usefunc = var_3;
   }
 
-  if(isDefined(param_04)) {
-    var_07.var_12ED9 = param_04;
+  if(isDefined(var_4)) {
+    var_7.var_12ED9 = var_4;
   }
 
-  if(isDefined(param_05)) {
-    var_07.usednotify = param_05;
+  if(isDefined(var_5)) {
+    var_7.usednotify = var_5;
   }
 
-  if(isDefined(param_06)) {
-    var_07.var_9A90 = param_06;
+  if(isDefined(var_6)) {
+    var_7.var_9A90 = var_6;
   }
 }
 
-func_D750(param_00, param_01) {
-  var_02 = getcurrentequipment(param_00);
-  var_03 = self.powers[var_02];
-  var_04 = level.powers[var_02];
-  var_05 = var_03.var_91B1;
-  var_06 = var_03.charges;
-  if(isDefined(var_05) && var_05 == param_01) {
+func_D750(var_0, var_1) {
+  var_2 = getcurrentequipment(var_0);
+  var_3 = self.powers[var_2];
+  var_4 = level.powers[var_2];
+  var_5 = var_3.var_91B1;
+  var_6 = var_3.charges;
+  if(isDefined(var_5) && var_5 == var_1) {
     return;
   }
 
-  if(isDefined(var_05)) {
-    func_D75E(param_00);
+  if(isDefined(var_5)) {
+    func_D75E(var_0);
   }
 
-  switch (param_01) {
+  switch (var_1) {
     case 0:
-      scripts\cp\zombies\_powerup_ability::powershud_beginpowerdrain(param_00);
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowermeter(param_00, 1);
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(param_00, var_06);
-      thread func_D76E(var_02);
+      scripts\cp\zombies\_powerup_ability::powershud_beginpowerdrain(var_0);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowermeter(var_0, 1);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(var_0, var_6);
+      thread func_D76E(var_2);
       break;
 
     case 1:
-      scripts\cp\zombies\_powerup_ability::powershud_beginpowercooldown(param_00, 0);
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(param_00, var_06);
-      thread func_D76D(var_02);
+      scripts\cp\zombies\_powerup_ability::powershud_beginpowercooldown(var_0, 0);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(var_0, var_6);
+      thread func_D76D(var_2);
       break;
 
     case 2:
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowerdisabled(param_00, 0);
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowermeter(param_00, 1);
-      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(param_00, var_06);
-      thread func_D76C(var_02);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowerdisabled(var_0, 0);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowermeter(var_0, 1);
+      scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(var_0, var_6);
+      thread func_D76C(var_2);
       break;
 
     case 3:
       break;
   }
 
-  var_03.var_91B1 = param_01;
-  thread func_D75F(param_00);
+  var_3.var_91B1 = var_1;
+  thread func_D75F(var_0);
 }
 
-func_D75E(param_00) {
-  var_01 = getcurrentequipment(param_00);
-  if(!isDefined(var_01)) {
+func_D75E(var_0) {
+  var_1 = getcurrentequipment(var_0);
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var_02 = self.powers[var_01];
-  var_03 = var_02.var_91B1;
-  if(!isDefined(var_03)) {
+  var_2 = self.powers[var_1];
+  var_3 = var_2.var_91B1;
+  if(!isDefined(var_3)) {
     return;
   }
 
-  switch (var_03) {
+  switch (var_3) {
     case "unavailable":
       break;
 
     case 0:
-      scripts\cp\zombies\_powerup_ability::powershud_endpowerdrain(param_00);
+      scripts\cp\zombies\_powerup_ability::powershud_endpowerdrain(var_0);
       break;
 
     case 2:
       break;
 
     case 1:
-      scripts\cp\zombies\_powerup_ability::powershud_finishpowercooldown(param_00, 0);
+      scripts\cp\zombies\_powerup_ability::powershud_finishpowercooldown(var_0, 0);
       break;
   }
 
-  var_02.var_91B1 = undefined;
+  var_2.var_91B1 = undefined;
 }
 
-func_D75F(param_00) {
+func_D75F(var_0) {
   self endon("disconnect");
-  self notify("power_unsetHudStateOnRemoved_" + param_00);
-  self endon("power_unsetHudStateOnRemoved_" + param_00);
-  var_01 = getcurrentequipment(param_00);
-  self waittill("power_removed_" + var_01);
-  func_D75E(param_00);
+  self notify("power_unsetHudStateOnRemoved_" + var_0);
+  self endon("power_unsetHudStateOnRemoved_" + var_0);
+  var_1 = getcurrentequipment(var_0);
+  self waittill("power_removed_" + var_1);
+  func_D75E(var_0);
 }
 
-givepower(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = 2;
+givepower(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 2;
   if(!isDefined(self.powers)) {
     self.powers = [];
   }
 
-  if(param_00 == "none") {
+  if(var_0 == "none") {
     return;
   }
 
-  if(param_01 == "scripted") {
-    var_05++;
+  if(var_1 == "scripted") {
+    var_5++;
   }
 
-  func_D725(param_00, param_01, param_04);
-  var_06 = self.powers[param_00];
-  var_07 = level.powers[param_00];
-  scripts\cp\zombies\_powerup_ability::powershud_updatepowermaxcharges(var_06.slot, var_06.maxcharges);
-  if(isDefined(param_03)) {
-    var_06.passives = param_03;
+  func_D725(var_0, var_1, var_4);
+  var_6 = self.powers[var_0];
+  var_7 = level.powers[var_0];
+  scripts\cp\zombies\_powerup_ability::powershud_updatepowermaxcharges(var_6.slot, var_6.maxcharges);
+  if(isDefined(var_3)) {
+    var_6.passives = var_3;
   }
 
   var_0B = 0;
-  if(isDefined(self.var_D76F) && isDefined(self.var_D76F[param_00])) {
-    var_0C = self.var_D76F[param_00];
+  if(isDefined(self.var_D76F) && isDefined(self.var_D76F[var_0])) {
+    var_0C = self.var_D76F[var_0];
     var_0D = func_D720(var_0C);
     if(var_0D > 0) {
-      var_0E = var_06.charges * var_07.cooldowntime;
-      var_06.charges = int(var_0E - var_0D / var_07.cooldowntime);
-      if(var_06.charges < 0) {
-        var_06.charges = 0;
+      var_0E = var_6.charges * var_7.cooldowntime;
+      var_6.charges = int(var_0E - var_0D / var_7.cooldowntime);
+      if(var_6.charges < 0) {
+        var_6.charges = 0;
       }
 
       var_0B = var_0D;
-      while(var_0B > var_07.cooldowntime) {
-        var_0B = var_0B - var_07.cooldowntime;
+      while(var_0B > var_7.cooldowntime) {
+        var_0B = var_0B - var_7.cooldowntime;
       }
     }
   }
 
-  if(param_01 == "scripted") {
+  if(var_1 == "scripted") {
     return;
   }
 
-  var_06.weaponuse = undefined;
-  if(var_07.weaponuse == "<power_script_generic_weapon>") {
-    var_06.weaponuse = scripts\engine\utility::ter_op(param_01 == "primary", "power_script_generic_primary_mp", "power_script_generic_secondary_mp");
+  var_6.weaponuse = undefined;
+  if(var_7.weaponuse == "<power_script_generic_weapon>") {
+    var_6.weaponuse = scripts\engine\utility::ter_op(var_1 == "primary", "power_script_generic_primary_mp", "power_script_generic_secondary_mp");
   } else {
-    var_06.weaponuse = var_07.weaponuse;
+    var_6.weaponuse = var_7.weaponuse;
   }
 
-  var_0F = _meth_8090(param_00);
-  var_10 = scripts\engine\utility::ter_op(isDefined(var_0F), var_0F, var_06.weaponuse);
-  var_06.weaponuse = var_10;
+  var_0F = _meth_8090(var_0);
+  var_10 = scripts\engine\utility::ter_op(isDefined(var_0F), var_0F, var_6.weaponuse);
+  var_6.weaponuse = var_10;
   scripts\mp\utility::_giveweapon(var_10, 0);
-  self setweaponammoclip(var_10, var_06.charges);
-  if(var_06.slot == "primary") {
+  self setweaponammoclip(var_10, var_6.charges);
+  if(var_6.slot == "primary") {
     self assignweaponoffhandprimary(var_10);
     self.powerprimarygrenade = var_10;
-  } else if(var_06.slot == "secondary") {
+  } else if(var_6.slot == "secondary") {
     self assignweaponoffhandsecondary(var_10);
     self.powersecondarygrenade = var_10;
   }
 
-  if(isDefined(level.var_D786[param_00])) {
-    self[[level.var_D786[param_00]]](param_00);
+  if(isDefined(level.var_D786[var_0])) {
+    self[[level.var_D786[var_0]]](var_0);
   }
 
-  thread func_D73D(param_00);
-  thread func_B2F0(var_07, param_00, var_06.slot, var_07.cooldowntime, var_07.var_12ED9, var_07.usednotify, var_10, var_0B, param_02);
+  thread func_D73D(var_0);
+  thread func_B2F0(var_7, var_0, var_6.slot, var_7.cooldowntime, var_7.var_12ED9, var_7.usednotify, var_10, var_0B, var_2);
 }
 
-removepower(param_00) {
-  if(isDefined(level.var_D79B[param_00])) {
-    self[[level.var_D79B[param_00]]]();
+removepower(var_0) {
+  if(isDefined(level.var_D79B[var_0])) {
+    self[[level.var_D79B[var_0]]]();
   }
 
-  if(isDefined(self.powers[param_00].weaponuse)) {
-    scripts\mp\utility::_takeweapon(self.powers[param_00].weaponuse);
+  if(isDefined(self.powers[var_0].weaponuse)) {
+    scripts\mp\utility::_takeweapon(self.powers[var_0].weaponuse);
   }
 
-  if(self.powers[param_00].slot == "primary") {
+  if(self.powers[var_0].slot == "primary") {
     self _meth_844D();
     self.powerprimarygrenade = undefined;
-  } else if(self.powers[param_00].slot == "secondary") {
+  } else if(self.powers[var_0].slot == "secondary") {
     self gonevo();
     self.powersecondarygrenade = undefined;
   }
 
-  self notify("power_removed_" + param_00);
-  scripts\cp\zombies\_powerup_ability::powershud_clearpower(self.powers[param_00].slot);
-  self.powers[param_00] = undefined;
+  self notify("power_removed_" + var_0);
+  scripts\cp\zombies\_powerup_ability::powershud_clearpower(self.powers[var_0].slot);
+  self.powers[var_0] = undefined;
 }
 
 func_110C2() {
@@ -390,28 +390,28 @@ func_110C2() {
       func_4042();
     }
 
-    foreach(var_03, var_01 in self.powers) {
+    foreach(var_3, var_1 in self.powers) {
       if(isDefined(level.var_C81F) && level.var_C81F == 1) {
         continue;
       } else if(isDefined(level.var_C81F) && level.var_C81F != 0) {
-        if(level.powers[var_03].var_4E5A == 1) {
+        if(level.powers[var_3].var_4E5A == 1) {
           continue;
         }
       } else if(!isDefined(level.var_C81F)) {
-        if(level.powers[var_03].var_4E5A == 1) {
+        if(level.powers[var_3].var_4E5A == 1) {
           continue;
         }
       }
 
-      if(var_01.var_4619 > 0) {
-        var_02 = spawnStruct();
-        var_02.power = var_03;
-        var_02.var_4619 = var_01.var_4619;
-        var_02.charges = var_01.charges;
-        var_02.maxcharges = var_01.maxcharges;
-        var_02.var_4E5A = var_01.var_4E5A;
-        var_02.var_11931 = gettime();
-        self.var_D76F[var_03] = var_02;
+      if(var_1.var_4619 > 0) {
+        var_2 = spawnStruct();
+        var_2.power = var_3;
+        var_2.var_4619 = var_1.var_4619;
+        var_2.charges = var_1.charges;
+        var_2.maxcharges = var_1.maxcharges;
+        var_2.var_4E5A = var_1.var_4E5A;
+        var_2.var_11931 = gettime();
+        self.var_D76F[var_3] = var_2;
       }
     }
   }
@@ -419,42 +419,42 @@ func_110C2() {
 
 func_4042() {
   if(isDefined(self.var_D76F) && self.var_D76F.size > 0) {
-    var_00 = self.var_D76F;
-    foreach(var_03, var_02 in var_00) {
-      if(func_D720(var_02) == 0) {
-        self.var_D76F[var_03] = undefined;
+    var_0 = self.var_D76F;
+    foreach(var_3, var_2 in var_0) {
+      if(func_D720(var_2) == 0) {
+        self.var_D76F[var_3] = undefined;
       }
     }
   }
 }
 
-func_D720(param_00) {
-  var_01 = level.powers[param_00.power];
-  var_02 = param_00.maxcharges - param_00.charges * var_01.cooldowntime - var_01.cooldowntime - param_00.var_4619;
-  var_03 = gettime() - param_00.var_11931 / 1000;
-  return max(0, var_02 - var_03);
+func_D720(var_0) {
+  var_1 = level.powers[var_0.power];
+  var_2 = var_0.maxcharges - var_0.charges * var_1.cooldowntime - var_1.cooldowntime - var_0.var_4619;
+  var_3 = gettime() - var_0.var_11931 / 1000;
+  return max(0, var_2 - var_3);
 }
 
 clearpowers() {
   self notify("powers_cleanUp");
   if(isDefined(self.powers)) {
-    var_00 = self.powers;
-    foreach(var_03, var_02 in var_00) {
-      removepower(var_03);
+    var_0 = self.powers;
+    foreach(var_3, var_2 in var_0) {
+      removepower(var_3);
     }
 
     self.powers = [];
   }
 }
 
-getcurrentequipment(param_00) {
+getcurrentequipment(var_0) {
   if(!isDefined(self.powers)) {
     return undefined;
   }
 
-  foreach(var_03, var_02 in self.powers) {
-    if(var_02.slot == param_00) {
-      return var_03;
+  foreach(var_3, var_2 in self.powers) {
+    if(var_2.slot == var_0) {
+      return var_3;
     }
   }
 
@@ -466,354 +466,354 @@ func_E265() {
     return;
   }
 
-  foreach(var_04, var_01 in self.powers) {
-    var_02 = var_01.charges;
-    var_03 = var_01.maxcharges;
-    if(var_02 != var_03) {
-      self.powers[var_04].charges = self.powers[var_04].maxcharges;
-      func_D765(var_04);
-      self notify("power_charges_adjusted_" + var_04, self.powers[var_04].charges);
+  foreach(var_4, var_1 in self.powers) {
+    var_2 = var_1.charges;
+    var_3 = var_1.maxcharges;
+    if(var_2 != var_3) {
+      self.powers[var_4].charges = self.powers[var_4].maxcharges;
+      func_D765(var_4);
+      self notify("power_charges_adjusted_" + var_4, self.powers[var_4].charges);
     }
   }
 }
 
-func_1813(param_00) {
+func_1813(var_0) {
   if(!isDefined(self) || !isDefined(self.powers)) {
     return;
   }
 
-  foreach(var_07, var_02 in self.powers) {
-    var_03 = var_02.charges;
-    var_04 = var_02.maxcharges;
-    var_05 = var_03 + param_00;
-    if(var_05 > var_04) {
-      var_05 = var_04;
+  foreach(var_7, var_2 in self.powers) {
+    var_3 = var_2.charges;
+    var_4 = var_2.maxcharges;
+    var_5 = var_3 + var_0;
+    if(var_5 > var_4) {
+      var_5 = var_4;
     }
 
-    var_06 = var_05 - var_03;
-    if(var_06 > 0) {
-      self.powers[var_07].charges = var_05;
-      func_D765(var_07);
-      self notify("power_charges_adjusted_" + var_07, self.powers[var_07].charges);
+    var_6 = var_5 - var_3;
+    if(var_6 > 0) {
+      self.powers[var_7].charges = var_5;
+      func_D765(var_7);
+      self notify("power_charges_adjusted_" + var_7, self.powers[var_7].charges);
     }
   }
 }
 
-func_D735(param_00) {
-  return scripts\engine\utility::ter_op(self.powers[param_00].slot == "primary", "+frag", "+smoke");
+func_D735(var_0) {
+  return scripts\engine\utility::ter_op(self.powers[var_0].slot == "primary", "+frag", "+smoke");
 }
 
-func_D734(param_00) {
-  return self.powers[param_00].charges;
+func_D734(var_0) {
+  return self.powers[var_0].charges;
 }
 
-func_D736(param_00) {
-  return self.powers[param_00].maxcharges;
+func_D736(var_0) {
+  return self.powers[var_0].maxcharges;
 }
 
-func_D737(param_00) {
-  return level.var_D7A4[param_00];
+func_D737(var_0) {
+  return level.var_D7A4[var_0];
 }
 
-func_D738(param_00) {
-  if(!isDefined(param_00) || !isDefined(level.powers[param_00]) || param_00 == "none") {
+func_D738(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.powers[var_0]) || var_0 == "none") {
     return 0;
   }
 
-  return level.powers[param_00].id;
+  return level.powers[var_0].id;
 }
 
-func_D725(param_00, param_01, param_02) {
-  var_03 = level.powers[param_00];
-  var_04 = spawnStruct();
-  var_04.slot = param_01;
-  var_04.charges = var_03.maxcharges;
-  if(scripts\mp\utility::istrue(param_02)) {
-    var_04.charges++;
+func_D725(var_0, var_1, var_2) {
+  var_3 = level.powers[var_0];
+  var_4 = spawnStruct();
+  var_4.slot = var_1;
+  var_4.charges = var_3.maxcharges;
+  if(scripts\mp\utility::istrue(var_2)) {
+    var_4.charges++;
   }
 
-  var_04.maxcharges = var_04.charges;
-  var_04.var_93DD = 0;
-  var_04.var_19 = 0;
-  var_04.var_4619 = 0;
-  var_04.cooldownratemod = 1;
-  var_04.passives = [];
-  self.powers[param_00] = var_04;
+  var_4.maxcharges = var_4.charges;
+  var_4.var_93DD = 0;
+  var_4.var_19 = 0;
+  var_4.var_4619 = 0;
+  var_4.cooldownratemod = 1;
+  var_4.passives = [];
+  self.powers[var_0] = var_4;
 }
 
-func_B2F0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+func_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("death");
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_01);
-  if((isDefined(param_08) && param_08) || param_01 == "power_copycatGrenade") {
+  self endon("power_removed_" + var_1);
+  if((isDefined(var_8) && var_8) || var_1 == "power_copycatGrenade") {
     self endon("start_copycat");
   }
 
-  scripts\cp\zombies\_powerup_ability::powershud_assignpower(param_02, int(param_00.id), 1, int(self.powers[param_01].charges));
+  scripts\cp\zombies\_powerup_ability::powershud_assignpower(var_2, int(var_0.id), 1, int(self.powers[var_1].charges));
   scripts\mp\utility::gameflagwait("prematch_done");
-  param_03 = scripts\mp\powerloot::func_7FBF(param_01, param_03);
-  func_D750(param_02, 2);
-  scripts\cp\zombies\_powerup_ability::powershud_updatepoweroffcooldown(param_02, 0);
-  self notify("power_available", param_01, param_02);
-  thread scripts\mp\weapons::func_13AB5(self, param_01, param_02);
+  var_3 = scripts\mp\powerloot::func_7FBF(var_1, var_3);
+  func_D750(var_2, 2);
+  scripts\cp\zombies\_powerup_ability::powershud_updatepoweroffcooldown(var_2, 0);
+  self notify("power_available", var_1, var_2);
+  thread scripts\mp\weapons::func_13AB5(self, var_1, var_2);
   for(;;) {
-    func_D765(param_01);
-    var_09 = param_06 + "_success";
-    thread func_13A0E(param_03, param_01, var_09, param_02);
-    var_0A = scripts\engine\utility::ter_op(param_00.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
-    if(param_00.var_130F3 == "weapon_hold") {
+    func_D765(var_1);
+    var_9 = var_6 + "_success";
+    thread func_13A0E(var_3, var_1, var_9, var_2);
+    var_0A = scripts\engine\utility::ter_op(var_0.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
+    if(var_0.var_130F3 == "weapon_hold") {
       self waittill(var_0A, var_0B);
-      if(var_0B != param_06) {
+      if(var_0B != var_6) {
         continue;
       }
-    } else if(!func_D76B(param_06)) {
+    } else if(!func_D76B(var_6)) {
       continue;
     }
 
-    self notify("power_activated", param_01, param_02);
-    scripts\mp\utility::printgameaction("power used - " + param_01, self);
-    self notify(var_09);
+    self notify("power_activated", var_1, var_2);
+    scripts\mp\utility::printgameaction("power used - " + var_1, self);
+    self notify(var_9);
     var_0C = undefined;
-    if(isDefined(param_00.usefunc)) {
-      var_0C = self thread[[param_00.usefunc]]();
+    if(isDefined(var_0.usefunc)) {
+      var_0C = self thread[[var_0.usefunc]]();
       if(isDefined(var_0C) && var_0C == 0) {
         continue;
       }
     }
 
-    if(isDefined(param_05)) {
-      self waittill(param_05, var_0C);
+    if(isDefined(var_5)) {
+      self waittill(var_5, var_0C);
       if(isDefined(var_0C) && var_0C == 0) {
         continue;
       }
     }
 
     scripts\mp\gamelogic::sethasdonecombat(self, 1);
-    scripts\mp\analyticslog::logevent_powerused(param_01, "unused");
-    power_adjustcharges(-1, self.powers[param_01].slot);
-    combatrecordpoweruse(param_01);
-    if(isDefined(param_04) && level.powers[param_01].var_12B2B == "drain" && !scripts\mp\utility::istrue(self.powers[param_01].var_940B)) {
-      func_D72B(param_01);
+    scripts\mp\analyticslog::logevent_powerused(var_1, "unused");
+    power_adjustcharges(-1, self.powers[var_1].slot);
+    combatrecordpoweruse(var_1);
+    if(isDefined(var_4) && level.powers[var_1].var_12B2B == "drain" && !scripts\mp\utility::istrue(self.powers[var_1].var_940B)) {
+      func_D72B(var_1);
     }
 
-    thread func_D72A(param_01, param_03, param_08, param_02);
+    thread func_D72A(var_1, var_3, var_8, var_2);
   }
 }
 
-func_D73F(param_00) {
+func_D73F(var_0) {
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = level.powers[param_00];
+  self endon("power_removed_" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = level.powers[var_0];
   for(;;) {
-    self waittill("scavenged_ammo", var_03);
-    if(var_01.weaponuse == var_03) {
-      var_04 = var_02.cooldowntime;
-      func_D74F(param_00, var_04);
+    self waittill("scavenged_ammo", var_3);
+    if(var_1.weaponuse == var_3) {
+      var_4 = var_2.cooldowntime;
+      func_D74F(var_0, var_4);
     }
   }
 }
 
-func_D74C(param_00) {
-  if(hasequipment(param_00)) {
-    var_01 = self.powers[param_00];
-    func_D71B(1, param_00);
-    func_D765(param_00);
-    var_02 = var_01.var_91B1;
-    if(isDefined(var_02) && var_02 == 1) {
-      func_D750(var_01.slot, 2);
+func_D74C(var_0) {
+  if(hasequipment(var_0)) {
+    var_1 = self.powers[var_0];
+    func_D71B(1, var_0);
+    func_D765(var_0);
+    var_2 = var_1.var_91B1;
+    if(isDefined(var_2) && var_2 == 1) {
+      func_D750(var_1.slot, 2);
     }
   }
 }
 
-func_D73D(param_00) {
+func_D73D(var_0) {
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = var_01.weaponuse;
-  var_03 = var_01.slot;
+  self endon("power_removed_" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = var_1.weaponuse;
+  var_3 = var_1.slot;
   for(;;) {
-    self waittill("scavenged_ammo", var_04);
-    if(var_04 == var_02) {
-      func_D74C(param_00);
+    self waittill("scavenged_ammo", var_4);
+    if(var_4 == var_2) {
+      func_D74C(var_0);
     }
   }
 }
 
-func_EBD4(param_00) {
-  param_00 func_D74C("power_throwingKnife");
-  param_00 func_D74C("power_blinkKnife");
-  param_00 func_D74C("power_bioSpike");
+func_EBD4(var_0) {
+  var_0 func_D74C("power_throwingKnife");
+  var_0 func_D74C("power_blinkKnife");
+  var_0 func_D74C("power_bioSpike");
 }
 
-func_D74F(param_00, param_01) {
-  var_02 = self.powers[param_00];
-  var_03 = level.powers[param_00];
-  var_02.var_4617 = min(param_01, var_03.cooldowntime);
-  var_02.var_4619 = var_03.cooldowntime - param_01;
-  if(var_02.var_4619 <= 0) {
-    self notify("finish_power_cooldown_" + param_00);
+func_D74F(var_0, var_1) {
+  var_2 = self.powers[var_0];
+  var_3 = level.powers[var_0];
+  var_2.var_4617 = min(var_1, var_3.cooldowntime);
+  var_2.var_4619 = var_3.cooldowntime - var_1;
+  if(var_2.var_4619 <= 0) {
+    self notify("finish_power_cooldown_" + var_0);
   }
 }
 
-func_D752(param_00, param_01) {
-  if(param_01 scripts\mp\utility::_hasperk("specialty_powercell")) {
+func_D752(var_0, var_1) {
+  if(var_1 scripts\mp\utility::_hasperk("specialty_powercell")) {
     return 1;
   }
 
-  if(level.powers[param_00].var_13058) {
+  if(level.powers[var_0].var_13058) {
     return 1;
   }
 
   return 0;
 }
 
-func_D72A(param_00, param_01, param_02, param_03) {
+func_D72A(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_00);
-  self endon("power_cooldown_ended" + param_00);
-  if((isDefined(param_02) && param_02) || param_00 == "power_copycatGrenade") {
+  self endon("power_removed_" + var_0);
+  self endon("power_cooldown_ended" + var_0);
+  if((isDefined(var_2) && var_2) || var_0 == "power_copycatGrenade") {
     self endon("start_copycat");
   }
 
-  self notify("power_cooldown_begin_" + param_00);
-  self endon("power_cooldown_begin_" + param_00);
-  var_04 = level.powers[param_00];
-  var_05 = self.powers[param_00];
-  param_03 = var_05.slot;
-  var_06 = param_00 + "_cooldown_update";
-  var_05.var_93DD = 1;
-  if(!isDefined(var_05.var_461C)) {
-    var_05.var_461C = 0;
+  self notify("power_cooldown_begin_" + var_0);
+  self endon("power_cooldown_begin_" + var_0);
+  var_4 = level.powers[var_0];
+  var_5 = self.powers[var_0];
+  var_3 = var_5.slot;
+  var_6 = var_0 + "_cooldown_update";
+  var_5.var_93DD = 1;
+  if(!isDefined(var_5.var_461C)) {
+    var_5.var_461C = 0;
   }
 
-  var_05.var_461C++;
-  if(!isDefined(var_05.var_4617)) {
-    var_05.var_4617 = 0;
+  var_5.var_461C++;
+  if(!isDefined(var_5.var_4617)) {
+    var_5.var_4617 = 0;
   }
 
-  if(!isDefined(var_05.var_4619)) {
-    var_05.var_4619 = 0;
+  if(!isDefined(var_5.var_4619)) {
+    var_5.var_4619 = 0;
   }
 
-  var_05.var_4619 = var_05.var_4619 + param_01;
-  var_07 = var_05.var_91B1;
-  if(isDefined(var_07) && var_07 != 0 && var_05.charges == 0) {
-    func_D750(param_03, 1);
-    self notify("power_unavailable", param_00, param_03);
+  var_5.var_4619 = var_5.var_4619 + var_1;
+  var_7 = var_5.var_91B1;
+  if(isDefined(var_7) && var_7 != 0 && var_5.charges == 0) {
+    func_D750(var_3, 1);
+    self notify("power_unavailable", var_0, var_3);
   }
 
-  while(var_05.charges < var_05.maxcharges) {
-    if(func_D752(param_00, self)) {
+  while(var_5.charges < var_5.maxcharges) {
+    if(func_D752(var_0, self)) {
       wait(0.1);
     } else {
-      self waittill("power_charges_adjusted_" + param_00);
+      self waittill("power_charges_adjusted_" + var_0);
     }
 
-    if(var_05.var_4617 > param_01) {
-      power_adjustcharges(1, param_03);
-      func_D765(param_00);
-      if(var_05.charges == var_05.maxcharges) {
-        thread func_D730(param_00, param_02);
+    if(var_5.var_4617 > var_1) {
+      power_adjustcharges(1, var_3);
+      func_D765(var_0);
+      if(var_5.charges == var_5.maxcharges) {
+        thread func_D730(var_0, var_2);
       }
 
-      var_05.var_4617 = var_05.var_4617 - param_01;
-      var_05.var_4619 = var_05.var_4619 - param_01;
-      var_05.var_461C--;
-      if(isDefined(var_07) && var_07 != 0) {
-        func_D750(param_03, 2);
+      var_5.var_4617 = var_5.var_4617 - var_1;
+      var_5.var_4619 = var_5.var_4619 - var_1;
+      var_5.var_461C--;
+      if(isDefined(var_7) && var_7 != 0) {
+        func_D750(var_3, 2);
       }
     } else {
-      var_05.var_4617 = var_05.var_4617 + 0.1;
-      var_05.var_4619 = var_05.var_4619 - 0.1;
+      var_5.var_4617 = var_5.var_4617 + 0.1;
+      var_5.var_4619 = var_5.var_4619 - 0.1;
     }
 
-    var_08 = min(1, var_05.var_4617 / param_01);
-    self notify(var_06, var_08);
+    var_8 = min(1, var_5.var_4617 / var_1);
+    self notify(var_6, var_8);
   }
 
-  thread func_D730(param_00, param_02);
+  thread func_D730(var_0, var_2);
 }
 
-func_D730(param_00, param_01) {
-  self notify("power_cooldown_ended" + param_00);
-  var_02 = self.powers[param_00];
-  var_02.var_93DD = 0;
-  var_02.var_4617 = 0;
-  var_02.var_4619 = 0;
-  var_02.var_461C = 0;
-  if(isDefined(param_01) && param_01) {
+func_D730(var_0, var_1) {
+  self notify("power_cooldown_ended" + var_0);
+  var_2 = self.powers[var_0];
+  var_2.var_93DD = 0;
+  var_2.var_4617 = 0;
+  var_2.var_4619 = 0;
+  var_2.var_461C = 0;
+  if(isDefined(var_1) && var_1) {
     self notify("copycat_reset");
   }
 
-  var_03 = var_02.var_91B1;
-  var_04 = var_02.slot;
-  if(var_03 == 0) {
+  var_3 = var_2.var_91B1;
+  var_4 = var_2.slot;
+  if(var_3 == 0) {
     return;
   }
 
-  func_D750(var_04, 2);
+  func_D750(var_4, 2);
 }
 
-func_D72B(param_00) {
+func_D72B(var_0) {
   self endon("death");
-  self endon("power_drain_ended_" + param_00);
-  self notify("power_cooldown_ended_" + param_00);
-  var_01 = level.powers[param_00];
-  var_02 = self.powers[param_00];
-  var_03 = var_01.var_12ED9;
-  var_04 = var_01.var_9A90;
-  var_05 = var_02.slot;
-  var_02.var_940B = 1;
-  func_D727(param_00);
-  func_D750(var_05, 0);
-  if(isDefined(var_04)) {
-    thread func_D732(param_00, var_05, var_04);
+  self endon("power_drain_ended_" + var_0);
+  self notify("power_cooldown_ended_" + var_0);
+  var_1 = level.powers[var_0];
+  var_2 = self.powers[var_0];
+  var_3 = var_1.var_12ED9;
+  var_4 = var_1.var_9A90;
+  var_5 = var_2.slot;
+  var_2.var_940B = 1;
+  func_D727(var_0);
+  func_D750(var_5, 0);
+  if(isDefined(var_4)) {
+    thread func_D732(var_0, var_5, var_4);
   }
 
   for(;;) {
-    self waittill(var_03, var_06);
-    if(var_06 == 0) {
+    self waittill(var_3, var_6);
+    if(var_6 == 0) {
       break;
     }
   }
 
-  thread func_D731(param_00);
+  thread func_D731(var_0);
 }
 
-func_D732(param_00, param_01, param_02) {
+func_D732(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_00);
-  self endon("power_drain_ended_" + param_00);
-  self waittill(param_02);
-  thread func_D731(param_00);
+  self endon("power_removed_" + var_0);
+  self endon("power_drain_ended_" + var_0);
+  self waittill(var_2);
+  thread func_D731(var_0);
 }
 
-func_D731(param_00) {
-  self notify("power_drain_ended_" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = var_01.slot;
-  var_01.var_940B = 0;
-  func_D72D(param_00);
-  if(var_01.charges > 0) {
-    func_D750(var_02, 2);
+func_D731(var_0) {
+  self notify("power_drain_ended_" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = var_1.slot;
+  var_1.var_940B = 0;
+  func_D72D(var_0);
+  if(var_1.charges > 0) {
+    func_D750(var_2, 2);
     return;
   }
 
-  func_D750(var_02, 1);
+  func_D750(var_2, 1);
 }
 
 func_12D2C() {}
 
 func_130D5() {}
 
-func_F676(param_00) {
-  level.powers[param_00].var_4620 = "multi_use";
+func_F676(var_0) {
+  level.powers[var_0].var_4620 = "multi_use";
 }
 
 func_12C89() {}
@@ -822,7 +822,7 @@ func_13051() {
   scripts\mp\bulletstorm::func_10D76();
 }
 
-func_F6B1(param_00) {}
+func_F6B1(var_0) {}
 
 func_12C9F() {
   scripts\mp\equipment\dash::func_E0E9();
@@ -832,7 +832,7 @@ func_13072() {
   return scripts\mp\equipment\dash::func_4D90();
 }
 
-func_F7C8(param_00) {}
+func_F7C8(var_0) {}
 
 func_12CFB() {
   scripts\mp\equipment\optic_wave::func_E145();
@@ -842,7 +842,7 @@ func_130B4() {
   scripts\mp\equipment\optic_wave::func_C6AF();
 }
 
-func_F7E7(param_00) {}
+func_F7E7(var_0) {}
 
 func_12D0B() {
   scripts\mp\equipment\phase_split::func_CABB();
@@ -852,8 +852,8 @@ usephasesplit() {
   return scripts\mp\equipment\phase_split::func_CAC2();
 }
 
-func_F6EF(param_00) {
-  scripts\mp\equipment\exploding_drone::func_69D0(param_00);
+func_F6EF(var_0) {
+  scripts\mp\equipment\exploding_drone::func_69D0(var_0);
 }
 
 func_12CAF() {
@@ -862,7 +862,7 @@ func_12CAF() {
 
 func_13085() {}
 
-func_F7CC(param_00) {}
+func_F7CC(var_0) {}
 
 func_12CFD() {
   scripts\mp\equipment\overcharge::func_E14C();
@@ -872,7 +872,7 @@ useovercharge() {
   scripts\mp\equipment\overcharge::useovercharge();
 }
 
-func_F84A(param_00) {}
+func_F84A(var_0) {}
 
 func_12D30() {
   scripts\mp\equipment\smoke_wall::func_E16E();
@@ -882,9 +882,9 @@ func_130D7() {
   scripts\mp\equipment\smoke_wall::func_1037D();
 }
 
-func_F69C(param_00) {}
+func_F69C(var_0) {}
 
-unsetcomlink(param_00) {
+unsetcomlink(var_0) {
   scripts\mp\equipment\commlink::func_E0E0();
 }
 
@@ -892,7 +892,7 @@ func_13055() {
   scripts\mp\equipment\commlink::setturrettargetent();
 }
 
-func_F87F(param_00) {
+func_F87F(var_0) {
   scripts\mp\equipment\telereap::_meth_83B2();
 }
 
@@ -901,11 +901,11 @@ func_12D45() {
 }
 
 func_130E8() {
-  var_00 = scripts\mp\equipment\telereap::func_130E8();
-  return var_00;
+  var_0 = scripts\mp\equipment\telereap::func_130E8();
+  return var_0;
 }
 
-func_F844(param_00) {}
+func_F844(var_0) {}
 
 func_12D2B() {
   scripts\mp\phaseshift::func_E169();
@@ -915,7 +915,7 @@ func_130D4() {
   scripts\mp\phaseshift::func_D41C();
 }
 
-settransponder(param_00) {
+settransponder(var_0) {
   scripts\mp\equipment\transponder::func_F5D3();
 }
 
@@ -927,7 +927,7 @@ func_130F0() {
   scripts\mp\equipment\transponder::transponder_use();
 }
 
-func_F7EB(param_00) {
+func_F7EB(var_0) {
   scripts\mp\equipment\plasma_spear::giveplayeraccessory();
 }
 
@@ -935,8 +935,8 @@ func_12D0D() {
   scripts\mp\equipment\plasma_spear::func_E158();
 }
 
-setheadgear(param_00) {
-  level.powers[param_00].var_5FF3 = 30;
+setheadgear(var_0) {
+  level.powers[var_0].var_5FF3 = 30;
   level.var_8C74 = 0.8;
 }
 
@@ -946,8 +946,8 @@ func_1308F() {
   scripts\mp\equipment\headgear::func_E855();
 }
 
-func_F658(param_00) {
-  level.powers[param_00].var_5FF3 = 30;
+func_F658(var_0) {
+  level.powers[var_0].var_5FF3 = 30;
 }
 
 func_12C78() {}
@@ -956,7 +956,7 @@ func_13049() {
   scripts\mp\equipment\barrier::func_E83A();
 }
 
-func_F659(param_00) {}
+func_F659(var_0) {}
 
 func_12C79() {}
 
@@ -964,7 +964,7 @@ func_1304B() {
   scripts\mp\equipment\battery::func_E83B();
 }
 
-func_F7A5(param_00) {
+func_F7A5(var_0) {
   scripts\mp\equipment\mortar_mount::func_BB90();
 }
 
@@ -976,7 +976,7 @@ func_130A5() {
   scripts\mp\equipment\mortar_mount::func_BB94();
 }
 
-func_F62E(param_00) {}
+func_F62E(var_0) {}
 
 func_12C67() {
   scripts\mp\equipment\adrenaline::removeadrenaline();
@@ -986,7 +986,7 @@ useadrenaline() {
   thread scripts\mp\equipment\adrenaline::useadrenaline();
 }
 
-func_F7AB(param_00) {
+func_F7AB(var_0) {
   scripts\mp\equipment\multi_visor::func_F7AB();
 }
 
@@ -998,7 +998,7 @@ func_130A7() {
   scripts\mp\equipment\multi_visor::func_130A7();
 }
 
-func_F861(param_00) {
+func_F861(var_0) {
   scripts\mp\archetypes\archscout::func_F861();
 }
 
@@ -1010,7 +1010,7 @@ func_130E0() {
   scripts\mp\archetypes\archscout::func_130E0();
 }
 
-func_F7B5(param_00) {
+func_F7B5(var_0) {
   scripts\mp\equipment\niagara::func_BFC9();
 }
 
@@ -1030,7 +1030,7 @@ usepercent() {
   scripts\mp\equipment\peripheral_vision::func_CA2C();
 }
 
-func_F899(param_00) {
+func_F899(var_0) {
   scripts\mp\trophy_system::func_12820();
 }
 
@@ -1038,11 +1038,11 @@ func_12D52() {
   scripts\mp\trophy_system::func_12825();
 }
 
-func_F677(param_00) {
+func_F677(var_0) {
   scripts\mp\equipment\c4::c4_set();
 }
 
-func_F69E(param_00) {
+func_F69E(var_0) {
   scripts\mp\equipment\cone_flash::func_44FB();
 }
 
@@ -1054,7 +1054,7 @@ func_13057() {
   scripts\mp\equipment\cone_flash::func_44FF();
 }
 
-func_F664(param_00) {}
+func_F664(var_0) {}
 
 func_12C80() {
   scripts\mp\equipment\blackhat::func_E0D4();
@@ -1064,7 +1064,7 @@ func_1304D() {
   scripts\mp\equipment\blackhat::func_13073();
 }
 
-func_FB22(param_00) {
+func_FB22(var_0) {
   scripts\mp\equipment\wrist_rocket::wristrocket_set();
 }
 
@@ -1072,21 +1072,21 @@ func_12D6A() {
   scripts\mp\equipment\wrist_rocket::wristrocket_unset();
 }
 
-hasequipment(param_00) {
-  if(!isDefined(self.powers[param_00])) {
+hasequipment(var_0) {
+  if(!isDefined(self.powers[var_0])) {
     return 0;
   }
 
   return 1;
 }
 
-func_13709(param_00) {
+func_13709(var_0) {
   self endon("death");
   self endon("disconnect");
-  if(param_00 == "primary") {
-    var_01 = "power_primary_used";
+  if(var_0 == "primary") {
+    var_1 = "power_primary_used";
   } else {
-    var_01 = "power_secondary_used";
+    var_1 = "power_secondary_used";
   }
 
   for(;;) {
@@ -1095,76 +1095,76 @@ func_13709(param_00) {
       break;
     }
 
-    self waittill(var_01);
+    self waittill(var_1);
     break;
   }
 }
 
-power_modifycooldownrate(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = "all";
+power_modifycooldownrate(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "all";
   }
 
-  var_02 = func_D739();
-  foreach(var_04 in var_02) {
-    if(self.powers[var_04].slot == param_01 || param_01 == "all") {
-      self.powers[var_04].cooldownratemod = param_00;
+  var_2 = func_D739();
+  foreach(var_4 in var_2) {
+    if(self.powers[var_4].slot == var_1 || var_1 == "all") {
+      self.powers[var_4].cooldownratemod = var_0;
     }
   }
 }
 
-func_D74E(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = "all";
+func_D74E(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  var_01 = func_D739();
-  foreach(var_03 in var_01) {
-    if(self.powers[var_03].slot == param_00 || param_00 == "all") {
-      self.powers[var_03].cooldownratemod = 1;
+  var_1 = func_D739();
+  foreach(var_3 in var_1) {
+    if(self.powers[var_3].slot == var_0 || var_0 == "all") {
+      self.powers[var_3].cooldownratemod = 1;
     }
   }
 }
 
-power_adjustcharges(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = "all";
+power_adjustcharges(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "all";
   }
 
-  var_02 = func_D739();
-  foreach(var_04 in var_02) {
-    if(self.powers[var_04].slot == param_01 || param_01 == "all") {
-      var_05 = self.powers[var_04].charges;
-      var_06 = self.powers[var_04].maxcharges;
-      var_07 = max(min(var_06, var_05 + param_00), 0);
-      self.powers[var_04].charges = var_07;
-      if(var_05 != var_07) {
-        self notify("power_charges_adjusted_" + var_04, self.powers[var_04].charges);
+  var_2 = func_D739();
+  foreach(var_4 in var_2) {
+    if(self.powers[var_4].slot == var_1 || var_1 == "all") {
+      var_5 = self.powers[var_4].charges;
+      var_6 = self.powers[var_4].maxcharges;
+      var_7 = max(min(var_6, var_5 + var_0), 0);
+      self.powers[var_4].charges = var_7;
+      if(var_5 != var_7) {
+        self notify("power_charges_adjusted_" + var_4, self.powers[var_4].charges);
       }
     }
   }
 }
 
-func_D71B(param_00, param_01) {
-  power_adjustcharges(param_00, self.powers[param_01].slot);
+func_D71B(var_0, var_1) {
+  power_adjustcharges(var_0, self.powers[var_1].slot);
 }
 
 func_D739() {
-  var_00 = getarraykeys(level.powers);
-  var_01 = getarraykeys(self.powers);
-  var_02 = [];
-  var_03 = 0;
-  foreach(var_05 in var_01) {
-    foreach(var_07 in var_00) {
-      if(var_05 == var_07) {
-        var_02[var_03] = var_05;
-        var_03 = var_03 + 1;
+  var_0 = getarraykeys(level.powers);
+  var_1 = getarraykeys(self.powers);
+  var_2 = [];
+  var_3 = 0;
+  foreach(var_5 in var_1) {
+    foreach(var_7 in var_0) {
+      if(var_5 == var_7) {
+        var_2[var_3] = var_5;
+        var_3 = var_3 + 1;
         break;
       }
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
 func_D729() {
@@ -1175,151 +1175,151 @@ func_D72F() {
   scripts\engine\utility::allow_offhand_weapons(1);
 }
 
-usequickslothealitem(param_00) {
-  scripts\mp\utility::_giveweapon(param_00);
-  scripts\mp\utility::_switchtoweapon(param_00);
+usequickslothealitem(var_0) {
+  scripts\mp\utility::_giveweapon(var_0);
+  scripts\mp\utility::_switchtoweapon(var_0);
   wait(1);
-  scripts\mp\utility::_switchtoweapon(param_00);
-  scripts\mp\utility::_takeweapon(param_00);
+  scripts\mp\utility::_switchtoweapon(var_0);
+  scripts\mp\utility::_takeweapon(var_0);
 }
 
-func_50A4(param_00) {
+func_50A4(var_0) {
   if(!isDefined(self.var_D775)) {
     self.var_D775 = [];
   }
 
-  if(!isDefined(self.var_D775[param_00])) {
-    self.var_D775[param_00] = 0;
+  if(!isDefined(self.var_D775[var_0])) {
+    self.var_D775[var_0] = 0;
   }
 }
 
-damageconetrace(param_00) {
-  func_50A4(param_00);
-  return self.var_D775[param_00];
+damageconetrace(var_0) {
+  func_50A4(var_0);
+  return self.var_D775[var_0];
 }
 
-func_F809(param_00, param_01) {
-  func_50A4(param_00);
-  self.var_D775[param_00] = param_01;
+func_F809(var_0, var_1) {
+  func_50A4(var_0);
+  self.var_D775[var_0] = var_1;
 }
 
-func_4575(param_00, param_01, param_02) {
+func_4575(var_0, var_1, var_2) {
   self endon("death");
   self endon("disconnect");
-  self endon("cancel_" + param_01);
-  if(isDefined(param_02)) {
-    self endon(param_02);
+  self endon("cancel_" + var_1);
+  if(isDefined(var_2)) {
+    self endon(var_2);
   }
 
-  param_00 = param_00 * 1000;
-  var_03 = 1 / param_00;
-  var_04 = gettime();
-  func_F809(param_01, param_00);
-  var_05 = damageconetrace(param_01);
-  while(var_05 > 0) {
-    func_C170(param_01, var_05 * var_03);
+  var_0 = var_0 * 1000;
+  var_3 = 1 / var_0;
+  var_4 = gettime();
+  func_F809(var_1, var_0);
+  var_5 = damageconetrace(var_1);
+  while(var_5 > 0) {
+    func_C170(var_1, var_5 * var_3);
     wait(0.1);
-    var_05 = damageconetrace(param_01);
-    var_06 = gettime();
-    var_05 = var_05 - var_06 - var_04;
-    var_04 = var_06;
-    func_F809(param_01, var_05);
+    var_5 = damageconetrace(var_1);
+    var_6 = gettime();
+    var_5 = var_5 - var_6 - var_4;
+    var_4 = var_6;
+    func_F809(var_1, var_5);
   }
 
-  func_C170(param_01, 0);
+  func_C170(var_1, 0);
 }
 
-func_3885(param_00) {
-  func_F809(param_00, 0);
-  self notify("cancel_" + param_00);
-  func_C170(param_00, 0);
+func_3885(var_0) {
+  func_F809(var_0, 0);
+  self notify("cancel_" + var_0);
+  func_C170(var_0, 0);
 }
 
-func_C170(param_00, param_01) {
-  self notify(param_00, param_01);
+func_C170(var_0, var_1) {
+  self notify(var_0, var_1);
 }
 
-func_13A0E(param_00, param_01, param_02, param_03) {
+func_13A0E(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   self endon("powers_cleanUp");
-  self endon("power_removed_" + param_01);
-  self endon(param_02);
+  self endon("power_removed_" + var_1);
+  self endon(var_2);
   level endon("game_ended");
-  self waittill("offhand_fired", var_04);
-  var_05 = self.powers[param_01];
-  if(isDefined(var_04) && var_04 == var_05.weaponuse) {
+  self waittill("offhand_fired", var_4);
+  var_5 = self.powers[var_1];
+  if(isDefined(var_4) && var_4 == var_5.weaponuse) {
     if(!isalive(self)) {
-      if(var_05.charges > 0) {
-        scripts\mp\analyticslog::logevent_powerused(param_01, "unused");
-        power_adjustcharges(-1, var_05.slot);
+      if(var_5.charges > 0) {
+        scripts\mp\analyticslog::logevent_powerused(var_1, "unused");
+        power_adjustcharges(-1, var_5.slot);
       }
 
-      if(!var_05.var_93DD) {
-        var_05.var_4619 = level.powers[param_01].cooldowntime;
-        thread func_D72A(param_01, param_00, undefined, param_03);
+      if(!var_5.var_93DD) {
+        var_5.var_4619 = level.powers[var_1].cooldowntime;
+        thread func_D72A(var_1, var_0, undefined, var_3);
         return;
       }
     }
   }
 }
 
-func_136DD(param_00, param_01, param_02) {
-  if(isDefined(param_02)) {
-    thread func_13A68(param_00, param_02);
+func_136DD(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    thread func_13A68(var_0, var_2);
   }
 
-  thread func_13A7D(param_00, param_01);
-  self waittill("power_use_update_" + param_00, var_03);
-  return var_03;
+  thread func_13A7D(var_0, var_1);
+  self waittill("power_use_update_" + var_0, var_3);
+  return var_3;
 }
 
-func_13A68(param_00, param_01) {
-  self endon("power_use_update_" + param_00);
+func_13A68(var_0, var_1) {
+  self endon("power_use_update_" + var_0);
   for(;;) {
-    self waittill("scavenged_ammo", var_02);
-    if(var_02 == param_01) {
-      self notify("power_use_update_" + param_00);
+    self waittill("scavenged_ammo", var_2);
+    if(var_2 == var_1) {
+      self notify("power_use_update_" + var_0);
       return;
     }
   }
 }
 
-func_13A7D(param_00, param_01) {
-  self endon("power_use_update_" + param_00);
-  self waittill(param_01, var_02);
-  self notify("power_use_update_" + param_00, var_02);
+func_13A7D(var_0, var_1) {
+  self endon("power_use_update_" + var_0);
+  self waittill(var_1, var_2);
+  self notify("power_use_update_" + var_0, var_2);
 }
 
-func_D767(param_00, param_01, param_02, param_03) {
-  var_04 = 0;
-  param_02 = param_02 - 1;
-  var_05 = 0;
-  var_06 = 0.05;
-  var_07 = func_D735(param_00);
-  var_08 = undefined;
-  var_09 = param_03;
+func_D767(var_0, var_1, var_2, var_3) {
+  var_4 = 0;
+  var_2 = var_2 - 1;
+  var_5 = 0;
+  var_6 = 0.05;
+  var_7 = func_D735(var_0);
+  var_8 = undefined;
+  var_9 = var_3;
   for(;;) {
-    if(!func_9F09(var_07)) {
+    if(!func_9F09(var_7)) {
       break;
     }
 
-    if(func_9F09(var_07)) {
-      while(func_9F09(var_07)) {
+    if(func_9F09(var_7)) {
+      while(func_9F09(var_7)) {
         if(self usebuttonpressed()) {
-          if(var_05 == 0) {
-            var_06 = 0.05;
+          if(var_5 == 0) {
+            var_6 = 0.05;
           }
 
           var_0A = 0;
           while(self usebuttonpressed()) {
             var_0A = var_0A + 0.05;
-            if(var_0A >= var_06) {
-              param_01 = func_93FD(param_01, param_02, param_03);
-              var_05 = 1;
+            if(var_0A >= var_6) {
+              var_1 = func_93FD(var_1, var_2, var_3);
+              var_5 = 1;
               var_0A = 0;
-              var_06 = 0.7;
-              var_04 = 1;
-              self[[var_09]](param_01);
+              var_6 = 0.7;
+              var_4 = 1;
+              self[[var_9]](var_1);
               break;
             }
 
@@ -1329,7 +1329,7 @@ func_D767(param_00, param_01, param_02, param_03) {
 
         wait(0.05);
         if(self usebuttonpressed() == 0) {
-          var_05 = 0;
+          var_5 = 0;
           break;
         }
       }
@@ -1338,54 +1338,54 @@ func_D767(param_00, param_01, param_02, param_03) {
     wait(0.05);
   }
 
-  if(!var_04) {
-    if(param_01 == param_02) {
-      param_01 = 0;
+  if(!var_4) {
+    if(var_1 == var_2) {
+      var_1 = 0;
     } else {
-      param_01++;
+      var_1++;
     }
 
-    self[[var_09]](param_01);
+    self[[var_9]](var_1);
   }
 
-  return param_01;
+  return var_1;
 }
 
-func_9F09(param_00) {
-  if((param_00 == "+frag" && self fragbuttonpressed()) || param_00 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+func_9F09(var_0) {
+  if((var_0 == "+frag" && self fragbuttonpressed()) || var_0 == "+smoke" && self secondaryoffhandbuttonpressed()) {
     return 1;
   }
 
   return 0;
 }
 
-func_D769(param_00, param_01) {
+func_D769(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(param_01)) {
-    param_01 = 2000;
+  if(!isDefined(var_1)) {
+    var_1 = 2000;
   } else {
-    param_01 = param_01 * 1000;
+    var_1 = var_1 * 1000;
   }
 
-  var_02 = func_D735(param_00);
-  var_03 = gettime();
-  var_04 = var_03 + param_01;
-  while(func_9F09(var_02) && gettime() < var_04) {
+  var_2 = func_D735(var_0);
+  var_3 = gettime();
+  var_4 = var_3 + var_1;
+  while(func_9F09(var_2) && gettime() < var_4) {
     wait(0.05);
   }
 
-  return gettime() - var_03 / 1000;
+  return gettime() - var_3 / 1000;
 }
 
-func_93FD(param_00, param_01, param_02) {
-  if(param_00 < param_01) {
-    param_00++;
+func_93FD(var_0, var_1, var_2) {
+  if(var_0 < var_1) {
+    var_0++;
   } else {
-    param_00 = 0;
+    var_0 = 0;
   }
 
-  return param_00;
+  return var_0;
 }
 
 func_C179() {
@@ -1431,8 +1431,8 @@ func_C179() {
   }
 }
 
-func_9F0A(param_00) {
-  switch (param_00) {
+func_9F0A(var_0) {
+  switch (var_0) {
     case "iw6_minigunsiege_mp":
     case "iw7_niagara_mp":
     case "armorup_mp":
@@ -1443,194 +1443,194 @@ func_9F0A(param_00) {
   }
 }
 
-func_F808(param_00, param_01) {
-  if(!isDefined(param_01)) {
-    param_01 = 0;
+func_F808(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(param_01 > 0) {
-    func_4575(param_01, param_00);
+  if(var_1 > 0) {
+    func_4575(var_1, var_0);
     return;
   }
 
-  func_3885(param_00);
+  func_3885(var_0);
 }
 
-func_D76C(param_00) {
+func_D76C(var_0) {
   self endon("death");
-  self endon("power_available_ended_" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = var_01.slot;
+  self endon("power_available_ended_" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = var_1.slot;
   for(;;) {
-    self waittill("power_charges_adjusted_" + param_00, var_03);
-    scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(var_02, var_03);
+    self waittill("power_charges_adjusted_" + var_0, var_3);
+    scripts\cp\zombies\_powerup_ability::powershud_updatepowercharges(var_2, var_3);
   }
 }
 
-func_D76E(param_00) {
+func_D76E(var_0) {
   self endon("disconnect");
-  self endon("power_removed_" + param_00);
-  self endon("power_drain_ended_" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = level.powers[param_00];
-  var_03 = var_01.slot;
-  var_04 = var_02.var_12ED9;
-  if(!isDefined(var_04)) {
-    var_04 = param_00 + "_update";
+  self endon("power_removed_" + var_0);
+  self endon("power_drain_ended_" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = level.powers[var_0];
+  var_3 = var_1.slot;
+  var_4 = var_2.var_12ED9;
+  if(!isDefined(var_4)) {
+    var_4 = var_0 + "_update";
   }
 
   for(;;) {
-    self waittill(var_04, var_05);
-    var_05 = max(0, min(1, var_05));
-    scripts\cp\zombies\_powerup_ability::powershud_updatepowerdrainprogress(var_03, var_05);
+    self waittill(var_4, var_5);
+    var_5 = max(0, min(1, var_5));
+    scripts\cp\zombies\_powerup_ability::powershud_updatepowerdrainprogress(var_3, var_5);
   }
 }
 
-func_D76D(param_00) {
+func_D76D(var_0) {
   self endon("disconnect");
-  self endon("power_removed_" + param_00);
-  self endon("power_cooldown_ended" + param_00);
-  var_01 = self.powers[param_00];
-  var_02 = level.powers[param_00];
-  var_03 = var_01.slot;
-  var_04 = param_00 + "_cooldown_update";
+  self endon("power_removed_" + var_0);
+  self endon("power_cooldown_ended" + var_0);
+  var_1 = self.powers[var_0];
+  var_2 = level.powers[var_0];
+  var_3 = var_1.slot;
+  var_4 = var_0 + "_cooldown_update";
   for(;;) {
-    self waittill(var_04, var_05);
-    scripts\cp\zombies\_powerup_ability::powershud_updatepowercooldown(var_03, var_05);
+    self waittill(var_4, var_5);
+    scripts\cp\zombies\_powerup_ability::powershud_updatepowercooldown(var_3, var_5);
   }
 }
 
-func_D76B(param_00) {
-  var_01 = spawnStruct();
-  childthread func_13A2C(param_00, var_01);
-  childthread func_13A2D(param_00, var_01);
-  self waittill("grenadeOffhandFiredRace_" + param_00 + "_begin");
+func_D76B(var_0) {
+  var_1 = spawnStruct();
+  childthread func_13A2C(var_0, var_1);
+  childthread func_13A2D(var_0, var_1);
+  self waittill("grenadeOffhandFiredRace_" + var_0 + "_begin");
   waittillframeend;
-  self notify("grenadeOffhandFiredRace_" + param_00 + "_end");
-  if(isDefined(var_01.enableworldup) && var_01.enableworldup == param_00) {
-    return !isDefined(var_01.setonwallanimconditional);
+  self notify("grenadeOffhandFiredRace_" + var_0 + "_end");
+  if(isDefined(var_1.enableworldup) && var_1.enableworldup == var_0) {
+    return !isDefined(var_1.setonwallanimconditional);
   }
 
-  if(isDefined(var_01.var_C336) && var_01.var_C336 == param_00) {
+  if(isDefined(var_1.var_C336) && var_1.var_C336 == var_0) {
     return 1;
   }
 
   return 0;
 }
 
-func_13A2C(param_00, param_01) {
-  self endon("grenadeOffhandFiredRace_" + param_00 + "_end");
+func_13A2C(var_0, var_1) {
+  self endon("grenadeOffhandFiredRace_" + var_0 + "_end");
   for(;;) {
-    self waittill("grenade_fire", var_02, var_03, var_04, var_05);
-    if(!scripts\mp\utility::func_85E0(var_02)) {
+    self waittill("grenade_fire", var_2, var_3, var_4, var_5);
+    if(!scripts\mp\utility::func_85E0(var_2)) {
       continue;
     }
 
-    param_01.enableworldup = var_03;
-    param_01.setonwallanimconditional = var_05;
+    var_1.enableworldup = var_3;
+    var_1.setonwallanimconditional = var_5;
     break;
   }
 
-  self notify("grenadeOffhandFiredRace_" + param_00 + "_begin");
+  self notify("grenadeOffhandFiredRace_" + var_0 + "_begin");
 }
 
-func_13A2D(param_00, param_01) {
-  self endon("grenadeOffhandFiredRace_" + param_00 + "_end");
-  self waittill("offhand_fired", var_02);
-  param_01.var_C336 = var_02;
-  self notify("grenadeOffhandFiredRace_" + param_00 + "_begin");
+func_13A2D(var_0, var_1) {
+  self endon("grenadeOffhandFiredRace_" + var_0 + "_end");
+  self waittill("offhand_fired", var_2);
+  var_1.var_C336 = var_2;
+  self notify("grenadeOffhandFiredRace_" + var_0 + "_begin");
 }
 
-func_D727(param_00) {
-  var_01 = self.powers[param_00];
-  if(!isDefined(var_01.var_55AB)) {
-    var_01.var_55AB = 0;
+func_D727(var_0) {
+  var_1 = self.powers[var_0];
+  if(!isDefined(var_1.var_55AB)) {
+    var_1.var_55AB = 0;
   }
 
-  var_01.var_55AB++;
-  if(var_01.var_55AB == 1) {
-    func_D765(param_00);
-  }
-}
-
-func_D72D(param_00) {
-  var_01 = self.powers[param_00];
-  var_01.var_55AB--;
-  if(var_01.var_55AB == 0) {
-    func_D765(param_00);
+  var_1.var_55AB++;
+  if(var_1.var_55AB == 1) {
+    func_D765(var_0);
   }
 }
 
-func_D71E(param_00) {
-  var_01 = self.powers[param_00];
-  return !isDefined(var_01.var_55AB) || var_01.var_55AB == 0;
+func_D72D(var_0) {
+  var_1 = self.powers[var_0];
+  var_1.var_55AB--;
+  if(var_1.var_55AB == 0) {
+    func_D765(var_0);
+  }
 }
 
-func_D765(param_00) {
-  var_01 = self.powers[param_00];
-  var_02 = isDefined(var_01.var_55AB) && var_01.var_55AB;
-  var_03 = var_01.charges > 0;
-  if(!var_02 && var_03) {
-    self setweaponammoclip(var_01.weaponuse, 1);
+func_D71E(var_0) {
+  var_1 = self.powers[var_0];
+  return !isDefined(var_1.var_55AB) || var_1.var_55AB == 0;
+}
+
+func_D765(var_0) {
+  var_1 = self.powers[var_0];
+  var_2 = isDefined(var_1.var_55AB) && var_1.var_55AB;
+  var_3 = var_1.charges > 0;
+  if(!var_2 && var_3) {
+    self setweaponammoclip(var_1.weaponuse, 1);
     return;
   }
 
-  self setweaponammoclip(var_01.weaponuse, 0);
+  self setweaponammoclip(var_1.weaponuse, 0);
 }
 
-combatrecordpoweruse(param_00) {
+combatrecordpoweruse(var_0) {
   if(!scripts\mp\utility::canrecordcombatrecordstats()) {
     return;
   }
 
-  var_01 = undefined;
-  if(isenumvaluevalid("mp", "LethalStatItems", param_00)) {
-    var_01 = "lethalStats";
-  } else if(isenumvaluevalid("mp", "TacticalStatItems", param_00)) {
-    var_01 = "tacticalStats";
+  var_1 = undefined;
+  if(isenumvaluevalid("mp", "LethalStatItems", var_0)) {
+    var_1 = "lethalStats";
+  } else if(isenumvaluevalid("mp", "TacticalStatItems", var_0)) {
+    var_1 = "tacticalStats";
   } else {
     return;
   }
 
-  var_03 = self getplayerdata("mp", var_01, param_00, "uses");
-  self setplayerdata("mp", var_01, param_00, "uses", var_03 + 1);
+  var_3 = self getplayerdata("mp", var_1, var_0, "uses");
+  self setplayerdata("mp", var_1, var_0, "uses", var_3 + 1);
 }
 
-equipmenthit(param_00, param_01, param_02, param_03) {
-  if(scripts\mp\utility::playersareenemies(param_01, param_00)) {
-    if(scripts\mp\utility::iskillstreakweapon(param_02)) {
+equipmenthit(var_0, var_1, var_2, var_3) {
+  if(scripts\mp\utility::playersareenemies(var_1, var_0)) {
+    if(scripts\mp\utility::iskillstreakweapon(var_2)) {
       return;
     }
 
-    if(!isDefined(param_01.lasthittime[param_02])) {
-      param_01.lasthittime[param_02] = 0;
+    if(!isDefined(var_1.lasthittime[var_2])) {
+      var_1.lasthittime[var_2] = 0;
     }
 
-    if(param_01.lasthittime[param_02] == gettime()) {
+    if(var_1.lasthittime[var_2] == gettime()) {
       return;
     }
 
-    param_01.lasthittime[param_02] = gettime();
-    param_01 thread scripts\mp\gamelogic::threadedsetweaponstatbyname(param_02, 1, "hits");
-    var_04 = param_01 scripts\mp\persistence::statgetbuffered("totalShots");
-    var_05 = param_01 scripts\mp\persistence::statgetbuffered("hits") + 1;
-    if(var_05 <= var_04) {
-      param_01 scripts\mp\persistence::func_10E55("hits", var_05);
-      param_01 scripts\mp\persistence::func_10E55("misses", int(var_04 - var_05));
-      param_01 scripts\mp\persistence::func_10E55("accuracy", int(var_05 * 10000 / var_04));
+    var_1.lasthittime[var_2] = gettime();
+    var_1 thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_2, 1, "hits");
+    var_4 = var_1 scripts\mp\persistence::statgetbuffered("totalShots");
+    var_5 = var_1 scripts\mp\persistence::statgetbuffered("hits") + 1;
+    if(var_5 <= var_4) {
+      var_1 scripts\mp\persistence::func_10E55("hits", var_5);
+      var_1 scripts\mp\persistence::func_10E55("misses", int(var_4 - var_5));
+      var_1 scripts\mp\persistence::func_10E55("accuracy", int(var_5 * 10000 / var_4));
     }
 
-    if((isDefined(param_03) && scripts\engine\utility::isbulletdamage(param_03)) || scripts\mp\utility::isprojectiledamage(param_03)) {
-      param_01 thread scripts\mp\contractchallenges::contractshotslanded(param_02);
-      param_01.lastdamagetime = gettime();
-      var_06 = scripts\mp\utility::getweapongroup(param_02);
-      if(var_06 == "weapon_lmg") {
-        if(!isDefined(param_01.shotslandedlmg)) {
-          param_01.shotslandedlmg = 1;
+    if((isDefined(var_3) && scripts\engine\utility::isbulletdamage(var_3)) || scripts\mp\utility::isprojectiledamage(var_3)) {
+      var_1 thread scripts\mp\contractchallenges::contractshotslanded(var_2);
+      var_1.lastdamagetime = gettime();
+      var_6 = scripts\mp\utility::getweapongroup(var_2);
+      if(var_6 == "weapon_lmg") {
+        if(!isDefined(var_1.shotslandedlmg)) {
+          var_1.shotslandedlmg = 1;
           return;
         }
 
-        param_01.shotslandedlmg++;
+        var_1.shotslandedlmg++;
         return;
       }
     }

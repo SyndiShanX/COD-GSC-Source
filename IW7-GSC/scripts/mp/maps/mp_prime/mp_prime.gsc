@@ -24,26 +24,26 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player512x512x8", "targetname");
-  var_01 = spawn("script_model", (-708, -1759, 476));
-  var_01.angles = (0, 0, 90);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player512x512x8", "targetname");
-  var_03 = spawn("script_model", (-708, -1759, 988));
-  var_03.angles = (0, 0, 90);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player512x512x8", "targetname");
-  var_05 = spawn("script_model", (-708, -1759, 1500));
-  var_05.angles = (0, 0, 90);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("clip32x32x128", "targetname");
-  var_07 = spawn("script_model", (-1160, -1616, 232));
-  var_07.angles = (0, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("clip128x128x8", "targetname");
-  var_09 = spawn("script_model", (-1000, -1380, 340));
-  var_09.angles = (270, 180, 180);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player512x512x8", "targetname");
+  var_1 = spawn("script_model", (-708, -1759, 476));
+  var_1.angles = (0, 0, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player512x512x8", "targetname");
+  var_3 = spawn("script_model", (-708, -1759, 988));
+  var_3.angles = (0, 0, 90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player512x512x8", "targetname");
+  var_5 = spawn("script_model", (-708, -1759, 1500));
+  var_5.angles = (0, 0, 90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("clip32x32x128", "targetname");
+  var_7 = spawn("script_model", (-1160, -1616, 232));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("clip128x128x8", "targetname");
+  var_9 = spawn("script_model", (-1000, -1380, 340));
+  var_9.angles = (270, 180, 180);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("player64x64x256", "targetname");
   var_0B = spawn("script_model", (-1298, 1862, 156));
   var_0B.angles = (0, 0, 0);
@@ -143,57 +143,57 @@ wr_mover_setup() {
   thread func_5CC7("wr_mover_2", "wr_mover_start", 200, undefined, undefined);
 }
 
-func_5CC7(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = getent(param_00, "targetname");
-  if(isDefined(param_03)) {
-    var_05.var_4380 = getent(param_03, "targetname");
-    var_05.var_4380 linkto(var_05);
+func_5CC7(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getent(var_0, "targetname");
+  if(isDefined(var_3)) {
+    var_5.var_4380 = getent(var_3, "targetname");
+    var_5.var_4380 linkto(var_5);
   }
 
-  var_06 = 1 / param_02;
-  var_05.var_C72D = scripts\engine\utility::getstruct(param_01, "targetname");
-  var_05 moveto(var_05.var_C72D.origin, 0.1, 0, 0);
-  var_05 rotateto(var_05.var_C72D.angles, 0.1, 0, 0);
-  var_05.getclosestpointonnavmesh3d = 0;
+  var_6 = 1 / var_2;
+  var_5.var_C72D = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_5 moveto(var_5.var_C72D.origin, 0.1, 0, 0);
+  var_5 rotateto(var_5.var_C72D.angles, 0.1, 0, 0);
+  var_5.getclosestpointonnavmesh3d = 0;
   wait(0.5);
-  if(isDefined(param_04)) {
-    var_05 playLoopSound(param_04);
+  if(isDefined(var_4)) {
+    var_5 playLoopSound(var_4);
   }
 
-  var_05.destination = var_05.var_C72D;
-  var_05.destination = func_5CBC(var_05, var_05.destination, var_06);
+  var_5.destination = var_5.var_C72D;
+  var_5.destination = func_5CBC(var_5, var_5.destination, var_6);
 }
 
-func_5CBC(param_00, param_01, param_02) {
-  param_00 endon("death");
-  var_03 = scripts\engine\utility::getstruct(param_01.target, "targetname");
-  if(isDefined(var_03.target)) {
-    var_04 = abs(distance(param_00.origin, var_03.origin) * param_02);
-    param_00 moveto(var_03.origin, var_04, 0, 0);
-    param_00 rotateto(var_03.angles, var_04, 0, 0);
-    wait(var_04);
-    return var_03;
+func_5CBC(var_0, var_1, var_2) {
+  var_0 endon("death");
+  var_3 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  if(isDefined(var_3.target)) {
+    var_4 = abs(distance(var_0.origin, var_3.origin) * var_2);
+    var_0 moveto(var_3.origin, var_4, 0, 0);
+    var_0 rotateto(var_3.angles, var_4, 0, 0);
+    wait(var_4);
+    return var_3;
   }
 
-  param_01 hide();
-  if(isDefined(param_01.var_4380)) {
-    param_01.var_4380 notsolid();
+  var_1 hide();
+  if(isDefined(var_1.var_4380)) {
+    var_1.var_4380 notsolid();
   }
 
   wait(1);
-  param_01.origin = param_01.var_C72D.origin;
-  param_01.angles = param_01.var_C72D.angles;
+  var_1.origin = var_1.var_C72D.origin;
+  var_1.angles = var_1.var_C72D.angles;
   wait(1);
-  param_01 show();
-  if(isDefined(param_01.var_4380)) {
-    param_01.var_4380 solid();
+  var_1 show();
+  if(isDefined(var_1.var_4380)) {
+    var_1.var_4380 solid();
   }
 
-  return param_01.var_C72D;
+  return var_1.var_C72D;
 }
 
 sfx_club_music() {
-  var_00 = spawn("script_origin", (1200, 703, 238));
+  var_0 = spawn("script_origin", (1200, 703, 238));
   scripts\engine\utility::waitframe();
-  var_00 playLoopSound("emt_mus_prime_club");
+  var_0 playLoopSound("emt_mus_prime_club");
 }

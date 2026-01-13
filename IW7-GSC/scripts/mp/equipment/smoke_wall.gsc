@@ -13,86 +13,86 @@ func_E16E() {
   self notify("remove_smoke_wall");
 }
 
-func_1037D(param_00, param_01) {
+func_1037D(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("remove_smoke_wall");
-  var_02 = "power_smokeWall";
-  var_03 = self.angles;
-  if(isDefined(param_01) && param_01 >= 0.2) {
-    var_04 = self.origin;
+  var_2 = "power_smokeWall";
+  var_3 = self.angles;
+  if(isDefined(var_1) && var_1 >= 0.2) {
+    var_4 = self.origin;
   } else {
-    var_05 = param_01 scripts\engine\utility::waittill_any_return("missile_stuck", "death");
-    if(var_05 != "death") {
-      var_04 = param_00.origin;
-      var_03 = param_00.angles;
-      var_06 = anglestoup(var_03) * 64;
-      var_04 = var_04 + var_06;
+    var_5 = var_1 scripts\engine\utility::waittill_any_return("missile_stuck", "death");
+    if(var_5 != "death") {
+      var_4 = var_0.origin;
+      var_3 = var_0.angles;
+      var_6 = anglestoup(var_3) * 64;
+      var_4 = var_4 + var_6;
     } else {
-      var_07 = scripts\mp\powerloot::func_7FC5("power_smokeWall", 500);
-      var_08 = anglesToForward(self.angles) * var_07;
-      var_04 = self.origin + var_08;
+      var_7 = scripts\mp\powerloot::func_7FC5("power_smokeWall", 500);
+      var_8 = anglesToForward(self.angles) * var_7;
+      var_4 = self.origin + var_8;
     }
   }
 
-  thread func_1037C(var_04, self);
-  playFX(scripts\engine\utility::getfx("smokewall"), var_04, anglesToForward(var_03), anglestoup(var_03));
-  thread scripts\engine\utility::play_sound_in_space("synaptic_smokewall", var_04);
+  thread func_1037C(var_4, self);
+  playFX(scripts\engine\utility::getfx("smokewall"), var_4, anglesToForward(var_3), anglestoup(var_3));
+  thread scripts\engine\utility::play_sound_in_space("synaptic_smokewall", var_4);
 }
 
-func_1037C(param_00, param_01) {
-  var_02 = undefined;
+func_1037C(var_0, var_1) {
+  var_2 = undefined;
   if(level.teambased) {
-    var_02 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(param_01.team));
+    var_2 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(var_1.team));
   } else {
-    var_02 = level.characters;
+    var_2 = level.characters;
   }
 
-  var_03 = 0;
-  foreach(var_05 in var_02) {
-    if(!isDefined(var_05) || var_05 == param_01 || !scripts\mp\utility::isreallyalive(var_05)) {
+  var_3 = 0;
+  foreach(var_5 in var_2) {
+    if(!isDefined(var_5) || var_5 == var_1 || !scripts\mp\utility::isreallyalive(var_5)) {
       continue;
     }
 
-    var_06 = param_01 scripts\mp\powerloot::func_7FC4("power_smokeWall", 65536);
-    if(distance2dsquared(param_00, var_05.origin) > var_06) {
+    var_6 = var_1 scripts\mp\powerloot::func_7FC4("power_smokeWall", 65536);
+    if(distance2dsquared(var_0, var_5.origin) > var_6) {
       continue;
     }
 
-    var_07 = scripts\common\trace::create_contents(0, 1, 1, 0, 0, 0, 0);
-    var_08 = physics_raycast(param_00, var_05 getEye(), var_07, undefined, 0, "physicsquery_closest");
-    if(isDefined(var_08) && var_08.size > 0) {
+    var_7 = scripts\common\trace::create_contents(0, 1, 1, 0, 0, 0, 0);
+    var_8 = physics_raycast(var_0, var_5 getEye(), var_7, undefined, 0, "physicsquery_closest");
+    if(isDefined(var_8) && var_8.size > 0) {
       continue;
     }
 
-    var_09 = param_01 scripts\mp\powerloot::func_7FC1("power_smokeWall", 1);
-    if(var_05 giveperks(param_00) >= 0.75) {
-      var_05 shellshock("flashbang_mp", var_09);
+    var_9 = var_1 scripts\mp\powerloot::func_7FC1("power_smokeWall", 1);
+    if(var_5 giveperks(var_0) >= 0.75) {
+      var_5 shellshock("flashbang_mp", var_9);
     }
 
-    if(!var_05 scripts\mp\utility::_hasperk("specialty_noplayertarget") && !var_05 scripts\mp\utility::_hasperk("specialty_incog")) {
-      var_05 thread func_E48C(param_01);
-      var_05 scripts\mp\hud_message::showmiscmessage("spotted");
+    if(!var_5 scripts\mp\utility::_hasperk("specialty_noplayertarget") && !var_5 scripts\mp\utility::_hasperk("specialty_incog")) {
+      var_5 thread func_E48C(var_1);
+      var_5 scripts\mp\hud_message::showmiscmessage("spotted");
     }
 
-    var_03++;
+    var_3++;
   }
 
-  if(var_03 == 0) {
-    param_01 iprintlnbold("No Threats Detected");
+  if(var_3 == 0) {
+    var_1 iprintlnbold("No Threats Detected");
     return;
   }
 
-  param_01 iprintlnbold(var_03 + " Threats Detected");
+  var_1 iprintlnbold(var_3 + " Threats Detected");
 }
 
-func_E48C(param_00) {
+func_E48C(var_0) {
   self endon("disconnect");
   thread scripts\mp\killstreaks\_emp_common::func_5AA9();
-  var_01 = scripts\mp\utility::outlineenableforplayer(self, "orange", param_00, 0, 0, "level_script");
-  var_02 = param_00 scripts\mp\powerloot::func_7FC1("power_smokeWall", 1.15);
-  scripts\engine\utility::waittill_any_timeout_1(var_02, "death");
-  if(isDefined(param_00)) {
-    scripts\mp\utility::outlinedisable(var_01, self);
+  var_1 = scripts\mp\utility::outlineenableforplayer(self, "orange", var_0, 0, 0, "level_script");
+  var_2 = var_0 scripts\mp\powerloot::func_7FC1("power_smokeWall", 1.15);
+  scripts\engine\utility::waittill_any_timeout_1(var_2, "death");
+  if(isDefined(var_0)) {
+    scripts\mp\utility::outlinedisable(var_1, self);
   }
 }

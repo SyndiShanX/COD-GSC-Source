@@ -28,18 +28,18 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread func_C541();
-    var_00 thread func_C540();
-    var_00 thread onplayerspawned();
-    var_00 thread func_11B01();
+    level waittill("connected", var_0);
+    var_0 thread func_C541();
+    var_0 thread func_C540();
+    var_0 thread onplayerspawned();
+    var_0 thread func_11B01();
   }
 }
 
 func_C532() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread func_11B01();
+    level waittill("connected", var_0);
+    var_0 thread func_11B01();
   }
 }
 
@@ -122,8 +122,8 @@ func_12EF3() {
   level endon("game_ended");
   for(;;) {
     scripts\mp\hostmigration::waittillhostmigrationdone();
-    foreach(var_01 in level.players) {
-      var_01 func_12EEE();
+    foreach(var_1 in level.players) {
+      var_1 func_12EEE();
     }
 
     wait(10);
@@ -135,10 +135,10 @@ finalizeplayertimes() {
     wait(2);
   }
 
-  foreach(var_01 in level.players) {
-    var_01 func_12EEE();
-    var_01 scripts\mp\persistence::writebufferedstats();
-    var_01 scripts\mp\persistence::func_12F5E();
+  foreach(var_1 in level.players) {
+    var_1 func_12EEE();
+    var_1 scripts\mp\persistence::writebufferedstats();
+    var_1 scripts\mp\persistence::func_12F5E();
   }
 }
 
@@ -201,9 +201,9 @@ func_12EEE() {
 
     if(self.timeplayed["missionTeam"]) {
       if(scripts\mp\utility::rankingenabled() && isDefined(self.var_9978) && isDefined(self.var_9978.var_4C0D)) {
-        var_00 = self.var_B8D4;
-        var_01 = self getplayerdata("mp", "missionTeamPerformanceData", var_00, "timePlayed");
-        self setplayerdata("mp", "missionTeamPerformanceData", var_00, "timePlayed", var_01 + self.timeplayed["missionTeam"]);
+        var_0 = self.var_B8D4;
+        var_1 = self getplayerdata("mp", "missionTeamPerformanceData", var_0, "timePlayed");
+        self setplayerdata("mp", "missionTeamPerformanceData", var_0, "timePlayed", var_1 + self.timeplayed["missionTeam"]);
       }
     }
   }
@@ -228,8 +228,8 @@ updateteamtime() {
 
 updateteambalancedvar() {
   for(;;) {
-    var_00 = getdvarint("scr_teambalance");
-    if(level.teambalance != var_00) {
+    var_0 = getdvarint("scr_teambalance");
+    if(level.teambalance != var_0) {
       level.teambalance = getdvarint("scr_teambalance");
     }
 
@@ -282,14 +282,14 @@ func_12F37() {
 _meth_81A2() {
   level.team["allies"] = 0;
   level.team["axis"] = 0;
-  var_00 = level.players;
-  for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    if(isDefined(var_00[var_01].pers["team"]) && var_00[var_01].pers["team"] == "allies") {
+  var_0 = level.players;
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "allies") {
       level.team["allies"]++;
       continue;
     }
 
-    if(isDefined(var_00[var_01].pers["team"]) && var_00[var_01].pers["team"] == "axis") {
+    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis") {
       level.team["axis"]++;
     }
   }
@@ -303,74 +303,74 @@ _meth_81A2() {
 
 balanceteams() {
   iprintlnbold(game["strings"]["autobalance"]);
-  var_00 = [];
-  var_01 = [];
-  var_02 = level.players;
-  for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    if(!isDefined(var_02[var_03].pers["teamTime"])) {
+  var_0 = [];
+  var_1 = [];
+  var_2 = level.players;
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(!isDefined(var_2[var_3].pers["teamTime"])) {
       continue;
     }
 
-    if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "allies") {
-      var_00[var_00.size] = var_02[var_03];
+    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "allies") {
+      var_0[var_0.size] = var_2[var_3];
       continue;
     }
 
-    if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "axis") {
-      var_01[var_01.size] = var_02[var_03];
+    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
+      var_1[var_1.size] = var_2[var_3];
     }
   }
 
-  var_04 = undefined;
-  while(var_00.size > var_01.size + 1 || var_01.size > var_00.size + 1) {
-    if(var_00.size > var_01.size + 1) {
-      for(var_05 = 0; var_05 < var_00.size; var_05++) {
-        if(isDefined(var_00[var_05].dont_auto_balance)) {
+  var_4 = undefined;
+  while(var_0.size > var_1.size + 1 || var_1.size > var_0.size + 1) {
+    if(var_0.size > var_1.size + 1) {
+      for(var_5 = 0; var_5 < var_0.size; var_5++) {
+        if(isDefined(var_0[var_5].dont_auto_balance)) {
           continue;
         }
 
-        if(!isDefined(var_04)) {
-          var_04 = var_00[var_05];
+        if(!isDefined(var_4)) {
+          var_4 = var_0[var_5];
           continue;
         }
 
-        if(var_00[var_05].pers["teamTime"] > var_04.pers["teamTime"]) {
-          var_04 = var_00[var_05];
+        if(var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
+          var_4 = var_0[var_5];
         }
       }
 
-      var_04[[level.onteamselection]]("axis");
-    } else if(var_01.size > var_00.size + 1) {
-      for(var_05 = 0; var_05 < var_01.size; var_05++) {
-        if(isDefined(var_01[var_05].dont_auto_balance)) {
+      var_4[[level.onteamselection]]("axis");
+    } else if(var_1.size > var_0.size + 1) {
+      for(var_5 = 0; var_5 < var_1.size; var_5++) {
+        if(isDefined(var_1[var_5].dont_auto_balance)) {
           continue;
         }
 
-        if(!isDefined(var_04)) {
-          var_04 = var_01[var_05];
+        if(!isDefined(var_4)) {
+          var_4 = var_1[var_5];
           continue;
         }
 
-        if(var_01[var_05].pers["teamTime"] > var_04.pers["teamTime"]) {
-          var_04 = var_01[var_05];
+        if(var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
+          var_4 = var_1[var_5];
         }
       }
 
-      var_04[[level.onteamselection]]("allies");
+      var_4[[level.onteamselection]]("allies");
     }
 
-    var_04 = undefined;
-    var_00 = [];
-    var_01 = [];
-    var_02 = level.players;
-    for(var_03 = 0; var_03 < var_02.size; var_03++) {
-      if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "allies") {
-        var_00[var_00.size] = var_02[var_03];
+    var_4 = undefined;
+    var_0 = [];
+    var_1 = [];
+    var_2 = level.players;
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "allies") {
+        var_0[var_0.size] = var_2[var_3];
         continue;
       }
 
-      if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "axis") {
-        var_01[var_01.size] = var_02[var_03];
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
+        var_1[var_1.size] = var_2[var_3];
       }
     }
   }
@@ -380,29 +380,29 @@ func_F7F6() {
   func_F6B8();
 }
 
-func_D3D8(param_00, param_01) {}
+func_D3D8(var_0, var_1) {}
 
 countplayers() {
-  var_00 = [];
-  for(var_01 = 0; var_01 < level.teamnamelist.size; var_01++) {
-    var_00[level.teamnamelist[var_01]] = 0;
+  var_0 = [];
+  for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
+    var_0[level.teamnamelist[var_1]] = 0;
   }
 
-  for(var_01 = 0; var_01 < level.players.size; var_01++) {
-    if(level.players[var_01] == self) {
+  for(var_1 = 0; var_1 < level.players.size; var_1++) {
+    if(level.players[var_1] == self) {
       continue;
     }
 
-    if(level.players[var_01].pers["team"] == "spectator") {
+    if(level.players[var_1].pers["team"] == "spectator") {
       continue;
     }
 
-    if(isDefined(level.players[var_01].pers["team"])) {
-      var_00[level.players[var_01].pers["team"]]++;
+    if(isDefined(level.players[var_1].pers["team"])) {
+      var_0[level.players[var_1].pers["team"]]++;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
 func_F6B8() {
@@ -431,94 +431,94 @@ func_F6B8() {
   }
 }
 
-setcharactermodels(param_00, param_01, param_02) {
+setcharactermodels(var_0, var_1, var_2) {
   if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
   }
 
-  self setModel(param_00);
-  self givegoproattachments(param_02);
-  self attach(param_01, "", 1);
-  self.headmodel = param_01;
+  self setModel(var_0);
+  self givegoproattachments(var_2);
+  self attach(var_1, "", 1);
+  self.headmodel = var_1;
 }
 
-func_72A5(param_00) {
-  var_01 = undefined;
-  var_02 = undefined;
-  var_03 = [];
-  switch (param_00) {
+func_72A5(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = [];
+  switch (var_0) {
     case 1:
-      var_01 = "mp_warfighter_body_1_3";
-      var_02 = "mp_warfighter_head_1_3";
+      var_1 = "mp_warfighter_body_1_3";
+      var_2 = "mp_warfighter_head_1_3";
       break;
 
     case 2:
-      var_01 = "mp_body_heavy_1_2";
-      var_02 = "mp_head_heavy_1_2";
+      var_1 = "mp_body_heavy_1_2";
+      var_2 = "mp_head_heavy_1_2";
       break;
 
     case 3:
       if(level.gametype == "infect") {
-        var_01 = "mp_synaptic_body_1_4";
-        var_02 = "mp_synaptic_head_1_4";
+        var_1 = "mp_synaptic_body_1_4";
+        var_2 = "mp_synaptic_head_1_4";
       } else {
-        var_01 = "mp_synaptic_body_1_1";
-        var_02 = "mp_synaptic_head_1_1";
+        var_1 = "mp_synaptic_body_1_1";
+        var_2 = "mp_synaptic_head_1_1";
       }
       break;
 
     case 4:
-      var_01 = "mp_ftl_body_3_1";
-      var_02 = "mp_ftl_head_5_1";
+      var_1 = "mp_ftl_body_3_1";
+      var_2 = "mp_ftl_head_5_1";
       break;
 
     case 5:
-      var_01 = "mp_stryker_body_2_1";
-      var_02 = "mp_stryker_head_3_1";
+      var_1 = "mp_stryker_body_2_1";
+      var_2 = "mp_stryker_head_3_1";
       break;
 
     case 6:
-      var_01 = "mp_ghost_body_1_3";
-      var_02 = "mp_ghost_head_1_1";
+      var_1 = "mp_ghost_body_1_3";
+      var_2 = "mp_ghost_head_1_1";
       break;
   }
 
-  self setcustomization(var_01, var_02);
-  var_04 = self getcustomizationbody();
-  var_05 = self getcustomizationhead();
-  var_06 = self getcustomizationviewmodel();
-  setcharactermodels(var_04, var_05, var_06);
+  self setcustomization(var_1, var_2);
+  var_4 = self getcustomizationbody();
+  var_5 = self getcustomizationhead();
+  var_6 = self getcustomizationviewmodel();
+  setcharactermodels(var_4, var_5, var_6);
 }
 
 getcustomization() {
-  var_00 = undefined;
-  var_01 = undefined;
-  var_02 = [];
-  var_03 = getplayermodelindex();
-  var_04 = getplayerheadmodel();
-  self.var_6A = var_03;
-  self.playfxontag = var_04;
-  var_00 = tablelookupbyrow("mp\cac\bodies.csv", var_03, 1);
-  var_01 = tablelookupbyrow("mp\cac\heads.csv", var_04, 1);
-  var_02["body"] = var_00;
-  var_02["head"] = var_01;
-  return var_02;
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = [];
+  var_3 = getplayermodelindex();
+  var_4 = getplayerheadmodel();
+  self.var_6A = var_3;
+  self.playfxontag = var_4;
+  var_0 = tablelookupbyrow("mp\cac\bodies.csv", var_3, 1);
+  var_1 = tablelookupbyrow("mp\cac\heads.csv", var_4, 1);
+  var_2["body"] = var_0;
+  var_2["head"] = var_1;
+  return var_2;
 }
 
 setmodelfromcustomization() {
-  var_00 = getcustomization();
-  self setcustomization(var_00["body"], var_00["head"]);
-  var_01 = self getcustomizationbody();
-  var_02 = self getcustomizationhead();
-  var_03 = self getcustomizationviewmodel();
-  setcharactermodels(var_01, var_02, var_03);
+  var_0 = getcustomization();
+  self setcustomization(var_0["body"], var_0["head"]);
+  var_1 = self getcustomizationbody();
+  var_2 = self getcustomizationhead();
+  var_3 = self getcustomizationviewmodel();
+  setcharactermodels(var_1, var_2, var_3);
 }
 
 func_F6BE() {
-  var_00 = level.var_5033[self.team];
-  var_01 = level.var_503D[self.team];
-  var_02 = level.var_5050[self.team];
-  setcharactermodels(var_00, var_01, var_02);
+  var_0 = level.var_5033[self.team];
+  var_1 = level.var_503D[self.team];
+  var_2 = level.var_5050[self.team];
+  setcharactermodels(var_0, var_1, var_2);
 }
 
 getplayermodelindex() {
@@ -537,45 +537,45 @@ getplayerheadmodel() {
   return self getplayerdata("privateloadouts", "squadMembers", "head");
 }
 
-clearclienttriggeraudiozone(param_00) {
-  return tablelookup("mp\cac\bodies.csv", 0, param_00, 5);
+clearclienttriggeraudiozone(var_0) {
+  return tablelookup("mp\cac\bodies.csv", 0, var_0, 5);
 }
 
-getplayermodelname(param_00) {
-  return tablelookup("mp\cac\bodies.csv", 0, param_00, 1);
+getplayermodelname(var_0) {
+  return tablelookup("mp\cac\bodies.csv", 0, var_0, 1);
 }
 
 func_FADC() {
   if(isai(self) || level.gametype == "infect" && self.team == "allies" && isDefined(self.infected_archtype) && self.infected_archtype == "archetype_scout") {
-    var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
+    var_0 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
   } else if(isDefined(self.changedarchetypeinfo)) {
-    var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
+    var_0 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
   } else {
-    var_00 = getdvarint("forceArchetype", 0);
+    var_0 = getdvarint("forceArchetype", 0);
   }
 
   if(level.gametype == "infect" && self.team == "axis") {
-    var_00 = 3;
+    var_0 = 3;
   }
 
-  if(isplayer(self) && var_00 == 0) {
+  if(isplayer(self) && var_0 == 0) {
     setmodelfromcustomization();
   } else {
-    func_72A5(var_00);
+    func_72A5(var_0);
   }
 
   if(!isai(self)) {
-    var_01 = getplayermodelindex();
-    self.var_6A = var_01;
-    var_02 = clearclienttriggeraudiozone(var_01);
+    var_1 = getplayermodelindex();
+    self.var_6A = var_1;
+    var_2 = clearclienttriggeraudiozone(var_1);
   } else {
     self give_explosive_touch_on_revived("vestLight");
   }
 
   self.voice = level.dropscavengerfordeath[self.team];
   if(scripts\mp\utility::isanymlgmatch() && !isai(self)) {
-    var_03 = getplayermodelname(getplayermodelindex());
-    if(issubstr(var_03, "fullbody_sniper")) {
+    var_3 = getplayermodelname(getplayermodelindex());
+    if(issubstr(var_3, "fullbody_sniper")) {
       thread func_72B2();
     }
   }
@@ -620,15 +620,15 @@ func_12E95() {
     return;
   }
 
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_00++;
-    if(var_00 >= level.players.size) {
-      var_00 = 0;
+    var_0++;
+    if(var_0 >= level.players.size) {
+      var_0 = 0;
     }
 
-    if(isDefined(level.players[var_00])) {
-      level.players[var_00] func_12E94();
+    if(isDefined(level.players[var_0])) {
+      level.players[var_0] func_12E94();
     }
 
     wait(1);
@@ -695,19 +695,19 @@ func_12E94() {
 }
 
 watchafk() {
-  var_00 = 0;
+  var_0 = 0;
   for(;;) {
-    var_00++;
-    if(var_00 >= level.players.size) {
-      var_00 = 0;
+    var_0++;
+    if(var_0 >= level.players.size) {
+      var_0 = 0;
     }
 
-    if(isDefined(level.players[var_00])) {
-      if(isai(level.players[var_00])) {
+    if(isDefined(level.players[var_0])) {
+      if(isai(level.players[var_0])) {
         continue;
       }
 
-      level.players[var_00] checkforafk();
+      level.players[var_0] checkforafk();
     }
 
     wait(1);
@@ -724,66 +724,66 @@ checkforafk() {
     self.pers["validKickTime"] = 0;
   }
 
-  var_00 = self.pers["validKickTime"];
-  var_01 = 0;
-  var_02 = self.pers["kills"];
-  var_03 = self.pers["assists"];
-  var_04 = var_02 == 0 && var_03 == 0;
-  if(isDefined(self.pers["stanceTracking"]) && var_00 > 30) {
-    var_05 = self.pers["stanceTracking"]["crouch"] / var_00;
-    if(var_05 > 1) {
-      var_01 = 1;
+  var_0 = self.pers["validKickTime"];
+  var_1 = 0;
+  var_2 = self.pers["kills"];
+  var_3 = self.pers["assists"];
+  var_4 = var_2 == 0 && var_3 == 0;
+  if(isDefined(self.pers["stanceTracking"]) && var_0 > 30) {
+    var_5 = self.pers["stanceTracking"]["crouch"] / var_0;
+    if(var_5 > 1) {
+      var_1 = 1;
     }
   }
 
-  if(var_04 && var_00 > 60) {
+  if(var_4 && var_0 > 60) {
     if(!isDefined(self.pers["distTrackingPassed"])) {
       if(level.gametype == "infect") {
         if(self.team == "axis") {
-          var_01 = 1;
+          var_1 = 1;
         }
       } else {
-        var_01 = 1;
+        var_1 = 1;
       }
     }
   }
 
-  if(var_04 && var_00 > 120) {
+  if(var_4 && var_0 > 120) {
     if(!isDefined(self.lastdamagetime) || self.lastdamagetime + -5536 < gettime()) {
       switch (level.gametype) {
         case "gun":
           if(scripts\mp\utility::istrue(level.kick_afk_check)) {
-            var_01 = 1;
+            var_1 = 1;
           }
           break;
       }
     }
   }
 
-  if(var_01 && !isgamebattlematch()) {
+  if(var_1 && !isgamebattlematch()) {
     kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE", 1);
   }
 }
 
-getjointeampermissions(param_00) {
-  var_01 = 0;
-  var_02 = 0;
-  var_03 = level.players;
-  for(var_04 = 0; var_04 < var_03.size; var_04++) {
-    var_05 = var_03[var_04];
-    if(isDefined(var_05.pers["team"]) && var_05.pers["team"] == param_00) {
-      var_01++;
-      if(isbot(var_05)) {
-        var_02++;
+getjointeampermissions(var_0) {
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = level.players;
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    var_5 = var_3[var_4];
+    if(isDefined(var_5.pers["team"]) && var_5.pers["team"] == var_0) {
+      var_1++;
+      if(isbot(var_5)) {
+        var_2++;
       }
     }
   }
 
-  if(var_01 < level.teamlimit) {
+  if(var_1 < level.teamlimit) {
     return 1;
   }
 
-  if(var_02 > 0) {
+  if(var_2 > 0) {
     return 1;
   }
 
@@ -811,82 +811,82 @@ onplayerspawned() {
   self waittill("spawned_player");
 }
 
-func_BD73(param_00) {
-  return tablelookupistring("mp\MTTable.csv", 0, param_00, 1);
+func_BD73(var_0) {
+  return tablelookupistring("mp\MTTable.csv", 0, var_0, 1);
 }
 
-func_BD72(param_00) {
-  return tablelookup("mp\MTTable.csv", 0, param_00, 2);
+func_BD72(var_0) {
+  return tablelookup("mp\MTTable.csv", 0, var_0, 2);
 }
 
-func_BD71(param_00) {
-  return tablelookup("mp\MTTable.csv", 0, param_00, 3);
+func_BD71(var_0) {
+  return tablelookup("mp\MTTable.csv", 0, var_0, 3);
 }
 
-isonladder(param_00) {
-  return tablelookupistring("mp\factionTable.csv", 0, game[param_00], 1);
+isonladder(var_0) {
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 1);
 }
 
-_meth_81B7(param_00) {
-  return tablelookupistring("mp\factionTable.csv", 0, game[param_00], 2);
+_meth_81B7(var_0) {
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 2);
 }
 
-ismlgspectator(param_00) {
-  return tablelookupistring("mp\factionTable.csv", 0, game[param_00], 4);
+ismlgspectator(var_0) {
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 4);
 }
 
-_meth_81A8(param_00) {
-  return tablelookupistring("mp\factionTable.csv", 0, game[param_00], 3);
+_meth_81A8(var_0) {
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 3);
 }
 
-_meth_81B2(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 5);
+_meth_81B2(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 5);
 }
 
-_meth_81B1(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 6);
+_meth_81B1(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 6);
 }
 
-_meth_81B0(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 17);
+_meth_81B0(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 17);
 }
 
-getteamvoiceprefix(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 7);
+getteamvoiceprefix(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 7);
 }
 
-getteamspawnmusic(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 8);
+getteamspawnmusic(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 8);
 }
 
-issprinting(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 9);
+issprinting(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 9);
 }
 
-ismeleeing(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 10);
+ismeleeing(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 10);
 }
 
-_meth_81AA(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 11);
+_meth_81AA(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 11);
 }
 
-ismantling(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 12);
+ismantling(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 12);
 }
 
-_meth_81AC(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 13);
+_meth_81AC(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 13);
 }
 
-_meth_81A4(param_00) {
-  return (scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[param_00], 14)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[param_00], 15)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[param_00], 16)));
+_meth_81A4(var_0) {
+  return (scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 14)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 15)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 16)));
 }
 
-_meth_81A5(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 18);
+_meth_81A5(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 18);
 }
 
-_meth_81A6(param_00) {
-  return tablelookup("mp\factionTable.csv", 0, game[param_00], 19);
+_meth_81A6(var_0) {
+  return tablelookup("mp\factionTable.csv", 0, game[var_0], 19);
 }

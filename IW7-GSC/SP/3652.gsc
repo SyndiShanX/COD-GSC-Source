@@ -9,37 +9,37 @@ func_952C() {
   level.player scripts\sp\utility::func_65E1("using_arm_device");
 }
 
-func_169B(param_00, param_01, param_02, param_03) {
-  var_04 = func_2164(param_00);
-  level notify("arm_device_remove_slot_" + var_04);
-  self notifyonplayercommand("action_slot_used_" + var_04, "+actionslot " + var_04);
-  thread func_2167(var_04, param_01, param_02, param_03);
+func_169B(var_0, var_1, var_2, var_3) {
+  var_4 = func_2164(var_0);
+  level notify("arm_device_remove_slot_" + var_4);
+  self notifyonplayercommand("action_slot_used_" + var_4, "+actionslot " + var_4);
+  thread func_2167(var_4, var_1, var_2, var_3);
 }
 
-func_2167(param_00, param_01, param_02, param_03) {
+func_2167(var_0, var_1, var_2, var_3) {
   level endon("stop_arm_device");
-  level endon("arm_device_remove_slot_" + param_00);
+  level endon("arm_device_remove_slot_" + var_0);
   self endon("death");
-  var_04 = 0;
+  var_4 = 0;
   for(;;) {
-    var_05 = scripts\engine\utility::waittill_any_return("action_slot_used_" + param_00, param_03);
+    var_5 = scripts\engine\utility::waittill_any_return("action_slot_used_" + var_0, var_3);
     if(isDefined(self.var_55BD) && self.var_55BD > 0) {
       continue;
     }
 
-    if(scripts\sp\utility::func_65DB("using_arm_device") || isDefined(param_03) && var_05 == param_03) {
-      if(var_04 == 1 && isDefined(param_02) || isDefined(param_03)) {
-        if(isDefined(param_02)) {
-          level thread[[param_02]]();
+    if(scripts\sp\utility::func_65DB("using_arm_device") || isDefined(var_3) && var_5 == var_3) {
+      if(var_4 == 1 && isDefined(var_2) || isDefined(var_3)) {
+        if(isDefined(var_2)) {
+          level thread[[var_2]]();
         }
 
-        var_04 = 0;
+        var_4 = 0;
         continue;
       }
 
-      if(!isDefined(param_03) || var_05 != param_03) {
-        level thread[[param_01]]();
-        var_04 = 1;
+      if(!isDefined(var_3) || var_5 != var_3) {
+        level thread[[var_1]]();
+        var_4 = 1;
       }
     }
   }
@@ -57,30 +57,30 @@ func_2168() {
   scripts\sp\utility::func_65E1("using_arm_device");
 }
 
-func_2166(param_00) {
-  var_01 = func_2164(param_00);
-  level notify("arm_device_remove_slot_" + var_01);
+func_2166(var_0) {
+  var_1 = func_2164(var_0);
+  level notify("arm_device_remove_slot_" + var_1);
 }
 
-func_2164(param_00) {
-  var_01 = undefined;
-  switch (param_00) {
+func_2164(var_0) {
+  var_1 = undefined;
+  switch (var_0) {
     case "up":
-      var_01 = 1;
+      var_1 = 1;
       break;
 
     case "down":
-      var_01 = 2;
+      var_1 = 2;
       break;
 
     case "left":
-      var_01 = 3;
+      var_1 = 3;
       break;
 
     case "right":
-      var_01 = 4;
+      var_1 = 4;
       break;
   }
 
-  return var_01;
+  return var_1;
 }

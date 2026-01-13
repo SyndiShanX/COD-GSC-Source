@@ -112,51 +112,51 @@ func_DAB0() {
     return;
   }
 
-  var_00 = self.origin;
-  var_01 = (0, 0, 0);
+  var_0 = self.origin;
+  var_1 = (0, 0, 0);
   if(scripts\sp\utility::hastag(self.model, "j_spine4")) {
-    var_00 = self gettagorigin("j_spine4");
-    var_01 = (0, 0, 35);
+    var_0 = self gettagorigin("j_spine4");
+    var_1 = (0, 0, 35);
   }
 
-  foreach(var_03 in level.players) {
-    var_04 = 0;
-    if(!isalive(var_03)) {
+  foreach(var_3 in level.players) {
+    var_4 = 0;
+    if(!isalive(var_3)) {
       continue;
     }
 
-    if(issentient(var_03) && var_03.ignoreme || var_03.target_gettargetatindex) {
+    if(issentient(var_3) && var_3.ignoreme || var_3.target_gettargetatindex) {
       continue;
     }
 
-    var_05 = distancesquared(var_00, var_03.origin + var_01);
+    var_5 = distancesquared(var_0, var_3.origin + var_1);
     if(isDefined(level.var_10E6D.var_DAB2) && level.var_10E6D.var_DAB2 > 0) {
-      var_06 = squared(level.var_10E6D.var_DAB2);
-      if(var_05 < var_06) {
-        var_04 = 1;
+      var_6 = squared(level.var_10E6D.var_DAB2);
+      if(var_5 < var_6) {
+        var_4 = 1;
       }
     }
 
-    if(!var_04 && isDefined(level.var_10E6D.var_DAB3) && level.var_10E6D.var_DAB3 > 0) {
-      var_07 = squared(level.var_10E6D.var_DAB3);
-      if(var_05 < var_07 && self getpersstat(var_03, 0)) {
-        var_04 = 1;
+    if(!var_4 && isDefined(level.var_10E6D.var_DAB3) && level.var_10E6D.var_DAB3 > 0) {
+      var_7 = squared(level.var_10E6D.var_DAB3);
+      if(var_5 < var_7 && self getpersstat(var_3, 0)) {
+        var_4 = 1;
       }
     }
 
-    if(var_04) {
-      self _meth_84F7("proximity", var_03, var_03.origin);
+    if(var_4) {
+      self _meth_84F7("proximity", var_3, var_3.origin);
       return;
     }
   }
 }
 
-func_F2E0(param_00) {
+func_F2E0(var_0) {
   if(!isDefined(self.var_10E6D)) {
     return;
   }
 
-  if(param_00 && self.var_29 <= 2) {
+  if(var_0 && self.var_29 <= 2) {
     self.var_10E6D.var_2B96 = 1;
     func_F59D("blind");
     return;
@@ -171,8 +171,8 @@ func_F2E0(param_00) {
   func_F59D("hidden");
 }
 
-func_F59D(param_00) {
-  switch (param_00) {
+func_F59D(var_0) {
+  switch (var_0) {
     case "blind":
       lib_0F26::func_117D4("hidden");
       self.musicplay = 1;
@@ -224,16 +224,16 @@ func_10E1B() {
     self.var_BC = "no_cover";
   }
 
-  foreach(var_01 in level.players) {
-    if(!isDefined(var_01.var_10E6D)) {
+  foreach(var_1 in level.players) {
+    if(!isDefined(var_1.var_10E6D)) {
       continue;
     }
 
-    if(!isDefined(var_01.var_10E6D.var_10A9D)) {
+    if(!isDefined(var_1.var_10E6D.var_10A9D)) {
       continue;
     }
 
-    var_01.var_10E6D.var_10A9D[self.unique_id] = undefined;
+    var_1.var_10E6D.var_10A9D[self.unique_id] = undefined;
   }
 
   lib_0F22::func_9B25();
@@ -259,20 +259,20 @@ func_10E20() {
   }
 
   self notify("active_sense_thread");
-  var_00 = undefined;
-  var_01 = self.origin;
+  var_0 = undefined;
+  var_1 = self.origin;
   if(isDefined(level.var_10E6D.group.var_10A9B)) {
-    var_00 = level.var_10E6D.group.var_10A9B[self.var_EED1];
+    var_0 = level.var_10E6D.group.var_10A9B[self.var_EED1];
   }
 
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin;
-    self getenemyinfo(var_00);
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin;
+    self getenemyinfo(var_0);
   } else {
-    var_00 = undefined;
+    var_0 = undefined;
   }
 
-  self _meth_84F7("combat", var_00, var_01);
+  self _meth_84F7("combat", var_0, var_1);
 }
 
 func_7346() {
@@ -288,7 +288,7 @@ func_7346() {
   }
 }
 
-func_1B3D(param_00) {
+func_1B3D(var_0) {
   thread lib_0F27::func_1284A("hmph");
   func_F299("reset");
   thread func_10E1B();
@@ -305,11 +305,11 @@ func_F5C9() {
   }
 
   lib_0F22::func_9B25();
-  var_00 = self.isnodeoccupied;
-  if(isDefined(var_00)) {
-    level.var_10E6D.group.var_10A9B[self.var_EED1] = var_00;
-    if(isDefined(var_00.var_10E6D)) {
-      var_00 lib_0F27::func_868C("stealth_spotted");
+  var_0 = self.isnodeoccupied;
+  if(isDefined(var_0)) {
+    level.var_10E6D.group.var_10A9B[self.var_EED1] = var_0;
+    if(isDefined(var_0.var_10E6D)) {
+      var_0 lib_0F27::func_868C("stealth_spotted");
     }
   }
 
@@ -320,33 +320,33 @@ func_D7DD() {
   wait(2);
 }
 
-func_F299(param_00) {
+func_F299(var_0) {
   if(!scripts\sp\utility::func_65DB("stealth_enabled")) {
     return;
   }
 
-  if(isDefined(self.var_1B44) && self.var_1B44 == param_00) {
+  if(isDefined(self.var_1B44) && self.var_1B44 == var_0) {
     return;
   }
 
   self notify("set_alert_level");
   self endon("set_alert_level");
   self endon("death");
-  if(param_00 == "attack" || param_00 == "combat") {
+  if(var_0 == "attack" || var_0 == "combat") {
     thread func_F5C9();
   }
 
-  self.var_1B44 = param_00;
+  self.var_1B44 = var_0;
   while(isDefined(self.physics_setgravityragdollscalar)) {
     wait(0.05);
   }
 
-  lib_0F27::func_F5B7(param_00);
-  self notify("stealth_alertlevel_change", param_00);
-  self.var_28 = lib_0F27::func_1B40(param_00);
-  var_01 = self.var_29 > 2;
-  lib_0F1C::func_6837(!var_01);
-  self._func_182 = !var_01;
+  lib_0F27::func_F5B7(var_0);
+  self notify("stealth_alertlevel_change", var_0);
+  self.var_28 = lib_0F27::func_1B40(var_0);
+  var_1 = self.var_29 > 2;
+  lib_0F1C::func_6837(!var_1);
+  self._func_182 = !var_1;
 }
 
 func_F345() {
@@ -361,35 +361,35 @@ func_F345() {
   level lib_0F27::func_F5B4("combat", ::func_6847);
 }
 
-func_B960(param_00, param_01) {
-  var_02 = undefined;
-  var_03 = self.team;
+func_B960(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = self.team;
   for(;;) {
     if(!isalive(self)) {
       return;
     }
 
-    self waittill("damage", var_04, var_05, var_06, var_07);
-    func_3DAF(var_04, var_05, var_07);
-    var_08 = self.origin;
+    self waittill("damage", var_4, var_5, var_6, var_7);
+    func_3DAF(var_4, var_5, var_7);
+    var_8 = self.origin;
     if(isalive(self) && !scripts\sp\utility::func_65DB("stealth_enabled")) {
       continue;
     }
 
-    if(isalive(var_05)) {
-      var_02 = var_05;
+    if(isalive(var_5)) {
+      var_2 = var_5;
     }
 
-    if(!isDefined(var_02)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(isplayer(var_02) || isDefined(var_02.team) && var_02.team != var_03) {
+    if(isplayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
       break;
     }
 
-    if(isDefined(var_02.classname) && var_02.classname == "script_model") {
-      if(var_02.var_9D62) {
+    if(isDefined(var_2.classname) && var_2.classname == "script_model") {
+      if(var_2.var_9D62) {
         break;
       }
     }
@@ -399,111 +399,111 @@ func_B960(param_00, param_01) {
     return;
   }
 
-  if(isDefined(var_02) && var_02 == level.player && lib_0E29::func_87A7() == "controllingrobot") {
-    var_02 give_zombies_perk();
+  if(isDefined(var_2) && var_2 == level.player && lib_0E29::func_87A7() == "controllingrobot") {
+    var_2 give_zombies_perk();
   }
 
   if(isDefined(self.var_10E6D.var_C813)) {
-    param_00 = self.var_10E6D.var_C813;
+    var_0 = self.var_10E6D.var_C813;
   } else if(isDefined(level.var_10E6D.var_C813)) {
-    param_00 = level.var_10E6D.var_C813;
+    var_0 = level.var_10E6D.var_C813;
   }
 
   if(isDefined(self.var_10E6D.var_C814)) {
-    param_01 = self.var_10E6D.var_C814;
+    var_1 = self.var_10E6D.var_C814;
   } else if(isDefined(level.var_10E6D.var_C814)) {
-    param_01 = level.var_10E6D.var_C814;
+    var_1 = level.var_10E6D.var_C814;
   }
 
-  lib_0F1C::func_67FF("attack", var_02, param_00, param_01);
+  lib_0F1C::func_67FF("attack", var_2, var_0, var_1);
 }
 
-func_3DAF(param_00, param_01, param_02) {
-  if(param_00 > 0 && self.var_DE != "MOD_MELEE" && self.var_1B44 != "attack" && self.var_1B44 != "combat") {
-    var_03 = self getEye();
-    if(distancesquared(param_02, var_03) < squared(20)) {
-      self dodamage(self.health, param_02, param_01, param_01, "MOD_HEAD_SHOT");
+func_3DAF(var_0, var_1, var_2) {
+  if(var_0 > 0 && self.var_DE != "MOD_MELEE" && self.var_1B44 != "attack" && self.var_1B44 != "combat") {
+    var_3 = self getEye();
+    if(distancesquared(var_2, var_3) < squared(20)) {
+      self dodamage(self.health, var_2, var_1, var_1, "MOD_HEAD_SHOT");
     }
   }
 }
 
-func_6847(param_00) {
-  param_00.var_9B22 = param_00.origin;
-  if(isDefined(self.isnodeoccupied) && isDefined(param_00.issplitscreen) && param_00.issplitscreen == self.isnodeoccupied) {
-    param_00.var_9B22 = self lastknownpos(self.isnodeoccupied);
-  } else if(isDefined(param_00.issplitscreen) && param_00.var_12AE9 == "bulletwhizby") {
-    param_00.var_9B22 = param_00.issplitscreen.origin;
+func_6847(var_0) {
+  var_0.var_9B22 = var_0.origin;
+  if(isDefined(self.isnodeoccupied) && isDefined(var_0.issplitscreen) && var_0.issplitscreen == self.isnodeoccupied) {
+    var_0.var_9B22 = self lastknownpos(self.isnodeoccupied);
+  } else if(isDefined(var_0.issplitscreen) && var_0.var_12AE9 == "bulletwhizby") {
+    var_0.var_9B22 = var_0.issplitscreen.origin;
   }
 
-  func_6849(param_00);
-  if(func_6848(param_00)) {
+  func_6849(var_0);
+  if(func_6848(var_0)) {
     return;
   }
 
   self.var_10E6D.var_A908 = gettime();
-  if(!func_DD2D(param_00)) {
-    func_DD2C(param_00);
+  if(!func_DD2D(var_0)) {
+    func_DD2C(var_0);
   }
 
-  switch (param_00.type) {
+  switch (var_0.type) {
     case "investigate":
-      thread func_6859(param_00);
+      thread func_6859(var_0);
       break;
 
     case "cover_blown":
-      thread func_6810(param_00);
+      thread func_6810(var_0);
       break;
 
     case "combat":
-      thread func_6808(param_00);
+      thread func_6808(var_0);
       break;
   }
 
-  var_01 = lib_0F18::func_10EBB(param_00.var_12AE9);
-  if(isDefined(var_01) && var_01 != ::func_6847) {
-    self thread[[var_01]](param_00);
+  var_1 = lib_0F18::func_10EBB(var_0.var_12AE9);
+  if(isDefined(var_1) && var_1 != ::func_6847) {
+    self thread[[var_1]](var_0);
   }
 }
 
-func_6848(param_00) {
-  var_01 = self.var_10E6D.var_6896;
-  if(!isDefined(var_01)) {
-    var_01 = level.var_10E6D.var_6896;
+func_6848(var_0) {
+  var_1 = self.var_10E6D.var_6896;
+  if(!isDefined(var_1)) {
+    var_1 = level.var_10E6D.var_6896;
   }
 
-  if(isDefined(var_01)) {
-    var_02 = lib_0F1C::func_6894(var_01, param_00.type);
-    if(var_02 > 0) {
+  if(isDefined(var_1)) {
+    var_2 = lib_0F1C::func_6894(var_1, var_0.type);
+    if(var_2 > 0) {
       return 1;
     }
   }
 
-  if(scripts\engine\utility::istrue(level.var_10E6D.var_5659) && func_6872(param_00)) {
+  if(scripts\engine\utility::istrue(level.var_10E6D.var_5659) && func_6872(var_0)) {
     return 1;
   }
 
-  if(isDefined(param_00.issplitscreen) && param_00.issplitscreen == level.player && lib_0E29::func_87A7() == "controllingrobot" && func_6871(param_00)) {
-    self.var_10E6D.var_683A[param_00.var_12AE9] = 0;
-    self.var_10E6D.var_683A[param_00.type] = 0;
+  if(isDefined(var_0.issplitscreen) && var_0.issplitscreen == level.player && lib_0E29::func_87A7() == "controllingrobot" && func_6871(var_0)) {
+    self.var_10E6D.var_683A[var_0.var_12AE9] = 0;
+    self.var_10E6D.var_683A[var_0.type] = 0;
     return 1;
   }
 
-  var_03 = lib_0F18::func_10EBB("event_" + param_00.type);
-  if(isDefined(var_03)) {
-    return lib_0F18::func_10E8A("event_" + param_00.type, param_00);
+  var_3 = lib_0F18::func_10EBB("event_" + var_0.type);
+  if(isDefined(var_3)) {
+    return lib_0F18::func_10E8A("event_" + var_0.type, var_0);
   }
 
   return 0;
 }
 
-func_6872(param_00) {
-  if(issentient(param_00.issplitscreen)) {
-    switch (param_00.var_12AE9) {
+func_6872(var_0) {
+  if(issentient(var_0.issplitscreen)) {
+    switch (var_0.var_12AE9) {
       case "proximity":
       case "footstep_walk":
       case "footstep_sprint":
       case "footstep":
-        thread lib_0F26::func_117C5(param_00.issplitscreen, 1);
+        thread lib_0F26::func_117C5(var_0.issplitscreen, 1);
         return 1;
     }
   }
@@ -511,9 +511,9 @@ func_6872(param_00) {
   return 0;
 }
 
-func_6871(param_00) {
-  if(issentient(param_00.issplitscreen)) {
-    switch (param_00.var_12AE9) {
+func_6871(var_0) {
+  if(issentient(var_0.issplitscreen)) {
+    switch (var_0.var_12AE9) {
       case "proximity":
         return 1;
 
@@ -523,41 +523,41 @@ func_6871(param_00) {
       case "bulletwhizby":
       case "grenade danger":
       case "explode":
-        param_00.type = "combat";
+        var_0.type = "combat";
         return 0;
     }
   }
 
-  if(param_00.type != "combat") {
+  if(var_0.type != "combat") {
     return 1;
   }
 
   return 0;
 }
 
-func_6849(param_00) {
-  if(!isDefined(param_00) || !isDefined(param_00.var_12AE9)) {
+func_6849(var_0) {
+  if(!isDefined(var_0) || !isDefined(var_0.var_12AE9)) {
     return;
   }
 
-  switch (param_00.var_12AE9) {
+  switch (var_0.var_12AE9) {
     case "sight":
       if(isDefined(self.var_10E6D.var_117CA) && self.var_10E6D.var_117CA == 0) {
-        param_00.type = "combat";
+        var_0.type = "combat";
       }
       break;
   }
 }
 
-func_6859(param_00) {
+func_6859(var_0) {
   func_F299("warning1");
-  thread lib_0F22::func_9B23(param_00);
+  thread lib_0F22::func_9B23(var_0);
 }
 
-func_6810(param_00) {
+func_6810(var_0) {
   func_F299("warning2");
   if(scripts\engine\utility::istrue(level.var_10E6D.var_5659)) {
-    switch (param_00.var_12AE9) {
+    switch (var_0.var_12AE9) {
       case "silenced_shot":
       case "gunshot":
       case "explode":
@@ -567,16 +567,16 @@ func_6810(param_00) {
     }
   }
 
-  thread lib_0F22::func_9B23(param_00);
+  thread lib_0F22::func_9B23(var_0);
   if(!lib_0F27::func_8693()) {
-    var_01 = lib_0F27::func_1284A("backup_call", 4);
-    if(isDefined(var_01) && var_01) {
-      lib_0F27::func_4F6C("seek_backup", param_00.var_9B22, randomintrange(1, 2), 800);
+    var_1 = lib_0F27::func_1284A("backup_call", 4);
+    if(isDefined(var_1) && var_1) {
+      lib_0F27::func_4F6C("seek_backup", var_0.var_9B22, randomintrange(1, 2), 800);
     }
   }
 }
 
-func_6808(param_00) {
+func_6808(var_0) {
   self notify("investigate_behavior");
   self notify("stop_going_to_node");
   self notify("investigate_forget");
@@ -586,21 +586,21 @@ func_6808(param_00) {
 
   self.var_10E6D.beginusegas = "combat";
   func_F299("attack");
-  if(issentient(param_00.issplitscreen) && !isDefined(self.isnodeoccupied)) {
-    self getenemyinfo(param_00.issplitscreen);
+  if(issentient(var_0.issplitscreen) && !isDefined(self.isnodeoccupied)) {
+    self getenemyinfo(var_0.issplitscreen);
     lib_0F26::func_117D4("spotted");
   }
 
   scripts\sp\utility::func_65E1("stealth_attack");
   lib_0F27::func_10EE4(1);
-  lib_0F27::func_F4C8("combat", 1, param_00.var_9B22);
+  lib_0F27::func_F4C8("combat", 1, var_0.var_9B22);
 }
 
-func_1272D(param_00) {
+func_1272D(var_0) {
   self endon("death");
-  var_01 = undefined;
-  if(isDefined(param_00)) {
-    var_01 = param_00.origin;
+  var_1 = undefined;
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin;
   }
 
   if(!isDefined(self.var_10E6D)) {
@@ -613,53 +613,53 @@ func_1272D(param_00) {
 
   scripts\sp\utility::func_65E1("stealth_cover_blown");
   lib_0F27::func_868C("stealth_cover_blown");
-  var_02 = lib_0F27::func_7B72();
-  if(!isDefined(var_02) || var_02 == "unaware") {
+  var_2 = lib_0F27::func_7B72();
+  if(!isDefined(var_2) || var_2 == "unaware") {
     if(!isDefined(self.var_10E6D.var_C9A8) || self.var_10E6D.var_C9A8 == "unaware") {
-      lib_0F27::func_F4C8("alert", isDefined(self.var_10E6D.beginusegas) && self.var_10E6D.beginusegas != "investigate", var_01);
+      lib_0F27::func_F4C8("alert", isDefined(self.var_10E6D.beginusegas) && self.var_10E6D.beginusegas != "investigate", var_1);
     }
 
     self.var_10E6D.var_500C = "alert";
   }
 }
 
-func_DD2C(param_00) {
+func_DD2C(var_0) {
   self endon("death");
-  var_01 = 0.1;
-  switch (param_00.type) {
+  var_1 = 0.1;
+  switch (var_0.type) {
     case "investigate":
-      thread lib_0F27::func_1284A("warning1", var_01);
+      thread lib_0F27::func_1284A("warning1", var_1);
       return 1;
 
     case "cover_blown":
-      thread lib_0F27::func_1284A("warning2", var_01);
+      thread lib_0F27::func_1284A("warning2", var_1);
       return 1;
 
     case "combat":
-      thread lib_0F27::func_1284A("spotted", var_01);
+      thread lib_0F27::func_1284A("spotted", var_1);
       return 1;
   }
 
   return 0;
 }
 
-func_DD2D(param_00) {
+func_DD2D(var_0) {
   self endon("death");
-  if(isDefined(param_00.var_12AE9)) {
-    var_01 = randomfloatrange(0.5, 1);
-    switch (param_00.var_12AE9) {
+  if(isDefined(var_0.var_12AE9)) {
+    var_1 = randomfloatrange(0.5, 1);
+    switch (var_0.var_12AE9) {
       case "explode":
-        thread lib_0F27::func_1284A("explosion", var_01);
+        thread lib_0F27::func_1284A("explosion", var_1);
         return 1;
 
       case "seek_backup":
-        thread lib_0F27::func_1284A("acknowledgement", var_01);
+        thread lib_0F27::func_1284A("acknowledgement", var_1);
         return 1;
 
       case "found_corpse":
       case "saw_corpse":
-        thread lib_0F27::func_1284A(param_00.var_12AE9, var_01);
-        thread lib_0F27::func_1698(["saw_corpse", "found_corpse"], var_01 + 0.05);
+        thread lib_0F27::func_1284A(var_0.var_12AE9, var_1);
+        thread lib_0F27::func_1698(["saw_corpse", "found_corpse"], var_1 + 0.05);
         return 1;
     }
   }
@@ -667,50 +667,50 @@ func_DD2D(param_00) {
   return 0;
 }
 
-setworldupreference(param_00, param_01, param_02) {
+setworldupreference(var_0, var_1, var_2) {
   self endon("death");
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var_03 = !param_02;
-  while(lib_0F27::func_10E82() || !var_03) {
+  var_3 = !var_2;
+  while(lib_0F27::func_10E82() || !var_3) {
     lib_0F27::func_10E87();
-    self[[param_00]](param_01);
-    var_03 = 1;
+    self[[var_0]](var_1);
+    var_3 = 1;
     self waittill("goal");
   }
 }
 
-isjumping(param_00, param_01) {
+isjumping(var_0, var_1) {
   self endon("death");
-  setworldupreference(param_00, param_01);
+  setworldupreference(var_0, var_1);
   if(isDefined(self.var_10E6D.var_92CC)) {
     lib_0F27::func_413E();
     if(isDefined(self.var_10E6D.var_4C4F)) {
-      lib_0F27::func_CCD4(param_01, "gravity");
+      lib_0F27::func_CCD4(var_1, "gravity");
     }
   }
 }
 
-_meth_840C(param_00, param_01) {
-  setworldupreference(param_00, param_01, 0);
-  if(isDefined(param_01.var_EE2C)) {
-    self.moveplaybackrate = param_01.var_EE2C;
+_meth_840C(var_0, var_1) {
+  setworldupreference(var_0, var_1, 0);
+  if(isDefined(var_1.var_EE2C)) {
+    self.moveplaybackrate = var_1.var_EE2C;
   }
 
-  if(isDefined(param_01.script_animation)) {
-    if(scripts\engine\utility::istrue(param_01.var_ED88) && isDefined(param_01.angles)) {
-      self orientmode("face angle", param_01.angles[1]);
+  if(isDefined(var_1.script_animation)) {
+    if(scripts\engine\utility::istrue(var_1.var_ED88) && isDefined(var_1.angles)) {
+      self orientmode("face angle", var_1.angles[1]);
     }
 
-    var_02 = param_01.script_animation;
-    scripts\sp\anim::func_1EC8(self, "gravity", var_02);
-  } else if(isDefined(param_01.var_EDDE)) {
-    self[[level.var_92DE[param_01.var_EDDE]]](param_01);
+    var_2 = var_1.script_animation;
+    scripts\sp\anim::func_1EC8(self, "gravity", var_2);
+  } else if(isDefined(var_1.var_EDDE)) {
+    self[[level.var_92DE[var_1.var_EDDE]]](var_1);
   }
 
-  if(isDefined(param_01.script_animation_exit)) {
-    scripts\sp\anim::func_1EC8(self, "gravity", param_01.script_animation_exit);
+  if(isDefined(var_1.script_animation_exit)) {
+    scripts\sp\anim::func_1EC8(self, "gravity", var_1.script_animation_exit);
   }
 }

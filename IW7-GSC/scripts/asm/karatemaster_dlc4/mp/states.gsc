@@ -153,70 +153,70 @@ func_2371() {
   scripts\asm\asm::func_2327();
 }
 
-trans_idle_to_choose_movetype0(param_00, param_01, param_02, param_03) {
+trans_idle_to_choose_movetype0(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_choose_movetype_to_idle_exit_sprint0(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_idle_exit_sprint0(var_0, var_1, var_2, var_3) {
   return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-trans_choose_movetype_to_idle_exit_walk1(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_idle_exit_walk1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-trans_choose_movetype_to_idle_exit_run2(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_idle_exit_run2(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-trans_choose_movetype_to_idle_exit_slow_walk3(param_00, param_01, param_02, param_03) {
+trans_choose_movetype_to_idle_exit_slow_walk3(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_movetyperequested("slow_walk");
 }
 
-trans_pass_walk_in_to_walk_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_walk_in_to_walk_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_walk_out_to_move_done4(param_00, param_01, param_02, param_03) {
+trans_pass_walk_out_to_move_done4(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_in_to_run_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_run_in_to_run_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_run_out_to_move_done2(param_00, param_01, param_02, param_03) {
+trans_pass_run_out_to_move_done2(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_in_to_sprint_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_in_to_sprint_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_sprint_out_to_move_done0(param_00, param_01, param_02, param_03) {
+trans_pass_sprint_out_to_move_done0(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_slow_walk_in_to_slow_walk_loop1(param_00, param_01, param_02, param_03) {
+trans_pass_slow_walk_in_to_slow_walk_loop1(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_pass_slow_walk_out_to_move_done3(param_00, param_01, param_02, param_03) {
+trans_pass_slow_walk_out_to_move_done3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-trans_death_generic_to_death_normal0(param_00, param_01, param_02, param_03) {
+trans_death_generic_to_death_normal0(var_0, var_1, var_2, var_3) {
   return self.agent_type == "skater";
 }
 
-trans_death_generic_to_death_kungfu1(param_00, param_01, param_02, param_03) {
+trans_death_generic_to_death_kungfu1(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::istrue(self.kung_fu_punched);
 }
 
-trans_death_moving_to_death_moving_normal0(param_00, param_01, param_02, param_03) {
+trans_death_moving_to_death_moving_normal0(var_0, var_1, var_2, var_3) {
   return self.agent_type == "skater";
 }
 
-trans_death_moving_to_death_kungfu1(param_00, param_01, param_02, param_03) {
+trans_death_moving_to_death_kungfu1(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::istrue(self.kung_fu_punched);
 }

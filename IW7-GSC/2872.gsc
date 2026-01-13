@@ -9,11 +9,11 @@ func_9606() {
 }
 
 func_13D55() {
-  var_00 = getglass(self.target);
-  if(!isDefined(var_00)) {
+  var_0 = getglass(self.target);
+  if(!isDefined(var_0)) {
     return;
   }
 
-  level waittillmatch(var_00, "glass_destroyed");
+  level waittillmatch(var_0, "glass_destroyed");
   self delete();
 }

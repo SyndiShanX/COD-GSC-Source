@@ -4,15 +4,15 @@
 ***************************************/
 
 func_D9AB() {
-  foreach(var_01 in level.placement["all"]) {
-    var_01 func_F7F8();
+  foreach(var_1 in level.placement["all"]) {
+    var_1 func_F7F8();
   }
 
   if(level.multiteambased) {
     func_3219("multiteam");
 
-    foreach(var_01 in level.players) {
-      var_01 setrankedplayerdata("common", "round", "scoreboardType", "multiteam");
+    foreach(var_1 in level.players) {
+      var_1 setrankedplayerdata("common", "round", "scoreboardType", "multiteam");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -20,15 +20,15 @@ func_D9AB() {
     setclientmatchdata("alliesKills", -1);
     setclientmatchdata("alliesDeaths", -1);
   } else if(level.teambased) {
-    var_05 = getteamscore("allies");
-    var_06 = getteamscore("axis");
-    var_07 = 0;
-    var_08 = 0;
+    var_5 = getteamscore("allies");
+    var_6 = getteamscore("axis");
+    var_7 = 0;
+    var_8 = 0;
 
-    foreach(var_01 in level.players) {
+    foreach(var_1 in level.players) {
       if(isDefined(var_1.pers["team"]) && var_1.pers["team"] == "allies") {
-        var_07 = var_07 + var_1.pers["kills"];
-        var_08 = var_08 + var_1.pers["deaths"];
+        var_7 = var_7 + var_1.pers["kills"];
+        var_8 = var_8 + var_1.pers["deaths"];
       }
     }
 
@@ -50,48 +50,48 @@ func_D9AB() {
         setclientmatchdata("axisTTB", scripts\engine\utility::ter_op("axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
         var_11 = game["timeToBeatTeam"];
       }
-    } else if(var_05 == var_06)
+    } else if(var_5 == var_6)
       var_11 = "tied";
-    else if(var_05 > var_06) {
+    else if(var_5 > var_6) {
       var_11 = "allies";
     } else {
       var_11 = "axis";
     }
 
-    setclientmatchdata("alliesScore", var_05);
-    setclientmatchdata("axisScore", var_06);
-    setclientmatchdata("alliesKills", var_07);
-    setclientmatchdata("alliesDeaths", var_08);
+    setclientmatchdata("alliesScore", var_5);
+    setclientmatchdata("axisScore", var_6);
+    setclientmatchdata("alliesKills", var_7);
+    setclientmatchdata("alliesDeaths", var_8);
 
     if(var_11 == "tied") {
       func_3219("allies");
       func_3219("axis");
 
-      foreach(var_01 in level.players) {
+      foreach(var_1 in level.players) {
         var_13 = var_1.pers["team"];
 
         if(!isDefined(var_13)) {
           continue;
         }
         if(var_13 == "spectator") {
-          var_01 setrankedplayerdata("common", "round", "scoreboardType", "allies");
+          var_1 setrankedplayerdata("common", "round", "scoreboardType", "allies");
           continue;
         }
 
-        var_01 setrankedplayerdata("common", "round", "scoreboardType", var_13);
+        var_1 setrankedplayerdata("common", "round", "scoreboardType", var_13);
       }
     } else {
       func_3219(var_11);
 
-      foreach(var_01 in level.players) {
-        var_01 setrankedplayerdata("common", "round", "scoreboardType", var_11);
+      foreach(var_1 in level.players) {
+        var_1 setrankedplayerdata("common", "round", "scoreboardType", var_11);
       }
     }
   } else {
     func_3219("neutral");
 
-    foreach(var_01 in level.players) {
-      var_01 setrankedplayerdata("common", "round", "scoreboardType", "neutral");
+    foreach(var_1 in level.players) {
+      var_1 setrankedplayerdata("common", "round", "scoreboardType", "neutral");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -100,105 +100,105 @@ func_D9AB() {
     setclientmatchdata("alliesDeaths", -1);
   }
 
-  foreach(var_01 in level.players) {
-    var_01 setrankedplayerdata("common", "round", "totalXp", var_1.pers["summary"]["xp"]);
-    var_01 setrankedplayerdata("common", "round", "scoreXp", var_1.pers["summary"]["score"]);
-    var_01 setrankedplayerdata("common", "round", "challengeXp", var_1.pers["summary"]["challenge"]);
-    var_01 setrankedplayerdata("common", "round", "matchXp", var_1.pers["summary"]["match"]);
-    var_01 setrankedplayerdata("common", "round", "miscXp", var_1.pers["summary"]["misc"]);
-    var_01 setrankedplayerdata("common", "round", "medalXp", var_1.pers["summary"]["medal"]);
-    var_01 setrankedplayerdata("common", "common_entitlement_xp", var_1.pers["summary"]["bonusXP"]);
+  foreach(var_1 in level.players) {
+    var_1 setrankedplayerdata("common", "round", "totalXp", var_1.pers["summary"]["xp"]);
+    var_1 setrankedplayerdata("common", "round", "scoreXp", var_1.pers["summary"]["score"]);
+    var_1 setrankedplayerdata("common", "round", "challengeXp", var_1.pers["summary"]["challenge"]);
+    var_1 setrankedplayerdata("common", "round", "matchXp", var_1.pers["summary"]["match"]);
+    var_1 setrankedplayerdata("common", "round", "miscXp", var_1.pers["summary"]["misc"]);
+    var_1 setrankedplayerdata("common", "round", "medalXp", var_1.pers["summary"]["medal"]);
+    var_1 setrankedplayerdata("common", "common_entitlement_xp", var_1.pers["summary"]["bonusXP"]);
   }
 }
 
 func_F7F8() {
-  var_00 = getclientmatchdata("scoreboardPlayerCount");
+  var_0 = getclientmatchdata("scoreboardPlayerCount");
 
-  if(var_00 <= 24) {
+  if(var_0 <= 24) {
     setclientmatchdata("players", self.clientmatchdataid, "score", self.pers["score"]);
-    var_01 = self.pers["kills"];
-    setclientmatchdata("players", self.clientmatchdataid, "kills", var_01);
+    var_1 = self.pers["kills"];
+    setclientmatchdata("players", self.clientmatchdataid, "kills", var_1);
 
     if(level.gametype == "dm" || level.gametype == "gun") {
-      var_02 = self.assists;
+      var_2 = self.assists;
     } else {
-      var_02 = self.pers["assists"];
+      var_2 = self.pers["assists"];
     }
 
-    setclientmatchdata("players", self.clientmatchdataid, "assists", var_02);
-    var_03 = self.pers["deaths"];
-    setclientmatchdata("players", self.clientmatchdataid, "deaths", var_03);
-    var_04 = self.pers["team"];
-    setclientmatchdata("players", self.clientmatchdataid, "team", var_04);
-    var_05 = game[self.pers["team"]];
-    setclientmatchdata("players", self.clientmatchdataid, "faction", var_05);
-    var_06 = self.pers["extrascore0"];
-    setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var_06);
-    var_07 = self.pers["extrascore1"];
-    setclientmatchdata("players", self.clientmatchdataid, "extrascore1", var_07);
-    var_08 = self.timeplayed["total"];
-    setclientmatchdata("players", self.clientmatchdataid, "timeplayed", var_08);
-    var_09 = scripts\mp\rank::getrank();
-    setclientmatchdata("players", self.clientmatchdataid, "rank", var_09);
+    setclientmatchdata("players", self.clientmatchdataid, "assists", var_2);
+    var_3 = self.pers["deaths"];
+    setclientmatchdata("players", self.clientmatchdataid, "deaths", var_3);
+    var_4 = self.pers["team"];
+    setclientmatchdata("players", self.clientmatchdataid, "team", var_4);
+    var_5 = game[self.pers["team"]];
+    setclientmatchdata("players", self.clientmatchdataid, "faction", var_5);
+    var_6 = self.pers["extrascore0"];
+    setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var_6);
+    var_7 = self.pers["extrascore1"];
+    setclientmatchdata("players", self.clientmatchdataid, "extrascore1", var_7);
+    var_8 = self.timeplayed["total"];
+    setclientmatchdata("players", self.clientmatchdataid, "timeplayed", var_8);
+    var_9 = scripts\mp\rank::getrank();
+    setclientmatchdata("players", self.clientmatchdataid, "rank", var_9);
     var_10 = scripts\mp\rank::detachshieldmodel();
     setclientmatchdata("players", self.clientmatchdataid, "prestige", var_10);
     var_0++;
-    setclientmatchdata("scoreboardPlayerCount", var_00);
-  } else {}
+    setclientmatchdata("scoreboardPlayerCount", var_0);
+  }
 }
 
-computescoreboardslot(var_00, var_01) {
-  if(var_00 == "none") {
-    return 0 + var_01;
+computescoreboardslot(var_0, var_1) {
+  if(var_0 == "none") {
+    return 0 + var_1;
   }
 
-  if(var_00 == "neutral") {
-    return 24 + var_01;
+  if(var_0 == "neutral") {
+    return 24 + var_1;
   }
 
-  if(var_00 == "allies") {
-    return 48 + var_01;
+  if(var_0 == "allies") {
+    return 48 + var_1;
   }
 
-  if(var_00 == "axis") {
-    return 72 + var_01;
+  if(var_0 == "axis") {
+    return 72 + var_1;
   }
 
-  if(var_00 == "multiteam") {
-    return 96 + var_01;
+  if(var_0 == "multiteam") {
+    return 96 + var_1;
   }
 
   return 0;
 }
 
-func_3219(var_00) {
-  if(var_00 == "multiteam") {
-    var_01 = 0;
+func_3219(var_0) {
+  if(var_0 == "multiteam") {
+    var_1 = 0;
 
-    foreach(var_03 in level.teamnamelist) {
-      foreach(var_05 in level.placement[var_03]) {
-        setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var_01), var_5.clientmatchdataid);
+    foreach(var_3 in level.teamnamelist) {
+      foreach(var_5 in level.placement[var_3]) {
+        setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var_1), var_5.clientmatchdataid);
         var_1++;
       }
     }
-  } else if(var_00 == "neutral") {
-    var_01 = 0;
+  } else if(var_0 == "neutral") {
+    var_1 = 0;
 
-    foreach(var_05 in level.placement["all"]) {
-      setclientmatchdata("scoreboards", computescoreboardslot(var_00, var_01), var_5.clientmatchdataid);
+    foreach(var_5 in level.placement["all"]) {
+      setclientmatchdata("scoreboards", computescoreboardslot(var_0, var_1), var_5.clientmatchdataid);
       var_1++;
     }
   } else {
-    var_10 = scripts\mp\utility\game::getotherteam(var_00);
-    var_01 = 0;
+    var_10 = scripts\mp\utility\game::getotherteam(var_0);
+    var_1 = 0;
 
-    foreach(var_05 in level.placement[var_00]) {
-      setclientmatchdata("scoreboards", computescoreboardslot(var_00, var_01), var_5.clientmatchdataid);
+    foreach(var_5 in level.placement[var_0]) {
+      setclientmatchdata("scoreboards", computescoreboardslot(var_0, var_1), var_5.clientmatchdataid);
       var_1++;
     }
 
-    foreach(var_05 in level.placement[var_10]) {
-      setclientmatchdata("scoreboards", computescoreboardslot(var_00, var_01), var_5.clientmatchdataid);
+    foreach(var_5 in level.placement[var_10]) {
+      setclientmatchdata("scoreboards", computescoreboardslot(var_0, var_1), var_5.clientmatchdataid);
       var_1++;
     }
   }

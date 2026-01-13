@@ -30,18 +30,18 @@ main() {
 runmodespecifictriggers() {
   if(level.gametype == "ball" || level.gametype == "tdef") {
     wait(1);
-    var_00 = spawn("trigger_radius", (-1386, -154, 692), 0, 46, 128);
-    var_00.var_336 = "uplink_nozone";
-    var_00 hide();
-    level.nozonetriggers[level.nozonetriggers.size] = var_00;
-    var_01 = spawn("trigger_radius", (1416, 56, 432), 0, 32, 128);
-    var_01.var_336 = "uplink_nozone";
-    var_01 hide();
-    level.nozonetriggers[level.nozonetriggers.size] = var_01;
+    var_0 = spawn("trigger_radius", (-1386, -154, 692), 0, 46, 128);
+    var_0.var_336 = "uplink_nozone";
+    var_0 hide();
+    level.nozonetriggers[level.nozonetriggers.size] = var_0;
+    var_1 = spawn("trigger_radius", (1416, 56, 432), 0, 32, 128);
+    var_1.var_336 = "uplink_nozone";
+    var_1 hide();
+    level.nozonetriggers[level.nozonetriggers.size] = var_1;
   }
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }

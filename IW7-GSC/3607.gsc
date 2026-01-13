@@ -61,8 +61,8 @@ func_13A9F() {
   for(;;) {
     self waittill("got_a_kill");
     self.health = self.maxhealth;
-    var_00 = self getvieworigin();
-    playFX(level._effect["screen_blood"], var_00);
+    var_0 = self getvieworigin();
+    playFX(level._effect["screen_blood"], var_0);
   }
 }
 
@@ -71,20 +71,20 @@ func_13B7A() {
   self endon("disconnect");
   self endon("reaper_removed");
   level endon("game_ended");
-  var_00 = 0;
+  var_0 = 0;
   self thermalvisionoff();
   self notifyonplayercommand("switch_reaper_thermal", "+usereload");
   self notifyonplayercommand("switch_reaper_thermal", "+activate");
   for(;;) {
     self waittill("switch_reaper_thermal");
-    if(!var_00) {
+    if(!var_0) {
       self thermalvisionon();
     } else {
       self thermalvisionoff();
     }
 
     self playlocalsound("reaper_thermal_toggle");
-    var_00 = !var_00;
+    var_0 = !var_0;
   }
 }
 
@@ -93,7 +93,7 @@ func_13ACC() {
   self endon("disconnect");
   self endon("reaper_removed");
   level endon("game_ended");
-  var_00 = (0, 0, 32);
+  var_0 = (0, 0, 32);
   for(;;) {
     self waittill("melee_fired");
     self setscriptablepartstate("reaper_claws", "claws_on_fire", 0);
@@ -188,21 +188,21 @@ func_A668() {
   self endon("disconnect");
   level endon("game_ended");
   wait(0.05);
-  var_00 = self _meth_8113();
-  if(!isDefined(var_00)) {
+  var_0 = self _meth_8113();
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var_01 = var_00.origin;
+  var_1 = var_0.origin;
   if(self.loadoutarchetype == "archetype_scout") {
-    playFX(level._effect["reaper_kill_robot"], var_01 + (0, 0, 12));
+    playFX(level._effect["reaper_kill_robot"], var_1 + (0, 0, 12));
   } else {
-    playFX(level._effect["reaper_kill"], var_01 + (0, 0, 12));
+    playFX(level._effect["reaper_kill"], var_1 + (0, 0, 12));
   }
 
-  if(isDefined(var_00)) {
-    var_00 hide(1);
-    var_00.permanentcustommovetransition = 1;
+  if(isDefined(var_0)) {
+    var_0 hide(1);
+    var_0.permanentcustommovetransition = 1;
   }
 }
 
@@ -215,8 +215,8 @@ isusingreaper() {
     return 0;
   }
 
-  var_00 = scripts\mp\supers::getcurrentsuperref();
-  if(!isDefined(var_00) || var_00 != "super_reaper") {
+  var_0 = scripts\mp\supers::getcurrentsuperref();
+  if(!isDefined(var_0) || var_0 != "super_reaper") {
     return 0;
   }
 

@@ -18,8 +18,8 @@ init() {
 
 onplayerconnect() {
   for(;;) {
-    level waittill("connected", var_00);
-    var_00 thread onplayerspawned();
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
   }
 }
 
@@ -36,57 +36,57 @@ func_13D18() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  var_00 = gettime();
+  var_0 = gettime();
   for(;;) {
-    self waittill("bulletwhizby", var_01, var_02);
-    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_01)) {
+    self waittill("bulletwhizby", var_1, var_2);
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_1)) {
       continue;
     }
 
-    if(gettime() - var_00 > 190 && !scripts\mp\utility::isusingremote() && getdvar("scr_whizby_off") == "") {
-      thread func_13D17(var_01);
-      var_00 = gettime();
+    if(gettime() - var_0 > 190 && !scripts\mp\utility::isusingremote() && getdvar("scr_whizby_off") == "") {
+      thread func_13D17(var_1);
+      var_0 = gettime();
     }
   }
 }
 
 func_13D11() {
   scripts\engine\utility::waittill_any_3("death", "disconnect");
-  foreach(var_01 in self.var_1468) {
-    if(isalive(var_01)) {
-      var_01 delete();
+  foreach(var_1 in self.var_1468) {
+    if(isalive(var_1)) {
+      var_1 delete();
     }
   }
 }
 
-func_13D17(param_00) {
-  var_01 = distance(param_00 getEye(), self getEye()) * 0.9;
-  var_02 = param_00 getEye();
-  var_03 = anglesToForward(param_00 getgunangles());
-  var_04 = var_02 + var_03 * var_01;
-  var_05 = self getEye();
-  var_06 = 2;
-  var_07 = var_05[2] - var_04[2];
-  if(abs(var_07) > 10) {
-    var_06 = var_07 <= 0;
+func_13D17(var_0) {
+  var_1 = distance(var_0 getEye(), self getEye()) * 0.9;
+  var_2 = var_0 getEye();
+  var_3 = anglesToForward(var_0 getgunangles());
+  var_4 = var_2 + var_3 * var_1;
+  var_5 = self getEye();
+  var_6 = 2;
+  var_7 = var_5[2] - var_4[2];
+  if(abs(var_7) > 10) {
+    var_6 = var_7 <= 0;
   }
 
-  var_08 = 2;
-  var_09 = anglesToForward(self.angles);
-  var_0A = var_09;
-  var_0B = var_04 - self getEye();
+  var_8 = 2;
+  var_9 = anglesToForward(self.angles);
+  var_0A = var_9;
+  var_0B = var_4 - self getEye();
   var_0A = (var_0A[0], var_0A[1], 0);
   var_0B = (var_0B[0], var_0B[1], 0);
   var_0C = scripts\engine\utility::anglebetweenvectorssigned(var_0A, var_0B, (0, 0, 1));
   if(abs(var_0C) > 21 || 180 - abs(var_0C) < 21) {
-    var_08 = var_0C > 0;
+    var_8 = var_0C > 0;
   }
 
-  var_0D = func_13D15(var_06, var_08);
+  var_0D = func_13D15(var_6, var_8);
   if(!isDefined(self.var_1468[var_0D])) {
     if(isDefined(level._effect[var_0D])) {
       self.var_1468[var_0D] = spawnfxforclient(level._effect[var_0D], self getEye(), self);
-    } else {}
+    }
   }
 
   triggerfx(self.var_1468[var_0D]);
@@ -94,38 +94,38 @@ func_13D17(param_00) {
   self.var_1468[var_0D] thread func_13D19();
 }
 
-func_13D15(param_00, param_01) {
-  var_02 = "whizzby";
-  if(param_00 == 0) {
-    var_02 = var_02 + "_bottom";
-  } else if(param_00 == 1) {
-    var_02 = var_02 + "_top";
+func_13D15(var_0, var_1) {
+  var_2 = "whizzby";
+  if(var_0 == 0) {
+    var_2 = var_2 + "_bottom";
+  } else if(var_0 == 1) {
+    var_2 = var_2 + "_top";
   }
 
-  if(param_01 == 0) {
-    var_02 = var_02 + "_right";
-  } else if(param_01 == 1) {
-    var_02 = var_02 + "_left";
+  if(var_1 == 0) {
+    var_2 = var_2 + "_right";
+  } else if(var_1 == 1) {
+    var_2 = var_2 + "_left";
   }
 
-  if(param_00 == 2 && param_01 == 2) {
-    var_02 = var_02 + "_top";
+  if(var_0 == 2 && var_1 == 2) {
+    var_2 = var_2 + "_top";
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_13D12(param_00, param_01) {
-  var_02 = param_00;
-  if(param_01 == "left") {
-    var_02 = var_02 + 90;
+func_13D12(var_0, var_1) {
+  var_2 = var_0;
+  if(var_1 == "left") {
+    var_2 = var_2 + 90;
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_13D16(param_00) {
-  return level.var_1467[param_00];
+func_13D16(var_0) {
+  return level.var_1467[var_0];
 }
 
 func_13D19() {

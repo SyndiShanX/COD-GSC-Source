@@ -4,72 +4,72 @@
 ***************************************/
 
 func_109B8() {
-  level.func_109BE = [];
-  level.func_109BE = scripts\engine\utility::add_to_array(level.func_109BE, "specialty_fastreload");
-  level.func_109BE = scripts\engine\utility::add_to_array(level.func_109BE, "specialty_quickdraw");
-  level.func_109BE = scripts\engine\utility::add_to_array(level.func_109BE, "specialty_quickswap");
+  level.var_109BE = [];
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_fastreload");
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_quickdraw");
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_quickswap");
 }
 
-func_109C1(var_00) {
+func_109C1(var_0) {
   if(!isalive(self)) {
-    var_00 delete();
+    var_0 delete();
     return;
   }
 
-  var_00 waittill("missile_stuck", var_01);
-  var_02 = self canplayerplacesentry(1, 12);
-  var_03 = spawn("script_model", var_0.origin);
+  var_0 waittill("missile_stuck", var_1);
+  var_2 = self canplayerplacesentry(1, 12);
+  var_3 = spawn("script_model", var_0.origin);
   var_3.angles = var_0.angles;
   var_3.team = self.team;
   var_3.owner = self;
-  var_03 setModel("prop_mp_speed_strip_temp");
-  var_03 thread func_109B4(self);
-  var_03 thread func_109C3();
-  var_03 thread func_109B5(self);
-  var_03 thread func_109BF(self);
-  var_03 thread scripts\mp\weapons::func_66B4();
-  var_03 setotherent(self);
-  var_03 scripts\mp\weapons::explosivehandlemovers(var_2["entity"], 1);
+  var_3 setModel("prop_mp_speed_strip_temp");
+  var_3 thread func_109B4(self);
+  var_3 thread func_109C3();
+  var_3 thread func_109B5(self);
+  var_3 thread func_109BF(self);
+  var_3 thread scripts\mp\weapons::func_66B4();
+  var_3 setotherent(self);
+  var_3 scripts\mp\weapons::explosivehandlemovers(var_2["entity"], 1);
 
-  if(isDefined(var_00)) {
-    var_00 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
-  var_03 thread func_109B3(self);
-  var_03 thread func_109B9(45);
+  var_3 thread func_109B3(self);
+  var_3 thread func_109B9(45);
 
-  if(isDefined(var_01)) {
-    var_03 scripts\mp\weapons::explosivehandlemovers(var_01, 1);
+  if(isDefined(var_1)) {
+    var_3 scripts\mp\weapons::explosivehandlemovers(var_1, 1);
   }
 
   if(level.teambased) {
-    var_03 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 40));
+    var_3 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 40));
   } else {
-    var_03 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 40));
+    var_3 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 40));
   }
 
-  scripts\mp\weapons::ontacticalequipmentplanted(var_03, "power_speedStrip");
+  scripts\mp\weapons::ontacticalequipmentplanted(var_3, "power_speedStrip");
 }
 
-func_109B4(var_00) {
+func_109B4(var_0) {
   scripts\mp\damage::monitordamage(100, "trophy", ::func_109B7, ::func_109BC, 0);
 }
 
-func_109B7(var_00, var_01, var_02, var_03) {
-  if(isDefined(self.owner) && var_00 != self.owner) {
-    var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
-    var_00 notify("destroyed_equipment");
+func_109B7(var_0, var_1, var_2, var_3) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
+    var_0 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    var_0 notify("destroyed_equipment");
   }
 
   self notify("detonateExplosive");
 }
 
-func_109BC(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = var_03;
-  var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
-  var_05 = scripts\mp\damage::handleempdamage(var_01, var_02, var_05);
-  var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
-  return var_05;
+func_109BC(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
+  var_5 = scripts\mp\damage::handlemeleedamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleempdamage(var_1, var_2, var_5);
+  var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
+  return var_5;
 }
 
 func_109C3() {
@@ -79,7 +79,7 @@ func_109C3() {
   self stoploopsound();
   scripts\mp\weapons::equipmentdeathvfx();
   self notify("death");
-  var_00 = self.origin;
+  var_0 = self.origin;
   wait 3;
 
   if(isDefined(self)) {
@@ -92,111 +92,111 @@ func_109C3() {
   }
 }
 
-func_109B5(var_00) {
+func_109B5(var_0) {
   self endon("death");
-  var_00 waittill("disconnect");
+  var_0 waittill("disconnect");
   self notify("detonateExplosive");
 }
 
-func_109BF(var_00) {
+func_109BF(var_0) {
   self endon("disconnect");
   self endon("death");
-  var_00 waittill("spawned_player");
+  var_0 waittill("spawned_player");
   self notify("detonateExplosive");
 }
 
-func_109C2(var_00) {
+func_109C2(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_00 endon("disconnect");
-  var_00 endon("death");
+  var_0 endon("disconnect");
+  var_0 endon("death");
   self.trigger setcursorhint("HINT_NOICON");
   self.trigger sethintstring(&"MP_PICKUP_SPEED_STRIP");
-  self.trigger scripts\mp\utility\game::setselfusable(var_00);
-  self.trigger thread scripts\mp\utility\game::notusableforjoiningplayers(var_00);
+  self.trigger scripts\mp\utility\game::setselfusable(var_0);
+  self.trigger thread scripts\mp\utility\game::notusableforjoiningplayers(var_0);
 
   for(;;) {
-    self.trigger waittill("trigger", var_00);
+    self.trigger waittill("trigger", var_0);
     self stoploopsound();
     self scriptmodelclearanim();
-    var_00 setweaponammoclip("speed_strip_mp", 1);
+    var_0 setweaponammoclip("speed_strip_mp", 1);
     scripts\mp\weapons::deleteexplosive();
     self notify("death");
   }
 }
 
-func_109B9(var_00) {
+func_109B9(var_0) {
   self endon("death");
-  wait(var_00);
+  wait(var_0);
   self notify("detonateExplosive");
 }
 
-func_109B3(var_00) {
-  var_01 = spawn("trigger_rotatable_radius", self.origin, 0, 50, 100);
+func_109B3(var_0) {
+  var_1 = spawn("trigger_rotatable_radius", self.origin, 0, 50, 100);
   var_1.angles = self.angles;
-  var_01 thread func_13B54(var_00, self);
-  var_01 thread func_13B4E(self, 1);
-  var_01 thread func_13B51(self);
-  self.func_72FE = ::func_109C0;
-  self.func_72F5 = ::func_109B6;
-  self.func_109AB = 5;
+  var_1 thread func_13B54(var_0, self);
+  var_1 thread func_13B4E(self, 1);
+  var_1 thread func_13B51(self);
+  self.var_72FE = ::func_109C0;
+  self.var_72F5 = ::func_109B6;
+  self.var_109AB = 5;
 
-  foreach(var_03 in level.players) {
-    if(!isDefined(var_03) || !scripts\mp\utility\game::isreallyalive(var_03)) {
+  foreach(var_3 in level.players) {
+    if(!isDefined(var_3) || !scripts\mp\utility\game::isreallyalive(var_3)) {
       continue;
     }
-    var_03 thread func_D534(self, self.origin);
+    var_3 thread func_D534(self, self.origin);
   }
 }
 
-func_13B54(var_00, var_01) {
+func_13B54(var_0, var_1) {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var_02);
+    self waittill("trigger", var_2);
 
     if(var_2.team != var_0.team) {
       continue;
     }
-    if(scripts\mp\equipment\charge_mode::func_3CEE(var_02)) {
+    if(scripts\mp\equipment\charge_mode::func_3CEE(var_2)) {
       continue;
     }
-    if(!isDefined(var_2.func_109B2)) {
-      var_2.func_109B2 = 1;
+    if(!isDefined(var_2.var_109B2)) {
+      var_2.var_109B2 = 1;
 
-      foreach(var_04 in level.func_109BE) {
-        var_02 scripts\mp\utility\game::giveperk(var_04);
+      foreach(var_4 in level.var_109BE) {
+        var_2 scripts\mp\utility\game::giveperk(var_4);
       }
 
-      if(!(isDefined(var_2.powers) && var_02 scripts\mp\powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
+      if(!(isDefined(var_2.powers) && var_2 scripts\mp\powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
         var_2.speedstripmod = 0.2;
-        var_02 scripts\mp\weapons::updatemovespeedscale();
-        var_02 thread func_13B53();
-        var_2.func_109BD = var_00;
-        scripts\mp\gamescore::trackbuffassist(var_00, var_02, "power_speedBoost");
+        var_2 scripts\mp\weapons::updatemovespeedscale();
+        var_2 thread func_13B53();
+        var_2.var_109BD = var_0;
+        scripts\mp\gamescore::trackbuffassist(var_0, var_2, "power_speedBoost");
       }
 
-      if(isplayer(var_02)) {
-        var_2.func_109A9 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_screen"), var_02 getEye(), var_02);
-        triggerfx(var_2.func_109A9);
+      if(isplayer(var_2)) {
+        var_2.var_109A9 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_screen"), var_2 getEye(), var_2);
+        triggerfx(var_2.var_109A9);
       }
 
-      var_02 notify("speed_strip_start");
-      var_02 thread func_13B50(var_1.func_109AB);
-      var_02 thread func_13B86(self);
-      var_02 thread func_13B4F();
+      var_2 notify("speed_strip_start");
+      var_2 thread func_13B50(var_1.var_109AB);
+      var_2 thread func_13B86(self);
+      var_2 thread func_13B4F();
     }
   }
 }
 
-func_13B86(var_00) {
+func_13B86(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
     if(isDefined(self)) {
-      if(!isDefined(var_00) || !self istouching(var_00)) {
+      if(!isDefined(var_0) || !self istouching(var_0)) {
         self notify("start_speed_strip_linger");
         break;
       }
@@ -206,12 +206,12 @@ func_13B86(var_00) {
   }
 }
 
-func_13B50(var_00) {
+func_13B50(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("start_speed_strip_linger");
-  wait(var_00);
+  wait(var_0);
   self notify("speed_strip_end");
 }
 
@@ -225,52 +225,52 @@ func_13B4F() {
 }
 
 func_41E0() {
-  if(isDefined(self.func_109B2)) {
-    self.func_109B2 = undefined;
-    self.func_109BA = undefined;
+  if(isDefined(self.var_109B2)) {
+    self.var_109B2 = undefined;
+    self.var_109BA = undefined;
 
-    foreach(var_01 in level.func_109BE) {
-      scripts\mp\utility\game::removeperk(var_01);
+    foreach(var_1 in level.var_109BE) {
+      scripts\mp\utility\game::removeperk(var_1);
     }
 
     if(isDefined(self.speedstripmod)) {
       self.speedstripmod = undefined;
       scripts\mp\weapons::updatemovespeedscale();
-      scripts\mp\gamescore::untrackbuffassist(self.func_109BD, self, "power_speedBoost");
-      self.func_109BD = undefined;
+      scripts\mp\gamescore::untrackbuffassist(self.var_109BD, self, "power_speedBoost");
+      self.var_109BD = undefined;
     }
 
-    if(isDefined(self.func_109A9)) {
-      self.func_109A9 delete();
+    if(isDefined(self.var_109A9)) {
+      self.var_109A9 delete();
     }
   }
 }
 
-func_13B4E(var_00, var_01, var_02, var_03, var_04, var_05) {
+func_13B4E(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("game_ended");
 
-  if(isDefined(var_05)) {
-    self endon(var_05);
+  if(isDefined(var_5)) {
+    self endon(var_5);
   }
 
-  var_00 waittill("death");
+  var_0 waittill("death");
 
-  if(isDefined(var_02)) {
-    if(isDefined(var_03)) {
-      switch (var_03) {
+  if(isDefined(var_2)) {
+    if(isDefined(var_3)) {
+      switch (var_3) {
         case "player_linger":
-          if(isplayer(self) && isDefined(self.func_109B2) && !isDefined(self.func_109BA)) {
-            self notify(var_04);
-            self.func_109BA = 1;
+          if(isplayer(self) && isDefined(self.var_109B2) && !isDefined(self.var_109BA)) {
+            self notify(var_4);
+            self.var_109BA = 1;
           }
 
           break;
       }
     }
-  } else if(isDefined(var_04))
-    self notify(var_04);
+  } else if(isDefined(var_4))
+    self notify(var_4);
 
-  if(isDefined(var_01)) {
+  if(isDefined(var_1)) {
     if(isDefined(self)) {
       self delete();
     }
@@ -281,18 +281,18 @@ func_13B53() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_00 = 0.2;
-  var_01 = 0.1;
+  var_0 = 0.2;
+  var_1 = 0.1;
 
-  while(var_00 >= var_01) {
+  while(var_0 >= var_1) {
     wait 1.5;
-    var_00 = var_00 - 0.05;
-    self.speedstripmod = var_00;
+    var_0 = var_0 - 0.05;
+    self.speedstripmod = var_0;
     scripts\mp\weapons::updatemovespeedscale();
   }
 }
 
-func_13B51(var_00) {
+func_13B51(var_0) {
   self endon("death");
 
   for(;;) {
@@ -304,67 +304,67 @@ func_13B51(var_00) {
   }
 }
 
-func_D534(var_00, var_01) {
-  var_00 endon("death");
-  var_02 = undefined;
-  var_03 = var_01;
-  var_04 = 1;
+func_D534(var_0, var_1) {
+  var_0 endon("death");
+  var_2 = undefined;
+  var_3 = var_1;
+  var_4 = 1;
 
   for(;;) {
-    if(isDefined(var_00) && var_04) {
+    if(isDefined(var_0) && var_4) {
       if(self.team == var_0.team) {
-        var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_friendly"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
+        var_2 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_friendly"), var_3, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
       } else {
-        var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_enemy"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
+        var_2 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_enemy"), var_3, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
       }
 
-      if(isDefined(var_02)) {
-        triggerfx(var_02);
-        var_02 thread func_13B4E(var_00, 1);
-        thread func_13B52(var_00, var_03, var_02, "disconnect", "spawned_player", 1);
-        thread func_13B52(var_00, var_03, var_02, undefined, "disconnect", 0);
+      if(isDefined(var_2)) {
+        triggerfx(var_2);
+        var_2 thread func_13B4E(var_0, 1);
+        thread func_13B52(var_0, var_3, var_2, "disconnect", "spawned_player", 1);
+        thread func_13B52(var_0, var_3, var_2, undefined, "disconnect", 0);
       }
 
-      var_04 = 0;
+      var_4 = 0;
     }
 
     wait 0.5;
 
-    if(var_03 != var_0.origin) {
-      if(isDefined(var_02)) {
-        var_02 delete();
+    if(var_3 != var_0.origin) {
+      if(isDefined(var_2)) {
+        var_2 delete();
       }
 
-      var_03 = var_0.origin;
+      var_3 = var_0.origin;
       self notify("speed_strip_moved");
-      var_04 = 1;
+      var_4 = 1;
     }
   }
 }
 
-func_13B52(var_00, var_01, var_02, var_03, var_04, var_05) {
-  var_00 endon("death");
+func_13B52(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_0 endon("death");
   self endon("speed_strip_moved");
 
-  if(isDefined(var_03)) {
-    self endon(var_03);
+  if(isDefined(var_3)) {
+    self endon(var_3);
   }
 
-  self waittill(var_04);
+  self waittill(var_4);
 
-  if(isDefined(var_02)) {
-    var_02 delete();
+  if(isDefined(var_2)) {
+    var_2 delete();
   }
 
-  if(isDefined(var_05) && var_05) {
-    thread func_D534(var_00, var_01);
+  if(isDefined(var_5) && var_5) {
+    thread func_D534(var_0, var_1);
   }
 }
 
 func_109C0() {
-  self.func_109AB = 10;
+  self.var_109AB = 10;
 }
 
 func_109B6() {
-  self.func_109AB = 5;
+  self.var_109AB = 5;
 }

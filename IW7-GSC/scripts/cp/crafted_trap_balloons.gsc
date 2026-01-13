@@ -6,34 +6,34 @@
 
 init() {
   level._effect["balloon_death"] = loadfx("vfx\iw7\_requests\coop\vfx_clown_exp.vfx");
-  var_00 = spawnStruct();
-  var_00.timeout = 60;
-  var_00.modelbase = "equipment_tank_nitrogen_zmb";
-  var_00.modelplacement = "equipment_tank_nitrogen_zmb";
-  var_00.modelplacementfailed = "equipment_tank_nitrogen_zmb";
-  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
-  var_00.var_9F43 = 0;
-  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_00.placementheighttolerance = 48;
-  var_00.placementradius = 32;
-  var_00.carriedtrapoffset = (0, 0, 10);
-  var_00.carriedtrapangles = (0, 0, 0);
+  var_0 = spawnStruct();
+  var_0.timeout = 60;
+  var_0.modelbase = "equipment_tank_nitrogen_zmb";
+  var_0.modelplacement = "equipment_tank_nitrogen_zmb";
+  var_0.modelplacementfailed = "equipment_tank_nitrogen_zmb";
+  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.var_9F43 = 0;
+  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.placementheighttolerance = 48;
+  var_0.placementradius = 32;
+  var_0.carriedtrapoffset = (0, 0, 10);
+  var_0.carriedtrapangles = (0, 0, 0);
   if(!isDefined(level.var_47B3)) {
     level.var_47B3 = [];
   }
 
-  level.var_47B3["crafted_trap_balloon"] = var_00;
+  level.var_47B3["crafted_trap_balloon"] = var_0;
 }
 
-give_crafted_trap(param_00, param_01) {
-  param_01 thread watch_dpad();
-  param_01 notify("new_power", "crafted_trap_balloon");
-  param_01 setclientomnvar("zom_crafted_weapon", 9);
-  param_01 thread scripts\cp\utility::usegrenadegesture(param_01, "iw7_pickup_zm");
-  scripts\cp\utility::set_crafted_inventory_item("crafted_trap_balloon", ::give_crafted_trap, param_01);
+give_crafted_trap(var_0, var_1) {
+  var_1 thread watch_dpad();
+  var_1 notify("new_power", "crafted_trap_balloon");
+  var_1 setclientomnvar("zom_crafted_weapon", 9);
+  var_1 thread scripts\cp\utility::usegrenadegesture(var_1, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_trap_balloon", ::give_crafted_trap, var_1);
 }
 
 watch_dpad() {
@@ -64,35 +64,35 @@ watch_dpad() {
   thread setsuppressiontime(1);
 }
 
-setsuppressiontime(param_00, param_01) {
+setsuppressiontime(var_0, var_1) {
   self endon("disconnect");
   scripts\cp\utility::clearlowermessage("msg_power_hint");
-  var_02 = func_4A2A(self);
-  self.itemtype = var_02.name;
+  var_2 = func_4A2A(self);
+  self.itemtype = var_2.name;
   removeperks();
-  self.carriedsentry = var_02;
-  if(param_00) {
-    var_02.firstplacement = 1;
+  self.carriedsentry = var_2;
+  if(var_0) {
+    var_2.firstplacement = 1;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = level.var_47B3["crafted_trap_balloon"].timeout;
+  if(!isDefined(var_1)) {
+    var_1 = level.var_47B3["crafted_trap_balloon"].timeout;
   }
 
-  var_03 = func_F68A(var_02, param_00, param_01);
+  var_3 = func_F68A(var_2, var_0, var_1);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
-  if(isDefined(var_02)) {
+  if(isDefined(var_2)) {
     return 1;
   }
 
   return 0;
 }
 
-func_F68A(param_00, param_01, param_02) {
+func_F68A(var_0, var_1, var_2) {
   self endon("disconnect");
-  param_00 func_126A8(self, param_01, param_02);
+  var_0 func_126A8(self, var_1, var_2);
   scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_trap", "+attack");
   self notifyonplayercommand("place_trap", "+attack_akimbo_accessible");
@@ -104,41 +104,41 @@ func_F68A(param_00, param_01, param_02) {
   }
 
   for(;;) {
-    var_03 = scripts\engine\utility::waittill_any_return("place_trap", "cancel_trap", "force_cancel_placement");
-    if(!isDefined(param_00)) {
+    var_3 = scripts\engine\utility::waittill_any_return("place_trap", "cancel_trap", "force_cancel_placement");
+    if(!isDefined(var_0)) {
       scripts\engine\utility::allow_weapon(1);
       return 1;
     }
 
-    if(!isDefined(var_03)) {
-      var_03 = "force_cancel_placement";
+    if(!isDefined(var_3)) {
+      var_3 = "force_cancel_placement";
     }
 
-    if(var_03 == "cancel_trap" || var_03 == "force_cancel_placement") {
-      if(!param_01 && var_03 == "cancel_trap") {
+    if(var_3 == "cancel_trap" || var_3 == "force_cancel_placement") {
+      if(!var_1 && var_3 == "cancel_trap") {
         continue;
       }
 
       scripts\engine\utility::allow_weapon(1);
-      param_00 func_126A7();
-      if(var_03 != "force_cancel_placement") {
+      var_0 func_126A7();
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      } else if(param_01) {
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
       return 0;
     }
 
-    if(!param_00.canbeplaced) {
+    if(!var_0.canbeplaced) {
       continue;
     }
 
-    if(param_01) {
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
     }
 
-    param_00 func_126AA(param_02, self);
+    var_0 func_126AA(var_2, self);
     scripts\engine\utility::allow_weapon(1);
     return 1;
   }
@@ -146,10 +146,10 @@ func_F68A(param_00, param_01, param_02) {
 
 removeweapons() {
   if(self.hasriotshield) {
-    var_00 = scripts\cp\utility::riotshieldname();
-    self.restoreweapon = var_00;
-    self.riotshieldammo = self getrunningforwardpainanim(var_00);
-    self takeweapon(var_00);
+    var_0 = scripts\cp\utility::riotshieldname();
+    self.restoreweapon = var_0;
+    self.riotshieldammo = self getrunningforwardpainanim(var_0);
+    self takeweapon(var_0);
   }
 }
 
@@ -164,8 +164,8 @@ restoreweapons() {
   if(isDefined(self.restoreweapon)) {
     scripts\cp\utility::_giveweapon(self.restoreweapon);
     if(self.hasriotshield) {
-      var_00 = scripts\cp\utility::riotshieldname();
-      self setweaponammoclip(var_00, self.riotshieldammo);
+      var_0 = scripts\cp\utility::riotshieldname();
+      self setweaponammoclip(var_0, self.riotshieldammo);
     }
   }
 
@@ -187,28 +187,28 @@ waitrestoreperks() {
   restoreperks();
 }
 
-func_4A2A(param_00) {
-  var_01 = spawnturret("misc_turret", param_00.origin + (0, 0, 40), "sentry_minigun_mp");
-  var_01.angles = param_00.angles;
-  var_01.triggerportableradarping = param_00;
-  var_01.name = "crafted_trap_balloon";
-  var_01.carried_trap = spawn("script_model", var_01.origin);
-  var_01.carried_trap.angles = param_00.angles;
-  var_01.carried_trap setcontents(0);
-  var_01 getvalidattachments();
-  var_01 setturretmodechangewait(1);
-  var_01 give_player_session_tokens("sentry_offline");
-  var_01 makeunusable();
-  var_01 setsentryowner(param_00);
-  var_01 func_126A2(param_00);
-  return var_01;
+func_4A2A(var_0) {
+  var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 40), "sentry_minigun_mp");
+  var_1.angles = var_0.angles;
+  var_1.triggerportableradarping = var_0;
+  var_1.name = "crafted_trap_balloon";
+  var_1.carried_trap = spawn("script_model", var_1.origin);
+  var_1.carried_trap.angles = var_0.angles;
+  var_1.carried_trap setcontents(0);
+  var_1 getvalidattachments();
+  var_1 setturretmodechangewait(1);
+  var_1 give_player_session_tokens("sentry_offline");
+  var_1 makeunusable();
+  var_1 setsentryowner(var_0);
+  var_1 func_126A2(var_0);
+  return var_1;
 }
 
-func_126A2(param_00) {
+func_126A2(var_0) {
   self.canbeplaced = 1;
 }
 
-func_126A0(param_00) {
+func_126A0(var_0) {
   self waittill("death");
   if(!isDefined(self)) {
     return;
@@ -236,16 +236,16 @@ func_126A1() {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self waittill("trigger", var_00);
-    if(!var_00 scripts\cp\utility::is_valid_player()) {
+    self waittill("trigger", var_0);
+    if(!var_0 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_00.iscarrying)) {
+    if(scripts\engine\utility::istrue(var_0.iscarrying)) {
       continue;
     }
 
-    var_00 thread setsuppressiontime(0, self.lifespan);
+    var_0 thread setsuppressiontime(0, self.lifespan);
     if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
     }
@@ -256,26 +256,26 @@ func_126A1() {
   }
 }
 
-func_126AA(param_00, param_01) {
-  var_02 = spawn("script_model", self.origin + (0, 0, 1));
-  var_02 setModel(level.var_47B3["crafted_trap_balloon"].modelbase);
-  var_02 notsolid();
-  var_03 = (0, 0, 60);
-  var_04 = (0, 0, 350) - var_03;
-  var_05 = var_02.origin;
-  var_06 = var_02.origin + var_03;
-  var_07 = bulletTrace(var_06, var_06 + var_04, 0, var_02);
-  var_08 = var_07;
-  var_02.detonate_height = var_08["position"] - (0, 0, 60) - self.origin;
-  var_02.balloons = spawn("script_model", var_02.origin + (0, 0, 62));
-  var_02.balloons setModel("decor_balloon_bunch_01");
+func_126AA(var_0, var_1) {
+  var_2 = spawn("script_model", self.origin + (0, 0, 1));
+  var_2 setModel(level.var_47B3["crafted_trap_balloon"].modelbase);
+  var_2 notsolid();
+  var_3 = (0, 0, 60);
+  var_4 = (0, 0, 350) - var_3;
+  var_5 = var_2.origin;
+  var_6 = var_2.origin + var_3;
+  var_7 = bulletTrace(var_6, var_6 + var_4, 0, var_2);
+  var_8 = var_7;
+  var_2.detonate_height = var_8["position"] - (0, 0, 60) - self.origin;
+  var_2.balloons = spawn("script_model", var_2.origin + (0, 0, 62));
+  var_2.balloons setModel("decor_balloon_bunch_01");
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
-  var_02.repulsor = createnavrepulsor("mower_repulsor", 0, var_02.origin, 8, 1);
-  param_01.iscarrying = 0;
-  var_02.triggerportableradarping = param_01;
-  var_02.name = "crafted_trap_balloon";
-  var_02 thread func_126A6(param_00);
+  var_2.repulsor = createnavrepulsor("mower_repulsor", 0, var_2.origin, 8, 1);
+  var_1.iscarrying = 0;
+  var_2.triggerportableradarping = var_1;
+  var_2.name = "crafted_trap_balloon";
+  var_2 thread func_126A6(var_0);
   self notify("placed");
   self.carried_trap delete();
   self delete();
@@ -295,21 +295,21 @@ func_126A7() {
   self delete();
 }
 
-func_126A8(param_00, param_01, param_02) {
-  self setsentrycarrier(param_00);
+func_126A8(var_0, var_1, var_2) {
+  self setsentrycarrier(var_0);
   self setCanDamage(0);
   self stoploopsound();
-  self.carriedby = param_00;
-  param_00.iscarrying = 1;
-  param_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_trap, level.var_47B3["crafted_trap_balloon"]);
-  thread scripts\cp\utility::item_oncarrierdeath(param_00);
-  thread scripts\cp\utility::item_oncarrierdisconnect(param_00);
-  thread scripts\cp\utility::item_ongameended(param_00);
+  self.carriedby = var_0;
+  var_0.iscarrying = 1;
+  var_0 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_trap, level.var_47B3["crafted_trap_balloon"]);
+  thread scripts\cp\utility::item_oncarrierdeath(var_0);
+  thread scripts\cp\utility::item_oncarrierdisconnect(var_0);
+  thread scripts\cp\utility::item_ongameended(var_0);
   func_126A9();
   self notify("carried");
 }
 
-func_126A6(param_00) {
+func_126A6(var_0) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.var_47B3["crafted_trap_balloon"].pow);
   self makeusable();
@@ -318,7 +318,7 @@ func_126A6(param_00) {
   self setuserange(96);
   thread func_126A0(self.triggerportableradarping);
   thread scripts\cp\utility::item_handleownerdisconnect("electrap_handleOwner");
-  thread scripts\cp\utility::item_timeout(param_00, level.var_47B3["crafted_trap_balloon"].timeout);
+  thread scripts\cp\utility::item_timeout(var_0, level.var_47B3["crafted_trap_balloon"].timeout);
   thread func_126A1();
   thread trap_wait_for_enemies();
   scripts\cp\utility::addtotraplist();
@@ -351,44 +351,44 @@ trap_wait_for_enemies() {
 kill_zombies() {
   self.dmg_trigger = spawn("trigger_radius", self.origin + (0, 0, -20), 0, 256, 128);
   for(;;) {
-    self.dmg_trigger waittill("trigger", var_00);
-    if(isplayer(var_00)) {
+    self.dmg_trigger waittill("trigger", var_0);
+    if(isplayer(var_0)) {
       continue;
     }
 
-    if(!scripts\cp\utility::should_be_affected_by_trap(var_00) || var_00.about_to_dance || var_00.scripted_mode) {
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_0) || var_0.about_to_dance || var_0.scripted_mode) {
       continue;
     }
 
-    if(var_00.agent_type == "slasher" || var_00.agent_type == "superslasher" || var_00.agent_type == "lumberjack" || var_00.agent_type == "zombie_sasquatch") {
+    if(var_0.agent_type == "slasher" || var_0.agent_type == "superslasher" || var_0.agent_type == "lumberjack" || var_0.agent_type == "zombie_sasquatch") {
       continue;
     }
 
-    if(isDefined(var_00.is_skeleton)) {
+    if(isDefined(var_0.is_skeleton)) {
       continue;
     }
 
-    var_00 thread go_to_balloons(self);
-    var_00 thread release_zombie_on_trap_death(self);
+    var_0 thread go_to_balloons(self);
+    var_0 thread release_zombie_on_trap_death(self);
   }
 }
 
-go_to_balloons(param_00) {
-  param_00 endon("death");
+go_to_balloons(var_0) {
+  var_0 endon("death");
   self endon("death");
   self endon("turned");
   self.disablearrivals = 1;
   self.scripted_mode = 1;
   self.og_goalradius = 4;
-  self ghostskulls_complete_status(param_00.origin);
+  self ghostskulls_complete_status(var_0.origin);
   self ghostskulls_total_waves(60);
-  var_01 = param_00.detonate_height[2];
+  var_1 = var_0.detonate_height[2];
   scripts\engine\utility::waittill_any_3("goal", "goal_reached");
-  thread balloon_death(var_01);
+  thread balloon_death(var_1);
 }
 
-balloon_death(param_00) {
-  self.detonate_height = param_00;
+balloon_death(var_0) {
+  self.detonate_height = var_0;
   self.shared_damage_points = 1;
   self.var_55CF = 1;
   scripts\mp\agents\_scriptedagents::setstatelocked(1, "balloon_trap");
@@ -398,9 +398,9 @@ balloon_death(param_00) {
   self stopsounds();
 }
 
-release_zombie_on_trap_death(param_00) {
+release_zombie_on_trap_death(var_0) {
   self endon("death");
-  param_00 waittill("death");
+  var_0 waittill("death");
   if(isDefined(self.og_goalradius)) {
     self.objective_playermask_showto = self.og_goalradius;
   }

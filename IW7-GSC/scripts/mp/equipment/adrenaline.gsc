@@ -28,14 +28,14 @@ useadrenaline() {
   thread func_E0C6();
   thread func_E0C3();
   thread func_13A85();
-  var_00 = scripts\mp\powerloot::func_7FC1("power_adrenaline", 5);
-  scripts\mp\powers::func_4575(var_00, "power_adrenaline_update", "removeAdrenaline");
+  var_0 = scripts\mp\powerloot::func_7FC1("power_adrenaline", 5);
+  scripts\mp\powers::func_4575(var_0, "power_adrenaline_update", "removeAdrenaline");
   thread removeadrenaline();
 }
 
-removeadrenaline(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = "";
+removeadrenaline(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "";
   }
 
   if(isDefined(self.var_8BC2) && self.var_8BC2) {
@@ -44,7 +44,7 @@ removeadrenaline(param_00) {
     scripts\mp\utility::removeperk("specialty_adrenaline");
     self setscriptablepartstate("adrenaline", "neutral", 0);
     self setscriptablepartstate("adrenalineHeal", "neutral", 0);
-    if(param_00 != "death") {
+    if(var_0 != "death") {
       self playlocalsound("mp_adrenaline_off");
     }
   }

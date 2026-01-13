@@ -4,7 +4,7 @@
  * Script: SP\3663.gsc
 ************************/
 
-func_9755(param_00) {
+func_9755(var_0) {
   if(!level.player scripts\sp\utility::func_65DF("pressurized")) {
     level.player scripts\sp\utility::func_65E0("pressurized");
   }
@@ -17,7 +17,7 @@ func_9755(param_00) {
     level.player scripts\sp\utility::func_65E0("player_space_override_off");
   }
 
-  if(!isDefined(param_00) || !param_00) {
+  if(!isDefined(var_0) || !var_0) {
     setsaveddvar("player_spaceViewHeight", 60);
     setsaveddvar("player_spaceCapsuleHeight", 70);
   }
@@ -33,9 +33,9 @@ func_9756() {
   lib_0E4A::_meth_84BB();
 }
 
-func_5570(param_00) {
+func_5570(var_0) {
   func_9755(1);
-  if(param_00 == 1) {
+  if(var_0 == 1) {
     level.player scripts\sp\utility::func_65E1("player_space_override_off");
     return;
   }
@@ -56,7 +56,7 @@ func_9C7B() {
   return 1;
 }
 
-func_622C(param_00, param_01) {
+func_622C(var_0, var_1) {
   func_9755();
   if(level.player scripts\sp\utility::func_65DB("player_space_override_off")) {
     return;
@@ -65,11 +65,11 @@ func_622C(param_00, param_01) {
   level.player.isent.var_6F43 = 1;
   level.player scripts\sp\utility::func_65E1("player_gravity_off");
   level.var_7684 = ::lib_0E50::unloadalltransients;
-  if(!isDefined(param_00) || param_00) {
+  if(!isDefined(var_0) || var_0) {
     level.player thread lib_0E47::func_4D8A();
   }
 
-  if(!isDefined(param_01) || param_01) {
+  if(!isDefined(var_1) || var_1) {
     level.player thread lib_0E4A::_meth_84BA();
   }
 
@@ -118,7 +118,7 @@ func_559D() {
   self give_crafted_fireworks_trap(1);
 }
 
-func_621C(param_00) {
+func_621C(var_0) {
   setsaveddvar("cg_footsteps", 0);
   setsaveddvar("cg_equipmentSounds", 0);
   setsaveddvar("cg_landingSounds", 0);
@@ -229,13 +229,13 @@ func_8B3A() {
   self endon("disable_space");
   self.var_286F = self.var_50;
   for(;;) {
-    var_00 = getdvarfloat("player_sprintSpeedScale", 1.4);
-    var_01 = getdvarfloat("player_swimSpeed", level.var_1050D);
-    var_02 = length(self getvelocity());
+    var_0 = getdvarfloat("player_sprintSpeedScale", 1.4);
+    var_1 = getdvarfloat("player_swimSpeed", level.var_1050D);
+    var_2 = length(self getvelocity());
     self.var_50 = self.var_286F;
-    if(var_02 >= var_01 * 0.99) {
+    if(var_2 >= var_1 * 0.99) {
       self.var_50 = 0.4 * self.var_286F;
-      if(var_02 >= var_01 * var_00) {
+      if(var_2 >= var_1 * var_0) {
         self.var_50 = 0.15 * self.var_286F;
       }
     }
@@ -248,9 +248,9 @@ func_93E9() {
   self endon("death");
   self endon("disable_space");
   for(;;) {
-    var_00 = level.player.origin + (0, 0, 25);
-    var_01 = !scripts\common\trace::sphere_trace_passed(level.player.origin, level.player.origin, 60, level.player);
-    if(var_01) {
+    var_0 = level.player.origin + (0, 0, 25);
+    var_1 = !scripts\common\trace::sphere_trace_passed(level.player.origin, level.player.origin, 60, level.player);
+    if(var_1) {
       thread scripts\sp\utility::func_AB9A("player_swimFriction", level.var_104D9, 0.1);
       thread scripts\sp\utility::func_AB9A("player_swimSpeed", level.var_1050D, 1);
       thread scripts\sp\utility::func_AB9A("player_swimAcceleration", level.var_104AE, 0.1);
@@ -275,58 +275,58 @@ func_13E97() {
   self.var_13E97 = scripts\sp\player_rig::func_7B88();
   self.var_13E97 _meth_81E4(self, "tag_origin", (-12, 0, -58), (-4, 0, 0), 1, 0, 0, 0);
   for(;;) {
-    var_00 = self getnormalizedmovement();
-    var_01 = 0.75;
-    var_02 = 0.5;
-    if(var_00[0] >= 0) {
-      var_03 = var_00[0];
-      var_03 = var_03 * var_03;
-      self.var_13E97 clearanim( % space_playerbody_idle_b, var_01);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_f, var_03, var_01);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_03, var_01);
+    var_0 = self getnormalizedmovement();
+    var_1 = 0.75;
+    var_2 = 0.5;
+    if(var_0[0] >= 0) {
+      var_3 = var_0[0];
+      var_3 = var_3 * var_3;
+      self.var_13E97 clearanim( % space_playerbody_idle_b, var_1);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_f, var_3, var_1);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_3, var_1);
     } else {
-      var_03 = abs(var_00[0]);
-      var_03 = var_03 * var_03;
-      var_04 = func_EBAB();
-      var_05 = max(var_02, var_04);
-      var_03 = var_04 * var_03;
-      self.var_13E97 clearanim( % space_playerbody_idle_f, var_01 * var_05);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_b, var_03, var_01 * var_05);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_03, var_01 * var_05);
+      var_3 = abs(var_0[0]);
+      var_3 = var_3 * var_3;
+      var_4 = func_EBAB();
+      var_5 = max(var_2, var_4);
+      var_3 = var_4 * var_3;
+      self.var_13E97 clearanim( % space_playerbody_idle_f, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_b, var_3, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_3, var_1 * var_5);
     }
 
-    if(var_00[1] >= 0) {
-      var_03 = var_00[1];
-      var_03 = var_03 * var_03;
-      var_04 = func_EBAB();
-      var_05 = max(var_02, var_04);
-      var_03 = var_04 * var_03;
-      self.var_13E97 clearanim( % space_playerbody_idle_r, var_01 * var_05);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_l, var_03, var_01 * var_05);
+    if(var_0[1] >= 0) {
+      var_3 = var_0[1];
+      var_3 = var_3 * var_3;
+      var_4 = func_EBAB();
+      var_5 = max(var_2, var_4);
+      var_3 = var_4 * var_3;
+      self.var_13E97 clearanim( % space_playerbody_idle_r, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_l, var_3, var_1 * var_5);
     } else {
-      var_03 = abs(var_00[1]);
-      var_03 = var_03 * var_03;
-      var_04 = func_EBAB();
-      var_05 = max(var_02, var_04);
-      var_03 = var_04 * var_03;
-      self.var_13E97 clearanim( % space_playerbody_idle_l, var_01 * var_05);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_r, var_03, var_01 * var_05);
+      var_3 = abs(var_0[1]);
+      var_3 = var_3 * var_3;
+      var_4 = func_EBAB();
+      var_5 = max(var_2, var_4);
+      var_3 = var_4 * var_3;
+      self.var_13E97 clearanim( % space_playerbody_idle_l, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_r, var_3, var_1 * var_5);
     }
 
     scripts\engine\utility::waitframe();
   }
 }
 
-func_EBAB(param_00) {
-  var_01 = self getplayerangles();
-  var_02 = var_01[0];
-  if(var_02 > 0) {
-    if(!isDefined(param_00)) {
-      param_00 = 75;
+func_EBAB(var_0) {
+  var_1 = self getplayerangles();
+  var_2 = var_1[0];
+  if(var_2 > 0) {
+    if(!isDefined(var_0)) {
+      var_0 = 75;
     }
 
-    var_03 = 1 - min(param_00, var_02) / param_00;
-    return max(var_03, 0.1);
+    var_3 = 1 - min(var_0, var_2) / var_0;
+    return max(var_3, 0.1);
   }
 
   return 1;

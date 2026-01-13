@@ -4,12 +4,12 @@
  * Script: scripts\cp\cp_persistence.gsc
 *****************************************/
 
-set_perk(param_00) {
-  self[[level.coop_perk_callbacks[param_00].set]]();
+set_perk(var_0) {
+  self[[level.coop_perk_callbacks[var_0].set]]();
 }
 
-unset_perk(param_00) {
-  self[[level.coop_perk_callbacks[param_00].unset]]();
+unset_perk(var_0) {
+  self[[level.coop_perk_callbacks[var_0].unset]]();
 }
 
 get_player_currency() {
@@ -32,85 +32,85 @@ get_starting_currency() {
   return 500;
 }
 
-wait_to_set_player_currency(param_00) {
+wait_to_set_player_currency(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   wait(1);
-  set_player_currency(param_00);
+  set_player_currency(var_0);
 }
 
-set_player_currency(param_00) {
-  self setplayerdata("cp", "alienSession", "currency", int(param_00));
-  eog_player_update_stat("currency", int(param_00), 1);
+set_player_currency(var_0) {
+  self setplayerdata("cp", "alienSession", "currency", int(var_0));
+  eog_player_update_stat("currency", int(var_0), 1);
 }
 
-give_player_currency(param_00, param_01, param_02, param_03, param_04) {
+give_player_currency(var_0, var_1, var_2, var_3, var_4) {
   if(!isplayer(self)) {
     return;
   }
 
-  if(!scripts\engine\utility::istrue(param_03)) {
-    param_00 = int(param_00 * scripts\cp\perks\prestige::prestige_getmoneyearnedscalar());
-    param_00 = scripts\cp\cp_gamescore::round_up_to_nearest(param_00, 5);
+  if(!scripts\engine\utility::istrue(var_3)) {
+    var_0 = int(var_0 * scripts\cp\perks\prestige::prestige_getmoneyearnedscalar());
+    var_0 = scripts\cp\cp_gamescore::round_up_to_nearest(var_0, 5);
   }
 
   if(isDefined(level.currency_scale_func)) {
-    param_00 = [[level.currency_scale_func]](self, param_00);
+    var_0 = [[level.currency_scale_func]](self, var_0);
   }
 
-  var_05 = get_player_currency();
-  var_06 = get_player_max_currency();
-  var_07 = var_05 + param_00;
-  var_07 = min(var_07, var_06);
+  var_5 = get_player_currency();
+  var_6 = get_player_max_currency();
+  var_7 = var_5 + var_0;
+  var_7 = min(var_7, var_6);
   if(!isDefined(self.total_currency_earned)) {
-    self.total_currency_earned = param_00;
+    self.total_currency_earned = var_0;
   }
 
-  if(is_valid_give_type(param_04)) {
-    self.total_currency_earned = self.total_currency_earned + var_07 - var_05;
-    self notify("consumable_charge", param_00 * 0.5);
+  if(is_valid_give_type(var_4)) {
+    self.total_currency_earned = self.total_currency_earned + var_7 - var_5;
+    self notify("consumable_charge", var_0 * 0.5);
   }
 
   level notify("currency_changed");
   eog_player_update_stat("currencytotal", int(self.total_currency_earned), 1);
-  set_player_currency(var_07);
+  set_player_currency(var_7);
   if(isDefined(level.update_money_performance)) {
-    [[level.update_money_performance]](self, param_00);
+    [[level.update_money_performance]](self, var_0);
   }
 
-  var_08 = 30000;
-  var_09 = gettime();
-  if(var_07 >= var_06) {
+  var_8 = 30000;
+  var_9 = gettime();
+  if(var_7 >= var_6) {
     if(!isDefined(self.next_maxmoney_hint_time)) {
-      self.next_maxmoney_hint_time = var_09 + var_08;
-    } else if(var_09 < self.next_maxmoney_hint_time) {
+      self.next_maxmoney_hint_time = var_9 + var_8;
+    } else if(var_9 < self.next_maxmoney_hint_time) {
       return;
     }
 
     if(!level.gameended) {
       scripts\cp\utility::setlowermessage("maxmoney", &"COOP_GAME_PLAY_MONEY_MAX", 4);
-      self.next_maxmoney_hint_time = var_09 + var_08;
+      self.next_maxmoney_hint_time = var_9 + var_8;
     }
   }
 
-  if(is_valid_give_type(param_04)) {
-    thread scripts\cp\utility::add_to_notify_queue("player_earned_money", param_00);
+  if(is_valid_give_type(var_4)) {
+    thread scripts\cp\utility::add_to_notify_queue("player_earned_money", var_0);
   }
 
-  self notify("currency_earned", param_00);
+  self notify("currency_earned", var_0);
   if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    scripts\cp\utility::bufferednotify("currency_earned_buffered", param_00);
+    scripts\cp\utility::bufferednotify("currency_earned_buffered", var_0);
   }
 
   eog_player_update_stat("score", int(self.total_currency_earned), 1);
 }
 
-is_valid_give_type(param_00) {
-  if(!isDefined(param_00)) {
+is_valid_give_type(var_0) {
+  if(!isDefined(var_0)) {
     return 1;
   }
 
-  switch (param_00) {
+  switch (var_0) {
     case "pillage":
     case "nuke":
     case "magicWheelRefund":
@@ -127,73 +127,73 @@ is_valid_give_type(param_00) {
   return 1;
 }
 
-take_player_currency(param_00, param_01, param_02, param_03) {
-  var_04 = get_player_currency();
-  var_05 = max(0, var_04 - param_00);
-  var_06 = int(var_04 - var_05);
+take_player_currency(var_0, var_1, var_2, var_3) {
+  var_4 = get_player_currency();
+  var_5 = max(0, var_4 - var_0);
+  var_6 = int(var_4 - var_5);
   if(isDefined(level.chaos_update_spending_currency_event)) {
-    [[level.chaos_update_spending_currency_event]](self, param_02, param_03);
+    [[level.chaos_update_spending_currency_event]](self, var_2, var_3);
   }
 
-  if(scripts\cp\utility::is_consumable_active("next_purchase_free") && param_00 >= 1 && param_02 != "atm" && param_02 != "laststand" && param_02 != "bleedoutPenalty") {
+  if(scripts\cp\utility::is_consumable_active("next_purchase_free") && var_0 >= 1 && var_2 != "atm" && var_2 != "laststand" && var_2 != "bleedoutPenalty") {
     scripts\cp\utility::notify_used_consumable("next_purchase_free");
   } else {
-    set_player_currency(var_05);
+    set_player_currency(var_5);
   }
 
-  if(var_06 < 1) {
+  if(var_6 < 1) {
     return;
   }
 
-  if(isDefined(param_02)) {
-    scripts\cp\cp_analytics::update_spending_type(var_06, param_02);
+  if(isDefined(var_2)) {
+    scripts\cp\cp_analytics::update_spending_type(var_6, var_2);
   }
 
-  eog_player_update_stat("currencyspent", var_06);
-  if(scripts\cp\utility::is_consumable_active("door_buy_refund") && param_00 > 0) {
-    if(param_02 != "atm" && param_02 != "laststand" && param_02 != "bleedoutPenalty") {
-      give_player_currency(int(var_06 * 0.3), undefined, undefined, 1, "bonus");
+  eog_player_update_stat("currencyspent", var_6);
+  if(scripts\cp\utility::is_consumable_active("door_buy_refund") && var_0 > 0) {
+    if(var_2 != "atm" && var_2 != "laststand" && var_2 != "bleedoutPenalty") {
+      give_player_currency(int(var_6 * 0.3), undefined, undefined, 1, "bonus");
       scripts\cp\utility::notify_used_consumable("door_buy_refund");
     }
   }
 
-  if(scripts\cp\cp_interaction::should_interaction_fill_consumable_meter(param_02)) {
-    self notify("consumable_charge", param_00 * 0.07);
+  if(scripts\cp\cp_interaction::should_interaction_fill_consumable_meter(var_2)) {
+    self notify("consumable_charge", var_0 * 0.07);
   }
 
-  if(param_02 != "atm" && param_02 != "laststand" && param_02 != "bleedoutPenalty") {
-    scripts\cp\utility::bufferednotify("currency_spent_buffered", param_00);
+  if(var_2 != "atm" && var_2 != "laststand" && var_2 != "bleedoutPenalty") {
+    scripts\cp\utility::bufferednotify("currency_spent_buffered", var_0);
   }
 
-  if(isDefined(param_01) && param_01) {}
+  if(isDefined(var_1) && var_1) {}
 }
 
-player_has_enough_currency(param_00, param_01) {
-  if(!isDefined(param_01) || isDefined(param_01) && param_01 != "atm" && param_01 != "laststand" && param_01 != "bleedoutPenalty") {
+player_has_enough_currency(var_0, var_1) {
+  if(!isDefined(var_1) || isDefined(var_1) && var_1 != "atm" && var_1 != "laststand" && var_1 != "bleedoutPenalty") {
     if(scripts\cp\utility::is_consumable_active("next_purchase_free")) {
-      param_00 = 0;
+      var_0 = 0;
     }
   }
 
-  var_02 = get_player_currency();
-  return var_02 >= param_00;
+  var_2 = get_player_currency();
+  return var_2 >= var_0;
 }
 
-try_take_player_currency(param_00) {
-  if(player_has_enough_currency(param_00)) {
-    take_player_currency(param_00);
+try_take_player_currency(var_0) {
+  if(player_has_enough_currency(var_0)) {
+    take_player_currency(var_0);
     return 1;
   }
 
   return 0;
 }
 
-is_unlocked(param_00) {
-  var_01 = undefined;
-  var_01 = strtok(param_00, "_")[0];
-  var_02 = level.combat_resource[param_00].unlock;
-  var_03 = get_player_rank();
-  return var_03 >= var_02;
+is_unlocked(var_0) {
+  var_1 = undefined;
+  var_1 = strtok(var_0, "_")[0];
+  var_2 = level.combat_resource[var_0].unlock;
+  var_3 = get_player_rank();
+  return var_3 >= var_2;
 }
 
 player_persistence_init() {
@@ -203,29 +203,29 @@ player_persistence_init() {
   self setrank(get_player_rank(), get_player_prestige());
 }
 
-setcoopplayerdata_for_everyone(param_00, param_01, param_02, param_03, param_04) {
-  foreach(var_07, var_06 in level.players) {
-    if(var_07 == 4) {
+setcoopplayerdata_for_everyone(var_0, var_1, var_2, var_3, var_4) {
+  foreach(var_7, var_6 in level.players) {
+    if(var_7 == 4) {
       continue;
     }
 
-    if(isDefined(param_00) && isDefined(param_01) && isDefined(param_02) && isDefined(param_03) && isDefined(param_04)) {
-      var_06 setplayerdata("cp", param_00, param_01, param_02, param_03, param_04);
+    if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2) && isDefined(var_3) && isDefined(var_4)) {
+      var_6 setplayerdata("cp", var_0, var_1, var_2, var_3, var_4);
       continue;
     }
 
-    if(isDefined(param_00) && isDefined(param_01) && isDefined(param_02) && isDefined(param_03) && !isDefined(param_04)) {
-      var_06 setplayerdata("cp", param_00, param_01, param_02, param_03);
+    if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2) && isDefined(var_3) && !isDefined(var_4)) {
+      var_6 setplayerdata("cp", var_0, var_1, var_2, var_3);
       continue;
     }
 
-    if(isDefined(param_00) && isDefined(param_01) && isDefined(param_02) && !isDefined(param_03) && !isDefined(param_04)) {
-      var_06 setplayerdata("cp", param_00, param_01, param_02);
+    if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2) && !isDefined(var_3) && !isDefined(var_4)) {
+      var_6 setplayerdata("cp", var_0, var_1, var_2);
       continue;
     }
 
-    if(isDefined(param_00) && isDefined(param_01) && !isDefined(param_02) && !isDefined(param_03) && !isDefined(param_04)) {
-      var_06 setplayerdata("cp", param_00, param_01);
+    if(isDefined(var_0) && isDefined(var_1) && !isDefined(var_2) && !isDefined(var_3) && !isDefined(var_4)) {
+      var_6 setplayerdata("cp", var_0, var_1);
       continue;
     }
   }
@@ -238,257 +238,257 @@ session_stats_init() {
 eog_player_tracking_init() {
   self endon("disconnect");
   wait(0.5);
-  var_00 = self getentitynumber();
-  if(var_00 == 4) {
-    var_00 = 0;
+  var_0 = self getentitynumber();
+  if(var_0 == 4) {
+    var_0 = 0;
   }
 
-  var_01 = "unknownPlayer";
+  var_1 = "unknownPlayer";
   if(isDefined(self.name)) {
-    var_01 = self.name;
+    var_1 = self.name;
   }
 
   if(!level.console) {
-    var_01 = getsubstr(var_01, 0, 19);
-  } else if(have_clan_tag(var_01)) {
-    var_01 = remove_clan_tag(var_01);
+    var_1 = getsubstr(var_1, 0, 19);
+  } else if(have_clan_tag(var_1)) {
+    var_1 = remove_clan_tag(var_1);
   }
 
-  for(var_02 = 0; var_02 < 4; var_02++) {
-    self setplayerdata("cp", "EoGPlayer", var_02, "connected", 0);
+  for(var_2 = 0; var_2 < 4; var_2++) {
+    self setplayerdata("cp", "EoGPlayer", var_2, "connected", 0);
   }
 
-  foreach(var_04 in level.players) {
-    var_04 reset_eog_stats(var_00);
-    var_04 setplayerdata("cp", "EoGPlayer", var_00, "connected", 1);
-    var_04 setplayerdata("cp", "EoGPlayer", var_00, "name", var_01);
-    var_04 setplayerdata("common", "round", "totalXp", 0);
-    var_04 setplayerdata("common", "aarUnlockCount", 0);
+  foreach(var_4 in level.players) {
+    var_4 reset_eog_stats(var_0);
+    var_4 setplayerdata("cp", "EoGPlayer", var_0, "connected", 1);
+    var_4 setplayerdata("cp", "EoGPlayer", var_0, "name", var_1);
+    var_4 setplayerdata("common", "round", "totalXp", 0);
+    var_4 setplayerdata("common", "aarUnlockCount", 0);
   }
 
-  var_06 = [0, 0, 0, 0];
-  foreach(var_08 in level.players) {
-    var_09 = var_08 getentitynumber();
-    if(var_09 == 4) {
-      var_09 = 0;
+  var_6 = [0, 0, 0, 0];
+  foreach(var_8 in level.players) {
+    var_9 = var_8 getentitynumber();
+    if(var_9 == 4) {
+      var_9 = 0;
     }
 
-    var_06[int(var_09)] = 1;
-    if(var_08 == self) {
+    var_6[int(var_9)] = 1;
+    if(var_8 == self) {
       continue;
     }
 
-    var_00 = var_08 getentitynumber();
-    if(var_00 == 4) {
-      var_00 = 0;
+    var_0 = var_8 getentitynumber();
+    if(var_0 == 4) {
+      var_0 = 0;
     }
 
-    var_0A = var_08 getplayerdata("cp", "EoGPlayer", var_00, "name");
-    var_0B = var_08 getplayerdata("cp", "EoGPlayer", var_00, "kills");
-    var_0C = var_08 getplayerdata("cp", "EoGPlayer", var_00, "score");
-    var_0D = var_08 getplayerdata("cp", "EoGPlayer", var_00, "assists");
-    var_0E = var_08 getplayerdata("cp", "EoGPlayer", var_00, "revives");
-    var_0F = var_08 getplayerdata("cp", "EoGPlayer", var_00, "drillrestarts");
-    var_10 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "drillplants");
-    var_11 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "downs");
-    var_12 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "deaths");
-    var_13 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "hivesdestroyed");
-    var_14 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currency");
-    var_15 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currencyspent");
-    var_16 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currencytotal");
-    var_17 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currency");
-    var_18 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currencyspent");
-    var_19 = var_08 getplayerdata("cp", "EoGPlayer", var_00, "currencytotal");
-    var_1A = var_08 getplayerdata("cp", "EoGPlayer", var_00, "traps");
-    var_1B = var_08 getplayerdata("cp", "EoGPlayer", var_00, "deployables");
-    var_1C = var_08 getplayerdata("cp", "EoGPlayer", var_00, "deployablesused");
-    var_1D = var_08 getplayerdata("cp", "EoGPlayer", var_00, "consumablesearned");
-    var_1E = var_08 getplayerdata("cp", "EoGPlayer", var_00, "headShots");
-    var_1F = var_08 getplayerdata("cp", "EoGPlayer", var_00, "connected");
-    self setplayerdata("cp", "EoGPlayer", var_00, "name", var_0A);
-    self setplayerdata("cp", "EoGPlayer", var_00, "kills", var_0B);
-    self setplayerdata("cp", "EoGPlayer", var_00, "score", var_0C);
-    self setplayerdata("cp", "EoGPlayer", var_00, "assists", var_0D);
-    self setplayerdata("cp", "EoGPlayer", var_00, "revives", var_0E);
-    self setplayerdata("cp", "EoGPlayer", var_00, "drillrestarts", var_0F);
-    self setplayerdata("cp", "EoGPlayer", var_00, "drillplants", var_10);
-    self setplayerdata("cp", "EoGPlayer", var_00, "downs", var_11);
-    self setplayerdata("cp", "EoGPlayer", var_00, "deaths", var_12);
-    self setplayerdata("cp", "EoGPlayer", var_00, "hivesdestroyed", var_13);
-    self setplayerdata("cp", "EoGPlayer", var_00, "currency", var_14);
-    self setplayerdata("cp", "EoGPlayer", var_00, "currencyspent", var_15);
-    self setplayerdata("cp", "EoGPlayer", var_00, "currencytotal", var_16);
-    self setplayerdata("cp", "EoGPlayer", var_00, "tickets", var_17);
-    self setplayerdata("cp", "EoGPlayer", var_00, "ticketsspent", var_18);
-    self setplayerdata("cp", "EoGPlayer", var_00, "tickettotal", var_19);
-    self setplayerdata("cp", "EoGPlayer", var_00, "traps", var_1A);
-    self setplayerdata("cp", "EoGPlayer", var_00, "deployables", var_1B);
-    self setplayerdata("cp", "EoGPlayer", var_00, "deployablesused", var_1C);
-    self setplayerdata("cp", "EoGPlayer", var_00, "consumablesearned", var_1D);
-    self setplayerdata("cp", "EoGPlayer", var_00, "headShots", var_1E);
-    self setplayerdata("cp", "EoGPlayer", var_00, "connected", var_1F);
+    var_0A = var_8 getplayerdata("cp", "EoGPlayer", var_0, "name");
+    var_0B = var_8 getplayerdata("cp", "EoGPlayer", var_0, "kills");
+    var_0C = var_8 getplayerdata("cp", "EoGPlayer", var_0, "score");
+    var_0D = var_8 getplayerdata("cp", "EoGPlayer", var_0, "assists");
+    var_0E = var_8 getplayerdata("cp", "EoGPlayer", var_0, "revives");
+    var_0F = var_8 getplayerdata("cp", "EoGPlayer", var_0, "drillrestarts");
+    var_10 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "drillplants");
+    var_11 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "downs");
+    var_12 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "deaths");
+    var_13 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "hivesdestroyed");
+    var_14 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currency");
+    var_15 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currencyspent");
+    var_16 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currencytotal");
+    var_17 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currency");
+    var_18 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currencyspent");
+    var_19 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "currencytotal");
+    var_1A = var_8 getplayerdata("cp", "EoGPlayer", var_0, "traps");
+    var_1B = var_8 getplayerdata("cp", "EoGPlayer", var_0, "deployables");
+    var_1C = var_8 getplayerdata("cp", "EoGPlayer", var_0, "deployablesused");
+    var_1D = var_8 getplayerdata("cp", "EoGPlayer", var_0, "consumablesearned");
+    var_1E = var_8 getplayerdata("cp", "EoGPlayer", var_0, "headShots");
+    var_1F = var_8 getplayerdata("cp", "EoGPlayer", var_0, "connected");
+    self setplayerdata("cp", "EoGPlayer", var_0, "name", var_0A);
+    self setplayerdata("cp", "EoGPlayer", var_0, "kills", var_0B);
+    self setplayerdata("cp", "EoGPlayer", var_0, "score", var_0C);
+    self setplayerdata("cp", "EoGPlayer", var_0, "assists", var_0D);
+    self setplayerdata("cp", "EoGPlayer", var_0, "revives", var_0E);
+    self setplayerdata("cp", "EoGPlayer", var_0, "drillrestarts", var_0F);
+    self setplayerdata("cp", "EoGPlayer", var_0, "drillplants", var_10);
+    self setplayerdata("cp", "EoGPlayer", var_0, "downs", var_11);
+    self setplayerdata("cp", "EoGPlayer", var_0, "deaths", var_12);
+    self setplayerdata("cp", "EoGPlayer", var_0, "hivesdestroyed", var_13);
+    self setplayerdata("cp", "EoGPlayer", var_0, "currency", var_14);
+    self setplayerdata("cp", "EoGPlayer", var_0, "currencyspent", var_15);
+    self setplayerdata("cp", "EoGPlayer", var_0, "currencytotal", var_16);
+    self setplayerdata("cp", "EoGPlayer", var_0, "tickets", var_17);
+    self setplayerdata("cp", "EoGPlayer", var_0, "ticketsspent", var_18);
+    self setplayerdata("cp", "EoGPlayer", var_0, "tickettotal", var_19);
+    self setplayerdata("cp", "EoGPlayer", var_0, "traps", var_1A);
+    self setplayerdata("cp", "EoGPlayer", var_0, "deployables", var_1B);
+    self setplayerdata("cp", "EoGPlayer", var_0, "deployablesused", var_1C);
+    self setplayerdata("cp", "EoGPlayer", var_0, "consumablesearned", var_1D);
+    self setplayerdata("cp", "EoGPlayer", var_0, "headShots", var_1E);
+    self setplayerdata("cp", "EoGPlayer", var_0, "connected", var_1F);
   }
 
-  foreach(var_23, var_22 in var_06) {
+  foreach(var_23, var_22 in var_6) {
     if(!var_22) {
       reset_eog_stats(var_23);
     }
   }
 }
 
-reset_eog_stats(param_00) {
-  if(param_00 == 4) {
-    param_00 = 0;
+reset_eog_stats(var_0) {
+  if(var_0 == 4) {
+    var_0 = 0;
   }
 
-  self setplayerdata("cp", "EoGPlayer", param_00, "name", "");
-  self setplayerdata("cp", "EoGPlayer", param_00, "kills", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "score", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "assists", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "revives", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "drillrestarts", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "drillplants", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "downs", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "deaths", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "hivesdestroyed", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "currency", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "currencyspent", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "currencytotal", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "tickets", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "ticketsspent", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "tickettotal", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "traps", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "deployables", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "deployablesused", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "consumablesearned", 0);
-  self setplayerdata("cp", "EoGPlayer", param_00, "headShots", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "name", "");
+  self setplayerdata("cp", "EoGPlayer", var_0, "kills", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "score", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "assists", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "revives", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "drillrestarts", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "drillplants", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "downs", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "deaths", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "hivesdestroyed", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "currency", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "currencyspent", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "currencytotal", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "tickets", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "ticketsspent", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "tickettotal", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "traps", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "deployables", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "deployablesused", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "consumablesearned", 0);
+  self setplayerdata("cp", "EoGPlayer", var_0, "headShots", 0);
 }
 
-eog_update_on_player_disconnect(param_00) {
+eog_update_on_player_disconnect(var_0) {
   if(scripts\cp\cp_endgame::gamealreadyended()) {
     return;
   }
 
-  var_01 = param_00 getentitynumber();
-  setcoopplayerdata_for_everyone("EoGPlayer", var_01, "connected", 0);
+  var_1 = var_0 getentitynumber();
+  setcoopplayerdata_for_everyone("EoGPlayer", var_1, "connected", 0);
 }
 
-eog_player_update_stat(param_00, param_01, param_02) {
-  var_03 = self getentitynumber();
-  var_04 = param_01;
-  if(!isDefined(param_02) || !param_02) {
-    var_05 = self getplayerdata("cp", "EoGPlayer", var_03, param_00);
-    var_04 = int(var_05) + int(param_01);
+eog_player_update_stat(var_0, var_1, var_2) {
+  var_3 = self getentitynumber();
+  var_4 = var_1;
+  if(!isDefined(var_2) || !var_2) {
+    var_5 = self getplayerdata("cp", "EoGPlayer", var_3, var_0);
+    var_4 = int(var_5) + int(var_1);
   }
 
-  try_update_lb_playerdata(param_00, var_04, 1);
-  if(var_03 == 4) {
-    var_03 = 0;
+  try_update_lb_playerdata(var_0, var_4, 1);
+  if(var_3 == 4) {
+    var_3 = 0;
   }
 
-  setcoopplayerdata_for_everyone("EoGPlayer", var_03, param_00, var_04);
+  setcoopplayerdata_for_everyone("EoGPlayer", var_3, var_0, var_4);
 }
 
-try_update_lb_playerdata(param_00, param_01, param_02) {
-  var_03 = get_mapped_lb_ref_from_eog_ref(param_00);
-  if(!isDefined(var_03)) {
+try_update_lb_playerdata(var_0, var_1, var_2) {
+  var_3 = get_mapped_lb_ref_from_eog_ref(var_0);
+  if(!isDefined(var_3)) {
     return;
   }
 
-  lb_player_update_stat(var_03, param_01, param_02);
+  lb_player_update_stat(var_3, var_1, var_2);
 }
 
-lb_player_update_stat(param_00, param_01, param_02) {
-  if(scripts\engine\utility::istrue(param_02)) {
-    var_03 = param_01;
+lb_player_update_stat(var_0, var_1, var_2) {
+  if(scripts\engine\utility::istrue(var_2)) {
+    var_3 = var_1;
   } else {
-    var_04 = self getplayerdata("cp", "alienSession", param_01);
-    var_03 = var_04 + param_01;
+    var_4 = self getplayerdata("cp", "alienSession", var_1);
+    var_3 = var_4 + var_1;
   }
 
-  self setplayerdata("cp", "alienSession", param_00, var_03);
+  self setplayerdata("cp", "alienSession", var_0, var_3);
 }
 
 weapons_tracking_init() {
   self.persistence_weaponstats = [];
-  foreach(var_03, var_01 in level.collectibles) {
-    if(strtok(var_03, "_")[0] == "weapon") {
-      var_02 = get_base_weapon_name(var_03);
-      self.persistence_weaponstats[var_02] = 1;
+  foreach(var_3, var_1 in level.collectibles) {
+    if(strtok(var_3, "_")[0] == "weapon") {
+      var_2 = get_base_weapon_name(var_3);
+      self.persistence_weaponstats[var_2] = 1;
     }
   }
 
   thread player_weaponstats_track_shots();
 }
 
-get_base_weapon_name(param_00) {
-  var_01 = "";
-  var_02 = strtok(param_00, "_");
-  for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    var_04 = var_02[var_03];
-    if(var_04 == "weapon" && var_03 == 0) {
+get_base_weapon_name(var_0) {
+  var_1 = "";
+  var_2 = strtok(var_0, "_");
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_4 = var_2[var_3];
+    if(var_4 == "weapon" && var_3 == 0) {
       continue;
     }
 
-    if(var_04 == "zm") {
-      var_01 = var_01 + "zm";
+    if(var_4 == "zm") {
+      var_1 = var_1 + "zm";
       break;
     }
 
-    if(var_03 < var_02.size - 1) {
-      var_01 = var_01 + var_04 + "_";
+    if(var_3 < var_2.size - 1) {
+      var_1 = var_1 + var_4 + "_";
       continue;
     }
 
-    var_01 = var_01 + var_04;
+    var_1 = var_1 + var_4;
     break;
   }
 
-  if(var_01 == "") {
+  if(var_1 == "") {
     return "none";
   }
 
-  return var_01;
+  return var_1;
 }
 
-weaponstats_reset(param_00, param_01) {
-  self setplayerdata("cp", param_00, param_01, "hits", 0);
-  self setplayerdata("cp", param_00, param_01, "shots", 0);
-  self setplayerdata("cp", param_00, param_01, "kills", 0);
+weaponstats_reset(var_0, var_1) {
+  self setplayerdata("cp", var_0, var_1, "hits", 0);
+  self setplayerdata("cp", var_0, var_1, "shots", 0);
+  self setplayerdata("cp", var_0, var_1, "kills", 0);
 }
 
-update_weaponstats_hits(param_00, param_01, param_02) {
-  if(!is_valid_weapon_hit(param_00, param_02)) {
+update_weaponstats_hits(var_0, var_1, var_2) {
+  if(!is_valid_weapon_hit(var_0, var_2)) {
     return;
   }
 
-  update_weaponstats("weaponStats", param_00, "hits", param_01);
-  var_03 = "personal";
+  update_weaponstats("weaponStats", var_0, "hits", var_1);
+  var_3 = "personal";
   if(isDefined(level.personal_score_component_name)) {
-    var_03 = level.personal_score_component_name;
+    var_3 = level.personal_score_component_name;
   }
 
-  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_03, "shots_hit", param_01);
+  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_3, "shots_hit", var_1);
 }
 
-is_valid_weapon_hit(param_00, param_01) {
-  if(param_00 == "none") {
+is_valid_weapon_hit(var_0, var_1) {
+  if(var_0 == "none") {
     return 0;
   }
 
-  if(param_01 == "MOD_MELEE") {
+  if(var_1 == "MOD_MELEE") {
     return 0;
   }
 
-  if(no_weapon_fired_notify(param_00)) {
+  if(no_weapon_fired_notify(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-no_weapon_fired_notify(param_00) {
-  switch (param_00) {
+no_weapon_fired_notify(var_0) {
+  switch (var_0) {
     case "iw7_spiked_bat_zm_pap2":
     case "iw7_spiked_bat_zm_pap1":
     case "iw7_spiked_bat_zm":
@@ -517,48 +517,48 @@ no_weapon_fired_notify(param_00) {
   }
 }
 
-update_weaponstats_shots(param_00, param_01) {
+update_weaponstats_shots(var_0, var_1) {
   if(!self.should_track_weapon_fired) {
     return;
   }
 
-  update_weaponstats("weaponStats", param_00, "shots", param_01);
-  var_02 = "personal";
+  update_weaponstats("weaponStats", var_0, "shots", var_1);
+  var_2 = "personal";
   if(isDefined(level.personal_score_component_name)) {
-    var_02 = level.personal_score_component_name;
+    var_2 = level.personal_score_component_name;
   }
 
-  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_02, "shots_fired", param_01);
+  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_2, "shots_fired", var_1);
 }
 
-update_weaponstats_kills(param_00, param_01) {
-  update_weaponstats("weaponStats", param_00, "kills", param_01);
+update_weaponstats_kills(var_0, var_1) {
+  update_weaponstats("weaponStats", var_0, "kills", var_1);
 }
 
-update_weaponstats(param_00, param_01, param_02, param_03) {
+update_weaponstats(var_0, var_1, var_2, var_3) {
   if(!isplayer(self)) {
     return;
   }
 
-  var_04 = get_base_weapon_name(param_01);
-  if(!isDefined(var_04) || !isDefined(self.persistence_weaponstats[var_04])) {
+  var_4 = get_base_weapon_name(var_1);
+  if(!isDefined(var_4) || !isDefined(self.persistence_weaponstats[var_4])) {
     return;
   }
 
   if(isDefined(level.weapon_stats_override_name_func)) {
-    var_04 = [[level.weapon_stats_override_name_func]](var_04);
+    var_4 = [[level.weapon_stats_override_name_func]](var_4);
   }
 
-  if(issubstr(var_04, "dlc")) {
-    var_05 = strtok(var_04, "d");
-    var_04 = var_05[0] + "DLC";
-    var_05 = strtok(var_05[1], "c");
-    var_04 = var_04 + var_05[1];
+  if(issubstr(var_4, "dlc")) {
+    var_5 = strtok(var_4, "d");
+    var_4 = var_5[0] + "DLC";
+    var_5 = strtok(var_5[1], "c");
+    var_4 = var_4 + var_5[1];
   }
 
-  var_06 = int(self getplayerdata("cp", param_00, var_04, param_02));
-  var_07 = var_06 + int(param_03);
-  self setplayerdata("cp", param_00, var_04, param_02, var_07);
+  var_6 = int(self getplayerdata("cp", var_0, var_4, var_2));
+  var_7 = var_6 + int(var_3);
+  self setplayerdata("cp", var_0, var_4, var_2, var_7);
 }
 
 player_weaponstats_track_shots() {
@@ -566,13 +566,13 @@ player_weaponstats_track_shots() {
   self notify("weaponstats_track_shots");
   self endon("weaponstats_track_shots");
   for(;;) {
-    self waittill("weapon_fired", var_00);
-    if(!isDefined(var_00)) {
+    self waittill("weapon_fired", var_0);
+    if(!isDefined(var_0)) {
       continue;
     }
 
-    var_01 = 1;
-    update_weaponstats_shots(var_00, var_01);
+    var_1 = 1;
+    update_weaponstats_shots(var_0, var_1);
   }
 }
 
@@ -583,74 +583,74 @@ rank_init() {
 
   level.zombie_ranks = [];
   level.zombie_max_rank = int(tablelookup(level.zombie_ranks_table, 0, "maxrank", 1));
-  for(var_00 = 0; var_00 <= level.zombie_max_rank; var_00++) {
-    var_01 = get_ref_by_id(var_00);
-    if(var_01 == "") {
+  for(var_0 = 0; var_0 <= level.zombie_max_rank; var_0++) {
+    var_1 = get_ref_by_id(var_0);
+    if(var_1 == "") {
       break;
     }
 
-    if(!isDefined(level.zombie_ranks[var_00])) {
-      var_02 = spawnStruct();
-      var_02.id = var_00;
-      var_02.ref = var_01;
-      var_02.lvl = get_level_by_id(var_00);
-      var_02.icon = get_icon_by_id(var_00);
-      var_02.tokenreward = get_token_reward_by_id(var_00);
-      var_02.xp = [];
-      var_02.xp["min"] = get_minxp_by_id(var_00);
-      var_02.xp["next"] = get_nextxp_by_id(var_00);
-      var_02.xp["max"] = get_maxxp_by_id(var_00);
-      var_02.name = [];
-      var_02.name["short"] = get_shortrank_by_id(var_00);
-      var_02.name["full"] = get_fullrank_by_id(var_00);
-      var_02.name["ingame"] = get_ingamerank_by_id(var_00);
-      level.zombie_ranks[var_00] = var_02;
+    if(!isDefined(level.zombie_ranks[var_0])) {
+      var_2 = spawnStruct();
+      var_2.id = var_0;
+      var_2.ref = var_1;
+      var_2.lvl = get_level_by_id(var_0);
+      var_2.icon = get_icon_by_id(var_0);
+      var_2.tokenreward = get_token_reward_by_id(var_0);
+      var_2.xp = [];
+      var_2.xp["min"] = get_minxp_by_id(var_0);
+      var_2.xp["next"] = get_nextxp_by_id(var_0);
+      var_2.xp["max"] = get_maxxp_by_id(var_0);
+      var_2.name = [];
+      var_2.name["short"] = get_shortrank_by_id(var_0);
+      var_2.name["full"] = get_fullrank_by_id(var_0);
+      var_2.name["ingame"] = get_ingamerank_by_id(var_0);
+      level.zombie_ranks[var_0] = var_2;
     }
   }
 }
 
-get_ref_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 1);
+get_ref_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 1);
 }
 
-get_minxp_by_id(param_00) {
-  return int(tablelookup(level.zombie_ranks_table, 0, param_00, 2));
+get_minxp_by_id(var_0) {
+  return int(tablelookup(level.zombie_ranks_table, 0, var_0, 2));
 }
 
-get_maxxp_by_id(param_00) {
-  return int(tablelookup(level.zombie_ranks_table, 0, param_00, 7));
+get_maxxp_by_id(var_0) {
+  return int(tablelookup(level.zombie_ranks_table, 0, var_0, 7));
 }
 
-get_nextxp_by_id(param_00) {
-  return int(tablelookup(level.zombie_ranks_table, 0, param_00, 3));
+get_nextxp_by_id(var_0) {
+  return int(tablelookup(level.zombie_ranks_table, 0, var_0, 3));
 }
 
-get_level_by_id(param_00) {
-  return int(tablelookup(level.zombie_ranks_table, 0, param_00, 14));
+get_level_by_id(var_0) {
+  return int(tablelookup(level.zombie_ranks_table, 0, var_0, 14));
 }
 
-get_shortrank_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 4);
+get_shortrank_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 4);
 }
 
-get_fullrank_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 5);
+get_fullrank_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 5);
 }
 
-get_ingamerank_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 17);
+get_ingamerank_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 17);
 }
 
-get_icon_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 6);
+get_icon_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 6);
 }
 
-get_token_reward_by_id(param_00) {
-  return int(tablelookup(level.zombie_ranks_table, 0, param_00, 19));
+get_token_reward_by_id(var_0) {
+  return int(tablelookup(level.zombie_ranks_table, 0, var_0, 19));
 }
 
-get_splash_by_id(param_00) {
-  return tablelookup(level.zombie_ranks_table, 0, param_00, 8);
+get_splash_by_id(var_0) {
+  return tablelookup(level.zombie_ranks_table, 0, var_0, 8);
 }
 
 get_player_rank() {
@@ -669,297 +669,297 @@ get_player_session_xp() {
   return self getplayerdata("cp", "alienSession", "experience");
 }
 
-set_player_session_xp(param_00) {
-  self setplayerdata("cp", "alienSession", "experience", param_00);
+set_player_session_xp(var_0) {
+  self setplayerdata("cp", "alienSession", "experience", var_0);
 }
 
-give_player_session_xp(param_00) {
-  var_01 = get_player_session_xp();
-  var_02 = param_00 + var_01;
-  set_player_session_xp(var_02);
+give_player_session_xp(var_0) {
+  var_1 = get_player_session_xp();
+  var_2 = var_0 + var_1;
+  set_player_session_xp(var_2);
 }
 
 get_player_session_tokens() {
   return self getplayerdata("cp", "alienSession", "shots");
 }
 
-set_player_session_tokens(param_00) {
-  self setplayerdata("cp", "alienSession", "shots", param_00);
+set_player_session_tokens(var_0) {
+  self setplayerdata("cp", "alienSession", "shots", var_0);
 }
 
-give_player_session_tokens(param_00) {
-  var_01 = get_player_session_tokens();
-  var_02 = param_00 + var_01;
-  set_player_session_tokens(var_02);
+give_player_session_tokens(var_0) {
+  var_1 = get_player_session_tokens();
+  var_2 = var_0 + var_1;
+  set_player_session_tokens(var_2);
 }
 
-set_player_session_rankup(param_00) {
-  self setplayerdata("cp", "alienSession", "ranked_up", int(param_00));
+set_player_session_rankup(var_0) {
+  self setplayerdata("cp", "alienSession", "ranked_up", int(var_0));
 }
 
 get_player_session_rankup() {
   return self getplayerdata("cp", "alienSession", "ranked_up");
 }
 
-update_player_session_rankup(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 1;
+update_player_session_rankup(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  var_01 = get_player_session_rankup();
-  var_02 = param_00 + var_01;
-  set_player_session_rankup(var_02);
+  var_1 = get_player_session_rankup();
+  var_2 = var_0 + var_1;
+  set_player_session_rankup(var_2);
 }
 
-set_player_rank(param_00) {
-  self setplayerdata("cp", "progression", "playerLevel", "rank", param_00);
+set_player_rank(var_0) {
+  self setplayerdata("cp", "progression", "playerLevel", "rank", var_0);
 }
 
-set_player_xp(param_00) {
-  self setplayerdata("cp", "progression", "playerLevel", "xp", param_00);
+set_player_xp(var_0) {
+  self setplayerdata("cp", "progression", "playerLevel", "xp", var_0);
   if(isDefined(self.totalxpearned)) {
     self setplayerdata("common", "round", "totalXp", self.totalxpearned);
   }
 }
 
-set_player_prestige(param_00) {
-  self setplayerdata("cp", "progression", "playerLevel", "prestige", param_00);
+set_player_prestige(var_0) {
+  self setplayerdata("cp", "progression", "playerLevel", "prestige", var_0);
   self setplayerdata("cp", "progression", "playerLevel", "xp", 0);
   self setplayerdata("cp", "progression", "playerLevel", "rank", 0);
 }
 
-get_rank_by_xp(param_00) {
-  var_01 = 0;
-  if(param_00 >= level.zombie_ranks[level.zombie_max_rank].xp["max"]) {
+get_rank_by_xp(var_0) {
+  var_1 = 0;
+  if(var_0 >= level.zombie_ranks[level.zombie_max_rank].xp["max"]) {
     return level.zombie_max_rank;
   }
 
   if(isDefined(level.zombie_ranks)) {
-    for(var_02 = 0; var_02 < level.zombie_ranks.size; var_02++) {
-      if(param_00 >= level.zombie_ranks[var_02].xp["min"]) {
-        if(param_00 < level.zombie_ranks[var_02].xp["max"]) {
-          var_01 = level.zombie_ranks[var_02].id;
+    for(var_2 = 0; var_2 < level.zombie_ranks.size; var_2++) {
+      if(var_0 >= level.zombie_ranks[var_2].xp["min"]) {
+        if(var_0 < level.zombie_ranks[var_2].xp["max"]) {
+          var_1 = level.zombie_ranks[var_2].id;
           break;
         }
       }
     }
   }
 
-  return var_01;
+  return var_1;
 }
 
-get_scaled_xp(param_00, param_01) {
-  return int(param_01 * get_level_xp_scale(param_00) * get_weapon_passive_xp_scale(param_00));
+get_scaled_xp(var_0, var_1) {
+  return int(var_1 * get_level_xp_scale(var_0) * get_weapon_passive_xp_scale(var_0));
 }
 
-get_level_xp_scale(param_00) {
-  if(isDefined(param_00.xpscale)) {
-    return param_00.xpscale;
+get_level_xp_scale(var_0) {
+  if(isDefined(var_0.xpscale)) {
+    return var_0.xpscale;
   }
 
   return 1;
 }
 
-wait_and_give_player_xp(param_00, param_01) {
+wait_and_give_player_xp(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
-  wait(param_01);
-  give_player_xp(param_00);
+  wait(var_1);
+  give_player_xp(var_0);
 }
 
-get_weapon_passive_xp_scale(param_00) {
-  if(isDefined(param_00.weapon_passive_xp_multiplier) && scripts\engine\utility::istrue(param_00.kill_with_extra_xp_passive)) {
-    param_00.kill_with_extra_xp_passive = 0;
-    return param_00.weapon_passive_xp_multiplier;
+get_weapon_passive_xp_scale(var_0) {
+  if(isDefined(var_0.weapon_passive_xp_multiplier) && scripts\engine\utility::istrue(var_0.kill_with_extra_xp_passive)) {
+    var_0.kill_with_extra_xp_passive = 0;
+    return var_0.weapon_passive_xp_multiplier;
   }
 
   return 1;
 }
 
-give_player_xp(param_00, param_01) {
+give_player_xp(var_0, var_1) {
   if(!level.onlinegame) {
     return;
   }
 
-  param_00 = get_scaled_xp(self, param_00);
+  var_0 = get_scaled_xp(self, var_0);
   if(isDefined(self.totalxpearned)) {
-    self.totalxpearned = self.totalxpearned + param_00;
-    scripts\cp\zombies\zombie_analytics::log_session_xp_earned(param_00, self.totalxpearned, self, level.wave_num);
+    self.totalxpearned = self.totalxpearned + var_0;
+    scripts\cp\zombies\zombie_analytics::log_session_xp_earned(var_0, self.totalxpearned, self, level.wave_num);
   }
 
-  thread give_player_session_xp(param_00);
-  var_02 = 0;
-  var_03 = get_player_rank();
-  var_04 = get_player_xp();
-  var_05 = var_04 + param_00;
-  set_player_xp(var_05);
-  if(scripts\engine\utility::istrue(param_01) && param_00 > 0) {
-    self setclientomnvar("zom_xp_reward", param_00);
+  thread give_player_session_xp(var_0);
+  var_2 = 0;
+  var_3 = get_player_rank();
+  var_4 = get_player_xp();
+  var_5 = var_4 + var_0;
+  set_player_xp(var_5);
+  if(scripts\engine\utility::istrue(var_1) && var_0 > 0) {
+    self setclientomnvar("zom_xp_reward", var_0);
     self setclientomnvar("zom_xp_notify", gettime());
   }
 
-  var_06 = get_rank_by_xp(var_05);
-  if(var_06 > var_03) {
-    if(var_06 == level.zombie_max_rank + 1) {
-      var_02 = 1;
+  var_6 = get_rank_by_xp(var_5);
+  if(var_6 > var_3) {
+    if(var_6 == level.zombie_max_rank + 1) {
+      var_2 = 1;
     }
 
-    set_player_rank(var_06);
-    if(var_02 == 0) {
-      var_07 = var_06 + 1;
-      var_08 = get_splash_by_id(var_06);
-      thread scripts\cp\cp_hud_message::showsplash(var_08, var_07);
-      self notify("ranked_up", var_06);
+    set_player_rank(var_6);
+    if(var_2 == 0) {
+      var_7 = var_6 + 1;
+      var_8 = get_splash_by_id(var_6);
+      thread scripts\cp\cp_hud_message::showsplash(var_8, var_7);
+      self notify("ranked_up", var_6);
       update_player_session_rankup();
     }
 
     self setrank(get_player_rank(), get_player_prestige());
-    process_rank_merits(var_06);
+    process_rank_merits(var_6);
   }
 }
 
-process_rank_merits(param_00) {
+process_rank_merits(var_0) {
   scripts\cp\cp_merits::processmerit("mt_prestige_1");
-  if(param_00 >= 40) {
+  if(var_0 >= 40) {
     scripts\cp\cp_merits::processmerit("mt_prestige_2");
   }
 
-  if(param_00 >= 60) {
+  if(var_0 >= 60) {
     scripts\cp\cp_merits::processmerit("mt_prestige_3");
   }
 
-  if(param_00 >= 80) {
+  if(var_0 >= 80) {
     scripts\cp\cp_merits::processmerit("mt_prestige_4");
   }
 
-  if(param_00 >= 100) {
+  if(var_0 >= 100) {
     scripts\cp\cp_merits::processmerit("mt_prestige_5");
   }
 
-  if(param_00 >= 120) {
+  if(var_0 >= 120) {
     scripts\cp\cp_merits::processmerit("mt_prestige_6");
   }
 
-  if(param_00 >= 140) {
+  if(var_0 >= 140) {
     scripts\cp\cp_merits::processmerit("mt_prestige_7");
   }
 
-  if(param_00 >= 160) {
+  if(var_0 >= 160) {
     scripts\cp\cp_merits::processmerit("mt_prestige_8");
   }
 
-  if(param_00 >= 180) {
+  if(var_0 >= 180) {
     scripts\cp\cp_merits::processmerit("mt_prestige_9");
   }
 
-  if(param_00 >= 200) {
+  if(var_0 >= 200) {
     scripts\cp\cp_merits::processmerit("mt_prestige_10");
   }
 }
 
-inc_stat(param_00, param_01, param_02) {
-  var_03 = self getplayerdata("cp", param_00, param_01);
-  var_04 = var_03 + param_02;
-  self setplayerdata("cp", param_00, param_01, var_04);
+inc_stat(var_0, var_1, var_2) {
+  var_3 = self getplayerdata("cp", var_0, var_1);
+  var_4 = var_3 + var_2;
+  self setplayerdata("cp", var_0, var_1, var_4);
 }
 
-inc_session_stat(param_00, param_01) {
-  inc_stat("alienSession", param_00, param_01);
+inc_session_stat(var_0, var_1) {
+  inc_stat("alienSession", var_0, var_1);
 }
 
 get_hives_destroyed_stat() {
   return get_aliensession_stat("hivesDestroyed");
 }
 
-get_aliensession_stat(param_00) {
-  return self getplayerdata("cp", "alienSession", param_00);
+get_aliensession_stat(var_0) {
+  return self getplayerdata("cp", "alienSession", var_0);
 }
 
-set_aliensession_stat(param_00, param_01) {
-  self setplayerdata("cp", "alienSession", param_00, param_01);
+set_aliensession_stat(var_0, var_1) {
+  self setplayerdata("cp", "alienSession", var_0, var_1);
 }
 
-update_deployable_box_performance(param_00) {
+update_deployable_box_performance(var_0) {
   if(isDefined(level.update_deployable_box_performance_func)) {
-    param_00[[level.update_deployable_box_performance_func]]();
+    var_0[[level.update_deployable_box_performance_func]]();
     return;
   }
 
-  param_00 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "team_support_deploy");
+  var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "team_support_deploy");
 }
 
-update_lb_aliensession_challenge(param_00) {
-  foreach(var_02 in level.players) {
-    var_02 lb_player_update_stat("challengesAttempted", 1);
-    if(param_00) {
-      var_02 lb_player_update_stat("challengesCompleted", 1);
+update_lb_aliensession_challenge(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 lb_player_update_stat("challengesAttempted", 1);
+    if(var_0) {
+      var_2 lb_player_update_stat("challengesCompleted", 1);
     }
   }
 }
 
-update_lb_aliensession_wave(param_00) {
-  foreach(var_02 in level.players) {
-    var_02 lb_player_update_stat("waveNum", param_00, 1);
+update_lb_aliensession_wave(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 lb_player_update_stat("waveNum", var_0, 1);
   }
 }
 
-update_lb_aliensession_escape(param_00, param_01) {
-  var_02 = get_lb_escape_rank(param_01);
-  foreach(var_04 in param_00) {
-    var_04 lb_player_update_stat("escapedRank" + var_02, 1, 1);
-    var_04 lb_player_update_stat("hits", 1, 1);
+update_lb_aliensession_escape(var_0, var_1) {
+  var_2 = get_lb_escape_rank(var_1);
+  foreach(var_4 in var_0) {
+    var_4 lb_player_update_stat("escapedRank" + var_2, 1, 1);
+    var_4 lb_player_update_stat("hits", 1, 1);
   }
 }
 
-update_alien_kill_sessionstats(param_00, param_01) {
-  if(!isDefined(param_01) || !isplayer(param_01)) {
+update_alien_kill_sessionstats(var_0, var_1) {
+  if(!isDefined(var_1) || !isplayer(var_1)) {
     return;
   }
 
-  if(scripts\cp\utility::is_trap(param_00)) {
-    param_01 lb_player_update_stat("trapKills", 1);
+  if(scripts\cp\utility::is_trap(var_0)) {
+    var_1 lb_player_update_stat("trapKills", 1);
   }
 }
 
-register_lb_escape_rank(param_00) {
-  level.escape_rank_array = param_00;
+register_lb_escape_rank(var_0) {
+  level.escape_rank_array = var_0;
 }
 
-get_lb_escape_rank(param_00) {
-  for(var_01 = 0; var_01 < level.escape_rank_array.size - 1; var_01++) {
-    if(param_00 >= level.escape_rank_array[var_01] && param_00 < level.escape_rank_array[var_01 + 1]) {
-      return var_01;
+get_lb_escape_rank(var_0) {
+  for(var_1 = 0; var_1 < level.escape_rank_array.size - 1; var_1++) {
+    if(var_0 >= level.escape_rank_array[var_1] && var_0 < level.escape_rank_array[var_1 + 1]) {
+      return var_1;
     }
   }
 }
 
-have_clan_tag(param_00) {
-  return issubstr(param_00, "[") && issubstr(param_00, "]");
+have_clan_tag(var_0) {
+  return issubstr(var_0, "[") && issubstr(var_0, "]");
 }
 
-remove_clan_tag(param_00) {
-  var_01 = strtok(param_00, "]");
-  return var_01[1];
+remove_clan_tag(var_0) {
+  var_1 = strtok(var_0, "]");
+  return var_1[1];
 }
 
 register_eog_to_lb_playerdata_mapping() {
-  var_00 = [];
-  var_01["kills"] = "kills";
-  var_01["deployables"] = "deployables";
-  var_01["drillplants"] = "drillPlants";
-  var_01["revives"] = "revives";
-  var_01["downs"] = "downed";
-  var_01["drillrestarts"] = "repairs";
-  var_01["score"] = "score";
-  var_01["currencyspent"] = "currencySpent";
-  var_01["currencytotal"] = "currencyTotal";
-  var_01["hivesdestroyed"] = "hivesDestroyed";
-  var_01["waveNum"] = "waveNum";
-  level.eog_to_lb_playerdata_mapping = var_01;
+  var_0 = [];
+  var_1["kills"] = "kills";
+  var_1["deployables"] = "deployables";
+  var_1["drillplants"] = "drillPlants";
+  var_1["revives"] = "revives";
+  var_1["downs"] = "downed";
+  var_1["drillrestarts"] = "repairs";
+  var_1["score"] = "score";
+  var_1["currencyspent"] = "currencySpent";
+  var_1["currencytotal"] = "currencyTotal";
+  var_1["hivesdestroyed"] = "hivesDestroyed";
+  var_1["waveNum"] = "waveNum";
+  level.eog_to_lb_playerdata_mapping = var_1;
 }
 
-get_mapped_lb_ref_from_eog_ref(param_00) {
-  return level.eog_to_lb_playerdata_mapping[param_00];
+get_mapped_lb_ref_from_eog_ref(var_0) {
+  return level.eog_to_lb_playerdata_mapping[var_0];
 }
 
 play_time_monitor() {
@@ -970,128 +970,128 @@ play_time_monitor() {
   }
 }
 
-record_player_kills(param_00, param_01, param_02, param_03) {
-  if(scripts\cp\utility::isheadshot(param_00, param_01, param_02, param_03)) {
-    increment_player_career_headshot_kills(param_03);
+record_player_kills(var_0, var_1, var_2, var_3) {
+  if(scripts\cp\utility::isheadshot(var_0, var_1, var_2, var_3)) {
+    increment_player_career_headshot_kills(var_3);
   }
 
-  param_03 increment_player_career_kills(param_03);
-  param_03 eog_player_update_stat("kills", 1);
+  var_3 increment_player_career_kills(var_3);
+  var_3 eog_player_update_stat("kills", 1);
 }
 
-increment_player_career_total_waves(param_00) {
-  if(isDefined(param_00.wave_num_when_joined)) {
-    increment_zombiecareerstats(param_00, "Total_Waves", level.wave_num - param_00.wave_num_when_joined);
+increment_player_career_total_waves(var_0) {
+  if(isDefined(var_0.wave_num_when_joined)) {
+    increment_zombiecareerstats(var_0, "Total_Waves", level.wave_num - var_0.wave_num_when_joined);
     return;
   }
 
-  increment_zombiecareerstats(param_00, "Total_Waves", level.wave_num);
+  increment_zombiecareerstats(var_0, "Total_Waves", level.wave_num);
 }
 
-increment_player_career_total_score(param_00) {
-  increment_zombiecareerstats(param_00, "Total_Score", param_00.score_earned);
+increment_player_career_total_score(var_0) {
+  increment_zombiecareerstats(var_0, "Total_Score", var_0.score_earned);
 }
 
-increment_player_career_shots_fired(param_00) {
-  increment_zombiecareerstats(param_00, "Shots_Fired", 1);
+increment_player_career_shots_fired(var_0) {
+  increment_zombiecareerstats(var_0, "Shots_Fired", 1);
 }
 
-increment_player_career_shots_on_target(param_00) {
-  increment_zombiecareerstats(param_00, "Shots_on_Target", 1);
+increment_player_career_shots_on_target(var_0) {
+  increment_zombiecareerstats(var_0, "Shots_on_Target", 1);
 }
 
-increment_player_career_explosive_kills(param_00) {
-  increment_zombiecareerstats(param_00, "Explosive_Kills", 1);
+increment_player_career_explosive_kills(var_0) {
+  increment_zombiecareerstats(var_0, "Explosive_Kills", 1);
 }
 
-increment_player_career_doors_opened(param_00) {
-  increment_zombiecareerstats(param_00, "Doors_Opened", 1);
+increment_player_career_doors_opened(var_0) {
+  increment_zombiecareerstats(var_0, "Doors_Opened", 1);
 }
 
-increment_player_career_perks_used(param_00) {
-  increment_zombiecareerstats(param_00, "Perks_Used", 1);
+increment_player_career_perks_used(var_0) {
+  increment_zombiecareerstats(var_0, "Perks_Used", 1);
 }
 
-increment_player_career_kills(param_00) {
-  increment_zombiecareerstats(param_00, "Kills", 1);
-  updateleaderboardstats(param_00, "Kills", 1, level.script, level.players.size, 1);
+increment_player_career_kills(var_0) {
+  increment_zombiecareerstats(var_0, "Kills", 1);
+  updateleaderboardstats(var_0, "Kills", 1, level.script, level.players.size, 1);
 }
 
-increment_player_career_headshot_kills(param_00) {
-  param_00 increment_zombiecareerstats(param_00, "Headshot_Kills", 1);
-  updateleaderboardstats(param_00, "Headshots", 1, level.script, level.players.size, 1);
+increment_player_career_headshot_kills(var_0) {
+  var_0 increment_zombiecareerstats(var_0, "Headshot_Kills", 1);
+  updateleaderboardstats(var_0, "Headshots", 1, level.script, level.players.size, 1);
 }
 
-increment_player_career_revives(param_00) {
-  param_00 increment_zombiecareerstats(param_00, "Revives", 1);
-  updateleaderboardstats(param_00, "Revives", 1, level.script, level.players.size, 1);
+increment_player_career_revives(var_0) {
+  var_0 increment_zombiecareerstats(var_0, "Revives", 1);
+  updateleaderboardstats(var_0, "Revives", 1, level.script, level.players.size, 1);
 }
 
-increment_player_career_downs(param_00) {
-  param_00 increment_zombiecareerstats(param_00, "Downs", 1);
-  updateleaderboardstats(param_00, "Downs", 1, level.script, level.players.size, 1);
+increment_player_career_downs(var_0) {
+  var_0 increment_zombiecareerstats(var_0, "Downs", 1);
+  updateleaderboardstats(var_0, "Downs", 1, level.script, level.players.size, 1);
 }
 
-update_players_career_highest_wave(param_00, param_01) {
-  foreach(var_03 in level.players) {
-    update_player_career_highest_wave(var_03, param_00, param_01, level.players.size);
+update_players_career_highest_wave(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    update_player_career_highest_wave(var_3, var_0, var_1, level.players.size);
   }
 }
 
-update_player_career_highest_wave(param_00, param_01, param_02, param_03) {
-  updateifgreaterthan_zombiecareerstats(param_00, "Highest_Wave", param_01);
-  update_highest_wave_lb(param_00, param_01, "Highest_Wave", param_02, param_03);
-  updateleaderboardstats(param_00, "Rounds", param_01, param_02, param_03, 1);
+update_player_career_highest_wave(var_0, var_1, var_2, var_3) {
+  updateifgreaterthan_zombiecareerstats(var_0, "Highest_Wave", var_1);
+  update_highest_wave_lb(var_0, var_1, "Highest_Wave", var_2, var_3);
+  updateleaderboardstats(var_0, "Rounds", var_1, var_2, var_3, 1);
 }
 
-increment_zombiecareerstats(param_00, param_01, param_02) {
+increment_zombiecareerstats(var_0, var_1, var_2) {
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return;
   }
 
-  if(!isDefined(param_02)) {
-    param_02 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var_03 = param_00 getplayerdata("cp", "coopCareerStats", param_01);
-  var_04 = var_03 + param_02;
-  param_00 setplayerdata("cp", "coopCareerStats", param_01, int(var_04));
+  var_3 = var_0 getplayerdata("cp", "coopCareerStats", var_1);
+  var_4 = var_3 + var_2;
+  var_0 setplayerdata("cp", "coopCareerStats", var_1, int(var_4));
 }
 
-updateifgreaterthan_zombiecareerstats(param_00, param_01, param_02) {
+updateifgreaterthan_zombiecareerstats(var_0, var_1, var_2) {
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return;
   }
 
-  var_03 = param_00 getplayerdata("cp", "coopCareerStats", param_01);
-  if(param_02 > var_03) {
-    param_00 setplayerdata("cp", "coopCareerStats", param_01, param_02);
+  var_3 = var_0 getplayerdata("cp", "coopCareerStats", var_1);
+  if(var_2 > var_3) {
+    var_0 setplayerdata("cp", "coopCareerStats", var_1, var_2);
   }
 }
 
-update_highest_wave_lb(param_00, param_01, param_02, param_03, param_04) {
+update_highest_wave_lb(var_0, var_1, var_2, var_3, var_4) {
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return;
   }
 
-  var_05 = param_00 getplayerdata("cp", "leaderboarddata", param_03, "leaderboardDataPerMap", param_04, param_02);
-  if(param_01 > var_05) {
-    param_00 setplayerdata("cp", "leaderboarddata", param_03, "leaderboardDataPerMap", param_04, param_02, param_01);
+  var_5 = var_0 getplayerdata("cp", "leaderboarddata", var_3, "leaderboardDataPerMap", var_4, var_2);
+  if(var_1 > var_5) {
+    var_0 setplayerdata("cp", "leaderboarddata", var_3, "leaderboardDataPerMap", var_4, var_2, var_1);
   }
 }
 
-updateleaderboardstats(param_00, param_01, param_02, param_03, param_04, param_05) {
+updateleaderboardstats(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return;
   }
 
-  if(!isDefined(param_05)) {
-    param_05 = 1;
+  if(!isDefined(var_5)) {
+    var_5 = 1;
   }
 
-  var_06 = param_00 getplayerdata("cp", "leaderboarddata", param_03, "leaderboardDataPerMap", param_04, param_01);
-  param_02 = var_06 + param_05;
-  if(param_02 > var_06) {
-    param_00 setplayerdata("cp", "leaderboarddata", param_03, "leaderboardDataPerMap", param_04, param_01, param_02);
+  var_6 = var_0 getplayerdata("cp", "leaderboarddata", var_3, "leaderboardDataPerMap", var_4, var_1);
+  var_2 = var_6 + var_5;
+  if(var_2 > var_6) {
+    var_0 setplayerdata("cp", "leaderboarddata", var_3, "leaderboardDataPerMap", var_4, var_1, var_2);
   }
 }

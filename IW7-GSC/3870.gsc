@@ -29,32 +29,32 @@ main() {
   level.var_EC85["generic"]["guy2_convo_exit_right"] = % titan_stealth_street_enemy02_convo_exit_right;
 }
 
-func_8728(param_00) {
-  var_01["left"] = "guy1_convo_react_left";
-  var_01["right"] = "guy1_convo_react_right";
-  var_01["forward"] = "guy1_convo_react_front";
-  var_01["back"] = "guy1_convo_react_back";
-  var_01["default"] = "guy1_convo_react_front";
-  var_02["left"] = "guy1_convo_exit_left";
-  var_02["right"] = "guy1_convo_exit_right";
-  var_02["forward"] = "guy1_convo_exit_front";
-  var_02["back"] = "guy1_convo_exit_back";
-  var_02["default"] = "guy1_convo_exit_front";
-  param_00 lib_0F27::func_92CF(self, "guy1_convo_idle", var_01, "guy1_convo_death");
-  lib_0F27::func_F320(var_02);
+func_8728(var_0) {
+  var_1["left"] = "guy1_convo_react_left";
+  var_1["right"] = "guy1_convo_react_right";
+  var_1["forward"] = "guy1_convo_react_front";
+  var_1["back"] = "guy1_convo_react_back";
+  var_1["default"] = "guy1_convo_react_front";
+  var_2["left"] = "guy1_convo_exit_left";
+  var_2["right"] = "guy1_convo_exit_right";
+  var_2["forward"] = "guy1_convo_exit_front";
+  var_2["back"] = "guy1_convo_exit_back";
+  var_2["default"] = "guy1_convo_exit_front";
+  var_0 lib_0F27::func_92CF(self, "guy1_convo_idle", var_1, "guy1_convo_death");
+  lib_0F27::func_F320(var_2);
 }
 
-func_8729(param_00) {
-  var_01["left"] = "guy2_convo_react_left";
-  var_01["right"] = "guy2_convo_react_right";
-  var_01["forward"] = "guy2_convo_react_front";
-  var_01["back"] = "guy2_convo_react_back";
-  var_01["default"] = "guy2_convo_react_front";
-  var_02["left"] = "guy2_convo_exit_left";
-  var_02["right"] = "guy2_convo_exit_right";
-  var_02["forward"] = "guy2_convo_exit_front";
-  var_02["back"] = "guy2_convo_exit_back";
-  var_02["default"] = "guy2_convo_exit_front";
-  param_00 lib_0F27::func_92CF(self, "guy2_convo_idle", var_01, "guy2_convo_death");
-  lib_0F27::func_F320(var_02);
+func_8729(var_0) {
+  var_1["left"] = "guy2_convo_react_left";
+  var_1["right"] = "guy2_convo_react_right";
+  var_1["forward"] = "guy2_convo_react_front";
+  var_1["back"] = "guy2_convo_react_back";
+  var_1["default"] = "guy2_convo_react_front";
+  var_2["left"] = "guy2_convo_exit_left";
+  var_2["right"] = "guy2_convo_exit_right";
+  var_2["forward"] = "guy2_convo_exit_front";
+  var_2["back"] = "guy2_convo_exit_back";
+  var_2["default"] = "guy2_convo_exit_front";
+  var_0 lib_0F27::func_92CF(self, "guy2_convo_idle", var_1, "guy2_convo_death");
+  lib_0F27::func_F320(var_2);
 }

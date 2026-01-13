@@ -39,26 +39,26 @@ main() {
 }
 
 fix_collision() {
-  var_00 = getent("player32x32x8", "targetname");
-  var_01 = spawn("script_model", (-1756, 1772, 372));
-  var_01.angles = (300, 0, 0);
-  var_01 clonebrushmodeltoscriptmodel(var_00);
-  var_02 = getent("player256x256x8", "targetname");
-  var_03 = spawn("script_model", (84, -1790, 608));
-  var_03.angles = (0, 0, -90);
-  var_03 clonebrushmodeltoscriptmodel(var_02);
-  var_04 = getent("player256x256x256", "targetname");
-  var_05 = spawn("script_model", (-104, 1184, 928));
-  var_05.angles = (340, 0, 0);
-  var_05 clonebrushmodeltoscriptmodel(var_04);
-  var_06 = getent("player32x32x8", "targetname");
-  var_07 = spawn("script_model", (-1284, -714, 520));
-  var_07.angles = (75, 0, 0);
-  var_07 clonebrushmodeltoscriptmodel(var_06);
-  var_08 = getent("clip512x512x8", "targetname");
-  var_09 = spawn("script_model", (-1662, 2688, 1184));
-  var_09.angles = (270, 0, 0);
-  var_09 clonebrushmodeltoscriptmodel(var_08);
+  var_0 = getent("player32x32x8", "targetname");
+  var_1 = spawn("script_model", (-1756, 1772, 372));
+  var_1.angles = (300, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getent("player256x256x8", "targetname");
+  var_3 = spawn("script_model", (84, -1790, 608));
+  var_3.angles = (0, 0, -90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getent("player256x256x256", "targetname");
+  var_5 = spawn("script_model", (-104, 1184, 928));
+  var_5.angles = (340, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getent("player32x32x8", "targetname");
+  var_7 = spawn("script_model", (-1284, -714, 520));
+  var_7.angles = (75, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getent("clip512x512x8", "targetname");
+  var_9 = spawn("script_model", (-1662, 2688, 1184));
+  var_9.angles = (270, 0, 0);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
   var_0A = getent("clip32x32x8", "targetname");
   var_0B = spawn("script_model", (-1972, -1987, 200));
   var_0B.angles = (0, 0, -90);
@@ -101,17 +101,17 @@ func_FA7D() {
   level.var_114C3 = 600;
   level.var_114C4 = 1200;
   level.var_BF61 = -1;
-  var_00 = getEntArray("watertank_invulnerable", "targetname");
-  foreach(var_02 in var_00) {
-    var_02 thread func_12E48();
+  var_0 = getEntArray("watertank_invulnerable", "targetname");
+  foreach(var_2 in var_0) {
+    var_2 thread func_12E48();
   }
 }
 
 func_12E48() {
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_00, var_01, var_02, var_03, var_04);
-    if(!issubstr(var_04, "BULLET")) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4);
+    if(!issubstr(var_4, "BULLET")) {
       continue;
     }
 
@@ -119,25 +119,25 @@ func_12E48() {
       continue;
     }
 
-    var_05 = func_7D54(var_01, var_02, var_03);
-    if(!isDefined(var_05)) {
+    var_5 = func_7D54(var_1, var_2, var_3);
+    if(!isDefined(var_5)) {
       continue;
     }
 
     func_1C33();
-    var_05 = vectortoangles(var_05);
-    playFX(level._effect["vfx_imp_glass_water_fishtank_riot"], var_03, anglesToForward(var_05), anglestoup(var_05));
-    playFX(level._effect["vfx_water_stream_fishtank_riot"], var_03, anglesToForward(var_05), anglestoup(var_05));
-    playsoundatpos(var_03, "dst_aquarium_puncture");
+    var_5 = vectortoangles(var_5);
+    playFX(level._effect["vfx_imp_glass_water_fishtank_riot"], var_3, anglesToForward(var_5), anglestoup(var_5));
+    playFX(level._effect["vfx_water_stream_fishtank_riot"], var_3, anglesToForward(var_5), anglestoup(var_5));
+    playsoundatpos(var_3, "dst_aquarium_puncture");
   }
 }
 
-func_7D54(param_00, param_01, param_02) {
-  var_03 = param_00.origin;
-  var_04 = param_02 - var_03;
-  var_05 = bulletTrace(var_03, var_03 + 1.5 * var_04, 0, param_00, 0);
-  if(isDefined(var_05["normal"]) && isDefined(var_05["entity"]) && var_05["entity"] == self) {
-    return var_05["normal"];
+func_7D54(var_0, var_1, var_2) {
+  var_3 = var_0.origin;
+  var_4 = var_2 - var_3;
+  var_5 = bulletTrace(var_3, var_3 + 1.5 * var_4, 0, var_0, 0);
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
+    return var_5["normal"];
   }
 
   return undefined;
@@ -155,110 +155,110 @@ func_1C33() {
   level.var_BF61 = gettime() + randomfloatrange(level.var_114C3, level.var_114C4);
 }
 
-func_CDA4(param_00) {
+func_CDA4(var_0) {
   wait(30);
-  playcinematicforalllooping(param_00);
+  playcinematicforalllooping(var_0);
 }
 
 managephysicsprops() {
   level endon("game_ended");
   for(;;) {
-    level waittill("connected", var_00);
-    if(!var_00 ishost()) {
+    level waittill("connected", var_0);
+    if(!var_0 ishost()) {
       thread triggerphysicsbump();
     }
   }
 }
 
 triggerphysicsbump() {
-  var_00 = (-786.5, -2572, 40);
-  var_01 = 200;
+  var_0 = (-786.5, -2572, 40);
+  var_1 = 200;
   wait(5);
-  var_02 = physics_volumecreate(var_00, 1000);
-  var_02 physics_volumesetasfocalforce(1, var_00, var_01);
-  var_02 physics_volumeenable(1);
-  var_02 physics_volumesetactivator(1);
-  var_02.time = gettime();
-  var_02.var_720E = var_01;
-  var_02 physics_volumesetasfocalforce(1, var_00, var_01);
+  var_2 = physics_volumecreate(var_0, 1000);
+  var_2 physics_volumesetasfocalforce(1, var_0, var_1);
+  var_2 physics_volumeenable(1);
+  var_2 physics_volumesetactivator(1);
+  var_2.time = gettime();
+  var_2.var_720E = var_1;
+  var_2 physics_volumesetasfocalforce(1, var_0, var_1);
   wait(0.1);
-  var_02 delete();
+  var_2 delete();
 }
 
 move_sd_startspawns() {
   if(level.gametype == "sd") {
     wait(0.1);
-    var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_defender");
-    foreach(var_02 in var_00) {
-      var_03 = anglestoright(var_02.angles);
-      if(distance(var_02.origin, (-500, 3060, 176.124)) < 10) {
-        var_02.origin = (-600, 2564, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
+    var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_defender");
+    foreach(var_2 in var_0) {
+      var_3 = anglestoright(var_2.angles);
+      if(distance(var_2.origin, (-500, 3060, 176.124)) < 10) {
+        var_2.origin = (-600, 2564, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-596, 3064, 172.002)) < 10) {
-        var_02.origin = (-686, 2564, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-596, 3064, 172.002)) < 10) {
+        var_2.origin = (-686, 2564, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-700, 3064, 176.124)) < 10) {
-        var_02.origin = (-790, 2564, 180);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-700, 3064, 176.124)) < 10) {
+        var_2.origin = (-790, 2564, 180);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-500, 3140, 176.124)) < 10) {
-        var_02.origin = (-600, 2644, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-500, 3140, 176.124)) < 10) {
+        var_2.origin = (-600, 2644, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-596, 3144, 172.002)) < 10) {
-        var_02.origin = (-686, 2644, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-596, 3144, 172.002)) < 10) {
+        var_2.origin = (-686, 2644, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-700, 3144, 176.124)) < 10) {
-        var_02.origin = (-790, 2644, 180);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-700, 3144, 176.124)) < 10) {
+        var_2.origin = (-790, 2644, 180);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-500, 3220, 176.124)) < 10) {
-        var_02.origin = (-600, 2724, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-500, 3220, 176.124)) < 10) {
+        var_2.origin = (-600, 2724, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-596, 3224, 172.002)) < 10) {
-        var_02.origin = (-686, 2724, 176);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-596, 3224, 172.002)) < 10) {
+        var_2.origin = (-686, 2724, 176);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
         continue;
       }
 
-      if(distance(var_02.origin, (-700, 3224, 176.124)) < 10) {
-        var_02.origin = (-790, 2724, 180);
-        var_02.alternates = [];
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin + var_03 * 45);
-        scripts\mp\spawnlogic::func_17A7(var_02, var_02.origin - var_03 * 45);
+      if(distance(var_2.origin, (-700, 3224, 176.124)) < 10) {
+        var_2.origin = (-790, 2724, 180);
+        var_2.alternates = [];
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin + var_3 * 45);
+        scripts\mp\spawnlogic::func_17A7(var_2, var_2.origin - var_3 * 45);
       }
     }
   }

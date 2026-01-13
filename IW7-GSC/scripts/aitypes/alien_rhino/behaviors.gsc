@@ -4,7 +4,7 @@
  * Script: scripts\aitypes\alien_rhino\behaviors.gsc
 *****************************************************/
 
-initbehaviors(param_00) {
+initbehaviors(var_0) {
   setupbehaviorstates();
   self.desiredaction = undefined;
   self.lastenemyengagetime = 0;
@@ -21,22 +21,22 @@ setupbehaviorstates() {
   scripts\aitypes\dlc4\bt_action_api::setupbtaction("charge", ::charge_begin, ::charge_tick, ::charge_end);
 }
 
-updateeveryframe(param_00) {
+updateeveryframe(var_0) {
   scripts\aitypes\dlc4\behavior_utils::updateenemy();
   return level.failure;
 }
 
-charge_begin(param_00) {
+charge_begin(var_0) {
   scripts\asm\dlc4\dlc4_asm::setasmaction("charge");
-  var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_02 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  self.curmeleetarget = var_02;
+  var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_2 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  self.curmeleetarget = var_2;
   self.bchargeaborted = undefined;
-  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00, "charge_intro", "charge_intro", ::charge_introdone);
-  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00, "charge_intro");
+  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(var_0, "charge_intro", "charge_intro", ::charge_introdone);
+  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(var_0, "charge_intro");
 }
 
-charge_tick(param_00) {
+charge_tick(var_0) {
   if(!isDefined(self.curmeleetarget) || scripts\aitypes\dlc4\behavior_utils::shouldignoreenemy(self.curmeleetarget)) {
     return level.failure;
   }
@@ -45,170 +45,170 @@ charge_tick(param_00) {
     return level.failure;
   }
 
-  var_01 = getclosestpointonnavmesh(self.curmeleetarget.origin);
-  self ghostskulls_complete_status(var_01);
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
+  var_1 = getclosestpointonnavmesh(self.curmeleetarget.origin);
+  self ghostskulls_complete_status(var_1);
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return level.running;
   }
 
   return level.success;
 }
 
-charge_end(param_00) {
+charge_end(var_0) {
   scripts\asm\dlc4\dlc4_asm::clearasmaction();
   self.curmeleetarget = undefined;
   self.bchargehit = undefined;
   self.desiredyaw = undefined;
   self.bchargeaborted = undefined;
-  self.var_1198.chargeintroindex = undefined;
+  self._blackboard.chargeintroindex = undefined;
   self clearpath();
-  var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  self.nextchargeattacktesttime = gettime() + randomintrange(var_01.min_charge_attack_interval_ms, var_01.max_charge_attack_interval_ms);
+  var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  self.nextchargeattacktesttime = gettime() + randomintrange(var_1.min_charge_attack_interval_ms, var_1.max_charge_attack_interval_ms);
 }
 
-charge_introdone(param_00, param_01) {
-  var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00, "charging", "charge_loop", ::charge_movedone, undefined, var_02.max_charge_time_ms);
-  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00, "charging");
+charge_introdone(var_0, var_1) {
+  var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(var_0, "charging", "charge_loop", ::charge_movedone, undefined, var_2.max_charge_time_ms);
+  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(var_0, "charging");
   return 1;
 }
 
-charge_movedone(param_00, param_01) {
+charge_movedone(var_0, var_1) {
   scripts\asm\dlc4\dlc4_asm::clearasmaction();
-  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00, "charge_end", "charge_outro", ::charge_enddone);
-  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00, "charge_end");
+  scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(var_0, "charge_end", "charge_outro", ::charge_enddone);
+  scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(var_0, "charge_end");
   return 1;
 }
 
-charge_enddone(param_00, param_01) {
+charge_enddone(var_0, var_1) {
   return 0;
 }
 
-trycharge(param_00, param_01, param_02) {
-  if(!scripts\engine\utility::istrue(param_02)) {
+trycharge(var_0, var_1, var_2) {
+  if(!scripts\engine\utility::istrue(var_2)) {
     if(isDefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime) {
       return 0;
     }
   }
 
-  var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_04 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  if(!isDefined(var_04)) {
+  var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_4 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  if(!isDefined(var_4)) {
     return 0;
   }
 
-  if(!isDefined(param_01)) {
-    param_01 = distancesquared(var_04.origin, self.origin);
+  if(!isDefined(var_1)) {
+    var_1 = distancesquared(var_4.origin, self.origin);
   }
 
-  if(param_01 < var_03.charge_attack_mindist_sq) {
+  if(var_1 < var_3.charge_attack_mindist_sq) {
     return 0;
   }
 
-  if(param_01 > var_03.charge_attack_maxdist_sq) {
+  if(var_1 > var_3.charge_attack_maxdist_sq) {
     return 0;
   }
 
   self.nextchargeattacktesttime = gettime() + 2000;
-  var_05 = randomint(var_03.chargeintroanimtimes.size);
-  var_06 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(var_04, var_03.chargeintroanimtimes[var_05] * 0.7);
-  var_07 = anglesToForward(self.angles);
-  var_08 = var_06 - self.origin;
-  var_07 = (var_07[0], var_07[1], 0);
-  var_08 = vectornormalize((var_08[0], var_08[1], 0));
-  var_09 = vectordot(var_07, var_08);
-  if(var_09 < 0.707) {
+  var_5 = randomint(var_3.chargeintroanimtimes.size);
+  var_6 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(var_4, var_3.chargeintroanimtimes[var_5] * 0.7);
+  var_7 = anglesToForward(self.angles);
+  var_8 = var_6 - self.origin;
+  var_7 = (var_7[0], var_7[1], 0);
+  var_8 = vectornormalize((var_8[0], var_8[1], 0));
+  var_9 = vectordot(var_7, var_8);
+  if(var_9 < 0.707) {
     return 0;
   }
 
-  if(!navisstraightlinereachable(self.origin, var_06, self)) {
+  if(!navisstraightlinereachable(self.origin, var_6, self)) {
     self.nextchargeattacktesttime = gettime() + 500;
     return 0;
   }
 
-  self.var_1198.chargeintroindex = var_05;
-  scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00, "charge");
+  self._blackboard.chargeintroindex = var_5;
+  scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "charge");
   return 1;
 }
 
-taunt(param_00) {
-  scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00, "taunt");
+taunt(var_0) {
+  scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(var_0, "taunt");
 }
 
-trytaunt(param_00) {
-  var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  if(!isDefined(var_01)) {
+trytaunt(var_0) {
+  var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_03 = gettime();
+  var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_3 = gettime();
   if(!isDefined(self.nexttaunttime)) {
-    self.nexttaunttime = var_03 + var_02.initial_taunt_wait_time_ms;
+    self.nexttaunttime = var_3 + var_2.initial_taunt_wait_time_ms;
     return 0;
   }
 
-  if(var_03 < self.nexttaunttime) {
+  if(var_3 < self.nexttaunttime) {
     return 0;
   }
 
-  var_04 = distancesquared(self.origin, var_01.origin);
-  if(var_04 < var_02.taunt_min_dist_to_enemy_sq) {
-    self.nexttaunttime = var_03 + 1000;
+  var_4 = distancesquared(self.origin, var_1.origin);
+  if(var_4 < var_2.taunt_min_dist_to_enemy_sq) {
+    self.nexttaunttime = var_3 + 1000;
     return 0;
   }
 
-  if(var_04 > var_02.taunt_max_dist_to_enemy_sq) {
-    self.nexttaunttime = var_03 + 1000;
+  if(var_4 > var_2.taunt_max_dist_to_enemy_sq) {
+    self.nexttaunttime = var_3 + 1000;
     return 0;
   }
 
-  self.nexttaunttime = var_03 + randomintrange(var_02.min_time_between_taunts_ms, var_02.max_time_between_taunts_ms);
-  var_05 = randomint(var_02.taunt_chance);
-  if(var_05 < var_02.taunt_chance) {
-    taunt(param_00);
+  self.nexttaunttime = var_3 + randomintrange(var_2.min_time_between_taunts_ms, var_2.max_time_between_taunts_ms);
+  var_5 = randomint(var_2.taunt_chance);
+  if(var_5 < var_2.taunt_chance) {
+    taunt(var_0);
     return 1;
   }
 
   return 0;
 }
 
-decideaction(param_00) {
+decideaction(var_0) {
   if(isDefined(self.desiredaction)) {
     return level.success;
   }
 
   if(isDefined(self.nextaction)) {
-    scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00, self.nextaction);
+    scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, self.nextaction);
     self.nextaction = undefined;
     return level.success;
   }
 
-  var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  if(!isDefined(var_01)) {
+  var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  var_02 = gettime();
-  if(self getpersstat(var_01)) {
-    if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00)) {
-      self.lastenemyengagetime = var_02;
+  var_2 = gettime();
+  if(self getpersstat(var_1)) {
+    if(scripts\aitypes\dlc4\melee::trymeleeattacks(var_0)) {
+      self.lastenemyengagetime = var_2;
       return level.success;
     }
 
-    if(trycharge(param_00)) {
+    if(trycharge(var_0)) {
       return level.success;
     }
 
-    if(trytaunt(param_00)) {
+    if(trytaunt(var_0)) {
       return level.success;
     }
   } else {
-    var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-    var_04 = distancesquared(var_01.origin, self.origin);
-    if(var_04 <= var_03.stand_melee_dist_sq) {
-      if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00)) {
-        self.lastenemyengagetime = var_02;
+    var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+    var_4 = distancesquared(var_1.origin, self.origin);
+    if(var_4 <= var_3.stand_melee_dist_sq) {
+      if(scripts\aitypes\dlc4\melee::trymeleeattacks(var_0)) {
+        self.lastenemyengagetime = var_2;
         return level.success;
       }
     }
@@ -217,35 +217,35 @@ decideaction(param_00) {
   return level.failure;
 }
 
-followenemy_begin(param_00) {
-  self.var_3135.instancedata[param_00] = spawnStruct();
+followenemy_begin(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
 }
 
-followenemy_tick(param_00) {
-  var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-  if(!isDefined(var_01)) {
+followenemy_tick(var_0) {
+  var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+  if(!isDefined(var_1)) {
     return level.failure;
   }
 
-  var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  var_03 = getclosestpointonnavmesh(var_01.origin, self);
-  var_04 = distancesquared(var_03, self.origin);
-  if(var_04 > var_02.stand_melee_dist_sq) {
-    self ghostskulls_complete_status(var_03);
-    if(!self getpersstat(var_01)) {
+  var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_3 = getclosestpointonnavmesh(var_1.origin, self);
+  var_4 = distancesquared(var_3, self.origin);
+  if(var_4 > var_2.stand_melee_dist_sq) {
+    self ghostskulls_complete_status(var_3);
+    if(!self getpersstat(var_1)) {
       if(!isDefined(self.vehicle_getspawnerarray)) {
-        scripts\aitypes\dlc4\behavior_utils::facepoint(var_01.origin);
+        scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
       }
 
       return level.running;
     }
   } else {
-    scripts\aitypes\dlc4\behavior_utils::facepoint(var_01.origin);
+    scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
   }
 
   return level.success;
 }
 
-followenemy_end(param_00) {
-  self.var_3135.instancedata[param_00] = undefined;
+followenemy_end(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }

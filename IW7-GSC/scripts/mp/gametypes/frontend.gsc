@@ -20,15 +20,15 @@ callback_frontendstartgametype() {}
 
 callback_frontendplayerconnect() {}
 
-callback_frontendplayerdisconnect(param_00) {}
+callback_frontendplayerdisconnect(var_0) {}
 
-callback_frontendplayerdamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {}
+callback_frontendplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {}
 
-callback_frontendplayerimpaled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {}
+callback_frontendplayerimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {}
 
-callback_frontendplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
+callback_frontendplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
-callback_frontendplayerlaststand(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
+callback_frontendplayerlaststand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
 callback_frontendplayermigrated() {}
 

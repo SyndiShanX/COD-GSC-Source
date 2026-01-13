@@ -24,7 +24,7 @@ func_FAB0() {
   level.agent_funcs["ratking"]["on_killed"] = ::onratkingkilled;
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("zmb_rat_king");
   thread delaygiveequipment();
 }
@@ -157,7 +157,7 @@ setupagent() {
   thread listen_for_fake_death();
 }
 
-accumulatedamage(param_00, param_01) {
+accumulatedamage(var_0, var_1) {
   if(!isDefined(self.damageaccumulator)) {
     self.damageaccumulator = spawnStruct();
     self.damageaccumulator.accumulateddamage = 0;
@@ -167,18 +167,18 @@ accumulatedamage(param_00, param_01) {
   }
 
   self.damageaccumulator.lastdamagetime = gettime();
-  if(!isDefined(param_01)) {
-    param_01 = (1, 1, 1);
+  if(!isDefined(var_1)) {
+    var_1 = (1, 1, 1);
   }
 
-  self.damageaccumulator.lastdir = param_01;
+  self.damageaccumulator.lastdir = var_1;
   if(isDefined(self.fake_damage)) {
     self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
     self.fake_damage = undefined;
     return;
   }
 
-  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
+  self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
 isinravemode() {
@@ -189,30 +189,30 @@ isinravemode() {
   return 0;
 }
 
-onratkingdamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
-  accumulatedamage(param_02, param_07);
-  ratking_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0B, param_0C);
+onratkingdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+  accumulatedamage(var_2, var_7);
+  ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C);
 }
 
-ratking_on_damage_finished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {
+ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
   var_0D = self.health;
-  if(isDefined(param_07)) {
-    var_0E = vectortoyaw(param_07);
+  if(isDefined(var_7)) {
+    var_0E = vectortoyaw(var_7);
     var_0F = self.angles[1];
     self.var_E3 = angleclamp180(var_0E - var_0F);
   } else {
     self.var_E3 = 0;
   }
 
-  self.var_DD = param_08;
-  self.var_DE = param_04;
-  self.damagedby = param_01;
-  self.var_DC = param_07;
-  self.var_E1 = param_02;
-  self.var_E2 = param_05;
-  self.var_4D62 = param_06;
-  if(param_02 >= self.health) {
-    param_02 = 0;
+  self.var_DD = var_8;
+  self.var_DE = var_4;
+  self.damagedby = var_1;
+  self.var_DC = var_7;
+  self.var_E1 = var_2;
+  self.var_E2 = var_5;
+  self.var_4D62 = var_6;
+  if(var_2 >= self.health) {
+    var_2 = 0;
     level.rat_king_death_pos = self.origin;
     if(scripts\engine\utility::array_contains(level.spawned_enemies, self)) {
       level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies, self);
@@ -221,7 +221,7 @@ ratking_on_damage_finished(param_00, param_01, param_02, param_03, param_04, par
     self notify("fake_death");
   }
 
-  self getrespawndelay(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0B, param_0C, 0, 1);
+  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C, 0, 1);
   if(self.health > 0 && self.health < var_0D) {
     self notify("pain");
   }
@@ -231,14 +231,14 @@ ratking_on_damage_finished(param_00, param_01, param_02, param_03, param_04, par
     if(isDefined(var_10)) {
       [
         [var_10]
-      ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
     }
   }
 }
 
-onratkingkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+onratkingkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self.nocorpse = 1;
-  scripts\mp\mp_agent::default_on_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
 getratkinggrenadehandoffset() {
@@ -270,11 +270,11 @@ getenemy() {
 }
 
 lookatspot() {
-  var_00 = getstructpos();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", (0, var_02[1], 0));
+  var_0 = getstructpos();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", (0, var_2[1], 0));
     return;
   }
 
@@ -282,11 +282,11 @@ lookatspot() {
 }
 
 lookatenemy() {
-  var_00 = getenemy();
-  if(isDefined(var_00)) {
-    var_01 = var_00.origin - self.origin;
-    var_02 = vectortoangles(var_01);
-    self orientmode("face angle abs", (0, var_02[1], 0));
+  var_0 = getenemy();
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin - self.origin;
+    var_2 = vectortoangles(var_1);
+    self orientmode("face angle abs", (0, var_2[1], 0));
     return;
   }
 
@@ -313,8 +313,8 @@ listen_for_fake_death() {
     if(scripts\engine\utility::istrue(level.ratking_fight)) {
       self.precacheleaderboards = 1;
       self.scripted_mode = 1;
-      foreach(var_01 in level.players) {
-        var_01 thread scripts\cp\maps\cp_disco\rat_king_fight::outroblackscreen();
+      foreach(var_1 in level.players) {
+        var_1 thread scripts\cp\maps\cp_disco\rat_king_fight::outroblackscreen();
       }
 
       wait(2);

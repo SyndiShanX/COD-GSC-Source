@@ -4,8 +4,8 @@
  * Script: scripts\asm\crab_boss\crab_boss_asm.gsc
 ***************************************************/
 
-asminit(param_00, param_01, param_02, param_03) {
-  scripts\asm\zombie\zombie::func_13F9A(param_00, param_01, param_02, param_03);
+asminit(var_0, var_1, var_2, var_3) {
+  scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
   if(!isDefined(level.crab_boss_arrival_data)) {
     analyzecrabbossmovement();
   }
@@ -14,33 +14,33 @@ asminit(param_00, param_01, param_02, param_03) {
 analyzecrabbossmovement() {
   level.crab_boss_arrival_data = [];
   level.crab_boss_move_data = [];
-  for(var_00 = 1; var_00 <= 9; var_00++) {
-    if(var_00 == 5) {
+  for(var_0 = 1; var_0 <= 9; var_0++) {
+    if(var_0 == 5) {
       continue;
     }
 
-    var_01 = var_00;
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_arrival", var_01);
-    var_03 = self getsafecircleorigin("move_arrival", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.crab_boss_arrival_data[var_00] = var_04;
-    level.crab_boss_arrival_time[var_00] = getanimlength(var_03);
-    var_01 = var_00;
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_loop", var_01);
-    var_03 = self getsafecircleorigin("move_loop", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.crab_boss_move_data[var_00] = var_04;
-    level.crab_boss_move_time[var_00] = getanimlength(var_03);
-    var_02 = scripts\asm\asm::asm_lookupanimfromalias("move_exit", var_01);
-    var_03 = self getsafecircleorigin("move_exit", var_02);
-    var_04 = getmovedelta(var_03, 0, 1);
-    level.crab_boss_exit_data[var_00] = var_04;
-    level.crab_boss_exit_time[var_00] = getanimlength(var_03);
+    var_1 = var_0;
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_arrival", var_1);
+    var_3 = self getsafecircleorigin("move_arrival", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.crab_boss_arrival_data[var_0] = var_4;
+    level.crab_boss_arrival_time[var_0] = getanimlength(var_3);
+    var_1 = var_0;
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_loop", var_1);
+    var_3 = self getsafecircleorigin("move_loop", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.crab_boss_move_data[var_0] = var_4;
+    level.crab_boss_move_time[var_0] = getanimlength(var_3);
+    var_2 = scripts\asm\asm::asm_lookupanimfromalias("move_exit", var_1);
+    var_3 = self getsafecircleorigin("move_exit", var_2);
+    var_4 = getmovedelta(var_3, 0, 1);
+    level.crab_boss_exit_data[var_0] = var_4;
+    level.crab_boss_exit_time[var_0] = getanimlength(var_3);
   }
 }
 
-isvalidaction(param_00) {
-  switch (param_00) {
+isvalidaction(var_0) {
+  switch (var_0) {
     case "heal":
     case "move":
     case "toxic_spawn":
@@ -66,41 +66,41 @@ isvalidaction(param_00) {
   return 0;
 }
 
-setaction(param_00) {
-  self.requested_action = param_00;
+setaction(var_0) {
+  self.requested_action = var_0;
 }
 
 clearaction() {
   self.requested_action = undefined;
 }
 
-shouldplayentranceanim(param_00, param_01, param_02, param_03) {
+shouldplayentranceanim(var_0, var_1, var_2, var_3) {
   return !scripts\engine\utility::istrue(self.shouldabortentranceanim);
 }
 
-isanimdone(param_00, param_01, param_02, param_03) {
-  if(scripts\asm\asm::func_232B(param_01, "end")) {
+isanimdone(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::func_232B(var_1, "end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "early_end")) {
+  if(scripts\asm\asm::func_232B(var_1, "early_end")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "finish_early")) {
+  if(scripts\asm\asm::func_232B(var_1, "finish_early")) {
     return 1;
   }
 
-  if(scripts\asm\asm::func_232B(param_01, "code_move")) {
+  if(scripts\asm\asm::func_232B(var_1, "code_move")) {
     return 1;
   }
 
   return 0;
 }
 
-playbeamanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  thread scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+playbeamanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
 stopcrabbossbeam() {
@@ -109,115 +109,115 @@ stopcrabbossbeam() {
   self.beamtargetdest = undefined;
 }
 
-isbeamdone(param_00, param_01, param_02, param_03) {
-  return isanimdone(param_00, param_01, param_02, param_03);
+isbeamdone(var_0, var_1, var_2, var_3) {
+  return isanimdone(var_0, var_1, var_2, var_3);
 }
 
-launchegg(param_00, param_01, param_02) {
-  var_03 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  if(scripts\engine\utility::istrue(param_02)) {
-    scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(param_00, param_01, var_03.egg_sac_spawn_fly_time, 0);
+launchegg(var_0, var_1, var_2) {
+  var_3 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  if(scripts\engine\utility::istrue(var_2)) {
+    scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_1, var_3.egg_sac_spawn_fly_time, 0);
     return;
   }
 
-  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(param_00, param_01, var_03.egg_sac_spawn_fly_time, 1);
+  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_1, var_3.egg_sac_spawn_fly_time, 1);
 }
 
 doroarbomb() {
-  foreach(var_01 in level.players) {
-    thread doroarbombnearplayer(var_01, self);
+  foreach(var_1 in level.players) {
+    thread doroarbombnearplayer(var_1, self);
     scripts\engine\utility::waitframe();
   }
 }
 
-doroarbombnearplayer(param_00, param_01) {
-  var_02 = getroarbombloc(param_00, param_01);
-  foreach(var_04 in var_02) {
-    var_05 = geteggsaclaunchpos();
-    var_06 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-    scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_05, var_04, var_06.roar_bomb_fly_time, 0);
+doroarbombnearplayer(var_0, var_1) {
+  var_2 = getroarbombloc(var_0, var_1);
+  foreach(var_4 in var_2) {
+    var_5 = geteggsaclaunchpos();
+    var_6 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+    scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_5, var_4, var_6.roar_bomb_fly_time, 0);
     scripts\engine\utility::waitframe();
   }
 }
 
-getroarbombloc(param_00, param_01) {
-  var_02 = [];
+getroarbombloc(var_0, var_1) {
+  var_2 = [];
   if(players_commit_to_the_run() && level.players.size == 1) {
-    var_02[var_02.size] = param_00.origin;
+    var_2[var_2.size] = var_0.origin;
   }
 
-  var_03 = vectortoangles(param_01.origin - param_00.origin);
-  var_02[var_02.size] = gettargetbombloc(param_00.origin, var_03, 30 + randomintrange(-5, 5), adjust_roar_bomb_dist(145) + randomintrange(5, 10));
-  var_02[var_02.size] = gettargetbombloc(param_00.origin, var_03, -30 + randomintrange(-5, 5), adjust_roar_bomb_dist(145) + randomintrange(5, 10));
-  var_02[var_02.size] = gettargetbombloc(param_00.origin, var_03, 0 + randomintrange(-5, 5), adjust_roar_bomb_dist(300) + randomintrange(5, 10));
-  return var_02;
+  var_3 = vectortoangles(var_1.origin - var_0.origin);
+  var_2[var_2.size] = gettargetbombloc(var_0.origin, var_3, 30 + randomintrange(-5, 5), adjust_roar_bomb_dist(145) + randomintrange(5, 10));
+  var_2[var_2.size] = gettargetbombloc(var_0.origin, var_3, -30 + randomintrange(-5, 5), adjust_roar_bomb_dist(145) + randomintrange(5, 10));
+  var_2[var_2.size] = gettargetbombloc(var_0.origin, var_3, 0 + randomintrange(-5, 5), adjust_roar_bomb_dist(300) + randomintrange(5, 10));
+  return var_2;
 }
 
-adjust_roar_bomb_dist(param_00) {
+adjust_roar_bomb_dist(var_0) {
   if(!players_commit_to_the_run()) {
     return 1000;
   }
 
-  var_01 = 35;
-  var_02 = 0;
-  foreach(var_04 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_04)) {
+  var_1 = 35;
+  var_2 = 0;
+  foreach(var_4 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_4)) {
       continue;
     }
 
-    var_02++;
+    var_2++;
   }
 
-  return param_00 - var_02 - 1 * var_02;
+  return var_0 - var_2 - 1 * var_2;
 }
 
 players_commit_to_the_run() {
-  var_00 = 0;
-  foreach(var_02 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
+  var_0 = 0;
+  foreach(var_2 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_2)) {
       continue;
     }
 
-    if(var_02.origin[1] > 1200) {
-      var_00 = 1;
+    if(var_2.origin[1] > 1200) {
+      var_0 = 1;
       break;
     }
   }
 
-  return var_00;
+  return var_0;
 }
 
-gettargetbombloc(param_00, param_01, param_02, param_03) {
-  var_04 = param_01 + (0, param_02, 0);
-  var_05 = anglesToForward(var_04);
-  return param_00 + var_05 * param_03;
+gettargetbombloc(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 + (0, var_2, 0);
+  var_5 = anglesToForward(var_4);
+  return var_0 + var_5 * var_3;
 }
 
-playroarloop(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  scripts\asm\asm_mp::func_235F(param_00, param_01, param_02, param_03);
+playroarloop(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  scripts\asm\asm_mp::func_235F(var_0, var_1, var_2, var_3);
 }
 
-playroarend(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+playroarend(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
   self notify("roar_done");
 }
 
-dospawnsovertime(param_00, param_01) {
-  self endon(param_00 + "_finished");
+dospawnsovertime(var_0, var_1) {
+  self endon(var_0 + "_finished");
   self endon("stop_spawns_over_time");
-  var_02 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  var_03 = scripts\engine\utility::array_randomize(var_02.egg_sack_launching_tags);
-  var_04 = scripts\engine\utility::array_randomize(self.spawnposarray);
+  var_2 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  var_3 = scripts\engine\utility::array_randomize(var_2.egg_sack_launching_tags);
+  var_4 = scripts\engine\utility::array_randomize(self.spawnposarray);
   self.numofspawnrequested = self.spawnposarray.size;
-  for(var_05 = 0; var_05 < self.numofspawnrequested; var_05++) {
-    var_06 = var_05 % var_03.size;
-    var_07 = var_05 % var_04.size;
-    var_08 = self gettagorigin(var_03[var_06]);
-    var_09 = var_04[var_07];
-    launchegg(var_08, var_09, param_01);
-    wait(randomfloatrange(var_02.spawn_interval_min, var_02.spawn_interval_max));
+  for(var_5 = 0; var_5 < self.numofspawnrequested; var_5++) {
+    var_6 = var_5 % var_3.size;
+    var_7 = var_5 % var_4.size;
+    var_8 = self gettagorigin(var_3[var_6]);
+    var_9 = var_4[var_7];
+    launchegg(var_8, var_9, var_1);
+    wait(randomfloatrange(var_2.spawn_interval_min, var_2.spawn_interval_max));
   }
 
   self.numofspawnrequested = 0;
@@ -228,43 +228,43 @@ stopspawnsovertime() {
 }
 
 func_5AAE() {
-  var_00 = ["j_thumb_ri_3", "j_thumb_le_3"];
-  foreach(var_02 in var_00) {
-    level thread trycrabbosssmashattack(var_02, self);
+  var_0 = ["j_thumb_ri_3", "j_thumb_le_3"];
+  foreach(var_2 in var_0) {
+    level thread trycrabbosssmashattack(var_2, self);
   }
 }
 
-trycrabbosssmashattack(param_00, param_01) {
-  var_02 = 300;
-  var_03 = 10;
-  var_04 = 250;
-  var_05 = 0.2;
-  var_06 = 300;
-  var_07 = 80;
-  var_08 = param_01 gettagorigin(param_00);
-  var_09 = bulletTrace(var_08, var_08 + (0, 0, var_02 * -1), 0, param_01)["position"];
-  var_0A = param_01.angles;
-  if(distancesquared(var_08, var_09) > var_02 * var_02) {
+trycrabbosssmashattack(var_0, var_1) {
+  var_2 = 300;
+  var_3 = 10;
+  var_4 = 250;
+  var_5 = 0.2;
+  var_6 = 300;
+  var_7 = 80;
+  var_8 = var_1 gettagorigin(var_0);
+  var_9 = bulletTrace(var_8, var_8 + (0, 0, var_2 * -1), 0, var_1)["position"];
+  var_0A = var_1.angles;
+  if(distancesquared(var_8, var_9) > var_2 * var_2) {
     return;
   }
 
-  earthquake(0.5, 3, var_08, 5000);
-  for(var_0B = 0; var_0B <= var_03; var_0B++) {
-    var_0C = scripts\engine\utility::drop_to_ground(param_01.origin + anglesToForward(var_0A) * var_04 * var_0B, 1000, -3000);
+  earthquake(0.5, 3, var_8, 5000);
+  for(var_0B = 0; var_0B <= var_3; var_0B++) {
+    var_0C = scripts\engine\utility::drop_to_ground(var_1.origin + anglesToForward(var_0A) * var_4 * var_0B, 1000, -3000);
     if(var_0B == 0) {
       playFX(level._effect["claw_trail"], var_0C);
     } else {
       playFX(level._effect["claw_trail_sand"], var_0C);
     }
 
-    earthquake(0.8, 1, var_0C, var_06);
+    earthquake(0.8, 1, var_0C, var_6);
     foreach(var_0E in level.players) {
-      if(distancesquared(var_0E.origin, var_0C) < var_06 * var_06) {
-        var_0E dodamage(var_07, var_0C);
+      if(distancesquared(var_0E.origin, var_0C) < var_6 * var_6) {
+        var_0E dodamage(var_7, var_0C);
       }
     }
 
-    wait(var_05);
+    wait(var_5);
   }
 }
 
@@ -277,8 +277,8 @@ endgas() {
   self notify("stop_gas");
 }
 
-crabbossnotehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+crabbossnotehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "spawn_group":
       break;
 
@@ -326,12 +326,12 @@ crabbossnotehandler(param_00, param_01, param_02, param_03) {
       self.roar_loops--;
       if(self.roar_loops == 0) {
         self.roar_loops = undefined;
-        scripts\asm\asm::asm_fireevent(param_01, "roar_done");
+        scripts\asm\asm::asm_fireevent(var_1, "roar_done");
       }
       break;
 
     case "spawn_start":
-      thread dospawnsovertime(param_01);
+      thread dospawnsovertime(var_1);
       break;
 
     case "spawn_end":
@@ -364,36 +364,36 @@ dodebrisvfx_3() {
   playFX(level._effect["food_search_debris"], self gettagorigin("tag_mouth"));
 }
 
-dorightfootstep(param_00) {
-  if(scripts\engine\utility::istrue(param_00)) {
+dorightfootstep(var_0) {
+  if(scripts\engine\utility::istrue(var_0)) {
     earthquake(0.3, 1, self.origin, 7000);
   }
 
-  var_01 = self gettagorigin("j_ball_ri");
-  var_01 = bulletTrace(var_01 + (0, 0, 1000), var_01, 0, self)["position"];
-  playFX(level._effect["leg_splashes_heavy"], var_01);
+  var_1 = self gettagorigin("j_ball_ri");
+  var_1 = bulletTrace(var_1 + (0, 0, 1000), var_1, 0, self)["position"];
+  playFX(level._effect["leg_splashes_heavy"], var_1);
 }
 
-doleftfootstep(param_00) {
-  if(scripts\engine\utility::istrue(param_00)) {
+doleftfootstep(var_0) {
+  if(scripts\engine\utility::istrue(var_0)) {
     earthquake(0.3, 1, self.origin, 7000);
   }
 
-  var_01 = self gettagorigin("j_ball_le");
-  var_01 = bulletTrace(var_01 + (0, 0, 1000), var_01, 0, self)["position"];
-  playFX(level._effect["leg_splashes_heavy"], var_01);
+  var_1 = self gettagorigin("j_ball_le");
+  var_1 = bulletTrace(var_1 + (0, 0, 1000), var_1, 0, self)["position"];
+  playFX(level._effect["leg_splashes_heavy"], var_1);
 }
 
-submerge_spawn_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+submerge_spawn_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "shoot_egg_sac_spawn":
-      thread dosubmergespawn_asm(param_01);
+      thread dosubmergespawn_asm(var_1);
       break;
   }
 }
 
-toxic_spawn_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+toxic_spawn_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "gas_start":
       thread dogas();
       break;
@@ -404,22 +404,22 @@ toxic_spawn_notehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-submerge_bomb_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+submerge_bomb_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "shoot_egg_sac_bomb":
-      thread dosubmergebomb_asm(param_01);
+      thread dosubmergebomb_asm(var_1);
       break;
   }
 }
 
-bomb_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+bomb_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "calculate_target_pos":
       thread calculatetargetpos();
       break;
 
     case "spawn_start":
-      thread dospawnsovertime(param_01, 1);
+      thread dospawnsovertime(var_1, 1);
       break;
 
     case "spawn_end":
@@ -429,76 +429,76 @@ bomb_notehandler(param_00, param_01, param_02, param_03) {
 }
 
 calculatetargetpos() {
-  var_00 = self.bomb_target.origin;
-  var_01 = getbombingradius();
-  var_02 = getnumofbombs();
-  var_03 = [];
-  for(var_04 = 0; var_04 < var_02; var_04++) {
-    var_05 = randomfloatrange(var_01 * -1, var_01);
-    var_06 = randomfloatrange(var_01 * -1, var_01);
-    var_03[var_04] = getclosestpointonnavmesh((var_00[0] + var_05, var_00[1] + var_06, var_00[2]));
+  var_0 = self.bomb_target.origin;
+  var_1 = getbombingradius();
+  var_2 = getnumofbombs();
+  var_3 = [];
+  for(var_4 = 0; var_4 < var_2; var_4++) {
+    var_5 = randomfloatrange(var_1 * -1, var_1);
+    var_6 = randomfloatrange(var_1 * -1, var_1);
+    var_3[var_4] = getclosestpointonnavmesh((var_0[0] + var_5, var_0[1] + var_6, var_0[2]));
   }
 
-  self.spawnposarray = var_03;
+  self.spawnposarray = var_3;
 }
 
 getbombingradius() {
-  var_00 = 100;
+  var_0 = 100;
   if(isDefined(self.bombing_radius)) {
     return self.bombing_radius;
   }
 
-  return var_00;
+  return var_0;
 }
 
 getnumofbombs() {
-  var_00 = 10;
+  var_0 = 10;
   if(isDefined(self.num_of_bombs)) {
     return self.num_of_bombs;
   }
 
-  return var_00;
+  return var_0;
 }
 
-dobeamattackposition(param_00, param_01) {
-  self endon(param_00 + "_finished");
+dobeamattackposition(var_0, var_1) {
+  self endon(var_0 + "_finished");
   self endon("stop_beam");
-  var_02 = 2;
-  var_03 = 200;
-  var_04 = 80;
-  self.setplayerignoreradiusdamage = param_01;
-  var_05 = var_02 * 20;
-  playFX(level._effect["crab_boss_beam_impact_buildup"], param_01);
-  var_06 = self gettagorigin("tag_laser");
-  level thread crab_boss_lure_beam_sfx(var_06, param_01);
-  for(var_07 = 0; var_07 < var_05; var_07++) {
-    var_08 = self gettagorigin("tag_laser");
-    playfxbetweenpoints(level._effect["crab_boss_beam_attack"], var_08, vectortoangles(param_01 - var_08), param_01);
+  var_2 = 2;
+  var_3 = 200;
+  var_4 = 80;
+  self.setplayerignoreradiusdamage = var_1;
+  var_5 = var_2 * 20;
+  playFX(level._effect["crab_boss_beam_impact_buildup"], var_1);
+  var_6 = self gettagorigin("tag_laser");
+  level thread crab_boss_lure_beam_sfx(var_6, var_1);
+  for(var_7 = 0; var_7 < var_5; var_7++) {
+    var_8 = self gettagorigin("tag_laser");
+    playfxbetweenpoints(level._effect["crab_boss_beam_attack"], var_8, vectortoangles(var_1 - var_8), var_1);
     scripts\engine\utility::waitframe();
   }
 
   level notify("stop_lure_beam_sfx");
-  playFX(level._effect["crab_boss_beam_impact"], param_01);
-  earthquake(0.7, 1, param_01, var_03);
+  playFX(level._effect["crab_boss_beam_impact"], var_1);
+  earthquake(0.7, 1, var_1, var_3);
   foreach(var_0A in level.players) {
-    if(distancesquared(var_0A.origin, param_01) < var_03 * var_03) {
-      var_0A dodamage(var_04, param_01);
+    if(distancesquared(var_0A.origin, var_1) < var_3 * var_3) {
+      var_0A dodamage(var_4, var_1);
     }
   }
 }
 
-crab_boss_lure_beam_sfx(param_00, param_01) {
-  var_02 = param_01 - param_00;
-  var_03 = param_01 + var_02 * 0.3333333;
-  var_04 = param_01 + var_02 * 0.6666667;
-  var_05 = param_01 + var_02 * 0.5;
-  level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_start", param_00);
-  level.boss_beam_lure_loop_sfx = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop", param_00);
-  level.boss_beam_lure_loop_sfx_1 = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop", var_05);
-  level.boss_beam_lure_loop_sfx_2 = scripts\engine\utility::play_loopsound_in_space("town_weap_apex_beam_fire_npc_loop", param_01);
+crab_boss_lure_beam_sfx(var_0, var_1) {
+  var_2 = var_1 - var_0;
+  var_3 = var_1 + var_2 * 0.3333333;
+  var_4 = var_1 + var_2 * 0.6666667;
+  var_5 = var_1 + var_2 * 0.5;
+  level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_start", var_0);
+  level.boss_beam_lure_loop_sfx = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop", var_0);
+  level.boss_beam_lure_loop_sfx_1 = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop", var_5);
+  level.boss_beam_lure_loop_sfx_2 = scripts\engine\utility::play_loopsound_in_space("town_weap_apex_beam_fire_npc_loop", var_1);
   level waittill("stop_lure_beam_sfx");
-  level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_end", param_00);
-  level scripts\engine\utility::play_sound_in_space("town_frag_grenade_explode", param_01);
+  level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_end", var_0);
+  level scripts\engine\utility::play_sound_in_space("town_frag_grenade_explode", var_1);
   wait(0.15);
   level.boss_beam_lure_loop_sfx stoploopsound();
   level.boss_beam_lure_loop_sfx delete();
@@ -508,10 +508,10 @@ crab_boss_lure_beam_sfx(param_00, param_01) {
   level.boss_beam_lure_loop_sfx_2 delete();
 }
 
-beam_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+beam_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "beam_start":
-      thread dobeamattackposition(param_01, self.beamattacktarget.origin);
+      thread dobeamattackposition(var_1, self.beamattacktarget.origin);
       break;
 
     case "beam_end":
@@ -536,8 +536,8 @@ beam_notehandler(param_00, param_01, param_02, param_03) {
 
     case "start_beam_fx":
       if(!scripts\engine\utility::istrue(self.bbeamfxstarted)) {
-        var_04 = self gettagorigin("tag_laser");
-        thread scripts\engine\utility::play_sound_in_space("boss_crog_lure_build_up", var_04);
+        var_4 = self gettagorigin("tag_laser");
+        thread scripts\engine\utility::play_sound_in_space("boss_crog_lure_build_up", var_4);
         playFXOnTag(scripts\engine\utility::getfx("boss_crab_beam_start_fx"), self, "tag_laser");
         self.bbeamfxstarted = 1;
       }
@@ -550,8 +550,8 @@ beam_notehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-smash_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+smash_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "show_weak_spot":
       thread showweakspot();
       break;
@@ -574,31 +574,31 @@ smash_notehandler(param_00, param_01, param_02, param_03) {
   }
 }
 
-dosubmergespawn_asm(param_00) {
-  var_01 = geteggsaclaunchpos();
-  var_02 = self.spawnposarray[self.numofspawnrequested - 1];
-  var_03 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_01, var_02, var_03.egg_sac_spawn_fly_time, 1, vectortoangles(var_02 - var_01 * (1, 1, 0)));
+dosubmergespawn_asm(var_0) {
+  var_1 = geteggsaclaunchpos();
+  var_2 = self.spawnposarray[self.numofspawnrequested - 1];
+  var_3 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_1, var_2, var_3.egg_sac_spawn_fly_time, 1, vectortoangles(var_2 - var_1 * (1, 1, 0)));
   self.numofspawnrequested--;
 }
 
-dosubmergebomb_asm(param_00) {
+dosubmergebomb_asm(var_0) {
   if(self.numofbombrequested <= 0) {
     return;
   }
 
-  var_01 = geteggsaclaunchpos();
-  var_02 = 0;
+  var_1 = geteggsaclaunchpos();
+  var_2 = 0;
   if(isDefined(self.submergebombspawnindex) && scripts\engine\utility::array_contains(self.submergebombspawnindex, self.numofbombrequested)) {
-    var_02 = 1;
+    var_2 = 1;
   }
 
-  thread launchonebomb(var_01, var_02);
+  thread launchonebomb(var_1, var_2);
 }
 
-dotoxicspawn_asm(param_00) {
-  var_01 = geteggsaclaunchpos();
-  thread launchtoxicspawn(var_01);
+dotoxicspawn_asm(var_0) {
+  var_1 = geteggsaclaunchpos();
+  thread launchtoxicspawn(var_1);
 }
 
 showweakspot() {
@@ -619,23 +619,23 @@ hideweakspot() {
   }
 }
 
-launchtoxicspawn(param_00) {
+launchtoxicspawn(var_0) {
   if(self.numofspawnrequested == 0) {
     return;
   }
 
-  var_01 = self.spawnposarray[self.numofspawnrequested - 1 % self.spawnposarray.size];
-  var_02 = var_01.origin;
-  var_03 = var_01.angles;
-  var_04 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(param_00, var_02, var_04.egg_sac_toxic_spawn_fly_time, 1, var_03);
+  var_1 = self.spawnposarray[self.numofspawnrequested - 1 % self.spawnposarray.size];
+  var_2 = var_1.origin;
+  var_3 = var_1.angles;
+  var_4 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_2, var_4.egg_sac_toxic_spawn_fly_time, 1, var_3);
   self.numofspawnrequested--;
 }
 
-launchonebomb(param_00, param_01) {
-  var_02 = self.bombposarray[self.numofbombrequested - 1];
-  var_03 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(param_00, var_02, var_03.egg_sac_bomb_fly_time, param_01);
+launchonebomb(var_0, var_1) {
+  var_2 = self.bombposarray[self.numofbombrequested - 1];
+  var_3 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_2, var_3.egg_sac_bomb_fly_time, var_1);
   self.numofbombrequested--;
 }
 
@@ -644,20 +644,20 @@ geteggsaclaunchpos() {
     self.eggsaclaunchtagcounter = 0;
   }
 
-  var_00 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  var_01 = var_00.egg_sack_launching_tags;
-  var_02 = var_01[self.eggsaclaunchtagcounter % var_01.size];
+  var_0 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  var_1 = var_0.egg_sack_launching_tags;
+  var_2 = var_1[self.eggsaclaunchtagcounter % var_1.size];
   self.eggsaclaunchtagcounter++;
-  return self gettagorigin(var_02);
+  return self gettagorigin(var_2);
 }
 
-shouldabortaction(param_00, param_01, param_02, param_03) {
+shouldabortaction(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.requested_action)) {
     return 1;
   }
 
-  if(isDefined(param_03)) {
-    if(self.requested_action != param_03) {
+  if(isDefined(var_3)) {
+    if(self.requested_action != var_3) {
       return 1;
     }
   }
@@ -665,57 +665,57 @@ shouldabortaction(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-shoulddoaction(param_00, param_01, param_02, param_03) {
+shoulddoaction(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.requested_action)) {
     return 0;
   }
 
-  if(self.requested_action == param_02) {
+  if(self.requested_action == var_2) {
     return 1;
   }
 
   return 0;
 }
 
-playanimwithplaybackrate(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
-  var_04 = param_03;
-  var_05 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_05, var_04);
+playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_3;
+  var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
-chooseidleanim(param_00, param_01, param_02) {
+chooseidleanim(var_0, var_1, var_2) {
   if(scripts\engine\utility::istrue(self.blookatplayer)) {
     return 0;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, "idle");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "idle");
 }
 
-choosecrabbossturnanim(param_00, param_01, param_02) {
-  var_03 = undefined;
-  var_04 = abs(self.desiredyaw);
+choosecrabbossturnanim(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = abs(self.desiredyaw);
   if(self.desiredyaw < 0) {
-    if(var_04 < 67.5) {
-      var_03 = 9;
+    if(var_4 < 67.5) {
+      var_3 = 9;
     } else {
-      var_03 = 6;
+      var_3 = 6;
     }
-  } else if(var_04 < 67.5) {
-    var_03 = 7;
+  } else if(var_4 < 67.5) {
+    var_3 = 7;
   } else {
-    var_03 = 4;
+    var_3 = 4;
   }
 
-  var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
-  var_06 = self getsafecircleorigin(param_01, var_05);
-  var_07 = getangledelta(var_06, 0, 1);
-  self.additionalyaw = self.desiredyaw - var_07;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  var_6 = self getsafecircleorigin(var_1, var_5);
+  var_7 = getangledelta(var_6, 0, 1);
+  self.additionalyaw = self.desiredyaw - var_7;
   self.desiredyaw = undefined;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-shouldturn(param_00, param_01, param_02, param_03) {
+shouldturn(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.desiredyaw)) {
     return 0;
   }
@@ -723,49 +723,49 @@ shouldturn(param_00, param_01, param_02, param_03) {
   return 1;
 }
 
-handleadditionalyaw(param_00, param_01) {
-  self endon(param_00 + "_finished");
-  var_02 = self.additionalyaw / param_01;
-  for(var_03 = 0; var_03 < param_01; var_03++) {
-    var_04 = self.angles[1];
-    var_04 = var_04 + var_02;
-    var_05 = (self.angles[0], var_04, self.angles[2]);
-    self orientmode("face angle abs", var_05);
+handleadditionalyaw(var_0, var_1) {
+  self endon(var_0 + "_finished");
+  var_2 = self.additionalyaw / var_1;
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    var_4 = self.angles[1];
+    var_4 = var_4 + var_2;
+    var_5 = (self.angles[0], var_4, self.angles[2]);
+    self orientmode("face angle abs", var_5);
     scripts\engine\utility::waitframe();
   }
 
   self.additionalyaw = undefined;
 }
 
-playcrabbossturnanim(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-  var_05 = self getsafecircleorigin(param_01, var_04);
-  var_06 = getanimlength(var_05);
+playcrabbossturnanim(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+  var_5 = self getsafecircleorigin(var_1, var_4);
+  var_6 = getanimlength(var_5);
   if(isDefined(self.additionalyaw)) {
-    thread handleadditionalyaw(param_01, ceil(var_06 * 20));
+    thread handleadditionalyaw(var_1, ceil(var_6 * 20));
   }
 
-  return scripts\asm\asm_mp::func_2365(param_00, param_01, param_02, var_04, 1);
+  return scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 1);
 }
 
-playcrabbossemergeanim(param_00, param_01, param_02, param_03) {
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02);
+playcrabbossemergeanim(var_0, var_1, var_2, var_3) {
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2);
   self notify("emerge_complete");
 }
 
-healme(param_00) {
+healme(var_0) {
   self.bhealing = 1;
-  wait(param_00);
+  wait(var_0);
   self.bhealing = undefined;
 }
 
-loophealanim(param_00, param_01, param_02, param_03) {
-  var_04 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-  thread healme(var_04.heal_duration);
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+loophealanim(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
+  thread healme(var_4.heal_duration);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-isdonehealing(param_00, param_01, param_02, param_03) {
+isdonehealing(var_0, var_1, var_2, var_3) {
   if(!scripts\engine\utility::istrue(self.bhealing)) {
     return 1;
   }
@@ -773,105 +773,105 @@ isdonehealing(param_00, param_01, param_02, param_03) {
   return 0;
 }
 
-choosecrabbossmoveanim(param_00, param_01, param_02) {
-  var_03 = self.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosecrabbossmoveanim(var_0, var_1, var_2) {
+  var_3 = self.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-playmovearrival(param_00, param_01, param_02, param_03) {
+playmovearrival(var_0, var_1, var_2, var_3) {
   if(isDefined(self.desiredbossmovepos)) {
-    var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-    var_05 = self getsafecircleorigin(param_01, var_04);
-    thread applyallmotiontowards(param_01, self.desiredbossmovepos, var_05, self.moveloopscale);
+    var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+    var_5 = self getsafecircleorigin(var_1, var_4);
+    thread applyallmotiontowards(var_1, self.desiredbossmovepos, var_5, self.moveloopscale);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-applyallmotiontowards(param_00, param_01, param_02, param_03) {
-  self endon(param_00 + "_finished");
-  if(!isDefined(param_03)) {
-    param_03 = 1;
+applyallmotiontowards(var_0, var_1, var_2, var_3) {
+  self endon(var_0 + "_finished");
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var_04 = 0;
-  var_05 = getanimlength(param_02);
-  while(var_04 < var_05) {
-    var_06 = var_04 / var_05;
-    var_07 = var_04 + 0.05 / var_05;
-    if(var_07 > 1) {
-      var_04 = 0;
-      var_06 = 0;
-      var_07 = var_06 + 0.05;
+  var_4 = 0;
+  var_5 = getanimlength(var_2);
+  while(var_4 < var_5) {
+    var_6 = var_4 / var_5;
+    var_7 = var_4 + 0.05 / var_5;
+    if(var_7 > 1) {
+      var_4 = 0;
+      var_6 = 0;
+      var_7 = var_6 + 0.05;
     }
 
-    var_08 = getmovedelta(param_02, var_06, var_07);
-    var_09 = length2d(var_08) * param_03;
-    var_0A = vectornormalize(param_01 - self.origin);
-    var_0B = self.origin + var_0A * var_09;
+    var_8 = getmovedelta(var_2, var_6, var_7);
+    var_9 = length2d(var_8) * var_3;
+    var_0A = vectornormalize(var_1 - self.origin);
+    var_0B = self.origin + var_0A * var_9;
     self setorigin(var_0B, 0);
     wait(0.05);
-    var_04 = var_04 + 0.05;
+    var_4 = var_4 + 0.05;
   }
 }
 
-playmoveexit(param_00, param_01, param_02, param_03) {
+playmoveexit(var_0, var_1, var_2, var_3) {
   if(isDefined(self.desiredbossmovepos)) {
-    var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-    var_05 = self getsafecircleorigin(param_01, var_04);
-    thread applyallmotiontowards(param_01, self.desiredbossmovepos, var_05, self.moveloopscale);
+    var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+    var_5 = self getsafecircleorigin(var_1, var_4);
+    thread applyallmotiontowards(var_1, self.desiredbossmovepos, var_5, self.moveloopscale);
   }
 
-  scripts\asm\asm_mp::func_2364(param_00, param_01, param_02, param_03);
+  scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
 }
 
-loopcrabbossmoveanim(param_00, param_01, param_02, param_03) {
-  self endon(param_01 + "_finished");
+loopcrabbossmoveanim(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
   if(isDefined(self.desiredbossmovepos)) {
-    var_04 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-    var_05 = self getsafecircleorigin(param_01, var_04);
-    thread applyallmotiontowards(param_01, self.desiredbossmovepos, var_05, self.moveloopscale);
+    var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+    var_5 = self getsafecircleorigin(var_1, var_4);
+    thread applyallmotiontowards(var_1, self.desiredbossmovepos, var_5, self.moveloopscale);
   }
 
-  var_06 = self.movedircount;
-  for(var_07 = 0; var_07 < var_06; var_07++) {
-    var_08 = scripts\asm\asm_mp::asm_getanim(param_00, param_01);
-    self setanimstate(param_01, var_08);
-    scripts\mp\agents\_scriptedagents::func_1384C(param_01, "end", param_01, var_08, ::crabbossnotehandler);
+  var_6 = self.movedircount;
+  for(var_7 = 0; var_7 < var_6; var_7++) {
+    var_8 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
+    self setanimstate(var_1, var_8);
+    scripts\mp\agents\_scriptedagents::func_1384C(var_1, "end", var_1, var_8, ::crabbossnotehandler);
   }
 
   clearaction();
 }
 
-choosecrabbossarrivalanim(param_00, param_01, param_02) {
-  var_03 = self.currentmovedirindex;
-  return scripts\asm\asm::asm_lookupanimfromalias(param_01, var_03);
+choosecrabbossarrivalanim(var_0, var_1, var_2) {
+  var_3 = self.currentmovedirindex;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-func_3EE4(param_00, param_01, param_02) {
+func_3EE4(var_0, var_1, var_2) {
   if(!isDefined(self.painalias)) {
-    var_03 = self getanimentrycount(param_01);
-    return randomint(var_03);
+    var_3 = self getanimentrycount(var_1);
+    return randomint(var_3);
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(param_02, self.painalias);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_2, self.painalias);
 }
 
-choosesmashanim(param_00, param_01, param_02) {
-  var_03 = self getanimentrycount(param_01);
-  var_04 = randomint(var_03);
-  self.smashanimindex = var_04;
-  return var_04;
+choosesmashanim(var_0, var_1, var_2) {
+  var_3 = self getanimentrycount(var_1);
+  var_4 = randomint(var_3);
+  self.smashanimindex = var_4;
+  return var_4;
 }
 
-choosesmashinterruptedanim(param_00, param_01, param_02) {
-  var_03 = self.smashanimindex;
+choosesmashinterruptedanim(var_0, var_1, var_2) {
+  var_3 = self.smashanimindex;
   self.smashanimindex = undefined;
-  return var_03;
+  return var_3;
 }
 
-toxicspawn_notehandler(param_00, param_01, param_02, param_03) {
-  switch (param_00) {
+toxicspawn_notehandler(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "spawn_group":
       thread dogroupspawn();
       break;
@@ -879,10 +879,10 @@ toxicspawn_notehandler(param_00, param_01, param_02, param_03) {
 }
 
 dogroupspawn() {
-  var_00 = self.numofspawnrequested;
-  for(var_01 = 1; var_01 <= var_00; var_01++) {
-    var_02 = geteggsaclaunchpos();
-    thread launchtoxicspawn(var_02);
+  var_0 = self.numofspawnrequested;
+  for(var_1 = 1; var_1 <= var_0; var_1++) {
+    var_2 = geteggsaclaunchpos();
+    thread launchtoxicspawn(var_2);
     scripts\engine\utility::waitframe();
   }
 }
@@ -893,10 +893,10 @@ startsonicbeam() {
 
 stopsonicbeam() {}
 
-choosetauntanim(param_00, param_01, param_02) {
+choosetauntanim(var_0, var_1, var_2) {
   if(scripts\engine\utility::istrue(level.crab_boss_random_taunt_anim)) {
-    return lib_0F3C::func_3E96(param_00, param_01);
+    return lib_0F3C::func_3E96(var_0, var_1);
   }
 
-  return lib_0F3C::func_3E96(param_00, param_01, "taunt");
+  return lib_0F3C::func_3E96(var_0, var_1, "taunt");
 }

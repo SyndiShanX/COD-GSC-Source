@@ -46,15 +46,15 @@ func_899C() {
   self endon("death");
   level waittill("game_ended");
   self clearpath();
-  foreach(var_04, var_01 in self.var_164D) {
-    var_02 = var_01.var_4BC0;
-    var_03 = level.asm[var_04].states[var_02];
-    scripts\asm\asm::func_2388(var_04, var_02, var_03, var_03.var_116FB);
-    scripts\asm\asm::func_238A(var_04, "idle", 0.2, undefined, undefined, undefined);
+  foreach(var_4, var_1 in self.var_164D) {
+    var_2 = var_1.var_4BC0;
+    var_3 = level.asm[var_4].states[var_2];
+    scripts\asm\asm::func_2388(var_4, var_2, var_3, var_3.var_116FB);
+    scripts\asm\asm::func_238A(var_4, "idle", 0.2, undefined, undefined, undefined);
   }
 }
 
-func_FACE(param_00) {
+func_FACE(var_0) {
   self setModel("police_officer_zombie");
   thread scripts\mp\agents\zombie\zmb_zombie_agent::func_50EF();
 }
@@ -63,26 +63,26 @@ func_AEB0() {}
 
 func_FF94() {
   if(level.wave_num >= 20) {
-    var_00 = min(level.wave_num - 10, 20);
+    var_0 = min(level.wave_num - 10, 20);
   } else {
-    var_00 = level.cop_spawn_percent;
+    var_0 = level.cop_spawn_percent;
   }
 
-  var_01 = 5;
-  var_02 = "zombie_cop";
+  var_1 = 5;
+  var_2 = "zombie_cop";
   if(getdvarint("scr_force_cop_spawn", 0) == 1) {
-    var_01 = 0;
-    var_00 = 100;
+    var_1 = 0;
+    var_0 = 100;
   }
 
   if(getdvarint("scr_force_no_cop_spawn", 0) == 1) {
-    var_01 = 500;
-    var_00 = 0;
+    var_1 = 500;
+    var_0 = 0;
   }
 
-  if(level.wave_num > var_01) {
-    if(randomint(100) < var_00) {
-      return var_02;
+  if(level.wave_num > var_1) {
+    if(randomint(100) < var_0) {
+      return var_2;
     }
 
     return undefined;

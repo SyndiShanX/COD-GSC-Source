@@ -4,16 +4,16 @@
 ***************************************/
 
 init() {
-  var_00 = spawnStruct();
+  var_0 = spawnStruct();
   var_0.id = "deployable_weapon_crate";
   var_0.weaponinfo = "crate_marker_mp";
   var_0.modelbase = "mp_weapon_crate";
   var_0.modelbombsquad = "mp_weapon_crate_bombsquad";
   var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  var_0.func_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
-  var_0.func_67E5 = "deployable_ammo_taken";
+  var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  var_0.var_67E5 = "deployable_ammo_taken";
   var_0.streakname = "deployable_ammo";
-  var_0.func_10A38 = "used_deployable_ammo";
+  var_0.var_10A38 = "used_deployable_ammo";
   var_0.shadername = "compass_objpoint_deploy_ammo_friendly";
   var_0.headiconoffset = 20;
   var_0.lifespan = 20.0;
@@ -33,38 +33,38 @@ init() {
   var_0.allowmeleedamage = 1;
   var_0.allowhvtspawn = 0;
   var_0.maxuses = 4;
-  var_0.func_B7A5 = 20;
+  var_0.var_B7A5 = 20;
   var_0.minigunweapon = "iw6_minigun_mp";
-  var_0.func_1E4B = 0.5;
-  var_0.func_1E4C = 10.0;
-  var_0.func_127C8 = 200;
-  var_0.func_127C5 = 64;
+  var_0.var_1E4B = 0.5;
+  var_0.var_1E4C = 10.0;
+  var_0.var_127C8 = 200;
+  var_0.var_127C5 = 64;
   var_0.ondeploycallback = ::func_C4CF;
   var_0.canuseotherboxes = 0;
-  level.boxsettings["deployable_ammo"] = var_00;
+  level.boxsettings["deployable_ammo"] = var_0;
   scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_ammo", undefined, ::func_128DD);
-  level.func_5226 = randomintrange(1, var_0.func_B7A5 + 1);
+  level.var_5226 = randomintrange(1, var_0.var_B7A5 + 1);
   level.deployable_box["deployable_ammo"] = [];
 }
 
-func_1E3C(var_00) {
-  func_128D7(1, var_00, "ammo_box_mp");
+func_1E3C(var_0) {
+  func_128D7(1, var_0, "ammo_box_mp");
 }
 
-func_128D7(var_00, var_01, var_02) {
-  var_03 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_ammo", var_01, var_02);
+func_128D7(var_0, var_1, var_2) {
+  var_3 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_0, "deployable_ammo", var_1, var_2);
 
-  if(!isDefined(var_03) || !var_03) {
+  if(!isDefined(var_3) || !var_3) {
     return 0;
   }
 
   return 1;
 }
 
-func_128DD(var_00, var_01) {
-  var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_0.lifeid, "deployable_ammo", var_01, var_0.weapon);
+func_128DD(var_0, var_1) {
+  var_2 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_0.lifeid, "deployable_ammo", var_1, var_0.weapon);
 
-  if(!isDefined(var_02) || !var_02) {
+  if(!isDefined(var_2) || !var_2) {
     return 0;
   }
 
@@ -72,106 +72,106 @@ func_128DD(var_00, var_01) {
   return 1;
 }
 
-onusedeployable(var_00) {
-  level.func_5226--;
+onusedeployable(var_0) {
+  level.var_5226--;
 
-  if(level.func_5226 == 0) {
-    var_01 = level.boxsettings[var_0.boxtype];
+  if(level.var_5226 == 0) {
+    var_1 = level.boxsettings[var_0.boxtype];
 
-    if(isDefined(level.func_5222)) {
+    if(isDefined(level.var_5222)) {
       [
-        [level.func_5222]
+        [level.var_5222]
       ](1);
     } else {
       setviewmodeldepthoffield(self, var_1.minigunweapon);
     }
 
     scripts\mp\missions::processchallenge("ch_guninabox");
-    level.func_5226 = randomintrange(var_1.func_B7A5, var_1.func_B7A5 + 1);
+    level.var_5226 = randomintrange(var_1.var_B7A5, var_1.var_B7A5 + 1);
   } else
     startpath(self);
 }
 
-func_C4CF(var_00) {
-  thread func_E2B7(var_00);
+func_C4CF(var_0) {
+  thread func_E2B7(var_0);
 }
 
-startpath(var_00) {
-  var_01 = [];
+startpath(var_0) {
+  var_1 = [];
 
-  foreach(var_03 in var_00 getweaponslistprimaries()) {
-    var_1[var_1.size] = getweaponbasename(var_03);
+  foreach(var_3 in var_0 getweaponslistprimaries()) {
+    var_1[var_1.size] = getweaponbasename(var_3);
   }
 
-  var_05 = undefined;
+  var_5 = undefined;
 
   for(;;) {
-    var_05 = scripts\mp\gametypes\sotf::getrandomweapon(level.weaponarray);
-    var_06 = var_5["name"];
+    var_5 = scripts\mp\gametypes\sotf::getrandomweapon(level.weaponarray);
+    var_6 = var_5["name"];
 
-    if(!scripts\engine\utility::array_contains(var_01, var_06)) {
+    if(!scripts\engine\utility::array_contains(var_1, var_6)) {
       break;
     }
   }
 
-  var_05 = scripts\mp\gametypes\sotf::getrandomattachments(var_05);
-  setviewmodeldepthoffield(var_00, var_05);
+  var_5 = scripts\mp\gametypes\sotf::getrandomattachments(var_5);
+  setviewmodeldepthoffield(var_0, var_5);
 }
 
-setviewmodeldepthoffield(var_00, var_01) {
-  var_02 = var_00 getweaponslistprimaries();
-  var_03 = 0;
+setviewmodeldepthoffield(var_0, var_1) {
+  var_2 = var_0 getweaponslistprimaries();
+  var_3 = 0;
 
-  foreach(var_05 in var_02) {
-    if(!scripts\mp\weapons::isaltmodeweapon(var_05)) {
+  foreach(var_5 in var_2) {
+    if(!scripts\mp\weapons::isaltmodeweapon(var_5)) {
       var_3++;
     }
   }
 
-  if(var_03 > 1) {
-    var_07 = var_0.lastdroppableweaponobj;
+  if(var_3 > 1) {
+    var_7 = var_0.lastdroppableweaponobj;
 
-    if(isDefined(var_07) && var_07 != "none") {
-      var_00 dropitem(var_07);
+    if(isDefined(var_7) && var_7 != "none") {
+      var_0 dropitem(var_7);
     }
   }
 
-  var_00 scripts\mp\utility\game::_giveweapon(var_01);
-  var_00 scripts\mp\utility\game::_switchtoweapon(var_01);
-  var_00 givestartammo(var_01);
+  var_0 scripts\mp\utility\game::_giveweapon(var_1);
+  var_0 scripts\mp\utility\game::_switchtoweapon(var_1);
+  var_0 givestartammo(var_1);
 }
 
-func_E2B7(var_00) {
+func_E2B7(var_0) {
   self endon("death");
   level endon("game_eneded");
-  var_01 = spawn("trigger_radius", self.origin, 0, var_0.func_127C8, var_0.func_127C5);
+  var_1 = spawn("trigger_radius", self.origin, 0, var_0.var_127C8, var_0.var_127C5);
   var_1.owner = self;
-  thread scripts\mp\weapons::deleteondeath(var_01);
+  thread scripts\mp\weapons::deleteondeath(var_1);
 
   if(isDefined(self.moving_platform)) {
-    var_01 getrankxp();
-    var_01 linkto(self.moving_platform);
+    var_1 getrankxp();
+    var_1 linkto(self.moving_platform);
   }
 
-  var_02 = var_0.func_127C8 * var_0.func_127C8;
-  var_03 = undefined;
+  var_2 = var_0.var_127C8 * var_0.var_127C8;
+  var_3 = undefined;
 
   for(;;) {
-    var_04 = var_01 getistouchingentities(level.players);
+    var_4 = var_1 getistouchingentities(level.players);
 
-    foreach(var_03 in var_04) {
-      if(isDefined(var_03) && !self.owner scripts\mp\utility\game::isenemy(var_03)) {
-        if(!isDefined(var_3.func_116D0) || !var_3.func_116D0) {
-          var_03 thread func_93EF();
+    foreach(var_3 in var_4) {
+      if(isDefined(var_3) && !self.owner scripts\mp\utility\game::isenemy(var_3)) {
+        if(!isDefined(var_3.var_116D0) || !var_3.var_116D0) {
+          var_3 thread func_93EF();
         }
 
-        if(func_FFB8(var_03)) {
-          func_17A8(var_03, var_0.func_1E4C);
+        if(func_FFB8(var_3)) {
+          func_17A8(var_3, var_0.var_1E4C);
         }
       }
     }
 
-    wait(var_0.func_1E4B);
+    wait(var_0.var_1E4B);
   }
 }
 
@@ -185,31 +185,31 @@ func_93EF() {
   scripts\mp\powers::func_D74E();
 }
 
-func_FFB8(var_00) {
-  return !isDefined(var_0.func_5227) || gettime() >= var_0.func_5227;
+func_FFB8(var_0) {
+  return !isDefined(var_0.var_5227) || gettime() >= var_0.var_5227;
 }
 
-func_17A8(var_00, var_01) {
-  var_0.func_5227 = gettime() + var_01 * 1000;
-  scripts\mp\weapons::func_EBD2(var_00);
+func_17A8(var_0, var_1) {
+  var_0.var_5227 = gettime() + var_1 * 1000;
+  scripts\mp\weapons::func_EBD2(var_0);
 }
 
-func_17A9(var_00, var_01, var_02) {
+func_17A9(var_0, var_1, var_2) {
   self endon("death");
-  var_00 endon("death");
-  var_00 endon("disconnect");
+  var_0 endon("death");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    func_17A8(var_00);
-    wait(var_02);
+    func_17A8(var_0);
+    wait(var_2);
 
-    if(distancesquared(var_0.origin, self.origin) > var_01) {
+    if(distancesquared(var_0.origin, self.origin) > var_1) {
       break;
     }
   }
 }
 
-func_3937(var_00) {
+func_3937(var_0) {
   return !scripts\mp\utility\game::isjuggernaut();
 }
