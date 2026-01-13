@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3115.gsc
-*********************************************/
+***********************************************/
 
 func_98E5(var_0) {
   if(isDefined(self.spawner) && self.spawner func_10863()) {
@@ -14,11 +14,11 @@ func_98E5(var_0) {
     }
   }
 
-  return level.success;
+  return anim.success;
 }
 
 func_10863() {
-  if(isDefined(self.script_parameters) && self.script_parameters == "no_boards" || self.script_parameters == "ground_spawn_no_boards") {
+  if(isDefined(self.script_parameters) && (self.script_parameters == "no_boards" || self.script_parameters == "ground_spawn_no_boards")) {
     return 1;
   }
 
@@ -27,46 +27,48 @@ func_10863() {
 
 func_102D4(var_0) {
   var_1 = gettime();
+
   if(isDefined(self.var_102D5)) {
     if(var_1 >= self.var_102D5) {
       self.var_102D5 = undefined;
-      return level.failure;
+      return anim.failure;
     }
 
-    return level.running;
+    return anim.running;
   }
 
   if(!isDefined(self.curmeleetarget)) {
     self.var_102D5 = var_1 + 800;
-    return level.running;
+    return anim.running;
   }
 
   var_2 = distance2d(self.origin, self.curmeleetarget.origin);
+
   if(var_2 < 250) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(var_2 > 800) {
     self.var_102D5 = var_1 + 500;
-    return level.running;
+    return anim.running;
   }
 
   var_2 = var_2 - 250;
   var_3 = var_2 / 550;
   self.var_102D5 = var_1 + 200 + int(var_3 * 300);
-  return level.running;
+  return anim.running;
 }
 
 func_10004(var_0) {
   if(isDefined(level.fnzombieshouldenterplayspace)) {
     if(!self[[level.fnzombieshouldenterplayspace]]()) {
-      return level.failure;
+      return anim.failure;
     } else if(self.hastraversed) {
-      return level.failure;
+      return anim.failure;
     }
   }
 
-  return level.success;
+  return anim.success;
 }
 
 func_5827() {
@@ -85,79 +87,81 @@ func_6629(var_0) {
 }
 
 func_6627(var_0) {
-  if(scripts\engine\utility::istrue(self.entered_playspace)) {
-    return level.success;
+  if(scripts\engine\utility::is_true(self.entered_playspace)) {
+    return anim.success;
   }
 
-  return level.running;
+  return anim.running;
 }
 
 func_3E48(var_0) {
-  if(!scripts\engine\utility::istrue(self.scripted_mode)) {
-    return level.failure;
+  if(!scripts\engine\utility::is_true(self.scripted_mode)) {
+    return anim.failure;
   }
 
-  return level.running;
+  return anim.running;
 }
 
 func_3E29(var_0) {
-  if(self.precacheleaderboards) {
+  if(self.ignoreall) {
     scripts\asm\asm_bb::bb_clearmeleerequest();
-    return level.failure;
+    return anim.failure;
   }
 
   scripts\asm\asm_bb::bb_clearmeleerequest();
+
   if(!isDefined(self.curmeleetarget)) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(isDefined(self.curmeleetarget.ignoreme) && self.curmeleetarget.ignoreme == 1) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(isDefined(self.curmeleetarget.killing_time)) {
-    return level.failure;
+    return anim.failure;
   }
 
-  if(self.aistate == "melee" || scripts\mp\agents\_scriptedagents::isstatelocked()) {
-    return level.failure;
+  if(self.aistate == "melee" || scripts\anim\notetracks_mp::isstatelocked()) {
+    return anim.failure;
   }
 
   if(!scripts\mp\agents\zombie\zombie_util::func_8B76()) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(scripts\mp\agents\zombie\zombie_util::func_138E7()) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(scripts\mp\agents\zombie\zombie_util::func_54BF()) {
-    return level.failure;
+    return anim.failure;
   }
 
-  var_1 = scripts\engine\utility::istrue(self.var_B104) && isDefined(self.var_B100) && gettime() - self.var_B100 <= self.var_B0FE;
+  var_1 = scripts\engine\utility::is_true(self.var_B104) && isDefined(self.var_B100) && gettime() - self.var_B100 <= self.var_B0FE;
+
   if(!ispointonnavmesh(self.curmeleetarget.origin, self) && !scripts\asm\asm_bb::bb_moverequested()) {
     if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("offmesh")) {
-      return level.failure;
+      return anim.failure;
     }
   } else if(scripts\mp\agents\zombie\zombie_util::func_54BE() || var_1) {
     if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("base")) {
-      return level.failure;
+      return anim.failure;
     }
-  } else if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal")) {
-    return level.failure;
-  }
+  } else if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal"))
+    return anim.failure;
 
   if(isDefined(self.var_B603)) {
     var_2 = gettime() - self.var_A9B8;
+
     if(var_2 < self.var_B603 * 1000) {
-      return level.failure;
+      return anim.failure;
     }
   }
 
   if(!isDefined(self.var_A9B9) || distancesquared(self.var_A9B9, self.origin) > 256) {
     if(!isDefined(self.asm.cur_move_mode)) {
-      var_3 = self.synctransients;
+      var_3 = self.movemode;
     } else {
       var_3 = self.asm.cur_move_mode;
     }
@@ -166,41 +170,42 @@ func_3E29(var_0) {
   }
 
   scripts\asm\asm_bb::bb_requestmelee(self.curmeleetarget);
-  return level.failure;
+  return anim.failure;
 }
 
 func_3E4F(var_0) {
-  if(!scripts\engine\utility::istrue(self.is_suicide_bomber)) {
-    return level.failure;
+  if(!scripts\engine\utility::is_true(self.is_suicide_bomber)) {
+    return anim.failure;
   }
 
   scripts\asm\asm_bb::bb_clearmeleerequest();
-  if(self.precacheleaderboards) {
-    return level.failure;
+
+  if(self.ignoreall) {
+    return anim.failure;
   }
 
   if(!isDefined(self.curmeleetarget)) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(isDefined(self.curmeleetarget.ignoreme) && self.curmeleetarget.ignoreme == 1) {
-    return level.failure;
+    return anim.failure;
   }
 
-  if(self.aistate == "melee" || scripts\mp\agents\_scriptedagents::isstatelocked()) {
-    return level.failure;
+  if(self.aistate == "melee" || scripts\anim\notetracks_mp::isstatelocked()) {
+    return anim.failure;
   }
 
   if(!scripts\mp\agents\zombie\zombie_util::func_8B76()) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(!func_13D9D(self.curmeleetarget)) {
-    return level.failure;
+    return anim.failure;
   }
 
   bb_requeststance(self.curmeleetarget);
-  return level.failure;
+  return anim.failure;
 }
 
 bb_requeststance(var_0) {
@@ -213,36 +218,38 @@ func_13D9D(var_0) {
 
 chaseenemy(var_0) {
   scripts\asm\asm_bb::bb_setisincombat(1);
-  if(self.precacheleaderboards) {
+
+  if(self.ignoreall) {
     self.curmeleetarget = undefined;
-    return level.failure;
+    return anim.failure;
   }
 
   if(isDefined(self.hastraversed) && self.hastraversed) {
     self.noturnanims = 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
-    return level.failure;
+  if(!isDefined(self.enemy)) {
+    return anim.failure;
   }
 
-  if(isDefined(self.isnodeoccupied.is_fast_traveling) || isDefined(self.isnodeoccupied.is_off_grid)) {
+  if(isDefined(self.enemy.is_fast_traveling) || isDefined(self.enemy.is_off_grid)) {
     self.curmeleetarget = undefined;
-    return level.failure;
+    return anim.failure;
   }
 
-  if(isDefined(self.isnodeoccupied.killing_time)) {
+  if(isDefined(self.enemy.killing_time)) {
     self.curmeleetarget = undefined;
-    return level.failure;
+    return anim.failure;
   }
 
   var_1 = undefined;
+
   if(isDefined(self.var_571B) && scripts\mp\agents\zombie\zombie_util::func_100AB()) {
     var_1 = self.var_571B;
   } else if(isDefined(self.attackent)) {
     var_1 = self.attackent;
-  } else if(isDefined(self.isnodeoccupied) && !scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.isnodeoccupied)) {
-    var_1 = self.isnodeoccupied;
+  } else if(isDefined(self.enemy) && !scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.enemy)) {
+    var_1 = self.enemy;
   }
 
   if(!isDefined(var_1)) {
@@ -251,10 +258,10 @@ chaseenemy(var_0) {
     }
 
     self.curmeleetarget = undefined;
-    return level.failure;
+    return anim.failure;
   }
 
-  var_3 = self.var_252B + self.fgetarg * 2;
+  var_3 = self.var_252B + self.radius * 2;
   var_4 = var_3 * var_3;
   var_5 = self.var_252B;
   var_6 = var_5 * var_5;
@@ -262,69 +269,71 @@ chaseenemy(var_0) {
   var_7 = scripts\mp\agents\zombie\zombie_util::func_7FAA(var_1);
   var_8 = var_7.var_656D;
   var_9 = distancesquared(var_7.origin, self.origin);
-  var_0A = distancesquared(var_8, self.origin);
-  var_0B = self.var_2AB8;
-  if(var_0A < squared(self.fgetarg) && distancesquared(var_8, var_7.origin) > squared(self.fgetarg)) {
-    var_0B = 1;
+  var_10 = distancesquared(var_8, self.origin);
+  var_11 = self.var_2AB8;
+
+  if(var_10 < squared(self.radius) && distancesquared(var_8, var_7.origin) > squared(self.radius)) {
+    var_11 = 1;
     self notify("attack_anim", "end");
   }
 
-  if(!var_0B && var_0A > var_4 && var_9 > var_6) {
-    var_0B = 1;
+  if(!var_11 && var_10 > var_4 && var_9 > var_6) {
+    var_11 = 1;
   }
 
   if(var_7.var_1312B) {
-    if(!var_0B && var_0A <= var_4 && var_9 > squared(self.defaultgoalradius)) {
-      var_0B = 1;
+    if(!var_11 && var_10 <= var_4 && var_9 > squared(self.defaultgoalradius)) {
+      var_11 = 1;
     }
 
-    self ghostskulls_total_waves(self.defaultgoalradius);
+    self scragentsetgoalradius(self.defaultgoalradius);
   } else if(!scripts\mp\agents\zombie\zombie_util::func_8C39(var_1, self.var_B640)) {
-    self ghostskulls_total_waves(self.defaultgoalradius);
-    var_0B = 1;
+    self scragentsetgoalradius(self.defaultgoalradius);
+    var_11 = 1;
   } else {
-    self ghostskulls_total_waves(var_3);
-    if(var_0A <= var_4) {
+    self scragentsetgoalradius(var_3);
+
+    if(var_10 <= var_4) {
       var_7.origin = self.origin;
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  if(var_0B) {
+  if(var_11) {
     var_2 = getclosestpointonnavmesh(var_7.origin);
+
     if(distancesquared(var_2, var_7.origin) > 10000) {
-      return level.failure;
+      return anim.failure;
     }
 
-    self ghostskulls_complete_status(var_2);
+    self scragentsetgoalpos(var_2);
   }
 
-  return level.success;
+  return anim.success;
 }
 
 seekenemy(var_0) {
   if(isDefined(self.dontseekenemies)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_1 = [];
+
   foreach(var_3 in level.players) {
-    if(var_3.ignoreme || isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping.ignoreme) {
+    if(var_3.ignoreme || isDefined(var_3.owner) && var_3.owner.ignoreme) {
       continue;
     }
-
     if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_3)) {
       continue;
     }
-
     if(!isalive(var_3)) {
       continue;
     }
-
     var_1[var_1.size] = var_3;
   }
 
   var_5 = undefined;
+
   if(var_1.size > 0) {
     var_5 = sortbydistance(var_1, self.origin);
   }
@@ -332,44 +341,49 @@ seekenemy(var_0) {
   if(isDefined(var_5) && var_5.size > 0) {
     var_6 = 300;
     var_7 = distancesquared(var_5[0].origin, self.origin);
+
     if(var_7 < var_6 * var_6) {
       var_6 = 16;
     }
 
     var_8 = var_6 * var_6;
+
     if(self.var_2AB8 || distancesquared(self ghosthide(), var_5[0].origin) > var_8) {
       var_9 = var_5[0].origin;
-      var_0A = getclosestpointonnavmesh(var_9, self);
-      if(distancesquared(var_0A, var_5[0].origin) > var_8) {
-        return level.failure;
+      var_10 = getclosestpointonnavmesh(var_9, self);
+
+      if(distancesquared(var_10, var_5[0].origin) > var_8) {
+        return anim.failure;
       }
 
-      self ghostskulls_complete_status(var_0A);
+      self scragentsetgoalpos(var_10);
       self.var_2AB8 = 0;
     }
 
     scripts\asm\asm_bb::bb_setisincombat(1);
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 notargetfound(var_0) {
   scripts\asm\asm_bb::bb_setisincombat(0);
+
   if(isDefined(level.var_71A7)) {
     var_1 = 200;
-    if(!isDefined(self.vehicle_getspawnerarray) || distancesquared(self.vehicle_getspawnerarray, self.origin) < var_1 * var_1) {
+
+    if(!isDefined(self.pathgoalpos) || distancesquared(self.pathgoalpos, self.origin) < var_1 * var_1) {
       var_2 = self[[level.var_71A7]]();
+
       if(isDefined(var_2)) {
-        self ghostskulls_complete_status(var_2);
+        self scragentsetgoalpos(var_2);
       } else {
         self clearpath();
       }
     }
-  } else {
+  } else
     self clearpath();
-  }
 
-  return level.success;
+  return anim.success;
 }

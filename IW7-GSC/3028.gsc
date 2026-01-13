@@ -57,7 +57,7 @@ func_A329(var_0) {
     level.player allowads(0);
   }
 
-  level.player func_0BCE::func_A2B2(self, undefined, var_0);
+  level.player lib_0BCE::func_A2B2(self, undefined, var_0);
   level.player setorigin((100000, 100000, 100000));
   level.player.var_D409 = self;
   _setsaveddvar("spaceship_disableViewModelNotetracks", 1);
@@ -71,7 +71,7 @@ func_A2D9() {
   }
 
   setomnvar("ui_jackal_hide_follow_pip", 1);
-  level.player func_0BCE::func_A2B1(self);
+  level.player lib_0BCE::func_A2B1(self);
 }
 
 func_10492() {
@@ -79,7 +79,7 @@ func_10492() {
   var_0.var_B8F9 = "sp";
   var_0.dvarfuncs = ::dvarfuncs;
   var_0.init = ::func_9640;
-  func_0BCE::main(var_0);
+  lib_0BCE::main(var_0);
   func_104AB();
   func_104A5();
   func_10496();

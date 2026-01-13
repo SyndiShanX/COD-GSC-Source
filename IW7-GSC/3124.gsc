@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3124.gsc
-*********************************************/
+***********************************************/
 
 func_11090() {}
 
@@ -11,7 +11,7 @@ func_4E36() {
 }
 
 func_CF0E(var_0, var_1, var_2, var_3) {
-  self gib_fx_override("gravity");
+  self scragentsetphysicsmode("gravity");
   self ghostlaunched("anim deltas");
   lib_0F3C::func_CEA8(var_0, var_1, var_2);
 }

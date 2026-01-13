@@ -249,7 +249,7 @@ func_3714(var_0) {
 }
 
 func_78C3(var_0, var_1) {
-  var_2 = func_0BCE::func_7DB5();
+  var_2 = lib_0BCE::func_7DB5();
   var_3 = var_1 * var_1;
 
   for(var_4 = 3; var_4 > 0; var_4--) {

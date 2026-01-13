@@ -211,7 +211,7 @@ func_3EDE(var_0, var_1, var_2) {
     }
   }
 
-  if(func_0BCE::func_10056()) {
+  if(lib_0BCE::func_10056()) {
     if(scripts\asm\asm::asm_hasalias(var_1, "space_" + var_4)) {
       var_4 = "space_" + var_4;
       var_5 = "space_" + var_5;

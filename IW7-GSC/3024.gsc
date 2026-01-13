@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3024.gsc
-*********************************************/
+***********************************************/
 
 func_F5E9(var_0, var_1) {
   var_0.var_C8DF = [];
@@ -59,19 +59,20 @@ func_48B7(var_0, var_1, var_2) {
 }
 
 func_48B6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = newclienthudelem(var_0);
-  var_0A.elemtype = "icon";
-  var_0A.children = [];
-  var_0A.alpha = var_5;
-  var_0A.archived = 0;
-  var_0A setparent(level.uiparent);
-  var_0A setshader(var_2, var_3, var_4);
-  var_0A setpoint(var_6, var_7, var_8, var_9);
+  var_10 = newclienthudelem(var_0);
+  var_10.elemtype = "icon";
+  var_10.children = [];
+  var_10.alpha = var_5;
+  var_10.archived = 0;
+  var_10 setparent(level.uiparent);
+  var_10 setshader(var_2, var_3, var_4);
+  var_10 setpoint(var_6, var_7, var_8, var_9);
+
   if(var_1) {
-    var_0.var_C8DF[var_0.var_C8DF.size] = var_0A;
+    var_0.var_C8DF[var_0.var_C8DF.size] = var_10;
   }
 
-  return var_0A;
+  return var_10;
 }
 
 func_4920(var_0) {
@@ -97,9 +98,11 @@ func_A0D1(var_0, var_1) {
   var_0 endon("exit_jackal");
   var_1 endon("death");
   var_0 notifyonplayercommand("jackal boost", "+breath_sprint");
+
   for(;;) {
     var_0 waittill("jackal boost");
     var_0 thread func_1297D(var_0, var_1);
+
     while(var_0 issprinting()) {
       scripts\engine\utility::waitframe();
     }
@@ -133,12 +136,12 @@ func_12951(var_0, var_1) {
 
 func_6EB6(var_0) {
   for(;;) {
-    wait(0.3);
+    wait 0.3;
     func_12959(var_0.var_916B);
     func_12959(var_0.var_916E);
     func_12985(var_0.var_916C);
     func_12985(var_0.var_916F);
-    wait(0.3);
+    wait 0.3;
     func_12985(var_0.var_916B);
     func_12985(var_0.var_916E);
     func_12959(var_0.var_916C);
@@ -151,14 +154,15 @@ func_915E(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("exit_jackal");
   var_1 endon("death");
+
   for(;;) {
     var_2 = func_7B68(var_1, 0.05);
     func_BC4C(var_0, var_2);
-    wait(0.05);
+    wait 0.05;
     func_BC4C(var_0, -1 * var_2);
     var_2 = func_7B68(var_1, 0.05);
     func_BC4C(var_0, -1 * var_2);
-    wait(0.05);
+    wait 0.05;
     func_BC4C(var_0, var_2);
   }
 }
@@ -223,6 +227,7 @@ createbar(var_0, var_1, var_2, var_3) {
   var_4.shader = "progress_bar_fill";
   var_4 setshader("progress_bar_fill", var_1, var_2);
   var_4.hidden = 0;
+
   if(isDefined(var_3)) {
     var_4.flashfrac = var_3;
   }
@@ -248,19 +253,18 @@ setparent(var_0) {
   if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
-
   if(isDefined(self.parent)) {
     self.parent removechild(self);
   }
 
   self.parent = var_0;
   self.parent addchild(self);
+
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-    return;
+  } else {
+    setpoint("TOPLEFT");
   }
-
-  setpoint("TOPLEFT");
 }
 
 addchild(var_0) {
@@ -273,18 +277,17 @@ removedestroyedchildren() {
   if(isDefined(self.childchecktime) && self.childchecktime == gettime()) {
     return;
   }
-
   self.childchecktime = gettime();
+
   if(!isDefined(self.children)) {
     return;
   }
-
   var_0 = [];
-  foreach(var_2 in self.children) {
+
+  foreach(var_3, var_2 in self.children) {
     if(!isDefined(var_2)) {
       continue;
     }
-
     var_2.index = var_0.size;
     var_0[var_0.size] = var_2;
   }
@@ -294,6 +297,7 @@ removedestroyedchildren() {
 
 removechild(var_0) {
   var_0.parent = undefined;
+
   if(self.children[self.children.size - 1] != var_0) {
     self.children[var_0.index] = self.children[self.children.size - 1];
     self.children[var_0.index].index = var_0.index;
@@ -309,6 +313,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 = getparent();
+
   if(var_4) {
     self moveovertime(var_4);
   }
@@ -318,6 +323,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self.xoffset = var_2;
+
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
@@ -326,6 +332,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
+
   if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
   }
@@ -349,6 +356,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   self.relativepoint = var_1;
   var_6 = "center_adjustable";
   var_7 = "middle";
+
   if(issubstr(var_1, "TOP")) {
     var_7 = "top_adjustable";
   }
@@ -376,16 +384,18 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(strip_suffix(var_6, "_adjustable") == var_5.alignx) {
     var_8 = 0;
     var_9 = 0;
-  } else if(var_8 == "center" || var_7.alignx == "center") {
-    var_8 = int(var_7.width / 2);
-    if(var_7 == "left_adjustable" || var_6.alignx == "right") {
+  } else if(var_6 == "center" || var_5.alignx == "center") {
+    var_8 = int(var_5.width / 2);
+
+    if(var_6 == "left_adjustable" || var_5.alignx == "right") {
       var_9 = -1;
     } else {
       var_9 = 1;
     }
   } else {
-    var_8 = var_7.width;
-    if(var_7 == "left_adjustable") {
+    var_8 = var_5.width;
+
+    if(var_6 == "left_adjustable") {
       var_9 = -1;
     } else {
       var_9 = 1;
@@ -393,28 +403,32 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self.x = var_5.x + var_8 * var_9;
+
   if(strip_suffix(var_7, "_adjustable") == var_5.aligny) {
-    var_0A = 0;
-    var_0B = 0;
-  } else if(var_9 == "middle" || var_7.aligny == "middle") {
-    var_0A = int(var_7.height / 2);
-    if(var_8 == "top_adjustable" || var_6.aligny == "bottom") {
-      var_0B = -1;
+    var_10 = 0;
+    var_11 = 0;
+  } else if(var_7 == "middle" || var_5.aligny == "middle") {
+    var_10 = int(var_5.height / 2);
+
+    if(var_7 == "top_adjustable" || var_5.aligny == "bottom") {
+      var_11 = -1;
     } else {
-      var_0B = 1;
+      var_11 = 1;
     }
   } else {
-    var_0A = var_7.height;
-    if(var_8 == "top_adjustable") {
-      var_0B = -1;
+    var_10 = var_5.height;
+
+    if(var_7 == "top_adjustable") {
+      var_11 = -1;
     } else {
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  self.y = var_5.y + var_0A * var_0B;
+  self.y = var_5.y + var_10 * var_11;
   self.x = self.x + self.xoffset;
   self.y = self.y + self.yoffset;
+
   switch (self.elemtype) {
     case "bar":
       setpointbar(var_0, var_1, var_2, var_3);
@@ -446,6 +460,7 @@ setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.alignx = "left";
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
+
   if(self.alignx == "left") {
     self.bar.x = self.x;
   } else if(self.alignx == "right") {
@@ -478,17 +493,19 @@ updatebar(var_0, var_1) {
 
 updatebarscale(var_0, var_1) {
   var_2 = int(self.width * var_0 + 0.5);
+
   if(!var_2) {
     var_2 = 1;
   }
 
   self.bar.frac = var_0;
   self.bar setshader(self.bar.shader, var_2, self.height);
+
   if(isDefined(var_1) && var_2 < self.width) {
     if(var_1 > 0) {
-      self.bar scaleovertime(1 - var_0 / var_1, self.width, self.height);
+      self.bar scaleovertime((1 - var_0) / var_1, self.width, self.height);
     } else if(var_1 < 0) {
-      self.bar scaleovertime(var_0 / -1 * var_1, 1, self.height);
+      self.bar scaleovertime(var_0 / (-1 * var_1), 1, self.height);
     }
   }
 
@@ -498,6 +515,7 @@ updatebarscale(var_0, var_1) {
 
 destroyelem() {
   var_0 = [];
+
   for(var_1 = 0; var_1 < self.children.size; var_1++) {
     if(isDefined(self.children[var_1])) {
       var_0[var_0.size] = self.children[var_1];

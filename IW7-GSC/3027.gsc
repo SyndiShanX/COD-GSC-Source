@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3027.gsc
-*********************************************/
+***********************************************/
 
 main(var_0, var_1, var_2) {
   var_3 = spawnStruct();
@@ -23,7 +23,8 @@ dvarfuncs(var_0, var_1) {
 }
 
 func_D31A(var_0, var_1, var_2) {
-  self getweaponrankxpmultiplier();
+  self playerhide();
+
   if(isDefined(var_2) && var_2) {
     var_3 = "hover";
   } else {

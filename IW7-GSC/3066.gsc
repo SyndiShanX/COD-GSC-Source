@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3066.gsc
-*********************************************/
+***********************************************/
 
 func_8987(var_0) {
   if(!isDefined(var_0) || var_0 == 0) {
@@ -19,11 +19,9 @@ func_8987(var_0) {
     case 2:
       scripts\asm\asm_bb::func_295B();
       break;
-
     case 1:
       scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
       break;
-
     default:
       scripts\asm\asm_bb::bb_requestcombatmovetype_facemotion();
       break;
@@ -32,80 +30,81 @@ func_8987(var_0) {
 
 func_3E49(var_0) {
   if(!isDefined(self.var_EF7D) && !isDefined(self.var_EF7A) && !isDefined(self.var_EF7C)) {
-    return level.failure;
+    return anim.failure;
   }
 
   func_8987(self.var_EF73);
-  if(isDefined(self.isnodeoccupied)) {
+
+  if(isDefined(self.enemy)) {
     if(isDefined(self.var_3123)) {
-      return level.failure;
+      return anim.failure;
     }
 
     if(isDefined(self.var_EF79) && self.var_EF79 > 0) {
       var_1 = self.var_EF79 * self.var_EF79;
-      var_2 = distancesquared(self.origin, self.isnodeoccupied.origin);
+      var_2 = distancesquared(self.origin, self.enemy.origin);
+
       if(var_2 < var_1) {
         self.var_3123 = 1;
-        return level.failure;
+        return anim.failure;
       }
     }
-  } else {
+  } else
     self.var_3123 = undefined;
-  }
 
   if(isDefined(self.var_EF7E)) {
-    self ghostskulls_total_waves(self.var_EF7E);
+    self scragentsetgoalradius(self.var_EF7E);
     var_3 = self.var_EF7E;
-  } else {
+  } else
     var_3 = 4;
-  }
 
   if(isDefined(self.var_EF7D)) {
     self _meth_8484();
-    self ghostskulls_complete_status(self.var_EF7D);
+    self scragentsetgoalpos(self.var_EF7D);
   } else if(isDefined(self.var_EF7A)) {
     var_4 = distancesquared(self.origin, self.var_EF7A.origin);
+
     if(var_4 > var_3 * var_3) {
       self _meth_8484();
-      self ghosts_attack_logic(self.var_EF7A);
-    } else {
-      return level.failure;
-    }
+      self scragentsetgoalentity(self.var_EF7A);
+    } else
+      return anim.failure;
   } else if(isDefined(self.var_EF7C)) {
     self _meth_8484();
-    self ghostshouldexplode(self.var_EF7C);
+    self scragentsetgoalnode(self.var_EF7C);
   }
 
-  return level.success;
+  return anim.success;
 }
 
 func_930A(var_0) {
   if(scripts\asm\asm_bb::bb_ismissingaleg()) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_930D(var_0) {
-  if(!scripts\asm\asm_bb::bb_ismissingaleg() || !isDefined(self.isnodeoccupied)) {
-    return level.failure;
+  if(!scripts\asm\asm_bb::bb_ismissingaleg() || !isDefined(self.enemy)) {
+    return anim.failure;
   }
 
   var_1 = 0;
+
   if(scripts\asm\asm_bb::bb_moverequested()) {
     var_1 = self pathdisttogoal();
   }
 
   if(var_1 == 0) {
-    var_1 = distance2d(self.origin, self.isnodeoccupied.origin);
+    var_1 = distance2d(self.origin, self.enemy.origin);
   }
 
   if(!scripts\aitypes\combat::hasammoinclip() || var_1 < self.forcefastcrawldist) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_97FA(var_0) {
@@ -114,7 +113,7 @@ func_97FA(var_0) {
   }
 
   scripts\asm\asm_bb::func_2979(1);
-  return level.success;
+  return anim.success;
 }
 
 func_5814() {
@@ -125,17 +124,18 @@ func_5814() {
 }
 
 func_5813(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
-    return level.failure;
+  if(!isDefined(self.enemy)) {
+    return anim.failure;
   }
 
-  var_1 = distancesquared(self.origin, self.isnodeoccupied.origin);
+  var_1 = distancesquared(self.origin, self.enemy.origin);
+
   if(var_1 < self.dismemberchargeexplodedistsq) {
     func_5814();
-    return level.success;
+    return anim.success;
   }
 
-  return level.running;
+  return anim.running;
 }
 
 func_116F3(var_0) {
@@ -149,12 +149,14 @@ decidemovetype(var_0, var_1) {
   }
 
   var_2 = gettime();
+
   if(self.last_enemy_sight_time < 0 || var_2 - self.last_enemy_sight_time < self.maxtimetostrafewithoutlos) {
     scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
     return;
   }
 
   self.strafeifwithindist = self.desiredenemydistmax + 100;
+
   if(var_1 < self.strafeifwithindist) {
     scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
     return;
@@ -168,9 +170,9 @@ func_9ED8() {
 }
 
 func_3DE6(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     if(isDefined(self.var_6571)) {
-      return level.failure;
+      return anim.failure;
     }
 
     if(!func_9ED8()) {
@@ -178,28 +180,30 @@ func_3DE6(var_0) {
       self clearpath();
     }
 
-    return level.failure;
+    return anim.failure;
   }
 
   var_1 = gettime();
+
   if(isDefined(self.var_A938)) {
     if(var_1 < self.var_A938 + 250) {
-      return level.success;
+      return anim.success;
     }
   }
 
   self.var_A938 = var_1;
-  if(isDefined(self.last_enemy_seen) && isDefined(self.isnodeoccupied)) {
-    if(self.last_enemy_seen != self.isnodeoccupied) {
+
+  if(isDefined(self.last_enemy_seen) && isDefined(self.enemy)) {
+    if(self.last_enemy_seen != self.enemy) {
       self.last_enemy_sight_time = -99;
     }
-  } else {
+  } else
     self.last_enemy_sight_time = -99;
-  }
 
   var_2 = 1;
-  var_3 = self getpersstat(self.isnodeoccupied);
-  var_4 = distance2d(self.origin, self.isnodeoccupied.origin);
+  var_3 = self cansee(self.enemy);
+  var_4 = distance2d(self.origin, self.enemy.origin);
+
   if(var_3) {
     var_2 = self canshoot(getdefaultenemychestpos());
   } else {
@@ -207,44 +211,47 @@ func_3DE6(var_0) {
   }
 
   if(!var_2) {
-    if(!scripts\engine\utility::istrue(self.var_3320)) {
+    if(!scripts\engine\utility::is_true(self.var_3320)) {
       decidemovetype(0, var_4);
       self _meth_8484();
-      self ghostskulls_complete_status(self.isnodeoccupied.origin);
+      self scragentsetgoalpos(self.enemy.origin);
     }
 
-    return level.success;
+    return anim.success;
   }
 
   self.var_3320 = undefined;
   self.last_enemy_sight_time = gettime();
-  self.last_enemy_seen = self.isnodeoccupied;
+  self.last_enemy_seen = self.enemy;
+
   if(var_4 > self.desiredenemydistmax) {
     decidemovetype(1, var_4);
     self _meth_8484();
-    self ghostskulls_complete_status(self.isnodeoccupied.origin);
-    return level.success;
+    self scragentsetgoalpos(self.enemy.origin);
+    return anim.success;
   }
 
   if(var_4 < self.backawayenemydist) {
     var_1 = gettime();
-    if(isDefined(self.var_A88C) && var_1 - self.var_A88C < 500 && isDefined(self.vehicle_getspawnerarray)) {
-      return level.success;
+
+    if(isDefined(self.var_A88C) && var_1 - self.var_A88C < 500 && isDefined(self.pathgoalpos)) {
+      return anim.success;
     }
 
-    var_5 = vectornormalize(self.origin - self.isnodeoccupied.origin);
+    var_5 = vectornormalize(self.origin - self.enemy.origin);
     var_6 = 100;
     var_7 = self.origin + var_5 * var_6;
     var_7 = getclosestpointonnavmesh(var_7, self);
     var_8 = var_7 - self.origin;
     var_8 = (var_8[0], var_8[1], 0);
     var_9 = vectornormalize(var_8);
-    var_0A = vectordot(var_9, var_5);
-    if(var_0A > 0) {
+    var_10 = vectordot(var_9, var_5);
+
+    if(var_10 > 0) {
       scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
       self _meth_8484();
-      self ghostskulls_complete_status(var_7);
-      return level.success;
+      self scragentsetgoalpos(var_7);
+      return anim.success;
     }
   }
 
@@ -253,14 +260,14 @@ func_3DE6(var_0) {
       self clearpath();
     }
 
-    return level.success;
+    return anim.success;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 picktargetingfunction() {
-  if(isDefined(self.isnodeoccupied) && isDefined(self.isnodeoccupied.dismember_crawl) && self.isnodeoccupied.dismember_crawl) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.dismember_crawl) && self.enemy.dismember_crawl) {
     if(isDefined(self.var_3402)) {
       return self.var_3402;
     }
@@ -268,8 +275,10 @@ picktargetingfunction() {
 
   var_0 = 0;
   var_1 = randomint(100);
+
   for(var_2 = 0; var_2 < self.var_3403.size; var_2++) {
     var_3 = self.var_3403[var_2];
+
     if(var_1 < var_3 + var_0) {
       return self.var_3404[var_2];
     }
@@ -281,25 +290,26 @@ picktargetingfunction() {
 }
 
 func_7E8E() {
-  var_0 = self.isnodeoccupied gettagorigin("j_head");
+  var_0 = self.enemy gettagorigin("j_head");
   return var_0;
 }
 
 getdefaultenemychestpos() {
-  if(scripts\engine\utility::istrue(self.dismember_crawl)) {
+  if(scripts\engine\utility::is_true(self.dismember_crawl)) {
     return func_7E8E();
   }
 
   var_0 = 70;
   var_1 = 15;
-  if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_0 = self.isnodeoccupied.var_18F4;
-    var_1 = self.isnodeoccupied.var_18F9;
+
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
   var_2 = var_0 * 0.75;
   var_3 = (0, 0, var_2);
-  var_4 = self.isnodeoccupied.origin + var_3;
+  var_4 = self.enemy.origin + var_3;
   return var_4;
 }
 
@@ -308,8 +318,9 @@ updatetarget(var_0) {
     return scripts\aitypes\combat::func_12EC2(var_0);
   }
 
-  if(isDefined(self.isnodeoccupied)) {
-    self.doentitiessharehierarchy = undefined;
+  if(isDefined(self.enemy)) {
+    self.looktarget = undefined;
+
     if(!isDefined(self.fncustomtargetingfunc) || !isDefined(self.nexttargetchangetime) || gettime() > self.nexttargetchangetime) {
       self.fncustomtargetingfunc = picktargetingfunction();
       self.nexttargetchangetime = gettime() + randomintrange(1500, 2500);
@@ -317,49 +328,50 @@ updatetarget(var_0) {
 
     if(isDefined(self.fncustomtargetingfunc)) {
       var_1 = self[[self.fncustomtargetingfunc]]();
+
       if(!self canshoot(var_1)) {
         var_1 = getdefaultenemychestpos();
       }
-    } else {
+    } else
       var_1 = getdefaultenemychestpos();
-    }
 
-    self.setplayerignoreradiusdamage = var_1;
+    self.lookposition = var_1;
   } else {
     scripts\asm\asm_bb::bb_setshootparams(undefined);
-    self.setplayerignoreradiusdamage = undefined;
+    self.lookposition = undefined;
     self.nexttargetchangetime = undefined;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 func_3401(var_0) {
-  if(!isDefined(self.setplayerignoreradiusdamage)) {
+  if(!isDefined(self.lookposition)) {
     return scripts\aitypes\combat::func_FE88(var_0);
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("shoot", "shoot_finished")) {
-    return level.success;
+    return anim.success;
   }
 
   var_1 = self.bt.shootparams;
-  if(self getpersstat(self.isnodeoccupied)) {
-    self.doentitiessharehierarchy = undefined;
-    var_1.pos = self.setplayerignoreradiusdamage;
+
+  if(self cansee(self.enemy)) {
+    self.looktarget = undefined;
+    var_1.pos = self.lookposition;
     var_1.ent = undefined;
   } else if(isDefined(self.goodshootpos)) {
     var_1.pos = self.goodshootpos;
     var_1.ent = undefined;
-  } else {
-    return level.success;
-  }
+  } else
+    return anim.success;
 
   if(!isDefined(var_1.objective)) {
     var_1.objective = "normal";
   }
 
-  scripts\asm\asm_bb::bb_setshootparams(var_1, self.isnodeoccupied);
+  scripts\asm\asm_bb::bb_setshootparams(var_1, self.enemy);
+
   if(scripts\aitypes\combat::isaimedataimtarget()) {
     if(!self.bt.m_bfiring) {
       scripts\aitypes\combat::resetmisstime_code();
@@ -369,14 +381,13 @@ func_3401(var_0) {
 
     scripts\aitypes\combat::func_3EF8(var_1);
     self.bt.m_bfiring = 1;
-  } else {
+  } else
     self.bt.m_bfiring = 0;
-  }
 
   if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
-    return level.success;
+    return anim.success;
   }
 
   scripts\asm\asm_bb::bb_requestfire(self.bt.m_bfiring);
-  return level.running;
+  return anim.running;
 }

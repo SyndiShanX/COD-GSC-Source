@@ -1,14 +1,15 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 2559.gsc
-*********************************************/
+***********************************************/
 
 func_006E(var_0, var_1, var_2, var_3) {
-  var_4 = level.invalid;
+  var_4 = anim.invalid;
   var_5 = undefined;
   var_6 = level.var_119E[var_0];
   var_7 = var_6.var_1581[var_1];
   var_4 = [[var_7]](var_2);
+
   if(!isDefined(var_4)) {
     var_4 = 3;
   }
@@ -49,32 +50,28 @@ bt_nativeregisteraction(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 bt_nativeexecaction(var_0, var_1, var_2, var_3) {
-  var_4 = level.invalid;
+  var_4 = anim.invalid;
   var_5 = gettime();
+
   if(isDefined(var_3)) {
     var_6 = [[var_3]]();
     var_4 = [[var_1]](var_2, var_6);
-  } else {
+  } else
     var_4 = [[var_1]](var_2);
-  }
 
   if(!isDefined(var_4)) {
     return 3;
   }
 
-  if(var_4 == level.failure) {
+  if(var_4 == anim.failure) {
     return 0;
-  }
-
-  if(var_4 == level.success) {
+  } else if(var_4 == anim.success) {
     return 1;
-  }
-
-  if(var_4 == level.running) {
+  } else if(var_4 == anim.running) {
     return 2;
+  } else {
+    return 3;
   }
-
-  return 3;
 }
 
 bt_nativecopyaction(var_0) {}

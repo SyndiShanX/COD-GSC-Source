@@ -1,12 +1,13 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3950.gsc
-*********************************************/
+***********************************************/
 
 registerscriptedagent() {
   scripts\aitypes\bt_util::init();
   lib_03B1::func_DEE8();
   lib_0F39::func_2371();
+
   if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
   }
@@ -53,22 +54,24 @@ setupagent() {
 
 func_FAEF() {
   self endon("death");
-  wait(0.1);
+  wait 0.1;
   self _meth_8504(1, "bot_move_forward", "bot_jump", "bot_double_jump");
 }
 
 func_1090C(var_0, var_1, var_2) {
   scripts\mp\utility::printgameaction("spider grenade spawn", var_2);
   var_3 = scripts\mp\mp_agent::spawnnewagent("seeker", var_2.team, var_0, var_1);
+
   if(!isDefined(var_3)) {
     return undefined;
   }
 
   scripts\mp\equipment\spider_grenade::spidergrenade_addtoactiveagentarray(var_3);
-  var_3.triggerportableradarping = var_2;
+  var_3.owner = var_2;
   var_3.var_9F72 = 1;
   var_3.var_9F46 = 1;
-  if(var_3.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
+
+  if(var_3.owner scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
     var_3.hasruggedeqp = 1;
     var_3 scripts\mp\mp_agent::set_agent_health(30);
   }
@@ -78,11 +81,12 @@ func_1090C(var_0, var_1, var_2) {
   return var_3;
 }
 
-func_C58B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = self.triggerportableradarping;
-  var_0D = var_1;
-  if(isDefined(var_1) && isDefined(var_1.triggerportableradarping)) {
-    var_0D = var_1.triggerportableradarping;
+func_C58B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = self.owner;
+  var_13 = var_1;
+
+  if(isDefined(var_1) && isDefined(var_1.owner)) {
+    var_13 = var_1.owner;
   }
 
   if(isDefined(level.weaponmapfunc)) {
@@ -98,42 +102,45 @@ func_C58B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   } else if(isDefined(var_0) && !scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_0)) {
     var_2 = 0;
   } else if(isDefined(var_1)) {
-    if(!isDefined(var_0) && !scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_0D)) {
+    if(!isDefined(var_0) && !scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_13)) {
       var_2 = 0;
-    } else if(!level.friendlyfire && var_0C != var_0D && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_0C, var_0D))) {
+    } else if(!level.friendlyfire && var_12 != var_13 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_12, var_13))) {
       var_2 = 0;
     }
   }
 
   if(var_2) {
-    var_0E = getseekermaxhealth();
-    var_0F = 1;
+    var_14 = getseekermaxhealth();
+    var_15 = 1;
+
     if(scripts\mp\utility::isfmjdamage(var_5, var_4)) {
-      var_0F = 2;
+      var_15 = 2;
     } else if(var_2 >= scripts\mp\weapons::minegettwohitthreshold()) {
-      var_0F = 2;
+      var_15 = 2;
     }
 
-    var_2 = var_0F * var_0E;
-    if(isplayer(var_0D)) {
-      var_10 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(self.hasruggedeqp), "hitequip", "");
-      var_0D scripts\mp\damagefeedback::updatedamagefeedback(var_10, var_2 >= self.maxhealth);
+    var_2 = var_15 * var_14;
+
+    if(isplayer(var_13)) {
+      var_16 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(self.hasruggedeqp), "hitequip", "");
+      var_13 scripts\mp\damagefeedback::updatedamagefeedback(var_16, var_2 >= self.maxhealth);
     }
 
-    scripts\mp\powers::equipmenthit(var_0C, var_0D, var_5, var_4);
+    scripts\mp\powers::equipmenthit(var_12, var_13, var_5, var_4);
+
     if(var_2 >= self.health) {
-      if(isDefined(var_0D) && isDefined(var_0C) && scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_0D, var_0C))) {
-        var_0D thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
+      if(isDefined(var_13) && isDefined(var_12) && scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_13, var_12))) {
+        var_13 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
       }
 
-      if(isDefined(self.triggerportableradarping)) {
+      if(isDefined(self.owner)) {
         thread scripts\mp\equipment\spider_grenade::spidergrenade_explode();
         return;
       }
     }
   }
 
-  self getrespawndelay(var_0, var_1, int(var_2), var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  self finishagentdamage(var_0, var_1, int(var_2), var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_10, var_11);
 }
 
 func_C58D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {

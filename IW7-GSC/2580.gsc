@@ -1,12 +1,12 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 2580.gsc
-*********************************************/
+***********************************************/
 
 func_98C5(var_0) {
   self.var_10264 = 1;
   setupdestructibledoors();
-  return level.success;
+  return anim.success;
 }
 
 setupdestructibledoors() {
@@ -23,8 +23,10 @@ func_4D5E() {
   self endon("death");
   self endon("terminate_ai_threads");
   var_0 = 0;
+
   for(;;) {
     self waittill("damage_part_died", var_1);
+
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = var_1[var_2];
       var_4 = var_2 < 3;
@@ -37,16 +39,18 @@ func_4D5E() {
 }
 
 func_C924(var_0, var_1) {
-  var_2 = var_0.var_4E;
-  self hidepart(var_0.updategamerprofileall);
-  var_3 = anglestoup(self gettagangles(var_0.updategamerprofileall));
+  var_2 = var_0.var_004E;
+  self hidepart(var_0.partname);
+  var_3 = anglestoup(self gettagangles(var_0.partname));
 }
 
 func_5670() {
   self endon("death");
   self endon("terminate_ai_threads");
+
   for(;;) {
     self waittill("dismemberment_part_died", var_0);
+
     foreach(var_2 in var_0) {
       func_5673(var_2);
     }
@@ -56,12 +60,12 @@ func_5670() {
 }
 
 func_5673(var_0) {
-  switch (var_0.updategamerprofileall) {
+  switch (var_0.partname) {
     case "right_arm":
-      break;
+      return;
   }
 
   self._blackboard.var_5663 = 1;
-  scripts\asm\asm_bb::bb_dismemberedpart(var_0.updategamerprofileall);
-  self _meth_8189(var_0.var_332);
+  scripts\asm\asm_bb::bb_dismemberedpart(var_0.partname);
+  self hidepartandchildren_allinstances(var_0.var_0332);
 }

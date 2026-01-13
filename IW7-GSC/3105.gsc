@@ -356,7 +356,7 @@ func_20DE(var_0, var_1) {
 
 func_B2E0() {
   for(;;) {
-    var_0 = func_0BCE::func_7DB5();
+    var_0 = lib_0BCE::func_7DB5();
 
     foreach(var_2 in var_0) {
       var_2.var_C1DB = 0;

@@ -1,34 +1,34 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 2569.gsc
-*********************************************/
+***********************************************/
 
 func_E477(var_0) {
-  return level.success;
+  return anim.success;
 }
 
 func_E470(var_0) {
-  return level.failure;
+  return anim.failure;
 }
 
 func_E475(var_0) {
-  return level.running;
+  return anim.running;
 }
 
 func_E478(var_0, var_1) {
   if(var_1 == 1) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_9FEE(var_0, var_1) {
   if(isDefined(var_1)) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_FAF6(var_0) {
@@ -38,49 +38,53 @@ func_FAF6(var_0) {
 
 func_5AEA(var_0, var_1) {
   var_2 = self.bt.instancedata[var_0]["waitStartTime"];
+
   if(gettime() - var_2 < var_1) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 func_8C0A(var_0, var_1) {
   var_2 = var_1;
-  if(self getpersstat(var_2)) {
-    return level.success;
+
+  if(self cansee(var_2)) {
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_13157(var_0, var_1) {
   var_2 = var_1[0];
   var_3 = var_1[1];
   var_4 = var_1[2];
+
   if(var_3 <= var_2 && var_2 <= var_4) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_DC6A(var_0, var_1) {
   var_2 = var_1[0];
   var_3 = var_1[1];
+
   if(randomint(var_2) < var_3) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 cointoss(var_0) {
   if(randomint(100) < 50) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_9309(var_0, var_1) {
@@ -95,16 +99,16 @@ func_9309(var_0, var_1) {
 
 func_9307(var_0) {
   if(scripts\asm\asm_bb::bb_isanimscripted()) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 func_930C(var_0) {
   if(scripts\asm\asm_bb::bb_isselfdestruct()) {
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }

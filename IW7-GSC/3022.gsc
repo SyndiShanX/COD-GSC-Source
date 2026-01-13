@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3022.gsc
-*********************************************/
+***********************************************/
 
 main(var_0) {
   if(!isDefined(level.var_A3B9)) {
@@ -16,17 +16,18 @@ main(var_0) {
 
 func_A22F(var_0) {
   var_1 = getEntArray("script_vehicle", "code_classname");
+
   foreach(var_3 in var_1) {
     if(isspawner(var_3) || !isaircraft(var_3) || !func_1312C(var_3)) {
       continue;
     }
-
     var_3 init();
   }
 }
 
 func_1312C(var_0) {
   var_1 = ["script_vehicle_jackal_friendly", "script_vehicle_jackal_friendly_moon", "script_vehicle_jackal_friendly_heist", "script_vehicle_jackal_friendly_pearl", "script_vehicle_jackal_friendly_marsbase_cheap", "script_vehicle_jackal_enemy", "script_vehicle_jackal_enemy_marsbase_cheap", "script_vehicle_jackal_fake_friendly", "script_vehicle_jackal_fake_enemy"];
+
   if(scripts\engine\utility::array_contains(var_1, var_0.classname)) {
     return 1;
   }
@@ -53,11 +54,12 @@ func_9639() {
 func_A2B2(var_0, var_1, var_2) {
   var_0 notify("enter_jackal");
   self setplayerangles(var_0.angles);
-  var_0.triggerportableradarping = self;
+  var_0.owner = self;
   self.ignoreme = 1;
   self remotecontrolvehicle(var_0);
   var_0 makeentitysentient(self.team, 0);
   var_0 setvehicleteam(self.team);
+
   if(isDefined(var_1)) {
     self.var_E473 = self getorigin();
     self setorigin(var_1);
@@ -75,30 +77,34 @@ func_A2B2(var_0, var_1, var_2) {
 func_A2B1(var_0) {
   self notify("exit_jackal");
   self remotecontrolvehicleoff();
+
   if(isDefined(self.var_E473)) {
     self setorigin(self.var_E473);
   }
 
   self.ignoreme = 0;
-  var_0.triggerportableradarping = undefined;
+  var_0.owner = undefined;
 }
 
 func_104FE() {
   level notify("stop_particulates");
   level endon("stop_particulates");
   thread func_104FF();
+
   for(;;) {
     var_0 = anglesToForward(level.var_D127.angles) * 300;
     playFX(scripts\engine\utility::getfx("space_particulate_player"), level.var_D127.origin + var_0);
-    wait(0.6);
+    wait 0.6;
   }
 }
 
 func_104FF() {
   level endon("stop_particulates");
+
   for(;;) {
     var_0 = level.var_D127.origin;
-    wait(0.1);
+    wait 0.1;
+
     if(distance(var_0, level.var_D127.origin) > 1) {
       var_1 = vectortoangles(level.var_D127.origin - var_0);
       var_2 = anglesToForward(var_1) * 256;
@@ -112,13 +118,15 @@ monitorboost(var_0, var_1) {
   var_1 endon("disconnect");
   var_1 endon("exit_jackal");
   var_0 endon("death");
+
   for(;;) {
-    while(!var_0.isnonentspawner) {
+    while(!var_0.spaceship_boosting) {
       scripts\engine\utility::waitframe();
     }
 
     var_1 notify("engage boost");
-    while(var_0.isnonentspawner) {
+
+    while(var_0.spaceship_boosting) {
       scripts\engine\utility::waitframe();
     }
 
@@ -129,6 +137,7 @@ monitorboost(var_0, var_1) {
 func_7DB5() {
   var_0 = [];
   var_1 = vehicle_getarray();
+
   foreach(var_3 in var_1) {
     if(isaircraft(var_3)) {
       var_0[var_0.size] = var_3;

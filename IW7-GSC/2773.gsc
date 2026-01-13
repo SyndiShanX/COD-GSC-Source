@@ -473,7 +473,7 @@ func_5005(var_0, var_1) {
   switch (var_1) {
     case "traverse":
       self.do_immediate_ragdoll = 1;
-      func_0F3C::func_5AC0();
+      lib_0F3C::func_5AC0();
       self.do_immediate_ragdoll = 0;
       break;
     default:

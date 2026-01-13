@@ -2236,7 +2236,7 @@ func_10493() {
 }
 
 func_7DB4() {
-  var_0 = func_0BCE::func_7DB5();
+  var_0 = lib_0BCE::func_7DB5();
   var_1 = level.var_90E2.var_5084;
 
   foreach(var_3 in var_1) {

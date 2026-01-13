@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3128.gsc
-*********************************************/
+***********************************************/
 
 func_33FF(var_0, var_1, var_2, var_3) {
   self.asm.footsteps = spawnStruct();
@@ -14,10 +14,9 @@ func_33FF(var_0, var_1, var_2, var_3) {
 }
 
 func_98A7() {
-  if(isDefined(level.var_C05A)) {
+  if(isDefined(anim.var_C05A)) {
     return;
   }
-
   var_0 = [];
   var_0["Cover Left"] = 90;
   var_0["Cover Right"] = -90;
@@ -55,11 +54,12 @@ reload(var_0, var_1, var_2, var_3) {
 
 func_100A9(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getrequestedweapon();
+
   if(!isDefined(var_4)) {
     return 0;
   }
 
-  if(weaponclass(self.var_394) == var_4) {
+  if(weaponclass(self.weapon) == var_4) {
     return 0;
   }
 
@@ -68,12 +68,13 @@ func_100A9(var_0, var_1, var_2, var_3) {
 
 func_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
+
   if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
     var_4 = self._blackboard.shootparams.ent.origin;
   } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = self._blackboard.shootparams.pos;
-  } else if(isDefined(self.isnodeoccupied)) {
-    var_4 = self.isnodeoccupied.origin;
+  } else if(isDefined(self.enemy)) {
+    var_4 = self.enemy.origin;
   }
 
   if(!isDefined(var_4)) {
@@ -82,8 +83,10 @@ func_BEA0(var_0, var_1, var_2, var_3) {
 
   var_5 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_6 = distancesquared(self.origin, var_4);
+
   if(var_6 < 65536) {
     var_7 = sqrt(var_6);
+
     if(var_7 > 3) {
       var_5 = var_5 + asin(-3 / var_7);
     }
@@ -100,6 +103,7 @@ _meth_81DE() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
+
   if(isDefined(self._blackboard.shootparams)) {
     if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
@@ -108,9 +112,9 @@ _meth_81DE() {
     }
   }
 
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     if(!isDefined(var_1) && !isDefined(var_2)) {
-      var_1 = self.isnodeoccupied;
+      var_1 = self.enemy;
     }
   }
 
@@ -124,6 +128,7 @@ _meth_81DE() {
 
 func_3F0A(var_0, var_1, var_2) {
   var_3 = _meth_81DE();
+
   if(var_3 < 0) {
     var_4 = "right";
   } else {
@@ -132,6 +137,7 @@ func_3F0A(var_0, var_1, var_2) {
 
   var_3 = abs(var_3);
   var_5 = 0;
+
   if(var_3 > 157.5) {
     var_5 = 180;
   } else if(var_3 > 112.5) {
@@ -153,11 +159,12 @@ func_116FF(var_0, var_1, var_2, var_3) {}
 func_D56A(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
-  var_5 = self.vehicle_getspawnerarray;
-  self orientmode("face angle abs", self.angles);
+  var_5 = self.pathgoalpos;
+  self scragentsetorientmode("face angle abs", self.angles);
   self ghostlaunched("anim deltas");
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
-  if(!isDefined(var_5) && isDefined(self.vehicle_getspawnerarray)) {
+
+  if(!isDefined(var_5) && isDefined(self.pathgoalpos)) {
     self clearpath();
   }
 
@@ -166,12 +173,13 @@ func_D56A(var_0, var_1, var_2, var_3) {
 }
 
 func_1007E(var_0, var_1, var_2, var_3) {
-  var_4 = !scripts\asm\asm_bb::bb_moverequested() && scripts\asm\shared_utility::isatcovernode();
+  var_4 = !scripts\asm\asm_bb::bb_moverequested() && scripts\asm\shared\utility::isatcovernode();
+
   if(!var_4) {
     return 0;
   }
 
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
@@ -191,13 +199,13 @@ func_CECB(var_0, var_1, var_2, var_3) {
 }
 
 func_D4B2(var_0, var_1, var_2, var_3) {
-  self gib_fx_override("noclip");
+  self scragentsetphysicsmode("noclip");
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 1);
 }
 
 func_D4B3(var_0, var_1, var_2, var_3) {
-  self gib_fx_override("noclip");
+  self scragentsetphysicsmode("noclip");
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, 0.001);
 }
@@ -216,13 +224,13 @@ func_FFF3(var_0, var_1, var_2, var_3) {
 
 func_D4EC(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "finished");
-  self gib_fx_override("noclip");
-  self orientmode("face angle abs", level.neil.angles);
-  wait(0.5);
+  self scragentsetphysicsmode("noclip");
+  self scragentsetorientmode("face angle abs", level.neil.angles);
+  wait 0.5;
   lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
 }
 
 func_116EC(var_0, var_1, var_2, var_3) {
   self notify("introanim_done");
-  self gib_fx_override("gravity");
+  self scragentsetphysicsmode("gravity");
 }

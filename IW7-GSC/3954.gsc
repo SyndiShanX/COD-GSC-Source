@@ -904,7 +904,7 @@ func_BDFB(var_0, var_1, var_2, var_3, var_4) {
 
       if(var_8) {
         if(var_2 < 1) {
-          func_0C72::func_F6C8(var_0, var_6);
+          lib_0C72::func_F6C8(var_0, var_6);
         } else {
           var_5 = 1;
         }

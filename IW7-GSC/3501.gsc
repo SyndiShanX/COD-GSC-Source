@@ -159,7 +159,7 @@ func_12889(var_0) {
   var_10.var_13CC3["land"] = var_10.var_13CC3["hover"];
   var_10 _meth_84BE("minijackal_mp");
   var_10 _meth_849E(var_10.var_13CC3["fly"]);
-  func_0BCE::func_A2B2(var_10, undefined, "hover");
+  lib_0BCE::func_A2B2(var_10, undefined, "hover");
   self _meth_8490("disable_mode_switching", 1);
   self _meth_8490("disable_juke", 1);
   self _meth_8490("disable_guns", 0);
@@ -549,7 +549,7 @@ func_B961(var_0) {
       var_0 earthquakeforplayer(0.6, 1, self.origin, 500);
     }
 
-    var_0 func_0BCE::func_A2B1(self);
+    var_0 lib_0BCE::func_A2B1(self);
     var_0 setclientomnvar("ui_minijackal_controls", 0);
     var_0 setclientomnvar("ui_killstreak_missile_warn", 0);
     var_0 setclientomnvar("ui_killstreak_countdown", 0);

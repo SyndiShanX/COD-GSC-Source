@@ -1,9 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 2557.gsc
-*********************************************/
-
-main() {}
+***********************************************/
 
 soldier() {
   level.var_7649["human_gib_fullbody"] = loadfx("vfx\iw7\core\impact\flesh\vfx_flesh_hit_body_meatbag_large.vfx");

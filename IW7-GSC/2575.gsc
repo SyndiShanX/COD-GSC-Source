@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 2575.gsc
-*********************************************/
+***********************************************/
 
 func_9898(var_0) {
   self.acceptablemeleefraction = 0.95;
@@ -12,12 +12,13 @@ func_9898(var_0) {
   self.fnmeleevsplayer_init = ::meleevsplayer_init_mp;
   self.fnmeleevsplayer_terminate = ::meleevsplayer_terminate_mp;
   self.fncanmovefrompointtopoint = ::canmovefrompointtopoint;
-  return level.success;
+  return anim.success;
 }
 
 canmovefrompointtopoint(var_0, var_1) {
   var_2 = navtrace(var_0, var_1, self, 1);
   var_3 = var_2["fraction"];
+
   if(var_3 >= self.acceptablemeleefraction) {
     var_4 = 0;
   } else {
@@ -37,6 +38,7 @@ ismeleevalid(var_0, var_1) {
   }
 
   var_2 = scripts\aitypes\melee::gettargetchargepos(var_0);
+
   if(!isDefined(var_2)) {
     return 0;
   }

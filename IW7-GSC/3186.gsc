@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3186.gsc
-*********************************************/
+***********************************************/
 
 func_566E() {}
 
@@ -97,7 +97,7 @@ func_5815(var_0, var_1) {
   self endon("death");
   self endon("terminate_ai_threads");
   self scragentsetanimscale(1, 1);
-  scripts\mp\agents\_scriptedagents::func_CED3(var_0, var_1, self.var_C081, "end");
+  scripts\anim\notetracks_mp::func_CED3(var_0, var_1, self.var_C081, "end");
 }
 
 func_9EA5() {

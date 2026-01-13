@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: 3130.gsc
-*********************************************/
+***********************************************/
 
 func_D55D(var_0, var_1, var_2, var_3) {}
 
@@ -20,21 +20,21 @@ func_D563(var_0, var_1, var_2, var_3) {
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
   var_5 = self _meth_8146();
-  self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_4.angles);
+  self scragentsetphysicsmode("noclip");
+  self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
-  self scragentsetanimscale(1, 1);
+  self scragentsetanimscale(1.0, 1.0);
   var_6 = var_5 - var_4.origin;
-  var_7 = self getsafecircleorigin(var_1, 0);
+  var_7 = self getanimentry(var_1, 0);
   var_8 = getanimlength(var_7);
   var_9 = getmovedelta(var_7);
-  var_0A = length(var_9);
-  var_0B = length(var_5 - self.origin);
-  var_0C = var_8 * var_0B / var_0A;
-  self ghostexplode(self.origin, var_5, var_0C);
+  var_10 = length(var_9);
+  var_11 = length(var_5 - self.origin);
+  var_12 = var_8 * (var_11 / var_10);
+  self ghostexplode(self.origin, var_5, var_12);
   self setanimstate(var_1, 0);
-  wait(var_0C);
-  self gib_fx_override("gravity");
+  wait(var_12);
+  self scragentsetphysicsmode("gravity");
   self notify("traverse_end");
   func_11701(var_0, var_1);
 }
@@ -44,15 +44,15 @@ playtraverseanim_gravity(var_0, var_1, var_2, var_3) {
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
   var_5 = self _meth_8146();
-  self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_4.angles);
+  self scragentsetphysicsmode("noclip");
+  self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
-  self scragentsetanimscale(1, 1);
-  var_6 = self getsafecircleorigin(var_1, 0);
+  self scragentsetanimscale(1.0, 1.0);
+  var_6 = self getanimentry(var_1, 0);
   var_7 = getanimlength(var_6);
   thread lib_0F3C::func_CEA8(var_0, var_1, var_2);
   wait(var_7 * 0.4);
-  self gib_fx_override("gravity");
+  self scragentsetphysicsmode("gravity");
   wait(var_7 * 0.6);
   self notify("traverse_end");
   func_11701(var_0, var_1);
@@ -63,13 +63,13 @@ func_D564(var_0, var_1, var_2, var_3) {
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
   var_5 = self _meth_8146();
-  self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_4.angles);
+  self scragentsetphysicsmode("noclip");
+  self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
-  self scragentsetanimscale(1, 1);
-  var_6 = self getsafecircleorigin(var_1, 0);
+  self scragentsetanimscale(1.0, 1.0);
+  var_6 = self getanimentry(var_1, 0);
   lib_0F3C::func_CEA8(var_0, var_1, var_2);
-  self gib_fx_override("gravity");
+  self scragentsetphysicsmode("gravity");
   self notify("traverse_end");
   func_11701(var_0, var_1);
 }
@@ -79,8 +79,9 @@ func_D55C(var_0, var_1, var_2, var_3) {
 }
 
 func_11701(var_0, var_1) {
-  var_2 = level.asm[var_0].states[var_1];
+  var_2 = anim.asm[var_0].states[var_1];
   var_3 = undefined;
+
   if(isarray(var_2.var_116FB)) {
     var_3 = var_2.var_116FB[0];
   } else {
