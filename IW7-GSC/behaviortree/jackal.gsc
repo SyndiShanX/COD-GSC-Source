@@ -97,7 +97,7 @@ func_2AD0() {
   var_0.var_1581[25] = ::func_A3C6;
   var_0.var_1581[26] = func_0A0D::func_1002B;
   var_0.var_1581[27] = func_0A0D::func_90F2;
-  var_0.var_1581[28] = func_0A09::func_E475;
+  var_0.var_1581[28] = lib_0A09::func_E475;
   var_0.var_1581[29] = func_0A0D::func_1003F;
   var_0.var_1581[30] = func_0A0D::func_9DE3;
   var_0.var_1581[31] = func_0A0D::func_8C2C;

@@ -987,10 +987,10 @@ func_7097(var_0, var_1, var_2, var_3) {
           var_4 = var_0 + 2;
 
           if(!isDefined(var_1.var_D8BE[var_4])) {
-            func_0A09::func_FAF6(var_4);
+            lib_0A09::func_FAF6(var_4);
           }
 
-          var_3 = func_0A09::func_5AEA(var_4, scripts\aitypes\bt_util::func_0076(var_4));
+          var_3 = lib_0A09::func_5AEA(var_4, scripts\aitypes\bt_util::func_0076(var_4));
 
           if(var_3 == anim.running) {
             var_1.var_E87F[var_4] = -1;
@@ -1667,10 +1667,10 @@ func_704E(var_0, var_1, var_2, var_3) {
           var_4 = var_0 + 5;
 
           if(!isDefined(var_1.var_D8BE[var_4])) {
-            func_0A09::func_FAF6(var_4);
+            lib_0A09::func_FAF6(var_4);
           }
 
-          var_3 = func_0A09::func_5AEA(var_4, scripts\aitypes\bt_util::func_0076(var_4));
+          var_3 = lib_0A09::func_5AEA(var_4, scripts\aitypes\bt_util::func_0076(var_4));
 
           if(var_3 == anim.running) {
             var_1.var_E87F[var_4] = -1;

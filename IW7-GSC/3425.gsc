@@ -1774,7 +1774,7 @@ func_13F53(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_5.spawner)) {
-    if(var_4 func_0C2B::func_10863()) {
+    if(var_4 lib_0C2B::func_10863()) {
       var_5.entered_playspace = 1;
     }
   }

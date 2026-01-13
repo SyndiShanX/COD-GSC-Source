@@ -48,7 +48,7 @@ func_BE5C() {
   func_09FF::bt_nativeregisterbehavior("HoverShoot", "sequence", ["jk_setFireMode::fnArgsNative24", "action", "jk_setOrientMode::fnArgsNative34", "action", "doWait::fnArgsNative44", "action"], 4);
   func_09FF::bt_nativeregisteraction("jk_setFireMode::fnArgsNative24", func_0A0D::func_F706, ::func_7182, undefined, undefined, 4);
   func_09FF::bt_nativeregisteraction("jk_setOrientMode::fnArgsNative34", func_0A0D::func_F7C9, ::func_7183, undefined, undefined, 4);
-  func_09FF::bt_nativeregisteraction("doWait::fnArgsNative44", func_0A09::func_5AEA, ::func_7184, func_0A09::func_FAF6, undefined, 4);
+  func_09FF::bt_nativeregisteraction("doWait::fnArgsNative44", lib_0A09::func_5AEA, ::func_7184, lib_0A09::func_FAF6, undefined, 4);
   func_09FF::bt_nativeregisterbehavior("ShouldGotoAndFollowSpline", "sequence", ["jk_hasSpline4", "action", "GotoAndFollowSpline", "selector"], 4);
   func_09FF::bt_nativeregisteraction("jk_hasSpline4", func_0A0D::func_8C2C, undefined, undefined, undefined, 4);
   func_09FF::bt_nativeregisterbehavior("GotoAndFollowSpline", "selector", ["ShouldFollowSpline", "sequence", "GotoSpline", "sequence"], 4);
@@ -75,7 +75,7 @@ func_BE5C() {
   func_09FF::bt_nativeregisteraction("jk_passEnemy4", func_0A0D::func_C936, undefined, undefined, undefined, 4);
   func_09FF::bt_nativeregisteraction("jk_setOrientMode::fnArgsNative34", func_0A0D::func_F7C9, ::func_7183, undefined, undefined, 4);
   func_09FF::bt_nativeregisteraction("jk_setFireMode::fnArgsNative24", func_0A0D::func_F706, ::func_7182, undefined, undefined, 4);
-  func_09FF::bt_nativeregisteraction("doWait::fnArgsNative64", func_0A09::func_5AEA, ::func_7186, func_0A09::func_FAF6, undefined, 4);
+  func_09FF::bt_nativeregisteraction("doWait::fnArgsNative64", lib_0A09::func_5AEA, ::func_7186, lib_0A09::func_FAF6, undefined, 4);
   func_09FF::bt_nativeregisterbehavior("AttackStrafe", "active_sequence", ["jk_shouldContinueAttacking4", "action", "jk_stayAtOptimalDistance4", "action", "jk_findAndSetGoal::fnArgsNative74", "action", "jk_setBoostMode::fnArgsNative84", "action", "jk_setGoalRadius::fnArgsNative94", "action", "jk_setFireMode::fnArgsNative24", "action", "jk_waitForGoal4", "action"], 4);
   func_09FF::bt_nativeregisteraction("jk_shouldContinueAttacking4", func_0A0D::func_FFD6, undefined, undefined, undefined, 4);
   func_09FF::bt_nativeregisteraction("jk_stayAtOptimalDistance4", func_0A0D::func_10E66, undefined, undefined, undefined, 4);
