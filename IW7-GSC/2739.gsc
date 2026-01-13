@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2739.gsc
-***************************************/
+**************************************/
 
 main() {
   scripts\mp\global_fx_code::global_fx("ch_streetlight_02_FX_origin", "vfx\misc\lighthaze");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3950.gsc
-************************/
+*********************************************/
 
 registerscriptedagent() {
   scripts\aitypes\bt_util::init();

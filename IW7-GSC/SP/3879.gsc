@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3879.gsc
-************************/
+*********************************************/
 
 func_79F5(var_0) {
   if(!isDefined(level.var_10E6D.group.groups[var_0])) {

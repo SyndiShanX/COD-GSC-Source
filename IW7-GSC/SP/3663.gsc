@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3663.gsc
-************************/
+*********************************************/
 
 func_9755(var_0) {
   if(!level.player scripts\sp\utility::func_65DF("pressurized")) {

@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_analytics.gsc
-***************************************/
+*********************************************/
 
 start_game_type(var_0, var_1, var_2) {
   init(var_2);

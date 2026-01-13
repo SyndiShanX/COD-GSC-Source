@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3560.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["sonicPulseImpact"] = loadfx("vfx\iw7\_requests\mp_effects\vfx_force_push_distortion");

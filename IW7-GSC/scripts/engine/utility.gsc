@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\engine\utility.gsc
-**************************************/
+*********************************************/
 
 noself_func(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level.func)) {

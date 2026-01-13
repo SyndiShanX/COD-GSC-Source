@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_interaction.gsc
-*****************************************/
+*********************************************/
 
 coop_interaction_pregame() {
   func_96E3();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3381.gsc
-************************/
+*********************************************/
 
 init_knifethrow_game() {
   level._effect["shot_impact"] = loadfx("vfx\iw7\core\zombie\blood\vfx_zmb_blood_frontend.vfx");

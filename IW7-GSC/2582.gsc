@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2582.gsc
-************************/
+*********************************************/
 
 func_98D2() {
   self.bt.var_EB89 = spawnStruct();

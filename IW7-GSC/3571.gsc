@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3571.gsc
-***************************************/
+**************************************/
 
 func_BFBE() {
   level._effect["niagara_expl"] = loadfx("vfx\iw7\_requests\mp\power\vfx_niagara_airburst_expl");

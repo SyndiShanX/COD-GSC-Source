@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3636.gsc
-************************/
+*********************************************/
 
 func_2A2D() {
   func_2A30();

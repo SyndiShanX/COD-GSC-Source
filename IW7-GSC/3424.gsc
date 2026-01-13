@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3424.gsc
-************************/
+*********************************************/
 
 func_13F54() {
   scripts\engine\utility::flag_init("spawn_point_score_data_init_done");

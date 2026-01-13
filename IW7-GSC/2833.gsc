@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2833.gsc
-************************/
+*********************************************/
 
 func_37A9() {
   precachemodel("fx_org_view");

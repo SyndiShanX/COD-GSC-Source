@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2670.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["medusa_death"] = loadfx("vfx\core\base\vfx_alien_soul_fly.vfx");

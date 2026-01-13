@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3335.gsc
-************************/
+*********************************************/
 
 c4_used(var_0) {
   self endon("disconnect");

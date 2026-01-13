@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\traverse\shared.gsc
-********************************************/
+*********************************************/
 
 func_18D1(var_0, var_1) {
   self.var_5270 = "crouch";

@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\melee.gsc
-******************************************/
+*********************************************/
 
 setupstandmeleebtaction(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {

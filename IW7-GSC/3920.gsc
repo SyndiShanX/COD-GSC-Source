@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3920.gsc
-***************************************/
+**************************************/
 
 main() {
   level._effect["vfx_zmb_gns_ghost_float_arms"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_arms.vfx");

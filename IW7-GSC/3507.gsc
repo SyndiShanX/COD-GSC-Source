@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3507.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_fastsprintrecovery_ks", ::tryuseperkstreak);

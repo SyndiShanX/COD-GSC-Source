@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2914.gsc
-************************/
+*********************************************/
 
 func_96E9(var_0, var_1, var_2) {
   if(isDefined(var_0)) {

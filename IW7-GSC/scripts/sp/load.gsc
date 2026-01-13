@@ -1,8 +1,7 @@
-/*******************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\load.gsc
-*******************************/
+*********************************************/
 
 main() {
   lib_0A2F::func_9789();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4090.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_glare_01_skyway_close"] = loadfx("vfx\iw7\levels\mp_skyway\vfx_glare_01_skyway_close.vfx");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3138.gsc
-************************/
+*********************************************/
 
 func_35A6(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.var_362A)) {

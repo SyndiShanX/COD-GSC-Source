@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3137.gsc
-************************/
+*********************************************/
 
 func_3629() {
   anim.var_362A = [];

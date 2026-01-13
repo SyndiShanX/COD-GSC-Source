@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2559.gsc
-************************/
+*********************************************/
 
 func_006E(var_0, var_1, var_2, var_3) {
   var_4 = level.invalid;

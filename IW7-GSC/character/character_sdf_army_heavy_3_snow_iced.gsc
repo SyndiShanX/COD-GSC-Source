@@ -1,6 +1,5 @@
 /**************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: character\character_sdf_army_heavy_3_snow_iced.gsc
 **************************************************************/
 

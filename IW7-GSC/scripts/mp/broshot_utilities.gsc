@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\broshot_utilities.gsc
-********************************************/
+*********************************************/
 
 processepictaunt(var_0, var_1, var_2) {
   if(var_1 >= 0 && isDefined(level.camera_bro_shot.char_loc)) {

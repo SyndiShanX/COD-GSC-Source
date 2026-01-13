@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 965.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_civ_facility_worker_lt");

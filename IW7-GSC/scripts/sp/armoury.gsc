@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\armoury.gsc
-**********************************/
+*********************************************/
 
 func_952F() {
   func_2237();

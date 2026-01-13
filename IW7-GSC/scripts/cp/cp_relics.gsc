@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_relics.gsc
-************************************/
+*********************************************/
 
 func_DEE0() {
   level.updateonkillpassivesfunc = ::func_12EDF;

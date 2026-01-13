@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2958.gsc
-************************/
+*********************************************/
 
 func_977D() {
   if(!scripts\engine\utility::add_init_script("player_thermal", ::func_977D)) {

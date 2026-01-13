@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3629.gsc
-************************/
+*********************************************/
 
 func_112B5() {
   precachemodel("veh_mil_air_un_pocketdrone");

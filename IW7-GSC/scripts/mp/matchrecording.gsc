@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\matchrecording.gsc
-*****************************************/
+*********************************************/
 
 init() {
   var_0 = getdvarint("scr_match_recording", 0);

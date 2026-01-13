@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\gestures.gsc
-***********************************/
+*********************************************/
 
 init() {
   level.var_77C0 = [];

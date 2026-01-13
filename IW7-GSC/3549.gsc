@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3549.gsc
-************************/
+*********************************************/
 
 c4_set(var_0) {
   thread c4_watchforaltdetonation();

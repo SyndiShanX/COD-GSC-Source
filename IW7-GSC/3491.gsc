@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3491.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\helicopter_guard::func_AADA();

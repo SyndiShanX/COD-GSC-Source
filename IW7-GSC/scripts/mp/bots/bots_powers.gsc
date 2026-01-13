@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\bots\bots_powers.gsc
-*******************************************/
+*********************************************/
 
 func_2E53() {
   level.var_2D1C = [];

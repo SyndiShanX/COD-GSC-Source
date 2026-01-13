@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4072.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_fire_sml_nosmk"] = loadfx("vfx\iw7\levels\mp_riot\vfx_fire_sml_nosmk.vfx");

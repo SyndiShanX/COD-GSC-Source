@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2262.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_sdf_army_light_2_kotch");

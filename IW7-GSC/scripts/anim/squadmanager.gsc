@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\squadmanager.gsc
-*****************************************/
+*********************************************/
 
 func_9763() {
   if(isDefined(level.var_10AE6) && level.var_10AE6) {

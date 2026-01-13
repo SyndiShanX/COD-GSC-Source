@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\snowmobile.gsc
-***************************************/
+*********************************************/
 
 main() {
   self.var_4B71 = "none";

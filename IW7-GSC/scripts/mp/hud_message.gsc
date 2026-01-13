@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\hud_message.gsc
-**************************************/
+*********************************************/
 
 init() {
   game["round_end"]["draw"] = 1;

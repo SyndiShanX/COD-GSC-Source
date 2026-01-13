@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3408.gsc
-************************/
+*********************************************/
 
 try_collect_from_lost_and_found(var_0, var_1) {
   if(scripts\engine\utility::istrue(var_1.have_things_in_lost_and_found) && can_collect_lost_and_found_items(var_1) && isDefined(var_1.lost_and_found_spot) && var_1.lost_and_found_spot == var_0) {

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3375.gsc
-************************/
+*********************************************/
 
 init_beam_trap() {
   level.beamtrapuses = 0;

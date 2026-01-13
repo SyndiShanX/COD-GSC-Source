@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2709.gsc
-***************************************/
+**************************************/
 
 shouldlogcodcasterclientmatchdata() {
   return getdvarint("com_codcasterEnabled", 0) == 1 && getdvarint("systemlink");

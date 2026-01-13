@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2691.gsc
-***************************************/
+**************************************/
 
 init() {
   if(getdvarint("prototype_adrenaline_enabled") == 1 && level.rankedmatch) {

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2606.gsc
-***************************************/
+**************************************/
 
 setmodelfromarray(var_0) {
   self setModel(var_0[randomint(var_0.size)]);

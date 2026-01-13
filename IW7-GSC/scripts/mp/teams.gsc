@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\teams.gsc
-********************************/
+*********************************************/
 
 init() {
   level.teambalance = getdvarint("scr_teambalance");

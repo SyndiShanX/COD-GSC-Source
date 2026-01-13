@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3885.gsc
-************************/
+*********************************************/
 
 func_1355D() {
   precachemodel("vr_unfold_left_rig");

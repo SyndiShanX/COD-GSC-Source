@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2586.gsc
-************************/
+*********************************************/
 
 asm_globalinit() {
   if(isDefined(level.asm)) {

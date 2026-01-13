@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3080.gsc
-************************/
+*********************************************/
 
 func_7FD3() {
   if(isDefined(self.var_10AB7) && self.var_10AB7) {

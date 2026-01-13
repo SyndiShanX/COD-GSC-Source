@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2370.gsc
-************************/
+*********************************************/
 
 main() {
   var_0[0] = "body_un_moon_guards_loadout_a";

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2580.gsc
-************************/
+*********************************************/
 
 func_98C5(var_0) {
   self.var_10264 = 1;

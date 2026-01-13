@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2912.gsc
-************************/
+*********************************************/
 
 func_96DC() {
   precacheshader("hud_icon_grenade_incoming_frag_sp");

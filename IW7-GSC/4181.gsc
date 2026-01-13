@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 4181.gsc
-***************************************/
+**************************************/
 
 main() {
   func_0BAD::main("veh_mil_air_ca_destroyer_rig", undefined, "script_vehicle_capitalship_destroyer_ca");

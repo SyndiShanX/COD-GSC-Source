@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2750.gsc
-***************************************/
+**************************************/
 
 callback_hostmigration() {
   level.hostmigrationreturnedplayercount = 0;

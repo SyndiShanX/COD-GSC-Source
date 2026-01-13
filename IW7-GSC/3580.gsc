@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3580.gsc
-************************/
+*********************************************/
 
 func_DAF5(var_0) {
   thread func_13A55(var_0);

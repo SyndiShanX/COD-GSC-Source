@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\c12.gsc
-********************************/
+*********************************************/
 
 func_3643(var_0) {
   return lib_0C08::func_8C25(var_0, 1);

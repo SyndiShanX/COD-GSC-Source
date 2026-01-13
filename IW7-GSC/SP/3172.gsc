@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3172.gsc
-************************/
+*********************************************/
 
 func_9D87(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee) && isDefined(self.melee.var_2FB1);

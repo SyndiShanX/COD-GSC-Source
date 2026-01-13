@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2497.gsc
-************************/
+*********************************************/
 
 main() {
   var_0[0] = "head_sc_kloos";

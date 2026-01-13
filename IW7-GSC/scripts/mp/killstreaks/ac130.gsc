@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreaks\ac130.gsc
-********************************************/
+*********************************************/
 
 init() {
   level.ac130_use_duration = 40;

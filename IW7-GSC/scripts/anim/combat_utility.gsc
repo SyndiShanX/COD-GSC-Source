@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\combat_utility.gsc
-*******************************************/
+*********************************************/
 
 _meth_8197(var_0) {
   var_1 = self getshootatpos() + (0, 0, -3);

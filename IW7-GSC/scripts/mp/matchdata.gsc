@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\matchdata.gsc
-************************************/
+*********************************************/
 
 init() {
   if(!isDefined(game["gamestarted"])) {

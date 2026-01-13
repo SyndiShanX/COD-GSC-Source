@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3450.gsc
-***************************************/
+**************************************/
 
 bot_killstreak_sentry(var_0, var_1, var_2, var_3) {
   self endon("bot_sentry_exited");

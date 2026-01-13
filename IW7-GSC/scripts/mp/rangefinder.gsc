@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\rangefinder.gsc
-**************************************/
+*********************************************/
 
 runmprangefinder() {
   precachemodel("mw_rangefinder_soldier");

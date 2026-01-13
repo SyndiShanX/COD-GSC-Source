@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2928.gsc
-************************/
+*********************************************/
 
 func_1032A() {
   if(!scripts\engine\utility::add_init_script("slowmo", ::func_1032A)) {

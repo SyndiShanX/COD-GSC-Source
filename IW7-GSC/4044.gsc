@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4044.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_metr_utility_light_flare"] = loadfx("vfx\iw7\levels\mp_metropolis\vfx_metr_utility_light_flare.vfx");

@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreaks\_odin.gsc
-********************************************/
+*********************************************/
 
 init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("odin_support", ::func_128F1);

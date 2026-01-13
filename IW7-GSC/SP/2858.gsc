@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2858.gsc
-************************/
+*********************************************/
 
 func_B9D3() {
   scripts\engine\utility::flag_init("primary_equipment_input_down");

@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_damage.gsc
-************************************/
+*********************************************/
 
 updatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(level.friendly_damage_check) && [[level.friendly_damage_check]](var_4, var_5, var_6)) {

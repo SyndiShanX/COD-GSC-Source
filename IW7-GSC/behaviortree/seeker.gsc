@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\seeker.gsc
-***********************************/
+*********************************************/
 
 func_F170(var_0) {
   return scripts\aitypes\melee::melee_init(var_0, self.bt.var_F15D);

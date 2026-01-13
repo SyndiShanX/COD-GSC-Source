@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\exit_node.gsc
-**************************************/
+*********************************************/
 
 func_10DCA() {
   if(isDefined(self.custommovetransition)) {

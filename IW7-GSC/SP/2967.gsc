@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2967.gsc
-************************/
+*********************************************/
 
 lights_on(var_0, var_1) {
   var_2 = strtok(var_0, " ");

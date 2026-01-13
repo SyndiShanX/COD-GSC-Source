@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\geo_mover.gsc
-************************************/
+*********************************************/
 
 func_12764(var_0) {
   if(!isDefined(level.var_BCDB)) {

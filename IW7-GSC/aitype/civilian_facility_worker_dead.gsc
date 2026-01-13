@@ -1,6 +1,5 @@
 /****************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\civilian_facility_worker_dead.gsc
 ****************************************************/
 

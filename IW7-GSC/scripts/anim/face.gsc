@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\face.gsc
-*********************************/
+*********************************************/
 
 saygenericdialogue(var_0) {
   if(self.unittype != "soldier" && self.unittype != "c6") {

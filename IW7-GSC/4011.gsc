@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4011.gsc
-************************/
+*********************************************/
 
 main() {
   precachempanim("IW7_cp_frontend_feeding_walk_off_civ");

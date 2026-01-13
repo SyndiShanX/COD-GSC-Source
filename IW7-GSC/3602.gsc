@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3602.gsc
-************************/
+*********************************************/
 
 _meth_8543() {
   level thread _meth_8545();

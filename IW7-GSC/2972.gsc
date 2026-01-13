@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2972.gsc
-************************/
+*********************************************/
 
 func_13BFD() {
   var_0 = getEntArray();

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2676.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["candypile_fire"] = loadfx("vfx\iw7\_requests\coop\zmb_candypile_fire.vfx");

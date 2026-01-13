@@ -1,6 +1,5 @@
 /***************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\zombie_dlc1\zombie_dlc1_agent.gsc
 ***************************************************************/
 

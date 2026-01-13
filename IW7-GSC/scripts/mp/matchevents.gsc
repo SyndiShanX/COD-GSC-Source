@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\matchevents.gsc
-**************************************/
+*********************************************/
 
 init() {
   level.var_B3DA["smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3115.gsc
-************************/
+*********************************************/
 
 func_98E5(var_0) {
   if(isDefined(self.spawner) && self.spawner func_10863()) {

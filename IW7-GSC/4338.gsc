@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4338.gsc
-************************/
+*********************************************/
 
 main() {
   var_0 = scripts\engine\utility::createoneshoteffect("vfx_trash_drift_01");

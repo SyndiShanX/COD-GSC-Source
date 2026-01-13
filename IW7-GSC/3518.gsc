@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3518.gsc
-***************************************/
+**************************************/
 
 init() {
   level.remoteuav_fx["hit"] = loadfx("vfx\core\impacts\large_metal_painted_hit");

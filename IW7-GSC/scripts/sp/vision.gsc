@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\vision.gsc
-*********************************/
+*********************************************/
 
 func_979C() {
   if(!isDefined(level.var_13483)) {

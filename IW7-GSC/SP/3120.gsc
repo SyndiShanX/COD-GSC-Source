@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3120.gsc
-************************/
+*********************************************/
 
 _meth_80A1() {
   var_0 = [];

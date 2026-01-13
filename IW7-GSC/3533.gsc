@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3533.gsc
-************************/
+*********************************************/
 
 func_1664() {
   if(!isDefined(level.var_1668)) {

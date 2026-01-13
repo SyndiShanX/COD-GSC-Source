@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\utility.gsc
-**********************************/
+*********************************************/
 
 exploder_sound() {
   if(isDefined(self.script_delay)) {

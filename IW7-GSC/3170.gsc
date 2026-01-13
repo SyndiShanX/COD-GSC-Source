@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3170.gsc
-************************/
+*********************************************/
 
 _meth_811C() {
   if(isDefined(self.var_130A9)) {

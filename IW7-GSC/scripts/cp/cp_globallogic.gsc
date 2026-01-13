@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_globallogic.gsc
-*****************************************/
+*********************************************/
 
 init() {
   scripts\engine\utility::struct_class_init();

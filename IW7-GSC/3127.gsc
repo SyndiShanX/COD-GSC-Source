@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3127.gsc
-************************/
+*********************************************/
 
 func_3EE5(var_0, var_1, var_2) {
   return lib_0F3C::func_3EF4(var_0, var_1, var_2);

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3958.gsc
-***************************************/
+**************************************/
 
 registerscriptedagent() {
   scripts\aitypes\bt_util::init();

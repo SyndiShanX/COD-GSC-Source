@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2998.gsc
-***************************************/
+**************************************/
 
 func_12A89() {
   scripts\engine\utility::flag_init("show_capital_turrets");

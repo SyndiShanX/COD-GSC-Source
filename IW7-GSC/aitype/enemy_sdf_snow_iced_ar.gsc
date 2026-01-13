@@ -1,6 +1,5 @@
 /*********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\enemy_sdf_snow_iced_ar.gsc
 *********************************************/
 

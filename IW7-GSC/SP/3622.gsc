@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3622.gsc
-************************/
+*********************************************/
 
 func_972B() {
   setdvarifuninitialized("debug_seeker", 0);

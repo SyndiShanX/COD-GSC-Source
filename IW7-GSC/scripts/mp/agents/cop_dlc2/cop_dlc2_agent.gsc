@@ -1,6 +1,5 @@
 /*********************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\cop_dlc2\cop_dlc2_agent.gsc
 *********************************************************/
 

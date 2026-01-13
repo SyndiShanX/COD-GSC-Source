@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3985.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_desert_periph_jackal_01"] = loadfx("vfx\iw7\levels\mp_desert\vfx_desert_periph_jackal_01.vfx");

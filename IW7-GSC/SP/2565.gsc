@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2565.gsc
-************************/
+*********************************************/
 
 func_360D(var_0, var_1, var_2, var_3) {
   if(isarray(var_1)) {

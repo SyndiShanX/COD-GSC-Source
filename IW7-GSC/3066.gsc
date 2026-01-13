@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3066.gsc
-************************/
+*********************************************/
 
 func_8987(var_0) {
   if(!isDefined(var_0) || var_0 == 0) {

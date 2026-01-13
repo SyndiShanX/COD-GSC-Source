@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2997.gsc
-***************************************/
+**************************************/
 
 main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::func_31C5("capital_ship", var_0, var_1, var_2);

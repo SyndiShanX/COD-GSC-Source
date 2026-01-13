@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3447.gsc
-************************/
+*********************************************/
 
 func_8995(var_0, var_1) {
   thread scripts\mp\bots\_bots_powers::useprompt(var_0, var_1, 450, ::func_1307D);

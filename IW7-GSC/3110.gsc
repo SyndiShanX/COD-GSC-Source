@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3110.gsc
-************************/
+*********************************************/
 
 func_98CB(var_0) {
   if(!isDefined(self.var_9F46)) {

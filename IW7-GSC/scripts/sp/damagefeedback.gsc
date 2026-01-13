@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\damagefeedback.gsc
-*****************************************/
+*********************************************/
 
 init() {
   precacheshader("damage_feedback_thin");

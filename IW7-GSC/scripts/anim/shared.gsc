@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\shared.gsc
-***********************************/
+*********************************************/
 
 placeweaponon(var_0, var_1, var_2) {
   self notify("weapon_position_change");

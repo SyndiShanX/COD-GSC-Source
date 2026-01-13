@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3168.gsc
-************************/
+*********************************************/
 
 func_4E4A() {
   if(!isDefined(self._blackboard.var_AB58)) {

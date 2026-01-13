@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3825.gsc
-************************/
+*********************************************/
 
 func_9739() {
   level.var_FDBE = spawnStruct();

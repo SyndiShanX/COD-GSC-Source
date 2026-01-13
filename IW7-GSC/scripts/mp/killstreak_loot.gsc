@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreak_loot.gsc
-******************************************/
+*********************************************/
 
 init() {
   level.var_110EC = spawnStruct();

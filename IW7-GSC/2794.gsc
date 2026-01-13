@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2794.gsc
-***************************************/
+**************************************/
 
 func_FC58() {
   level._effect["shard_ball_rocket_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_launch_trail.vfx");

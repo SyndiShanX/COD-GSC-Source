@@ -1,6 +1,5 @@
 /*******************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\maps\cp_town\gen\cp_town_art.gsc
 *******************************************************/
 

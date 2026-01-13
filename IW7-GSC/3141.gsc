@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3141.gsc
-************************/
+*********************************************/
 
 func_BEA0(var_0, var_1, var_2, var_3) {
   self._blackboard.var_5279 = undefined;

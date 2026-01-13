@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\intel.gsc
-********************************/
+*********************************************/
 
 init() {
   scripts\mp\intelchallenges::func_DEF9();

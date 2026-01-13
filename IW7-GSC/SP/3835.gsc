@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3835.gsc
-************************/
+*********************************************/
 
 func_FE05() {
   if(!isDefined(level.var_FD6E)) {

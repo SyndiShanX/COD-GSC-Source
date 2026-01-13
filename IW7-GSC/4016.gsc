@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4016.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_gn_sprinkler_spray_rainbow"] = loadfx("vfx\iw7\levels\mp_geneva\vfx_gn_sprinkler_spray_rainbow.vfx");

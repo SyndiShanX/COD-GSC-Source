@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\player_stats.gsc
-***************************************/
+*********************************************/
 
 func_9768() {
   self.var_10E53["kills"] = 0;

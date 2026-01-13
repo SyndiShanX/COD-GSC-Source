@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3257.gsc
-************************/
+*********************************************/
 
 main() {
   scripts\mp\agents\zombie\zmb_zombie_agent::registerscriptedagent();

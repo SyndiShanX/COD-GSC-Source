@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 8.gsc
-***************************************/
+**************************************/
 
 codecallback_agentadded() {
   self[[level.initagentscriptvariables]]();

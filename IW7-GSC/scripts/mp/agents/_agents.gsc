@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\_agents.gsc
-*****************************************/
+*********************************************/
 
 main() {
   if(isDefined(level.createfx_enabled) && level.createfx_enabled) {

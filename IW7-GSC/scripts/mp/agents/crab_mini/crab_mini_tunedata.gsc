@@ -1,6 +1,5 @@
 /**************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\crab_mini\crab_mini_tunedata.gsc
 **************************************************************/
 

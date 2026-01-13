@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\weaponlist.gsc
-***************************************/
+*********************************************/
 
 usingautomaticweapon() {
   return weaponisauto(self.var_394) || weaponisbeam(self.var_394) || weaponburstcount(self.var_394) > 0;

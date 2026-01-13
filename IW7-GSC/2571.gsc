@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2571.gsc
-************************/
+*********************************************/
 
 func_98C9(var_0) {
   if(!isDefined(self._blackboard.scriptableparts)) {

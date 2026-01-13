@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3524.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("team_ammo_refill", ::func_12908);

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3662.gsc
-************************/
+*********************************************/
 
 func_96F1() {
   level.player.var_3D4C = [];

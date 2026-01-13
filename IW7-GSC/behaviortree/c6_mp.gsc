@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\c6_mp.gsc
-**********************************/
+*********************************************/
 
 func_3387(var_0) {
   return scripts\aitypes\combat::func_9E8B(var_0, 0);

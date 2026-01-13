@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3655.gsc
-************************/
+*********************************************/
 
 func_4D8A() {
   self.var_4D8B = 1;

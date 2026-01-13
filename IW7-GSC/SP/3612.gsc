@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3612.gsc
-************************/
+*********************************************/
 
 func_200A() {
   level._effect["impact_shock"] = loadfx("vfx\iw7\core\impact\custom\vfx_imp_cstm_antigrav_barrel.vfx");

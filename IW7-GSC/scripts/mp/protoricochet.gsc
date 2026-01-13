@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\protoricochet.gsc
-****************************************/
+*********************************************/
 
 func_E4E3() {
   level.var_E4DF = [];

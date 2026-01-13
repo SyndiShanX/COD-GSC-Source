@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreaks\_thor.gsc
-********************************************/
+*********************************************/
 
 init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("thor", ::func_12909, undefined, undefined, undefined, ::func_13C8E, undefined, ::func_13099, ::weaponswitchendedairstrike);

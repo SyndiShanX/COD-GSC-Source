@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2498.gsc
-************************/
+*********************************************/
 
 main() {
   var_0[0] = "head_bg_var_head_sc_kloos_blast_damage";

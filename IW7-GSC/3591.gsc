@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3591.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["telereap_trail"] = loadfx("vfx\old\_requests\mp_weapons\vfx_knife_tele_start_blue");

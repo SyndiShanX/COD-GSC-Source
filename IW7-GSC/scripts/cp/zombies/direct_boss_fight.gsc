@@ -1,6 +1,5 @@
 /****************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\zombies\direct_boss_fight.gsc
 ****************************************************/
 

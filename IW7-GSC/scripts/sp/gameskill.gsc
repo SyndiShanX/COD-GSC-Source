@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\gameskill.gsc
-************************************/
+*********************************************/
 
 func_95F9() {
   if(!scripts\engine\utility::add_init_script("gameskill", ::func_95F9)) {

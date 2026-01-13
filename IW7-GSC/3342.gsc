@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3342.gsc
-************************/
+*********************************************/
 
 init() {
   level.kinetic_pulse_fx = [];

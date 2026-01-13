@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 4391.gsc
-***************************************/
+**************************************/
 
 main() {
   var_0 = scripts\engine\utility::createoneshoteffect("vfx_ph_sky_exit_cloud_03_player");

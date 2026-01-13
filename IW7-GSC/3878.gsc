@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3878.gsc
-************************/
+*********************************************/
 
 func_117D3(var_0) {
   var_1 = isDefined(level.var_10E6D.var_117C3) && level.var_10E6D.var_117C3;

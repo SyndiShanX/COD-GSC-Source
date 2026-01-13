@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\friendlyfire.gsc
-***************************************/
+*********************************************/
 
 main() {
   level.friendlyfire["min_participation"] = -200;

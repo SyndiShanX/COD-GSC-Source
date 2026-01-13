@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3625.gsc
-************************/
+*********************************************/
 
 func_87ED(var_0) {
   level.player.var_885C = 1;

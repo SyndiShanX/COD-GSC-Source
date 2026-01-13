@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3403.gsc
-************************/
+*********************************************/
 
 devfindhost() {
   var_0 = undefined;

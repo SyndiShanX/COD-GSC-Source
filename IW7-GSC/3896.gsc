@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3896.gsc
-************************/
+*********************************************/
 
 func_B063(var_0, var_1, var_2, var_3) {
   self setscriptablepartstate("run", "active", 0);

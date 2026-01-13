@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2572.gsc
-************************/
+*********************************************/
 
 func_10020(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("grenade response", "return throw", 0)) {

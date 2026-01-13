@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3166.gsc
-************************/
+*********************************************/
 
 func_FFD9() {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() == "exposed" && isDefined(self.isnodeoccupied) && isDefined(self.target_getindexoftarget);

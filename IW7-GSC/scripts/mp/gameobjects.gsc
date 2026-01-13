@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\gameobjects.gsc
-**************************************/
+*********************************************/
 
 main(var_0) {
   var_0[var_0.size] = "airdrop_pallet";

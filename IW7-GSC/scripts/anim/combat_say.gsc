@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\combat_say.gsc
-***************************************/
+*********************************************/
 
 func_7745() {
   scripts\anim\battlechatter::func_CEE8();

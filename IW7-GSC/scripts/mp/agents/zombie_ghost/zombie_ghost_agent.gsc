@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*****************************************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3961.gsc
-************************/
+*****************************************************************/
 
 registerscriptedagent() {
   level.zombie_ghost_hide_nodes = scripts\engine\utility::getstructarray("zombie_ghost_hide_node", "script_noteworthy");

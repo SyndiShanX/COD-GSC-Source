@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/**************************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3116.gsc
-************************/
+**************************************************/
 
 initzombiebrute(var_0) {
   self.moveratescale = 1;

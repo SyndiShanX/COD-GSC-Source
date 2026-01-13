@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3503.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("mrsiartillery", ::func_12906);

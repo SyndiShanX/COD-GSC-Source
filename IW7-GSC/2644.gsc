@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2644.gsc
-************************/
+*********************************************/
 
 init_gamescore() {
   register_scoring_mode();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3167.gsc
-************************/
+*********************************************/
 
 func_10097(var_0, var_1, var_2, var_3) {
   return isDefined(self.asm.var_4C86.var_92FA) && scripts\asm\asm::func_232B(var_1, "end");

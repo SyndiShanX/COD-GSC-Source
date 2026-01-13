@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3573.gsc
-************************/
+*********************************************/
 
 init() {
   scripts\mp\powerloot::func_DF06("power_opticWave", ["passive_increased_duration", "passive_increased_range", "passive_increased_speed"]);

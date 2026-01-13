@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3627.gsc
-************************/
+*********************************************/
 
 func_C32F() {
   precacheitem("offhandshield");

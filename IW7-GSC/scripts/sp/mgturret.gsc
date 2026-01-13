@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\mgturret.gsc
-***********************************/
+*********************************************/
 
 func_967C() {
   level.var_B6C2["easy"]["convergenceTime"] = 2.5;

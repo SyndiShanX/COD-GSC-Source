@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\detonategrenades.gsc
-*******************************************/
+*********************************************/
 
 init() {
   level.var_7649["c4_light_blink"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");

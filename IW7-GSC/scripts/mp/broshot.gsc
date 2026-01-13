@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\broshot.gsc
-**********************************/
+*********************************************/
 
 initbroshotfx() {
   level._effect["FX_BRO_LIGHT"] = loadfx("vfx\iw7\_requests\mp\broshot\vfx_bs_light_fill.vfx");

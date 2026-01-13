@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3569.gsc
-************************/
+*********************************************/
 
 func_BB80() {
   level._effect["mortarMount_path_fr"] = loadfx("vfx\iw7\_requests\mp\power\vfx_mortar_mount_trail_fr");

@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\zombie_grey.gsc
-****************************************/
+*********************************************/
 
 func_13F2F(var_0) {
   return scripts\aitypes\combat::func_9E8B(var_0, 0);

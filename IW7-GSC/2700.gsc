@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2700.gsc
-***************************************/
+**************************************/
 
 init() {
   if(level.teambased && !isDefined(level.nobuddyspawns)) {

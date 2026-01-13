@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3396.gsc
-***************************************/
+**************************************/
 
 enter_afterlife_arcade(var_0) {
   if(isDefined(level.rewind_afterlife_func)) {

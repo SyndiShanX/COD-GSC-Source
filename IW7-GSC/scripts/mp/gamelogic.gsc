@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: scripts\mp\gamelogic.gsc
-***************************************/
+**************************************/
 
 func_C530(var_0) {
   if(isDefined(level.var_72F2)) {

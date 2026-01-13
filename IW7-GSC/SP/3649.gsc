@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3649.gsc
-************************/
+*********************************************/
 
 func_F701() {
   level.player setperk("specialty_fastreload", 1);

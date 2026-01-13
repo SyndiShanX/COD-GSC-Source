@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\enemy_c6_ar.gsc
-**********************************/
+*********************************************/
 
 main() {
   self.var_17DB = "ai\\c6_assets.csv";

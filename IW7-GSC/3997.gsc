@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3997.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_fallen_sun"] = loadfx("vfx\iw7\levels\mp_fallen\vfx_fallen_sun.vfx");

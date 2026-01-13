@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3081.gsc
-************************/
+*********************************************/
 
 func_97F9() {
   self.var_71A1 = ::func_5673;

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3171.gsc
-************************/
+*********************************************/
 
 func_D899() {
   self endon("kill_long_death");

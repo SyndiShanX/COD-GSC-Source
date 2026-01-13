@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2822.gsc
-************************/
+*********************************************/
 
 init() {
   if(!isDefined(level.var_EC8D)) {

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2902.gsc
-***************************************/
+**************************************/
 
 func_BE57(var_0, var_1, var_2) {
   setdvarifuninitialized("narrative_debug", 0);

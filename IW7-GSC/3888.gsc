@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3888.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_vr_enemy_death"] = loadfx("vfx\iw7\levels\vr\vfx_vr_enemy_death_01.vfx");

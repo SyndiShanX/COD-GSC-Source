@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\_adrenalinemist.gsc
-******************************************/
+*********************************************/
 
 func_18A0() {
   level._effect["adrenaline_mist_friendly"] = loadfx("vfx\core\mp\equipment\vfx_adrenaline_device_mist_friend");

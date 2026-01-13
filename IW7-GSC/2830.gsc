@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2830.gsc
-***************************************/
+**************************************/
 
 main() {
   if(!scripts\engine\utility::add_init_script("autosave", ::main)) {

@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\common\elevator.gsc
-***************************************/
+*********************************************/
 
 init() {
   if(getdvar("scr_elevator_disabled") == "1") {

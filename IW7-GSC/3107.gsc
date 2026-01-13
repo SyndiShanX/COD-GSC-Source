@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3107.gsc
-***************************************/
+**************************************/
 
 func_BE5C() {
   if(func_09FF::bt_nativeistreeregistered("jackal\jackal_native_api")) {

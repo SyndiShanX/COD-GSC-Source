@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3543.gsc
-************************/
+*********************************************/
 
 init() {
   level.var_2850 = [];

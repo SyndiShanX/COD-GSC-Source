@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/**********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3325.gsc
-************************/
+**********************************************/
 
 func_96C9() {
   var_0 = spawnStruct();

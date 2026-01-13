@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2784.gsc
-***************************************/
+**************************************/
 
 portalgeneratorinit() {
   level._effect["portal_open"] = loadfx("vfx\iw7\_requests\mp\vfx_portal_generator");

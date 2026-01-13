@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3597.gsc
-************************/
+*********************************************/
 
 func_12F9B() {
   self setscriptablepartstate("amplify", "active", 0);

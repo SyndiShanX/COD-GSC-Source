@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\idles.gsc
-********************************/
+*********************************************/
 
 func_DEB8(var_0, var_1) {
   level.var_1DBE[var_0] = var_1;

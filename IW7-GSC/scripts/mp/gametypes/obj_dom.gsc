@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\gametypes\obj_dom.gsc
-********************************************/
+*********************************************/
 
 func_591D(var_0) {
   var_1 = level.objectives[var_0];

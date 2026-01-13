@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3489.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("littlebird_support", ::func_128EE);

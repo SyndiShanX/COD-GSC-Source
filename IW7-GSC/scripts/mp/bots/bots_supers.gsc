@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\bots\bots_supers.gsc
-*******************************************/
+*********************************************/
 
 func_2EA3() {
   level.var_2D1D["super_claw"] = ::func_89EF;

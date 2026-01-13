@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\wander.gsc
-*******************************************/
+*********************************************/
 
 findrandomnavpoint(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {

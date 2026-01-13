@@ -1,6 +1,5 @@
 /*************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\enemy_villain_kotch_helmet.gsc
 *************************************************/
 

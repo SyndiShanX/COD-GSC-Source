@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3876.gsc
-************************/
+*********************************************/
 
 main() {
   if(isDefined(self.var_10E6D)) {

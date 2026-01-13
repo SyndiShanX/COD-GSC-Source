@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3341.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["slam_sml"] = loadfx("vfx\old\_requests\archetypes\vfx_heavy_slam_s");

@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\compass.gsc
-**********************************/
+*********************************************/
 
 setupminimap(var_0) {
   var_1 = getdvarfloat("scr_RequiredMapAspectratio", 1);

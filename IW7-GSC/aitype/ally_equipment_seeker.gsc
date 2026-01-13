@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\ally_equipment_seeker.gsc
-********************************************/
+*********************************************/
 
 main() {
   self.var_17DB = "ai\\seeker_assets.csv";

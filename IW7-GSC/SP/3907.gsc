@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3907.gsc
-************************/
+*********************************************/
 
 func_1000F() {
   return isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied);

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3544.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["battery_pulse"] = loadfx("vfx\iw7\_requests\mp\vfx_battery_pulse");

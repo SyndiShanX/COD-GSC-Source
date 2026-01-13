@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3001.gsc
-***************************************/
+**************************************/
 
 main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::func_31C5("droppod", var_0, var_1, var_2);

@@ -1,6 +1,5 @@
 /***************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4_boss\behaviors.gsc
 ***************************************************/
 

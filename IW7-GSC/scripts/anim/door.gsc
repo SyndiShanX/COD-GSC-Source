@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\door.gsc
-*********************************/
+*********************************************/
 
 func_5A09() {
   self endon("killanimscript");

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2712.gsc
-***************************************/
+**************************************/
 
 createfx() {
   level.var_position_player = scripts\engine\utility::void;

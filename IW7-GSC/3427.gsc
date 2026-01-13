@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3427.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\cp\cp_splash_grenade::splashgrenadeinit();

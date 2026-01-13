@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2767.gsc
-***************************************/
+**************************************/
 
 init() {
   level.var_B3DA["smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");

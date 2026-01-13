@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\notetracks.gsc
-***************************************/
+*********************************************/
 
 registernotetracks_init() {
   if(isDefined(level.notetracks)) {

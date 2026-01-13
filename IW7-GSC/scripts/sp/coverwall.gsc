@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\coverwall.gsc
-************************************/
+*********************************************/
 
 func_4761() {
   precachemodel("barrier_cover_foam_128");

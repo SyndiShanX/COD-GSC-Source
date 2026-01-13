@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2603.gsc
-************************/
+*********************************************/
 
 func_11A90(var_0) {
   func_F724();

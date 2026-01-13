@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3407.gsc
-***************************************/
+**************************************/
 
 parse_music_genre_table() {
   scripts\engine\utility::flag_init("jukebox_paused");

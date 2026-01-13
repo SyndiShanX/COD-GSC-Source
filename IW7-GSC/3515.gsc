@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3515.gsc
-***************************************/
+**************************************/
 
 init() {
   level.reminder_vo_init["laserTarget"] = loadfx("vfx\misc\laser_glow");

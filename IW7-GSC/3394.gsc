@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3394.gsc
-************************/
+*********************************************/
 
 func_DDAE(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);

@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\drone_base.gsc
-*************************************/
+*********************************************/
 
 func_5C21() {
   func_23C7();

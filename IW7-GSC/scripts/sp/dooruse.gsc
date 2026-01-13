@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\dooruse.gsc
-**********************************/
+*********************************************/
 
 func_95B6() {
   level.doors = [];

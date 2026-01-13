@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3611.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["visionPulse_ping"] = loadfx("vfx\iw7\_requests\mp\vfx_opticwave.vfx");

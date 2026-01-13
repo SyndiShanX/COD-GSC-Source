@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2578.gsc
-************************/
+*********************************************/
 
 func_C565(var_0) {
   if(isDefined(self.var_C9B4)) {

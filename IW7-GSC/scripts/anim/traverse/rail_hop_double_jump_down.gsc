@@ -1,6 +1,5 @@
 /***************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\traverse\rail_hop_double_jump_down.gsc
 ***************************************************************/
 

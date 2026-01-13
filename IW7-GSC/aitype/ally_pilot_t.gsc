@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: aitype\ally_pilot_t.gsc
-***********************************/
+*********************************************/
 
 main() {
   self.var_17DB = "";

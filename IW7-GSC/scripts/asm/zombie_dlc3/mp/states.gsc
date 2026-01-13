@@ -1,6 +1,5 @@
 /*************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\asm\zombie_dlc3\mp\states.gsc
 *************************************************/
 

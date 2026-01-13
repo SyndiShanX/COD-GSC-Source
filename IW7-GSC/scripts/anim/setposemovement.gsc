@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\setposemovement.gsc
-********************************************/
+*********************************************/
 
 setposemovement(var_0, var_1) {
   if(var_0 == "") {

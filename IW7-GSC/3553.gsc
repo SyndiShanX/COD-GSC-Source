@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3553.gsc
-************************/
+*********************************************/
 
 func_44F9() {
   level._effect["coneFlash_wave"] = loadfx("vfx\iw7\_requests\mp\trail_kinetic_wave");

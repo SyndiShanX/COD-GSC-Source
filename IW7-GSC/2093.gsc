@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2093.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_un_jackal_pilots");

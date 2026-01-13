@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3145.gsc
-************************/
+*********************************************/
 
 func_3FCE(var_0, var_1, var_2, var_3) {
   self.asm.var_7360 = 0;

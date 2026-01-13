@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3411.gsc
-***************************************/
+**************************************/
 
 applyzombiescriptablestate(var_0, var_1) {
   var_0 notify("applyZombieScriptableState");

@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\starts.gsc
-*********************************/
+*********************************************/
 
 func_9766() {
   scripts\engine\utility::flag_init("start_is_set");

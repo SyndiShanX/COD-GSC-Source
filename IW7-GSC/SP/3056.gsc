@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3056.gsc
-************************/
+*********************************************/
 
 main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::func_31C5("support_drone", var_0, var_1, var_2);

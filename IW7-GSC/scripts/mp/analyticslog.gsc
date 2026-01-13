@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\analyticslog.gsc
-***************************************/
+*********************************************/
 
 init() {
   setdvarifuninitialized("enable_analytics_log", 0);

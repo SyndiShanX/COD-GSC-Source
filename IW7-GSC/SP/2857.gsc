@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2857.gsc
-************************/
+*********************************************/
 
 init() {
   level.var_66A3 = [];

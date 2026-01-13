@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\healthoverlay.gsc
-****************************************/
+*********************************************/
 
 init() {
   level.healthoverlaycutoff = 0.55;

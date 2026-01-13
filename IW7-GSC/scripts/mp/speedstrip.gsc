@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\speedstrip.gsc
-*************************************/
+*********************************************/
 
 func_109B8() {
   level.var_109BE = [];

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3102.gsc
-***************************************/
+**************************************/
 
 func_BE5C(var_0) {
   func_09FF::bt_nativeregisterbehavior(var_0 + "escape_native_api_Escape", "sequence", [var_0 + "Not_jk_hasSpline4", "negate", var_0 + "jk_findAndSetGoal::fnArgsNative04", "action", var_0 + "jk_setBoostMode::fnArgsNative14", "action", var_0 + "jk_setGoalRadius::fnArgsNative24", "action", var_0 + "jk_setFireMode::fnArgsNative34", "action", var_0 + "jk_waitForGoal4", "action", var_0 + "jk_setOrientMode::fnArgsNative14", "action"], 4);

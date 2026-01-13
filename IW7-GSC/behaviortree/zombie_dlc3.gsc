@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\zombie_dlc3.gsc
-****************************************/
+*********************************************/
 
 zombie_dlc3fn0(var_0) {
   return lib_0A09::func_5AEA(var_0, 200);

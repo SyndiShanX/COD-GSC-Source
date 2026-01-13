@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2780.gsc
-***************************************/
+**************************************/
 
 func_D41B() {
   level._effect["shoulder_cannon_charge"] = loadfx("vfx\old\misc\shoulder_cannon_charge");

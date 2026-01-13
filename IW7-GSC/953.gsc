@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 953.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("robot_c6_red_scriptable");

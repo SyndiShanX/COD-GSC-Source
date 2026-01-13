@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3178.gsc
-************************/
+*********************************************/
 
 func_100AD(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {

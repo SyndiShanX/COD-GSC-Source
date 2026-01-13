@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\engine\scriptable.gsc
-*****************************************/
+*********************************************/
 
 func_EF33(var_0) {
   level.var_EF2E = var_0;

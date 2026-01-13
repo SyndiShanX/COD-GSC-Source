@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3175.gsc
-************************/
+*********************************************/
 
 func_C97D(var_0, var_1, var_2, var_3) {
   if(self.var_527B != "patrol") {

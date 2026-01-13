@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\missions.gsc
-***********************************/
+*********************************************/
 
 init() {
   if(!func_B4E8()) {

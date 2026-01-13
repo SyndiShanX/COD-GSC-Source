@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_persistence.gsc
-*****************************************/
+*********************************************/
 
 set_perk(var_0) {
   self[[level.coop_perk_callbacks[var_0].set]]();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3652.gsc
-************************/
+*********************************************/
 
 func_952C() {
   level.player scripts\sp\utility::func_65E0("using_arm_device");

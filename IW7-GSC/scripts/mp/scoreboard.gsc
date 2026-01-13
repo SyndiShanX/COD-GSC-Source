@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\scoreboard.gsc
-*************************************/
+*********************************************/
 
 func_D9AB() {
   foreach(var_1 in level.placement["all"]) {

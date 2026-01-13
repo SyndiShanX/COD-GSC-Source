@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\audio.gsc
-********************************/
+*********************************************/
 
 init_audio() {
   if(!isDefined(level.audio)) {

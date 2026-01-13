@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 1300.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_sdf_army_light_3_cpt3");

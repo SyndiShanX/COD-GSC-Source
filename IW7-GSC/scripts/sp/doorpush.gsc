@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\doorpush.gsc
-***********************************/
+*********************************************/
 
 func_8FE0() {
   level.var_EC87["player_rig"] = #animtree;

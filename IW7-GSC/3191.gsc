@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3191.gsc
-************************/
+*********************************************/
 
 func_13F64() {
   if(scripts\asm\asm_bb::bb_movetyperequested("fly")) {

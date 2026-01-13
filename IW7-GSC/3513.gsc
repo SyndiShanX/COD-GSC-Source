@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3513.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["rc8_malfunction"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_glitch_out.vfx");

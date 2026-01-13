@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3905.gsc
-************************/
+*********************************************/
 
 func_CEE2(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");

@@ -1,6 +1,5 @@
 /************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\maps\cp_final\cp_final_final_boss.gsc
 ************************************************************/
 

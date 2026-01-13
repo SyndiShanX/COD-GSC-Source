@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\crab_mini.gsc
-**************************************/
+*********************************************/
 
 func_2AD0() {
   if(isDefined(level.var_119E["crab_mini"])) {

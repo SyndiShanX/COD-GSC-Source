@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3399.gsc
-************************/
+*********************************************/
 
 init_ark_quest() {
   level.ark_quest_pieces = [];

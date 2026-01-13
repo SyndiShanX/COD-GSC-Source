@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\movers.gsc
-*********************************/
+*********************************************/
 
 main() {
   if(getdvar("r_reflectionProbeGenerate") == "1") {

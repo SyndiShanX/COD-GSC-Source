@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3444.gsc
-***************************************/
+**************************************/
 
 remote_vehicle_setup() {
   while(!isDefined(level.bot_variables_initialized)) {

@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\missilelauncher.gsc
-******************************************/
+*********************************************/
 
 func_98D5() {
   self.var_10FA9 = undefined;

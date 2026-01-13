@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\heavyarmor.gsc
-*************************************/
+*********************************************/
 
 addheavyarmor(var_0) {
   var_1 = self.heavyarmor;

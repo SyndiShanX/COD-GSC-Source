@@ -1,6 +1,5 @@
 /************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\maps\mp_parkour\gen\mp_parkour_fx.gsc
 ************************************************************/
 

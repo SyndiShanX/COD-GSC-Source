@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2799.gsc
-***************************************/
+**************************************/
 
 checkdynamicspawns(var_0) {
   if(isDefined(level.dynamicspawns)) {

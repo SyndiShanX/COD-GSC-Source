@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3443.gsc
-***************************************/
+**************************************/
 
 bot_killstreak_setup() {
   if(!isDefined(level.killstreak_botfunc)) {

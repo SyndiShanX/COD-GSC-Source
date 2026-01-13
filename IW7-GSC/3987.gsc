@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3987.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_vista_astroid_cluster_01"] = loadfx("vfx\iw7\levels\mp_divide\vfx_vista_astroid_cluster_01.vfx");

@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\equipment\cloak.gsc
-******************************************/
+*********************************************/
 
 func_97C5() {
   level.var_1BBA = spawnStruct();

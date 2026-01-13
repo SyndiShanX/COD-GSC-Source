@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\vehicle.gsc
-**********************************/
+*********************************************/
 
 func_979A() {
   if(isDefined(level.var_5619) && level.var_5619) {

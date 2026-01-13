@@ -1,6 +1,5 @@
 /****************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\alien_goon\alien_goon_tunedata.gsc
 ****************************************************************/
 

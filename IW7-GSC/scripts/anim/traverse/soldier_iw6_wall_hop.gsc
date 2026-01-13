@@ -1,6 +1,5 @@
 /**********************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\traverse\soldier_iw6_wall_hop.gsc
 **********************************************************/
 

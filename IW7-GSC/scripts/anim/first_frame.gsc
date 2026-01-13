@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\first_frame.gsc
-****************************************/
+*********************************************/
 
 main() {
   self endon("death");

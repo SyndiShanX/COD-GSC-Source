@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4138.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_eu_basereveal_snowstorm_flakes"] = loadfx("vfx\iw7\levels\europa\vfx_eu_basereveal_snowstorm_flakes.vfx");

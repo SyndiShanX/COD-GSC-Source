@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 4180.gsc
-***************************************/
+**************************************/
 
 main() {
   level._effect["vfx_ph_launch_explosion_sml_periph_run"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_explosion_sml_periph_run.vfx");

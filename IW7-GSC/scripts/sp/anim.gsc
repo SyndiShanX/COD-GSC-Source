@@ -1,8 +1,7 @@
-/*******************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\anim.gsc
-*******************************/
+*********************************************/
 
 func_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 endon("stop_sequencing_notetracks");

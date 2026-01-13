@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4056.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_prime_rain_groundhit_m_02"] = loadfx("vfx\iw7\levels\mp_prime\vfx_prime_rain_groundhit_m_02.vfx");

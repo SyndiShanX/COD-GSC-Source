@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3413.gsc
-************************/
+*********************************************/
 
 fast_travel_init() {
   func_95D9();

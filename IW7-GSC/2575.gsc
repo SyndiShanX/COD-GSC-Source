@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2575.gsc
-************************/
+*********************************************/
 
 func_9898(var_0) {
   self.acceptablemeleefraction = 0.95;

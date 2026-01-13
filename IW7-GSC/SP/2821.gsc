@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2821.gsc
-************************/
+*********************************************/
 
 main() {
   level.analytics = spawnStruct();

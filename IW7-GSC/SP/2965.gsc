@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2965.gsc
-************************/
+*********************************************/
 
 func_31B3(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_4)) {

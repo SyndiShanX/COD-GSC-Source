@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3521.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["spider_explode"] = loadfx("vfx\core\expl\grenadeexp_default");

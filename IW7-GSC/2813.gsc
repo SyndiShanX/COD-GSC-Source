@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2813.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["whizzby_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_left.vfx");

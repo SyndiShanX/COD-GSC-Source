@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2881.gsc
-***************************************/
+**************************************/
 
 main() {
   precachestring(&"SCRIPT_INTELLIGENCE_OF_EIGHTEEN");

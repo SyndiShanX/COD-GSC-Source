@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3065.gsc
-************************/
+*********************************************/
 
 func_33FF(var_0) {
   self.var_87F6 = 1;

@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killcam.gsc
-**********************************/
+*********************************************/
 
 init() {
   level.killcam = scripts\mp\tweakables::gettweakablevalue("game", "allowkillcam");

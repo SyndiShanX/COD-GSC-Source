@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\emp_debuff_mp.gsc
-****************************************/
+*********************************************/
 
 func_13A12() {
   var_0 = scripts\engine\utility::spawn_tag_origin();

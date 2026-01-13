@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3582.gsc
-************************/
+*********************************************/
 
 setrewind() {
   thread func_13A62();

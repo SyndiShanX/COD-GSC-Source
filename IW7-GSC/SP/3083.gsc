@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3083.gsc
-************************/
+*********************************************/
 
 func_98DD() {
   if(self.team == level.player.team) {

@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\lightarmor.gsc
-*************************************/
+*********************************************/
 
 haslightarmor(var_0) {
   return getlightarmorvalue(var_0) > 0;

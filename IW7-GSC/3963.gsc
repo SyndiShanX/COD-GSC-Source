@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3963.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_afg_ceiling_vent_steam_int"] = loadfx("vfx\iw7\levels\mp_afghan\vfx_afg_ceiling_vent_steam_int.vfx");

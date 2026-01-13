@@ -1,8 +1,7 @@
-/*******************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\math.gsc
-*******************************/
+*********************************************/
 
 func_AB6F(var_0, var_1, var_2) {
   return var_0 + var_1 - var_0 * var_2;

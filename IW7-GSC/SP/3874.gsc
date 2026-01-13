@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3874.gsc
-************************/
+*********************************************/
 
 func_9B1E(var_0, var_1) {
   self endon("death");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3155.gsc
-************************/
+*********************************************/
 
 func_B063(var_0, var_1, var_2, var_3) {
   lib_0A1E::func_235F(var_0, var_1, var_2, self.moveplaybackrate);

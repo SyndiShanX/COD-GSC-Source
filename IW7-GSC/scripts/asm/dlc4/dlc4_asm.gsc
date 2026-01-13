@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\asm\dlc4\dlc4_asm.gsc
-*****************************************/
+*********************************************/
 
 gettunedata() {
   return level.agenttunedata[self.agent_type];

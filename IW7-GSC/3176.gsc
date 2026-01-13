@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3176.gsc
-************************/
+*********************************************/
 
 func_51E8(var_0, var_1, var_2, var_3) {
   if(isDefined(self.asm.var_51E8)) {

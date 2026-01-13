@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\common\trace.gsc
-************************************/
+*********************************************/
 
 ray_trace(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, create_default_contents());

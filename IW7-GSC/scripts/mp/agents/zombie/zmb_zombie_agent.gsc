@@ -1,6 +1,5 @@
 /*********************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\zombie\zmb_zombie_agent.gsc
 *********************************************************/
 

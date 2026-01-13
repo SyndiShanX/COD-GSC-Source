@@ -1,6 +1,5 @@
 /*****************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\maps\mp_codphish\gen\mp_codphish_sound.gsc
 *****************************************************************/
 

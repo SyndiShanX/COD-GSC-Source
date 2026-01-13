@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3574.gsc
-************************/
+*********************************************/
 
 init() {
   level.var_C7E4 = loadfx("vfx\core\mp\ability\vfx_aslt_overcharge_scrn");

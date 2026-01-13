@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2859.gsc
-************************/
+*********************************************/
 
 func_6B44() {
   setdvarifuninitialized("debug_fakeactor", 0);

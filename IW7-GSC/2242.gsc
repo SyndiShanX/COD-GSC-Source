@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2242.gsc
-************************/
+*********************************************/
 
 main() {
   scripts\code\character::setmodelfromarray(lib_0942::main());

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4074.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_periph_structure_light"] = loadfx("vfx\iw7\levels\mp_rivet\vfx_periph_structure_light.vfx");

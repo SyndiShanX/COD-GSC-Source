@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreaks\_ims.gsc
-*******************************************/
+*********************************************/
 
 init() {
   scripts\mp\killstreaks\_killstreaks::registerkillstreak("ims", ::func_128EA);

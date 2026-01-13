@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3121.gsc
-************************/
+*********************************************/
 
 func_D4FF(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);

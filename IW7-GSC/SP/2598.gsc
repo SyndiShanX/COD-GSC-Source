@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2598.gsc
-************************/
+*********************************************/
 
 func_3ED1(var_0, var_1, var_2) {
   if(!scripts\asm\asm::asm_hasalias(var_1, self.a.pose)) {

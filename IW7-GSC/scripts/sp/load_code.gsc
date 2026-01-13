@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\load_code.gsc
-************************************/
+*********************************************/
 
 _meth_83D5() {
   setsaveddvar("cg_fovScale", "1");

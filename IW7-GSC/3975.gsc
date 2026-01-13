@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3975.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_breakneck_hsmk_wire_stream"] = loadfx("vfx\iw7\levels\mp_breakneck\vfx_breakneck_hsmk_wire_stream.vfx");

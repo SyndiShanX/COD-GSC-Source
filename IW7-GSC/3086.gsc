@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3086.gsc
-************************/
+*********************************************/
 
 func_97E6(var_0) {
   if(isDefined(self.bt.var_9882)) {

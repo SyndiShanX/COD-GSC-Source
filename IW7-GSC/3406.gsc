@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3406.gsc
-************************/
+*********************************************/
 
 fast_travel_init() {
   scripts\engine\utility::flag_init("fast_travel_init_done");

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2710.gsc
-***************************************/
+**************************************/
 
 setupminimap(var_0) {
   var_1 = getdvarfloat("scr_RequiredMapAspectratio", 1);

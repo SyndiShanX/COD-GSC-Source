@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3501.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("minijackal", ::func_12889, undefined, undefined, undefined, ::func_13C16, undefined, ::invalid_use_minijackal);

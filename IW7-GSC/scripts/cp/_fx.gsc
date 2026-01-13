@@ -1,8 +1,7 @@
-/******************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\_fx.gsc
-******************************/
+*********************************************/
 
 main() {
   func_95F5();

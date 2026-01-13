@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\cqb.gsc
-********************************/
+*********************************************/
 
 func_BCB1() {
   scripts\anim\run::func_10B77();

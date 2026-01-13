@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\killstreaks\_nuke.gsc
-********************************************/
+*********************************************/
 
 init() {
   level.var_C1D0 = "aftermath_post";

@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\destructables.gsc
-****************************************/
+*********************************************/
 
 init() {
   var_0 = getEntArray("destructable", "targetname");

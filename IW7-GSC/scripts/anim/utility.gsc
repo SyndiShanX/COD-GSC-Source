@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\utility.gsc
-************************************/
+*********************************************/
 
 func_97CF(var_0) {
   self clearanim( % body, 0.3);

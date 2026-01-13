@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\intelchallenges.gsc
-******************************************/
+*********************************************/
 
 func_DEF9() {
   level.var_9979 = [];

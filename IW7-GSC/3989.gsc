@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3989.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_dome_robotarm_sparks"] = loadfx("vfx\iw7\levels\mp_dome_iw\vfx_dome_robotarm_sparks.vfx");

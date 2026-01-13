@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3462.gsc
-***************************************/
+**************************************/
 
 init() {
   level.airstrikefx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");

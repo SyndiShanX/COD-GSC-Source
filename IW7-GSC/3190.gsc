@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3190.gsc
-************************/
+*********************************************/
 
 func_8E15(var_0, var_1, var_2, var_3) {
   if(var_0 == "remove_helmet") {

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3324.gsc
-************************/
+*********************************************/
 
 func_95C1() {
   self.perk_data = [];

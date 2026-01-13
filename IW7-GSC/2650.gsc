@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2650.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["debris_buy"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_gatebuy_01.vfx");

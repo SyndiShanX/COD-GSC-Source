@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3616.gsc
-************************/
+*********************************************/
 
 func_DE0F() {
   precachemodel("misc_exterior_oxygen_barrel_large");

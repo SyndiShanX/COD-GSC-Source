@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2885.gsc
-***************************************/
+**************************************/
 
 func_9631() {
   scripts\engine\utility::flag_init("introscreen_complete");

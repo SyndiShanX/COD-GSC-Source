@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\stinger.gsc
-**********************************/
+*********************************************/
 
 init() {
   level.player func_41BB();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2922.gsc
-************************/
+*********************************************/
 
 func_EBE9() {
   scripts\engine\utility::flag_init("setup_sceneblock_anims");

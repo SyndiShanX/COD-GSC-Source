@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2865.gsc
-************************/
+*********************************************/
 
 func_4FF0() {
   var_0 = "soldier";

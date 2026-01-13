@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3387.gsc
-************************/
+*********************************************/
 
 init_rockettrap() {
   level.rockettrapuses = 0;

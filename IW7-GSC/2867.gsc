@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2867.gsc
-************************/
+*********************************************/
 
 func_95F3() {
   scripts\engine\utility::add_func_ref_MAYBE("setsaveddvar", ::setsaveddvar);

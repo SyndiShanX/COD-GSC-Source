@@ -1,8 +1,7 @@
-/********************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: behaviortree\enemy_combatant.gsc
-********************************************/
+*********************************************/
 
 func_63EC(var_0) {
   return lib_0A0A::shouldrefundsuper(var_0, 0.3);

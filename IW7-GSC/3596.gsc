@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3596.gsc
-************************/
+*********************************************/
 
 func_14FB() {
   level thread func_14FD();

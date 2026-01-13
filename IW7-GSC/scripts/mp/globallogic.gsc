@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\globallogic.gsc
-**************************************/
+*********************************************/
 
 init() {
   setdvar("match_running", 1);

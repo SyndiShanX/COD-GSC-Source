@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3539.gsc
-***************************************/
+**************************************/
 
 init() {
   level thread scripts\mp\perks\weaponpassives::weaponpassivesinit();

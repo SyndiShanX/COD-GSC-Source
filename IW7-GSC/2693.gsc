@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2693.gsc
-***************************************/
+**************************************/
 
 init() {
   setdvarifuninitialized("enable_analytics_log", 0);

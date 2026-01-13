@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\utility_common.gsc
-*******************************************/
+*********************************************/
 
 print3dtime(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_0 / 0.05;

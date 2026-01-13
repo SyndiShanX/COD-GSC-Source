@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\splashgrenade.gsc
-****************************************/
+*********************************************/
 
 splashgrenadeinit() {
   level._effect["base_plasma_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_smoke");

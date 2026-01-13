@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3125.gsc
-************************/
+*********************************************/
 
 func_D4D9(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::func_2923();

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3118.gsc
-************************/
+*********************************************/
 
 zombiegreymayshoot(var_0) {
   if(!isDefined(self.var_394)) {

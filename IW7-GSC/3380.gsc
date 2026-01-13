@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3380.gsc
-************************/
+*********************************************/
 
 init_discoball_trap() {
   if(scripts\engine\utility::flag_exist("pre_game_over")) {

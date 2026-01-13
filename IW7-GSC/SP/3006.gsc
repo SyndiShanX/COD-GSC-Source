@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3006.gsc
-************************/
+*********************************************/
 
 func_5DFB(var_0) {
   var_1 = self.var_7724;

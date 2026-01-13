@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\asm\asm_bb.gsc
-**********************************/
+*********************************************/
 
 func_2980(var_0, var_1) {
   self._blackboard.var_1FC7[var_0] = var_1;

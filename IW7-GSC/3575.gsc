@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3575.gsc
-************************/
+*********************************************/
 
 func_CA2B() {
   func_CA29(1);

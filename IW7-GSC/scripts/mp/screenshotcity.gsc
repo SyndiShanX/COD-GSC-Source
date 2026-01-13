@@ -1,8 +1,7 @@
-/*****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\screenshotcity.gsc
-*****************************************/
+*********************************************/
 
 func_BC86() {
   var_0 = getent("weapon_loc_screenshot_1", "targetname");

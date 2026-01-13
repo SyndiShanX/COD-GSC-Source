@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3451.gsc
-***************************************/
+**************************************/
 
 bot_defend_get_random_entrance_point_for_current_area() {
   var_0 = bot_defend_get_precalc_entrances_for_current_area(self.cur_defend_stance);

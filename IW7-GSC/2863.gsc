@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2863.gsc
-************************/
+*********************************************/
 
 func_9752() {
   if(!isDefined(level.flag)) {

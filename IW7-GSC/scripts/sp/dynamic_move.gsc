@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\dynamic_move.gsc
-***************************************/
+*********************************************/
 
 func_5F84(var_0) {
   self notify("disable_dynamic_move");

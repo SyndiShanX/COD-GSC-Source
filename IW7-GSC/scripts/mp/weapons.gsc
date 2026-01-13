@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\weapons.gsc
-**********************************/
+*********************************************/
 
 func_248C(var_0) {
   return tablelookup("mp\attachmentTable.csv", 4, var_0, 2);

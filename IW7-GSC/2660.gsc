@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2660.gsc
-************************/
+*********************************************/
 
 func_4941(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.var_D928)) {

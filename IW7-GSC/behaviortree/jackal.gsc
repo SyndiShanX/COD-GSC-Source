@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: behaviortree\jackal.gsc
-***************************************/
+**************************************/
 
 func_A3C3(var_0) {
   return func_0A0D::func_F711(var_0, "fly");

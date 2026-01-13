@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\init.gsc
-*********************************/
+*********************************************/
 
 func_98E1(var_0) {
   self.var_39B[var_0] = spawnStruct();

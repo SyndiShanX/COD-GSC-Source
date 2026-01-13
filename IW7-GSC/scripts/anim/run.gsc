@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\run.gsc
-********************************/
+*********************************************/
 
 func_BCEB() {
   var_0 = [[self.var_3EF3]]("stand");

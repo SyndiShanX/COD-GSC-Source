@@ -1,8 +1,7 @@
-/****************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\trophy_system.gsc
-****************************************/
+*********************************************/
 
 func_12813() {
   var_0 = spawnStruct();

@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_challenge.gsc
-***************************************/
+*********************************************/
 
 init_coop_challenge() {
   func_956D();

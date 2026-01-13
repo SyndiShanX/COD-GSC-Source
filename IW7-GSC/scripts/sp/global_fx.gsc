@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\global_fx.gsc
-************************************/
+*********************************************/
 
 main() {
   scripts\sp\global_fx_code::global_fx("ch_streetlight_02_FX_origin", "vfx\misc\lighthaze");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3657.gsc
-************************/
+*********************************************/
 
 func_660C() {
   thread func_F34E("normal");

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2883.gsc
-************************/
+*********************************************/
 
 register_interaction(var_0, var_1) {
   level.interactions[var_0] = var_1;

@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\hud_util.gsc
-***********************************/
+*********************************************/
 
 setparent(var_0) {
   if(isDefined(self.parent) && self.parent == var_0) {

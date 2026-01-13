@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\objidpoolmanager.gsc
-*******************************************/
+*********************************************/
 
 init() {
   var_0 = spawnStruct();

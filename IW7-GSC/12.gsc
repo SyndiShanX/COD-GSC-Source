@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 12.gsc
-***************************************/
+**************************************/
 
 main() {
   if(isDefined(level.createfx_enabled) && level.createfx_enabled) {

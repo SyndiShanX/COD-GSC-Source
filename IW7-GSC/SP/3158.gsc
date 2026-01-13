@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3158.gsc
-************************/
+*********************************************/
 
 func_98CC(var_0, var_1, var_2, var_3) {
   self._blackboard.shootstate = scripts\asm\asm::asm_getcurrentstate(self.asmname);

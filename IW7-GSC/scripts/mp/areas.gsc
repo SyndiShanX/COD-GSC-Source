@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\areas.gsc
-********************************/
+*********************************************/
 
 init() {
   level.softlandingtriggers = getEntArray("trigger_multiple_softlanding", "classname");

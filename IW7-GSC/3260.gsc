@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3260.gsc
-************************/
+*********************************************/
 
 main() {
   if(isDefined(level.createfx_enabled) && level.createfx_enabled) {

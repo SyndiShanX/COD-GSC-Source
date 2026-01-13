@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3461.gsc
-***************************************/
+**************************************/
 
 init() {
   level._effect["airdrop_crate_destroy"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_dp_pickup_dust.vfx");

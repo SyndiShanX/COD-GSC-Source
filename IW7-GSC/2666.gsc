@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2666.gsc
-***************************************/
+**************************************/
 
 initcpvosystem() {
   level.vo_priority_level = ["highest", "high", "medium", "low"];

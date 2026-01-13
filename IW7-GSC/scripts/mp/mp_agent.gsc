@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\mp_agent.gsc
-***********************************/
+*********************************************/
 
 init_agent(var_0) {
   level.agent_definition = [];

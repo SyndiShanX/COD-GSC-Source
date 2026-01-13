@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3070.gsc
-************************/
+*********************************************/
 
 func_97F9(var_0) {
   self.var_719D = ::func_EF29;

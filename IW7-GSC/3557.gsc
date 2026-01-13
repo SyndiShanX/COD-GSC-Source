@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3557.gsc
-************************/
+*********************************************/
 
 func_5223() {
   level._effect["deployableCover_explode"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_expand_mp.vfx");

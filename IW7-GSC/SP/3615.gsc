@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3615.gsc
-************************/
+*********************************************/
 
 func_6137() {
   level._effect["impact_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_thegreatzapper.vfx");

@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\validation.gsc
-*************************************/
+*********************************************/
 
 validationerror(var_0, var_1, var_2) {
   var_3 = var_0;

@@ -1,8 +1,7 @@
-/***************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\lib_0A2F.gsc
-***************************/
+*********************************************/
 
 func_7AF1(var_0, var_1) {
   var_2 = ["yard", "mars", "heist", "prisoner", "rogue", "titan", "sa_moon", "moon_port", "pearlharbor", "europa"];

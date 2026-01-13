@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2969.gsc
-************************/
+*********************************************/
 
 func_1324B() {
   var_0 = self.classname;

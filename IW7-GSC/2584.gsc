@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2584.gsc
-************************/
+*********************************************/
 
 func_1180F(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(1, self.isnodeoccupied);

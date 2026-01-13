@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3906.gsc
-************************/
+*********************************************/
 
 func_D4DA() {
   if(!isDefined(self.a.var_BF8C)) {

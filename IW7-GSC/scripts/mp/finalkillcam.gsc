@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\finalkillcam.gsc
-***************************************/
+*********************************************/
 
 func_9807() {
   level.finalkillcam_delay = [];

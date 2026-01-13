@@ -1,8 +1,7 @@
-/***********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\doorpeek.gsc
-***********************************/
+*********************************************/
 
 func_11620(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {

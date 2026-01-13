@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\adrenaline.gsc
-*************************************/
+*********************************************/
 
 init() {
   if(getdvarint("prototype_adrenaline_enabled") == 1 && level.rankedmatch) {

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2506.gsc
-************************/
+*********************************************/
 
 main() {
   var_0[0] = "head_bg_var_head_male_bc_01_head_male_bc_03";

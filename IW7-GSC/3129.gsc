@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3129.gsc
-************************/
+*********************************************/
 
 func_3EA8(var_0, var_1, var_2) {
   return 0;

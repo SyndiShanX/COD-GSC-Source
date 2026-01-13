@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2570.gsc
-************************/
+*********************************************/
 
 func_97EF(var_0) {
   self.bt.var_C2 = spawnStruct();

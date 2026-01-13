@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2831.gsc
-************************/
+*********************************************/
 
 func_9543() {
   setdvarifuninitialized("skyambient_off", 0);

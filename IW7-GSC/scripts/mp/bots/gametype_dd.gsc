@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\bots\gametype_dd.gsc
-*******************************************/
+*********************************************/
 
 main() {
   setup_callbacks();

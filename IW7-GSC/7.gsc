@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 7.gsc
-***************************************/
+**************************************/
 
 codecallback_startgametype() {
   if(getdvar("r_reflectionProbeGenerate") == "1") {

@@ -1,8 +1,7 @@
-/*********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\damage.gsc
-*********************************/
+*********************************************/
 
 callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
   if(isDefined(var_1) && scripts\mp\utility::istrue(level.jittermodcheck) && level.jittermodcheck == 2 && scripts\mp\utility::istrue(var_1.ismodded)) {

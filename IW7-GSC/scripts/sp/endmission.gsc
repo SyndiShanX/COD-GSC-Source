@@ -1,8 +1,7 @@
-/*************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\endmission.gsc
-*************************************/
+*********************************************/
 
 main() {
   level.var_B8D2 = func_49EF();

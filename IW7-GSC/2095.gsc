@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2095.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_hero_t");

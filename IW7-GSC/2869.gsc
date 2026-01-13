@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2869.gsc
-***************************************/
+**************************************/
 
 func_95F9() {
   if(!scripts\engine\utility::add_init_script("gameskill", ::func_95F9)) {

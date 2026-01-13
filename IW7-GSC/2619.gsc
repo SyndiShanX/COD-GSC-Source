@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2619.gsc
-***************************************/
+**************************************/
 
 init_flags() {
   if(!scripts\engine\utility::add_init_script("init_flags", ::init_flags)) {

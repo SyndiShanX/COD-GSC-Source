@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2657.gsc
-***************************************/
+**************************************/
 
 init() {
   scripts\engine\utility::flag_init("vo_system_setup_done");

@@ -1,6 +1,5 @@
 /*****************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\asm\crab_brute\crab_brute_asm.gsc
 *****************************************************/
 

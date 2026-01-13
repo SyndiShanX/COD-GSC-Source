@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3918.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_rave_cp_stm"] = loadfx("vfx\iw7\levels\cp_rave\trap\woodchipper\vfx_rave_cp_stm.vfx");

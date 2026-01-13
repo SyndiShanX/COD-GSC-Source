@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2589.gsc
-************************/
+*********************************************/
 
 func_234D(var_0) {
   scripts\asm\asm::func_234E();

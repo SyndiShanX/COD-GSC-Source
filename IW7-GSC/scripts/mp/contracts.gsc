@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\contracts.gsc
-************************************/
+*********************************************/
 
 init() {
   if(getdvarint("mission_team_contracts_enabled", 0) == 0) {

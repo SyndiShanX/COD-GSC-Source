@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3163.gsc
-************************/
+*********************************************/
 
 func_2371() {
   if(scripts\asm\asm::func_232E("shoot_cover_A")) {

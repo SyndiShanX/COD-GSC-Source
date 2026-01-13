@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\utility_code.gsc
-***************************************/
+*********************************************/
 
 func_11166(var_0, var_1) {
   var_2 = var_0.var_11159;

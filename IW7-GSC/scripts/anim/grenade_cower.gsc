@@ -1,8 +1,7 @@
-/******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\grenade_cower.gsc
-******************************************/
+*********************************************/
 
 main() {
   if(getdvarint("ai_iw7", 0) == 1) {

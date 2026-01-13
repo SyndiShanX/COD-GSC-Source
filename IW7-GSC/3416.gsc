@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3416.gsc
-************************/
+*********************************************/
 
 init_jaroslav() {
   var_0 = scripts\engine\utility::getstructarray("jaroslav_machine", "script_noteworthy");

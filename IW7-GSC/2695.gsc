@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2695.gsc
-***************************************/
+**************************************/
 
 animationsuite() {
   while(!scripts\mp\utility\game::istrue(game["gamestarted"])) {

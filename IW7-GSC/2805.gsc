@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2805.gsc
-***************************************/
+**************************************/
 
 init() {
   level.teambalance = getdvarint("scr_teambalance");

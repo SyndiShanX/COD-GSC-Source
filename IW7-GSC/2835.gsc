@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2835.gsc
-***************************************/
+**************************************/
 
 init_colors() {
   if(!scripts\engine\utility::add_init_script("colors", ::init_colors)) {

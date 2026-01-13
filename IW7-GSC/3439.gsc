@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3439.gsc
-***************************************/
+**************************************/
 
 func_97D0() {
   level._effect["dodge_ground_spark_fx"] = loadfx("vfx\iw7\_requests\mp\vfx_dodge_ground_spark_fx");

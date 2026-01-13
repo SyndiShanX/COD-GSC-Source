@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3007.gsc
-************************/
+*********************************************/
 
 func_B1C7(var_0, var_1, var_2) {
   lib_0BBC::main(var_0, var_1, var_2);

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3433.gsc
-************************/
+*********************************************/
 
 init() {
   scripts\mp\archetypes\archassassin::func_97D0();

@@ -1,6 +1,5 @@
 /*******************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\agents\alien_phantom\alien_phantom_agent.gsc
 *******************************************************************/
 

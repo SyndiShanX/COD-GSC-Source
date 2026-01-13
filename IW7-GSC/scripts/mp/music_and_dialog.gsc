@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\music_and_dialog.gsc
-*******************************************/
+*********************************************/
 
 init() {
   if(!isDefined(game["music"])) {

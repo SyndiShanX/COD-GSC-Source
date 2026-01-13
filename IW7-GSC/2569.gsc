@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2569.gsc
-************************/
+*********************************************/
 
 func_E477(var_0) {
   return level.success;

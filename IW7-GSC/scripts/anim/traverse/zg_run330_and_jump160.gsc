@@ -1,6 +1,5 @@
 /***********************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\traverse\zg_run330_and_jump160.gsc
 ***********************************************************/
 

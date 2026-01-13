@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 1258.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("body_sdf_army_heavy_3");

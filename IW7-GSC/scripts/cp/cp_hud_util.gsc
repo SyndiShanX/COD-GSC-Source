@@ -1,8 +1,7 @@
-/**************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_hud_util.gsc
-**************************************/
+*********************************************/
 
 mt_getprogress(var_0) {
   return self getplayerdata("cp", "meritProgress", var_0);

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2620.gsc
-***************************************/
+**************************************/
 
 initfx() {
   if(!scripts\engine\utility::add_init_script("fx", ::initfx)) {

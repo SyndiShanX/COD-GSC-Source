@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2740.gsc
-***************************************/
+**************************************/
 
 global_fx(var_0, var_1, var_2, var_3, var_4) {
   var_5 = scripts\engine\utility::getstructarray(var_0, "targetname");

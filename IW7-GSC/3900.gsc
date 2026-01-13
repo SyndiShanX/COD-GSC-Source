@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3900.gsc
-************************/
+*********************************************/
 
 func_5AC0() {
   self endon("killanimscript");

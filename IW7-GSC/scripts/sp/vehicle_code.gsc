@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\vehicle_code.gsc
-***************************************/
+*********************************************/
 
 func_FA79() {
   var_0 = func_12B8();

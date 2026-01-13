@@ -1,8 +1,7 @@
-/********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\cp\cp_vo.gsc
-********************************/
+*********************************************/
 
 initcpvosystem() {
   level.vo_priority_level = ["highest", "high", "medium", "low"];

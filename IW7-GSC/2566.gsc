@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2566.gsc
-************************/
+*********************************************/
 
 func_12E91(var_0) {
   scripts\asm\asm_bb::bb_requestweapon(weaponclass(self.primaryweapon));

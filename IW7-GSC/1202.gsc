@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 1202.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("robot_c12_normal_torso");

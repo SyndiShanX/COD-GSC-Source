@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3351.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["repulsor_view"] = loadfx("vfx\iw7\_requests\coop\zmb_repulsor_wave_view.vfx");

@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\cover_behavior.gsc
-*******************************************/
+*********************************************/
 
 main(var_0) {
   self.var_46A6 = self.origin;

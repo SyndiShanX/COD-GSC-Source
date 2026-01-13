@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3035.gsc
-***************************************/
+**************************************/
 
 func_D18D() {
   level.player notifyonplayercommand("pulse_button", "+usereload");

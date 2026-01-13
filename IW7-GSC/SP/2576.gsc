@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2576.gsc
-************************/
+*********************************************/
 
 func_9898(var_0) {
   self.meleerangesq = 12100;

@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3189.gsc
-************************/
+*********************************************/
 
 func_13F9A(var_0, var_1, var_2, var_3) {
   self.asm.footsteps = spawnStruct();

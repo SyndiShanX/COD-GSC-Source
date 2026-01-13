@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3024.gsc
-************************/
+*********************************************/
 
 func_F5E9(var_0, var_1) {
   var_0.var_C8DF = [];

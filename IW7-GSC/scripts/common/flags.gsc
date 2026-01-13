@@ -1,8 +1,7 @@
-/************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\common\flags.gsc
-************************************/
+*********************************************/
 
 init_flags() {
   if(!scripts\engine\utility::add_init_script("init_flags", ::init_flags)) {

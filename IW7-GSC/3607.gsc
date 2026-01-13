@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3607.gsc
-************************/
+*********************************************/
 
 func_DD9E() {
   level._effect["reaper_kill"] = loadfx("vfx\iw7\_requests\mp\vfx_meatbag_large.vfx");

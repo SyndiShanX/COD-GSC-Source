@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3656.gsc
-************************/
+*********************************************/
 
 func_5AD1(var_0) {
   scripts\engine\utility::flag_init("allow_double_jump");

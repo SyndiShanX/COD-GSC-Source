@@ -1,8 +1,7 @@
-/***************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\common\exploder.gsc
-***************************************/
+*********************************************/
 
 setup_individual_exploder(var_0) {
   var_1 = var_0.script_exploder;

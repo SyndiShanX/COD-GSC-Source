@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2585.gsc
-************************/
+*********************************************/
 
 func_12F5C(var_0) {
   if(isDefined(level.var_13CD3) && isDefined(self.var_72BA)) {

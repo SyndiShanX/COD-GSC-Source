@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2890.gsc
-************************/
+*********************************************/
 
 func_12867() {
   level.player scripts\sp\loadout_code::func_F6B5();

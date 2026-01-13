@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2562.gsc
-************************/
+*********************************************/
 
 init() {
   if(isDefined(level._btactions)) {

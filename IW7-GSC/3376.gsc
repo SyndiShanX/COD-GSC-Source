@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3376.gsc
-************************/
+*********************************************/
 
 init_blackhole_trap() {
   level.blackholetrapuses = 0;

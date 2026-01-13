@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3664.gsc
-************************/
+*********************************************/
 
 func_6247() {
   if(isDefined(self.var_1183D)) {

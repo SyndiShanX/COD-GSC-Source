@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2336.gsc
-************************/
+*********************************************/
 
 main() {
   self setModel("seeker_grenade_wm");

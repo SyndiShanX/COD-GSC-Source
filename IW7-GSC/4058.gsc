@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 4058.gsc
-************************/
+*********************************************/
 
 main() {
   level._effect["vfx_iceplain_horizon_haze_proto_lrg"] = loadfx("vfx\iw7\levels\mp_proto\vfx_iceplain_horizon_haze_proto_lrg.vfx");

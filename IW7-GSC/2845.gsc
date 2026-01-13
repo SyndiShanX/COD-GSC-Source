@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2845.gsc
-***************************************/
+**************************************/
 
 init() {
   level.var_7649["c4_light_blink"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");

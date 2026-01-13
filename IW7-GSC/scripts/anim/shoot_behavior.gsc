@@ -1,8 +1,7 @@
-/*******************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\shoot_behavior.gsc
-*******************************************/
+*********************************************/
 
 func_4F69(var_0) {
   self endon("killanimscript");

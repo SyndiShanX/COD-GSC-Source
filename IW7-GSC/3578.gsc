@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3578.gsc
-************************/
+*********************************************/
 
 init() {
   level._effect["plasmaSpear_trail"] = loadfx("vfx\old\_requests\mp_weapons\vfx_trail_life_link");

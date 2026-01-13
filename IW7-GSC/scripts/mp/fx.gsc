@@ -1,8 +1,7 @@
-/*****************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\mp\fx.gsc
-*****************************/
+*********************************************/
 
 script_print_fx() {
   if(!isDefined(self.script_fxid) || !isDefined(self.script_fxcommand) || !isDefined(self.script_delay)) {

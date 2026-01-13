@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2820.gsc
-************************/
+*********************************************/
 
 func_94F9() {
   precacheshader("specialty_ammo_crate");

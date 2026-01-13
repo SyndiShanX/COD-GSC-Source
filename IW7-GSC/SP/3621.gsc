@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\3621.gsc
-************************/
+*********************************************/
 
 func_7977() {
   var_0 = level.var_612D.var_A925;

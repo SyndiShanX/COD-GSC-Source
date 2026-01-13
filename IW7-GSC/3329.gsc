@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3329.gsc
-***************************************/
+**************************************/
 
 init_armageddon() {
   scripts\engine\utility::flag_init("armageddon_active");

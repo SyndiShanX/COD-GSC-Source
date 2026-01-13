@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 3371.gsc
-***************************************/
+**************************************/
 
 update_player_tickets_earned(var_0) {
   if(var_0.tickets_earned > 0) {

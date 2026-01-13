@@ -1,6 +1,5 @@
 /**************************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\anim\traverse\c8_stair_down_moon_short.gsc
 **************************************************************/
 

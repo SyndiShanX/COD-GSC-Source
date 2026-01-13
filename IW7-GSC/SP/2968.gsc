@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: SP\2968.gsc
-************************/
+*********************************************/
 
 setsuit(var_0) {
   if(!isDefined(var_0)) {

@@ -1,7 +1,7 @@
-/***************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: 2648.gsc
-***************************************/
+**************************************/
 
 mt_getprogress(var_0) {
   return self getrankedplayerdata("cp", "meritProgress", var_0);

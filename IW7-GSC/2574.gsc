@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 2574.gsc
-************************/
+*********************************************/
 
 meleedeathhandler(var_0) {
   self endon("melee_finished");

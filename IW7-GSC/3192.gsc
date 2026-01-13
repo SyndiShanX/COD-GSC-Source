@@ -1,8 +1,7 @@
-/************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: 3192.gsc
-************************/
+*********************************************/
 
 func_FE6A(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");

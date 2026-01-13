@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\trigger.gsc
-**********************************/
+*********************************************/
 
 func_7AA4() {
   var_0 = [];

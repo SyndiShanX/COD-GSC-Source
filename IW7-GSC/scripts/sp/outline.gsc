@@ -1,8 +1,7 @@
-/**********************************
- * Decompiled by Bog
- * Edited by SyndiShanX
+/*********************************************
+ * Decompiled by Bog and Edited by SyndiShanX
  * Script: scripts\sp\outline.gsc
-**********************************/
+*********************************************/
 
 func_918F() {
   level.var_91AA = [];
