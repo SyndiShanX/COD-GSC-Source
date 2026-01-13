@@ -375,7 +375,7 @@ logplayerdata() {
 
   setmatchdata("players", self.clientid, "kills", scripts\mp\utility::getpersstat("kills"));
   setmatchdata("players", self.clientid, "deaths", scripts\mp\utility::getpersstat("deaths"));
-  self _meth_8572(self.clientid);
+  self func_8572(self.clientid);
   var_0 = 0;
   var_1 = 0;
   var_2 = 0;
@@ -415,14 +415,14 @@ logplayerdata() {
     var_0B = self.pers["matchdataDoubleKillsCount"];
   }
 
-  self _meth_85AC(self.clientid, scripts\mp\utility::getpersstat("headshots"), var_0A, var_0B, var_9);
+  self func_85AC(self.clientid, scripts\mp\utility::getpersstat("headshots"), var_0A, var_0B, var_9);
   foreach(var_8, var_0D in self.pers["matchdataScoreEventCounts"]) {
     setmatchdata("players", self.clientid, "scoreEventCount", var_8, var_0D);
   }
 
   setmatchdata("players", self.clientid, "playerXpModifier", int(scripts\mp\rank::getrankxpmultiplier()));
   if(level.teambased) {
-    setmatchdata("players", self.clientid, "teamXpModifier", int(scripts\mp\rank::_meth_81B6(self.team)));
+    setmatchdata("players", self.clientid, "teamXpModifier", int(scripts\mp\rank::func_81B6(self.team)));
   }
 
   setmatchdata("players", self.clientid, "weaponXpModifier", int(scripts\mp\weaponrank::getweaponrankxpmultiplier()));
@@ -697,7 +697,7 @@ loginitialspawnposition() {
 }
 
 logfinalstats() {
-  if(!self _meth_8592()) {
+  if(!self func_8592()) {
     return;
   }
 

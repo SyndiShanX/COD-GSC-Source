@@ -37,7 +37,7 @@ func_3620() {
       }
 
       var_1 = var_1 + var_6.var_3C;
-      if(self _meth_850C(var_6.updategamerprofileall, var_6.spawnscriptitem) <= 0) {
+      if(self func_850C(var_6.updategamerprofileall, var_6.spawnscriptitem) <= 0) {
         var_3 = 1;
       }
 
@@ -96,7 +96,7 @@ func_D4EE(var_0, var_1, var_2, var_3) {
   self.asm.var_2AD2 = 1;
   var_4 = self[[self.var_7191]](var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_231F(var_0, var_1);
 }
 
@@ -125,7 +125,7 @@ func_D542(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   self.asm.var_2AD2 = 1;
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, lib_0A1E::asm_getallanimsforstate(var_0, var_1), 1, var_2);
+  self func_82E7(var_1, lib_0A1E::asm_getallanimsforstate(var_0, var_1), 1, var_2);
   lib_0A1E::func_231F(var_0, var_1);
 }
 
@@ -137,7 +137,7 @@ func_CF37(var_0, var_1, var_2, var_3) {
   var_6 = max(0, self.empstartcallback - getanimlength(var_4) - getanimlength(var_5));
   if(var_6 > 0) {
     self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-    self _meth_82AB(lib_0A1E::func_2356(var_1, "stun"), 1, var_2);
+    self func_82AB(lib_0A1E::func_2356(var_1, "stun"), 1, var_2);
     wait(var_6);
   }
 
@@ -149,7 +149,7 @@ func_CF1C(var_0, var_1, var_2, var_3) {
   self.asm.var_2AD2 = 1;
   if(!scripts\asm\asm_bb::bb_isselfdestruct() && !isDefined(self.var_30E9) || !self.var_30E9) {
     self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-    self _meth_82AB(lib_0A1E::func_2356(var_1, "stun"), 1, var_2);
+    self func_82AB(lib_0A1E::func_2356(var_1, "stun"), 1, var_2);
     wait(level.var_3546);
   }
 
@@ -162,7 +162,7 @@ func_411A(var_0, var_1, var_2) {
 
 func_8C21(var_0) {
   var_1 = getmovedelta(var_0);
-  var_2 = self _meth_84AC();
+  var_2 = self func_84AC();
   var_3 = rotatevector(var_1, self.angles);
   var_4 = var_2 + var_3;
   if(self maymovefrompointtopoint(var_2, var_4, 0, 1)) {
@@ -225,7 +225,7 @@ func_35D7(var_0, var_1, var_2, var_3) {
 
   playFXOnTag(level.var_7649["c12_implode_buildup"], self, "j_spinelowerbottom");
   self clearanim(lib_0A1E::func_2342(), var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2);
+  self func_82EA(var_1, var_5, 1, var_2);
   self endon("terminate_death_thread");
   lib_0A1E::func_231F(var_0, var_1);
   self notify("endPlayDeathAnim");

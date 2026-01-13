@@ -223,7 +223,7 @@ func_A269() {}
 func_A2CC(var_0) {
   self notify("new_fire_func");
   self endon("new_fire_func");
-  var_1 = level.player _meth_848A();
+  var_1 = level.player func_848A();
 
   if(isDefined(var_1) && isDefined(var_1[0]) && var_1[2] > 0.05) {
     var_2 = var_1[0];
@@ -288,13 +288,13 @@ func_A1F6(var_0) {
     var_1 = 0.15;
     var_2 = 0.0;
     level.var_D127.var_76F8 ghostattack(1, var_2);
-    level.var_D127.var_76F8 _meth_8277(1, var_2);
+    level.var_D127.var_76F8 func_8277(1, var_2);
     level.var_D127.var_76F8 playLoopSound("jackal_dragonfly_fire_plr");
     level.var_D127.var_76FA playLoopSound("jackal_dragonfly_mech_plr");
     level.var_D127.var_76F9 playSound("jackal_dragonfly_init_plr");
     self.loop_sound = 1;
     level.var_D127.var_76FA ghostattack(1, var_1);
-    level.var_D127.var_76FA _meth_8277(1, var_1);
+    level.var_D127.var_76FA func_8277(1, var_1);
   }
 
   var_3 = randomfloatrange(-5, 5) * func_7D5B();
@@ -328,7 +328,7 @@ func_EBAA(var_0, var_1, var_2) {
   var_0 endon("death");
   self endon("new_fire_func");
   var_0 ghostattack(0, var_2);
-  var_0 _meth_8277(0.8, var_2);
+  var_0 func_8277(0.8, var_2);
   wait(var_2);
   var_0 stoploopsound(var_1);
   self.loop_sound = 0;
@@ -478,7 +478,7 @@ func_A39A() {
   level.var_D127.var_76FA linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
   level.var_D127.var_76F9 linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
   level.var_D127.var_76FA ghostattack(0, 0);
-  level.var_D127.var_76FA _meth_8277(0.5, 0);
+  level.var_D127.var_76FA func_8277(0.5, 0);
 }
 
 func_A399() {
@@ -507,16 +507,16 @@ func_7D5B() {
 func_6186(var_0, var_1) {
   self notify("emp_distortion");
   self endon("emp_distortion");
-  level.player _meth_809A(1, 1);
+  level.player func_809A(1, 1);
   wait 0.05;
 
   for(var_2 = var_0; var_2 > 0; var_2 = var_2 - 0.05) {
     var_3 = var_2 / var_0 * var_1;
-    level.player _meth_809A(var_3, 1);
+    level.player func_809A(var_3, 1);
     wait 0.05;
   }
 
-  level.player _meth_809A(0, 1);
+  level.player func_809A(0, 1);
 }
 
 func_7CAA(var_0) {
@@ -636,7 +636,7 @@ func_A275(var_0, var_1) {
       var_7 = var_6 * var_5 * -1;
     }
 
-    var_9 = level.player _meth_848A();
+    var_9 = level.player func_848A();
 
     if(isDefined(var_9) && isDefined(var_9[0])) {
       var_8 = var_9[0];

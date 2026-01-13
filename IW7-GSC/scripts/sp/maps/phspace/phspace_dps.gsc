@@ -170,7 +170,7 @@ func_1130D(var_0) {
     return;
   }
   if(level.player istouching(var_1)) {
-    level.player _meth_81D0();
+    level.player func_81D0();
   }
 
   var_1 solid();
@@ -195,7 +195,7 @@ func_376D(var_0, var_1) {
 func_CA93() {
   for(;;) {
     if(scripts\engine\utility::player_is_in_jackal()) {
-      level.player _meth_82C0("jackal_cockpit", 2);
+      level.player func_82C0("jackal_cockpit", 2);
       level waittill("jackal_landing");
       level.player playSound("jackal_landing_plr");
       level.var_D127 waittill("jackal_touchdown");

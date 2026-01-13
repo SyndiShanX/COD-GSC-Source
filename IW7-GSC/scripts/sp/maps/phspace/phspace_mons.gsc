@@ -271,7 +271,7 @@ func_1F90() {
 func_F5D4(var_0) {
   level.var_12703 = scripts\engine\utility::array_add(level.var_12703, self);
   self give_attacker_kill_rewards(self.var_AEBB);
-  self _meth_82B0(self.var_AEBB, var_0);
+  self func_82B0(self.var_AEBB, var_0);
 }
 
 func_1F8F() {
@@ -286,11 +286,11 @@ func_1F8F() {
   level.var_3670 func_F5D4(var_0);
 
   foreach(var_2 in level.var_12704) {
-    var_2 _meth_82B1(level.var_EC85["generic_mover"][var_2.var_1FAF], 1 * level.var_1F5B);
+    var_2 func_82B1(level.var_EC85["generic_mover"][var_2.var_1FAF], 1 * level.var_1F5B);
   }
 
   foreach(var_5 in level.var_12703) {
-    var_5 _meth_82B1(var_5.var_AEBB, 1 * level.var_1F5B);
+    var_5 func_82B1(var_5.var_AEBB, 1 * level.var_1F5B);
   }
 
   thread func_1F92();
@@ -300,7 +300,7 @@ func_1F98(var_0) {
   var_1 = getnotetracktimes(level.var_EC85["generic_mover"][level.var_D16B.var_1FAF], var_0);
 
   foreach(var_3 in level.var_12704) {
-    var_3 _meth_82B0(level.var_EC85["generic_mover"][var_3.var_1FAF], var_1[0]);
+    var_3 func_82B0(level.var_EC85["generic_mover"][var_3.var_1FAF], var_1[0]);
   }
 }
 
@@ -391,7 +391,7 @@ func_1F92() {
   func_A830();
   func_137E2("kill_convoy04");
   level.var_12B55.var_4E09 = undefined;
-  level.var_12B55 scripts\engine\utility::delaycall(3, ::_meth_81D0);
+  level.var_12B55 scripts\engine\utility::delaycall(3, ::func_81D0);
   level.var_3670 thread func_0BB6::func_3966(1, 1, level.var_12B67);
   level.var_3670 func_BAF7();
   level.var_12B67 thread func_0BB6::func_3966(1, 1, level.var_3670);
@@ -536,7 +536,7 @@ func_BAB9(var_0, var_1, var_2) {
   wait 3;
 
   if(isDefined(var_0)) {
-    var_0 _meth_81D0();
+    var_0 func_81D0();
     thread func_BAB8(var_0.origin);
   }
 
@@ -624,9 +624,9 @@ func_1F91() {
   level.var_3670 func_0BB8::func_39C8();
 
   if(!var_0) {
-    level.player _meth_82C0("phspace_kotch_pip", 0.25);
+    level.player func_82C0("phspace_kotch_pip", 0.25);
     func_A71B();
-    level.player _meth_82C0("jackal_cockpit", 0.25);
+    level.player func_82C0("jackal_cockpit", 0.25);
     thread scripts\sp\utility::func_10350("phspace_slt_deploycounterm");
     thread func_12700("phspace_plr_flaresout");
   }
@@ -952,7 +952,7 @@ func_BAA0(var_0) {
 
 func_1EC5(var_0) {
   thread scripts\sp\anim::func_1F35(var_0, var_0.var_1FAF);
-  var_0 _meth_82B1(level.var_EC85["generic_mover"][var_0.var_1FAF], 0);
+  var_0 func_82B1(level.var_EC85["generic_mover"][var_0.var_1FAF], 0);
 }
 
 func_10712(var_0) {
@@ -1130,7 +1130,7 @@ func_BA82() {
   earthquake(0.53, 2.8, level.var_D127.origin, 40000);
   level.player playrumbleonentity("damage_heavy");
   func_0BDC::func_A38E(35, 5, 5, 0.5);
-  level.player _meth_8497();
+  level.player func_8497();
   thread func_A1E2();
   thread func_0BDC::func_A287(0.2);
 }
@@ -1158,7 +1158,7 @@ func_D12E() {
   wait 0.4;
   level.var_D127 thread func_0BDB::func_BBE0();
   wait 0.5;
-  level.player _meth_8497();
+  level.player func_8497();
   thread func_0BDC::func_A388(0.2);
   func_0BDC::func_A153(0);
 }
@@ -1167,7 +1167,7 @@ func_D17C() {
   level.var_D127.var_13BF7.weapon = "spaceship_30mm_projectile_large_radius";
 
   if(level.var_D127.var_4C15 == level.var_D127.var_13BF7) {
-    level.var_D127 _meth_849E(level.var_D127.var_13BF7.weapon);
+    level.var_D127 func_849E(level.var_D127.var_13BF7.weapon);
   }
 }
 
@@ -1250,7 +1250,7 @@ func_50BF(var_0) {
     if(func_0B76::func_7A60(self.origin) < 0.7 && !scripts\engine\utility::cointoss()) {
       self delete();
     } else {
-      self _meth_81D0();
+      self func_81D0();
     }
   }
 }
@@ -1576,7 +1576,7 @@ func_A830() {
   level.var_FD6E.var_E35D linkto(level.var_12B67);
   level.var_FD6E.var_E35D func_0B51::func_FDCB("show");
   level.var_FD6E.var_E35D func_0B51::func_FDCB("solid");
-  level.var_12B67 _meth_8184();
+  level.var_12B67 func_8184();
   level.var_12B67 notsolid();
   level.var_12B67 func_0BB8::func_397C();
   scripts\sp\maps\phspace\phspace_battle::delete_ret_door_hack();

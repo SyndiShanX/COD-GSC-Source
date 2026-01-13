@@ -5,7 +5,7 @@
 
 init() {}
 
-_meth_819B(var_0, var_1) {
+func_819B(var_0, var_1) {
   scripts\engine\utility::allow_usability(0);
   self setscriptablepartstate("killstreak", "visor_active", 0);
   scripts\mp\utility\game::func_1254();
@@ -59,7 +59,7 @@ _meth_819B(var_0, var_1) {
     var_3.var_1349C setModel("ks_marker_mp");
     var_3.var_1349C setotherent(self);
     var_3.var_1349C setscriptablepartstate("target", "placed", 0);
-    var_3.var_1349C _meth_85C8(1);
+    var_3.var_1349C func_85C8(1);
   }
 
   if(scripts\mp\utility\game::isreallyalive(self)) {

@@ -326,7 +326,7 @@ func_BEA0(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-_meth_81DE() {
+func_81DE() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
@@ -370,7 +370,7 @@ chooseshieldornoshieldanim(var_0, var_1, var_2) {
 }
 
 func_3F0A(var_0, var_1, var_2) {
-  var_3 = _meth_81DE();
+  var_3 = func_81DE();
   if(var_3 < 0) {
     var_4 = "right";
   } else {
@@ -391,7 +391,7 @@ func_3F0A(var_0, var_1, var_2) {
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
-  var_8 = self _meth_8101(var_1, var_7);
+  var_8 = self func_8101(var_1, var_7);
   return var_7;
 }
 
@@ -574,7 +574,7 @@ play_teleport_sound_to_players(var_0) {
 }
 
 ontraversalteleport(var_0, var_1, var_2, var_3) {
-  self.teleportpos = self _meth_8146();
+  self.teleportpos = self func_8146();
   self.btraversalteleport = 1;
   return 1;
 }

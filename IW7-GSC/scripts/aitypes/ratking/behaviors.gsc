@@ -956,7 +956,7 @@ tryteleport(var_0) {
       return 0;
     }
 
-    var_5 = self _meth_84F9(var_4);
+    var_5 = self func_84F9(var_4);
     if(shouldtrytraversalteleport() && isDefined(var_5)) {
       var_6 = var_5["node"];
       var_7 = var_5["position"];
@@ -1455,7 +1455,7 @@ trytraversalteleport() {
 
   if(isDefined(self.vehicle_getspawnerarray)) {
     var_0 = self pathdisttogoal();
-    var_1 = self _meth_84F9(var_0);
+    var_1 = self func_84F9(var_0);
     if(isDefined(var_1)) {
       var_2 = var_1["node"];
       var_3 = var_1["position"];

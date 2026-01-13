@@ -3,7 +3,7 @@
  * Script: SP\3120.gsc
 *********************************************/
 
-_meth_80A1() {
+func_80A1() {
   var_0 = [];
   var_0["chokePlayer_counter_c"] = % c6_grnd_red_melee_choke_counter_cable;
   return var_0;
@@ -85,7 +85,7 @@ func_D3F9() {
   var_2 = clearpotentialthreat();
   level.player playrumbleonentity("heavy_2s");
   var_3 = "meleeAnim";
-  var_1 _meth_82E4(var_3, var_2["chokePlayer"], var_1.var_E6E5, 1, 0.2, 1);
+  var_1 func_82E4(var_3, var_2["chokePlayer"], var_1.var_E6E5, 1, 0.2, 1);
   level.player notify("choke_scene_music");
   thread func_D3F8(var_1);
   var_4 = getanimlength(var_2["chokePlayer"]);
@@ -120,7 +120,7 @@ func_D3F8(var_0) {
     return;
   }
 
-  level.player _meth_84FE();
+  level.player func_84FE();
   thread lib_0F3D::func_5103(0.5, 2, 20, 10, 5, 60, 10, 0.1);
   thread lib_0F3D::func_5103(1, 2, 20, 4, 50, 90, 10, 0.1);
   thread lib_0F3D::func_510F(1, 50, 0.4);
@@ -212,7 +212,7 @@ func_B61E(var_0, var_1, var_2, var_3) {
   var_5 = scripts\sp\utility::array_removedeadvehicles(var_5);
   var_6 = (40, -55, 0);
   var_7 = self.origin + rotatevector(var_6, self.angles);
-  if(!navisstraightlinereachable(self _meth_84AC(), var_7, self)) {
+  if(!navisstraightlinereachable(self func_84AC(), var_7, self)) {
     return 0;
   }
 
@@ -224,7 +224,7 @@ func_B61E(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(var_0B _meth_81A6() || var_0B scripts\sp\utility::isactorwallrunning()) {
+    if(var_0B func_81A6() || var_0B scripts\sp\utility::isactorwallrunning()) {
       continue;
     }
 
@@ -316,13 +316,13 @@ func_B61F(var_0, var_1, var_2, var_3) {
   var_0A setCanDamage(0);
   thread lib_0F3D::func_50E8(0.5);
   thread lib_0F3D::func_510F(0.5, 65, 0.4);
-  var_9 _meth_82E4(var_6, var_8, var_9.var_E6E5, 1, 0.2, 1);
+  var_9 func_82E4(var_6, var_8, var_9.var_E6E5, 1, 0.2, 1);
   var_9 thread scripts\sp\anim::func_10CBF(var_9, var_6);
   var_9 thread scripts\anim\shared::donotetracks(var_6, ::func_B617);
   var_0B = self gettagorigin("tag_sync");
   var_0C = self gettagangles("tag_sync");
   var_0A dontinterpolate();
-  var_0A _meth_80F1(var_0B, var_0C);
+  var_0A func_80F1(var_0B, var_0C);
   var_0A.var_B650 = spawn("script_model", var_0B);
   var_0A.var_B650 setModel("tag_origin");
   var_0A.var_B650.angles = var_0C;
@@ -332,7 +332,7 @@ func_B61F(var_0, var_1, var_2, var_3) {
   var_0A lib_0A1E::func_2307(::func_EB7C, ::saviorcleanup);
   var_0D = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_0D, 1, var_2, 1);
+  self func_82E7(var_1, var_0D, 1, var_2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_1);
   var_0E = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   if(var_0E == "end") {
@@ -363,7 +363,7 @@ func_B61C(var_0, var_1, var_2, var_3) {
   } else {
     var_7 = "chokePlayer_counter_c";
     var_8 = lib_0A1E::func_2356("melee_playerCounter", var_8);
-    var_9 = _meth_80A1();
+    var_9 = func_80A1();
     var_5 = var_9[var_7];
   }
 
@@ -372,7 +372,7 @@ func_B61C(var_0, var_1, var_2, var_3) {
   var_0C = level.player.melee.var_E505;
   thread lib_0F3D::func_50E8(0.5);
   thread lib_0F3D::func_510F(0.5, 65, 0.4);
-  var_0C _meth_82E4(var_0A, var_0B, var_0C.var_E6E5, 1, 0.2, 1);
+  var_0C func_82E4(var_0A, var_0B, var_0C.var_E6E5, 1, 0.2, 1);
   var_0C thread scripts\sp\anim::func_10CBF(var_0C, var_0A);
   var_0C thread scripts\anim\shared::donotetracks(var_0A, ::func_B617);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
@@ -380,7 +380,7 @@ func_B61C(var_0, var_1, var_2, var_3) {
     thread func_3675(var_1, var_5, var_2);
   }
 
-  self _meth_82E7(var_1, var_8, 1, var_2, 1);
+  self func_82E7(var_1, var_8, 1, var_2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_1);
   var_0D = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
@@ -393,7 +393,7 @@ func_3675(var_0, var_1, var_2) {
   var_3.origin = self gettagorigin("j_head_pv_z");
   var_3.angles = self gettagangles("j_head_pv_z");
   var_3 linkto(self, "j_head_pv_z");
-  var_3 _meth_82E7(var_0, var_1, 1, var_2, 1);
+  var_3 func_82E7(var_0, var_1, 1, var_2, 1);
   scripts\engine\utility::waittill_notify_or_timeout("death", 7);
   if(isDefined(var_3)) {
     var_3 delete();
@@ -403,7 +403,7 @@ func_3675(var_0, var_1, var_2) {
 func_EB7C() {
   self endon("killanimscript");
   var_0 = "meleeSave";
-  self _meth_82E4(var_0, self.asm.var_EB67, lib_0A1E::func_2342(), 1, 0.2, 1);
+  self func_82E4(var_0, self.asm.var_EB67, lib_0A1E::func_2342(), 1, 0.2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_0);
   var_1 = getanimlength(self.asm.var_EB67) + 1;
   scripts\anim\notetracks::donotetrackswithtimeout(var_0, var_1, ::func_B617);
@@ -430,7 +430,7 @@ func_B61A(var_0, var_1, var_2, var_3) {
   var_8 = level.player.melee.var_E505;
   thread lib_0F3D::func_50E8(0.5);
   thread lib_0F3D::func_510F(0.5, 65, 0.4);
-  var_8 _meth_82E4(var_5, var_7, var_8.var_E6E5, 1, 0.2, 1);
+  var_8 func_82E4(var_5, var_7, var_8.var_E6E5, 1, 0.2, 1);
   var_8 thread scripts\sp\anim::func_10CBF(var_8, var_5);
   var_8 thread scripts\anim\shared::donotetracks(var_5, ::func_B617);
   self playSound("c6_grapple_punch");
@@ -468,7 +468,7 @@ func_B617(var_0) {
       self.ignoreme = 0;
       self.var_10265 = 1;
       self.asm.var_4E40 = ::func_B614;
-      self _meth_81D0();
+      self func_81D0();
       if(isDefined(self.var_B63D)) {
         self.var_B63D unlink();
       }
@@ -489,15 +489,15 @@ func_B617(var_0) {
       self.var_10265 = 1;
       self.asm.var_4E40 = ::func_B613;
       self playSound("c6_grapple_knife_death");
-      self _meth_81D0();
+      self func_81D0();
       break;
 
     case "player_kill":
       level.player notify("bt_stop_meleegrab");
       func_E128();
       setblur(10, 0.1);
-      level.player _meth_80A1();
-      level.player _meth_81D0();
+      level.player func_80A1();
+      level.player func_81D0();
       break;
 
     case "disable_weapons":
@@ -527,7 +527,7 @@ func_A707() {
 func_D456() {
   level.player endon("death");
   level.player unlink();
-  level.player _meth_84FD();
+  level.player func_84FD();
   if(isDefined(level.player.melee) && isDefined(level.player.melee.var_E505)) {
     level.player.melee.var_E505 delete();
   }
@@ -637,7 +637,7 @@ func_D3EC() {
   level.player.melee.var_E505 = var_1;
   var_2 = clearpotentialthreat();
   var_3 = "meleeAnim";
-  var_1 _meth_82E4(var_3, var_2["crawlMeleeGrab"], var_1.var_E6E5, 1, 0.2, 1);
+  var_1 func_82E4(var_3, var_2["crawlMeleeGrab"], var_1.var_E6E5, 1, 0.2, 1);
   var_1 thread func_4884(self);
   thread func_487D(var_1);
   level.player forceplaygestureviewmodel("ges_crawlmelee_enter", undefined, undefined, undefined, 1);
@@ -654,7 +654,7 @@ func_D3EB(var_0) {
   level.player forceplaygestureviewmodel("ges_crawlmelee_grabbed");
   var_3 = "crawMeleeGrabLoop";
   while(isDefined(level.player.melee)) {
-    level.player.melee.var_E505 _meth_82E7(var_3, var_2, 1, 0.2, 1);
+    level.player.melee.var_E505 func_82E7(var_3, var_2, 1, 0.2, 1);
     level.player.melee.var_E505 scripts\anim\shared::donotetracks(var_3);
   }
 }
@@ -680,7 +680,7 @@ func_487D(var_0) {
     }
   }
 
-  level.player _meth_84FE();
+  level.player func_84FE();
   thread lib_0F3D::func_5103(1.5, 1, 50, 100, 15, 100, 5, 1.5);
   var_0 show();
   level.player thread lib_0F3D::func_D3A3();
@@ -731,7 +731,7 @@ func_933D() {
   level.player allowprone(1);
   level.player enableweapons();
   level.player allowoffhandshieldweapons(1);
-  level.player _meth_80A6();
+  level.player func_80A6();
   level.player enableusability();
   level.player scripts\sp\utility::func_1C34(1);
 }
@@ -823,9 +823,9 @@ func_488B() {
   var_1 = clearpotentialthreat();
   var_2 = "crawlMeleeCounter";
   thread lib_0F3D::func_50E8(1);
-  level.player _meth_80A6();
+  level.player func_80A6();
   level.player stopgestureviewmodel("ges_crawlmelee_grabbed");
-  var_0 _meth_82E4(var_2, var_1["crawlMeleeGrab_win"], var_0.var_E6E5, 1, 0.2, 1);
+  var_0 func_82E4(var_2, var_1["crawlMeleeGrab_win"], var_0.var_E6E5, 1, 0.2, 1);
   var_0 thread scripts\sp\anim::func_10CBF(var_0, var_2);
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_B617);
   level.player allowcrouch(1);
@@ -834,7 +834,7 @@ func_488B() {
   level.player unlink();
   func_E128();
   var_0 delete();
-  level.player _meth_84FD();
+  level.player func_84FD();
   level.player enableoffhandweapons();
   level.player allowoffhandshieldweapons(1);
   level.player enableusability();
@@ -852,7 +852,7 @@ func_4888(var_0, var_1, var_2, var_3) {
   scripts\engine\utility::stop_loop_sound_on_entity("c6_grapple_crawl_struggle_lp");
   var_4 = clearpotentialthreat();
   var_5 = "crawlMeleeKill";
-  level.player.melee.var_E505 _meth_82E4(var_5, var_4["crawlMeleeGrab_lose"], level.player.melee.var_E505.var_E6E5, 1, 0.2, 1);
+  level.player.melee.var_E505 func_82E4(var_5, var_4["crawlMeleeGrab_lose"], level.player.melee.var_E505.var_E6E5, 1, 0.2, 1);
   level.player.melee.var_E505 thread scripts\sp\anim::func_10CBF(level.player.melee.var_E505, var_5);
   level.player.melee.var_E505 thread scripts\anim\shared::donotetracks(var_5, ::func_B617);
   level.player scripts\engine\utility::delaycall(0.1, ::playsound, "c6_grapple_crawl_lose_pound_01");

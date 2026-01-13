@@ -44,7 +44,7 @@ func_D684(var_0) {
 
 func_D686(var_0, var_1, var_2, var_3) {
   if(isDefined(self.owner) && var_0 != self.owner) {
-    var_0 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 

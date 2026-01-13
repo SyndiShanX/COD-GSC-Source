@@ -6,7 +6,7 @@
 setup_kung_fu_crane_powers() {
   crane_kill_fx();
   scripts\engine\utility::flag_wait("interactions_initialized");
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_crane", ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_crane", scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
   init_valid_patch_nodes();
   level.is_in_crane_box_func = ::is_in_basic_box;
   setupinvalidcranevolumes();

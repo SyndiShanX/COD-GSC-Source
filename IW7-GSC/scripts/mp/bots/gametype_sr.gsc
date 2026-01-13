@@ -89,7 +89,7 @@ sr_pick_up_tag(var_0) {
     self botsetscriptgoal(var_1, 0, "tactical");
     var_2 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail(undefined, "tag_picked_up", "new_role");
     if(var_2 == "no_path") {
-      var_1 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", ::scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, var_0.curorigin, 32, self);
+      var_1 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, var_0.curorigin, 32, self);
       if(isDefined(var_1)) {
         self botsetscriptgoal(var_1, 0, "tactical");
         var_2 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail(undefined, "tag_picked_up", "new_role");

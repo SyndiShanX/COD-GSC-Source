@@ -56,7 +56,7 @@ func_5859() {
     return;
   }
 
-  if(self _meth_81B1() && self.weaponstartammo == "move" && self.a.pose == "stand" && !isDefined(self.var_55EF)) {
+  if(self func_81B1() && self.weaponstartammo == "move" && self.a.pose == "stand" && !isDefined(self.var_55EF)) {
     if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < squared(128)) {
       return;
     }
@@ -72,7 +72,7 @@ func_5859() {
     }
 
     func_E246();
-    self _meth_82E4("react", var_0, % root, 1, 0.2, self.animplaybackrate);
+    self func_82E4("react", var_0, % root, 1, 0.2, self.animplaybackrate);
     func_43E3(var_0, "run");
     scripts\anim\shared::donotetracks("react");
   }
@@ -90,7 +90,7 @@ transitiontocombat() {
   if(self.weaponstartammo == "stop" && !scripts\anim\utility::func_9D9B() && self.a.pose == "stand") {
     func_E246();
     var_0 = scripts\anim\utility::func_B027("combat", "trans_to_combat");
-    self _meth_82E4("transition", var_0, % root, 1, 0.2, 1.2 * self.animplaybackrate);
+    self func_82E4("transition", var_0, % root, 1, 0.2, 1.2 * self.animplaybackrate);
     func_43E3(var_0, "run");
     scripts\anim\shared::donotetracks("transition");
   }
@@ -135,9 +135,9 @@ func_1108A() {
 
 func_F337(var_0) {
   if(isDefined(var_0)) {
-    self _meth_82D0(var_0);
+    self func_82D0(var_0);
   } else {
-    self _meth_82D0();
+    self func_82D0();
   }
 
   if(scripts\engine\utility::actor_is3d()) {
@@ -496,7 +496,7 @@ func_392C() {
     if(isDefined(var_1) && func_129B2(var_1)) {
       return 1;
     }
-  } else if(isDefined(self.heat) && self _meth_8213()) {
+  } else if(isDefined(self.heat) && self func_8213()) {
     var_1 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
     if(func_129B2(var_1)) {
       return 1;
@@ -625,13 +625,13 @@ func_6A6F() {
 isdeploying(var_0) {
   var_1 = getmovedelta(var_0, 0, 1);
   var_2 = self gettweakablevalue(var_1);
-  return self _meth_81A5(var_2) && self maymovetopoint(var_2);
+  return self func_81A5(var_2) && self maymovetopoint(var_2);
 }
 
 func_9D43(var_0) {
   var_1 = getmovedelta(var_0, 0, 1);
   var_2 = self gettweakablevalue(var_1);
-  return self _meth_81A5(var_2);
+  return self func_81A5(var_2);
 }
 
 func_5AC8(var_0, var_1) {
@@ -679,19 +679,19 @@ func_5AC8(var_0, var_1) {
     self animmode("angle deltas", 0);
   }
 
-  self _meth_82A5( % exposed_aiming, % body, 1, var_4);
+  self func_82A5( % exposed_aiming, % body, 1, var_4);
   if(!isDefined(self.var_129B3)) {
     func_129A1(var_4);
   }
 
-  self _meth_82AC( % turn, 1, var_4);
+  self func_82AC( % turn, 1, var_4);
   if(isDefined(self.heat)) {
     var_3 = min(1, var_3);
   } else if(isDefined(self.var_129B3)) {
     var_3 = max(1.5, var_3);
   }
 
-  self _meth_82E6("turn", var_9, 1, var_4, var_3);
+  self func_82E6("turn", var_9, 1, var_4, var_3);
   func_43E3(var_9, "aim");
   self notify("turning");
   if(var_2 && !isDefined(self.var_129B3) && !isDefined(self.heat)) {
@@ -699,7 +699,7 @@ func_5AC8(var_0, var_1) {
   }
 
   func_5AC9();
-  self _meth_82AC( % turn, 0, 0.2);
+  self func_82AC( % turn, 0, 0.2);
   if(!isDefined(self.var_129B3)) {
     func_129A0(0.2);
   }
@@ -737,7 +737,7 @@ func_B2B2() {
 }
 
 func_129A1(var_0) {
-  self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, var_0);
+  self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, var_0);
   self give_attacker_kill_rewards( % add_idle, 0, var_0);
   if(!scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     self clearanim( % add_fire, 0.2);
@@ -745,7 +745,7 @@ func_129A1(var_0) {
 }
 
 func_129A0(var_0) {
-  self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
+  self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
   self give_attacker_kill_rewards( % add_idle, 1, var_0);
 }
 
@@ -825,7 +825,7 @@ func_1289C(var_0, var_1) {
 
   if(distancesquared(self.origin, var_3) > var_1 * var_1 && self.a.pose == self.a.var_85E2) {
     scripts\anim\combat_utility::func_F62B(var_0);
-    if(!scripts\anim\combat_utility::_meth_85B5(var_0)) {
+    if(!scripts\anim\combat_utility::func_85B5(var_0)) {
       return 0;
     }
 
@@ -889,7 +889,7 @@ transitionto(var_0) {
         ")) {
       }
 
-      self _meth_82E4("trans", var_2, % body, 1, 0.2, var_3); func_43E3(var_2, "run"); var_4 = getanimlength(var_2) / var_3; var_5 = var_4 - 0.3;
+      self func_82E4("trans", var_2, % body, 1, 0.2, var_3); func_43E3(var_2, "run"); var_4 = getanimlength(var_2) / var_3; var_5 = var_4 - 0.3;
       if(var_5 < 0.2) {
         var_5 = 0.2;
       }
@@ -980,9 +980,9 @@ transitionto(var_0) {
         var_2 = 1.2;
       }
 
-      var_3 = "reload_" + scripts\anim\combat_utility::_meth_81EB();
+      var_3 = "reload_" + scripts\anim\combat_utility::func_81EB();
       self clearanim( % root, 0.2);
-      self _meth_82EA(var_3, var_0, 1, 0.2, var_2);
+      self func_82EA(var_3, var_0, 1, 0.2, var_2);
       func_43E3(var_0, "run");
       thread func_C16A("abort_reload", var_3);
       self endon("start_aim");
@@ -1033,7 +1033,7 @@ transitionto(var_0) {
       thread scripts\anim\combat_utility::putgunbackinhandonkillanimscript();
       scripts\anim\combat_utility::func_631A();
       self.var_11317 = var_0;
-      self _meth_82E4("weapon swap", var_0, % body, 1, 0.2, scripts\anim\combat_utility::func_6B9A());
+      self func_82E4("weapon swap", var_0, % body, 1, 0.2, scripts\anim\combat_utility::func_6B9A());
       func_43E3(var_0, "run");
       donotetrackspostcallbackwithendon("weapon swap", ::func_89D2, "end_weapon_swap");
       self clearanim(self.var_11317, 0.2);
@@ -1079,7 +1079,7 @@ transitionto(var_0) {
 
       scripts\anim\combat_utility::func_631A();
       self.var_11317 = var_0;
-      self _meth_82E4("weapon swap", var_0, % body, 1, 0.1, 1);
+      self func_82E4("weapon swap", var_0, % body, 1, 0.1, 1);
       func_43E3(var_0, "run");
       if(isDefined(var_1)) {
         donotetrackspostcallbackwithendon("weapon swap", ::func_8984, "end_weapon_swap");
@@ -1135,7 +1135,7 @@ transitionto(var_0) {
         var_0 = scripts\anim\utility::func_B027("combat", "rpg_death_stagger");
       }
 
-      self _meth_82E3("deathanim", var_0, % root, 1, 0.05, 1);
+      self func_82E3("deathanim", var_0, % root, 1, 0.05, 1);
       func_43E3(var_0, "death");
       scripts\anim\shared::donotetracks("deathanim");
       scripts\anim\shared::func_5D1A();
@@ -1236,7 +1236,7 @@ transitionto(var_0) {
 
         case 4:
           if(!self getpersstat(self.isnodeoccupied) || !self canshootenemy()) {
-            self _meth_80EC();
+            self func_80EC();
           }
           break;
 

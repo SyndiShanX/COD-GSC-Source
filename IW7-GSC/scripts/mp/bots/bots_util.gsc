@@ -4,7 +4,7 @@
 *********************************************/
 
 bot_get_nodes_in_cone(var_0, var_1, var_2) {
-  var_3 = self _meth_8533();
+  var_3 = self func_8533();
   var_4 = getnodesinradius(self.origin, var_0, 0, 512, "path", var_3);
   var_5 = [];
   var_6 = self getnearestnode();
@@ -514,7 +514,7 @@ bot_get_entrances_for_stance_and_index(var_0, var_1) {
 
 bot_find_node_to_guard_player(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = self _meth_8533();
+  var_4 = self func_8533();
   var_5 = self.bot_defend_player_guarding getvelocity();
   if(lengthsquared(var_5) > 100) {
     var_6 = getnodesinradius(var_0, var_1 * 1.75, var_1 * 0.5, 500, "path", var_4);
@@ -586,7 +586,7 @@ bot_find_node_to_guard_player(var_0, var_1, var_2) {
 
 bot_find_node_to_capture_point(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = self _meth_8533();
+  var_4 = self func_8533();
   var_5 = getnodesinradius(var_0, var_1, 0, 500, "path", var_4);
   if(var_5.size > 0) {
     var_3 = self botnodepick(var_5, var_5.size * 0.15, "node_capture", var_0, var_2, self.defense_score_flags);
@@ -606,7 +606,7 @@ bot_find_node_to_capture_zone(var_0, var_1) {
 
 bot_find_node_that_protects_point(var_0, var_1) {
   var_2 = undefined;
-  var_3 = self _meth_8533();
+  var_3 = self func_8533();
   var_4 = getnodesinradius(var_0, var_1, 0, 500, "path", var_3);
   if(var_4.size > 0) {
     var_2 = self botnodepick(var_4, var_4.size * 0.15, "node_protect", var_0, self.defense_score_flags);
@@ -617,7 +617,7 @@ bot_find_node_that_protects_point(var_0, var_1) {
 
 bot_pick_random_point_in_radius(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
-  var_6 = self _meth_8533();
+  var_6 = self func_8533();
   var_7 = getnodesinradius(var_0, var_1, 0, 500, "path", var_6);
   if(isDefined(var_7) && var_7.size >= 2) {
     var_5 = bot_find_random_midpoint(var_7, var_2);

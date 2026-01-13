@@ -218,7 +218,7 @@ shouldmelee(var_0) {
     return level.failure;
   }
 
-  var_5 = self _meth_84AC();
+  var_5 = self func_84AC();
   var_6 = getclosestpointonnavmesh(var_1.origin, self);
   if(!navisstraightlinereachable(var_5, var_6, self)) {
     return level.failure;
@@ -506,7 +506,7 @@ shouldteleport(var_0) {
 
   if(isDefined(self.vehicle_getspawnerarray)) {
     var_3 = self pathdisttogoal();
-    var_4 = self _meth_84F9(var_3);
+    var_4 = self func_84F9(var_3);
     if(isDefined(var_4)) {
       var_5 = var_4["node"];
       var_6 = var_4["position"];

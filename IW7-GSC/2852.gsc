@@ -5,7 +5,7 @@
 
 func_5C21() {
   func_23C7();
-  self _meth_839E();
+  self func_839E();
 
   if(isDefined(self.var_EE2C)) {
     self.moveplaybackrate = self.var_EE2C;
@@ -15,7 +15,7 @@ func_5C21() {
 
   if(self.team == "allies") {
     scripts\sp\names::func_7B05();
-    self _meth_8307(self.name, &"");
+    self func_8307(self.name, &"");
   }
 
   if(isDefined(level.var_5CA7)) {

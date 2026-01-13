@@ -25,7 +25,7 @@ main() {
   func_F924();
   self.covernode = self.target_getindexoftarget;
   self orientmode("face angle", self.covernode.angles[1]);
-  self.a._meth_8445 = 1;
+  self.a.func_8445 = 1;
   self give_run_perk(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
   if(self.a.pose != "prone") {
     prone_transitionto("prone");
@@ -43,7 +43,7 @@ main() {
 }
 
 end_script() {
-  self.a._meth_8445 = undefined;
+  self.a.func_8445 = undefined;
 }
 
 func_92FF() {
@@ -51,14 +51,14 @@ func_92FF() {
   self endon("kill_idle_thread");
   for(;;) {
     var_0 = scripts\anim\utility::func_1F67("prone_idle");
-    self _meth_82E8("idle", var_0);
+    self func_82E8("idle", var_0);
     self waittillmatch("end", "idle");
     self clearanim(var_0, 0.2);
   }
 }
 
 func_12EF6(var_0) {
-  self _meth_83CF(scripts\anim\utility::func_B027("cover_prone", "legs_up"), scripts\anim\utility::func_B027("cover_prone", "legs_down"), 1, var_0, 1);
+  self func_83CF(scripts\anim\utility::func_B027("cover_prone", "legs_up"), scripts\anim\utility::func_B027("cover_prone", "legs_down"), 1, var_0, 1);
   self give_attacker_kill_rewards( % exposed_aiming, 1, 0.2);
 }
 
@@ -117,7 +117,7 @@ func_DA83(var_0) {
 }
 
 func_F924() {
-  self _meth_82D0(self.target_getindexoftarget);
+  self func_82D0(self.target_getindexoftarget);
   self.a.var_2274 = scripts\anim\utility::func_B028("cover_prone");
 }
 
@@ -182,7 +182,7 @@ prone_transitionto(var_0) {
 
   if(var_0 == "prone") {}
 
-  self _meth_82E4("trans", var_1, % body, 1, 0.2, 1);
+  self func_82E4("trans", var_1, % body, 1, 0.2, 1);
   scripts\anim\shared::donotetracks("trans");
   self give_boombox(scripts\anim\utility::func_1F64("straight_level"), % body, 1, 0.25);
   func_FADE(0.25);
@@ -194,11 +194,11 @@ func_6CDE(var_0) {
 }
 
 func_FADE(var_0) {
-  self _meth_82A5( % prone_aim_5, % body, 1, var_0);
-  self _meth_82AC( % prone_aim_2_add, 1, var_0);
-  self _meth_82AC( % prone_aim_4_add, 1, var_0);
-  self _meth_82AC( % prone_aim_6_add, 1, var_0);
-  self _meth_82AC( % prone_aim_8_add, 1, var_0);
+  self func_82A5( % prone_aim_5, % body, 1, var_0);
+  self func_82AC( % prone_aim_2_add, 1, var_0);
+  self func_82AC( % prone_aim_4_add, 1, var_0);
+  self func_82AC( % prone_aim_6_add, 1, var_0);
+  self func_82AC( % prone_aim_8_add, 1, var_0);
 }
 
 func_DA87(var_0, var_1) {
@@ -217,7 +217,7 @@ func_DA87(var_0, var_1) {
   }
 
   scripts\anim\utility::exitpronewrapper(getanimlength(var_2) / 2);
-  self _meth_82E4("trans", var_2, % body, 1, 0.2, var_1);
+  self func_82E4("trans", var_2, % body, 1, 0.2, var_1);
   scripts\anim\shared::donotetracks("trans");
   self clearanim(var_2, 0.1);
 }

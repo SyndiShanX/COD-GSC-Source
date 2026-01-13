@@ -55,7 +55,7 @@ setupagent() {
 func_FAEF() {
   self endon("death");
   wait 0.1;
-  self _meth_8504(1, "bot_move_forward", "bot_jump", "bot_double_jump");
+  self func_8504(1, "bot_move_forward", "bot_jump", "bot_double_jump");
 }
 
 func_1090C(var_0, var_1, var_2) {

@@ -15,8 +15,8 @@ main(var_0) {
 }
 
 func_B79D(var_0, var_1) {
-  if(var_1 _meth_810A() > 0) {
-    var_1 _meth_83A2();
+  if(var_1 func_810A() > 0) {
+    var_1 func_83A2();
   }
 }
 
@@ -77,7 +77,7 @@ func_6D64(var_0) {
       }
 
       if(self.var_9DA6 || gettime() - var_4 >= var_5) {
-        var_0 _meth_83A2();
+        var_0 func_83A2();
         var_7 = 0;
         var_5 = undefined;
       }
@@ -106,12 +106,12 @@ func_6D64(var_0) {
 }
 
 func_B7A2() {
-  if(self _meth_810A() == 1) {
+  if(self func_810A() == 1) {
     return;
   }
 
-  self _meth_8395();
-  while(self _meth_810A() < 1) {
+  self func_8395();
+  while(self func_810A() < 1) {
     wait(0.05);
   }
 }

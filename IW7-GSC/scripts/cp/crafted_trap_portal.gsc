@@ -271,7 +271,7 @@ portal_setactive(var_0) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.crafted_portal_settings["crafted_portal"].pow);
   self makeusable();
-  self _meth_84A7("tag_fx");
+  self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
   thread portal_handledeath(self.triggerportableradarping);

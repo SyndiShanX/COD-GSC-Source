@@ -23,7 +23,7 @@ dotraverseanim_dlc(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self.endnode_pos = var_5;
   if(!isDefined(var_4)) {
     return;
@@ -121,7 +121,7 @@ dotraverseanim_dlc(var_0, var_1, var_2, var_3) {
   }
 
   self gib_fx_override("noclip");
-  opcode::OP_CallBuiltin4 = self _meth_8145();
+  opcode::OP_CallBuiltin4 = self func_8145();
   if(isDefined(opcode::OP_CallBuiltin4) && isDefined(var_1E.target)) {
     self.endnode = opcode::OP_CallBuiltin4;
     opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
@@ -485,7 +485,7 @@ shoot_generic_dlc(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   lib_0F3E::func_FE89();
   var_4 = lib_0F3E::func_FE64();
-  self _meth_83CE();
+  self func_83CE();
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   shootburst_dlc(var_1, 0.2, 2);
   self.asm.shootparams.var_C21C--;
@@ -516,8 +516,8 @@ shootburst_dlc(var_0, var_1, var_2) {
     }
 
     self.var_A9ED = gettime();
-    var_0A = lib_0F3C::_meth_811C();
-    var_0B = lib_0F3C::_meth_811E(var_0A);
+    var_0A = lib_0F3C::func_811C();
+    var_0B = lib_0F3C::func_811E(var_0A);
     self shoot(1, var_0B, 1, 0, 1);
     if(self.bulletsinclip > 0) {
       if(var_8) {

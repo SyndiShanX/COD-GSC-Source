@@ -45,7 +45,7 @@ init() {
     var_5.var_130F9 = func_DD68(var_3, 11, 1);
     var_5.var_130FA = func_DD68(var_3, 12, 1);
     var_5.var_BCEF = func_DD68(var_3, 13, 1);
-    var_5._meth_8487 = func_DD68(var_3, var_1, 1);
+    var_5.func_8487 = func_DD68(var_3, var_1, 1);
     var_5.var_B474 = func_DD68(var_3, 15, 1);
     var_5.var_12B28 = func_DD68(var_3, 17, 1);
     var_5.archetype = func_DD68(var_3, 16);
@@ -94,10 +94,10 @@ init() {
       var_5.weapon = "super_default_mp";
     }
 
-    if(isDefined(var_5._meth_8487)) {
-      var_5._meth_8487 = var_5._meth_8487 * 1000.0;
+    if(isDefined(var_5.func_8487)) {
+      var_5.func_8487 = var_5.func_8487 * 1000.0;
     } else {
-      var_5._meth_8487 = 0.0;
+      var_5.func_8487 = 0.0;
     }
 
     if(isDefined(var_5.var_12B28)) {
@@ -330,7 +330,7 @@ func_12F32() {
       self setclientomnvar("ui_super_progress", var_1);
     }
 
-    self _meth_8400(var_1);
+    self func_8400(var_1);
     scripts\engine\utility::waitframe();
   }
 }
@@ -471,7 +471,7 @@ func_2A79() {
       var_2[1] = "super_switched";
       scripts\mp\lightbar::func_1768(2, 0, 2, 1, 0, var_2);
       var_0.isinuse = 1;
-      var_0.var_1CA3 = scripts\engine\utility::ter_op(var_0.staticdata._meth_8487 > 0, 1, 0);
+      var_0.var_1CA3 = scripts\engine\utility::ter_op(var_0.staticdata.func_8487 > 0, 1, 0);
       func_10DF7();
 
       if(isDefined(self.matchdatalifeindex)) {
@@ -528,7 +528,7 @@ func_10DF7() {
   var_0 = getcurrentsuper();
   self notify("super_use_started");
   var_0.var_130DE = gettime();
-  var_0.var_130EF = _meth_8188() * 1000.0;
+  var_0.var_130EF = func_8188() * 1000.0;
   var_0.var_12B2C = gettime() + var_0.staticdata.var_12B28;
   func_112A5();
 }
@@ -754,7 +754,7 @@ hudoutlinedisable() {
   var_0 = getcurrentsuper();
   var_1 = gettime();
   var_2 = var_0.var_12B2C - var_0.var_130DE;
-  var_3 = _meth_8188() * 1000.0 - var_2;
+  var_3 = func_8188() * 1000.0 - var_2;
   var_4 = clamp(var_0.var_130EF / var_3, 0.0, 1.0);
   return var_4;
 }
@@ -768,7 +768,7 @@ getsupermaxcooldownmsec() {
   return int(getsupermaxcooldownsec() * 1000);
 }
 
-_meth_8188() {
+func_8188() {
   return getcurrentsuper().staticdata.var_5F36;
 }
 
@@ -806,7 +806,7 @@ getcurrentsuperref() {
 
 shouldreacttonewenemy(var_0) {
   var_1 = getcurrentsuper();
-  var_2 = var_1.staticdata._meth_8487;
+  var_2 = var_1.staticdata.func_8487;
   var_3 = gettime() - var_1.var_130DE;
 
   if(var_3 >= var_2) {
@@ -894,11 +894,11 @@ func_12CFF() {
 }
 
 func_1308A() {
-  return scripts\mp\supers\super_gravwave::_meth_8541();
+  return scripts\mp\supers\super_gravwave::func_8541();
 }
 
 func_6332() {
-  scripts\mp\supers\super_gravwave::_meth_853F();
+  scripts\mp\supers\super_gravwave::func_853F();
 }
 
 func_130F6() {
@@ -1009,7 +1009,7 @@ func_1309C() {
   return 1;
 }
 
-_meth_8189(var_0) {
+func_8189(var_0) {
   var_0 = scripts\mp\utility\game::getweaponrootname(var_0);
 
   if(!isDefined(level.superweapons[var_0])) {
@@ -1048,7 +1048,7 @@ func_7F0D(var_0) {
   return undefined;
 }
 
-_meth_8186(var_0) {
+func_8186(var_0) {
   if(!isDefined(var_0) || !isDefined(level.var_10E4E[var_0]) || var_0 == "none") {
     return 0;
   }

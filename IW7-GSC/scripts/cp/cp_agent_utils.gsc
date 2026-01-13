@@ -123,7 +123,7 @@ set_agent_traversal_unit_type(var_0, var_1) {
     return;
   }
 
-  var_0 _meth_828C(level.agent_definition[var_1]["traversal_unit_type"]);
+  var_0 func_828C(level.agent_definition[var_1]["traversal_unit_type"]);
 }
 
 can_set_traversal_unit_type(var_0) {
@@ -458,7 +458,7 @@ do_immediate_ragdoll(var_0) {
 
 delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_0)) {
-    var_6 = var_0 _meth_8112();
+    var_6 = var_0 func_8112();
     if(animhasnotetrack(var_6, "ignore_ragdoll")) {
       return;
     }
@@ -477,11 +477,11 @@ delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(var_0 _meth_81B7()) {
+  if(var_0 func_81B7()) {
     return;
   }
 
-  var_6 = var_0 _meth_8112();
+  var_6 = var_0 func_8112();
   var_0A = 0.35;
   if(animhasnotetrack(var_6, "start_ragdoll")) {
     var_0B = getnotetracktimes(var_6, "start_ragdoll");

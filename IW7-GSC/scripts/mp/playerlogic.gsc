@@ -796,7 +796,7 @@ spawnplayer(var_0) {
     scripts\mp\class::giveloadout(self.team, self.class);
   }
 
-  self _meth_84BE("player_mp");
+  self func_84BE("player_mp");
   if(isDefined(game["roundsPlayed"]) && game["roundsPlayed"] > 0) {
     if(!isDefined(self.classrefreshed) || !self.classrefreshed) {
       if(isDefined(self.class_num)) {
@@ -869,7 +869,7 @@ func_DDED() {
       var_1 = scripts\mp\utility::func_9EE8();
       var_2 = scripts\mp\matchdata::gettimefrommatchstart(gettime());
       var_3 = var_2 / 1000;
-      self _meth_8571(var_3, var_0, var_1);
+      self func_8571(var_3, var_0, var_1);
       wait(2);
     }
   }
@@ -1837,7 +1837,7 @@ callback_playerconnect() {
     self.pers["matchdataScoreEventCounts"] = [];
     self.pers["xpAtLastDeath"] = 0;
     self.pers["scoreAtLastDeath"] = 0;
-    self _meth_8596(self.pers["clientid"]);
+    self func_8596(self.pers["clientid"]);
     setmatchdata("players", self.pers["clientid"], "joinType", self getjointype());
     setmatchdata("players", self.pers["clientid"], "isTrialVersion", self istrialversion());
   }

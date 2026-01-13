@@ -8,5 +8,5 @@ main() {
 }
 
 func_12A73(var_0) {
-  self _meth_83AE();
+  self func_83AE();
 }

@@ -87,7 +87,7 @@ func_12783(var_0) {
       self delete();
       return;
     } else if(var_0.script_noteworthy == "engineoff") {
-      self _meth_83E8();
+      self func_83E8();
     } else {
       self notify(var_0.script_noteworthy);
       self notify("noteworthy", var_0.script_noteworthy);
@@ -495,7 +495,7 @@ func_1321B(var_0, var_1, var_2) {
       thread func_12BC7(var_7);
     }
 
-    if(self _meth_83E2()) {
+    if(self func_83E2()) {
       if(isDefined(var_7.var_EE7C)) {
         self.var_378 = var_7.var_EE7C;
       }
@@ -645,7 +645,7 @@ beginlocationselection(var_0) {
     if(isDefined(self.target)) {
       var_3 = getcsplineid(self.target);
       if(isDefined(var_3)) {
-        self _meth_8479(var_3);
+        self func_8479(var_3);
       }
     }
 

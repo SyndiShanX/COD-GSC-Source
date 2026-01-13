@@ -480,7 +480,7 @@ func_A207(var_0) {
     self.var_8E5D = scripts\engine\utility::array_add(self.var_8E5D, var_0);
   }
 
-  self _meth_8189(var_0);
+  self func_8189(var_0);
 }
 
 func_A335(var_0) {
@@ -494,7 +494,7 @@ func_A335(var_0) {
   self showallparts();
 
   foreach(var_2 in self.var_8E5D) {
-    self _meth_8189(var_2);
+    self func_8189(var_2);
   }
 }
 
@@ -759,7 +759,7 @@ func_198F(var_0) {
     var_0 = 1;
   }
 
-  self _meth_8555(var_0);
+  self func_8555(var_0);
 }
 
 func_1983() {
@@ -815,7 +815,7 @@ func_1991(var_0) {
     var_1 = level.var_A065["evasion"][level.var_A056.var_67D8];
   }
 
-  self _meth_82AB(var_1, 1, 0.0);
+  self func_82AB(var_1, 1, 0.0);
   self give_attacker_kill_rewards(level.var_A065["evasion_overlay"], 1.0);
 
   if(!var_2) {
@@ -929,7 +929,7 @@ func_F5BD(var_0) {
 }
 
 func_7BBA() {
-  var_0 = level.player _meth_8473();
+  var_0 = level.player func_8473();
 
   if(isDefined(var_0)) {
     return var_0.origin;
@@ -939,7 +939,7 @@ func_7BBA() {
 }
 
 func_7BB9() {
-  var_0 = level.player _meth_8473();
+  var_0 = level.player func_8473();
 
   if(isDefined(var_0)) {
     return var_0.angles;
@@ -1129,7 +1129,7 @@ func_A2DE(var_0, var_1, var_2, var_3) {
     var_1 = 0.2;
   }
 
-  self _meth_848F(var_0);
+  self func_848F(var_0);
 
   if(var_0 && !var_2) {
     self clearanim( % jackal_thrust_p, var_1);
@@ -1364,7 +1364,7 @@ func_A25B(var_0, var_1, var_2, var_3, var_4, var_5) {
     self linkto(level.var_D127, var_1, var_2, var_3);
   } else if(!isDefined(var_4)) {
     level.player.spaceship_linked_ent = self;
-    level.player _meth_8468(self, var_1, var_0, var_2, var_3);
+    level.player func_8468(self, var_1, var_0, var_2, var_3);
   } else {
     self.start = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles - (0, 180, 0));
     thread func_2B74(self.start, level.var_D127, var_0, 0, "tag_origin", "j_canopy");
@@ -1376,7 +1376,7 @@ func_A387() {
     level.var_D127.linked_ents = scripts\engine\utility::array_remove(level.var_D127.linked_ents, self);
 
     if(!isDefined(level.player.spaceship_linked_ent) || level.player.spaceship_linked_ent == self) {
-      level.player _meth_8469();
+      level.player func_8469();
       level.player.spaceship_linked_ent = undefined;
     }
   }
@@ -1387,7 +1387,7 @@ func_A386(var_0) {
     var_0 = 1;
   }
 
-  level.player _meth_8490("unlimited_boost", var_0);
+  level.player func_8490("unlimited_boost", var_0);
 }
 
 func_A160(var_0, var_1) {
@@ -1609,13 +1609,13 @@ func_A149(var_0) {
   if(var_0) {
     var_0 = 0;
     level.player scripts\sp\utility::func_65E1("disable_jackal_ads");
-    level.player _meth_8490("disable_lockon", 1);
+    level.player func_8490("disable_lockon", 1);
   } else {
     var_0 = 1;
     level.player scripts\sp\utility::func_65DD("disable_jackal_ads");
 
     if(!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon")) {
-      level.player _meth_8490("disable_lockon", 0);
+      level.player func_8490("disable_lockon", 0);
     }
   }
 
@@ -1627,7 +1627,7 @@ func_A14D(var_0) {
     var_0 = 1;
   }
 
-  level.player _meth_8490("disable_collision", var_0);
+  level.player func_8490("disable_collision", var_0);
 
   if(var_0) {
     _setsaveddvar("spaceshipResolvePenetration", 0);
@@ -1641,7 +1641,7 @@ func_A14A(var_0) {
     var_0 = 1;
   }
 
-  level.player _meth_8490("disable_boost", var_0);
+  level.player func_8490("disable_boost", var_0);
 }
 
 func_A162(var_0) {
@@ -1833,7 +1833,7 @@ func_A155(var_0) {
     level.player scripts\sp\utility::func_65DD("disable_jackal_juke");
   }
 
-  level.player _meth_8490("disable_juke", var_0);
+  level.player func_8490("disable_juke", var_0);
 }
 
 func_A161(var_0) {
@@ -1911,9 +1911,9 @@ func_A152(var_0) {
     level.var_D127 notify("spaceship_weapon_state_change", "silent");
   }
 
-  level.var_D127 _meth_849E("spaceship_disabled_guns");
+  level.var_D127 func_849E("spaceship_disabled_guns");
   thread func_A157();
-  level.var_D127 _meth_849F(0);
+  level.var_D127 func_849F(0);
   level.player allowads(0);
   setomnvar("ui_jackal_weapon_display_temp", 0);
 }
@@ -1926,10 +1926,10 @@ func_A19E(var_0) {
   level.var_D127 func_0BD9::func_D17E();
 
   if(!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon")) {
-    level.player _meth_8490("disable_lockon", 0);
+    level.player func_8490("disable_lockon", 0);
   }
 
-  level.var_D127 _meth_849F(1);
+  level.var_D127 func_849F(1);
   level.player allowads(1);
 
   if(!level.player scripts\sp\utility::func_65DB("disable_jackal_overheat")) {
@@ -1979,7 +1979,7 @@ func_E047() {
 func_A157() {
   level.player endon("disable_jackal_guns");
   func_137DB();
-  level.player _meth_8490("disable_lockon", 1);
+  level.player func_8490("disable_lockon", 1);
 }
 
 func_13C11(var_0, var_1) {
@@ -2003,8 +2003,8 @@ func_A15F(var_0) {
     level.player scripts\sp\utility::func_65DD("disable_jackal_pilot_assist");
   }
 
-  level.player _meth_8490("disable_pilot_aim_assist", var_0);
-  level.player _meth_8490("disable_pilot_move_assist", var_0);
+  level.player func_8490("disable_pilot_aim_assist", var_0);
+  level.player func_8490("disable_pilot_move_assist", var_0);
 }
 
 func_A15D(var_0) {
@@ -2107,7 +2107,7 @@ func_A1DD(var_0) {
   } else {
     level.player scripts\sp\utility::func_65E1("jackal_force_mode");
     level.var_D127.var_72A8 = var_0;
-    level.var_D127 _meth_8491(var_0);
+    level.var_D127 func_8491(var_0);
   }
 }
 
@@ -2164,7 +2164,7 @@ func_A156(var_0) {
   }
 
   if(scripts\engine\utility::player_is_in_jackal()) {
-    level.player _meth_8490("disable_lockon", var_0);
+    level.player func_8490("disable_lockon", var_0);
   }
 }
 
@@ -2188,7 +2188,7 @@ func_A0BE(var_0) {
     level.var_A056.var_2CAD = 0;
   }
 
-  level.player _meth_8490("auto_boost_on", var_0);
+  level.player func_8490("auto_boost_on", var_0);
 }
 
 func_9CC8() {
@@ -2855,7 +2855,7 @@ func_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_8 = 1;
   }
 
-  self _meth_8339(0);
+  self func_8339(0);
   var_9 = 0;
 
   if(isDefined(self.script_team)) {
@@ -2885,9 +2885,9 @@ func_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(isstring(var_1)) {
-      self _meth_8307(var_1, &"");
+      self func_8307(var_1, &"");
     } else {
-      self _meth_8307("", var_1);
+      self func_8307("", var_1);
     }
 
     if(var_9) {
@@ -2901,7 +2901,7 @@ func_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   level.var_A056.targets = scripts\engine\utility::array_removeundefined(level.var_A056.targets);
   level.var_A056.targets = scripts\engine\utility::array_add(level.var_A056.targets, self);
-  self _meth_84BE(self.var_AEDF.type);
+  self func_84BE(self.var_AEDF.type);
   func_620B();
 
   if(var_8) {
@@ -3012,7 +3012,7 @@ func_3777() {
   self endon("stop_target_priority");
 
   for(;;) {
-    self _meth_84A0(0);
+    self func_84A0(0);
     wait 0.05;
   }
 }
@@ -3081,7 +3081,7 @@ func_620B() {
 }
 
 func_E046() {
-  self _meth_8558();
+  self func_8558();
   self.var_AEDF.var_3A5B = 0;
 }
 
@@ -3092,7 +3092,7 @@ func_620A() {
 
 func_5543() {
   if(!self.var_AEDF.var_72A3) {
-    self _meth_84A0(0);
+    self func_84A0(0);
     self.var_AEDF.callout = 0;
   }
 }
@@ -3136,7 +3136,7 @@ func_105DA() {
   func_105D8();
   self.var_AEDF = undefined;
   level.var_A056.targets = scripts\engine\utility::array_remove(level.var_A056.targets, self);
-  self _meth_8558();
+  self func_8558();
   self notify("spaceship_target_remove");
 }
 
@@ -3154,9 +3154,9 @@ func_105D9() {
     level.var_A056.var_C93E = scripts\engine\utility::array_remove(level.var_A056.var_C93E, self);
   }
 
-  self _meth_84A0(0);
-  self _meth_8558();
-  self _meth_84C1();
+  self func_84A0(0);
+  self func_8558();
+  self func_84C1();
 }
 
 func_105D5() {
@@ -3180,7 +3180,7 @@ func_105D6() {
     func_0B76::func_F42C(self.var_AEDF.var_3A5C);
   }
 
-  self _meth_84BE(self.var_AEDF.type);
+  self func_84BE(self.var_AEDF.type);
 }
 
 func_7B9B() {
@@ -3603,7 +3603,7 @@ func_137DA() {
 
 func_137D8() {
   for(;;) {
-    var_0 = level.player _meth_8473();
+    var_0 = level.player func_8473();
 
     if(!isDefined(var_0)) {
       break;
@@ -3639,7 +3639,7 @@ func_13797() {
     var_1 = level.player getnormalizedmovement();
     var_2 = var_1[0] + var_1[1];
 
-    if(level.player _meth_8439()) {
+    if(level.player func_8439()) {
       if(var_2 > 0.3 && !var_0) {
         break;
       }
@@ -3935,7 +3935,7 @@ func_1162F(var_0) {
   }
 
   self vehicle_teleport(var_1.origin + (0, 0, 70), var_1.angles);
-  self _meth_8455(var_1.origin + (0, 0, 70), 1, var_1.angles);
+  self func_8455(var_1.origin + (0, 0, 70), 1, var_1.angles);
 }
 
 func_10749() {
@@ -4008,8 +4008,8 @@ func_D155(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   level.var_A056.var_11B0D[var_5][var_6] = 1;
   level.var_D127 notify(var_5 + "_started");
-  level.player _meth_8462(var_0, var_5, var_6, var_1, var_3);
-  level.player _meth_8462(var_0, var_5, var_6 + "_player", var_2, var_3);
+  level.player func_8462(var_0, var_5, var_6, var_1, var_3);
+  level.player func_8462(var_0, var_5, var_6 + "_player", var_2, var_3);
 
   if(var_1 == 0 && var_2 == 1) {
     thread func_D156(var_5, var_6, var_3);
@@ -4022,7 +4022,7 @@ func_D156(var_0, var_1, var_2) {
   level.var_A056.var_11B0D[var_0][var_1] = 0;
 
   if(level.var_A056.var_11B0D[var_0]["absolute"] == 0 && level.var_A056.var_11B0D[var_0]["desires"] == 0 && level.var_A056.var_11B0D[var_0]["link"] == 0) {
-    level.player _meth_8463(var_0);
+    level.player func_8463(var_0);
   }
 }
 
@@ -4036,10 +4036,10 @@ func_D164(var_0, var_1) {
   level.var_D127 notify("moveto_started");
   level.var_D127 notify("lookat_started");
   level.var_D127 endon("linktoblend_started");
-  level.player _meth_8462(var_0, "orient", "time", 1, var_1);
-  level.player _meth_8462(var_0, "orient", "time_player", 0, var_1);
-  level.player _meth_8462(var_0, "moveto", "time", 1, var_1);
-  level.player _meth_8462(var_0, "moveto", "time_player", 0, var_1);
+  level.player func_8462(var_0, "orient", "time", 1, var_1);
+  level.player func_8462(var_0, "orient", "time_player", 0, var_1);
+  level.player func_8462(var_0, "moveto", "time", 1, var_1);
+  level.player func_8462(var_0, "moveto", "time_player", 0, var_1);
   level.var_A056.var_AD1D = var_0;
 }
 
@@ -4060,14 +4060,14 @@ func_D190(var_0) {
 func_D191(var_0, var_1, var_2) {
   level.var_D127 endon(var_1 + "_started");
   level.var_D127 endon("linktoblend_started");
-  level.player _meth_8462(level.var_A056.var_AD1D, var_2, "time", 0, var_0);
-  level.player _meth_8462(level.var_A056.var_AD1D, var_2, "time_player", 1, var_0);
+  level.player func_8462(level.var_A056.var_AD1D, var_2, "time", 0, var_0);
+  level.player func_8462(level.var_A056.var_AD1D, var_2, "time_player", 1, var_0);
   wait(var_0);
   level.var_A056.var_11B0D["moveto"]["link"] = 0;
   level.var_A056.var_11B0D["lookat"]["link"] = 0;
 
   if(level.var_A056.var_11B0D[var_1]["absolute"] == 0 && level.var_A056.var_11B0D[var_1]["desires"] == 0 && level.var_A056.var_11B0D[var_1]["link"] == 0) {
-    level.player _meth_8463(var_1);
+    level.player func_8463(var_1);
   }
 }
 
@@ -4104,9 +4104,9 @@ func_A2B0(var_0, var_1, var_2, var_3) {
     var_3 = 0.2;
   }
 
-  level.player _meth_8489("body", var_0, var_2, var_1);
+  level.player func_8489("body", var_0, var_2, var_1);
   wait(getanimlength(var_0) - var_3);
-  level.player _meth_8489("blendout", var_0, var_3, var_1);
+  level.player func_8489("blendout", var_0, var_3, var_1);
 }
 
 func_2B74(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -4323,7 +4323,7 @@ func_A1F0(var_0, var_1, var_2, var_3, var_4) {
   var_6 = rotatevector(var_6, self.angles);
   var_7 = self.origin + var_6;
   var_8 = _calccsplineclosestpoint(var_5, var_7);
-  self _meth_8455(var_8);
+  self func_8455(var_8);
 
   if(!isDefined(var_2)) {
     var_2 = 384.0;
@@ -4332,13 +4332,13 @@ func_A1F0(var_0, var_1, var_2, var_3, var_4) {
   self setneargoalnotifydist(var_2);
 
   if(isDefined(var_1)) {
-    self _meth_845F(var_1);
+    self func_845F(var_1);
   }
 
   self waittill("near_goal");
   func_1981();
-  self _meth_8479(var_5);
-  self _meth_847B(var_3, var_7);
+  self func_8479(var_5);
+  self func_847B(var_3, var_7);
   self.var_10A43 = var_5;
   self waittill("near_goal");
   func_0C24::func_10A44(var_5);
@@ -4355,7 +4355,7 @@ func_A1ED(var_0, var_1, var_2, var_3) {
     var_4 = getcsplinepointposition(var_0, 0);
   }
 
-  self _meth_8455(var_4);
+  self func_8455(var_4);
 
   if(!isDefined(var_2)) {
     var_2 = 384.0;
@@ -4364,7 +4364,7 @@ func_A1ED(var_0, var_1, var_2, var_3) {
   self setneargoalnotifydist(var_2);
 
   if(isDefined(var_1)) {
-    self _meth_845F(var_1);
+    self func_845F(var_1);
   }
 
   self waittill("near_goal");
@@ -4376,7 +4376,7 @@ func_A1F2(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = getcsplinepointposition(var_0, var_1);
-  self _meth_8455(var_4);
+  self func_8455(var_4);
 
   if(!isDefined(var_3)) {
     var_3 = 384.0;
@@ -4385,7 +4385,7 @@ func_A1F2(var_0, var_1, var_2, var_3) {
   self setneargoalnotifydist(var_3);
 
   if(isDefined(var_2)) {
-    self _meth_845F(var_2);
+    self func_845F(var_2);
   }
 
   self waittill("near_goal");
@@ -4506,9 +4506,9 @@ func_A1EC(var_0, var_1, var_2, var_3) {
   func_1981();
 
   if(isDefined(var_3)) {
-    self _meth_8455(var_0, var_1, var_3);
+    self func_8455(var_0, var_1, var_3);
   } else {
-    self _meth_8455(var_0, var_1);
+    self func_8455(var_0, var_1);
   }
 
   self setneargoalnotifydist(var_2);
@@ -4571,7 +4571,7 @@ func_19B0(var_0) {
   self._blackboard.var_E1AC = var_0;
 
   if(var_0 == "hover" || var_0 == "fly") {
-    self _meth_8491(var_0);
+    self func_8491(var_0);
     func_0C21::func_20DD();
   }
 }
@@ -4687,7 +4687,7 @@ func_19AB(var_0, var_1, var_2, var_3) {
     func_19AD(var_0, var_1, var_2, var_3);
     func_19AC(var_0, var_1, var_2, var_3);
   } else
-    self _meth_845F(var_0, var_1, var_2, var_3);
+    self func_845F(var_0, var_1, var_2, var_3);
 }
 
 func_19AC(var_0, var_1, var_2, var_3) {
@@ -4735,7 +4735,7 @@ func_19AD(var_0, var_1, var_2, var_3) {
 }
 
 func_1996() {
-  return func_0C21::_meth_814A();
+  return func_0C21::func_814A();
 }
 
 func_ACE8(var_0, var_1) {
@@ -4798,7 +4798,7 @@ func_1995(var_0) {
   }
 
   self give_left_powers("cannon", var_1.anims, 1.0, 0.0, 1.0);
-  self _meth_82B0(var_1.anims, 1.0);
+  self func_82B0(var_1.anims, 1.0);
 }
 
 func_DBDC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -4855,7 +4855,7 @@ func_D527(var_0, var_1, var_2, var_3, var_4) {
   var_5 playSound(var_0, "sounddone");
 
   if(isDefined(var_2)) {
-    var_5 _meth_8277(var_2, 0);
+    var_5 func_8277(var_2, 0);
   }
 
   if(isDefined(var_3)) {
@@ -4881,7 +4881,7 @@ func_D52C(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 playSound(var_0, "sounddone");
 
   if(isDefined(var_2)) {
-    var_6 _meth_8277(var_2, 0);
+    var_6 func_8277(var_2, 0);
   }
 
   if(isDefined(var_3)) {
@@ -4909,22 +4909,22 @@ func_D52D(var_0, var_1, var_2) {
 }
 
 func_F2FF() {
-  self _meth_84BF(1);
+  self func_84BF(1);
   level.var_A056.var_D824 = scripts\engine\utility::array_add(level.var_A056.var_D824, self);
   thread func_413C();
-  level.player _meth_84D4(1);
+  level.player func_84D4(1);
 }
 
 func_413B() {
   if(isDefined(self)) {
-    self _meth_84BF(0);
+    self func_84BF(0);
     level.var_A056.var_D824 = scripts\engine\utility::array_remove(level.var_A056.var_D824, self);
   }
 
   level.var_A056.var_D824 = scripts\engine\utility::array_removeundefined(level.var_A056.var_D824);
 
   if(level.var_A056.var_D824.size == 0) {
-    level.player _meth_84D4(0);
+    level.player func_84D4(0);
   }
 }
 
@@ -4936,23 +4936,23 @@ func_413C() {
 func_A287(var_0) {
   if(isDefined(var_0)) {
     if(isDefined(level.script) && level.script == "moonjackal") {
-      level.player scripts\engine\utility::delaycall(1, ::_meth_82C0, "jackal_mute_engines", 1);
+      level.player scripts\engine\utility::delaycall(1, ::func_82C0, "jackal_mute_engines", 1);
     } else {
-      level.player _meth_82C0("jackal_mute_engines", var_0);
+      level.player func_82C0("jackal_mute_engines", var_0);
     }
   } else
-    level.player _meth_82C0("jackal_mute_engines", 0.5);
+    level.player func_82C0("jackal_mute_engines", 0.5);
 }
 
 func_A388(var_0) {
   if(isDefined(var_0)) {
     if(isDefined(level.script) && level.script == "moonjackal") {
-      level.player scripts\engine\utility::delaycall(2, ::_meth_82C0, "jackal_cockpit", 0.5);
+      level.player scripts\engine\utility::delaycall(2, ::func_82C0, "jackal_cockpit", 0.5);
     } else {
-      level.player _meth_82C0("jackal_cockpit", var_0);
+      level.player func_82C0("jackal_cockpit", var_0);
     }
   } else
-    level.player _meth_82C0("jackal_cockpit", 0.5);
+    level.player func_82C0("jackal_cockpit", 0.5);
 }
 
 func_1990(var_0) {
@@ -5197,9 +5197,9 @@ func_A0E9() {
   level endon("stop_boundary_warning_alarm");
 
   for(;;) {
-    self _meth_8557("OFFSCREEN_ENEMY_INDICATOR");
+    self func_8557("OFFSCREEN_ENEMY_INDICATOR");
     wait 0.5;
-    self _meth_8558();
+    self func_8558();
     wait 0.25;
   }
 }

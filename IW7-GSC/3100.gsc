@@ -44,7 +44,7 @@ func_FF27() {
     return 0;
   }
 
-  if(isDefined(self._meth_843F) && self._meth_843F) {
+  if(isDefined(self.func_843F) && self.func_843F) {
     return 0;
   }
 
@@ -56,12 +56,12 @@ func_FF27() {
 }
 
 func_88C4() {
-  self _meth_8555(0);
+  self func_8555(0);
   wait 5.0;
 
   for(;;) {
     if(_ispointonnavmesh3d(self.origin, self)) {
-      self _meth_8555(1);
+      self func_8555(1);
       return;
     }
 
@@ -125,7 +125,7 @@ damage_monitor() {
     var_11 = func_9D1C(var_9);
     var_12 = 0;
 
-    if(isDefined(self._meth_843F) && self._meth_843F) {
+    if(isDefined(self.func_843F) && self.func_843F) {
       var_12 = 1;
     }
 
@@ -146,7 +146,7 @@ damage_monitor() {
 
     if(self.health < 50000) {
       self notify("death", var_1, var_4, var_9);
-      self _meth_81D0();
+      self func_81D0();
     }
 
     thread func_4D1B();
@@ -156,7 +156,7 @@ damage_monitor() {
 func_DFE7() {}
 
 func_4D1B() {
-  if(isDefined(self._meth_843F) && self._meth_843F) {
+  if(isDefined(self.func_843F) && self.func_843F) {
     return;
   }
   if(isDefined(self.var_51E6) && self.var_51E6) {
@@ -677,7 +677,7 @@ func_D0DB(var_0) {
   var_2 = 2;
 
   if(scripts\engine\utility::player_is_in_jackal()) {
-    playFXOnTag(scripts\engine\utility::getfx("jackal_debris_impact"), level.player _meth_8473(), "j_mainroot_ship");
+    playFXOnTag(scripts\engine\utility::getfx("jackal_debris_impact"), level.player func_8473(), "j_mainroot_ship");
   }
 
   level.player playrumbleonentity("steady_rumble");

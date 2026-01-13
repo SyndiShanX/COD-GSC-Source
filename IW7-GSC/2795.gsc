@@ -16,7 +16,7 @@ shellshockondamage(var_0, var_1) {
   }
   if(var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH") {
     if(var_1 > 10) {
-      if(isplayer(self) && self _meth_84CA()) {
+      if(isplayer(self) && self func_84CA()) {
         return;
       }
       if(isDefined(self.shellshockreduction) && self.shellshockreduction) {

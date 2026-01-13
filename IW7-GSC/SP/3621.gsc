@@ -384,7 +384,7 @@ func_5781(var_0) {
     return;
   }
 
-  if(scripts\asm\asm_bb::bb_isanimscripted() || self _meth_81A6() || isDefined(self.script) && self.script == "pain" || scripts\sp\utility::isactorwallrunning()) {
+  if(scripts\asm\asm_bb::bb_isanimscripted() || self func_81A6() || isDefined(self.script) && self.script == "pain" || scripts\sp\utility::isactorwallrunning()) {
     return;
   }
 
@@ -654,7 +654,7 @@ func_D293(var_0, var_1, var_2, var_3) {
     }
 
     self getrawbaseweaponname(0.3, 0.3);
-    self _meth_8244("damage_heavy");
+    self func_8244("damage_heavy");
     scripts\sp\art::func_583F(1, 1, 0, 0, 40, var_2, 0.05);
     scripts\engine\utility::flag_set("emp_dof_enabled");
     if(isDefined(var_3)) {
@@ -679,7 +679,7 @@ func_D293(var_0, var_1, var_2, var_3) {
     playworldsound("emp_nade_plr_lp_end", self.origin);
   }
 
-  self _meth_80A6();
+  self func_80A6();
   self stoprumble("damage_heavy");
   self notify("done_shocked");
   scripts\sp\utility::func_1C49(1);
@@ -726,7 +726,7 @@ func_CFA6(var_0) {
     var_9 = 0;
     var_0A = 0;
     var_0B = 1;
-    level.player _meth_8291(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    level.player func_8291(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
     wait(var_4);
   }
 }
@@ -811,14 +811,14 @@ func_529D(var_0, var_1) {
   }
 
   foreach(var_9, var_4 in self.var_4D5D) {
-    if(var_9 != "head" && self _meth_850C(var_9) > 0) {
+    if(var_9 != "head" && self func_850C(var_9) > 0) {
       var_2[var_9] = [];
     } else {
       continue;
     }
 
     foreach(var_8, var_6 in self.var_4D5D[var_9].partnerheli) {
-      var_7 = self _meth_850C(var_9, var_8);
+      var_7 = self func_850C(var_9, var_8);
       if(var_7 > 0) {
         var_2[var_9][var_8] = spawnStruct();
         var_2[var_9][var_8].health = var_7;
@@ -856,7 +856,7 @@ func_529D(var_0, var_1) {
 
   thread func_10209(self gettagorigin(var_2[var_9][var_8].var_4D6F), level.var_612D.var_4BF1);
   var_0A = var_2[var_9][var_8].maxhealth;
-  self _meth_850B(var_0A, var_9, var_8);
+  self func_850B(var_0A, var_9, var_8);
   self.var_217E = var_2[var_9][var_8].var_4D6F;
 }
 
@@ -952,14 +952,14 @@ func_6152(var_0) {
   var_1 = scripts\engine\utility::array_randomize(self.var_4D5D);
   foreach(var_8, var_3 in var_1) {
     if(var_8 == "head") {
-      var_4 = self _meth_850C(var_8);
-      self _meth_850B(var_4, var_8);
+      var_4 = self func_850C(var_8);
+      self func_850B(var_4, var_8);
       continue;
     }
 
     foreach(var_7, var_6 in var_1[var_8].partnerheli) {
-      var_4 = self _meth_850C(var_8, var_7);
-      self _meth_850B(var_4, var_8, var_7);
+      var_4 = self func_850C(var_8, var_7);
+      self func_850B(var_4, var_8, var_7);
       wait(0.1);
     }
   }

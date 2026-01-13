@@ -108,7 +108,7 @@ func_85E3(var_0, var_1) {
 
   func_F62B(var_0);
 
-  if(!_meth_85B5(var_0)) {
+  if(!func_85B5(var_0)) {
     return 0;
   }
 
@@ -170,7 +170,7 @@ func_D022() {
   return 0;
 }
 
-_meth_85B5(var_0) {
+func_85B5(var_0) {
   if(func_D022()) {
     return 0;
   }
@@ -292,7 +292,7 @@ func_3929(var_0) {
 
   func_F62B(self.enemy);
 
-  if(!_meth_85B5(self.enemy)) {
+  if(!func_85B5(self.enemy)) {
     return 0;
   }
 

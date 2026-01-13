@@ -12,5 +12,5 @@ main(var_0, var_1, var_2) {
 
 init_location() {
   self.var_55A4 = 1;
-  self _meth_8184();
+  self func_8184();
 }

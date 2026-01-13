@@ -21,7 +21,7 @@ applyarchetype() {
   self.var_FC9F setCanDamage(0);
   self.var_FC9F hide();
   thread func_13ACC();
-  self _meth_845E(1);
+  self func_845E(1);
 }
 
 removearchetype() {

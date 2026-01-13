@@ -27,7 +27,7 @@ func_C9A0(var_0, var_1, var_2, var_3) {
       var_5 = self.angles[1] - var_7[1];
     }
 
-    var_8 = _meth_80DE(var_5);
+    var_8 = func_80DE(var_5);
     if(self.getcsplinepointtargetname != "none") {
       var_4 = var_4 + "_stairs_" + self.getcsplinepointtargetname;
       if(self.asm.footsteps.foot == "left") {
@@ -74,12 +74,12 @@ func_CEBF(var_0, var_1, var_2, var_3) {
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   lib_0A1E::func_2322(var_0, var_1, ::func_89A1);
   self.var_10E6D.var_C999 = undefined;
 }
 
-_meth_80DE(var_0) {
+func_80DE(var_0) {
   var_0 = angleclamp180(var_0);
   if(var_0 > 135 || var_0 < -135) {
     var_1 = 2;
@@ -143,18 +143,18 @@ func_D4DF(var_0, var_1, var_2, var_3) {
 func_D4DE(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
   var_5 = scripts\asm\asm::asm_getmoveplaybackrate();
-  self _meth_84F1(var_5);
+  self func_84F1(var_5);
   var_6 = lib_0A1E::asm_getbodyknob();
   self clearanim(var_6, var_2);
   if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
     var_7 = lib_0A1E::func_2356("Knobs", "move");
-    self _meth_84F2(var_7);
+    self func_84F2(var_7);
   }
 
   var_8 = var_6;
   for(;;) {
     if(var_4 != var_8) {
-      self _meth_82E7(var_1, var_4, 1, var_2, 1);
+      self func_82E7(var_1, var_4, 1, var_2, 1);
     }
 
     lib_0A1E::func_2369(var_0, var_1, var_4);
@@ -221,6 +221,6 @@ func_C99F(var_0, var_1, var_2, var_3) {
 func_CEBE(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, self.a.var_C984, 1, var_2, 1);
+  self func_82EA(var_1, self.a.var_C984, 1, var_2, 1);
   lib_0A1E::func_231F(var_0, var_1);
 }

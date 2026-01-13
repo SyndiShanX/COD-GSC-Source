@@ -563,7 +563,7 @@ func_DFAA(var_0) {
 
     if(isDefined(var_10)) {
       if(!isDefined(self.var_AEFB) || isDefined(self.var_AEFB) && self.var_AEFB != var_10) {
-        self _meth_8402(var_10);
+        self func_8402(var_10);
         self.var_AEFB = var_10;
         if(isDefined(var_6)) {
           var_0 notify("end_launch_dialog");

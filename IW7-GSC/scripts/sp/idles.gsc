@@ -60,7 +60,7 @@ func_CC80(var_0, var_1, var_2) {
     var_5.var_DC6F = 0;
     if(!var_1 && isai(var_5)) {
       var_5 animmode("noclip");
-      var_5 _meth_80F1(self.origin, self.angles, 100000);
+      var_5 func_80F1(self.origin, self.angles, 100000);
       continue;
     }
 
@@ -123,7 +123,7 @@ func_DC81(var_0) {
       var_0.origin = var_7;
       var_0.angles = var_8;
     } else {
-      var_0 _meth_80F1(var_7, var_8, 100000);
+      var_0 func_80F1(var_7, var_8, 100000);
     }
 
     var_9 = undefined;
@@ -234,7 +234,7 @@ func_DC84(var_0) {
         var_7.origin = var_0C;
         var_7.angles = var_0D;
       } else {
-        var_7 _meth_80F1(var_0C, var_0D, 100000);
+        var_7 func_80F1(var_0C, var_0D, 100000);
       }
 
       var_0E = undefined;
@@ -369,7 +369,7 @@ func_DC82(var_0) {
       var_0.origin = var_6;
       var_0.angles = var_7;
     } else {
-      var_0 _meth_80F1(var_6, var_7, 100000);
+      var_0 func_80F1(var_6, var_7, 100000);
     }
 
     var_8 = undefined;

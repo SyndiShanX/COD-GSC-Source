@@ -14,7 +14,7 @@ main() {
   }
 
   if(issentient(self)) {
-    self _meth_849A();
+    self func_849A();
     var_0 = [];
     var_0["left_arm"] = spawnStruct();
     var_0["left_arm"].var_B4B8 = 90;
@@ -27,7 +27,7 @@ main() {
     var_0["left_arm"].partnerheli["lower"].maxhealth = 30;
     var_0["left_arm"].partnerheli["lower"].hitloc = "left_arm_lower";
     var_0["left_arm"].partnerheli["lower"].var_4D6F = "j_shoulder_le";
-    self _meth_849B("left_arm", 90, "upper", 30, "left_arm_upper", "j_shoulder_le", "lower", 30, "left_arm_lower", "j_shoulder_le");
+    self func_849B("left_arm", 90, "upper", 30, "left_arm_upper", "j_shoulder_le", "lower", 30, "left_arm_lower", "j_shoulder_le");
     var_0["right_arm"] = spawnStruct();
     var_0["right_arm"].var_B4B8 = 90;
     var_0["right_arm"].partnerheli = [];
@@ -39,7 +39,7 @@ main() {
     var_0["right_arm"].partnerheli["lower"].maxhealth = 30;
     var_0["right_arm"].partnerheli["lower"].hitloc = "right_arm_lower";
     var_0["right_arm"].partnerheli["lower"].var_4D6F = "j_shoulder_ri";
-    self _meth_849B("right_arm", 90, "upper", 30, "right_arm_upper", "j_shoulder_ri", "lower", 30, "right_arm_lower", "j_shoulder_ri");
+    self func_849B("right_arm", 90, "upper", 30, "right_arm_upper", "j_shoulder_ri", "lower", 30, "right_arm_lower", "j_shoulder_ri");
     var_0["left_leg"] = spawnStruct();
     var_0["left_leg"].var_B4B8 = 90;
     var_0["left_leg"].partnerheli = [];
@@ -51,7 +51,7 @@ main() {
     var_0["left_leg"].partnerheli["lower"].maxhealth = 30;
     var_0["left_leg"].partnerheli["lower"].hitloc = "left_leg_lower";
     var_0["left_leg"].partnerheli["lower"].var_4D6F = "j_hip_le";
-    self _meth_849B("left_leg", 90, "upper", 30, "left_leg_upper", "j_hip_le", "lower", 30, "left_leg_lower", "j_hip_le");
+    self func_849B("left_leg", 90, "upper", 30, "left_leg_upper", "j_hip_le", "lower", 30, "left_leg_lower", "j_hip_le");
     var_0["right_leg"] = spawnStruct();
     var_0["right_leg"].var_B4B8 = 90;
     var_0["right_leg"].partnerheli = [];
@@ -63,7 +63,7 @@ main() {
     var_0["right_leg"].partnerheli["lower"].maxhealth = 30;
     var_0["right_leg"].partnerheli["lower"].hitloc = "right_leg_lower";
     var_0["right_leg"].partnerheli["lower"].var_4D6F = "j_hip_ri";
-    self _meth_849B("right_leg", 90, "upper", 30, "right_leg_upper", "j_hip_ri", "lower", 30, "right_leg_lower", "j_hip_ri");
+    self func_849B("right_leg", 90, "upper", 30, "right_leg_upper", "j_hip_ri", "lower", 30, "right_leg_lower", "j_hip_ri");
     var_0["head"] = spawnStruct();
     var_0["head"].var_B4B8 = 300;
     var_0["head"].partnerheli = [];
@@ -71,7 +71,7 @@ main() {
     var_0["head"].partnerheli["head"].maxhealth = 0;
     var_0["head"].partnerheli["head"].hitloc = "head";
     var_0["head"].partnerheli["head"].var_4D6F = "j_head";
-    self _meth_849B("head", 300, "head", 0, "head", "j_head");
+    self func_849B("head", 300, "head", 0, "head", "j_head");
     var_0["torso"] = spawnStruct();
     var_0["torso"].var_B4B8 = 0;
     var_0["torso"].partnerheli = [];
@@ -83,7 +83,7 @@ main() {
     var_0["torso"].partnerheli["lower"].maxhealth = 100;
     var_0["torso"].partnerheli["lower"].hitloc = "torso_lower";
     var_0["torso"].partnerheli["lower"].var_4D6F = "j_spinelower";
-    self _meth_849B("torso", 0, "upper", 100, "torso_upper", "j_spineupper", "lower", 100, "torso_lower", "j_spinelower");
+    self func_849B("torso", 0, "upper", 100, "torso_upper", "j_spineupper", "lower", 100, "torso_lower", "j_spinelower");
     self.var_4D5D = var_0;
   }
 

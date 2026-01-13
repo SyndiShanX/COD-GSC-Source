@@ -160,7 +160,7 @@ func_BEA0(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-_meth_81DE() {
+func_81DE() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
@@ -188,7 +188,7 @@ _meth_81DE() {
 }
 
 func_3F0A(var_0, var_1, var_2) {
-  var_3 = _meth_81DE();
+  var_3 = func_81DE();
   if(var_3 < 0) {
     var_4 = "right";
   } else {
@@ -209,7 +209,7 @@ func_3F0A(var_0, var_1, var_2) {
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
-  var_8 = self _meth_8101(var_1, var_7);
+  var_8 = self func_8101(var_1, var_7);
   return var_7;
 }
 
@@ -264,12 +264,12 @@ playanim_melee(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   thread scripts\asm\zombie\melee::func_6A6A(var_1, self._blackboard.meleetarget);
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
-  self _meth_85C9(16);
+  self func_85C9(16);
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
 }
 
 terminate_melee(var_0, var_1, var_2) {
-  self _meth_85C9(0);
+  self func_85C9(0);
 }
 
 choosestandmeleeanim(var_0, var_1, var_2) {
@@ -437,7 +437,7 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
 }
 
 ontraversalteleport(var_0, var_1, var_2, var_3) {
-  self._blackboard.teleportspot = self _meth_8146();
+  self._blackboard.teleportspot = self func_8146();
   self.btraversalteleport = 1;
   return 1;
 }

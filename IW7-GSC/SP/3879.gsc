@@ -362,11 +362,11 @@ func_F4C6(var_0, var_1, var_2) {
   self notify("stealth_react", var_0, var_1, var_2);
 }
 
-_meth_8468() {
+func_8468() {
   self notify("going_back");
   self endon("death");
-  if(isDefined(self.var_10E6D._meth_8439)) {
-    self[[self.var_10E6D._meth_8439]]();
+  if(isDefined(self.var_10E6D.func_8439)) {
+    self[[self.var_10E6D.func_8439]]();
   }
 
   var_0 = self.var_10E6D.var_A8C3;
@@ -387,14 +387,14 @@ _meth_8468() {
   }
 
   if(isDefined(var_0)) {
-    thread _meth_8469(var_0);
+    thread func_8469(var_0);
   }
 
   wait(0.05);
   func_10EE4(0);
 }
 
-_meth_8469(var_0) {
+func_8469(var_0) {
   self endon("death");
   scripts\sp\utility::func_13817(var_0);
   self.var_10E6D.last_spot = undefined;
@@ -424,7 +424,7 @@ func_4F6C(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_8 _meth_84F7("trigger_cover_blown", self, self.origin);
+    var_8 func_84F7("trigger_cover_blown", self, self.origin);
     if(var_8 == self) {
       continue;
     }
@@ -450,7 +450,7 @@ func_4F6C(var_0, var_1, var_2, var_3) {
     }
 
     var_6 = 1;
-    var_8 _meth_84F7(var_0, self, var_1);
+    var_8 func_84F7(var_0, self, var_1);
   }
 }
 
@@ -1247,7 +1247,7 @@ func_CD58(var_0, var_1) {
     var_3 scripts\sp\anim::func_1F35(self, var_1);
     var_0C = getclosestpointonnavmesh(self.origin, self);
     if(distance2dsquared(self.origin, var_0C) > 0.0001) {
-      self _meth_80F1(var_0C, self.angles);
+      self func_80F1(var_0C, self.angles);
     }
 
     scripts\sp\utility::func_F3DC(self.origin);

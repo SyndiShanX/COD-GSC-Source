@@ -85,14 +85,14 @@ main() {
   setdvarifuninitialized("player_did_helmet_death", 0);
   level.player thread func_D2FB();
   level.player waittill("death", var_0, var_1, var_2, var_3, var_4);
-  level.player _meth_8329("deathsdoor", "deathsdoor", "reverb");
+  level.player func_8329("deathsdoor", "deathsdoor", "reverb");
   level.player setsoundsubmix("deaths_door_sp");
   level.player shellshock("default_nosound", 3);
   level.player playSound("deaths_door_death");
   level.player thread func_10FD3();
   level.player allowmelee(0);
   if(scripts\sp\utility::func_93AB()) {
-    level.player _meth_8591(1);
+    level.player func_8591(1);
     updategamerprofile();
     scripts\sp\endmission::func_41ED();
   }
@@ -103,7 +103,7 @@ main() {
     return;
   }
 
-  level.player _meth_84FE();
+  level.player func_84FE();
   if(!scripts\sp\utility::func_93A6()) {
     setomnvar("ui_death_hint", 0);
   }
@@ -300,7 +300,7 @@ func_11A18(var_0) {
 
   var_1 = spawn("script_model", level.player.origin + (0, -7, 20));
   var_1 setModel(var_0);
-  if(!var_1 _meth_8418()) {
+  if(!var_1 func_8418()) {
     var_1 delete();
     return;
   }
@@ -601,10 +601,10 @@ func_8DDF() {
     level.player.helmet = level.var_10964.helmet;
   }
 
-  level.player.helmet _meth_83CB(level.player);
+  level.player.helmet func_83CB(level.player);
   level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_03");
   level.player.helmet notsolid();
-  level.player.helmet _meth_81E2(level.player, "tag_playerhelmet", (var_0, 0, 0), (var_1, var_2, var_3), 1, "view_jostle");
+  level.player.helmet func_81E2(level.player, "tag_playerhelmet", (var_0, 0, 0), (var_1, var_2, var_3), 1, "view_jostle");
 }
 
 func_1033D() {

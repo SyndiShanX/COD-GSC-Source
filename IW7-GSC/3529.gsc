@@ -330,11 +330,11 @@ removefromplayerkillstreaklistondeath(var_0) {
 func_F774(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self makeusable();
   self setcursorhint("HINT_NOICON");
-  self _meth_84A9("show");
+  self func_84A9("show");
   self sethintstring(var_1);
-  self _meth_84A6(var_2);
+  self func_84A6(var_2);
   self setusefov(var_3);
-  self _meth_84A4(var_4);
+  self func_84A4(var_4);
   self setuserange(var_5);
   self setusepriority(var_6);
   level thread func_20D8(self);
@@ -644,7 +644,7 @@ func_13B85(var_0) {
 
   if(isDefined(var_1)) {
     var_1 setclientomnvar("ui_out_of_bounds_countdown", 0);
-    var_1 _meth_859E("", 0);
+    var_1 func_859E("", 0);
   }
 
   if(isDefined(self)) {
@@ -678,7 +678,7 @@ func_13B84(var_0, var_1, var_2) {
 
   if(!scripts\mp\utility\game::func_9EF0(self) || scripts\mp\utility\game::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "MANUAL") {
     var_3 setclientomnvar("ui_out_of_bounds_countdown", var_5);
-    var_6 _meth_859E("mp_out_of_bounds");
+    var_6 func_859E("mp_out_of_bounds");
   }
 
   var_7 = 0;
@@ -693,7 +693,7 @@ func_13B84(var_0, var_1, var_2) {
   }
 
   var_3 setclientomnvar("ui_out_of_bounds_countdown", 0);
-  var_6 _meth_859E("");
+  var_6 func_859E("");
 
   if(isDefined(self)) {
     self.var_1D44 = undefined;

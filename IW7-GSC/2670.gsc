@@ -375,7 +375,7 @@ func_B541(var_0, var_1) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.var_B549["crafted_medusa"].hintstring);
   self makeusable();
-  self _meth_84A7("tag_fx");
+  self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
   thread func_B53C(self.owner);
@@ -440,7 +440,7 @@ func_B547() {
       }
 
       self makeusable();
-      self _meth_84A7("tag_fx");
+      self func_84A7("tag_fx");
       self setusefov(120);
       self setuserange(96);
     }

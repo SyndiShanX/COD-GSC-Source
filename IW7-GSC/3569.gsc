@@ -16,7 +16,7 @@ func_BB90() {
 func_BB93() {
   self notify("mortarMount_unset");
   self unlink();
-  self _meth_845E(0);
+  self func_845E(0);
   self allowads(1);
   func_BB77();
   func_BB78();
@@ -44,7 +44,7 @@ func_BB8C() {
   self.var_BB6E.isactive = 1;
   var_0 = rotatepointaroundvector(anglestoright(self.angles), anglesToForward(self.angles), 0);
   var_1 = vectortoangles(var_0);
-  self _meth_845E(1);
+  self func_845E(1);
   self allowads(0);
   self setplayerangles(var_1);
   var_2 = scripts\engine\utility::spawn_tag_origin(self.origin, var_1);
@@ -77,7 +77,7 @@ func_BB8E(var_0) {
     var_0 delete();
   }
 
-  self _meth_845E(0);
+  self func_845E(0);
   self allowads(1);
   func_BB77();
   func_BB78();

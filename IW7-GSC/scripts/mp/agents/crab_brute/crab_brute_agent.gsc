@@ -153,7 +153,7 @@ setupagent() {
   self.footstepdetectdistwalk = 2500;
   self.footstepdetectdistsprint = 2500;
   self.precacheleaderboards = 1;
-  self _meth_85C9(16);
+  self func_85C9(16);
   thread dopostspawnupdates();
   thread listen_for_death_sfx();
 }

@@ -106,7 +106,7 @@ ismeleevalid(var_0, var_1) {
   }
 
   if(isai(var_0)) {
-    if(var_0 _meth_81A6()) {
+    if(var_0 func_81A6()) {
       return 0;
     }
 

@@ -53,7 +53,7 @@ func_8E06(var_0) {
     level.player.helmet = func_1072F();
   }
 
-  level.player.helmet _meth_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  level.player.helmet func_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
   level.player.helmet.var_13487 = "down";
   if(isDefined(var_0) && var_0) {
     thread func_1348D(1);
@@ -68,7 +68,7 @@ func_8E04(var_0) {
     return;
   }
 
-  level.player.helmet _meth_83CB(level.player);
+  level.player.helmet func_83CB(level.player);
   if(!isDefined(var_0) || !var_0) {
     level.player.helmet delete();
   }
@@ -117,7 +117,7 @@ func_1348D(var_0, var_1) {
     level.player forceplaygestureviewmodel(var_2, undefined, undefined, undefined, 1);
     wait(getanimlength( % vm_gesture_visor_up_visor));
   } else {
-    level.player.helmet _meth_82B0( % vm_gesture_visor_up_visor, 1);
+    level.player.helmet func_82B0( % vm_gesture_visor_up_visor, 1);
   }
 
   if(!var_0) {
@@ -189,7 +189,7 @@ func_13485(var_0, var_1, var_2) {
   } else {
     if(self == level.player) {}
 
-    level.player.helmet _meth_82B0( % vm_gesture_visor_down_visor, 1);
+    level.player.helmet func_82B0( % vm_gesture_visor_down_visor, 1);
   }
 
   if(!var_0) {
@@ -230,7 +230,7 @@ func_8E05(var_0, var_1, var_2) {
   }
 
   level.player.helmet = func_1072F();
-  level.player.helmet _meth_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  level.player.helmet func_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
   if(isDefined(var_0) && var_0) {
     level.player.helmet.var_13487 = "none";
     level.player thread func_1348D(1);
@@ -278,7 +278,7 @@ func_8E02(var_0) {
   wait(getanimlength(var_1));
   level.player.helmet clearanim(var_1, 0);
   level.player blendlinktoplayerviewmotion(0.25, 1);
-  level.player.helmet _meth_83CB(level.player);
+  level.player.helmet func_83CB(level.player);
   level.player.helmet delete();
   if(self != level && self != level.player && isDefined(self.model)) {
     level.player.helmet = func_10730();
@@ -343,10 +343,10 @@ func_D5E3() {
 
 func_CFD4() {
   var_0 = [];
-  var_0["offhandWeapons"] = func_3BE8("offhandWeapons", ::scripts\engine\utility::allow_offhand_weapons, ::scripts\engine\utility::isoffhandweaponsallowed, "!allow_offhand_weapons");
-  var_0["offhandPrimaryWeapons"] = func_3BE8("offhandPrimaryWeapons", ::scripts\engine\utility::allow_offhand_primary_weapons, ::scripts\engine\utility::isoffhandprimaryweaponsallowed, "!allow_offhand_primary_weapons");
-  var_0["offhandSecondaryWeapons"] = func_3BE8("offhandSecondaryWeapons", ::scripts\engine\utility::allow_offhand_secondary_weapons, ::scripts\engine\utility::isoffhandsecondaryweaponsallowed, "!allow_offhand_secondary_weapons");
-  var_0["reload"] = func_3BE8("reload", ::scripts\engine\utility::allow_reload);
+  var_0["offhandWeapons"] = func_3BE8("offhandWeapons", scripts\engine\utility::allow_offhand_weapons, ::scripts\engine\utility::isoffhandweaponsallowed, "!allow_offhand_weapons");
+  var_0["offhandPrimaryWeapons"] = func_3BE8("offhandPrimaryWeapons", scripts\engine\utility::allow_offhand_primary_weapons, ::scripts\engine\utility::isoffhandprimaryweaponsallowed, "!allow_offhand_primary_weapons");
+  var_0["offhandSecondaryWeapons"] = func_3BE8("offhandSecondaryWeapons", scripts\engine\utility::allow_offhand_secondary_weapons, ::scripts\engine\utility::isoffhandsecondaryweaponsallowed, "!allow_offhand_secondary_weapons");
+  var_0["reload"] = func_3BE8("reload", scripts\engine\utility::allow_reload);
   level.player.var_1C69 = var_0;
 }
 

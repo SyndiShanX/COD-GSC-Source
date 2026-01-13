@@ -7,8 +7,8 @@ func_18D1(var_0, var_1) {
   self.var_5270 = "crouch";
   scripts\anim\utility::func_12E5F();
   self endon("killanimscript");
-  self _meth_83C4("nogravity");
-  self _meth_83C4("noclip");
+  self func_83C4("nogravity");
+  self func_83C4("noclip");
   var_2 = self getspectatepoint();
   self orientmode("face angle", var_2.angles[1]);
   var_2.var_126D4 = var_2.origin[2] + var_2.var_126D5;
@@ -16,20 +16,20 @@ func_18D1(var_0, var_1) {
   thread func_11661(var_3 - var_1);
   var_4 = 0.15;
   self clearanim( % body, var_4);
-  self _meth_82E4("traverse", var_0, % root, 1, var_4, 1);
+  self func_82E4("traverse", var_0, % root, 1, var_4, 1);
   var_5 = 0.2;
   var_6 = 0.2;
   thread scripts\anim\notetracks::donotetracksforever("traverse", "no clear");
   if(!animhasnotetrack(var_0, "gravity on")) {
     var_7 = 1.23;
     wait(var_7 - var_5);
-    self _meth_83C4("gravity");
+    self func_83C4("gravity");
     wait(var_5);
     return;
   }
 
   self waittillmatch("gravity on", "traverse");
-  self _meth_83C4("gravity");
+  self func_83C4("gravity");
   if(!animhasnotetrack(var_0, "blend")) {
     wait(var_5);
     return;
@@ -45,7 +45,7 @@ func_11661(var_0) {
   var_1 = 5;
   var_2 = (0, 0, var_0 / var_1);
   for(var_3 = 0; var_3 < var_1; var_3++) {
-    self _meth_80F1(self.origin + var_2);
+    self func_80F1(self.origin + var_2);
     wait(0.05);
   }
 }
@@ -64,16 +64,16 @@ func_11662(var_0, var_1, var_2, var_3) {
 
   var_4 = (0, 0, var_0 / var_2);
   if(isDefined(var_3) && var_3 < 1) {
-    self _meth_82E3("traverseAnim", self.var_126DB, self.var_126DD, 1, 0.2, var_3);
+    self func_82E3("traverseAnim", self.var_126DB, self.var_126DD, 1, 0.2, var_3);
   }
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
-    self _meth_80F1(self.origin + var_4);
+    self func_80F1(self.origin + var_4);
     wait(0.05);
   }
 
   if(isDefined(var_3) && var_3 < 1) {
-    self _meth_82E3("traverseAnim", self.var_126DB, self.var_126DD, 1, 0.2, 1);
+    self func_82E3("traverseAnim", self.var_126DB, self.var_126DD, 1, 0.2, 1);
   }
 }
 
@@ -88,7 +88,7 @@ func_5AC3(var_0) {
     var_2.var_126D4 = var_2.var_126D4 + var_2.var_126D5;
   }
 
-  var_3 = self _meth_8145();
+  var_3 = self func_8145();
   self orientmode("face angle", var_2.angles[1]);
   self.var_126E6 = var_0["traverseHeight"];
   self.var_126EB = var_2;
@@ -97,8 +97,8 @@ func_5AC3(var_0) {
   if(var_1) {
     self animmode("noclip");
   } else {
-    self _meth_83C4("nogravity");
-    self _meth_83C4("noclip");
+    self func_83C4("nogravity");
+    self func_83C4("noclip");
   }
 
   self.var_126EC = self.origin[2];
@@ -131,14 +131,14 @@ func_5AC3(var_0) {
 
   self.var_126DB = var_4;
   self.var_126DD = var_7;
-  self _meth_82E4("traverseAnim", var_4, var_7, 1, 0.2, 1);
+  self func_82E4("traverseAnim", var_4, var_7, 1, 0.2, 1);
   self.var_126E3 = 0;
   self.var_126E2 = var_0["interruptDeathAnim"];
   scripts\anim\shared::donotetracks("traverseAnim", ::func_89F8);
   if(var_1) {
     self animmode("gravity");
   } else {
-    self _meth_83C4("gravity");
+    self func_83C4("gravity");
   }
 
   if(self.var_EB) {
@@ -152,7 +152,7 @@ func_5AC3(var_0) {
   self.a.nodeath = 0;
   if(var_6 && isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
     self.a.movement = "stop";
-    self _meth_83B9(self.target_getindexoftarget.origin);
+    self func_83B9(self.target_getindexoftarget.origin);
   } else if(isDefined(var_0["traverseStopsAtEnd"])) {
     self.a.movement = "stop";
   } else {
@@ -195,8 +195,8 @@ func_89F5() {
   if(getdvarint("ai_iw7", 0) != 0) {
     self animmode("noclip");
   } else {
-    self _meth_83C4("nogravity");
-    self _meth_83C4("noclip");
+    self func_83C4("nogravity");
+    self func_83C4("noclip");
   }
 
   if(isDefined(self.var_126E6) && isDefined(self.var_126EB.var_126D4)) {
@@ -235,7 +235,7 @@ func_6CE5(var_0) {
       if(getdvarint("ai_iw7", 0) != 0) {
         self animmode("gravity");
       } else {
-        self _meth_83C4("gravity");
+        self func_83C4("gravity");
       }
 
       break;
@@ -303,8 +303,8 @@ func_586C() {
 
 func_586D(var_0, var_1, var_2) {
   self endon("killanimscript");
-  self _meth_83C4("nogravity");
-  self _meth_83C4("noclip");
+  self func_83C4("nogravity");
+  self func_83C4("noclip");
   thread func_586C();
   var_3 = self getspectatepoint();
   self orientmode("face angle", var_3.angles[1]);
@@ -315,9 +315,9 @@ func_586D(var_0, var_1, var_2) {
 
   self.var_126DB = level.var_58C7[var_0];
   self.var_126EB = var_3;
-  self.var_126E4 = self _meth_8145();
+  self.var_126E4 = self func_8145();
   self clearanim( % body, 0.2);
-  self _meth_82EA("dog_traverse", self.var_126DB, 1, 0.2, 1);
+  self func_82EA("dog_traverse", self.var_126DB, 1, 0.2, 1);
   self.var_BCA6 = "land";
   scripts\anim\notetracks::donotetracksintercept("dog_traverse", ::func_5864);
   self.var_BCA6 = undefined;
@@ -326,10 +326,10 @@ func_586D(var_0, var_1, var_2) {
 
 func_5867(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
-  self _meth_83C4("noclip");
+  self func_83C4("noclip");
   thread func_586C();
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8145();
+  var_5 = self func_8145();
   self orientmode("face angle", var_4.angles[1]);
   if(!isDefined(var_2)) {
     var_2 = "jump_down_40";
@@ -350,7 +350,7 @@ func_5867(var_0, var_1, var_2, var_3) {
 
   self.var_BCA6 = "land";
   self clearanim( % body, 0.2);
-  self _meth_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
+  self func_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
   } else {
@@ -358,14 +358,14 @@ func_5867(var_0, var_1, var_2, var_3) {
   }
 
   self.var_BCA6 = undefined;
-  self _meth_83C4("gravity");
+  self func_83C4("gravity");
   self.var_126DD = undefined;
   self.var_126DB = undefined;
 }
 
 func_5868(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
-  self _meth_83C4("noclip");
+  self func_83C4("noclip");
   thread func_586C();
   var_4 = self getspectatepoint();
   self orientmode("face angle", var_4.angles[1]);
@@ -376,7 +376,7 @@ func_5868(var_0, var_1, var_2, var_3) {
   self.var_126DB = level.var_58C7[var_2];
   self.var_126DD = % body;
   self.var_126EB = var_4;
-  self.var_126E4 = self _meth_8145();
+  self.var_126E4 = self func_8145();
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
@@ -387,7 +387,7 @@ func_5868(var_0, var_1, var_2, var_3) {
 
   self.var_BCA6 = "land";
   self clearanim( % body, 0.2);
-  self _meth_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
+  self func_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
   } else {
@@ -395,15 +395,15 @@ func_5868(var_0, var_1, var_2, var_3) {
   }
 
   self.var_BCA6 = undefined;
-  self _meth_83C4("gravity");
+  self func_83C4("gravity");
   self.var_126DB = undefined;
   self.var_126DD = undefined;
 }
 
 func_5869(var_0, var_1) {
   self endon("killanimscript");
-  self _meth_83C4("nogravity");
-  self _meth_83C4("noclip");
+  self func_83C4("nogravity");
+  self func_83C4("noclip");
   thread func_586C();
   var_2 = self getspectatepoint();
   self orientmode("face angle", var_2.angles[1]);
@@ -415,7 +415,7 @@ func_5869(var_0, var_1) {
   thread func_11661(var_3 - var_1);
   self.var_BCA6 = "land";
   self clearanim( % body, 0.2);
-  self _meth_82E4("dog_traverse", level.var_58C7[var_0], 1, 0.2, 1);
+  self func_82E4("dog_traverse", level.var_58C7[var_0], 1, 0.2, 1);
   scripts\anim\shared::donotetracks("dog_traverse");
   self.var_BCA6 = undefined;
 }

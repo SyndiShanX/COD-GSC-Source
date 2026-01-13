@@ -213,7 +213,7 @@ getpreferreddompoints(var_0, var_1) {
     var_4 = var_8;
     var_5 = level.bestspawnflag[var_8];
     if(var_4.size > 0 && var_4.size < level.domflags.size) {
-      var_8 = _meth_81EF(var_7, undefined);
+      var_8 = func_81EF(var_7, undefined);
       level.bestspawnflag[var_7] = var_8;
     }
 
@@ -399,20 +399,20 @@ domflags() {
   level.areanynavvolumesloaded["allies"] = var_14[0].origin;
   level.areanynavvolumesloaded["axis"] = var_13[0].origin;
   level.bestspawnflag = [];
-  level.bestspawnflag["allies"] = _meth_81EF("allies", undefined);
-  level.bestspawnflag["axis"] = _meth_81EF("axis", level.bestspawnflag["allies"]);
+  level.bestspawnflag["allies"] = func_81EF("allies", undefined);
+  level.bestspawnflag["axis"] = func_81EF("axis", level.bestspawnflag["allies"]);
   if(level.precappoints) {
     func_110AB();
     var_15 = [];
     var_15[var_15.size] = level.var_3BB4;
     if(game["switchedsides"]) {
-      level.var_429F = _meth_81EF("axis", level.var_3BB4);
+      level.var_429F = func_81EF("axis", level.var_3BB4);
       var_15[var_15.size] = level.var_429F;
-      level.var_42A0 = _meth_81EF("allies", var_15);
+      level.var_42A0 = func_81EF("allies", var_15);
     } else {
-      level.var_429F = _meth_81EF("allies", level.var_3BB4);
+      level.var_429F = func_81EF("allies", level.var_3BB4);
       var_15[var_15.size] = level.var_429F;
-      level.var_42A0 = _meth_81EF("axis", var_15);
+      level.var_42A0 = func_81EF("axis", var_15);
     }
 
     level scripts\engine\utility::delaythread(1.5, ::precap);
@@ -838,7 +838,7 @@ onuncontested(var_0) {
   scripts\mp\gametypes\obj_dom::updateflagstate(var_2, 0);
 }
 
-_meth_81EF(var_0, var_1) {
+func_81EF(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
   var_4 = undefined;

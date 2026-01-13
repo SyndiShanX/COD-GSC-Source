@@ -225,7 +225,7 @@ func_E058() {
   var_3 = var_1 + var_2 * 10000;
   var_4 = spawn("script_origin", var_3);
   var_4 linkto(self);
-  self.cannon _meth_8535(0);
+  self.cannon func_8535(0);
   self clearanim( % veh_mil_air_ca_mons_main_cannon_open, 0);
   self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_close);
   wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_close));
@@ -256,9 +256,9 @@ func_BA68(var_0, var_1) {
   level notify("mons_cannon_targeting");
   level endon("mons_cannon_targeting");
   level endon("removing_mons_cannon");
-  self.cannon _meth_8535(0);
-  self.cannon _meth_82C9(var_1, "yaw");
-  self.cannon _meth_82C9(var_1, "pitch");
+  self.cannon func_8535(0);
+  self.cannon func_82C9(var_1, "yaw");
+  self.cannon func_82C9(var_1, "pitch");
   self.cannon settargetentity(var_0);
   self.cannon scripts\engine\utility::waittill_notify_or_timeout("turret_on_target", var_1);
 }
@@ -317,7 +317,7 @@ func_BA6A(var_0, var_1, var_2) {
 
   if(var_2) {
     self.cannon cleartargetentity();
-    self.cannon _meth_8535(1);
+    self.cannon func_8535(1);
   }
 }
 

@@ -224,7 +224,7 @@ atk_bomber_update() {
     if(!self bothasscriptgoal()) {
       var_6 = 15;
       var_7 = 32;
-      var_8 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", ::scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_6 + var_7, self);
+      var_8 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_6 + var_7, self);
       if(isDefined(var_8)) {
         var_9 = self botsetscriptgoal(level.sdbomb.curorigin, 0, "critical");
         if(var_9) {
@@ -242,7 +242,7 @@ atk_bomber_update() {
       }
 
       if(isDefined(level.sdbomb) && !isDefined(level.sdbomb.carrier)) {
-        var_7 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", ::scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_5 + var_6, self);
+        var_7 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_5 + var_6, self);
         if(!isDefined(var_7)) {
           level.sdbomb scripts\mp\gameobjects::setpickedup(self);
           return;

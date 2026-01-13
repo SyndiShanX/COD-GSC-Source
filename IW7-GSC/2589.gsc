@@ -186,7 +186,7 @@ func_237E(var_0) {
 func_237F(var_0) {
   switch (var_0) {
     case "face goal":
-      var_1 = self _meth_8150();
+      var_1 = self func_8150();
       if(isDefined(var_1)) {
         var_2 = var_1 - self.origin;
         var_3 = vectornormalize(var_2);

@@ -89,7 +89,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  var_15 = scripts\mp\utility::_meth_8238(var_6);
+  var_15 = scripts\mp\utility::func_8238(var_6);
   if(var_15 == "killstreak") {
     var_3 = killstreakdamagefilter(var_1, var_2, var_3, var_6, var_5);
     if(var_3 == 0) {
@@ -143,7 +143,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
         vectornormalize(var_1C);
       }
 
-      var_2 _meth_84DC(var_1C, 650);
+      var_2 func_84DC(var_1C, 650);
     }
   }
 
@@ -320,7 +320,7 @@ suppressdamageflash(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_3696(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  if(isplayer(var_0) && var_0 _meth_8568() || var_0 _meth_8569()) {
+  if(isplayer(var_0) && var_0 func_8568() || var_0 func_8569()) {
     return [0, 0, 0, var_7];
   }
 
@@ -1018,7 +1018,7 @@ handleriotshieldhits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   if(var_4 == "MOD_MELEE" && scripts\mp\weapons::isriotshield(var_5)) {
     var_15 = 0;
-    var_1 _meth_83B2(0);
+    var_1 func_83B2(0);
   }
 
   return var_3;
@@ -1781,14 +1781,14 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   if(var_0B) {
     var_26 = 0;
-    var_0A = var_2 _meth_8231(var_0, var_5, var_6, var_8, var_7);
+    var_0A = var_2 func_8231(var_0, var_5, var_6, var_8, var_7);
   }
 
   if(isDefined(var_1) && isplayer(var_1) && isDefined(var_5) && isDefined(var_6) && isDefined(var_8) && isDefined(var_7)) {
     var_2D = scripts\mp\utility::getweaponrootname(var_6);
-    var_2E = var_1 _meth_8519(var_6);
+    var_2E = var_1 func_8519(var_6);
     if(isDefined(var_2D) && var_2D == "iw7_rvn" && scripts\mp\utility::istrue(var_2E) && var_5 == "MOD_MELEE") {
-      var_0A = var_2 _meth_8231(var_1, "MOD_EXPLOSIVE", var_6, var_8, var_7);
+      var_0A = var_2 func_8231(var_1, "MOD_EXPLOSIVE", var_6, var_8, var_7);
       var_2F = getweaponvariantindex(var_6);
       if(!isDefined(var_2F) || var_2F != 3 && var_2F != 35) {
         playsoundatpos(var_2.origin, "melee_user2_human_default_fatal_npc");
@@ -1798,7 +1798,7 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   if(!isDefined(self.nocorpse)) {
     var_2.body = var_2 getplayerweaponrankxp(var_0A);
-    if(var_2 _meth_84CA()) {
+    if(var_2 func_84CA()) {
       var_2.body setscriptablepartstate("chargeModeShieldDrop", "active", 0);
     }
 
@@ -2101,7 +2101,7 @@ handlesuicidedeath(var_0, var_1) {
   self.suicides = scripts\mp\utility::getpersstat("suicides");
   var_2 = scripts\mp\tweakables::gettweakablevalue("game", "suicidepointloss");
   scripts\mp\gamescore::_setplayerscore(self, scripts\mp\gamescore::_getplayerscore(self) - var_2);
-  if(scripts\mp\weapons::_meth_85BE() && var_0 == "MOD_SUICIDE" && var_1 == "none") {
+  if(scripts\mp\weapons::func_85BE() && var_0 == "MOD_SUICIDE" && var_1 == "none") {
     self.lastgrenadesuicidetime = gettime();
   }
 
@@ -2130,7 +2130,7 @@ handlefriendlyfiredeath(var_0) {
   if(level.ingraceperiod) {
     var_2 = 1;
     var_0.pers["teamkills"] = var_0.pers["teamkills"] + level.maxallowedteamkills;
-  } else if(var_2.pers["teamkills"] > 1 && scripts\mp\utility::gettimepassed() < level._meth_8487 * 1000 + 8000 + var_2.pers["teamkills"] * 1000) {
+  } else if(var_2.pers["teamkills"] > 1 && scripts\mp\utility::gettimepassed() < level.func_8487 * 1000 + 8000 + var_2.pers["teamkills"] * 1000) {
     var_2 = 1;
     var_0.pers["teamkills"] = var_0.pers["teamkills"] + level.maxallowedteamkills;
   } else {
@@ -2174,8 +2174,8 @@ handlenormaldeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_8 scripts\mp\persistence::statsetchild("round", "kills", var_8.setculldist, level.ignorekdrstats);
   }
 
-  self _meth_83FF();
-  var_1 _meth_83FE();
+  self func_83FF();
+  var_1 func_83FE();
   var_9 = var_1.pers["cur_kill_streak"];
   if(!scripts\mp\utility::istrue(level.ignorescoring) && isalive(var_1) || var_1.streaktype == "support") {
     if((var_4 == "MOD_MELEE" && !var_1 scripts\mp\utility::isjuggernaut()) || var_1 scripts\mp\utility::func_A679(var_3)) {
@@ -3195,7 +3195,7 @@ gethitlocheight(var_0) {
 
 delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_0)) {
-    var_6 = var_0 _meth_8112();
+    var_6 = var_0 func_8112();
     if(animhasnotetrack(var_6, "ignore_ragdoll")) {
       return;
     }
@@ -3214,11 +3214,11 @@ delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(var_0 _meth_81B7()) {
+  if(var_0 func_81B7()) {
     return;
   }
 
-  var_6 = var_0 _meth_8112();
+  var_6 = var_0 func_8112();
   var_0A = 0.35;
   if(animhasnotetrack(var_6, "start_ragdoll")) {
     var_0B = getnotetracktimes(var_6, "start_ragdoll");
@@ -4127,9 +4127,9 @@ enqueueweapononkillcorpsetablefuncs(var_0, var_1, var_2, var_3, var_4) {
   if(scripts\mp\weapons::isprimaryweapon(var_3)) {
     var_5 = scripts\mp\utility::getweaponrootname(var_3);
     var_6 = getweaponvariantindex(var_3);
-    var_7 = var_0 _meth_8519(var_3);
+    var_7 = var_0 func_8519(var_3);
     if(var_5 == "iw7_rvn" && scripts\mp\utility::istrue(var_7) && var_4 == "MOD_MELEE") {
-      var_1 thread enqueuecorpsetablefunc("passive_melee_cone_expl", ::scripts\mp\perks\_weaponpassives::meleeconeexplodevictimcorpsefx);
+      var_1 thread enqueuecorpsetablefunc("passive_melee_cone_expl", scripts\mp\perks\_weaponpassives::meleeconeexplodevictimcorpsefx);
     }
   }
 }

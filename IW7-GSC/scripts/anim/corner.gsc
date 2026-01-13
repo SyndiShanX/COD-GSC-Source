@@ -30,7 +30,7 @@ func_4661(var_0, var_1) {
   var_2.var_6B9B = ::func_6B9B;
   var_2.var_92CC = ::func_92CC;
   var_2.objective_position = ::func_128AF;
-  var_2._meth_85BF = ::func_128B0;
+  var_2.func_85BF = ::func_128B0;
   var_2.var_2B99 = ::func_2B99;
   scripts\anim\cover_behavior::main(var_2);
 }
@@ -105,10 +105,10 @@ func_B24A() {
       var_1 = scripts\anim\utility::func_1F64("alert_idle");
     }
 
-    _meth_846D(var_1, 0.3, 0.4);
+    func_846D(var_1, 0.3, 0.4);
   } else {
     var_2 = scripts\anim\utility::func_1F64("stance_change");
-    _meth_846D(var_2, 0.3, getanimlength(var_2));
+    func_846D(var_2, 0.3, getanimlength(var_2));
     func_F2AE(var_0);
   }
 
@@ -169,7 +169,7 @@ func_7E3C(var_0, var_1) {
 
   var_4 = [];
   if(isDefined(var_0) && self.a.pose == "crouch" && var_3 < self.setmatchdatadef && self.setdevdvar < var_3) {
-    var_4 = var_0 _meth_8169();
+    var_4 = var_0 func_8169();
   }
 
   if(self.var_4664 == "up") {
@@ -177,7 +177,7 @@ func_7E3C(var_0, var_1) {
       var_5 = 0;
       if(isDefined(var_1)) {
         var_6 = anglestoup(self.angles);
-        var_5 = scripts\anim\combat_utility::_meth_8063(var_1, self getEye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
+        var_5 = scripts\anim\combat_utility::func_8063(var_1, self getEye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
       }
 
       if(func_38C5(var_5, -80, 5)) {
@@ -298,7 +298,7 @@ func_3C5D() {
   scripts\anim\combat_utility::func_6309();
   func_1105C(0.3);
   var_5 = self.a.pose;
-  self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, 0.2);
+  self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, 0.2);
   self give_left_powers("changeStepOutPos", var_2, 1, 0.2, 1.2);
   func_465E(var_2);
   thread donotetrackswithendon("changeStepOutPos");
@@ -382,9 +382,9 @@ func_1105C(var_0) {
 
 func_F637(var_0, var_1, var_2) {
   self.var_10A5A = var_0;
-  self _meth_82AC( % exposed_modern, 1, var_2);
-  self _meth_82AC( % exposed_aiming, 1, var_2);
-  self _meth_82AC( % add_idle, 1, var_2);
+  self func_82AC( % exposed_modern, 1, var_2);
+  self func_82AC( % exposed_aiming, 1, var_2);
+  self func_82AC( % add_idle, 1, var_2);
   scripts\anim\track::func_F641(1, var_2);
   func_465D(undefined);
   var_3 = undefined;
@@ -394,37 +394,37 @@ func_F637(var_0, var_1, var_2) {
 
   thread scripts\anim\combat_utility::func_1A3E();
   if(isDefined(self.a.var_AAF2)) {
-    self _meth_82AC(var_3, 1, var_2);
-    self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, 0);
-    self _meth_82A9(scripts\anim\utility::func_1F64("lean_aim_left"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("lean_aim_right"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("lean_aim_up"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("lean_aim_down"), 1, var_2);
+    self func_82AC(var_3, 1, var_2);
+    self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, 0);
+    self func_82A9(scripts\anim\utility::func_1F64("lean_aim_left"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("lean_aim_right"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("lean_aim_up"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("lean_aim_down"), 1, var_2);
     return;
   }
 
   if(var_1) {
-    self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 1, var_2);
+    self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 1, var_2);
     if(isDefined(var_3)) {
-      self _meth_82AC(var_3, 0, 0);
+      self func_82AC(var_3, 0, 0);
     }
 
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_up"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_down"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_left"), 1, var_2);
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_right"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_up"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_down"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_left"), 1, var_2);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_right"), 1, var_2);
     return;
   }
 
-  self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, var_2);
+  self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, var_2);
   if(isDefined(var_3)) {
-    self _meth_82AC(var_3, 0, 0);
+    self func_82AC(var_3, 0, 0);
   }
 
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_turn_aim_up"), 1, var_2);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_turn_aim_down"), 1, var_2);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_turn_aim_left"), 1, var_2);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_turn_aim_right"), 1, var_2);
+  self func_82A9(scripts\anim\utility::func_1F64("add_turn_aim_up"), 1, var_2);
+  self func_82A9(scripts\anim\utility::func_1F64("add_turn_aim_down"), 1, var_2);
+  self func_82A9(scripts\anim\utility::func_1F64("add_turn_aim_left"), 1, var_2);
+  self func_82A9(scripts\anim\utility::func_1F64("add_turn_aim_right"), 1, var_2);
 }
 
 func_10F8A() {
@@ -496,7 +496,7 @@ func_10F89() {
   self notify("done_changing_cover_pos");
   var_5 = func_10F8A();
   self.closefile = 0;
-  self _meth_82E4("stepout", var_3, % root, 1, 0.2, var_5);
+  self func_82E4("stepout", var_3, % root, 1, 0.2, var_5);
   func_465E(var_3);
   thread donotetrackswithendon("stepout");
   var_4 = animhasnotetrack(var_3, "start_aim");
@@ -608,7 +608,7 @@ func_DC57() {
   self.a.var_D892 = "rambo";
   self.var_3C60 = 1;
   thread scripts\anim\shared::func_DC59(var_0);
-  self _meth_82E4("rambo", var_4, % body, 1, 0, 1);
+  self func_82E4("rambo", var_4, % body, 1, 0, 1);
   func_465E(var_4);
   scripts\anim\shared::donotetracks("rambo");
   self notify("rambo_aim_end");
@@ -762,7 +762,7 @@ func_E47A() {
     self clearanim( % body, 0.1);
   }
 
-  self _meth_82EA("hide", var_2, 1, 0.1, var_4);
+  self func_82EA("hide", var_2, 1, 0.1, var_4);
   func_465E(var_2);
   scripts\anim\shared::donotetracks("hide");
   if(var_3) {
@@ -790,7 +790,7 @@ func_2B99() {
   func_F6B9();
   self.sendmatchdata = 1;
   var_0 = scripts\anim\utility::func_1F67("blind_fire");
-  self _meth_82E4("blindfire", var_0, % body, 1, 0, 1);
+  self func_82E4("blindfire", var_0, % body, 1, 0, 1);
   func_465E(var_0);
   scripts\anim\shared::donotetracks("blindfire");
   self.sendmatchdata = 0;
@@ -871,7 +871,7 @@ func_B01C(var_0) {
     var_1 = scripts\anim\utility::func_1F64("look_to_alert");
   }
 
-  self _meth_82E4("looking_end", var_1, % body, 1, 0.1, 1);
+  self func_82E4("looking_end", var_1, % body, 1, 0.1, 1);
   func_465E(var_1);
   scripts\anim\shared::donotetracks("looking_end");
   func_F6B9();
@@ -915,7 +915,7 @@ func_C9FC() {
   }
 
   var_0 = scripts\anim\utility::func_1F64("alert_to_look");
-  self _meth_82E3("looking_start", var_0, % body, 1, 0.2, 1);
+  self func_82E3("looking_start", var_0, % body, 1, 0.2, 1);
   func_465E(var_0);
   scripts\anim\shared::donotetracks("looking_start");
   return 1;
@@ -931,7 +931,7 @@ func_6B9B() {
 
 func_4668() {
   var_0 = scripts\anim\utility::func_1F67("reload");
-  self _meth_82E7("cornerReload", var_0, 1, 0.2);
+  self func_82E7("cornerReload", var_0, 1, 0.2);
   func_465E(var_0);
   scripts\anim\shared::donotetracks("cornerReload");
   self notify("abort_reload");
@@ -1012,9 +1012,9 @@ func_6F27() {
 
 func_D49E(var_0, var_1) {
   if(var_1) {
-    self _meth_82E4("idle", var_0, % body, 1, 0.1, 1);
+    self func_82E4("idle", var_0, % body, 1, 0.1, 1);
   } else {
-    self _meth_82E3("idle", var_0, % body, 1, 0.1, 1);
+    self func_82E3("idle", var_0, % body, 1, 0.1, 1);
   }
 
   func_465E(var_0);
@@ -1037,14 +1037,14 @@ transitiontostance(var_0) {
   }
 
   var_1 = scripts\anim\utility::func_1F64("stance_change");
-  self _meth_82E4("changeStance", var_1, % body);
+  self func_82E4("changeStance", var_1, % body);
   func_465E(var_1);
   func_F2AE(var_0);
   scripts\anim\shared::donotetracks("changeStance");
   wait(0.2);
 }
 
-_meth_846D(var_0, var_1, var_2) {
+func_846D(var_0, var_1, var_2) {
   var_3 = scripts\anim\utility_common::getnodedirection();
   var_4 = scripts\anim\utility_common::func_7E28();
   var_5 = var_3 + self.var_8EDF;
@@ -1059,7 +1059,7 @@ _meth_846D(var_0, var_1, var_2) {
     thread scripts\anim\shared::func_BD1D(var_4, var_1);
   }
 
-  self _meth_82E4("coveranim", var_0, % body, 1, var_1);
+  self func_82E4("coveranim", var_0, % body, 1, var_1);
   func_465E(var_0);
   scripts\anim\notetracks::donotetracksfortime(var_2, "coveranim");
   while(scripts\engine\utility::absangleclamp180(self.angles[1] - var_5) > 1) {

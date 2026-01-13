@@ -9,7 +9,7 @@ init() {
   level._effect["dash_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
-_meth_83B2() {}
+func_83B2() {}
 
 removethinker() {
   self notify("removeTeleReap");
@@ -107,7 +107,7 @@ func_139E6() {
   level endon("game_ended");
   var_0 = [];
   for(;;) {
-    var_1 = _meth_808B(384);
+    var_1 = func_808B(384);
     foreach(var_3 in var_1) {
       var_4 = 0;
       if(distancesquared(self.origin, var_3.origin) > 2048) {
@@ -194,13 +194,13 @@ func_DD93(var_0, var_1, var_2, var_3) {
     var_1 moveto(var_0, var_3, var_9, 0);
     wait(var_3);
   } else {
-    var_0A = _meth_8089(var_4);
+    var_0A = func_8089(var_4);
     var_1 moveto(var_0A + var_2, var_3, var_9, 0);
     wait(var_3 / 4);
-    var_0A = _meth_8089(var_4);
+    var_0A = func_8089(var_4);
     var_1 moveto(var_0A + var_2, var_3, 0, 0);
     wait(var_3 / 4);
-    var_0A = _meth_8089(var_4);
+    var_0A = func_8089(var_4);
     var_1 moveto(var_0A + var_2, var_3, 0, 0);
     wait(var_3 / 2);
   }
@@ -211,7 +211,7 @@ func_DD93(var_0, var_1, var_2, var_3) {
   self setstance("stand");
 }
 
-_meth_8089(var_0) {
+func_8089(var_0) {
   var_1 = self.var_11667.origin - var_0;
   var_2 = distance(var_0, self.var_11667.origin);
   var_3 = vectortoangles(var_1);
@@ -240,7 +240,7 @@ func_DD91(var_0, var_1) {
   }
 }
 
-_meth_808B(var_0) {
+func_808B(var_0) {
   var_1 = [];
   if(!isDefined(var_0)) {
     var_0 = 0;
@@ -318,7 +318,7 @@ func_11668() {
   var_0 = [];
   var_1 = [];
   self.var_11667 = undefined;
-  var_0 = _meth_808B(384);
+  var_0 = func_808B(384);
   var_2 = 0;
   if(isDefined(var_0) && var_0.size > 0) {
     if(var_0.size > 1) {

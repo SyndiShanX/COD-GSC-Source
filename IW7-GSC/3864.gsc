@@ -4,9 +4,9 @@
 *********************************************/
 
 func_956A() {
-  level._meth_83D2 = [];
+  level.func_83D2 = [];
   foreach(var_1 in ["_autosave_stealthcheck", "_patrol_endon_spotted_flag", "_spawner_stealth_default", "_idle_call_idle_func"]) {
-    level._meth_83D2[var_1] = ::usetriggerrequirelookat;
+    level.func_83D2[var_1] = ::usetriggerrequirelookat;
   }
 
   scripts\engine\utility::flag_init("stealth_spotted");

@@ -3,11 +3,11 @@
  * Script: 3602.gsc
 *********************************************/
 
-_meth_8543() {
-  level thread _meth_8545();
+func_8543() {
+  level thread func_8545();
 }
 
-_meth_8545() {
+func_8545() {
   for(;;) {
     level waittill("player_spawned", var_0);
     if(isai(var_0)) {
@@ -16,18 +16,18 @@ _meth_8545() {
   }
 }
 
-_meth_8544() {}
+func_8544() {}
 
-_meth_8541() {
-  self._meth_853E = 1;
+func_8541() {
+  self.func_853E = 1;
   self iprintlnbold("gravWave");
   self radiusdamage(self.origin, 256, 50, 33, self, "MOD_EXPLOSIVE", "distortionfield_grenade_mp");
   thread codemoverequested();
-  thread _meth_8540();
+  thread func_8540();
   return 1;
 }
 
-_meth_8546() {
+func_8546() {
   self endon("gravWave_end");
   self endon("death");
   for(;;) {
@@ -60,7 +60,7 @@ func_ABFD(var_0, var_1) {
   var_3 = getcenterfrac();
   var_4 = self.origin;
   var_5 = anglestoup(self.angles);
-  self _meth_84DC(var_5, 160);
+  self func_84DC(var_5, 160);
   self shellshock("concussion_grenade_mp", 3, 0, 1);
   self notify("flashbang", self.origin, 1, 30, var_1, 1);
   var_0.origin = self.origin;
@@ -142,12 +142,12 @@ func_20FE(var_0) {
   var_0 rotateto(var_2, var_3, 0.1, 0.1);
 }
 
-_meth_853F() {
+func_853F() {
   if(!isDefined(self)) {
     return;
   }
 
-  self._meth_853E = 0;
+  self.func_853E = 0;
   self setscriptablepartstate("gravWave", "gravwaveOff", 0);
   self notify("gravWave_end");
 }
@@ -155,18 +155,18 @@ _meth_853F() {
 codemoverequested() {
   self endon("gravWave_end");
   scripts\engine\utility::waittill_any_3("death", "disconnect", "game_ended");
-  thread _meth_853F();
+  thread func_853F();
 }
 
 func_9E17() {
-  if(!isDefined(self._meth_853E)) {
+  if(!isDefined(self.func_853E)) {
     return 0;
   }
 
-  return self._meth_853E;
+  return self.func_853E;
 }
 
-_meth_8540() {
+func_8540() {
   self endon("disconnect");
   self endon("gravWave_end");
   self forceplaygestureviewmodel("ges_hold");

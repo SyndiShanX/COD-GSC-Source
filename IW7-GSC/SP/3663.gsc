@@ -29,7 +29,7 @@ func_9755(var_0) {
 }
 
 func_9756() {
-  lib_0E4A::_meth_84BB();
+  lib_0E4A::func_84BB();
 }
 
 func_5570(var_0) {
@@ -63,17 +63,17 @@ func_622C(var_0, var_1) {
 
   level.player.isent.var_6F43 = 1;
   level.player scripts\sp\utility::func_65E1("player_gravity_off");
-  level.var_7684 = ::lib_0E50::unloadalltransients;
+  level.var_7684 = lib_0E50::unloadalltransients;
   if(!isDefined(var_0) || var_0) {
     level.player thread lib_0E47::func_4D8A();
   }
 
   if(!isDefined(var_1) || var_1) {
-    level.player thread lib_0E4A::_meth_84BA();
+    level.player thread lib_0E4A::func_84BA();
   }
 
   level.player thread lib_0E50::func_CF84();
-  level.player thread _meth_853A();
+  level.player thread func_853A();
 }
 
 func_556F() {
@@ -142,7 +142,7 @@ func_621C(var_0) {
   setsaveddvar("player_swimSpeed", level.var_1050D);
   setsaveddvar("player_sprintSpeedScale", level.var_10510);
   self allowlean(0);
-  self _meth_8014(1);
+  self func_8014(1);
   self setviewkickscale(0.6);
   thread func_8B3A();
   thread func_93E9();
@@ -166,7 +166,7 @@ func_5558() {
   setsaveddvar("player_sprintUnlimited", "1");
   setsaveddvar("player_swimWaterCurrent", (0, 0, 0));
   self allowlean(1);
-  self _meth_8014(0);
+  self func_8014(0);
   scripts\engine\utility::allow_doublejump(1);
   if(isDefined(self.var_286F)) {
     self.var_50 = self.var_286F;
@@ -177,7 +177,7 @@ func_5558() {
   }
 }
 
-_meth_853A() {
+func_853A() {
   self.isent.var_6F43 = 0;
   self.isent.var_6F43 = 1;
   func_61FA();
@@ -192,8 +192,8 @@ _meth_853A() {
     }
   }
 
-  if(isDefined(self._meth_849A)) {
-    level.player thread lib_0E4A::_meth_84B9();
+  if(isDefined(self.func_849A)) {
+    level.player thread lib_0E4A::func_84B9();
   }
 }
 
@@ -205,7 +205,7 @@ func_61FA() {
 }
 
 func_552C() {
-  self _meth_80A6();
+  self func_80A6();
   func_559D();
   func_5558();
   lib_0E50::func_5593();
@@ -272,7 +272,7 @@ func_13E97() {
   }
 
   self.var_13E97 = scripts\sp\player_rig::func_7B88();
-  self.var_13E97 _meth_81E4(self, "tag_origin", (-12, 0, -58), (-4, 0, 0), 1, 0, 0, 0);
+  self.var_13E97 func_81E4(self, "tag_origin", (-12, 0, -58), (-4, 0, 0), 1, 0, 0, 0);
   for(;;) {
     var_0 = self getnormalizedmovement();
     var_1 = 0.75;

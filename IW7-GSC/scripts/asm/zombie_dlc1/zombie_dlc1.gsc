@@ -23,7 +23,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self.endnode_pos = var_5;
   if(!isDefined(var_4)) {
     return;
@@ -107,7 +107,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   }
 
   self gib_fx_override("noclip");
-  opcode::OP_CallBuiltin4 = self _meth_8145();
+  opcode::OP_CallBuiltin4 = self func_8145();
   if(isDefined(opcode::OP_CallBuiltin4) && isDefined(var_1E.target)) {
     self.endnode = opcode::OP_CallBuiltin4;
     opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");

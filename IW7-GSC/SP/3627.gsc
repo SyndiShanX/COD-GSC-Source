@@ -109,7 +109,7 @@ func_DDD3() {
     return;
   }
 
-  while(level.player _meth_84D0() > getdvarfloat("offhandshield_minenergyfordeploy")) {
+  while(level.player func_84D0() > getdvarfloat("offhandshield_minenergyfordeploy")) {
     wait(0.15);
   }
 
@@ -120,7 +120,7 @@ func_DDD3() {
 func_DDD4() {
   for(;;) {
     level.player waittill("secondary_equipment_pressed");
-    if(level.player _meth_84D0() < getdvarfloat("offhandshield_minenergyfordeploy")) {
+    if(level.player func_84D0() < getdvarfloat("offhandshield_minenergyfordeploy")) {
       scripts\sp\utility::func_56BE("shield_recharge_remind", 3);
       wait(3);
     }
@@ -161,13 +161,13 @@ func_13746(var_0) {
 }
 
 func_C330() {
-  var_0 = level.player _meth_84CF() * 0.25;
+  var_0 = level.player func_84CF() * 0.25;
   for(;;) {
-    var_1 = level.player _meth_84D0();
+    var_1 = level.player func_84D0();
     if(var_1 <= var_0 && self.var_C337.var_19) {
       thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_alarm");
       childthread func_C339(var_0);
-      while(self _meth_84D0() < var_0 && self.var_C337.var_19) {
+      while(self func_84D0() < var_0 && self.var_C337.var_19) {
         wait(0.05);
       }
 
@@ -184,7 +184,7 @@ func_C339(var_0) {
   }
 
   self.var_C337.var_FC8E = 1;
-  while(self _meth_84D0() < var_0) {
+  while(self func_84D0() < var_0) {
     wait(0.05);
   }
 
@@ -278,7 +278,7 @@ func_CB92(var_0) {
 
 doping() {
   thread scripts\sp\utility::play_sound_on_entity("retract_shield_tracker_pulse");
-  self _meth_854F();
+  self func_854F();
 }
 
 func_CB94(var_0) {
@@ -304,7 +304,7 @@ func_CB95(var_0) {
 
   var_4 = spawn("script_origin", var_3);
   var_4 playSound("retract_shield_tracker_3d_target", "sounddone");
-  var_4 _meth_8277(var_2);
+  var_4 func_8277(var_2);
   var_4 waittill("sounddone");
   var_4 delete();
 }

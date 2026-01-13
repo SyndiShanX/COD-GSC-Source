@@ -328,7 +328,7 @@ func_5845() {
   }
 
   foreach(var_14 in var_0F) {
-    var_15 = var_14 _meth_819D();
+    var_15 = var_14 func_819D();
     var_16 = var_14 getstruct(var_3);
     if(!var_15 && !var_16) {
       continue;
@@ -458,7 +458,7 @@ func_584E() {
 
     func_5845();
     func_5839();
-    if(isDefined(self _meth_8473())) {
+    if(isDefined(self func_8473())) {
       func_583A("results", "current");
     }
 

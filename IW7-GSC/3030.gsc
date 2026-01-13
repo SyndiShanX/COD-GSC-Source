@@ -141,7 +141,7 @@ func_5D07(var_0, var_1) {
   level endon("stop_drop_pod_logic");
   var_2 = 3.5;
   var_3 = (4000, 2000, 35000);
-  var_4 = level.player _meth_8473();
+  var_4 = level.player func_8473();
   var_5 = (0, var_4.angles[1], 0);
   var_6 = anglesToForward(var_5);
   var_7 = anglestoright(var_5);
@@ -155,7 +155,7 @@ func_5D07(var_0, var_1) {
   var_12 = var_2;
 
   while(isDefined(var_10)) {
-    var_4 = level.player _meth_8473();
+    var_4 = level.player func_8473();
     var_13 = scripts\sp\math::func_C097(0, var_2, var_12);
     var_6 = anglesToForward(var_4.angles);
     var_7 = anglesToForward(var_4.angles);
@@ -192,7 +192,7 @@ func_5D04(var_0) {
   var_1 = (450, 0, 50);
 
   for(var_2 = undefined; var_0 > 0; var_0 = var_0 - 0.05) {
-    var_3 = level.player _meth_8473();
+    var_3 = level.player func_8473();
     var_4 = var_1[0];
     var_5 = var_1[2];
     var_6 = anglesToForward(var_3.angles);
@@ -231,10 +231,10 @@ func_13C0F() {
 }
 
 func_5BFD(var_0, var_1) {
-  var_2 = level.player _meth_8473();
+  var_2 = level.player func_8473();
   var_1 unlink();
   var_1 func_0BDC::func_F2FF();
-  var_1 _meth_82B1( % weapon_drone_fly_init, 1);
+  var_1 func_82B1( % weapon_drone_fly_init, 1);
   var_1.var_FC28 = scripts\engine\utility::spawn_tag_origin();
   var_1.var_FC28 func_0BDC::func_F2FF();
   var_1 thread func_5C87();
@@ -264,7 +264,7 @@ func_5BFD(var_0, var_1) {
     }
 
     var_3 = 1;
-    var_2 = level.player _meth_8473();
+    var_2 = level.player func_8473();
 
     if(!isDefined(var_2)) {
       continue;
@@ -329,14 +329,14 @@ func_5BFC(var_0) {
   var_1.active = 1;
 
   if(!isDefined(var_0)) {
-    var_2 = level.player _meth_8473();
+    var_2 = level.player func_8473();
   } else {
     var_2 = level.var_D127;
   }
 
   var_1 unlink();
   var_1 func_0BDC::func_F2FF();
-  var_1 _meth_82B1( % landing_drone_fly_init, 1);
+  var_1 func_82B1( % landing_drone_fly_init, 1);
   var_1 thread func_5C3E();
   var_1 thread func_5C95();
   var_3 = var_1.origin - var_2.origin;
@@ -378,7 +378,7 @@ func_5BFC(var_0) {
     level.player waittill("on_player_update");
 
     if(!isDefined(var_0)) {
-      var_2 = level.player _meth_8473();
+      var_2 = level.player func_8473();
     } else {
       var_2 = level.var_D127;
     }
@@ -463,7 +463,7 @@ func_5BE2(var_0) {
     func_0BDC::func_D165(self.var_6C1E, 1.0, 0, 0.0);
     func_0BDC::func_D16C(self.var_102D1.var_20F1, 0.0, 0, 0.0);
   } else {
-    self.var_102D1.var_5BD7 _meth_8291(0.1, 0.1, 0.1, 0.5);
+    self.var_102D1.var_5BD7 func_8291(0.1, 0.1, 0.1, 0.5);
     self.var_102D1.var_5BD7 linkto(level.var_D127, "tag_body", (325.491, 0, 14.494), (0, -180, 0));
   }
 }
@@ -584,7 +584,7 @@ func_E095(var_0, var_1, var_2) {
   self give_attacker_kill_rewards( % weapon_drone_fly_init, 0, var_3);
   self give_attacker_kill_rewards( % weapon_drone_fly_static, 1, var_3);
   var_4 = self islegacyagent( % weapon_drone_fly_init);
-  self _meth_82B0( % weapon_drone_fly_static, var_4);
+  self func_82B0( % weapon_drone_fly_static, var_4);
 }
 
 func_E04D(var_0, var_1, var_2) {
@@ -597,7 +597,7 @@ func_E04D(var_0, var_1, var_2) {
   self give_attacker_kill_rewards( % landing_drone_fly_init, 0, var_3);
   self give_attacker_kill_rewards( % landing_drone_fly_static, 1, var_3, 1);
   var_4 = self islegacyagent( % landing_drone_fly_init);
-  self _meth_82B0( % landing_drone_fly_static, var_4);
+  self func_82B0( % landing_drone_fly_static, var_4);
 }
 
 func_5C4D(var_0, var_1, var_2, var_3, var_4) {
@@ -823,7 +823,7 @@ func_B7F2() {
   var_0 = -9999999;
 
   while(level.var_D127.missiles.count > 0) {
-    var_1 = level.player _meth_848A();
+    var_1 = level.player func_848A();
     var_2 = gettime();
 
     if(isDefined(var_1) && isDefined(var_1[0]) && var_1[1] == 0 && !scripts\engine\utility::flag("jackal_missile_hint") && !scripts\engine\utility::flag("jackal_find_lockon")) {
@@ -873,7 +873,7 @@ func_5C40(var_0) {
     var_1 = getnotetracktimes( % machinery_landing_drone_recovery, "attach_drone");
     var_1 = var_1[0] * getanimlength( % machinery_landing_drone_recovery);
     self.var_102D1.var_5BD7 thread func_685F(var_1);
-    self.var_5C6B _meth_82B1( % machinery_landing_drone_recovery, 1.0);
+    self.var_5C6B func_82B1( % machinery_landing_drone_recovery, 1.0);
     wait(var_1);
     self.var_102D1.var_5BD7 linkto(self.var_5C6B, "j_arm_L");
   } else {

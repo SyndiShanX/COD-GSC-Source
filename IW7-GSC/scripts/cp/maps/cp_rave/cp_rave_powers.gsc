@@ -4,10 +4,10 @@
 ******************************************************/
 
 init() {
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_transponder", ::scripts\cp\powers\coop_powers::settransponder, ::scripts\cp\powers\coop_powers::unsettransponder, undefined, "transponder_update", "powers_transponder_used", undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_transponder", scripts\cp\powers\coop_powers::settransponder, ::scripts\cp\powers\coop_powers::unsettransponder, undefined, "transponder_update", "powers_transponder_used", undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_armageddon", undefined, undefined, ::scripts\cp\powers\coop_powers::usearmageddon, undefined, undefined, undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_microTurret", undefined, undefined, undefined, "microTurret_update", "powers_microTurret_used", undefined);
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_rewind", ::scripts\cp\powers\coop_powers::setrewind, ::scripts\cp\powers\coop_powers::unsetrewind, ::scripts\cp\powers\coop_powers::userewind, undefined, "powers_rewind_used", undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_rewind", scripts\cp\powers\coop_powers::setrewind, ::scripts\cp\powers\coop_powers::unsetrewind, ::scripts\cp\powers\coop_powers::userewind, undefined, "powers_rewind_used", undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_repulsor", undefined, undefined, ::scripts\cp\powers\coop_powers::userepulsor, undefined, undefined, undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_blackholeGrenade", undefined, undefined, undefined, undefined, "powers_blackholeGrenade_used", undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_tripMine", undefined, undefined, undefined, "trip_mine_update", undefined, undefined);

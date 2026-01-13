@@ -9,12 +9,12 @@ func_2371() {
   }
 
   scripts\asm\asm::func_230B("gesture", "gesture_start");
-  scripts\asm\asm::func_2374("gesture", ::lib_0C4C::func_D48B, undefined, undefined, undefined, undefined, ::lib_0C4C::func_3EDA, undefined, ["gesture"], undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2374("gesture", lib_0C4C::func_D48B, undefined, undefined, undefined, undefined, lib_0C4C::func_3EDA, undefined, ["gesture"], undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   scripts\asm\asm::func_2375("gesture_start", undefined, ::func_121A5, undefined);
-  scripts\asm\asm::func_2374("gesture_start", ::lib_0C4C::func_980D, undefined, undefined, undefined, undefined, ::lib_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::func_2374("gesture_start", lib_0C4C::func_980D, undefined, undefined, undefined, undefined, lib_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
   scripts\asm\asm::func_2375("gesture", undefined, ::func_121A1, undefined);
   scripts\asm\asm::func_2375("gesture_point", undefined, ::func_121A3, undefined);
-  scripts\asm\asm::func_2374("gesture_point", ::lib_0C4C::func_D48B, undefined, undefined, undefined, undefined, ::lib_0C4C::func_3EDA, undefined, ["gesture"], undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2374("gesture_point", lib_0C4C::func_D48B, undefined, undefined, undefined, undefined, lib_0C4C::func_3EDA, undefined, ["gesture"], undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   scripts\asm\asm::func_2375("gesture_start", undefined, ::func_1219F, undefined);
   scripts\asm\asm::func_2327();
 }

@@ -18,7 +18,7 @@ main() {
 
   scripts\sp\load_code::vehicle_getspeed();
   scripts\sp\load_code::vehicle_finishdamage();
-  scripts\sp\load_code::_meth_83D5();
+  scripts\sp\load_code::func_83D5();
   scripts\engine\utility::init_trigger_flags();
   scripts\engine\utility::struct_class_init();
   scripts\sp\colors::init_colors();
@@ -81,8 +81,8 @@ main() {
   lib_0E1E::func_5374();
   scripts\sp\armoury::func_952F();
   scripts\sp\utility::func_9674();
-  if(isDefined(level._meth_83DF)) {
-    [[level._meth_83DF]]();
+  if(isDefined(level.func_83DF)) {
+    [[level.func_83DF]]();
   }
 
   scripts\sp\load_code::func_B3CD();

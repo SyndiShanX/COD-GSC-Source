@@ -1425,7 +1425,7 @@ watchgrenadeusage() {
 
   for(;;) {
     self waittill("grenade_pullback", var_0);
-    var_1 = self _meth_8556();
+    var_1 = self func_8556();
 
     if(var_1 != "none") {
       continue;
@@ -1892,7 +1892,7 @@ heart_used() {
   self notify("beginHeartTracking");
   self endon("beginHeartTracking");
   self endon("death");
-  var_0 = self _meth_8513("ges_heart_pull", "explode");
+  var_0 = self func_8513("ges_heart_pull", "explode");
   var_1 = self getgestureanimlength("ges_heart_pull");
   self.changingweapon = undefined;
   var_2 = self.origin;
@@ -2131,7 +2131,7 @@ throwingknifeteleport(var_0, var_1, var_2, var_3) {
   var_2 playsoundonmovingent("blinkknife_teleport_npc");
   playLoopSound(var_0.origin, "blinkknife_impact");
   thread throwingknifeteleport_fxstartburst(var_2, var_1);
-  var_4 = var_1 _meth_8113();
+  var_4 = var_1 func_8113();
 
   if(isDefined(var_4)) {
     var_4 setcontents(0);

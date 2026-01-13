@@ -174,7 +174,7 @@ func_103FD() {
   self endon("death");
 
   for(;;) {
-    self.turret _meth_8398();
+    self.turret func_8398();
     wait(randomfloatrange(0.3, 0.7));
     self.turret givesentry();
     wait(randomfloatrange(0.1, 1.1));

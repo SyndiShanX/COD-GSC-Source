@@ -282,20 +282,20 @@ setlightintensity(var_0, var_1) {
   return 1;
 }
 
-_meth_82FF() {
+func_82FF() {
   var_0 = func_D9F8();
   foreach(var_2 in var_0) {
-    var_3 = level.player _meth_84C6("equipmentState", var_2);
+    var_3 = level.player func_84C6("equipmentState", var_2);
     setlightintensity(var_2, var_3);
   }
 }
 
-_meth_8315() {
+func_8315() {
   var_0 = func_DA12();
   var_1 = [];
   var_2 = undefined;
   foreach(var_4 in var_0) {
-    var_2 = level.player _meth_84C6("suitUpgradeState", var_4);
+    var_2 = level.player func_84C6("suitUpgradeState", var_4);
     if(isDefined(var_2) && var_2 == "unlocked") {
       var_5 = "specialty_" + var_4;
       var_1 = scripts\engine\utility::array_add(var_1, var_5);
@@ -310,16 +310,16 @@ _meth_8315() {
 }
 
 func_DA19() {
-  if(level.player _meth_84C6("suitUpgradeState", "slasher") != "locked") {
+  if(level.player func_84C6("suitUpgradeState", "slasher") != "locked") {
     return 1;
   }
 
-  return level.player _meth_84C6("suitUpgradeState", "shocker") != "locked";
+  return level.player func_84C6("suitUpgradeState", "shocker") != "locked";
 }
 
 func_D9FB() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "jackalSetup", "jackalDecal");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "jackalSetup", "jackalDecal");
   if(!isDefined(var_1) || var_1 == "none" || var_1 == "") {
     var_1 = "veh_mil_air_un_jackal_livery_shell_01";
   }
@@ -328,8 +328,8 @@ func_D9FB() {
 }
 
 func_DA02() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "jackalSetup", "jackalUpgrade");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "jackalSetup", "jackalUpgrade");
   if(!isDefined(var_1)) {
     var_1 = "none";
   }
@@ -338,8 +338,8 @@ func_DA02() {
 }
 
 func_D9FE() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "jackalSetup", "jackalPrimary");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "jackalSetup", "jackalPrimary");
   if(!isDefined(var_1)) {
     var_1 = "primary_default";
   }
@@ -348,8 +348,8 @@ func_D9FE() {
 }
 
 func_DA00() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "jackalSetup", "jackalSecondary");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "jackalSetup", "jackalSecondary");
   if(!isDefined(var_1)) {
     var_1 = "secondary_default";
   }
@@ -466,7 +466,7 @@ func_96FD() {
 func_13C43() {
   self endon("death");
   for(;;) {
-    if(isDefined(self.disableautoreload) && self.disableautoreload > 0 && self _meth_843C()) {}
+    if(isDefined(self.disableautoreload) && self.disableautoreload > 0 && self func_843C()) {}
 
     wait(0.05);
   }
@@ -493,7 +493,7 @@ func_DA3E(var_0) {
   }
 
   foreach(var_0B in var_1) {
-    var_0C = level.player _meth_84C6("weaponsScanned", var_0B);
+    var_0C = level.player func_84C6("weaponsScanned", var_0B);
     if(isDefined(var_0C) && var_0C != "") {
       level.var_D9E5["weaponstates"][var_0B] = var_0C;
       continue;
@@ -513,7 +513,7 @@ func_DA1D() {
     }
   }
 
-  level.player _meth_84C7("scrapCount", var_1);
+  level.player func_84C7("scrapCount", var_1);
   func_DA4F();
 }
 
@@ -530,11 +530,11 @@ func_DA28(var_0) {
     for(var_2 = 0; var_2 < 2; var_2++) {
       for(var_3 = 0; var_3 < 2; var_3++) {
         var_4 = var_2 * 2 + var_3;
-        var_5 = level.player _meth_84C6("missionLootRooms", var_0, "terminal", var_4);
+        var_5 = level.player func_84C6("missionLootRooms", var_0, "terminal", var_4);
         var_1["terminals"] = scripts\engine\utility::array_add(var_1["terminals"], var_5);
       }
 
-      var_6 = level.player _meth_84C6("missionLootRooms", var_0, "discovered", var_2);
+      var_6 = level.player func_84C6("missionLootRooms", var_0, "discovered", var_2);
       var_1["discovered"] = scripts\engine\utility::array_add(var_1["discovered"], var_6);
     }
   }
@@ -545,21 +545,21 @@ func_DA28(var_0) {
 func_D9ED(var_0) {
   var_1 = scripts\engine\utility::get_template_script_MAYBE();
   var_1 = func_7BDE(var_1);
-  var_2 = level.player _meth_84C6("missionLootRooms", var_1, "discovered", var_0);
+  var_2 = level.player func_84C6("missionLootRooms", var_1, "discovered", var_0);
   return var_2;
 }
 
 func_DA49(var_0, var_1) {
   var_2 = scripts\engine\utility::get_template_script_MAYBE();
   var_2 = func_7BDE(var_2);
-  level.player _meth_84C7("missionLootRooms", var_2, "discovered", var_0, var_1);
+  level.player func_84C7("missionLootRooms", var_2, "discovered", var_0, var_1);
 }
 
 func_DA44(var_0, var_1) {
   var_2 = scripts\engine\utility::get_template_script_MAYBE();
   var_2 = func_7BDE(var_2);
   var_3 = var_0 * 2 + var_1;
-  var_4 = level.player _meth_84C6("missionLootRooms", var_2, "terminal", var_3);
+  var_4 = level.player func_84C6("missionLootRooms", var_2, "terminal", var_3);
   return var_4;
 }
 
@@ -567,7 +567,7 @@ func_DA4D(var_0, var_1) {
   var_2 = scripts\engine\utility::get_template_script_MAYBE();
   var_2 = func_7BDE(var_2);
   var_3 = var_0 * 2 + var_1;
-  level.player _meth_84C7("missionLootRooms", var_2, "terminal", var_3, 1);
+  level.player func_84C7("missionLootRooms", var_2, "terminal", var_3, 1);
 }
 
 func_DA3B() {
@@ -663,9 +663,9 @@ func_DA2F(var_0) {
   }
 
   foreach(var_0D in var_3) {
-    var_0E = level.player _meth_84C6("weaponsScanned", var_0D);
+    var_0E = level.player func_84C6("weaponsScanned", var_0D);
     if(!isDefined(var_0E) || var_0E == "locked") {
-      level.player _meth_84C7("weaponsScanned", var_0D, "unlocked");
+      level.player func_84C7("weaponsScanned", var_0D, "unlocked");
       level.var_D9E5["weaponstates"][var_0D] = "unlocked";
     }
   }
@@ -677,14 +677,14 @@ func_DA32(var_0) {
   var_1 = strtok(tablelookup("sp\progression_unlocks.csv", 0, var_0, 4), ", ");
   var_1 = func_D9E7(var_1);
   if(var_0 != "europa" && var_0 != "pearlharbor") {
-    var_2 = level.player _meth_84C6("weaponsScanned", "iw7_steeldragon");
+    var_2 = level.player func_84C6("weaponsScanned", "iw7_steeldragon");
     if(isDefined(var_2) && var_2 == "locked") {
       var_1 = scripts\engine\utility::array_add(var_1, "iw7_steeldragon");
     }
   }
 
   foreach(var_4 in var_1) {
-    var_5 = level.player _meth_84C6("weaponsScanned", var_4);
+    var_5 = level.player func_84C6("weaponsScanned", var_4);
     if(isDefined(var_5) && var_5 == "unlocked") {
       var_1 = scripts\engine\utility::array_remove(var_1, var_4);
       continue;
@@ -1057,65 +1057,65 @@ func_7BDE(var_0, var_1) {
 }
 
 func_492B(var_0) {
-  var_1 = level.player _meth_84C6("weaponsScanned", "iw7_g18");
+  var_1 = level.player func_84C6("weaponsScanned", "iw7_g18");
   if(!isDefined(var_1) || var_1 != "unlocked" || isDefined(var_0)) {
     var_2 = ["iw7_g18", "iw7_m8", "iw7_m4", "iw7_fhr"];
     foreach(var_4 in var_2) {
-      level.player _meth_84C7("weaponsScanned", var_4, "unlocked");
+      level.player func_84C7("weaponsScanned", var_4, "unlocked");
     }
 
     var_6 = ["seeker", "antigrav"];
     foreach(var_8 in var_6) {
-      level.player _meth_84C7("equipmentState", var_8, "unlocked");
+      level.player func_84C7("equipmentState", var_8, "unlocked");
     }
 
     var_0A = ["reflex", "acog", "silencer"];
     foreach(var_0C in var_0A) {
-      level.player _meth_84C7("attachmentsState", var_0C, "unlocked");
+      level.player func_84C7("attachmentsState", var_0C, "unlocked");
     }
 
     var_0E = "primary_default";
-    level.player _meth_84C7("jackalPrimaryState", var_0E, "unlocked");
+    level.player func_84C7("jackalPrimaryState", var_0E, "unlocked");
     var_0F = "secondary_default";
-    level.player _meth_84C7("jackalSecondaryState", var_0F, "unlocked");
+    level.player func_84C7("jackalSecondaryState", var_0F, "unlocked");
     var_10 = ["weapons", "hull"];
     foreach(var_12 in var_10) {
-      level.player _meth_84C7("jackalUpgradeState", var_12, "unlocked");
+      level.player func_84C7("jackalUpgradeState", var_12, "unlocked");
     }
 
     var_14 = ["veh_mil_air_un_jackal_livery_shell_01"];
     foreach(var_16 in var_14) {
-      level.player _meth_84C7("jackalDecals", var_16, "unlocked");
+      level.player func_84C7("jackalDecals", var_16, "unlocked");
     }
 
-    level.player _meth_84C8("loadouts", 0, "name", "MENU_SP_GRIFFS_RECOMMENDED");
-    level.player _meth_84C8("loadouts", 1, "name", "MENU_SP_LOADOUT_1");
-    level.player _meth_84C8("loadouts", 2, "name", "MENU_SP_LOADOUT_2");
-    level.player _meth_84C8("loadouts", 3, "name", "MENU_SP_LOADOUT_3");
+    level.player func_84C8("loadouts", 0, "name", "MENU_SP_GRIFFS_RECOMMENDED");
+    level.player func_84C8("loadouts", 1, "name", "MENU_SP_LOADOUT_1");
+    level.player func_84C8("loadouts", 2, "name", "MENU_SP_LOADOUT_2");
+    level.player func_84C8("loadouts", 3, "name", "MENU_SP_LOADOUT_3");
     scripts\sp\loadout::func_F56D("loadout1", 0, 1);
     scripts\sp\loadout::func_F56D("loadout2", 0, 2);
     scripts\sp\loadout::func_F56D("loadout3", 0, 3);
-    level.player _meth_84C7("missionStateData", "europa", "incomplete");
+    level.player func_84C7("missionStateData", "europa", "incomplete");
   }
 
   if(scripts\sp\utility::func_93A6()) {
     var_18 = ["nanoshot", "helmet"];
     foreach(var_8 in var_18) {
-      var_1A = level.player _meth_84C6("equipmentState", var_8);
+      var_1A = level.player func_84C6("equipmentState", var_8);
       if(var_1A == "locked") {
-        level.player _meth_84C7("equipmentState", var_8, "scanned");
+        level.player func_84C7("equipmentState", var_8, "scanned");
       }
     }
   }
 }
 
 func_DA57(var_0) {
-  var_1 = level.player _meth_84C6("weaponsScanned", var_0);
+  var_1 = level.player func_84C6("weaponsScanned", var_0);
   if(!isDefined(var_1)) {
     return 0;
   }
 
-  return level.player _meth_84C6("weaponsScanned", var_0) != "locked";
+  return level.player func_84C6("weaponsScanned", var_0) != "locked";
 }
 
 func_DA55(var_0, var_1) {
@@ -1181,18 +1181,18 @@ func_DA18(var_0, var_1, var_2, var_3, var_4) {
   var_0F = [];
   if(!var_1) {
     if(!var_2) {
-      var_10 = level.player _meth_84C6("lastWeaponPreload");
+      var_10 = level.player func_84C6("lastWeaponPreload");
       if(isDefined(var_10) && var_10 == level.template_script) {
         var_11 = func_DA17();
         foreach(var_9 in var_11) {
-          var_13 = level.player _meth_84C6("weaponsLoaded", var_9);
+          var_13 = level.player func_84C6("weaponsLoaded", var_9);
           if(isDefined(var_13) && var_13) {
             var_0F = scripts\engine\utility::array_add(var_0F, var_9);
           }
         }
       }
 
-      level.player _meth_84C7("lastWeaponPreload", "nodata");
+      level.player func_84C7("lastWeaponPreload", "nodata");
     }
 
     if(var_0F.size == 0) {
@@ -1379,7 +1379,7 @@ func_DA18(var_0, var_1, var_2, var_3, var_4) {
 
       precacheitem(var_9);
       precachemodel(getweaponviewmodel(var_9));
-      var_31 = level.player _meth_84C6(var_2F, var_9);
+      var_31 = level.player func_84C6(var_2F, var_9);
       if(isDefined(var_31)) {
         level.var_D9E5["weaponstates"][var_9] = var_31;
         continue;
@@ -1392,7 +1392,7 @@ func_DA18(var_0, var_1, var_2, var_3, var_4) {
     var_33 = func_D9F8();
     foreach(var_35 in var_33) {
       precacheitem(var_35);
-      var_36 = level.player _meth_84C6(var_2F, var_35);
+      var_36 = level.player func_84C6(var_2F, var_35);
       if(isDefined(var_36)) {
         level.var_D9E5["weaponstates"][var_35] = var_36;
         continue;
@@ -1548,7 +1548,7 @@ func_12642() {
       continue;
     }
 
-    level.player _meth_84C7("weaponsLoaded", var_6, 0);
+    level.player func_84C7("weaponsLoaded", var_6, 0);
   }
 
   if(level.var_D9E5["loaded_weapons"].size > 0) {
@@ -1564,7 +1564,7 @@ func_12642() {
       }
 
       if(var_1) {
-        level.player _meth_84C7("weaponsScanned", var_6, "unlocked");
+        level.player func_84C7("weaponsScanned", var_6, "unlocked");
       }
     }
   }
@@ -1586,7 +1586,7 @@ func_12642() {
         if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_6)) {
           level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_6);
           level.var_D9E5["loaded_weapon_types"][var_10] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_10], var_0E);
-          level.player _meth_84C7("weaponsLoaded", var_6, 1);
+          level.player func_84C7("weaponsLoaded", var_6, 1);
         }
       }
     }
@@ -1660,7 +1660,7 @@ func_12650() {
       var_17 = "weapon_" + var_9 + "_tr";
       scripts\sp\utility::func_1264E(var_17);
       level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_16);
-      level.player _meth_84C7("weaponsLoaded", var_16, 0);
+      level.player func_84C7("weaponsLoaded", var_16, 0);
       continue;
     }
 
@@ -1706,9 +1706,9 @@ func_12652(var_0) {
 }
 
 func_DA0C() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 0, "weapon");
-  var_2 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 1, "weapon");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "weaponSetups", 0, "weapon");
+  var_2 = level.player func_84C6("loadouts", var_0, "weaponSetups", 1, "weapon");
   var_3 = [var_1, var_2];
   var_3 = scripts\engine\utility::array_remove_duplicates(var_3);
   foreach(var_5 in var_3) {
@@ -1723,7 +1723,7 @@ func_DA0C() {
 func_DA54() {
   foreach(var_2, var_1 in level.var_D9E5["weaponstates"]) {
     if(func_9B49(var_2)) {
-      level.var_D9E5["weaponstates"][var_2] = level.player _meth_84C6("weaponsScanned", var_2);
+      level.var_D9E5["weaponstates"][var_2] = level.player func_84C6("weaponsScanned", var_2);
     }
   }
 }
@@ -1731,7 +1731,7 @@ func_DA54() {
 func_DA53() {
   foreach(var_2, var_1 in level.var_D9E5["weaponstates"]) {
     if(!func_9B49(var_2)) {
-      level.var_D9E5["weaponstates"][var_2] = level.player _meth_84C6("equipmentState", var_2);
+      level.var_D9E5["weaponstates"][var_2] = level.player func_84C6("equipmentState", var_2);
     }
   }
 }
@@ -1772,12 +1772,12 @@ func_DA52(var_0) {
           var_0D.var_13CCE = var_0C;
           var_1[var_9][var_0D.type][var_0C][var_0D.var_657B] = var_0D;
           if(isDefined(var_0) && !var_0) {
-            level.player _meth_84C7("attachmentsState", var_0D.type, "locked");
+            level.player func_84C7("attachmentsState", var_0D.type, "locked");
             continue;
           }
 
           if(isDefined(var_0) && var_0) {
-            level.player _meth_84C7("attachmentsState", var_0D.type, "unlocked");
+            level.player func_84C7("attachmentsState", var_0D.type, "unlocked");
           }
         }
       }
@@ -1878,7 +1878,7 @@ func_13C05(var_0, var_1) {
 
 func_13E80(var_0, var_1) {
   var_2 = level.player getcurrentprimaryweapon();
-  var_3 = level.player _meth_8519(var_2, 1);
+  var_3 = level.player func_8519(var_2, 1);
   var_4 = getweaponbasename(var_2);
   var_5 = undefined;
   var_6 = undefined;
@@ -2015,7 +2015,7 @@ func_13C35() {
   level scripts\engine\utility::waittill_notify_or_timeout("starting_weapons_scanned", 2);
   foreach(var_1 in level.var_D9E5["mandatoryunlocks"]) {
     if(func_9B49(var_1)) {
-      var_2 = level.player _meth_84C6("weaponsScanned", var_1);
+      var_2 = level.player func_84C6("weaponsScanned", var_1);
       if(isDefined(var_2) && var_2 != "locked") {
         level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_1);
       }
@@ -2134,9 +2134,9 @@ func_EBB9() {
     level.var_D9E5["weaponstates"][var_5] = "unlocked";
     level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_5);
     level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_5);
-    var_0A = level.player _meth_84C6("weaponsScanned", var_5);
+    var_0A = level.player func_84C6("weaponsScanned", var_5);
     if(!isDefined(var_0A) || var_0A == "locked") {
-      level.player _meth_84C7("weaponsScanned", var_5, "unlocked");
+      level.player func_84C7("weaponsScanned", var_5, "unlocked");
     }
   }
 
@@ -2315,7 +2315,7 @@ func_3D6E() {
   var_1 = 0;
   var_2 = func_D9F8();
   foreach(var_4 in var_2) {
-    var_5 = level.player _meth_84C6("equipmentState", var_4);
+    var_5 = level.player func_84C6("equipmentState", var_4);
     if(!isDefined(var_5)) {
       continue;
     }
@@ -2350,7 +2350,7 @@ func_3DAE() {
     }
 
     var_1++;
-    var_5 = level.player _meth_84C6("jackalPrimaryState", var_4);
+    var_5 = level.player func_84C6("jackalPrimaryState", var_4);
     if(var_5 != "locked") {
       var_0++;
     }
@@ -2363,7 +2363,7 @@ func_3DAE() {
     }
 
     var_1++;
-    var_5 = level.player _meth_84C6("jackalSecondaryState", var_9);
+    var_5 = level.player func_84C6("jackalSecondaryState", var_9);
     if(var_5 != "locked") {
       var_0++;
     }
@@ -2376,7 +2376,7 @@ func_3DAE() {
     }
 
     var_1++;
-    var_5 = level.player _meth_84C6("jackalUpgradeState", var_0D);
+    var_5 = level.player func_84C6("jackalUpgradeState", var_0D);
     if(var_5 != "locked") {
       var_0++;
     }
@@ -2401,7 +2401,7 @@ func_7D70(var_0) {
   var_2 = scripts\engine\utility::array_combine(var_2, func_DA0A());
   var_2 = scripts\engine\utility::array_combine(var_2, func_DA10());
   if(var_0) {
-    var_3 = level.player _meth_84C6("weaponsScanned", "iw7_ake");
+    var_3 = level.player func_84C6("weaponsScanned", "iw7_ake");
     if(!isDefined(var_3)) {
       var_3 = "locked";
     }
@@ -2415,7 +2415,7 @@ func_7D70(var_0) {
   var_4 = var_1.size;
   var_5 = 0;
   foreach(var_7 in var_1) {
-    var_3 = level.player _meth_84C6("weaponsScanned", var_7);
+    var_3 = level.player func_84C6("weaponsScanned", var_7);
     if(!isDefined(var_3)) {
       var_3 = "locked";
     }
@@ -2462,7 +2462,7 @@ func_3DDD() {
       continue;
     }
 
-    var_7 = level.player _meth_84C6("wantedBoardDataState", var_6);
+    var_7 = level.player func_84C6("wantedBoardDataState", var_6);
     if(!isDefined(var_7)) {
       continue;
     }
@@ -2504,14 +2504,14 @@ func_3D6A(var_0) {
     scripts\sp\utility::settimer("DOOR_PEEK");
     if(isDefined(var_0) && var_0) {
       foreach(var_5, var_4 in level.var_D9E5["achievementDoorPeek"]) {
-        level.player _meth_84C7(var_5, var_4);
+        level.player func_84C7(var_5, var_4);
       }
     }
   }
 }
 
 func_3D61() {
-  var_0 = level.player _meth_84C6("achievementBootsOnGround");
+  var_0 = level.player func_84C6("achievementBootsOnGround");
   if(isDefined(var_0) && var_0) {
     return;
   }
@@ -2546,7 +2546,7 @@ func_3D61() {
 
     if(level.var_C538 >= var_1) {
       scripts\sp\utility::settimer("NO_JUMPING");
-      level.player _meth_84C7("achievementBootsOnGround", 1);
+      level.player func_84C7("achievementBootsOnGround", 1);
       break;
     }
 
@@ -2560,7 +2560,7 @@ func_F618(var_0) {
   }
 
   level.var_D9E5["weaponstates"][var_0] = "scanned";
-  level.player _meth_84C7("weaponsScanned", var_0, "scanned");
+  level.player func_84C7("weaponsScanned", var_0, "scanned");
   func_DA50(var_0);
   var_1 = func_3DDF();
   if(scripts\engine\utility::array_contains(level.var_D9E5["optionalunlocks"], var_0)) {
@@ -2656,14 +2656,14 @@ func_13C61(var_0) {
   }
 
   if(!level.var_D9E5["fakedata"]) {
-    level.player _meth_84C7("weaponsScanned", var_0, "unlocked");
+    level.player func_84C7("weaponsScanned", var_0, "unlocked");
   }
 
   level.var_D9E5["loaded_weapon_types"] = func_DA3F();
 }
 
 func_66A4(var_0, var_1) {
-  var_2 = level.player _meth_84C6("equipmentState", var_0);
+  var_2 = level.player func_84C6("equipmentState", var_0);
   if(isDefined(var_2) && var_2 != "locked") {
     level.var_D9E5["weaponstates"][var_0] = var_2;
     return;
@@ -2676,7 +2676,7 @@ func_66A4(var_0, var_1) {
   }
 
   level.var_D9E5["weaponstates"][var_0] = var_3;
-  level.player _meth_84C7("equipmentState", var_0, var_3);
+  level.player func_84C7("equipmentState", var_0, var_3);
 }
 
 func_7D5F(var_0) {
@@ -3161,12 +3161,12 @@ func_7806() {
 func_D9EF(var_0, var_1) {
   var_2 = [];
   foreach(var_4 in var_1) {
-    var_5 = level.player _meth_84C6(var_0, var_4);
-    if(!isDefined(level.player _meth_84C6(var_0, var_4))) {
+    var_5 = level.player func_84C6(var_0, var_4);
+    if(!isDefined(level.player func_84C6(var_0, var_4))) {
       continue;
     }
 
-    if(level.player _meth_84C6(var_0, var_4) == "scanned") {
+    if(level.player func_84C6(var_0, var_4) == "scanned") {
       var_2 = scripts\engine\utility::array_add(var_2, var_4);
     }
   }
@@ -3200,7 +3200,7 @@ func_DA3C() {
   var_1 = 1;
   var_2 = [];
   foreach(var_4 in var_0) {
-    var_5 = level.player _meth_84C6("wantedBoardDataState", var_4);
+    var_5 = level.player func_84C6("wantedBoardDataState", var_4);
     if(!isDefined(var_5) || var_5 != "obtained" && var_5 != "viewed") {
       var_1 = 0;
     }
@@ -3217,9 +3217,9 @@ func_DA56(var_0, var_1) {
 
 func_DA1B() {
   var_0 = [];
-  var_0["achievementDoorPeekOpen"] = level.player _meth_84C6("achievementDoorPeekOpen");
-  var_0["achievementDoorPeekKick"] = level.player _meth_84C6("achievementDoorPeekKick");
-  var_0["achievementDoorPeekGrenade"] = level.player _meth_84C6("achievementDoorPeekGrenade");
+  var_0["achievementDoorPeekOpen"] = level.player func_84C6("achievementDoorPeekOpen");
+  var_0["achievementDoorPeekKick"] = level.player func_84C6("achievementDoorPeekKick");
+  var_0["achievementDoorPeekGrenade"] = level.player func_84C6("achievementDoorPeekGrenade");
   return var_0;
 }
 
@@ -3228,7 +3228,7 @@ func_DA08() {
 }
 
 func_DA4F() {
-  var_0 = level.player _meth_84C6("scrapCount");
+  var_0 = level.player func_84C6("scrapCount");
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
@@ -3238,18 +3238,18 @@ func_DA4F() {
     foreach(var_7, var_5 in var_3) {
       if(int(var_5) <= var_0) {
         if(var_8 == "attachment") {
-          var_6 = level.player _meth_84C6("attachmentsState", var_7);
+          var_6 = level.player func_84C6("attachmentsState", var_7);
           if(var_6 == "locked") {
-            level.player _meth_84C7("attachmentsState", var_7, "scanned");
+            level.player func_84C7("attachmentsState", var_7, "scanned");
           }
 
           continue;
         }
 
         if(var_8 == "reticle") {
-          var_6 = level.player _meth_84C6("reticlesState", var_7);
+          var_6 = level.player func_84C6("reticlesState", var_7);
           if(var_6 == "locked") {
-            level.player _meth_84C7("reticlesState", var_7, "scanned");
+            level.player func_84C7("reticlesState", var_7, "scanned");
           }
         }
       }
@@ -3261,47 +3261,47 @@ func_DA4F() {
 
 func_DA4E() {
   foreach(var_1 in level.var_D9E5["scanned_items"]["suit_upgrades"]) {
-    level.player _meth_84C7("suitUpgradeState", var_1, "unlocked");
+    level.player func_84C7("suitUpgradeState", var_1, "unlocked");
   }
 }
 
 func_DA48() {
   foreach(var_1 in level.var_D9E5["scanned_items"]["suit_upgrades"]) {
-    level.player _meth_84C7("suitUpgradeState", var_1, "unlocked");
+    level.player func_84C7("suitUpgradeState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["jackal_decals"]) {
-    level.player _meth_84C7("jackalDecals", var_1, "unlocked");
+    level.player func_84C7("jackalDecals", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["jackal_primaries"]) {
-    level.player _meth_84C7("jackalPrimaryState", var_1, "unlocked");
+    level.player func_84C7("jackalPrimaryState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["jackal_secondaries"]) {
-    level.player _meth_84C7("jackalSecondaryState", var_1, "unlocked");
+    level.player func_84C7("jackalSecondaryState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["jackal_upgrades"]) {
-    level.player _meth_84C7("jackalUpgradeState", var_1, "unlocked");
+    level.player func_84C7("jackalUpgradeState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["attachments"]) {
-    level.player _meth_84C7("attachmentsState", var_1, "unlocked");
+    level.player func_84C7("attachmentsState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["reticles"]) {
-    level.player _meth_84C7("reticlesState", var_1, "unlocked");
+    level.player func_84C7("reticlesState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["scanned_items"]["camos"]) {
-    level.player _meth_84C7("camosState", var_1, "unlocked");
+    level.player func_84C7("camosState", var_1, "unlocked");
   }
 
   foreach(var_13, var_12 in level.var_D9E5["weaponstates"]) {
     if(func_9B49(var_13) && var_12 == "scanned") {
       level.var_D9E5["weaponstates"][var_13] = "unlocked";
-      level.player _meth_84C7("weaponsScanned", var_13, "unlocked");
+      level.player func_84C7("weaponsScanned", var_13, "unlocked");
     }
   }
 }
@@ -3313,12 +3313,12 @@ func_D9F0(var_0, var_1) {
       continue;
     }
 
-    var_5 = level.player _meth_84C6(var_0, var_4);
+    var_5 = level.player func_84C6(var_0, var_4);
     if(!isDefined(var_5)) {
       continue;
     }
 
-    if((isstring(var_5) && level.player _meth_84C6(var_0, var_4) == "unlocked") || !isstring(var_5) && level.player _meth_84C6(var_0, var_4) == 1) {
+    if((isstring(var_5) && level.player func_84C6(var_0, var_4) == "unlocked") || !isstring(var_5) && level.player func_84C6(var_0, var_4) == 1) {
       var_2 = scripts\engine\utility::array_add(var_2, var_4);
     }
   }
@@ -3374,69 +3374,69 @@ func_12E18() {
   }
 
   foreach(var_1 in level.var_D9E5["suit_upgrades"]) {
-    level.player _meth_84C7("suitUpgradeState", var_1, "unlocked");
+    level.player func_84C7("suitUpgradeState", var_1, "unlocked");
   }
 
   foreach(var_1 in level.var_D9E5["mandatory_suit_upgrades"]) {
-    var_4 = level.player _meth_84C6("suitUpgradeState", var_1);
+    var_4 = level.player func_84C6("suitUpgradeState", var_1);
     if(var_4 == "locked") {
-      level.player _meth_84C7("suitUpgradeState", var_1, "scanned");
+      level.player func_84C7("suitUpgradeState", var_1, "scanned");
     }
   }
 
   foreach(var_7 in level.var_D9E5["mandatory_jackal_primaries"]) {
-    var_4 = level.player _meth_84C6("jackalPrimaryState", var_7);
+    var_4 = level.player func_84C6("jackalPrimaryState", var_7);
     if(var_4 == "locked") {
-      level.player _meth_84C7("jackalPrimaryState", var_7, "scanned");
+      level.player func_84C7("jackalPrimaryState", var_7, "scanned");
     }
   }
 
   foreach(var_0A in level.var_D9E5["mandatory_jackal_secondaries"]) {
-    var_4 = level.player _meth_84C6("jackalSecondaryState", var_0A);
+    var_4 = level.player func_84C6("jackalSecondaryState", var_0A);
     if(var_4 == "locked") {
-      level.player _meth_84C7("jackalSecondaryState", var_0A, "scanned");
+      level.player func_84C7("jackalSecondaryState", var_0A, "scanned");
     }
   }
 
   foreach(var_0D in level.var_D9E5["mandatory_jackal_upgrades"]) {
-    var_4 = level.player _meth_84C6("jackalUpgradeState", var_0D);
+    var_4 = level.player func_84C6("jackalUpgradeState", var_0D);
     if(var_4 == "locked") {
-      level.player _meth_84C7("jackalUpgradeState", var_0D, "scanned");
+      level.player func_84C7("jackalUpgradeState", var_0D, "scanned");
     }
   }
 
   foreach(var_10 in level.var_D9E5["mandatory_jackal_decals"]) {
-    var_4 = level.player _meth_84C6("jackalDecals", var_10);
+    var_4 = level.player func_84C6("jackalDecals", var_10);
     if(var_4 == "locked") {
-      level.player _meth_84C7("jackalDecals", var_10, "scanned");
+      level.player func_84C7("jackalDecals", var_10, "scanned");
     }
   }
 
   func_3DAE();
   foreach(var_13, var_4 in level.var_D9E5["wanted_cards"]) {
-    level.player _meth_84C7("wantedBoardDataState", var_13, var_4);
+    level.player func_84C7("wantedBoardDataState", var_13, var_4);
   }
 
   func_3DDD();
   foreach(var_16, var_15 in level.var_D9E5["achievementDoorPeek"]) {
-    level.player _meth_84C7(var_16, var_15);
+    level.player func_84C7(var_16, var_15);
   }
 
   func_3D6A();
   foreach(var_18, var_4 in level.var_D9E5["weaponstates"]) {
     if(func_9B49(var_18)) {
-      level.player _meth_84C7("weaponsScanned", var_18, var_4);
+      level.player func_84C7("weaponsScanned", var_18, var_4);
     }
   }
 
   if(isDefined(level.template_script)) {
-    level.player _meth_84C7("lastCompletedMission", level.template_script);
+    level.player func_84C7("lastCompletedMission", level.template_script);
     game["lastcompletedmission"] = level.template_script;
   }
 
   if(level.var_D9E5["submission"] != "submission") {
-    level.player _meth_84C7("missionStateData", level.var_D9E5["submission"], "complete");
-    level.player _meth_84C7("opsmapMissionStateData", level.var_D9E5["submission"], "complete");
+    level.player func_84C7("missionStateData", level.var_D9E5["submission"], "complete");
+    level.player func_84C7("opsmapMissionStateData", level.var_D9E5["submission"], "complete");
   }
 }
 
@@ -3465,15 +3465,15 @@ func_9B44(var_0) {
 }
 
 func_EBB7(var_0) {
-  if(level.player _meth_84C6("weaponsScanned", var_0) == "locked") {
-    level.player _meth_84C7("weaponsScanned", var_0, "scanned");
+  if(level.player func_84C6("weaponsScanned", var_0) == "locked") {
+    level.player func_84C7("weaponsScanned", var_0, "scanned");
     func_DA50(var_0);
   }
 }
 
 func_EBB3(var_0) {
-  if(level.player _meth_84C6("jackalDecals", var_0) == "locked") {
-    level.player _meth_84C7("jackalDecals", var_0, "scanned");
+  if(level.player func_84C6("jackalDecals", var_0) == "locked") {
+    level.player func_84C7("jackalDecals", var_0, "scanned");
   }
 }
 
@@ -3484,7 +3484,7 @@ func_5F2F() {
     }
 
     var_1 = scripts\sp\endmission::func_7F69(var_0);
-    var_2 = level.player _meth_84C6("missionStateData", scripts\sp\endmission::func_7F6D(var_0));
+    var_2 = level.player func_84C6("missionStateData", scripts\sp\endmission::func_7F6D(var_0));
     if(var_1 == 1) {
       var_2 = "COMPLETE - Recruit";
       continue;
@@ -3565,12 +3565,12 @@ func_5F2F() {
 
     var_23 = var_23 / var_24;
     for(var_25 = 0; var_25 < var_24; var_25++) {
-      var_26 = level.player _meth_84C6("missionLootRooms", var_22, "discovered", var_25);
+      var_26 = level.player func_84C6("missionLootRooms", var_22, "discovered", var_25);
       if(var_26) {}
 
       for(var_27 = 0; var_27 < 1; var_27++) {
         var_28 = var_25 * 2 + var_27;
-        var_29 = level.player _meth_84C6("missionLootRooms", var_22, "terminal", var_28);
+        var_29 = level.player func_84C6("missionLootRooms", var_22, "terminal", var_28);
         if(var_29) {
           continue;
         }
@@ -3579,56 +3579,56 @@ func_5F2F() {
   }
 
   for(var_2B = 0; var_2B < 4; var_2B++) {
-    var_2C = level.player _meth_84C6("loadouts", var_2B, "name");
-    var_2D = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 0, "weapon");
-    var_2E[0] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 0);
-    var_2E[1] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 1);
-    var_2E[2] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 2);
-    var_2F = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 1, "weapon");
-    var_30[0] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 0);
-    var_30[1] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 1);
-    var_30[2] = level.player _meth_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 2);
-    var_31 = level.player _meth_84C6("loadouts", var_2B, "equipment", 0);
-    var_32 = level.player _meth_84C6("loadouts", var_2B, "offhandEquipment", 0);
-    var_33 = level.player _meth_84C6("loadouts", var_2B, "equipment", 1);
-    var_34 = level.player _meth_84C6("loadouts", var_2B, "offhandEquipment", 1);
+    var_2C = level.player func_84C6("loadouts", var_2B, "name");
+    var_2D = level.player func_84C6("loadouts", var_2B, "weaponSetups", 0, "weapon");
+    var_2E[0] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 0);
+    var_2E[1] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 1);
+    var_2E[2] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 0, "attachment", 2);
+    var_2F = level.player func_84C6("loadouts", var_2B, "weaponSetups", 1, "weapon");
+    var_30[0] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 0);
+    var_30[1] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 1);
+    var_30[2] = level.player func_84C6("loadouts", var_2B, "weaponSetups", 1, "attachment", 2);
+    var_31 = level.player func_84C6("loadouts", var_2B, "equipment", 0);
+    var_32 = level.player func_84C6("loadouts", var_2B, "offhandEquipment", 0);
+    var_33 = level.player func_84C6("loadouts", var_2B, "equipment", 1);
+    var_34 = level.player func_84C6("loadouts", var_2B, "offhandEquipment", 1);
   }
 
-  if(level.player _meth_84C6("unlockedRealism")) {}
+  if(level.player func_84C6("unlockedRealism")) {}
 
-  if(level.player _meth_84C6("beatRealism")) {}
+  if(level.player func_84C6("beatRealism")) {}
 
-  if(level.player _meth_84C6("achievementDoorPeekOpen")) {}
+  if(level.player func_84C6("achievementDoorPeekOpen")) {}
 
-  if(level.player _meth_84C6("achievementDoorPeekKick")) {}
+  if(level.player func_84C6("achievementDoorPeekKick")) {}
 
-  if(level.player _meth_84C6("achievementDoorPeekGrenade")) {}
+  if(level.player func_84C6("achievementDoorPeekGrenade")) {}
 }
 
 func_E222() {
-  level.player _meth_84C7("scrapCount", 0);
+  level.player func_84C7("scrapCount", 0);
   foreach(var_1 in func_DA12()) {
-    level.player _meth_84C7("suitUpgradeState", var_1, "locked");
+    level.player func_84C7("suitUpgradeState", var_1, "locked");
   }
 
   foreach(var_4 in func_D9FF()) {
-    level.player _meth_84C7("jackalPrimaryState", var_4, "locked");
+    level.player func_84C7("jackalPrimaryState", var_4, "locked");
   }
 
   foreach(var_7 in func_DA01()) {
-    level.player _meth_84C7("jackalSecondaryState", var_7, "locked");
+    level.player func_84C7("jackalSecondaryState", var_7, "locked");
   }
 
   foreach(var_0A in func_DA03()) {
-    level.player _meth_84C7("jackalUpgradeState", var_0A, "locked");
+    level.player func_84C7("jackalUpgradeState", var_0A, "locked");
   }
 
   foreach(var_0D in func_D9FC()) {
-    level.player _meth_84C7("jackalDecals", var_0D, "locked");
+    level.player func_84C7("jackalDecals", var_0D, "locked");
   }
 
   foreach(var_10 in func_DA15()) {
-    level.player _meth_84C7("wantedBoardDataState", var_10, "locked");
+    level.player func_84C7("wantedBoardDataState", var_10, "locked");
   }
 
   foreach(var_13 in func_DA17()) {
@@ -3641,92 +3641,92 @@ func_E222() {
     }
 
     if(func_9B49(var_13)) {
-      level.player _meth_84C7("weaponsScanned", var_13, "locked");
+      level.player func_84C7("weaponsScanned", var_13, "locked");
       continue;
     }
 
-    level.player _meth_84C7("equipmentState", var_13, "locked");
+    level.player func_84C7("equipmentState", var_13, "locked");
   }
 
   var_15 = func_D9F2(1);
   foreach(var_17 in var_15) {
-    level.player _meth_84C7("attachmentsState", var_17, "locked");
+    level.player func_84C7("attachmentsState", var_17, "locked");
   }
 
   var_19 = func_DA0D();
   foreach(var_1B in var_19) {
-    level.player _meth_84C7("reticlesState", var_1B, "locked");
+    level.player func_84C7("reticlesState", var_1B, "locked");
   }
 
   var_1D = func_D9F3();
   foreach(var_1F in var_1D) {
-    level.player _meth_84C7("camosState", var_1F, "locked");
+    level.player func_84C7("camosState", var_1F, "locked");
   }
 
   var_21 = func_DA15();
   foreach(var_23 in var_21) {
-    level.player _meth_84C7("wantedBoardDataState", var_23, "locked");
+    level.player func_84C7("wantedBoardDataState", var_23, "locked");
   }
 
-  level.player _meth_84C7("currentLoadout", "levelCreated", 0);
-  level.player _meth_84C7("currentLoadout", "heldWeapon", "none");
+  level.player func_84C7("currentLoadout", "levelCreated", 0);
+  level.player func_84C7("currentLoadout", "heldWeapon", "none");
   for(var_25 = 0; var_25 < 2; var_25++) {
-    level.player _meth_84C7("currentLoadout", "weaponSetups", var_25, "weapon", "none");
-    level.player _meth_84C7("currentLoadout", "weaponSetups", var_25, "reticle", "none");
-    level.player _meth_84C7("currentLoadout", "weaponClipAmmo", var_25, 0);
-    level.player _meth_84C7("currentLoadout", "weaponStockAmmo", var_25, 0);
+    level.player func_84C7("currentLoadout", "weaponSetups", var_25, "weapon", "none");
+    level.player func_84C7("currentLoadout", "weaponSetups", var_25, "reticle", "none");
+    level.player func_84C7("currentLoadout", "weaponClipAmmo", var_25, 0);
+    level.player func_84C7("currentLoadout", "weaponStockAmmo", var_25, 0);
     for(var_26 = 0; var_26 < 3; var_26++) {
-      level.player _meth_84C7("currentLoadout", "weaponSetups", var_25, "attachment", var_26, "none");
+      level.player func_84C7("currentLoadout", "weaponSetups", var_25, "attachment", var_26, "none");
     }
   }
 
-  level.player _meth_84C7("currentLoadout", "offhandEquipment", 0, "none");
-  level.player _meth_84C7("currentLoadout", "offhandEquipmentAmmo", 0, 0);
-  level.player _meth_84C7("currentLoadout", "offhandEquipment", 1, "none");
-  level.player _meth_84C7("currentLoadout", "offhandEquipmentAmmo", 1, 0);
-  level.player _meth_84C7("currentLoadout", "equipment", 0, "none");
-  level.player _meth_84C7("currentLoadout", "equipmentAmmo", 0, 0);
-  level.player _meth_84C7("currentLoadout", "equipment", 1, "none");
-  level.player _meth_84C7("currentLoadout", "equipmentAmmo", 1, 0);
-  level.player _meth_84C7("lastCompletedMission", "");
-  level.player _meth_84C7("lastShipcribMission", "");
-  level.player _meth_84C7("lastWeaponPreload", "");
-  level.player _meth_84C7("currentViewModel", "");
-  level.player _meth_84C7("currentSelectedWeapon", "");
-  level.player _meth_84C7("jackalDecal", "none");
-  level.player _meth_84C7("selectedLoadout", 0);
-  level.player _meth_84C7("forcedAttachment", "none");
-  level.player _meth_84C7("scTitanFirstPlay", 0);
-  level.player _meth_84C7("scPrisonerFirstPlay", 0);
-  level.player _meth_84C7("scTaughtVR", 0);
-  level.player _meth_84C7("scTaughtVREnergy", 0);
-  level.player _meth_84C7("scTaughtVRMenu", 0);
-  level.player _meth_84C7("scTaughtWantedBoard", 0);
-  level.player _meth_84C7("scTaughtOpsmap", 0);
-  level.player _meth_84C7("c12AchievementRodeoLeft", 0);
-  level.player _meth_84C7("c12AchievementRodeoRight", 0);
-  level.player _meth_84C7("c12AchievementSelfdestruct", 0);
-  level.player _meth_84C7("hintAltM8", 0);
-  level.player _meth_84C7("hintAltFMG", 0);
-  level.player _meth_84C7("hintAltRipper", 0);
-  level.player _meth_84C7("hintAltERAD", 0);
+  level.player func_84C7("currentLoadout", "offhandEquipment", 0, "none");
+  level.player func_84C7("currentLoadout", "offhandEquipmentAmmo", 0, 0);
+  level.player func_84C7("currentLoadout", "offhandEquipment", 1, "none");
+  level.player func_84C7("currentLoadout", "offhandEquipmentAmmo", 1, 0);
+  level.player func_84C7("currentLoadout", "equipment", 0, "none");
+  level.player func_84C7("currentLoadout", "equipmentAmmo", 0, 0);
+  level.player func_84C7("currentLoadout", "equipment", 1, "none");
+  level.player func_84C7("currentLoadout", "equipmentAmmo", 1, 0);
+  level.player func_84C7("lastCompletedMission", "");
+  level.player func_84C7("lastShipcribMission", "");
+  level.player func_84C7("lastWeaponPreload", "");
+  level.player func_84C7("currentViewModel", "");
+  level.player func_84C7("currentSelectedWeapon", "");
+  level.player func_84C7("jackalDecal", "none");
+  level.player func_84C7("selectedLoadout", 0);
+  level.player func_84C7("forcedAttachment", "none");
+  level.player func_84C7("scTitanFirstPlay", 0);
+  level.player func_84C7("scPrisonerFirstPlay", 0);
+  level.player func_84C7("scTaughtVR", 0);
+  level.player func_84C7("scTaughtVREnergy", 0);
+  level.player func_84C7("scTaughtVRMenu", 0);
+  level.player func_84C7("scTaughtWantedBoard", 0);
+  level.player func_84C7("scTaughtOpsmap", 0);
+  level.player func_84C7("c12AchievementRodeoLeft", 0);
+  level.player func_84C7("c12AchievementRodeoRight", 0);
+  level.player func_84C7("c12AchievementSelfdestruct", 0);
+  level.player func_84C7("hintAltM8", 0);
+  level.player func_84C7("hintAltFMG", 0);
+  level.player func_84C7("hintAltRipper", 0);
+  level.player func_84C7("hintAltERAD", 0);
   var_27 = func_7AF1("sub");
   foreach(var_29 in var_27) {
     for(var_2A = 0; var_2A < 2; var_2A++) {
-      level.player _meth_84C7("missionLootRooms", var_29, "discovered", var_2A, 0);
+      level.player func_84C7("missionLootRooms", var_29, "discovered", var_2A, 0);
       for(var_2B = 0; var_2B < 2; var_2B++) {
         var_2C = var_2A * 2 + var_2B;
-        level.player _meth_84C7("missionLootRooms", var_29, "terminal", var_2B, 0);
+        level.player func_84C7("missionLootRooms", var_29, "terminal", var_2B, 0);
       }
     }
 
-    level.player _meth_84C7("missionStateData", var_29, "locked");
-    level.player _meth_84C7("opsmapMissionStateData", var_29, "locked");
+    level.player func_84C7("missionStateData", var_29, "locked");
+    level.player func_84C7("opsmapMissionStateData", var_29, "locked");
   }
 
   var_2E = func_7AF1("main", "sub");
   foreach(var_30 in var_2E) {
-    level.player _meth_84C7("shipAssaultStateData", var_30, "locked");
+    level.player func_84C7("shipAssaultStateData", var_30, "locked");
   }
 
   func_492B(1);

@@ -208,7 +208,7 @@ func_6734() {
           continue;
         }
 
-        var_4 thread _meth_8404(var_0, self);
+        var_4 thread func_8404(var_0, self);
         var_4 thread func_DF46(self);
         scripts\engine\utility::waitframe();
       }
@@ -218,7 +218,7 @@ func_6734() {
   }
 }
 
-_meth_8404(var_0, var_1) {
+func_8404(var_0, var_1) {
   var_1 endon("stop_dmg");
   self endon("death");
   self.scripted_mode = 1;

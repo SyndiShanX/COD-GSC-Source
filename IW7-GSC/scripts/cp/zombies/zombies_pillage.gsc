@@ -286,7 +286,7 @@ player_used_pillage_spot(var_0, var_1) {
 
     case "maxammo":
       if(var_1 func_38BA()) {
-        var_1 _meth_82E8();
+        var_1 func_82E8();
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("pillage_ammo", "zmb_comment_vo", "low", 10, 0, 1, 0, 50);
         scripts\engine\utility::waitframe();
         var_0 notify("all_players_searched");
@@ -405,7 +405,7 @@ func_7DCA(var_0) {
   }
 }
 
-_meth_831A(var_0) {
+func_831A(var_0) {
   self endon("all_players_searched");
   if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(var_0)) {
     var_1 = var_0 getcurrentweapon();
@@ -822,7 +822,7 @@ func_1287B(var_0) {
   }
 
   var_5 = func_FFA4(level.var_C32B);
-  self _meth_831C("other");
+  self func_831C("other");
   if(!isDefined(var_5)) {
     self giveweapon(var_1);
     self setweaponammoclip(var_1, var_2);
@@ -966,7 +966,7 @@ setaimspreadmovementscale() {
   self playlocalsound("weap_ammo_pickup");
 }
 
-_meth_82E8() {
+func_82E8() {
   var_0 = self getweaponslistprimaries();
   foreach(var_2 in var_0) {
     if(weapontype(var_2) == "riotshield") {

@@ -159,7 +159,7 @@ func_12924(var_0) {
 func_C7C7(var_0) {
   playFX(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), var_0 gettagorigin("j_head"), (0, 0, 1));
   var_0.a.nodeath = 1;
-  var_0 _meth_81D0();
+  var_0 func_81D0();
 }
 
 func_C7BE(var_0) {
@@ -240,9 +240,9 @@ func_C7BF(var_0) {
 }
 
 func_54D7(var_0, var_1, var_2) {
-  level.player _meth_809A(var_0, var_1);
+  level.player func_809A(var_0, var_1);
   wait(var_2);
-  level.player _meth_809A(0, 1);
+  level.player func_809A(0, 1);
 }
 
 func_C7C5(var_0) {
@@ -258,28 +258,28 @@ func_C7C5(var_0) {
   var_1 = 1;
   if(var_0.var_902B == 1) {
     level.player thread scripts\sp\gameskill::func_2BDB(2.5, 0.5);
-    level.player _meth_809A(0.25, 2);
+    level.player func_809A(0.25, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_02_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_01");
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_2");
     level.player notify("sfx_beep_fade");
   } else if(var_0.var_902B == 2) {
     level.player thread scripts\sp\gameskill::func_2BDB(2.7, 0.5);
-    level.player _meth_809A(0.5, 2);
+    level.player func_809A(0.5, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_03_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_03");
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_3");
   } else if(var_0.var_902B == 3) {
     thread scripts\sp\hud::func_8DF7(0.05);
-    level.player _meth_809A(0, 1);
+    level.player func_809A(0, 1);
     level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_4");
     wait(0.15);
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_04");
     func_C7CD();
     wait(0.05);
     var_1 = 0;
-    level.player.var_E505 _meth_82B1(level.player.var_E505 scripts\sp\utility::func_7DC1("outro"), 0);
-    var_0 _meth_82B1(var_0 scripts\sp\utility::func_7DC1("outro"), 0);
+    level.player.var_E505 func_82B1(level.player.var_E505 scripts\sp\utility::func_7DC1("outro"), 0);
+    var_0 func_82B1(var_0 scripts\sp\utility::func_7DC1("outro"), 0);
     level.player freezecontrols(1);
     setomnvar("ui_show_compass", 1);
     scripts\engine\utility::flag_set("outro_freeze");
@@ -330,11 +330,11 @@ func_AB76(var_0, var_1, var_2, var_3) {
   var_5 = var_3 - var_2 / var_4;
   for(var_6 = 0; var_6 < var_4; var_6++) {
     var_2 = var_2 + var_5;
-    self _meth_82B1(var_0, var_2);
+    self func_82B1(var_0, var_2);
     wait(0.05);
   }
 
-  self _meth_82B1(var_0, var_3);
+  self func_82B1(var_0, var_3);
 }
 
 func_3353() {
@@ -434,9 +434,9 @@ func_8E18(var_0) {
   playFX(scripts\engine\utility::getfx("helmet_sdf_army_broken_europa"), var_1, var_2);
   if(isDefined(self.var_8E1E)) {
     self.var_8E1E = undefined;
-    var_3 = self _meth_850C("helmet", "helmet");
+    var_3 = self func_850C("helmet", "helmet");
     if(var_3 > 0) {
-      self _meth_850B(var_3, "helmet", "helmet");
+      self func_850B(var_3, "helmet", "helmet");
     }
   }
 
@@ -528,7 +528,7 @@ func_12920(var_0) {
   var_0.var_DC1A = 1;
   var_0.var_30 = 1;
   var_0 scripts\sp\utility::func_F2DA(0);
-  var_0 _meth_81D0();
+  var_0 func_81D0();
 }
 
 func_C0C7(var_0) {
@@ -543,7 +543,7 @@ func_C0C7(var_0) {
 func_7348(var_0) {
   level endon("fpar_fire_stop");
   for(;;) {
-    var_0 _meth_8494("iw7_steeldragon", level.var_21F7 gettagorigin("tag_flash"), level.var_21F7 gettagangles("tag_flash"));
+    var_0 func_8494("iw7_steeldragon", level.var_21F7 gettagorigin("tag_flash"), level.var_21F7 gettagangles("tag_flash"));
     wait(0.05);
   }
 }
@@ -595,7 +595,7 @@ func_F2DF(var_0) {
     level.var_11B30.var_2AA2 thread func_2AA4(var_1[var_0]);
   }
 
-  level.var_11B30.var_2AA2 _meth_82E1(var_2, var_1[var_0], 1, 0.2, 1);
+  level.var_11B30.var_2AA2 func_82E1(var_2, var_1[var_0], 1, 0.2, 1);
   if(var_0 == "fire") {
     thread func_2AA3();
   }
@@ -619,12 +619,12 @@ func_2AA4(var_0) {
     var_6 = var_4 / var_5;
     for(var_7 = 0; var_7 < var_5; var_7++) {
       var_1 = var_1 + var_6;
-      self _meth_82B1(var_0, var_1);
+      self func_82B1(var_0, var_1);
       wait(0.05);
     }
 
     var_1 = var_3;
-    self _meth_82B1(var_0, var_1);
+    self func_82B1(var_0, var_1);
   }
 }
 

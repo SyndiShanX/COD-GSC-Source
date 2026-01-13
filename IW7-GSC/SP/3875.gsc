@@ -40,8 +40,8 @@ init() {
 }
 
 func_FA55() {
-  level lib_0F27::func_F5B4("do_stealth", ::lib_0F27::func_57C7);
-  level lib_0F27::func_F5B4("is_in_stealth", ::lib_0F27::func_9C1E);
+  level lib_0F27::func_F5B4("do_stealth", lib_0F27::func_57C7);
+  level lib_0F27::func_F5B4("is_in_stealth", lib_0F27::func_9C1E);
   lib_0F1B::func_F345();
 }
 

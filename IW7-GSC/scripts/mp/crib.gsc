@@ -317,9 +317,9 @@ func_13FC9(var_0, var_1) {
   }
 
   if(isDefined(var_1) && var_1) {
-    level.var_C2C8 _meth_83FD(level.radial_button_group[level.var_DBE1]["view_start"], var_0);
+    level.var_C2C8 func_83FD(level.radial_button_group[level.var_DBE1]["view_start"], var_0);
   } else {
-    level.var_C2C8 _meth_83FC(level.radial_button_group[var_0]["view_start"]);
+    level.var_C2C8 func_83FC(level.radial_button_group[var_0]["view_start"]);
   }
 
   level thread func_5B5C(var_0);
@@ -420,7 +420,7 @@ func_31AD(var_0) {
   }
 }
 
-_meth_83FC(var_0) {
+func_83FC(var_0) {
   if(!isDefined(level.var_5F21)) {
     var_1 = level.var_1338D[var_0][0];
     level.var_5F21 = spawn("script_model", var_1.origin);
@@ -455,7 +455,7 @@ _meth_83FC(var_0) {
   }
 }
 
-_meth_83FD(var_0, var_1) {
+func_83FD(var_0, var_1) {
   var_2 = 1;
   var_3 = abs(distance(level.var_5F21.origin, level.radial_button_group[var_1]["player_view_pos"]));
   var_2 = var_2 * var_3 / 1200;

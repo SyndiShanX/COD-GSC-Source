@@ -21,7 +21,7 @@ func_8CFA() {
   scripts\sp\utility::func_16EB("heavy_weapon_slot_hint", "HOLD ^3[{+weapnext}]^7 TO USE HEAVY WEAPON", ::func_8CF9);
 }
 
-_meth_82D7(var_0) {
+func_82D7(var_0) {
   self.var_8CED = var_0;
   self giveweapon(var_0);
   self notify("give_heavy_weapon");
@@ -49,7 +49,7 @@ func_8CFB(var_0) {
   for(;;) {
     childthread func_8CEF();
     var_1 = scripts\engine\utility::waittill_any_return("give_heavy_weapon", "give_next_weapon");
-    if(!self _meth_843C()) {
+    if(!self func_843C()) {
       continue;
     }
 

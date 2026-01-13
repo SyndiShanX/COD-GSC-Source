@@ -736,7 +736,7 @@ func_3724(var_0, var_1, var_2) {
   var_17 = lib_0F3A::func_36D9(var_0C.pos, var_0C.log[1], var_11, var_12);
   var_18 = getclosestpointonnavmesh(var_0C.pos, self);
   var_19 = lib_0F3A::func_36D9(var_18, var_0C.log[1], var_11, var_12);
-  var_1A = self _meth_84AC();
+  var_1A = self func_84AC();
   var_1B = navtrace(var_1A, var_18, self, 1);
   var_1C = var_1B["fraction"] >= 0.9 || navisstraightlinereachable(var_1A, var_18, self);
   if(!var_1C) {
@@ -764,7 +764,7 @@ func_D563(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self gib_fx_override("noclip");
   self orientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
@@ -824,7 +824,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self.endnode_pos = var_5;
   if(!isDefined(var_4)) {
     return;
@@ -904,7 +904,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   }
 
   self gib_fx_override("noclip");
-  var_1E = self _meth_8145();
+  var_1E = self func_8145();
   if(isDefined(var_1E) && isDefined(var_1E.target)) {
     self.endnode = var_1E;
     if(var_13.size > 0) {
@@ -1149,7 +1149,7 @@ func_D515(var_0, var_1, var_2, var_3) {
 func_D538(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   scripts\asm\asm::func_237B(self.moveratescale);
-  if(scripts\mp\agents\zombie\zombie_util::_meth_8252() < 2) {
+  if(scripts\mp\agents\zombie\zombie_util::func_8252() < 2) {
     var_4 = level.var_BCE6["run"][1];
     var_4 = var_4 + self.moveratescale - level.var_BCE6["sprint"][0];
     scripts\asm\asm::func_237B(var_4);
@@ -1216,7 +1216,7 @@ func_631D(var_0, var_1, var_2, var_3) {
 }
 
 func_A013() {
-  if(self _meth_84B9(200)) {
+  if(self func_84B9(200)) {
     return 1;
   }
 
@@ -1617,7 +1617,7 @@ func_BA3D() {
   self endon("death");
   self.noturnanims = 1;
   self.despawncovernode = 200;
-  self _meth_84BD();
+  self func_84BD();
   self waittill("stop_soon");
   self.attack_spot = scripts\cp\zombies\zombie_entrances::get_open_attack_spot(self.var_6658);
   if(!scripts\cp\zombies\zombie_entrances::func_9CD3(self.attack_spot)) {

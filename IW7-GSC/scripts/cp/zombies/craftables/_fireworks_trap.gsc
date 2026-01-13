@@ -16,7 +16,7 @@ init() {
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.lifespan = 120;
   var_0.var_DDAC = 2;
-  var_0._meth_8487 = 0.4;
+  var_0.func_8487 = 0.4;
   var_0.var_C228 = 12;
   var_0.var_6A03 = "park_fireworks_trap_rocket";
   var_0.placementheighttolerance = 30;
@@ -59,10 +59,10 @@ watch_dpad() {
     }
   }
 
-  thread _meth_82CA("crafted_ims");
+  thread func_82CA("crafted_ims");
 }
 
-_meth_82CA(var_0) {
+func_82CA(var_0) {
   self endon("disconnect");
   scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_1 = func_48EB(var_0, self);

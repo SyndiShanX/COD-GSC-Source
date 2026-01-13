@@ -132,7 +132,7 @@ tryjumpattack(var_0, var_1) {
     }
   }
 
-  if(!self _meth_85CA(self.origin, var_9)) {
+  if(!self func_85CA(self.origin, var_9)) {
     return 0;
   }
 

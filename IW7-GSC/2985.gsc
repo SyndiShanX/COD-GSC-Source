@@ -472,7 +472,7 @@ func_39AC() {
   self.var_BFE3 = 1;
   var_0 = func_3977();
   var_0 give_attacker_kill_rewards(level.var_3979[var_0.type].var_1FAF);
-  var_0 _meth_82B0(level.var_3979[var_0.type].var_1FAF, 1);
+  var_0 func_82B0(level.var_3979[var_0.type].var_1FAF, 1);
   self notify("death");
   return var_0;
 }

@@ -25,7 +25,7 @@ func_40D9() {
 func_979B() {
   scripts\engine\utility::create_lock("aircraft_wash_math");
   scripts\sp\vehicle_code::func_F9C7();
-  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\utility::_meth_8181("helicopter_crash_location", "targetname"));
+  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\utility::func_8181("helicopter_crash_location", "targetname"));
   scripts\sp\vehicle_code::func_FA79();
   var_0 = scripts\sp\vehicle_code::func_D808();
   scripts\sp\vehicle_code::func_FA7A(var_0);
@@ -48,11 +48,11 @@ func_A5DF(var_0, var_1) {
 }
 
 playgestureviewmodel() {
-  self._meth_843F = 1;
+  self.func_843F = 1;
 }
 
-_meth_8440() {
-  self._meth_843F = 0;
+func_8440() {
+  self.func_843F = 0;
 }
 
 func_B6B9() {
@@ -133,7 +133,7 @@ func_1080B() {
   var_0 = scripts\sp\utility::func_10808();
   if(isDefined(self.script_speed)) {
     if(!func_9E2C()) {
-      var_0 _meth_83F4(self.script_speed);
+      var_0 func_83F4(self.script_speed);
     }
   }
 

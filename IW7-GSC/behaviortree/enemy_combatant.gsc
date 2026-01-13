@@ -86,7 +86,7 @@ func_2AD0() {
   var_0.var_1581[17] = lib_0A0C::func_1001E;
   var_0.var_1581[18] = lib_0A0C::isspectatingplayer;
   var_0.var_1581[19] = lib_0A0C::spectateclientnum;
-  var_0.var_1581[20] = lib_0A0C::_meth_85B1;
+  var_0.var_1581[20] = lib_0A0C::func_85B1;
   var_0.var_1581[21] = lib_0A17::func_9308;
   var_0.var_1581[22] = lib_0A17::func_12F2D;
   var_0.var_1581[23] = scripts\aitypes\combat::func_9E40;

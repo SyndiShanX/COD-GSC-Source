@@ -55,9 +55,9 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
 
     if(!isDefined(var_7)) {
-      var_11 = self _meth_806B(var_6, var_12, "min energy", "min time", "max time");
+      var_11 = self func_806B(var_6, var_12, "min energy", "min time", "max time");
     } else {
-      var_11 = self _meth_806B(var_6, var_12, "min time", "min energy");
+      var_11 = self func_806B(var_6, var_12, "min time", "min energy");
     }
   }
 
@@ -146,7 +146,7 @@ func_89AD(var_0, var_1, var_2, var_3, var_4) {
   self endon("killanimscript");
   self endon(var_1 + "_finished");
   var_5 = scripts\anim\utility_common::getgrenademodel();
-  var_6 = self _meth_8101(var_1, var_2);
+  var_6 = self func_8101(var_1, var_2);
   var_7 = "none";
   var_8 = 0;
 
@@ -182,7 +182,7 @@ func_89AD(var_0, var_1, var_2, var_3, var_4) {
     thread func_13A98(var_1, self.var_1652.player, var_3);
   }
 
-  self _meth_83C2();
+  self func_83C2();
 
   if(!usingplayer()) {
     func_F72C(self.var_1652, var_3);
@@ -290,7 +290,7 @@ func_13A99(var_0, var_1) {
         var_13 = distancesquared(var_5.origin, var_12.origin);
 
         if(var_13 < var_6) {
-          var_12 _meth_85C8(var_2, var_1);
+          var_12 func_85C8(var_2, var_1);
           continue;
         }
 
@@ -310,7 +310,7 @@ func_13A99(var_0, var_1) {
   }
 }
 
-_meth_85C8(var_0, var_1) {
+func_85C8(var_0, var_1) {
   var_2 = self;
   anim.var_11813 = undefined;
 

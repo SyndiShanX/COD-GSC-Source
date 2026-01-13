@@ -76,7 +76,7 @@ updateenemy() {
   }
 }
 
-_meth_81C5(var_0) {
+func_81C5(var_0) {
   var_1 = [];
   foreach(var_3 in var_0) {
     if(!func_9FA6(var_3)) {

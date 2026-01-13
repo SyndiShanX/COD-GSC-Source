@@ -186,7 +186,7 @@ func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       } else if(var_1 == self.var_65FC) {
         func_D974(var_1, self);
       } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
-        _meth_8263(var_1, var_0C);
+        func_8263(var_1, var_0C);
       }
     } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
       var_1 iprintlnbold("This weapon is not effective againt the ghost");
@@ -198,7 +198,7 @@ func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 }
 
-_meth_8263(var_0, var_1) {
+func_8263(var_0, var_1) {
   if(!isDefined(var_0.var_D8A1) || var_1 - var_0.var_D8A1 / 1000 > 3) {
     if(isDefined(level.grab_same_ghost_string)) {
       var_0 iprintlnbold(level.grab_same_ghost_string);

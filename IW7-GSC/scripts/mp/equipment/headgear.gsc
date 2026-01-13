@@ -80,7 +80,7 @@ func_8C70(var_0) {
   }
 
   foreach(var_6 in var_0) {
-    if(distance2dsquared(self.origin, var_6.origin) < 100000 && isDefined(self _meth_840B(var_6.origin, 65))) {
+    if(distance2dsquared(self.origin, var_6.origin) < 100000 && isDefined(self func_840B(var_6.origin, 65))) {
       var_7 = var_6 damageconetrace(var_1[2].origin);
       if(var_7 > 0.2) {
         var_8 = self worldpointinreticle_circle(var_6 gettagorigin("tag_eye"), 65, 50);

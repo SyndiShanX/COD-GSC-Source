@@ -27,7 +27,7 @@ func_61CA() {
   }
 
   func_0BDC::func_A0AF();
-  self _meth_8459("face motion");
+  self func_8459("face motion");
   self.behavior = "jackal\jackal";
   self.behaviortreeasset = "jackal";
   self.var_1FA9 = "jackal";
@@ -68,7 +68,7 @@ func_61CA() {
   }
 
   self.var_1912 = 1;
-  self _meth_8456((0, 0, 1));
+  self func_8456((0, 0, 1));
   func_0BDC::func_198F();
   self.a = spawnStruct();
   self.a.nodeath = 1;
@@ -101,7 +101,7 @@ func_61CA() {
   func_D97E();
   self.var_38A2 = 0;
   func_0BDC::func_198B(7.0);
-  self _meth_8491(self._blackboard.var_E1AC);
+  self func_8491(self._blackboard.var_E1AC);
   thread func_A067();
   thread func_A068();
   func_0C1B::func_13CC4();
@@ -114,7 +114,7 @@ func_61CA() {
 
   thread func_0C1C::init();
   level.var_A056.var_1630 = scripts\engine\utility::array_add(level.var_A056.var_1630, self);
-  self _meth_8455(self.origin, 1);
+  self func_8455(self.origin, 1);
   func_107E2();
 
   if(isDefined(self.var_9B4C) && self.var_9B4C) {
@@ -314,7 +314,7 @@ func_976D() {
   return var_0;
 }
 
-_meth_814A(var_0) {
+func_814A(var_0) {
   var_1 = undefined;
 
   if(!isDefined(self._blackboard)) {
@@ -345,13 +345,13 @@ _meth_814A(var_0) {
 }
 
 func_20DD(var_0) {
-  var_1 = _meth_814A(var_0);
-  self _meth_845F(var_1.speed, var_1.var_1545, var_1.var_1E91, var_1.var_1E71);
+  var_1 = func_814A(var_0);
+  self func_845F(var_1.speed, var_1.var_1545, var_1.var_1E91, var_1.var_1E71);
 }
 
 func_20DE(var_0, var_1) {
-  var_2 = _meth_814A(var_1);
-  self _meth_845F(var_2.speed * var_0, var_2.var_1545 * var_0, var_2.var_1E91 * var_0, var_2.var_1E71 * var_0);
+  var_2 = func_814A(var_1);
+  self func_845F(var_2.speed * var_0, var_2.var_1545 * var_0, var_2.var_1E91 * var_0, var_2.var_1E71 * var_0);
 }
 
 func_B2E0() {

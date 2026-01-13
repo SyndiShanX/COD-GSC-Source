@@ -335,7 +335,7 @@ func_112C9(var_0) {
   return 1;
 }
 
-_meth_805E(var_0) {
+func_805E(var_0) {
   var_1 = [];
   if(var_0 == 1) {
     var_1[0] = 0;
@@ -541,7 +541,7 @@ func_128AF(var_0, var_1) {
   }
 
   if(scripts\anim\utility::func_9ED4()) {
-    return func_3773(var_0._meth_85BF, var_1);
+    return func_3773(var_0.func_85BF, var_1);
   }
 
   return func_3773(var_0.objective_position, var_1);
@@ -708,8 +708,8 @@ func_BD1C() {
     return 0;
   }
 
-  var_0 = self _meth_80E8();
-  if(isDefined(var_0) && var_0 != self.target_getindexoftarget && self _meth_83D4(var_0)) {
+  var_0 = self func_80E8();
+  if(isDefined(var_0) && var_0 != self.target_getindexoftarget && self func_83D4(var_0)) {
     self.var_1016F = 1;
     self.shufflenode = var_0;
     self.var_54C3 = 1;

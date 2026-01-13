@@ -560,7 +560,7 @@ melee_charge(var_0) {
   var_6 = 1000;
   if(isDefined(self.bt.instancedata[var_0].bcharge) && var_4 > self.bt.instancedata[var_0].starttime + var_6) {
     var_7 = anglesToForward(self.angles);
-    var_8 = self _meth_84AC();
+    var_8 = self func_84AC();
     if(navtrace(var_8, var_8 + var_7 * 36)) {
       self.bt.instancedata[var_0].bsuccess = 1;
       return level.success;
@@ -659,7 +659,7 @@ shouldthrowsaw(var_0) {
     }
 
     var_4 = getclosestpointonnavmesh(self.bt.target.origin, self);
-    if(!navisstraightlinereachable(self _meth_84AC(), var_4)) {
+    if(!navisstraightlinereachable(self func_84AC(), var_4)) {
       return level.failure;
     }
   }
@@ -1036,7 +1036,7 @@ shouldjumpmove(var_0) {
   if(isDefined(self.bt.target)) {
     var_3 = getclosestpointonnavmesh(self.bt.target.origin, self);
     if(distance2dsquared(self.origin, var_3) >= var_2) {
-      var_4 = self _meth_84AC();
+      var_4 = self func_84AC();
       if(navisstraightlinereachable(var_4, var_3, self)) {
         return level.success;
       }

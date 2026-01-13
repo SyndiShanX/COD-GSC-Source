@@ -78,7 +78,7 @@ func_BFBB(var_0, var_1) {
   }
 
   if(isDefined(self.var_BFB8.var_55DB)) {
-    self _meth_80DB();
+    self func_80DB();
   }
 
   if(isDefined(self.var_BFB8.disabledusability)) {

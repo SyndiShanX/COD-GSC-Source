@@ -716,7 +716,7 @@ func_3E61(var_0, var_1, var_2) {
     return var_2;
   }
 
-  var_4 = _meth_8254(var_0, var_1);
+  var_4 = func_8254(var_0, var_1);
 
   if(var_4 <= 1) {
     return var_2;
@@ -727,7 +727,7 @@ func_3E61(var_0, var_1, var_2) {
   return clamp(var_6, var_3, var_2);
 }
 
-_meth_8254(var_0, var_1) {
+func_8254(var_0, var_1) {
   var_2 = getweaponbasename(var_1);
 
   if(!func_8C3E(var_0, var_2)) {
@@ -1026,7 +1026,7 @@ func_10D81() {
   self.var_2CA7 = undefined;
   self.dismember_crawl = 1;
   thread func_F34B();
-  self _meth_828D(15);
+  self func_828D(15);
   level.var_4878++;
   self waittill("death");
   level.var_4878--;
@@ -1503,7 +1503,7 @@ velocityragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(var_0 _meth_81B7()) {
+  if(var_0 func_81B7()) {
     return;
   }
   if(isDefined(var_0)) {
@@ -1738,7 +1738,7 @@ func_13F9F(var_0, var_1) {
           }
         }
 
-        var_3 _meth_84DC(var_9, var_7);
+        var_3 func_84DC(var_9, var_7);
       }
     }
   }

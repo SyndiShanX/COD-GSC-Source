@@ -878,7 +878,7 @@ func_BA34() {
     var_8.team = self.team;
     var_8.owner = self;
     var_8.enemytrigger = spawn("script_origin", var_4);
-    var_8 thread _meth_83EC(self);
+    var_8 thread func_83EC(self);
     var_8.playerspawnpos = self.var_11947;
     var_8 setotherent(self);
     var_8 scripts\mp\sentientpoolmanager::registersentient("Tactical_Static", self);
@@ -889,7 +889,7 @@ func_BA34() {
   }
 }
 
-_meth_83EC(var_0) {
+func_83EC(var_0) {
   self setModel(level.var_108D3["enemy"]);
 
   if(level.teambased) {
@@ -898,23 +898,23 @@ _meth_83EC(var_0) {
     scripts\mp\entityheadicons::setplayerheadicon(var_0, (0, 0, 20));
   }
 
-  thread _meth_83E8(var_0);
-  thread _meth_83E9(var_0);
-  thread _meth_83EE(var_0);
-  thread _meth_83EF(var_0);
+  thread func_83E8(var_0);
+  thread func_83E9(var_0);
+  thread func_83EE(var_0);
+  thread func_83EF(var_0);
   var_1 = spawn("script_model", self.origin);
   var_1.angles = self.angles;
   var_1 setModel(level.var_108D3["friendly"]);
   var_1 setcontents(0);
   var_1 linkto(self);
   var_1 playLoopSound("tactical_insert_lp");
-  thread _meth_83ED(self, var_1, var_0);
+  thread func_83ED(self, var_1, var_0);
   self waittill("death");
   var_1 stoploopsound();
   var_1 delete();
 }
 
-_meth_83ED(var_0, var_1, var_2) {
+func_83ED(var_0, var_1, var_2) {
   var_0 endon("death");
   wait 0.05;
   var_3 = [];
@@ -957,15 +957,15 @@ deleteondeath(var_0) {
   }
 }
 
-_meth_83E8(var_0) {
-  scripts\mp\damage::monitordamage(100, "tactical_insertion", ::_meth_83EB, ::_meth_83EA, 1);
+func_83E8(var_0) {
+  scripts\mp\damage::monitordamage(100, "tactical_insertion", ::func_83EB, ::func_83EA, 1);
 }
 
-_meth_83EB(var_0, var_1, var_2, var_3, var_4) {
+func_83EB(var_0, var_1, var_2, var_3, var_4) {
   return scripts\mp\damage::handlemeleedamage(var_1, var_2);
 }
 
-_meth_83EA(var_0, var_1, var_2, var_3, var_4) {
+func_83EA(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_insertion", self.owner);
     var_0 notify("destroyed_equipment");
@@ -975,7 +975,7 @@ _meth_83EA(var_0, var_1, var_2, var_3, var_4) {
   var_0 thread deleteti(self);
 }
 
-_meth_83EE(var_0) {
+func_83EE(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
@@ -1004,7 +1004,7 @@ func_12E8B(var_0) {
   }
 }
 
-_meth_83EF(var_0) {
+func_83EF(var_0) {
   self endon("death");
   var_0 waittill("disconnect");
   thread deleteti(self);
@@ -1038,7 +1038,7 @@ func_5F2B(var_0) {
   var_0 delete();
 }
 
-_meth_83E9(var_0) {
+func_83E9(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
@@ -1413,7 +1413,7 @@ settaggerinternal() {
 
   for(;;) {
     self waittill("eyesOn");
-    var_0 = self _meth_8156();
+    var_0 = self func_8156();
 
     foreach(var_2 in var_0) {
       if(level.teambased && var_2.team == self.team) {
@@ -1442,7 +1442,7 @@ outlinewatcher(var_0) {
 
   for(;;) {
     var_1 = 1;
-    var_2 = var_0 _meth_8156();
+    var_2 = var_0 func_8156();
 
     foreach(var_4 in var_2) {
       if(var_4 == self) {
@@ -2276,7 +2276,7 @@ func_139D8() {
 
   for(;;) {
     self waittill("got_a_kill", var_0, var_1, var_2);
-    var_3 = var_0 _meth_8113();
+    var_3 = var_0 func_8113();
     var_4 = "primary";
     var_5 = "none";
     var_6 = getarraykeys(var_0.powers);
@@ -2511,9 +2511,9 @@ setdodge() {
   self allowdodge(1);
 
   if(scripts\mp\utility\game::isanymlgmatch()) {
-    self _meth_8454(6);
+    self func_8454(6);
   } else {
-    self _meth_8454(3);
+    self func_8454(3);
   }
 
   scripts\mp\perks\perks_dodgedefense::func_139F9();
@@ -3642,7 +3642,7 @@ func_E863() {
 
   for(;;) {
     if(self issprinting()) {
-      _meth_848B();
+      func_848B();
       self.movespeedscaler = 1;
       scripts\mp\weapons::updatemovespeedscale();
     }
@@ -3651,7 +3651,7 @@ func_E863() {
   }
 }
 
-_meth_848B() {
+func_848B() {
   self endon("death");
   self endon("disconnect");
   self endon("game_ended");
@@ -4208,7 +4208,7 @@ updategpsjammer() {
       } else {
         var_3++;
 
-        if(var_0 == 1 && var_3 >= level._meth_848A) {
+        if(var_0 == 1 && var_3 >= level.func_848A) {
           var_1 = 1;
           var_0 = 0;
           self setplayerghost(0);
@@ -4311,7 +4311,7 @@ groundpoundshield_raise() {
   var_2.visen = var_4;
   var_2.owner = self;
   var_2 setCanDamage(1);
-  var_2 _meth_847F(1);
+  var_2 func_847F(1);
   var_2.health = 9999;
   var_2.shieldhealth = 210;
   self.groundpoundshield = var_2;

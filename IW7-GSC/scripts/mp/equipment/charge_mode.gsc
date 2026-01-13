@@ -11,7 +11,7 @@ func_3D0E() {}
 
 func_3D19() {
   self notify("chargeMode_unset");
-  if(self _meth_84CA()) {
+  if(self func_84CA()) {
     func_3CDD();
   }
 }
@@ -52,8 +52,8 @@ func_3D1A() {
 func_3CDD(var_0) {
   self notify("chargeMode_end");
   self notify("obj_drain_end");
-  if(self _meth_84CA()) {
-    self _meth_84CB();
+  if(self func_84CA()) {
+    self func_84CB();
   }
 
   self setscriptablepartstate("chargeModeMove", "neutral", 0);
@@ -235,7 +235,7 @@ chargemode_monitorshield() {
   self endon("disconnect");
   self endon("chargeMode_end");
   for(;;) {
-    if(!self _meth_853E()) {
+    if(!self func_853E()) {
       waittillframeend;
       self notify("bullChargeEnd", 0, 0, 1);
       break;
@@ -308,7 +308,7 @@ func_3CFA() {
   childthread func_3CE5(var_0);
   self waittill("gracePeriodRaceBegin");
   waittillframeend;
-  if(!scripts\mp\utility::istrue(var_0._meth_8462)) {
+  if(!scripts\mp\utility::istrue(var_0.func_8462)) {
     if(scripts\mp\utility::istrue(var_0.var_E6) || scripts\mp\utility::istrue(var_0.var_6ABF)) {
       scripts\mp\supers::refundsuper();
     } else {
@@ -339,7 +339,7 @@ func_3CE4(var_0) {
     }
   }
 
-  var_0._meth_8462 = 1;
+  var_0.func_8462 = 1;
   self notify("gracePeriodRaceBegin");
 }
 
@@ -438,11 +438,11 @@ func_3D18(var_0, var_1) {
   }
 
   if(isplayer(var_1)) {
-    if(var_1 _meth_8569()) {
+    if(var_1 func_8569()) {
       return;
     }
 
-    if(var_1 _meth_8568()) {
+    if(var_1 func_8568()) {
       return;
     }
   }
@@ -476,7 +476,7 @@ func_3D18(var_0, var_1) {
   thread func_3D14(var_0, var_1);
   thread scripts\mp\gamescore::func_11ACF(self, var_1, "chargemode_mp", 5);
   if(!chargemode_isqueuedforepicimpact(var_1)) {
-    if(var_1 _meth_84CA() && func_3CE8(var_1)) {
+    if(var_1 func_84CA() && func_3CE8(var_1)) {
       if(var_1 func_3CE8(self)) {
         thread chargemode_queueforepicimpact(var_1);
         var_1 thread chargemode_queueforepicimpact(self);
@@ -622,7 +622,7 @@ func_3CF5(var_0, var_1) {
     var_5 = var_5 + (0, 0, 250);
     var_6 = clamp(var_5[2], 100, 500);
     var_5 = (var_5[0], var_5[1], var_6);
-    var_0 _meth_84DC(var_5, length(var_5));
+    var_0 func_84DC(var_5, length(var_5));
     var_0 shellshock("chargemode_mp", 0.85);
   }
 }
@@ -663,14 +663,14 @@ func_3D15(var_0, var_1) {
 }
 
 func_3CEE(var_0) {
-  return var_0 _meth_84CA();
+  return var_0 func_84CA();
 }
 
 func_3D0C() {
   var_0 = self getvelocity();
   var_0 = (var_0[0], var_0[1], 0);
   var_1 = lengthsquared(var_0);
-  return var_1 >= -10311 && vectordot(var_0, anglesToForward(self.angles)) > 0 && !self _meth_8499();
+  return var_1 >= -10311 && vectordot(var_0, anglesToForward(self.angles)) > 0 && !self func_8499();
 }
 
 func_3CDF() {
@@ -718,7 +718,7 @@ func_3CE7(var_0) {
     var_6 = var_6 * -1;
   }
 
-  if(var_0 _meth_853E()) {
+  if(var_0 func_853E()) {
     if(var_6 >= -45 && var_6 <= 30) {
       return 1;
     }

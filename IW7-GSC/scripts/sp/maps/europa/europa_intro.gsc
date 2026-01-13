@@ -44,7 +44,7 @@ func_9ABC() {
   precacheshader("vfx_ui_player_freeze_overlay_02");
   precacheshader("arrow_left_white");
   precacheshader("arrow_right_white");
-  scripts\sp\utility::func_16EB("seeker_tutorial_hint", &"EUROPA_SEEKER_HINT", ::scripts\sp\maps\europa\europa_labs::func_F164);
+  scripts\sp\utility::func_16EB("seeker_tutorial_hint", &"EUROPA_SEEKER_HINT", scripts\sp\maps\europa\europa_labs::func_F164);
   scripts\sp\utility::func_16EB("halojump_hint", &"EUROPA_HALOJUMP_HINT", ::func_8893);
   scripts\sp\utility::func_16EB("freefall_boost", &"EUROPA_FREEFALL_BOOST", ::func_2CB4);
   scripts\sp\utility::func_16EB("scope_y", &"EUROPA_HINT_SCOPE_Y", ::func_9CF7);
@@ -96,10 +96,10 @@ func_9CF7() {
   }
 
   if(issubstr(level.player getcurrentweapon(), "hybrid_snow")) {
-    return !level.player _meth_8519(level.player getcurrentprimaryweapon());
+    return !level.player func_8519(level.player getcurrentprimaryweapon());
   }
 
-  return level.player _meth_8519(level.player getcurrentprimaryweapon());
+  return level.player func_8519(level.player getcurrentprimaryweapon());
 }
 
 func_9B50() {
@@ -158,13 +158,13 @@ func_EBBD() {
 }
 
 func_5DEF() {
-  level.player _meth_82C0("europa_dropship_intro_fullscreen_hit", 0);
+  level.player func_82C0("europa_dropship_intro_fullscreen_hit", 0);
   if(!isDefined(level.var_2B4C)) {
     level.var_2B4C = scripts\sp\hud_util::func_48B7("black", 1);
     level.var_2B4C.foreground = 0;
   }
 
-  level.player _meth_81DE(55, 0.05);
+  level.player func_81DE(55, 0.05);
   func_5E01();
   level.var_5D6C scripts\sp\anim::func_1EC1(level.var_5D6C.group, "europa_dropship_intro", "tag_origin");
   thread func_D324();
@@ -190,7 +190,7 @@ firstline() {
 
 func_9A9F() {
   scripts\engine\utility::flag_set("begin_dropship_bink");
-  level.player _meth_82C0("europa_dropship_intro_fullscreen_hit", 0);
+  level.player func_82C0("europa_dropship_intro_fullscreen_hit", 0);
   level.var_5D6C scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::play_sound_on_entity, "europa_rpr_warlordactual");
   if(!isDefined(level.var_2B4C)) {
     level.var_2B4C = scripts\sp\hud_util::func_48B7("black", 1);
@@ -210,7 +210,7 @@ func_5E25() {
   level.var_EBBB detach(level.var_EBBB.headmodel);
   level.var_EBBB attach("head_hero_sipes_cine_hqss");
   func_D324();
-  level.player _meth_81DE(55, 0.05);
+  level.player func_81DE(55, 0.05);
   setglobalsoundcontext("atmosphere", "helmet", 1);
   setomnvar("ui_europa_halo_drop_state", 1);
   setomnvar("ui_europa_halo_drop_state", 3);
@@ -278,7 +278,7 @@ func_5E21() {
   }
 
   level.player giveplayerscore(0, 1.6, 0.9);
-  level.player _meth_81DE(65, 3);
+  level.player func_81DE(65, 3);
   scripts\engine\utility::delaythread(3.5, ::func_EBC8, 1);
   scripts\engine\utility::delaythread(8.2, ::func_EBC8, 0);
   scripts\engine\utility::array_thread(level.var_EBCA, ::func_EBC2);
@@ -332,8 +332,8 @@ func_D067() {
   var_3 = (level.var_D267.origin[0], level.var_D267.origin[1], var_2);
   var_4 = getanimlength(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"));
   var_5 = 3;
-  level.var_D267 _meth_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), var_5);
-  level.var_D267 _meth_82B0(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), 0.6);
+  level.var_D267 func_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), var_5);
+  level.var_D267 func_82B0(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), 0.6);
   var_4 = var_4 * 1 / var_5;
   var_0 moveto(var_3, var_4);
   wait(var_4);
@@ -420,9 +420,9 @@ func_7944() {
 }
 
 func_F359(var_0) {
-  level.var_D267 _meth_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
-  level.var_EBBB _meth_82B1(level.var_EBBB scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
-  level.var_EBBC _meth_82B1(level.var_EBBC scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
+  level.var_D267 func_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
+  level.var_EBBB func_82B1(level.var_EBBB scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
+  level.var_EBBC func_82B1(level.var_EBBC scripts\sp\utility::func_7DC1("europa_dropship_halo_jump"), var_0);
 }
 
 func_CFE1() {
@@ -466,7 +466,7 @@ func_CF62() {
 
 func_9500() {
   level.var_D267 give_attacker_kill_rewards( % europa_dropship_intro_plr_halo_jump_lr, 1, 0, 0);
-  level.var_D267 _meth_82B0( % europa_dropship_intro_plr_halo_jump_lr, 0.5);
+  level.var_D267 func_82B0( % europa_dropship_intro_plr_halo_jump_lr, 0.5);
 }
 
 func_CFDC() {
@@ -688,12 +688,12 @@ func_CFE2(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     self.var_1EE3[var_5] = self.var_1EE3[var_5] * var_0A;
-    self _meth_82B1(var_0, self.var_1EE3[var_5]);
+    self func_82B1(var_0, self.var_1EE3[var_5]);
     wait(0.05);
   }
 
-  self _meth_82B0(var_0, var_1);
-  self _meth_82B1(var_0, 0);
+  self func_82B0(var_0, var_1);
+  self func_82B1(var_0, 0);
 }
 
 func_5727() {
@@ -780,14 +780,14 @@ func_D1D3() {
   var_2 = var_1 - var_0;
   setsunlight(10000, 10000, 15000);
   playworldsound("scn_europa_lightning_death", (0, 0, 0));
-  level.player _meth_809A(1, 1);
+  level.player func_809A(1, 1);
   earthquake(2, 10, level.player.origin, 1000);
   level.player thread lib_0B60::func_8DDF();
   level.player thread lib_0B60::func_2BC7();
   level.player freezecontrols(1);
   level notify("lightning_death");
   level.player givescorefortrophyblocks();
-  level.player _meth_81D0();
+  level.player func_81D0();
   wait(4);
   scripts\sp\utility::func_B8D1();
   level waittill("forever");
@@ -891,7 +891,7 @@ func_25DF() {
   level.var_1178D linkto(level.player);
   level.var_1178C playSound("scn_jump_from_plane_01_lr");
   wait(3.4);
-  level.player _meth_82C0("europa_halo_jump", 0.5);
+  level.player func_82C0("europa_halo_jump", 0.5);
   setmusicstate("");
   thread func_8891();
   func_13760(0.58);
@@ -956,7 +956,7 @@ func_D1B3() {
   thread func_8E4A();
   level.player thread scripts\sp\maps\europa\europa_util::func_8E34(1);
   level.player thread scripts\sp\maps\europa\europa_util::func_13013(1);
-  level.player _meth_809A(0, 2);
+  level.player func_809A(0, 2);
   thread func_DFCD();
   thread func_7451();
   level waittill("player_landed");
@@ -1127,7 +1127,7 @@ func_2CAC() {
       earthquake(0.43, 0.3, level.player.origin, 200);
       level.player playrumbleonentity("heavy_3s");
       level.player playrumbleonentity("damage_heavy");
-      level.player _meth_8291(0.5, 0.5, 0.5, 0.3, 0, -1, 0, 30, 30, 30);
+      level.player func_8291(0.5, 0.5, 0.5, 0.3, 0, -1, 0, 30, 30, 30);
       wait(0.1);
     }
 
@@ -1189,13 +1189,13 @@ func_7BA1() {
 }
 
 func_F537(var_0) {
-  level.var_D267 _meth_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_land_rel"), var_0);
+  level.var_D267 func_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_land_rel"), var_0);
 }
 
 func_A635() {
   level.var_2B4C fadeovertime(0.25);
   level.var_2B4C.alpha = 0;
-  level.player _meth_82C0("europa_dropship_intro_fullscreen_hit", 0.05);
+  level.player func_82C0("europa_dropship_intro_fullscreen_hit", 0.05);
   level.player scripts\engine\utility::delaycall(2, ::clearclienttriggeraudiozone, 5);
   level.player setclientomnvar("ui_hide_hud", 0);
   wait(0.25);
@@ -1267,7 +1267,7 @@ func_59B9() {
     var_8 = 0;
     var_9 = 0;
     var_0A = 1;
-    level.player _meth_8291(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    level.player func_8291(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     wait(var_3);
   }
 }
@@ -1295,12 +1295,12 @@ func_5E23() {
     var_6 = clamp(var_6, 15, 40);
     var_7 = var_1;
     if(var_1 > 0.4) {
-      level.player _meth_8291(var_7 + 0.35 * var_7 + 0.35 * 1.5, var_7, var_7 + 0.35 * var_7 + 0.35 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
+      level.player func_8291(var_7 + 0.35 * var_7 + 0.35 * 1.5, var_7, var_7 + 0.35 * var_7 + 0.35 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
     } else if(var_1 > 0.12) {
-      level.player _meth_8291(var_7 * 1.5, var_7 * 1.2, var_7 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
+      level.player func_8291(var_7 * 1.5, var_7 * 1.2, var_7 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
     } else {
       var_7 = 0.05;
-      level.player _meth_8291(var_7 * 1.5, var_7, var_7 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
+      level.player func_8291(var_7 * 1.5, var_7, var_7 * 2, var_4, 0, -1, 0, var_6, var_6, var_6);
     }
 
     var_0 dontinterpolate();
@@ -1752,7 +1752,7 @@ func_10AD0() {
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_54F7);
   level.var_EBBB.target = "sipes_lookaround";
   level.var_EBBC.target = "t_lookaround";
-  scripts\engine\utility::array_thread(level.var_EBCA, ::lib_0B77::worldpointinreticle_circle);
+  scripts\engine\utility::array_thread(level.var_EBCA, lib_0B77::worldpointinreticle_circle);
   scripts\engine\utility::flag_wait("player_at_landing_zone");
   func_1381C();
 }
@@ -1766,7 +1766,7 @@ func_B01E() {
   self endon("stop_going_to_node");
   var_0 = scripts\engine\utility::spawn_script_origin();
   var_0 scripts\engine\utility::delaycall(11, ::delete);
-  scripts\engine\utility::delaythread(1, ::lib_0C4C::func_1955, var_0);
+  scripts\engine\utility::delaythread(1, lib_0C4C::func_1955, var_0);
   for(;;) {
     var_1 = anglesToForward(self.angles);
     var_0.origin = self.origin + (0, 0, 200) + var_1 * 100;
@@ -1780,7 +1780,7 @@ func_10ACC() {
 }
 
 func_EBC2() {
-  while(self _meth_81A6()) {
+  while(self func_81A6()) {
     wait(0.05);
   }
 
@@ -1921,13 +1921,13 @@ func_F915() {
     thread func_3DB5(var_1);
     level.player waittill("melee_pressed");
     scripts\engine\utility::flag_set("player_stabbed");
-    level.var_421D.var_1CBF _meth_82B0(level.var_421D.var_1CBF scripts\sp\utility::func_7DC1("cliffjumper"), 0.5);
-    level.var_421D.var_1CE2 _meth_82B0(level.var_421D.var_1CE2 scripts\sp\utility::func_7DC1("cliffjumper"), 0.5);
+    level.var_421D.var_1CBF func_82B0(level.var_421D.var_1CBF scripts\sp\utility::func_7DC1("cliffjumper"), 0.5);
+    level.var_421D.var_1CE2 func_82B0(level.var_421D.var_1CE2 scripts\sp\utility::func_7DC1("cliffjumper"), 0.5);
   }
 
   level.player playSound("scn_cave_jump_boostkill_stab");
   setslowmotion(0.25, 1, 0.1);
-  level.player _meth_81DE(65, 0.75);
+  level.player func_81DE(65, 0.75);
   level.var_421D scripts\sp\anim::func_1F2C(var_0, "cliffjumper_kill");
   level.var_421D.var_D04B scripts\sp\utility::func_19D3();
   scripts\engine\utility::flag_set("cliffjump_complete");
@@ -1959,10 +1959,10 @@ func_3DB5(var_0) {
   settimescale(1);
   level.var_4214 delete();
   level.player playerlinktodelta(level.var_421D.var_D267, "tag_player", 0, 1, 1, 1, 1, 1);
-  level.player _meth_81DE(65, 0.75);
+  level.player func_81DE(65, 0.75);
   scripts\engine\utility::delaythread(1.25, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_focusupmate");
-  level.var_421D.var_1CBF _meth_82B0(level.var_421D.var_1CBF scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
-  level.var_421D.var_1CE2 _meth_82B0(level.var_421D.var_1CE2 scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
+  level.var_421D.var_1CBF func_82B0(level.var_421D.var_1CBF scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
+  level.var_421D.var_1CE2 func_82B0(level.var_421D.var_1CE2 scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
   thread func_6ADE();
   var_2 = [level.player.var_D267, level.var_421D.var_D04B];
   level.var_421D scripts\sp\anim::func_1F2C(var_2, "cliffjumper_exit");
@@ -2021,7 +2021,7 @@ func_78A5() {
 func_F300(var_0) {
   foreach(var_2 in level.var_421D.var_1684) {
     if(isDefined(var_2)) {
-      var_2 _meth_82B1(var_2 scripts\sp\utility::func_7DC1("cliffjumper"), var_0);
+      var_2 func_82B1(var_2 scripts\sp\utility::func_7DC1("cliffjumper"), var_0);
     }
   }
 }
@@ -2128,7 +2128,7 @@ func_4206(var_0) {
   level.var_4205 stopsounds();
   level.var_1031B.var_ABA1 = 0.4;
   level.var_1031B.var_1098F = 0.1;
-  level.player _meth_81DE(50, 2);
+  level.player func_81DE(50, 2);
   setslowmotion(1, 0.5, 1.5);
   thread func_AB70(0.05, 2);
   wait(0.2);
@@ -2163,7 +2163,7 @@ func_ABB3(var_0, var_1) {
   var_5 = var_0 - var_2 / var_4;
   while(gettime() < var_3) {
     var_2 = var_2 + var_5;
-    level.player _meth_81DE(var_2, 0.05);
+    level.player func_81DE(var_2, 0.05);
     wait(0.05);
   }
 }
@@ -2183,10 +2183,10 @@ func_4202(var_0) {
     wait(0.15);
     playworldsound("player_falling_death_impact", level.player.origin);
     earthquake(1, 1, level.player.origin, 200);
-    level.player _meth_8244("damage_heavy");
+    level.player func_8244("damage_heavy");
     lib_0B60::func_F322("EUROPA_BOOST_DEATH_HINT");
     setdvar("player_death_animated", 0);
-    level.player _meth_81D0();
+    level.player func_81D0();
     level.player stoprumble("damage_heavy");
   }
 }
@@ -2197,7 +2197,7 @@ func_4207() {
   var_0 = scripts\engine\utility::getstructarray("drop_landing_start", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy != "scar2") {
-      level.var_EBBB _meth_80F1(var_2.origin, var_2.angles, -15536);
+      level.var_EBBB func_80F1(var_2.origin, var_2.angles, -15536);
     }
   }
 

@@ -15,7 +15,7 @@ func_FE61(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   func_FE89();
   var_4 = func_FE64();
-  self _meth_83CE();
+  self func_83CE();
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   shootblankorrpg(var_1, 0.2, 2);
   self.asm.shootparams.var_C21C--;
@@ -200,14 +200,14 @@ func_32BE() {
     return;
   }
 
-  var_0 = _meth_80E7();
+  var_0 = func_80E7();
 
   if(var_0) {
     wait(var_0);
   }
 }
 
-_meth_80E7() {
+func_80E7() {
   var_0 = (gettime() - self.var_A9ED) / 1000;
   var_1 = func_7E12();
 

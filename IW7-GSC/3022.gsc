@@ -48,7 +48,7 @@ init() {
 func_9639() {
   self.var_5958 = 1;
   self.var_C1DB = 0;
-  self _meth_8455(self.origin);
+  self func_8455(self.origin);
 }
 
 func_A2B2(var_0, var_1, var_2) {
@@ -69,8 +69,8 @@ func_A2B2(var_0, var_1, var_2) {
     var_2 = "fly";
   }
 
-  var_0 _meth_8491(var_2);
-  self _meth_8490("disable_pilot_move_assist", 1);
+  var_0 func_8491(var_2);
+  self func_8490("disable_pilot_move_assist", 1);
   thread monitorboost(var_0, self);
 }
 

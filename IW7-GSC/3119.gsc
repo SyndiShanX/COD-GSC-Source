@@ -16,7 +16,7 @@ func_3359(var_0, var_1, var_2, var_3) {
   func_3374();
   scripts\anim\combat::func_F296();
   thread lib_0A1E::func_234F();
-  self.var_71C8 = ::lib_0C60::func_33AA;
+  self.var_71C8 = lib_0C60::func_33AA;
   self.meleechargedistreloadmultiplier = 1;
   self.var_C009 = 1;
   self.var_596E = 1;
@@ -232,7 +232,7 @@ func_CEB9(var_0, var_1, var_2, var_3) {
   self orientmode("face angle", var_4);
   var_5 = self[[self.var_7191]](var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   thread lib_0A1E::func_231F(var_0, var_1);
   if(animhasnotetrack(var_5, "grenade_left")) {
     self waittillmatch("grenade_left", var_1);
@@ -246,7 +246,7 @@ func_CEB9(var_0, var_1, var_2, var_3) {
     self.objective_position delete();
     var_6 = randomfloatrange(1, 1.5);
     var_7 = magicgrenademanual("frag_c6hug", self gettagorigin("tag_accessory_left"), (0, 0, 0), var_6);
-    self._meth_85C0 = var_7;
+    self.func_85C0 = var_7;
     var_7.angles = self gettagangles("tag_accessory_left");
     var_7 linkto(self, "tag_accessory_left");
   }
@@ -257,26 +257,26 @@ func_CEB9(var_0, var_1, var_2, var_3) {
 func_CEB8(var_0, var_1, var_2, var_3) {
   var_4 = self[[self.var_7191]](var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
 }
 
-_meth_85C4(var_0, var_1, var_2, var_3) {
-  return !isDefined(self._meth_85C0);
+func_85C4(var_0, var_1, var_2, var_3) {
+  return !isDefined(self.func_85C0);
 }
 
 func_CEBA(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = self[[self.var_7191]](var_0, var_1);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   self.bt.var_5615 = 1;
   var_5 = ["right_arm", "left_arm", "torso", "right_leg", "left_leg"];
   foreach(var_7 in var_5) {
-    var_8 = self _meth_850C(var_7, "upper");
-    var_9 = self _meth_850C(var_7, "lower");
+    var_8 = self func_850C(var_7, "upper");
+    var_9 = self func_850C(var_7, "lower");
     var_0A = max(var_8, var_9);
     if(var_8 > 0 && var_9 > 0) {
-      self _meth_850B(int(var_0A), var_7, "upper");
-      self _meth_850B(int(var_0A), var_7, "lower");
+      self func_850B(int(var_0A), var_7, "upper");
+      self func_850B(int(var_0A), var_7, "lower");
     }
   }
 

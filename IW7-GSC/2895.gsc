@@ -80,7 +80,7 @@ func_D66E() {
   if(var_1.type != "Turret") {
     return;
   }
-  var_2 = _meth_8194();
+  var_2 = func_8194();
   var_2[self.node.origin + ""] = undefined;
 
   if(isDefined(var_2[var_1.origin + ""])) {
@@ -326,7 +326,7 @@ func_B6A3(var_0) {
   for(;;) {
     var_0 waittill("startfiring");
     thread func_32B5(var_0);
-    var_0 _meth_8398();
+    var_0 func_8398();
     var_0 waittill("stopfiring");
     var_0 givesentry();
   }
@@ -362,7 +362,7 @@ func_32B5(var_0, var_1) {
   }
 
   for(;;) {
-    var_0 _meth_8398();
+    var_0 func_8398();
 
     if(isDefined(var_1)) {
       var_0 thread func_DC9D(var_1);
@@ -763,7 +763,7 @@ func_BC9D(var_0, var_1, var_2) {
     }
   }
 
-  self _meth_83D7(var_0);
+  self func_83D7(var_0);
 }
 
 func_116C2(var_0, var_1) {
@@ -807,11 +807,11 @@ func_129EA(var_0, var_1) {
   var_2 = _getaiarray();
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(var_2[var_3] _meth_81A5(var_0.origin) && var_2[var_3] _meth_8063(var_1)) {
+    if(var_2[var_3] func_81A5(var_0.origin) && var_2[var_3] func_8063(var_1)) {
       var_4 = var_2[var_3].keepclaimednodeifvalid;
       var_2[var_3].keepclaimednodeifvalid = 0;
 
-      if(!var_2[var_3] _meth_83D4(var_0)) {
+      if(!var_2[var_3] func_83D4(var_0)) {
         var_2[var_3].keepclaimednodeifvalid = var_4;
       }
     }
@@ -902,7 +902,7 @@ func_B6A9(var_0, var_1, var_2) {
     self.contextleanenabled = 2;
 
     if(!var_0) {
-      var_5 = self _meth_8165();
+      var_5 = self func_8165();
 
       if(!isalive(var_5) || isplayer(var_5)) {
         wait 0.05;
@@ -954,7 +954,7 @@ func_B6A9(var_0, var_1, var_2) {
       self cleartargetentity();
       self givesentry();
 
-      if(!var_0 && !(isDefined(self _meth_8165()) && self _meth_8165() == var_5)) {
+      if(!var_0 && !(isDefined(self func_8165()) && self func_8165() == var_5)) {
         break;
       }
     }
@@ -992,7 +992,7 @@ func_5C88(var_0, var_1, var_2) {
     }
 
     if(!var_4) {
-      self _meth_8398();
+      self func_8398();
       var_4 = 1;
     }
 
@@ -1350,7 +1350,7 @@ func_10389(var_0) {
 }
 
 func_AB14(var_0) {
-  self _meth_83AF();
+  self func_83AF();
   scripts\anim\shared::placeweaponon(self.primaryweapon, "none");
   var_1 = func_7D25(var_0);
   var_2 = _getstartorigin(var_0.origin, var_0.angles, var_1);
@@ -1360,7 +1360,7 @@ func_AB14(var_0) {
 }
 
 func_CB35(var_0) {
-  self _meth_83AF();
+  self func_83AF();
   self.turret func_8EAE();
 }
 
@@ -1457,7 +1457,7 @@ func_12A4E() {
   var_2 = self.node;
 
   if(!isDefined(var_2) || !scripts\engine\utility::array_contains(var_1, var_2)) {
-    var_3 = _meth_8194();
+    var_3 = func_8194();
 
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
       var_2 = scripts\engine\utility::random(var_1);
@@ -1485,7 +1485,7 @@ func_12A4E() {
 }
 
 func_13030(var_0) {
-  var_1 = self _meth_83D7(var_0);
+  var_1 = self func_83D7(var_0);
 
   if(var_1) {
     scripts\sp\utility::func_F398("move", ::func_12A4E);
@@ -1519,7 +1519,7 @@ func_7BC7(var_0) {
   }
 }
 
-_meth_8194() {
+func_8194() {
   var_0 = [];
   var_1 = _getaiarray();
 
@@ -1537,7 +1537,7 @@ find_connected_turrets(var_0) {
   var_1 = level.var_FC5D;
   var_2 = [];
   var_3 = getarraykeys(var_1);
-  var_4 = _meth_8194();
+  var_4 = func_8194();
   var_4[self.node.origin + ""] = undefined;
 
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
@@ -1641,7 +1641,7 @@ func_1101D() {
 }
 
 func_12A05(var_0) {
-  var_1 = var_0 _meth_8165();
+  var_1 = var_0 func_8165();
 
   if(!isDefined(var_1)) {
     return 0;

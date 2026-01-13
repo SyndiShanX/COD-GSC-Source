@@ -50,7 +50,7 @@ c4_explode(var_0) {
   scripts\mp\utility::printgameaction("c4 triggered", self.triggerportableradarping);
   thread c4_delete(0.1);
   self setentityowner(var_0);
-  self _meth_8593();
+  self func_8593();
   self setscriptablepartstate("plant", "neutral", 0);
   self setscriptablepartstate("explode", "active", 0);
 }
@@ -103,7 +103,7 @@ c4_destroyonemp() {
 
   if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
     var_0 notify("destroyed_equipment");
-    var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
   }
 
   var_5 = "";
@@ -141,11 +141,11 @@ c4_validdetonationstate() {
     return 0;
   }
 
-  if(self _meth_84CA()) {
+  if(self func_84CA()) {
     return 0;
   }
 
-  if(self _meth_8568()) {
+  if(self func_8568()) {
     return 0;
   }
 

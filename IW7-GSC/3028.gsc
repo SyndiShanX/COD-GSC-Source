@@ -400,7 +400,7 @@ func_104A7() {
         }
 
         var_2 getrankxp();
-        var_2 _meth_8314();
+        var_2 func_8314();
         var_2 linkto(var_5);
         var_4 linkto(var_5);
         var_4.tag_origin linkto(var_5);

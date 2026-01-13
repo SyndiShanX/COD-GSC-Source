@@ -26,7 +26,7 @@ func_3E9F(var_0, var_1, var_2) {
   return var_3;
 }
 
-_meth_8162(var_0) {
+func_8162(var_0) {
   var_1 = [];
 
   if(scripts\asm\asm::asm_hasalias(var_0, "1")) {
@@ -99,9 +99,9 @@ func_53CA(var_0) {
     return;
   }
   if(isDefined(self.asm.var_4C86) && isDefined(self.asm.var_4C86.var_697F)) {
-    var_10 = _meth_8162(self.asm.var_4C86.var_697F);
+    var_10 = func_8162(self.asm.var_4C86.var_697F);
   } else {
-    var_10 = _meth_8162(var_0);
+    var_10 = func_8162(var_0);
   }
 
   var_11 = getangleindices(var_7);

@@ -172,7 +172,7 @@ func_CEC3(var_0, var_1, var_2, var_3) {
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
 
@@ -263,7 +263,7 @@ func_3722(var_0, var_1, var_2, var_3) {
     var_6 = getangleindex(var_8, 22.5);
   }
 
-  var_9 = lib_0C5D::_meth_8174(var_0, undefined, 1);
+  var_9 = lib_0C5D::func_8174(var_0, undefined, 1);
   if(!isDefined(var_9[var_6])) {
     return undefined;
   }
@@ -284,7 +284,7 @@ func_3722(var_0, var_1, var_2, var_3) {
   }
 
   var_11 = getclosestpointonnavmesh(var_0D, self);
-  var_12 = self _meth_84AC();
+  var_12 = self func_84AC();
   if(!navisstraightlinereachable(var_12, var_11, self)) {
     return undefined;
   }
@@ -323,7 +323,7 @@ func_3E99(var_0, var_1, var_2) {
 
 func_CEAD(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
-  self.var_4C7E = ::lib_0F3D::func_22EA;
+  self.var_4C7E = lib_0F3D::func_22EA;
   self.a.var_22E5 = var_1;
   if(isDefined(self.asm.var_11068)) {
     var_4 = self.asm.var_11068;
@@ -342,10 +342,10 @@ func_CEAD(var_0, var_1, var_2, var_3) {
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   var_0C = var_6[1] - var_8;
   if(isDefined(self.asm.var_11068)) {
-    self _meth_8396(var_7, var_0C);
+    self func_8396(var_7, var_0C);
   } else {
     self orientmode("face angle", self.angles[1]);
   }
@@ -581,7 +581,7 @@ func_CEBB(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_5 = func_7DD5();
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   childthread func_CEBC();
   lib_0A1E::func_231F(var_0, var_1);
 }
@@ -608,7 +608,7 @@ func_CEB6(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_5 = -1 * self.setocclusionpreset;
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   var_6 = vectortoyaw(var_5);
   var_7 = lib_0C08::func_7E30();
   if(isDefined(var_7)) {
@@ -626,7 +626,7 @@ func_CEB6(var_0, var_1, var_2, var_3) {
 }
 
 func_CEAC(var_0, var_1, var_2, var_3) {
-  self.var_4C7E = ::lib_0F3D::func_22EA;
+  self.var_4C7E = lib_0F3D::func_22EA;
   self.a.var_22E5 = var_1;
   var_4 = func_100A2(var_0, var_1);
   var_5 = func_7DD5();
@@ -649,13 +649,13 @@ func_CEAC(var_0, var_1, var_2, var_3) {
   var_0B = -1 * var_0A;
   var_0C = vectortoyaw(var_0B);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_7, 1, var_2, 1);
+  self func_82EA(var_1, var_7, 1, var_2, 1);
   if(!var_4) {
-    self _meth_8396(var_8, self.angles[1]);
+    self func_8396(var_8, self.angles[1]);
   } else {
     var_0D = self.origin + rotatevector(var_9, self.angles);
     if(!self maymovefrompointtopoint(self.origin, var_0D)) {
-      self _meth_8396(var_8, self.angles[1]);
+      self func_8396(var_8, self.angles[1]);
     } else {
       self orientmode("face current");
     }

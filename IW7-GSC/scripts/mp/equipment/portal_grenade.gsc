@@ -121,7 +121,7 @@ func_468B(var_0, var_1) {
   self endon("disconnect");
   var_0 endon("diconnect");
   wait(0.05);
-  var_2 = var_0 _meth_8113();
+  var_2 = var_0 func_8113();
   if(!isDefined(var_2)) {
     return;
   }

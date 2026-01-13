@@ -100,9 +100,9 @@ func_C133(var_0, var_1, var_2) {
 }
 
 loop_or_delete() {
-  self _meth_847A();
-  self _meth_8479(self.var_10A43);
-  self _meth_847B(1.0);
+  self func_847A();
+  self func_8479(self.var_10A43);
+  self func_847B(1.0);
   thread loop_path(self.var_10A43);
 }
 
@@ -190,12 +190,12 @@ func_10A46(var_0, var_1, var_2) {
     var_1 = 0.2;
   }
 
-  self _meth_8479(var_0);
+  self func_8479(var_0);
 
   if(isDefined(var_2)) {
-    self _meth_847B(var_1, var_2);
+    self func_847B(var_1, var_2);
   } else {
-    self _meth_847B(var_1);
+    self func_847B(var_1);
   }
 
   self.var_10A43 = var_0;

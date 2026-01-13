@@ -333,23 +333,23 @@ playflyoveraudioline() {
     if(self.sessionteam == "allies") {
       switch (var_1) {
         case 0:
-          self _meth_85BF("jtfw_mtc1_un_flyover");
+          self func_85BF("jtfw_mtc1_un_flyover");
           break;
 
         case 1:
-          self _meth_85BF("oi_mtc3_un_flyover");
+          self func_85BF("oi_mtc3_un_flyover");
           break;
 
         case 2:
-          self _meth_85BF("st7_mtc4_prematch_flyover");
+          self func_85BF("st7_mtc4_prematch_flyover");
           break;
 
         case 3:
-          self _meth_85BF("wr_mtc5_un_flyover");
+          self func_85BF("wr_mtc5_un_flyover");
           break;
 
         case 4:
-          self _meth_85BF("ba_mtc2_un_flyover");
+          self func_85BF("ba_mtc2_un_flyover");
           break;
 
         default:
@@ -362,23 +362,23 @@ playflyoveraudioline() {
     if(self.sessionteam == "axis") {
       switch (var_1) {
         case 0:
-          self _meth_85BF("jtfw_mtc1_sdf_flyover");
+          self func_85BF("jtfw_mtc1_sdf_flyover");
           break;
 
         case 1:
-          self _meth_85BF("oi_mtc3_sdf_flyover");
+          self func_85BF("oi_mtc3_sdf_flyover");
           break;
 
         case 2:
-          self _meth_85BF("st7_mtc4_prematch_flyover");
+          self func_85BF("st7_mtc4_prematch_flyover");
           break;
 
         case 3:
-          self _meth_85BF("wr_mtc5_sdf_flyover");
+          self func_85BF("wr_mtc5_sdf_flyover");
           break;
 
         case 4:
-          self _meth_85BF("ba_mtc2_sdf_flyover");
+          self func_85BF("ba_mtc2_sdf_flyover");
           break;
 
         default:

@@ -143,7 +143,7 @@ registernotetracks() {
                               self[[self.var_71C8]]();
                             }
 
-                            self _meth_8576();
+                            self func_8576();
                           }
 
                           notetrackragdollblendstart(var_0, var_1) {}
@@ -215,7 +215,7 @@ registernotetracks() {
                             self give_run_perk(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
                             scripts\anim\utility::enterpronewrapper(1);
                             setpose("prone");
-                            if(isDefined(self.a._meth_8445)) {
+                            if(isDefined(self.a.func_8445)) {
                               self.a.proneaiming = 1;
                               return;
                             }
@@ -346,9 +346,9 @@ registernotetracks() {
                             playfootstep(var_2, var_3);
                             var_5 = get_notetrack_movement();
                             if(isDefined(self.classname) && self.classname != "script_model") {
-                              self _meth_8584(var_5);
+                              self func_8584(var_5);
                               if(isDefined(self.var_394)) {
-                                var_6 = self _meth_8583(var_5, self.var_394);
+                                var_6 = self func_8583(var_5, self.var_394);
                               }
                             }
                           }
@@ -668,8 +668,8 @@ registernotetracks() {
                             }
 
                             self playsurfacesound("default_step_land", var_2);
-                            self _meth_8584("land");
-                            self _meth_8583("land", self.var_394);
+                            self func_8584("land");
+                            self func_8583("land", self.var_394);
                           }
 
                           notetrackcodemove(var_0, var_1) {

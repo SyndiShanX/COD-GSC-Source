@@ -121,12 +121,12 @@ func_D4CE(var_0, var_1, var_2, var_3) {
   self animmode("zonly_physics");
   self linktoblendtotag(self.melee.target, "tag_sync", 0, 0);
   self clearanim(lib_0A1E::asm_getbodyknob(), 0);
-  self _meth_82EA(var_1, var_5, 1, 0, 1);
+  self func_82EA(var_1, var_5, 1, 0, 1);
   scripts\engine\utility::delaythread(0.25, ::func_F836);
-  var_8 = lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  var_8 = lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
   var_9 = func_3EB5(var_0, var_1, self.melee.var_F2);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_9, 1, var_2, 1);
+  self func_82EA(var_1, var_9, 1, var_2, 1);
   childthread func_F172();
   scripts\engine\utility::waittill_notify_or_timeout("on_screen", 1.5);
   wait(0.4);
@@ -175,7 +175,7 @@ func_F153() {
   level.player.melee.var_E505 = var_1;
   var_2 = func_F130();
   var_3 = "meleeAnim";
-  var_1 _meth_82E4(var_3, var_2["seekerMeleeGrab"], var_1.var_E6E5, 1, 0, 1);
+  var_1 func_82E4(var_3, var_2["seekerMeleeGrab"], var_1.var_E6E5, 1, 0, 1);
   thread func_F152(var_1);
   var_4 = getanimlength(var_2["seekerMeleeGrab"]);
   thread func_F142(1.25, 0.75);
@@ -295,7 +295,7 @@ func_F152(var_0) {
     return;
   }
 
-  level.player _meth_84FE();
+  level.player func_84FE();
   thread lib_0F3D::func_5103(0.5, 2, 20, 10, 5, 60, 10, 0.1);
   thread lib_0F3D::func_5103(1, 2, 20, 4, 50, 90, 10, 0.1);
   thread lib_0F3D::func_510F(1, 50, 0.4);
@@ -368,14 +368,14 @@ func_F149(var_0, var_1, var_2, var_3) {
   var_6 = level.player.melee.var_E505;
   thread lib_0F3D::func_50E8(0.2);
   thread lib_0F3D::func_510F(0.2, 65, 0.4);
-  var_6 _meth_82E4("meleeCounter", var_5, var_6.var_E6E5, 1, 0.2, 1);
+  var_6 func_82E4("meleeCounter", var_5, var_6.var_E6E5, 1, 0.2, 1);
   var_6 thread scripts\sp\anim::func_10CBF(var_6, "meleeCounter");
   var_6 thread scripts\anim\shared::donotetracks("meleeCounter", ::func_F145);
   var_7 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   playworldsound("seeker_expl_beep", self.origin);
   thread func_F116();
-  self _meth_82E7(var_1, var_7, 1, var_2, 1);
+  self func_82E7(var_1, var_7, 1, var_2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_1);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   func_F13E();
@@ -395,7 +395,7 @@ func_F13E(var_0) {
 
 post_meleeexplode() {
   wait(0.1);
-  self _meth_80A1();
+  self func_80A1();
 }
 
 func_F116() {
@@ -433,15 +433,15 @@ func_D4D0(var_0, var_1, var_2, var_3) {
   thread lib_0C64::func_B5D7(var_1);
   var_4 = func_3EB4(var_0, var_1, self.melee.var_F2);
   self clearanim(lib_0A1E::asm_getbodyknob(), 0);
-  self _meth_82EA(var_1, var_4, 1, 0, 1);
+  self func_82EA(var_1, var_4, 1, 0, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   scripts\anim\face::saygenericdialogue("pain");
-  var_5 = lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  var_5 = lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
   var_6 = func_3EB5(var_0, var_1, self.melee.var_F2);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_6, 1, var_2, 1);
+  self func_82EA(var_1, var_6, 1, var_2, 1);
   childthread func_F16D();
-  lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
 }
 
 func_F16D() {

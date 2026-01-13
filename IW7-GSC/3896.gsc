@@ -23,7 +23,7 @@ func_D560(var_0, var_1, var_2, var_3) {
   self.var_9FB2 = 1;
   self setscriptablepartstate("jump", "active", 0);
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8145();
+  var_5 = self func_8145();
   self scragentsetphysicsmode("noclip");
   self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
@@ -43,7 +43,7 @@ func_D560(var_0, var_1, var_2, var_3) {
 func_D562(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8145();
+  var_5 = self func_8145();
   self scragentsetphysicsmode("noclip");
   self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");

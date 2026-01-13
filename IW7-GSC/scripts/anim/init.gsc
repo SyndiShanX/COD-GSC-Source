@@ -165,7 +165,7 @@ main() {
 
   thread ondeath_clearscriptedanim();
   if(getdvarint("ai_iw7", 0) == 1 && !getdvarint("r_reflectionProbeGenerate")) {
-    self _meth_8250(0);
+    self func_8250(0);
     scripts\aitypes\bt_util::opcode::OP_ScriptThreadCallPointer();
     lib_0A1E::func_234D(self.var_1FA9, self.var_1FA8);
     thread func_19F7();
@@ -583,7 +583,7 @@ begingrenadetracking() {
   self endon("death");
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
-    if(isDefined(var_0) && scripts\engine\utility::istrue(var_0._meth_8589)) {
+    if(isDefined(var_0) && scripts\engine\utility::istrue(var_0.func_8589)) {
       continue;
     }
 
@@ -728,7 +728,7 @@ func_5031() {
   func_98E1(self.primaryweapon);
   func_98E1(self.secondaryweapon);
   func_98E1(self.var_101B4);
-  self _meth_82D0();
+  self func_82D0();
   self.a.weaponpos["left"] = "none";
   self.a.weaponpos["right"] = "none";
   self.a.weaponpos["chest"] = "none";

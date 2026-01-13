@@ -139,7 +139,7 @@ func_13059(var_0) {
   var_2 = self.sendclientmatchdata;
   self.sendmatchdata = 0;
   self.sendclientmatchdata = 0;
-  if(self _meth_83D4(var_0, 0)) {
+  if(self func_83D4(var_0, 0)) {
     func_BD18(var_0);
     return 1;
   }
@@ -289,11 +289,11 @@ func_12EA7(var_0) {
 }
 
 func_9D96(var_0) {
-  return self _meth_8199(var_0) || scripts\engine\utility::istrue(self.var_9327);
+  return self func_8199(var_0) || scripts\engine\utility::istrue(self.var_9327);
 }
 
 func_9D98() {
-  return self _meth_8199() || scripts\engine\utility::istrue(self.var_9327);
+  return self func_8199() || scripts\engine\utility::istrue(self.var_9327);
 }
 
 func_9E43(var_0) {
@@ -487,7 +487,7 @@ func_38CB(var_0) {
   } else if(var_1 == "Cover Right") {
     return level.success;
   } else if(var_1 == "Cover Stand" || var_1 == "Cover Stand 3D") {
-    var_2 = self.target_getindexoftarget _meth_8169();
+    var_2 = self.target_getindexoftarget func_8169();
     foreach(var_4 in var_2) {
       if(var_4 == "over") {
         return level.success;
@@ -567,7 +567,7 @@ func_38E8(var_0) {
   if(scripts\engine\utility::isnodecovercrouch(self.target_getindexoftarget)) {
     return level.success;
   } else if(var_1 == "Cover Stand" || var_1 == "Cover Stand 3D") {
-    var_2 = self.target_getindexoftarget _meth_8169();
+    var_2 = self.target_getindexoftarget func_8169();
     foreach(var_4 in var_2) {
       if(var_4 == "over") {
         return level.success;
@@ -1067,7 +1067,7 @@ func_471E(var_0) {
       }
 
       if(!isDefined(var_16)) {
-        var_1A = var_7 _meth_8169();
+        var_1A = var_7 func_8169();
         var_15 = ["full exposed"];
         foreach(var_1C in var_1A) {
           if(var_1C == "over") {
@@ -1200,7 +1200,7 @@ func_3875() {
       return 0;
 
     case "Cover Stand":
-      var_1 = self.target_getindexoftarget _meth_8169();
+      var_1 = self.target_getindexoftarget func_8169();
       for(var_2 = 0; var_2 < var_1.size; var_2++) {
         if(var_1[var_2] == "over") {
           return 1;
@@ -1298,12 +1298,12 @@ func_100AD(var_0) {
   }
 
   lib_0A18::func_F62B(self.isnodeoccupied);
-  if(!lib_0A18::_meth_85B5(var_2)) {
+  if(!lib_0A18::func_85B5(var_2)) {
     return level.failure;
   }
 
   if(scripts\anim\utility_common::canseeenemyfromexposed()) {
-    if(!self _meth_81A2(var_2, var_2.origin)) {
+    if(!self func_81A2(var_2, var_2.origin)) {
       return level.failure;
     }
 
@@ -1314,7 +1314,7 @@ func_100AD(var_0) {
     return level.success;
   }
 
-  if(!self _meth_81A2(var_2, var_2.origin)) {
+  if(!self func_81A2(var_2, var_2.origin)) {
     return level.failure;
   }
 
@@ -1425,7 +1425,7 @@ func_B4ED(var_0, var_1) {
 }
 
 func_2546(var_0) {
-  var_1 = self _meth_80E8();
+  var_1 = self func_80E8();
   if(!isDefined(var_1)) {
     return level.failure;
   }
@@ -1440,7 +1440,7 @@ func_2546(var_0) {
 
   var_2 = self.sendmatchdata;
   self.sendmatchdata = 0;
-  var_3 = self _meth_83D4(var_1);
+  var_3 = self func_83D4(var_1);
   if(!var_3) {
     self.sendmatchdata = var_2;
     return level.failure;

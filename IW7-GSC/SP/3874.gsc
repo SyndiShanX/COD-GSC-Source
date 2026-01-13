@@ -19,7 +19,7 @@ func_9B1E(var_0, var_1) {
   for(var_2 = 0; var_2 < 10; var_2 = var_2 + var_3) {
     if(scripts\asm\asm::asm_isinstate("patrol_move")) {
       if(isDefined(self.a.var_C98E) && gettime() - self.a.var_C98E >= 1500) {
-        self _meth_84F7("reset", self, self.origin);
+        self func_84F7("reset", self, self.origin);
         return;
       }
     }
@@ -28,7 +28,7 @@ func_9B1E(var_0, var_1) {
     wait(var_3);
   }
 
-  self _meth_84F7("reset", self, self.origin);
+  self func_84F7("reset", self, self.origin);
 }
 
 func_9B28(var_0) {
@@ -197,7 +197,7 @@ func_9B23(var_0) {
     }
 
     if(!isDefined(var_6)) {
-      self _meth_84F7("reset", self, self.origin);
+      self func_84F7("reset", self, self.origin);
       return;
     }
 

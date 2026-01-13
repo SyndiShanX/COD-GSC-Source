@@ -15,7 +15,7 @@ reflectionprobe_hide_hp() {}
 
 reflectionprobe_hide_front() {}
 
-_meth_8470() {}
+func_8470() {}
 
 allowmantle() {}
 

@@ -45,7 +45,7 @@ func_BCB1() {
     var_4 = % stand_and_crouch;
   }
 
-  self _meth_82E3("runanim", var_1, var_4, 1, var_2, self.moveplaybackrate, 1);
+  self func_82E3("runanim", var_1, var_4, 1, var_2, self.moveplaybackrate, 1);
   func_478E(var_1);
   scripts\anim\run::func_F7A9(scripts\anim\utility::func_B027("cqb", "move_b"), scripts\anim\utility::func_B027("cqb", "move_l"), scripts\anim\utility::func_B027("cqb", "move_r"));
   thread scripts\anim\run::setcombatstandmoveanimweights("cqb");
@@ -90,13 +90,13 @@ func_53C3() {
 func_4790() {
   self endon("movemode");
   self orientmode("face motion");
-  var_0 = "reload_" + scripts\anim\combat_utility::_meth_81EB();
+  var_0 = "reload_" + scripts\anim\combat_utility::func_81EB();
   var_1 = scripts\anim\utility::func_B027("cqb", "reload");
   if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
   }
 
-  self _meth_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, % body, 1, 0.25);
   func_478E(var_1);
   scripts\anim\run::func_F7A9(scripts\anim\utility::func_B027("cqb", "move_b"), scripts\anim\utility::func_B027("cqb", "move_l"), scripts\anim\utility::func_B027("cqb", "move_r"));
   thread scripts\anim\run::setcombatstandmoveanimweights("cqb");

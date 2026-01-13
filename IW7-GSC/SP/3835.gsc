@@ -409,11 +409,11 @@ func_FDE8(var_0) {
 func_7304() {
   stopFXOnTag(scripts\engine\utility::getfx("forklift_red_flash"), self, "tag_light_top_red");
   if(isDefined(self.var_5BC8)) {
-    self.var_5BC8 _meth_81D0();
+    self.var_5BC8 func_81D0();
     self.var_5BC8 delete();
   }
 
-  self _meth_81D0();
+  self func_81D0();
   self delete();
 }
 
@@ -517,7 +517,7 @@ func_FDBA(var_0) {
   }
 
   if(isai(var_0)) {
-    var_0 _meth_81D0();
+    var_0 func_81D0();
   }
 
   var_0 delete();
@@ -601,7 +601,7 @@ func_7C60() {
 
 func_7C5F() {
   if(!isDefined(level.var_FDBC)) {
-    level.var_FDBC = level.player _meth_84C6("lastCompletedMission");
+    level.var_FDBC = level.player func_84C6("lastCompletedMission");
     if(!scripts\sp\utility::func_9BB5()) {
       if(isDefined(func_4EDF())) {
         level.var_FDBC = func_4EDF();
@@ -640,23 +640,23 @@ func_4EE0() {
   var_0 = undefined;
   switch (level.script) {
     case "shipcrib_europa":
-      level.player _meth_84C7("lastCompletedMission", "sa_moon");
+      level.player func_84C7("lastCompletedMission", "sa_moon");
       var_0 = "sa_moon";
       break;
 
     case "shipcrib_titan":
-      level.player _meth_84C7("scTitanFirstPlay", 0);
-      level.player _meth_84C7("lastCompletedMission", "sa_assassination");
+      level.player func_84C7("scTitanFirstPlay", 0);
+      level.player func_84C7("lastCompletedMission", "sa_assassination");
       var_0 = "sa_assassination";
       break;
 
     case "shipcrib_rogue":
-      level.player _meth_84C7("lastCompletedMission", "titanjackal");
+      level.player func_84C7("lastCompletedMission", "titanjackal");
       var_0 = "titan";
       break;
 
     case "shipcrib_prisoner":
-      level.player _meth_84C7("lastCompletedMission", "rogue");
+      level.player func_84C7("lastCompletedMission", "rogue");
       var_0 = "rogue";
       break;
   }
@@ -669,56 +669,56 @@ func_4EE1() {
   switch (level.var_10CDA) {
     case "sc_sa_assa":
       var_0 = "sa_assassination";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "sa_assassination");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "sa_assassination");
       break;
 
     case "sc_sa_emp":
       var_0 = "sa_empambush";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "sa_empambush");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "sa_empambush");
       break;
 
     case "sc_sa_vips":
       var_0 = "sa_vips";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "sa_vips");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "sa_vips");
       break;
 
     case "sc_sa_wound":
       var_0 = "sa_wounded";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "sa_wounded");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "sa_wounded");
       break;
 
     case "sc_ja_asteroid":
       var_0 = "ja_asteroid";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "ja_asteroid");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "ja_asteroid");
       break;
 
     case "sc_ja_mining":
       var_0 = "ja_mining";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "ja_mining");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "ja_mining");
       break;
 
     case "sc_ja_spacestation":
       var_0 = "ja_spacestation";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "ja_spacestation");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "ja_spacestation");
       break;
 
     case "sc_ja_titan":
       var_0 = "ja_titan";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "ja_titan");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "ja_titan");
       break;
 
     case "sc_ja_wreckage":
       var_0 = "ja_wreckage";
-      level.player _meth_84C7("scTitanFirstPlay", 1);
-      level.player _meth_84C7("lastCompletedMission", "ja_wreckage");
+      level.player func_84C7("scTitanFirstPlay", 1);
+      level.player func_84C7("lastCompletedMission", "ja_wreckage");
       break;
   }
 
@@ -825,7 +825,7 @@ func_9CB4() {
 }
 
 func_9870() {
-  var_0 = level.player _meth_84C6("scTitanFirstPlay");
+  var_0 = level.player func_84C6("scTitanFirstPlay");
   if((!isDefined(var_0) || var_0 == 0) && level.script == "shipcrib_titan") {
     var_1 = 1;
   } else {
@@ -836,7 +836,7 @@ func_9870() {
 }
 
 func_986C() {
-  level.var_EFF2 = level.player _meth_84C6("scTaughtOpsmap");
+  level.var_EFF2 = level.player func_84C6("scTaughtOpsmap");
 }
 
 func_FD77(var_0) {
@@ -1306,7 +1306,7 @@ func_3DDE(var_0, var_1) {
     scripts\sp\utility::func_12641(var_2);
     if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_0)) {
       level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_0);
-      level.player _meth_84C7("weaponsLoaded", var_0, 1);
+      level.player func_84C7("weaponsLoaded", var_0, 1);
     }
   }
 }
@@ -1341,7 +1341,7 @@ func_FDD6(var_0, var_1) {
 func_37D0(var_0, var_1, var_2) {
   level.player playSound("sc_armory_player_hand_camo_change");
   var_0 setotherent(level.player);
-  var_0 _meth_854E();
+  var_0 func_854E();
   var_3 = var_0 gettagorigin("j_elbow_le");
   var_4 = var_0 gettagangles("j_elbow_le");
   var_3 = var_3 + anglesToForward(var_4) * 8;
@@ -1353,7 +1353,7 @@ func_37D0(var_0, var_1, var_2) {
   wait(0.5);
   var_0 setscriptablepartstate("camouflage", "camouflageOn", 1);
   wait(0.5);
-  level.player _meth_84C7("currentViewModel", var_2);
+  level.player func_84C7("currentViewModel", var_2);
   var_0 func_FDD7(1);
   var_0 setscriptablepartstate("camouflage", "camouflageOnInstant", 1);
   scripts\engine\utility::waitframe();
@@ -1388,7 +1388,7 @@ func_FDD7(var_0) {
   }
 
   level.player givegoproattachments(var_1);
-  level.player _meth_8574(var_2);
+  level.player func_8574(var_2);
 }
 
 func_FE02(var_0, var_1, var_2) {
@@ -1399,7 +1399,7 @@ func_FE02(var_0, var_1, var_2) {
 }
 
 func_FD9D() {
-  var_0 = level.player _meth_84C6("currentViewModel");
+  var_0 = level.player func_84C6("currentViewModel");
   if(!isDefined(var_0)) {
     var_0 = "viewmodel_base_viewhands_iw7";
   } else if(var_0 == "") {

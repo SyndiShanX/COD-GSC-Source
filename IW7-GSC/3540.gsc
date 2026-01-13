@@ -1143,8 +1143,8 @@ quadfeederon() {
     self.quadfeeder = 1;
     setpassivevalue("passive_berserk", 1);
     scripts\mp\utility\game::giveperk("specialty_overcharge");
-    self _meth_85C1(65);
-    var_0 = self _meth_85C0();
+    self func_85C1(65);
+    var_0 = self func_85C0();
 
     if(var_0 < 0) {
       var_0 = 100;
@@ -1181,8 +1181,8 @@ unsetquadfeedereffect() {
     self.quadfeeder = 0;
     setpassivevalue("passive_berserk", undefined);
     scripts\mp\utility\game::removeperk("specialty_overcharge");
-    self _meth_85C2();
-    var_0 = self _meth_85C0();
+    self func_85C2();
+    var_0 = self func_85C0();
     var_0 = min(var_0 + 20, 100);
     self getweaponrankinfomaxxp(int(var_0));
     self notify("end_quadFeederEffect");
@@ -2001,7 +2001,7 @@ func_89AB(var_0, var_1) {
   var_1 endon("diconnect");
   level thread handlegoreeffect(var_1);
   wait 0.05;
-  var_2 = var_1 _meth_8113();
+  var_2 = var_1 func_8113();
 
   if(isDefined(var_2)) {
     var_2 hide();
@@ -2408,7 +2408,7 @@ updatemodeswitchweaponkills(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  if(scripts\mp\utility\game::_meth_8238(var_2) != "primary") {
+  if(scripts\mp\utility\game::func_8238(var_2) != "primary") {
     return;
   }
   var_4 = scripts\mp\utility\game::getweaponrootname(var_2);
@@ -2423,7 +2423,7 @@ updatemodeswitchweaponkills(var_0, var_1, var_2) {
   if(!isDefined(var_7)) {
     return;
   }
-  var_8 = var_0 _meth_8519(var_2);
+  var_8 = var_0 func_8519(var_2);
 
   if(!isDefined(var_7.killinaltmode) || var_7.killinaltmode == var_8) {
     var_7.numkills++;
@@ -2447,7 +2447,7 @@ updatemodeswitchweaponkills(var_0, var_1, var_2) {
     var_0 thread scripts\mp\rank::scoreeventpopup(var_10);
     var_11 = scripts\mp\rank::getscoreinfovalue(var_10);
     var_0 thread scripts\mp\rank::scorepointspopup(var_11);
-    var_0 scripts\mp\killstreaks\killstreaks::_meth_83A7(var_10, var_11);
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A7(var_10, var_11);
   }
 
   var_7.killinaltmode = var_8;
@@ -2458,7 +2458,7 @@ getmodeswitchkillweaponkey(var_0) {
 }
 
 handlemeleeconeexplodeonkillpassive(var_0, var_1, var_2, var_3) {
-  if(!var_0 _meth_8519(var_2)) {
+  if(!var_0 func_8519(var_2)) {
     return;
   }
   if(var_3 != "MOD_MELEE") {
@@ -2589,7 +2589,7 @@ handleleaderkillscorepassive(var_0, var_1, var_2) {
   var_0 thread scripts\mp\rank::scoreeventpopup(var_8);
   var_9 = scripts\mp\rank::getscoreinfovalue(var_8);
   var_0 thread scripts\mp\rank::scorepointspopup(var_9);
-  var_0 scripts\mp\killstreaks\killstreaks::_meth_83A7(var_8, var_9);
+  var_0 scripts\mp\killstreaks\killstreaks::func_83A7(var_8, var_9);
 }
 
 handlepowermeleeondamagepassive(var_0, var_1, var_2, var_3) {

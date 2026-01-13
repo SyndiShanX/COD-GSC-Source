@@ -578,7 +578,7 @@ sentry_handledeath() {
   self setsentryowner(undefined);
 
   if(isDefined(self.inuseby)) {
-    self _meth_83D3(self.inuseby);
+    self func_83D3(self.inuseby);
   }
 
   self setturretminimapvisible(0);

@@ -392,7 +392,7 @@ func_3C52(var_0, var_1) {
   self ghostlaunched("anim deltas");
   self scragentsetanimscale(1, 1);
   scripts\mp\agents\_scriptedagents::func_CED6(var_1, randomint(self getanimentrycount(var_1)), "change_anim_class");
-  self _meth_82A3(var_0);
+  self func_82A3(var_0);
   scripts\mp\agents\_scriptedagents::setstatelocked(0, "ChangeAnimClass");
   self.inplayerportableradar = 0;
   self scragentsetscripted(0);
@@ -411,7 +411,7 @@ missile_setflightmodetop(var_0) {
   return var_8[2];
 }
 
-_meth_8088(var_0, var_1, var_2, var_3) {
+func_8088(var_0, var_1, var_2, var_3) {
   var_4 = getanimlength(var_0);
   var_5 = getmovedelta(var_0, 0, var_3 / var_4);
   var_6 = rotatevector(var_5, var_2);
@@ -626,7 +626,7 @@ func_13D9B() {
   var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq;
   if(!var_0 && isplayer(self.curmeleetarget) || isagent(self.curmeleetarget)) {
     var_1 = undefined;
-    var_1 = self.curmeleetarget _meth_845B();
+    var_1 = self.curmeleetarget func_845B();
     if(isDefined(var_1) && isDefined(var_1.var_336) && var_1.var_336 == "care_package") {
       var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
     }
@@ -650,7 +650,7 @@ func_C04C(var_0) {
   return !isDefined(var_0.var_13FAA);
 }
 
-_meth_8252() {
+func_8252() {
   return level.zombiedlclevel;
 }
 

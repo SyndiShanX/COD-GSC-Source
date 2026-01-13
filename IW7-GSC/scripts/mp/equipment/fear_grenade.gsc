@@ -16,7 +16,7 @@ init() {
   func_49CF("projectile_m67fraggrenade", "vfx_fear_grenade_explode_frag", "grenade_explode_scr", undefined, 2);
   func_49CF("projectile_m67fraggrenade", "vfx_fear_grenade_explode_plasma", "grenade_explode_scr", undefined, 2);
   func_49CF("projectile_m67fraggrenade", "vfx_fear_grenade_explode_blackhole", "blackhole_grenade_explode_default", 75, 0.5);
-  level.var_6BBA._meth_8283 = ["mp_fullbody_synaptic_1"];
+  level.var_6BBA.func_8283 = ["mp_fullbody_synaptic_1"];
   level.var_6BBA.var_3251 = ["drone_ak12_fire_npc"];
   scripts\mp\powerloot::func_DF06("power_fearGrenade", ["passive_increased_duration", "passive_increased_damage", "passive_increased_radius"]);
 }
@@ -238,7 +238,7 @@ func_E854() {
       var_4 = (self.angles[0], 180 + self.angles[1], self.angles[2]);
       var_0.origin = var_2;
       var_0.angles = var_4;
-      var_5 = level.var_6BBA._meth_8283[randomint(level.var_6BBA._meth_8283.size)];
+      var_5 = level.var_6BBA.func_8283[randomint(level.var_6BBA.func_8283.size)];
       var_0 setModel(var_5);
     }
 

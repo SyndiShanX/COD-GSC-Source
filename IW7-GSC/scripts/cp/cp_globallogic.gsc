@@ -234,7 +234,7 @@ func_4631() {
   scripts\cp\cp_merits::init();
   thread scripts\cp\contracts_coop::init();
   level thread func_E896();
-  level thread _meth_8489();
+  level thread func_8489();
   level thread func_10D9F();
   game["gamestarted"] = 1;
 }
@@ -249,8 +249,8 @@ func_E256() {
   level.gameended = 0;
   level.var_72B3 = 0;
   level.hostforcedend = 0;
-  level._meth_8487 = 10;
-  level.ingraceperiod = level._meth_8487;
+  level.func_8487 = 10;
+  level.ingraceperiod = level.func_8487;
   level.noragdollents = getEntArray("noragdoll", "targetname");
   level.friendlyfire = 0;
   level.starttime = gettime();
@@ -281,7 +281,7 @@ func_E896() {
   setomnvar("ui_prematch_period", 0);
 }
 
-_meth_8489() {
+func_8489() {
   level notify("coop_grace_period");
   level endon("game_ended");
   level endon("coop_grace_period");
@@ -523,9 +523,9 @@ func_108F3(var_0) {
   self notify("spawned");
   self notify("started_spawnPlayer");
   if(level.gameended) {
-    self spawn(getspawnorigin(self, 1), _meth_8132(self));
+    self spawn(getspawnorigin(self, 1), func_8132(self));
   } else {
-    self spawn(getspawnorigin(self), _meth_8132(self));
+    self spawn(getspawnorigin(self), func_8132(self));
   }
 
   func_E262();
@@ -660,7 +660,7 @@ getspawnorigin(var_0, var_1) {
   return var_2;
 }
 
-_meth_8132(var_0) {
+func_8132(var_0) {
   var_1 = undefined;
   if(isDefined(var_0.forcespawnangles)) {
     var_1 = var_0.forcespawnangles;

@@ -3440,7 +3440,7 @@ is_true(var_0) {
 }
 
 player_is_in_jackal() {
-  if(isDefined(level.player _meth_8473())) {
+  if(isDefined(level.player func_8473())) {
     return 1;
   } else {
     return 0;
@@ -3766,7 +3766,7 @@ allow_reload(var_0, var_1) {
     self allowreload(0);
 
     if(!isDefined(var_1) || !var_1) {
-      self _meth_8545();
+      self func_8545();
     }
   }
 }

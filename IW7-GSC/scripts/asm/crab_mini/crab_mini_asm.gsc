@@ -318,7 +318,7 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 }
 
 doteleporthack(var_0, var_1, var_2, var_3) {
-  var_6 = self _meth_8146();
+  var_6 = self func_8146();
   self setorigin(var_6, 0);
   var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;

@@ -307,7 +307,7 @@ func_6961(var_0, var_1, var_2) {
     var_2 func_1296C(var_0, var_2);
     var_2 func_6208(var_2);
     var_2 func_FEBF(var_2);
-    var_2 _meth_832F(var_0, var_2);
+    var_2 func_832F(var_0, var_2);
   }
 
   if(!var_1.var_45C5.in_afterlife_arcade) {
@@ -624,7 +624,7 @@ func_1103E(var_0) {
   }
 }
 
-_meth_832F(var_0, var_1) {
+func_832F(var_0, var_1) {
   if(!scripts\engine\utility::istrue(var_0.song_playing)) {
     if(var_1.var_FEBA <= 0) {
       playsoundatpos(var_0.origin, "shooting_gall_anc_failure");

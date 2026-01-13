@@ -801,13 +801,13 @@ set_interaction_point(var_0, var_1) {
 
   if(interaction_is_weapon_buy(var_0)) {
     if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
-      var_5 = _meth_8228(var_0.script_noteworthy);
-      var_6 = _meth_8220(var_0.script_noteworthy);
+      var_5 = func_8228(var_0.script_noteworthy);
+      var_6 = func_8220(var_0.script_noteworthy);
       self.interaction_trigger sethintstringparams(var_5, var_6);
     }
   } else if(interaction_is_weapon_upgrade(var_0)) {
     var_7 = self getcurrentweapon();
-    var_5 = _meth_8228(var_7);
+    var_5 = func_8228(var_7);
 
     if(scripts\cp\cp_weapon::can_upgrade(var_7)) {
       if(isDefined(var_5)) {
@@ -853,7 +853,7 @@ set_interaction_point(var_0, var_1) {
   self.interaction_trigger makeusable();
 }
 
-_meth_8228(var_0) {
+func_8228(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
@@ -979,7 +979,7 @@ _meth_8228(var_0) {
   }
 }
 
-_meth_8220(var_0) {
+func_8220(var_0) {
   return int(level.interactions[var_0].cost);
 }
 
@@ -994,7 +994,7 @@ func_F422(var_0, var_1) {
     if(isDefined(var_2) && !isstring(var_2) && var_2 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
       var_3 = scripts\cp\utility::getrawbaseweaponname(var_1.script_noteworthy);
       var_4 = scripts\cp\cp_weapon::get_weapon_level(var_3);
-      var_5 = _meth_8228(var_1.script_noteworthy);
+      var_5 = func_8228(var_1.script_noteworthy);
 
       if(var_4 > 1) {
         self.interaction_trigger sethintstringparams(int(4500), var_5);
@@ -1045,11 +1045,11 @@ func_F474(var_0) {
     }
 
     if(var_1.size > 2) {
-      var_5 = _meth_8228(var_1[1]);
-      var_6 = _meth_8228(var_1[2]);
+      var_5 = func_8228(var_1[1]);
+      var_6 = func_8228(var_1[2]);
       var_0.interaction_trigger sethintstringparams(var_5, var_6);
     } else {
-      var_5 = _meth_8228(var_1[1]);
+      var_5 = func_8228(var_1[1]);
       var_0.interaction_trigger sethintstringparams(var_5);
     }
   }

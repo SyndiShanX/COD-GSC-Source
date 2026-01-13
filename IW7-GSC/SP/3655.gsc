@@ -14,7 +14,7 @@ func_4D8A() {
   self getwholescenedurationmin(var_0);
   thread func_A4D9();
   while(lib_0E4F::func_9C7B()) {
-    while(level.player _meth_8439() || level.player _meth_843B() || level.player gettimeremainingpercentage()) {
+    while(level.player func_8439() || level.player func_843B() || level.player gettimeremainingpercentage()) {
       wait(0.05);
     }
 
@@ -37,7 +37,7 @@ func_4D8A() {
     var_6 = undefined;
     var_7 = undefined;
     var_8 = 0;
-    if(self _meth_843B()) {
+    if(self func_843B()) {
       var_1 = var_5 * -1;
       var_9 = 0.1;
       var_0A = 0.1;
@@ -117,7 +117,7 @@ func_4D8A() {
 
     if(func_9C57()) {
       thread scripts\sp\utility::play_sound_on_entity("land");
-      self _meth_80A6();
+      self func_80A6();
     } else {
       scripts\engine\utility::delaythread(var_0D, ::func_AB9C, "player_SwimWaterCurrent", (0, 0, 0), 0.5);
     }
@@ -159,7 +159,7 @@ func_11ABF() {
   while(level.player scripts\sp\utility::func_65DB("player_gravity_off")) {
     var_0 = self getnormalizedmovement();
     var_1 = length(var_0);
-    if((self buttonpressed("BUTTON_LSTICK") && var_1 > 0.3) || self _meth_843B() || self gettimeremainingpercentage()) {
+    if((self buttonpressed("BUTTON_LSTICK") && var_1 > 0.3) || self func_843B() || self gettimeremainingpercentage()) {
       if(self.var_4D8B) {
         self notify("juke");
       }

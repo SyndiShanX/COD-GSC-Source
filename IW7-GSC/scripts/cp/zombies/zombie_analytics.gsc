@@ -156,7 +156,7 @@ func_97A4(var_0) {
     }
   }
 
-  var_5 = var_0._meth_8235;
+  var_5 = var_0.func_8235;
   if(isDefined(var_5)) {
     foreach(var_7 in var_5) {
       var_0.weapon_name_log = scripts\cp\utility::getbaseweaponname(var_7);

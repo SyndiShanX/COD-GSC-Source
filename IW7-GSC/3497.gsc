@@ -162,7 +162,7 @@ func_A4AC() {
   self endon("jugg_removed");
   thread func_A4AB();
   scripts\engine\utility::waittill_any("death", "joined_team", "joined_spectators", "lost_juggernaut");
-  self _meth_80DB();
+  self func_80DB();
   self.isjuggernaut = 0;
   self.isjuggernautdef = 0;
   self.isjuggernautgl = 0;

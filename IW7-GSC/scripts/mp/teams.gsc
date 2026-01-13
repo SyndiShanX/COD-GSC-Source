@@ -252,7 +252,7 @@ func_12F37() {
       return;
     }
 
-    if(!_meth_81A2()) {
+    if(!func_81A2()) {
       game["BalanceTeamsNextRound"] = 1;
       return;
     }
@@ -263,10 +263,10 @@ func_12F37() {
   level endon("game_ended");
   for(;;) {
     if(level.teambalance) {
-      if(!_meth_81A2()) {
+      if(!func_81A2()) {
         scripts\mp\hud_message::showerrormessagetoallplayers("MP_AUTOBALANCE_SECONDS", 15);
         wait(15);
-        if(!_meth_81A2()) {
+        if(!func_81A2()) {
           level balanceteams();
         }
       }
@@ -278,7 +278,7 @@ func_12F37() {
   }
 }
 
-_meth_81A2() {
+func_81A2() {
   level.team["allies"] = 0;
   level.team["axis"] = 0;
   var_0 = level.players;
@@ -826,7 +826,7 @@ isonladder(var_0) {
   return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 1);
 }
 
-_meth_81B7(var_0) {
+func_81B7(var_0) {
   return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 2);
 }
 
@@ -834,19 +834,19 @@ ismlgspectator(var_0) {
   return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 4);
 }
 
-_meth_81A8(var_0) {
+func_81A8(var_0) {
   return tablelookupistring("mp\factionTable.csv", 0, game[var_0], 3);
 }
 
-_meth_81B2(var_0) {
+func_81B2(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 5);
 }
 
-_meth_81B1(var_0) {
+func_81B1(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 6);
 }
 
-_meth_81B0(var_0) {
+func_81B0(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 17);
 }
 
@@ -866,7 +866,7 @@ ismeleeing(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 10);
 }
 
-_meth_81AA(var_0) {
+func_81AA(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 11);
 }
 
@@ -874,18 +874,18 @@ ismantling(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 12);
 }
 
-_meth_81AC(var_0) {
+func_81AC(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 13);
 }
 
-_meth_81A4(var_0) {
+func_81A4(var_0) {
   return (scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 14)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 15)), scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_0], 16)));
 }
 
-_meth_81A5(var_0) {
+func_81A5(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 18);
 }
 
-_meth_81A6(var_0) {
+func_81A6(var_0) {
   return tablelookup("mp\factionTable.csv", 0, game[var_0], 19);
 }

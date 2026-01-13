@@ -107,7 +107,7 @@ checkforearlyteleport(var_0) {
     return 0;
   }
 
-  var_3 = self _meth_84F9(var_2);
+  var_3 = self func_84F9(var_2);
   if(!isDefined(var_3)) {
     return 0;
   }

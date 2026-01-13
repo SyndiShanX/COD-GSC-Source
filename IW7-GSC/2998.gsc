@@ -508,7 +508,7 @@ func_107FC(var_0, var_1, var_2, var_3, var_4) {
   var_6 setCanDamage(1);
   var_6 give_player_session_tokens(var_0.var_B8F9);
   var_6 getrandomweaponfromcategory();
-  var_6 _meth_8534(1);
+  var_6 func_8534(1);
   var_6.class_progression_init = var_0;
 
   if(var_0.team != "allies") {}
@@ -549,18 +549,18 @@ func_107FC(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_0.var_45E4)) {
     var_6.var_45E4 = var_0.var_45E4;
-    var_6 _meth_82C9(var_0.var_45E4, "yaw");
+    var_6 func_82C9(var_0.var_45E4, "yaw");
   } else {
     var_6.var_45E4 = 5;
-    var_6 _meth_82C9(5, "yaw");
+    var_6 func_82C9(5, "yaw");
   }
 
   if(isDefined(var_0.var_45E3)) {
     var_6.var_45E3 = var_0.var_45E3;
-    var_6 _meth_82C9(var_0.var_45E3, "pitch");
+    var_6 func_82C9(var_0.var_45E3, "pitch");
   } else {
     var_6.var_45E3 = 5;
-    var_6 _meth_82C9(5, "pitch");
+    var_6 func_82C9(5, "pitch");
   }
 
   var_6 settargetentity(var_6, (0, 0, 0));
@@ -1880,9 +1880,9 @@ func_12A02(var_0) {
   self endon("death");
   self notify("turret_hold_still");
   self endon("turret_hold_still");
-  self _meth_8535(1);
+  self func_8535(1);
   wait(var_0);
-  self _meth_8535(0);
+  self func_8535(0);
 }
 
 func_39E3(var_0, var_1) {
@@ -2100,7 +2100,7 @@ func_B2CA(var_0, var_1) {
 
   if(isDefined(self) && isDefined(self.var_12A01) && self.var_12A01.size > 0) {
     foreach(var_5 in self.var_12A01) {
-      if(isDefined(var_5) && isDefined(var_5.var_1153C) && var_5.var_1153C == 1 && self _meth_8540(var_5.origin)) {
+      if(isDefined(var_5) && isDefined(var_5.var_1153C) && var_5.var_1153C == 1 && self func_8540(var_5.origin)) {
         self settargetentity(var_5, (0, 0, 0));
         return;
       }
@@ -2120,7 +2120,7 @@ func_B2CA(var_0, var_1) {
   if(isDefined(level.var_1678) && isDefined(self.type) && self.type == "cap_turret_small_constant") {
     var_3 = func_B2CB(level.var_1678, var_3, var_2);
 
-    if(isDefined(self.var_114FB) && self.var_114FB != self && self _meth_8540(self.var_114FB.origin)) {
+    if(isDefined(self.var_114FB) && self.var_114FB != self && self func_8540(self.var_114FB.origin)) {
       if(isDefined(var_1) && self.classname == "misc_turret") {
         self settargetentity(self.var_114FB, (0, 0, 0));
         return;
@@ -2132,7 +2132,7 @@ func_B2CA(var_0, var_1) {
     if(!isDefined(level.var_C0B7) || isDefined(level.var_C0B7) && level.var_C0B7 == 0) {
       if(isDefined(self.var_C841) && isDefined(self.var_C841.var_11578) && self.var_C841.var_11578) {
         if(isDefined(var_1) && self.classname == "misc_turret" && (!isDefined(self.var_10241.var_102A6) || !self.var_10241.var_102A6)) {
-          var_7 = self _meth_8540(level.var_D127.origin);
+          var_7 = self func_8540(level.var_D127.origin);
           var_8 = distancesquared(self.origin, level.var_D127.origin);
 
           if(var_7 && var_8 < 225000000) {
@@ -2154,7 +2154,7 @@ func_B2CA(var_0, var_1) {
   }
 
   if(isDefined(var_1) && self.classname == "misc_turret") {
-    if(self.var_114FB == self || scripts\engine\utility::is_true(self.var_10241.var_102A6) || !self _meth_8540(self.var_114FB.origin)) {
+    if(self.var_114FB == self || scripts\engine\utility::is_true(self.var_10241.var_102A6) || !self func_8540(self.var_114FB.origin)) {
       func_11547();
     } else {
       self settargetentity(self.var_114FB, (0, 0, 0));
@@ -2166,8 +2166,8 @@ func_12A46(var_0) {
   self notify("track_new_target");
   self endon("track_new_target");
   self endon("death");
-  self _meth_82C9(0, "yaw");
-  self _meth_82C9(0, "pitch");
+  self func_82C9(0, "yaw");
+  self func_82C9(0, "pitch");
   var_1 = (0, 0, 0);
 
   for(;;) {
@@ -2210,7 +2210,7 @@ func_11547() {
     while(var_0 < 10) {
       var_1 = scripts\engine\utility::random(self.var_C841.var_102A9);
 
-      if(self _meth_8540(var_1.origin)) {
+      if(self func_8540(var_1.origin)) {
         self.var_114FB = var_1;
         self.var_102A8 = var_1;
         self settargetentity(self.var_114FB, (0, 0, 0));
@@ -3950,8 +3950,8 @@ func_4335(var_0, var_1, var_2, var_3) {
         if(var_2) {
           var_9 makeentitysentient("axis");
           var_9.ignoreme = 1;
-          var_9 _meth_84BE("turret");
-          var_9 _meth_8339(0);
+          var_9 func_84BE("turret");
+          var_9 func_8339(0);
           var_4.missiles[var_4.missiles.size] = var_9;
           var_9.group = var_4;
         }

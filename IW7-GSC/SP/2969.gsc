@@ -78,7 +78,7 @@ func_126EF(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 func_7D1B(var_0, var_1) {
-  var_2 = self _meth_8178(var_1);
+  var_2 = self func_8178(var_1);
   if(!isDefined(var_0.var_380)) {
     var_3 = -1;
     return var_3;

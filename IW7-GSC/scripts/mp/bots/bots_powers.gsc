@@ -117,7 +117,7 @@ func_5234(var_0, var_1) {
     var_2 = 0;
     var_3 = 1400;
     var_4 = distance(self.origin, self.isnodeoccupied.origin);
-    if(self _meth_8520()) {
+    if(self func_8520()) {
       var_2 = 700;
     }
 
@@ -152,7 +152,7 @@ func_8BEE() {
     return 0;
   }
 
-  if(self botcanseeentity(self.isnodeoccupied) && self _meth_8520()) {
+  if(self botcanseeentity(self.isnodeoccupied) && self func_8520()) {
     return 1;
   }
 

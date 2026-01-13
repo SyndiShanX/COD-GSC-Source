@@ -63,7 +63,7 @@ func_1166B() {
       continue;
     }
 
-    var_2 = _meth_81C1(320);
+    var_2 = func_81C1(320);
     var_3 = getdvarint("teleport_minDrawDistanceForFX", 16);
     if(distance2dsquared(var_2, self.origin) <= var_3 * var_3) {
       continue;
@@ -92,7 +92,7 @@ func_10148(var_0) {
   self.var_1166A hide();
 }
 
-_meth_81C1(var_0) {
+func_81C1(var_0) {
   var_1 = self.origin + (0, 0, 0);
   var_2 = anglesToForward(self.angles);
   var_3 = var_1 + var_2 * var_0;

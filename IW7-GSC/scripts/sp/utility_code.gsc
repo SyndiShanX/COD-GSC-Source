@@ -75,7 +75,7 @@ func_BF01(var_0) {
     if(isDefined(self.var_5955)) {
       self.var_5955 = undefined;
     } else {
-      thread scripts\sp\colors::_meth_8467();
+      thread scripts\sp\colors::func_8467();
     }
   }
 
@@ -778,7 +778,7 @@ func_764F(var_0) {
 }
 
 func_7647() {
-  return level.player _meth_810B();
+  return level.player func_810B();
 }
 
 func_7648(var_0) {
@@ -943,7 +943,7 @@ func_A5CF(var_0) {
   }
 
   playFXOnTag(scripts\engine\utility::getfx("flesh_hit"), self, "tag_eye");
-  self _meth_81D0(level.player.origin);
+  self func_81D0(level.player.origin);
 }
 
 func_12E1F(var_0, var_1) {
@@ -952,7 +952,7 @@ func_12E1F(var_0, var_1) {
   for(;;) {
     if(self.var_99E5 > 0.0001 && gettime() > 300) {
       if(!var_2) {
-        self _meth_8244(var_1);
+        self func_8244(var_1);
         var_2 = 1;
       }
     } else if(var_2) {

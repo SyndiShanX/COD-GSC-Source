@@ -399,7 +399,7 @@ func_8836() {
             level.player.var_883D = "transitiontorobot";
             level.player.var_883A = 1;
             thread player_lookat_ent_wrapper(self.var_AEFA, 0.65);
-            self _meth_80A6();
+            self func_80A6();
             self notify("hack_control_target");
             level.player scripts\sp\utility::func_2B76(0, 0.5);
             self forceplaygestureviewmodel("ges_hack_lock_fire", undefined, 0.2, 0, 1, 1);
@@ -408,12 +408,12 @@ func_8836() {
             self notify("hack_intro_done");
             self getradiuspathsighttestnodes();
             level.var_D365 = scripts\sp\utility::func_10639("player_arms");
-            var_5 = level.player _meth_84C6("currentViewModel");
+            var_5 = level.player func_84C6("currentViewModel");
             if(isDefined(var_5)) {
               level.var_D365 setModel(var_5);
             }
 
-            level.var_D365 _meth_81E2(self, "tag_origin", (0, 0, 0), (0, 0, 0), 1);
+            level.var_D365 func_81E2(self, "tag_origin", (0, 0, 0), (0, 0, 0), 1);
             level.var_D365 hide();
             level.player scripts\sp\utility::func_65E3("hack_control_outro_done");
             break;
@@ -456,7 +456,7 @@ hacking_end() {
   setomnvar("ui_hack_target_entity", undefined);
   level notify("unpause_jackal_streak_message");
   self notify("hack_device_closed");
-  self _meth_80A6();
+  self func_80A6();
   scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_reload, 1);
   scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_ads, 1);
   scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_offhand_primary_weapons, 1);
@@ -487,7 +487,7 @@ func_882D() {
 }
 
 func_381E() {
-  if(!self _meth_843C() || self getteamsize()) {
+  if(!self func_843C() || self getteamsize()) {
     return 0;
   }
 
@@ -547,7 +547,7 @@ func_882C() {
   thread func_87E4();
   scripts\sp\utility::func_2B76(0.75, 0.2);
   self playSound("hack_open_targeting_hud_lr");
-  level.player _meth_82C2("hacking_targeting_hud", "mix", "filter", "ambient");
+  level.player func_82C2("hacking_targeting_hud", "mix", "filter", "ambient");
   scripts\sp\utility::func_9199("hackTarget", 1);
   setomnvar("ui_wrist_pc", 5);
 }
@@ -755,7 +755,7 @@ func_87AF() {
   scripts\engine\utility::noself_delaycall(0.6, ::setomnvar, "ui_wrist_pc", 0);
   thread scripts\engine\utility::flag_set_delayed("hack_hud_control_intro_finished", 1);
   scripts\engine\utility::delaycall(0.65, ::playsound, "hack_start_hud_lr");
-  level.player scripts\engine\utility::delaycall(0.65, ::_meth_82C2, "hacking_hud_transition", "mix");
+  level.player scripts\engine\utility::delaycall(0.65, ::func_82C2, "hacking_hud_transition", "mix");
 }
 
 func_87B2() {
@@ -782,7 +782,7 @@ func_87B0() {
   scripts\engine\utility::noself_delaycall(1.5, ::setomnvar, "ui_hack_targeting_status", "searching");
   thread scripts\engine\utility::flag_set_delayed("hack_hud_control_outro_finished", 0.7);
   scripts\engine\utility::delaycall(0, ::playsound, "hack_hud_outro_lr");
-  level.player scripts\engine\utility::delaycall(0.01, ::_meth_82C2, "hacking_hud_transition", "ambient", "mix");
+  level.player scripts\engine\utility::delaycall(0.01, ::func_82C2, "hacking_hud_transition", "ambient", "mix");
   level.player scripts\engine\utility::delaycall(0.7, ::clearclienttriggeraudiozone, 0.2);
   level.player scripts\engine\utility::delaythread(1.4, ::func_87B3);
 }
@@ -792,7 +792,7 @@ func_87B4(var_0) {
 }
 
 func_87B5(var_0) {
-  return level.player _meth_840B(var_0 gettagorigin(func_87A8(var_0)), getdvarint("cg_fov"));
+  return level.player func_840B(var_0 gettagorigin(func_87A8(var_0)), getdvarint("cg_fov"));
 }
 
 func_87B3() {
@@ -1441,7 +1441,7 @@ func_2A46(var_0) {
     level.player scripts\engine\utility::allow_ads(1);
     level.player scripts\engine\utility::allow_fire(1);
     level.player scripts\sp\utility::func_1C75(0);
-    level.player _meth_8559(0);
+    level.player func_8559(0);
     level.player getrankinfofull(1);
     level.player scripts\engine\utility::allow_weapon_switch(1);
     if(isDefined(level.player.var_28CF)) {
@@ -1455,7 +1455,7 @@ func_2A46(var_0) {
 
     lib_0E4B::func_8DEA();
     level.player lib_0E42::giveperks(["specialty_fastreload"]);
-    level.player _meth_84FE();
+    level.player func_84FE();
     level.player notify("stop_hacking_end_think");
     lib_0B2A::func_11429();
     level.player notify("hack_unequipped");
@@ -1509,7 +1509,7 @@ func_2A46(var_0) {
       level.player allowswim(1);
       level.player allowlean(0);
       level.player scripts\engine\utility::allow_crouch(0);
-      level.player _meth_818A();
+      level.player func_818A();
       level.var_880A thread func_E0E3();
     } else if(var_0 == "C6") {
       func_61E0(1);
@@ -1596,10 +1596,10 @@ func_61E0(var_0) {
     level.player setsuit("hacked_c6");
     level.player.var_C37E = getdvar("cg_fov");
     setsaveddvar("cg_fov", 75);
-    level.player _meth_81DE(75, 0.05);
+    level.player func_81DE(75, 0.05);
     level.player scripts\engine\utility::allow_reload(1);
     level.player.health = self.health;
-    level.player.var_C39C = level.player _meth_816D();
+    level.player.var_C39C = level.player func_816D();
     if(level.player.var_C39C == "") {
       level.player.var_C39C = "viewmodel_base_viewhands_iw7";
     }
@@ -1608,7 +1608,7 @@ func_61E0(var_0) {
     func_12C5();
     level.player scripts\engine\utility::delaythread(1.25, ::scripts\sp\utility::func_D090, "ges_c6raise");
     level.player.var_C389 = level.player scripts\sp\utility::func_7AD7();
-    level.player scripts\sp\utility::_meth_82EA("iw7_c6hack_melee");
+    level.player scripts\sp\utility::func_82EA("iw7_c6hack_melee");
     level.player.var_87FE = 0.9;
     return;
   }
@@ -1619,14 +1619,14 @@ func_61E0(var_0) {
   }
 
   if(isDefined(level.player.var_C389)) {
-    level.player scripts\sp\utility::_meth_82EA(level.player.var_C389);
+    level.player scripts\sp\utility::func_82EA(level.player.var_C389);
   }
 
   level.player givegoproattachments(level.player.var_C39C);
   level.player.var_C39C = undefined;
   level.player give_explosive_touch_on_revived("vestlight");
   level.player setsuit("normal_sp");
-  level.player _meth_81DE(float(level.player.var_C37E), 0.05);
+  level.player func_81DE(float(level.player.var_C37E), 0.05);
   level.player scripts\engine\utility::allow_reload(0);
 }
 
@@ -1637,9 +1637,9 @@ func_61E2(var_0) {
     level.player setsuit("hacked_c8");
     level.player.var_C37E = getdvar("cg_fov");
     setsaveddvar("cg_fov", 75);
-    level.player _meth_81DE(75, 0.05);
+    level.player func_81DE(75, 0.05);
     level.player.health = self.health;
-    level.player.var_C39C = level.player _meth_816D();
+    level.player.var_C39C = level.player func_816D();
     if(level.player.var_C39C == "") {
       level.player.var_C39C = "viewmodel_base_viewhands_iw7";
     }
@@ -1659,14 +1659,14 @@ func_61E2(var_0) {
   level.player scripts\sp\utility::func_11428();
   level.player notify("hack_stop_sustaining_ammo");
   if(isDefined(level.player.var_C389)) {
-    level.player scripts\sp\utility::_meth_82EA(level.player.var_C389);
+    level.player scripts\sp\utility::func_82EA(level.player.var_C389);
   }
 
   level.player givegoproattachments(level.player.var_C39C);
   level.player.var_C39C = undefined;
   level.player give_explosive_touch_on_revived("vestlight");
   level.player setsuit("normal_sp");
-  level.player _meth_81DE(float(level.player.var_C37E), 0.05);
+  level.player func_81DE(float(level.player.var_C37E), 0.05);
   level.player scripts\engine\utility::allow_offhand_primary_weapons(0);
 }
 
@@ -1698,12 +1698,12 @@ func_61E1(var_0) {
     level.player setsuit("hacked_c6");
     level.player.var_C37E = getdvar("cg_fov");
     setsaveddvar("cg_fov", 75);
-    level.player _meth_81DE(75, 0.05);
+    level.player func_81DE(75, 0.05);
     level.player scripts\engine\utility::allow_reload(1);
     level.player.health = self.health;
     level.player giveweapon("iw7_c6worker_fists");
     level.player switchtoweaponimmediate("iw7_c6worker_fists");
-    level.player.var_C39C = level.player _meth_816D();
+    level.player.var_C39C = level.player func_816D();
     if(level.player.var_C39C == "") {
       level.player.var_C39C = "viewmodel_base_viewhands_iw7";
     }
@@ -1722,7 +1722,7 @@ func_61E1(var_0) {
   level.player.var_C39C = undefined;
   level.player give_explosive_touch_on_revived("vestlight");
   level.player setsuit("normal_sp");
-  level.player _meth_81DE(float(level.player.var_C37E), 0.05);
+  level.player func_81DE(float(level.player.var_C37E), 0.05);
   level.player scripts\engine\utility::allow_reload(0);
 }
 
@@ -1751,7 +1751,7 @@ func_880B(var_0) {
   level.player playSound("hacked_drone_on");
   wait(0.2);
   if(isDefined(level.var_8805)) {
-    level.player _meth_82C0(level.var_8805, 0.4);
+    level.player func_82C0(level.var_8805, 0.4);
   } else if(var_0 == "C6" || var_0 == "C6Worker") {
     wait(0.3);
     level.player setclienttriggeraudiozonepartialwithfade("hacking_hud_c6", 0.3, "reverb", "mix", "filter", "ambient", "player_adsr");
@@ -2103,7 +2103,7 @@ func_5C85(var_0, var_1, var_2) {
   var_4.angles = vectortoangles(var_7);
   var_4 thread func_113DC();
   playFXOnTag(level._effect["hack_pov_suicide_loop"], var_4, "tag_origin");
-  level.player._meth_843F = 1;
+  level.player.func_843F = 1;
   var_9 = 0.65;
   if(var_1) {
     level.player playSound("c6_hack_self_destruct_initiate_short_plr");
@@ -2149,7 +2149,7 @@ func_5C85(var_0, var_1, var_2) {
   level.player scripts\engine\utility::allow_melee(1);
   var_4 stopsounds();
   var_4 scripts\engine\utility::delaycall(0.05, ::delete);
-  level.player._meth_843F = undefined;
+  level.player.func_843F = undefined;
   if(!var_2) {
     level.player stopgestureviewmodel("ges_player_death_drop1", 0.05);
   } else {
@@ -2159,8 +2159,8 @@ func_5C85(var_0, var_1, var_2) {
   level.player stoprumble("damage_heavy");
   if(isDefined(var_0) && isai(var_0) && isalive(var_0)) {
     var_0.var_6D = 16;
-    var_0 _meth_8481(var_0C);
-    var_0 _meth_81D0();
+    var_0 func_8481(var_0C);
+    var_0 func_81D0();
   }
 }
 
@@ -2205,7 +2205,7 @@ func_5C3B(var_0, var_1) {
   var_3.origin = var_4;
   var_3.angles = vectortoangles(var_6);
   var_3 thread func_113DC();
-  level.player._meth_843F = 1;
+  level.player.func_843F = 1;
   var_8 = 0.65;
   level.player thread scripts\sp\utility::func_C12D("hack_done_control_target", var_8);
   level.player notify("stop soundhack_hud_self_destruct_alarm");
@@ -2224,7 +2224,7 @@ func_5C3B(var_0, var_1) {
   level.player scripts\engine\utility::allow_offhand_primary_weapons(1);
   level.player scripts\engine\utility::allow_melee(1);
   var_3 delete();
-  level.player._meth_843F = undefined;
+  level.player.func_843F = undefined;
   if(!var_1) {
     level.player stopgestureviewmodel("ges_player_death_drop1", 0.05);
   } else {
@@ -2234,8 +2234,8 @@ func_5C3B(var_0, var_1) {
   level.player stoprumble("damage_heavy");
   if(isDefined(var_0) && isai(var_0) && isalive(var_0)) {
     var_0.var_6D = 16;
-    var_0 _meth_8481(var_9);
-    var_0 _meth_81D0();
+    var_0 func_8481(var_9);
+    var_0 func_81D0();
   }
 }
 
@@ -2351,7 +2351,7 @@ func_5C77(var_0) {
   var_2.angles = vectortoangles(var_5);
   var_2 thread func_113DC();
   playFXOnTag(level._effect["hack_pov_suicide_loop"], var_2, "tag_origin");
-  level.player._meth_843F = 1;
+  level.player.func_843F = 1;
   var_7 = 0.65;
   level.player playSound("c6_shutdown");
   wait(var_7);
@@ -2360,13 +2360,13 @@ func_5C77(var_0) {
   var_8 = level.player.origin;
   scripts\engine\utility::flag_wait("hack_hud_control_outro_black");
   var_2 delete();
-  level.player._meth_843F = undefined;
+  level.player.func_843F = undefined;
   level.player stopgestureviewmodel("ges_shocknade_loop", 0.05);
   level.player stoprumble("damage_heavy");
   if(isDefined(var_0) && isai(var_0) && isalive(var_0)) {
     var_0.var_6D = 16;
-    var_0 _meth_8481(var_8);
-    var_0 _meth_81D0();
+    var_0 func_8481(var_8);
+    var_0 func_81D0();
   }
 }
 
@@ -2382,7 +2382,7 @@ func_E44E() {
     level.var_880A show();
     level.var_880A unlink();
     if(isai(level.var_880A)) {
-      level.var_880A _meth_80F1(level.player.origin, level.player.angles);
+      level.var_880A func_80F1(level.player.origin, level.player.angles);
     } else {
       level.var_880A.origin = level.player.origin;
       level.var_880A.angles = level.player.angles;
@@ -2479,11 +2479,11 @@ func_2A47(var_0) {
     }
 
     level.player scripts\sp\utility::func_1C75(1);
-    level.player _meth_8559(1);
+    level.player func_8559(1);
     lib_0E4B::func_8E0A();
     level.player lib_0E42::removeperk("specialty_fastreload");
-    level.player _meth_84FD();
-    level.player _meth_8475();
+    level.player func_84FD();
+    level.player func_8475();
     level.var_87FF = undefined;
     if(isDefined(level.player.var_8860)) {
       level.player scripts\engine\utility::allow_usability(0);
@@ -2511,7 +2511,7 @@ func_2A47(var_0) {
     level.player scripts\engine\utility::delaythread(0.4, ::func_2A49);
     level.player scripts\engine\utility::allow_jump(1);
     level.player scripts\engine\utility::allow_mantle(1);
-    level.player scripts\engine\utility::delaycall(0.3, ::_meth_80A6);
+    level.player scripts\engine\utility::delaycall(0.3, ::func_80A6);
     for(var_7 = 0; var_7 < level.player.var_C39E.size; var_7++) {
       var_8 = level.player.var_C39E[var_7];
       level.player giveweapon(var_8.var_394);
@@ -2618,17 +2618,17 @@ func_6AFD() {
   var_0 thread scripts\sp\anim::func_1EEA(var_0, "drone_use_idle", "stop_loop");
   level.player waittill("faded_out");
   var_0 givescorefortrophyblocks();
-  var_0 _meth_81D0();
+  var_0 func_81D0();
   wait(0.05);
   var_0 delete();
 }
 
 func_54FD() {
-  level.player _meth_84CE(["trigger_hurt"]);
+  level.player func_84CE(["trigger_hurt"]);
 }
 
 func_61D0() {
-  level.player _meth_84CD();
+  level.player func_84CD();
 }
 
 func_E5B9(var_0, var_1) {

@@ -148,13 +148,13 @@ func_468A() {
       self.var_10E6D.var_C997 = gettime();
     }
 
-    self _meth_84F7("found_corpse", var_1, var_1 scripts\sp\utility::func_78E4());
+    self func_84F7("found_corpse", var_1, var_1 scripts\sp\utility::func_78E4());
     return;
   }
 
   if(isDefined(var_2)) {
     thread func_4688(var_2);
-    self _meth_84F7("saw_corpse", var_2, var_2 scripts\sp\utility::func_78E4());
+    self func_84F7("saw_corpse", var_2, var_2 scripts\sp\utility::func_78E4());
   }
 }
 
@@ -173,7 +173,7 @@ func_467E(var_0) {
   }
 
   self.var_10E6D.var_466C.ent = undefined;
-  var_1 _meth_82CB(level.var_10E6D.var_466C.var_E237);
+  var_1 func_82CB(level.var_10E6D.var_466C.var_E237);
   if(!isDefined(self.var_1FBB) && isDefined(self.var_1FEC) && self.var_1FEC == "generic_human") {
     self.var_1FBB = "generic";
   }

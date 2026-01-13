@@ -176,7 +176,7 @@ func_E877(var_0, var_1, var_2, var_3) {
     self setanimstate(var_1, var_15);
 
     if(isDefined(var_12) && isplayer(var_12)) {
-      self _meth_83CE();
+      self func_83CE();
     }
 
     wait 0.2;
@@ -193,7 +193,7 @@ func_E874(var_0, var_1, var_2, var_3) {
 
   for(;;) {
     if(isplayer(self.enemy)) {
-      self _meth_83CE();
+      self func_83CE();
     }
 
     var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);

@@ -242,7 +242,7 @@ logplayerlife() {
   }
 
   var_4 = gettimefrommatchstart(var_0);
-  var_5 = self _meth_81EB(self.clientid, var_1, var_4, var_2, var_3);
+  var_5 = self func_81EB(self.clientid, var_1, var_4, var_2, var_3);
   return var_5;
 }
 
@@ -317,7 +317,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_17 = scripts\mp\utility\game::iskillstreakweapon(var_4);
-    self _meth_81E8(var_0, self.clientid, var_1, var_1.clientid, var_4, var_3, var_17, var_1 scripts\mp\utility\game::isjuggernaut(), var_7, var_8, var_9, var_10, var_11, var_12, var_15, var_14, var_16);
+    self func_81E8(var_0, self.clientid, var_1, var_1.clientid, var_4, var_3, var_17, var_1 scripts\mp\utility\game::isjuggernaut(), var_7, var_8, var_9, var_10, var_11, var_12, var_15, var_14, var_16);
 
     if(var_17) {
       if(isDefined(var_1.lastmatchdatakillstreakindex) && var_1.lastmatchdatakillstreakindex != -1) {
@@ -337,7 +337,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
   } else {
-    self _meth_81E8(var_0, self.clientid, undefined, undefined, var_4, var_3, scripts\mp\utility\game::iskillstreakweapon(var_4), 0, var_7, var_8, var_9, var_10, var_11, 0, 0, 0, -1);
+    self func_81E8(var_0, self.clientid, undefined, undefined, var_4, var_3, scripts\mp\utility\game::iskillstreakweapon(var_4), 0, var_7, var_8, var_9, var_10, var_11, 0, 0, 0, -1);
     setmatchdata("lives", var_0, "attackerKillstreakIndex", -1);
   }
 
@@ -380,7 +380,7 @@ logplayerdata() {
 
   setmatchdata("players", self.clientid, "kills", scripts\mp\utility\game::getpersstat("kills"));
   setmatchdata("players", self.clientid, "deaths", scripts\mp\utility\game::getpersstat("deaths"));
-  self _meth_8572(self.clientid);
+  self func_8572(self.clientid);
   var_0 = 0;
   var_1 = 0;
   var_2 = 0;
@@ -427,7 +427,7 @@ logplayerdata() {
     var_11 = self.pers["matchdataDoubleKillsCount"];
   }
 
-  self _meth_85AC(self.clientid, scripts\mp\utility\game::getpersstat("headshots"), var_10, var_11, var_9);
+  self func_85AC(self.clientid, scripts\mp\utility\game::getpersstat("headshots"), var_10, var_11, var_9);
 
   foreach(var_8, var_13 in self.pers["matchdataScoreEventCounts"]) {
     setmatchdata("players", self.clientid, "scoreEventCount", var_8, var_13);
@@ -436,7 +436,7 @@ logplayerdata() {
   setmatchdata("players", self.clientid, "playerXpModifier", int(scripts\mp\rank::getrankxpmultiplier()));
 
   if(level.teambased) {
-    setmatchdata("players", self.clientid, "teamXpModifier", int(scripts\mp\rank::_meth_81B6(self.team)));
+    setmatchdata("players", self.clientid, "teamXpModifier", int(scripts\mp\rank::func_81B6(self.team)));
   }
 
   setmatchdata("players", self.clientid, "weaponXpModifier", int(scripts\mp\weaponrank::getweaponrankxpmultiplier()));
@@ -702,7 +702,7 @@ loginitialspawnposition() {
 }
 
 logfinalstats() {
-  if(!self _meth_8592()) {
+  if(!self func_8592()) {
     return;
   }
   if(getdvarint("mdsd") > 0) {

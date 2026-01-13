@@ -258,7 +258,7 @@ func_130F4(var_0, var_1) {
 
 launchuav(var_0, var_1, var_2) {
   var_3 = var_0.team;
-  var_4 = _meth_81E8(var_1, var_2);
+  var_4 = func_81E8(var_1, var_2);
   var_5 = spawn("script_model", var_4 gettagorigin("tag_origin") + (0, 0, 5000));
   var_6 = level.uavsettings[var_1].modelbase;
   var_7 = level.uavsettings[var_1].timeout;
@@ -311,8 +311,8 @@ launchuav(var_0, var_1, var_2) {
   var_5.maxhealth = var_8;
   var_5.streakinfo = var_2;
   var_5 setotherent(var_0);
-  var_5 _meth_8549();
-  var_5 _meth_8594();
+  var_5 func_8549();
+  var_5 func_8594();
   var_5 scripts\mp\killstreaks\utility::func_1843(var_1, "Killstreak_Air", var_0);
   var_5 thread damagetracker();
   var_5 thread func_89B7();
@@ -1169,7 +1169,7 @@ func_13AA0(var_0, var_1, var_2, var_3) {
   }
 }
 
-_meth_81E8(var_0, var_1) {
+func_81E8(var_0, var_1) {
   var_2 = undefined;
 
   switch (var_0) {
@@ -1270,10 +1270,10 @@ givefriendlyperks(var_0) {
 shutdownenemysystem(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  self _meth_85C7(1);
+  self func_85C7(1);
   self playlocalsound("counter_uav_jam_sfx");
   var_0 waittill("death");
-  self _meth_85C7(0);
+  self func_85C7(0);
   self playlocalsound("counter_uav_jam_reboot_sfx");
 }
 

@@ -28,7 +28,7 @@ cover() {
 
   thread func_BC1C();
   for(;;) {
-    self _meth_82E3("idle", scripts\engine\utility::random(var_1), % root, 1, 0.2, 1);
+    self func_82E3("idle", scripts\engine\utility::random(var_1), % root, 1, 0.2, 1);
     self waittillmatch("end", "idle");
   }
 }

@@ -471,7 +471,7 @@ onplayerspawned() {
 func_FB0F(var_0) {
   wait(var_0);
   if(level.mapname != "mp_dome_dusk") {
-    self _meth_83FD(-3, 0);
+    self func_83FD(-3, 0);
   }
 
   playfxontagforclients(scripts\engine\utility::getfx("mons_screen_ash"), self, "tag_eye", self);

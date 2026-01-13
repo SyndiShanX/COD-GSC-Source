@@ -183,7 +183,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(issubstr(var_0D.classname, "trigger")) {
       if(!isDefined(var_0D.var_AD47) || var_0D.var_AD47 == 0) {
         var_0D enablelinkto();
-        var_0D _meth_8314();
+        var_0D func_8314();
         var_0D.var_AD47 = 1;
       }
 
@@ -716,7 +716,7 @@ func_1243(var_0) {
 
 func_1101E(var_0) {
   self notify("stop_monitor_player_in_dropship");
-  if(scripts\engine\utility::istrue(level.player._meth_84B1) && isDefined(var_0) && var_0) {
+  if(scripts\engine\utility::istrue(level.player.func_84B1) && isDefined(var_0) && var_0) {
     return;
   }
 
@@ -1186,7 +1186,7 @@ func_4CBF() {
 func_4CBE() {
   for(;;) {
     for(;;) {
-      if(level.player _meth_8439()) {
+      if(level.player func_8439()) {
         break;
       }
 
@@ -1611,7 +1611,7 @@ func_1239(var_0) {
     level.player allowprone(1);
     level.player notify("ammo_hack_off");
     level.player scripts\sp\utility::func_E2CF("railgun");
-    level.player _meth_81DE(level.player.var_C3BF, 1);
+    level.player func_81DE(level.player.var_C3BF, 1);
   }
 
   if(level.player hasweapon("iw7_railgunprojectile")) {
@@ -1674,7 +1674,7 @@ func_123F(var_0) {
     level.player allowprone(0);
     level.player childthread func_1E31();
     level.player.var_C3BF = getdvarint("cg_fov");
-    level.player _meth_81DE(80, 0.5);
+    level.player func_81DE(80, 0.5);
     wait(1);
     while(!level.player usebuttonpressed()) {
       scripts\engine\utility::waitframe();
@@ -1691,7 +1691,7 @@ func_123F(var_0) {
     level.player allowprone(1);
     level.player notify("ammo_hack_off");
     level.player scripts\sp\utility::func_E2CF("railgun");
-    level.player _meth_81DE(level.player.var_C3BF, 1);
+    level.player func_81DE(level.player.var_C3BF, 1);
     wait(1);
   }
 }
@@ -2021,7 +2021,7 @@ func_11C3() {
     var_0 = randomfloatrange(0.3, 0.4);
     var_1 = randomfloatrange(0.1, 1);
     var_2 = randomfloatrange(0.1, 0.3);
-    level.player _meth_8291(var_2, var_2, var_2, var_1, var_1 * 0.25, var_1 * 0.25, 0, 15, 15, 15);
+    level.player func_8291(var_2, var_2, var_2, var_1, var_1 * 0.25, var_1 * 0.25, 0, 15, 15, 15);
     wait(var_1);
   }
 }
@@ -2046,7 +2046,7 @@ func_11C0() {
     var_0 = randomfloatrange(0.3, 3);
     var_1 = randomfloatrange(0.1, 1);
     var_2 = randomfloatrange(0.1, 1 * var_0);
-    level.player _meth_8291(var_2, var_2, var_2, var_1, var_1 * 0.25, var_1 * 0.25, 0, 15, 15, 15);
+    level.player func_8291(var_2, var_2, var_2, var_1, var_1 * 0.25, var_1 * 0.25, 0, 15, 15, 15);
     wait(var_1);
   }
 }

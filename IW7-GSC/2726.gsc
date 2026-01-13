@@ -16,8 +16,8 @@ init() {
       precacheshader(game[var_2]);
     }
   } else {
-    game["entity_headicon_allies"] = scripts\mp\teams::_meth_81B0("allies");
-    game["entity_headicon_axis"] = scripts\mp\teams::_meth_81B0("axis");
+    game["entity_headicon_allies"] = scripts\mp\teams::func_81B0("allies");
+    game["entity_headicon_axis"] = scripts\mp\teams::func_81B0("axis");
     precacheshader(game["entity_headicon_allies"]);
     precacheshader(game["entity_headicon_axis"]);
   }

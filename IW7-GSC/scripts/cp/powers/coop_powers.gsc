@@ -243,7 +243,7 @@ func_D780() {
   }
 }
 
-_meth_8091(var_0, var_1) {
+func_8091(var_0, var_1) {
   if(!isDefined(level.var_D77F)) {
     return undefined;
   }
@@ -260,7 +260,7 @@ _meth_8091(var_0, var_1) {
   return var_2[var_1];
 }
 
-_meth_8090(var_0) {
+func_8090(var_0) {
   if(!isDefined(self.powers[var_0])) {
     return undefined;
   }
@@ -268,7 +268,7 @@ _meth_8090(var_0) {
   var_1 = self.powers[var_0];
   var_2 = getdvar("scr_debug_power_passive");
   if(isDefined(var_2)) {
-    var_3 = _meth_8091(var_0, var_2);
+    var_3 = func_8091(var_0, var_2);
     if(isDefined(var_3)) {
       if(isDefined(var_3.var_23B1)) {
         return var_3.var_23B1;
@@ -277,7 +277,7 @@ _meth_8090(var_0) {
   }
 
   foreach(var_5 in var_1.passives) {
-    var_3 = _meth_8091(var_0, var_5);
+    var_3 = func_8091(var_0, var_5);
     if(!isDefined(var_3)) {
       continue;
     }
@@ -412,7 +412,7 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7++;
   }
 
-  for(var_8 = self _meth_854D(); var_8 != "none"; var_8 = self _meth_854D()) {
+  for(var_8 = self func_854D(); var_8 != "none"; var_8 = self func_854D()) {
     scripts\engine\utility::waitframe();
   }
 
@@ -463,7 +463,7 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_0D.weaponuse = var_0E.weaponuse;
   }
 
-  var_13 = _meth_8090(var_0);
+  var_13 = func_8090(var_0);
   var_14 = scripts\engine\utility::ter_op(isDefined(var_13), var_13, var_0D.weaponuse);
   var_0D.weaponuse = var_14;
   self giveweapon(var_14, 0);
@@ -500,7 +500,7 @@ removepower(var_0) {
   }
 
   if(self.powers[var_0].slot == "primary") {
-    self _meth_844D();
+    self func_844D();
     self.powerprimarygrenade = undefined;
   } else if(self.powers[var_0].slot == "secondary") {
     self gonevo();
@@ -1038,7 +1038,7 @@ func_1309C() {
 func_F6B1(var_0) {
   self allowdodge(1);
   self.var_38A1 = 1;
-  self _meth_8454(3);
+  self func_8454(3);
 }
 
 func_12C9F() {

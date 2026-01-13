@@ -148,7 +148,7 @@ func_12B58(var_0) {
   if(self.var_101B2 && var_0 > 50) {
     scripts\sp\utility::func_65DD("side_thrusters_out");
     self give_attacker_kill_rewards( % vh_dropship_front_thrusters_in);
-    scripts\engine\utility::delaycall(0.05, ::_meth_82B1, % vh_dropship_front_thrusters_in, 0.25);
+    scripts\engine\utility::delaycall(0.05, ::func_82B1, % vh_dropship_front_thrusters_in, 0.25);
     self clearanim( % vh_dropship_front_thrusters_out, 0.05);
     self.var_101B2 = 0;
     return;
@@ -164,7 +164,7 @@ func_12B58(var_0) {
 
   scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::func_65E1, "side_thrusters_out");
   self give_attacker_kill_rewards( % vh_dropship_front_thrusters_out);
-  scripts\engine\utility::delaycall(0.05, ::_meth_82B1, % vh_dropship_front_thrusters_out, 0.25);
+  scripts\engine\utility::delaycall(0.05, ::func_82B1, % vh_dropship_front_thrusters_out, 0.25);
   self clearanim( % vh_dropship_front_thrusters_in, 0.05);
   self.var_101B2 = 1;
 }
@@ -495,7 +495,7 @@ func_1242(var_0, var_1, var_2, var_3, var_4) {
   self give_capture_credit(var_1, 1);
   var_5 = getanimlength(var_1);
   if(isDefined(var_3) && var_3) {
-    self _meth_82B0(var_1, 1);
+    self func_82B0(var_1, 1);
   } else {
     wait(var_5);
   }

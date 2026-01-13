@@ -933,7 +933,7 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
             if(var_3 == "MOD_MELEE") {
               var_0F = scripts\mp\utility::getweaponrootname(var_2);
               if(var_0F == "iw7_rvn") {
-                if(self _meth_8519(var_2)) {
+                if(self func_8519(var_2)) {
                   updatecurrentobjective();
                 }
               }
@@ -942,7 +942,7 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
               if(var_0F == "iw7_rvn") {
                 var_10 = getweaponvariantindex(var_2);
                 if(isDefined(var_10) && var_10 == 3 || var_10 == 35) {
-                  if(self _meth_8519(var_2)) {
+                  if(self func_8519(var_2)) {
                     updatecurrentobjective();
                   }
                 }

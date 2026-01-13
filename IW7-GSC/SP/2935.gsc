@@ -366,7 +366,7 @@ func_12799() {
 
   var_1 = isDefined(self.var_EED1) && scripts\engine\utility::flag("stealth_enabled") && !scripts\engine\utility::flag("stealth_spotted");
   if(isDefined(self.var_EDB3)) {
-    var_0 = self _meth_8393(var_1);
+    var_0 = self func_8393(var_1);
   } else {
     var_0 = self dospawn(var_1);
   }
@@ -666,19 +666,19 @@ spawn_grenade(var_0, var_1) {
 }
 
 add_to_grenade_cache(var_0) {
-  if(!isDefined(level._meth_8580) || !isDefined(level._meth_8580[var_0])) {
-    level._meth_8581[var_0] = 0;
-    level._meth_8580[var_0] = [];
+  if(!isDefined(level.func_8580) || !isDefined(level.func_8580[var_0])) {
+    level.func_8581[var_0] = 0;
+    level.func_8580[var_0] = [];
   }
 
-  var_1 = level._meth_8581[var_0];
-  var_2 = level._meth_8580[var_0][var_1];
+  var_1 = level.func_8581[var_0];
+  var_2 = level.func_8580[var_0][var_1];
   if(isDefined(var_2)) {
     var_2 delete();
   }
 
-  level._meth_8580[var_0][var_1] = self;
-  level._meth_8581[var_0] = var_1 + 1 % 16;
+  level.func_8580[var_0][var_1] = self;
+  level.func_8581[var_0] = var_1 + 1 % 16;
 }
 
 func_1382D() {
@@ -1149,7 +1149,7 @@ func_3DF4() {
   var_0["crew"] = 1;
   var_0["no_boost"] = 1;
   if(isDefined(self.subclass) && isDefined(var_0[self.subclass])) {
-    self _meth_8504(0, "soldier_boost");
+    self func_8504(0, "soldier_boost");
   }
 }
 
@@ -1184,13 +1184,13 @@ func_19BB() {
     return;
   }
 
-  self _meth_81D6();
+  self func_81D6();
   self waittill("death");
   if(!isDefined(self)) {
     return;
   }
 
-  self _meth_81D5();
+  self func_81D5();
 }
 
 func_107F5() {
@@ -1521,7 +1521,7 @@ func_EF8C() {
   self.objective_playermask_showto = level.var_4FF6;
   self.objective_playermask_hidefrom = level.var_4FF5;
   self.precacherumble = 0;
-  self _meth_8250(0);
+  self func_8250(0);
   if(isDefined(self.var_B14F) && self.var_B14F) {
     scripts\sp\utility::func_1101B();
   }
@@ -1596,11 +1596,11 @@ func_F3DE() {
   }
 
   if(isDefined(self.target)) {
-    self _meth_82F0(var_0);
+    self func_82F0(var_0);
     return;
   }
 
-  self _meth_82F1(var_0);
+  self func_82F1(var_0);
 }
 
 func_7CDA(var_0) {
@@ -1711,15 +1711,15 @@ allowboostjump(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(self.var_10E6D)) {
-      lib_0F18::func_10E8A("go_to_node_wait", ::_meth_840F, var_0);
+      lib_0F18::func_10E8A("go_to_node_wait", ::func_840F, var_0);
     } else {
-      _meth_840F(var_0);
+      func_840F(var_0);
       self waittill("goal");
     }
 
     var_0 notify("trigger", self);
     if(isDefined(self.var_10E6D)) {
-      lib_0F18::func_10E8A("go_to_node_arrive", ::_meth_840F, var_0);
+      lib_0F18::func_10E8A("go_to_node_arrive", ::func_840F, var_0);
     }
 
     if(isDefined(var_1)) {
@@ -1826,8 +1826,8 @@ allowboostjump(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(isDefined(self _meth_812A())) {
-    self _meth_82F1(self _meth_812A());
+  if(isDefined(self func_812A())) {
+    self func_82F1(self func_812A());
     return;
   }
 
@@ -1926,13 +1926,13 @@ allowhighjump(var_0) {
   return 0;
 }
 
-_meth_840F(var_0) {
+func_840F(var_0) {
   if(isnode(var_0)) {
-    _meth_8411(var_0);
+    func_8411(var_0);
   } else if(isstruct(var_0)) {
     allowdodge(var_0);
   } else if(isent(var_0)) {
-    _meth_8410(var_0);
+    func_8410(var_0);
   }
 
   if(isstruct(var_0) || isnode(var_0)) {
@@ -1940,9 +1940,9 @@ _meth_840F(var_0) {
   }
 }
 
-_meth_8410(var_0) {
+func_8410(var_0) {
   if(var_0.classname == "info_volume") {
-    self _meth_82F1(var_0);
+    self func_82F1(var_0);
     self notify("go_to_node_new_goal");
     return;
   }
@@ -1955,7 +1955,7 @@ allowdodge(var_0) {
   self notify("go_to_node_new_goal");
 }
 
-_meth_8411(var_0) {
+func_8411(var_0) {
   scripts\sp\utility::func_F3D9(var_0);
   self notify("go_to_node_new_goal");
 }
@@ -2001,7 +2001,7 @@ func_F3D7(var_0) {
     }
   }
 
-  if(!isDefined(self _meth_812A())) {
+  if(!isDefined(self func_812A())) {
     if(self.type == "civilian") {
       self.objective_playermask_showto = 128;
       return;
@@ -2013,7 +2013,7 @@ func_F3D7(var_0) {
 
 func_2697(var_0) {
   for(;;) {
-    var_1 = self _meth_8165();
+    var_1 = self func_8165();
     if(!isalive(var_1)) {
       wait(1.5);
       continue;
@@ -2022,7 +2022,7 @@ func_2697(var_0) {
     if(!isDefined(var_1.isnodeoccupied)) {
       self settargetentity(scripts\engine\utility::random(var_0));
       self notify("startfiring");
-      self _meth_8398();
+      self func_8398();
     }
 
     wait(2 + randomfloat(1));
@@ -2033,7 +2033,7 @@ func_B321(var_0) {
   for(;;) {
     self settargetentity(scripts\engine\utility::random(var_0));
     self notify("startfiring");
-    self _meth_8398();
+    self func_8398();
     wait(2 + randomfloat(1));
   }
 }
@@ -2047,7 +2047,7 @@ func_12F9C(var_0) {
   }
 
   scripts\asm\asm_bb::func_296E(var_0);
-  while(!isDefined(self _meth_8164()) || self _meth_8164() != var_0) {
+  while(!isDefined(self func_8164()) || self func_8164() != var_0) {
     wait(0.05);
   }
 
@@ -2109,12 +2109,12 @@ func_D31C(var_0) {
 func_11054() {
   self notify("stop_using_turret");
   self notify("stop_using_built_in_burst_fire");
-  var_0 = self _meth_8164();
+  var_0 = self func_8164();
   if(!isDefined(var_0)) {
     return;
   }
 
-  self _meth_83AF();
+  self func_83AF();
   scripts\asm\asm_bb::func_296E(undefined);
   self givescorefortrophyblocks();
   var_0 givesentry();
@@ -2170,7 +2170,7 @@ func_73D8(var_0) {
   self waittill("trigger");
   self.var_369 = 0;
   self sethintstring("");
-  self _meth_83AF();
+  self func_83AF();
   self notify("stopped_use_turret");
   var_0 notify("friendly_finished_using_mg42");
 }
@@ -2239,7 +2239,7 @@ func_73D6(var_0, var_1) {
   self.var_73D0 = var_0;
   thread func_73D8(var_0);
   thread func_73D1(var_0);
-  self _meth_83D7(var_0);
+  self func_83D7(var_0);
   if(isDefined(var_0.target)) {
     var_2 = getent(var_0.target, "targetname");
     if(isDefined(var_2)) {
@@ -2249,7 +2249,7 @@ func_73D6(var_0, var_1) {
 
   for(;;) {
     if(distance(self.origin, var_1.origin) < 32) {
-      self _meth_83D7(var_0);
+      self func_83D7(var_0);
     } else {
       break;
     }
@@ -2270,7 +2270,7 @@ func_73D3() {
   self endon("death");
   var_0 = self.var_73D0;
   self.var_73D0 = undefined;
-  self _meth_83AF();
+  self func_83AF();
   self notify("stopped_use_turret");
   self.var_369 = 0;
   self.objective_playermask_showto = self.oldradius;
@@ -2504,7 +2504,7 @@ func_6F51(var_0, var_1, var_2) {
     wait(var_4);
     var_6 = isDefined(self.var_EED1) && scripts\engine\utility::flag("stealth_enabled") && !scripts\engine\utility::flag("stealth_spotted");
     if(isDefined(self.var_EDB3)) {
-      var_7 = self _meth_8393(var_6);
+      var_7 = self func_8393(var_6);
     } else {
       var_7 = self dospawn(var_6);
     }
@@ -2685,7 +2685,7 @@ func_6F4E() {
 
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "delete") {
-      self _meth_81D0();
+      self func_81D0();
       return;
     }
   }
@@ -2711,7 +2711,7 @@ func_6F4E() {
     }
   }
 
-  if(!isDefined(self.var_EDB0) && !isDefined(self _meth_812A())) {
+  if(!isDefined(self.var_EDB0) && !isDefined(self func_812A())) {
     self.objective_playermask_showto = level.var_4FF6;
   }
 }
@@ -2979,7 +2979,7 @@ func_6F5C(var_0) {
     }
 
     if(isDefined(self.var_EDB3)) {
-      var_4 = var_3 _meth_8393(var_2);
+      var_4 = var_3 func_8393(var_2);
     } else {
       var_4 = var_3 dospawn(var_2);
     }
@@ -3222,7 +3222,7 @@ func_2BD0() {
 
   self endon("death");
   self waittill("reached_path_end");
-  if(!isDefined(self _meth_812A())) {
+  if(!isDefined(self func_812A())) {
     self.objective_playermask_showto = level.var_4FF6;
   }
 }
@@ -3259,7 +3259,7 @@ func_10869(var_0, var_1) {
   }
 
   var_0.spawner.var_C1 = var_0.spawner.var_C1 + 1;
-  var_5 = var_0.spawner _meth_8393();
+  var_5 = var_0.spawner func_8393();
   var_6 = scripts\sp\utility::func_106ED(var_5);
   if(var_6) {}
 
@@ -3345,7 +3345,7 @@ deathtime() {
   self endon("death");
   wait(self.var_ED4B);
   wait(randomfloat(10));
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_11AD7(var_0) {

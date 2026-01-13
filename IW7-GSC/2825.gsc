@@ -372,17 +372,17 @@ func_3E94(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
 
-  if(!isDefined(var_0._meth_845F)) {
-    var_0._meth_845F = 0;
+  if(!isDefined(var_0.func_845F)) {
+    var_0.func_845F = 0;
   }
 
   for(var_12 = 0; var_12 < var_0.var_3850.size; var_12++) {
     if(scripts\engine\utility::get_template_script_MAYBE() == "rogue") {
       if(var_0.var_10310 < var_0.var_11A2E) {
-        var_0._meth_845F = 1;
+        var_0.func_845F = 1;
       }
 
-      if(var_0._meth_845F && randomint(100) > 25) {
+      if(var_0.func_845F && randomint(100) > 25) {
         var_3 = undefined;
         var_2 = undefined;
         break;
@@ -397,8 +397,8 @@ func_3E94(var_0, var_1) {
     } else if(scripts\engine\utility::get_template_script_MAYBE() == "moon_port") {
       var_2 = var_0.var_3850[var_12];
 
-      if(!isDefined(var_0._meth_8460)) {
-        var_0._meth_8460 = 0;
+      if(!isDefined(var_0.func_8460)) {
+        var_0.func_8460 = 0;
       }
 
       if(!isDefined(var_0.setplayermusicstate)) {
@@ -409,9 +409,9 @@ func_3E94(var_0, var_1) {
         var_3 = func_13C06(var_2, var_0.nodes);
         var_0.setplayermusicstate++;
         break;
-      } else if(var_2 == "iw7_mauler" && var_0._meth_8460 < 12) {
+      } else if(var_2 == "iw7_mauler" && var_0.func_8460 < 12) {
         var_3 = func_13C06(var_2, var_0.nodes);
-        var_0._meth_8460++;
+        var_0.func_8460++;
         break;
       }
     } else {
@@ -725,7 +725,7 @@ func_116DC(var_0, var_1, var_2) {
     var_8 = func_0A2F::func_D9F8();
 
     foreach(var_10 in var_8) {
-      var_11 = level.player _meth_84C6("equipmentState", var_10);
+      var_11 = level.player func_84C6("equipmentState", var_10);
 
       if(!isDefined(var_11)) {
         continue;
@@ -741,7 +741,7 @@ func_116DC(var_0, var_1, var_2) {
     }
 
     var_13 = var_5[var_7];
-    var_14 = level.player _meth_84C6("equipmentState", var_13);
+    var_14 = level.player func_84C6("equipmentState", var_13);
     var_15 = "upgrade1";
 
     if(isDefined(var_14) && var_14 == "upgrade1") {
@@ -754,7 +754,7 @@ func_116DC(var_0, var_1, var_2) {
       }
     }
 
-    level.player _meth_84C7("equipmentState", var_13, var_15);
+    level.player func_84C7("equipmentState", var_13, var_15);
     level.var_D9E5["weaponstates"][var_13] = var_15;
     func_0A2F::setlightintensity(var_13, var_15);
     var_4 = scripts\engine\utility::array_add(var_4, var_13);
@@ -806,7 +806,7 @@ clearomnvaronautosave(var_0) {
 
 func_FA17(var_0) {
   var_1 = scripts\sp\utility::func_10639("player_arms");
-  var_2 = level.player _meth_84C6("currentViewModel");
+  var_2 = level.player func_84C6("currentViewModel");
 
   if(isDefined(var_2)) {
     var_1 setModel(var_2);

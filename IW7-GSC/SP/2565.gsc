@@ -60,7 +60,7 @@ func_3551(var_0) {
 
   self.var_290A = var_0;
   if(!var_0) {
-    self _meth_8484();
+    self func_8484();
   }
 }
 
@@ -123,8 +123,8 @@ func_1375A(var_0) {
   level.player endon("death");
   self waittill("death");
   wait(0.1);
-  level.player _meth_84C7(var_0, 1);
-  if(level.player _meth_84C6("c12AchievementRodeoLeft") && level.player _meth_84C6("c12AchievementRodeoRight") && level.player _meth_84C6("c12AchievementSelfdestruct")) {
+  level.player func_84C7(var_0, 1);
+  if(level.player func_84C6("c12AchievementRodeoLeft") && level.player func_84C6("c12AchievementRodeoRight") && level.player func_84C6("c12AchievementSelfdestruct")) {
     scripts\sp\utility::settimer("KILL_C12S");
   }
 }

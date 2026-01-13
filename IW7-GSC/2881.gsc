@@ -74,7 +74,7 @@ poll_for_found() {
 
 func_3DAD() {
   foreach(var_1 in level.players) {
-    if(!var_1 _meth_8153(self.var_C1D5)) {
+    if(!var_1 func_8153(self.var_C1D5)) {
       return 0;
     }
   }
@@ -222,10 +222,10 @@ func_9961(var_0, var_1) {
 
 func_EB60() {
   foreach(var_1 in level.players) {
-    if(var_1 _meth_8153(self.var_C1D5)) {
+    if(var_1 func_8153(self.var_C1D5)) {
       continue;
     }
-    var_1 _meth_8324(self.var_C1D5);
+    var_1 func_8324(self.var_C1D5);
   }
 
   logstring("found intel item " + self.var_C1D5);
@@ -233,8 +233,8 @@ func_EB60() {
 }
 
 setplayerangles() {
-  var_0 = self _meth_8139("cheatPoints");
-  self _meth_8302("cheatPoints", var_0 + 1);
+  var_0 = self func_8139("cheatPoints");
+  self func_8302("cheatPoints", var_0 + 1);
 }
 
 func_9952(var_0) {
@@ -246,7 +246,7 @@ func_9952(var_0) {
   var_3 = var_1 + var_2 / 1000;
 
   foreach(var_5 in level.players) {
-    if(var_0 != var_5 && var_5 _meth_8153(self.var_C1D5)) {
+    if(var_0 != var_5 && var_5 func_8153(self.var_C1D5)) {
       continue;
     }
     var_6 = var_5 scripts\sp\hud_util::func_4999("objective", 1.5);
@@ -257,12 +257,12 @@ func_9952(var_0) {
     var_6 setpulsefx(60, var_1, var_2);
     var_7 = 0;
 
-    if(var_0 == var_5 && var_5 _meth_8153(self.var_C1D5)) {
+    if(var_0 == var_5 && var_5 func_8153(self.var_C1D5)) {
       var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
     } else {
       var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_5 setplayerangles();
-      var_7 = var_5 _meth_8139("cheatPoints");
+      var_7 = var_5 func_8139("cheatPoints");
       var_6 setvalue(var_7);
     }
 

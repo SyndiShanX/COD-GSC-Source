@@ -84,7 +84,7 @@ func_1095B() {
   self orientmode("face current");
   self clearanim( % root, 0.2);
   for(;;) {
-    self _meth_82EA("special_idle", var_0[randomint(var_0.size)], 1, 0.2, self.animplaybackrate);
+    self func_82EA("special_idle", var_0[randomint(var_0.size)], 1, 0.2, self.animplaybackrate);
     self waittillmatch("end", "special_idle");
   }
 }
@@ -119,7 +119,7 @@ transitiontoidle(var_0, var_1) {
   var_2 = scripts\anim\utility::func_B028("idle_transitions");
   if(isDefined(var_2[var_0])) {
     var_3 = var_2[var_0];
-    self _meth_82E4("idle_transition", var_3, % body, 1, 0.2, self.animplaybackrate);
+    self func_82E4("idle_transition", var_3, % body, 1, 0.2, self.animplaybackrate);
     scripts\anim\shared::donotetracks("idle_transition");
   }
 }
@@ -155,11 +155,11 @@ func_D49C(var_0, var_1) {
   }
 
   if(isDefined(var_2)) {
-    self _meth_82A5(var_3, % body, 1, var_7, 1);
+    self func_82A5(var_3, % body, 1, var_7, 1);
     self give_attacker_kill_rewards( % add_idle);
-    self _meth_82E4("idle", var_2, % add_idle, 1, var_7, self.animplaybackrate);
+    self func_82E4("idle", var_2, % add_idle, 1, var_7, self.animplaybackrate);
   } else {
-    self _meth_82E4("idle", var_3, % body, 1, var_7, self.animplaybackrate);
+    self func_82E4("idle", var_3, % body, 1, var_7, self.animplaybackrate);
   }
 
   scripts\anim\shared::donotetracks("idle");
@@ -174,9 +174,9 @@ func_DA85() {
   if(randomint(10) < 3) {
     var_0 = scripts\anim\utility::func_B027("cover_prone", "twitch");
     var_1 = var_0[randomint(var_0.size)];
-    self _meth_82E3("prone_idle", var_1, % exposed_modern, 1, 0.2);
+    self func_82E3("prone_idle", var_1, % exposed_modern, 1, 0.2);
   } else {
-    self _meth_82A5(scripts\anim\utility::func_B027("cover_prone", "straight_level"), % exposed_modern, 1, 0.2);
+    self func_82A5(scripts\anim\utility::func_B027("cover_prone", "straight_level"), % exposed_modern, 1, 0.2);
     self give_left_powers("prone_idle", scripts\anim\utility::func_B027("cover_prone", "exposed_idle")[0], 1, 0.2);
   }
 

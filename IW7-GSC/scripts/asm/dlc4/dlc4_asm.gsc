@@ -278,7 +278,7 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
 }
 
 terminate_movingmelee(var_0, var_1, var_2) {
-  self _meth_85C9(0);
+  self func_85C9(0);
 }
 
 playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
@@ -324,14 +324,14 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
   thread stopfacingenemy(var_1, var_0C);
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5, var_4);
 }
 
 terminate_meleeattack(var_0, var_1, var_2) {
-  self _meth_85C9(0);
+  self func_85C9(0);
 }
 
 playmeleeattack(var_0, var_1, var_2, var_3) {
@@ -339,7 +339,7 @@ playmeleeattack(var_0, var_1, var_2, var_3) {
   thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4, self.var_C081);
@@ -368,7 +368,7 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 }
 
 doteleporthack(var_0, var_1, var_2, var_3) {
-  var_6 = self _meth_8146();
+  var_6 = self func_8146();
   self setorigin(var_6, 0);
   var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;
@@ -519,7 +519,7 @@ dojump(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\alien_goon\alien_jump::func_A4C3(var_0, var_1, self.origin, self.angles, self._blackboard.jumpdestinationpos, self._blackboard.jumpdestinationangles, self._blackboard.jumpnextpos);
@@ -535,7 +535,7 @@ dojumpattack(var_0, var_1, var_2, var_3) {
   var_4 = gettunedata();
   thread domeleedamageoncontact(var_1, self.curmeleetarget, self.var_B601 * var_4.jump_attack_melee_damage_multiplier, var_4.jump_attack_damage_radius_sq, var_4.jump_attack_damage_dot);
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\alien_goon\alien_jump::jumpattack(var_0, var_1, self._blackboard.jumpdestinationpos);
@@ -546,7 +546,7 @@ dojumpattack(var_0, var_1, var_2, var_3) {
 doalienjumptraversal(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   var_6 = scripts\engine\utility::getyawtospot(var_5);
   if(abs(var_6) > 16) {
     self.desiredyaw = var_6;

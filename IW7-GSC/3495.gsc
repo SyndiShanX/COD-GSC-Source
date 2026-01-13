@@ -7,7 +7,7 @@ func_2A6B(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(scripts\mp\killstreaks\utility::func_A69F(var_3, "passive_support_drop")) {
-    var_4 = scripts\mp\killstreaks\target_marker::_meth_819B(var_3);
+    var_4 = scripts\mp\killstreaks\target_marker::func_819B(var_3);
 
     if(!isDefined(var_4.location)) {
       self notify("cancel_jackal");
@@ -166,7 +166,7 @@ func_108DE(var_0, var_1, var_2, var_3, var_4) {
   level.jackals[level.jackals.size] = var_20;
   level.jackals = scripts\engine\utility::array_removeundefined(level.jackals);
   level.var_A22D = undefined;
-  var_20 _meth_84BE("killstreak_jackal_mp");
+  var_20 func_84BE("killstreak_jackal_mp");
   var_20 thread scripts\mp\killstreaks\flares::func_6EAB(undefined, "j_body");
   var_20 thread func_A3BD();
   var_20 thread delayjackalloopsfx(0.05, "dropship_enemy_hover_world_grnd");
@@ -415,7 +415,7 @@ patrolfield() {
   for(;;) {
     var_0 = undefined;
 
-    if(isDefined(self.patroltarget) && isalive(self.patroltarget) && isplayer(self.patroltarget) && !self.patroltarget _meth_8181("specialty_blindeye")) {
+    if(isDefined(self.patroltarget) && isalive(self.patroltarget) && isplayer(self.patroltarget) && !self.patroltarget func_8181("specialty_blindeye")) {
       if(!jackalcanseeenemy(self.patroltarget) || distance2dsquared(self.origin, self.patroltarget.origin) > 4194304) {
         jackalmovetoenemy(self.patroltarget);
       }
@@ -556,7 +556,7 @@ jackalfindclosestenemy() {
     if(isDefined(level.teambased) && isDefined(var_2.team) && self.team == var_2.team) {
       continue;
     }
-    if(var_2 _meth_8181("specialty_blindeye")) {
+    if(var_2 func_8181("specialty_blindeye")) {
       continue;
     }
     if(var_2 isjackalenemyindoors()) {

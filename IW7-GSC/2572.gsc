@@ -41,7 +41,7 @@ spectateclientnum(var_0) {
   lib_0A0A::func_41A3(var_0);
 }
 
-_meth_85B1(var_0) {
+func_85B1(var_0) {
   self.bt.instancedata[var_0] = undefined;
   scripts\asm\asm_bb::func_2963(undefined);
 }
@@ -49,8 +49,8 @@ _meth_85B1(var_0) {
 isspectatingplayer(var_0) {
   var_1 = self.bt.instancedata[var_0];
   var_2 = gettime();
-  if(!isDefined(var_1._meth_85BA) && !isDefined(self.objective_position)) {
-    var_1._meth_85BA = var_2;
+  if(!isDefined(var_1.func_85BA) && !isDefined(self.objective_position)) {
+    var_1.func_85BA = var_2;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("grenade dive", "end")) {
@@ -59,7 +59,7 @@ isspectatingplayer(var_0) {
 
   if(scripts\asm\asm::asm_ephemeraleventfired("grenade cower", "end")) {
     var_1.var_4767 = 1;
-    if(isDefined(var_1._meth_85BA)) {
+    if(isDefined(var_1.func_85BA)) {
       var_1.var_6393 = var_2;
     } else {
       var_3 = 3000;
@@ -68,7 +68,7 @@ isspectatingplayer(var_0) {
   }
 
   if(var_1.var_4767) {
-    if(isDefined(var_1._meth_85BA) && var_2 - var_1._meth_85BA > 500) {
+    if(isDefined(var_1.func_85BA) && var_2 - var_1.func_85BA > 500) {
       return level.success;
     }
   } else if(!isDefined(self.objective_position)) {

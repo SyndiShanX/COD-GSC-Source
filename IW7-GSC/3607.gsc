@@ -10,7 +10,7 @@ func_DD9E() {
 }
 
 func_DD9D() {
-  self _meth_845E(1);
+  self func_845E(1);
   self give_crafted_sentry(1);
   self setclientomnvar("ui_odin", 5);
   self give_explosive_touch_on_revived("c6reaperservo");
@@ -34,7 +34,7 @@ func_DD97() {
   self endon("disconnect");
   self notify("reaper_removed");
   self notify("obj_drain_end");
-  self _meth_845E(0);
+  self func_845E(0);
   self give_crafted_sentry(0);
   self setclientomnvar("ui_odin", -1);
   self thermalvisionoff();
@@ -187,7 +187,7 @@ func_A668() {
   self endon("disconnect");
   level endon("game_ended");
   wait(0.05);
-  var_0 = self _meth_8113();
+  var_0 = self func_8113();
   if(!isDefined(var_0)) {
     return;
   }

@@ -72,8 +72,8 @@ func_DBCD() {
     var_11 = anglestoright(self getplayerangles());
     var_12 = self getEye();
 
-    if(isDefined(self _meth_8473())) {
-      var_12 = self _meth_8473() gettagorigin("tag_camera");
+    if(isDefined(self func_8473())) {
+      var_12 = self func_8473() gettagorigin("tag_camera");
     }
 
     foreach(var_14 in self.var_DBC6) {

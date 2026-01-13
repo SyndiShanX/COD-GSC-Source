@@ -76,7 +76,7 @@ watchgrenadeusage() {
 begingrenadetracking() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
-    if(isDefined(var_0) && scripts\engine\utility::istrue(var_0._meth_8589)) {
+    if(isDefined(var_0) && scripts\engine\utility::istrue(var_0.func_8589)) {
       continue;
     }
 

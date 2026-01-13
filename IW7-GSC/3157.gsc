@@ -225,7 +225,7 @@ getnodeyawoffset(var_0, var_1) {
   return 0;
 }
 
-_meth_812E(var_0, var_1) {
+func_812E(var_0, var_1) {
   if(!isDefined(var_0.angles)) {
     return 0;
   }
@@ -260,7 +260,7 @@ getnodeforwardyaw(var_0, var_1) {
 }
 
 gethighestnodestance(var_0, var_1) {
-  var_2 = _meth_812E(var_0, var_1);
+  var_2 = func_812E(var_0, var_1);
   return var_0.angles[1] + var_2;
 }
 

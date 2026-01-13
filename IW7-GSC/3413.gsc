@@ -153,7 +153,7 @@ player_zipline_travel(var_0, var_1) {
   var_0 scripts\engine\utility::allow_reload(0);
   var_0 disableautoreload();
   var_0 scripts\engine\utility::allow_weapon_switch(0);
-  var_0 _meth_857E(1);
+  var_0 func_857E(1);
   var_2 = player_zipline(var_0, var_1);
   var_0 lerpfovbypreset("zombiedefault");
   wait(0.1);
@@ -165,7 +165,7 @@ player_zipline_travel(var_0, var_1) {
   var_0 scripts\engine\utility::allow_prone(1);
   var_0 enableautoreload();
   var_0 scripts\engine\utility::allow_weapon_switch(1);
-  var_0 _meth_857E(0);
+  var_0 func_857E(0);
   var_0 notify("fast_travel_complete");
   var_0 thread scripts\cp\cp_vo::try_to_play_vo("zipline_exit", "rave_comment_vo");
 }
@@ -216,7 +216,7 @@ player_zipline(var_0, var_1) {
 
   wait(1);
   var_0 lerpfovbypreset("zombiearcade");
-  var_9 = var_0 _meth_816D();
+  var_9 = var_0 func_816D();
   var_0 givegoproattachments("viewmodel_arms_invisi");
   var_0A = var_2;
   var_0B = scripts\engine\utility::getstructarray(var_0A.target, "targetname");

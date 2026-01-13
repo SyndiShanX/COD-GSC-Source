@@ -78,7 +78,7 @@ func_10DD3(var_0, var_1) {
   } else {
     scripts\engine\utility::allow_usability(0);
     scripts\engine\utility::allow_weapon_switch(0);
-    var_3 = scripts\mp\killstreaks\_mapselect::_meth_8112(var_0);
+    var_3 = scripts\mp\killstreaks\_mapselect::func_8112(var_0);
     if(!isDefined(var_3)) {
       func_C6C4();
       scripts\engine\utility::allow_usability(1);

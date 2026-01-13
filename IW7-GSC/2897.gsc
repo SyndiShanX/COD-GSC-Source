@@ -451,7 +451,7 @@ func_C5FE(var_0) {
 func_C5FF(var_0) {
   foreach(var_2 in self.var_747E[var_0]) {
     var_2 setanimknob( % vh_mil_air_un_retribution_ftl_open);
-    var_2 _meth_82B0( % vh_mil_air_un_retribution_ftl_open, 1.0);
+    var_2 func_82B0( % vh_mil_air_un_retribution_ftl_open, 1.0);
   }
 }
 

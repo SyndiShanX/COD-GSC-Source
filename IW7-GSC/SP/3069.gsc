@@ -108,7 +108,7 @@ func_488C(var_0) {
     if(!isDefined(self.bt.var_487E)) {
       self.bt.var_487E = 1;
       self.var_6D = 16;
-      self _meth_8481(self.origin);
+      self func_8481(self.origin);
       thread lib_0BFE::func_F1F8();
     }
 
@@ -150,7 +150,7 @@ func_9DA2(var_0, var_1) {
   }
 
   if(isai(var_0)) {
-    if(var_0 _meth_81A6()) {
+    if(var_0 func_81A6()) {
       return 0;
     }
 

@@ -659,7 +659,7 @@ func_12E3A() {
   } else if(isDefined(self._blackboard.var_2534)) {
     var_1 = self._blackboard.var_2534;
   } else {
-    var_2 = self _meth_8493() == "follow";
+    var_2 = self func_8493() == "follow";
     var_3 = vehicle_getarray();
 
     if(isDefined(self._blackboard.var_2520) && self._blackboard.var_2520) {
@@ -718,7 +718,7 @@ func_12E3A() {
   var_13 = 0;
 
   if(!isDefined(var_1)) {
-    self _meth_846A();
+    self func_846A();
     self._blackboard.var_E1AD = undefined;
     var_13 = 1;
   } else if(!isDefined(self._blackboard.var_E1AD) || var_1 != self._blackboard.var_E1AD) {
@@ -729,7 +729,7 @@ func_12E3A() {
     var_1.var_C1DB++;
     self.var_6577 = gettime();
     var_13 = 1;
-    self _meth_846A(var_1);
+    self func_846A(var_1);
     self._blackboard.var_E1AD = var_1;
   }
 
@@ -793,7 +793,7 @@ func_12D7B() {
     var_3 = var_3 * func_7CFC(var_0);
     self._blackboard.accuracy = var_3;
   } else
-    self _meth_846A();
+    self func_846A();
 }
 
 func_9CC7() {
@@ -885,7 +885,7 @@ func_10D72() {
   self._blackboard.var_BFA6 = gettime() + 4000 + randomintrange(7000, 12000);
   self._blackboard.var_2CB8 = gettime() + 10000;
   var_0 = func_0BDC::func_1996();
-  self _meth_845F(var_0.speed * 1.8, var_0.var_1545 * 1.8, var_0.var_1E91 * 1.8, var_0.var_1E71 * 1.8);
+  self func_845F(var_0.speed * 1.8, var_0.var_1545 * 1.8, var_0.var_1E91 * 1.8, var_0.var_1E71 * 1.8);
 }
 
 func_11062() {
@@ -895,7 +895,7 @@ func_11062() {
   self._blackboard.var_2CCD = 0;
   var_0 = func_0BDC::func_1996();
   var_1 = var_0.speed;
-  self _meth_845F(var_1);
+  self func_845F(var_1);
 }
 
 func_12D99() {

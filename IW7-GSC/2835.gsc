@@ -145,12 +145,12 @@ func_19CE(var_0) {
     self.var_4BDF = var_0;
     var_1 = self.var_EDAD;
     level.var_22E0[func_7CE4()][var_1] = scripts\engine\utility::array_add(level.var_22E0[func_7CE4()][var_1], self);
-    thread _meth_8467();
+    thread func_8467();
     return;
   }
 }
 
-_meth_8467() {
+func_8467() {
   if(!isDefined(self.var_4BDF)) {
     return;
   }
@@ -493,7 +493,7 @@ func_F21B(var_0, var_1) {
   }
 
   self.fixednode = 0;
-  self _meth_82F1(var_0);
+  self func_82F1(var_0);
 }
 
 func_9F83(var_0, var_1, var_2, var_3) {
@@ -729,7 +729,7 @@ func_12FAD(var_0, var_1) {
     for(;;) {
       wait 1;
 
-      if(self _meth_81A8(var_0.origin, self.fixednodesaferadius)) {
+      if(self func_81A8(var_0.origin, self.fixednodesaferadius)) {
         continue;
       }
       if(self getteamfallbackspawnpoints(var_1)) {
@@ -762,7 +762,7 @@ func_9E6E(var_0, var_1) {
 func_13689(var_0, var_1) {
   if(isDefined(var_1)) {
     for(;;) {
-      if(self _meth_81A8(var_0.origin, self.fixednodesaferadius)) {
+      if(self func_81A8(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
       if(self getteamfallbackspawnpoints(var_1)) {
@@ -1229,7 +1229,7 @@ func_10735(var_0, var_1) {
     var_3.count = 1;
     var_4 = var_3.origin;
     var_3.origin = level.respawn_threshold;
-    var_2 = var_3 _meth_8393();
+    var_2 = var_3 func_8393();
     var_3.origin = var_4;
 
     if(scripts\sp\utility::func_106ED(var_2)) {

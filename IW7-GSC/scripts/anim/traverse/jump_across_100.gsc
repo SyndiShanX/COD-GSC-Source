@@ -12,12 +12,12 @@ main() {
   self.var_5270 = "stand";
   scripts\anim\utility::func_12E5F();
   self endon("killanimscript");
-  self _meth_83C4("nogravity");
-  self _meth_83C4("noclip");
+  self func_83C4("nogravity");
+  self func_83C4("noclip");
   var_0 = self getspectatepoint();
   self orientmode("face angle", var_0.angles[1]);
   var_1 = func_7814();
-  self _meth_82E4("jumpanim", var_1, % body, 1, 0.1, 1);
+  self func_82E4("jumpanim", var_1, % body, 1, 0.1, 1);
   scripts\anim\shared::donotetracks("jumpanim");
 }
 

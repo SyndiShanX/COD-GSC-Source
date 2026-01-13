@@ -23,7 +23,7 @@ bt_initroot() {
   var_0.var_C21E = 8;
   var_0.var_273F = 0;
   self.bt.var_E6E5 = var_0;
-  self.bt.var_BE5D = self _meth_84B1("jackal\jackal_native_api");
+  self.bt.var_BE5D = self func_84B1("jackal\jackal_native_api");
 }
 
 func_0070() {

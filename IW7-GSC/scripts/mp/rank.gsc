@@ -91,7 +91,7 @@ getrankinfomaxxp(var_0) {
   return int(level.ranktable[var_0]["maxXP"]);
 }
 
-_meth_80D0(var_0) {
+func_80D0(var_0) {
   var_1 = getdvarint("scr_beta_max_level", 0);
   if(var_1 > 0 && var_0 + 1 >= var_1) {
     return "ranked_up_beta_max";
@@ -170,7 +170,7 @@ onplayerconnect() {
     var_0 thread func_C575();
     if(var_0 scripts\mp\utility::rankingenabled()) {
       var_3 = getdvarint("online_mp_party_xpscale");
-      var_4 = var_0 _meth_85BE() > 1;
+      var_4 = var_0 func_85BE() > 1;
       if(var_4) {
         var_0 addrankxpmultiplier(var_3, "online_mp_party_xpscale");
       }
@@ -283,7 +283,7 @@ giverankxp(var_0, var_1, var_2) {
   var_6 = var_1;
   var_7 = 0;
   if(scripts\mp\utility::istrue(var_4)) {
-    var_5 = _meth_80D4();
+    var_5 = func_80D4();
     var_6 = int(var_1 * var_5);
     var_7 = int(max(var_6 - var_1, 0));
   }
@@ -296,7 +296,7 @@ giverankxp(var_0, var_1, var_2) {
 
   func_11390();
   if(isDefined(var_2) && scripts\mp\weaponrank::func_13CCA(var_2)) {
-    thread scripts\mp\weaponrank::_meth_8394(var_2, var_0, var_1);
+    thread scripts\mp\weaponrank::func_8394(var_2, var_0, var_1);
   }
 
   func_DDF7(var_0, var_1, var_7);
@@ -368,7 +368,7 @@ func_12EFB() {
   }
 
   var_1 = self.pers["rank"];
-  var_2 = _meth_80D0(var_1);
+  var_2 = func_80D0(var_1);
   if(isDefined(var_2) && var_2 != "") {
     thread scripts\mp\hud_message::showsplash(var_2, var_1 + 1);
   }
@@ -673,7 +673,7 @@ removeteamrankxpmultiplier(var_0, var_1) {
   level.teamrankxpmultipliers[var_0][var_1] = undefined;
 }
 
-_meth_81B6(var_0) {
+func_81B6(var_0) {
   if(!level.teambased) {
     var_0 = "all";
   }
@@ -694,9 +694,9 @@ _meth_81B6(var_0) {
   return var_1;
 }
 
-_meth_80D4() {
+func_80D4() {
   var_0 = getrankxpmultiplier();
   var_1 = func_7ED9();
-  var_2 = _meth_81B6(self.team);
+  var_2 = func_81B6(self.team);
   return var_0 * var_1 * var_2;
 }

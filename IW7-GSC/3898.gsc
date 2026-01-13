@@ -181,10 +181,10 @@ func_3721(var_0, var_1, var_2, var_3) {
   var_13 = var_1;
 
   if(var_2 == "Custom") {
-    var_14 = _meth_8174(self.asm.var_4C86.var_22F1, undefined, self.asm.var_4C86.var_22F6);
+    var_14 = func_8174(self.asm.var_4C86.var_22F1, undefined, self.asm.var_4C86.var_22F6);
     var_13 = self.asm.var_4C86.var_22F1;
   } else
-    var_14 = _meth_8174(var_1, undefined, var_3);
+    var_14 = func_8174(var_1, undefined, var_3);
 
   var_15 = getweaponslistprimaries();
   var_16 = var_5 - self.origin;
@@ -214,7 +214,7 @@ func_3721(var_0, var_1, var_2, var_3) {
   var_26 = func_36D9(var_15.pos, var_15.var_0130[1], var_20, var_21);
   var_27 = getclosestpointonnavmesh(var_15.pos, self);
   var_28 = func_36D9(var_27, var_15.var_0130[1], var_20, var_21);
-  var_29 = self _meth_84AC();
+  var_29 = self func_84AC();
   var_30 = var_2 == "Cover Left" || var_2 == "Cover Right" || var_2 == "Cover Left Crouch" || var_2 == "Cover Right Crouch";
 
   if(var_30 && (var_12 == 0 || var_12 == 8 || var_12 == 7 || var_12 == 1)) {
@@ -365,7 +365,7 @@ func_CEAA(var_0, var_1, var_2, var_3) {
   var_10 = self getanimentry(var_1, var_5.var_11060);
   var_11 = getanimlength(var_10);
   var_11 = var_11 * (1 / var_6);
-  self _meth_8396(var_5.startpos, var_9[1], var_11);
+  self func_8396(var_5.startpos, var_9[1], var_11);
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_5.var_11060, var_6);
 }
 
@@ -437,7 +437,7 @@ func_36D9(var_0, var_1, var_2, var_3) {
   return var_0 - var_6;
 }
 
-_meth_8174(var_0, var_1, var_2) {
+func_8174(var_0, var_1, var_2) {
   var_3 = [];
   var_3[5] = scripts\asm\asm::func_235C(1, var_0, var_2);
   var_3[4] = scripts\asm\asm::func_235C(2, var_0, var_2);

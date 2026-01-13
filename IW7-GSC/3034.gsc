@@ -62,7 +62,7 @@ main(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\sp\vehicle_build::func_31C6(var_2, "water", "vfx\iw7\core\vehicle\jackal\vfx_jackal_water_tread_wash.vfx", 1);
 
   if(!isDefined(level.var_A056)) {
-    level._meth_83DF = func_0BD4::func_10492;
+    level.func_83DF = func_0BD4::func_10492;
     level.var_A056 = spawnStruct();
     level.var_A056.var_4FEB = [];
     level.var_A056.var_63A3 = 0;

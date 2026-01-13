@@ -3,7 +3,7 @@
  * Script: scripts\sp\load_code.gsc
 *********************************************/
 
-_meth_83D5() {
+func_83D5() {
   setsaveddvar("cg_fovScale", "1");
   setsaveddvar("sv_saveOnStartMap", !isDefined(level.var_4A3A));
   setsaveddvar("sm_roundRobinPrioritySpotShadows", 4);

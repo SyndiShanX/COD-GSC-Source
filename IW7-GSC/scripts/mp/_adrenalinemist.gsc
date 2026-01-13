@@ -67,7 +67,7 @@ func_189C(var_0) {
 
 func_189F(var_0, var_1, var_2, var_3) {
   if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-    var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 

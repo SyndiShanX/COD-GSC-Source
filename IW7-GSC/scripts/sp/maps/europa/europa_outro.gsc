@@ -44,7 +44,7 @@ func_C7D3() {
   setdvar("skip_outro", "0");
   var_0 = scripts\sp\hud_util::func_7B4F();
   var_0.alpha = 1;
-  level.player _meth_82C0("europa_suck_out_hit_fade_to_black", 0);
+  level.player func_82C0("europa_suck_out_hit_fade_to_black", 0);
   setmusicstate("");
   scripts\engine\utility::flag_set("player_holding_on");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
@@ -59,8 +59,8 @@ func_94FB() {
   }
 
   foreach(var_2 in var_0) {
-    var_2.var_99E5 = var_2 _meth_8134();
-    var_2.color = var_2 _meth_8131();
+    var_2.var_99E5 = var_2 func_8134();
+    var_2.color = var_2 func_8131();
     var_2 setlightintensity(0);
   }
 }
@@ -169,9 +169,9 @@ func_EBEA() {
 
   if(!var_8) {
     level.player.helmet notsolid();
-    level.player.helmet _meth_83CB(level.player);
+    level.player.helmet func_83CB(level.player);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_01_clear");
-    level.player.helmet _meth_81E2(level.player, "tag_playerhelmet", (-2, 0, 0), (12, 0, 0), 1, "view_jostle");
+    level.player.helmet func_81E2(level.player, "tag_playerhelmet", (-2, 0, 0), (12, 0, 0), 1, "view_jostle");
     lib_0E4B::func_8E0A();
   }
 
@@ -200,7 +200,7 @@ func_EBEA() {
   }
 
   thread func_FB84();
-  level.player _meth_82C0("europa_wake_up_scene", 12);
+  level.player func_82C0("europa_wake_up_scene", 12);
   wait(8);
   thread func_912F();
   level.player scripts\engine\utility::delaycall(4.5, ::setclientomnvar, "ui_hide_hud", 0);
@@ -216,7 +216,7 @@ func_EBEA() {
   var_9 thread scripts\sp\anim::func_1F2C(var_1, "outro");
   scripts\engine\utility::noself_delaycall(112, ::objective_state, 3, "failed");
   scripts\engine\utility::flag_wait("outro_freeze");
-  level.player _meth_82C0("europa_end_cut_hard", 0.05);
+  level.player func_82C0("europa_end_cut_hard", 0.05);
 }
 
 func_DB9C() {
@@ -595,7 +595,7 @@ func_11628() {
         var_5 freezecontrols(1);
         break;
       } else if(isai(var_5) && var_3.script_noteworthy == var_5.script_noteworthy) {
-        var_5 _meth_80F1(var_3.origin);
+        var_5 func_80F1(var_3.origin);
         var_5 give_mp_super_weapon(var_3.origin);
         break;
       }

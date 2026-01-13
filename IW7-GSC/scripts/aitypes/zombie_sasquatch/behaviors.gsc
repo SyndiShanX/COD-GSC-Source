@@ -166,7 +166,7 @@ melee_charge(var_0) {
 
   var_1 = self.bt.meleetarget;
   var_2 = gettime() - self.bt.instancedata[var_0].starttime;
-  var_3 = isDefined(self _meth_8150());
+  var_3 = isDefined(self func_8150());
   if(var_2 > 200 && !var_3) {
     melee_failed(1, var_1);
     return level.failure;
@@ -191,7 +191,7 @@ melee_charge(var_0) {
   }
 
   if(var_5 < 5184) {
-    var_8 = self _meth_84AC();
+    var_8 = self func_84AC();
     var_9 = getclosestpointonnavmesh(var_1.origin, self);
     if(navisstraightlinereachable(var_8, var_9, self)) {
       self.bt.instancedata[var_0].bsuccess = 1;
@@ -270,7 +270,7 @@ shouldrush(var_0) {
   }
 
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_4 = self _meth_84F9(84);
+    var_4 = self func_84F9(84);
     if(isDefined(var_4)) {
       return level.failure;
     }
@@ -329,7 +329,7 @@ rush_charge(var_0) {
     return level.failure;
   }
 
-  var_8 = self _meth_84F9(84);
+  var_8 = self func_84F9(84);
   if(isDefined(var_8)) {
     self.bt.instancedata[var_0].bfailure = 1;
     return level.failure;
@@ -339,11 +339,11 @@ rush_charge(var_0) {
     var_9 = 1000;
     if(var_4 > self.bt.instancedata[var_0].starttime + var_9) {
       var_0A = vectornormalize((var_7[0], var_7[1], 0));
-      var_0B = self _meth_813A();
+      var_0B = self func_813A();
       var_0B = vectornormalize((var_0B[0], var_0B[1], 0));
       if(vectordot(var_7, var_0B) < 0.966) {
         var_0C = self.origin + var_0B * 208;
-        var_0D = self _meth_84AC();
+        var_0D = self func_84AC();
         var_0E = navtrace(var_0D, var_0C, self, 1);
         if(var_0E["fraction"] < 1) {
           var_0C = var_0E["position"];

@@ -164,7 +164,7 @@ func_E4C7() {
         continue;
       }
 
-      if(self _meth_8519(var_3, 1)) {
+      if(self func_8519(var_3, 1)) {
         var_3 = getsubstr(var_3, 4, var_3.size);
       }
 
@@ -181,7 +181,7 @@ func_E4C7() {
   foreach(var_3 in var_0) {
     var_0E = 0;
     if(scripts\mp\utility::getweaponrootname(var_3) == "iw7_fmg") {
-      var_0E = self _meth_8519(var_3, 1);
+      var_0E = self func_8519(var_3, 1);
     } else if(issubstr(var_3, "akimbo")) {
       var_0E = 1;
     }

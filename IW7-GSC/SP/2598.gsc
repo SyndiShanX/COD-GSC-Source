@@ -37,13 +37,13 @@ func_33AC(var_0, var_1, var_2, var_3) {
     var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
-  self _meth_82B1(lib_0A1E::func_2342(), 0);
+  self func_82B1(lib_0A1E::func_2342(), 0);
   if(isDefined(self.var_71C8)) {
     self[[self.var_71C8]]();
   }
 
   self giverankxp_regularmp("torso_upper", var_4 * 2400);
-  level.player _meth_8244("damage_heavy");
+  level.player func_8244("damage_heavy");
   earthquake(0.5, 1, level.player.origin, 100);
   level.player scripts\engine\utility::delaycall(0.25, ::stoprumble, "damage_heavy");
   wait(1);
@@ -56,7 +56,7 @@ func_3368() {
   }
 
   foreach(var_5, var_1 in self.var_4D5D) {
-    if(var_5 == "head" && self _meth_850C(var_5) <= 0) {
+    if(var_5 == "head" && self func_850C(var_5) <= 0) {
       continue;
     }
 
@@ -77,7 +77,7 @@ func_3361(var_0, var_1, var_2, var_3) {
 
   self.var_A709 = 1;
   var_4 = undefined;
-  level.player _meth_8244("damage_heavy");
+  level.player func_8244("damage_heavy");
   earthquake(0.5, 1, level.player.origin, 100);
   thread scripts\sp\art::func_583F(0, 1, 0.02, 203, 211, 3, 0.05);
   if(self.asmname == "c6_worker") {

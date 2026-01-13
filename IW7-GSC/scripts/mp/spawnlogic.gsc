@@ -108,7 +108,7 @@ func_13B84(var_0) {
   var_1 = gettime() + int(self.lastboundstimelimit * 1000);
   self.var_1D44 = 1;
   self setclientomnvar("ui_out_of_bounds_countdown", var_1);
-  self _meth_859E("mp_out_of_bounds");
+  self func_859E("mp_out_of_bounds");
   var_2 = 0;
   var_3 = self.lastboundstimelimit;
   while(self istouching(var_0)) {
@@ -126,7 +126,7 @@ func_13B84(var_0) {
   }
 
   self setclientomnvar("ui_out_of_bounds_countdown", 0);
-  self _meth_859E("");
+  self func_859E("");
   self.var_1D44 = undefined;
   if(scripts\mp\utility::istrue(var_2)) {
     self.lastboundstimelimit = undefined;
@@ -971,7 +971,7 @@ func_67D3(var_0, var_1) {
     }
 
     if(!isDefined(var_9.spawnviewpathnodes)) {
-      var_9.spawnviewpathnodes = var_9 _meth_8480(getfarnoderadiusdist());
+      var_9.spawnviewpathnodes = var_9 func_8480(getfarnoderadiusdist());
       if(!isDefined(var_9.spawnviewpathnodes) || var_9.spawnviewpathnodes.size == 0) {
         if(isDefined(level.matchrecording_logeventmsg) && var_7 && isplayer(var_9)) {
           if(!isDefined(var_9.var_A9CC) || var_9.var_A9CC != gettime()) {

@@ -76,7 +76,7 @@ func_470E(var_0) {
   var_3.var_92CC = ::func_92CC;
   var_3.var_6F27 = ::func_6F27;
   var_3.objective_position = ::func_128AF;
-  var_3._meth_85BF = ::func_128B0;
+  var_3.func_85BF = ::func_128B0;
   var_3.var_2B99 = ::func_2B99;
   scripts\anim\cover_behavior::main(var_3);
 }
@@ -139,7 +139,7 @@ func_D66A() {
     }
   }
 
-  _meth_8405();
+  func_8405();
   self.var_4716 = undefined;
   self.sendmatchdata = 0;
   return 1;
@@ -203,7 +203,7 @@ func_DC57() {
     return 0;
   }
 
-  var_1 = _meth_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
+  var_1 = func_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
   if(var_1 > 15) {
     return 0;
   }
@@ -222,7 +222,7 @@ func_DC57() {
   self.var_3C60 = 1;
   thread scripts\anim\shared::func_DC59(0);
   var_4 = scripts\anim\utility::func_1F67(var_0);
-  self _meth_82E4("rambo", var_4, % body, 1, 0.2, 1);
+  self func_82E4("rambo", var_4, % body, 1, 0.2, 1);
   func_470A(var_4);
   scripts\anim\shared::donotetracks("rambo");
   self notify("rambo_aim_end");
@@ -269,9 +269,9 @@ func_6F27() {
 
 func_D49E(var_0, var_1) {
   if(var_1) {
-    self _meth_82E4("idle", var_0, % body, 1, 0.25, 1);
+    self func_82E4("idle", var_0, % body, 1, 0.25, 1);
   } else {
-    self _meth_82E3("idle", var_0, % body, 1, 0.25, 1);
+    self func_82E3("idle", var_0, % body, 1, 0.25, 1);
   }
 
   func_470A(var_0);
@@ -296,7 +296,7 @@ look(var_0) {
     var_1 = scripts\anim\utility::func_1F64("look_to_hide");
   }
 
-  self _meth_82E4("looking_end", var_1, % body, 1, 0.1);
+  self func_82E4("looking_end", var_1, % body, 1, 0.1);
   func_470A(var_1);
   scripts\anim\shared::donotetracks("looking_end");
   return 1;
@@ -308,7 +308,7 @@ func_C9FC() {
   }
 
   var_0 = scripts\anim\utility::func_1F64("hide_to_look");
-  self _meth_82E3("looking_start", var_0, % body, 1, 0.2);
+  self func_82E3("looking_start", var_0, % body, 1, 0.2);
   func_470A(var_0);
   scripts\anim\shared::donotetracks("looking_start");
   return 1;
@@ -316,7 +316,7 @@ func_C9FC() {
 
 func_6B9B() {
   var_0 = scripts\anim\utility::func_1F67("look");
-  self _meth_82E4("look", var_0, % body, 1, 0.1);
+  self func_82E4("look", var_0, % body, 1, 0.1);
   func_470A(var_0);
   scripts\anim\shared::donotetracks("look");
   return 1;
@@ -361,7 +361,7 @@ func_D65B() {
   self notify("done_changing_cover_pos");
   func_F6C0();
   var_4 = func_D65C();
-  self _meth_82E4("pop_up", var_2, % body, 1, 0.1, var_4);
+  self func_82E4("pop_up", var_2, % body, 1, 0.1, var_4);
   thread donotetracksforpopup("pop_up");
   if(animhasnotetrack(var_2, "start_aim")) {
     self waittillmatch("start_aim", "pop_up");
@@ -400,47 +400,47 @@ func_F8A6(var_0) {
     var_1 = self.a.var_4727;
   }
 
-  self _meth_82A5(scripts\anim\utility::func_1F64(var_1 + "_aim"), % body, 1, var_0);
+  self func_82A5(scripts\anim\utility::func_1F64(var_1 + "_aim"), % body, 1, var_0);
   if(var_1 == "crouch") {
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_down"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_left"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_up"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_right"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_down"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_left"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_up"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_crouch", "add_aim_right"), 1, 0);
     return;
   }
 
   if(var_1 == "stand") {
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_down"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_left"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_up"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_right"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_down"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_left"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_up"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_right"), 1, 0);
     return;
   }
 
   if(var_1 == "lean") {
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_down"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_left"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_up"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_right"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_down"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_left"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_up"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("default_stand", "add_aim_right"), 1, 0);
     return;
   }
 
   if(var_1 == "over") {
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_down"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_left"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_up"), 1, 0);
-    self _meth_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_right"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_down"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_left"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_up"), 1, 0);
+    self func_82AC(scripts\anim\utility::func_B027("cover_stand", "add_aim_right"), 1, 0);
     return;
   }
 }
 
-_meth_8405() {
+func_8405() {
   self notify("return_to_cover");
   self.var_3C60 = 1;
   self notify("done_changing_cover_pos");
   scripts\anim\combat_utility::func_6309();
   var_0 = func_D65C();
-  self _meth_82E3("go_to_hide", scripts\anim\utility::func_1F64(self.a.var_4727 + "_2_hide"), % body, 1, 0.2, var_0);
+  self func_82E3("go_to_hide", scripts\anim\utility::func_1F64(self.a.var_4727 + "_2_hide"), % body, 1, 0.2, var_0);
   self clearanim( % exposed_modern, 0.2);
   scripts\anim\shared::donotetracks("go_to_hide");
   self.a.var_4727 = "hide";
@@ -485,7 +485,7 @@ func_2B99() {
 
   func_F6C0();
   self.sendmatchdata = 1;
-  self _meth_82E4("blindfire", scripts\anim\utility::func_1F67("blind_fire"), % body, 1, 0.2, 1);
+  self func_82E4("blindfire", scripts\anim\utility::func_1F67("blind_fire"), % body, 1, 0.2, 1);
   scripts\anim\shared::donotetracks("blindfire");
   self.sendmatchdata = 0;
   return 1;
@@ -615,7 +615,7 @@ func_BE9D() {
     return 0;
   }
 
-  var_0 = _meth_811F(self getEye());
+  var_0 = func_811F(self getEye());
   if(self.a.var_4727 == "lean") {
     return var_0 < 10;
   }
@@ -626,10 +626,10 @@ func_BE9D() {
 func_7DFA() {
   var_0 = [];
   if(self.var_4757 == "stand") {
-    var_0 = self.covernode _meth_8169();
+    var_0 = self.covernode func_8169();
     var_0[var_0.size] = "stand";
   } else {
-    var_1 = _meth_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
+    var_1 = func_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
     if(var_1 > 30) {
       return "lean";
     }
@@ -638,7 +638,7 @@ func_7DFA() {
       return "stand";
     }
 
-    var_0 = self.covernode _meth_8169();
+    var_0 = self.covernode func_8169();
     var_0[var_0.size] = "crouch";
   }
 
@@ -653,7 +653,7 @@ func_7DFA() {
   return scripts\anim\combat_utility::dospawn(var_0);
 }
 
-_meth_811F(var_0) {
+func_811F(var_0) {
   var_1 = scripts\anim\utility_common::getenemyeyepos();
   return angleclamp180(vectortoangles(var_1 - var_0)[0]);
 }

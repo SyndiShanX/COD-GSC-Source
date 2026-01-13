@@ -1636,7 +1636,7 @@ func_3BFE(var_0, var_1) {
 
   var_7 = [];
   foreach(var_9 in var_0.var_24FD) {
-    var_0A = scripts\mp\perks\_perks::_meth_805C(var_9);
+    var_0A = scripts\mp\perks\_perks::func_805C(var_9);
     if(isDefined(var_0A)) {
       if(!isDefined(var_7[var_0A])) {
         var_7[var_0A] = 1;
@@ -2849,7 +2849,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9.isbulletdamage = scripts\engine\utility::isbulletdamage(var_4);
   if(isDefined(var_5) && issubstr(var_5, "_hybrid")) {
     if(var_1 getcurrentweapon() == var_5) {
-      var_9.var_9272 = var_1 _meth_812E(var_5);
+      var_9.var_9272 = var_1 func_812E(var_5);
     } else {
       var_9.var_9272 = 0;
     }
@@ -3652,7 +3652,7 @@ giverankxpafterwait(var_0, var_1) {
   var_2 = "challenge";
   var_3 = undefined;
   if(func_9FFC(var_0)) {
-    var_3 = scripts\mp\utility::func_13C75(_meth_8222(var_0));
+    var_3 = scripts\mp\utility::func_13C75(func_8222(var_0));
   }
 
   var_4 = level.var_3C2C[var_0]["reward"][var_1];
@@ -3792,7 +3792,7 @@ isweaponclasschallenge(var_0) {
   return 0;
 }
 
-_meth_8222(var_0) {
+func_8222(var_0) {
   return func_7E20(var_0);
 }
 
@@ -4487,7 +4487,7 @@ func_3DFA(var_0, var_1, var_2) {
 }
 
 func_3DF8(var_0) {
-  if(self _meth_81AA()) {
+  if(self func_81AA()) {
     processchallenge("ch_" + var_0 + "_leaning");
   }
 }

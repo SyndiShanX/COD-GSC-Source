@@ -186,7 +186,7 @@ func_11B9() {
 func_1270(var_0) {
   var_1 = [];
   foreach(var_3 in var_0) {
-    var_4 = level.player _meth_854C(var_3);
+    var_4 = level.player func_854C(var_3);
     if(var_4 != "scriptoffhand") {
       var_1 = scripts\engine\utility::array_add(var_1, var_3);
     }
@@ -237,10 +237,10 @@ func_1271() {
   for(;;) {
     waittillframeend;
     level.player.var_AA2B = level.player.var_1180B;
-    level.player.var_1180B = level.player _meth_8556();
+    level.player.var_1180B = level.player func_8556();
     if(level.player func_8448()) {
       level.player.var_1180A = 1;
-      level.player.var_127C1 = level.player _meth_8556();
+      level.player.var_127C1 = level.player func_8556();
       wait(0.05);
       continue;
     }
@@ -429,7 +429,7 @@ func_142E(var_0, var_1) {
       level.player takeweapon(var_0A);
     }
 
-    level.player _meth_844D();
+    level.player func_844D();
     level.player assignweaponoffhandprimary(var_2[0]);
     if(var_2.size > 1) {
       if(level.player.var_110C0) {

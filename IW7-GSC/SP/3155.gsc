@@ -37,7 +37,7 @@ func_F16E(var_0, var_1, var_2, var_3) {
   var_4 = level.asm[var_0].states[var_1].var_71A5;
   var_5 = self[[var_4]](var_0, var_1, var_3);
   var_6 = getanimlength(var_5);
-  self _meth_82E4("deathanim", var_5, lib_0A1E::asm_getbodyknob(), 1, 0.1);
+  self func_82E4("deathanim", var_5, lib_0A1E::asm_getbodyknob(), 1, 0.1);
   wait(var_6);
   self notify("terminate_ai_threads");
   self notify("killanimscript");
@@ -50,8 +50,8 @@ func_F16C(var_0, var_1, var_2, var_3) {
 
   self.var_EA0E = 1;
   stopFXOnTag(level.var_7649["seeker_" + self.team], self, "tag_fx");
-  self _meth_8484();
-  self _meth_8481(self.origin);
+  self func_8484();
+  self func_8481(self.origin);
   if(isDefined(self.var_B14F)) {
     self notify("stop_magic_bullet_shield");
     self.var_B14F = undefined;
@@ -83,7 +83,7 @@ func_D55F(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = self getspectatepoint();
   var_5 = scripts\engine\utility::drop_to_ground(var_4.origin, 5);
-  var_6 = self _meth_8146();
+  var_6 = self func_8146();
   var_6 = scripts\engine\utility::drop_to_ground(var_6, 5);
   self orientmode("face angle", var_4.angles[1]);
   var_7 = distance(var_5, var_6);
@@ -100,11 +100,11 @@ func_D55F(var_0, var_1, var_2, var_3) {
 
     var_0D = vectorlerp(var_5, var_6, var_0B);
     var_0B = var_0B + var_0A;
-    self _meth_80F1(var_0D, self.angles, 10000);
+    self func_80F1(var_0D, self.angles, 10000);
     scripts\engine\utility::waitframe();
   }
 
-  self _meth_80F1(var_6, self.angles, 10000);
+  self func_80F1(var_6, self.angles, 10000);
   func_11701(var_0, var_1);
 }
 
@@ -137,7 +137,7 @@ func_CF23(var_0, var_1, var_2, var_3) {
 func_CF25(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   var_6 = var_5 - var_4.origin;
   var_6 = (var_6[0], var_6[1], 0);
   func_D561(var_0, var_1, var_2, [var_6[2]]);
@@ -151,7 +151,7 @@ func_D561(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = self getspectatepoint();
   var_5 = scripts\engine\utility::drop_to_ground(var_4.origin, 5);
-  var_6 = self _meth_8146();
+  var_6 = self func_8146();
   var_6 = scripts\engine\utility::drop_to_ground(var_6, 5);
   var_7 = 0;
   if(isDefined(var_3)) {
@@ -191,7 +191,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   var_14 = func_3EA3(var_0, var_1, "takeoff");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_14, 1, var_2, 1);
+  self func_82EA(var_1, var_14, 1, var_2, 1);
   wait(getanimlength(var_14) - 0.1);
   var_15 = distance(var_0A, var_10) + distance(var_0B, var_10);
   var_16 = scripts\sp\utility::func_BD6B(25, var_15);
@@ -202,7 +202,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   thread scripts\sp\utility::play_sound_on_entity("seeker_jump_start");
   var_19 = func_3EA3(var_0, var_1, "jumploop");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_19, 1, var_2, 1);
+  self func_82EA(var_1, var_19, 1, var_2, 1);
   self.var_A481 = scripts\engine\utility::spawn_tag_origin();
   self.var_A481 linkto(self, "tag_origin", (0, 0, 0), (90, 0, 0));
   playFXOnTag(level.var_7649["seeker_thruster"], self.var_A481, "tag_origin");
@@ -217,11 +217,11 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     var_1D = scripts\sp\math::func_7BC5(var_0A, var_0B, var_0F, var_1A);
     var_1A = var_1A + var_18;
-    self _meth_80F1(var_1D, self.angles, 10000);
+    self func_80F1(var_1D, self.angles, 10000);
     if(var_1A > 0.7 && !var_1C) {
       var_19 = func_3EA3(var_0, var_1, "fallloop");
       self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-      self _meth_82EA(var_1, var_19, 1, var_2, 1);
+      self func_82EA(var_1, var_19, 1, var_2, 1);
       killfxontag(level.var_7649["seeker_thruster"], self, "tag_origin");
       var_1C = 1;
     }
@@ -230,11 +230,11 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   self.var_A481 delete();
-  self _meth_80F1(var_0B, self.angles, 10000);
+  self func_80F1(var_0B, self.angles, 10000);
   func_F154(self.pausemayhem);
   var_1E = func_3EA3(var_0, var_1, "land");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_1E, 1, var_2, 1);
+  self func_82EA(var_1, var_1E, 1, var_2, 1);
   thread scripts\sp\utility::play_sound_on_entity("seeker_jump_end");
   wait(getanimlength(var_1E) - 0.05);
   self.var_36A = 0;

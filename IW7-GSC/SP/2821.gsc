@@ -5,7 +5,7 @@
 
 main() {
   level.analytics = spawnStruct();
-  level.analytics.var_B8D3 = level.player _meth_84C6("totalGameplayTime");
+  level.analytics.var_B8D3 = level.player func_84C6("totalGameplayTime");
   level.analytics.var_10DB5 = func_7E73();
   setdvar("scr_analytics_playerJustDied", 0);
   thread func_1E6C();
@@ -39,15 +39,15 @@ func_F230(var_0, var_1) {
 
   var_2 = var_1 - level.analytics.var_B8D3;
   var_3 = func_7E73();
-  self _meth_84C9(var_0, int(var_2), level.analytics.var_10DB5, var_3);
+  self func_84C9(var_0, int(var_2), level.analytics.var_10DB5, var_3);
 }
 
 func_12F49() {
-  var_0 = level.player _meth_84C6("totalGameplayTime");
+  var_0 = level.player func_84C6("totalGameplayTime");
   var_1 = int(gettime() - getdvarint("scr_analytics_playerStartTime") / 1000);
   if(var_1 > 0) {
     var_0 = var_0 + var_1;
-    level.player _meth_84C7("totalGameplayTime", var_0);
+    level.player func_84C7("totalGameplayTime", var_0);
   }
 
   return var_0;

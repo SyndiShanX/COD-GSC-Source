@@ -2306,7 +2306,7 @@ final_last_stand_handler(var_0) {
 delay_set_audio_zone(var_0) {
   var_0 endon("disconnect");
   wait(1);
-  var_0 _meth_82C0("cp_zmb_afterlife_lg_room", 0.5);
+  var_0 func_82C0("cp_zmb_afterlife_lg_room", 0.5);
 }
 
 delay_unset_audio_zone(var_0) {

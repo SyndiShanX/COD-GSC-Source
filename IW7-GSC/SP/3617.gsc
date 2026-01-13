@@ -78,7 +78,7 @@ func_FF4F(var_0, var_1) {
       return var_0.var_1C78;
     }
 
-    if(var_0 _meth_81A6()) {
+    if(var_0 func_81A6()) {
       return 0;
     }
 
@@ -317,7 +317,7 @@ func_197D(var_0) {
   }
 
   if(isDefined(self.a) && isDefined(self.a.var_58DA)) {
-    self _meth_81D0();
+    self func_81D0();
     return;
   }
 
@@ -907,7 +907,7 @@ func_3CB0(var_0, var_1) {
 
 func_4933() {
   var_0 = physics_volumecreate(self.origin, self.var_85D2, 180);
-  var_0 _meth_8527(0);
+  var_0 func_8527(0);
   var_0 physics_volumesetactivator(1);
   var_0 physics_volumeenable(1);
   thread func_CB0A(var_0);
@@ -917,9 +917,9 @@ func_4933() {
 func_CB0A(var_0) {
   var_0 endon("destroy_volume");
   var_1 = -0.15;
-  var_0 _meth_852A(1, var_1);
+  var_0 func_852A(1, var_1);
   wait(0.2);
-  var_0 _meth_852A(1, 0);
+  var_0 func_852A(1, 0);
 }
 
 func_52B3(var_0) {

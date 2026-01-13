@@ -1040,7 +1040,7 @@ loadout_updateplayerarchetype(var_0) {
     var_1 = 0;
   }
 
-  self _meth_845E(0);
+  self func_845E(0);
   self allowdoublejump(var_6 &var_1);
   self allowslide(var_6 &var_2);
   self allowwallrun(var_6 &var_3);
@@ -1076,9 +1076,9 @@ loadout_updateplayerarchetype(var_0) {
     self give_explosive_touch_on_revived(var_8);
 
     if(var_8 == "c6servo") {
-      self _meth_8460("clothtype", "c6servo");
+      self func_8460("clothtype", "c6servo");
     } else {
-      self _meth_8460("clothtype", "");
+      self func_8460("clothtype", "");
     }
 
     self.var_42B0 = var_8;
@@ -1406,7 +1406,7 @@ setmlgspectatorclientloadoutdata(var_0, var_1) {
   var_0 getrandomindex("primaryPower", var_2);
   var_3 = scripts\mp\powers::func_D738(var_1.var_AE7D);
   var_0 getrandomindex("secondaryPower", var_3);
-  var_4 = scripts\mp\supers::_meth_8186(var_1.loadoutsuper);
+  var_4 = scripts\mp\supers::func_8186(var_1.loadoutsuper);
   var_0 getrandomindex("super", var_4);
 
   if(isai(var_0)) {
@@ -1443,7 +1443,7 @@ setmlgspectatorclientloadoutdata(var_0, var_1) {
 }
 
 shouldallowinstantclassswap() {
-  return level.ingraceperiod && level._meth_8487 - level.ingraceperiod >= 0 && level._meth_8487 - level.ingraceperiod < 5 && !self.hasdonecombat;
+  return level.ingraceperiod && level.func_8487 - level.ingraceperiod >= 0 && level.func_8487 - level.ingraceperiod < 5 && !self.hasdonecombat;
 }
 
 giveloadoutswap() {
@@ -1575,10 +1575,10 @@ func_AE38(var_0, var_1) {
       setmatchdata("players", self.clientid, "killstreaks", 2, var_0.loadoutkillstreak3);
 
       if(var_6 == 0) {
-        self _meth_859B(self.clientid, self.headmodel, self.model);
+        self func_859B(self.clientid, self.headmodel, self.model);
 
         if(isDefined(self.loadoutgesture)) {
-          self _meth_85AB(self.clientid, self.loadoutgesture);
+          self func_85AB(self.clientid, self.loadoutgesture);
         }
       }
 
@@ -2339,7 +2339,7 @@ onplayerconnecting() {
 
     if(!isai(var_0) && !scripts\engine\utility::is_true(var_0.btestclient)) {
       var_0 setclientomnvar("ui_selected_archetype", level.archetypeids[var_0 cac_getcharacterarchetype()]);
-      var_0 setclientomnvar("ui_selected_super", scripts\mp\supers::_meth_8186(var_0 cac_getsuper()));
+      var_0 setclientomnvar("ui_selected_super", scripts\mp\supers::func_8186(var_0 cac_getsuper()));
       var_0 setclientomnvar("ui_selected_trait", scripts\mp\perks::getequipmenttableinfo(var_0 cac_getloadoutarchetypeperk()));
     }
 
@@ -2465,7 +2465,7 @@ changearchetype(var_0, var_1, var_2) {
 
   if(!isai(self)) {
     self setclientomnvar("ui_selected_archetype", level.archetypeids[var_0]);
-    self setclientomnvar("ui_selected_super", scripts\mp\supers::_meth_8186(var_1));
+    self setclientomnvar("ui_selected_super", scripts\mp\supers::func_8186(var_1));
     self setclientomnvar("ui_selected_trait", scripts\mp\perks::getequipmenttableinfo(var_2));
   }
 

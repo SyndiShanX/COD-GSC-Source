@@ -43,7 +43,7 @@ func_104B7(var_0) {
   level.var_D299 glinton(#animtree);
   level.var_D299 animscripted("", var_2.origin, var_2.angles, level.var_EC85["sled_jackal"]["space_launch_boost"]);
   wait 0.05;
-  level.var_D299 _meth_82B0(level.var_EC85["sled_jackal"]["space_launch_boost"], 0.654132);
+  level.var_D299 func_82B0(level.var_EC85["sled_jackal"]["space_launch_boost"], 0.654132);
   wait 0.05;
   level.var_D127 vehicle_teleport(level.var_D299.origin, level.var_D299.angles);
   func_0BDC::func_D164(level.var_D299.var_BD0D, 0);
@@ -73,7 +73,7 @@ func_104B6() {
   func_0BDC::func_A0BE(0);
   func_0BDC::func_A301(0, 0.1, "pearl");
   func_0BDC::func_A302(0, 0.1, "pearl");
-  level.var_D127 _meth_8491("hover");
+  level.var_D127 func_8491("hover");
   level.var_D127 func_0BDC::func_A14A(1);
   level.var_D127 func_0BDC::func_A156(1);
 
@@ -132,9 +132,9 @@ func_104B6() {
   func_0BDC::func_A156(0);
   func_0BDC::func_A1DD(undefined);
   func_0BDC::func_A15C(0);
-  level.player _meth_8463("moveto");
-  level.player _meth_8463("orient");
-  level.player _meth_8463("lookat");
+  level.player func_8463("moveto");
+  level.player func_8463("orient");
+  level.player func_8463("lookat");
   var_5 = level.var_111D0.var_1022B;
   var_6 = level.var_111D0.var_6C28;
   var_7 = level.var_111D0.var_6C27;
@@ -456,7 +456,7 @@ func_FD5A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_9 scripts\engine\utility::delaythread(0.8, func_0BB8::func_39D0, "idle");
   }
 
-  var_9 _meth_8064();
+  var_9 func_8064();
   return var_9;
 }
 
@@ -492,7 +492,7 @@ func_12B4D() {
   var_0.angles = self.angles;
   var_0 setModel("tag_origin");
   playFXOnTag(level._effect["vfx_generic_ship_death"], var_0, "tag_origin");
-  self _meth_81D0();
+  self func_81D0();
   wait 0.4;
   earthquake(0.07, 3, level.var_D127.origin, 10000);
   wait 3.2;
@@ -514,9 +514,9 @@ func_20E9() {
 }
 
 phspace_audio_mix_for_2nd_explosion() {
-  level.player _meth_82C0("phspace_intro_cap_ship_explo_2", 2.0);
+  level.player func_82C0("phspace_intro_cap_ship_explo_2", 2.0);
   wait 15;
-  level.player _meth_82C0("jackal_cockpit", 2.0);
+  level.player func_82C0("jackal_cockpit", 2.0);
 }
 
 func_6FF4(var_0) {
@@ -659,10 +659,10 @@ func_2731() {
   level.var_12B7D.turrets["cap_turret_cannon_large_un"] = scripts\engine\utility::array_remove(level.var_12B7D.turrets["cap_turret_cannon_large_un"], level.var_12B7D.turrets["cap_turret_cannon_large_un"][4]);
   level.var_12B67 func_0BB6::func_3984(level.var_3665);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(14);
-  level.var_12B61 _meth_81D0();
+  level.var_12B61 func_81D0();
   level.var_3665 thread func_720F(1, 1);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(16.2);
-  level.var_12B60 _meth_81D0();
+  level.var_12B60 func_81D0();
 }
 
 func_12B7E() {
@@ -1159,7 +1159,7 @@ func_1D75(var_0, var_1, var_2) {
   self endon("new_patrol");
   func_0BDC::func_19B7();
   scripts\sp\vehicle::playgestureviewmodel();
-  self._meth_843F = 1;
+  self.func_843F = 1;
 
   if(scripts\engine\utility::is_true(var_1) && scripts\engine\utility::cointoss()) {
     wait(randomfloatrange(0, 0.65));
@@ -1572,7 +1572,7 @@ func_1D76() {
 
   foreach(var_1 in level.var_1D0B) {
     var_1 vehicle_teleport(level.var_3664.origin, level.var_3664.angles);
-    var_1 _meth_8455(level.var_3664.origin, 1, level.var_3664.angles);
+    var_1 func_8455(level.var_3664.origin, 1, level.var_3664.angles);
   }
 }
 
@@ -1868,7 +1868,7 @@ func_FCD5() {
     wait 0.1;
   }
 
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_52FA() {
@@ -2200,7 +2200,7 @@ func_FD3D() {
   wait 2.5;
 
   if(getdvarint("e3", 0)) {
-    level.player _meth_82C0("phspace_e3_fade", 4);
+    level.player func_82C0("phspace_e3_fade", 4);
   }
 }
 
@@ -2285,23 +2285,23 @@ func_A24C(var_0) {
   level.var_EA99 animscripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["salter_jackal"]["space_launch"]);
   level.var_1CB9 animscripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["jackal_ally1"]["space_launch"]);
   wait 0.05;
-  level.var_EA99 _meth_82B0(level.var_EC85["salter_jackal"]["space_launch"], 0.803228);
-  level.var_1CB9 _meth_82B0(level.var_EC85["jackal_ally1"]["space_launch"], 0.803228);
+  level.var_EA99 func_82B0(level.var_EC85["salter_jackal"]["space_launch"], 0.803228);
+  level.var_1CB9 func_82B0(level.var_EC85["jackal_ally1"]["space_launch"], 0.803228);
   level.var_EA99 waittill("space_launch_done");
   wait 0.05;
   level.var_EA99 givescorefortrophyblocks();
   level.var_1CB9 givescorefortrophyblocks();
   level.var_EA99 func_0BDC::func_A1EC(level.var_EA99.origin, 1, 384, level.var_EA99.angles);
   level.var_1CB9 func_0BDC::func_A1EC(level.var_1CB9.origin, 1, 384, level.var_1CB9.angles);
-  level.player _meth_8463("moveto");
-  level.player _meth_8463("lookat");
+  level.player func_8463("moveto");
+  level.player func_8463("lookat");
 }
 
 #using_animtree("jackal");
 
 func_2CB6() {
   self give_attacker_kill_rewards( % jackal_vehicle_fly_motion, 1, 0, 1.5);
-  self _meth_82B0( % jackal_vehicle_fly_motion, randomfloatrange(0, 1));
+  self func_82B0( % jackal_vehicle_fly_motion, randomfloatrange(0, 1));
   self give_attacker_kill_rewards( % jackal_extra_fly_motion_overlay, 0.0, 0);
   self give_attacker_kill_rewards( % jackal_extra_fly_motion_overlay, 0.5, 2);
   wait 3;

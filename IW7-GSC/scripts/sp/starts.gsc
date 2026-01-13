@@ -319,7 +319,7 @@ func_8960() {
   }
 
   if(isDefined(level.var_501A) && !isDefined(level.var_10CDA)) {
-    var_4 = level.player _meth_84C6("lastCompletedMission");
+    var_4 = level.player func_84C6("lastCompletedMission");
     if(isDefined(var_4)) {
       var_5 = strtok(var_4, "_");
       if(isDefined(var_4) && var_5.size > 0) {
@@ -358,8 +358,8 @@ func_8960() {
 
   scripts\sp\loadout::func_12867();
   lib_0A2F::func_96FD();
-  lib_0A2F::_meth_82FF();
-  lib_0A2F::_meth_8315();
+  lib_0A2F::func_82FF();
+  lib_0A2F::func_8315();
   func_10C9F();
   waittillframeend;
   scripts\engine\utility::flag_set("start_is_set");

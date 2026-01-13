@@ -177,7 +177,7 @@ init() {
   level.scriptperks["ammo_box_mp"] = 1;
   level.scriptperks["blackhat_mp"] = 1;
   level.scriptperks["flare_mp"] = 1;
-  var_0 = scripts\mp\passives::_meth_8239();
+  var_0 = scripts\mp\passives::func_8239();
   foreach(var_2 in var_0) {
     level.scriptperks[var_2] = 1;
     var_3 = scripts\mp\passives::getpassivemessage(var_2);
@@ -604,7 +604,7 @@ func_7DE8() {
   return var_0;
 }
 
-_meth_805C(var_0) {
+func_805C(var_0) {
   var_1 = level.menuperks[var_0];
   if(!isDefined(var_1)) {
     return undefined;
@@ -710,7 +710,7 @@ func_98B0() {
   level.var_E559 = scripts\mp\utility::getintproperty("perk_riotShield", 100) / 100;
   level.var_21A3 = scripts\mp\utility::getintproperty("perk_armorVest", 75) / 100;
   level.var_8C74 = scripts\mp\utility::getintproperty("perk_headgear", 55) / 100;
-  level._meth_848A = scripts\mp\utility::getintproperty("perk_gpsjammer_graceperiods", 4);
+  level.func_848A = scripts\mp\utility::getintproperty("perk_gpsjammer_graceperiods", 4);
   level.var_B7CB = scripts\mp\utility::getintproperty("perk_gpsjammer_min_speed", 100);
   level.var_B75C = scripts\mp\utility::getintproperty("perk_gpsjammer_min_distance", 10);
   level.timeperiod = scripts\mp\utility::getintproperty("perk_gpsjammer_time_period", 200) / 1000;
@@ -855,7 +855,7 @@ updateactiveperks(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = isDefined(var_0) && isplayer(var_0);
   var_9 = scripts\mp\utility::getweaponrootname(var_5);
   var_0A = isDefined(var_9) && var_9 == "iw7_axe";
-  var_0B = isDefined(var_9) && var_9 == "iw7_tacburst" && var_1 _meth_8519(var_5);
+  var_0B = isDefined(var_9) && var_9 == "iw7_tacburst" && var_1 func_8519(var_5);
   var_0C = var_0A && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "grenade";
   var_0D = isDefined(var_1) && isplayer(var_1) && var_1 != var_2;
   if(var_0D && var_8 || var_0C || var_0B) {
@@ -891,7 +891,7 @@ func_F7C5(var_0, var_1) {
       continue;
     }
 
-    var_5 = _meth_805C(var_4);
+    var_5 = func_805C(var_4);
     if(!isDefined(var_5)) {
       continue;
     }

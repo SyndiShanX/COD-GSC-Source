@@ -244,7 +244,7 @@ runaonrules() {
   }
 
   if(!scripts\mp\utility::istrue(level.tactical)) {
-    _meth_8114(self.loadoutarchetype);
+    func_8114(self.loadoutarchetype);
   }
 
   self.var_2049 = 0;
@@ -279,7 +279,7 @@ runaonrules() {
     self givestartammo("iw7_g18_mpr_aon_fixed");
     if(isDefined(var_0)) {
       scripts\mp\utility::_giveweapon(var_0);
-      self _meth_8541(var_0);
+      self func_8541(var_0);
       self.gestureweapon = var_0;
     }
   }
@@ -339,7 +339,7 @@ devforcegestures(var_0, var_1) {
   }
 
   scripts\mp\utility::_giveweapon(var_0);
-  self _meth_8541(var_0);
+  self func_8541(var_0);
   self.gestureweapon = var_0;
 }
 
@@ -360,7 +360,7 @@ randomizegesture() {
   }
 
   scripts\mp\utility::_giveweapon(var_0);
-  self _meth_8541(var_0);
+  self func_8541(var_0);
   self.gestureweapon = var_0;
   return var_1;
 }
@@ -825,9 +825,9 @@ dogesturedamage(var_0, var_1, var_2, var_3) {
       var_6 = var_6 * -1;
     }
 
-    var_0 _meth_84DC(var_6 + (0, 0, 500), 750);
+    var_0 func_84DC(var_6 + (0, 0, 500), 750);
   } else {
-    var_0 _meth_84DC(vectornormalize(var_0.origin - self.origin) * 500 + (0, 0, 800), 750);
+    var_0 func_84DC(vectornormalize(var_0.origin - self.origin) * 500 + (0, 0, 800), 750);
   }
 
   wait(0.05);
@@ -955,7 +955,7 @@ giveextraaonperks() {
   }
 }
 
-_meth_8114(var_0) {
+func_8114(var_0) {
   switch (var_0) {
     case "archetype_assault":
       var_0 = "assault_mp";

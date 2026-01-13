@@ -107,7 +107,7 @@ func_73B1(var_0) {
         var_8 = 1;
       }
     } else if(isDefined(var_2.var_9F) && var_2.var_9F == "script_vehicle") {
-      var_9 = var_2 _meth_816A();
+      var_9 = var_2 func_816A();
       if(isDefined(var_9) && isplayer(var_9)) {
         var_8 = 1;
       }

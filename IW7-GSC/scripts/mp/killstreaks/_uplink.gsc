@@ -12,7 +12,7 @@ init() {
   level.var_4418["giveComExpBenefits"] = ::setturretmodechangewait;
   level.var_4418["removeComExpBenefits"] = ::func_E0DF;
   level.var_4418["getRadarStrengthForTeam"] = ::disableusability;
-  level.var_4418["getRadarStrengthForPlayer"] = ::_meth_80A7;
+  level.var_4418["getRadarStrengthForPlayer"] = ::func_80A7;
   level._effect["uav_beam"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_energy_beam");
   unblockteamradar("axis");
   unblockteamradar("allies");
@@ -140,7 +140,7 @@ func_12F41(var_0) {
     }
 
     var_7.var_FFC7 = var_2;
-    var_7 _meth_82DF(var_2);
+    var_7 func_82DF(var_2);
     var_7.createprintchannel = level.createprintchannel[var_7.team];
     var_7.cylinder = var_5;
     var_7 func_12F09(var_0);
@@ -157,7 +157,7 @@ func_12EF4() {
       continue;
     }
 
-    var_2 = _meth_80A7(var_1);
+    var_2 = func_80A7(var_1);
     func_F7F7(var_1, var_2);
     var_1 func_12F09();
     wait(0.05);
@@ -180,7 +180,7 @@ func_12E79() {
 
 setturretmodechangewait() {
   if(scripts\mp\utility::_hasperk("specialty_comexp")) {
-    var_0 = _meth_80A6(self);
+    var_0 = func_80A6(self);
     func_F7F7(self, var_0);
     func_12F09();
   }
@@ -191,11 +191,11 @@ func_12F09(var_0) {
   if(isDefined(var_0)) {
     var_1 = disableusability(var_0);
   } else {
-    var_1 = _meth_80A7(self);
+    var_1 = func_80A7(self);
   }
 
   if(scripts\mp\utility::_hasperk("specialty_comexp")) {
-    var_1 = _meth_80A6(self);
+    var_1 = func_80A6(self);
   }
 
   if(var_1 > 0) {
@@ -208,7 +208,7 @@ func_12F09(var_0) {
 
 func_E0DF() {
   self.var_FFC7 = 0;
-  self _meth_82DF(0);
+  self func_82DF(0);
   self.cylinder = 0;
   self.createprintchannel = "normal_radar";
   self.playcinematicforall = 0;
@@ -221,7 +221,7 @@ func_F7F7(var_0, var_1) {
   var_4 = var_1 >= 3;
   var_5 = var_1 >= 4;
   var_0.var_FFC7 = var_2;
-  var_0 _meth_82DF(var_2);
+  var_0 func_82DF(var_2);
   var_0.cylinder = var_5;
   var_0.createprintchannel = "normal_radar";
   var_0.playcinematicforall = var_3;
@@ -438,7 +438,7 @@ disableusability(var_0) {
   return clamp(var_1, 0, 4);
 }
 
-_meth_80A7(var_0) {
+func_80A7(var_0) {
   var_1 = 0;
   foreach(var_3 in level.uplinks) {
     if(isDefined(var_3)) {
@@ -462,7 +462,7 @@ _meth_80A7(var_0) {
   return clamp(var_1, 0, 4);
 }
 
-_meth_80A6(var_0) {
+func_80A6(var_0) {
   var_1 = 0;
   foreach(var_3 in level.uplinks) {
     if(isDefined(var_3)) {
@@ -499,6 +499,6 @@ func_12F83() {
   for(;;) {
     level waittill("player_spawned", var_0);
     var_1 = isDefined(var_0.var_FFC7) && var_0.var_FFC7;
-    var_0 _meth_82DF(var_1);
+    var_0 func_82DF(var_1);
   }
 }

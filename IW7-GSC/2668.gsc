@@ -166,9 +166,9 @@ sentry_initsentry(var_0, var_1) {
       self setrightarc(100);
       self give_crafted_gascan(90);
       self settoparc(60);
-      self _meth_82C9(0.3, "pitch");
-      self _meth_82C9(0.3, "yaw");
-      self _meth_82C8(0.65);
+      self func_82C9(0.3, "pitch");
+      self func_82C9(0.3, "yaw");
+      self func_82C8(0.65);
       self setdefaultdroppitch(-89.0);
       break;
   }
@@ -214,7 +214,7 @@ func_F23F() {
     playFXOnTag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
     self.inuseby scripts\cp\utility::restore_player_perk();
     self notify("deleting");
-    self _meth_83D3(self.inuseby);
+    self func_83D3(self.inuseby);
     wait 1.0;
   } else {
     wait 1.5;
@@ -493,7 +493,7 @@ turret_shotmonitor(var_0) {
 
   for(;;) {
     var_0 waittill("turret_fire");
-    var_0 _meth_8165() notify("turret_fire");
+    var_0 func_8165() notify("turret_fire");
     var_0.heatlevel = var_0.heatlevel + var_1;
     var_0.cooldownwaittime = var_1;
   }

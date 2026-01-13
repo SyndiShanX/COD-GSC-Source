@@ -20,7 +20,7 @@ func_35A6(var_0) {
   self.acceptablemeleefraction = 0.98;
   self.var_B5DA = 1;
   self.var_B64F = 400;
-  self.fnismeleevalid = ::lib_0C08::func_35AD;
+  self.fnismeleevalid = lib_0C08::func_35AD;
   self.closefile = 0;
   func_170A();
   return level.success;

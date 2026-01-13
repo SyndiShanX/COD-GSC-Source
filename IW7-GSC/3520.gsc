@@ -676,8 +676,8 @@ func_1058D(var_0, var_1) {
   var_0.var_13CC3["fly"] = "spaceship_strike_mp";
   var_0.var_13CC3["land"] = var_0.var_13CC3["hover"];
   func_105BF(var_0);
-  var_0 _meth_84BC(level.var_A407.var_1051B);
-  var_0 _meth_84BE("spaceship");
+  var_0 func_84BC(level.var_A407.var_1051B);
+  var_0 func_84BE("spaceship");
   thread func_105A1(var_0);
   thread func_105A0(var_0);
   thread func_105A4(var_0);
@@ -1180,13 +1180,13 @@ func_1058E(var_0) {
 
 func_105AD(var_0, var_1) {
   if(isDefined(var_0.owner)) {
-    var_0 _meth_8476(var_1.var_B4C9);
+    var_0 func_8476(var_1.var_B4C9);
   }
 }
 
 func_105B0(var_0, var_1) {
   if(isDefined(var_0.owner)) {
-    var_0 _meth_8476(1.0);
+    var_0 func_8476(1.0);
   }
 }
 

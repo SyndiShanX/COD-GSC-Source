@@ -97,7 +97,7 @@ func_13F6A(var_0, var_1, var_2, var_3) {
   func_CECF(var_0, var_1, var_2, var_3);
 }
 
-_meth_826A(var_0, var_1, var_2, var_3, var_4) {
+func_826A(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
   if(!isDefined(var_3)) {
     var_3 = 1;

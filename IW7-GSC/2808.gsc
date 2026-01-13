@@ -38,7 +38,7 @@ gettweakabledvarvalue(var_0, var_1) {
   return var_3;
 }
 
-_meth_81E4(var_0, var_1) {
+func_81E4(var_0, var_1) {
   switch (var_0) {
     case "rule":
       var_2 = level.rules[var_1].dvar;

@@ -436,7 +436,7 @@ func_1275F(var_0) {
 }
 
 func_12794(var_0) {
-  var_0 _meth_84C0(1);
+  var_0 func_84C0(1);
   if(isDefined(var_0.target)) {
     var_1 = getent(var_0.target, "targetname");
     var_0 enablelinkto();
@@ -445,7 +445,7 @@ func_12794(var_0) {
 }
 
 func_12723(var_0) {
-  var_0 _meth_84C0(1);
+  var_0 func_84C0(1);
   if(isDefined(var_0.target)) {
     var_1 = getent(var_0.target, "targetname");
     var_0 enablelinkto();
@@ -883,7 +883,7 @@ func_12729(var_0) {
         var_5 = "allies";
       }
 
-      var_6 = scripts\anim\battlechatter::_meth_8145("custom", var_5);
+      var_6 = scripts\anim\battlechatter::func_8145("custom", var_5);
       var_6 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_6);
       foreach(var_8 in var_6) {
         if(var_8 istouching(var_0)) {

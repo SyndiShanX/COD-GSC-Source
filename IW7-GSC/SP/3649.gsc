@@ -86,7 +86,7 @@ func_F849() {
 
   scripts\sp\utility::func_13705();
   scripts\sp\utility::func_12641("weapon_iw7_knife_perk_tr");
-  scripts\sp\utility::_meth_82EA("iw7_knife_perk");
+  scripts\sp\utility::func_82EA("iw7_knife_perk");
 }
 
 func_12D2F() {
@@ -100,7 +100,7 @@ func_F83E() {
 
   scripts\sp\utility::func_13705();
   scripts\sp\utility::func_12641("weapon_iw7_knife_upgrade1_tr");
-  scripts\sp\utility::_meth_82EA("iw7_knife_upgrade1");
+  scripts\sp\utility::func_82EA("iw7_knife_upgrade1");
 }
 
 func_12D2A() {

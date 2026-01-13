@@ -47,7 +47,7 @@ func_B050(var_0, var_1, var_2, var_3) {
 
 func_136B4(var_0, var_1, var_2) {
   self endon(var_1 + "_finished");
-  self _meth_84BD();
+  self func_84BD();
   self waittill("stop_soon");
   self.var_20EE = self getlookaheaddir();
   scripts\asm\asm::asm_fireevent(var_1, "cover_approach", self.var_20EE);
@@ -209,7 +209,7 @@ func_138E2() {
   return 0;
 }
 
-_meth_811E(var_0) {
+func_811E(var_0) {
   if(!isDefined(self._blackboard.shootparams)) {
     return undefined;
   } else if(isDefined(self._blackboard.shootparams.ent)) {
@@ -223,7 +223,7 @@ _meth_811E(var_0) {
   return undefined;
 }
 
-_meth_811C() {
+func_811C() {
   if(isDefined(self.var_130A9)) {
     var_0 = self getmuzzlesideoffsetpos();
     return (var_0[0], var_0[1], self getEye()[2]);
@@ -238,8 +238,8 @@ isaimedataimtarget() {
   }
 
   var_0 = self getmuzzleangle();
-  var_1 = _meth_811C();
-  var_2 = _meth_811E(var_1);
+  var_1 = func_811C();
+  var_2 = func_811E(var_1);
 
   if(!isDefined(var_2)) {
     return 0;

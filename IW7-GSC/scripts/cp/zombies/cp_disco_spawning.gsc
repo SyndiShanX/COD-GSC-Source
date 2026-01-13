@@ -8,13 +8,13 @@ goon_spawn_event_func() {
   level.dynamic_enemy_types = [];
   level.max_static_spawned_enemies = 24;
   level.max_dynamic_spawners = 0;
-  level.desired_enemy_deaths_this_wave = _meth_8455();
+  level.desired_enemy_deaths_this_wave = func_8455();
   level.current_enemy_deaths = 0;
   level.last_clown_spawn_time = gettime();
   func_1071B();
 }
 
-_meth_8455() {
+func_8455() {
   var_0 = level.players.size;
   var_1 = var_0 * 3;
   var_2 = 2;
@@ -63,7 +63,7 @@ func_1071B() {
     var_2 = get_spawner_and_spawn_goons(var_1);
     var_0 = var_0 + var_2;
     if(var_2 > 0) {
-      wait(_meth_8454(var_0, level.desired_enemy_deaths_this_wave));
+      wait(func_8454(var_0, level.desired_enemy_deaths_this_wave));
       continue;
     }
 
@@ -111,7 +111,7 @@ func_79EB() {
   return ["skater"];
 }
 
-_meth_8454(var_0, var_1) {
+func_8454(var_0, var_1) {
   var_2 = 1.5;
   switch (level.specialroundcounter) {
     case 0:
@@ -140,7 +140,7 @@ _meth_8454(var_0, var_1) {
   return var_2;
 }
 
-_meth_826F() {
+func_826F() {
   var_0 = 0.5;
   return var_0;
 }
@@ -345,7 +345,7 @@ func_79EC() {
   }
 
   if(var_0.size > 0) {
-    var_2 = _meth_8456(var_0);
+    var_2 = func_8456(var_0);
     if(isDefined(var_2)) {
       return var_2;
     }
@@ -354,7 +354,7 @@ func_79EC() {
   return scripts\engine\utility::random(var_0);
 }
 
-_meth_8456(var_0) {
+func_8456(var_0) {
   var_1 = [];
   var_2 = 2;
   var_3 = 1;

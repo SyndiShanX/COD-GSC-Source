@@ -189,9 +189,9 @@ func_48BF(var_0) {
     level.allies[var_2] = scripts\sp\utility::func_107EA(var_2, 1);
     level.allies[var_2].grenadeammo = 0;
     level.allies[var_2] scripts\sp\utility::func_B14F();
-    level.allies[var_2] _meth_8250(0);
+    level.allies[var_2] func_8250(0);
     level.allies[var_2] scripts\sp\utility::func_F3B5("b");
-    level.allies[var_2] _meth_8504(1, "soldier");
+    level.allies[var_2] func_8504(1, "soldier");
     level.allies[var_2].var_1FBB = var_2;
 
     if(var_2 == "admiral") {
@@ -266,7 +266,7 @@ func_1683(var_0, var_1, var_2) {
     var_0 setplayerangles(var_3.angles);
     var_0 setorigin(var_3.origin);
   } else if(isai(var_0)) {
-    var_0 _meth_80F1(var_3.origin, var_3.angles);
+    var_0 func_80F1(var_3.origin, var_3.angles);
     var_4 = var_0.var_164D[var_0.asmname].var_4BC0;
     var_5 = anim.asm[var_0.asmname];
     var_6 = var_5.states[var_4];
@@ -344,7 +344,7 @@ func_518F() {
 }
 
 func_CA95(var_0, var_1) {
-  self _meth_84E5(0.0);
+  self func_84E5(0.0);
   scripts\sp\utility::func_F492(1);
   var_2 = func_0E26::func_10679(var_0);
   var_2 scripts\sp\utility::func_B14F(1);
@@ -1115,7 +1115,7 @@ func_19C5(var_0) {
         var_5 notify("ai_move_think_stop_loop");
         self givescorefortrophyblocks();
       } else
-        _meth_8426(var_1);
+        func_8426(var_1);
     }
 
     if(!isDefined(var_1.target)) {
@@ -1164,7 +1164,7 @@ energy_getmax(var_0) {
   var_1 scripts\sp\anim::func_1ECE(self, var_0.animation);
 }
 
-_meth_8426(var_0) {
+func_8426(var_0) {
   var_1 = func_7822(var_0);
 
   if(!isDefined(var_0.script_physics)) {
@@ -1217,7 +1217,7 @@ func_7822(var_0) {
 
 energy_setmax(var_0) {
   scripts\engine\utility::waitframe();
-  self _meth_82B1(scripts\sp\utility::func_7DC3(var_0.animation), var_0.var_EE2C);
+  self func_82B1(scripts\sp\utility::func_7DC3(var_0.animation), var_0.var_EE2C);
 }
 
 func_19EF(var_0) {
@@ -1240,7 +1240,7 @@ func_19EF(var_0) {
   var_6 = var_1 scripts\engine\utility::spawn_tag_origin();
   var_7 = self.ignoreall;
   self.ignoreall = 0;
-  self _meth_82DE(var_6);
+  self func_82DE(var_6);
   scripts\engine\utility::waittill_any("clear_targeting", "cancel_path", "new_path_goal", "death");
 
   if(isDefined(self) && isalive(self)) {
@@ -1604,7 +1604,7 @@ func_F293(var_0, var_1) {
   var_3 = getent(var_1, "targetname");
 
   foreach(var_5 in var_2) {
-    var_5 _meth_82F1(var_3);
+    var_5 func_82F1(var_3);
   }
 }
 
@@ -1613,7 +1613,7 @@ func_F2D4(var_0) {
   var_2 = getent(var_0, "targetname");
 
   foreach(var_4 in var_1) {
-    var_4 _meth_82F1(var_2);
+    var_4 func_82F1(var_2);
   }
 }
 
@@ -1649,12 +1649,12 @@ func_EA00(var_0, var_1) {
 
 func_A5E4() {
   scripts\engine\utility::waitframe();
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_2C16() {
   scripts\sp\names::func_7B05();
-  self _meth_8307(self.name, &"");
+  self func_8307(self.name, &"");
 }
 
 func_2C15() {
@@ -1933,7 +1933,7 @@ func_3FAF() {
   var_1 scripts\sp\utility::func_13876();
   var_1 scripts\sp\utility::func_5528();
   var_1 scripts\sp\utility::func_5504();
-  var_1 _meth_8250(1);
+  var_1 func_8250(1);
   var_2 = var_1 scripts\engine\utility::get_target_ent();
   var_1 scripts\sp\utility::func_7227(var_2, 0);
   wait 1;
@@ -1958,7 +1958,7 @@ func_3FC1(var_0, var_1) {
 
     for(;;) {
       if(!scripts\sp\utility::func_CFAC(self) && distance2d(level.player.origin, self.origin) > 1200) {
-        self _meth_81D0();
+        self func_81D0();
       }
 
       wait 15;
@@ -2005,7 +2005,7 @@ func_1F8A() {
 
   if(isDefined(self.var_EE2C)) {
     scripts\engine\utility::waitframe();
-    self _meth_82B1(scripts\sp\utility::func_7DC3(var_0)[0], self.var_EE2C);
+    self func_82B1(scripts\sp\utility::func_7DC3(var_0)[0], self.var_EE2C);
   }
 
   if(isDefined(self.var_ED48)) {
@@ -2070,13 +2070,13 @@ func_D290() {
 
   for(;;) {
     self waittill("trigger");
-    level.player _meth_84FE();
+    level.player func_84FE();
 
     while(level.player istouching(self)) {
       wait 0.05;
     }
 
-    level.player _meth_84FD();
+    level.player func_84FD();
   }
 }
 
@@ -2271,7 +2271,7 @@ func_13435() {
   for(;;) {
     wait 0.05;
 
-    if(!level.player _meth_8439()) {
+    if(!level.player func_8439()) {
       continue;
     }
     if(!getdvarint("visibility_cover_debug")) {
@@ -2305,7 +2305,7 @@ func_13435() {
       }
 
       var_12 setModel("fullbody_sdf_army");
-      var_12 _meth_839E();
+      var_12 func_839E();
       var_0[var_0.size] = var_12;
       var_13 = var_11 func_4702();
 
@@ -2315,7 +2315,7 @@ func_13435() {
       var_12 thread func_1EDF(var_13, var_11);
     }
 
-    while(level.player _meth_8439()) {
+    while(level.player func_8439()) {
       wait 0.05;
     }
   }

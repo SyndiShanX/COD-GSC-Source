@@ -119,7 +119,7 @@ func_F7C9(var_0, var_1) {
 }
 
 func_F672(var_0, var_1) {
-  self _meth_8459(var_1);
+  self func_8459(var_1);
   return anim.success;
 }
 
@@ -130,7 +130,7 @@ func_F706(var_0, var_1) {
 
 func_F711(var_0, var_1) {
   if(self._blackboard.var_E1AC == "none" || self._blackboard.var_E1AC == var_1) {
-    self _meth_8491(var_1);
+    self func_8491(var_1);
     func_0C21::func_20DD(var_1);
   }
 
@@ -138,7 +138,7 @@ func_F711(var_0, var_1) {
 }
 
 func_F6C2(var_0, var_1) {
-  self _meth_845F(var_1);
+  self func_845F(var_1);
   return anim.success;
 }
 
@@ -156,9 +156,9 @@ func_7E02(var_0, var_1) {
   var_2 = undefined;
 
   if(isDefined(self._blackboard.var_10A4D) && isDefined(self._blackboard.var_10A4A)) {
-    var_2 = self _meth_8486(var_0, var_1, self._blackboard.var_10A4D[self._blackboard.var_10A4A]);
+    var_2 = self func_8486(var_0, var_1, self._blackboard.var_10A4D[self._blackboard.var_10A4A]);
   } else {
-    var_2 = self _meth_8486(var_0, var_1);
+    var_2 = self func_8486(var_0, var_1);
   }
 
   if(!isDefined(var_2) && var_0 < 100000) {
@@ -176,7 +176,7 @@ func_3713(var_0) {
     var_2 = _getclosestpointonnavmesh3d(self._blackboard.var_90D9);
     return var_2;
   } else {
-    var_3 = func_0C21::_meth_814A();
+    var_3 = func_0C21::func_814A();
     var_4 = randomfloatrange(2.0, 4.0);
 
     if(_isaircraft(var_0) && isDefined(var_0.spaceship_vel)) {
@@ -219,7 +219,7 @@ func_3714(var_0) {
   var_3 = 30;
 
   if(var_0 == level.var_D127 && var_0.owner == level.player) {
-    var_4 = level.player _meth_848A();
+    var_4 = level.player func_848A();
 
     if(isDefined(var_4) && var_4[0] == self) {
       var_2 = 10;
@@ -257,7 +257,7 @@ func_78C3(var_0, var_1) {
       if(var_6 == self) {
         continue;
       }
-      var_7 = var_6 _meth_8579();
+      var_7 = var_6 func_8579();
 
       if(distancesquared(var_7, var_0) < var_3) {
         var_0 = var_0 + vectornormalize(var_0 - var_7) * var_1;
@@ -506,12 +506,12 @@ func_6CAB(var_0, var_1) {
     case "spline":
       var_2 = getcsplinepointposition(self.bt.var_3F28["spline"], self.bt.var_3F28["node"]);
       self setneargoalnotifydist(2048);
-      self _meth_8479(self.bt.var_3F28["spline"]);
-      self _meth_8455(var_2, 0);
+      self func_8479(self.bt.var_3F28["spline"]);
+      self func_8455(var_2, 0);
       return anim.success;
   }
 
-  self _meth_8455(var_2, 0);
+  self func_8455(var_2, 0);
   return anim.success;
 }
 
@@ -630,8 +630,8 @@ func_B4DB(var_0) {
 
 func_724A(var_0) {
   if(isDefined(self.bt.var_3F28)) {
-    self _meth_8479(self.bt.var_3F28["spline"]);
-    self _meth_847B(1.0, getcsplinepointposition(self.bt.var_3F28["spline"], self.bt.var_3F28["node"]));
+    self func_8479(self.bt.var_3F28["spline"]);
+    self func_847B(1.0, getcsplinepointposition(self.bt.var_3F28["spline"], self.bt.var_3F28["node"]));
 
     if(!self._blackboard.var_2CCD) {
       if(isDefined(self.bt.var_DB05)) {
@@ -668,7 +668,7 @@ func_D3B2(var_0) {
     return anim.failure;
   }
 
-  var_1 = level.player _meth_848A();
+  var_1 = level.player func_848A();
 
   if(isDefined(var_1)) {
     var_2 = var_1[0];
@@ -692,7 +692,7 @@ func_D3B5(var_0) {
     return anim.failure;
   }
 
-  var_1 = level.player _meth_848A();
+  var_1 = level.player func_848A();
 
   if(isDefined(var_1)) {
     var_2 = var_1[0];
@@ -782,9 +782,9 @@ func_7221(var_0) {
     self notify("in_follow_position");
 
     if(isDefined(self._blackboard.var_7235.var_98F9)) {
-      self _meth_848D(self._blackboard.var_7235.target, self._blackboard.var_7235.offset, 1.0, self._blackboard.var_7235.var_98F9, self._blackboard.var_7235.var_98FE, self._blackboard.var_7235.var_C760, self._blackboard.var_7235.var_C765);
+      self func_848D(self._blackboard.var_7235.target, self._blackboard.var_7235.offset, 1.0, self._blackboard.var_7235.var_98F9, self._blackboard.var_7235.var_98FE, self._blackboard.var_7235.var_C760, self._blackboard.var_7235.var_C765);
     } else {
-      self _meth_848D(self._blackboard.var_7235.target, self._blackboard.var_7235.offset, 1.0);
+      self func_848D(self._blackboard.var_7235.target, self._blackboard.var_7235.offset, 1.0);
     }
 
     self._blackboard.var_7235.var_7237 = 1;
@@ -793,7 +793,7 @@ func_7221(var_0) {
 
 func_7231(var_0) {
   if(!isalive(self._blackboard.var_7235.target) && !self._blackboard.animscriptedactive) {
-    self _meth_8455(self.origin, 1);
+    self func_8455(self.origin, 1);
   }
 
   self._blackboard.var_7235.var_7237 = 0;
@@ -805,7 +805,7 @@ follow(var_0) {
       return anim.success;
     }
 
-    var_1 = self _meth_8493();
+    var_1 = self func_8493();
     return anim.running;
   }
 
@@ -848,7 +848,7 @@ func_A299(var_0, var_1) {
 
 func_7233(var_0) {
   func_A299("face motion");
-  self _meth_8459("face motion");
+  self func_8459("face motion");
 }
 
 func_7232(var_0) {
@@ -856,11 +856,11 @@ func_7232(var_0) {
   var_2 = self._blackboard.var_7235.offset;
   var_3 = rotatevector(var_2, var_1.angles);
   var_4 = func_7EC1();
-  self _meth_8455(var_4, 0);
+  self func_8455(var_4, 0);
   self setneargoalnotifydist(3000.0);
 
   if(_isaircraft(var_1)) {
-    var_5 = func_0C21::_meth_814A();
+    var_5 = func_0C21::func_814A();
     var_6 = var_5.speed;
     var_7 = getdvarint("spaceshipAiBoostSpeedScale");
     var_8 = length(var_1.spaceship_vel);
@@ -868,16 +868,16 @@ func_7232(var_0) {
 
     if(var_9 > 0 && var_8 * 1.5 > var_6 * var_7) {
       var_6 = var_8 * 1.5 / var_7;
-      self _meth_8459("always");
+      self func_8459("always");
     }
 
     if(var_9 > 0 && var_8 * 1.5 > var_6) {
-      self _meth_8459("always");
+      self func_8459("always");
     } else {
-      self _meth_8459("never");
+      self func_8459("never");
     }
 
-    self _meth_845F(var_6);
+    self func_845F(var_6);
   }
 
   return anim.success;
@@ -885,7 +885,7 @@ func_7232(var_0) {
 
 func_7234(var_0) {
   var_1 = _getdvarvector("spaceshipAiBoostSpeed");
-  self _meth_845F(var_1[0]);
+  self func_845F(var_1[0]);
 }
 
 func_7E67(var_0) {
@@ -945,7 +945,7 @@ func_F748(var_0) {
 
   self._blackboard.var_90DC = var_1;
   self setneargoalnotifydist(3000);
-  self _meth_8455(var_1, 1);
+  self func_8455(var_1, 1);
   self.bt.var_3F28 = undefined;
   return anim.success;
 }
@@ -980,10 +980,10 @@ func_1002B(var_0) {
     return anim.failure;
   }
 
-  var_3 = level.player _meth_8473();
+  var_3 = level.player func_8473();
 
   if(self.enemy == level.var_D127 && isDefined(var_3) && var_3 == self.enemy) {
-    var_4 = level.player _meth_848A();
+    var_4 = level.player func_848A();
 
     if(isDefined(var_4) && var_4[0] == self) {
       var_1 = 1300;
@@ -1010,23 +1010,23 @@ func_90F2(var_0) {
 
   if(isDefined(var_1)) {
     if(distancesquared(self.origin, var_1) > 3000) {
-      self _meth_8491("fly");
+      self func_8491("fly");
       func_0C21::func_20DD("fly");
     } else {
-      self _meth_8491("hover");
+      self func_8491("hover");
       func_0C21::func_20DD("hover");
     }
 
     self._blackboard.var_90DC = var_1;
     self setneargoalnotifydist(512);
-    self _meth_8455(var_1, 1);
+    self func_8455(var_1, 1);
   }
 
   return anim.success;
 }
 
 func_9E00(var_0) {
-  var_1 = self _meth_8493();
+  var_1 = self func_8493();
   var_2 = var_1 == "follow" && self._blackboard.var_7235.var_7237;
 
   if(var_2) {

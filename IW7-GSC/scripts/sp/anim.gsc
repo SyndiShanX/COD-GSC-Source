@@ -232,10 +232,10 @@ func_C0DB(var_0) {
     if(var_0E == "start") {
       var_0F = float(var_0D[2]);
       var_10 = float(var_0D[3]);
-      level.player _meth_81DE(var_0F, var_10);
+      level.player func_81DE(var_0F, var_10);
     } else {
       var_10 = float(var_0D[2]);
-      level.player _meth_81DE(var_0F, var_10);
+      level.player func_81DE(var_0F, var_10);
     }
 
     return 1;

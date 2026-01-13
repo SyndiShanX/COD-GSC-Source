@@ -171,15 +171,15 @@ func_E873(var_0) {
     var_0B = var_9 - var_5 / var_5;
     var_0B = clamp(var_0B, 0, 1);
     self clearanim(var_0A["F"], 0.2);
-    self _meth_82AC(var_0A["L"], 1 - var_0B * var_2, 0.2);
-    self _meth_82AC(var_0A["R"], 1 - var_0B * var_3, 0.2);
-    self _meth_82AC(var_0A["LB"], var_0B * var_2, 0.2);
-    self _meth_82AC(var_0A["RB"], var_0B * var_3, 0.2);
+    self func_82AC(var_0A["L"], 1 - var_0B * var_2, 0.2);
+    self func_82AC(var_0A["R"], 1 - var_0B * var_3, 0.2);
+    self func_82AC(var_0A["LB"], var_0B * var_2, 0.2);
+    self func_82AC(var_0A["RB"], var_0B * var_3, 0.2);
   } else {
     var_0B = clamp(var_0A / var_6, 0, 1);
-    self _meth_82AC(var_0A["F"], 1 - var_0B, 0.2);
-    self _meth_82AC(var_0A["L"], var_0B * var_2, 0.2);
-    self _meth_82AC(var_0A["R"], var_0B * var_3, 0.2);
+    self func_82AC(var_0A["F"], 1 - var_0B, 0.2);
+    self func_82AC(var_0A["L"], var_0B * var_2, 0.2);
+    self func_82AC(var_0A["R"], var_0B * var_3, 0.2);
     if(var_5 < 1) {
       self clearanim(var_0A["LB"], 0.2);
       self clearanim(var_0A["RB"], 0.2);
@@ -190,7 +190,7 @@ func_E873(var_0) {
   func_E80F(undefined);
   self.a.var_1C8D = gettime() + 500;
   if(var_0 && isplayer(self.isnodeoccupied)) {
-    self _meth_83CE();
+    self func_83CE();
   }
 
   return 1;
@@ -202,7 +202,7 @@ func_E874() {
   self give_left_powers("runanim", var_0, 1, 0.3, 0.8);
   func_E80F(var_0);
   if(isplayer(self.isnodeoccupied)) {
-    self _meth_83CE();
+    self func_83CE();
   }
 
   scripts\anim\notetracks::donotetracksfortime(0.2, "runanim");
@@ -244,7 +244,7 @@ func_E87E() {
 
   anim.var_A9E6 = var_1;
   var_2 = var_0[var_1];
-  self _meth_82E7("reactanim", var_2, 1, 0.5, self.moveplaybackrate);
+  self func_82E7("reactanim", var_2, 1, 0.5, self.moveplaybackrate);
   func_E80F(var_2);
   thread func_DD62();
   scripts\anim\shared::donotetracks("reactanim");
@@ -257,14 +257,14 @@ func_4C9A() {
   self orientmode("face motion");
   var_0 = randomint(self.var_E80D.size);
   var_1 = self.var_E80D[var_0];
-  self _meth_82E7("reactanim", var_1, 1, 0.5, self.moveplaybackrate);
+  self func_82E7("reactanim", var_1, 1, 0.5, self.moveplaybackrate);
   func_E80F(var_1);
   thread func_DD62();
   scripts\anim\shared::donotetracks("reactanim");
   func_6382();
 }
 
-_meth_8150() {
+func_8150() {
   var_0 = undefined;
   if(isDefined(self.objective_position)) {
     var_0 = scripts\anim\utility::func_7FCC("sprint_short");
@@ -343,7 +343,7 @@ func_10B79() {
   }
 
   if(func_10086()) {
-    var_3 = _meth_8150();
+    var_3 = func_8150();
     self give_left_powers("runanim", var_3, 1, 0.5, self.moveplaybackrate);
     func_E80F(var_3);
     func_F843(0);
@@ -388,7 +388,7 @@ func_10B79() {
       var_4 = getrunningforwardpainanim();
     }
 
-    self _meth_82E5("runanim", var_4, 1, 0.1, self.moveplaybackrate, 1);
+    self func_82E5("runanim", var_4, 1, 0.1, self.moveplaybackrate, 1);
     func_E80F(var_4);
     func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"), self.var_101BB);
     thread setcombatstandmoveanimweights("run");
@@ -397,7 +397,7 @@ func_10B79() {
   scripts\anim\notetracks::donotetracksfortime(0.2, "runanim");
 }
 
-_meth_815A(var_0, var_1) {
+func_815A(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "none";
   }
@@ -431,13 +431,13 @@ func_6A6B() {
   self.var_1A32 = 1;
   self endon("killanimscript");
   self endon("end_face_enemy_tracking");
-  self _meth_82D0();
+  self func_82D0();
   var_0 = undefined;
   if(isDefined(self.var_440C) && isDefined(self.var_440C["walk_aims"])) {
-    self _meth_82AC(self.var_440C["walk_aims"]["walk_aim_2"]);
-    self _meth_82AC(self.var_440C["walk_aims"]["walk_aim_4"]);
-    self _meth_82AC(self.var_440C["walk_aims"]["walk_aim_6"]);
-    self _meth_82AC(self.var_440C["walk_aims"]["walk_aim_8"]);
+    self func_82AC(self.var_440C["walk_aims"]["walk_aim_2"]);
+    self func_82AC(self.var_440C["walk_aims"]["walk_aim_4"]);
+    self func_82AC(self.var_440C["walk_aims"]["walk_aim_6"]);
+    self func_82AC(self.var_440C["walk_aims"]["walk_aim_8"]);
   } else {
     var_1 = "walk";
     if(scripts\anim\utility::func_FFDB() && isDefined(scripts\anim\utility::func_B027("cqb", "aim_2"))) {
@@ -445,12 +445,12 @@ func_6A6B() {
     }
 
     var_2 = scripts\anim\utility::func_B028(var_1);
-    self _meth_82AC(var_2["aim_2"]);
-    self _meth_82AC(var_2["aim_4"]);
-    self _meth_82AC(var_2["aim_6"]);
-    self _meth_82AC(var_2["aim_8"]);
+    self func_82AC(var_2["aim_2"]);
+    self func_82AC(var_2["aim_4"]);
+    self func_82AC(var_2["aim_6"]);
+    self func_82AC(var_2["aim_8"]);
     if(isDefined(var_2["aim_5"])) {
-      self _meth_82AC(var_2["aim_5"]);
+      self func_82AC(var_2["aim_5"]);
       var_0 = % w_aim_5;
     }
   }
@@ -561,7 +561,7 @@ func_BC1D() {
         return 0;
       }
 
-      var_1 = _meth_815A("none", "up");
+      var_1 = func_815A("none", "up");
     } else {
       var_7 = 18;
       var_8 = var_5 + (0, 0, var_7);
@@ -575,7 +575,7 @@ func_BC1D() {
         return 0;
       }
 
-      var_1 = _meth_815A("none", "down");
+      var_1 = func_815A("none", "down");
     }
   } else if(self.getcsplinepointtargetname == "up") {
     var_2 = 24;
@@ -592,7 +592,7 @@ func_BC1D() {
       return 0;
     }
 
-    var_1 = _meth_815A("up", "none");
+    var_1 = func_815A("up", "none");
   } else if(self.getcsplinepointtargetname == "down" && !self.setomnvarforallclients) {
     var_2 = 24;
     var_7 = 18;
@@ -608,7 +608,7 @@ func_BC1D() {
       return 0;
     }
 
-    var_1 = _meth_815A("down", "none");
+    var_1 = func_815A("down", "none");
   }
 
   if(!isDefined(var_1)) {
@@ -617,7 +617,7 @@ func_BC1D() {
 
   self notify("stop_move_anim_update");
   self.var_12DEF = undefined;
-  self _meth_82E4("runanim", var_1, % body, 1, 0.1, self.moveplaybackrate);
+  self func_82E4("runanim", var_1, % body, 1, 0.1, self.moveplaybackrate);
   func_E80F(var_1);
   scripts\anim\shared::donotetracks("runanim");
   return 1;
@@ -632,9 +632,9 @@ func_10B7A() {
   }
 
   self clearanim( % stair_transitions, 0.1);
-  self _meth_82A5( % combatrun, % body, 1, 0.2, var_0);
+  self func_82A5( % combatrun, % body, 1, 0.2, var_0);
   if(func_10086()) {
-    var_1 = _meth_8150();
+    var_1 = func_8150();
   } else {
     var_1 = getrunningforwardpainanim();
   }
@@ -662,7 +662,7 @@ func_10B7A() {
 
 func_4AA1() {
   self endon("movemode");
-  self _meth_82E3("runanim", self.var_4A9F, % body, 1, 0.4, self.moveplaybackrate);
+  self func_82E3("runanim", self.var_4A9F, % body, 1, 0.4, self.moveplaybackrate);
   func_E80F(self.var_4A9F);
   scripts\anim\shared::donotetracks("runanim");
 }
@@ -672,7 +672,7 @@ func_4AA0() {
   var_0 = func_7E47();
   self setanimknob(var_0, 1, 0.4);
   thread func_12ED3("crouchrun", var_0, scripts\anim\utility::func_B027("run", "crouch_b"), scripts\anim\utility::func_B027("run", "crouch_l"), scripts\anim\utility::func_B027("run", "crouch_r"));
-  self _meth_82E3("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
+  self func_82E3("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
   func_E80F(undefined);
   scripts\anim\notetracks::donotetracksfortime(0.2, "runanim");
 }
@@ -735,13 +735,13 @@ func_10B78() {
 func_10B7B() {
   self endon("movemode");
   self orientmode("face motion");
-  var_0 = "reload_" + scripts\anim\combat_utility::_meth_81EB();
+  var_0 = "reload_" + scripts\anim\combat_utility::func_81EB();
   var_1 = scripts\anim\utility::func_B027("run", "reload");
   if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
   }
 
-  self _meth_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, % body, 1, 0.25);
   func_E80F(var_1);
   self.var_12DF0 = 1;
   func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"));
@@ -776,9 +776,9 @@ func_F7A9(var_0, var_1, var_2, var_3) {
     var_3 = 1;
   }
 
-  self _meth_82A9(var_0, 1, 0.1, var_3, 1);
-  self _meth_82A9(var_1, 1, 0.1, var_3, 1);
-  self _meth_82A9(var_2, 1, 0.1, var_3, 1);
+  self func_82A9(var_0, 1, 0.1, var_3, 1);
+  self func_82A9(var_1, 1, 0.1, var_3, 1);
+  self func_82A9(var_2, 1, 0.1, var_3, 1);
 }
 
 setcombatstandmoveanimweights(var_0) {
@@ -886,7 +886,7 @@ func_10B77() {
 
 func_FF02(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("movemode");
-  self _meth_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, % body, 1, 0.25);
   func_E80F(var_1);
   self.var_12DF0 = 1;
   func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"));

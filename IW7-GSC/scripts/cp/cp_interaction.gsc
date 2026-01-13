@@ -786,13 +786,13 @@ set_interaction_point(var_0, var_1) {
 
   if(interaction_is_weapon_buy(var_0)) {
     if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
-      var_5 = _meth_8228(var_0.script_noteworthy);
-      var_6 = _meth_8220(var_0.script_noteworthy);
+      var_5 = func_8228(var_0.script_noteworthy);
+      var_6 = func_8220(var_0.script_noteworthy);
       self.interaction_trigger sethintstringparams(var_5, var_6);
     }
   } else if(interaction_is_weapon_upgrade(var_0)) {
     var_7 = self getcurrentweapon();
-    var_5 = _meth_8228(var_7);
+    var_5 = func_8228(var_7);
     if(scripts\cp\cp_weapon::can_upgrade(var_7)) {
       if(isDefined(var_5)) {
         var_8 = scripts\cp\cp_weapon::get_weapon_level(var_7);
@@ -837,7 +837,7 @@ set_interaction_point(var_0, var_1) {
   self.interaction_trigger makeusable();
 }
 
-_meth_8228(var_0) {
+func_8228(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
@@ -1032,7 +1032,7 @@ _meth_8228(var_0) {
   }
 }
 
-_meth_8220(var_0) {
+func_8220(var_0) {
   return int(level.interactions[var_0].cost);
 }
 
@@ -1046,14 +1046,14 @@ func_F422(var_0, var_1) {
     if(scripts\cp\zombies\direct_boss_fight::is_kung_fu(self.weapon_purchase_looking_at.var_39C)) {
       self.interaction_trigger sethintstringparams(scripts\cp\zombies\direct_boss_fight::get_kung_fu_string(self.weapon_purchase_looking_at.var_39C));
     } else {
-      var_3 = _meth_8228(self.weapon_purchase_looking_at.var_39C);
+      var_3 = func_8228(self.weapon_purchase_looking_at.var_39C);
       self.interaction_trigger sethintstringparams(var_3, int(scripts\cp\zombies\direct_boss_fight::get_weapon_cost(self.weapon_purchase_looking_at.var_39C)));
     }
   } else if(interaction_is_weapon_buy(var_1)) {
     if(isDefined(var_2) && !isstring(var_2) && var_2 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
       var_4 = scripts\cp\utility::getrawbaseweaponname(var_1.script_noteworthy);
       var_5 = scripts\cp\cp_weapon::get_weapon_level(var_4);
-      var_3 = _meth_8228(var_1.script_noteworthy);
+      var_3 = func_8228(var_1.script_noteworthy);
       if(var_5 > 1) {
         self.interaction_trigger sethintstringparams(int(4500), var_3);
       } else {
@@ -1103,13 +1103,13 @@ func_F474(var_0) {
     }
 
     if(var_1.size > 2) {
-      var_5 = _meth_8228(var_1[1]);
-      var_6 = _meth_8228(var_1[2]);
+      var_5 = func_8228(var_1[1]);
+      var_6 = func_8228(var_1[2]);
       var_0.interaction_trigger sethintstringparams(var_5, var_6);
       return;
     }
 
-    var_5 = _meth_8228(var_2[1]);
+    var_5 = func_8228(var_2[1]);
     var_0.interaction_trigger sethintstringparams(var_5);
   }
 }

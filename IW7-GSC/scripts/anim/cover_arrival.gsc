@@ -18,7 +18,7 @@ main() {
   }
 
   self clearanim( % body, 0.2);
-  self _meth_82EA("coverArrival", var_1, 1, 0.2, self.var_BD22);
+  self func_82EA("coverArrival", var_1, 1, 0.2, self.var_BD22);
   scripts\anim\face::playfacialanim(var_1, "run");
   scripts\anim\shared::donotetracks("coverArrival", ::func_89EA);
   var_2 = level.var_22E7[self.var_20F2];
@@ -53,7 +53,7 @@ func_9FA5() {
   }
 
   if(isDefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied, 1.5) && distancesquared(self.origin, self.isnodeoccupied.origin) < 250000) {
-    return !self _meth_8199();
+    return !self func_8199();
   }
 
   return 0;
@@ -397,7 +397,7 @@ func_10D80(var_0, var_1, var_2, var_3, var_4) {
   self.var_20F0 = var_0A;
   self.var_20F2 = var_0;
   self.var_22F0 = undefined;
-  self _meth_8396(self.var_4718, var_0C);
+  self func_8396(self.var_4718, var_0C);
 }
 
 func_3DEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -670,7 +670,7 @@ func_58E6() {
     var_11 = self.origin;
   }
 
-  self _meth_8396(var_11, var_10);
+  self func_8396(var_11, var_10);
 }
 
 func_136CD() {
@@ -690,7 +690,7 @@ custommovetransitionfunc() {
 
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self _meth_82E4("move", self.var_10DCB, % root, 1);
+  self func_82E4("move", self.var_10DCB, % root, 1);
   scripts\anim\face::playfacialanim(self.var_10DCB, "run");
   if(animhasnotetrack(self.var_10DCB, "code_move")) {
     scripts\anim\shared::donotetracks("move");

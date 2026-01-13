@@ -42,7 +42,7 @@ func_3EB3(var_0, var_1, var_2) {
   }
 
   if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_5 = self.target_getindexoftarget _meth_8169();
+    var_5 = self.target_getindexoftarget func_8169();
     var_6 = 1;
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
       if(var_5[var_7] == "over") {
@@ -61,7 +61,7 @@ func_3EB3(var_0, var_1, var_2) {
 func_3EA1(var_0, var_1, var_2) {
   var_2 = "";
   if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_3 = self.target_getindexoftarget _meth_8169();
+    var_3 = self.target_getindexoftarget func_8169();
     var_4 = 1;
     for(var_5 = 0; var_5 < var_3.size; var_5++) {
       if(var_3[var_5] == "over") {
@@ -158,7 +158,7 @@ func_2360(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4) && var_4) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_6 = lib_0A1E::func_2356("Knobs", "move");
-      self _meth_84F2(var_6);
+      self func_84F2(var_6);
     }
   }
 
@@ -196,7 +196,7 @@ func_2360(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_4) && var_4) {
       var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
-      self _meth_84F1(var_3);
+      self func_84F1(var_3);
     }
 
     if(var_0D != var_7 || var_3 != var_8) {
@@ -422,7 +422,7 @@ func_22EA() {
 }
 
 func_7DD6() {
-  if(isDefined(self.physics_querypoint) && !self _meth_858D()) {
+  if(isDefined(self.physics_querypoint) && !self func_858D()) {
     return self.physics_querypoint;
   }
 
@@ -648,7 +648,7 @@ func_510F(var_0, var_1, var_2) {
   level.player endon("meleegrab_interupt");
   level.player endon("crawlmeleegrab_interrupt");
   wait(var_0);
-  level.player _meth_81DE(var_1, var_2);
+  level.player func_81DE(var_1, var_2);
 }
 
 func_5103(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -704,7 +704,7 @@ func_D3D2() {
   level.player allowprone(1);
   level.player enableweapons();
   level.player allowoffhandshieldweapons(1);
-  level.player _meth_80A6();
+  level.player func_80A6();
   level.player enableusability();
   level.player scripts\sp\utility::func_1C34(1);
 }

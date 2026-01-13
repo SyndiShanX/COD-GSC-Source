@@ -18,8 +18,8 @@ main() {
   self.behaviortreeasset = "civilian";
   self.var_1FA9 = "civilian";
   if(isai(self)) {
-    self _meth_82DC(256, 0);
-    self _meth_82DB(768, 1024);
+    self func_82DC(256, 0);
+    self func_82DB(768, 1024);
   }
 
   self.var_394 = "none";

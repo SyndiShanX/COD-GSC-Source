@@ -180,7 +180,7 @@ func_10DF3(var_0) {
   self allowprone(0);
   self getnumownedagentsonteambytype(0);
   self allowdodge(1);
-  self _meth_8454(8);
+  self func_8454(8);
   self setscriptablepartstate("CompassIcon", "spiderbot");
   return 1;
 }

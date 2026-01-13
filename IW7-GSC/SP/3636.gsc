@@ -137,7 +137,7 @@ func_2A33(var_0) {
 
       self notify("beam_rifle_off");
       self.var_2A2A = 0;
-      self _meth_80A6();
+      self func_80A6();
       thread scripts\sp\utility::func_D2CA(0.05);
       scripts\engine\utility::delaythread(0.1, ::scripts\engine\utility::stop_loop_sound_on_entity, "weap_steeldragon_lp");
       if(self.var_2A2E) {
@@ -208,12 +208,12 @@ func_2A22() {
       wait(0.05);
     }
 
-    self _meth_81DE(var_0, var_1);
+    self func_81DE(var_0, var_1);
     while(self adsbuttonpressed()) {
       wait(0.05);
     }
 
-    self _meth_81DE(65, var_1);
+    self func_81DE(65, var_1);
     wait(0.05);
   }
 }

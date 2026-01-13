@@ -322,7 +322,7 @@ func_BE9F(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  var_4 = _meth_81DD();
+  var_4 = func_81DD();
   if(abs(var_4) > self.var_129AF) {
     return 1;
   }
@@ -335,7 +335,7 @@ func_BE9F(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-_meth_81DE() {
+func_81DE() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
@@ -357,7 +357,7 @@ _meth_81DE() {
   return var_3;
 }
 
-_meth_81DD() {
+func_81DD() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
@@ -402,7 +402,7 @@ laststandrevive() {
 }
 
 func_3F0A(var_0, var_1, var_2) {
-  var_3 = _meth_81DE();
+  var_3 = func_81DE();
   if(var_3 < 0) {
     var_4 = "right";
   } else {
@@ -427,7 +427,7 @@ func_3F0A(var_0, var_1, var_2) {
 }
 
 func_3F09(var_0, var_1, var_2) {
-  var_3 = _meth_81DD();
+  var_3 = func_81DD();
   var_4 = laststandrevive();
   if(abs(var_3) > self.var_129AF && abs(var_3) > abs(var_4)) {
     if(var_3 < 0) {
@@ -485,7 +485,7 @@ func_2B9A(var_0, var_1, var_2, var_3) {
 }
 
 func_3ECC(var_0, var_1, var_2) {
-  var_3 = _meth_81DE();
+  var_3 = func_81DE();
   if(var_3 < -135) {
     var_4 = "2r";
   } else if(var_4 > 135) {

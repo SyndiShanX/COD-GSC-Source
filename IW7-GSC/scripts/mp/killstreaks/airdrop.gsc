@@ -257,7 +257,7 @@ tryuseairdrop(var_0) {
 func_1AA2(var_0) {
   var_0.var_1AA0 = var_0.streakname;
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_1 = scripts\mp\killstreaks\_target_marker::_meth_819B(var_0);
+  var_1 = scripts\mp\killstreaks\_target_marker::func_819B(var_0);
   if(!isDefined(var_1.location)) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
@@ -521,7 +521,7 @@ createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.cratetype = var_2;
   var_6.droptype = var_1;
   var_6.var_336 = "care_package";
-  var_6 _meth_85C8(1);
+  var_6 func_85C8(1);
   var_7 = "care_package_iw7_dummy";
   if(isDefined(level.custom_dummy_crate_model)) {
     var_7 = level.custom_dummy_crate_model;
@@ -588,7 +588,7 @@ dropcrateexistence(var_0) {
 cratesetupforuse(var_0, var_1, var_2, var_3) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(var_0);
-  self _meth_84A7("none");
+  self func_84A7("none");
   self makeusable();
   if(isDefined(var_3)) {
     self setusepriority(var_3);
@@ -667,11 +667,11 @@ fakererollcratesetupforuse(var_0, var_1) {
   var_8 makeusable();
   var_8 disableplayeruse(var_0);
   var_8 setcursorhint("HINT_NOICON");
-  var_8 _meth_84A9("show");
+  var_8 func_84A9("show");
   var_8 sethintstring(var_2);
-  var_8 _meth_84A6(var_4);
+  var_8 func_84A6(var_4);
   var_8 setusefov(var_6);
-  var_8 _meth_84A4(var_3);
+  var_8 func_84A4(var_3);
   var_8 setuserange(var_5);
   var_8 setusepriority(var_7);
   var_8 thread deleteuseent(self);
@@ -1264,8 +1264,8 @@ func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 sethoverparams(5, 5, 2);
   var_9 setCanDamage(1);
   var_9 setturningability(1);
-  var_9 _meth_84E1(1);
-  var_9 _meth_84E0(1);
+  var_9 func_84E1(1);
+  var_9 func_84E0(1);
   var_9.streakinfo = var_5;
   var_9.helitype = "dronedrop";
   var_9 scripts\mp\killstreaks\_utility::func_1843(var_9.helitype, "Killstreak_Air", var_0, 1);

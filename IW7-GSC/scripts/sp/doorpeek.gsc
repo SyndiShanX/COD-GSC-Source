@@ -350,7 +350,7 @@ func_1202(var_0, var_1) {
   if(!scripts\engine\utility::flag(var_0 + "door_peek_handle_down")) {
     var_7 = 0.4;
     level.var_5A23[var_0].var_C9FD = scripts\sp\utility::func_10639("player_rig");
-    var_8 = level.player _meth_84C6("currentViewModel");
+    var_8 = level.player func_84C6("currentViewModel");
     if(isDefined(var_8)) {
       level.var_5A23[var_0].var_C9FD setModel(var_8);
     }
@@ -1058,14 +1058,14 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(scripts\engine\utility::flag("doorpeek_hand_on_door")) {
       var_0B = level.player getplayerangles(1);
       var_0C = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_0B);
-      var_0D = level.player _meth_84C6("currentViewModel");
+      var_0D = level.player func_84C6("currentViewModel");
       if(isDefined(var_0D)) {
         var_0C setModel(var_0D);
       }
 
       var_0E = (0, 0, 0);
       var_0F = (var_9[0] - var_0A[0], var_9[1] - var_0A[1], 0);
-      var_0C _meth_81E2(level.player, "tag_origin", (0, 0, 0) + var_0E, var_0F, 0);
+      var_0C func_81E2(level.player, "tag_origin", (0, 0, 0) + var_0E, var_0F, 0);
       if(!var_2) {
         var_0C thread scripts\sp\anim::func_1F35(var_0C, "doorpeek_" + func_1297(var_6) + "_out");
       } else {
@@ -1092,7 +1092,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     level.player getrawbaseweaponname(0.6, 0.6);
-    level.player scripts\engine\utility::delaycall(0.5, ::_meth_80A6);
+    level.player scripts\engine\utility::delaycall(0.5, ::func_80A6);
   }
 
   if(!isDefined(var_4) || var_4 == 0) {
@@ -1180,7 +1180,7 @@ func_120D(var_0, var_1, var_2) {
   level endon(var_0 + "door_peek_kick");
   level endon(var_0 + "door_peek_detach");
   for(;;) {
-    if(level.player _meth_819F()) {
+    if(level.player func_819F()) {
       break;
     }
 
@@ -1903,7 +1903,7 @@ func_11F0(var_0, var_1, var_2) {
   scripts\engine\utility::delaythread(var_0E, ::func_11EE);
   var_18 = level.player getplayerangles(1);
   level.var_5A23[var_4.var_336].var_A5AE = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_18);
-  var_19 = level.player _meth_84C6("currentViewModel");
+  var_19 = level.player func_84C6("currentViewModel");
   if(isDefined(var_19)) {
     level.var_5A23[var_4.var_336].var_A5AE setModel(var_19);
   }

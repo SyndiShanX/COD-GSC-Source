@@ -246,10 +246,10 @@ func_C0DB(var_0) {
     if(var_14 == "start") {
       var_15 = float(var_13[2]);
       var_16 = float(var_13[3]);
-      level.player _meth_81DE(var_15, var_16);
+      level.player func_81DE(var_15, var_16);
     } else {
       var_16 = float(var_13[2]);
-      level.player _meth_81DE(var_15, var_16);
+      level.player func_81DE(var_15, var_16);
     }
 
     return 1;

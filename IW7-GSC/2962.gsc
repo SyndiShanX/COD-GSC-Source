@@ -79,7 +79,7 @@ func_BF01(var_0) {
     if(isDefined(self.var_5955)) {
       self.var_5955 = undefined;
     } else {
-      thread scripts\sp\colors::_meth_8467();
+      thread scripts\sp\colors::func_8467();
     }
   }
 
@@ -154,7 +154,7 @@ func_12DD(var_0, var_1) {
   var_2 = var_1 + var_0;
   var_3 = level.var_12750[var_2];
   var_4 = scripts\sp\utility::func_7B92();
-  var_4 _meth_8496(var_3);
+  var_4 func_8496(var_3);
 }
 
 func_900E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -203,7 +203,7 @@ func_9021(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.var_4B80 = 1;
   level.var_8FE4 = var_1;
   level endon("friendlyfire_mission_fail");
-  self _meth_8496(var_0);
+  self func_8496(var_0);
   var_8 = spawnStruct();
   var_8.var_6AB8 = 0;
 
@@ -217,7 +217,7 @@ func_9021(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 func_9022(var_0, self);
 
   if(!scripts\engine\utility::is_true(var_8.var_6AB8)) {
-    self _meth_8497(1);
+    self func_8497(1);
   }
 
   scripts\sp\utility::func_135AF(var_7, var_6);
@@ -225,7 +225,7 @@ func_9021(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self.var_4B7A = undefined;
 
   if(var_8.var_6AB8) {
-    self _meth_8497();
+    self func_8497();
   }
 
   level.var_4B80 = 0;
@@ -794,7 +794,7 @@ func_764F(var_0) {
 }
 
 func_7647() {
-  return level.player _meth_810B();
+  return level.player func_810B();
 }
 
 func_7648(var_0) {
@@ -967,7 +967,7 @@ func_A5CF(var_0) {
   }
 
   playFXOnTag(scripts\engine\utility::getfx("flesh_hit"), self, "tag_eye");
-  self _meth_81D0(level.player.origin);
+  self func_81D0(level.player.origin);
 }
 
 func_12E1F(var_0, var_1) {
@@ -977,7 +977,7 @@ func_12E1F(var_0, var_1) {
   for(;;) {
     if(self.var_99E5 > 0.0001 && gettime() > 300) {
       if(!var_2) {
-        self _meth_8244(var_1);
+        self func_8244(var_1);
         var_2 = 1;
       }
     } else if(var_2) {

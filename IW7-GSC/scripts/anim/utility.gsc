@@ -27,7 +27,7 @@ func_12E5F() {
     if(self.var_5270 == "prone") {
       self give_run_perk(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
       enterpronewrapper(0.5);
-      self _meth_82A5(func_B027("default_prone", "straight_level"), % body, 1, 0.1, 1);
+      self func_82A5(func_B027("default_prone", "straight_level"), % body, 1, 0.1, 1);
     }
   }
 
@@ -43,7 +43,7 @@ func_9832(var_0) {
 
   if(isDefined(self.var_AFE7)) {
     if(var_0 != "pain" && var_0 != "death") {
-      self _meth_81D0(self.origin);
+      self func_81D0(self.origin);
     }
 
     if(var_0 != "pain") {
@@ -53,7 +53,7 @@ func_9832(var_0) {
   }
 
   if(isDefined(self.a.var_B4E7) && var_0 != "death") {
-    self _meth_81D0(self.origin);
+    self func_81D0(self.origin);
   }
 
   if(isDefined(self.a.var_D707)) {
@@ -144,7 +144,7 @@ func_12EB9() {
   }
 }
 
-_meth_824E(var_0, var_1) {
+func_824E(var_0, var_1) {
   var_2 = self gettagangles(var_0)[1] - scripts\anim\utility_common::getyawfromorigin(var_1, self gettagorigin(var_0));
   var_2 = angleclamp180(var_2);
   return var_2;
@@ -216,7 +216,7 @@ func_3EF2(var_0) {
 
 func_CEA8(var_0) {
   if(isDefined(var_0)) {
-    self _meth_82E4("playAnim", var_0, % root, 1, 0.1, 1);
+    self func_82E4("playAnim", var_0, % root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
     thread func_C15B("time is up", "time is up", var_1);
@@ -669,7 +669,7 @@ func_662B(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self _meth_80DF(var_0, isDefined(self.a.onback));
+  self func_80DF(var_0, isDefined(self.a.onback));
   self waittill("killanimscript");
   if(self.a.pose != "prone" && !isDefined(self.a.onback)) {
     self.a.pose = "prone";
@@ -684,7 +684,7 @@ func_697C(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self _meth_80E0(var_0);
+  self func_80E0(var_0);
   self waittill("killanimscript");
   if(self.a.pose == "prone") {
     self.a.pose = "crouch";

@@ -45,7 +45,7 @@ onuse(var_0) {
 
 dostrike(var_0, var_1) {
   var_2 = level.planeconfigs[var_1];
-  var_3 = scripts\mp\killstreaks\_plane::_meth_8069(var_2.var_5715);
+  var_3 = scripts\mp\killstreaks\_plane::func_8069(var_2.var_5715);
   wait(1);
   var_4 = scripts\mp\utility::getotherteam(self.team);
   level.teamairdenied[var_4] = 1;

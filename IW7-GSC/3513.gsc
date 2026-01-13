@@ -218,16 +218,16 @@ rc8_updateteamuavstatus(var_0, var_1) {
     var_7 = var_3;
   }
 
-  self _meth_85A6(var_7);
+  self func_85A6(var_7);
 
   if(var_7 >= var_5) {
-    self _meth_85A5(0);
+    self func_85A5(0);
   } else {
-    self _meth_85A5(1);
+    self func_85A5(1);
   }
 
   if(var_7 <= var_5) {
-    self _meth_85A4(0);
+    self func_85A4(0);
     self.radarshowenemydirection = 0;
 
     if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
@@ -240,7 +240,7 @@ rc8_updateteamuavstatus(var_0, var_1) {
 
   scripts\mp\killstreaks\uav::setradarmode(var_7, var_6, var_4);
   self.radarshowenemydirection = var_7 >= var_4;
-  self _meth_85A4(1);
+  self func_85A4(1);
   self setclientomnvar("ui_show_hardcore_minimap", 1);
 }
 
@@ -269,16 +269,16 @@ rc8_updateplayersuavstatus(var_0) {
     var_5 = var_2;
   }
 
-  self _meth_85A6(var_5);
+  self func_85A6(var_5);
 
   if(var_5 >= getuavstrengthlevelneutral()) {
-    self _meth_85A5(0);
+    self func_85A5(0);
   } else {
-    self _meth_85A5(1);
+    self func_85A5(1);
   }
 
   if(var_5 <= getuavstrengthlevelneutral()) {
-    self _meth_85A4(0);
+    self func_85A4(0);
     self.radarshowenemydirection = 0;
 
     if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
@@ -291,7 +291,7 @@ rc8_updateplayersuavstatus(var_0) {
 
   scripts\mp\killstreaks\uav::setradarmode(var_5, var_4, var_3);
   self.radarshowenemydirection = var_5 >= var_3;
-  self _meth_85A4(1);
+  self func_85A4(1);
   self setclientomnvar("ui_show_hardcore_minimap", 1);
 }
 
@@ -439,7 +439,7 @@ func_DCF6() {
     if(isDefined(var_2.team) && self.team == var_2.team) {
       continue;
     }
-    if(var_2 _meth_8181("specialty_blindeye")) {
+    if(var_2 func_8181("specialty_blindeye")) {
       continue;
     }
     var_0[var_0.size] = var_2;
@@ -469,7 +469,7 @@ func_DCF9() {
       thread playvoice(1, "vox_c8_seeking");
     }
 
-    if(isDefined(self.enemy) && isalive(self.enemy) && isplayer(self.enemy) && !self.enemy _meth_8181("specialty_blindeye")) {
+    if(isDefined(self.enemy) && isalive(self.enemy) && isplayer(self.enemy) && !self.enemy func_8181("specialty_blindeye")) {
       if(!self botcanseeentity(self.enemy)) {
         func_DCF8(self.enemy);
       }
@@ -559,7 +559,7 @@ func_128F7(var_0) {
     return 0;
   }
 
-  var_2 = scripts\mp\killstreaks\target_marker::_meth_819B(var_0, ::checkrc8availablevalidationfunc);
+  var_2 = scripts\mp\killstreaks\target_marker::func_819B(var_0, ::checkrc8availablevalidationfunc);
 
   if(!isDefined(var_2.location)) {
     scripts\mp\utility::decrementfauxvehiclecount();
@@ -675,7 +675,7 @@ func_10D8D(var_0, var_1) {
   var_9 setModel(var_7);
   var_9 setviewmodel("vm_robot_c8_base_mp");
   var_9 setscriptablepartstate("CompassIcon", "hideIcon");
-  var_9 _meth_8184();
+  var_9 func_8184();
   var_9.midairdamage = spawn("script_model", var_9.origin);
   var_9.midairdamage setModel("ks_remote_c8_mp");
   var_9.midairdamage setotherent(self);
@@ -746,7 +746,7 @@ func_10D8D(var_0, var_1) {
     var_9 setsuit("rc8_jump_mp");
     var_9 allowjump(1);
     var_9 allowdoublejump(1);
-    var_9 _meth_85C5(1);
+    var_9 func_85C5(1);
     var_9 botsetflag("disable_traversals", 0);
     var_9 botsetflag("disable_wall_traversals", 1);
   }
@@ -895,7 +895,7 @@ func_560D(var_0, var_1) {
     self notify("stop_manual_rc8");
     scripts\engine\utility::waitframe();
     self.var_DCFC thermalvisionfofoverlayoff();
-    self.var_DCFC _meth_85A2("");
+    self.var_DCFC func_85A2("");
     self.var_DCFC setclientomnvar("ui_rc8_controls", 0);
     self.var_DCFC setclientomnvar("ui_killstreak_missile_warn", 0);
     self.var_DCFC setclientomnvar("ui_remote_c8_countdown", 0);
@@ -939,7 +939,7 @@ func_10D87() {
   }
 
   self.var_DCFC thermalvisionfofoverlayon();
-  self.var_DCFC _meth_85A2("rc8_mp");
+  self.var_DCFC func_85A2("rc8_mp");
   self.var_DCFC setclientomnvar("ui_rc8_controls", 1);
   self.var_DCFC setclientomnvar("ui_remote_c8_countdown", gettime() + int(self.var_DCFC.var_ED75 * 1000));
   self.var_DCFC setclientomnvar("ui_remote_c8_health", self.var_DCFC.health / self.var_DCFC.maxhealth);
@@ -975,7 +975,7 @@ func_627B(var_0) {
     self.var_DCFC rc8_setuavstrength();
   }
 
-  self.var_DCFC _meth_8597(1);
+  self.var_DCFC func_8597(1);
   self.var_DCFC rc8_disable_movement(0);
   self.var_DCFC rc8_disable_rotation(0);
   self.var_DCFC rc8_disable_attack(0);
@@ -1199,7 +1199,7 @@ func_D51B(var_0, var_1, var_2) {
   self setclientomnvar("ui_killstreak_missile_warn", 0);
   self setclientomnvar("ui_remote_c8_countdown", 0);
   self setclientomnvar("ui_remote_c8_health", 0);
-  self _meth_85A2("");
+  self func_85A2("");
   self thermalvisionfofoverlayoff();
   rc8_disable_movement(1);
   rc8_disable_rotation(1);
@@ -1282,7 +1282,7 @@ func_13ACD(var_0) {
         var_14 = var_0 gettagorigin("c8_shield_le") + (0, 0, 20) + var_12 * 200;
         var_15 = vectornormalize(var_14 - var_13);
         var_1 = var_2.health + 1;
-        var_2 _meth_84DC(var_15, 700);
+        var_2 func_84DC(var_15, 700);
         var_2 playSound("rc8_melee_hit");
         wait 0.05;
       } else

@@ -38,8 +38,8 @@ func_F848(var_0) {
       level.var_4C6B = ::func_E44D;
     }
 
-    level._meth_83D4 = ::func_61BA;
-    level._meth_83D3 = ::func_61BA;
+    level.func_83D4 = ::func_61BA;
+    level.func_83D3 = ::func_61BA;
     level.vehicle_canturrettargetpoint = ::func_61BA;
     scripts\sp\utility::func_F305();
 
@@ -67,7 +67,7 @@ func_F848(var_0) {
       var_2.disabledweapon = 0;
       var_2.disabledweaponswitch = 0;
       var_2.disabledusability = 0;
-      var_2 _meth_831C("frag");
+      var_2 func_831C("frag");
     }
 
     level.var_54D3[0] = "easy";
@@ -581,7 +581,7 @@ func_7E4A(var_0) {
   return level.var_54D0[var_0][func_7C6D(self.var_7683)];
 }
 
-_meth_80D5(var_0, var_1, var_2) {
+func_80D5(var_0, var_1, var_2) {
   return (level.var_54D0[var_0][level.var_54D3[var_1]] * (100 - getdvarint("autodifficulty_frac")) + level.var_54D0[var_0][level.var_54D3[var_2]] * getdvarint("autodifficulty_frac")) * 0.01;
 }
 
@@ -1137,11 +1137,11 @@ func_DE3C() {
     return;
   }
   if(isalive(self)) {
-    var_0 = self _meth_8139("takeCoverWarnings");
+    var_0 = self func_8139("takeCoverWarnings");
 
     if(var_0 > 0) {
       var_0--;
-      self _meth_8302("takeCoverWarnings", var_0);
+      self func_8302("takeCoverWarnings", var_0);
     }
   }
 }
@@ -1438,7 +1438,7 @@ func_8C1D() {
 }
 
 func_E34F() {
-  return level.player _meth_84D0() > level.player _meth_84CF() * 0.1;
+  return level.player func_84D0() > level.player func_84CF() * 0.1;
 }
 
 func_FF8B() {
@@ -1474,7 +1474,7 @@ func_FF8B() {
     return 0;
   }
 
-  var_0 = self _meth_8139("takeCoverWarnings");
+  var_0 = self func_8139("takeCoverWarnings");
 
   if(var_0 <= 3) {
     return 0;
@@ -1512,7 +1512,7 @@ func_FF89() {
     return 0;
   }
 
-  var_0 = self _meth_8139("takeCoverWarnings");
+  var_0 = self func_8139("takeCoverWarnings");
 
   if(var_0 <= 3) {
     return 0;
@@ -1549,7 +1549,7 @@ get_num_jackal_arenas_completed() {
   var_0 = 0;
 
   foreach(var_2 in maps_with_jackal_arenas()) {
-    var_3 = level.player _meth_84C6("missionStateData", var_2);
+    var_3 = level.player func_84C6("missionStateData", var_2);
 
     if(isDefined(var_3) && var_3 == "complete") {
       var_0++;
@@ -1705,7 +1705,7 @@ func_D259() {
   scripts\sp\utility::func_65DD("player_has_red_flashing_overlay");
 
   if(scripts\sp\utility::func_65DB("near_death_vision_enabled")) {
-    self _meth_8222();
+    self func_8222();
     thread func_0B0B::func_E2BB();
   }
 
@@ -1725,8 +1725,8 @@ func_E26C() {
 func_9772() {
   var_0 = isDefined(level.var_9F0B) && level.var_9F0B;
 
-  if(self _meth_8139("takeCoverWarnings") == -1 || var_0) {
-    self _meth_8302("takeCoverWarnings", 9);
+  if(self func_8139("takeCoverWarnings") == -1 || var_0) {
+    self func_8302("takeCoverWarnings", 9);
   }
 }
 
@@ -1741,10 +1741,10 @@ func_93F7() {
   if(!func_11432()) {
     return;
   }
-  var_0 = self _meth_8139("takeCoverWarnings");
+  var_0 = self func_8139("takeCoverWarnings");
 
   if(var_0 < 10) {
-    self _meth_8302("takeCoverWarnings", var_0 + 1);
+    self func_8302("takeCoverWarnings", var_0 + 1);
   }
 }
 
@@ -2229,17 +2229,17 @@ func_262C(var_0) {
       func_14DB("aa_player_damage_dealt", var_0);
 
       if(!level.player scripts\sp\utility::func_9D27()) {
-        [[level._meth_83D3]](var_1, self.damagelocation, var_2);
+        [[level.func_83D3]](var_1, self.damagelocation, var_2);
         return 0;
       }
 
       if(!func_3234(var_1)) {
-        [[level._meth_83D3]](var_1, self.damagelocation, var_2);
+        [[level.func_83D3]](var_1, self.damagelocation, var_2);
         return 0;
       }
 
       [
-        [level._meth_83D4]
+        [level.func_83D4]
       ](var_1, self.damagelocation, var_2);
       func_14DB("aa_ads_damage_dealt", var_0);
       return 1;
@@ -2307,7 +2307,7 @@ func_262C(var_0) {
       if(scripts\engine\utility::flag("disable_weapon_help")) {
         return;
       }
-      if(!level.player _meth_843C()) {
+      if(!level.player func_843C()) {
         return;
       }
       if(level.player getteamflagcount()) {
@@ -2360,10 +2360,10 @@ func_262C(var_0) {
       level.var_1305F = 1;
       level.var_1305E = 1;
       level.var_13069 = 1;
-      var_1 = level.player _meth_84C6("hintAltM8");
-      var_2 = level.player _meth_84C6("hintAltFMG");
-      var_3 = level.player _meth_84C6("hintAltERAD");
-      var_4 = level.player _meth_84C6("hintAltRipper");
+      var_1 = level.player func_84C6("hintAltM8");
+      var_2 = level.player func_84C6("hintAltFMG");
+      var_3 = level.player func_84C6("hintAltERAD");
+      var_4 = level.player func_84C6("hintAltRipper");
 
       if(isDefined(var_1)) {
         level.var_13062 = var_1;
@@ -2406,7 +2406,7 @@ func_262C(var_0) {
           return;
         }
         level.player waittill("weapon_change", var_6);
-        var_7 = level.player _meth_8519(var_6, 1);
+        var_7 = level.player func_8519(var_6, 1);
         var_8 = getweaponbasename(var_6);
         var_9 = "";
 
@@ -2414,7 +2414,7 @@ func_262C(var_0) {
           case "iw7_m8":
             if(var_7) {
               if(!level.var_13062) {
-                level.player _meth_84C7("hintAltM8", 1);
+                level.player func_84C7("hintAltM8", 1);
                 level.var_13062 = 1;
                 var_5++;
               }
@@ -2425,7 +2425,7 @@ func_262C(var_0) {
           case "iw7_fmg":
             if(var_7) {
               if(!level.var_1305F) {
-                level.player _meth_84C7("hintAltFMG", 1);
+                level.player func_84C7("hintAltFMG", 1);
                 level.var_1305F = 1;
                 var_5++;
               }
@@ -2436,7 +2436,7 @@ func_262C(var_0) {
           case "iw7_erad":
             if(var_7) {
               if(!level.var_1305E) {
-                level.player _meth_84C7("hintAltERAD", 1);
+                level.player func_84C7("hintAltERAD", 1);
                 level.var_1305E = 1;
                 var_5++;
               }
@@ -2447,7 +2447,7 @@ func_262C(var_0) {
           case "iw7_ripper":
             if(var_7) {
               if(!level.var_13069) {
-                level.player _meth_84C7("hintAltRipper", 1);
+                level.player func_84C7("hintAltRipper", 1);
                 level.var_13069 = 1;
                 var_5++;
               }

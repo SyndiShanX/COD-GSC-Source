@@ -93,7 +93,7 @@ getpassivedeathwatching(var_0) {
   return var_1.var_B689;
 }
 
-_meth_8239() {
+func_8239() {
   var_0 = [];
   foreach(var_2 in level.passivemap) {
     if(var_2.var_13CDE) {

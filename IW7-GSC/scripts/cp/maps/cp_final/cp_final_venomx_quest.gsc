@@ -4117,7 +4117,7 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
     }
 
     if(int(distance(var_0.origin, var_3.origin)) <= 120) {
-      if(var_3 _meth_843B()) {
+      if(var_3 func_843B()) {
         if(randomint(100) > 50) {
           var_3 dodamage(int(var_3.health / 4), var_3.origin);
         }

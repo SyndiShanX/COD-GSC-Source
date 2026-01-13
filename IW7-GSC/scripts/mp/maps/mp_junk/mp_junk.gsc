@@ -188,7 +188,7 @@ killtriggerloop(var_0) {
     if(isDefined(var_1)) {
       if(isplayer(var_1)) {
         var_1 suicide();
-        var_2 = var_1 _meth_8113();
+        var_2 = var_1 func_8113();
         var_2 hide(1);
         var_2.permanentcustommovetransition = 1;
         if(var_1.loadoutarchetype == "archetype_scout") {

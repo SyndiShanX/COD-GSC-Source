@@ -57,7 +57,7 @@ func_DEE7(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_2) && var_2) {
-    scripts\anim\init_move_transitions::_meth_814D(var_0);
+    scripts\anim\init_move_transitions::func_814D(var_0);
   }
 }
 

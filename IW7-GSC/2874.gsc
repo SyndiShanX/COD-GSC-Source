@@ -6,7 +6,7 @@
 global_fx(var_0, var_1, var_2, var_3, var_4) {
   init();
   level.global_fx[var_0] = var_3;
-  var_5 = scripts\sp\utility::_meth_8181(var_0, "targetname");
+  var_5 = scripts\sp\utility::func_8181(var_0, "targetname");
 
   if(!isDefined(var_5)) {
     return;

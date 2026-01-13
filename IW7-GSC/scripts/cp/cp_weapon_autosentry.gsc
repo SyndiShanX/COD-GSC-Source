@@ -168,9 +168,9 @@ sentry_initsentry(var_0, var_1) {
       self setrightarc(100);
       self give_crafted_gascan(90);
       self settoparc(60);
-      self _meth_82C9(0.3, "pitch");
-      self _meth_82C9(0.3, "yaw");
-      self _meth_82C8(0.65);
+      self func_82C9(0.3, "pitch");
+      self func_82C9(0.3, "yaw");
+      self func_82C8(0.65);
       self setdefaultdroppitch(-89);
       break;
   }
@@ -477,7 +477,7 @@ turret_shotmonitor(var_0) {
   var_1 = weaponfiretime(level.sentrysettings[var_0.sentrytype].var_39B);
   for(;;) {
     var_0 waittill("turret_fire");
-    var_0 _meth_8165() notify("turret_fire");
+    var_0 func_8165() notify("turret_fire");
     var_0.heatlevel = var_0.heatlevel + var_1;
     var_0.cooldownwaittime = var_1;
   }

@@ -3,7 +3,7 @@
  * Script: scripts\anim\combat_utility.gsc
 *********************************************/
 
-_meth_8197(var_0) {
+func_8197(var_0) {
   var_1 = self getshootatpos() + (0, 0, -3);
   var_2 = (var_1[0] - var_0[0], var_1[1] - var_0[1], var_1[2] - var_0[2]);
   var_2 = vectornormalize(var_2);
@@ -19,7 +19,7 @@ getjointype() {
   return randomfloatrange(level.var_B750, level.var_B461);
 }
 
-_meth_80E7() {
+func_80E7() {
   var_0 = gettime() - self.a.var_A9ED / 1000;
   var_1 = func_7E12();
   if(var_1 > var_0) {
@@ -59,7 +59,7 @@ func_32BE() {
       return;
     }
 
-    var_0 = _meth_80E7();
+    var_0 = func_80E7();
     if(var_0) {
       wait(var_0);
     }
@@ -131,7 +131,7 @@ func_FEDF() {
   }
 }
 
-_meth_81EB() {
+func_81EB() {
   level.var_1FB5++;
   return level.var_1FB5;
 }
@@ -139,15 +139,15 @@ _meth_81EB() {
 func_FA8C(var_0) {
   self give_attacker_kill_rewards( % exposed_aiming, 1, 0.2);
   if(scripts\engine\utility::actor_is3d()) {
-    self _meth_82E5("exposed_aim", scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
+    self func_82E5("exposed_aim", scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
   } else {
-    self _meth_82A9(scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
+    self func_82A9(scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
   }
 
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_up"), 1, var_0);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_down"), 1, var_0);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_left"), 1, var_0);
-  self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_right"), 1, var_0);
+  self func_82A9(scripts\anim\utility::func_1F64("add_aim_up"), 1, var_0);
+  self func_82A9(scripts\anim\utility::func_1F64("add_aim_down"), 1, var_0);
+  self func_82A9(scripts\anim\utility::func_1F64("add_aim_left"), 1, var_0);
+  self func_82A9(scripts\anim\utility::func_1F64("add_aim_right"), 1, var_0);
   self.facialidx = scripts\anim\face::playfacialanim(undefined, "aim", self.facialidx);
 }
 
@@ -190,7 +190,7 @@ func_1A3E(var_0) {
 
   self.a.var_1A3E = 1;
   wait(0.1);
-  self _meth_82AC( % add_idle, 1, 0.2);
+  self func_82AC( % add_idle, 1, 0.2);
   var_1 = % add_idle;
   var_2 = 0;
   for(;;) {
@@ -203,9 +203,9 @@ func_1A3E(var_0) {
       wait(0.5);
     } else {
       if(var_4 == var_1) {
-        self _meth_82E9(var_3, var_4, 1, 0.2);
+        self func_82E9(var_3, var_4, 1, 0.2);
       } else {
-        self _meth_82E6(var_3, var_4, 1, 0.2);
+        self func_82E6(var_3, var_4, 1, 0.2);
       }
 
       var_1 = var_4;
@@ -237,7 +237,7 @@ func_FEFE() {
 }
 
 func_6D97(var_0, var_1, var_2) {
-  var_3 = "fireAnim_" + _meth_81EB();
+  var_3 = "fireAnim_" + func_81EB();
   scripts\sp\gameskill::resetmisstime_code();
   while(!func_1A3B()) {
     wait(0.05);
@@ -257,8 +257,8 @@ func_6D97(var_0, var_1, var_2) {
     var_4 = func_FEFE();
   }
 
-  self _meth_82E7(var_3, var_0, 1, 0.2, var_4);
-  self _meth_83CE();
+  self func_82E7(var_3, var_0, 1, 0.2, var_4);
+  self func_83CE();
   func_6D99(var_3, var_0, var_1, var_2);
   func_8EBF();
 }
@@ -352,7 +352,7 @@ func_1A3B() {
   }
 
   var_0 = self getspawnpointdist();
-  var_1 = scripts\anim\shared::_meth_811C();
+  var_1 = scripts\anim\shared::func_811C();
   var_2 = vectortoangles(self.var_FECF - var_1);
   var_3 = scripts\engine\utility::absangleclamp180(var_0[1] - var_2[1]);
   if(var_3 > level.var_1A52) {
@@ -570,7 +570,7 @@ func_BE18() {
   return gettime() >= self.a.nextgrenadetrytime;
 }
 
-_meth_85B5(var_0) {
+func_85B5(var_0) {
   if(scripts\sp\utility::func_D022()) {
     return 0;
   }
@@ -595,7 +595,7 @@ _meth_85B5(var_0) {
 }
 
 func_128A1(var_0, var_1, var_2, var_3) {
-  if(!self _meth_81A2(var_0, var_1)) {
+  if(!self func_81A2(var_0, var_1)) {
     return 0;
   } else if(distancesquared(self.origin, var_1) < -25536) {
     return 0;
@@ -617,7 +617,7 @@ func_128A0(var_0, var_1) {
 
   func_F62B(var_0);
   var_0 = func_453D(var_0);
-  if(!_meth_85B5(var_0)) {
+  if(!func_85B5(var_0)) {
     return 0;
   }
 
@@ -628,7 +628,7 @@ func_128A0(var_0, var_1) {
     }
 
     if(scripts\anim\utility_common::canseeenemyfromexposed()) {
-      if(!self _meth_81A2(var_0, var_0.origin)) {
+      if(!self func_81A2(var_0, var_0.origin)) {
         return 0;
       }
 
@@ -636,7 +636,7 @@ func_128A0(var_0, var_1) {
     } else if(scripts\anim\utility_common::cansuppressenemyfromexposed()) {
       return func_128A1(var_0, scripts\anim\utility::func_7E90(), var_1, var_2);
     } else {
-      if(!self _meth_81A2(var_0, var_0.origin)) {
+      if(!self func_81A2(var_0, var_0.origin)) {
         return 0;
       }
 
@@ -665,7 +665,7 @@ func_58BA(var_0, var_1, var_2, var_3) {
 
   scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
   self notify("stop_aiming_at_enemy");
-  self _meth_82E4("throwanim", var_0, % body, func_6B9A(), 0.1, 1);
+  self func_82E4("throwanim", var_0, % body, func_6B9A(), 0.1, 1);
   thread scripts\anim\notetracks::donotetracksforever("throwanim", "killanimscript");
   var_4 = scripts\anim\utility_common::getgrenademodel();
   var_5 = "none";
@@ -692,7 +692,7 @@ func_58BA(var_0, var_1, var_2, var_3) {
     thread func_13A98(self.var_1652.player, var_2);
   }
 
-  self _meth_83C2();
+  self func_83C2();
   if(!usingplayer()) {
     func_F72C(self.var_1652, var_2);
   }
@@ -759,7 +759,7 @@ func_13A99(var_0) {
         var_0B = var_7[var_0A];
         var_0C = distancesquared(var_4.origin, var_0B.origin);
         if(var_0C < var_5) {
-          var_0B _meth_85C8(var_1, var_0);
+          var_0B func_85C8(var_1, var_0);
           continue;
         }
 
@@ -778,7 +778,7 @@ func_13A99(var_0) {
   }
 }
 
-_meth_85C8(var_0, var_1) {
+func_85C8(var_0, var_1) {
   var_2 = self;
   anim.var_11813 = undefined;
   if(gettime() - var_2.var_A990 < 3000) {
@@ -832,7 +832,7 @@ func_C371(var_0) {
   return var_1 + var_2 + var_3;
 }
 
-_meth_85C9(var_0, var_1) {
+func_85C9(var_0, var_1) {
   level notify("armoffset");
   level endon("armoffset");
   var_0 = self.origin + func_C371(var_0);
@@ -897,7 +897,7 @@ func_13059(var_0) {
   var_2 = self.sendclientmatchdata;
   self.sendmatchdata = 0;
   self.sendclientmatchdata = 0;
-  if(self _meth_83D4(var_0)) {
+  if(self func_83D4(var_0)) {
     return 1;
   }
 
@@ -968,7 +968,7 @@ func_128AA(var_0) {
     return 0;
   }
 
-  if(!self _meth_81A5(self.isnodeoccupied.origin)) {
+  if(!self func_81A5(self.isnodeoccupied.origin)) {
     return 0;
   }
 
@@ -985,7 +985,7 @@ func_128AA(var_0) {
   }
 
   self getrelativeteam(var_0);
-  if(self _meth_8254()) {
+  if(self func_8254()) {
     self.sendmatchdata = 0;
     self.sendclientmatchdata = 0;
     self.a.var_B168 = 1;
@@ -1075,7 +1075,7 @@ castshadows(var_0) {
   return angleclamp180(var_2);
 }
 
-_meth_8063(var_0, var_1) {
+func_8063(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return 0;
   }

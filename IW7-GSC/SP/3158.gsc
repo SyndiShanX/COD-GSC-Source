@@ -122,7 +122,7 @@ func_C185(var_0, var_1, var_2, var_3) {
 }
 
 func_10078(var_0, var_1, var_2, var_3) {
-  return scripts\anim\utility_common::usingmg() || isDefined(self _meth_8164());
+  return scripts\anim\utility_common::usingmg() || isDefined(self func_8164());
 }
 
 func_FEDA(var_0, var_1, var_2, var_3) {
@@ -142,8 +142,8 @@ func_3DFB(var_0, var_1) {
 }
 
 func_5AAC(var_0) {
-  var_1 = self _meth_8164();
-  var_1 _meth_8398();
+  var_1 = self func_8164();
+  var_1 func_8398();
   var_1 endon("death");
   var_1 endon("turretstatechange");
   var_2 = self.asm.shootparams.var_FF0B;
@@ -162,11 +162,11 @@ func_5AAB(var_0, var_1, var_2, var_3) {
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_6 = getanimlength(var_5);
   var_6 = var_6 / var_3;
-  self _meth_83CE();
+  self func_83CE();
   while(var_4 > 0) {
     var_4--;
     scripts\anim\utility_common::shootenemywrapper(0);
-    self _meth_82E7(var_1, var_5, 1, var_2, var_6);
+    self func_82E7(var_1, var_5, 1, var_2, var_6);
     scripts\anim\combat_utility::decrementbulletsinclip();
     wait(var_3);
   }
@@ -178,7 +178,7 @@ func_FE70(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   func_FE89();
   var_4 = func_FE64();
-  if(isDefined(self _meth_8164())) {
+  if(isDefined(self func_8164())) {
     func_5AAC(var_4);
   } else {
     func_5AAB(var_0, var_1, var_2, var_4);
@@ -204,9 +204,9 @@ func_FE61(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = func_FE64();
-  self _meth_83CE();
+  self func_83CE();
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E7(var_1, var_5, 1, var_2, var_4);
+  self func_82E7(var_1, var_5, 1, var_2, var_4);
   func_FE5C(var_0, var_1, var_5, 2);
   self.asm.shootparams.var_C21C--;
   if(!func_FEDC()) {
@@ -372,13 +372,13 @@ func_32BE() {
     return;
   }
 
-  var_0 = _meth_80E7();
+  var_0 = func_80E7();
   if(var_0) {
     wait(var_0);
   }
 }
 
-_meth_80E7() {
+func_80E7() {
   var_0 = gettime() - self.a.var_A9ED / 1000;
   var_1 = func_7E12();
   if(var_1 > var_0) {

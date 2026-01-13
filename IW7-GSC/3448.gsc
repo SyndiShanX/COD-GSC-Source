@@ -3,7 +3,7 @@
  * Script: 3448.gsc
 *********************************************/
 
-_meth_80F1() {
+func_80F1() {
   foreach(var_1 in self.rewindorigins) {
     return var_1;
   }
@@ -16,7 +16,7 @@ func_E4D6() {
     return 0;
   }
 
-  var_0 = _meth_80F1();
+  var_0 = func_80F1();
   if(!isDefined(var_0)) {
     return 0;
   }

@@ -312,7 +312,7 @@ func_1EE0(var_0, var_1, var_2) {
   var_8 = var_0.origin + var_7;
   var_9 = combineangles(var_0.angles, var_6);
   if(isai(var_0)) {
-    var_0 _meth_80F1(var_8, var_9, 9999);
+    var_0 func_80F1(var_8, var_9, 9999);
     return;
   }
 
@@ -433,7 +433,7 @@ func_1EAE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_0.var_11BB = var_6;
   var_0.var_11BC = var_7;
   if(getdvarint("ai_iw7", 0) == 1) {
-    var_0 lib_0A1E::func_2307(::scripts\anim\animmode::main, ::lib_0A1E::func_2385);
+    var_0 lib_0A1E::func_2307(::scripts\anim\animmode::main, lib_0A1E::func_2385);
     return;
   }
 
@@ -736,10 +736,10 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
         var_1E = level.var_EC85[var_1C]["root"];
         var_7 give_attacker_kill_rewards(var_1E, 0, var_1D);
         var_1F = level.var_EC85[var_1C][var_1];
-        var_7 _meth_82E1(var_12, var_1F, 1, var_1D);
+        var_7 func_82E1(var_12, var_1F, 1, var_1D);
       } else if(var_7.var_9F == "misc_turret") {
         var_1F = level.var_EC85[var_1C][var_1];
-        var_7 _meth_82E1(var_12, var_1F, 1, var_1D);
+        var_7 func_82E1(var_12, var_1F, 1, var_1D);
       } else {
         var_20 = undefined;
         if(isai(var_7)) {
@@ -923,8 +923,8 @@ func_1F60(var_0, var_1) {
 }
 
 func_CC70(var_0, var_1) {
-  var_0 _meth_82AC( % addtive_head_anims, 1, 0.2);
-  var_0 _meth_82AC(var_1, 1, 0.2);
+  var_0 func_82AC( % addtive_head_anims, 1, 0.2);
+  var_0 func_82AC(var_1, 1, 0.2);
   wait(getanimlength(var_1));
   var_0 clearanim( % addtive_head_anims, 0.2);
   var_0 clearanim(var_1, 0.2);
@@ -1151,7 +1151,7 @@ func_1F57(var_0, var_1, var_2) {
     var_8 = getstartorigin(var_4, var_5, level.var_EC85[var_7.var_1FBB][var_1]);
     var_9 = getstartangles(var_4, var_5, level.var_EC85[var_7.var_1FBB][var_1]);
     if(isai(var_7)) {
-      var_7 _meth_83B9(var_8);
+      var_7 func_83B9(var_8);
       continue;
     }
 
@@ -1183,7 +1183,7 @@ func_1ED2(var_0, var_1, var_2) {
   var_6 = getstartorigin(var_4, var_5, level.var_EC85["generic"][var_1]);
   var_7 = getstartangles(var_4, var_5, level.var_EC85["generic"][var_1]);
   if(isai(var_0)) {
-    var_0 _meth_83B9(var_6);
+    var_0 func_83B9(var_6);
     return;
   }
 
@@ -1341,7 +1341,7 @@ func_1EA8(var_0) {
     return;
   }
 
-  self _meth_8250(var_0);
+  self func_8250(var_0);
 }
 
 func_DD11(var_0, var_1) {
@@ -1351,7 +1351,7 @@ func_DD11(var_0, var_1) {
 }
 
 func_DD12(var_0, var_1) {
-  var_2 = self _meth_811F(var_0);
+  var_2 = self func_811F(var_0);
   var_0 = var_2;
   var_0 = func_DD14(var_0, var_1);
   self.disablearrivals = 1;
@@ -1359,7 +1359,7 @@ func_DD12(var_0, var_1) {
 }
 
 func_DD13(var_0, var_1) {
-  var_2 = self _meth_811F(var_0);
+  var_2 = self func_811F(var_0);
   var_0 = var_2;
   var_0 = func_DD14(var_0, var_1);
   self.disablearrivals = 0;
@@ -1545,13 +1545,13 @@ func_1ECD(var_0, var_1, var_2, var_3, var_4) {
 
 func_1EB3(var_0) {
   foreach(var_2 in var_0) {
-    var_2 _meth_8250(0);
+    var_2 func_8250(0);
   }
 }
 
 func_1F08(var_0) {
   foreach(var_2 in var_0) {
-    var_2 _meth_8250(1);
+    var_2 func_8250(1);
   }
 }
 
@@ -1884,7 +1884,7 @@ func_1EBD(var_0, var_1, var_2) {
 
   var_4 = "scripted_face_" + var_1;
   var_0 give_attacker_kill_rewards(self.var_EF82, 5, 0.2);
-  var_0 _meth_82E7(var_4, var_2, 1, 0, 1);
+  var_0 func_82E7(var_4, var_2, 1, 0, 1);
   thread scripts\sp\anim::func_6A85(var_0, var_4, var_1);
   thread func_41AC(var_0, var_4, var_1);
 }
@@ -1932,7 +1932,7 @@ func_1EBF(var_0, var_1) {
   }
 
   scripts\sp\utility::func_F6FE("filler");
-  self _meth_82AA(var_4, 1, 0, 1);
+  self func_82AA(var_4, 1, 0, 1);
   self give_attacker_kill_rewards(var_5, 5, 0.267);
   func_F5BE(var_0, var_4, var_5);
   var_2 = 0.3;
@@ -1947,7 +1947,7 @@ func_F5BE(var_0, var_1, var_2) {
 func_11497(var_0) {
   self endon("death");
   var_1 = self.var_504D;
-  self _meth_82AA(var_1, 1, 0, 1);
+  self func_82AA(var_1, 1, 0, 1);
   self give_attacker_kill_rewards(self.var_EF82, 5, 0.4);
   func_55C7();
   wait(var_0);
@@ -2035,7 +2035,7 @@ func_F5B0(var_0, var_1, var_2, var_3, var_4) {
       var_7 = scripts\sp\utility::func_864C(var_7);
     }
 
-    self _meth_80F1(var_7, var_8);
+    self func_80F1(var_7, var_8);
     return;
   }
 
@@ -2079,7 +2079,7 @@ func_1F28(var_0, var_1, var_2) {
     var_3 = self.var_1FBB;
   }
 
-  self _meth_82E1("single anim", scripts\sp\utility::func_7DC2(var_0, var_3), 1, 0, var_1);
+  self func_82E1("single anim", scripts\sp\utility::func_7DC2(var_0, var_3), 1, 0, var_1);
 }
 
 func_1F2A(var_0, var_1, var_2) {
@@ -2088,7 +2088,7 @@ func_1F2A(var_0, var_1, var_2) {
 
 func_1F23(var_0, var_1) {
   var_2 = scripts\sp\utility::func_7DC1(var_0);
-  self _meth_82B0(var_2, var_1);
+  self func_82B0(var_2, var_1);
 }
 
 func_A888() {
@@ -2139,7 +2139,7 @@ func_2B8C(var_0, var_1, var_2, var_3) {
   var_0.var_6317 = var_3;
   var_0.var_77A3 = var_1;
   var_0.var_1FBD = self;
-  var_0 lib_0A1E::func_2307(::lib_0C4C::func_2B8A, ::lib_0C4C::func_2B8B);
+  var_0 lib_0A1E::func_2307(lib_0C4C::func_2B8A, lib_0C4C::func_2B8B);
 }
 
 func_2B87(var_0, var_1, var_2) {
@@ -2150,5 +2150,5 @@ func_2B87(var_0, var_1, var_2) {
   var_0.var_1E9D = var_2;
   var_0.var_77A3 = var_1;
   var_0.var_1FBD = self;
-  var_0 lib_0A1E::func_2307(::lib_0C4C::func_2B86);
+  var_0 lib_0A1E::func_2307(lib_0C4C::func_2B86);
 }

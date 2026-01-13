@@ -6,8 +6,8 @@
 snake_kung_fu_init() {
   level._effect["skeleton_summon_portal"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_spawn_portal.vfx");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_snake", ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_summon_pet_snake", ::scripts\cp\maps\cp_disco\kung_fu_mode::blank, ::scripts\cp\maps\cp_disco\kung_fu_mode::blank, ::summon_skeleton_pet, undefined, "snake_chi_power", undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_snake", scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_summon_pet_snake", scripts\cp\maps\cp_disco\kung_fu_mode::blank, ::scripts\cp\maps\cp_disco\kung_fu_mode::blank, ::summon_skeleton_pet, undefined, "snake_chi_power", undefined);
 }
 
 summon_skeleton_pet() {

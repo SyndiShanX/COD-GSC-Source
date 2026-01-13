@@ -50,11 +50,11 @@ main(var_0) {
   var_0.var_5855 = 0;
   thread func_6D63(var_0);
   self setturretanim(self.primaryturretanim);
-  self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
-  self _meth_82AA(self.var_17E3);
-  self _meth_82AA(self.var_17E2);
-  var_0 _meth_82AA(var_0.var_17E3);
-  var_0 _meth_82AA(var_0.var_17E2);
+  self func_82AB(self.primaryturretanim, 1, 0.2, 1);
+  self func_82AA(self.var_17E3);
+  self func_82AA(self.var_17E2);
+  var_0 func_82AA(var_0.var_17E3);
+  var_0 func_82AA(var_0.var_17E2);
   var_0 endon("death");
   for(;;) {
     if(var_0.var_5855) {
@@ -123,7 +123,7 @@ func_1109E() {
   self endon("killanimscript");
   for(;;) {
     if(!isDefined(self.target_getindexoftarget) || distancesquared(self.origin, self.target_getindexoftarget.origin) > 4096) {
-      self _meth_83AF();
+      self func_83AF();
     }
 
     wait(0.25);
@@ -138,12 +138,12 @@ func_D707(var_0) {
       self.a.var_D707 = ::func_D705;
       return;
     } else {
-      self _meth_83AF();
+      self func_83AF();
     }
   }
 
   if(var_0 == "saw") {
-    var_1 = self _meth_8164();
+    var_1 = self func_8164();
     return;
   }
 
@@ -154,7 +154,7 @@ func_D707(var_0) {
 
 func_D705(var_0) {
   if(!isDefined(self.target_getindexoftarget) || distancesquared(self.origin, self.target_getindexoftarget.origin) > 4096) {
-    self _meth_83AF();
+    self func_83AF();
     self.a.usingworldspacehitmarkers delete();
     self.a.usingworldspacehitmarkers = undefined;
     if(isDefined(self.var_394) && self.var_394 != "none") {

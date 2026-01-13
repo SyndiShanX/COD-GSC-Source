@@ -80,7 +80,7 @@ func_CF0E(var_0, var_1, var_2, var_3) {
     thread func_2453();
   }
 
-  if(func_1001C() && !self _meth_81B7()) {
+  if(func_1001C() && !self func_81B7()) {
     if(self.unittype == "c6") {
       anim thread[[self.bt.var_71CC]](self, 150, 120, 1);
       return;
@@ -120,7 +120,7 @@ func_CF0E(var_0, var_1, var_2, var_3) {
     }
 
     func_C703();
-    self _meth_82E4(var_1, var_6, lib_0A1E::asm_getbodyknob(), 1, 0.1);
+    self func_82E4(var_1, var_6, lib_0A1E::asm_getbodyknob(), 1, 0.1);
     lib_0A1E::func_2369(var_0, var_1, var_6);
   }
 
@@ -178,7 +178,7 @@ func_CF0E(var_0, var_1, var_2, var_3) {
       return;
     }
 
-    self _meth_82B1(lib_0A1E::func_2342(), 0);
+    self func_82B1(lib_0A1E::func_2342(), 0);
   }
 
   func_4E36();
@@ -352,7 +352,7 @@ func_10059(var_0, var_1, var_2, var_3) {
 }
 
 func_11043() {
-  self _meth_83AC("voice_bchatter_1_3d");
+  self func_83AC("voice_bchatter_1_3d");
   scripts\sp\anim::func_55C7(0);
   self stoploopsound();
 }
@@ -777,9 +777,9 @@ func_8E17() {
   playworldsound("bullet_small_flesh_helmet_npc", var_0);
   if(isDefined(self.var_8E1E)) {
     self.var_8E1E = undefined;
-    var_2 = self _meth_850C("helmet", "helmet");
+    var_2 = self func_850C("helmet", "helmet");
     if(var_2 > 0) {
-      self _meth_850B(var_2, "helmet", "helmet");
+      self func_850B(var_2, "helmet", "helmet");
     }
   }
 
@@ -791,7 +791,7 @@ func_8E17() {
       self.var_4E30 = 1;
     }
 
-    self _meth_81D0();
+    self func_81D0();
   }
 }
 
@@ -1056,7 +1056,7 @@ func_5AA8(var_0, var_1, var_2, var_3) {
     var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
-  self _meth_82B1(lib_0A1E::func_2342(), 0);
+  self func_82B1(lib_0A1E::func_2342(), 0);
   if(isDefined(self.var_71C8)) {
     self[[self.var_71C8]]();
   }
@@ -1070,7 +1070,7 @@ func_5AA8(var_0, var_1, var_2, var_3) {
     self playSound("shield_death_c6_1");
   }
 
-  level.player _meth_8244("damage_heavy");
+  level.player func_8244("damage_heavy");
   earthquake(0.5, 1, level.player.origin, 100);
   level.player scripts\engine\utility::delaycall(0.25, ::stoprumble, "damage_heavy");
   wait(1);
@@ -1092,7 +1092,7 @@ func_58E4(var_0, var_1, var_2, var_3) {
 
   self.var_A709 = 1;
   var_4 = undefined;
-  level.player _meth_8244("damage_heavy");
+  level.player func_8244("damage_heavy");
   earthquake(0.5, 1, level.player.origin, 100);
   thread scripts\sp\art::func_583F(0, 1, 0.02, 203, 211, 3, 0.05);
   if(self.a.pose == "stand") {

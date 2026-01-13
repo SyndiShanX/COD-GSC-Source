@@ -476,9 +476,9 @@ getplayerspeedbyweapon(var_0) {
       }
 
       if(!isDefined(var_2) || !self hasweapon(var_2)) {
-        var_1 = _meth_8237();
+        var_1 = func_8237();
       } else {
-        var_1 = _meth_8236(var_2);
+        var_1 = func_8236(var_2);
       }
     }
   }
@@ -487,18 +487,18 @@ getplayerspeedbyweapon(var_0) {
   return var_1;
 }
 
-_meth_8236(var_0) {
+func_8236(var_0) {
   var_1 = scripts\cp\utility::getbaseweaponname(var_0);
   var_2 = level.weaponmap_tospeed[var_1];
   return var_2;
 }
 
-_meth_8237() {
+func_8237() {
   var_0 = 2;
   self.weaponlist = self getweaponslistprimaries();
   if(self.weaponlist.size) {
     foreach(var_2 in self.weaponlist) {
-      var_3 = _meth_8236(var_2);
+      var_3 = func_8236(var_2);
       if(var_3 == 0) {
         continue;
       }
@@ -519,7 +519,7 @@ clampweaponspeed(var_0) {
   return clamp(var_0, 0, 1);
 }
 
-_meth_8226() {
+func_8226() {
   var_0 = 1000;
   self.weaponlist = self getweaponslistprimaries();
   if(self.weaponlist.size) {
@@ -608,7 +608,7 @@ func_E863() {
   self endon("momentum_unset");
   for(;;) {
     if(self issprinting()) {
-      _meth_848B();
+      func_848B();
       self.movespeedscaler = 1;
       updatemovespeedscale();
     }
@@ -617,7 +617,7 @@ func_E863() {
   }
 }
 
-_meth_848B() {
+func_848B() {
   self endon("death");
   self endon("disconnect");
   self endon("momentum_reset");
@@ -715,13 +715,13 @@ func_F53D() {
     self allowwallrun(0);
     self allowdodge(0);
     if(isDefined(var_8) && isDefined(var_9)) {
-      self _meth_8426(var_7);
-      self _meth_8425(var_7);
-      self _meth_8454(3);
+      self func_8426(var_7);
+      self func_8425(var_7);
+      self func_8454(3);
     } else {
-      self _meth_8426(var_7);
-      self _meth_8425(var_7);
-      self _meth_8454(3);
+      self func_8426(var_7);
+      self func_8425(var_7);
+      self func_8454(3);
     }
 
     thread scripts\cp\powers\coop_powers::clearpowers();

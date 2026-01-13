@@ -238,7 +238,7 @@ func_52FB() {
     wait 0.25;
   }
 
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_52FA() {

@@ -286,7 +286,7 @@ func_12E70(var_0) {
         break;
     }
 
-    var_3 = self _meth_805E(22, 22, 50, var_2, 0, 0);
+    var_3 = self func_805E(22, 22, 50, var_2, 0, 0);
     var_0.origin = var_3["origin"] + anglestoup(self.angles) * 27;
     var_0.angles = var_3["angles"];
     var_0.canbeplaced = self isonground() && var_3["result"] && var_0 remoteuav_in_range() && !var_0 isinremotenodeploy();
@@ -534,7 +534,7 @@ func_DFAA(var_0) {
   var_0 endon("end_remote");
   var_0.var_AA34 = 0;
   self.var_AEFB = undefined;
-  self _meth_8403();
+  self func_8403();
   wait 1;
 
   for(;;) {
@@ -585,7 +585,7 @@ func_DFAA(var_0) {
 
     if(isDefined(var_16)) {
       if(!isDefined(self.var_AEFB) || isDefined(self.var_AEFB) && self.var_AEFB != var_16) {
-        self _meth_8402(var_16);
+        self func_8402(var_16);
         self.var_AEFB = var_16;
 
         if(isDefined(var_6)) {
@@ -594,7 +594,7 @@ func_DFAA(var_0) {
         }
       }
     } else {
-      self _meth_8403();
+      self func_8403();
       self.var_AEFB = undefined;
     }
 

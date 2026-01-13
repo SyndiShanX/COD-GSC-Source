@@ -102,7 +102,7 @@ auto_start_boss_fight(var_0) {
   scripts\cp\cp_vo::set_vo_system_busy(1);
   foreach(var_3 in level.players) {
     scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_3);
-    var_3 _meth_82C0("bink_fadeout_amb", 0.66);
+    var_3 func_82C0("bink_fadeout_amb", 0.66);
   }
 
   scripts\cp\utility::play_bink_video("sysload_o2", 86, 0);
@@ -155,7 +155,7 @@ try_to_leave_bossfight(var_0, var_1) {
   scripts\cp\cp_vo::set_vo_system_busy(1);
   foreach(var_1 in level.players) {
     scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_1);
-    var_1 _meth_82C0("bink_fadeout_amb", 0.66);
+    var_1 func_82C0("bink_fadeout_amb", 0.66);
   }
 
   scripts\cp\utility::play_bink_video("sysload_o2", 86, 0);
@@ -281,7 +281,7 @@ enable_bossfight_magicwheel() {
   level.bossfight_magicwheel.var_10A03 show();
   level.bossfight_magicwheel.var_10A03 setscriptablepartstate("spinner", "idle");
   level.bossfight_magicwheel makeusable();
-  level.bossfight_magicwheel _meth_84A7("tag_use");
+  level.bossfight_magicwheel func_84A7("tag_use");
   level.bossfight_magicwheel setusefov(60);
   level.bossfight_magicwheel setuserange(72);
   level.current_active_wheel = level.bossfight_magicwheel;
@@ -337,7 +337,7 @@ spawn_meph() {
   scripts\cp\cp_vo::set_vo_system_busy(1);
   level.can_use_pistol_during_laststand_func = ::disable_laststand_weapon;
   foreach(var_1 in level.players) {
-    var_1 _meth_82C0("final_boss_battle_space_intro", 0.02);
+    var_1 func_82C0("final_boss_battle_space_intro", 0.02);
     var_1 thread boss_fight_intro_clear_audio_zone();
   }
 
@@ -1032,7 +1032,7 @@ giveentangler(var_0) {
   var_0 thread entanglerrechargemonitor(var_0);
   var_0 thread scripts\cp\crafted_entangler::watch_dpad();
   var_0 setclientomnvar("zom_crafted_weapon", 19);
-  scripts\cp\utility::set_crafted_inventory_item("crafted_entangler", ::scripts\cp\crafted_entangler::give_crafted_entangler, var_0);
+  scripts\cp\utility::set_crafted_inventory_item("crafted_entangler", scripts\cp\crafted_entangler::give_crafted_entangler, var_0);
 }
 
 entanglerhitmonitor(var_0) {

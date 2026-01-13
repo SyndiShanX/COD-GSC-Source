@@ -224,7 +224,7 @@ groundpound_modifiedblastshieldconst(var_0, var_1) {
 }
 
 func_8651(var_0) {
-  return var_0 _meth_8499();
+  return var_0 func_8499();
 }
 
 groundpound_initimpactstructs() {

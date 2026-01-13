@@ -135,11 +135,11 @@ func_2AD0() {
   var_0.var_1581[62] = scripts\aitypes\melee::func_9896;
   var_0.var_1581[63] = scripts\aitypes\melee::func_41C6;
   var_0.var_1581[64] = lib_0A0C::func_10020;
-  var_0.var_1581[65] = lib_0BF9::_meth_846E;
+  var_0.var_1581[65] = lib_0BF9::func_846E;
   var_0.var_1581[66] = lib_0BF9::forceplaygestureviewmodel;
-  var_0.var_1581[67] = lib_0BF9::_meth_85C3;
-  var_0.var_1581[68] = lib_0BF9::_meth_85C1;
-  var_0.var_1581[69] = lib_0BF9::_meth_85C2;
+  var_0.var_1581[67] = lib_0BF9::func_85C3;
+  var_0.var_1581[68] = lib_0BF9::func_85C1;
+  var_0.var_1581[69] = lib_0BF9::func_85C2;
   var_0.var_1581[70] = lib_0A0C::func_1001E;
   var_0.var_1581[71] = lib_0BF9::func_336E;
   var_0.var_1581[72] = lib_0BF9::func_336F;

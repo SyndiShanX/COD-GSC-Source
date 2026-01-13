@@ -74,7 +74,7 @@ func_5285(var_0) {
     self.var_BE64 = undefined;
   }
 
-  self _meth_8514(var_0);
+  self func_8514(var_0);
   scripts\mp\utility::printgameaction("deployable cover removed", self.triggerportableradarping);
 }
 

@@ -1059,7 +1059,7 @@ play_loop_sound_on_entity_with_pitch(var_0, var_1, var_2, var_3) {
   var_4.angles = self.angles;
   var_4 linkto(self);
   var_4 playLoopSound(var_0);
-  var_4 _meth_8277(var_2, var_3);
+  var_4 func_8277(var_2, var_3);
   self waittill("stop sound" + var_0);
   var_4 stoploopsound(var_0);
   var_4 delete();
@@ -2236,7 +2236,7 @@ func_B8D1() {
   }
 
   if(func_93AB()) {
-    level.player _meth_8591(1);
+    level.player func_8591(1);
     updategamerprofile();
     scripts\sp\endmission::func_41ED();
   }
@@ -2417,9 +2417,9 @@ func_6ED8(var_0) {
   self endon("death");
   self endon("flashed");
   wait(0.2);
-  self _meth_80D0(0);
+  self func_80D0(0);
   wait(var_0 + 2);
-  self _meth_80D0(1);
+  self func_80D0(1);
 }
 
 func_E2B0() {
@@ -2900,7 +2900,7 @@ func_228A(var_0) {
 
 func_229F(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1] _meth_81D0();
+    var_0[var_1] func_81D0();
   }
 }
 
@@ -3298,7 +3298,7 @@ func_9591() {
   }
 
   self.var_1FBB = "corpse";
-  self _meth_839E();
+  self func_839E();
   if(isai(self)) {
     self.precacheleaderboards = 1;
   } else {
@@ -3309,7 +3309,7 @@ func_9591() {
     var_0 = scripts\engine\utility::get_target_ent(self.target);
     self dontinterpolate();
     if(isai(self)) {
-      self _meth_80F1(var_0.origin, var_0.angles);
+      self func_80F1(var_0.origin, var_0.angles);
     } else {
       self.origin = var_0.origin;
       self.angles = var_0.angles;
@@ -3336,7 +3336,7 @@ func_9591() {
     }
 
     func_F333(self.script_animation);
-    self _meth_81D0();
+    self func_81D0();
     return;
   }
 
@@ -3715,7 +3715,7 @@ func_13035(var_0, var_1, var_2) {
     self unlink();
   }
 
-  self _meth_80F1(var_6, var_7);
+  self func_80F1(var_6, var_7);
   var_8 = var_0 getlinkedparent();
   if(isDefined(var_8)) {
     self linkto(var_8);
@@ -4137,7 +4137,7 @@ func_10619(var_0, var_1) {
   } else if(isDefined(self.var_ED1B)) {
     var_2 = func_2C17(self);
   } else if(isDefined(self.var_EDB3) || isDefined(var_0)) {
-    var_2 = self _meth_8393(var_3);
+    var_2 = self func_8393(var_3);
   } else {
     var_2 = self dospawn(var_3);
   }
@@ -4613,7 +4613,7 @@ func_200D(var_0, var_1) {
 
 func_A62F() {
   self getrankinfofull(0);
-  self _meth_81D0();
+  self func_81D0();
   return 1;
 }
 
@@ -4640,7 +4640,7 @@ func_22D8(var_0, var_1, var_2) {
 }
 
 func_54C6() {
-  self _meth_81D0((0, 0, 0));
+  self func_81D0((0, 0, 0));
 }
 
 func_7FBC(var_0) {
@@ -5186,7 +5186,7 @@ func_C08C() {
   level.var_6AD2 = 0;
 }
 
-_meth_806D() {
+func_806D() {
   var_0 = self getweaponslistall();
   var_1 = [];
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
@@ -5921,7 +5921,7 @@ func_11624(var_0) {
   }
 
   if(isai(self)) {
-    self _meth_80F1(var_0.origin, var_0.angles);
+    self func_80F1(var_0.origin, var_0.angles);
     return;
   }
 
@@ -5940,7 +5940,7 @@ func_11645(var_0, var_1) {
   }
 
   if(isai(self)) {
-    self _meth_80F1(var_2, var_3);
+    self func_80F1(var_2, var_3);
     return;
   }
 
@@ -5949,7 +5949,7 @@ func_11645(var_0, var_1) {
 }
 
 func_1160F(var_0) {
-  self _meth_80F1(var_0.origin, var_0.angles);
+  self func_80F1(var_0.origin, var_0.angles);
   self give_mp_super_weapon(self.origin);
   self give_more_perk(var_0);
 }
@@ -6024,7 +6024,7 @@ func_2A75(var_0, var_1, var_2) {
 
   var_5 moveslide((0, 0, 15), 15, var_0);
   var_3 thread play_sound_on_entity("foot_slide_plr_start");
-  var_3 _meth_84FE();
+  var_3 func_84FE();
   var_3 forceplaygestureviewmodel("ges_slide", var_5.var_77BA, 0.2);
   if(isDefined(level._effect["vfx_slide_dirt"])) {
     var_10 = scripts\engine\utility::getfx("vfx_slide_dirt");
@@ -6058,7 +6058,7 @@ func_6389() {
     var_0 thread play_sound_on_entity("foot_slide_plr_end");
   }
 
-  var_0 scripts\engine\utility::delaycall(0.2, ::_meth_84FD);
+  var_0 scripts\engine\utility::delaycall(0.2, ::func_84FD);
   if(level.player islinked()) {
     var_0 unlink();
     var_0 setvelocity(var_0.slidemodel.slidevelocity);
@@ -6284,7 +6284,7 @@ func_7B92() {
 }
 
 func_7B93() {
-  return int(self _meth_8155("gameskill"));
+  return int(self func_8155("gameskill"));
 }
 
 func_228B(var_0, var_1, var_2) {
@@ -7073,7 +7073,7 @@ func_5FC7(var_0) {
 }
 
 func_54EF(var_0) {
-  if(level.player _meth_853E()) {
+  if(level.player func_853E()) {
     return;
   }
 
@@ -7200,7 +7200,7 @@ func_9330() {
     }
   }
 
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_8E9A() {
@@ -7407,7 +7407,7 @@ func_C268(var_0) {
   return isDefined(level.var_C265) && isDefined(level.var_C265[var_0]);
 }
 
-_meth_848C(var_0, var_1, var_2, var_3, var_4) {
+func_848C(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_4 - var_2;
   var_6 = var_3 - var_1;
   var_7 = var_5 / var_6;
@@ -7742,7 +7742,7 @@ getstruct_delete(var_0, var_1) {
   return var_2;
 }
 
-_meth_8181(var_0, var_1, var_2) {
+func_8181(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
   func_51D6(var_3, var_2);
   return var_3;
@@ -8351,7 +8351,7 @@ func_D08C(var_0, var_1) {
 
 func_D091(var_0, var_1) {
   self endon("death");
-  if(self _meth_819F()) {
+  if(self func_819F()) {
     return 0;
   }
 
@@ -8574,13 +8574,13 @@ func_F526(var_0, var_1) {
 }
 
 func_7B8C() {
-  return level.player _meth_846D();
+  return level.player func_846D();
 }
 
 func_960B() {
   if(!isDefined(level.isinphase)) {
     level.isinphase = getdvarint("bg_gravity");
-    level._meth_8519 = getomnvar("physics_gravity_z");
+    level.func_8519 = getomnvar("physics_gravity_z");
   }
 }
 
@@ -8591,7 +8591,7 @@ func_EBA6(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    physics_setgravity((0, 0, level._meth_8519 * var_1));
+    physics_setgravity((0, 0, level.func_8519 * var_1));
   }
 }
 
@@ -8624,7 +8624,7 @@ func_F3E4(var_0, var_1) {
 
 func_E1F0() {
   setsaveddvar("bg_gravity", level.isinphase);
-  physics_setgravity((0, 0, level._meth_8519));
+  physics_setgravity((0, 0, level.func_8519));
 }
 
 func_77B9(var_0) {
@@ -8755,7 +8755,7 @@ func_77B8(var_0, var_1, var_2, var_3) {
 }
 
 func_D123() {
-  var_0 = level.player _meth_8473();
+  var_0 = level.player func_8473();
   if(isDefined(var_0)) {
     return 1;
   }
@@ -8978,21 +8978,21 @@ func_1C72(var_0) {
   setsaveddvar("bg_disableWeaponFirstRaiseAnims", 1);
 }
 
-_meth_82EA(var_0) {
+func_82EA(var_0) {
   func_1143E();
   self giveweapon(var_0);
   self assignweaponmeleeslot(var_0);
 }
 
 func_1143E() {
-  var_0 = self _meth_8524();
+  var_0 = self func_8524();
   if(var_0 != "none") {
     self takeweapon(var_0);
   }
 }
 
 func_7AD7() {
-  var_0 = self _meth_8524();
+  var_0 = self func_8524();
   if(var_0 != "none") {
     return var_0;
   }
@@ -9249,7 +9249,7 @@ func_799D(var_0) {
 
 func_78E4() {
   if(getdvarint("ai_corpseSynch")) {
-    return self _meth_82CC();
+    return self func_82CC();
   }
 
   return self.origin;
@@ -9932,8 +9932,8 @@ func_7A8E() {
 func_E820(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "targetname");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);
-  if(isDefined(level._meth_8134)) {
-    var_6 = [[level._meth_8134]](var_0);
+  if(isDefined(level.func_8134)) {
+    var_6 = [[level.func_8134]](var_0);
     foreach(var_8 in var_6) {
       if(isnonentspawner(var_8)) {
         scripts\engine\utility::array_thread([var_8], var_1, var_2, var_3, var_4);
@@ -9952,8 +9952,8 @@ func_E820(var_0, var_1, var_2, var_3, var_4) {
 func_E81F(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "script_noteworthy");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);
-  if(isDefined(level._meth_8134)) {
-    var_6 = [[level._meth_8134]]();
+  if(isDefined(level.func_8134)) {
+    var_6 = [[level.func_8134]]();
     foreach(var_8 in var_6) {
       if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == var_0 && isnonentspawner(var_8)) {
         scripts\engine\utility::array_thread([var_8], var_1, var_2, var_3, var_4);
@@ -10077,7 +10077,7 @@ func_B979(var_0, var_1) {
     }
   }
 
-  level.player _meth_80A6();
+  level.player func_80A6();
   level.player scripts\engine\utility::allow_ads(1);
   return var_2;
 }
@@ -10184,8 +10184,8 @@ func_CE10(var_0, var_1, var_2) {
   level.player scripts\engine\utility::allow_weapon(0);
   level.player freezecontrols(1);
   level.player getrankinfoxpamt();
-  level.player _meth_8475();
-  level.player _meth_8559(0);
+  level.player func_8475();
+  level.player func_8559(0);
   setomnvar("ui_hide_hud", 1);
   level.player func_1C3E(0);
   setomnvar("ui_hide_weapon_info", 1);
@@ -10201,10 +10201,10 @@ func_CE10(var_0, var_1, var_2) {
     }
 
     level.player scripts\engine\utility::allow_weapon(1);
-    level.player _meth_80A1();
+    level.player func_80A1();
     level.player freezecontrols(0);
-    level.player _meth_8475();
-    level.player _meth_8559(1);
+    level.player func_8475();
+    level.player func_8559(1);
     level.player thread scripts\sp\gameskill::func_8CBA();
     setomnvar("ui_hide_hud", 0);
     level.player func_1C3E(1);
@@ -10234,10 +10234,10 @@ func_CE10(var_0, var_1, var_2) {
   }
 
   level.player scripts\engine\utility::allow_weapon(1);
-  level.player _meth_80A1();
+  level.player func_80A1();
   level.player freezecontrols(0);
-  level.player _meth_8475();
-  level.player _meth_8559(1);
+  level.player func_8475();
+  level.player func_8559(1);
   level.player thread scripts\sp\gameskill::func_8CBA();
   setomnvar("ui_hide_hud", 0);
   level.player func_1C3E(1);

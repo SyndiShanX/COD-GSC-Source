@@ -200,8 +200,8 @@ func_4F66() {
 
 func_FE9D(var_0) {
   self.var_A9ED = gettime();
-  var_1 = lib_0F3C::_meth_811C();
-  var_2 = lib_0F3C::_meth_811E(var_1);
+  var_1 = lib_0F3C::func_811C();
+  var_2 = lib_0F3C::func_811E(var_1);
   func_FED2(var_2, var_0);
 }
 

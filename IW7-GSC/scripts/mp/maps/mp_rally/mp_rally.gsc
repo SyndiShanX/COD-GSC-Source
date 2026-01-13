@@ -150,8 +150,8 @@ barreldroppersetup(var_0, var_1, var_2, var_3) {
   var_4 = getent(var_0, "targetname");
   var_4 makeusable();
   var_4 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
-  var_4 _meth_84A4(64);
-  var_4 _meth_84A6(60);
+  var_4 func_84A4(64);
+  var_4 func_84A6(60);
   var_4 setuserange(64);
   var_4 setusefov(60);
   var_5 = getent(var_3, "targetname");
@@ -327,8 +327,8 @@ burninatorsetup(var_0, var_1) {
   var_2.bigredbutton = getent(var_1, "targetname");
   var_2.bigredbutton makeusable();
   var_2.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
-  var_2.bigredbutton _meth_84A4(64);
-  var_2.bigredbutton _meth_84A6(60);
+  var_2.bigredbutton func_84A4(64);
+  var_2.bigredbutton func_84A6(60);
   var_2.bigredbutton setuserange(64);
   var_2.bigredbutton setusefov(60);
   var_2.killcament = spawn("script_model", (956, 996, 268));
@@ -428,7 +428,7 @@ burninatorplaydeathfx(var_0, var_1, var_2) {
   scripts\engine\utility::waitframe();
   scripts\engine\utility::waitframe();
   var_3 = anglesToForward(var_1.angles);
-  var_4 = var_1 _meth_8113();
+  var_4 = var_1 func_8113();
   if(isDefined(var_4)) {
     var_4 hide(1);
     var_4.permanentcustommovetransition = 1;

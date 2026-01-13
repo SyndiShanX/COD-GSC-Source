@@ -90,7 +90,7 @@ updateenemy() {
       continue;
     }
 
-    if(var_1 && !var_3 _meth_85BA()) {
+    if(var_1 && !var_3 func_85BA()) {
       continue;
     }
 
@@ -915,7 +915,7 @@ trygrenadethrow(var_0, var_1) {
     return 0;
   }
 
-  if(!self _meth_81A2(var_3, var_1)) {
+  if(!self func_81A2(var_3, var_1)) {
     return 0;
   }
 

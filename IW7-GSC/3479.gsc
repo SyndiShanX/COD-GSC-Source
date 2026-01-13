@@ -123,7 +123,7 @@ func_E846(var_0, var_1, var_2, var_3) {
   var_10 = var_8.var_1155F.origin;
   var_11 = scripts\mp\utility\game::_magicbullet(var_5, var_9, var_10, var_0);
   var_11 setCanDamage(1);
-  var_11 _meth_80A2();
+  var_11 func_80A2();
   var_11 give_player_next_weapon(1);
   var_11.team = var_0.team;
   var_11.lifeid = var_1;

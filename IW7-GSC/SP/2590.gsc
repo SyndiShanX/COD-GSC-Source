@@ -480,7 +480,7 @@ func_236B(var_0, var_1, var_2) {
   }
 
   scripts\sp\utility::func_F6FE("asm");
-  if(self.asm.var_6A86 != var_1 || self _meth_8103(var_3) < 1) {
+  if(self.asm.var_6A86 != var_1 || self func_8103(var_3) < 1) {
     self.asm.var_6A86 = var_1;
     var_4 = "facial_" + var_1;
     var_5 = scripts\asm\asm::asm_lookupanimfromalias("facial_animation", var_4);
@@ -544,7 +544,7 @@ func_234F() {
   var_3 = 0;
   var_4 = 0;
   for(;;) {
-    var_5 = self _meth_853F(var_2);
+    var_5 = self func_853F(var_2);
     var_6 = var_5[0] - var_0;
     var_7 = var_6 > 0.001 - var_6 < -0.001;
     if(var_7 != var_3) {
@@ -820,7 +820,7 @@ func_235F(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4) && var_4) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_6 = func_2356("Knobs", "move");
-      self _meth_84F2(var_6);
+      self func_84F2(var_6);
     }
   }
 
@@ -832,17 +832,17 @@ func_235F(var_0, var_1, var_2, var_3, var_4) {
     var_0B = asm_getallanimsforstate(var_0, var_1);
     if(isDefined(var_4) && var_4) {
       var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
-      self _meth_84F1(var_3);
+      self func_84F1(var_3);
     }
 
     if(isDefined(var_7) && var_7 != var_0B) {
       self clearanim(var_7, var_2);
     }
 
-    if(self _meth_8103(var_0B) > 0) {
-      self _meth_82E1(var_1, var_0B, 1, var_2, var_3);
+    if(self func_8103(var_0B) > 0) {
+      self func_82E1(var_1, var_0B, 1, var_2, var_3);
     } else {
-      self _meth_82EA(var_1, var_0B, 1, var_2, var_3);
+      self func_82EA(var_1, var_0B, 1, var_2, var_3);
     }
 
     func_2369(var_0, var_1, var_0B);
@@ -858,8 +858,8 @@ func_235F(var_0, var_1, var_2, var_3, var_4) {
       if(!isDefined(var_0D) && var_0A) {
         var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
         if(var_3 != var_0E) {
-          self _meth_84F1(var_3);
-          self _meth_82B1(var_0B, var_3);
+          self func_84F1(var_3);
+          self func_82B1(var_0B, var_3);
         }
       }
     }
@@ -872,7 +872,7 @@ func_2368(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
   var_5 = asm_getallanimsforstate(var_0, var_1);
   self clearanim(asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_5, 1, var_2, 1);
+  self func_82E7(var_1, var_5, 1, var_2, 1);
   func_2369(var_0, var_1, var_5);
   var_6 = func_2322(var_0, var_1, var_3, var_4);
   if(var_6 == "end") {
@@ -888,7 +888,7 @@ func_2366(var_0, var_1, var_2) {
   self endon(var_1 + "_finished");
   var_3 = asm_getallanimsforstate(var_0, var_1);
   self clearanim(asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_3, 1, var_2, 1);
+  self func_82E7(var_1, var_3, 1, var_2, 1);
   func_2369(var_0, var_1, var_3);
   var_4 = func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
@@ -897,7 +897,7 @@ func_2364(var_0, var_1, var_2) {
   self endon(var_1 + "_finished");
   var_3 = asm_getallanimsforstate(var_0, var_1);
   self clearanim(asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_3, 1, var_2, 1);
+  self func_82E7(var_1, var_3, 1, var_2, 1);
   func_2369(var_0, var_1, var_3);
   var_4 = func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   if(var_4 == "code_move") {
@@ -913,9 +913,9 @@ func_2363(var_0, var_1, var_2, var_3) {
   var_4 = asm_getallanimsforstate(var_0, var_1);
   var_5 = isDefined(var_3) && var_3 == "limited";
   if(var_5) {
-    self _meth_82E6(var_1, var_4, 1, var_2, 1);
+    self func_82E6(var_1, var_4, 1, var_2, 1);
   } else {
-    self _meth_82E7(var_1, var_4, 1, var_2, 1);
+    self func_82E7(var_1, var_4, 1, var_2, 1);
   }
 
   func_2369(var_0, var_1, var_4);
@@ -930,9 +930,9 @@ func_2361(var_0, var_1, var_2, var_3) {
     var_6 = asm_getallanimsforstate(var_0, var_1);
     if(var_4 != var_6) {
       if(var_5) {
-        self _meth_82E6(var_1, var_6, 1, var_2, 1);
+        self func_82E6(var_1, var_6, 1, var_2, 1);
       } else {
-        self _meth_82E7(var_1, var_6, 1, var_2, 1);
+        self func_82E7(var_1, var_6, 1, var_2, 1);
       }
 
       var_4 = var_6;
@@ -951,11 +951,11 @@ func_2362(var_0, var_1, var_2) {
   while(isDefined(var_1)) {
     wait(0.2);
     if(var_2) {
-      self _meth_82E8(var_0, var_1, 1, 0, 1);
+      self func_82E8(var_0, var_1, 1, 0, 1);
       continue;
     }
 
-    self _meth_82E1(var_0, var_1, 1, 0, 1);
+    self func_82E1(var_0, var_1, 1, 0, 1);
   }
 }
 
@@ -1053,12 +1053,12 @@ func_2380(var_0, var_1, var_2, var_3, var_4) {
     var_7 = func_235B(var_1, var_5 + "_aim_5");
   }
 
-  self _meth_82A9(func_235B(var_1, var_5 + "_aim_8"), 1, var_2);
-  self _meth_82A9(func_235B(var_1, var_5 + "_aim_2"), 1, var_2);
-  self _meth_82A9(func_235B(var_1, var_5 + "_aim_4"), 1, var_2);
-  self _meth_82A9(func_235B(var_1, var_5 + "_aim_6"), 1, var_2);
+  self func_82A9(func_235B(var_1, var_5 + "_aim_8"), 1, var_2);
+  self func_82A9(func_235B(var_1, var_5 + "_aim_2"), 1, var_2);
+  self func_82A9(func_235B(var_1, var_5 + "_aim_4"), 1, var_2);
+  self func_82A9(func_235B(var_1, var_5 + "_aim_6"), 1, var_2);
   if(isDefined(var_7)) {
-    self _meth_82AC(var_7, 1, var_2);
+    self func_82AC(var_7, 1, var_2);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_1, "aim_root")) {

@@ -148,7 +148,7 @@ playchargeloop(var_0, var_1, var_2, var_3) {
 
   self notify("charge_to_stop");
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
@@ -197,7 +197,7 @@ playsharpturnanim_rhino(var_0, var_1, var_2, var_3) {
 
 playrhinochargeoutro(var_0, var_1, var_2, var_3) {
   if(isDefined(self.preventplayerpushdist)) {
-    self _meth_85C9(self.preventplayerpushdist);
+    self func_85C9(self.preventplayerpushdist);
   }
 
   scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);

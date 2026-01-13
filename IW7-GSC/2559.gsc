@@ -42,7 +42,7 @@ bt_nativefinalizeregistrar() {
 }
 
 bt_nativetick() {
-  self _meth_84B3();
+  self func_84B3();
 }
 
 bt_nativeregisteraction(var_0, var_1, var_2, var_3, var_4, var_5) {

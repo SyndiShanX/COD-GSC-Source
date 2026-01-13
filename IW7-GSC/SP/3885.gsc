@@ -482,7 +482,7 @@ func_E53E(var_0, var_1, var_2, var_3) {
 
   if(var_0 == "passive") {
     foreach(var_5 in self.var_466A) {
-      var_5.var_AC84 _meth_82FC(var_5.var_AC84.var_10BF7);
+      var_5.var_AC84 func_82FC(var_5.var_AC84.var_10BF7);
       var_5.var_6128 show();
       var_5.var_6123 hide();
       if(var_1) {
@@ -498,7 +498,7 @@ func_E53E(var_0, var_1, var_2, var_3) {
     }
   } else if(var_0 == "active") {
     foreach(var_5 in self.var_466A) {
-      var_5.var_AC84 _meth_82FC(var_5.var_AC84.var_62C0);
+      var_5.var_AC84 func_82FC(var_5.var_AC84.var_62C0);
       var_5.var_6128 hide();
       var_5.var_6123 show();
       if(var_1) {
@@ -862,9 +862,9 @@ func_106C8(var_0, var_1) {
 }
 
 func_F60F() {
-  var_0 = level.player _meth_84C6("selectedLoadout");
-  var_1 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 0, "weapon");
-  var_2 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 1, "weapon");
+  var_0 = level.player func_84C6("selectedLoadout");
+  var_1 = level.player func_84C6("loadouts", var_0, "weaponSetups", 0, "weapon");
+  var_2 = level.player func_84C6("loadouts", var_0, "weaponSetups", 1, "weapon");
   var_3 = scripts\sp\loadout::func_31CE(0, var_0);
   var_4 = scripts\sp\loadout::func_31CE(1, var_0);
   if(isDefined(var_3) || isDefined(var_4)) {
@@ -1139,7 +1139,7 @@ func_A62A() {
     }
 
     var_2.var_4E68 = 1;
-    var_2 _meth_81D0();
+    var_2 func_81D0();
   }
 }
 
@@ -1165,7 +1165,7 @@ func_13566(var_0) {
         return;
       }
 
-      var_0 _meth_85AC();
+      var_0 func_85AC();
       if(scripts\engine\utility::flag("vr_delete_thrown_grenades")) {
         switch (var_2) {
           case "seeker":
@@ -1214,7 +1214,7 @@ func_13566(var_0) {
         }
 
         if(isDefined(var_3)) {
-          level thread _meth_859E("vfx_vr_equipment_derez", var_3);
+          level thread func_859E("vfx_vr_equipment_derez", var_3);
           return;
         }
 
@@ -1224,7 +1224,7 @@ func_13566(var_0) {
   }
 }
 
-_meth_85AC() {
+func_85AC() {
   self endon("explode");
   self endon("missile_stuck");
   self endon("death");
@@ -1287,11 +1287,11 @@ func_DFF0(var_0) {
 func_DFF3(var_0) {
   if(!var_0) {
     foreach(var_2 in level.var_F10A.var_162D) {
-      level thread _meth_859E("vfx_vr_equipment_derez", var_2.origin);
+      level thread func_859E("vfx_vr_equipment_derez", var_2.origin);
     }
 
     foreach(var_5 in level.var_F10A.var_1633) {
-      level thread _meth_859E("vfx_vr_equipment_derez", var_5.origin);
+      level thread func_859E("vfx_vr_equipment_derez", var_5.origin);
     }
   }
 
@@ -1301,7 +1301,7 @@ func_DFF3(var_0) {
 func_DFF1(var_0) {
   if(!var_0) {
     foreach(var_2 in level.var_612D.var_522C) {
-      level thread _meth_859E("vfx_vr_equipment_derez", var_2.origin + (0, 0, 16));
+      level thread func_859E("vfx_vr_equipment_derez", var_2.origin + (0, 0, 16));
     }
   }
 
@@ -1311,7 +1311,7 @@ func_DFF1(var_0) {
 func_DFEE(var_0) {
   if(!var_0) {
     foreach(var_2 in level.var_2006.var_522B) {
-      level thread _meth_859E("vfx_vr_equipment_derez", var_2.origin + (0, 0, 16));
+      level thread func_859E("vfx_vr_equipment_derez", var_2.origin + (0, 0, 16));
     }
   }
 
@@ -1327,7 +1327,7 @@ func_DFEF(var_0) {
         var_3 = var_2.origin;
       }
 
-      level thread _meth_859E("vfx_vr_equipment_derez", var_3 + (0, 0, 16));
+      level thread func_859E("vfx_vr_equipment_derez", var_3 + (0, 0, 16));
     }
   }
 
@@ -1338,14 +1338,14 @@ func_DFF2(var_0) {
   if(!var_0) {
     foreach(var_2 in level.newteamhudelem.var_B37A) {
       var_3 = var_2.origin;
-      level thread _meth_859E("vfx_vr_equipment_derez", var_3);
+      level thread func_859E("vfx_vr_equipment_derez", var_3);
     }
   }
 
   scripts\sp\detonategrenades::func_DFBF();
 }
 
-_meth_859E(var_0, var_1) {
+func_859E(var_0, var_1) {
   level endon("reset_vr");
   var_2 = spawnfx(scripts\engine\utility::getfx(var_0), var_1);
   triggerfx(var_2);
@@ -1387,7 +1387,7 @@ func_A5D0() {
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(var_1.unittype == "seeker") {
-      level thread _meth_859E("vfx_vr_equipment_derez", var_1.origin);
+      level thread func_859E("vfx_vr_equipment_derez", var_1.origin);
       var_1 thread lib_0E26::func_E084();
     }
   }
@@ -1578,7 +1578,7 @@ func_E241() {
   level.player notify("stop_delay_call");
   level.player freezecontrols(1);
   level.player setstance("stand");
-  scripts\sp\outline::func_91A1("default", ::scripts\sp\outline::func_9192);
+  scripts\sp\outline::func_91A1("default", scripts\sp\outline::func_9192);
   func_A62A();
   func_10FB6();
   func_DFED(1);
@@ -1629,7 +1629,7 @@ func_465F(var_0, var_1) {
     var_0.var_1078F.var_A534 = undefined;
   }
 
-  var_0.var_AC84 _meth_82FC(var_0.var_AC84.var_10BF7);
+  var_0.var_AC84 func_82FC(var_0.var_AC84.var_10BF7);
   var_0.var_AC84 setlightintensity(0);
   var_0.var_6128 hide();
   var_0.var_6123 hide();
@@ -1690,7 +1690,7 @@ func_57F2(var_0) {
 
 func_12B92() {
   foreach(var_1 in level.var_13563.var_2BE3) {
-    var_1 _meth_83C9();
+    var_1 func_83C9();
   }
 
   level.var_13563.var_2BE3 = [];
@@ -1818,7 +1818,7 @@ func_F61F() {
   level.player playerlinktoabsolute(getent("start_vr_chamber", "targetname"));
   scripts\sp\utility::func_28D7("axis");
   level.player scripts\sp\utility::func_11428();
-  level.player _meth_8559(0);
+  level.player func_8559(0);
   if(issubstr(level.script, "shipcrib")) {
     setsuncolorandintensity(0);
   }
@@ -1834,7 +1834,7 @@ func_F61F() {
     level.player scripts\engine\utility::allow_mantle(1);
     level.player scripts\engine\utility::allow_weapon_switch(1);
     level.player scripts\engine\utility::allow_prone(1);
-    level.player _meth_80A1();
+    level.player func_80A1();
     level.player getrankinfofull(1);
     level.player switchtoweaponimmediate(level.player getcurrentprimaryweapon());
     setsaveddvar("mantle_enable", 1);
@@ -1843,15 +1843,15 @@ func_F61F() {
     setomnvar("ui_hide_hud", 0);
   }
 
-  lib_0EE8::_meth_8311();
+  lib_0EE8::func_8311();
   level thread create_fx_pause();
   func_F60F();
   level thread func_1E3A();
 }
 
 func_F620() {
-  level.player _meth_8475();
-  level.player _meth_8559(1);
+  level.player func_8475();
+  level.player func_8559(1);
   level thread scripts\sp\gameskill::func_E080();
   level.player enableusability();
   scripts\sp\utility::func_28D8("axis");

@@ -295,7 +295,7 @@ hint_missile_conditions(var_0) {
     return 0;
   }
 
-  var_1 = level.player _meth_848A();
+  var_1 = level.player func_848A();
   if(!isDefined(var_1) || !isDefined(var_1[0])) {
     return 0;
   }
@@ -336,7 +336,7 @@ hint_weapdrone_conditions(var_0) {
     return 0;
   }
 
-  var_1 = level.player _meth_848A();
+  var_1 = level.player func_848A();
   if(isDefined(var_1) && isDefined(var_1[0])) {
     return 0;
   }

@@ -205,7 +205,7 @@ goon_spawn_event_func() {
   level.dynamic_enemy_types = [];
   level.max_static_spawned_enemies = 24;
   level.max_dynamic_spawners = 0;
-  level.desired_enemy_deaths_this_wave = _meth_8455();
+  level.desired_enemy_deaths_this_wave = func_8455();
   level.current_enemy_deaths = 0;
 
   while(level.wait_for_music_clown_wave == 0) {
@@ -240,7 +240,7 @@ func_79E9() {
   return ["zombie_ghost"];
 }
 
-_meth_8454(var_0, var_1) {
+func_8454(var_0, var_1) {
   var_2 = 1.5;
 
   switch (level.specialroundcounter) {
@@ -265,12 +265,12 @@ _meth_8454(var_0, var_1) {
   return var_2;
 }
 
-_meth_826F() {
+func_826F() {
   var_0 = 0.5;
   return var_0;
 }
 
-_meth_8455() {
+func_8455() {
   var_0 = level.players.size;
   var_1 = var_0 * 6;
   var_2 = 2;
@@ -322,7 +322,7 @@ func_1071B() {
     var_0 = var_0 + var_2;
 
     if(var_2 > 0) {
-      wait(_meth_8454(var_0, level.desired_enemy_deaths_this_wave));
+      wait(func_8454(var_0, level.desired_enemy_deaths_this_wave));
       continue;
     }
 
@@ -359,7 +359,7 @@ spawn_ghosts() {
   level endon("game_ended");
   level endon("stop_ghost_spawn");
   var_0 = 24;
-  var_1 = _meth_826F();
+  var_1 = func_826F();
 
   for(;;) {
     var_2 = func_7C2D();
@@ -578,7 +578,7 @@ func_79EC() {
   }
 
   if(var_0.size > 0) {
-    var_2 = _meth_8456(var_0);
+    var_2 = func_8456(var_0);
 
     if(isDefined(var_2)) {
       return var_2;
@@ -588,7 +588,7 @@ func_79EC() {
   return scripts\engine\utility::random(var_0);
 }
 
-_meth_8456(var_0) {
+func_8456(var_0) {
   var_1 = [];
   var_2 = 2;
   var_3 = 1;

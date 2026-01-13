@@ -428,7 +428,7 @@ func_311E(var_0, var_1) {
           }
         }
 
-        var_3 _meth_84DC(var_9, var_7);
+        var_3 func_84DC(var_9, var_7);
       }
     }
   }

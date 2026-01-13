@@ -33,13 +33,13 @@ main() {
 
   var_4 = getstartorigin(self.var_141C.origin, self.var_141C.angles, var_3);
   var_5 = getstartangles(self.var_141C.origin, self.var_141C.angles, var_3);
-  var_6 = self _meth_811F(var_4);
+  var_6 = self func_811F(var_4);
   if(isDefined(var_6)) {
     var_4 = var_6;
   }
 
   if(!isDefined(self.var_C0C1)) {
-    self _meth_83B9(var_4, var_5);
+    self func_83B9(var_4, var_5);
   }
 
   self.closefile = 0;
@@ -59,7 +59,7 @@ main() {
 
   self orientmode("face angle", var_5[1]);
   var_9 = "custom_animmode";
-  self _meth_82EA(var_9, var_3, 1, var_8, 1);
+  self func_82EA(var_9, var_3, 1, var_8, 1);
   self.var_141C thread scripts\sp\anim::func_10CBF(self, var_9, var_1, self.var_1180, var_3);
   self.var_141C thread scripts\sp\anim::func_1FCA(self, var_9, var_1);
   var_0A = self.var_141C;
@@ -79,7 +79,7 @@ main() {
     self waittillmatch(var_0B, var_9);
     if(var_0) {
       var_3 = level.var_EC85[self.var_1180][var_1][randomint(var_2)];
-      self _meth_82E6(var_9, var_3, 1, 0.2, 1);
+      self func_82E6(var_9, var_3, 1, 0.2, 1);
       if(isDefined(var_0A)) {
         var_0A thread scripts\sp\anim::func_10CBF(self, var_9, var_1, self.var_1180, var_3);
         var_0A thread scripts\sp\anim::func_1FCA(self, var_9, var_1);

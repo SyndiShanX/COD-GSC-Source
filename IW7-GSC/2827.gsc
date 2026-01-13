@@ -52,11 +52,11 @@ func_F334() {
   if(func_9BB3()) {
     if(isDefined(level.var_4E62)) {
       thread func_D0D0();
-      level.player _meth_8329(level.var_4E62, "deathsdoor", "reverb");
+      level.player func_8329(level.var_4E62, "deathsdoor", "reverb");
       level.player setsoundsubmix("deaths_door_sp");
     } else {
       thread func_D0D0();
-      level.player _meth_8329("deathsdoor", "deathsdoor", "reverb");
+      level.player func_8329("deathsdoor", "deathsdoor", "reverb");
       level.player setsoundsubmix("deaths_door_sp");
     }
 
@@ -124,14 +124,14 @@ func_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = 1;
 
   if(isDefined(var_1)) {
-    level.player _meth_82C0(var_1);
+    level.player func_82C0(var_1);
   }
 
   while(!iscinematicplaying()) {
     wait 0.05;
   }
 
-  level.player _meth_82C0("fade_to_black_minus_music", var_2);
+  level.player func_82C0("fade_to_black_minus_music", var_2);
 
   while(1 && iscinematicplaying()) {
     var_9 = _cinematicgettimeinmsec() / 1000;
@@ -147,7 +147,7 @@ func_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_8 == 0) {
     if(isDefined(var_3)) {
-      level.player _meth_82C0(var_3, var_4);
+      level.player func_82C0(var_3, var_4);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
     } else
@@ -187,14 +187,14 @@ func_257C(var_0, var_1) {
   }
 
   if(isDefined(var_0)) {
-    level.player _meth_82C0(var_0);
+    level.player func_82C0(var_0);
   }
 
   while(!iscinematicplaying()) {
     wait 0.05;
   }
 
-  level.player _meth_82C0("fade_to_black_minus_music", var_1);
+  level.player func_82C0("fade_to_black_minus_music", var_1);
 }
 
 func_257B(var_0, var_1, var_2, var_3, var_4) {
@@ -235,7 +235,7 @@ func_257B(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_6 == 0) {
     if(isDefined(var_1)) {
-      level.player _meth_82C0(var_1, var_2);
+      level.player func_82C0(var_1, var_2);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
     } else
@@ -313,7 +313,7 @@ func_25C0(var_0, var_1, var_2) {
     if(var_2 == "clear_all") {
       level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
     } else {
-      level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
+      level.player scripts\engine\utility::delaycall(0.45, ::func_82C0, var_2, 0.2);
     }
   }
 }
@@ -346,7 +346,7 @@ func_25C2(var_0, var_1, var_2) {
   if(var_2 == "clear_all") {
     level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
   } else {
-    level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
+    level.player scripts\engine\utility::delaycall(0.45, ::func_82C0, var_2, 0.2);
   }
 }
 

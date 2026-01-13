@@ -40,7 +40,7 @@ func_694D(var_0) {
     self.var_77C1.var_51E5 = 0;
   }
 
-  self _meth_80A6();
+  self func_80A6();
   scripts\engine\utility::allow_melee(1);
   scripts\engine\utility::allow_offhand_weapons(1);
   scripts\engine\utility::allow_doublejump(1);
@@ -70,7 +70,7 @@ func_EA1C() {
   level.player notifyonplayercommand("safe_zoom_pressed", "+speed_throw");
   for(;;) {
     self waittill("safe_zoom_pressed");
-    self _meth_81DE(self.var_77C1.var_EA1F - 9, 0.14);
+    self func_81DE(self.var_77C1.var_EA1F - 9, 0.14);
   }
 }
 
@@ -80,14 +80,14 @@ func_EA1D() {
   level.player notifyonplayercommand("safe_zoom_released", "-speed_throw");
   for(;;) {
     self waittill("safe_zoom_released");
-    self _meth_81DE(self.var_77C1.var_EA1F, 0.1);
+    self func_81DE(self.var_77C1.var_EA1F, 0.1);
   }
 }
 
 func_EA1B() {
   self endon("death");
   self waittill("entering_new_demeanor");
-  self _meth_81DE(self.var_77C1.var_EA1F, 0.1);
+  self func_81DE(self.var_77C1.var_EA1F, 0.1);
 }
 
 func_51E0(var_0) {

@@ -256,7 +256,7 @@ func_8FFD() {
 }
 
 func_8FFF() {
-  var_0 = level.player _meth_848A();
+  var_0 = level.player func_848A();
 
   if(isDefined(var_0) && var_0[1] == 1) {
     level notify("player_did_lockon");
@@ -336,7 +336,7 @@ func_1062D(var_0, var_1) {
   var_2 = scripts\sp\vehicle::func_1080C(var_0);
   var_2.unittype = "jackal";
   var_2.var_1FBB = "generic";
-  var_2._meth_843F = 1;
+  var_2.func_843F = 1;
   var_2 scripts\sp\vehicle::playgestureviewmodel();
   level.var_A06E = level.var_A06E + 1;
   var_2 thread func_1CFF();
@@ -365,7 +365,7 @@ func_107B6() {
   level.var_12B67 scripts\sp\vehicle::playgestureviewmodel();
   level.var_12B67.var_1FBB = "retribution";
   level.var_12B67 func_0BB8::func_39AE();
-  level.var_12B67 _meth_8064();
+  level.var_12B67 func_8064();
   level.var_12B67.var_E7D0 = 0;
   level.var_12B67 scripts\sp\anim::func_F64A();
   thread func_FBFB();
@@ -389,7 +389,7 @@ func_107F6() {
   level.var_12B7D scripts\sp\vehicle::playgestureviewmodel();
   level.var_12B7D solid();
   level.var_12B7D.var_1FBB = "tigris";
-  level.var_12B7D _meth_8064();
+  level.var_12B7D func_8064();
   level.var_12B7D.var_E7D0 = 0;
 }
 
@@ -486,7 +486,7 @@ func_CF3C() {
 
     var_0 = spawn("script_model", (0, 0, 0));
     var_0 setModel("vm_hero_protagonist_helmet");
-    var_0 _meth_81E2(level.player, "tag_camera", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+    var_0 func_81E2(level.player, "tag_camera", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
     level.player setviewmodeldepthoffield(2, 10);
 
     while(getdvarint("player_helmet")) {

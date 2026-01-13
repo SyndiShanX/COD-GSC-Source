@@ -144,7 +144,7 @@ func_DAB0() {
     }
 
     if(var_4) {
-      self _meth_84F7("proximity", var_3, var_3.origin);
+      self func_84F7("proximity", var_3, var_3.origin);
       return;
     }
   }
@@ -271,7 +271,7 @@ func_10E20() {
     var_0 = undefined;
   }
 
-  self _meth_84F7("combat", var_0, var_1);
+  self func_84F7("combat", var_0, var_1);
 }
 
 func_7346() {
@@ -291,7 +291,7 @@ func_1B3D(var_0) {
   thread lib_0F27::func_1284A("hmph");
   func_F299("reset");
   thread func_10E1B();
-  lib_0F27::_meth_8468();
+  lib_0F27::func_8468();
 }
 
 func_F5C9() {
@@ -350,9 +350,9 @@ func_F299(var_0) {
 
 func_F345() {
   level lib_0F27::func_F5B4("go_to_node_wait", ::isjumping);
-  level lib_0F27::func_F5B4("go_to_node_arrive", ::_meth_840C);
+  level lib_0F27::func_F5B4("go_to_node_arrive", ::func_840C);
   level lib_0F27::func_F5B4("reset", ::func_1B3D);
-  level lib_0F27::func_F5B4("set_patrol_style", ::lib_0F27::func_F4C8);
+  level lib_0F27::func_F5B4("set_patrol_style", lib_0F27::func_F4C8);
   level lib_0F27::func_F5B4("trigger_cover_blown", ::func_1272D);
   level lib_0F27::func_F5B4("set_blind", ::func_F2E0);
   level lib_0F27::func_F5B4("investigate", ::func_6847);
@@ -561,7 +561,7 @@ func_6810(var_0) {
       case "gunshot":
       case "explode":
         lib_0F27::func_F357(0);
-        level scripts\engine\utility::delaythread(20, ::lib_0F27::func_F357, 1);
+        level scripts\engine\utility::delaythread(20, lib_0F27::func_F357, 1);
         break;
     }
   }
@@ -692,7 +692,7 @@ isjumping(var_0, var_1) {
   }
 }
 
-_meth_840C(var_0, var_1) {
+func_840C(var_0, var_1) {
   setworldupreference(var_0, var_1, 0);
   if(isDefined(var_1.var_EE2C)) {
     self.moveplaybackrate = var_1.var_EE2C;

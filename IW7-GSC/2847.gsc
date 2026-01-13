@@ -951,7 +951,7 @@ buddy_down_two_enemy_dead_thread(var_0) {
     var_12 = var_12 / var_10;
 
     foreach(var_5 in var_0) {
-      var_5 _meth_82B1(var_5 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
+      var_5 func_82B1(var_5 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
     }
 
     wait(var_12);
@@ -1266,7 +1266,7 @@ func_FA17(var_0) {
     var_1 = scripts\sp\utility::func_10639("player_rig_disguise");
   } else {
     var_1 = scripts\sp\utility::func_10639("player_arms");
-    var_2 = level.player _meth_84C6("currentViewModel");
+    var_2 = level.player func_84C6("currentViewModel");
 
     if(isDefined(var_2)) {
       var_1 setModel(var_2);
@@ -1374,7 +1374,7 @@ func_D0A6(var_0) {
   var_1 = scripts\sp\utility::func_10639("door_player_rig");
 
   if(var_1.model == "viewmodel_base_viewhands_iw7") {
-    var_2 = level.player _meth_84C6("currentViewModel");
+    var_2 = level.player func_84C6("currentViewModel");
 
     if(isDefined(var_2)) {
       var_1 setModel(var_2);
@@ -1401,8 +1401,8 @@ func_D0A6(var_0) {
   level.player getweaponvariantattachments(var_7, "tag_origin", 1, 0, 0, 0, 0, 0);
   var_8 = 0.45;
 
-  if(isDefined(self._meth_8483)) {
-    var_8 = self._meth_8483;
+  if(isDefined(self.func_8483)) {
+    var_8 = self.func_8483;
   }
 
   if(length(level.player getvelocity()) > 200) {
@@ -1444,12 +1444,12 @@ func_1162A(var_0) {
       var_2 = self.origin + var_3 * var_1;
     }
 
-    var_0 _meth_80F1(var_2, self.angles, 10000);
+    var_0 func_80F1(var_2, self.angles, 10000);
   }
 }
 
 func_598D() {
-  level.player _meth_84FE();
+  level.player func_84FE();
   level.player getradiuspathsighttestnodes();
   level.player getroundswon(1);
   level.player setstance("stand");
@@ -1465,8 +1465,8 @@ func_5990() {
   level.player getroundswon(0);
   level.player scripts\engine\utility::allow_prone(1);
   level.player scripts\engine\utility::allow_crouch(1);
-  level.player _meth_80A1();
-  level.player _meth_84FD();
+  level.player func_80A1();
+  level.player func_84FD();
 }
 
 func_5997(var_0) {

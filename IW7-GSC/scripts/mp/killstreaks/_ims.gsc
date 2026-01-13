@@ -21,7 +21,7 @@ init() {
   var_0.maxhealth = 670;
   var_0.lifespan = 90;
   var_0.var_DDAC = 0.5;
-  var_0._meth_8487 = 0.4;
+  var_0.func_8487 = 0.4;
   var_0.var_C228 = 4;
   var_0.var_6A03 = "ims_scorpion_explosive_iw6";
   var_0.placementheighttolerance = 30;
@@ -289,7 +289,7 @@ func_9367() {
   }
 
   scripts\mp\weapons::equipmentdeletevfx();
-  self _meth_80D4();
+  self func_80D4();
   self delete();
 }
 
@@ -723,7 +723,7 @@ func_9362() {
     }
 
     self playSound("ims_trigger");
-    scripts\mp\weapons::explosivetrigger(var_0, level.var_9385[self.var_9386]._meth_8487, "ims");
+    scripts\mp\weapons::explosivetrigger(var_0, level.var_9385[self.var_9386].func_8487, "ims");
     if(!isDefined(self.var_2536)) {
       break;
     }

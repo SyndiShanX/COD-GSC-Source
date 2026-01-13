@@ -228,8 +228,8 @@ func_117AE(var_0, var_1) {
   var_0.owner scripts\mp\utility\game::_giveweapon(var_4);
   var_0.owner scripts\mp\utility\game::_switchtoweaponimmediate(var_3);
   var_0.owner getwholescenedurationmax(var_0, "tag_player", 0.0, 180, 180, 45, 180);
-  var_0.owner _meth_8236(0);
-  var_0.owner _meth_85A2(getthormapvisionset(level.mapname));
+  var_0.owner func_8236(0);
+  var_0.owner func_85A2(getthormapvisionset(level.mapname));
   var_0.owner thread func_B011(var_0);
   var_0.owner setclientomnvar("ui_thor_show", 1);
   var_0.owner setclientomnvar("ui_thor_missiles_loaded", var_2.weapon["missile"].var_B47C);
@@ -241,7 +241,7 @@ func_117AE(var_0, var_1) {
     var_0.owner setclientomnvar(var_0.var_B888[var_5].omnvar, -1);
   }
 
-  var_0.owner _meth_82C0("thor_killstreak", 1);
+  var_0.owner func_82C0("thor_killstreak", 1);
   var_6 = var_2.teamsplash;
   var_7 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
 
@@ -539,7 +539,7 @@ func_11791(var_0, var_1) {
 
     self thermalvisionfofoverlayoff();
     self thermalvisionoff();
-    self _meth_85A2("");
+    self func_85A2("");
     self unlink();
     self setplayerangles(self.restoreangles);
 
@@ -594,8 +594,8 @@ func_117AA() {
   var_1 setModel("tag_origin");
   var_1 hide();
   self.targeting_marker = var_1;
-  self _meth_8549();
-  self _meth_8594();
+  self func_8549();
+  self func_8594();
 
   for(;;) {
     var_2 = var_0 getvieworigin() - (0, 0, 50);
@@ -845,7 +845,7 @@ func_117A2() {
 func_B06B(var_0) {
   self endon("death");
   var_0 endon("thor_release_thrusters");
-  var_0 _meth_8244("thor_thrust_rumble");
+  var_0 func_8244("thor_thrust_rumble");
 
   for(;;) {
     scripts\mp\shellshock::_earthquake(0.15, 0.05, self.origin, 1000);

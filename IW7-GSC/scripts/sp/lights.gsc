@@ -22,8 +22,8 @@ init() {
 
 init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   wait(0.05);
-  self.var_99E6 = func_95A8([self.script_intensity_01, var_0, self _meth_8134()]);
-  self.var_438F = func_95A8([self.var_ED31, var_1, self _meth_8131()]);
+  self.var_99E6 = func_95A8([self.script_intensity_01, var_0, self func_8134()]);
+  self.var_438F = func_95A8([self.var_ED31, var_1, self func_8131()]);
   self.var_99E7 = func_95A8([self.var_EDEE, var_2, 0]);
   self.var_4390 = func_95A8([self.var_ED32, var_3, (0, 0, 0)]);
   self.var_C14B = func_95A8([self.var_EDFF, var_4]);
@@ -808,9 +808,9 @@ func_F466(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    self _meth_82FC(var_1);
+    self func_82FC(var_1);
     if(isDefined(self.var_AD22)) {
-      scripts\engine\utility::array_call(self.var_AD22, ::_meth_82FC, var_1);
+      scripts\engine\utility::array_call(self.var_AD22, ::func_82FC, var_1);
     }
   }
 }
@@ -847,7 +847,7 @@ func_7765() {
     return;
   }
 
-  var_0 = self _meth_8134();
+  var_0 = self func_8134();
   var_1 = 0.05;
   var_2 = var_0;
   var_3 = 0.3;
@@ -884,7 +884,7 @@ func_774A() {
     return;
   }
 
-  var_0 = self _meth_8134();
+  var_0 = self func_8134();
   var_1 = 0.05;
   var_2 = 0;
   var_3 = undefined;
@@ -949,7 +949,7 @@ func_3299() {
     return;
   }
 
-  var_0 = self _meth_8134();
+  var_0 = self func_8134();
   var_1 = var_0;
   for(;;) {
     var_2 = randomfloatrange(var_0 * 0.7, var_0 * 1.2);
@@ -998,14 +998,14 @@ func_3C57(var_0, var_1, var_2, var_3) {
 }
 
 func_3C58(var_0, var_1, var_2, var_3) {
-  var_4 = self _meth_8131();
+  var_4 = self func_8131();
   var_5 = 1 / var_1 * 2 - var_2 + var_3;
   var_6 = 0;
   if(var_6 < var_2) {
     var_7 = var_5 / var_2;
     while(var_6 < var_2) {
       var_8 = var_7 * var_6 * var_6;
-      self _meth_82FC(vectorlerp(var_4, var_0, var_8));
+      self func_82FC(vectorlerp(var_4, var_0, var_8));
       wait(0.05);
       var_6 = var_6 + 0.05;
     }
@@ -1013,7 +1013,7 @@ func_3C58(var_0, var_1, var_2, var_3) {
 
   while(var_6 < var_1 - var_3) {
     var_8 = var_5 * 2 * var_6 - var_2;
-    self _meth_82FC(vectorlerp(var_4, var_0, var_8));
+    self func_82FC(vectorlerp(var_4, var_0, var_8));
     wait(0.05);
     var_6 = var_6 + 0.05;
   }
@@ -1023,17 +1023,17 @@ func_3C58(var_0, var_1, var_2, var_3) {
     var_7 = var_5 / var_3;
     while(var_6 > 0) {
       var_8 = 1 - var_7 * var_6 * var_6;
-      self _meth_82FC(vectorlerp(var_4, var_0, var_8));
+      self func_82FC(vectorlerp(var_4, var_0, var_8));
       wait(0.05);
       var_6 = var_6 - 0.05;
     }
   }
 
-  self _meth_82FC(var_0);
+  self func_82FC(var_0);
 }
 
 func_6F19(var_0, var_1) {
-  var_2 = self _meth_8134();
+  var_2 = self func_8134();
   var_3 = 0;
   var_4 = var_2;
   var_5 = 0;
@@ -1122,7 +1122,7 @@ func_ABA0(var_0, var_1) {
 
 func_AB83(var_0, var_1) {
   var_2 = int(var_1 * 20);
-  var_3 = self _meth_8134();
+  var_3 = self func_8134();
   var_4 = var_0 - var_3 / var_2;
   for(var_5 = 0; var_5 < var_2; var_5++) {
     thread func_8924(var_0);

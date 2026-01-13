@@ -399,7 +399,7 @@ func_774C() {
   self.var_90D5 = spawn("script_origin", self.origin);
   self.var_90D5 linkto(self);
   self.var_90D5 ghostattack(0);
-  self _meth_83E8();
+  self func_83E8();
   wait(0.1);
   self.var_90D5 playLoopSound("dropship_enemy_idle_world");
   wait(0.05);

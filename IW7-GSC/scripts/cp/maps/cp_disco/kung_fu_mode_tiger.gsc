@@ -8,7 +8,7 @@ tiger_kung_fu_init() {
   level._effect["blackhole_trap"] = loadfx("vfx\iw7\core\zombie\traps\vfx_zmb_blackhole_trap.vfx");
   level._effect["blackhole_trap_death"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_blackhole_death");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_tiger", ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
+  scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_tiger", scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power, ::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken, undefined, undefined, undefined);
   scripts\cp\powers\coop_powers::powersetupfunctions("power_black_hole_tiger", ::tiger_black_hole_set, ::tiger_black_hole_unset, ::tiger_black_hole_use, undefined, "power_tiger_black_hole_used", undefined);
 }
 

@@ -18,8 +18,8 @@ main() {
   self.behaviortreeasset = "c6";
   self.var_1FA9 = "c6";
   if(isai(self)) {
-    self _meth_82DC(250, 0);
-    self _meth_82DB(600, 600);
+    self func_82DC(250, 0);
+    self func_82DB(600, 600);
   }
 
   self.var_394 = lib_0A2F::func_7BEC("smg");

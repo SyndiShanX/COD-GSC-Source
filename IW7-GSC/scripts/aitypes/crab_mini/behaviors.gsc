@@ -262,7 +262,7 @@ trymeleeattacks(var_0) {
   }
 
   if(var_5 > var_2.check_reachable_dist_sq) {
-    var_6 = self _meth_84AC();
+    var_6 = self func_84AC();
     var_7 = getclosestpointonnavmesh(var_1.origin, self);
     if(!navisstraightlinereachable(var_6, var_7, self)) {
       return 0;

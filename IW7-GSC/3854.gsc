@@ -642,8 +642,8 @@ func_890D() {
   }
   foreach(var_1 in level.var_26EB.var_FE2D) {
     if(isDefined(var_1) && _target_istarget(var_1)) {
-      var_1 _meth_8558();
-      var_1 _meth_84C1();
+      var_1 func_8558();
+      var_1 func_84C1();
       _target_hidefromplayer(var_1, level.player);
     }
   }

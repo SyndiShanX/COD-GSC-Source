@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
- * Script: scripts\mp\equipment\cloak.gsc
-*********************************************/
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
+ * Script: 3923.gsc
+***********************************************/
 
 func_97C5() {
   level.var_1BBA = spawnStruct();
@@ -30,10 +30,12 @@ func_3703() {
 func_36F6(var_0) {
   var_1 = 0;
   var_2 = self getanimentrycount(var_0);
+
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    var_4 = self getsafecircleorigin(var_0, var_3);
+    var_4 = self getanimentry(var_0, var_3);
     var_5 = getmovedelta(var_4, 0, 1);
     var_6 = lengthsquared(var_5);
+
     if(var_6 > var_1) {
       var_1 = var_6;
     }
@@ -118,7 +120,7 @@ func_97C6(var_0) {
 }
 
 func_97C8(var_0) {
-  level.var_1BBA.var_A4E2 = 907.0294;
+  level.var_1BBA.var_A4E2 = 907.029;
   level.var_1BBA.var_A4E6 = 16.8476;
   level.var_1BBA.var_A4E7 = 0.111111;
   level.var_1BBA.var_A4E5 = [];
@@ -499,6 +501,7 @@ func_989F() {
 func_DF12(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   var_6["animState"] = var_0;
+
   if(isDefined(var_1)) {
     var_6["animIndexArray"] = var_1;
   }
@@ -529,19 +532,22 @@ func_129B5(var_0) {
 
 func_129B7(var_0) {
   var_1 = func_81E1(anglesToForward(self.angles), var_0, anglestoup(self.angles));
-  self orientmode("face angle abs", self.angles);
+  self scragentsetorientmode("face angle abs", self.angles);
+
   if(var_1 != 4) {
-    self.projectileintercept = 1;
-    if(self.trajectorycanattemptaccuratejump) {
+    self.statelocked = 1;
+
+    if(self.oriented) {
       self ghostlaunched("anim angle delta");
     } else {
       self ghostlaunched("anim deltas");
     }
 
     var_2 = linkto();
-    scripts\mp\agents\_scriptedagents::func_CED5(var_2, var_1, "turn_in_place", "code_move");
-    if(!lib_0A49::func_9C09()) {
-      self.projectileintercept = 0;
+    scripts\anim\notetracks_mp::func_CED5(var_2, var_1, "turn_in_place", "code_move");
+
+    if(!func_0A49::func_9C09()) {
+      self.statelocked = 0;
     }
 
     return 1;
@@ -553,19 +559,20 @@ func_129B7(var_0) {
 linkto() {
   if(isDefined(level.var_5750)) {
     var_0 = [[level.var_5750]]();
+
     if(isDefined(var_0)) {
       return var_0;
     }
   }
 
   var_0 = undefined;
+
   switch (scripts\cp\cp_agent_utils::get_agent_type(self)) {
     case "gargoyle_boss":
     case "gargoyle":
       var_0 = [
         [level.var_1B6B["gargoyle"]["turn_in_place_anim_state"]]
       ]();
-      break;
   }
 
   if(!isDefined(var_0)) {
@@ -582,10 +589,11 @@ func_81E1(var_0, var_1, var_2) {
   var_6 = var_5.var_E72A;
   var_7 = var_5.var_DA69;
   var_8 = 10;
+
   if(var_7 > 0) {
-    var_4 = int(ceil(180 - var_6 - var_8 / 45));
+    var_4 = int(ceil((180 - var_6 - var_8) / 45));
   } else {
-    var_4 = int(floor(180 + var_6 + var_8 / 45));
+    var_4 = int(floor((180 + var_6 + var_8) / 45));
   }
 
   var_4 = int(clamp(var_4, 0, 8));
@@ -601,8 +609,8 @@ disableforcethirdpersonwhenfollowing(var_0, var_1, var_2) {
   var_8 = vectordot(var_4 * -1, var_7);
   var_9 = vectordot(var_5, var_4);
   var_9 = clamp(var_9, -1, 1);
-  var_0A = acos(var_9);
-  var_3.var_E72A = var_0A;
+  var_10 = acos(var_9);
+  var_3.var_E72A = var_10;
   var_3.var_DA69 = var_8;
   return var_3;
 }
@@ -618,7 +626,7 @@ func_C864(var_0) {
 }
 
 func_C865(var_0) {
-  var_1 = scripts\mp\agents\_scriptedagents::func_7DBD(var_0);
+  var_1 = scripts\anim\notetracks_mp::func_7DBD(var_0);
   return level.var_1BBA.var_C871["hitDirection"][var_1];
 }
 
@@ -627,7 +635,7 @@ func_4E0C(var_0) {
 }
 
 func_4E0D(var_0) {
-  var_1 = scripts\mp\agents\_scriptedagents::func_7DBD(var_0);
+  var_1 = scripts\anim\notetracks_mp::func_7DBD(var_0);
   return level.var_1BBA.var_4E2D["hitDirection"][var_1];
 }
 
@@ -639,15 +647,17 @@ botnodepick(var_0, var_1, var_2) {
 func_7E59(var_0, var_1) {
   var_2 = scripts\cp\cp_agent_utils::get_agent_type(self);
   var_3 = level.var_1BA4[var_2].var_2552["heavy_damage_threshold"];
+
   if(var_0 < var_3 && !var_1) {
     return "light";
+  } else {
+    return "heavy";
   }
-
-  return "heavy";
 }
 
 botnodeavailable(var_0, var_1, var_2) {
   var_1 = func_C865(var_1 * -1);
+
   if(isDefined(var_2)) {
     var_2 = func_C864(var_2);
   }
@@ -676,7 +686,7 @@ botnodepickmultiple(var_0, var_1, var_2, var_3) {
   if(isDefined(var_2)) {
     var_4 = var_3[var_0][var_1][var_2];
   } else {
-    var_4 = var_4[var_1][var_2];
+    var_4 = var_3[var_0][var_1];
   }
 
   return var_4[randomint(var_4.size)];
@@ -694,10 +704,10 @@ func_E26A(var_0, var_1) {
 
 func_CED8(var_0, var_1, var_2) {
   var_3 = getent(var_0, "targetname");
+
   if(!isDefined(var_3)) {
     return;
   }
-
   if(!isDefined(var_2)) {
     var_2 = 1;
   }

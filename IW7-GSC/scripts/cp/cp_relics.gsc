@@ -424,7 +424,7 @@ handlemeleekillpassive(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   level thread handlegoreeffect(var_2);
   wait(0.05);
-  var_6 = var_2 _meth_8113();
+  var_6 = var_2 func_8113();
   if(isDefined(var_6)) {
     var_6 hide();
     var_6.permanentcustommovetransition = 1;
@@ -455,7 +455,7 @@ func_89AB(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
   var_2 endon("diconnect");
   wait(0.05);
-  var_6 = var_2 _meth_8113();
+  var_6 = var_2 func_8113();
   if(!isDefined(var_6)) {
     return;
   }
@@ -1365,8 +1365,8 @@ unset_passive_berserk(var_0) {
 handleberserk(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!scripts\engine\utility::istrue(var_1.berserk)) {
     var_1.berserk = 1;
-    var_1 _meth_85C1(65);
-    var_6 = var_1 _meth_85C0();
+    var_1 func_85C1(65);
+    var_6 = var_1 func_85C0();
     if(var_6 < 0) {
       var_6 = 100;
     }
@@ -1400,8 +1400,8 @@ listencancelberserk() {
 unset_berserk() {
   if(scripts\engine\utility::istrue(self.berserk)) {
     self.berserk = 0;
-    self _meth_85C2();
-    var_0 = self _meth_85C0();
+    self func_85C2();
+    var_0 = self func_85C0();
     var_0 = min(var_0 + 20, 100);
     self player_recoilscaleon(int(var_0));
     self notify("end_berserk");
@@ -1431,7 +1431,7 @@ handlemeleeconeexplode(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(!issubstr(var_0, "meleervn") && !var_1 _meth_8519(var_0)) {
+  if(!issubstr(var_0, "meleervn") && !var_1 func_8519(var_0)) {
     return;
   }
 

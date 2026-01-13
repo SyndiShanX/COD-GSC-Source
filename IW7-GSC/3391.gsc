@@ -325,7 +325,7 @@ func_77CB(var_0) {
       break;
 
     case "arcade_counter_grenade":
-      var_1 = ::_meth_857F;
+      var_1 = ::func_857F;
       break;
 
     case "large_ticket_prize":
@@ -352,7 +352,7 @@ func_2761(var_0, var_1) {
   return 1;
 }
 
-_meth_857F(var_0, var_1) {
+func_857F(var_0, var_1) {
   var_1 playlocalsound("purchase_ticket");
   scripts\cp\gametypes\zombie::replace_grenades_on_player(var_1);
   return 1;

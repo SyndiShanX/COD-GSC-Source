@@ -15,7 +15,7 @@ init() {
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.lifespan = 120;
   var_0.var_DDAC = 2;
-  var_0._meth_8487 = 0.4;
+  var_0.func_8487 = 0.4;
   var_0.var_C228 = 12;
   var_0.placementheighttolerance = 30;
   var_0.placementradius = 16;

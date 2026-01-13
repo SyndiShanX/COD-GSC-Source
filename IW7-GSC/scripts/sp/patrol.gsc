@@ -15,7 +15,7 @@ func_C97C(var_0) {
   self endon("dog_attacks_ai");
   waittillframeend;
   if(isDefined(self.var_EED1)) {
-    [[level._meth_83D2["_patrol_endon_spotted_flag"]]]();
+    [[level.func_83D2["_patrol_endon_spotted_flag"]]]();
   }
 
   thread func_13749();
@@ -272,7 +272,7 @@ func_10B63() {
   if(self.a.pose == "crouch" && isDefined(self.a.var_2274)) {
     var_0 = self.a.var_2274["stance_change"];
     if(isDefined(var_0)) {
-      self _meth_82E4("stand_up", var_0, % root, 1);
+      self func_82E4("stand_up", var_0, % root, 1);
       scripts\anim\shared::donotetracks("stand_up");
     }
   }
@@ -284,7 +284,7 @@ func_C99B() {
   self orientmode("face current");
   func_10B63();
   var_0 = level.var_EC85["generic"]["patrol_radio_in_clear"];
-  self _meth_82E4("radio", var_0, % root, 1);
+  self func_82E4("radio", var_0, % root, 1);
   scripts\anim\shared::donotetracks("radio");
   func_12942();
 }
@@ -309,7 +309,7 @@ func_12942() {
     self orientmode("face current");
     func_10B63();
     var_4 = level.var_EC85["generic"]["patrol_turn180"];
-    self _meth_82E4("move", var_4, % root, 1);
+    self func_82E4("move", var_4, % root, 1);
     if(animhasnotetrack(var_4, "code_move")) {
       scripts\anim\shared::donotetracks("move");
       self orientmode("face motion");
@@ -507,7 +507,7 @@ func_CA83() {
   self endon("death");
   self endon("end_patrol");
   if(isDefined(self.var_EED1)) {
-    [[level._meth_83D2["_patrol_endon_spotted_flag"]]]();
+    [[level.func_83D2["_patrol_endon_spotted_flag"]]]();
   }
 
   self.var_C98C endon("death");

@@ -324,9 +324,9 @@ func_5A60(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   var_18.lifeid = var_0;
   var_18.streakinfo = var_11;
   var_18 setotherent(var_1);
-  var_18 _meth_8549();
-  var_18 _meth_8594();
-  var_18 _meth_8548();
+  var_18 func_8549();
+  var_18 func_8594();
+  var_18 func_8548();
   var_18 scripts\mp\killstreaks\utility::func_1843(var_9, "Killstreak_Air", var_1, 1, "kill_outline");
   var_18 thread handleemp(var_1);
 
@@ -897,7 +897,7 @@ selectairstrikelocation(var_0, var_1, var_2) {
     self playlocalsound("bombardment_killstreak_bootup");
     var_9 playLoopSound("bombardment_killstreak_hud_loop");
     self setsoundsubmix("mp_killstreak_overlay");
-    var_4 = scripts\mp\killstreaks\mapselect::_meth_8112(var_1, var_12, 1);
+    var_4 = scripts\mp\killstreaks\mapselect::func_8112(var_1, var_12, 1);
     scripts\engine\utility::allow_weapon_switch(1);
   } else if(var_1 == "jackal" && (isDefined(level.var_A056) || level.jackals.size > 1)) {
     self notify("cancel_location");

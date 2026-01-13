@@ -82,7 +82,7 @@ onplayerconnect() {
     var_0.var_A653 = [];
     var_0.killedby = [];
     var_0.lastkilledby = undefined;
-    var_0._meth_8549 = 0;
+    var_0.func_8549 = 0;
     var_0.var_DDC2 = 0;
     var_0.var_DDC1 = 0;
     var_0.lastkilltime = 0;
@@ -210,7 +210,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    var_0C = var_1 _meth_854D();
+    var_0C = var_1 func_854D();
     if(var_0C == "frag_grenade_mp" || var_0C == "cluster_grenade_mp") {
       self.modifiers["cooking"] = 1;
     }
@@ -374,7 +374,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(var_12) {
-      if(scripts\mp\weapons::_meth_85BE()) {
+      if(scripts\mp\weapons::func_85BE()) {
         self.modifiers["clutchkill"] = 1;
       }
     }
@@ -767,7 +767,7 @@ func_3E51(var_0, var_1, var_2) {
 }
 
 func_A655(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\mp\supers::_meth_8189(var_2);
+  var_4 = scripts\mp\supers::func_8189(var_2);
   var_5 = self.var_DDC3[var_2];
   if(isDefined(var_5) && var_5 > 0 && var_5 % 2 == 0) {
     superkill(var_4, var_3);

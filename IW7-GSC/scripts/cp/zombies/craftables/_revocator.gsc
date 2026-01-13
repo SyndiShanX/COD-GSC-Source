@@ -57,10 +57,10 @@ watch_dpad() {
     }
   }
 
-  thread _meth_8329(1);
+  thread func_8329(1);
 }
 
-_meth_8329(var_0, var_1, var_2) {
+func_8329(var_0, var_1, var_2) {
   self endon("disconnect");
   scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_3 = func_4A08(self, var_2);
@@ -255,7 +255,7 @@ func_E4B5(var_0) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.var_47B1["crafted_revocator"].pow);
   self makeusable();
-  self _meth_84A7("tag_fx");
+  self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
   thread func_E4B1(self.triggerportableradarping);
@@ -282,7 +282,7 @@ func_E4B2() {
     }
 
     self playSound("trap_revocator_pickup");
-    var_0 thread _meth_8329(0, self.lifespan, self.var_130D2);
+    var_0 thread func_8329(0, self.lifespan, self.var_130D2);
     if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
     }

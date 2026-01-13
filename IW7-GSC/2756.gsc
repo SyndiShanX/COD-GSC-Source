@@ -1035,7 +1035,7 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
               var_15 = scripts\mp\utility\game::getweaponrootname(var_2);
 
               if(var_15 == "iw7_rvn") {
-                if(self _meth_8519(var_2)) {
+                if(self func_8519(var_2)) {
                   updatecurrentobjective();
                 }
               }
@@ -1046,7 +1046,7 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
                 var_16 = getweaponvariantindex(var_2);
 
                 if(isDefined(var_16) && (var_16 == 3 || var_16 == 35)) {
-                  if(self _meth_8519(var_2)) {
+                  if(self func_8519(var_2)) {
                     updatecurrentobjective();
                   }
                 }

@@ -16,7 +16,7 @@ onplayerconnect() {
     if(!isai(var_0)) {
       if(var_0 scripts\mp\utility::rankingenabled()) {
         var_1 = getdvarint("online_mp_party_weapon_xpscale");
-        var_2 = var_0 _meth_85BE() > 1;
+        var_2 = var_0 func_85BE() > 1;
         if(var_2) {
           var_0 addweaponrankxpmultiplier(var_1, "online_mp_party_weapon_xpscale");
         }
@@ -157,7 +157,7 @@ getweaponrankinfomaxxp(var_0) {
   return level.weaponranktable.rankinfo[var_0].maxxp;
 }
 
-_meth_8394(var_0, var_1, var_2) {
+func_8394(var_0, var_1, var_2) {
   if(isai(self) || !isplayer(self) || !isDefined(var_2) || var_2 == 0 || !scripts\mp\utility::rankingenabled()) {
     return;
   }
@@ -182,7 +182,7 @@ _meth_8394(var_0, var_1, var_2) {
   }
 
   var_5 = var_2;
-  var_2 = var_2 * _meth_8233();
+  var_2 = var_2 * func_8233();
   var_2 = int(var_2);
   if(var_2 > getweaponmaxrankxp(var_3)) {
     return;
@@ -291,7 +291,7 @@ removeweaponrankxpmultiplier(var_0) {
   self.rankxpmultipliers[var_0] = undefined;
 }
 
-_meth_8233() {
+func_8233() {
   var_0 = getweaponrankxpmultiplier();
   var_1 = getglobalweaponrankxpmultiplier();
   return var_0 * var_1;

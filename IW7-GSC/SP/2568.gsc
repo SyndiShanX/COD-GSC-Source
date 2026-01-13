@@ -7,8 +7,8 @@ func_97EC(var_0) {
   self.var_71A8 = ::func_7FD3;
   self.var_71AE = ::isaimedataimtarget;
   self.var_71CA = ::resetmisstime_code;
-  self.var_71A9 = ::_meth_811D;
-  self.var_71AA = ::_meth_81E3;
+  self.var_71A9 = ::func_811D;
+  self.var_71AA = ::func_81E3;
   self.var_71A0 = ::func_4F67;
   self.var_71AB = ::makescrambler;
   self.var_71A6 = ::func_7EFC;
@@ -58,23 +58,23 @@ isaimedataimtarget() {
 }
 
 func_129AD() {
-  self _meth_81D6();
+  self func_81D6();
 }
 
 func_129AA() {
-  self _meth_81D5();
+  self func_81D5();
 }
 
 saygenericdialogue(var_0) {
   scripts\anim\face::saygenericdialogue(var_0);
 }
 
-_meth_811D() {
-  return scripts\anim\shared::_meth_811C();
+func_811D() {
+  return scripts\anim\shared::func_811C();
 }
 
-_meth_81E3(var_0) {
-  return var_0 _meth_851F();
+func_81E3(var_0) {
+  return var_0 func_851F();
 }
 
 func_4F67() {
@@ -155,7 +155,7 @@ func_3DE5() {
 }
 
 func_2543() {
-  if(!self _meth_81A5(self.isnodeoccupied.origin)) {
+  if(!self func_81A5(self.isnodeoccupied.origin)) {
     return 0;
   }
 
@@ -168,7 +168,7 @@ func_2543() {
   }
 
   self getrelativeteam(0);
-  if(self _meth_8254()) {
+  if(self func_8254()) {
     self.sendmatchdata = 0;
     self.sendclientmatchdata = 0;
     if(level.var_18D5[self.team] == 0) {
@@ -216,7 +216,7 @@ func_2542(var_0) {
       break;
 
     case 15:
-      self _meth_80EC();
+      self func_80EC();
       break;
   }
 
@@ -229,7 +229,7 @@ func_2542(var_0) {
 }
 
 makescrambler() {
-  return self _meth_8164();
+  return self func_8164();
 }
 
 func_12E93() {

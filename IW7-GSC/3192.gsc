@@ -7,7 +7,7 @@ func_FE6A(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   lib_0F3E::func_FE89();
   var_4 = lib_0F3E::func_FE64();
-  self _meth_83CE();
+  self func_83CE();
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   self.is_shooting = 1;
   lib_0F3E::shootblankorrpg(var_1, 0.7, 2);

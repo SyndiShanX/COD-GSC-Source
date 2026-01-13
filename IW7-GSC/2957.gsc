@@ -29,9 +29,9 @@ func_41BB() {
   self notify("stop_lockon_sound");
   self notify("stop_locked_sound");
   self.var_10F9D.var_10FA4 = undefined;
-  self _meth_8403();
-  self _meth_8406(0);
-  self _meth_8404(0);
+  self func_8403();
+  self func_8406(0);
+  self func_8404(0);
 }
 
 func_10FA0() {
@@ -150,7 +150,7 @@ func_10FA2() {
       }
       self notify("stop_lockon_sound");
       self.var_10F9D.var_10FA3 = 1;
-      self _meth_8402(self.var_10F9D.var_10FAA);
+      self func_8402(self.var_10F9D.var_10FAA);
       func_F875(self.var_10F9D.var_10FAA);
       setomnvar("ui_lockon_target_state_" + var_0.id, 2);
       continue;
@@ -444,10 +444,10 @@ func_F875(var_0) {
 
   if(var_2 < var_1) {
     self.var_10F9D.var_11588 = 1;
-    self _meth_8406(1);
+    self func_8406(1);
   } else {
     self.var_10F9D.var_11588 = 0;
-    self _meth_8406(0);
+    self func_8406(0);
   }
 }
 

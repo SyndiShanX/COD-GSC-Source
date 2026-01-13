@@ -9,7 +9,7 @@ func_3FCE(var_0, var_1, var_2, var_3) {
   self.asm.footsteps = spawnStruct();
   self.asm.footsteps.foot = "invalid";
   self.asm.footsteps.time = 0;
-  self _meth_8504(0);
+  self func_8504(0);
   self.ispreloadzonescomplete = 0;
 }
 

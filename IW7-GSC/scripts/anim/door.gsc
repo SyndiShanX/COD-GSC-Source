@@ -10,7 +10,7 @@ func_5A09() {
   }
 
   for(;;) {
-    var_0 = self _meth_811E();
+    var_0 = self func_811E();
     if(isDefined(var_0)) {
       break;
     }
@@ -26,7 +26,7 @@ func_5A09() {
   }
 
   for(;;) {
-    var_2 = self _meth_811E();
+    var_2 = self func_811E();
     if(!isDefined(var_2) || var_2 != var_0) {
       break;
     }
@@ -123,7 +123,7 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
       scripts\anim\combat_utility::func_F62B(self.isnodeoccupied);
       if(!var_5) {
         var_0E = var_9 + var_8 * 100;
-        if(!self _meth_81A2(self.isnodeoccupied, var_0E, 128)) {
+        if(!self func_81A2(self.isnodeoccupied, var_0E, 128)) {
           return;
         }
       }
@@ -137,7 +137,7 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
 
     var_6--;
     wait(var_4);
-    var_0F = self _meth_811E();
+    var_0F = self func_811E();
     if(!isDefined(var_0F) || var_0F != var_0) {
       return;
     }
@@ -152,7 +152,7 @@ func_940A() {
 
   self.var_9E45 = 0;
   for(;;) {
-    if(self _meth_81A4() && !self.var_FC) {
+    if(self func_81A4() && !self.var_FC) {
       func_5A07();
     } else if(!isDefined(self.var_B7B5) || self.var_B7B5 < gettime()) {
       self.var_B7B5 = undefined;
@@ -199,7 +199,7 @@ func_5A06(var_0) {
 
     if(func_56F2(self.origin - var_0.origin, 562500, 25600)) {
       func_5A08(var_0, "fraggrenade", 0, 302500, 0.3);
-      var_0 = self _meth_811E();
+      var_0 = self func_811E();
       if(!isDefined(var_0)) {
         return;
       }

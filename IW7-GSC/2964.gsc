@@ -79,7 +79,7 @@ func_8739(var_0, var_1) {
   func_AD14(var_0, var_5.var_10220, var_5.var_10221, var_5.var_AD46);
 
   if(isai(var_0)) {
-    var_0 _meth_83B9(var_6, var_7);
+    var_0 func_83B9(var_6, var_7);
     var_0.a.disablelongdeath = 1;
 
     if(isDefined(var_5.var_2AB6) && !var_5.var_2AB6) {
@@ -516,7 +516,7 @@ func_AD14(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3 && !isDefined(var_0.var_ED6E)) {
-    var_0 _meth_81E1(self, var_1, 0);
+    var_0 func_81E1(self, var_1, 0);
   } else {
     var_0 linkto(self, var_1, var_2, (0, 0, 0));
   }
@@ -814,7 +814,7 @@ botgetpathdist(var_0, var_1, var_2) {
 
   thread func_1FC2(var_0, var_1, var_2);
   waittillframeend;
-  var_0 _meth_82B0(var_2, var_4 / var_3);
+  var_0 func_82B0(var_2, var_4 / var_3);
   var_6 = self;
 
   if(isDefined(self.var_C720)) {
@@ -852,7 +852,7 @@ func_F642(var_0, var_1) {
 
   var_2 = getanimlength(var_0);
   self endon("death");
-  self _meth_82EA("vehicle_anim_flag", var_0);
+  self func_82EA("vehicle_anim_flag", var_0);
   wait(var_2);
 
   if(var_1) {
@@ -1022,7 +1022,7 @@ func_8766(var_0, var_1) {
   }
 
   if(isai(var_0)) {
-    var_0 _meth_8250(1);
+    var_0 func_8250(1);
   }
 
   if(isDefined(var_3.var_2BE8)) {
@@ -1208,7 +1208,7 @@ func_8766(var_0, var_1) {
         var_0 allowedstances("stand", "crouch", "prone");
       }
 
-      var_0 _meth_8250(0);
+      var_0 func_8250(0);
 
       if(func_8750(var_0)) {
         var_0.goalradius = 600;
@@ -1479,7 +1479,7 @@ func_1FC4(var_0, var_1, var_2) {
   var_0.var_4E46 = undefined;
   var_0.var_1EB2 = 1;
   var_0 notify("rope_death", var_2);
-  var_0 _meth_81D0(var_2.origin, var_2);
+  var_0 func_81D0(var_2.origin, var_2);
 
   if(isDefined(var_0.var_EECD)) {
     var_0 notsolid();
@@ -1558,7 +1558,7 @@ func_876B(var_0, var_1, var_2) {
 
     if(var_2 == "bm21_troops") {
       var_0.allowdeath = 1;
-      var_0 _meth_81D0();
+      var_0 func_81D0();
       return;
     }
 
@@ -1690,7 +1690,7 @@ func_872D(var_0) {
     func_538C(var_0, "weapon_");
   }
 
-  while(!var_0 _meth_81B7() && gettime() < var_7) {
+  while(!var_0 func_81B7() && gettime() < var_7) {
     var_9 = var_0.origin;
     wait 0.05;
     var_8 = var_0.origin - var_9;
@@ -1713,7 +1713,7 @@ func_872D(var_0) {
     wait 0.05;
   }
 
-  if(!var_0 _meth_81B7()) {
+  if(!var_0 func_81B7()) {
     var_0 delete();
   }
 }

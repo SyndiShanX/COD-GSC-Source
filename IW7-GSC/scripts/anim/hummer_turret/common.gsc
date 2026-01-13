@@ -18,7 +18,7 @@ func_91E0(var_0, var_1) {
 
   self.var_9DA6 = 0;
   self setturretanim(self.primaryturretanim);
-  self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
+  self func_82AB(self.primaryturretanim, 1, 0.2, 1);
   if(isDefined(self.var_394)) {
     scripts\anim\shared::placeweaponon(self.var_394, "none");
   }
@@ -108,7 +108,7 @@ func_129D3() {
     self.var_12A7F = undefined;
     self.var_C584 = undefined;
     self.autoboltmissileeffects = undefined;
-    self _meth_83AF();
+    self func_83AF();
     if(isDefined(self.var_394)) {
       scripts\anim\shared::placeweaponon(self.var_394, "right");
     }
@@ -199,8 +199,8 @@ func_8716(var_0) {
       }
 
       if(isDefined(var_3)) {
-        self _meth_82AC(self.var_17E0, 1, var_1, 1);
-        self _meth_82A9(var_3, 1, 0, 1);
+        self func_82AC(self.var_17E0, 1, var_1, 1);
+        self func_82A9(var_3, 1, 0, 1);
         while(isDefined(var_0.var_6D87) && !var_0 func_129BF(var_0.var_6D87, var_0.var_4292)) {
           if(self.var_9DA6) {
             break;
@@ -246,7 +246,7 @@ func_873F(var_0, var_1, var_2, var_3) {
   wait(getanimlength(var_3));
   self givescorefortrophyblocks();
   var_2 func_129BC();
-  self _meth_83D7(var_2);
+  self func_83D7(var_2);
 }
 
 func_129C2(var_0) {
@@ -255,13 +255,13 @@ func_129C2(var_0) {
     self.var_92F3 = undefined;
   }
 
-  self _meth_82E7("minigun_turret", var_0, 1, 0, 1);
+  self func_82E7("minigun_turret", var_0, 1, 0, 1);
   self waittillmatch("end", "minigun_turret");
   self clearanim(var_0, 0);
 }
 
 func_129C3(var_0) {
-  self _meth_82AB(var_0, 1, 0, 0);
+  self func_82AB(var_0, 1, 0, 0);
   self.var_92F3 = var_0;
 }
 
@@ -399,8 +399,8 @@ func_F479(var_0, var_1, var_2, var_3) {
 
 func_5AAA(var_0) {
   self notify("doshoot_starting");
-  self _meth_82AC(self.var_17E6, 1, 0.1);
-  self _meth_82A9(self.var_17E2, 1, 0.1);
+  self func_82AC(self.var_17E6, 1, 0.1);
+  self func_82A9(self.var_17E2, 1, 0.1);
   var_0.var_12A94 = "fire";
   var_0 thread func_6CE6(self);
 }
@@ -435,12 +435,12 @@ func_57DC(var_0) {
   var_2 = -1;
   for(;;) {
     if(var_1 vehicle_getspeed() < 1 && var_2) {
-      self _meth_82AC(self.var_17E6, 1, 0.1);
-      self _meth_82A9(self.var_17E3, 1, 0.1);
+      self func_82AC(self.var_17E6, 1, 0.1);
+      self func_82A9(self.var_17E3, 1, 0.1);
       var_2 = 0;
     } else if(var_1 vehicle_getspeed() >= 1 && !var_2) {
-      self _meth_82AC(self.var_17E6, 1, 0.1);
-      self _meth_82A9(self.var_17E1, 1, 0.1);
+      self func_82AC(self.var_17E6, 1, 0.1);
+      self func_82A9(self.var_17E1, 1, 0.1);
       var_2 = 1;
     }
 
@@ -499,8 +499,8 @@ func_57FB(var_0, var_1, var_2) {
   self.var_4C7D = var_1;
   var_0.var_12A94 = "customanim";
   var_0 turretfiredisable();
-  if(var_0 _meth_810A() > 0) {
-    var_0 _meth_83A2();
+  if(var_0 func_810A() > 0) {
+    var_0 func_83A2();
   }
 
   var_0 notify("kill_fireController");
@@ -509,8 +509,8 @@ func_57FB(var_0, var_1, var_2) {
     var_0 func_129BD();
   }
 
-  self _meth_82AA(self.var_12A93, 1, 0.2);
-  self _meth_82E7("special_anim", var_1, 1, 0, 1);
+  self func_82AA(self.var_12A93, 1, 0.2);
+  self func_82E7("special_anim", var_1, 1, 0, 1);
   for(;;) {
     self waittill("special_anim", var_3);
     if(var_3 == "end") {
@@ -519,8 +519,8 @@ func_57FB(var_0, var_1, var_2) {
   }
 
   self clearanim(self.var_12A93, 0.2);
-  self _meth_82AC(self.primaryturretanim, 1);
-  self _meth_82AC(self.var_17E6, 1);
+  self func_82AC(self.primaryturretanim, 1);
+  self func_82AC(self.var_17E6, 1);
   if(isDefined(var_2) && var_2) {
     var_0 func_129BC();
   }

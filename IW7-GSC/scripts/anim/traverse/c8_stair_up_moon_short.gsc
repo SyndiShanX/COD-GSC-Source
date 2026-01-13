@@ -12,7 +12,7 @@ main() {
   var_2 = self getspectatepoint();
   self orientmode("face angle", var_2.angles[1]);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_1);
-  self _meth_82E7("traverse_external", var_0, 1, var_1, 1);
+  self func_82E7("traverse_external", var_0, 1, var_1, 1);
   lib_0A1E::func_231F("c8", "traverse_external");
   lib_0C6B::func_11701("c8", "traverse_external");
 }

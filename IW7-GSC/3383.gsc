@@ -167,7 +167,7 @@ init_magic_wheel(var_0) {
     var_2 = scripts\engine\utility::getclosest(var_0.origin, var_1);
     var_2 hide();
     var_0 makeusable();
-    var_0 _meth_84A7("tag_use");
+    var_0 func_84A7("tag_use");
     var_0 setusefov(60);
     var_0 setuserange(72);
     level.current_active_wheel = var_0;
@@ -215,7 +215,7 @@ func_100ED(var_0) {
   wait 1;
   var_0.var_10A03 setscriptablepartstate("spinner", "idle");
   var_0 makeusable();
-  var_0 _meth_84A7("tag_use");
+  var_0 func_84A7("tag_use");
   var_0 setusefov(60);
   var_0 setuserange(72);
 
@@ -328,14 +328,14 @@ func_12FFA(var_0, var_1, var_2) {
       }
 
       var_1 makeusable();
-      var_1 _meth_84A7("tag_use");
+      var_1 func_84A7("tag_use");
       var_1 setusefov(60);
       var_1 setuserange(72);
     }
   } else {
     wait 0.5;
     var_1 makeusable();
-    var_1 _meth_84A7("tag_use");
+    var_1 func_84A7("tag_use");
     var_1 setusefov(60);
     var_1 setuserange(72);
   }

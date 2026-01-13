@@ -217,8 +217,8 @@ func_117AE(var_0, var_1) {
   var_0.triggerportableradarping scripts\mp\utility::_giveweapon(var_4);
   var_0.triggerportableradarping scripts\mp\utility::_switchtoweaponimmediate(var_3);
   var_0.triggerportableradarping playerlinkweaponviewtodelta(var_0, "tag_player", 0, 180, 180, 45, 180);
-  var_0.triggerportableradarping _meth_8236(0);
-  var_0.triggerportableradarping _meth_85A2(getthormapvisionset(level.mapname));
+  var_0.triggerportableradarping func_8236(0);
+  var_0.triggerportableradarping func_85A2(getthormapvisionset(level.mapname));
   var_0.triggerportableradarping thread func_B011(var_0);
   var_0.triggerportableradarping setclientomnvar("ui_thor_show", 1);
   var_0.triggerportableradarping setclientomnvar("ui_thor_missiles_loaded", var_2.var_394["missile"].var_B47C);
@@ -229,7 +229,7 @@ func_117AE(var_0, var_1) {
     var_0.triggerportableradarping setclientomnvar(var_0.var_B888[var_5].omnvar, -1);
   }
 
-  var_0.triggerportableradarping _meth_82C0("thor_killstreak", 1);
+  var_0.triggerportableradarping func_82C0("thor_killstreak", 1);
   var_6 = var_2.teamsplash;
   var_7 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
   if(var_7 != "") {
@@ -513,7 +513,7 @@ func_11791(var_0, var_1) {
 
     self thermalvisionfofoverlayoff();
     self thermalvisionoff();
-    self _meth_85A2("");
+    self func_85A2("");
     self unlink();
     self setplayerangles(self.restoreangles);
     if(scripts\mp\utility::istrue(var_1)) {
@@ -565,8 +565,8 @@ func_117AA() {
   var_1 setModel("tag_origin");
   var_1 hide();
   self.targeting_marker = var_1;
-  self _meth_8549();
-  self _meth_8594();
+  self func_8549();
+  self func_8594();
   for(;;) {
     var_2 = var_0 getvieworigin() - (0, 0, 50);
     var_3 = var_2 + anglesToForward(var_0 getplayerangles()) * -15536;
@@ -807,7 +807,7 @@ func_117A2() {
 func_B06B(var_0) {
   self endon("death");
   var_0 endon("thor_release_thrusters");
-  var_0 _meth_8244("thor_thrust_rumble");
+  var_0 func_8244("thor_thrust_rumble");
   for(;;) {
     scripts\mp\shellshock::_earthquake(0.15, 0.05, self.origin, 1000);
     scripts\engine\utility::waitframe();

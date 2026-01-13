@@ -321,7 +321,7 @@ onplayerconnect() {
       if(var_0 scripts\cp\utility::rankingenabled()) {
         var_1 = getdvarint("online_zombie_party_weapon_xpscale");
         var_2 = getdvarint("online_zombie_party_xpscale");
-        var_3 = var_0 _meth_85BE() > 1;
+        var_3 = var_0 func_85BE() > 1;
         if(isDefined(var_1)) {
           if(var_3 && var_1 > 1) {
             var_0.weaponxpscale = var_1;

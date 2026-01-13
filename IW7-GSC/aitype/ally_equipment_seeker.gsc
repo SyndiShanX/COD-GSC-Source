@@ -18,8 +18,8 @@ main() {
   self.behaviortreeasset = "seeker";
   self.var_1FA9 = "seeker";
   if(isai(self)) {
-    self _meth_82DC(50, 0);
-    self _meth_82DB(50, 1024);
+    self func_82DC(50, 0);
+    self func_82DB(50, 1024);
   }
 
   self.var_394 = "none";

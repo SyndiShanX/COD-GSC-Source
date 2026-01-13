@@ -428,7 +428,7 @@ func_CEED(var_0, var_1, var_2, var_3) {
     var_0 = var_0[randomint(var_0.size)];
   }
 
-  self _meth_82E3("blendTransition", var_0, % body, 1, var_1, 1);
+  self func_82E3("blendTransition", var_0, % body, 1, var_1, 1);
   scripts\anim\notetracks::donotetracksfortime(var_1 / 2, "blendTransition");
   self.a.pose = var_2;
   self.a.movement = var_3;
@@ -490,9 +490,9 @@ func_2B91() {
   }
 
   if(isDefined(self.var_10AB7)) {
-    self _meth_82A9(scripts\anim\utility::func_7FCC("sprint"), 1, var_0, 1);
+    self func_82A9(scripts\anim\utility::func_7FCC("sprint"), 1, var_0, 1);
   } else {
-    self _meth_82A9(scripts\anim\run::getrunningforwardpainanim(), 1, var_0, 1);
+    self func_82A9(scripts\anim\run::getrunningforwardpainanim(), 1, var_0, 1);
   }
 
   scripts\anim\run::func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"), self.var_101BB);
@@ -594,7 +594,7 @@ func_DA8A() {
 
 func_2B90() {
   if(isDefined(self.var_4A9F)) {
-    self _meth_82A5(self.var_4A9F, % body, 1, 0.4);
+    self func_82A5(self.var_4A9F, % body, 1, 0.4);
     func_CEED(self.var_4A9F, 0.6, "crouch", "walk");
     self notify("BlendIntoCrouchWalk");
     return;
@@ -704,7 +704,7 @@ func_D555(var_0, var_1, var_2, var_3, var_4, var_5) {
     thread func_13712(getanimlength(var_0) / 2, "killtimerscript", var_1);
   }
 
-  self _meth_82E4("transAnimDone2", var_0, % body, 1, 0.2, var_4);
+  self func_82E4("transAnimDone2", var_0, % body, 1, 0.2, var_4);
   if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
   }
@@ -720,7 +720,7 @@ func_D555(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("entered_pose" + var_1);
   self.a.movement = var_2;
   if(isDefined(var_3)) {
-    self _meth_82A5(var_3, % body, 1, 0.3, var_4);
+    self func_82A5(var_3, % body, 1, 0.3, var_4);
   }
 }
 

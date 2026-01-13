@@ -402,7 +402,7 @@ func_288E() {
   var_0 = 0.4;
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   level.player.var_E505 hide();
-  level.player _meth_84FE();
+  level.player func_84FE();
   var_1 = getent("selfdestruct_console", "targetname");
   var_1.var_1FBB = "selfdestruct_console";
   var_1 scripts\sp\anim::func_F64A();
@@ -431,7 +431,7 @@ func_288E() {
   level.player scripts\engine\utility::allow_offhand_weapons(1);
   level.player enableusability();
   level.player enableweapons();
-  level.player _meth_84FD();
+  level.player func_84FD();
 }
 
 func_1C38(var_0) {
@@ -446,7 +446,7 @@ func_1C38(var_0) {
 func_115F9() {
   wait(5);
   var_0 = getnode("tee_after_handoff", "script_noteworthy");
-  while(level.var_EBBC _meth_81A6()) {
+  while(level.var_EBBC func_81A6()) {
     wait(0.05);
   }
 
@@ -455,7 +455,7 @@ func_115F9() {
 
 func_10215() {
   var_0 = getnode("sipes_after_handoff", "script_noteworthy");
-  while(level.var_EBBB _meth_81A6()) {
+  while(level.var_EBBB func_81A6()) {
     wait(0.05);
   }
 
@@ -463,7 +463,7 @@ func_10215() {
 }
 
 func_4543() {
-  level.player _meth_81DE(55, 2);
+  level.player func_81DE(55, 2);
   level waittill("dof_change");
   scripts\sp\art::func_583F(0, 194, 3, 100, 490, 3.2, 1.2);
   level waittill("dof_change");
@@ -471,7 +471,7 @@ func_4543() {
   level waittill("dof_change");
   scripts\sp\art::func_583F(0, 0, 0, 0, 128.1, 2.6, 0.1);
   wait(1);
-  level.player _meth_81DE(65, 0.25);
+  level.player func_81DE(65, 0.25);
   scripts\sp\art::func_583D(0.05);
 }
 
@@ -892,7 +892,7 @@ func_355D() {
   thread func_3575();
   var_4 lib_0A05::func_3554();
   var_5 = 4;
-  var_4 scripts\engine\utility::delaythread(var_5, ::lib_0A05::func_3551, 1);
+  var_4 scripts\engine\utility::delaythread(var_5, lib_0A05::func_3551, 1);
   var_4 lib_0A05::func_3540();
   var_4 lib_0A05::func_3552(0);
   var_6 = getnode(var_4.target, "targetname");
@@ -1056,11 +1056,11 @@ func_3621() {
     }
 
     var_1 = gettime() + var_0;
-    var_2 = level.player _meth_8519(level.player getcurrentweapon());
+    var_2 = level.player func_8519(level.player getcurrentweapon());
     var_3 = 0;
     var_4 = 3;
     while(func_3614()) {
-      if(level.player _meth_8519(level.player getcurrentweapon()) != var_2) {
+      if(level.player func_8519(level.player getcurrentweapon()) != var_2) {
         var_2 = !var_2;
         var_3++;
       }
@@ -1186,7 +1186,7 @@ func_E6D1() {
   }
 
   physics_setgravity((0, 0, -386.09));
-  level.player _meth_8251((0, 0, 0));
+  level.player func_8251((0, 0, 0));
   var_0 = 0.25;
   level.player.var_8632 rotateto((0, 0, 0), var_0, var_0);
   screenshake(level.player.origin, 5, 1, 1, 1, 0, 1, 5000, 3, 2, 0);
@@ -1229,7 +1229,7 @@ func_E6D4() {
     var_1 = randomfloatrange(0.1, 0.5) * var_0;
     var_2 = randomfloatrange(0.2, 0.5) * var_0;
     var_3 = randomfloatrange(0.05, 0.2) * var_0;
-    level.player _meth_8291(var_1, var_2, var_3, 0.2, 0, 0, 700, 10, 10, 10);
+    level.player func_8291(var_1, var_2, var_3, 0.2, 0, 0, 700, 10, 10, 10);
     wait(0.2);
   }
 }
@@ -1240,7 +1240,7 @@ func_F352() {
   var_1 = var_1 * -300;
   physics_setgravity(var_1);
   var_2 = (var_1[0], var_1[1], 0) * 0.02;
-  level.player _meth_8251(var_2);
+  level.player func_8251(var_2);
 }
 
 func_A9E2() {
@@ -1283,12 +1283,12 @@ func_35B5() {
 
 func_35B6(var_0, var_1) {
   if(isDefined(var_1)) {
-    var_2 = self _meth_850C(var_0, var_1);
+    var_2 = self func_850C(var_0, var_1);
   } else {
-    var_2 = self _meth_850C(var_1);
+    var_2 = self func_850C(var_1);
   }
 
-  self _meth_8550(var_0, var_1, var_2 * 0.6);
+  self func_8550(var_0, var_1, var_2 * 0.6);
 }
 
 func_35FE() {
@@ -1312,14 +1312,14 @@ func_353D() {
   thread scripts\sp\utility::func_1034D("europa_plr_ohshit");
   wait(1);
   level.var_EBBB scripts\sp\utility::func_10346("europa_sip_c12");
-  while(level.player _meth_819F()) {
+  while(level.player func_819F()) {
     wait(0.05);
   }
 
   level.player clearsoundsubmix();
   scripts\sp\maps\europa\europa_util::func_134B7("europa_plr_sipesgetthatf");
   wait(0.1);
-  while(level.player _meth_819F()) {
+  while(level.player func_819F()) {
     wait(0.05);
   }
 
@@ -1503,12 +1503,12 @@ func_3532() {
   var_0 lib_0A05::func_3555("right", 0);
   var_1 = ["hip_pack_right", "hip_pack_left", "left_arm", "right_arm", "head"];
   foreach(var_3 in var_1) {
-    var_0 _meth_847D(var_3);
+    var_0 func_847D(var_3);
   }
 
   wait(0.5);
   var_0.asm.var_4E73 = 1;
-  var_0 _meth_81D0();
+  var_0 func_81D0();
   thread func_363D();
   scripts\engine\utility::flag_set("c12_dead");
 }
@@ -1639,7 +1639,7 @@ func_7398(var_0) {
     self.var_33F = self.var_33F - 500;
   }
 
-  self _meth_82F1(var_0);
+  self func_82F1(var_0);
   return 1;
 }
 
@@ -2247,7 +2247,7 @@ func_6474() {
   }
 
   wait(randomfloat(0.5));
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_A5D9() {
@@ -2318,11 +2318,11 @@ func_652C() {
     self give_mp_super_weapon(self.origin);
   }
 
-  self _meth_82F1(var_0);
+  self func_82F1(var_0);
   scripts\engine\utility::flag_wait("start_fallback");
   var_0 = getent("c12_backhalf", "targetname");
   wait(randomfloat(1));
-  self _meth_82F1(var_0);
+  self func_82F1(var_0);
 }
 
 func_1024C() {
@@ -2359,7 +2359,7 @@ func_D287(var_0) {
     lib_0B60::func_F322("EUROPA_FAILED_TO_ESCAPE");
   }
 
-  level.player _meth_80A1();
+  level.player func_80A1();
   magicgrenademanual("frag", level.player.origin, (0, 0, 0), 0);
   wait(0.5);
   foreach(var_2 in level.var_EBCA) {
@@ -2370,7 +2370,7 @@ func_D287(var_0) {
   if(isalive(level.player)) {
     if(scripts\sp\utility::func_93A6()) {
       level.player notify("headshot_death");
-      level.player _meth_80A1();
+      level.player func_80A1();
     }
 
     level.player scripts\sp\utility::func_54C6();
@@ -2463,10 +2463,10 @@ func_134D9() {
 
 func_7463(var_0, var_1) {
   thread scripts\sp\art::func_583F(0, 1199, 2, 80000, 90000, 0, var_0);
-  level.player _meth_81DE(60, var_0);
+  level.player func_81DE(60, var_0);
   wait(var_0 + var_1);
   scripts\sp\art::func_583D(0.05);
-  level.player _meth_81DE(65, 0.05);
+  level.player func_81DE(65, 0.05);
 }
 
 func_746F(var_0) {
@@ -2491,14 +2491,14 @@ func_3D24(var_0) {
   level endon("stop_charge_shake");
   level thread scripts\sp\utility::func_C12D("stop_charge_shake", var_0);
   var_1 = 1;
-  level.player _meth_8244("steady_rumble");
+  level.player func_8244("steady_rumble");
   for(;;) {
     var_2 = var_1 * 0.5;
     var_2 = min(var_2, 1);
     var_3 = randomfloatrange(0.2, 0.6) * var_2;
     var_4 = randomfloatrange(0.2, 0.5) * var_2;
     var_5 = randomfloatrange(0.1, 0.2) * var_2;
-    level.player _meth_8291(var_3, var_4, var_5, 0.2, 0, 0, 700, 10, 10, 10);
+    level.player func_8291(var_3, var_4, var_5, 0.2, 0, 0, 700, 10, 10, 10);
     wait(0.2);
     var_1++;
   }
@@ -2663,7 +2663,7 @@ func_D294() {
   func_D087(var_0, var_1);
   scripts\engine\utility::flag_wait("new_decompress_anim");
   var_0 notify("stop_loop");
-  level.player _meth_8244("steady_rumble");
+  level.player func_8244("steady_rumble");
   level.player scripts\engine\utility::delaycall(4.5, ::stoprumble, "steady_rumble");
   scripts\engine\utility::delaythread(0.5, ::func_AB59);
   scripts\engine\utility::flag_clear("pause_destruction_explosions");
@@ -2858,7 +2858,7 @@ func_224B() {
 }
 
 func_224E() {
-  level.player _meth_82C0("europa_suck_out_grab", 1);
+  level.player func_82C0("europa_suck_out_grab", 1);
   level.player playSound("scn_end_suck_out_plr_grab_bar");
   wait(2.8);
   playworldsound("scn_euro_guy_impacts_plr_lr", level.player.origin);
@@ -2870,7 +2870,7 @@ func_224E() {
 func_224F() {
   level.player stoprumble("steady_rumble");
   level.var_4FB4 stoploopsound();
-  level.player _meth_82C0("europa_suck_out_hit_fade_to_black", 0);
+  level.player func_82C0("europa_suck_out_hit_fade_to_black", 0);
   setmusicstate("");
   level.player stopsounds();
   level.player setclientomnvar("ui_hide_hud", 1);
@@ -3142,7 +3142,7 @@ func_4FB1() {
       }
 
       var_3.var_DC1A = 1;
-      var_3 _meth_81D0();
+      var_3 func_81D0();
     }
   }
 }
@@ -3424,7 +3424,7 @@ func_5B56(var_0) {}
 func_4F9F() {
   var_0 = 485;
   var_1 = func_4F9B();
-  level.player _meth_84FE();
+  level.player func_84FE();
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   level.player.var_E505 hide();
   level.player.var_E505.angles = level.player.angles;
@@ -3519,7 +3519,7 @@ func_4FA9() {
     var_2 = randomfloatrange(0.25, 0.55) * var_1;
     var_3 = randomfloatrange(0.25, 0.55) * var_1;
     var_4 = randomfloatrange(0.1, 0.3) * var_1;
-    level.player _meth_8291(var_2, var_3, var_4, 0.2, 0, 0, 700, 10, 10, 10);
+    level.player func_8291(var_2, var_3, var_4, 0.2, 0, 0, 700, 10, 10, 10);
     wait(0.2);
     var_0++;
   }
@@ -3531,7 +3531,7 @@ func_4FA1() {
   var_1 = var_0 scripts\sp\utility::func_7DC1("decompress_loop");
   var_2 = "decompress_loop";
   for(;;) {
-    var_0 _meth_82E7(var_2, var_1, 1, 0.2, 1);
+    var_0 func_82E7(var_2, var_1, 1, 0.2, 1);
     var_0 thread scripts\sp\anim::func_10CBF(var_0, var_2);
     var_0 scripts\anim\shared::donotetracks(var_2);
   }
@@ -3977,7 +3977,7 @@ func_10F7F() {
         var_4 = gettime() - var_1 / var_3;
         var_4 = min(var_4, 1);
         var_5 = anglesToForward(level.player.angles) * var_4 * var_2;
-        level.player _meth_8251(var_5);
+        level.player func_8251(var_5);
       }
 
       continue;
@@ -3986,7 +3986,7 @@ func_10F7F() {
     if(var_0) {
       var_0 = 0;
       var_5 = (0, 0, 0);
-      level.player _meth_8251(var_5);
+      level.player func_8251(var_5);
     }
   }
 }

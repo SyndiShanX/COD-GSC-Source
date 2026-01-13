@@ -673,7 +673,7 @@ func_D54B() {
   var_2 = self.var_3D4C["threat"].var_68BA;
   switch (var_2) {
     case "infantry":
-      if((scripts\engine\utility::player_is_in_jackal() && var_0 == level.player) || !var_0 scripts\anim\battlechatter_ai::func_1A1B() && isplayer(var_0) || (!var_0 scripts\anim\battlechatter_ai::func_1A1B() && !isDefined(var_0 _meth_8164())) || var_0 scripts\anim\battlechatter_ai::func_1A1B()) {
+      if((scripts\engine\utility::player_is_in_jackal() && var_0 == level.player) || !var_0 scripts\anim\battlechatter_ai::func_1A1B() && isplayer(var_0) || (!var_0 scripts\anim\battlechatter_ai::func_1A1B() && !isDefined(var_0 func_8164())) || var_0 scripts\anim\battlechatter_ai::func_1A1B()) {
         if(isDefined(self._blackboard)) {
           self._blackboard.var_28DE = var_0;
         }
@@ -2135,7 +2135,7 @@ func_7EFE() {
   return var_0;
 }
 
-_meth_83DE(var_0) {
+func_83DE(var_0) {
   if(!level.isteamsaying[level.var_115E7[0]][var_0] && !level.isteamsaying[level.var_115E7[1]][var_0] && !level.isteamsaying[level.var_115E7[2]][var_0] && !level.isteamsaying[level.var_115E7[3]][var_0]) {
     return 1;
   }
@@ -2143,7 +2143,7 @@ _meth_83DE(var_0) {
   return 0;
 }
 
-_meth_819F(var_0) {
+func_819F(var_0) {
   var_1 = self.var_10AC8;
   var_2 = [];
   for(var_3 = 0; var_3 < var_1.var_B661.size; var_3++) {
@@ -2390,12 +2390,12 @@ getrank() {
 }
 
 func_7E32(var_0) {
-  var_1 = _meth_8145(var_0, self.team);
+  var_1 = func_8145(var_0, self.team);
   var_2 = scripts\engine\utility::getclosest(self.origin, var_1);
   return var_2;
 }
 
-_meth_8145(var_0, var_1) {
+func_8145(var_0, var_1) {
   var_2 = [];
   var_3 = getaiarray(var_1);
   for(var_4 = 0; var_4 < var_3.size; var_4++) {

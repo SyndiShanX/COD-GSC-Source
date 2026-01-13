@@ -44,12 +44,12 @@ func_8A06() {
     var_2 scripts\sp\utility::func_51E1("casual_gun");
     var_2 scripts\sp\utility::func_5504();
     var_2 scripts\sp\utility::func_5528();
-    var_2 _meth_8250(1);
+    var_2 func_8250(1);
   }
 
   level.player scripts\sp\utility::func_F526("safe");
   level.player scripts\engine\utility::delaythread(1.0, scripts\sp\utility::func_F526, "safe");
-  level.var_920F _meth_84AE();
+  level.var_920F func_84AE();
   wait 0.05;
   thread func_6DCB();
   var_4 = getnode("start_handoff_salter", "targetname");
@@ -230,10 +230,10 @@ func_89FE() {
   var_10 = getanimlength( % ph_aatis_tower_hvt_handoff_ally01);
   var_7 thread scripts\sp\anim::func_1F2C(var_8, "hvt_handoff");
   wait 0.05;
-  level.var_920F _meth_82B0( % ph_aatis_tower_hvt_handoff_hvt, var_9);
-  var_3 _meth_82B0( % ph_aatis_tower_hvt_handoff_ally01, var_9);
-  var_4 _meth_82B0( % ph_aatis_tower_hvt_handoff_ally02, var_9);
-  var_5 _meth_82B0( % ph_aatis_tower_hvt_handoff_ally03, var_9);
+  level.var_920F func_82B0( % ph_aatis_tower_hvt_handoff_hvt, var_9);
+  var_3 func_82B0( % ph_aatis_tower_hvt_handoff_ally01, var_9);
+  var_4 func_82B0( % ph_aatis_tower_hvt_handoff_ally02, var_9);
+  var_5 func_82B0( % ph_aatis_tower_hvt_handoff_ally03, var_9);
   var_6 thread func_889A(var_9);
   wait(var_10 - var_10 * var_9 - 0.05);
   var_7 thread scripts\sp\anim::func_1EEA(var_3, "hvt_handoff_idle", "stop_handoff_idle");
@@ -246,7 +246,7 @@ func_89FE() {
 #using_animtree("script_model");
 
 func_889A(var_0) {
-  self _meth_82B0( % ph_aatis_tower_hvt_handoff_handcuffs, var_0);
+  self func_82B0( % ph_aatis_tower_hvt_handoff_handcuffs, var_0);
 }
 
 func_8A05() {
@@ -255,7 +255,7 @@ func_8A05() {
 
   foreach(var_3, var_2 in var_0) {
     level.var_923A[var_3] = var_2 scripts\sp\utility::func_10619();
-    level.var_923A[var_3] _meth_8250(1);
+    level.var_923A[var_3] func_8250(1);
   }
 
   wait 3.0;
@@ -441,14 +441,14 @@ func_376C(var_0, var_1) {
   var_0 scripts\engine\utility::delaythread(var_2 - 10, ::func_D166);
   level.allies["eth3n"] thread func_674E();
   wait(var_2 - 0.05);
-  var_0 _meth_82B1( % ph_jackals_landing_jackal01, 0.0);
+  var_0 func_82B1( % ph_jackals_landing_jackal01, 0.0);
   wait 0.05;
   level.var_D127 func_0BDC::func_A167();
   level.var_D127.var_99F5.var_E526 = 0;
   level.var_D127 func_0BDC::func_104A6(1);
   scripts\engine\utility::flag_set("jackals_landed");
   func_0BDC::func_137CF();
-  var_0 _meth_82B1( % ph_jackals_landing_jackal01, 1.0);
+  var_0 func_82B1( % ph_jackals_landing_jackal01, 1.0);
 }
 
 func_D166() {
@@ -476,7 +476,7 @@ func_674E() {
   wait 13.0;
   wait 0.15;
   scripts\sp\utility::func_51E1("combat");
-  self _meth_8250(1);
+  self func_8250(1);
   self give_more_perk(var_0);
   wait 0.8;
   scripts\sp\utility::func_15F5("jackals_salter_to_jackal");
@@ -521,7 +521,7 @@ func_1130D(var_0) {
     return;
   }
   if(level.player istouching(var_1)) {
-    level.player _meth_81D0();
+    level.player func_81D0();
   }
 
   var_1 solid();
@@ -568,7 +568,7 @@ func_8A02() {
 func_CA93() {
   for(;;) {
     if(scripts\engine\utility::player_is_in_jackal()) {
-      level.player _meth_82C0("jackal_cockpit", 2);
+      level.player func_82C0("jackal_cockpit", 2);
       level waittill("jackal_landing");
       level.player playSound("jackal_landing_plr");
       level.var_D127 waittill("jackal_touchdown");
@@ -969,7 +969,7 @@ func_CFDE(var_0) {
     var_14 = scripts\sp\math::func_C09B(abs(var_11));
     var_15 = scripts\sp\math::func_C097(0, var_13, var_14);
     var_16 = scripts\sp\math::func_6A8E(1, var_12, var_15);
-    level.var_D2A1 _meth_82B1(level.var_EC85["sled_jackal"][var_1], var_16);
+    level.var_D2A1 func_82B1(level.var_EC85["sled_jackal"][var_1], var_16);
     level.var_D2A1.var_BD0D unlink();
     level.var_D2A1.var_B025 unlink();
     level.var_1EF0 unlink();
@@ -1179,7 +1179,7 @@ func_5F9A(var_0) {
 func_5F9B(var_0) {
   var_1 = getanimlength(level.var_EC85[self.var_1FBB]["space_launch"]);
   var_2 = var_0 / var_1;
-  self _meth_82B0(level.var_EC85[self.var_1FBB]["space_launch"], var_2);
+  self func_82B0(level.var_EC85[self.var_1FBB]["space_launch"], var_2);
 }
 
 func_D2F6() {
@@ -1645,11 +1645,11 @@ func_104F4() {
     wait 0.05;
   }
 
-  level.var_AA61 _meth_8064();
-  level.var_AA62 _meth_8064();
-  level.var_AA63 _meth_8064();
-  level.var_12B67 _meth_8064();
-  level.var_12B7D _meth_8064();
+  level.var_AA61 func_8064();
+  level.var_AA62 func_8064();
+  level.var_AA63 func_8064();
+  level.var_12B67 func_8064();
+  level.var_12B7D func_8064();
 }
 
 func_1050B() {
@@ -1668,7 +1668,7 @@ func_CADD() {
   setglobalsoundcontext("atmosphere", "space", 4);
   wait 1;
   level.player clearclienttriggeraudiozone(0);
-  level.player _meth_82C0("jackal_cockpit", 4);
+  level.player func_82C0("jackal_cockpit", 4);
 }
 
 func_CAE2() {

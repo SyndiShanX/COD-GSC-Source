@@ -265,7 +265,7 @@ func_A448() {
         continue;
       }
 
-      self _meth_8402(self.var_A447, (0, 0, 0), 1);
+      self func_8402(self.var_A447, (0, 0, 0), 1);
       self notify("stop_lockon_sound");
       self playlocalsound("javelin_clu_lock");
       self.var_A444 = 3;
@@ -347,9 +347,9 @@ func_A440(var_0) {
     }
 
     if(isplayer(self.var_A445)) {
-      self _meth_8402(self.var_A445, (0, 0, 64), 0);
+      self func_8402(self.var_A445, (0, 0, 64), 0);
     } else {
-      self _meth_8402(self.var_A445, (0, 0, 0), 0);
+      self func_8402(self.var_A445, (0, 0, 0), 0);
     }
 
     self notify("stop_lockon_sound");

@@ -38,7 +38,7 @@ func_D4CC(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   thread lib_0C64::func_D4CD(var_1);
   lib_0A1E::func_231F(var_0, var_1);
@@ -62,7 +62,7 @@ func_D4D7(var_0, var_1, var_2, var_3) {
     self playSound(var_3);
   }
 
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   self endon(var_1 + "_finished");
   lib_0C64::donotetracks_vsplayer(var_0, var_1);
   scripts\asm\asm::asm_fireevent(var_1, "end");
@@ -104,18 +104,18 @@ func_D4D1(var_0, var_1, var_2, var_3) {
   self animmode("zonly_physics");
   self orientmode("face angle", self.melee.var_10D6D[1]);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_5);
   thread lib_0C64::func_D4D6(var_1);
   self endon(var_1 + "_finished");
-  var_8 = lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  var_8 = lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
   if((var_8 == "melee_death" || !self.melee.var_13D8A) && !isDefined(self.melee.var_112E2)) {
     self.a.nodeath = 0;
     if(isDefined(self.melee.target) && isDefined(self.melee.target.melee)) {
       self.melee.target.melee.var_2BE6 = 1;
     }
 
-    self _meth_81D0();
+    self func_81D0();
   }
 }
 
@@ -135,7 +135,7 @@ func_D4D5(var_0, var_1, var_2, var_3) {
   thread lib_0C64::func_B5D7(var_1);
   var_4 = self[[self.var_7191]](var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   var_5 = getnotetracktimes(var_4, "melee_stop");
   if(var_5.size > 0) {
@@ -153,14 +153,14 @@ func_D4D5(var_0, var_1, var_2, var_3) {
   }
 
   thread lib_0C64::func_D4D6(var_1);
-  var_8 = lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  var_8 = lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
   if((var_8 == "melee_death" || !self.melee.var_13D8A) && !isDefined(self.melee.var_112E2)) {
     self.a.nodeath = 0;
     if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee)) {
       self.melee.partner.melee.var_2BE6 = 1;
     }
 
-    self _meth_81D0();
+    self func_81D0();
   }
 }
 
@@ -168,9 +168,9 @@ func_D4D4(var_0, var_1, var_2, var_3) {
   lib_0F3D::func_444B(var_1);
   var_4 = self[[self.var_7191]](var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
-  lib_0A1E::func_231F(var_0, var_1, ::lib_0C64::func_B590);
+  lib_0A1E::func_231F(var_0, var_1, lib_0C64::func_B590);
 }
 
 func_D4D3(var_0, var_1, var_2) {

@@ -100,7 +100,7 @@ func_C540() {
     if(self ismlgspectator() || isDefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"]) {
       self setmlgspectator(1);
       self setclientomnvar("ui_use_mlg_hud", 1);
-      self _meth_85B1(0);
+      self func_85B1(0);
       thread updatemlgspectator();
       thread autoattachtoplayer();
     }
@@ -126,7 +126,7 @@ func_C5A2() {
   self endon("disconnect");
   for(;;) {
     self waittill("spectating_mlg_camera");
-    var_0 = self _meth_858E();
+    var_0 = self func_858E();
     if(self ismlgspectator() || isDefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"]) {
       if(isDefined(var_0)) {
         self setclientomnvar("ui_callout_area_id", -1);

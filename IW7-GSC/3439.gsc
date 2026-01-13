@@ -340,7 +340,7 @@ func_11320() {
 }
 
 func_F6F2() {
-  self _meth_8454(4);
+  self func_8454(4);
 }
 
 func_139FA() {

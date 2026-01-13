@@ -28,7 +28,7 @@ watchdeployablemarkerplacement(var_0, var_1, var_2, var_3) {
     var_2 delete();
   }
 
-  var_2 _meth_81EF(1);
+  var_2 func_81EF(1);
   self notify("deployable_deployed");
   var_2.owner = self;
   var_2.weaponname = var_3;

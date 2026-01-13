@@ -138,7 +138,7 @@ func_10FA2() {
 
       self notify("stop_lockon_sound");
       self.var_10F9D.var_10FA3 = 1;
-      self _meth_8402(self.var_10F9D.var_10FAA);
+      self func_8402(self.var_10F9D.var_10FAA);
       func_F875(self.var_10F9D.var_10FAA);
       setomnvar("ui_lockon_target_state_" + var_0.id, 2);
       continue;

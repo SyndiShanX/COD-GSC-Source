@@ -320,7 +320,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
     }
 
     if(!isDefined(var_0A)) {
-      var_0B = self _meth_8533();
+      var_0B = self func_8533();
       var_0C = scripts\mp\bots\_bots_util::defend_valid_center();
       var_0D = getnodesinradiussorted(var_0C, 256, 0, 500, "path", var_0B);
       for(var_0E = 0; var_0E < var_0D.size; var_0E++) {
@@ -590,7 +590,7 @@ defense_cautious_approach() {
   }
 
   var_7 = var_6 * var_6;
-  var_8 = self _meth_8533();
+  var_8 = self func_8533();
   var_9 = getnodesinradius(self.bot_defending_center, var_6, 0, 500, "path", var_8);
   if(var_9.size <= 0) {
     return;
@@ -1243,7 +1243,7 @@ find_defend_node_bodyguard() {
 
 find_defend_node_patrol() {
   var_0 = undefined;
-  var_1 = self _meth_8533();
+  var_1 = self func_8533();
   var_2 = getnodesinradius(scripts\mp\bots\_bots_util::defend_valid_center(), self.bot_defending_radius, 0, 520, "path", var_1);
   if(isDefined(var_2) && var_2.size > 0) {
     var_0 = self botnodepick(var_2, 1 + var_2.size * 0.5, "node_traffic");
@@ -1503,7 +1503,7 @@ bot_melee_tactical_insertion_check() {
       return 0;
     }
 
-    var_4 = self _meth_8533();
+    var_4 = self func_8533();
     var_5 = getnodesinradius(self.origin, 500, 0, 999, "path", var_4);
     if(var_5.size <= 0) {
       return 0;

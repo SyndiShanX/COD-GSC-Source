@@ -556,7 +556,7 @@ prematchperiod() {
   }
 }
 
-_meth_8487() {
+func_8487() {
   level endon("game_ended");
 
   if(!isDefined(game["clientActive"])) {
@@ -1653,11 +1653,11 @@ callback_startgametype() {
     game["colors"]["green"] = (0.25, 0.75, 0.25);
     game["colors"]["yellow"] = (0.65, 0.65, 0);
     game["strings"]["allies_name"] = scripts\mp\teams::isonladder("allies");
-    game["icons"]["allies"] = scripts\mp\teams::_meth_81B2("allies");
-    game["colors"]["allies"] = scripts\mp\teams::_meth_81A4("allies");
+    game["icons"]["allies"] = scripts\mp\teams::func_81B2("allies");
+    game["colors"]["allies"] = scripts\mp\teams::func_81A4("allies");
     game["strings"]["axis_name"] = scripts\mp\teams::isonladder("axis");
-    game["icons"]["axis"] = scripts\mp\teams::_meth_81B2("axis");
-    game["colors"]["axis"] = scripts\mp\teams::_meth_81A4("axis");
+    game["icons"]["axis"] = scripts\mp\teams::func_81B2("axis");
+    game["colors"]["axis"] = scripts\mp\teams::func_81A4("axis");
     game["colors"]["friendly"] = (0.258824, 0.639216, 0.87451);
     game["colors"]["enemy"] = (0.929412, 0.231373, 0.141176);
     game["colors"]["contest"] = (1, 0.858824, 0);
@@ -1965,8 +1965,8 @@ callback_startgametype() {
   }
 
   scripts\mp\utility\game::gameflaginit("prematch_done", 0);
-  level._meth_8487 = 15;
-  level.ingraceperiod = level._meth_8487;
+  level.func_8487 = 15;
+  level.ingraceperiod = level.func_8487;
   scripts\mp\utility\game::gameflaginit("graceperiod_done", 0);
   level.playovertime = 0;
   level.var_E75F = 6.0;
@@ -2284,7 +2284,7 @@ func_10D9F() {
   }
 
   thread func_118F7();
-  thread _meth_8487();
+  thread func_8487();
   thread scripts\mp\missions::func_E75B();
 }
 
@@ -3189,8 +3189,8 @@ func_D9AA() {
 
     setclientmatchdata("players", var_2.clientmatchdataid, "username", var_3);
     setclientmatchdata("players", var_2.clientmatchdataid, "clanTag", var_2 getclantag());
-    setclientmatchdata("players", var_2.clientmatchdataid, "xuidHigh", var_2 _meth_8565());
-    setclientmatchdata("players", var_2.clientmatchdataid, "xuidLow", var_2 _meth_8566());
+    setclientmatchdata("players", var_2.clientmatchdataid, "xuidHigh", var_2 func_8565());
+    setclientmatchdata("players", var_2.clientmatchdataid, "xuidLow", var_2 func_8566());
     setclientmatchdata("players", var_2.clientmatchdataid, "isBot", isbot(var_2));
     setclientmatchdata("players", var_2.clientmatchdataid, "uniqueClientId", var_2.clientid);
     var_2 setrankedplayerdata("common", "round", "clientMatchIndex", var_2.clientmatchdataid);

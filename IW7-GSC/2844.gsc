@@ -207,7 +207,7 @@ func_4ED4() {
 
   if(isDefined(var_1.lastenemysightpos)) {}
 
-  if(isalive(var_1._meth_8450)) {}
+  if(isalive(var_1.func_8450)) {}
 
   if(!var_1 scripts\anim\utility::func_8BED()) {
     return;
@@ -386,7 +386,7 @@ func_4747() {
       var_1.origin = self.origin;
       var_1.angles = self.angles;
       var_1.count = 1;
-      var_0 = var_1 _meth_8393();
+      var_0 = var_1 func_8393();
 
       if(scripts\sp\utility::func_106ED(var_0)) {
         func_E0C0(self);
@@ -579,9 +579,9 @@ func_4EBB() {
 func_C1A6() {
   if(!self.damageshield) {
     if(isDefined(self.unittype) && self.unittype == "c12") {
-      self _meth_81D0((0, 0, -500), level.player);
+      self func_81D0((0, 0, -500), level.player);
     } else {
-      self _meth_81D0((0, 0, -500), level.player, level.player);
+      self func_81D0((0, 0, -500), level.player, level.player);
     }
   }
 }

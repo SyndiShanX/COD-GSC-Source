@@ -119,8 +119,8 @@ func_9B71() {
 func_EA0E() {
   self.var_EA0E = 1;
   stopFXOnTag(level.var_7649[self.var_F166], self, "tag_fx");
-  self _meth_8484();
-  self _meth_8481(self.origin);
+  self func_8484();
+  self func_8481(self.origin);
   if(isDefined(self.var_B14F)) {
     scripts\sp\utility::func_1101B();
   }
@@ -129,7 +129,7 @@ func_EA0E() {
   playworldsound("seeker_expire", self.origin);
   destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
   self hudoutlinedisable();
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_EB63() {
@@ -150,10 +150,10 @@ func_13940() {
     if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping) {
       if(isDefined(self.var_728A) || isplayer(self.bt.var_F15D)) {
         if(isDefined(self.var_A9CB)) {
-          self._meth_8425 = 1;
-          self _meth_8481(self.var_A9CB);
+          self.func_8425 = 1;
+          self func_8481(self.var_A9CB);
           wait(2);
-          self._meth_8425 = undefined;
+          self.func_8425 = undefined;
         }
 
         continue;
@@ -187,7 +187,7 @@ func_1572(var_0) {
     }
   }
 
-  _meth_8420();
+  func_8420();
   if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && !isDefined(self.var_9BB9) && !self.bt.var_54AE) {
     self.bt.var_54AE = 1;
     self notify("stop soundseeker_seek_lp");
@@ -220,7 +220,7 @@ func_F177(var_0) {
     return level.failure;
   }
 
-  if(isDefined(self._meth_8425) || isDefined(self.var_391C)) {
+  if(isDefined(self.func_8425) || isDefined(self.var_391C)) {
     return level.failure;
   }
 
@@ -249,7 +249,7 @@ func_F177(var_0) {
 func_13850(var_0) {
   if(!isalive(self.bt.var_F15D)) {
     if(isplayer(self.bt.var_F15D)) {
-      self _meth_8481(self.origin);
+      self func_8481(self.origin);
     }
 
     return level.failure;
@@ -260,7 +260,7 @@ func_13850(var_0) {
   }
 
   var_1 = distancesquared(self.origin, self.bt.var_F15D.origin);
-  if(isDefined(self._meth_8425) && isDefined(self.var_A9CB)) {
+  if(isDefined(self.func_8425) && isDefined(self.var_A9CB)) {
     var_1 = distancesquared(self.origin, self.var_A9CB);
   } else if(isDefined(self.var_391C) && isDefined(self.var_7296)) {
     var_1 = distancesquared(self.origin, self.var_7296);
@@ -272,11 +272,11 @@ func_13850(var_0) {
   }
 
   if(var_1 <= squared(var_2)) {
-    self _meth_8484();
-    self _meth_8481(self.origin);
+    self func_8484();
+    self func_8481(self.origin);
     return level.success;
   } else {
-    _meth_8420();
+    func_8420();
   }
 
   return level.running;
@@ -303,7 +303,7 @@ func_2BD3(var_0) {
   return level.running;
 }
 
-_meth_8420() {
+func_8420() {
   if(isDefined(self.var_EA0E) || isDefined(self.var_C93D)) {
     return;
   }
@@ -320,7 +320,7 @@ _meth_8420() {
     self.var_6D = 60;
   }
 
-  if(isDefined(self._meth_8425)) {
+  if(isDefined(self.func_8425)) {
     return;
   }
 
@@ -330,13 +330,13 @@ _meth_8420() {
     if(var_1 <= squared(12)) {
       self.var_391C = undefined;
       self.var_7296 = undefined;
-      self _meth_8482(self.bt.var_F15D);
+      self func_8482(self.bt.var_F15D);
       return;
     }
 
     self.var_391C = 1;
     self.var_7296 = var_0;
-    self _meth_8481(self.var_7296);
+    self func_8481(self.var_7296);
   }
 }
 

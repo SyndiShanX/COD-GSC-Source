@@ -198,9 +198,9 @@ func_6B15() {
   func_F8BE();
   if(self.team == "allies" && isDefined(self.name)) {
     scripts\sp\names::func_7B05();
-    self _meth_8307(self.name, &"");
+    self func_8307(self.name, &"");
   } else if(self.team == "axis") {
-    self _meth_8307("enemy", &"");
+    self func_8307("enemy", &"");
   }
 
   if(isDefined(self.var_EE2C)) {
@@ -213,7 +213,7 @@ func_6B15() {
     level thread scripts\sp\friendlyfire::func_73B1(self);
   }
 
-  self _meth_839E();
+  self func_839E();
   if(isDefined(self.target)) {
     var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
     if(isDefined(var_0) && var_0 scripts\sp\fakeactor_node_MAYBE::func_9BE0()) {
@@ -810,7 +810,7 @@ func_6B11() {
       break;
 
     case "die_on_goal":
-      self _meth_81D0();
+      self func_81D0();
       break;
   }
 }
@@ -827,7 +827,7 @@ func_6B12(var_0) {
         break;
 
       case "die_on_goal":
-        self _meth_81D0();
+        self func_81D0();
         break;
     }
   }
@@ -998,7 +998,7 @@ func_6D53(var_0) {
         func_6ADC(self.var_394, var_6, var_9, self.var_C01E);
       }
 
-      self _meth_82AB(var_0, 1, 0.2, 1);
+      self func_82AB(var_0, 1, 0.2, 1);
       scripts\engine\utility::delaycall(0.15, ::clearanim, var_0, 0);
     }
 
@@ -1077,13 +1077,13 @@ func_1A2E() {
   var_0 = 0.2;
   var_1 = func_77E7("aim_5");
   if(isDefined(var_1)) {
-    self _meth_82A5(var_1, self.var_1EA4["body"], 1, var_0);
+    self func_82A5(var_1, self.var_1EA4["body"], 1, var_0);
   }
 
-  self _meth_82AC(func_77E7("aim_2"), 1, var_0);
-  self _meth_82AC(func_77E7("aim_4"), 1, var_0);
-  self _meth_82AC(func_77E7("aim_6"), 1, var_0);
-  self _meth_82AC(func_77E7("aim_8"), 1, var_0);
+  self func_82AC(func_77E7("aim_2"), 1, var_0);
+  self func_82AC(func_77E7("aim_4"), 1, var_0);
+  self func_82AC(func_77E7("aim_6"), 1, var_0);
+  self func_82AC(func_77E7("aim_8"), 1, var_0);
   var_2 = 10;
   var_3 = 0;
   var_4 = 0;
@@ -1731,7 +1731,7 @@ play_looping_breath_sound(var_0, var_1) {
 
   self clearanim(self.var_1EA4["body"], 0.2);
   self givescorefortrophyblocks();
-  self _meth_82E4("fakeactor_anim", var_0, self.var_1EA4["body"], 1, 0.2, var_1);
+  self func_82E4("fakeactor_anim", var_0, self.var_1EA4["body"], 1, 0.2, var_1);
 }
 
 func_CE00(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -1876,25 +1876,25 @@ func_1A31(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = 1;
   if(var_5 < 0) {
     var_8 = var_5 / self.setdevdvar * var_7;
-    self _meth_82AC(var_1, 0, var_6, 1, 1);
-    self _meth_82AC(var_2, var_8, var_6, 1, 1);
+    self func_82AC(var_1, 0, var_6, 1, 1);
+    self func_82AC(var_2, var_8, var_6, 1, 1);
   } else if(var_5 > 0) {
     var_8 = var_5 / self.setmatchdatadef * var_7;
-    self _meth_82AC(var_1, var_8, var_6, 1, 1);
-    self _meth_82AC(var_2, 0, var_6, 1, 1);
+    self func_82AC(var_1, var_8, var_6, 1, 1);
+    self func_82AC(var_2, 0, var_6, 1, 1);
   }
 
   if(var_4 < 0) {
     var_8 = var_4 / self.var_368 * var_7;
-    self _meth_82AC(var_0, 0, var_6, 1, 1);
-    self _meth_82AC(var_3, var_8, var_6, 1, 1);
+    self func_82AC(var_0, 0, var_6, 1, 1);
+    self func_82AC(var_3, var_8, var_6, 1, 1);
     return;
   }
 
   if(var_4 > 0) {
     var_8 = var_4 / self.isbot * var_7;
-    self _meth_82AC(var_0, var_8, var_6, 1, 1);
-    self _meth_82AC(var_3, 0, var_6, 1, 1);
+    self func_82AC(var_0, var_8, var_6, 1, 1);
+    self func_82AC(var_3, 0, var_6, 1, 1);
   }
 }
 

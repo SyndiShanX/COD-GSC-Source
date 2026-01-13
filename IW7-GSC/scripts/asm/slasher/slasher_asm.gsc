@@ -227,12 +227,12 @@ grenadethrownotehandler(var_0, var_1, var_2, var_3) {
         var_5 = self.setignoremegroup;
         var_6 = self getplayerassets(scripts\mp\agents\slasher\slasher_agent::getslashergrenadehandoffset(), var_5, 0, "min time", "min energy");
         if(isDefined(var_6)) {
-          self _meth_83C2();
+          self func_83C2();
           scripts\asm\asm::asm_fireephemeralevent("grenade_throw", "thrown");
         } else if(isDefined(self.enemygrenadepos)) {
           var_6 = self getplayerassets(scripts\mp\agents\slasher\slasher_agent::getslashergrenadehandoffset(), self.enemygrenadepos, 0, "min time", "min energy");
           if(isDefined(var_6)) {
-            self _meth_83C2();
+            self func_83C2();
             scripts\asm\asm::asm_fireephemeralevent("grenade_throw", "thrown");
           }
         }
@@ -390,7 +390,7 @@ func_BEA0(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-_meth_81DE() {
+func_81DE() {
   var_0 = 0.25;
   var_1 = undefined;
   var_2 = undefined;
@@ -418,7 +418,7 @@ _meth_81DE() {
 }
 
 func_3F0A(var_0, var_1, var_2) {
-  var_3 = _meth_81DE();
+  var_3 = func_81DE();
   if(var_3 < 0) {
     var_4 = "right";
   } else {
@@ -439,7 +439,7 @@ func_3F0A(var_0, var_1, var_2) {
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
-  var_8 = self _meth_8101(var_1, var_7);
+  var_8 = self func_8101(var_1, var_7);
   return var_7;
 }
 
@@ -467,7 +467,7 @@ doramattackdamage(var_0) {
   var_1 = vectornormalize(self getvelocity());
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   self.bramattackdamageoccured = 1;
-  var_0 _meth_84DC(var_1, var_2.ram_attack_push);
+  var_0 func_84DC(var_1, var_2.ram_attack_push);
   wait(0.2);
   var_3 = int(var_2.ram_attack_damage / 100 * var_0.maxhealth);
   scripts\asm\zombie\melee::domeleedamage(var_0, var_3, "MOD_IMPACT");
@@ -703,7 +703,7 @@ play_teleport_sound_to_players(var_0) {
 }
 
 ontraversalteleport(var_0, var_1, var_2, var_3) {
-  self.teleportpos = self _meth_8146();
+  self.teleportpos = self func_8146();
   self.btraversalteleport = 1;
   return 1;
 }

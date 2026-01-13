@@ -64,8 +64,8 @@ func_13A4F() {
     } else if(isDefined(var_0.var_637B)) {
       func_6373(0);
     } else if(isDefined(var_0.gameendedreceived)) {
-      if(self _meth_856B()) {
-        self _meth_85AD();
+      if(self func_856B()) {
+        self func_85AD();
         func_6373(0);
       }
     } else if(isDefined(var_0.var_10DE6)) {
@@ -118,9 +118,9 @@ func_13ADF() {
   self endon("disconnect");
   self endon("overdriveEnd");
   waittillframeend;
-  while(self _meth_856B()) {
+  while(self func_856B()) {
     var_0 = scripts\mp\supers::getcurrentsuper();
-    var_0.var_130EF = self _meth_856C() * scripts\mp\supers::_meth_8188() * 1000;
+    var_0.var_130EF = self func_856C() * scripts\mp\supers::func_8188() * 1000;
     scripts\mp\supers::func_112A5();
     scripts\engine\utility::waitframe();
   }

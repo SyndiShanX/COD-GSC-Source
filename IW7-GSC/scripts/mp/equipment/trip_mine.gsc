@@ -93,7 +93,7 @@ func_127D8() {
   self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
   if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
     var_0 notify("destroyed_equipment");
-    var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
     if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
       var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
@@ -121,7 +121,7 @@ func_127D9() {
 func_127DB(var_0) {
   thread func_127D6(0.1);
   self setentityowner(var_0);
-  self _meth_8593();
+  self func_8593();
   self setscriptablepartstate("plant", "neutral", 0);
   self setscriptablepartstate("arm", "neutral", 0);
   self setscriptablepartstate("trigger", "neutral", 0);

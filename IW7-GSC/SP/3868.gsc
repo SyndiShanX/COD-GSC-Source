@@ -32,7 +32,7 @@ func_6837(var_0) {
   }
 
   foreach(var_2 in level.var_10E6D.var_4652) {
-    self _meth_8260(var_2);
+    self func_8260(var_2);
   }
 }
 
@@ -120,7 +120,7 @@ func_6860() {
       continue;
     }
 
-    if(self.precacheleaderboards || self _meth_81B7()) {
+    if(self.precacheleaderboards || self func_81B7()) {
       continue;
     }
 
@@ -202,7 +202,7 @@ func_67FF(var_0, var_1, var_2, var_3) {
     }
 
     if(var_0A) {
-      var_8 _meth_84F7(var_0, var_1, var_1.origin);
+      var_8 func_84F7(var_0, var_1, var_1.origin);
     }
   }
 }
@@ -220,7 +220,7 @@ func_6800(var_0, var_1, var_2) {
     }
 
     if(distancesquared(var_6.origin, var_1) <= var_4) {
-      var_6 _meth_84F7(var_0, level.player, var_1);
+      var_6 func_84F7(var_0, level.player, var_1);
     }
   }
 }

@@ -120,7 +120,7 @@ botmemoryselectpos() {
 
   if(self.a.pose == "prone") {
     self.a.movement = "stop";
-    return _meth_80A0();
+    return func_80A0();
   }
 }
 
@@ -262,7 +262,7 @@ func_7E46() {
   return var_0[randomint(var_0.size)];
 }
 
-_meth_80A0() {
+func_80A0() {
   var_0 = scripts\anim\utility::func_B027("pain", "prone");
   return var_0[randomint(var_0.size)];
 }
@@ -271,7 +271,7 @@ func_D4EE(var_0) {
   var_1 = 1;
   func_C86D("painanim", var_0, % body, 1, 0.1, var_1);
   if(self.a.pose == "prone") {
-    self _meth_83CF( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self func_83CF( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
   }
 
   if(animhasnotetrack(var_0, "start_aim")) {
@@ -561,10 +561,10 @@ func_4877() {
   thread func_D899("crawling");
   self.a.var_10930 = "none";
   self.var_10957 = undefined;
-  self _meth_8306();
+  self func_8306();
   thread func_C874();
   level notify("ai_crawling", self);
-  self _meth_82A5( % dying, % body, 1, 0.1, 1);
+  self func_82A5( % dying, % body, 1, 0.1, 1);
   if(isDefined(self.a.var_11188)) {
     func_11185();
     self.a.var_11188 = undefined;
@@ -580,7 +580,7 @@ func_4877() {
   self.a.var_10930 = "dying_crawl";
   thread func_5F73();
   if(isDefined(self.isnodeoccupied)) {
-    self _meth_8306(self.isnodeoccupied);
+    self func_8306(self.isnodeoccupied);
   }
 
   func_4F64();
@@ -850,8 +850,8 @@ func_5F73() {
   }
 
   self.var_5F72 = 1;
-  self _meth_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_4"), 1, 0);
-  self _meth_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_6"), 1, 0);
+  self func_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_4"), 1, 0);
+  self func_82AC(scripts\anim\utility::func_B027("crawl_death", "aim_6"), 1, 0);
   var_0 = 0;
   for(;;) {
     var_1 = scripts\anim\utility_common::getyawtoenemy();
@@ -1085,11 +1085,11 @@ func_4669() {
 
     func_A6CE() {
       if(isDefined(self.var_A8AA)) {
-        self _meth_81D0(self.origin, self.var_A8AA);
+        self func_81D0(self.origin, self.var_A8AA);
         return;
       }
 
-      self _meth_81D0();
+      self func_81D0();
     }
 
     func_6560() {
@@ -1194,8 +1194,8 @@ func_4669() {
         var_7 = var_8[randomint(var_8.size)];
       }
 
-      self _meth_82AC( % add_pain, 1, 0.1, 1);
-      self _meth_82AC(var_7, 1, 0, 1);
+      self func_82AC( % add_pain, 1, 0.1, 1);
+      self func_82AC(var_7, 1, 0, 1);
       wait(0.4);
       self clearanim(var_7, 0.2);
       self clearanim( % add_pain, 0.2);
@@ -1232,7 +1232,7 @@ func_4669() {
         var_4 = 1;
       }
 
-      self _meth_82E7(var_0, var_1, var_2, var_3, var_4);
+      self func_82E7(var_0, var_1, var_2, var_3, var_4);
       self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
     }
 
@@ -1249,6 +1249,6 @@ func_4669() {
         var_5 = 1;
       }
 
-      self _meth_82E4(var_0, var_1, var_2, var_3, var_4, var_5);
+      self func_82E4(var_0, var_1, var_2, var_3, var_4, var_5);
       self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
     }

@@ -52,7 +52,7 @@ onuse(var_0, var_1) {
 dostrike(var_0, var_1, var_2, var_3) {
   level.var_C22F = 0;
   wait 1;
-  var_4 = scripts\mp\killstreaks\plane::_meth_806A();
+  var_4 = scripts\mp\killstreaks\plane::func_806A();
   var_5 = anglesToForward((0, var_2, 0));
   dooneflyby(var_3, var_0, var_1, var_5, var_4);
   self waittill("gas_airstrike_flyby_complete");

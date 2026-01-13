@@ -1827,7 +1827,7 @@ rhino_fight_over() {
 
     scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_5);
     scripts\cp\cp_vo::func_C9CB([var_5]);
-    var_5 _meth_82C0("bink_fadeout_amb", 0.66);
+    var_5 func_82C0("bink_fadeout_amb", 0.66);
     var_5 notify("force_cancel_placement");
   }
 

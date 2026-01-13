@@ -506,9 +506,9 @@ set_spawn_defaults() {
   self allowslide(1);
   self allowwallrun(0);
   self allowdodge(0);
-  self _meth_8426(0);
-  self _meth_8425(0);
-  self _meth_8454(3);
+  self func_8426(0);
+  self func_8425(0);
+  self func_8454(3);
   if(isDefined(level.player_suit)) {
     self setsuit(level.player_suit);
   } else {

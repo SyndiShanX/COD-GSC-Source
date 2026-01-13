@@ -752,7 +752,7 @@ func_1176D() {
 
 func_1176F() {
   if(!isDefined(self.isnodeoccupied)) {
-    _meth_83FF();
+    func_83FF();
     return;
   }
 
@@ -761,7 +761,7 @@ func_1176F() {
     return;
   }
 
-  _meth_83FF();
+  func_83FF();
 }
 
 func_1176B() {
@@ -804,7 +804,7 @@ physics_getbodyid(var_0) {
   wait(4);
 }
 
-_meth_83FF() {
+func_83FF() {
   var_0 = scripts\cp\utility::get_array_of_valid_players(1, self.origin);
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0);
   if(!isDefined(var_1)) {

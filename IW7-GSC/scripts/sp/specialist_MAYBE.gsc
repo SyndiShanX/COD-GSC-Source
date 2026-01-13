@@ -16,8 +16,8 @@ unlockspecialist() {
     }
 
     if(gettime() >= var_0) {
-      level.player _meth_84C7("unlockedRealism", 1);
-      level.player _meth_84C7("beatRealism", 1);
+      level.player func_84C7("unlockedRealism", 1);
+      level.player func_84C7("beatRealism", 1);
       scripts\sp\endmission::func_725B(1);
       level.player playrumbleonentity("light_2s");
       var_1 = newhudelem();
@@ -100,7 +100,7 @@ main() {
   level.player notifyonplayercommand("melee_pressed", "+melee_zoom");
   level.player notifyonplayercommand("melee_pressed", "+melee_sprint");
   level.player notifyonplayercommand("actionslot_weapon_pressed", "+actionslot 1");
-  level.player _meth_857E(1);
+  level.player func_857E(1);
   level.player scripts\engine\utility::allow_autoreload(0);
   level.player scripts\sp\utility::func_1C3E(0);
   lib_0B61::func_95A4();
@@ -470,7 +470,7 @@ func_4D36() {
   level notify("pause_jackal_streak_message");
   if(scripts\sp\utility::func_D0BD("grapplingdevice", 1)) {
     level.player notify("spacegrapple_cancel");
-    level.player _meth_8507();
+    level.player func_8507();
   }
 
   thread func_4D37();
@@ -595,7 +595,7 @@ func_4D1D() {
 
 func_86CB(var_0) {
   var_1 = level.player getcurrentprimaryweapon();
-  if(level.player _meth_8519(var_1, 1) && !issubstr(var_1, "iw7_fmg")) {
+  if(level.player func_8519(var_1, 1) && !issubstr(var_1, "iw7_fmg")) {
     var_1 = weaponaltweaponname(var_1);
   }
 
@@ -888,7 +888,7 @@ func_BE51() {
     level.player scripts\sp\utility::func_1C72(1);
     level.player scripts\sp\utility::func_1C34(1);
     if(scripts\sp\utility::func_D0BD("grapplingdevice", 1)) {
-      level.player _meth_8503("ges_grapple", "ges_grav_jump_combat_fail", level.var_10533, level.var_10532);
+      level.player func_8503("ges_grapple", "ges_grav_jump_combat_fail", level.var_10533, level.var_10532);
     }
   }
 }
@@ -927,7 +927,7 @@ func_8DE1() {
     level.player waittill("secondary_equipment_change", var_1);
     if(var_1 == "helmet") {
       if(scripts\sp\utility::func_D0BD("grapplingdevice", 1) && !func_2C94("arm_left")) {
-        level.player _meth_8507();
+        level.player func_8507();
       }
 
       level.player scripts\engine\utility::allow_offhand_secondary_weapons(0);
@@ -936,7 +936,7 @@ func_8DE1() {
 
     if(var_0 == "helmet") {
       if(scripts\sp\utility::func_D0BD("grapplingdevice", 0) && !func_2C94("arm_left")) {
-        level.player _meth_8503("ges_grapple", "ges_grav_jump_combat_fail", level.var_10533, level.var_10532);
+        level.player func_8503("ges_grapple", "ges_grav_jump_combat_fail", level.var_10533, level.var_10532);
       }
 
       level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
@@ -1115,7 +1115,7 @@ func_4D17() {
     }
 
     level.player shellshock("plane_sway", 12);
-    level.player _meth_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter");
+    level.player func_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter");
     level.player scripts\engine\utility::allow_reload(0);
     scripts\sp\utility::func_D020();
     thread func_25E9("injury", "oxygen");
@@ -1140,8 +1140,8 @@ func_4D17() {
       wait(0.05);
     }
 
-    level.player _meth_80A1();
-    level.player _meth_81D0();
+    level.player func_80A1();
+    level.player func_81D0();
     scripts\sp\utility::func_B8D1();
   }
 }
@@ -1185,7 +1185,7 @@ func_8E05() {
   if(!isDefined(level.var_10964.helmet)) {
     level.var_10964.helmet = spawn("script_model", level.player.origin);
     level.var_10964.helmet setModel("vm_hero_protagonist_helmet");
-    level.var_10964.helmet _meth_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+    level.var_10964.helmet func_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
     level.var_10964.helmet notsolid();
   }
 
@@ -1210,7 +1210,7 @@ func_8E05() {
 specialist_helmet_on_immediate() {
   level.var_10964.helmet = spawn("script_model", level.player.origin);
   level.var_10964.helmet setModel("vm_hero_protagonist_helmet");
-  level.var_10964.helmet _meth_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  level.var_10964.helmet func_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
   level.var_10964.helmet notsolid();
   level.player blendlinktoplayerviewmotion(0.25, 0);
   func_F3FF(1);
@@ -1223,7 +1223,7 @@ func_4E1A(var_0) {
 
   level.player notify("headshot_death");
   if(scripts\sp\utility::func_93AB()) {
-    level.player _meth_8591(1);
+    level.player func_8591(1);
     updategamerprofile();
     scripts\sp\endmission::func_41ED();
   }
@@ -1235,7 +1235,7 @@ func_4E1A(var_0) {
   setomnvar("ui_hide_weapon_info", 1);
   setsaveddvar("hud_showstance", 0);
   setsaveddvar("actionSlotsHide", 1);
-  level.player _meth_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter", "occlusion", "ambient", "ambient_events", "player_adsr", "weapon_reflection", "contexts", "full_occlusion");
+  level.player func_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter", "occlusion", "ambient", "ambient_events", "player_adsr", "weapon_reflection", "contexts", "full_occlusion");
   level.player playrumbleonentity("grenade_rumble");
   playFX(level.var_7649["human_gib_head"], level.player getEye(), anglesToForward(level.player.angles), anglestoleft(level.player.angles));
   playFX(level.var_7649["human_gib_fullbody"], level.player getEye() + (0, 0, 5));
@@ -1255,8 +1255,8 @@ func_4E1A(var_0) {
 
   if(var_0) {
     level.player getradiuspathsighttestnodes();
-    level.player _meth_80A1();
-    level.player _meth_81D0();
+    level.player func_80A1();
+    level.player func_81D0();
     scripts\sp\utility::func_B8D1();
     return;
   }
@@ -1266,7 +1266,7 @@ func_4E1A(var_0) {
   level.player playerlinktoabsolute(var_2, "tag_origin");
   func_F52C(1);
   level.player specialist_allow_invulnerability(1);
-  level.player _meth_84FE();
+  level.player func_84FE();
   level.player.ignoreme = 1;
   var_2 thread func_4E10();
 }
@@ -1295,8 +1295,8 @@ func_4E10() {
   self rotatepitch(-5, 0.25);
   if(var_1 == "prone" || !var_0 || scripts\sp\utility::func_93AC()) {
     wait(4);
-    level.player _meth_80A1();
-    level.player _meth_81D0();
+    level.player func_80A1();
+    level.player func_81D0();
     scripts\sp\utility::func_B8D1();
     return;
   }
@@ -1317,8 +1317,8 @@ func_4E10() {
   level.player playrumbleonentity("grenade_rumble");
   playFX(level._effect["deathfx_bloodpool_generic"], level.player getEye() + (0, 0, -25) + anglesToForward(level.player.angles) * -4);
   wait(4);
-  level.player _meth_80A1();
-  level.player _meth_81D0();
+  level.player func_80A1();
+  level.player func_81D0();
   scripts\sp\utility::func_B8D1();
 }
 
@@ -1938,7 +1938,7 @@ func_9150(var_0) {
 }
 
 hudcanshow() {
-  if(!level.player _meth_843C()) {
+  if(!level.player func_843C()) {
     return 0;
   }
 
@@ -2258,7 +2258,7 @@ func_2C88() {
     return 0;
   }
 
-  if(!level.player _meth_843C()) {
+  if(!level.player func_843C()) {
     return 0;
   }
 
@@ -2422,7 +2422,7 @@ func_2C8B() {
     return 0;
   }
 
-  if(!level.player _meth_843C()) {
+  if(!level.player func_843C()) {
     return 0;
   }
 
@@ -2658,7 +2658,7 @@ specialist_allow_invulnerability(var_0) {
 
   level.var_10964.allowinvulnerability--;
   if(level.var_10964.allowinvulnerability == 0) {
-    self _meth_80A1();
+    self func_80A1();
   }
 }
 
@@ -2819,9 +2819,9 @@ crate_waittill_delete(var_0) {
 }
 
 nanoshot_pickup_watcher() {
-  if(!isDefined(level._meth_8580) || !isDefined(level._meth_8580["axis"])) {
-    level._meth_8581["axis"] = 0;
-    level._meth_8580["axis"] = [];
+  if(!isDefined(level.func_8580) || !isDefined(level.func_8580["axis"])) {
+    level.func_8581["axis"] = 0;
+    level.func_8580["axis"] = [];
   }
 
   for(;;) {
@@ -2830,7 +2830,7 @@ nanoshot_pickup_watcher() {
       wait(0.15);
     }
 
-    foreach(var_1 in level._meth_8580["axis"]) {
+    foreach(var_1 in level.func_8580["axis"]) {
       if(isDefined(var_1) && var_1.classname == "weapon_nanoshot") {
         var_1.var_9027 makeusable();
       }
@@ -2841,7 +2841,7 @@ nanoshot_pickup_watcher() {
       wait(0.15);
     }
 
-    foreach(var_1 in level._meth_8580["axis"]) {
+    foreach(var_1 in level.func_8580["axis"]) {
       if(isDefined(var_1) && var_1.classname == "weapon_nanoshot") {
         var_1.var_9027 makeunusable();
       }
@@ -2855,7 +2855,7 @@ nanoshot_near_pickup_check() {
     return;
   }
 
-  foreach(var_2 in level._meth_8580["axis"]) {
+  foreach(var_2 in level.func_8580["axis"]) {
     if(!isDefined(var_2) || var_2.classname != "weapon_nanoshot") {
       continue;
     }

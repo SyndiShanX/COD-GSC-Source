@@ -116,7 +116,7 @@ func_3600() {
   var_2["min"] = var_3;
   var_4 = var_3 < 0;
   var_5 = 0;
-  self _meth_82B1(var_1, 1);
+  self func_82B1(var_1, 1);
   var_6 = 0;
   while(var_6 < 1) {
     var_7 = self gettagorigin("j_spineupper");
@@ -310,7 +310,7 @@ func_3603(var_0) {
   var_5 = func_358F(var_0);
   var_6 = func_358C(var_3, var_0);
   var_7 = func_3590(var_0);
-  self _meth_82B0(var_3, 1);
+  self func_82B0(var_3, 1);
   wait(0.1);
   var_8 = func_358F(var_0);
   var_9 = func_358C(var_3, var_0);
@@ -321,10 +321,10 @@ func_3603(var_0) {
   var_0D = distance(var_5, var_0C);
   var_0E = distance(var_8, var_0C);
   var_1.var_DCCF[var_0]["rail"]["radius"] = var_0D + var_0E * 0.5;
-  self _meth_82B0(var_3, 0);
+  self func_82B0(var_3, 0);
   wait(0.1);
   var_1.var_DCCF[var_0]["rail"]["min"] = func_358B(var_0);
-  self _meth_82B0(var_3, 1);
+  self func_82B0(var_3, 1);
   wait(0.1);
   var_1.var_DCCF[var_0]["rail"]["max"] = func_358B(var_0);
   var_1.var_DCCF[var_0]["rail"]["rate"] = 0.05 * abs(var_1.var_DCCF[var_0]["rail"]["max"] - var_1.var_DCCF[var_0]["rail"]["min"]) / getanimlength(var_3);
@@ -339,13 +339,13 @@ func_3603(var_0) {
   wait(0.05);
   var_1.var_DCCF[var_0]["pitch"] = [];
   var_1.var_DCCF[var_0]["pitch"]["min"] = func_358E(var_3, var_0);
-  self _meth_82B0(var_3, 1);
+  self func_82B0(var_3, 1);
   wait(0.1);
   var_1.var_DCCF[var_0]["pitch"]["max"] = func_358E(var_3, var_0);
   var_1.var_DCCF[var_0]["pitch"]["rate"] = 0.05 * abs(var_1.var_DCCF[var_0]["pitch"]["max"] - var_1.var_DCCF[var_0]["pitch"]["min"]) / getanimlength(var_3);
   var_0F = 0;
-  self _meth_82B0(var_3, 0);
-  self _meth_82B1(var_3, 1);
+  self func_82B0(var_3, 0);
+  self func_82B1(var_3, 1);
   while(var_0F < 8) {
     var_10 = undefined;
     if(var_0 == "left") {
@@ -362,7 +362,7 @@ func_3603(var_0) {
     var_0F = var_0F + 0.05;
   }
 
-  self _meth_82B1(var_3, 0);
+  self func_82B1(var_3, 0);
   func_3608(var_3, var_0, "pitch", 0);
 }
 
@@ -781,7 +781,7 @@ func_3631(var_0) {
   var_1 = lib_0A1E::func_2356("aimset_right", "arm_pitch");
   self clearanim(var_1, var_0);
   var_2 = func_358A();
-  var_3 = self _meth_8103(var_2);
+  var_3 = self func_8103(var_2);
   var_4 = 2;
   if(var_3 <= var_4) {
     var_5 = min(var_0, 0.2 * var_3 / var_4);
@@ -797,7 +797,7 @@ func_3631(var_0) {
     }
 
     var_1 = var_1 - 0.05;
-    var_4 = self _meth_8103(var_3);
+    var_4 = self func_8103(var_3);
   }
 
   if(!self.asm.var_11B08.btracking) {
@@ -807,15 +807,15 @@ func_3631(var_0) {
 
 func_3574() {
   var_0 = lib_0A1E::func_2356("aim_body", "hexapod");
-  self _meth_82B1(var_0, 0);
+  self func_82B1(var_0, 0);
   var_0 = lib_0A1E::func_2356("aimset_left", "arm_rail");
-  self _meth_82B1(var_0, 0);
+  self func_82B1(var_0, 0);
   var_0 = lib_0A1E::func_2356("aimset_left", "arm_pitch");
-  self _meth_82B1(var_0, 0);
+  self func_82B1(var_0, 0);
   var_0 = lib_0A1E::func_2356("aimset_right", "arm_rail");
-  self _meth_82B1(var_0, 0);
+  self func_82B1(var_0, 0);
   var_0 = lib_0A1E::func_2356("aimset_right", "arm_pitch");
-  self _meth_82B1(var_0, 0);
+  self func_82B1(var_0, 0);
 }
 
 func_363C() {
@@ -848,7 +848,7 @@ func_3608(var_0, var_1, var_2, var_3, var_4) {
   var_8 = var_3 - var_5 / var_7;
   var_8 = clamp(var_8, 0, 1);
   self give_attacker_kill_rewards(var_0, 1, var_4, 0);
-  self _meth_82B0(var_0, var_8);
+  self func_82B0(var_0, var_8);
 }
 
 func_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -876,7 +876,7 @@ func_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(-0.002 < var_0B && var_0B < 0.002) {
     var_0B = 0;
-    self _meth_82B0(var_0, var_9);
+    self func_82B0(var_0, var_9);
   }
 
   var_0C = 1;
@@ -885,7 +885,7 @@ func_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_0D = func_3628(var_2, var_3, "rate");
-  self _meth_82B1(var_0, var_0C * var_0B / var_0D);
+  self func_82B1(var_0, var_0C * var_0B / var_0D);
 }
 
 func_360B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -1095,7 +1095,7 @@ func_35D6(var_0, var_1, var_2, var_3) {
 
   thread func_35E9(var_6, var_0E[0], var_12, var_7.var_DCE8 * var_9, var_1 + "_finished");
   self waittill("rocket_ready");
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   thread func_360F(var_1);
   var_16 = 0;
   var_17 = 0;
@@ -1192,15 +1192,15 @@ func_35E9(var_0, var_1, var_2, var_3, var_4) {
   createnavrepulsor("c12_rocket", var_0C, var_2, 256, 1);
   self notify("rocket_targeting");
   lib_0A16::func_17BA("targeting");
-  self _meth_857A("target", var_2);
+  self func_857A("target", var_2);
   self.var_E5DB = [];
   for(var_0D = 0; var_0D < var_6; var_0D++) {
     var_0E = spawn("script_model", (0, 0, 0));
     self.var_E5DB[var_0D] = var_0E;
     var_0E setModel("tag_flash");
-    var_0E _meth_81D6();
+    var_0E func_81D6();
     var_0E setotherent(self);
-    var_0E _meth_8575(self.secondaryweapon);
+    var_0E func_8575(self.secondaryweapon);
   }
 
   func_3635(var_5, var_2, 0);
@@ -1226,9 +1226,9 @@ func_35E9(var_0, var_1, var_2, var_3, var_4) {
 
 func_35EB() {
   if(isDefined(self.var_E5DB)) {
-    self _meth_857A("none");
+    self func_857A("none");
     foreach(var_1 in self.var_E5DB) {
-      var_1 _meth_81D5();
+      var_1 func_81D5();
       var_1 delete();
     }
 
@@ -1341,13 +1341,13 @@ func_35C5(var_0, var_1, var_2) {
       var_0A = var_7.var_EF76[0];
     }
 
-    self _meth_8494(var_4, var_5, var_6, var_8, var_0A, var_9, var_1, var_3);
+    self func_8494(var_4, var_5, var_6, var_8, var_0A, var_9, var_1, var_3);
     return;
   }
 
   var_0B = func_3595(var_0, var_2);
   var_0C = bulletspread(var_5, var_0B, 4);
-  self _meth_8494(var_4, var_5, var_6, var_8, var_0C, var_9, var_1, var_3);
+  self func_8494(var_4, var_5, var_6, var_8, var_0C, var_9, var_1, var_3);
 }
 
 func_3615(var_0, var_1, var_2) {

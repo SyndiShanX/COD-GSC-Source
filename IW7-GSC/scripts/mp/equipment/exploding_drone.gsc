@@ -47,7 +47,7 @@ func_69C8(var_0) {
   }
 
   explodingdrone_awardpointsfordeath(var_0, var_1);
-  self _meth_8593();
+  self func_8593();
   self setscriptablepartstate("beacon", "neutral", 0);
   self setscriptablepartstate("primaryThruster", "neutral", 0);
   self setscriptablepartstate("secondaryThrusters", "neutral", 0);
@@ -75,7 +75,7 @@ func_69C2(var_0) {
     scripts\mp\utility::printgameaction("exploding drone destroyed", var_1);
   }
 
-  self _meth_8593();
+  self func_8593();
   self setscriptablepartstate("beacon", "neutral", 0);
   self setscriptablepartstate("primaryThruster", "neutral", 0);
   self setscriptablepartstate("secondaryThrusters", "neutral", 0);
@@ -265,11 +265,11 @@ explodingdrone_validdetonationstate() {
     return 0;
   }
 
-  if(self _meth_84CA()) {
+  if(self func_84CA()) {
     return 0;
   }
 
-  if(self _meth_8568()) {
+  if(self func_8568()) {
     return 0;
   }
 

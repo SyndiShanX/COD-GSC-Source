@@ -19,9 +19,9 @@ func_E254() {
   }
   self.var_A449 = undefined;
   self notify("stop_lockon_sound");
-  self _meth_8403();
-  self _meth_8406(0);
-  self _meth_8404(0);
+  self func_8403();
+  self func_8406(0);
+  self func_8404(0);
   self.var_4BF3 = 0;
   self.var_4BF2 = 0;
   self.var_A445 = undefined;
@@ -225,10 +225,10 @@ func_A448() {
       }
 
       if(func_11579(var_21[0])) {
-        self _meth_8406(1);
+        self func_8406(1);
         continue;
       } else
-        self _meth_8406(0);
+        self func_8406(0);
 
       if(isDefined(self.var_A443)) {
         var_22 = averagepoint(self.var_A443);
@@ -256,7 +256,7 @@ func_A448() {
       self.var_A443 = undefined;
       self.var_A442 = undefined;
       self.var_A43F = gettime();
-      self _meth_8405(self.var_A447);
+      self func_8405(self.var_A447);
       thread func_B061("javelin_clu_aquiring_lock", 0.6);
       self.var_A444 = 2;
     }
@@ -270,9 +270,9 @@ func_A448() {
       }
 
       if(func_11579(self.var_A447)) {
-        self _meth_8406(1);
+        self func_8406(1);
       } else {
-        self _meth_8406(0);
+        self func_8406(0);
       }
 
       var_17 = gettime() - self.var_A43F;
@@ -280,7 +280,7 @@ func_A448() {
       if(var_17 < var_0) {
         continue;
       }
-      self _meth_8402(self.var_A447, (0, 0, 0), 1);
+      self func_8402(self.var_A447, (0, 0, 0), 1);
       self notify("stop_lockon_sound");
       self playlocalsound("javelin_clu_lock");
       self.var_A444 = 3;
@@ -295,9 +295,9 @@ func_A448() {
       }
 
       if(func_11579(self.var_A447)) {
-        self _meth_8406(1);
+        self func_8406(1);
       } else {
-        self _meth_8406(0);
+        self func_8406(0);
       }
 
       continue;
@@ -338,7 +338,7 @@ func_13263(var_0) {
 
 func_A440(var_0) {
   if(self.var_A444 == 2) {
-    self _meth_8405(self.var_A445);
+    self func_8405(self.var_A445);
 
     if(!func_10F9B(self.var_A445)) {
       func_E254();
@@ -368,9 +368,9 @@ func_A440(var_0) {
       return;
     }
     if(isplayer(self.var_A445)) {
-      self _meth_8402(self.var_A445, (0, 0, 64), 0);
+      self func_8402(self.var_A445, (0, 0, 64), 0);
     } else {
-      self _meth_8402(self.var_A445, (0, 0, 0), 0);
+      self func_8402(self.var_A445, (0, 0, 0), 0);
     }
 
     self notify("stop_lockon_sound");

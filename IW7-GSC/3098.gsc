@@ -176,7 +176,7 @@ func_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = [];
   var_9[0] = 320;
   var_9[1] = 230;
-  self _meth_83E8();
+  self func_83E8();
   self.audio.var_D889 = func_A16A(var_2);
   self.audio.var_7008 = 0;
   self.audio.var_7007 = 0;

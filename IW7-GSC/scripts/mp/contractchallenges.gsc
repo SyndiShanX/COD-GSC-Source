@@ -152,7 +152,7 @@ contractkills(var_0) {
           var_5 = 1;
         }
 
-        if(self _meth_8519(var_2)) {
+        if(self func_8519(var_2)) {
           var_6 = scripts\mp\utility::getweaponrootname(var_2);
           var_7 = getweaponvariantindex(var_2);
           if(var_6 == "iw7_longshot") {

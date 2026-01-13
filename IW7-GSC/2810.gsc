@@ -234,7 +234,7 @@ func_13145(var_0, var_1, var_2) {
         var_0.invaliditems[9][var_0.invaliditems[9].size] = var_5;
       }
 
-      var_6 = scripts\mp\perks::_meth_805C(var_5);
+      var_6 = scripts\mp\perks::func_805C(var_5);
 
       if(isDefined(var_6)) {
         var_3[var_6]++;

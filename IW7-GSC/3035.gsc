@@ -225,7 +225,7 @@ func_2658(var_0) {
   earthquake(0.35, 0.75, level.var_D127.origin, 3000);
   level.player playrumbleonentity("damage_heavy");
   func_0BDC::func_A1DD();
-  level.var_D127 _meth_8491("land");
+  level.var_D127 func_8491("land");
   level.var_D127 notify("jackal_touchdown");
   var_15 = level.var_D127.origin;
   var_16 = (0, level.var_D127.angles[1], 0);
@@ -309,7 +309,7 @@ func_A7D7(var_0) {
 func_F51F() {
   var_0 = level.player;
   func_A2D8();
-  level.player _meth_81E3(1);
+  level.player func_81E3(1);
   func_0BDC::func_104A6(0);
   var_1 = self makeentitysentient("allies", 0);
   func_0BD9::func_D161(var_0.team);
@@ -339,7 +339,7 @@ func_E073(var_0) {
     func_5686();
     func_DF4D();
     func_0BD4::func_A2D9();
-    level.player _meth_81E3(0);
+    level.player func_81E3(0);
     self notify("player_exit_jackal");
     func_0BD5::func_4086();
     thread func_0BD9::func_D176(0.0, 0, 0.2, 0.01, 0.3);
@@ -438,7 +438,7 @@ func_A1A6() {
   wait 0.7;
   level.player playSound("jack_plr_enter_zg_boot");
   wait 1;
-  level.player _meth_82C0("jackal_cockpit");
+  level.player func_82C0("jackal_cockpit");
 }
 
 func_A32A() {
@@ -551,7 +551,7 @@ func_11478() {
 
 func_1148A() {
   scripts\engine\utility::flag_set("jackal_taking_off");
-  level.player _meth_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 0.2, 0);
+  level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 0.2, 0);
   var_0 = level.var_D127.origin + anglesToForward(level.var_D127.angles) * 1000;
   func_0BDC::func_D165(var_0, 1, 1, 0);
   func_0BDC::func_A14D();
@@ -579,8 +579,8 @@ func_1148A() {
   level.player playrumbleonentity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   func_0BDC::func_A302(1.0, 7, "vtol_turn_takeoff");
-  level.player _meth_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
-  level.var_D127 _meth_8491("hover");
+  level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
+  level.var_D127 func_8491("hover");
 
   if(!isDefined(level.var_D127.var_7294)) {
     func_0BDC::func_A14D(0);
@@ -632,7 +632,7 @@ func_1147D() {
   scripts\engine\utility::flag_set("jackal_taking_off");
   func_0BDC::jackal_engine_throttle_sfx_volume(0, 0);
   var_0 = spawnvehicle("veh_mil_air_un_jackal_02", "player_sled", "jackal_un", level.var_D127.origin, level.var_D127.angles);
-  var_0 _meth_8184();
+  var_0 func_8184();
   var_0 notsolid();
   var_0.var_AFEB = scripts\engine\utility::spawn_tag_origin();
   var_0.var_AFEB.origin = var_0.origin + anglesToForward(var_0.angles) * 15000;
@@ -668,14 +668,14 @@ func_1147D() {
   func_0BDC::func_A1DD("hover");
   level.player playrumbleonentity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
-  var_0 _meth_8479(var_1);
-  var_0 _meth_847B(0.2);
+  var_0 func_8479(var_1);
+  var_0 func_847B(0.2);
   var_0 playLoopSound("jackal_runway_sled_lp");
   var_0 ghostattack(0.7, 0.0);
-  var_0 _meth_8277(0.7, 0.0);
+  var_0 func_8277(0.7, 0.0);
   wait 0.05;
   var_0 ghostattack(1.8, 2.0);
-  var_0 _meth_8277(1.3, 2.0);
+  var_0 func_8277(1.3, 2.0);
   var_0 waittill("off_ramp");
   level notify("player_off_ramp");
   var_0 ghostattack(0.0, 0.2);
@@ -829,7 +829,7 @@ func_11482() {
   var_16 = scripts\engine\utility::spawn_tag_origin();
   var_16.origin = level.var_D127.origin;
   var_15 ghostattack(0, 0);
-  var_15 _meth_8277(var_6, 0);
+  var_15 func_8277(var_6, 0);
   var_17 = 0;
   scripts\engine\utility::flag_set("jackal_reving_hint");
   scripts\engine\utility::delaythread(1, ::func_A2CE);
@@ -900,7 +900,7 @@ func_11482() {
       }
     }
 
-    if(level.player _meth_8439()) {
+    if(level.player func_8439()) {
       if(!var_2 && var_17) {
         break;
       }
@@ -916,7 +916,7 @@ func_11482() {
     var_28 = scripts\sp\math::func_C097(0, var_4, var_3);
     setomnvar("ui_jackal_booster_charge", var_28);
     var_15 ghostattack(var_25, 0.05);
-    var_15 _meth_8277(var_7, 0.05);
+    var_15 func_8277(var_7, 0.05);
     earthquake(var_26, 0.3, level.var_D127.origin, 3000);
     var_14 scripts\sp\utility::func_E7C9(var_27, 0.05);
     wait 0.05;
@@ -979,7 +979,7 @@ func_1147A() {
   var_16 = scripts\engine\utility::spawn_tag_origin();
   var_16.origin = level.var_D127.origin;
   var_15 ghostattack(0, 0);
-  var_15 _meth_8277(var_6, 0);
+  var_15 func_8277(var_6, 0);
   var_17 = 0;
   scripts\engine\utility::flag_set("jackal_reving_hint");
   scripts\engine\utility::delaythread(1, ::func_A2CE);
@@ -1055,7 +1055,7 @@ func_1147A() {
       level.player playSound("jackal_runway_takeoff_lights_off");
     }
 
-    if(level.player _meth_8439()) {
+    if(level.player func_8439()) {
       if(!var_2 && var_17) {
         break;
       }
@@ -1072,7 +1072,7 @@ func_1147A() {
     var_28 = scripts\sp\math::func_6A8E(var_11, var_12, var_3);
     var_29 = scripts\sp\math::func_6A8E(0, var_13, var_3);
     var_15 ghostattack(var_27, 0.05);
-    var_15 _meth_8277(var_7, 0.05);
+    var_15 func_8277(var_7, 0.05);
     earthquake(var_28, 0.3, level.var_D127.origin, 3000);
     var_14 scripts\sp\utility::func_E7C9(var_29, 0.05);
     wait 0.05;
@@ -1129,7 +1129,7 @@ func_4091() {
 func_11477() {
   scripts\engine\utility::flag_set("jackal_taking_off");
   func_0BDC::func_A302(0.1, 0, "vtol_turn_takeoff");
-  level.player _meth_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 0.2, 0);
+  level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 0.2, 0);
   func_0BDC::func_A15C();
   func_0BDC::func_A15B();
   func_0BDC::func_A151();
@@ -1147,7 +1147,7 @@ func_11477() {
   level.player playrumbleonentity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   func_0BDC::func_A302(1.0, 7, "vtol_turn_takeoff");
-  level.player _meth_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
+  level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
   wait 1.2;
   func_0BDC::func_A153(0);
   wait 1.8;
@@ -1159,7 +1159,7 @@ func_11477() {
 
 func_11484() {
   scripts\engine\utility::flag_set("jackal_taking_off");
-  level.var_D127 _meth_8491("hover");
+  level.var_D127 func_8491("hover");
   func_0BDC::func_A2DE(1, 0);
   var_0 = level.player scripts\engine\utility::spawn_tag_origin();
   var_0.angles = (0, 0, 1);
@@ -1290,7 +1290,7 @@ func_BBD0(var_0, var_1, var_2, var_3, var_4) {
   }
 
   func_BBE2();
-  self _meth_8491("land");
+  self func_8491("land");
 
   if(isDefined(self.var_99F5.var_2ADD)) {
     return;
@@ -1335,7 +1335,7 @@ func_BBD1(var_0) {
   }
 
   func_BBE2();
-  self _meth_8491("land");
+  self func_8491("land");
   wait 0.05;
   var_3 = func_1ED3(var_1, "finish_link");
   func_107A1();
@@ -1515,7 +1515,7 @@ func_BBDD(var_0, var_1, var_2, var_3) {
   var_5 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, % jackal_vehicle_mount_02_starboard);
   var_6 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, % jackal_vehicle_assault_motion_idle);
   func_BBE2();
-  self _meth_8491("hover");
+  self func_8491("hover");
   wait 0.05;
   var_7 = func_1ED3(var_4, "finish_link");
   func_107A1();
@@ -1561,12 +1561,12 @@ func_BBEF(var_0) {
   }
 
   func_BBE2();
-  self _meth_8491("land");
+  self func_8491("land");
   wait 0.05;
   var_4 = func_1ED3(var_1, "finish_link");
   func_107A1();
-  level.player _meth_8507();
-  level.player scripts\engine\utility::delaycall(var_4 + 0.05, ::_meth_84F0, 0);
+  level.player func_8507();
+  level.player scripts\engine\utility::delaycall(var_4 + 0.05, ::func_84F0, 0);
   level.player getweaponweight(self.var_AD34, "tag_origin", var_4, var_4 * 0.5, var_4 * 0.5);
   level.player scripts\engine\utility::delaycall(var_4, ::getweightedchanceroll, self.var_AD34, "tag_origin", 1, 0, 0, 0, 0, 1);
   level.player scripts\engine\utility::delaycall(var_4 + 0.05, ::lerpviewangleclamp, 2, 0, 0, 25, 25, 25, 25);
@@ -1604,12 +1604,12 @@ func_BBF0(var_0) {
   }
 
   func_BBE2();
-  self _meth_8491("land");
+  self func_8491("land");
   wait 0.05;
   var_3 = func_1ED3(var_1, "finish_link");
   func_107A1();
-  level.player _meth_8507();
-  level.player _meth_84F0(0);
+  level.player func_8507();
+  level.player func_84F0(0);
   level.player getweaponweight(self.var_AD34, "tag_origin", var_3, var_3 * 0.5, var_3 * 0.5);
   level.player scripts\engine\utility::delaycall(var_3, ::getweightedchanceroll, self.var_AD34, "tag_origin", 1, 0, 0, 0, 0, 1);
   level.player scripts\engine\utility::delaycall(var_3 + 0.05, ::lerpviewangleclamp, 2, 0, 0, 25, 25, 25, 25);
@@ -1692,7 +1692,7 @@ func_BBC8(var_0, var_1, var_2, var_3) {
 func_8D1C() {
   level.player playSound("scn_heist_jackal_mount");
   wait 3.8;
-  level.player _meth_82C0("jackal_cockpit", 1);
+  level.player func_82C0("jackal_cockpit", 1);
 }
 
 func_D5E9() {
@@ -1700,7 +1700,7 @@ func_D5E9() {
   wait 4;
   level.player playSound("jackal_warmup_plr");
   wait 2;
-  level.player _meth_82C0("jackal_cockpit", 1);
+  level.player func_82C0("jackal_cockpit", 1);
 }
 
 func_D5E5() {
@@ -1710,7 +1710,7 @@ func_D5E5() {
 func_D5E6() {
   level.player playSound("plr_sc_enter_jackal_cockpit_b");
   wait 3.2;
-  level.player _meth_82C0("jackal_cockpit", 0.5);
+  level.player func_82C0("jackal_cockpit", 0.5);
 }
 
 func_DADD() {
@@ -1768,8 +1768,8 @@ func_BBDA() {
   self clearanim( % root, 0.0);
   scripts\engine\utility::delaythread(0.1, func_0BDC::func_A334);
   func_F919(1);
-  level.player _meth_818A();
-  level.player _meth_84FE();
+  level.player func_818A();
+  level.player func_84FE();
   setomnvar("ui_jackal_weapon_display_temp", 1);
 }
 
@@ -1916,7 +1916,7 @@ func_A2C0() {
   level.player playSound("jackal_warmup_plr");
   wait 0.75;
   wait 1;
-  level.player _meth_82C0("jackal_cockpit");
+  level.player func_82C0("jackal_cockpit");
 }
 
 func_A2C5() {
@@ -1933,7 +1933,7 @@ func_A2C6() {
 func_A2C7() {
   level.player playSound("plr_foley_jackal_mount_europa03");
   wait 2.38;
-  level.player _meth_82C0("jackal_cockpit");
+  level.player func_82C0("jackal_cockpit");
 }
 
 func_A2C8() {
@@ -1946,7 +1946,7 @@ func_A2C9() {
   level.player playSound("jackal_warmup_plr");
   wait 0.75;
   wait 1;
-  level.player _meth_82C0("jackal_cockpit");
+  level.player func_82C0("jackal_cockpit");
 }
 
 func_A2C1() {
@@ -1989,8 +1989,8 @@ func_BBCB() {
 
 func_BBEC() {
   func_0BDC::func_A208(0);
-  level.player _meth_818A();
-  level.player _meth_84FE();
+  level.player func_818A();
+  level.player func_84FE();
 }
 
 func_BBE2() {
@@ -2013,13 +2013,13 @@ func_5699() {
   level.player getradiuspathsighttestnodes();
   level.player getnumberoffrozenticksfromwave(0);
   level.player getnumownedactiveagents(0);
-  level.player _meth_818A();
+  level.player func_818A();
 }
 
 func_569D() {
   level.player unlink(1);
   level.player giveperkoffhand();
-  level.player _meth_84FD();
+  level.player func_84FD();
   level.player getroundswon(0);
   level.player enableweapons();
   level.player enableoffhandweapons();
@@ -2040,7 +2040,7 @@ func_5685() {
   level.player setorigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
-  self _meth_848E(1);
+  self func_848E(1);
   func_107A1();
   level.player getweaponweight(self.var_AD34, "tag_origin", 0);
   wait 0.05;
@@ -2055,7 +2055,7 @@ func_56A6() {
   level.player setorigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
-  self _meth_848E(1);
+  self func_848E(1);
   func_107A1();
   level.player getweaponweight(self.var_AD34, "tag_player", 0);
   wait 0.05;
@@ -2072,7 +2072,7 @@ func_568B() {
   level.player setstance("stand");
   level.player getnumownedactiveagents(0);
   level.player getnumberoffrozenticksfromwave(0);
-  level.player _meth_84FE();
+  level.player func_84FE();
   thread func_A0F9();
   level.player getweightedchanceroll(level.var_D267, "tag_player", 1, 0, 0, 0, 0, 1);
   level.var_D267 scripts\engine\utility::delaycall(var_0, ::show);
@@ -2088,7 +2088,7 @@ func_5695() {
   level.player setorigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
-  self _meth_848E(1);
+  self func_848E(1);
   func_107A1();
   level.player getweaponweight(self.var_AD34, "tag_player", 0);
   wait 0.05;
@@ -2105,7 +2105,7 @@ func_5684() {
   level.player setorigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
-  self _meth_848E(1);
+  self func_848E(1);
   func_107A1();
   level.player getweaponweight(self.var_AD34, "tag_origin", 0);
   wait 0.05;
@@ -2144,8 +2144,8 @@ func_5681(var_0, var_1, var_2) {
   self give_attacker_kill_rewards(var_1, 1, var_4);
 
   if(isDefined(var_2)) {
-    self _meth_82B1(var_0, 0);
-    self _meth_82B1(var_1, 0);
+    self func_82B1(var_0, 0);
+    self func_82B1(var_1, 0);
     self waittill(var_2);
     self setanimknob(var_0, 1, 0.2, 1);
     self give_attacker_kill_rewards(var_1, 1, 0.2, 1);
@@ -2171,8 +2171,8 @@ func_5682(var_0, var_1, var_2) {
   self give_attacker_kill_rewards(var_1, 1, var_4);
 
   if(isDefined(var_2)) {
-    self _meth_82B1(var_0, 0);
-    self _meth_82B1(var_1, 0);
+    self func_82B1(var_0, 0);
+    self func_82B1(var_1, 0);
     self waittill(var_2);
     self setanimknob(var_0, 1, 0.2, 1);
     self give_attacker_kill_rewards(var_1, 1, 0.2, 1);
@@ -2193,7 +2193,7 @@ func_5682(var_0, var_1, var_2) {
 }
 
 func_88C8(var_0, var_1, var_2, var_3, var_4) {
-  var_0 _meth_8239(1);
+  var_0 func_8239(1);
 
   if(isDefined(var_3)) {
     wait(var_3);
@@ -2732,7 +2732,7 @@ func_3AE5() {
         var_10 = scripts\sp\math::func_6A8E(0.5, 1.8, var_9);
         var_11 = scripts\sp\math::func_6A8E(0.2, 0.4, var_9);
         self.var_102D1 ghostattack(var_10, 0.05);
-        self.var_102D1 _meth_8277(var_11, 0.05);
+        self.var_102D1 func_8277(var_11, 0.05);
       } else if(var_0) {
         self.var_102D1 ghostattack(0, 0.5);
         var_0 = 0;
@@ -3054,7 +3054,7 @@ func_3ACB() {
     return;
   }
   foreach(var_1 in self.var_2AD8) {
-    var_1.var_C385 = var_1 _meth_8134();
+    var_1.var_C385 = var_1 func_8134();
     var_1 thread scripts\sp\lights::func_AB83(0.2, 0.2);
     var_1 scripts\engine\utility::delaythread(1, scripts\sp\lights::func_AB83, var_1.var_C385, 7);
   }
@@ -3074,7 +3074,7 @@ func_3ACB() {
     var_8.var_A6EC hide();
 
     foreach(var_1 in var_8.lights) {
-      var_1 _meth_82FC((1, 0.085294, 0.03137));
+      var_1 func_82FC((1, 0.085294, 0.03137));
       var_1 thread scripts\sp\lights::func_AB83(var_1.script_intensity_01, 1);
     }
 
@@ -3083,7 +3083,7 @@ func_3ACB() {
 }
 
 func_3AC1() {
-  var_0 = self _meth_8134();
+  var_0 = self func_8134();
   var_1 = 90;
   var_2 = self getspawnpoint();
   var_3 = var_2 * 2;
@@ -3102,7 +3102,7 @@ func_3AC1() {
 }
 
 func_3AB1(var_0, var_1, var_2) {
-  var_3 = self _meth_8134();
+  var_3 = self func_8134();
   var_4 = self getspawnpoint();
   var_5 = int(var_2 * 20);
   var_6 = (var_1 - var_4) / var_5;
@@ -3654,7 +3654,7 @@ func_3ACF(var_0) {
     self.var_11593.angles = self.var_6C1E.angles;
     self.var_11593 linkto(self);
     self.var_102D1.var_5BD7.var_FB5C ghostattack(var_12, 0.05);
-    self.var_102D1.var_5BD7.var_FB5C _meth_8277(var_13, 0.05);
+    self.var_102D1.var_5BD7.var_FB5C func_8277(var_13, 0.05);
 
     if(var_8 < 5) {
       break;

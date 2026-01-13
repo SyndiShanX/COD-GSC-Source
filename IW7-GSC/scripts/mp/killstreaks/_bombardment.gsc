@@ -58,7 +58,7 @@ func_F1AC(var_0, var_1, var_2) {
     self playlocalsound("bombardment_killstreak_bootup");
     var_8 playLoopSound("bombardment_killstreak_hud_loop");
     self setsoundsubmix("mp_killstreak_overlay");
-    var_7 = scripts\mp\killstreaks\_mapselect::_meth_8112(var_1, var_3);
+    var_7 = scripts\mp\killstreaks\_mapselect::func_8112(var_1, var_3);
     self playlocalsound("bombardment_killstreak_shutdown");
     self clearsoundsubmix();
     var_8 stoploopsound("");

@@ -47,43 +47,43 @@ func_F5FF() {
     case "shipcrib_titan":
     case "shipcrib_europa":
       setsaveddvar("spaceshipPilotModel", "viewmodel_base_animated");
-      level.player _meth_8573("nopack_nohelmet_shadow");
-      level.player _meth_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_naval");
+      level.player func_8573("nopack_nohelmet_shadow");
+      level.player func_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_naval");
       level.player givegoproattachments("viewmodel_base_viewhands_iw7_naval");
-      level.player _meth_8574("body_hero_protagonist_vm_legs_naval");
+      level.player func_8574("body_hero_protagonist_vm_legs_naval");
       break;
 
     case "phspace":
       setsaveddvar("spaceshipPilotModel", "viewmodel_base_animated_naval");
-      level.player _meth_8573("default_character_shadow");
-      level.player _meth_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_naval");
+      level.player func_8573("default_character_shadow");
+      level.player func_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_naval");
       level.player givegoproattachments("viewmodel_base_viewhands_iw7_naval");
-      level.player _meth_8574("body_hero_protagonist_vm_legs_naval");
+      level.player func_8574("body_hero_protagonist_vm_legs_naval");
       break;
 
     case "titanjackal":
     case "titan":
       setsaveddvar("spaceshipPilotModel", "viewmodel_base_animated_desert");
-      level.player _meth_8573("default_character_shadow");
-      level.player _meth_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_desert");
+      level.player func_8573("default_character_shadow");
+      level.player func_84C7("currentViewModel", "viewmodel_base_viewhands_iw7_desert");
       level.player givegoproattachments("viewmodel_base_viewhands_iw7_desert");
-      level.player _meth_8574("body_hero_protagonist_vm_legs_desert");
+      level.player func_8574("body_hero_protagonist_vm_legs_desert");
       break;
 
     case "sa_assassination":
       setsaveddvar("spaceshipPilotModel", "viewmodel_body_mp_stryker_2");
-      level.player _meth_8573("default_character_shadow");
-      level.player _meth_84C7("currentViewModel", "viewmodel_base_viewhands_iw7");
+      level.player func_8573("default_character_shadow");
+      level.player func_84C7("currentViewModel", "viewmodel_base_viewhands_iw7");
       level.player givegoproattachments("viewmodel_base_viewhands_iw7");
-      level.player _meth_8574("body_hero_protagonist_vm_legs");
+      level.player func_8574("body_hero_protagonist_vm_legs");
       break;
 
     default:
       setsaveddvar("spaceshipPilotModel", "viewmodel_base_animated");
-      level.player _meth_8573("default_character_shadow");
-      level.player _meth_84C7("currentViewModel", "viewmodel_base_viewhands_iw7");
+      level.player func_8573("default_character_shadow");
+      level.player func_84C7("currentViewModel", "viewmodel_base_viewhands_iw7");
       level.player givegoproattachments("viewmodel_base_viewhands_iw7");
-      level.player _meth_8574("body_hero_protagonist_vm_legs");
+      level.player func_8574("body_hero_protagonist_vm_legs");
       break;
   }
 }
@@ -194,7 +194,7 @@ handle_fov_viewmodel() {
   level.player scripts\sp\utility::func_65E1("script_allow_showviewmodel");
   for(;;) {
     if(!level.player scripts\sp\utility::func_65DB("script_allow_showviewmodel")) {
-      level.player _meth_818A();
+      level.player func_818A();
       level.player scripts\sp\utility::func_65E1("fov_vm_hide");
       level.player scripts\sp\utility::func_65E3("script_allow_showviewmodel");
     }
@@ -202,7 +202,7 @@ handle_fov_viewmodel() {
     var_1 = getdvarfloat("com_fovUserScale");
     if(var_1 >= var_0 && level.player getcurrentweapon() == "iw7_gunless") {
       if(!level.player scripts\sp\utility::func_65DB("fov_vm_hide")) {
-        level.player _meth_818A();
+        level.player func_818A();
         level.player scripts\sp\utility::func_65E1("fov_vm_hide");
       }
     } else if(level.player scripts\sp\utility::func_65DB("fov_vm_hide")) {

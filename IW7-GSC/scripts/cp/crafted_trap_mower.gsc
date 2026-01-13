@@ -478,7 +478,7 @@ func_126A6(var_0) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.var_47B3["crafted_trap_mower"].pow);
   self makeusable();
-  self _meth_84A7("tag_fx");
+  self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
   thread func_126A0(self.triggerportableradarping);

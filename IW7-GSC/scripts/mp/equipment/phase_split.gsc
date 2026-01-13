@@ -120,7 +120,7 @@ func_CAB6() {
 
 func_CAB4() {
   self waittill("death");
-  var_0 = self _meth_8113();
+  var_0 = self func_8113();
   var_0 hide();
   playFX(level.var_CAA3["death"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   if(isDefined(self.triggerportableradarping)) {

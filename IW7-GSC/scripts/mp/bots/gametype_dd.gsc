@@ -224,14 +224,14 @@ bot_dd_think() {
 }
 
 plant_set_stage() {
-  _meth_8466(1);
+  func_8466(1);
 }
 
 func_50A6() {
-  _meth_8466(0);
+  func_8466(0);
 }
 
-_meth_8466(var_0) {
+func_8466(var_0) {
   scripts\mp\bots\_bots_strategy::bot_defend_stop();
   if(var_0) {
     self botsetscriptgoal(self.current_bombzone.bottarget.origin, 20, "critical", self.current_bombzone.bottarget.angles[1]);

@@ -52,7 +52,7 @@ func_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   setomnvar("ui_pip_message_type", 1);
   if(!isDefined(var_5)) {
     setomnvar("ui_show_pip", 1);
-    if(isDefined(level.player _meth_8473())) {
+    if(isDefined(level.player func_8473())) {
       setomnvar("ui_jackal_hide_follow_pip", 1);
       return;
     }

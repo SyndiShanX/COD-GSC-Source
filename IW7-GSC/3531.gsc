@@ -85,8 +85,8 @@ func_1288B(var_0) {
   var_9.nullownerdamagefunc = scripts\mp\killstreaks\utility::func_C1D3;
   var_9.weapon_name = "venomproj_mp";
   var_9.streakinfo = var_0;
-  var_9 _meth_8491("fly");
-  var_9 _meth_849F(0);
+  var_9 func_8491("fly");
+  var_9 func_849F(0);
   var_9 give_player_tickets(1);
   var_9 getrandomweaponfromcategory();
   var_9 setotherent(self);
@@ -109,10 +109,10 @@ func_1288B(var_0) {
 
   self setplayerangles(var_9.angles);
   self remotecontrolvehicle(var_9);
-  self _meth_8490("disable_mode_switching", 1);
-  self _meth_8490("disable_juke", 0);
-  self _meth_8490("disable_guns", 1);
-  self _meth_8490("disable_boost", 1);
+  self func_8490("disable_mode_switching", 1);
+  self func_8490("disable_juke", 0);
+  self func_8490("disable_guns", 1);
+  self func_8490("disable_boost", 1);
   thread func_F673();
   var_9 scripts\mp\killstreaks\utility::func_1843(var_0.streakname, "Killstreak_Ground", var_9.owner, 1);
   var_9 scripts\mp\killstreaks\utility::func_FAE4("venom_end");
@@ -271,7 +271,7 @@ func_1327B() {
 
 func_0118(var_0, var_1) {
   if(isDefined(var_0)) {
-    self _meth_8593();
+    self func_8593();
     self setscriptablepartstate("Explosion", "explode", 0);
   }
 }

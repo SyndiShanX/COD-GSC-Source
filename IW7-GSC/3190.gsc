@@ -36,7 +36,7 @@ func_11809(var_0, var_1, var_2, var_3) {
   }
 }
 
-_meth_8485(var_0, var_1, var_2, var_3) {
+func_8485(var_0, var_1, var_2, var_3) {
   if(var_0 == "hit") {
     if(isDefined(self.zombietograb) && !isDefined(self.zombiepiece) && isalive(self.zombietograb)) {
       self.zombietograb.full_gib = 1;
@@ -472,7 +472,7 @@ func_3EC2(var_0, var_1, var_2) {
 }
 
 func_1003B(var_0, var_1, var_2, var_3) {
-  var_4 = self _meth_855B("door", 300);
+  var_4 = self func_855B("door", 300);
   if(isDefined(var_4)) {
     self.last_door_loc = var_4;
     return 1;

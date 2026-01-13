@@ -169,7 +169,7 @@ func_7B15() {
 }
 
 func_385A() {
-  if(!self _meth_843C() || self getteamsize() || !scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed()) {
+  if(!self func_843C() || self getteamsize() || !scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed()) {
     return 0;
   }
 
@@ -262,7 +262,7 @@ func_112BA(var_0) {
   var_0D give_zombies_perk("equipment");
   var_0D setCanDamage(1);
   var_0D scripts\sp\vehicle::playgestureviewmodel();
-  var_0D _meth_839E();
+  var_0D func_839E();
   var_0D.var_6DA5 = 0;
   var_0D.var_C181 = 0;
   level.player.var_112AB = var_0D;
@@ -347,8 +347,8 @@ func_112BC() {
     var_1 setrightarc(90);
     var_1 settoparc(90);
     var_1 give_crafted_gascan(90);
-    var_1 _meth_82C9(0, "yaw");
-    var_1 _meth_82C9(0, "pitch");
+    var_1 func_82C9(0, "yaw");
+    var_1 func_82C9(0, "pitch");
   }
 
   self.var_5CDB = self.mgturret[0];

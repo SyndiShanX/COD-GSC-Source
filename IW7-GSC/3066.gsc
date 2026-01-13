@@ -59,18 +59,18 @@ func_3E49(var_0) {
     var_3 = 4;
 
   if(isDefined(self.var_EF7D)) {
-    self _meth_8484();
+    self func_8484();
     self scragentsetgoalpos(self.var_EF7D);
   } else if(isDefined(self.var_EF7A)) {
     var_4 = distancesquared(self.origin, self.var_EF7A.origin);
 
     if(var_4 > var_3 * var_3) {
-      self _meth_8484();
+      self func_8484();
       self scragentsetgoalentity(self.var_EF7A);
     } else
       return anim.failure;
   } else if(isDefined(self.var_EF7C)) {
-    self _meth_8484();
+    self func_8484();
     self scragentsetgoalnode(self.var_EF7C);
   }
 
@@ -213,7 +213,7 @@ func_3DE6(var_0) {
   if(!var_2) {
     if(!scripts\engine\utility::is_true(self.var_3320)) {
       decidemovetype(0, var_4);
-      self _meth_8484();
+      self func_8484();
       self scragentsetgoalpos(self.enemy.origin);
     }
 
@@ -226,7 +226,7 @@ func_3DE6(var_0) {
 
   if(var_4 > self.desiredenemydistmax) {
     decidemovetype(1, var_4);
-    self _meth_8484();
+    self func_8484();
     self scragentsetgoalpos(self.enemy.origin);
     return anim.success;
   }
@@ -249,7 +249,7 @@ func_3DE6(var_0) {
 
     if(var_10 > 0) {
       scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
-      self _meth_8484();
+      self func_8484();
       self scragentsetgoalpos(var_7);
       return anim.success;
     }

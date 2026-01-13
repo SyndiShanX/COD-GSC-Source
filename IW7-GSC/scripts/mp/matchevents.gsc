@@ -49,7 +49,7 @@ func_7F8A() {
   return (0, 0, 0);
 }
 
-_meth_8168() {
+func_8168() {
   var_0 = getspawnarray("mp_tdm_spawn_allies_start");
   var_1 = getspawnarray("mp_tdm_spawn_axis_start");
   if(isDefined(var_0) && isDefined(var_0[0]) && isDefined(var_1) && isDefined(var_1[0])) {
@@ -100,7 +100,7 @@ func_FAC7(var_0, var_1, var_2) {
     }
   }
 
-  var_5 = _meth_8168();
+  var_5 = func_8168();
   var_6 = 1200;
   var_7 = 1200;
   var_8 = 1000;
@@ -273,7 +273,7 @@ func_5A5C() {
 }
 
 func_5A59() {
-  var_0 = _meth_8168();
+  var_0 = func_8168();
   if(isDefined(var_0)) {
     var_1 = 200;
     var_2 = 200;

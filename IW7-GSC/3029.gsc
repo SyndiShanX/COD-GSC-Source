@@ -35,7 +35,7 @@ func_D188() {
     self stoploopsound(self.var_4B22);
   }
 
-  level.player _meth_80A1();
+  level.player func_80A1();
 }
 
 func_D13C() {
@@ -48,7 +48,7 @@ func_D13C() {
     if(_isgodmode(self.owner)) {
       continue;
     }
-    if(isDefined(self._meth_843F) && self._meth_843F) {
+    if(isDefined(self.func_843F) && self.func_843F) {
       continue;
     }
     if(isDefined(var_1.classname) && var_1.classname == "misc_turret") {
@@ -313,7 +313,7 @@ func_D184(var_0) {
   self endon("death_fadeout");
   earthquake(0.3, 1.0, level.var_D127.origin, 10000);
   level.player playSound("jackal_slow_death_plr_init");
-  level.player _meth_8329("deathsdoor", "deathsdoor", "reverb");
+  level.player func_8329("deathsdoor", "deathsdoor", "reverb");
   level.player setsoundsubmix("deaths_door_sp");
   level.var_D127 playrumbleonentity("damage_heavy");
   scripts\sp\utility::func_75C4("cockpit_dying_flames", "tag_body");
@@ -322,7 +322,7 @@ func_D184(var_0) {
   func_0BDC::func_A078((0, 0, -0.25 * var_1), 1, "death");
   thread func_D140();
   var_2 = func_7929();
-  level.player _meth_8489("body", var_2[0], 0.2, var_2[1]);
+  level.player func_8489("body", var_2[0], 0.2, var_2[1]);
   var_3 = getanimlength(var_2[0]) - var_2[2];
   var_3 = max(var_3, 0);
   visionsetnaked("jackal_dying", var_3);

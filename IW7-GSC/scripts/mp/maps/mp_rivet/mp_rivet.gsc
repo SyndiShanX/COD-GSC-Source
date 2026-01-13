@@ -475,7 +475,7 @@ func_6D22() {
       if(scripts\mp\utility::isreallyalive(var_0)) {
         var_0 dodamage(var_0.maxhealth, self.origin, var_0, undefined, "MOD_EXPLOSIVE");
         if(isplayer(var_0) || isagent(var_0)) {
-          thread func_57D4(var_0 _meth_8113());
+          thread func_57D4(var_0 func_8113());
         }
       }
     }

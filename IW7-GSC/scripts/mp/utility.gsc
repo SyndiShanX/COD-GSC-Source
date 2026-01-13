@@ -48,7 +48,7 @@ stoplocationselection(var_0, var_1) {
 
   if(!var_0) {
     self setblurforplayer(0, 0.3);
-    self _meth_80DE();
+    self func_80DE();
     self.selectinglocation = undefined;
     if(isDefined(self.var_110E9)) {
       self.var_110E9 destroy();
@@ -841,7 +841,7 @@ leaderdialogonplayer_internal(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_8 = tolower(var_8);
-    self _meth_8252(var_8, var_0, 2, var_1, var_2, var_3);
+    self func_8252(var_8, var_0, 2, var_1, var_2, var_3);
   }
 }
 
@@ -922,7 +922,7 @@ func_C638(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = game["dialog"][var_0];
-  self _meth_8252(var_4, var_0, 2, var_1, var_2, var_3);
+  self func_8252(var_4, var_0, 2, var_1, var_2, var_3);
 }
 
 func_7FEB() {
@@ -1359,7 +1359,7 @@ func_12F5B() {
     var_0 = getarraykeys(level.var_13A08);
     foreach(var_2 in var_0) {
       if(level.var_13A08[var_2].type == "string") {
-        var_3 = _meth_80A2(var_2, level.var_13A08[var_2].value);
+        var_3 = func_80A2(var_2, level.var_13A08[var_2].value);
       } else if(level.var_13A08[var_2].type == "float") {
         var_3 = func_7EBF(var_2, level.var_13A08[var_2].value);
       } else {
@@ -1911,7 +1911,7 @@ setusingremote(var_0) {
   self notify("using_remote");
 }
 
-_meth_80E8() {
+func_80E8() {
   return self.usingremote;
 }
 
@@ -2027,8 +2027,8 @@ _switchtoweaponimmediate(var_0) {
 }
 
 _takeweapon(var_0) {
-  if(self _meth_856D() == var_0) {
-    self _meth_8570(var_0);
+  if(self func_856D() == var_0) {
+    self func_8570(var_0);
   }
 
   self takeweapon(var_0);
@@ -2298,7 +2298,7 @@ func_22DB(var_0, var_1, var_2) {
   var_0[var_2] = var_1;
 }
 
-_meth_80A2(var_0, var_1) {
+func_80A2(var_0, var_1) {
   var_2 = var_1;
   var_2 = getdvar(var_0, var_1);
   return var_2;
@@ -2382,7 +2382,7 @@ isjuggernaut() {
   return 0;
 }
 
-_meth_8238(var_0) {
+func_8238(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -5106,7 +5106,7 @@ func_9E7D(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  if(var_0 _meth_8519(var_2) && getweaponrootname(var_2) == "iw7_rvn") {
+  if(var_0 func_8519(var_2) && getweaponrootname(var_2) == "iw7_rvn") {
     return 1;
   }
 
@@ -5568,7 +5568,7 @@ func_1377B() {
       continue;
     }
 
-    _meth_85C6(var_0, var_1, var_2, var_3);
+    func_85C6(var_0, var_1, var_2, var_3);
     self notify("grenade_throw");
     return var_0;
   }
@@ -5578,12 +5578,12 @@ func_85E0(var_0) {
   return !isDefined(var_0.notthrown) || !var_0.notthrown;
 }
 
-_meth_85C7() {
-  return self _meth_854D() != "none";
+func_85C7() {
+  return self func_854D() != "none";
 }
 
 func_7EE5() {
-  var_0 = self _meth_854D();
+  var_0 = self func_854D();
   if(isDefined(self.gestureweapon) && var_0 == self.gestureweapon) {
     var_0 = "none";
   }
@@ -5591,7 +5591,7 @@ func_7EE5() {
   return var_0;
 }
 
-_meth_85C6(var_0, var_1, var_2, var_3) {
+func_85C6(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0.weapon_name)) {
     var_0.weapon_name = var_1;
   }
@@ -5651,14 +5651,14 @@ _setnameplatematerial(var_0, var_1) {
 
   self.var_BE4C[0] = var_0;
   self.var_BE4C[1] = var_1;
-  self _meth_8315(var_0, var_1);
+  self func_8315(var_0, var_1);
 }
 
 func_13B6() {
   if(isDefined(self.var_D8B9)) {
-    self _meth_8315(self.var_D8B9[0], self.var_D8B9[1]);
+    self func_8315(self.var_D8B9[0], self.var_D8B9[1]);
   } else {
-    self _meth_8315("", "");
+    self func_8315("", "");
   }
 
   self.var_BE4C = undefined;
@@ -6625,7 +6625,7 @@ func_E165(var_0, var_1, var_2) {
   self.var_EC51[var_0] = self.var_EC51[var_0] - var_1;
 }
 
-_meth_8101(var_0, var_1) {
+func_8101(var_0, var_1) {
   func_50A5(var_0, var_1);
   if(isDefined(var_1)) {
     return self.var_EC52[var_0][var_1];
@@ -6755,7 +6755,7 @@ givestreakpointswithtext(var_0, var_1, var_2) {
   }
 
   var_3 = func_B93D(var_0, var_3, var_1);
-  scripts\mp\killstreaks\_killstreaks::_meth_83A7(var_0, var_3);
+  scripts\mp\killstreaks\_killstreaks::func_83A7(var_0, var_3);
   displayscoreeventpoints(var_3, var_0);
   if(var_0 == "assist_hardline") {
     scripts\mp\missions::func_D991("ch_hardline_extra_score", var_3);
@@ -6775,7 +6775,7 @@ giveunifiedpoints(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = func_B93D(var_0, var_6, var_1);
   scripts\mp\gamescore::giveplayerscore(var_0, var_6);
-  scripts\mp\killstreaks\_killstreaks::_meth_83A7(var_0, var_6);
+  scripts\mp\killstreaks\_killstreaks::func_83A7(var_0, var_6);
   if(!istrue(var_5)) {
     thread scripts\mp\rank::giverankxp(var_0, var_6, var_1);
   }
@@ -6830,7 +6830,7 @@ func_B93D(var_0, var_1, var_2) {
 
   var_4 = 0;
   var_4 = var_4 + scripts\mp\supers\super_amplify::func_1E58(var_3);
-  var_5 = _meth_8101(var_0, var_2);
+  var_5 = func_8101(var_0, var_2);
   var_5 = var_5 - 1;
   var_4 = var_4 + var_3 * var_5;
   var_1 = var_1 + var_4;
@@ -6875,7 +6875,7 @@ _hudoutlineviewmodeldisable() {
     return;
   }
 
-  self _meth_8192();
+  self func_8192();
 }
 
 _hudoutlineviewmodelenable(var_0, var_1, var_2) {
@@ -7147,7 +7147,7 @@ getmaxoutofboundscooldown() {
 
 getcurrentmonitoredweaponswitchweapon() {
   validatelistener();
-  var_0 = self _meth_856D();
+  var_0 = self func_856D();
   if(!isDefined(var_0) || var_0 == "none") {
     return undefined;
   }
@@ -7192,8 +7192,8 @@ func_391B(var_0) {
 
 func_1529(var_0) {
   func_4F5B("+++ ABORT - " + var_0);
-  if(self _meth_856D() == var_0) {
-    self _meth_8570(var_0);
+  if(self func_856D() == var_0) {
+    self func_8570(var_0);
   }
 
   _takeweapon(var_0);
@@ -7223,10 +7223,10 @@ func_11383(var_0, var_1) {
   }
 
   if(isanymonitoredweaponswitchinprogress()) {
-    self _meth_8570(getcurrentmonitoredweaponswitchweapon());
+    self func_8570(getcurrentmonitoredweaponswitchweapon());
   }
 
-  self _meth_856F(var_0);
+  self func_856F(var_0);
   if(istrue(var_1)) {
     _switchtoweaponimmediate(var_0);
   }
@@ -7238,7 +7238,7 @@ func_11383(var_0, var_1) {
       return 1;
     }
 
-    if(!self _meth_856E(var_0) || !self hasweapon(var_0)) {
+    if(!self func_856E(var_0) || !self hasweapon(var_0)) {
       func_4F5B(">>> FAIL switchToWeaponReliable() - " + var_0);
       return 0;
     }
@@ -7249,8 +7249,8 @@ func_11383(var_0, var_1) {
 
 validatelistener() {
   var_0 = self getcurrentweapon();
-  if(self _meth_856E(var_0)) {
-    self _meth_8570(var_0);
+  if(self func_856E(var_0)) {
+    self func_8570(var_0);
   }
 }
 

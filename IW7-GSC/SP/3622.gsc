@@ -105,7 +105,7 @@ func_A5FB() {
     playFXOnTag(level.var_7649["seeker_sparks"], var_0, "tag_fx");
     playworldsound("seeker_expire", var_0.origin);
     var_0 hudoutlinedisable();
-    var_0 _meth_81D0();
+    var_0 func_81D0();
   }
 }
 
@@ -215,7 +215,7 @@ func_F12A() {
   var_1 = 5;
   for(;;) {
     if(!self islinked()) {
-      var_2 = self _meth_812B();
+      var_2 = self func_812B();
       if(var_2 == "none") {
         var_0++;
         if(var_0 > 4 * var_1) {
@@ -251,7 +251,7 @@ func_F15A() {
   self.var_9C20 = 1;
   self.var_C1 = self.var_C1 + 1;
   for(var_2 = 0; var_2 < 5; var_2++) {
-    var_1 = self _meth_8393();
+    var_1 = self func_8393();
     if(!isDefined(var_1)) {
       wait(0.05);
       continue;
@@ -391,7 +391,7 @@ func_F159() {
   self.var_2745 = [];
   self.var_2A4B = 1;
   self.var_733D = 0;
-  self _meth_84E5(0);
+  self func_84E5(0);
   if(isDefined(self.var_C93D)) {
     self.ignoreme = 1;
   }
@@ -557,7 +557,7 @@ func_E084() {
   }
 
   if(isDefined(self.melee)) {
-    self _meth_8484();
+    self func_8484();
     if(isDefined(self.melee)) {
       if(isDefined(self.melee.target)) {
         self.melee.target.melee = undefined;
@@ -803,7 +803,7 @@ func_F11E(var_0, var_1, var_2) {
       }
 
       if(isalive(self)) {
-        self _meth_81D0();
+        self func_81D0();
       }
 
       self delete();
@@ -965,8 +965,8 @@ func_CBA1() {
   var_0 give_player_session_tokens("manual");
   var_0 makeunusable();
   var_0.var_9FF0 = 1;
-  var_0 _meth_82C9(0, "yaw");
-  var_0 _meth_82C9(0, "pitch");
+  var_0 func_82C9(0, "yaw");
+  var_0 func_82C9(0, "pitch");
   var_1 = (2, 0, 7);
   if(isDefined(self.var_37B3)) {
     var_1 = var_1 + self.var_37B3;

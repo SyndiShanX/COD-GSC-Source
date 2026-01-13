@@ -93,9 +93,9 @@ microturret_use(var_0) {
   var_3 setrightarc(180);
   var_3 give_crafted_gascan(90);
   var_3 settoparc(45);
-  var_3 _meth_82C9(0.3, "pitch");
-  var_3 _meth_82C9(0.3, "yaw");
-  var_3 _meth_82C8(0.65);
+  var_3 func_82C9(0.3, "pitch");
+  var_3 func_82C9(0.3, "yaw");
+  var_3 func_82C8(0.65);
   var_3 thread func_B6EA();
   var_3 setotherent(self);
   if(isDefined(var_2)) {
@@ -490,7 +490,7 @@ func_B6EC() {
   var_0 = weaponfiretime("micro_turret_gun_zm");
   for(;;) {
     if(func_B701()) {
-      var_1 = self _meth_8161(0);
+      var_1 = self func_8161(0);
       if(!isDefined(self.var_1A4A)) {
         self settargetentity(self.var_1A4A);
       }

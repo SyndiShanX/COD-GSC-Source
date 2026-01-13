@@ -130,7 +130,7 @@ func_CD4C(var_0, var_1, var_2, var_3, var_4) {
   }
 
   func_10C47(var_0.var_EBEA[var_1]);
-  self _meth_82E1(var_1, var_0.var_EBEA[var_1], var_2, var_3, var_4);
+  self func_82E1(var_1, var_0.var_EBEA[var_1], var_2, var_3, var_4);
 }
 
 func_509D(var_0) {
@@ -229,7 +229,7 @@ func_CD4B(var_0, var_1, var_2) {
     var_7 = getstartorigin(var_4.origin, var_4.angles, var_6);
     var_8 = getstartangles(var_4.origin, var_4.angles, var_6);
     if(!isDefined(self.var_9B89)) {
-      self _meth_80F1(var_7, var_8);
+      self func_80F1(var_7, var_8);
     } else {
       self.origin = var_7;
       self.angles = var_8;
@@ -550,7 +550,7 @@ func_CD53(var_0, var_1, var_2) {
     var_7 = getstartorigin(var_4.origin, var_4.angles, var_6);
     var_8 = getstartangles(var_4.origin, var_4.angles, var_6);
     if(!isDefined(self.var_9B89)) {
-      self _meth_80F1(var_7, var_8);
+      self func_80F1(var_7, var_8);
     } else {
       self.origin = var_7;
       self.angles = var_8;
@@ -761,7 +761,7 @@ func_1162B(var_0, var_1) {
     return;
   }
 
-  self _meth_80F1(var_0, var_1);
+  self func_80F1(var_0, var_1);
 }
 
 func_E7DE() {
@@ -894,11 +894,11 @@ func_9A13() {
     if(isDefined(var_0)) {
       var_0B = getstartorigin(var_0.origin, var_0.angles, var_7);
       var_0C = getstartangles(var_0.origin, var_0.angles, var_7);
-      self _meth_80F1(var_0B, var_0C);
+      self func_80F1(var_0B, var_0C);
     }
 
     func_10C47(var_7);
-    self _meth_82E1(var_1, var_7, 1, var_2);
+    self func_82E1(var_1, var_7, 1, var_2);
     var_0D = getanimlength(var_7);
     wait(var_0D);
     self clearanim(var_7, var_3);
@@ -928,7 +928,7 @@ func_9A11() {
   }
 
   func_10C47(var_0);
-  self _meth_82E1("idle", var_0, 1, 0.5, 1);
+  self func_82E1("idle", var_0, 1, 0.5, 1);
   thread func_9A3B("stop");
   var_1 = "single anim";
   if(!scripts\sp\utility::func_65DF("scene_end")) {
@@ -1076,8 +1076,8 @@ func_9A11() {
 
     if(!self.var_10254) {
       func_10C47(self.var_B004["follow"]);
-      self _meth_82E8(var_1, self.var_B004["follow"], 1, 0.25, 1);
-      self _meth_82B0(self.var_B004["follow"], var_11);
+      self func_82E8(var_1, self.var_B004["follow"], 1, 0.25, 1);
+      self func_82B0(self.var_B004["follow"], var_11);
       self setanimknob(self.var_B004["ring"], 1, var_4, 1);
     }
 
@@ -1090,10 +1090,10 @@ func_9A11() {
     }
 
     func_10C47(var_1A);
-    self _meth_82E8(var_1, var_1A, 1, 0.25, 1);
+    self func_82E8(var_1, var_1A, 1, 0.25, 1);
     self.var_9C84 = 1;
     if(!self.var_10254) {
-      self _meth_82AC(self.var_B004["additive"], 1, var_4, 1);
+      self func_82AC(self.var_B004["additive"], 1, var_4, 1);
     }
 
     scripts\engine\utility::delaythread(getanimlength(var_1A), ::scripts\sp\utility::func_65E1, "scene_end");
@@ -1271,14 +1271,14 @@ func_9A11() {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_right"]);
           self clearanim( % body, 0.25);
-          self _meth_82EA(var_1, self.var_B004["reacquire_right"], 1, 0.25);
+          self func_82EA(var_1, self.var_B004["reacquire_right"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_right"]) - 0.25, 0, 100));
           self clearanim(self.var_B004["reacquire_right"], 0.25);
         } else if(var_10 < -90 && !var_25 && !scripts\sp\utility::func_65DB("playing_interaction")) {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_left"]);
           self clearanim( % body, 0.25);
-          self _meth_82EA(var_1, self.var_B004["reacquire_left"], 1, 0.25);
+          self func_82EA(var_1, self.var_B004["reacquire_left"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_left"]) - 0.25, 0, 100));
           self clearanim(self.var_B004["reacquire_left"], 0.25);
         } else {
@@ -1295,15 +1295,15 @@ func_9A11() {
           var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
           var_11 = scripts\sp\math::func_C097(0, 360, var_10);
           func_10C47(self.var_B004["follow"]);
-          self _meth_82E8(var_1, self.var_B004["follow"], 1, 0.25, 1);
-          self _meth_82B0(self.var_B004["follow"], 0.5);
+          self func_82E8(var_1, self.var_B004["follow"], 1, 0.25, 1);
+          self func_82B0(self.var_B004["follow"], 0.5);
           self setanimknob(self.var_B004["ring"], 1, var_4, 1);
           if(!scripts\sp\utility::func_65DB("playing_interaction") && !scripts\sp\utility::func_65DB("scene_end")) {
             func_10C47(self.var_B004["diff"]);
-            self _meth_82E8(var_1, self.var_B004["diff"], 1, 0.05, 1);
+            self func_82E8(var_1, self.var_B004["diff"], 1, 0.05, 1);
           }
 
-          self _meth_82AC(self.var_B004["additive"], 1, var_4, 1);
+          self func_82AC(self.var_B004["additive"], 1, var_4, 1);
           var_1B = 0.5;
         }
       } else {
@@ -1338,7 +1338,7 @@ func_9A35() {
   }
 
   func_10C47(var_0);
-  self _meth_82E1("idle", var_0, 1, 0.05, 1);
+  self func_82E1("idle", var_0, 1, 0.05, 1);
   thread func_9A3B("stop");
   var_1 = "single anim";
   if(!scripts\sp\utility::func_65DF("scene_end")) {
@@ -1552,20 +1552,20 @@ func_9A35() {
         if(isarray(var_0E[0])) {
           func_10C47();
           if(self.var_1F25 >= var_0E[0].size - 1) {
-            self _meth_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+            self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
           } else {
-            self _meth_82E3(var_1, var_0, % body, 1, var_6, 1);
+            self func_82E3(var_1, var_0, % body, 1, var_6, 1);
           }
         } else {
-          self _meth_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+          self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
         }
       } else {
         func_10C47();
-        self _meth_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+        self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
       }
     } else {
       func_10C47();
-      self _meth_82E3(var_1, var_0, % body, 1, var_6, 1);
+      self func_82E3(var_1, var_0, % body, 1, var_6, 1);
     }
 
     self.var_1F25 = self.var_1F25 + 1;
@@ -1636,8 +1636,8 @@ func_9A37() {
 
   var_3 = "single anim";
   func_10C47(var_0);
-  self _meth_82E1(var_3, var_0, 1, 0.5, 1);
-  self _meth_82B0(var_0, randomfloat(1));
+  self func_82E1(var_3, var_0, 1, 0.5, 1);
+  self func_82B0(var_0, randomfloat(1));
   thread func_9A3B("stop");
   thread func_CC88();
   if(!scripts\sp\utility::func_65DF("scene_end")) {
@@ -1805,7 +1805,7 @@ func_F8D1() {
   var_0 = func_7A4C();
   self.var_DC80 = 0;
   func_10C47(var_0);
-  self _meth_82E1("single anim", var_0, 1, 0.05, 1);
+  self func_82E1("single anim", var_0, 1, 0.05, 1);
   thread func_9A3B("stop");
 }
 
@@ -1882,9 +1882,9 @@ func_CCA9() {
     var_0B = clamp(vectordot(var_4, var_7), 0.005, 1);
     var_0C = clamp(vectordot(var_4, var_8), 0.005, 1);
     var_0D = clamp(vectordot(var_4, var_6), 0.005, 1);
-    self _meth_82AC(self.var_B004["right_anim"], var_0B, 0.2);
-    self _meth_82AC(self.var_B004["left_anim"], var_0C, 0.2);
-    self _meth_82E8("single anim", self.var_B004["fwd_anim"], var_0A + 0.005, 0.2);
+    self func_82AC(self.var_B004["right_anim"], var_0B, 0.2);
+    self func_82AC(self.var_B004["left_anim"], var_0C, 0.2);
+    self func_82E8("single anim", self.var_B004["fwd_anim"], var_0A + 0.005, 0.2);
     var_0E = 1;
     if(scripts\engine\utility::anglebetweenvectorssigned(var_5, var_4, var_9) > 0) {
       var_0E = 0;
@@ -1898,8 +1898,8 @@ func_CCA9() {
       var_0 = scripts\sp\math::func_AB6F(var_0, var_0D, 0.1);
     }
 
-    self _meth_82AC(self.var_B004["back_right_anim"], var_1, 0.2);
-    self _meth_82AC(self.var_B004["back_left_anim"], var_0, 0.2);
+    self func_82AC(self.var_B004["back_right_anim"], var_1, 0.2);
+    self func_82AC(self.var_B004["back_left_anim"], var_0, 0.2);
     scripts\engine\utility::waitframe();
   }
 
@@ -1913,16 +1913,16 @@ func_9842() {
   var_0 = vectortoangles(level.player.origin - self.origin);
   self.var_9C84 = 1;
   level thread scripts\sp\interaction_manager::func_9A0E(self);
-  self _meth_82AC(self.var_B004["interaction_blend_parent"], 1, 0.2);
+  self func_82AC(self.var_B004["interaction_blend_parent"], 1, 0.2);
   var_1 = func_7A4C();
   self clearanim(var_1, 0.2);
   self clearanim( % head, 0.2);
   func_10C47(self.var_B004["fwd_anim"]);
-  self _meth_82E8("single anim", self.var_B004["fwd_anim"], 0.005, 0.05);
-  self _meth_82AC(self.var_B004["right_anim"], 0.005, 0.05);
-  self _meth_82AC(self.var_B004["left_anim"], 0.005, 0.05);
-  self _meth_82AC(self.var_B004["back_right_anim"], 0.005, 0.05);
-  self _meth_82AC(self.var_B004["back_left_anim"], 0.005, 0.05);
+  self func_82E8("single anim", self.var_B004["fwd_anim"], 0.005, 0.05);
+  self func_82AC(self.var_B004["right_anim"], 0.005, 0.05);
+  self func_82AC(self.var_B004["left_anim"], 0.005, 0.05);
+  self func_82AC(self.var_B004["back_right_anim"], 0.005, 0.05);
+  self func_82AC(self.var_B004["back_left_anim"], 0.005, 0.05);
 }
 
 func_62AB(var_0) {
@@ -1943,13 +1943,13 @@ func_CD4E(var_0) {
     if(isDefined(self.var_B004["end_idle"])) {
       var_1 = self.var_B004["end_idle"];
       func_10C47(var_1);
-      self _meth_82B0(var_1, 0);
-      self _meth_82E3("single anim", var_1, % body, 1, var_0, 1);
+      self func_82B0(var_1, 0);
+      self func_82E3("single anim", var_1, % body, 1, var_0, 1);
     } else {
       var_1 = func_7A4C();
       func_10C47(var_1);
-      self _meth_82B0(var_1, 0);
-      self _meth_82E3("single anim", var_1, % body, 1, var_0, 1);
+      self func_82B0(var_1, 0);
+      self func_82E3("single anim", var_1, % body, 1, var_0, 1);
     }
 
     wait(getanimlength(var_1));
@@ -2057,7 +2057,7 @@ func_13CA(var_0, var_1) {
   var_2 = getstartorigin(var_0.origin, var_0.angles, var_1);
   var_3 = getstartangles(var_0.origin, var_0.angles, var_1);
   if(!isDefined(self.var_9B89)) {
-    self _meth_80F1(var_2, var_3, 100000);
+    self func_80F1(var_2, var_3, 100000);
     wait(0.05);
     return;
   }
@@ -2373,7 +2373,7 @@ func_DC7D() {
       var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       if(!isDefined(self.var_9B89)) {
-        self _meth_80F1(var_0A, var_0B);
+        self func_80F1(var_0A, var_0B);
       } else {
         self.origin = var_0A;
         self.angles = var_0B;
@@ -2397,7 +2397,7 @@ func_DC7D() {
       var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
       var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
       if(!isDefined(self.var_9B89)) {
-        self _meth_80F1(var_0A, var_0B);
+        self func_80F1(var_0A, var_0B);
       } else {
         self.origin = var_0A;
         self.angles = var_0B;
@@ -2409,7 +2409,7 @@ func_DC7D() {
     self.var_9C83 = undefined;
     func_10C47(var_4);
     self give_left_powers("single anim", var_4, 1, 0.2, 1);
-    self _meth_82B0(var_4, randomfloat(1));
+    self func_82B0(var_4, randomfloat(1));
     for(;;) {
       if(isDefined(self.var_383A)) {
         break;
@@ -2477,7 +2477,7 @@ func_DC7E() {
       var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       if(!isDefined(self.var_9B89)) {
-        self _meth_80F1(var_0A, var_0B);
+        self func_80F1(var_0A, var_0B);
       } else {
         self.origin = var_0A;
         self.angles = var_0B;
@@ -2501,7 +2501,7 @@ func_DC7E() {
       var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
       var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
       if(!isDefined(self.var_9B89)) {
-        self _meth_80F1(var_0A, var_0B);
+        self func_80F1(var_0A, var_0B);
       } else {
         self.origin = var_0A;
         self.angles = var_0B;
@@ -2513,7 +2513,7 @@ func_DC7E() {
     self.var_9C83 = undefined;
     func_10C47(var_3);
     self give_left_powers("single anim", var_3, 1, 0.2, 1);
-    self _meth_82B0(var_3, randomfloat(1));
+    self func_82B0(var_3, randomfloat(1));
     for(;;) {
       if(isDefined(self.var_383A)) {
         break;
@@ -2595,7 +2595,7 @@ func_DC7F(var_0, var_1, var_2) {
         var_10 = getstartorigin(var_6.origin, var_6.angles, var_0F);
         var_11 = getstartangles(var_6.origin, var_6.angles, var_0F);
         if(isai(var_6)) {
-          var_6 _meth_80F1(var_10, var_11);
+          var_6 func_80F1(var_10, var_11);
         } else {
           var_6.origin = var_10;
           var_6.angles = var_11;
@@ -2624,7 +2624,7 @@ func_DC7F(var_0, var_1, var_2) {
         var_14 thread func_10C47(var_14.var_10DB2);
         var_14 setanimknob(var_0F, 0, 0.2);
         var_14 give_left_powers("single anim", var_14.var_10DB2, 1, 0.2, 1);
-        var_14 _meth_82B0(var_14.var_10DB2, randomfloat(1));
+        var_14 func_82B0(var_14.var_10DB2, randomfloat(1));
         var_14.var_383A = 1;
         var_14.var_1C4D = 1;
         var_14.var_906F = undefined;
@@ -2664,7 +2664,7 @@ func_F5CD(var_0, var_1, var_2) {
   var_3 = self getscoreinfocategory(var_0);
   var_4 = getanimlength(var_0);
   var_5 = var_1 - var_3 * var_4 / 0.05;
-  self _meth_82AC(var_0, var_2, 0.25, var_5);
+  self func_82AC(var_0, var_2, 0.25, var_5);
 }
 
 func_CCCA(var_0, var_1) {
@@ -2841,11 +2841,11 @@ func_43DB() {
   }
 
   func_10C47(var_8);
-  self _meth_82AC( % cover, 0, 0.25, 1);
-  self _meth_82E3("vo", var_8, % body, 1, 0.25, 1);
+  self func_82AC( % cover, 0, 0.25, 1);
+  self func_82E3("vo", var_8, % body, 1, 0.25, 1);
   wait(getanimlength(var_8));
   self clearanim( % scripted, 0.25);
-  self _meth_82AC( % cover, 1, 0.25, 1);
+  self func_82AC( % cover, 1, 0.25, 1);
   self.var_9C84 = 0;
   wait(0.25);
   self notify("interaction_done");

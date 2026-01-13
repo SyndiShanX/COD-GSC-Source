@@ -266,7 +266,7 @@ func_3E2C(var_0, var_1, var_2, var_3, var_4) {
   var_0A = var_7 * var_8[1];
   var_0B = var_0 + var_9 - var_0A;
   self.var_471C = var_0B;
-  if(!var_3 && !self _meth_8068(var_0B)) {
+  if(!var_3 && !self func_8068(var_0B)) {
     return 0;
   }
 
@@ -301,7 +301,7 @@ func_5926(var_0, var_1) {
   }
 
   self orientmode("face angle", self.angles[1]);
-  self _meth_82E4("coverexit", var_2, % body, 1, var_5, self.var_BD22);
+  self func_82E4("coverexit", var_2, % body, 1, var_5, self.var_BD22);
   scripts\anim\shared::donotetracks("coverexit");
   self.a.pose = "stand";
   self.a.movement = "run";

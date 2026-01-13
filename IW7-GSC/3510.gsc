@@ -187,7 +187,7 @@ playplanefx() {
   playFXOnTag(level.fx_airstrike_wingtip_light_green, self, "tag_left_wingtip");
 }
 
-_meth_806A() {
+func_806A() {
   var_0 = getent("airstrikeheight", "targetname");
 
   if(isDefined(var_0)) {
@@ -203,9 +203,9 @@ _meth_806A() {
   }
 }
 
-_meth_8069(var_0) {
+func_8069(var_0) {
   var_1 = spawnStruct();
-  var_1.height = _meth_806A();
+  var_1.height = func_806A();
   var_2 = getent("airstrikeheight", "targetname");
 
   if(isDefined(var_2) && isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "fixedposition") {

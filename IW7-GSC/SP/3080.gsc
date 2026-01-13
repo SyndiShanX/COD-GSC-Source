@@ -373,7 +373,7 @@ func_FE8C(var_0) {
     var_3 = self.isnodeoccupied;
     if(self.var_27F7) {
       if(func_8C3C("left") && func_9F5B("left") && func_8C3C("right") && func_9F5B("right")) {
-        var_4 = self _meth_848B();
+        var_4 = self func_848B();
         if(isDefined(var_4) && var_4.size > 0) {
           var_5 = var_4[0];
           var_6 = self.isnodeoccupied.origin - self.origin;
@@ -1180,7 +1180,7 @@ func_FE8F(var_0) {
 
 func_F811(var_0) {
   var_1 = getrandomnavpoint(self.origin, 2048, self);
-  self _meth_8481(var_1);
+  self func_8481(var_1);
   self give_mp_super_weapon((0, 0, 0));
   return level.success;
 }
@@ -1190,7 +1190,7 @@ func_1383A(var_0) {
     return level.running;
   }
 
-  self _meth_8484();
+  self func_8484();
   return level.success;
 }
 
@@ -1386,7 +1386,7 @@ enableweaponswitch(var_0) {
 
 func_F814(var_0) {
   var_1 = func_7FCB();
-  if(!self _meth_84BA() && !isDefined(var_1) || !self _meth_84BA(var_1.origin)) {
+  if(!self func_84BA() && !isDefined(var_1) || !self func_84BA(var_1.origin)) {
     return level.failure;
   }
 
@@ -1398,7 +1398,7 @@ func_F814(var_0) {
 
     if(isDefined(var_2)) {
       self.var_6D = 128;
-      self _meth_8481(var_2);
+      self func_8481(var_2);
       self._blackboard.var_C974 = var_1;
       return level.success;
     }
@@ -1412,14 +1412,14 @@ func_12845(var_0) {
     return level.failure;
   }
 
-  var_1 = self _meth_84B6();
+  var_1 = self func_84B6();
   if(!isDefined(var_1) || distancesquared(var_1, self.origin) < 1296) {
     self clearpath();
-    self _meth_8484();
+    self func_8484();
     return level.failure;
   }
 
-  self _meth_8481(var_1);
+  self func_8481(var_1);
   return level.success;
 }
 
@@ -1494,7 +1494,7 @@ func_41B3(var_0) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     var_1 = 84;
     var_2 = self getposonpath(var_1);
-    self _meth_8481(var_2);
+    self func_8481(var_2);
   }
 
   return level.success;
@@ -1628,7 +1628,7 @@ func_E602(var_0) {
     if(isDefined(self.bt.var_E5FB)) {
       self.bt.var_E5FB = undefined;
       self.var_6D = 32;
-      self _meth_8481(self.origin);
+      self func_8481(self.origin);
     }
 
     if(isDefined(self.var_30EA)) {
@@ -1651,7 +1651,7 @@ func_E602(var_0) {
       self.var_6D = max(var_2.fgetarg - 180, 32);
     }
 
-    self _meth_8481(self.bt.var_E5FB);
+    self func_8481(self.bt.var_E5FB);
   }
 
   return level.running;
@@ -1679,7 +1679,7 @@ func_F1F8() {
   self waittill("beep_done");
   func_F1FB();
   self.asm.var_F1FD = 1;
-  self _meth_81D0(self.origin, level.player);
+  self func_81D0(self.origin, level.player);
 }
 
 func_F1FA() {
@@ -1689,7 +1689,7 @@ func_F1FA() {
   for(;;) {
     if(distance2dsquared(var_0, level.player.origin) > squared(self.var_6D)) {
       var_0 = getclosestpointonnavmesh(level.player.origin, self);
-      self _meth_8481(var_0);
+      self func_8481(var_0);
     }
 
     wait(1);
@@ -1786,7 +1786,7 @@ func_128AE(var_0, var_1) {
 
   var_0C = self gettagangles(var_0B);
   var_0D = self gettagorigin(var_0B) + rotatevector((0, -10, 0), var_0C);
-  var_0E = self _meth_81ED(var_0D, var_0A);
+  var_0E = self func_81ED(var_0D, var_0A);
   if(isDefined(var_0E)) {
     self playSound("c12_grenade_launch");
     var_0E makeunusable();

@@ -40,7 +40,7 @@ func_11AF8(var_0, var_1, var_2, var_3, var_4) {
 
   for(;;) {
     func_93E2();
-    var_11 = scripts\anim\shared::_meth_811C();
+    var_11 = scripts\anim\shared::func_811C();
     var_12 = self.var_FECF;
     if(isDefined(self.var_FE9E)) {
       var_12 = self.var_FE9E getshootatpos();
@@ -233,12 +233,12 @@ func_11AFE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_9 = 1;
   }
 
-  self _meth_82AC(var_0, var_7, 0.1, 1, 1);
-  self _meth_82AC(var_1, var_8, 0.1, 1, 1);
-  self _meth_82AC(var_2, var_0A, 0.1, 1, 1);
-  self _meth_82AC(var_3, var_0B, 0.1, 1, 1);
+  self func_82AC(var_0, var_7, 0.1, 1, 1);
+  self func_82AC(var_1, var_8, 0.1, 1, 1);
+  self func_82AC(var_2, var_0A, 0.1, 1, 1);
+  self func_82AC(var_3, var_0B, 0.1, 1, 1);
   if(isDefined(var_4)) {
-    self _meth_82AC(var_4, var_9, 0.1, 1, 1);
+    self func_82AC(var_4, var_9, 0.1, 1, 1);
   }
 }
 

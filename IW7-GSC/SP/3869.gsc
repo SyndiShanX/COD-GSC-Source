@@ -63,7 +63,7 @@ func_10E20() {
   }
 
   self.ignoreme = 0;
-  self _meth_8250(0);
+  self func_8250(0);
   scripts\sp\utility::func_5514();
   if(isDefined(self.var_10E6D.var_74D5["spotted"])) {
     lib_0F18::func_10E8B("spotted");

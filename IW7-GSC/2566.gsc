@@ -287,7 +287,7 @@ resetmisstime_code() {
   }
 }
 
-_meth_811C() {
+func_811C() {
   if(isDefined(self.var_71A9)) {
     return self[[self.var_71A9]]();
   }
@@ -295,7 +295,7 @@ _meth_811C() {
   return 0;
 }
 
-_meth_81E2(var_0) {
+func_81E2(var_0) {
   if(isDefined(self.var_71AA)) {
     return self[[self.var_71AA]](var_0);
   }
@@ -318,10 +318,10 @@ func_FE88(var_0) {
   }
 
   if(isDefined(var_2)) {
-    var_4 = _meth_81E2(var_2);
+    var_4 = func_81E2(var_2);
     var_5 = anglesToForward(var_4);
     var_5 = rotatevector(var_5, self.angles);
-    var_6 = _meth_811C();
+    var_6 = func_811C();
     var_1.pos = var_6 + var_5 * 512;
     var_1.ent = undefined;
   } else if(isDefined(self.goodshootpos)) {
@@ -843,7 +843,7 @@ func_2545(var_0) {
 }
 
 func_93B6(var_0) {
-  if(self _meth_8531()) {
+  if(self func_8531()) {
     return level.success;
   }
 
@@ -855,9 +855,9 @@ func_2753(var_0) {
     return level.failure;
   }
 
-  var_1 = self _meth_8530(128);
+  var_1 = self func_8530(128);
   if(isDefined(var_1)) {
-    self _meth_8481(var_1);
+    self func_8481(var_1);
     self._blackboard.var_2754 = gettime();
     return level.success;
   }
@@ -879,7 +879,7 @@ func_1384E(var_0) {
 }
 
 func_275A(var_0) {
-  self _meth_8484();
+  self func_8484();
   self._blackboard.var_2754 = undefined;
 }
 
@@ -944,10 +944,10 @@ func_E84D(var_0) {
     var_3 = self.origin + var_2 * 200;
     var_4 = getclosestpointonnavmesh(var_3);
     self.var_BC = "no_cover";
-    self _meth_8481(var_4);
+    self func_8481(var_4);
   } else {
     self.var_BC = "no_cover";
-    self _meth_8481(self.origin);
+    self func_8481(self.origin);
   }
 
   if(!isDefined(self.loadstartpointtransients) || !isalive(self.loadstartpointtransients) || self.loadstartpointtransients != self.var_F126) {
@@ -1005,7 +1005,7 @@ func_E84D(var_0) {
 }
 
 func_E84F(var_0) {
-  self _meth_8484();
+  self func_8484();
   self.loadstartpointtransients = self.var_C3BB;
   self.var_C3BB = undefined;
   self.var_BC = self.var_C3B6;
@@ -1022,7 +1022,7 @@ func_12A82(var_0) {
   return level.failure;
 }
 
-_meth_8082() {
+func_8082() {
   var_0 = self getEye();
   foreach(var_2 in level.players) {
     if(!self getpersstat(var_2)) {
@@ -1084,7 +1084,7 @@ func_12F1D(var_0) {
     return level.success;
   }
 
-  var_2 = _meth_8082();
+  var_2 = func_8082();
   if(!isDefined(var_2)) {
     return level.success;
   }
@@ -1094,7 +1094,7 @@ func_12F1D(var_0) {
   }
 
   if(scripts\asm\asm_bb::func_2985() && isDefined(self._blackboard.shootparams.pos)) {
-    var_3 = self _meth_853C();
+    var_3 = self func_853C();
     var_4 = vectornormalize(self._blackboard.shootparams.pos - self getEye());
     var_5 = vectordot(var_3, var_4);
     if(var_5 < 0.906) {

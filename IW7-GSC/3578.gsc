@@ -169,9 +169,9 @@ func_CC56(var_0, var_1) {
     }
 
     if(var_1.var_115F6) {
-      var_2 = _meth_808B(32, var_1);
+      var_2 = func_808B(32, var_1);
     } else {
-      var_2 = _meth_808B(64, var_1);
+      var_2 = func_808B(64, var_1);
     }
 
     foreach(var_4 in var_2) {
@@ -194,7 +194,7 @@ func_CC56(var_0, var_1) {
   }
 }
 
-_meth_808B(var_0, var_1) {
+func_808B(var_0, var_1) {
   var_2 = [];
   if(!isDefined(var_0)) {
     var_0 = 0;

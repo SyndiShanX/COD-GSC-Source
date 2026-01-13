@@ -4,7 +4,7 @@
 *****************************************************/
 
 main() {
-  var_0 = self _meth_8164();
+  var_0 = self func_8164();
   var_1 = func_7927();
   self.var_5270 = "stand";
   scripts\anim\utility::func_12E5F();

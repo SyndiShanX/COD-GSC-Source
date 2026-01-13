@@ -414,8 +414,8 @@ func_10E08() {
   }
 
   var_0 getwholescenedurationmax(self, "tag_player", 0, 180, 180, 50, 25, 0);
-  var_0 _meth_8236(0);
-  var_0 _meth_8235(1);
+  var_0 func_8236(0);
+  var_0 func_8235(1);
   var_0 remotecontrolturret(self);
   var_0 scripts\mp\utility\game::clearlowermessage("enter_remote_turret");
   var_0 scripts\mp\utility\game::clearlowermessage("pickup_remote_turret");
@@ -550,7 +550,7 @@ func_13A1D() {
 
     var_2 = 0;
 
-    while(var_0 usebuttonpressed() && !var_0 fragbuttonpressed() && !var_0 scripts\mp\utility\game::_meth_85C7() && !var_0 secondaryoffhandbuttonpressed() && !var_0 isusingturret() && var_0 isonground() && !var_0 istouching(self.ownertrigger) && (!isDefined(var_0.empgrenaded) || !var_0.empgrenaded)) {
+    while(var_0 usebuttonpressed() && !var_0 fragbuttonpressed() && !var_0 scripts\mp\utility\game::func_85C7() && !var_0 secondaryoffhandbuttonpressed() && !var_0 isusingturret() && var_0 isonground() && !var_0 istouching(self.ownertrigger) && (!isDefined(var_0.empgrenaded) || !var_0.empgrenaded)) {
       if(isDefined(var_0.iscarrying) && var_0.iscarrying) {
         break;
       }

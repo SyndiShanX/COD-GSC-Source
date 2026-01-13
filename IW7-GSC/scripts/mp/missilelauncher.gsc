@@ -230,7 +230,7 @@ stinger_finalizelock(var_0) {
     var_1 = (0, 0, 0);
   }
 
-  self _meth_8402(self.var_10FAA, var_1);
+  self func_8402(self.var_10FAA, var_1);
 }
 
 func_17D0(var_0) {
@@ -329,7 +329,7 @@ stingtargstruct_getorigins() {
 stingtargstruct_getinreticle() {
   foreach(var_1 in self.origins) {
     for(var_2 = 0; var_2 < self.origins.size; var_2++) {
-      var_3 = self.player _meth_840B(self.origins[var_2], 65);
+      var_3 = self.player func_840B(self.origins[var_2], 65);
       if(isDefined(var_3)) {
         var_4 = length2dsquared(var_3);
         if(var_4 <= 7225) {

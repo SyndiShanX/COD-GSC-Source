@@ -49,7 +49,7 @@ func_3E9F(var_0, var_1, var_2) {
   return var_3;
 }
 
-_meth_8162(var_0, var_1) {
+func_8162(var_0, var_1) {
   var_2 = [];
   var_3 = "";
   if(isDefined(var_1)) {
@@ -121,7 +121,7 @@ func_53CA(var_0, var_1, var_2) {
     if(var_2) {
       var_6 = self.origin + self.setocclusionpreset * self.setomnvar;
     } else {
-      var_6 = self _meth_845C(128);
+      var_6 = self func_845C(128);
     }
 
     var_7 = vectortoangles(var_6 - self.origin);
@@ -149,13 +149,13 @@ func_53CA(var_0, var_1, var_2) {
   }
 
   if(isDefined(self.asm.var_4C86.var_697F)) {
-    var_0C = _meth_8162(self.asm.var_4C86.var_697F, var_1);
+    var_0C = func_8162(self.asm.var_4C86.var_697F, var_1);
   } else {
-    var_0C = _meth_8162(var_1, var_2);
+    var_0C = func_8162(var_1, var_2);
   }
 
   var_0D = getangleindices(var_9);
-  var_0E = self _meth_84AC();
+  var_0E = self func_84AC();
   var_0F = undefined;
   var_10 = 0;
   for(var_10 = 0; var_10 < var_0D.size; var_10++) {
@@ -204,7 +204,7 @@ func_53CA(var_0, var_1, var_2) {
 func_D53A(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
   if(self.var_36F) {
-    var_5 = self _meth_845C(128);
+    var_5 = self func_845C(128);
     var_6 = vectortoangles(var_5 - self.origin);
   } else {
     var_6 = vectortoangles(self.setocclusionpreset);
@@ -225,9 +225,9 @@ func_D53A(var_0, var_1, var_2, var_3, var_4) {
   thread lib_0F3D::func_444B(var_1);
   lib_0A1E::func_2369(var_0, var_1, var_2);
   if(isDefined(self.var_22EE)) {
-    self _meth_82E4(var_1, var_2, lib_0A1E::asm_getbodyknob(), 1, var_3, self.moveplaybackrate * self.var_22EE);
+    self func_82E4(var_1, var_2, lib_0A1E::asm_getbodyknob(), 1, var_3, self.moveplaybackrate * self.var_22EE);
   } else {
-    self _meth_82E4(var_1, var_2, lib_0A1E::asm_getbodyknob(), 1, var_3, self.moveplaybackrate);
+    self func_82E4(var_1, var_2, lib_0A1E::asm_getbodyknob(), 1, var_3, self.moveplaybackrate);
   }
 
   lib_0A1E::func_231F(var_0, var_1, ::func_899E, var_2, undefined, 1);
@@ -242,7 +242,7 @@ func_D53A(var_0, var_1, var_2, var_3, var_4) {
 func_899E(var_0, var_1) {
   if(var_0 == "exit_align" || var_0 == "corner") {
     var_2 = var_1;
-    var_3 = self _meth_845C(36);
+    var_3 = self func_845C(36);
     var_4 = vectortoangles(var_3 - self.origin);
     var_5 = self getscoreinfocategory(var_2);
     var_6 = getangledelta3d(var_2, var_5, 1);
@@ -379,7 +379,7 @@ func_371C(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8 = -1;
   }
 
-  var_9 = self _meth_8546(self.asm.archetype, var_1, scripts\asm\asm::asm_getdemeanor(), var_2, var_3, var_6, var_8, var_7, var_5);
+  var_9 = self func_8546(self.asm.archetype, var_1, scripts\asm\asm::asm_getdemeanor(), var_2, var_3, var_6, var_8, var_7, var_5);
   var_0A = var_9[0];
   var_0B = var_9[1];
   if(isDefined(self.asm.var_13CAF) && self.asm.var_13CAF && isDefined(var_0B)) {
@@ -445,7 +445,7 @@ func_D514(var_0, var_1, var_2, var_3) {
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   thread lib_0F3D::func_444B(var_1);
-  self _meth_82EA(var_1, var_4, 1, var_2, self.moveplaybackrate);
+  self func_82EA(var_1, var_4, 1, var_2, self.moveplaybackrate);
   var_5 = lib_0A1E::func_231F(var_0, var_1, ::func_8989, undefined, undefined, 0);
   self orientmode("face motion");
   self animmode("normal", 0);
@@ -596,15 +596,15 @@ func_E877(var_0, var_1, var_2, var_3) {
       var_14 = var_13 - var_0B / var_0B;
       var_14 = clamp(var_14, 0, 1);
       self clearanim(var_4, 0.2);
-      self _meth_82AC(var_5, 1 - var_14 * var_0F, 0.2);
-      self _meth_82AC(var_6, 1 - var_14 * var_10, 0.2);
-      self _meth_82AC(var_7, var_14 * var_0F, 0.2);
-      self _meth_82AC(var_8, var_14 * var_10, 0.2);
+      self func_82AC(var_5, 1 - var_14 * var_0F, 0.2);
+      self func_82AC(var_6, 1 - var_14 * var_10, 0.2);
+      self func_82AC(var_7, var_14 * var_0F, 0.2);
+      self func_82AC(var_8, var_14 * var_10, 0.2);
     } else {
       var_14 = clamp(var_13 / var_0B, 0, 1);
-      self _meth_82AC(var_4, 1 - var_14, 0.2);
-      self _meth_82AC(var_5, var_14 * var_0F, 0.2);
-      self _meth_82AC(var_6, var_14 * var_10, 0.2);
+      self func_82AC(var_4, 1 - var_14, 0.2);
+      self func_82AC(var_5, var_14 * var_0F, 0.2);
+      self func_82AC(var_6, var_14 * var_10, 0.2);
       if(var_0B < 1) {
         self clearanim(var_7, 0.2);
         self clearanim(var_8, 0.2);
@@ -614,7 +614,7 @@ func_E877(var_0, var_1, var_2, var_3) {
     self setanimknob(var_9, 1, 0.3, 0.8);
     self.a.var_1C8D = gettime() + 500;
     if(isDefined(var_0D) && isplayer(var_0D)) {
-      self _meth_83CE();
+      self func_83CE();
     }
 
     wait(0.2);
@@ -630,7 +630,7 @@ func_E874(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   for(;;) {
     if(isplayer(self.isnodeoccupied)) {
-      self _meth_83CE();
+      self func_83CE();
     }
 
     var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
@@ -725,13 +725,13 @@ func_BD2C(var_0, var_1, var_2, var_3) {
   thread lib_0F3D::func_136E7(var_0, var_1, var_3);
   var_4 = scripts\asm\asm::asm_getmoveplaybackrate();
   scripts\asm\asm::asm_updatefrantic();
-  self _meth_84F1(var_4);
+  self func_84F1(var_4);
   scripts\asm\asm::asm_updatefrantic();
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_6 = var_5.var_47;
   var_7 = var_5.var_7332;
   self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
-  self _meth_82E1(var_1, var_7, 1, 0.2, 1);
+  self func_82E1(var_1, var_7, 1, 0.2, 1);
   thread func_13874(var_0, var_1);
   var_8 = 0;
   var_9 = 20;
@@ -917,7 +917,7 @@ func_BCFD(var_0, var_1, var_2, var_3) {
     var_7 = giveachievement(self.var_110D5);
     for(var_8 = 0; var_8 < var_7.size; var_8++) {
       if(isDefined(var_5[var_8])) {
-        self _meth_82AC(var_5[var_8], var_7[var_8], 0.1, var_4, 1);
+        self func_82AC(var_5[var_8], var_7[var_8], 0.1, var_4, 1);
       }
     }
 
@@ -940,10 +940,10 @@ func_98A2(var_0, var_1, var_2, var_3) {
   var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "L");
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "R");
   var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "B");
-  self _meth_82A9(var_5, 1, 0.1, var_4, 1);
-  self _meth_82A9(var_8, 1, 0.1, var_4, 1);
-  self _meth_82A9(var_7, 1, 0.1, var_4, 1);
-  self _meth_82A9(var_6, 1, 0.1, var_4, 1);
+  self func_82A9(var_5, 1, 0.1, var_4, 1);
+  self func_82A9(var_8, 1, 0.1, var_4, 1);
+  self func_82A9(var_7, 1, 0.1, var_4, 1);
+  self func_82A9(var_6, 1, 0.1, var_4, 1);
 }
 
 func_BCFC(var_0, var_1, var_2, var_3) {
@@ -953,7 +953,7 @@ func_BCFC(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
   }
 
-  self _meth_84F1(var_4);
+  self func_84F1(var_4);
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "f_knob");
   var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "l_knob");
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "r_knob");
@@ -1036,7 +1036,7 @@ func_D506(var_0, var_1, var_2, var_3) {
   thread lib_0F3D::func_136B4(var_0, var_1, var_3);
   thread lib_0F3D::func_136E7(var_0, var_1, var_3);
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E7(var_1, var_4, 1, var_2, self.moveplaybackrate);
+  self func_82E7(var_1, var_4, 1, var_2, self.moveplaybackrate);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1);
 }
@@ -1078,7 +1078,7 @@ func_9EC9(var_0, var_1, var_2, var_3) {
   return self.getcsplinepointtargetname == var_4;
 }
 
-_meth_8157() {
+func_8157() {
   var_0 = scripts\asm\asm::asm_getdemeanor();
   switch (var_0) {
     case "casual":
@@ -1107,8 +1107,8 @@ func_10006(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  var_5 = _meth_8157();
-  var_6 = self _meth_84D7(var_5);
+  var_5 = func_8157();
+  var_6 = self func_84D7(var_5);
   if(var_6 == var_4) {
     return 1;
   }
@@ -1133,8 +1133,8 @@ func_10005(var_0, var_1, var_2, var_3) {
     return func_10B4F(var_2, "left", var_5);
   }
 
-  var_6 = _meth_8157();
-  var_7 = self _meth_84D7(var_6);
+  var_6 = func_8157();
+  var_7 = self func_84D7(var_6);
   if(var_7 == var_5) {
     var_5 = undefined;
     if(isarray(var_3)) {
@@ -1147,7 +1147,7 @@ func_10005(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-_meth_8158() {
+func_8158() {
   var_0 = scripts\asm\asm::asm_getdemeanor();
   switch (var_0) {
     case "casual":
@@ -1188,7 +1188,7 @@ getpointinbounds() {
 }
 
 func_7EEA() {
-  var_0 = self _meth_8552();
+  var_0 = self func_8552();
   if(abs(var_0) > 0.99) {
     return 0;
   }
@@ -1211,7 +1211,7 @@ func_1000E(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = var_3;
-  var_5 = _meth_8158();
+  var_5 = func_8158();
   if(isDefined(var_3) && var_3 == "up") {
     var_5 = getpointinbounds();
   }
@@ -1220,7 +1220,7 @@ func_1000E(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  var_6 = self _meth_84D7(var_5);
+  var_6 = self func_84D7(var_5);
   return var_6 != self.getcsplinepointtargetname;
 }
 

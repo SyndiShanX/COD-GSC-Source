@@ -136,7 +136,7 @@ func_D780() {
   }
 }
 
-_meth_8091(var_0, var_1) {
+func_8091(var_0, var_1) {
   if(!isDefined(level.var_D77F[var_0])) {
     return undefined;
   }
@@ -149,7 +149,7 @@ _meth_8091(var_0, var_1) {
   return var_2[var_1];
 }
 
-_meth_8090(var_0) {
+func_8090(var_0) {
   if(!isDefined(self.powers[var_0])) {
     return undefined;
   }
@@ -157,7 +157,7 @@ _meth_8090(var_0) {
   var_1 = self.powers[var_0];
   var_2 = getdvar("scr_debug_power_passive");
   if(isDefined(var_2)) {
-    var_3 = _meth_8091(var_0, var_2);
+    var_3 = func_8091(var_0, var_2);
     if(isDefined(var_3)) {
       if(isDefined(var_3.var_23B1)) {
         return var_3.var_23B1;
@@ -166,7 +166,7 @@ _meth_8090(var_0) {
   }
 
   foreach(var_5 in var_1.passives) {
-    var_3 = _meth_8091(var_0, var_5);
+    var_3 = func_8091(var_0, var_5);
     if(!isDefined(var_3)) {
       continue;
     }
@@ -338,7 +338,7 @@ givepower(var_0, var_1, var_2, var_3, var_4) {
     var_6.weaponuse = var_7.weaponuse;
   }
 
-  var_0F = _meth_8090(var_0);
+  var_0F = func_8090(var_0);
   var_10 = scripts\engine\utility::ter_op(isDefined(var_0F), var_0F, var_6.weaponuse);
   var_6.weaponuse = var_10;
   scripts\mp\utility::_giveweapon(var_10, 0);
@@ -369,7 +369,7 @@ removepower(var_0) {
   }
 
   if(self.powers[var_0].slot == "primary") {
-    self _meth_844D();
+    self func_844D();
     self.powerprimarygrenade = undefined;
   } else if(self.powers[var_0].slot == "secondary") {
     self gonevo();
@@ -892,7 +892,7 @@ func_13055() {
 }
 
 func_F87F(var_0) {
-  scripts\mp\equipment\telereap::_meth_83B2();
+  scripts\mp\equipment\telereap::func_83B2();
 }
 
 func_12D45() {

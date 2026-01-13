@@ -67,7 +67,7 @@ func_11274() {
   }
 
   self setCanDamage(0);
-  self _meth_854A();
+  self func_854A();
   self setscriptablepartstate("effects", "activeDestroyStart", 0);
   wait(3);
   self setscriptablepartstate("effects", "activeDestroyEnd", 0);
@@ -233,8 +233,8 @@ func_11271(var_0, var_1, var_2) {
   var_3 setotherent(self);
   var_3 setModel("super_trophy_mp_wm");
   var_3 give_player_tickets(1);
-  var_3 _meth_8549();
-  var_3 _meth_8594();
+  var_3 func_8549();
+  var_3 func_8594();
   var_3.triggerportableradarping = self;
   var_3.team = var_3.triggerportableradarping.team;
   var_3.super = "super_supertrophy";

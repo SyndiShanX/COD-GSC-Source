@@ -112,7 +112,7 @@ givegesture(var_0) {
   }
 
   scripts\mp\utility\game::_giveweapon(var_0);
-  self _meth_8541(var_0);
+  self func_8541(var_0);
   self.gestureweapon = var_0;
   thread func_77A4();
 }

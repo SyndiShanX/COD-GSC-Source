@@ -180,7 +180,7 @@ wristrocket_watcheffectsraceunset(var_0) {
 wristrocket_watcheffectsraceheldoffhandbreak(var_0) {
   self endon("wristRocket_watchEffectsRaceEnd");
   scripts\engine\utility::waitframe();
-  while(self _meth_854D() == "wristrocket_mp") {
+  while(self func_854D() == "wristrocket_mp") {
     scripts\engine\utility::waitframe();
   }
 

@@ -95,7 +95,7 @@ func_A279(var_0) {
   }
 
   thread func_B805();
-  self _meth_8557("OFFSCREEN_HAZARD_INDICATOR");
+  self func_8557("OFFSCREEN_HAZARD_INDICATOR");
   thread func_B806();
 }
 
@@ -107,7 +107,7 @@ func_B806() {
     var_0 = length(self.origin - level.var_D127.origin);
     var_1 = scripts\sp\math::func_C097(200, 10000, var_0);
     var_2 = scripts\sp\math::func_6A8E(0.6, 1.3, var_1);
-    self _meth_8277(var_2, 0.05);
+    self func_8277(var_2, 0.05);
     wait 0.05;
   }
 }
@@ -142,11 +142,11 @@ func_686D(var_0, var_1) {
 func_B804() {
   self endon("death");
   self playSound("enemy_lockon_missile_launch");
-  self _meth_8277(0.5, 0.05);
+  self func_8277(0.5, 0.05);
   self ghostattack(1.3, 0.05);
   wait 0.05;
   var_0 = 2;
-  self _meth_8277(1.2, var_0);
+  self func_8277(1.2, var_0);
   self ghostattack(2, var_0);
 }
 
@@ -159,8 +159,8 @@ func_B805() {
   self.health = 99999999;
   self.script_team = "axis";
   self setCanDamage(1);
-  self _meth_84BE("missile");
-  self _meth_8339(0);
+  self func_84BE("missile");
+  self func_8339(0);
 
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
@@ -1080,23 +1080,23 @@ func_F42B(var_0) {
   }
 
   if(var_0 == "none") {
-    self _meth_84A0(0);
+    self func_84A0(0);
   } else if(var_0 == "ally_jackal") {
-    self _meth_84A0(1);
+    self func_84A0(1);
   } else if(var_0 == "enemy_jackal") {
-    self _meth_84A0(2);
+    self func_84A0(2);
   } else if(var_0 == "enemy_dogfight") {
-    self _meth_84A0(3);
+    self func_84A0(3);
   } else if(var_0 == "ally_capitalship") {
-    self _meth_84A0(4);
+    self func_84A0(4);
   } else if(var_0 == "enemy_capitalship") {
-    self _meth_84A0(5);
+    self func_84A0(5);
   } else if(var_0 == "enemy_jackal_ace") {
-    self _meth_84A0(6);
+    self func_84A0(6);
   } else if(var_0 == "enemy_dogfight_ace") {
-    self _meth_84A0(7);
+    self func_84A0(7);
   } else if(var_0 == "ally_jackal_unloc") {
-    self _meth_84A0(8);
+    self func_84A0(8);
   }
 }
 
@@ -1128,55 +1128,55 @@ func_F42C(var_0) {
 
   switch (var_0) {
     case "jackal":
-      self _meth_8557("FLYING_TARGET");
+      self func_8557("FLYING_TARGET");
       break;
     case "jackal_ace":
-      self _meth_8557("ACE_TARGET");
+      self func_8557("ACE_TARGET");
       break;
     case "last_engaged":
-      self _meth_8557("ENEMY_OBJECTIVE");
+      self func_8557("ENEMY_OBJECTIVE");
       break;
     case "last_engaged_ace":
-      self _meth_8557("PRIORITY_FLYING_TARGET");
+      self func_8557("PRIORITY_FLYING_TARGET");
       break;
     case "ally_jackal":
-      self _meth_8557("FLYING_ALLY_TARGET");
+      self func_8557("FLYING_ALLY_TARGET");
       break;
     case "axis_objective":
-      self _meth_8557("ENEMY_OBJECTIVE");
+      self func_8557("ENEMY_OBJECTIVE");
       break;
     case "ally_objective":
-      self _meth_8557("ALLY_OBJECTIVE");
+      self func_8557("ALLY_OBJECTIVE");
       break;
     case "ace_objective":
-      self _meth_8557("PRIORITY_FLYING_TARGET_ACE");
+      self func_8557("PRIORITY_FLYING_TARGET_ACE");
       break;
     case "dogfight_tracker":
-      self _meth_8557("PRIORITY_FLYING_TARGET");
+      self func_8557("PRIORITY_FLYING_TARGET");
       break;
     case "large_target":
-      self _meth_8557("LARGE_TARGET");
+      self func_8557("LARGE_TARGET");
       break;
     case "medium_target":
-      self _meth_8557("MEDIUM_TARGET");
+      self func_8557("MEDIUM_TARGET");
       break;
     case "small_target":
-      self _meth_8557("SMALL_TARGET");
+      self func_8557("SMALL_TARGET");
       break;
     case "incoming_missile":
-      self _meth_8557("OFFSCREEN_HAZARD_INDICATOR");
+      self func_8557("OFFSCREEN_HAZARD_INDICATOR");
       break;
     case "immediate_threat":
-      self _meth_8557("OFFSCREEN_ENEMY_INDICATOR");
+      self func_8557("OFFSCREEN_ENEMY_INDICATOR");
       break;
     case "hoverheat":
-      self _meth_8557("OFFSCREEN_ENEMY_INDICATOR");
+      self func_8557("OFFSCREEN_ENEMY_INDICATOR");
       break;
     case "droppod_marker":
-      self _meth_8557("LARGE_WEAKSPOT");
+      self func_8557("LARGE_WEAKSPOT");
       break;
     case "none":
-      self _meth_8558();
+      self func_8558();
       break;
     default:
   }

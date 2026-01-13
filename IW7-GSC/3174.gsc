@@ -87,7 +87,7 @@ func_136E3(var_0, var_1) {
     }
 
     var_0C = func_3E95(var_0, var_1);
-    self _meth_82AB(var_0C, 1, 0.01, 1);
+    self func_82AB(var_0C, 1, 0.01, 1);
     thread func_89E1();
     wait(0.35);
   }
@@ -163,7 +163,7 @@ func_FE4E(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4) && var_4) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_7 = lib_0A1E::func_2356("Knobs", "move");
-      self _meth_84F2(var_7);
+      self func_84F2(var_7);
     }
   }
 
@@ -174,7 +174,7 @@ func_FE4E(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_9 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
     }
 
-    self _meth_82E7(var_1, var_9, 1, var_2, var_3);
+    self func_82E7(var_1, var_9, 1, var_2, var_3);
     lib_0A1E::func_2369(var_0, var_1, var_9);
     var_8 = var_9;
     lib_0A1E::func_2320(var_0, var_1, var_9, scripts\asm\asm::func_2341(var_0, var_1));
@@ -246,7 +246,7 @@ func_D4F1(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = level.asm[var_0].states[var_1].var_71A5;
   var_7 = self[[var_6]](var_0, var_1, var_3);
-  self _meth_82E4(var_1, var_7, lib_0A1E::asm_getbodyknob(), 1, var_2, 1);
+  self func_82E4(var_1, var_7, lib_0A1E::asm_getbodyknob(), 1, var_2, 1);
   if(var_4 == 1) {
     self.asm.var_F0BC = 0;
     thread func_136E3(var_0, var_1);

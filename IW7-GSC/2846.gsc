@@ -375,7 +375,7 @@ func_1202(var_0, var_1) {
   if(!scripts\engine\utility::flag(var_0 + "door_peek_handle_down")) {
     var_7 = 0.4;
     level.var_5A23[var_0].var_C9FD = scripts\sp\utility::func_10639("player_rig");
-    var_8 = level.player _meth_84C6("currentViewModel");
+    var_8 = level.player func_84C6("currentViewModel");
 
     if(isDefined(var_8)) {
       level.var_5A23[var_0].var_C9FD setModel(var_8);
@@ -1136,7 +1136,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(scripts\engine\utility::flag("doorpeek_hand_on_door")) {
       var_11 = level.player getplayerangles(1);
       var_12 = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_11);
-      var_13 = level.player _meth_84C6("currentViewModel");
+      var_13 = level.player func_84C6("currentViewModel");
 
       if(isDefined(var_13)) {
         var_12 setModel(var_13);
@@ -1144,7 +1144,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       var_14 = (0, 0, 0);
       var_15 = (var_9[0] - var_10[0], var_9[1] - var_10[1], 0);
-      var_12 _meth_81E2(level.player, "tag_origin", (0, 0, 0) + var_14, var_15, 0);
+      var_12 func_81E2(level.player, "tag_origin", (0, 0, 0) + var_14, var_15, 0);
 
       if(!var_2) {
         var_12 thread scripts\sp\anim::func_1F35(var_12, "doorpeek_" + func_1297(var_6) + "_out");
@@ -1174,7 +1174,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     level.player getrawbaseweaponname(0.6, 0.6);
-    level.player scripts\engine\utility::delaycall(0.5, ::_meth_80A6);
+    level.player scripts\engine\utility::delaycall(0.5, ::func_80A6);
   }
 
   if(!isDefined(var_4) || var_4 == 0) {
@@ -1266,7 +1266,7 @@ func_120D(var_0, var_1, var_2) {
   level endon(var_0 + "door_peek_detach");
 
   for(;;) {
-    if(level.player _meth_819F()) {
+    if(level.player func_819F()) {
       break;
     }
     wait 0.05;
@@ -1738,7 +1738,7 @@ func_1200() {
   level.player scripts\engine\utility::allow_melee(1);
   level.player scripts\engine\utility::allow_jump(1);
   level.player scripts\engine\utility::allow_usability(1);
-  level.player _meth_80DB();
+  level.player func_80DB();
   level.player scripts\sp\utility::func_1C72(1);
   level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
 }
@@ -2001,7 +2001,7 @@ func_11F0(var_0, var_1, var_2) {
   scripts\engine\utility::delaythread(var_14, ::func_11EE);
   var_24 = level.player getplayerangles(1);
   level.var_5A23[var_4.targetname].var_A5AE = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_24);
-  var_25 = level.player _meth_84C6("currentViewModel");
+  var_25 = level.player func_84C6("currentViewModel");
 
   if(isDefined(var_25)) {
     level.var_5A23[var_4.targetname].var_A5AE setModel(var_25);

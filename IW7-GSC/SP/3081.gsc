@@ -38,7 +38,7 @@ func_4D6D(var_0) {
   }
 
   if(var_3) {
-    self _meth_847D(var_0.updategamerprofileall);
+    self func_847D(var_0.updategamerprofileall);
     return;
   }
 

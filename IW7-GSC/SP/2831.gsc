@@ -344,7 +344,7 @@ func_48B2(var_0, var_1, var_2) {
   var_8.script_team = var_0.script_team;
   var_8.origin = var_0.origin;
   var_8.angles = var_0.angles;
-  var_8 _meth_8184();
+  var_8 func_8184();
   var_8 notsolid();
   var_8 dontcastshadows();
   var_8 lib_0C24::func_10A49();
@@ -716,7 +716,7 @@ func_DC18() {
 
 func_2C16() {
   scripts\sp\names::func_7B05();
-  self _meth_8307(self.name, &"");
+  self func_8307(self.name, &"");
 }
 
 func_9DB6(var_0) {

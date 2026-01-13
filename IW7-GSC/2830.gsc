@@ -97,7 +97,7 @@ immediatelevelstartsave() {
   var_3 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
   _savegame("immediatelevelstart", &"AUTOSAVE_LEVELSTART", var_3, 1);
   setdvar("ui_grenade_death", "0");
-  level.player _meth_8591(0);
+  level.player func_8591(0);
   scripts\engine\utility::flag_clear("game_saving");
   scripts\engine\utility::flag_set("ImmediateLevelStartSave");
 }
@@ -137,7 +137,7 @@ func_2A6E() {
   }
   _savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   setdvar("ui_grenade_death", "0");
-  level.player _meth_8591(0);
+  level.player func_8591(0);
   scripts\engine\utility::flag_clear("game_saving");
 }
 
@@ -288,7 +288,7 @@ func_1190(var_0, var_1) {
 
   if(func_12878(var_7)) {
     _commitsave(var_7);
-    level.player _meth_8591(0);
+    level.player func_8591(0);
     setdvar("ui_grenade_death", "0");
   }
 
@@ -438,7 +438,7 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       _commitsave(var_11);
-      level.player _meth_8591(0);
+      level.player func_8591(0);
       level.var_A9E7 = gettime();
       setdvar("ui_grenade_death", "0");
       break;
@@ -514,7 +514,7 @@ func_2685(var_0, var_1, var_2) {
 
   if(var_1) {
     if(![
-        [level._meth_83D2["_autosave_stealthcheck"]]
+        [level.func_83D2["_autosave_stealthcheck"]]
       ]())
       return 0;
   }
@@ -567,7 +567,7 @@ func_268C(var_0, var_1) {
     return 0;
   }
 
-  if(self _meth_819F() && var_0) {
+  if(self func_819F() && var_0) {
     return 0;
   }
 

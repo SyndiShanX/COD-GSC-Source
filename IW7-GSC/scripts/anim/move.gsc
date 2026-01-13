@@ -472,7 +472,7 @@ func_C965() {
     var_1 = self.var_C975;
   }
 
-  self _meth_82EA("turnAnim", var_0, 1, var_1, self.moveplaybackrate);
+  self func_82EA("turnAnim", var_0, 1, var_1, self.moveplaybackrate);
   if(scripts\engine\utility::actor_is3d()) {
     self orientmode("face angle 3d", self.angles);
   } else {
@@ -494,10 +494,10 @@ func_C964() {
 }
 
 func_580E() {
-  self _meth_8250(1);
+  self func_8250(1);
   self animmode("zonly_physics", 0);
   self clearanim( % body, 0.2);
-  self _meth_82EA("dodgeAnim", self.var_4BE6, 1, 0.2, 1);
+  self func_82EA("dodgeAnim", self.var_4BE6, 1, 0.2, 1);
   scripts\anim\shared::donotetracks("dodgeAnim");
   self animmode("none", 0);
   self orientmode("face default");
@@ -506,7 +506,7 @@ func_580E() {
   }
 
   self clearanim( % civilian_dodge, 0.2);
-  self _meth_8250(0);
+  self func_8250(0);
   self.var_4BE6 = undefined;
   self.var_BCC3 = undefined;
   return 1;
@@ -517,7 +517,7 @@ func_12898(var_0, var_1) {
   var_3 = self.setocclusionpreset * var_1[0];
   var_4 = var_2 * var_1[1];
   var_5 = self.origin + var_3 - var_4;
-  self _meth_8250(1);
+  self func_8250(1);
   if(self maymovetopoint(var_5)) {
     self.var_4BE6 = var_0;
     self.var_BCC3 = ::func_580E;
@@ -525,7 +525,7 @@ func_12898(var_0, var_1) {
     return 1;
   }
 
-  self _meth_8250(0);
+  self func_8250(0);
   return 0;
 }
 
@@ -762,7 +762,7 @@ func_BCAD() {
   var_0E = distance(self.origin, var_2.origin);
   if(var_0E > var_0B) {
     self orientmode("face angle", scripts\asm\shared_utility::getnodeforwardyaw(var_1));
-    self _meth_82EA("shuffle_start", var_7, 1, var_6);
+    self func_82EA("shuffle_start", var_7, 1, var_6);
     scripts\anim\shared::donotetracks("shuffle_start");
     self clearanim(var_7, 0.2);
     var_0E = var_0E - var_0B;
@@ -780,7 +780,7 @@ func_BCAD() {
   var_10 = getanimlength(var_8);
   var_11 = var_10 * var_0E / var_0C * 0.9;
   var_11 = floor(var_11 * 20) * 0.05;
-  self _meth_82E1("shuffle", var_8, 1, var_6);
+  self func_82E1("shuffle", var_8, 1, var_6);
   scripts\anim\notetracks::donotetracksfortime(var_11, "shuffle");
   for(var_12 = 0; var_12 < 2; var_12++) {
     var_0E = distance(self.origin, var_2.origin);
@@ -809,7 +809,7 @@ func_BCAD() {
     }
 
     self clearanim(var_8, var_6);
-    self _meth_82E1("shuffle_end", var_9, 1, var_6);
+    self func_82E1("shuffle_end", var_9, 1, var_6);
     scripts\anim\shared::donotetracks("shuffle_end");
   }
 
@@ -839,7 +839,7 @@ func_BCB5(var_0, var_1, var_2) {
 
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self _meth_82EA("sideToSide", var_3, 1, 0.2);
+  self func_82EA("sideToSide", var_3, 1, 0.2);
   scripts\anim\shared::donotetracks("sideToSide", ::func_89E3);
   var_4 = self getscoreinfocategory(var_3);
   var_5 = var_2.origin - var_1.origin;
@@ -884,7 +884,7 @@ func_102E9(var_0, var_1) {
 func_BCF8(var_0, var_1) {
   self endon("movemode");
   self clearanim( % combatrun, 0.6);
-  self _meth_82A5( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self func_82A5( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
   if(isDefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100 && isDefined(self.var_E80D) && randomfloat(1) < self.a.reacttobulletchance) {
     scripts\anim\run::func_4C9A();
     return;

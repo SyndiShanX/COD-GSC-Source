@@ -76,7 +76,7 @@ func_6626(var_0, var_1) {
   self playlocalsound("ftl_phase_out");
   self playSound("ftl_phase_out_npc");
   func_2A71(self, var_1);
-  self _meth_82C0("phaseshift_mp_shock", 0.1);
+  self func_82C0("phaseshift_mp_shock", 0.1);
   scripts\engine\utility::allow_offhand_weapons(0);
   scripts\mp\equipment\peripheral_vision::func_CA2A();
   self setscriptablepartstate("compassicon", "hideIcon", 0);
@@ -100,10 +100,10 @@ restartweaponvfx() {
   self notify("startWeaponVFX");
   self endon("restartWeaponVFX");
   var_0 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::clearweaponscriptvfx(var_0, scripts\mp\utility::istrue(self _meth_8519(var_0)));
+  scripts\mp\weapons::clearweaponscriptvfx(var_0, scripts\mp\utility::istrue(self func_8519(var_0)));
   scripts\engine\utility::waitframe();
   var_0 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::runweaponscriptvfx(var_0, scripts\mp\utility::istrue(self _meth_8519(var_0)));
+  scripts\mp\weapons::runweaponscriptvfx(var_0, scripts\mp\utility::istrue(self func_8519(var_0)));
 }
 
 exitphaseshift(var_0) {}

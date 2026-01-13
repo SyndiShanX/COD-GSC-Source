@@ -146,7 +146,7 @@ func_56E7() {
 
         var_3 = anglestoright(self getplayerangles());
         var_4 = rotatepointaroundvector(var_3, var_0, 20);
-        var_2 _meth_84DC(var_4, 512);
+        var_2 func_84DC(var_4, 512);
         var_2 shellshock("concussion_grenade_mp", 2.5, 0, 1);
         var_2 notify("flashbang", var_2.origin, 1, 30, self, 1);
         playFX(scripts\engine\utility::getfx("disruptor_impact"), var_2.origin + (0, 0, 36));

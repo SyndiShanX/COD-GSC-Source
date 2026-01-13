@@ -196,7 +196,7 @@ sas_play_traverseexternal(var_0, var_1, var_2, var_3) {
   self endon("terminate_ai_threads");
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\mp\agents\_scriptedagents::func_CED4(var_1, var_4, 1);
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self setorigin(var_5);
   self notify("killanimscript");
   scripts\asm\asm::asm_fireevent(var_1, "end");

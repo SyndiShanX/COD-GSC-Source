@@ -64,7 +64,7 @@ func_13D11() {
 func_13D17(var_0) {
   var_1 = distance(var_0 getEye(), self getEye()) * 0.9;
   var_2 = var_0 getEye();
-  var_3 = anglesToForward(var_0 _meth_857C());
+  var_3 = anglesToForward(var_0 func_857C());
   var_4 = var_2 + var_3 * var_1;
   var_5 = self getEye();
   var_6 = 2;

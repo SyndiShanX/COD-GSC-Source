@@ -325,7 +325,7 @@ carryobjectusethink() {
       continue;
     }
 
-    if(var_0 _meth_84CA()) {
+    if(var_0 func_84CA()) {
       continue;
     }
 
@@ -376,8 +376,8 @@ carryobjectusethink() {
       continue;
     }
 
-    if(var_0 scripts\mp\utility::_meth_85C7()) {
-      var_2 = var_0 _meth_854D();
+    if(var_0 scripts\mp\utility::func_85C7()) {
+      var_2 = var_0 func_854D();
       if(!scripts\mp\utility::isgesture(var_2)) {
         continue;
       }
@@ -1507,7 +1507,7 @@ func_DAD2() {
       continue;
     }
 
-    if(var_1 _meth_8568()) {
+    if(var_1 func_8568()) {
       continue;
     }
 
@@ -2135,7 +2135,7 @@ func_130E9(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(var_0 scripts\mp\utility::_meth_85C7()) {
+  if(var_0 scripts\mp\utility::func_85C7()) {
     return 0;
   }
 

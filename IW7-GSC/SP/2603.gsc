@@ -44,7 +44,7 @@ func_103BC() {
     self.var_103A9 delete();
     self.var_103A9 = undefined;
     self.bhaslasertag = undefined;
-    self _meth_857A("none");
+    self func_857A("none");
   }
 }
 
@@ -86,7 +86,7 @@ getlaserstartpoint() {
 }
 
 getlaserdirection() {
-  return self _meth_853C();
+  return self func_853C();
 }
 
 getlaserangles() {
@@ -102,10 +102,10 @@ func_103BB() {
   var_0 = getlaserstartpoint();
   self.var_103A9 = spawn("script_model", var_0);
   self.var_103A9 setModel("tag_laser");
-  self.var_103A9 _meth_8575(self.var_394);
+  self.var_103A9 func_8575(self.var_394);
   self.var_103A9 setotherent(self);
   self.var_103A9.origin = var_0;
-  self _meth_857A("interpolate");
+  self func_857A("interpolate");
   self.var_103A9[[self.var_71BD]]();
   while(isalive(self) && isDefined(self.var_103A9)) {
     if(isDefined(self.var_45E2.var_1A2B)) {
@@ -158,7 +158,7 @@ func_E24D(var_0, var_1, var_2, var_3) {
     self.var_45E2.var_45E1 = 2000;
   }
 
-  self _meth_857A("interpolate");
+  self func_857A("interpolate");
   var_4 = scripts\sp\gameskill::func_7C6D(level.var_7683);
   var_5 = level.var_54D0["sniper_converge_scale"][var_4];
   if(isDefined(var_5)) {
@@ -237,9 +237,9 @@ func_36DA(var_0) {
   if(isDefined(self.var_45E2.var_45DA) && gettime() - self.var_45E2.var_45DA >= 100) {
     var_1 = gettime() - self.var_45E2.var_45DA;
     if(isDefined(var_0.target) && isplayer(var_0.target)) {
-      self _meth_857A("lock");
+      self func_857A("lock");
     } else {
-      self _meth_857A("interpolate");
+      self func_857A("interpolate");
     }
 
     return var_0.pos - (0, 0, 1.3);
@@ -248,7 +248,7 @@ func_36DA(var_0) {
   var_2 = vectornormalize(var_1.pos - self.origin);
   var_3 = vectortoangles(var_2);
   if(self.var_45E2.var_45D8 < 0) {
-    self _meth_857A("interpolate");
+    self func_857A("interpolate");
     var_4 = var_1.pos + self.var_45E2.var_45DE * self.var_45E2.var_45DC;
     return var_4;
   }
@@ -261,7 +261,7 @@ func_36DA(var_0) {
   var_6 = var_5 * self.var_45E2.var_45DC - self.var_45E2.var_45DB + self.var_45E2.var_45DB;
   var_4 = var_2.pos + self.var_45E2.var_45DE * var_6;
   if(isDefined(var_1.target) && isplayer(var_1.target)) {
-    self _meth_857A("interpolate");
+    self func_857A("interpolate");
   }
 
   return var_6;
@@ -311,7 +311,7 @@ func_45E5(var_0) {
       func_E24D(var_0, var_2);
     }
   } else if(scripts\engine\utility::istrue(self.var_45E2.var_103A6)) {
-    self _meth_857A("interpolate");
+    self func_857A("interpolate");
     self.var_45E2.var_103A6 = undefined;
     if(isDefined(var_0.target) && isplayer(var_0.target) && self getpersstat(var_0.target)) {
       func_E24D(var_0, var_2, undefined, 1);
@@ -323,7 +323,7 @@ func_45E5(var_0) {
   var_4 = getlaserstartpoint();
   var_5 = func_36DA(var_0);
   var_6 = vectornormalize(var_5 - var_4);
-  var_7 = self _meth_853C();
+  var_7 = self func_853C();
   if(self.var_45E2.var_45D8 < 0) {
     if(!func_9D30()) {
       return 0;
@@ -375,7 +375,7 @@ func_45E5(var_0) {
   return var_3;
 }
 
-_meth_811E(var_0) {
+func_811E(var_0) {
   var_1 = spawnStruct();
   if(scripts\anim\utility::func_FFDB()) {
     var_2 = func_11AFB(var_0);
@@ -468,17 +468,17 @@ func_11AF8(var_0) {
 
     var_1 = (0, 0, 0);
     if(var_6) {
-      var_7 = scripts\anim\shared::_meth_811C();
-      var_8 = _meth_811E(var_7);
+      var_7 = scripts\anim\shared::func_811C();
+      var_8 = func_811E(var_7);
       var_9 = undefined;
       if(isDefined(var_8)) {
         var_9 = var_8.var_FECF;
       }
 
-      var_0A = self _meth_8164();
+      var_0A = self func_8164();
       var_0B = isDefined(var_0A);
       if(var_0B) {
-        var_0C = var_0A _meth_851F();
+        var_0C = var_0A func_851F();
         var_0D = anglesToForward(self.angles);
         var_0E = rotatevector(var_0D, var_0C);
         var_9 = var_7 + var_0E * 512;
@@ -662,12 +662,12 @@ func_11AFE(var_0, var_1) {
     var_9 = 1;
   }
 
-  self _meth_82AC(var_3, var_7, 0.1, 1, 1);
-  self _meth_82AC(var_4, var_8, 0.1, 1, 1);
-  self _meth_82AC(var_5, var_0A, 0.1, 1, 1);
-  self _meth_82AC(var_6, var_0B, 0.1, 1, 1);
+  self func_82AC(var_3, var_7, 0.1, 1, 1);
+  self func_82AC(var_4, var_8, 0.1, 1, 1);
+  self func_82AC(var_5, var_0A, 0.1, 1, 1);
+  self func_82AC(var_6, var_0B, 0.1, 1, 1);
   if(isDefined(var_2)) {
-    self _meth_82AC(var_2, var_9, 0.1, 1, 1);
+    self func_82AC(var_2, var_9, 0.1, 1, 1);
   }
 }
 
@@ -704,10 +704,10 @@ func_11AFF(var_0, var_1) {
       if(var_17 > 0) {
         var_18 = getanimlength(var_0A[var_13]);
         var_19 = var_14 - var_17 * var_18 / 0.05;
-        self _meth_82AC(var_0A[var_13], var_16, 0.05, var_19);
+        self func_82AC(var_0A[var_13], var_16, 0.05, var_19);
       } else {
-        self _meth_82AC(var_0A[var_13], var_16, 0.05, 0);
-        self _meth_82B0(var_0A[var_13], var_14);
+        self func_82AC(var_0A[var_13], var_16, 0.05, 0);
+        self func_82B0(var_0A[var_13], var_14);
       }
 
       continue;
@@ -751,7 +751,7 @@ func_1A3A() {
     return 1;
   }
 
-  var_0 = self _meth_8164();
+  var_0 = self func_8164();
   if(isDefined(self._blackboard.shootparams.var_29AF)) {
     if(!isDefined(self.var_45E2)) {
       return 0;
@@ -773,15 +773,15 @@ func_1A3A() {
     return 1;
   }
 
-  var_2 = scripts\anim\shared::_meth_811C();
-  var_3 = _meth_811E(var_2);
+  var_2 = scripts\anim\shared::func_811C();
+  var_3 = func_811E(var_2);
   if(!isDefined(var_3)) {
     return 0;
   }
 
   var_4 = var_3.var_FECF;
   if(scripts\engine\utility::actor_is3d()) {
-    var_5 = self _meth_853C();
+    var_5 = self func_853C();
     var_6 = rotatevectorinverted(var_5, self.angles);
     var_7 = vectortoangles(var_6);
     var_8 = var_4 - var_2;

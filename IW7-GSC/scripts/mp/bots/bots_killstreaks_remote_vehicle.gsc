@@ -554,7 +554,7 @@ bot_control_vanguard() {
       wait(4);
     }
 
-    var_0A = scripts\mp\bots\_bots_util::bot_queued_process("GetNodesOnPathVanguard", ::scripts\mp\bots\_bots_util::func_get_nodes_on_path, self.vehicle_controlling.origin, var_3.origin);
+    var_0A = scripts\mp\bots\_bots_util::bot_queued_process("GetNodesOnPathVanguard", scripts\mp\bots\_bots_util::func_get_nodes_on_path, self.vehicle_controlling.origin, var_3.origin);
     if(!isDefined(var_0A)) {
       if(var_4 == 0) {
         var_4++;

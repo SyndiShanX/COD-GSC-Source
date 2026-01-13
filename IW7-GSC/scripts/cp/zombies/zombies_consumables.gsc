@@ -2495,7 +2495,7 @@ use_dodge_mode(var_0) {
   self goalflag(1, 25);
   self goal_type(1, 0);
   self allowdodge(1);
-  self _meth_8454(5);
+  self func_8454(5);
   thread func_139F9(var_0);
   thread remove_dodge_mode(var_0);
 }

@@ -544,7 +544,7 @@ func_397C() {
 }
 
 func_397D() {
-  self _meth_8184();
+  self func_8184();
 }
 
 func_397E() {

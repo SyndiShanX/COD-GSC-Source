@@ -57,7 +57,7 @@ func_325D() {
 func_41C3() {
   self endon("killanimscript");
   wait(0.3);
-  self _meth_8306();
+  self func_8306();
 }
 
 func_7FE1() {}
@@ -74,7 +74,7 @@ func_BF20() {
   } else {
     var_0 = func_7FE1();
     self clearanim( % root, 0.2);
-    self _meth_82E7("reactanim", var_0, 1, 0.2, 1);
+    self func_82E7("reactanim", var_0, 1, 0.2, 1);
     scripts\anim\shared::donotetracks("reactanim");
   }
 

@@ -149,9 +149,9 @@ monitor_pain() {
   self endon("death");
   scripts\engine\utility::waitframe();
   foreach(var_2, var_1 in self.var_C925) {
-    var_1.var_B43D = self _meth_850C(var_2);
-    var_1.var_B440 = self _meth_850C(var_2, "upper");
-    var_1.var_B43E = self _meth_850C(var_2, "lower");
+    var_1.var_B43D = self func_850C(var_2);
+    var_1.var_B440 = self func_850C(var_2, "upper");
+    var_1.var_B43E = self func_850C(var_2, "lower");
     var_1.var_8CB0 = 100;
   }
 
@@ -164,9 +164,9 @@ monitor_pain() {
 }
 
 func_36F9(var_0, var_1) {
-  var_2 = self _meth_850C(var_0);
-  var_3 = self _meth_850C(var_0, "upper");
-  var_4 = self _meth_850C(var_0, "lower");
+  var_2 = self func_850C(var_0);
+  var_3 = self func_850C(var_0, "upper");
+  var_4 = self func_850C(var_0, "lower");
   if(strtok(var_0, "_")[1] == "leg") {
     var_5 = var_2 + var_3 + var_4;
     var_6 = var_1.var_B43D + var_1.var_B440 + var_1.var_B43E;
@@ -231,8 +231,8 @@ func_10F6C() {
 
       var_1 = var_0.updategamerprofileall;
       if(var_1 == "torso") {
-        var_2 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
-        var_3 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
+        var_2 = self func_850C("right_arm", "upper") + self func_850C("right_arm");
+        var_3 = self func_850C("left_arm", "upper") + self func_850C("left_arm");
         if(var_3 > 0 && var_3 < var_2 || var_2 == 0) {
           var_1 = "left_arm";
         } else if(var_2 > 0) {
@@ -311,18 +311,18 @@ func_10F6E() {
 
 func_11A0D() {
   self endon("death");
-  var_0 = self _meth_850C("torso", "upper");
-  var_1 = self _meth_850C("torso", "lower");
+  var_0 = self func_850C("torso", "upper");
+  var_1 = self func_850C("torso", "lower");
   for(;;) {
     scripts\engine\utility::waitframe();
-    var_2 = self _meth_850C("torso", "upper");
-    var_3 = self _meth_850C("torso", "lower");
+    var_2 = self func_850C("torso", "upper");
+    var_3 = self func_850C("torso", "lower");
     var_4 = var_0 - var_2 + var_1 - var_3;
     if(var_4 > 0) {
-      self _meth_8550("torso", "upper", var_0);
-      self _meth_8550("torso", "lower", var_1);
-      var_5 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
-      var_6 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
+      self func_8550("torso", "upper", var_0);
+      self func_8550("torso", "lower", var_1);
+      var_5 = self func_850C("right_arm", "upper") + self func_850C("right_arm");
+      var_6 = self func_850C("left_arm", "upper") + self func_850C("left_arm");
       if(var_5 == 0 && var_6 == 0) {
         return;
       }
@@ -332,7 +332,7 @@ func_11A0D() {
         var_7 = "left_arm";
       }
 
-      self _meth_850B(var_4, var_7, "upper");
+      self func_850B(var_4, var_7, "upper");
     }
   }
 }

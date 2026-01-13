@@ -136,7 +136,7 @@ func_E838() {}
 
 mpdividecollisionfunc(var_0) {
   if(var_0.origin[2] - self.origin[2] > 30) {
-    var_0 _meth_84DC((0, -40, 10), 200);
+    var_0 func_84DC((0, -40, 10), 200);
     return;
   }
 

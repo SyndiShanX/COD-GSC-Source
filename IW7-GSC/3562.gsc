@@ -127,7 +127,7 @@ func_883F(var_0) {
 func_1903() {
   self waittill("death");
   var_0 = self.origin;
-  var_1 = self _meth_8113();
+  var_1 = self func_8113();
   var_1 hide();
 }
 

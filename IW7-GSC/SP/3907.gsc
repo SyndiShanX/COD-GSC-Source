@@ -60,7 +60,7 @@ reload(var_0, var_1, var_2, var_3) {
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1);
   scripts\anim\weaponlist::refillclip();
@@ -70,7 +70,7 @@ func_CECB(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = scripts\asm\asm_bb::bb_getrequestedweapon();
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E4(var_1, var_5, lib_0A1E::asm_getbodyknob(), 1, var_2, scripts\anim\combat_utility::func_6B9A());
+  self func_82E4(var_1, var_5, lib_0A1E::asm_getbodyknob(), 1, var_2, scripts\anim\combat_utility::func_6B9A());
   lib_0A1E::func_2369(var_0, var_1, var_5);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   self notify("switched_to_sidearm");
@@ -97,7 +97,7 @@ func_D56A(var_0, var_1, var_2, var_3) {
   lib_0A1E::func_2369(var_0, var_1, var_4);
   self.var_10F8C = angleclamp180(getangledelta(var_4, 0, 1) + self.angles[1]);
   self.var_36A = 1;
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   if(func_1000F()) {
     thread func_D56D(var_4, var_1);
   }

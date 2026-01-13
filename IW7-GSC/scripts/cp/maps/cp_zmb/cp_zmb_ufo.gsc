@@ -964,7 +964,7 @@ stop_gameplay_audio() {
   level notify("skip_song");
   foreach(var_1 in level.players) {
     scripts\cp\maps\cp_zmb\cp_zmb_vo::clear_up_all_vo(var_1);
-    var_1 _meth_82C0("bink_fadeout_amb", 0.66);
+    var_1 func_82C0("bink_fadeout_amb", 0.66);
   }
 }
 

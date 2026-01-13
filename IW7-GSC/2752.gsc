@@ -456,7 +456,7 @@ func_68B8() {
   if(!scripts\mp\utility\game::matchmakinggame()) {
     return;
   }
-  var_0 = self _meth_85BE() > 1;
+  var_0 = self func_85BE() > 1;
 
   if(getdvarint("online_mp_xpscale") == 2 || var_0 && getdvarint("online_mp_party_xpscale") == 2) {
     showsplash("event_double_xp");

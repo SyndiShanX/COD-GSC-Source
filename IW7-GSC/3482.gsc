@@ -356,7 +356,7 @@ func_E4F8(var_0, var_1) {
     scripts\mp\utility\game::setthirdpersondof(0);
   }
 
-  var_1 _meth_83ED(self);
+  var_1 func_83ED(self);
   self getwholescenedurationmax(var_1, "tag_player", 1.0, 0, 0, 0, 0, 1);
   self setplayerangles(var_1 gettagangles("tag_player"));
   var_1 thread scripts\mp\killstreaks\helicopter::heli_targeting();
@@ -800,7 +800,7 @@ func_6380(var_0) {
     self.var_6741 scripts\mp\hud_util::destroyelem();
   }
 
-  self _meth_8258();
+  self func_8258();
   self thermalvisionoff();
   self thermalvisionfofoverlayoff();
   self unlink();
@@ -813,7 +813,7 @@ func_6380(var_0) {
   self visionsetthermalforplayer(game["thermal_vision"], 0);
 
   if(isDefined(var_0)) {
-    var_0 _meth_83EC(self);
+    var_0 func_83EC(self);
   }
 
   self notify("heliPlayer_removed");

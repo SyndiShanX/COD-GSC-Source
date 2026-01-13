@@ -2503,7 +2503,7 @@ func_B541(var_0, var_1) {
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.rad_extractor_settings["crafted_rad_extractor"].pow);
   self makeusable();
-  self _meth_84A7("tag_fx");
+  self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
   thread medusa_watch_for_player_melee(self.triggerportableradarping);

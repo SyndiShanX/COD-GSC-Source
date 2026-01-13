@@ -73,7 +73,7 @@ door_setup() {
 
         var_3 notsolid();
         var_3 hide();
-        var_3 _meth_829D(0);
+        var_3 func_829D(0);
         var_0.var_19E5[var_0.var_19E5.size] = var_3;
       } else
         var_0.doors[var_0.doors.size] = var_3;
@@ -170,7 +170,7 @@ door_state_update(var_0) {
         if(isDefined(var_1.var_19E5)) {
           foreach(var_10 in var_1.var_19E5) {
             var_10 show();
-            var_10 _meth_829D(1);
+            var_10 func_829D(1);
           }
         }
 
@@ -181,7 +181,7 @@ door_state_update(var_0) {
         if(isDefined(var_1.var_19E5)) {
           foreach(var_10 in var_1.var_19E5) {
             var_10 hide();
-            var_10 _meth_829D(0);
+            var_10 func_829D(0);
           }
         }
 

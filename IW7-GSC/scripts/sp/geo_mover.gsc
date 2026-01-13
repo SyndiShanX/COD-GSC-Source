@@ -176,10 +176,10 @@ func_BD16(var_0, var_1) {
   var_2.angles = var_3.angles;
   var_1 waittill("trigger");
   var_4 = var_0 global_physics_sound_monitor();
-  var_4 _meth_83E8();
+  var_4 func_83E8();
   var_4 hide();
   var_4 scripts\sp\vehicle::playgestureviewmodel();
-  var_4 _meth_83E8();
+  var_4 func_83E8();
   var_2 linkto(var_4);
   var_4 attachpath(var_3);
   var_4 startpath();

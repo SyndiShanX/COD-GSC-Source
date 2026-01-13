@@ -201,7 +201,7 @@ getpreferreddompoints(var_0, var_1) {
     var_4 = var_0D;
     var_5 = level.bestspawnflag[var_0D];
     if(var_4.size > 0 && var_4.size < level.domflags.size) {
-      var_0D = _meth_81EF(var_0C);
+      var_0D = func_81EF(var_0C);
       level.bestspawnflag[var_0C] = var_0D;
     }
 
@@ -260,13 +260,13 @@ domflags() {
   level.areanynavvolumesloaded["allies"] = var_5[0].origin;
   level.areanynavvolumesloaded["axis"] = var_4[0].origin;
   level.bestspawnflag = [];
-  level.bestspawnflag["allies"] = _meth_81EF("allies", undefined);
-  level.bestspawnflag["axis"] = _meth_81EF("axis", level.bestspawnflag["allies"]);
+  level.bestspawnflag["allies"] = func_81EF("allies", undefined);
+  level.bestspawnflag["axis"] = func_81EF("axis", level.bestspawnflag["allies"]);
   flagsetup();
   thread modifieddefendradiussetup();
 }
 
-_meth_81EF(var_0, var_1) {
+func_81EF(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
   for(var_4 = 0; var_4 < level.magicbullet.size; var_4++) {

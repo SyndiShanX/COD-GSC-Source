@@ -755,7 +755,7 @@ leaderdialogonplayer(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_4) && (var_4 == "axis" || var_4 == "allies")) {
     var_5 = game["voice"][var_4] + game["dialog"][var_0];
-    self _meth_8252(var_5, var_0, 2, var_1, var_2, var_3);
+    self func_8252(var_5, var_0, 2, var_1, var_2, var_3);
   }
 }
 

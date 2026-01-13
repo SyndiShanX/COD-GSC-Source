@@ -151,16 +151,16 @@ func_12889(var_0) {
   var_0A.var_13CC3["hover"] = "minijackal_assault_mp";
   var_0A.var_13CC3["fly"] = var_7;
   var_0A.var_13CC3["land"] = var_0A.var_13CC3["hover"];
-  var_0A _meth_84BE("minijackal_mp");
-  var_0A _meth_849E(var_0A.var_13CC3["fly"]);
+  var_0A func_84BE("minijackal_mp");
+  var_0A func_849E(var_0A.var_13CC3["fly"]);
   lib_0BCE::func_A2B2(var_0A, undefined, "hover");
-  self _meth_8490("disable_mode_switching", 1);
-  self _meth_8490("disable_juke", 1);
-  self _meth_8490("disable_guns", 0);
-  self _meth_8490("disable_boost", 0);
+  self func_8490("disable_mode_switching", 1);
+  self func_8490("disable_juke", 1);
+  self func_8490("disable_guns", 0);
+  self func_8490("disable_boost", 0);
   self.restoreangles = self getplayerangles();
   self.ignoreme = 0;
-  self _meth_85A2("apex_mp");
+  self func_85A2("apex_mp");
   var_0A.var_10E4C = func_495B();
   var_0A.var_EDD7 = 2250;
   var_0A.max_health = 2250;
@@ -214,7 +214,7 @@ func_B9A5(var_0) {
   self endon("minijackal_end");
   for(;;) {
     var_0 waittill("disengage boost");
-    self _meth_8491("hover");
+    self func_8491("hover");
     self setscriptablepartstate("thrusters", "hover", 0);
   }
 }
@@ -227,7 +227,7 @@ func_B9AF(var_0) {
   var_1 = self.var_13CC3["hover"];
   for(;;) {
     var_0 waittill("ks_switch_weapons");
-    self _meth_849E(var_1);
+    self func_849E(var_1);
     if(var_1 == self.var_13CC3["fly"]) {
       var_1 = self.var_13CC3["hover"];
       continue;
@@ -257,9 +257,9 @@ func_B97A(var_0) {
   var_0 notifyonplayercommand("ks_lockoff", "-speed_throw");
   for(;;) {
     var_0 waittill("ks_lockon");
-    self _meth_849E(self.var_13CC3["hover"]);
+    self func_849E(self.var_13CC3["hover"]);
     var_0 waittill("ks_lockoff");
-    self _meth_849E(self.var_13CC3["fly"]);
+    self func_849E(self.var_13CC3["fly"]);
   }
 }
 
@@ -538,7 +538,7 @@ func_B961(var_0) {
     var_0 setclientomnvar("ui_minijackal_reload", 0);
     var_0 setclientomnvar("ui_minijackal_reload_long", 0);
     var_0 setplayerangles(var_0.restoreangles);
-    var_0 _meth_85A2("");
+    var_0 func_85A2("");
     var_0 thermalvisionfofoverlayoff();
     var_0 thread scripts\mp\killstreaks\_killstreaks::func_11086();
     var_0 scripts\engine\utility::allow_usability(1);

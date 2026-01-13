@@ -49,7 +49,7 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       }
     }
   } else if(isDefined(var_0)) {
-    var_0F _meth_84A7(var_0);
+    var_0F func_84A7(var_0);
   }
 
   if(isDefined(var_8) && var_8) {
@@ -67,7 +67,7 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_11 = var_3;
   }
 
-  var_0F _meth_84A6(var_11);
+  var_0F func_84A6(var_11);
   var_12 = 65;
   if(isDefined(var_0E)) {
     var_12 = var_0E;
@@ -79,7 +79,7 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_13 = var_4;
   }
 
-  var_0F _meth_84A4(var_13);
+  var_0F func_84A4(var_13);
   var_14 = 80;
   if(isDefined(var_5)) {
     var_14 = var_5;
@@ -87,19 +87,19 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
   var_0F setuserange(var_14);
   if(isDefined(var_6) && var_6) {
-    var_0F _meth_84A9("show");
+    var_0F func_84A9("show");
   } else {
-    var_0F _meth_84A9("hide");
+    var_0F func_84A9("hide");
   }
 
   if(isDefined(var_0A) && var_0A) {
-    var_0F _meth_84A9("disable");
+    var_0F func_84A9("disable");
   }
 
   if(isDefined(var_7) && var_7) {
-    var_0F _meth_84B8(var_7);
+    var_0F func_84B8(var_7);
   } else if(isDefined(var_0B) && var_0B) {
-    var_0F _meth_8560(var_0B);
+    var_0F func_8560(var_0B);
   } else {
     thread func_8FF0();
   }
@@ -109,13 +109,13 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   if(isDefined(var_0C)) {
-    var_0F _meth_84A3(var_0C);
+    var_0F func_84A3(var_0C);
   }
 
   if(isDefined(var_0D)) {
-    var_0F _meth_8561(1);
+    var_0F func_8561(1);
   } else {
-    var_0F _meth_8561(0);
+    var_0F func_8561(0);
   }
 
   var_0F makeusable();

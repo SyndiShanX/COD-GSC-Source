@@ -188,7 +188,7 @@ getguid(var_0) {
 
 func_3721(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = lib_0F3D::func_7DD6();
-  if(isDefined(var_8) && !self _meth_858D() && isDefined(self.physics_querypoint) && self.physics_querypoint == var_8) {
+  if(isDefined(var_8) && !self func_858D() && isDefined(self.physics_querypoint) && self.physics_querypoint == var_8) {
     if(distance2dsquared(self.physics_querypoint.origin, self.vehicle_getspawnerarray) > 4096) {
       if(!isDefined(self.physics_querypoint.var_3723) || self.physics_querypoint.var_3723 < gettime() - 50) {
         self.physics_querypoint.var_3723 = gettime();
@@ -243,7 +243,7 @@ func_3721(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_0D = var_8.angles;
   }
 
-  return self _meth_8547(var_0A, var_0D, func_7E54(), var_5, var_0B, self.asm.archetype, var_2, scripts\asm\asm::asm_getdemeanor(), var_0C, var_9, var_6, var_7, var_3);
+  return self func_8547(var_0A, var_0D, func_7E54(), var_5, var_0B, self.asm.archetype, var_2, scripts\asm\asm::asm_getdemeanor(), var_0C, var_9, var_6, var_7, var_3);
 }
 
 func_CECA(var_0, var_1) {
@@ -299,7 +299,7 @@ func_CEAA(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
   }
 
-  self.var_4C7E = ::lib_0F3D::func_22EA;
+  self.var_4C7E = lib_0F3D::func_22EA;
   self.a.var_22E5 = var_1;
   self orientmode("face motion");
   thread func_22F4(var_1);
@@ -319,7 +319,7 @@ func_CEAA(var_0, var_1, var_2, var_3) {
     var_0B = rotatevectorinverted(var_0B, var_5.unloadtransient);
     var_0C = invertangles(var_5.unloadtransient);
     var_0D = combineangles(var_8, var_0C);
-    var_0E = self _meth_846B();
+    var_0E = self func_846B();
     var_0B = rotatevector(var_0B, var_0E.angles);
     var_9 = var_0B + var_0E.origin;
     var_0F = combineangles(var_0D, var_0E.angles);
@@ -327,7 +327,7 @@ func_CEAA(var_0, var_1, var_2, var_3) {
   }
 
   var_10 = self.vehicle_getspawnerarray;
-  self _meth_8396(var_9, var_0A);
+  self func_8396(var_9, var_0A);
   if(isDefined(self.asm.var_4C86.var_4C38)) {
     var_11 = self.asm.var_4C86.var_4C38;
     self animmode(var_11);
@@ -349,9 +349,9 @@ func_CEAA(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(self.var_22EE)) {
-    self _meth_82E7(var_1, var_5.getgrenadedamageradius, 1, var_2, self.var_BD22 * self.var_22EE * var_4 * var_12);
+    self func_82E7(var_1, var_5.getgrenadedamageradius, 1, var_2, self.var_BD22 * self.var_22EE * var_4 * var_12);
   } else {
-    self _meth_82E7(var_1, var_5.getgrenadedamageradius, 1, var_2, self.var_BD22 * var_4 * var_12);
+    self func_82E7(var_1, var_5.getgrenadedamageradius, 1, var_2, self.var_BD22 * var_4 * var_12);
   }
 
   thread lib_0F3D::func_444B(var_1);
@@ -367,7 +367,7 @@ func_7E54() {
   return undefined;
 }
 
-_meth_8174(var_0, var_1, var_2, var_3) {
+func_8174(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_4[5] = scripts\asm\asm::func_235C(1, var_0, var_2, var_3);
   var_4[4] = scripts\asm\asm::func_235C(2, var_0, var_2, var_3);
@@ -442,8 +442,8 @@ func_FFD4(var_0, var_1, var_2, var_3) {
       var_5 = "crouch";
     }
 
-    var_6 = scripts\asm\shared_utility::_meth_812E(var_4, var_5);
-    self _meth_853D(var_6);
+    var_6 = scripts\asm\shared_utility::func_812E(var_4, var_5);
+    self func_853D(var_6);
   }
 
   var_7 = self.var_164D[var_0].var_4BC0;

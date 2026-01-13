@@ -505,7 +505,7 @@ func_DE49() {
     var_1 = self getrunningforwardpainanim("aliensemtex_mp");
     if(var_1 == 0) {
       for(var_2 = 1; var_2 <= scripts\cp\perks\perk_utility::perk_getoffhandcount(); var_2++) {
-        self _meth_831C("other");
+        self func_831C("other");
         scripts\cp\utility::filloffhandweapons("aliensemtex_mp", 1);
         wait(var_0);
       }
@@ -934,7 +934,7 @@ func_3D92(var_0, var_1) {
   self.var_CBD7 = self getweaponammostock(var_1);
 }
 
-_meth_82F0(var_0) {
+func_82F0(var_0) {
   var_1 = var_0;
   scripts\cp\utility::_giveweapon(var_1);
   self setweaponammoclip(var_1, self.var_CBD8, "right");
@@ -952,7 +952,7 @@ func_12C4F() {
 }
 
 func_F50C() {
-  _meth_82F0("iw6_p226_mp_barrelrange02");
+  func_82F0("iw6_p226_mp_barrelrange02");
 }
 
 func_12C50() {
@@ -960,7 +960,7 @@ func_12C50() {
 }
 
 func_F50D() {
-  _meth_82F0("iw6_p226_mp_barrelrange02_xmags");
+  func_82F0("iw6_p226_mp_barrelrange02_xmags");
 }
 
 func_12C51() {
@@ -968,7 +968,7 @@ func_12C51() {
 }
 
 func_F50E() {
-  _meth_82F0("iw6_p226_mp_barrelrange02_xmags");
+  func_82F0("iw6_p226_mp_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -978,7 +978,7 @@ func_12C52() {
 }
 
 func_F50F() {
-  _meth_82F0("iw6_p226_mp_akimbo_barrelrange02_xmags");
+  func_82F0("iw6_p226_mp_akimbo_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -994,7 +994,7 @@ func_12C36() {
 }
 
 func_F4F3() {
-  _meth_82F0("iw6_magnum_mp_barrelrange02");
+  func_82F0("iw6_magnum_mp_barrelrange02");
 }
 
 func_12C37() {
@@ -1002,7 +1002,7 @@ func_12C37() {
 }
 
 func_F4F4() {
-  _meth_82F0("iw6_magnum_mp_barrelrange02_xmags");
+  func_82F0("iw6_magnum_mp_barrelrange02_xmags");
 }
 
 func_12C38() {
@@ -1010,7 +1010,7 @@ func_12C38() {
 }
 
 func_F4F5() {
-  _meth_82F0("iw6_magnum_mp_barrelrange02_xmags");
+  func_82F0("iw6_magnum_mp_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -1020,7 +1020,7 @@ func_12C39() {
 }
 
 func_F4F6() {
-  _meth_82F0("iw6_magnum_mp_akimbo_barrelrange02_xmags");
+  func_82F0("iw6_magnum_mp_akimbo_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -1036,7 +1036,7 @@ func_12C4A() {
 }
 
 func_F507() {
-  _meth_82F0("iw6_m9a1_mp_barrelrange02");
+  func_82F0("iw6_m9a1_mp_barrelrange02");
 }
 
 func_12C4B() {
@@ -1044,7 +1044,7 @@ func_12C4B() {
 }
 
 func_F508() {
-  _meth_82F0("iw6_m9a1_mp_barrelrange02_xmags");
+  func_82F0("iw6_m9a1_mp_barrelrange02_xmags");
 }
 
 func_12C4C() {
@@ -1052,7 +1052,7 @@ func_12C4C() {
 }
 
 func_F509() {
-  _meth_82F0("iw6_m9a1_mp_barrelrange02_xmags");
+  func_82F0("iw6_m9a1_mp_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -1062,7 +1062,7 @@ func_12C4D() {
 }
 
 func_F50A() {
-  _meth_82F0("iw6_m9a1_mp_akimbo_barrelrange02_xmags");
+  func_82F0("iw6_m9a1_mp_akimbo_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -1084,7 +1084,7 @@ func_12C45() {
 }
 
 func_F502() {
-  _meth_82F0("iw6_mp443_mp_barrelrange02");
+  func_82F0("iw6_mp443_mp_barrelrange02");
 }
 
 func_12C46() {
@@ -1092,7 +1092,7 @@ func_12C46() {
 }
 
 func_F503() {
-  _meth_82F0("iw6_mp443_mp_barrelrange02_xmags");
+  func_82F0("iw6_mp443_mp_barrelrange02_xmags");
 }
 
 func_12C47() {
@@ -1100,7 +1100,7 @@ func_12C47() {
 }
 
 func_F504() {
-  _meth_82F0("iw6_mp443_mp_barrelrange02_xmags");
+  func_82F0("iw6_mp443_mp_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 
@@ -1110,7 +1110,7 @@ func_12C48() {
 }
 
 func_F505() {
-  _meth_82F0("iw6_mp443_mp_akimbo_barrelrange02_xmags");
+  func_82F0("iw6_mp443_mp_akimbo_barrelrange02_xmags");
   self.perk_data["pistol"].pistol_overkill = 1;
 }
 

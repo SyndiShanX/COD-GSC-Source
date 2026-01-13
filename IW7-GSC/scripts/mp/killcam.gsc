@@ -231,7 +231,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     setglobalsoundcontext("atmosphere", "killcam", 0.1);
     foreach(var_12 in level.players) {
       self playlocalsound("final_killcam_in");
-      self _meth_82C2("killcam", "mix");
+      self func_82C2("killcam", "mix");
     }
   }
 
@@ -477,7 +477,7 @@ func_F76B(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_4)) {
-    self _meth_85C4(var_4);
+    self func_85C4(var_4);
   }
 }
 

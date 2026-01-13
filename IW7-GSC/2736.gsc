@@ -349,7 +349,7 @@ carryobjectusethink() {
     if(!isplayer(var_0)) {
       continue;
     }
-    if(var_0 _meth_84CA()) {
+    if(var_0 func_84CA()) {
       continue;
     }
     if(var_0 getcurrentweapon() == "ks_remote_map_mp") {
@@ -390,8 +390,8 @@ carryobjectusethink() {
     if(!isDefined(var_0.var_987A)) {
       continue;
     }
-    if(var_0 scripts\mp\utility\game::_meth_85C7()) {
-      var_2 = var_0 _meth_854D();
+    if(var_0 scripts\mp\utility\game::func_85C7()) {
+      var_2 = var_0 func_854D();
 
       if(!scripts\mp\utility\game::isgesture(var_2)) {
         continue;
@@ -1085,7 +1085,7 @@ takeobject(var_0) {
         thread scripts\mp\utility\game::func_72ED(var_2);
       }
 
-      self _meth_80DB();
+      self func_80DB();
       scripts\engine\utility::allow_weapon_switch(1);
     } else if(!var_0.allowweapons)
       scripts\engine\utility::allow_weapon(1);
@@ -1560,7 +1560,7 @@ func_DAD2() {
     if(isDefined(var_1.spawningafterremotedeath)) {
       continue;
     }
-    if(var_1 _meth_8568()) {
+    if(var_1 func_8568()) {
       continue;
     }
     if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
@@ -2065,7 +2065,7 @@ useholdthink(var_0) {
   }
 
   var_0 getweaponrootname();
-  var_0 _meth_8082(self.trigger);
+  var_0 func_8082(self.trigger);
   var_0.var_3FFA = self.trigger;
   var_0 goal_head_icon(0);
   var_0 unlink();
@@ -2173,7 +2173,7 @@ func_130E9(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(var_0 scripts\mp\utility\game::_meth_85C7()) {
+  if(var_0 scripts\mp\utility\game::func_85C7()) {
     return 0;
   }
 
@@ -2398,7 +2398,7 @@ func_12F67(var_0, var_1) {
       }
 
       setobjpointteamcolor(var_6, var_2[var_4], var_0);
-      var_6 _meth_85A8(getwaypointbackgroundtype(self.var_13DCA[var_0]));
+      var_6 func_85A8(getwaypointbackgroundtype(self.var_13DCA[var_0]));
 
       if(self.type == "carryObject") {
         var_7 = var_2[var_4] == "mlg_allies" || var_2[var_4] == "mlg_axis";

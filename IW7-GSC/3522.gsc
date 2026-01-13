@@ -289,7 +289,7 @@ func_114E9(var_0, var_1) {
   self endon("tankDestroyed");
   self endon("death");
 
-  if(!isDefined(level._meth_848E)) {
+  if(!isDefined(level.func_848E)) {
     self startpath(var_0);
     return;
   }
@@ -1133,7 +1133,7 @@ getnodenearenemies() {
   }
 
   var_10 = var_7.origin;
-  var_11 = sortbydistance(level._meth_848E, var_10);
+  var_11 = sortbydistance(level.func_848E, var_10);
   return var_11[0];
 }
 
@@ -1304,10 +1304,10 @@ func_FAD8() {
     }
   }
 
-  level._meth_848E = func_98A6(var_3);
+  level.func_848E = func_98A6(var_3);
 
   foreach(var_4 in var_0) {
-    if(!isDefined(var_4._meth_848D)) {
+    if(!isDefined(var_4.func_848D)) {
       var_4 thread func_C059();
     }
   }
@@ -1327,7 +1327,7 @@ dontinterpolate(var_0) {
 }
 
 func_7FE9(var_0, var_1) {
-  var_2 = level._meth_848E[self._meth_848D];
+  var_2 = level.func_848E[self.func_848D];
   var_3 = func_7732(var_2, var_0, undefined, var_1);
   var_4 = var_3[0].var_7646;
   var_5 = func_7732(var_2, var_0, undefined, level.var_C74A[var_1]);
@@ -1347,7 +1347,7 @@ func_897F(var_0) {
 
   for(;;) {
     self waittill("trigger", var_1, var_2);
-    var_3 = level._meth_848E[self._meth_848D];
+    var_3 = level.func_848E[self.func_848D];
     var_1.node = self;
     var_4 = undefined;
 
@@ -1363,12 +1363,12 @@ func_897F(var_0) {
       var_4 = var_3 dontinterpolate(var_1.veh_pathdir);
     }
 
-    var_5 = var_3.var_AD41[var_4._meth_848D];
+    var_5 = var_3.var_AD41[var_4.func_848D];
 
     if(var_1.veh_pathdir == "forward") {
       var_6 = func_7FE8();
     } else {
-      var_6 = _meth_809A();
+      var_6 = func_809A();
     }
 
     if(var_6 != var_5) {
@@ -1384,14 +1384,14 @@ func_8982(var_0, var_1) {
     if(var_2.veh_pathdir != var_1) {
       continue;
     }
-    func_4F52("tank starting path at join node: " + var_0._meth_848D);
+    func_4F52("tank starting path at join node: " + var_0.func_848D);
     var_2 startpath(var_0);
   }
 }
 
 func_C059() {
-  self.var_7334 = func_7EC4()._meth_848D;
-  self.var_E492 = _meth_80EF()._meth_848D;
+  self.var_7334 = func_7EC4().func_848D;
+  self.var_E492 = func_80EF().func_848D;
 
   for(;;) {
     self waittill("trigger", var_0, var_1);
@@ -1451,13 +1451,13 @@ func_72EA(var_0, var_1, var_2) {
 }
 
 func_7EC4() {
-  for(var_0 = self; !isDefined(var_0._meth_848D); var_0 = var_0 func_7FE8()) {}
+  for(var_0 = self; !isDefined(var_0.func_848D); var_0 = var_0 func_7FE8()) {}
 
   return var_0;
 }
 
-_meth_80EF() {
-  for(var_0 = self; !isDefined(var_0._meth_848D); var_0 = var_0 _meth_809A()) {}
+func_80EF() {
+  for(var_0 = self; !isDefined(var_0.func_848D); var_0 = var_0 func_809A()) {}
 
   return var_0;
 }
@@ -1470,7 +1470,7 @@ func_7FE8() {
   }
 }
 
-_meth_809A() {
+func_809A() {
   return self.var_D886;
 }
 
@@ -1486,19 +1486,19 @@ func_98A6(var_0) {
     var_4.var_AD41 = [];
     var_4.node = var_3;
     var_4.origin = var_3.origin;
-    var_4._meth_848D = var_1.size;
-    var_3._meth_848D = var_1.size;
-    func_4F50(var_4.origin + (0, 0, 80), var_4._meth_848D, (1, 1, 1), 0.65, 2, 100000);
+    var_4.func_848D = var_1.size;
+    var_3.func_848D = var_1.size;
+    func_4F50(var_4.origin + (0, 0, 80), var_4.func_848D, (1, 1, 1), 0.65, 2, 100000);
     var_1[var_1.size] = var_4;
   }
 
   foreach(var_3 in var_0) {
-    var_7 = var_3._meth_848D;
+    var_7 = var_3.func_848D;
     var_8 = getvehiclenode(var_3.target, "targetname");
     var_9 = distance(var_3.origin, var_8.origin);
     var_10 = var_8;
 
-    while(!isDefined(var_8._meth_848D)) {
+    while(!isDefined(var_8.func_848D)) {
       var_9 = var_9 + distance(var_8.origin, var_8.var_D886.origin);
 
       if(isDefined(var_8.target)) {
@@ -1509,15 +1509,15 @@ func_98A6(var_0) {
       var_8 = var_8.var_BF2E;
     }
 
-    var_1[var_7] func_17EC(var_1[var_8._meth_848D], var_9, "forward", var_10);
+    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_10);
     var_8 = var_3.var_D886;
     var_9 = distance(var_3.origin, var_8.origin);
 
-    for(var_10 = var_8; !isDefined(var_8._meth_848D); var_8 = var_8.var_D886) {
+    for(var_10 = var_8; !isDefined(var_8.func_848D); var_8 = var_8.var_D886) {
       var_9 = var_9 + distance(var_8.origin, var_8.var_D886.origin);
     }
 
-    var_1[var_7] func_17EC(var_1[var_8._meth_848D], var_9, "reverse", var_10);
+    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_10);
 
     foreach(var_12 in var_3.var_2F45) {
       var_8 = var_12;
@@ -1525,7 +1525,7 @@ func_98A6(var_0) {
       var_10 = var_8;
 
       if(var_8.targetname == "branchnode") {
-        while(!isDefined(var_8._meth_848D)) {
+        while(!isDefined(var_8.func_848D)) {
           if(isDefined(var_8.target)) {
             var_13 = getvehiclenode(var_8.target, "targetname");
           } else {
@@ -1536,16 +1536,16 @@ func_98A6(var_0) {
           var_8 = var_13;
         }
 
-        var_1[var_7] func_17EC(var_1[var_8._meth_848D], var_9, "forward", var_10);
+        var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_10);
         continue;
       }
 
-      while(!isDefined(var_8._meth_848D)) {
+      while(!isDefined(var_8.func_848D)) {
         var_9 = var_9 + distance(var_8.origin, var_8.var_D886.origin);
         var_8 = var_8.var_D886;
       }
 
-      var_1[var_7] func_17EC(var_1[var_8._meth_848D], var_9, "reverse", var_10);
+      var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_10);
     }
   }
 
@@ -1553,17 +1553,17 @@ func_98A6(var_0) {
 }
 
 func_17EC(var_0, var_1, var_2, var_3) {
-  self.var_AD40[var_0._meth_848D] = var_0;
-  self.var_AD36[var_0._meth_848D] = var_1;
-  self.var_AD17[var_0._meth_848D] = var_2;
-  self.var_AD41[var_0._meth_848D] = var_3;
+  self.var_AD40[var_0.func_848D] = var_0;
+  self.var_AD36[var_0.func_848D] = var_1;
+  self.var_AD17[var_0.func_848D] = var_2;
+  self.var_AD41[var_0.func_848D] = var_3;
   var_4 = spawnStruct();
   var_4.var_119D3 = var_0;
-  var_4.var_119D2 = var_0._meth_848D;
+  var_4.var_119D2 = var_0.func_848D;
   var_4.var_AB5D = var_1;
   var_4.var_00F2 = var_2;
   var_4.var_10DCD = var_3;
-  self.var_AD35[var_0._meth_848D] = var_4;
+  self.var_AD35[var_0.func_848D] = var_4;
 }
 
 func_7732(var_0, var_1, var_2, var_3) {
@@ -1590,7 +1590,7 @@ func_7732(var_0, var_1, var_2, var_3) {
       if(scripts\engine\utility::array_contains(level.var_428F, var_8)) {
         continue;
       }
-      if(isDefined(var_3) && var_8.var_AD17[var_6._meth_848D] != var_3) {
+      if(isDefined(var_3) && var_8.var_AD17[var_6.func_848D] != var_3) {
         continue;
       }
       if(!scripts\engine\utility::array_contains(level.var_C62D, var_8)) {
@@ -1667,7 +1667,7 @@ func_7F0A(var_0, var_1) {
 }
 
 func_7EED(var_0, var_1) {
-  return var_0.var_C8F6.var_7646 + var_0.var_AD36[var_1._meth_848D];
+  return var_0.var_C8F6.var_7646 + var_0.var_AD36[var_1.func_848D];
 }
 
 drawpath(var_0) {
@@ -1675,17 +1675,17 @@ drawpath(var_0) {
     var_2 = var_0[var_1 - 1];
     var_3 = var_0[var_1];
 
-    if(var_2.var_AD17[var_3._meth_848D] == "reverse") {
+    if(var_2.var_AD17[var_3.func_848D] == "reverse") {
       level thread func_5B7C(var_2.node.origin, var_3.node.origin, (1, 0, 0));
     } else {
       level thread func_5B7C(var_2.node.origin, var_3.node.origin, (0, 1, 0));
     }
 
-    var_4 = var_2.var_AD41[var_3._meth_848D];
+    var_4 = var_2.var_AD41[var_3.func_848D];
     level thread func_5B7C(var_2.node.origin + (0, 0, 4), var_4.origin + (0, 0, 4), (0, 0, 1));
 
-    if(var_2.var_AD17[var_3._meth_848D] == "reverse") {
-      while(!isDefined(var_4._meth_848D)) {
+    if(var_2.var_AD17[var_3.func_848D] == "reverse") {
+      while(!isDefined(var_4.func_848D)) {
         var_5 = var_4;
         var_4 = var_4.var_D886;
         level thread func_5B7C(var_5.origin + (0, 0, 4), var_4.origin + (0, 0, 4), (0, 1, 1));
@@ -1694,7 +1694,7 @@ drawpath(var_0) {
       continue;
     }
 
-    while(!isDefined(var_4._meth_848D)) {
+    while(!isDefined(var_4.func_848D)) {
       var_5 = var_4;
 
       if(isDefined(var_4.target)) {

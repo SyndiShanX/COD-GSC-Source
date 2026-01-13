@@ -19,8 +19,8 @@ main() {
   self.var_1FA9 = "soldier";
 
   if(isai(self)) {
-    self _meth_82DC(256.0, 0.0);
-    self _meth_82DB(768.0, 1024.0);
+    self func_82DC(256.0, 0.0);
+    self func_82DB(768.0, 1024.0);
   }
 
   self.weapon = func_0A2F::func_7BEC("rifle");

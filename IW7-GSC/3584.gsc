@@ -181,7 +181,7 @@ func_FCB8(var_0) {
   var_0.var_FCB9.origin = var_0.var_FCB9.origin + anglesToForward(var_0.angles) * 10;
   var_0.var_FCB9.angles = var_0.angles + (0, 90, 0);
   var_0.var_FCB9 setCanDamage(1);
-  var_0.var_FCB9 _meth_847F(1);
+  var_0.var_FCB9 func_847F(1);
   var_0 playlocalsound("heavy_shield_up");
   var_0 playsoundtoteam("heavy_shield_up_npc", "axis", var_0);
   var_0 playsoundtoteam("heavy_shield_up_npc", "allies", var_0);
@@ -190,7 +190,7 @@ func_FCB8(var_0) {
 
 func_FCB7(var_0) {
   var_0.var_FCB9 setCanDamage(0);
-  var_0.var_FCB9 _meth_847F(0);
+  var_0.var_FCB9 func_847F(0);
   var_0 playlocalsound("heavy_shield_down");
   var_0 playsoundtoteam("heavy_shield_down_npc", "axis", var_0);
   var_0 playsoundtoteam("heavy_shield_down_npc", "allies", var_0);

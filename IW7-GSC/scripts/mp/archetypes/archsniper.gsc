@@ -52,7 +52,7 @@ func_E83E() {
   self.var_9E3F = 0;
   self.var_37E5 = 0.1;
   self.var_C3E6 = self.model;
-  self.var_C408 = self _meth_816D();
+  self.var_C408 = self func_816D();
   thread func_37DD();
   if(getdvarint("camo_method", 1)) {
     thread func_37D4();

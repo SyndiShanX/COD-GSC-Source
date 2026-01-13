@@ -254,7 +254,7 @@ func_98A0() {
   level.var_10A53["right_cqb"] = 1;
   level.var_10A53["right_crouch_cqb"] = 1;
   level.var_10A53["heat_right"] = 1;
-  _meth_814D("soldier");
+  func_814D("soldier");
   level.var_22E7["left"] = "stand";
   level.var_22E7["left_cqb"] = "stand";
   level.var_22E7["right"] = "stand";
@@ -281,18 +281,18 @@ func_98A0() {
   level.var_E1B7["Conceal Crouch"] = "crouch";
 }
 
-_meth_814D(var_0) {
-  _meth_814E(var_0, 7, 8, 0, level.var_10A50, level.var_10A52);
-  _meth_814E(var_0, 8, 9, 1, level.var_10A51, level.var_10A53);
+func_814D(var_0) {
+  func_814E(var_0, 7, 8, 0, level.var_10A50, level.var_10A52);
+  func_814E(var_0, 8, 9, 1, level.var_10A51, level.var_10A53);
 }
 
-_meth_814E(var_0, var_1, var_2, var_3, var_4, var_5) {
+func_814E(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
   for(var_7 = var_1; var_7 <= var_2; var_7++) {
     if(!var_6) {
       foreach(var_0A, var_9 in var_4) {
         if(isDefined(level.archetypes[var_0]["cover_trans"]) && isDefined(level.archetypes[var_0]["cover_trans"][var_0A]) && isDefined(level.archetypes[var_0]["cover_trans"][var_0A][var_7])) {
-          level.archetypes[var_0]["cover_trans_predist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, _meth_81D6(var_0, var_0A, var_7));
+          level.archetypes[var_0]["cover_trans_predist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, func_81D6(var_0, var_0A, var_7));
           level.archetypes[var_0]["cover_trans_dist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, 1) - level.archetypes[var_0]["cover_trans_predist"][var_0A][var_7];
           level.archetypes[var_0]["cover_trans_angles"][var_0A][var_7] = getangledelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, 1);
         }
@@ -315,6 +315,6 @@ func_7EA4(var_0, var_1, var_2) {
   return level.archetypes[var_0]["cover_exit_split"][var_1][var_2];
 }
 
-_meth_81D6(var_0, var_1, var_2) {
+func_81D6(var_0, var_1, var_2) {
   return level.archetypes[var_0]["cover_trans_split"][var_1][var_2];
 }

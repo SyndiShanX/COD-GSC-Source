@@ -73,7 +73,7 @@ func_B285() {
   var_2 = undefined;
   if(self.script_noteworthy == "base_exterior") {
     var_3 = ["body_un_moon_guards_loadout_a", "body_un_moon_guards_loadout_b"];
-    var_1 = ::_meth_810D;
+    var_1 = ::func_810D;
     var_2 = "europa_security";
   } else {
     var_3 = ["body_civ_facility_worker_lt", "body_civ_facility_worker_drk"];
@@ -86,7 +86,7 @@ func_B285() {
   return var_0;
 }
 
-_meth_810D() {
+func_810D() {
   var_0[0] = "head_bg_var_head_bg_engineering_mate_head_hero_gator_blast_damage";
   var_0[1] = "head_bg_var_head_bg_engineering_mate_head_male_bc_01_blast_damage";
   var_0[2] = "head_bg_var_head_bg_engineering_mate_head_male_bc_02_blast_damage";
@@ -445,7 +445,7 @@ func_D85C() {
   level.player setstance("stand");
   level.player allowprone(0);
   level.player allowcrouch(0);
-  level.player _meth_84FE();
+  level.player func_84FE();
 }
 
 func_DF3E() {
@@ -453,7 +453,7 @@ func_DF3E() {
   level.player allowprone(1);
   level.player allowcrouch(1);
   level.player enableweapons();
-  level.player _meth_84FD();
+  level.player func_84FD();
   var_0 = undefined;
   if(isDefined(level.player.var_C39D)) {
     var_0 = level.player.var_C39D;
@@ -741,7 +741,7 @@ func_F5B1(var_0) {
         break;
 
       case "salter":
-        level.var_EA2C _meth_80F1(var_3.origin, var_3.angles);
+        level.var_EA2C func_80F1(var_3.origin, var_3.angles);
         level.var_EA2C give_mp_super_weapon(var_3.origin);
         if(isDefined(var_3.animation)) {
           var_3 thread scripts\sp\anim::func_1EC7(level.var_EA2C, var_3.animation);
@@ -754,7 +754,7 @@ func_F5B1(var_0) {
         break;
 
       case "mccallum":
-        level.var_B4F1 _meth_80F1(var_3.origin, var_3.angles);
+        level.var_B4F1 func_80F1(var_3.origin, var_3.angles);
         level.var_B4F1 give_mp_super_weapon(var_3.origin);
         if(isDefined(var_3.animation)) {
           var_3 thread scripts\sp\anim::func_1EC7(level.var_B4F1, var_3.animation);
@@ -780,7 +780,7 @@ func_1F8A() {
   thread scripts\sp\anim::func_1ECC(self, var_0);
   if(isDefined(self.var_EE2C)) {
     scripts\engine\utility::waitframe();
-    self _meth_82B1(scripts\sp\utility::func_7DC3(var_0)[0], self.var_EE2C);
+    self func_82B1(scripts\sp\utility::func_7DC3(var_0)[0], self.var_EE2C);
   }
 
   if(isDefined(self.var_ED48)) {
@@ -1162,7 +1162,7 @@ func_11690() {
   level.var_133EC.var_D1A4 scripts\sp\utility::func_65DD("auto_boost_on");
 }
 
-_meth_8578() {
+func_8578() {
   setdvarifuninitialized("grenade_indicator", 0);
   setsaveddvar("r_hudoutlineEnable", 1);
   if(getdvarint("grenade_indicator") != 1) {
@@ -1170,18 +1170,18 @@ _meth_8578() {
   }
 
   var_0 = getspawnerarray();
-  scripts\sp\utility::func_22C7(var_0, ::_meth_857A);
+  scripts\sp\utility::func_22C7(var_0, ::func_857A);
 }
 
-_meth_857A() {
+func_857A() {
   self endon("death");
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
-    var_0 thread _meth_8579();
+    var_0 thread func_8579();
   }
 }
 
-_meth_8579() {
+func_8579() {
   self hudoutlineenable(1, 0, 0);
   target_set(self);
   target_setshader(self, "hud_grenadethrowback");
@@ -1388,9 +1388,9 @@ func_A764(var_0, var_1, var_2) {
     var_9 = self.var_EDCF;
     var_0A = getnode(self.target, "targetname");
     if(isDefined(var_0A)) {
-      var_3 _meth_82F0(level.enableoffhandsecondaryweapons[var_9]);
+      var_3 func_82F0(level.enableoffhandsecondaryweapons[var_9]);
     } else {
-      var_3 _meth_82F1(level.enableoffhandsecondaryweapons[var_9]);
+      var_3 func_82F1(level.enableoffhandsecondaryweapons[var_9]);
     }
   } else {
     var_3.var_BC = "no_cover";
@@ -1494,7 +1494,7 @@ func_E59C(var_0) {
   var_1.ignoreme = 0;
   var_1 give_mp_super_weapon(var_1.origin);
   if(isDefined(self.var_EDCF)) {
-    var_1 _meth_82F1(level.enableoffhandsecondaryweapons[self.var_EDCF]);
+    var_1 func_82F1(level.enableoffhandsecondaryweapons[self.var_EDCF]);
   }
 
   self notify("robot_locker_opened");
@@ -1519,7 +1519,7 @@ func_E59A() {
         var_5 = var_4 scripts\sp\utility::func_7DC1("robot_locker_on");
         var_6 = getanimlength(var_5);
         var_7 = var_2 / var_6;
-        var_4 _meth_82B0(var_5, var_7);
+        var_4 func_82B0(var_5, var_7);
       }
 
       scripts\sp\anim::func_1F27(var_1, "robot_locker_on", 0);
@@ -1592,7 +1592,7 @@ func_10752(var_0, var_1) {
 
   var_2.var_1FBB = "robot";
   if(isDefined(var_0)) {
-    var_2 _meth_82F1(level.enableoffhandsecondaryweapons[var_0]);
+    var_2 func_82F1(level.enableoffhandsecondaryweapons[var_0]);
   }
 
   if(isDefined(self.var_EDD2)) {
@@ -1666,7 +1666,7 @@ func_A796() {
   wait(0.4);
   var_7 = scripts\engine\utility::spawn_tag_origin();
   var_7 show();
-  var_7 _meth_81E2(level.player, "tag_flash", (60, 0, -5), (0, 0, 0), 1);
+  var_7 func_81E2(level.player, "tag_flash", (60, 0, -5), (0, 0, 0), 1);
   playFXOnTag(level._effect["player_flashlight"], var_7, "tag_origin");
   level.player thread scripts\sp\utility::play_sound_on_entity("flashlight_on");
   scripts\engine\utility::flag_wait("flashlights_off");
@@ -1843,7 +1843,7 @@ func_10F53(var_0) {
       var_0.var_D435 = self;
       var_0.var_D3C9 = 1;
       if(isalive(self)) {
-        self _meth_81D0(self.origin, level.player);
+        self func_81D0(self.origin, level.player);
       }
     }
 
@@ -1901,7 +1901,7 @@ func_10F55(var_0) {
 
   wait(0.25);
   if(isalive(var_0)) {
-    var_0 _meth_81D0(var_0.origin, self);
+    var_0 func_81D0(var_0.origin, self);
   }
 }
 
@@ -1968,8 +1968,8 @@ func_10F49() {
     }
   }
 
-  self _meth_8260("bulletwhizby");
-  self _meth_8260("explode");
+  self func_8260("bulletwhizby");
+  self func_8260("explode");
   setsaveddvar("ai_eventdistsilencedshot", 128);
   self notify("shutdown_stealthlight");
 }
@@ -2045,8 +2045,8 @@ func_10F4A() {
 }
 
 func_1108E() {
-  self _meth_8260("bulletwhizby");
-  self _meth_8260("explode");
+  self func_8260("bulletwhizby");
+  self func_8260("explode");
   self notify("shutdown_stealthlight");
   self.precacheleaderboards = 0;
 }
@@ -2368,7 +2368,7 @@ func_6F2C() {
 
 func_AC90(var_0, var_1) {
   var_2 = int(var_1 * 20);
-  var_3 = self _meth_8134();
+  var_3 = self func_8134();
   var_4 = var_0 - var_3 / var_2;
   for(var_5 = 0; var_5 < var_2; var_5++) {
     thread func_AC91(var_0);

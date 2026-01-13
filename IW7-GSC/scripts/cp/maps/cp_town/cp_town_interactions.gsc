@@ -2045,7 +2045,7 @@ runcutiegestureloop(var_0, var_1) {
     return;
   }
 
-  var_2 = var_0 _meth_8513("ges_cutie_crank", "crank_loop_end");
+  var_2 = var_0 func_8513("ges_cutie_crank", "crank_loop_end");
   if(isDefined(var_0.disabledfire) && var_0.disabledfire < 1) {
     var_0 scripts\engine\utility::allow_fire(0);
   }

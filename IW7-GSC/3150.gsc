@@ -12,14 +12,14 @@ func_A22E(var_0, var_1, var_2, var_3) {
 func_A2AE(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = func_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E7(var_1, var_4, 1.0, var_2, 1.0);
+  self func_82E7(var_1, var_4, 1.0, var_2, 1.0);
   func_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
 
 func_A2BE(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = func_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_8478(var_4, 1.0, var_2, 1.0);
+  self func_8478(var_4, 1.0, var_2, 1.0);
   func_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
 
@@ -53,18 +53,18 @@ func_10E30(var_0) {
 func_10E25(var_0, var_1, var_2, var_3) {}
 
 func_A40C(var_0, var_1, var_2, var_3) {
-  return self _meth_8498();
+  return self func_8498();
 }
 
 func_C17E(var_0, var_1, var_2, var_3) {
-  return !self _meth_8498();
+  return !self func_8498();
 }
 
 func_A410(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon(var_1 + "_finished");
   var_4 = func_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E4(var_1, var_4["base"], var_4["body"], 1.0, var_2, 1.0, var_3);
+  self func_82E4(var_1, var_4["base"], var_4["body"], 1.0, var_2, 1.0, var_3);
   self give_attacker_kill_rewards(level.var_A065["evasion_overlay"], 1, 0);
   self setanimknob(var_4["add"], 1.0, var_2, 1.0, var_3);
 }
@@ -74,7 +74,7 @@ func_A411(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = func_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_5 = getanimlength(var_4["transition"]);
-  self _meth_82E4(var_1, var_4["transition"], var_4["body"], 1.0, var_2, 1.0, var_3);
+  self func_82E4(var_1, var_4["transition"], var_4["body"], 1.0, var_2, 1.0, var_3);
   self give_attacker_kill_rewards(level.var_A065["evasion_overlay"], 1, 0);
   self setanimknob(var_4["add_in"], 1.0, var_5, 1.0, var_3);
   wait(var_5);
@@ -274,7 +274,7 @@ func_67C5(var_0) {
       var_2 = randomint(var_1["evade"].size - 1);
       var_3 = var_1["evade"][var_2];
       self._blackboard.var_9DE4 = 1;
-      self _meth_82AB(var_3, 1.0, 0.0);
+      self func_82AB(var_3, 1.0, 0.0);
 
       if(var_2 == 0 || var_2 == 1 || var_2 == 6) {
         self playSound("jackal_evade_long");

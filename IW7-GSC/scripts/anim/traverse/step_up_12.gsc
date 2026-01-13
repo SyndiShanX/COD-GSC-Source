@@ -15,18 +15,18 @@ main() {
   if(var_5) {
     self animmode("noclip");
   } else {
-    self _meth_83C4("noclip");
+    self func_83C4("noclip");
   }
 
   for(var_6 = 0; var_6 < var_3; var_6++) {
-    self _meth_83B9(self.origin + var_4);
+    self func_83B9(self.origin + var_4);
     wait(0.05);
   }
 
   if(var_5) {
     self animmode("gravity");
   } else {
-    self _meth_83C4("gravity");
+    self func_83C4("gravity");
   }
 
   if(var_5) {

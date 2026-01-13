@@ -25,7 +25,7 @@ melee_init(var_0, var_1) {
 }
 
 melee_destroy() {
-  self _meth_8484();
+  self func_8484();
   if(isDefined(self.melee)) {
     if(isDefined(self.melee.target)) {
       self.melee.target.melee = undefined;
@@ -295,7 +295,7 @@ func_B5EE(var_0) {
     melee_destroy();
   }
 
-  self _meth_8484();
+  self func_8484();
   self.setumbraportalstate = 0;
   if(isDefined(self.bt.instancedata[var_0].objective_state_nomessage)) {
     self.objective_state_nomessage = self.bt.instancedata[var_0].objective_state_nomessage;
@@ -424,7 +424,7 @@ func_B5F0(var_0) {
   if(isplayer(var_2)) {
     var_6 = getclosestpointonnavmesh(var_2.origin, self);
   } else {
-    var_6 = var_3 _meth_84AC();
+    var_6 = var_3 func_84AC();
   }
 
   var_7 = var_1;
@@ -446,7 +446,7 @@ func_B5F0(var_0) {
     }
 
     if(isDefined(self.var_B621) || abs(self.origin[2] - var_2.origin[2]) < var_9) {
-      var_0A = self _meth_84AC();
+      var_0A = self func_84AC();
       if(self[[self.fncanmovefrompointtopoint]](var_0A, var_6)) {
         self.melee.var_29A8 = 1;
         return level.success;
@@ -538,7 +538,7 @@ func_B5F0(var_0) {
     return level.failure;
   }
 
-  self _meth_8481(var_0E);
+  self func_8481(var_0E);
   self.var_6D = 6;
   self.bt.instancedata[var_0].targetpos = var_0E;
   scripts\asm\asm_bb::bb_requestmeleecharge(var_2, var_0E);

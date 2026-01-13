@@ -7,7 +7,7 @@ func_B337() {
   level._effect["map_target_mark"] = loadfx("vfx\iw7\_requests\mp\vfx_marker_map_target");
 }
 
-_meth_8112(var_0, var_1, var_2) {
+func_8112(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -130,7 +130,7 @@ func_10DC2(var_0, var_1, var_2) {
 }
 
 func_1107B() {
-  self _meth_80DE();
+  self func_80DE();
   self.var_B338 = undefined;
   self.var_B336 = undefined;
   self.var_D8AD = undefined;

@@ -129,7 +129,7 @@ func_EF2C(var_0, var_1) {
 
 func_566D() {
   self.var_87F6 = 0;
-  self _meth_8504(0);
+  self func_8504(0);
   self.var_BC = "no_cover";
   self.objective_state_nomessage = 0;
 }
@@ -220,7 +220,7 @@ func_566B() {
 
   if(isDefined(self.var_2A8F)) {
     self.bt.var_5661 = 2;
-    self _meth_8321();
+    self func_8321();
     return;
   }
 
@@ -248,7 +248,7 @@ func_566B() {
 
   var_6 = var_2[randomint(var_2.size)] == var_0;
   if(var_6) {
-    self _meth_8321();
+    self func_8321();
     scripts\anim\shared::func_5D19();
     scripts\asm\asm_bb::func_2977(1);
     self.bt.var_5661 = 6;
@@ -297,7 +297,7 @@ func_11A13() {
   var_5 = [3, 1, 1];
   var_6 = func_7D77(var_5);
   var_2 = var_4[var_6];
-  self _meth_847D(var_2);
+  self func_847D(var_2);
 }
 
 func_8BE3(var_0) {
@@ -383,7 +383,7 @@ func_F1FB(var_0) {
 }
 
 func_5AA5(var_0) {
-  self _meth_8481(self.origin);
+  self func_8481(self.origin);
   self.var_6D = 64;
   self.bt.var_3125 = 1;
   anim thread[[self.bt.var_71CC]](self);
@@ -459,7 +459,7 @@ func_F20E(var_0) {
 }
 
 func_5AA6(var_0) {
-  self _meth_81D0();
+  self func_81D0();
   return level.running;
 }
 
@@ -537,7 +537,7 @@ func_F202(var_0) {
 
     self getplayerforguid();
     self.var_6D = var_3;
-    self _meth_8481(var_4);
+    self func_8481(var_4);
   } else if(var_1 >= self.bt.instancedata[var_0].var_BFA1) {
     if(self.badpath || !isDefined(self.vehicle_getspawnerarray)) {
       func_E1B1(1000);
@@ -605,7 +605,7 @@ func_F209(var_0) {
       self.bt.instancedata[var_0].var_BFB5 = var_1 + 3000;
       self.objective_playermask_showto = 80;
       self.bt.var_F1EE = var_2;
-      self _meth_8482(var_2);
+      self func_8482(var_2);
     }
   } else if(var_1 >= self.bt.instancedata[var_0].var_BFA1) {
     if(self.badpath || !isDefined(self.vehicle_getspawnerarray)) {
@@ -674,7 +674,7 @@ func_F204(var_0) {
 }
 
 func_F208(var_0) {
-  self _meth_8481(self.origin);
+  self func_8481(self.origin);
   self.var_6D = 24;
   self.bt.var_5661 = 0;
   return level.success;
@@ -691,11 +691,11 @@ func_9E21(var_0) {
 func_8C53(var_0) {
   func_E1B1(randomintrange(5000, 10000));
   self.bt.instancedata[var_0] = gettime();
-  self _meth_82B1(lib_0A1E::func_2342(), 1.5);
+  self func_82B1(lib_0A1E::func_2342(), 1.5);
   self.objective_playermask_showto = 1000;
   self.team = "team3";
   self.precacheleaderboards = 0;
-  self _meth_8481(self.origin);
+  self func_8481(self.origin);
   self.var_6D = 500;
   self.ignoreme = 1;
   self.var_2894 = 2;
@@ -705,7 +705,7 @@ func_8C53(var_0) {
 func_8C54(var_0) {
   var_1 = gettime();
   if(var_1 >= self.bt.instancedata[var_0]) {
-    self _meth_80EC();
+    self func_80EC();
     self.bt.instancedata[var_0] = var_1 + randomintrange(2000, 3000);
   }
 
@@ -797,7 +797,7 @@ func_12F13(var_0) {
     self.bt.var_F1F9 = var_1 + 3000;
     self.objective_playermask_showto = 80;
     self.bt.var_F1EE = var_2;
-    self _meth_8482(var_2);
+    self func_8482(var_2);
     thread func_F1F8();
   }
 
@@ -848,7 +848,7 @@ func_F1F8() {
   }
 
   self.var_6D = 16;
-  self _meth_8481(self.origin);
+  self func_8481(self.origin);
   scripts\asm\asm_bb::func_2972();
   wait(0.5);
   anim thread[[self.bt.var_71CC]](self);
@@ -896,7 +896,7 @@ func_F1F6(var_0, var_1) {
   }
 
   var_1 = max(var_1, 5);
-  self _meth_8277(2, var_1 - 1);
+  self func_8277(2, var_1 - 1);
   if(isalive(var_0)) {
     var_0 waittill("death");
   }
@@ -1031,7 +1031,7 @@ func_F20D(var_0, var_1) {
     var_3 = randomintrange(var_0, var_1);
     self.bt.var_F20D = var_2 + var_3;
   } else if(var_2 >= self.bt.var_F20D) {
-    self _meth_81D0();
+    self func_81D0();
     return 1;
   }
 
@@ -1054,7 +1054,7 @@ func_5671() {
     }
   }
 
-  self _meth_847D(var_0);
+  self func_847D(var_0);
 }
 
 func_9E7B(var_0) {
@@ -1172,7 +1172,7 @@ func_F1F9(var_0, var_1) {
     thread func_F1F5(var_3 * 0.001);
   } else if(var_2 >= self.bt.var_F1F9) {
     self.var_6D = 64;
-    self _meth_8481(self.origin);
+    self func_8481(self.origin);
     anim thread[[self.bt.var_71CC]](self);
     return 1;
   }
@@ -1206,7 +1206,7 @@ func_DCAA(var_0, var_1) {
   var_3 = var_2[randomint(var_2.size)];
   var_4 = ["upper", "lower"];
   var_5 = var_4[randomint(var_4.size)];
-  self _meth_850B(30, var_3, var_5);
+  self func_850B(30, var_3, var_5);
 }
 
 func_4D64(var_0, var_1) {
@@ -1245,7 +1245,7 @@ func_4D64(var_0, var_1) {
 
     wait(randomfloatrange(var_0, var_1));
     if(isDefined(var_6)) {
-      self _meth_850B(50, var_2[var_4], var_6);
+      self func_850B(50, var_2[var_4], var_6);
     }
   }
 }

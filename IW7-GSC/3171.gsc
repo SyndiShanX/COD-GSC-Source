@@ -43,8 +43,8 @@ func_5F73(var_0) {
   var_3 = lib_0A1E::func_2356(var_0, "aim_4_knob");
   var_4 = lib_0A1E::func_2356(var_0, "aim_6_knob");
   wait(0.05);
-  self _meth_82AC(var_1, 1, 0);
-  self _meth_82AC(var_2, 1, 0);
+  self func_82AC(var_1, 1, 0);
+  self func_82AC(var_2, 1, 0);
   var_5 = 0;
   for(;;) {
     var_6 = scripts\anim\utility_common::getyawtoenemy();
@@ -155,11 +155,11 @@ func_AFE5(var_0, var_1, var_2, var_3) {
 
 func_A669() {
   if(isDefined(self.var_A8AA)) {
-    self _meth_81D0(self.origin, self.var_A8AA);
+    self func_81D0(self.origin, self.var_A8AA);
     return;
   }
 
-  self _meth_81D0();
+  self func_81D0();
 }
 
 func_10D8E(var_0) {
@@ -256,7 +256,7 @@ func_CF2A(var_0, var_1, var_2, var_3) {
 
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_5, 1, var_2, 1);
+  self func_82E7(var_1, var_5, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_5);
   for(var_6 = 0; var_6 < var_4; var_6++) {
     if(!func_9D9D(var_5)) {
@@ -281,7 +281,7 @@ func_CF2A(var_0, var_1, var_2, var_3) {
 func_CF2B(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   if(isDefined(self.isnodeoccupied)) {
-    self _meth_8306(self.isnodeoccupied);
+    self func_8306(self.isnodeoccupied);
   }
 
   if(isDefined(self.a.var_7280)) {
@@ -293,7 +293,7 @@ func_CF2B(var_0, var_1, var_2, var_3) {
   func_FA8D(var_1, var_2);
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   lib_0A1E::func_2369(var_0, var_1, var_5);
-  self _meth_82E7(var_1, var_5, 1, var_2, 1);
+  self func_82E7(var_1, var_5, 1, var_2, 1);
   for(var_6 = 0; var_6 < var_4; var_6++) {
     if(!func_9D9D(var_5)) {
       break;
@@ -312,13 +312,13 @@ func_CF2B(var_0, var_1, var_2, var_3) {
 }
 
 func_CF06(var_0, var_1, var_2, var_3) {
-  self _meth_8306();
+  self func_8306();
   lib_0A1E::func_2368(var_0, var_1, var_2, ::func_8977);
 }
 
 func_CF07(var_0, var_1, var_2, var_3) {
   thread func_D899();
-  self _meth_8306();
+  self func_8306();
   lib_0A1E::func_2368(var_0, var_1, var_2, ::func_8977);
 }
 
@@ -328,7 +328,7 @@ func_CF29(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
     lib_0A1E::func_2369(var_0, var_1, var_4);
-    self _meth_82E7(var_1, var_4, 1, var_2, 1);
+    self func_82E7(var_1, var_4, 1, var_2, 1);
     var_5 = var_4;
     var_6 = lib_0A1E::func_2322(var_0, var_1, ::func_8977);
     if(var_6 == "end") {
@@ -349,7 +349,7 @@ func_CF28(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
     if(!isDefined(var_4) || var_5 != var_4) {
-      self _meth_82E7(var_1, var_5, 1, var_2, 1);
+      self func_82E7(var_1, var_5, 1, var_2, 1);
       var_4 = var_5;
     }
 
@@ -361,7 +361,7 @@ func_CF28(var_0, var_1, var_2, var_3) {
 
 func_D540(var_0, var_1, var_2, var_3) {
   thread func_D899();
-  self _meth_8306();
+  self func_8306();
   lib_0A1E::func_2364(var_0, var_1, var_2);
 }
 
@@ -377,7 +377,7 @@ func_D541(var_0, var_1, var_2, var_3) {
   var_7 = getmovedelta(var_6);
   var_8 = randomintrange(1, 3);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   while(var_8 > 0) {
     var_9 = self gettweakablevalue(var_7);

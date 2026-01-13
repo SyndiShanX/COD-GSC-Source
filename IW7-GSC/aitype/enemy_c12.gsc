@@ -18,8 +18,8 @@ main() {
   self.behaviortreeasset = "c12";
   self.var_1FA9 = "C12";
   if(isai(self)) {
-    self _meth_82DC(256, 0);
-    self _meth_82DB(768, 1024);
+    self func_82DC(256, 0);
+    self func_82DB(768, 1024);
   }
 
   self.var_394 = "iw7_c12rocket";

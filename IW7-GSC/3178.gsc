@@ -14,7 +14,7 @@ func_100AD(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(lib_0A18::_meth_85B5(var_4)) {
+  if(lib_0A18::func_85B5(var_4)) {
     var_5 = self[[self.var_7191]](var_0, var_2);
     if(isDefined(var_5)) {
       var_6 = func_7EE8(var_2, var_5);
@@ -28,7 +28,7 @@ func_100AD(var_0, var_1, var_2, var_3) {
         }
       }
 
-      var_9 = self _meth_806B(var_6, var_7, "min energy", "min time", "max time");
+      var_9 = self func_806B(var_6, var_7, "min energy", "min time", "max time");
       self.a.nextgrenadetrytime = gettime() + randomintrange(1000, 2000);
       if(isDefined(var_9)) {
         var_0A = spawnStruct();
@@ -162,12 +162,12 @@ func_CEC8(var_0, var_1, var_2, var_3) {
   scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
   lib_0A1E::func_2369(var_0, var_1, var_7);
   self clearanim(var_8, var_2);
-  self _meth_82EA(var_1, var_7, 1, var_2, func_6B9A());
+  self func_82EA(var_1, var_7, 1, var_2, func_6B9A());
   thread lib_0A1E::func_231F(var_0, var_1);
   var_9 = "seeker_grenade_folded";
   var_0A = undefined;
   var_0B = 0;
-  var_0C = _meth_810E(var_6);
+  var_0C = func_810E(var_6);
   while(!var_0B) {
     self waittill(var_1, var_0D);
     if(!isarray(var_0D)) {
@@ -238,7 +238,7 @@ func_CEC8(var_0, var_1, var_2, var_3) {
   scripts\asm\asm::asm_fireephemeralevent("throwSeeker", "end");
 }
 
-_meth_810E(var_0) {
+func_810E(var_0) {
   if(var_0 == "exposed_seeker_throw") {
     return % equip_seeker_throw01;
   }
@@ -254,7 +254,7 @@ func_57E0(var_0, var_1) {
   self.var_F174 linkto(self, var_0, (0, 0, 0), (0, 0, 0));
   self.var_F174 setModel("seeker_grenade_wm");
   self.var_F174 glinton(#animtree);
-  self.var_F174 _meth_82EA("thrown", var_1, 1, 0.2);
+  self.var_F174 func_82EA("thrown", var_1, 1, 0.2);
 }
 
 trygrenadethrow(var_0, var_1, var_2, var_3, var_4) {
@@ -378,7 +378,7 @@ func_58BA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
   lib_0A1E::func_2369(var_0, var_1, var_2);
   self clearanim(var_8, var_4);
-  self _meth_82EA(var_1, var_2, 1, var_4, func_6B9A());
+  self func_82EA(var_1, var_2, 1, var_4, func_6B9A());
   thread lib_0A1E::func_231F(var_0, var_1);
   var_9 = scripts\anim\utility_common::getgrenademodel();
   var_0A = "none";
@@ -417,7 +417,7 @@ func_58BA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     thread func_13A98(var_1, self.var_1652.player, var_5);
   }
 
-  var_16 = self _meth_83C2();
+  var_16 = self func_83C2();
   if(!usingplayer()) {
     func_F72C(self.var_1652, var_5);
   }
@@ -531,7 +531,7 @@ func_13A99(var_0, var_1) {
         var_0C = var_8[var_0B];
         var_0D = distancesquared(var_5.origin, var_0C.origin);
         if(var_0D < var_6) {
-          var_0C _meth_85C8(var_2, var_1);
+          var_0C func_85C8(var_2, var_1);
           continue;
         }
 
@@ -550,7 +550,7 @@ func_13A99(var_0, var_1) {
   }
 }
 
-_meth_85C8(var_0, var_1) {
+func_85C8(var_0, var_1) {
   var_2 = self;
   anim.var_11813 = undefined;
   if(gettime() - var_2.var_A990 < 3000) {

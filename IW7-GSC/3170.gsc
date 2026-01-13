@@ -3,7 +3,7 @@
  * Script: 3170.gsc
 *********************************************/
 
-_meth_811C() {
+func_811C() {
   if(isDefined(self.var_130A9)) {
     var_0 = self getspawnteam();
     return (var_0[0], var_0[1], self getEye()[2]);
@@ -13,7 +13,7 @@ _meth_811C() {
 }
 
 func_7AA3() {
-  var_0 = _meth_811C();
+  var_0 = func_811C();
   return var_0;
 }
 
@@ -63,10 +63,10 @@ func_4756(var_0, var_1, var_2) {
   self.asm.var_58EC = 0;
   var_3 = lib_0A1E::func_2356(var_1, "aim_knob");
   self clearanim(var_3, 0.2);
-  self _meth_82D0();
-  var_4 = self _meth_8164();
+  self func_82D0();
+  var_4 = self func_8164();
   if(isDefined(var_4) && var_4 == self.asm.turret) {
-    self _meth_83AF();
+    self func_83AF();
   }
 
   self.asm.turret.origin = self.asm.var_12A7E;
@@ -80,7 +80,7 @@ func_4725(var_0, var_1, var_2) {
   self.asm.var_58EC = 0;
   var_3 = lib_0A1E::func_2356(var_1, "aim_knob");
   self clearanim(var_3, 0.2);
-  self _meth_82D0();
+  self func_82D0();
 }
 
 func_CEB3(var_0, var_1, var_2, var_3) {
@@ -90,7 +90,7 @@ func_CEB3(var_0, var_1, var_2, var_3) {
 }
 
 func_AB31(var_0, var_1) {
-  if(self _meth_81B7()) {
+  if(self func_81B7()) {
     return "none";
   }
 
@@ -144,7 +144,7 @@ func_CEB0(var_0, var_1, var_2, var_3) {
   self.asm.var_12A7E = var_4.origin;
   self.asm.var_12A57 = var_4.angles;
   self.asm.turret = var_4;
-  self _meth_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
+  self func_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
 }
 
 func_C021(var_0, var_1, var_2, var_3) {
@@ -153,7 +153,7 @@ func_C021(var_0, var_1, var_2, var_3) {
   self.asm.var_12A7E = var_4.origin;
   self.asm.var_12A57 = var_4.angles;
   self.asm.turret = var_4;
-  self _meth_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
+  self func_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
 }
 
 func_CEB2(var_0, var_1, var_2, var_3) {
@@ -164,9 +164,9 @@ func_CEB2(var_0, var_1, var_2, var_3) {
 func_FFE4(var_0, var_1, var_2, var_3) {
   var_4 = isDefined(self.asm.var_1310E) && self.asm.var_1310E;
   if(var_4) {
-    var_5 = self _meth_8164();
+    var_5 = self func_8164();
     var_6 = scripts\asm\asm_bb::bb_getrequestedturret();
-    var_7 = isDefined(var_5) && var_5 _meth_8165() == self;
+    var_7 = isDefined(var_5) && var_5 func_8165() == self;
     var_8 = var_7 && isDefined(var_6) && var_6 == var_5;
     return !var_8;
   }
@@ -187,7 +187,7 @@ func_CEAF(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   if(isDefined(self.target_getindexoftarget)) {
     if(isDefined(self._blackboard.var_5D3B)) {
-      self _meth_80F1(self.target_getindexoftarget.origin, self.angles);
+      self func_80F1(self.target_getindexoftarget.origin, self.angles);
       self orientmode("face angle", self.target_getindexoftarget.angles[1]);
     } else {
       var_5 = getangledelta(var_4);
@@ -200,7 +200,7 @@ func_CEAF(var_0, var_1, var_2, var_3) {
 
   self endon(var_1 + "_finished");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   var_7 = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   if(var_7 == "end") {
@@ -234,7 +234,7 @@ func_C0C0(var_0, var_1, var_2, var_3) {
 
 func_B0E9(var_0, var_1, var_2, var_3) {
   if(isDefined(self.target_getindexoftarget)) {
-    var_4 = self.target_getindexoftarget _meth_8169();
+    var_4 = self.target_getindexoftarget func_8169();
     if(!scripts\engine\utility::array_contains(var_4, "over")) {
       return var_3 == "high";
     }

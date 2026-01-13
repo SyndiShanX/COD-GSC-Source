@@ -59,10 +59,10 @@ func_255D() {
   var_1 = [];
   var_1["left2right"] = getanimlength(scripts\anim\utility::func_1F64("left2right"));
   var_1["right2left"] = getanimlength(scripts\anim\utility::func_1F64("right2left"));
-  self _meth_82A5( % atv_turn, % body, 1, 0);
+  self func_82A5( % atv_turn, % body, 1, 0);
   self give_attacker_kill_rewards(scripts\anim\utility::func_1F64("drive"), 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64(var_0), 1, 0);
-  self _meth_82B0(scripts\anim\utility::func_1F64(var_0), 0.5);
+  self func_82B0(scripts\anim\utility::func_1F64(var_0), 0.5);
   for(;;) {
     if(self.var_E500.var_10F83) {
       var_2 = 0.5 * 1 + scripts\sp\vehicle_code::func_12E33(self.var_E500);
@@ -86,8 +86,8 @@ func_255D() {
       var_3 = 0.5;
     }
 
-    self _meth_82A9(scripts\anim\utility::func_1F64(var_0), 1, 0.1, var_4);
-    self _meth_82B0(scripts\anim\utility::func_1F64(var_0), var_3);
+    self func_82A9(scripts\anim\utility::func_1F64(var_0), 1, 0.1, var_4);
+    self func_82B0(scripts\anim\utility::func_1F64(var_0), var_3);
     wait(0.05);
   }
 }
@@ -97,7 +97,7 @@ func_255E() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self _meth_82A5( % atv_aiming, % body, 1, 0);
+  self func_82A5( % atv_aiming, % body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("idle"), 1, 0);
   for(;;) {
     if(self.var_4B71 != "none") {
@@ -109,9 +109,9 @@ func_255E() {
     var_3 = 1 - abs(var_2);
     var_4 = max(0, 0 - var_2);
     var_5 = max(0, var_2);
-    self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_center"), var_3, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_left"), var_4, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_right"), var_5, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("straight_level_center"), var_3, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("straight_level_left"), var_4, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("straight_level_right"), var_5, var_0);
     if(self.bulletsinclip <= 0) {
       scripts\anim\weaponlist::refillclip();
       var_1 = gettime() + 3000;
@@ -121,12 +121,12 @@ func_255E() {
       func_2568();
     }
 
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_left_center"), var_3, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_left_left"), var_4, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_left_right"), var_5, var_0);
-    self _meth_82A9(scripts\anim\utility::func_1F64("add_aim_right_center"), var_3, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_right_left"), var_4, var_0);
-    self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_right_right"), var_5, var_0);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_left_center"), var_3, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("add_aim_left_left"), var_4, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("add_aim_left_right"), var_5, var_0);
+    self func_82A9(scripts\anim\utility::func_1F64("add_aim_right_center"), var_3, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("add_aim_right_left"), var_4, var_0);
+    self func_82AC(scripts\anim\utility::func_1F64("add_aim_right_right"), var_5, var_0);
     thread func_2569();
     wait(0.05);
   }
@@ -135,9 +135,9 @@ func_255E() {
 func_2558(var_0) {
   self endon("death");
   self.var_E500.var_10F83 = 0;
-  self _meth_82E6("atv_event", var_0, 1, 0.17);
+  self func_82E6("atv_event", var_0, 1, 0.17);
   scripts\anim\shared::donotetracks("atv_event", ::func_256F);
-  self _meth_82A9(scripts\anim\utility::func_1F64("event_restore"), 1, 0.1);
+  self func_82A9(scripts\anim\utility::func_1F64("event_restore"), 1, 0.1);
   self.var_E500.var_10F83 = 1;
   self.var_4B71 = "none";
   self notify("atv_event_finished");
@@ -153,7 +153,7 @@ func_255C(var_0) {
       self notify("atv_event_occurred");
       self.var_4B71 = "jump";
       var_1.var_10F83 = 0;
-      self _meth_82E6("jump", scripts\anim\utility::func_1F64("event_jump"), 1, 0.17);
+      self func_82E6("jump", scripts\anim\utility::func_1F64("event_jump"), 1, 0.17);
     }
 
     if(var_1.var_67E5["bump"][var_0]) {
@@ -316,13 +316,13 @@ func_2561() {
   self.var_10FB2 = 1;
   self waittill("start_blending_reload");
   self give_attacker_kill_rewards( % atv_aiming, 0, 0.25);
-  self _meth_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
+  self func_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
   scripts\anim\shared::donotetracks("gun_down");
   self clearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
-  self _meth_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
+  self func_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
   scripts\anim\shared::donotetracks("reload_anim");
   self clearanim( % atv_reload, 0.2);
-  self _meth_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
+  self func_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
   self.var_86EC = 1;
   scripts\anim\shared::donotetracks("gun_up", ::func_256E);
   self.var_10FB2 = undefined;
@@ -398,8 +398,8 @@ func_256A() {
     var_2 = var_3;
     var_0B = min(max(0 - var_3, 0), 90) / 90 * self.a.var_1A4B;
     var_0C = min(max(var_3, 0), 90) / 90 * self.a.var_1A4B;
-    self _meth_82AC( % atv_aim_4, var_0B, var_0);
-    self _meth_82AC( % atv_aim_6, var_0C, var_0);
+    self func_82AC( % atv_aim_4, var_0B, var_0);
+    self func_82AC( % atv_aim_6, var_0C, var_0);
     wait(0.05);
   }
 }

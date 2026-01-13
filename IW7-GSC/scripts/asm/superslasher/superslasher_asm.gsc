@@ -421,7 +421,7 @@ func_3722(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_10 = getclosestpointonnavmesh(var_0D, self);
-  var_11 = self _meth_84AC();
+  var_11 = self func_84AC();
   if(!navisstraightlinereachable(var_11, var_10, self)) {
     return undefined;
   }
@@ -550,7 +550,7 @@ ss_play_stomp_nt(var_0, var_1, var_2, var_3) {
 
 superslasher_needstoturn(var_0, var_1, var_2, var_3) {
   if(isDefined(self.vehicle_getspawnerarray)) {
-    var_4 = vectortoyaw(self _meth_813A());
+    var_4 = vectortoyaw(self func_813A());
     var_5 = angleclamp180(var_4 - self.angles[1]);
     if(abs(var_5) >= 35) {
       var_6 = anglesToForward(self.angles);

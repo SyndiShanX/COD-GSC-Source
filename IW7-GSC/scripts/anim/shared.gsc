@@ -82,7 +82,7 @@ func_5390() {
     }
   }
 
-  self _meth_83CD();
+  self func_83CD();
 }
 
 func_12E61() {
@@ -95,10 +95,10 @@ func_12E61() {
   var_0[var_0.size] = "back";
   foreach(var_4 in var_0) {
     var_1[var_1.size] = orientmode(var_4);
-    var_2[var_2.size] = _meth_8193(var_4);
+    var_2[var_2.size] = func_8193(var_4);
   }
 
-  self _meth_83CD(var_1[0], var_2[0], var_1[1], var_2[1], var_1[2], var_2[2], var_1[3], var_2[3]);
+  self func_83CD(var_1[0], var_2[0], var_1[1], var_2[1], var_1[2], var_2[2], var_1[3], var_2[3]);
   foreach(var_4 in var_0) {
     var_7 = orientmode(var_4);
     if(var_7 == "none") {
@@ -143,7 +143,7 @@ func_3939() {
   return isalive(self);
 }
 
-_meth_8193(var_0) {
+func_8193(var_0) {
   switch (var_0) {
     case "chest":
       return "tag_weapon_chest";
@@ -224,7 +224,7 @@ func_5D1A() {
 }
 
 func_5EF5(var_0, var_1) {
-  if(self _meth_81B7()) {
+  if(self func_81B7()) {
     return "none";
   }
 
@@ -282,7 +282,7 @@ getaimyawtoshootentorpos() {
 }
 
 func_7DA5() {
-  var_0 = _meth_8064();
+  var_0 = func_8064();
   if(self.script == "cover_crouch" && isDefined(self.a.var_4727) && self.a.var_4727 == "lean") {
     var_0 = var_0 - level.covercrouchleanpitch;
   }
@@ -290,7 +290,7 @@ func_7DA5() {
   return var_0;
 }
 
-_meth_8064() {
+func_8064() {
   if(!isDefined(self.var_FE9E)) {
     if(!isDefined(self.var_FECF)) {
       return 0;
@@ -302,7 +302,7 @@ _meth_8064() {
   return scripts\anim\combat_utility::castshadows(self.var_FE9E getshootatpos());
 }
 
-_meth_811C() {
+func_811C() {
   if(scripts\engine\utility::actor_is3d()) {
     return self getEye();
   }
@@ -599,7 +599,7 @@ func_D4C2(var_0, var_1, var_2) {
       return;
     }
 
-    self _meth_82A5(var_0, % body, 1, 0.1);
+    self func_82A5(var_0, % body, 1, 0.1);
     wait(0.1);
   }
 }

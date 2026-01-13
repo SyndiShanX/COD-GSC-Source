@@ -721,7 +721,7 @@ func_6835(var_0, var_1, var_2) {
   var_0 thread func_6830(var_3, var_4);
   wait 0.15;
   var_0 unlink();
-  var_0 _meth_8455(var_2, 0);
+  var_0 func_8455(var_2, 0);
 
   for(;;) {
     var_5 = distance(var_0.origin, var_2);
@@ -1843,7 +1843,7 @@ func_F0C6(var_0) {
 }
 
 func_D30D() {
-  var_0 = level.player _meth_848A();
+  var_0 = level.player func_848A();
   var_1 = level.player adsbuttonpressed();
 
   if(var_1 && isDefined(var_0) && isDefined(var_0[0]) && var_0[1] > 0.1) {

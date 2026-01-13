@@ -15,7 +15,7 @@ main() {
     self waittill("hellfreezesover");
   }
 
-  self _meth_83AC("voice_bchatter_1_3d");
+  self func_83AC("voice_bchatter_1_3d");
   var_0 = 0.3;
   self clearanim( % scripted_talking, var_0);
   scripts\sp\anim::func_55C7(0);
@@ -163,7 +163,7 @@ func_CF0E(var_0) {
   }
 
   func_C703();
-  self _meth_82E4("deathanim", var_0, % body, 1, 0.1);
+  self func_82E4("deathanim", var_0, % body, 1, 0.1);
   scripts\anim\face::playfacialanim(var_0, "death");
   if(isDefined(self.var_10265)) {
     if(!isDefined(self.noragdoll)) {
@@ -510,7 +510,7 @@ func_7E5F() {
   }
 
   if(self.a.pose == "prone") {
-    return _meth_809F();
+    return func_809F();
   }
 }
 
@@ -540,14 +540,14 @@ giveweapon() {
 getsafeanimmovedeltapercentage() {
   if(abs(self.var_E3) < 45) {
     var_0 = scripts\anim\utility::func_B027("death", "running_forward_f");
-    var_1 = _meth_80C3(var_0);
+    var_1 = func_80C3(var_0);
     if(isDefined(var_1)) {
       return var_1;
     }
   }
 
   var_0 = scripts\anim\utility::func_B027("death", "running_forward");
-  var_1 = _meth_80C3(var_0);
+  var_1 = func_80C3(var_0);
   if(isDefined(var_1)) {
     return var_1;
   }
@@ -555,7 +555,7 @@ getsafeanimmovedeltapercentage() {
   return getspectatingplayer();
 }
 
-_meth_80C3(var_0) {
+func_80C3(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
@@ -732,7 +732,7 @@ func_7E45() {
   return var_0[randomint(var_0.size)];
 }
 
-_meth_809F() {}
+func_809F() {}
 
 func_7DF1() {}
 

@@ -14,7 +14,7 @@ func_4D5F() {
   while(isalive(self)) {
     self waittill("damage_part_died", var_0);
     scripts\anim\utility_common::repeater_headshot_ammo_passive(self.var_E2, self.sethalfresparticles, self);
-    if(self _meth_81B7()) {
+    if(self func_81B7()) {
       return;
     }
 
@@ -30,7 +30,7 @@ func_4D60() {
   self endon("terminate_ai_threads");
   while(isalive(self)) {
     self waittill("damage_subpart_died", var_0);
-    if(self _meth_81B7()) {
+    if(self func_81B7()) {
       return;
     }
 

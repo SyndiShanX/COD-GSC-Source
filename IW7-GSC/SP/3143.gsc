@@ -32,7 +32,7 @@ func_351B() {
   level.player scripts\engine\utility::allow_crouch(0);
   level.player scripts\engine\utility::allow_prone(0);
   level.player scripts\engine\utility::allow_offhand_weapons(0);
-  level.player _meth_84AF(1);
+  level.player func_84AF(1);
   level.player scripts\engine\utility::allow_weapon(0);
   level.player.inrodeo = 1;
   if(var_0 == "right") {
@@ -53,7 +53,7 @@ func_351B() {
   level.player playerlinktoblend(var_2, var_5, var_1);
   level.player.ignoreme = 1;
   self.ignoreme = 1;
-  self.var_D461 = level.player _meth_8525();
+  self.var_D461 = level.player func_8525();
   level.player getrankinfoxpamt();
   self setCanDamage(0);
   self._blackboard.var_E5FD = 1;
@@ -64,7 +64,7 @@ func_351B() {
     var_6 = "rodeo_right";
   }
 
-  self _meth_82E7("RodeoJump", lib_0A1E::func_2356(var_6, "jump_" + self.var_E5F8), 1, 0.2, 1);
+  self func_82E7("RodeoJump", lib_0A1E::func_2356(var_6, "jump_" + self.var_E5F8), 1, 0.2, 1);
   lib_0A1E::func_231F("rodeo", "RodeoJump", ::func_35EE);
   thread func_D3FA(var_2, var_0);
   thread func_D433(self.var_D267, var_0);
@@ -90,14 +90,14 @@ func_351B() {
     }
 
     var_9 = lib_0A1E::func_2356(var_6, "hit");
-    self _meth_82E7("RodeoHit", var_9, 1, 0.2, 1);
+    self func_82E7("RodeoHit", var_9, 1, 0.2, 1);
     lib_0A1E::func_231F("rodeo", "RodeoHit", ::func_35EE);
     self clearanim(var_9, 0.2);
     if(var_0 == "left") {
       thread func_35F2(var_2);
       thread func_D404(var_2);
       var_0A = lib_0A1E::func_2356(var_6, "struggle");
-      self _meth_82EA("RodeoStruggle", var_0A, 1, 0.2, 1);
+      self func_82EA("RodeoStruggle", var_0A, 1, 0.2, 1);
       self waittill("struggle_succeeded");
       self clearanim(var_0A, 0.2);
       thread lib_0F3D::func_50E8(0.2);
@@ -105,7 +105,7 @@ func_351B() {
 
     var_0A = lib_0A1E::func_2356(var_6, "success");
     thread func_D3ED(self.var_D267, var_0);
-    self _meth_82E7("RodeoDismount", var_0A, 1, 0.2, 1);
+    self func_82E7("RodeoDismount", var_0A, 1, 0.2, 1);
     if(var_0 == "left") {
       self give_attacker_kill_rewards(lib_0A1E::func_2356("rodeo_right", "fire"), 1, 0.2, 1);
     }
@@ -116,7 +116,7 @@ func_351B() {
     var_0A = lib_0A1E::func_2356(var_7, "fail");
     var_0B = scripts\engine\utility::get_notetrack_time(var_0A, "knockoff");
     thread func_D3F6(self.var_D267, var_0, var_0B);
-    self _meth_82E7("RodeoKnockOff", var_0A, 1, 0.2, 1);
+    self func_82E7("RodeoKnockOff", var_0A, 1, 0.2, 1);
     lib_0A1E::func_231F("rodeo", "RodeoKnockOff", ::func_35EE);
     self.asm.var_11B08.var_30E6 = 0;
   }
@@ -150,7 +150,7 @@ func_35F1(var_0, var_1, var_2) {
   var_3 = 0;
   var_4 = [scripts\engine\utility::get_notetrack_time(var_0, "hit_start"), scripts\engine\utility::get_notetrack_time(var_0, "hit_end")];
   var_5 = gettime();
-  self _meth_82E7("RodeoHitPlayer", var_0, 1, 0.2, 1);
+  self func_82E7("RodeoHitPlayer", var_0, 1, 0.2, 1);
   thread lib_0A1E::func_231F("rodeo", "RodeoHitPlayer", ::func_35EE);
   wait(var_4[0] - 0.05);
   var_6 = func_4A09(var_1);
@@ -192,11 +192,11 @@ func_35F2(var_0) {
   self endon("death");
   var_1 = lib_0A1E::func_2356("rodeo_right", "struggle");
   var_2 = scripts\engine\utility::spawn_tag_origin();
-  var_2 _meth_81E2(level.player, "tag_origin", (50, 0, -15), (0, 0, 0), 1);
+  var_2 func_81E2(level.player, "tag_origin", (50, 0, -15), (0, 0, 0), 1);
   var_2 setcursorhint("HINT_BUTTON");
-  var_2 _meth_84B8(1);
+  var_2 func_84B8(1);
   var_2 setuserange(500);
-  var_2 _meth_84A4(500);
+  var_2 func_84A4(500);
   var_2 makeusable();
   var_2 show();
   self.var_A8E4 = 0;
@@ -211,7 +211,7 @@ func_35F2(var_0) {
   var_9 = 1000 / var_8;
   self.var_6D3E = 1;
   thread func_35F3();
-  var_0 _meth_8244("steady_rumble");
+  var_0 func_8244("steady_rumble");
   var_0A = getdvarint("cg_fov");
   var_0B = 50;
   var_0C = var_0A - var_0B;
@@ -222,25 +222,25 @@ func_35F2(var_0) {
     var_0D = gettime() - self.var_A8E4;
     var_5 = self getscoreinfocategory(var_1);
     if(var_3 && !var_4) {
-      self _meth_82B1(var_1, var_7);
-      var_0 _meth_82B1(var_0.var_11169, var_7);
+      self func_82B1(var_1, var_7);
+      var_0 func_82B1(var_0.var_11169, var_7);
     }
 
     if(!var_3) {
       if(var_4) {
-        self _meth_82B1(var_1, 0);
-        var_0 _meth_82B1(var_0.var_11169, 0);
+        self func_82B1(var_1, 0);
+        var_0 func_82B1(var_0.var_11169, 0);
         continue;
       }
 
       if(var_5 > var_6) {
         var_5 = var_5 - var_6;
-        self _meth_82B0(var_1, var_5);
-        var_0 _meth_82B0(var_0.var_11169, var_5);
+        self func_82B0(var_1, var_5);
+        var_0 func_82B0(var_0.var_11169, var_5);
       }
     }
 
-    level.player _meth_81DE(var_0A - var_0C * var_5, 0.05);
+    level.player func_81DE(var_0A - var_0C * var_5, 0.05);
   }
 
   self notify("mash_end");
@@ -248,15 +248,15 @@ func_35F2(var_0) {
   self.var_6D3E = 0;
   var_2 makeunusable();
   var_2 delete();
-  self _meth_82B1(var_1, var_7);
-  var_0 _meth_82B1(var_0.var_11169, var_7);
-  level.player _meth_81DE(var_0B, getanimlength(var_1) * 1 - var_5 / var_7);
+  self func_82B1(var_1, var_7);
+  var_0 func_82B1(var_0.var_11169, var_7);
+  level.player func_81DE(var_0B, getanimlength(var_1) * 1 - var_5 / var_7);
   while(self getscoreinfocategory(var_1) < 1) {
     scripts\engine\utility::waitframe();
   }
 
-  self _meth_82B1(var_1, 0);
-  var_0 _meth_82B1(var_0.var_11169, 0);
+  self func_82B1(var_1, 0);
+  var_0 func_82B1(var_0.var_11169, 0);
   playFXOnTag(level.var_7649["vfx_c12_joint_selfdestruct_head_buildup"], self, "j_neck");
   wait(0.4);
   self setscriptablepartstate("head", "rodeofinal");
@@ -268,7 +268,7 @@ func_35F2(var_0) {
   wait(0.05);
   setslowmotion(1, 0.2, 0.2);
   level.player playrumbleonentity("heavy_1s");
-  level.player _meth_81DE(var_0A, 1);
+  level.player func_81DE(var_0A, 1);
   wait(0.3);
   setslowmotion(0.2, 1, 2);
   self.brodeostrugglesucceeded = 1;
@@ -310,7 +310,7 @@ func_35F3() {
   while(self.var_6D3E && isalive(level.player)) {
     var_3 = var_3 - var_4;
     var_6 = level.player.health - var_3;
-    level.player _meth_80A1();
+    level.player func_80A1();
     level.player dodamage(var_6, level.player.origin, self);
     level.player getrankinfoxpamt();
     wait(2);
@@ -406,7 +406,7 @@ func_6D73() {
     var_0B = self gettagangles(var_1);
     var_0C = var_0A + anglesToForward(var_0B);
     var_0D = bulletspread(var_0A, var_0C, 4);
-    self _meth_8494(var_0, var_0A, var_0B, 1, var_0D, 0, 0, var_1);
+    self func_8494(var_0, var_0A, var_0B, 1, var_0D, 0, 0, var_1);
     var_0E = 0.35;
     if(!isDefined(self.brodeostrugglesucceeded) || !self.brodeostrugglesucceeded) {
       var_0F = self getscoreinfocategory(var_2);
@@ -493,10 +493,10 @@ func_4A09(var_0) {
 
   var_3 = scripts\engine\utility::spawn_tag_origin();
   var_3 linkto(self, var_1, var_2, (0, 0, 0));
-  var_3 _meth_84A3("+melee");
+  var_3 func_84A3("+melee");
   var_3 setcursorhint("HINT_BUTTON");
   var_3 setuserange(50);
-  var_3 _meth_84A4(100);
+  var_3 func_84A4(100);
   var_3 sethintstring(&"SCRIPT_C12_RODEO_MELEE");
   return var_3;
 }
@@ -505,7 +505,7 @@ func_361C(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 glinton(#animtree);
-  var_2 = level.player _meth_84C6("currentViewModel");
+  var_2 = level.player func_84C6("currentViewModel");
   if(isDefined(var_2)) {
     var_1 setModel(var_2);
   }
@@ -594,7 +594,7 @@ func_D3F2(var_0, var_1) {
   if(var_1 == "right") {
     var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_miss_quick);
   } else {
-    var_0 _meth_82E7(var_2, % titan_c12_rodeo_gun_player_miss_quick);
+    var_0 func_82E7(var_2, % titan_c12_rodeo_gun_player_miss_quick);
   }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
@@ -606,7 +606,7 @@ func_D3F3(var_0, var_1) {
   if(var_1 == "right") {
     var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_idle);
   } else {
-    var_0 _meth_82E7(var_2, % titan_c12_rodeo_gun_player_idle);
+    var_0 func_82E7(var_2, % titan_c12_rodeo_gun_player_idle);
   }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
@@ -749,7 +749,7 @@ func_D3EF(var_0, var_1, var_2) {
   wait(0.3);
   level.player.ignoreme = 0;
   if(!self.var_D461) {
-    level.player _meth_80A1();
+    level.player func_80A1();
   }
 
   if(var_1 == "left") {
@@ -763,7 +763,7 @@ func_D3EE(var_0) {
   if(var_0 == "right") {
     self notify("can_damage_rocket");
     thread lib_0F3D::func_50E8(0);
-    self _meth_84AE();
+    self func_84AE();
     level.player lib_0E42::giveperk("specialty_quickdraw");
     var_1 = getdvarfloat("perk_quickDrawSpeedScaleSP", 1);
     var_2 = getdvarfloat("perk_quickDrawSpeedScaleSniperSP", 1);
@@ -786,7 +786,7 @@ func_D3EE(var_0) {
     setsaveddvar("perk_quickDrawSpeedScaleSniperSP", var_2);
     setsaveddvar("bg_quickWeaponSwitchSpeedScaleSP", var_3);
     level.player lib_0E42::removeperk("specialty_quickdraw");
-    self _meth_84AD();
+    self func_84AD();
     self setCanDamage(1);
     if(!isalive(self)) {
       wait(0.2);
@@ -796,7 +796,7 @@ func_D3EE(var_0) {
     }
   }
 
-  level.player _meth_84AF(0);
+  level.player func_84AF(0);
 }
 
 func_445F(var_0, var_1) {
@@ -881,7 +881,7 @@ func_CC50(var_0) {
     return;
   }
 
-  var_3 _meth_81D0();
+  var_3 func_81D0();
   var_1 = self gettagorigin("j_spineupper");
   self playSound("scn_C12_rodeo_exp");
   playFX(level.var_7649["c12_implode_pre_explosion"], var_1);
@@ -889,7 +889,7 @@ func_CC50(var_0) {
   level.player viewkick(var_7, var_1, 0);
   self getyawtoenemy("vox_c12_death", "vox_c12_death", 1);
   lib_0C46::func_3539("implode", ["right_leg", "left_leg"]);
-  self _meth_8189("j_spinelowerbottom");
+  self func_8189("j_spinelowerbottom");
   self.asm.var_4E73 = 1;
   playrumbleonposition("heavy_1s", var_1);
   earthquake(0.25, 0.5, var_1, 1200);
@@ -897,7 +897,7 @@ func_CC50(var_0) {
   var_1 = var_3.origin;
   var_3 delete();
   thread scripts\engine\utility::play_sound_in_space("c12_self_destruct", self.origin);
-  self _meth_81D0(var_1, level.player);
+  self func_81D0(var_1, level.player);
 }
 
 func_10907() {
@@ -920,7 +920,7 @@ func_D3F7(var_0, var_1, var_2) {
   wait(var_2);
   level.player playrumbleonentity("heavy_1s");
   thread lib_0F3D::func_50E8(0);
-  level.player _meth_84AF(0);
+  level.player func_84AF(0);
   if(var_1 == "right") {
     var_3 = "tag_brass_ri";
   } else {
@@ -933,7 +933,7 @@ func_D3F7(var_0, var_1, var_2) {
   level.player setvelocity(var_6);
   level.player viewkick(75, var_4);
   if(!self.var_D461) {
-    level.player _meth_80A1();
+    level.player func_80A1();
   }
 
   level.player dodamage(level.player.health * 0.6, var_4, self);
@@ -961,15 +961,15 @@ func_D310() {
   level.player unlink();
   self.var_D267 delete();
   thread lib_0F3D::func_50E8(0);
-  level.player _meth_81DE(65, 0.2);
+  level.player func_81DE(65, 0.2);
   level.player scripts\engine\utility::allow_crouch(1);
   level.player scripts\engine\utility::allow_prone(1);
   level.player scripts\engine\utility::allow_offhand_weapons(1);
-  level.player _meth_84AF(0);
+  level.player func_84AF(0);
   level.player scripts\engine\utility::allow_weapon(1);
   level.player.ignoreme = 0;
   level.player.inrodeo = undefined;
   if(!self.var_D461) {
-    level.player _meth_80A1();
+    level.player func_80A1();
   }
 }

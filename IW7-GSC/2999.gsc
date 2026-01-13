@@ -688,8 +688,8 @@ func_B878(var_0, var_1, var_2) {
   var_0 setrightarc(120);
   var_0 settoparc(20);
   var_0 give_crafted_gascan(20);
-  var_0 _meth_82C9(0.5, "yaw");
-  var_0 _meth_82C9(0.5, "pitch");
+  var_0 func_82C9(0.5, "yaw");
+  var_0 func_82C9(0.5, "pitch");
   var_4 = "JACKAL_MMT38_WHIPLASH";
   var_5 = "small_target";
 

@@ -263,7 +263,7 @@ init() {
   level.var_10FA1 = loadfx("vfx\iw7\_requests\mp\power\vfx_wrist_rocket_exp.vfx");
   level.var_D8D4 = [];
   level.var_101AE = [];
-  level._meth_857E = [];
+  level.func_857E = [];
   level.var_B7E0 = [];
   level.var_9B16 = [];
   level.mines = [];
@@ -411,7 +411,7 @@ onplayerspawned() {
     self.trophyremainingammo = undefined;
     scripts\mp\gamescore::func_97D2();
     var_0 = self getcurrentweapon();
-    var_1 = self _meth_8519(var_0);
+    var_1 = self func_8519(var_0);
     var_2 = getweaponcamoname(var_0);
     thread runcamoscripts(var_0, var_2);
     thread runweaponscriptvfx(var_0, var_1);
@@ -420,14 +420,14 @@ onplayerspawned() {
 
 recordtogglescopestates() {
   self.pers["altScopeStates"] = [];
-  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self func_8519(self.primaryweapon)) {
     var_0 = getweaponbasename(self.primaryweapon);
     var_1 = func_7DB8(self.primaryweapon);
     var_2 = var_0 + "+" + var_1;
     self.pers["altScopeStates"][var_2] = 1;
   }
 
-  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
+  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self func_8519(self.secondaryweapon)) {
     var_0 = getweaponbasename(self.secondaryweapon);
     var_1 = func_7DB8(self.secondaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -436,7 +436,7 @@ recordtogglescopestates() {
 }
 
 func_DDF6() {
-  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self func_8519(self.primaryweapon)) {
     var_0 = getweaponbasename(self.primaryweapon);
     var_1 = missile_settargetent(self.primaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -446,7 +446,7 @@ func_DDF6() {
     self.pers["altScopeStates"][var_4] = 1;
   }
 
-  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
+  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self func_8519(self.secondaryweapon)) {
     var_0 = getweaponbasename(self.secondaryweapon);
     var_1 = missile_settargetent(self.secondaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -465,7 +465,7 @@ func_DDF4() {
       var_3 = getweaponattachments(var_2);
       foreach(var_5 in var_3) {
         if(issmallmissile(var_5)) {
-          self.pers["toggleScopeStates"][var_2] = self _meth_812E(var_2);
+          self.pers["toggleScopeStates"][var_2] = self func_812E(var_2);
           break;
         }
       }
@@ -1192,7 +1192,7 @@ func_1015B() {
 
   var_0 = getitemweaponname();
   var_1 = getweaponbasename(var_0);
-  var_2 = _meth_822A(var_1);
+  var_2 = func_822A(var_1);
   switch (var_2) {
     case 4:
       playFXOnTag(scripts\engine\utility::getfx("item_fx_epic"), self, "j_gun");
@@ -1212,7 +1212,7 @@ func_1015B() {
   }
 }
 
-_meth_822A(var_0) {
+func_822A(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -2076,7 +2076,7 @@ func_3B0E(var_0, var_1, var_2) {
 func_3B0D(var_0, var_1) {
   level endon("game_ended");
   wait(0.05);
-  var_2 = var_0 _meth_8113();
+  var_2 = var_0 func_8113();
   wait(randomfloatrange(0.5, 0.8));
   if(!isDefined(var_2)) {
     return;
@@ -3518,7 +3518,7 @@ func_3343() {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback("c4");
     if(var_0 != self.triggerportableradarping && var_0.team != self.triggerportableradarping.team) {
       if(var_0A != "trophy_mp") {
-        var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+        var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
       }
     }
   }
@@ -3889,7 +3889,7 @@ makeexplosiveusabletag(var_0, var_1) {
     self setcursorhint("HINT_NOICON");
   }
 
-  self _meth_84A7(var_0);
+  self func_84A7(var_0);
   switch (var_3) {
     case "c4_mp":
       self sethintstring(&"MP_PICKUP_C4");
@@ -4273,7 +4273,7 @@ func_66B4(var_0) {
 
   equipmentempstunvfx();
   if(isDefined(self.triggerportableradarping) && isDefined(var_1) && self.triggerportableradarping != var_1) {
-    var_1 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+    var_1 scripts\mp\killstreaks\_killstreaks::func_83A0();
   }
 
   if(isDefined(var_0) && var_0) {
@@ -4597,7 +4597,7 @@ func_41AB() {
   self waittill("death");
 }
 
-_meth_8237() {
+func_8237() {
   var_0 = 2;
   self.weaponlist = self getweaponslistprimaries();
   if(self.weaponlist.size) {
@@ -4607,7 +4607,7 @@ _meth_8237() {
       } else if(scripts\mp\utility::func_9E0D(var_2)) {
         var_3 = func_7ECD(var_2);
       } else {
-        var_3 = _meth_8236(var_2);
+        var_3 = func_8236(var_2);
       }
 
       if(!isDefined(var_3) || var_3 == 0) {
@@ -4626,7 +4626,7 @@ _meth_8237() {
   return var_0;
 }
 
-_meth_8236(var_0) {
+func_8236(var_0) {
   var_1 = scripts\mp\utility::getweaponrootname(var_0);
   return level.weaponmapdata[var_1].getclosestpointonnavmesh3d;
 }
@@ -4730,9 +4730,9 @@ getplayerspeedbyweapon(var_0) {
       var_1 = 0.87;
     } else if(issubstr(var_2, "iw7_udm45_mpl")) {
       var_1 = 0.95;
-    } else if(issubstr(var_2, "iw7_rvn") && self _meth_8519(var_2)) {
+    } else if(issubstr(var_2, "iw7_rvn") && self func_8519(var_2)) {
       var_1 = 1;
-    } else if(issubstr(var_2, "iw7_longshot") && self _meth_8519(var_2)) {
+    } else if(issubstr(var_2, "iw7_longshot") && self func_8519(var_2)) {
       var_1 = 0.98;
     } else {
       var_3 = weaponinventorytype(var_2);
@@ -4745,9 +4745,9 @@ getplayerspeedbyweapon(var_0) {
       }
 
       if(!isDefined(var_2) || !self hasweapon(var_2)) {
-        var_1 = _meth_8237();
+        var_1 = func_8237();
       } else {
-        var_1 = _meth_8236(var_2);
+        var_1 = func_8236(var_2);
       }
     }
   }
@@ -5278,7 +5278,7 @@ minedamagemonitor() {
   if(isplayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_3);
     if(var_0 != self.triggerportableradarping && var_0.team != self.triggerportableradarping.team) {
-      var_0 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
+      var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
     }
   }
 
@@ -6459,8 +6459,8 @@ outlinesuperequipmentforplayer(var_0, var_1) {
   scripts\mp\utility::outlinedisable(var_2, var_0);
 }
 
-_meth_85BE() {
-  if(!isDefined(self._meth_85BE) || self._meth_85BE == "none") {
+func_85BE() {
+  if(!isDefined(self.func_85BE) || self.func_85BE == "none") {
     return 0;
   }
 
@@ -6468,11 +6468,11 @@ _meth_85BE() {
 }
 
 func_7EE4() {
-  if(!isDefined(self._meth_85BE)) {
+  if(!isDefined(self.func_85BE)) {
     return "none";
   }
 
-  return self._meth_85BE;
+  return self.func_85BE;
 }
 
 func_13A93() {
@@ -6482,7 +6482,7 @@ func_13A93() {
   self endon("disconnect");
   self endon("faux_spawn");
   for(;;) {
-    self._meth_85BE = scripts\mp\utility::func_7EE5();
+    self.func_85BE = scripts\mp\utility::func_7EE5();
     scripts\engine\utility::waitframe();
   }
 }
@@ -6863,11 +6863,11 @@ watchaxeuse(var_0, var_1) {
   self.useobj_trigger = var_2;
   var_2 makeusable();
   var_2 setcursorhint("HINT_NOICON");
-  var_2 _meth_84A9("show");
+  var_2 func_84A9("show");
   var_2 sethintstring(&"WEAPON_PICKUP_AXE");
-  var_2 _meth_84A6(360);
+  var_2 func_84A6(360);
   var_2 setusefov(360);
-  var_2 _meth_84A4(64);
+  var_2 func_84A4(64);
   var_2 setuserange(64);
   var_2 setusepriority(0);
   thread watchallplayerphasestates(var_2);
@@ -7056,11 +7056,11 @@ watchrigchangeforweaponfx(var_0, var_1, var_2, var_3) {
 updateholidayweaponsounds(var_0, var_1, var_2, var_3) {
   var_4 = getweaponvariantindex(var_0);
   if(scripts\mp\class::isholidayweapon(var_0, var_4)) {
-    self _meth_8460("special_foley", "bells", 2);
+    self func_8460("special_foley", "bells", 2);
     return;
   }
 
-  self _meth_8460("special_foley", "", 0.1);
+  self func_8460("special_foley", "", 0.1);
 }
 
 updateweaponscriptvfx(var_0, var_1, var_2, var_3) {

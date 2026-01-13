@@ -73,7 +73,7 @@ func_EC0D(var_0, var_1) {
   lib_0A1E::func_2385();
   scripts\sp\anim::func_1F12(self);
   var_2 = lib_0EFB::func_7D7A(var_0);
-  self _meth_80F1(var_2.origin, var_2.angles);
+  self func_80F1(var_2.origin, var_2.angles);
   self give_mp_super_weapon(self.origin);
   if(isDefined(var_1) && var_1) {
     if(var_1 && scripts\sp\interaction::func_9C26(var_2)) {
@@ -156,7 +156,7 @@ func_EC08(var_0, var_1, var_2) {
         scripts\engine\utility::waitframe();
       }
 
-      self _meth_80F1(self.origin, var_3.angles);
+      self func_80F1(self.origin, var_3.angles);
       scripts\engine\utility::waitframe();
       break;
 
@@ -172,7 +172,7 @@ func_EC08(var_0, var_1, var_2) {
         scripts\engine\utility::waitframe();
       }
 
-      self _meth_80F1(self.origin, vectortoangles(var_3.origin - self.origin));
+      self func_80F1(self.origin, vectortoangles(var_3.origin - self.origin));
       scripts\engine\utility::waitframe();
       break;
   }
@@ -232,17 +232,17 @@ func_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_1) {
     if(var_5) {
-      scripts\engine\utility::delaycall(0.05, ::_meth_8250, 1);
+      scripts\engine\utility::delaycall(0.05, ::func_8250, 1);
     } else {
-      scripts\engine\utility::delaycall(0.05, ::_meth_8250, 0);
+      scripts\engine\utility::delaycall(0.05, ::func_8250, 0);
     }
 
     var_6 scripts\sp\anim::func_1ED0(self, var_3, undefined, var_4);
   } else {
     if(var_5) {
-      scripts\engine\utility::delaycall(0.05, ::_meth_8250, 1);
+      scripts\engine\utility::delaycall(0.05, ::func_8250, 1);
     } else {
-      scripts\engine\utility::delaycall(0.05, ::_meth_8250, 0);
+      scripts\engine\utility::delaycall(0.05, ::func_8250, 0);
     }
 
     var_6 scripts\sp\anim::func_1ECE(self, var_3);
@@ -251,7 +251,7 @@ func_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.objective_playermask_showto = 0;
   self give_mp_super_weapon(self.origin);
   if(var_5) {
-    self _meth_8250(0);
+    self func_8250(0);
   }
 
   self notify("sceneblock_reach_finished");
@@ -489,10 +489,10 @@ func_EC0F(var_0, var_1, var_2) {
   var_5 = 0;
   for(;;) {
     if(distance2d(self.origin, var_3.origin) < 12 && !var_5) {
-      self _meth_80F1(self.origin, vectortoangles(var_3.origin - self.origin));
+      self func_80F1(self.origin, vectortoangles(var_3.origin - self.origin));
       var_5 = 1;
     } else if(distance2d(self.origin, var_3.origin) < 4) {
-      self _meth_80F1(var_3.origin, self.angles);
+      self func_80F1(var_3.origin, self.angles);
       break;
     }
 

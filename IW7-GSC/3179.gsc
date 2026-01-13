@@ -20,7 +20,7 @@ func_D55D(var_0, var_1, var_2, var_3) {
   var_2 = 0.15;
   var_7 = lib_0A1E::asm_getbodyknob();
   self clearanim(var_7, var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   var_8 = 0.2;
   var_9 = 0.2;
   thread func_126D1(var_0, var_1);
@@ -64,7 +64,7 @@ func_D566(var_0, var_1, var_2, var_3) {
   lib_0A1E::func_2369(var_0, var_1, var_4);
   self.var_126DB = var_4;
   self.var_126DD = lib_0A1E::asm_getbodyknob();
-  self _meth_82E4(var_1, var_4, self.var_126DD, 1, 0.2, 1);
+  self func_82E4(var_1, var_4, self.var_126DD, 1, 0.2, 1);
   self.var_126E3 = 0;
   self.var_126E2 = undefined;
   lib_0A1E::func_231F(var_0, var_1, ::func_89F8);
@@ -77,7 +77,7 @@ func_D566(var_0, var_1, var_2, var_3) {
   self.a.nodeath = 0;
   if(var_7 && isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
     self.a.movement = "stop";
-    self _meth_83B9(self.target_getindexoftarget.origin);
+    self func_83B9(self.target_getindexoftarget.origin);
   } else {
     self.a.movement = "run";
     self clearanim(var_4, 0.2);
@@ -97,7 +97,7 @@ func_D55C(var_0, var_1, var_2, var_3) {
   var_5 = self getspectatepoint();
   self orientmode("face angle", var_5.angles[1]);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_231F(var_0, var_1);
   func_11701(var_0, var_1);
 }
@@ -138,7 +138,7 @@ func_11661(var_0) {
   var_1 = 5;
   var_2 = (0, 0, var_0 / var_1);
   for(var_3 = 0; var_3 < var_1; var_3++) {
-    self _meth_80F1(self.origin + var_2);
+    self func_80F1(self.origin + var_2);
     scripts\engine\utility::waitframe();
   }
 }
@@ -158,16 +158,16 @@ func_11662(var_0, var_1, var_2, var_3) {
 
   var_4 = (0, 0, var_0 / var_2);
   if(isDefined(var_3) && var_3 < 1) {
-    self _meth_82B1(self.var_126DB, var_3);
+    self func_82B1(self.var_126DB, var_3);
   }
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
-    self _meth_80F1(self.origin + var_4);
+    self func_80F1(self.origin + var_4);
     scripts\engine\utility::waitframe();
   }
 
   if(isDefined(var_3) && var_3 < 1) {
-    self _meth_82B1(self.var_126DB, 1);
+    self func_82B1(self.var_126DB, 1);
   }
 }
 
@@ -250,7 +250,7 @@ func_D55E(var_0, var_1, var_2, var_3) {
 
   self.var_DC1A = 1;
   var_5 = self getspectatepoint();
-  var_6 = self _meth_8146();
+  var_6 = self func_8146();
   var_5.var_126D4 = var_5.origin[2] + var_5.var_126D5 - 44;
   var_7 = [];
   if(var_5.var_126D4 > var_6[2]) {
@@ -270,7 +270,7 @@ func_D55E(var_0, var_1, var_2, var_3) {
   var_0D = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
   lib_0A1E::func_2369(var_0, var_1, var_0D);
-  self _meth_82EA(var_1, var_0D, 1, var_2, 1);
+  self func_82EA(var_1, var_0D, 1, var_2, 1);
   thread func_126D1(var_0, var_1);
   foreach(var_0F in var_7) {
     var_10 = var_0C / var_7.size;
@@ -292,7 +292,7 @@ func_126D2(var_0, var_1, var_2) {
 
 func_D565(var_0, var_1, var_2, var_3) {
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8145();
+  var_5 = self func_8145();
   func_3E58(var_1);
   var_6 = distance(var_4.origin, var_5.origin);
   self animmode("noclip");
@@ -303,7 +303,7 @@ func_D565(var_0, var_1, var_2, var_3) {
   var_0A = length(var_9) / var_8;
   var_0B = var_6 / var_0A;
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_7, 1, var_2, 1);
+  self func_82EA(var_1, var_7, 1, var_2, 1);
   wait(var_0B);
   func_11701(var_0, var_1);
 }
@@ -327,7 +327,7 @@ func_CF1E(var_0, var_1, var_2, var_3) {
   self orientmode("face angle", self.angles[1]);
   self.var_36A = 1;
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1);
   thread func_11701(var_0, var_1);
@@ -382,7 +382,7 @@ func_3E04(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  var_5 = _meth_81D7();
+  var_5 = func_81D7();
   if(!func_5AE3(var_0, var_2, var_4, var_5)) {
     thread func_11701(var_0, "double_jump");
     return 0;
@@ -399,12 +399,12 @@ laseroff() {
   return self getspectatepoint();
 }
 
-_meth_81D7() {
+func_81D7() {
   if(isDefined(self.var_126C3)) {
     return self.var_126C3;
   }
 
-  return self _meth_8146();
+  return self func_8146();
 }
 
 func_CF21(var_0, var_1, var_2, var_3) {
@@ -449,7 +449,7 @@ isdriving(var_0, var_1, var_2, var_3) {
 func_CF24(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = laseroff();
-  var_5 = _meth_81D7();
+  var_5 = func_81D7();
   var_6 = var_4.angles - var_4.var_10DCE;
   if(var_6 != (0, 0, 0)) {
     var_5 = rotatevector(var_5, var_6);
@@ -506,7 +506,7 @@ func_CF24(var_0, var_1, var_2, var_3) {
 }
 
 func_3ED2(var_0, var_1, var_2) {
-  var_3 = _meth_81D7();
+  var_3 = func_81D7();
   var_4 = "double_jump_up";
   if(isDefined(var_2)) {
     var_4 = "double_jump_" + var_2;
@@ -563,7 +563,7 @@ func_3F0E(var_0, var_1, var_2) {
   return var_3;
 }
 
-_meth_812B(var_0) {
+func_812B(var_0) {
   return var_0 * var_0 * 3 - 2 * var_0;
 }
 
@@ -577,12 +577,12 @@ func_11657(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = self.origin[2];
   var_8 = var_7 + var_2[2];
   var_9 = self.origin[2];
-  self _meth_82B1(var_4, var_5);
+  self func_82B1(var_4, var_5);
   for(var_0A = 0; var_0A < var_3; var_0A++) {
     var_0B = 1;
     if(var_0B) {
       var_0C = var_0A / var_3 - 1;
-      var_0D = _meth_812B(var_0C);
+      var_0D = func_812B(var_0C);
       var_0E = var_8 * var_0D + var_7 * 1 - var_0D;
       var_0F = var_0E - var_9;
       var_6 = (var_6[0], var_6[1], var_0F);
@@ -590,13 +590,13 @@ func_11657(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     var_10 = self.origin + var_6;
-    self _meth_80F1(var_10);
+    self func_80F1(var_10);
     if(var_0A + 1 < var_3) {
       scripts\engine\utility::waitframe();
     }
   }
 
-  self _meth_82B1(var_4, 1);
+  self func_82B1(var_4, 1);
 }
 
 func_138D4(var_0, var_1) {
@@ -674,7 +674,7 @@ func_89BB(var_0, var_1, var_2) {
   }
 }
 
-_meth_8213(var_0) {
+func_8213(var_0) {
   var_1 = moveshieldmodel(var_0, 1) - moveshieldmodel(var_0, 0);
   var_2 = vectortoangles(var_1);
   return var_2[1];
@@ -703,7 +703,7 @@ func_FAF8() {
 
   if(!isDefined(self.var_126C5)) {
     self.var_126C5 = self getspectatepoint();
-    self.var_126C3 = self _meth_8146();
+    self.var_126C3 = self func_8146();
   }
 
   var_0 = self.var_126C5;
@@ -721,7 +721,7 @@ wallrunterminate(var_0, var_1, var_2) {
   self.var_138BD = undefined;
   self.var_138C1 = undefined;
   self.var_138B9 = undefined;
-  self _meth_82D0();
+  self func_82D0();
   self.var_36A = 0;
   self.var_A4CA = undefined;
   self.var_126C5 = undefined;
@@ -748,9 +748,9 @@ func_D5CF(var_0, var_1, var_2, var_3) {
   var_7 = getangledelta(var_4, 0, var_6);
   var_8 = self.var_138C1 - var_7;
   var_9 = (0, var_8, 0);
-  self _meth_80F1(self.origin, var_9);
+  self func_80F1(self.origin, var_9);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   var_0A = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   if(var_0A == "end") {
@@ -785,7 +785,7 @@ func_D5D2(var_0, var_1, var_2, var_3) {
   }
 
   func_D50F(var_0, var_1, var_4, var_2, var_9, var_8, var_0A, 0, 1);
-  self _meth_80F1(var_9, var_8);
+  self func_80F1(var_9, var_8);
   thread scripts\asm\asm::func_2310(var_0, var_1, 0);
 }
 
@@ -803,14 +803,14 @@ func_D50F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_8 = 0;
   }
 
-  self _meth_80F1(self.origin, var_5);
+  self func_80F1(self.origin, var_5);
   self animmode("noclip");
   self orientmode("face angle", var_5[1]);
   var_9 = getanimlength(var_2);
   var_0A = int(var_9 * 1000);
-  self _meth_85A1(gettime() + var_0A - 1000);
+  self func_85A1(gettime() + var_0A - 1000);
   self.var_36A = 1;
-  self _meth_82E7(var_1, var_2, 1, var_3, 1);
+  self func_82E7(var_1, var_2, 1, var_3, 1);
   lib_0A1E::func_2369(var_0, var_1, var_2);
   var_0B = [var_1, var_2, var_4, gettime(), var_6, var_7, var_8];
   lib_0A1E::func_231F(var_0, var_1, ::func_138D4, var_0B);
@@ -995,7 +995,7 @@ func_D5D4(var_0, var_1, var_2, var_3) {
   self orientmode("face direction", var_12);
   thread func_D5D1(var_1);
   self animmode("noclip");
-  self _meth_82E7(var_1, var_5, 1, var_2, 1);
+  self func_82E7(var_1, var_5, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_5);
   lib_0A1E::func_231F(var_0, var_1);
 }
@@ -1097,7 +1097,7 @@ func_11705(var_0, var_1) {
   self.var_138BD = undefined;
   self.var_138C1 = undefined;
   self.var_138B9 = undefined;
-  self _meth_82D0();
+  self func_82D0();
   func_11701(var_0, var_1);
 }
 
@@ -1126,7 +1126,7 @@ func_D5D5(var_0, var_1, var_2, var_3) {
   var_0D = getnotetracktimes(var_9, "end_mantle");
   var_0E = var_0D[0];
   var_0F = getmovedelta(var_9, var_0C, var_0E);
-  self _meth_80F1(self.origin, var_7);
+  self func_80F1(self.origin, var_7);
   var_10 = self gettweakablevalue(var_0F);
   var_11 = var_10 - self.origin;
   var_12 = var_6 - var_11;
@@ -1174,12 +1174,12 @@ func_D55B(var_0, var_1, var_2, var_3) {
 
   var_11 = lib_0C5E::func_36D9(var_9.origin, var_0E, var_7, var_8);
   var_12 = var_0E - var_8;
-  self.var_4C7E = ::lib_0F3D::func_22EA;
+  self.var_4C7E = lib_0F3D::func_22EA;
   self.a.var_22E5 = var_1;
   self.var_36A = 1;
-  self _meth_8396(var_11, var_12, var_0B);
+  self func_8396(var_11, var_12, var_0B);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   thread scripts\asm\asm::func_2310(var_0, var_1, 0);
@@ -1203,7 +1203,7 @@ func_3F07(var_0, var_1, var_2) {
   var_7 = var_5[1];
   var_8 = angleclamp180(var_7 - var_4[1]);
   var_9 = getangleindex(var_8, 22.5);
-  var_0A = lib_0C5D::_meth_8174(var_1, undefined, 1);
+  var_0A = lib_0C5D::func_8174(var_1, undefined, 1);
   if(!isDefined(var_0A[var_9])) {
     return undefined;
   }
@@ -1212,7 +1212,7 @@ func_3F07(var_0, var_1, var_2) {
 }
 
 func_FAF0(var_0, var_1, var_2, var_3) {
-  var_4 = self _meth_84F9(120);
+  var_4 = self func_84F9(120);
   if(!isDefined(var_4)) {
     return 0;
   }
@@ -1321,7 +1321,7 @@ func_FFFC(var_0, var_1, var_2, var_3) {
   var_9 = vectortoangles(var_8);
   var_0A = angleclamp180(var_7 - var_9[1]);
   var_0B = getangleindex(var_0A, 22.5);
-  var_0C = lib_0C5D::_meth_8174(var_2, undefined, 1);
+  var_0C = lib_0C5D::func_8174(var_2, undefined, 1);
   var_0D = var_0C[var_0B];
   if(!isDefined(var_0D)) {
     return 0;
@@ -1389,7 +1389,7 @@ func_126CE(var_0, var_1, var_2, var_3) {
   self animmode("noclip", 0);
   var_5 = self getspectatepoint();
   self orientmode("face angle", var_5.angles[1]);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   func_11701(var_0, var_1);
 }

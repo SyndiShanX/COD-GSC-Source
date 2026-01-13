@@ -152,7 +152,7 @@ func_117C9() {
     wait(randomfloatrange(0.4, 0.6));
     foreach(var_1 in level.players) {
       if(self getpersstat(var_1)) {
-        self _meth_84F7("sight", var_1, var_1.origin);
+        self func_84F7("sight", var_1, var_1.origin);
       }
     }
   }
@@ -186,16 +186,16 @@ func_117CD(var_0, var_1) {
 
     case "investigate":
       if(isDefined(var_0.isnodeoccupied) && var_0.isnodeoccupied == self) {
-        var_0 _meth_84EA(self, 1);
+        var_0 func_84EA(self, 1);
       }
       break;
 
     case "spotted":
-      var_0 _meth_84EA(self, 1);
+      var_0 func_84EA(self, 1);
       break;
 
     case "death":
-      var_0 _meth_84EA(self, 0);
+      var_0 func_84EA(self, 0);
       break;
   }
 
@@ -221,7 +221,7 @@ func_117D6(var_0) {
   var_0 endon("disconnect");
   var_1 = self getentitynumber();
   var_0.var_10E6D.var_117DC[var_1] = self;
-  self _meth_84F7("sight", var_0, var_0.origin);
+  self func_84F7("sight", var_0, var_0.origin);
   var_2 = lib_0F27::func_1B24(var_0);
   if(!isDefined(self.var_10E6D.var_117C2)) {
     self.var_10E6D.var_117C2 = 0;
@@ -243,7 +243,7 @@ func_117D7(var_0) {
   var_2 = self getentitynumber();
   var_0.var_10E6D.var_117DC[var_2] = undefined;
   for(;;) {
-    self.var_10E6D.var_117CA = self _meth_84E9(var_0) < 0.75;
+    self.var_10E6D.var_117CA = self func_84E9(var_0) < 0.75;
     if(self.var_10E6D.var_117CA) {
       return;
     }
@@ -287,16 +287,16 @@ func_117C6() {
     var_4 = getdvarfloat("ai_threatForcedRate") * var_0;
     foreach(var_8, var_6 in self.var_10E6D.var_729B) {
       if(var_2 < var_6.end && issentient(var_6.ent) && !self getpersstat(var_6.ent)) {
-        var_7 = self _meth_84E9(var_6.ent);
+        var_7 = self func_84E9(var_6.ent);
         if(isplayer(var_6.ent)) {
           var_6.ent thread func_117D0(1, max(var_6.ent.var_10E6D.var_B4CB, var_7));
         }
 
         if(var_7 + var_4 < getdvarfloat("ai_threatForcedMax")) {
           var_7 = var_7 + var_4;
-          self _meth_84EA(var_6.ent, var_7);
+          self func_84EA(var_6.ent, var_7);
           if(getdvarfloat("ai_threatForcedMax") >= 1 && var_7 >= 1 && !var_1) {
-            self _meth_84F7("sight", var_6.ent, var_6.ent.origin);
+            self func_84F7("sight", var_6.ent, var_6.ent.origin);
             var_1 = 1;
           } else if(var_7 < 0.75 && var_1) {
             var_1 = 0;
@@ -340,7 +340,7 @@ func_117CE() {
       var_7 = var_6 getentitynumber();
       self.var_10E6D.var_B476 = max(self.var_10E6D.var_B476, var_6.var_29);
       if(getdvarint("ai_threatsight", 1)) {
-        var_8 = var_6 _meth_84E9(self);
+        var_8 = var_6 func_84E9(self);
         var_9 = var_6 getpersstat(self);
         if(var_9) {
           var_0 = gettime();
@@ -354,7 +354,7 @@ func_117CE() {
           var_1 = 1;
         }
 
-        self.var_10E6D.var_B4CB = max(self.var_10E6D.var_B4CB, var_6 _meth_84E9(self));
+        self.var_10E6D.var_B4CB = max(self.var_10E6D.var_B4CB, var_6 func_84E9(self));
         var_0A = var_9 && scripts\engine\utility::istrue(level.var_10E6D.var_5659) || var_6 lib_0F22::func_9B2C() && var_8 > 0;
         if(var_0A) {
           var_0B = vectornormalize(var_3 - var_6 getEye());
@@ -364,10 +364,10 @@ func_117CE() {
 
         if(var_0A) {
           var_6.var_10E6D.var_B020 = self;
-          var_6 _meth_8306(self);
+          var_6 func_8306(self);
         } else if(isDefined(var_6.var_10E6D.var_B020) && var_6.var_10E6D.var_B020 == self) {
           var_6.var_10E6D.var_B020 = undefined;
-          var_6 _meth_8306();
+          var_6 func_8306();
         }
       }
 

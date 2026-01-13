@@ -60,7 +60,7 @@ func_6626(var_0, var_1) {
   self playlocalsound("ftl_phase_out");
   self playSound("ftl_phase_out_npc");
   func_2A71(self, var_1);
-  self _meth_82C0("phaseshift_mp_shock", 0.1);
+  self func_82C0("phaseshift_mp_shock", 0.1);
   thread func_13A57();
   scripts\cp\utility::allow_player_ignore_me(1);
   if(!scripts\engine\utility::istrue(level.no_power_cooldowns)) {

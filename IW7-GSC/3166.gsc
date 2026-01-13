@@ -84,7 +84,7 @@ func_D559(var_0, var_1, var_2, var_3) {
     var_5 = 2;
   }
 
-  self _meth_82E7(var_1, var_4.var_1299D, 1, var_2, var_5);
+  self func_82E7(var_1, var_4.var_1299D, 1, var_2, var_5);
   lib_0A1E::func_2369(var_0, var_1, var_4.var_1299D);
   thread func_D55A(var_1, var_4.var_1299D, var_4.var_D81F, var_2);
   var_6 = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
@@ -106,7 +106,7 @@ func_D55A(var_0, var_1, var_2, var_3) {
   var_0A = var_7 / var_9;
   var_0B = 0;
   while(var_0B < var_9) {
-    self _meth_80F1(self.origin, self.angles + (0, var_0A, 0));
+    self func_80F1(self.origin, self.angles + (0, var_0A, 0));
     var_0B++;
     wait(0.05);
   }
@@ -124,12 +124,12 @@ func_D558(var_0, var_1, var_2, var_3) {
 
   var_7 = undefined;
   if(isDefined(var_6)) {
-    var_7 = _meth_8178(var_0, var_1, var_5, var_6);
+    var_7 = func_8178(var_0, var_1, var_5, var_6);
   }
 
   if(isDefined(var_7)) {
     self endon(var_1 + "_finished");
-    self.var_4C7E = ::lib_0F3D::func_22EA;
+    self.var_4C7E = lib_0F3D::func_22EA;
     self.a.var_22E5 = var_1;
     var_8 = var_7.log;
     var_9 = var_7.areanynavvolumesloaded;
@@ -143,9 +143,9 @@ func_D558(var_0, var_1, var_2, var_3) {
 
     lib_0A1E::func_2369(var_0, var_1, var_7.getgrenadedamageradius);
     self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-    self _meth_82E7(var_1, var_7.getgrenadedamageradius, 1, var_2, self.animplaybackrate);
+    self func_82E7(var_1, var_7.getgrenadedamageradius, 1, var_2, self.animplaybackrate);
     lib_0F3D::func_444B(var_1);
-    self _meth_8396(var_9, var_0A);
+    self func_8396(var_9, var_0A);
     lib_0A1E::func_231F(var_0, var_1);
     self.a.movement = "stop";
     return;
@@ -155,7 +155,7 @@ func_D558(var_0, var_1, var_2, var_3) {
   childthread scripts\asm\shared_utility::setuseanimgoalweight(var_4, var_5);
   self orientmode("face current");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_5);
-  self _meth_82E7(var_4, var_8, 1, var_5, 1);
+  self func_82E7(var_4, var_8, 1, var_5, 1);
   lib_0A1E::func_2369(var_3, var_4, var_0A);
   lib_0A1E::func_231F(var_3, var_4, scripts\asm\asm::func_2341(var_3, var_4));
 }
@@ -167,7 +167,7 @@ func_36D9(var_0, var_1, var_2, var_3) {
   return var_0 - var_6;
 }
 
-_meth_8178(var_0, var_1, var_2, var_3) {
+func_8178(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_4 = var_3.origin;
   var_5 = lib_0F3D::func_C057(var_3);
@@ -199,7 +199,7 @@ func_9E30(var_0) {
     return 0;
   }
 
-  var_1 = var_0 _meth_8169();
+  var_1 = var_0 func_8169();
   foreach(var_3 in var_1) {
     if(var_3 == "over") {
       return 0;
@@ -246,7 +246,7 @@ func_CEFC(var_0, var_1, var_2, var_3) {
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
   self orientmode("face current");
@@ -342,7 +342,7 @@ func_CEC2(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_5 = getanimlength(var_4);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   childthread scripts\asm\shared_utility::setuseanimgoalweight(var_1, var_2);
   var_6 = lib_0A1E::func_2323(var_0, var_1, var_5, scripts\asm\asm::func_2341(var_0, var_1));
@@ -379,7 +379,7 @@ func_CEFD(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self orientmode("face current");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82E7(var_1, var_4, 1, var_2, 1);
+  self func_82E7(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
@@ -394,7 +394,7 @@ func_D51A(var_0, var_1, var_2, var_3) {
   var_5 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_6 = lib_0A1E::asm_getbodyknob();
   self clearanim(var_6, var_2);
-  self _meth_82EA(var_1, var_5, 1, var_2, 1);
+  self func_82EA(var_1, var_5, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_5);
   if(isDefined(self._blackboard.shufflenode)) {
     var_7 = self._blackboard.shufflenode.angles[1];
@@ -460,11 +460,11 @@ func_FFCA(var_0, var_1, var_2, var_3) {
 }
 
 func_D518(var_0, var_1, var_2, var_3) {
-  self.var_4C7E = ::lib_0F3D::func_22EA;
+  self.var_4C7E = lib_0F3D::func_22EA;
   self.a.var_22E5 = var_1;
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   lib_0A1E::func_2369(var_0, var_1, var_4);
   var_5 = getmovedelta(var_4);
   var_6 = getangledelta3d(var_4);
@@ -483,7 +483,7 @@ func_D518(var_0, var_1, var_2, var_3) {
     var_9 = self.angles;
   }
 
-  self _meth_8396(var_0A, var_9[1]);
+  self func_8396(var_0A, var_9[1]);
   lib_0A1E::func_231F(var_0, var_1);
 }
 

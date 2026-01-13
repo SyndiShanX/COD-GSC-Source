@@ -35,7 +35,7 @@ main() {
   }
 
   var_0 = var_2[randomint(var_2.size)];
-  self _meth_82E4("throwanim", var_0, % body, 1, 0.3);
+  self func_82E4("throwanim", var_0, % body, 1, 0.3);
   var_4 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
   if(var_4) {
     scripts\anim\shared::placeweaponon(self.var_394, "left");
@@ -43,17 +43,17 @@ main() {
     thread func_C162("throwanim", "grenade_left");
     thread func_C162("throwanim", "grenade_right");
     self waittill("grenade_pickup");
-    self _meth_8228();
+    self func_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
     self waittillmatch("grenade_throw", "throwanim");
   } else {
     self waittillmatch("grenade_throw", "throwanim");
-    self _meth_8228();
+    self func_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
   }
 
   if(isDefined(self.objective_position)) {
-    self _meth_83C2();
+    self func_83C2();
   }
 
   wait(1);

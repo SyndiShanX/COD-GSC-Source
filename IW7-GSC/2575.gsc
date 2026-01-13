@@ -56,7 +56,7 @@ meleecharge_init_mp(var_0) {
 
 meleecharge_terminate_mp(var_0) {
   self scragentsetscripted(0);
-  self _meth_8484();
+  self func_8484();
 }
 
 meleevsplayer_init_mp(var_0) {
@@ -65,5 +65,5 @@ meleevsplayer_init_mp(var_0) {
 
 meleevsplayer_terminate_mp(var_0) {
   self scragentsetscripted(0);
-  self _meth_8484();
+  self func_8484();
 }

@@ -40,7 +40,7 @@ func_128FE(var_0, var_1) {
   }
 
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_3 = _meth_83AC(var_0, "remote_tank");
+  var_3 = func_83AC(var_0, "remote_tank");
   if(var_3) {
     scripts\mp\matchdata::logkillstreakevent("remote_tank", self.origin);
     thread scripts\mp\utility::teamplayercardsplash("used_remote_tank", self);
@@ -153,7 +153,7 @@ func_13710() {
   restoreweapons();
 }
 
-_meth_83AC(var_0, var_1) {
+func_83AC(var_0, var_1) {
   var_2 = func_4A20(var_1, self);
   var_2.lifeid = var_0;
   removeperks();
@@ -410,7 +410,7 @@ func_114CC() {
     self.mgturret setturretteam(var_0.team);
     foreach(var_3 in level.players) {
       if(var_3 != var_0 && var_3.team == var_0.team) {
-        var_4 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_3, scripts\mp\teams::_meth_81B0(self.team), var_1, 10, 10, 0, 0.05, 0, 1, 0, 1);
+        var_4 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_3, scripts\mp\teams::func_81B0(self.team), var_1, 10, 10, 0, 0.05, 0, 1, 0, 1);
         if(isDefined(var_4)) {
           var_4 settargetent(self);
         }

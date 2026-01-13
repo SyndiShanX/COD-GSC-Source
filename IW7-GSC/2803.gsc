@@ -20,7 +20,7 @@ resetmissilelauncherlocking() {
   self notify("stop_javelin_locking_feedback");
   self notify("stop_javelin_locked_feedback");
   self notify("stinger_lock_lost");
-  self _meth_8403();
+  self func_8403();
   self stopolcalsound("maaws_reticle_tracking");
   self stopolcalsound("maaws_reticle_locked");
   func_E12E(self.var_10FAA);
@@ -239,7 +239,7 @@ stinger_finalizelock(var_0) {
   } else
     var_1 = (0, 0, 0);
 
-  self _meth_8402(self.var_10FAA, var_1);
+  self func_8402(self.var_10FAA, var_1);
 }
 
 func_17D0(var_0) {
@@ -326,7 +326,7 @@ stingtargstruct_getorigins() {
 stingtargstruct_getinreticle() {
   foreach(var_5, var_1 in self.origins) {
     for(var_2 = 0; var_2 < self.origins.size; var_2++) {
-      var_3 = self.player _meth_840B(self.origins[var_2], 65);
+      var_3 = self.player func_840B(self.origins[var_2], 65);
 
       if(isDefined(var_3)) {
         var_4 = length2dsquared(var_3);

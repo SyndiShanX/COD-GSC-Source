@@ -19,7 +19,7 @@ func_D563(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self scragentsetphysicsmode("noclip");
   self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
@@ -43,7 +43,7 @@ playtraverseanim_gravity(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self scragentsetphysicsmode("noclip");
   self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");
@@ -62,7 +62,7 @@ func_D564(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_4 = self getspectatepoint();
-  var_5 = self _meth_8146();
+  var_5 = self func_8146();
   self scragentsetphysicsmode("noclip");
   self scragentsetorientmode("face angle abs", var_4.angles);
   self ghostlaunched("anim deltas");

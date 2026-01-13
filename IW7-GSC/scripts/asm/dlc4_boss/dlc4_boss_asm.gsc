@@ -1079,7 +1079,7 @@ meph_victory() {
   scripts\cp\cp_vo::set_vo_system_busy(1);
   foreach(var_1 in level.players) {
     scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_1);
-    var_1 _meth_82C0("bink_fadeout_amb", 0.66);
+    var_1 func_82C0("bink_fadeout_amb", 0.66);
   }
 
   level notify("FINAL_BOSS_VICTORY");

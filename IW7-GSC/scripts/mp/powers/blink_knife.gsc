@@ -179,11 +179,11 @@ blinkknife_validatestuckto(var_0) {
     return 0;
   }
 
-  if(var_0 _meth_8568()) {
+  if(var_0 func_8568()) {
     return 0;
   }
 
-  if(var_0 _meth_8569()) {
+  if(var_0 func_8569()) {
     return 0;
   }
 
@@ -203,7 +203,7 @@ blinkknife_validateplayer(var_0) {
     return 0;
   }
 
-  if(var_0 _meth_84CA()) {
+  if(var_0 func_84CA()) {
     return 0;
   }
 
@@ -215,11 +215,11 @@ blinkknife_validateplayer(var_0) {
     return 0;
   }
 
-  if(var_0 _meth_8568()) {
+  if(var_0 func_8568()) {
     return 0;
   }
 
-  if(var_0 _meth_8569()) {
+  if(var_0 func_8569()) {
     return 0;
   }
 
@@ -287,7 +287,7 @@ blinkknife_endfx(var_0) {
 }
 
 blinkknife_victimfx(var_0, var_1) {
-  var_2 = var_1 _meth_8113();
+  var_2 = var_1 func_8113();
   if(isDefined(var_2)) {
     var_2 hide();
   }

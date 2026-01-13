@@ -29,7 +29,7 @@ func_475F(var_0) {
   var_1 = spawnStruct();
   var_1.grenade = var_0;
   level.player.var_4759.var_11168[level.player.var_4759.var_11168.size] = var_1;
-  var_1 _meth_85AE(var_0);
+  var_1 func_85AE(var_0);
 
   if(!isDefined(var_1.grenade)) {
     var_1 func_DFDF(1);
@@ -57,9 +57,9 @@ func_475F(var_0) {
   func_4763(var_2, var_5, undefined, var_1);
 }
 
-_meth_85AE(var_0) {
+func_85AE(var_0) {
   thread func_85E8(var_0);
-  _meth_85AD(var_0);
+  func_85AD(var_0);
 }
 
 func_85E8(var_0) {
@@ -68,7 +68,7 @@ func_85E8(var_0) {
   self.var_6643 = 1;
 }
 
-_meth_85AD(var_0) {
+func_85AD(var_0) {
   var_0 waittill("missile_stuck", var_1);
   self.origin = var_0.origin;
   self.angles = var_0.angles;
@@ -192,7 +192,7 @@ func_475A() {
 
     if(var_0.team == "axis") {
       if(var_0 func_3870()) {
-        var_0 _meth_81D0();
+        var_0 func_81D0();
       }
     }
   }
@@ -455,7 +455,7 @@ func_475E(var_0) {
   }
 
   if(isDefined(self.var_BE07)) {
-    self.var_BE07 _meth_8514(var_2);
+    self.var_BE07 func_8514(var_2);
   }
 
   if(isDefined(self.var_BE07.var_132AA)) {

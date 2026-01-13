@@ -206,7 +206,7 @@ dotraverseteleport(var_0, var_1, var_2, var_3) {
   if(isDefined(self.earlytraversalteleportpos)) {
     var_4 = self.earlytraversalteleportpos;
   } else {
-    var_4 = self _meth_8146();
+    var_4 = self func_8146();
   }
 
   var_5 = vectornormalize(var_4 - self.origin * (1, 1, 0));

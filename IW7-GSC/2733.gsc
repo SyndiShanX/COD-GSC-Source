@@ -5,8 +5,8 @@
 
 init() {
   level.drawfriend = 0;
-  game["headicon_allies"] = scripts\mp\teams::_meth_81B0("allies");
-  game["headicon_axis"] = scripts\mp\teams::_meth_81B0("axis");
+  game["headicon_allies"] = scripts\mp\teams::func_81B0("allies");
+  game["headicon_axis"] = scripts\mp\teams::func_81B0("axis");
   precacheheadicon(game["headicon_allies"]);
   precacheheadicon(game["headicon_axis"]);
   precacheshader("waypoint_revive");

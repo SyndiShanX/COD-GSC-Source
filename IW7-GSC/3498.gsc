@@ -352,7 +352,7 @@ func_A6BA() {
         var_4 = undefined;
 
         if(var_3 == "KILLSTREAKS_UNAVAILABLE_FOR_N") {
-          var_4 = level.var_A6AA - (level._meth_8487 - level.ingraceperiod);
+          var_4 = level.var_A6AA - (level.func_8487 - level.ingraceperiod);
         }
 
         scripts\mp\hud_message::showerrormessage(var_3, var_4);
@@ -448,7 +448,7 @@ laseron(var_0) {
 func_392B(var_0, var_1) {
   if(scripts\mp\utility\game::func_10060(var_1.streakname)) {
     if(isDefined(level.var_A6AA) && level.var_A6AA > 0) {
-      if(level._meth_8487 - level.ingraceperiod < level.var_A6AA) {
+      if(level.func_8487 - level.ingraceperiod < level.var_A6AA) {
         return "KILLSTREAKS_UNAVAILABLE_FOR_N";
       }
     }
@@ -688,7 +688,7 @@ func_A69A(var_0, var_1) {
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
     if(func_9E6B(var_0.streakname)) {
-      self _meth_80C3(1);
+      self func_80C3(1);
     }
   }
 
@@ -709,7 +709,7 @@ func_A69A(var_0, var_1) {
   self.var_13111 = undefined;
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
-    self _meth_80C3(0);
+    self func_80C3(0);
   }
 
   if(!var_3 || !var_4) {
@@ -771,7 +771,7 @@ func_4A1C(var_0, var_1, var_2) {
   var_3.var_9E0B = 0;
   var_3.var_FFC4 = 0;
   var_3.owner = var_1;
-  var_3.var_A5B0 = _meth_81ED(self);
+  var_3.var_A5B0 = func_81ED(self);
   var_3.lifeid = self.pers["deaths"];
   var_3.isgimme = 0;
   var_3.var_9F6E = 0;
@@ -784,7 +784,7 @@ func_4A1C(var_0, var_1, var_2) {
   return var_3;
 }
 
-_meth_81ED(var_0) {
+func_81ED(var_0) {
   if(!isDefined(var_0.pers["nextKillstreakID"])) {
     var_0.pers["nextKillstreakID"] = 0;
   }
@@ -1214,7 +1214,7 @@ clearkillstreakselection() {
   updatekillstreakselectedui();
 }
 
-_meth_8110() {
+func_8110() {
   var_0 = getclosestenemysqdist();
 
   if(!isDefined(var_0)) {
@@ -1449,7 +1449,7 @@ func_6CBA(var_0) {
   return undefined;
 }
 
-_meth_83A7(var_0, var_1) {
+func_83A7(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = scripts\mp\rank::getscoreinfovalue(var_0);
   }
@@ -1635,7 +1635,7 @@ killstreakhit(var_0, var_1, var_2, var_3) {
   }
 }
 
-_meth_83A0() {
+func_83A0() {
   thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
 }
 

@@ -118,7 +118,7 @@ func_6743() {
 
 func_115FA() {
   self.var_C9BD = 1;
-  while(self _meth_81A6()) {
+  while(self func_81A6()) {
     wait(0.05);
   }
 
@@ -278,7 +278,7 @@ func_1146A() {
 
 func_2BD4() {
   self.dontevershoot = 1;
-  self _meth_82DE(level.var_EBBC.var_1A29, 1);
+  self func_82DE(level.var_EBBC.var_1A29, 1);
 }
 
 func_11467(var_0) {
@@ -296,7 +296,7 @@ func_11465(var_0) {
     if(isDefined(var_2) && var_2 == level.player) {
       var_0.var_9A92 = 1;
       self.var_30 = 1;
-      self _meth_81D0((0, 0, 0), level.player);
+      self func_81D0((0, 0, 0), level.player);
       return;
     }
   }
@@ -328,7 +328,7 @@ func_11464() {
 }
 
 func_1145F(var_0) {
-  thread scripts\sp\utility::func_6E7C("takedown_enemy_dead", ::scripts\engine\utility::flag_set, "takedown_finished");
+  thread scripts\sp\utility::func_6E7C("takedown_enemy_dead", scripts\engine\utility::flag_set, "takedown_finished");
   level.var_EBBB.var_C9BD = undefined;
   level.var_EBBB scripts\sp\utility::func_61C7();
   scripts\engine\utility::trigger_on("takedown_color_moveup", "targetname");
@@ -484,7 +484,7 @@ snipers_get_tough() {
   var_1["crouch"] = 2000;
   var_1["stand"] = 3000;
   lib_0F27::func_F353(var_0, var_1);
-  self _meth_84F7("attack", level.player, level.player.origin);
+  self func_84F7("attack", level.player, level.player.origin);
 }
 
 check_dead_count(var_0) {
@@ -722,7 +722,7 @@ func_28AD() {
 func_CC60() {
   wait(0.05);
   var_0 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
-  scripts\engine\utility::array_thread(var_0, ::lib_0F1C::func_6837, 0);
+  scripts\engine\utility::array_thread(var_0, lib_0F1C::func_6837, 0);
 }
 
 func_DC46() {
@@ -749,7 +749,7 @@ func_872B() {
   thread guy_die_if_helmet_pop();
   wait(randomfloat(2));
   self.var_10E6D.var_B470 = 1;
-  self _meth_84F7("attack", level.player, level.player.origin);
+  self func_84F7("attack", level.player, level.player.origin);
   scripts\sp\utility::func_50E4(randomfloat(0.8), ::func_2527);
   self.health = 100;
   scale_accuracy_on_level(1.6);
@@ -760,7 +760,7 @@ guy_die_if_helmet_pop() {
   for(;;) {
     self waittill("damage", var_0, var_0, var_0, var_0, var_0, var_0, var_0, var_1, var_0, var_0);
     if(isDefined(var_1) && var_1 == "j_helmet") {
-      self _meth_81D0();
+      self func_81D0();
     }
 
     wait(0.05);
@@ -1046,7 +1046,7 @@ func_A76D() {
   level.var_EBBC.var_C9BD = undefined;
   scripts\engine\utility::flag_wait("squad_to_airlock");
   setsaveddvar("sm_roundrobinpriorityspotshadows", 8);
-  _meth_8463();
+  func_8463();
   scripts\engine\utility::flag_wait("airlock_ready");
 }
 
@@ -1317,7 +1317,7 @@ func_F168() {
     wait(0.05);
   }
 
-  if(self.bt.var_F15D _meth_81A6()) {
+  if(self.bt.var_F15D func_81A6()) {
     self.bt.var_F15D endon("death");
     while(distance2dsquared(self.origin, self.bt.var_F15D.origin) > squared(400)) {
       wait(0.05);
@@ -1360,13 +1360,13 @@ func_11803() {
   self orientmode("face point", scripts\engine\utility::random(getaiarray("axis")).origin);
   wait(0.25);
   self clearanim( % body, 0.2);
-  self _meth_82EA("exposed_throw_seeker", % hm_grnd_org_exposed_seeker_throw01, 1, 0.2, lib_0C6A::func_6B9A());
+  self func_82EA("exposed_throw_seeker", % hm_grnd_org_exposed_seeker_throw01, 1, 0.2, lib_0C6A::func_6B9A());
   var_0 = "exposed_throw_seeker";
   thread lib_0A1E::func_231F("soldier", var_0);
   var_1 = "seeker_grenade_folded";
   var_2 = undefined;
   var_3 = 0;
-  var_4 = lib_0C6A::_meth_810E("exposed_seeker_throw");
+  var_4 = lib_0C6A::func_810E("exposed_seeker_throw");
   while(!var_3) {
     self waittill(var_0, var_5);
     if(!isarray(var_5)) {
@@ -1530,7 +1530,7 @@ func_EF56() {
     self.var_C012 = 1;
     level.var_EF59++;
     var_4 func_AFDF();
-    var_4 _meth_80F1(self.origin, self.angles, 10000);
+    var_4 func_80F1(self.origin, self.angles, 10000);
     var_5 = spawnStruct();
     var_5.origin = self.origin;
     var_5.angles = self.angles;
@@ -1545,7 +1545,7 @@ func_EF56() {
     var_4 scripts\sp\utility::func_1101B();
     var_4.var_30 = 1;
     var_4.a.nodeath = 1;
-    var_4 _meth_81D0();
+    var_4 func_81D0();
     return 1;
   }
 
@@ -1645,7 +1645,7 @@ func_10FC3() {
   self givescorefortrophyblocks();
 }
 
-_meth_8463() {
+func_8463() {
   var_0 = getent("lab_airlock_dynpath", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
@@ -1681,7 +1681,7 @@ _meth_8463() {
   var_0D show();
   var_0D solid();
   var_0E = [var_5, var_6];
-  level.player _meth_82C0("europa_airlock_room", 3);
+  level.player func_82C0("europa_airlock_room", 3);
   var_6 scripts\engine\utility::delaythread(1, ::scripts\sp\utility::play_sound_on_entity, "airlock_entry_door_close");
   var_1 notify("stop_loop");
   scripts\engine\utility::flag_set("airlock_closing");
@@ -1849,7 +1849,7 @@ func_A744() {
   level.var_EBBB thread func_2014(var_4);
   level.player thread func_2016(var_6);
   wait(0.4);
-  level.player scripts\engine\utility::delaycall(4.2, ::_meth_82C0, "europa_post_airlock_hallway", 1);
+  level.player scripts\engine\utility::delaycall(4.2, ::func_82C0, "europa_post_airlock_hallway", 1);
   level.player scripts\engine\utility::delaycall(5.5, ::clearclienttriggeraudiozone, 3);
   var_6 thread scripts\sp\anim::func_1F2C(var_6.var_1684, "antigrav_breach");
   var_6.var_99F4 lib_0E46::func_DFE3();
@@ -1857,7 +1857,7 @@ func_A744() {
   var_6.var_4220 delete();
   thread scripts\sp\maps\europa\europa_util::func_10690("lab_walk");
   scripts\engine\utility::flag_wait("antigrav_detonates");
-  thread scripts\sp\utility::func_6E7C("player_crossing_bridge", ::scripts\engine\utility::flag_set, "straggler_dead");
+  thread scripts\sp\utility::func_6E7C("player_crossing_bridge", scripts\engine\utility::flag_set, "straggler_dead");
   foreach(var_1 in level.var_EBCA) {
     var_1.var_C9BD = undefined;
     var_1 scripts\sp\utility::func_61E7();
@@ -1865,7 +1865,7 @@ func_A744() {
 
   thread func_CD69();
   thread func_EBCC();
-  level.player _meth_80A1();
+  level.player func_80A1();
   scripts\sp\utility::func_13753(var_5);
   scripts\engine\utility::flag_set("airlock_enemies_dead");
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
@@ -1982,7 +1982,7 @@ func_2016(var_0) {
   level.player unlink(1);
   level.player allowprone(1);
   level.player allowcrouch(1);
-  level.player _meth_84FD();
+  level.player func_84FD();
   level.player scripts\sp\maps\europa\europa_util::func_8E34(0);
   level.player scripts\sp\maps\europa\europa_util::func_13013(0, 1);
   level.player enableweapons();
@@ -2361,7 +2361,7 @@ func_1B2F() {
   var_0 = lib_0F27::func_79F5("office_door_guards");
   scripts\engine\utility::array_thread(var_0, ::func_1374F);
   level waittill("research_enemies_alerted");
-  scripts\engine\utility::array_call(var_0, ::_meth_84F7, "attack", level.player, level.player.origin);
+  scripts\engine\utility::array_call(var_0, ::func_84F7, "attack", level.player, level.player.origin);
 }
 
 func_F167() {
@@ -2376,11 +2376,11 @@ func_F167() {
   }
 
   self.bt.var_F15D.var_5951 = undefined;
-  if(self.bt.var_F15D _meth_81A6()) {
+  if(self.bt.var_F15D func_81A6()) {
     self.bt.var_F15D givescorefortrophyblocks();
   }
 
-  self.bt.var_F15D _meth_84F7("attack", self, self.origin);
+  self.bt.var_F15D func_84F7("attack", self, self.origin);
   level notify("research_enemies_alerted");
 }
 
@@ -2663,7 +2663,7 @@ func_3371() {
 
 func_B279() {
   wait(0.05);
-  self _meth_82B1(scripts\sp\utility::func_7DC1("c6_hack_enter"), 1.7);
+  self func_82B1(scripts\sp\utility::func_7DC1("c6_hack_enter"), 1.7);
   wait(2);
   scripts\sp\utility::func_1101B();
   self.var_4E46 = ::func_10FC1;
@@ -2709,7 +2709,7 @@ func_3383() {}
 
 func_520B() {
   wait(0.05);
-  self _meth_82B1(scripts\sp\utility::func_7DC1("locker_deploy"), 1.45);
+  self func_82B1(scripts\sp\utility::func_7DC1("locker_deploy"), 1.45);
 }
 
 func_FB53(var_0) {
@@ -2929,7 +2929,7 @@ func_A789() {
 
   if(isalive(var_3)) {
     var_0B = getnode("moving_desk_node", "targetname");
-    var_0B _meth_808B();
+    var_0B func_808B();
     var_3 give_more_perk(var_0B);
     var_2 disconnectpaths();
   }
@@ -2970,7 +2970,7 @@ ag_check(var_0) {
   for(;;) {
     level.player waittill("grenade_fire", var_1, var_2);
     if(isDefined(var_2) && var_2 == "antigrav") {
-      if(var_0 _meth_81A6()) {
+      if(var_0 func_81A6()) {
         var_0 givescorefortrophyblocks();
         return;
       }

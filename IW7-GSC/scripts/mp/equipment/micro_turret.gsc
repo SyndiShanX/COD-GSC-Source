@@ -330,12 +330,12 @@ func_B6EC() {
 
   for(;;) {
     if(func_B701()) {
-      var_1 = self _meth_8161(0);
+      var_1 = self func_8161(0);
       if(!isDefined(self.var_1A4A)) {
         self settargetentity(self.var_1A4A);
       }
 
-      if(func_B715() && isDefined(self _meth_8161(1))) {
+      if(func_B715() && isDefined(self func_8161(1))) {
         self shootturret();
         self.var_1E2D--;
         if(self.var_1E2D <= 0) {

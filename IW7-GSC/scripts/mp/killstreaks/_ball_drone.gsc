@@ -234,10 +234,10 @@ createballdrone(var_0, var_1) {
   var_0E givelastonteamwarning(120, 90);
   var_0E setneargoalnotifydist(16);
   var_0E sethoverparams(30, 10, 5);
-  var_0E _meth_856A(50, 1.3, 30, 20);
+  var_0E func_856A(50, 1.3, 30, 20);
   var_0E setotherent(self);
-  var_0E _meth_84E1(1);
-  var_0E _meth_84E0(1);
+  var_0E func_84E1(1);
+  var_0E func_84E0(1);
   var_0E.useobj = spawn("script_model", var_0E.origin);
   var_0E.useobj linkto(var_0E, "tag_origin");
   var_0E scripts\mp\killstreaks\_utility::func_1843(var_0E.balldronetype, "Killstreak_Ground", var_0E.triggerportableradarping, 1);
@@ -266,7 +266,7 @@ createballdrone(var_0, var_1) {
 
     case "ball_drone_backup":
       var_0E givelastonteamwarning(150, 90);
-      var_0E _meth_856A(100, 1.3, 30, 20);
+      var_0E func_856A(100, 1.3, 30, 20);
       var_0E.followspeed = 140;
       var_12 = spawnturret("misc_turret", var_0E gettagorigin(level.balldronesettings[var_0].weaponswitchendednuke), level.balldronesettings[var_0].var_39B);
       var_12 linkto(var_0E, level.balldronesettings[var_0].weaponswitchendednuke);
@@ -296,7 +296,7 @@ createballdrone(var_0, var_1) {
       var_12 give_crafted_gascan(50);
       var_12 thread balldrone_attacktargets();
       var_12 setturretminimapvisible(1, "buddy_turret");
-      var_12 _meth_82C8(0.8);
+      var_12 func_82C8(0.8);
       var_14 = var_0E.origin + anglesToForward(var_0E.angles) * -10 + anglestoright(var_0E.angles) * -10 + (0, 0, 6);
       var_12.killcament = spawn("script_model", var_14);
       var_12.killcament setscriptmoverkillcam("explosive");
@@ -340,7 +340,7 @@ createballdrone(var_0, var_1) {
       var_12 give_crafted_gascan(50);
       var_12 thread balldrone_attacktargets();
       var_12 setturretminimapvisible(1, "buddy_turret");
-      var_12 _meth_82C8(0.8);
+      var_12 func_82C8(0.8);
       var_14 = var_0E.origin + anglesToForward(var_0E.angles) * -10 + anglestoright(var_0E.angles) * -10 + (0, 0, 10);
       var_12.killcament = spawn("script_model", var_14);
       var_12.killcament setscriptmoverkillcam("explosive");
@@ -552,7 +552,7 @@ startballdrone(var_0) {
   }
 
   var_1 = balldrone_gettargetoffset(var_0, self);
-  var_0 _meth_85C6(self, var_1, 16, 10);
+  var_0 func_85C6(self, var_1, 16, 10);
   var_0 vehicle_setspeed(var_0.getclosestpointonnavmesh3d, 10, 10);
   if(var_0.balldronetype == "ball_drone_backup") {
     if(scripts\mp\killstreaks\_utility::func_A69F(var_0.streakinfo, "passive_seeker")) {
@@ -598,7 +598,7 @@ balldrone_followplayer() {
 
       self.var_A8F2 = var_0;
       var_1 = balldrone_gettargetoffset(self, self.triggerportableradarping);
-      self _meth_85C6(self.triggerportableradarping, var_1, 16, 10);
+      self func_85C6(self.triggerportableradarping, var_1, 16, 10);
     }
 
     wait(0.5);
@@ -636,7 +636,7 @@ balldrone_watchfornearbytargets() {
     var_0 = self.turret getturrettarget(1);
     balldrone_guardlocation();
     var_1 = balldrone_gettargetoffset(self, var_0);
-    self _meth_85C6(var_0, var_1, 16, 10);
+    self func_85C6(var_0, var_1, 16, 10);
     self.var_2525 = 1;
     thread func_13B79(var_0, self.origin, 1);
     self waittill("disengage_target");
@@ -657,7 +657,7 @@ getvalidenemylist() {
       continue;
     }
 
-    if(var_2 _meth_8181("specialty_blindeye")) {
+    if(var_2 func_8181("specialty_blindeye")) {
       continue;
     }
 
@@ -777,7 +777,7 @@ func_27E7() {
     self notify("player_defend");
     self.var_A8F2 = undefined;
     var_0E = balldrone_gettargetoffset(self, var_1);
-    self _meth_85C6(var_1, var_0E, 16, 10);
+    self func_85C6(var_1, var_0E, 16, 10);
     self.var_2525 = 1;
     thread func_13B79(var_1, undefined, 1);
     break;
@@ -814,7 +814,7 @@ func_27EA() {
     self notify("target_assist");
     self.var_A8F2 = undefined;
     var_0A = balldrone_gettargetoffset(self, var_0);
-    self _meth_85C6(var_0, var_0A, 16, 10);
+    self func_85C6(var_0, var_0A, 16, 10);
     self.var_2525 = 1;
     thread func_13B79(var_0, undefined, 1);
     break;
@@ -895,7 +895,7 @@ balldrone_seekclosesttarget() {
 
   if(isDefined(var_1) && var_1.size > 0) {
     var_2 = balldrone_gettargetoffset(self, var_1[0]);
-    self _meth_85C6(var_1[0], var_2, 16, 10);
+    self func_85C6(var_1[0], var_2, 16, 10);
     thread func_13B79(var_1[0]);
     self waittill("disengage_target");
     balldrone_guardlocation();
@@ -950,7 +950,7 @@ func_27DF() {
   self notify("ballDrone_moveToPlayer");
   self endon("ballDrone_moveToPlayer");
   var_0 = balldrone_gettargetoffset(self, self.triggerportableradarping);
-  self _meth_85C6(self.triggerportableradarping, var_0, 16, 10);
+  self func_85C6(self.triggerportableradarping, var_0, 16, 10);
   self.intransit = 1;
   thread balldrone_watchforgoal();
 }

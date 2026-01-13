@@ -67,16 +67,16 @@ func_E3D8(var_0) {
 }
 
 func_F2CE() {
-  level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_no_air", 0.5);
+  level.player func_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_no_air", 0.5);
   thread func_25C6();
 }
 
 func_F2CD() {
-  level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_air", 12.0);
+  level.player func_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_air", 12.0);
 }
 
 func_F2CF() {
-  level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_hangar_has_air", 7.0);
+  level.player func_82C0("shipcrib_crane_in_jackal_canopy_closed_hangar_has_air", 7.0);
   thread func_25C7();
 }
 
@@ -347,7 +347,7 @@ func_E3CD(var_0, var_1, var_2, var_3) {
     var_9 = level.var_E35D.var_A2E8[var_0].var_3FFB.var_EACA / var_7;
   }
 
-  level.var_E35D.var_A2E8[var_0].var_3FFB _meth_826F((0, var_4, 0), var_1);
+  level.var_E35D.var_A2E8[var_0].var_3FFB func_826F((0, var_4, 0), var_1);
 
   for(var_10 = 0; var_10 < var_7; var_10++) {
     if(var_0 == "b") {

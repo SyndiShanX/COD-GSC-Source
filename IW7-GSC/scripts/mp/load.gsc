@@ -115,7 +115,7 @@ main() {
 
       if(var_3 == "trigger_multiple_arbitrary_up") {
         var_5 = var_4[var_1];
-        var_5 _meth_84C0(1);
+        var_5 func_84C0(1);
         if(isDefined(var_5.target)) {
           var_6 = getent(var_5.target, "targetname");
           var_5 enablelinkto();

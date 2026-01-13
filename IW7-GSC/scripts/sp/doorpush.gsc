@@ -156,7 +156,7 @@ func_5A42(var_0) {
     return;
   }
 
-  scripts\engine\utility::array_call(self.var_ECCE, ::_meth_8184);
+  scripts\engine\utility::array_call(self.var_ECCE, ::func_8184);
   switch (var_0) {
     case "unlocked":
       scripts\engine\utility::array_call(self.var_ECCE, ::giveperk, "tag_unlocked");
@@ -406,12 +406,12 @@ func_5A4D(var_0, var_1, var_2) {
   lib_0B6A::func_EC04();
   switch (var_2) {
     case "push":
-      self _meth_80F1(func_794A(var_0).var_DB15, func_794A(var_0).var_DB14);
+      self func_80F1(func_794A(var_0).var_DB15, func_794A(var_0).var_DB14);
       self give_mp_super_weapon(self.origin);
       break;
 
     case "pull":
-      self _meth_80F1(func_794A(var_0).var_DB15, func_794A(var_0).var_DB14);
+      self func_80F1(func_794A(var_0).var_DB15, func_794A(var_0).var_DB14);
       self give_mp_super_weapon(self.origin);
       break;
   }
@@ -438,7 +438,7 @@ func_11EB(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 = scripts\sp\utility::func_10639("player_rig");
-  var_6 = level.player _meth_84C6("currentViewModel");
+  var_6 = level.player func_84C6("currentViewModel");
   if(isDefined(var_6)) {
     var_5 setModel(var_6);
   }

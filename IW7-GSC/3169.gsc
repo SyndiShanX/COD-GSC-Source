@@ -12,7 +12,7 @@ func_D490(var_0, var_1, var_2, var_3) {
     self orientmode("face angle", vectortoyaw(self.objective_position.origin - self.origin));
   }
 
-  self _meth_82EA(var_1, var_4, 1, var_2, 1);
+  self func_82EA(var_1, var_4, 1, var_2, 1);
   var_5 = animhasnotetrack(var_4, "grenade_left");
   var_6 = animhasnotetrack(var_4, "grenade_right");
   var_7 = var_5 || var_6;
@@ -25,9 +25,9 @@ func_D490(var_0, var_1, var_2, var_3) {
       self waittillmatch("grenade_right", var_1);
     }
 
-    self _meth_8228();
+    self func_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
-    var_8 = self _meth_84F3();
+    var_8 = self func_84F3();
     if(isDefined(var_8)) {
       var_9 = vectortoyaw(var_8);
       self orientmode("face angle", var_9);
@@ -37,12 +37,12 @@ func_D490(var_0, var_1, var_2, var_3) {
   } else {
     thread lib_0A1E::func_231F(var_0, var_1);
     self waittillmatch("grenade_throw", var_1);
-    self _meth_8228();
+    self func_8228();
     scripts\anim\battlechatter_ai::func_67CF("frag");
   }
 
   if(isDefined(self.objective_position)) {
-    self _meth_83C2();
+    self func_83C2();
   }
 
   wait(1);
@@ -116,6 +116,6 @@ func_1001F(var_0, var_1, var_2, var_3) {
   return 1;
 }
 
-_meth_85B1(var_0, var_1, var_2) {
+func_85B1(var_0, var_1, var_2) {
   self.asm.var_312B = undefined;
 }
