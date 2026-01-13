@@ -133,7 +133,7 @@ func_194A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_2 = lib_0EFB::func_7D7A(var_2);
     if(isDefined(var_5)) {
       self thread[[var_1]](var_2, var_5);
-      scripts\engine\utility::delaythread(var_5, ::scripts\sp\utility::func_77B9, 0.7);
+      scripts\engine\utility::delaythread(var_5, scripts\sp\utility::func_77B9, 0.7);
     } else {
       self thread[[var_1]](var_2);
     }

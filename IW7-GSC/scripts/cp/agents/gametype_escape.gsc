@@ -16,11 +16,11 @@ main() {
   level.wave_num = 0;
   level.laststand_currency_penalty_amount_func = ::zombie_laststand_currency_penalth_amount;
   level.disable_zombie_exo_abilities = 1;
-  level.in_room_check_func = ::scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
-  level.custom_giveloadout = ::scripts\cp\zombies\zombies_loadout::givedefaultloadout;
-  level.move_speed_scale = ::scripts\cp\zombies\zombies_loadout::updatemovespeedscale;
+  level.in_room_check_func = scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
+  level.custom_giveloadout = scripts\cp\zombies\zombies_loadout::givedefaultloadout;
+  level.move_speed_scale = scripts\cp\zombies\zombies_loadout::updatemovespeedscale;
   level.getnodearrayfunction = ::getnodearray;
-  level.callbackplayerdamage = ::scripts\cp\zombies\zombie_damage::callback_zombieplayerdamage;
+  level.callbackplayerdamage = scripts\cp\zombies\zombie_damage::callback_zombieplayerdamage;
   level.prespawnfromspectaorfunc = ::zombie_prespawnfromspectatorfunc;
   level.update_money_performance = ::escape_update_money_performance;
   level.prematchfunc = ::default_zombie_prematch_func;
@@ -31,7 +31,7 @@ main() {
   level.statstable = "mp\statstable.csv";
   level.game_mode_statstable = "cp\zombies\mode_string_tables\zombies_statstable.csv";
   level.game_mode_attachment_map = "cp\zombies\zombie_attachmentmap.csv";
-  level.active_volume_check = ::scripts\cp\loot::is_in_active_volume;
+  level.active_volume_check = scripts\cp\loot::is_in_active_volume;
   scripts\cp\cp_weapon::weaponsinit();
   scripts\cp\utility::healthregeninit(0);
   if(!isDefined(level.powers)) {
@@ -237,11 +237,11 @@ zombie_onstartgametype() {
 
   level thread handle_nondeterministic_entities();
   level thread revive_players_between_waves_monitor();
-  level scripts\engine\utility::delaythread(0.2, ::scripts\cp\zombies\zombie_entrances::init_zombie_entrances);
+  level scripts\engine\utility::delaythread(0.2, scripts\cp\zombies\zombie_entrances::init_zombie_entrances);
   level.xpscale = getdvarint("scr_aliens_xpscale");
   level.xpscale = min(level.xpscale, 4);
   level.xpscale = max(level.xpscale, 0);
-  level.gamemode_perk_callback_init_func = ::scripts\cp\zombies\zombies_perk_machines::register_zombie_perks;
+  level.gamemode_perk_callback_init_func = scripts\cp\zombies\zombies_perk_machines::register_zombie_perks;
   scripts\cp\perks\perkmachines::init_zombie_perks_callback();
   scripts\cp\perks\perkmachines::init_perks_from_table();
   thread scripts\cp\zombies\zombies_consumables::init_consumables();

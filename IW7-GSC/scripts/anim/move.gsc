@@ -613,7 +613,7 @@ func_325C() {
 
     if(!isDefined(self.isnodeoccupied) && !self.precacheleaderboards && isDefined(var_0.team) && isenemyteam(self.team, var_0.team)) {
       self.var_13D13 = var_0;
-      self animcustom(::scripts\anim\reactions::func_325E);
+      self animcustom(scripts\anim\reactions::func_325E);
       continue;
     }
 

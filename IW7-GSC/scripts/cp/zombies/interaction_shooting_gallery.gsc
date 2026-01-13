@@ -7,7 +7,7 @@ func_13010(var_0, var_1) {
   var_0.var_45C5.in_afterlife_arcade = scripts\engine\utility::istrue(var_1.in_afterlife_arcade);
   var_1 playlocalsound("arcade_insert_coin_01");
   if(!scripts\engine\utility::istrue(var_0.var_45C5.song_playing)) {
-    scripts\engine\utility::delaythread(0.2, ::scripts\engine\utility::play_sound_in_space, "arcade_horserace_gunshot", var_1.origin);
+    scripts\engine\utility::delaythread(0.2, scripts\engine\utility::play_sound_in_space, "arcade_horserace_gunshot", var_1.origin);
     scripts\cp\utility::playsoundatpos_safe(var_0.origin, "shooting_gall_anc_activate");
     level thread scripts\cp\zombies\arcade_game_utility::update_song_playing(var_0.var_45C5, "shooting_gall_anc_activate");
   }
@@ -769,6 +769,6 @@ func_5555(var_0) {
 
 register_interactions() {
   level.interaction_hintstrings["shooting_gallery_afterlife"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("shooting_gallery", "arcade_game", undefined, ::scripts\cp\zombies\arcade_game_utility::arcade_game_hint_func, ::func_13010, 0, 1, ::func_973E);
+  scripts\cp\cp_interaction::register_interaction("shooting_gallery", "arcade_game", undefined, scripts\cp\zombies\arcade_game_utility::arcade_game_hint_func, ::func_13010, 0, 1, ::func_973E);
   scripts\cp\cp_interaction::register_interaction("shooting_gallery_afterlife", "afterlife_game", undefined, undefined, ::func_13010, 0, 0, ::func_94DA);
 }

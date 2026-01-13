@@ -162,7 +162,7 @@ func_12B58(var_0) {
     return;
   }
 
-  scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::func_65E1, "side_thrusters_out");
+  scripts\engine\utility::delaythread(1.5, scripts\sp\utility::func_65E1, "side_thrusters_out");
   self give_attacker_kill_rewards( % vh_dropship_front_thrusters_out);
   scripts\engine\utility::delaycall(0.05, ::func_82B1, % vh_dropship_front_thrusters_out, 0.25);
   self clearanim( % vh_dropship_front_thrusters_in, 0.05);

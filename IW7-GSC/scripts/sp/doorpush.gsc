@@ -160,14 +160,14 @@ func_5A42(var_0) {
   switch (var_0) {
     case "unlocked":
       scripts\engine\utility::array_call(self.var_ECCE, ::giveperk, "tag_unlocked");
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_AB83, 0.009, 0.05);
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
       break;
 
     case "locked":
       scripts\engine\utility::array_call(self.var_ECCE, ::giveperk, "tag_locked");
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_AB83, 0.009, 0.05);
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_3C57, (0.98, 0.18, 0.26), 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_3C57, (0.98, 0.18, 0.26), 0.05);
       break;
 
     case "automatic":
@@ -176,8 +176,8 @@ func_5A42(var_0) {
 
     case "open":
       scripts\engine\utility::array_call(self.var_ECCE, ::giveperk, "tag_unlocked");
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_AB83, 0.009, 0.05);
-      scripts\engine\utility::array_thread(self.var_ECCA, ::scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+      scripts\engine\utility::array_thread(self.var_ECCA, scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
       break;
   }
 }
@@ -493,22 +493,22 @@ func_11EB(var_0, var_1, var_2, var_3, var_4) {
     switch (var_0) {
       case "left_push":
         level.player playSound("shipcrib_door_left_hinge_push_handle_down_open");
-        self.var_5A3C scripts\engine\utility::delaythread(2.6, ::scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_push_release_and_close", "door_locked");
+        self.var_5A3C scripts\engine\utility::delaythread(2.6, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_push_release_and_close", "door_locked");
         break;
 
       case "left_pull":
         level.player playSound("shipcrib_door_left_hinge_pull_handle_down_open");
-        self.var_5A3C scripts\engine\utility::delaythread(2.4, ::scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_pull_release_and_close", "door_locked");
+        self.var_5A3C scripts\engine\utility::delaythread(2.4, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_pull_release_and_close", "door_locked");
         break;
 
       case "right_push":
         level.player playSound("shipcrib_door_right_hinge_push_handle_down_open");
-        self.var_5A3C scripts\engine\utility::delaythread(2.6, ::scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_push_release_and_close", "door_locked");
+        self.var_5A3C scripts\engine\utility::delaythread(2.6, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_push_release_and_close", "door_locked");
         break;
 
       case "right_pull":
         level.player playSound("shipcrib_door_right_hinge_pull_handle_down_open");
-        self.var_5A3C scripts\engine\utility::delaythread(2.4, ::scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_pull_release_and_close", "door_locked");
+        self.var_5A3C scripts\engine\utility::delaythread(2.4, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_pull_release_and_close", "door_locked");
         break;
     }
 

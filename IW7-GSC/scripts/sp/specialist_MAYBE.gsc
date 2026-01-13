@@ -1035,7 +1035,7 @@ func_914F(var_0, var_1, var_2, var_3) {
   if(var_2) {
     var_4["burn"].alpha = 0.7;
     var_0A = 3;
-    var_4["burn"] scripts\engine\utility::delaythread(0.5, ::scripts\sp\hud_util::func_6AAB, 0, var_0A - 0.5);
+    var_4["burn"] scripts\engine\utility::delaythread(0.5, scripts\sp\hud_util::func_6AAB, 0, var_0A - 0.5);
     var_4["burn"] thread func_9175(var_0A);
   }
 
@@ -1130,7 +1130,7 @@ func_4D17() {
         level.player clearclienttriggeraudiozone(2);
         setblur(0, 1);
         level.player scripts\engine\utility::allow_reload(1);
-        level.player scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::play_sound_on_entity, "breathing_better");
+        level.player scripts\engine\utility::delaythread(1.5, scripts\sp\utility::play_sound_on_entity, "breathing_better");
         scripts\engine\utility::delaythread(2, ::func_25E9, "repair", "oxygen");
         level notify("player_replacing_helmet");
         break;

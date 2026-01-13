@@ -7,7 +7,7 @@ disco_vo_init() {
   level.recent_vo = [];
   level.announcer_vo_playing = 0;
   level.player_vo_playing = 0;
-  level.get_alias_2d_func = ::scripts\cp\maps\cp_disco\cp_disco::cp_disco_get_alias_2d_version;
+  level.get_alias_2d_func = scripts\cp\maps\cp_disco\cp_disco::cp_disco_get_alias_2d_version;
   level.spawn_vo_func = ::starting_vo;
   level.level_specific_vo_callouts = ::rave_vo_callouts;
   level.pap_vo_approve_func = ::is_vo_in_pap;

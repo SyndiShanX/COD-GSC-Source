@@ -39,7 +39,7 @@ main() {
   level.bypassclasschoicefunc = ::alwaysgamemodeclass;
   level.modifyunifiedpointscallback = ::modifyunifiedpointscallback;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "gungame";

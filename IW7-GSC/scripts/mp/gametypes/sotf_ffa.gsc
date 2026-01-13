@@ -48,7 +48,7 @@ main() {
   level.emptylocations = 1;
   level.assists_disabled = 1;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "hunted";

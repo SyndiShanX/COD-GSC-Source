@@ -149,7 +149,7 @@ func_224A() {
   scripts\engine\utility::array_thread(var_0, ::func_A6ED);
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\utility::func_F5AF("armory_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
@@ -162,7 +162,7 @@ func_21A4() {
   }
 
   scripts\sp\utility::func_28D8("axis");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_54F7);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_54F7);
   thread func_21DF();
   scripts\sp\maps\europa\europa_util::func_6244(1);
 }
@@ -282,9 +282,9 @@ func_2891() {
   var_0 = getEntArray("extra_corridor_klaxon_light", "script_noteworthy");
   scripts\engine\utility::array_thread(var_0, ::func_A6ED);
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\engine\utility::delaythread(0.1, ::scripts\sp\utility::func_F5AF, "selfdestruct_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::delaythread(0.1, scripts\sp\utility::func_F5AF, "selfdestruct_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   level.var_11B30.var_10DDB = 2000;
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", &"EUROPA_OBJECTIVE_FSPAR");
   thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
@@ -316,7 +316,7 @@ func_288C() {
   func_288E();
   scripts\engine\utility::array_thread(level.var_EBCA, ::func_1C38, 1);
   var_3 = getEntArray("tram_out_trigger", "script_noteworthy");
-  scripts\engine\utility::array_thread(var_3, ::scripts\engine\utility::trigger_on);
+  scripts\engine\utility::array_thread(var_3, scripts\engine\utility::trigger_on);
   scripts\sp\utility::func_2669("post_give_steeldragon");
   thread func_C856();
   scripts\engine\utility::flag_wait("tram_intro_done");
@@ -833,7 +833,7 @@ func_3568() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\utility::func_F5AF("c12_fight_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   level.var_11B30.var_10DDB = 1000;
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   thread func_B784();
   scripts\sp\utility::func_22CD("tram_initial_enemies", 1);
   thread scripts\sp\utility::func_1034D("europa_plr_letsgetitout");
@@ -2202,7 +2202,7 @@ func_11B3A() {
 func_21DB() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\utility::func_F5AF("armory_tram_end_startpoint", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   scripts\engine\utility::flag_set("tram_move");
   scripts\engine\utility::delaythread(30.5, ::func_D287);
   thread func_2872(30.5);
@@ -2413,7 +2413,7 @@ func_2AC3() {
   thread scripts\engine\utility::flag_set_delayed("fspar_done_firing", var_6 + var_5);
   thread func_7468(var_5, var_6, var_0);
   thread func_7463(var_5, var_6);
-  scripts\engine\utility::delaythread(var_5 + var_6 + 1, ::scripts\engine\utility::exploder, "decomp_room");
+  scripts\engine\utility::delaythread(var_5 + var_6 + 1, scripts\engine\utility::exploder, "decomp_room");
   scripts\engine\utility::delaythread(var_5 + 0.2, ::func_3576, var_0);
   scripts\engine\utility::delaythread(var_5 + var_6, ::func_FED5, 0.25);
   scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), ::func_A9E0);
@@ -2421,7 +2421,7 @@ func_2AC3() {
   scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), ::func_4F99);
   scripts\engine\utility::delaythread(var_5 + 0.05, ::func_4F97);
   scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), ::func_4FA9);
-  scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), ::scripts\sp\maps\europa\europa_util::func_6F30);
+  scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), scripts\sp\maps\europa\europa_util::func_6F30);
   scripts\engine\utility::delaythread(var_5 + var_6 + randomfloatrange(0.05, 0.25), ::func_224B);
   wait(var_5 + var_6);
   wait(3);
@@ -2625,7 +2625,7 @@ func_FFA7() {
 func_2AC2() {}
 
 func_6C29(var_0) {
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility::func_51E1, "casual");
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility::func_51E1, "casual");
   scripts\engine\utility::flag_wait("open_room3_doors");
   wait(2);
   scripts\engine\utility::flag_set("final_stand_moveup");
@@ -2893,7 +2893,7 @@ func_134DA() {
   level.var_EBBB scripts\sp\utility::func_10346("europa_sip_keeppushing");
   scripts\engine\utility::flag_wait("fspar_done_firing");
   wait(0.5);
-  level.var_EBBC scripts\engine\utility::delaythread(0.6, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_holdon");
+  level.var_EBBC scripts\engine\utility::delaythread(0.6, scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_holdon");
   level.var_EBBB scripts\sp\utility::func_10346("europa_sip_itsdecompressing");
   wait(0.6);
   scripts\sp\utility::func_1034D("europa_plr_holdon");
@@ -4090,13 +4090,13 @@ func_DAED(var_0) {
 func_1B20() {
   wait(0.1);
   var_0 = getEntArray("europa_monitor_light_red1", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_monitor_light_red2", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_monitor_light_blue1", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 20);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 20);
   var_0 = getEntArray("europa_monitor_light_blue2", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 10);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 10);
   var_1 = getscriptablearray("monitors", "targetname");
   scripts\sp\maps\europa\europa_util::func_EF3F(var_1, "part", "healthy", "healthy_blue");
   scripts\sp\maps\europa\europa_util::func_EF3F(var_1, "part", "dead", "dead_blue");
@@ -4105,13 +4105,13 @@ func_1B20() {
 
 alarm_lights_on() {
   var_0 = getEntArray("europa_monitor_light_blue1", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_monitor_light_blue2", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_monitor_light_red1", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 5);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 5);
   var_0 = getEntArray("europa_monitor_light_red2", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 5);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 5);
   var_1 = getscriptablearray("monitors", "targetname");
   scripts\sp\maps\europa\europa_util::func_EF3F(var_1, "part", "healthy_blue", "healthy_red");
   scripts\sp\maps\europa\europa_util::func_EF3F(var_1, "part", "health_healthy_blue", "healthy_red");

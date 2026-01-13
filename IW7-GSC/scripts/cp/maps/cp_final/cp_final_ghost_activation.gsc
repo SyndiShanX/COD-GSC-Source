@@ -1897,21 +1897,21 @@ load_cp_final_ghost_vfx() {
 
 gns4_formation_movement() {
   level.formation_movements = [];
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(1, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_1_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(2, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_2_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(3, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_3_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(4, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_4_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(5, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_5_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(6, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_6_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(7, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_7_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(8, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_8_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(9, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_9_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(10, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_10_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(11, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_11_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(12, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_12_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(13, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_13_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(14, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_14_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(15, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_15_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(1, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_1_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(2, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_2_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(3, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_3_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(4, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_4_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(5, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_5_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(6, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_6_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(7, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_7_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(8, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_8_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(9, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_9_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(10, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_10_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(11, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_11_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(12, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_12_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(13, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_13_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(14, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_14_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(15, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_15_move_pattern);
 }
 
 register_ghost_form() {
@@ -2287,7 +2287,7 @@ final_pre_gns_end_func() {
 
 reactivate_skullbuster_cabinet() {
   if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
-    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::secret_button_combo, ::complete_secret_button_combo, ::debug_secret_button_combo, 5, "Enter secret button combo");
+    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::secret_button_combo, ::complete_secret_button_combo, ::debug_secret_button_combo, 5, "Enter secret button combo");
     scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 1, ::blank, ::wait_for_player_activation, ::complete_clean_arcade_cabinet, ::debug_wait_for_player_activation, 5, "Wait for player activation");
   }
 

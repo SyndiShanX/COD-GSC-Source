@@ -977,7 +977,7 @@ registernotetracks() {
                           }
 
                           donotetracksforever(var_0, var_1, var_2, var_3) {
-                            donotetracksforeverproc(::scripts\anim\shared::donotetracks, var_0, var_1, var_2, var_3);
+                            donotetracksforeverproc(scripts\anim\shared::donotetracks, var_0, var_1, var_2, var_3);
                           }
 
                           donotetracksforeverintercept(var_0, var_1, var_2, var_3) {

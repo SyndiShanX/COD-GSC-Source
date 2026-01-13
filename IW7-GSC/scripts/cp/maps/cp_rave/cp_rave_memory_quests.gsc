@@ -493,7 +493,7 @@ remove_interaction_for_vo_length(var_0, var_1, var_2) {
 
 getquestfromid(var_0) {
   if(!isDefined(var_0.name)) {
-    return::scripts\cp\maps\cp_rave\cp_rave_interactions::collect_zombie_souls;
+    returnscripts\cp\maps\cp_rave\cp_rave_interactions::collect_zombie_souls;
   }
 
   switch (var_0.name) {
@@ -528,7 +528,7 @@ getquestfromid(var_0) {
       return::run_boots_quest;
 
     default:
-      return::scripts\cp\maps\cp_rave\cp_rave_interactions::collect_zombie_souls;
+      returnscripts\cp\maps\cp_rave\cp_rave_interactions::collect_zombie_souls;
   }
 }
 

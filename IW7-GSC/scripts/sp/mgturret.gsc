@@ -1199,7 +1199,7 @@ func_12A61() {
 
 func_E2DB() {
   self.var_E80C = undefined;
-  scripts\sp\utility::func_F2A4(::scripts\anim\init::isdefined);
+  scripts\sp\utility::func_F2A4(scripts\anim\init::isdefined);
 }
 
 func_E2E2() {
@@ -1349,7 +1349,7 @@ func_E826(var_0) {
   var_3 = getstartorigin(var_0.origin, var_0.angles, var_2);
   self give_smack_perk(var_3);
   wait(0.05);
-  scripts\sp\utility::func_F2A4(::scripts\anim\combat::func_68C7);
+  scripts\sp\utility::func_F2A4(scripts\anim\combat::func_68C7);
   scripts\engine\utility::clear_exception("move");
   scripts\sp\utility::func_F398("cover_crouch", ::func_906E);
   while(distance(self.origin, var_3) > 16) {
@@ -1374,7 +1374,7 @@ func_E826(var_0) {
   scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
   func_13030(var_0);
   self detach(self.var_12A78, level.var_D66F);
-  scripts\sp\utility::func_F2A4(::scripts\anim\init::isdefined);
+  scripts\sp\utility::func_F2A4(scripts\anim\init::isdefined);
   self notify("bcs_portable_turret_setup");
 }
 

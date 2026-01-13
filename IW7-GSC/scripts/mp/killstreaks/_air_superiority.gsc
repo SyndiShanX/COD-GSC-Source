@@ -108,9 +108,9 @@ func_6CAA(var_0, var_1) {
   var_2.targets = [];
   var_3 = undefined;
   if(level.teambased) {
-    var_3 = ::scripts\mp\utility::func_9FE7;
+    var_3 = scripts\mp\utility::func_9FE7;
   } else {
-    var_3 = ::scripts\mp\utility::func_9FD8;
+    var_3 = scripts\mp\utility::func_9FD8;
   }
 
   var_4 = undefined;

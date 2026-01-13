@@ -1353,7 +1353,7 @@ func_5C12() {
   self endon("death");
   thread scripts\sp\utility::play_loop_sound_on_tag("support_drone_windup", "tag_origin");
   wait(0.5);
-  scripts\engine\utility::delaythread(0.15, ::scripts\engine\utility::stop_loop_sound_on_entity, "support_drone_windup");
+  scripts\engine\utility::delaythread(0.15, scripts\engine\utility::stop_loop_sound_on_entity, "support_drone_windup");
   self.ammocount = self.ammocount - 1;
   func_5C32(self.var_9180, self.ammocount);
   if(self.ammocount <= 0) {

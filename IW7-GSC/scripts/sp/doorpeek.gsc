@@ -395,9 +395,9 @@ func_1202(var_0, var_1) {
     if(var_1B > 0) {
       level.player scripts\engine\utility::delaycall(var_1B, ::forceplaygestureviewmodel, var_3);
       var_4 thread scripts\sp\anim::func_1EC3(level.var_5A23[var_0].var_C9FD, var_5);
-      var_4 scripts\engine\utility::delaythread(var_1B, ::scripts\sp\anim::func_1F35, level.var_5A23[var_0].var_C9FD, var_5);
+      var_4 scripts\engine\utility::delaythread(var_1B, scripts\sp\anim::func_1F35, level.var_5A23[var_0].var_C9FD, var_5);
       if(level.var_5A23[var_0].var_5A57 != "civlever" && level.var_5A23[var_0].var_5A57 != "armoryajar") {
-        level.var_5A23[var_0].var_5978 scripts\engine\utility::delaythread(var_1B, ::scripts\sp\anim::func_1F35, level.var_5A23[var_0].var_5978, "doorpeek_" + func_1297(level.var_5A23[var_0].var_5A57) + "_in");
+        level.var_5A23[var_0].var_5978 scripts\engine\utility::delaythread(var_1B, scripts\sp\anim::func_1F35, level.var_5A23[var_0].var_5978, "doorpeek_" + func_1297(level.var_5A23[var_0].var_5A57) + "_in");
       }
     } else {
       level.player forceplaygestureviewmodel(var_3);
@@ -1088,7 +1088,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
     level.player unlink();
     if(var_1.var_EE52 == "airlock") {
       level.player scripts\sp\utility::func_2B76(0.25, 0.5);
-      level.player scripts\engine\utility::delaythread(0.5, ::scripts\sp\utility::func_2B76, 1, 0.7);
+      level.player scripts\engine\utility::delaythread(0.5, scripts\sp\utility::func_2B76, 1, 0.7);
     }
 
     level.player getrawbaseweaponname(0.6, 0.6);
@@ -1889,7 +1889,7 @@ func_11F0(var_0, var_1, var_2) {
   thread func_59A5(var_9 - 0.05);
   var_5 scripts\engine\utility::delaycall(var_9, ::connectpaths);
   var_5 scripts\engine\utility::delaycall(var_9 + var_0A + 0.05, ::disconnectpaths);
-  var_4 scripts\engine\utility::delaythread(var_9, ::scripts\engine\utility::play_sound_in_space, "doorpeek_" + func_1299(var_6) + "_kick", var_4.origin);
+  var_4 scripts\engine\utility::delaythread(var_9, scripts\engine\utility::play_sound_in_space, "doorpeek_" + func_1299(var_6) + "_kick", var_4.origin);
   level thread scripts\sp\utility::func_C12D(var_0 + "door_kick_open", var_9);
   level thread scripts\sp\utility::func_C12D("door_kick_open", var_9);
   var_15 = "doorpeek_kick";

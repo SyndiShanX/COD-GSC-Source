@@ -733,7 +733,7 @@ func_12761(var_0, var_1) {
       var_0D = anglesToForward(var_0C);
       var_0E = vectordot(var_0D, var_0B);
       if(var_0E >= var_2) {
-        scripts\engine\utility::array_thread(var_4, ::scripts\sp\utility::func_F225, "trigger");
+        scripts\engine\utility::array_thread(var_4, scripts\sp\utility::func_F225, "trigger");
         if(var_6) {
           scripts\engine\utility::flag_set(var_7, var_9);
         }
@@ -801,7 +801,7 @@ func_1272B(var_0) {
         scripts\engine\utility::flag_set(var_5);
       }
 
-      scripts\engine\utility::array_thread(var_1, ::scripts\sp\utility::func_F225, "trigger");
+      scripts\engine\utility::array_thread(var_1, scripts\sp\utility::func_F225, "trigger");
       wait(0.5);
     }
   }
@@ -826,9 +826,9 @@ func_127A8(var_0) {
   var_2 = getEntArray(var_0.target, "targetname");
   var_0 thread func_127A9(var_0.target);
   for(;;) {
-    scripts\engine\utility::array_thread(var_2, ::scripts\engine\utility::trigger_off);
+    scripts\engine\utility::array_thread(var_2, scripts\engine\utility::trigger_off);
     var_0 waittill("trigger");
-    scripts\engine\utility::array_thread(var_2, ::scripts\engine\utility::trigger_on);
+    scripts\engine\utility::array_thread(var_2, scripts\engine\utility::trigger_on);
     func_135AA(var_2, var_1);
     scripts\sp\utility::func_22A4(var_2, "relock");
   }
@@ -837,7 +837,7 @@ func_127A8(var_0) {
 func_127A9(var_0) {
   self waittill("death");
   var_1 = getEntArray(var_0, "targetname");
-  scripts\engine\utility::array_thread(var_1, ::scripts\engine\utility::trigger_off);
+  scripts\engine\utility::array_thread(var_1, scripts\engine\utility::trigger_off);
 }
 
 func_135AA(var_0, var_1) {
@@ -1040,16 +1040,16 @@ func_127A6(var_0) {
 
   var_1 = strtok(var_0.script_linkto, " ");
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    scripts\engine\utility::array_thread(getEntArray(var_1[var_2], "script_linkname"), ::scripts\engine\utility::trigger_off);
+    scripts\engine\utility::array_thread(getEntArray(var_1[var_2], "script_linkname"), scripts\engine\utility::trigger_off);
   }
 }
 
 func_12752(var_0) {
-  thread func_1278D(var_0, ::scripts\sp\utility::func_F416, ::scripts\sp\utility::func_7A31);
+  thread func_1278D(var_0, scripts\sp\utility::func_F416, scripts\sp\utility::func_7A31);
 }
 
 func_1277C(var_0) {
-  thread func_1278D(var_0, ::scripts\sp\utility::func_F4B2, ::scripts\sp\utility::func_7B61);
+  thread func_1278D(var_0, scripts\sp\utility::func_F4B2, scripts\sp\utility::func_7B61);
 }
 
 func_1278D(var_0, var_1, var_2) {
@@ -1251,7 +1251,7 @@ func_1276D(var_0) {
   for(;;) {
     self waittill("trigger");
     if(!var_0.var_75AD) {
-      scripts\engine\utility::array_thread(var_0.fx, ::scripts\sp\utility::func_E2B0);
+      scripts\engine\utility::array_thread(var_0.fx, scripts\sp\utility::func_E2B0);
     }
 
     wait(1);
@@ -1262,7 +1262,7 @@ func_1276C(var_0) {
   for(;;) {
     self waittill("trigger");
     if(var_0.var_75AD) {
-      scripts\engine\utility::array_thread(var_0.fx, ::scripts\engine\utility::pauseeffect);
+      scripts\engine\utility::array_thread(var_0.fx, scripts\engine\utility::pauseeffect);
     }
 
     wait(1);

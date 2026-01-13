@@ -34,27 +34,27 @@ removearchetype(var_0) {
   var_1 = undefined;
   switch (var_0) {
     case "archetype_assault":
-      var_1 = ::scripts\mp\archetypes\archassault::removearchetype;
+      var_1 = scripts\mp\archetypes\archassault::removearchetype;
       break;
 
     case "archetype_heavy":
-      var_1 = ::scripts\mp\archetypes\archheavy::removearchetype;
+      var_1 = scripts\mp\archetypes\archheavy::removearchetype;
       break;
 
     case "archetype_scout":
-      var_1 = ::scripts\mp\archetypes\archscout::removearchetype;
+      var_1 = scripts\mp\archetypes\archscout::removearchetype;
       break;
 
     case "archetype_assassin":
-      var_1 = ::scripts\mp\archetypes\archassassin::removearchetype;
+      var_1 = scripts\mp\archetypes\archassassin::removearchetype;
       break;
 
     case "archetype_engineer":
-      var_1 = ::scripts\mp\archetypes\archengineer::removearchetype;
+      var_1 = scripts\mp\archetypes\archengineer::removearchetype;
       break;
 
     case "archetype_sniper":
-      var_1 = ::scripts\mp\archetypes\archsniper::removearchetype;
+      var_1 = scripts\mp\archetypes\archsniper::removearchetype;
       break;
 
     default:

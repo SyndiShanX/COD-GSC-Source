@@ -555,7 +555,7 @@ makezombiessprint(var_0) {
 
 max_ammo_manager() {
   wait(3);
-  level.drop_max_ammo_func = ::scripts\cp\loot::drop_loot;
+  level.drop_max_ammo_func = scripts\cp\loot::drop_loot;
   level thread unlimited_max_ammo();
   level thread max_ammo_pick_up_listener();
 }

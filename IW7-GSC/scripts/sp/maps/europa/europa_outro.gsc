@@ -158,7 +158,7 @@ func_EBEA() {
   }
 
   foreach(var_6 in level.var_EBCA) {
-    var_6 scripts\engine\utility::delaythread(0.5, ::scripts\sp\utility::func_86E4);
+    var_6 scripts\engine\utility::delaythread(0.5, scripts\sp\utility::func_86E4);
   }
 
   var_8 = 0;
@@ -180,7 +180,7 @@ func_EBEA() {
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.var_A70E attach("oxygen_bottle_air_boss", "tag_accessory_right");
   thread func_C7C9();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "lower");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "lower");
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   var_1[var_1.size] = level.player.var_E505;
   var_1[var_1.size] = level.var_EBBB;
@@ -641,7 +641,7 @@ func_FB33() {
   level.player waittill("o2_in");
   self stoploopsound();
   level.player waittill("o2_out");
-  scripts\engine\utility::delaythread(11, ::scripts\sp\utility::func_10461, "plr_helmet_air_leak_lp", 1, 2, 1);
+  scripts\engine\utility::delaythread(11, scripts\sp\utility::func_10461, "plr_helmet_air_leak_lp", 1, 2, 1);
   level.player waittill("sfx_beep_fade");
   scripts\sp\utility::func_10460(1);
 }

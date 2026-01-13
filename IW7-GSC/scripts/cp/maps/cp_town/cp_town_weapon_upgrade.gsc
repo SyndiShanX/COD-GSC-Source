@@ -11,7 +11,7 @@ init_weapon_upgrade() {
 
 init_all_weapon_upgrades() {
   var_0 = scripts\engine\utility::getstructarray("weapon_upgrade", "script_noteworthy");
-  level.get_weapon_level_func = ::scripts\cp\cp_weapon::get_weapon_level;
+  level.get_weapon_level_func = scripts\cp\cp_weapon::get_weapon_level;
   foreach(var_2 in var_0) {
     var_2.powered_on = 1;
     var_2 thread init_upgrade_weapon();

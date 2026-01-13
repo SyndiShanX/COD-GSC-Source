@@ -23,27 +23,27 @@ register_interactions() {
   level.interaction_hintstrings["atm_deposit"] = &"CP_RAVE_ATM_DEPOSIT";
   level.interaction_hintstrings["atm_withdrawal"] = &"CP_RAVE_ATM_WITHDRAWAL";
   level.interaction_hintstrings["fix_pap"] = &"CP_RAVE_FIX_PAP";
-  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_hint_logic, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_use_func, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("fix_pap", "pap", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_repair_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_boat::fix_pap, 0);
-  scripts\cp\cp_interaction::register_interaction("interaction_packboat", "door_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::packboat_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_boat::use_packboat, 0, 0, ::scripts\cp\maps\cp_rave\cp_rave_boat::init_pap_boat);
-  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, ::scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::weapon_upgrade_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::weapon_upgrade, 5000, 1, ::scripts\cp\zombies\interaction_weapon_upgrade::init_all_weapon_upgrades);
-  scripts\cp\cp_interaction::register_interaction("debris_350", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 350);
-  scripts\cp\cp_interaction::register_interaction("debris_1000", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 1000);
-  scripts\cp\cp_interaction::register_interaction("debris_1500", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 1500);
-  scripts\cp\cp_interaction::register_interaction("debris_2000", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 2000);
-  scripts\cp\cp_interaction::register_interaction("debris_2500", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 2500);
-  scripts\cp\cp_interaction::register_interaction("debris_1250", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 1250);
-  scripts\cp\cp_interaction::register_interaction("debris_750", "door_buy", undefined, undefined, ::scripts\cp\zombies\cp_rave_doors::clear_debris, 750);
-  scripts\cp\cp_interaction::register_interaction("power_door_sliding", "door_buy", undefined, undefined, undefined, 0, 1, ::scripts\cp\zombies\interaction_rave_openareas::init_sliding_power_doors);
+  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_hint_logic, scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_use_func, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("fix_pap", "pap", undefined, scripts\cp\maps\cp_rave\cp_rave_boat::pap_repair_hint_func, scripts\cp\maps\cp_rave\cp_rave_boat::fix_pap, 0);
+  scripts\cp\cp_interaction::register_interaction("interaction_packboat", "door_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_boat::packboat_hint_func, scripts\cp\maps\cp_rave\cp_rave_boat::use_packboat, 0, 0, scripts\cp\maps\cp_rave\cp_rave_boat::init_pap_boat);
+  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::weapon_upgrade_hint_func, scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::weapon_upgrade, 5000, 1, scripts\cp\zombies\interaction_weapon_upgrade::init_all_weapon_upgrades);
+  scripts\cp\cp_interaction::register_interaction("debris_350", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 350);
+  scripts\cp\cp_interaction::register_interaction("debris_1000", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 1000);
+  scripts\cp\cp_interaction::register_interaction("debris_1500", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 1500);
+  scripts\cp\cp_interaction::register_interaction("debris_2000", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 2000);
+  scripts\cp\cp_interaction::register_interaction("debris_2500", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 2500);
+  scripts\cp\cp_interaction::register_interaction("debris_1250", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 1250);
+  scripts\cp\cp_interaction::register_interaction("debris_750", "door_buy", undefined, undefined, scripts\cp\zombies\cp_rave_doors::clear_debris, 750);
+  scripts\cp\cp_interaction::register_interaction("power_door_sliding", "door_buy", undefined, undefined, undefined, 0, 1, scripts\cp\zombies\interaction_rave_openareas::init_sliding_power_doors);
   register_wall_buys();
   scripts\cp\cp_interaction::register_interaction("ritual_stone", undefined, undefined, ::rave_ritual_stone_hint, ::use_rave_ritual_stone, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("interaction_woodchipper", "trap", undefined, undefined, ::scripts\cp\zombies\interaction_woodchipper_trap::use_woodchipper_trap, 750, 1, ::scripts\cp\zombies\interaction_woodchipper_trap::init_woodchipper_trap);
-  scripts\cp\cp_interaction::register_interaction("trap_loudspeaker", "trap", undefined, undefined, ::scripts\cp\zombies\interaction_loudspeaker::use_loudspeaker_trap, 750, 1, ::scripts\cp\zombies\interaction_loudspeaker::init_loudspeaker_trap);
-  scripts\cp\cp_interaction::register_interaction("trap_electric", "trap", undefined, undefined, ::scripts\cp\zombies\interaction_fishtrap::use_fishtrap, 750, 1, ::scripts\cp\zombies\interaction_fishtrap::init_fishtrap);
-  scripts\cp\cp_interaction::register_interaction("trap_logswing", "trap", undefined, undefined, ::scripts\cp\zombies\interaction_logswing::use_logswing_trap, 350, 1, ::scripts\cp\zombies\interaction_logswing::init_logswing_trap);
-  scripts\cp\cp_interaction::register_interaction("trap_waterfall", "trap", undefined, undefined, ::scripts\cp\zombies\interaction_waterfall::use_waterfall_trap, 750, 1, ::scripts\cp\zombies\interaction_waterfall::init_waterfall_trap);
+  scripts\cp\cp_interaction::register_interaction("interaction_woodchipper", "trap", undefined, undefined, scripts\cp\zombies\interaction_woodchipper_trap::use_woodchipper_trap, 750, 1, scripts\cp\zombies\interaction_woodchipper_trap::init_woodchipper_trap);
+  scripts\cp\cp_interaction::register_interaction("trap_loudspeaker", "trap", undefined, undefined, scripts\cp\zombies\interaction_loudspeaker::use_loudspeaker_trap, 750, 1, scripts\cp\zombies\interaction_loudspeaker::init_loudspeaker_trap);
+  scripts\cp\cp_interaction::register_interaction("trap_electric", "trap", undefined, undefined, scripts\cp\zombies\interaction_fishtrap::use_fishtrap, 750, 1, scripts\cp\zombies\interaction_fishtrap::init_fishtrap);
+  scripts\cp\cp_interaction::register_interaction("trap_logswing", "trap", undefined, undefined, scripts\cp\zombies\interaction_logswing::use_logswing_trap, 350, 1, scripts\cp\zombies\interaction_logswing::init_logswing_trap);
+  scripts\cp\cp_interaction::register_interaction("trap_waterfall", "trap", undefined, undefined, scripts\cp\zombies\interaction_waterfall::use_waterfall_trap, 750, 1, scripts\cp\zombies\interaction_waterfall::init_waterfall_trap);
   scripts\cp\cp_interaction::register_interaction("atm_withdrawal", "atm", undefined, ::atm_withdrawal_hint_logic, ::atm_withdrawal, 0);
-  scripts\cp\cp_interaction::register_interaction("atm_deposit", "atm", undefined, ::scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000);
+  scripts\cp\cp_interaction::register_interaction("atm_deposit", "atm", undefined, scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000);
   scripts\cp\cp_interaction::register_interaction("memory_vo_skull", undefined, undefined, ::blank_hint_func, ::use_memory_skull, 0, 1);
   scripts\cp\cp_interaction::register_interaction("computer", undefined, undefined, ::blank_hint_func, ::use_computer, 0, 1);
   register_afterlife_games();
@@ -182,15 +182,15 @@ blank_hint_func(var_0, var_1) {
 
 register_challenges() {
   level.interaction_hintstrings["challenge_repulsor"] = &"CP_RAVE_CHALLENGES_REPULSOR_CHALLENGE";
-  scripts\cp\cp_interaction::register_interaction("challenge_repulsor", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::repulsor_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_repulsor_challenge, 0);
+  scripts\cp\cp_interaction::register_interaction("challenge_repulsor", "wall_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_challenges::repulsor_challenge_hint, scripts\cp\maps\cp_rave\cp_rave_challenges::activate_repulsor_challenge, 0);
   level.interaction_hintstrings["challenge_tripmine"] = &"CP_RAVE_CHALLENGES_ARMAGEDDON_CHALLENGE";
-  scripts\cp\cp_interaction::register_interaction("challenge_armageddon", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::armageddon_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_armageddon_challenge, 0);
+  scripts\cp\cp_interaction::register_interaction("challenge_armageddon", "wall_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_challenges::armageddon_challenge_hint, scripts\cp\maps\cp_rave\cp_rave_challenges::activate_armageddon_challenge, 0);
   level.interaction_hintstrings["challenge_blackhole"] = &"CP_RAVE_CHALLENGES_BLACKHOLE_CHALLENGE";
-  scripts\cp\cp_interaction::register_interaction("challenge_blackhole", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::blackhole_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_blackhole_challenge, 0);
+  scripts\cp\cp_interaction::register_interaction("challenge_blackhole", "wall_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_challenges::blackhole_challenge_hint, scripts\cp\maps\cp_rave\cp_rave_challenges::activate_blackhole_challenge, 0);
   level.interaction_hintstrings["challenge_transponder"] = &"CP_RAVE_CHALLENGES_TRANSPONDER_CHALLENGE";
-  scripts\cp\cp_interaction::register_interaction("challenge_transponder", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::transponder_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_transponder_challenge, 0);
+  scripts\cp\cp_interaction::register_interaction("challenge_transponder", "wall_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_challenges::transponder_challenge_hint, scripts\cp\maps\cp_rave\cp_rave_challenges::activate_transponder_challenge, 0);
   level.interaction_hintstrings["challenge_rewind"] = &"CP_RAVE_CHALLENGES_REWIND_CHALLENGE";
-  scripts\cp\cp_interaction::register_interaction("challenge_rewind", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::rewind_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_rewind_challenge, 0);
+  scripts\cp\cp_interaction::register_interaction("challenge_rewind", "wall_buy", undefined, scripts\cp\maps\cp_rave\cp_rave_challenges::rewind_challenge_hint, scripts\cp\maps\cp_rave\cp_rave_challenges::activate_rewind_challenge, 0);
   level thread init_challenge_stations();
 }
 
@@ -260,11 +260,11 @@ register_afterlife_games() {
   level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, ::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
-  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, ::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
-  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, ::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
-  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, ::scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
-  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, ::scripts\cp\zombies\interaction_racing::race_game_hint_logic, ::scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, ::scripts\cp\zombies\interaction_racing::init_all_race_games);
+  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
+  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
+  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
+  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
+  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, scripts\cp\zombies\interaction_racing::race_game_hint_logic, scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, scripts\cp\zombies\interaction_racing::init_all_race_games);
 }
 
 rave_wall_buy_hint_func(var_0, var_1) {
@@ -437,25 +437,25 @@ register_crafting_interactions() {
   level.interaction_hintstrings["crafted_trap_balloon"] = &"CP_RAVE_EQUIP_BALLOONS";
   level.interaction_hintstrings["lair_secret_door"] = "";
   level.interaction_hintstrings["survivor_interaction"] = &"CP_RAVE_KEVIN";
-  scripts\cp\cp_interaction::register_interaction("crafting_station", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_crafting::use_crafting_station, 0, 1, ::scripts\cp\maps\cp_rave\cp_rave_crafting::init_crafting_station);
-  scripts\cp\cp_interaction::register_interaction("crafting_pickup", "souvenir_coin", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_crafting::crafting_item_pickup, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_autosentry", "craftable", undefined, undefined, ::scripts\cp\cp_weapon_autosentry::give_crafted_sentry, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_ims", "craftable", 1, undefined, ::scripts\cp\zombies\craftables\_fireworks_trap::give_crafted_fireworks_trap, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_medusa", "craftable", undefined, undefined, ::scripts\cp\zombies\craftables\_zm_soul_collector::give_crafted_medusa, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_electric_trap", "craftable", undefined, undefined, ::scripts\cp\zombies\craftables\_electric_trap::give_crafted_trap, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_boombox", "craftable", undefined, undefined, ::scripts\cp\zombies\craftables\_boombox::give_crafted_boombox, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_revocator", "craftable", undefined, undefined, ::scripts\cp\zombies\craftables\_revocator::give_crafted_revocator, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_gascan", "craftable", undefined, undefined, ::scripts\cp\zombies\craftables\_gascan::give_crafted_gascan, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_windowtrap", "craftable", undefined, undefined, ::scripts\cp\zombies\interaction_windowtraps::purchase_laser_trap, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_trap_mower", "craftable", undefined, undefined, ::scripts\cp\crafted_trap_mower::give_crafted_trap, 0);
-  scripts\cp\cp_interaction::register_interaction("crafted_trap_balloon", "craftable", undefined, undefined, ::scripts\cp\crafted_trap_balloons::give_crafted_trap, 0);
-  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, ::scripts\cp\zombies\zombies_pillage::pillage_hint_func, ::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("animal_statue_toys", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave::toy_animal_statue_hint_func, ::scripts\cp\maps\cp_rave\cp_rave::use_toy_animal_statue, 0);
-  scripts\cp\cp_interaction::register_interaction("animal_statue_end_pos", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave::toy_statue_end_pos_hint_func, ::scripts\cp\maps\cp_rave\cp_rave::toy_animal_statue_end_pos, 0);
-  scripts\cp\cp_interaction::register_interaction("charge_animal_toys", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave::toy_charging_hint_func, ::scripts\cp\maps\cp_rave\cp_rave::toy_charging_use_func, 0);
-  scripts\cp\cp_interaction::register_interaction("memory_quest_start_pos", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::memory_start_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::memory_quest_start_func, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("memory_quest_end_pos", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::memories_end_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::memories_end_use_func, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("ring_quest_lights", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::ring_quest_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_memory_quests::ring_quest_use_func, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("crafting_station", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_crafting::use_crafting_station, 0, 1, scripts\cp\maps\cp_rave\cp_rave_crafting::init_crafting_station);
+  scripts\cp\cp_interaction::register_interaction("crafting_pickup", "souvenir_coin", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_crafting::crafting_item_pickup, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_autosentry", "craftable", undefined, undefined, scripts\cp\cp_weapon_autosentry::give_crafted_sentry, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_ims", "craftable", 1, undefined, scripts\cp\zombies\craftables\_fireworks_trap::give_crafted_fireworks_trap, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_medusa", "craftable", undefined, undefined, scripts\cp\zombies\craftables\_zm_soul_collector::give_crafted_medusa, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_electric_trap", "craftable", undefined, undefined, scripts\cp\zombies\craftables\_electric_trap::give_crafted_trap, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_boombox", "craftable", undefined, undefined, scripts\cp\zombies\craftables\_boombox::give_crafted_boombox, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_revocator", "craftable", undefined, undefined, scripts\cp\zombies\craftables\_revocator::give_crafted_revocator, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_gascan", "craftable", undefined, undefined, scripts\cp\zombies\craftables\_gascan::give_crafted_gascan, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_windowtrap", "craftable", undefined, undefined, scripts\cp\zombies\interaction_windowtraps::purchase_laser_trap, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_trap_mower", "craftable", undefined, undefined, scripts\cp\crafted_trap_mower::give_crafted_trap, 0);
+  scripts\cp\cp_interaction::register_interaction("crafted_trap_balloon", "craftable", undefined, undefined, scripts\cp\crafted_trap_balloons::give_crafted_trap, 0);
+  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, scripts\cp\zombies\zombies_pillage::pillage_hint_func, scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("animal_statue_toys", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave::toy_animal_statue_hint_func, scripts\cp\maps\cp_rave\cp_rave::use_toy_animal_statue, 0);
+  scripts\cp\cp_interaction::register_interaction("animal_statue_end_pos", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave::toy_statue_end_pos_hint_func, scripts\cp\maps\cp_rave\cp_rave::toy_animal_statue_end_pos, 0);
+  scripts\cp\cp_interaction::register_interaction("charge_animal_toys", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave::toy_charging_hint_func, scripts\cp\maps\cp_rave\cp_rave::toy_charging_use_func, 0);
+  scripts\cp\cp_interaction::register_interaction("memory_quest_start_pos", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_memory_quests::memory_start_hint_func, scripts\cp\maps\cp_rave\cp_rave_memory_quests::memory_quest_start_func, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("memory_quest_end_pos", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_memory_quests::memories_end_hint_func, scripts\cp\maps\cp_rave\cp_rave_memory_quests::memories_end_use_func, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("ring_quest_lights", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_memory_quests::ring_quest_hint_func, scripts\cp\maps\cp_rave\cp_rave_memory_quests::ring_quest_use_func, 0, 0);
   scripts\cp\cp_interaction::register_interaction("mushroom_patch", undefined, undefined, ::mushroom_patch_hint_func, ::mushroom_patch_use_func, 0, 0);
   scripts\cp\cp_interaction::register_interaction("survivor_interaction", undefined, undefined, ::survivor_hint_func, ::survivor_use_func, 0, 0);
   scripts\cp\cp_interaction::register_interaction("boat_quest_piece", undefined, undefined, ::boat_quest_hint_func, ::boat_quest_use_func, 0, 0, ::init_boat_quest);
@@ -739,14 +739,14 @@ register_arcade_rom_games() {
   level.interaction_hintstrings["arcade_ghostbu"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_hero"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_megaman"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("arcade_atlantis", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_beamrid", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_boombang", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_command", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_kaboom", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_ghostbu", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_megaman", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_atlantis", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_beamrid", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_boombang", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_command", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_kaboom", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_ghostbu", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_megaman", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   level.interaction_hintstrings["arcade_icehock"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_seaques"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_boxing"] = &"COOP_INTERACTIONS_PLAY_GAME";
@@ -754,13 +754,13 @@ register_arcade_rom_games() {
   level.interaction_hintstrings["arcade_keyston"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
 }
 
 collect_zombie_souls(var_0) {
@@ -1006,12 +1006,12 @@ exit_rave_on_laststand() {
 
 register_mini_games() {
   level.interaction_hintstrings["interaction_knife_throw"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("interaction_knife_throw", "arcade_game", undefined, undefined, ::scripts\cp\zombies\interaction_knife_throw::use_knife_throw, 0, 0, ::scripts\cp\zombies\interaction_knife_throw::init_knifethrow_game);
+  scripts\cp\cp_interaction::register_interaction("interaction_knife_throw", "arcade_game", undefined, undefined, scripts\cp\zombies\interaction_knife_throw::use_knife_throw, 0, 0, scripts\cp\zombies\interaction_knife_throw::init_knifethrow_game);
 }
 
 register_super_slasher_fight_interactions() {
   level.interaction_hintstrings["memory_trap_trigger"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("memory_trap_trigger", "memory_trap_trigger", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::use_memory_trap, 0, 0, ::scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::init_memory_traps);
+  scripts\cp\cp_interaction::register_interaction("memory_trap_trigger", "memory_trap_trigger", undefined, undefined, scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::use_memory_trap, 0, 0, scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::init_memory_traps);
 }
 
 cp_rave_interaction_monitor() {

@@ -52,11 +52,11 @@ main() {
   level thread lib_0A2F::func_3D61();
   scripts\engine\utility::array_call(getEntArray("notsolid_on_load", "script_noteworthy"), ::notsolid);
   scripts\engine\utility::array_call(getnodearray("disconnect_on_load", "script_noteworthy"), ::getrallyvehiclespawndata);
-  scripts\engine\utility::array_thread(getEntArray("hide_on_load", "script_noteworthy"), ::scripts\sp\utility::func_8E7E);
-  scripts\engine\utility::array_thread(getEntArray("delete_linked", "targetname"), ::scripts\sp\maps\europa\europa_util::func_5168);
+  scripts\engine\utility::array_thread(getEntArray("hide_on_load", "script_noteworthy"), scripts\sp\utility::func_8E7E);
+  scripts\engine\utility::array_thread(getEntArray("delete_linked", "targetname"), scripts\sp\maps\europa\europa_util::func_5168);
   scripts\engine\utility::array_thread(getEntArray("sunscale_triggers", "targetname"), ::func_1122F);
-  scripts\engine\utility::array_thread(getEntArray("glass_break_trigger", "targetname"), ::scripts\sp\maps\europa\europa_util::turretfireenable);
-  scripts\engine\utility::array_thread(getEntArray("ally_advance_trigger", "script_noteworthy"), ::scripts\sp\maps\europa\europa_labs::func_1CC5);
+  scripts\engine\utility::array_thread(getEntArray("glass_break_trigger", "targetname"), scripts\sp\maps\europa\europa_util::turretfireenable);
+  scripts\engine\utility::array_thread(getEntArray("ally_advance_trigger", "script_noteworthy"), scripts\sp\maps\europa\europa_labs::func_1CC5);
   scripts\sp\utility::func_28D7("axis");
   thread footsteps();
   level.player setweaponammostock("seeker", 0);
@@ -140,21 +140,21 @@ footsteps() {
 func_FA53() {
   scripts\sp\utility::func_F343("dropship");
   var_0 = ["europa_fatty_tr"];
-  scripts\sp\utility::func_1749("dropship", scripts\sp\maps\europa\europa_intro::func_5DF1, "Dropship Flyin", scripts\sp\maps\europa\europa_intro::func_5DEF, var_0, ::scripts\sp\maps\europa\europa_intro::func_5DF0);
-  scripts\sp\utility::func_1749("dropship_jump", scripts\sp\maps\europa\europa_intro::func_5E25, "Dropship jump", scripts\sp\maps\europa\europa_intro::func_5E21, var_0, ::scripts\sp\maps\europa\europa_intro::func_5E22);
-  scripts\sp\utility::func_1749("cliffjumper", scripts\sp\maps\europa\europa_intro::func_4212, "Cliff Jumper", scripts\sp\maps\europa\europa_intro::func_4209, var_0, ::scripts\sp\maps\europa\europa_intro::func_420C);
-  scripts\sp\utility::func_1749("underground", scripts\sp\maps\europa\europa_labs::func_12B8F, "underground", scripts\sp\maps\europa\europa_labs::func_12B8C, var_0, ::scripts\sp\maps\europa\europa_labs::func_12B8D);
-  scripts\sp\utility::func_1749("takedown", scripts\sp\maps\europa\europa_labs::func_1146B, "takedown", scripts\sp\maps\europa\europa_labs::func_1145E, var_0, ::scripts\sp\maps\europa\europa_labs::func_11462);
-  scripts\sp\utility::func_1749("lab_exterior", scripts\sp\maps\europa\europa_labs::func_A780, "Lab Exterior", scripts\sp\maps\europa\europa_labs::func_A77D, var_0, ::scripts\sp\maps\europa\europa_labs::func_A77E);
-  scripts\sp\utility::func_1749("lab_enter", scripts\sp\maps\europa\europa_labs::func_A770, "Lab Entrance", scripts\sp\maps\europa\europa_labs::func_A76D, var_0, ::scripts\sp\maps\europa\europa_labs::func_A76E);
-  scripts\sp\utility::func_1749("airlock peek", scripts\sp\maps\europa\europa_labs::func_A746, "Lab Airlock", scripts\sp\maps\europa\europa_labs::func_A744, var_0, ::scripts\sp\maps\europa\europa_labs::func_A745);
-  scripts\sp\utility::func_1749("Glass Bridge", scripts\sp\maps\europa\europa_labs::func_A797, "LabWalk", scripts\sp\maps\europa\europa_labs::func_A793, var_0, ::scripts\sp\maps\europa\europa_labs::func_A794);
-  scripts\sp\utility::func_1749("Wonder Room", scripts\sp\maps\europa\europa_labs::func_E1C7, "Enter Research", scripts\sp\maps\europa\europa_labs::func_E1C3, var_0, ::scripts\sp\maps\europa\europa_labs::func_E1C4);
-  scripts\sp\utility::func_1749("Office Fight", scripts\sp\maps\europa\europa_labs::func_A788, "Office Fight", scripts\sp\maps\europa\europa_labs::func_A786, var_0, ::scripts\sp\maps\europa\europa_labs::func_A787);
-  scripts\sp\utility::func_1749("Cutter room approach", scripts\sp\maps\europa\europa_labs::func_A76C, "Cutter room approach", scripts\sp\maps\europa\europa_labs::func_A767, var_0, ::scripts\sp\maps\europa\europa_labs::func_A769);
-  scripts\sp\utility::func_1749("armory", scripts\sp\maps\europa\europa_armory::func_224A, "Armory", scripts\sp\maps\europa\europa_armory::func_21A4, var_0, ::scripts\sp\maps\europa\europa_armory::func_21CC);
-  scripts\sp\utility::func_1749("selfdestruct", scripts\sp\maps\europa\europa_armory::func_2891, "Base Self Destruct", scripts\sp\maps\europa\europa_armory::func_288C, var_0, ::scripts\sp\maps\europa\europa_armory::func_288D);
-  scripts\sp\utility::func_1749("c12", scripts\sp\maps\europa\europa_armory::func_3568, "C12", scripts\sp\maps\europa\europa_armory::func_355D, var_0, ::scripts\sp\maps\europa\europa_armory::func_355E);
+  scripts\sp\utility::func_1749("dropship", scripts\sp\maps\europa\europa_intro::func_5DF1, "Dropship Flyin", scripts\sp\maps\europa\europa_intro::func_5DEF, var_0, scripts\sp\maps\europa\europa_intro::func_5DF0);
+  scripts\sp\utility::func_1749("dropship_jump", scripts\sp\maps\europa\europa_intro::func_5E25, "Dropship jump", scripts\sp\maps\europa\europa_intro::func_5E21, var_0, scripts\sp\maps\europa\europa_intro::func_5E22);
+  scripts\sp\utility::func_1749("cliffjumper", scripts\sp\maps\europa\europa_intro::func_4212, "Cliff Jumper", scripts\sp\maps\europa\europa_intro::func_4209, var_0, scripts\sp\maps\europa\europa_intro::func_420C);
+  scripts\sp\utility::func_1749("underground", scripts\sp\maps\europa\europa_labs::func_12B8F, "underground", scripts\sp\maps\europa\europa_labs::func_12B8C, var_0, scripts\sp\maps\europa\europa_labs::func_12B8D);
+  scripts\sp\utility::func_1749("takedown", scripts\sp\maps\europa\europa_labs::func_1146B, "takedown", scripts\sp\maps\europa\europa_labs::func_1145E, var_0, scripts\sp\maps\europa\europa_labs::func_11462);
+  scripts\sp\utility::func_1749("lab_exterior", scripts\sp\maps\europa\europa_labs::func_A780, "Lab Exterior", scripts\sp\maps\europa\europa_labs::func_A77D, var_0, scripts\sp\maps\europa\europa_labs::func_A77E);
+  scripts\sp\utility::func_1749("lab_enter", scripts\sp\maps\europa\europa_labs::func_A770, "Lab Entrance", scripts\sp\maps\europa\europa_labs::func_A76D, var_0, scripts\sp\maps\europa\europa_labs::func_A76E);
+  scripts\sp\utility::func_1749("airlock peek", scripts\sp\maps\europa\europa_labs::func_A746, "Lab Airlock", scripts\sp\maps\europa\europa_labs::func_A744, var_0, scripts\sp\maps\europa\europa_labs::func_A745);
+  scripts\sp\utility::func_1749("Glass Bridge", scripts\sp\maps\europa\europa_labs::func_A797, "LabWalk", scripts\sp\maps\europa\europa_labs::func_A793, var_0, scripts\sp\maps\europa\europa_labs::func_A794);
+  scripts\sp\utility::func_1749("Wonder Room", scripts\sp\maps\europa\europa_labs::func_E1C7, "Enter Research", scripts\sp\maps\europa\europa_labs::func_E1C3, var_0, scripts\sp\maps\europa\europa_labs::func_E1C4);
+  scripts\sp\utility::func_1749("Office Fight", scripts\sp\maps\europa\europa_labs::func_A788, "Office Fight", scripts\sp\maps\europa\europa_labs::func_A786, var_0, scripts\sp\maps\europa\europa_labs::func_A787);
+  scripts\sp\utility::func_1749("Cutter room approach", scripts\sp\maps\europa\europa_labs::func_A76C, "Cutter room approach", scripts\sp\maps\europa\europa_labs::func_A767, var_0, scripts\sp\maps\europa\europa_labs::func_A769);
+  scripts\sp\utility::func_1749("armory", scripts\sp\maps\europa\europa_armory::func_224A, "Armory", scripts\sp\maps\europa\europa_armory::func_21A4, var_0, scripts\sp\maps\europa\europa_armory::func_21CC);
+  scripts\sp\utility::func_1749("selfdestruct", scripts\sp\maps\europa\europa_armory::func_2891, "Base Self Destruct", scripts\sp\maps\europa\europa_armory::func_288C, var_0, scripts\sp\maps\europa\europa_armory::func_288D);
+  scripts\sp\utility::func_1749("c12", scripts\sp\maps\europa\europa_armory::func_3568, "C12", scripts\sp\maps\europa\europa_armory::func_355D, var_0, scripts\sp\maps\europa\europa_armory::func_355E);
   scripts\sp\utility::func_1749("decompression", scripts\sp\maps\europa\europa_armory::func_21DB, "Decompression", scripts\sp\maps\europa\europa_armory::func_21DA, var_0);
   scripts\sp\utility::func_1749("outro", scripts\sp\maps\europa\europa_outro::func_C7D3, "Outro", scripts\sp\maps\europa\europa_outro::func_C7B4, undefined);
 }
@@ -165,7 +165,7 @@ func_EDEB() {
   scripts\sp\maps\europa\europa_armory::func_220C();
   scripts\sp\maps\europa\europa_outro::func_C7C6();
   lib_0B11::func_37A9();
-  scripts\engine\utility::array_thread(getEntArray("ai_gesture_trig", "targetname"), ::scripts\sp\maps\europa\europa_util::func_1968);
+  scripts\engine\utility::array_thread(getEntArray("ai_gesture_trig", "targetname"), scripts\sp\maps\europa\europa_util::func_1968);
 }
 
 func_D7FB() {

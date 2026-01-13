@@ -226,7 +226,7 @@ set_up_not_ready_hint(var_0) {
   var_2.script_parameters = "";
   var_2.requires_power = 0;
   var_2.hint_func = ::death_ray_hint_func;
-  var_2.activation_func = ::scripts\cp\maps\cp_town\cp_town_interactions::blankusefunc;
+  var_2.activation_func = scripts\cp\maps\cp_town\cp_town_interactions::blankusefunc;
   var_2.enabled = 1;
   var_2.disable_guided_interactions = 1;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);

@@ -211,37 +211,37 @@ func_12F1E(var_0) {
 }
 
 func_11748(var_0) {
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B7, var_0)) {
     var_0.badspawnreason = 0;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B8, var_0)) {
     var_0.badspawnreason = 1;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26BC, var_0)) {
     var_0.badspawnreason = 2;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AB, var_0)) {
     var_0.badspawnreason = 3;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::avoidcarepackages, var_0)) {
     var_0.badspawnreason = 4;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26C4, var_0)) {
     var_0.badspawnreason = 5;
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B6, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B6, var_0)) {
     var_0.badspawnreason = 6;
     return "bad";
   }
@@ -251,11 +251,11 @@ func_11748(var_0) {
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B3, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B3, var_0)) {
     return "secondary";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_0)) {
     return "secondary";
   }
 
@@ -263,31 +263,31 @@ func_11748(var_0) {
 }
 
 func_11746(var_0) {
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B7, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B8, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26BC, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AB, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::avoidcarepackages, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26C4, var_0)) {
     return 0;
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE, var_0)) {
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_0)) {
     return 0;
   }
 

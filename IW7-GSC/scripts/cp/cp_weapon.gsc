@@ -94,8 +94,8 @@ setupconfigs() {
   var_0.onexplodesfx = "motion_explode_default";
   var_0.launchheight = 64;
   var_0.launchtime = 0.65;
-  var_0.ontriggeredfunc = ::scripts\cp\powers\coop_blackholegrenade::blackholeminetrigger;
-  var_0.onexplodefunc = ::scripts\cp\powers\coop_blackholegrenade::blackholemineexplode;
+  var_0.ontriggeredfunc = scripts\cp\powers\coop_blackholegrenade::blackholeminetrigger;
+  var_0.onexplodefunc = scripts\cp\powers\coop_blackholegrenade::blackholemineexplode;
   var_0.headiconoffset = 20;
   var_0.minedetectionradius = 200;
   var_0.minedetectionheight = 100;
@@ -4103,7 +4103,7 @@ explosivehandlemovers(var_0, var_1) {
   var_2.deathoverridecallback = ::movingplatformdetonate;
   var_2.endonstring = "death";
   if(!isDefined(var_1) || !var_1) {
-    var_2.invalidparentoverridecallback = ::scripts\cp\cp_movers::moving_platform_empty_func;
+    var_2.invalidparentoverridecallback = scripts\cp\cp_movers::moving_platform_empty_func;
   }
 
   thread scripts\cp\cp_movers::handle_moving_platforms(var_2);

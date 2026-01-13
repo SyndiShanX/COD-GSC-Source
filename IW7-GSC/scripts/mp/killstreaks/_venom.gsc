@@ -78,7 +78,7 @@ func_1288B(var_0) {
   var_9.streakname = var_0.streakname;
   var_9.var_AC75 = var_4;
   var_9.spawnpos = var_2;
-  var_9.nullownerdamagefunc = ::scripts\mp\killstreaks\_utility::func_C1D3;
+  var_9.nullownerdamagefunc = scripts\mp\killstreaks\_utility::func_C1D3;
   var_9.weapon_name = "venomproj_mp";
   var_9.streakinfo = var_0;
   var_9 func_8491("fly");

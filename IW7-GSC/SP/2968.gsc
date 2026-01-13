@@ -60,7 +60,7 @@ func_12783(var_0) {
   if(isDefined(var_0.script_exploder)) {
     var_1 = var_0.var_ED85;
     if(isDefined(var_1)) {
-      level scripts\engine\utility::delaythread(var_1, ::scripts\engine\utility::exploder, var_0.script_exploder);
+      level scripts\engine\utility::delaythread(var_1, scripts\engine\utility::exploder, var_0.script_exploder);
     } else {
       level scripts\engine\utility::exploder(var_0.script_exploder);
     }
@@ -165,14 +165,14 @@ func_13222() {
 }
 
 func_7B6F(var_0) {
-  var_1 = ::scripts\sp\vehicle_code::func_79D7;
+  var_1 = scripts\sp\vehicle_code::func_79D7;
   if(scripts\sp\vehicle_code::func_12F8() && isDefined(var_0.target)) {
     if(isDefined(scripts\sp\vehicle_code::func_79D3(var_0.target))) {
-      var_1 = ::scripts\sp\vehicle_code::func_79D3;
+      var_1 = scripts\sp\vehicle_code::func_79D3;
     }
 
     if(isDefined(scripts\sp\vehicle_code::func_79D5(var_0.target))) {
-      var_1 = ::scripts\sp\vehicle_code::func_79D5;
+      var_1 = scripts\sp\vehicle_code::func_79D5;
     }
   }
 

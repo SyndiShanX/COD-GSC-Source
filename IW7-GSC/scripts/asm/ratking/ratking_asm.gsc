@@ -5,7 +5,7 @@
 
 ratkinginit(var_0, var_1, var_2, var_3) {
   scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
-  self.var_71D0 = ::scripts\mp\agents\ratking\ratking_agent::shouldratkingplaypainanim;
+  self.var_71D0 = scripts\mp\agents\ratking\ratking_agent::shouldratkingplaypainanim;
   self._blackboard.requestedshieldstate = "equipped";
   self.asm.shieldstate = "equipped";
 }

@@ -18,15 +18,15 @@ func_7C8A(var_0) {
 }
 
 func_13F59(var_0) {
-  if(!scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\func_0D5F::func_26B8, var_0)) {
+  if(!scripts\cp\zombies\func_0D5F::critical_factor(scripts\cp\zombies\func_0D5F::func_26B8, var_0)) {
     return "secondary";
   }
 
-  if(!scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\func_0D5F::func_26BC, var_0)) {
+  if(!scripts\cp\zombies\func_0D5F::critical_factor(scripts\cp\zombies\func_0D5F::func_26BC, var_0)) {
     return "secondary";
   }
 
-  if(!scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\func_0D5F::func_26C4, var_0)) {
+  if(!scripts\cp\zombies\func_0D5F::critical_factor(scripts\cp\zombies\func_0D5F::func_26C4, var_0)) {
     return "secondary";
   }
 

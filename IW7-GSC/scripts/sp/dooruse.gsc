@@ -752,12 +752,12 @@ func_A854(var_0, var_1) {
     var_5.var_1FBB = "console_ai";
     var_4.var_A93B = var_4.var_1FBB;
     var_4.var_1FBB = "main";
-    var_4 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "actor_at_door");
+    var_4 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "actor_at_door");
     thread func_A853(var_4, var_5);
   }
 
   if(isDefined(self.var_454F["player"])) {
-    scripts\sp\utility::func_178D(::scripts\sp\utility::func_65E3, "player_at_door");
+    scripts\sp\utility::func_178D(scripts\sp\utility::func_65E3, "player_at_door");
   }
 
   scripts\sp\utility::func_57D5();
@@ -1431,7 +1431,7 @@ func_59DE(var_0, var_1, var_2) {
 
   if(!isDefined(var_2) && var_3.size > 0) {
     foreach(var_5 in var_3) {
-      var_5 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, var_1);
+      var_5 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, var_1);
     }
 
     scripts\sp\utility::func_57D5();

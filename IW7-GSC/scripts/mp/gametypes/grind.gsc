@@ -563,11 +563,11 @@ placepoint() {
       var_0B scripts\mp\gameobjects::set3dicon("enemy", "waypoint_captureneutral" + var_0C);
       var_0B scripts\mp\gameobjects::setvisibleteam("any");
       var_0B scripts\mp\gameobjects::cancontestclaim(1);
-      var_0B.onuse = ::scripts\mp\gametypes\obj_grindzone::zone_onuse;
-      var_0B.onbeginuse = ::scripts\mp\gametypes\obj_grindzone::zone_onusebegin;
-      var_0B.onunoccupied = ::scripts\mp\gametypes\obj_grindzone::zone_onunoccupied;
-      var_0B.oncontested = ::scripts\mp\gametypes\obj_grindzone::zone_oncontested;
-      var_0B.onuncontested = ::scripts\mp\gametypes\obj_grindzone::zone_onuncontested;
+      var_0B.onuse = scripts\mp\gametypes\obj_grindzone::zone_onuse;
+      var_0B.onbeginuse = scripts\mp\gametypes\obj_grindzone::zone_onusebegin;
+      var_0B.onunoccupied = scripts\mp\gametypes\obj_grindzone::zone_onunoccupied;
+      var_0B.oncontested = scripts\mp\gametypes\obj_grindzone::zone_oncontested;
+      var_0B.onuncontested = scripts\mp\gametypes\obj_grindzone::zone_onuncontested;
       var_0B.claimgracetime = level.bankcapturetime * 1000;
       var_6 = var_0B.visuals[0].origin + (0, 0, 32);
       var_7 = var_0B.visuals[0].origin + (0, 0, -32);

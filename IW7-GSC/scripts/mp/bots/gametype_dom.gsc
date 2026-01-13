@@ -6,7 +6,7 @@
 main() {
   setup_callbacks();
   setup_bot_dom();
-  level thread scripts\mp\bots\_bots_util::bot_monitor_enemy_camp_spots(::scripts\mp\bots\_bots_util::bot_valid_camp_assassin);
+  level thread scripts\mp\bots\_bots_util::bot_monitor_enemy_camp_spots(scripts\mp\bots\_bots_util::bot_valid_camp_assassin);
 }
 
 setup_callbacks() {

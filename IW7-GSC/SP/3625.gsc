@@ -368,7 +368,7 @@ func_8836() {
     level.player scripts\sp\utility::func_1C49(0);
     level.player scripts\sp\utility::func_65DD("hack_control_outro_done");
     level.player scripts\sp\utility::func_65E1("hack_raise_autohold_period");
-    level.player scripts\engine\utility::delaythread(0.4, ::scripts\sp\utility::func_65DD, "hack_raise_autohold_period");
+    level.player scripts\engine\utility::delaythread(0.4, scripts\sp\utility::func_65DD, "hack_raise_autohold_period");
     scripts\engine\utility::allow_reload(0);
     scripts\engine\utility::allow_ads(0);
     scripts\engine\utility::allow_fire(0);
@@ -457,15 +457,15 @@ hacking_end() {
   level notify("unpause_jackal_streak_message");
   self notify("hack_device_closed");
   self func_80A6();
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_reload, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_ads, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_offhand_primary_weapons, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_fire, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_usability, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_melee, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\sp\utility::func_1C34, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_weapon_switch, 1);
-  scripts\engine\utility::delaythread(0.75, ::scripts\engine\utility::allow_autoreload, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_reload, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_ads, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_offhand_primary_weapons, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_fire, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_usability, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_melee, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\sp\utility::func_1C34, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_weapon_switch, 1);
+  scripts\engine\utility::delaythread(0.75, scripts\engine\utility::allow_autoreload, 1);
   self.hackdoingoutro = 1;
   thread func_882D();
   if(isDefined(self.var_8824)) {
@@ -1285,17 +1285,17 @@ func_8828() {
   }
 
   self.var_87FC = 1;
-  level.player scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  level.player scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "hack_device_closing");
-  level.player scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "hack_control_target");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "player_controlled");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "hack_added_to_blacklist");
+  level.player scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  level.player scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "hack_device_closing");
+  level.player scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "hack_control_target");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "player_controlled");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "hack_added_to_blacklist");
   scripts\sp\utility::func_57D6();
   if(isDefined(self.var_6554)) {
     self.var_5CBA scripts\sp\utility::func_9193("hackTarget");
   } else if(isDefined(level.player.var_AEFA) && self == level.player.var_AEFA) {
-    scripts\engine\utility::delaythread(1, ::scripts\sp\utility::func_9193, "hackTarget");
+    scripts\engine\utility::delaythread(1, scripts\sp\utility::func_9193, "hackTarget");
   } else {
     scripts\sp\utility::func_9193("hackTarget");
   }
@@ -1434,7 +1434,7 @@ func_2A46(var_0) {
     level.player scripts\engine\utility::allow_prone(0);
     level.player setstance("stand");
     level.player scripts\engine\utility::allow_crouch(0);
-    level.player scripts\engine\utility::delaythread(0.5, ::scripts\engine\utility::allow_crouch, 1);
+    level.player scripts\engine\utility::delaythread(0.5, scripts\engine\utility::allow_crouch, 1);
     level.player scripts\engine\utility::allow_autoreload(1);
     level.var_ECA4["autopickup"] = 0;
     level.player disableweaponpickup();
@@ -1584,8 +1584,8 @@ func_2A46(var_0) {
     setomnvar("ui_hack_control_selfdestruct_timer", 0);
     setomnvar("ui_hack_control_selfdestruct_show_timer", 0);
     var_7 = getspawnerteamarray("bad_guys");
-    scripts\engine\utility::array_thread(var_7, ::scripts\sp\utility::func_E08B, ::func_19C8);
-    scripts\engine\utility::array_thread(var_7, ::scripts\sp\utility::func_E08B, ::func_1933);
+    scripts\engine\utility::array_thread(var_7, scripts\sp\utility::func_E08B, ::func_19C8);
+    scripts\engine\utility::array_thread(var_7, scripts\sp\utility::func_E08B, ::func_1933);
     level.player thread func_2A47(var_0);
   }
 }
@@ -1606,7 +1606,7 @@ func_61E0(var_0) {
 
     level.player givegoproattachments("viewmodel_robot_c6");
     func_12C5();
-    level.player scripts\engine\utility::delaythread(1.25, ::scripts\sp\utility::func_D090, "ges_c6raise");
+    level.player scripts\engine\utility::delaythread(1.25, scripts\sp\utility::func_D090, "ges_c6raise");
     level.player.var_C389 = level.player scripts\sp\utility::func_7AD7();
     level.player scripts\sp\utility::func_82EA("iw7_c6hack_melee");
     level.player.var_87FE = 0.9;
@@ -2290,7 +2290,7 @@ func_5C84(var_0) {
 
   if(!isDefined(level.var_1024F)) {
     var_6 = level.player scripts\sp\detonategrenades::func_734E();
-    level.player scripts\engine\utility::delaythread(2.4, ::scripts\sp\detonategrenades::func_734D, var_1, var_6, var_2);
+    level.player scripts\engine\utility::delaythread(2.4, scripts\sp\detonategrenades::func_734D, var_1, var_6, var_2);
   }
 
   radiusdamage(var_1, var_2, var_3, var_4, level.player);

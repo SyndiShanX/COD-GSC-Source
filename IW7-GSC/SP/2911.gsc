@@ -155,8 +155,8 @@ func_D023() {
 func_CFF8() {
   setdvar("player_died_recently", "0");
   thread func_D023();
-  level scripts\sp\utility::func_178D(::scripts\engine\utility::flag_wait, "missionfailed");
-  level.player scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
+  level scripts\sp\utility::func_178D(scripts\engine\utility::flag_wait, "missionfailed");
+  level.player scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
   scripts\sp\utility::func_57D6();
   var_0 = [];
   var_0[0] = 70;

@@ -19,10 +19,10 @@ init_fx_thread() {
 
   scripts\engine\utility::create_lock("createfx_looper", 20);
   level._fx.fireloopmod = 1;
-  level._fx.exploderfunction = ::scripts\common\exploder::exploder_before_load;
+  level._fx.exploderfunction = scripts\common\exploder::exploder_before_load;
   waittillframeend;
   waittillframeend;
-  level._fx.exploderfunction = ::scripts\common\exploder::exploder_after_load;
+  level._fx.exploderfunction = scripts\common\exploder::exploder_after_load;
   level._fx.server_culled_sounds = 0;
   if(getdvarint("serverCulledSounds") == 1) {
     level._fx.server_culled_sounds = 1;

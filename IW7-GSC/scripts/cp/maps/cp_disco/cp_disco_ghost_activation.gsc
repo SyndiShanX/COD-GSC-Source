@@ -1900,7 +1900,7 @@ reactivate_skullbuster_cabinet() {
       return;
     }
 
-    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::call_service_number, ::complete_call_service_number, ::debug_call_service_number);
+    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::call_service_number, ::complete_call_service_number, ::debug_call_service_number);
     scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 1, ::blank, ::wait_for_player_activation, ::complete_clean_arcade_cabinet, ::debug_wait_for_player_activation);
   }
 

@@ -261,18 +261,18 @@ func_C7C5(var_0) {
     level.player func_809A(0.25, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_02_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_01");
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_2");
+    level.player scripts\engine\utility::delaythread(0.2, scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_2");
     level.player notify("sfx_beep_fade");
   } else if(var_0.var_902B == 2) {
     level.player thread scripts\sp\gameskill::func_2BDB(2.7, 0.5);
     level.player func_809A(0.5, 2);
     level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_03_clear");
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_03");
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_3");
+    level.player scripts\engine\utility::delaythread(0.2, scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_3");
   } else if(var_0.var_902B == 3) {
     thread scripts\sp\hud::func_8DF7(0.05);
     level.player func_809A(0, 1);
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_4");
+    level.player scripts\engine\utility::delaythread(0.2, scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_4");
     wait(0.15);
     level.player playSound("scn_europa_outro_plr_helmet_glass_break_04");
     func_C7CD();
@@ -559,7 +559,7 @@ func_F1EC(var_0) {
   }
 
   thread scripts\sp\art::func_583F(0, 4, 10, 5, 15, 150, 0.5);
-  scripts\engine\utility::delaythread(3.5, ::scripts\sp\art::func_583D, 1);
+  scripts\engine\utility::delaythread(3.5, scripts\sp\art::func_583D, 1);
   while(iscinematicplaying()) {
     wait(0.05);
   }

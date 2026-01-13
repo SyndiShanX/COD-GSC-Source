@@ -2077,8 +2077,8 @@ remove_frozen_effects_on_disconnect(var_0) {
     self.slow_mo_active_pap2 = 0;
   }
 
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
 }
 
 delete_venomxpap_effects_after_time(var_0, var_1) {
@@ -2088,8 +2088,8 @@ delete_venomxpap_effects_after_time(var_0, var_1) {
     scripts\engine\utility::waitframe();
   }
 
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
 }
 
 slow_mo_sphere(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2128,8 +2128,8 @@ slow_mo_sphere(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 delete();
   }
 
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
   var_8 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   foreach(var_0A in var_8) {
     if(issubstr(var_0A.agent_type, "alien")) {

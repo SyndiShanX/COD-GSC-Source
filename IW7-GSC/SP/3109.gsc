@@ -376,9 +376,9 @@ func_CBA9() {
 
 func_E098(var_0, var_1) {
   var_0 endon("new_bt_target");
-  var_0 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  var_1 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  var_1 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "start_context_melee");
+  var_0 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  var_1 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  var_1 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "start_context_melee");
   scripts\sp\utility::func_57D6();
   level.var_F10A.targets = scripts\engine\utility::array_remove(level.var_F10A.targets, var_1);
 }

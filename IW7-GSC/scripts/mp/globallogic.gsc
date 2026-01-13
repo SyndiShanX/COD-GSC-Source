@@ -105,39 +105,39 @@ setupcallbacks() {
   scripts\mp\callbacksetup::setupdamageflags();
   scripts\mp\gametypes\common::setupcommoncallbacks();
   level.getspawnpoint = ::blank;
-  level.onspawnplayer = ::scripts\mp\gametypes\common::onspawnplayer;
+  level.onspawnplayer = scripts\mp\gametypes\common::onspawnplayer;
   level.onrespawndelay = ::blank;
-  level.ontimelimit = ::scripts\mp\gamelogic::default_ontimelimit;
-  level.var_C539 = ::scripts\mp\gamelogic::default_onhalftime;
-  level.ondeadevent = ::scripts\mp\gamelogic::func_5007;
-  level.ononeleftevent = ::scripts\mp\gamelogic::default_ononeleftevent;
+  level.ontimelimit = scripts\mp\gamelogic::default_ontimelimit;
+  level.var_C539 = scripts\mp\gamelogic::default_onhalftime;
+  level.ondeadevent = scripts\mp\gamelogic::func_5007;
+  level.ononeleftevent = scripts\mp\gamelogic::default_ononeleftevent;
   level.onprecachegametype = ::blank;
   level.onstartgametype = ::blank;
   level.onplayerkilled = ::blank;
-  level.var_A6A2 = ::scripts\mp\killstreaks\_init_mp::init;
-  level.var_B3E7 = ::scripts\mp\matchevents::init;
-  level.var_9994 = ::scripts\mp\intel::init;
-  level.matchrecording_init = ::scripts\mp\matchrecording::init;
-  level.weaponmapfunc = ::scripts\mp\utility::func_13CA1;
-  level.initagentscriptvariables = ::scripts\mp\agents\agent_utility::initagentscriptvariables;
-  level.setagentteam = ::scripts\mp\agents\agent_utility::set_agent_team;
-  level.agentvalidateattacker = ::scripts\mp\utility::_validateattacker;
-  level.agentfunc = ::scripts\mp\agents\agent_utility::agentfunc;
-  level.getfreeagent = ::scripts\mp\agents\agent_utility::getfreeagent;
-  level.addtocharactersarray = ::scripts\mp\spawnlogic::addtocharactersarray;
+  level.var_A6A2 = scripts\mp\killstreaks\_init_mp::init;
+  level.var_B3E7 = scripts\mp\matchevents::init;
+  level.var_9994 = scripts\mp\intel::init;
+  level.matchrecording_init = scripts\mp\matchrecording::init;
+  level.weaponmapfunc = scripts\mp\utility::func_13CA1;
+  level.initagentscriptvariables = scripts\mp\agents\agent_utility::initagentscriptvariables;
+  level.setagentteam = scripts\mp\agents\agent_utility::set_agent_team;
+  level.agentvalidateattacker = scripts\mp\utility::_validateattacker;
+  level.agentfunc = scripts\mp\agents\agent_utility::agentfunc;
+  level.getfreeagent = scripts\mp\agents\agent_utility::getfreeagent;
+  level.addtocharactersarray = scripts\mp\spawnlogic::addtocharactersarray;
 }
 
 setdefaultcallbacks() {
-  level.callbackstartgametype = ::scripts\mp\gamelogic::callback_startgametype;
-  level.callbackplayerconnect = ::scripts\mp\playerlogic::callback_playerconnect;
-  level.callbackplayerdisconnect = ::scripts\mp\playerlogic::callback_playerdisconnect;
-  level.callbackplayerdamage = ::scripts\mp\damage::callback_playerdamage;
-  level.callbackplayerimpaled = ::scripts\mp\damage::callback_playerimpaled;
-  level.callbackplayerkilled = ::scripts\mp\damage::callback_playerkilled;
-  level.callbackplayerlaststand = ::scripts\mp\damage::callback_playerlaststand;
-  level.callbackplayermigrated = ::scripts\mp\playerlogic::callback_playermigrated;
-  level.callbackhostmigration = ::scripts\mp\hostmigration::callback_hostmigration;
-  level.callbackfinishweaponchange = ::scripts\mp\weapons::callback_finishweaponchange;
+  level.callbackstartgametype = scripts\mp\gamelogic::callback_startgametype;
+  level.callbackplayerconnect = scripts\mp\playerlogic::callback_playerconnect;
+  level.callbackplayerdisconnect = scripts\mp\playerlogic::callback_playerdisconnect;
+  level.callbackplayerdamage = scripts\mp\damage::callback_playerdamage;
+  level.callbackplayerimpaled = scripts\mp\damage::callback_playerimpaled;
+  level.callbackplayerkilled = scripts\mp\damage::callback_playerkilled;
+  level.callbackplayerlaststand = scripts\mp\damage::callback_playerlaststand;
+  level.callbackplayermigrated = scripts\mp\playerlogic::callback_playermigrated;
+  level.callbackhostmigration = scripts\mp\hostmigration::callback_hostmigration;
+  level.callbackfinishweaponchange = scripts\mp\weapons::callback_finishweaponchange;
 }
 
 blank(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}

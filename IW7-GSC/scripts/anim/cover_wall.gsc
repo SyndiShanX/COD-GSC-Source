@@ -66,7 +66,7 @@ func_470E(var_0) {
 
   var_3 = spawnStruct();
   if(!self.logstring) {
-    var_3.var_BD1C = ::scripts\anim\cover_behavior::func_BD1C;
+    var_3.var_BD1C = scripts\anim\cover_behavior::func_BD1C;
   }
 
   var_3.openfile = ::func_4742;

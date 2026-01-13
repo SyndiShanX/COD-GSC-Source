@@ -115,7 +115,7 @@ set_carrying_mindcontrol(var_0, var_1, var_2) {
 
     var_0 thread mindcontrol_trap_setplaced(var_2);
     self notify("IMS_placed");
-    scripts\engine\utility::delaythread(0.5, ::scripts\engine\utility::allow_weapon, 1);
+    scripts\engine\utility::delaythread(0.5, scripts\engine\utility::allow_weapon, 1);
     return 1;
   }
 }

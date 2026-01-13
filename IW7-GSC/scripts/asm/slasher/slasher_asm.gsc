@@ -5,7 +5,7 @@
 
 slasherinit(var_0, var_1, var_2, var_3) {
   scripts\asm\zombie\zombie::func_13F9A(var_0, var_1, var_2, var_3);
-  self.var_71D0 = ::scripts\mp\agents\slasher\slasher_agent::shouldslasherplaypainanim;
+  self.var_71D0 = scripts\mp\agents\slasher\slasher_agent::shouldslasherplaypainanim;
   self setscriptablepartstate("slasher_audio", "normal");
 }
 

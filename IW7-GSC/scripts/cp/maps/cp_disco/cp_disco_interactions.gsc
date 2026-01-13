@@ -21,23 +21,23 @@ register_interactions() {
   level.interaction_hintstrings["trap_buffer"] = &"CP_DISCO_INTERACTIONS_TRAP_BUFFER_HINT";
   level.interaction_hintstrings["trap_hydrant"] = &"CP_DISCO_INTERACTIONS_TRAP_HYDRANT_HINT";
   level.interaction_hintstrings["trap_mosh"] = &"CP_DISCO_INTERACTIONS_TRAP_MOSH_HINT";
-  scripts\cp\cp_interaction::register_interaction("debris_350", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 350);
-  scripts\cp\cp_interaction::register_interaction("debris_1000", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1000);
-  scripts\cp\cp_interaction::register_interaction("debris_1500", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1500);
-  scripts\cp\cp_interaction::register_interaction("debris_2000", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 2000);
-  scripts\cp\cp_interaction::register_interaction("debris_2500", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 2500);
-  scripts\cp\cp_interaction::register_interaction("debris_1250", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1250);
-  scripts\cp\cp_interaction::register_interaction("debris_750", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 750);
+  scripts\cp\cp_interaction::register_interaction("debris_350", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 350);
+  scripts\cp\cp_interaction::register_interaction("debris_1000", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1000);
+  scripts\cp\cp_interaction::register_interaction("debris_1500", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1500);
+  scripts\cp\cp_interaction::register_interaction("debris_2000", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 2000);
+  scripts\cp\cp_interaction::register_interaction("debris_2500", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 2500);
+  scripts\cp\cp_interaction::register_interaction("debris_1250", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1250);
+  scripts\cp\cp_interaction::register_interaction("debris_750", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 750);
   scripts\cp\cp_interaction::register_interaction("team_killdoor", "team_killdoor", undefined, undefined, undefined, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("chi_0", "chi_door", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("chi_1", "chi_door", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1, 0);
-  scripts\cp\cp_interaction::register_interaction("chi_2", "chi_door", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 2, 0);
+  scripts\cp\cp_interaction::register_interaction("chi_0", "chi_door", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("chi_1", "chi_door", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1, 0);
+  scripts\cp\cp_interaction::register_interaction("chi_2", "chi_door", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 2, 0);
   scripts\cp\cp_interaction::register_interaction("power_door_sliding", "door_buy", undefined, undefined, undefined, 0, 1, ::init_sliding_power_doors);
   scripts\cp\cp_interaction::register_interaction("power_door_pivot", "door_buy", undefined, undefined, undefined, 0, 1, ::init_pivot_power_doors);
-  disco_register_interaction(1, "phonebooth", undefined, undefined, ::scripts\cp\maps\cp_disco\phonebooth::hint_phonebooth, ::scripts\cp\maps\cp_disco\phonebooth::use_phonebooth, 0, 1, ::scripts\cp\maps\cp_disco\phonebooth::init_phonebooth);
-  disco_register_interaction(1, "disco_record", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::discorecordhint, ::scripts\cp\maps\cp_disco\cp_disco::discorecorduse, 0, 1, ::scripts\cp\maps\cp_disco\cp_disco::init_disco_record);
-  disco_register_interaction(1, "punk_record", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::punkrecordhint, ::scripts\cp\maps\cp_disco\cp_disco::punkrecorduse, 0, 1, ::scripts\cp\maps\cp_disco\cp_disco::init_punk_record);
-  disco_register_interaction(1, "pa_turntable", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::paturntablehint, ::scripts\cp\maps\cp_disco\cp_disco::paturntableuse, 0, 1, ::scripts\cp\maps\cp_disco\cp_disco::init_pa_turntables);
+  disco_register_interaction(1, "phonebooth", undefined, undefined, scripts\cp\maps\cp_disco\phonebooth::hint_phonebooth, scripts\cp\maps\cp_disco\phonebooth::use_phonebooth, 0, 1, scripts\cp\maps\cp_disco\phonebooth::init_phonebooth);
+  disco_register_interaction(1, "disco_record", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::discorecordhint, scripts\cp\maps\cp_disco\cp_disco::discorecorduse, 0, 1, scripts\cp\maps\cp_disco\cp_disco::init_disco_record);
+  disco_register_interaction(1, "punk_record", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::punkrecordhint, scripts\cp\maps\cp_disco\cp_disco::punkrecorduse, 0, 1, scripts\cp\maps\cp_disco\cp_disco::init_punk_record);
+  disco_register_interaction(1, "pa_turntable", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::paturntablehint, scripts\cp\maps\cp_disco\cp_disco::paturntableuse, 0, 1, scripts\cp\maps\cp_disco\cp_disco::init_pa_turntables);
   disco_register_interaction(1, "clock", undefined, undefined, ::hint_nunchucks, ::use_nunchucks_object, 0, 0, ::init_nunchucks);
   disco_register_interaction(1, "clock_2", undefined, undefined, ::hint_nunchucks, ::use_nunchucks_object_2, 0, 0, ::init_nunchucks_2);
   disco_register_interaction(1, "clock_3", undefined, undefined, ::hint_nunchucks, ::use_nunchucks_object_3, 0, 0, ::init_nunchucks_3);
@@ -47,17 +47,17 @@ register_interactions() {
   disco_register_interaction(1, "memory_object_five", undefined, undefined, ::mem_object_hint, ::mem_object_func, 0, 0, ::init_mem5);
   disco_register_interaction(1, "memory_object_six", undefined, undefined, ::mem_object_hint, ::mem_object_func, 0, 0, ::init_mem6);
   register_environment_interactions();
-  disco_register_interaction(1, "rk_relic_pos", undefined, undefined, ::scripts\cp\maps\cp_disco\rat_king_fight::rkrelic_hint_func, ::scripts\cp\maps\cp_disco\rat_king_fight::pickuprkrelic, 0, 0, ::scripts\cp\maps\cp_disco\rat_king_fight::init_rkrelic);
-  disco_register_interaction(1, "rk_arena_center", undefined, undefined, ::scripts\cp\maps\cp_disco\rat_king_fight::rkarenacenter_hint_func, ::scripts\cp\maps\cp_disco\rat_king_fight::userkarenacenter, 0, 0, undefined);
-  disco_register_interaction(1, "rk_debug", undefined, undefined, ::scripts\cp\maps\cp_disco\rat_king_fight::rkdebug_hint_func, ::scripts\cp\maps\cp_disco\rat_king_fight::userkdebug, 0, 0, undefined);
-  scripts\cp\cp_interaction::register_interaction("trap_buffer", "trap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_traps::use_buffer_trap, 750, 1, ::scripts\cp\maps\cp_disco\cp_disco_traps::init_buffer_trap);
-  scripts\cp\cp_interaction::register_interaction("trap_hydrant", "trap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_traps::use_hydrant_trap, 350, 1, ::scripts\cp\maps\cp_disco\cp_disco_traps::init_hydrant_trap);
-  scripts\cp\cp_interaction::register_interaction("trap_mosh", "trap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_traps::use_mosh_trap, 750, 1, ::scripts\cp\maps\cp_disco\cp_disco_traps::init_mosh_trap);
+  disco_register_interaction(1, "rk_relic_pos", undefined, undefined, scripts\cp\maps\cp_disco\rat_king_fight::rkrelic_hint_func, scripts\cp\maps\cp_disco\rat_king_fight::pickuprkrelic, 0, 0, scripts\cp\maps\cp_disco\rat_king_fight::init_rkrelic);
+  disco_register_interaction(1, "rk_arena_center", undefined, undefined, scripts\cp\maps\cp_disco\rat_king_fight::rkarenacenter_hint_func, scripts\cp\maps\cp_disco\rat_king_fight::userkarenacenter, 0, 0, undefined);
+  disco_register_interaction(1, "rk_debug", undefined, undefined, scripts\cp\maps\cp_disco\rat_king_fight::rkdebug_hint_func, scripts\cp\maps\cp_disco\rat_king_fight::userkdebug, 0, 0, undefined);
+  scripts\cp\cp_interaction::register_interaction("trap_buffer", "trap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_traps::use_buffer_trap, 750, 1, scripts\cp\maps\cp_disco\cp_disco_traps::init_buffer_trap);
+  scripts\cp\cp_interaction::register_interaction("trap_hydrant", "trap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_traps::use_hydrant_trap, 350, 1, scripts\cp\maps\cp_disco\cp_disco_traps::init_hydrant_trap);
+  scripts\cp\cp_interaction::register_interaction("trap_mosh", "trap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_traps::use_mosh_trap, 750, 1, scripts\cp\maps\cp_disco\cp_disco_traps::init_mosh_trap);
   scripts\cp\cp_interaction::register_interaction("fan_trap", "trap", undefined, undefined, ::use_fan_trap, 750, 1, ::init_fan_trap);
   scripts\cp\cp_interaction::register_interaction("electric_trap", "trap", undefined, undefined, ::use_electric_trap, 750, 0, ::init_electric_trap);
-  disco_register_interaction(1, "turnstile", undefined, undefined, ::scripts\cp\maps\cp_disco\disco_mpq::empty_hint, ::scripts\cp\maps\cp_disco\disco_mpq::use_turnstile, 0, 0, ::scripts\cp\maps\cp_disco\disco_mpq::init_turnstile);
-  disco_register_interaction(1, "disco_fever_interact", undefined, undefined, ::scripts\cp\maps\cp_disco\disco_mpq::discofeverhintfunc, ::scripts\cp\maps\cp_disco\disco_mpq::use_turntable, 0, 0, ::scripts\cp\maps\cp_disco\disco_mpq::init_turntable);
-  disco_register_interaction(1, "mpq_relics", undefined, undefined, ::scripts\cp\maps\cp_disco\disco_mpq::mpqrelichintfunc, ::scripts\cp\maps\cp_disco\disco_mpq::mpqrelicusefunc, 0, 0);
+  disco_register_interaction(1, "turnstile", undefined, undefined, scripts\cp\maps\cp_disco\disco_mpq::empty_hint, scripts\cp\maps\cp_disco\disco_mpq::use_turnstile, 0, 0, scripts\cp\maps\cp_disco\disco_mpq::init_turnstile);
+  disco_register_interaction(1, "disco_fever_interact", undefined, undefined, scripts\cp\maps\cp_disco\disco_mpq::discofeverhintfunc, scripts\cp\maps\cp_disco\disco_mpq::use_turntable, 0, 0, scripts\cp\maps\cp_disco\disco_mpq::init_turntable);
+  disco_register_interaction(1, "mpq_relics", undefined, undefined, scripts\cp\maps\cp_disco\disco_mpq::mpqrelichintfunc, scripts\cp\maps\cp_disco\disco_mpq::mpqrelicusefunc, 0, 0);
   register_martial_arts_style_interactions();
   register_weapon_interactions();
   register_pack_a_punch_interactions();
@@ -81,25 +81,25 @@ register_pack_a_punch_interactions() {
   level.interaction_hintstrings["pap_fuse_switch"] = "";
   level.interaction_hintstrings["pap_fusebox"] = "";
   level.interaction_hintstrings["weapon_upgrade"] = &"CP_DISCO_INTERACTIONS_UPGRADE_WEAPON";
-  scripts\cp\cp_interaction::register_interaction("enter_stall", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::enter_pap_stall, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("add_reel", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::add_reel, 0, 0, ::scripts\cp\maps\cp_disco\cp_disco::init_projector);
-  scripts\cp\cp_interaction::register_interaction("pickup_reel", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::pickup_reel, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, ::scripts\cp\maps\cp_disco\cp_disco::pap_portal_hint_logic, ::scripts\cp\maps\cp_disco\cp_disco::pap_portal_use_func, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("enter_stall_allowed", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::enter_pap_stall, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("enter_peepshow", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::enter_peepshow, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("enter_peepshow_allowed", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::enter_peepshow, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("peepshow_flyer", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::take_peepshow_flyer, 0, 0, ::scripts\cp\maps\cp_disco\cp_disco::init_peepshow_flyer);
-  scripts\cp\cp_interaction::register_interaction("pap_fuse_switch", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::use_pap_upgrade_switch, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("pap_fusebox", "pap", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco::take_fuses, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, ::scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::weapon_upgrade_hint_func, ::scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::weapon_upgrade, 5000, 1, ::scripts\cp\zombies\interaction_weapon_upgrade::init_all_weapon_upgrades);
+  scripts\cp\cp_interaction::register_interaction("enter_stall", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::enter_pap_stall, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("add_reel", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::add_reel, 0, 0, scripts\cp\maps\cp_disco\cp_disco::init_projector);
+  scripts\cp\cp_interaction::register_interaction("pickup_reel", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::pickup_reel, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, scripts\cp\maps\cp_disco\cp_disco::pap_portal_hint_logic, scripts\cp\maps\cp_disco\cp_disco::pap_portal_use_func, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("enter_stall_allowed", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::enter_pap_stall, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("enter_peepshow", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::enter_peepshow, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("enter_peepshow_allowed", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::enter_peepshow, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("peepshow_flyer", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::take_peepshow_flyer, 0, 0, scripts\cp\maps\cp_disco\cp_disco::init_peepshow_flyer);
+  scripts\cp\cp_interaction::register_interaction("pap_fuse_switch", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::use_pap_upgrade_switch, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("pap_fusebox", "pap", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco::take_fuses, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::weapon_upgrade_hint_func, scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::weapon_upgrade, 5000, 1, scripts\cp\zombies\interaction_weapon_upgrade::init_all_weapon_upgrades);
 }
 
 register_martial_arts_style_interactions() {
-  disco_register_interaction(1, "martial_arts_animals", undefined, undefined, ::scripts\cp\maps\cp_disco\kung_fu_mode::style_hint_func, ::scripts\cp\maps\cp_disco\kung_fu_mode::choose_martial_arts_style, 0, 0, ::scripts\cp\maps\cp_disco\kung_fu_mode::ma_style_init);
-  disco_register_interaction(1, "gourd_station", undefined, undefined, ::scripts\cp\maps\cp_disco\kung_fu_mode::usegourd_hint_func, ::scripts\cp\maps\cp_disco\kung_fu_mode::usegourdstation, 0, 0, ::scripts\cp\maps\cp_disco\kung_fu_mode::guord_interaction_init);
-  disco_register_interaction(0, "martial_arts_trainer", undefined, undefined, ::scripts\cp\maps\cp_disco\kung_fu_mode::trainer_hint_func, ::scripts\cp\maps\cp_disco\kung_fu_mode::talk_to_trainer, 0, 0, ::scripts\cp\maps\cp_disco\kung_fu_mode::init_martial_arts_trainer);
-  disco_register_interaction(1, "black_cat", undefined, undefined, ::scripts\cp\maps\cp_disco\kung_fu_mode::blackcathintfunc, ::scripts\cp\maps\cp_disco\kung_fu_mode::blackcatusefunc, 0, 0, ::scripts\cp\maps\cp_disco\kung_fu_mode::blackcatinitfunc);
-  disco_register_interaction(1, "perk_candy_box", undefined, undefined, ::scripts\cp\maps\cp_disco\rat_king_fight::perkbox_hintfunc, ::scripts\cp\maps\cp_disco\rat_king_fight::perkbox_usefunc, 0, 0, ::scripts\cp\maps\cp_disco\rat_king_fight::init_rk_candy_interactions);
+  disco_register_interaction(1, "martial_arts_animals", undefined, undefined, scripts\cp\maps\cp_disco\kung_fu_mode::style_hint_func, scripts\cp\maps\cp_disco\kung_fu_mode::choose_martial_arts_style, 0, 0, scripts\cp\maps\cp_disco\kung_fu_mode::ma_style_init);
+  disco_register_interaction(1, "gourd_station", undefined, undefined, scripts\cp\maps\cp_disco\kung_fu_mode::usegourd_hint_func, scripts\cp\maps\cp_disco\kung_fu_mode::usegourdstation, 0, 0, scripts\cp\maps\cp_disco\kung_fu_mode::guord_interaction_init);
+  disco_register_interaction(0, "martial_arts_trainer", undefined, undefined, scripts\cp\maps\cp_disco\kung_fu_mode::trainer_hint_func, scripts\cp\maps\cp_disco\kung_fu_mode::talk_to_trainer, 0, 0, scripts\cp\maps\cp_disco\kung_fu_mode::init_martial_arts_trainer);
+  disco_register_interaction(1, "black_cat", undefined, undefined, scripts\cp\maps\cp_disco\kung_fu_mode::blackcathintfunc, scripts\cp\maps\cp_disco\kung_fu_mode::blackcatusefunc, 0, 0, scripts\cp\maps\cp_disco\kung_fu_mode::blackcatinitfunc);
+  disco_register_interaction(1, "perk_candy_box", undefined, undefined, scripts\cp\maps\cp_disco\rat_king_fight::perkbox_hintfunc, scripts\cp\maps\cp_disco\rat_king_fight::perkbox_usefunc, 0, 0, scripts\cp\maps\cp_disco\rat_king_fight::init_rk_candy_interactions);
 }
 
 register_environment_interactions() {
@@ -107,7 +107,7 @@ register_environment_interactions() {
   level.interaction_hintstrings["atm_withdrawal"] = &"CP_DISCO_INTERACTIONS_ATM_WITHDRAWAL";
   disco_register_interaction(1, "pay_phones", "atm", undefined, ::blank_hint, ::blank, 0);
   disco_register_interaction(1, "trash_cans", "atm", undefined, ::blank_hint, ::trash_can_use, 0);
-  disco_register_interaction(0, "atm_deposit", "atm", undefined, ::scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000, 1, undefined);
+  disco_register_interaction(0, "atm_deposit", "atm", undefined, scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000, 1, undefined);
   disco_register_interaction(0, "atm_withdrawal", "atm", undefined, ::atm_withdrawal_hint, ::atm_withdrawal, 0, 1, ::setup_atm_system);
 }
 
@@ -162,31 +162,31 @@ register_weapon_interactions() {
   level.interaction_hintstrings["iw7_rvn_zm"] = &"CP_DISCO_INTERACTIONS_BUY_WEAPON";
   level.interaction_hintstrings["iw7_udm45_zm"] = &"CP_DISCO_INTERACTIONS_BUY_WEAPON";
   level.interaction_hintstrings["iw7_katana_zm"] = &"CP_DISCO_INTERACTIONS_BUY_WEAPON";
-  disco_register_interaction(1, "iw7_katana_zm", "wall_buy", undefined, ::scripts\cp\maps\cp_disco\rat_king_fight::katanahintfunc, ::scripts\cp\maps\cp_disco\rat_king_fight::katanausefunc, 10000);
+  disco_register_interaction(1, "iw7_katana_zm", "wall_buy", undefined, scripts\cp\maps\cp_disco\rat_king_fight::katanahintfunc, scripts\cp\maps\cp_disco\rat_king_fight::katanausefunc, 10000);
   var_0 = 500;
-  scripts\cp\cp_interaction::register_interaction("iw7_revolver_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_m1c_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_revolver_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_m1c_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
   var_0 = 750;
-  scripts\cp\cp_interaction::register_interaction("iw7_g18c_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_sonic_zmr", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_udm45_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_g18c_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_sonic_zmr", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_udm45_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
   var_0 = 1000;
-  scripts\cp\cp_interaction::register_interaction("iw7_m8_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_cheytac_zmr", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_g18_zmr", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_rvn_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_spas_zmr", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_kbs_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_crb_zml", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_erad_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_ripper_zmr", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_ump45_zml", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_devastator_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
-  scripts\cp\cp_interaction::register_interaction("iw7_m4_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
-  scripts\cp\cp_interaction::register_interaction("iw7_ar57_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
-  scripts\cp\cp_interaction::register_interaction("iw7_ake_zml", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
-  scripts\cp\cp_interaction::register_interaction("iw7_fmg_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
-  scripts\cp\cp_interaction::register_interaction("iw7_axe_zm", "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
+  scripts\cp\cp_interaction::register_interaction("iw7_m8_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_cheytac_zmr", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_g18_zmr", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_rvn_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_spas_zmr", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_kbs_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_crb_zml", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_erad_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_ripper_zmr", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_ump45_zml", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_devastator_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_0);
+  scripts\cp\cp_interaction::register_interaction("iw7_m4_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
+  scripts\cp\cp_interaction::register_interaction("iw7_ar57_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
+  scripts\cp\cp_interaction::register_interaction("iw7_ake_zml", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
+  scripts\cp\cp_interaction::register_interaction("iw7_fmg_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
+  scripts\cp\cp_interaction::register_interaction("iw7_axe_zm", "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, 1500);
 }
 
 register_afterlife_games() {
@@ -203,19 +203,19 @@ register_afterlife_games() {
   level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_hero"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, ::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
-  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, ::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
-  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, ::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
-  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, ::scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
-  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, ::scripts\cp\zombies\interaction_racing::race_game_hint_logic, ::scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, ::scripts\cp\zombies\interaction_racing::init_all_race_games);
+  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
+  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
+  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
+  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
+  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, scripts\cp\zombies\interaction_racing::race_game_hint_logic, scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, scripts\cp\zombies\interaction_racing::init_all_race_games);
 }
 
 register_crafting_interactions() {
@@ -230,18 +230,18 @@ register_crafting_interactions() {
   level.interaction_hintstrings["craft_lavalamp"] = "";
   level.interaction_hintstrings["purchase_lavalamp"] = &"CP_DISCO_PURCHASE_LAVALAMP";
   level.interaction_hintstrings["puzzle"] = "";
-  scripts\cp\cp_interaction::register_interaction("craft_zombgone", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("purchase_zombgone", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("craft_turret", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("purchase_turret", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("craft_boombox", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("purchase_boombox", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("craft_lavalamp", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("purchase_lavalamp", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("craft_robot", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("purchase_robot", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
-  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, ::scripts\cp\zombies\zombies_pillage::pillage_hint_func, ::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
-  scripts\cp\cp_interaction::register_interaction("puzzle", "souvenir_coin", undefined, undefined, ::scripts\cp\maps\cp_disco\cp_disco_crafting::pickup_puzzle, 0);
+  scripts\cp\cp_interaction::register_interaction("craft_zombgone", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("purchase_zombgone", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("craft_turret", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("purchase_turret", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("craft_boombox", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("purchase_boombox", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("craft_lavalamp", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("purchase_lavalamp", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("craft_robot", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("purchase_robot", "souvenir_station", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::use_crafting_station, 0);
+  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, scripts\cp\zombies\zombies_pillage::pillage_hint_func, scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("puzzle", "souvenir_coin", undefined, undefined, scripts\cp\maps\cp_disco\cp_disco_crafting::pickup_puzzle, 0);
   scripts\cp\maps\cp_disco\cp_disco_crafting::init_crafting();
 }
 

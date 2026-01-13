@@ -71,7 +71,7 @@ func_819B(var_0, var_1) {
   self setscriptablepartstate("killstreak", "neutral", 0);
   scripts\mp\utility::func_11DB();
   scripts\mp\utility::func_1C47(1);
-  thread scripts\engine\utility::delaythread(0.05, ::scripts\engine\utility::allow_usability, 1);
+  thread scripts\engine\utility::delaythread(0.05, scripts\engine\utility::allow_usability, 1);
   return var_3;
 }
 

@@ -37,9 +37,9 @@ main() {
   level.ondeadevent = ::ondeadevent;
   level.ontimelimit = ::ontimelimit;
   level.onnormaldeath = ::onnormaldeath;
-  level.gamemodemaydropweapon = ::scripts\mp\utility::isplayeroutsideofanybombsite;
+  level.gamemodemaydropweapon = scripts\mp\utility::isplayeroutsideofanybombsite;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   level.var_4DA2 = 1;

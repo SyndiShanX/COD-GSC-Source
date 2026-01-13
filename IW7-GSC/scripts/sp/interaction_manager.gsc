@@ -331,7 +331,7 @@ func_E815(var_0) {
           var_9 = getanimlength(var_4 scripts\sp\utility::func_7DC1(var_5[1]));
           var_4 thread scripts\sp\utility::func_C12D("reminder_anim_done", var_9);
           if(isDefined(var_4.var_E40E)) {
-            var_4.remind_calltrain scripts\engine\utility::delaythread(var_9, ::scripts\sp\anim::func_1EEA, var_4, var_4.var_E40E, "stop_loop");
+            var_4.remind_calltrain scripts\engine\utility::delaythread(var_9, scripts\sp\anim::func_1EEA, var_4, var_4.var_E40E, "stop_loop");
           }
         } else {
           var_5 notify("stop_loop");
@@ -339,7 +339,7 @@ func_E815(var_0) {
           var_9 = getanimlength(var_5 scripts\sp\utility::func_7DC1(var_6[1]));
           var_4 thread scripts\sp\utility::func_C12D("reminder_anim_done", var_9);
           if(isDefined(var_4.var_E40E)) {
-            var_4 scripts\engine\utility::delaythread(var_9, ::scripts\sp\anim::func_1EEA, var_4, var_4.var_E40E, "stop_loop");
+            var_4 scripts\engine\utility::delaythread(var_9, scripts\sp\anim::func_1EEA, var_4, var_4.var_E40E, "stop_loop");
           }
         }
 
@@ -918,7 +918,7 @@ func_CD37(var_0, var_1, var_2, var_3) {
   foreach(var_5 in var_0) {
     var_0A = randomfloatrange(0, 1);
     var_0B = randomfloatrange(0.5, 1.5);
-    var_5 scripts\engine\utility::delaythread(var_0A, ::scripts\sp\utility::func_77B9, var_0B);
+    var_5 scripts\engine\utility::delaythread(var_0A, scripts\sp\utility::func_77B9, var_0B);
   }
 }
 
@@ -1310,7 +1310,7 @@ func_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = getanimlength(var_0 scripts\sp\utility::func_7DC1(var_3));
   thread scripts\sp\utility::func_C12D("reminder_anim_done", var_8);
   if(isDefined(var_0.var_E40E)) {
-    scripts\engine\utility::delaythread(var_8, ::scripts\sp\anim::func_1EEA, var_0, var_0.var_E40E, "stop_loop");
+    scripts\engine\utility::delaythread(var_8, scripts\sp\anim::func_1EEA, var_0, var_0.var_E40E, "stop_loop");
   }
 
   if(isDefined(var_4)) {

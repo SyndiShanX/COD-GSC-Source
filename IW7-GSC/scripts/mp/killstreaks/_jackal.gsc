@@ -1509,7 +1509,7 @@ dropcrates(var_0, var_1) {
     var_5 physicslaunchserver((0, 0, 0), var_2, var_3);
     var_5 thread scripts\mp\killstreaks\_airdrop::physicswaiter(var_5.droptype, var_5.cratetype, var_2, var_3);
     var_5 thread scripts\mp\killstreaks\_airdrop::killplayerfromcrate_fastvelocitypush();
-    var_5.unresolved_collision_func = ::scripts\mp\killstreaks\_airdrop::killplayerfromcrate_dodamage;
+    var_5.unresolved_collision_func = scripts\mp\killstreaks\_airdrop::killplayerfromcrate_dodamage;
     var_5 thread scripts\mp\killstreaks\_airdrop::handlenavobstacle();
     var_5 thread watchforcapture(self, var_6);
     wait(0.1);

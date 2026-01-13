@@ -237,7 +237,7 @@ func_CE0F(var_0) {
     }
   }
 
-  scripts\engine\utility::delaythread(2, ::scripts\cp\cp_interaction::add_to_current_interaction_list, var_0);
+  scripts\engine\utility::delaythread(2, scripts\cp\cp_interaction::add_to_current_interaction_list, var_0);
   self notify("arcade_game_over_for_player");
 }
 

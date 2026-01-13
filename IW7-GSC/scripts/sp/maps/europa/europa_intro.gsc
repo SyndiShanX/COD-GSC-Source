@@ -122,8 +122,8 @@ func_5DF1() {}
 
 func_5E01() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_BE49);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_BE49);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   func_5EA4();
   lib_0E4B::func_8E06(1);
   level.var_D267 = scripts\sp\utility::func_10639("player_rig", level.player.origin, level.player.angles);
@@ -191,7 +191,7 @@ firstline() {
 func_9A9F() {
   scripts\engine\utility::flag_set("begin_dropship_bink");
   level.player func_82C0("europa_dropship_intro_fullscreen_hit", 0);
-  level.var_5D6C scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::play_sound_on_entity, "europa_rpr_warlordactual");
+  level.var_5D6C scripts\engine\utility::delaythread(1.5, scripts\sp\utility::play_sound_on_entity, "europa_rpr_warlordactual");
   if(!isDefined(level.var_2B4C)) {
     level.var_2B4C = scripts\sp\hud_util::func_48B7("black", 1);
     level.var_2B4C.foreground = 0;
@@ -202,7 +202,7 @@ func_5E25() {
   func_5E01();
   scripts\engine\utility::flag_set("dropship_door_open");
   level.var_5D6C lib_0BBC::func_C5F1("right", 0, 1, 0);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "lower");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "lower");
   level.var_EBBC.var_C383 = level.var_EBBC.headmodel;
   level.var_EBBC detach(level.var_EBBC.headmodel);
   level.var_EBBC attach("head_hero_t_hqss");
@@ -216,7 +216,7 @@ func_5E25() {
   setomnvar("ui_europa_halo_drop_state", 3);
   level.var_E7C2 = scripts\sp\utility::func_7C23();
   level.var_E7C2 thread scripts\sp\utility::func_E7C9(1, 0.1);
-  level.var_E7C2 scripts\engine\utility::delaythread(0.1, ::scripts\sp\utility::func_E7C9, 0.2, 1);
+  level.var_E7C2 scripts\engine\utility::delaythread(0.1, scripts\sp\utility::func_E7C9, 0.2, 1);
 }
 
 func_D324() {
@@ -244,7 +244,7 @@ func_5E21() {
     }
   }
 
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_BE4A);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_BE4A);
   thread func_5E06();
   thread func_5E24();
   level.var_5D6C thread scripts\sp\anim::func_1EE7(level.var_5D6C.var_EBCA, "europa_dropship_idle", "stop_loop", "tag_origin");
@@ -290,10 +290,10 @@ func_5E21() {
 
 func_257A() {
   level.player scripts\engine\utility::delaycall(0.5, ::playsound, "europa_dropship_halo_plr_01");
-  level.player scripts\engine\utility::delaythread(0.62, ::scripts\sp\utility::func_1034D, "europa_plr_gogo");
+  level.player scripts\engine\utility::delaythread(0.62, scripts\sp\utility::func_1034D, "europa_plr_gogo");
   level.player scripts\engine\utility::delaycall(0.62, ::playrumbleonentity, "light_2s");
   level.player scripts\engine\utility::delaycall(1.633333, ::playsound, "europa_dropship_halo_plr_02");
-  level.player scripts\engine\utility::delaythread(1.7, ::scripts\sp\utility::func_1034D, "europa_plr_go");
+  level.player scripts\engine\utility::delaythread(1.7, scripts\sp\utility::func_1034D, "europa_plr_go");
   level.player scripts\engine\utility::delaycall(1.7, ::playrumbleonentity, "light_2s");
 }
 
@@ -473,7 +473,7 @@ func_CFDC() {
   level endon("stop_player_controlled_updates");
   level.player playrumbleonentity("heavy_2s");
   scripts\engine\utility::delaythread(1.25, ::func_5858);
-  scripts\engine\utility::delaythread(0.9, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_staytight");
+  scripts\engine\utility::delaythread(0.9, scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_staytight");
   thread func_CF62();
   level.var_CFE4 = spawnStruct();
   func_13E6B();
@@ -1213,7 +1213,7 @@ func_59E8() {
   level.player playrumbleonentity("heavy_3s");
   level.var_E7C2 = scripts\sp\utility::func_7C23();
   level.var_E7C2 thread scripts\sp\utility::func_E7C9(1, 0.1);
-  level.var_E7C2 scripts\engine\utility::delaythread(0.1, ::scripts\sp\utility::func_E7C9, 0.2, 1);
+  level.var_E7C2 scripts\engine\utility::delaythread(0.1, scripts\sp\utility::func_E7C9, 0.2, 1);
   playFXOnTag(scripts\engine\utility::getfx("dropship_door_open"), level.var_5D6C, "tag_origin");
   thread func_59B9();
   var_0 = scripts\engine\utility::getstruct("dropship_door_sound", "targetname");
@@ -1579,7 +1579,7 @@ func_11A84() {
 
 func_8E4A() {
   scripts\engine\utility::flag_wait("safe_to_swap_models");
-  scripts\engine\utility::delaythread(0.25, ::scripts\sp\maps\europa\europa_util::func_8E46, 1);
+  scripts\engine\utility::delaythread(0.25, scripts\sp\maps\europa\europa_util::func_8E46, 1);
 }
 
 func_4211() {
@@ -1627,7 +1627,7 @@ func_7451() {
 func_6745() {
   level.player thread scripts\sp\maps\europa\europa_util::func_12992();
   thread scripts\sp\maps\europa\europa_util::func_982F(5);
-  level.player scripts\engine\utility::delaythread(5, ::scripts\sp\maps\europa\europa_util::func_12970);
+  level.player scripts\engine\utility::delaythread(5, scripts\sp\maps\europa\europa_util::func_12970);
 }
 
 func_AB7E() {
@@ -1683,7 +1683,7 @@ func_AB7E() {
       level.player thread scripts\sp\utility::play_sound_on_entity(var_9[var_0A]);
       var_0A++;
       level.player thread scripts\sp\maps\europa\europa_util::func_12992();
-      level.player scripts\engine\utility::delaythread(5, ::scripts\sp\maps\europa\europa_util::func_12970);
+      level.player scripts\engine\utility::delaythread(5, scripts\sp\maps\europa\europa_util::func_12970);
       if(var_0A == 2) {
         thread start_player_freezing_sfx();
       }
@@ -1749,7 +1749,7 @@ func_DAEF(var_0, var_1) {
 }
 
 func_10AD0() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_54F7);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_54F7);
   level.var_EBBB.target = "sipes_lookaround";
   level.var_EBBC.target = "t_lookaround";
   scripts\engine\utility::array_thread(level.var_EBCA, lib_0B77::worldpointinreticle_circle);
@@ -1790,7 +1790,7 @@ func_EBC2() {
     level.var_EBBC scripts\sp\utility::func_F3B5("b");
   }
 
-  scripts\engine\utility::delaythread(6, ::scripts\sp\utility::func_5514);
+  scripts\engine\utility::delaythread(6, scripts\sp\utility::func_5514);
   thread func_B013();
 }
 
@@ -1913,7 +1913,7 @@ func_F915() {
   level endon("scar_saved_player");
   var_0 = [level.player.var_D267, level.var_421D.var_D04B];
   scripts\engine\utility::flag_wait("cliffjump_kick_done");
-  scripts\engine\utility::delaythread(0.25, ::scripts\sp\hud::func_8DFF, -250, 0.05);
+  scripts\engine\utility::delaythread(0.25, scripts\sp\hud::func_8DFF, -250, 0.05);
   if(!scripts\engine\utility::flag("player_stabbed")) {
     level.var_421D thread scripts\sp\anim::func_1F2C(var_0, "cliffjumper_loop");
     setslowmotion(1, 0.25, 0.5);
@@ -1945,7 +1945,7 @@ func_1081C() {
 func_5FB3() {
   level endon("player_stabbed");
   level endon("scar_saved_player");
-  scripts\engine\utility::delaythread(1.95, ::scripts\sp\utility::func_56BA, "melee_hint");
+  scripts\engine\utility::delaythread(1.95, scripts\sp\utility::func_56BA, "melee_hint");
   level.player waittill("melee_pressed");
   scripts\engine\utility::flag_set("player_stabbed");
 }
@@ -1960,7 +1960,7 @@ func_3DB5(var_0) {
   level.var_4214 delete();
   level.player playerlinktodelta(level.var_421D.var_D267, "tag_player", 0, 1, 1, 1, 1, 1);
   level.player func_81DE(65, 0.75);
-  scripts\engine\utility::delaythread(1.25, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_focusupmate");
+  scripts\engine\utility::delaythread(1.25, scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_focusupmate");
   level.var_421D.var_1CBF func_82B0(level.var_421D.var_1CBF scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
   level.var_421D.var_1CE2 func_82B0(level.var_421D.var_1CE2 scripts\sp\utility::func_7DC1("cliffjumper"), 0.6);
   thread func_6ADE();
@@ -2121,7 +2121,7 @@ func_4206(var_0) {
     return;
   }
 
-  scripts\engine\utility::delaythread(0.85, ::scripts\sp\utility::func_56BE, "freefall_boost", 3);
+  scripts\engine\utility::delaythread(0.85, scripts\sp\utility::func_56BE, "freefall_boost", 3);
   level.player thread scripts\sp\utility::play_sound_on_entity("scn_cave_jump_slomo");
   setmusicstate("");
   wait(0.2);
@@ -2277,16 +2277,16 @@ func_5DF0() {}
 
 func_5E75() {
   var_0 = getEntArray("europa_dropshiplight_green", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_dropshiplight_red", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 100);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 100);
 }
 
 func_5E06() {
   var_0 = getEntArray("europa_dropshiplight_red", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_dropshiplight_green", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 1000);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 1000);
 }
 
 func_5EA4() {

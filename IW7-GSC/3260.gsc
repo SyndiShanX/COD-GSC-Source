@@ -27,7 +27,7 @@ main() {
   level.agent_funcs["the_hoff"]["gametype_on_damage_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["the_hoff"]["gametype_on_killed"] = ::onzombiekilled;
   level.var_768B = ::func_777C;
-  level.in_room_check_func = ::scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
+  level.in_room_check_func = scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
   level.fnzombieshouldenterplayspace = ::zombieshouldenterplayspace;
   level.movemodefunc["generic_zombie"] = ::run_if_last_zombie;
   if(!isDefined(level.eligable_for_reward_func)) {
@@ -39,11 +39,11 @@ main() {
   }
 
   level.last_drop_time = gettime();
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
   level thread func_97BA();
   level.var_7089 = ::get_closest_player_near_interaction_point;
-  level.fn_get_closest_entrance = ::scripts\cp\utility::get_closest_entrance;
+  level.fn_get_closest_entrance = scripts\cp\utility::get_closest_entrance;
   level.no_pain_volume = getent("no_pain_volume", "targetname");
 }
 

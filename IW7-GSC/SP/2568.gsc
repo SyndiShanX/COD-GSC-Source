@@ -17,7 +17,7 @@ func_97EC(var_0) {
   self.var_71BC = ::func_129AA;
   self.var_71CB = ::saygenericdialogue;
   self.var_71D5 = ::func_12E93;
-  self.var_71C7 = ::scripts\sp\utility::func_D022;
+  self.var_71C7 = scripts\sp\utility::func_D022;
   return level.success;
 }
 

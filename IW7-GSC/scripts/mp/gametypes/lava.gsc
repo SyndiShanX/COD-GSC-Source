@@ -32,7 +32,7 @@ main() {
   level.onnormaldeath = ::onnormaldeath;
   level.onsuicidedeath = ::onsuicidedeath;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "tm_death";

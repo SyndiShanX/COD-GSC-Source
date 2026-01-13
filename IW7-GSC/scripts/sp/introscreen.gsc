@@ -18,7 +18,7 @@ func_B23E() {
   scripts\engine\utility::flag_wait("start_is_set");
   var_0 = 0;
   if(!isDefined(level.var_9AF3) || !scripts\sp\utility::func_9BB5() || var_0) {
-    scripts\engine\utility::delaythread(0.05, ::scripts\engine\utility::flag_set, "introscreen_complete");
+    scripts\engine\utility::delaythread(0.05, scripts\engine\utility::flag_set, "introscreen_complete");
     return;
   }
 
@@ -140,7 +140,7 @@ func_9AF3(var_0, var_1) {
     scripts\sp\hud_util::func_10CCC();
     level.player freezecontrols(1);
     level.player scripts\engine\utility::delaycall(var_1, ::freezecontrols, 0);
-    scripts\engine\utility::delaythread(var_1, ::scripts\sp\hud_util::func_6A99, 2);
+    scripts\engine\utility::delaythread(var_1, scripts\sp\hud_util::func_6A99, 2);
   }
 
   level.var_3F69 = spawnStruct();

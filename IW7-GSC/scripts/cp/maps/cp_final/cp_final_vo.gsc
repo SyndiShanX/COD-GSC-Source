@@ -10,7 +10,7 @@ final_vo_init() {
   level.player_vo_playing = 0;
   level.level_specific_vo_callouts = ::rave_vo_callouts;
   level.pap_vo_approve_func = ::is_vo_in_pap;
-  level.get_alias_2d_func = ::scripts\cp\cp_vo::get_alias_2d_version;
+  level.get_alias_2d_func = scripts\cp\cp_vo::get_alias_2d_version;
   level.spawn_vo_func = ::final_starting_vo;
   level thread rave_vo_callouts();
   level.dialogue_playing_queue = [];

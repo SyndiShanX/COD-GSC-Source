@@ -264,7 +264,7 @@ door_state_update(var_0) {
         var_3 moveto(var_14, var_16, var_17, var_17);
         var_3 scripts\mp\movers::notify_moving_platform_invalid();
         if(var_3.var_C001) {
-          var_3.unresolved_collision_func = ::scripts\mp\movers::func_12BEE;
+          var_3.unresolved_collision_func = scripts\mp\movers::func_12BEE;
         }
 
         if(!isDefined(var_1C) || var_16 > var_1C) {

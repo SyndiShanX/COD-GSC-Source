@@ -32,7 +32,7 @@ main() {
   level.getspawnpoint = ::getspawnpoint;
   level.onnormaldeath = ::onnormaldeath;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "team_deathmatch";

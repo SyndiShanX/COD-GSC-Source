@@ -852,7 +852,7 @@ func_5B7E(var_0, var_1, var_2) {
   var_10 = var_4 * 0.003;
   var_11 = func_7E1F();
   for(;;) {
-    scripts\engine\utility::array_levelthread(var_11, ::scripts\engine\utility::plot_points);
+    scripts\engine\utility::array_levelthread(var_11, scripts\engine\utility::plot_points);
     wait(0.05);
   }
 }

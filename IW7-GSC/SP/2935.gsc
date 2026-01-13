@@ -1139,7 +1139,7 @@ func_107ED() {
   }
 
   func_3DF4();
-  scripts\sp\utility::func_16B7(::scripts\sp\gameskill::func_2627);
+  scripts\sp\utility::func_16B7(scripts\sp\gameskill::func_2627);
   if(isDefined(self.var_ED3A)) {
     self.var_BC = self.var_ED3A;
   }
@@ -2847,9 +2847,9 @@ camper_trigger_think(var_0) {
     var_8++;
   }
 
-  scripts\engine\utility::array_thread(var_2, ::scripts\sp\utility::func_1747, ::func_37E9);
-  scripts\engine\utility::array_thread(var_2, ::scripts\sp\utility::func_1747, ::func_BC9F, var_3);
-  scripts\engine\utility::array_thread(var_2, ::scripts\sp\utility::func_10619);
+  scripts\engine\utility::array_thread(var_2, scripts\sp\utility::func_1747, ::func_37E9);
+  scripts\engine\utility::array_thread(var_2, scripts\sp\utility::func_1747, ::func_BC9F, var_3);
+  scripts\engine\utility::array_thread(var_2, scripts\sp\utility::func_10619);
 }
 
 func_37E9() {
@@ -3211,8 +3211,8 @@ func_DC9B(var_0) {
   }
 
   waittillframeend;
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\utility::func_1747, ::func_2BD0);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\utility::func_10619);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\utility::func_1747, ::func_2BD0);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\utility::func_10619);
 }
 
 func_2BD0() {

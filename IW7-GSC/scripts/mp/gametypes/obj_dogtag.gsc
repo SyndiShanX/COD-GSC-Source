@@ -5,8 +5,8 @@
 
 init() {
   level.dogtags = [];
-  level.dogtagallyonusecb = ::scripts\mp\gametypes\common::dogtagallyonusecb;
-  level.dogtagenemyonusecb = ::scripts\mp\gametypes\common::dogtagenemyonusecb;
+  level.dogtagallyonusecb = scripts\mp\gametypes\common::dogtagallyonusecb;
+  level.dogtagenemyonusecb = scripts\mp\gametypes\common::dogtagenemyonusecb;
   level.conf_fx["vanish"] = loadfx("vfx\core\impacts\small_snowhit");
   level.numlifelimited = scripts\mp\utility::getgametypenumlives();
 }

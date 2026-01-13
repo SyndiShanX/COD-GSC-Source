@@ -546,7 +546,7 @@ func_FF31() {
     return 0;
   }
 
-  if(!isDefined(level.player.helmet) || scripts\sp\utility::func_93A6() && !::scripts\sp\specialist_MAYBE::func_2C95) {
+  if(!isDefined(level.player.helmet) || scripts\sp\utility::func_93A6() && !scripts\sp\specialist_MAYBE::func_2C95) {
     return 0;
   }
 

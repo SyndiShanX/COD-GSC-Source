@@ -37,7 +37,7 @@ main() {
   level.alliescapturing = [];
   level.axiscapturing = [];
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "domination";
@@ -780,10 +780,10 @@ placedompoint() {
       var_6.label = var_7;
       var_6 scripts\mp\gameobjects::setzonestatusicons(level.icondefend + var_7, level.iconneutral + var_7);
       var_6 scripts\mp\gameobjects::setvisibleteam("any");
-      var_6.onuse = ::scripts\mp\gametypes\obj_dom::dompoint_onuse;
-      var_6.onbeginuse = ::scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
-      var_6.onuseupdate = ::scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
-      var_6.onenduse = ::scripts\mp\gametypes\obj_dom::dompoint_onuseend;
+      var_6.onuse = scripts\mp\gametypes\obj_dom::dompoint_onuse;
+      var_6.onbeginuse = scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
+      var_6.onuseupdate = scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
+      var_6.onenduse = scripts\mp\gametypes\obj_dom::dompoint_onuseend;
       var_6.nousebar = 1;
       var_6.id = "domFlag";
       var_6.firstcapture = 1;

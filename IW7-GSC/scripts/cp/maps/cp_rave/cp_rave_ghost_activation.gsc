@@ -524,7 +524,7 @@ debug_wait_for_player_activation() {}
 
 reactive_ghost_n_skull_cabinet() {
   if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
-    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::hit_gns_cabinet_with_ben_franklin, ::complete_hit_gns_cabinet_with_ben_franklin, ::debug_hit_gns_cabinet_with_ben_franklin);
+    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::hit_gns_cabinet_with_ben_franklin, ::complete_hit_gns_cabinet_with_ben_franklin, ::debug_hit_gns_cabinet_with_ben_franklin);
     scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 1, ::blank, ::wait_for_player_activation, ::complete_clean_arcade_cabinet, ::debug_wait_for_player_activation);
   }
 

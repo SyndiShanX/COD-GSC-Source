@@ -401,7 +401,7 @@ func_1EC2(var_0, var_1, var_2, var_3, var_4) {
   if(isai(var_0)) {
     var_0.var_1286 = var_7;
     var_0.var_1180 = var_5;
-    var_0 lib_0A1E::func_2307(::scripts\anim\first_frame::main);
+    var_0 lib_0A1E::func_2307(scripts\anim\first_frame::main);
     return;
   }
 
@@ -433,11 +433,11 @@ func_1EAE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_0.var_11BB = var_6;
   var_0.var_11BC = var_7;
   if(getdvarint("ai_iw7", 0) == 1) {
-    var_0 lib_0A1E::func_2307(::scripts\anim\animmode::main, lib_0A1E::func_2385);
+    var_0 lib_0A1E::func_2307(scripts\anim\animmode::main, lib_0A1E::func_2385);
     return;
   }
 
-  var_0 animcustom(::scripts\anim\animmode::main);
+  var_0 animcustom(scripts\anim\animmode::main);
 }
 
 func_1EE7(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2107,7 +2107,7 @@ func_A888() {
 }
 
 func_F325(var_0, var_1) {
-  var_0.custommovetransition = ::scripts\anim\cover_arrival::custommovetransitionfunc;
+  var_0.custommovetransition = scripts\anim\cover_arrival::custommovetransitionfunc;
   var_0.var_10DCB = level.var_EC85[var_0.var_1FBB][var_1];
 }
 

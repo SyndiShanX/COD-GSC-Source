@@ -653,8 +653,8 @@ wait_for_painting_kills_complete(var_0, var_1, var_2) {
 }
 
 complete_weeping_angels_start() {
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
   scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::notify_activation_progress(5);
 }
 
@@ -1380,8 +1380,8 @@ paintings_activation_function(var_0, var_1) {
   level.painting_active = 0;
   var_0.painting_owner = undefined;
   var_1.inside_slow_sphere = 0;
-  level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
-  level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
+  level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
+  level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
   if(var_1.hidden_figures_hit >= 7) {
     level notify(var_0.name + "_done");
     level thread scripts\engine\utility::play_sound_in_space("part_pickup", var_0.origin);
@@ -1888,21 +1888,21 @@ upgrade_magic_wheel() {
 
 gns3_formation_movement() {
   level.formation_movements = [];
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(1, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_1_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(2, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_2_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(3, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_3_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(4, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_4_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(5, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_5_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(6, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_6_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(7, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_7_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(8, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_8_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(9, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_9_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(10, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_10_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(11, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_11_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(12, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_12_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(13, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_13_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(14, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_14_move_pattern);
-  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(15, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_15_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(1, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_1_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(2, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_2_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(3, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_3_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(4, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_4_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(5, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_5_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(6, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_6_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(7, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_7_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(8, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_8_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(9, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_9_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(10, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_10_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(11, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_11_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(12, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_12_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(13, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_13_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(14, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_14_move_pattern);
+  scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::register_formation_movements(15, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::formation_15_move_pattern);
 }
 
 register_ghost_form() {
@@ -2194,7 +2194,7 @@ reactivate_skullbuster_cabinet() {
       return;
     }
 
-    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::shoot_the_machine, ::complete_shoot_the_machine, ::debug_shoot_the_machine);
+    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::shoot_the_machine, ::complete_shoot_the_machine, ::debug_shoot_the_machine);
     scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 1, ::blank, ::wait_for_player_activation, ::complete_clean_arcade_cabinet, ::debug_wait_for_player_activation);
   }
 

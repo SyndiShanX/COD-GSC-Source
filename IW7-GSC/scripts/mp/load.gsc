@@ -24,8 +24,8 @@ main() {
     level.flags_lock = [];
   }
 
-  level.var_499A = ::scripts\mp\hud_util::createfontstring;
-  level.var_91B0 = ::scripts\mp\hud_util::setpoint;
+  level.var_499A = scripts\mp\hud_util::createfontstring;
+  level.var_91B0 = scripts\mp\hud_util::setpoint;
   thread scripts\mp\tweakables::init();
   if(!isDefined(level.func)) {
     level.func = [];

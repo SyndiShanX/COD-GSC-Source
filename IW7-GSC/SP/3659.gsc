@@ -343,9 +343,9 @@ func_D5E3() {
 
 func_CFD4() {
   var_0 = [];
-  var_0["offhandWeapons"] = func_3BE8("offhandWeapons", scripts\engine\utility::allow_offhand_weapons, ::scripts\engine\utility::isoffhandweaponsallowed, "!allow_offhand_weapons");
-  var_0["offhandPrimaryWeapons"] = func_3BE8("offhandPrimaryWeapons", scripts\engine\utility::allow_offhand_primary_weapons, ::scripts\engine\utility::isoffhandprimaryweaponsallowed, "!allow_offhand_primary_weapons");
-  var_0["offhandSecondaryWeapons"] = func_3BE8("offhandSecondaryWeapons", scripts\engine\utility::allow_offhand_secondary_weapons, ::scripts\engine\utility::isoffhandsecondaryweaponsallowed, "!allow_offhand_secondary_weapons");
+  var_0["offhandWeapons"] = func_3BE8("offhandWeapons", scripts\engine\utility::allow_offhand_weapons, scripts\engine\utility::isoffhandweaponsallowed, "!allow_offhand_weapons");
+  var_0["offhandPrimaryWeapons"] = func_3BE8("offhandPrimaryWeapons", scripts\engine\utility::allow_offhand_primary_weapons, scripts\engine\utility::isoffhandprimaryweaponsallowed, "!allow_offhand_primary_weapons");
+  var_0["offhandSecondaryWeapons"] = func_3BE8("offhandSecondaryWeapons", scripts\engine\utility::allow_offhand_secondary_weapons, scripts\engine\utility::isoffhandsecondaryweaponsallowed, "!allow_offhand_secondary_weapons");
   var_0["reload"] = func_3BE8("reload", scripts\engine\utility::allow_reload);
   level.player.var_1C69 = var_0;
 }

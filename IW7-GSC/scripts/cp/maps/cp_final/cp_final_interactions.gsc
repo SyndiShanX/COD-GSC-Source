@@ -5,17 +5,17 @@
 
 register_interactions() {
   registerdoorinteractions();
-  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, ::scripts\cp\maps\cp_final\cp_final_weapon_upgrade::weapon_upgrade_hint_func, ::scripts\cp\maps\cp_final\cp_final_weapon_upgrade::weapon_upgrade, 5000, 1, ::scripts\cp\maps\cp_final\cp_final_weapon_upgrade::init_weapon_upgrade);
+  scripts\cp\cp_interaction::register_interaction("weapon_upgrade", "pap", undefined, scripts\cp\maps\cp_final\cp_final_weapon_upgrade::weapon_upgrade_hint_func, scripts\cp\maps\cp_final\cp_final_weapon_upgrade::weapon_upgrade, 5000, 1, scripts\cp\maps\cp_final\cp_final_weapon_upgrade::init_weapon_upgrade);
   levelinteractionregistration(1, "pap_fusebox", undefined, undefined, ::blankhintfunc, ::pickupfuse, 0, 0, ::init_pap_fuses);
   register_afterlife_games();
   register_arcade_roms();
   register_pap_interactions();
   registeratminteractions();
-  levelinteractionregistration(1, "fig_1", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig1);
-  levelinteractionregistration(1, "fig_2", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig2);
-  levelinteractionregistration(1, "fig_3", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig3);
-  levelinteractionregistration(1, "fig_4", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, ::scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig4);
-  levelinteractionregistration(1, "emp_console", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_rhino_boss::empconsolehint, ::scripts\cp\maps\cp_final\cp_final_rhino_boss::empconsoleuse, 0, 0);
+  levelinteractionregistration(1, "fig_1", undefined, undefined, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig1);
+  levelinteractionregistration(1, "fig_2", undefined, undefined, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig2);
+  levelinteractionregistration(1, "fig_3", undefined, undefined, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig3);
+  levelinteractionregistration(1, "fig_4", undefined, undefined, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_hint, scripts\cp\maps\cp_final\cp_final_venomx_quest::fig_func, 0, 0, scripts\cp\maps\cp_final\cp_final_venomx_quest::init_fig4);
+  levelinteractionregistration(1, "emp_console", undefined, undefined, scripts\cp\maps\cp_final\cp_final_rhino_boss::empconsolehint, scripts\cp\maps\cp_final\cp_final_rhino_boss::empconsoleuse, 0, 0);
   scripts\cp\maps\cp_final\cp_final_fast_travel::register_portal_interactions();
   scripts\cp\maps\cp_final\cp_final_mpq::registermpqinteractions();
   scripts\cp\maps\cp_final\cp_final_venomx_quest::init_venomx_models_interactions();
@@ -57,20 +57,20 @@ registerdoorinteractions() {
   level.interaction_hintstrings["team_door_switch"] = &"CP_TOWN_INTERACTIONS_TEAM_DOOR_SWITCH";
   level.interaction_hintstrings["power_door_sliding"] = &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
   level.interaction_hintstrings["power_door_sliding"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  levelinteractionregistration(0, "debris_350", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 350, 0, undefined);
-  levelinteractionregistration(0, "debris_1000", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1000, 0, undefined);
-  levelinteractionregistration(0, "debris_1500", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1500, 0, undefined);
-  levelinteractionregistration(0, "debris_2000", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 2000, 0, undefined);
-  levelinteractionregistration(0, "debris_2500", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 2500, 0, undefined);
-  levelinteractionregistration(0, "debris_1250", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1250, 0, undefined);
-  levelinteractionregistration(0, "debris_750", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 750, 0, undefined);
-  levelinteractionregistration(0, "team_door_switch", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::use_team_door_switch, 250, 0, undefined);
+  levelinteractionregistration(0, "debris_350", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 350, 0, undefined);
+  levelinteractionregistration(0, "debris_1000", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1000, 0, undefined);
+  levelinteractionregistration(0, "debris_1500", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1500, 0, undefined);
+  levelinteractionregistration(0, "debris_2000", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 2000, 0, undefined);
+  levelinteractionregistration(0, "debris_2500", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 2500, 0, undefined);
+  levelinteractionregistration(0, "debris_1250", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 1250, 0, undefined);
+  levelinteractionregistration(0, "debris_750", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::clear_debris, 750, 0, undefined);
+  levelinteractionregistration(0, "team_door_switch", "door_buy", undefined, undefined, scripts\cp\zombies\interaction_openareas::use_team_door_switch, 250, 0, undefined);
   levelinteractionregistration(0, "facility_sliding_door_750", "door_buy", undefined, ::slidingdoorhint, ::openslidingdoor, 750, 0, ::initslidingdoor);
   levelinteractionregistration(0, "facility_sliding_door_1000", "door_buy", undefined, ::slidingdoorhint, ::openslidingdoor, 1000, 0, undefined);
   levelinteractionregistration(0, "facility_sliding_door_1250", "door_buy", undefined, ::slidingdoorhint, ::openslidingdoor, 1250, 0, undefined);
   levelinteractionregistration(0, "facility_sliding_door_1500", "door_buy", undefined, ::slidingdoorhint, ::openslidingdoor, 1250, 0, undefined);
   levelinteractionregistration(0, "facility_sliding_door_2000", "door_buy", undefined, ::slidingdoorhint, ::openslidingdoor, 2000, 0, undefined);
-  levelinteractionregistration(0, "power_door_sliding", "door_buy", undefined, undefined, undefined, 0, 1, ::scripts\cp\zombies\interaction_openareas::init_sliding_power_doors);
+  levelinteractionregistration(0, "power_door_sliding", "door_buy", undefined, undefined, undefined, 0, 1, scripts\cp\zombies\interaction_openareas::init_sliding_power_doors);
 }
 
 register_ritual_circle_interactions() {}
@@ -81,11 +81,11 @@ register_afterlife_games() {
   level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, ::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
-  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, ::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
-  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, ::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
-  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, ::scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
-  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, ::scripts\cp\zombies\interaction_racing::race_game_hint_logic, ::scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, ::scripts\cp\zombies\interaction_racing::init_all_race_games);
+  scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
+  scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
+  scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
+  scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife", "afterlife_game", undefined, undefined, scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game, 0, 0, scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
+  scripts\cp\cp_interaction::register_interaction("game_race", "arcade_game", undefined, scripts\cp\zombies\interaction_racing::race_game_hint_logic, scripts\cp\zombies\interaction_racing::use_race_game, 0, 1, scripts\cp\zombies\interaction_racing::init_all_race_games);
 }
 
 register_arcade_roms() {
@@ -97,18 +97,18 @@ register_arcade_roms() {
   level.interaction_hintstrings["arcade_keyston"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
   level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
-  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_oink", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_keyston", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_plaque", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
+  scripts\cp\cp_interaction::register_interaction("arcade_crackpo", "arcade_game", undefined, undefined, scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
 }
 
 register_crafting_interactions() {
-  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, ::scripts\cp\zombies\zombies_pillage::pillage_hint_func, ::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
+  scripts\cp\cp_interaction::register_interaction("pillage_item", undefined, undefined, scripts\cp\zombies\zombies_pillage::pillage_hint_func, scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
 }
 
 level_specific_wait_for_interaction_triggered(var_0) {
@@ -416,7 +416,7 @@ weaponinteractions() {
     var_3 = int(tablelookupbyrow("cp\zombies\cp_final_weapontable.csv", var_0, 4));
     var_4 = tablelookupbyrow("cp\zombies\cp_final_weapontable.csv", var_0, 1);
     level.interaction_hintstrings[var_4] = &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
-    levelinteractionregistration(0, var_4, "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_3);
+    levelinteractionregistration(0, var_4, "wall_buy", undefined, scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_3);
     var_0++;
   }
 }
@@ -424,7 +424,7 @@ weaponinteractions() {
 registeratminteractions() {
   level.interaction_hintstrings["atm_deposit"] = &"CP_TOWN_INTERACTIONS_ATM_DEPOSIT";
   level.interaction_hintstrings["atm_withdrawal"] = &"CP_TOWN_INTERACTIONS_ATM_WITHDRAWAL";
-  levelinteractionregistration(0, "atm_deposit", "atm", undefined, ::scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000, 0, undefined);
+  levelinteractionregistration(0, "atm_deposit", "atm", undefined, scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000, 0, undefined);
   levelinteractionregistration(0, "atm_withdrawal", "atm", undefined, ::atm_withdrawal_hint, ::atm_withdrawal, 0, 0, ::setup_atm_system);
 }
 
@@ -511,12 +511,12 @@ atm_withdrawal_hint(var_0, var_1) {
 }
 
 register_pap_interactions() {
-  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, ::pap_portal_hint, ::scripts\cp\maps\cp_final\cp_final_fast_travel::run_fast_travel_logic, 0, 1, ::init_pap_portal);
+  scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, ::pap_portal_hint, scripts\cp\maps\cp_final\cp_final_fast_travel::run_fast_travel_logic, 0, 1, ::init_pap_portal);
   levelinteractionregistration(1, "brute_interaction", undefined, undefined, ::blankhintfunc, ::use_brute_func, 0, 1, ::init_brute_func);
   levelinteractionregistration(1, "sasquatch_interaction", undefined, undefined, ::blankhintfunc, ::use_sasquatch_func, 0, 1, ::init_sasquatch_func);
   levelinteractionregistration(1, "reel_change", undefined, undefined, ::blankhintfunc, ::change_reel_func, 0, 1, ::init_reel_change_func);
   levelinteractionregistration(1, "zis_reel", undefined, undefined, ::blankhintfunc, ::pickup_zis_reel, 0, 1, ::init_zis_reel);
-  levelinteractionregistration(1, "construct_bridge", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_mpq::constructbridgehint, ::scripts\cp\maps\cp_final\cp_final_mpq::constructbridgeuse, 0, 1, ::scripts\cp\maps\cp_final\cp_final_mpq::constructbridgeinit);
+  levelinteractionregistration(1, "construct_bridge", undefined, undefined, scripts\cp\maps\cp_final\cp_final_mpq::constructbridgehint, scripts\cp\maps\cp_final\cp_final_mpq::constructbridgeuse, 0, 1, scripts\cp\maps\cp_final\cp_final_mpq::constructbridgeinit);
 }
 
 init_pap_fuses() {

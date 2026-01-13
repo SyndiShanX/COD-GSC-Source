@@ -1891,7 +1891,7 @@ kill_all_enemies(var_0) {
 }
 
 resume_cp_final() {
-  level.getspawnpoint = ::scripts\cp\cp_globallogic::defaultgetspawnpoint;
+  level.getspawnpoint = scripts\cp\cp_globallogic::defaultgetspawnpoint;
   level.force_respawn_location = undefined;
   level.zombies_paused = undefined;
   level.specialroundcounter = level.oldspecialroundcounter;

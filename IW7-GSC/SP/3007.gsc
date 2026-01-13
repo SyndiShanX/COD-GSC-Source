@@ -391,7 +391,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       var_9.var_4D94.var_2E = scripts\engine\utility::array_add(var_9.var_4D94.var_2E, var_3[var_1C]);
       if(isai(var_3[var_1C])) {
-        var_3[var_1C] scripts\engine\utility::delaythread(0.05, ::scripts\sp\utility::func_11624, var_9.var_4D94.var_10DED[var_1D]);
+        var_3[var_1C] scripts\engine\utility::delaythread(0.05, scripts\sp\utility::func_11624, var_9.var_4D94.var_10DED[var_1D]);
       }
 
       var_9.var_4D94.var_13060[var_1D] = 1;
@@ -2228,7 +2228,7 @@ func_CCE5(var_0, var_1, var_2) {
         foreach(var_8 in var_1) {
           self.var_C264 childthread scripts\engine\utility::play_loop_sound_on_entity(var_1);
           if(var_2 > 0) {
-            self.var_C264 scripts\sp\utility::func_50E4(var_2, ::scripts\engine\utility::stop_loop_sound_on_entity, var_1);
+            self.var_C264 scripts\sp\utility::func_50E4(var_2, scripts\engine\utility::stop_loop_sound_on_entity, var_1);
           }
         }
 
@@ -2245,7 +2245,7 @@ func_CCE5(var_0, var_1, var_2) {
     if(var_0A) {
       self.var_C264 childthread scripts\engine\utility::play_loop_sound_on_entity(var_6);
       if(var_8 > 0) {
-        self.var_C264 scripts\sp\utility::func_50E4(var_8, ::scripts\engine\utility::stop_loop_sound_on_entity, var_6);
+        self.var_C264 scripts\sp\utility::func_50E4(var_8, scripts\engine\utility::stop_loop_sound_on_entity, var_6);
         return;
       }
 

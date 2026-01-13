@@ -487,7 +487,7 @@ func_CC8A() {
 
 func_57D2(var_0) {
   var_1 = func_7D19(var_0);
-  func_CE00(var_1, undefined, ::scripts\anim\traverse\shared::func_89F8, "traverseAnim", self.var_4B94);
+  func_CE00(var_1, undefined, scripts\anim\traverse\shared::func_89F8, "traverseAnim", self.var_4B94);
 }
 
 func_BC42() {

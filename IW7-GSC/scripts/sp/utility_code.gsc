@@ -1221,11 +1221,11 @@ func_7615(var_0, var_1) {
   }
 
   if(var_1) {
-    func_22D4(var_0.fx, ::scripts\engine\utility::pauseeffect);
+    func_22D4(var_0.fx, scripts\engine\utility::pauseeffect);
     return;
   }
 
-  scripts\engine\utility::array_thread(var_0.fx, ::scripts\engine\utility::pauseeffect);
+  scripts\engine\utility::array_thread(var_0.fx, scripts\engine\utility::pauseeffect);
 }
 
 func_22D4(var_0, var_1, var_2) {
@@ -1289,7 +1289,7 @@ func_517B(var_0, var_1) {
 }
 
 func_F3A7(var_0, var_1) {
-  thread scripts\sp\utility::func_F3A5(var_0, var_1, ::scripts\sp\utility::empty_func, "set_flag_on_spawned");
+  thread scripts\sp\utility::func_F3A5(var_0, var_1, scripts\sp\utility::empty_func, "set_flag_on_spawned");
 }
 
 endondeath() {

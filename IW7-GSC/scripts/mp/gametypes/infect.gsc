@@ -37,7 +37,7 @@ main() {
   level.ontimelimit = ::ontimelimit;
   level.bypassclasschoicefunc = ::alwaysgamemodeclass;
   if(level.matchrules_damagemultiplier) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "infected";

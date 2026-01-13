@@ -1000,42 +1000,42 @@ loadout_updateplayerarchetype(var_0) {
     case "archetype_assault":
       var_5 = "assault_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archassault::applyarchetype;
+      var_7 = scripts\mp\archetypes\archassault::applyarchetype;
       var_8 = "vestlight";
       break;
 
     case "archetype_heavy":
       var_5 = "armor_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archheavy::applyarchetype;
+      var_7 = scripts\mp\archetypes\archheavy::applyarchetype;
       var_8 = "vestheavy";
       break;
 
     case "archetype_scout":
       var_5 = "scout_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archscout::applyarchetype;
+      var_7 = scripts\mp\archetypes\archscout::applyarchetype;
       var_8 = "c6servo";
       break;
 
     case "archetype_assassin":
       var_5 = "assassin_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archassassin::applyarchetype;
+      var_7 = scripts\mp\archetypes\archassassin::applyarchetype;
       var_8 = "vestftl";
       break;
 
     case "archetype_engineer":
       var_5 = "engineer_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archengineer::applyarchetype;
+      var_7 = scripts\mp\archetypes\archengineer::applyarchetype;
       var_8 = "vestlight";
       break;
 
     case "archetype_sniper":
       var_5 = "sniper_mp";
       var_6 = var_1 | var_2 | var_3;
-      var_7 = ::scripts\mp\archetypes\archsniper::applyarchetype;
+      var_7 = scripts\mp\archetypes\archsniper::applyarchetype;
       var_8 = "vestghost";
       break;
 

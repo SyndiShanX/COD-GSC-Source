@@ -1323,7 +1323,7 @@ func_13753(var_0, var_1, var_2) {
     var_0A.var_C1 = var_1;
   }
 
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility_code::func_13757, var_0A);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility_code::func_13757, var_0A);
   while(var_0A.var_C1 > 0) {
     var_0A waittill("waittill_dead guy died");
   }
@@ -1349,7 +1349,7 @@ func_13754(var_0, var_1, var_2) {
     var_7.var_C1 = var_1;
   }
 
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility_code::func_13756, var_7);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility_code::func_13756, var_7);
   while(var_7.var_C1 > 0) {
     var_7 waittill("waittill_dead_guy_dead_or_dying");
   }
@@ -5000,7 +5000,7 @@ func_57D5(var_0) {
   level.var_13711.var_E7E0 = [];
   level.var_13711.var_E80A = [];
   var_1.var_C1 = var_2.size;
-  var_1 scripts\engine\utility::array_levelthread(var_2, ::scripts\sp\utility_code::func_13774, var_3);
+  var_1 scripts\engine\utility::array_levelthread(var_2, scripts\sp\utility_code::func_13774, var_3);
   var_1 thread scripts\sp\utility_code::func_5767(var_7);
   var_1 endon("any_funcs_aborted");
   for(;;) {
@@ -5012,9 +5012,9 @@ func_57D5(var_0) {
   }
 
   var_1 notify("all_funcs_ended");
-  scripts\engine\utility::array_levelthread(var_4, ::scripts\sp\utility_code::func_68CE, []);
-  scripts\engine\utility::array_levelthread(var_5, ::scripts\sp\utility_code::func_68CC);
-  scripts\engine\utility::array_levelthread(var_6, ::scripts\sp\utility_code::func_68CD);
+  scripts\engine\utility::array_levelthread(var_4, scripts\sp\utility_code::func_68CE, []);
+  scripts\engine\utility::array_levelthread(var_5, scripts\sp\utility_code::func_68CC);
+  scripts\engine\utility::array_levelthread(var_6, scripts\sp\utility_code::func_68CD);
 }
 
 func_578A() {
@@ -5540,7 +5540,7 @@ func_12687() {
     var_0[var_0.size] = self.issplitscreen;
   }
 
-  scripts\engine\utility::array_levelthread(var_0, ::scripts\sp\utility_code::func_12688);
+  scripts\engine\utility::array_levelthread(var_0, scripts\sp\utility_code::func_12688);
 }
 
 func_C621(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -5841,14 +5841,14 @@ func_D2D1(var_0, var_1) {
     level.player.var_764D = var_2;
   }
 
-  var_3 = ::scripts\sp\utility_code::func_764E;
-  var_4 = ::scripts\sp\utility_code::func_764F;
+  var_3 = scripts\sp\utility_code::func_764E;
+  var_4 = scripts\sp\utility_code::func_764F;
   level.player thread func_D2CE(var_0, var_1, var_3, var_4, "player_speed_set");
 }
 
 func_CF97(var_0, var_1) {
-  var_2 = ::scripts\sp\utility_code::func_7647;
-  var_3 = ::scripts\sp\utility_code::func_7648;
+  var_2 = scripts\sp\utility_code::func_7647;
+  var_3 = scripts\sp\utility_code::func_7648;
   level.player thread func_D2CE(var_0, var_1, var_2, var_3, "player_bob_scale_set");
 }
 
@@ -5862,8 +5862,8 @@ func_2B76(var_0, var_1) {
     var_2.var_BCF5 = 1;
   }
 
-  var_3 = ::scripts\sp\utility_code::func_BCF0;
-  var_4 = ::scripts\sp\utility_code::func_BCF3;
+  var_3 = scripts\sp\utility_code::func_BCF0;
+  var_4 = scripts\sp\utility_code::func_BCF3;
   var_2 thread func_D2CE(var_0, var_1, var_3, var_4, "blend_movespeedscale");
 }
 
@@ -6348,7 +6348,7 @@ func_61FF(var_0) {
     func_558D();
   }
 
-  self.var_1096A = ::scripts\anim\animset::func_8CD8;
+  self.var_1096A = scripts\anim\animset::func_8CD8;
   self.custommoveanimset["run"] = scripts\anim\utility::func_B028("heat_run");
 }
 

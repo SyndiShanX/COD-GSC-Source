@@ -1126,7 +1126,7 @@ cleanuprkfightoverrides() {
   level.loot_time_out = undefined;
   level.dont_resume_wave_after_solo_afterlife = undefined;
   level.karate_zombie_model_list = level.old_karate_zombie_model_list;
-  level.getspawnpoint = ::scripts\cp\cp_globallogic::defaultgetspawnpoint;
+  level.getspawnpoint = scripts\cp\cp_globallogic::defaultgetspawnpoint;
 }
 
 unsetpgsettings() {

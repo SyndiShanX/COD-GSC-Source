@@ -514,7 +514,7 @@ func_193C(var_0, var_1) {
 func_5F7C(var_0) {
   level endon("stop_catching_up");
   level.player endon("death");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility::func_61E7);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility::func_61E7);
   for(;;) {
     foreach(var_2 in var_0) {
       var_0 = scripts\sp\utility::array_removedeadvehicles(var_0);
@@ -569,7 +569,7 @@ func_9B77() {
 
 func_10FE5(var_0) {
   level notify("stop_catching_up");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility::func_5514);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility::func_5514);
 }
 
 func_10FC2() {
@@ -1372,11 +1372,11 @@ func_A764(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_4)) {
-    var_4 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
+    var_4 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "trigger");
   }
 
   if(isDefined(var_2) && var_2) {
-    var_3 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "awaken");
+    var_3 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "awaken");
   }
 
   if(isDefined(var_4) || isDefined(var_2) && var_2) {

@@ -41,11 +41,11 @@ activate_pap(var_0) {
   var_5 = spawnfx(var_1, var_2.origin, anglesToForward(var_2.angles), anglestoup(var_2.angles));
   wait(0.5);
   triggerfx(var_4);
-  scripts\engine\utility::delaythread(0.05, ::scripts\engine\utility::play_loopsound_in_space, "zmb_packapunch_machine_idle_lp", var_3.origin);
+  scripts\engine\utility::delaythread(0.05, scripts\engine\utility::play_loopsound_in_space, "zmb_packapunch_machine_idle_lp", var_3.origin);
   wait(0.5);
   triggerfx(var_5);
   playsoundatpos(var_2.origin, "zmb_portal_powered_on_activate");
-  scripts\engine\utility::delaythread(0.5, ::scripts\engine\utility::play_loopsound_in_space, "zmb_portal_powered_on_activate_lp", var_2.origin);
+  scripts\engine\utility::delaythread(0.5, scripts\engine\utility::play_loopsound_in_space, "zmb_portal_powered_on_activate_lp", var_2.origin);
 }
 
 turn_on_room_exit_portal() {

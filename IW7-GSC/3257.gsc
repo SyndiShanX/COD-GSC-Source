@@ -10,13 +10,13 @@ main() {
   level.agent_funcs["generic_zombie"]["on_damaged"] = ::onzombiedamaged;
   level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::onzombiekilled;
-  level.in_room_check_func = ::scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
+  level.in_room_check_func = scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
   level.fnzombieshouldenterplayspace = ::zombieshouldenterplayspace;
   level.fnzombieenterplayspace = ::zombieenterplayspace;
   level.movemodefunc["generic_zombie"] = ::run_if_last_zombie;
   level.zombies_spawn_score_func = ::escape_spawn_score_func;
   level.current_room_index = 0;
-  level.fn_get_closest_entrance = ::scripts\cp\utility::get_closest_entrance;
+  level.fn_get_closest_entrance = scripts\cp\utility::get_closest_entrance;
 }
 
 escape_spawn_score_func() {

@@ -99,7 +99,7 @@ use_race_game(var_0, var_1) {
   var_1 notify("cancel_gascan");
   level.wave_num_at_start_of_game = level.wave_num;
   var_1 playlocalsound("arcade_insert_coin_02");
-  scripts\engine\utility::delaythread(0.2, ::scripts\engine\utility::play_sound_in_space, "arcade_horserace_gunshot", var_1.origin);
+  scripts\engine\utility::delaythread(0.2, scripts\engine\utility::play_sound_in_space, "arcade_horserace_gunshot", var_1.origin);
   if(var_0.script_location == "arcade") {
     if(!scripts\engine\utility::flag("arcade_race_pregame")) {
       scripts\engine\utility::flag_set("arcade_race_pregame");

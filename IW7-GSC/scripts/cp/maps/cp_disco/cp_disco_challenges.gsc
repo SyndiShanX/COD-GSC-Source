@@ -17,8 +17,8 @@ register_default_challenges() {
   scripts\cp\zombies\solo_challenges::register_challenge("crane_3_challenge", undefined, 0, ::challenge_success, undefined, ::activate_challenge, ::empty, undefined, ::update_disco_challenge);
   scripts\cp\zombies\solo_challenges::register_challenge("snake_3_challenge", undefined, 0, ::challenge_success, undefined, ::activate_challenge, ::empty, undefined, ::update_disco_challenge);
   scripts\cp\zombies\solo_challenges::register_challenge("dragon_3_challenge", undefined, 0, ::challenge_success, undefined, ::activate_challenge, ::empty, undefined, ::update_disco_challenge);
-  scripts\cp\zombies\solo_challenges::register_challenge("challenge_failed", undefined, 0, undefined, undefined, ::scripts\cp\zombies\solo_challenges::default_resetsuccess, ::scripts\cp\zombies\solo_challenges::default_resetsuccess, undefined, undefined);
-  scripts\cp\zombies\solo_challenges::register_challenge("challenge_success", undefined, 0, undefined, undefined, ::scripts\cp\zombies\solo_challenges::default_resetsuccess, ::scripts\cp\zombies\solo_challenges::default_resetsuccess, undefined, undefined);
+  scripts\cp\zombies\solo_challenges::register_challenge("challenge_failed", undefined, 0, undefined, undefined, scripts\cp\zombies\solo_challenges::default_resetsuccess, scripts\cp\zombies\solo_challenges::default_resetsuccess, undefined, undefined);
+  scripts\cp\zombies\solo_challenges::register_challenge("challenge_success", undefined, 0, undefined, undefined, scripts\cp\zombies\solo_challenges::default_resetsuccess, scripts\cp\zombies\solo_challenges::default_resetsuccess, undefined, undefined);
 }
 
 activate_challenge(var_0) {

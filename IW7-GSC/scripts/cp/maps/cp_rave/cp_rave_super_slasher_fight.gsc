@@ -9,8 +9,8 @@ init_super_slasher_quest() {
 }
 
 start_super_slasher_quest() {
-  scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 0, ::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_trapped, ::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_trapped, ::blank, ::debug_trap_survivor);
-  scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 1, ::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_released, ::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_released, ::debug_release_survivor, ::debug_release_survivor);
+  scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 0, scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_trapped, scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_trapped, ::blank, ::debug_trap_survivor);
+  scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 1, scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_released, scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_released, ::debug_release_survivor, ::debug_release_survivor);
   scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 2, ::init_get_survivor_to_island, ::get_survivor_to_island, ::complete_to_island, ::debug_get_survivor_to_island);
   scripts\cp\zombies\zombie_quest::register_quest_step("superslasher", 3, ::init_super_slasher_fight, ::super_slasher_fight, ::complete_fight, ::debug_super_slasher_fight);
 }
@@ -71,7 +71,7 @@ get_survivor_to_island() {
 
 complete_to_island() {
   scripts\cp\maps\cp_rave\cp_rave_boat::move_players_to_shore();
-  level.getspawnpoint = ::scripts\cp\maps\cp_rave\cp_rave::respawn_on_island;
+  level.getspawnpoint = scripts\cp\maps\cp_rave\cp_rave::respawn_on_island;
   scripts\engine\utility::flag_clear("survivor_released");
   level notify("end_boat_hotjoin");
   level.boat_vehicle vehicle_teleport(level.boat_start_node.origin, level.boat_start_node.angles);
@@ -142,7 +142,7 @@ super_slasher_fight() {
   level.superslasher.dont_cleanup = 1;
   level.superslasher.var_E0 = 1;
   level.superslasher thread put_on_happy_face(level.superslasher);
-  level.force_respawn_location = ::scripts\cp\maps\cp_rave\cp_rave::respawn_on_island;
+  level.force_respawn_location = scripts\cp\maps\cp_rave\cp_rave::respawn_on_island;
   soul_collection_sequence_init();
   thread scripts\cp\maps\cp_rave\cp_rave::deactivateadjacentvolumes();
   wait(2);
@@ -161,7 +161,7 @@ super_slasher_fight() {
   level.no_slasher = 0;
   level thread move_lost_and_found("cabin");
   level.force_respawn_location = undefined;
-  level.getspawnpoint = ::scripts\cp\cp_globallogic::defaultgetspawnpoint;
+  level.getspawnpoint = scripts\cp\cp_globallogic::defaultgetspawnpoint;
   level thread disableslasherpas();
   level.loot_time_out = undefined;
   scripts\engine\utility::flag_set("zombie_drop_powerups");

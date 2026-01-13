@@ -139,7 +139,7 @@ func_2A33(var_0) {
       self.var_2A2A = 0;
       self func_80A6();
       thread scripts\sp\utility::func_D2CA(0.05);
-      scripts\engine\utility::delaythread(0.1, ::scripts\engine\utility::stop_loop_sound_on_entity, "weap_steeldragon_lp");
+      scripts\engine\utility::delaythread(0.1, scripts\engine\utility::stop_loop_sound_on_entity, "weap_steeldragon_lp");
       if(self.var_2A2E) {
         scripts\sp\utility::play_sound_on_entity("weap_steeldragon_powerdown");
         var_1 = undefined;

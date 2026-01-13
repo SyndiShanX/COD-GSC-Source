@@ -1979,7 +1979,7 @@ func_13E76() {
         var_7 = func_B148(var_1);
         var_8 = rotatevector(var_7, var_3);
         var_6 physics_takecontrol(1, var_5 + (0, 0, randomfloatrange(-1, -0.5)), var_8);
-        var_6 scripts\engine\utility::delaythread(60, ::scripts\sp\utility::func_F1DE);
+        var_6 scripts\engine\utility::delaythread(60, scripts\sp\utility::func_F1DE);
       }
     }
 

@@ -41,14 +41,14 @@ main() {
   level.ononeleftevent = ::ononeleftevent;
   level.ontimelimit = ::ontimelimit;
   level.onnormaldeath = ::onnormaldeath;
-  level.gamemodemaydropweapon = ::scripts\mp\utility::isplayeroutsideofanybombsite;
+  level.gamemodemaydropweapon = scripts\mp\utility::isplayeroutsideofanybombsite;
   level.onobjectivecomplete = ::onbombexploded;
   level.allowlatecomers = 0;
   level.bombsplanted = 0;
   level.aplanted = 0;
   level.bplanted = 0;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "searchdestroy";

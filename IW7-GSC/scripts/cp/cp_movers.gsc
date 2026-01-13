@@ -245,13 +245,13 @@ script_mover_parse_targets() {
 
       case "triggerHide":
       case "triggerhide":
-        thread script_mover_func_on_notify(var_9, ::scripts\engine\utility::trigger_off, var_0A[2]);
+        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_off, var_0A[2]);
         break;
 
       case "triggerShow":
       case "triggershow":
         var_9 scripts\engine\utility::trigger_off();
-        thread script_mover_func_on_notify(var_9, ::scripts\engine\utility::trigger_on, var_0A[2]);
+        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_on, var_0A[2]);
         break;
 
       default:

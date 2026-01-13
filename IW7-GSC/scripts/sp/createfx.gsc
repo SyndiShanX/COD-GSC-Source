@@ -11,8 +11,8 @@ createfx() {
   clearstartpointtransients();
   level.var_position_player = ::func_position_player;
   level.var_position_player_get = ::func_position_player_get;
-  level.var_updatefx = ::scripts\common\createfx::restart_fx_looper;
-  level.var_process_fx_rotater = ::scripts\common\createfx::process_fx_rotater;
+  level.var_updatefx = scripts\common\createfx::restart_fx_looper;
+  level.var_process_fx_rotater = scripts\common\createfx::process_fx_rotater;
   level.var_player_speed = ::func_player_speed;
   level.mp_createfx = 0;
   scripts\engine\utility::array_call(getaiarray(), ::delete);

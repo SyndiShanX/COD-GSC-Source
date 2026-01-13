@@ -133,7 +133,7 @@ func_C97C(var_0) {
       }
     }
 
-    var_0C = ::scripts\anim\reactions::func_DD51;
+    var_0C = scripts\anim\reactions::func_DD51;
     var_0D = var_7.script_animation;
     var_0E = 1;
     var_0F = 0;

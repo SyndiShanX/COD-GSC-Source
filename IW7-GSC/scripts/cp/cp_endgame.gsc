@@ -91,7 +91,7 @@ endgame(var_0, var_1) {
   setomnvarforallclients("post_game_state", 2);
   func_56DA(var_0, var_1);
   setomnvarforallclients("post_game_state", 1);
-  var_0E = ::scripts\cp\cp_globallogic::spawnintermission;
+  var_0E = scripts\cp\cp_globallogic::spawnintermission;
   if(isDefined(level.var_4C58)) {
     var_0E = level.var_4C58;
   }

@@ -20,7 +20,7 @@ func_4661(var_0, var_1) {
   self.var_8C4B = 0;
   var_2 = spawnStruct();
   if(!self.logstring) {
-    var_2.var_BD1C = ::scripts\anim\cover_behavior::func_BD1C;
+    var_2.var_BD1C = scripts\anim\cover_behavior::func_BD1C;
   }
 
   var_2.var_B24A = ::func_B24A;

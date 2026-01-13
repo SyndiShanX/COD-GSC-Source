@@ -101,15 +101,15 @@ setupcallbacks() {
   level.onprecachegametype = ::blank;
   level.onstartgametype = ::blank;
   level.var_D3D5 = ::func_5048;
-  level.initagentscriptvariables = ::scripts\cp\cp_agent_utils::initagentscriptvariables;
-  level.setagentteam = ::scripts\cp\cp_agent_utils::set_agent_team;
-  level.agentvalidateattacker = ::scripts\cp\cp_agent_utils::validateattacker;
-  level.agentfunc = ::scripts\cp\cp_agent_utils::agentfunc;
-  level.getfreeagent = ::scripts\cp\cp_agent_utils::getfreeagent;
-  level.addtocharactersarray = ::scripts\cp\cp_agent_utils::addtocharactersarray;
-  level.callbackplayerlaststand = ::scripts\cp\cp_laststand::callback_defaultplayerlaststand;
-  level.endgame = ::scripts\cp\cp_endgame::endgame;
-  level.var_72BF = ::scripts\cp\cp_endgame::func_72BF;
+  level.initagentscriptvariables = scripts\cp\cp_agent_utils::initagentscriptvariables;
+  level.setagentteam = scripts\cp\cp_agent_utils::set_agent_team;
+  level.agentvalidateattacker = scripts\cp\cp_agent_utils::validateattacker;
+  level.agentfunc = scripts\cp\cp_agent_utils::agentfunc;
+  level.getfreeagent = scripts\cp\cp_agent_utils::getfreeagent;
+  level.addtocharactersarray = scripts\cp\cp_agent_utils::addtocharactersarray;
+  level.callbackplayerlaststand = scripts\cp\cp_laststand::callback_defaultplayerlaststand;
+  level.endgame = scripts\cp\cp_endgame::endgame;
+  level.var_72BF = scripts\cp\cp_endgame::func_72BF;
 }
 
 func_AE18() {

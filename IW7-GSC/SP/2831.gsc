@@ -687,8 +687,8 @@ func_489C(var_0, var_1, var_2) {
   var_2 waittill("aiAmbient_spawned");
   scripts\engine\utility::waitframe();
   var_3 = spawn("trigger_radius", self.origin, 0, var_1, var_1);
-  var_3 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "entitydeleted");
+  var_3 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "trigger");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "entitydeleted");
   scripts\sp\utility::func_57D6();
   var_3 delete();
   if(isDefined(self)) {
@@ -734,8 +734,8 @@ func_9DB6(var_0) {
 func_19FD() {
   wait(0.05);
   var_0 = spawn("trigger_radius", self.origin, 0, 512, 64);
-  var_0 scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "trigger");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "entitydeleted");
+  var_0 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "trigger");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "entitydeleted");
   scripts\sp\utility::func_57D6();
   var_0 delete();
   if(isDefined(self)) {
@@ -747,7 +747,7 @@ func_19FC(var_0, var_1) {
   self endon("entitydeleted");
   self setCanDamage(1);
   thread scripts\sp\utility::func_7748();
-  scripts\sp\utility::func_16B7(::scripts\sp\damagefeedback::func_4D4C);
+  scripts\sp\utility::func_16B7(scripts\sp\damagefeedback::func_4D4C);
   if(isDefined(var_0) && var_0) {
     self.type = "civilian";
   }

@@ -102,7 +102,7 @@ main() {
   self.a.reacttobulletchance = 0.8;
   self.a.var_D707 = undefined;
   self.a.var_10B53 = "stand";
-  self.var_3EF3 = ::scripts\anim\utility::func_3EF2;
+  self.var_3EF3 = scripts\anim\utility::func_3EF2;
   self.var_117C = 0;
   self.var_1300 = 0;
   thread func_6568();
@@ -379,8 +379,8 @@ func_6DE9() {
   func_9811();
   func_97C0();
   if(!isDefined(level.optionalstepeffectfunction)) {
-    anim.optionalstepeffectsmallfunction = ::scripts\anim\notetracks::func_D480;
-    anim.optionalstepeffectfunction = ::scripts\anim\notetracks::playfootstepeffect;
+    anim.optionalstepeffectsmallfunction = scripts\anim\notetracks::func_D480;
+    anim.optionalstepeffectfunction = scripts\anim\notetracks::playfootstepeffect;
   }
 
   if(!isDefined(level.optionalstepeffects)) {
@@ -392,11 +392,11 @@ func_6DE9() {
   }
 
   if(!isDefined(level.shootenemywrapper_func)) {
-    anim.shootenemywrapper_func = ::scripts\anim\utility::func_FE9D;
+    anim.shootenemywrapper_func = scripts\anim\utility::func_FE9D;
   }
 
   if(!isDefined(level.var_FED3)) {
-    anim.var_FED3 = ::scripts\anim\utility::func_FED2;
+    anim.var_FED3 = scripts\anim\utility::func_FED2;
   }
 
   level.fire_notetrack_functions["scripted"] = scripts\anim\notetracks::fire_straight;
@@ -666,13 +666,13 @@ func_6DEA() {
   anim.var_13CC8 = [];
   level.var_13CC8["c12"] = ::func_363B;
   anim.var_5667 = [];
-  anim.var_13CD3 = ::scripts\anim\shared::func_CB29;
+  anim.var_13CD3 = scripts\anim\shared::func_CB29;
   func_9811();
   func_97C0();
   func_9897();
   if(!isDefined(level.optionalstepeffectfunction)) {
-    anim.optionalstepeffectsmallfunction = ::scripts\anim\notetracks::func_D480;
-    anim.optionalstepeffectfunction = ::scripts\anim\notetracks::playfootstepeffect;
+    anim.optionalstepeffectsmallfunction = scripts\anim\notetracks::func_D480;
+    anim.optionalstepeffectfunction = scripts\anim\notetracks::playfootstepeffect;
   }
 
   if(!isDefined(level.optionalstepeffects)) {
@@ -684,11 +684,11 @@ func_6DEA() {
   }
 
   if(!isDefined(level.shootenemywrapper_func)) {
-    anim.shootenemywrapper_func = ::scripts\anim\utility::func_FE9D;
+    anim.shootenemywrapper_func = scripts\anim\utility::func_FE9D;
   }
 
   if(!isDefined(level.var_FED3)) {
-    anim.var_FED3 = ::scripts\anim\utility::func_FED2;
+    anim.var_FED3 = scripts\anim\utility::func_FED2;
   }
 
   anim.fire_notetrack_functions = [];

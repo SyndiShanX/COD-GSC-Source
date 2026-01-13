@@ -947,8 +947,8 @@ func_56C6(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_D3A9() {
-  var_0 = ::scripts\sp\utility::func_7751;
-  var_1 = ::scripts\sp\utility::func_2BC6;
+  var_0 = scripts\sp\utility::func_7751;
+  var_1 = scripts\sp\utility::func_2BC6;
   var_2 = [];
   var_2["MOD_GRENADE"] = var_0;
   var_2["MOD_GRENADE_SPLASH"] = var_0;

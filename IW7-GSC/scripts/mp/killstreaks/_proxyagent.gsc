@@ -151,27 +151,27 @@ func_DDA3(var_0) {
   var_1 = undefined;
   switch (var_0.loadoutarchetype) {
     case "archetype_assault":
-      var_1 = ::scripts\mp\archetypes\archassault::applyarchetype;
+      var_1 = scripts\mp\archetypes\archassault::applyarchetype;
       break;
 
     case "archetype_heavy":
-      var_1 = ::scripts\mp\archetypes\archheavy::applyarchetype;
+      var_1 = scripts\mp\archetypes\archheavy::applyarchetype;
       break;
 
     case "archetype_scout":
-      var_1 = ::scripts\mp\archetypes\archscout::applyarchetype;
+      var_1 = scripts\mp\archetypes\archscout::applyarchetype;
       break;
 
     case "archetype_assassin":
-      var_1 = ::scripts\mp\archetypes\archassassin::applyarchetype;
+      var_1 = scripts\mp\archetypes\archassassin::applyarchetype;
       break;
 
     case "archetype_engineer":
-      var_1 = ::scripts\mp\archetypes\archengineer::applyarchetype;
+      var_1 = scripts\mp\archetypes\archengineer::applyarchetype;
       break;
 
     case "archetype_sniper":
-      var_1 = ::scripts\mp\archetypes\archsniper::applyarchetype;
+      var_1 = scripts\mp\archetypes\archsniper::applyarchetype;
       break;
   }
 

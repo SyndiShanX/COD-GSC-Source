@@ -113,7 +113,7 @@ func_12B8C() {
 
 func_6743() {
   level.player thread scripts\sp\maps\europa\europa_util::func_12992();
-  level.player scripts\engine\utility::delaythread(5, ::scripts\sp\maps\europa\europa_util::func_12970);
+  level.player scripts\engine\utility::delaythread(5, scripts\sp\maps\europa\europa_util::func_12970);
 }
 
 func_115FA() {
@@ -129,9 +129,9 @@ func_115FA() {
 }
 
 func_1351D() {
-  level.player scripts\engine\utility::delaythread(0.15, ::scripts\sp\utility::func_D091, "ges_point_firm", level.var_10214);
+  level.player scripts\engine\utility::delaythread(0.15, scripts\sp\utility::func_D091, "ges_point_firm", level.var_10214);
   var_0 = ["europa_plr_sipestakepoint"];
-  scripts\engine\utility::delaythread(1.3, ::scripts\sp\utility::func_15F5, "cliffjump_friendlies_clear");
+  scripts\engine\utility::delaythread(1.3, scripts\sp\utility::func_15F5, "cliffjump_friendlies_clear");
   scripts\sp\maps\europa\europa_util::func_48BD(var_0);
   scripts\engine\utility::flag_set("cliffjumper_vo_finished");
   wait(1.8);
@@ -872,11 +872,11 @@ func_A77E() {
 }
 
 func_A781() {
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F415, 1);
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F416, 1);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], scripts\sp\utility::func_F415, 1);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], scripts\sp\utility::func_F416, 1);
   scripts\engine\utility::flag_wait("raise_platform");
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F415, 0);
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F416, 0);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], scripts\sp\utility::func_F416, 0);
 }
 
 func_F164() {
@@ -1621,8 +1621,8 @@ func_F11F() {
   thread func_3D9C();
   thread func_10FC3();
   self.var_4E46 = ::func_EF56;
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "stealthlight_attack");
-  scripts\sp\utility::func_178D(::scripts\engine\utility::flag_wait, "seeker_room_hot");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "stealthlight_attack");
+  scripts\sp\utility::func_178D(scripts\engine\utility::flag_wait, "seeker_room_hot");
   scripts\sp\utility::func_57D6();
   if(getdvarint("debug_europa")) {}
 
@@ -1682,7 +1682,7 @@ func_8463() {
   var_0D solid();
   var_0E = [var_5, var_6];
   level.player func_82C0("europa_airlock_room", 3);
-  var_6 scripts\engine\utility::delaythread(1, ::scripts\sp\utility::play_sound_on_entity, "airlock_entry_door_close");
+  var_6 scripts\engine\utility::delaythread(1, scripts\sp\utility::play_sound_on_entity, "airlock_entry_door_close");
   var_1 notify("stop_loop");
   scripts\engine\utility::flag_set("airlock_closing");
   var_1 thread scripts\sp\anim::func_1F2C(var_0E, "lab_airlock_close");
@@ -1713,11 +1713,11 @@ func_8463() {
 
 func_1AE2() {
   var_0 = getEntArray("europa_lights_airlock_green", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_lights_airlock_red", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 30);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 30);
   var_1 = getEntArray("europa_lights_airlock_red2", "targetname");
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 7);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 7);
   scripts\engine\utility::flag_wait("airlock_closing");
   wait(6);
   var_2 = getscriptablearray("airlock_monitor", "targetname");
@@ -1729,41 +1729,41 @@ func_1AE2() {
   wait(0.5);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "3", "4");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 28);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 7);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 28);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 7);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "4", "5");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 25);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 7);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 25);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 7);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "5", "6");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 20);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 6);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 20);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 6);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "6", "7");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 15);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 5);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 15);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 5);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "7", "8");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 10);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 3);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 10);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 3);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "8", "9");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 5);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 1);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 5);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 1);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "9", "10");
   wait(0.5);
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 1);
-  scripts\engine\utility::array_thread(var_1, ::scripts\sp\maps\europa\europa_util::func_AC87, 0.5);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 1);
+  scripts\engine\utility::array_thread(var_1, scripts\sp\maps\europa\europa_util::func_AC87, 0.5);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "10", "11");
   wait(0.5);
   scripts\sp\maps\europa\europa_util::func_EF3F(var_2, "root", "11", "12");
   var_0 = getEntArray("europa_lights_airlock_red", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_1 = getEntArray("europa_lights_airlock_red2", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC86);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC86);
   var_0 = getEntArray("europa_lights_airlock_green", "targetname");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\maps\europa\europa_util::func_AC87, 40);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\maps\europa\europa_util::func_AC87, 40);
 }
 
 func_1AC0(var_0, var_1) {
@@ -1844,7 +1844,7 @@ func_A744() {
   var_6.var_99F4 lib_0E46::func_48C4();
   var_6.var_99F4 waittill("trigger");
   level.player getrankinfoxpamt();
-  level.player scripts\engine\utility::delaythread(1.55, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_plr_antigravoutonmy");
+  level.player scripts\engine\utility::delaythread(1.55, scripts\sp\maps\europa\europa_util::func_134B7, "europa_plr_antigravoutonmy");
   thread scripts\sp\maps\europa\europa_util::func_8E46(0);
   level.var_EBBB thread func_2014(var_4);
   level.player thread func_2016(var_6);
@@ -1868,7 +1868,7 @@ func_A744() {
   level.player func_80A1();
   scripts\sp\utility::func_13753(var_5);
   scripts\engine\utility::flag_set("airlock_enemies_dead");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   scripts\engine\utility::flag_wait("antigrav_clear");
   foreach(var_1 in level.var_EBCA) {
     var_1.objective_state = var_1.var_C380;
@@ -1879,7 +1879,7 @@ func_A744() {
   scripts\sp\utility::func_15F5("after_two_kill_color_move");
   var_0B = scripts\sp\utility::func_107EA("locker_enemy_guard");
   if(isDefined(var_0B)) {
-    scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_5564);
+    scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_5564);
     var_0B thread func_110DA();
     var_0B thread func_54C1();
     var_0B.health = 50;
@@ -1887,7 +1887,7 @@ func_A744() {
     var_0B.var_4E46 = ::func_4E31;
     var_0B.ignoreme = 1;
     var_0B.objective_state = 0;
-    var_0B scripts\engine\utility::delaythread(2, ::scripts\sp\utility::func_F416, 0);
+    var_0B scripts\engine\utility::delaythread(2, scripts\sp\utility::func_F416, 0);
     return;
   }
 
@@ -1907,7 +1907,7 @@ func_18EA() {
 
   self.health = 20;
   self endon("death");
-  scripts\engine\utility::delaythread(6.5, ::scripts\sp\utility::func_54C6);
+  scripts\engine\utility::delaythread(6.5, scripts\sp\utility::func_54C6);
 }
 
 func_CD69() {
@@ -1921,7 +1921,7 @@ func_CD69() {
 }
 
 func_4E31() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_6224);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_6224);
   if(isDefined(self.var_D417)) {
     var_0 = ["europa_plr_hesdown", "europa_plr_watchyourcorners"];
   } else {
@@ -1929,7 +1929,7 @@ func_4E31() {
   }
 
   scripts\engine\utility::flag_set("straggler_dead");
-  level scripts\engine\utility::delaythread(1.1, ::scripts\sp\maps\europa\europa_util::func_48BD, var_0);
+  level scripts\engine\utility::delaythread(1.1, scripts\sp\maps\europa\europa_util::func_48BD, var_0);
   return 0;
 }
 
@@ -2196,8 +2196,8 @@ func_A745() {
 
 func_A797() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\engine\utility::delaythread(0.6, ::scripts\sp\maps\europa\europa_util::func_10690, "lab_airlock");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::delaythread(0.6, scripts\sp\maps\europa\europa_util::func_10690, "lab_airlock");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
   scripts\sp\utility::func_F5AF("lab_walk_start", [level.var_EBBB, level.var_EBBC, level.player]);
@@ -2217,7 +2217,7 @@ func_A793() {
   scripts\engine\utility::flag_wait("player_enters_glass_bridge");
   level.var_EBBC thread func_26AA();
   scripts\engine\utility::flag_wait("straggler_dead");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 1);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F415, 1);
   func_10F41();
   if(scripts\sp\utility::func_93A6()) {
     thread scripts\sp\specialist_MAYBE::func_2683();
@@ -2310,10 +2310,10 @@ func_E1C7() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   func_10F41();
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   scripts\sp\maps\europa\europa_util::func_EBC7();
   scripts\sp\utility::func_F5AF("research_start", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 1);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F415, 1);
   thread func_13DA2();
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
@@ -2394,8 +2394,8 @@ visionsetnakedforplayer() {
   thread func_26E5();
   scripts\engine\utility::flag_wait_any("office_hot", "axis_close");
   func_10F42();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 0);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F416, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F416, 0);
 }
 
 func_26E5() {
@@ -2495,12 +2495,12 @@ func_A788() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\utility::func_15F5("wonder_room_patroller_spawn");
   func_10F42();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   scripts\sp\utility::func_F5AF("start_lab_office_door", [level.var_EBBB, level.var_EBBC, level.player]);
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
   var_0 = [level.var_EBBB, level.var_EBBC];
-  scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
+  scripts\engine\utility::delaythread(1, scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
   scripts\sp\utility::func_15F5("office_door_color_trig");
   scripts\sp\utility::func_15F5("spawn_back_office_enemies");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
@@ -2508,18 +2508,18 @@ func_A788() {
 }
 
 func_A786() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 0);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F416, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_F416, 0);
   scripts\sp\utility::func_15F5("office_door_color_trig");
   thread func_1EDA();
   thread func_3385();
   var_0 = getaiunittypearray("all", "soldier");
-  scripts\engine\utility::array_thread(var_0, ::scripts\sp\utility::func_F2DA, 1);
+  scripts\engine\utility::array_thread(var_0, scripts\sp\utility::func_F2DA, 1);
   thread func_134E6();
   scripts\engine\utility::flag_wait("enter_office_door_area");
   scripts\sp\utility::func_2669("soldier_combat");
   level notify("stop_catching_up");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_5514);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_5514);
   thread func_4794();
   scripts\engine\utility::flag_wait("entering_office_exit");
   level notify("deploy_c6_lockers");
@@ -2759,8 +2759,8 @@ func_AF01() {
 }
 
 func_11600() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\maps\europa\europa_util::func_10FC2);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_61C7);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\maps\europa\europa_util::func_10FC2);
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_61C7);
   var_0 = getspawnerarray("back_office_enemies");
   scripts\engine\utility::play_sound_in_space("eu_enemy_incoming_2", var_0[0].origin);
   playworldsound("eu_enemy_incoming_3", var_0[1].origin);
@@ -2788,7 +2788,7 @@ func_5995() {
 func_33B1() {
   self endon("death");
   thread scripts\sp\utility::func_B14F();
-  scripts\engine\utility::delaythread(2.5, ::scripts\sp\utility::func_1101B);
+  scripts\engine\utility::delaythread(2.5, scripts\sp\utility::func_1101B);
 }
 
 func_4794() {
@@ -2835,10 +2835,10 @@ func_A76C() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_DC45, "raise");
   scripts\sp\utility::func_F5AF("lab_engineer_office_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set("entering_office_exit");
-  scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
+  scripts\engine\utility::delaythread(1, scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
   scripts\sp\utility::func_15F5("engineer_office_color_move");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
@@ -2943,7 +2943,7 @@ func_A789() {
   scripts\sp\utility::func_15F5("engineer_office_color_move");
   scripts\sp\maps\europa\europa_util::func_1368F("office_exit_area", 0);
   scripts\sp\utility::func_15F5("engineer_exit_color_move");
-  scripts\engine\utility::delaythread(0.4, ::scripts\sp\utility::func_15F5, "engineer_exit_color_move");
+  scripts\engine\utility::delaythread(0.4, scripts\sp\utility::func_15F5, "engineer_exit_color_move");
   scripts\sp\utility::func_28D7("axis");
   scripts\engine\utility::flag_set("cutter_bot_battle_finished");
   func_1C08();
@@ -2959,7 +2959,7 @@ func_A789() {
   thread func_BEFD();
   wait(1);
   var_0F = getEntArray("extra_corridor_klaxon_light", "script_noteworthy");
-  scripts\engine\utility::array_thread(var_0F, ::scripts\sp\maps\europa\europa_armory::func_A6ED);
+  scripts\engine\utility::array_thread(var_0F, scripts\sp\maps\europa\europa_armory::func_A6ED);
   scripts\sp\utility::func_15F5("into_armory_color_move");
   scripts\engine\utility::flag_wait("player_exit_office_into_armory");
   scripts\sp\maps\europa\europa_util::func_EBC4();

@@ -41,7 +41,7 @@ main() {
   level.current_vision_set = "cp_town_bw";
   level.vision_set_override = level.current_vision_set;
   scripts\cp\zombies\coop_wall_buys::init();
-  level.map_interaction_func = ::scripts\cp\maps\cp_town\cp_town_interactions::register_interactions;
+  level.map_interaction_func = scripts\cp\maps\cp_town\cp_town_interactions::register_interactions;
   level.custom_onplayerconnect_func = ::onplayerconnect;
   level.weapon_rank_event_table = "scripts\cp\maps\cp_town\cp_town_weaponrank_event.csv";
   level.coop_weapontable = "cp\cp_town_weapontable.csv";
@@ -52,10 +52,10 @@ main() {
   level.interaction_trigger_properties_func = ::interactiontriggerproperties;
   level.wait_to_be_revived_func = ::wait_to_be_revived_func;
   level.auto_melee_agent_type_check = ::auto_melee_agent_type_check;
-  level.callbackplayerdamage = ::scripts\cp\maps\cp_town\cp_town_damage::callback_townzombieplayerdamage;
+  level.callbackplayerdamage = scripts\cp\maps\cp_town\cp_town_damage::callback_townzombieplayerdamage;
   level.aa_ww_char_vo = ::town_choose_correct_vo_for_player;
   level.spawn_fx_func = ::cp_town_spawn_fx_func;
-  level.scriptablestatefunc = ::scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate;
+  level.scriptablestatefunc = scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate;
   level.introscreen_text_func = ::cp_town_introscreen_text;
   level.mutilation_mask_override_func = ::mutilation_mask_func;
   level.customhostmigrationend = ::townhostmigrationfunc;
@@ -78,8 +78,8 @@ main() {
   scripts\cp\maps\cp_town\cp_town_crab_boss_bomb::generate_nuclear_code();
   level.player_suit = "zom_dlc3_suit";
   level.player_run_suit = "zom_dlc3_suit_sprint";
-  level.player_interaction_monitor = ::scripts\cp\maps\cp_town\cp_town_interactions::town_player_interaction_monitor;
-  level.wait_for_interaction_func = ::scripts\cp\maps\cp_town\cp_town_interactions::town_wait_for_interaction_triggered;
+  level.player_interaction_monitor = scripts\cp\maps\cp_town\cp_town_interactions::town_player_interaction_monitor;
+  level.wait_for_interaction_func = scripts\cp\maps\cp_town\cp_town_interactions::town_wait_for_interaction_triggered;
   level.should_run_event_func = ::cp_town_should_run_event;
   level.event_funcs_init = ::cp_town_event_wave_init;
   level.available_event_func = ::cp_town_event_selection;
@@ -88,9 +88,9 @@ main() {
   level.custom_pillageinitfunc = ::pillage_init;
   level.pap_room_func = ::pap_machine_func;
   level.should_do_damage_check_func = ::cp_town_should_do_damage_check_func;
-  level.boss_spawn_func = ::scripts\cp\zombies\cp_town_spawning::cp_town_boss_spawn;
-  level.should_spawn_special_zombie_func = ::scripts\cp\zombies\cp_town_spawning::should_spawn_skater;
-  level.special_zombie_spawn_func = ::scripts\cp\zombies\cp_town_spawning::get_spawner_and_spawn_goons;
+  level.boss_spawn_func = scripts\cp\zombies\cp_town_spawning::cp_town_boss_spawn;
+  level.should_spawn_special_zombie_func = scripts\cp\zombies\cp_town_spawning::should_spawn_skater;
+  level.special_zombie_spawn_func = scripts\cp\zombies\cp_town_spawning::get_spawner_and_spawn_goons;
   level.goon_spawner_patch_func = ::cp_town_goon_patch_func;
   level.patch_update_spawners = ::patch_update_spawners;
   level.setup_direct_boss_fight_func = ::town_setup_direct_boss_fight_func;
@@ -104,7 +104,7 @@ main() {
   level.char_intro_music = ::play_char_intro_music;
   level.char_intro_gesture = ::play_char_intro_gesture;
   level.initial_active_volumes = ["morgue"];
-  level.drop_max_ammo_func = ::scripts\cp\loot::drop_loot;
+  level.drop_max_ammo_func = scripts\cp\loot::drop_loot;
   level thread scripts\cp\maps\cp_town\cp_town_vo::town_vo_init();
   level thread wait_for_pre_game_period();
   level thread watchforpowerontriggers();
@@ -118,7 +118,7 @@ main() {
   level thread scripts\cp\zombies\cp_town_spawning::cp_town_spawning_init();
   level thread setup_pa_speakers();
   level thread scripts\cp\maps\cp_town\cp_town_vo::power_nag();
-  level.purchase_area_vo = ::scripts\cp\maps\cp_town\cp_town_vo::purchase_area_vo;
+  level.purchase_area_vo = scripts\cp\maps\cp_town\cp_town_vo::purchase_area_vo;
   level thread water_triggers();
   scripts\cp\maps\cp_town\cp_town_crafting::init_crafting();
   scripts\engine\utility::flag_init("fuses_inserted");

@@ -285,7 +285,7 @@ make_vehicle_teleporter_interaction() {
   var_0.script_parameters = "";
   var_0.requires_power = 0;
   var_0.hint_func = ::vehicle_teleporter_hint_func;
-  var_0.activation_func = ::scripts\cp\maps\cp_town\cp_town_interactions::blankusefunc;
+  var_0.activation_func = scripts\cp\maps\cp_town\cp_town_interactions::blankusefunc;
   var_0.enabled = 1;
   var_0.disable_guided_interactions = 0;
   level.interactions["vehicle_teleporter"] = var_0;

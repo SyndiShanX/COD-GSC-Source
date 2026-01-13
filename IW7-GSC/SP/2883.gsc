@@ -306,7 +306,7 @@ func_DB73(var_0, var_1) {
   }
 
   self waittill("playing_interaction_scene");
-  scripts\engine\utility::delaythread(var_1, ::scripts\sp\interaction_manager::func_CE17, var_0);
+  scripts\engine\utility::delaythread(var_1, scripts\sp\interaction_manager::func_CE17, var_0);
 }
 
 func_CE1A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -577,7 +577,7 @@ func_CD53(var_0, var_1, var_2) {
     thread func_9A37();
     thread func_9A10();
   } else {
-    lib_0A1E::func_2307(::func_9A37, ::scripts\sp\interaction_manager::func_11048);
+    lib_0A1E::func_2307(::func_9A37, scripts\sp\interaction_manager::func_11048);
   }
 
   self waittill("reaction_end");
@@ -1096,7 +1096,7 @@ func_9A11() {
       self func_82AC(self.var_B004["additive"], 1, var_4, 1);
     }
 
-    scripts\engine\utility::delaythread(getanimlength(var_1A), ::scripts\sp\utility::func_65E1, "scene_end");
+    scripts\engine\utility::delaythread(getanimlength(var_1A), scripts\sp\utility::func_65E1, "scene_end");
     scripts\sp\utility::func_65E1("playing_interaction");
     thread scripts\sp\utility::func_65DE("playing_interaction", getanimlength(var_1A));
     var_1B = var_11;

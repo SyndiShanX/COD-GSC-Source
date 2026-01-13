@@ -820,7 +820,7 @@ get_arcade_interaction_next_to_ghost_n_skull() {
 
 reactive_ghost_n_skull_cabinet() {
   if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
-    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, ::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::brute_hit_arcade_cabinet_with_laser, ::complete_brute_hit_arcade_cabinet_with_laser, ::debug_brute_hit_arcade_cabinet_with_laser);
+    scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 0, scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet, ::brute_hit_arcade_cabinet_with_laser, ::complete_brute_hit_arcade_cabinet_with_laser, ::debug_brute_hit_arcade_cabinet_with_laser);
     scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost", 1, ::blank, ::wait_for_player_activation, ::complete_clean_arcade_cabinet, ::debug_wait_for_player_activation);
   }
 

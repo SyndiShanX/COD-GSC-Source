@@ -329,7 +329,7 @@ func_C76C(var_0, var_1) {
 
   scripts\engine\utility::array_thread(var_2, ::func_C769);
   if(var_3.size) {
-    scripts\engine\utility::array_thread(var_3, ::scripts\sp\utility::func_E08B, ::func_C76A);
+    scripts\engine\utility::array_thread(var_3, scripts\sp\utility::func_E08B, ::func_C76A);
   }
 }
 

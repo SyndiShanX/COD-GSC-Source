@@ -84,7 +84,7 @@ func_E810() {
 
 func_51C4() {
   scripts\sp\utility::func_228A(getEntArray("delete_on_load", "targetname"));
-  scripts\engine\utility::delaythread(0.05, ::scripts\sp\utility::func_228A, getEntArray("delete_on_firstframeend", "targetname"));
+  scripts\engine\utility::delaythread(0.05, scripts\sp\utility::func_228A, getEntArray("delete_on_firstframeend", "targetname"));
   if(!scripts\sp\utility::func_93A6()) {
     scripts\sp\utility::func_51D5("helmet_pickup", "script_noteworthy");
     scripts\sp\utility::func_51D5("nanoshot_pickup", "script_noteworthy");

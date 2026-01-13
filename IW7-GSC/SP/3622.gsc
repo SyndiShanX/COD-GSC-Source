@@ -770,7 +770,7 @@ func_F11E(var_0, var_1, var_2) {
 
     if(isDefined(self.triggerportableradarping) && level.player == self.triggerportableradarping) {
       var_4 = self.triggerportableradarping scripts\sp\detonategrenades::func_734E();
-      self.triggerportableradarping scripts\engine\utility::delaythread(0.1, ::scripts\sp\detonategrenades::func_734D, var_3, var_4, level.var_F10A.var_4D19);
+      self.triggerportableradarping scripts\engine\utility::delaythread(0.1, scripts\sp\detonategrenades::func_734D, var_3, var_4, level.var_F10A.var_4D19);
     }
 
     self notify("seeker_detonate_finish", var_3);

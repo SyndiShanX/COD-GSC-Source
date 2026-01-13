@@ -264,10 +264,10 @@ registermpqinteractions() {
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "puzzle_pieces", undefined, undefined, ::puzzlepiecehintfunc, ::puzzlepieceusefunc, 0, 0, ::blank);
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "entangler_button", undefined, undefined, ::entanglerbuttonhint, ::entanglerbuttonuse, 0, 0, ::initentanglerbutton);
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "entangler_spawner", undefined, undefined, ::useentanglerweaponhint, ::useentanglerweapon, 0, 0, ::initentanglerspawner);
-  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "puzzle_door_button", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::usepuzzlebutton, 0, 0, ::initpuzzlebutton);
-  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "neil_head_final_pos", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::neilheadfinalusefunc, 0, 0, ::initneilfinalpos);
-  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "neil_monitors", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::scripts\cp\maps\cp_final\cp_final_interactions::blankusefunc, 0, 0, ::initneilmonitors);
-  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "pap_bridge", undefined, undefined, ::scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::pickupbridgepiece, 0, 0, ::initbridgepieces);
+  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "puzzle_door_button", undefined, undefined, scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::usepuzzlebutton, 0, 0, ::initpuzzlebutton);
+  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "neil_head_final_pos", undefined, undefined, scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::neilheadfinalusefunc, 0, 0, ::initneilfinalpos);
+  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "neil_monitors", undefined, undefined, scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, scripts\cp\maps\cp_final\cp_final_interactions::blankusefunc, 0, 0, ::initneilmonitors);
+  scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "pap_bridge", undefined, undefined, scripts\cp\maps\cp_final\cp_final_interactions::blankhintfunc, ::pickupbridgepiece, 0, 0, ::initbridgepieces);
   spawnastronauts();
 }
 

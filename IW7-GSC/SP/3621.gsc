@@ -295,7 +295,7 @@ func_106C1(var_0) {
   self.trigger = spawn("trigger_radius", var_0, 7, level.player.var_612D.fgetarg, 40);
   if(isDefined(self.triggerportableradarping) && level.player == self.triggerportableradarping) {
     var_1 = self.triggerportableradarping scripts\sp\detonategrenades::func_734E();
-    self.triggerportableradarping scripts\engine\utility::delaythread(1.25, ::scripts\sp\detonategrenades::func_734D, var_0, var_1, level.player.var_612D.fgetarg);
+    self.triggerportableradarping scripts\engine\utility::delaythread(1.25, scripts\sp\detonategrenades::func_734D, var_0, var_1, level.player.var_612D.fgetarg);
   }
 
   for(;;) {
@@ -490,8 +490,8 @@ func_3D25(var_0) {
   var_1 = "emp_electrocute_lp";
   thread scripts\engine\utility::play_loop_sound_on_entity(var_1);
   var_2 = self.origin;
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::timeout, var_0);
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  scripts\sp\utility::func_178D(scripts\sp\utility::timeout, var_0);
   scripts\sp\utility::func_57D6();
   self notify("stop sound" + var_1);
   playworldsound("emp_nade_lp_end", var_2);
@@ -604,7 +604,7 @@ func_D044(var_0) {
     if(!scripts\engine\utility::flag_exist("in_vr_mode") || scripts\engine\utility::flag_exist("in_vr_mode") && !scripts\engine\utility::flag("in_vr_mode")) {
       playworldsound("gravity_explode_default", self.origin);
       playFX(level.var_7649["c12_impact"], self getEye());
-      scripts\engine\utility::delaythread(0.5, ::scripts\sp\utility::func_54C6);
+      scripts\engine\utility::delaythread(0.5, scripts\sp\utility::func_54C6);
     }
   } else {
     self dodamage(self.health * 0.3, self.origin, level.var_612D.var_A925, level.var_612D.var_A925, "MOD_GRENADE_SPLASH", "emp");
@@ -754,7 +754,7 @@ func_354C(var_0) {
   var_2 = distance2d(self.origin, var_0);
   var_3 = func_7977();
   self.var_9DD2 = 1;
-  scripts\engine\utility::delaythread(1.2, ::scripts\engine\utility::play_sound_in_space, "c12_selfdestruct_beep", self.origin);
+  scripts\engine\utility::delaythread(1.2, scripts\engine\utility::play_sound_in_space, "c12_selfdestruct_beep", self.origin);
   if(vectordot(anglestoright(self.angles), var_0 - self.origin) > 0) {
     var_4 = "right";
   } else {
@@ -996,7 +996,7 @@ func_6154(var_0) {
   var_2 = "stop sound" + var_1;
   thread scripts\sp\utility::func_C12D(var_2, var_0);
   thread scripts\sp\utility::func_C12D("emp_finished", var_0);
-  scripts\engine\utility::delaythread(var_0, ::scripts\sp\utility::play_sound_on_entity, "emp_nade_lp_end");
+  scripts\engine\utility::delaythread(var_0, scripts\sp\utility::play_sound_on_entity, "emp_nade_lp_end");
   var_3 = scripts\sp\utility::func_7CCC(self.model);
   playFXOnTag(level.var_7649["c8_death"], self, "tag_torso");
   wait(0.15);
@@ -1020,7 +1020,7 @@ func_6155(var_0) {
   var_2 = "stop sound" + var_1;
   thread scripts\sp\utility::func_C12D(var_2, var_0);
   thread scripts\sp\utility::func_C12D("emp_finished", var_0);
-  scripts\engine\utility::delaythread(var_0, ::scripts\sp\utility::play_sound_on_entity, "emp_nade_lp_end");
+  scripts\engine\utility::delaythread(var_0, scripts\sp\utility::play_sound_on_entity, "emp_nade_lp_end");
   var_3 = scripts\sp\utility::func_7CCC(self.model);
   var_3 = scripts\engine\utility::array_randomize(var_3);
   playFXOnTag(level.var_7649["c12_death"], self, "tag_torso");
@@ -1043,8 +1043,8 @@ func_6156(var_0, var_1) {
   var_2 = "emp_electrocute_lp";
   thread scripts\engine\utility::play_loop_sound_on_entity(var_2);
   var_3 = self.origin;
-  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "death");
-  scripts\sp\utility::func_178D(::scripts\sp\utility::timeout, var_0);
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  scripts\sp\utility::func_178D(scripts\sp\utility::timeout, var_0);
   scripts\sp\utility::func_57D6();
   self notify("stop sound" + var_2);
   playworldsound("emp_nade_lp_end", var_3);

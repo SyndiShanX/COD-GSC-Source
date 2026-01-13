@@ -29,11 +29,11 @@ main() {
   updategametypedvars();
   level.teambased = 1;
   level.onstartgametype = ::onstartgametype;
-  level.getspawnpoint = ::scripts\mp\gametypes\koth::getspawnpoint;
-  level.onplayerkilled = ::scripts\mp\gametypes\koth::onplayerkilled;
-  level.onrespawndelay = ::scripts\mp\gametypes\koth::getrespawndelay;
+  level.getspawnpoint = scripts\mp\gametypes\koth::getspawnpoint;
+  level.onplayerkilled = scripts\mp\gametypes\koth::onplayerkilled;
+  level.onrespawndelay = scripts\mp\gametypes\koth::getrespawndelay;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   game["dialog"]["gametype"] = "dropzone";

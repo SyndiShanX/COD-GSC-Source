@@ -48,7 +48,7 @@ func_13F51(var_0) {
 
 func_97A4(var_0) {
   var_0 endon("disconnect");
-  var_0.achievement_registration_func = ::scripts\cp\zombies\achievement::register_default_achievements;
+  var_0.achievement_registration_func = scripts\cp\zombies\achievement::register_default_achievements;
   scripts\cp\zombies\achievement::init_player_achievement(var_0);
   while(!isDefined(var_0.pers)) {
     wait(1);

@@ -423,7 +423,7 @@ func_131FA() {
       thread[[level.vehicle.var_116CE.var_4E23[self.var_380]]]();
     }
 
-    scripts\engine\utility::array_levelthread(self.var_E4FB, ::scripts\sp\vehicle_aianim::func_876B, var_1, self.var_380);
+    scripts\engine\utility::array_levelthread(self.var_E4FB, scripts\sp\vehicle_aianim::func_876B, var_1, self.var_380);
     thread func_A5CB(self.classname);
     thread func_A5BF(self.classname);
     thread scripts\sp\vehicle_lights::func_A5F2(self.classname);

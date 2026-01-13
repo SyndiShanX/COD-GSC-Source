@@ -39,7 +39,7 @@ main() {
   level.customcratefunc = ::createmuggercrates;
   level.assists_disabled = 1;
   if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-    level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
+    level.modifyplayerdamage = scripts\mp\damage::gamemodemodifyplayerdamage;
   }
 
   level.mugger_fx["vanish"] = loadfx("impacts\small_snowhit");

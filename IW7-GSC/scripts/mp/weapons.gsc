@@ -208,8 +208,8 @@ init() {
   var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
-  var_2.ontriggeredfunc = ::scripts\mp\equipment\fear_grenade::func_6BBC;
-  var_2.onexplodefunc = ::scripts\mp\equipment\fear_grenade::func_6BBB;
+  var_2.ontriggeredfunc = scripts\mp\equipment\fear_grenade::func_6BBC;
+  var_2.onexplodefunc = scripts\mp\equipment\fear_grenade::func_6BBB;
   var_2.headiconoffset = 20;
   var_2.minedetectionradius = 200;
   var_2.minedetectionheight = 100;
@@ -226,8 +226,8 @@ init() {
   var_2.onexplodesfx = "motion_explode_default";
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
-  var_2.ontriggeredfunc = ::scripts\mp\blackholegrenade::blackholeminetrigger;
-  var_2.onexplodefunc = ::scripts\mp\blackholegrenade::blackholemineexplode;
+  var_2.ontriggeredfunc = scripts\mp\blackholegrenade::blackholeminetrigger;
+  var_2.onexplodefunc = scripts\mp\blackholegrenade::blackholemineexplode;
   var_2.headiconoffset = 20;
   var_2.minedetectionradius = 200;
   var_2.minedetectionheight = 100;
@@ -244,8 +244,8 @@ init() {
   var_2.onexplodesfx = "motion_explode_default";
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
-  var_2.ontriggeredfunc = ::scripts\mp\shardball::func_FC5A;
-  var_2.onexplodefunc = ::scripts\mp\shardball::func_FC59;
+  var_2.ontriggeredfunc = scripts\mp\shardball::func_FC5A;
+  var_2.onexplodefunc = scripts\mp\shardball::func_FC59;
   var_2.headiconoffset = 20;
   var_2.minedetectionradius = 200;
   var_2.minedetectionheight = 100;
@@ -2003,7 +2003,7 @@ watchgrenadethrows() {
 
     case "shard_ball_mp":
       if(scripts\mp\powerloot::func_D779(var_1.power, "passive_grenade_to_mine")) {
-        thread mineused(var_1, ::func_1090D, ::scripts\mp\shardball::placementfailed);
+        thread mineused(var_1, ::func_1090D, scripts\mp\shardball::placementfailed);
       } else {
         thread scripts\mp\shardball::func_FC5B(var_1);
       }
@@ -3939,7 +3939,7 @@ explosivehandlemovers(var_0, var_1) {
   var_2.deathoverridecallback = ::movingplatformdetonate;
   var_2.endonstring = "death";
   if(!isDefined(var_1) || !var_1) {
-    var_2.invalidparentoverridecallback = ::scripts\mp\movers::moving_platform_empty_func;
+    var_2.invalidparentoverridecallback = scripts\mp\movers::moving_platform_empty_func;
   }
 
   thread scripts\mp\movers::handle_moving_platforms(var_2);
