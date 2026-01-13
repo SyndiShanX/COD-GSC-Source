@@ -461,7 +461,7 @@ onbombexploded(var_0, var_1, var_2, var_3, var_4) {
 
 setspecialloadout() {
   if(isusingmatchrulesdata() && scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", game["attackers"], 5, "class", "inUse")) {
-    level.sd_loadout[game["attackers"]] = ::scripts\mp\utility::getmatchrulesspecialclass(game["attackers"], 5);
+    level.sd_loadout[game["attackers"]] = scripts\mp\utility::getmatchrulesspecialclass(game["attackers"], 5);
   }
 }
 

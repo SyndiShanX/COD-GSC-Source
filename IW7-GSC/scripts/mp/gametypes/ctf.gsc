@@ -1122,11 +1122,11 @@ detachflag() {
 
 setspecialloadouts() {
   if(isusingmatchrulesdata() && getmatchrulesdata("defaultClasses", "axis", 5, "class", "inUse")) {
-    level.ctf_loadouts["axis"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 5);
+    level.ctf_loadouts["axis"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 5);
   }
 
   if(isusingmatchrulesdata() && getmatchrulesdata("defaultClasses", "allies", 5, "class", "inUse")) {
-    level.ctf_loadouts["allies"] = ::scripts\mp\utility::getmatchrulesspecialclass("allies", 5);
+    level.ctf_loadouts["allies"] = scripts\mp\utility::getmatchrulesspecialclass("allies", 5);
   }
 }
 

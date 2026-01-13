@@ -114,8 +114,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_motion_sensor";
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
-  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -132,8 +132,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_mobile_radar";
   var_2.bombsquadmodel = "weapon_mobile_radar_bombsquad";
-  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -179,8 +179,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_sonic_sensor_wm";
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
-  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -4041,7 +4041,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_8 = scripts\mp\utility::func_7921(var_6[var_7]);
     var_9 = distancesquared(var_0, var_8);
     if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_8, var_3, var_6[var_7])) {
-      var_4[var_4.size] = ::scripts\mp\utility::func_7920(var_6[var_7], var_8);
+      var_4[var_4.size] = scripts\mp\utility::func_7920(var_6[var_7], var_8);
     }
   }
 
@@ -4050,7 +4050,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_0B = scripts\mp\utility::func_791E(var_0A[var_7]);
     var_9 = distancesquared(var_0, var_0B);
     if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_0A[var_7])) {
-      var_4[var_4.size] = ::scripts\mp\utility::func_791D(var_0A[var_7], var_0B);
+      var_4[var_4.size] = scripts\mp\utility::func_791D(var_0A[var_7], var_0B);
     }
   }
 
@@ -4093,7 +4093,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
         case "mp_scramble_turret":
         case "mp_sam_turret":
         case "sentry_minigun_weak":
-          var_4[var_4.size] = ::scripts\mp\utility::func_7922(var_11, var_0B);
+          var_4[var_4.size] = scripts\mp\utility::func_7922(var_11, var_0B);
           break;
       }
     }
@@ -4108,7 +4108,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_0B = var_15.origin + (0, 0, 32);
     var_9 = distancesquared(var_0, var_0B);
     if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_15)) {
-      var_4[var_4.size] = ::scripts\mp\utility::func_791F(var_15, var_0B);
+      var_4[var_4.size] = scripts\mp\utility::func_791F(var_15, var_0B);
     }
   }
 

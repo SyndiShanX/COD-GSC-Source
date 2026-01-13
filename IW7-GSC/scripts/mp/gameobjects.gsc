@@ -105,17 +105,17 @@ func_4A29(var_0, var_1) {
   var_3.carriervisible = 0;
   var_3.visibleteam = "none";
   foreach(var_5 in level.teamnamelist) {
-    var_3.teamobjids[var_5] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_3.teamobjids[var_5] = scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_3.teamobjids[var_5] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_3.teamobjids[var_5], "invisible", var_3.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_3.teamobjids[var_5], var_5);
     }
 
-    var_3.objpoints[var_5] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+    var_3.objpoints[var_5] = scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
     var_3.objpoints[var_5].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_6 = "mlg_" + var_5;
-      var_3.objpoints[var_6] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+      var_3.objpoints[var_6] = scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
       var_3.objpoints[var_6].alpha = 0;
     }
   }
@@ -188,17 +188,17 @@ createcarryobject(var_0, var_1, var_2, var_3) {
   var_4.objidpingenemy = 0;
   var_4.objidpingfriendly = 0;
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }
@@ -1137,17 +1137,17 @@ createuseobject(var_0, var_1, var_2, var_3) {
   var_4.offset3d = var_3;
   var_4.var_4465 = [];
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }

@@ -279,14 +279,14 @@ func_10956() {
     case "cover_crouch":
       var_0 = [];
       if(scripts\engine\utility::damagelocationisany("head", "neck") && self.var_E3 > 135 || self.var_E3 <= -45) {
-        var_0[var_0.size] = ::scripts\anim\utility::func_B027("death", "cover_crouch_head");
+        var_0[var_0.size] = scripts\anim\utility::func_B027("death", "cover_crouch_head");
       }
 
       if(self.var_E3 > -45 && self.var_E3 <= 45) {
-        var_0[var_0.size] = ::scripts\anim\utility::func_B027("death", "cover_crouch_back");
+        var_0[var_0.size] = scripts\anim\utility::func_B027("death", "cover_crouch_back");
       }
 
-      var_0[var_0.size] = ::scripts\anim\utility::func_B027("death", "cover_crouch_default");
+      var_0[var_0.size] = scripts\anim\utility::func_B027("death", "cover_crouch_default");
       func_57FC(var_0);
       return 1;
 
@@ -684,7 +684,7 @@ getspectatingplayer() {
   }
 
   if(var_0.size == 0) {
-    var_0[var_0.size] = ::scripts\anim\utility::func_B027("death", "stand_backup_default");
+    var_0[var_0.size] = scripts\anim\utility::func_B027("death", "stand_backup_default");
   }
 
   if(!self.a.disablelongdeath && self.getcsplinepointtargetname == "none" && !isDefined(self.a.var_C87B)) {

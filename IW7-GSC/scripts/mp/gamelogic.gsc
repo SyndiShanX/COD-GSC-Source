@@ -1652,12 +1652,12 @@ callback_startgametype() {
     game["colors"]["red"] = (0.75, 0.25, 0.25);
     game["colors"]["green"] = (0.25, 0.75, 0.25);
     game["colors"]["yellow"] = (0.65, 0.65, 0);
-    game["strings"]["allies_name"] = ::scripts\mp\teams::isonladder("allies");
-    game["icons"]["allies"] = ::scripts\mp\teams::_meth_81B2("allies");
-    game["colors"]["allies"] = ::scripts\mp\teams::_meth_81A4("allies");
-    game["strings"]["axis_name"] = ::scripts\mp\teams::isonladder("axis");
-    game["icons"]["axis"] = ::scripts\mp\teams::_meth_81B2("axis");
-    game["colors"]["axis"] = ::scripts\mp\teams::_meth_81A4("axis");
+    game["strings"]["allies_name"] = scripts\mp\teams::isonladder("allies");
+    game["icons"]["allies"] = scripts\mp\teams::_meth_81B2("allies");
+    game["colors"]["allies"] = scripts\mp\teams::_meth_81A4("allies");
+    game["strings"]["axis_name"] = scripts\mp\teams::isonladder("axis");
+    game["icons"]["axis"] = scripts\mp\teams::_meth_81B2("axis");
+    game["colors"]["axis"] = scripts\mp\teams::_meth_81A4("axis");
     game["colors"]["friendly"] = (0.258824, 0.639216, 0.87451);
     game["colors"]["enemy"] = (0.929412, 0.231373, 0.141176);
     game["colors"]["contest"] = (1, 0.858824, 0);
@@ -2740,7 +2740,7 @@ checkmodeoverridetie(var_0) {
 
 func_6323() {
   if(isDefined(level.finalkillcam_winner)) {
-    level.finalkillcam_timegameended[level.finalkillcam_winner] = ::scripts\mp\utility\game::getsecondspassed();
+    level.finalkillcam_timegameended[level.finalkillcam_winner] = scripts\mp\utility\game::getsecondspassed();
     level notify("game_cleanup");
     level waittill("final_killcam_done");
   }

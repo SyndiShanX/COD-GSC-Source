@@ -412,7 +412,7 @@ loadout_updateclassteam(var_0, var_1, var_2) {
     var_0.loadoutprimary = "iw7_fists";
   } else {
     for(var_4 = 0; var_4 < 6; var_4++) {
-      var_0.loadoutprimaryattachments[var_4] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 0, "attachment", var_4);
+      var_0.loadoutprimaryattachments[var_4] = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 0, "attachment", var_4);
     }
   }
 
@@ -421,7 +421,7 @@ loadout_updateclassteam(var_0, var_1, var_2) {
   var_0.loadoutsecondary = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "weapon");
 
   for(var_4 = 0; var_4 < 5; var_4++) {
-    var_0.loadoutsecondaryattachments[var_4] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "attachment", var_4);
+    var_0.loadoutsecondaryattachments[var_4] = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "attachment", var_4);
   }
 
   var_0.loadoutsecondarycamo = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "camo");
@@ -1828,12 +1828,12 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   for(var_15 = 0; var_15 < var_1.size; var_15++) {
-    var_1[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_1[var_15], var_10);
+    var_1[var_15] = scripts\mp\utility\game::attachmentmap_tounique(var_1[var_15], var_10);
   }
 
   if(isDefined(var_9)) {
     for(var_15 = 0; var_15 < var_9.size; var_15++) {
-      var_9[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
+      var_9[var_15] = scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
     }
   }
 
@@ -1863,7 +1863,7 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_20 = scripts\mp\utility\game::attachmentmap_toextra(var_19);
 
     if(isDefined(var_20)) {
-      var_17[var_17.size] = ::scripts\mp\utility\game::attachmentmap_tounique(var_20, var_10);
+      var_17[var_17.size] = scripts\mp\utility\game::attachmentmap_tounique(var_20, var_10);
     }
   }
 

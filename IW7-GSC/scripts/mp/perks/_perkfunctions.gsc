@@ -3917,7 +3917,7 @@ bulletoutlineaddenemy(var_0, var_1, var_2) {
   var_4 = gettime() + var_1 * 1000;
   self.enemies[var_3] = var_0;
   if(!isDefined(self.enemyids[var_3])) {
-    self.enemyids[var_3] = ::scripts\mp\utility::outlineenableforplayer(var_0, "red", self.player, 1, 0, "perk");
+    self.enemyids[var_3] = scripts\mp\utility::outlineenableforplayer(var_0, "red", self.player, 1, 0, "perk");
   }
 
   if(!isDefined(self.enemyendtimes[var_3]) || !isDefined(var_2) || var_2) {

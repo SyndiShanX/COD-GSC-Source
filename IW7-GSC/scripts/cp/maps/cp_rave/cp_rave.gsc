@@ -1929,9 +1929,9 @@ wait_for_pre_game_period() {
   level thread setupmemoryquestitems();
   level thread init_boat_and_pap_quest_structs();
   level thread scripts\cp\maps\cp_rave\cp_rave_memory_quests::set_up_ring_quest_interactions();
-  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
-  level.agent_funcs["slasher"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
+  level.agent_funcs["slasher"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
 }
 
 init_magic_wheel() {
@@ -3266,10 +3266,10 @@ spawn_ground_pound_flowers(var_0) {
   var_7 = -1 * vectornormalize(var_6) * 50;
   var_8 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_detail", "physicscontents_vehicleclip", "physicscontents_vehicle", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
   var_9 = [];
-  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_4, 32, -100);
-  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_5, 32, -100);
-  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_6, 32, -100);
-  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_7, 32, -100);
+  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_4, 32, -100);
+  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_5, 32, -100);
+  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_6, 32, -100);
+  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_7, 32, -100);
   var_0A = [];
   foreach(var_0C in var_9) {
     var_0D = scripts\common\trace::ray_trace(var_3, var_0C, var_0, var_8);
@@ -4844,7 +4844,7 @@ cp_rave_should_run_event(var_0) {
 
 cp_rave_event_wave_init() {
   level.event_funcs["team_rave_mode"] = ::team_rave_event_func;
-  level.event_funcs["sasquatch_wave"] = ::scripts\cp\zombies\cp_rave_spawning::goon_spawn_event_func;
+  level.event_funcs["sasquatch_wave"] = scripts\cp\zombies\cp_rave_spawning::goon_spawn_event_func;
   init_rave_spawner_locations();
 }
 

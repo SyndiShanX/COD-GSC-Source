@@ -19,10 +19,10 @@ func_FAB0() {
 
   level.agent_definition["crab_mini"]["setup_func"] = ::setupagent;
   level.agent_definition["crab_mini"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["crab_mini"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
-  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["crab_mini"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
-  level.agent_funcs["crab_mini"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["gametype_on_killed"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
+  level.agent_funcs["crab_mini"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
   level.agent_funcs["crab_mini"]["on_killed"] = ::onkilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
@@ -33,7 +33,7 @@ func_FAB0() {
     level.damage_feedback_overrride = [];
   }
 
-  level.damage_feedback_overrride["crab_mini"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
+  level.damage_feedback_overrride["crab_mini"] = scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
   if(!isDefined(level.special_zombie_damage_func)) {
     level.special_zombie_damage_func = [];
   }

@@ -155,7 +155,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
         var_0F.var_C264 = var_0E;
         var_0F.physics_setgravitydynentscalar = "tag_origin";
         var_0F.name = "dropship_weapon_light";
-        var_9.var_4D94.fx["weapon_lights"] = ::scripts\engine\utility::array_add(var_9.var_4D94.fx["weapon_lights"], var_0F);
+        var_9.var_4D94.fx["weapon_lights"] = scripts\engine\utility::array_add(var_9.var_4D94.fx["weapon_lights"], var_0F);
       } else if(issubstr(var_0E.var_336, "fx_damage")) {
         var_0F = spawnStruct();
         var_0F.var_C264 = var_0E;
@@ -164,7 +164,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
           var_9.var_4D94.fx["damage"][var_0E.var_EE52] = [];
         }
 
-        var_9.var_4D94.fx["damage"][var_0E.var_EE52] = ::scripts\engine\utility::array_add(var_9.var_4D94.fx["damage"][var_0E.var_EE52], var_0F);
+        var_9.var_4D94.fx["damage"][var_0E.var_EE52] = scripts\engine\utility::array_add(var_9.var_4D94.fx["damage"][var_0E.var_EE52], var_0F);
       } else {
         var_9.var_4D94.var_C743 = scripts\engine\utility::array_add(var_9.var_4D94.var_C743, var_0E);
       }
@@ -439,7 +439,7 @@ func_F9C8(var_0, var_1) {
       self.var_4D94.lights[var_4][var_5] = [];
     }
 
-    self.var_4D94.lights[var_4][var_5] = ::scripts\engine\utility::array_add(self.var_4D94.lights[var_4][var_5], var_0);
+    self.var_4D94.lights[var_4][var_5] = scripts\engine\utility::array_add(self.var_4D94.lights[var_4][var_5], var_0);
   }
 }
 
@@ -480,7 +480,7 @@ func_106B9(var_0, var_1) {
   }
 
   var_2 = "tag_seat_" + var_0;
-  self.var_4D94.var_F08B[var_0] = ::scripts\sp\utility::func_10639("dropship_seat");
+  self.var_4D94.var_F08B[var_0] = scripts\sp\utility::func_10639("dropship_seat");
   self.var_4D94.var_F08B[var_0] linkto(self, var_2, (0, 0, 0), (0, 0, 0));
   self.var_4D94.var_F08B[var_0].var_1FBB = "dropship_seat_" + var_0;
   self.var_4D94.var_F08B[var_0] glinton(#animtree);

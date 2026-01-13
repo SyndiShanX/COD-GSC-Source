@@ -494,38 +494,38 @@ func_3F00(var_0, var_1, var_2) {
 
   var_3 = [];
   if(scripts\engine\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "lower_body");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "lower_body");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
   } else if(scripts\engine\utility::damagelocationisany("neck")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "neck");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "neck");
   } else if(scripts\engine\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_shoulder");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_shoulder");
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
   }
 
   if(self.var_E3 > 135 || self.var_E3 <= -135) {
     if(scripts\engine\utility::damagelocationisany("neck", "head", "helmet")) {
-      var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2");
+      var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2");
     }
 
     if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-      var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2");
+      var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2");
     }
   } else if(self.var_E3 > -45 && self.var_E3 <= 45) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "back");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "back");
   }
 
   var_4 = var_3.size > 0;
   if(!var_4 || randomint(100) < 15) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   if(randomint(100) < 10 && func_6DB2()) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default_firing");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default_firing");
   }
 
   return var_3[randomint(var_3.size)];
@@ -574,19 +574,19 @@ func_3F02(var_0, var_1, var_2) {
 
   var_3 = [];
   if(abs(self.var_E3) < 110) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_2");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_2");
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper");
   }
 
   if(!scripts\engine\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_upper_body");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_upper_body");
   }
 
   if(var_3.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
-    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default");
+    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default");
   }
 
   return var_3[randomint(var_3.size)];

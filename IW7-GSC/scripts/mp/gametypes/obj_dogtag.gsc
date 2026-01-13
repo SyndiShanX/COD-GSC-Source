@@ -92,7 +92,7 @@ spawndogtags(var_0, var_1, var_2) {
       }
     }
 
-    level.dogtags[var_0.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
+    level.dogtags[var_0.guid] = scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
     level.dogtags[var_0.guid] scripts\mp\gameobjects::setusetime(0);
     level.dogtags[var_0.guid].onuse = ::onuse;
     level.dogtags[var_0.guid].victim = var_0;

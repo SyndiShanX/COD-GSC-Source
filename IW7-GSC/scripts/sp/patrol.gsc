@@ -37,14 +37,14 @@ func_C97C(var_0) {
   func_AD3A();
   func_F4C7();
   var_1["ent"][1] = ::func_7CD9;
-  var_1["ent"][0] = ::scripts\sp\utility::func_7A8F;
+  var_1["ent"][0] = scripts\sp\utility::func_7A8F;
   var_1["node"][1] = ::func_7CDB;
   var_1["node"][0] = ::func_7A92;
   var_1["struct"][1] = ::func_7CE0;
-  var_1["struct"][0] = ::scripts\sp\utility::func_7A97;
-  var_2["ent"] = ::scripts\sp\utility::func_F3D3;
-  var_2["node"] = ::scripts\sp\utility::func_F3D9;
-  var_2["struct"] = ::scripts\sp\utility::func_F3D3;
+  var_1["struct"][0] = scripts\sp\utility::func_7A97;
+  var_2["ent"] = scripts\sp\utility::func_F3D3;
+  var_2["node"] = scripts\sp\utility::func_F3D9;
+  var_2["struct"] = scripts\sp\utility::func_F3D3;
   if(isDefined(var_0)) {
     self.target = var_0;
   }
@@ -83,7 +83,7 @@ func_C97C(var_0) {
 
   var_9 = [];
   var_9["pause"] = "patrol_idle_";
-  var_9["turn180"] = ::scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
+  var_9["turn180"] = scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
   var_9["smoke"] = "patrol_idle_smoke";
   var_9["stretch"] = "patrol_idle_stretch";
   var_9["checkphone"] = "patrol_idle_checkphone";

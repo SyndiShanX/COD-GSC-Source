@@ -193,7 +193,7 @@ onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
     if(isai(self)) {
-      self.pers["rankxp"] = ::scripts\mp\utility::get_rank_xp_for_bot();
+      self.pers["rankxp"] = scripts\mp\utility::get_rank_xp_for_bot();
     } else if(!level.rankedmatch) {
       self.pers["rankxp"] = 0;
     }

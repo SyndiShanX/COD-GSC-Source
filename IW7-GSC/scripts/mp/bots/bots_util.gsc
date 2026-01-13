@@ -52,7 +52,7 @@ bot_set_difficulty(var_0) {
 
   self botsetdifficulty(var_0);
   if(isplayer(self)) {
-    self.pers["rankxp"] = ::scripts\mp\utility::get_rank_xp_for_bot();
+    self.pers["rankxp"] = scripts\mp\utility::get_rank_xp_for_bot();
     scripts\mp\rank::playerupdaterank();
   }
 }
@@ -211,7 +211,7 @@ bot_cache_entrances_to_bombzones() {
   var_1 = [];
   var_2 = 0;
   foreach(var_4 in level.bombzones) {
-    var_0[var_2] = ::scripts\engine\utility::random(var_4.bottargets).origin;
+    var_0[var_2] = scripts\engine\utility::random(var_4.bottargets).origin;
     var_1[var_2] = "zone" + var_4.label;
     var_2++;
   }
@@ -1415,7 +1415,7 @@ bot_monitor_enemy_camp_spots(var_0) {
         level.enemy_camp_spots[var_3.team] = var_3 getclosestenemysqdist(1);
         if(isDefined(level.enemy_camp_spots[var_3.team])) {
           if(!isDefined(level.enemy_camp_assassin_goal[var_3.team]) || !scripts\engine\utility::array_contains(level.enemy_camp_spots[var_3.team], level.enemy_camp_assassin_goal[var_3.team])) {
-            level.enemy_camp_assassin_goal[var_3.team] = ::scripts\engine\utility::random(level.enemy_camp_spots[var_3.team]);
+            level.enemy_camp_assassin_goal[var_3.team] = scripts\engine\utility::random(level.enemy_camp_spots[var_3.team]);
           }
 
           if(isDefined(level.enemy_camp_assassin_goal[var_3.team])) {

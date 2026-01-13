@@ -20,7 +20,7 @@ func_7AA4() {
   var_0["trigger_multiple_compass"] = ::func_12769;
   var_0["trigger_multiple_fx_volume"] = ::func_1276E;
   var_0["trigger_multiple_kleenex"] = ::func_12770;
-  var_0["trigger_multiple_light_sunshadow"] = ::scripts\sp\lights::func_11203;
+  var_0["trigger_multiple_light_sunshadow"] = scripts\sp\lights::func_11203;
   var_0["trigger_multiple_jackal_boundary_autoturn"] = ::func_12759;
   var_0["trigger_multiple_jackal_boundary_warning"] = ::func_1275B;
   var_0["trigger_multiple_jackal_boundary_push"] = ::func_1275A;
@@ -29,9 +29,9 @@ func_7AA4() {
   var_0["trigger_multiple_arbitrary_up"] = ::func_12723;
   var_0["trigger_multiple_spacejump"] = ::func_12794;
   if(!scripts\sp\starts::func_9C4B()) {
-    var_0["trigger_multiple_autosave"] = ::scripts\sp\autosave::func_12724;
-    var_0["trigger_multiple_spawn"] = ::lib_0B77::func_12797;
-    var_0["trigger_multiple_spawn_reinforcement"] = ::lib_0B77::func_12798;
+    var_0["trigger_multiple_autosave"] = scripts\sp\autosave::func_12724;
+    var_0["trigger_multiple_spawn"] = lib_0B77::func_12797;
+    var_0["trigger_multiple_spawn_reinforcement"] = lib_0B77::func_12798;
   }
 
   var_0["trigger_multiple_slide"] = ::func_12792;
@@ -45,14 +45,14 @@ func_7AA4() {
   var_0["trigger_multiple_friendly_stop_respawn"] = ::trigger_friendly_stop_respawn;
   var_0["trigger_multiple_physics"] = ::func_1277E;
   var_0["trigger_multiple_fx_watersheeting"] = ::func_1276F;
-  var_0["trigger_multiple_fakeactor_move"] = ::scripts\sp\fakeactor::func_12735;
-  var_0["trigger_multiple_fakeactor_node_disable"] = ::scripts\sp\fakeactor::func_12736;
-  var_0["trigger_multiple_fakeactor_node_enable"] = ::scripts\sp\fakeactor::func_12738;
-  var_0["trigger_multiple_fakeactor_node_disablegroup"] = ::scripts\sp\fakeactor::func_12737;
-  var_0["trigger_multiple_fakeactor_node_enablegroup"] = ::scripts\sp\fakeactor::func_12739;
-  var_0["trigger_multiple_fakeactor_node_passthrough"] = ::scripts\sp\fakeactor::func_1273B;
-  var_0["trigger_multiple_fakeactor_node_lock"] = ::scripts\sp\fakeactor::func_1273A;
-  var_0["trigger_multiple_geo_mover"] = ::scripts\sp\geo_mover::func_12764;
+  var_0["trigger_multiple_fakeactor_move"] = scripts\sp\fakeactor::func_12735;
+  var_0["trigger_multiple_fakeactor_node_disable"] = scripts\sp\fakeactor::func_12736;
+  var_0["trigger_multiple_fakeactor_node_enable"] = scripts\sp\fakeactor::func_12738;
+  var_0["trigger_multiple_fakeactor_node_disablegroup"] = scripts\sp\fakeactor::func_12737;
+  var_0["trigger_multiple_fakeactor_node_enablegroup"] = scripts\sp\fakeactor::func_12739;
+  var_0["trigger_multiple_fakeactor_node_passthrough"] = scripts\sp\fakeactor::func_1273B;
+  var_0["trigger_multiple_fakeactor_node_lock"] = scripts\sp\fakeactor::func_1273A;
+  var_0["trigger_multiple_geo_mover"] = scripts\sp\geo_mover::func_12764;
   var_0["trigger_multiple_transient"] = ::func_12773;
   var_0["trigger_multiple_fire"] = ::func_1273C;
   var_0["trigger_radius_fire"] = ::func_1273C;
@@ -76,21 +76,21 @@ func_1276F(var_0) {
 
 func_7AA5() {
   var_0 = [];
-  var_0["friendly_mgTurret"] = ::lib_0B77::func_73D9;
+  var_0["friendly_mgTurret"] = lib_0B77::func_73D9;
   if(!scripts\sp\starts::func_9C4B()) {
-    var_0["camper_spawner"] = ::lib_0B77::camper_trigger_think;
-    var_0["flood_spawner"] = ::lib_0B77::func_6F5D;
-    var_0["trigger_spawner"] = ::lib_0B77::func_12797;
-    var_0["trigger_autosave"] = ::scripts\sp\autosave::func_12724;
+    var_0["camper_spawner"] = lib_0B77::camper_trigger_think;
+    var_0["flood_spawner"] = lib_0B77::func_6F5D;
+    var_0["trigger_spawner"] = lib_0B77::func_12797;
+    var_0["trigger_autosave"] = scripts\sp\autosave::func_12724;
     var_0["trigger_spawngroup"] = ::func_1279A;
     var_0["trigger_vehicle_spline_spawn"] = ::func_127AC;
-    var_0["trigger_vehicle_spawn"] = ::lib_0B77::func_12797;
-    var_0["random_spawn"] = ::lib_0B77::func_DC9B;
+    var_0["trigger_vehicle_spawn"] = lib_0B77::func_12797;
+    var_0["random_spawn"] = lib_0B77::func_DC9B;
   }
 
-  var_0["autosave_now"] = ::scripts\sp\autosave::func_2671;
-  var_0["trigger_autosave_tactical"] = ::scripts\sp\autosave::func_12727;
-  var_0["trigger_autosave_stealth"] = ::scripts\sp\autosave::func_12726;
+  var_0["autosave_now"] = scripts\sp\autosave::func_2671;
+  var_0["trigger_autosave_tactical"] = scripts\sp\autosave::func_12727;
+  var_0["trigger_autosave_stealth"] = scripts\sp\autosave::func_12726;
   var_0["trigger_unlock"] = ::func_127A8;
   var_0["trigger_lookat"] = ::func_12760;
   var_0["trigger_looking"] = ::func_12762;
@@ -106,8 +106,8 @@ func_7AA5() {
   var_0["trigger_delete"] = ::func_127A6;
   var_0["trigger_delete_on_touch"] = ::func_12731;
   var_0["trigger_off"] = ::func_127A6;
-  var_0["trigger_outdoor"] = ::lib_0B77::func_C75A;
-  var_0["trigger_indoor"] = ::lib_0B77::func_9409;
+  var_0["trigger_outdoor"] = lib_0B77::func_C75A;
+  var_0["trigger_indoor"] = lib_0B77::func_9409;
   var_0["trigger_hint"] = ::func_1274E;
   var_0["trigger_grenade_at_player"] = ::func_127A5;
   var_0["flag_on_cleared"] = ::func_1273E;
@@ -116,7 +116,7 @@ func_7AA5() {
   var_0["trigger_slide"] = ::func_12792;
   var_0["trigger_dooropen"] = ::func_12734;
   var_0["stealth_shadow"] = ::func_1279C;
-  var_0["geo_mover"] = ::scripts\sp\geo_mover::func_12764;
+  var_0["geo_mover"] = scripts\sp\geo_mover::func_12764;
   var_0["no_crouch_or_prone"] = ::func_12775;
   var_0["no_prone"] = ::func_12776;
   return var_0;

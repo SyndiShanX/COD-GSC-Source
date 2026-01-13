@@ -369,14 +369,14 @@ func_7E54() {
 
 _meth_8174(var_0, var_1, var_2, var_3) {
   var_4 = [];
-  var_4[5] = ::scripts\asm\asm::func_235C(1, var_0, var_2, var_3);
-  var_4[4] = ::scripts\asm\asm::func_235C(2, var_0, var_2, var_3);
-  var_4[3] = ::scripts\asm\asm::func_235C(3, var_0, var_2, var_3);
-  var_4[6] = ::scripts\asm\asm::func_235C(4, var_0, var_2, var_3);
-  var_4[2] = ::scripts\asm\asm::func_235C(6, var_0, var_2, var_3);
-  var_4[7] = ::scripts\asm\asm::func_235C(7, var_0, var_2, var_3);
-  var_4[0] = ::scripts\asm\asm::func_235C(8, var_0, var_2, var_3);
-  var_4[1] = ::scripts\asm\asm::func_235C(9, var_0, var_2, var_3);
+  var_4[5] = scripts\asm\asm::func_235C(1, var_0, var_2, var_3);
+  var_4[4] = scripts\asm\asm::func_235C(2, var_0, var_2, var_3);
+  var_4[3] = scripts\asm\asm::func_235C(3, var_0, var_2, var_3);
+  var_4[6] = scripts\asm\asm::func_235C(4, var_0, var_2, var_3);
+  var_4[2] = scripts\asm\asm::func_235C(6, var_0, var_2, var_3);
+  var_4[7] = scripts\asm\asm::func_235C(7, var_0, var_2, var_3);
+  var_4[0] = scripts\asm\asm::func_235C(8, var_0, var_2, var_3);
+  var_4[1] = scripts\asm\asm::func_235C(9, var_0, var_2, var_3);
   var_4[8] = var_4[0];
   return var_4;
 }

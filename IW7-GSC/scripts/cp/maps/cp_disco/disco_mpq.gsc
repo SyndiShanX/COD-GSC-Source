@@ -1238,12 +1238,12 @@ p2t2_5_rat_king_puzzle() {
 solve_word_logic(var_0) {
   level endon("game_ended");
   var_1 = [];
-  var_1[0] = ::scripts\engine\utility::getstruct("letter_puzzle_solve_struct", "targetname");
+  var_1[0] = scripts\engine\utility::getstruct("letter_puzzle_solve_struct", "targetname");
   level.bchartoggle = 0;
   level.cur_puzzle_letter = undefined;
   level.rooftopcypherglyphs = [];
   while(isDefined(var_1[var_1.size - 1].target)) {
-    var_1[var_1.size] = ::scripts\engine\utility::getstruct(var_1[var_1.size - 1].target, "targetname");
+    var_1[var_1.size] = scripts\engine\utility::getstruct(var_1[var_1.size - 1].target, "targetname");
     wait(0.05);
   }
 

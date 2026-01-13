@@ -976,7 +976,7 @@ func_39D3(var_0) {
       var_1[var_5] = [];
     }
 
-    var_1[var_5] = ::scripts\engine\utility::array_add(var_1[var_5], var_4);
+    var_1[var_5] = scripts\engine\utility::array_add(var_1[var_5], var_4);
   }
 
   return var_1;

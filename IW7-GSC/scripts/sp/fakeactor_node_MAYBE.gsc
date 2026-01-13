@@ -99,7 +99,7 @@ func_6B28() {
       level.var_6B23[var_2] = [];
     }
 
-    level.var_6B23[var_2] = ::scripts\engine\utility::array_add(level.var_6B23[var_2], self);
+    level.var_6B23[var_2] = scripts\engine\utility::array_add(level.var_6B23[var_2], self);
   }
 }
 

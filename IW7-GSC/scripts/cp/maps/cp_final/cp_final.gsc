@@ -721,15 +721,15 @@ registerscriptedagents() {
   level.var_C4BE = ::scripts\mp\agents\zombie_dlc4\zombie_dlc4_agent::onzombiekilled;
   scripts\mp\agents\karatemaster\karatemaster_agent_dlc4::registerscriptedagent();
   scripts\mp\agents\slasher\slasher_agent_dlc4::registerscriptedagent();
-  level.agent_funcs["skeleton"]["on_damaged"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
+  level.agent_funcs["skeleton"]["on_damaged"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
 }
 
 cp_final_event_wave_init() {
-  level.event_funcs["alien_goon_start"] = ::scripts\cp\zombies\cp_final_spawning::start_goon_spawn_event_func;
-  level.event_funcs["alien_goon"] = ::scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
-  level.event_funcs["zombie_clown"] = ::scripts\cp\zombies\zombies_spawning::goon_spawn_event_func;
-  level.event_funcs["karatemaster"] = ::scripts\cp\zombies\cp_final_spawning::km_spawn_event_func;
-  level.event_funcs["slasher"] = ::scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
+  level.event_funcs["alien_goon_start"] = scripts\cp\zombies\cp_final_spawning::start_goon_spawn_event_func;
+  level.event_funcs["alien_goon"] = scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
+  level.event_funcs["zombie_clown"] = scripts\cp\zombies\zombies_spawning::goon_spawn_event_func;
+  level.event_funcs["karatemaster"] = scripts\cp\zombies\cp_final_spawning::km_spawn_event_func;
+  level.event_funcs["slasher"] = scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
   init_final_spawner_locations();
 }
 

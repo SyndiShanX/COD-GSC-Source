@@ -91,7 +91,7 @@ func_10CBC() {
   scripts\engine\utility::array_call(getaiarray(), ::delete);
   scripts\engine\utility::array_call(getspawnerarray(), ::delete);
   var_0 = [];
-  var_0["trigger_multiple_createart_transient"] = ::scripts\sp\trigger::func_1272E;
+  var_0["trigger_multiple_createart_transient"] = scripts\sp\trigger::func_1272E;
   foreach(var_4, var_2 in var_0) {
     var_3 = getEntArray(var_4, "classname");
     scripts\engine\utility::array_levelthread(var_3, var_2);

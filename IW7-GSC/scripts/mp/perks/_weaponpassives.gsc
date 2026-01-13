@@ -2439,7 +2439,7 @@ watchmodeswitchkillweaponsdrop(var_0) {
     var_4 = [];
     for(var_5 = 0; var_5 < var_2.size; var_5++) {
       var_6 = var_2[var_5];
-      var_3[var_5] = ::scripts\mp\utility::getweaponrootname(var_6);
+      var_3[var_5] = scripts\mp\utility::getweaponrootname(var_6);
       var_4[var_5] = getweaponvariantindex(var_6);
     }
 

@@ -124,7 +124,7 @@ init() {
 
   scripts\mp\agents\agents::wait_till_agent_funcs_defined();
   level.agent_funcs["odin_juggernaut"] = level.agent_funcs["player"];
-  level.agent_funcs["odin_juggernaut"]["think"] = ::scripts\engine\utility::empty_init_func;
+  level.agent_funcs["odin_juggernaut"]["think"] = scripts\engine\utility::empty_init_func;
   level.odin_marking_flash_radius_max = 800;
   level.odin_marking_flash_radius_min = 200;
   level.var_1639 = [];

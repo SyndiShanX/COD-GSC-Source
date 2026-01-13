@@ -148,10 +148,10 @@ func_CAB5() {
 
 func_CAC9() {
   level.agent_funcs["phaseSplitAgent"] = level.agent_funcs["player"];
-  level.agent_funcs["phaseSplitAgent"]["think"] = ::scripts\mp\killstreaks\_agent_killstreak::squadmate_agent_think;
+  level.agent_funcs["phaseSplitAgent"]["think"] = scripts\mp\killstreaks\_agent_killstreak::squadmate_agent_think;
   level.agent_funcs["phaseSplitAgent"]["on_killed"] = ::func_CACA;
-  level.agent_funcs["phaseSplitAgent"]["on_damaged"] = ::scripts\mp\agents\_agents::on_agent_player_damaged;
-  level.agent_funcs["phaseSplitAgent"]["gametype_update"] = ::scripts\mp\killstreaks\_agent_killstreak::no_gametype_update;
+  level.agent_funcs["phaseSplitAgent"]["on_damaged"] = scripts\mp\agents\_agents::on_agent_player_damaged;
+  level.agent_funcs["phaseSplitAgent"]["gametype_update"] = scripts\mp\killstreaks\_agent_killstreak::no_gametype_update;
 }
 
 func_CACA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -179,7 +179,7 @@ func_CAB2() {
   var_2 = var_3;
   if(var_2.size > 0 && var_2[0] != "none") {
     var_5 = var_2[0];
-    var_1["loadoutPrimary"] = ::scripts\mp\utility::getweaponrootname(var_5);
+    var_1["loadoutPrimary"] = scripts\mp\utility::getweaponrootname(var_5);
     var_6 = getweaponattachments(var_5);
     for(var_4 = 0; var_4 < var_6.size; var_4++) {
       var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutPrimaryAttachment" + var_4 + 1, "loadoutPrimaryAttachment");
@@ -191,7 +191,7 @@ func_CAB2() {
 
   if(var_2.size > 0 && var_2[1] != "none") {
     var_5 = var_2[1];
-    var_1["loadoutSecondary"] = ::scripts\mp\utility::getweaponrootname(var_5);
+    var_1["loadoutSecondary"] = scripts\mp\utility::getweaponrootname(var_5);
     var_6 = getweaponattachments(var_5);
     for(var_4 = 0; var_4 < var_6.size; var_4++) {
       var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutSecondaryAttachment1" + var_4, "loadoutSecondaryAttachment");

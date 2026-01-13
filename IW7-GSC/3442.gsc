@@ -77,7 +77,7 @@ commander_aggregate_score_on_game_end() {
 
 commander_create_dom_obj(var_0) {
   if(!isDefined(self.fireteam_dom_point_obj[var_0])) {
-    self.fireteam_dom_point_obj[var_0] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.fireteam_dom_point_obj[var_0] = scripts\mp\objidpoolmanager::requestminimapid(1);
     var_1 = (0, 0, 0);
 
     foreach(var_3 in level.domflags) {
@@ -341,7 +341,7 @@ hud_monitorplayerownership() {
   self.ownershipstring = [];
 
   for(var_0 = 0; var_0 < 16; var_0++) {
-    self.ownershipstring[var_0] = ::scripts\mp\hud_util::createfontstring("default", 1);
+    self.ownershipstring[var_0] = scripts\mp\hud_util::createfontstring("default", 1);
     self.ownershipstring[var_0].color = (1, 1, 1);
     self.ownershipstring[var_0].x = 0;
     self.ownershipstring[var_0].y = 30 + var_0 * 12;

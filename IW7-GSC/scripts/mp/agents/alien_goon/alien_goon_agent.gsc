@@ -22,10 +22,10 @@ func_FAB0() {
   level.agent_definition["alien_goon"]["setup_func"] = ::setupagent;
   level.agent_definition["alien_goon"]["setup_model_func"] = ::func_FACE;
   level.agent_funcs["alien_goon"]["on_damaged"] = ::func_C4E0;
-  level.agent_funcs["alien_goon"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["alien_goon"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
-  level.agent_funcs["alien_goon"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["alien_goon"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
+  level.agent_funcs["alien_goon"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["alien_goon"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["alien_goon"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["alien_goon"]["on_killed"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }

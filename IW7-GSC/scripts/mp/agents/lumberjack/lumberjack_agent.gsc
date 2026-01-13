@@ -18,9 +18,9 @@ func_FAB0() {
 
   level.agent_definition["lumberjack"]["setup_func"] = ::setupagent;
   level.agent_definition["lumberjack"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["lumberjack"]["on_damaged"] = ::scripts\cp\agents\gametype_zombie::onzombiedamaged;
-  level.agent_funcs["lumberjack"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["lumberjack"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["lumberjack"]["on_damaged"] = scripts\cp\agents\gametype_zombie::onzombiedamaged;
+  level.agent_funcs["lumberjack"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["lumberjack"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.var_1094E["lumberjack"] = ::should_spawn_lumberjack;
 }
 

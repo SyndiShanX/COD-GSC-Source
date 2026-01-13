@@ -20,7 +20,7 @@ func_FAB0() {
     level.damage_feedback_overrride = [];
   }
 
-  level.damage_feedback_overrride["slasher"] = ::scripts\cp\maps\cp_final\cp_final_damage::slasher_processdamagefeedback;
+  level.damage_feedback_overrride["slasher"] = scripts\cp\maps\cp_final\cp_final_damage::slasher_processdamagefeedback;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }

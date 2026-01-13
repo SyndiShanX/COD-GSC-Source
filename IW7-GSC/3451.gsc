@@ -61,7 +61,7 @@ bot_get_ambush_trap_item(var_0, var_1, var_2) {
 
   foreach(var_6 in var_4) {
     var_3["purpose"] = var_6;
-    var_3["item_action"] = ::scripts\mp\bots\bots_util::bot_get_grenade_for_purpose(var_6);
+    var_3["item_action"] = scripts\mp\bots\bots_util::bot_get_grenade_for_purpose(var_6);
 
     if(isDefined(var_3["item_action"])) {
       return var_3;
@@ -314,9 +314,9 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
       self.defend_entrance_index = self.name + " " + gettime();
 
       foreach(var_8 in self.defense_override_watch_nodes) {
-        var_8.prone_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "prone");
+        var_8.prone_visible_from[self.defend_entrance_index] = scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "prone");
         wait 0.05;
-        var_8.crouch_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "crouch");
+        var_8.crouch_visible_from[self.defend_entrance_index] = scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "crouch");
         wait 0.05;
       }
     }

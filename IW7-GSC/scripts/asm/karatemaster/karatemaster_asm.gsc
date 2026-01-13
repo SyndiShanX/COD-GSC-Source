@@ -62,7 +62,7 @@ setupmeleedistances(var_0, var_1) {
     level.karatemastermeleetimetoimpact[var_1][var_3] = var_9;
   }
 
-  level.karatemastermeleedist[var_1] = ::scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
+  level.karatemastermeleedist[var_1] = scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
 }
 
 karatemasterinit(var_0, var_1, var_2, var_3) {

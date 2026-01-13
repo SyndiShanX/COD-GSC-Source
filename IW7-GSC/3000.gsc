@@ -22,7 +22,7 @@ func_7561(var_0, var_1, var_2, var_3) {
   var_4.state = var_3;
 
   if(isDefined(self.var_7560[var_0])) {
-    self.var_7560[var_0] = ::scripts\engine\utility::array_add(self.var_7560[var_0], var_4);
+    self.var_7560[var_0] = scripts\engine\utility::array_add(self.var_7560[var_0], var_4);
   } else {
     self.var_7560[var_0] = [var_4];
   }

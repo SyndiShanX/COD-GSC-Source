@@ -374,11 +374,11 @@ func_119C6(var_0, var_1) {
       }
 
       if(issubstr(var_2[var_7], "hybrid")) {
-        var_2[var_7] = ::scripts\engine\utility::ter_op(var_1, "hybrid_snow", "hybrid");
+        var_2[var_7] = scripts\engine\utility::ter_op(var_1, "hybrid_snow", "hybrid");
       }
 
       if(issubstr(var_2[var_7], "reflexsmg")) {
-        var_2[var_7] = ::scripts\engine\utility::ter_op(var_1, "reflexsmg_snow", "reflexsmg");
+        var_2[var_7] = scripts\engine\utility::ter_op(var_1, "reflexsmg_snow", "reflexsmg");
       }
 
       var_6 = var_6 + "+" + var_2[var_7];
@@ -1026,7 +1026,7 @@ func_1776(var_0) {
   if(!isDefined(level.var_67B9[var_0])) {}
 
   var_1 = spawnStruct();
-  level.var_67B9[var_0] = ::scripts\engine\utility::array_add(level.var_67B9[var_0], var_1);
+  level.var_67B9[var_0] = scripts\engine\utility::array_add(level.var_67B9[var_0], var_1);
   var_1 waittill("queue_hit");
   return var_1;
 }
@@ -1049,7 +1049,7 @@ func_7766(var_0, var_1, var_2) {
         var_3[0] waittill("continue_queue");
       }
 
-      level.var_67B9[var_0] = ::scripts\engine\utility::array_remove(level.var_67B9[var_0], var_3[0]);
+      level.var_67B9[var_0] = scripts\engine\utility::array_remove(level.var_67B9[var_0], var_3[0]);
     }
 
     wait(0.1);
@@ -1351,7 +1351,7 @@ func_A764(var_0, var_1, var_2) {
     level.var_5A91[var_0] = [];
   }
 
-  level.var_5A91[var_0] = ::scripts\engine\utility::array_add(level.var_5A91[var_0], var_3);
+  level.var_5A91[var_0] = scripts\engine\utility::array_add(level.var_5A91[var_0], var_3);
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
   }

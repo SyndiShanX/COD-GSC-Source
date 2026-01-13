@@ -399,12 +399,12 @@ func_6DE9() {
     anim.var_FED3 = ::scripts\anim\utility::func_FED2;
   }
 
-  level.fire_notetrack_functions["scripted"] = ::scripts\anim\notetracks::fire_straight;
-  level.fire_notetrack_functions["cover_right"] = ::scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_left"] = ::scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_crouch"] = ::scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_stand"] = ::scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["move"] = ::scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["scripted"] = scripts\anim\notetracks::fire_straight;
+  level.fire_notetrack_functions["cover_right"] = scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_left"] = scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_crouch"] = scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_stand"] = scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["move"] = scripts\anim\notetracks::shootnotetrack;
   scripts\anim\notetracks::registernotetracks();
   if(!isDefined(level.flag)) {
     scripts\common\flags::init_flags();

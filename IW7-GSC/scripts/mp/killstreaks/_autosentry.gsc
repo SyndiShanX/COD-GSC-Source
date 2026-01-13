@@ -541,7 +541,7 @@ sentry_handledeath() {
   self endon("carried");
   self waittill("death");
   if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(self.triggerportableradarping.placedsentries[self.sentrytype], self);
+    self.triggerportableradarping.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.triggerportableradarping.placedsentries[self.sentrytype], self);
   }
 
   if(!isDefined(self)) {
@@ -629,7 +629,7 @@ sentry_handleuse(var_0) {
       self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
     }
 
-    var_1.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+    var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
     var_1 setcarryingsentry(self, 0, var_0);
   }
 }

@@ -656,7 +656,7 @@ func_2731() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(11);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(12);
   level.var_12B7D.turrets["cap_turret_cannon_large_un"][4] thread func_0BB6::func_129DF();
-  level.var_12B7D.turrets["cap_turret_cannon_large_un"] = ::scripts\engine\utility::array_remove(level.var_12B7D.turrets["cap_turret_cannon_large_un"], level.var_12B7D.turrets["cap_turret_cannon_large_un"][4]);
+  level.var_12B7D.turrets["cap_turret_cannon_large_un"] = scripts\engine\utility::array_remove(level.var_12B7D.turrets["cap_turret_cannon_large_un"], level.var_12B7D.turrets["cap_turret_cannon_large_un"][4]);
   level.var_12B67 func_0BB6::func_3984(level.var_3665);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(14);
   level.var_12B61 _meth_81D0();
@@ -1517,7 +1517,7 @@ func_CB28(var_0, var_1) {
     }
   }
 
-  level.var_134F6[var_0] = ::scripts\engine\utility::array_randomize(level.var_134F6[var_0]);
+  level.var_134F6[var_0] = scripts\engine\utility::array_randomize(level.var_134F6[var_0]);
 
   foreach(var_4, var_3 in level.var_134F6[var_0]) {
     if(var_3[1] == 0) {

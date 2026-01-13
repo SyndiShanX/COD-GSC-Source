@@ -624,7 +624,7 @@ getrandomweaponfromcategory(var_0) {
         var_2 = var_3["weapon"];
         for(var_8 = 0; var_8 < level.weaponcategories[var_0].size; var_8++) {
           if(level.weaponcategories[var_0][var_8]["weapon"] == var_2) {
-            level.weaponcategories[var_0] = ::scripts\mp\utility::array_remove_index(level.weaponcategories[var_0], var_8);
+            level.weaponcategories[var_0] = scripts\mp\utility::array_remove_index(level.weaponcategories[var_0], var_8);
             break;
           }
         }
@@ -750,7 +750,7 @@ getvalidattachments(var_0, var_1, var_2, var_3, var_4) {
     var_7 = tablelookup(var_3, 0, int(var_4), 18);
     var_7 = strtok(var_7, "+");
     for(var_8 = 0; var_8 < var_6.size; var_8++) {
-      var_6[var_8] = ::scripts\mp\utility::attachmentmap_tobase(var_6[var_8]);
+      var_6[var_8] = scripts\mp\utility::attachmentmap_tobase(var_6[var_8]);
     }
   }
 

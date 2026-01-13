@@ -12,7 +12,7 @@ setup_callbacks() {
   level.agent_funcs["squadmate"] = level.agent_funcs["player"];
   level.agent_funcs["squadmate"]["think"] = ::squadmate_agent_think;
   level.agent_funcs["squadmate"]["on_killed"] = ::on_agent_squadmate_killed;
-  level.agent_funcs["squadmate"]["on_damaged"] = ::scripts\mp\agents\_agents::on_agent_player_damaged;
+  level.agent_funcs["squadmate"]["on_damaged"] = scripts\mp\agents\_agents::on_agent_player_damaged;
   level.agent_funcs["squadmate"]["gametype_update"] = ::no_gametype_update;
 }
 

@@ -823,7 +823,7 @@ func_1991(var_0) {
 
     if(level.var_A056.var_67D8 == level.var_A065["evasion"].size) {
       level.var_A056.var_67D8 = 0;
-      level.var_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.var_A065["evasion"]);
+      level.var_A065["evasion"] = scripts\engine\utility::array_randomize(level.var_A065["evasion"]);
     }
   }
 

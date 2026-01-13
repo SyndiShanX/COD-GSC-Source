@@ -285,7 +285,7 @@ spawndogtags(var_0, var_1) {
     var_8 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     var_8.var_336 = "trigger_dogtag";
     var_8 hide();
-    level.dogtags[var_2.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
+    level.dogtags[var_2.guid] = scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
     scripts\mp\objpoints::deleteobjpoint(level.dogtags[var_2.guid].objpoints["allies"]);
     scripts\mp\objpoints::deleteobjpoint(level.dogtags[var_2.guid].objpoints["axis"]);
     level.dogtags[var_2.guid] scripts\mp\gameobjects::setusetime(0);

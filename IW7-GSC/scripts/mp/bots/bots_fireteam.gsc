@@ -271,7 +271,7 @@ fireteam_tdm_hunt_end(var_0) {
   level notify("hunting_party_end_" + var_0);
   level.fireteam_hunt_leader[var_0] = undefined;
   level.fireteam_hunt_target_zone[var_0] = undefined;
-  level.bot_random_path_function[var_0] = ::scripts\mp\bots\_bots_personality::bot_random_path_default;
+  level.bot_random_path_function[var_0] = scripts\mp\bots\_bots_personality::bot_random_path_default;
 }
 
 fireteam_tdm_hunt_most_dangerous_zone(var_0, var_1) {

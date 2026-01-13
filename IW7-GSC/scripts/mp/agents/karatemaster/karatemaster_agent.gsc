@@ -18,8 +18,8 @@ func_FAB0() {
 
   level.agent_definition["karatemaster"]["setup_func"] = ::setupagent;
   level.agent_definition["karatemaster"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["karatemaster"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["karatemaster"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["karatemaster"]["on_damaged"] = ::func_C4E0;
   level.agent_funcs["karatemaster"]["on_damaged_finished"] = ::ondamagefinished;
   level.agent_funcs["karatemaster"]["on_killed"] = level.var_C4BE;

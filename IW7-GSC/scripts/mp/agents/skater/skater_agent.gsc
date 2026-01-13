@@ -17,14 +17,14 @@ func_FAB0() {
     level waittill("scripted_agents_initialized");
   }
 
-  level.agent_funcs["skater"]["on_damaged"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
-  level.agent_funcs["skater"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["skater"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
-  level.movemodefunc["skater"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.agent_funcs["skater"]["on_damaged"] = scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
+  level.agent_funcs["skater"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["skater"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.movemodefunc["skater"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
   level.agent_definition["skater"]["setup_func"] = ::setupagent;
   level.agent_definition["skater"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["skater"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["skater"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
+  level.agent_funcs["skater"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["skater"]["on_killed"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }

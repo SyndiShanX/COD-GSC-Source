@@ -21,19 +21,19 @@ setup_callbacks() {
   level.bot_funcs = [];
   level.bot_funcs["bots_spawn"] = ::spawn_bots;
   level.bot_funcs["bots_add_scavenger_bag"] = ::bot_add_scavenger_bag;
-  level.bot_funcs["bots_add_to_level_targets"] = ::scripts\mp\bots\bots_util::bot_add_to_bot_level_targets;
-  level.bot_funcs["bots_remove_from_level_targets"] = ::scripts\mp\bots\bots_util::bot_remove_from_bot_level_targets;
+  level.bot_funcs["bots_add_to_level_targets"] = scripts\mp\bots\bots_util::bot_add_to_bot_level_targets;
+  level.bot_funcs["bots_remove_from_level_targets"] = scripts\mp\bots\bots_util::bot_remove_from_bot_level_targets;
   level.bot_funcs["bots_make_entity_sentient"] = ::bot_make_entity_sentient;
   level.bot_funcs["think"] = ::bot_think;
   level.bot_funcs["on_killed"] = ::on_bot_killed;
   level.bot_funcs["should_do_killcam"] = ::bot_should_do_killcam;
-  level.bot_funcs["get_attacker_ent"] = ::scripts\mp\bots\bots_util::bot_get_known_attacker;
+  level.bot_funcs["get_attacker_ent"] = scripts\mp\bots\bots_util::bot_get_known_attacker;
   level.bot_funcs["should_pickup_weapons"] = ::bot_should_pickup_weapons;
   level.bot_funcs["on_damaged"] = ::bot_damage_callback;
   level.bot_funcs["gametype_think"] = ::default_gametype_think;
-  level.bot_funcs["leader_dialog"] = ::scripts\mp\bots\bots_util::bot_leader_dialog;
+  level.bot_funcs["leader_dialog"] = scripts\mp\bots\bots_util::bot_leader_dialog;
   level.bot_funcs["player_spawned"] = ::bot_player_spawned;
-  level.bot_funcs["should_start_cautious_approach"] = ::scripts\mp\bots\bots_strategy::should_start_cautious_approach_default;
+  level.bot_funcs["should_start_cautious_approach"] = scripts\mp\bots\bots_strategy::should_start_cautious_approach_default;
   level.bot_funcs["know_enemies_on_start"] = ::bot_know_enemies_on_start;
   level.bot_funcs["bot_get_rank_xp"] = ::bot_get_rank_xp;
   level.bot_funcs["ai_3d_sighting_model"] = ::bot_3d_sighting_model;
@@ -46,8 +46,8 @@ setup_callbacks() {
   level.bot_funcs["crate_in_range"] = ::crate_in_range;
   level.bot_funcs["post_teleport"] = ::bot_post_teleport;
   level.bot_random_path_function = [];
-  level.bot_random_path_function["allies"] = ::scripts\mp\bots\bots_personality::bot_random_path_default;
-  level.bot_random_path_function["axis"] = ::scripts\mp\bots\bots_personality::bot_random_path_default;
+  level.bot_random_path_function["allies"] = scripts\mp\bots\bots_personality::bot_random_path_default;
+  level.bot_random_path_function["axis"] = scripts\mp\bots\bots_personality::bot_random_path_default;
   level.bot_can_use_box_by_type["deployable_vest"] = ::bot_should_use_ballistic_vest_crate;
   level.bot_can_use_box_by_type["deployable_ammo"] = ::bot_should_use_ammo_crate;
   level.bot_can_use_box_by_type["scavenger_bag"] = ::bot_should_use_scavenger_bag;
@@ -55,11 +55,11 @@ setup_callbacks() {
   level.bot_can_use_box_by_type["deployable_juicebox"] = ::bot_should_use_juicebox_crate;
   level.bot_pre_use_box_of_type["deployable_ammo"] = ::bot_post_use_ammo_crate;
   level.bot_post_use_box_of_type["deployable_ammo"] = ::bot_post_use_ammo_crate;
-  level.bot_find_defend_node_func["capture"] = ::scripts\mp\bots\bots_strategy::find_defend_node_capture;
-  level.bot_find_defend_node_func["capture_zone"] = ::scripts\mp\bots\bots_strategy::find_defend_node_capture_zone;
-  level.bot_find_defend_node_func["protect"] = ::scripts\mp\bots\bots_strategy::find_defend_node_protect;
-  level.bot_find_defend_node_func["bodyguard"] = ::scripts\mp\bots\bots_strategy::find_defend_node_bodyguard;
-  level.bot_find_defend_node_func["patrol"] = ::scripts\mp\bots\bots_strategy::find_defend_node_patrol;
+  level.bot_find_defend_node_func["capture"] = scripts\mp\bots\bots_strategy::find_defend_node_capture;
+  level.bot_find_defend_node_func["capture_zone"] = scripts\mp\bots\bots_strategy::find_defend_node_capture_zone;
+  level.bot_find_defend_node_func["protect"] = scripts\mp\bots\bots_strategy::find_defend_node_protect;
+  level.bot_find_defend_node_func["bodyguard"] = scripts\mp\bots\bots_strategy::find_defend_node_bodyguard;
+  level.bot_find_defend_node_func["patrol"] = scripts\mp\bots\bots_strategy::find_defend_node_patrol;
   scripts\mp\bots\gametype_war::setup_callbacks();
 
   if(scripts\mp\utility\game::bot_is_fireteam_mode()) {

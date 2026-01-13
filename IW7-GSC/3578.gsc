@@ -12,8 +12,8 @@ init() {
 
 giveplayeraccessory() {
   self.var_CC58 = [];
-  self.var_CC58[0] = ::scripts\engine\utility::spawn_tag_origin();
-  self.var_CC58[1] = ::scripts\engine\utility::spawn_tag_origin();
+  self.var_CC58[0] = scripts\engine\utility::spawn_tag_origin();
+  self.var_CC58[1] = scripts\engine\utility::spawn_tag_origin();
   self.var_C243 = 0;
 }
 

@@ -426,7 +426,7 @@ add_cutie_eggs() {
 }
 
 cp_town_event_wave_init() {
-  level.event_funcs["crab_mini"] = ::scripts\cp\zombies\cp_town_spawning::goon_spawn_event_func;
+  level.event_funcs["crab_mini"] = scripts\cp\zombies\cp_town_spawning::goon_spawn_event_func;
   init_town_spawner_locations();
 }
 

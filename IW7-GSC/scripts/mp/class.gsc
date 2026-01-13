@@ -408,7 +408,7 @@ loadout_updateclassteam(var_0, var_1, var_2) {
     var_0.loadoutprimary = "iw7_fists";
   } else {
     for(var_4 = 0; var_4 < 6; var_4++) {
-      var_0.loadoutprimaryattachments[var_4] = ::scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 0, "attachment", var_4);
+      var_0.loadoutprimaryattachments[var_4] = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 0, "attachment", var_4);
     }
   }
 
@@ -416,7 +416,7 @@ loadout_updateclassteam(var_0, var_1, var_2) {
   var_0.loadoutprimaryreticle = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 0, "reticle");
   var_0.loadoutsecondary = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "weapon");
   for(var_4 = 0; var_4 < 5; var_4++) {
-    var_0.loadoutsecondaryattachments[var_4] = ::scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "attachment", var_4);
+    var_0.loadoutsecondaryattachments[var_4] = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "attachment", var_4);
   }
 
   var_0.loadoutsecondarycamo = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", var_2, var_3, "class", "weaponSetups", 1, "camo");
@@ -1805,12 +1805,12 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   for(var_0F = 0; var_0F < var_1.size; var_0F++) {
-    var_1[var_0F] = ::scripts\mp\utility::attachmentmap_tounique(var_1[var_0F], var_0A);
+    var_1[var_0F] = scripts\mp\utility::attachmentmap_tounique(var_1[var_0F], var_0A);
   }
 
   if(isDefined(var_9)) {
     for(var_0F = 0; var_0F < var_9.size; var_0F++) {
-      var_9[var_0F] = ::scripts\mp\utility::attachmentmap_tounique(var_9[var_0F], var_0A);
+      var_9[var_0F] = scripts\mp\utility::attachmentmap_tounique(var_9[var_0F], var_0A);
     }
   }
 
@@ -1837,7 +1837,7 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   foreach(var_13 in var_1) {
     var_14 = scripts\mp\utility::attachmentmap_toextra(var_13);
     if(isDefined(var_14)) {
-      var_11[var_11.size] = ::scripts\mp\utility::attachmentmap_tounique(var_14, var_0A);
+      var_11[var_11.size] = scripts\mp\utility::attachmentmap_tounique(var_14, var_0A);
     }
   }
 

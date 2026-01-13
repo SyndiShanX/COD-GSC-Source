@@ -2479,19 +2479,19 @@ loop_sound_delete(var_0, var_1) {
 
 createloopeffect(var_0) {
   var_1 = scripts\common\createfx::createeffect("loopfx", var_0);
-  var_1.v["delay"] = ::scripts\common\createfx::getloopeffectdelaydefault();
+  var_1.v["delay"] = scripts\common\createfx::getloopeffectdelaydefault();
   return var_1;
 }
 
 createoneshoteffect(var_0) {
   var_1 = scripts\common\createfx::createeffect("oneshotfx", var_0);
-  var_1.v["delay"] = ::scripts\common\createfx::getoneshoteffectdelaydefault();
+  var_1.v["delay"] = scripts\common\createfx::getoneshoteffectdelaydefault();
   return var_1;
 }
 
 createexploder(var_0) {
   var_1 = scripts\common\createfx::createeffect("exploder", var_0);
-  var_1.v["delay"] = ::scripts\common\createfx::getexploderdelaydefault();
+  var_1.v["delay"] = scripts\common\createfx::getexploderdelaydefault();
   var_1.v["exploder_type"] = "normal";
   return var_1;
 }

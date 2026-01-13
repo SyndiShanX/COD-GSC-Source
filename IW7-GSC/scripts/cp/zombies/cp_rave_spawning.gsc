@@ -4,9 +4,9 @@
 ***************************************************/
 
 goon_spawn_event_func() {
-  level.agent_funcs["zombie_sasquatch"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
-  level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["zombie_sasquatch"]["gametype_on_killed"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
+  level.agent_funcs["zombie_sasquatch"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["zombie_sasquatch"]["gametype_on_killed"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
   if(!isDefined(level.zombie_sasquatch_vo_prefix)) {
     level.zombie_sasquatch_vo_prefix = "zmb_vo_sasquatch_";
   }

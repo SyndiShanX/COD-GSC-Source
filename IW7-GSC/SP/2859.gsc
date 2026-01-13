@@ -32,19 +32,19 @@ func_6B44() {
   }
 
   if(!isDefined(level.var_6B46["allies"])) {
-    level.var_6B46["allies"] = ::scripts\sp\utility::func_1115A();
+    level.var_6B46["allies"] = scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["axis"])) {
-    level.var_6B46["axis"] = ::scripts\sp\utility::func_1115A();
+    level.var_6B46["axis"] = scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["team3"])) {
-    level.var_6B46["team3"] = ::scripts\sp\utility::func_1115A();
+    level.var_6B46["team3"] = scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["neutral"])) {
-    level.var_6B46["neutral"] = ::scripts\sp\utility::func_1115A();
+    level.var_6B46["neutral"] = scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6A65)) {
@@ -176,7 +176,7 @@ func_174C(var_0, var_1, var_2, var_3, var_4) {
   level.var_6A65[var_0][var_5]["stateName"] = var_1;
   level.var_6A65[var_0][var_5]["thinkFunc"] = var_2;
   level.var_6A65[var_0][var_5]["changeFunc"] = var_3;
-  level.var_6A65[var_0] = ::scripts\engine\utility::array_sort_with_func(level.var_6A65[var_0], ::is_higher_priority);
+  level.var_6A65[var_0] = scripts\engine\utility::array_sort_with_func(level.var_6A65[var_0], ::is_higher_priority);
 }
 
 func_E092(var_0, var_1) {
@@ -629,7 +629,7 @@ func_BC82() {
       var_15 = invertangles(var_14);
       var_16 = combineangles(var_8["angles"], var_15);
       var_17 = var_8["origin"] - rotatevector(var_13, var_16);
-      var_8["anim_node"] = ::scripts\engine\utility::spawn_script_origin(var_17, var_16);
+      var_8["anim_node"] = scripts\engine\utility::spawn_script_origin(var_17, var_16);
       func_174D(var_8["anim_node"]);
       var_8["origin"] = var_17;
       var_8["angles"] = var_16;

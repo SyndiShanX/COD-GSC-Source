@@ -23,7 +23,7 @@ setup_callbacks() {
 
   level.agent_funcs["player"] = [];
   level.agent_funcs["player"]["spawn"] = ::spawn_agent_player;
-  level.agent_funcs["player"]["think"] = ::scripts\mp\bots\gametype_war::bot_war_think;
+  level.agent_funcs["player"]["think"] = scripts\mp\bots\gametype_war::bot_war_think;
   level.agent_funcs["player"]["on_killed"] = ::on_agent_player_killed;
   level.agent_funcs["player"]["on_damaged"] = ::on_agent_player_damaged;
   level.agent_funcs["player"]["on_damaged_finished"] = ::agent_damage_finished;

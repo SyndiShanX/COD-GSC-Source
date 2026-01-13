@@ -370,7 +370,7 @@ func_DA46() {
     var_3 = func_DA17("sdf", "un");
     foreach(var_5 in var_3) {
       var_2 = "weapon_" + var_5 + "_tr";
-      level.var_D9E5["default_weapon_transients"] = ::scripts\engine\utility::array_add(level.var_D9E5["default_weapon_transients"], var_2);
+      level.var_D9E5["default_weapon_transients"] = scripts\engine\utility::array_add(level.var_D9E5["default_weapon_transients"], var_2);
       precacheitem(var_5);
       precachemodel(getweaponviewmodel(var_5));
     }
@@ -531,11 +531,11 @@ func_DA28(var_0) {
       for(var_3 = 0; var_3 < 2; var_3++) {
         var_4 = var_2 * 2 + var_3;
         var_5 = level.player _meth_84C6("missionLootRooms", var_0, "terminal", var_4);
-        var_1["terminals"] = ::scripts\engine\utility::array_add(var_1["terminals"], var_5);
+        var_1["terminals"] = scripts\engine\utility::array_add(var_1["terminals"], var_5);
       }
 
       var_6 = level.player _meth_84C6("missionLootRooms", var_0, "discovered", var_2);
-      var_1["discovered"] = ::scripts\engine\utility::array_add(var_1["discovered"], var_6);
+      var_1["discovered"] = scripts\engine\utility::array_add(var_1["discovered"], var_6);
     }
   }
 
@@ -862,7 +862,7 @@ func_DA3F() {
       var_4.weapon_name = var_3;
       var_4.var_13C13 = func_7D5F(var_3);
       var_5 = scripts\engine\utility::weaponclass(var_3);
-      var_1[var_5] = ::scripts\engine\utility::array_add(var_1[var_5], var_4);
+      var_1[var_5] = scripts\engine\utility::array_add(var_1[var_5], var_4);
     }
   }
 
@@ -1255,7 +1255,7 @@ func_DA18(var_0, var_1, var_2, var_3, var_4) {
       if(!isDefined(var_4) || isDefined(var_4) && !var_4) {
         var_0E = scripts\sp\utility::func_22A2(var_0E, var_0D);
         var_1F = strtok(tablelookup("sp\progression_unlocks.csv", 0, var_0, 5), ", ");
-        level.var_D9E5["mandatoryunlocks"] = ::scripts\engine\utility::array_combine(level.var_D9E5["mandatoryunlocks"], var_1F);
+        level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_combine(level.var_D9E5["mandatoryunlocks"], var_1F);
         foreach(var_9, var_21 in level.var_D9E5["weaponstates"]) {
           if(func_9B49(var_9)) {
             if(!scripts\engine\utility::array_contains(var_0E, var_9)) {
@@ -1584,8 +1584,8 @@ func_12642() {
         var_0E.weapon_name = var_6;
         var_10 = scripts\engine\utility::weaponclass(var_6);
         if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_6)) {
-          level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_6);
-          level.var_D9E5["loaded_weapon_types"][var_10] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_10], var_0E);
+          level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_6);
+          level.var_D9E5["loaded_weapon_types"][var_10] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_10], var_0E);
           level.player _meth_84C7("weaponsLoaded", var_6, 1);
         }
       }
@@ -1659,7 +1659,7 @@ func_12650() {
       var_16 = getweaponbasename(var_9);
       var_17 = "weapon_" + var_9 + "_tr";
       scripts\sp\utility::func_1264E(var_17);
-      level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_16);
+      level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_16);
       level.player _meth_84C7("weaponsLoaded", var_16, 0);
       continue;
     }
@@ -1681,7 +1681,7 @@ func_12646(var_0) {
 
   scripts\sp\utility::func_12641(var_1);
   if(isDefined(level.var_D9E5)) {
-    level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_0);
+    level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_0);
   } else {
     return;
   }
@@ -1691,7 +1691,7 @@ func_12646(var_0) {
   var_2.var_13C13 = var_3;
   var_2.weapon_name = var_0;
   var_4 = scripts\engine\utility::weaponclass(var_0);
-  level.var_D9E5["loaded_weapon_types"][var_4] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_4], var_2);
+  level.var_D9E5["loaded_weapon_types"][var_4] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_4], var_2);
 }
 
 func_12652(var_0) {
@@ -1802,14 +1802,14 @@ func_DA3D() {
     var_3 = getsubstr(var_2.classname, 7);
     var_4 = weaponinventorytype(var_3);
     if(var_4 != "primary") {
-      level.var_D9E5["weapon_pickups"] = ::scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_2);
+      level.var_D9E5["weapon_pickups"] = scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_2);
       continue;
     }
 
     var_5 = getweaponbasename(var_3);
     var_6 = getweaponattachments(var_3);
     if(var_6.size > 0) {
-      level.var_D9E5["weapon_pickups"] = ::scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_2);
+      level.var_D9E5["weapon_pickups"] = scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_2);
       continue;
     }
 
@@ -1823,7 +1823,7 @@ func_DA3D() {
       var_0C.angles = var_2.angles;
       var_0C.var_336 = var_2.var_336;
       var_0C.target = var_2.target;
-      level.var_D9E5["weapon_pickups"] = ::scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_0C);
+      level.var_D9E5["weapon_pickups"] = scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"], var_0C);
       var_2 delete();
     }
   }
@@ -2017,7 +2017,7 @@ func_13C35() {
     if(func_9B49(var_1)) {
       var_2 = level.player _meth_84C6("weaponsScanned", var_1);
       if(isDefined(var_2) && var_2 != "locked") {
-        level.var_D9E5["mandatoryunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_1);
+        level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_1);
       }
     }
   }
@@ -2132,8 +2132,8 @@ func_EBB9() {
     }
 
     level.var_D9E5["weaponstates"][var_5] = "unlocked";
-    level.var_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_5);
-    level.var_D9E5["mandatoryunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_5);
+    level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_5);
+    level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_5);
     var_0A = level.player _meth_84C6("weaponsScanned", var_5);
     if(!isDefined(var_0A) || var_0A == "locked") {
       level.player _meth_84C7("weaponsScanned", var_5, "unlocked");
@@ -2564,11 +2564,11 @@ func_F618(var_0) {
   func_DA50(var_0);
   var_1 = func_3DDF();
   if(scripts\engine\utility::array_contains(level.var_D9E5["optionalunlocks"], var_0)) {
-    level.var_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_0);
+    level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_0);
   }
 
   if(scripts\engine\utility::array_contains(level.var_D9E5["mandatoryunlocks"], var_0)) {
-    level.var_D9E5["mandatoryunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_0);
+    level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_0);
   }
 
   level notify("weapon_scan_complete", var_0);
@@ -2645,14 +2645,14 @@ func_13C46() {
 }
 
 func_12BD8(var_0) {
-  level.var_D9E5["mandatoryunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_0);
+  level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["mandatoryunlocks"], var_0);
   level.var_D9E5["loaded_weapon_types"] = func_DA3F();
 }
 
 func_13C61(var_0) {
   level.var_D9E5["weaponstates"][var_0] = "unlocked";
   if(scripts\engine\utility::array_contains(level.var_D9E5["optionalunlocks"], var_0)) {
-    level.var_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_0);
+    level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_remove(level.var_D9E5["optionalunlocks"], var_0);
   }
 
   if(!level.var_D9E5["fakedata"]) {

@@ -415,7 +415,7 @@ func_10635() {
         self.var_747F[var_11].var_EB9C = "_large";
       }
 
-      self.var_747E[var_12] = ::scripts\engine\utility::array_add(self.var_747E[var_12], self.var_747F[var_11]);
+      self.var_747E[var_12] = scripts\engine\utility::array_add(self.var_747E[var_12], self.var_747F[var_11]);
       continue;
     }
 

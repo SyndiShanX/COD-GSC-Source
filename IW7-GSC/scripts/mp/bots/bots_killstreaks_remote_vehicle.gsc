@@ -14,16 +14,16 @@ remote_vehicle_setup() {
 
   level.bot_ks_heli_offset["heli_pilot"] = (0, 0, 350);
   level.bot_ks_heli_offset["heli_sniper"] = (0, 0, 228);
-  level.bot_ks_funcs["isUsing"]["odin_assault"] = ::scripts\mp\utility::isusingremote;
-  level.bot_ks_funcs["isUsing"]["odin_support"] = ::scripts\mp\utility::isusingremote;
-  level.bot_ks_funcs["isUsing"]["heli_pilot"] = ::scripts\mp\utility::isusingremote;
+  level.bot_ks_funcs["isUsing"]["odin_assault"] = scripts\mp\utility::isusingremote;
+  level.bot_ks_funcs["isUsing"]["odin_support"] = scripts\mp\utility::isusingremote;
+  level.bot_ks_funcs["isUsing"]["heli_pilot"] = scripts\mp\utility::isusingremote;
   level.bot_ks_funcs["isUsing"]["heli_sniper"] = ::isusinggunship;
-  level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = ::scripts\mp\utility::isusingremote;
+  level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = scripts\mp\utility::isusingremote;
   level.bot_ks_funcs["isUsing"]["vanguard"] = ::isusingvanguard;
   level.bot_ks_funcs["waittill_initial_goal"]["heli_pilot"] = ::heli_pilot_waittill_initial_goal;
   level.bot_ks_funcs["waittill_initial_goal"]["heli_sniper"] = ::heli_sniper_waittill_initial_goal;
   level.bot_ks_funcs["control_aiming"]["heli_pilot"] = ::heli_pilot_control_heli_aiming;
-  level.bot_ks_funcs["control_aiming"]["heli_sniper"] = ::scripts\engine\utility::empty_init_func;
+  level.bot_ks_funcs["control_aiming"]["heli_sniper"] = scripts\engine\utility::empty_init_func;
   level.bot_ks_funcs["control_aiming"]["vanguard"] = ::vanguard_control_aiming;
   level.bot_ks_funcs["control_other"]["heli_pilot"] = ::heli_pilot_monitor_flares;
   level.bot_ks_funcs["heli_pick_node"]["heli_pilot"] = ::heli_pilot_pick_node;
@@ -1606,7 +1606,7 @@ bot_killstreak_get_zone_allies_outside(var_0) {
     var_6 = var_5 getnearestnode();
     var_7 = getnodezone(var_6);
     if(isDefined(var_7)) {
-      var_2[var_7] = ::scripts\engine\utility::array_add(var_2[var_7], var_5);
+      var_2[var_7] = scripts\engine\utility::array_add(var_2[var_7], var_5);
     }
   }
 
@@ -1623,7 +1623,7 @@ bot_killstreak_get_zone_enemies_outside(var_0) {
   foreach(var_5 in var_1) {
     var_6 = var_5 getnearestnode();
     var_7 = getnodezone(var_6);
-    var_2[var_7] = ::scripts\engine\utility::array_add(var_2[var_7], var_5);
+    var_2[var_7] = scripts\engine\utility::array_add(var_2[var_7], var_5);
   }
 
   return var_2;

@@ -553,7 +553,7 @@ sentry_handledeath() {
   self waittill("death");
 
   if(isDefined(self.owner)) {
-    self.owner.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
+    self.owner.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
   }
 
   if(!isDefined(self)) {
@@ -645,7 +645,7 @@ sentry_handleuse(var_0) {
       self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
     }
 
-    var_1.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+    var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
     var_1 setcarryingsentry(self, 0, var_0);
   }
 }

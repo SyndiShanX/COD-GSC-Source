@@ -1369,7 +1369,7 @@ func_4968(var_0) {
   var_3 = 0;
 
   for(var_4 = []; var_3 < var_2; var_3++) {
-    var_4[var_3] = ::scripts\sp\maps\phspace\phspace_battle::func_491E(level.var_3670, randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), 1, "1", var_1, var_0);
+    var_4[var_3] = scripts\sp\maps\phspace\phspace_battle::func_491E(level.var_3670, randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), 1, "1", var_1, var_0);
   }
 
   return var_4;

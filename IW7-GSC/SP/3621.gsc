@@ -1172,14 +1172,14 @@ func_106C3(var_0) {
       while(var_0F < var_0C) {
         if(var_11 == 0 && !var_0B) {
           var_12 = 0;
-          var_10[var_10.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
+          var_10[var_10.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
         } else if(var_11 == 1) {
           var_12 = 0;
-          var_10[var_10.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
+          var_10[var_10.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
         } else if(var_11 == 2) {
           var_12 = 7.5;
-          var_10[var_10.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
-          var_10[var_10.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, 0 - var_12, 0)) * var_0F, 12, -1000);
+          var_10[var_10.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, var_12, 0)) * var_0F, 12, -1000);
+          var_10[var_10.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0D, (0, 0 - var_12, 0)) * var_0F, 12, -1000);
         }
 
         var_11++;
